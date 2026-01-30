@@ -20,11 +20,15 @@ import android.hardware.usb.UsbManager.FUNCTION_MIDI
 import android.hardware.usb.UsbManager.FUNCTION_MTP
 import android.hardware.usb.UsbManager.FUNCTION_PTP
 import android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE
+import android.hardware.usb.UsbPortStatus.POWER_ROLE_NONE
+import android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK
+import android.hardware.usb.UsbPortStatus.POWER_ROLE_SOURCE
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.connecteddevice.usb.UsbDetailsApiScreen.Companion.PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC
+import com.android.settings.connecteddevice.usb.UsbDetailsApiScreen.Companion.PREFERENCE_USB_DETAILS_POWER_ROLE
 import com.android.settings.flags.Flags
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils2.ApiTester
@@ -142,5 +146,77 @@ class UsbDetailsApiScreenTest {
         tester.set(PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC, false)
 
         verify(mockUsbDetailsRepository).setMtpTranscodeState(false)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_powerRoleNone_failedPreconditionExceptionAndNoCrash() {
+        mockUsbDetailsRepository.stub { on { powerRole } doReturn POWER_ROLE_NONE }
+
+        try {
+            tester.get<Boolean>(PREFERENCE_USB_DETAILS_POWER_ROLE)
+        } catch (e: FailedPreconditionException) {
+            // no Crash
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_notSupportAllRoles_failedPreconditionExceptionAndNoCrash() {
+        mockUsbDetailsRepository.stub { on { isSupportAllRoles } doReturn false }
+
+        try {
+            tester.get<Boolean>(PREFERENCE_USB_DETAILS_POWER_ROLE)
+        } catch (e: FailedPreconditionException) {
+            // no Crash
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_allowedAndRoleIsSink_returnFalse() {
+        mockUsbDetailsRepository.stub {
+            on { powerRole } doReturn POWER_ROLE_SINK
+            on { isSupportAllRoles } doReturn true
+        }
+
+        assertThat(tester.get<Boolean>(PREFERENCE_USB_DETAILS_POWER_ROLE)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_allowedAndRoleIsSource_returnTrue() {
+        mockUsbDetailsRepository.stub {
+            on { powerRole } doReturn POWER_ROLE_SOURCE
+            on { isSupportAllRoles } doReturn true
+        }
+
+        assertThat(tester.get<Boolean>(PREFERENCE_USB_DETAILS_POWER_ROLE)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_turnOffChargeConnectedDevice_success() {
+        mockUsbDetailsRepository.stub {
+            on { powerRole } doReturn POWER_ROLE_SOURCE
+            on { isSupportAllRoles } doReturn true
+        }
+
+        tester.set(PREFERENCE_USB_DETAILS_POWER_ROLE, false)
+
+        verify(mockUsbDetailsRepository).powerRole = POWER_ROLE_SINK
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_turnOnChargeConnectedDevice_success() {
+        mockUsbDetailsRepository.stub {
+            on { powerRole } doReturn POWER_ROLE_SINK
+            on { isSupportAllRoles } doReturn true
+        }
+
+        tester.set(PREFERENCE_USB_DETAILS_POWER_ROLE, true)
+
+        verify(mockUsbDetailsRepository).powerRole = POWER_ROLE_SOURCE
     }
 }
