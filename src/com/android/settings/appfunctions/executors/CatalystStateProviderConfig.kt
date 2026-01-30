@@ -141,6 +141,7 @@ import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
+import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppsApiScreen
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsApiScreen
 import com.android.settings.spa.app.specialaccess.MediaRoutingControlApiScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
@@ -432,6 +433,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = MediaRoutingControlApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = LongBackgroundTasksAppsApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = SupervisionWebContentFiltersScreen.KEY),
