@@ -877,6 +877,64 @@ public class UtilsTest {
         assertThat(Utils.isPrivateProfile(mockUserId, mockContext)).isTrue();
     }
 
+    @Test
+    public void enforceSameOwner_sameUser_returnsUserId() {
+        final int currentUserId = 0;
+        final int profileUserId = 10;
+        ShadowBinder.setCallingUid(UserHandle.getUid(currentUserId, 12345));
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getProfileIdsWithDisabled(currentUserId))
+                .thenReturn(new int[]{currentUserId, profileUserId});
+
+        assertThat(Utils.enforceSameOwner(mContext, currentUserId)).isEqualTo(currentUserId);
+    }
+
+    @Test
+    public void enforceSameOwner_profileOfCurrentUser_returnsUserId() {
+        final int currentUserId = 0;
+        final int profileUserId = 10;
+        ShadowBinder.setCallingUid(UserHandle.getUid(currentUserId, 12345));
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getProfileIdsWithDisabled(currentUserId))
+                .thenReturn(new int[]{currentUserId, profileUserId});
+
+        assertThat(Utils.enforceSameOwner(mContext, profileUserId)).isEqualTo(profileUserId);
+    }
+
+    @Test
+    public void enforceSameOwner_supervisingProfile_returnsUserId() {
+        final int currentUserId = 0;
+        final int profileUserId = 10;
+        final int supervisingUserId = 12;
+        ShadowBinder.setCallingUid(UserHandle.getUid(currentUserId, 12345));
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getProfileIdsWithDisabled(currentUserId))
+                .thenReturn(new int[]{currentUserId, profileUserId});
+        UserInfo supervisingUserInfo = new UserInfo(supervisingUserId, "supervising", 0);
+        supervisingUserInfo.userType = UserManager.USER_TYPE_PROFILE_SUPERVISING;
+        when(mMockUserManager.getUsers()).thenReturn(List.of(supervisingUserInfo));
+
+        assertThat(Utils.enforceSameOwner(mContext, supervisingUserId))
+                .isEqualTo(supervisingUserId);
+    }
+
+    @Test
+    public void enforceSameOwner_unrelatedUser_throwsSecurityException() {
+        final int currentUserId = 0;
+        final int profileUserId = 10;
+        final int unrelatedUserId = 15;
+        ShadowBinder.setCallingUid(UserHandle.getUid(currentUserId, 12345));
+        when(mContext.getSystemService(UserManager.class)).thenReturn(mMockUserManager);
+        when(mMockUserManager.getProfileIdsWithDisabled(currentUserId))
+                .thenReturn(new int[]{currentUserId, profileUserId});
+        UserInfo unrelatedUserInfo = new UserInfo(unrelatedUserId, "unrelated", 0);
+        // Make sure supervising user is not in the list of users.
+        when(mMockUserManager.getUsers()).thenReturn(List.of(unrelatedUserInfo));
+
+        assertThrows(SecurityException.class,
+                () -> Utils.enforceSameOwner(mContext, unrelatedUserId));
+    }
+
     private void setUpForConfirmCredentialString(boolean isEffectiveUserManagedProfile) {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mMockUserManager);
         when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);

@@ -28,10 +28,15 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -63,39 +68,45 @@ class OpenNetworkSelectPagePreferenceControllerTest {
     private val preference = Preference(context).apply { key = TEST_KEY }
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
 
-    private val serviceState = ServiceState()
-
-    private val controller =
-        OpenNetworkSelectPagePreferenceController(
-                context = context,
-                key = TEST_KEY,
-                allowedNetworkTypesFlowFactory = { emptyFlow() },
-                serviceStateFlowFactory = { flowOf(serviceState) },
-            )
-            .init(subId = SUB_ID)
+    private val serviceStateFlow = MutableStateFlow(ServiceState())
 
     @Before
     fun setUp() {
         preferenceScreen.addPreference(preference)
+    }
+
+    private fun createController(
+        testDispatcher: CoroutineDispatcher
+    ): OpenNetworkSelectPagePreferenceController {
+        val controller =
+            OpenNetworkSelectPagePreferenceController(
+                context = context,
+                key = TEST_KEY,
+                allowedNetworkTypesFlowFactory = { emptyFlow() },
+                serviceStateFlowFactory = { serviceStateFlow },
+                defaultDispatcher = testDispatcher,
+            )
+        controller.init(subId = SUB_ID)
         controller.displayPreference(preferenceScreen)
+        return controller
     }
 
     @Test
-    fun isEnabled_modeManual_enabled() {
+    fun isEnabled_modeManual_enabled() = runTestWithController {
         controller.onNetworkSelectModeUpdated(TelephonyManager.NETWORK_SELECTION_MODE_MANUAL)
 
         assertThat(preference.isEnabled).isTrue()
     }
 
     @Test
-    fun isEnabled_modeAuto_disabled() {
+    fun isEnabled_modeAuto_disabled() = runTestWithController {
         controller.onNetworkSelectModeUpdated(TelephonyManager.NETWORK_SELECTION_MODE_AUTO)
 
         assertThat(preference.isEnabled).isFalse()
     }
 
     @Test
-    fun isEnabled_modeManualAndIsAirplaneModeOff_enabled() {
+    fun isEnabled_modeManualAndIsAirplaneModeOff_enabled() = runTestWithController {
         controller.notifyAirplaneModeChanged(false)
         controller.onNetworkSelectModeUpdated(TelephonyManager.NETWORK_SELECTION_MODE_MANUAL)
 
@@ -103,7 +114,7 @@ class OpenNetworkSelectPagePreferenceControllerTest {
     }
 
     @Test
-    fun isEnabled_modeManualAndIsAirplaneModeOn_disable() {
+    fun isEnabled_modeManualAndIsAirplaneModeOn_disable() = runTestWithController {
         controller.notifyAirplaneModeChanged(true)
         controller.onNetworkSelectModeUpdated(TelephonyManager.NETWORK_SELECTION_MODE_MANUAL)
 
@@ -111,23 +122,49 @@ class OpenNetworkSelectPagePreferenceControllerTest {
     }
 
     @Test
-    fun summary_inService_isOperatorName() = runBlocking {
-        serviceState.state = ServiceState.STATE_IN_SERVICE
+    fun summary_inService_isOperatorName() = runTestWithController {
+        serviceStateFlow.value = ServiceState().apply { state = ServiceState.STATE_IN_SERVICE }
 
-        controller.onViewCreated(TestLifecycleOwner())
-        delay(100)
+        controller.onViewCreated(testLifecycleOwner)
+        advanceUntilIdle()
 
         assertThat(preference.summary).isEqualTo(OPERATOR_NAME)
     }
 
     @Test
-    fun summary_notInService_isDisconnect() = runBlocking {
-        serviceState.state = ServiceState.STATE_OUT_OF_SERVICE
+    fun summary_notInService_isDisconnect() = runTestWithController {
+        serviceStateFlow.value = ServiceState().apply { state = ServiceState.STATE_OUT_OF_SERVICE }
 
-        controller.onViewCreated(TestLifecycleOwner())
-        delay(100)
+        controller.onViewCreated(testLifecycleOwner)
+        advanceUntilIdle()
 
         assertThat(preference.summary).isEqualTo(context.getString(R.string.network_disconnected))
+    }
+
+    private interface Scope {
+        fun advanceUntilIdle()
+
+        val controller: OpenNetworkSelectPagePreferenceController
+        val testLifecycleOwner: TestLifecycleOwner
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun runTestWithController(testBody: Scope.() -> Unit) = runTest {
+        val testDispatcher = StandardTestDispatcher(testScheduler)
+        Dispatchers.setMain(testDispatcher)
+        val scope =
+            object : Scope {
+                override fun advanceUntilIdle() {
+                    testScheduler.advanceUntilIdle()
+                }
+
+                override val controller = createController(testDispatcher)
+
+                override val testLifecycleOwner =
+                    TestLifecycleOwner(coroutineDispatcher = testDispatcher)
+            }
+        scope.testBody()
+        Dispatchers.resetMain()
     }
 
     private companion object {

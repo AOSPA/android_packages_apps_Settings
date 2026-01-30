@@ -166,7 +166,10 @@ class DisplayTopologyPreferenceController(
         }
         // No longer need to reveal wallpapers since the blocks are not visible; these will be
         // revealed again upon invocation of refreshPane.
-        revealedWallpapers.forEach { it.viewManager.removeView(it.revealer) }
+        revealedWallpapers.forEach {
+            it.viewManager.removeView(it.revealer)
+            Log.d(TAG, "View detached, removed wallpaper window for display#${it.displayId}")
+        }
         revealedWallpapers = listOf()
         injector.unregisterTopologyListener(topologyListener)
         injector.unregisterDisplayListener(displayListener)
@@ -223,6 +226,13 @@ class DisplayTopologyPreferenceController(
         // If mirroring display is turned on, updates will come from DisplayListener since there's
         // no more topology update when display is added / removed
         if (!this::paneContent.isInitialized || isDisplayInMirroringMode(context)) {
+            Log.d(
+                TAG,
+                "Ignoring topology update in mirroring mode as this will be handled by display update",
+            )
+            // TODO(b/461655992): Speculative fix to see if this was caused by display listener
+            //  not getting updated with the correct mirroring state
+            applyDisplayUpdateInMirroringMode()
             return
         }
         val topologyBounds = topology.absoluteBounds
@@ -280,6 +290,10 @@ class DisplayTopologyPreferenceController(
     private fun applyDisplayUpdateInMirroringMode() {
         // If mirroring display is turned off, update will be handled by topology update
         if (!this::paneContent.isInitialized || !isDisplayInMirroringMode(context)) {
+            Log.d(
+                TAG,
+                "Ignoring display update in non-mirroring mode as this will be handled by topology update",
+            )
             return
         }
         // Step 1
@@ -317,6 +331,7 @@ class DisplayTopologyPreferenceController(
                         put(r.displayId, r)
                     } else {
                         r.viewManager.removeView(r.revealer)
+                        Log.d(TAG, "Removed wallpaper window for display#${r.displayId}")
                     }
                 }
             }
@@ -731,6 +746,6 @@ class DisplayTopologyPreferenceController(
         private const val MAX_EDGE_LENGTH_DP_SINGLE_DISPLAY = 128f
         private const val MAX_EDGE_LENGTH_DP = 256f
         private const val MIRRORING_DIAGONAL_STACK_OFFSET_DP = 120f
-        private const val TAG = "DisplayTopologyPreferenceController"
+        private const val TAG = "DisplayTopologyPref"
     }
 }

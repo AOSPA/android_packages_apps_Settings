@@ -31,6 +31,7 @@ import com.android.settings.network.telephony.TelephonyBasePreferenceController
 import com.android.settings.network.telephony.allowedNetworkTypesFlow
 import com.android.settings.network.telephony.serviceStateFlow
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -45,6 +46,7 @@ constructor(
         context::allowedNetworkTypesFlow,
     private val serviceStateFlowFactory: (subId: Int) -> Flow<ServiceState> =
         context::serviceStateFlow,
+    private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) :
     TelephonyBasePreferenceController(context, key),
     AutoSelectPreferenceController.OnNetworkSelectModeListener {
@@ -82,7 +84,7 @@ constructor(
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
         allowedNetworkTypesFlowFactory(mSubId).collectLatestWithLifecycle(viewLifecycleOwner) {
             preference?.isVisible =
-                withContext(Dispatchers.Default) {
+                withContext(defaultDispatcher) {
                     MobileNetworkUtils.shouldDisplayNetworkSelectOptions(mContext, mSubId)
                 }
         }
@@ -91,7 +93,7 @@ constructor(
             serviceState ->
             preference?.summary =
                 if (serviceState.state == ServiceState.STATE_IN_SERVICE) {
-                    withContext(Dispatchers.Default) {
+                    withContext(defaultDispatcher) {
                         MobileNetworkUtils.getCurrentCarrierNameForDisplay(mContext, mSubId)
                     }
                 } else {
