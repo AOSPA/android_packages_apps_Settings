@@ -32,6 +32,8 @@ import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
 import android.hardware.face.IFaceAuthenticatorsRegisteredCallback;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.UserHandle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
@@ -46,6 +48,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.VisibleForTesting;
+import androidx.appcompat.app.AlertDialog;
 
 import com.android.settings.R;
 import com.android.settings.Settings;
@@ -54,6 +57,7 @@ import com.android.settings.biometrics.BiometricEnrollActivity;
 import com.android.settings.biometrics.BiometricEnrollIntroduction;
 import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.biometrics.MultiBiometricEnrollHelper;
+import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupSkipDialog;
 import com.android.settings.utils.SensorPrivacyManagerHelper;
@@ -73,12 +77,15 @@ import java.util.List;
  */
 public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
     private static final String TAG = "FaceEnrollIntroduction";
+    private static final int CHALLENGE_GENERATION_TIMEOUT = 2000; // ms
 
     private FaceManager mFaceManager;
     @Nullable private FooterButton mPrimaryFooterButton;
     @Nullable private FooterButton mSecondaryFooterButton;
     @Nullable private SensorPrivacyManager mSensorPrivacyManager;
     private boolean mIsFaceStrong;
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
+    @Nullable private Runnable mTimeoutRunnable;
 
     @Override
     protected void onCancelButtonClick(View view) {
@@ -201,9 +208,21 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         if (mToken == null && BiometricUtils.containsGatekeeperPasswordHandle(getIntent())) {
             if (generateChallengeOnCreate()) {
                 mFooterBarMixin.getPrimaryButton().setEnabled(false);
+                // TODO: Use a straightforward way to determine if the challenge can be generated.
+                if (Flags.showFaceEnrollIntroTimeoutDialog()
+                        && getResources().getBoolean(
+                            R.bool.config_show_face_enroll_intro_timeout_dialog)) {
+                    mTimeoutRunnable = () -> {
+                        showTimeoutDialog();
+                    };
+                    mHandler.postDelayed(mTimeoutRunnable, CHALLENGE_GENERATION_TIMEOUT);
+                }
                 // We either block on generateChallenge, or need to gray out the "next" button until
                 // the challenge is ready. Let's just do this for now.
                 mFaceManager.generateChallenge(mUserId, (sensorId, userId, challenge) -> {
+                    if (mTimeoutRunnable != null) {
+                        mHandler.removeCallbacks(mTimeoutRunnable);
+                    }
                     if (isFinishing()) {
                         // Do nothing if activity is finishing
                         Log.w(TAG, "activity finished before challenge callback launched.");
@@ -248,6 +267,14 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
         intent.putExtra(EXTRA_KEY_CHALLENGE, getIntent().getLongExtra(EXTRA_KEY_CHALLENGE, -1L));
         intent.putExtra(EXTRA_KEY_SENSOR_ID, getIntent().getIntExtra(EXTRA_KEY_SENSOR_ID, -1));
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mTimeoutRunnable != null) {
+            mHandler.removeCallbacks(mTimeoutRunnable);
+        }
     }
 
     @VisibleForTesting
@@ -635,5 +662,20 @@ public class FaceEnrollIntroduction extends BiometricEnrollIntroduction {
 
     protected boolean isPrivateProfile() {
         return Utils.isPrivateProfile(mUserId, getApplicationContext());
+    }
+
+    private void showTimeoutDialog() {
+        if (isFinishing() || isDestroyed()) {
+            return;
+        }
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.security_settings_face_enroll_intro_timeout_dialog_title)
+                .setMessage(R.string.security_settings_face_enroll_intro_timeout_dialog_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.security_settings_face_enroll_dialog_ok,
+                        (dialog, which) -> {
+                            dialog.dismiss();
+                        })
+                .show();
     }
 }

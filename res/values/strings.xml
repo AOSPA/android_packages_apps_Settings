@@ -965,6 +965,10 @@
     <string name="face_intro_error_max">You\u2019ve added the maximum number of faces</string>
     <!-- Text shown when an unknown error caused the device to be unable to add faces [CHAR LIMIT=NONE] -->
     <string name="face_intro_error_unknown">Can\u2019t add more faces</string>
+    <!-- Dialog message for dialog which shows when the Face HAL is not responding. [CHAR LIMIT=45] -->
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title">Can\'t set up Face Unlock</string>
+    <!-- Dialog message for dialog which shows when face cannot be enrolled due to an internal error or face can't be read. -->
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message">You aren\'t connected to the internet. Go back and connect to the internet, or set this up in settings later.</string>
     <!-- Dialog message for dialog which shows when face cannot be enrolled. [CHAR LIMIT=45] -->
     <string name="security_settings_face_enroll_error_dialog_title">Enrollment was not completed</string>
     <!-- Button text shown in face dialog shown when an error occurs during enrollment [CHAR LIMIT=22] -->

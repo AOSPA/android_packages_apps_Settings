@@ -350,6 +350,9 @@
     <!-- Whether to support enrollment during setup wizard flow -->
     <bool name="config_suw_support_face_enroll">true</bool>
 
+    <!-- Whether to show a timeout dialog on the face ernoll intro screen -->
+    <bool name="config_show_face_enroll_intro_timeout_dialog">false</bool>
+
     <!-- App intent -->
     <string name="config_account_intent_uri" translatable="false"></string>
 
