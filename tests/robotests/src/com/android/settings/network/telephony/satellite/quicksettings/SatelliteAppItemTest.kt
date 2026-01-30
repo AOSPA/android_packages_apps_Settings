@@ -30,10 +30,8 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class SatelliteAppItemTest {
 
-    @Mock
-    private lateinit var packageManager: PackageManager
-    @Mock
-    private lateinit var applicationInfo: ApplicationInfo
+    @Mock private lateinit var packageManager: PackageManager
+    @Mock private lateinit var applicationInfo: ApplicationInfo
 
     private val defaultAppLabel = "Default App Label"
 
@@ -54,5 +52,12 @@ class SatelliteAppItemTest {
     fun getAppLabel_withoutCustomLabel_returnsDefaultAppLabel() {
         val item = SatelliteAppItem(applicationInfo, null, null)
         assertThat(item.getAppLabel(packageManager)).isEqualTo(defaultAppLabel)
+    }
+
+    @Test
+    fun getSummary_returnsCorrectSummary() {
+        val summary = "Summary"
+        val item = SatelliteAppItem(applicationInfo, null, null, summary)
+        assertThat(item.summary).isEqualTo(summary)
     }
 }
