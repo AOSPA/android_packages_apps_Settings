@@ -185,6 +185,12 @@ open class CaptioningAppearanceScreen(context: Context) :
                 +CaptionFontFamilyPreference(context)
                 +CaptionTextColorPreference(context)
                 +CaptionTextOpacityPreference(context)
+                +CaptionEdgeTypePreference(context)
+                +CaptionEdgeColorPreference(context)
+                +CaptionBackgroundColorPreference(context)
+                +CaptionBackgroundOpacityPreference(context)
+                +CaptionWindowColorPreference(context)
+                +CaptionWindowOpacityPreference(context)
             }
             +CaptioningFooterPreference("captioning_appearance_footer")
         }
