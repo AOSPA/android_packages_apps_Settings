@@ -73,4 +73,4 @@ public class CaptioningMoreOptionsFragment extends DashboardFragment {
                 }
             };
 }
-// LINT.ThenChange(captionpreferences/ui/CaptioningMoreOptionsScreen.kt)
+// LINT.ThenChange(captionpreferences/ui/CaptioningScreens.kt:more_options_screen)

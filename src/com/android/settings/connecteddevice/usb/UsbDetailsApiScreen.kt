@@ -18,6 +18,9 @@ package com.android.settings.connecteddevice.usb
 
 import android.hardware.usb.UsbManager
 import android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE
+import android.hardware.usb.UsbPortStatus.POWER_ROLE_NONE
+import android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK
+import android.hardware.usb.UsbPortStatus.POWER_ROLE_SOURCE
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory
@@ -63,11 +66,36 @@ class UsbDetailsApiScreen :
 
             set { execute { value -> usbDetailsRepository.setMtpTranscodeState(value) } }
         }
+
+        preference(
+            key = PREFERENCE_USB_DETAILS_POWER_ROLE,
+            purpose = R.string.usb_charge_connected_device,
+            type = AnyBoolean,
+        ) {
+            preconditions(R.string.usb_charge_connected_device_preconditions) {
+                if (
+                    usbDetailsRepository.powerRole != POWER_ROLE_NONE &&
+                        usbDetailsRepository.isSupportAllRoles
+                )
+                    Allowed
+                else Disallowed(R.string.usb_charge_connected_device_unavailable)
+            }
+
+            get { execute { usbDetailsRepository.powerRole == POWER_ROLE_SOURCE } }
+
+            set {
+                execute { value ->
+                    if (value) usbDetailsRepository.powerRole = POWER_ROLE_SOURCE
+                    else usbDetailsRepository.powerRole = POWER_ROLE_SINK
+                }
+            }
+        }
     }
 
     companion object {
         const val KEY = "usb_details_fragment"
         const val PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC = "usb_transcode_files"
+        const val PREFERENCE_USB_DETAILS_POWER_ROLE = "usb_details_power_role"
     }
 }
 // LINT.ThenChange(UsbDetailsFragment.java)

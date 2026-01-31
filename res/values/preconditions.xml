@@ -16,7 +16,9 @@
 
 <resources>
     <string name="spatial_audio_screen_preconditions" translatable="false">The device must have a spatializer.</string>
-    <string name="spatial_audio_screen_hardware_unsupported" translatable="false">The spatialization is not enabled.</string>
+    <string name="spatial_audio_phone_speaker_preconditions" translatable="false">The device must have a speaker which supports spacial audio.</string>
+    <string name="spatial_audio_screen_hardware_unsupported" translatable="false">Spatialization is not enabled.</string>
+    <string name="spatial_audio_phone_speaker_hardware_unsupported" translatable="false">Spatialization is not available for the device speaker.</string>
     <string name="managed_profile_settings_screen_preconditions" translatable="false">The device must have a work profile.</string>
     <string name="managed_profile_settings_screen_not_supported" translatable="false">The work profile is not set up on this device.</string>
     <string name="gesture_settings_screen_preconditions" translatable="false">The device must have an available gesture controller.</string>
@@ -54,4 +56,6 @@
     <string name="app_locale_picker_screen_unavailable" translatable="false">Not allow to display Locale Settings UI.</string>
     <string name="usb_transcode_files_preconditions" translatable="false">The USB must be connected and set to File Transfer (MTP) or PTP mode.</string>
     <string name="usb_transcode_files_unavailable" translatable="false">This option is only available when USB file transfer or PTP is active.</string>
+    <string name="usb_charge_connected_device_preconditions" translatable="false">The USB must be connected and the hardware must support power role switching.</string>
+    <string name="usb_charge_connected_device_unavailable" translatable="false">This option is only available when the connected device and cable support being charged via USB.</string>
 </resources>

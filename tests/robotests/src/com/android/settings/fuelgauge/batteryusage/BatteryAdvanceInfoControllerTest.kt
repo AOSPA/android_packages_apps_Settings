@@ -52,7 +52,7 @@ class BatteryAdvanceInfoControllerTest {
         // Test with null data
         controller.onBatteryUsageUpdated(
             batteryDiffDataMap = null,
-            index = 0,
+            selectedDailyIndex = 0,
             description = "test"
         )
 
@@ -60,7 +60,7 @@ class BatteryAdvanceInfoControllerTest {
         val emptyData = mutableMapOf<Int?, MutableMap<Int?, BatteryDiffData?>?>()
         controller.onBatteryUsageUpdated(
             batteryDiffDataMap = emptyData,
-            index = 1,
+            selectedDailyIndex = 1,
             description = null
         )
     }

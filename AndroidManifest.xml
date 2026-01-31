@@ -6229,6 +6229,10 @@
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name=".network.telephony.satellite.quicksettings.SatelliteTilePromptUtils$SatellitePromptDismissalReceiver"
+            android:exported="false" />
+
         <!-- This is the longest AndroidManifest.xml ever. -->
 
     </application>

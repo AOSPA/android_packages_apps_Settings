@@ -16,12 +16,14 @@
 
 package com.android.settings.network.telephony.satellite.quicksettings
 
+import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.OutcomeReceiver
+import android.os.UserHandle
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
@@ -66,8 +68,15 @@ open class SatelliteTileStateReceiver(
 ) : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
+        if (UserHandle.myUserId() != UserHandle.USER_SYSTEM) {
+            Log.d(TAG, "Not running on system user, ignoring.")
+            return
+        }
+
         if (!isSatelliteTileFeatureEnabled(context)) {
             Log.v(TAG, "Satellite tile feature is disabled. Ignoring intent.")
+            // EXPLICITLY disable the tile service to clean up legacy state
+            updateTileServiceEnabledState(context, false)
             return
         }
 
@@ -202,14 +211,25 @@ open class SatelliteTileStateReceiver(
          * Verifies that the satellite tile feature is enabled for the device.
          *
          * This function checks for the following conditions in order:
-         * 1. The master aconfig flag `FLAG_ENABLE_SATELLITE_TILE` is enabled.
-         * 2. The device supports satellite telephony via `FEATURE_TELEPHONY_SATELLITE`.
-         * 3. The feature is enabled by the OEM via `config_show_satellite_tile`.
+         * 1. The device is not running in the test harness environment.
+         * 2. The master aconfig flag `FLAG_ENABLE_SATELLITE_TILE` is enabled.
+         * 3. The device supports satellite telephony via `FEATURE_TELEPHONY_SATELLITE`.
+         * 4. The feature is enabled by the OEM via `config_show_satellite_tile`.
          *
          * @param context The application context.
          * @return `true` if all conditions are met, `false` otherwise.
          */
         fun isSatelliteTileFeatureEnabled(context: Context): Boolean {
+            // Suppress the feature in user test harness environments to prevent
+            // intrusive prompts from interrupting automated tests (b/479033947).
+            if (
+                ActivityManager.isRunningInTestHarness() ||
+                    ActivityManager.isRunningInUserTestHarness()
+            ) {
+                Log.d(TAG, "isRunningInTestHarness is true. Suppressing satellite tile.")
+                return false
+            }
+
             // Master aconfig flag check for the entire feature
             if (!Flags.enableSatelliteTile()) {
                 Log.d(TAG, "enable_satellite_tile aconfig flag is false.")

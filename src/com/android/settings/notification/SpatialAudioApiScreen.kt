@@ -17,6 +17,8 @@
 package com.android.settings.notification
 
 import android.content.Context
+import android.media.AudioDeviceAttributes
+import android.media.AudioDeviceInfo
 import android.media.AudioManager
 import android.media.Spatializer
 import com.android.settings.R
@@ -26,6 +28,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 // LINT.IfChange
 @ProvidePreferenceScreen(SpatialAudioApiScreen.KEY)
@@ -36,6 +39,11 @@ class SpatialAudioApiScreen :
         fragment = SpatialAudioSettings::class,
         purpose = R.string.spatial_audio_screen_purpose,
     ) {
+    /**
+     * Cache of the Spatializer to reduce the number of calls to the system service.
+     */
+    @Volatile
+    private var cachedSpatializer: Spatializer? = null
 
     init {
         flag { Flags.catalystMigration26q2() }
@@ -47,17 +55,66 @@ class SpatialAudioApiScreen :
                 HardwareUnsupported(R.string.spatial_audio_screen_hardware_unsupported)
             }
         }
+
+        preference(
+            key = "spatial_audio",
+            purpose = R.string.spatial_audio_phone_speakers_purpose,
+            type = AnyBoolean,
+        ) {
+            val speaker by lazy {
+                AudioDeviceAttributes(
+                AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_BUILTIN_SPEAKER, ""
+                )
+            }
+
+            preconditions(R.string.spatial_audio_phone_speaker_preconditions) {
+                if (context.spatializer?.isAvailableForDevice(speaker) == true) {
+                    Allowed
+                } else {
+                    HardwareUnsupported(R.string.spatial_audio_screen_hardware_unsupported)
+                }
+            }
+
+            get {
+                execute {
+                    context.spatializer?.compatibleAudioDevices?.contains(speaker) ?: false
+                }
+            }
+
+            set {
+                execute { value ->
+                    context.spatializer?.let {
+                        if (value) {
+                            it.addCompatibleAudioDevice(speaker)
+                        } else {
+                            it.removeCompatibleAudioDevice(speaker)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Private helper to fetch and cache the Spatializer from the Application Context.
+     */
+    private val Context.spatializer: Spatializer?
+        get() {
+            if (cachedSpatializer == null) {
+                cachedSpatializer = applicationContext
+                    .getSystemService(AudioManager::class.java)
+                    ?.spatializer
+            }
+            return cachedSpatializer
+        }
+
+    private fun Context.isSpatializerAvailable(): Boolean {
+        return spatializer?.immersiveAudioLevel != Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE
     }
 
     companion object {
         const val KEY = "spatial_audio_screen"
-
-        fun Context.isSpatializerAvailable(): Boolean {
-            val audioManager: AudioManager =
-                getSystemService(AudioManager::class.java) ?: return false
-            return audioManager.spatializer.immersiveAudioLevel !=
-                Spatializer.SPATIALIZER_IMMERSIVE_LEVEL_NONE
-        }
     }
 }
 // LINT.ThenChange(SpatialAudioSettings.java, SpatialAudioParentPreferenceController.java)

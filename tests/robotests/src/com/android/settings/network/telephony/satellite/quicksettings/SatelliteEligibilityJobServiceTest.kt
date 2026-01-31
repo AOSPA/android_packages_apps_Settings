@@ -19,6 +19,7 @@ package com.android.settings.network.telephony.satellite.quicksettings
 import android.app.job.JobParameters
 import android.app.job.JobScheduler
 import android.content.Context
+import android.os.UserHandle
 import android.telephony.ServiceState
 import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
@@ -46,7 +47,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowJobScheduler
 import org.robolectric.shadows.ShadowLooper
+import org.robolectric.shadows.ShadowProcess
 import org.robolectric.shadows.ShadowSubscriptionManager
+import org.robolectric.shadows.ShadowSystemProperties
 import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
@@ -113,6 +116,37 @@ class SatelliteEligibilityJobServiceTest {
     fun tearDown() {
         SatelliteEligibilityJobService.satelliteTilePromptUtils = SatelliteTilePromptUtils()
         SatelliteStateRepository.setInstance(null)
+        ShadowSystemProperties.reset()
+    }
+
+    @Test
+    fun schedule_featureDisabled_doesNothing() {
+        ShadowSystemProperties.override("ro.test_harness", "true")
+
+        SatelliteEligibilityJobService.schedule(context)
+
+        assertThat(jobScheduler.getAllPendingJobs()).isEmpty()
+    }
+
+    @Test
+    fun onStartJob_featureDisabled_returnsFalse() {
+        ShadowSystemProperties.override("ro.test_harness", "true")
+
+        val result = service.onStartJob(mockJobParameters)
+
+        assertThat(result).isFalse()
+        verify(service, never()).getSystemService(TelephonyManager::class.java)
+    }
+
+    @Test
+    fun onStartJob_notSystemUser_returnsFalse() {
+        // UID for user 1. USER_SYSTEM is 0.
+        ShadowProcess.setUid(100000)
+
+        val result = service.onStartJob(mockJobParameters)
+
+        assertThat(result).isFalse()
+        verify(mockTelephonyManager, never()).registerTelephonyCallback(any(), any())
     }
 
     @Test
