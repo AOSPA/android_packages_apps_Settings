@@ -16,8 +16,12 @@
 
 package com.android.settings.development;
 
+import static com.android.settings.development.ForceEnableNotesRolePreferenceController.OVERLAY_PACKAGE_NAME;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -28,11 +32,18 @@ import android.content.pm.UserInfo;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
+import com.android.settings.testutils.shadow.ShadowUserManager;
+import com.android.systemui.Flags;
+
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -42,12 +53,16 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.annotation.Implementation;
 import org.robolectric.annotation.Implements;
+import org.robolectric.shadow.api.Shadow;
 
 import java.util.Arrays;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ForceEnableNotesRolePreferenceControllerTest.ShadowOverlayManagerStub.class)
+@Config(shadows = {ForceEnableNotesRolePreferenceControllerTest.ShadowOverlayManagerStub.class,
+        ShadowUserManager.class})
 public class ForceEnableNotesRolePreferenceControllerTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private PreferenceScreen mScreen;
     @Mock
@@ -93,10 +108,52 @@ public class ForceEnableNotesRolePreferenceControllerTest {
         mController = new ForceEnableNotesRolePreferenceController(context);
         mController.setEnabled(true);
 
-        verify(sOverlayManager).setEnabled(
-                ForceEnableNotesRolePreferenceController.OVERLAY_PACKAGE_NAME, true, 1);
-        verify(sOverlayManager).setEnabled(
-                ForceEnableNotesRolePreferenceController.OVERLAY_PACKAGE_NAME, true, 2);
+        verify(sOverlayManager).setEnabled(OVERLAY_PACKAGE_NAME, true, 1);
+        verify(sOverlayManager).setEnabled(OVERLAY_PACKAGE_NAME, true, 2);
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_NOTE_HSUM_DEV_OPTION_FIX)
+    public void setEnabled_hsumDevices_fixDisabled_updatesFullAndProfileUsers()
+            throws RemoteException {
+        Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        UserManager userManager = context.getSystemService(UserManager.class);
+        ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+
+        shadowUserManager.setHeadlessSystemUserMode(true);
+        shadowUserManager.addUser(1, "Name", UserInfo.FLAG_PROFILE);
+        shadowUserManager.addUser(2, "Name", UserInfo.FLAG_FULL);
+        shadowUserManager.addUser(3, "Name", UserInfo.FLAG_EPHEMERAL);
+
+        mController = new ForceEnableNotesRolePreferenceController(context);
+        mController.setEnabled(true);
+
+        verify(sOverlayManager, never()).setEnabled(eq(OVERLAY_PACKAGE_NAME), eq(true), eq(0));
+        verify(sOverlayManager).setEnabled(OVERLAY_PACKAGE_NAME, true, 1);
+        verify(sOverlayManager).setEnabled(OVERLAY_PACKAGE_NAME, true, 2);
+        verify(sOverlayManager, never()).setEnabled(eq(OVERLAY_PACKAGE_NAME), eq(true), eq(3));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_NOTE_HSUM_DEV_OPTION_FIX)
+    public void setEnabled_hsumDevices_updatesFullAndProfileAndSystemUsers()
+            throws RemoteException {
+        Context context = spy(RuntimeEnvironment.application.getApplicationContext());
+        UserManager userManager = context.getSystemService(UserManager.class);
+        ShadowUserManager shadowUserManager = Shadow.extract(userManager);
+
+        shadowUserManager.setHeadlessSystemUserMode(true);
+        shadowUserManager.addUser(1, "Name", UserInfo.FLAG_PROFILE);
+        shadowUserManager.addUser(2, "Name", UserInfo.FLAG_FULL);
+        shadowUserManager.addUser(3, "Name", UserInfo.FLAG_EPHEMERAL);
+
+        mController = new ForceEnableNotesRolePreferenceController(context);
+        mController.setEnabled(true);
+
+        verify(sOverlayManager).setEnabled(OVERLAY_PACKAGE_NAME, true, 0);
+        verify(sOverlayManager).setEnabled(OVERLAY_PACKAGE_NAME, true, 1);
+        verify(sOverlayManager).setEnabled(OVERLAY_PACKAGE_NAME, true, 2);
+        verify(sOverlayManager, never()).setEnabled(eq(OVERLAY_PACKAGE_NAME), eq(true), eq(3));
     }
 
     @Test
