@@ -50,6 +50,14 @@ flag {
 }
 
 flag {
+    name: "hide_modes_setting_in_demo_mode"
+    namespace: "android_settings"
+    description: "Controls whether to hide modes setting in demo mode."
+    bug: "475928673"
+}
+
+
+flag {
     name: "hide_dream_setting_in_demo_mode"
     namespace: "android_settings"
     description: "Controls whether to hide dream setting in demo mode."

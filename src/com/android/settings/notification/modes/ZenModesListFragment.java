@@ -27,6 +27,7 @@ import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Lifecycle;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.ModeType;
 import com.android.settings.notification.modes.ZenModesListAddModePreferenceController.OnAddModeListener;
@@ -153,6 +154,10 @@ public class ZenModesListFragment extends ZenModesFragmentBase {
      */
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.modes_list_settings) {
+
+                @Override protected boolean isPageSearchEnabled(Context context) {
+                    return !Utils.shouldHideModesInDemoMode(context);
+                }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
