@@ -57,18 +57,19 @@ class MeasurementSystemApiFirstScreen :
             set {
                 execute { value ->
                     val unitValues = context.resources.getStringArray(R.array.measurement_system)
+                    val defaultName =
+                        context.getString(R.string.default_string_of_regional_preference)
                     for (item in unitValues) {
                         // If the human-readable value contains the input,
                         // 1. the human-readable value is UK and the input is uk
                         // 2. the human-readable value is Use default and the input is default
-                        if (
+                        val systemName =
                             RegionalPreferencesDataUtils.measurementSystemConverter(context, item)
-                                .contains(value, ignoreCase = true)
-                        ) {
+                        if (isMeasurementSystemMatch(defaultName, systemName, value)) {
                             RegionalPreferencesDataUtils.savePreference(
                                 context,
                                 ExtensionTypes.MEASUREMENT_SYSTEM,
-                                item,
+                                item.takeIf { it != RegionalPreferencesDataUtils.DEFAULT_VALUE },
                             )
                             break
                         }
@@ -78,9 +79,32 @@ class MeasurementSystemApiFirstScreen :
         }
     }
 
+    private fun isMeasurementSystemMatch(
+        defaultName: String,
+        systemName: String,
+        inputValue: String,
+    ): Boolean {
+        val inputValue = inputValue.lowercase()
+        val systemName = systemName.lowercase()
+
+        return when (inputValue) {
+            // case 1: when input is "default" or "use default"
+            INPUT_VALUE_DEFAULT,
+            INPUT_VALUE_USE_DEFAULT -> {
+                systemName == defaultName.lowercase()
+            }
+            // case 2: when input is "us", "uk", "metrics"
+            else -> {
+                systemName == inputValue
+            }
+        }
+    }
+
     companion object {
         const val KEY = "regional_preference_measurement_system"
         const val KEY_MEASUREMENT_SYSTEM_ITEM = "measurement_system_item_preference"
+        const val INPUT_VALUE_DEFAULT = "default"
+        const val INPUT_VALUE_USE_DEFAULT = "use default"
     }
 }
 // LINT.ThenChange(MeasurementSystemItemFragment.java)
