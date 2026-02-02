@@ -156,6 +156,7 @@ import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppsApiScre
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsApiScreen
 import com.android.settings.spa.app.specialaccess.MediaRoutingControlApiScreen
 import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsApiScreen
+import com.android.settings.spa.app.specialaccess.TurnScreenOnAppsApiScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
@@ -465,6 +466,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = NfcTagAppsSettingsApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = TurnScreenOnAppsApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = SupervisionWebContentFiltersScreen.KEY),
