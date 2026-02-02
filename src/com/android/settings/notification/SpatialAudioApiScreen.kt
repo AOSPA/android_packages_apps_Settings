@@ -93,6 +93,44 @@ class SpatialAudioApiScreen :
                 }
             }
         }
+
+        preference(
+            key = "spatial_audio_wired_headphones",
+            purpose = R.string.spatial_audio_wired_headphones_purpose,
+            type = AnyBoolean,
+        ) {
+            val wiredHeadphones by lazy {
+                AudioDeviceAttributes(
+                    AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_WIRED_HEADPHONES, ""
+                )
+            }
+
+            preconditions(R.string.spatial_audio_wired_headphones_preconditions) {
+                if (context.spatializer?.isAvailableForDevice(wiredHeadphones) == true) {
+                    Allowed
+                } else {
+                    HardwareUnsupported(R.string.spatial_audio_screen_hardware_unsupported)
+                }
+            }
+
+            get {
+                execute {
+                    context.spatializer?.compatibleAudioDevices?.contains(wiredHeadphones) ?: false
+                }
+            }
+
+            set {
+                execute { value ->
+                    context.spatializer?.let {
+                        if (value) {
+                            it.addCompatibleAudioDevice(wiredHeadphones)
+                        } else {
+                            it.removeCompatibleAudioDevice(wiredHeadphones)
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
@@ -117,4 +155,8 @@ class SpatialAudioApiScreen :
         const val KEY = "spatial_audio_screen"
     }
 }
-// LINT.ThenChange(SpatialAudioSettings.java, SpatialAudioParentPreferenceController.java)
+// LINT.ThenChange(
+//      SpatialAudioSettings.java,
+//      SpatialAudioParentPreferenceController.java,
+//      SpatialAudioWiredHeadphonesController.java
+// )
