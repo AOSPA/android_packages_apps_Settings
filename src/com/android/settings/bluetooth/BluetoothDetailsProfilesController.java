@@ -579,6 +579,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             hasVisibleProfile = hasVisibleProfile || pref.isVisible();
         }
         mProfilesContainer.setVisible(hasVisibleProfile);
+        Utils.updateVisibilityAccordingToChildren(mProfilesContainer.getParent());
     }
 
     @Override
