@@ -91,6 +91,7 @@ class SatelliteLandingPageFragmentTest {
 
     private lateinit var fragmentFactory: FragmentFactory
     private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.NOT_AVAILABLE)
+    private val activeSubIdFlow = MutableStateFlow(SUB_ID)
 
     @Before
     fun setUp() {
@@ -116,6 +117,7 @@ class SatelliteLandingPageFragmentTest {
 
         // Mock State Repository
         `when`(satelliteStateRepository.satelliteStatus).thenReturn(satelliteStatusFlow)
+        `when`(satelliteStateRepository.activeSubIdFlow).thenReturn(activeSubIdFlow)
         SatelliteStateRepository.setInstance(satelliteStateRepository)
 
         fragmentFactory =

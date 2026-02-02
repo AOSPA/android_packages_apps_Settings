@@ -20,7 +20,6 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.telephony.SubscriptionManager
 import android.util.Log
 import android.view.View
 import androidx.annotation.VisibleForTesting
@@ -90,8 +89,6 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
 
     constructor() : super()
 
-    private var activeSubId: Int = SubscriptionManager.INVALID_SUBSCRIPTION_ID
-
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         if (!::packageManager.isInitialized) {
             packageManager = requireContext().packageManager
@@ -101,8 +98,6 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateActiveSubId()
-        Log.d(TAG, "onViewCreated: activeSubId: $activeSubId")
 
         bannerController =
             SatelliteBannerController(
@@ -118,12 +113,7 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
 
     override fun onResume() {
         super.onResume()
-        updateActiveSubId()
         updateLandingPageContent()
-    }
-
-    private fun updateActiveSubId() {
-        activeSubId = SubscriptionManager.getActiveDataSubscriptionId()
     }
 
     private fun observeViewModel() {
@@ -161,11 +151,10 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
      * Updates the content of the landing page.
      *
      * This method triggers a refresh in the ViewModel, which in turn updates the satellite app list
-     * and support status. It should be called when the fragment becomes visible or when the
-     * subscription ID might have changed.
+     * and support status. It should be called when the fragment becomes visible.
      */
     private fun updateLandingPageContent() {
-        viewModel.refresh(activeSubId)
+        viewModel.refresh()
     }
 
     /**
