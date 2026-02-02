@@ -20,6 +20,8 @@ import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings
+import android.view.accessibility.CaptioningManager
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
@@ -32,6 +34,8 @@ import com.android.settings.utils.highlightPreference
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -177,6 +181,11 @@ open class CaptioningAppearanceScreen(context: Context) :
             +CaptionAppearancePreviewPreference(context)
             +CaptionFontSizePreference(context)
             +CaptionStylePreference(context)
+            +CustomCaptionOptionsPreference() += {
+                +CaptionFontFamilyPreference(context)
+                +CaptionTextColorPreference(context)
+                +CaptionTextOpacityPreference(context)
+            }
             +CaptioningFooterPreference("captioning_appearance_footer")
         }
 
@@ -219,6 +228,49 @@ open class CaptioningMoreOptionsScreen : PreferenceScreenMixin, PreferenceIndexa
 
     companion object {
         const val KEY = "captioning_more_options"
+    }
+}
+// LINT.ThenChange()
+
+// LINT.IfChange(custom_options_category)
+/** Category container for custom captioning options. */
+class CustomCaptionOptionsPreference :
+    PreferenceCategory(
+        key = KEY,
+        title = R.string.captioning_custom_options_title,
+        purpose = R.string.caption_preferences_appearance_custom_options_purpose,
+    ),
+    PreferenceLifecycleProvider,
+    PreferenceAvailabilityProvider {
+
+    private var captionStyleChangeListener: CaptioningManager.CaptioningChangeListener? = null
+
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        super.onCreate(context)
+        val listener =
+            object : CaptioningManager.CaptioningChangeListener() {
+                override fun onUserStyleChanged(userStyle: CaptioningManager.CaptionStyle) {
+                    context.notifyPreferenceChange(key)
+                }
+            }
+        context.getSystemService<CaptioningManager>()?.addCaptioningChangeListener(listener)
+        captionStyleChangeListener = listener
+    }
+
+    override fun onDestroy(context: PreferenceLifecycleContext) {
+        super.onDestroy(context)
+        captionStyleChangeListener?.let {
+            context.getSystemService<CaptioningManager>()?.removeCaptioningChangeListener(it)
+            captionStyleChangeListener = null
+        }
+    }
+
+    override fun isAvailable(context: Context): Boolean =
+        context.getSystemService<CaptioningManager>()?.rawUserStyle ==
+            CaptioningManager.CaptionStyle.PRESET_CUSTOM
+
+    companion object {
+        const val KEY = "captioning_custom_options_category"
     }
 }
 // LINT.ThenChange()

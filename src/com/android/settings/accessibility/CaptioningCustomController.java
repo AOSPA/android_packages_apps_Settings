@@ -35,6 +35,7 @@ import com.android.settingslib.core.lifecycle.events.OnStop;
 import java.util.Arrays;
 import java.util.List;
 
+// LINT.IfChange
 /** Preference controller for captioning custom visibility. */
 public class CaptioningCustomController extends BaseCaptioningCustomController
         implements LifecycleObserver, OnStart, OnStop {
@@ -91,3 +92,4 @@ public class CaptioningCustomController extends BaseCaptioningCustomController
         return mCaptionHelper.getRawUserStyle() == CaptioningManager.CaptionStyle.PRESET_CUSTOM;
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptioningScreens.kt:custom_options_category)
