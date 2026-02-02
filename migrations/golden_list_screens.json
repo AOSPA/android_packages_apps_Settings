@@ -1,0 +1,727 @@
+[
+  {
+    "file_name": "StoragePreferenceScreen.kt",
+    "item_name": "storage_dashboard_fragment",
+    "intent": "Intent { act=android.settings.INTERNAL_STORAGE_SETTINGS pkg=com.android.settings }"
+  },
+  {
+    "file_name": "NetworkProviderScreen.kt",
+    "item_name": "internet_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$NetworkProviderSettingsActivity }"
+  },
+  {
+    "file_name": "ScreensaverScreen.kt",
+    "item_name": "screensaver",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$DreamSettingsActivity }"
+  },
+  {
+    "file_name": "LockScreenPreferenceScreen.kt",
+    "item_name": "lockscreen_from_display_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$LockScreenSettingsActivity }"
+  },
+  {
+    "file_name": "AccountScreen.kt",
+    "item_name": "top_level_accounts",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$AccountDashboardActivity }"
+  },
+  {
+    "file_name": "VpnSettingsScreen.kt",
+    "item_name": "vpn_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$VpnSettingsActivity }"
+  },
+  {
+    "file_name": "ButtonNavigationSettingsScreen.kt",
+    "item_name": "button_navigation_settings_page",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ButtonNavigationSettingsActivity }"
+  },
+  {
+    "file_name": "SoundScreen.kt",
+    "item_name": "sound_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$SoundSettingsActivity }"
+  },
+  {
+    "file_name": "ConfigureWifiScreen.kt",
+    "item_name": "configure_network_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ConfigureWifiSettingsActivity }"
+  },
+  {
+    "file_name": "DateTimeSettingsScreen.kt",
+    "item_name": "date_time_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$DateTimeSettingsActivity }"
+  },
+  {
+    "file_name": "CaptioningAppearanceScreen.kt",
+    "item_name": "captioning_appearance",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "CaptioningPropertiesScreen.kt",
+    "item_name": "captioning_preference_screen",
+    "intent": "Intent { act=android.settings.CAPTIONING_SETTINGS }"
+  },
+  {
+    "file_name": "AirplaneModeSettingsScreen.kt",
+    "item_name": "airplane_mode_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$AirplaneModeSettingsActivity }"
+  },
+  {
+    "file_name": "TetherScreen.kt",
+    "item_name": "tether_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$TetherSettingsActivity }"
+  },
+  {
+    "file_name": "DarkModeScreen.kt",
+    "item_name": "dark_ui_mode",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$DarkThemeSettingsActivity }"
+  },
+  {
+    "file_name": "DarkModeScreen.kt",
+    "item_name": "dark_ui_mode_accessibility",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$DarkThemeSettingsActivity }"
+  },
+  {
+    "file_name": "MediaControlsScreen.kt",
+    "item_name": "media_controls",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$MediaControlsSettingsActivity }"
+  },
+  {
+    "file_name": "LocationServicesScreen.kt",
+    "item_name": "location_services",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ScanningSettingsActivity }"
+  },
+  {
+    "file_name": "AppDashboardScreen.kt",
+    "item_name": "top_level_apps",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$AppDashboardActivity }"
+  },
+  {
+    "file_name": "ModuleLicensesScreen.kt",
+    "item_name": "module_license",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "ZenModesListScreen.kt",
+    "item_name": "top_level_priority_modes",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ModesSettingsActivity }"
+  },
+  {
+    "file_name": "NetworkDashboardScreen.kt",
+    "item_name": "network_provider_and_internet_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$NetworkDashboardActivity }"
+  },
+  {
+    "file_name": "AccessibilityScreen.kt",
+    "item_name": "top_level_accessibility",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$AccessibilitySettingsActivity }"
+  },
+  {
+    "file_name": "ColorModeScreen.kt",
+    "item_name": "color_mode",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ColorModeActivity }"
+  },
+  {
+    "file_name": "LegalSettingsScreen.kt",
+    "item_name": "legal_information",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "ManageAccountsScreen.kt",
+    "item_name": "manage_accounts_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "CaptioningMoreOptionsScreen.kt",
+    "item_name": "captioning_more_options",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "MobileNetworkListScreen.kt",
+    "item_name": "mobile_network_list",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$MobileNetworkListActivity }"
+  },
+  {
+    "file_name": "EmergencyDashboardScreen.kt",
+    "item_name": "top_level_emergency",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$EmergencyDashboardActivity }"
+  },
+  {
+    "file_name": "ScreenTimeoutScreen.kt",
+    "item_name": "screen_timeout",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ScreenTimeoutActivity }"
+  },
+  {
+    "file_name": "AccountsAndBackupScreen.kt",
+    "item_name": "top_level_accounts_and_backup",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "HearingDevicesScreen.kt",
+    "item_name": "hearing_devices",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$HearingDevicesActivity }"
+  },
+  {
+    "file_name": "LocationScreen.kt",
+    "item_name": "location_settings",
+    "intent": "Intent { act=android.settings.LOCATION_SOURCE_SETTINGS }"
+  },
+  {
+    "file_name": "DoubleTapPowerScreen.kt",
+    "item_name": "gesture_double_tap_power_input_summary",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$DoubleTapPowerSettingsActivity }"
+  },
+  {
+    "file_name": "NfcAndPaymentScreen.kt",
+    "item_name": "nfc_and_payment_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$NfcSettingsActivity }"
+  },
+  {
+    "file_name": "DataSaverScreen.kt",
+    "item_name": "restrict_background_parent_entry",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$DataSaverSummaryActivity }"
+  },
+  {
+    "file_name": "AdaptiveConnectivityScreen.kt",
+    "item_name": "adaptive_connectivity",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$AdaptiveConnectivitySettingsActivity }"
+  },
+  {
+    "file_name": "ShortcutsSettingsScreen.kt",
+    "item_name": "accessibility_shortcuts_preference_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "ResetDashboardScreen.kt",
+    "item_name": "reset_dashboard",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ResetDashboardActivity }"
+  },
+  {
+    "file_name": "AllAppsScreen.kt",
+    "item_name": "see_all_apps",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ManageApplicationsActivity }"
+  },
+  {
+    "file_name": "ConversationListScreen.kt",
+    "item_name": "conversations",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ConversationListSettingsActivity }"
+  },
+  {
+    "file_name": "AdvancedConnectedDeviceScreen.kt",
+    "item_name": "connection_preferences",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$AdvancedConnectedDeviceActivity }"
+  },
+  {
+    "file_name": "ColorCorrectionScreen.kt",
+    "item_name": "daltonizer_preference",
+    "intent": "Intent { act=com.android.settings.ACCESSIBILITY_COLOR_SPACE_SETTINGS }"
+  },
+  {
+    "file_name": "LanguageAndRegionScreen.kt",
+    "item_name": "language_and_region_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$LanguageAndRegionSettingsActivity }"
+  },
+  {
+    "file_name": "VibrationIntensityScreen.kt",
+    "item_name": "vibration_intensity_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$VibrationIntensitySettingsActivity }"
+  },
+  {
+    "file_name": "SystemNavigationGestureScreen.kt",
+    "item_name": "gesture_system_navigation_input_summary",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$NavigationModeSettingsActivity }"
+  },
+  {
+    "file_name": "PreviouslyConnectedDeviceScreen.kt",
+    "item_name": "previously_connected_devices_see_all",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$PreviouslyConnectedDeviceActivity }"
+  },
+  {
+    "file_name": "AppStorageAppListScreen.kt",
+    "item_name": "device_state_apps_storage",
+    "intent": "Intent { cmp=com.android.settings/.Settings$StorageUseActivity }"
+  },
+  {
+    "file_name": "BluetoothDashboardScreen.kt",
+    "item_name": "bluetooth_switchbar_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$BluetoothDashboardActivity }"
+  },
+  {
+    "file_name": "SpecialAccessSettingsScreen.kt",
+    "item_name": "special_access",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$SpecialAccessSettingsActivity }"
+  },
+  {
+    "file_name": "HardwareInfoScreen.kt",
+    "item_name": "device_model",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "WifiDisplayScreen.kt",
+    "item_name": "wifi_display_settings",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$WifiDisplaySettingsActivity }"
+  },
+  {
+    "file_name": "SupervisionDashboardScreen.kt",
+    "item_name": "top_level_supervision",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.supervision.SupervisionDashboardActivity }"
+  },
+  {
+    "file_name": "WifiHotspotScreen.kt",
+    "item_name": "wifi_tether",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$WifiTetherSettingsActivity }"
+  },
+  {
+    "file_name": "ButtonShortcutSettingScreen.kt",
+    "item_name": "accessibility_button_preference",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "TimingControlsScreen.kt",
+    "item_name": "tap_assistance_preference_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "ColorAndMotionScreen.kt",
+    "item_name": "accessibility_color_and_motion",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ColorAndMotionActivity }"
+  },
+  {
+    "file_name": "ColorInversionScreen.kt",
+    "item_name": "toggle_inversion_preference",
+    "intent": "Intent { act=android.settings.COLOR_INVERSION_SETTINGS }"
+  },
+  {
+    "file_name": "MyDeviceInfoScreen.kt",
+    "item_name": "my_device_info_pref_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$MyDeviceInfoActivity }"
+  },
+  {
+    "file_name": "SupervisionAppStoreFiltersScreen.kt",
+    "item_name": "supervision_app_store_filters",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.supervision.appstorefilters.SupervisionAppStoreFiltersActivity }"
+  },
+  {
+    "file_name": "BubbleNotificationScreen.kt",
+    "item_name": "notification_bubbles",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$BubbleNotificationSettingsActivity }"
+  },
+  {
+    "file_name": "TextReadingScreen.kt",
+    "item_name": "text_reading_options",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$TextReadingSettingsActivity }"
+  },
+  {
+    "file_name": "MagnificationScreen.kt",
+    "item_name": "magnification_preference_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$MagnificationActivity }"
+  },
+  {
+    "file_name": "ActionTimeoutSettingsScreen.kt",
+    "item_name": "accessibility_control_timeout_preference_fragment",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "DisplayScreen.kt",
+    "item_name": "display_settings_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$DisplaySettingsActivity }"
+  },
+  {
+    "file_name": "ConnectedDeviceDashboardScreen.kt",
+    "item_name": "top_level_connected_devices",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ConnectedDeviceDashboardActivity }"
+  },
+  {
+    "file_name": "SystemDashboardScreen.kt",
+    "item_name": "top_level_system",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$SystemDashboardActivity }"
+  },
+  {
+    "file_name": "SupervisionPinManagementScreen.kt",
+    "item_name": "supervision_pin_management",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.supervision.credentialmanagement.SupervisionPinManagementActivity }"
+  },
+  {
+    "file_name": "RecentLocationAccessScreen.kt",
+    "item_name": "device_state_all_recent_location_access",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "InteractAcrossProfilesAppListScreen.kt",
+    "item_name": "special_access_interact_across_profiles_app_list",
+    "intent": "Intent { act=android.settings.MANAGE_CROSS_PROFILE_ACCESS }"
+  },
+  {
+    "file_name": "FirmwareVersionScreen.kt",
+    "item_name": "firmware_version",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$FirmwareVersionActivity }"
+  },
+  {
+    "file_name": "PowerUsageAdvancedScreen.kt",
+    "item_name": "battery_usage_summary",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$PowerUsageAdvancedActivity }"
+  },
+  {
+    "file_name": "AutoBrightnessScreen.kt",
+    "item_name": "auto_brightness_entry",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$AdaptiveBrightnessActivity }"
+  },
+  {
+    "file_name": "SystemControlsScreen.kt",
+    "item_name": "system_controls_preference_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "PowerUsageSummaryScreen.kt",
+    "item_name": "power_usage_summary_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$PowerUsageSummaryActivity }"
+  },
+  {
+    "file_name": "AppsNotificationAccessScreen.kt",
+    "item_name": "notification_access",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$NotificationAccessSettingsActivity }"
+  },
+  {
+    "file_name": "ExtraDimScreen.kt",
+    "item_name": "reduce_bright_colors_preference",
+    "intent": "Intent { act=android.settings.REDUCE_BRIGHT_COLORS_SETTINGS }"
+  },
+  {
+    "file_name": "NightDisplayScreen.kt",
+    "item_name": "night_display",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$NightDisplaySettingsActivity }"
+  },
+  {
+    "file_name": "SavedAccessPointsWifiScreen.kt",
+    "item_name": "saved_networks",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$SavedAccessPointsSettingsActivity }"
+  },
+  {
+    "file_name": "FlashNotificationsScreen.kt",
+    "item_name": "flash_notifications",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$FlashNotificationsActivity }"
+  },
+  {
+    "file_name": "AmbientDisplayAlwaysOnPreferenceScreen.kt",
+    "item_name": "ambient_display_always_on_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.display.AmbientDisplayAlwaysOnActivity }"
+  },
+  {
+    "file_name": "SupervisionWebContentFiltersScreen.kt",
+    "item_name": "supervision_web_content_filters",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.supervision.webcontentfilters.SupervisionWebContentFiltersActivity }"
+  },
+  {
+    "file_name": "AudioAdjustmentScreen.kt",
+    "item_name": "audio_adjustment_preference_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) }"
+  },
+  {
+    "file_name": "VibrationScreen.kt",
+    "item_name": "vibration_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$VibrationSettingsActivity }"
+  },
+  {
+    "file_name": "UserSettingsScreenApi.kt",
+    "item_name": "user_settings_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=user_settings_screen}"
+  },
+  {
+    "file_name": "PrintSettingsApiScreen.kt",
+    "item_name": "print_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=print_settings}"
+  },
+  {
+    "file_name": "GestureSettingsApiScreen.kt",
+    "item_name": "gesture_settings_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=gesture_settings_screen}"
+  },
+  {
+    "file_name": "UserCredentialsScreenApi.kt",
+    "item_name": "user_credentials",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=user_credentials}"
+  },
+  {
+    "file_name": "IccLockApiScreen.kt",
+    "item_name": "sim_lock_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=sim_lock_settings}"
+  },
+  {
+    "file_name": "ManagedProfileApiScreen.kt",
+    "item_name": "managed_profile_settings_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=managed_profile_settings_screen}"
+  },
+  {
+    "file_name": "PowerMenuSettingsScreenApi.kt",
+    "item_name": "long_press_power_pref_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=long_press_power_pref_screen}"
+  },
+  {
+    "file_name": "ConfigureWifiApiScreen.kt",
+    "item_name": "api_configure_network_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_configure_network_settings}"
+  },
+  {
+    "file_name": "VibrationScreenApi.kt",
+    "item_name": "api_vibration_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_vibration_screen}"
+  },
+  {
+    "file_name": "SoundWorkApiScreen.kt",
+    "item_name": "sound_work_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=sound_work_screen}"
+  },
+  {
+    "file_name": "ContactsStorageApiScreen.kt",
+    "item_name": "contacts_storage_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=contacts_storage_settings}"
+  },
+  {
+    "file_name": "TetherApiScreen.kt",
+    "item_name": "api_tether_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_tether_settings}"
+  },
+  {
+    "file_name": "TrustedCredentialsScreenApi.kt",
+    "item_name": "trusted_credentials",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=trusted_credentials}"
+  },
+  {
+    "file_name": "SwipeToNotificationApiScreen.kt",
+    "item_name": "gesture_swipe_down_fingerprint_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=gesture_swipe_down_fingerprint_screen}"
+  },
+  {
+    "file_name": "RegionPickerApiFirstScreen.kt",
+    "item_name": "key_system_region_picker_page",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=key_system_region_picker_page}"
+  },
+  {
+    "file_name": "BatteryInfoApiScreen.kt",
+    "item_name": "battery_info_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=battery_info_screen}"
+  },
+  {
+    "file_name": "ManageWriteSettingsAppListScreen.kt",
+    "item_name": "special_access_manage_write_settings_app_list",
+    "intent": "Intent { act=android.settings.action.MANAGE_WRITE_SETTINGS }"
+  },
+  {
+    "file_name": "WifiDirectApiScreen.kt",
+    "item_name": "wifi_direct_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=wifi_direct_screen}"
+  },
+  {
+    "file_name": "CredentialManagementAppScreenApi.kt",
+    "item_name": "certificate_management_app",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=certificate_management_app}"
+  },
+  {
+    "file_name": "EncryptionAndCredentialScreenApi.kt",
+    "item_name": "encryption_and_credential",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=encryption_and_credential}"
+  },
+  {
+    "file_name": "VibrationIntensityScreenApi.kt",
+    "item_name": "api_vibration_intensity_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_vibration_intensity_screen}"
+  },
+  {
+    "file_name": "WriteSystemPreferencesAppListScreen.kt",
+    "item_name": "special_access_write_system_preferences_app_list",
+    "intent": "Intent { act=android.settings.action.WRITE_SYSTEM_PREFERENCES }"
+  },
+  {
+    "file_name": "SpatialAudioApiScreen.kt",
+    "item_name": "spatial_audio_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=spatial_audio_screen}"
+  },
+  {
+    "file_name": "UsbDetailsApiScreen.kt",
+    "item_name": "usb_details_fragment",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=usb_details_fragment}"
+  },
+  {
+    "file_name": "AccountSecuritySubpageScreenApi.kt",
+    "item_name": "account_security_subpage_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=account_security_subpage_screen}"
+  },
+  {
+    "file_name": "TemperatureUnitApiFirstScreen.kt",
+    "item_name": "regional_preference_temperature",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=regional_preference_temperature}"
+  },
+  {
+    "file_name": "WifiControlAppListScreen.kt",
+    "item_name": "special_access_wifi_control_app_list",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ChangeWifiStateActivity }"
+  },
+  {
+    "file_name": "AppLocalePickerApiFirstScreen.kt",
+    "item_name": "key_app_language_picker_page",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=key_app_language_picker_page}"
+  },
+  {
+    "file_name": "UserDictionaryListApiScreen.kt",
+    "item_name": "user_dict_list",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=user_dict_list}"
+  },
+  {
+    "file_name": "DeviceAdminApiScreen.kt",
+    "item_name": "device_admin_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=device_admin_settings}"
+  },
+  {
+    "file_name": "MeasurementSystemApiFirstScreen.kt",
+    "item_name": "regional_preference_measurement_system",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=regional_preference_measurement_system}"
+  },
+  {
+    "file_name": "FullScreenNotificationsAppListScreen.kt",
+    "item_name": "special_access_full_screen_notifications_app_list",
+    "intent": "Intent { cmp=com.android.settings/.ManageFullScreenIntent }"
+  },
+  {
+    "file_name": "WifiHotspotSpeedApiScreen.kt",
+    "item_name": "wifi_hotspot_speed",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=wifi_hotspot_speed}"
+  },
+  {
+    "file_name": "InstallCertificateFromStorageScreenApi.kt",
+    "item_name": "install_certificate",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=install_certificate}"
+  },
+  {
+    "file_name": "AllFilesAccessAppListScreen.kt",
+    "item_name": "special_access_all_files_access_app_list",
+    "intent": "Intent { act=android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION }"
+  },
+  {
+    "file_name": "FirstDayOfWeekApiFirstScreen.kt",
+    "item_name": "regional_preference_first_day_of_week",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=regional_preference_first_day_of_week}"
+  },
+  {
+    "file_name": "LanguageAndRegionApiFirstScreen.kt",
+    "item_name": "api_language_and_region_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_language_and_region_settings}"
+  },
+  {
+    "file_name": "SystemLocalePickerApiFirstScreen.kt",
+    "item_name": "key_system_language_picker_page",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) }  extras={screen_key=key_system_language_picker_page}"
+  },
+  {
+    "file_name": "TrustAgentApiScreen.kt",
+    "item_name": "trust_agents",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) }  extras={screen_key=trust_agents}"
+  },
+  {
+    "file_name": "UnrestrictedDataAccessApiScreen.kt",
+    "item_name": "unrestricted_data_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) }  extras={screen_key=unrestricted_data_screen}"
+  },
+  {
+    "file_name": "TermsOfAddressApiFirstScreen.kt",
+    "item_name": "terms_of_address",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) }  extras={screen_key=terms_of_address}"
+  },
+  {
+    "file_name": "DoubleTwistGestureApiFirstScreen.kt",
+    "item_name": "double_twist_gesture_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) }  extras={screen_key=double_twist_gesture_screen}"
+  },
+  {
+    "file_name": "AlarmsAndRemindersAppListScreen.kt",
+    "item_name": "special_access_alarms_and_reminders_app_list",
+    "intent": "Intent { act=android.settings.REQUEST_SCHEDULE_EXACT_ALARM }"
+  },
+  {
+    "file_name": "WifiHotspotSecurityApiScreen.kt",
+    "item_name": "wifi_hotspot_security",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) }  extras={screen_key=wifi_hotspot_security}"
+  },
+  {
+    "file_name": "PictureInPictureAppListScreen.kt",
+    "item_name": "special_access_picture_in_picture_app_list",
+    "intent": "Intent { act=android.settings.PICTURE_IN_PICTURE_SETTINGS }"
+  },
+  {
+    "file_name": "InstallUnknownAppsAppListScreen.kt",
+    "item_name": "special_access_install_unknown_apps_app_list",
+    "intent": "Intent { act=android.settings.MANAGE_UNKNOWN_APP_SOURCES }"
+  },
+  {
+    "file_name": "SupervisionWebContentFiltersBrowserSupportedAppsScreen.kt",
+    "item_name": "supervision_web_content_filters_browser_supported_apps",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.supervision.webcontentfilters.SupervisionWebContentFiltersBrowserSupportedAppsActivity }"
+  },
+  {
+    "file_name": "SupervisionWebContentFiltersSearchSupportedAppsScreen.kt",
+    "item_name": "supervision_web_content_filters_search_supported_apps",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.supervision.webcontentfilters.SupervisionWebContentFiltersSearchSupportedAppsActivity }"
+  },
+  {
+    "file_name": "BatterySaverScreen.kt",
+    "item_name": "battery_saver_screen",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$BatterySaverSettingsActivity (has extras) }"
+  },
+  {
+    "file_name": "PairHearingDeviceScreen.kt",
+    "item_name": "hearing_device_add_bt_devices",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) } extras={screen_key=hearing_device_add_bt_devices}"
+  },
+  {
+    "file_name": "BluetoothScanningApiScreen.kt",
+    "item_name": "bluetooth_always_scanning_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=bluetooth_always_scanning_screen}"
+  },
+  {
+    "file_name": "DateTimeSettingsApiScreen.kt",
+    "item_name": "api_date_time_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_date_time_settings}"
+  },
+  {
+    "file_name": "DisplayOverOtherAppsAppListScreen.kt",
+    "item_name": "special_access_draw_overlay_app_list",
+    "intent": "Intent { act=android.settings.action.MANAGE_OVERLAY_PERMISSION }"
+  },
+  {
+    "file_name": "MyDeviceInfoApiFirstScreen.kt",
+    "item_name": "api_my_device_info_pref_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_my_device_info_pref_screen}"
+  },
+  {
+    "file_name": "NumberingSystemLocaleListApiFirstScreen.kt",
+    "item_name": "regional_preference_numbering_system",
+    "intent": "precondition present"
+  },
+  {
+    "file_name": "UserAspectRatioAppsApiScreen.kt",
+    "item_name": "aspect_ratio_apps",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=aspect_ratio_apps}"
+  },
+  {
+    "file_name": "CaptioningScreens.kt",
+    "item_name": "captioning_preference_screen",
+    "intent": "Intent { act=android.settings.CAPTIONING_SETTINGS }"
+  },
+  {
+    "file_name": "AvailableVirtualKeyboardApiScreen.kt",
+    "item_name": "available_virtual_keyboard_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=available_virtual_keyboard_screen}"
+  },
+  {
+    "file_name": "DeviceUnlockApiScreen.kt",
+    "item_name": "device_unlock_pref_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=device_unlock_pref_screen}"
+  },
+  {
+    "file_name": "FirmwareVersionScreenApi.kt",
+    "item_name": "firmware_version_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=firmware_version_screen}"
+  },
+  {
+    "file_name": "UserDetailsSettingsScreenApi.kt",
+    "item_name": "user_details_settings_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=firmware_version_screen}"
+  }
+]
