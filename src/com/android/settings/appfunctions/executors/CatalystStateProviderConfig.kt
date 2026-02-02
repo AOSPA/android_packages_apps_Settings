@@ -47,6 +47,7 @@ import com.android.settings.accessibility.shortcutssettings.ui.ShortcutsSettings
 import com.android.settings.accessibility.systemcontrols.ui.SystemControlsScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.accessibility.timingcontrols.ui.TimingControlsScreen
+import com.android.settings.accounts.AccountDetailApiScreen
 import com.android.settings.accounts.AccountScreen
 import com.android.settings.accounts.ManagedProfileApiScreen
 import com.android.settings.applications.AppDashboardScreen
@@ -489,6 +490,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = TextReadingScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccessibilityScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccountScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AccountDetailApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ManagedProfileApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AppDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ConnectedDeviceDashboardScreen.KEY),
