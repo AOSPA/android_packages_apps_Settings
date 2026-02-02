@@ -36,7 +36,7 @@ object GameControllerUtils {
     const val TAG = "GameControllerSettings"
     const val EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier"
 
-    /** Map of Preference key to String resource for preference name */
+    /** Default map of Preference key to String resource for preference name */
     val preferenceKeyToNameMap =
         mapOf(
             "controller_button_a" to R.string.game_controller_button_a,
@@ -54,7 +54,7 @@ object GameControllerUtils {
             "controller_stick_right" to R.string.game_controller_stick_right,
         )
 
-    /** Map of Preference key to drawable resource for preference name */
+    /** Default map of Preference key to drawable resource for preference name */
     val preferenceKeyToIconMap =
         mapOf(
             "controller_button_a" to R.drawable.ic_controller_button_a,

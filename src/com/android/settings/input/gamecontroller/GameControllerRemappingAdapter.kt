@@ -16,13 +16,12 @@
 
 package com.android.settings.input.gamecontroller
 
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.recyclerview.widget.RecyclerView
 import com.android.settings.R
 
@@ -37,7 +36,7 @@ class GameControllerRemappingAdapter(
     private val onItemClick: (preferenceKey: String) -> Unit,
 ) : RecyclerView.Adapter<GameControllerRemappingAdapter.ViewHolder>() {
 
-    data class Choice(@StringRes val nameResId: Int, @DrawableRes val iconResId: Int)
+    data class Choice(val name: String, val icon: Drawable)
 
     private val keys = choices.keys.toList()
 
@@ -58,8 +57,8 @@ class GameControllerRemappingAdapter(
         val key = keys[position]
         holder.iconView.setImageResource(R.drawable.ic_check_24dp)
         val choice = choices[key]!!
-        holder.iconView.setImageResource(choice.iconResId)
-        holder.titleView.setText(choice.nameResId)
+        holder.iconView.setImageDrawable(choice.icon)
+        holder.titleView.text = choice.name
 
         holder.checkIcon.visibility =
             if (key == currentSelectionKey) {
