@@ -110,7 +110,7 @@ class SatelliteLandingPageFragmentTest {
         // Mock Apps Repository
         `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf())
         `when`(appsRepository.getAppsPackagesForNbNtnLandingPage()).thenReturn(listOf())
-        `when`(appsRepository.getEmergencySosIntent()).thenReturn(null)
+        `when`(appsRepository.getDialerIntent()).thenReturn(null)
         `when`(appsRepository.getSettingsIntent(org.mockito.ArgumentMatchers.anyBoolean()))
             .thenReturn(null)
 
