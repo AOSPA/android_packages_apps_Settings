@@ -796,7 +796,8 @@ public class CredentialManagerPreferenceController extends BasePreferenceControl
                     public void onLeftSideClicked() {
                         if (CombinedProviderInfo.launchSettingsActivityIntent(mContext, packageName,
                                 settingsActivity, getUser())) {
-                            mCredmanMetricsLogger.recordOutboundIntentLaunch(packageName);
+                            mCredmanMetricsLogger.recordAdditionalServiceOutboundLaunch(
+                                    packageName);
                         }
                     }
                 });
