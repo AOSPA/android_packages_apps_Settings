@@ -16,6 +16,8 @@ per-file DesktopModePreferenceController.java=file:platform/frameworks/base:/lib
 # ADB
 per-file Adb*=set noparent
 per-file Adb*=file:platform/packages/modules/adb:/OWNERS
+per-file qstile/Adb*=set noparent
+per-file qstile/Adb*=file:platform/packages/modules/adb:/OWNERS
 
 #TouchpadVisualizerPreferenceController
 per-file TouchpadVisualizerPreferenceController.java=file:platform/frameworks/base:/INPUT_OWNERS
