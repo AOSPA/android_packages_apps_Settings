@@ -45,14 +45,11 @@ import android.widget.TextView;
 import androidx.annotation.StringRes;
 
 import com.android.settings.R;
-import com.android.settings.SetupWizardUtils;
 import com.android.settings.wifi.dpp.AdbQrCode;
 import com.android.settings.wifi.dpp.WifiDppQrCodeBaseFragment;
 import com.android.settings.wifi.dpp.WifiNetworkConfig;
 import com.android.settingslib.qrcode.QrCamera;
 import com.android.settingslib.qrcode.QrDecorateView;
-
-import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Fragment shown when clicking on the "Pair by QR code" preference in
@@ -148,9 +145,6 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Context context = getContext();
-        context.setTheme(SetupWizardUtils.getTheme(context, getActivity().getIntent()));
-        ThemeHelper.trySetDynamicColor(getContext());
         super.onCreate(savedInstanceState);
 
         mIntentFilter = new IntentFilter(AdbManager.WIRELESS_DEBUG_PAIRING_RESULT_ACTION);
