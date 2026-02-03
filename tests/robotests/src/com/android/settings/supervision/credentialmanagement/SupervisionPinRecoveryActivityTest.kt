@@ -1067,6 +1067,13 @@ class SupervisionPinRecoveryActivityTest {
         }
     }
 
+    @Test
+    fun activity_isDeclaredTransparentInManifest() {
+        val componentName = ComponentName(context, SupervisionPinRecoveryActivity::class.java)
+        val activityInfo = context.packageManager.getActivityInfo(componentName, 0)
+        assertThat(activityInfo.themeResource).isEqualTo(com.android.settings.R.style.Transparent)
+    }
+
     /**
      * Helper function to verify that the SupervisionRecoveryInfo is set correctly.
      *
