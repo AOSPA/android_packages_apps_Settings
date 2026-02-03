@@ -19,7 +19,6 @@ import android.annotation.MainThread
 import android.app.ActivityManager
 import android.app.ActivityTaskManager
 import android.app.TaskStackListener
-import android.app.supervision.flags.Flags
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
@@ -56,14 +55,8 @@ class SupervisionAuthController private constructor(private val appContext: Cont
         object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
                 handler.post {
-                    if (Flags.enableSupervisionAuthControllerUpdatesBugfix()) {
-                        if (sessionStartTime != null) {
-                            invalidateSession()
-                        }
-                    } else {
-                        if (currentTaskId != null) {
-                            invalidateSession()
-                        }
+                    if (currentTaskId != null) {
+                        invalidateSession()
                     }
                 }
             }
@@ -74,14 +67,8 @@ class SupervisionAuthController private constructor(private val appContext: Cont
         object : TaskStackListener() {
             override fun onTaskStackChanged() {
                 handler.post {
-                    if (Flags.enableSupervisionAuthControllerUpdatesBugfix()) {
-                        if (sessionStartTime != null && !isSupervisionActivityRunning()) {
-                            invalidateSession()
-                        }
-                    } else {
-                        if (currentTaskId != null && !isSupervisionActivityFocused()) {
-                            invalidateSession()
-                        }
+                    if (currentTaskId != null && !isSupervisionActivityFocused()) {
+                        invalidateSession()
                     }
                 }
             }
@@ -113,9 +100,6 @@ class SupervisionAuthController private constructor(private val appContext: Cont
         if (isTimedOut) {
             invalidateSession()
             return false
-        }
-        if (Flags.enableSupervisionAuthControllerUpdatesBugfix()) {
-            return sessionStartTime != null && isSupervisionActivityRunning()
         }
         return currentTaskId == taskId
     }
@@ -153,10 +137,7 @@ class SupervisionAuthController private constructor(private val appContext: Cont
      * activity.
      */
     private fun isSupervisionActivityFocused(): Boolean {
-        if (!Flags.enableSupervisionAuthControllerUpdatesBugfix() && currentTaskId == null)
-            return false
-        if (Flags.enableSupervisionAuthControllerUpdatesBugfix() && sessionStartTime == null)
-            return false
+        if (currentTaskId == null) return false
         val appTasks = activityManager.appTasks ?: emptyList()
         val task = appTasks.find { it.taskInfo?.taskId == currentTaskId }
         if (task == null) return false
