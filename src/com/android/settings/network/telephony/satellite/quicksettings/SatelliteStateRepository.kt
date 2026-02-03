@@ -25,6 +25,7 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.telephony.ServiceState
+import android.telephony.SubscriptionManager
 import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteDisallowedReasonsCallback
@@ -230,6 +231,38 @@ constructor(
         combine(isCellularAvailableFlow, isInternetConnectedFlow) { cell, wifi -> cell || wifi }
             .stateIn(scope, SharingStarted.WhileSubscribed(), false)
 
+    open val activeSubIdFlow: StateFlow<Int> =
+        callbackFlow {
+                val sm = context.getSystemService(SubscriptionManager::class.java)
+                val listener =
+                    object : SubscriptionManager.OnSubscriptionsChangedListener() {
+                        override fun onSubscriptionsChanged() {
+                            trySend(SubscriptionManager.getActiveDataSubscriptionId())
+                        }
+                    }
+                sm?.addOnSubscriptionsChangedListener(context.mainExecutor, listener)
+                trySend(SubscriptionManager.getActiveDataSubscriptionId())
+                awaitClose { sm?.removeOnSubscriptionsChangedListener(listener) }
+            }
+            .stateIn(
+                scope,
+                SharingStarted.WhileSubscribed(),
+                SubscriptionManager.getActiveDataSubscriptionId(),
+            )
+
+    /**
+     * A flow that groups the current state of satellite modem signals.
+     *
+     * This includes the carrier roaming NTN state, OEM satellite activity, and disallowed reasons.
+     */
+    private val satelliteModemSignalsFlow =
+        combine(carrierRoamingNtnStateFlow, isOemSatelliteActiveFlow, satelliteDisallowedReasons) {
+            carrierState,
+            isOemActive,
+            disallowedReasons ->
+            Triple(carrierState, isOemActive, disallowedReasons)
+        }
+
     /**
      * The current status of satellite connectivity.
      *
@@ -237,28 +270,26 @@ constructor(
      */
     open val satelliteStatus: StateFlow<SatelliteStatus> =
         combine(
-                carrierRoamingNtnStateFlow,
-                isOemSatelliteActiveFlow,
-                satelliteDisallowedReasons,
+                satelliteModemSignalsFlow,
                 isTerrestrialConnected,
                 isAirplaneModeEnabledFlow,
-            ) { carrierState, isOemActive, disallowedReasons, isTerrestrial, isAirplaneMode ->
-                // Immediate return if Airplane Mode is on
-                if (isAirplaneMode) {
-                    return@combine SatelliteStatus.NOT_AVAILABLE
-                }
+                activeSubIdFlow,
+            ) { (carrierState, isOemActive, disallowedReasons), isTerrestrial, isAirplaneMode, subId
+                ->
+                // Rule: Immediate return if Airplane Mode is on
+                if (isAirplaneMode) return@combine SatelliteStatus.NOT_AVAILABLE
 
-                val isSatelliteActive = carrierState.isActive || isOemActive
-                val isOemAllowed = disallowedReasons.isEmpty()
+                val isCarrierSupported = SatelliteUtils.isCarrierRoamingNtnSupported(context, subId)
                 val isSatelliteAvailable =
                     checkSatelliteAvailability(
                         isCarrierEligible = carrierState.isEligible,
-                        isOemAllowed = isOemAllowed,
+                        isOemAllowed = disallowedReasons.isEmpty(),
                         isTerrestrialConnected = isTerrestrial,
+                        isCarrierSupported = isCarrierSupported,
                     )
 
                 when {
-                    isSatelliteActive -> SatelliteStatus.ACTIVE
+                    carrierState.isActive || isOemActive -> SatelliteStatus.ACTIVE
                     isSatelliteAvailable -> SatelliteStatus.AVAILABLE
                     else -> SatelliteStatus.NOT_AVAILABLE
                 }
@@ -289,10 +320,19 @@ constructor(
         isCarrierEligible: Boolean,
         isOemAllowed: Boolean,
         isTerrestrialConnected: Boolean,
+        isCarrierSupported: Boolean,
     ): Boolean {
-        return (isCarrierEligible || isOemAllowed) &&
-            !isTerrestrialConnected &&
-            !isLteNtnSupportedChecker(context)
+        if (isTerrestrialConnected) return false
+
+        // Rule: LTE-NTN devices never show "Available".
+        // This state is strictly for NB-IoT (Carrier Roaming/Pixel Skylo).
+        if (isLteNtnSupportedChecker(context)) return false
+
+        return if (isCarrierSupported) {
+            isCarrierEligible
+        } else {
+            isOemAllowed
+        }
     }
 
     /* Returns true if cellular is available and not using a non-terrestrial network. */

@@ -68,13 +68,16 @@ class SatelliteLandingPageViewModel(
     val isCarrierRoamingNtnSupported: StateFlow<Boolean> =
         _isCarrierRoamingNtnSupported.asStateFlow()
 
+    private val satelliteStatus: StateFlow<SatelliteStatus> =
+        satelliteStateRepository.satelliteStatus
+
     /**
      * Whether the "Try a demo" button should be enabled.
      *
      * The button is disabled if satellite connectivity is [SatelliteStatus.ACTIVE].
      */
     val isTryADemoButtonEnabled: StateFlow<Boolean> =
-        satelliteStateRepository.satelliteStatus
+        satelliteStatus
             .map { it != SatelliteStatus.ACTIVE }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), true)
 
@@ -85,7 +88,7 @@ class SatelliteLandingPageViewModel(
      * [SatelliteStatus.AVAILABLE].
      */
     val areAppsEnabled: StateFlow<Boolean> =
-        satelliteStateRepository.satelliteStatus
+        satelliteStatus
             .map { it != SatelliteStatus.NOT_AVAILABLE }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), false)
 
@@ -93,33 +96,39 @@ class SatelliteLandingPageViewModel(
     /** The state of the satellite warning banners. */
     val bannerState: StateFlow<SatelliteBannerState> = _bannerState
 
+    init {
+        viewModelScope.launch {
+            satelliteStateRepository.activeSubIdFlow.collect { subId -> refreshInternal(subId) }
+        }
+    }
+
     /**
      * Refreshes the satellite landing page data.
      *
      * This method fetches the latest support status for LTE-based NTN and Carrier Roaming NTN, and
      * reloads the list of satellite applications.
-     *
-     * @param subId The subscription ID to check carrier support for.
      */
-    fun refresh(subId: Int) {
-        viewModelScope.launch {
-            // Fetch support status on a background thread to avoid blocking the UI.
-            val isLteSupported =
-                withContext(backgroundDispatcher) {
-                    SatelliteUtils.isLteBasedNtnSupportedByDevice(context)
-                }
-            _isLteBasedNtnSupported.value = isLteSupported
+    fun refresh() {
+        viewModelScope.launch { refreshInternal(satelliteStateRepository.activeSubIdFlow.value) }
+    }
 
-            val isCarrierSupported =
-                withContext(backgroundDispatcher) {
-                    SatelliteUtils.isCarrierRoamingNtnSupported(context, subId)
-                }
-            _isCarrierRoamingNtnSupported.value = isCarrierSupported
+    private suspend fun refreshInternal(subId: Int) {
+        // Fetch support status on a background thread to avoid blocking the UI.
+        val isLteSupported =
+            withContext(backgroundDispatcher) {
+                SatelliteUtils.isLteBasedNtnSupportedByDevice(context)
+            }
+        _isLteBasedNtnSupported.value = isLteSupported
 
-            loadSatelliteAppItems(isLteSupported, isCarrierSupported)
+        val isCarrierSupported =
+            withContext(backgroundDispatcher) {
+                SatelliteUtils.isCarrierRoamingNtnSupported(context, subId)
+            }
+        _isCarrierRoamingNtnSupported.value = isCarrierSupported
 
-            updateBannerState(subId)
-        }
+        loadSatelliteAppItems(isLteSupported, isCarrierSupported)
+
+        updateBannerState(subId)
     }
 
     /** Updates the state flow for banners. */
