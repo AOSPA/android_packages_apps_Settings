@@ -17,9 +17,13 @@
 package com.android.settings.applications
 
 import android.content.Context
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager.PackageInfoFlags
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.content.pm.PackageManager.ApplicationInfoFlags
+import android.multiuser.Flags
 import android.os.Build
+import android.os.UserHandle
+import android.os.UserManager
 import androidx.annotation.RequiresApi
 import com.android.settingslib.metadata.R
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
@@ -30,18 +34,32 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
  * This implementation lives within Settings because most library clients do not possess the
  * required permissions to list all packages on the device.
  *
- * @param flags - The flags used to query the underlying `getInstalledPackages` method from the
+ * @param flags - The flags used to query the underlying `getInstalledApplications` method from the
  *   package manager, when retrieving all the options.
  */
-class InstalledPackageName(private val flags: PackageInfoFlags) : FiniteOptionsType<String> {
+class InstalledPackageName(private val flags: ApplicationInfoFlags? = null) :
+    FiniteOptionsType<String> {
 
     override fun getDescription(context: Context): String =
         context.getString(R.string.installed_package_name_type_description)
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    override fun getOptions(context: Context): List<Pair<String, String>> =
-        context.packageManager.getInstalledPackages(flags).map { packageInfo: PackageInfo ->
-            packageInfo.packageName to
-                (packageInfo.applicationInfo?.name ?: packageInfo.packageName)
+    override fun getOptions(context: Context): List<Pair<String, String>> {
+        val pm = context.packageManager
+        return pm.getInstalledApplications(flags ?: getDefaultFlags(context)).map {
+            appInfo: ApplicationInfo ->
+            appInfo.packageName to (appInfo.loadLabel(pm)?.toString() ?: appInfo.packageName)
         }
+    }
+
+    private fun getDefaultFlags(context: Context): ApplicationInfoFlags {
+        val um = context.getSystemService(UserManager::class.java)
+        var retrieveFlags =
+            PackageManager.MATCH_DISABLED_COMPONENTS or
+                PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
+        if (!Flags.dontShowOtherUsersAppsToAdmin() && um.isUserAdmin(UserHandle.myUserId())) {
+            retrieveFlags = retrieveFlags or PackageManager.MATCH_ANY_USER
+        }
+        return ApplicationInfoFlags.of(retrieveFlags.toLong())
+    }
 }

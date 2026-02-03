@@ -61,6 +61,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /** The page of the Open by default */
+// LINT.IfChange
 public class AppLaunchSettings extends AppInfoBase implements
         Preference.OnPreferenceChangeListener, SelectorWithWidgetPreference.OnClickListener {
     private static final String TAG = "AppLaunchSettings";
@@ -453,3 +454,4 @@ public class AppLaunchSettings extends AppInfoBase implements
         return linkList.size();
     }
 }
+// LINT.ThenChange(AppLaunchApiScreen.java)
