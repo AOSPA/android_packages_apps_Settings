@@ -51,6 +51,7 @@ import com.android.settings.accounts.AccountScreen
 import com.android.settings.accounts.ManagedProfileApiScreen
 import com.android.settings.applications.AppDashboardScreen
 import com.android.settings.applications.contacts.ContactsStorageApiScreen
+import com.android.settings.applications.intentpicker.AppLaunchApiScreen
 import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen
 import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppListScreen
 import com.android.settings.applications.specialaccess.AllFilesAccessAppDetailScreen
@@ -370,6 +371,11 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = InstallUnknownAppsAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ManageWriteSettingsAppListScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = AppLaunchApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
