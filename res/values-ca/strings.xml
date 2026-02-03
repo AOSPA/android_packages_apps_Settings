@@ -412,6 +412,10 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Omet"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Has afegit el nombre màxim de cares"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"No es poden afegir més cares"</string>
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
+    <skip />
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"No s\'ha completat el registre"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"D\'ACORD"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"S\'ha esgotat el temps d\'espera per registrar la cara. Torna-ho a provar."</string>
@@ -555,6 +559,14 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Toca el sensor"</string>
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Toca el botó d\'engegada sense prémer-lo"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Com pots configurar l\'empremta digital"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_title" msgid="2560358942286362136">"Toca el sensor d\'empremtes digitals"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_message" msgid="1440652109953064598">"El sensor es troba al teclat, al botó d\'engegada o al lateral del dispositiu."</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_left_message" msgid="9114169763600792562">"El sensor d\'empremtes digitals es troba a l\'extrem inferior esquerre del teclat"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_right_message" msgid="1259481399128590523">"El sensor d\'empremtes digitals es troba a l\'extrem inferior dret del teclat"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_top_right_message" msgid="3676793246782964274">"El sensor d\'empremtes digitals es troba a l\'extrem superior dret del teclat"</string>
+    <string name="security_settings_enroll_find_sensor_right_side_message" msgid="4935349088172995426">"El sensor d\'empremtes digitals es troba a la part dreta del dispositiu"</string>
+    <string name="security_settings_enroll_find_sensor_left_side_message" msgid="5826609754513683067">"El sensor d\'empremtes digitals es troba a la part esquerra del dispositiu"</string>
+    <string name="security_settings_enroll_find_sensor_left_of_power_button_top_right_message" msgid="4384349514752161995">"El sensor d\'empremtes digitals es troba a l\'extrem superior dret del teclat, al costat del botó d\'engegada"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"És a la part posterior del telèfon. Utilitza el dit índex."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"El sensor d\'empremtes digitals es troba a la pantalla. Capturaràs l\'empremta digital a la pantalla següent."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Comença"</string>
@@ -672,7 +684,7 @@
     <string name="private_space_auto_lock_after_inactivity" msgid="7107814517866649733">"5 min després del temps d\'espera de la pantalla"</string>
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Només després de reiniciar el dispositiu"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Amaga l\'espai privat"</string>
-    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Amaga l\'espai privat quan es bloquegi."</string>
+    <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Amaga l\'espai privat quan es bloquegi"</string>
     <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Per evitar que altres persones sàpiguen que tens un espai privat al dispositiu, pots amagar-lo de la llista d\'aplicacions"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Accedeix a l\'espai privat quan està amagat"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"A la barra de cerca, escriu \"espai privat\""</string>
@@ -1147,14 +1159,14 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utilitza un codi QR per afegir un dispositiu a aquesta xarxa"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"El codi QR no té un format vàlid"</string>
     <string name="retry" msgid="7542103800274026915">"Torna-ho a provar"</string>
-    <string name="shared_message" msgid="2104244057926025072">"compartit"</string>
-    <string name="private_message" msgid="5897966950396765392">"privat"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Canvia"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancel·la"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Comparteix la xarxa"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Els altres usuaris d\'aquest dispositiu poden accedir a aquesta xarxa"</string>
-    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"Vols canviar a la xarxa <xliff:g id="SHARED">%1$s</xliff:g>?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"Ja existeix una xarxa <xliff:g id="SHARED_0">%1$s</xliff:g> amb el nom \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\". Si canvies a la xarxa <xliff:g id="SHARED_1">%1$s</xliff:g>, sortiràs de la xarxa <xliff:g id="PRIVATE">%3$s</xliff:g> i és possible que no tinguis Internet temporalment."</string>
+    <string name="wifi_share_conflict_dialog_title" msgid="3758584730708042014">"Vols canviar a una xarxa compartida?"</string>
+    <string name="wifi_share_conflict_dialog_message" msgid="4614968368961927940">"Ja existeix una xarxa compartida amb el nom \"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>\". Si hi canvies, sortiràs de la xarxa privada i és possible que no tinguis Internet temporalment."</string>
+    <string name="wifi_private_conflict_dialog_title" msgid="10940608988441770">"Vols canviar a una xarxa privada?"</string>
+    <string name="wifi_private_conflict_dialog_message" msgid="495022893355731972">"Ja existeix una xarxa privada amb el nom \"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>\". Si hi canvies, sortiràs de la xarxa compartida i és possible que no tinguis Internet temporalment."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(sense canvis)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Permet que els usuaris editin la xarxa"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Altres usuaris poden fer canvis en aquesta xarxa"</string>
@@ -1439,7 +1451,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Utilitza un fons fosc perquè la pantalla sigui més agradable a la vista i reduir l\'ús de la bateria en algunes pantalles. El tema canviarà si tens una programació, quan la pantalla estigui desactivada."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Actualment, el tema fosc segueix la programació del mode Hora de dormir"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Configuració del mode Hora de dormir"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Els modes també poden activar el tema fosc}=1{{mode_1} també activa el tema fosc}=2{{mode_1} i {mode_2} també activen el tema fosc}=3{{mode_1}, {mode_2} i {mode_3} també activen el tema fosc}other{{mode_1}, {mode_2} i # més també activen el tema fosc}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8510284128378660986">"{count,plural,offset:2 =0{Els modes també poden activar el tema fosc.}=1{{mode_1} també activa el tema fosc.}=2{{mode_1} i {mode_2} també activen el tema fosc.}=3{{mode_1}, {mode_2} i {mode_3} també activen el tema fosc.}other{{mode_1}, {mode_2} i # més també activen el tema fosc.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Configuració dels modes"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Millora la il·luminació, la claredat i la gamma de colors de les imatges i els vídeos en alt rang dinàmic (HDR). El contingut HDR es mostrarà més brillant."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Temps d\'espera de la pantalla"</string>
@@ -1517,6 +1529,24 @@
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"No es pot activar el PIN."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"D\'acord"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Cancel·la"</string>
+    <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Protegeix la targeta SIM"</string>
+    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"Protecció automàtica amb bloqueig de SIM"</string>
+    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"Gestió automàtica del PIN"</string>
+    <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Gestionat per Android"</string>
+    <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"No gestionat per Android"</string>
+    <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"La inscripció s\'ha fet correctament"</string>
+    <string name="sim_enrollment_failed" msgid="342422651961251317">"Ha fallat la inscripció"</string>
+    <string name="sim_display_platform_managed_pin_title" msgid="6889806433509624620">"Mostra el PIN gestionat per Android"</string>
+    <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"PIN gestionat per Android"</string>
+    <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Valor del PIN gestionat per Android:"</string>
+    <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"No s\'ha pogut obtenir el PIN"</string>
+    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"Protegeix la targeta SIM contra robatoris"</string>
+    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"PIN de la SIM gestionat per Android"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"El PIN de la SIM es gestiona manualment"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"Per activar la protecció de la SIM, la pantalla de bloqueig ha d\'estar configurada"</string>
+    <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Introdueix el PIN actual de la SIM"</string>
+    <string name="provide_current_sim_pin" msgid="2805396981527525822">"Introdueix el PIN actual de la targeta SIM"</string>
+    <string name="use_carrier_default_pin" msgid="4777399918806287607">"Usa l\'opció de l\'operador"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Utilitzar <xliff:g id="CARRIER">%1$s</xliff:g> per a dades mòbils?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Estàs utilitzant <xliff:g id="CARRIER2_0">%2$s</xliff:g> per a les dades mòbils. Si canvies a <xliff:g id="CARRIER1">%1$s</xliff:g>, ja no es farà servir <xliff:g id="CARRIER2_1">%2$s</xliff:g> per a les dades mòbils."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Utilitza <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2118,13 +2148,12 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Premeu la tecla d\'espai dos cops per inserir \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Mostra les contrasenyes"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Mostra els caràcters breument mentre escrius"</string>
-    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
     <skip />
-    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Mostra els caràcters breument mentre escrius a la pantalla tàctil"</string>
+    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
     <skip />
-    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
     <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"És possible que aquest corrector ortogràfic pugui recopilar tot el text que escrius, la qual cosa inclou dades personals com ara les contrasenyes i els números de les targetes de crèdit. Prové de l\'aplicació <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vols fer servir aquest corrector ortogràfic?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Configuració"</string>
@@ -2305,11 +2334,11 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Tria una tecla nova per a <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accessibilitat del teclat físic"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Tecles permanents, tecles de rebot, tecles del ratolí"</string>
-    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Repeteix les tecles"</string>
+    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Repetició de tecles"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Retard abans de la repetició"</string>
     <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"Augmenta el retard"</string>
     <string name="keyboard_repeat_keys_decrease_delay_desc" msgid="6762794746507398346">"Disminueix el retard"</string>
-    <string name="keyboard_repeat_keys_delay_title" msgid="5954595732341624638">"Percentatge de repetició"</string>
+    <string name="keyboard_repeat_keys_delay_title" msgid="5954595732341624638">"Freqüència de repetició"</string>
     <string name="keyboard_repeat_keys_summary" msgid="8972905345211768313">"Mantén premuda una tecla per repetir-ne el caràcter fins que la deixis anar"</string>
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"Augmenta el percentatge de repetició"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"Disminueix el percentatge de repetició"</string>
@@ -2504,7 +2533,6 @@
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Amplia el zoom a la pantalla ràpidament per fer més gran el contingut"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Per ampliar el zoom&lt;/b&gt;:&lt;br/&gt; {0,number,integer}. Utilitza la drecera per iniciar l\'ampliació.&lt;br/&gt; {1,number,integer}. Toca la pantalla.&lt;br/&gt; {2,number,integer}. Arrossega 2 dits per moure\'t per la pantalla.&lt;br/&gt; {3,number,integer}. Pinça amb 2 dits per ajustar el zoom.&lt;br/&gt; {4,number,integer}. Utilitza la drecera per aturar l\'ampliació.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Per ampliar el zoom temporalment&lt;/b&gt;:&lt;br/&gt; {0,number,integer}. Assegura\'t que el tipus d\'ampliació estigui definit com a pantalla completa.&lt;br/&gt; {1,number,integer}. Utilitza la drecera per iniciar l\'ampliació.&lt;br/&gt; {2,number,integer}. Mantén premut qualsevol punt de la pantalla.&lt;br/&gt; {3,number,integer}. Arrossega un dit per moure\'t per la pantalla.&lt;br/&gt; {4,number,integer}. Aixeca el dit per aturar l\'ampliació."</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;Per ampliar el zoom&lt;/b&gt;:&lt;br/&gt; {0,number,integer}. Utilitza una drecera o prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M per iniciar l\'ampliació&lt;br/&gt; {1,number,integer}. Prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + les tecles de fletxa per moure\'t per la pantalla&lt;br/&gt; {2,number,integer}. Prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; i \"+\" o \"-\" per ajustar el zoom&lt;br/&gt; {3,number,integer}. Utilitza una drecera o prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M per aturar l\'ampliació."</string>
-    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;Per ampliar el zoom&lt;/b&gt;:&lt;br/&gt; {0,number,integer}. Utilitza una drecera per iniciar l\'ampliació.&lt;br/&gt; {1,number,integer}. Prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + les tecles de fletxa per moure\'t per la pantalla&lt;br/&gt; {2,number,integer}. Prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; i \"+\" o \"-\" per ajustar el zoom&lt;br/&gt; {3,number,integer}. Utilitza una drecera per aturar l\'ampliació."</string>
     <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Teclat&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilitza una drecera o prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M per iniciar l\'ampliació&lt;br/&gt; {1,number,integer}. Prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + les tecles de fletxa per moure\'t per la pantalla&lt;br/&gt; {2,number,integer}. Prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; i \"+\" o \"-\" per ajustar el zoom&lt;br/&gt; {3,number,integer}. Utilitza una drecera o prem &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M per aturar l\'ampliació.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pantalla tàctil&lt;/b&gt;&lt;br/&gt; Per ampliar el zoom:&lt;br/&gt; {0,number,integer}. Utilitza una drecera per iniciar l\'ampliació.&lt;br/&gt; {1,number,integer}. Toca la pantalla.&lt;br/&gt; {2,number,integer}. Arrossega 2 dits per moure\'t per la pantalla.&lt;br/&gt; {3,number,integer}. Pinça amb 2 dits per ajustar el zoom.&lt;br/&gt; {4,number,integer}. Utilitza una drecera per aturar l\'ampliació.&lt;br/&gt;&lt;br/&gt; Per ampliar el zoom temporalment:&lt;br/&gt; {0,number,integer}. Assegura\'t que el tipus d\'ampliació estigui definit com a pantalla completa.&lt;br/&gt; {1,number,integer}. Utilitza una drecera per iniciar l\'ampliació.&lt;br/&gt; {2,number,integer}. Mantén premut qualsevol punt de la pantalla.&lt;br/&gt; {3,number,integer}. Arrossega un dit per moure\'t per la pantalla.&lt;br/&gt; {4,number,integer}. Aixeca el dit per aturar l\'ampliació."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Per ampliar el zoom&lt;/b&gt;:&lt;br/&gt; {0,number,integer}. Utilitza una drecera per iniciar l\'ampliació.&lt;br/&gt; {1,number,integer}. Toca la pantalla.&lt;br/&gt; {2,number,integer}. Arrossega 2 dits per moure\'t per la pantalla.&lt;br/&gt; {3,number,integer}. Pinça amb 2 dits per ajustar el zoom.&lt;br/&gt; {4,number,integer}. Utilitza la drecera per aturar l\'ampliació.&lt;br/&gt;&lt;br/&gt; També pots ampliar el zoom temporalment i més."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Per ampliar el zoom&lt;/b&gt;:&lt;br/&gt; {0,number,integer}. Utilitza una drecera per iniciar l\'ampliació.&lt;br/&gt; {1,number,integer}. Toca la pantalla.&lt;br/&gt; {2,number,integer}. Arrossega 1 o 2 dits per moure\'t per la pantalla.&lt;br/&gt; {3,number,integer}. Pinça amb 2 dits per ajustar el zoom.&lt;br/&gt; {4,number,integer}. Utilitza la drecera per aturar l\'ampliació.&lt;br/&gt;&lt;br/&gt; També pots ampliar el zoom temporalment i més."</string>
@@ -2600,11 +2628,13 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Activa el tema fosc per al dispositiu i per a les aplicacions que admeten aquest tema."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Ampliat"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema fosc ampliat"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Aplica automàticament el tema fosc a la majoria d\'aplicacions que no l\'admeten, cosa que ajuda a millorar l\'accessibilitat."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Aplica automàticament el tema fosc a la majoria d\'aplicacions que no l\'admeten, cosa que ajuda a millorar l\'accessibilitat"</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Si tens problemes amb l\'opció ampliada, utilitza\'n l\'estàndard."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"força la inversió, inversió de colors, contrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema fosc ampliat"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Configuració del tema fosc ampliat"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Obre la configuració del tema fosc ampliat"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"El tema fosc ampliat pot millorar la llegibilitat, però pot fer que algunes aplicacions no es mostrin correctament.\n\nLes aplicacions amb aquesta opció de configuració desactivada utilitzaran l\'opció estàndard del tema fosc."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Suprimeix les animacions"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Redueix el moviment a la pantalla"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Parpelleig del cursor de text"</string>
@@ -2742,6 +2772,12 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Audiòfons"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Dispositius desats"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Controls de l\'audiòfon"</string>
+    <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Sons"</string>
+    <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Notificacions"</string>
+    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"Sons de trucada i alarmes"</string>
+    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Els sons es reproduiran pels audiòfons"</string>
+    <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"Els sons es reproduiran per l\'altaveu del dispositiu"</string>
+    <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Els sons es reproduiran pels audiòfons i per l\'altaveu del dispositiu"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Drecera de l\'audiòfon"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilitat amb audiòfons"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Millora la compatibilitat amb telebobines i redueix els sorolls no desitjats"</string>
@@ -2929,6 +2965,7 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Consulta l\'ús de les 24 darreres hores"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Consulta l\'ús des d\'última càrrega completa"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Ús de la bateria de l\'aplicació"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalls d\'ús"</string>
@@ -3230,7 +3267,7 @@
     <string name="device_admin_add_title" msgid="6087481040932322289">"Administrador del dispositiu"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"En activar aquesta aplicació d\'administració, l\'aplicació <xliff:g id="APP_NAME">%1$s</xliff:g> podrà dur a terme les operacions següents:"</string>
     <string name="supervision_role_holder_warning" msgid="167724047638694522">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> gestionarà i supervisarà aquest dispositiu. \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> podrà gestionar la configuració dels controls parentals, com ara el bloqueig d\'aplicacions i les restriccions de contingut."</string>
-    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"<xliff:g id="APP_NAME">%1$s</xliff:g> gestionarà i supervisarà aquest dispositiu."</string>
+    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"Aquest dispositiu estarà gestionat i supervisat per <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"Aquesta aplicació d\'administració està activa i permet a l\'aplicació <xliff:g id="APP_NAME">%1$s</xliff:g> dur a terme les operacions següents:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Vols activar un gestor de perfil?"</string>
     <string name="supervision_confirmation_title" msgid="8094974031562728585">"Vols permetre que <xliff:g id="APP_NAME">%1$s</xliff:g> supervisi aquest dispositiu?"</string>
@@ -3759,8 +3796,7 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiqueta, lector"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"teclat, tecnologia hàptica, vibració,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"pantalla externa, pantalla connectada, pantalla ampliada, segona pantalla, pantalla integrada, organitzar pantalles, duplicar, mida de visualització, rotació, resolució, freqüència d\'actualització"</string>
-    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
-    <skip />
+    <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"cursor de text, cursor, parpelleig, interval de parpelleig, freqüència de parpelleig, animació, reduir l\'animació, suprimir l\'animació"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volum i vibració"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volum de multimèdia"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volum de Google Cast"</string>
@@ -3869,7 +3905,7 @@
     <string name="mode_aod_title_secondary_list" msgid="8268180392811027557">"mantén la pantalla fosca"</string>
     <string name="mode_aod_summary" msgid="7516159044827627065">"Desactiva la pantalla sempre activa"</string>
     <string name="mode_wallpaper_title" msgid="5549693923133928374">"Atenua el fons de pantalla"</string>
-    <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"atenuar el fons de pantalla"</string>
+    <string name="mode_wallpaper_title_secondary_list" msgid="5034602021811580157">"atenuació del fons de pantalla"</string>
     <string name="mode_wallpaper_summary" msgid="665480011615603784">"Filtra la brillantor del fons de pantalla"</string>
     <string name="mode_dark_theme_title" msgid="8099007897943513209">"Activa el tema fosc"</string>
     <string name="mode_dark_theme_title_secondary_list" msgid="4761262694149772845">"activa el tema fosc"</string>
@@ -5329,6 +5365,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satèl·lit"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Connectivitat per satèl·lit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"connectivitat per satèl·lit"</string>
+    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
+    <skip />
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"L\'ús d\'aplicacions compatibles s\'inclou amb el teu compte"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Les dades de totes les aplicacions s\'inclouen amb el teu compte"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Aplicacions admeses al telèfon"</string>
@@ -6034,7 +6072,7 @@
     <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"Filtres d\'aplicacions, filtres d\'aplicacions per a adults, filtres per a adults, aplicacions explícites, bloquejar aplicacions, bloquejar aplicacions explícites, bloquejar aplicacions per a adults"</string>
     <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtra les aplicacions segons la maduresa del seu contingut"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Cada botiga classifica el contingut de manera diferent. La classificació d\'una aplicació pot variar segons la botiga."</string>
-    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtra les aplicacions segons les classificacions del contingut"</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtra les aplicacions per classificacions del contingut"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtres de contingut web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtres de llocs web, bloqueig de llocs web, filtres del navegador, bloqueig de llocs web explícits, filtració de llocs web, bloqueig de resultats de cerca, filtració de resultats de cerca explícits, restriccions de contingut"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Llocs web"</string>
@@ -6123,7 +6161,7 @@
     <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Privadesa, tauler de privadesa"</string>
     <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Espai privat"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Més alertes"</string>
-    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Menys alertes"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"Menys alertes"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertes ignorades"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Vols ignorar aquesta alerta?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Revisa la configuració de seguretat i privadesa en qualsevol moment per afegir més protecció"</string>
@@ -6150,13 +6188,13 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Pàgina de destinació de satèl·lit"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Prova una demostració"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Mira com funciona"</string>
-    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
-    <skip />
+    <string name="landing_page_footer_text_lte" msgid="8788085197575734787">"Quan perdis el senyal mòbil i Wi-Fi, el telèfon provarà de connectar-se al satèl·lit. Es tornarà a connectar a una xarxa mòbil o Wi-Fi quan n\'hi hagi una disponible.\n\nImportant: les trucades per satèl·lit no estan disponibles. Tanmateix, és possible que les trucades d\'emergència es continuïn connectant."</string>
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Per obtenir la millor connexió possible, has de ser en una zona en què es vegi bé el cel. El telèfon es tornarà a connectar a una xarxa mòbil quan estigui disponible. Les trucades per satèl·lit no estan disponibles. És possible que puguis continuar fent trucades d\'emergència."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Més informació sobre la connectivitat per satèl·lit"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Obre la demostració d\'SOS per satèl·lit"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Aplicacions de satèl·lit"</string>
-    <string name="satellite_emergency_sos" msgid="5598135807261930736">"Emergència SOS"</string>
+    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
+    <skip />
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Connectivitat per satèl·lit disponible"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Accedeix fàcilment a la informació de satèl·lits afegint la icona Satèl·lit a Configuració ràpida"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Afegeix una icona"</string>
@@ -6172,10 +6210,9 @@
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Mostra les ubicacions disponibles"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Canvia l\'aplicació predeterminada"</string>
     <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Mostra la configuració de l\'operador"</string>
-    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
-    <skip />
-    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
-    <skip />
-    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
-    <skip />
+    <string name="unknown_location_warning" msgid="2547687229551053971">"Per veure si SOS per satèl·lit està disponible a la ubicació actual, activa-la a Configuració"</string>
+    <string name="unknown_location_warning_button" msgid="2223709540054752411">"Activa la ubicació"</string>
+    <string name="unprovisioned_device_warning" msgid="1275456484320369400">"El dispositiu no està registrat a SOS per satèl·lit. Comprova que tinguis connexió a Internet perquè el dispositiu completi el registre automàticament."</string>
+    <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Activa el servei d\'instal·lador d\'aplicacions web"</string>
+    <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Activa aquest servei per instal·lar llocs web directament a la pantalla d\'inici a fi d\'utilitzar-los com si fossin aplicacions normals."</string>
 </resources>

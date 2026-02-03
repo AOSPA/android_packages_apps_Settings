@@ -412,6 +412,8 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"છોડો"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"તમે મહત્તમ ચહેરા ઉમેર્યાં છે"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"વધુ ચહેરા ઉમેરી શકાતા નથી"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" msgid="2276422963933723362">"ફેસ અનલૉકની સુવિધાનું સેટઅપ કરી શકતા નથી"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message" msgid="2680132270879475080">"તમે ઇન્ટરનેટ સાથે કનેક્ટેડ નથી. પાછા જાઓ અને ઇન્ટરનેટ સાથે કનેક્ટ કરો અથવા પછીથી સેટિંગમાં આનું સેટઅપ કરો."</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"નોંધણી પૂર્ણ થઈ ન હતી"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"ઓકે"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"ચહેરાની નોંધણીની સમય મર્યાદા સુધી પહોંચી ગયાં. ફરી પ્રયાસ કરો."</string>
@@ -555,6 +557,14 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"સેન્સરને સ્પર્શ કરો"</string>
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"પાવર બટનને દબાવ્યા વિના તેને ટચ કરો"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"તમારી ફિંગરપ્રિન્ટને સેટઅપ કરવાની રીત"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_title" msgid="2560358942286362136">"ફિંગરપ્રિન્ટ સેન્સરને ટચ કરો"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_message" msgid="1440652109953064598">"સેન્સર તમારા કીબોર્ડ, પાવર બટન અથવા તમારા ડિવાઇસની બાજુના ભાગમાં છે."</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_left_message" msgid="9114169763600792562">"ફિંગરપ્રિન્ટ સેન્સર તમારા કીબોર્ડના સૌથી નીચેના ડાબા ખૂણામાં છે"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_right_message" msgid="1259481399128590523">"ફિંગરપ્રિન્ટ સેન્સર તમારા કીબોર્ડના સૌથી નીચેના જમણા ખૂણામાં છે"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_top_right_message" msgid="3676793246782964274">"ફિંગરપ્રિન્ટ સેન્સર તમારા કીબોર્ડના સૌથી ઉપરના જમણા ખૂણામાં છે"</string>
+    <string name="security_settings_enroll_find_sensor_right_side_message" msgid="4935349088172995426">"ફિંગરપ્રિન્ટ સેન્સર તમારા ડિવાઇસની જમણી બાજુમાં છે"</string>
+    <string name="security_settings_enroll_find_sensor_left_side_message" msgid="5826609754513683067">"ફિંગરપ્રિન્ટ સેન્સર તમારા ડિવાઇસની ડાબી બાજુમાં છે"</string>
+    <string name="security_settings_enroll_find_sensor_left_of_power_button_top_right_message" msgid="4384349514752161995">"ફિંગરપ્રિન્ટ સેન્સર તમારા કીબોર્ડના સૌથી ઉપરના જમણા ખૂણામાં, પાવર બટનની બાજુમાં છે"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"તે તમારા ફોનના પાછળના ભાગ પર છે. તમારી પ્રથમ આંગળીનો ઉપયોગ કરો."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"ફિંગરપ્રિન્ટ સેન્સર તમારી સ્ક્રીન પર છે. તમે તમારી ફિંગરપ્રિન્ટ આગલી સ્ક્રીન પર કૅપ્ચર કરશો."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"શરૂ કરો"</string>
@@ -1147,14 +1157,14 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"આ નેટવર્ક પર ડિવાઇસ ઉમેરવા માટે QR કોડનો ઉપયોગ કરો"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR કોડનું માન્ય ફોર્મેટ નથી"</string>
     <string name="retry" msgid="7542103800274026915">"ફરી પ્રયાસ કરો"</string>
-    <string name="shared_message" msgid="2104244057926025072">"શેર કરેલું"</string>
-    <string name="private_message" msgid="5897966950396765392">"ખાનગી"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"સ્વિચ કરો"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"રદ કરો"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"નેટવર્ક શેર કરો"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"આ ડિવાઇસ પરના અન્ય વપરાશકર્તાઓ આ નેટવર્કને ઍક્સેસ કરી શકે છે"</string>
-    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"<xliff:g id="SHARED">%1$s</xliff:g> નેટવર્ક પર સ્વિચ કરીએ?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"\"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" નામનું <xliff:g id="SHARED_0">%1$s</xliff:g> નેટવર્ક પહેલેથી અસ્તિત્વમાં છે. જો તમે <xliff:g id="SHARED_1">%1$s</xliff:g> નેટવર્ક પર સ્વિચ કરશો, તો તમે તમારું <xliff:g id="PRIVATE">%3$s</xliff:g> નેટવર્ક છોડી દેશો અને તમને ઇન્ટરનેટની સુવિધા હંગામી રીતે ન મળે એવું બની શકે છે."</string>
+    <string name="wifi_share_conflict_dialog_title" msgid="3758584730708042014">"શેર કરેલા નેટવર્ક પર સ્વિચ કરીએ?"</string>
+    <string name="wifi_share_conflict_dialog_message" msgid="4614968368961927940">"\"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>\" નામનું શેર કરેલું નેટવર્ક પહેલેથી અસ્તિત્વમાં છે. જો તમે શેર કરેલા નેટવર્ક પર સ્વિચ કરશો, તો તમે તમારું ખાનગી નેટવર્ક છોડી દેશો અને તમને ઇન્ટરનેટની સુવિધા હંગામી રીતે ન મળે એવું બની શકે છે."</string>
+    <string name="wifi_private_conflict_dialog_title" msgid="10940608988441770">"ખાનગી નેટવર્ક પર સ્વિચ કરીએ?"</string>
+    <string name="wifi_private_conflict_dialog_message" msgid="495022893355731972">"\"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>\" નામનું ખાનગી નેટવર્ક પહેલેથી અસ્તિત્વમાં છે. જો તમે ખાનગી નેટવર્ક પર સ્વિચ કરશો, તો તમે તમારું શેર કરેલું નેટવર્ક છોડી દેશો અને તમને ઇન્ટરનેટની સુવિધા હંગામી રીતે ન મળે એવું બની શકે છે."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(ન બદલાયેલો)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"વપરાશકર્તાઓને નેટવર્કમાં ફેરફાર કરવાની મંજૂરી આપો"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"અન્ય વપરાશકર્તાઓ આ નેટવર્કમાં ફેરફારો કરી શકે છે"</string>
@@ -1439,7 +1449,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"તમારી સ્ક્રીનને જોવાનું વધુ અનુકૂળ બનાવવા માટે અને અમુક સ્ક્રીન પર બૅટરીનો વપરાશ ઘટાડવા માટે ડાર્ક બૅકગ્રાઉન્ડનો ઉપયોગ કરો. જો તમારું કોઈ શેડ્યૂલ હોય, તો જ્યારે સ્ક્રીન બંધ હોય ત્યારે તમારી થીમ બદલાશે."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"ઘેરી થીમ હાલમાં તમારા બેડટાઇમ મોડના શેડ્યૂલને અનુસરી રહી છે"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"બેડટાઇમ મોડનાં સેટિંગ"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{મોડને કારણે પણ ડાર્ક થીમ ચાલુ થઈ શકે છે}=1{{mode_1}ને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}=2{{mode_1} અને {mode_2}ને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}=3{{mode_1}, {mode_2} અને {mode_3}ને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}one{{mode_1}, {mode_2} અને વધુ # મોડને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}other{{mode_1}, {mode_2} અને વધુ # મોડને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8510284128378660986">"{count,plural,offset:2 =0{મોડને કારણે પણ ડાર્ક થીમ ચાલુ થઈ શકે છે.}=1{{mode_1}ને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે.}=2{{mode_1} અને {mode_2}ને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે.}=3{{mode_1}, {mode_2} અને {mode_3}ને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે.}one{{mode_1}, {mode_2} અને વધુ # મોડને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે.}other{{mode_1}, {mode_2} અને વધુ # મોડને કારણે પણ ડાર્ક થીમ ચાલુ થાય છે.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"મોડના સેટિંગ"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"ઉચ્ચ ડાઇનૅમિક શ્રેણી (HDR)ની છબીઓ અને વીડિયોની રંગની શ્રેણી અને સ્પષ્ટતામાં વધારો કરો તેમજ તેને વધુ બ્રાઇટ બનાવો. HDR કન્ટેન્ટ વધુ બ્રાઇટ દેખાશે."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"સ્ક્રીનનો ઑટોમૅટિક સમાપ્તિ સમય"</string>
@@ -1517,6 +1527,24 @@
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"પિન ચાલુ કરી શકાતો નથી."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"ઓકે"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"રદ કરો"</string>
+    <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"સિમ કાર્ડનું સંરક્ષણ કરો"</string>
+    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"ઑટોમૅટિક રીતે સિમ કાર્ડ લૉક કરવાનું સંરક્ષણ"</string>
+    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"ઑટોમૅટિક પિન મેનેજમેન્ટ"</string>
+    <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android દ્વારા મેનેજ કરવામાં આવે છે"</string>
+    <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android દ્વારા મેનેજ કરવામાં આવતો નથી"</string>
+    <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"નોંધણી કરવામાં સફળ રહ્યાં"</string>
+    <string name="sim_enrollment_failed" msgid="342422651961251317">"નોંધણી કરવામાં નિષ્ફળ રહ્યાં"</string>
+    <string name="sim_display_platform_managed_pin_title" msgid="6889806433509624620">"Android દ્વારા મેનેજ કરવામાં આવતો પિન બતાવો"</string>
+    <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android દ્વારા મેનેજ કરવામાં આવતો પિન"</string>
+    <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Android દ્વારા મેનેજ કરવામાં આવતા પિનનું મૂલ્ય:"</string>
+    <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"પિન મેળવવામાં નિષ્ફળ રહ્યાં"</string>
+    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"સિમ કાર્ડને ચોરીથી સુરક્ષિત રાખો"</string>
+    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Android દ્વારા મેનેજ કરવામાં આવતો સિમ કાર્ડનો પિન"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"સિમ કાર્ડનો પિન મેન્યુઅલી મેનેજ કરવામાં આવ્યો"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"સિમ કાર્ડનું સંરક્ષણ ચાલુ કરવા માટે લૉકસ્ક્રીનનું સેટઅપ કરવું આવશ્યક છે"</string>
+    <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"વર્તમાન સિમ કાર્ડનો પિન દાખલ કરો"</string>
+    <string name="provide_current_sim_pin" msgid="2805396981527525822">"સિમ કાર્ડનો વર્તમાન પિન દાખલ કરો"</string>
+    <string name="use_carrier_default_pin" msgid="4777399918806287607">"ડિફૉલ્ટ મોબાઇલ ઑપરેટરનો ઉપયોગ કરો"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"મોબાઇલ ડેટા માટે <xliff:g id="CARRIER">%1$s</xliff:g>નો ઉપયોગ કરીએ?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"તમે મોબાઇલ ડેટા માટે <xliff:g id="CARRIER2_0">%2$s</xliff:g>નો ઉપયોગ કરી રહ્યા છો. જો તમે બદલીને <xliff:g id="CARRIER1">%1$s</xliff:g> કરશો, તો મોબાઇલ ડેટા માટે <xliff:g id="CARRIER2_1">%2$s</xliff:g>નો ઉપયોગ નહીં થઈ શકે."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>નો ઉપયોગ કરો"</string>
@@ -1744,7 +1772,7 @@
     <string name="tether_settings_title_all" msgid="6807525590937697228">"હૉટસ્પૉટ અને ટિથરિંગ"</string>
     <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"હૉટસ્પૉટ ચાલુ છે, ટિથરિંગ"</string>
     <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"હૉટસ્પૉટ ચાલુ છે"</string>
-    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"ટિથરિંગ"</string>
+    <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"ટિથરિંગ ચાલુ છે"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"ડેટા સેવર ચાલુ હોય તે વખતે ટીથર કરી શકતાં નથી અથવા તો પોર્ટેબલ હોટસ્પોટ્સનો ઉપયોગ કરી શકતાં નથી"</string>
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"ફક્ત હૉટસ્પૉટ"</string>
     <string name="tether_settings_summary_usb_tethering_only" msgid="6351624505239356221">"ફક્ત USB"</string>
@@ -2118,13 +2146,12 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"\".\" શામેલ કરવા માટે Space કીને બે વાર દબાવો"</string>
     <string name="show_password" msgid="7101900779571040117">"પાસવર્ડ બતાવો"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"તમારા લખતાની સાથે તરત જ અક્ષરો પ્રદર્શિત કરો"</string>
-    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
     <skip />
-    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <string name="show_secrets_touch_summary" msgid="4533171516921235441">"તમે ટચસ્ક્રીન પર ટાઇપ કરો ત્યારે અક્ષરો સંક્ષિપ્તમાં ડિસ્પ્લે કરો"</string>
+    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
     <skip />
-    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
     <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"આ જોડણી તપાસનાર પાસવર્ડ્સ અને ક્રેડિટ કાર્ડ નંબર્સ જેવા વ્યક્તિગત ડેટા સહિત તમે લખો છો તે તમામ ટેક્સ્ટ એકત્રિત કરી શકે છે. તે ઍપ્લિકેશન <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> માંથી આવે છે. આ જોડણી તપાસનારનો ઉપયોગ કરીએ?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"સેટિંગ"</string>
@@ -2289,10 +2316,10 @@
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"ઝડપી સેટિંગ"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"નોંધ કરો"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g> માટે શૉર્ટકટ પસંદ કરો"</string>
-    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"સૌથી નીચે ડાબા ખૂણે"</string>
-    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"સૌથી નીચે જમણા ખૂણે"</string>
-    <string name="action_corner_top_left_name" msgid="8077670910600032291">"સૌથી ઉપર ડાબા ખૂણે"</string>
-    <string name="action_corner_top_right_name" msgid="6307321595919080297">"સૌથી ઉપર જમણા ખૂણે"</string>
+    <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"સૌથી નીચે ડાબા ખૂણા"</string>
+    <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"સૌથી નીચે જમણા ખૂણા"</string>
+    <string name="action_corner_top_left_name" msgid="8077670910600032291">"સૌથી ઉપર ડાબા ખૂણા"</string>
+    <string name="action_corner_top_right_name" msgid="6307321595919080297">"સૌથી ઉપર જમણા ખૂણા"</string>
     <string name="modifier_keys_settings" msgid="2537108435032034683">"મૉડિફાયર કી"</string>
     <string name="modifier_keys_settings_summary" msgid="6933143361657444436">"કીની વર્તણૂક બદલો"</string>
     <string name="modifier_keys_reset_title" msgid="948294258402761066">"તમામને રીસેટ કરો"</string>
@@ -2504,7 +2531,6 @@
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"કન્ટેન્ટને મોટું કરવા માટે સ્ક્રીનને ઝડપથી મોટી કરો"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;મોટું કરવા માટે:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. મોટું કરવાનું શરૂ કરવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt; {1,number,integer}. સ્ક્રીન પર ટૅપ કરો&lt;br/&gt; {2,number,integer}. સ્ક્રીન પર કોઈપણ જગ્યાએ જવા માટે 2 આંગળી ખેંચો&lt;br/&gt; {3,number,integer}. નાનું-મોટું કરવાનું ગોઠવવા માટે 2 આંગળી વડે પિન્ચ કરો&lt;br/&gt; {4,number,integer}. મોટું કરવાનું રોકવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt;&lt;br/&gt; &lt;b&gt;હંગામી રીતે મોટું કરવા માટે:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. તમારા ડિવાઇસ પર મોટું કરવાના પ્રકારને પૂર્ણ સ્ક્રીન પર સેટ કરવામાં આવ્યો હોય તેની ખાતરી કરો&lt;br/&gt; {1,number,integer}. મોટું કરવાનું શરૂ કરવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt; {2,number,integer}. સ્ક્રીન પર ગમે-ત્યાં આંગળી ટચ કરીને થોડીવાર દબાવી રાખો&lt;br/&gt; {3,number,integer}. સ્ક્રીન પર કોઈપણ જગ્યાએ જવા માટે આંગળી ખેંચો&lt;br/&gt; {4,number,integer}. મોટું કરવાનું રોકવા માટે આંગળીને ઉઠાવી લો"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;મોટું કરવા માટે:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. શૉર્ટકટનો ઉપયોગ કરો અથવા &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M દબાવો, જેથી મોટું કરવાનું શરૂ કરી શકાય&lt;br/&gt; {1,number,integer}. &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + ઍરો કી દબાવો, જેથી સ્ક્રીન પર એક આઇટમ પરથી બીજી પર જઈ શકાય&lt;br/&gt; {2,number,integer}. &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; અને \"+\" અથવા \"-\" દબાવો, જેથી નાનું-મોટું કરવાનું ગોઠવી શકાય&lt;br/&gt; {3,number,integer}. શૉર્ટકટનો ઉપયોગ કરો અથવા &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M દબાવો, જેથી મોટું કરવાનું રોકી શકાય"</string>
-    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;મોટું કરવા માટે:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. મોટું કરવાનું શરૂ કરવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt; {1,number,integer}. &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + ઍરો કી દબાવો, જેથી સ્ક્રીન પર એક આઇટમ પરથી બીજી પર જઈ શકાય&lt;br/&gt; {2,number,integer}. &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; અને \"+\" અથવા \"-\" દબાવો, જેથી નાનું-મોટું કરવાનું ગોઠવી શકાય&lt;br/&gt; {3,number,integer}. મોટું કરવાનું રોકવા માટેના શૉર્ટકટનો ઉપયોગ કરો"</string>
     <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;કીબોર્ડ&lt;/b&gt;&lt;br/&gt; {0,number,integer}. શૉર્ટકટનો ઉપયોગ કરો અથવા &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M દબાવો, જેથી મોટું કરવાનું શરૂ કરી શકાય&lt;br/&gt; {1,number,integer}. &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + ઍરો કી દબાવો, જેથી સ્ક્રીન પર એક આઇટમ પરથી બીજી પર જઈ શકાય&lt;br/&gt; {2,number,integer}. &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; અને \"+\" અથવા \"-\" દબાવો, જેથી નાનું-મોટું કરવાનું ગોઠવી શકાય&lt;br/&gt; {3,number,integer}. શૉર્ટકટનો ઉપયોગ કરો અથવા &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M દબાવો, જેથી મોટું કરવાનું રોકી શકાય&lt;br/&gt;&lt;br/&gt; &lt;b&gt;ટચસ્ક્રીન&lt;/b&gt;&lt;br/&gt; મોટું કરવા માટે:&lt;br/&gt; {0,number,integer}. મોટું કરવાનું શરૂ કરવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt; {1,number,integer}. સ્ક્રીન પર ટૅપ કરો&lt;br/&gt; {2,number,integer}. સ્ક્રીન પર કોઈપણ જગ્યાએ જવા માટે 2 આંગળી ખેંચો&lt;br/&gt; {3,number,integer}. નાનું-મોટું કરવાનું ગોઠવવા માટે 2 આંગળી વડે પિન્ચ કરો&lt;br/&gt; {4,number,integer}. મોટું કરવાનું રોકવા માટે શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt;&lt;br/&gt; હંગામી રીતે મોટું કરવા માટે:&lt;br/&gt; {0,number,integer}. તમારા ડિવાઇસ પર મોટું કરવાના પ્રકારને પૂર્ણ સ્ક્રીન પર સેટ કરવામાં આવ્યો હોય તેની ખાતરી કરો&lt;br/&gt; {1,number,integer}. મોટું કરવાનું શરૂ કરવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt; {2,number,integer}. સ્ક્રીન પર ગમે ત્યાં આંગળી ટચ કરીને થોડીવાર દબાવી રાખો&lt;br/&gt; {3,number,integer}. સ્ક્રીન પર કોઈપણ જગ્યાએ જવા માટે આંગળી ખેંચો&lt;br/&gt; {4,number,integer}. મોટું કરવાનું રોકવા માટે આંગળીને ઉઠાવી લો"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;મોટું કરવા માટે:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. મોટું કરવાનું શરૂ કરવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt; {1,number,integer}. સ્ક્રીન પર ટૅપ કરો&lt;br/&gt; {2,number,integer}. સ્ક્રીન પર અહીંતહીં જવા 2 આંગળીથી ખેંચો&lt;br/&gt; {3,number,integer}. નાનું-મોટું કરવાનું ગોઠવવા માટે 2 આંગળી વડે પિન્ચ કરો&lt;br/&gt; {4,number,integer}. મોટું કરવાનું બંધ કરવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt;&lt;br/&gt; તમે હંગામી રીતે મોટું કરવાની સાથે બીજું ઘણું કરી શકો છો."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;મોટું કરવા માટે:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. મોટું કરવાનું શરૂ કરવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt; {1,number,integer}. સ્ક્રીન પર ટૅપ કરો&lt;br/&gt; {2,number,integer}. સ્ક્રીન પર અહીંતહીં જવા 1 કે 2 આંગળીથી ખેંચો&lt;br/&gt; {3,number,integer}. નાનું-મોટું કરવાનું ગોઠવવા માટે 2 આંગળી વડે પિન્ચ કરો&lt;br/&gt; {4,number,integer}. મોટું કરવાનું બંધ કરવા માટેના શૉર્ટકટનો ઉપયોગ કરો&lt;br/&gt;&lt;br/&gt; તમે હંગામી રીતે મોટું કરવાની સાથે બીજું ઘણું કરી શકો છો."</string>
@@ -2600,11 +2626,13 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"આ સુવિધા, ડાર્ક થીમને સપોર્ટ કરતા તમારા ડિવાઇસ અને ઍપ માટે ડાર્ક થીમ ચાલુ કરે છે"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"મોટું કરેલું"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"મોટી કરેલી ડાર્ક થીમ"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"આ સુવિધા, ડાર્ક થીમને સપોર્ટ ન કરતી મોટાભાગની ઍપ પર ઑટોમૅટિક રીતે ડાર્ક થીમ લાગુ કરે છે, જેનાથી ઍક્સેસિબિલિટી બહેતર બનાવવામાં મદદ મળે છે."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"આ સુવિધા, ડાર્ક થીમને સપોર્ટ ન કરતી મોટાભાગની ઍપ પર ઑટોમૅટિક રીતે ડાર્ક થીમ લાગુ કરે છે, જેને કારણે ઍક્સેસિબિલિટી બહેતર બનાવવામાં મદદ મળે છે"</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"જો તમને મોટું કરેલા વિકલ્પ સાથે સમસ્યાઓ જોવા મળે, તો સ્ટૅન્ડર્ડ વિકલ્પનો ઉપયોગ કરો."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ઉલટાવવાની ફરજ પાડો, વિપરીત રંગમાં બદલવું, કૉન્ટ્રાસ્ટ"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"મોટી કરેલી ડાર્ક થીમ"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"ડાર્ક થીમના મોટા કરેલા સેટિંગ"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"ડાર્ક થીમના મોટા કરેલા સેટિંગ ખોલો"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"ડાર્ક થીમની વધારેલી સુવિધા વાંચનક્ષમતાને બહેતર બનાવે છે, પરંતુ તેને કારણે કેટલીક ઍપ અયોગ્ય રીતે ડિસ્પ્લે થઈ શકે છે.\n\nઆ સેટિંગ બંધ હોય તેવી ઍપ સ્ટૅન્ડર્ડ ડાર્ક થીમ વિકલ્પનો ઉપયોગ કરશે."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ઍનિમેશન કાઢી નાખો"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"સ્ક્રીન પર હિલચાલ ઘટાડો"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"ટેક્સ્ટ કર્સર બ્લિંક થવું"</string>
@@ -2742,6 +2770,12 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"સાંભળવામાં સહાય કરતા ડિવાઇસ"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"સાચવેલા ડિવાઇસ"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"સાંભળવામાં મદદ આપતા યંત્રના નિયંત્રણો"</string>
+    <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"સાઉન્ડ"</string>
+    <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"નોટિફિકેશન"</string>
+    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"રિંગટોન અને અલાર્મ"</string>
+    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"સાઉન્ડ સાંભળવામાં મદદ આપતા ડિવાઇસ મારફતે વગાડવામાં આવશે"</string>
+    <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"સાઉન્ડ ડિવાઇસના સ્પીકર મારફતે વાગશે"</string>
+    <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"સાઉન્ડ સાંભળવામાં મદદ આપતા ડિવાઇસ અને ડિવાઇસના સ્પીકર મારફતે વગાડવામાં આવશે"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"સાંભળવામાં મદદરૂપ ડિવાઇસના શૉર્ટકટ"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"સાંભળવામાં મદદ આપતા યંત્રની સુસંગતતા"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"ટેલિકૉઇલ સાથેની સુસંગતતા વધારે છે અને વણજોઈતો અવાજ ઘટાડે છે"</string>
@@ -2927,6 +2961,7 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"છેલ્લા 24 કલાકનો વપરાશ જુઓ"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"છેલ્લે પૂર્ણ ચાર્જ કર્યા પછીનો વપરાશ જુઓ"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"ઍપ દ્વારા બૅટરીનો વપરાશ"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"વિગતોનો ઉપયોગ કરો"</string>
@@ -3228,7 +3263,7 @@
     <string name="device_admin_add_title" msgid="6087481040932322289">"ડિવાઇસ વ્યવસ્થાપક"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"આ ઍડમિન ઍપને સક્રિય કરવાથી આ ઍપ <xliff:g id="APP_NAME">%1$s</xliff:g>ને નીચેની ક્રિયાઓ કરવાની મંજૂરી આપશે:"</string>
     <string name="supervision_role_holder_warning" msgid="167724047638694522">"આ ડિવાઇસને <xliff:g id="APP_NAME_0">%1$s</xliff:g> દ્વારા મેનેજ અને મોનિટર કરવામાં આવશે. \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> ઍપ બ્લૉક કરવા અને કન્ટેન્ટ પ્રતિબંધો જેવા માતાપિતાના યોગ્ય નિયંત્રણોના સેટિંગ મેનેજ કરી શકશે."</string>
-    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"આ ડિવાઇસને <xliff:g id="APP_NAME">%1$s</xliff:g> દ્વારા મેનેજ અને મોનિટર કરવામાં આવશે."</string>
+    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"આ ડિવાઇસને <xliff:g id="APP_NAME">%1$s</xliff:g> દ્વારા મેનેજ અને મૉનિટર કરવામાં આવશે."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"આ વ્યવસ્થાપક ઍપ સક્રિય છે અને આ ઍપ <xliff:g id="APP_NAME">%1$s</xliff:g>ને નીચેની ક્રિયાઓ કરવાની મંજૂરી આપે છે:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"પ્રોફાઇલ સંચાલક સક્રિય કરીએ?"</string>
     <string name="supervision_confirmation_title" msgid="8094974031562728585">"<xliff:g id="APP_NAME">%1$s</xliff:g>ને આ ડિવાઇસનું નિરીક્ષણ કરવાની મંજૂરી આપીએ?"</string>
@@ -3757,8 +3792,7 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ટૅગ, રીડર"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"કીબોર્ડ, હેપ્ટિક, વાઇબ્રેટ,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"બાહ્ય ડિસ્પ્લે, કનેક્ટેડ ડિસ્પ્લે, વધારેલું ડિસ્પ્લે, બીજું ડિસ્પ્લે, બિલ્ટ-ઇન ડિસ્પ્લે, ડિસ્પ્લે ગોઠવો, મિરર, ડિસ્પ્લે સાઇઝ, રોટેશન, રિઝોલ્યુશન, રિફ્રેશ થવાનો રેટ"</string>
-    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
-    <skip />
+    <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"કૅરેટ, ટેક્સ્ટ કૅરેટ, ટેક્સ્ટ કર્સર, કર્સર, બ્લિંક થવું, બ્લિંક થવાનો અંતરાલ, બ્લિંક રેટ, ઍનિમેશન, ઍનિમેશન ઘટાડો, ઍનિમેશન કાઢી નાખો"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"વૉલ્યૂમ અને વાઇબ્રેશન"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"મીડિયા વૉલ્યૂમ"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast વૉલ્યૂમ"</string>
@@ -3858,7 +3892,7 @@
     <string name="mode_interruption_filter_title" msgid="6293843948349239256">"નોટિફિકેશનના ફિલ્ટર"</string>
     <string name="mode_device_effects_title" msgid="6019908499525166737">"વધુ સેટિંગ"</string>
     <string name="modes_sound_summary_off" msgid="6972648204528227879">"{count,plural, =0{બંધ}=1{બંધ / 1 મોડ ઑટોમૅટિક રીતે ચાલુ થઈ શકે છે}one{બંધ / # મોડ ઑટોમૅટિક રીતે ચાલુ થઈ શકે છે}other{બંધ / # મોડ ઑટોમૅટિક રીતે ચાલુ થઈ શકે છે}}"</string>
-    <string name="mode_display_settings_title" msgid="8132825978346535472">"ડિસ્પ્લે સેટિંગ"</string>
+    <string name="mode_display_settings_title" msgid="8132825978346535472">"ડિસ્પ્લેના સેટિંગ"</string>
     <string name="mode_display_options_section" msgid="5151597748243866532">"ડિસ્પ્લેના વિકલ્પો"</string>
     <string name="mode_grayscale_title" msgid="6027553257331235461">"ગ્રેસ્કેલ"</string>
     <string name="mode_grayscale_title_secondary_list" msgid="2662593380253642581">"ગ્રેસ્કેલ"</string>
@@ -4118,7 +4152,7 @@
     <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"હંમેશાં મોટું કરો"</string>
     <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"ક્યારેય મોટું કરશો નહીં"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"ઑફિસની પ્રોફાઇલ ઍપ પર લાગુ કરો"</string>
-    <string name="vr_listeners_title" msgid="4960357292472540964">"VR સહાયક સેવાઓ"</string>
+    <string name="vr_listeners_title" msgid="4960357292472540964">"VR મદદગાર સેવાઓ"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"કોઇ ઇન્સ્ટૉલ કરેલી ઍપએ VR સહાયક સેવાઓ તરીકે શરૂ કરવાની વિનંતી કરી નથી."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"<xliff:g id="SERVICE">%1$s</xliff:g> માટે VR સેવા ઍક્સેસની મંજૂરી આપીએ?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"જ્યારે તમે વર્ચ્યુઅલ રિયાલિટી મોડમાં ઍપ્લિકેશનોનો ઉપયોગ કરી રહ્યાં હોવ ત્યારે <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> શરૂ થવા માટે સમર્થ હશે."</string>
@@ -5327,6 +5361,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"સૅટલાઇટ"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"સૅટલાઇટ કનેક્ટિવિટી"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"સૅટલાઇટ કનેક્ટિવિટી"</string>
+    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
+    <skip />
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"તમારા એકાઉન્ટમાં સપોર્ટેડ ઍપનો ઉપયોગ શામેલ છે"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"તમામ ઍપ માટેનો ડેટા તમારા એકાઉન્ટમાં શામેલ છે"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"તમારા ફોનમાં સપોર્ટ કરતી ઍપ"</string>
@@ -6121,7 +6157,7 @@
     <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"પ્રાઇવસી, પ્રાઇવસી ડૅશબોર્ડ"</string>
     <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"ખાનગી સ્પેસ"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"વધુ અલર્ટ"</string>
-    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"ઓછા અલર્ટ"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"ઓછા અલર્ટ"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"છોડી દીધેલા અલર્ટ"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"શું આ અલર્ટને છોડી દઈએ?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"વધુ સંરક્ષણ ઉમેરવા માટે, કોઈપણ સમયે તમારા સુરક્ષા અને પ્રાઇવસી સેટિંગનો રિવ્યૂ કરો"</string>
@@ -6148,13 +6184,13 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"સૅટલાઇટ લૅન્ડિંગ પેજ"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"ડેમો અજમાવી જુઓ"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"તે કેવી રીતે કામ કરે છે એ જુઓ"</string>
-    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
-    <skip />
+    <string name="landing_page_footer_text_lte" msgid="8788085197575734787">"જ્યારે તમે મોબાઇલ અને વાઇ-ફાઇ સિગ્નલ ગુમાવો, ત્યારે તમારો ફોન સૅટલાઇટ સાથે કનેક્ટ કરવાનો પ્રયાસ કરશે. જ્યારે કોઈ મોબાઇલ કે વાઇ-ફાઇ નેટવર્ક ઉપલબ્ધ હોય, ત્યારે તમારો ફોન તેની સાથે ફરીથી કનેક્ટ કરવામાં આવશે.\n\nમહત્ત્વપૂર્ણ: સૅટલાઇટ પરથી કૉલ કરવાની સુવિધા ઉપલબ્ધ નથી. જોકે, ઇમર્જન્સી કૉલ હજી પણ કનેક્ટ થઈ શકે છે."</string>
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"શ્રેષ્ઠ કનેક્શન માટે, સ્પષ્ટ રીતે આકાશ જોઈ શકાય તે રીતે બહાર રહો. જ્યારે કોઈ મોબાઇલ નેટવર્ક ઉપલબ્ધ હશે, ત્યારે તમારો ફોન તેની સાથે ફરીથી કનેક્ટ કરવામાં આવશે. સૅટલાઇટ મારફતે કૉલ કરવાની સુવિધા ઉપલબ્ધ નથી. આમ છતાં શક્ય છે કે ઇમર્જન્સી કૉલ કનેક્ટ થાય."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"સૅટલાઇટની કનેક્ટિવિટી વિશે વધુ"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"ઇમર્જન્સી સૅટલાઇટ સહાયનો ડેમો ખોલો"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"સૅટલાઇટ ઍપ"</string>
-    <string name="satellite_emergency_sos" msgid="5598135807261930736">"ઇમર્જન્સી સહાય"</string>
+    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
+    <skip />
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"સૅટલાઇટ કનેક્ટિવિટી ઉપલબ્ધ છે"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"ઝડપી સેટિંગમાં સૅટલાઇટ ટાઇલ ઉમેરીને સૅટલાઇટની માહિતી સરળતાથી ઍક્સેસ કરો"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"ટાઇલ ઉમેરો"</string>
@@ -6170,10 +6206,9 @@
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"ઉપલબ્ધ લોકેશન જુઓ"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"ડિફોલ્ટ ઍપ બદલો"</string>
     <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"મોબાઇલ ઑપરેટરના સેટિંગ જુઓ"</string>
-    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
-    <skip />
-    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
-    <skip />
-    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
-    <skip />
+    <string name="unknown_location_warning" msgid="2547687229551053971">"તમારા વર્તમાન લોકેશન પર ઇમર્જન્સી સૅટલાઇટ મદદ ઉપલબ્ધ છે કે નહીં તે જોવા માટે, સેટિંગમાં જઈને લોકેશન ચાલુ કરો"</string>
+    <string name="unknown_location_warning_button" msgid="2223709540054752411">"લોકેશન ચાલુ કરો"</string>
+    <string name="unprovisioned_device_warning" msgid="1275456484320369400">"તમારું ડિવાઇસ ઇમર્જન્સી સૅટલાઇટ મદદ માટે રજિસ્ટર કરેલું નથી. તમારા ડિવાઇસનું ઑટોમૅટિક રીતે રજિસ્ટ્રેશન પૂર્ણ કરવા માટે, તમે ઇન્ટરનેટ સાથે કનેક્ટેડ હોવાની ખાતરી કરો"</string>
+    <string name="enable_webapp_minter_title" msgid="1814043991443158736">"વેબ ઍપ ઇન્સ્ટૉલર સેવા ચાલુ કરો"</string>
+    <string name="enable_webapp_minter_summary" msgid="333269694933213570">"વેબસાઇટને સીધા તમારી હોમ સ્ક્રીન પર ઇન્સ્ટૉલ કરવા માટે આ સેવા ચાલુ કરો, જેથી તેનો ઉપયોગ નિયમિત ઍપની જેમ કરી શકાય."</string>
 </resources>
