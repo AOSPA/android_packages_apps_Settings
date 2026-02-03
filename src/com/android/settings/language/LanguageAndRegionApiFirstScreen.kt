@@ -26,6 +26,8 @@ import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.localepicker.LocaleUtils
 import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.appendLocaleExtension
+import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.sameLanguageAndScript
+import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateSelectedLocale
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -74,25 +76,37 @@ class LanguageAndRegionApiFirstScreen :
                     val locale = appendLocaleExtension(Locale.forLanguageTag(value))
                     // Check whether the country that user inputs is in the user list already
                     val userLocaleList = LocaleUtils.getUserLocaleList()
-                    val index =
-                        userLocaleList.indexOfFirst { it?.locale?.equals(locale) == true }
-                    if (index != -1) {
+                    val indexInUserList = userLocaleList.indexOfFirst { it?.locale == locale }
+                    when {
                         // In the user list, move the user input to the first position
-                        val defaultLocale = userLocaleList.removeAt(index)
-                        userLocaleList.add(0, defaultLocale)
-                    } else {
-                        // It's not in the user list, check whether it is in the supported list
-                        // If the language is supported, add it to the top of the user list.
-                        getLocaleInfoList(context)
-                            .find {
+                        indexInUserList != -1 -> {
+                            val existingLocaleInfo = userLocaleList.removeAt(indexInUserList)
+                            userLocaleList.add(0, existingLocaleInfo)
+                        }
+
+                        // Update the region if the input language is the same as current default
+                        // language. For example: current default language is en-US and the input is
+                        // en-GB, then update the region to GB from US.
+                        sameLanguageAndScript(locale, Locale.getDefault()) -> {
+                            updateSelectedLocale(locale)
+                            return@execute
+                        }
+
+                        else -> {
+                            // It's not in the user list, check whether it is in the supported list
+                            // If the language is supported, add it to the top of the user list.
+                            val supportedLocaleInfo = getLocaleInfoList(context).find {
                                 locale
                                     .toLanguageTag()
                                     .startsWith(it.locale.toLanguageTag(), ignoreCase = true)
                             }
-                            ?.let { localeInfo ->
+
+                            supportedLocaleInfo?.let {
                                 userLocaleList.add(0, LocaleStore.getLocaleInfo(locale))
                             }
+                        }
                     }
+
                     val localeList = LocaleList(*userLocaleList.map { it?.locale }.toTypedArray())
                     // Update the device settings by the new locale list
                     LocaleList.setDefault(localeList)
