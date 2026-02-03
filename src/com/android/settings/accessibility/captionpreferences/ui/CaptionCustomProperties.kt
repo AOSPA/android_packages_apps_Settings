@@ -20,9 +20,15 @@ import android.content.Context
 import android.view.accessibility.CaptioningManager
 import androidx.core.content.getSystemService
 import androidx.preference.ListPreference
+import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.accessibility.CaptionHelper
+import com.android.settings.accessibility.EdgeTypePreference as EdgeTypeWidget
+import com.android.settings.accessibility.captionpreferences.data.CaptionEdgeColorDataStore
+import com.android.settings.accessibility.captionpreferences.data.CaptionEdgeTypeDataStore
 import com.android.settings.accessibility.captionpreferences.data.CaptionFontFamilyDataStore
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.DiscreteStringValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -80,6 +86,92 @@ class CaptionFontFamilyPreference(context: Context) :
 
     companion object {
         private const val KEY = "captioning_typeface"
+    }
+}
+// LINT.ThenChange()
+
+// LINT.IfChange(caption_edge_type_pref)
+class CaptionEdgeTypePreference(context: Context) :
+    PersistentPreference<Int>,
+    PreferenceBinding,
+    DiscreteIntValue,
+    CustomCaptionPreference,
+    PreferenceSummaryProvider {
+    override val key: String
+        get() = KEY
+
+    override val title: Int
+        get() = R.string.captioning_edge_type
+
+    override val purpose: Int
+        get() = R.string.caption_preferences_appearance_custom_edge_type_purpose
+
+    override val values: Int
+        get() = R.array.captioning_edge_type_selector_values
+
+    override val valuesDescription: Int
+        get() = R.array.captioning_edge_type_selector_titles
+
+    override val valueType: Class<Int>
+        get() = Int::class.javaObjectType
+
+    private val summaryMap by lazy {
+        SummaryMap(values, valuesDescription, useIntValues = true) { _, v -> v as Int }
+    }
+
+    private val dataStore by lazy { CaptionEdgeTypeDataStore(context) }
+
+    override fun storage(context: Context): KeyValueStore = dataStore
+
+    override fun createWidget(context: Context): Preference = EdgeTypeWidget(context, null)
+
+    override fun getSummary(context: Context): CharSequence? =
+        summaryMap.getSummary(context, storage(context).getInt(key))
+
+    companion object {
+        const val KEY = "captioning_edge_type"
+    }
+}
+// LINT.ThenChange()
+
+// LINT.IfChange(caption_edge_color_pref)
+class CaptionEdgeColorPreference(context: Context) :
+    PersistentPreference<Int>, PreferenceBinding, DiscreteIntValue, CustomCaptionPreference {
+    override val key: String
+        get() = KEY
+
+    override val title: Int
+        get() = R.string.captioning_edge_color
+
+    override val purpose: Int
+        get() = R.string.caption_preferences_appearance_custom_edge_color_purpose
+
+    override val values: Int
+        get() = R.array.captioning_color_selector_values
+
+    override val valuesDescription: Int
+        get() = R.array.captioning_color_selector_titles
+
+    override val valueType: Class<Int>
+        get() = Int::class.javaObjectType
+
+    private val dataStore by lazy { CaptionEdgeColorDataStore(context) }
+
+    private val captionHelper by lazy { CaptionHelper(context) }
+
+    override fun storage(context: Context): KeyValueStore = dataStore
+
+    override fun createWidget(context: Context): Preference =
+        createColorWidget(context, values, valuesDescription)
+
+    override fun isEnabled(context: Context): Boolean =
+        captionHelper.edgeType != CaptioningManager.CaptionStyle.EDGE_TYPE_NONE
+
+    override fun dependencies(context: Context): Array<String> =
+        super<CustomCaptionPreference>.dependencies(context) + CaptionEdgeTypePreference.KEY
+
+    companion object {
+        const val KEY = "captioning_edge_color"
     }
 }
 // LINT.ThenChange()

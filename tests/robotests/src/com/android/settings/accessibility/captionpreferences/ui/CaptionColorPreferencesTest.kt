@@ -139,4 +139,100 @@ class CaptionColorPreferencesTest {
         assertThat(preference.dependencies(context).toList())
             .contains(CaptionTextColorPreference.KEY)
     }
+
+    @Test
+    fun backgroundColorPreference_metadata() {
+        val preference = CaptionBackgroundColorPreference(context)
+
+        assertThat(preference.key).isEqualTo(CaptionBackgroundColorPreference.KEY)
+        assertThat(preference.title).isEqualTo(R.string.captioning_background_color)
+        assertThat(preference.values)
+            .isEqualTo(R.array.captioning_color_selector_including_transparent_values)
+    }
+
+    @Test
+    fun backgroundOpacityPreference_metadata() {
+        val preference = CaptionBackgroundOpacityPreference(context)
+
+        assertThat(preference.key).isEqualTo(CaptionBackgroundOpacityPreference.KEY)
+        assertThat(preference.title).isEqualTo(R.string.captioning_background_opacity)
+        assertThat(preference.dependencies(context).toList())
+            .contains(CaptionBackgroundColorPreference.KEY)
+    }
+
+    @Test
+    fun backgroundOpacityPreference_isEnabled_returnsTrueWhenAlphaNotZero() {
+        val preference = CaptionBackgroundOpacityPreference(context)
+        val colorKey = Settings.Secure.ACCESSIBILITY_CAPTIONING_BACKGROUND_COLOR
+
+        settingsSecureStore.setInt(colorKey, Color.RED)
+        assertThat(preference.isEnabled(context)).isTrue()
+    }
+
+    @Test
+    fun backgroundOpacityPreference_isEnabled_returnsFalseWhenAlphaIsZero() {
+        val preference = CaptionBackgroundOpacityPreference(context)
+        val colorKey = Settings.Secure.ACCESSIBILITY_CAPTIONING_BACKGROUND_COLOR
+
+        settingsSecureStore.setInt(
+            colorKey,
+            Color.argb(0, Color.WHITE.red, Color.WHITE.green, Color.WHITE.blue),
+        )
+        assertThat(preference.isEnabled(context)).isFalse()
+    }
+
+    @Test
+    fun backgroundOpacityPreference_dependencies() {
+        val preference = CaptionBackgroundOpacityPreference(context)
+        assertThat(preference.dependencies(context).toList())
+            .contains(CaptionBackgroundColorPreference.KEY)
+    }
+
+    @Test
+    fun windowColorPreference_metadata() {
+        val preference = CaptionWindowColorPreference(context)
+
+        assertThat(preference.key).isEqualTo(CaptionWindowColorPreference.KEY)
+        assertThat(preference.title).isEqualTo(R.string.captioning_window_color)
+        assertThat(preference.values)
+            .isEqualTo(R.array.captioning_color_selector_including_transparent_values)
+    }
+
+    @Test
+    fun windowOpacityPreference_metadata() {
+        val preference = CaptionWindowOpacityPreference(context)
+
+        assertThat(preference.key).isEqualTo(CaptionWindowOpacityPreference.KEY)
+        assertThat(preference.title).isEqualTo(R.string.captioning_window_opacity)
+        assertThat(preference.dependencies(context).toList())
+            .contains(CaptionWindowColorPreference.KEY)
+    }
+
+    @Test
+    fun windowOpacityPreference_isEnabled_returnsTrueWhenAlphaNotZero() {
+        val preference = CaptionWindowOpacityPreference(context)
+        val colorKey = Settings.Secure.ACCESSIBILITY_CAPTIONING_WINDOW_COLOR
+
+        settingsSecureStore.setInt(colorKey, Color.RED)
+        assertThat(preference.isEnabled(context)).isTrue()
+    }
+
+    @Test
+    fun windowOpacityPreference_isEnabled_returnsFalseWhenAlphaIsZero() {
+        val preference = CaptionWindowOpacityPreference(context)
+        val colorKey = Settings.Secure.ACCESSIBILITY_CAPTIONING_WINDOW_COLOR
+
+        settingsSecureStore.setInt(
+            colorKey,
+            Color.argb(0, Color.WHITE.red, Color.WHITE.green, Color.WHITE.blue),
+        )
+        assertThat(preference.isEnabled(context)).isFalse()
+    }
+
+    @Test
+    fun windowOpacityPreference_dependencies() {
+        val preference = CaptionWindowOpacityPreference(context)
+        assertThat(preference.dependencies(context).toList())
+            .contains(CaptionWindowColorPreference.KEY)
+    }
 }

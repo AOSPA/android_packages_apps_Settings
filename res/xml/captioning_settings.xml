@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 
+<!-- LINT.IfChange -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
@@ -56,3 +57,4 @@
         settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
 
 </PreferenceScreen>
+<!-- LINT.ThenChange(/src/com/android/settings/accessibility/captionpreferences/ui/CaptioningScreens.kt:caption_properties_screen) -->
