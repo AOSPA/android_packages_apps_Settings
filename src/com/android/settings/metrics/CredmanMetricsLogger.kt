@@ -36,8 +36,8 @@ import com.android.internal.util.FrameworkStatsLog
  * redirected from Settings to a credential service provider.
  *
  * Note that if a [Lifecycle] is provided during initialization, this class will automatically:
- * 1. Finalize and log a return event on [onResume], provided [recordOutboundIntentLaunch] was
- *    called.
+ * 1. Finalize and log a return event on [onResume], provided [recordPreferredServiceOutboundLaunch]
+ *    or [recordAdditionalServiceOutboundLaunch] was called.
  * 2. Clear pending sessions on [onDestroy] to prevent stale data.
  */
 @OpenForTesting
@@ -48,7 +48,11 @@ constructor(context: Context, lifecycle: Lifecycle? = null) : DefaultLifecycleOb
     private val packageManager = context.applicationContext.packageManager
 
     /** Holds state for timing the duration a user was redirected away from Settings. */
-    private data class OutboundSession(val startTime: Long, val packageName: String?)
+    private data class OutboundSession(
+        val eventType: Int,
+        val startTime: Long,
+        val packageName: String?,
+    )
 
     private var outboundSession: OutboundSession? = null
 
@@ -57,21 +61,49 @@ constructor(context: Context, lifecycle: Lifecycle? = null) : DefaultLifecycleOb
     }
 
     /**
-     * Records the start of an outbound interaction.
+     * Records the start of an outbound session to the preferred service provider.
      *
-     * Call this when launching an Intent that takes the user out of the current Settings page
-     * (e.g., to a provider's configuration screen). The time elapsed until the next [onResume] will
-     * be tracked and logged.
+     * Call this when launching an intent that takes the user out of the current Settings page to
+     * the preferred service provider. The time elapsed until the next [onResume] will be tracked
+     * and logged.
      */
     @JvmOverloads
-    fun recordOutboundIntentLaunch(packageName: String? = null) {
-        outboundSession = OutboundSession(SystemClock.elapsedRealtime(), packageName)
+    fun recordPreferredServiceOutboundLaunch(packageName: String? = null) {
+        outboundSession =
+            OutboundSession(
+                FrameworkStatsLog
+                    .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_PREFERRED_SERVICE,
+                SystemClock.elapsedRealtime(),
+                packageName,
+            )
     }
 
+    /**
+     * Records the start of an outbound session to an additional service provider.
+     *
+     * Call this when launching an intent that takes the user out of the current Settings page to an
+     * additional service provider. The time elapsed until the next [onResume] will be tracked and
+     * logged.
+     */
+    @JvmOverloads
+    fun recordAdditionalServiceOutboundLaunch(packageName: String? = null) {
+        outboundSession =
+            OutboundSession(
+                FrameworkStatsLog
+                    .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_ADDITIONAL_SERVICE,
+                SystemClock.elapsedRealtime(),
+                packageName,
+            )
+    }
+
+    /**
+     * Logs an event when a user returns to Settings after being redirected to the preferred service
+     * provider or an additional service provider.
+     */
     override fun onResume(owner: LifecycleOwner) {
         outboundSession?.let { session ->
-            val duration = SystemClock.elapsedRealtime() - session.startTime
-            logReturnFromServiceProviderEvent(session.packageName, duration)
+            val durationMs = SystemClock.elapsedRealtime() - session.startTime
+            logEvent(session.eventType, session.packageName, durationMs)
             outboundSession = null
         }
     }
@@ -80,19 +112,7 @@ constructor(context: Context, lifecycle: Lifecycle? = null) : DefaultLifecycleOb
         outboundSession = null
     }
 
-    /**
-     * Logs an event when a user returns to Settings after being redirected to a service provider.
-     */
-    @JvmOverloads
-    fun logReturnFromServiceProviderEvent(packageName: String? = null, durationMs: Long = 0L) =
-        logEvent(
-            FrameworkStatsLog
-                .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_SERVICE_PROVIDER,
-            packageName,
-            durationMs,
-        )
-
-    /** Logs an event when a user edits the current preferred service. */
+    /** Logs an event when a user edits the preferred service provider. */
     @JvmOverloads
     fun logEditPreferredServiceEvent(packageName: String? = null) =
         logEvent(
@@ -108,7 +128,7 @@ constructor(context: Context, lifecycle: Lifecycle? = null) : DefaultLifecycleOb
                 .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__ADD_PREFERRED_SERVICE
         )
 
-    /** Logs an event when a user enables a provider in the additional services list. */
+    /** Logs an event when a user enables an additional service provider. */
     @JvmOverloads
     fun logEnableAdditionalServiceEvent(packageName: String? = null) =
         logEvent(
@@ -117,7 +137,7 @@ constructor(context: Context, lifecycle: Lifecycle? = null) : DefaultLifecycleOb
             packageName,
         )
 
-    /** Logs an event when a user disables a provider in the additional services list. */
+    /** Logs an event when a user disables an additional service provider. */
     @JvmOverloads
     fun logDisableAdditionalServiceEvent(packageName: String? = null) =
         logEvent(
@@ -127,8 +147,8 @@ constructor(context: Context, lifecycle: Lifecycle? = null) : DefaultLifecycleOb
         )
 
     /**
-     * Logs an event when a user attempts to add a provider to the additional services list but hit
-     * the maximum provider limit.
+     * Logs an event when a user attempts to add an additional service provider but hit the maximum
+     * provider limit.
      */
     @JvmOverloads
     fun logHitAdditionalServiceLimitEvent(packageName: String? = null) =

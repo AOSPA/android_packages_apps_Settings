@@ -24,7 +24,6 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
 import android.content.res.Resources
-import android.net.Uri
 import android.provider.DeviceConfig
 import android.provider.Settings
 import android.telephony.satellite.SatelliteManager
@@ -109,7 +108,7 @@ class SatelliteAppsRepositoryTest {
     }
 
     @Test
-    fun getEmergencySosIntent_resolvable_returnsIntent() {
+    fun getDialerIntent_resolvable_returnsIntent() {
         val resolveInfo =
             ResolveInfo().apply {
                 activityInfo =
@@ -127,15 +126,15 @@ class SatelliteAppsRepositoryTest {
             )
             .thenReturn(resolveInfo)
 
-        val result = satelliteAppsRepository.getEmergencySosIntent()
+        val result = satelliteAppsRepository.getDialerIntent()
 
         assertThat(result).isNotNull()
         assertThat(result!!.action).isEqualTo(Intent.ACTION_DIAL)
-        assertThat(result.data).isEqualTo(Uri.parse("tel:911"))
+        assertThat(result.data).isNull()
     }
 
     @Test
-    fun getEmergencySosIntent_notResolvable_returnsNull() {
+    fun getDialerIntent_notResolvable_returnsNull() {
         `when`(
                 packageManager.resolveActivity(
                     argThat { it.action == Intent.ACTION_DIAL },
@@ -144,7 +143,7 @@ class SatelliteAppsRepositoryTest {
             )
             .thenReturn(null)
 
-        val result = satelliteAppsRepository.getEmergencySosIntent()
+        val result = satelliteAppsRepository.getDialerIntent()
 
         assertThat(result).isNull()
     }

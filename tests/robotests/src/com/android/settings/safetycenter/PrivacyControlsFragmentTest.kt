@@ -31,6 +31,7 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.swipeUp
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
@@ -128,7 +129,7 @@ class PrivacyControlsFragmentTest {
                 onView(withText(mApplication.getString(R.string.show_secrets_touch_summary)))
                     .check(matches(isDisplayed()))
                 onView(withText(mApplication.getString(R.string.show_secrets_physical_summary)))
-                    .check(matches(isDisplayed()))
+                    .check(doesNotExist())
             } else {
                 onView(withText(mApplication.getString(R.string.show_password)))
                     .check(matches(isDisplayed()))

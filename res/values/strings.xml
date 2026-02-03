@@ -5039,13 +5039,13 @@
     <!-- On Security & location settings screen. This is a short summary text describing what "Show passwords" setting does -->
     <string name="show_password_summary">Display characters briefly as you type</string>
     <!-- Title for toggle controlling whether to show secrets from touch input. [CHAR LIMIT=50]-->
-    <string name="show_secrets_touch_title">Show secrets from touch input</string>
-    <!-- Summary for toggle controlling whether to show secrets in input fields from touch input devices. [CHAR LIMIT=NONE] -->
+    <string name="show_secrets_touch_title">Show passwords for touchscreen</string>
+    <!-- Summary for toggle controlling whether to show secrets, like passwords, pins etc, in input fields from touch input devices. [CHAR LIMIT=NONE] -->
     <string name="show_secrets_touch_summary">Display characters briefly as you type on the touchscreen</string>
     <!-- Title for toggle controlling whether to show secrets in input fields from physical keyboard input devices. [CHAR LIMIT=50]-->
-    <string name="show_secrets_physical_title">Show secrets from physical input</string>
-    <!-- Summary for toggle controlling whether to show secrets from physical keyboard/mouse input. [CHAR LIMIT=NONE] -->
-    <string name="show_secrets_physical_summary">Display characters briefly as you enter using a physical device</string>
+    <string name="show_secrets_physical_title">Show passwords for keyboard</string>
+    <!-- Summary for toggle controlling whether to show secrets, like passwords, pins etc, from physical keyboard/mouse input devices. [CHAR LIMIT=NONE] -->
+    <string name="show_secrets_physical_summary">Display characters briefly as you type on the keyboard</string>
     <!-- Warning message about security implications of enabling a spell checker, displayed as a dialog
          message when the user selects to enable a spell checker. -->
     <string name="spellchecker_security_warning">This spell checker may be able to collect
@@ -15415,8 +15415,8 @@
     <string name="forward_arrow_content_desc">Open satellite SOS demo</string>
     <!-- Title for the satellite apps preference category. [CHAR LIMIT=NONE] [SCREENSHOT=screen/4uVGfjXnxQQmMby] -->
     <string name="satellite_apps_title">Satellite apps</string>
-    <!-- Name for the Emergency SOS app in the satellite landing page. [CHAR LIMIT=NONE] -->
-    <string name="satellite_emergency_sos">Emergency SOS</string>
+    <!-- Summary for the Phone app in the satellite landing page. [CHAR LIMIT=NONE] -->
+    <string name="satellite_phone_summary">Emergency calling only</string>
     <!-- Title for the satellite tile prompt notification. [CHAR LIMIT=NONE] -->
     <string name="satellite_tile_prompt_notification_title">Satellite connectivity available</string>
     <!-- Summary for the satellite tile prompt notification. [CHAR LIMIT=NONE] -->

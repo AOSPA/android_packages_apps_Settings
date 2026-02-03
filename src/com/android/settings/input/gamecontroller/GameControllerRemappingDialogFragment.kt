@@ -22,7 +22,6 @@ import android.view.Window
 import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResult
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,9 +30,11 @@ import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceK
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToButtonMap
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToIconMap
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToNameMap
+import com.android.settingslib.Utils.getColorAttrDefaultColor
 
 /** Fragment that displays game controller remapping list of preferences. */
-class GameControllerRemappingDialogFragment : DialogFragment() {
+class GameControllerRemappingDialogFragment(val viewModel: GameControllerViewModel) :
+    DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = requireContext()
@@ -53,12 +54,21 @@ class GameControllerRemappingDialogFragment : DialogFragment() {
                 preferenceKeyToNameMap.filterKeys { preferenceKeyToAxesMap.containsKey(it) }
                 preferenceKeyToNameMap.keys.filter { preferenceKeyToAxesMap.containsKey(it) }
             }
-
+        val color = getColorAttrDefaultColor(context, android.R.attr.colorControlNormal)
         val choices =
             validKeys.associateWith { key ->
+                val glyph =
+                    preferenceKeyToButtonMap[key]?.let {
+                        viewModel.glyphMap?.getDrawableForKeycode(context, it)
+                    }
+                glyph?.setTint(color)
+                val displayName =
+                    preferenceKeyToButtonMap[key]?.let {
+                        viewModel.glyphMap?.getDisplayNameForKeycode(it)
+                    }
                 GameControllerRemappingAdapter.Choice(
-                    preferenceKeyToNameMap.getValue(key),
-                    preferenceKeyToIconMap.getValue(key),
+                    displayName ?: context.getString(preferenceKeyToNameMap.getValue(key)),
+                    glyph ?: context.getDrawable(preferenceKeyToIconMap.getValue(key))!!,
                 )
             }
 
@@ -81,30 +91,13 @@ class GameControllerRemappingDialogFragment : DialogFragment() {
             }
 
         val dialog = AlertDialog.Builder(context).setView(view).create()
-        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return dialog
     }
 
     companion object {
-        private val TAG = GameControllerRemappingDialogFragment::class.java.simpleName
         const val REQUEST_REMAPPING = "request_remapping"
         const val ARGS_FROM_PREFERENCE_KEY = "from_preference_key"
         const val ARGS_TO_PREFERENCE_KEY = "to_preference_key"
-
-        fun show(
-            fragmentManager: FragmentManager,
-            fromPreferenceKey: String,
-            toPreferenceKey: String,
-        ) {
-            val dialog =
-                GameControllerRemappingDialogFragment().apply {
-                    arguments =
-                        bundleOf(
-                            ARGS_FROM_PREFERENCE_KEY to fromPreferenceKey,
-                            ARGS_TO_PREFERENCE_KEY to toPreferenceKey,
-                        )
-                }
-            dialog.show(fragmentManager, TAG)
-        }
     }
 }

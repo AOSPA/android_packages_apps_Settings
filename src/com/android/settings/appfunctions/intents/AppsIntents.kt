@@ -25,15 +25,15 @@ fun getAppsIntents() =
         listOf(
             StaticIntent(
                 description =
-                    "App permissions: Intent to open the app permissions screen for a specific app. The Intent uri is the following (replace \${package_name} with the app package name)",
+                    "App permissions: Intent to open the app permissions screen for a specific app. The Intent uri is the following (replace \${package} with the app package name)",
                 intentUri =
-                    "intent:#Intent;action=android.intent.action.MANAGE_APP_PERMISSIONS;S.android.intent.extra.PACKAGE_NAME=\${package_name};B.hideInfoButton=true;end",
+                    "intent:#Intent;action=android.intent.action.MANAGE_APP_PERMISSIONS;S.android.intent.extra.PACKAGE_NAME=\${package};B.hideInfoButton=true;end",
             ),
             StaticIntent(
                 description =
-                    "App screen time: Intent to open the app screen time screen for a specific app. The Intent uri is the following (replace \${package_name} with the app package name). This screen includes the daily and hourly breakdown of screen time for a particular app.",
+                    "App screen time: Intent to open the app screen time screen for a specific app. The Intent uri is the following (replace \${package} with the app package name). This screen includes the daily and hourly breakdown of screen time for a particular app.",
                 intentUri =
-                    "intent:#Intent;action=android.settings.APP_USAGE_SETTINGS;S.android.intent.extra.PACKAGE_NAME=\${package_name};end",
+                    "intent:#Intent;action=android.settings.APP_USAGE_SETTINGS;S.android.intent.extra.PACKAGE_NAME=\${package};end",
             ),
             StaticIntent(
                 description =

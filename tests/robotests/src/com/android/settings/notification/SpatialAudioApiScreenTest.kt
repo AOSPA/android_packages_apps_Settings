@@ -44,6 +44,10 @@ class SpatialAudioApiScreenTest {
         AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_BUILTIN_SPEAKER, ""
     )
 
+    private val wiredHeadphones = AudioDeviceAttributes(
+        AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_WIRED_HEADPHONES, ""
+    )
+
     @Before
     fun setUp() {
         ShadowSpatializer.reset()
@@ -111,6 +115,49 @@ class SpatialAudioApiScreenTest {
         ShadowSpatializer.availableForDevice = false
 
         tester.get<Boolean>("spatial_audio")
+    }
+
+    @Test
+    @Config(shadows = [ShadowSpatializer::class])
+    fun get_wiredHeadphones_whenCompatible_returnsTrue() {
+        ShadowSpatializer.compatibleDevices.add(wiredHeadphones)
+
+        assertThat(tester.get<Boolean>("spatial_audio_wired_headphones")).isTrue()
+    }
+
+    @Test
+    @Config(shadows = [ShadowSpatializer::class])
+    fun get_wiredHeadphones_whenNotCompatible_returnsFalse() {
+        ShadowSpatializer.compatibleDevices.clear()
+
+        assertThat(tester.get<Boolean>("spatial_audio_wired_headphones")).isFalse()
+    }
+
+    @Test
+    @Config(shadows = [ShadowSpatializer::class])
+    fun set_wiredHeadphones_toTrue_addsDevice() {
+        tester.set("spatial_audio_wired_headphones", true)
+
+        assertThat(ShadowSpatializer.compatibleDevices).contains(wiredHeadphones)
+    }
+
+    @Test
+    @Config(shadows = [ShadowSpatializer::class])
+    fun set_wiredHeadphones_toFalse_removesDevice() {
+        ShadowSpatializer.compatibleDevices.add(wiredHeadphones)
+
+        tester.set("spatial_audio_wired_headphones", false)
+
+        assertThat(ShadowSpatializer.compatibleDevices).doesNotContain(wiredHeadphones)
+    }
+
+    @Test(expected = HardwareUnsupportedException::class)
+    @Config(shadows = [ShadowSpatializer::class])
+    fun get_wiredHeadphonesPreconditionFails_throwsException() {
+        // Simulate wired headphones specifically not supporting spatial audio
+        ShadowSpatializer.availableForDevice = false
+
+        tester.get<Boolean>("spatial_audio_wired_headphones")
     }
 
     @Test

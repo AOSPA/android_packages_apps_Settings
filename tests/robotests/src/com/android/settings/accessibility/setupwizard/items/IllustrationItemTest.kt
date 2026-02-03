@@ -50,6 +50,7 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestParameterInjector
+import org.robolectric.Shadows.shadowOf
 
 /** Tests for [IllustrationItem]. */
 @RunWith(RobolectricTestParameterInjector::class)
@@ -250,6 +251,9 @@ class IllustrationItemTest {
     @Test
     fun handleAnimationControl_animatedDrawable_togglesPauseAndResume() {
         val imageUri = Uri.parse("content://test/lottie.json")
+        val contentResolver = shadowOf(context.contentResolver)
+        val validLottieJson = "{}".toByteArray()
+        contentResolver.registerInputStream(imageUri, ByteArrayInputStream(validLottieJson))
         val rootView =
             setupMockLottieAnimationView<AnimationDrawable>(
                 context,

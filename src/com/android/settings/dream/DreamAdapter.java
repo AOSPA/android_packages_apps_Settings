@@ -38,14 +38,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settingslib.utils.ColorUtil;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
 /**
  * RecyclerView adapter which displays list of items for the user to select.
  */
-public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final List<IDreamItem> mItemList;
+public class DreamAdapter<DreamItemT extends IDreamItem>
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final List<DreamItemT> mItemList;
     private final MessageFormat mOrdinalFormat =
         new MessageFormat("{0,ordinal}", Locale.getDefault());
     private int mLastSelectedPos = -1;
@@ -219,17 +221,17 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public DreamAdapter(SparseIntArray layouts, List<IDreamItem> itemList) {
+    public DreamAdapter(SparseIntArray layouts, List<DreamItemT> itemList) {
         mItemList = itemList;
         mLayouts = layouts;
     }
 
-    public DreamAdapter(@LayoutRes int layoutRes, List<IDreamItem> itemList) {
+    public DreamAdapter(@LayoutRes int layoutRes, List<DreamItemT> itemList) {
         mItemList = itemList;
         mLayouts.append(DreamItemViewTypes.DREAM_ITEM, layoutRes);
     }
 
-    void setItemList(List<IDreamItem> itemList) {
+    void setItemList(List<DreamItemT> itemList) {
         mItemList.clear();
         mItemList.addAll(itemList);
     }
@@ -273,5 +275,32 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      */
     public boolean getEnabled() {
         return mEnabled;
+    }
+
+    /**
+     * Rotates the items in the list.
+     *
+     * @param fromPos The position to start rotating from.
+     * @param toPos The position to rotate to.
+     */
+    public void rotateItems(int fromPos, int toPos) {
+        if (fromPos == toPos) {
+            return;
+        }
+
+        if (fromPos < toPos) {
+            // Move down, rotate other items up.
+            List<DreamItemT> subList = mItemList.subList(fromPos, toPos + 1);
+            Collections.rotate(subList, -1);
+        } else {
+            // Move up, rotate other items down.
+            List<DreamItemT> subList = mItemList.subList(toPos, fromPos + 1);
+            Collections.rotate(subList, 1);
+        }
+        notifyItemMoved(fromPos, toPos);
+    }
+
+    List<DreamItemT> getItems() {
+        return mItemList;
     }
 }

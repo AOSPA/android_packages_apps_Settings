@@ -109,9 +109,13 @@
     <string name="caption_preferences_screen_purpose" translatable="false">Shows all available options to customize the visual appearance of the captioning.</string>
     <string name="caption_preferences_footer_purpose" translatable="false">Contains additional information about caption preferences</string>
     <string name="caption_preferences_appearance_purpose" translatable="false">Allows users to configure the caption\'s text size and style.</string>
-    <string name="caption_preferences_appearance_preview_purpose" translatable="false">The preview shows exactly how your captions will look over a real video. This helps you make sure the text is easy to read before you save your settings.</string>
-    <string name="caption_preferences_appearance_caption_size_purpose" translatable="false">Caption size determines how large the text appears on your screen to ensure it is comfortable for you to read.</string>
-    <string name="caption_preferences_appearance_caption_style_purpose" translatable="false">Caption style lets you change the font color and background so the words stand out clearly against different video scenes.</string>
+    <string name="caption_preferences_appearance_preview_purpose" translatable="false">The preview shows exactly how the captions will look over a real video. This helps the user make sure the text is easy to read before saving the settings.</string>
+    <string name="caption_preferences_appearance_caption_size_purpose" translatable="false">Caption size determines how large the text appears on the screen to ensure it is comfortable for the user to read.</string>
+    <string name="caption_preferences_appearance_caption_style_purpose" translatable="false">Caption style lets the user change the font color and background so the words stand out clearly against different video scenes.</string>
+    <string name="caption_preferences_appearance_custom_options_purpose" translatable="false">Custom options let the user change specific details like text color and font to make captions easier for them to see, especially if standard presets don\'t provide enough contrast against the videos they watch.</string>
+    <string name="caption_preferences_appearance_custom_font_family_purpose" translatable="false">Allows users to choose a lettering style that is most comfortable for their eyes to read quickly.</string>
+    <string name="caption_preferences_appearance_custom_text_color_purpose" translatable="false">Allows users to pick a high-contrast color so the words don\'t blend into the video background.</string>
+    <string name="caption_preferences_appearance_custom_text_opacity_purpose" translatable="false">Allows users to adjust how solid the letters appear to ensure they are clear without being distracting.</string>
     <string name="caption_preferences_more_options_screen_purpose" translatable="false">Displays more options the user can customize on the captions.</string>
     <string name="caption_preferences_locale_purpose" translatable="false">Allows users to change the locale used when displaying the caption.</string>
     <string name="configure_network_settings_purpose" translatable="false">Allows users to configure network preferences, such as enabling Wi-Fi wakeup and network notifications.</string>
@@ -204,6 +208,7 @@
     <!-- Spatial audio screen begin -->
     <string name="spatial_audio_screen_purpose" translatable="false">Allows users to configure Spatial Audio settings for an immersive sound experience with speakers and headphones.</string>
     <string name="spatial_audio_phone_speakers_purpose" translatable="false">Enables spatial audio on the device\'s built-in speakers for a more immersive sound experience</string>
+    <string name="spatial_audio_wired_headphones_purpose" translatable="false">Enable spatial audio on connected wired headphones for a more immersive sound experience</string>
     <!-- Spatial audio screen end -->
     <!-- Device admin screen begin -->
     <string name="device_admin_settings_screen_purpose" translatable="false">Allows users to view and manage applications that have device administrator privileges, which can control the security and settings of the device</string>
@@ -366,6 +371,8 @@
     <string name="special_access_media_routing_control_list_purpose" translatable="false">Grants an app the ability to route or transfer audio and video playback to different output devices, such as Bluetooth speakers or remote screens.</string>
     <string name="special_access_long_background_tasks_apps_list_purpose" translatable="false">Grants specific apps the permission to execute prolonged background operations, such as large downloads or data synchronization, without being terminated by the system\'s battery optimization measures.</string>
     <string name="special_access_nfc_tag_apps_settings_list_purpose" translatable="false">Determines whether an app is permitted to automatically launch or execute actions when the device scans a compatible Near Field Communication (NFC) tag.</string>
+    <string name="special_access_turn_screen_on_apps_list_purpose" translatable="false">Grants an app the permission to wake up your device\'s display, typically to light up the screen for incoming notifications or alarms.</string>
+    <string name="special_access_usage_data_app_list_purpose" translatable="false">Grants an app the ability to track your general device usage habits, including which other apps you use, how frequently you open them, and the duration of their use.</string>
     <string name="no_app_purpose" translatable="false">no_app</string>
     <string name="special_access_write_system_preferences_app_list_purpose" translatable="false">special_access_write_system_preferences_app_list</string>
     <string name="free_up_space_purpose" translatable="false">free_up_space</string>

@@ -16,30 +16,58 @@
 
 package com.android.settings.input.gamecontroller
 
+import android.app.Application
+import android.content.Context
+import android.hardware.input.InputManager
 import android.os.Bundle
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.view.InputDevice
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.testing.launchFragment
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToAxesMap
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToButtonMap
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToNameMap
+import com.android.settings.testutils.shadow.ShadowInputManager
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowLooper
 
 /** Tests for [GameControllerRemappingDialogFragment]. */
 @RunWith(AndroidJUnit4::class)
 @EnableFlags(com.android.hardware.input.Flags.FLAG_CONTROLLER_REMAPPING)
+@Config(shadows = [ShadowInputManager::class])
 class GameControllerRemappingDialogFragmentTest {
 
     @get:Rule val setFlagsRule = SetFlagsRule()
+
+    private lateinit var inputManager: InputManager
+    private lateinit var shadowInputManager: ShadowInputManager
+    private lateinit var context: Context
+    private lateinit var viewModel: GameControllerViewModel
+
+    @Before
+    fun setUp() {
+        context = ApplicationProvider.getApplicationContext()
+        inputManager = context.getSystemService(InputManager::class.java)
+        shadowInputManager = shadowOf(inputManager) as ShadowInputManager
+
+        val device = createGameController(deviceId = 1, name = "Test Controller")
+        shadowInputManager.addInputDevice(device)
+
+        viewModel =
+            GameControllerViewModel(context.applicationContext as Application, device.identifier)
+    }
 
     @Test
     fun onLaunch_forButtonRemapping_showsCorrectNumberOfItems() {
@@ -48,7 +76,7 @@ class GameControllerRemappingDialogFragmentTest {
         val scenario = launchFragment<Fragment>(themeResId = R.style.Theme_Settings)
 
         scenario.onFragment { fragment ->
-            val dialog = GameControllerRemappingDialogFragment()
+            val dialog = GameControllerRemappingDialogFragment(viewModel)
             dialog.arguments =
                 Bundle().apply {
                     putString(
@@ -76,7 +104,7 @@ class GameControllerRemappingDialogFragmentTest {
         val scenario = launchFragment<Fragment>(themeResId = R.style.Theme_Settings)
 
         scenario.onFragment { fragment ->
-            val dialog = GameControllerRemappingDialogFragment()
+            val dialog = GameControllerRemappingDialogFragment(viewModel)
             dialog.arguments =
                 Bundle().apply {
                     putString(
@@ -106,7 +134,7 @@ class GameControllerRemappingDialogFragmentTest {
         val scenario = launchFragment<Fragment>(themeResId = R.style.Theme_Settings)
 
         scenario.onFragment { fragment ->
-            val dialog = GameControllerRemappingDialogFragment()
+            val dialog = GameControllerRemappingDialogFragment(viewModel)
             dialog.arguments =
                 Bundle().apply {
                     putString(
@@ -166,5 +194,18 @@ class GameControllerRemappingDialogFragmentTest {
                     as GameControllerRemappingDialogFragment?
             assertThat(dialog?.dialog?.isShowing ?: false).isFalse()
         }
+    }
+
+    private fun createGameController(
+        deviceId: Int,
+        name: String,
+        source: Int = InputDevice.SOURCE_GAMEPAD or InputDevice.SOURCE_JOYSTICK,
+    ): InputDevice {
+        return InputDevice.Builder()
+            .setSources(source)
+            .setId(deviceId)
+            .setName(name)
+            .setDescriptor("device $deviceId")
+            .build()
     }
 }
