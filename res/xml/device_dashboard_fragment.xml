@@ -58,7 +58,7 @@
         android:fragment="com.android.settings.DisplaySettings"
         android:icon="@drawable/ic_settings_tv_displays"
         android:key="device_dashboard_display"
-        android:title="@string/device_dashboard_display_title"
+        android:title="@string/display_settings"
         android:summary="@string/display_dashboard_summary"
         settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
@@ -66,6 +66,6 @@
         android:fragment="com.android.settings.notification.SoundSettings"
         android:icon="@drawable/ic_settings_mic"
         android:key="device_dashboard_sound"
-        android:title="@string/device_dashboard_sound_title"
+        android:title="@string/sound_settings"
         android:summary="@string/sound_dashboard_summary" />
 </PreferenceScreen>

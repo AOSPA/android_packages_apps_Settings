@@ -373,7 +373,7 @@ open class TabbedDisplayPreferenceFragment(
                         context.getString(R.string.keywords_external_display_settings)
                     if (DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(context)) {
                         indexInfo.screenTitle =
-                            context.getString(R.string.device_dashboard_display_title)
+                            context.getString(R.string.display_settings)
                     } else {
                         indexInfo.screenTitle =
                             context.getString(R.string.connected_devices_dashboard_title)
