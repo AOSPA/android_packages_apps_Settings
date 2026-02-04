@@ -34,6 +34,7 @@ import com.android.settings.contract.KEY_DARK_THEME
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.PrimarySwitchPreference
 import com.android.settingslib.PrimarySwitchPreferenceBinding
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
@@ -140,6 +141,13 @@ abstract class BaseDarkModeScreen(context: Context) :
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         if (preference is DarkModePreference) preference.setCatalystEnabled(true)
+        if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) {
+            (preference as? PrimarySwitchPreference)?.apply {
+                // Disable the switch during power save mode, but allow users to enter the Settings
+                // page for the Dark theme option selection.
+                isSwitchEnabled = !context.isPowerSaveMode()
+            }
+        }
     }
 
     override fun onStart(context: PreferenceLifecycleContext) {
@@ -164,7 +172,8 @@ abstract class BaseDarkModeScreen(context: Context) :
         else !context.isPowerSaveMode()
 
     override fun isIndexable(context: Context) =
-        Flags.catalystDarkUiMode() && !context.isPowerSaveMode()
+        Flags.catalystDarkUiMode() &&
+            (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver() || !context.isPowerSaveMode())
 
     override fun getSummary(context: Context): CharSequence? {
         val active = darkModeStorage.getBoolean(key) == true
