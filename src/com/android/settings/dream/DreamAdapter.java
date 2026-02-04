@@ -50,6 +50,7 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
     private final List<DreamItemT> mItemList;
     private final MessageFormat mOrdinalFormat =
         new MessageFormat("{0,ordinal}", Locale.getDefault());
+    private final boolean mAllowMultiSelection;
     private int mLastSelectedPos = -1;
     private boolean mEnabled = true;
     private SparseIntArray mLayouts = new SparseIntArray();
@@ -90,7 +91,7 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
             }
 
             final Drawable icon;
-            if (dreamsSwitcher() && item.getOrder() >= 0) {
+            if (supportMultipleSelection() && item.getOrder() >= 0) {
                 icon = new NumberedIconDrawable(
                     mContext, item.getOrder() + 1, R.color.dream_card_color_state_list);
             } else {
@@ -114,7 +115,7 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
 
             itemView.setOnClickListener(v -> {
                 item.onItemClicked();
-                if (!dreamsSwitcher()) {
+                if (!supportMultipleSelection()) {
                     if (mLastSelectedPos > -1 && mLastSelectedPos != position) {
                         notifyItemChanged(mLastSelectedPos);
                     }
@@ -124,7 +125,7 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
 
             final boolean isActive = item.isActive();
             itemView.setSelected(isActive);
-            if (dreamsSwitcher()) {
+            if (supportMultipleSelection()) {
                 itemView.setClickable(true);
                 if (item.getOrder() >= 0) {
                     String ordinal = mOrdinalFormat.format(new Object[]{item.getOrder() + 1});
@@ -222,13 +223,25 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
     }
 
     public DreamAdapter(SparseIntArray layouts, List<DreamItemT> itemList) {
+        this(layouts, itemList, /* allowMultiSelection= */ false);
+    }
+
+    public DreamAdapter(
+            SparseIntArray layouts, List<DreamItemT> itemList, boolean allowMultiSelection) {
         mItemList = itemList;
         mLayouts = layouts;
+        mAllowMultiSelection = allowMultiSelection;
     }
 
     public DreamAdapter(@LayoutRes int layoutRes, List<DreamItemT> itemList) {
+        this(layoutRes, itemList, /* allowMultiSelection= */ false);
+    }
+
+    public DreamAdapter(
+            @LayoutRes int layoutRes, List<DreamItemT> itemList, boolean allowMultiSelection) {
         mItemList = itemList;
         mLayouts.append(DreamItemViewTypes.DREAM_ITEM, layoutRes);
+        mAllowMultiSelection = allowMultiSelection;
     }
 
     void setItemList(List<DreamItemT> itemList) {
@@ -258,6 +271,10 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
     @Override
     public int getItemCount() {
         return mItemList.size();
+    }
+
+    private boolean supportMultipleSelection() {
+        return dreamsSwitcher() && mAllowMultiSelection;
     }
 
     /**
