@@ -30,7 +30,11 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.dreams.Flags;
+import android.view.View;
 import android.widget.TextView;
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,7 +55,9 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+import com.google.testing.junit.testparameterinjector.TestParameter;
+
+import org.robolectric.RobolectricTestParameterInjector;
 import org.robolectric.shadows.ShadowLooper;
 
 import android.graphics.Canvas;
@@ -71,7 +77,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricTestParameterInjector.class)
 public class DreamPickerControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -464,6 +470,30 @@ public class DreamPickerControllerTest {
 
         // verify
         assertThat(flags).isEqualTo(0);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
+    public void onBindView_setsCorrectAccessibilityInfo(@TestParameter boolean isActive) {
+        // Setup
+        final DreamInfo dream = createDreamInfo("dream1", isActive, isActive ? 0 : -1);
+        when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(List.of(dream)));
+        final DreamPickerController controller = buildController();
+        controller.updateState(mPreference);
+        final RecyclerView recyclerView = mPreference.findViewById(R.id.dream_list);
+        recyclerView.measure(0, 0);
+        recyclerView.layout(0, 0, 100, 1000);
+        final View itemView =
+                recyclerView.findViewHolderForAdapterPosition(0).itemView;
+        final AccessibilityDelegateCompat delegate =
+                ViewCompat.getAccessibilityDelegate(itemView);
+        final AccessibilityNodeInfoCompat info = AccessibilityNodeInfoCompat.obtain();
+
+        // Verify
+        delegate.onInitializeAccessibilityNodeInfo(itemView, info);
+        assertThat(info.isCheckable()).isTrue();
+        assertThat(info.isChecked()).isEqualTo(isActive);
+        assertThat(info.isSelected()).isFalse();
     }
 
     private DreamInfo createDreamInfo(String caption, boolean isActive, int order) {
