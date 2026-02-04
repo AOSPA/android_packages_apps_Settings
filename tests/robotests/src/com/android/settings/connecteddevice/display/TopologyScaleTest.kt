@@ -51,21 +51,24 @@ class TopologyScaleTest {
                 listOf(RectF(0f, 0f, 640f, 480f)),
             )
 
-        // blockRatio is is set in order to make the smallest display edge (480 dp) 48dp in the pane
-        // Ratio=0.1 (minEdge/minDim=48/480). Height=Ratio*480 + 3.5*48 = 48+168 = 216.
+        // blockRatio is set in order to make the smallest display edge (480 dp) 48dp in the pane
+        // Ratio=0.1 (minEdge/minDim=48/480). Height=Ratio*480 + 48 = 48 + 48 = 96.
+        // OriginY = (96 - 48) / 2 = 24.
+        // For single display, vertical padding around display is set to minimum as there's neither
+        // topology hint text nor other displays to be dragged around
         assertEquals(
-            "{TopologyScale blockRatio=0.100000 originPaneXY=288.0,84.0 paneHeight=216.0}",
+            "{TopologyScale blockRatio=0.100000 originPaneXY=288.0,24.0 paneHeight=96.0}",
             "" + scale,
         )
 
         assertPointF(
             listOf(
-                // x: 640*0.1 + 288 = 352. y: 480*0.1 + 84 = 132.
-                PointF(352f, 132f) to scale.displayToPaneCoor(640f, 480f),
-                // x: 320*0.1 + 288 = 320. y: 240*0.1 + 84 = 108.
-                PointF(320f, 108f) to scale.displayToPaneCoor(320f, 240f),
-                // x: (352-288)/0.1 = 640. y: (96-84)/0.1 = 120.
-                PointF(640f, 120f) to scale.paneToDisplayCoor(352f, 96f),
+                // x: 640*0.1 + 288 = 352. y: 480*0.1 + 24 = 72.
+                PointF(352f, 72f) to scale.displayToPaneCoor(640f, 480f),
+                // x: 320*0.1 + 288 = 320. y: 240*0.1 + 24 = 48.
+                PointF(320f, 48f) to scale.displayToPaneCoor(320f, 240f),
+                // x: (352-288)/0.1 = 640. y: (96-24)/0.1 = 720.
+                PointF(640f, 720f) to scale.paneToDisplayCoor(352f, 96f),
             ),
             0.001f,
         )

@@ -28,15 +28,6 @@
         android:entries="@array/bluetooth_audio_routing_titles"
         android:entryValues="@array/bluetooth_audio_routing_values"
         android:summary="%s"
-        android:key="audio_routing_ringtone"
-        android:persistent="false"
-        android:title="@string/bluetooth_ringtone_title"
-        settings:controller="com.android.settings.accessibility.HearingDeviceRingtoneRoutingPreferenceController" />
-
-    <ListPreference
-        android:entries="@array/bluetooth_audio_routing_titles"
-        android:entryValues="@array/bluetooth_audio_routing_values"
-        android:summary="%s"
         android:key="audio_routing_call"
         android:persistent="false"
         android:title="@string/bluetooth_call_title"
@@ -46,10 +37,10 @@
         android:entries="@array/bluetooth_audio_routing_titles"
         android:entryValues="@array/bluetooth_audio_routing_values"
         android:summary="%s"
-        android:key="audio_routing_notification"
+        android:key="audio_routing_media"
         android:persistent="false"
-        android:title="@string/bluetooth_notification_title"
-        settings:controller="com.android.settings.accessibility.HearingDeviceNotificationRoutingPreferenceController" />
+        android:title="@string/bluetooth_media_title"
+        settings:controller="com.android.settings.accessibility.HearingDeviceMediaRoutingPreferenceController" />
 
     <com.android.settings.accessibility.AccessibilityFooterPreference
         android:key="hearing_device_footer"

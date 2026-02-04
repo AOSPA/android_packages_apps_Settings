@@ -44,7 +44,6 @@ public class ApnPreference extends TwoTargetPreference
         implements CompoundButton.OnCheckedChangeListener, Preference.OnPreferenceClickListener {
     private static final String TAG = "ApnPreference";
     private boolean mIsChecked = false;
-    private RadioButton mRadioButton;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     private boolean mProtectFromCheckedChange = false;
     private boolean mDefaultSelectable = true;
@@ -62,17 +61,21 @@ public class ApnPreference extends TwoTargetPreference
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
-        final RadioButton rb = (RadioButton) holder.findViewById(android.R.id.checkbox);
+        final RadioButton radioButton = (RadioButton) holder.findViewById(android.R.id.checkbox);
         final View radioButtonFrame = holder.findViewById(android.R.id.widget_frame);
-        if (rb == null || radioButtonFrame == null) {
+        if (radioButton == null || radioButtonFrame == null) {
             throw new RuntimeException("Failed to load system layout.");
         }
 
-        mRadioButton = rb;
-        radioButtonFrame.setOnClickListener(v -> rb.performClick());
-        rb.setOnCheckedChangeListener(this);
-        setIsChecked(mIsChecked);
-        rb.setVisibility(View.VISIBLE);
+        radioButtonFrame.setOnClickListener(v -> radioButton.performClick());
+        radioButton.setOnCheckedChangeListener(this);
+
+        // Directly set the RadioButton state
+        mProtectFromCheckedChange = true;
+        radioButton.setChecked(mIsChecked);
+        mProtectFromCheckedChange = false;
+
+        radioButton.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -89,12 +92,11 @@ public class ApnPreference extends TwoTargetPreference
      * Set preference isChecked.
      */
     public void setIsChecked(boolean isChecked) {
-        mIsChecked = isChecked;
-        if (mRadioButton != null) {
-            mProtectFromCheckedChange = true;
-            mRadioButton.setChecked(mIsChecked);
-            mProtectFromCheckedChange = false;
+        if (mIsChecked == isChecked) {
+            return;
         }
+        mIsChecked = isChecked;
+        notifyChanged();
     }
 
     /**

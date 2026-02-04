@@ -24,9 +24,11 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import android.util.Log;
+import android.util.ArraySet;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -39,7 +41,6 @@ import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -51,6 +52,7 @@ public class DreamPickerController extends BasePreferenceController {
     public static final String PREF_KEY = "dream_picker";
 
     private static final String TAG = "DreamPickerController";
+    private static final DreamInfoComparator DREAM_INFO_COMPARATOR = new DreamInfoComparator();
 
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -60,7 +62,7 @@ public class DreamPickerController extends BasePreferenceController {
     private List<DreamInfo> mSelectedDreams = new ArrayList<>();
     private DreamAdapter mAdapter;
 
-    private final HashSet<Callback> mCallbacks = new HashSet<>();
+    private final ArraySet<Callback> mCallbacks = new ArraySet<>();
 
     public DreamPickerController(Context context) {
         this(context, DreamBackend.getInstance(context));
@@ -71,7 +73,8 @@ public class DreamPickerController extends BasePreferenceController {
         mBackend = backend;
         mDreamInfos.addAll(mBackend.getDreamInfos());
         if (dreamsSwitcher()) {
-            mSelectedDreams = transformToSelectedDreams(mDreamInfos);
+            mDreamInfos.sort(DREAM_INFO_COMPARATOR);
+            mSelectedDreams = filterSelectedDreamInfos(mDreamInfos);
         } else {
             mActiveDream = getActiveDreamInfo(mDreamInfos);
         }
@@ -100,8 +103,26 @@ public class DreamPickerController extends BasePreferenceController {
         }
         final RecyclerView recyclerView = pref.findViewById(R.id.dream_list);
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
-        recyclerView.addItemDecoration(
-                new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
+        if (dreamsSwitcher()) {
+            recyclerView.addItemDecoration(
+                new FixedSpaceAroundItemDecoration(
+                    mContext, R.dimen.dream_preference_card_fixed_space_around)
+            );
+            // Apply negative padding on RecyclerView to compensate spacing of items on the edge
+            final int spacingCompensation = mContext.getResources().getDimensionPixelSize(
+                        R.dimen.dream_preference_card_space_compensation);
+            final int targetBottomPadding = mContext.getResources().getDimensionPixelSize(
+                        R.dimen.dream_preference_card_padding);
+            recyclerView.setPaddingRelative(
+                spacingCompensation,
+                spacingCompensation,
+                spacingCompensation,
+                targetBottomPadding + spacingCompensation
+            );
+        } else {
+            recyclerView.addItemDecoration(
+                    new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
+        }
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mAdapter);
     }
@@ -127,7 +148,8 @@ public class DreamPickerController extends BasePreferenceController {
         mDreamInfos.clear();
         mDreamInfos.addAll(mBackend.getDreamInfos());
         if (dreamsSwitcher()) {
-            mSelectedDreams = transformToSelectedDreams(mDreamInfos);
+            mDreamInfos.sort(DREAM_INFO_COMPARATOR);
+            mSelectedDreams = filterSelectedDreamInfos(mDreamInfos);
         }
         mAdapter.setItemList(mDreamInfos
                 .stream()
@@ -136,17 +158,31 @@ public class DreamPickerController extends BasePreferenceController {
         mAdapter.notifyDataSetChanged();
     }
 
-    private List<DreamInfo> transformToSelectedDreams(List<DreamInfo> dreamInfos) {
+    private List<DreamInfo> filterSelectedDreamInfos(List<DreamInfo> dreamInfos) {
         return dreamInfos.stream()
                 .filter(d -> d.isActive)
-                .sorted((DreamInfo d1, DreamInfo d2) -> {
-                    if (d1.order == d2.order) {
-                        Log.w(TAG, "Duplicate order=" + d1.order
-                                + " for " + d1.componentName + " and " + d2.componentName);
-                    }
-                    return d1.order - d2.order;
-                })
                 .collect(Collectors.toList());
+    }
+
+    private static class DreamInfoComparator implements Comparator<DreamInfo> {
+        @Override
+        public int compare(DreamInfo d1, DreamInfo d2) {
+            // 1. Selected dreams are smaller than unselected ones.
+            // 2. If both items are not selected, return 0 to preserve order (assume stable sort).
+            // 3. If both are selected and have the same order, log a conflicted orders warning.
+            // 4. Otherwise compare their `order` field.
+            if (d1.isActive != d2.isActive) {
+                return d1.isActive ? -1 : 1;
+            }
+            if (!d1.isActive) {
+                return 0;
+            }
+            if (d1.order == d2.order) {
+                Log.w(TAG, "Duplicate order=" + d1.order
+                        + " for " + d1.componentName + " and " + d2.componentName);
+            }
+            return d1.order - d2.order;
+        }
     }
 
     @Nullable
@@ -169,6 +205,99 @@ public class DreamPickerController extends BasePreferenceController {
     interface Callback {
         // Triggered when the selected dream changes.
         void onActiveDreamChanged();
+    }
+
+    /** Holds the DreamInfo state snapshot for DiffUtil to detect changes. */
+    private static class DreamItemState {
+        final ComponentName componentName;
+        final boolean isActive;
+        final int order;
+
+        DreamItemState(DreamInfo dreamInfo) {
+            this.componentName = dreamInfo.componentName;
+            this.isActive = dreamInfo.isActive;
+            this.order = dreamInfo.order;
+        }
+    }
+
+    private static class DreamItemDiffCallback extends DiffUtil.Callback {
+        private final List<DreamItemState> mOldList;
+        private final List<DreamItemState> mNewList;
+
+        DreamItemDiffCallback(List<DreamItemState> oldList, List<DreamItemState> newList) {
+            mOldList = oldList;
+            mNewList = newList;
+        }
+
+        @Override
+        public int getOldListSize() {
+            return mOldList.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return mNewList.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+            return mOldList.get(oldItemPosition).componentName.equals(
+                    mNewList.get(newItemPosition).componentName);
+        }
+
+        @Override
+        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+            final DreamItemState oldItem = mOldList.get(oldItemPosition);
+            final DreamItemState newItem = mNewList.get(newItemPosition);
+            return oldItem.isActive == newItem.isActive
+                    && oldItem.order == newItem.order;
+        }
+    }
+
+    private void updateDreamSelection(DreamInfo dreamInfo) {
+        final List<DreamItemState> oldItemStates = mDreamInfos.stream()
+                .map(DreamItemState::new)
+                .collect(Collectors.toList());
+
+        final int selectedIndex = findIndex(mSelectedDreams,
+                d -> d.componentName.equals(dreamInfo.componentName));
+        if (selectedIndex == -1) {
+            // Select the dream if it was not selected, and set the order of the dream to
+            // the last index in the mSelectedDreams list.
+            mSelectedDreams.add(dreamInfo);
+            dreamInfo.isActive = true;
+            dreamInfo.order = mSelectedDreams.size() - 1;
+        } else {
+            // Unselect the dream if it was selected.
+            mSelectedDreams.remove(selectedIndex);
+            dreamInfo.isActive = false;
+            dreamInfo.order = DreamInfo.ORDER_UNSELECTED;
+            // Update the order of the dreams which were after the unselected dream.
+            for (int i = selectedIndex; i < mSelectedDreams.size(); i++) {
+                mSelectedDreams.get(i).order = i;
+            }
+        }
+
+        final ComponentName[] activeComponents = mSelectedDreams.stream()
+                .map(d -> d.componentName)
+                .toArray(ComponentName[]::new);
+
+        mBackend.setActiveDreams(activeComponents);
+
+        // Update the mDreamInfos list and apply it to the adapter.
+        mDreamInfos.sort(DREAM_INFO_COMPARATOR);
+
+        final List<IDreamItem> newAdapterItems = mDreamInfos.stream()
+                .map(DreamItem::new)
+                .collect(Collectors.toList());
+        mAdapter.setItemList(newAdapterItems);
+
+        final List<DreamItemState> newItemStates = mDreamInfos.stream()
+                .map(DreamItemState::new)
+                .collect(Collectors.toList());
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(
+                new DreamItemDiffCallback(oldItemStates, newItemStates));
+        diffResult.dispatchUpdatesTo(mAdapter);
     }
 
     private class DreamItem implements IDreamItem {
@@ -196,51 +325,7 @@ public class DreamPickerController extends BasePreferenceController {
         @Override
         public void onItemClicked() {
             if (dreamsSwitcher()) {
-                int selectedIndex = findIndex(mSelectedDreams,
-                        d -> d.componentName.equals(mDreamInfo.componentName));
-                if (selectedIndex == DreamInfo.ORDER_UNSELECTED) {
-                    // Select the dream if it was not selected, and set the order of the dream to
-                    // the last index.
-                    mSelectedDreams.add(mDreamInfo);
-                    mDreamInfo.isActive = true;
-                    mDreamInfo.order = mSelectedDreams.size() - 1;
-                } else {
-                    // Unselect the dream if it was selected.
-                    mSelectedDreams.remove(selectedIndex);
-                    mDreamInfo.isActive = false;
-                    mDreamInfo.order = DreamInfo.ORDER_UNSELECTED;
-                    // Update the order of the dreams which were after the unselected dream.
-                    for (int i = selectedIndex; i < mSelectedDreams.size(); i++) {
-                        mSelectedDreams.get(i).order = i;
-                    }
-                }
-
-                final ComponentName[] activeComponents = mSelectedDreams.stream()
-                        .map(d -> d.componentName)
-                        .toArray(ComponentName[]::new);
-
-                mBackend.setActiveDreams(activeComponents);
-
-                // Update views
-                for (int i = 0; i < mDreamInfos.size(); i++) {
-                    DreamInfo info = mDreamInfos.get(i);
-                    // Update the clicked dreamCard.
-                    if (info == mDreamInfo) {
-                        mAdapter.notifyItemChanged(i);
-                        continue;
-                    }
-                    // Update the affected dreamCards.
-                    int idx = -1;
-                    for (int j = 0; j < activeComponents.length; j++) {
-                        if (activeComponents[j].equals(info.componentName)) {
-                            idx = j;
-                            break;
-                        }
-                    }
-                    if (selectedIndex != -1 && idx >= selectedIndex) {
-                        mAdapter.notifyItemChanged(i);
-                    }
-                }
+                updateDreamSelection(mDreamInfo);
             } else {
                 mActiveDream = mDreamInfo;
                 mBackend.setActiveDream(mDreamInfo.componentName);
@@ -291,6 +376,10 @@ public class DreamPickerController extends BasePreferenceController {
         }
     }
 
+    /**
+     * Returns the index of the first element in the list that matches the given predicate,
+     * or -1 if no such element is found.
+     */
     private static int findIndex(List<DreamInfo> dreamInfos, Predicate<DreamInfo> predicate) {
         for (int i = 0; i < dreamInfos.size(); i++) {
             if (predicate.test(dreamInfos.get(i))) {

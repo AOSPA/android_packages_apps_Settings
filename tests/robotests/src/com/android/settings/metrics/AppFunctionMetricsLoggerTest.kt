@@ -60,7 +60,12 @@ class AppFunctionMetricsLoggerTest {
         val latencyMs = 100L
 
         // When
-        appFunctionMetricsLogger.logAppFunction(functionType, callingPackage, latencyMs, context)
+        appFunctionMetricsLogger.logAppFunction(
+            functionType.toMetricsId(),
+            callingPackage,
+            latencyMs,
+            context,
+        )
 
         // Then
         val writtenEvents = ShadowSettingsStatsLog.getWrittenEvents()
@@ -80,7 +85,12 @@ class AppFunctionMetricsLoggerTest {
         val latencyMs = 250L
 
         // When
-        appFunctionMetricsLogger.logAppFunction(functionType, callingPackage, latencyMs, context)
+        appFunctionMetricsLogger.logAppFunction(
+            functionType.toMetricsId(),
+            callingPackage,
+            latencyMs,
+            context,
+        )
 
         // Then
         val writtenEvents = ShadowSettingsStatsLog.getWrittenEvents()
@@ -104,7 +114,7 @@ class AppFunctionMetricsLoggerTest {
             callingPackage,
             errorCode,
             context,
-            functionType,
+            functionType.toMetricsId(),
         )
 
         // Then
@@ -124,7 +134,7 @@ class AppFunctionMetricsLoggerTest {
         val errorCode = 1
 
         // When
-        appFunctionMetricsLogger.logAppFunctionError(callingPackage, errorCode, context)
+        appFunctionMetricsLogger.logAppFunctionError(callingPackage, errorCode, context, null)
 
         // Then
         val writtenEvents = ShadowSettingsStatsLog.getWrittenEvents()

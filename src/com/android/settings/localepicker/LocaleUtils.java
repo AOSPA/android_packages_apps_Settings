@@ -25,9 +25,13 @@ import android.app.PendingIntent;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.LocaleList;
 import android.os.SystemClock;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -39,6 +43,7 @@ import com.android.internal.app.LocaleHelper;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
+import com.android.settings.applications.AppLocaleUtil;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -335,5 +340,49 @@ public class LocaleUtils {
         return (supportedLanguageList.contains(language)
                 && !notSupportedLocaleList.contains(localeTag))
                 || LocaleList.isPseudoLocale(locale);
+    }
+
+    public static List<ApplicationInfo> getAppList(
+            @NonNull Context context,
+            @NonNull PackageManager packageManager
+    ) {
+        UserManager userManager = context.getSystemService(UserManager.class);
+        List<UserHandle> userHandles = userManager.getUserProfiles();
+        List<ApplicationInfo> result = new ArrayList<>();
+
+        for (UserHandle userHandle : userHandles) {
+            final int userId = userHandle.getIdentifier();
+            List<ApplicationInfo> appList = packageManager.getInstalledApplicationsAsUser(
+                    PackageManager.ApplicationInfoFlags.of(PackageManager.GET_META_DATA),
+                    userId
+            );
+            Context userContext;
+            if (userId == context.getUserId()) {
+                userContext = context;
+            } else {
+                userContext = context.createContextAsUser(userHandle, 0);
+            }
+            for (ApplicationInfo app : appList) {
+                if (canDisplayLocaleUi(userContext, app.packageName)) {
+                    result.add(app);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static boolean canDisplayLocaleUi(Context context, String packageName) {
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            return AppLocaleUtil.canDisplayLocaleUi(context,
+                    packageManager.getApplicationInfo(packageName, 0),
+                    packageManager.queryIntentActivities(AppLocaleUtil.LAUNCHER_ENTRY_INTENT,
+                            PackageManager.GET_META_DATA));
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(TAG, "Unable to find info for package: " + packageName);
+        }
+
+        return false;
     }
 }

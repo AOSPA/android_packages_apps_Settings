@@ -51,7 +51,6 @@ import android.media.VolumeProvider;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
-import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
@@ -264,31 +263,9 @@ public class MediaOutputPreferenceControllerTest {
         ShadowLocalMediaManager.reset();
     }
 
-    /** Start broadcasting so Preference summary should become "Audio Sharing" and disabled */
-    @Test
-    @EnableFlags(FLAG_ENABLE_LE_AUDIO_SHARING)
-    @DisableFlags(Flags.FLAG_ENABLE_OUTPUT_SWITCHER_PERSONAL_AUDIO_SHARING)
-    public void audioSharingStart_changeSummaryAndDisabled() {
-        mController.onStart();
-        ArgumentCaptor<BluetoothLeBroadcast.Callback> broadcastCallbackCaptor =
-                ArgumentCaptor.forClass(BluetoothLeBroadcast.Callback.class);
-        mShadowAudioManager.setOutputDevice(DEVICE_OUT_BLUETOOTH_A2DP);
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        when(mLocalBluetoothLeBroadcast.isEnabled(null)).thenReturn(true);
-        verify(mLocalBluetoothLeBroadcast)
-                .registerServiceCallBack(any(), broadcastCallbackCaptor.capture());
-        BluetoothLeBroadcast.Callback callback = broadcastCallbackCaptor.getValue();
-
-        callback.onBroadcastStarted(0, 0);
-        assertThat(mPreference.getSummary().toString())
-                .isEqualTo(mContext.getText(R.string.media_output_audio_sharing).toString());
-        assertThat(mPreference.isEnabled()).isFalse();
-    }
-
     /** Start broadcasting so Preference summary should become "Audio Sharing" and enabled */
     @Test
-    @EnableFlags({FLAG_ENABLE_LE_AUDIO_SHARING,
-            Flags.FLAG_ENABLE_OUTPUT_SWITCHER_PERSONAL_AUDIO_SHARING})
+    @EnableFlags(FLAG_ENABLE_LE_AUDIO_SHARING)
     public void audioSharingStart_outputSwitcherIntegrated_changeSummaryAndEnabled() {
         mController.onStart();
         ArgumentCaptor<BluetoothLeBroadcast.Callback> broadcastCallbackCaptor =

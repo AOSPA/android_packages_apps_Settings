@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"ใช้เป็นจอแสดงผลแยกต่างหาก"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"มิเรอร์จอแสดงผลในตัว"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"แสดงกล่องโต้ตอบการเชื่อมต่อ"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"ใช้ HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"ช่วยให้แสดงสีได้หลากหลายยิ่งขึ้นและไฮไลต์สว่างขึ้น"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"ยกเลิกการเชื่อมต่อกับจอแสดงผลภายนอกแล้ว"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"การหมุน"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"มาตรฐาน"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"กดปุ่ม Space สองครั้งเพื่อแทรก \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"แสดงรหัสผ่าน"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"แสดงอักขระชั่วครู่ขณะพิมพ์"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"เครื่องตวรจตัวสะกดซึ่งมาจากแอปพลิเคชัน <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> นี้อาจเก็บข้อความทั้งหมดที่คุณพิมพ์ รวมถึงข้อมูลส่วนบุคคล เช่น รหัสผ่านและหมายเลขบัตรเครดิต ต้องการใช้เครื่องตวรจตัวสะกดนี้หรือไม่"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"การตั้งค่า"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"ภาษา"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"ดูการใช้งานใน 24 ชั่วโมงที่ผ่านมา"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"ดูการใช้งานตั้งแต่ชาร์จจนเต็มครั้งล่าสุด"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"การใช้งานแบตเตอรี่ของแอป"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"ใช้รายละเอียด"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"บลูทูธ, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"บลูทูธ, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"อุปกรณ์"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"แป้นพิมพ์ ทัชแพด จอแสดงผล เสียง"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"จอแสดงผล"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"เสียง"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"ใช้งานไม่ได้เพราะ NFC ปิดอยู่"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"หากต้องการใช้งาน ให้ติดตั้งแอปการชำระเงินก่อนเป็นอันดับแรก"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"แอปล่าสุด แอปเริ่มต้น"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, แท็ก, เครื่องอ่าน"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"แป้นพิมพ์ การโต้ตอบการสัมผัส การสั่น"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"จอแสดงผลภายนอก, จอแสดงผลที่เชื่อมต่อ, จอแสดงผลที่ขยาย, จอแสดงผลที่สอง, จอแสดงผลในตัว, จัดเรียงจอแสดงผล, มิเรอร์, ขนาดการแสดงผล, การหมุน, ความละเอียด, อัตราการรีเฟรช"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"ระดับเสียงและการสั่น"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"ระดับเสียงของสื่อ"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"ระดับเสียง Google Cast"</string>
@@ -4390,12 +4394,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"รีสตาร์ท"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"ไว้ทีหลัง"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"ดูข้อมูลเพิ่มเติมเกี่ยวกับการป้องกันหน่วยความจำขั้นสูง"</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"การวินิจฉัยระบบปฏิบัติการ Android"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"ตรวจสอบบิลด์ของระบบปฏิบัติการ"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"การวินิจฉัย, ความโปร่งใส, ไบนารี"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"โปรไฟล์งานนี้ได้รับการจัดการโดย"</string>
     <string name="managing_admin" msgid="2633920317425356619">"จัดการโดย <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"เปิดโดยค่าเริ่มต้น"</string>
@@ -4516,18 +4517,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"การกำหนดค่า USB เริ่มต้น"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"ตัวเลือกสำหรับการเปิด/ปิด"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"ตัวเลือกการโอนไฟล์"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"การป้องกันการเข้าถึงข้อมูล"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"อนุญาตการสร้างอุโมงค์เสมือน PCI"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"เมื่อเปิดใช้ อุปกรณ์ต่อพ่วง USB และ Thunderbolt จะสร้างการสร้างอุโมงค์เสมือน PCI และเข้าถึงหน่วยความจำระบบได้"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"ต้องเป็นผู้ใช้ที่ดูแลระบบจึงจะแก้ไขการตั้งค่านี้ได้"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"ปิดใช้โดยผู้ดูแลระบบไอที"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"ปิดใช้โดยโหมดการปกป้องขั้นสูง"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"ค่ากำหนด USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"ควบคุม USB โดย"</string>
@@ -5799,10 +5794,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> โดย <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"แอปจะรีสตาร์ทเมื่อคุณเปลี่ยนสัดส่วนการแสดงผล การเปลี่ยนแปลงที่ไม่ได้บันทึกไว้อาจหายไป บางแอปอาจยังไม่ได้รับการปรับให้เหมาะกับทุกสัดส่วนการแสดงผล"</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"ประสบการณ์"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"เกมแพด"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"เซ็นเซอร์ลายนิ้วมือ"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"การแจ้งเตือนด้วยแฟลช"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"เกี่ยวกับการแจ้งเตือนด้วยแฟลช"</string>
@@ -6158,7 +6151,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"หน้า Landing Page ของดาวเทียม"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"ลองใช้เดโม"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"ดูวิธีการทำงาน"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"เมื่อไม่มีเครือข่ายมือถือหรือ Wi-Fi โทรศัพท์จะเชื่อมต่อกับดาวเทียมโดยอัตโนมัติ โปรดอยู่ในพื้นที่ที่มองเห็นท้องฟ้าได้อย่างชัดเจนเพื่อรับการเชื่อมต่อที่ดีที่สุด โดยโทรศัพท์จะเชื่อมต่อกับเครือข่ายมือถืออีกครั้งเมื่อมีให้ใช้งาน การโทรผ่านดาวเทียมไม่พร้อมใช้งาน การโทรฉุกเฉินอาจยังเชื่อมต่ออยู่"</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"โปรดอยู่ในพื้นที่ที่มองเห็นท้องฟ้าได้อย่างชัดเจนเพื่อรับการเชื่อมต่อที่ดีที่สุด โดยโทรศัพท์จะเชื่อมต่อกับเครือข่ายมือถืออีกครั้งเมื่อมีให้ใช้งาน การโทรผ่านดาวเทียมไม่พร้อมใช้งาน การโทรฉุกเฉินอาจยังเชื่อมต่ออยู่"</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"ข้อมูลเพิ่มเติมเกี่ยวกับการเชื่อมต่อผ่านดาวเทียม"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"เปิดเดโมของ SOS ดาวเทียม"</string>
@@ -6169,24 +6163,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"เพิ่มการ์ด"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"พรอมต์ของการ์ดดาวเทียม"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"ดาวเทียมไม่พร้อมใช้งาน"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"สัญญาณดาวเทียมไม่พร้อมใช้งานขณะที่คุณเชื่อมต่อกับเครือข่ายมือถือหรือ Wi-Fi"</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"การเชื่อมต่อผ่านดาวเทียมไม่พร้อมใช้งานในประเทศหรือภูมิภาคนี้"</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"การเชื่อมต่อผ่านดาวเทียมไม่พร้อมใช้งานในขณะนี้ โปรดลองอีกครั้งในภายหลัง"</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"แพ็กเกจมือถือของคุณไม่ครอบคลุมการใช้สัญญาณดาวเทียม โปรดติดต่อขอความช่วยเหลือจากผู้ให้บริการ"</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"แอปรับส่งข้อความเริ่มต้นของคุณต้องเป็น Google Messages จึงจะใช้การรับส่งข้อความผ่านดาวเทียมได้"</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"ผู้ให้บริการเปิดใช้การเชื่อมต่อผ่านดาวเทียม ดูข้อมูลเพิ่มเติมได้จากการตั้งค่าดาวเทียมของผู้ให้บริการ"</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"ดูพื้นที่ให้บริการ"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"เปลี่ยนแอปเริ่มต้น"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"ดูการตั้งค่าของผู้ให้บริการ"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

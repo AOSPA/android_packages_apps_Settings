@@ -112,6 +112,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
         windowManager.addView(
             view,
             WindowManager.LayoutParams().also {
+                it.title = "display#$displayId show_wallpaper window"
                 it.width = 1
                 it.height = 1
                 it.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
@@ -121,6 +122,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
                 it.format = PixelFormat.TRANSLUCENT
             },
         )
+        Log.d(TAG, "Added wallpaper window for display#$displayId")
         return RevealedWallpaper(display.displayId, view, windowManager)
     }
 
