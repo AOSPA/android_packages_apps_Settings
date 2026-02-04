@@ -27,7 +27,6 @@ import android.provider.Settings
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
-import android.telephony.satellite.SatelliteManager
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -59,8 +58,6 @@ import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
-import org.robolectric.shadow.api.Shadow
-import org.robolectric.shadows.ShadowSatelliteManager
 import org.robolectric.shadows.ShadowSubscriptionManager
 import org.robolectric.util.ReflectionHelpers
 
@@ -70,7 +67,6 @@ class SatelliteLandingPageFragmentTest {
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     private lateinit var context: Application
-    private lateinit var shadowSatelliteManager: ShadowSatelliteManager
     private val SUB_ID = 1
     private val APP1_PACKAGE = "com.app1"
     private val APP1_NAME = "App1"
@@ -99,8 +95,6 @@ class SatelliteLandingPageFragmentTest {
         context.setTheme(R.style.Theme_Settings)
 
         // Mock System Services
-        shadowSatelliteManager =
-            Shadow.extract(context.getSystemService(SatelliteManager::class.java))
         ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
         `when`(subInfo.subscriptionId).thenReturn(SUB_ID)
         val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
@@ -444,7 +438,6 @@ class SatelliteLandingPageFragmentTest {
 
     private fun setLteNtnSupported(isSupported: Boolean) {
         val reasons = if (isSupported) emptySet() else setOf(1)
-        shadowSatelliteManager.setAttachRestrictionReasonsForCarrier(SUB_ID, reasons)
         val config =
             PersistableBundle().apply {
                 putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, isSupported)
