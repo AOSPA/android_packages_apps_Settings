@@ -66,6 +66,7 @@ public class DreamPickerController extends BasePreferenceController {
      * auto-scrolling will be triggered.
      */
     private static final float SCROLL_THRESHOLD_FRACTION = 0.1f;
+    private static final long SCROLL_NOT_STARTED = Long.MIN_VALUE;
 
     private final DreamBackend mBackend;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -228,7 +229,8 @@ public class DreamPickerController extends BasePreferenceController {
     class DreamItemTouchHelperCallback extends ItemTouchHelper.Callback {
         private final RecyclerView mRecyclerView;
         @Nullable private RecyclerView mParentRecyclerView;
-        private long mDragScrollStartTimeInMs = Long.MIN_VALUE;
+        @Nullable private Rect mParentViewRect;
+        private long mDragScrollStartTimeInMs = SCROLL_NOT_STARTED;
 
         DreamItemTouchHelperCallback(@NonNull RecyclerView recyclerView) {
             super();
@@ -258,17 +260,21 @@ public class DreamPickerController extends BasePreferenceController {
             if (viewHolder != null && actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
                 viewHolder.itemView.setActivated(true);
                 mParentRecyclerView = findParentRecyclerView(mRecyclerView);
+                if (mParentRecyclerView != null) {
+                    mParentViewRect = new Rect();
+                    mParentRecyclerView.getGlobalVisibleRect(mParentViewRect);
+                }
             }
         }
 
         @Nullable
         private RecyclerView findParentRecyclerView(RecyclerView view) {
-            ViewParent parent = view.getParent();
-            while (parent != null) {
-                if (parent instanceof RecyclerView) {
-                    return (RecyclerView) parent;
+            ViewParent viewParent = view.getParent();
+            while (viewParent != null) {
+                if (viewParent instanceof RecyclerView) {
+                    return (RecyclerView) viewParent;
                 }
-                parent = parent.getParent();
+                viewParent = viewParent.getParent();
             }
             return null;
         }
@@ -288,18 +294,16 @@ public class DreamPickerController extends BasePreferenceController {
 
         private void scrollIfNecessary(
                 @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-            if (mParentRecyclerView == null) {
+            if (mParentRecyclerView == null || mParentViewRect == null) {
                 return;
             }
 
             final View itemView = viewHolder.itemView;
             final Rect itemViewRect = new Rect();
             itemView.getGlobalVisibleRect(itemViewRect);
-            final Rect parentViewRect = new Rect();
-            mParentRecyclerView.getGlobalVisibleRect(parentViewRect);
 
-            final int relativeTop = itemViewRect.top - parentViewRect.top;
-            final int relativeBottom = itemViewRect.bottom - parentViewRect.top;
+            final int relativeTop = itemViewRect.top - mParentViewRect.top;
+            final int relativeBottom = itemViewRect.bottom - mParentViewRect.top;
 
             final int parentHeight = mParentRecyclerView.getHeight();
             final int scrollThreshold = (int) (parentHeight * SCROLL_THRESHOLD_FRACTION);
@@ -311,19 +315,18 @@ public class DreamPickerController extends BasePreferenceController {
                 recyclerView.getGlobalVisibleRect(innerRecyclerViewRect);
                 // Positive when the inner RecyclerView is above the parent.
                 final int scrollBottomOvershoot =
-                    parentViewRect.bottom - innerRecyclerViewRect.bottom;
+                    mParentViewRect.bottom - innerRecyclerViewRect.bottom;
                 if (scrollBottomOvershoot > 0) {
                     // "Brake" when we're reaching the bottom of the inner RecyclerView.
                     // We don't want to scroll down beyond the bottom of the inner RecyclerView.
                     outOfBounds = Math.max(0, outOfBounds - scrollBottomOvershoot);
                 }
-
             } else if (relativeTop < scrollThreshold) {
                 outOfBounds = relativeTop - scrollThreshold;
                 final Rect innerRecyclerViewRect = new Rect();
                 recyclerView.getGlobalVisibleRect(innerRecyclerViewRect);
                  // Negative when the inner RecyclerView is below the parent.
-                final int scrollTopOvershoot = parentViewRect.top - innerRecyclerViewRect.top;
+                final int scrollTopOvershoot = mParentViewRect.top - innerRecyclerViewRect.top;
                 if (scrollTopOvershoot < 0) {
                     // "Brake" when we're reaching the top of the inner RecyclerView.
                     // We don't want to scroll up beyond the top of the inner RecyclerView.
@@ -334,10 +337,10 @@ public class DreamPickerController extends BasePreferenceController {
             int scrollAmount = 0;
             if (outOfBounds != 0) {
                 final long currentTimeMs = System.currentTimeMillis();
-                final long scrollDurationMs = mDragScrollStartTimeInMs == Long.MIN_VALUE
+                final long scrollDurationMs = mDragScrollStartTimeInMs == SCROLL_NOT_STARTED
                         ? 0
                         : currentTimeMs - mDragScrollStartTimeInMs;
-                if (mDragScrollStartTimeInMs == Long.MIN_VALUE) {
+                if (mDragScrollStartTimeInMs == SCROLL_NOT_STARTED) {
                     // Start accelerating for interpolateOutOfBoundsScroll.
                     mDragScrollStartTimeInMs = currentTimeMs;
                 }
@@ -355,7 +358,7 @@ public class DreamPickerController extends BasePreferenceController {
                 });
             } else {
                 // Reset the scroll start time to reset acceleration.
-                mDragScrollStartTimeInMs = Long.MIN_VALUE;
+                mDragScrollStartTimeInMs = SCROLL_NOT_STARTED;
             }
         }
 
@@ -395,7 +398,8 @@ public class DreamPickerController extends BasePreferenceController {
                 mAdapter.notifyItemRangeChanged(0, mSelectedDreams.size());
             }
             mParentRecyclerView = null;
-            mDragScrollStartTimeInMs = Long.MIN_VALUE;
+            mParentViewRect = null;
+            mDragScrollStartTimeInMs = SCROLL_NOT_STARTED;
         }
 
         private void commitReordering() {
@@ -410,8 +414,7 @@ public class DreamPickerController extends BasePreferenceController {
 
             // Rebuild mDreamInfos according to the displayed order in the adapter.
             mDreamInfos.clear();
-            mDreamInfos.addAll(
-                items.stream().map(DreamItem::getDreamInfo).collect(Collectors.toList()));
+            items.stream().map(DreamItem::getDreamInfo).forEach(mDreamInfos::add);
 
             commitReorderingForSelectedDreams();
         }
@@ -421,9 +424,10 @@ public class DreamPickerController extends BasePreferenceController {
         // Since active items are at the top and we only reordered active items,
         // we can just iterate and update order.
         // Also update mSelectedDreams.
-        mSelectedDreams = mDreamInfos.stream()
+        mSelectedDreams.clear();
+        mDreamInfos.stream()
                 .filter(d -> d.isActive)
-                .collect(Collectors.toList());
+                .forEach(mSelectedDreams::add);
 
         // Update order in objects
         for (int i = 0; i < mSelectedDreams.size(); i++) {
