@@ -30,11 +30,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.internal.util.ArrayUtils;
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoController;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
 import com.android.settings.fuelgauge.batteryusage.BatteryEvent;
 import com.android.settings.fuelgauge.batteryusage.DataProcessor;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.ArrayList;
@@ -166,6 +169,15 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public String getOldEstimateDebugString(String timeRemaining) {
+        return null;
+    }
+
+    @Override
+    @Nullable
+    public BatteryAdvanceInfoController getBatteryAdvanceInfoController(
+            Context context,
+            Lifecycle lifecycle,
+            InstrumentedPreferenceFragment fragment) {
         return null;
     }
 

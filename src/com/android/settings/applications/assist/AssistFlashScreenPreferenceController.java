@@ -61,6 +61,9 @@ public class AssistFlashScreenPreferenceController extends AbstractPreferenceCon
 
     @Override
     public boolean isAvailable() {
+        if (android.permission.flags.Flags.assistSettingsPrivacyImprovementsEnabled()) {
+            return false;
+        }
         return getCurrentAssist() != null && allowDisablingAssistDisclosure();
     }
 

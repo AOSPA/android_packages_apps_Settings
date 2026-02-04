@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 The Android Open Source Project
+ * Copyright (C) 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-package com.android.settings.accounts;
+package com.android.settings.accounts
 
-import android.accounts.Account;
-import android.content.Context;
+import android.accounts.Account
+import android.content.Context
 
-public interface AccountFeatureProvider {
-    String getAccountType();
-    Account[] getAccounts(Context context);
+class AccountFeatureProviderImpl : AccountFeatureProvider {
+    override fun getAccountType(): String? {
+        return null
+    }
+
+    override fun getAccounts(context: Context): Array<Account> {
+        return emptyArray()
+    }
 }

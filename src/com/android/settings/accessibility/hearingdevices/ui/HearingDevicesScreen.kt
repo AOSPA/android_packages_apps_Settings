@@ -26,6 +26,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import com.android.internal.accessibility.AccessibilityShortcutController.ACCESSIBILITY_HEARING_AIDS_COMPONENT_NAME
 import com.android.settings.R
@@ -41,10 +42,12 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.bluetooth.BluetoothCallback
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
+import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants
 import com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_LEFT
 import com.android.settingslib.bluetooth.HearingAidInfo.DeviceSide.SIDE_RIGHT
 import com.android.settingslib.bluetooth.LocalBluetoothManager
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager
+import com.android.settingslib.flags.Flags as SettingsLibFlags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -166,6 +169,30 @@ open class HearingDevicesScreen(context: Context) :
                 +AddDevicePreference(context)
             }
             +SavedHearingDevicePreferenceCategory(metricsCategory)
+            if (SettingsLibFlags.hearingDevicesGranularOutputRouting()) {
+                +HearingDeviceRoutingPreferenceCategory() += {
+                    +HearingDeviceAudioRoutingSwitchPreference(
+                        context,
+                        "hearing_device_notification_routing",
+                        Settings.Secure.HEARING_AID_NOTIFICATION_ROUTING,
+                        R.string.accessibility_hearing_device_notification_routing_title,
+                        R.string.accessibility_hearing_device_routing_hearing_device_summary,
+                        R.string.accessibility_hearing_device_routing_device_speaker_summary,
+                        R.string.hearing_device_notification_routing_purpose,
+                        HearingAidAudioRoutingConstants.NOTIFICATION_ROUTING_ATTRIBUTES,
+                    )
+                    +HearingDeviceAudioRoutingSwitchPreference(
+                        context,
+                        "hearing_device_ringtone_alarm_routing",
+                        Settings.Secure.HEARING_AID_RINGTONE_ROUTING,
+                        R.string.accessibility_hearing_device_ringtone_alarm_routing_title,
+                        R.string.accessibility_hearing_device_routing_duplicate_both_summary,
+                        R.string.accessibility_hearing_device_routing_device_speaker_summary,
+                        R.string.hearing_device_ringtone_alarm_routing_purpose,
+                        HearingAidAudioRoutingConstants.RINGTONE_ROUTING_ATTRIBUTES,
+                    )
+                }
+            }
             +HearingDeviceOptionsPreferenceCategory() += {
                 +AudioRoutingPreference()
                 +HearingDeviceShortcutPreference(context, metricsCategory)
@@ -235,6 +262,15 @@ open class HearingDevicesScreen(context: Context) :
                 metricsCategory,
             )
         }
+    }
+
+    class HearingDeviceRoutingPreferenceCategory(
+        key: String = "hearing_routing_category",
+        purpose: Int = R.string.hearing_device_audio_routing_purpose,
+        title: Int = R.string.accessibility_hearing_device_routing_title,
+    ) : PreferenceCategory(key, purpose, title), PreferenceAvailabilityProvider {
+        override fun isAvailable(context: Context): Boolean =
+            SettingsLibFlags.hearingDevicesGranularOutputRouting()
     }
 
     class HearingDeviceOptionsPreferenceCategory(

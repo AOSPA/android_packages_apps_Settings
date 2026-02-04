@@ -824,11 +824,11 @@
 </xliff:g>Pembayaran nirsentuh tidak akan tersedia.<xliff:g id="EMPTY_LINE_1">
 
 </xliff:g>Wallet, aplikasi pembayaran, dan aplikasi lainnya yang memerlukan autentikasi mungkin tidak berfungsi dengan baik."</string>
-    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Kunci layar dan &amp; Buka dengan Sidik Jari &amp; Wajah akan dihapus.<xliff:g id="EMPTY_LINE_0">
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" msgid="1574263040292024543">"Kunci layar, Buka dengan Wajah, dan Buka dengan Sidik Jari akan dihapus.<xliff:g id="EMPTY_LINE_0">
 
 </xliff:g>Pembayaran nirsentuh tidak akan tersedia.<xliff:g id="EMPTY_LINE_1">
 
-</xliff:g>Wallet, aplikasi pembayaran, dan aplikasi lainnya yang memerlukan autentikasi mungkin tidak berfungsi dengan baik."</string>
+</xliff:g>Wallet, aplikasi pembayaran, dan aplikasi lain yang perlu autentikasi mungkin tidak berfungsi dengan baik."</string>
     <string name="unlock_disable_frp_warning_ok" msgid="6173427638951230842">"Hapus"</string>
     <string name="unlock_footer_high_complexity_requested" msgid="4471274783909915352">"<xliff:g id="APP_NAME">%1$s</xliff:g> merekomendasikan PIN atau sandi yang kuat, dan mungkin tidak berfungsi seperti yang diharapkan tanpa salah satunya"</string>
     <string name="unlock_footer_medium_complexity_requested" msgid="5515870066751600640">"<xliff:g id="APP_NAME">%1$s</xliff:g> merekomendasikan PIN atau sandi baru, dan mungkin tidak berfungsi seperti yang diharapkan tanpa salah satunya"</string>
@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Gunakan sebagai layar terpisah"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Cerminkan layar bawaan"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Tampilkan dialog koneksi"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"Gunakan HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"Memungkinkan rentang warna yang lebih luas dan highlight yang lebih terang"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Layar eksternal tidak terhubung"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotasi"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standar"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Tekan Spasi dua kali untuk memasukkan \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Tampilkan sandi"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Tampilkan karakter sejenak saat Anda mengetik"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Pemeriksa ejaan ini mungkin dapat mengumpulkan semua teks yang Anda ketik, termasuk data pribadi seperti sandi dan nomor kartu kredit. Pemeriksa ejaan ini berasal dari aplikasi <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Gunakan pemeriksa ejaan ini?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Setelan"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Bahasa"</string>
@@ -2590,7 +2600,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Mengaktifkan tema gelap untuk perangkat dan aplikasi yang mendukung tema gelap"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Diperluas"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema gelap yang diperluas"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Otomatis menerapkan tema gelap ke sebagian besar aplikasi yang tidak mendukungnya, sehingga membantu meningkatkan aksesibilitas."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Otomatis menerapkan tema gelap ke sebagian besar aplikasi yang tidak mendukungnya, sehingga membantu meningkatkan aksesibilitas"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"paksa inversi, inversi warna, kontras"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema gelap yang diperluas"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Setelan tema gelap yang diperluas"</string>
@@ -2660,7 +2670,7 @@
     <string name="autoclick_revert_to_left_click_summary" msgid="9207568192335942225">"Setelah Anda menggunakan tindakan lain, klik otomatis akan otomatis kembali menjadi klik kiri"</string>
     <string name="accessibility_autoclick_navigation_title" msgid="1577786826651016069">"Klik otomatis berfungsi optimal dengan navigasi 3 tombol"</string>
     <string name="accessibility_autoclick_navigation_message" msgid="4985375526457764240">"Untuk kembali, membuka Layar utama, dan beralih aplikasi dengan mudah saat menggunakan klik otomatis, gunakan navigasi 3 tombol, bukan navigasi gestur"</string>
-    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Pertahankan navigasi gestur"</string>
+    <string name="accessibility_autoclick_keep_gesture_navigation" msgid="5403212927837555942">"Tetap gunakan navigasi gestur"</string>
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"Setelan navigasi"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"Getaran &amp; haptik"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"Kontrol kekuatan getaran untuk penggunaan yang berbeda"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Melihat penggunaan selama 24 jam terakhir"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Lihat penggunaan sejak terakhir penuh"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Penggunaan baterai aplikasi"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detail penggunaan"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Perangkat"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"Keyboard, touchpad, layar, suara"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Layar"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Suara"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Tidak tersedia karena NFC nonaktif"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Untuk menggunakannya, instal aplikasi pembayaran terlebih dahulu"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplikasi baru-baru ini, aplikasi default"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, pembaca"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"keyboard, haptic, getar,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"layar eksternal, layar terhubung, layar diperluas, layar kedua, layar bawaan, atur layar, cermin, ukuran tampilan, rotasi, resolusi, kecepatan refresh"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume dan getaran"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume media"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volume Google Cast"</string>
@@ -4390,12 +4394,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Mulai ulang"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Lain kali"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Pelajari lebih lanjut Perlindungan memori lanjutan."</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Diagnostik Android OS"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"Memvalidasi build OS"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"diagnostik, transparansi, biner"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Profil kerja ini dikelola oleh:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Dikelola oleh <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Buka secara default"</string>
@@ -4516,18 +4517,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Konfigurasi USB default"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opsi daya"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opsi transfer file"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Perlindungan Akses Data"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Izinkan Tunneling PCI"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Jika diaktifkan, periferal USB dan Thunderbolt dapat membuat tunnel PCI dan mengakses memori sistem"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Harus menjadi pengguna admin untuk mengubah setelan ini"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Dinonaktifkan oleh admin IT Anda"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Dinonaktifkan oleh Mode Perlindungan Lanjutan"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferensi USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB dikontrol oleh"</string>
@@ -5799,10 +5794,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> kali <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Aplikasi akan dimulai ulang saat Anda mengubah rasio aspek. Anda mungkin akan kehilangan perubahan yang belum disimpan. Beberapa aplikasi mungkin tidak dioptimalkan untuk rasio aspek tertentu."</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Pengalaman"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor sidik jari"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notifikasi flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Tentang notifikasi flash"</string>
@@ -6158,7 +6151,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Halaman Landing Satelit"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Coba demo"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Lihat cara kerjanya"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"Saat Anda tidak memiliki jaringan seluler atau Wi-Fi, ponsel akan otomatis terhubung ke satelit. Untuk koneksi terbaik, pastikan langit terlihat jelas tanpa terhalang. Ponsel Anda akan terhubung kembali ke jaringan seluler jika tersedia. Panggilan satelit tidak tersedia. Panggilan darurat masih dapat terhubung."</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Untuk koneksi terbaik, pastikan langit terlihat jelas tanpa terhalang. Ponsel Anda akan terhubung kembali ke jaringan seluler jika tersedia. Panggilan satelit tidak tersedia. Panggilan darurat masih dapat terhubung."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Selengkapnya tentang konektivitas satelit"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Membuka demo SOS via satelit"</string>
@@ -6169,24 +6163,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"Tambahkan kartu"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Perintah Kartu Satelit"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satelit tidak tersedia"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Cakupan satelit tidak tersedia saat Anda terhubung ke jaringan seluler atau Wi-Fi."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Konektivitas satelit tidak tersedia di negara atau wilayah ini"</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Konektivitas satelit saat ini tidak tersedia. Coba lagi nanti."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Paket seluler Anda tidak termasuk cakupan satelit. Hubungi operator untuk mendapatkan bantuan."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Untuk menggunakan fitur Pengiriman pesan via satelit, Google Message harus menjadi aplikasi pesan default Anda."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Konektivitas satelit diaktifkan oleh operator Anda. Pelajari lebih lanjut dari setelan satelit operator Anda."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Lihat lokasi yang tersedia"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Ubah aplikasi default"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Lihat setelan operator"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

@@ -162,7 +162,7 @@ public class RegionalPreferencesDataUtils {
         return builder.build();
     }
 
-    static void updateRegion(Locale selectedLocale) {
+    static void updateSelectedLocale(Locale selectedLocale) {
         Locale[] newLocales = getUpdatedLocales(selectedLocale);
         LocaleList localeList = new LocaleList(newLocales);
         LocaleList.setDefault(localeList);

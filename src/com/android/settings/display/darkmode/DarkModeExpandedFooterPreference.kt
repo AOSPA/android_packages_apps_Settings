@@ -37,6 +37,9 @@ class DarkModeExpandedFooterPreference :
     override val purpose: Int
         get() = R.string.dark_theme_expanded_footer_purpose
 
+    override val title: Int
+        get() = R.string.accessibility_expanded_dark_theme_footer
+
     override fun isAvailable(context: Context): Boolean = Flags.forceInvertColor()
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

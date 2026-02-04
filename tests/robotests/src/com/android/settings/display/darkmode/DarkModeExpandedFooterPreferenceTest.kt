@@ -65,6 +65,11 @@ class DarkModeExpandedFooterPreferenceTest {
     }
 
     @Test
+    fun title() {
+        assertThat(preference.title).isEqualTo(R.string.accessibility_expanded_dark_theme_footer)
+    }
+
+    @Test
     fun isIndexable() {
         assertThat(preference.indexable).isFalse()
     }
@@ -91,6 +96,7 @@ class DarkModeExpandedFooterPreferenceTest {
                 object : FooterPreferenceMetadata {
                     override val key: String
                         get() = DarkModeCustomModesFooterPreference.KEY
+
                     override val purpose: Int
                         get() = R.string.dark_theme_custom_bedtime_footer_purpose
                 }

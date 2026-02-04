@@ -116,4 +116,23 @@ public class AutoSyncPersonalDataPreferenceControllerTest {
 
         assertThat(mPreference.isVisible()).isTrue();
     }
+
+    @Test
+    public void displayPreference_forceDisabled_shouldNotDisplay() {
+        // Instantiate controller with forceDisable = true
+        mController = new AutoSyncPersonalDataPreferenceController(mContext, mFragment, true);
+
+        // Setup conditions that would normally make the preference available
+        List<UserInfo> infos = new ArrayList<>();
+        infos.add(new UserInfo(1, "user 1", 0));
+        infos.add(new UserInfo(2, "user 2", 0));
+        when(mUserManager.isManagedProfile()).thenReturn(false);
+        when(mUserManager.isRestrictedProfile()).thenReturn(false);
+        when(mUserManager.getProfiles(anyInt())).thenReturn(infos);
+
+        mController.displayPreference(mScreen);
+
+        // Verify that the preference is not visible because it's force-disabled
+        assertThat(mPreference.isVisible()).isFalse();
+    }
 }

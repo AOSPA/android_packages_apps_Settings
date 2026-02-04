@@ -29,6 +29,7 @@ import android.content.pm.ResolveInfo
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Looper
 import android.os.Process
 import android.os.UserHandle
 import android.platform.test.annotations.DisableFlags
@@ -197,6 +198,8 @@ class SupervisionDashboardScreenTest {
             val webContentFilterPreference =
                 fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
+            shadowOf(Looper.getMainLooper()).idle()
+
             assertThat(webContentFilterPreference.summary).isEqualTo(initialSummary)
         }
     }
@@ -215,6 +218,8 @@ class SupervisionDashboardScreenTest {
             val webContentFilterPreference =
                 fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
+            shadowOf(Looper.getMainLooper()).idle()
+
             assertThat(webContentFilterPreference.summary).isEqualTo(initialSummary)
 
             // Update the preference summary.
@@ -224,6 +229,8 @@ class SupervisionDashboardScreenTest {
 
             // refreshDashboardTiles should restore the value from the data map.
             dashboardFragment.refreshDashboardTiles("test")
+
+            shadowOf(Looper.getMainLooper()).idle()
 
             assertThat(webContentFilterPreference.summary).isEqualTo(initialSummary)
         }
