@@ -16,7 +16,9 @@
 
 package com.android.settings.safetycenter
 
+import android.app.job.JobScheduler
 import android.content.Context
+import android.content.Intent
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.Flags
 import android.os.UserManager
@@ -33,6 +35,7 @@ import android.safetycenter.SafetySourceIssue
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
+import com.android.settings.flags.Flags.FLAG_SCHEDULE_WATCH_RANGING_AVAILABILITY_WITH_JOB_SCHEDULER
 import com.android.settings.safetycenter.IdentityCheckSafetySource.Companion.ACTION_ISSUE_CARD_SHOW_DETAILS
 import com.android.settings.safetycenter.IdentityCheckSafetySource.Companion.ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS
 import com.android.settings.safetycenter.IdentityCheckSafetySource.Companion.ACTION_ISSUE_NOTIFICATION_CLICKED
@@ -49,6 +52,7 @@ import org.mockito.Mock
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.atLeastOnce
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
@@ -74,12 +78,14 @@ class IdentityCheckSafetySourceTest {
     private val safetySourceDataArgumentCaptor = argumentCaptor<SafetySourceData>()
 
     private lateinit var identityCheckSafetySource: IdentityCheckSafetySource
+    private lateinit var jobScheduler: JobScheduler
 
     @Before
     fun setUp() {
         SafetyCenterManagerWrapper.sInstance = safetyCenterManagerWrapper
         identityCheckSafetySource = IdentityCheckSafetySource()
         setIdentityCheckToggleStatus(true)
+        jobScheduler = applicationContext.getSystemService(JobScheduler::class.java)
         whenever(biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG))
             .thenReturn(BiometricManager.BIOMETRIC_SUCCESS)
         whenever(userManager.isProfile(applicationContext.userId)).thenReturn(false)
@@ -88,6 +94,18 @@ class IdentityCheckSafetySourceTest {
     @After
     fun tearDown() {
         SafetyCenterManagerWrapper.sInstance = null
+    }
+
+    @Test
+    @RequiresFlagsEnabled(FLAG_SCHEDULE_WATCH_RANGING_AVAILABILITY_WITH_JOB_SCHEDULER)
+    fun onReceive_whenBootComplete_schedulesWatchRangingJobService() {
+        identityCheckSafetySource.onReceive(
+            applicationContext,
+            Intent(Intent.ACTION_BOOT_COMPLETED),
+        )
+
+        assertThat(jobScheduler.getPendingJob(IdentityCheckSafetySource.WATCH_RANGING_JOB_ID))
+            .isNotNull()
     }
 
     @Test
@@ -503,7 +521,7 @@ class IdentityCheckSafetySourceTest {
 
         observer.onChange(false, uri)
 
-        verify(safetyCenterManagerWrapper)
+        verify(safetyCenterManagerWrapper, atLeastOnce())
             .setSafetySourceData(
                 eq(applicationContext),
                 eq(IdentityCheckSafetySource.SAFETY_SOURCE_ID),

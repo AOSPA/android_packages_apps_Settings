@@ -17,7 +17,10 @@ package com.android.settings.safetycenter
 
 import android.app.ActivityManager
 import android.app.PendingIntent
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
 import android.content.BroadcastReceiver
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.database.ContentObserver
@@ -53,24 +56,39 @@ import java.util.concurrent.Executors
  */
 class IdentityCheckSafetySource : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        WatchContentObserver(context).registerContentObserver()
+        if (com.android.settings.flags.Flags.scheduleWatchRangingAvailabilityWithJobScheduler()) {
+            if (intent.action == Intent.ACTION_BOOT_COMPLETED) {
+                val jobScheduler = context.getSystemService(JobScheduler::class.java)
+                val componentName =
+                    ComponentName(context.applicationContext, WatchRangingJobService::class.java)
 
-        if (intent.action?.equals(Intent.ACTION_BOOT_COMPLETED) == true) {
-            val pendingResult = goAsync()
-            val watchRangingFuture = context.getWatchRangingAvailabilityFuture()
-            watchRangingFuture.addListener(
-                {
-                    try {
-                        val watchRangingSupported = watchRangingFuture.get()
-                        context.setWatchRangingSupported(watchRangingSupported)
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Error getting watch ranging support: ${e.message}", e)
-                    } finally {
-                        pendingResult?.finish()
-                    }
-                },
-                Executors.newSingleThreadExecutor(),
-            )
+                val jobInfo = JobInfo.Builder(WATCH_RANGING_JOB_ID, componentName).build()
+
+                val result = jobScheduler.schedule(jobInfo)
+                if (result != JobScheduler.RESULT_SUCCESS) {
+                    Log.w(TAG, "Watch Ranging Job could not be scheduled.")
+                }
+            }
+        } else {
+            WatchContentObserver(context).registerContentObserver()
+
+            if (intent.action?.equals(Intent.ACTION_BOOT_COMPLETED) == true) {
+                val pendingResult = goAsync()
+                val watchRangingFuture = context.getWatchRangingAvailabilityFuture()
+                watchRangingFuture.addListener(
+                    {
+                        try {
+                            val watchRangingSupported = watchRangingFuture.get()
+                            context.setWatchRangingSupported(watchRangingSupported)
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error getting watch ranging support: ${e.message}", e)
+                        } finally {
+                            pendingResult?.finish()
+                        }
+                    },
+                    Executors.newSingleThreadExecutor(),
+                )
+            }
         }
     }
 
@@ -84,6 +102,7 @@ class IdentityCheckSafetySource : BroadcastReceiver() {
             "com.android.settings.safetycenter.action.IDENTITY_CHECK_NOTIFICATION_CLICKED"
         const val ACTION_WATCH_ISSUE_NOTIFICATION_CLICKED =
             "com.android.settings.safetycenter.action.IDENTITY_CHECK_WATCH_NOTIFICATION_CLICKED"
+        const val WATCH_RANGING_JOB_ID = 1001
         private const val TAG = "ICSafetySource"
         private const val REQUEST_ID = 0
         private const val ISSUE_CARD_VIEW_DETAILS = 1
