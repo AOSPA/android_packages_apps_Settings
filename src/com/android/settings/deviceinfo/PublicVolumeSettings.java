@@ -16,6 +16,8 @@
 
 package com.android.settings.deviceinfo;
 
+import static com.android.settings.flags.Flags.enableRenameInPublicVolumeSettings;
+
 import android.app.ActivityManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
@@ -33,12 +35,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
+import com.android.settings.deviceinfo.storage.StorageRenameFragment;
 import com.android.settings.deviceinfo.storage.StorageUtils;
 import com.android.settings.deviceinfo.storage.StorageUtils.MountTask;
 import com.android.settings.deviceinfo.storage.StorageUtils.UnmountTask;
@@ -68,6 +72,7 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
     private UsageProgressBarPreference mSummary;
     private Preference mMount;
     private Preference mFormatPublic;
+    @Nullable private Preference mRename;
     private Button mUnmount;
     private final StorageEventListener mStorageListener = new StorageEventListener() {
         @Override
@@ -141,6 +146,10 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
         mUnmount.setText(R.string.storage_menu_unmount);
         mUnmount.setOnClickListener(mUnmountListener);
         mFormatPublic = buildAction(R.string.storage_menu_format_option);
+
+        if (enableRenameInPublicVolumeSettings()) {
+            mRename = buildAction(R.string.storage_menu_rename);
+        }
     }
 
     @Override
@@ -193,6 +202,10 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             mUnmount.setVisibility(View.GONE);
         }
         addPreference(mFormatPublic);
+
+        if (enableRenameInPublicVolumeSettings() && mRename != null) {
+            addPreference(mRename);
+        }
     }
 
     private void addPreference(Preference pref) {
@@ -235,6 +248,8 @@ public class PublicVolumeSettings extends SettingsPreferenceFragment {
             new MountTask(getActivity(), mVolume).execute();
         } else if (pref == mFormatPublic) {
             startActivity(intent);
+        } else if (enableRenameInPublicVolumeSettings() && pref == mRename) {
+            StorageRenameFragment.show(this, mVolume);
         }
 
         return super.onPreferenceTreeClick(pref);

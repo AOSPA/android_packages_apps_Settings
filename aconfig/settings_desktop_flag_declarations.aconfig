@@ -90,3 +90,10 @@ flag {
     description: "Controls whether to show Clear and Confirm buttons during password confirmation in Settings."
     bug: "436650475"
 }
+
+flag {
+    name: "enable_rename_in_public_volume_settings"
+    namespace: "documentsui"
+    description: "Controls whether to allow renaming via the PublicVolumeSettings fragment"
+    bug: "350615090"
+}
