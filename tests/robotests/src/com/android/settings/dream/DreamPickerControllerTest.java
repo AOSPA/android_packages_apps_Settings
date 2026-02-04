@@ -89,17 +89,18 @@ public class DreamPickerControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private DreamBackend mBackend;
-    private Context mContext;
     @Mock
     private PreferenceScreen mScreen;
-    private LayoutPreference mPreference;
     @Mock
     private RecyclerView mParentRecyclerView;
     @Mock
     private RecyclerView mInnerRecyclerView;
-    private RecyclerView.ViewHolder mViewHolder;
     @Mock
     private View mItemView;
+
+    private Context mContext;
+    private LayoutPreference mPreference;
+    private RecyclerView.ViewHolder mViewHolder;
 
     @Before
     public void setup() {
@@ -551,6 +552,7 @@ public class DreamPickerControllerTest {
         // Inner RV is not at the bottom yet, it is far below the parent's viewable area.
         setInnerRecyclerViewBounds(200, PARENT_HEIGHT + 200);
 
+        callback.onSelectedChanged(mViewHolder, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
                 ItemTouchHelper.ACTION_STATE_DRAG, true);
         ShadowLooper.runUiThreadTasks();
@@ -569,6 +571,7 @@ public class DreamPickerControllerTest {
         // Inner RV is not at the top yet, it is far above the parent's viewable area.
         setInnerRecyclerViewBounds(-200, PARENT_HEIGHT - 200);
 
+        callback.onSelectedChanged(mViewHolder, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
                 ItemTouchHelper.ACTION_STATE_DRAG, true);
         ShadowLooper.runUiThreadTasks();
@@ -588,6 +591,7 @@ public class DreamPickerControllerTest {
         setInnerRecyclerViewBounds(
             -PARENT_SCROLL_THRESHOLD, PARENT_HEIGHT - PARENT_SCROLL_THRESHOLD);
 
+        callback.onSelectedChanged(mViewHolder, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
                 ItemTouchHelper.ACTION_STATE_DRAG, true);
         ShadowLooper.runUiThreadTasks();
@@ -605,6 +609,7 @@ public class DreamPickerControllerTest {
         setInnerRecyclerViewBounds(
             PARENT_SCROLL_THRESHOLD, PARENT_HEIGHT + PARENT_SCROLL_THRESHOLD);
 
+        callback.onSelectedChanged(mViewHolder, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
                 ItemTouchHelper.ACTION_STATE_DRAG, true);
         ShadowLooper.runUiThreadTasks();
