@@ -29,7 +29,6 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
-import com.android.settings.media_drm.Flags;
 
 /**
  * The controller (in the Media Drm settings) enforces software secure crypto.
@@ -57,15 +56,13 @@ public class ForceSwSecureCryptoFallbackPreferenceController extends TogglePrefe
     @Override
     public void updateState(Preference preference) {
         boolean isEnable = false;
-        if (Flags.forceL3Enabled()) {
-            try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
-                String version = drm.getPropertyString(MediaDrm.PROPERTY_VERSION);
-                if (Integer.parseInt(version.split("\\.", 2)[0]) >= 19) {
-                    isEnable = true;
-                }
-            } catch (Exception ex) {
-                Log.e(TAG, "An exception occurred:", ex);
+        try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
+            String version = drm.getPropertyString(MediaDrm.PROPERTY_VERSION);
+            if (Integer.parseInt(version.split("\\.", 2)[0]) >= 19) {
+                isEnable = true;
             }
+        } catch (Exception ex) {
+            Log.e(TAG, "An exception occurred:", ex);
         }
 
         preference.setEnabled(isEnable);
