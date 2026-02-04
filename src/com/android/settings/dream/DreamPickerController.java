@@ -107,10 +107,10 @@ public class DreamPickerController extends BasePreferenceController {
             return;
         }
 
-        mAdapter = new DreamAdapter<>(R.layout.dream_preference_layout,
-                mDreamInfos.stream()
-                        .map(DreamItem::new)
-                        .collect(Collectors.toList()));
+        mAdapter = new DreamAdapter<>(
+                R.layout.dream_preference_layout,
+                mDreamInfos.stream().map(DreamItem::new).collect(Collectors.toList()),
+                /* allowMultiSelection= */ dreamsSwitcher());
 
         mAdapter.setEnabled(mBackend.isEnabled());
 
