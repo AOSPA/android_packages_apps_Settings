@@ -143,6 +143,7 @@ class SatelliteLandingPageViewModel(
         val isLocationEnabled: Boolean
         val isProvisioned: Boolean
         val isDefaultMessagingApp: Boolean
+        val isUserRestricted: Boolean
 
         if (isLteSupported == true) {
             // Branch A: LTE Mode
@@ -154,6 +155,10 @@ class SatelliteLandingPageViewModel(
             isEntitled =
                 !restrictions.contains(
                     SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_ENTITLEMENT
+                )
+            isUserRestricted =
+                restrictions.contains(
+                    SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_USER
                 )
             // Not tracked by attach restrictions
             isLocationEnabled = true
@@ -176,6 +181,7 @@ class SatelliteLandingPageViewModel(
                 )
             // Entitlement is not a disallowed reason in NB-IoT mode yet/handled differently
             isEntitled = true
+            isUserRestricted = false
         }
 
         _bannerState.value =
@@ -187,6 +193,7 @@ class SatelliteLandingPageViewModel(
                 isSatelliteEnabledByCarrier = isSatelliteEnabledByCarrier,
                 isProvisioned = isProvisioned,
                 isLocationEnabled = isLocationEnabled,
+                isUserRestricted = isUserRestricted,
             )
         Log.i(TAG, "Banner state: ${_bannerState.value}")
     }
@@ -296,4 +303,5 @@ data class SatelliteBannerState(
     val isSatelliteEnabledByCarrier: Boolean = false,
     val isProvisioned: Boolean = true,
     val isLocationEnabled: Boolean = true,
+    val isUserRestricted: Boolean = false,
 )
