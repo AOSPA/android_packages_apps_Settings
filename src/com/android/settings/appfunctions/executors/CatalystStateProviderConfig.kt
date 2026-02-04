@@ -244,7 +244,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = BatterySaverScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
             additionalDescription =
-                ". The Battery Saver screen allows users to set the device to Standard or Extreme Battery Saver mode. Users can also configure schedules and reminders for Battery Saver.",
+                "The Battery Saver screen allows users to set the device to Standard or Extreme Battery Saver mode. Users can also configure schedules and reminders for Battery Saver",
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LockScreenPreferenceScreen.KEY),
@@ -362,7 +362,7 @@ private fun getCatalystScreenConfigs() =
             enabled = true,
             screenKey = AmbientDisplayAlwaysOnPreferenceScreen.KEY,
             additionalDescription =
-                ". Always-on-display settings indicates whether the lock screen, including the time, is visible when the phone is off.",
+                "Always-on-display settings indicates whether the lock screen, including the time, is visible when the phone is off",
         ),
         PerScreenCatalystConfig(
             enabled = true,
@@ -388,7 +388,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = ConversationListScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
             additionalDescription =
-                ": Settings to manage and customize how conversations are displayed in notifications.",
+                "Settings to manage and customize how conversations are displayed in notifications",
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceAdminApiScreen.KEY),
@@ -432,7 +432,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = BubbleNotificationScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
             additionalDescription =
-                ": Settings to manage and customize how bubbles are displayed for notifications.",
+                "Settings to manage and customize how bubbles are displayed for notifications",
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ResetDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DisplayOverOtherAppsAppListScreen.KEY),
@@ -444,7 +444,7 @@ private fun getCatalystScreenConfigs() =
             enabled = true,
             screenKey = InteractAcrossProfilesAppListScreen.KEY,
             additionalDescription =
-                ": Apps that share permissions and can access each other's data between personal and work profiles.",
+                "Apps that share permissions and can access each other's data between personal and work profiles",
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = PictureInPictureAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiControlAppListScreen.KEY),
@@ -519,20 +519,20 @@ private fun getCatalystScreenConfigs() =
             enabled = true,
             screenKey = WifiDisplayScreen.KEY,
             additionalDescription =
-                ": Settings to configure Cast options to send screen or media to other devices.",
+                "Settings to configure Cast options to send screen or media to other devices",
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = AppsNotificationAccessScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
             additionalDescription =
-                ": Settings to manage apps that can read, reply and control notifications.",
+                "Settings to manage apps that can read, reply and control notifications",
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = PreviouslyConnectedDeviceScreen.KEY,
             additionalDescription =
-                ": Settings to show the list of previously connected Bluetooth devices.",
+                "Settings to show the list of previously connected Bluetooth devices",
         ),
         PerScreenCatalystConfig(
             enabled = true,
@@ -549,7 +549,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = DataUsageListScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
             additionalDescription =
-                ". This SIM data usage screen shows the amount of data each app has consumed from a specific SIM card.",
+                "This SIM data usage screen shows the amount of data each app has consumed from a specific SIM card",
         ),
         PerScreenCatalystConfig(
             enabled = true,
