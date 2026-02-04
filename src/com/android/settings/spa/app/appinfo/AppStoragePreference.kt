@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
+import com.android.settings.utils.HsuUtils
 import com.android.settings.applications.AppStorageSettings
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settingslib.spa.widget.preference.Preference
@@ -33,11 +34,27 @@ import com.android.settingslib.spaprivileged.template.app.getStorageSize
 fun AppStoragePreference(app: ApplicationInfo) {
     if (!app.hasFlag(ApplicationInfo.FLAG_INSTALLED)) return
     val context = LocalContext.current
+    val canControl = !android.multiuser.Flags.hsuAppManagement() ||
+            HsuUtils.canControlHsuApp(context, app)
+    val hsuWarningDialogPresenter = HsuUtils.rememberHsuAppWarningDialogPresenter {
+        startStorageSettingsActivity(context, app)
+    }
+
     Preference(
         model = object : PreferenceModel {
             override val title = stringResource(R.string.storage_settings_for_app)
             override val summary = getSummary(context, app)
-            override val onClick = { startStorageSettingsActivity(context, app) }
+            // Disable the preference if the user cannot control the HSU app (non-admin).
+            override val enabled = { canControl }
+            override val onClick = {
+                // For admins controlling HSU apps, show a warning dialog before proceeding.
+                if (android.multiuser.Flags.hsuAppManagement() &&
+                    HsuUtils.isHsuApp(context, app)) {
+                    hsuWarningDialogPresenter.open()
+                } else {
+                    startStorageSettingsActivity(context, app)
+                }
+            }
         },
         singleLineSummary = true,
     )
