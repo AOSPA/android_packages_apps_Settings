@@ -110,22 +110,24 @@ abstract class BaseDarkModeScreen(context: Context) :
                     key = "dark_theme_group",
                     purpose = R.string.dark_theme_group_purpose,
                     title = R.string.dark_theme_version_category,
-                ) += {
-                    val modeStorage = DarkThemeModeStorage(context)
-                    +StandardDarkModeSelectorPreference(modeStorage)
-                    +ExpandedDarkModeSelectorPreference(modeStorage)
-                }
+                ) +=
+                    {
+                        val modeStorage = DarkThemeModeStorage(context)
+                        +StandardDarkModeSelectorPreference(modeStorage)
+                        +ExpandedDarkModeSelectorPreference(modeStorage)
+                    }
             }
             +PreferenceCategory(
                 key = "display_category",
                 purpose = R.string.display_category_purpose,
                 title = R.string.dark_theme_timing_category,
-            ) += {
-                val uiModeManager = context.getSystemService(UiModeManager::class.java)
-                +DarkModeSchedulePreference(context)
-                +StartTimePreference(uiModeManager)
-                +EndTimePreference(uiModeManager)
-            }
+            ) +=
+                {
+                    val uiModeManager = context.getSystemService(UiModeManager::class.java)
+                    +DarkModeSchedulePreference(context)
+                    +StartTimePreference(uiModeManager)
+                    +EndTimePreference(uiModeManager)
+                }
             +DarkModePendingLocationFooterPreference()
             +DarkModeExpandedFooterPreference()
             +DarkModeCustomModesFooterPreference()
@@ -157,7 +159,9 @@ abstract class BaseDarkModeScreen(context: Context) :
         }
     }
 
-    override fun isEnabled(context: Context) = !context.isPowerSaveMode()
+    override fun isEnabled(context: Context) =
+        if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) true
+        else !context.isPowerSaveMode()
 
     override fun isIndexable(context: Context) =
         Flags.catalystDarkUiMode() && !context.isPowerSaveMode()
@@ -184,7 +188,7 @@ open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context) {
     override val key
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.dark_ui_mode_purpose
 
@@ -198,7 +202,7 @@ open class DarkModeScreenOnAccessibility(context: Context) : BaseDarkModeScreen(
     override val key
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.dark_ui_mode_accessibility_purpose
 

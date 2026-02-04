@@ -19,12 +19,13 @@ package com.android.settings.accessibility.extensions
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.PowerManager
 import com.android.internal.R
 import com.android.settingslib.widget.SetupWizardHelper
 
 fun Context.isWindowMagnificationSupported(): Boolean {
     return resources.getBoolean(R.bool.config_magnification_area) &&
-            packageManager.hasSystemFeature(PackageManager.FEATURE_WINDOW_MAGNIFICATION)
+        packageManager.hasSystemFeature(PackageManager.FEATURE_WINDOW_MAGNIFICATION)
 }
 
 fun Context.isInSetupWizard(): Boolean {
@@ -33,3 +34,5 @@ fun Context.isInSetupWizard(): Boolean {
     }
     return false
 }
+
+fun Context.isPowerSaveMode() = getSystemService(PowerManager::class.java)?.isPowerSaveMode == true

@@ -112,10 +112,19 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    fun isEnabled_isFalse() {
+    @DisableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOff_PowerSaveTrue_isFalse() {
         shadowPowerManager.setIsPowerSaveMode(true)
 
         assertThat(preferenceScreenCreator.isEnabled(context)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOn_PowerSaveTrue_isTrue() {
+        shadowPowerManager.setIsPowerSaveMode(true)
+
+        assertThat(preferenceScreenCreator.isEnabled(context)).isTrue()
     }
 
     @Test
@@ -204,4 +213,5 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     }
 }
 
-private data class TestMetadata(override val key: String, override val purpose: Int) : PreferenceMetadata
+private data class TestMetadata(override val key: String, override val purpose: Int) :
+    PreferenceMetadata

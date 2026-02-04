@@ -17,16 +17,25 @@
 package com.android.settings.display.darkmode
 
 import android.content.Context
+import android.os.PowerManager
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.accessibility.Flags
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(RobolectricTestRunner::class)
 class DarkModeMainSwitchPreferenceTest {
+    @get:Rule val mSetFlagsRule = SetFlagsRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val shadowPowerManager = shadowOf(context.getSystemService(PowerManager::class.java))!!
     private val mainSwitchPreference = DarkModeMainSwitchPreference(DarkModeStorage(context))
 
     @Test
@@ -42,5 +51,29 @@ class DarkModeMainSwitchPreferenceTest {
     @Test
     fun getTitle() {
         assertThat(mainSwitchPreference.title).isEqualTo(R.string.dark_theme_main_switch_title)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOff_PowerSaveTrue_isTrue() {
+        shadowPowerManager.setIsPowerSaveMode(true)
+
+        assertThat(mainSwitchPreference.isEnabled(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOn_PowerSaveFalse_isTrue() {
+        shadowPowerManager.setIsPowerSaveMode(false)
+
+        assertThat(mainSwitchPreference.isEnabled(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOn_PowerSaveTrue_isFalse() {
+        shadowPowerManager.setIsPowerSaveMode(true)
+
+        assertThat(mainSwitchPreference.isEnabled(context)).isFalse()
     }
 }
