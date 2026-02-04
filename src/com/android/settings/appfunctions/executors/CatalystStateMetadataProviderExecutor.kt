@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceTitle
+import com.android.settingslib.metadata.isUiOnlyPreference
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenMetadata
@@ -128,6 +129,9 @@ class CatalystStateMetadataProviderExecutor(
         preferencesHierarchy.forEach {
             val metadata = it.metadata
             val config = settingConfigMap[metadata.key]
+            // skip over UI-only preferences
+            if(metadata.isUiOnlyPreference(context))
+                return@forEach
             // skip over explicitly disabled preferences
             val metadataProto =
                 metadata.toProto(

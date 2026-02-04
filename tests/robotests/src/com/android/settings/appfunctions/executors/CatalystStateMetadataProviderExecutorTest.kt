@@ -25,6 +25,7 @@ import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.testutils.GraphTestUtils
+import com.android.settingslib.testutils.GraphTestUtils.createPersistentPreference
 import com.android.settingslib.testutils.GraphTestUtils.createScreen
 import com.android.settingslib.testutils.GraphTestUtils.createSimplePreference
 import com.android.settingslib.testutils.GraphTestUtils.setRegistryFactories
@@ -336,6 +337,144 @@ class CatalystStateMetadataProviderExecutorTest {
         assertThat(result.metadata).hasSize(1)
         assertThat(result.metadata[0].description).isEqualTo(
             context.getString(R.string.preference_screen_purpose)
+        )
+    }
+
+    @Test
+    fun execute_onEntireScreenConfig_returnsAllPreferencesAsDeviceStateItem() = runTest {
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig (
+                    screenKey = "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "preference_key_1",
+                                    purpose = R.string.preference_purpose
+                                )
+                            )
+                        ),
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "preference_key_2",
+                                    purpose = R.string.preference_purpose
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        // single screen
+        assertThat(result.metadata).hasSize(1)
+        // the screen itself and the 2 preferences
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(3)
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
+            "screen_key/screen_key"
+        )
+        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
+            "screen_key/preference_key_1"
+        )
+        assertThat(result.metadata[0].deviceStateItemsMetadata[2].key).isEqualTo(
+            "screen_key/preference_key_2"
+        )
+    }
+
+    @Test
+    fun execute_onScreenWithUiOnlyPreferences_returnsOnlyNonUiPreferencesAsDeviceStateItems() = runTest {
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig (
+                    screenKey = "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "ui_only_preference",
+                                    purpose = R.string.preference_purpose,
+                                    isUiOnly = true
+                                )
+                            )
+                        ),
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "preference_key_2",
+                                    purpose = R.string.preference_purpose
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        // single screen
+        assertThat(result.metadata).hasSize(1)
+        // the screen itself and the non-ui only preference
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(2)
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
+            "screen_key/screen_key"
+        )
+        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
+            "screen_key/preference_key_2"
+        )
+    }
+
+    @Test
+    fun execute_withUiOnlyPreferenceInConfig_DoesNotReturnItAsDeviceStateItem() = runTest {
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig (
+                    screenKey = "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "ui_only_preference",
+                                    purpose = R.string.preference_purpose,
+                                    isUiOnly = true
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("screen_key", listOf("ui_only_preference")),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        // single screen
+        assertThat(result.metadata).hasSize(1)
+        // the screen itself only
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
+            "screen_key/screen_key"
         )
     }
 
