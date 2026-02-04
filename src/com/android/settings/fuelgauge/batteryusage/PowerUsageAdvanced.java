@@ -340,7 +340,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         }
         mBatteryAdvanceInfoController.onBatteryUsageUpdated(
                 /* batteryDiffDataMap= */ mBatteryUsageMap,
-                /* index= */ selectedDailyIndex,
+                /* selectedDailyIndex= */ selectedDailyIndex,
                 /* description= */ selectedSlotText);
     }
 

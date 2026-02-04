@@ -1772,6 +1772,24 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Returns true if the device is in demo mode and should hide Modes settings.
+     */
+    public static boolean shouldHideModesInDemoMode(Context context) {
+        if (context == null) {
+            return false;
+        }
+        try {
+            return Flags.hideModesSettingInDemoMode() && UserManager.isDeviceInDemoMode(context)
+                && context.getResources().getBoolean(
+                    R.bool.config_hide_modes_setting_in_demo_mode);
+        } catch (Exception e) {
+            // Some tests may not setup context content resolver. Should not happen on real device.
+            Log.w(TAG, "Error getting demo mode status.");
+            return false;
+        }
+    }
+
+    /**
      * Returns true if the device is in demo mode and should hide dream settings.
      */
     public static boolean shouldHideDreamsInDemoMode(Context context) {

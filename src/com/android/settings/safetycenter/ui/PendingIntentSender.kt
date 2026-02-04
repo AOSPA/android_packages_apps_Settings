@@ -71,11 +71,13 @@ object PendingIntentSender {
         }
     }
 
-    private fun getTaskIdToSend(
-        context: Context,
-        safetySourceId: String,
-        launchTaskId: Int?,
-    ): Int? {
+    /**
+     * Determines the right task which can be used for sending an intent.
+     *
+     * If the {@param safetySourceId} is listed to be associated with the initial task, then the
+     * {@param launchTaskId} will be returned, otherwise {@code null} will be returned.
+     */
+    fun getTaskIdToSend(context: Context, safetySourceId: String, launchTaskId: Int?): Int? {
         val sameTaskSourceIds =
             context.resources.getString(R.string.config_same_task_safety_source_ids).split(',')
         val useSameTask = sameTaskSourceIds.contains(safetySourceId)

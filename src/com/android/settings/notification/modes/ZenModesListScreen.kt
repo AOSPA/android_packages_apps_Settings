@@ -22,6 +22,7 @@ import android.os.UserManager.DISALLOW_ADJUST_VOLUME
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ModesSettingsActivity
+import com.android.settings.Utils
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
@@ -79,7 +80,12 @@ open class ZenModesListScreen :
             else -> com.android.internal.R.drawable.ic_zen_priority_modes
         }
 
-    override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
+    override fun isEnabled(context: Context): Boolean {
+        if (Utils.shouldHideModesInDemoMode(context)) {
+            return false
+        }
+        return super<PreferenceRestrictionMixin>.isEnabled(context)
+    }
 
     override val restrictionKeys: Array<String> = arrayOf(DISALLOW_ADJUST_VOLUME)
 

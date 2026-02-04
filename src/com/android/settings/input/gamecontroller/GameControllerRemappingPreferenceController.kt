@@ -17,6 +17,7 @@
 package com.android.settings.input.gamecontroller
 
 import android.content.Context
+import android.text.TextUtils
 import android.util.Log
 import android.view.InputDevice
 import androidx.preference.Preference
@@ -26,10 +27,11 @@ import com.android.settings.input.gamecontroller.GameControllerUtils.buttonToPre
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToAxesMap
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToButtonMap
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToNameMap
+import com.android.settingslib.Utils.getColorAttrDefaultColor
 
 /** Preference controller for game controller key and stick remapping */
 class GameControllerRemappingPreferenceController(
-    context: Context,
+    private val context: Context,
     private val viewModel: GameControllerViewModel,
 ) : BasePreferenceController(context, "game_controller_remapping") {
 
@@ -44,9 +46,20 @@ class GameControllerRemappingPreferenceController(
         val hasJoystickSource =
             (viewModel.controllerDevice.sources and InputDevice.SOURCE_JOYSTICK) ==
                 InputDevice.SOURCE_JOYSTICK
+        val color = getColorAttrDefaultColor(context, android.R.attr.colorControlNormal)
         // Update visibility for all button and axis preferences
-        preferenceKeyToButtonMap.keys.forEach {
-            screen.findPreference<Preference>(it)?.isVisible = hasGamepadSource
+        preferenceKeyToButtonMap.forEach { (preferenceKey, keyCode) ->
+            val preference = screen.findPreference<Preference>(preferenceKey)
+            preference?.isVisible = hasGamepadSource
+            val glyph = viewModel.glyphMap?.getDrawableForKeycode(context, keyCode)
+            val displayName = viewModel.glyphMap?.getDisplayNameForKeycode(keyCode)
+            if (glyph != null) {
+                glyph.setTint(color)
+                preference?.icon = glyph
+            }
+            if (!TextUtils.isEmpty(displayName)) {
+                preference?.title = displayName
+            }
         }
         preferenceKeyToAxesMap.keys.forEach {
             screen.findPreference<Preference>(it)?.isVisible = hasJoystickSource
@@ -57,11 +70,27 @@ class GameControllerRemappingPreferenceController(
         super.updateState(preference)
         val screen = preferenceScreen ?: return
         // Loop through all the key remapping preferences we manage and update their summaries
-        preferenceKeyToNameMap.forEach { (fromPreferenceKey, _) ->
+        preferenceKeyToButtonMap.keys.forEach { fromPreferenceKey ->
             screen.findPreference<Preference>(fromPreferenceKey)?.let { pref ->
                 val toPreferenceKey = findMappedPreference(fromPreferenceKey)
                 if (toPreferenceKey != null) {
-                    pref.setSummary(preferenceKeyToNameMap[toPreferenceKey]!!)
+                    val displayName =
+                        viewModel.glyphMap?.getDisplayNameForKeycode(
+                            preferenceKeyToButtonMap[toPreferenceKey]!!
+                        )
+                    pref.summary =
+                        displayName ?: context.getString(preferenceKeyToNameMap[toPreferenceKey]!!)
+                } else {
+                    Log.w(GameControllerUtils.TAG, "Unmapped preference key $fromPreferenceKey")
+                }
+            }
+        }
+
+        preferenceKeyToAxesMap.keys.forEach { fromPreferenceKey ->
+            screen.findPreference<Preference>(fromPreferenceKey)?.let { pref ->
+                val toPreferenceKey = findMappedPreference(fromPreferenceKey)
+                if (toPreferenceKey != null) {
+                    pref.setSummary(context.getString(preferenceKeyToNameMap[toPreferenceKey]!!))
                 } else {
                     Log.w(GameControllerUtils.TAG, "Unmapped preference key $fromPreferenceKey")
                 }

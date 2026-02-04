@@ -32,6 +32,7 @@ data class SatelliteAppItem(
     override val app: ApplicationInfo,
     val intent: Intent?,
     val appLabel: String? = null,
+    val summary: String? = null,
 ) : AppRecord {
     /** Returns the display label for the app, falling back to the app's default label. */
     fun getAppLabel(pm: PackageManager): String = appLabel ?: app.loadLabel(pm).toString()

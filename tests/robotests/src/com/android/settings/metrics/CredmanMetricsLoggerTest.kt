@@ -78,8 +78,14 @@ class CredmanMetricsLoggerTest {
     }
 
     @Test
-    fun onResume_afterSingleOutboundSession_callsLogEventWithCorrectParameters() {
-        credmanMetricsLogger.recordOutboundIntentLaunch(testPackageName)
+    fun constructor_withLifecycle_addsObserver() {
+        val credmanMetricsLogger = CredmanMetricsLogger(context, mockLifecycle)
+        verify(mockLifecycle).addObserver(credmanMetricsLogger)
+    }
+
+    @Test
+    fun onResume_afterSinglePreferredServiceOutbound_callsLogEventWithCorrectParameters() {
+        credmanMetricsLogger.recordPreferredServiceOutboundLaunch(testPackageName)
         ShadowSystemClock.advanceBy(Duration.ofMillis(testDurationMs))
 
         credmanMetricsLogger.onResume(mockLifecycleOwner)
@@ -88,7 +94,25 @@ class CredmanMetricsLoggerTest {
             .logEvent(
                 eq(
                     FrameworkStatsLog
-                        .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_SERVICE_PROVIDER
+                        .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_PREFERRED_SERVICE
+                ),
+                eq(testPackageName),
+                eq(testDurationMs),
+            )
+    }
+
+    @Test
+    fun onResume_afterSingleAdditionalServiceOutbound_callsLogEventWithCorrectParameters() {
+        credmanMetricsLogger.recordAdditionalServiceOutboundLaunch(testPackageName)
+        ShadowSystemClock.advanceBy(Duration.ofMillis(testDurationMs))
+
+        credmanMetricsLogger.onResume(mockLifecycleOwner)
+
+        verify(credmanMetricsLogger)
+            .logEvent(
+                eq(
+                    FrameworkStatsLog
+                        .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_ADDITIONAL_SERVICE
                 ),
                 eq(testPackageName),
                 eq(testDurationMs),
@@ -97,10 +121,10 @@ class CredmanMetricsLoggerTest {
 
     @Test
     fun onResume_afterMultipleOutboundSessions_callsLogEventWithCorrectParameters() {
-        credmanMetricsLogger.recordOutboundIntentLaunch(testPackageName)
+        credmanMetricsLogger.recordPreferredServiceOutboundLaunch(testPackageName)
         ShadowSystemClock.advanceBy(Duration.ofMillis(4321L))
         credmanMetricsLogger.onResume(mockLifecycleOwner)
-        credmanMetricsLogger.recordOutboundIntentLaunch(testPackageName)
+        credmanMetricsLogger.recordAdditionalServiceOutboundLaunch(testPackageName)
         ShadowSystemClock.advanceBy(Duration.ofMillis(testDurationMs))
 
         credmanMetricsLogger.onResume(mockLifecycleOwner)
@@ -109,7 +133,7 @@ class CredmanMetricsLoggerTest {
             .logEvent(
                 eq(
                     FrameworkStatsLog
-                        .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_SERVICE_PROVIDER
+                        .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_ADDITIONAL_SERVICE
                 ),
                 eq(testPackageName),
                 eq(testDurationMs),
@@ -124,32 +148,12 @@ class CredmanMetricsLoggerTest {
 
     @Test
     fun onDestroy_clearsOutboundSession() {
-        credmanMetricsLogger.recordOutboundIntentLaunch()
+        credmanMetricsLogger.recordPreferredServiceOutboundLaunch()
         credmanMetricsLogger.onDestroy(mockLifecycleOwner)
 
         credmanMetricsLogger.onResume(mockLifecycleOwner)
 
         verify(credmanMetricsLogger, never()).logEvent(any(), anyOrNull(), any())
-    }
-
-    @Test
-    fun constructor_withLifecycle_addsObserver() {
-        val credmanMetricsLogger = CredmanMetricsLogger(context, mockLifecycle)
-        verify(mockLifecycle).addObserver(credmanMetricsLogger)
-    }
-
-    @Test
-    fun logReturnFromServiceProviderEvent_callsLogEventWithCorrectParameters() {
-        credmanMetricsLogger.logReturnFromServiceProviderEvent(testPackageName, testDurationMs)
-        verify(credmanMetricsLogger)
-            .logEvent(
-                eq(
-                    FrameworkStatsLog
-                        .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_SERVICE_PROVIDER
-                ),
-                eq(testPackageName),
-                eq(testDurationMs),
-            )
     }
 
     @Test
@@ -229,7 +233,7 @@ class CredmanMetricsLoggerTest {
 
         credmanMetricsLogger.logEvent(
             FrameworkStatsLog
-                .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_SERVICE_PROVIDER,
+                .CREDENTIAL_MANAGER_SETTINGS_EVENT_REPORTED__EVENT_TYPE__RETURN_FROM_PREFERRED_SERVICE,
             testPackageName,
             testDurationMs,
         )

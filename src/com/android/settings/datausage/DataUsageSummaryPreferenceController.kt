@@ -28,6 +28,7 @@ import android.net.NetworkPolicy
 import android.net.NetworkTemplate
 import android.text.TextUtils
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
@@ -41,6 +42,7 @@ import com.android.settings.network.telephony.DomesticRoamUtils
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import kotlin.math.max
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -68,6 +70,7 @@ constructor(
         {
             DataPlanRepositoryImpl(it)
         },
+    private val defaultDispatcher: CoroutineDispatcher = Dispatchers.Default,
 ) : TelephonyBasePreferenceController(context, KEY) {
 
     init {
@@ -114,7 +117,7 @@ constructor(
             setDataBarSize(dataBarSize)
         }
         val dataPlanInfo =
-            withContext(Dispatchers.Default) {
+            withContext(defaultDispatcher) {
                 dataPlanRepositoryFactory(networkCycleDataRepository)
                     .getDataPlanInfo(
                         policy = policy,
@@ -185,7 +188,8 @@ constructor(
 
     companion object {
         private const val TAG = "DataUsageSummaryPC"
-        private const val KEY = "status_header"
+
+        @VisibleForTesting const val KEY = "status_header"
     }
 }
 // LINT.ThenChange(MobileNetworkDataUsagePreference.kt)

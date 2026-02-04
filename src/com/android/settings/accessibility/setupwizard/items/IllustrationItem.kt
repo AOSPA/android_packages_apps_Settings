@@ -31,6 +31,7 @@ import android.view.accessibility.AccessibilityNodeInfo
 import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import androidx.annotation.RawRes
 import androidx.core.content.withStyledAttributes
+import androidx.core.view.postDelayed
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
@@ -235,8 +236,7 @@ class IllustrationItem : Item {
         if (DelightHelper.shouldApplyAnimatedIcon(context)) {
             val delay =
                 context.resources.getInteger(SetupR.integer.sud_lottie_animation_delay_ms).toLong()
-            pendingAnimationRunnable =
-                Runnable { action() }.also { illustrationView.postDelayed(it, delay) }
+            pendingAnimationRunnable = illustrationView.postDelayed(delay, action)
         } else {
             action()
         }

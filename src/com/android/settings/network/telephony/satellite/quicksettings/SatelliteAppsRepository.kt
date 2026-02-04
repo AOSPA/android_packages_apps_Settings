@@ -20,7 +20,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.provider.DeviceConfig
 import android.provider.Settings
 import android.telephony.SubscriptionManager
@@ -32,7 +31,7 @@ import com.android.settings.R
 /** A repository for getting the list of satellite apps for the landing page. */
 open class SatelliteAppsRepository(private val context: Context) {
     companion object {
-        const val PACKAGE_NAME_SAFETY_HUB = "com.google.android.apps.safetyhub"
+        const val PACKAGE_NAME_PHONE = "com.google.android.dialer"
 
         @VisibleForTesting const val PACKAGE_NAME_SCONE = "com.google.android.apps.scone"
         @VisibleForTesting
@@ -49,16 +48,14 @@ open class SatelliteAppsRepository(private val context: Context) {
             false
     }
 
-    /** Returns the intent for the Emergency SOS app. */
-    open fun getEmergencySosIntent(): Intent? {
-        // TODO(434793872): Add a config for the emergency number. Note that the emergency number
-        // may be different in different countries.
-        val sosIntent = Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:911"))
-        if (sosIntent.resolveActivity(context.packageManager) == null) {
-            Log.d(TAG, "Intent for Emergency SOS cannot be resolved.")
+    /** Returns the intent to open the dialer in the Phone app. */
+    open fun getDialerIntent(): Intent? {
+        val intent = Intent(Intent.ACTION_DIAL)
+        if (intent.resolveActivity(context.packageManager) == null) {
+            Log.d(TAG, "Intent for dialer cannot be resolved.")
             return null
         }
-        return sosIntent
+        return intent
     }
 
     /**

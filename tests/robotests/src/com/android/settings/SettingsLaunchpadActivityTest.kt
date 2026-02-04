@@ -47,6 +47,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.spa.framework.util.KEY_DESTINATION
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.Flow
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -141,6 +142,11 @@ class SettingsLaunchpadActivityTest {
                 it.put(SPA_SCREEN_KEY, fakeSpaApiFactory)
                 it.put(TEST_SCREEN_KEY, fakeFactory)
             }
+    }
+
+    @After
+    fun cleanUp() {
+        ShadowActivityEmbeddingUtils.reset()
     }
 
     @Test
@@ -252,6 +258,7 @@ class SettingsLaunchpadActivityTest {
     @Test
     fun launch_withSpaRoutePrefix_shouldLaunchSpaActivity() {
         // Arrange
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(false)
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
                 putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, SPA_SCREEN_KEY)
@@ -266,6 +273,26 @@ class SettingsLaunchpadActivityTest {
         assertThat(nextActivity).isNotNull()
         assertThat(nextActivity.component?.className).isEqualTo(SpaActivity::class.java.name)
         assertThat(nextActivity.getStringExtra(KEY_DESTINATION)).isEqualTo(SPA_ROUTE_PREFIX)
+        assertThat(activity.isFinishing).isTrue()
+    }
+
+    @Test
+    fun launch_withSpaRoutePrefix_twoPane_shouldLaunchTrampolineActivity() {
+        // Arrange
+        ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true)
+        val intent =
+            Intent(context, SettingsLaunchpadActivity::class.java).apply {
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, SPA_SCREEN_KEY)
+            }
+
+        // Act
+        val activity =
+            Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
+
+        // Assert
+        val nextActivity = shadowOf(activity).nextStartedActivity
+        assertThat(nextActivity).isNotNull()
+        assertThat(nextActivity.action).isEqualTo(Settings.ACTION_SETTINGS_EMBED_DEEP_LINK_ACTIVITY)
         assertThat(activity.isFinishing).isTrue()
     }
 

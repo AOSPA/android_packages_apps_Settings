@@ -39,6 +39,21 @@ public class UsbDetailsRepository {
         return mUsbBackend.getDataRole();
     }
 
+    /** Checks if current USB functions roles are supported. */
+    public boolean isSupportAllRoles() {
+        return mUsbBackend.areAllRolesSupported();
+    }
+
+    /** Sets the power role of the current USB port. */
+    public void setPowerRole(int role) {
+        mUsbBackend.setPowerRole(role);
+    }
+
+    /** Gets the power role of the current USB port. */
+    public int getPowerRole() {
+        return mUsbBackend.getPowerRole();
+    }
+
     /** Gets current state of MTP transcoding for transferring the file. */
     public boolean isMtpTranscodeEnabled() {
         return SystemProperties.getBoolean(TRANSCODE_MTP_SYS_PROP_KEY, false);

@@ -54,15 +54,15 @@ class SpaActivity : BrowseActivity() {
             }
 
         @[JvmStatic JvmOverloads]
-        fun Context.startSpaActivity(destination: String, highlightItemKey: String? = null) {
-            val intent =
-                Intent(this, SpaActivity::class.java)
-                    .appendSpaParams(
-                        destination = destination,
-                        highlightItemKey = highlightItemKey,
-                        sessionName = SESSION_BROWSE,
-                    )
-            startActivity(intent)
-        }
+        fun Context.startSpaActivity(destination: String, highlightItemKey: String? = null) =
+            startActivity(getSpaActivityIntent(destination, highlightItemKey))
+
+        fun Context.getSpaActivityIntent(destination: String, highlightItemKey: String? = null) =
+            Intent(this, SpaActivity::class.java)
+                .appendSpaParams(
+                    destination = destination,
+                    highlightItemKey = highlightItemKey,
+                    sessionName = SESSION_BROWSE,
+                )
     }
 }

@@ -19,6 +19,7 @@ package com.android.settings.network.telephony.satellite.quicksettings
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -33,6 +34,8 @@ open class SatelliteTilePromptUtils {
         private const val NOTIFICATION_CHANNEL_ID = "satellite_tile_prompt_channel"
         private const val SHARED_PREFS_NAME = "SatelliteTilePromptPrefs"
         private const val PROMPT_SHOWN_KEY = "prompt_shown"
+        const val ACTION_DISMISS =
+            "com.android.settings.network.telephony.satellite.quicksettings.ACTION_DISMISS"
     }
 
     private fun getSharedPreferences(context: Context): SharedPreferences {
@@ -82,6 +85,18 @@ open class SatelliteTilePromptUtils {
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
             )
 
+        val dismissIntent =
+            Intent(context, SatellitePromptDismissalReceiver::class.java).apply {
+                action = ACTION_DISMISS
+            }
+        val dismissPendingIntent =
+            PendingIntent.getBroadcast(
+                context,
+                0,
+                dismissIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
+
         val notification =
             NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_satellite_tile)
@@ -101,8 +116,20 @@ open class SatelliteTilePromptUtils {
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true)
+                .setDeleteIntent(dismissPendingIntent)
+                .setOnlyAlertOnce(true)
                 .build()
 
         notificationManager.notify(R.id.satellite_prompt_notification_id, notification)
+    }
+
+    /** Receiver to handle the dismissal of the Satellite Quick Settings prompt notification. */
+    class SatellitePromptDismissalReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            if (ACTION_DISMISS == intent.action) {
+                Log.d(TAG, "Notification dismissed by user. Marking prompt as shown.")
+                SatelliteTilePromptUtils().setAddTilePromptShown(context, true)
+            }
+        }
     }
 }

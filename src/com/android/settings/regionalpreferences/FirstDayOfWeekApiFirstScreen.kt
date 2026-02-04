@@ -66,9 +66,8 @@ class FirstDayOfWeekApiFirstScreen :
                                 .contains(value, ignoreCase = true)
                         ) {
                             RegionalPreferencesDataUtils.savePreference(
-                                context,
-                                ExtensionTypes.FIRST_DAY_OF_WEEK,
-                                item,
+                                context, ExtensionTypes.FIRST_DAY_OF_WEEK,
+                                item.takeIf { it != RegionalPreferencesDataUtils.DEFAULT_VALUE }
                             )
                             break
                         }

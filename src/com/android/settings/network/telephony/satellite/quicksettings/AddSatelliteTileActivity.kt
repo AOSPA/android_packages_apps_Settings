@@ -74,7 +74,8 @@ class AddSatelliteTileActivity : Activity() {
                     StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ADDED,
                     StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_NOT_ADDED,
                     StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ALREADY_ADDED,
-                    StatusBarManager.TILE_ADD_REQUEST_RESULT_DIALOG_DISMISSED -> {
+                    StatusBarManager.TILE_ADD_REQUEST_RESULT_DIALOG_DISMISSED,
+                    StatusBarManager.TILE_ADD_REQUEST_ERROR_NOT_CURRENT_USER -> {
                         // 1. If the tile was added, the user was prompted and accepted, so we
                         // should mark as shown so we don't prompt again.
                         // 2. If the tile was not added, the user was prompted and declined, so we
@@ -83,6 +84,9 @@ class AddSatelliteTileActivity : Activity() {
                         // been shown.
                         // 4. If the dialog was dismissed, the user was prompted and dismissed it,
                         // so we should mark as shown so we don't potentially spam the user.
+                        // 5. If the user is not the current user, then we should mark as shown to
+                        // avoid potentially spamming the user (the user likely does not have
+                        // permissions to add the tile).
                         satelliteTilePromptUtils.setAddTilePromptShown(this, true)
                     }
                     else -> {

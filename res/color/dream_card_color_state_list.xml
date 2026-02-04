@@ -17,6 +17,8 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <!-- Dragging -->
+    <item android:state_activated="true" android:color="@color/materialColorPrimary"/>
     <item android:state_selected="true" android:color="@color/materialColorPrimaryContainer"/>
     <item android:color="@color/materialColorSurfaceBright"/>
 </selector>

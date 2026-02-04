@@ -6306,6 +6306,10 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name=".network.telephony.satellite.quicksettings.SatelliteTilePromptUtils$SatellitePromptDismissalReceiver"
+            android:exported="false" />
+
         <!-- This is the longest AndroidManifest.xml ever. -->
 
     </application>

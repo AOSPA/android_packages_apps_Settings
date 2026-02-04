@@ -28,6 +28,12 @@ import com.android.settings.accessibility.VibrationScreen
 import com.android.settings.accessibility.VibrationScreenApi
 import com.android.settings.accessibility.a11yactivity.ui.A11yActivityScreen
 import com.android.settings.accessibility.a11yservice.ui.A11yServiceScreen
+import com.android.settings.accessibility.actiontimeout.ui.ActionTimeoutSettingsScreen
+import com.android.settings.accessibility.audioadjustment.ui.AudioAdjustmentScreen
+import com.android.settings.accessibility.buttonshortcutsetting.ui.ButtonShortcutSettingScreen
+import com.android.settings.accessibility.captionpreferences.ui.CaptioningAppearanceScreen
+import com.android.settings.accessibility.captionpreferences.ui.CaptioningMoreOptionsScreen
+import com.android.settings.accessibility.captionpreferences.ui.CaptioningPropertiesScreen
 import com.android.settings.accessibility.colorandmotion.ui.ColorAndMotionScreen
 import com.android.settings.accessibility.colorcorrection.ui.ColorCorrectionScreen
 import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen
@@ -35,7 +41,12 @@ import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
 import com.android.settings.accessibility.flashnotifications.ui.FlashNotificationsScreen
 import com.android.settings.accessibility.hearingdevices.ui.HearingDevicesScreen
 import com.android.settings.accessibility.hearingdevices.ui.PairHearingDeviceScreen
+import com.android.settings.accessibility.screenmagnification.ui.MagnificationScreen
+import com.android.settings.accessibility.shortcuts.ui.EditShortcutsScreen
+import com.android.settings.accessibility.shortcutssettings.ui.ShortcutsSettingsScreen
+import com.android.settings.accessibility.systemcontrols.ui.SystemControlsScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
+import com.android.settings.accessibility.timingcontrols.ui.TimingControlsScreen
 import com.android.settings.accounts.AccountScreen
 import com.android.settings.accounts.ManagedProfileApiScreen
 import com.android.settings.applications.AppDashboardScreen
@@ -141,6 +152,12 @@ import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
+import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppsApiScreen
+import com.android.settings.spa.app.specialaccess.MediaManagementAppsApiScreen
+import com.android.settings.spa.app.specialaccess.MediaRoutingControlApiScreen
+import com.android.settings.spa.app.specialaccess.NfcTagAppsSettingsApiScreen
+import com.android.settings.spa.app.specialaccess.TurnScreenOnAppsApiScreen
+import com.android.settings.spa.app.specialaccess.UsageDataAppListApiScreen
 import com.android.settings.supervision.SupervisionDashboardScreen
 import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
@@ -385,7 +402,17 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = HearingDevicesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PairHearingDeviceScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreen.KEY),
-        //        PerScreenCatalystConfig(enabled = true, screenKey = MagnificationScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = MagnificationScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ActionTimeoutSettingsScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AudioAdjustmentScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ButtonShortcutSettingScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = CaptioningPropertiesScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = CaptioningAppearanceScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = CaptioningMoreOptionsScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = EditShortcutsScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ShortcutsSettingsScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = SystemControlsScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TimingControlsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = MediaControlsScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
@@ -422,6 +449,36 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = AllFilesAccessAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AlarmsAndRemindersAppListScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SpecialAccessSettingsScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = MediaManagementAppsApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = MediaRoutingControlApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = LongBackgroundTasksAppsApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = NfcTagAppsSettingsApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = TurnScreenOnAppsApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = UsageDataAppListApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = SupervisionWebContentFiltersScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TextReadingScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccessibilityScreen.KEY),

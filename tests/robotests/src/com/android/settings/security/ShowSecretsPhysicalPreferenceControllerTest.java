@@ -62,9 +62,9 @@ public class ShowSecretsPhysicalPreferenceControllerTest {
     }
 
     @Test
-    public void isAvailable_splitEnabled_isTrue() {
+    public void isAvailable_splitEnabled_isFalse() {
         mIsSplitSystemEnabled = true;
-        assertThat(mController.isAvailable()).isTrue();
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test

@@ -350,6 +350,9 @@
     <!-- Whether to support enrollment during setup wizard flow -->
     <bool name="config_suw_support_face_enroll">true</bool>
 
+    <!-- Whether to show a timeout dialog on the face ernoll intro screen -->
+    <bool name="config_show_face_enroll_intro_timeout_dialog">false</bool>
+
     <!-- App intent -->
     <string name="config_account_intent_uri" translatable="false"></string>
 
@@ -381,6 +384,9 @@
 
     <!-- Whether swipe security option is hidden or not -->
     <bool name="config_hide_swipe_security_option">false</bool>
+
+    <!-- Whether to hide modes setting in demo mode -->
+    <bool name="config_hide_modes_setting_in_demo_mode">false</bool>
 
     <!-- Whether to hide dream setting in demo mode -->
     <bool name="config_hide_dream_setting_in_demo_mode">false</bool>
@@ -493,7 +499,7 @@
     <bool name="config_show_show_secrets_touch">true</bool>
 
     <!-- Whether to show the "Show secrets (physical)" toggle in Privacy Settings. -->
-    <bool name="config_show_show_secrets_physical">true</bool>
+    <bool name="config_show_show_secrets_physical">false</bool>
 
     <!-- Whether trust_agent_click_intent should be shown or not. -->
     <bool name="config_show_trust_agent_click_intent">true</bool>
