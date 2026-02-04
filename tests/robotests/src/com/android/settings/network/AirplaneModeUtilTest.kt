@@ -58,7 +58,7 @@ class AirplaneModeUtilTest {
     private var selfSupportsApmSync = true
     private val mockCompanionDeviceManager =
         mock<CompanionDeviceManager> {
-            on { allAssociations } doReturn associationsList
+            on { getAllAssociations(UserHandle.USER_ALL) } doReturn associationsList
             on { getLocalMetadata(UserHandle.USER_ALL) } doAnswer
                 {
                     getMetadata(selfSupportsApmSync)

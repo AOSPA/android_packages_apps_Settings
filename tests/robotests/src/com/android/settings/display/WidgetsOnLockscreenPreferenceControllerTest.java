@@ -19,7 +19,6 @@ package com.android.settings.display;
 import static android.app.admin.DevicePolicyManager.KEYGUARD_DISABLE_WIDGETS_ALL;
 import static android.provider.Settings.Secure.GLANCEABLE_HUB_ENABLED;
 
-import static com.android.systemui.Flags.FLAG_GLANCEABLE_HUB_ENABLED_BY_DEFAULT;
 import static com.android.systemui.Flags.FLAG_GLANCEABLE_HUB_V2;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
@@ -198,7 +197,6 @@ public class WidgetsOnLockscreenPreferenceControllerTest {
     }
 
     @EnableFlags(FLAG_GLANCEABLE_HUB_V2)
-    @DisableFlags(FLAG_GLANCEABLE_HUB_ENABLED_BY_DEFAULT)
     @Test
     public void hubEnabledByUser_defaultsToConfigValue_true() {
         SettingsShadowResources.overrideResource(
@@ -208,22 +206,12 @@ public class WidgetsOnLockscreenPreferenceControllerTest {
     }
 
     @EnableFlags(FLAG_GLANCEABLE_HUB_V2)
-    @DisableFlags(FLAG_GLANCEABLE_HUB_ENABLED_BY_DEFAULT)
     @Test
     public void hubEnabledByUser_defaultsToConfigValue_false() {
         SettingsShadowResources.overrideResource(
                 com.android.internal.R.bool.config_glanceableHubEnabledByDefault, false);
 
         assertThat(mController.isChecked()).isFalse();
-    }
-
-    @EnableFlags({FLAG_GLANCEABLE_HUB_V2, FLAG_GLANCEABLE_HUB_ENABLED_BY_DEFAULT})
-    @Test
-    public void hubEnabledByUser_defaultsToFlagValue_true() {
-        SettingsShadowResources.overrideResource(
-                com.android.internal.R.bool.config_glanceableHubEnabledByDefault, false);
-
-        assertThat(mController.isChecked()).isTrue();
     }
 
     private void updateSecureSetting(int value) {

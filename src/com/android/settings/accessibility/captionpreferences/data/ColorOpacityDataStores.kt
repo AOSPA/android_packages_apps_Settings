@@ -110,3 +110,17 @@ class CaptionTextColorDataStore(context: Context, isColor: Boolean) :
     ) {
     override fun getFullColorFromHelper(): Int = captionHelper.foregroundColor
 }
+
+class CaptionBackgroundColorDataStore(context: Context, isColor: Boolean) :
+    ColorOpacityDataStore(
+        context,
+        Settings.Secure.ACCESSIBILITY_CAPTIONING_BACKGROUND_COLOR,
+        isColor,
+    ) {
+    override fun getFullColorFromHelper(): Int = captionHelper.backgroundColor
+}
+
+class CaptionWindowColorDataStore(context: Context, isColor: Boolean) :
+    ColorOpacityDataStore(context, Settings.Secure.ACCESSIBILITY_CAPTIONING_WINDOW_COLOR, isColor) {
+    override fun getFullColorFromHelper(): Int = captionHelper.windowColor
+}

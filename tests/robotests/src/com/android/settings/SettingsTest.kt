@@ -189,7 +189,7 @@ class SettingsTest {
                 )
             }
         mMockCompanionDeviceManager.stub {
-            on { allAssociations } doReturn
+            on { getAllAssociations(UserHandle.USER_ALL) } doReturn
                 listOf(
                     AssociationInfo.Builder(1, UserHandle.myUserId(), mContext.packageName)
                         .setDeviceProfile(DEVICE_PROFILE_WATCH)

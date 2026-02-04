@@ -22,6 +22,12 @@
     <string name="spatial_audio_phone_speaker_hardware_unsupported" translatable="false">Spatialization is not available for the device speaker.</string>
     <string name="managed_profile_settings_screen_preconditions" translatable="false">The device must have a work profile.</string>
     <string name="managed_profile_settings_screen_not_supported" translatable="false">The work profile is not set up on this device.</string>
+    <string name="app_launch_settings_screen_preconditions" translatable="false">The app must be installed and enabled, and must not be an instant app or a browser app.</string>
+    <string name="app_launch_screen_app_unavailable" translatable="false">The app is unavailable due to an internal error.</string>
+    <string name="app_launch_screen_app_not_installed" translatable="false">The app is not installed.</string>
+    <string name="app_launch_screen_app_disabled" translatable="false">The app is disabled.</string>
+    <string name="app_launch_screen_app_instant" translatable="false">The app is an instant app.</string>
+    <string name="app_launch_screen_app_browser" translatable="false">The app is a browser app.</string>
     <string name="gesture_settings_screen_preconditions" translatable="false">The device must have an available gesture controller.</string>
     <string name="gesture_settings_screen_all_controllers_not_available" translatable="false">The device has no available gesture controllers.</string>
     <string name="double_twist_gesture_screen_preconditions" translatable="false">The device must have a Double Twist sensor.</string>
@@ -43,6 +49,8 @@
     <string name="battery_info_screen_battery_information_feature_disabled" translatable="false">The battery information feature is not enabled.</string>
     <string name="sound_work_screen_preconditions" translatable="false">The device must have a work profile and must not use a single volume for all audio streams.</string>
     <string name="sound_work_screen_not_supported" translatable="false">The work profile is not supported on this device.</string>
+    <string name="sound_vibration_precondition" translatable="false">This device must have a vibration motor.</string>
+    <string name="sound_vibration_hardware_unsupported" translatable="false">This device does not have a vibration motor.</string>
     <string name="contacts_storage_screen_preconditions" translatable="false">The device must have a valid default account.</string>
     <string name="contacts_storage_screen_unsupported" translatable="false">Error reading the default account.</string>
     <string name="account_security_subpage_screen_preconditions" translatable="false">Requires account security data to be available in Safety Center.</string>

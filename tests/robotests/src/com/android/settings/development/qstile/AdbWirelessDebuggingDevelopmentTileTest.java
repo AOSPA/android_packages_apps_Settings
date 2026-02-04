@@ -41,20 +41,20 @@ import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowWirelessDebuggingPreferenceController.class})
-public class WirelessDebuggingTest {
+public class AdbWirelessDebuggingDevelopmentTileTest {
     @Mock
     private Toast mToast;
     @Mock
     private KeyguardManager mKeyguardManager;
 
     private Context mContext;
-    private DevelopmentTiles.WirelessDebugging mWirelessDebugging;
+    private AdbWirelessDebuggingDevelopmentTile mWirelessDebugging;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mWirelessDebugging = spy(new DevelopmentTiles.WirelessDebugging());
+        mWirelessDebugging = spy(new AdbWirelessDebuggingDevelopmentTile());
         doReturn(mContext.getContentResolver()).when(mWirelessDebugging).getContentResolver();
         ReflectionHelpers.setField(mWirelessDebugging, "mKeyguardManager", mKeyguardManager);
         ReflectionHelpers.setField(mWirelessDebugging, "mToast", mToast);
