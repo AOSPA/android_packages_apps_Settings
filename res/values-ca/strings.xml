@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Utilitza com a pantalla independent"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Duplica la pantalla integrada"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Mostra el quadre de diàleg de connexió"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"Utilitza HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"Permet una gamma més àmplia de colors i altes llums més brillants"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"La pantalla externa està desconnectada"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotació"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Estàndard"</string>
@@ -1115,7 +1117,7 @@
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Escaneja aquest codi QR amb un altre dispositiu per unir-te a <xliff:g id="SSID">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Escaneja aquest codi QR per conectar-te a <xliff:g id="SSID">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_failure_authentication_or_configuration" msgid="847551626830740204">"Torna-ho a provar. Si el problema continua, contacta amb el fabricant del dispositiu"</string>
-    <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"S\'ha produït un error"</string>
+    <string name="wifi_dpp_failure_not_compatible" msgid="4453775826337805825">"Hi ha hagut un error"</string>
     <string name="wifi_dpp_failure_timeout" msgid="7902971341771145564">"Comprova que el dispositiu tingui bateria i estigui connectat i encès"</string>
     <string name="wifi_dpp_failure_generic" msgid="6559442892600448442">"Comprova que el dispositiu tingui bateria i estigui connectat i encès. Si el problema continua, contacta amb el fabricant del dispositiu"</string>
     <string name="wifi_dpp_failure_not_supported" msgid="2908961523550486480">"En aquest dispositiu no es pot afegir \"<xliff:g id="SSID">%1$s</xliff:g>\""</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Premeu la tecla d\'espai dos cops per inserir \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Mostra les contrasenyes"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Mostra els caràcters breument mentre escrius"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"És possible que aquest corrector ortogràfic pugui recopilar tot el text que escrius, la qual cosa inclou dades personals com ara les contrasenyes i els números de les targetes de crèdit. Prové de l\'aplicació <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vols fer servir aquest corrector ortogràfic?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Configuració"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
@@ -2919,11 +2929,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Consulta l\'ús de les 24 darreres hores"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Consulta l\'ús des d\'última càrrega completa"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Ús de la bateria de l\'aplicació"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalls d\'ús"</string>
@@ -3623,12 +3628,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto i NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth i Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositiu"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"Teclat, ratolí tàctil, pantalla, so"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Pantalla"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"So"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"No disponible perquè l\'NFC està desactivada"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Per utilitzar aquesta funció, primer instal·la una aplicació de pagaments"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplicacions recents, aplicacions predeterminades"</string>
@@ -3757,6 +3759,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiqueta, lector"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"teclat, tecnologia hàptica, vibració,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"pantalla externa, pantalla connectada, pantalla ampliada, segona pantalla, pantalla integrada, organitzar pantalles, duplicar, mida de visualització, rotació, resolució, freqüència d\'actualització"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volum i vibració"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volum de multimèdia"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volum de Google Cast"</string>
@@ -4392,12 +4396,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Reinicia"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Ara no"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Obtén més informació sobre la protecció avançada de la memòria."</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Diagnòstic de l\'SO Android"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"Valida les compilacions de l\'SO"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"diagnòstic, transparència, binari"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"L\'administrador d\'aquest perfil de treball és:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Gestionat per <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Obre de manera predeterminada"</string>
@@ -4518,18 +4519,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Configuració d\'USB predeterminada"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opcions d\'alimentació"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opcions de transferència de fitxers"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Protecció d\'accés a les dades"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Permet la tunelització PCI"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Quan aquesta opció estigui activada, els perifèrics USB i Thunderbolt podran crear túnels PCI i accedir a la memòria del sistema"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Has de ser usuari administrador per modificar aquesta opció de configuració"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"L\'ha desactivat el teu administrador de TI"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"L\'ha desactivat el mode Protecció avançada"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferències d\'USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB controlat per"</string>
@@ -5801,10 +5796,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> per <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"L\'aplicació es reiniciarà quan canviïs la relació d\'aspecte. És possible que es perdin els canvis sense desar. Pot ser que algunes aplicacions no estiguin optimitzades per a determinades relacions d\'aspecte."</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Experiència"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Comandament de joc"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor d\'empremtes digitals"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificacions amb flaix"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Sobre les notificacions amb flaix"</string>
@@ -6160,7 +6153,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Pàgina de destinació de satèl·lit"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Prova una demostració"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Mira com funciona"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"Quan no tinguis connexió a una xarxa mòbil o Wi‑Fi, el telèfon es connectarà automàticament a un satèl·lit. Per obtenir la millor connexió possible, has de ser en una zona en què es vegi bé el cel. El telèfon es tornarà a connectar a una xarxa mòbil quan estigui disponible. Les trucades per satèl·lit no estan disponibles. És possible que puguis continuar fent trucades d\'emergència."</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Per obtenir la millor connexió possible, has de ser en una zona en què es vegi bé el cel. El telèfon es tornarà a connectar a una xarxa mòbil quan estigui disponible. Les trucades per satèl·lit no estan disponibles. És possible que puguis continuar fent trucades d\'emergència."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Més informació sobre la connectivitat per satèl·lit"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Obre la demostració d\'SOS per satèl·lit"</string>
@@ -6171,24 +6165,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"Afegeix una icona"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Indicacions de la icona Satèl·lit"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"El satèl·lit no està disponible"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"La cobertura per satèl·lit no està disponible mentre tens la connexió establerta amb una xarxa mòbil o Wi-Fi."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"La connectivitat per satèl·lit no està disponible en aquest país o regió."</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"La connectivitat per satèl·lit no està disponible ara mateix. Torna-ho a provar més tard."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"El teu pla mòbil no inclou cobertura per satèl·lit. Contacta amb l\'operador per rebre ajuda."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Per utilitzar els missatges per satèl·lit, Missatges de Google ha de ser l\'aplicació de missatgeria predeterminada."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"La connectivitat per satèl·lit l\'activa el teu operador. Obtén més informació a la configuració de satèl·lit del teu operador."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Mostra les ubicacions disponibles"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Canvia l\'aplicació predeterminada"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Mostra la configuració de l\'operador"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

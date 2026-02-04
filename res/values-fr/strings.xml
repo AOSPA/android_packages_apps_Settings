@@ -957,6 +957,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Utiliser comme écran séparé"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Dupliquer l\'écran intégré"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Afficher la boîte de dialogue de connexion"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"Utiliser le HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"Permet d\'afficher une gamme de couleurs plus étendue et des tons clairs plus lumineux"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"L\'écran externe est déconnecté"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotation"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standard"</string>
@@ -2116,6 +2118,14 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Appuyez deux fois sur la touche Espace pour insérer \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Afficher les mots de passe"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Afficher brièvement les caractères pendant la saisie"</string>
+    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <skip />
+    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Ce correcteur orthographique peut recueillir l\'ensemble du texte saisi, y compris des données personnelles comme des mots de passe et des numéros de carte de paiement. Il provient de l\'application <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utiliser ce correcteur orthographique ?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Paramètres"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Langue"</string>
@@ -2917,11 +2927,6 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Voir l\'utilisation des dernières 24 h"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Voir l\'utilisation depuis la dernière recharge complète"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilisation de la batterie par l\'appli"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Détails d\'utilisation"</string>
@@ -3621,12 +3626,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Appareil"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"Clavier, pavé tactile, écran, son"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Écran"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Son"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Indisponible, car le NFC est désactivé"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour utiliser cette option, vous devez d\'abord installer une application de paiement"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Applications récentes, applications par défaut"</string>
@@ -3755,6 +3757,8 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, tag, lecteur"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"clavier, technologies haptiques, vibreur"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"écran externe, écran connecté, écran étendu, deuxième écran, écran intégré, organiser les écrans, dupliquer, taille de l\'écran, rotation, résolution, fréquence d\'actualisation"</string>
+    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
+    <skip />
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume et vibreur"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume des contenus multimédias"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volume Google Cast"</string>
@@ -4390,12 +4394,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Redémarrer"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Pas maintenant"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"En savoir plus sur la protection avancée de la mémoire"</string>
-    <!-- no translation found for binary_transparency_title (8669346926803868809) -->
-    <skip />
-    <!-- no translation found for binary_transparency_summary (6556263563122917101) -->
-    <skip />
-    <!-- no translation found for keywords_binary_transparency (4628341524132968893) -->
-    <skip />
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Diagnostics de l\'OS Android"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"Valider les builds d\'OS"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"diagnostics, transparence, binaire"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Ce profil professionnel est géré par :"</string>
     <string name="managing_admin" msgid="2633920317425356619">"Géré par <xliff:g id="ADMIN_APP_LABEL">%s</xliff:g>"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Ouvrir par défaut"</string>
@@ -4516,18 +4517,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Configuration USB par défaut"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Options d\'alimentation"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Options de transfert de fichiers"</string>
-    <!-- no translation found for usb_pci_tunnel_title (3005345509895837923) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control (6336380624215965491) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_summary (5979721828896955730) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_nonadmin_summary (5117546225327785011) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_enterprise_summary (5735179482503540735) -->
-    <skip />
-    <!-- no translation found for usb_pci_tunnel_control_disallowed_by_apm_summary (2082174070822927730) -->
-    <skip />
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Protection de l\'accès aux données"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Autoriser la tunnellisation PCI"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Lorsque cette option est activée, les périphériques USB et Thunderbolt peuvent créer des tunnels PCI et accéder à la mémoire système"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Vous devez être un utilisateur administrateur pour modifier ce paramètre"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Désactivé par votre administrateur informatique"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Désactivé par le mode Protection Avancée"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Préférences USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB contrôlé par"</string>
@@ -5799,10 +5794,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> par <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Si vous modifiez le format, l\'application redémarrera et vous risquez de perdre les modifications non enregistrées. Il est possible que certaines applications ne soient pas optimisées pour certains formats."</string>
-    <!-- no translation found for app_info_experience_category (6283332744508784886) -->
-    <skip />
-    <!-- no translation found for virtual_gamepad_title (4310166725503017564) -->
-    <skip />
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Expérience"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Manette de jeu"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Lecteur d\'empreinte digitale"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notifications lumineuses"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"À propos des notifications lumineuses"</string>
@@ -6158,7 +6151,8 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Page de destination satellite"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Essayer en mode démo"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"En savoir plus"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"Lorsque vous ne disposez pas de réseau mobile ou Wi-Fi, votre téléphone se connecte automatiquement à un satellite. Pour obtenir une meilleure connexion, restez à l\'extérieur avec une vue dégagée du ciel. Votre téléphone se reconnectera à un réseau mobile lorsque ce sera possible. Les appels par satellite ne sont pas disponibles. Il est toutefois possible de passer des appels d\'urgence."</string>
+    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
+    <skip />
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Pour obtenir une meilleure connexion, restez à l\'extérieur avec une vue dégagée du ciel. Votre téléphone se reconnectera à un réseau mobile lorsque ce sera possible. Les appels par satellite ne sont pas disponibles. Il est toutefois possible de passer des appels d\'urgence."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"En savoir plus sur la connectivité par satellite"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Ouvrir la démo de SOS par satellite"</string>
@@ -6169,24 +6163,20 @@
     <string name="add_tile_action" msgid="5271301747196740442">"Ajouter une carte"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Suggestions relatives au bloc Satellite"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
-    <!-- no translation found for satellite_not_available_warning_title (3448838339621037508) -->
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satellite non disponible"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"La couverture satellite n\'est pas disponible lorsque vous êtes connecté à un réseau mobile ou Wi‑Fi."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"La connectivité satellite n\'est pas disponible dans ce pays ou cette région."</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"La connectivité satellite n\'est pas disponible pour le moment. Veuillez réessayer plus tard."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Votre forfait mobile n\'inclut pas la couverture satellite. Contactez votre opérateur pour obtenir de l\'aide."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Pour que vous puissiez utiliser la messagerie par satellite, Google Messages doit être votre application de chat par défaut"</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"La connectivité satellite est activée par votre opérateur. Pour en savoir plus, consultez les paramètres de satellite de votre opérateur."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Voir où cette fonctionnalité est disponible"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Changer d\'application par défaut"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Afficher les paramètres de l\'opérateur"</string>
+    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
     <skip />
-    <!-- no translation found for satellite_network_connected_warning_summary (3252410685526769324) -->
+    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
     <skip />
-    <!-- no translation found for satellite_unavailable_in_region_warning_summary (6113727472208461087) -->
-    <skip />
-    <!-- no translation found for satellite_unavailable_generic_warning_summary (8686231390499556096) -->
-    <skip />
-    <!-- no translation found for satellite_plan_warning_summary (4033700318847986474) -->
-    <skip />
-    <!-- no translation found for satellite_default_app_warning_summary (1508886758034910436) -->
-    <skip />
-    <!-- no translation found for satellite_carrier_enabled_info_summary (6914881458573108229) -->
-    <skip />
-    <!-- no translation found for satellite_view_coverage_button (4658208635014009964) -->
-    <skip />
-    <!-- no translation found for satellite_change_default_app_button (2473564922032869945) -->
-    <skip />
-    <!-- no translation found for satellite_view_carrier_settings_button (3459000243785835031) -->
+    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
     <skip />
 </resources>

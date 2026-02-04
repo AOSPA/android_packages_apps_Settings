@@ -34,6 +34,7 @@ import com.android.settings.Settings
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.android.settings.testutils.InstantTaskExecutorRule
+import com.android.settings.testutils.shadow.ShadowDesktopSettingsUtils
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
 import com.android.settingslib.search.Indexable
 import com.google.android.material.appbar.AppBarLayout
@@ -54,9 +55,11 @@ import org.mockito.kotlin.reset
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.annotation.Config
 
 /** Unit tests for [TabbedDisplayPreferenceFragment]. */
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowDesktopSettingsUtils::class])
 class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -299,11 +302,11 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun setupAppBarLayout_onMouseScroll_propagatesEventWithClampedY() {
-        // Verifies that a mouse scroll event is propagated to the container below the app bar.
-        // Also verifies that the Y coordinate of the event is clamped to the container's height.
+    fun setupAppBarLayout_onMouseScroll_propagatesEvent() {
         val containerSpy = fragment.selectedDisplayPrefContainer
+        val containerWidth = 100
         val containerHeight = 100
+        whenever(containerSpy.width).thenReturn(containerWidth)
         whenever(containerSpy.height).thenReturn(containerHeight)
         val uptime = SystemClock.uptimeMillis()
         val motionEvent =
@@ -322,8 +325,8 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         assertThat(result).isTrue()
         verify(containerSpy).dispatchGenericMotionEvent(motionEventCaptor.capture())
         val capturedEvent = motionEventCaptor.value
-        // Expected Y is min(150f, 100 - 1) = 99f. The event is offset to have this new Y.
-        assertThat(capturedEvent.y).isEqualTo(99f)
+        assertThat(capturedEvent.x).isEqualTo(50.0f)
+        assertThat(capturedEvent.y).isEqualTo(0.0f)
         motionEvent.recycle()
     }
 
@@ -376,7 +379,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
             /* oldLeft= */ 0,
             /* oldTop= */ 0,
             /* oldRight= */ 0,
-            /* oldBottom= */ 0
+            /* oldBottom= */ 0,
         )
 
         // Verify the padding state was set correctly
@@ -476,16 +479,37 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
     @Test
     fun searchIndexProvider_getRawIndexData() {
+        ShadowDesktopSettingsUtils.setShouldShow(false)
         val provider: Indexable.SearchIndexProvider =
             TabbedDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
 
         val indexData = provider.getRawDataToIndex(mContext, /* enabled= */ true)
         assertThat(indexData).hasSize(1)
-        assertThat(indexData.first().screenTitle)
+        val resource = indexData.first()
+        assertThat(resource).isNotNull()
+        assertThat(resource.screenTitle)
             .contains(mContext.getString(R.string.connected_devices_dashboard_title))
-        assertThat(indexData.first().keywords)
+        assertThat(resource.keywords)
             .isEqualTo(mContext.getString(R.string.keywords_external_display_settings))
-        assertThat(indexData.first().title)
+        assertThat(resource.title)
+            .isEqualTo(mContext.getString(R.string.external_display_settings_title))
+    }
+
+    @Test
+    fun searchIndexProvider_getRawIndexData_topLevelDeviceEnabled() {
+        ShadowDesktopSettingsUtils.setShouldShow(true)
+        val provider: Indexable.SearchIndexProvider =
+            TabbedDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+
+        val indexData = provider.getRawDataToIndex(mContext, /* enabled= */ true)
+        assertThat(indexData).hasSize(1)
+        val resource = indexData.first()
+        assertThat(resource).isNotNull()
+        assertThat(resource.screenTitle)
+            .contains(mContext.getString(R.string.device_dashboard_display_title))
+        assertThat(resource.keywords)
+            .isEqualTo(mContext.getString(R.string.keywords_external_display_settings))
+        assertThat(resource.title)
             .isEqualTo(mContext.getString(R.string.external_display_settings_title))
     }
 
@@ -535,7 +559,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
     class FakeDisplayTopologyPreferenceView(
         injector: ConnectedDisplayInjector,
-        initialSelectedDisplayId: Int? = null
+        initialSelectedDisplayId: Int? = null,
     ) : DisplayTopologyPreferenceView(injector, initialSelectedDisplayId) {
 
         var selectedListener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener? =

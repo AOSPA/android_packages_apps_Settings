@@ -21,7 +21,7 @@ import com.android.internal.app.LocaleStore
 import com.android.internal.app.SystemLocaleCollector
 import com.android.settings.R
 import com.android.settings.flags.Flags
-import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateRegion
+import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateSelectedLocale
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -65,11 +65,8 @@ class RegionPickerApiFirstScreen :
             set {
                 execute { value ->
                     val locale =
-                        Locale.Builder()
-                            .setLocale(Locale.getDefault())
-                            .setRegion(value)
-                            .build()
-                    updateRegion(locale)
+                        Locale.Builder().setLocale(Locale.getDefault()).setRegion(value).build()
+                    updateSelectedLocale(locale)
                 }
             }
         }

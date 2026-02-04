@@ -25,10 +25,13 @@ import android.util.SparseIntArray;
 
 import androidx.annotation.NonNull;
 
+import com.android.settings.core.InstrumentedPreferenceFragment;
+import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoController;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
 import com.android.settings.fuelgauge.batteryusage.BatteryEvent;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
 import com.android.settings.fuelgauge.batteryusage.PowerAnomalyEventList;
+import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.fuelgauge.Estimate;
 
 import java.util.List;
@@ -58,7 +61,7 @@ public interface PowerUsageFeatureProvider {
      */
     double getBatteryUsageListScreenOnTimeThresholdInMs();
 
-    /** Returns a threshold (mA) for the minimal comsume power in battery usage list */
+    /** Returns a threshold (mA) for the minimal consume power in battery usage list */
     double getBatteryUsageListConsumePowerThreshold();
 
     /** Returns an allowlist of app names combined into the system-apps item */
@@ -112,6 +115,11 @@ public interface PowerUsageFeatureProvider {
      * @return A string containing the estimate and a label indicating it is a normal estimate
      */
     String getOldEstimateDebugString(String timeRemaining);
+
+    /** Returns the battery advance info controller */
+    @Nullable
+    BatteryAdvanceInfoController getBatteryAdvanceInfoController(
+            Context context, Lifecycle lifecycle, InstrumentedPreferenceFragment fragment);
 
     /** Checks whether smart battery feature is supported in this device */
     boolean isSmartBatterySupported();

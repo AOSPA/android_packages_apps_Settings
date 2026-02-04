@@ -19,7 +19,6 @@
     android:title="@string/safety_center_title">
     <com.android.settingslib.widget.StatusBannerPreference
         android:key="safety_center_status_banner"
-        android:selectable="false"
         settings:controller="com.android.settings.safetycenter.ui.StatusBannerPreferenceController" />
 
     <com.android.settingslib.widget.BannerMessagePreferenceGroup

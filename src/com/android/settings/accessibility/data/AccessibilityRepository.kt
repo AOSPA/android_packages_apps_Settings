@@ -90,17 +90,16 @@ interface AccessibilityRepository {
 }
 
 internal class AccessibilityRepositoryImpl(
-    context: Context,
+    private val appContext: Context,
     internal val scope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob()),
 ) : AccessibilityRepository {
-    private val applicationContext: Context = context.applicationContext
     private val a11yManager: AccessibilityManager =
-        applicationContext.getSystemService(AccessibilityManager::class.java)!!
+        appContext.getSystemService(AccessibilityManager::class.java)!!
 
     private val packageChangeFlow: Flow<Unit> = callbackFlow {
         val observer: KeyedObserver<String?> = KeyedObserver { _, _ -> trySend(Unit) }
-        PackageObservable.get(context).addObserver(observer, HandlerExecutor.main)
-        awaitClose { PackageObservable.get(context).removeObserver(observer) }
+        PackageObservable.get(appContext).addObserver(observer, HandlerExecutor.main)
+        awaitClose { PackageObservable.get(appContext).removeObserver(observer) }
     }
 
     private val accessibilityShortcutInfosInternal: Flow<List<AccessibilityShortcutInfo>> =
@@ -110,7 +109,7 @@ internal class AccessibilityRepositoryImpl(
 
     private fun getInstalledAccessibilityShortcutList(): List<AccessibilityShortcutInfo> {
         return a11yManager.getInstalledAccessibilityShortcutListAsUser(
-            applicationContext,
+            appContext,
             UserHandle.myUserId(),
         )
     }
@@ -206,7 +205,10 @@ class AccessibilityRepositoryProvider {
         fun get(context: Context): AccessibilityRepository =
             instance
                 ?: synchronized(this) {
-                    instance ?: AccessibilityRepositoryImpl(context).also { instance = it }
+                    instance
+                        ?: AccessibilityRepositoryImpl(context.applicationContext).also {
+                            instance = it
+                        }
                 }
 
         @JvmStatic

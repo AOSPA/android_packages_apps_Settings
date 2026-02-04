@@ -22,13 +22,12 @@ import static android.app.settings.SettingsEnums.ACTION_CHANGE_REGION_DIALOG_NEG
 import static android.app.settings.SettingsEnums.ACTION_CHANGE_REGION_DIALOG_POSITIVE_BTN_CLICKED;
 import static android.app.settings.SettingsEnums.CHANGE_REGION_DIALOG;
 
-import static com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateRegion;
+import static com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateSelectedLocale;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.LocaleList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 
-import com.android.internal.app.LocalePicker;
 import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
@@ -47,7 +45,6 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import java.util.Locale;
-import java.util.Set;
 
 /**
  * Create a dialog for system region events.
@@ -148,7 +145,7 @@ public class RegionDialogFragment extends InstrumentedDialogFragment {
             if (mDialogType == DIALOG_CHANGE_SYSTEM_LOCALE_REGION
                     || mDialogType == DIALOG_CHANGE_PREFERRED_LOCALE_REGION) {
                 if (which == DialogInterface.BUTTON_POSITIVE) {
-                    updateRegion(mLocaleInfo.getLocale());
+                    updateSelectedLocale(mLocaleInfo.getLocale());
                     mMetricsFeatureProvider.action(
                             mContext,
                             mDialogType == DIALOG_CHANGE_SYSTEM_LOCALE_REGION

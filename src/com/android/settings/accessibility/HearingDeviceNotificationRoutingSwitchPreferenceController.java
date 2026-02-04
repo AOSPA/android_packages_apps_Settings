@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 The Android Open Source Project
+ * Copyright (C) 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,36 +17,35 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.media.AudioAttributes;
 import android.provider.Settings;
 
 import com.android.settingslib.bluetooth.HearingAidAudioRoutingConstants;
 
 /**
- * The controller of the hearing device notification routing list preference.
+ * The controller of the hearing device notification routing switch preference.
  */
-public class HearingDeviceNotificationRoutingPreferenceController extends
-        HearingDeviceAudioRoutingBasePreferenceController {
+public class HearingDeviceNotificationRoutingSwitchPreferenceController extends
+        HearingDeviceAudioRoutingBaseSwitchPreferenceController {
 
-    public HearingDeviceNotificationRoutingPreferenceController(Context context,
+    public HearingDeviceNotificationRoutingSwitchPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey);
     }
 
     @Override
-    protected int[] getSupportedAttributeList() {
+    protected @AudioAttributes.AttributeUsage int[] getAudioAttributeUsages() {
         return HearingAidAudioRoutingConstants.NOTIFICATION_ROUTING_ATTRIBUTES;
-
     }
 
     @Override
-    protected void saveRoutingValue(Context context, int routingValue) {
+    protected void setRoutingValue(Context context, int routingValue) {
         Settings.Secure.putInt(context.getContentResolver(),
                 Settings.Secure.HEARING_AID_NOTIFICATION_ROUTING, routingValue);
-
     }
 
     @Override
-    protected int restoreRoutingValue(Context context) {
+    protected int getRoutingValue(Context context) {
         return Settings.Secure.getInt(context.getContentResolver(),
                 Settings.Secure.HEARING_AID_NOTIFICATION_ROUTING,
                 HearingAidAudioRoutingConstants.RoutingValue.AUTO);

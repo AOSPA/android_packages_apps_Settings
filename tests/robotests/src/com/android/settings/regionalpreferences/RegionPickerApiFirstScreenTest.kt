@@ -61,8 +61,8 @@ class RegionPickerApiFirstScreenTest {
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         setupLocaleInfoList(
-            Locale.forLanguageTag("zh-Hant-TW"),
-            "zh-Hant-TW" to "繁體中文（台灣)",
+            Locale.US,
+            "en-US" to "English (United States)",
             "es-US" to "Español (Estados Unidos)"
         )
         val shadowTelephonyManager: ShadowTelephonyManager =
@@ -95,7 +95,7 @@ class RegionPickerApiFirstScreenTest {
         setupLocaleInfoList(
             Locale.forLanguageTag("fr-FR"),
             "fr-FR" to "Français (France)",
-            "zh-Hant-TW" to "繁體中文（台灣)"
+            "en-US" to "English (United States)"
         )
 
         assertThat(tester.get<String>(KEY_PREFERENCE)).isEqualTo("FR")
@@ -103,15 +103,12 @@ class RegionPickerApiFirstScreenTest {
 
     @Test
     fun setDefaultSystemLanguageRegion_isSet() {
-        tester.set(KEY_PREFERENCE, "TW")
+        tester.set(KEY_PREFERENCE, "GB")
 
-        assertThat(Locale.getDefault().toLanguageTag()).isEqualTo("zh-Hant-TW")
+        assertThat(Locale.getDefault().toLanguageTag()).isEqualTo("en-GB")
         assertThat(
-            LocaleStore.getLocaleInfo(
-                Locale.forLanguageTag("zh-Hant-TW")
-            ).fullCountryNameNative
-        )
-            .isEqualTo("台灣")
+            LocaleStore.getLocaleInfo(Locale.getDefault()).fullCountryNameNative
+        ).isEqualTo("United Kingdom")
 
         Locale.setDefault(Locale.forLanguageTag("fr-FR"))
         tester.set(KEY_PREFERENCE, "FR")
@@ -124,25 +121,25 @@ class RegionPickerApiFirstScreenTest {
     @Test
     fun setDefaultSystemLanguageRegion_isSet_withExtension() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(context, "")
-        Locale.setDefault(Locale.forLanguageTag("zh-Hant-TW-u-ms-ussystem"))
-        tester.set(KEY_PREFERENCE, "MO")
+        Locale.setDefault(Locale.forLanguageTag("en-US-u-ms-ussystem"))
+        tester.set(KEY_PREFERENCE, "IN")
 
         assertThat(
             Locale.getDefault().toLanguageTag()
-        ).isEqualTo("zh-Hant-MO-u-ms-ussystem")
+        ).isEqualTo("en-IN-u-ms-ussystem")
         assertThat(LocaleStore.getLocaleInfo(Locale.getDefault()).fullCountryNameNative)
-            .isEqualTo("澳門")
+            .isEqualTo("India")
     }
 
     @Test
     fun systemLocaleRegion_optionsAreInSupportedList() {
-        Locale.setDefault(Locale.forLanguageTag("zh-Hant-TW"))
+        Locale.setDefault(Locale.US)
 
         assertThat(tester.getPreferenceOptions<String>(KEY_PREFERENCE))
-            .containsExactly(
-                ("TW" to "台灣"),
-                ("HK" to "香港"),
-                ("MO" to "澳門"),
+            .containsAtLeast(
+                ("US" to "United States"),
+                ("GB" to "United Kingdom"),
+                ("IN" to "India"),
             )
     }
 
