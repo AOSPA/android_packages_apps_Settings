@@ -38,11 +38,11 @@ class DisplayBlockA11yController(
     private val onMove: (Direction) -> Unit,
 ) {
     var arrowMovement: ArrowMovement = ArrowMovement.immovable()
+    var areArrowsVisible: Boolean = false
 
-    private val arrowSizePx =
-        context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_size)
+    val arrowSizePx = context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_size)
 
-    private val arrowTappableAreaSizePx =
+    val arrowTappableAreaSizePx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_tappable_area_size)
 
     val arrowButtons: Map<Direction, View> =
@@ -131,13 +131,13 @@ class DisplayBlockA11yController(
             context.getString(R.string.external_display_topology_a11y_action_move_right),
         )
 
-    fun setArrowVisible(visible: Boolean) {
+    fun updateArrowVisibility() {
         arrowButtons.forEach { (direction, buttonView) ->
-            buttonView.visibility = if (isMovable(direction) && visible) VISIBLE else GONE
+            buttonView.visibility = if (isMovable(direction) && areArrowsVisible) VISIBLE else GONE
         }
     }
 
-    private fun isMovable(direction: Direction) = arrowMovement.directionMapping[direction] ?: false
+    fun isMovable(direction: Direction) = arrowMovement.directionMapping[direction] ?: false
 
     private fun createArrowButton(props: ArrowButtonProperties) =
         FrameLayout(context).apply {

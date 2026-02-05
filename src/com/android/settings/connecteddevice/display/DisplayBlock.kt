@@ -31,19 +31,31 @@ import com.android.settings.R
 /** Represents a draggable block in the topology pane. */
 class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injector.context!!) {
     @VisibleForTesting
-    internal val highlightPx =
-        context.resources.getDimensionPixelSize(R.dimen.display_block_highlight_width)
-
-    @VisibleForTesting
     internal val cornerRadiusPx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_corner_radius)
 
-    @VisibleForTesting
-    internal val arrowSizePx =
-        context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_size)
+    private val highlightPx =
+        context.resources.getDimensionPixelSize(R.dimen.display_block_highlight_width)
 
-    private val arrowTappableAreaSizePx =
-        context.resources.getDimensionPixelSize(R.dimen.display_block_arrow_tappable_area_size)
+    private val horizontalArrowMargin: Int
+        get() =
+            if (
+                a11yController.areArrowsVisible &&
+                    (a11yController.isMovable(Direction.LEFT) ||
+                        a11yController.isMovable(Direction.RIGHT))
+            )
+                a11yController.arrowSizePx
+            else 0
+
+    private val verticalArrowMargin: Int
+        get() =
+            if (
+                a11yController.areArrowsVisible &&
+                    (a11yController.isMovable(Direction.UP) ||
+                        a11yController.isMovable(Direction.DOWN))
+            )
+                a11yController.arrowSizePx
+            else 0
 
     // Id of the logical display this DisplayBlock represents
     val logicalDisplayId: Int
@@ -57,12 +69,15 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
                     val bounds = Rect()
                     arrowButton.getHitRect(bounds)
 
-                    // Expand the bounds to at least 48dp - centered on the button's current center
+                    // Expand the bounds to at least arrowTappableAreaSizePx, centered on the
+                    // button's current center
                     val width = bounds.width()
                     val height = bounds.height()
 
-                    val extraWidth = (arrowTappableAreaSizePx - width).coerceAtLeast(0)
-                    val extraHeight = (arrowTappableAreaSizePx - height).coerceAtLeast(0)
+                    val extraWidth =
+                        (a11yController.arrowTappableAreaSizePx - width).coerceAtLeast(0)
+                    val extraHeight =
+                        (a11yController.arrowTappableAreaSizePx - height).coerceAtLeast(0)
 
                     // Only add a TouchDelegate if the bounds need to be expanded.
                     if (extraWidth > 0 || extraHeight > 0) {
@@ -87,14 +102,22 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         }
 
     /**
-     * The coordinates of the upper-left corner of the block in pane coordinates, not including the
-     * highlight border.
+     * The logical position of the display's wallpaper content within the parent topology pane.
+     *
+     * Unlike [x] and [y], which define the top-left corner of the entire [DisplayBlock] container
+     * (including variable margins for arrows and highlights), this property refers to the stable
+     * visual anchor of the display itself.
+     * - **Getter:** Returns the coordinate of the wallpaper, calculated by adding the current
+     *   margins to the View's [x]/[y].
+     * - **Setter:** Updates the View's [x]/[y] by subtracting the current margins, ensuring the
+     *   wallpaper lands at the specified coordinates regardless of the container's current padding.
      */
     var positionInPane: PointF
-        get() = PointF(x + highlightPx + arrowSizePx, y + highlightPx + arrowSizePx)
-        set(value: PointF) {
-            x = value.x - highlightPx - arrowSizePx
-            y = value.y - highlightPx - arrowSizePx
+        get() =
+            PointF(x + highlightPx + horizontalArrowMargin, y + highlightPx + verticalArrowMargin)
+        set(value) {
+            x = value.x - highlightPx - horizontalArrowMargin
+            y = value.y - highlightPx - verticalArrowMargin
         }
 
     var onA11yMoveListener: ((direction: Direction) -> Unit)? = null
@@ -125,7 +148,6 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
 
         a11yController.arrowButtons.values.forEach(::addView)
         accessibilityDelegate = a11yController.accessibilityDelegate
-
     }
 
     override fun onAttachedToWindow() {
@@ -151,7 +173,36 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     }
 
     fun setArrowVisible(visible: Boolean) {
-        a11yController.setArrowVisible(visible)
+        if (a11yController.areArrowsVisible == visible) return
+
+        updateMarginsAndCompensatePosition {
+            a11yController.areArrowsVisible = visible
+            a11yController.updateArrowVisibility()
+        }
+    }
+
+    /**
+     * Updates state within the [updateBlock] and shifts the View's X/Y coordinates to compensate
+     * for any resulting changes in margins, keeping the wallpaper visually stationary.
+     */
+    private fun updateMarginsAndCompensatePosition(updateBlock: () -> Unit) {
+        val oldHMargin = horizontalArrowMargin
+        val oldVMargin = verticalArrowMargin
+
+        updateBlock()
+
+        val newHMargin = horizontalArrowMargin
+        val newVMargin = verticalArrowMargin
+
+        // Shift the View to compensate for the margin change.
+        // The visual position of the wallpaper is determined by (View.x + Margin).
+        // When arrows appear, margins increase, pushing the wallpaper inward relative to the View.
+        // To keep the wallpaper visually stationary on screen, we must shift the View's origin
+        // in the opposite direction by the delta of the margins.
+        x += (oldHMargin - newHMargin)
+        y += (oldVMargin - newVMargin)
+
+        wallpaperView.layoutParams?.let { setupLayoutBounds(Size(it.width, it.height)) }
     }
 
     // DisplayBlock bounds are bigger than the actual display wallpaper (+ padding) area. Sets
@@ -170,8 +221,10 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
      * @param logicalDisplayId ID of the logical display this DisplayBlock represents
      * @param displayIdToShowWallpaper ID of the display whose wallpaper would be projected on this
      *   display block.
-     * @param topLeft coordinates of top left corner of the block, not including highlight border
-     * @param bottomRight coordinates of bottom right corner of the block, not including highlight
+     * @param contentTopLeftWithoutMargins coordinates of top left corner of the block, not
+     *   including highlight border and margins for arrow movements (sticking out of the display)
+     * @param contentBottomRightWithoutMargins coordinates of bottom right corner of the block, not
+     *   including highlight border and margins for arrow movements (sticking out of the display)
      *   border
      * @param surfaceScale scale in pixels of the size of the wallpaper mirror to the actual
      *   wallpaper on the screen - should be less than one to indicate scaling to smaller size
@@ -181,15 +234,18 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     fun reset(
         logicalDisplayId: Int,
         displayIdToShowWallpaper: Int,
-        topLeft: PointF,
-        bottomRight: PointF,
+        contentTopLeftWithoutMargins: PointF,
+        contentBottomRightWithoutMargins: PointF,
         surfaceScale: Float,
         surfaceSize: Size,
         arrowMovement: ArrowMovement,
     ) {
         surfaceRenderer.reset(logicalDisplayId, displayIdToShowWallpaper, surfaceScale, surfaceSize)
-        positionInPane = topLeft
         a11yController.arrowMovement = arrowMovement
+        a11yController.updateArrowVisibility()
+        // It's important to let arrows visibility update to be done first, as the positioning will
+        // rely on whether arrows are visible or not
+        positionInPane = contentTopLeftWithoutMargins
 
         val displayDevice = injector.getDisplay(logicalDisplayId)
         contentDescription =
@@ -198,7 +254,10 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
                 displayDevice?.name ?: "Display $logicalDisplayId",
             )
         setupLayoutBounds(
-            Size((bottomRight.x - topLeft.x).toInt(), (bottomRight.y - topLeft.y).toInt())
+            Size(
+                (contentBottomRightWithoutMargins.x - contentTopLeftWithoutMargins.x).toInt(),
+                (contentBottomRightWithoutMargins.y - contentTopLeftWithoutMargins.y).toInt(),
+            )
         )
     }
 
@@ -229,8 +288,8 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
      * </pre>
      */
     private fun setupLayoutBounds(bounds: Size) {
-        val paddedWidth = bounds.width + 2 * highlightPx + 2 * arrowSizePx
-        val paddedHeight = bounds.height + 2 * highlightPx + 2 * arrowSizePx
+        val paddedWidth = bounds.width + 2 * highlightPx + 2 * horizontalArrowMargin
+        val paddedHeight = bounds.height + 2 * highlightPx + 2 * verticalArrowMargin
 
         if (width == paddedWidth && height == paddedHeight) {
             // Will not receive a surfaceChanged callback, so in case the wallpaper is different,
@@ -251,27 +310,32 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
             it.width = bounds.width
             it.height = bounds.height
             if (it is MarginLayoutParams) {
-                val marginToParentBounds = highlightPx + arrowSizePx
                 it.setMargins(
-                    marginToParentBounds,
-                    marginToParentBounds,
-                    marginToParentBounds,
-                    marginToParentBounds,
+                    highlightPx + horizontalArrowMargin,
+                    highlightPx + verticalArrowMargin,
+                    highlightPx + horizontalArrowMargin,
+                    highlightPx + verticalArrowMargin,
                 )
             }
             wallpaperView.layoutParams = it
         }
         // Padding is already applied in xml layout
-        (backgroundView.layoutParams as MarginLayoutParams).let {
-            it.width = bounds.width + 2 * highlightPx
-            it.height = bounds.height + 2 * highlightPx
-            it.setMargins(arrowSizePx, arrowSizePx, arrowSizePx, arrowSizePx)
+        val boundaryPlusHighlightWidth = bounds.width + 2 * highlightPx
+        val boundaryPlusHighlightHeight = bounds.height + 2 * highlightPx
+        fun updateBoundaryWithHighlight(view: View) {
+            (view.layoutParams as MarginLayoutParams).let {
+                it.width = boundaryPlusHighlightWidth
+                it.height = boundaryPlusHighlightHeight
+                it.setMargins(
+                    horizontalArrowMargin,
+                    verticalArrowMargin,
+                    horizontalArrowMargin,
+                    verticalArrowMargin,
+                )
+            }
         }
-        (selectionMarkerView.layoutParams as MarginLayoutParams).let {
-            it.width = bounds.width + 2 * highlightPx
-            it.height = bounds.height + 2 * highlightPx
-            it.setMargins(arrowSizePx, arrowSizePx, arrowSizePx, arrowSizePx)
-        }
+        updateBoundaryWithHighlight(backgroundView)
+        updateBoundaryWithHighlight(selectionMarkerView)
 
         wallpaperView.outlineProvider =
             object : ViewOutlineProvider() {
