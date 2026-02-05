@@ -25,8 +25,8 @@ import android.telephony.SubscriptionManager
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
-import com.android.settings.flags.Flags
 import com.android.settingslib.spa.widget.preference.ListPreferenceOption
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
@@ -199,7 +199,7 @@ class PrimarySimRepositoryTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_EXCLUDE_OPPORTUNISTIC_SUB_FROM_DSDS)
+    @EnableFlags(Flags.FLAG_ENABLE_IS_PRIVATE_NETWORK_API)
     fun getPrimarySimInfo_excludeOpportunisticSubFromDsds_hideOpportunisticSub() {
         val simList = listOf(
             SUB_INFO_1,

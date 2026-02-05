@@ -28,6 +28,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.internal.telephony.flags.Flags as TelephonyFlags
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import kotlinx.coroutines.flow.flowOf
@@ -57,7 +58,7 @@ class NetworkCellularGroupProviderTest {
         }
 
     @Test
-    @EnableFlags(Flags.FLAG_EXCLUDE_OPPORTUNISTIC_SUB_FROM_DSDS)
+    @EnableFlags(TelephonyFlags.FLAG_ENABLE_IS_PRIVATE_NETWORK_API)
     fun primarySimSectionImpl_twoNormalSims_displayed() {
         val simList = listOf(SUB_INFO_1, SUB_INFO_2)
 
@@ -77,7 +78,7 @@ class NetworkCellularGroupProviderTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_EXCLUDE_OPPORTUNISTIC_SUB_FROM_DSDS)
+    @EnableFlags(TelephonyFlags.FLAG_ENABLE_IS_PRIVATE_NETWORK_API)
     fun primarySimSectionImpl_oneNormalOneOpportunistic_notDisplayed() {
         val simList = listOf(SUB_INFO_1, SUB_INFO_OPPORTUNISTIC)
 
