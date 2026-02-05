@@ -15,19 +15,13 @@
  */
 package com.android.settings.security;
 
-import static com.android.internal.R.string.config_defaultContentProtectionService;
-
-import android.content.ComponentName;
 import android.content.Context;
-import android.provider.DeviceConfig;
-import android.view.contentcapture.ContentCaptureManager;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.BasePreferenceController;
 
+// LINT.IfChange
 public class ContentProtectionPreferenceController extends BasePreferenceController {
 
     public ContentProtectionPreferenceController(@NonNull Context context, @NonNull String key) {
@@ -41,3 +35,4 @@ public class ContentProtectionPreferenceController extends BasePreferenceControl
                 : UNSUPPORTED_ON_DEVICE;
     }
 }
+// LINT.ThenChange(ContentProtectionScreenApi.kt)
