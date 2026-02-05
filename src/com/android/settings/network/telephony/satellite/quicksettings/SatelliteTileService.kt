@@ -65,12 +65,7 @@ open class SatelliteTileService : TileService() {
 
     override fun onTileAdded() {
         super.onTileAdded()
-        satelliteTilePromptUtils.setAddTilePromptShown(this, true)
-    }
-
-    override fun onTileRemoved() {
-        super.onTileRemoved()
-        satelliteTilePromptUtils.setAddTilePromptShown(this, false)
+        satelliteTilePromptUtils.markAllPromptsShown(this)
     }
 
     override fun onClick() {

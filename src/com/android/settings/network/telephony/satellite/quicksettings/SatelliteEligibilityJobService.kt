@@ -75,10 +75,10 @@ open class SatelliteEligibilityJobService : JobService() {
                 return
             }
 
-            // We need to check if the prompt has already been shown.
+            // We need to check if all prompts have already been shown.
             // If so, we don't need to do anything.
-            if (satelliteTilePromptUtils.hasAddTilePromptBeenShown(context)) {
-                Log.d(TAG, "Prompt already shown, skipping job scheduling.")
+            if (satelliteTilePromptUtils.areAllPromptsShown(context)) {
+                Log.d(TAG, "All prompts shown, skipping job scheduling.")
                 return
             }
 
@@ -151,10 +151,9 @@ open class SatelliteEligibilityJobService : JobService() {
             return false
         }
 
-        // We need to check if the prompt has already been shown.
-        // If so, we don't need to do anything.
-        if (satelliteTilePromptUtils.hasAddTilePromptBeenShown(this)) {
-            Log.d(TAG, "Prompt already shown, stopping job.")
+        // If all prompts have been shown (or the tile was added), do not proceed.
+        if (satelliteTilePromptUtils.areAllPromptsShown(this)) {
+            Log.i(TAG, "All prompts shown; stopping job.")
             return false
         }
 
@@ -233,13 +232,16 @@ open class SatelliteEligibilityJobService : JobService() {
     }
 
     private fun showPromptAndFinish(params: JobParameters) {
-        if (!satelliteTilePromptUtils.hasAddTilePromptBeenShown(this)) {
+        if (satelliteTilePromptUtils.shouldShowSatelliteTilePrompt(this)) {
             satelliteTilePromptUtils.showSatelliteTileAvailableNotification(this)
+            satelliteTilePromptUtils.recordPromptShown(this)
+        } else {
+            Log.d(TAG, "Should not show prompt yet, interval has not passed.")
         }
         cleanup()
         // Schedule the job again in the case that the user doesn't interact with the
-        // notification to add the tile. We will fully stop the job once the add tile prompt has
-        // been shown to the user.
+        // notification to add the tile, or for the next retry interval. We will fully stop
+        // the job once all prompts have been shown.
         schedule(this@SatelliteEligibilityJobService)
         jobFinished(params, false)
     }
