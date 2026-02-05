@@ -18,6 +18,8 @@ package com.android.settings.notification.modes
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.UserManager.DISALLOW_ADJUST_VOLUME
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -25,11 +27,13 @@ import com.android.settings.R
 import com.android.settings.Settings.ModesSettingsActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
+import com.android.settings.flags.Flags.FLAG_HIDE_MODES_SETTING_IN_DEMO_MODE
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.notification.modes.ZenMode
 import com.android.settingslib.notification.modes.ZenModesBackend
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
@@ -43,6 +47,8 @@ import org.robolectric.Shadows.shadowOf
 
 @RunWith(AndroidJUnit4::class)
 class ZenModesListScreenTest {
+
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     private lateinit var zenModesBackend: ZenModesBackend
     private lateinit var mockLifeCycleContext: PreferenceLifecycleContext
@@ -91,7 +97,24 @@ class ZenModesListScreenTest {
     }
 
     @Test
-    fun isEnabled_returnsTrue() {
+    @EnableFlags(FLAG_HIDE_MODES_SETTING_IN_DEMO_MODE)
+    fun isEnabled_inDemoMode_returnsFalse() {
+        val spyContext = spy(appContext)
+        val mockResources = mock<android.content.res.Resources>()
+        whenever(spyContext.resources).doReturn(mockResources)
+        whenever(mockResources.getBoolean(R.bool.config_hide_modes_setting_in_demo_mode))
+            .doReturn(true)
+        // Put the device in demo mode.
+        Settings.Global.putInt(spyContext.contentResolver, Settings.Global.DEVICE_DEMO_MODE, 1)
+
+        assertThat(preferenceScreenCreator.isEnabled(spyContext)).isFalse()
+
+        // Clean up to the default value.
+        Settings.Global.putInt(spyContext.contentResolver, Settings.Global.DEVICE_DEMO_MODE, 0)
+    }
+
+    @Test
+    fun isEnabled_notInDemoMode_returnsTrue() {
         assertThat(preferenceScreenCreator.isEnabled(appContext)).isTrue()
     }
 

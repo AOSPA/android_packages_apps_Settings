@@ -200,15 +200,13 @@ class SatelliteLandingPageViewModel(
     ) {
         val items = mutableListOf<SatelliteAppItem>()
 
-        // Emergency SOS app
-        if (!isLteBasedNtnSupported) {
-            createSatelliteAppItem(
-                    packageName = SatelliteAppsRepository.PACKAGE_NAME_SAFETY_HUB,
-                    intent = appsRepository.getEmergencySosIntent(),
-                    appLabel = context.getString(R.string.satellite_emergency_sos),
-                )
-                ?.let { items.add(it) }
-        }
+        // Phone app
+        createSatelliteAppItem(
+                packageName = SatelliteAppsRepository.PACKAGE_NAME_PHONE,
+                intent = appsRepository.getDialerIntent(),
+                appSummary = context.getString(R.string.satellite_phone_summary),
+            )
+            ?.let { items.add(it) }
 
         // Configurable apps based on NTN support
         val appPackages =
@@ -233,11 +231,12 @@ class SatelliteLandingPageViewModel(
         packageName: String,
         intent: Intent?,
         appLabel: String? = null,
+        appSummary: String? = null,
     ): SatelliteAppItem? {
         if (intent == null) return null
         return try {
             val appInfo = packageManager.getApplicationInfo(packageName, 0)
-            SatelliteAppItem(appInfo, intent, appLabel)
+            SatelliteAppItem(appInfo, intent, appLabel, appSummary)
         } catch (e: PackageManager.NameNotFoundException) {
             Log.w(TAG, "App not found: $packageName")
             null

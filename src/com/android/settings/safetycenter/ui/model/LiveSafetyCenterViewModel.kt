@@ -243,9 +243,18 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     }
 
     @RequiresPermission(Manifest.permission.MANAGE_SAFETY_CENTER)
-    override fun pageOpen() {
+    override fun pageOpen(safetySourceIds: List<String>) {
         executeIfNotChangingConfigurations {
-            safetyCenterManager.refreshSafetySources(SafetyCenterManager.REFRESH_REASON_PAGE_OPEN)
+            if (safetySourceIds.isEmpty()) {
+                safetyCenterManager.refreshSafetySources(
+                    SafetyCenterManager.REFRESH_REASON_PAGE_OPEN
+                )
+            } else {
+                safetyCenterManager.refreshSafetySources(
+                    SafetyCenterManager.REFRESH_REASON_PAGE_OPEN,
+                    safetySourceIds,
+                )
+            }
         }
     }
 
@@ -262,9 +271,9 @@ class LiveSafetyCenterViewModel(app: Application) : SafetyCenterViewModel(app) {
     override fun executeIssueAction(
         issue: SafetyCenterIssue,
         action: SafetyCenterIssue.Action,
-        launchTaskId: Int,
+        launchTaskId: Int?,
     ) {
-        if (Flags.openSafetyCenterApis()) {
+        if (Flags.openSafetyCenterApis() && launchTaskId != null) {
             safetyCenterManager.executeSafetyCenterIssueAction(issue.id, action.id, launchTaskId)
         } else {
             safetyCenterManager.executeSafetyCenterIssueAction(issue.id, action.id)

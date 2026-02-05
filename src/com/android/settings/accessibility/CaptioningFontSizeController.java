@@ -26,6 +26,7 @@ import androidx.preference.Preference;
 import com.android.settings.core.BasePreferenceController;
 
 /** Preference controller for captioning font size. */
+// LINT.IfChange
 public class CaptioningFontSizeController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
@@ -61,3 +62,4 @@ public class CaptioningFontSizeController extends BasePreferenceController
         return true;
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptionPropertyPreferences.kt:caption_font_size_pref)

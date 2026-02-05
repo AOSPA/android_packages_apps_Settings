@@ -236,7 +236,7 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
                         AppListItemModel(
                             record = item,
                             label = item.getAppLabel(packageManager),
-                            summary = { "" },
+                            summary = { item.summary ?: "" },
                         )
                     appListItemModel.SatelliteAppListItem(
                         enabled = areAppsEnabled,

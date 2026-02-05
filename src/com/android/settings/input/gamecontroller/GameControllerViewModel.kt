@@ -20,6 +20,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.hardware.input.InputDeviceIdentifier
 import android.hardware.input.InputManager
+import android.hardware.input.KeyGlyphMap
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -42,6 +43,8 @@ class GameControllerViewModel(
     val controllerDevice: GameControllerUtils.ControllerDevice =
         GameControllerUtils.getControllerDeviceFromIdentifier(application, identifier)
             ?: throw IllegalStateException("ControllerDevice could not be created for identifier.")
+
+    val glyphMap: KeyGlyphMap? = inputManager.getKeyGlyphMap(controllerDevice.inputDeviceId)
 
     // Holds the current state of all button remappings.
     private val _buttonRemapping = MutableLiveData<Map<Int, Int>>()

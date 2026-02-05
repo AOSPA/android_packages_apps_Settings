@@ -17,11 +17,13 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.content.Context
+import android.database.ContentObserver
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.os.Handler
 import android.os.Looper
+import android.provider.Settings
 import android.telephony.ServiceState
 import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
@@ -167,6 +169,29 @@ constructor(
             }
             .stateIn(scope, SharingStarted.WhileSubscribed(), intArrayOf())
 
+    private fun isAirplaneModeEnabled(): Boolean {
+        return Settings.Global.getInt(
+            context.contentResolver,
+            Settings.Global.AIRPLANE_MODE_ON,
+            0,
+        ) != 0
+    }
+
+    private val isAirplaneModeEnabledFlow = callbackFlow {
+        val uri = Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON)
+        val observer =
+            object : ContentObserver(Handler(Looper.getMainLooper())) {
+                override fun onChange(selfChange: Boolean) {
+                    trySend(isAirplaneModeEnabled())
+                }
+            }
+
+        context.contentResolver.registerContentObserver(uri, false, observer)
+        trySend(isAirplaneModeEnabled())
+
+        awaitClose { context.contentResolver.unregisterContentObserver(observer) }
+    }
+
     private val isInternetConnectedFlow = callbackFlow {
         var isConnected = checkInitialInternetAvailability()
         val callback =
@@ -216,7 +241,13 @@ constructor(
                 isOemSatelliteActiveFlow,
                 satelliteDisallowedReasons,
                 isTerrestrialConnected,
-            ) { carrierState, isOemActive, disallowedReasons, isTerrestrial ->
+                isAirplaneModeEnabledFlow,
+            ) { carrierState, isOemActive, disallowedReasons, isTerrestrial, isAirplaneMode ->
+                // Immediate return if Airplane Mode is on
+                if (isAirplaneMode) {
+                    return@combine SatelliteStatus.NOT_AVAILABLE
+                }
+
                 val isSatelliteActive = carrierState.isActive || isOemActive
                 val isOemAllowed = disallowedReasons.isEmpty()
                 val isSatelliteAvailable =

@@ -22,6 +22,7 @@ import android.util.Log;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
@@ -48,6 +49,9 @@ public class ZenModesLinkPreferenceController extends BasePreferenceController
     @Override
     @AvailabilityStatus
     public int getAvailabilityStatus() {
+        if (Utils.shouldHideModesInDemoMode(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return AVAILABLE;
     }
 

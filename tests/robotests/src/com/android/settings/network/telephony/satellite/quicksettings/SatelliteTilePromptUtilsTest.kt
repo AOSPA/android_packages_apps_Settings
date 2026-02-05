@@ -21,6 +21,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
@@ -35,6 +36,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.never
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when` as whenever
@@ -140,7 +142,30 @@ class SatelliteTilePromptUtilsTest {
             assertPendingIntent(contentIntent)
             assertPendingIntent(actions[0].actionIntent)
             assertThat(actions[0].title).isEqualTo(context.getString(R.string.add_tile_action))
+            assertDismissPendingIntent(deleteIntent)
         }
+    }
+
+    @Test
+    fun satellitePromptDismissalReceiver_onReceive_dismissAction_marksPromptAsShown() {
+        val receiver = SatelliteTilePromptUtils.SatellitePromptDismissalReceiver()
+        val intent = Intent(SatelliteTilePromptUtils.ACTION_DISMISS)
+
+        receiver.onReceive(context, intent)
+
+        verify(mockEditor).putBoolean(eq(PROMPT_SHOWN_KEY), eq(true))
+        verify(mockEditor).apply()
+    }
+
+    @Test
+    fun satellitePromptDismissalReceiver_onReceive_otherAction_doesNothing() {
+        val receiver = SatelliteTilePromptUtils.SatellitePromptDismissalReceiver()
+        val intent = Intent("some.other.action")
+
+        receiver.onReceive(context, intent)
+
+        verify(mockEditor, never()).putBoolean(anyString(), anyBoolean())
+        verify(mockEditor, never()).apply()
     }
 
     private fun assertPendingIntent(pendingIntent: PendingIntent?) {
@@ -155,6 +180,17 @@ class SatelliteTilePromptUtilsTest {
                 )
             )
             .isEqualTo(R.id.satellite_prompt_notification_id)
+        assertThat(shadowIntent.flags)
+            .isEqualTo(PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+    }
+
+    private fun assertDismissPendingIntent(pendingIntent: PendingIntent?) {
+        assertThat(pendingIntent).isNotNull()
+        val shadowIntent = Shadows.shadowOf(pendingIntent)
+        assertThat(shadowIntent.savedIntent.component?.className)
+            .isEqualTo(SatelliteTilePromptUtils.SatellitePromptDismissalReceiver::class.java.name)
+        assertThat(shadowIntent.savedIntent.action)
+            .isEqualTo(SatelliteTilePromptUtils.ACTION_DISMISS)
         assertThat(shadowIntent.flags)
             .isEqualTo(PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }

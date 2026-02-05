@@ -22,13 +22,15 @@ import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-
 import android.util.Log;
 import android.util.ArraySet;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -40,6 +42,7 @@ import com.android.settingslib.dream.DreamBackend.DreamInfo;
 import com.android.settingslib.widget.LayoutPreference;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -60,7 +63,7 @@ public class DreamPickerController extends BasePreferenceController {
     @Nullable
     private DreamInfo mActiveDream;
     private List<DreamInfo> mSelectedDreams = new ArrayList<>();
-    private DreamAdapter mAdapter;
+    private DreamAdapter<DreamItem> mAdapter;
 
     private final ArraySet<Callback> mCallbacks = new ArraySet<>();
 
@@ -89,42 +92,48 @@ public class DreamPickerController extends BasePreferenceController {
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        final LayoutPreference pref = screen.findPreference(getPreferenceKey());
+        if (pref == null) {
+            return;
+        }
 
-        mAdapter = new DreamAdapter(R.layout.dream_preference_layout,
+        mAdapter = new DreamAdapter<>(R.layout.dream_preference_layout,
                 mDreamInfos.stream()
                         .map(DreamItem::new)
                         .collect(Collectors.toList()));
 
         mAdapter.setEnabled(mBackend.isEnabled());
 
-        final LayoutPreference pref = screen.findPreference(getPreferenceKey());
-        if (pref == null) {
-            return;
-        }
         final RecyclerView recyclerView = pref.findViewById(R.id.dream_list);
         recyclerView.setLayoutManager(new AutoFitGridLayoutManager(mContext));
-        if (dreamsSwitcher()) {
-            recyclerView.addItemDecoration(
-                new FixedSpaceAroundItemDecoration(
-                    mContext, R.dimen.dream_preference_card_fixed_space_around)
-            );
-            // Apply negative padding on RecyclerView to compensate spacing of items on the edge
-            final int spacingCompensation = mContext.getResources().getDimensionPixelSize(
-                        R.dimen.dream_preference_card_space_compensation);
-            final int targetBottomPadding = mContext.getResources().getDimensionPixelSize(
-                        R.dimen.dream_preference_card_padding);
-            recyclerView.setPaddingRelative(
-                spacingCompensation,
-                spacingCompensation,
-                spacingCompensation,
-                targetBottomPadding + spacingCompensation
-            );
-        } else {
-            recyclerView.addItemDecoration(
-                    new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
-        }
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(mAdapter);
+        setupRecyclerView(recyclerView);
+    }
+
+    private void setupRecyclerView(RecyclerView recyclerView) {
+        if (!dreamsSwitcher()) {
+            recyclerView.addItemDecoration(
+                    new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
+            return;
+        }
+
+        recyclerView.addItemDecoration(
+            new FixedSpaceAroundItemDecoration(
+                mContext, R.dimen.dream_preference_card_fixed_space_around)
+        );
+        // Apply negative padding on RecyclerView to compensate spacing of items on the edge
+        final int spacingCompensation = mContext.getResources().getDimensionPixelSize(
+                    R.dimen.dream_preference_card_space_compensation);
+        final int targetBottomPadding = mContext.getResources().getDimensionPixelSize(
+                    R.dimen.dream_preference_card_padding);
+        recyclerView.setPaddingRelative(
+            spacingCompensation,
+            spacingCompensation,
+            spacingCompensation,
+            targetBottomPadding + spacingCompensation
+        );
+        new ItemTouchHelper(new DreamItemTouchHelperCallback()).attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -151,11 +160,13 @@ public class DreamPickerController extends BasePreferenceController {
             mDreamInfos.sort(DREAM_INFO_COMPARATOR);
             mSelectedDreams = filterSelectedDreamInfos(mDreamInfos);
         }
-        mAdapter.setItemList(mDreamInfos
-                .stream()
-                .map(DreamItem::new)
-                .collect(Collectors.toList()));
-        mAdapter.notifyDataSetChanged();
+        if (mAdapter != null) {
+            mAdapter.setItemList(mDreamInfos
+                    .stream()
+                    .map(DreamItem::new)
+                    .collect(Collectors.toList()));
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     private List<DreamInfo> filterSelectedDreamInfos(List<DreamInfo> dreamInfos) {
@@ -200,6 +211,109 @@ public class DreamPickerController extends BasePreferenceController {
 
     void removeCallback(Callback callback) {
         mCallbacks.remove(callback);
+    }
+
+    @VisibleForTesting
+    class DreamItemTouchHelperCallback extends ItemTouchHelper.Callback {
+        @Override
+        public int getMovementFlags(@NonNull RecyclerView recyclerView,
+                @NonNull RecyclerView.ViewHolder viewHolder) {
+            // Only allow drag if the item is active
+            final int position = viewHolder.getBindingAdapterPosition();
+            if (position < 0 || position >= mDreamInfos.size()) return 0;
+
+            final DreamInfo item = mDreamInfos.get(position);
+            if (!item.isActive) return 0;
+
+            final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.START
+                    | ItemTouchHelper.END;
+            return makeMovementFlags(dragFlags, 0); // No swipe, only drag.
+        }
+
+        @Override
+        public void onSelectedChanged(
+            @Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
+            super.onSelectedChanged(viewHolder, actionState);
+            if (viewHolder != null && actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+                viewHolder.itemView.setActivated(true);
+            }
+        }
+
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView,
+                @NonNull RecyclerView.ViewHolder viewHolder,
+                @NonNull RecyclerView.ViewHolder target) {
+            final int fromPos = viewHolder.getBindingAdapterPosition();
+            final int toPos = target.getBindingAdapterPosition();
+
+            // Prevent dragging into inactive items section.
+            if (toPos < 0 || toPos >= mDreamInfos.size() || !mDreamInfos.get(toPos).isActive) {
+                return false;
+            }
+
+            // Move in Adapter
+            if (mAdapter != null) {
+                mAdapter.rotateItems(fromPos, toPos);
+            }
+
+            return true;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            // No swipe
+        }
+
+        @Override
+        public void clearView(@NonNull RecyclerView recyclerView,
+                @NonNull RecyclerView.ViewHolder viewHolder) {
+            super.clearView(recyclerView, viewHolder);
+            viewHolder.itemView.setActivated(false);
+            commitReordering();
+            if (mAdapter != null) {
+                // Notify the adapter to update the displayed order on views.
+                mAdapter.notifyItemRangeChanged(0, mSelectedDreams.size());
+            }
+        }
+
+        private void commitReordering() {
+            if (mAdapter == null) {
+                return;
+            }
+
+            // Get the current order of items from the adapter,
+            // which is the source of truth for the displayed order (modified in onMove).
+            // Assume the items of the adapter are DreamItem instances.
+            final List<DreamItem> items = mAdapter.getItems();
+
+            // Rebuild mDreamInfos according to the displayed order in the adapter.
+            mDreamInfos.clear();
+            mDreamInfos.addAll(
+                items.stream().map(DreamItem::getDreamInfo).collect(Collectors.toList()));
+
+            commitReorderingForSelectedDreams();
+        }
+    }
+
+    private void commitReorderingForSelectedDreams() {
+        // Since active items are at the top and we only reordered active items,
+        // we can just iterate and update order.
+        // Also update mSelectedDreams.
+        mSelectedDreams = mDreamInfos.stream()
+                .filter(d -> d.isActive)
+                .collect(Collectors.toList());
+
+        // Update order in objects
+        for (int i = 0; i < mSelectedDreams.size(); i++) {
+            mSelectedDreams.get(i).order = i;
+        }
+
+        final ComponentName[] activeComponents = mSelectedDreams.stream()
+                .map(d -> d.componentName)
+                .toArray(ComponentName[]::new);
+
+        // Persist the new order.
+        mBackend.setActiveDreams(activeComponents);
     }
 
     interface Callback {
@@ -287,7 +401,7 @@ public class DreamPickerController extends BasePreferenceController {
         // Update the mDreamInfos list and apply it to the adapter.
         mDreamInfos.sort(DREAM_INFO_COMPARATOR);
 
-        final List<IDreamItem> newAdapterItems = mDreamInfos.stream()
+        final List<DreamItem> newAdapterItems = mDreamInfos.stream()
                 .map(DreamItem::new)
                 .collect(Collectors.toList());
         mAdapter.setItemList(newAdapterItems);
@@ -305,6 +419,10 @@ public class DreamPickerController extends BasePreferenceController {
 
         DreamItem(DreamInfo dreamInfo) {
             mDreamInfo = dreamInfo;
+        }
+
+        DreamInfo getDreamInfo() {
+            return mDreamInfo;
         }
 
         @Override

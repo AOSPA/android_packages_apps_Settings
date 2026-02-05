@@ -157,6 +157,20 @@ class AddSatelliteTileActivityTest {
     }
 
     @Test
+    fun requestAddTileService_whenNotCurrentUser_finishesAndSetsPromptShown() {
+        val (satelliteTilePromptUtils, scenario) = setupAndLaunchActivity()
+
+        invokeRequestAddTileServiceCallbackAndClose(
+            scenario,
+            satelliteTilePromptUtils,
+            StatusBarManager.TILE_ADD_REQUEST_ERROR_NOT_CURRENT_USER,
+        )
+
+        assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+        assertThat(satelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).isTrue()
+    }
+
+    @Test
     fun onCreate_withNotificationId_cancelsNotification() {
         val testNotificationId = R.id.satellite_prompt_notification_id
         val intent =

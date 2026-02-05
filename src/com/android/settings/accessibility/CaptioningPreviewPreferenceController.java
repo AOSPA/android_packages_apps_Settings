@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Locale;
 
 /** Controller that shows the captioning locale summary. */
+// LINT.IfChange
 public class CaptioningPreviewPreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop {
 
@@ -128,3 +129,4 @@ public class CaptioningPreviewPreferenceController extends BasePreferenceControl
         }
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptionAppearancePreviewPreference.kt)

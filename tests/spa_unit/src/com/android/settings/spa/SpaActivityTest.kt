@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
+import com.android.settings.spa.SpaActivity.Companion.getSpaActivityIntent
 import com.android.settings.spa.SpaActivity.Companion.isSuwAndPageBlocked
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.AllAppListPageProvider
@@ -47,11 +48,12 @@ class SpaActivityTest {
 
     @Before
     fun setUp() {
-        mockSession = ExtendedMockito.mockitoSession()
-            .initMocks(this)
-            .mockStatic(WizardManagerHelper::class.java)
-            .strictness(Strictness.LENIENT)
-            .startMocking()
+        mockSession =
+            ExtendedMockito.mockitoSession()
+                .initMocks(this)
+                .mockStatic(WizardManagerHelper::class.java)
+                .strictness(Strictness.LENIENT)
+                .startMocking()
         whenever(context.applicationContext).thenReturn(context)
     }
 
@@ -89,9 +91,7 @@ class SpaActivityTest {
     fun startSpaActivity() {
         context.startSpaActivity(destination = DESTINATION)
 
-        val intent = argumentCaptor<Intent> {
-            verify(context).startActivity(capture())
-        }.firstValue
+        val intent = argumentCaptor<Intent> { verify(context).startActivity(capture()) }.firstValue
         assertThat(intent.component?.className).isEqualTo(SpaActivity::class.qualifiedName)
         assertThat(intent.getStringExtra(KEY_DESTINATION)).isEqualTo(DESTINATION)
     }
@@ -100,9 +100,28 @@ class SpaActivityTest {
     fun startSpaActivity_withHighlightItemKey() {
         context.startSpaActivity(destination = DESTINATION, highlightItemKey = HIGHLIGHT_ITEM_KEY)
 
-        val intent = argumentCaptor<Intent> {
-            verify(context).startActivity(capture())
-        }.firstValue
+        val intent = argumentCaptor<Intent> { verify(context).startActivity(capture()) }.firstValue
+        assertThat(intent.component?.className).isEqualTo(SpaActivity::class.qualifiedName)
+        assertThat(intent.getStringExtra(KEY_DESTINATION)).isEqualTo(DESTINATION)
+        assertThat(intent.getStringExtra(KEY_HIGHLIGHT_ITEM_KEY)).isEqualTo(HIGHLIGHT_ITEM_KEY)
+    }
+
+    @Test
+    fun getSpaActivityIntent() {
+        val intent = context.getSpaActivityIntent(destination = DESTINATION)
+
+        assertThat(intent.component?.className).isEqualTo(SpaActivity::class.qualifiedName)
+        assertThat(intent.getStringExtra(KEY_DESTINATION)).isEqualTo(DESTINATION)
+    }
+
+    @Test
+    fun getSpaActivityIntent_withHighlightItemKey() {
+        val intent =
+            context.getSpaActivityIntent(
+                destination = DESTINATION,
+                highlightItemKey = HIGHLIGHT_ITEM_KEY,
+            )
+
         assertThat(intent.component?.className).isEqualTo(SpaActivity::class.qualifiedName)
         assertThat(intent.getStringExtra(KEY_DESTINATION)).isEqualTo(DESTINATION)
         assertThat(intent.getStringExtra(KEY_HIGHLIGHT_ITEM_KEY)).isEqualTo(HIGHLIGHT_ITEM_KEY)

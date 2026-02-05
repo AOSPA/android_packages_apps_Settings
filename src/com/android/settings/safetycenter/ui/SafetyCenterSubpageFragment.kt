@@ -97,6 +97,7 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
 
     override fun onResume() {
         super.onResume()
+        viewModel.pageOpen(safetySourceIds)
         logSafetyCenterViewedEvent()
     }
 

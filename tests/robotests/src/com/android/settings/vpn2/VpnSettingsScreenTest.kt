@@ -42,4 +42,11 @@ class VpnSettingsScreenTest {
         assertThat(underTest.component?.className)
             .isEqualTo(Settings.VpnSettingsActivity::class.java.getName())
     }
+
+    @Test
+    fun restrictionKeys_containsDisallowConfigVpn() {
+        assertThat(preferenceScreenCreator.restrictionKeys)
+            .asList()
+            .contains(android.os.UserManager.DISALLOW_CONFIG_VPN)
+    }
 }

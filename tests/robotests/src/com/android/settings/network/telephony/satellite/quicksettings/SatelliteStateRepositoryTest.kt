@@ -20,6 +20,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
+import android.provider.Settings
 import android.telephony.ServiceState
 import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
@@ -47,6 +48,7 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.shadows.ShadowLooper
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)
@@ -229,7 +231,7 @@ class SatelliteStateRepositoryTest {
             repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
             advanceUntilIdle()
 
-            // Set Carrier Eligible (would be Available)
+            // Set Carrier Eligible (would be Available, but since LTE NTN is supported, it is not)
             val telephonyCallback = captureCarrierRoamingNtnListener()
             telephonyCallback?.onCarrierRoamingNtnEligibleStateChanged(true)
             setCellularAvailable(false)
@@ -239,7 +241,49 @@ class SatelliteStateRepositoryTest {
             assertThat(values.last()).isEqualTo(SatelliteStatus.NOT_AVAILABLE)
         }
 
+    @Test
+    fun satelliteStatus_whenAirplaneModeOn_returnsNotAvailable() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+            val values = mutableListOf<SatelliteStatus>()
+            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+            advanceUntilIdle()
+
+            // Set conditions for AVAILABLE state
+            setCellularAvailable(false)
+            setInternetConnected(false)
+            val callback = captureCarrierRoamingNtnListener()
+            callback?.onCarrierRoamingNtnEligibleStateChanged(true)
+            advanceUntilIdle()
+            assertThat(values.last()).isEqualTo(SatelliteStatus.AVAILABLE)
+
+            // Turn on Airplane Mode
+            setAirplaneMode(true)
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.NOT_AVAILABLE)
+
+            // Turn off Airplane Mode
+            setAirplaneMode(false)
+            advanceUntilIdle()
+
+            assertThat(values.last()).isEqualTo(SatelliteStatus.AVAILABLE)
+        }
+
     // Helpers to capture callbacks and trigger updates
+
+    private fun setAirplaneMode(airplaneModeOn: Boolean) {
+        Settings.Global.putInt(
+            context.contentResolver,
+            Settings.Global.AIRPLANE_MODE_ON,
+            if (airplaneModeOn) 1 else 0,
+        )
+        context.contentResolver.notifyChange(
+            Settings.Global.getUriFor(Settings.Global.AIRPLANE_MODE_ON),
+            null,
+        )
+        ShadowLooper.idleMainLooper()
+    }
 
     private fun captureCarrierRoamingNtnListener(): TelephonyCallback.CarrierRoamingNtnListener? {
         val captor = ArgumentCaptor.forClass(TelephonyCallback::class.java)

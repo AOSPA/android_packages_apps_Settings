@@ -25,6 +25,7 @@ import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
 /** Preference controller for captioning preset. */
+// LINT.IfChange
 public class CaptioningPresetController extends BasePreferenceController
         implements ListDialogPreference.OnValueChangedListener {
 
@@ -60,3 +61,4 @@ public class CaptioningPresetController extends BasePreferenceController
         mCaptionHelper.setEnabled(true);
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptionPropertyPreferences.kt:caption_style_pref)

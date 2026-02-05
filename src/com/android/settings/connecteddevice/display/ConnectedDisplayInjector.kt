@@ -404,7 +404,8 @@ open class ConnectedDisplayInjector(open val context: Context?) {
                 com.android.graphics.surfaceflinger.flags.Flags
                     .forceSlowerFollowerGpuCompositionPlatform() &&
                 com.android.graphics.surfaceflinger.flags.Flags
-                    .followerDisplayBackpressurePlatform()
+                    .followerDisplayBackpressurePlatform() &&
+                com.android.graphics.surfaceflinger.flags.Flags.syncedResolutionSwitch()
 
         fun isUserPreferredHdrModeEnabled() =
             com.android.window.flags.Flags.enableUserPreferredHdrMode() &&

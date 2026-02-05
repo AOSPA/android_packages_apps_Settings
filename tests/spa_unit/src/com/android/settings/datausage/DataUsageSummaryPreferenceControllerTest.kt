@@ -33,10 +33,11 @@ import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkUsageData
 import com.android.settings.network.ProxySubscriptionManager
 import com.android.settings.network.policy.NetworkPolicyRepository
+import com.android.settings.testutils.TestEnvironment
+import com.android.settings.testutils.runTestWithDispatcher
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,51 +57,45 @@ class DataUsageSummaryPreferenceControllerTest {
 
     private var policy: NetworkPolicy? = mock<NetworkPolicy>()
 
-    private val mockTelephonyManager = mock<TelephonyManager> {
-        on { isDataCapable } doReturn true
-    }
+    private val mockTelephonyManager = mock<TelephonyManager> { on { isDataCapable } doReturn true }
 
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
-    }
+    private val context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+        }
 
-    private val mockSubscriptionManager = mock<SubscriptionManager> {
-        on { getSubscriptionPlans(any()) } doReturn emptyList()
-    }
+    private val mockSubscriptionManager =
+        mock<SubscriptionManager> { on { getSubscriptionPlans(any()) } doReturn emptyList() }
 
-    private val mockProxySubscriptionManager = mock<ProxySubscriptionManager> {
-        on { get() } doReturn mockSubscriptionManager
-    }
+    private val mockProxySubscriptionManager =
+        mock<ProxySubscriptionManager> { on { get() } doReturn mockSubscriptionManager }
 
-    private val mockNetworkPolicyRepository = mock<NetworkPolicyRepository> {
-        on { networkPolicyFlow(any()) } doAnswer { flowOf(policy) }
-    }
+    private val mockNetworkPolicyRepository =
+        mock<NetworkPolicyRepository> {
+            on { networkPolicyFlow(any()) } doAnswer { flowOf(policy) }
+        }
 
-    private val fakeNetworkCycleDataRepository = object : INetworkCycleDataRepository {
-        override fun getCycles(): List<Range<Long>> = emptyList()
-        override fun getPolicy() = policy
-        override fun queryUsage(range: Range<Long>) = NetworkUsageData.AllZero
-    }
+    private val fakeNetworkCycleDataRepository =
+        object : INetworkCycleDataRepository {
+            override fun getCycles(): List<Range<Long>> = emptyList()
+
+            override fun getPolicy() = policy
+
+            override fun queryUsage(range: Range<Long>) = NetworkUsageData.AllZero
+        }
 
     private var dataPlanInfo = EMPTY_DATA_PLAN_INFO
 
-    private val fakeDataPlanRepository = object : DataPlanRepository {
-        override fun getDataPlanInfo(policy: NetworkPolicy, plans: List<SubscriptionPlan>) =
-            dataPlanInfo
-    }
+    private val fakeDataPlanRepository =
+        object : DataPlanRepository {
+            override fun getDataPlanInfo(policy: NetworkPolicy, plans: List<SubscriptionPlan>) =
+                dataPlanInfo
+        }
 
-    private val controller = DataUsageSummaryPreferenceController(
-        context = context,
-        subId = SUB_ID,
-        proxySubscriptionManager = mockProxySubscriptionManager,
-        networkPolicyRepository = mockNetworkPolicyRepository,
-        networkCycleDataRepositoryFactory = { fakeNetworkCycleDataRepository },
-        dataPlanRepositoryFactory = { fakeDataPlanRepository },
-    )
-
-    private val preference = mock<DataUsageSummaryPreference> {
-        on { key } doReturn controller.preferenceKey
-    }
+    private val preference =
+        mock<DataUsageSummaryPreference> {
+            on { key } doReturn DataUsageSummaryPreferenceController.KEY
+        }
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
 
     @Before
@@ -108,11 +103,20 @@ class DataUsageSummaryPreferenceControllerTest {
         preferenceScreen.addPreference(preference)
     }
 
+    private fun createController(testDispatcher: CoroutineDispatcher) =
+        DataUsageSummaryPreferenceController(
+            context = context,
+            subId = SUB_ID,
+            proxySubscriptionManager = mockProxySubscriptionManager,
+            networkPolicyRepository = mockNetworkPolicyRepository,
+            networkCycleDataRepositoryFactory = { fakeNetworkCycleDataRepository },
+            dataPlanRepositoryFactory = { fakeDataPlanRepository },
+            defaultDispatcher = testDispatcher,
+        )
+
     @Test
-    fun getAvailabilityStatus_noMobileData_conditionallyUnavailable() {
-        mockTelephonyManager.stub {
-            on { isDataCapable } doReturn false
-        }
+    fun getAvailabilityStatus_noMobileData_conditionallyUnavailable() = runTestWithController {
+        mockTelephonyManager.stub { on { isDataCapable } doReturn false }
 
         val availabilityStatus = controller.getAvailabilityStatus(SUB_ID)
 
@@ -120,7 +124,7 @@ class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    fun getAvailabilityStatus_hasSubInfo_available() {
+    fun getAvailabilityStatus_hasSubInfo_available() = runTestWithController {
         mockProxySubscriptionManager.stub {
             on { getAccessibleSubscriptionInfo(SUB_ID) } doReturn SubscriptionInfo.Builder().build()
         }
@@ -131,7 +135,7 @@ class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    fun getAvailabilityStatus_noSubInfo_conditionallyUnavailable() {
+    fun getAvailabilityStatus_noSubInfo_conditionallyUnavailable() = runTestWithController {
         mockProxySubscriptionManager.stub {
             on { getAccessibleSubscriptionInfo(SUB_ID) } doReturn null
         }
@@ -142,150 +146,162 @@ class DataUsageSummaryPreferenceControllerTest {
     }
 
     @Test
-    fun onViewCreated_noPolicy_setInvisible() = runBlocking {
+    fun onViewCreated_noPolicy_setInvisible() = runTestWithController {
         policy = null
         controller.displayPreference(preferenceScreen)
         clearInvocations(preference)
 
         controller.onViewCreated(TestLifecycleOwner())
-        delay(100)
+        advanceUntilIdle()
 
         verify(preference).isVisible = false
     }
 
     @Test
-    fun onViewCreated_policyHasNoLimitInfo() = runBlocking {
-        policy = mock<NetworkPolicy>().apply {
-            warningBytes = NetworkPolicy.WARNING_DISABLED
-            limitBytes = NetworkPolicy.LIMIT_DISABLED
-        }
+    fun onViewCreated_policyHasNoLimitInfo() = runTestWithController {
+        policy =
+            mock<NetworkPolicy>().apply {
+                warningBytes = NetworkPolicy.WARNING_DISABLED
+                limitBytes = NetworkPolicy.LIMIT_DISABLED
+            }
         controller.displayPreference(preferenceScreen)
 
         controller.onViewCreated(TestLifecycleOwner())
-        delay(100)
+        advanceUntilIdle()
 
         verify(preference).setLimitInfo(null)
         verify(preference, never()).setLabels(any(), any())
     }
 
     @Test
-    fun onViewCreated_policyWarningOnly() = runBlocking {
-        policy = mock<NetworkPolicy>().apply {
-            warningBytes = 1L
-            limitBytes = NetworkPolicy.LIMIT_DISABLED
-        }
+    fun onViewCreated_policyWarningOnly() = runTestWithController {
+        policy =
+            mock<NetworkPolicy>().apply {
+                warningBytes = 1L
+                limitBytes = NetworkPolicy.LIMIT_DISABLED
+            }
         controller.displayPreference(preferenceScreen)
 
         controller.onViewCreated(TestLifecycleOwner())
-        delay(100)
+        advanceUntilIdle()
 
-        val limitInfo = argumentCaptor {
-            verify(preference).setLimitInfo(capture())
-        }.firstValue.toString()
+        val limitInfo =
+            argumentCaptor { verify(preference).setLimitInfo(capture()) }.firstValue.toString()
         assertThat(limitInfo).isEqualTo("1 byte data warning")
         verify(preference).setLabels("0 byte", "1 byte")
     }
 
     @Test
-    fun onViewCreated_policyLimitOnly() = runBlocking {
-        policy = mock<NetworkPolicy>().apply {
-            warningBytes = NetworkPolicy.WARNING_DISABLED
-            limitBytes = 1L
-        }
+    fun onViewCreated_policyLimitOnly() = runTestWithController {
+        policy =
+            mock<NetworkPolicy>().apply {
+                warningBytes = NetworkPolicy.WARNING_DISABLED
+                limitBytes = 1L
+            }
         controller.displayPreference(preferenceScreen)
 
         controller.onViewCreated(TestLifecycleOwner())
-        delay(100)
+        advanceUntilIdle()
 
-        val limitInfo = argumentCaptor {
-            verify(preference).setLimitInfo(capture())
-        }.firstValue.toString()
+        val limitInfo =
+            argumentCaptor { verify(preference).setLimitInfo(capture()) }.firstValue.toString()
         assertThat(limitInfo).isEqualTo("1 byte data limit")
         verify(preference).setLabels("0 byte", "1 byte")
     }
 
     @Test
-    fun onViewCreated_policyHasWarningAndLimit() = runBlocking {
-        policy = mock<NetworkPolicy>().apply {
-            warningBytes = BillingCycleSettings.GIB_IN_BYTES / 2
-            limitBytes = BillingCycleSettings.GIB_IN_BYTES
-        }
+    fun onViewCreated_policyHasWarningAndLimit() = runTestWithController {
+        policy =
+            mock<NetworkPolicy>().apply {
+                warningBytes = BillingCycleSettings.GIB_IN_BYTES / 2
+                limitBytes = BillingCycleSettings.GIB_IN_BYTES
+            }
         controller.displayPreference(preferenceScreen)
 
         controller.onViewCreated(TestLifecycleOwner())
-        delay(100)
+        advanceUntilIdle()
 
-        val limitInfo = argumentCaptor {
-            verify(preference).setLimitInfo(capture())
-        }.firstValue.toString()
+        val limitInfo =
+            argumentCaptor { verify(preference).setLimitInfo(capture()) }.firstValue.toString()
         assertThat(limitInfo).isEqualTo("512 MB data warning / 1.00 GB data limit")
         verify(preference).setLabels("0 byte", "1.00 GB")
     }
 
     @Test
-    fun onViewCreated_emptyDataPlanInfo() = runBlocking {
+    fun onViewCreated_emptyDataPlanInfo() = runTestWithController {
         dataPlanInfo = EMPTY_DATA_PLAN_INFO
         controller.displayPreference(preferenceScreen)
 
         controller.onViewCreated(TestLifecycleOwner())
-        delay(100)
+        advanceUntilIdle()
 
-        verify(preference).setUsageNumbers(
-            EMPTY_DATA_PLAN_INFO.dataPlanUse,
-            EMPTY_DATA_PLAN_INFO.dataPlanSize,
-        )
+        verify(preference)
+            .setUsageNumbers(EMPTY_DATA_PLAN_INFO.dataPlanUse, EMPTY_DATA_PLAN_INFO.dataPlanSize)
         verify(preference).setChartEnabled(false)
-        verify(preference).setUsageInfo(
-            EMPTY_DATA_PLAN_INFO.cycleEnd,
-            EMPTY_DATA_PLAN_INFO.snapshotTime,
-            null,
-            EMPTY_DATA_PLAN_INFO.dataPlanCount,
-        )
+        verify(preference)
+            .setUsageInfo(
+                EMPTY_DATA_PLAN_INFO.cycleEnd,
+                EMPTY_DATA_PLAN_INFO.snapshotTime,
+                null,
+                EMPTY_DATA_PLAN_INFO.dataPlanCount,
+            )
     }
 
     @Test
-    fun onViewCreated_positiveDataPlanInfo() = runBlocking {
+    fun onViewCreated_positiveDataPlanInfo() = runTestWithController {
         dataPlanInfo = POSITIVE_DATA_PLAN_INFO
         controller.displayPreference(preferenceScreen)
 
         controller.onViewCreated(TestLifecycleOwner())
-        delay(100)
+        advanceUntilIdle()
 
-        verify(preference).setUsageNumbers(
-            POSITIVE_DATA_PLAN_INFO.dataPlanUse,
-            POSITIVE_DATA_PLAN_INFO.dataPlanSize,
-        )
+        verify(preference)
+            .setUsageNumbers(
+                POSITIVE_DATA_PLAN_INFO.dataPlanUse,
+                POSITIVE_DATA_PLAN_INFO.dataPlanSize,
+            )
         verify(preference).setChartEnabled(true)
         verify(preference).setLabels("0 byte", "9 byte")
-        val progress = argumentCaptor {
-            verify(preference).setProgress(capture())
-        }.firstValue
+        val progress = argumentCaptor { verify(preference).setProgress(capture()) }.firstValue
         assertThat(progress).isEqualTo(0.8888889f)
-        verify(preference).setUsageInfo(
-            POSITIVE_DATA_PLAN_INFO.cycleEnd,
-            POSITIVE_DATA_PLAN_INFO.snapshotTime,
-            null,
-            POSITIVE_DATA_PLAN_INFO.dataPlanCount,
-        )
+        verify(preference)
+            .setUsageInfo(
+                POSITIVE_DATA_PLAN_INFO.cycleEnd,
+                POSITIVE_DATA_PLAN_INFO.snapshotTime,
+                null,
+                POSITIVE_DATA_PLAN_INFO.dataPlanCount,
+            )
     }
+
+    private class ControllerTestScope(
+        base: TestEnvironment,
+        val controller: DataUsageSummaryPreferenceController,
+    ) : TestEnvironment by base
+
+    private fun runTestWithController(testBody: suspend ControllerTestScope.() -> Unit) =
+        runTestWithDispatcher {
+            ControllerTestScope(this, createController(testDispatcher)).testBody()
+        }
 
     private companion object {
         const val SUB_ID = 1234
-        val EMPTY_DATA_PLAN_INFO = DataPlanInfo(
-            dataPlanCount = 0,
-            dataPlanSize = SubscriptionPlan.BYTES_UNKNOWN,
-            dataBarSize = SubscriptionPlan.BYTES_UNKNOWN,
-            dataPlanUse = 0,
-            cycleEnd = null,
-            snapshotTime = SubscriptionPlan.TIME_UNKNOWN,
-        )
-        val POSITIVE_DATA_PLAN_INFO = DataPlanInfo(
-            dataPlanCount = 0,
-            dataPlanSize = 10L,
-            dataBarSize = 9L,
-            dataPlanUse = 8L,
-            cycleEnd = 7L,
-            snapshotTime = 6L,
-        )
+        val EMPTY_DATA_PLAN_INFO =
+            DataPlanInfo(
+                dataPlanCount = 0,
+                dataPlanSize = SubscriptionPlan.BYTES_UNKNOWN,
+                dataBarSize = SubscriptionPlan.BYTES_UNKNOWN,
+                dataPlanUse = 0,
+                cycleEnd = null,
+                snapshotTime = SubscriptionPlan.TIME_UNKNOWN,
+            )
+        val POSITIVE_DATA_PLAN_INFO =
+            DataPlanInfo(
+                dataPlanCount = 0,
+                dataPlanSize = 10L,
+                dataBarSize = 9L,
+                dataPlanUse = 8L,
+                cycleEnd = 7L,
+                snapshotTime = 6L,
+            )
     }
 }
