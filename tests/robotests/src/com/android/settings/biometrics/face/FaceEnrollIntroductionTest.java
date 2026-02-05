@@ -160,6 +160,11 @@ public class FaceEnrollIntroductionTest {
         protected boolean launchPostureGuidance() {
             return super.launchPostureGuidance();
         }
+
+        @Override
+        public String getLaunchedFromPackage() {
+            return getPackageName();
+        }
     }
 
     @Before
