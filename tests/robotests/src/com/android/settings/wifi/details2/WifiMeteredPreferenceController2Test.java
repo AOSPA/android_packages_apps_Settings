@@ -33,7 +33,7 @@ import androidx.preference.DropDownPreference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
-import com.android.settings.connectivity.Flags;
+import com.android.settings.flags.Flags;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
@@ -116,7 +116,8 @@ public class WifiMeteredPreferenceController2Test {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void displayPreference_flagDisabled() {
         mPreferenceController.updateState(mDropDownPreference);
 
@@ -124,7 +125,7 @@ public class WifiMeteredPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void displayPreference_networkOwned() {
         when(mUserManager.getUserCount()).thenReturn(3);
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);
@@ -136,7 +137,7 @@ public class WifiMeteredPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void displayPreference_networkNotOwned_singleUser() {
         when(mUserManager.getUserCount()).thenReturn(1);
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);
@@ -148,7 +149,7 @@ public class WifiMeteredPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void displayPreference_networkNotOwned() {
         when(mUserManager.getUserCount()).thenReturn(3);
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mWifiConfiguration);

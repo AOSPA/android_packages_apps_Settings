@@ -45,7 +45,7 @@ import android.os.UserManager;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
-import com.android.settings.connectivity.Flags;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.wifi.AccessPoint;
 import com.android.wifitrackerlib.NetworkDetailsTracker;
@@ -205,7 +205,7 @@ public class WifiDialogActivityTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onSubmit2_whenAddNewNetwork_shouldSave() {
         when(mWifiConfiguration2.getConfig()).thenReturn(mWifiConfiguration);
         final Intent intent = new Intent("com.android.settings.WIFI_DIALOG");

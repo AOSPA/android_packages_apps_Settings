@@ -167,7 +167,7 @@ public class WifiEntryPreference extends RestrictedPreference implements
     }
 
     private boolean displaySharedIcon() {
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {
+        if (!com.android.settings.wifi.WifiUtils.isWifiMultiuserEnabled()) {
             return false;
         }
 

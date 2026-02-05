@@ -85,8 +85,8 @@ public class NotifyOpenNetworksPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.wifi.flags.Flags.FLAG_MULTI_USER_WIFI_ENHANCEMENT})
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void setChecked_withTrue_shouldUpdateSetting() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0);
@@ -99,8 +99,8 @@ public class NotifyOpenNetworksPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.wifi.flags.Flags.FLAG_MULTI_USER_WIFI_ENHANCEMENT})
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void setChecked_withFalse_shouldUpdateSetting() {
         Settings.Global.putInt(mContext.getContentResolver(),
                 WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 1);
@@ -113,8 +113,7 @@ public class NotifyOpenNetworksPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.wifi.flags.Flags.FLAG_MULTI_USER_WIFI_ENHANCEMENT})
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void testSetChecked_withMultiUserWifiSupport_shouldUpdateThroughWifiManager() {
         mController.setChecked(true);
         verify(mWifiManager).setOpenNetworkNotifierEnabled(true);
@@ -124,8 +123,7 @@ public class NotifyOpenNetworksPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.wifi.flags.Flags.FLAG_MULTI_USER_WIFI_ENHANCEMENT})
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void testDisplayPreference_withMultiUserWifiSupport_shouldFetchThroughWifiManager() {
         ArgumentCaptor<Consumer> resultCallbackCaptor = ArgumentCaptor.forClass(Consumer.class);
         mController.displayPreference(mPreferenceScreen);
@@ -143,16 +141,15 @@ public class NotifyOpenNetworksPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.wifi.flags.Flags.FLAG_MULTI_USER_WIFI_ENHANCEMENT})
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void testOnResume_withMultiUserWifiSupport_shouldFetchThroughWifiManager() {
         mController.onResume();
         verify(mWifiManager).isOpenNetworkNotifierEnabled(any(), any());
     }
 
     @Test
-    @DisableFlags({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.wifi.flags.Flags.FLAG_MULTI_USER_WIFI_ENHANCEMENT})
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void updateState_preferenceSetCheckedWhenSettingsAreEnabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
         Settings.Global.putInt(mContext.getContentResolver(),
@@ -164,8 +161,8 @@ public class NotifyOpenNetworksPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.wifi.flags.Flags.FLAG_MULTI_USER_WIFI_ENHANCEMENT})
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void updateState_preferenceSetCheckedWhenSettingsAreDisabled() {
         final SwitchPreference preference = mock(SwitchPreference.class);
         Settings.Global.putInt(mContext.getContentResolver(),
