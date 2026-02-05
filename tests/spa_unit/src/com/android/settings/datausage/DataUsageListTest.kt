@@ -73,17 +73,6 @@ class DataUsageListTest {
     }
 
     @Test
-    fun launchFragment_withoutArguments_finish() {
-        val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
-
-        scenario.withFragment {
-            assertThat(template).isNull()
-            assertThat(subId).isEqualTo(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
-            assertThat(activity!!.isFinishing).isTrue()
-        }
-    }
-
-    @Test
     fun launchFragment_isGuestUser_finish() {
         mockUserManager.stub { on { isGuestUser } doReturn true }
         val fragmentArgs =
@@ -99,6 +88,17 @@ class DataUsageListTest {
             )
 
         scenario.withFragment { assertThat(activity!!.isFinishing).isTrue() }
+    }
+
+    @Test
+    fun launchFragment_withoutArguments_displayNonCarrier() {
+        val scenario = launchFragment<TestDataUsageList>(initialState = Lifecycle.State.CREATED)
+
+        scenario.withFragment {
+            assertThat(template).isNotNull()
+            assertThat(subId).isEqualTo(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+            assertThat(activity!!.isFinishing).isFalse()
+        }
     }
 
     @Test

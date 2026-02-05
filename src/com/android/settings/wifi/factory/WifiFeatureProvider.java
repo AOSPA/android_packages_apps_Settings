@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.android.settings.network.tether.TetheringRepository;
 import com.android.settings.print.PrintRepository;
+import com.android.settings.wifi.WifiDataUsageRepository;
 import com.android.settings.wifi.details.WifiNetworkDetailsViewModel;
 import com.android.settings.wifi.dpp.WifiDppQrCodeGeneratorFragment;
 import com.android.settings.wifi.repository.SharedConnectivityRepository;
@@ -51,6 +52,7 @@ public class WifiFeatureProvider {
     private PrintManager mPrintManager;
     private WifiVerboseLogging mWifiVerboseLogging;
     private WifiHotspotRepository mWifiHotspotRepository;
+    private WifiDataUsageRepository mWifiDataUsageRepository;
     private TetheringRepository mTetheringRepository;
     private SharedConnectivityRepository mSharedConnectivityRepository;
     private PrintRepository mPrintRepository;
@@ -122,6 +124,17 @@ public class WifiFeatureProvider {
             verboseLog(TAG, "getWifiHotspotRepository():" + mWifiHotspotRepository);
         }
         return mWifiHotspotRepository;
+    }
+
+    /**
+     * Gets WifiDataUsageRepository
+     */
+    public WifiDataUsageRepository getWifiDataUsageRepository() {
+        if (mWifiDataUsageRepository == null) {
+            mWifiDataUsageRepository = new WifiDataUsageRepository(mAppContext);
+            verboseLog(TAG, "getWifiDataUsageRepository():" + mWifiDataUsageRepository);
+        }
+        return mWifiDataUsageRepository;
     }
 
     /**
