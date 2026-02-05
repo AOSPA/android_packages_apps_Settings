@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
+import com.android.settingslib.metadata.isUiOnlyPreference
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
@@ -131,6 +132,8 @@ class CatalystStateProviderExecutor(
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
+            if(metadata.isUiOnlyPreference(context))
+                return@forEach
             val config = settingConfigMap[metadata.key]
             val jsonValue =
                 when {
