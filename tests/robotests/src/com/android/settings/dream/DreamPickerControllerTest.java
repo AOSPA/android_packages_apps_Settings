@@ -52,6 +52,18 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.shadows.ShadowLooper;
+
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.view.View;
+import android.view.ViewParent;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,12 +76,24 @@ public class DreamPickerControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
+    private static final int PARENT_HEIGHT = 1000;
+    private static final int PARENT_SCROLL_THRESHOLD = (int) (PARENT_HEIGHT * 0.1f);
+    private static final int PARENT_WIDTH = 500;
+    private static final int ITEM_HEIGHT = 100;
+
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private DreamBackend mBackend;
     private Context mContext;
     @Mock
     private PreferenceScreen mScreen;
     private LayoutPreference mPreference;
+    @Mock
+    private RecyclerView mParentRecyclerView;
+    @Mock
+    private RecyclerView mInnerRecyclerView;
+    private RecyclerView.ViewHolder mViewHolder;
+    @Mock
+    private View mItemView;
 
     @Before
     public void setup() {
@@ -247,7 +271,7 @@ public class DreamPickerControllerTest {
         final RecyclerView.ViewHolder vhFrom = recyclerView.findViewHolderForAdapterPosition(2);
         final RecyclerView.ViewHolder vhTo = recyclerView.findViewHolderForAdapterPosition(0);
         final DreamPickerController.DreamItemTouchHelperCallback callback =
-                controller.new DreamItemTouchHelperCallback();
+                controller.new DreamItemTouchHelperCallback(recyclerView);
         // act: move item from pos 2 to pos 0
         callback.onSelectedChanged(vhFrom, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onMove(recyclerView, vhFrom, vhTo);
@@ -285,7 +309,7 @@ public class DreamPickerControllerTest {
         final RecyclerView.ViewHolder vhFrom = recyclerView.findViewHolderForAdapterPosition(0);
         final RecyclerView.ViewHolder vhTo = recyclerView.findViewHolderForAdapterPosition(2);
         final DreamPickerController.DreamItemTouchHelperCallback callback =
-                controller.new DreamItemTouchHelperCallback();
+                controller.new DreamItemTouchHelperCallback(recyclerView);
         // act: move item from pos 0 to pos 2
         callback.onSelectedChanged(vhFrom, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onMove(recyclerView, vhFrom, vhTo);
@@ -325,7 +349,7 @@ public class DreamPickerControllerTest {
         final RecyclerView.ViewHolder vhFrom = recyclerView.findViewHolderForAdapterPosition(1);
         final RecyclerView.ViewHolder vhTo = recyclerView.findViewHolderForAdapterPosition(3);
         final DreamPickerController.DreamItemTouchHelperCallback callback =
-                controller.new DreamItemTouchHelperCallback();
+                controller.new DreamItemTouchHelperCallback(recyclerView);
 
         // act: move item from pos 1 to pos 3
         callback.onSelectedChanged(vhFrom, ItemTouchHelper.ACTION_STATE_DRAG);
@@ -366,7 +390,7 @@ public class DreamPickerControllerTest {
         final RecyclerView.ViewHolder vhFrom = recyclerView.findViewHolderForAdapterPosition(0);
         final RecyclerView.ViewHolder vhTo = recyclerView.findViewHolderForAdapterPosition(1);
         final DreamPickerController.DreamItemTouchHelperCallback callback =
-                controller.new DreamItemTouchHelperCallback();
+                controller.new DreamItemTouchHelperCallback(recyclerView);
         // act: move item from pos 0 to pos 1
         callback.onSelectedChanged(vhFrom, ItemTouchHelper.ACTION_STATE_DRAG);
         final boolean moved = callback.onMove(recyclerView, vhFrom, vhTo);
@@ -433,7 +457,7 @@ public class DreamPickerControllerTest {
         recyclerView.layout(0, 0, 100, 1000);
         final RecyclerView.ViewHolder vh = recyclerView.findViewHolderForAdapterPosition(1);
         final DreamPickerController.DreamItemTouchHelperCallback callback =
-                controller.new DreamItemTouchHelperCallback();
+                controller.new DreamItemTouchHelperCallback(recyclerView);
 
         // act
         final int flags = callback.getMovementFlags(recyclerView, vh);
@@ -452,4 +476,139 @@ public class DreamPickerControllerTest {
         when(dreamInfo.icon.mutate()).thenReturn(dreamInfo.icon);
         return dreamInfo;
     }
+
+    // ===========================================================================================
+    // Start auto-scrolling tests
+    // ===========================================================================================
+    private DreamPickerController.DreamItemTouchHelperCallback setupAutoScrollTest() {
+        final List<DreamInfo> mockDreamInfos =
+                new ArrayList<>(Collections.singletonList(createDreamInfo("d1", true, 0)));
+        when(mBackend.getDreamInfos()).thenReturn(mockDreamInfos);
+        DreamPickerController controller = buildController();
+
+        ViewParent mockParent = mock(ViewParent.class);
+        when(mInnerRecyclerView.getParent()).thenReturn(mockParent);
+        when(mockParent.getParent()).thenReturn(mParentRecyclerView);
+
+        final DreamPickerController.DreamItemTouchHelperCallback callback =
+                controller.new DreamItemTouchHelperCallback(mInnerRecyclerView);
+
+        mViewHolder = new RecyclerView.ViewHolder(mItemView) {};
+        when(mParentRecyclerView.getHeight()).thenReturn(PARENT_HEIGHT);
+        // Set up parent to be at top of screen.
+        when(mParentRecyclerView.getGlobalVisibleRect(any()))
+                .thenAnswer(invocation -> {
+                    Rect rect = invocation.getArgument(0);
+                    rect.set(0, 0, PARENT_WIDTH, PARENT_HEIGHT);
+                    return null;
+                });
+        when(mInnerRecyclerView.getResources()).thenReturn(mContext.getResources());
+        when(mParentRecyclerView.post(any(Runnable.class))).thenAnswer(invocation -> {
+            Runnable runnable = invocation.getArgument(0);
+            runnable.run();
+            return null;
+        });
+
+        return callback;
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
+    public void onChildDraw_dragDown_shouldScrollDown() {
+        final DreamPickerController.DreamItemTouchHelperCallback callback = setupAutoScrollTest();
+        // Item is in the scroll-down zone.
+        setItemBottom(PARENT_HEIGHT - 50);
+        // Inner RV is not at the bottom yet, it is far below the parent's viewable area.
+        setInnerRecyclerViewBounds(200, PARENT_HEIGHT + 200);
+
+        callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
+                ItemTouchHelper.ACTION_STATE_DRAG, true);
+        ShadowLooper.runUiThreadTasks();
+
+        ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
+        verify(mParentRecyclerView).scrollBy(eq(0), captor.capture());
+        assertThat(captor.getValue()).isGreaterThan(0);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
+    public void onChildDraw_dragUp_shouldScrollUp() {
+        final DreamPickerController.DreamItemTouchHelperCallback callback = setupAutoScrollTest();
+        // Item is in the scroll-up zone.
+        setItemTop(50);
+        // Inner RV is not at the top yet, it is far above the parent's viewable area.
+        setInnerRecyclerViewBounds(-200, PARENT_HEIGHT - 200);
+
+        callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
+                ItemTouchHelper.ACTION_STATE_DRAG, true);
+        ShadowLooper.runUiThreadTasks();
+
+        ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
+        verify(mParentRecyclerView).scrollBy(eq(0), captor.capture());
+        assertThat(captor.getValue()).isLessThan(0);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
+    public void onChildDraw_dragDownAtBottom_shouldNotScroll() {
+        final DreamPickerController.DreamItemTouchHelperCallback callback = setupAutoScrollTest();
+        // Item is in the scroll-down zone.
+        setItemBottom(PARENT_HEIGHT - 50);
+        // Inner RV is scrolled to the bottom (its bottom edge is above the parent).
+        setInnerRecyclerViewBounds(
+            -PARENT_SCROLL_THRESHOLD, PARENT_HEIGHT - PARENT_SCROLL_THRESHOLD);
+
+        callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
+                ItemTouchHelper.ACTION_STATE_DRAG, true);
+        ShadowLooper.runUiThreadTasks();
+
+        verify(mParentRecyclerView, never()).scrollBy(anyInt(), anyInt());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
+    public void onChildDraw_dragUpAtTop_shouldNotScroll() {
+        final DreamPickerController.DreamItemTouchHelperCallback callback = setupAutoScrollTest();
+        // Item is in the scroll-up zone.
+        setItemTop(50);
+        // Inner RV is scrolled to the top (its top edge is below the parent).
+        setInnerRecyclerViewBounds(
+            PARENT_SCROLL_THRESHOLD, PARENT_HEIGHT + PARENT_SCROLL_THRESHOLD);
+
+        callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
+                ItemTouchHelper.ACTION_STATE_DRAG, true);
+        ShadowLooper.runUiThreadTasks();
+
+        verify(mParentRecyclerView, never()).scrollBy(anyInt(), anyInt());
+    }
+
+    private void setItemTop(int top) {
+        when(mItemView.getGlobalVisibleRect(any()))
+                .thenAnswer(invocation -> {
+                    Rect rect = invocation.getArgument(0);
+                    rect.set(0, top, PARENT_WIDTH, top + ITEM_HEIGHT);
+                    return null;
+                });
+    }
+
+    private void setItemBottom(int bottom) {
+        when(mItemView.getGlobalVisibleRect(any()))
+                .thenAnswer(invocation -> {
+                    Rect rect = invocation.getArgument(0);
+                    rect.set(0, bottom - ITEM_HEIGHT, PARENT_WIDTH, bottom);
+                    return null;
+                });
+    }
+
+    private void setInnerRecyclerViewBounds(int top, int bottom) {
+        when(mInnerRecyclerView.getGlobalVisibleRect(any()))
+                .thenAnswer(invocation -> {
+                    Rect rect = invocation.getArgument(0);
+                    rect.set(0, top, PARENT_WIDTH, bottom);
+                    return null;
+                });
+    }
+    // ===========================================================================================
+    // End auto-scrolling tests
+    // ===========================================================================================
 }

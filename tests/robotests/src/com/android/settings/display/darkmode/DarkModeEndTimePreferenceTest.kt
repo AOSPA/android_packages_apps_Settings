@@ -19,12 +19,17 @@ package com.android.settings.display.darkmode
 import android.app.TimePickerDialog
 import android.app.UiModeManager
 import android.content.Context
+import android.os.PowerManager
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.testing.launchFragment
 import androidx.lifecycle.Lifecycle
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.accessibility.Flags
 import com.android.settings.testutils.AccessibilityTestUtils.assertDialogShown
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settingslib.datastore.SettingsSecureStore
@@ -43,16 +48,19 @@ import org.mockito.kotlin.reset
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowDialog
 import org.robolectric.shadows.ShadowLooper
 
 @RunWith(RobolectricTestRunner::class)
 class DarkModeEndTimePreferenceTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
+    @get:Rule val mSetFlagsRule = SetFlagsRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val mockUiModeManager = mock<UiModeManager>()
     private val preference = EndTimePreference(mockUiModeManager)
+    private val shadowPowerManager = shadowOf(context.getSystemService(PowerManager::class.java))!!
 
     @Before
     fun setUp() {
@@ -165,5 +173,29 @@ class DarkModeEndTimePreferenceTest {
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
         verify(mockLifecycleContext, never()).notifyPreferenceChange(EndTimePreference.KEY)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOff_PowerSaveTrue_isTrue() {
+        shadowPowerManager.setIsPowerSaveMode(true)
+
+        assertThat(preference.isEnabled(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOn_PowerSaveFalse_isTrue() {
+        shadowPowerManager.setIsPowerSaveMode(false)
+
+        assertThat(preference.isEnabled(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOn_PowerSaveTrue_isFalse() {
+        shadowPowerManager.setIsPowerSaveMode(true)
+
+        assertThat(preference.isEnabled(context)).isFalse()
     }
 }

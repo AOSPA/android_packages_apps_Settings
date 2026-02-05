@@ -274,6 +274,22 @@ class SatelliteLandingPageViewModelTest {
         assertThat(viewModel.getSettingsIntent()).isEqualTo(expectedIntent)
     }
 
+    @Test
+    fun refresh_lteSupported_userRestricted_setsBannerStateCorrectly() = runTest {
+        setLteNtnSupported(true)
+        `when`(satelliteStateRepository.getAttachRestrictionReasons(SUB_ID))
+            .thenReturn(setOf(SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_USER))
+
+        val viewModel = createViewModel()
+        viewModel.refresh()
+        waitForAsync()
+
+        val bannerState = viewModel.bannerState.value
+        assertThat(bannerState.isUserRestricted).isTrue()
+        assertThat(bannerState.isSatelliteAvailableInRegion).isTrue()
+        assertThat(bannerState.isEntitled).isTrue()
+    }
+
     private fun setupPackageManagerForApp(packageName: String, appName: String, intent: Intent?) {
         val appInfo = mock(ApplicationInfo::class.java)
         `when`(appInfo.loadLabel(packageManager)).thenReturn(appName)
@@ -282,8 +298,6 @@ class SatelliteLandingPageViewModelTest {
     }
 
     private fun setLteNtnSupported(isSupported: Boolean) {
-        val reasons = if (isSupported) emptySet() else setOf(1)
-        shadowSatelliteManager.setAttachRestrictionReasonsForCarrier(SUB_ID, reasons)
         val config =
             PersistableBundle().apply {
                 putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, isSupported)
