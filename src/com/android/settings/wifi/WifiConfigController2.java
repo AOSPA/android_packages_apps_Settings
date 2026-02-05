@@ -407,6 +407,12 @@ public class WifiConfigController2 implements TextWatcher,
                         ? HIDDEN_NETWORK
                         : NOT_HIDDEN_NETWORK);
 
+                if (mSharedSwitch != null) {
+                    mSharedSwitch.setChecked(config.shared);
+                }
+                if (mEditConfigurationSwitch != null) {
+                    mEditConfigurationSwitch.setChecked(config.isAllowedToUpdateByOtherUsers());
+                }
                 if (mPrivacySettingsSpinner != null) {
                     final int prefMacValue = WifiPrivacyPreferenceController2
                             .translateWifiEntryPrivacyToPrefValue(mWifiEntry.getPrivacy());
