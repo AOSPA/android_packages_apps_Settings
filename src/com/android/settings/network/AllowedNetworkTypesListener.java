@@ -57,7 +57,11 @@ public class AllowedNetworkTypesListener extends TelephonyCallback implements
     public void register(Context context, int subId) {
         TelephonyManager telephonyManager = context.getSystemService(
                 TelephonyManager.class).createForSubscriptionId(subId);
-        telephonyManager.registerTelephonyCallback(mExecutor, this);
+        try {
+            telephonyManager.registerTelephonyCallback(mExecutor, this);
+        } catch (IllegalStateException e) {
+            Log.w(LOG_TAG, "IllegalStateException : " + e);
+        }
     }
 
     /**
