@@ -126,14 +126,20 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         a11yController.arrowButtons.values.forEach(::addView)
         accessibilityDelegate = a11yController.accessibilityDelegate
 
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
         addOnLayoutChangeListener(layoutChangeListener)
+        surfaceRenderer.attach()
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
+        surfaceRenderer.detach()
         setTouchListener(null)
-        removeOnLayoutChangeListener(layoutChangeListener)
         onA11yMoveListener = null
+        removeOnLayoutChangeListener(layoutChangeListener)
     }
 
     fun setHighlighted(value: Boolean) {
