@@ -19,23 +19,16 @@ package com.android.settings.connecteddevice.display
 import android.graphics.Outline
 import android.graphics.PointF
 import android.graphics.Rect
-import android.os.Bundle
 import android.os.Trace
 import android.util.Log
 import android.util.Size
-import android.view.Gravity
 import android.view.SurfaceControl
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.TouchDelegate
 import android.view.View
 import android.view.ViewOutlineProvider
-import android.view.accessibility.AccessibilityNodeInfo
-import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction
 import android.widget.FrameLayout
-import android.widget.ImageButton
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 import com.android.settingslib.utils.ThreadUtils
@@ -84,30 +77,6 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     private var wallpaperSurface: SurfaceControl? = null
 
     private val updateSurfaceView = Runnable { updateSurfaceView() }
-
-    private val a11yActionMoveUp =
-        AccessibilityAction(
-            R.id.action_move_display_block_up,
-            context.getString(R.string.external_display_topology_a11y_action_move_up),
-        )
-
-    private val a11yActionMoveDown =
-        AccessibilityAction(
-            R.id.action_move_display_block_down,
-            context.getString(R.string.external_display_topology_a11y_action_move_down),
-        )
-
-    private val a11yActionMoveLeft =
-        AccessibilityAction(
-            R.id.action_move_display_block_left,
-            context.getString(R.string.external_display_topology_a11y_action_move_left),
-        )
-
-    private val a11yActionMoveRight =
-        AccessibilityAction(
-            R.id.action_move_display_block_right,
-            context.getString(R.string.external_display_topology_a11y_action_move_right),
-        )
 
     private val holderCallback =
         object : SurfaceHolder.Callback {
@@ -174,8 +143,12 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         }
 
     var onA11yMoveListener: ((direction: Direction) -> Unit)? = null
-    @VisibleForTesting internal val arrowButtons: Map<Direction, View>
-    private var arrowMovement: ArrowMovement = ArrowMovement.immovable()
+    @VisibleForTesting
+    internal val arrowButtons: Map<Direction, View>
+        get() = a11yController.arrowButtons
+
+    private val a11yController =
+        DisplayBlockA11yController(context) { direction -> onA11yMoveListener?.invoke(direction) }
 
     init {
         isScrollContainer = false
@@ -192,13 +165,10 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         addView(backgroundView)
         addView(selectionMarkerView)
 
-        arrowButtons =
-            ARROW_BUTTONS.mapValues { (direction, properties) ->
-                createArrowButtons(properties).also { arrowButtonView -> addView(arrowButtonView) }
-            }
+        a11yController.arrowButtons.values.forEach(::addView)
+        accessibilityDelegate = a11yController.accessibilityDelegate
 
         addOnLayoutChangeListener(layoutChangeListener)
-
         wallpaperView.holder.addCallback(holderCallback)
     }
 
@@ -320,9 +290,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
     }
 
     fun setArrowVisible(visible: Boolean) {
-        arrowButtons.forEach { (direction, buttonView) ->
-            buttonView.visibility = if (isMovable(direction) && visible) VISIBLE else GONE
-        }
+        a11yController.setArrowVisible(visible)
     }
 
     // DisplayBlock bounds are bigger than the actual display wallpaper (+ padding) area. Sets
@@ -369,7 +337,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         this.displayIdToShowWallpaper = displayIdToShowWallpaper
         this.surfaceScale = surfaceScale
         this.surfaceSize = surfaceSize
-        this.arrowMovement = arrowMovement
+        a11yController.arrowMovement = arrowMovement
 
         val displayDevice = injector.getDisplay(logicalDisplayId)
         contentDescription =
@@ -464,136 +432,7 @@ class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injecto
         requestLayout()
     }
 
-    private fun createArrowButtons(props: ArrowButtonProperties) =
-        FrameLayout(context).apply {
-            layoutParams =
-                LayoutParams(arrowTappableAreaSizePx, arrowTappableAreaSizePx, props.gravity)
-                    .apply {
-                        when (props.direction) {
-                            Direction.UP -> topMargin = props.verticalOffset
-                            Direction.DOWN -> bottomMargin = props.verticalOffset
-                            Direction.LEFT -> leftMargin = props.horizontalOffset
-                            Direction.RIGHT -> rightMargin = props.horizontalOffset
-                        }
-                    }
-            addView(
-                ImageButton(context).apply {
-                    setImageResource(props.drawableRes)
-                    background = context.getDrawable(R.drawable.display_block_arrow_background)
-                    importantForAccessibility = IMPORTANT_FOR_ACCESSIBILITY_NO
-                    isFocusable = false
-                    setClickable(false)
-                },
-                LayoutParams(arrowSizePx, arrowSizePx, Gravity.CENTER),
-            )
-            contentDescription = context.getString(props.contentDescriptionRes)
-            isFocusable = true
-            setOnClickListener { _ -> onA11yMoveListener?.invoke(props.direction) }
-            visibility = GONE
-        }
-
-    override fun onInitializeAccessibilityNodeInfo(info: AccessibilityNodeInfo) {
-        super.onInitializeAccessibilityNodeInfo(info)
-        // Add custom actions for moving the display block, only if can move selected direction
-        if (isMovable(Direction.UP)) {
-            info.addAction(a11yActionMoveUp)
-        } else {
-            info.removeAction(a11yActionMoveUp)
-        }
-
-        if (isMovable(Direction.DOWN)) {
-            info.addAction(a11yActionMoveDown)
-        } else {
-            info.removeAction(a11yActionMoveDown)
-        }
-
-        if (isMovable(Direction.LEFT)) {
-            info.addAction(a11yActionMoveLeft)
-        } else {
-            info.removeAction(a11yActionMoveLeft)
-        }
-
-        if (isMovable(Direction.RIGHT)) {
-            info.addAction(a11yActionMoveRight)
-        } else {
-            info.removeAction(a11yActionMoveRight)
-        }
-    }
-
-    override fun performAccessibilityAction(action: Int, arguments: Bundle?): Boolean {
-        if (onA11yMoveListener == null) {
-            return super.performAccessibilityAction(action, arguments)
-        }
-
-        when (action) {
-            R.id.action_move_display_block_up -> {
-                onA11yMoveListener?.invoke(Direction.UP)
-                return true
-            }
-
-            R.id.action_move_display_block_down -> {
-                onA11yMoveListener?.invoke(Direction.DOWN)
-                return true
-            }
-
-            R.id.action_move_display_block_left -> {
-                onA11yMoveListener?.invoke(Direction.LEFT)
-                return true
-            }
-
-            R.id.action_move_display_block_right -> {
-                onA11yMoveListener?.invoke(Direction.RIGHT)
-                return true
-            }
-
-            else -> return super.performAccessibilityAction(action, arguments)
-        }
-    }
-
-    private fun isMovable(direction: Direction) = arrowMovement.directionMapping[direction] ?: false
-
     private companion object {
-        private data class ArrowButtonProperties(
-            @param:DrawableRes val drawableRes: Int,
-            @param:StringRes val contentDescriptionRes: Int,
-            val direction: Direction,
-            val gravity: Int,
-            val horizontalOffset: Int = 0,
-            val verticalOffset: Int = 0,
-        )
-
-        private val ARROW_BUTTONS =
-            mutableMapOf<Direction, ArrowButtonProperties>(
-                Direction.UP to
-                    ArrowButtonProperties(
-                        R.drawable.display_block_arrow_up,
-                        R.string.external_display_topology_a11y_action_move_up,
-                        Direction.UP,
-                        Gravity.TOP or Gravity.CENTER_HORIZONTAL,
-                    ),
-                Direction.DOWN to
-                    ArrowButtonProperties(
-                        R.drawable.display_block_arrow_down,
-                        R.string.external_display_topology_a11y_action_move_down,
-                        Direction.DOWN,
-                        Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL,
-                    ),
-                Direction.LEFT to
-                    ArrowButtonProperties(
-                        R.drawable.display_block_arrow_left,
-                        R.string.external_display_topology_a11y_action_move_left,
-                        Direction.LEFT,
-                        Gravity.START or Gravity.CENTER_VERTICAL,
-                    ),
-                Direction.RIGHT to
-                    ArrowButtonProperties(
-                        R.drawable.display_block_arrow_right,
-                        R.string.external_display_topology_a11y_action_move_right,
-                        Direction.RIGHT,
-                        Gravity.END or Gravity.CENTER_VERTICAL,
-                    ),
-            )
-
         private val REFETCH_WALLPAPER_DELAY = 500.milliseconds
         private const val TAG = "DisplayBlock"
     }
