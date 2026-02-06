@@ -37,6 +37,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+// LINT.IfChange
 /** Controller class that controls accessibility autoclick delay time settings. */
 public class ToggleAutoclickDelayBeforeClickController
         extends BasePreferenceController implements DefaultLifecycleObserver {
@@ -133,3 +134,4 @@ public class ToggleAutoclickDelayBeforeClickController
         }
     }
 }
+// LINT.ThenChange(autoclick/ui/AutoclickDelayPreference.kt)
