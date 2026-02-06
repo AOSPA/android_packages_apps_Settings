@@ -95,6 +95,7 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoScreen
 import com.android.settings.deviceinfo.batteryinfo.BatteryInfoApiScreen
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
 import com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreference
+import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoApiScreen
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoScreen
 import com.android.settings.deviceinfo.hardwareinfo.HardwareVersionPreference
 import com.android.settings.deviceinfo.legal.LegalSettingsScreen
@@ -619,6 +620,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDataUsageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OpeningLinksApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =
