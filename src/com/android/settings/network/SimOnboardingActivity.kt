@@ -92,6 +92,8 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
 
     private val viewModel: SimOnboardingViewModel by viewModels()
 
+    private var isDsdsOnlyMode: Boolean = false
+
     private var enableMultiSimSidecar: EnableMultiSimSidecar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,6 +113,36 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID,
                 )
         }
+        Log.d(TAG, "SimOnboardingActivity onCreate targetSubId : $targetSubId")
+        if (targetSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            // {{ DSDS-only mode for Add SIM: no specific subscription to toggle }}
+            isDsdsOnlyMode = true
+
+            val tm = getSystemService(android.telephony.TelephonyManager::class.java)
+            if (tm == null || tm.activeModemCount > 1 || tm.supportedModemCount <= 1) {
+                Log.e(
+                    TAG,
+                    "DSDS-only flow aborted: tm=$tm, activeModemCount=${tm?.activeModemCount}, " +
+                        "supportedModemCount=${tm?.supportedModemCount}"
+                )
+                finish()
+                return
+            }
+
+            if (tm.doesSwitchMultiSimConfigTriggerReboot()) {
+                Log.e(TAG, "Device requires reboot for DSDS; cannot continue DSDS-only flow")
+                finish()
+                return
+            }
+
+            // Reboot-free DSDS: invoke sidecar
+            enableMultiSimSidecar = EnableMultiSimSidecar.get(fragmentManager)
+            // Initialize dialog state so Content() can show the DSDS progress dialog.
+            showDsdsProgressDialog = mutableStateOf(true)
+            enableMultiSimSidecar?.run(SimOnboardingService.NUM_OF_SIMS_FOR_DSDS)
+            return
+        }
+
         initServiceData(this, targetSubId, callbackListener)
         if (!onboardingService.isUsableTargetSubscriptionId) {
             Log.e(TAG, "The subscription id is not usable.")
@@ -445,6 +477,13 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 enableMultiSimSidecar!!.reset()
                 Log.i(TAG, "Successfully switched to DSDS without reboot.")
                 showDsdsProgressDialog.value = false
+
+                if (isDsdsOnlyMode) {
+                    // DSDS-only flow: we are done, let caller (Settings UI) retry Add SIM.
+                    finish()
+                    return
+                }
+
                 // refresh data
                 initServiceData(this, onboardingService.targetSubId, callbackListener)
                 startSimOnboardingProvider()

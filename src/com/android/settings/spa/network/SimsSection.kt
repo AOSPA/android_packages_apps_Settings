@@ -20,6 +20,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.UserManager
 import android.telephony.SubscriptionInfo
+import android.telephony.SubscriptionManager
+import android.telephony.TelephonyManager
 import android.telephony.euicc.EuiccManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
@@ -33,6 +35,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import android.util.Log
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.network.SatelliteRepository
@@ -40,6 +43,7 @@ import com.android.settings.network.SatelliteWarningDialogActivity
 import com.android.settings.network.SatelliteWarningDialogActivity.Companion.CUSTOM_CONTENT_BUTTON_NAME
 import com.android.settings.network.SatelliteWarningDialogActivity.Companion.CUSTOM_CONTENT_DESCRIPTION
 import com.android.settings.network.SatelliteWarningDialogActivity.Companion.CUSTOM_CONTENT_TITLE
+import com.android.settings.network.SimOnboardingActivity
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.network.telephony.SubscriptionActivationRepository
@@ -143,13 +147,52 @@ private fun AddSim() {
                         if (isSatelliteSessionStarted) {
                             startSatelliteWarningDialogFlow(context)
                         } else {
-                            startAddSimFlow(context)
+                            // {{ NEW DSDS CHECK START }}
+                            if (isMultiSimCapableAndInSingleSimMode(context)) {
+                                Log.d("AddSim", "Device is multi-SIM capable but in SSSS; "
+                                        + "launching SimOnboardingActivity to enable DSDS first")
+                                // Use INVALID_SUBSCRIPTION_ID because we’re not toggling
+                                // an existing sub, just preparing DSDS for add-eSIM.
+                                SimOnboardingActivity.startSimOnboardingActivity(
+                                    context,
+                                    SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                                    isNewTask = true
+                                )
+                            } else {
+                                startAddSimFlow(context)
+                            }
+                            // {{ NEW DSDS CHECK END }}
                         }
                     }
                 },
             restrictions = Restrictions(keys = listOf(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS)),
         )
     }
+}
+
+private fun getActiveModemCount(context: Context): Int {
+    val telephonyManager = context.getSystemService(TelephonyManager::class.java)
+    return telephonyManager?.activeModemCount ?: 0
+}
+
+private fun isMultiSimEnabled(context: Context): Boolean {
+    return getActiveModemCount(context) > 1
+}
+
+private fun isMultiSimSupported(context: Context): Boolean {
+    val telephonyManager = context.getSystemService(TelephonyManager::class.java)
+    return telephonyManager?.isMultiSimSupported == TelephonyManager.MULTISIM_ALLOWED
+}
+
+private fun isMultiSimCapableAndInSingleSimMode(context: Context): Boolean {
+    // Hardware supports DSDS
+    if (!isMultiSimSupported(context)) return false
+
+    // Currently single-SIM mode (multi-SIM not enabled)
+    if (isMultiSimEnabled(context)) return false
+
+    // Return true when device is Multi-SIM capable and device is in Single SIM mode currently.
+    return true
 }
 
 fun startAddSimFlow(context: Context) = context.startActivity(getAddSimIntent())
