@@ -22,6 +22,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
 
+// LINT.IfChange
 /** Preference controller for captioning edge type. */
 public class CaptioningEdgeTypeController extends BaseCaptioningCustomController
         implements OnValueChangedListener {
@@ -44,3 +45,4 @@ public class CaptioningEdgeTypeController extends BaseCaptioningCustomController
         mCaptionHelper.setEnabled(true);
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptionCustomProperties.kt:caption_edge_type_pref)

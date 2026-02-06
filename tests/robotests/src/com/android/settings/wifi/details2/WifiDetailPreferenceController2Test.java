@@ -82,7 +82,7 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
-import com.android.settings.connectivity.Flags;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.shadow.ShadowDevicePolicyManager;
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -1173,7 +1173,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onUpdated_networkOwned_showForgetButton() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1201,7 +1201,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onUpdated_networkNotOwnedModifiable_hideForgetButton() {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.canForget()).thenReturn(true);
@@ -1219,7 +1219,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onUpdated_networkNotOwnedNotModifiable_adminUser_showForgetButton() {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.canForget()).thenReturn(true);
@@ -1249,7 +1249,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onResume_canShareNetwork_networkOwned() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1263,7 +1263,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onResume_canNotShareNetwork_networkOwned_guestUser() {
         ShadowWifiUtils.setIsGuestUser(true);
         setUpForConnectedNetwork();
@@ -1278,7 +1278,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onResume_canNotShareNetwork_networkNotOwnedModifiable() {
         final WifiConfiguration mockWifiConfiguration = mock(WifiConfiguration.class);
         when(mMockWifiEntry.canShare()).thenReturn(true);
@@ -1336,7 +1336,8 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void canModifyNetwork_canModifyShareSettings_featureDisabled() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1346,7 +1347,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void canModifyNetwork_canModifyShareSettings_owned() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1359,7 +1360,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void canModifyNetwork_canModifyShareSettings_notOwnedNotEditable() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1375,7 +1376,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void canModifyNetwork_canModifyShareSettings_notOwnedEditable() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1391,7 +1392,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void canModifyNetwork_canModifyShareSettings_notOwned_singleUser() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1447,7 +1448,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void forgetNetwork_isShared_shouldShowDialog() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1468,7 +1469,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void forgetNetwork_singleUser_shouldNotShowDialog() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1484,7 +1485,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void forgetNetwork_isNotShared_shouldNotShowDialog() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1500,7 +1501,8 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void forgetNetwork_featureDisabled_shouldNotShowDialog() {
         setUpForConnectedNetwork();
         setUpSpyController();
@@ -1653,7 +1655,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void sharedNetwork_networkNotOwned_showFooter() {
         setUpForConnectedNetwork();
         setUpController();
@@ -1667,7 +1669,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void sharedNetwork_networkOwned_showFooter() {
         setUpForConnectedNetwork();
         setUpController();
@@ -1681,7 +1683,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCapabilitiesChanged_captivePortal_networkOwned_shouldShowSignInButton() {
         setUpForConnectedNetwork();
         setUpController();
@@ -1701,7 +1703,7 @@ public class WifiDetailPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCapabilitiesChanged_captivePortal_networkNotOwned_showNotShowSignInButton() {
         setUpForConnectedNetwork();
         setUpController();

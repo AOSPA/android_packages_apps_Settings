@@ -166,7 +166,7 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
         if (activity == null) {
             return;
         }
-        activity.setTitle(R.string.languages_settings);
+        activity.setTitle(R.string.language_and_region_settings);
 
         final boolean previouslyRestricted = mIsUiRestricted;
         mIsUiRestricted = isUiRestricted();

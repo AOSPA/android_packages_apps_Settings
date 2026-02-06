@@ -31,6 +31,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -63,8 +64,7 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
 
     public NotifyOpenNetworksPreferenceController(Context context) {
         super(context, KEY_NOTIFY_OPEN_NETWORKS);
-        if (com.android.settings.connectivity.Flags.wifiMultiuser()
-                && com.android.wifi.flags.Flags.multiUserWifiEnhancement()) {
+        if (WifiUtils.isWifiMultiuserEnabled()) {
             mWifiManager = context.getSystemService(WifiManager.class);
             mBackgroundExecutor = ThreadUtils.getBackgroundExecutor();
             mUiExecutor = context.getMainExecutor();
@@ -83,8 +83,7 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (com.android.settings.connectivity.Flags.wifiMultiuser()
-                && com.android.wifi.flags.Flags.multiUserWifiEnhancement()) {
+        if (WifiUtils.isWifiMultiuserEnabled()) {
             mPreference = screen.findPreference(getPreferenceKey());
             mBackgroundExecutor.execute(
                     () -> mWifiManager.isOpenNetworkNotifierEnabled(mUiExecutor, mResultCallback));
@@ -95,8 +94,7 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
 
     @Override
     public void onResume() {
-        if (com.android.settings.connectivity.Flags.wifiMultiuser()
-                && com.android.wifi.flags.Flags.multiUserWifiEnhancement()) {
+        if (WifiUtils.isWifiMultiuserEnabled()) {
             // On resume, fetch setting value from WifiManager once instead of registering a
             // listener on Settings.Global, since WifiManager is now the single source of value
             // storage for this setting.
@@ -109,9 +107,7 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
 
     @Override
     public void onPause() {
-        if (!(com.android.settings.connectivity.Flags.wifiMultiuser()
-                && com.android.wifi.flags.Flags.multiUserWifiEnhancement())
-                && mSettingObserver != null) {
+        if (WifiUtils.isWifiMultiuserEnabled() && mSettingObserver != null) {
             mSettingObserver.register(mContext.getContentResolver(), false /* register */);
         }
     }
@@ -123,8 +119,7 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
 
     @Override
     public boolean isChecked() {
-        if (com.android.settings.connectivity.Flags.wifiMultiuser()
-                && com.android.wifi.flags.Flags.multiUserWifiEnhancement()) {
+        if (WifiUtils.isWifiMultiuserEnabled()) {
             return mNotifierEnabled;
         } else {
             return Settings.Global.getInt(mContext.getContentResolver(),
@@ -134,8 +129,7 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (com.android.settings.connectivity.Flags.wifiMultiuser()
-                && com.android.wifi.flags.Flags.multiUserWifiEnhancement()) {
+        if (WifiUtils.isWifiMultiuserEnabled()) {
             mBackgroundExecutor.execute(
                     () -> mWifiManager.setOpenNetworkNotifierEnabled(isChecked));
         } else {
@@ -155,7 +149,7 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
      * @deprecated Use {@link WifiManager#isOpenNetworkNotifierEnabled(Executor, Consumer)} instead
      * as the source for setting value, and there's no need to listen to Settings.Global value
      * change. This will no longer be used on devices after B and when the following two flags are
-     * enabled: {@link com.android.settings.connectivity.Flags#wifiMultiuser} and
+     * enabled: {@link com.android.settings.flags.Flags#enableWifiMultiuser} and
      * {@link com.android.wifi.flags.Flags#multiUserWifiEnhancement}.
      */
     @Deprecated(forRemoval = true)

@@ -49,6 +49,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.internal.telephony.RILConstants;
 import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settingslib.RestrictedSwitchPreference;
@@ -229,6 +230,36 @@ public final class Enable2gPreferenceControllerTest {
         when2gIsEnabledForReasonEnable2g();
         when2gIsDisabledByAdmin(true);
         assertThat(mController.isChecked()).isTrue();
+    }
+
+    @Test
+    public void isChecked_invalidSubId_returnsFalse() {
+        mController.init(mFragment, SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        when2gIsDisabledByAdmin(false);
+
+        assertThat(mController.isChecked()).isFalse();
+    }
+
+    @Test
+    public void isChecked_corruptedNetworkType_resetsAndReturnsCorrectState() {
+        // When allowed network types for 2G is corrupted (i.e. 0), it should be reset to the
+        // default network types. The default includes 2G, so isChecked() should return false.
+        when2gIsDisabledByAdmin(false);
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(0L);
+
+        // Action
+        boolean isChecked = mController.isChecked();
+
+        // Verify that the allowed network types are reset to default.
+        long defaultNetworkTypes = RadioAccessFamily.getRafFromNetworkType(
+                RILConstants.PREFERRED_NETWORK_MODE);
+        verify(mTelephonyManager).setAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G, defaultNetworkTypes);
+
+        // The default network mode includes 2G, so 2G is enabled.
+        // The "disable 2G" toggle should be OFF (isChecked() == false).
+        assertThat(isChecked).isFalse();
     }
 
     @Test

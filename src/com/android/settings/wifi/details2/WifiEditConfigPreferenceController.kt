@@ -19,6 +19,7 @@ package com.android.settings.wifi.details2
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.core.TogglePreferenceController
+import com.android.settings.wifi.WifiUtils;
 import com.android.wifitrackerlib.WifiEntry
 
 class WifiEditConfigPreferenceController(
@@ -28,7 +29,7 @@ class WifiEditConfigPreferenceController(
 ) : TogglePreferenceController(context, preferenceKey) {
 
     override fun getAvailabilityStatus(): Int {
-        return if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
+        return if (WifiUtils.isWifiMultiuserEnabled()) {
             AVAILABLE
         } else {
             CONDITIONALLY_UNAVAILABLE

@@ -19,6 +19,7 @@ package com.android.settings.security;
 import android.app.compat.CompatChanges;
 import android.content.Context;
 import android.os.Process;
+import android.provider.Settings;
 import android.text.ShowSecretsSetting;
 
 import androidx.annotation.VisibleForTesting;
@@ -45,6 +46,12 @@ public class ShowSecretsTouchPreferenceController extends TogglePreferenceContro
     public boolean setChecked(boolean isChecked) {
         ShowSecretsSetting.setShouldShowTouchInputForUser(
                 mContext.getContentResolver(), isChecked, Process.myUserHandle());
+        // Also set the legacy setting for apps targeting older SDKs as this is/was closely
+        // related to what is now the touch setting.
+        Settings.System.putInt(
+                mContext.getContentResolver(),
+                Settings.System.TEXT_SHOW_PASSWORD,
+                isChecked ? 1 : 0);
         return true;
     }
 

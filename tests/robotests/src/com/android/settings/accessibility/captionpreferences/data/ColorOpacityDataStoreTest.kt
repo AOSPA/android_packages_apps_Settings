@@ -52,6 +52,26 @@ class ColorOpacityDataStoreTest {
     }
 
     @Test
+    fun captionBackgroundColorDataStore_getValue_returnsFromSettings() {
+        val dataStore = CaptionBackgroundColorDataStore(context, isColor = true)
+        settingsSecureStore.setInt(
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_BACKGROUND_COLOR,
+            Color.BLUE,
+        )
+        assertThat(dataStore.getValue(KEY, Int::class.javaObjectType)).isEqualTo(Color.BLUE)
+    }
+
+    @Test
+    fun captionWindowColorDataStore_getValue_returnsFromSettings() {
+        val dataStore = CaptionWindowColorDataStore(context, isColor = true)
+        settingsSecureStore.setInt(
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_WINDOW_COLOR,
+            Color.GREEN,
+        )
+        assertThat(dataStore.getValue(KEY, Int::class.javaObjectType)).isEqualTo(Color.GREEN)
+    }
+
+    @Test
     fun hasValidColor_returnsTrueForOpaque() {
         val dataStore = CaptionTextColorDataStore(context, isColor = true)
         settingsSecureStore.setInt(

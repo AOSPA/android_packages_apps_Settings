@@ -87,15 +87,18 @@ public class BatteryDiffData {
         return mEndTimestamp;
     }
 
-    int getStartBatteryLevel() {
+    /** Gets the start battery level. */
+    public int getStartBatteryLevel() {
         return mStartBatteryLevel;
     }
 
-    int getEndBatteryLevel() {
+    /** Gets the end battery level. */
+    public int getEndBatteryLevel() {
         return mEndBatteryLevel;
     }
 
-    long getScreenOnTime() {
+    /** Gets the screen on time. */
+    public long getScreenOnTime() {
         return mScreenOnTime;
     }
 
@@ -104,7 +107,8 @@ public class BatteryDiffData {
         return mAppEntries;
     }
 
-    List<BatteryDiffEntry> getSystemDiffEntryList() {
+    /** Gets the {@link BatteryDiffEntry} list for system. */
+    public List<BatteryDiffEntry> getSystemDiffEntryList() {
         return mSystemEntries;
     }
 

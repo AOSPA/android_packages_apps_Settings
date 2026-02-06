@@ -19,10 +19,12 @@ package com.android.settings.network
 import android.app.settings.SettingsEnums.ACTION_AIRPLANE_MODE_SYNC_TOGGLE
 import android.bluetooth.BluetoothAdapter.ACTION_STATE_CHANGED as BLUETOOTH_STATE_CHANGED
 import android.bluetooth.BluetoothManager
+import android.companion.CompanionDeviceManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.os.UserHandle.USER_ALL
 import android.provider.Settings
 import androidx.annotation.DrawableRes
 import com.android.settings.R
@@ -35,16 +37,20 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
+import java.util.concurrent.atomic.AtomicBoolean
 
-class AirplaneModeSyncPreference :
+class AirplaneModeSyncPreference(context: Context) :
     SwitchPreference(KEY, R.string.airplane_mode_sync_purpose, R.string.sync_across_devices_title),
     PreferenceActionMetricsProvider,
     PreferenceSummaryProvider {
 
+    private val storage = AirplaneModeSyncStorage(context)
+
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_sync
 
-    override fun isEnabled(context: Context) = context.isBluetoothEnabled()
+    override fun isEnabled(context: Context) =
+        context.isBluetoothEnabled() && storage.isSyncSupportedWatchPresent.get()
 
     override fun getSummary(context: Context) =
         context.getString(R.string.apm_sync_bluetooth_off_summary).takeUnless {
@@ -55,14 +61,13 @@ class AirplaneModeSyncPreference :
 
     override fun getWritePermissions(context: Context) = SettingsGlobalStore.getWritePermissions()
 
-    // TODO(b/420946599): Check with PWG for the read/write permit and sensitivityLevel.
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun storage(context: Context): KeyValueStore = AirplaneModeSyncStorage(context)
+    override fun storage(context: Context): KeyValueStore = storage
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
@@ -80,9 +85,12 @@ class AirplaneModeSyncPreference :
             AbstractKeyedDataObservable<String>(), KeyValueStore {
 
             private var bluetoothStateChangedReceiver: BroadcastReceiver? = null
+            private var isDevicePresenceEventListenerRegistered = false
 
             private val store =
                 SettingsGlobalStore.get(context).apply { setDefaultValue(KEY, true) }
+            private val cdm = context.getSystemService(CompanionDeviceManager::class.java)
+            val isSyncSupportedWatchPresent = AtomicBoolean(false)
 
             override fun onFirstObserverAdded() {
                 val broadcastReceiver =
@@ -95,20 +103,46 @@ class AirplaneModeSyncPreference :
                     }
                 bluetoothStateChangedReceiver = broadcastReceiver
                 context.registerReceiver(broadcastReceiver, IntentFilter(BLUETOOTH_STATE_CHANGED))
+                val watches =
+                    cdm.getAllAssociations(USER_ALL).filter(::isApmSyncSupportedWatch).map { it.id }
+                if (watches.isNotEmpty()) {
+                    cdm.setOnDevicePresenceEventListener(
+                        watches.toIntArray(),
+                        context.packageName,
+                        Runnable::run,
+                    ) {
+                        updateSyncSupportedWatchPresence(watches)
+                    }
+                    isDevicePresenceEventListenerRegistered = true
+                    updateSyncSupportedWatchPresence(watches)
+                }
             }
 
             override fun onLastObserverRemoved() {
                 bluetoothStateChangedReceiver?.let { context.unregisterReceiver(it) }
+                if (isDevicePresenceEventListenerRegistered) {
+                    cdm.removeOnDevicePresenceEventListener(context.packageName)
+                }
             }
 
             override fun contains(key: String) = key == KEY
 
             @Suppress("UNCHECKED_CAST")
             override fun <T : Any> getValue(key: String, valueType: Class<T>) =
-                ((store.getValue(KEY, valueType) as Boolean) && context.isBluetoothEnabled()) as T
+                ((store.getValue(KEY, valueType) as Boolean) &&
+                    context.isBluetoothEnabled() &&
+                    isSyncSupportedWatchPresent.get())
+                    as T
 
             override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
                 store.setValue(KEY, valueType, value)
+            }
+
+            private fun updateSyncSupportedWatchPresence(watches: List<Int>) {
+                val newPresence = watches.any(cdm::isDevicePresent)
+                if (isSyncSupportedWatchPresent.getAndSet(newPresence) != newPresence) {
+                    notifyChange(KEY, PreferenceChangeReason.STATE)
+                }
             }
         }
     }

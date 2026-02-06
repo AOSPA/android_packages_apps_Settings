@@ -22,6 +22,7 @@ import android.content.Intent
 import android.provider.Settings
 import com.android.settings.SubSettings
 import com.android.settings.development.AdbWirelessDebuggingPreferenceController
+import com.android.settings.development.qstile.AdbWirelessDebuggingDevelopmentTile
 import com.android.settings.development.qstile.DevelopmentTiles
 import com.android.settings.network.telephony.satellite.quicksettings.SatelliteLandingPageActivity
 import com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileService
@@ -81,7 +82,7 @@ class QSTileLongPressGatewayActivityTest {
                     Intent.EXTRA_COMPONENT_NAME,
                     ComponentName(
                         "com.android.settings",
-                        DevelopmentTiles.WirelessDebugging::class.java.name,
+                        AdbWirelessDebuggingDevelopmentTile::class.java.name,
                     ),
                 )
             }
@@ -107,7 +108,7 @@ class QSTileLongPressGatewayActivityTest {
                     Intent.EXTRA_COMPONENT_NAME,
                     ComponentName(
                         "com.android.settings",
-                        DevelopmentTiles.WirelessDebugging::class.java.name,
+                        AdbWirelessDebuggingDevelopmentTile::class.java.name,
                     ),
                 )
             }

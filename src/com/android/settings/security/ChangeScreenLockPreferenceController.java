@@ -29,17 +29,14 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
-import com.android.settings.widget.GearPreference;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class ChangeScreenLockPreferenceController extends AbstractPreferenceController implements
-        PreferenceControllerMixin, GearPreference.OnGearClickListener {
+        PreferenceControllerMixin {
 
     private static final String KEY_UNLOCK_SET_OR_CHANGE = "unlock_set_or_change";
 
@@ -49,7 +46,6 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
 
     protected final int mUserId = UserHandle.myUserId();
     protected final int mProfileChallengeUserId;
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
     protected final ScreenLockPreferenceDetailsUtils mScreenLockPreferenceDetailUtils;
 
     protected RestrictedPreference mPreference;
@@ -62,7 +58,6 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
                 .getLockPatternUtils(context);
         mHost = host;
         mProfileChallengeUserId = Utils.getManagedProfileId(mUm, mUserId);
-        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
         mScreenLockPreferenceDetailUtils = new ScreenLockPreferenceDetailsUtils(context);
     }
 
@@ -84,14 +79,6 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
 
     @Override
     public void updateState(Preference preference) {
-        if (mPreference != null && mPreference instanceof GearPreference) {
-            if (mScreenLockPreferenceDetailUtils.shouldShowGearMenu()) {
-                ((GearPreference) mPreference).setOnGearClickListener(this);
-            } else {
-                ((GearPreference) mPreference).setOnGearClickListener(null);
-            }
-        }
-
         updateSummary(preference, mUserId);
         if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
             // No need to check for managed profile or parent as this method handles it all.
@@ -106,15 +93,6 @@ public class ChangeScreenLockPreferenceController extends AbstractPreferenceCont
                 // profile's lock is the same. Disable main "Screen lock" menu.
                 disableIfPasswordQualityManaged(mProfileChallengeUserId);
             }
-        }
-    }
-
-    @Override
-    public void onGearClick(GearPreference p) {
-        if (TextUtils.equals(p.getKey(), getPreferenceKey())) {
-            mMetricsFeatureProvider.logClickedPreference(p,
-                    p.getExtras().getInt(DashboardFragment.CATEGORY));
-            mScreenLockPreferenceDetailUtils.openScreenLockSettings(mHost.getMetricsCategory());
         }
     }
 
