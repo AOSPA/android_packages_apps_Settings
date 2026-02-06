@@ -35,11 +35,19 @@ public final class AutoclickUtils {
     /** Used for autoclick custom delay in the preferences editor. */
     static final String KEY_CUSTOM_DELAY_VALUE = "custom_delay_value";
 
-    /** Min allowed autoclick delay value. */
-    static final int MIN_AUTOCLICK_DELAY_MS = 200;
+    /**
+     * Threshold for short autoclick delay.
+     * <p>
+     * Values smaller than this are considered short delays.
+     */
+    static final int AUTOCLICK_DELAY_SHORT_THRESHOLD_MS = 200;
 
-    /** Max allowed autoclick delay value. */
-    static final int MAX_AUTOCLICK_DELAY_MS = 1000;
+    /**
+     * Threshold for long autoclick delay.
+     * <p>
+     * Values larger than this are considered long delays.
+     */
+    static final int AUTOCLICK_DELAY_LONG_THRESHOLD_MS = 1000;
 
     /**
      * Allowed autoclick delay values are discrete. This is the difference between two allowed
