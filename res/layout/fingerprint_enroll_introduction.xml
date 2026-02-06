@@ -20,6 +20,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="?attr/fingerprint_layout_theme"
     android:id="@+id/setup_wizard_layout"
+    app:sudAnimationIcon="@raw/icon_lock"
+    app:sudIsAnimatedIconDelayed="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

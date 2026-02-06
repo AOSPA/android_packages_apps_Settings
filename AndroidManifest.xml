@@ -3046,6 +3046,7 @@
 
         <activity
             android:name=".supervision.credentialmanagement.SupervisionPinRecoveryActivity"
+            android:theme="@style/Transparent"
             android:excludeFromRecents="true"
             android:exported="false" />
 
@@ -6228,10 +6229,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <receiver
-            android:name=".network.telephony.satellite.quicksettings.SatelliteTilePromptUtils$SatellitePromptDismissalReceiver"
-            android:exported="false" />
 
         <!-- This is the longest AndroidManifest.xml ever. -->
 

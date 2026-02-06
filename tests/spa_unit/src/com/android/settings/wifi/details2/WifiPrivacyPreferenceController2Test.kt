@@ -29,7 +29,7 @@ import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.connectivity.Flags
+import com.android.settings.flags.Flags
 import com.android.wifitrackerlib.WifiEntry
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
@@ -177,7 +177,7 @@ class WifiPrivacyPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     fun displayPreference_networkOwned() {
         if (UserManager.isHeadlessSystemUserMode()) {
             mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfiguration }
@@ -191,7 +191,7 @@ class WifiPrivacyPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     fun displayPreference_networkNotOwned_singleUser() {
         mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfiguration }
         whenever(mockWifiConfiguration.getCreatorUserId()) doReturn USER_ID_OTHER
@@ -203,7 +203,7 @@ class WifiPrivacyPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     fun displayPreference_networkNotOwned() {
         mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfiguration }
         whenever(mockWifiConfiguration.getCreatorUserId()) doReturn USER_ID_OTHER

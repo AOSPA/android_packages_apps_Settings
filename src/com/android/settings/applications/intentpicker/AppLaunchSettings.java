@@ -300,8 +300,8 @@ public class AppLaunchSettings extends AppInfoBase implements
                 .setPositiveButton(R.string.app_launch_dialog_ok, /* listener= */ null)
                 .create();
         if (dialog.getListView() != null) {
-            dialog.getListView().setTextDirection(View.TEXT_DIRECTION_LOCALE);
-            dialog.getListView().setEnabled(false);
+            AlertDialogHelper.fixTextDirection(dialog);
+            AlertDialogHelper.fixAccessibilityAnnouncements(dialog);
         } else {
             Log.w(TAG, "createVerifiedLinksDialog: dialog.getListView() is null, please check it.");
         }
@@ -454,4 +454,4 @@ public class AppLaunchSettings extends AppInfoBase implements
         return linkList.size();
     }
 }
-// LINT.ThenChange(AppLaunchApiScreen.java)
+// LINT.ThenChange(AppLaunchApiScreen.kt)

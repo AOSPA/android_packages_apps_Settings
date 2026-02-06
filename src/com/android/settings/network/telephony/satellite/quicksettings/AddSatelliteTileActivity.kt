@@ -87,7 +87,7 @@ class AddSatelliteTileActivity : Activity() {
                         // 5. If the user is not the current user, then we should mark as shown to
                         // avoid potentially spamming the user (the user likely does not have
                         // permissions to add the tile).
-                        satelliteTilePromptUtils.setAddTilePromptShown(this, true)
+                        satelliteTilePromptUtils.markAllPromptsShown(this)
                     }
                     else -> {
                         // An error occurred, so we don't mark the prompt as shown so that we can

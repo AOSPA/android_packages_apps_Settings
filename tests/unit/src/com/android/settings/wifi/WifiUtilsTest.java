@@ -38,7 +38,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.R;
-import com.android.settings.connectivity.Flags;
 import com.android.wifitrackerlib.WifiEntry;
 
 import org.junit.Before;
@@ -215,13 +214,14 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
+            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
     public void isCurrentUserNetworkOwner_multiUserDisabled() {
         assertThat(WifiUtils.isCurrentUserNetworkOwner(mWifiEntry, mContext)).isTrue();
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isCurrentUserNetworkOwner_nullWifiConfiguration() {
         when(mWifiEntry.getWifiConfiguration()).thenReturn(null);
 
@@ -229,7 +229,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isCurrentUserNetworkOwner_singleUser() {
         when(mUserManager.getUserCount()).thenReturn(1);
 
@@ -237,7 +237,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isCurrentUserNetworkOwner_multipleUsers_notOwnedNetwork() {
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -246,7 +246,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isCurrentUserNetworkOwner_multipleUsers_ownedNetwork() {
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -255,13 +255,14 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
+            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
     public void isNetworkEditable_multiUserDisabled() {
         assertThat(WifiUtils.isNetworkEditable(mWifiEntry, mContext)).isTrue();
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkEditable_ownedNetwork() {
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -271,7 +272,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkEditable_notOwnedNetwork_networkModifiable() {
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -281,7 +282,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkEditable_notOwnedNetwork_networkNotModifiable() {
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -291,7 +292,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkEditable_guestUser_notOwnedNetwork_networkModifiable() {
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -302,7 +303,8 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
+            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
     public void isSharedFieldEditable_multiuserDisabled() {
         assertThat(WifiUtils.isSharedFieldEditable(mWifiEntry, mContext)).isFalse();
     }
@@ -315,13 +317,13 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isSharedFieldEditable_newNetwork() {
         assertThat(WifiUtils.isSharedFieldEditable(null, mContext)).isTrue();
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isSharedFieldEditable_ownedNetwork() {
         when(mUserManager.isGuestUser()).thenReturn(false);
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
@@ -331,7 +333,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isSharedFieldEditable_notOwnedNetwork() {
         when(mUserManager.isGuestUser()).thenReturn(false);
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
@@ -341,7 +343,8 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
+            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
     public void isNetworkShareable_canShare_multiuserDisabled() {
         when(mWifiEntry.canShare()).thenReturn(true);
 
@@ -356,7 +359,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkShareable_canShare_notOwnedNetwork() {
         when(mWifiEntry.canShare()).thenReturn(true);
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
@@ -366,7 +369,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkShareable_canShare_ownedNetwork() {
         when(mWifiEntry.canShare()).thenReturn(true);
         when(mUserManager.isGuestUser()).thenReturn(false);
@@ -377,7 +380,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkShareable_canShare_ownedNetwork_guestUser() {
         when(mWifiEntry.canShare()).thenReturn(true);
         when(mUserManager.isGuestUser()).thenReturn(true);
@@ -388,7 +391,8 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
+            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
     public void isNetworkForgettable_canForget_multiuserDisabled() {
         when(mWifiEntry.canForget()).thenReturn(true);
 
@@ -403,7 +407,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkForgettable_canForget_ownedNetwork() {
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
@@ -413,7 +417,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkForgettable_canForget_notOwnedNetwork() {
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);
@@ -423,7 +427,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsEnabled(Flags.FLAG_WIFI_MULTIUSER)
+    @RequiresFlagsEnabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkForgettable_canForget_notOwnedNetwork_adminUser() {
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiConfiguration.getCreatorUserId()).thenReturn(USER_ID_OTHER);

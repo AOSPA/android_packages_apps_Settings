@@ -412,6 +412,10 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Omitir"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Agregaste la cantidad máxima permitida de rostros"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"No se pueden agregar más rostros"</string>
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
+    <skip />
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"No se completó la configuración"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"Aceptar"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Se alcanzó el límite de tiempo para inscribir el rostro. Vuelve a intentarlo."</string>
@@ -555,6 +559,14 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Toca el sensor"</string>
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Toca el botón de encendido sin presionarlo"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Cómo configurar una huella dactilar"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_title" msgid="2560358942286362136">"Toca el sensor de huellas dactilares"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_message" msgid="1440652109953064598">"El sensor está en el teclado, el botón de encendido o el lateral del dispositivo."</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_left_message" msgid="9114169763600792562">"El sensor de huellas dactilares está en la esquina inferior izquierda del teclado"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_right_message" msgid="1259481399128590523">"El sensor de huellas dactilares está en la esquina inferior derecha del teclado"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_top_right_message" msgid="3676793246782964274">"El sensor de huellas dactilares está en la esquina superior derecha del teclado"</string>
+    <string name="security_settings_enroll_find_sensor_right_side_message" msgid="4935349088172995426">"El sensor de huellas dactilares está en el lado derecho del dispositivo"</string>
+    <string name="security_settings_enroll_find_sensor_left_side_message" msgid="5826609754513683067">"El sensor de huellas dactilares está en el lado izquierdo del dispositivo"</string>
+    <string name="security_settings_enroll_find_sensor_left_of_power_button_top_right_message" msgid="4384349514752161995">"El sensor de huellas dactilares está en la esquina superior derecha del teclado, junto al botón de encendido"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Se encuentra en la parte posterior del teléfono. Usa el dedo índice."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"El sensor de huellas dactilares está en la pantalla. En la próxima pantalla, se capturará tu huella dactilar."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Iniciar"</string>
@@ -1147,14 +1159,14 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Usar un código QR para agregar un dispositivo a esta red"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"El código QR no es un formato válido"</string>
     <string name="retry" msgid="7542103800274026915">"Reintentar"</string>
-    <string name="shared_message" msgid="2104244057926025072">"compartida"</string>
-    <string name="private_message" msgid="5897966950396765392">"privada"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Cambiar"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Cancelar"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Compartir la red"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Otros usuarios de este dispositivo pueden acceder a esta red"</string>
-    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"¿Quieres cambiar a la red <xliff:g id="SHARED">%1$s</xliff:g>?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"Ya existe una red <xliff:g id="SHARED_0">%1$s</xliff:g> con el nombre \"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\". Si cambias a la red <xliff:g id="SHARED_1">%1$s</xliff:g>, abandonarás la red <xliff:g id="PRIVATE">%3$s</xliff:g> y es posible que no tengas Internet temporalmente."</string>
+    <string name="wifi_share_conflict_dialog_title" msgid="3758584730708042014">"¿Quieres cambiar a una red compartida?"</string>
+    <string name="wifi_share_conflict_dialog_message" msgid="4614968368961927940">"Ya existe una red con el nombre “<xliff:g id="NETWORK_NAME">%1$s</xliff:g>”. Si cambias a la red compartida, abandonarás la red privada y es posible que no tengas Internet temporalmente."</string>
+    <string name="wifi_private_conflict_dialog_title" msgid="10940608988441770">"¿Quieres cambiar a una red privada?"</string>
+    <string name="wifi_private_conflict_dialog_message" msgid="495022893355731972">"Ya existe una red con el nombre “<xliff:g id="NETWORK_NAME">%1$s</xliff:g>”. Si cambias a la red privada, abandonarás la red compartida y es posible que no tengas Internet temporalmente."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(sin cambios)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Permitir que los usuarios editen la red"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Otros usuarios pueden realizar cambios en esta red"</string>
@@ -1439,7 +1451,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Usa un fondo oscuro para que la pantalla sea más fácil de ver y reducir el uso de batería en algunas pantallas. El tema cambiará si tienes un programa, cuando la pantalla está apagada."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"El tema oscuro se activa o desactiva a partir del horario para dormir"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Configuración del Modo hora de dormir"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Los modos también pueden activar el tema oscuro}=1{{mode_1} también activa el tema oscuro}=2{{mode_1} y {mode_2} también activan el tema oscuro}=3{{mode_1}, {mode_2} y {mode_3} también activan el tema oscuro}other{{mode_1}, {mode_2} y # más también activan el tema oscuro}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8510284128378660986">"{count,plural,offset:2 =0{Los modos también pueden activar el tema oscuro.}=1{{mode_1} también activa el tema oscuro.}=2{{mode_1} y {mode_2} también activan el tema oscuro.}=3{{mode_1}, {mode_2} y {mode_3} también activan el tema oscuro.}other{{mode_1}, {mode_2} y # más también activan el tema oscuro.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Configuración de los modos"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Aumenta el brillo y expande el rango de color y la claridad de las imágenes y los videos con alto rango dinámico (HDR). El contenido HDR se verá más brillante."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Tiempo de espera de la pantalla"</string>
@@ -1517,6 +1529,24 @@
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"No se puede habilitar el PIN."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"Aceptar"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Cancelar"</string>
+    <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Proteger la tarjeta SIM"</string>
+    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"Protección de bloqueo de SIM automática"</string>
+    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"Administración automática de PIN"</string>
+    <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Administrado por Android"</string>
+    <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"No administrado por Android"</string>
+    <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"La inscripción se realizó correctamente"</string>
+    <string name="sim_enrollment_failed" msgid="342422651961251317">"Error en la inscripción"</string>
+    <string name="sim_display_platform_managed_pin_title" msgid="6889806433509624620">"Mostrar PIN administrado por Android"</string>
+    <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"PIN administrado por Android"</string>
+    <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Valor del PIN administrado por Android:"</string>
+    <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"No se pudo obtener el PIN"</string>
+    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"Protege la tarjeta SIM contra robo"</string>
+    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"El PIN de la SIM es administrado por Android"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"El PIN de la SIM se administra de forma manual"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"Debes configurar la pantalla de bloqueo para activar la protección de la SIM"</string>
+    <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Ingresa el PIN actual de la SIM"</string>
+    <string name="provide_current_sim_pin" msgid="2805396981527525822">"Ingresa el PIN actual de la tarjeta SIM"</string>
+    <string name="use_carrier_default_pin" msgid="4777399918806287607">"Usar conf. pred. de oper."</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"¿Usar a <xliff:g id="CARRIER">%1$s</xliff:g> para datos móviles?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Estás usando a <xliff:g id="CARRIER2_0">%2$s</xliff:g> para datos móviles. Si cambias a <xliff:g id="CARRIER1">%1$s</xliff:g>, ya no se usará a <xliff:g id="CARRIER2_1">%2$s</xliff:g> para los datos móviles."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2118,13 +2148,12 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Presionar la tecla de espacio dos veces para insertar \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Mostrar contraseñas"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Muestra los caracteres brevemente mientras escribes"</string>
-    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
     <skip />
-    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Muestra los caracteres brevemente mientras escribes en la pantalla táctil"</string>
+    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
     <skip />
-    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
     <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Este corrector ortográfico puede recopilar todo el texto que escribas, incluidos los datos personales como contraseñas y números de tarjetas de crédito. Proviene de la aplicación <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. ¿Deseas usar este corrector ortográfico?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Configuración"</string>
@@ -2504,7 +2533,6 @@
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Acerca rápidamente la pantalla para que el contenido se muestre en un tamaño más grande"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Para acercar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa el atajo para comenzar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona la pantalla.&lt;br/&gt; {2,number,integer}. Arrastra 2 dedos para moverte por la pantalla.&lt;br/&gt; {3,number,integer}. Pellizca con 2 dedos para ajustar el zoom.&lt;br/&gt; {4,number,integer}. Usa el atajo para detener la ampliación.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Para acercar de manera temporal, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Asegúrate de que el tipo de ampliación esté configurado en pantalla completa.&lt;br/&gt; {1,number,integer}. Usa el atajo para comenzar la ampliación.&lt;br/&gt; {2,number,integer}. Mantén presionada cualquier parte de la pantalla.&lt;br/&gt; {3,number,integer}. Arrastra un dedo para moverte por la pantalla.&lt;br/&gt; {4,number,integer}. Levanta el dedo para detener la ampliación."</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;Para acercar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la combinación de teclas o presiona &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M para iniciar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + las teclas de flecha para moverte por la pantalla.&lt;br/&gt; {2,number,integer}. Presiona &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; y “+” o “-” para ajustar el zoom.&lt;br/&gt; {3,number,integer}. Usa la combinación de teclas o &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M para detener la ampliación."</string>
-    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;Para acercar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la combinación de teclas para comenzar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + las teclas de flecha para moverte por la pantalla.&lt;br/&gt; {2,number,integer}. Presiona &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; y “+” o “-” para ajustar el zoom.&lt;br/&gt; {3,number,integer}. Usa la combinación de teclas para detener la ampliación."</string>
     <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Teclado&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa la combinación de teclas o presiona &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M para iniciar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + las teclas de flecha para moverte por la pantalla.&lt;br/&gt; {2,number,integer}. Presiona &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; y “+” o “-” para ajustar el zoom.&lt;br/&gt; {3,number,integer}. Usa la combinación de teclas o &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M para detener la ampliación.&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Pantalla táctil&lt;/b&gt;&lt;br/&gt; Para acercar, haz lo siguiente:&lt;br/&gt; {0,number,integer}. Usa la combinación de teclas para comenzar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona la pantalla.&lt;br/&gt; {2,number,integer}. Arrastra 2 dedos para moverte por la pantalla.&lt;br/&gt; {3,number,integer}. Pellizca con 2 dedos para ajustar el zoom.&lt;br/&gt; {4,number,integer}. Usa la combinación de teclas para detener la ampliación.&lt;br/&gt;&lt;br/&gt; Para acercar de manera temporal, haz lo siguiente:&lt;br/&gt; {0,number,integer}. Asegúrate de que el tipo de ampliación esté configurado en pantalla completa.&lt;br/&gt; {1,number,integer}. Usa la combinación de teclas para comenzar la ampliación.&lt;br/&gt; {2,number,integer}. Mantén presionada cualquier parte de la pantalla.&lt;br/&gt; {3,number,integer}. Arrastra un dedo para moverte por la pantalla.&lt;br/&gt; {4,number,integer}. Levanta el dedo para detener la ampliación."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Para acercar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa el atajo para comenzar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona la pantalla.&lt;br/&gt; {2,number,integer}. Arrastra 2 dedos para moverte por la pantalla.&lt;br/&gt; {3,number,integer}. Pellizca con 2 dedos para ajustar el zoom.&lt;br/&gt; {4,number,integer}. Usa el atajo para detener la ampliación.&lt;br/&gt;&lt;br/&gt; También puedes acercar temporalmente y realizar otras acciones."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Para acercar, haz lo siguiente:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Usa el atajo para comenzar la ampliación.&lt;br/&gt; {1,number,integer}. Presiona la pantalla.&lt;br/&gt; {2,number,integer}. Arrastra con 1 o 2 dedos para moverte por la pantalla.&lt;br/&gt; {3,number,integer}. Pellizca con 2 dedos para ajustar el zoom.&lt;br/&gt; {4,number,integer}. Usa el atajo para detener la ampliación.&lt;br/&gt;&lt;br/&gt; También puedes acercar temporalmente y realizar otras acciones."</string>
@@ -2600,11 +2628,13 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Activa el tema oscuro para tu dispositivo y las apps que lo admiten"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expandido"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Tema oscuro expandido"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Aplica automáticamente el tema oscuro a la mayoría de las apps que no lo admiten. Esto ayuda a mejorar la accesibilidad."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Aplica automáticamente el tema oscuro a la mayoría de las apps que no lo admiten, lo que ayuda a mejorar la accesibilidad"</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Si tienes problemas con la opción expandida, usa la opción estándar."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"forzar inversión, inversión de colores, contraste"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema oscuro expandido"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Configuración del tema oscuro expandido"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Abrir la configuración del tema oscuro expandido"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"El tema oscuro expandido puede mejorar la legibilidad, pero es posible que algunas apps se muestren de forma incorrecta.\n\nLas apps con este parámetro de configuración desactivado usarán la opción de tema oscuro estándar."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Quitar animaciones"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce el movimiento de la pantalla"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Intermitencia del cursor de texto"</string>
@@ -2742,6 +2772,12 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Disp. auditivos"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Disp. guardados"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Controles del dispositivo auditivo"</string>
+    <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Sonidos"</string>
+    <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Notificaciones"</string>
+    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"Tonos y alarmas"</string>
+    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Los sonidos se reproducirán a través de los dispositivos auditivos"</string>
+    <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"Los sonidos se reproducirán a través de la bocina del dispositivo"</string>
+    <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Los sonidos se reproducirán a través de los dispositivos auditivos y la bocina del dispositivo"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Atajo para dispositivos auditivos"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilidad con audífonos"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Mejora la compatibilidad con el acoplamiento inductivo y reduce el ruido no deseado"</string>
@@ -2927,6 +2963,7 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Ver uso de las últimas 24 horas"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Uso desde la última carga completa"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Uso de batería en la app"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalles de uso"</string>
@@ -3072,7 +3109,7 @@
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Ver por sistemas"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_usage_less_than_percent_content_description" msgid="6265933174815461493">"inferior a <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
-    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Debido a las inspecciones de fábrica antes del envío, es posible que se muestre que tu dispositivo se usó antes de que lo configuraras y que el conteo de ciclos no sea igual a cero. Esto es habitual."</string>
+    <string name="battery_cycle_count_footer" msgid="682194266909198784">"Debido a las inspecciones de fábrica antes del envío, es posible que se muestre que tu dispositivo se usó antes de que lo configuraras y que el conteo de ciclos no sea igual a cero, lo cual es habitual"</string>
     <string name="process_stats_summary_title" msgid="502683176231281732">"Estadísticas de procesos"</string>
     <string name="process_stats_summary" msgid="522842188571764699">"Estadísticas para geeks sobre procesos activos"</string>
     <string name="app_memory_use" msgid="7559666138324410666">"Uso de memoria"</string>
@@ -3757,8 +3794,7 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiqueta, lector"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"teclado, tecnología táctil, vibración,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"pantalla externa, pantalla conectada, pantalla extendida, segunda pantalla, pantalla integrada, organizar pantallas, duplicar, tamaño de visualización, rotación, resolución, frecuencia de actualización"</string>
-    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
-    <skip />
+    <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"signo de intercalación, signo de intercalación de texto, cursor de texto, cursor, parpadeo, intervalo de parpadeo, frecuencia de parpadeo, animación, reducir animación, quitar animación"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volumen y vibración"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volumen multimedia"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volumen de Google Cast"</string>
@@ -3970,7 +4006,7 @@
     <string name="bubbles_feature_disabled_dialog_text" msgid="5275666953364031055">"Si activas las burbujas para esta app, también se activarán para el dispositivo.\n\nEsto afecta otras apps o conversaciones que pueden crear burbujas."</string>
     <string name="bubbles_feature_disabled_button_approve" msgid="2042628067101419871">"Activar"</string>
     <string name="bubbles_feature_disabled_button_cancel" msgid="8963409459448350600">"Cancelar"</string>
-    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Función activada: Las conversaciones pueden aparecer como elementos flotantes"</string>
+    <string name="notifications_bubble_setting_on_summary" msgid="4641572377430901196">"Función activada / Las conversaciones pueden aparecer como elementos flotantes"</string>
     <string name="notifications_bubble_setting_title" msgid="8287649393774855268">"Permitir que las apps muestren burbujas"</string>
     <string name="notifications_bubble_setting_description" msgid="7336770088735025981">"Algunas conversaciones aparecerán como elementos flotantes encima de otras apps"</string>
     <string name="bubble_app_setting_all" msgid="312524752846978277">"Se pueden crear burbujas de todas las conversaciones"</string>
@@ -5327,6 +5363,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satélite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conectividad satelital"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conectividad satelital"</string>
+    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
+    <skip />
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"El uso de apps compatibles está incluido en tu cuenta"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Los datos para usar todas las apps están incluidos en tu cuenta"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Apps compatibles en tu teléfono"</string>
@@ -6121,7 +6159,7 @@
     <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Privacidad, Panel de privacidad"</string>
     <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Espacio privado"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Más alertas"</string>
-    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Menos alertas"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"Menos alertas"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertas descartadas"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"¿Quieres descartar esta alerta?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Revisa la configuración de seguridad y privacidad en cualquier momento para tomar medidas adicionales de protección"</string>
@@ -6148,13 +6186,13 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Página de destino del satélite"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Probar demostración"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Mira cómo funciona"</string>
-    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
-    <skip />
+    <string name="landing_page_footer_text_lte" msgid="8788085197575734787">"Cuando pierdas la señal móvil y Wi-Fi, tu teléfono intentará conectarse a un satélite. El dispositivo se volverá a conectar a una red móvil o Wi-Fi cuando esté disponible.\n\nImportante: No se pueden realizar llamadas por satélite. Sin embargo, es posible que puedas realizar llamadas de emergencia."</string>
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Para tener una mejor conexión, ten una vista despejada del cielo. Tu teléfono se volverá a conectar a la red móvil cuando esté disponible. Las llamadas satelitales no están disponibles. Es posible que puedas realizar llamadas de emergencia."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Más información sobre la conectividad satelital"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Abrir la demostración de SOS por satélite"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Apps satelitales"</string>
-    <string name="satellite_emergency_sos" msgid="5598135807261930736">"Emergencia SOS"</string>
+    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
+    <skip />
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Conectividad satelital disponible"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Agrega la tarjeta de conectividad satelital a la Configuración rápida para acceder fácilmente a la información pertinente"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Agregar tarjeta"</string>
@@ -6170,10 +6208,9 @@
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Ver ubicaciones disponibles"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Cambiar app predeterminada"</string>
     <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Ver configuración del operador"</string>
-    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
-    <skip />
-    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
-    <skip />
-    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
-    <skip />
+    <string name="unknown_location_warning" msgid="2547687229551053971">"Para saber si SOS por satélite está disponible en tu ubicación actual, activa la ubicación en Configuración"</string>
+    <string name="unknown_location_warning_button" msgid="2223709540054752411">"Activar la ubicación"</string>
+    <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Tu dispositivo no se registró en SOS por satélite. Asegúrate de tener conexión a Internet para que tu dispositivo complete el registro automáticamente"</string>
+    <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Habilitar el servicio de instalador de apps web"</string>
+    <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Habilita este servicio para instalar sitios web directamente en la pantalla principal y usarlos como apps normales."</string>
 </resources>

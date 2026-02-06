@@ -30,7 +30,11 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.dreams.Flags;
+import android.view.View;
 import android.widget.TextView;
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,7 +55,9 @@ import org.mockito.Answers;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+import com.google.testing.junit.testparameterinjector.TestParameter;
+
+import org.robolectric.RobolectricTestParameterInjector;
 import org.robolectric.shadows.ShadowLooper;
 
 import android.graphics.Canvas;
@@ -71,7 +77,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricTestParameterInjector.class)
 public class DreamPickerControllerTest {
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -83,17 +89,18 @@ public class DreamPickerControllerTest {
 
     @Mock(answer = Answers.RETURNS_DEEP_STUBS)
     private DreamBackend mBackend;
-    private Context mContext;
     @Mock
     private PreferenceScreen mScreen;
-    private LayoutPreference mPreference;
     @Mock
     private RecyclerView mParentRecyclerView;
     @Mock
     private RecyclerView mInnerRecyclerView;
-    private RecyclerView.ViewHolder mViewHolder;
     @Mock
     private View mItemView;
+
+    private Context mContext;
+    private LayoutPreference mPreference;
+    private RecyclerView.ViewHolder mViewHolder;
 
     @Before
     public void setup() {
@@ -466,6 +473,30 @@ public class DreamPickerControllerTest {
         assertThat(flags).isEqualTo(0);
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
+    public void onBindView_setsCorrectAccessibilityInfo(@TestParameter boolean isActive) {
+        // Setup
+        final DreamInfo dream = createDreamInfo("dream1", isActive, isActive ? 0 : -1);
+        when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(List.of(dream)));
+        final DreamPickerController controller = buildController();
+        controller.updateState(mPreference);
+        final RecyclerView recyclerView = mPreference.findViewById(R.id.dream_list);
+        recyclerView.measure(0, 0);
+        recyclerView.layout(0, 0, 100, 1000);
+        final View itemView =
+                recyclerView.findViewHolderForAdapterPosition(0).itemView;
+        final AccessibilityDelegateCompat delegate =
+                ViewCompat.getAccessibilityDelegate(itemView);
+        final AccessibilityNodeInfoCompat info = AccessibilityNodeInfoCompat.obtain();
+
+        // Verify
+        delegate.onInitializeAccessibilityNodeInfo(itemView, info);
+        assertThat(info.isCheckable()).isTrue();
+        assertThat(info.isChecked()).isEqualTo(isActive);
+        assertThat(info.isSelected()).isFalse();
+    }
+
     private DreamInfo createDreamInfo(String caption, boolean isActive, int order) {
         final DreamInfo dreamInfo = new DreamInfo();
         dreamInfo.caption = caption;
@@ -521,6 +552,7 @@ public class DreamPickerControllerTest {
         // Inner RV is not at the bottom yet, it is far below the parent's viewable area.
         setInnerRecyclerViewBounds(200, PARENT_HEIGHT + 200);
 
+        callback.onSelectedChanged(mViewHolder, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
                 ItemTouchHelper.ACTION_STATE_DRAG, true);
         ShadowLooper.runUiThreadTasks();
@@ -539,6 +571,7 @@ public class DreamPickerControllerTest {
         // Inner RV is not at the top yet, it is far above the parent's viewable area.
         setInnerRecyclerViewBounds(-200, PARENT_HEIGHT - 200);
 
+        callback.onSelectedChanged(mViewHolder, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
                 ItemTouchHelper.ACTION_STATE_DRAG, true);
         ShadowLooper.runUiThreadTasks();
@@ -558,6 +591,7 @@ public class DreamPickerControllerTest {
         setInnerRecyclerViewBounds(
             -PARENT_SCROLL_THRESHOLD, PARENT_HEIGHT - PARENT_SCROLL_THRESHOLD);
 
+        callback.onSelectedChanged(mViewHolder, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
                 ItemTouchHelper.ACTION_STATE_DRAG, true);
         ShadowLooper.runUiThreadTasks();
@@ -575,6 +609,7 @@ public class DreamPickerControllerTest {
         setInnerRecyclerViewBounds(
             PARENT_SCROLL_THRESHOLD, PARENT_HEIGHT + PARENT_SCROLL_THRESHOLD);
 
+        callback.onSelectedChanged(mViewHolder, ItemTouchHelper.ACTION_STATE_DRAG);
         callback.onChildDraw(mock(Canvas.class), mInnerRecyclerView, mViewHolder, 0, 0,
                 ItemTouchHelper.ACTION_STATE_DRAG, true);
         ShadowLooper.runUiThreadTasks();

@@ -231,4 +231,133 @@ class CatalystStateProviderExecutorTest {
         )
     }
 
+    @Test
+    fun execute_onEntireScreenConfig_returnsAllPreferencesAsDeviceStateItem() = runTest {
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig (
+                    screenKey = "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "preference_key_1",
+                                    purpose = R.string.preference_purpose
+                                )
+                            )
+                        ),
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "preference_key_2",
+                                    purpose = R.string.preference_purpose
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        val executor = CatalystStateProviderExecutor(
+            buildConfig("screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+
+        // single screen
+        assertThat(result.states).hasSize(1)
+        // the 2 preferences
+        assertThat(result.states[0].deviceStateItems).hasSize(2)
+        assertThat(result.states[0].deviceStateItems[0].key).isEqualTo(
+            "screen_key/preference_key_1"
+        )
+        assertThat(result.states[0].deviceStateItems[1].key).isEqualTo(
+            "screen_key/preference_key_2"
+        )
+    }
+
+    @Test
+    fun execute_onScreenWithUiOnlyPreferences_returnsOnlyNonUiPreferencesAsDeviceStateItems() = runTest {
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig (
+                    screenKey = "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "ui_only_preference",
+                                    purpose = R.string.preference_purpose,
+                                    isUiOnly = true
+                                )
+                            )
+                        ),
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "preference_key_2",
+                                    purpose = R.string.preference_purpose
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        val executor = CatalystStateProviderExecutor(
+            buildConfig("screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+
+        // single screen
+        assertThat(result.states).hasSize(1)
+        // the non-ui only preference
+        assertThat(result.states[0].deviceStateItems).hasSize(1)
+        assertThat(result.states[0].deviceStateItems[0].key).isEqualTo(
+            "screen_key/preference_key_2"
+        )
+    }
+
+    @Test
+    fun execute_withUiOnlyPreferenceInConfig_DoesNotReturnItAsDeviceStateItem() = runTest {
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig (
+                    screenKey = "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "ui_only_preference",
+                                    purpose = R.string.preference_purpose,
+                                    isUiOnly = true
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        val executor = CatalystStateProviderExecutor(
+            buildConfig("screen_key", listOf("ui_only_preference")),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+
+        // single screen
+        assertThat(result.states).hasSize(1)
+        // no device state items
+        assertThat(result.states[0].deviceStateItems).hasSize(0)
+    }
+
 }

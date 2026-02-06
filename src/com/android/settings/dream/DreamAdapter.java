@@ -33,6 +33,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -126,6 +129,19 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
             final boolean isActive = item.isActive();
             itemView.setSelected(isActive);
             if (supportMultipleSelection()) {
+                ViewCompat.setAccessibilityDelegate(itemView, new AccessibilityDelegateCompat() {
+                    @Override
+                    public void onInitializeAccessibilityNodeInfo(View host,
+                            AccessibilityNodeInfoCompat info) {
+                        super.onInitializeAccessibilityNodeInfo(host, info);
+                        info.setCheckable(true);
+                        info.setChecked(isActive);
+                        // To avoid Talkback announcing "selected, checked...", we unset
+                        // selected here for the accessibility service. The view itself is
+                        // still selected to reflect the correct visual state.
+                        info.setSelected(false);
+                    }
+                });
                 itemView.setClickable(true);
                 if (item.getOrder() >= 0) {
                     String ordinal = mOrdinalFormat.format(new Object[]{item.getOrder() + 1});

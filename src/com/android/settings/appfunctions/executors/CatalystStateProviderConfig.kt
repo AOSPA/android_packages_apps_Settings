@@ -113,6 +113,7 @@ import com.android.settings.gestures.ButtonNavigationSettingsScreen
 import com.android.settings.gestures.DoubleTapPowerScreen
 import com.android.settings.gestures.DoubleTwistGestureApiFirstScreen
 import com.android.settings.gestures.GestureSettingsApiScreen
+import com.android.settings.gestures.PickupGestureApiScreen
 import com.android.settings.gestures.PowerMenuSettingsScreenApi
 import com.android.settings.gestures.SwipeToNotificationApiScreen
 import com.android.settings.gestures.SystemNavigationGestureScreen
@@ -142,6 +143,7 @@ import com.android.settings.print.PrintServiceApiScreen
 import com.android.settings.print.PrintSettingsApiScreen
 import com.android.settings.safetycenter.ui.AccountSecuritySubpageScreenApi
 import com.android.settings.safetycenter.ui.DeviceUnlockApiScreen
+import com.android.settings.security.ContentProtectionScreenApi
 import com.android.settings.security.CredentialManagementAppScreenApi
 import com.android.settings.security.EncryptionAndCredentialScreenApi
 import com.android.settings.security.InstallCertificateFromStorageScreenApi
@@ -559,6 +561,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = GestureSettingsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DoubleTwistGestureApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SwipeToNotificationApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = PickupGestureApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDirectApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ContactsStorageApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PowerMenuSettingsScreenApi.KEY),
@@ -581,6 +584,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = InstallCertificateFromStorageScreenApi.KEY,
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = IccLockApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ContentProtectionScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothScanningApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceUnlockApiScreen.KEY),

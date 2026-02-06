@@ -141,6 +141,29 @@ class SupervisionAuthControllerTest {
         assertThat(authController.isSessionActive(TASK_ID)).isFalse()
     }
 
+    @Test
+    fun onTaskStackChanged_withNullTaskInfoInAppTasks_sessionInvalidated() {
+        val mockFocusedTask =
+            mock<ActivityManager.AppTask>().stub {
+                on { taskInfo } doReturn FOCUSED_SUPERVISION_DASHBOARD_TASK_INFO
+            }
+        mockActivityManager.stub { on { appTasks } doReturn listOf(mockFocusedTask) }
+
+        val authController = SupervisionAuthController.getInstance(mockContext)
+        authController.startSession(TASK_ID)
+        ShadowLooper.idleMainLooper()
+        assertThat(authController.isSessionActive(TASK_ID)).isTrue()
+
+        val mockTaskWithNullInfo =
+            mock<ActivityManager.AppTask>().stub { on { taskInfo } doReturn null }
+        mockActivityManager.stub { on { appTasks } doReturn listOf(mockTaskWithNullInfo) }
+
+        authController.mTaskStackListener.onTaskStackChanged()
+        ShadowLooper.idleMainLooper()
+
+        assertThat(authController.isSessionActive(TASK_ID)).isFalse()
+    }
+
     private companion object {
         const val TASK_ID = 100
         val SUPERVISION_PACKAGE_NAME = "com.android.supervision"

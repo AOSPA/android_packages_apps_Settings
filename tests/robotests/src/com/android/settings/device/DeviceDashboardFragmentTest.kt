@@ -68,7 +68,7 @@ class DeviceDashboardFragmentTest {
         val displayPreference = fragment.findPreference<Preference>("device_dashboard_display")
         assertThat(displayPreference).isNotNull()
         assertThat(displayPreference?.fragment).isEqualTo("com.android.settings.DisplaySettings")
-        assertThat(displayPreference?.title).isEqualTo(fragment.context?.getString(R.string.device_dashboard_display_title))
+        assertThat(displayPreference?.title).isEqualTo(fragment.context?.getString(R.string.display_settings))
         assertThat(displayPreference?.summary).isEqualTo(fragment.context?.getString(R.string.display_dashboard_summary))
         val icon = displayPreference?.icon
         assertThat(Shadows.shadowOf(icon).createdFromResId)
@@ -80,7 +80,7 @@ class DeviceDashboardFragmentTest {
         val soundPreference = fragment.findPreference<Preference>("device_dashboard_sound")
         assertThat(soundPreference).isNotNull()
         assertThat(soundPreference?.fragment).isEqualTo("com.android.settings.notification.SoundSettings")
-        assertThat(soundPreference?.title).isEqualTo(fragment.context?.getString(R.string.device_dashboard_sound_title))
+        assertThat(soundPreference?.title).isEqualTo(fragment.context?.getString(R.string.sound_settings))
         assertThat(soundPreference?.summary).isEqualTo(fragment.context?.getString(R.string.sound_dashboard_summary))
         val icon = soundPreference?.icon
         assertThat(Shadows.shadowOf(icon).createdFromResId).isEqualTo(R.drawable.ic_settings_mic)
