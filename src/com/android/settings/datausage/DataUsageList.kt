@@ -191,6 +191,11 @@ open class DataUsageList : DashboardFragment() {
                     ?: DataUsageUtils.getMobileNetworkTemplateFromSubId(context, localIntent)
                         .getOrNull()
         }
+
+        if (template == null) {
+            template = NetworkTemplate.Builder(NetworkTemplate.MATCH_WIFI).build()
+            activity?.title = context?.getString(R.string.non_carrier_data_usage)
+        }
     }
 
     private fun getSubIdFromBindingArgs(): Int {

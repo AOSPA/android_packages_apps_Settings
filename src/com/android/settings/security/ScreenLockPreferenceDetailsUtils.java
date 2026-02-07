@@ -35,6 +35,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.password.ChooseLockGeneric.ChooseLockGenericFragment;
+import com.android.settings.security.screenlock.ScreenLockSettings;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.transition.SettingsTransitionHelper;
 
@@ -118,6 +119,31 @@ public class ScreenLockPreferenceDetailsUtils {
     }
 
     /**
+     * Returns whether the Gear Menu should be shown.
+     */
+    public boolean shouldShowGearMenu() {
+        return !com.android.settings.flags.Flags.biometricsOnboardingEducation()
+                && isLockPatternSecure();
+    }
+
+    /**
+     * Launches the {@link ScreenLockSettings}.
+     */
+    public void openScreenLockSettings(int sourceMetricsCategory) {
+        mContext.startActivity(getLaunchScreenLockSettingsIntent(sourceMetricsCategory));
+    }
+
+    /**
+     * Returns {@link Intent} to launch the {@link ScreenLockSettings}.
+     */
+    public Intent getLaunchScreenLockSettingsIntent(int sourceMetricsCategory) {
+        return new SubSettingLauncher(mContext)
+                .setDestination(ScreenLockSettings.class.getName())
+                .setSourceMetricsCategory(sourceMetricsCategory)
+                .toIntent();
+    }
+
+    /**
      * Tries to launch the {@link ChooseLockGenericFragment} if Quiet Mode is not enabled
      * for managed profile, otherwise shows a dialog to disable the Quiet Mode.
      *
@@ -180,7 +206,9 @@ public class ScreenLockPreferenceDetailsUtils {
         if (!mLockPatternUtils.isSecure(userId)) {
             if (userId == mProfileChallengeUserId
                     || mLockPatternUtils.isLockScreenDisabled(userId)) {
-                return R.string.unlock_set_unlock_mode_off_new;
+                return com.android.settings.flags.Flags.biometricsOnboardingEducation()
+                        ? R.string.unlock_set_unlock_mode_off_new
+                        : R.string.unlock_set_unlock_mode_off;
             } else {
                 return R.string.unlock_set_unlock_mode_none;
             }
