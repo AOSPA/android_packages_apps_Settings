@@ -41,6 +41,7 @@ import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferencesapi.ApiOperationContext
+import com.android.settingslib.metadata.preferencesapi.FlagContext
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
@@ -121,12 +122,9 @@ class SettingsLaunchpadActivity : Activity() {
                 }
 
         if (screenMetadata is PreferencesApiScreen) {
-            val checkScreenFlag = screenMetadata.flag?.check() ?: true
+            val checkScreenFlag = screenMetadata.flag?.check(FlagContext(this)) ?: true
             if (!checkScreenFlag) { // Do not launch the screen if flag is disabled.
-                Log.w(
-                    TAG,
-                    "Screen flag is disabled for key '$screenKey'. Aborting launch.",
-                )
+                Log.w(TAG, "Screen flag is disabled for key '$screenKey'. Aborting launch.")
                 return
             }
 
@@ -141,7 +139,9 @@ class SettingsLaunchpadActivity : Activity() {
             // the precondition checks are fast and won't cause ANRs.
             val screenPreconditionsCheck =
                 runBlocking { screenMetadata.screenPreconditions?.check(opContext) } ?: Allowed
-            if (screenPreconditionsCheck != Allowed) { // Do not launch the screen if preconditions are not met.
+            if (
+                screenPreconditionsCheck != Allowed
+            ) { // Do not launch the screen if preconditions are not met.
                 val reason = (screenPreconditionsCheck as Disallowed).getReason(opContext.context)
                 Log.w(
                     TAG,
