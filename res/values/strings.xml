@@ -6562,23 +6562,6 @@
     <string name="brightness_intensity_end_label">Brighter</string>
     <!-- Title for setting whether the Reduce Brightness activation state persists across reboots. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
-
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad cursor stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <string name="accessibilty_autoclick_preference_subtitle_short_delay">{count, plural,
-        =1      {Short ({time} second)}
-        other   {Short ({time} seconds)}
-        }</string>
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad cursor stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <string name="accessibilty_autoclick_preference_subtitle_medium_delay">{count, plural,
-        =1      {Medium ({time} second)}
-        other   {Medium ({time} seconds)}
-        }</string>
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad cursor stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <string name="accessibilty_autoclick_preference_subtitle_long_delay">{count, plural,
-        =1      {Long ({time} second)}
-        other   {Long ({time} seconds)}
-        }</string>
-
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_delay_unit_second">{count, plural,
         =1      {{time} second}
