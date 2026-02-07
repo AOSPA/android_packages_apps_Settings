@@ -21,10 +21,12 @@ import android.content.Context
 import android.provider.Settings
 import android.view.accessibility.AccessibilityManager
 import androidx.fragment.app.Fragment
+import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.R
 import com.android.settings.accessibility.AutoclickUtils
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.ToggleAutoclickPreferenceFragment
+import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 import com.android.settingslib.datastore.HandlerExecutor
@@ -115,7 +117,18 @@ open class AutoclickScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +AutoclickIntroPreference()
+            +AutoclickIllustrationPreference()
             +AutoclickMainSwitchPreference()
+            +AccessibilityShortcutPreference(
+                context = context,
+                key = "autoclick_shortcut_preference",
+                purpose = R.string.a11y_autoclick_shortcut_purpose,
+                title = R.string.accessibility_autoclick_shortcut_title,
+                componentName = AccessibilityShortcutController.AUTOCLICK_COMPONENT_NAME,
+                featureName = R.string.accessibility_autoclick_preference_title,
+                metricsCategory = metricsCategory,
+            )
             +AutoclickDelayPreference(context)
         }
 
