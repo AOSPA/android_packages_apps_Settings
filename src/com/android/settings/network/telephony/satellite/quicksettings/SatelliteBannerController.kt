@@ -60,8 +60,9 @@ class SatelliteBannerController(
         // 3. Satellite Unavailable in Region
         // 4. Unprovisioned
         // 5. Not Entitled
-        // 6. Default Messaging App Issue
-        // 7. Carrier Info (Satellite Enabled)
+        // 6. User Restricted
+        // 7. Default Messaging App Issue
+        // 8. Carrier Info (Satellite Enabled)
         val bannersToShow = mutableListOf<BannerMessagePreference.() -> Unit>()
 
         if (state.isNetworkConnected) {
@@ -78,6 +79,9 @@ class SatelliteBannerController(
         }
         if (!state.isEntitled) {
             bannersToShow.add { setupNotEntitledBanner(this) }
+        }
+        if (state.isUserRestricted) {
+            bannersToShow.add { setupUserRestrictedBanner(this) }
         }
         if (!state.isDefaultMessagingApp) {
             bannersToShow.add { setupNotDefaultMessagingAppBanner(this) }
@@ -104,6 +108,16 @@ class SatelliteBannerController(
             summaryRes = R.string.satellite_network_connected_warning_summary,
             buttonTextRes = 0,
             intent = null,
+        )
+    }
+
+    private fun setupUserRestrictedBanner(banner: BannerMessagePreference) {
+        setupBannerPreference(
+            banner,
+            titleRes = R.string.satellite_not_available_warning_title,
+            summaryRes = R.string.satellite_user_restricted_warning_summary,
+            buttonTextRes = R.string.satellite_view_carrier_settings_button,
+            intent = SatelliteUtils.getCarrierSettingsIntent(context),
         )
     }
 

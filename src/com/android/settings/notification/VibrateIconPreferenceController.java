@@ -25,6 +25,7 @@ import android.provider.Settings.Secure;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+// LINT.IfChange
 public class VibrateIconPreferenceController extends SettingPrefController {
 
     private static final String KEY_VIBRATE_ICON = "vibrate_icon";
@@ -43,3 +44,4 @@ public class VibrateIconPreferenceController extends SettingPrefController {
         return mHasVibrator;
     }
 }
+// LINT.ThenChange(SoundApiScreen.kt)

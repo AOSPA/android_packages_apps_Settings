@@ -26,7 +26,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.development.AdbWirelessDebuggingFragment
 import com.android.settings.development.AdbWirelessDebuggingPreferenceController
-import com.android.settings.development.qstile.DevelopmentTiles
+import com.android.settings.development.qstile.AdbWirelessDebuggingDevelopmentTile
 import com.android.settings.network.telephony.satellite.quicksettings.SatelliteLandingPageActivity
 import com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileService
 
@@ -53,7 +53,7 @@ class QSTileLongPressGatewayActivity : AppCompatActivity() {
                 finish()
                 return
             }
-            DevelopmentTiles.WirelessDebugging::class.java.name -> {
+            AdbWirelessDebuggingDevelopmentTile::class.java.name -> {
                 if (AdbWirelessDebuggingPreferenceController.isAvailable(this)) {
                     Log.d(TAG, "Long press from wireless debugging qstile")
                     SubSettingLauncher(this)

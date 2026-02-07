@@ -126,11 +126,14 @@ class AppLocalePickerApiFirstScreen :
     private fun getLocaleInfoList(
         context: Context,
         appPackageName: String,
-    ): MutableList<LocaleStore.LocaleInfo> {
+    ): List<LocaleStore.LocaleInfo> {
         val languageList = getSupportedLanguageList(context, appPackageName, null, false)
-        val localeInfoList: MutableList<LocaleStore.LocaleInfo> = ArrayList()
-        for (language in languageList) {
-            localeInfoList.addAll(getSupportedLanguageList(context, appPackageName, language, true))
+        val localeInfoList = languageList.flatMap { language ->
+            if (language.isSuggested) {
+                listOf(language)
+            } else {
+                getSupportedLanguageList(context, appPackageName, language, true)
+            }
         }
         return localeInfoList
     }

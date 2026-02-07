@@ -34,6 +34,7 @@ import com.android.settings.applications.intentpicker.IntentPickerUtils;
 import com.android.settingslib.applications.AppUtils;
 import com.android.settingslib.applications.ApplicationsState;
 
+// LINT.IfChange
 public class AppOpenByDefaultPreferenceController extends AppInfoPreferenceControllerBase {
 
     private final DomainVerificationManager mDomainVerificationManager;
@@ -94,3 +95,4 @@ public class AppOpenByDefaultPreferenceController extends AppInfoPreferenceContr
         return userState == null ? false : userState.isLinkHandlingAllowed();
     }
 }
+// LINT.ThenChange(AppLaunchApiScreen.java)

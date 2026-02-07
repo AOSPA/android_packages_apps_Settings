@@ -99,6 +99,8 @@ public class ShowSecretsTouchPreferenceControllerTest {
                         Settings.Secure.getInt(
                                 contentResolver, Settings.Secure.TEXT_SHOW_PASSWORD_TOUCH, 0))
                 .isEqualTo(1);
+        assertThat(Settings.System.getInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 0))
+                .isEqualTo(1);
     }
 
     @Test
@@ -117,6 +119,8 @@ public class ShowSecretsTouchPreferenceControllerTest {
         assertThat(
                         Settings.Secure.getInt(
                                 contentResolver, Settings.Secure.TEXT_SHOW_PASSWORD_TOUCH, 1))
+                .isEqualTo(0);
+        assertThat(Settings.System.getInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 1))
                 .isEqualTo(0);
     }
 

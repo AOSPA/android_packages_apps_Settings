@@ -88,4 +88,68 @@ class CaptionCustomPropertiesTest {
         settingsSecureStore.setString(typefaceKey, values[1])
         assertThat(preference.getSummary(context)).isEqualTo(titles[1])
     }
+
+    @Test
+    fun edgeTypePreference_metadata() {
+        val preference = CaptionEdgeTypePreference(context)
+
+        assertThat(preference.key).isEqualTo("captioning_edge_type")
+        assertThat(preference.title).isEqualTo(R.string.captioning_edge_type)
+        assertThat(preference.values).isEqualTo(R.array.captioning_edge_type_selector_values)
+        assertThat(preference.valueType).isEqualTo(Int::class.javaObjectType)
+    }
+
+    @Test
+    fun edgeTypePreference_getSummary() {
+        val preference = CaptionEdgeTypePreference(context)
+        val edgeTypeKey = Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_TYPE
+        val values = context.resources.getIntArray(R.array.captioning_edge_type_selector_values)
+        val titles = context.resources.getStringArray(R.array.captioning_edge_type_selector_titles)
+
+        settingsSecureStore.setInt(edgeTypeKey, values[1])
+        assertThat(preference.getSummary(context)).isEqualTo(titles[1])
+
+        settingsSecureStore.setInt(edgeTypeKey, values[2])
+        assertThat(preference.getSummary(context)).isEqualTo(titles[2])
+    }
+
+    @Test
+    fun edgeColorPreference_metadata() {
+        val preference = CaptionEdgeColorPreference(context)
+
+        assertThat(preference.key).isEqualTo("captioning_edge_color")
+        assertThat(preference.title).isEqualTo(R.string.captioning_edge_color)
+        assertThat(preference.values).isEqualTo(R.array.captioning_color_selector_values)
+        assertThat(preference.valueType).isEqualTo(Int::class.javaObjectType)
+    }
+
+    @Test
+    fun edgeColorPreference_isEnabled_returnsFalseWhenEdgeTypeNone() {
+        val preference = CaptionEdgeColorPreference(context)
+        settingsSecureStore.setInt(
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_TYPE,
+            CaptioningManager.CaptionStyle.EDGE_TYPE_NONE,
+        )
+
+        assertThat(preference.isEnabled(context)).isFalse()
+    }
+
+    @Test
+    fun edgeColorPreference_isEnabled_returnsTrueWhenEdgeTypeNotNone() {
+        val preference = CaptionEdgeColorPreference(context)
+        settingsSecureStore.setInt(
+            Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_TYPE,
+            CaptioningManager.CaptionStyle.EDGE_TYPE_DROP_SHADOW,
+        )
+
+        assertThat(preference.isEnabled(context)).isTrue()
+    }
+
+    @Test
+    fun edgeColorPreference_dependencies() {
+        val preference = CaptionEdgeColorPreference(context)
+
+        assertThat(preference.dependencies(context).toList())
+            .contains(CaptionEdgeTypePreference.KEY)
+    }
 }

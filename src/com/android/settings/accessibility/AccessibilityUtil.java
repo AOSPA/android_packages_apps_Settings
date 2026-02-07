@@ -167,6 +167,23 @@ public final class AccessibilityUtil {
                 == NAV_BAR_MODE_GESTURAL;
     }
 
+    /**
+     * Determines if the accessibility button location can be configured.
+     */
+    public static boolean isAccessibilityButtonLocationConfigurable(Context context) {
+        // 3-button navigation always allows configuring the button location.
+        if (!isGestureNavigateEnabled(context)) {
+            return true;
+        }
+
+        // Conditions to force floating menu mode:
+        // 1. Flag is off (original behavior): Always use floating menu in gestural nav.
+        // 2. Flag is on: Only use floating menu if nav bar can move (i.e. not persistent).
+        final boolean navBarCanMove = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_navBarCanMove);
+        return android.view.accessibility.Flags.allowA11yButtonOnLargeScreen() && !navBarCanMove;
+    }
+
     /** Determines if a accessibility floating menu is being used. */
     public static boolean isFloatingMenuEnabled(Context context) {
         return Settings.Secure.getIntForUser(context.getContentResolver(),

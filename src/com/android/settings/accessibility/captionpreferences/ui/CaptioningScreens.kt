@@ -46,6 +46,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
 /** Main settings screen for caption preferences. */
+// LINT.IfChange(caption_properties_screen)
 @ProvidePreferenceScreen(CaptioningPropertiesScreen.KEY)
 open class CaptioningPropertiesScreen :
     PreferenceScreenMixin, PreferenceLifecycleProvider, PreferenceSummaryProvider {
@@ -107,6 +108,9 @@ open class CaptioningPropertiesScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +CaptioningPropertiesTopIntro()
+            +CaptioningIllustrationPreference()
+            +CaptioningMainSwitchPreference()
             +CaptioningAppearanceScreen.KEY
             +CaptioningMoreOptionsScreen.KEY
             +CaptioningFooterPreference("captioning_settings_footer")
@@ -117,8 +121,10 @@ open class CaptioningPropertiesScreen :
         private const val MAIN_SETTING_KEY = Settings.Secure.ACCESSIBILITY_CAPTIONING_ENABLED
     }
 }
+// LINT.ThenChange()
 
 /** Screens where the user can customize the size and style of the caption. */
+// LINT.IfChange(caption_appearance_screen)
 @ProvidePreferenceScreen(CaptioningAppearanceScreen.KEY)
 open class CaptioningAppearanceScreen(context: Context) :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceLifecycleProvider {
@@ -185,6 +191,12 @@ open class CaptioningAppearanceScreen(context: Context) :
                 +CaptionFontFamilyPreference(context)
                 +CaptionTextColorPreference(context)
                 +CaptionTextOpacityPreference(context)
+                +CaptionEdgeTypePreference(context)
+                +CaptionEdgeColorPreference(context)
+                +CaptionBackgroundColorPreference(context)
+                +CaptionBackgroundOpacityPreference(context)
+                +CaptionWindowColorPreference(context)
+                +CaptionWindowOpacityPreference(context)
             }
             +CaptioningFooterPreference("captioning_appearance_footer")
         }
@@ -193,6 +205,7 @@ open class CaptioningAppearanceScreen(context: Context) :
         const val KEY = "captioning_appearance"
     }
 }
+// LINT.ThenChange()
 
 /** Displays "More options" in captioning settings. */
 // LINT.IfChange(more_options_screen)

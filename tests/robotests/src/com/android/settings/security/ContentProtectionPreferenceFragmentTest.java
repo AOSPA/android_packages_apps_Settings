@@ -93,7 +93,7 @@ public class ContentProtectionPreferenceFragmentTest {
     @Test
     public void getPreferenceScreenResId() {
         assertThat(mFragment.getPreferenceScreenResId())
-                .isEqualTo(R.layout.content_protection_preference_fragment);
+                .isEqualTo(R.xml.content_protection_preference_fragment);
     }
 
     @Test
@@ -112,7 +112,7 @@ public class ContentProtectionPreferenceFragmentTest {
                         mContext);
         final List<String> allKeys =
                 XmlTestUtils.getKeysFromPreferenceXml(
-                        mContext, R.layout.content_protection_preference_fragment);
+                        mContext, R.xml.content_protection_preference_fragment);
         final List<String> nonIndexableKeysExpected =
                 List.of(
                         "content_protection_preference_top_intro",
@@ -137,7 +137,7 @@ public class ContentProtectionPreferenceFragmentTest {
                         mContext);
         final List<String> allKeys =
                 XmlTestUtils.getKeysFromPreferenceXml(
-                        mContext, R.layout.content_protection_preference_fragment);
+                        mContext, R.xml.content_protection_preference_fragment);
 
         assertThat(nonIndexableKeys).isEqualTo(allKeys);
     }

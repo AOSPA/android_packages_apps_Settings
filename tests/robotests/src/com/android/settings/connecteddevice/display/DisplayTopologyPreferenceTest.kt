@@ -46,7 +46,6 @@ import com.google.common.truth.Truth.assertThat
 import java.util.function.Consumer
 import kotlin.math.abs
 import kotlin.math.min
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -890,7 +889,6 @@ class DisplayTopologyPreferenceTest {
     }
 
     @Test
-    @Ignore("b/461655992")
     fun mirroringMode_noUpdateFromDisplayListenerUpdate() {
         setMirroringMode(true)
         setupPaneWithTwoDisplays()

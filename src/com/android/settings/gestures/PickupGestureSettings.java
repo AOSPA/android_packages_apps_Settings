@@ -28,6 +28,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+// LINT.IfChange
 @SearchIndexable
 public class PickupGestureSettings extends DashboardFragment {
 
@@ -72,3 +73,4 @@ public class PickupGestureSettings extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.pick_up_gesture_settings);
 
 }
+// LINT.ThenChange(PickupGestureApiScreen.kt)

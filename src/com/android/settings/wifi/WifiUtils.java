@@ -369,6 +369,12 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
                 && userManager.isSystemUser();
     }
 
+    /** @return true if the multi user WiFi is enabled by flags. */
+    public static boolean isWifiMultiuserEnabled() {
+        return com.android.settings.connectivity.Flags.wifiMultiuser()
+            || com.android.settings.flags.Flags.enableWifiMultiuser();
+    }
+
     /**
      * Checks if the network is owned by the current user of the settings app or
      * if the userCount is one.
@@ -380,7 +386,7 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
      */
     public static boolean isCurrentUserNetworkOwner(
             @NonNull WifiEntry wifiEntry, @NonNull Context context) {
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
+        if (!isWifiMultiuserEnabled()
                 || wifiEntry.getWifiConfiguration() == null) {
             return true;
         }
@@ -423,7 +429,7 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
      */
     public static boolean isSharedFieldEditable(
             @Nullable WifiEntry wifiEntry, @NonNull Context context) {
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {
+        if (!isWifiMultiuserEnabled()) {
             return false;
         }
 

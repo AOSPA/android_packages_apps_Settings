@@ -46,8 +46,8 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
-import com.android.settings.connectivity.Flags;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.settingslib.core.lifecycle.ObservableActivity;
 import com.android.settingslib.widget.SettingsThemeHelper;
@@ -141,7 +141,7 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         }
 
         mIsWifiTrackerLib = !TextUtils.isEmpty(mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY));
-        if (Flags.wifiMultiuser()) {
+        if (WifiUtils.isWifiMultiuserEnabled()) {
             mUseWifiDialog2ForAddNetwork =
                 TextUtils.isEmpty(mIntent.getStringExtra(KEY_CHOSEN_WIFIENTRY_KEY))
                 && TextUtils.isEmpty(mIntent.getStringExtra(KEY_ACCESS_POINT_STATE));

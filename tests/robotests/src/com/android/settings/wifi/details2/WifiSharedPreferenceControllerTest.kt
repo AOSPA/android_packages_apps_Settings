@@ -24,8 +24,8 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.appcompat.app.AlertDialog
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.connectivity.Flags
 import com.android.settings.core.BasePreferenceController
+import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.wifitrackerlib.WifiEntry
@@ -189,14 +189,15 @@ class WifiSharedPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
     fun getAvailabilityStatus_flagDisabled() {
         assertThat(controller.getAvailabilityStatus())
             .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE)
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     fun getAvailabilityStatus_flagEnabled() {
         assertThat(controller.getAvailabilityStatus()).isEqualTo(BasePreferenceController.AVAILABLE)
     }

@@ -711,8 +711,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         if (!WifiUtils.isNetworkShareable(mSelectedWifiEntry, getActivity())) {
             return;
         }
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
-                && !mIsAdmin) {
+        if (!WifiUtils.isWifiMultiuserEnabled() && !mIsAdmin) {
             Log.w(TAG, "Don't add the Wi-Fi share menu because the user is not an admin.");
             EventLog.writeEvent(0x534e4554, "206986392", UserHandle.myUserId(),
                     "User is not an admin");
@@ -725,8 +724,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         if (!WifiUtils.isNetworkForgettable(mSelectedWifiEntry, getActivity())) {
             return;
         }
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
-                && !mIsAdmin) {
+        if (!WifiUtils.isWifiMultiuserEnabled() && !mIsAdmin) {
             Log.w(TAG, "Don't add the Wi-Fi forget menu because the user is not an admin.");
             EventLog.writeEvent(0x534e4554, "206986392", UserHandle.myUserId(),
                     "User is not an admin");
@@ -743,8 +741,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 || mSelectedWifiEntry.getConnectedState() == CONNECTED_STATE_CONNECTED) {
             return;
         }
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
-                && !mIsAdmin) {
+        if (!WifiUtils.isWifiMultiuserEnabled() && !mIsAdmin) {
             Log.w(TAG, "Don't add the Wi-Fi modify menu because the user is not an admin.");
             EventLog.writeEvent(0x534e4554, "237672190", UserHandle.myUserId(),
                     "User isn't admin");

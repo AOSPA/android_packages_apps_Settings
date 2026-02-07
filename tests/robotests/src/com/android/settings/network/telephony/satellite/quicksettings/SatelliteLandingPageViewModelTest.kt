@@ -68,6 +68,7 @@ class SatelliteLandingPageViewModelTest {
     private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.NOT_AVAILABLE)
     private val isTerrestrialConnectedFlow = MutableStateFlow(true)
     private val satelliteDisallowedReasonsFlow = MutableStateFlow(intArrayOf())
+    private val activeSubIdFlow = MutableStateFlow(SUB_ID)
 
     @Before
     fun setUp() {
@@ -88,6 +89,7 @@ class SatelliteLandingPageViewModelTest {
             .thenReturn(isTerrestrialConnectedFlow)
         `when`(satelliteStateRepository.satelliteDisallowedReasons)
             .thenReturn(satelliteDisallowedReasonsFlow)
+        `when`(satelliteStateRepository.activeSubIdFlow).thenReturn(activeSubIdFlow)
         `when`(satelliteStateRepository.getAttachRestrictionReasons(SUB_ID)).thenReturn(emptySet())
     }
 
@@ -254,7 +256,7 @@ class SatelliteLandingPageViewModelTest {
         setLteNtnSupported(true)
         val viewModel = createViewModel()
 
-        viewModel.refresh(SUB_ID)
+        viewModel.refresh()
         waitForAsync()
 
         assertThat(viewModel.isLteBasedNtnSupported.value).isTrue()
@@ -266,10 +268,26 @@ class SatelliteLandingPageViewModelTest {
         setupCommonPackageManagerApps()
         val viewModel = createViewModel()
         val expectedIntent = Intent("expected")
-        viewModel.refresh(SUB_ID)
+        viewModel.refresh()
         `when`(appsRepository.getSettingsIntent(false)).thenReturn(expectedIntent)
 
         assertThat(viewModel.getSettingsIntent()).isEqualTo(expectedIntent)
+    }
+
+    @Test
+    fun refresh_lteSupported_userRestricted_setsBannerStateCorrectly() = runTest {
+        setLteNtnSupported(true)
+        `when`(satelliteStateRepository.getAttachRestrictionReasons(SUB_ID))
+            .thenReturn(setOf(SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_USER))
+
+        val viewModel = createViewModel()
+        viewModel.refresh()
+        waitForAsync()
+
+        val bannerState = viewModel.bannerState.value
+        assertThat(bannerState.isUserRestricted).isTrue()
+        assertThat(bannerState.isSatelliteAvailableInRegion).isTrue()
+        assertThat(bannerState.isEntitled).isTrue()
     }
 
     private fun setupPackageManagerForApp(packageName: String, appName: String, intent: Intent?) {
@@ -280,8 +298,6 @@ class SatelliteLandingPageViewModelTest {
     }
 
     private fun setLteNtnSupported(isSupported: Boolean) {
-        val reasons = if (isSupported) emptySet() else setOf(1)
-        shadowSatelliteManager.setAttachRestrictionReasonsForCarrier(SUB_ID, reasons)
         val config =
             PersistableBundle().apply {
                 putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, isSupported)
@@ -308,9 +324,37 @@ class SatelliteLandingPageViewModelTest {
 
     private fun TestScope.createViewModelAndGetItems(): List<SatelliteAppItem> {
         val viewModel = createViewModel()
-        viewModel.refresh(SUB_ID)
+        // refresh() is called from init, but we call it again to ensure test consistency
+        viewModel.refresh()
         waitForAsync()
         return viewModel.satelliteAppItems.value
+    }
+
+    @Test
+    fun activeSubId_change_refreshesViewModel() = runTest {
+        setLteNtnSupported(false) // isCarrierRoamingNtnSupported is false for SUB_ID
+        val viewModel = createViewModel()
+        waitForAsync() // for init
+
+        assertThat(viewModel.isCarrierRoamingNtnSupported.value).isFalse()
+
+        // Set up a new subscription with carrier support
+        val newSubId = 2
+        val newSubInfo = SubscriptionInfo.Builder().setId(newSubId).build()
+        val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
+        shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo, newSubInfo))
+        val config =
+            PersistableBundle().apply {
+                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
+            }
+        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
+        shadowOf(carrierConfigManager).setConfigForSubId(newSubId, config)
+
+        // Trigger subscription change
+        activeSubIdFlow.value = newSubId
+        waitForAsync()
+
+        assertThat(viewModel.isCarrierRoamingNtnSupported.value).isTrue()
     }
 
     private fun TestScope.waitForAsync() {

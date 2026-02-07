@@ -19,7 +19,7 @@ import android.app.UiModeManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
 
-class ForceDarkAppExceptionsRepository(private val context: Context) {
+class ForceDarkAppExceptionsRepository(private val context: Context, private val userId: Int) {
 
     private val forceInvertAlwaysDisableSet = HashSet<String>()
 
@@ -50,7 +50,7 @@ class ForceDarkAppExceptionsRepository(private val context: Context) {
         forceInvertAlwaysDisableSet.clear()
 
         val uiModeManager: UiModeManager = context.getSystemService(UiModeManager::class.java)
-        val exceptionListValue = uiModeManager.getAllForceInvertAlwaysDisableApps()
+        val exceptionListValue = uiModeManager.getAllForceInvertAlwaysDisableApps(userId)
 
         if (exceptionListValue != null && exceptionListValue.isNotEmpty()) {
             forceInvertAlwaysDisableSet.addAll(exceptionListValue)
@@ -62,6 +62,6 @@ class ForceDarkAppExceptionsRepository(private val context: Context) {
         newState: Int,
     ) {
         val uiModeManager: UiModeManager = context.getSystemService(UiModeManager::class.java)
-        uiModeManager.setForceInvertOverrideStateForApp(packageName, newState)
+        uiModeManager.setForceInvertOverrideStateForApp(packageName, newState, userId)
     }
 }

@@ -383,7 +383,8 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @DisableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void onCreateContextMenu_shouldHaveForgetAndDisconnectMenuForConnectedWifiEntry() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canForget()).thenReturn(true);
@@ -396,7 +397,8 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @DisableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void onCreateContextMenu_canShare_shouldHaveShareMenuForConnectedWifiEntry() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(true);
@@ -409,7 +411,8 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @DisableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void onCreateContextMenu_canNotShare_shouldDisappearShareMenuForConnectedWifiEntry() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(false);
@@ -423,7 +426,8 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @DisableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void onCreateContextMenu_multiUserDisabled_isNotAdminUser_showsShareForgetModify() {
         mNetworkProviderSettings.mIsAdmin = false;
         when(mWifiEntry.canDisconnect()).thenReturn(true);
@@ -442,7 +446,8 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @DisableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void onCreateContextMenu_multiUserDisabled_isAdminUser_hidesShareForgetModify() {
         mNetworkProviderSettings.mIsAdmin = true;
         when(mWifiEntry.canDisconnect()).thenReturn(true);
@@ -480,7 +485,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_ownedNetwork_showsShareForgetModify() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(true);
@@ -499,7 +504,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_notOwnedNetwork_hidesShare() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(true);
@@ -511,7 +516,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_ownedNetwork_guestUser_hidesShare() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(true);
@@ -524,7 +529,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_notOwnedNetwork_hidesForget() {
         when(mWifiEntry.canForget()).thenReturn(true);
         createNetworkConfig(false);
@@ -536,7 +541,7 @@ public class NetworkProviderSettingsTest {
 
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_notOwnedNetwork_adminUser_showsForget() {
         when(mWifiEntry.canForget()).thenReturn(true);
         createNetworkConfig(false);
@@ -548,7 +553,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_modifiableNetwork_showsModify() {
         createNetworkConfig(false);
         when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
@@ -562,7 +567,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_modifiableNetwork_guestUser_hidesModify() {
         createNetworkConfig(false);
         when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
@@ -577,7 +582,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_notModifiableNetwork_hidesModify() {
         createNetworkConfig(false);
         when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(false);
@@ -591,7 +596,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_notSaved_hidesModify() {
         createNetworkConfig(true);
         when(mWifiEntry.isSaved()).thenReturn(false);
@@ -604,7 +609,7 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
-    @EnableFlags(com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void onCreateContextMenu_multiUserEnabled_isConnected_hidesModify() {
         createNetworkConfig(true);
         when(mWifiEntry.isSaved()).thenReturn(true);

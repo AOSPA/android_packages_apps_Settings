@@ -72,6 +72,7 @@ import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.utils.AndroidKeystoreAliasLoader;
 import com.android.settings.widget.EnhancedSettingsSpinnerAdapter;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.settings.wifi.dpp.WifiDppUtils;
@@ -356,7 +357,7 @@ public class WifiConfigController2 implements TextWatcher,
         mSharedNetworkLoginScreenWarning =
             (LinearLayout) mView.findViewById(R.id.shared_network_login_screen_warning);
 
-        if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
+        if (WifiUtils.isWifiMultiuserEnabled()) {
             mView.findViewById(R.id.sharing_toggle_fields)
                     .setVisibility(mIsMultiUser ? View.VISIBLE : View.GONE);
             mView.findViewById(R.id.edit_wifi_network_configuration_fields)
@@ -648,7 +649,7 @@ public class WifiConfigController2 implements TextWatcher,
             config.SSID = "\"" + mWifiEntry.getTitle() + "\"";
         }
 
-        if (com.android.settings.connectivity.Flags.wifiMultiuser()) {
+        if (WifiUtils.isWifiMultiuserEnabled()) {
             config.shared = mSharedSwitch.isChecked();
             if (!config.shared) {
                 config.setAllowedToUpdateByOtherUsers(false);
