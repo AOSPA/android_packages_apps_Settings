@@ -412,10 +412,8 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Slaan oor"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Jy het die maksimum aantal gesigte bygevoeg"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Kan nie meer gesigte byvoeg nie"</string>
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
-    <skip />
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" msgid="2276422963933723362">"Kan nie Gesigslot opstel nie"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message" msgid="2680132270879475080">"Jy is nie aan die internet verbind nie. Gaan terug en verbind aan die internet, of stel dit later in instellings op."</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Inskrywing is nie voltooi nie"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Tydlimiet vir gesiginskrywing is bereik. Probeer weer."</string>
@@ -884,7 +882,7 @@
     <string name="number_of_device_admins_none" msgid="152926922020437312">"Geen aktiewe apps nie"</string>
     <string name="number_of_device_admins" msgid="3402909995362162876">"{count,plural, =1{# aktiewe app}other{# aktiewe apps}}"</string>
     <string name="manage_trust_agents" msgid="6410149930029992356">"Vertrouensagente"</string>
-    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Stel eers \'n skermslot op om te gebruik"</string>
+    <string name="disabled_because_no_backup_security" msgid="4998095356607488854">"Stel eers ’n skermslot op om te gebruik"</string>
     <string name="manage_trust_agents_summary" msgid="6423843123607674286">"Geen"</string>
     <string name="manage_trust_agents_summary_on" msgid="3302574418419446146">"{count,plural, =1{1 aktiewe vertrouensagent}other{# aktiewe vertrouensagente}}"</string>
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
@@ -1343,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktiveer Wi-Fi-oproepe"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Skakel Wi-Fi-oproepe aan"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Is ontkoppel van <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Klank en vibrasie"</string>
     <string name="account_settings" msgid="255404935489127404">"Rekeninge"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Werkprofielrekeninge – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Persoonlikeprofielrekeninge"</string>
@@ -1351,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Werkrekening – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Persoonlike rekening – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Soek"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Skerm"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Outodraai skerm"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Af"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Aan"</string>
@@ -2148,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Druk spasie-sleutel twee keer om \".\" in te voeg"</string>
     <string name="show_password" msgid="7101900779571040117">"Wys wagwoorde"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Wys karakters kortliks terwyl jy tik"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"Wys wagwoorde vir raakskerm"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Wys karakters kortliks terwyl jy op die raakskerm tik"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"Wys wagwoorde vir sleutelbord"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"Wys karakters kortliks terwyl jy op die sleutelbord tik"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Hierdie speltoetser is dalk in staat om al die teks wat jy invoer te versamel, insluitend persoonlike inligting soos wagwoorde en kredietkaartnommers. Dit kom van die <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>-app. Gebruik hierdie speltoetser?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Instellings"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Taal"</string>
@@ -3664,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Toestel"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Sleutelbord, raakpaneel, skerm, klank"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Skerm"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Klank"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Nie beskikbaar nie want NFC is af"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Installeer eers \'n betalingprogram om dit te gebruik"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Onlangse apps, verstekapps"</string>
@@ -4468,7 +4459,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"Geen toestemmings is versoek nie"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"Beheer apptoegang tot jou data"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"Privaatheidkontroleskerm"</string>
-    <string name="permissions_usage_summary" msgid="6784310472062516454">"Wys watter programme onlangs toestemmings gebruik het"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"Wys watter apps onlangs toestemmings gebruik het"</string>
     <string name="unused_apps" msgid="4566272194756830656">"Ongebruikte apps"</string>
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{# ongebruikte app}other{# ongebruikte apps}}"</string>
     <string name="unused_apps_category" msgid="8954930958175500851">"Instellings vir ongebruikte apps"</string>
@@ -4550,9 +4541,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Verstek-USB-opstelling"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Kragopsies"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Lêeroordragopsies"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Datatoegangbeskerming"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Laat PCI-tonneling toe"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Wanneer dit geaktiveer is, kan USB- en Thunderbolt-randtoestelle PCI-tonnels skep en toegang tot stelselgeheue kry"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Moet ’n admingebruiker wees om hierdie instelling te wysig"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Deur jou IT-admin gedeaktiveer"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Deur Gevorderde Beskerming-modus gedeaktiveer"</string>
@@ -5363,8 +5357,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satelliet"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellietkonnektiwiteit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellietkonnektiwiteit"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Gebruik satellietkonnektiwiteit"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Die gebruik van gesteunde apps is by jou rekening ingesluit"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Data vir alle apps is by jou rekening ingesluit"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Gesteunde apps op jou foon"</string>
@@ -6191,19 +6184,24 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Meer oor satellietkonnektiwiteit"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Maak Satelliet-SOS-demonstrasie oop"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Satellietapps"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"Net noodoproepe"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Satellietkonnektiwiteit is beskikbaar"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Kry maklik toegang tot satellietinligting deur die Satelliet-teël by Kitsinstellings te voeg"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Voeg teël by"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Satellietteëlporteks"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_apps_see_all_supported_apps_text (1053383406430986034) -->
+    <skip />
+    <!-- no translation found for satellite_apps_see_less_text (3776624493969066217) -->
+    <skip />
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satelliet nie beskikbaar nie"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Satellietdekking is nie beskikbaar terwyl jy aan ’n selfoon- of wi-fi-netwerk verbind is nie."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Satelliet-konnektiwiteit is nie in hierdie land of streek beskikbaar nie."</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Satelliet-konnektiwiteit is nie nou beskikbaar nie. Probeer later weer."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Jou mobieletoestelpakket sluit nie satellietdekking in nie. Kontak jou diensverskaffer vir hulp."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Google Boodskappe moet jou verstekboodskapapp wees om satellietboodskappe te gebruik."</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Satellietkonnektiwiteit is deur jou diensverskaffer geaktiveer. Kry meer inligting in jou diensverskaffer se satellietinstellings."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Bekyk beskikbare liggings"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Verander verstekapp"</string>

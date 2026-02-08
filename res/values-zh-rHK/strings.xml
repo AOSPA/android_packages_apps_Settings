@@ -412,10 +412,8 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"略過"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"你加入的面孔數目已達上限"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"無法加入更多面孔"</string>
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
-    <skip />
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" msgid="2276422963933723362">"無法設定「面孔解鎖」"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message" msgid="2680132270879475080">"你未連線至互聯網。請返回並未連線至互聯網，或稍後在設定中設定。"</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"尚未完成註冊"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"確定"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"面孔註冊時限已過，請再試一次。"</string>
@@ -648,7 +646,7 @@
     <string name="security_advanced_settings_no_work_profile_settings_summary" msgid="345336447137417638">"加密、憑證等"</string>
     <string name="security_advanced_settings_keywords" msgid="5294945170370974974">"安全性, 更多安全性設定, 更多設定, 進階安全性設定"</string>
     <string name="privacy_advanced_settings" msgid="8828215456566937719">"更多私隱設定"</string>
-    <string name="more_security_privacy_settings" msgid="123465614090328851">"更多安全性和私隱設定"</string>
+    <string name="more_security_privacy_settings" msgid="123465614090328851">"更多安全和私隱設定"</string>
     <string name="security_header" msgid="961514795852103424">"保安"</string>
     <string name="privacy_header" msgid="5526002421324257007">"私隱"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"工作設定檔"</string>
@@ -1343,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"啟用 Wi-Fi 通話功能"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"開啟 Wi-Fi 通話功能"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"已中斷與「<xliff:g id="SSID">%1$s</xliff:g>」的連線"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"音效和震動"</string>
     <string name="account_settings" msgid="255404935489127404">"帳戶"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"工作設定檔帳戶 - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"個人設定檔帳戶"</string>
@@ -1351,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"工作帳戶 - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"個人帳戶 - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"搜尋"</string>
-    <string name="display_settings" msgid="7197750639709493852">"螢幕"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"自動旋轉螢幕"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"關閉"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"已開啟"</string>
@@ -2148,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"按兩下空格鍵即可插入「.」"</string>
     <string name="show_password" msgid="7101900779571040117">"顯示密碼"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"輸入時短暫顯示字元"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"顯示透過觸控螢幕輸入的密碼"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"在觸控螢幕上輸入時短暫顯示字元"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"顯示透過鍵盤輸入的密碼"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"在鍵盤上輸入時短暫顯示字元"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"這個拼字檢查程式可能會收集你輸入的所有文字，包括密碼和信用卡號碼等個人資料。程式是由應用程式「<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>」提供，你要使用嗎？"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"設定"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"語言"</string>
@@ -3664,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"藍牙、Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"裝置"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"鍵盤、觸控板、顯示、音效"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"顯示"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"音效"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"由於 NFC 已關閉，因此無法使用"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"如要使用，請先安裝付款應用程式"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"最近使用的應用程式、預設應用程式"</string>
@@ -4550,9 +4541,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"預設 USB 設定"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"電源選項"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"檔案傳輸選項"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"資料存取保護"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"允許 PCI 穿隧"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"啟用後，USB 和 Thunderbolt 周邊裝置可建立 PCI 穿隧並存取系統記憶體"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"此設定必須由管理員使用者修改"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"已由 IT 管理員停用"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"已由「進階保護功能模式」停用"</string>
@@ -5363,8 +5357,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"衛星"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"衛星連接"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"衛星連接"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"使用衛星連接"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"你可透過自己的帳戶使用支援的應用程式"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"你可透過自己的帳戶在所有應用程式上使用數據"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"手機支援的應用程式"</string>
@@ -6191,19 +6184,24 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"進一步瞭解衛星連接"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"開啟「緊急衛星連接」示範"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"衛星應用程式"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"僅限緊急電話"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"可以使用衛星連接"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"將「衛星」圖塊新增至「快速設定」，即可輕鬆存取衛星資訊"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"新增圖塊"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"衛星圖塊提示"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_apps_see_all_supported_apps_text (1053383406430986034) -->
+    <skip />
+    <!-- no translation found for satellite_apps_see_less_text (3776624493969066217) -->
+    <skip />
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"無法使用衛星"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"連線至流動網絡或 Wi-Fi 網絡後，便無法使用衛星連接。"</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"此國家或地區不支援衛星連接。"</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"目前無法使用衛星連接。請稍後再試。"</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"你的流動服務計劃不包括衛星連接。請聯絡你的流動網絡供應商尋求協助。"</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"你必須將「Google 訊息」設定為預設訊息應用程式，才能使用衛星訊息。"</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"你的流動網絡供應商已啟用衛星連接。請前往流動網絡供應商的衛星設定瞭解詳情。"</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"查看支援的地區"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"變更預設應用程式"</string>

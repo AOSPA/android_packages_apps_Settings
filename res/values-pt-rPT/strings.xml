@@ -1341,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Ativar Chamadas Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Ativar Chamadas Wi-Fi"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Desligado de <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Som e vibração"</string>
     <string name="account_settings" msgid="255404935489127404">"Contas"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Contas do perfil de trabalho – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Contas do perfil pessoal"</string>
@@ -1349,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Conta de trabalho – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Conta pessoal – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Pesquise"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Ecrã"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Rotação automática do ecrã"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Desativada"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Ativada"</string>
@@ -2245,7 +2243,7 @@
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad e rato"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Rato"</string>
-    <string name="mouse_settings_summary" msgid="2593803007491750229">"Veloc. cursor, person. dos botões"</string>
+    <string name="mouse_settings_summary" msgid="2593803007491750229">"Velocidade do cursor, personalização dos botões"</string>
     <string name="trackpad_settings_summary" msgid="2984582991609553396">"Velocidade do cursor, gestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tocar para clicar"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tocar e arrastar para mover itens"</string>
@@ -3659,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Teclado, touchpad, ecrã e som"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Ecrã"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Som"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Não disponível com o NFC desativado"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale primeiro uma app de pagamento"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recentes, apps predefinidas"</string>
@@ -4545,9 +4541,9 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Configuração USB predefinida"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opções de carregamento"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opções de transferência de ficheiros"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Proteção de acesso aos dados"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Permitir túnel PCI"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Quando ativados, os periféricos USB e Thunderbolt podem criar túneis PCI e aceder à memória do sistema"</string>
+    <string name="usb_pci_tunnel_title" msgid="2748798863335212013">"Proteção de acesso aos dados"</string>
+    <string name="usb_pci_tunnel_control" msgid="3567906081072788607">"Túnel PCI"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="3993635413468540397">"Permita que os dispositivos USB e Thunderbolt acedam diretamente à memória do sistema para atingir velocidades de hardware máximas.\n\nNota: isto representa um risco de segurança, por isso, ligue apenas dispositivos nos quais confia."</string>
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Tem de ser um utilizador administrador para modificar esta definição"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Desativado pelo administrador de TI"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Desativado pelo modo de Proteção avançada"</string>
@@ -5358,8 +5354,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satélite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conetividade por satélite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conetividade por satélite"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Usar conetividade por satélite"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"A utilização de apps compatíveis está incluída na sua conta"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Os dados para todas as apps estão incluídos na sua conta"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Apps compatíveis no telemóvel"</string>
@@ -6192,12 +6187,15 @@
     <string name="add_tile_action" msgid="5271301747196740442">"Adicionar cartão"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Comandos do mosaico Satélite"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <string name="satellite_apps_see_all_supported_apps_text" msgid="1053383406430986034">"Ver todas as apps compatíveis"</string>
+    <string name="satellite_apps_see_less_text" msgid="3776624493969066217">"Ver menos"</string>
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satélite não disponível"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"A cobertura por satélite não está disponível enquanto tiver uma ligação a uma rede móvel ou Wi‑Fi."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"A conetividade por satélite não está disponível neste país ou região."</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"De momento, a conetividade por satélite não está disponível. Tente mais tarde."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"O seu plano de dados móveis não inclui cobertura por satélite. Contacte a operadora para obter ajuda."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Para usar as mensagens por satélite, a app Mensagens Google tem de ser a sua app de mensagens predefinida."</string>
+    <string name="satellite_user_restricted_warning_summary" msgid="6863113114703813898">"A conetividade por satélite está desativada."</string>
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"A conetividade por satélite é ativada pela sua operadora. Saiba mais nas definições de satélite da sua operadora."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Ver localizações disponíveis"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Alterar app predefinida"</string>
