@@ -43,6 +43,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.google.common.collect.ImmutableBiMap;
 
 /** Controller class that controls accessibility autoclick cursor area size settings. */
+// LINT.IfChange
 public class ToggleAutoclickCursorAreaSizeController extends BasePreferenceController
         implements LifecycleObserver, SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -181,3 +182,4 @@ public class ToggleAutoclickCursorAreaSizeController extends BasePreferenceContr
         return size;
     }
 }
+// LINT.ThenChange(autoclick/ui/AutoclickCursorAreaSizePreference.kt)

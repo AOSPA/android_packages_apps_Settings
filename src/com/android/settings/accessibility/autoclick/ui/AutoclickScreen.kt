@@ -130,6 +130,7 @@ open class AutoclickScreen :
                 metricsCategory = metricsCategory,
             )
             +AutoclickDelayPreference(context)
+            +AutoclickCursorAreaSizePreference()
             +AutoclickIgnoreMinorCursorMovementPreference()
             +AutoclickRevertToLeftClickPreference()
             +AutoclickFooterPreference()
