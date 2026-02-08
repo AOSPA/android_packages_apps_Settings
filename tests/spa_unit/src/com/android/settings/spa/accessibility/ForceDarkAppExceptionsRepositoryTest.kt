@@ -35,12 +35,14 @@ class ForceDarkAppExceptionsRepositoryTest {
     @Mock lateinit var context: Context
     @Mock lateinit var uiModeManager: UiModeManager
     private lateinit var repository: ForceDarkAppExceptionsRepository
+    private val testUserId = 0
 
     @Before
     fun setup() {
         whenever(context.getSystemService(UiModeManager::class.java)).thenReturn(uiModeManager)
-        whenever(uiModeManager.getAllForceInvertAlwaysDisableApps()).thenReturn(mutableListOf())
-        repository = ForceDarkAppExceptionsRepository(context)
+        whenever(uiModeManager.getAllForceInvertAlwaysDisableApps(testUserId))
+            .thenReturn(mutableListOf())
+        repository = ForceDarkAppExceptionsRepository(context, testUserId)
     }
 
     @Test
@@ -53,6 +55,7 @@ class ForceDarkAppExceptionsRepositoryTest {
             .setForceInvertOverrideStateForApp(
                 eq(MOCK_PACKAGE_NAME),
                 eq(UiModeManager.FORCE_INVERT_PACKAGE_ALWAYS_DISABLE),
+                eq(testUserId),
             )
     }
 
@@ -66,6 +69,7 @@ class ForceDarkAppExceptionsRepositoryTest {
             .setForceInvertOverrideStateForApp(
                 eq(MOCK_PACKAGE_NAME),
                 eq(UiModeManager.FORCE_INVERT_PACKAGE_ALWAYS_DISABLE),
+                eq(testUserId),
             )
 
         // Exclude the app from the always disable list
@@ -75,6 +79,7 @@ class ForceDarkAppExceptionsRepositoryTest {
             .setForceInvertOverrideStateForApp(
                 eq(MOCK_PACKAGE_NAME),
                 eq(UiModeManager.FORCE_INVERT_PACKAGE_ALLOWED),
+                eq(testUserId),
             )
     }
 

@@ -162,7 +162,7 @@ public class RegionalPreferencesDataUtils {
         return builder.build();
     }
 
-    static void updateSelectedLocale(Locale selectedLocale) {
+    public static void updateSelectedLocale(Locale selectedLocale) {
         Locale[] newLocales = getUpdatedLocales(selectedLocale);
         LocaleList localeList = new LocaleList(newLocales);
         LocaleList.setDefault(localeList);
@@ -183,7 +183,7 @@ public class RegionalPreferencesDataUtils {
         return newLocales;
     }
 
-    private static boolean sameLanguageAndScript(Locale source, Locale target) {
+    public static boolean sameLanguageAndScript(Locale source, Locale target) {
         String sourceLanguage = source.getLanguage();
         String targetLanguage = target.getLanguage();
         String sourceLocaleScript = source.getScript();

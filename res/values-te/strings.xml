@@ -134,7 +134,7 @@
     <string name="bluetooth_device_name_summary" msgid="8678342689845439583">"ఇతర డివైజ్‌లకు \'<xliff:g id="DEVICE_NAME">^1</xliff:g>\' లాగా కనిపిస్తుంది"</string>
     <string name="bluetooth_off_footer" msgid="76578735660216295">"ఇతర పరికరాలతో కనెక్ట్ చేయడానికి బ్లూటూత్‌ను ఆన్ చేయండి"</string>
     <string name="bluetooth_paired_device_title" msgid="3240639218362342026">"మీ పరికరాలు"</string>
-    <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"కొత్త పరికరాన్ని పెయిర్ చేయండి"</string>
+    <string name="bluetooth_pairing_page_title" msgid="3403981358823707692">"కొత్త డివైజ్‌ను పెయిర్ చేయండి"</string>
     <string name="bluetooth_disable_a2dp_hw_offload" msgid="5942913792817797541">"బ్లూటూత్ A2DP హార్డ్‌వేర్ ఆఫ్‌లోడ్‌ను డిజేబుల్ చేయండి"</string>
     <string name="bluetooth_disable_le_audio_hw_offload" msgid="4656853795514691257">"బ్లూటూత్ LE ఆడియో హార్డ్‌వేర్ ఆఫ్‌లోడ్‌ను డిజేబుల్ చేయండి"</string>
     <string name="bluetooth_disable_hw_offload_dialog_title" msgid="6001142380445276918">"పరికరాన్ని రీస్టార్ట్ చేయాలా?"</string>
@@ -412,6 +412,10 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"స్కిప్ చేయండి"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"మీరు గరిష్ట సంఖ్యలో ముఖాలను జోడించారు"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"మరిన్ని ముఖాలను జోడించడం సాధ్యపడదు"</string>
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
+    <skip />
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"ఎన్‌రోల్‌మెంట్ పూర్తి కాలేదు"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"సరే"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"ముఖ నమోదు, సమయ పరిమితిని చేరుకుంది. మళ్లీ ట్రై చేయండి."</string>
@@ -555,6 +559,14 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"సెన్సార్‌ని తాకండి"</string>
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"పవర్ బటన్‌ను నొక్కకుండా తాకండి"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"మీ వేలిముద్రను ఎలా సెటప్ చేయాలి"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_title" msgid="2560358942286362136">"వేలిముద్ర సెన్సర్‌ను తాకండి"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_message" msgid="1440652109953064598">"సెన్సర్ మీ కీబోర్డ్‌లో, పవర్ బటన్‌లో, లేదా మీ డివైజ్‌కు రెండు వైపులా ఉంటుంది."</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_left_message" msgid="9114169763600792562">"వేలిముద్ర సెన్సర్ మీ కీబోర్డ్‌కు దిగువున ఎడమ వైపు మూలన ఉంది"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_right_message" msgid="1259481399128590523">"వేలిముద్ర సెన్సర్ మీ కీబోర్డ్‌కు దిగువున కుడి మూలన ఉంది"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_top_right_message" msgid="3676793246782964274">"వేలిముద్ర సెన్సర్ మీ కీబోర్డ్‌కు ఎగువ కుడి మూలన ఉంది"</string>
+    <string name="security_settings_enroll_find_sensor_right_side_message" msgid="4935349088172995426">"వేలిముద్ర సెన్సర్ మీ డివైజ్‌కు కుడి వైపున ఉంది"</string>
+    <string name="security_settings_enroll_find_sensor_left_side_message" msgid="5826609754513683067">"వేలిముద్ర సెన్సర్ మీ డివైజ్‌కు ఎడమ వైపున ఉంది"</string>
+    <string name="security_settings_enroll_find_sensor_left_of_power_button_top_right_message" msgid="4384349514752161995">"వేలిముద్ర సెన్సర్ మీ కీబోర్డ్‌కు ఎగువ కుడి మూలన, పవర్ బటన్ పక్కన ఉంది"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"ఇది మీ ఫోన్ వెనుక భాగంలో ఉంది. మీ చూపుడు వేలిని ఉపయోగించండి."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"మీ స్క్రీన్ మీద వేలిముద్ర సెన్సార్ ఉంది. తదుపరి స్క్రీన్‌లో మీ వేలిముద్రను క్యాప్చర్ చేస్తారు."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"స్టార్ట్‌"</string>
@@ -1147,14 +1159,14 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"ఈ నెట్‌వర్క్‌కు డివైజ్‌‌ను జోడించడానికి QR కోడ్‌ను ఉపయోగించండి"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR కోడ్ చెల్లుబాటు అయ్యే ఫార్మాట్‌లో లేదు"</string>
     <string name="retry" msgid="7542103800274026915">"మళ్లీ ట్రై చేయండి"</string>
-    <string name="shared_message" msgid="2104244057926025072">"షేర్ చేసిన"</string>
-    <string name="private_message" msgid="5897966950396765392">"ప్రైవేట్"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"మారండి"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"రద్దు చేయండి"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"నెట్‌వర్క్‌ను షేర్ చేయండి"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"ఈ డివైజ్‌లోని ఇతర యూజర్‌లు ఈ నెట్‌వర్క్‌ను యాక్సెస్ చేయగలరు"</string>
-    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"<xliff:g id="SHARED">%1$s</xliff:g> నెట్‌వర్క్‌కు మారాలా?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"\"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" పేరు గల <xliff:g id="SHARED_0">%1$s</xliff:g> నెట్‌వర్క్ ఇప్పటికే ఉంది. మీరు <xliff:g id="SHARED_1">%1$s</xliff:g> నెట్‌వర్క్‌కు మారితే, మీ <xliff:g id="PRIVATE">%3$s</xliff:g> నెట్‌వర్క్ నుండి మీరు వైదొలుగుతారు, మీకు తాత్కాలికంగా ఇంటర్నెట్ ఉండకపోవచ్చు."</string>
+    <string name="wifi_share_conflict_dialog_title" msgid="3758584730708042014">"షేర్ చేసిన నెట్‌వర్క్‌కు మారాలా?"</string>
+    <string name="wifi_share_conflict_dialog_message" msgid="4614968368961927940">"\"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>\" పేరు గల షేర్ చేసిన నెట్‌వర్క్ ఇప్పటికే ఉంది. మీరు షేర్ చేసిన నెట్‌వర్క్‌కు మారితే, మీ ప్రైవేట్ నెట్‌వర్క్ నుండి మీరు వైదొలుగుతారు, మీకు తాత్కాలికంగా ఇంటర్నెట్ ఉండకపోవచ్చు."</string>
+    <string name="wifi_private_conflict_dialog_title" msgid="10940608988441770">"ప్రైవేట్ నెట్‌వర్క్‌కు మారాలా?"</string>
+    <string name="wifi_private_conflict_dialog_message" msgid="495022893355731972">"\"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>\" పేరు గల ప్రైవేట్ నెట్‌వర్క్ ఇప్పటికే ఉంది. మీరు ప్రైవేట్ నెట్‌వర్క్‌కు మారితే, మీ షాట్ చేసిన నెట్‌వర్క్ నుండి మీరు వైదొలుగుతారు, మీకు తాత్కాలికంగా ఇంటర్నెట్ ఉండకపోవచ్చు."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(మారలేదు)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"నెట్‌వర్క్‌ను ఎడిట్ చేయడానికి యూజర్‌లను అనుమతించండి"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"ఇతర యూజర్‌లు ఈ నెట్‌వర్క్‌కు మార్పులు చేయగలరు"</string>
@@ -1323,7 +1335,7 @@
     <string name="wifi_calling_off_explanation_2" msgid="3487475808574416183"></string>
     <string name="emergency_address_title" msgid="8102786488994263815">"ఎమర్జెన్సీ అడ్రస్‌లు"</string>
     <string name="emergency_address_summary" msgid="3022628750270626473">"Wi-Fi ద్వారా అత్యవసర కాల్ చేసినప్పుడు మీ లొకేషన్ ఉపయోగించబడుతుంది"</string>
-    <string name="private_dns_title" msgid="1180823690693258572">"హోస్ట్‌పేరు"</string>
+    <string name="private_dns_title" msgid="1180823690693258572">"హోస్ట్ నేమ్"</string>
     <string name="private_dns_field_require" msgid="2318400923953435586">"ఈ ఫీల్డ్ అవసరం"</string>
     <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"మీరు టైప్ చేసిన హోస్ట్‌పేరు చెల్లదు"</string>
     <string name="private_dns_help_message" msgid="851221502063782306">"ప్రైవేట్ DNS ఫీచర్‌ల గురించి "<annotation id="url">"మరింత తెలుసుకోండి"</annotation></string>
@@ -1439,7 +1451,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"డార్క్ బ్యాక్‌గ్రౌండ్‌ను ఉపయోగించి మీ స్క్రీన్‌ను చూసేందుకు మరింత సౌకర్యవంతంగా చేయండి, కొన్ని స్క్రీన్‌లలో బ్యాటరీ వినియోగాన్ని తగ్గించండి. స్క్రీన్ ఆఫ్‌లో ఉన్నప్పుడు, మీకు షెడ్యూల్ ఉంటే, మీ థీమ్ మారుతుంది."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"డార్క్ థీమ్‌ ప్రస్తుతం మీ నిద్రించే సమయ మోడ్ షెడ్యూల్‌ను ఫాలో అవుతోంది"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"నిద్రించే సమయ మోడ్ సెట్టింగ్‌లు"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{మోడ్స్ కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి}=1{{mode_1} కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తుంది}=2{{mode_1}, {mode_2} కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి}=3{{mode_1}, {mode_2} ఇంకా {mode_3} కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి}other{{mode_1}, {mode_2}, మరో # మోడ్స్ కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8510284128378660986">"{count,plural,offset:2 =0{మోడ్‌లు డార్క్ థీమ్‌ను కూడా ఆన్ చేయగలవు.}=1{{mode_1} డార్క్ థీమ్‌ను కూడా ఆన్ చేస్తుంది.}=2{{mode_1}, {mode_2} కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి.}=3{{mode_1}, {mode_2}, {mode_3} కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి.}other{{mode_1}, {mode_2}, మరో # కూడా డార్క్ థీమ్‌ను ఆన్ చేస్తాయి.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"మోడ్‌ల సెట్టింగ్‌లు"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"హై డైనమిక్ రేంజ్ (HDR) ఇమేజ్‌ల్లో, వీడియోల్లో రంగు పరిధిని (కలర్ రేంజిని), క్లారిటీని బ్రైట్‌గా చేస్తుంది, విస్తరిస్తుంది. HDR కంటెంట్ చాలా బ్రైట్‌గా కనిపిస్తుంది."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"ఆటోమేటిక్ స్క్రీన్ గడువు ముగింపు"</string>
@@ -1517,6 +1529,24 @@
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"PINను ఆరంభించడం సాధ్యం కాదు."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"సరే"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"రద్దు చేయండి"</string>
+    <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM కార్డ్‌ను రక్షించండి"</string>
+    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"ఆటోమేటిక్ SIM లాక్ రక్షణ"</string>
+    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"ఆటోమేటిక్ PIN మేనేజ్‌మెంట్"</string>
+    <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android ద్వారా మేనేజ్ అవుతోంది"</string>
+    <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android ద్వారా మేనేజ్ కావడం లేదు"</string>
+    <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"ఎన్‌రోల్‌మెంట్ విజయవంతమైంది"</string>
+    <string name="sim_enrollment_failed" msgid="342422651961251317">"ఎన్‌రోల్‌మెంట్ విఫలమైంది"</string>
+    <string name="sim_display_platform_managed_pin_title" msgid="6889806433509624620">"Android మేనేజ్ చేసే PINను చూడండి"</string>
+    <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android ద్వారా మేనేజ్ అయ్యే PIN"</string>
+    <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Android ద్వారా మేనేజ్ అయ్యే PIN విలువ:"</string>
+    <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"PINను పొందడంలో విఫలమైంది"</string>
+    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"దొంగతనం నుండి SIM కార్డ్‌ను రక్షించండి"</string>
+    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Android ద్వారా మేనేజ్ అయ్యే SIM PIN"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"SIM PIN మాన్యువల్‌గా మేనేజ్ అవుతుంది"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"SIM ప్రొటెక్షన్‌ను ఆన్ చేయడానికి లాక్‌స్క్రీన్‌ను తప్పనిసరిగా సెటప్ చేయాలి"</string>
+    <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"ప్రస్తుత SIM PINను ఎంటర్ చేయండి"</string>
+    <string name="provide_current_sim_pin" msgid="2805396981527525822">"SIM కార్డ్ ప్రస్తుత PINను ఎంటర్ చేయండి"</string>
+    <string name="use_carrier_default_pin" msgid="4777399918806287607">"క్యారియర్ డిఫాల్ట్ వాడండి"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"మొబైల్ డేటా కోసం <xliff:g id="CARRIER">%1$s</xliff:g> ఉపయోగించాలా?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"మీరు మొబైల్ డేటా కోసం <xliff:g id="CARRIER2_0">%2$s</xliff:g>ను వినియోగిస్తున్నారు. మీరు <xliff:g id="CARRIER1">%1$s</xliff:g>కు మారితే, <xliff:g id="CARRIER2_1">%2$s</xliff:g> ఇప్పటి నుండి మొబైల్ డేటా కోసం ఉపయోగించబడదు."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>ని ఉపయోగించండి"</string>
@@ -2118,13 +2148,12 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"\".\"ని చొప్పించడానికి రెండుసార్లు Space కీని నొక్కండి"</string>
     <string name="show_password" msgid="7101900779571040117">"పాస్‌వర్డ్‌లను చూపించు"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"మీరు టైప్ చేస్తున్నప్పుడు అక్షరాలను క్లుప్తంగా చూపిస్తుంది"</string>
-    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
     <skip />
-    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <string name="show_secrets_touch_summary" msgid="4533171516921235441">"మీరు టచ్‌స్క్రీన్‌పై టైప్ చేస్తున్నప్పుడు అక్షరాలను క్లుప్తంగా డిస్‌ప్లే చేయండి"</string>
+    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
     <skip />
-    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
     <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"ఈ స్పెల్ చెకర్ మీరు టైప్ చేసే మొత్తం వచనాన్ని అలాగే పాస్‌వర్డ్‌లు మరియు క్రెడిట్ కార్డు నంబర్‌ల వంటి వ్యక్తిగత డేటాను సేకరించగలదు. ఇది యాప్ <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>లో అందించబడుతుంది. ఈ స్పెల్ చెకర్‌ను ఉపయోగించాలా?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"సెట్టింగ్‌లు"</string>
@@ -2504,7 +2533,6 @@
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"కంటెంట్‌ను పెద్దదిగా చేయడానికి స్క్రీన్‌పై త్వరగా జూమ్ - ఇన్ చేయండి"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;జూమ్-ఇన్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {1,number,integer}. స్క్రీన్‌ను ట్యాప్ చేయండి&lt;br/&gt; {2,number,integer}. స్క్రీన్ చుట్టూ కదిలేందుకు 2 వేళ్లతో లాగండి&lt;br/&gt; {3,number,integer}. జూమ్‌ను అడ్జస్ట్ (సర్దుబాటు) చేయడానికి 2 వేళ్లతో స్క్రీన్‌ను కంట్రోల్ చేయండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపివేయడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt;&lt;br/&gt;&lt;b&gt;తాత్కాలికంగా జూమ్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మీ మ్యాగ్నిఫికేషన్ మోడ్, ఫుల్ స్క్రీన్‌కు సెట్ అయిందని నిర్ధారించుకోండి&lt;br/&gt; {1,number,integer}. మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {2,number,integer}. స్క్రీన్‌పై ఎక్కడైనా తాకి &amp; హోల్డ్ చేయండి&lt;br/&gt; {3,number,integer}. స్క్రీన్ చుట్టూ కదిలేందుకు వేలితో లాగండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపివేయడానికి వేలును స్క్రీన్‌పై నుండి తీసివేయండి"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;జూమ్ - ఇన్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి లేదా &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M నొక్కండి&lt;br/&gt; {1,number,integer}. స్క్రీన్ చుట్టూ కదలడానికి &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + బాణం కీలను నొక్కండి&lt;br/&gt; {2,number,integer}. జూమ్‌ను సర్దుబాటు చేయడానికి &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ఇంకా \"+\" లేదా \"-\" నొక్కండి&lt;br/&gt; {3,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి షార్ట్‌కట్‌ను లేదా &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M ఉపయోగించండి"</string>
-    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;జూమ్ - ఇన్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {1,number,integer}. స్క్రీన్ చుట్టూ కదలడానికి &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + బాణం కీలను నొక్కండి&lt;br/&gt; {2,number,integer}. జూమ్‌ను సర్దుబాటు చేయడానికి &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ఇంకా \"+\" లేదా \"-\" నొక్కండి&lt;br/&gt; {3,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి షార్ట్‌కట్‌ను ఉపయోగించండి"</string>
     <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;కీబోర్డ్&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి లేదా &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M నొక్కండి&lt;br/&gt; {1,number,integer}. స్క్రీన్ చుట్టూ కదలడానికి &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + బాణం కీలను నొక్కండి&lt;br/&gt; {2,number,integer}. జూమ్‌ను సర్దుబాటు చేయడానికి &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ఇంకా \"+\" లేదా \"-\" నొక్కండి&lt;br/&gt; {3,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి షార్ట్‌కట్‌ను లేదా &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M ఉపయోగించండి&lt;br/&gt;&lt;br/&gt; &lt;b&gt;టచ్‌స్క్రీన్&lt;/b&gt;&lt;br/&gt; జూమ్ - ఇన్ చేయడానికి:&lt;br/&gt; {0,number,integer}. మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {1,number,integer}. స్క్రీన్‌ను ట్యాప్ చేయండి&lt;br/&gt; {2,number,integer}. స్క్రీన్ చుట్టూ కదలడానికి 2 వేళ్లతో లాగండి&lt;br/&gt; {3,number,integer}. జూమ్‌ను సర్దుబాటు చేయడానికి 2 వేళ్లతో స్క్రీన్‌ను నియంత్రించండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt;&lt;br/&gt; తాత్కాలికంగా జూమ్ - ఇన్ చేయడానికి:&lt;br/&gt; {0,number,integer}. మీ మ్యాగ్నిఫికేషన్ రకాన్ని ఫుల్ స్క్రీన్‌కు సెట్ చేసినట్లు నిర్ధారించుకోండి&lt;br/&gt; {1,number,integer}. మ్యాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {2,number,integer}. స్క్రీన్‌పై ఎక్కడైనా తాకి, నొక్కి ఉంచండి&lt;br/&gt; {3,number,integer}. స్క్రీన్ చుట్టూ కదలడానికి వేలితో లాగండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి వేలిని స్క్రీన్‌పై నుండి తీసివేయండి"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;జూమ్ - ఇన్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {1,number,integer}. స్క్రీన్‌ను ట్యాప్ చేయండి&lt;br/&gt; {2,number,integer}. స్క్రీన్ చుట్టూ కదిలేందుకు 2 వేళ్లతో లాగండి&lt;br/&gt; {3,number,integer}. జూమ్ చేయడాన్ని సర్దుబాటు చేయడానికి 2 వేళ్లతో స్క్రీన్‌ను నియంత్రించండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt;&lt;br/&gt; మీరు తాత్కాలికంగా కూడా జూమ్ - ఇన్ చేయవచ్చు, ఇంకా మరిన్ని చేయవచ్చు."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;జూమ్-ఇన్ చేయడానికి:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. మాగ్నిఫికేషన్‌ను ప్రారంభించడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt; {1,number,integer}. స్క్రీన్‌ను ట్యాప్ చేయండి&lt;br/&gt; {2,number,integer}. స్క్రీన్ చుట్టూ కదిలేందుకు 1 వేలితో లేదా 2 వేళ్లతో లాగండి&lt;br/&gt; {3,number,integer}. జూమ్‌ను అడ్జస్ట్ (సర్దుబాటు) చేయడానికి 2 వేళ్లతో స్క్రీన్‌ను కంట్రోల్ చేయండి&lt;br/&gt; {4,number,integer}. మ్యాగ్నిఫికేషన్‌ను ఆపడానికి షార్ట్‌కట్‌ను ఉపయోగించండి&lt;br/&gt;&lt;br/&gt; మీరు తాత్కాలికంగా కూడా జూమ్-ఇన్ చేయవచ్చు, మరిన్ని పనులు కూడా చేయవచ్చు."</string>
@@ -2600,11 +2628,13 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"మీ డివైజ్‌కు ఇంకా డార్క్ థీమ్‌ను సపోర్ట్ చేసే యాప్‌లకు, డార్క్ థీమ్‌ను ఆన్ చేస్తుంది"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"విస్తారిత ఆప్షన్"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"డార్క్ థీమ్ విస్తరించబడింది"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"డార్క్ థీమ్‌ను సపోర్ట్ చేయని చాలా యాప్‌లకు ఆటోమేటిక్‌గా వర్తింపజేస్తుంది, యాక్సెసిబిలిటీని మెరుగుపరచడంలో సహాయపడుతుంది."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"డార్క్ థీమ్‌ను సపోర్ట్ చేయని చాలా యాప్‌లకు ఆటోమేటిక్‌గా వర్తింపజేస్తుంది, యాక్సెసిబిలిటీని మెరుగుపరచడంలో సహాయపడుతుంది"</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"విస్తరించిన ఆప్షన్‌తో సమస్యలు ఉంటే, స్టాండర్డ్ ఆప్షన్ వాడండి."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ఫోర్స్ ఇన్వర్ట్, కలర్ మార్పిడి, కాంట్రాస్ట్"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"విస్తరించబడిన డార్క్ థీమ్"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"విస్తరించిన డార్క్ థీమ్ సెట్టింగ్‌లు"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"విస్తరించిన డార్క్ థీమ్ సెట్టింగ్‌లను తెరవండి"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"విస్తరించిన డార్క్ థీమ్ రీడబిలిటీని మెరుగుపరుస్తుంది, కానీ కొన్ని యాప్‌లు తప్పుగా డిస్‌ప్లే అవ్వడానికి కారణం కావచ్చు.\n\nఈ సెట్టింగ్ ఆఫ్ చేసిన యాప్‌లు స్టాండర్డ్ డార్క్ థీమ్ ఆప్షన్‌ను ఉపయోగిస్తాయి."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"యానిమేషన్‌లను తీసివేయండి"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"స్క్రీన్ మీద కదలికను తగ్గించండి"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"టెక్స్ట్ కర్సర్ బ్లింకింగ్"</string>
@@ -2742,6 +2772,12 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"హియరింగ్ డివైజ్‌‌‌లు"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"సేవ్ చేసిన డివైజ్‌లు"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"వినికిడి డివైజ్ కంట్రోల్స్"</string>
+    <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"సౌండ్‌లు"</string>
+    <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"నోటిఫికేషన్‌లు"</string>
+    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"రింగ్‌టోన్‌లు, అలారాలు"</string>
+    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"హియరింగ్ డివైజ్‌ల ద్వారా సౌండ్‌లు ప్లే అవుతాయి"</string>
+    <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"సౌండ్‌లు డివైజ్ స్పీకర్ ద్వారా ప్లే అవుతాయి"</string>
+    <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"సౌండ్‌లు హియరింగ్ డివైజ్‌లు, డివైజ్ స్పీకర్ ద్వారా ప్లే అవుతాయి"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"హియరింగ్ డివైజ్‌‌ షార్ట్‌కట్"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"హియరింగ్ డివైజ్‌‌‌తో అనుకూలత"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"టెలికాయిల్స్‌తో అనుకూలతను మెరుగుపరుస్తుంది, అవాంఛిత శబ్దాన్ని తగ్గిస్తుంది"</string>
@@ -2927,6 +2963,7 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"గత 24 గంటలలో వినియోగాన్ని చూడండి"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"చివరి ఫుల్ ఛార్జ్ వినియోగాన్ని చూడండి"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"యాప్ బ్యాటరీ వినియోగం"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"వినియోగ వివరాలు"</string>
@@ -3757,8 +3794,7 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, ట్యాగ్, రీడర్"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"కీబోర్డ్, స్పర్శ ప్రతిస్పందన టెక్నాలజీ, వైబ్రేట్,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"బాహ్య డిస్‌ప్లే, కనెక్ట్ చేయబడిన డిస్‌ప్లే, విస్తరించిన డిస్‌ప్లే, రెండవ డిస్‌ప్లే, బిల్ట్-ఇన్ డిస్‌ప్లే, డిస్‌ప్లేలను అమర్చడం, మిర్రర్, డిస్‌ప్లే సైజ్, రొటేషన్, రిజల్యూషన్, రిఫ్రెష్ రేటు"</string>
-    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
-    <skip />
+    <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"కేరెట్, టెక్స్ట్ కేరెట్, టెక్స్ట్ కర్సర్, కర్సర్, బ్లింకింగ్, బ్లింక్ ఇంటర్‌వెల్, బ్లింక్ రేట్, యానిమేషన్, యానిమేషన్‌ను తగ్గించండి, యానిమేషన్‌ను తీసివేయండి"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"వాల్యూమ్, వైబ్రేషన్"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"మీడియా వాల్యూమ్"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast వాల్యూమ్"</string>
@@ -4341,7 +4377,7 @@
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"ఎనేబుల్ చేయండి"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"రెగ్యులర్ షెడ్యూల్‌ను ఫాలో అయ్యే మోడ్‌ను సెట్ చేయండి"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"క్యాలెండర్ ఈవెంట్‌లతో సింక్ చేయడానికి, సమాధానాలను ఆహ్వానించడానికి మోడ్‌ను సెట్ చేయండి"</string>
-    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"గాఢంగా నిద్రపోవడానికి దినచర్యను రూపొందించండి. అలారాలను సెట్ చేయండి, స్క్రీన్‌ను డిమ్‌గా చేయండి, నోటిఫికేషన్‌లను బ్లాక్ చేయండి."</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"ప్రశాంతంగా నిద్రపోవడానికి రొటీన్‌ను రూపొందించండి. అలారాలను సెట్ చేయండి, స్క్రీన్‌ను డిమ్‌గా చేయండి, నోటిఫికేషన్‌లను బ్లాక్ చేయండి."</string>
     <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"రోడ్డు పైకి వచ్చినప్పుడు భద్రత ముఖ్యం. డిస్‌ట్రాక్ట్ చేసే (దృష్టి మరల్చే) వాటికి దూరం జరిగి డ్రైవింగ్ మీద ఫోకస్ పెట్టండి."</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"దృష్టి సారించేందుకు మీ డివైజ్ నుండి వచ్చే పరధ్యానాలను లేదా అంతరాయాలను బ్లాక్ చేయండి"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"నిశ్శబ్ద వాతావరణం కోసం అన్ని పరధ్యానాలను తొలగించండి"</string>
@@ -5330,6 +5366,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"శాటిలైట్"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"శాటిలైట్ కనెక్టివిటీ"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"శాటిలైట్ కనెక్టివిటీ"</string>
+    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
+    <skip />
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"మీ ఖాతాలో సపోర్ట్ ఉన్న యాప్‌ల వినియోగం చేర్చి ఉంది"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"అన్ని యాప్‌ల కోసం డేటా అనే ఫీచర్ మీ ఖాతాతో చేర్చి ఉంది"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"మీ ఫోన్‌లో సపోర్ట్ ఇచ్చే యాప్‌లు"</string>
@@ -6124,7 +6162,7 @@
     <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"గోప్యత, గోప్యతా డ్యాష్‌బోర్డ్"</string>
     <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"ప్రైవేట్ స్పేస్"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"మరిన్ని అలర్ట్‌లు"</string>
-    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"తక్కువ అలర్ట్‌లు"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"చాలా తక్కువ అలర్ట్‌లు"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"విస్మరించబడిన అలర్ట్‌లు"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"ఈ అలర్ట్‌ను విస్మరించాలా?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"మరింత రక్షణను జోడించడానికి, మీ సెక్యూరిటీ, గోప్యతా సెట్టింగ్‌లను ఎప్పుడైనా సరే రివ్యూ చేయండి"</string>
@@ -6151,13 +6189,13 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"శాటిలైట్ ల్యాండింగ్ పేజీ"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"డెమోను ట్రై చేయండి"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"ఇది ఎలా పని చేస్తుందో చూడండి"</string>
-    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
-    <skip />
+    <string name="landing_page_footer_text_lte" msgid="8788085197575734787">"మీరు మొబైల్, Wi-Fi సిగ్నల్‌ను కోల్పోయినప్పుడు, మీ ఫోన్ శాటిలైట్‌కు కనెక్ట్ చేయడానికి ట్రై చేస్తుంది. మొబైల్ లేదా Wi-Fi నెట్‌వర్క్ అందుబాటులో ఉన్నప్పుడు మీ ఫోన్ దానికి మళ్లీ కనెక్ట్ అవుతుంది.\n\nముఖ్య గమనిక: శాటిలైట్ ద్వారా కాల్ చేయడం అందుబాటులో లేదు. అయితే, ఎమర్జెన్సీ కాల్స్ ఇప్పటికీ కనెక్ట్ కావచ్చు."</string>
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"ఉత్తమ కనెక్షన్ కోసం, దయచేసి ఆకాశం స్పష్టంగా కనిపించే ప్రాంతంలో ఉంచండి. అందుబాటులో ఉన్నప్పుడు మీ ఫోన్ మొబైల్ నెట్‌వర్క్‌కు మళ్లీ కనెక్ట్ అవుతుంది. శాటిలైట్ ద్వారా కాల్ చేయడం అందుబాటులో లేదు. అయినప్పటికీ ఎమర్జెన్సీ కాల్స్ కనెక్ట్ అయ్యే అవకాశం ఉంది."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"శాటిలైట్ కనెక్టివిటీ గురించి మరిన్ని వివరాలు"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"ఎమర్జెన్సీ శాటిలైట్ సహాయం డెమోను తెరవండి"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"శాటిలైట్ యాప్‌లు"</string>
-    <string name="satellite_emergency_sos" msgid="5598135807261930736">"ఎమర్జెన్సీ సహాయం"</string>
+    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
+    <skip />
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"శాటిలైట్ కనెక్టివిటీ అందుబాటులో ఉంది"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"క్విక్ సెట్టింగ్‌లకు శాటిలైట్ టైల్‌ను జోడించడం ద్వారా శాటిలైట్ సమాచారాన్ని సులభంగా యాక్సెస్ చేయండి"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"టైల్‌ను జోడించండి"</string>
@@ -6173,10 +6211,9 @@
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"అందుబాటులో ఉన్న లొకేషన్‌లను చూడండి"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"ఆటోమేటిక్ యాప్‌ను మార్చండి"</string>
     <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"క్యారియర్ సెట్టింగ్‌లను చూడండి"</string>
-    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
-    <skip />
-    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
-    <skip />
-    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
-    <skip />
+    <string name="unknown_location_warning" msgid="2547687229551053971">"మీరు ప్రస్తుతం ఉన్న లొకేషన్‌లో ఎమర్జెన్సీ శాటిలైట్ సహాయం అందుబాటులో ఉందో లేదో తెలుసుకోవడానికి, సెట్టింగ్‌లలో లొకేషన్‌ను ఆన్ చేయండి"</string>
+    <string name="unknown_location_warning_button" msgid="2223709540054752411">"లొకేషన్‌ను ఆన్ చేయండి"</string>
+    <string name="unprovisioned_device_warning" msgid="1275456484320369400">"మీ డివైజ్ ఎమర్జెన్సీ శాటిలైట్ సహాయం కోసం రిజిస్టర్ అవ్వలేదు. రిజిస్ట్రేషన్‌ను ఆటోమేటిక్‌గా పూర్తి చేయడానికి, మీరు ఇంటర్నెట్‌కు కనెక్ట్ అయ్యారని నిర్ధారించుకోండి"</string>
+    <string name="enable_webapp_minter_title" msgid="1814043991443158736">"వెబ్ యాప్ ఇన్‌స్టాలర్ సర్వీస్‌ను ఎనేబుల్ చేయండి"</string>
+    <string name="enable_webapp_minter_summary" msgid="333269694933213570">"వెబ్‌సైట్‌లను నేరుగా మీ మొదటి స్క్రీన్‌కు ఇన్‌స్టాల్ చేయడానికి ఈ సర్వీస్‌ను ఎనేబుల్ చేయండి, వాటిని సాధారణ యాప్‌ల వలె ఉపయోగించడానికి."</string>
 </resources>

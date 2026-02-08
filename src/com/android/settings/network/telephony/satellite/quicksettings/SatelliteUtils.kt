@@ -26,7 +26,6 @@ import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
 import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
 import android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL
 import android.telephony.SubscriptionManager
-import android.telephony.satellite.SatelliteManager
 import android.util.Log
 
 /** Utility class for satellite/telephony-related functionalities. */
@@ -93,24 +92,6 @@ object SatelliteUtils {
      */
     fun isLteBasedNtnSupportedByCarrier(context: Context, activeSubId: Int): Boolean {
         if (!isCarrierRoamingNtnSupported(context, activeSubId)) {
-            return false
-        }
-
-        val satelliteManager: SatelliteManager =
-            context.getSystemService(SatelliteManager::class.java) ?: return false
-        try {
-            val attachRestrictionReasons =
-                satelliteManager.getAttachRestrictionReasonsForCarrier(activeSubId)
-            if (attachRestrictionReasons.isNotEmpty()) {
-                Log.d(
-                    TAG,
-                    "isLteBasedNtnSupportedByCarrier: Attach restriction reasons are not empty: $attachRestrictionReasons",
-                )
-                return false
-            }
-        } catch (e: Exception) {
-            // Log the exception and assume not supported/available to prevent crashes
-            Log.e(TAG, "Error checking attach restriction reasons", e)
             return false
         }
 

@@ -19,6 +19,7 @@
 package com.android.settings.accessibility.captionpreferences.data
 
 import android.content.Context
+import android.graphics.Color
 import android.provider.Settings
 import android.view.accessibility.CaptioningManager.CaptionStyle
 import com.android.settingslib.datastore.HandlerExecutor
@@ -85,5 +86,50 @@ class CaptionFontFamilyDataStore(appContext: Context) :
 
     companion object {
         const val DEFAULT_FONT_FAMILY = ""
+    }
+}
+
+class CaptionEdgeTypeDataStore(context: Context) :
+    SecureSettingsCaptionDataStore(context, Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_TYPE) {
+
+    override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>): T? {
+        return DEFAULT_EDGE_TYPE as? T
+    }
+
+    override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
+        if (valueType != Int::class.javaObjectType) return null
+        return captionHelper.edgeType as? T
+    }
+
+    override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+        if (valueType != Int::class.javaObjectType) return
+        captionHelper.edgeType = value as? Int ?: DEFAULT_EDGE_TYPE
+        enableCaptioning()
+    }
+
+    companion object {
+        const val DEFAULT_EDGE_TYPE = CaptionStyle.EDGE_TYPE_NONE
+    }
+}
+
+class CaptionEdgeColorDataStore(context: Context) :
+    SecureSettingsCaptionDataStore(context, Settings.Secure.ACCESSIBILITY_CAPTIONING_EDGE_COLOR) {
+    override fun <T : Any> getDefaultValue(key: String, valueType: Class<T>): T? {
+        return DEFAULT_EDGE_COLOR as? T
+    }
+
+    override fun <T : Any> getValue(key: String, valueType: Class<T>): T? {
+        if (valueType != Int::class.javaObjectType) return null
+        return captionHelper.edgeColor as? T
+    }
+
+    override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+        if (valueType != Int::class.javaObjectType) return
+        captionHelper.edgeColor = value as? Int ?: DEFAULT_EDGE_COLOR
+        enableCaptioning()
+    }
+
+    companion object {
+        const val DEFAULT_EDGE_COLOR = Color.BLACK
     }
 }

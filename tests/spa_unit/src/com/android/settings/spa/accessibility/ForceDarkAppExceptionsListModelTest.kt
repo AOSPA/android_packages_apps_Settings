@@ -72,7 +72,10 @@ class ForceDarkAppExceptionsListModelTest {
             )
         whenever(context.getSystemService(Context.USAGE_STATS_SERVICE))
             .thenReturn(usageStatsManager)
-        listModel = ForceDarkAppExceptionsListModel(context, repository)
+        listModel =
+            ForceDarkAppExceptionsListModel(context).apply {
+                repositoryFactory = { _, _ -> repository }
+            }
     }
 
     @Test
@@ -164,7 +167,7 @@ class ForceDarkAppExceptionsListModelTest {
         whenever(repository.isAppForceDarkAlwaysDisable(APP_A)).thenReturn(true)
 
         composeTestRule.setContent {
-            with(ForceDarkAppExceptionsListModel(context, repository)) {
+            with(ForceDarkAppExceptionsListModel(context)) {
                 AppListItemModel(
                         record =
                             ForceDarkAppExceptionRecord(
@@ -186,7 +189,7 @@ class ForceDarkAppExceptionsListModelTest {
         whenever(repository.isAppForceDarkAlwaysDisable(APP_A)).thenReturn(false)
 
         composeTestRule.setContent {
-            with(ForceDarkAppExceptionsListModel(context, repository)) {
+            with(ForceDarkAppExceptionsListModel(context)) {
                 AppListItemModel(
                         record =
                             ForceDarkAppExceptionRecord(

@@ -25,6 +25,7 @@ import com.android.settings.R;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
 
 /** Preference controller for captioning background opacity. */
+// LINT.IfChange
 public class CaptioningBackgroundOpacityController extends BaseCaptioningCustomController
         implements OnValueChangedListener {
 
@@ -57,3 +58,4 @@ public class CaptioningBackgroundOpacityController extends BaseCaptioningCustomC
         mCaptionHelper.setEnabled(true);
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptionColorPreferences.kt:caption_background_opacity_pref)

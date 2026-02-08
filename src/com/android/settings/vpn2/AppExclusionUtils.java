@@ -23,6 +23,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.VpnManager;
+import android.os.UserHandle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -86,7 +87,8 @@ final class AppExclusionUtils {
     /** Gets VPN application exclusion list from {@link VpnManager} */
     static List<String> getAppExclusionList(Context context, int userId, String vpnPackage) {
         List<String> list =
-                context.getSystemService(VpnManager.class).getAppExclusionList(userId, vpnPackage);
+                context.getSystemService(VpnManager.class)
+                        .getAppExclusionList(UserHandle.of(userId), vpnPackage);
         if (list == null) {
             return new ArrayList<>();
         }
@@ -97,7 +99,7 @@ final class AppExclusionUtils {
     static boolean setAppExclusionList(
             Context context, int userId, String vpnPackage, List<String> list) {
         return context.getSystemService(VpnManager.class)
-                .setAppExclusionList(userId, vpnPackage, list);
+                .setAppExclusionList(UserHandle.of(userId), vpnPackage, list);
     }
 
     private AppExclusionUtils() {}

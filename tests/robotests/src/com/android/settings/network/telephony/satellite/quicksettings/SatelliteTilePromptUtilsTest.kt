@@ -30,13 +30,12 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.never
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when` as whenever
@@ -44,6 +43,7 @@ import org.mockito.junit.MockitoJUnit
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
+import java.util.concurrent.TimeUnit
 
 @RunWith(RobolectricTestRunner::class)
 class SatelliteTilePromptUtilsTest {
@@ -56,7 +56,9 @@ class SatelliteTilePromptUtilsTest {
     private lateinit var satelliteTilePromptUtils: SatelliteTilePromptUtils
 
     companion object {
-        private const val PROMPT_SHOWN_KEY: String = "prompt_shown"
+        private const val PREF_PROMPT_COUNT = "satellite_tile_prompt_count"
+        private const val PREF_LAST_PROMPT_TIMESTAMP = "satellite_tile_prompt_last_timestamp"
+        private const val MAX_PROMPTS = 4
     }
 
     @Before
@@ -67,7 +69,8 @@ class SatelliteTilePromptUtilsTest {
         // Mock SharedPreferences
         doReturn(mockSharedPreferences).`when`(context).getSharedPreferences(anyString(), anyInt())
         whenever(mockSharedPreferences.edit()).thenReturn(mockEditor)
-        whenever(mockEditor.putBoolean(anyString(), anyBoolean())).thenReturn(mockEditor)
+        whenever(mockEditor.putInt(anyString(), anyInt())).thenReturn(mockEditor)
+        whenever(mockEditor.putLong(anyString(), anyLong())).thenReturn(mockEditor)
 
         // Mock NotificationManager
         doReturn(mockNotificationManager)
@@ -76,42 +79,94 @@ class SatelliteTilePromptUtilsTest {
     }
 
     @Test
-    fun hasAddTilePromptBeenShown_returnsFalseByDefault() {
-        whenever(mockSharedPreferences.getBoolean(eq(PROMPT_SHOWN_KEY), eq(false)))
-            .thenReturn(false)
-
-        assertThat(satelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).isFalse()
-    }
-
-    @Test
-    fun hasAddTilePromptBeenShown_returnsTrueWhenSet() {
-        whenever(mockSharedPreferences.getBoolean(eq(PROMPT_SHOWN_KEY), eq(false))).thenReturn(true)
-
-        assertThat(satelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).isTrue()
-    }
-
-    @Test
-    fun setAddTilePromptShown_true_writesToSharedPreferences() {
-        satelliteTilePromptUtils.setAddTilePromptShown(context, true)
-
-        verify(mockEditor).putBoolean(eq(PROMPT_SHOWN_KEY), eq(true))
-        verify(mockEditor).apply()
-    }
-
-    @Test
-    fun setAddTilePromptShown_false_writesToSharedPreferences() {
-        satelliteTilePromptUtils.setAddTilePromptShown(context, false)
-
-        verify(mockEditor).putBoolean(eq(PROMPT_SHOWN_KEY), eq(false))
-        verify(mockEditor).apply()
-    }
-
-    @Test
     fun showSatelliteTileAvailableNotification_createsNotificationChannelAndNotifies() {
         satelliteTilePromptUtils.showSatelliteTileAvailableNotification(context)
 
         verifyNotificationChannelCreated()
-        verifyNotificationSent()
+        verifyNotificationSentWithIntents()
+    }
+
+    @Test
+    fun areAllPromptsShown_lessThanMax_returnsFalse() {
+        whenever(mockSharedPreferences.getInt(PREF_PROMPT_COUNT, 0)).thenReturn(MAX_PROMPTS - 1)
+
+        assertThat(satelliteTilePromptUtils.areAllPromptsShown(context)).isFalse()
+    }
+
+    @Test
+    fun areAllPromptsShown_equalToMax_returnsTrue() {
+        whenever(mockSharedPreferences.getInt(PREF_PROMPT_COUNT, 0)).thenReturn(MAX_PROMPTS)
+
+        assertThat(satelliteTilePromptUtils.areAllPromptsShown(context)).isTrue()
+    }
+
+    @Test
+    fun areAllPromptsShown_moreThanMax_returnsTrue() {
+        whenever(mockSharedPreferences.getInt(PREF_PROMPT_COUNT, 0)).thenReturn(MAX_PROMPTS + 1)
+
+        assertThat(satelliteTilePromptUtils.areAllPromptsShown(context)).isTrue()
+    }
+
+    @Test
+    fun markAllPromptsShown_setsCountToMax() {
+        satelliteTilePromptUtils.markAllPromptsShown(context)
+
+        verify(mockEditor).putInt(PREF_PROMPT_COUNT, MAX_PROMPTS)
+        verify(mockEditor).apply()
+    }
+
+    @Test
+    fun recordPromptShown_incrementsCountAndTimestamp() {
+        val initialCount = 1
+        whenever(mockSharedPreferences.getInt(PREF_PROMPT_COUNT, 0)).thenReturn(initialCount)
+        val beforeTimestamp = System.currentTimeMillis()
+
+        satelliteTilePromptUtils.recordPromptShown(context)
+
+        val afterTimestamp = System.currentTimeMillis()
+        val timestampCaptor = ArgumentCaptor.forClass(Long::class.java)
+        verify(mockEditor).putInt(PREF_PROMPT_COUNT, initialCount + 1)
+        verify(mockEditor).putLong(eq(PREF_LAST_PROMPT_TIMESTAMP), timestampCaptor.capture())
+        verify(mockEditor).apply()
+
+        assertThat(timestampCaptor.value).isAtLeast(beforeTimestamp)
+        assertThat(timestampCaptor.value).isAtMost(afterTimestamp)
+    }
+
+    @Test
+    fun shouldShowSatelliteTilePrompt_count0_returnsTrue() {
+        whenever(mockSharedPreferences.getInt(PREF_PROMPT_COUNT, 0)).thenReturn(0)
+
+        assertThat(satelliteTilePromptUtils.shouldShowSatelliteTilePrompt(context)).isTrue()
+    }
+
+    @Test
+    fun shouldShowSatelliteTilePrompt_countMax_returnsFalse() {
+        whenever(mockSharedPreferences.getInt(PREF_PROMPT_COUNT, 0)).thenReturn(MAX_PROMPTS)
+
+        assertThat(satelliteTilePromptUtils.shouldShowSatelliteTilePrompt(context)).isFalse()
+    }
+
+    @Test
+    fun shouldShowSatelliteTilePrompt_intervalNotPassed_returnsFalse() {
+        val now = System.currentTimeMillis()
+        val interval = TimeUnit.HOURS.toMillis(24)
+        whenever(mockSharedPreferences.getInt(PREF_PROMPT_COUNT, 0)).thenReturn(1)
+        whenever(mockSharedPreferences.getLong(PREF_LAST_PROMPT_TIMESTAMP, 0L))
+            .thenReturn(now - interval + 1000) // 1 second less than required
+
+        assertThat(satelliteTilePromptUtils.shouldShowSatelliteTilePrompt(context)).isFalse()
+    }
+
+    @Test
+    fun shouldShowSatelliteTilePrompt_intervalPassed_returnsTrue() {
+        val now = System.currentTimeMillis()
+        val interval = TimeUnit.HOURS.toMillis(24)
+        whenever(mockSharedPreferences.getInt(PREF_PROMPT_COUNT, 0)).thenReturn(1)
+        whenever(mockSharedPreferences.getLong(PREF_LAST_PROMPT_TIMESTAMP, 0L))
+            .thenReturn(now - interval)
+
+        assertThat(satelliteTilePromptUtils.shouldShowSatelliteTilePrompt(context)).isTrue()
     }
 
     private fun verifyNotificationChannelCreated() {
@@ -124,7 +179,7 @@ class SatelliteTilePromptUtilsTest {
         assertThat(channel.importance).isEqualTo(NotificationManager.IMPORTANCE_DEFAULT)
     }
 
-    private fun verifyNotificationSent() {
+    private fun verifyNotificationSentWithIntents() {
         val notificationCaptor = ArgumentCaptor.forClass(Notification::class.java)
         val notificationId = R.id.satellite_prompt_notification_id
         verify(mockNotificationManager).notify(eq(notificationId), notificationCaptor.capture())
@@ -142,30 +197,8 @@ class SatelliteTilePromptUtilsTest {
             assertPendingIntent(contentIntent)
             assertPendingIntent(actions[0].actionIntent)
             assertThat(actions[0].title).isEqualTo(context.getString(R.string.add_tile_action))
-            assertDismissPendingIntent(deleteIntent)
+            assertThat(deleteIntent).isNull()
         }
-    }
-
-    @Test
-    fun satellitePromptDismissalReceiver_onReceive_dismissAction_marksPromptAsShown() {
-        val receiver = SatelliteTilePromptUtils.SatellitePromptDismissalReceiver()
-        val intent = Intent(SatelliteTilePromptUtils.ACTION_DISMISS)
-
-        receiver.onReceive(context, intent)
-
-        verify(mockEditor).putBoolean(eq(PROMPT_SHOWN_KEY), eq(true))
-        verify(mockEditor).apply()
-    }
-
-    @Test
-    fun satellitePromptDismissalReceiver_onReceive_otherAction_doesNothing() {
-        val receiver = SatelliteTilePromptUtils.SatellitePromptDismissalReceiver()
-        val intent = Intent("some.other.action")
-
-        receiver.onReceive(context, intent)
-
-        verify(mockEditor, never()).putBoolean(anyString(), anyBoolean())
-        verify(mockEditor, never()).apply()
     }
 
     private fun assertPendingIntent(pendingIntent: PendingIntent?) {
@@ -180,17 +213,6 @@ class SatelliteTilePromptUtilsTest {
                 )
             )
             .isEqualTo(R.id.satellite_prompt_notification_id)
-        assertThat(shadowIntent.flags)
-            .isEqualTo(PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
-    }
-
-    private fun assertDismissPendingIntent(pendingIntent: PendingIntent?) {
-        assertThat(pendingIntent).isNotNull()
-        val shadowIntent = Shadows.shadowOf(pendingIntent)
-        assertThat(shadowIntent.savedIntent.component?.className)
-            .isEqualTo(SatelliteTilePromptUtils.SatellitePromptDismissalReceiver::class.java.name)
-        assertThat(shadowIntent.savedIntent.action)
-            .isEqualTo(SatelliteTilePromptUtils.ACTION_DISMISS)
         assertThat(shadowIntent.flags)
             .isEqualTo(PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
     }

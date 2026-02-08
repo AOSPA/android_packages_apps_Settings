@@ -30,15 +30,18 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
+import android.view.WindowManagerPolicyConstants;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.server.accessibility.Flags;
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 import com.android.settings.utils.LocaleUtils;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -52,7 +55,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-@Config(shadows = ShadowInputDevice.class)
+@Config(shadows = {ShadowInputDevice.class, SettingsShadowResources.class})
 @RunWith(RobolectricTestRunner.class)
 public final class AccessibilityUtilTest {
     @Rule
@@ -68,6 +71,11 @@ public final class AccessibilityUtilTest {
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
+    }
+
+    @After
+    public void tearDown() {
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -286,6 +294,46 @@ public final class AccessibilityUtilTest {
         assertThat(AccessibilityUtil.removeTypeFromShortcutTypes(UserShortcutType.SOFTWARE
                 | UserShortcutType.KEY_GESTURE, UserShortcutType.KEY_GESTURE))
                 .isEqualTo(UserShortcutType.SOFTWARE);
+    }
+
+    @Test
+    public void isAccessibilityButtonLocationConfigurable_gestureNavigationOff_returnsTrue() {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON);
+
+        assertThat(AccessibilityUtil.isAccessibilityButtonLocationConfigurable(mContext)).isTrue();
+    }
+
+    @Test
+    public void isAccessibilityButtonLocationConfigurable_gestureNavigationOn_navBarCanMove() {
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.NAVIGATION_MODE,
+                WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL);
+        SettingsShadowResources.overrideResource(com.android.internal.R.bool.config_navBarCanMove,
+                true);
+
+        assertThat(AccessibilityUtil.isAccessibilityButtonLocationConfigurable(mContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(android.view.accessibility.Flags.FLAG_ALLOW_A11Y_BUTTON_ON_LARGE_SCREEN)
+    public void isAccessibilityButtonLocationConfigurable_gestureNavigationOn_navBarCannotMove() {
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.NAVIGATION_MODE,
+                WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL);
+        SettingsShadowResources.overrideResource(com.android.internal.R.bool.config_navBarCanMove,
+                false);
+
+        assertThat(AccessibilityUtil.isAccessibilityButtonLocationConfigurable(mContext)).isTrue();
+    }
+
+    @Test
+    @DisableFlags(android.view.accessibility.Flags.FLAG_ALLOW_A11Y_BUTTON_ON_LARGE_SCREEN)
+    public void isAccessibilityButtonLocationConfigurable_flagOff() {
+        Settings.Secure.putInt(mContext.getContentResolver(), Settings.Secure.NAVIGATION_MODE,
+                WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL);
+        SettingsShadowResources.overrideResource(com.android.internal.R.bool.config_navBarCanMove,
+                false);
+
+        assertThat(AccessibilityUtil.isAccessibilityButtonLocationConfigurable(mContext)).isFalse();
     }
 
     private AccessibilityServiceInfo getMockAccessibilityServiceInfo() {

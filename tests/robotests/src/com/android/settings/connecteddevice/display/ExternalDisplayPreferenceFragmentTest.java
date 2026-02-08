@@ -830,7 +830,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
                 mContext, /* enabled= */ true);
         assertThat(indexData).hasSize(1);
         assertThat(indexData.getFirst().screenTitle).contains(
-                mContext.getString(R.string.device_dashboard_display_title));
+                mContext.getString(R.string.display_settings));
         assertThat(indexData.getFirst().keywords).isEqualTo(
                 mContext.getString(R.string.keywords_external_display_settings));
         assertThat(indexData.getFirst().title).isEqualTo(

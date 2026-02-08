@@ -307,7 +307,7 @@
     <string name="apply" msgid="7834684883190163536">"Appliquer"</string>
     <string name="share" msgid="8502235338607613795">"Partager"</string>
     <string name="add" msgid="8335206931421683426">"Ajouter"</string>
-    <string name="verify" msgid="6452664472920137535">"Vérifier"</string>
+    <string name="verify" msgid="6452664472920137535">"Valider"</string>
     <string name="remove" msgid="1028414219245072102">"Retirer"</string>
     <string name="process" msgid="2614220641928709668">"Processus"</string>
     <string name="dismiss" msgid="7878176050401175851">"Fermer"</string>
@@ -358,11 +358,11 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"Par exemple : Android de Jonathan."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Localisation"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Utiliser la localisation"</string>
-    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Désactivé"</string>
+    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Désactivée"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activée/# appli a accès à la position}one{Activée/# appli a accès à la position}other{Activée/# applis ont accès à la position}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Chargement en cours…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Les applis qui possèdent l\'autorisation de détection des appareils à proximité peuvent déterminer la position relative des appareils connectés."</string>
-    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"L\'accès à la position est désactivé pour les applis et les services. La position de votre appareil pourrait quand même être envoyée aux agents d\'intervention lorsque vous communiquez avec un numéro d\'urgence."</string>
+    <string name="location_settings_footer_location_off_with_telephony" msgid="5600725945541382556">"L\'accès à la localisation est désactivé pour les applis et les services. La position de votre appareil pourrait quand même être envoyée aux agents d\'intervention lorsque vous communiquez avec un numéro d\'urgence."</string>
     <string name="location_settings_footer_location_off_no_telephony" msgid="2709958040008816610">"L\'accès à la position est désactivé pour les applis et les services."</string>
     <string name="location_settings_footer_learn_more_content_description" msgid="349380666660145540">"En savoir plus sur les paramètres de localisation"</string>
     <string name="location_settings_tooltip_text_for_chrome" msgid="5781821709250544575">"Pour modifier cela, accédez à Paramètres ChromeOS &gt; Confidentialité et sécurité &gt; Paramètres de confidentialité &gt; Accès à la localisation"</string>
@@ -412,6 +412,10 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Ignorer"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Vous avez ajouté le nombre maximal de visages"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Impossible d\'ajouter d\'autres visages"</string>
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
+    <skip />
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"L\'inscription n\'est pas terminée"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Le temps attribué pour l\'inscription des visages est écoulé. Veuillez essayer de nouveau."</string>
@@ -555,6 +559,14 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Toucher le capteur"</string>
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Touchez l\'interrupteur sans l\'enfoncer"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Comment configurer votre empreinte digitale"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_title" msgid="2560358942286362136">"Toucher le capteur d\'empreintes digitales"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_message" msgid="1440652109953064598">"Le capteur se trouve sur votre clavier, sur l\'interrupteur ou sur le côté de votre appareil."</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_left_message" msgid="9114169763600792562">"Le capteur d\'empreintes digitales se trouve dans le coin inférieur gauche de votre clavier"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_right_message" msgid="1259481399128590523">"Le capteur d\'empreintes digitales se trouve dans le coin inférieur droit de votre clavier"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_top_right_message" msgid="3676793246782964274">"Le capteur d\'empreintes digitales se trouve dans le coin supérieur droit de votre clavier"</string>
+    <string name="security_settings_enroll_find_sensor_right_side_message" msgid="4935349088172995426">"Le capteur d\'empreintes digitales se trouve sur le côté droit de votre appareil"</string>
+    <string name="security_settings_enroll_find_sensor_left_side_message" msgid="5826609754513683067">"Le capteur d\'empreintes digitales se trouve sur le côté gauche de votre appareil"</string>
+    <string name="security_settings_enroll_find_sensor_left_of_power_button_top_right_message" msgid="4384349514752161995">"Le capteur d\'empreintes digitales se trouve dans le coin supérieur droit de votre clavier, à côté de l\'interrupteur"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Il se trouve à l\'arrière de votre téléphone. Utilisez votre index."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Le capteur d\'empreintes digitales se trouve sur votre écran. Vous capturerez votre empreinte digitale au prochain écran."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Commencer"</string>
@@ -673,7 +685,7 @@
     <string name="private_space_auto_lock_after_device_restart" msgid="288755768725895029">"Seulement après le redémarrage de l\'appareil"</string>
     <string name="private_space_hide_page_title" msgid="3364639176511877414">"Masquer l\'espace privé"</string>
     <string name="private_space_hide_when_locked" msgid="6219472348124151797">"Masquer l\'espace privé lorsqu\'il est verrouillé"</string>
-    <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Pour empêcher les autres personnes de savoir que vous avez un espace privé sur votre appareil, vous pouvez le masquer à partir de votre liste d\'applis"</string>
+    <string name="private_space_hide_page_summary" msgid="6247773353685839242">"Pour empêcher les autres personnes de savoir que vous avez un espace privé sur votre appareil, vous pouvez le masquer dans votre liste d\'applis"</string>
     <string name="private_space_access_header" msgid="1077082416567150819">"Accéder à l\'espace privé lorsqu\'il est masqué"</string>
     <string name="private_space_search_description" msgid="1538155187658429618">"Dans la barre de recherche, saisissez « espace privé »"</string>
     <string name="private_space_tap_tile_description" msgid="6173556870938267361">"Touchez "<b>"Espace privé"</b></string>
@@ -688,7 +700,7 @@
     <string name="private_space_delete_header" msgid="4594429153176776184">"Supprimer l\'espace privé?"</string>
     <string name="private_space_accounts" msgid="1078277762792056395">"Les comptes suivants seront retirés de votre espace privé :"</string>
     <string name="private_space_delete_button_label" msgid="1256981385318225002">"Supprimer"</string>
-    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Suppression de l\'Espace privé en cours…"</string>
+    <string name="private_space_confirm_deletion_header" msgid="3468651585498942977">"Suppression de l\'espace privé en cours…"</string>
     <string name="private_space_deleted" msgid="7692240901492540053">"Espace privé supprimé"</string>
     <string name="private_space_delete_failed" msgid="7705795653796174741">"Impossible de supprimer l\'Espace privé"</string>
     <string name="private_space_unlocked" msgid="9091600948712932046">"Espace privé déverrouillé"</string>
@@ -957,10 +969,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Utiliser comme écran séparé"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Dupliquer l\'écran intégré"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Afficher la boîte de dialogue de connexion"</string>
-    <!-- no translation found for hdr_preference_title (1297374795868644828) -->
-    <skip />
-    <!-- no translation found for hdr_preference_summary (2557507660147446325) -->
-    <skip />
+    <string name="hdr_preference_title" msgid="1297374795868644828">"Utiliser le mode HDR"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"Permet d\'afficher une plus large gamme de couleurs et des tons clairs plus lumineux"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"L\'écran externe est déconnecté"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Rotation"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standard"</string>
@@ -998,7 +1008,7 @@
     <string name="wifi_display_status_in_use" msgid="5904009697167947449">"En cours d\'utilisation"</string>
     <string name="wifi_display_status_not_available" msgid="8463750208946968594">"Non disponible"</string>
     <string name="wifi_display_options_title" msgid="7584326966240865043">"Options d\'affichage sans fil"</string>
-    <string name="wifi_display_options_forget" msgid="3140558691112356024">"Supprimer"</string>
+    <string name="wifi_display_options_forget" msgid="3140558691112356024">"Retirer"</string>
     <string name="wifi_display_options_done" msgid="7608851767701954020">"Terminé"</string>
     <string name="wifi_display_options_name" msgid="8181334945680312228">"Nom"</string>
     <string name="wifi_band_24ghz" msgid="7322286660245127384">"2,4 GHz"</string>
@@ -1149,14 +1159,14 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Utilisez un code QR pour ajouter un appareil à ce réseau"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"Le format du code QR est incorrect"</string>
     <string name="retry" msgid="7542103800274026915">"Réessayer"</string>
-    <string name="shared_message" msgid="2104244057926025072">"partagé"</string>
-    <string name="private_message" msgid="5897966950396765392">"privé"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Changer"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"Annuler"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Partager le réseau"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Les autres utilisateurs de cet appareil peuvent accéder à ce réseau"</string>
-    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"Passer au réseau <xliff:g id="SHARED">%1$s</xliff:g>?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"Un réseau <xliff:g id="SHARED_0">%1$s</xliff:g> nommé « <xliff:g id="NETWORK_NAME">%2$s</xliff:g> » existe déjà. Si vous passez au réseau <xliff:g id="SHARED_1">%1$s</xliff:g>, vous quitterez votre réseau <xliff:g id="PRIVATE">%3$s</xliff:g> et vous pourriez perdre l\'accès à Internet temporairement."</string>
+    <string name="wifi_share_conflict_dialog_title" msgid="3758584730708042014">"Passer au réseau partagé?"</string>
+    <string name="wifi_share_conflict_dialog_message" msgid="4614968368961927940">"Un réseau partagé nommé « <xliff:g id="NETWORK_NAME">%1$s</xliff:g> » existe déjà. Si vous passez au réseau partagé, vous quitterez votre réseau privé et vous pourriez perdre l\'accès à Internet temporairement."</string>
+    <string name="wifi_private_conflict_dialog_title" msgid="10940608988441770">"Passer au réseau privé?"</string>
+    <string name="wifi_private_conflict_dialog_message" msgid="495022893355731972">"Un réseau privé nommé « <xliff:g id="NETWORK_NAME">%1$s</xliff:g> » existe déjà. Si vous passez au réseau privé, vous quitterez votre réseau partagé et vous pourriez perdre l\'accès à Internet temporairement."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(aucune modification)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Autor. utilis. à modif. rés."</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"D\'autres utilisateurs peuvent apporter des modifications à ce réseau"</string>
@@ -1182,12 +1192,12 @@
     <string name="lost_internet_access_switch" msgid="7935665847081706202">"Passer au réseau cellulaire"</string>
     <string name="lost_internet_access_cancel" msgid="1981171269794585284">"Rester connecté au Wi-Fi"</string>
     <string name="lost_internet_access_persist" msgid="6813604557672782197">"Ne plus afficher"</string>
-    <string name="wifi_connect" msgid="2481467560349907397">"Se connecter"</string>
+    <string name="wifi_connect" msgid="2481467560349907397">"Connecter"</string>
     <string name="wifi_connected_to_message" msgid="8976048616505112896">"Connecté à <xliff:g id="NETWORK_NAME">%1$s</xliff:g>"</string>
     <string name="wifi_connecting" msgid="7450277833386859724">"Connexion en cours…"</string>
     <string name="wifi_failed_connect_message" msgid="8538000546604347894">"Échec de la connexion au réseau."</string>
     <string name="wifi_not_in_range_message" msgid="3885327464037574739">"Réseau hors de portée"</string>
-    <string name="wifi_forget" msgid="3485573280364015620">"Supprimer"</string>
+    <string name="wifi_forget" msgid="3485573280364015620">"Retirer"</string>
     <string name="wifi_modify" msgid="5127926476383659412">"Modifier"</string>
     <string name="wifi_save" msgid="2312643132472226807">"Enregistrer"</string>
     <string name="wifi_failed_save_message" msgid="1830279872341387120">"Échec de l\'enregistrement du réseau."</string>
@@ -1328,7 +1338,7 @@
     <string name="private_dns_title" msgid="1180823690693258572">"Nom d\'hôte"</string>
     <string name="private_dns_field_require" msgid="2318400923953435586">"Ce champ est obligatoire"</string>
     <string name="private_dns_hostname_invalid" msgid="5085498734835552780">"Le nom d\'hôte saisi n\'est pas valide"</string>
-    <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"En savoir plus"</annotation>" sur la fonctionnalité de DNS privé"</string>
+    <string name="private_dns_help_message" msgid="851221502063782306"><annotation id="url">"En savoir plus"</annotation>" sur les fonctionnalités du DNS privé"</string>
     <string name="private_dns_mode_on" msgid="8878679071975375696">"Activé"</string>
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Activer les appels Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Activer les appels Wi-Fi"</string>
@@ -1441,7 +1451,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Utilisez un arrière-plan sombre pour rendre votre écran plus agréable à regarder et réduire l\'utilisation de la pile sur certains écrans. Votre thème changera si vous avez un programme, lorsque l\'écran est éteint."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"L\'activation du thème sombre suit actuellement votre horaire de mode Nuit"</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Paramètres du mode Nuit"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Les modes peuvent également activer le thème Sombre}=1{{mode_1} active également le thème Sombre}=2{{mode_1} et {mode_2} activent également le thème Sombre}=3{{mode_1}, {mode_2} et {mode_3} activent également le thème Sombre}one{{mode_1}, {mode_2} et # autre mode activent également le thème Sombre}other{{mode_1}, {mode_2} et # autres modes activent également le thème Sombre}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8510284128378660986">"{count,plural,offset:2 =0{Les modes peuvent également activer le thème Sombre.}=1{{mode_1} active également le thème Sombre.}=2{{mode_1} et {mode_2} activent également le thème Sombre.}=3{{mode_1}, {mode_2} et {mode_3} activent également le thème Sombre.}one{{mode_1}, {mode_2} et # autre mode activent également le thème Sombre.}other{{mode_1}, {mode_2} et # autres modes activent également le thème Sombre.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Paramètres des modes"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Améliorez la luminosité, la gamme de couleurs et la clarté des images et des vidéos avec imagerie à grande gamme dynamique (HDR). Le contenu HDR apparaîtra plus lumineux."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Délai de mise en veille de l\'écran"</string>
@@ -1483,7 +1493,7 @@
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"L\'horloge à faible luminosité s\'affiche lorsque votre environnement est sombre"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Affichage en mode Veille"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Activation du mode Veille"</string>
-    <string name="doze_title" msgid="1523090408230862316">"Activer écran si notifications"</string>
+    <string name="doze_title" msgid="1523090408230862316">"Activer l\'écran si notifications"</string>
     <string name="doze_summary" msgid="8252867381522942804">"Lorsque l\'écran est sombre, il s\'allume en cas de nouvelles notifications"</string>
     <string name="doze_always_on_title2" msgid="6806855871175589465">"Écran actif en permanence"</string>
     <string name="doze_always_on_summary" msgid="509097829739647852">"Utilisation accrue de la pile"</string>
@@ -1519,6 +1529,24 @@
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"Impossible d\'activer le NIP."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Annuler"</string>
+    <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Protéger la carte SIM"</string>
+    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"Protection de la carte SIM par verrouillage automatique"</string>
+    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"Gestion automatique du NIP"</string>
+    <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Géré par Android"</string>
+    <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Non géré par Android"</string>
+    <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Inscription réussie"</string>
+    <string name="sim_enrollment_failed" msgid="342422651961251317">"Échec de l\'inscription"</string>
+    <string name="sim_display_platform_managed_pin_title" msgid="6889806433509624620">"Afficher le NIP géré par Android"</string>
+    <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"NIP géré par Android"</string>
+    <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Valeur du NIP géré par Android :"</string>
+    <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Échec de la récupération du NIP"</string>
+    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"Protéger la carte SIM contre le vol"</string>
+    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"NIP de la carte SIM géré par Android"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"NIP de la carte SIM géré manuellement"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"L\'écran de verrouillage doit être configuré pour activer la protection de la carte SIM"</string>
+    <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Entrer le NIP actuel de la carte SIM"</string>
+    <string name="provide_current_sim_pin" msgid="2805396981527525822">"Entrez le NIP actuel de la carte SIM"</string>
+    <string name="use_carrier_default_pin" msgid="4777399918806287607">"Utiliser les paramètres par défaut de l\'opérateur"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Utiliser <xliff:g id="CARRIER">%1$s</xliff:g> pour les donn. cell.?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Vous utilisez <xliff:g id="CARRIER2_0">%2$s</xliff:g> pour les données cellulaires. Si vous passez à <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> ne sera plus utilisé pour les données cellulaires."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Utiliser le réseau de <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1590,7 +1618,7 @@
     <string name="storage_menu_format_public" msgid="5567214442727034630">"Formater comme mémoire externe"</string>
     <string name="storage_menu_format_option" msgid="4886059624052908432">"Formater"</string>
     <string name="storage_menu_migrate" msgid="2196088149560070193">"Transférer les données"</string>
-    <string name="storage_menu_forget" msgid="5154017890033638936">"Supprimer"</string>
+    <string name="storage_menu_forget" msgid="5154017890033638936">"Retirer"</string>
     <string name="storage_menu_set_up" msgid="4401074025612064744">"Configurer"</string>
     <string name="storage_menu_free" msgid="616100170298501673">"Libérer de l\'espace"</string>
     <string name="storage_menu_manage" msgid="7465522758801346408">"Gérer l\'espace de stockage"</string>
@@ -1744,8 +1772,8 @@
     <string name="tether_settings_title_bluetooth" msgid="8878813702520141084">"Partage connexion Bluetooth"</string>
     <string name="tether_settings_title_usb_bluetooth" msgid="4437274151658505496">"Partage de connexion"</string>
     <string name="tether_settings_title_all" msgid="6807525590937697228">"Point d\'accès sans fil et partage de connexion"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Point d\'accès activé, partage de connexion"</string>
-    <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Point d\'accès activé"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_on" msgid="6110241048260139633">"Point d\'accès sans fil activé, partage de connexion"</string>
+    <string name="tether_settings_summary_hotspot_on_tether_off" msgid="5057598961245943644">"Point d\'accès sans fil activé"</string>
     <string name="tether_settings_summary_hotspot_off_tether_on" msgid="7181518138494995888">"Partage de connexion"</string>
     <string name="tether_settings_disabled_on_data_saver" msgid="9054069463426952689">"Impossible de partager la connexion ou d\'utiliser des points d\'accès mobiles lorsque la fonction Économiseur de données est activée"</string>
     <string name="tether_settings_summary_hotspot_only" msgid="8529008147731140279">"Point d\'accès sans fil uniquement"</string>
@@ -2120,13 +2148,12 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Appuyez deux fois sur la touche Espace pour insérer « . »"</string>
     <string name="show_password" msgid="7101900779571040117">"Afficher les mots de passe"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Les caractères s\'affichent brièvement pendant la saisie"</string>
-    <!-- no translation found for show_secrets_touch_title (5683959933564965700) -->
+    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
     <skip />
-    <!-- no translation found for show_secrets_touch_summary (4533171516921235441) -->
+    <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Afficher les caractères brièvement pendant la saisie sur l\'écran tactile"</string>
+    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
     <skip />
-    <!-- no translation found for show_secrets_physical_title (4109609431714381217) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (4781058146462080269) -->
+    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
     <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Ce correcteur orthographique peut recueillir l\'ensemble du texte saisi, y compris des données personnelles comme des mots de passe et des numéros de carte de paiement. Il provient de l\'appli <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utiliser ce correcteur orthographique?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Paramètres"</string>
@@ -2271,7 +2298,7 @@
     <string name="gesture_summary_recent_apps" msgid="6643179135202417509">"Balayez vers le haut avec trois doigts, maintenez et relâchez"</string>
     <string name="gesture_title_notifications" msgid="791717222472350194">"Afficher notif. et param. rapides"</string>
     <string name="gesture_summary_notifications" msgid="8419514601638387255">"Balayez votre écran d\'accueil vers le bas avec trois doigts"</string>
-    <string name="gesture_title_switch_apps" msgid="5840994412037872157">"Changer d\'appli"</string>
+    <string name="gesture_title_switch_apps" msgid="5840994412037872157">"Changement d\'appli"</string>
     <string name="gesture_summary_switch_apps" msgid="6842648062151413042">"Balayez vers la gauche ou vers la droite avec quatre doigts"</string>
     <string name="gesture_button_skip" msgid="5174842083451193213">"Ignorer"</string>
     <string name="gesture_button_next" msgid="695288092704187356">"Suivant"</string>
@@ -2307,7 +2334,7 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Choisir une nouvelle touche pour <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g> :"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accessibilité du clavier physique"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Touches rémanentes, touches non répétées, touches de souris"</string>
-    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Touches de répétition"</string>
+    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Touches répétées"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Délai avant la répétition"</string>
     <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"Augmentez le délai"</string>
     <string name="keyboard_repeat_keys_decrease_delay_desc" msgid="6762794746507398346">"Réduisez le délai"</string>
@@ -2506,7 +2533,6 @@
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Zoomez rapidement pour agrandir le contenu"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Pour zoomer, procédez comme suit :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement.&lt;br/&gt; {1,number,integer}. Touchez l\'écran.&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour naviguer dans l\'écran.&lt;br/&gt; {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom.&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement.&lt;br/&gt;&lt;br/&gt;&lt;b&gt;Pour zoomer temporairement, procédez comme suit :&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Assurez-vous que le type d\'agrandissement est défini à plein écran.&lt;br/&gt; {1,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement.&lt;br/&gt; {2,number,integer}. Maintenez le doigt sur une zone de l\'écran.&lt;br/&gt; {3,number,integer}. Faites glisser un doigt pour naviguer dans l\'écran.&lt;br/&gt; {4,number,integer}. Levez le doigt pour arrêter l\'agrandissement."</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"<br/>Pour zoomer, procédez comme suit :<br/><br/> {0,number,integer} Utilisez le raccourci ou appuyez sur &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt;+&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt;+M pour démarrer l\'agrandissement.<br/> {1,number,integer}. Appuyez sur &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt;+touches fléchées pour vous déplacer sur l\'écran.<br/> {2,number,integer}. Appuyez sur &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt;+&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; et « + » ou « - » pour régler le zoom.<br/> {3,number,integer}. Utilisez le raccourci ou &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt;+&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt;+M pour arrêter l\'agrandissement."</string>
-    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"<br/>Pour zoomer, procédez comme suit :<br/><br/> {0,number,integer} Utilisez le raccourci pour commencer l\'agrandissement.<br/> {1,number,integer}. Appuyez sur &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt;+touches fléchées pour vous déplacer sur l\'écran.<br/> {2,number,integer}. Appuyez sur &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt;+&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; et « + » ou « - » pour régler le zoom.<br/> {3,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement."</string>
     <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"<br/>Clavier<br/><br/> {0,number,integer}. Utilisez le raccourci ou appuyez sur &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt;+&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt;+M pour démarrer l\'agrandissement.<br/> {1,number,integer}. Appuyez sur &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt;+touches fléchées pour vous déplacer sur l\'écran.<br/> {2,number,integer}. Appuyez sur &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt;+&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; et « + » ou « - » pour régler le zoom.<br/> {3,number,integer}. Utilisez le raccourci ou &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt;+&lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt;+M pour arrêter l\'agrandissement.<br/><br/> &lt;b&gt;Écran tactile<br/><br/> Pour zoomer, procédez comme suit :<br/> {0,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement.<br/> {1,number,integer}. Touchez l\'écran.<br/> {2,number,integer}. Faites glisser deux doigts pour naviguer dans l\'écran.<br/> {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom.<br/> {4,number,integer}. Utilisez le raccourci pour arrêter l\'agrandissement<br/><br/> Pour zoomer temporairement, procédez comme suit :<br/> {0,number,integer}. Assurez-vous que le type d\'agrandissement est défini à plein écran.<br/> {1,number,integer}. Utilisez le raccourci pour commencer l\'agrandissement.<br/> {2,number,integer}. Maintenez le doigt sur une zone de l\'écran.<br/> {3,number,integer}. Faites glisser un doigt pour naviguer dans l\'écran.<br/> {4,number,integer}. Levez le doigt pour arrêter l\'agrandissement."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Pour zoomer, procédez comme suit :&lt;/b&gt;&lt;br/&gt; {0,number,integer} Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {1,number,integer}. Touchez l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser deux doigts pour naviguer dans l\'écran&lt;br/&gt; {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'aggrandissement&lt;br/&gt;&lt;br/&gt; Vous pouvez aussi zoomer temporairement et plus."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Pour zoomer, procédez comme suit :&lt;/b&gt;&lt;br/&gt; {0,number,integer} Utilisez le raccourci pour commencer l\'agrandissement&lt;br/&gt; {1,number,integer}. Touchez l\'écran&lt;br/&gt; {2,number,integer}. Faites glisser un ou deux doigts pour naviguer dans l\'écran&lt;br/&gt; {3,number,integer}. Pincez l\'écran avec deux doigts pour ajuster le zoom&lt;br/&gt; {4,number,integer}. Utilisez le raccourci pour arrêter l\'aggrandissement&lt;br/&gt;&lt;br/&gt; Vous pouvez aussi zoomer temporairement et plus."</string>
@@ -2573,7 +2599,7 @@
     <string name="accessibility_button_intro" msgid="2601976470525277903">"Utilisez le bouton d\'accessibilité. Le geste n\'est pas proposé avec la navigation à trois boutons."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Accès rapide aux fonctionnalités d\'accessibilité"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Pour commencer&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Accédez aux paramètres d\'accessibilité.&lt;br/&gt; {1,number,integer}. Sélectionnez une fonctionnalité et touchez le raccourci.&lt;br/&gt; {2,number,integer}. Choisissez le bouton pour accéder à la fonctionnalité.&lt;br/&gt;"</string>
-    <string name="accessibility_button_location_title" msgid="7182107846092304942">"Position"</string>
+    <string name="accessibility_button_location_title" msgid="7182107846092304942">"Localisation"</string>
     <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Flottant par-dessus d\'autres applis"</string>
     <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Barre de navigation"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Taille"</string>
@@ -2602,11 +2628,13 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Active le thème Sombre pour votre appareil et les applis qui le prennent en charge"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Étendu"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Thème Sombre étendu"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Applique automatiquement le thème Sombre à la plupart des applis qui ne le prennent pas en charge, ce qui contribue à en améliorer l\'accessibilité."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Applique automatiquement le thème Sombre à la plupart des applis qui ne le prennent pas en charge, ce qui contribue à en améliorer l\'accessibilité"</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Si vous rencontrez des problèmes avec l\'option développée, utilisez l\'option standard."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"forcer l\'inversion, inversion des couleurs, contraste"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Thème Sombre étendu"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Paramètres du thème Sombre étendu"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Ouvrir les paramètres du thème Sombre étendu"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"Le thème Sombre étendu peut améliorer la lisibilité, mais peut entraîner un affichage incorrect de certaines applis.\n\nLes applis dont ce paramètre est désactivé utiliseront l\'option de thème Sombre standard."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Retirer les animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduisez les mouvements sur l\'écran"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Clignotement du curseur de texte"</string>
@@ -2744,6 +2772,12 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Appareils auditifs"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Appareils consignés"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Commandes de l\'appareil auditif"</string>
+    <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Sons"</string>
+    <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Notifications"</string>
+    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"Sonneries et alarmes"</string>
+    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Les sons seront diffusés par les appareils auditifs"</string>
+    <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"Les sons seront diffusés par le haut-parleur de l\'appareil"</string>
+    <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Les sons seront diffusés par les appareils auditifs et le haut-parleur de l\'appareil"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Raccourci pour appareils auditifs"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilité : prothèses auditives"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Améliore la compatibilité avec les phonocapteurs et réduit les bruits indésirables"</string>
@@ -2929,6 +2963,7 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Voir utilisation des dernières 24 heures"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Utilisation depuis la recharge complète"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
+    <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilisation de la pile par les applis"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Détails d\'utilisation"</string>
@@ -3364,7 +3399,7 @@
     <string name="vpn_connect" msgid="7102335248484045354">"Connexion"</string>
     <string name="vpn_replace" msgid="1533147558671640341">"Remplacer"</string>
     <string name="vpn_edit" msgid="5862301148429324911">"Modifier le profil RPV"</string>
-    <string name="vpn_forget" msgid="2913950864877236737">"Supprimer"</string>
+    <string name="vpn_forget" msgid="2913950864877236737">"Retirer"</string>
     <string name="vpn_connect_to" msgid="216709261691085594">"Se connecter à <xliff:g id="PROFILE">%s</xliff:g>"</string>
     <string name="vpn_disconnect_confirm" msgid="6356789348816854539">"Déconnecter ce RPV?"</string>
     <string name="vpn_disconnect" msgid="7753808961085867345">"Déconnecter"</string>
@@ -3628,12 +3663,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, CCP"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Appareil"</string>
-    <!-- no translation found for device_dashboard_summary (3847551449956082389) -->
-    <skip />
-    <!-- no translation found for device_dashboard_display_title (6053173876299389437) -->
-    <skip />
-    <!-- no translation found for device_dashboard_sound_title (1474805168827021884) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"Clavier, pavé tactile, affichage, son"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Affichage"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Son"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non accessible parce que la technologie CCP est désactivée"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour utiliser la fonctionnalité, installez d\'abord une appli de paiement"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Applis récentes, applis par défaut"</string>
@@ -3762,8 +3794,7 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"ccp, balise, lecteur"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"clavier, haptique, vibrer"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"écran externe, écran connecté, écran étendu, deuxième écran, écran intégré, organiser les écrans, dupliquer, taille de l\'écran, rotation, résolution, fréquence d\'actualisation"</string>
-    <!-- no translation found for keywords_text_cursor_blink_rate (7682963763334011148) -->
-    <skip />
+    <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"caret, caret de texte, curseur de texte, curseur, clignotement, intervalle de clignotement, fréquence de clignotement, animation, réduire l\'animation, retirer l\'animation"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume et vibration"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Volume du contenu multimédia"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volume de Google Cast"</string>
@@ -3805,7 +3836,7 @@
     <string name="live_caption_summary" msgid="7290150167089515457">"Obtenir des sous-titres pour les appels, les vidéos et d\'autres contenus multimédias"</string>
     <string name="live_caption_on_summary" msgid="8921561021882989495">"Activé/Obtenir des sous-titres pour les appels, les vidéos et d\'autres contenus multimédias"</string>
     <string name="live_caption_off_summary" msgid="6761535729357010911">"Désactivés – Obtenez des sous-titres pour les appels, les vidéos et d\'autres contenus multimédias"</string>
-    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"écouteurs filaires"</string>
+    <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Écouteurs filaires"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Le son des appareils multimédias compatibles devient plus immersif"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Désactivé"</string>
     <string name="spatial_summary_on_one" msgid="6239933399496282994">"Activé : <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
@@ -3907,7 +3938,7 @@
     <string name="zen_category_duration" msgid="7515850842082631460">"Durée des paramètres rapides"</string>
     <string name="sound_work_settings" msgid="752627453846309092">"Sons du profil professionnel"</string>
     <string name="work_use_personal_sounds_title" msgid="7729428677919173609">"Utiliser les sons du profil personnel"</string>
-    <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Utiliser les mêmes sons que votre profil personnel"</string>
+    <string name="work_use_personal_sounds_summary" msgid="608061627969077231">"Utilisez les mêmes sons que votre profil personnel"</string>
     <string name="work_ringtone_title" msgid="4810802758746102589">"Sonnerie du téléphone professionnel"</string>
     <string name="work_notification_ringtone_title" msgid="2955312017013255515">"Son par défaut des notifications du profil professionnel"</string>
     <string name="work_alarm_ringtone_title" msgid="3369293796769537392">"Son par défaut des alarmes du profil professionnel"</string>
@@ -3937,8 +3968,8 @@
     <string name="notification_history_summary" msgid="5434741516307706892">"Affichez les notifications récentes et reportées"</string>
     <string name="notification_history" msgid="8663811361243456201">"Historique des notifications"</string>
     <string name="notification_history_toggle" msgid="9093762294928569030">"Utiliser l\'historique des notifications"</string>
-    <string name="notification_history_off_title_extended" msgid="853807652537281601">"L\'historique des notifications a été désactivé"</string>
-    <string name="notification_history_off_summary" msgid="671359587084797617">"Activez l\'historique des notifications pour afficher les anciennes notifications et les notifications reportées"</string>
+    <string name="notification_history_off_title_extended" msgid="853807652537281601">"L\'historique des notifications est désactivé"</string>
+    <string name="notification_history_off_summary" msgid="671359587084797617">"Activez l\'historique des notifications pour afficher les notifications récentes et reportées"</string>
     <string name="history_toggled_on_title" msgid="4518001110492652830">"Aucune notification récente"</string>
     <string name="history_toggled_on_summary" msgid="9034278971358282728">"Vos notifications récentes et celles que vous avez reportées s\'afficheront ici"</string>
     <string name="notification_history_view_settings" msgid="5269317798670449002">"afficher les paramètres de notification"</string>
@@ -4051,7 +4082,7 @@
     <string name="clear" msgid="5092178335409471100">"Effacer"</string>
     <string name="clear_conversation" msgid="5564321180363279096">"Effacer <xliff:g id="CONVERSATION_NAME">%1$s</xliff:g>"</string>
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"Les conversations prioritaires et modifiées s\'afficheront ici"</string>
-    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Lorsque vous marquez des conversations comme prioritaires, ou si vous apportez d\'autres modifications aux conversations, elles s\'affichent ici. \n\nPour modifier les paramètres de conversation : \nbalayez l\'écran du haut vers le bas pour ouvrir le volet déroulant, puis maintenez le doigt sur une conversation."</string>
+    <string name="conversation_onboarding_summary" msgid="2484845363368486941">"Lorsque vous modifiez des conversations ou les marquez comme prioritaires, elles s\'affichent ici. \n\nPour modifier les paramètres de conversation : \nbalayez l\'écran du haut vers le bas pour ouvrir le volet déroulant, puis maintenez le doigt sur une conversation."</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"Réduire"</string>
     <string name="notification_importance_high_title" msgid="394129291760607808">"Afficher sur l\'écran"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"Mode Silencieux"</string>
@@ -4126,7 +4157,7 @@
     <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Toujours développer"</string>
     <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Ne jamais développer"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"Appliquer ce paramètre aux applis du profil professionnel"</string>
-    <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance pour la réalité virtuelle"</string>
+    <string name="vr_listeners_title" msgid="4960357292472540964">"Services d\'assistance pour la RV"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"Aucune demande d\'exécution en tant que services d\'assistance pour la réalité virtuelle n\'a été envoyée pour les applis installées."</string>
     <string name="vr_listener_security_warning_title" msgid="7026351795627615177">"Autoriser <xliff:g id="SERVICE">%1$s</xliff:g> à accéder au service de réalité virtuelle?"</string>
     <string name="vr_listener_security_warning_summary" msgid="1888843557687017791">"L\'écouteur <xliff:g id="VR_LISTENER_NAME">%1$s</xliff:g> pourra être exécuté lorsque vous utiliserez des applis en mode Réalité virtuelle."</string>
@@ -4332,7 +4363,7 @@
     <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"Le nom du mode est obligatoire"</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Sélectionner une icône"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Événements d\'agenda"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Routine Heure du coucher"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Routine Coucher"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"En conduisant"</string>
     <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"Dans les transports en commun"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Paramètres de l\'appli"</string>
@@ -4601,7 +4632,7 @@
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatisation de l\'écran"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Cette appli pourra voir le contenu de l\'écran d\'autres applis et interagir avec celui-ci pour vous aider à accomplir des tâches, même lorsque les applis sont en arrière-plan"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Si vous n\'autorisez pas l\'automatisation de l\'écran, <xliff:g id="ID_1">%1$s</xliff:g> peut toujours être en mesure d\'interagir avec les applis connectées à <xliff:g id="ID_2">%1$s</xliff:g> d\'autres manières"</string>
-    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Autoriser les applis à vous aider à effectuer des tâches en interagissant avec le contenu de l\'écran d\'autres applis"</string>
+    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Autorisez les applis à vous aider à effectuer des tâches en interagissant avec le contenu de l\'écran d\'autres applis"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Toujours demander"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Toujours autoriser"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Ne pas autoriser"</string>
@@ -4611,7 +4642,7 @@
     <string name="write_system_preferences_page_title" msgid="4775435310385611055">"Modifier les paramètres système"</string>
     <string name="write_system_preferences_switch_title" msgid="213522354119233085">"Autoriser cette appli à modifier les préférences système en votre nom"</string>
     <string name="write_system_preferences_footer_description" msgid="8645052087619752514">"Cette autorisation permet à une appli de modifier les préférences système principales."</string>
-    <string name="media_management_apps_title" msgid="8222942355578724582">"Applis de gestion des fichiers multimédias"</string>
+    <string name="media_management_apps_title" msgid="8222942355578724582">"Applis de gestion de contenu multimédia"</string>
     <string name="media_management_apps_toggle_label" msgid="166724270857067456">"Autoriser l\'appli à gérer fichiers multimédias"</string>
     <string name="media_management_apps_description" msgid="8000565658455268524">"Si vous l\'autorisez à le faire, cette appli peut modifier ou supprimer des fichiers multimédias créés à l\'aide d\'autres applis sans vous le demander. L\'appli doit avoir l\'autorisation d\'accéder aux fichiers et aux fichiers multimédias."</string>
     <string name="keywords_media_management_apps" msgid="7499959607583088690">"éléments multimédias, fichier, gestion, gestionnaire, gérer, modifier, éditeur, appli, appli, programme"</string>
@@ -4869,7 +4900,7 @@
     <string name="double_tap_power_for_camera_summary" msgid="1100926048598415509">"Pour ouvrir rapidement l\'appareil photo, appuyez deux fois sur l\'interrupteur. Cela fonctionne à partir de n\'importe quel écran."</string>
     <string name="double_tap_power_title" msgid="8129216801770589261">"Appuyer deux fois sur l\'interrupteur"</string>
     <string name="double_tap_power_enabled" msgid="7609935047996304482">"Utiliser la double pression"</string>
-    <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"Appuyez deux fois sur l\'interrupteur pour ouvrir"</string>
+    <string name="double_tap_power_target_action_category" msgid="2568741597095863728">"Appuyer deux fois sur l\'interrupteur pour ouvrir"</string>
     <string name="double_tap_power_camera_action_title" msgid="6641206739933181509">"Appareil photo"</string>
     <string name="double_tap_power_camera_action_summary" msgid="4942585540579590444">"Ouvrez Appareil photo"</string>
     <string name="double_tap_power_wallet_action_title" msgid="2460162990983117189">"Portefeuille"</string>
@@ -5335,6 +5366,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Connectivité par satellite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"Connectivité par satellite"</string>
+    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
+    <skip />
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"L\'utilisation des applis prises en charge est comprise dans votre compte"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Les données pour toutes les applis sont incluses dans votre compte"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Applis prises en charge sur votre téléphone"</string>
@@ -5714,7 +5747,7 @@
     <string name="virtual_device_unknown" msgid="3592486476918448088">"Appareil inconnu"</string>
     <string name="virtual_device_details_title" msgid="2298529342462505596">"Détails de l\'appareil"</string>
     <string name="virtual_device_forget_dialog_title" msgid="4589091802540229362">"Oublier <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <string name="virtual_device_forget_dialog_confirm_button" msgid="2700888112027110344">"Oublier"</string>
+    <string name="virtual_device_forget_dialog_confirm_button" msgid="2700888112027110344">"Retirer"</string>
     <string name="virtual_device_companion_app_category" msgid="2795042145688252495">"Connexion gérée par"</string>
     <string name="uwb_settings_title" msgid="8578498712312002231">"Bande ultralarge (BUL)"</string>
     <string name="uwb_settings_summary" msgid="3074271396764672268">"Aide à déterminer la position relative des appareils à proximité qui utilisent la connectivité à bande ultralarge"</string>
@@ -5995,13 +6028,13 @@
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"contacts, stockage, compte"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Stockage des contacts"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Appareil uniquement"</string>
-    <string name="contacts_storage_device_only_preference_summary" msgid="8585284581093336284">"Les contacts peuvent ne pas être synchronisés ni accessibles sur d\'autres appareils"</string>
+    <string name="contacts_storage_device_only_preference_summary" msgid="8585284581093336284">"Les contacts ne devraient pas être synchronisés ni accessibles sur d\'autres appareils"</string>
     <string name="contacts_storage_selection_message" msgid="8082077300632059003">"Les contacts seront enregistrés sur votre appareil et synchronisés avec votre compte par défaut"</string>
     <string name="contacts_storage_set_default_account_error_message" msgid="849847649756411393">"Erreur lors de la définition du compte par défaut"</string>
     <string name="contacts_storage_no_account_set_summary" msgid="7454973781666475276">"Aucun compte par défaut n\'a été défini"</string>
     <string name="contacts_storage_local_account_summary" msgid="5034805108128685712">"Appareil uniquement"</string>
     <string name="contacts_storage_account_title" msgid="7334522539665856395">"Appareil et %1$s"</string>
-    <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Ajoutez un compte pour commencer"</string>
+    <string name="contacts_storage_first_time_add_account_message" msgid="5161093169928132323">"Ajouter un compte pour commencer"</string>
     <string name="contacts_storage_account_category_title" msgid="6427149157377815586">"Où enregistrer les contacts"</string>
     <string name="search_gesture_feature_title" msgid="7037117019612710960">"Encercler et rechercher"</string>
     <string name="search_gesture_feature_summary" msgid="1793056495030564014">"Maintenez le doigt sur la touche d\'accueil ou sur la barre de navigation pour effectuer une recherche à l\'aide du contenu de votre écran."</string>
@@ -6029,8 +6062,8 @@
     <string name="supervision_pin_updated" msgid="660463938258442344">"NIP mis à jour"</string>
     <string name="supervision_pin_changed" msgid="4822686882868075710">"NIP modifié"</string>
     <string name="supervision_pin_deleted" msgid="368631223166018476">"NIP supprimé"</string>
-    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"Vérifier les données de récupération"</string>
-    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"Votre compte de récupération n\'a pas été vérifié. Pour effectuer la validation, vous devrez saisir le mot de passe du compte."</string>
+    <string name="supervision_recovery_banner_title_verify" msgid="94833947387963488">"Valider les données de récupération"</string>
+    <string name="supervision_recovery_banner_summary_verify" msgid="1463391385277996666">"Votre compte de récupération n\'a pas été validé. Pour effectuer la validation, vous devrez saisir le mot de passe du compte."</string>
     <string name="supervision_recovery_banner_title_add" msgid="4124903663348389949">"Ajouter des données de récupération"</string>
     <string name="supervision_recovery_banner_summary_add" msgid="6989861841264157457">"Si vous oubliez votre NIP, vous pouvez utiliser votre compte pour le réinitialiser"</string>
     <string name="supervision_delete_pin_preference_title" msgid="8447541098148430866">"Supprimer le NIP"</string>
@@ -6038,9 +6071,9 @@
     <string name="supervision_verify_pin_recovery_title" msgid="6452759874064092217">"Valider les données de récupération"</string>
     <string name="supervision_app_store_filters_title" msgid="3358631395247752727">"Filtres de la boutique d\'applis"</string>
     <string name="supervision_app_store_filters_keywords" msgid="8281936888718160336">"Filtres d\'applis, filtres d\'applis pour adultes, filtres pour adultes, applis explicites, bloquer des applis, bloquer les applis explicites, bloquer les applis pour adultes"</string>
-    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrer les applis en fonction de la maturité de leur contenu"</string>
+    <string name="supervision_app_store_filters_top_intro" msgid="6578154226139006984">"Filtrez les applis en fonction de la classification relative aux catégories d\'âge de leur contenu"</string>
     <string name="supervision_app_store_filters_footer_content" msgid="8782299039136703625">"Chaque boutique évalue le contenu différemment. La note d\'une appli peut varier d\'une boutique à l\'autre."</string>
-    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtrer les applis par classification du contenu"</string>
+    <string name="supervision_app_store_filters_summary" msgid="7953506045105313815">"Filtrez les applis par classification du contenu"</string>
     <string name="supervision_web_content_filters_title" msgid="3653430162065686156">"Filtres de contenu Web"</string>
     <string name="supervision_web_content_filters_keywords" msgid="8469519676189544447">"Filtres de sites Web, bloquer les sites, filtres de navigateur, bloquer les sites explicites, filtrer les sites, bloquer les résultats de recherche, filtrer les résultats de recherche explicites, restrictions liées au contenu"</string>
     <string name="supervision_web_content_filters_browser_title" msgid="8737341514264129889">"Sites Web"</string>
@@ -6129,7 +6162,7 @@
     <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Confidentialité, Tableau de bord de confidentialité"</string>
     <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Espace privé"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Plus d\'alertes"</string>
-    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Moins d\'alertes"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"Moins d\'alertes"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertes fermées"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Fermer cette alerte?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Passez en revue les paramètres de sécurité et de confidentialité à tout moment pour renforcer votre protection."</string>
@@ -6156,13 +6189,13 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Page de destination du satellite"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Essayer une démo"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Découvrir le fonctionnement"</string>
-    <!-- no translation found for landing_page_footer_text_lte (8788085197575734787) -->
-    <skip />
+    <string name="landing_page_footer_text_lte" msgid="8788085197575734787">"Lorsque vous perdez le signal cellulaire et Wi-Fi, votre téléphone tentera de se connecter au satellite. Votre téléphone se reconnectera à un réseau cellulaire ou Wi-Fi lorsqu\'il sera accessible.\n\nImportant : Les appels par satellite ne sont pas offerts. Toutefois, les appels d\'urgence pourraient tout de même être reçus."</string>
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Pour une connexion optimale, tenez le téléphone sous un ciel dégagé. Votre téléphone se reconnectera à un réseau cellulaire lorsqu\'il sera accessible. Les appels par satellite ne sont pas accessibles. Les appels d\'urgence pourraient tout de même être reçus."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"En savoir plus sur la connectivité par satellite"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Lancer la démo de SOS par satellite"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Applis satellites"</string>
-    <string name="satellite_emergency_sos" msgid="5598135807261930736">"Appel d\'urgence"</string>
+    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
+    <skip />
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Connectivité par satellite accessible"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Accédez facilement aux informations sur les satellites en ajoutant la tuile Satellite aux Paramètres rapides"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Ajouter la tuile"</string>
@@ -6178,10 +6211,9 @@
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Afficher les régions prises en charge"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Modifier l\'appli par défaut"</string>
     <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Afficher les paramètres de l\'opérateur"</string>
-    <!-- no translation found for unknown_location_warning (2547687229551053971) -->
-    <skip />
-    <!-- no translation found for unknown_location_warning_button (2223709540054752411) -->
-    <skip />
-    <!-- no translation found for unprovisioned_device_warning (1275456484320369400) -->
-    <skip />
+    <string name="unknown_location_warning" msgid="2547687229551053971">"Pour savoir si SOS par satellite est accessible à votre position actuelle, activez la localisation dans les paramètres"</string>
+    <string name="unknown_location_warning_button" msgid="2223709540054752411">"Activer la localisation"</string>
+    <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Votre appareil n\'est pas inscrit à SOS par satellite. Vérifiez que vous êtes connecté à Internet pour que l\'inscription de votre appareil se fasse automatiquement."</string>
+    <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Activer le service d\'installation d\'applis Web"</string>
+    <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Activez ce service pour installer des sites Web directement sur votre écran d\'accueil et les utiliser comme des applis ordinaires."</string>
 </resources>

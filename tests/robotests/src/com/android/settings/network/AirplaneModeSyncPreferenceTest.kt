@@ -16,10 +16,20 @@
 
 package com.android.settings.network
 
+import android.app.Application
 import android.app.settings.SettingsEnums.ACTION_AIRPLANE_MODE_SYNC_TOGGLE
 import android.bluetooth.BluetoothAdapter
+import android.companion.AssociationInfo
+import android.companion.AssociationRequest
+import android.companion.CompanionDeviceManager
+import android.companion.CompanionDeviceManager.FEATURE_CROSS_DEVICE_SYNC
+import android.companion.CompanionDeviceManager.FLAG_AIRPLANE_MODE
+import android.companion.DevicePresenceEvent
 import android.content.Context
 import android.content.Intent
+import android.os.PersistableBundle
+import android.os.UserHandle
+import android.os.UserHandle.USER_ALL
 import android.provider.Settings.Global
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
@@ -32,23 +42,40 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
+import java.util.function.Consumer
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.clearInvocations
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
 import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowBluetoothAdapter
+import org.robolectric.shadows.ShadowContextImpl
 import org.robolectric.shadows.ShadowLooper
 
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowBluetoothAdapter::class])
 class AirplaneModeSyncPreferenceTest {
 
-    private val context: Context = ApplicationProvider.getApplicationContext()
-    private val preference = AirplaneModeSyncPreference()
+    private val context = ApplicationProvider.getApplicationContext<Application>()
+    private val companionDeviceManager = mock<CompanionDeviceManager>()
+    private lateinit var preference: AirplaneModeSyncPreference
     private val bluetoothAdapter: ShadowBluetoothAdapter =
         Shadow.extract(BluetoothAdapter.getDefaultAdapter())
+
+    @Before
+    fun setUp() {
+        Shadow.extract<ShadowContextImpl>(context.baseContext)
+            .setSystemService(Context.COMPANION_DEVICE_SERVICE, companionDeviceManager)
+        preference = AirplaneModeSyncPreference(context)
+    }
 
     @Test
     fun key_returnsCorrectKey() {
@@ -61,15 +88,33 @@ class AirplaneModeSyncPreferenceTest {
     }
 
     @Test
-    fun isEnabled_whenBluetoothEnabled_returnsTrue() {
+    fun isEnabled_whenBluetoothEnabledAndWatchPresent_returnsTrue() {
         bluetoothAdapter.setEnabled(true)
+        setupWatch()
 
         assertThat(preference.isEnabled(context)).isTrue()
     }
 
     @Test
-    fun isEnabled_whenBluetoothDisabled_returnsFalse() {
+    fun isEnabled_whenBluetoothEnabledAndNoWatchPresent_returnsFalse() {
+        bluetoothAdapter.setEnabled(true)
+        setupWatch(isPresent = false)
+
+        assertThat(preference.isEnabled(context)).isFalse()
+    }
+
+    @Test
+    fun isEnabled_whenBluetoothDisabledAndWatchPresent_returnsFalse() {
         bluetoothAdapter.setEnabled(false)
+        setupWatch()
+
+        assertThat(preference.isEnabled(context)).isFalse()
+    }
+
+    @Test
+    fun isEnabled_whenBluetoothDisabledAndNoWatchPresent_returnsFalse() {
+        bluetoothAdapter.setEnabled(false)
+        setupWatch(isPresent = false)
 
         assertThat(preference.isEnabled(context)).isFalse()
     }
@@ -115,12 +160,40 @@ class AirplaneModeSyncPreferenceTest {
     fun storage_notifiesChange_whenBluetoothStateChanges() {
         val storage = preference.storage(context)
         val observer = mock<KeyedObserver<String?>>()
-        storage.addObserver(observer) { it.run() }
+        storage.addObserver(observer, Runnable::run)
 
         context.sendBroadcast(Intent(BluetoothAdapter.ACTION_STATE_CHANGED))
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
         verify(observer).onKeyChanged(Global.AIRPLANE_MODE_SYNC, PreferenceChangeReason.STATE)
+    }
+
+    @Test
+    fun storage_notifiesChange_whenDevicePresenceChanges() {
+        bluetoothAdapter.setEnabled(true)
+        val observer = mock<KeyedObserver<String?>>()
+        setupWatch(isPresent = false, observer)
+        assertThat(preference.isEnabled(context)).isFalse()
+        clearInvocations(observer)
+
+        val listenerCaptor = argumentCaptor<Consumer<DevicePresenceEvent>>()
+        verify(companionDeviceManager)
+            .setOnDevicePresenceEventListener(
+                eq(intArrayOf(1)),
+                eq(context.packageName),
+                any(),
+                listenerCaptor.capture(),
+            )
+        companionDeviceManager.stub { on { isDevicePresent(1) } doReturn true }
+        listenerCaptor.lastValue.accept(
+            DevicePresenceEvent.Builder()
+                .setEvent(DevicePresenceEvent.EVENT_BT_CONNECTED)
+                .setAssociationId(1)
+                .build()
+        )
+
+        verify(observer).onKeyChanged(Global.AIRPLANE_MODE_SYNC, PreferenceChangeReason.STATE)
+        assertThat(preference.isEnabled(context)).isTrue()
     }
 
     @Test
@@ -136,6 +209,7 @@ class AirplaneModeSyncPreferenceTest {
     @Test
     fun createAndBindWidget_whenBluetoothIsDisabled_switchIsNotChecked() {
         bluetoothAdapter.setEnabled(false)
+        setupWatch()
         Global.putInt(context.contentResolver, Global.AIRPLANE_MODE_SYNC, 1)
 
         val switchPreference = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
@@ -146,6 +220,7 @@ class AirplaneModeSyncPreferenceTest {
     @Test
     fun createAndBindWidget_whenSettingIsTrue_switchIsChecked() {
         bluetoothAdapter.setEnabled(true)
+        setupWatch()
         Global.putInt(context.contentResolver, Global.AIRPLANE_MODE_SYNC, 1)
 
         val switchPreference = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
@@ -156,6 +231,7 @@ class AirplaneModeSyncPreferenceTest {
     @Test
     fun createAndBindWidget_whenSettingIsNotSet_switchIsChecked() {
         bluetoothAdapter.setEnabled(true)
+        setupWatch()
         Global.putString(context.contentResolver, Global.AIRPLANE_MODE_SYNC, null)
 
         val switchPreference = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
@@ -175,6 +251,7 @@ class AirplaneModeSyncPreferenceTest {
     @Test
     fun performClick_whenSettingIsFalse_enablesSettingAndIsChecked() {
         bluetoothAdapter.setEnabled(true)
+        setupWatch()
         Global.putInt(context.contentResolver, Global.AIRPLANE_MODE_SYNC, 0)
         val switchPreference = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
 
@@ -186,6 +263,7 @@ class AirplaneModeSyncPreferenceTest {
     @Test
     fun performClickTwice_whenSettingIsFalse_disablesSettingAndIsNotChecked() {
         bluetoothAdapter.setEnabled(true)
+        setupWatch()
         Global.putInt(context.contentResolver, Global.AIRPLANE_MODE_SYNC, 0)
         val switchPreference = preference.createAndBindWidget<SwitchPreferenceCompat>(context)
 
@@ -194,5 +272,28 @@ class AirplaneModeSyncPreferenceTest {
 
         assertThat(Global.getInt(context.contentResolver, Global.AIRPLANE_MODE_SYNC)).isEqualTo(0)
         assertThat(switchPreference.isChecked).isFalse()
+    }
+
+    private fun setupWatch(isPresent: Boolean = true, observer: KeyedObserver<String?> = mock()) {
+        val metadata =
+            PersistableBundle().apply {
+                putPersistableBundle(
+                    FEATURE_CROSS_DEVICE_SYNC,
+                    PersistableBundle().apply { putBoolean(APM_SYNC_SUPPORTED, true) },
+                )
+            }
+        val associationInfo =
+            AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
+                .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)
+                .setDisplayName("Watch")
+                .setMetadata(metadata)
+                .setSystemDataSyncFlags(FLAG_AIRPLANE_MODE)
+                .build()
+
+        companionDeviceManager.stub {
+            on { getAllAssociations(USER_ALL) } doReturn listOf(associationInfo)
+            on { isDevicePresent(1) } doReturn isPresent
+        }
+        preference.storage(context).addObserver(observer, Runnable::run)
     }
 }

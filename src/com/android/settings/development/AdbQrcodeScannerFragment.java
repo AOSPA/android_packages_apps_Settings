@@ -45,14 +45,10 @@ import android.widget.TextView;
 import androidx.annotation.StringRes;
 
 import com.android.settings.R;
-import com.android.settings.SetupWizardUtils;
 import com.android.settings.wifi.dpp.AdbQrCode;
 import com.android.settings.wifi.dpp.WifiDppQrCodeBaseFragment;
 import com.android.settings.wifi.dpp.WifiNetworkConfig;
 import com.android.settingslib.qrcode.QrCamera;
-import com.android.settingslib.qrcode.QrDecorateView;
-
-import com.google.android.setupdesign.util.ThemeHelper;
 
 /**
  * Fragment shown when clicking on the "Pair by QR code" preference in
@@ -74,7 +70,6 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
 
     private QrCamera mCamera;
     private TextureView mTextureView;
-    private QrDecorateView mDecorateView;
     private View mQrCameraView;
     private View mVerifyingView;
     private TextView mVerifyingTextView;
@@ -148,9 +143,6 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Context context = getContext();
-        context.setTheme(SetupWizardUtils.getTheme(context, getActivity().getIntent()));
-        ThemeHelper.trySetDynamicColor(getContext());
         super.onCreate(savedInstanceState);
 
         mIntentFilter = new IntentFilter(AdbManager.WIRELESS_DEBUG_PAIRING_RESULT_ACTION);
@@ -170,10 +162,9 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
         mTextureView = (TextureView) view.findViewById(R.id.preview_view);
         mTextureView.setSurfaceTextureListener(this);
 
-        mDecorateView = view.findViewById(R.id.decorate_view);
         setProgressBarShown(false);
 
-        mQrCameraView = view.findViewById(R.id.camera_layout);
+        mQrCameraView = view.findViewById(R.id.camera_container);
         mVerifyingView = view.findViewById(R.id.verifying_layout);
         mVerifyingTextView = view.findViewById(R.id.verifying_textview);
 
@@ -282,7 +273,6 @@ public class AdbQrcodeScannerFragment extends WifiDppQrCodeBaseFragment implemen
     @Override
     public void handleSuccessfulResult(String qrCode) {
         destroyCamera();
-        mDecorateView.setFocused(true);
         mQrCameraView.setVisibility(View.GONE);
         mVerifyingView.setVisibility(View.VISIBLE);
         AdbQrCode.triggerVibrationForQrCodeRecognition(getContext());

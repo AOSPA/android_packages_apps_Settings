@@ -20,6 +20,7 @@ import static com.android.settings.localepicker.LocaleUtils.getFirstTranslatedLo
 import static com.android.settings.localepicker.LocaleUtils.getUserLocaleList;
 import static com.android.settings.localepicker.LocaleUtils.mayAppendUnicodeTags;
 import static com.android.settings.localepicker.RegionAndNumberingSystemPickerFragment.EXTRA_IS_NUMBERING_SYSTEM;
+import static com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.sameLanguageAndScript;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -423,19 +424,5 @@ public abstract class LocalePickerBaseListPreferenceController extends
             }
         }
         return index;
-    }
-
-    private static boolean sameLanguageAndScript(Locale source, Locale target) {
-        String sourceLanguage = source.getLanguage();
-        String targetLanguage = target.getLanguage();
-        String sourceLocaleScript = source.getScript();
-        String targetLocaleScript = target.getScript();
-        if (sourceLanguage.equals(targetLanguage)) {
-            if (!sourceLocaleScript.isEmpty() && !targetLocaleScript.isEmpty()) {
-                return sourceLocaleScript.equals(targetLocaleScript);
-            }
-            return true;
-        }
-        return false;
     }
 }

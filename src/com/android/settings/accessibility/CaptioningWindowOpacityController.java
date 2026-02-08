@@ -25,6 +25,7 @@ import com.android.settings.R;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
 
 /** Preference controller for captioning window opacity. */
+// LINT.IfChange
 public class CaptioningWindowOpacityController extends BaseCaptioningCustomController
         implements OnValueChangedListener {
 
@@ -57,3 +58,4 @@ public class CaptioningWindowOpacityController extends BaseCaptioningCustomContr
         mCaptionHelper.setEnabled(true);
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptionColorPreferences.kt:caption_window_opacity_pref)

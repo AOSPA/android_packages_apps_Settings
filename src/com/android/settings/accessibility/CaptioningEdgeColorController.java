@@ -24,6 +24,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.accessibility.ListDialogPreference.OnValueChangedListener;
 
+// LINT.IfChange
 /** Preference controller for captioning edge color. */
 public class CaptioningEdgeColorController extends BaseCaptioningCustomController
         implements OnValueChangedListener {
@@ -52,3 +53,4 @@ public class CaptioningEdgeColorController extends BaseCaptioningCustomControlle
         mCaptionHelper.setEnabled(true);
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptionCustomProperties.kt:caption_edge_color_pref)

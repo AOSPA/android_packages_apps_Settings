@@ -1009,7 +1009,9 @@ public class ChooseLockPassword extends SettingsActivity {
                                 error.requirement,
                                 mIsAlphaMode
                                         ? R.string.lockpassword_password_too_short
-                                        : isSupervisingProfile
+                                        : (!android.app.supervision.flags.Flags
+                                                .enableSupervisionPinUiUpdatesBugfix()
+                                                && isSupervisingProfile)
                                                 ? R.string.supervision_pin_length_message
                                                 : R.string.lockpassword_pin_too_short);
                         if (!mIsAlphaMode

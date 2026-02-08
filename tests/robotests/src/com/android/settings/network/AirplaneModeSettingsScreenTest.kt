@@ -276,7 +276,7 @@ class AirplaneModeSettingsScreenTest {
                 )
             }
         mockCompanionDeviceManager.stub {
-            on { allAssociations } doReturn
+            on { getAllAssociations(UserHandle.USER_ALL) } doReturn
                 listOf(
                     AssociationInfo.Builder(1, UserHandle.myUserId(), context.packageName)
                         .setDeviceProfile(AssociationRequest.DEVICE_PROFILE_WATCH)

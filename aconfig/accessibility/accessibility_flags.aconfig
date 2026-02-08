@@ -4,6 +4,16 @@ container: "system_ext"
 # NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
 
 flag {
+  name: "allow_to_enter_dark_theme_settings_when_battery_saver"
+  namespace: "accessibility"
+  description: "Allow users to enter the dark theme settings page to change the option config during battery saver mode."
+  bug: "467786619"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
   name: "catalyst_a11y_button_shortcut_setting"
   namespace: "accessibility"
   description: "Migrate a11y button shortcut setting screen to the Catalyst infrastructure"

@@ -31,6 +31,7 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 @SearchIndexable
+// LINT.IfChange
 public class ContentProtectionPreferenceFragment extends DashboardFragment {
     private static final String TAG = "ContentProtectionPreferenceFragment";
     private static final String ILLUSTRATION_KEY =
@@ -43,7 +44,7 @@ public class ContentProtectionPreferenceFragment extends DashboardFragment {
     @VisibleForTesting
     public static final ContentProtectionSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new ContentProtectionSearchIndexProvider(
-                    R.layout.content_protection_preference_fragment);
+                    R.xml.content_protection_preference_fragment);
 
     @Override
     public void onAttach(Context context) {
@@ -62,7 +63,7 @@ public class ContentProtectionPreferenceFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.layout.content_protection_preference_fragment;
+        return R.xml.content_protection_preference_fragment;
     }
 
     @Override
@@ -97,3 +98,4 @@ public class ContentProtectionPreferenceFragment extends DashboardFragment {
         }
     }
 }
+// LINT.ThenChange(ContentProtectionScreenApi.kt)

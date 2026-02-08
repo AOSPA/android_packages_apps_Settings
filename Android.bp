@@ -177,12 +177,28 @@ platform_compat_config {
     system_ext_specific: true,
 }
 
+java_defaults {
+    name: "Settings_optimized_defaults",
+    optimize: {
+        enabled: true,
+        optimize: select(release_flag("RELEASE_SETTINGS_ENABLE_OPTIMIZE"), {
+            true: true,
+            default: false,
+        }),
+        shrink: true,
+        proguard_flags_files: [
+            ":Settings_proguard_flags",
+        ],
+    },
+}
+
 // Build the Settings APK
 android_app {
     name: "Settings",
     defaults: [
         "platform_app_defaults",
         "SpaPrivilegedLib-defaults",
+        "Settings_optimized_defaults",
     ],
     platform_apis: true,
     certificate: "platform",
@@ -196,9 +212,6 @@ android_app {
     uses_libs: ["org.apache.http.legacy"],
     use_resource_processor: true,
     resource_dirs: [],
-    optimize: {
-        proguard_flags_files: ["proguard.flags"],
-    },
     libs: [
         "extphonelib"
     ],

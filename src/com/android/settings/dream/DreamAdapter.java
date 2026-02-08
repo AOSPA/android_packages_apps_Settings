@@ -33,6 +33,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
@@ -50,6 +53,7 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
     private final List<DreamItemT> mItemList;
     private final MessageFormat mOrdinalFormat =
         new MessageFormat("{0,ordinal}", Locale.getDefault());
+    private final boolean mAllowMultiSelection;
     private int mLastSelectedPos = -1;
     private boolean mEnabled = true;
     private SparseIntArray mLayouts = new SparseIntArray();
@@ -90,7 +94,7 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
             }
 
             final Drawable icon;
-            if (dreamsSwitcher() && item.getOrder() >= 0) {
+            if (supportMultipleSelection() && item.getOrder() >= 0) {
                 icon = new NumberedIconDrawable(
                     mContext, item.getOrder() + 1, R.color.dream_card_color_state_list);
             } else {
@@ -114,7 +118,7 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
 
             itemView.setOnClickListener(v -> {
                 item.onItemClicked();
-                if (!dreamsSwitcher()) {
+                if (!supportMultipleSelection()) {
                     if (mLastSelectedPos > -1 && mLastSelectedPos != position) {
                         notifyItemChanged(mLastSelectedPos);
                     }
@@ -124,7 +128,20 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
 
             final boolean isActive = item.isActive();
             itemView.setSelected(isActive);
-            if (dreamsSwitcher()) {
+            if (supportMultipleSelection()) {
+                ViewCompat.setAccessibilityDelegate(itemView, new AccessibilityDelegateCompat() {
+                    @Override
+                    public void onInitializeAccessibilityNodeInfo(View host,
+                            AccessibilityNodeInfoCompat info) {
+                        super.onInitializeAccessibilityNodeInfo(host, info);
+                        info.setCheckable(true);
+                        info.setChecked(isActive);
+                        // To avoid Talkback announcing "selected, checked...", we unset
+                        // selected here for the accessibility service. The view itself is
+                        // still selected to reflect the correct visual state.
+                        info.setSelected(false);
+                    }
+                });
                 itemView.setClickable(true);
                 if (item.getOrder() >= 0) {
                     String ordinal = mOrdinalFormat.format(new Object[]{item.getOrder() + 1});
@@ -222,13 +239,25 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
     }
 
     public DreamAdapter(SparseIntArray layouts, List<DreamItemT> itemList) {
+        this(layouts, itemList, /* allowMultiSelection= */ false);
+    }
+
+    public DreamAdapter(
+            SparseIntArray layouts, List<DreamItemT> itemList, boolean allowMultiSelection) {
         mItemList = itemList;
         mLayouts = layouts;
+        mAllowMultiSelection = allowMultiSelection;
     }
 
     public DreamAdapter(@LayoutRes int layoutRes, List<DreamItemT> itemList) {
+        this(layoutRes, itemList, /* allowMultiSelection= */ false);
+    }
+
+    public DreamAdapter(
+            @LayoutRes int layoutRes, List<DreamItemT> itemList, boolean allowMultiSelection) {
         mItemList = itemList;
         mLayouts.append(DreamItemViewTypes.DREAM_ITEM, layoutRes);
+        mAllowMultiSelection = allowMultiSelection;
     }
 
     void setItemList(List<DreamItemT> itemList) {
@@ -258,6 +287,10 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
     @Override
     public int getItemCount() {
         return mItemList.size();
+    }
+
+    private boolean supportMultipleSelection() {
+        return dreamsSwitcher() && mAllowMultiSelection;
     }
 
     /**

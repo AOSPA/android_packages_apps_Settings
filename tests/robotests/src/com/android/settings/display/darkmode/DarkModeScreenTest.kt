@@ -30,11 +30,13 @@ import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.accessibility.Flags
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils2.SettingsCatalystTestCase
+import com.android.settingslib.PrimarySwitchPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.notification.modes.TestModeBuilder
 import com.android.settingslib.notification.modes.ZenMode
 import com.android.settingslib.notification.modes.ZenModesBackend
+import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Rule
@@ -112,31 +114,74 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    fun isEnabled_isFalse() {
+    @DisableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOff_PowerSaveTrue_isFalse() {
         shadowPowerManager.setIsPowerSaveMode(true)
 
         assertThat(preferenceScreenCreator.isEnabled(context)).isFalse()
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isEnabled_flagOn_PowerSaveTrue_isTrue() {
+        shadowPowerManager.setIsPowerSaveMode(true)
+
+        assertThat(preferenceScreenCreator.isEnabled(context)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun setSwitchEnabled_flagOn_PowerSaveTrue_isFalse() {
+        shadowPowerManager.setIsPowerSaveMode(true)
+
+        val widget = preferenceScreenCreator.createAndBindWidget<PrimarySwitchPreference>(context)
+        val metadata =
+            object : PreferenceMetadata {
+                override val key: String
+                    get() = DarkModeScreen.KEY
+
+                override val purpose: Int
+                    get() = R.string.dark_ui_mode_purpose
+            }
+        preferenceScreenCreator.bind(widget, metadata)
+
+        assertThat(widget.isSwitchEnabled()).isFalse()
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_CATALYST_DARK_UI_MODE)
-    fun isIndexable_flagOn_isTrue() {
+    fun isIndexable_catalystFlagOn_isTrue() {
         shadowPowerManager.setIsPowerSaveMode(false)
 
         assertThat(preferenceScreenCreator.isIndexable(context)).isTrue()
     }
 
     @Test
+    @EnableFlags(
+        Flags.FLAG_CATALYST_DARK_UI_MODE,
+        Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER,
+    )
+    fun isIndexable_allowEnteringDarkThemeSettingsFlagOn_isTrue() {
+        shadowPowerManager.setIsPowerSaveMode(true)
+
+        assertThat(preferenceScreenCreator.isIndexable(context)).isTrue()
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_CATALYST_DARK_UI_MODE)
-    fun isIndexable_flagOn_isFalse() {
+    @DisableFlags(Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER)
+    fun isIndexable_catalystFlagOn_isFalse() {
         shadowPowerManager.setIsPowerSaveMode(true)
 
         assertThat(preferenceScreenCreator.isIndexable(context)).isFalse()
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_CATALYST_DARK_UI_MODE)
-    fun isIndexable_flagOFF_isFalse() {
+    @DisableFlags(
+        Flags.FLAG_CATALYST_DARK_UI_MODE,
+        Flags.FLAG_ALLOW_TO_ENTER_DARK_THEME_SETTINGS_WHEN_BATTERY_SAVER,
+    )
+    fun isIndexable_catalystFlagOFF_isFalse() {
         shadowPowerManager.setIsPowerSaveMode(false)
 
         assertThat(preferenceScreenCreator.isIndexable(context)).isFalse()
@@ -204,4 +249,5 @@ class DarkModeScreenTest : SettingsCatalystTestCase() {
     }
 }
 
-private data class TestMetadata(override val key: String, override val purpose: Int) : PreferenceMetadata
+private data class TestMetadata(override val key: String, override val purpose: Int) :
+    PreferenceMetadata

@@ -50,12 +50,18 @@ flag {
 }
 
 flag {
+    name: "disable_keyboard_settings_in_demo_mode"
+    namespace: "android_settings"
+    description: "Controls whether to disable the keyboard setting in demo mode."
+    bug: "447034534"
+}
+
+flag {
     name: "hide_modes_setting_in_demo_mode"
     namespace: "android_settings"
     description: "Controls whether to hide modes setting in demo mode."
     bug: "475928673"
 }
-
 
 flag {
     name: "hide_dream_setting_in_demo_mode"
@@ -83,4 +89,11 @@ flag {
     namespace: "android_settings"
     description: "Controls whether to show Clear and Confirm buttons during password confirmation in Settings."
     bug: "436650475"
+}
+
+flag {
+    name: "enable_rename_in_public_volume_settings"
+    namespace: "documentsui"
+    description: "Controls whether to allow renaming via the PublicVolumeSettings fragment"
+    bug: "350615090"
 }

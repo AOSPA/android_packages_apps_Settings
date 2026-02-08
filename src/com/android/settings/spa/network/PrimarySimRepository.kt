@@ -20,8 +20,8 @@ import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.util.Log
+import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
-import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.spa.widget.preference.ListPreferenceOption
 
@@ -38,7 +38,7 @@ class PrimarySimRepository(private val context: Context) {
         // selectable as default subscriptions.
         val nonOpportunisticSubscriptions =
             selectableSubscriptionInfoList.filter { subInfo ->
-                !Flags.excludeOpportunisticSubFromDsds() || !subInfo.isOpportunistic
+                !Flags.enableIsPrivateNetworkApi() || !subInfo.isOpportunistic
             }
 
         if (nonOpportunisticSubscriptions.size < 2) {

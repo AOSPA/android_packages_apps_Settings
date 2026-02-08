@@ -28,11 +28,6 @@ import android.sysprop.WidevineProperties;
 import android.util.Log;
 import android.content.Context;
 
-import com.android.settings.media_drm.Flags;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
-
 import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -52,8 +47,6 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
         new UUID(0xEDEF8BA979D64ACEL, 0xA3C827DCD51D21EDL);
     private static final String TAG = "ForceSwSecureCryptoFallbackPreferenceControllerTest";
 
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     private Context mContext;
     private ForceSwSecureCryptoFallbackPreferenceController mController;
     private SwitchPreference mPreference;
@@ -67,8 +60,7 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_FORCE_L3_ENABLED)
-    public void updateState_flagEnabled_checkPreference() {
+    public void updateState_checkPreference() {
         try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
             mController.updateState(mPreference);
         } catch (UnsupportedSchemeException ex) {
@@ -94,14 +86,6 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_FORCE_L3_ENABLED)
-    public void updateState_flagDisabled_checkPreference() {
-        mController.updateState(mPreference);
-        assertThat(mPreference.isEnabled()).isFalse();
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_FORCE_L3_ENABLED)
     public void updateState_checkWidevine() throws Exception {
         try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
             assumeTrue(drm.getPropertyString("securityLevel").equals("L1"));
@@ -134,7 +118,6 @@ public class ForceSwSecureCryptoFallbackPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_FORCE_L3_ENABLED)
     public void updateState_checkWhenWidevineReady() throws Exception {
         try (MediaDrm drm = new MediaDrm(WIDEVINE_UUID)) {
             if (drm.getPropertyString("securityLevel").equals("L1")) {

@@ -19,7 +19,9 @@ package com.android.settings.accessibility.captionpreferences.ui
 import android.content.Context
 import androidx.preference.Preference
 import com.android.settings.R
+import com.android.settings.accessibility.captionpreferences.data.CaptionBackgroundColorDataStore
 import com.android.settings.accessibility.captionpreferences.data.CaptionTextColorDataStore
+import com.android.settings.accessibility.captionpreferences.data.CaptionWindowColorDataStore
 import com.android.settings.accessibility.captionpreferences.data.ColorOpacityDataStore
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.DiscreteIntValue
@@ -101,6 +103,106 @@ class CaptionTextOpacityPreference(context: Context) :
 
     companion object {
         const val KEY = "captioning_foreground_opacity"
+    }
+}
+// LINT.ThenChange()
+
+// Background Color & Opacity
+// LINT.IfChange(caption_background_color_pref)
+class CaptionBackgroundColorPreference(context: Context) : BaseCaptionColorPreference() {
+    override val key: String
+        get() = KEY
+
+    override val purpose: Int
+        get() = R.string.caption_preferences_appearance_custom_background_color_purpose
+
+    override val title: Int
+        get() = R.string.captioning_background_color
+
+    override val values: Int
+        get() = R.array.captioning_color_selector_including_transparent_values
+
+    override val valuesDescription: Int
+        get() = R.array.captioning_color_selector_including_transparent_titles
+
+    override val dataStore: ColorOpacityDataStore by lazy {
+        CaptionBackgroundColorDataStore(context, isColor = true)
+    }
+
+    companion object {
+        const val KEY = "captioning_background_color"
+    }
+}
+// LINT.ThenChange()
+
+// LINT.IfChange(caption_background_opacity_pref)
+class CaptionBackgroundOpacityPreference(context: Context) :
+    BaseCaptionOpacityPreference(CaptionBackgroundColorPreference.KEY) {
+    override val key: String
+        get() = KEY
+
+    override val purpose: Int
+        get() = R.string.caption_preferences_appearance_custom_background_opacity_purpose
+
+    override val title: Int
+        get() = R.string.captioning_background_opacity
+
+    override val dataStore: ColorOpacityDataStore by lazy {
+        CaptionBackgroundColorDataStore(context, isColor = false)
+    }
+
+    companion object {
+        const val KEY = "captioning_background_opacity"
+    }
+}
+// LINT.ThenChange()
+
+// Window Color & Opacity
+// LINT.IfChange(caption_window_color_pref)
+class CaptionWindowColorPreference(context: Context) : BaseCaptionColorPreference() {
+    override val key: String
+        get() = KEY
+
+    override val purpose: Int
+        get() = R.string.caption_preferences_appearance_custom_window_color_purpose
+
+    override val title: Int
+        get() = R.string.captioning_window_color
+
+    override val values: Int
+        get() = R.array.captioning_color_selector_including_transparent_values
+
+    override val valuesDescription: Int =
+        R.array.captioning_color_selector_including_transparent_titles
+
+    override val dataStore: ColorOpacityDataStore by lazy {
+        CaptionWindowColorDataStore(context, isColor = true)
+    }
+
+    companion object {
+        const val KEY = "captioning_window_color"
+    }
+}
+// LINT.ThenChange()
+
+// LINT.IfChange(caption_window_opacity_pref)
+class CaptionWindowOpacityPreference(context: Context) :
+    BaseCaptionOpacityPreference(CaptionWindowColorPreference.KEY) {
+    override val key: String
+        get() = KEY
+
+    override val purpose: Int
+        get() = R.string.caption_preferences_appearance_custom_window_opacity_purpose
+
+    override val title: Int
+        get() = R.string.captioning_window_opacity
+
+    override val dataStore: ColorOpacityDataStore by lazy {
+        CaptionWindowColorDataStore(context, isColor = false)
+    }
+
+    companion object {
+        const val KEY = "captioning_window_opacity"
     }
 }
 // LINT.ThenChange()
