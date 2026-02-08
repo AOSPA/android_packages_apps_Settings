@@ -37,6 +37,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowPackageManager
+import org.robolectric.shadows.ShadowSystemProperties
 
 @RunWith(AndroidJUnit4::class)
 class AppLaunchApiScreenTest {
@@ -56,6 +57,7 @@ class AppLaunchApiScreenTest {
     @After
     fun cleanUp() {
         ShadowPackageManager.reset()
+        ShadowSystemProperties.reset()
     }
 
     @Test
@@ -96,7 +98,8 @@ class AppLaunchApiScreenTest {
 
     @Test
     fun getLaunchIntent_instantApp_shouldThrowFailedPreconditionException() {
-        installApp(FakeAppInfo(privateFlags = ApplicationInfo.PRIVATE_FLAG_INSTANT))
+        ShadowSystemProperties.override("settingsdebug.instant.packages", PACKAGE_NAME)
+        installApp(FakeAppInfo())
         tester.initializeScreenParameters(Parameters(ARG_PACKAGE_NAME to PACKAGE_NAME))
 
         assertThrows(FailedPreconditionException::class.java) { tester.getLaunchIntent() }
@@ -110,11 +113,10 @@ class AppLaunchApiScreenTest {
             }
         )
 
-    class FakeAppInfo(enabled: Boolean = true, privateFlags: Int = 0) : ApplicationInfo() {
+    class FakeAppInfo(enabled: Boolean = true) : ApplicationInfo() {
         init {
             this.packageName = PACKAGE_NAME
             this.enabled = enabled
-            this.privateFlags = privateFlags
         }
     }
 
