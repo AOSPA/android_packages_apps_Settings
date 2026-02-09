@@ -28,6 +28,7 @@ import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceIssue;
 import android.safetycenter.SafetySourceStatus;
+import android.safetycenter.SafetySourceStatus.IconAction;
 
 import com.android.settings.R;
 import com.android.settings.flags.Flags;
@@ -44,6 +45,7 @@ public final class LockScreenSafetySource {
     public static final String SET_SCREEN_LOCK_ACTION_ID = "SetScreenLockAction";
 
     private static final int REQUEST_CODE_SCREEN_LOCK = 1;
+    private static final int REQUEST_CODE_SCREEN_LOCK_SETTINGS = 2;
 
     private LockScreenSafetySource() {}
 
@@ -74,6 +76,8 @@ public final class LockScreenSafetySource {
                         screenLockPreferenceDetailsUtils.getLaunchChooseLockGenericFragmentIntent(
                                 SettingsEnums.SAFETY_CENTER),
                         REQUEST_CODE_SCREEN_LOCK);
+        final IconAction gearMenuIconAction =
+                createGearMenuIconAction(context, screenLockPreferenceDetailsUtils);
         final boolean lockScreenAllowedByAdmin = isLockScreenAllowedByAdmin(context,
                 screenLockPreferenceDetailsUtils);
         final boolean isLockPatternSecure = screenLockPreferenceDetailsUtils.isLockPatternSecure();
@@ -93,6 +97,7 @@ public final class LockScreenSafetySource {
                                 severityLevel)
                         .setPendingIntent(lockScreenAllowedByAdmin ? pendingIntent : null)
                         .setEnabled(lockScreenAllowedByAdmin)
+                        .setIconAction(lockScreenAllowedByAdmin ? gearMenuIconAction : null)
                         .build();
         final SafetySourceData.Builder safetySourceDataBuilder =
                 new SafetySourceData.Builder().setStatus(status);
@@ -140,6 +145,19 @@ public final class LockScreenSafetySource {
         } else {
             BiometricsSafetySource.onBiometricsChanged(context);
         }
+    }
+
+    private static IconAction createGearMenuIconAction(
+            Context context, ScreenLockPreferenceDetailsUtils screenLockPreferenceDetailsUtils) {
+        return screenLockPreferenceDetailsUtils.shouldShowGearMenu()
+                ? new IconAction(
+                        IconAction.ICON_TYPE_GEAR,
+                        createPendingIntent(
+                                context,
+                                screenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(
+                                        SettingsEnums.SAFETY_CENTER),
+                                REQUEST_CODE_SCREEN_LOCK_SETTINGS))
+                : null;
     }
 
     private static PendingIntent createPendingIntent(

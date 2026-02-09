@@ -18,6 +18,8 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
+import static com.android.settings.accessibility.AutoclickUtils.AUTOCLICK_DELAY_SHORT_THRESHOLD_MS;
+import static com.android.settings.accessibility.AutoclickUtils.AUTOCLICK_DELAY_LONG_THRESHOLD_MS;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -65,15 +67,14 @@ public class AutoclickPreferenceController extends BasePreferenceController {
 
     /** Finds index of the summary that should be used for the provided autoclick delay. */
     private int getAutoclickPreferenceSummaryIndex(int delay) {
-        if (delay <= AutoclickUtils.MIN_AUTOCLICK_DELAY_MS) {
+        if (delay <= AUTOCLICK_DELAY_SHORT_THRESHOLD_MS) {
             return 0;
         }
-        if (delay >= AutoclickUtils.MAX_AUTOCLICK_DELAY_MS) {
+        if (delay >= AUTOCLICK_DELAY_LONG_THRESHOLD_MS) {
             return AUTOCLICK_PREFERENCE_SUMMARIES.length - 1;
         }
-        int delayRange =
-                AutoclickUtils.MAX_AUTOCLICK_DELAY_MS - AutoclickUtils.MIN_AUTOCLICK_DELAY_MS;
+        int delayRange = AUTOCLICK_DELAY_LONG_THRESHOLD_MS - AUTOCLICK_DELAY_SHORT_THRESHOLD_MS;
         int rangeSize = (delayRange) / (AUTOCLICK_PREFERENCE_SUMMARIES.length - 1);
-        return (delay - AutoclickUtils.MIN_AUTOCLICK_DELAY_MS) / rangeSize;
+        return (delay - AUTOCLICK_DELAY_SHORT_THRESHOLD_MS) / rangeSize;
     }
 }

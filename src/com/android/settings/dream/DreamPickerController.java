@@ -36,6 +36,7 @@ import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -146,6 +147,12 @@ public class DreamPickerController extends BasePreferenceController {
         );
         new ItemTouchHelper(new DreamItemTouchHelperCallback(recyclerView))
                 .attachToRecyclerView(recyclerView);
+
+        // Known issue of RecyclerView: avoid losing a11y focus when the item is moved.
+        final RecyclerView.ItemAnimator itemAnimator = recyclerView.getItemAnimator();
+        if (itemAnimator instanceof SimpleItemAnimator) {
+            ((SimpleItemAnimator) itemAnimator).setSupportsChangeAnimations(false);
+        }
     }
 
     @Override
