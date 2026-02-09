@@ -350,6 +350,11 @@ public final class ConvertUtils {
                 if (dailyIndex < dailyDataSize - 1 && hourIndex == hourDataSize - 1) {
                     continue;
                 }
+                // Drop the battery event for the first hourly snapshot of the first day, as it was
+                // already saved to the database in the previous periodic job. See b/479060454.
+                if (hourIndex == 0 && dailyIndex == 0) {
+                    continue;
+                }
                 batteryEventList.add(
                         convertToBatteryEvent(
                                 oneDayData.getTimestamps().get(hourIndex),
