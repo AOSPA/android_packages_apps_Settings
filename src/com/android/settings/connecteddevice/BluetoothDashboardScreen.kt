@@ -34,7 +34,7 @@ open class BluetoothDashboardScreen : PreferenceScreenMixin {
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.bluetooth_switchbar_screen_purpose
 
@@ -62,9 +62,7 @@ open class BluetoothDashboardScreen : PreferenceScreenMixin {
         preferenceHierarchy(context) {
             val bluetoothDataStore = BluetoothPreference.createDataStore(context)
             +BluetoothPreference(bluetoothDataStore)
-            if (Flags.deeplinkConnectedDevices25q4()) {
-                +BluetoothDeviceRenamePreference(bluetoothDataStore)
-            }
+            +BluetoothDeviceRenamePreference(bluetoothDataStore)
             +BluetoothFooterPreference(bluetoothDataStore)
         }
 
