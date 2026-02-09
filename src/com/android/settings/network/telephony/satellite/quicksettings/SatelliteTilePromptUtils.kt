@@ -19,12 +19,14 @@ package com.android.settings.network.telephony.satellite.quicksettings
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import java.util.concurrent.TimeUnit
 
 /** Utility class for handling the satellite tile prompt notification and preferences. */
@@ -68,8 +70,8 @@ open class SatelliteTilePromptUtils {
 
     /**
      * Permanently marks the prompt as "shown" by setting the prompt count to the maximum value.
-     * This is used when the user affirmatively acts on the prompt (e.g., adds the tile),
-     * preventing any future notifications.
+     * This is used when the user affirmatively acts on the prompt (e.g., adds the tile), preventing
+     * any future notifications.
      */
     open fun markAllPromptsShown(context: Context) {
         getSharedPreferences(context).edit().putInt(PREF_PROMPT_COUNT, MAX_PROMPTS).apply()
@@ -79,8 +81,8 @@ open class SatelliteTilePromptUtils {
     /**
      * Determines if a satellite tile prompt should be shown based on the retry logic.
      *
-     * This checks the number of times the prompt has been shown and the time elapsed since the
-     * last prompt to decide if it's time for the next one.
+     * This checks the number of times the prompt has been shown and the time elapsed since the last
+     * prompt to decide if it's time for the next one.
      *
      * @return `true` if the notification should be displayed, `false` otherwise.
      */
@@ -107,7 +109,7 @@ open class SatelliteTilePromptUtils {
             "shouldShowSatelliteTilePrompt: $shouldShow. " +
                 "Count=$count, " +
                 "TimeSinceLastPrompt=${timeSinceLastPrompt}ms, " +
-                "RequiredInterval=${requiredInterval}ms"
+                "RequiredInterval=${requiredInterval}ms",
         )
         return shouldShow
     }
@@ -179,6 +181,10 @@ open class SatelliteTilePromptUtils {
                 .setOnlyAlertOnce(true)
                 .build()
 
+        FeatureFactory.featureFactory.metricsFeatureProvider.action(
+            context,
+            SettingsEnums.ACTION_SATELLITE_NOTIFICATION_SHOWN,
+        )
         notificationManager.notify(R.id.satellite_prompt_notification_id, notification)
     }
 }

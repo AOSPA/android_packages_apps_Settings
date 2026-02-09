@@ -17,10 +17,12 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.PendingIntent
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.Looper
 import android.service.quicksettings.Tile
 import com.android.settings.R
+import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.After
@@ -30,6 +32,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.eq
 import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.Mockito.doNothing
@@ -46,6 +49,7 @@ import org.robolectric.Shadows.shadowOf
 class SatelliteTileServiceTest {
 
     @get:Rule val mocks = MockitoJUnit.rule()
+    @get:Rule val metricsRule = MetricsRule()
 
     @Mock private lateinit var repository: SatelliteStateRepository
     @Mock private lateinit var satelliteTilePromptUtils: SatelliteTilePromptUtils
@@ -113,6 +117,22 @@ class SatelliteTileServiceTest {
         assertThat(capturedIntent).isNotNull()
         assertThat(capturedIntent.component?.className)
             .isEqualTo(SatelliteLandingPageActivity::class.java.name)
+    }
+
+    @Test
+    fun onTileAdded_logsTileAdded() {
+        service.onTileAdded()
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(any(), eq(SettingsEnums.QS_SATELLITE_TILE_ADDED))
+    }
+
+    @Test
+    fun onTileRemoved_logsTileRemoved() {
+        service.onTileRemoved()
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(any(), eq(SettingsEnums.QS_SATELLITE_TILE_REMOVED))
     }
 
     private fun assertTileState(expectedState: Int, expectedSubtitleResId: Int) {
