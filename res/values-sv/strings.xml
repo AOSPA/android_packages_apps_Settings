@@ -412,10 +412,8 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Hoppa över"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Du har lagt till det högsta tillåtna antalet ansikten"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Det går inte att lägga till fler ansikten"</string>
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
-    <skip />
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" msgid="2276422963933723362">"Det går inte att ställa ansiktslås"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message" msgid="2680132270879475080">"Du är inte ansluten till internet. Gå tillbaka och anslut till internet eller konfigurera detta i inställningarna senare."</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Registreringen slutfördes inte"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Tidsgränsen för ansiktsregistreringen har nåtts. Försök igen."</string>
@@ -1343,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktivera wifi-samtal"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Aktivera wifi-samtal"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Frånkopplad från <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Ljud och vibration"</string>
     <string name="account_settings" msgid="255404935489127404">"Konton"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Jobbprofilkonton – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Personliga profilkonton"</string>
@@ -1351,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Jobbkonto – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Personligt konto – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Sök"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Skärm"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Rotera skärmen automatiskt"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Av"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"På"</string>
@@ -1889,13 +1885,13 @@
     <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"Ange enhetens lösenord"</string>
     <string name="lockpassword_reenter_your_password_header" msgid="7257189484651655897">"Ange ditt lösenord igen"</string>
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Ange lösenordet för jobbet igen"</string>
-    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Ange lösenordet för jobbprofilen"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Ange lösenordet för jobbet"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"Ange enhetens mönster"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Ange mönstret för jobbet"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"Ange enhetens pinkod"</string>
     <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"Ange din pinkod igen"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Ange pinkoden för jobbet igen"</string>
-    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Ange pinkoden för jobbprofilen"</string>
+    <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Ange pinkoden för jobbet"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Lösenorden matchar inte"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Pinkoderna matchar inte"</string>
     <string name="lockpassword_draw_your_pattern_again_header" msgid="1045638030120803622">"Rita mönstret igen"</string>
@@ -2148,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Tryck på blanksteg två gånger om du vill infoga \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Visa lösenord"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Visa tecknen en kort stund medan du skriver"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"Visa lösenord för pekskärm"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Visa tecknen en kort stund medan du skriver på pekskärmen"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"Visa lösenord för tangentbord"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"Visa tecknen en kort stund medan du skriver på tangentbordet"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Stavningskontrollen kan samla in all text du skriver, inklusive personliga uppgifter som lösenord och kreditkortsuppgifter. Den kommer från appen <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vill du använda stavningskontrollen?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Inställningar"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Språk"</string>
@@ -3664,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Enhet"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Tangentbord, styrplatta, skärm, ljud"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Skärm"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Ljud"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Inte tillgängligt eftersom NFC är inaktiverat"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Först behöver du installera en betalningsapp"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Senaste apparna, standardappar"</string>
@@ -3957,7 +3948,7 @@
     <string name="profile_section_header_for_advanced_privacy" msgid="8385775428904838579">"Jobbprofil"</string>
     <string name="asst_capability_prioritizer_title" msgid="1181272430009156556">"Prioritet för anpassad avisering"</string>
     <string name="asst_capability_prioritizer_summary" msgid="954988212366568737">"Ställ automatiskt in aviseringar av lägre prioritet på Utan avbrott"</string>
-    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Smart rankning av aviseringar"</string>
+    <string name="asst_capability_ranking_title" msgid="312998580233257581">"Smart ranking av aviseringar"</string>
     <string name="asst_capability_ranking_summary" msgid="2293524677144599450">"Rangordna automatiskt aviseringar efter relevans"</string>
     <string name="asst_feedback_indicator_title" msgid="5169801869752395354">"Feedback om anpassad avisering"</string>
     <string name="asst_feedback_indicator_summary" msgid="5862082842073307900">"Ange justeringar av aviseringar och visa möjligheten att ge feedback till systemet"</string>
@@ -4550,9 +4541,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Standardkonfiguration för USB"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Strömalternativ"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Alternativ för filöverföring"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Dataåtkomstskydd"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Tillåt PCI-tunnlar"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"När alternativet är aktiverat kan kringutrustning med USB och Thunderbolt skapa PCI-tunnlar och få åtkomst till systemminnet"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Inställningen kan bara ändras av administratörsanvändare"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Inaktiverades av IT-administratören"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Inaktiverades av läget Avancerat skydd"</string>
@@ -4844,8 +4838,8 @@
     <string name="notification_log_details_ashmem" msgid="6163312898302809015">"ashmem"</string>
     <string name="notification_log_details_alerted" msgid="5285078967825048406">"avisering har skickats"</string>
     <string name="notification_log_channel" msgid="3406738695621767204">"kanal"</string>
-    <string name="notification_log_details_ranking_null" msgid="6607596177723101524">"Det finns inget rankningsobjekt."</string>
-    <string name="notification_log_details_ranking_none" msgid="2484105338466675261">"Rankningsobjektet innehåller inte den här nyckeln."</string>
+    <string name="notification_log_details_ranking_null" msgid="6607596177723101524">"Det finns inget rankingsobjekt."</string>
+    <string name="notification_log_details_ranking_none" msgid="2484105338466675261">"Rankingsobjektet innehåller inte den här nyckeln."</string>
     <string name="display_cutout_emulation" msgid="1421648375408281244">"Skärmutskärning"</string>
     <string name="display_cutout_emulation_keywords" msgid="4506580703807358127">"urklipp av skärm, flärp"</string>
     <string name="overlay_option_device_default" msgid="7986355499809313848">"Enhetens standardinställning"</string>
@@ -5117,7 +5111,7 @@
     <string name="credman_autofill_keywords" msgid="701180623776848914">"auto, fyll, autofyll, data, nyckel, lösenord"</string>
     <string name="credman_button_change" msgid="4072629639218503790">"Ändra"</string>
     <string name="credman_button_open" msgid="7519871964170816850">"Öppna"</string>
-    <string name="credman_app_list_preference_none" msgid="2509646651254971448">"Inget har valts"</string>
+    <string name="credman_app_list_preference_none" msgid="2509646651254971448">"Ingen har valts"</string>
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;Kontrollera att du litar på den här appen&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofyll&gt;%1$s&lt;/xliff:g&gt; identifierar vad som kan fyllas i automatiskt utifrån vad som visas på skärmen."</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Använd &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Nya lösenord, nycklar och annan information sparas här från och med nu. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; kan använda det som visas på skärmen för att avgöra vad som kan fyllas i automatiskt."</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"Föredragen tjänst för lösenord, nycklar och autofyll"</string>
@@ -5363,8 +5357,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellit"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellitanslutning"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellitanslutning"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Använd satellitanslutning"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Användning av appar som stöds ingår i kontot"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Data för alla appar ingår i kontot"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Appar som stöds på telefonen"</string>
@@ -6191,19 +6184,24 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Mer om satellitanslutning"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Öppna demon för SOS-larm via satellit"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Satellitappar"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"Endast nödsamtal"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Satellitanslutning är tillgänglig"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Få enkel åtkomst till satellitinformation genom att lägga till rutan Satellit i snabbinställningarna"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Lägg till en ruta"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Promptar för rutan Satellit"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_apps_see_all_supported_apps_text (1053383406430986034) -->
+    <skip />
+    <!-- no translation found for satellite_apps_see_less_text (3776624493969066217) -->
+    <skip />
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satellit är inte tillgänglig"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Satellittäckning är inte tillgänglig när du är ansluten till ett mobil- eller wifi-nätverk."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Satellitanslutning är inte tillgängligt i det här landet eller den här regionen."</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Satellitanslutning är inte tillgängligt just nu. Försök igen senare."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Satellittäckning ingår inte i ditt mobilabonnemang. Kontakta operatören och be om hjälp."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Om du vill använda satellitmeddelanden måste Google Messages vara din standardapp för meddelanden."</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Satellitanslutning har aktiverats av operatören. Läs mer i operatörens satellitinställningar."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Visa tillgängliga platser"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Ändra standardapp"</string>
