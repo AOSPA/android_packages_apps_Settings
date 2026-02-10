@@ -28,6 +28,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+// LINT.IfChange
 @SearchIndexable
 public class TapScreenGestureSettings extends DashboardFragment {
     private static final String TAG = "TapScreenGestureSettings";
@@ -65,3 +66,4 @@ public class TapScreenGestureSettings extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.tap_screen_gesture_settings);
 }
+// LINT.ThenChange(TapScreenGestureApiScreen.kt)

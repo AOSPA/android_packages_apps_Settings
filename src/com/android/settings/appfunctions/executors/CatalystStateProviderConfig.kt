@@ -117,6 +117,7 @@ import com.android.settings.gestures.PickupGestureApiScreen
 import com.android.settings.gestures.PowerMenuSettingsScreenApi
 import com.android.settings.gestures.SwipeToNotificationApiScreen
 import com.android.settings.gestures.SystemNavigationGestureScreen
+import com.android.settings.gestures.TapScreenGestureApiScreen
 import com.android.settings.inputmethod.AvailableVirtualKeyboardApiScreen
 import com.android.settings.inputmethod.UserDictionaryListApiScreen
 import com.android.settings.language.LanguageAndRegionApiFirstScreen
@@ -563,6 +564,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = DoubleTwistGestureApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SwipeToNotificationApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PickupGestureApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TapScreenGestureApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDirectApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ContactsStorageApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PowerMenuSettingsScreenApi.KEY),
