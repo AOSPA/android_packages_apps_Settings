@@ -18,16 +18,18 @@ package com.android.settings.connecteddevice
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
+import android.content.Context
 import android.content.pm.PackageManager.FEATURE_BLUETOOTH
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.PreviouslyConnectedDeviceActivity
 import com.android.settings.bluetooth.SavedBluetoothDeviceUpdater
 import com.android.settings.connecteddevice.dock.DockUpdater
-import com.android.settings.flags.Flags
 import com.android.settings.testutils.FakeFeatureFactory
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
@@ -36,12 +38,12 @@ import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
 import org.robolectric.shadows.ShadowBluetoothAdapter
 
+@RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowBluetoothAdapter::class])
-class PreviouslyConnectedDeviceScreenTest : SettingsCatalystTestCase() {
-    override val preferenceScreenCreator = PreviouslyConnectedDeviceScreen()
+class PreviouslyConnectedDeviceScreenTest {
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_CONNECTED_DEVICES_25Q4
+    private val preferenceScreenCreator = PreviouslyConnectedDeviceScreen()
 
     private val bluetoothManager = appContext.getSystemService(BluetoothManager::class.java)
     private val bluetoothAdapter: ShadowBluetoothAdapter = shadowOf(bluetoothManager?.adapter)
@@ -94,14 +96,6 @@ class PreviouslyConnectedDeviceScreenTest : SettingsCatalystTestCase() {
 
         assertThat(preferenceScreenCreator.getSummary(appContext))
             .isEqualTo(appContext.getString(R.string.connected_device_see_all_summary))
-    }
-
-    @Test
-    @Config(shadows = [ShadowSavedBluetoothDeviceUpdater::class])
-    override fun migration() {
-        bluetoothAdapter.setState(BluetoothAdapter.STATE_ON)
-        shadowOf(appContext.packageManager).setSystemFeature(FEATURE_BLUETOOTH, true)
-        super.migration()
     }
 
     private fun setSavedDockUpdater(updater: DockUpdater? = null) {
