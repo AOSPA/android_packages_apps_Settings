@@ -21,12 +21,6 @@
     android:title="@string/satellite_setting"
     settings:keywords="@string/keywords_satellite_setting">
 
-    <com.android.settings.widget.MainSwitchPreference
-        android:key="satellite_setting_main_switch"
-        android:title="@string/satellite_setting_main_switch_title"
-        settings:controller="com.android.settings.network.telephony.satellite.SatelliteSettingMainSwitchController"
-        settings:isPreferenceVisible="false"/>
-
     <PreferenceCategory
         android:title="@string/category_name_about_satellite_connectivity"
         android:key="key_category_about_satellite"

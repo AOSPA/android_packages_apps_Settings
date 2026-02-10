@@ -69,7 +69,7 @@ public class AutoclickPreferenceControllerTest {
         assertThat(mController.getSummary().toString())
                 .isEqualTo(AutoclickUtils.getAutoclickDelaySummary(
                         mContext,
-                        R.string.accessibilty_autoclick_preference_subtitle_medium_delay,
+                        R.string.accessibility_autoclick_delay_unit_second,
                         delayedInMs).toString());
     }
 

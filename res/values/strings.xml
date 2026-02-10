@@ -6562,23 +6562,6 @@
     <string name="brightness_intensity_end_label">Brighter</string>
     <!-- Title for setting whether the Reduce Brightness activation state persists across reboots. [CHAR LIMIT=NONE] -->
     <string name="reduce_bright_colors_persist_preference_title">Keep on after device restarts</string>
-
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad cursor stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <string name="accessibilty_autoclick_preference_subtitle_short_delay">{count, plural,
-        =1      {Short ({time} second)}
-        other   {Short ({time} seconds)}
-        }</string>
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad cursor stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <string name="accessibilty_autoclick_preference_subtitle_medium_delay">{count, plural,
-        =1      {Medium ({time} second)}
-        other   {Medium ({time} seconds)}
-        }</string>
-    <!-- Subtitle for the accessibility preference to configure feature that performs click action soon after mouse/trackpad cursor stops moving, in case delay before click is extremely short. Placeholder will be set to the number of milliseconds to which the delay amounts. [CHAR LIMIT=NONE] -->
-    <string name="accessibilty_autoclick_preference_subtitle_long_delay">{count, plural,
-        =1      {Long ({time} second)}
-        other   {Long ({time} seconds)}
-        }</string>
-
     <!-- Summary for autoclick seekbar settings preference when user selected custom item. [CHAR LIMIT=35] -->
     <string name="accessibility_autoclick_delay_unit_second">{count, plural,
         =1      {{time} second}
@@ -13451,8 +13434,6 @@
     <string name="title_satellite_setting_connectivity">Satellite connectivity</string>
     <!-- Description of satellite function with data transmission [CHAR LIMIT=60] -->
     <string name="description_satellite_setting_connectivity">satellite connectivity</string>
-    <!-- Title for the main switch in satellite settings [CHAR LIMIT=50] [SCREENSHOT=screen/6xmQbifSzboBER3] -->
-    <string name="satellite_setting_main_switch_title">Use Satellite connectivity</string>
     <!-- Title for notifying user's account be able to use constrained data transmission of Satellite" [CHAR_LIMIT=NONE] [SCREENSHOT=screen/9FiNr7RKa4j9T8Y]-->
     <string name="title_have_satellite_constrained_data_plan">Use of supported apps is included with your account</string>
     <!-- Title for notifying user's account be able to use unconstrained data transmission of Satellite" [CHAR_LIMIT=NONE] [SCREENSHOT=screen/BVG79MF3V43JHHs]-->
