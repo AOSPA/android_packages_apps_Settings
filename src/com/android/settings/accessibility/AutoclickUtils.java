@@ -29,31 +29,17 @@ import java.util.Map;
 /** Provides utility methods related auto click. */
 public final class AutoclickUtils {
 
-    /** Used for autoclick mode in the preferences editor. */
-    static final String KEY_DELAY_MODE = "delay_mode";
+    /** Min allowed autoclick delay value. */
+    public static final int MIN_AUTOCLICK_DELAY_MS = 100;
 
-    /** Used for autoclick custom delay in the preferences editor. */
-    static final String KEY_CUSTOM_DELAY_VALUE = "custom_delay_value";
-
-    /**
-     * Threshold for short autoclick delay.
-     * <p>
-     * Values smaller than this are considered short delays.
-     */
-    static final int AUTOCLICK_DELAY_SHORT_THRESHOLD_MS = 200;
-
-    /**
-     * Threshold for long autoclick delay.
-     * <p>
-     * Values larger than this are considered long delays.
-     */
-    static final int AUTOCLICK_DELAY_LONG_THRESHOLD_MS = 1000;
+    /** Max allowed autoclick delay value. */
+    public static final int MAX_AUTOCLICK_DELAY_MS = 5000;
 
     /**
      * Allowed autoclick delay values are discrete. This is the difference between two allowed
      * values.
      */
-    static final int AUTOCLICK_DELAY_STEP = 100;
+    public static final int AUTOCLICK_DELAY_STEP = 100;
 
     /**
      * Gets string that should be used for provided autoclick delay.
