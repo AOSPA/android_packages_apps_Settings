@@ -25,6 +25,7 @@ import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.FooterPreference
 
 // LINT.IfChange
@@ -36,6 +37,8 @@ class DarkModeExpandedFooterPreference :
 
     override val purpose: Int
         get() = R.string.dark_theme_expanded_footer_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val title: Int
         get() = R.string.accessibility_expanded_dark_theme_footer

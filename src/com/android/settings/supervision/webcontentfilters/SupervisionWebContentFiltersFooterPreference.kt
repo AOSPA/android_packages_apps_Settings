@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision.webcontentfilters
 
+import android.content.Context
 import android.util.Log
 import androidx.preference.Preference
 import com.android.settings.R
@@ -22,6 +23,7 @@ import com.android.settings.widget.FooterPreferenceBinding
 import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.FooterPreference
 
 class SupervisionWebContentFiltersFooterPreference :
@@ -31,6 +33,8 @@ class SupervisionWebContentFiltersFooterPreference :
 
     override val purpose: Int
         get() = R.string.web_content_filters_footer_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val title: Int
         get() = R.string.supervision_web_content_filters_footer_title

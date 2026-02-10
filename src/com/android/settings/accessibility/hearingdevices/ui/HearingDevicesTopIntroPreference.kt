@@ -22,6 +22,7 @@ import com.android.settings.accessibility.HearingAidHelper
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
 
@@ -37,6 +38,8 @@ class HearingDevicesTopIntroPreference(
 
     override val indexable
         get() = false
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 

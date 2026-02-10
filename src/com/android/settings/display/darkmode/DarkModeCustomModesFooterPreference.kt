@@ -29,6 +29,7 @@ import com.android.settings.widget.FooterPreferenceBinding
 import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.FooterPreference
 import java.util.Locale
 
@@ -41,6 +42,8 @@ class DarkModeCustomModesFooterPreference :
 
     override val purpose: Int
         get() = R.string.dark_theme_custom_bedtime_footer_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? {
         val modesUsingDarkTheme = AutoDarkTheme.getModesThatChangeDarkTheme(context)
