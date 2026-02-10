@@ -249,11 +249,7 @@ class SafetyCenterFragmentTest {
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     fun fragment_onLaunchQuickSettings_showsIssuesAndStatusButNotSubpages() {
         val activeIssue =
-            createIssue(
-                id = "activeIssue",
-                title = "Active Issue Title",
-                sourceIds = setOf("any"),
-            )
+            createIssue(id = "activeIssue", title = "Active Issue Title", sourceIds = setOf("any"))
         val entry =
             createEntry(
                 id = "TestEntry",
@@ -1420,21 +1416,20 @@ class SafetyCenterFragmentTest {
                 )
             }
 
-        ActivityScenario.launch<SafetyCenterActivity>(startIntent).use { scenario ->
-            scenario.onActivity { activity ->
-                val nextIntent = shadowOf(activity).nextStartedActivity
+        ActivityScenario.launch<SafetyCenterActivity>(startIntent).use {
+            val nextIntent = shadowOf(mApplication).nextStartedActivity
 
-                assertThat(nextIntent).isNotNull()
-                assertThat(nextIntent.component?.className).isEqualTo(SubSettings::class.java.name)
-                val extras = nextIntent.extras
-                assertThat(extras).isNotNull()
-                val expectedFragmentClass =
-                    SafetyCenterSubpageRegistry.getSubpageFragmentClassNameFor(
-                        activity,
-                        testGroupId,
-                    )
-                assertThat(extras?.getString(EXTRA_SHOW_FRAGMENT)).isEqualTo(expectedFragmentClass)
-            }
+            assertThat(nextIntent).isNotNull()
+            assertThat(nextIntent.component?.className).isEqualTo(SubSettings::class.java.name)
+            val extras = nextIntent.extras
+            assertThat(extras).isNotNull()
+            val expectedFragmentClass =
+                SafetyCenterSubpageRegistry.getSubpageFragmentClassNameFor(
+                    mApplication,
+                    testGroupId,
+                )
+            assertThat(extras?.getString(EXTRA_SHOW_FRAGMENT)).isEqualTo(expectedFragmentClass)
+            return
         }
     }
 
@@ -1450,17 +1445,16 @@ class SafetyCenterFragmentTest {
                 )
             }
 
-        ActivityScenario.launch<SafetyCenterActivity>(startIntent).use { scenario ->
-            scenario.onActivity { activity ->
-                val nextIntent = shadowOf(activity).nextStartedActivity
+        ActivityScenario.launch<SafetyCenterActivity>(startIntent).use {
+            val nextIntent = shadowOf(mApplication).nextStartedActivity
 
-                assertThat(nextIntent).isNotNull()
-                assertThat(nextIntent.component?.className).isEqualTo(SubSettings::class.java.name)
-                val extras = nextIntent.extras
-                assertThat(extras).isNotNull()
-                assertThat(extras?.getString(EXTRA_SHOW_FRAGMENT))
-                    .isEqualTo(PrivacyControlsFragment::class.qualifiedName)
-            }
+            assertThat(nextIntent).isNotNull()
+            assertThat(nextIntent.component?.className).isEqualTo(SubSettings::class.java.name)
+            val extras = nextIntent.extras
+            assertThat(extras).isNotNull()
+            assertThat(extras?.getString(EXTRA_SHOW_FRAGMENT))
+                .isEqualTo(PrivacyControlsFragment::class.qualifiedName)
+            return
         }
     }
 
