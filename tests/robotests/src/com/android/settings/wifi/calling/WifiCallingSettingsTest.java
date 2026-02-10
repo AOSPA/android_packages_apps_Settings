@@ -25,6 +25,7 @@ import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.telephony.SubscriptionInfo;
 import android.view.View;
@@ -35,16 +36,19 @@ import com.android.ims.ImsManager;
 import com.android.settings.R;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.ims.MockWifiCallingQueryImsState;
+import com.android.settings.testutils.shadow.ShadowTelecomDependencies;
 import com.android.settings.widget.RtlCompatibleViewPager;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 import java.util.ArrayList;
@@ -52,7 +56,11 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowTelecomDependencies.class)
 public class WifiCallingSettingsTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final int SUB_ID1 = 111;
     private static final int SUB_ID2 = 222;
     private static final CharSequence DISPLAY_NAME1 = "Carrier1";
@@ -70,6 +78,7 @@ public class WifiCallingSettingsTest {
 
     @Before
     public void setUp() {
+        mSetFlagsRule.enableFlags(android.telecom.flags.Flags.FLAG_TELECOM_MAINLINE_API);
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(RuntimeEnvironment.application);
