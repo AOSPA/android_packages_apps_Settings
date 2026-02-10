@@ -19,6 +19,7 @@ package com.android.settings.users;
 import static android.os.UserManager.SWITCHABILITY_STATUS_OK;
 import static android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED;
 import static android.multiuser.Flags.FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS;
+import static android.multiuser.Flags.FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR;
 
 import static com.android.settings.flags.Flags.FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF;
 import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
@@ -663,6 +664,52 @@ public class UserSettingsTest {
         verify(mAddUserPreference).setVisible(true);
         verify(mAddUserPreference)
                 .setDisabledByAdmin((RestrictedLockUtils.EnforcedAdmin) any());
+    }
+
+    @EnableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
+    @Test
+    public void updateUserList_userSetupComplete_notSetUpSummaryNotAdded() {
+        mUserCapabilities.mIsAdmin = true;
+        UserInfo secondaryUser = getSecondaryUser(false);
+        givenUsers(getAdminUser(true), secondaryUser);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.USER_SETUP_COMPLETE, 1, secondaryUser.id);
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(1);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_SECONDARY_USER_ID);
+        assertThat(userPref.getTitle()).isEqualTo(SECONDARY_USER_NAME);
+        assertThat(userPref.getSummary()).isNotEqualTo(mContext.getString(
+                com.android.settings.R.string.user_summary_not_set_up));
+        assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
+
+    }
+
+    @EnableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
+    @Test
+    public void updateUserList_userSetupNotComplete_notSetUpSummaryAdded() {
+        mUserCapabilities.mIsAdmin = true;
+        UserInfo secondaryUser = getSecondaryUser(false);
+        givenUsers(getAdminUser(true), secondaryUser);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.USER_SETUP_COMPLETE, 0, secondaryUser.id);
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(1);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_SECONDARY_USER_ID);
+        assertThat(userPref.getTitle()).isEqualTo(SECONDARY_USER_NAME);
+        assertThat(userPref.getSummary()).isEqualTo(mContext.getString(
+                com.android.settings.R.string.user_summary_not_set_up));
+        assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_SECONDARY_USER_ID);
+
     }
 
     @Test
