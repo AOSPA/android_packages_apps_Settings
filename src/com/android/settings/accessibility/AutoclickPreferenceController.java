@@ -18,8 +18,6 @@ package com.android.settings.accessibility;
 
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
-import static com.android.settings.accessibility.AutoclickUtils.AUTOCLICK_DELAY_SHORT_THRESHOLD_MS;
-import static com.android.settings.accessibility.AutoclickUtils.AUTOCLICK_DELAY_LONG_THRESHOLD_MS;
 
 import android.content.Context;
 import android.provider.Settings;
@@ -30,16 +28,6 @@ import com.android.settings.core.BasePreferenceController;
 
 /** Preference controller for autoclick (dwell timing). */
 public class AutoclickPreferenceController extends BasePreferenceController {
-
-    /**
-     * Resource ids from which autoclick preference summaries should be derived. The strings have
-     * placeholder for integer delay value.
-     */
-    private static final int[] AUTOCLICK_PREFERENCE_SUMMARIES = {
-            R.string.accessibilty_autoclick_preference_subtitle_short_delay,
-            R.string.accessibilty_autoclick_preference_subtitle_medium_delay,
-            R.string.accessibilty_autoclick_preference_subtitle_long_delay
-    };
 
     public AutoclickPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
@@ -60,21 +48,7 @@ public class AutoclickPreferenceController extends BasePreferenceController {
         final int delayMillis = Settings.Secure.getInt(mContext.getContentResolver(),
                 Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY,
                 AccessibilityManager.AUTOCLICK_DELAY_WITH_INDICATOR_DEFAULT);
-        final int summaryIndex = getAutoclickPreferenceSummaryIndex(delayMillis);
         return AutoclickUtils.getAutoclickDelaySummary(mContext,
-                AUTOCLICK_PREFERENCE_SUMMARIES[summaryIndex], delayMillis);
-    }
-
-    /** Finds index of the summary that should be used for the provided autoclick delay. */
-    private int getAutoclickPreferenceSummaryIndex(int delay) {
-        if (delay <= AUTOCLICK_DELAY_SHORT_THRESHOLD_MS) {
-            return 0;
-        }
-        if (delay >= AUTOCLICK_DELAY_LONG_THRESHOLD_MS) {
-            return AUTOCLICK_PREFERENCE_SUMMARIES.length - 1;
-        }
-        int delayRange = AUTOCLICK_DELAY_LONG_THRESHOLD_MS - AUTOCLICK_DELAY_SHORT_THRESHOLD_MS;
-        int rangeSize = (delayRange) / (AUTOCLICK_PREFERENCE_SUMMARIES.length - 1);
-        return (delay - AUTOCLICK_DELAY_SHORT_THRESHOLD_MS) / rangeSize;
+                R.string.accessibility_autoclick_delay_unit_second, delayMillis);
     }
 }
