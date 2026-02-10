@@ -113,7 +113,7 @@ class DisplayBlockTest {
         )
         injector.testHandler.flush()
 
-        block.updateSurfaceView()
+        block.surfaceRenderer.updateSurfaceView()
         injector.testHandler.flush()
 
         verify(mockTransaction).reparent(eq(wallpaper), any())
@@ -154,7 +154,7 @@ class DisplayBlockTest {
 
         // Should not have fetched wallpaper or display info yet.
         assertThat(injector.wallpapers.get(DISPLAY_ID)).isEqualTo(wallpaperB)
-        block.updateSurfaceView()
+        block.surfaceRenderer.updateSurfaceView()
         injector.testHandler.flush()
         assertThat(injector.wallpapers.get(DISPLAY_ID)).isNull()
 
@@ -181,7 +181,7 @@ class DisplayBlockTest {
             DISPLAY_SIZE,
             ArrowMovement.immovable(),
         )
-        block.updateSurfaceView()
+        block.surfaceRenderer.updateSurfaceView()
         injector.testHandler.flush()
 
         verify(mockTransaction).reparent(eq(wallpaperA), any())
@@ -243,7 +243,7 @@ class DisplayBlockTest {
             ArrowMovement.immovable(),
         )
         injector.testHandler.flush()
-        block.updateSurfaceView()
+        block.surfaceRenderer.updateSurfaceView()
         injector.testHandler.flush()
 
         verify(mockTransaction, never()).apply()
@@ -275,7 +275,7 @@ class DisplayBlockTest {
             ArrowMovement.immovable(),
         )
 
-        block.updateSurfaceView()
+        block.surfaceRenderer.updateSurfaceView()
         injector.testHandler.flush()
 
         val wallpaperViewWidth = block.wallpaperView().width.toFloat()
@@ -303,7 +303,7 @@ class DisplayBlockTest {
             ArrowMovement.immovable(),
         )
 
-        block.updateSurfaceView()
+        block.surfaceRenderer.updateSurfaceView()
         injector.testHandler.flush()
 
         val expectedRadius = block.cornerRadiusPx.toFloat() / surfaceScale
@@ -324,7 +324,7 @@ class DisplayBlockTest {
             ArrowMovement.immovable(),
         )
 
-        block.updateSurfaceView()
+        block.surfaceRenderer.updateSurfaceView()
         injector.testHandler.flush()
 
         verify(mockTransaction, never()).setCornerRadius(any(), anyFloat())
@@ -344,7 +344,7 @@ class DisplayBlockTest {
             ArrowMovement.immovable(),
         )
 
-        block.updateSurfaceView()
+        block.surfaceRenderer.updateSurfaceView()
         injector.testHandler.flush()
 
         val surfaceCaptor = ArgumentCaptor.forClass(SurfaceControl::class.java)
@@ -379,7 +379,7 @@ class DisplayBlockTest {
                     Direction.UP to true,
                     Direction.DOWN to false,
                     Direction.LEFT to true,
-                    Direction.RIGHT to false
+                    Direction.RIGHT to false,
                 )
             )
         block.reset(
@@ -420,7 +420,7 @@ class DisplayBlockTest {
                     Direction.UP to true,
                     Direction.DOWN to false,
                     Direction.LEFT to true,
-                    Direction.RIGHT to false
+                    Direction.RIGHT to false,
                 )
             )
         block.reset(
@@ -442,10 +442,7 @@ class DisplayBlockTest {
         verify(mockNodeInfo, times(2)).addAction(addActionCaptor.capture())
         val addedActionIds = addActionCaptor.allValues.map { it.id }
         assertThat(addedActionIds)
-            .containsExactly(
-                R.id.action_move_display_block_up,
-                R.id.action_move_display_block_left
-            )
+            .containsExactly(R.id.action_move_display_block_up, R.id.action_move_display_block_left)
             .inOrder()
 
         // Verification for removed actions (non-movable directions)
@@ -455,7 +452,7 @@ class DisplayBlockTest {
         assertThat(removedActionIds)
             .containsExactly(
                 R.id.action_move_display_block_down,
-                R.id.action_move_display_block_right
+                R.id.action_move_display_block_right,
             )
             .inOrder()
     }
@@ -489,7 +486,7 @@ class DisplayBlockTest {
                 R.id.action_move_display_block_up,
                 R.id.action_move_display_block_down,
                 R.id.action_move_display_block_left,
-                R.id.action_move_display_block_right
+                R.id.action_move_display_block_right,
             )
             .inOrder()
     }
@@ -503,7 +500,7 @@ class DisplayBlockTest {
                     Direction.UP to true,
                     Direction.DOWN to true,
                     Direction.LEFT to true,
-                    Direction.RIGHT to true
+                    Direction.RIGHT to true,
                 )
             )
         block.reset(
@@ -532,7 +529,7 @@ class DisplayBlockTest {
                 R.id.action_move_display_block_up,
                 R.id.action_move_display_block_down,
                 R.id.action_move_display_block_left,
-                R.id.action_move_display_block_right
+                R.id.action_move_display_block_right,
             )
             .inOrder()
     }
