@@ -39,7 +39,6 @@ import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.util.concurrent.ListeningExecutorService;
 
-import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
@@ -58,26 +57,15 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
     ListeningExecutorService mBackgroundExecutor;
     @VisibleForTesting
     Executor mUiExecutor;
-    private Consumer<Boolean> mResultCallback;
     private Preference mPreference;
-    private boolean mNotifierEnabled = false;
+    private final OpenNetworkNotifierHelper mHelper;
 
     public NotifyOpenNetworksPreferenceController(Context context) {
         super(context, KEY_NOTIFY_OPEN_NETWORKS);
-        if (WifiUtils.isWifiMultiuserEnabled()) {
-            mWifiManager = context.getSystemService(WifiManager.class);
-            mBackgroundExecutor = ThreadUtils.getBackgroundExecutor();
-            mUiExecutor = context.getMainExecutor();
-            mResultCallback = new Consumer<Boolean>() {
-                @Override
-                public void accept(Boolean enabled) {
-                    mNotifierEnabled = Objects.requireNonNullElse(enabled, false);
-                    if (mPreference != null) {
-                        updateState(mPreference);
-                    }
-                }
-            };
-        }
+        mWifiManager = context.getSystemService(WifiManager.class);
+        mBackgroundExecutor = ThreadUtils.getBackgroundExecutor();
+        mUiExecutor = context.getMainExecutor();
+        mHelper = OpenNetworkNotifierHelper.getInstance(context);
     }
 
     @Override
@@ -85,8 +73,7 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
         super.displayPreference(screen);
         if (WifiUtils.isWifiMultiuserEnabled()) {
             mPreference = screen.findPreference(getPreferenceKey());
-            mBackgroundExecutor.execute(
-                    () -> mWifiManager.isOpenNetworkNotifierEnabled(mUiExecutor, mResultCallback));
+            refresh();
         } else {
             mSettingObserver = new SettingObserver(screen.findPreference(getPreferenceKey()));
         }
@@ -98,11 +85,18 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
             // On resume, fetch setting value from WifiManager once instead of registering a
             // listener on Settings.Global, since WifiManager is now the single source of value
             // storage for this setting.
-            mBackgroundExecutor.execute(
-                    () -> mWifiManager.isOpenNetworkNotifierEnabled(mUiExecutor, mResultCallback));
+            refresh();
         } else if (mSettingObserver != null) {
             mSettingObserver.register(mContext.getContentResolver(), true /* register */);
         }
+    }
+
+    private void refresh() {
+        mHelper.loadValue(mWifiManager, mBackgroundExecutor, mUiExecutor, () -> {
+            if (mPreference != null) {
+                updateState(mPreference);
+            }
+        });
     }
 
     @Override
@@ -119,24 +113,12 @@ public class NotifyOpenNetworksPreferenceController extends TogglePreferenceCont
 
     @Override
     public boolean isChecked() {
-        if (WifiUtils.isWifiMultiuserEnabled()) {
-            return mNotifierEnabled;
-        } else {
-            return Settings.Global.getInt(mContext.getContentResolver(),
-                    Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON, 0) == 1;
-        }
+        return mHelper.isEnabled();
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        if (WifiUtils.isWifiMultiuserEnabled()) {
-            mBackgroundExecutor.execute(
-                    () -> mWifiManager.setOpenNetworkNotifierEnabled(isChecked));
-        } else {
-            Settings.Global.putInt(mContext.getContentResolver(),
-                    Settings.Global.WIFI_NETWORKS_AVAILABLE_NOTIFICATION_ON,
-                    isChecked ? 1 : 0);
-        }
+        mHelper.setEnabled(mWifiManager, mBackgroundExecutor, isChecked);
         return true;
     }
 

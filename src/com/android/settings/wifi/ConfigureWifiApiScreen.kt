@@ -16,11 +16,17 @@
 
 package com.android.settings.wifi
 
+import android.Manifest.permission.NETWORK_SETTINGS
+import android.Manifest.permission.NETWORK_SETUP_WIZARD
+import android.net.wifi.WifiManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settingslib.datastore.Permissions.Companion.anyOf
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
+import com.android.settingslib.utils.ThreadUtils
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ConfigureWifiApiScreen.KEY)
@@ -36,7 +42,43 @@ class ConfigureWifiApiScreen :
     init {
         flag { Flags.catalystMigration26q2() }
 
-        // TODO(b/473939497) CatalystApi: migrate the preferences
+        preference(
+            key = "wifi_notify_open_networks",
+            purpose = R.string.wifi_notify_open_networks_purpose,
+            type = AnyBoolean,
+        ) {
+            get {
+                execute {
+                    val helper = OpenNetworkNotifierHelper.getInstance(context.applicationContext)
+                    if (WifiUtils.isWifiMultiuserEnabled()) {
+                        val wifiManager = context.getSystemService(WifiManager::class.java)
+                        val bgExecutor = ThreadUtils.getBackgroundExecutor()
+
+                        kotlinx.coroutines.runBlocking {
+                            kotlinx.coroutines.suspendCancellableCoroutine { continuation ->
+                                helper.loadValue(wifiManager, bgExecutor, bgExecutor) {
+                                    if (continuation.isActive) {
+                                        continuation.resumeWith(Result.success(Unit))
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    helper.isEnabled
+                }
+            }
+            set {
+                permissions(anyOf(NETWORK_SETTINGS, NETWORK_SETUP_WIZARD))
+                execute { enabled: Boolean ->
+                    val wifiManager = context.getSystemService(WifiManager::class.java)
+                    val bgExecutor = ThreadUtils.getBackgroundExecutor()
+
+                    OpenNetworkNotifierHelper.getInstance(context.applicationContext)
+                        .setEnabled(wifiManager, bgExecutor, enabled)
+                }
+            }
+        }
     }
 
     companion object {
