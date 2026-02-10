@@ -187,10 +187,12 @@ public class AutoclickDelayDialogFragment extends InstrumentedDialogFragment {
         }
     }
 
+    // LINT.IfChange
     /** Converts seek bar preference progress value to autoclick delay associated with it. */
     private int seekBarProgressToDelay(int progress) {
         return progress * AUTOCLICK_DELAY_STEP;
     }
+    // LINT.ThenChange(autoclick/ui/AutoclickDelayPreference.kt)
 
     private CharSequence delayTimeToString(int delayMillis) {
         return AutoclickUtils.getAutoclickDelaySummary(getContext(),

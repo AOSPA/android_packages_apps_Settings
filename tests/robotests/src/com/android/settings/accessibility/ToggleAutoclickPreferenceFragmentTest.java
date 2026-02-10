@@ -28,6 +28,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.provider.SearchIndexableResource;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 
@@ -39,11 +44,13 @@ import androidx.preference.PreferenceViewHolder;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.autoclick.ui.AutoclickScreen;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -58,6 +65,8 @@ import java.util.Set;
  */
 @RunWith(RobolectricTestRunner.class)
 public class ToggleAutoclickPreferenceFragmentTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
     private static final String KEY_AUTOCLICK_SHORTCUT_PREFERENCE = "autoclick_shortcut_preference";
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
@@ -150,11 +159,27 @@ public class ToggleAutoclickPreferenceFragmentTest {
                 SettingsEnums.ACCESSIBILITY_TOGGLE_AUTOCLICK);
     }
 
+
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_AUTOCLICK_SCREEN)
     @Test
     public void getPreferenceScreenResId_returnsCorrectXml() {
         launchFragment();
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(
                 R.xml.accessibility_autoclick_settings);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_AUTOCLICK_SCREEN)
+    @Test
+    public void getPreferenceScreenResId_returnsZero() {
+        launchFragment();
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(0);
+    }
+
+    @Test
+    public void getPreferenceScreenBindingKey_returnsScreenKey() {
+        launchFragment();
+        assertThat(mFragment.getPreferenceScreenBindingKey(mContext)).isEqualTo(
+                AutoclickScreen.KEY);
     }
 
     @Test
@@ -169,6 +194,7 @@ public class ToggleAutoclickPreferenceFragmentTest {
         assertThat(mFragment.getLogTag()).isEqualTo("AutoclickPrefFragment");
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_AUTOCLICK_SCREEN)
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = ToggleAutoclickPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -180,12 +206,33 @@ public class ToggleAutoclickPreferenceFragmentTest {
         assertThat(keys).containsAtLeastElementsIn(niks);
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_AUTOCLICK_SCREEN)
     @Test
     public void getNonIndexableKeys_doesNotContainShortcut() {
         final List<String> niks = ToggleAutoclickPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext);
 
         assertThat(niks).doesNotContain(KEY_AUTOCLICK_SHORTCUT_PREFERENCE);
+    }
+
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_AUTOCLICK_SCREEN)
+    @Test
+    public void getSearchIndexDataProvider_verifyXmlResourcesToIndex() {
+        List<SearchIndexableResource> searchIndexableResource =
+                ToggleAutoclickPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+        assertThat(searchIndexableResource.getFirst().xmlResId)
+                .isEqualTo(R.xml.accessibility_autoclick_settings);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_AUTOCLICK_SCREEN)
+    @Test
+    public void getSearchIndexDataProvider_returnsNull() {
+        List<SearchIndexableResource> searchIndexableResource =
+                ToggleAutoclickPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+
+        assertThat(searchIndexableResource).isNull();
     }
 
     private void launchFragment() {

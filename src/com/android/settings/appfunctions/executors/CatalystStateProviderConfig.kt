@@ -30,6 +30,7 @@ import com.android.settings.accessibility.a11yactivity.ui.A11yActivityScreen
 import com.android.settings.accessibility.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.actiontimeout.ui.ActionTimeoutSettingsScreen
 import com.android.settings.accessibility.audioadjustment.ui.AudioAdjustmentScreen
+import com.android.settings.accessibility.autoclick.ui.AutoclickScreen
 import com.android.settings.accessibility.buttonshortcutsetting.ui.ButtonShortcutSettingScreen
 import com.android.settings.accessibility.captionpreferences.ui.CaptioningAppearanceScreen
 import com.android.settings.accessibility.captionpreferences.ui.CaptioningMoreOptionsScreen
@@ -416,6 +417,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = MagnificationScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ActionTimeoutSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AudioAdjustmentScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AutoclickScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ButtonShortcutSettingScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CaptioningPropertiesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CaptioningAppearanceScreen.KEY),
