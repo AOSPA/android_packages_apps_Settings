@@ -130,6 +130,14 @@ public class ShadowAccessibilityManager extends org.robolectric.shadows.ShadowAc
     }
 
     /**
+     * Removes what accessibility service is exempted from showing the accessibility service warning
+     * dialog
+     */
+    public void removeAccessibilityServiceWarningExempted(@NonNull ComponentName componentName) {
+        mServiceInfoWarningExempted.remove(componentName);
+    }
+
+    /**
      * Implements the hidden method
      * {@link AccessibilityManager#enableShortcutsForTargets(boolean, int, Set, int)}.
      */

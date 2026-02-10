@@ -28,6 +28,8 @@ import androidx.fragment.app.testing.FragmentScenario
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.common.ShortcutConstants.USER_SHORTCUT_TYPES
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE
+import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE
 import com.android.settings.R
 import com.android.settings.SettingsActivity
@@ -46,10 +48,13 @@ import com.android.settingslib.preference.PreferenceFragment
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.CoroutineScope
 import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
@@ -60,8 +65,7 @@ import org.robolectric.shadows.ShadowLooper
 @RunWith(RobolectricTestRunner::class)
 class A11yServiceShortcutPreferenceTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
-    private var fragScenario: FragmentScenario<TestA11yServiceShortcutFragment>? = null
-    private var fragment: TestA11yServiceShortcutFragment? = null
+
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(context.getSystemService(AccessibilityManager::class.java))
@@ -79,6 +83,16 @@ class A11yServiceShortcutPreferenceTest {
     private val serviceWarningDenyButtonId =
         com.android.internal.R.id.accessibility_permission_enable_deny_button
 
+    private var fragScenario: FragmentScenario<TestA11yServiceShortcutFragment>? = null
+    private var fragment: TestA11yServiceShortcutFragment? = null
+
+    @Before
+    fun setUp() {
+        setTargetSdk(Build.VERSION_CODES.R)
+        setServiceWarningRequired(false)
+        a11yManager.setInstalledAccessibilityServiceList(listOf(serviceInfo))
+    }
+
     @After
     fun cleanUp() {
         fragment = null
@@ -89,6 +103,7 @@ class A11yServiceShortcutPreferenceTest {
     @Test
     fun getTitle_returnsCorrectString() {
         val preference = A11yServiceShortcutPreference(context, serviceInfo, 0)
+
         assertThat(preference.getTitle(context).toString())
             .isEqualTo(
                 context.getString(R.string.accessibility_shortcut_title, "StandardA11yService")
@@ -98,131 +113,134 @@ class A11yServiceShortcutPreferenceTest {
     @Test
     fun getFeatureName_returnsCorrectString() {
         val preference = A11yServiceShortcutPreference(context, serviceInfo, 0)
+
         assertThat(preference.getFeatureName(context).toString()).isEqualTo("StandardA11yService")
     }
 
     @Test
-    fun bindWidget_serviceInfoTargetSdkIsAtLeastR_widgetIsEditable() {
-        launchFragment(
-            serviceWarningRequired = false,
-            shortcutEnabled = false,
-            targetSdkIsAtLeastR = true,
-        )
+    fun bindWidget_targetSdkIsAtLeastR_widgetIsEditable() {
+        setTargetSdk(Build.VERSION_CODES.R)
+
+        launchFragment()
 
         assertThat(getShortcutWidget().isSettingsEditable).isTrue()
     }
 
     @Test
-    fun bindWidget_serviceInfoTargetSdkLessThanR_widgetIsNotEditable() {
-        launchFragment(
-            serviceWarningRequired = false,
-            shortcutEnabled = false,
-            targetSdkIsAtLeastR = false,
-        )
+    fun bindWidget_targetSdkLessThanR_widgetIsNotEditable() {
+        setTargetSdk(Build.VERSION_CODES.Q)
+
+        launchFragment()
 
         assertThat(getShortcutWidget().isSettingsEditable).isFalse()
     }
 
     @Test
-    fun clickSettingsWhileShortcutIsOff_serviceWarningRequired_showServiceWarningDialog() {
-        launchFragment(serviceWarningRequired = true, shortcutEnabled = false)
+    fun clickSettings_serviceWarningRequiredAndShortcutIsOff_showsServiceWarningDialog() {
+        setServiceWarningRequired(true)
+        setShortcutEnabled(false)
+        launchFragment()
 
         getShortcutWidget().performClick()
         ShadowLooper.idleMainLooper()
+
         assertServiceWarningDialogShown()
     }
 
     @Test
-    fun clickSettingsWhileShortcutIsOff_serviceWarningRequired_clickAllow_showEditShortcutsScreen() {
-        launchFragment(serviceWarningRequired = true, shortcutEnabled = false)
-
+    fun clickSettings_serviceWarningRequired_clickAllow_showsEditShortcutsScreen() {
+        setServiceWarningRequired(true)
+        setShortcutEnabled(false)
+        launchFragment()
         getShortcutWidget().performClick()
         ShadowLooper.idleMainLooper()
-        assertServiceWarningDialogShown()
 
-        val dialog: ShadowDialog = shadowOf(ShadowDialog.getLatestDialog())
-        dialog.clickOn(serviceWarningAllowButtonId)
+        clickDialogButton(serviceWarningAllowButtonId)
 
-        assertThat(isEditShortcutsScreenShown()).isEqualTo(true)
+        assertThat(isEditShortcutsScreenShown()).isTrue()
     }
 
     @Test
-    fun clickSettingsWhileShortcutIsOff_serviceWarningRequired_clickDeny_shortcutKeepsOff() {
-        launchFragment(serviceWarningRequired = true, shortcutEnabled = false)
-
+    fun clickSettings_serviceWarningRequired_clickDeny_shortcutStaysOff() {
+        setServiceWarningRequired(true)
+        setShortcutEnabled(false)
+        launchFragment()
         getShortcutWidget().performClick()
         ShadowLooper.idleMainLooper()
-        assertServiceWarningDialogShown()
 
-        val dialog: ShadowDialog = shadowOf(ShadowDialog.getLatestDialog())
-        dialog.clickOn(serviceWarningDenyButtonId)
+        clickDialogButton(serviceWarningDenyButtonId)
 
         assertThat(getShortcutWidget().isChecked).isFalse()
         assertThat(hasAnyShortcutTargets()).isFalse()
     }
 
     @Test
-    fun clickSettingsWhileShortcutIsOff_serviceWarningNotRequired_showEditShortcutsScreen() {
-        launchFragment(serviceWarningRequired = false, shortcutEnabled = false)
+    fun clickSettings_serviceWarningNotRequiredAndShortcutIsOff_showsEditShortcutsScreen() {
+        setServiceWarningRequired(false)
+        setShortcutEnabled(false)
+        launchFragment()
 
         getShortcutWidget().performClick()
         ShadowLooper.idleMainLooper()
 
-        assertThat(isEditShortcutsScreenShown()).isEqualTo(true)
+        assertThat(isEditShortcutsScreenShown()).isTrue()
     }
 
     @Test
-    fun clickSettingsWhileShortcutIsOn_serviceWarningNotRequired_showEditShortcutsScreen() {
-        launchFragment(serviceWarningRequired = false, shortcutEnabled = true)
+    fun clickSettings_shortcutIsOn_showsEditShortcutsScreen() {
+        setServiceWarningRequired(false)
+        setShortcutEnabled(true)
+        launchFragment()
 
         getShortcutWidget().performClick()
         ShadowLooper.idleMainLooper()
 
-        assertThat(isEditShortcutsScreenShown()).isEqualTo(true)
+        assertThat(isEditShortcutsScreenShown()).isTrue()
     }
 
     @Test
-    fun clickToggleWhileShortcutIsOff_serviceWarningRequired_showServiceWarningDialog() {
-        launchFragment(serviceWarningRequired = true, shortcutEnabled = false)
+    fun clickToggle_serviceWarningRequiredAndShortcutIsOff_showsServiceWarningDialog() {
+        setServiceWarningRequired(true)
+        setShortcutEnabled(false)
+        launchFragment()
 
         getShortcutWidgetToggle().performClick()
-
         ShadowLooper.idleMainLooper()
+
         assertServiceWarningDialogShown()
     }
 
     @Test
-    fun clickToggleWhileShortcutIsOff_serviceWarningRequired_clickAllow_turnsOnShortcut() {
-        launchFragment(serviceWarningRequired = true, shortcutEnabled = false)
-
+    fun clickToggle_serviceWarningRequired_clickAllow_turnsOnShortcut() {
+        setServiceWarningRequired(true)
+        setShortcutEnabled(false)
+        launchFragment()
         getShortcutWidgetToggle().performClick()
-
         ShadowLooper.idleMainLooper()
-        assertServiceWarningDialogShown()
 
-        val dialog: ShadowDialog = shadowOf(ShadowDialog.getLatestDialog())
-        dialog.clickOn(serviceWarningAllowButtonId)
+        clickDialogButton(serviceWarningAllowButtonId)
 
         assertThat(hasAnyShortcutTargets()).isTrue()
     }
 
     @Test
-    fun clickToggleWhileShortcutIsOff_serviceWarningRequired_clickDeny_shortcutKeepsOff() {
-        launchFragment(serviceWarningRequired = true, shortcutEnabled = false)
-
+    fun clickToggle_serviceWarningRequired_clickDeny_shortcutStaysOff() {
+        setServiceWarningRequired(true)
+        setShortcutEnabled(false)
+        launchFragment()
         getShortcutWidgetToggle().performClick()
         ShadowLooper.idleMainLooper()
-        assertServiceWarningDialogShown()
 
-        val dialog: ShadowDialog = shadowOf(ShadowDialog.getLatestDialog())
-        dialog.clickOn(serviceWarningDenyButtonId)
+        clickDialogButton(serviceWarningDenyButtonId)
 
         assertThat(hasAnyShortcutTargets()).isFalse()
     }
 
     @Test
-    fun clickToggleWhileShortcutIsOn_serviceWarningRequired_turnOffShortcut() {
-        launchFragment(serviceWarningRequired = true, shortcutEnabled = true)
+    fun clickToggle_shortcutIsOn_turnsOffShortcut() {
+        setServiceWarningRequired(true)
+        setShortcutEnabled(true)
+        launchFragment()
 
         getShortcutWidgetToggle().performClick()
         ShadowLooper.idleMainLooper()
@@ -231,8 +249,10 @@ class A11yServiceShortcutPreferenceTest {
     }
 
     @Test
-    fun clickToggleWhileShortcutIsOff_serviceWarningNotRequired_turnsOnShortcut() {
-        launchFragment(serviceWarningRequired = false, shortcutEnabled = false)
+    fun clickToggle_serviceWarningNotRequiredAndShortcutIsOff_turnsOnShortcut() {
+        setServiceWarningRequired(false)
+        setShortcutEnabled(false)
+        launchFragment()
 
         getShortcutWidgetToggle().performClick()
         ShadowLooper.idleMainLooper()
@@ -241,101 +261,145 @@ class A11yServiceShortcutPreferenceTest {
     }
 
     @Test
-    fun clickToggleWhileShortcutIsOn_serviceWarningNotRequired_turnsOffShortcut() {
-        launchFragment(serviceWarningRequired = false, shortcutEnabled = true)
+    fun clickToggle_inSetupWizard_turnsOnSoftwareShortcut() {
+        setServiceWarningRequired(false)
+        setTargetSdk(Build.VERSION_CODES.R)
+        setIsAccessibilityTool(true)
+        setHasTile(true)
 
+        launchFragment(inSetupWizard = true)
         getShortcutWidgetToggle().performClick()
         ShadowLooper.idleMainLooper()
 
-        assertThat(hasAnyShortcutTargets()).isFalse()
+        assertHasShortcutTarget(SOFTWARE)
     }
 
-    private fun launchFragment(
-        serviceWarningRequired: Boolean,
-        shortcutEnabled: Boolean,
-        targetSdkIsAtLeastR: Boolean = true,
-    ) {
-        if (!serviceWarningRequired) {
+    @Test
+    fun clickToggle_notInSetupWizard_turnsOnQuickSettingsShortcut() {
+        setServiceWarningRequired(false)
+        setTargetSdk(Build.VERSION_CODES.R)
+        setIsAccessibilityTool(true)
+        setHasTile(true)
+
+        launchFragment(inSetupWizard = false)
+        getShortcutWidgetToggle().performClick()
+        ShadowLooper.idleMainLooper()
+
+        assertHasShortcutTarget(QUICK_SETTINGS)
+    }
+
+    @Test
+    fun clickToggle_targetSdkLessThanR_turnsOnHardwareShortcut() {
+        setServiceWarningRequired(false)
+        setTargetSdk(Build.VERSION_CODES.Q)
+
+        launchFragment()
+        getShortcutWidgetToggle().performClick()
+        ShadowLooper.idleMainLooper()
+
+        assertHasShortcutTarget(HARDWARE)
+    }
+
+    private fun setTargetSdk(targetSdk: Int) {
+        serviceInfo.resolveInfo.serviceInfo.applicationInfo.targetSdkVersion = targetSdk
+    }
+
+    private fun setIsAccessibilityTool(isTool: Boolean) {
+        whenever(serviceInfo.isAccessibilityTool) doReturn isTool
+    }
+
+    private fun setHasTile(hasTile: Boolean) {
+        whenever(serviceInfo.tileServiceName) doReturn (if (hasTile) "SomeTileService" else null)
+    }
+
+    private fun setServiceWarningRequired(required: Boolean) {
+        if (required) {
+            a11yManager.removeAccessibilityServiceWarningExempted(serviceInfo.componentName)
+        } else {
             a11yManager.setAccessibilityServiceWarningExempted(serviceInfo.componentName)
         }
-        if (shortcutEnabled) {
-            a11yManager.setAccessibilityShortcutTargets(
-                SOFTWARE,
-                listOf(serviceInfo.componentName.flattenToString()),
-            )
-        }
+    }
 
-        if (!targetSdkIsAtLeastR) {
-            serviceInfo.resolveInfo.serviceInfo.applicationInfo.targetSdkVersion =
-                Build.VERSION_CODES.Q
-        }
+    private fun setShortcutEnabled(enabled: Boolean) {
+        val targets =
+            if (enabled) listOf(serviceInfo.componentName.flattenToString()) else emptyList()
+        a11yManager.setAccessibilityShortcutTargets(SOFTWARE, targets)
+    }
 
-        a11yManager.setInstalledAccessibilityServiceList(listOf(serviceInfo))
+    private fun launchFragment(inSetupWizard: Boolean = false) {
         setupTestData(serviceInfo)
 
         fragScenario =
-            FragmentScenario.launch(
-                    TestA11yServiceShortcutFragment::class.java,
-                    null,
-                    androidx.appcompat.R.style.Theme_AppCompat,
-                    null as FragmentFactory?,
-                )
+            if (inSetupWizard) {
+                    AccessibilityTestUtils.launchFragmentInSetupWizardFlow(
+                        TestA11yServiceShortcutFragment::class.java,
+                        null,
+                    )
+                } else {
+                    FragmentScenario.launch(
+                        TestA11yServiceShortcutFragment::class.java,
+                        null,
+                        androidx.appcompat.R.style.Theme_AppCompat,
+                        null as FragmentFactory?,
+                    )
+                }
                 .moveToState(Lifecycle.State.RESUMED)
-        fragScenario!!.onFragment { fragment = it }
+
+        fragScenario?.onFragment { fragment = it }
     }
 
-    private fun getShortcutWidget(): ShortcutPreference {
-        return fragment!!.findPreference(A11yServiceShortcutPreference.KEY)!!
-    }
+    private fun getShortcutWidget(): ShortcutPreference =
+        checkNotNull(fragment?.findPreference(A11yServiceShortcutPreference.KEY))
 
     private fun getShortcutWidgetToggle(): View {
         val shortcutPrefWidget = getShortcutWidget()
         val viewHolder =
             AccessibilityTestUtils.inflateShortcutPreferenceView(
-                fragment!!.requireContext(),
+                checkNotNull(fragment).requireContext(),
                 shortcutPrefWidget,
             )
-        return requireNotNull(viewHolder.findViewById(shortcutPrefWidget.switchResId))
+        return checkNotNull(viewHolder.findViewById(shortcutPrefWidget.switchResId))
     }
 
     private fun setupTestData(serviceInfo: AccessibilityServiceInfo) {
         PreferenceScreenRegistry.preferenceScreenMetadataFactories =
             FixedArrayMap(1) {
-                it.put(FakePreferenceScreen.Companion.KEY) { FakePreferenceScreen(serviceInfo) }
+                it.put(FakePreferenceScreen.KEY) { FakePreferenceScreen(serviceInfo) }
             }
     }
 
-    private fun assertServiceWarningDialogShown(): AccessibilityServiceWarningDialogFragment {
+    private fun clickDialogButton(buttonId: Int) {
+        val dialog = shadowOf(ShadowDialog.getLatestDialog())
+        dialog.clickOn(buttonId)
         ShadowLooper.idleMainLooper()
-        val fragments = fragment!!.getChildFragmentManager().getFragments()
-        assertThat(fragments).isNotEmpty()
+    }
+
+    private fun assertServiceWarningDialogShown() {
+        ShadowLooper.idleMainLooper()
+        val fragments = checkNotNull(fragment).childFragmentManager.fragments
         assertThat(fragments).hasSize(1)
         assertThat(fragments[0]).isInstanceOf(AccessibilityServiceWarningDialogFragment::class.java)
-        return fragments[0] as AccessibilityServiceWarningDialogFragment
     }
 
     private fun isEditShortcutsScreenShown(): Boolean {
         ShadowLooper.idleMainLooper()
-        val intent = shadowOf(fragment!!.context as ContextWrapper?).peekNextStartedActivity()
-        return intent
-            ?.getExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)
-            ?.equals(EditShortcutsPreferenceFragment::class.java.getName()) == true
+        val intent =
+            shadowOf(checkNotNull(fragment).context as ContextWrapper).peekNextStartedActivity()
+        return intent?.getExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT) ==
+            EditShortcutsPreferenceFragment::class.java.name
     }
 
-    private fun hasAnyShortcutTargets(): Boolean {
-        for (shortcutType in USER_SHORTCUT_TYPES) {
-            if (a11yManager.getAccessibilityShortcutTargets(shortcutType).isNotEmpty()) {
-                return true
-            }
-        }
-        return false
+    private fun hasAnyShortcutTargets(): Boolean =
+        USER_SHORTCUT_TYPES.any { a11yManager.getAccessibilityShortcutTargets(it).isNotEmpty() }
+
+    private fun assertHasShortcutTarget(shortcutType: Int) {
+        assertThat(a11yManager.getAccessibilityShortcutTargets(shortcutType))
+            .contains(serviceInfo.componentName.flattenToString())
     }
 }
 
 class TestA11yServiceShortcutFragment : PreferenceFragment() {
-    override fun getPreferenceScreenBindingKey(context: Context): String? {
-        return FakePreferenceScreen.Companion.KEY
-    }
+    override fun getPreferenceScreenBindingKey(context: Context): String = FakePreferenceScreen.KEY
 }
 
 private class FakePreferenceScreen(private val serviceInfo: AccessibilityServiceInfo) :
@@ -344,15 +408,12 @@ private class FakePreferenceScreen(private val serviceInfo: AccessibilityService
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +A11yServiceShortcutPreference(context, serviceInfo, metricsCategory)
+            +A11yServiceShortcutPreference(context, serviceInfo, getMetricsCategory())
         }
 
-    override val key: String
-        get() = KEY
+    override val key: String = KEY
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
-    override val purpose: Int
-        get() = 0
+    override val purpose: Int = 0
 
     override fun getMetricsCategory(): Int = 0
 
