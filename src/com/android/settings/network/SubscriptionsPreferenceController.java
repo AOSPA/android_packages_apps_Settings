@@ -87,6 +87,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         TelephonyCallback.CarrierNetworkListener {
     private static final String TAG = "SubscriptionsPrefCntrlr";
 
+    public static final String PREF_KEY_ACTIVE_MOBILE_CONNECTION = "active_mobile_connection";
     private UpdateListener mUpdateListener;
     private String mPreferenceGroupKey;
     private PreferenceGroup mPreferenceGroup;
@@ -267,6 +268,7 @@ public class SubscriptionsPreferenceController extends AbstractPreferenceControl
         mSubsGearPref.setTitle(SubscriptionUtil.getUniqueSubscriptionDisplayName(
                 subInfo, mContext));
         mSubsGearPref.setOrder(mStartOrder);
+        mSubsGearPref.setKey(PREF_KEY_ACTIVE_MOBILE_CONNECTION);
         mSubsGearPref.setSummary(getMobilePreferenceSummary(subInfo.getSubscriptionId()));
         mSubsGearPref.setIcon(getIcon(subInfo.getSubscriptionId()));
         mPreferenceGroup.addPreference(mSubsGearPref);

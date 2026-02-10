@@ -35,7 +35,10 @@ import android.net.NetworkTemplate;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.PowerManager;
+import android.os.ResultReceiver;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -79,6 +82,8 @@ import com.android.settings.network.ethernet.EthernetSwitchPreferenceController;
 import com.android.settings.network.ethernet.EthernetTracker;
 import com.android.settings.network.ethernet.EthernetTrackerImpl;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.troubleshooting.TroubleshootingServiceConnection;
+import com.android.settings.troubleshooting.TroubleshootingUtils;
 import com.android.settings.widget.GearPreference;
 import com.android.settings.wifi.AddNetworkFragment;
 import com.android.settings.wifi.AddWifiNetworkPreference;
@@ -96,6 +101,7 @@ import com.android.settingslib.HelpUtils;
 import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.utils.StringUtil;
@@ -110,6 +116,7 @@ import com.android.wifitrackerlib.WifiEntry.ConnectCallback;
 import com.android.wifitrackerlib.WifiPickerTracker;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -188,6 +195,94 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     // things.
     private static final String EXTRA_START_CONNECT_SSID = "wifi_start_connect_ssid";
     private String mOpenSsid;
+
+    private TroubleshootingServiceConnection mTroubleshootingServiceConnection;
+
+    private ResultReceiver mWifiTroubleshootingReceiver =
+            new ResultReceiver(new Handler(Looper.getMainLooper())) {
+                @Override
+                protected void onReceiveResult(int resultCode, Bundle resultData) {
+                    super.onReceiveResult(resultCode, resultData);
+                    final WifiEntry connectedEntry = mWifiPickerTracker.getConnectedWifiEntry();
+                    PreferenceCategory connectedWifiPreferenceCategory =
+                            mWifiCategory.getPreferenceCategory();
+                    if (connectedEntry != null && connectedWifiPreferenceCategory != null) {
+                        final LongPressWifiEntryPreference connectedPref =
+                                connectedWifiPreferenceCategory.findPreference(
+                                        connectedEntry.getKey());
+                        if (connectedPref == null) {
+                            return;
+                        }
+                        if (resultCode == ITroubleshootingInfoProviderService.RESULT_SUCCESS) {
+                            attachFooter(connectedEntry.getKey(), "", null);
+                            return;
+                        }
+                        if (!resultData.containsKey(
+                                ITroubleshootingInfoProviderService
+                                        .KEY_ACTION_OF_PREFERENCE_UI_FOOTER)) {
+                            return;
+                        }
+                        String title = resultData.getString(
+                                ITroubleshootingInfoProviderService
+                                        .KEY_NAME_OF_PREFERENCE_UI_FOOTER);
+                        String packageName = resultData.getString(
+                                ITroubleshootingInfoProviderService.KEY_PACKAGE_NAME);
+                        String className = resultData.getString(
+                                ITroubleshootingInfoProviderService.KEY_CLASS_NAME);
+                        String action = resultData.getString(
+                                ITroubleshootingInfoProviderService
+                                        .KEY_ACTION_OF_PREFERENCE_UI_FOOTER);
+                        attachFooter(connectedEntry.getKey(), title, (v) -> {
+                            TroubleshootingUtils.startWifiTroubleShootingActivity(
+                                    getActivity(),
+                                    packageName,
+                                    className,
+                                    action,
+                                    connectedEntry.getSsid());
+                        });
+                    }
+                }
+            };
+
+    private ResultReceiver mMobileTroubleshootingReceiver =
+            new ResultReceiver(new Handler(Looper.getMainLooper())) {
+                @Override
+                protected void onReceiveResult(int resultCode, Bundle resultData) {
+                    super.onReceiveResult(resultCode, resultData);
+                    if (resultCode == ITroubleshootingInfoProviderService.RESULT_SUCCESS) {
+                        attachFooter(
+                                SubscriptionsPreferenceController.PREF_KEY_ACTIVE_MOBILE_CONNECTION,
+                                "",
+                                null);
+                        return;
+                    }
+                    if (!resultData.containsKey(
+                            ITroubleshootingInfoProviderService
+                                    .KEY_ACTION_OF_PREFERENCE_UI_FOOTER)) {
+                        return;
+                    }
+                    String title = resultData.getString(
+                            ITroubleshootingInfoProviderService.KEY_NAME_OF_PREFERENCE_UI_FOOTER);
+                    String packageName = resultData.getString(
+                            ITroubleshootingInfoProviderService.KEY_PACKAGE_NAME);
+                    String className = resultData.getString(
+                            ITroubleshootingInfoProviderService.KEY_CLASS_NAME);
+                    String action = resultData.getString(
+                            ITroubleshootingInfoProviderService.KEY_ACTION_OF_PREFERENCE_UI_FOOTER);
+
+                    attachFooter(
+                            SubscriptionsPreferenceController.PREF_KEY_ACTIVE_MOBILE_CONNECTION,
+                            title,
+                            (v) -> {
+                                TroubleshootingUtils.startMobileTroubleshootingActivity(
+                                        getActivity(),
+                                        packageName,
+                                        className,
+                                        action,
+                                        SubscriptionManager.getDefaultDataSubscriptionId());
+                            });
+                }
+            };
 
     private boolean mIsViewLoading;
     @VisibleForTesting
@@ -368,6 +463,13 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 fixConnectivityItem.setVisible(!mIsGuest && (!isAirplaneModeOn || isWifiEnabled));
             }
         };
+
+        HashMap<String, ResultReceiver> resultReceivers = new HashMap<>();
+        resultReceivers.put(ITroubleshootingInfoProviderService.ISSUE_SUBJECT_IS_WIFI,
+                mWifiTroubleshootingReceiver);
+        resultReceivers.put(ITroubleshootingInfoProviderService.ISSUE_SUBJECT_IS_CELLULAR,
+                mMobileTroubleshootingReceiver);
+        mTroubleshootingServiceConnection = new TroubleshootingServiceConnection(resultReceivers);
     }
 
     private void updateUserType() {
@@ -590,6 +692,19 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
 
         changeNextButtonState(mWifiPickerTracker != null
                 && mWifiPickerTracker.getConnectedWifiEntry() != null);
+
+        if (com.android.settings.flags.Flags.receiveTroubleshootingMessage()
+                && mTroubleshootingServiceConnection.isTroubleshootingServiceExists(getContext())) {
+            mTroubleshootingServiceConnection.bindService(getContext());
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (com.android.settings.flags.Flags.receiveTroubleshootingMessage()) {
+            mTroubleshootingServiceConnection.unbindService(getContext());
+        }
     }
 
     @Override
@@ -1057,6 +1172,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                     }
                     return true;
                 });
+
                 pref.setOnGearClickListener(preference -> {
                     launchNetworkDetailsFragment(pref);
                 });
@@ -1374,6 +1490,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
 
         wifiEntry.connect(callback);
     }
+
 
     private class WifiConnectActionListener implements WifiManager.ActionListener {
         @Override
