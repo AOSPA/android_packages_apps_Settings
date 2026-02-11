@@ -74,6 +74,7 @@ fun DeviceStateAppFunctionType.toMetricsId(): Int {
         DeviceStateAppFunctionType.GET_NOTIFICATIONS -> SettingsEnums.APP_FUNCTION_GET_NOTIFICATIONS
         DeviceStateAppFunctionType.GET_APPS -> SettingsEnums.APP_FUNCTION_GET_APPS
         DeviceStateAppFunctionType.GET_METADATA -> SettingsEnums.APP_FUNCTION_GET_METADATA
+        DeviceStateAppFunctionType.GET_DEVICE_STATE -> SettingsEnums.APP_FUNCTION_GET_DEVICE_STATE
         DeviceStateAppFunctionType.SET_DEVICE_STATE -> SettingsEnums.APP_FUNCTION_SET_DEVICE_STATE
         DeviceStateAppFunctionType.ADJUST_DEVICE_STATE_BY_PERCENTAGE ->
             SettingsEnums.APP_FUNCTION_ADJUST_DEVICE_STATE_BY_PERCENTAGE

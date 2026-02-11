@@ -28,6 +28,9 @@ enum class DeviceStateAppFunctionType(val functionId: String) {
     // AppFunctions for getting device state metadata
     GET_METADATA("getDeviceStateMetadata"),
 
+    // AppFunctions for getting device state
+    GET_DEVICE_STATE("getDeviceStateItem"),
+
     // AppFunctions for setting device state
     SET_DEVICE_STATE("setDeviceStateItem"),
     ADJUST_DEVICE_STATE_BY_PERCENTAGE("adjustNumericDeviceStateItemByPercentage"),
