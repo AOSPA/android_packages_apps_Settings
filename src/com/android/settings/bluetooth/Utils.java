@@ -38,6 +38,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.PreferenceGroup;
 
 import com.android.settings.R;
 import com.android.settings.flags.Flags;
@@ -80,6 +81,8 @@ public final class Utils {
 
     static final boolean V = BluetoothUtils.V; // verbose logging
     static final boolean D = BluetoothUtils.D;  // regular logging
+
+    static final String INVISIBLE_CATEGORY = "invisible_profile_category";
 
     private Utils() {
     }
@@ -480,5 +483,25 @@ public final class Utils {
                                 + ". Do nothing.");
             }
         }
+    }
+
+    /**
+     * Updates parent preference group visibility according to its children.
+     *
+     * @param group The parent preference group
+     */
+    public static void updateVisibilityAccordingToChildren(PreferenceGroup group) {
+        if (group.getKey() == INVISIBLE_CATEGORY) {
+            return;
+        }
+        int childrenSize = group.getPreferenceCount();
+        boolean visible = false;
+        for (int i = 0; i < childrenSize; ++i) {
+            if (group.getPreference(i).isVisible()) {
+                visible = true;
+                break;
+            }
+        }
+        group.setVisible(visible);
     }
 }

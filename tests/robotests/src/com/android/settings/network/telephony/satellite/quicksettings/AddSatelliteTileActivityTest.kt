@@ -19,6 +19,7 @@ package com.android.settings.network.telephony.satellite.quicksettings
 import android.app.Application
 import android.app.NotificationManager
 import android.app.StatusBarManager
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -26,6 +27,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
 import java.util.concurrent.Executor
 import java.util.function.Consumer
@@ -49,6 +51,7 @@ import org.robolectric.shadows.ShadowLooper
 @RunWith(RobolectricTestRunner::class)
 class AddSatelliteTileActivityTest {
     @get:Rule val mocks = MockitoJUnit.rule()
+    @get:Rule val metricsRule = MetricsRule()
 
     @Mock private lateinit var mockStatusBarManager: StatusBarManager
     @Mock private lateinit var mockNotificationManager: NotificationManager
@@ -199,6 +202,34 @@ class AddSatelliteTileActivityTest {
 
         verify(mockNotificationManager, never()).cancel(anyInt())
         scenario.close()
+    }
+
+    @Test
+    fun requestAddTileService_whenTileAdded_logsAction() {
+        val (satelliteTilePromptUtils, scenario) = setupAndLaunchActivity()
+
+        invokeRequestAddTileServiceCallbackAndClose(
+            scenario,
+            satelliteTilePromptUtils,
+            StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ADDED,
+        )
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(any(), eq(SettingsEnums.ACTION_SATELLITE_NOTIFICATION_ADD_TILE))
+    }
+
+    @Test
+    fun requestAddTileService_whenDialogDismissed_doesNotLogAction() {
+        val (satelliteTilePromptUtils, scenario) = setupAndLaunchActivity()
+
+        invokeRequestAddTileServiceCallbackAndClose(
+            scenario,
+            satelliteTilePromptUtils,
+            StatusBarManager.TILE_ADD_REQUEST_RESULT_DIALOG_DISMISSED,
+        )
+
+        verify(metricsRule.metricsFeatureProvider, never())
+            .action(any(), eq(SettingsEnums.ACTION_SATELLITE_NOTIFICATION_ADD_TILE))
     }
 
     private fun setupAndLaunchActivity():

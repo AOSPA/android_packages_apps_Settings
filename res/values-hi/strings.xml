@@ -352,7 +352,7 @@
     <string name="lock_after_timeout" msgid="8682769000437403444">"स्क्रीन टाइमआउट के बाद लॉक होने की सुविधा"</string>
     <string name="lock_after_timeout_summary" msgid="4869265514658147304">"टाइम आउट के बाद <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g>"</string>
     <string name="lock_immediately_summary_with_exception" msgid="40819611828339044">"टाइम आउट के तुरंत बाद, अगर <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> ने लॉक न कर रखा हो"</string>
-    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"टाइमआउट के <xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> बाद. हालांकि, <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> की मदद से डिवाइस अनलॉक रखे जाने पर नहीं"</string>
+    <string name="lock_after_timeout_summary_with_exception" msgid="3441806647509073124">"<xliff:g id="TIMEOUT_STRING">%1$s</xliff:g> बाद, लेकिन <xliff:g id="TRUST_AGENT_NAME">%2$s</xliff:g> चालू रहने पर नहीं"</string>
     <string name="owner_info_settings_title" msgid="3555626140700093017">"लॉक स्क्रीन पर टेक्स्ट जोड़ें"</string>
     <string name="owner_info_settings_summary" msgid="347238313388083297">"कोई नहीं"</string>
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"उदाहरण, जो का Android."</string>
@@ -1341,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"वाई-फ़ाई कॉलिंग की सुविधा शुरू करें"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"वाई-फ़ाई कॉलिंग की सुविधा चालू करें"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"<xliff:g id="SSID">%1$s</xliff:g> से डिसकनेक्ट किया गया"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"आवाज़ और वाइब्रेशन"</string>
     <string name="account_settings" msgid="255404935489127404">"खाते"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"वर्क प्रोफ़ाइल खाते - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"व्‍यक्‍तिगत प्रोफ़ाइल खाते"</string>
@@ -1349,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"कार्यस्‍थल खाता - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"व्‍यक्‍तिगत खाता - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"खोजें"</string>
-    <string name="display_settings" msgid="7197750639709493852">"डिसप्ले"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"स्क्रीन ऑटो-रोटेट होने की सुविधा"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"बंद है"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"चालू है"</string>
@@ -1947,7 +1945,7 @@
     <string name="lockpattern_change_lock_pin_label" msgid="7327409886587802756">"अनलॉक पिन बदलें"</string>
     <string name="lockpattern_recording_intro_header" msgid="8325736706877916560">"लॉक खोलने का पैटर्न बनाएं"</string>
     <string name="lockpattern_recording_intro_footer" msgid="2656868858594487197">"सहायता के लिए मेन्यू दबाएं."</string>
-    <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"सेट अप के बाद उंगली हटा लें"</string>
+    <string name="lockpattern_recording_inprogress" msgid="7268008332694009191">"सेट करने के बाद उंगली हटा लें"</string>
     <string name="lockpattern_recording_inprogress_click" msgid="8502597789237564270">"कम से कम <xliff:g id="NUMBER">%d</xliff:g> डॉट कनेक्ट करें"</string>
     <string name="lockpattern_recording_incorrect_too_short" msgid="3351522018450593723">"कम से कम <xliff:g id="NUMBER">%d</xliff:g> बिंदुओं को कनेक्‍ट करें. फिर से कोशिश करें."</string>
     <string name="lockpattern_pattern_entered_header" msgid="7709618312713127249">"पैटर्न रिकॉर्ड किया गया"</string>
@@ -1966,7 +1964,7 @@
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"प्रोफ़ाइल पैटर्न दिखे"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"छूने पर कंपन (वाइब्रेशन) करें"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"पावर बटन से तुरंत लॉक होने की सुविधा"</string>
-    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"<xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> की मदद से डिवाइस अनलॉक रखे जाने पर नहीं"</string>
+    <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"बस <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g> चालू रहने पर नहीं"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"अनलॉक आकार सेट करें"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"अनलॉक आकार बदलें"</string>
     <string name="lockpattern_settings_help_how_to_record" msgid="2093801939046625774">"अनलॉक आकार कैसे आरेखित करें"</string>
@@ -2146,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"\".\" सम्‍मिलित करने के लिए Space कुंजी दो बार दबाएं"</string>
     <string name="show_password" msgid="7101900779571040117">"पासवर्ड दिखाएं"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"लिखते समय वर्ण दिखाएं"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"टचस्क्रीन के लिए पासवर्ड दिखाएं"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"टचस्क्रीन पर टाइप करते समय, कम समय के लिए वर्ण दिखाएं"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"कीबोर्ड के लिए पासवर्ड दिखाएं"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"कीबोर्ड से टाइप करते समय, कम समय के लिए वर्ण दिखाएं"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"यह स्पेलिंग जाँचने वाला निजी डेटा, जैसे पासवर्ड और क्रेडिट कार्ड नंबर के साथ आपके लिखे सभी लेख इकट्ठा कर सकता है. यह ऐप्‍लिकेशन <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> से आता है. इस स्पेलिंग जाँचने वाले का इस्तेमाल करें?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"सेटिंग"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"भाषा"</string>
@@ -3174,7 +3169,7 @@
     <string name="adaptive_connectivity_summary" msgid="3648731530666326885">"अडैप्टिव कनेक्टिविटी से इंटरनेट कनेक्शन अपने-आप मैनेज होता है. इससे डिवाइस की परफ़ॉर्मेंस बेहतर होती है और बैटरी लाइफ़ बढ़ती है"</string>
     <string name="adaptive_connectivity_switch_on" msgid="3653067561620745493">"चालू है"</string>
     <string name="adaptive_connectivity_switch_off" msgid="5076172560836115265">"बंद करें"</string>
-    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"अडैप्टिव कनेक्टिविटी सुविधा का इस्तेमाल करें"</string>
+    <string name="adaptive_connectivity_main_switch_title" msgid="261045483524512420">"अडैप्टिव कनेक्टिविटी का इस्तेमाल करें"</string>
     <string name="adaptive_connectivity_wifi_switch_title" msgid="8534819376336827298">"मोबाइल नेटवर्क पर अपने-आप स्विच होने की सुविधा"</string>
     <string name="adaptive_connectivity_wifi_switch_summary" msgid="827122572213043364">"वाई-फ़ाई कनेक्शन कमज़ोर होने या उपलब्ध न होने पर, यह सुविधा इंटरनेट से कनेक्ट करने में मदद करती है. डेटा शुल्क लागू हो सकते हैं."</string>
     <string name="adaptive_connectivity_mobile_network_switch_title" msgid="1852172801040818123">"बैटरी लाइफ़ बढ़ाने के लिए नेटवर्क ऑप्टिमाइज़ करें"</string>
@@ -3651,7 +3646,7 @@
     <string name="network_dashboard_title" msgid="788543070557731240">"नेटवर्क और इंटरनेट"</string>
     <string name="network_dashboard_summary_no_mobile" msgid="4022575916334910790">"वाई-फ़ाई, हॉटस्पॉट"</string>
     <string name="connected_devices_dashboard_title" msgid="19868275519754895">"कनेक्ट किए गए डिवाइस"</string>
-    <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"ब्लूटूथ, दूसरे डिवाइस से जोड़ने की सेटिंग"</string>
+    <string name="connected_devices_dashboard_default_summary" msgid="7211769956193710397">"ब्लूटूथ, दूसरे डिवाइसों से जोड़ने की सेटिंग"</string>
     <string name="connected_devices_dashboard_summary" msgid="6927727617078296491">"ब्लूटूथ, ड्राइविंग मोड, NFC"</string>
     <string name="connected_devices_dashboard_no_nfc_summary" msgid="8424794257586524040">"ब्लूटूथ, ड्राइविंग मोड"</string>
     <string name="connected_devices_dashboard_no_driving_mode_summary" msgid="7155882619333726331">"ब्लूटूथ, एनएफ़सी"</string>
@@ -3662,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ब्लूटूथ, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"डिवाइस"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"कीबोर्ड, टचपैड, डिसप्ले, साउंड"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"डिसप्ले"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"साउंड"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"एनएफ़सी बंद होने की वजह से यह सुविधा उपलब्ध नहीं है"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"इसका इस्तेमाल करने के लिए, कोई पेमेंट ऐप्लिकेशन इंस्टॉल करें"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"हाल ही के ऐप्लिकेशन, डिफ़ॉल्ट ऐप्लिकेशन"</string>
@@ -4364,11 +4357,11 @@
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"ऐप्लिकेशन की सेटिंग"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"<xliff:g id="APP_NAME">%1$s</xliff:g> में जानकारी और सेटिंग दिखेंगी"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"इन्हें <xliff:g id="APP_NAME">%1$s</xliff:g> मैनेज कर रहा है"</string>
-    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"<xliff:g id="MODE_NAME">%1$s</xliff:g> को बंद करना है?"</string>
-    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"यह मोड बंद करने पर दोबारा कभी चालू नहीं होगा"</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"<xliff:g id="MODE_NAME">%1$s</xliff:g> मोड को बंद करना है?"</string>
+    <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"बंद किए जाने पर, यह मोड अपने-आप चालू नहीं होगा"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"बंद करें"</string>
     <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"<xliff:g id="MODE_NAME">%1$s</xliff:g> मोड चालू करना है?"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"यह मोड सेटिंग के हिसाब से अपने-आप चालू हो सकता है"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"सेटिंग के हिसाब से, यह मोड अपने-आप चालू हो सकता है"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"चालू करें"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"एक रेगुलर शेड्यूल के मुताबिक काम करने वाला कोई मोड सेट करें"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"कैलेंडर इवेंट और न्योतों के जवाबों के साथ सिंक करने के लिए, कोई मोड सेट करें"</string>
@@ -4429,7 +4422,7 @@
     <string name="binary_transparency_summary" msgid="6556263563122917101">"ओएस बिल्ड की पुष्टि करें"</string>
     <string name="keywords_binary_transparency" msgid="4628341524132968893">"परफ़ॉर्मेंस से जुड़ी जानकारी, पारदर्शिता, बाइनरी"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"इस वर्क प्रोफ़ाइल को यह ऐप्लिकेशन मैनेज करता है:"</string>
-    <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> द्वारा प्रबंधित"</string>
+    <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> मैनेज करता है"</string>
     <string name="launch_by_default" msgid="892824422067985734">"डिफ़ॉल्ट रूप से खुले"</string>
     <string name="app_launch_open_domain_urls_title" msgid="4805388403977096285">"काम करने वाले लिंक खोलें"</string>
     <string name="app_launch_open_in_app" msgid="2208182888681699512">"ऐप्लिकेशन में"</string>
@@ -4548,9 +4541,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"यूएसबी का डिफ़ॉल्ट कॉन्फ़िगरेशन"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"पावर इस्तेमाल करने के विकल्प"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"फ़ाइल ट्रांसफ़र करने के विकल्प"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"डेटा ऐक्सेस करने से जुड़ी सुरक्षा सेटिंग"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"पीसीआई टनलिंग की अनुमति दें"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"पीसीआई टनलिंग चालू होने पर यूएसबी और Thunderbolt वाले सहायक डिवाइस, पीसीआई टनल बना सकते हैं और सिस्टम मेमोरी को ऐक्सेस कर सकते हैं"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"इस सेटिंग को खाते का एडमिन ही बदल सकता है"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"आपके आईटी एडमिन ने बंद किया है"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"ऐडवांस सुरक्षा मोड की वजह से बंद किया गया है"</string>
@@ -5089,7 +5085,7 @@
     <string name="storage_apps" msgid="3564291603258795216">"ऐप्लिकेशन"</string>
     <string name="storage_system" msgid="8472410119822911844">"सिस्टम"</string>
     <string name="storage_os_name" msgid="4637680493234672410">"Android <xliff:g id="VERSION">%s</xliff:g>"</string>
-    <string name="storage_temporary_files" msgid="8254109904032452219">"अस्थाई सिस्टम फ़ाइलें"</string>
+    <string name="storage_temporary_files" msgid="8254109904032452219">"अस्थायी सिस्टम फ़ाइलें"</string>
     <string name="storage_trash" msgid="2807138998886084856">"ट्रैश"</string>
     <string name="storage_trash_dialog_title" msgid="2296169576049935200">"क्या आप ट्रैश खाली करना चाहते हैं?"</string>
     <string name="storage_trash_dialog_ask_message" msgid="8982602137242358798">"ट्रैश में <xliff:g id="TOTAL">%1$s</xliff:g> की फ़ाइलें हैं. सभी आइटम हमेशा के लिए मिटा दिए जाएंगे और आप उन्हें वापस नहीं ला पाएंगे."</string>
@@ -5361,8 +5357,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"सैटलाइट"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"सैटलाइट कनेक्टिविटी"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"सैटलाइट कनेक्टिविटी"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"सैटलाइट कनेक्टिविटी का इस्तेमाल करें"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"आपके खाते के प्लान में, ऐसे ऐप्लिकेशन शामिल हैं जो सैटलाइट कनेक्शन पर काम करते हैं"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"आपके खाते में सभी ऐप्लिकेशन का डेटा शामिल है"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"फ़ोन पर सैटलाइट सेवा के साथ काम करने वाले ऐप्लिकेशन"</string>
@@ -5883,7 +5878,7 @@
     <string name="content_protection_preference_title" msgid="5069260032659193074">"स्कैन करके धोखाधड़ी वाले ऐप्लिकेशन का पता लगाने की सुविधा"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"फ़िशिंग का पता लगाने के लिए, ऐप्लिकेशन की गतिविधि की जांच करें"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"स्कैन करके धोखाधड़ी वाले ऐप्लिकेशन का पता लगाएं"</string>
-    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"स्कैनिंग की सुविधा से, वर्क प्रोफ़ाइल में मौजूद धोखाधड़ी वाले ऐप्लिकेशन का पता लगाएं"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"स्कैन करने की सुविधा से, वर्क प्रोफ़ाइल में मौजूद धोखाधड़ी वाले ऐप्लिकेशन का पता लगाएं"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"अब पासवर्ड सेट अप हो गया"</string>
@@ -6189,19 +6184,24 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"सैटलाइट कनेक्टिविटी के बारे में ज़्यादा जानें"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"सैटलाइट एसओएस का डेमो देखें"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"सैटलाइट ऐप्लिकेशन"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"सिर्फ़ आपातकालीन कॉल"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"सैटलाइट कनेक्टिविटी उपलब्ध है"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"क्विक सेटिंग में सैटलाइट टाइल जोड़कर, सैटलाइट सेवाएं ऐक्सेस करने के बारे में आसानी से जानकारी पाएं"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"टाइल जोड़ें"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"टाइल से सैटलाइट की सुविधा ऐक्सेस करने के लिए सूचनाएं"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"सैटलाइट"</string>
+    <!-- no translation found for satellite_apps_see_all_supported_apps_text (1053383406430986034) -->
+    <skip />
+    <!-- no translation found for satellite_apps_see_less_text (3776624493969066217) -->
+    <skip />
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"सैटलाइट के ज़रिए संपर्क नहीं किया जा सकता"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"मोबाइल या वाई-फ़ाई नेटवर्क से कनेक्ट होने पर, सैटलाइट के ज़रिए संपर्क करने की सुविधा उपलब्ध नहीं होती."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"इस देश या इलाके में, सैटलाइट के ज़रिए संपर्क करने की सुविधा उपलब्ध नहीं है."</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"फ़िलहाल, सैटलाइट के ज़रिए संपर्क करने की सुविधा उपलब्ध नहीं है. कृपया बाद में कोशिश करें."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"आपके मोबाइल प्लान में, सैटलाइट के ज़रिए संपर्क करने की सुविधा शामिल नहीं है. इस बारे में मदद पाने के लिए, मोबाइल और इंटरनेट सेवा देने वाली कंपनी से संपर्क करें."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"सैटलाइट के ज़रिए मैसेज भेजने की सुविधा का इस्तेमाल करने के लिए, यह ज़रूरी है कि Google Messages आपके डिवाइस का डिफ़ॉल्ट मैसेजिंग ऐप्लिकेशन हो."</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"मोबाइल और इंटरनेट सेवा देने वाली कंपनी ने, सैटलाइट के ज़रिए संपर्क करने की सुविधा उपलब्ध कराई है. इस बारे में ज़्यादा जानने के लिए, कंपनी की सैटलाइट सेटिंग पर जाएं."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"देखें कि यह सुविधा किन देशों/इलाकों में उपलब्ध है"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"डिफ़ॉल्ट ऐप्लिकेशन बदलें"</string>

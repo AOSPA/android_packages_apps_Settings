@@ -20,11 +20,13 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.settings.SettingsEnums
 import android.content.Context
-import android.content.Intent
 import android.content.SharedPreferences
 import com.android.settings.R
+import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
+import java.util.concurrent.TimeUnit
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -43,11 +45,11 @@ import org.mockito.junit.MockitoJUnit
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows
-import java.util.concurrent.TimeUnit
 
 @RunWith(RobolectricTestRunner::class)
 class SatelliteTilePromptUtilsTest {
     @get:Rule val mocks = MockitoJUnit.rule()
+    @get:Rule val metricsRule = MetricsRule()
 
     private lateinit var context: Context
     @Mock private lateinit var mockSharedPreferences: SharedPreferences
@@ -84,6 +86,14 @@ class SatelliteTilePromptUtilsTest {
 
         verifyNotificationChannelCreated()
         verifyNotificationSentWithIntents()
+    }
+
+    @Test
+    fun showSatelliteTileAvailableNotification_logsImpression() {
+        satelliteTilePromptUtils.showSatelliteTileAvailableNotification(context)
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(context, SettingsEnums.ACTION_SATELLITE_NOTIFICATION_SHOWN)
     }
 
     @Test

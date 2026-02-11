@@ -380,7 +380,7 @@
     <string name="security_settings_face_preference_summary_none" msgid="523320857738436024">"Configuration requise"</string>
     <string name="security_settings_face_preference_summary_none_new" msgid="1963253146734002815">"Ajoutez un visage"</string>
     <string name="security_settings_face_preference_title_new" msgid="7680231874730796331">"Reconnaissance faciale"</string>
-    <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Reconnaissance faciale pour le travail"</string>
+    <string name="security_settings_face_profile_preference_title_new" msgid="685550153608106166">"Reconnaissance faciale professionnelle"</string>
     <string name="private_space_face_unlock_title_new" msgid="2079622608951402509">"Recon. faciale pour l\'esp. privé"</string>
     <string name="security_settings_face_preference_title" msgid="2126625155005348417">"Déverrouillage par reconn. faciale"</string>
     <string name="security_settings_face_profile_preference_title" msgid="7519527436266375005">"Déverrouillage reconnaissance faciale pour travail"</string>
@@ -412,10 +412,8 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Ignorer"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Vous avez ajouté le nombre maximal de visages"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Impossible d\'ajouter d\'autres visages"</string>
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
-    <skip />
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" msgid="2276422963933723362">"Impossible de configurer le déverrouillage par reconnaissance faciale"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message" msgid="2680132270879475080">"Vous n\'êtes pas connecté à Internet. Revenez en arrière et connectez-vous à Internet, ou configurez cette option plus tard dans les paramètres."</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"L\'inscription n\'est pas terminée"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Le temps attribué pour l\'inscription des visages est écoulé. Veuillez essayer de nouveau."</string>
@@ -448,8 +446,8 @@
     <string name="security_settings_category_use_fingerprint" msgid="4273932435979772330">"Utilisation de l\'empreinte digitale"</string>
     <string name="security_settings_fingerprint_preference_title" msgid="2484965173528415458">"Empreintes digitales"</string>
     <string name="security_settings_fingerprint_settings_preferences_category" msgid="8975029409126780752">"Quand le Déverrouillage par empreinte digitale est utilisé"</string>
-    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Empreinte digitale pour le travail"</string>
-    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Empreinte digitale pour le travail"</string>
+    <string name="security_settings_work_fingerprint_preference_title" msgid="2076006873519745979">"Empreinte digitale professionnelle"</string>
+    <string name="security_settings_work_fingerprint_preference_title_new" msgid="8967333987631878868">"Empreinte digitale professionnelle"</string>
     <string name="fingerprint_check_enrolled_title" msgid="1007921571704991108">"Vérifier les empreintes digitales enregistrées"</string>
     <string name="fingerprint_add_title" msgid="1837610443487902050">"Ajouter une empreinte digitale"</string>
     <string name="security_settings_fingerprint_preference_summary" msgid="8486134175759676037">"{count,plural, =1{Empreinte digitale ajoutée}one{# empreinte digitale ajoutée}other{# empreintes digitales ajoutées}}"</string>
@@ -1343,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Activer les appels Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Activer les appels Wi-Fi"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Déconnecté de <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Son et vibration"</string>
     <string name="account_settings" msgid="255404935489127404">"Comptes"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Comptes de profil professionnel - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Comptes de profil personnel"</string>
@@ -1351,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Compte professionnel - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Compte personnel - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Recherchez"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Affichage"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Rotation automatique de l\'écran"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Désactivée"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Activée"</string>
@@ -1891,7 +1887,7 @@
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Confirmer votre mot de passe professionnel"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Entrer votre mot de passe professionnel"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"Entrer le schéma de l\'appareil"</string>
-    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Entrer votre schéma prof."</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Entrer votre schéma professionnel"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"Entrer le NIP de votre appareil"</string>
     <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"Entrer de nouveau votre NIP"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Confirmer votre NIP professionnel"</string>
@@ -1967,7 +1963,7 @@
     <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"Désactivez les animations lors de la saisie du NIP"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"Rendre visible le schéma du profil"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"Vibrer au toucher"</string>
-    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Verr. auto par l\'interrupteur"</string>
+    <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"Verr. autom. par l\'interrupteur"</string>
     <string name="lockpattern_settings_power_button_instantly_locks_summary" msgid="2202430156268094229">"Sauf lorsque l\'appareil est maintenu déverrouillé par <xliff:g id="TRUST_AGENT_NAME">%1$s</xliff:g>"</string>
     <string name="lockpattern_settings_choose_lock_pattern" msgid="2193588309557281466">"Créer un schéma"</string>
     <string name="lockpattern_settings_change_lock_pattern" msgid="7614155083815661347">"Modifier le schéma"</string>
@@ -2148,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Appuyez deux fois sur la touche Espace pour insérer « . »"</string>
     <string name="show_password" msgid="7101900779571040117">"Afficher les mots de passe"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Les caractères s\'affichent brièvement pendant la saisie"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"Afficher les mots de passe pour l\'écran tactile"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Afficher les caractères brièvement pendant la saisie sur l\'écran tactile"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"Afficher les mots de passe pour le clavier"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"Afficher les caractères brièvement pendant la saisie sur le clavier"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Ce correcteur orthographique peut recueillir l\'ensemble du texte saisi, y compris des données personnelles comme des mots de passe et des numéros de carte de paiement. Il provient de l\'appli <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utiliser ce correcteur orthographique?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Paramètres"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Langue"</string>
@@ -3304,7 +3297,7 @@
     <string name="sync_in_progress" msgid="6200093151211458977">"Synchronisation en cours…"</string>
     <string name="settings_backup" msgid="5357973563989458049">"Sauvegarder les paramètres"</string>
     <string name="settings_backup_summary" msgid="6803046376335724034">"Sauvegarder mes paramètres"</string>
-    <string name="sync_menu_sync_now" msgid="3948443642329221882">"Synchroniser"</string>
+    <string name="sync_menu_sync_now" msgid="3948443642329221882">"Synchroniser maintenant"</string>
     <string name="sync_menu_sync_cancel" msgid="2422994461106269813">"Annuler la synchronisation"</string>
     <string name="sync_one_time_sync" msgid="8114337154112057462">"Touchez ici pour lancer la synchronisation<xliff:g id="LAST_SYNC_TIME">
 %1$s</xliff:g>"</string>
@@ -3325,8 +3318,8 @@
     <string name="select_all" msgid="7898929601615536401">"Tout sélectionner"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"Utilisation de données"</string>
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Données cellulaires et Wi-Fi"</string>
-    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Synchro auto des données perso"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Synchro auto des données pros"</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Synchron. autom. données pers."</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Synchron. autom. données prof."</string>
     <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sync. auto des données privées"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Changer le cycle..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Jour du mois de réinitialisation du cycle utilisation données :"</string>
@@ -3664,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Appareil"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Clavier, pavé tactile, affichage, son"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Affichage"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Son"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non accessible parce que la technologie CCP est désactivée"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour utiliser la fonctionnalité, installez d\'abord une appli de paiement"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Applis récentes, applis par défaut"</string>
@@ -4369,7 +4360,7 @@
     <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Désactiver <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
     <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Ce mode ne s\'activera jamais lorsqu\'il est désactivé"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Désactiver"</string>
-    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Voulez-vous activer <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
+    <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Activer <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
     <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Ce mode peut s\'activer automatiquement en fonction des paramètres"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Activer"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Définir un mode qui suit un programme régulier"</string>
@@ -4550,9 +4541,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Configuration USB par défaut"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Options d\'alimentation"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Options de transfert de fichiers"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Protection de l\'accès aux données"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Autoriser la tunnellisation PCI"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Lorsque l\'option est activée, les périphériques USB et Thunderbolt peuvent créer des tunnels PCI et accéder à la mémoire du système"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Vous devez être un utilisateur administrateur pour modifier ce paramètre"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"L\'option est désactivée par votre administrateur informatique"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"L\'option est désactivée par le mode de protection avancé"</string>
@@ -5131,7 +5125,7 @@
     <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Sauvegardez les données ou copiez-les à partir d\'un autre appareil"</string>
     <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Gérer les comptes"</string>
     <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Sauvegarder ou copier les données"</string>
-    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Désactiver tous les services?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Les mots de passe, les clés d\'accès et les autres renseignements enregistrés ne seront pas accessibles pour le Remplissage automatique lorsque vous vous connectez"</string>
+    <string name="credman_confirmation_message_new_ui" msgid="6126274509951156460">"&lt;b&gt;Désactiver tous les services?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Les mots de passe, les clés d\'accès et les autres renseignements enregistrés ne seront pas accessibles pour le remplissage automatique lorsque vous vous connectez"</string>
     <string name="credman_autofill_confirmation_message_new_ui" msgid="6222139222478822267">"&lt;b&gt;Modifiez votre service préféré pour &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Les nouveaux renseignements, notamment les clés d\'accès et les mots de passe, seront dorénavant enregistrés ici. &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; peut utiliser ce qui se trouve à l\'écran pour déterminer les renseignements qui peuvent être remplis automatiquement"</string>
     <string name="credman_enable_confirmation_message_title" msgid="1037501792652277829">"Utiliser %1$s?"</string>
     <string name="credman_on_off_switch_content_description" msgid="2930826358220917851">"%1$s activé/désactivé"</string>
@@ -5363,8 +5357,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Connectivité par satellite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"Connectivité par satellite"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Utiliser la connectivité par satellite"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"L\'utilisation des applis prises en charge est comprise dans votre compte"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Les données pour toutes les applis sont incluses dans votre compte"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Applis prises en charge sur votre téléphone"</string>
@@ -5632,7 +5625,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Affichez le lecteur"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"commandes multimédias"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Autoriser les extensions du logiciel de l\'appareil photo"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Active la mise en œuvre du logiciel par défaut pour les fonctionnalités avancées de l\'appareil photo, comme la technologie HDR, le mode Vision de nuit ou d\'autres extensions de l\'appareil photo."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Active l\'implémentation logicielle par défaut des fonctionnalités avancées de l\'appareil photo, comme la technologie HDR, le mode Vision de nuit ou d\'autres extensions de l\'appareil photo"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"Le Bluetooth sera activé"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Cartes SIM"</string>
@@ -5885,7 +5878,7 @@
     <string name="content_protection_preference_title" msgid="5069260032659193074">"Analyse des applis trompeuses"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"Vérifiez l\'activité des applis pour détecter les tentatives d\'hameçonnage"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Utiliser l\'analyse des applis trompeuses"</string>
-    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Utiliser l\'analyse des applis trompeuses pour le travail"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Utiliser l\'analyse des applis professionnelles trompeuses"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Le mot de passe a été configuré"</string>
@@ -6124,7 +6117,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Sécurité des applis"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Déverrouillage de l\'appareil"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Sécurité du compte"</string>
-    <string name="device_finders_subpage_title" msgid="2390688647994924006">"Localisateur d\'appareils"</string>
+    <string name="device_finders_subpage_title" msgid="2390688647994924006">"Localisateurs d\'appareils"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Système et mises à jour"</string>
     <string name="cellular_network_security_subpage_title" msgid="1191202157978621337">"Sécurité du réseau cellulaire"</string>
     <string name="location_settings" msgid="6833222354060094170">"Accès à la position"</string>
@@ -6186,24 +6179,29 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Page de destination du satellite"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Essayer une démo"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"Découvrir le fonctionnement"</string>
-    <string name="landing_page_footer_text_lte" msgid="8788085197575734787">"Lorsque vous perdez le signal cellulaire et Wi-Fi, votre téléphone tentera de se connecter au satellite. Votre téléphone se reconnectera à un réseau cellulaire ou Wi-Fi lorsqu\'il sera accessible.\n\nImportant : Les appels par satellite ne sont pas offerts. Toutefois, les appels d\'urgence pourraient tout de même être reçus."</string>
+    <string name="landing_page_footer_text_lte" msgid="8788085197575734787">"Si vous perdez le signal cellulaire et Wi-Fi, votre téléphone tentera de se connecter au satellite. Votre téléphone se reconnectera à un réseau cellulaire ou Wi-Fi lorsqu\'il y en aura un de disponible.\n\nImportant : Les appels par satellite ne sont pas offerts. Toutefois, les appels d\'urgence pourraient tout de même être reçus."</string>
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"Pour une connexion optimale, tenez le téléphone sous un ciel dégagé. Votre téléphone se reconnectera à un réseau cellulaire lorsqu\'il sera accessible. Les appels par satellite ne sont pas accessibles. Les appels d\'urgence pourraient tout de même être reçus."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"En savoir plus sur la connectivité par satellite"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Lancer la démo de SOS par satellite"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Applis satellites"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"Appels d\'urgence seulement"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Connectivité par satellite accessible"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Accédez facilement aux informations sur les satellites en ajoutant la tuile Satellite aux Paramètres rapides"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Ajouter la tuile"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Requêtes de la tuile satellite"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAM"</string>
+    <!-- no translation found for satellite_apps_see_all_supported_apps_text (1053383406430986034) -->
+    <skip />
+    <!-- no translation found for satellite_apps_see_less_text (3776624493969066217) -->
+    <skip />
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satellite non accessible"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"La couverture par satellite n\'est pas accessible lors de la connexion à un réseau cellulaire ou Wi-Fi."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"La connectivité par satellite n\'est pas accessible dans ce pays ou cette région."</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"La connectivité par satellite n\'est pas accessible pour le moment. Veuillez réessayer plus tard."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Votre forfait mobile n\'inclut pas la couverture par satellite. Communiquez avec votre opérateur pour obtenir de l\'aide."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Pour utiliser la messagerie par satellite, Messages de Google doit être votre appli de messagerie par défaut."</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"La connectivité par satellite est activée par votre opérateur. Apprenez-en plus sur les paramètres de satellite de votre opérateur."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Afficher les régions prises en charge"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Modifier l\'appli par défaut"</string>

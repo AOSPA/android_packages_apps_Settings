@@ -16,18 +16,20 @@
 
 package com.android.settings.connecteddevice
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings.AdvancedConnectedDeviceActivity
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class AdvancedConnectedDeviceScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class AdvancedConnectedDeviceScreenTest {
 
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_CONNECTED_DEVICES_25Q4
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    override val preferenceScreenCreator = AdvancedConnectedDeviceScreen()
+    private val preferenceScreenCreator = AdvancedConnectedDeviceScreen()
 
     @Test
     fun key_isEqualToStatic() {

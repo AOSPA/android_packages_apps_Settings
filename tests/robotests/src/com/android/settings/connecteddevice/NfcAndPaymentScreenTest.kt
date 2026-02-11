@@ -16,24 +16,26 @@
 
 package com.android.settings.connecteddevice
 
+import android.content.Context
 import android.content.pm.PackageManager.FEATURE_NFC
 import android.content.pm.PackageManager.FEATURE_NFC_HOST_CARD_EMULATION
 import android.nfc.NfcAdapter
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.NfcSettingsActivity
-import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.ShadowNfcAdapter
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 
-class NfcAndPaymentScreenTest : SettingsCatalystTestCase() {
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_CONNECTED_DEVICES_25Q4
+@RunWith(AndroidJUnit4::class)
+class NfcAndPaymentScreenTest {
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    override val preferenceScreenCreator = NfcAndPaymentScreen()
+    private val preferenceScreenCreator = NfcAndPaymentScreen()
 
     @Test
     fun key_isEqualToStatic() {
@@ -88,12 +90,5 @@ class NfcAndPaymentScreenTest : SettingsCatalystTestCase() {
         shadowOf(NfcAdapter.getDefaultAdapter(appContext)).setEnabled(false)
         assertThat(preferenceScreenCreator.getSummary(appContext))
             .isEqualTo(appContext.getText(R.string.nfc_setting_off))
-    }
-
-    @Test
-    override fun migration() {
-        shadowOf(appContext.packageManager).setSystemFeature(FEATURE_NFC, true)
-        shadowOf(appContext.packageManager).setSystemFeature(FEATURE_NFC_HOST_CARD_EMULATION, true)
-        super.migration()
     }
 }
