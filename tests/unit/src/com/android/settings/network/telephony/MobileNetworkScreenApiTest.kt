@@ -21,11 +21,13 @@ import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
+import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionInfo
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkScreenApi.Companion.KEY_AUTO_DATA_SWITCHING
+import com.android.settings.network.telephony.MobileNetworkScreenApi.Companion.KEY_ROAMING_SWITCHING
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.FailedPreconditionException
@@ -33,6 +35,7 @@ import com.android.settings.testutils2.Parameters
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -41,6 +44,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class MobileNetworkScreenApiTest {
@@ -62,6 +66,7 @@ class MobileNetworkScreenApiTest {
         telephonyFeatureProvider.stub {
             on { telephonyRepository } doReturn mockTelephonyRepository
             on { subscriptionRepository } doReturn mockSubscriptionRepository
+            on { carrierConfigRepository } doReturn CarrierConfigRepository(context)
         }
 
         mockTelephonyRepository.stub { on { isMobileDataCable } doReturn true }
@@ -74,6 +79,11 @@ class MobileNetworkScreenApiTest {
         val allParameters = mobileNetworkScreenApi.getAllPossibleParameters(context).first()
         mobileNetworkScreenApi.initializeParameters(allParameters)
         tester = ApiTester(mobileNetworkScreenApi)
+    }
+
+    @After
+    fun tearDown() {
+        CarrierConfigRepository.resetForTest()
     }
 
     @Test
@@ -126,6 +136,46 @@ class MobileNetworkScreenApiTest {
         tester.initializeScreenParameters(parameters)
 
         assertThat(tester.get<Boolean>(KEY_AUTO_DATA_SWITCHING, parameters)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_roamingStateIsOn_returnTrue() {
+        mockTelephonyRepository.stub { on { isDataRoamingEnabled(TEST_SUB_ID) } doReturn true }
+
+        val parameters = Parameters(Settings.EXTRA_SUB_ID to TEST_SUB_ID.toString())
+
+        tester.initializeScreenParameters(parameters)
+
+        assertThat(tester.get<Boolean>(KEY_ROAMING_SWITCHING, parameters)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBoolean_roamingStateIsOff_returnFalse() {
+        mockTelephonyRepository.stub { on { isDataRoamingEnabled(TEST_SUB_ID) } doReturn false }
+        val parameters = Parameters(Settings.EXTRA_SUB_ID to TEST_SUB_ID.toString())
+
+        tester.initializeScreenParameters(parameters)
+
+        assertThat(tester.get<Boolean>(KEY_ROAMING_SWITCHING, parameters)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBoolean_turnOnRoamingState_success() {
+        mockTelephonyRepository.stub { on { isDataRoamingEnabled(TEST_SUB_ID) } doReturn false }
+        CarrierConfigRepository.setBooleanForTest(
+            TEST_SUB_ID,
+            CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL,
+            false,
+        )
+        val parameters = Parameters(Settings.EXTRA_SUB_ID to TEST_SUB_ID.toString())
+        tester.initializeScreenParameters(parameters)
+
+        tester.set(KEY_ROAMING_SWITCHING, true, parameters)
+
+        verify(mockTelephonyRepository).setDataRoamingEnabled(TEST_SUB_ID, true)
     }
 
     companion object {

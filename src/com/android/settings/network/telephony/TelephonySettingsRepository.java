@@ -58,10 +58,13 @@ public class TelephonySettingsRepository {
                 isEnabled
         );
     }
-
+    /** Checks data roaming is enabled */
     public boolean isDataRoamingEnabled(int subId) {
         return getTelephonyManagerForSubId(subId).isDataRoamingEnabled();
     }
 
-
+    /** Sets data roaming enabled or not */
+    public void setDataRoamingEnabled(int subId, boolean isEnabled) {
+        getTelephonyManagerForSubId(subId).setDataRoamingEnabled(isEnabled);
+    }
 }
