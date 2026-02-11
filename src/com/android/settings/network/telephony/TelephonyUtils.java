@@ -282,11 +282,21 @@ public final class TelephonyUtils {
     }
 
     public static void connectExtTelephonyService(Context context) {
+        Log.d(TAG, "Connect to ExtTelephonyService entered, mIsServiceBound = " + mIsServiceBound);
         sSlotsInfo = getUiccSlotsInfo(context);
         if (!mIsServiceBound) {
             Log.d(TAG, "Connect to ExtTelephonyService...");
             mExtTelephonyManager = ExtTelephonyManager.getInstance(context);
             mExtTelephonyManager.connectService(mServiceCallback);
+        }
+    }
+
+    public static void switchMultiSimConfig(int config) {
+        Log.e(TAG, "switchMultiSimConfig config = " + config);
+        if (isServiceConnected()) {
+            mExtTelephonyManager.switchMultiSimConfig(config);
+        } else {
+            Log.e(TAG, "switchMultiSimConfig: ExtTelephony Service not connected!");
         }
     }
 
