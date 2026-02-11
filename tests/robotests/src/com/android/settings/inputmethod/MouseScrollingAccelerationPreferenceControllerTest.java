@@ -17,7 +17,10 @@
 package com.android.settings.inputmethod;
 
 import static com.google.common.truth.Truth.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.os.UserHandle;
@@ -29,12 +32,17 @@ import android.provider.Settings;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.hardware.input.Flags;
+import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
@@ -50,14 +58,22 @@ public class MouseScrollingAccelerationPreferenceControllerTest {
     private static final String PREFERENCE_KEY = "mouse_scrolling_acceleration";
     private static final String SETTING_KEY = Settings.System.MOUSE_SCROLLING_ACCELERATION;
 
+    @Mock
+    private MetricsFeatureProvider mMetricsFeatureProvider;
+    @Mock
+    private FeatureFactory mFeatureFactory;
+
     private Context mContext;
     private MouseScrollingAccelerationPreferenceController mController;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this);
         mContext = ApplicationProvider.getApplicationContext();
-        mController = new MouseScrollingAccelerationPreferenceController(
-                mContext, PREFERENCE_KEY);
+        when(mFeatureFactory.getMetricsFeatureProvider()).thenReturn(mMetricsFeatureProvider);
+        FeatureFactory.setFactory(mContext, mFeatureFactory);
+        mController =
+                new MouseScrollingAccelerationPreferenceController(mContext, PREFERENCE_KEY);
     }
 
     @Test
@@ -76,20 +92,24 @@ public class MouseScrollingAccelerationPreferenceControllerTest {
 
     @Test
     @EnableFlags(Flags.FLAG_MOUSE_SCROLLING_ACCELERATION)
-    public void setChecked_false_shouldReturnTrue() {
+    public void setChecked_false_enablesAccelerationAndLogsMetric() {
         mController.setChecked(false);
 
         boolean isEnabled = InputSettings.isMouseScrollingAccelerationEnabled(mContext);
         assertThat(isEnabled).isTrue();
+        verify(mMetricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_MOUSE_SCROLLING_ACCELERATION_ENABLED);
     }
 
     @Test
     @EnableFlags(Flags.FLAG_MOUSE_SCROLLING_ACCELERATION)
-    public void setChecked_false_shouldReturnFalse() {
+    public void setChecked_true_disablesAccelerationAndLogsMetric() {
         mController.setChecked(true);
 
         boolean isEnabled = InputSettings.isMouseScrollingAccelerationEnabled(mContext);
         assertThat(isEnabled).isFalse();
+        verify(mMetricsFeatureProvider).action(mContext,
+                SettingsEnums.ACTION_MOUSE_SCROLLING_ACCELERATION_DISABLED);
     }
 
     @Test
@@ -118,5 +138,10 @@ public class MouseScrollingAccelerationPreferenceControllerTest {
         boolean result = mController.isChecked();
 
         assertThat(result).isTrue();
+    }
+
+    @Test
+    public void getSliceHighlightMenuRes_returnsCorrectMenuKey() {
+        assertThat(mController.getSliceHighlightMenuRes()).isEqualTo(R.string.menu_key_system);
     }
 }
