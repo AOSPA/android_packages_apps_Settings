@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import java.time.LocalTime
 
@@ -104,7 +105,7 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
 }
 
 /** The "Start Time" preference. */
-class StartTimePreference(uiModeManager: UiModeManager) :
+class StartTimePreference(uiModeManager: UiModeManager, val isUiOnly: Boolean) :
     DarkModeCustomTimePreference(uiModeManager) {
 
     override val key
@@ -129,6 +130,13 @@ class StartTimePreference(uiModeManager: UiModeManager) :
         return true
     }
 
+    override fun tags(context: Context): Array<String> {
+        if (isUiOnly) {
+            return arrayOf(UI_ONLY_PREFERENCE)
+        }
+        return super.tags(context)
+    }
+
     override fun updateCustomTime(time: LocalTime) {
         uiModeManager.customNightModeStart = time
     }
@@ -139,7 +147,7 @@ class StartTimePreference(uiModeManager: UiModeManager) :
 }
 
 /** The "End Time" preference. */
-class EndTimePreference(uiModeManager: UiModeManager) :
+class EndTimePreference(uiModeManager: UiModeManager, val isUiOnly: Boolean) :
     DarkModeCustomTimePreference(uiModeManager) {
 
     override val key
@@ -162,6 +170,13 @@ class EndTimePreference(uiModeManager: UiModeManager) :
             uiModeManager.customNightModeEnd,
         )
         return true
+    }
+
+    override fun tags(context: Context): Array<String> {
+        if (isUiOnly) {
+            return arrayOf(UI_ONLY_PREFERENCE)
+        }
+        return super.tags(context)
     }
 
     override fun updateCustomTime(time: LocalTime) {

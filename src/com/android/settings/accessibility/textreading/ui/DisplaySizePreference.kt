@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 import com.google.android.material.slider.Slider
@@ -44,12 +45,23 @@ import kotlin.time.Duration
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-internal class DisplaySizePreference(context: Context, @EntryPoint private val entryPoint: Int) :
+internal class DisplaySizePreference(
+    context: Context,
+    @EntryPoint private val entryPoint: Int,
+    val isUiOnly: Boolean,
+) :
     IntRangeValuePreference,
     SliderPreferenceBinding,
     Slider.OnSliderTouchListener,
     Slider.OnChangeListener,
     PreferenceLifecycleProvider {
+
+    override fun tags(context: Context): Array<String> {
+        if (isUiOnly) {
+            return arrayOf(UI_ONLY_PREFERENCE)
+        }
+        return super.tags(context)
+    }
 
     override fun getReadPermissions(context: Context) = Permissions.EMPTY
 
