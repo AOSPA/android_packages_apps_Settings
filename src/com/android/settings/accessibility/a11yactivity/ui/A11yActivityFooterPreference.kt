@@ -25,6 +25,7 @@ import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenc
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 /** Footer metadata for [AccessibilityShortcutInfo]'s description. */
 class A11yActivityFooterPreference(
@@ -38,6 +39,8 @@ class A11yActivityFooterPreference(
     PreferenceTitleProvider,
     AccessibilityFooterPreferenceIntroductionTitleProvider,
     PreferenceAvailabilityProvider {
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? {
         return if (loadHtmlFooter) {

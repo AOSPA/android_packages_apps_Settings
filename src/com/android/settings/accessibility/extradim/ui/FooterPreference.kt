@@ -22,6 +22,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceBinding
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 class FooterPreference :
     AccessibilityFooterPreferenceMetadata,
@@ -32,6 +33,8 @@ class FooterPreference :
 
     override val purpose: Int
         get() = R.string.reduce_bright_colors_preference_html_description_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? =
         Html.fromHtml(

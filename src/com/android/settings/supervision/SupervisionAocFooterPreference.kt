@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.content.Context
 import android.text.Html
 import android.view.View
 import androidx.preference.Preference
@@ -25,6 +26,7 @@ import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.FooterPreference
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -41,6 +43,8 @@ class SupervisionAocFooterPreference(
 
     override val purpose: Int
         get() = R.string.aoc_footer_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     private var preferenceData: PreferenceData? = null
 
