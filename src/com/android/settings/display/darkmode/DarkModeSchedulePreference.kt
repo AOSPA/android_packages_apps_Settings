@@ -31,11 +31,13 @@ import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
 class DarkModeSchedulePreference(
     context: Context,
+    val isUiOnly: Boolean,
     private val scheduleStorage: DarkModeScheduleStorage = DarkModeScheduleStorage(context),
     private val bedtimeSettings: BedtimeSettings = BedtimeSettings(context),
 ) :
@@ -78,6 +80,13 @@ class DarkModeSchedulePreference(
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
+
+    override fun tags(context: Context): Array<String> {
+        if (isUiOnly) {
+            return arrayOf(UI_ONLY_PREFERENCE)
+        }
+        return super.tags(context)
+    }
 
     override fun storage(context: Context): KeyValueStore = scheduleStorage
 
