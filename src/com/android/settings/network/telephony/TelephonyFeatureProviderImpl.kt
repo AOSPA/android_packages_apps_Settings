@@ -21,4 +21,5 @@ import android.content.Context
 class TelephonyFeatureProviderImpl(appContext: Context) : TelephonyFeatureProvider {
     override val telephonyRepository = TelephonySettingsRepository(appContext)
     override val subscriptionRepository = SubscriptionSettingsRepository(appContext)
+    override val carrierConfigRepository = CarrierConfigRepository(appContext)
 }

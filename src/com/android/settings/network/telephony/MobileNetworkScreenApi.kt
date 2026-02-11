@@ -16,17 +16,22 @@
 
 package com.android.settings.network.telephony
 
+import android.os.UserHandle
+import android.os.UserManager
 import android.provider.Settings
+import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseRestriction
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
@@ -48,6 +53,8 @@ class MobileNetworkScreenApi :
 
         val subscriptionRepository = featureFactory.telephonyFeatureProvider.subscriptionRepository
         val telephonyRepository = featureFactory.telephonyFeatureProvider.telephonyRepository
+        val carrierConfigRepository =
+            featureFactory.telephonyFeatureProvider.carrierConfigRepository
 
         parameters {
             parameter(
@@ -74,6 +81,65 @@ class MobileNetworkScreenApi :
                 if (subIdString != null) {
                     val subId = subIdString.toInt()
                     extras.putInt(Settings.EXTRA_SUB_ID, subId)
+                }
+            }
+        }
+
+        preference(
+            key = KEY_ROAMING_SWITCHING,
+            purpose = R.string.mobile_network_data_roaming_switching_purpose,
+            type = AnyBoolean,
+        ) {
+            preconditions(R.string.data_roaming_switch_preconditions) {
+                val subId =
+                    keyParameters?.get(Settings.EXTRA_SUB_ID)?.toInt()
+                        ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+
+                if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+                    Disallowed("This is not a valid subscription id")
+                } else {
+                    Allowed
+                }
+            }
+            get {
+                execute {
+                    val subId = keyParameters?.get(Settings.EXTRA_SUB_ID)!!.toInt()
+                    // Accesses the roaming state via TelephonyManager/Repository
+                    telephonyRepository.isDataRoamingEnabled(subId)
+                }
+            }
+
+            set {
+                preconditions(R.string.data_roaming_switch_availability_preconditions) {
+                    val enforcedAdmin =
+                        RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
+                            context,
+                            UserManager.DISALLOW_DATA_ROAMING,
+                            UserHandle.myUserId(),
+                        )
+                    if (enforcedAdmin != null) {
+                        return@preconditions EnterpriseRestriction(
+                            R.string.user_settings_restricted_by_work_policy
+                        )
+                    }
+                    val subId =
+                        keyParameters?.get(Settings.EXTRA_SUB_ID)?.toInt()
+                            ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+
+                    if (
+                        carrierConfigRepository.getBoolean(
+                            subId,
+                            CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL,
+                        )
+                    ) {
+                        Disallowed("Roaming is disallowed by the carrier")
+                    } else {
+                        Allowed
+                    }
+                }
+                execute { value ->
+                    val subId = keyParameters?.get(Settings.EXTRA_SUB_ID)!!.toInt()
+                    telephonyRepository.setDataRoamingEnabled(subId, value)
                 }
             }
         }
@@ -116,6 +182,7 @@ class MobileNetworkScreenApi :
         private const val TAG = "MobileNetworkScreenApi"
         const val KEY = "api_mobile_network_pref_screen"
         const val KEY_AUTO_DATA_SWITCHING = "auto_data_switch"
+        const val KEY_ROAMING_SWITCHING = "button_roaming_key"
     }
 }
 // LINT.ThenChange(MobileNetworkSettings.java,
