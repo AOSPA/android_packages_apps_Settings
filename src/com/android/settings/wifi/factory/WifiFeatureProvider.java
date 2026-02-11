@@ -32,6 +32,7 @@ import com.android.settings.print.PrintRepository;
 import com.android.settings.wifi.WifiDataUsageRepository;
 import com.android.settings.wifi.details.WifiNetworkDetailsViewModel;
 import com.android.settings.wifi.dpp.WifiDppQrCodeGeneratorFragment;
+import com.android.settings.wifi.repository.SavedNetworkRepository;
 import com.android.settings.wifi.repository.SharedConnectivityRepository;
 import com.android.settings.wifi.repository.WifiHotspotRepository;
 import com.android.settings.wifi.tether.WifiHotspotSecurityViewModel;
@@ -53,6 +54,7 @@ public class WifiFeatureProvider {
     private WifiVerboseLogging mWifiVerboseLogging;
     private WifiHotspotRepository mWifiHotspotRepository;
     private WifiDataUsageRepository mWifiDataUsageRepository;
+    private SavedNetworkRepository mSavedNetworkRepository;
     private TetheringRepository mTetheringRepository;
     private SharedConnectivityRepository mSharedConnectivityRepository;
     private PrintRepository mPrintRepository;
@@ -135,6 +137,17 @@ public class WifiFeatureProvider {
             verboseLog(TAG, "getWifiDataUsageRepository():" + mWifiDataUsageRepository);
         }
         return mWifiDataUsageRepository;
+    }
+
+    /**
+     * Gets SavedNetworkRepository
+     */
+    public SavedNetworkRepository getSavedNetworkRepository() {
+        if (mSavedNetworkRepository == null) {
+            mSavedNetworkRepository = new SavedNetworkRepository(mAppContext);
+            verboseLog(TAG, "getSavedNetworkRepository():" + mSavedNetworkRepository);
+        }
+        return mSavedNetworkRepository;
     }
 
     /**
