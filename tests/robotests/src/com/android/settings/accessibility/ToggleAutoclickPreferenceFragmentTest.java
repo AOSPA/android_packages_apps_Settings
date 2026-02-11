@@ -17,6 +17,8 @@
 package com.android.settings.accessibility;
 
 
+import static android.view.InputDevice.SOURCE_MOUSE;
+
 import static com.android.internal.accessibility.AccessibilityShortcutController.AUTOCLICK_COMPONENT_NAME;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.ALL;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.HARDWARE;
@@ -47,6 +49,7 @@ import com.android.settings.R;
 import com.android.settings.accessibility.autoclick.ui.AutoclickScreen;
 import com.android.settings.testutils.XmlTestUtils;
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager;
+import com.android.settings.testutils.shadow.ShadowInputDevice;
 
 import org.junit.After;
 import org.junit.Before;
@@ -54,6 +57,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowDialog;
 
@@ -64,6 +68,7 @@ import java.util.Set;
  * Tests for {@link ToggleAutoclickPreferenceFragment}.
  */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowInputDevice.class})
 public class ToggleAutoclickPreferenceFragmentTest {
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
@@ -77,6 +82,10 @@ public class ToggleAutoclickPreferenceFragmentTest {
 
     @Before
     public void setUp() {
+        ShadowInputDevice.reset();
+        int deviceId = 1;
+        ShadowInputDevice.addDevice(deviceId,
+                ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId, SOURCE_MOUSE));
         mContext.setTheme(androidx.appcompat.R.style.Theme_AppCompat);
     }
 
@@ -85,6 +94,7 @@ public class ToggleAutoclickPreferenceFragmentTest {
         if (mFragScenario != null) {
             mFragScenario.close();
         }
+        ShadowInputDevice.reset();
     }
 
     @Test
