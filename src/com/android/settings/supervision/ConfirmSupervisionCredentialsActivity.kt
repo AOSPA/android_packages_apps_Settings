@@ -19,6 +19,8 @@ import android.Manifest.permission.INTERACT_ACROSS_USERS_FULL
 import android.Manifest.permission.MANAGE_USERS
 import android.Manifest.permission.SET_BIOMETRIC_DIALOG_ADVANCED
 import android.Manifest.permission.USE_BIOMETRIC_INTERNAL
+import android.annotation.ColorRes
+import android.annotation.DrawableRes
 import android.app.ActivityManager
 import android.app.settings.SettingsEnums
 import android.app.supervision.ISupervisionManager
@@ -32,6 +34,8 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ResolveInfo
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.hardware.biometrics.BiometricManager
 import android.hardware.biometrics.BiometricPrompt
 import android.hardware.biometrics.BiometricPrompt.AuthenticationCallback
@@ -304,9 +308,23 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     fun getBiometricPrompt(): BiometricPrompt {
         val builder =
             BiometricPrompt.Builder(this)
-                .setTitle(getString(R.string.supervision_full_screen_pin_verification_title))
                 .setConfirmationRequired(true)
                 .setAllowedAuthenticators(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
+
+        if (com.android.systemui.Flags.largeScreenBp()) {
+            builder
+                .setTitle(getString(R.string.supervision_pin_verification_title))
+                .setSubtitle(getString(R.string.supervision_pin_verification_subtitle))
+                .setLogoBitmap(
+                    getTintedBitmap(
+                        R.drawable.ic_account_child_invert_48,
+                        com.android.internal.R.color.materialColorOnSurface,
+                    )
+                )
+                .setLogoDescription(getString(R.string.supervision_settings_title))
+        } else {
+            builder.setTitle(getString(R.string.supervision_full_screen_pin_verification_title))
+        }
 
         // Add fallback for each other available approval method
         if (Flags.enableSupervisionSettingsUiUpdates()) {
@@ -409,6 +427,24 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
         } else {
             mProfileStarted = false
         }
+    }
+
+    private fun getTintedBitmap(@DrawableRes drawableId: Int, @ColorRes colorId: Int): Bitmap {
+        val drawable = getDrawable(drawableId)!!.mutate()
+        val color = getColor(colorId)
+        drawable.setTint(color)
+
+        val bitmap =
+            Bitmap.createBitmap(
+                drawable.intrinsicWidth,
+                drawable.intrinsicHeight,
+                Bitmap.Config.ARGB_8888,
+            )
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+
+        return bitmap
     }
 
     private fun errorHandler(errStr: String? = null) {
