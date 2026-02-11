@@ -16,15 +16,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/keyboard_layout_picker_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginHorizontal="@dimen/keyboard_picker_margin_one_pane"
     android:layout_marginVertical="@dimen/keyboard_picker_margin_one_pane_large"
     android:orientation="horizontal">
 
     <FrameLayout
         android:id="@+id/keyboard_layout_preview_container"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:layout_marginEnd="@dimen/keyboard_picker_margin_one_pane"
         android:background="@drawable/keyboard_review_layout_background">
 
@@ -67,7 +68,8 @@
         <FrameLayout
             android:id="@+id/keyboard_layouts"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_marginTop="@dimen/keyboard_picker_margin_small"
             android:background="@color/materialColorSurfaceContainer" />
     </LinearLayout>
