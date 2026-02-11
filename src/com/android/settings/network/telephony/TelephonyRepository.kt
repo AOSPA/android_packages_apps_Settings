@@ -28,8 +28,6 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 
-class TelephonyRepository(appContext: Context)
-
 /** Creates an instance of a cold Flow for Telephony callback of given [subId]. */
 fun <T> Context.telephonyCallbackFlow(
     subId: Int,

@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony
 
 import android.provider.Settings
+import android.telephony.SubscriptionManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.flags.Flags
@@ -24,10 +25,11 @@ import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 
 // LINT.IfChange
 @ProvidePreferenceScreen(MobileNetworkScreenApi.KEY, parameterized = true)
@@ -45,6 +47,8 @@ class MobileNetworkScreenApi :
         flag { Flags.catalystMigration26q2() }
 
         val subscriptionRepository = featureFactory.telephonyFeatureProvider.subscriptionRepository
+        val telephonyRepository = featureFactory.telephonyFeatureProvider.telephonyRepository
+
         parameters {
             parameter(
                 name = Settings.EXTRA_SUB_ID,
@@ -54,14 +58,11 @@ class MobileNetworkScreenApi :
                     GeneratedParameterType(
                         R.string.mobile_network_pref_screen_parameter_sub_id_description
                     ) {
-                        runBlocking {
-                            subscriptionRepository.activeSubscriptionListInfoFlow().first()?.map {
-                                info ->
-                                GeneratedValue(
-                                    info.subscriptionId.toString(),
-                                    info.displayName.toString(),
-                                )
-                            } ?: emptyList()
+                        subscriptionRepository.visibleActiveSubscriptionInfoList.map { info ->
+                            GeneratedValue(
+                                info.subscriptionId.toString(),
+                                info.displayName.toString(),
+                            )
                         }
                     },
             )
@@ -76,11 +77,45 @@ class MobileNetworkScreenApi :
                 }
             }
         }
+
+        preference(
+            key = KEY_AUTO_DATA_SWITCHING,
+            purpose = R.string.mobile_network_auto_data_switching_purpose,
+            type = AnyBoolean,
+        ) {
+            preconditions(R.string.auto_data_switching_preconditions) {
+                val subId =
+                    keyParameters?.get(Settings.EXTRA_SUB_ID)?.toInt()
+                        ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
+                if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+                    Disallowed("This is not a valid subscription id")
+                } else if (subscriptionRepository.getDefaultDataSubscriptionId() == subId) {
+                    Disallowed("This is the default data subscription")
+                } else if (!telephonyRepository.isMobileDataCable()) {
+                    Disallowed("Mobile data is not available")
+                } else {
+                    Allowed
+                }
+            }
+            get {
+                execute {
+                    val subId = keyParameters?.get(Settings.EXTRA_SUB_ID)!!.toInt()
+                    telephonyRepository.isMobileDataSwitchPolicyEnabled(subId)
+                }
+            }
+            set {
+                execute { value ->
+                    val subId = keyParameters?.get(Settings.EXTRA_SUB_ID)!!.toInt()
+                    telephonyRepository.setMobileDataSwitchPolicyEnabled(subId, value)
+                }
+            }
+        }
     }
 
     companion object {
         private const val TAG = "MobileNetworkScreenApi"
         const val KEY = "api_mobile_network_pref_screen"
+        const val KEY_AUTO_DATA_SWITCHING = "auto_data_switch"
     }
 }
 // LINT.ThenChange(MobileNetworkSettings.java,

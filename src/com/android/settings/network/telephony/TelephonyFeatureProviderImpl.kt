@@ -19,6 +19,6 @@ package com.android.settings.network.telephony
 import android.content.Context
 
 class TelephonyFeatureProviderImpl(appContext: Context) : TelephonyFeatureProvider {
-    override val telephonyRepository = TelephonyRepository(appContext)
-    override val subscriptionRepository = SubscriptionRepository(appContext)
+    override val telephonyRepository = TelephonySettingsRepository(appContext)
+    override val subscriptionRepository = SubscriptionSettingsRepository(appContext)
 }
