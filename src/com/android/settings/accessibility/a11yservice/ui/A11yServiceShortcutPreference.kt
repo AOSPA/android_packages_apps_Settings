@@ -49,6 +49,7 @@ class A11yServiceShortcutPreference(
     context: Context,
     private val serviceInfo: AccessibilityServiceInfo,
     metricCategory: Int,
+    private val isInSetupWizard: Boolean = context.isInSetupWizard(),
 ) :
     AccessibilityShortcutPreference(
         context = context,
@@ -61,7 +62,7 @@ class A11yServiceShortcutPreference(
     ShortcutFeatureNameProvider {
 
     override val dataStore: AccessibilityShortcutDataStore by lazy {
-        ShortcutDataStore(context, serviceInfo)
+        ShortcutDataStore(context, serviceInfo, isInSetupWizard = isInSetupWizard)
     }
 
     override fun getTitle(context: Context): CharSequence? {
