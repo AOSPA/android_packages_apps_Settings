@@ -74,9 +74,13 @@ class MagnificationShortcutTwoTargetItemController(
     }
 
     override fun onItemSelected(activity: FragmentActivity) {
-        // TODO (b/467928042): Impl new Edit Shortcut fragment by setup lib
-        // val twoTargetItem = targetItem as? TwoTargetItem ?: return
-        // magnificationShortcutMetadata.showEditShortcutsScreen(context, twoTargetItem.title ?: "")
+        EditShortcutSetupWizardFragment.show(
+            fragmentManager = activity.supportFragmentManager,
+            containerId = R.id.fragment_container,
+            metricsCategory = magnificationShortcutMetadata.metricsCategory,
+            screenTitle = magnificationShortcutMetadata.getPreferenceTitle(context) ?: "",
+            target = magnificationShortcutMetadata.componentName,
+        )
     }
 
     private fun updateDataStore(value: Boolean) =
