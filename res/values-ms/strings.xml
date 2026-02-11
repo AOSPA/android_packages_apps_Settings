@@ -1341,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktifkan Panggilan Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Hidupkan panggilan Wi-Fi"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Diputuskan sambungan daripada <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Bunyi dan getaran"</string>
     <string name="account_settings" msgid="255404935489127404">"Akaun"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Akaun profil kerja - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Akaun profil peribadi"</string>
@@ -1349,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Akaun kerja - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Akaun peribadi - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Carian"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Paparan"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Autoputar skrin"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Mati"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Hidup"</string>
@@ -2146,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Tekan kekunci Space dua kali untuk memasukkan \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Tunjukkan kata laluan"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Paparkan aksara seketika sambil anda menaip"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"Tunjukkan kata laluan untuk skrin sentuh"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Paparkan aksara sebentar semasa anda menaip pada skrin sentuh"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"Tunjukkan kata laluan untuk papan kekunci"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"Paparkan aksara sebentar semasa anda menaip pada papan kekunci"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Penyemak ejaan ini mungkin mampu mengumpul semua teks yang anda taip, termasuk data peribadi seperti kata laluan dan nombor kad kredit. Ia datang dari aplikasi <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Gunakan penyemak ejaan ini?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Tetapan"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Bahasa"</string>
@@ -3662,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Peranti"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Papan kekunci, pad sentuh, paparan, bunyi"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Paparan"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Bunyi"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Tidak tersedia kerana NFC dimatikan"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Untuk menggunakan ciri ini, pasang apl pembayaran dahulu"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apl terbaharu, apl lalai"</string>
@@ -4371,7 +4364,7 @@
     <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Mod ini tidak akan dihidupkan apabila dilumpuhkan"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Lumpuhkan"</string>
     <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Dayakan <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
-    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Mod ini boleh dihidupkan secara automatik berdasarkan tetapan mod tersebut"</string>
+    <string name="zen_mode_confirm_enable_message" msgid="8707142927858064775">"Mod ini boleh dihidupkan secara automatik berdasarkan tetapannya"</string>
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Dayakan"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Tetapkan mod yang mengikut jadual yang tetap"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Tetapkan mod untuk disegerakkan dengan acara kalendar dan maklum balas undangan"</string>
@@ -4551,9 +4544,9 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Kofigurasi USB lalai"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Pilihan kuasa"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Pilihan pemindahan fail"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Perlindungan Akses Data"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Benarkan Penerowongan PCI"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Apabila didayakan, persisian USB dan Thunderbolt boleh membuat terowong PCI dan mengakses memori sistem"</string>
+    <string name="usb_pci_tunnel_title" msgid="2748798863335212013">"Perlindungan akses data"</string>
+    <string name="usb_pci_tunnel_control" msgid="3567906081072788607">"Penerowongan PCI"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="3993635413468540397">"Benarkan peranti USB dan Thunderbolt mengakses memori sistem secara terus untuk mendapatkan kelajuan perkakasan maksimum.\n\nNota: Tindakan ini menimbulkan risiko keselamatan, maka hanya sambungkan peranti yang anda percayai."</string>
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Mestilah merupakan pengguna pentadbir untuk mengubah suai tetapan ini"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Dilumpuhkan oleh pentadbir IT anda"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Dilumpuhkan oleh Mod Perlindungan Lanjutan"</string>
@@ -5364,8 +5357,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satelit"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Kesambungan satelit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"kesambungan satelit"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Gunakan Kesambungan satelit"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Penggunaan apl yang disokong disertakan dengan akaun anda"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Data untuk semua apl disertakan dengan akaun anda"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Apl yang disokong pada telefon anda"</string>
@@ -5886,7 +5878,7 @@
     <string name="content_protection_preference_title" msgid="5069260032659193074">"Mengimbas untuk mengesan apl yang mengelirukan"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"Semak aktiviti apl untuk mengesan pancingan data"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Gunakan ciri pengimbasan untuk mengesan apl yang mengelirukan"</string>
-    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Gunakan pengimbasan apl kerja mengelirukan"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Gunakan pengimbasan apl mengelirukan pada profil kerja"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Kini kata laluan telah disediakan"</string>
@@ -6192,19 +6184,21 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Lagi perihal kesambungan satelit"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Buka demo SOS via satelit"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Apl satelit"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"Panggilan kecemasan sahaja"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Kesambungan satelit tersedia"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Akses maklumat satelit dengan mudah dengan menambahkan jubin Satelit pada Tetapan Pantas"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Tambahkan jubin"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Gesaan Jubin Satelit"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <string name="satellite_apps_see_all_supported_apps_text" msgid="1053383406430986034">"Lihat semua apl yang disokong"</string>
+    <string name="satellite_apps_see_less_text" msgid="3776624493969066217">"Lihat kurang"</string>
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satelit tidak tersedia"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Liputan satelit tidak tersedia semasa anda disambungkan kepada rangkaian mudah alih atau Wi‑Fi."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Kesambungan satelit tidak tersedia di negara atau rantau ini."</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Kesambungan satelit tidak tersedia sekarang. Sila cuba sebentar lagi."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Pelan mudah alih anda tidak termasuk liputan satelit. Hubungi pembawa anda untuk mendapatkan bantuan."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Untuk menggunakan Pemesejan satelit, Google Messages mestilah ditetapkan sebagai apl pemesejan lalai anda."</string>
+    <string name="satellite_user_restricted_warning_summary" msgid="6863113114703813898">"Kesambungan satelit dilumpuhkan."</string>
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Kesambungan satelit didayakan oleh pembawa anda. Ketahui lebih lanjut daripada tetapan satelit pembawa anda."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Lihat lokasi yang tersedia"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Tukar apl lalai"</string>

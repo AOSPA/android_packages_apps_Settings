@@ -1211,13 +1211,13 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="SafetyCenterQsContainer"
-           parent="android:Widget.DeviceDefault">
+    <style name="SafetyCenterQsContainer" parent="android:Widget.DeviceDefault">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:clipChildren">false</item>
       </style>
+
+    <style name="SafetyCenterQsBodyWidth">
+        <item name="android:layout_width">match_parent</item>
+    </style>
 
     <style name="SafetyCenterQsCloseButton"
            parent="android:Widget.DeviceDefault">

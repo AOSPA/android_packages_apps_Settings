@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.PendingIntent
+import android.app.settings.SettingsEnums
 import android.content.Intent
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
@@ -24,6 +25,7 @@ import android.util.Log
 import androidx.annotation.MainThread
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -65,7 +67,19 @@ open class SatelliteTileService : TileService() {
 
     override fun onTileAdded() {
         super.onTileAdded()
+        FeatureFactory.featureFactory.metricsFeatureProvider.action(
+            this,
+            SettingsEnums.QS_SATELLITE_TILE_ADDED,
+        )
         satelliteTilePromptUtils.markAllPromptsShown(this)
+    }
+
+    override fun onTileRemoved() {
+        super.onTileRemoved()
+        FeatureFactory.featureFactory.metricsFeatureProvider.action(
+            this,
+            SettingsEnums.QS_SATELLITE_TILE_REMOVED,
+        )
     }
 
     override fun onClick() {

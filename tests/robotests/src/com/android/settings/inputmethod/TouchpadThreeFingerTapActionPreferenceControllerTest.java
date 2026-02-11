@@ -50,6 +50,7 @@ import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.InputDevice;
+import android.view.View;
 
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
@@ -112,6 +113,8 @@ public class TouchpadThreeFingerTapActionPreferenceControllerTest {
 
     @Captor
     private ArgumentCaptor<Intent> mIntentCaptor;
+    @Captor
+    private ArgumentCaptor<View.OnClickListener> mExtraWidgetOnClickListenerCaptor;
 
     private ContentResolver mContentResolver;
     private FakeFeatureFactory mFeatureFactory;
@@ -202,7 +205,41 @@ public class TouchpadThreeFingerTapActionPreferenceControllerTest {
         setLaunchingApp(/* launchingApp= */ null);
         mController.onRadioButtonClicked(mMockPref);
 
-        assertAppSelectionIsLaunched();
+        assertAppSelectionIsLaunched(/* shouldSetGesture= */ true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_THREE_FINGER_TAP_APP_LAUNCH)
+    public void onExtraWidgetClick_whenNotLaunchApp_launchesAppSelectionWithoutSettingGesture() {
+        setupController(LAUNCH_APP_KEY);
+        // Set a different gesture type, so "launch app" is not the current one.
+        setGestureType(mContentResolver, GO_HOME_GESTURE);
+        verify(mMockPref)
+                .setExtraWidgetOnClickListener(mExtraWidgetOnClickListenerCaptor.capture());
+
+        // Simulate a click on the extra widget (gear icon).
+        mExtraWidgetOnClickListenerCaptor.getValue().onClick(null);
+
+        // Assert that the app selection fragment is launched, but without setting the gesture,
+        // as the user is only viewing/changing the selected app.
+        assertAppSelectionIsLaunched(/* shouldSetGesture= */ false);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_THREE_FINGER_TAP_APP_LAUNCH)
+    public void onExtraWidgetClick_whenIsLaunchApp_launchesAppSelectionAndSetsGesture() {
+        setupController(LAUNCH_APP_KEY);
+        // Set "launch app" as the current gesture type.
+        setGestureType(mContentResolver, LAUNCH_APP_GESTURE);
+        verify(mMockPref)
+                .setExtraWidgetOnClickListener(mExtraWidgetOnClickListenerCaptor.capture());
+
+        // Simulate a click on the extra widget (gear icon).
+        mExtraWidgetOnClickListenerCaptor.getValue().onClick(null);
+
+        // Assert that the app selection fragment is launched and the gesture is set,
+        // ensuring the gesture is re-applied if the user picks a new app.
+        assertAppSelectionIsLaunched(/* shouldSetGesture= */ true);
     }
 
     private void setLaunchingApp(ComponentName launchingApp) {
@@ -210,7 +247,7 @@ public class TouchpadThreeFingerTapActionPreferenceControllerTest {
         when(mMockSharedPreferences.getString(eq(LAUNCHING_APP_KEY), any())).thenReturn(flattened);
     }
 
-    private void assertAppSelectionIsLaunched() {
+    private void assertAppSelectionIsLaunched(boolean shouldSetGesture) {
         verify(mMockContext).startActivity(mIntentCaptor.capture());
 
         Intent intent = mIntentCaptor.getValue();
@@ -220,8 +257,12 @@ public class TouchpadThreeFingerTapActionPreferenceControllerTest {
         assertThat(dest).isEqualTo(TouchpadThreeFingerTapAppSelectionFragment.class.getName());
 
         Bundle args = intent.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS);
-        assertThat(args).isNotNull();
-        assertTrue(args.getBoolean(SET_GESTURE));
+        if (shouldSetGesture) {
+            assertThat(args).isNotNull();
+            assertTrue(args.getBoolean(SET_GESTURE));
+        } else {
+            assertThat(args).isNull();
+        }
     }
 
     @Test

@@ -111,7 +111,9 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
             supportedService.setTitle(R.string.title_supported_service_for_manual_type)
             supportedService.setSummary(R.string.summary_supported_service_for_manual_type)
         } else {
-            Log.d(TAG, "updateHowItWorksContent: Setting UX for auto or hybrid with data")
+            if (Flags.newSatelliteIcon()) {
+                supportedService.icon = SatelliteSettingIconDrawable(mContext)
+            }
             connectionGuide.setTitle(R.string.title_satellite_connection_guide)
             connectionGuide.setSummary(R.string.summary_satellite_connection_guide)
             supportedService.setTitle(R.string.title_supported_service)

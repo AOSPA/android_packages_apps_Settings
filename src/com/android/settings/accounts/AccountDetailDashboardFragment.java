@@ -40,6 +40,7 @@ import com.android.settingslib.drawer.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 public class AccountDetailDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "AccountDetailDashboard";
@@ -189,3 +190,4 @@ public class AccountDetailDashboardFragment extends DashboardFragment {
         }
     }
 }
+// LINT.ThenChange(AccountDetailApiScreen.kt)

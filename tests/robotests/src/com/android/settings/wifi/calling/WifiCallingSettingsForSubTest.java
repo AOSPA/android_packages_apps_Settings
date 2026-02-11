@@ -60,6 +60,7 @@ import com.android.settings.network.ims.MockWifiCallingQueryImsState;
 import com.android.settings.network.ims.WifiCallingQueryImsState;
 import com.android.settings.network.telephony.wificalling.IWifiCallingRepository;
 import com.android.settings.testutils.shadow.ShadowFragment;
+import com.android.settings.testutils.shadow.ShadowTelecomDependencies;
 import com.android.settings.widget.SettingsMainSwitchBar;
 import com.android.settings.widget.SettingsMainSwitchPreference;
 import com.android.settingslib.widget.TopIntroPreference;
@@ -79,7 +80,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
-@Config(shadows = ShadowFragment.class)
+@Config(shadows = {ShadowFragment.class, ShadowTelecomDependencies.class})
 @RunWith(RobolectricTestRunner.class)
 public class WifiCallingSettingsForSubTest {
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -130,6 +131,7 @@ public class WifiCallingSettingsForSubTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
+        mSetFlagsRule.enableFlags(android.telecom.flags.Flags.FLAG_TELECOM_MAINLINE_API);
 
         mContext = RuntimeEnvironment.application;
         doReturn(mContext.getTheme()).when(mActivity).getTheme();

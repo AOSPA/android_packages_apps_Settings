@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.AdvancedConnectedDeviceActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -36,7 +35,7 @@ open class AdvancedConnectedDeviceScreen : PreferenceScreenMixin, PreferenceSumm
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.connection_preferences_purpose
 
@@ -47,8 +46,6 @@ open class AdvancedConnectedDeviceScreen : PreferenceScreenMixin, PreferenceSumm
 
     override val highlightMenuKey
         get() = R.string.menu_key_connected_devices
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkConnectedDevices25q4()
 
     override fun hasCompleteHierarchy() = false
 
@@ -70,4 +67,5 @@ open class AdvancedConnectedDeviceScreen : PreferenceScreenMixin, PreferenceSumm
         const val KEY = "connection_preferences"
     }
 }
-// LINT.ThenChange(AdvancedConnectedDeviceDashboardFragment.java, AdvancedConnectedDeviceController.java)
+// LINT.ThenChange(AdvancedConnectedDeviceDashboardFragment.java,
+// AdvancedConnectedDeviceController.java)

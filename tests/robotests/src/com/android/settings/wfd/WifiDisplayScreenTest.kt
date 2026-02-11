@@ -23,10 +23,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.FEATURE_WIFI_DIRECT
 import android.media.MediaRouter
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.CoroutineScope
@@ -34,17 +34,18 @@ import kotlinx.coroutines.Dispatchers
 import org.junit.Assert.fail
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 
-class WifiDisplayScreenTest : SettingsCatalystTestCase() {
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_CONNECTED_DEVICES_25Q4
+@RunWith(AndroidJUnit4::class)
+class WifiDisplayScreenTest {
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    override val preferenceScreenCreator = WifiDisplayScreen()
+    private val preferenceScreenCreator = WifiDisplayScreen()
 
     private val mockMediaRouter: MediaRouter = mock()
     private val mockLifecycleContext: PreferenceLifecycleContext = mock()
@@ -361,11 +362,5 @@ class WifiDisplayScreenTest : SettingsCatalystTestCase() {
         val summary = preferenceScreenCreator.getSummary(context)
 
         assertThat(summary).isEqualTo(expectedStatus)
-    }
-
-    @Test
-    override fun migration() {
-        mockPackageManager.stub { on { hasSystemFeature(FEATURE_WIFI_DIRECT) } doReturn true }
-        super.migration()
     }
 }

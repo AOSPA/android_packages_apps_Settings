@@ -29,7 +29,6 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Settings.PreviouslyConnectedDeviceActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -61,7 +60,7 @@ open class PreviouslyConnectedDeviceScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.previously_connected_devices_see_all_purpose
 
@@ -75,8 +74,6 @@ open class PreviouslyConnectedDeviceScreen :
         get() = R.drawable.ic_chevron_right_24dp
 
     private var bluetoothStateReceiver: BroadcastReceiver? = null
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkConnectedDevices25q4()
 
     override fun getMetricsCategory() = SettingsEnums.PREVIOUSLY_CONNECTED_DEVICES
 
@@ -143,4 +140,5 @@ open class PreviouslyConnectedDeviceScreen :
         const val KEY = "previously_connected_devices_see_all"
     }
 }
-// LINT.ThenChange(PreviouslyConnectedDeviceDashboardFragment.java, PreviouslyConnectedDevicePreferenceController.java)
+// LINT.ThenChange(PreviouslyConnectedDeviceDashboardFragment.java,
+// PreviouslyConnectedDevicePreferenceController.java)

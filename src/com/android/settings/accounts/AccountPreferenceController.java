@@ -720,4 +720,5 @@ public class AccountPreferenceController extends AbstractPreferenceController
         }
     }
 }
-// LINT.ThenChange(ManagedProfileApiScreen.kt)
+// LINT.ThenChange(ManagedProfileApiScreen.kt
+//                 AccountDetailApiScreen.kt)

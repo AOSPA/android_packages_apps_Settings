@@ -16,29 +16,31 @@
 
 package com.android.settings.connecteddevice
 
+import android.content.Context
 import android.content.ContextWrapper
-import android.content.Intent
 import android.content.res.Resources
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
-import androidx.preference.PreferenceFragmentCompat
-import androidx.test.core.app.ActivityScenario
+import android.platform.test.flag.junit.SetFlagsRule
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings.ConnectedDeviceDashboardActivity
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.widget.theme.flags.Flags.FLAG_IS_EXPRESSIVE_DESIGN_ENABLED
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
-class ConnectedDeviceDashboardScreenTest : SettingsCatalystTestCase() {
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_CONNECTED_DEVICES_25Q4
+@RunWith(AndroidJUnit4::class)
+class ConnectedDeviceDashboardScreenTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
-    override val preferenceScreenCreator = ConnectedDeviceDashboardScreen()
+    private val preferenceScreenCreator = ConnectedDeviceDashboardScreen()
 
     private val mockResources = mock<Resources>()
     private val context =
@@ -87,19 +89,5 @@ class ConnectedDeviceDashboardScreenTest : SettingsCatalystTestCase() {
             on { getBoolean(R.bool.config_show_top_level_connected_devices) } doReturn false
         }
         assertThat(preferenceScreenCreator.isAvailable(context)).isEqualTo(false)
-    }
-
-    override fun launchFragment(
-        fragmentClass: Class<PreferenceFragmentCompat>,
-        action: (PreferenceFragmentCompat) -> Unit,
-    ) {
-        val intent = Intent(appContext, ConnectedDeviceDashboardActivity::class.java)
-        ActivityScenario.launch<ConnectedDeviceDashboardActivity>(intent).use {
-            it.onActivity { activity ->
-                val fragment = activity.supportFragmentManager.fragments[0]
-                assertThat(fragment.javaClass).isEqualTo(fragmentClass)
-                action(fragment as PreferenceFragmentCompat)
-            }
-        }
     }
 }

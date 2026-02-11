@@ -380,13 +380,15 @@ class DisplayTopologyPreferenceTest {
 
         val externalMonitorBlock = paneChildren.find { it.logicalDisplayId == DISPLAY_ID_2 }
         assertThat(externalMonitorBlock).isNotNull()
-        assertThat(externalMonitorBlock!!.surfaceSize).isEqualTo(DISPLAY_SIZE_1)
+        assertThat(externalMonitorBlock!!.surfaceRenderer.surfaceSize).isEqualTo(DISPLAY_SIZE_1)
 
         val blockBounds = virtualBounds(externalMonitorBlock)
         val expectedScaleX = blockBounds.width() / DISPLAY_SIZE_1.width.toFloat()
         val expectedScaleY = blockBounds.height() / DISPLAY_SIZE_1.height.toFloat()
         val expectedLetterboxScale = min(expectedScaleX, expectedScaleY)
-        assertThat(externalMonitorBlock.surfaceScale).isWithin(0.01f).of(expectedLetterboxScale)
+        assertThat(externalMonitorBlock.surfaceRenderer.surfaceScale)
+            .isWithin(0.01f)
+            .of(expectedLetterboxScale)
         // Assert scaled surface size fits within the block size
         assertThat(expectedLetterboxScale * DISPLAY_SIZE_1.width.toFloat() <= blockBounds.width())
             .isTrue()
