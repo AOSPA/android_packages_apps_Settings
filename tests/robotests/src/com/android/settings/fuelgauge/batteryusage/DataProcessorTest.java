@@ -3266,6 +3266,7 @@ public final class DataProcessorTest {
         values.put(
                 BatteryHistEntry.KEY_BATTERY_INFORMATION,
                 ConvertUtils.convertBatteryInformationToString(batteryInformation));
+        BatteryDiffEntry.sUidAndPackageNameCache.put(uid, packageName);
         return new BatteryHistEntry(values);
     }
 

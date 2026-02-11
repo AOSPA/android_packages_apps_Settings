@@ -43,7 +43,7 @@ import java.util.Map;
 public class BatteryDiffEntry {
     private static final String TAG = "BatteryDiffEntry";
     private static final Object sResourceCacheLock = new Object();
-    private static final Object sPackageNameAndUidCacheLock = new Object();
+    private static final Object sUidAndPackageNameCacheLock = new Object();
     private static final Object sValidForRestrictionLock = new Object();
 
     static Locale sCurrentLocale = null;
@@ -52,9 +52,9 @@ public class BatteryDiffEntry {
     @GuardedBy("sResourceCacheLock")
     static final Map<String, NameAndIcon> sResourceCache = new ArrayMap<>();
 
-    // Caches package name and uid to improve loading performance.
-    @GuardedBy("sPackageNameAndUidCacheLock")
-    static final Map<String, Integer> sPackageNameAndUidCache = new ArrayMap<>();
+    // Caches uid and package name to improve loading performance.
+    @GuardedBy("sUidAndPackageNameCacheLock")
+    static final Map<Long, String> sUidAndPackageNameCache = new ArrayMap<>();
 
     // Whether a specific item is valid to launch restriction page?
     @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
@@ -306,30 +306,27 @@ public class BatteryDiffEntry {
     /** Whether the current BatteryDiffEntry is uninstalled app or not. */
     public boolean isUninstalledEntry() {
         final String packageName = getPackageName();
-        if (TextUtils.isEmpty(packageName)
-                || isSystemEntry()
-                // Some special package UIDs could be 0. Those packages are not installed by users.
-                || mUid == BatteryUtils.UID_ZERO) {
+        if (TextUtils.isEmpty(packageName) || isSystemEntry() || mIsHidden) {
             return false;
         }
 
-        final int uid = getPackageUid(packageName);
-        return uid == BatteryUtils.UID_REMOVED_APPS || uid == BatteryUtils.UID_NULL;
+        // The package name will be null for the unassigned UID.
+        return !TextUtils.equals(packageName, getPackageNameByUid(mUid));
     }
 
-    private int getPackageUid(String packageName) {
-        synchronized (sPackageNameAndUidCacheLock) {
-            if (sPackageNameAndUidCache.containsKey(packageName)) {
-                return sPackageNameAndUidCache.get(packageName);
+    private String getPackageNameByUid(long uid) {
+        synchronized (sUidAndPackageNameCacheLock) {
+            if (sUidAndPackageNameCache.containsKey(uid)) {
+                return sUidAndPackageNameCache.get(uid);
             }
         }
 
-        int uid =
-                BatteryUtils.getInstance(mContext).getPackageUidAsUser(packageName, (int) mUserId);
-        synchronized (sPackageNameAndUidCacheLock) {
-            sPackageNameAndUidCache.put(packageName, uid);
+        final String packageName =
+                BatteryUtils.getInstance(mContext).getPackageName((int) uid);
+        synchronized (sUidAndPackageNameCacheLock) {
+            sUidAndPackageNameCache.put(uid, packageName);
         }
-        return uid;
+        return packageName;
     }
 
     void loadLabelAndIcon() {
@@ -575,8 +572,8 @@ public class BatteryDiffEntry {
         synchronized (sValidForRestrictionLock) {
             sValidForRestriction.clear();
         }
-        synchronized (sPackageNameAndUidCacheLock) {
-            sPackageNameAndUidCache.clear();
+        synchronized (sUidAndPackageNameCacheLock) {
+            sUidAndPackageNameCache.clear();
         }
     }
 

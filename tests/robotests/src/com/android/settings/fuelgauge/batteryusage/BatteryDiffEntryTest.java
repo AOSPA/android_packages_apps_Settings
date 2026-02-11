@@ -61,9 +61,9 @@ public final class BatteryDiffEntryTest {
     private static final int UID = 100;
     private static final int USER_ID = 0;
     private static final int UNINSTALLED_UID = 101;
+    private static final int REINSTALLED_UID = 102;
     private static final String PACKAGE_NAME = "com.android.testing";
     private static final String UNINSTALLED_PACKAGE_NAME = "com.android.testing.uninstalled";
-    private static final String UID_ZERO_PACKAGE_NAME = "com.android.testing.uid.zero";
 
     private Context mContext;
 
@@ -86,16 +86,11 @@ public final class BatteryDiffEntryTest {
         doReturn(mContext).when(mContext).getApplicationContext();
         doReturn(mMockUserManager).when(mContext).getSystemService(UserManager.class);
         doReturn(mMockPackageManager).when(mContext).getPackageManager();
-        doReturn(UID)
-                .when(mMockPackageManager)
-                .getPackageUidAsUser(PACKAGE_NAME, PackageManager.GET_META_DATA, USER_ID);
-        doReturn(BatteryUtils.UID_NULL)
-                .when(mMockPackageManager)
-                .getPackageUidAsUser(
-                        UNINSTALLED_PACKAGE_NAME, PackageManager.GET_META_DATA, USER_ID);
-        doReturn(BatteryUtils.UID_ZERO)
-                .when(mMockPackageManager)
-                .getPackageUidAsUser(UID_ZERO_PACKAGE_NAME, PackageManager.GET_META_DATA, USER_ID);
+        doReturn(new String[] {PACKAGE_NAME}).when(mMockPackageManager).getPackagesForUid(UID);
+        doReturn(null).when(mMockPackageManager)
+                .getPackagesForUid(UNINSTALLED_UID);
+        doReturn(new String[] {UNINSTALLED_PACKAGE_NAME}).when(mMockPackageManager)
+                .getPackagesForUid(REINSTALLED_UID);
         BatteryDiffEntry.clearCache();
     }
 
@@ -361,13 +356,13 @@ public final class BatteryDiffEntryTest {
                 "fake application key",
                 new BatteryEntry.NameAndIcon("app label", null, /* iconId= */ 0));
         BatteryDiffEntry.sValidForRestriction.put("fake application key", Boolean.valueOf(false));
-        BatteryDiffEntry.sPackageNameAndUidCache.put(PACKAGE_NAME, UID);
+        BatteryDiffEntry.sUidAndPackageNameCache.put((long) UID, PACKAGE_NAME);
 
         BatteryDiffEntry.clearCache();
 
         assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
         assertThat(BatteryDiffEntry.sValidForRestriction).isEmpty();
-        assertThat(BatteryDiffEntry.sPackageNameAndUidCache).isEmpty();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache).isEmpty();
     }
 
     @Test
@@ -451,10 +446,11 @@ public final class BatteryDiffEntryTest {
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, new BatteryHistEntry(values));
 
         assertThat(entry.isSystemEntry()).isFalse();
-        assertThat(BatteryDiffEntry.sPackageNameAndUidCache.containsKey(PACKAGE_NAME)).isFalse();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(entry.mUid)).isFalse();
         assertThat(entry.isUninstalledEntry()).isFalse();
-        assertThat(BatteryDiffEntry.sPackageNameAndUidCache.containsKey(PACKAGE_NAME)).isTrue();
-        assertThat(BatteryDiffEntry.sPackageNameAndUidCache.get(PACKAGE_NAME)).isEqualTo(UID);
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(entry.mUid)).isTrue();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.get(entry.mUid))
+                .isEqualTo(PACKAGE_NAME);
     }
 
     @Test
@@ -464,11 +460,13 @@ public final class BatteryDiffEntryTest {
         values.put(BatteryHistEntry.KEY_UID, BatteryUtils.UID_ZERO);
         values.put(BatteryHistEntry.KEY_PACKAGE_NAME, PACKAGE_NAME);
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, new BatteryHistEntry(values));
+        // Uid 0 is reserved for system app.
+        entry.mIsHidden = true;
 
         assertThat(entry.isSystemEntry()).isFalse();
-        assertThat(BatteryDiffEntry.sPackageNameAndUidCache.containsKey(PACKAGE_NAME)).isFalse();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(entry.mUid)).isFalse();
         assertThat(entry.isUninstalledEntry()).isFalse();
-        assertThat(BatteryDiffEntry.sPackageNameAndUidCache.containsKey(PACKAGE_NAME)).isFalse();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(entry.mUid)).isFalse();
     }
 
     @Test
@@ -480,11 +478,35 @@ public final class BatteryDiffEntryTest {
         final BatteryDiffEntry entry = createBatteryDiffEntry(10, new BatteryHistEntry(values));
 
         assertThat(entry.isSystemEntry()).isFalse();
-        assertThat(BatteryDiffEntry.sPackageNameAndUidCache.containsKey(UNINSTALLED_PACKAGE_NAME))
-                .isFalse();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(entry.mUid)).isFalse();
         assertThat(entry.isUninstalledEntry()).isTrue();
-        assertThat(BatteryDiffEntry.sPackageNameAndUidCache.get(UNINSTALLED_PACKAGE_NAME))
-                .isEqualTo(BatteryUtils.UID_NULL);
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(entry.mUid)).isTrue();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.get(entry.mUid)).isNull();
+    }
+
+    @Test
+    public void testIsUninstalledEntry_reinstalledApp_returnTrue() throws Exception {
+        final ContentValues values =
+                getContentValuesWithType(ConvertUtils.CONSUMER_TYPE_UID_BATTERY);
+        values.put(BatteryHistEntry.KEY_UID, UNINSTALLED_UID);
+        values.put(BatteryHistEntry.KEY_PACKAGE_NAME, UNINSTALLED_PACKAGE_NAME);
+        final BatteryDiffEntry oldEntry = createBatteryDiffEntry(10, new BatteryHistEntry(values));
+        values.put(BatteryHistEntry.KEY_UID, REINSTALLED_UID);
+        final BatteryDiffEntry newEntry = createBatteryDiffEntry(10, new BatteryHistEntry(values));
+
+        // The old entry will combine into uninstalled.
+        assertThat(oldEntry.isSystemEntry()).isFalse();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(oldEntry.mUid)).isFalse();
+        assertThat(oldEntry.isUninstalledEntry()).isTrue();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(oldEntry.mUid)).isTrue();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.get(oldEntry.mUid)).isNull();
+        // The new entry will not combine into uninstalled.
+        assertThat(newEntry.isSystemEntry()).isFalse();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(newEntry.mUid)).isFalse();
+        assertThat(newEntry.isUninstalledEntry()).isFalse();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.containsKey(newEntry.mUid)).isTrue();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache.get(newEntry.mUid))
+                .isEqualTo(UNINSTALLED_PACKAGE_NAME);
     }
 
     @Test
