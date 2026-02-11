@@ -135,6 +135,7 @@ import com.android.settings.network.NetworkDashboardScreen
 import com.android.settings.network.NetworkProviderScreen
 import com.android.settings.network.apn.ApnSettingsScreen
 import com.android.settings.network.telephony.MobileNetworkScreen
+import com.android.settings.network.telephony.MobileNetworkScreenApi
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.BubbleNotificationScreen
 import com.android.settings.notification.SoundScreen
@@ -430,6 +431,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = MobileNetworkScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = MobileNetworkScreenApi.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = NfcAndPaymentScreen.KEY),

@@ -42,6 +42,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
+import com.android.settings.network.telephony.TelephonyFeatureProvider
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
@@ -178,5 +179,8 @@ class FakeFeatureFactory : FeatureFactory() {
         get() = TODO("Not yet implemented")
 
     override val usbFeatureProvider: UsbFeatureProvider
+        get() = TODO("Not yet implemented")
+
+    override val telephonyFeatureProvider: TelephonyFeatureProvider
         get() = TODO("Not yet implemented")
 }

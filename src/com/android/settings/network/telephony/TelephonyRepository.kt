@@ -28,6 +28,8 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 
+class TelephonyRepository(appContext: Context)
+
 /** Creates an instance of a cold Flow for Telephony callback of given [subId]. */
 fun <T> Context.telephonyCallbackFlow(
     subId: Int,
@@ -36,15 +38,17 @@ fun <T> Context.telephonyCallbackFlow(
 
 /** Creates an instance of a cold Flow for Telephony callback. */
 fun <T> TelephonyManager.telephonyCallbackFlow(
-    block: ProducerScope<T>.() -> TelephonyCallback,
-): Flow<T> = callbackFlow {
-    val callback = block()
+    block: ProducerScope<T>.() -> TelephonyCallback
+): Flow<T> =
+    callbackFlow {
+            val callback = block()
 
-    registerTelephonyCallback(Dispatchers.Default.asExecutor(), callback)
+            registerTelephonyCallback(Dispatchers.Default.asExecutor(), callback)
 
-    awaitClose { unregisterTelephonyCallback(callback) }
-}.conflate().flowOn(Dispatchers.Default)
+            awaitClose { unregisterTelephonyCallback(callback) }
+        }
+        .conflate()
+        .flowOn(Dispatchers.Default)
 
 fun Context.telephonyManager(subId: Int): TelephonyManager =
-    getSystemService(TelephonyManager::class.java)!!
-        .createForSubscriptionId(subId)
+    getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)
