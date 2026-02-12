@@ -366,6 +366,24 @@ public final class BatteryDiffEntryTest {
     }
 
     @Test
+    public void testClearCacheForUid_clearDataForGivenPackage() {
+        BatteryDiffEntry.sResourceCache.put(
+                Integer.toString(UID),
+                new BatteryEntry.NameAndIcon("app label", null, /* iconId= */ 0));
+        BatteryDiffEntry.sValidForRestriction.put(
+                Integer.toString(UID), Boolean.valueOf(false));
+        BatteryDiffEntry.sUidAndPackageNameCache.put((long) UID, PACKAGE_NAME);
+
+        BatteryDiffEntry.clearCacheForUid(UNINSTALLED_UID);
+        assertThat(BatteryDiffEntry.sResourceCache).hasSize(1);
+
+        BatteryDiffEntry.clearCacheForUid(UID);
+        assertThat(BatteryDiffEntry.sResourceCache).isEmpty();
+        assertThat(BatteryDiffEntry.sValidForRestriction).isEmpty();
+        assertThat(BatteryDiffEntry.sUidAndPackageNameCache).isEmpty();
+    }
+
+    @Test
     public void testClearCache_switchLocale_clearCacheIconAndLabel() throws Exception {
         final int userId = UserHandle.getUserId(1001);
         Locale.setDefault(new Locale("en_US"));

@@ -577,6 +577,19 @@ public class BatteryDiffEntry {
         }
     }
 
+    /** Clears the cache for given uid. */
+    public static void clearCacheForUid(final int uid) {
+        synchronized (sResourceCacheLock) {
+            sResourceCache.remove(Integer.toString(uid));
+        }
+        synchronized (sValidForRestrictionLock) {
+            sValidForRestriction.remove(Integer.toString(uid));
+        }
+        synchronized (sUidAndPackageNameCacheLock) {
+            sUidAndPackageNameCache.remove((long) uid);
+        }
+    }
+
     private static void putResourceCache(String key, NameAndIcon nameAndIcon) {
         synchronized (sResourceCacheLock) {
             sResourceCache.put(key, nameAndIcon);
