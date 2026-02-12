@@ -54,6 +54,7 @@ import com.android.settings.accounts.ManagedProfileApiScreen
 import com.android.settings.applications.AppDashboardScreen
 import com.android.settings.applications.contacts.ContactsStorageApiScreen
 import com.android.settings.applications.intentpicker.AppLaunchApiScreen
+import com.android.settings.applications.managedomainurls.OpeningLinksApiScreen
 import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen
 import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppListScreen
 import com.android.settings.applications.specialaccess.AllFilesAccessAppDetailScreen
@@ -606,6 +607,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceUnlockApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AvailableVirtualKeyboardApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDataUsageScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = OpeningLinksApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
     )
 
