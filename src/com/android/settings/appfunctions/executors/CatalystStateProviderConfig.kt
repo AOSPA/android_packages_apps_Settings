@@ -112,6 +112,7 @@ import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
 import com.android.settings.gestures.ButtonNavigationSettingsScreen
+import com.android.settings.gestures.DoubleTapApiScreen
 import com.android.settings.gestures.DoubleTapPowerScreen
 import com.android.settings.gestures.DoubleTwistGestureApiFirstScreen
 import com.android.settings.gestures.GestureSettingsApiScreen
@@ -576,6 +577,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = SwipeToNotificationApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PickupGestureApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TapScreenGestureApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DoubleTapApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDirectApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ContactsStorageApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PowerMenuSettingsScreenApi.KEY),
