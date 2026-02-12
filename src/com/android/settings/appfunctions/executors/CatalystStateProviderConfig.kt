@@ -148,7 +148,11 @@ import com.android.settings.notification.modes.ZenModesListScreen
 import com.android.settings.print.PrintServiceApiScreen
 import com.android.settings.print.PrintSettingsApiScreen
 import com.android.settings.safetycenter.ui.AccountSecuritySubpageScreenApi
+import com.android.settings.safetycenter.ui.AppSecurityScreenApi
 import com.android.settings.safetycenter.ui.DeviceUnlockApiScreen
+import com.android.settings.safetycenter.ui.MoreSecurityPrivacyScreenApi
+import com.android.settings.safetycenter.ui.PrivacyControlsScreenApi
+import com.android.settings.safetycenter.ui.SystemAndUpdatesScreenApi
 import com.android.settings.security.ContentProtectionScreenApi
 import com.android.settings.security.CredentialManagementAppScreenApi
 import com.android.settings.security.EncryptionAndCredentialScreenApi
@@ -591,6 +595,10 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = UsbDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UnrestrictedDataAccessApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccountSecuritySubpageScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppSecurityScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = SystemAndUpdatesScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = MoreSecurityPrivacyScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = PrivacyControlsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TrustedCredentialsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserCredentialsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserAspectRatioAppsApiScreen.KEY),
@@ -737,6 +745,26 @@ private fun getDeviceStateItemList() =
             enabled = true,
             settingKey = "main_toggle_wifi",
             settingScreenKey = NetworkProviderScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "privacy_camera_toggle",
+            settingScreenKey = PrivacyControlsScreenApi.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "privacy_mic_toggle",
+            settingScreenKey = PrivacyControlsScreenApi.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "show_clip_access_notification",
+            settingScreenKey = PrivacyControlsScreenApi.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "show_password",
+            settingScreenKey = PrivacyControlsScreenApi.KEY,
         ),
         DeviceStateItemConfig(
             enabled = true,
