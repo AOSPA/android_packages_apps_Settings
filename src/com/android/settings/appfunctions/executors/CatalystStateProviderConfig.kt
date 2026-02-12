@@ -187,6 +187,7 @@ import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.WifiDataUsageScreenApi
 import com.android.settings.wifi.calling.WifiCallingScreen
 import com.android.settings.wifi.details.WifiDetailsScreenApi
+import com.android.settings.wifi.details2.WifiPrivacyScreenApi
 import com.android.settings.wifi.p2p.WifiDirectApiScreen
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settings.wifi.tether.WifiHotspotScreen
@@ -620,6 +621,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDataUsageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OpeningLinksApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
     )
 
