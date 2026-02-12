@@ -18,12 +18,17 @@ package com.android.settings.security;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.network.telephony.ConvertToEsimPreferenceController;
+
+import java.util.List;
 
 /**
  * Fragment for showing the PrimarySwitchPreference toggle for toggling SIM protection
@@ -46,11 +51,36 @@ public class AutomaticSimPinLockFragment extends DashboardFragment {
 
         mController = use(AutoSimPinManagementController.class);
         mController.setFragment(this);
+
+        int subId = getSubId(context);
+        ConvertToEsimPreferenceController convertToEsimController =
+                use(ConvertToEsimPreferenceController.class);
+        if (convertToEsimController != null) {
+            convertToEsimController.init(subId, this);
+        }
     }
 
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.automatic_sim_lock_protection_settings;
+    }
+
+    private static int getSubId(Context context) {
+        SubscriptionManager subscriptionManager =
+                context.getSystemService(SubscriptionManager.class);
+        final List<SubscriptionInfo> subInfoList = subscriptionManager
+                == null ? null : subscriptionManager.getActiveSubscriptionInfoList();
+        if (subInfoList == null) {
+            return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        }
+
+        for (SubscriptionInfo subInfo : subInfoList) {
+            if (subInfo.isActive() && !subInfo.isEmbedded()) {
+                return subInfo.getSubscriptionId();
+            }
+        }
+
+        return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     }
 
     @Override
