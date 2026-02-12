@@ -29,7 +29,7 @@ class ColorInversionIllustrationItemController(private val context: Context, ite
 
     private val colorInversionIllustrationMetadata = ColorInversionIllustrationPreference()
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         if (item is IllustrationItem) {
             item.imageResId = R.raw.accessibility_color_inversion_banner
             item.contentDescription =
