@@ -579,4 +579,14 @@ class SupervisionDashboardScreenTest {
                 SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
             )
     }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onResume_supervisionSettingsUiUpdatesEnabled_refreshPinManagementPreference() {
+        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+        preferenceScreenCreator.onResume(mockLifeCycleContext)
+
+        verify(mockLifeCycleContext, times(1))
+            .notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+    }
 }
