@@ -14,13 +14,22 @@
 
 package com.android.settings.display;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+import android.hardware.display.DisplayManagerGlobal;
+import android.view.Display;
+import android.view.DisplayAdjustments;
+import android.view.DisplayInfo;
 
 import androidx.preference.PreferenceScreen;
 
@@ -47,11 +56,16 @@ public class NightDisplayActivationPreferenceControllerTest {
     private Context mContext;
     private ColorDisplayManager mColorDisplayManager;
     private NightDisplayActivationPreferenceController mPreferenceController;
+    private final DisplayInfo mDisplayInfo = new DisplayInfo();
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mDisplayInfo.type = Display.TYPE_INTERNAL;
+        DisplayAdjustments daj = null;
+        Display display = new Display(mock(DisplayManagerGlobal.class),
+                Display.DEFAULT_DISPLAY, mDisplayInfo, daj);
+        mContext = RuntimeEnvironment.application.createDisplayContext(display);
         mColorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
         mPreference = new MainSwitchPreference(mContext);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
@@ -68,6 +82,7 @@ public class NightDisplayActivationPreferenceControllerTest {
     @Test
     public void configuredNightDisplayAvailableAndNotBlocked_isAvailable() {
         NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
+        assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
         assertThat(mPreferenceController.isAvailable()).isTrue();
     }
 
@@ -75,6 +90,7 @@ public class NightDisplayActivationPreferenceControllerTest {
     public void configuredNightDisplayUnavailableAndNotBlocked_isUnavailable() {
         NightDisplayTestUtils.setNightDisplayAvailable(false);
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(false);
+        assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
@@ -82,6 +98,7 @@ public class NightDisplayActivationPreferenceControllerTest {
     public void configuredNightDisplayAvailableAndBlocked_isUnavailable() {
         NightDisplayTestUtils.setNightDisplayAvailable(true);
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
@@ -89,6 +106,16 @@ public class NightDisplayActivationPreferenceControllerTest {
     public void configuredNightDisplayUnavailableAndBlocked_isUnavailable() {
         NightDisplayTestUtils.setNightDisplayAvailable(false);
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+        assertThat(mPreferenceController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void configuredNightDisplayAvailableAndNotBlocked_externalDisplay_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
+        mDisplayInfo.type = Display.TYPE_EXTERNAL;
+        assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(
+                CONDITIONALLY_UNAVAILABLE);
         assertThat(mPreferenceController.isAvailable()).isFalse();
     }
 
