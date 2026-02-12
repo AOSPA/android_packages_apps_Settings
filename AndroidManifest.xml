@@ -6128,6 +6128,11 @@
             </intent-filter>
         </receiver>
 
+        <service
+            android:name="com.android.settings.safetycenter.WatchRangingJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="false" />
+
         <activity android:name="com.android.settings.biometrics.IdentityCheckNotificationPromoCardActivity"
             android:enabled="true"
             android:launchMode="singleTask"

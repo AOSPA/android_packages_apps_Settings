@@ -186,7 +186,7 @@ public class FingerprintSettingsFragmentTest {
                 .getExtPreferenceProvider(mContext))
                 .thenReturn(mExtPreferencesProvider);
         when(mExtPreferencesProvider.getSize()).thenReturn(0);
-        MSDLPlayerWrapper.INSTANCE.createPlayer(mContext, mMSDLPlayer);
+        MSDLPlayerWrapper.INSTANCE.setPlayer(mMSDLPlayer);
     }
 
     @After

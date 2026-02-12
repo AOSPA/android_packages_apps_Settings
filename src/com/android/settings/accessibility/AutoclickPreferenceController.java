@@ -26,6 +26,7 @@ import android.view.accessibility.AccessibilityManager;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+// LINT.IfChange
 /** Preference controller for autoclick (dwell timing). */
 public class AutoclickPreferenceController extends BasePreferenceController {
 
@@ -52,3 +53,4 @@ public class AutoclickPreferenceController extends BasePreferenceController {
                 R.string.accessibility_autoclick_delay_unit_second, delayMillis);
     }
 }
+// LINT.ThenChange(autoclick/ui/AutoclickScreen.kt)

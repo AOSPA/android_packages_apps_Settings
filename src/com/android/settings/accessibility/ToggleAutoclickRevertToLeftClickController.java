@@ -30,6 +30,7 @@ import androidx.annotation.NonNull;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
+// LINT.IfChange
 public class ToggleAutoclickRevertToLeftClickController extends TogglePreferenceController {
 
     private static final String TAG =
@@ -72,3 +73,4 @@ public class ToggleAutoclickRevertToLeftClickController extends TogglePreference
         return R.string.menu_key_accessibility;
     }
 }
+// LINT.ThenChange(autoclick/ui/AutoclickRevertToLeftClickPreference.kt)

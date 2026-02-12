@@ -75,7 +75,9 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.LooperMode
+import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowRoleManager
+import org.robolectric.shadows.ShadowSupervisionManager
 
 private val fakePreferenceDataApi = TestPreferenceDataApiImp()
 
@@ -262,6 +264,33 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun clickDashboardPreference_supervisionEnabled_noPinSet_launchesSetupSupervisionActivity() {
+        val supervisionManager = context.getSystemService(SupervisionManager::class.java)
+        val shadowSupervisionManager: ShadowSupervisionManager = Shadow.extract(supervisionManager)
+
+        // Supervision enabled
+        shadowSupervisionManager.overrideSupervisionEnabled(true)
+        // Pin not set
+        shadowSupervisionManager.overrideCredentialType(-1)
+
+        preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
+            val dashboardFragment = fragment as SupervisionDashboardFragment
+            val childPreference =
+                fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
+
+            dashboardFragment.refreshDashboardTiles("test")
+
+            childPreference.performClick()
+
+            val intent = shadowOf(fragment.activity).nextStartedActivity
+            assertThat(intent).isNotNull()
+            assertThat(intent.component?.className)
+                .isEqualTo(SetupSupervisionActivity::class.java.name)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun refreshDashboardTiles_withSupervisionEnabled_restoresOriginalListener() {
         shadowOf(context as Application)
             .setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
@@ -270,6 +299,11 @@ class SupervisionDashboardScreenTest {
             val dashboardFragment = fragment as SupervisionDashboardFragment
             val childPreference =
                 fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
+
+            // Pin is set
+            mockSupervisionManager.stub {
+                on { createConfirmSupervisionCredentialsIntent() } doReturn Intent("FAKE_ACTION")
+            }
 
             // Store the original listener.
             mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn true }

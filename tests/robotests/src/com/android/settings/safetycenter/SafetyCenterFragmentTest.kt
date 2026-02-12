@@ -198,10 +198,6 @@ class SafetyCenterFragmentTest {
         return mApplication.getString(DEFAULT_DEVICE_UNLOCK_SUMMARY_RES)
     }
 
-    private fun expectedDefaultNetworkSecuritySummary(): String {
-        return mApplication.getString(DEFAULT_NETWORK_SECURITY_SUMMARY_RES)
-    }
-
     private fun expectedDefaultPrivacyControlsSummary(): String {
         return mApplication.getString(DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES)
     }
@@ -249,11 +245,7 @@ class SafetyCenterFragmentTest {
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     fun fragment_onLaunchQuickSettings_showsIssuesAndStatusButNotSubpages() {
         val activeIssue =
-            createIssue(
-                id = "activeIssue",
-                title = "Active Issue Title",
-                sourceIds = setOf("any"),
-            )
+            createIssue(id = "activeIssue", title = "Active Issue Title", sourceIds = setOf("any"))
         val entry =
             createEntry(
                 id = "TestEntry",
@@ -1372,39 +1364,6 @@ class SafetyCenterFragmentTest {
         }
     }
 
-    fun networkSecurityPref_withOkEntriesAndNoIssues_usesDefaultSummaryAndInfoIcon() {
-        val entry1 =
-            createEntry(
-                id = "TestEntry1",
-                title = "Entry1",
-                sourceId = ANDROID_NETWORK_SECURITY_SOURCE_ID,
-                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
-            )
-        val entry2 =
-            createEntry(
-                id = "TestEntry2",
-                title = "Entry2",
-                sourceId = ANDROID_NETWORK_SECURITY_SOURCE_ID,
-                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
-            )
-        val entry3 =
-            createEntry(
-                id = "TestEntry3",
-                title = "Entry3",
-                sourceId = ANDROID_NETWORK_SECURITY_SOURCE_ID,
-                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
-                userHandle = USER_WORK_PROFILE,
-            )
-
-        runTest(createScData(entries = listOf(entry1, entry2, entry3))) { fragment ->
-            val preference = fragment.findPreference<Preference>(NETWORK_SECURITY_KEY)
-            assertThat(preference?.isVisible).isTrue()
-            assertThat(preference?.summary.toString())
-                .isEqualTo(expectedDefaultNetworkSecuritySummary())
-            assertIconResource(preference, R.drawable.ic_safety_info)
-        }
-    }
-
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     fun launchWithSafetyCenterAction_withGroupId_startsSubSettingsWithFragment() {
@@ -1707,21 +1666,17 @@ class SafetyCenterFragmentTest {
     companion object {
         private const val ARG_IS_QUICK_SETTINGS = "is_quick_settings"
         private const val DEVICE_UNLOCK_KEY = "device_unlock_subpage"
-        private const val NETWORK_SECURITY_KEY = "cellular_network_security_subpage"
         private const val STATUS_BANNER_KEY = "safety_center_status_banner"
         private const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
         private const val ANDROID_LOCK_SCREEN_SOURCE_ID = "AndroidLockScreen"
         private const val ANDROID_FACE_UNLOCK_SOURCE_ID = "AndroidFaceUnlock"
         private const val ANDROID_FINGERPRINT_UNLOCK_SOURCE_ID = "AndroidFingerprintUnlock"
-        private const val ANDROID_NETWORK_SECURITY_SOURCE_ID = "AndroidCellularNetworkSecurity"
         private const val ANDROID_HEALTH_CONNECT_SOURCE_ID = "AndroidHealthConnect"
         private const val ANDROID_WORK_POLICY_INFO_SOURCE_ID = "AndroidWorkPolicyInfo"
         private const val ANDROID_A11Y_SOURCES_ID = "AndroidAccessibility"
         private const val SAFETY_ISSUES_BANNER_KEY = "issues_banner_group"
         private const val ANDROID_WORK_POLICY_INFO_PREFERENCE_KEY = "work_policy_info"
         private val DEFAULT_DEVICE_UNLOCK_SUMMARY_RES = R.string.safety_center_device_unlock_summary
-        private val DEFAULT_NETWORK_SECURITY_SUMMARY_RES =
-            R.string.safety_center_cellular_network_security_summary
         private val DEFAULT_PRIVACY_CONTROLS_SUMMARY_RES = R.string.privacy_sources_summary
     }
 }

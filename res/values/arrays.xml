@@ -985,6 +985,30 @@
         <item>1</item>
     </integer-array>
 
+
+    <!-- Titles for the autoclick cursor area size options. -->
+    <string-array name="autoclick_cursor_area_size_selector_titles" translatable="false">
+        <item>@string/autoclick_cursor_area_size_dialog_option_extra_small</item>
+        <item>@string/autoclick_cursor_area_size_dialog_option_small</item>
+        <item>@string/autoclick_cursor_area_size_dialog_option_default</item>
+        <item>@string/autoclick_cursor_area_size_dialog_option_large</item>
+        <item>@string/autoclick_cursor_area_size_dialog_option_extra_large</item>
+    </string-array>
+
+    <!-- Values for the autoclick cursor area size options. -->
+    <integer-array name="autoclick_cursor_area_size_selector_values" translatable="false" >
+        <!-- Extra small -->
+        <item>20</item>
+        <!-- Small -->
+        <item>40</item>
+        <!-- Default -->
+        <item>60</item>
+        <!-- Large -->
+        <item>80</item>
+        <!-- Extra large -->
+        <item>100</item>
+    </integer-array>
+
     <!-- Match this with the array VPN_TYPES in ConfigDialog. --> <skip />
     <!-- Short names for each VPN type, not really translatable. [CHAR LIMIT=20] -->
     <string-array name="vpn_types" translatable="false">

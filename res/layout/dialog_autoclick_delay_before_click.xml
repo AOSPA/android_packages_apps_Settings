@@ -132,6 +132,8 @@
         app:layout_constraintStart_toStartOf="@id/paddingStart"
         app:layout_constraintEnd_toStartOf="@id/accessibility_autoclick_custom_slider" />
 
+    <!-- When the min and max changed, we need to update the corresponding value in AutoclickDelayPreference -->
+    <!-- LINT.IfChange -->
     <SeekBar
         android:id="@+id/accessibility_autoclick_custom_slider"
         style="@android:style/Widget.Material.SeekBar"
@@ -148,6 +150,7 @@
         app:layout_constraintTop_toBottomOf="@id/accessibility_autoclick_custom_value"
         app:layout_constraintStart_toEndOf="@id/accessibility_autoclick_custom_value_decrease"
         app:layout_constraintEnd_toStartOf="@id/accessibility_autoclick_custom_value_increase" />
+    <!-- LINT.ThenChange(src/com/android/settings/accessibility/autoclick/ui/AutoclickDelayPreference.kt) -->
 
     <ImageView
         android:id="@+id/accessibility_autoclick_custom_value_increase"

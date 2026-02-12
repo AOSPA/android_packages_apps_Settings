@@ -30,6 +30,7 @@ import com.android.settings.accessibility.a11yactivity.ui.A11yActivityScreen
 import com.android.settings.accessibility.a11yservice.ui.A11yServiceScreen
 import com.android.settings.accessibility.actiontimeout.ui.ActionTimeoutSettingsScreen
 import com.android.settings.accessibility.audioadjustment.ui.AudioAdjustmentScreen
+import com.android.settings.accessibility.autoclick.ui.AutoclickScreen
 import com.android.settings.accessibility.buttonshortcutsetting.ui.ButtonShortcutSettingScreen
 import com.android.settings.accessibility.captionpreferences.ui.CaptioningAppearanceScreen
 import com.android.settings.accessibility.captionpreferences.ui.CaptioningMoreOptionsScreen
@@ -134,6 +135,7 @@ import com.android.settings.network.NetworkDashboardScreen
 import com.android.settings.network.NetworkProviderScreen
 import com.android.settings.network.apn.ApnSettingsScreen
 import com.android.settings.network.telephony.MobileNetworkScreen
+import com.android.settings.network.telephony.MobileNetworkScreenApi
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.BubbleNotificationScreen
 import com.android.settings.notification.SoundScreen
@@ -416,6 +418,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = MagnificationScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ActionTimeoutSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AudioAdjustmentScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AutoclickScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ButtonShortcutSettingScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CaptioningPropertiesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CaptioningAppearanceScreen.KEY),
@@ -428,6 +431,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = MobileNetworkScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = MobileNetworkScreenApi.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = NfcAndPaymentScreen.KEY),

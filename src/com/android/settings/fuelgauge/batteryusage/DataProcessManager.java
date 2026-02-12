@@ -470,6 +470,7 @@ public class DataProcessManager {
             protected Void doInBackground(Void... voids) {
                 final long startTime = System.currentTimeMillis();
                 final Map<Long, BatteryDiffData> batteryDiffDataMap = new ArrayMap<>();
+                long batteryUsageDiffDataLatestEndTime = -1L;
                 for (BatteryUsageSlot batteryUsageSlot : mBatteryUsageSlotList) {
                     batteryDiffDataMap.put(
                             batteryUsageSlot.getStartTimestamp(),
@@ -478,16 +479,27 @@ public class DataProcessManager {
                                     batteryUsageSlot,
                                     getSystemAppsPackageNames(),
                                     getSystemAppsUids()));
+                    batteryUsageDiffDataLatestEndTime = Math.max(
+                            batteryUsageDiffDataLatestEndTime, batteryUsageSlot.getEndTimestamp());
                 }
-                batteryDiffDataMap.putAll(
+                final Map<Long, BatteryDiffData> generatedBatteryDiffDataMap =
                         DataProcessor.getBatteryDiffDataMap(
-                                mContext,
-                                mUserIdsSeries,
-                                mHourlyBatteryLevelsPerDay,
-                                mBatteryHistoryMap,
-                                mAppUsagePeriodMap,
-                                getSystemAppsPackageNames(),
-                                getSystemAppsUids()));
+                        mContext,
+                        mUserIdsSeries,
+                        mHourlyBatteryLevelsPerDay,
+                        mBatteryHistoryMap,
+                        mAppUsagePeriodMap,
+                        getSystemAppsPackageNames(),
+                        getSystemAppsUids());
+                // For UI requests, only retain data slots with a start time greater than or equal
+                // to the latest end time in database.
+                final long latestEndTime = batteryUsageDiffDataLatestEndTime;
+                generatedBatteryDiffDataMap.forEach(
+                        (key, value) -> {
+                            if (key >= latestEndTime) {
+                                batteryDiffDataMap.put(key, value);
+                            }
+                        });
                 // Process the reattributate data for the following two cases:
                 // 1) the latest slot for the timestamp "until now"
                 // 2) walkthrough all BatteryDiffData again to handle "re-compute" case
