@@ -1032,6 +1032,29 @@ public class UserSettingsTest {
         assertThat(secondaryPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
+    @EnableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
+    @Test
+    public void updateUserList_existingRestrictedUserSetUp_shouldAddRestrictedUserPreference() {
+        givenUsers(getAdminUser(true), getRestrictedUser(false));
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.USER_SETUP_COMPLETE, 1, INACTIVE_RESTRICTED_USER_ID);
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(1);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_RESTRICTED_USER_ID);
+        assertThat(userPref.getTitle()).isEqualTo(RESTRICTED_USER_NAME);
+        assertThat(userPref.getIcon()).isNotNull();
+        assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_RESTRICTED_USER_ID);
+        assertThat(userPref.getSummary()).isEqualTo("Restricted profile");
+        assertThat(userPref.isEnabled()).isEqualTo(true);
+        assertThat(userPref.isSelectable()).isEqualTo(true);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
+    }
+
+    @DisableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
     @Test
     public void updateUserList_existingRestrictedUser_shouldAddRestrictedUserPreference() {
         givenUsers(getAdminUser(true), getRestrictedUser(false));
@@ -1065,6 +1088,7 @@ public class UserSettingsTest {
         assertThat(userPreferences.get(0).getUserId()).isEqualTo(ACTIVE_USER_ID);
     }
 
+    @DisableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
     @Test
     public void updateUserList_uninitializedRestrictedUser_shouldAddUserPreference() {
         UserInfo restrictedUser = getRestrictedUser(false);
@@ -1089,6 +1113,33 @@ public class UserSettingsTest {
         assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
     }
 
+    @EnableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
+    @Test
+    public void updateUserList_restrictedUserNotSetup_shouldAddUserPreference() {
+        UserInfo restrictedUser = getRestrictedUser(false);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.USER_SETUP_COMPLETE, 0, restrictedUser.id);
+        givenUsers(getAdminUser(true), restrictedUser);
+        doReturn(SWITCHABILITY_STATUS_OK).when(mUserManager).getUserSwitchability();
+        mUserCapabilities.mDisallowSwitchUser = false;
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory, times(2))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(1);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_RESTRICTED_USER_ID);
+        assertThat(userPref.getTitle()).isEqualTo(RESTRICTED_USER_NAME);
+        assertThat(userPref.getIcon()).isNotNull();
+        assertThat(userPref.getKey()).isEqualTo("id=" + INACTIVE_RESTRICTED_USER_ID);
+        assertThat(userPref.getSummary()).isEqualTo("Not set up - Restricted profile");
+        assertThat(userPref.isEnabled()).isEqualTo(true);
+        assertThat(userPref.isSelectable()).isEqualTo(true);
+        assertThat(userPref.getOnPreferenceClickListener()).isSameInstanceAs(mFragment);
+    }
+
+    @DisableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
     @Test
     public void updateUserList_guestWithoutInitializedFlag_shouldNotSetSummary() {
         UserInfo guest = getGuest(false);
@@ -1105,6 +1156,42 @@ public class UserSettingsTest {
         assertThat(userPref.getSummary()).isNull();
     }
 
+    @EnableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
+    @Test
+    public void updateUserList_guestSetupNotComplete_shouldNotSetSummary() {
+        UserInfo guest = getGuest(false);
+        givenUsers(getAdminUser(true), guest);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.USER_SETUP_COMPLETE, 0, guest.id);
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mGuestUserCategory, times(1))
+                .addPreference(captor.capture());
+        UserPreference userPref = captor.getAllValues().get(0);
+        assertThat(userPref.getUserId()).isEqualTo(INACTIVE_GUEST_USER_ID);
+        assertThat(userPref.getSummary()).isNull();
+    }
+
+    @EnableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
+    @Test
+    public void updateUserList_activeUserSetupNotComplete_shouldNotSetSummary() {
+        UserInfo activeUser = getSecondaryUser(true);
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.USER_SETUP_COMPLETE, 0, activeUser.id);
+        givenUsers(activeUser);
+
+        mFragment.updateUserList();
+
+        ArgumentCaptor<UserPreference> captor = ArgumentCaptor.forClass(UserPreference.class);
+        verify(mFragment.mUserListCategory).addPreference(captor.capture());
+        UserPreference userPref = captor.getValue();
+        assertThat(userPref.getUserId()).isEqualTo(ACTIVE_USER_ID);
+        assertThat(userPref.getSummary()).isNull();
+    }
+
+    @DisableFlags(FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR)
     @Test
     public void updateUserList_activeUserWithoutInitializedFlag_shouldNotSetSummary() {
         UserInfo activeUser = getSecondaryUser(true);
@@ -1380,5 +1467,4 @@ public class UserSettingsTest {
                 UserInfo.FLAG_FULL | UserInfo.FLAG_INITIALIZED | UserInfo.FLAG_GUEST,
                 UserManager.USER_TYPE_FULL_GUEST);
     }
-
 }
