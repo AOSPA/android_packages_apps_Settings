@@ -150,6 +150,15 @@ public final class LockScreenSafetySource {
 
     private static SafetySourceIssue createNoScreenLockIssue(
             Context context, PendingIntent pendingIntent) {
+        boolean isPatternSupported = !context.getResources().getBoolean(
+                R.bool.config_hide_pattern_security_option);
+        String notificationText = context.getString(isPatternSupported
+                ? R.string.no_screen_lock_issue_notification_text
+                : R.string.no_screen_lock_issue_notification_text_without_pattern);
+        String issueSummary = context.getString(isPatternSupported
+                ? R.string.no_screen_lock_issue_summary
+                : R.string.no_screen_lock_issue_summary_without_pattern);
+
         final SafetySourceIssue.Action action =
                 new SafetySourceIssue.Action.Builder(
                                 SET_SCREEN_LOCK_ACTION_ID,
@@ -160,12 +169,12 @@ public final class LockScreenSafetySource {
         final SafetySourceIssue.Notification customNotification =
                 new SafetySourceIssue.Notification.Builder(
                                 context.getString(R.string.no_screen_lock_issue_notification_title),
-                                context.getString(R.string.no_screen_lock_issue_notification_text))
+                                notificationText)
                         .build();
         return new SafetySourceIssue.Builder(
                         NO_SCREEN_LOCK_ISSUE_ID,
                         context.getString(R.string.no_screen_lock_issue_title),
-                        context.getString(R.string.no_screen_lock_issue_summary),
+                        issueSummary,
                         SafetySourceData.SEVERITY_LEVEL_RECOMMENDATION,
                         NO_SCREEN_LOCK_ISSUE_TYPE_ID)
                 .setIssueCategory(SafetySourceIssue.ISSUE_CATEGORY_DEVICE)
