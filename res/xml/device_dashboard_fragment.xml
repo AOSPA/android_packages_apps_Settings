@@ -23,7 +23,7 @@
     <Preference
         android:key="mouse_settings"
         android:title="@string/mouse_settings"
-        android:summary="@string/mouse_settings_summary"
+        android:summary="@string/device_mouse_settings_summary"
         android:icon="@drawable/ic_settings_mouse"
         android:fragment="com.android.settings.inputmethod.MouseSettingFragment"
         settings:controller="com.android.settings.inputmethod.MouseSettingsController"/>
@@ -31,7 +31,7 @@
     <Preference
         android:key="trackpad_settings"
         android:title="@string/trackpad_settings"
-        android:summary="@string/trackpad_settings_summary"
+        android:summary="@string/device_trackpad_settings_summary"
         android:icon="@drawable/ic_settings_touchpad_mouse"
         android:fragment="com.android.settings.inputmethod.TouchpadAndMouseSettings"
         settings:keywords="@string/keywords_touchpad"
@@ -40,7 +40,7 @@
     <Preference
         android:key="touchpad_settings"
         android:title="@string/trackpad_settings"
-        android:summary="@string/trackpad_settings_summary"
+        android:summary="@string/device_trackpad_settings_summary"
         android:icon="@drawable/ic_settings_touchpad_mouse"
         android:fragment="com.android.settings.inputmethod.TouchpadSettingFragment"
         settings:keywords="@string/keywords_touchpad"
@@ -59,7 +59,7 @@
         android:icon="@drawable/ic_settings_tv_displays"
         android:key="device_dashboard_display"
         android:title="@string/display_settings"
-        android:summary="@string/display_dashboard_summary"
+        android:summary="@string/device_display_dashboard_summary"
         settings:controller="com.android.settings.display.TopLevelDisplayPreferenceController"/>
 
     <Preference
@@ -67,5 +67,5 @@
         android:icon="@drawable/ic_settings_mic"
         android:key="device_dashboard_sound"
         android:title="@string/sound_settings"
-        android:summary="@string/sound_dashboard_summary" />
+        android:summary="@string/device_sound_dashboard_summary" />
 </PreferenceScreen>
