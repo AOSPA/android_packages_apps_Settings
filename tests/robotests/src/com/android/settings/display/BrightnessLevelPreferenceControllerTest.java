@@ -18,10 +18,14 @@ package com.android.settings.display;
 
 import static android.content.Context.POWER_SERVICE;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,9 +37,11 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.BrightnessInfo;
+import android.hardware.display.DisplayManagerGlobal;
 import android.os.PowerManager;
 import android.provider.Settings.System;
 import android.view.Display;
+import android.view.DisplayInfo;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -65,8 +71,6 @@ public class BrightnessLevelPreferenceControllerTest {
     @Mock
     private PowerManager mPowerManager;
     @Mock
-    private Display mDisplay;
-    @Mock
     private PreferenceScreen mScreen;
     @Mock
     private Preference mPreference;
@@ -76,6 +80,9 @@ public class BrightnessLevelPreferenceControllerTest {
     private ContentResolver mContentResolver;
 
     private BrightnessLevelPreferenceController mController;
+
+    private Display mDisplay;
+    private final DisplayInfo mDisplayInfo = new DisplayInfo();
 
     @Before
     public void setUp() {
@@ -89,13 +96,26 @@ public class BrightnessLevelPreferenceControllerTest {
         shadowOf((Application) ApplicationProvider.getApplicationContext())
                 .setSystemService(POWER_SERVICE, mPowerManager);
         when(mScreen.findPreference(anyString())).thenReturn(mPreference);
+        mDisplay = spy(
+                new Display(mock(DisplayManagerGlobal.class), Display.DEFAULT_DISPLAY, mDisplayInfo,
+                        mContext.getResources()));
         doReturn(mDisplay).when(mContext).getDisplay();
+        mDisplayInfo.type = Display.TYPE_INTERNAL;
         mController = spy(new BrightnessLevelPreferenceController(mContext, /* lifecycle= */ null));
     }
 
     @Test
-    public void isAvailable_shouldAlwaysReturnTrue() {
+    public void isAvailable_internalDisplay() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_externalDisplay() {
+        mDisplayInfo.type = Display.TYPE_EXTERNAL;
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
