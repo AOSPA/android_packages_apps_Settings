@@ -34,14 +34,24 @@ import com.google.android.setupdesign.items.RecyclerItemAdapter
 class EditShortcutSetupWizardFragment : BaseSetupWizardFragment() {
 
     private lateinit var screenTitle: CharSequence
+    private lateinit var shortcutTargets: Set<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         screenTitle = arguments?.getCharSequence(ARG_SCREEN_TITLE) ?: ""
+        shortcutTargets = arguments?.getStringArray(ARG_KEY_SHORTCUT_TARGETS)?.toSet() ?: emptySet()
     }
 
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
-        emptyMap()
+        buildMap {
+            val context = requireContext()
+            findItem(adapter, R.id.edit_keyboard_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_keyboard_shortcut_in_suw,
+                    EditKeyboardShortcutController.create(context, it, shortcutTargets),
+                )
+            }
+        }
 
     override val fragmentLayoutResId: Int = R.layout.edit_shortcut_suw_screen
 
