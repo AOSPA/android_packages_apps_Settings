@@ -89,7 +89,6 @@ public class AutoBrightnessPreferenceControllerForSetupWizardTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-
         mController =
                 new AutoBrightnessPreferenceControllerForSetupWizard(mContext, PREFERENCE_KEY);
     }
