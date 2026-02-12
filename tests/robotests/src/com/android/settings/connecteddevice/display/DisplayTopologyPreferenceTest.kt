@@ -167,14 +167,16 @@ class DisplayTopologyPreferenceTest {
 
     /** Returns the bounds of the non-highlighting part of the block relative to the parent. */
     private fun virtualBounds(block: DisplayBlock): RectF {
-        val d = block.highlightPx.toFloat() + block.arrowSizePx.toFloat()
-        val x = block.x + d
-        val y = block.y + d
-        // Using layoutParams as a proxy for the actual width and height appears to be standard
-        // practice in Robolectric tests, as they do not actually process layout requests.
-        val w = block.layoutParams.width - 2 * d
-        val h = block.layoutParams.height - 2 * d
-        return RectF(x, y, x + w, y + h)
+        val wallpaper = block.findViewById<View>(R.id.display_block_wallpaper)
+        val params = wallpaper.layoutParams as ViewGroup.MarginLayoutParams
+
+        // The wallpaper's visual position is determined by the block's position plus the
+        // wallpaper's margins
+        val left = block.x + params.leftMargin
+        val top = block.y + params.topMargin
+        val width = params.width.toFloat()
+        val height = params.height.toFloat()
+        return RectF(left, top, left + width, top + height)
     }
 
     private fun getPaneChildren(): List<DisplayBlock> =
