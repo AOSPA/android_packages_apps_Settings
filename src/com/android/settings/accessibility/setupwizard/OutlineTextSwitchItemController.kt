@@ -36,7 +36,7 @@ class OutlineTextSwitchItemController(
 
     private var outlineTextObserver: KeyedObserver<String>? = null
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         if (item is SwitchItem) {
             item.isChecked = outlineTextDataStore.getBoolean(OutlineTextPreference.KEY) ?: false
             item.setOnCheckedChangeListener { _, isChecked -> updateDataStore(isChecked) }
@@ -44,6 +44,7 @@ class OutlineTextSwitchItemController(
     }
 
     override fun onStart() {
+        super.onStart()
         val observer = KeyedObserver<String> { _, _ -> bindData(targetItem) }
         outlineTextObserver = observer
 

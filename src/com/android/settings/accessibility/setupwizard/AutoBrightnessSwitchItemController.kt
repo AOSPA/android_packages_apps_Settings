@@ -33,7 +33,7 @@ class AutoBrightnessSwitchItemController(
 
     private var autoBrightnessObserver: KeyedObserver<String>? = null
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         if (item is SwitchItem) {
             item.isChecked = autoBrightnessDataStore.getBoolean(AutoBrightnessScreen.KEY) ?: false
 
@@ -42,6 +42,7 @@ class AutoBrightnessSwitchItemController(
     }
 
     override fun onStart() {
+        super.onStart()
         val observer = KeyedObserver<String> { _, _ -> bindData(targetItem) }
         autoBrightnessObserver = observer
 

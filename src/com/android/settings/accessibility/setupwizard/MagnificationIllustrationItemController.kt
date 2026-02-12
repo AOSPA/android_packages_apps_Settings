@@ -30,7 +30,7 @@ class MagnificationIllustrationItemController(private val context: Context, item
 
     private val magnificationIllustrationMetadata = MagnificationIllustrationPreference()
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         if (item is IllustrationItem) {
             if (ThemeHelper.shouldApplyGlifExpressiveStyle(context)) {
                 item.imageResId = R.raw.accessibility_magnification_banner_expressive
