@@ -1341,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktivér wifi-anrop"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Slå på wifi-anrop"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Koblet fra <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Lyd og vibrering"</string>
     <string name="account_settings" msgid="255404935489127404">"Kontoer"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Joobprofil-kontoer – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Personlig profil-kontoer"</string>
@@ -1349,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Jobbkonto – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Personlig konto – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Søk"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Skjerm"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Roter skjermen automatisk"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Av"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"På"</string>
@@ -2146,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Trykk mellomromstasten to ganger for å skrive punktum"</string>
     <string name="show_password" msgid="7101900779571040117">"Vis passord"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Vis tegnene et øyeblikk mens du skriver"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"Vis passord for berøringsskjerm"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Vis tegnene et øyeblikk mens du skriver på berøringsskjermen"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"Vis passord for tastatur"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"Vis tegnene et øyeblikk mens du skriver på tastaturet"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Denne stavekontrollen kan være i stand til å samle all tekst du skriver, herunder personlige opplysninger som passord og kredittkortnumre. Den kommer fra appen <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Vil du bruke denne stavekontrollen?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Innstillinger"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Språk"</string>
@@ -3662,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Enhet"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Tastatur, styreflate, skjerm, lyd"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Skjerm"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Lyd"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Utilgjengelig fordi NFC er av"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Du må installere en betalingsapp for å bruke denne funksjonen"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Nylige apper, standardapper"</string>
@@ -4551,9 +4544,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Standard USB-konfigurasjon"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Strømalternativer"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Alternativer for filoverføring"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Beskyttelse av datatilgang"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Tillat PCI-tunnelering"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Når dette er slått på, kan eksterne USB- og Thunderbolt-enheter opprette PCI-tunneler og bruke systemminnet"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Du må være administratorbruker for å endre denne innstillingen"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Deaktivert av IT-administratoren"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Deaktivert av modusen for avansert beskyttelse"</string>
@@ -5364,8 +5360,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellitt"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Satellittilkobling"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"satellittilkobling"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Bruk satellittilkobling"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Bruk av støttede apper er inkludert med kontoen din"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Data for alle apper er inkludert med kontoen din"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Støttede apper på telefonen"</string>
@@ -6192,19 +6187,24 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Mer om satellittilkobling"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Åpne demoen av SOS-alarm via satellitt"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Satellittapper"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"Bare nødanrop"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Satellittilkobling er tilgjengelig"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Få tilgang til satellittinformasjon enkelt ved å legge til Satellitt-brikken i hurtiginnstillingene"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Legg til brikke"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Forespørsler om Satellitt-brikke"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_apps_see_all_supported_apps_text (1053383406430986034) -->
+    <skip />
+    <!-- no translation found for satellite_apps_see_less_text (3776624493969066217) -->
+    <skip />
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satellitt er ikke tilgjengelig"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Satellittdekning er ikke tilgjengelig mens du er koblet til et mobil- eller wifi-nettverk."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Satellittilkobling er ikke tilgjengelig i dette landet eller denne regionen"</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Satellittilkobling er ikke tilgjengelig akkurat nå. Prøv på nytt senere."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Mobilabonnementet ditt inkluderer ikke satellittdekning. Kontakt operatøren din for å få hjelp."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"For å bruke satellittmeldinger må Google Meldinger være standard meldingsapp."</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Operatøren din har aktivert satellittilkobling. Finn ut mer i operatørens satellittinnstillinger."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Se tilgjengelige steder"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Bytt standardapp"</string>

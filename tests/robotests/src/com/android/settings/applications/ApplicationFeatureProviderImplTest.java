@@ -42,10 +42,12 @@ import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telecom.TelecomManager;
 
 import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ApplicationTestUtils;
+import com.android.settings.testutils.shadow.ShadowTelecomDependencies;
 import com.android.settings.webview.WebViewUpdateServiceWrapper;
 import com.android.settingslib.testutils.shadow.ShadowSmsApplication;
 
@@ -75,6 +77,7 @@ import java.util.Set;
  * Tests for {@link ApplicationFeatureProviderImpl}.
  */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowTelecomDependencies.class})
 public final class ApplicationFeatureProviderImplTest {
 
     @Rule
@@ -82,6 +85,9 @@ public final class ApplicationFeatureProviderImplTest {
 
     @Rule
     public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private final int MAIN_USER_ID = 0;
     private final int MANAGED_PROFILE_ID = 10;
@@ -125,6 +131,7 @@ public final class ApplicationFeatureProviderImplTest {
 
     @Before
     public void setUp() {
+        mSetFlagsRule.enableFlags(android.telecom.flags.Flags.FLAG_TELECOM_MAINLINE_API);
         when(mContext.getApplicationContext()).thenReturn(mContext);
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mUserManager);
         when(mContext.getSystemService(Context.LOCATION_SERVICE)).thenReturn(mLocationManager);

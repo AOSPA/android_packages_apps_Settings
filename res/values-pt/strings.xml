@@ -412,10 +412,8 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Pular"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Você adicionou o número máximo de rostos"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Não é possível adicionar mais rostos"</string>
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
-    <skip />
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" msgid="2276422963933723362">"Não é possível definir o desbloqueio facial"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message" msgid="2680132270879475080">"Você está sem conexão de internet. Volte e conecte-se à internet ou ajuste isso mais tarde nas configurações."</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"O registro não foi concluído"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"Ok"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Tempo máximo para registro de rostos atingido. Tente novamente."</string>
@@ -1343,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Ativar chamada no Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Ativar chamada no Wi-Fi"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Desconectado de <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Som e vibração"</string>
     <string name="account_settings" msgid="255404935489127404">"Contas"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Contas do perfil de trabalho - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Contas do perfil pessoal"</string>
@@ -1351,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Conta de trabalho - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Conta pessoal - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Pesquisar"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Tela"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Giro automático da tela"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Desativado"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Ativado"</string>
@@ -1881,7 +1877,7 @@
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Defina um PIN de trabalho"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Defina um padrão"</string>
     <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Para aumentar a segurança, defina um padrão para desbloquear o dispositivo"</string>
-    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Definir um padrão de trabalho"</string>
+    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Defina um padrão p/ o perfil de trabalho"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Para usar a impressão digital, defina uma senha"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar a impressão digital, defina um padrão"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Por segurança, defina um PIN"</string>
@@ -1891,7 +1887,7 @@
     <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Digite sua senha de trabalho novamente"</string>
     <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Digite sua senha de trabalho"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"Insira o padrão do dispositivo"</string>
-    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Informe seu padrão de trabalho"</string>
+    <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Informe o padrão do perfil de trabalho"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"Digite o PIN do dispositivo"</string>
     <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"Digite seu PIN novamente"</string>
     <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Digite seu PIN de trabalho novamente"</string>
@@ -2148,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Pressione a tecla de Espaço duas vezes para inserir \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Mostrar senhas"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Mostrar os caracteres rapidamente enquanto você digita"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"Mostrar senhas para a tela touch"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Mostrar os caracteres rapidamente enquanto você digita na tela touch"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"Mostrar senhas para o teclado"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"Mostrar os caracteres rapidamente enquanto você digita no teclado"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Este corretor ortográfico pode coletar todo o texto que você digita, incluindo dados pessoais, como senhas e números de cartão de crédito. É um corretor do app <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utilizar este corretor ortográfico?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Configurações"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
@@ -3664,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Teclado, touchpad, tela, som"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Tela"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Som"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Indisponível porque a NFC está desativada"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale um app de pagamento"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Apps recentes, apps padrão"</string>
@@ -4550,9 +4541,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Configuração USB padrão"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opções de carregamento"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opções de transferência de arquivo"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Proteção de acesso a dados"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Permitir encapsulamento de PCI"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Com a opção ativada, periféricos USB e Thunderbolt podem criar túneis PCI e acessar a memória do sistema"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"É preciso ser usuário administrador para modificar essa configuração"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Desativado pelo admin de TI"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Desativado pelo Modo Proteção Avançada"</string>
@@ -5363,8 +5357,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satélite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conectividade via satélite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conectividade via satélite"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Usar a conectividade via satélite"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"O uso de apps compatíveis está incluído na sua conta"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Os dados móveis para todos os apps estão incluídos na sua conta"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Apps compatíveis no seu smartphone"</string>
@@ -5632,7 +5625,7 @@
     <string name="media_controls_show_player" msgid="8504571042365814021">"Exibe o player"</string>
     <string name="keywords_media_controls" msgid="8345490568291778638">"mídia"</string>
     <string name="camera_extensions_fallback_title" msgid="3604579046777004989">"Permitir extensões de softwares da câmera"</string>
-    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Permite a implementação de softwares padrão com recursos avançados de câmera, como HDR, modo noturno e outras extensões de câmera."</string>
+    <string name="camera_extensions_fallback_description" msgid="4306833827773277263">"Permite a implementação de softwares padrão com recursos avançados de câmera, como HDR, modo noturno e outras extensões de câmera"</string>
     <string name="connected_device_see_all_summary" msgid="2056010318537268108">"O Bluetooth será ativado"</string>
     <string name="provider_internet_settings" msgid="3831259474776313323">"Internet"</string>
     <string name="provider_network_settings_title" msgid="2624756136016346774">"Chips"</string>
@@ -6191,19 +6184,22 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Mais informações sobre a conectividade via satélite"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Abrir a demonstração do SOS via Satélite"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Apps que usam satélites"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"Somente chamadas de emergência"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Conectividade via satélite disponível"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Adicione o bloco de satélite às Configurações rápidas para acessar as informações com facilidade"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Adicionar bloco"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Comandos do bloco de satélite"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <string name="satellite_apps_see_all_supported_apps_text" msgid="1053383406430986034">"Mostrar todos os apps compatíveis"</string>
+    <string name="satellite_apps_see_less_text" msgid="3776624493969066217">"Mostrar menos"</string>
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satélite indisponível"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"A cobertura por satélite não está disponível quando uma rede móvel ou Wi-Fi está conectada."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"A conectividade via satélite não está disponível neste país ou região."</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"A conectividade via satélite não está disponível no momento. Tente novamente mais tarde."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Seu plano de serviço móvel não inclui cobertura via satélite. Entre em contato com a operadora para receber ajuda."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Para usar as mensagens via satélite, o Google Mensagens precisa ser seu app de mensagens padrão."</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"A conectividade via satélite foi ativada pela sua operadora. Saiba mais nas configurações relacionadas da operadora."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Mostrar locais disponíveis"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Mudar app padrão"</string>

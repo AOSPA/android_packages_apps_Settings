@@ -18,6 +18,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nested_scroll_view"
     android:contentDescription="@string/safety_center_qs_page_landing"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:clipChildren="false"
     style="@style/SafetyCenterQsContainer">
 
     <LinearLayout
@@ -34,9 +37,9 @@
         <LinearLayout
             android:id="@+id/main_page_contents"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            style="@style/SafetyCenterQsBodyWidth">
 
             <FrameLayout
                 android:id="@+id/safety_center_prefs"

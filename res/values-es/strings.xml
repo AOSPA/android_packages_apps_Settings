@@ -412,10 +412,8 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Saltar"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Has añadido el número máximo de caras"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"No se pueden añadir más caras"</string>
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
-    <skip />
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" msgid="2276422963933723362">"No se puede configurar Desbloqueo facial"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message" msgid="2680132270879475080">"No tienes conexión a Internet. Vuelve atrás y conéctate a Internet, o configura esta opción más adelante en los ajustes."</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Registro no completado"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"Aceptar"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Se ha superado el límite de tiempo del registro de la cara. Inténtalo de nuevo."</string>
@@ -653,7 +651,7 @@
     <string name="privacy_header" msgid="5526002421324257007">"Privacidad"</string>
     <string name="work_profile_category_header" msgid="85707750968948517">"Perfil de trabajo"</string>
     <string name="private_space_title" msgid="1752064212078238723">"Espacio privado"</string>
-    <string name="private_space_summary" msgid="2274405892301976238">"Bloquea y oculta tus aplicaciones privadas"</string>
+    <string name="private_space_summary" msgid="2274405892301976238">"Protege el acceso y oculta tus aplicaciones privadas"</string>
     <string name="private_space_description" msgid="4059594203775816136">"Mantén las aplicaciones privadas en un espacio separado que puedas ocultar o bloquear"</string>
     <string name="private_space_lock_title" msgid="7230836881433350526">"Bloqueo de espacio privado"</string>
     <string name="private_space_one_lock_summary" msgid="2106513606571219068">"Puedes desbloquear el espacio privado de la misma forma que desbloqueas tu dispositivo, o bien con un bloqueo diferente"</string>
@@ -768,7 +766,7 @@
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Elige un bloqueo de pantalla"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Elige un nuevo bloqueo de pantalla"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Bloqueo de apps de trabajo"</string>
-    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Elige un nuevo método de bloqueo para el trabajo"</string>
+    <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Nuevo bloqueo para el trabajo"</string>
     <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Para mayor seguridad, crea un bloqueo de pantalla alternativo"</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Selecciona un método de bloqueo de pantalla alternativo"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Si olvidas tu bloqueo de pantalla, tu administrador de TI no lo puede restablecer."</string>
@@ -1343,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Activar la función de llamada por Wi‑Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Activar la función de llamada por Wi‑Fi"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Desconectado de <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Sonido y vibración"</string>
     <string name="account_settings" msgid="255404935489127404">"Cuentas"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Cuentas de perfil de trabajo (<xliff:g id="MANAGED_BY">%s</xliff:g>)"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Cuentas de perfil personal"</string>
@@ -1351,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Cuenta de trabajo (<xliff:g id="MANAGED_BY">%s</xliff:g>)"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Cuenta personal (<xliff:g id="MANAGED_BY">%s</xliff:g>)"</string>
     <string name="search_settings" msgid="7573686516434589771">"Buscar"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Pantalla"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Girar pantalla automáticamente"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Desactivado"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Activado"</string>
@@ -2148,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Pulsa la barra espaciadora dos veces para insertar el carácter \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Mostrar contraseñas"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Muestra los caracteres brevemente al escribir"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"Mostrar contraseñas en la pantalla táctil"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Muestra los caracteres brevemente al escribir en la pantalla táctil"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"Mostrar contraseñas en el teclado"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"Muestra los caracteres brevemente al escribir en el teclado"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Este corrector ortográfico puede registrar todo lo que escribas, incluidos datos personales, como las contraseñas y los números de las tarjetas de crédito. Procede de la aplicación <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. ¿Quieres usar este corrector ortográfico?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Ajustes"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
@@ -2334,7 +2327,7 @@
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Elige una nueva tecla para <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
     <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Accesibilidad del teclado físico"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Teclas persistentes, teclas de rebote y teclas de ratón"</string>
-    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Teclas de repetición"</string>
+    <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Repetir teclas"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Tiempo hasta la repetición"</string>
     <string name="keyboard_repeat_keys_increase_delay_desc" msgid="9131810864682287872">"Aumentar el retraso"</string>
     <string name="keyboard_repeat_keys_decrease_delay_desc" msgid="6762794746507398346">"Reducir el retraso"</string>
@@ -3499,7 +3492,7 @@
     <string name="work_profile_confirm_remove_title" msgid="6229618888167176036">"¿Eliminar perfil de trabajo?"</string>
     <string name="user_confirm_remove_message" msgid="362545924965977597">"Se eliminarán todas las aplicaciones y datos."</string>
     <string name="work_profile_confirm_remove_message" msgid="1037294114103024478">"Si continúas, se eliminarán todas las aplicaciones y datos."</string>
-    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"Si continúas, se eliminarán todas las apps y datos de este perfil, incluidas las eSIMs de trabajo."</string>
+    <string name="work_profile_confirm_remove_message_with_esim" msgid="1169605178915445183">"Si continúas, se eliminarán todas las aplicaciones y datos de este perfil, incluidas las eSIMs de trabajo."</string>
     <string name="user_profile_confirm_remove_message" msgid="3641289528179850718">"Se eliminarán todas las aplicaciones y datos."</string>
     <string name="user_adding_new_user" msgid="7439602720177181412">"Añadiendo nuevo usuario…"</string>
     <string name="user_delete_user_description" msgid="7764153465503821011">"Eliminar usuario"</string>
@@ -3664,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Teclado, panel táctil, pantalla, sonido"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Pantalla"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Sonido"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"No está disponible porque el NFC está desactivado"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar esta opción, primero tienes que instalar una aplicación de pagos"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplicaciones recientes y aplicaciones predeterminadas"</string>
@@ -4170,7 +4161,7 @@
     <string name="picture_in_picture_app_detail_title" msgid="4442235098255164650">"Imagen en imagen"</string>
     <string name="picture_in_picture_app_detail_switch" msgid="8544190716075624017">"Permitir imagen en imagen"</string>
     <string name="picture_in_picture_app_detail_summary" msgid="2503211101305358849">"Permite que la aplicación cree una ventana imagen en imagen mientras esté abierta o después de que hayas salido de ella (por ejemplo, para seguir viendo un vídeo). La ventana se muestra sobre otras aplicaciones que estés utilizando."</string>
-    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Apps de trabajo y personales conectadas"</string>
+    <string name="interact_across_profiles_title" msgid="7285906999927669971">"Aplicaciones de trabajo y personales conectadas"</string>
     <string name="interact_across_profiles_summary_allowed" msgid="1365881452153799092">"Conectada"</string>
     <string name="interact_across_profiles_summary_not_allowed" msgid="5802674212788171790">"No conectada"</string>
     <string name="interact_across_profiles_empty_text" msgid="419061031064397168">"No hay aplicaciones conectadas"</string>
@@ -4187,7 +4178,7 @@
     <string name="interact_across_profiles_consent_dialog_permissions_title" msgid="2316852600280487055">"Permisos"</string>
     <string name="interact_across_profiles_consent_dialog_permissions_summary" msgid="995051542847604039">"Esta aplicación puede utilizar los permisos de tu aplicación personal <xliff:g id="NAME">%1$s</xliff:g>, como el acceso a la ubicación, el almacenamiento o los contactos."</string>
     <string name="interact_across_profiles_number_of_connected_apps_none" msgid="8573289199942092964">"No hay aplicaciones conectadas"</string>
-    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{# app conectada}other{# apps conectadas}}"</string>
+    <string name="interact_across_profiles_number_of_connected_apps" msgid="4000424798291479207">"{count,plural, =1{# aplicación conectada}other{# aplicaciones conectadas}}"</string>
     <string name="interact_across_profiles_install_work_app_title" msgid="2821669067014436056">"Para conectar estas aplicaciones, instala <xliff:g id="NAME">%1$s</xliff:g> en tu perfil de trabajo"</string>
     <string name="interact_across_profiles_install_personal_app_title" msgid="4790651223324866344">"Para conectar estas aplicaciones, instala <xliff:g id="NAME">%1$s</xliff:g> en tu perfil personal"</string>
     <string name="interact_across_profiles_install_app_summary" msgid="7715324358034968657">"Toca para descargar la aplicación"</string>
@@ -4363,7 +4354,7 @@
     <string name="zen_mode_edit_name_empty_error" msgid="5788063278827188275">"El nombre del modo no puede estar vacío"</string>
     <string name="zen_mode_edit_choose_icon_title" msgid="6452801577128788362">"Selecciona un icono"</string>
     <string name="zen_mode_trigger_title_schedule_calendar" msgid="9206609438617550331">"Eventos del calendario"</string>
-    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina Buenas noches"</string>
+    <string name="zen_mode_trigger_title_bedtime" msgid="3287241454965736913">"Rutina Descanso"</string>
     <string name="zen_mode_trigger_title_driving" msgid="7890990983453164403">"Durante la conducción"</string>
     <string name="zen_mode_trigger_title_transit" msgid="5778914231980939940">"En el transporte público"</string>
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Ajustes de aplicaciones"</string>
@@ -4377,7 +4368,7 @@
     <string name="zen_mode_action_enable" msgid="1161480633223176531">"Habilitar"</string>
     <string name="zen_mode_blurb_schedule_time" msgid="8223898702097484009">"Define un modo que siga un calendario regular"</string>
     <string name="zen_mode_blurb_schedule_calendar" msgid="382177907856065945">"Define un modo para sincronizar los eventos del calendario y las respuestas a invitaciones"</string>
-    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Diseña una rutina de sueño relajante. Configura alarmas, atenúa la pantalla y bloquea las notificaciones."</string>
+    <string name="zen_mode_blurb_bedtime" msgid="6155075956151013457">"Diseña una rutina de sueño relajante. Pon alarmas, atenúa la pantalla y bloquea las notificaciones."</string>
     <string name="zen_mode_blurb_driving" msgid="1316054379000667305">"Prioriza la seguridad en la carretera para una conducción sin distracciones"</string>
     <string name="zen_mode_blurb_immersive" msgid="5884004861848687869">"Bloquea las distracciones o interrupciones de tu dispositivo para concentrarte"</string>
     <string name="zen_mode_blurb_theater" msgid="2999237960059524225">"Elimina todas las distracciones para un ambiente silencioso"</string>
@@ -4488,7 +4479,7 @@
     <string name="filter_notif_blocked_apps" msgid="1065653868850012325">"Desactivadas"</string>
     <string name="advanced_apps" msgid="7643010673326578815">"Ajustes avanzados"</string>
     <string name="app_permissions" msgid="8666537659217653626">"Gestor de permisos"</string>
-    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Cambios en los datos compartidos de ubicación"</string>
+    <string name="app_data_sharing_updates_title" msgid="1694297952320402788">"Cambios en la compartición de datos de ubicación"</string>
     <string name="app_data_sharing_updates_summary" msgid="4465929918457739443">"Revisa las aplicaciones que han cambiado cómo pueden compartir tus datos de ubicación"</string>
     <string name="app_function_access_settings_title" msgid="1837117989202166166">"Agentes"</string>
     <string name="app_function_access_settings_summary" msgid="3654291845453799170">"Agentes que pueden acceder a información o realizar acciones en apps"</string>
@@ -4553,9 +4544,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Configuración de USB predeterminada"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opciones de alimentación"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opciones de transferencia de archivos"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Protección del acceso a datos"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Permitir tunelización PCI"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Si se habilita, los periféricos USB y Thunderbolt podrán crear túneles PCI y acceder a la memoria del sistema"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Para modificar este ajuste, debes ser un usuario administrador"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Inhabilitado por tu administrador de TI"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Inhabilitado por el modo Protección Avanzada"</string>
@@ -5368,8 +5362,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satélite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conectividad por satélite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conectividad por satélite"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Usar conectividad por satélite"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"El uso de apps compatibles está incluido en tu cuenta"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"El uso de datos para todas las apps está incluido en tu cuenta"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Apps compatibles en tu teléfono"</string>
@@ -5887,10 +5880,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Las apps que hayas instalado pueden ver el nombre de tu dispositivo. También es posible que lo vean otros usuarios si lo conectas con dispositivos Bluetooth, si te conectas a una red Wi-Fi o si configuras un punto de acceso Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Género gramatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Selecciona el género gramatical"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"Usar Buscar aplicaciones engañosas"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Buscar aplicaciones engañosas"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"Comprueba la actividad de las aplicaciones en busca de phishing"</string>
-    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Usar Buscar aplicaciones engañosas"</string>
-    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Buscar apps de trabajo engañosas"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Buscar aplicaciones engañosas"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Buscar aplicaciones de trabajo engañosas"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"La contraseña ya está configurada"</string>
@@ -6196,19 +6189,24 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Más información sobre la conectividad por satélite"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Abrir demo de SOS por satélite"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Aplicaciones por satélite"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"Solo llamadas de emergencia"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Conectividad por satélite disponible"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Accede fácilmente a información sobre servicios por satélite añadiendo el recuadro Satélite a los ajustes rápidos"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Añadir recuadro"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Notificaciones del recuadro Satélite"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_apps_see_all_supported_apps_text (1053383406430986034) -->
+    <skip />
+    <!-- no translation found for satellite_apps_see_less_text (3776624493969066217) -->
+    <skip />
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Satélite no disponible"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"La cobertura por satélite no está disponible si tienes conexión a una red móvil o Wi-Fi."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"La conectividad por satélite no está disponible en este país o territorio."</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"La conectividad por satélite no está disponible en este momento. Inténtalo de nuevo más tarde."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Tu plan móvil no incluye cobertura por satélite. Pide ayuda a tu operador."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Para usar los mensajes por satélite, Mensajes de Google debe ser tu aplicación de mensajería predeterminada."</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Tu operador ha habilitado la conectividad por satélite. Consulta más información en los ajustes de satélite de tu operador."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Ver ubicaciones disponibles"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Cambiar aplicación predeterminada"</string>

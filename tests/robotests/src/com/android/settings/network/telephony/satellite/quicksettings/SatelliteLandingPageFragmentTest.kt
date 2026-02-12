@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.Application
+import android.app.settings.SettingsEnums
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
@@ -43,6 +44,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.spa.preference.ComposePreference
+import com.android.settings.testutils.MetricsRule
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.FooterPreference
@@ -55,9 +57,14 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.never
+import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
@@ -74,6 +81,7 @@ class SatelliteLandingPageFragmentTest {
 
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
     @get:Rule val composeTestRule = createComposeRule()
+    @get:Rule val metricsRule = MetricsRule()
 
     private lateinit var context: Application
     private val SUB_ID = 1
@@ -493,6 +501,106 @@ class SatelliteLandingPageFragmentTest {
         }
     }
 
+    @Test
+    fun onResume_logsPageVisible() {
+        val scenario = launchFragment()
+        scenario.moveToState(Lifecycle.State.RESUMED)
+
+        scenario.onFragment { fragment ->
+            verify(metricsRule.metricsFeatureProvider)
+                .visible(
+                    fragment.requireContext(),
+                    metricsRule.metricsFeatureProvider.getAttribution(fragment.activity),
+                    SettingsEnums.SATELLITE_LANDING_PAGE,
+                    0, // latency
+                )
+        }
+    }
+
+    @Test
+    fun onLteNtnSupportChanged_whenFalse_logsNbiotVariant() {
+        setLteNtnSupported(false)
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment -> fragment.viewModel.refresh() }
+        waitForAsync()
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(
+                any(),
+                eq(SettingsEnums.ACTION_SATELLITE_LANDING_PAGE_VARIANT),
+                eq(1),
+            ) // Nb-IoT variant 1, LTE variant 2
+    }
+
+    @Test
+    fun onLteNtnSupportChanged_whenTrue_logsLTEVariant() {
+        setLteNtnSupported(true)
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment -> fragment.viewModel.refresh() }
+        waitForAsync()
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(any(), eq(SettingsEnums.ACTION_SATELLITE_LANDING_PAGE_VARIANT), eq(2))
+    }
+
+    @Test
+    fun onLteNtnSupportChanged_logsVariantOnlyOnce() {
+        setLteNtnSupported(false)
+        val scenario = launchFragment()
+        scenario.onFragment { fragment ->
+            val viewModel = fragment.viewModel
+            val isLteBasedNtnSupportedFlow =
+                ReflectionHelpers.getField<MutableStateFlow<Boolean>>(
+                    viewModel,
+                    "_isLteBasedNtnSupported",
+                )
+
+            // Trigger a state change to LTE variant
+            isLteBasedNtnSupportedFlow.value = false
+            isLteBasedNtnSupportedFlow.value = true
+        }
+        waitForAsync()
+
+        verify(metricsRule.metricsFeatureProvider, times(1))
+            .action(any(), eq(SettingsEnums.ACTION_SATELLITE_LANDING_PAGE_VARIANT), eq(1))
+        verify(metricsRule.metricsFeatureProvider, never())
+            .action(any(), eq(SettingsEnums.ACTION_SATELLITE_LANDING_PAGE_VARIANT), eq(2))
+    }
+
+    @Test
+    fun tryDemoButton_onClick_logsAction() {
+        setLteNtnSupported(false) // Make button visible
+        val scenario = launchFragment()
+
+        scenario.onFragment { fragment ->
+            val demoButton = fragment.findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON)
+            demoButton!!.performClick()
+        }
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(any(), eq(SettingsEnums.ACTION_SATELLITE_DEMO_CLICK))
+    }
+
+    @Test
+    fun onAppClick_logsActionWithPackageName() {
+        setLteNtnSupported(true)
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        val messagingPackage = "com.google.android.apps.messaging"
+        `when`(appsRepository.getAppsPackagesForLteLandingPage())
+            .thenReturn(listOf(messagingPackage))
+        setupPackageManagerForApp(messagingPackage, "Messages", Intent("action"))
+        val scenario = launchFragment()
+        waitForAsync()
+
+        composeTestRule.onNodeWithText("Messages").performClick()
+        waitForAsync()
+
+        verify(metricsRule.metricsFeatureProvider)
+            .action(any(), eq(SettingsEnums.ACTION_SATELLITE_APP_CLICK), eq(messagingPackage))
+    }
+
     private fun waitForAsync() {
         shadowOf(Looper.getMainLooper()).idle()
     }
@@ -509,6 +617,7 @@ class SatelliteLandingPageFragmentTest {
 
     private fun setupPackageManagerForApp(packageName: String, appName: String, intent: Intent) {
         val appInfo = mock(ApplicationInfo::class.java)
+        appInfo.packageName = packageName
         `when`(appInfo.loadLabel(packageManager)).thenReturn(appName)
         `when`(appInfo.loadIcon(packageManager)).thenReturn(mock(Drawable::class.java))
         // Use doReturn for methods that can throw checked exceptions to avoid Mockito issues.

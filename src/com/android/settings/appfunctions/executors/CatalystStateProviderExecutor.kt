@@ -20,6 +20,7 @@ import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.Intent
 import android.os.BaseBundle
+import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
@@ -34,6 +35,7 @@ import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isUiOnlyPreference
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
+import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
@@ -182,7 +184,8 @@ class CatalystStateProviderExecutor(
             } else {
                 ". " + arguments.keySet().joinToString(", ") { "$it=${arguments.get(it)}" }
             }
-        val description = basicDescription + descriptionSuffix
+        val descriptionPrefix = if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else ""
+        val description = descriptionPrefix + basicDescription + descriptionSuffix
 
         val launchingIntent = screenMetaData.getLaunchIntent(context, null)
         val states =
@@ -192,6 +195,19 @@ class CatalystStateProviderExecutor(
                 intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
             )
         return states
+    }
+
+    /**
+     * Returns true if the screen key should be included in the description for debugging.
+     *
+     * This should never be used in production.
+     */
+    private fun shouldIncludeScreenKey(): Boolean {
+        return AppUtils.isDebuggable() && Settings.Global.getInt(
+            context.contentResolver,
+            "com.android.settings.APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION",
+            0
+        ) == 1
     }
 
     private fun isImeiPreference(prefKey: String): Boolean {

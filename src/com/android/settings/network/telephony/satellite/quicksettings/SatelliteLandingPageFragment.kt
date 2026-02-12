@@ -16,6 +16,7 @@
 
 package com.android.settings.network.telephony.satellite.quicksettings
 
+import android.app.settings.SettingsEnums
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -43,6 +44,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.preference.Preference
 import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.widget.preference.Preference as SpaPreference
@@ -66,6 +68,7 @@ import kotlinx.coroutines.launch
 class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
 
     private lateinit var packageManager: PackageManager
+    private var isVariantMetricLogged = false
 
     private var appsRepository: SatelliteAppsRepository? = null
     private var backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default
@@ -126,6 +129,12 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
 
     override fun onResume() {
         super.onResume()
+        FeatureFactory.featureFactory.metricsFeatureProvider.visible(
+            context,
+            FeatureFactory.featureFactory.metricsFeatureProvider.getAttribution(activity),
+            SettingsEnums.SATELLITE_LANDING_PAGE,
+            0, // latency
+        )
         updateLandingPageContent()
     }
 
@@ -135,6 +144,15 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
                 launch {
                     viewModel.isLteBasedNtnSupported.collectLatest { isLte ->
                         if (isLte != null) {
+                            if (!isVariantMetricLogged) {
+                                val subType = if (isLte) 2 else 1 // 2 for LTE, 1 for NB-NTN
+                                FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                                    requireContext(),
+                                    SettingsEnums.ACTION_SATELLITE_LANDING_PAGE_VARIANT,
+                                    subType,
+                                )
+                                isVariantMetricLogged = true
+                            }
                             addIllustrationPreference(isLte)
                             updateTryADemoButtonVisibility(isLte)
                             setUpFooterPreference(isLte)
@@ -187,6 +205,10 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
     private fun setUpTryADemoButtonListener() {
         val demoButtonPreference = findPreference<Preference>(KEY_TRY_A_DEMO_BUTTON) ?: return
         demoButtonPreference.setOnPreferenceClickListener {
+            FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                requireContext(),
+                SettingsEnums.ACTION_SATELLITE_DEMO_CLICK,
+            )
             val action =
                 getString(
                     com.android.internal.R.string.config_satellite_demo_mode_sos_intent_action
@@ -254,7 +276,7 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
                         )
                     appListItemModel.SatelliteAppListItem(
                         enabled = areAppsEnabled,
-                        onClick = { item.intent?.let { startActivitySafely(it) } },
+                        onClick = { handleSatelliteAppClick(item) },
                     )
                 }
 
@@ -289,6 +311,18 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
                 }
             }
         }
+    }
+
+    private fun handleSatelliteAppClick(item: SatelliteAppItem) {
+        // Log the package name of the app that was clicked. No sensitive
+        // data is logged as this is only for satellite optimized apps.
+        val payload = item.app.packageName
+        FeatureFactory.featureFactory.metricsFeatureProvider.action(
+            requireContext(),
+            SettingsEnums.ACTION_SATELLITE_APP_CLICK,
+            payload,
+        )
+        item.intent?.let { startActivitySafely(it) }
     }
 
     /** Sets up the footer preference based on the NTN type. */

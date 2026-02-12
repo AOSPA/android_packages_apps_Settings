@@ -47,6 +47,7 @@ import com.android.settings.accessibility.shortcutssettings.ui.ShortcutsSettings
 import com.android.settings.accessibility.systemcontrols.ui.SystemControlsScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.accessibility.timingcontrols.ui.TimingControlsScreen
+import com.android.settings.accounts.AccountDetailApiScreen
 import com.android.settings.accounts.AccountScreen
 import com.android.settings.accounts.ManagedProfileApiScreen
 import com.android.settings.applications.AppDashboardScreen
@@ -117,6 +118,7 @@ import com.android.settings.gestures.PickupGestureApiScreen
 import com.android.settings.gestures.PowerMenuSettingsScreenApi
 import com.android.settings.gestures.SwipeToNotificationApiScreen
 import com.android.settings.gestures.SystemNavigationGestureScreen
+import com.android.settings.gestures.TapScreenGestureApiScreen
 import com.android.settings.inputmethod.AvailableVirtualKeyboardApiScreen
 import com.android.settings.inputmethod.UserDictionaryListApiScreen
 import com.android.settings.language.LanguageAndRegionApiFirstScreen
@@ -492,6 +494,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = TextReadingScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccessibilityScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccountScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AccountDetailApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ManagedProfileApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AppDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ConnectedDeviceDashboardScreen.KEY),
@@ -563,6 +566,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = DoubleTwistGestureApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SwipeToNotificationApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PickupGestureApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TapScreenGestureApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDirectApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ContactsStorageApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PowerMenuSettingsScreenApi.KEY),

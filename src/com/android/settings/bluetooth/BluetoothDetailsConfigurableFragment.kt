@@ -26,7 +26,6 @@ import android.os.Bundle
 import android.os.UserManager
 import android.util.Log
 import android.view.View
-import androidx.compose.runtime.getValue
 import androidx.core.graphics.drawable.toDrawable
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -37,7 +36,7 @@ import androidx.preference.PreferenceViewHolder
 import androidx.preference.SwitchPreferenceCompat
 import androidx.preference.TwoStatePreference
 import com.android.settings.R
-import com.android.settings.bluetooth.ui.composable.MultiTogglePreference
+import com.android.settings.bluetooth.Utils.INVISIBLE_CATEGORY
 import com.android.settings.bluetooth.ui.model.DeviceSettingPreferenceModel
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel
 import com.android.settings.bluetooth.ui.view.DeviceDetailsMoreSettingsFragment
@@ -260,9 +259,7 @@ abstract class BluetoothDetailsConfigurableFragment :
         val existedPrefWrapper = container.findPreference<ChainedPreferenceGroup>(prefWrapperKey)
         if (model == null) {
             existedPrefWrapper?.let { container.removePreference(it) }
-            if (container.preferenceCount == 0) {
-                container.isVisible = false
-            }
+            Utils.updateVisibilityAccordingToChildren(container)
             return
         }
         val prefKey = getPreferenceKey(settingId)
@@ -505,10 +502,7 @@ abstract class BluetoothDetailsConfigurableFragment :
             container.addPreference(generatedPrefWrapper)
             generatedPref.key = prefKey
             generatedPrefWrapper.addPreference(generatedPref)
-
-            if (container.preferenceCount > 0) {
-                container.isVisible = true
-            }
+            Utils.updateVisibilityAccordingToChildren(container)
         }
     }
 
@@ -718,7 +712,6 @@ abstract class BluetoothDetailsConfigurableFragment :
         const val LOADING_PREF = "loading_pref"
 
         private const val TAG = "BtDetailsConfigFrg"
-        private const val INVISIBLE_CATEGORY = "invisible_profile_category"
         private const val EVENT_SWITCH_OFF = 0
         private const val EVENT_SWITCH_ON = 1
         private const val EVENT_CLICK_PRIMARY = 2
