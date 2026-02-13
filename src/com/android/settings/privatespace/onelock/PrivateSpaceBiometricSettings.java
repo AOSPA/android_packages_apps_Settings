@@ -33,16 +33,14 @@ public class PrivateSpaceBiometricSettings extends BiometricsSettingsBase {
 
     @Override
     public void onAttach(Context context) {
-        if (android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace()) {
-            super.onAttach(context);
-            UserHandle privateProfileHandle =
-                    PrivateSpaceMaintainer.getInstance(context).getPrivateProfileHandle();
-            if (privateProfileHandle != null) {
-                mUserId = privateProfileHandle.getIdentifier();
-            } else {
-                mUserId = -1;
-                Log.e(TAG, "Private profile user handle is not expected to be null.");
-            }
+        super.onAttach(context);
+        UserHandle privateProfileHandle =
+                PrivateSpaceMaintainer.getInstance(context).getPrivateProfileHandle();
+        if (privateProfileHandle != null) {
+            mUserId = privateProfileHandle.getIdentifier();
+        } else {
+            mUserId = -1;
+            Log.e(TAG, "Private profile user handle is not expected to be null.");
         }
     }
 
