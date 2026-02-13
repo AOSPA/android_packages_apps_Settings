@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
+// LINT.IfChange
 public class HdrBrightnessPreferenceController extends TogglePreferenceController {
     public HdrBrightnessPreferenceController(@NonNull Context context, @NonNull String key) {
         super(context, key);
@@ -53,3 +54,4 @@ public class HdrBrightnessPreferenceController extends TogglePreferenceControlle
         return R.string.menu_key_display;
     }
 }
+// LINT.ThenChange(HdrBrightnessScreenApi.kt)
