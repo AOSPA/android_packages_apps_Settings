@@ -27,6 +27,9 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.preference.Preference
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.CatalystFragment
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -40,6 +43,7 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionSupportedAppPreferenceTest {
@@ -50,61 +54,88 @@ class SupervisionSupportedAppPreferenceTest {
     private val preferenceKey = "preferenceKey"
     private val appIcon = ColorDrawable(Color.RED)
     private val mockPackageManager = mock(PackageManager::class.java)
-    private lateinit var preference: Preference
-    private lateinit var preferenceWithDefaultKey: Preference
 
     @get:Rule(order = 0) val setFlagsRule = SetFlagsRule()
 
     @Before
     fun setUp() {
         val fakeApplicationInfo = ApplicationInfo().apply { packageName = appPackageName }
-        val spyContext = spy(context) { on { packageManager } doReturn mockPackageManager }
 
         mockPackageManager.stub {
             on { getApplicationInfo(eq(appPackageName), any<Int>()) } doReturn fakeApplicationInfo
             on { getApplicationIcon(fakeApplicationInfo) } doReturn appIcon
         }
-
-        preference =
-            SupervisionSupportedAppPreference(title, summary, appPackageName, preferenceKey)
-                .createWidget(spyContext)
-
-        preferenceWithDefaultKey =
-            SupervisionSupportedAppPreference(title, summary, appPackageName)
-                .createWidget(spyContext)
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPPORTED_APPS_RETRIEVAL_UPDATES)
     fun getTitle() {
+        val preference = getPreference(preferenceKey)
         assertThat(preference.title).isEqualTo(title)
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPPORTED_APPS_RETRIEVAL_UPDATES)
     fun getSummary() {
+        val preference = getPreference(preferenceKey)
         assertThat(preference.summary).isEqualTo(summary)
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPPORTED_APPS_RETRIEVAL_UPDATES)
     fun getIcon() {
+        val preference = getPreference(preferenceKey)
         assertThat(preference.icon).isEqualTo(appIcon)
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getKey() {
+        val preference = getPreference(preferenceKey)
         assertThat(preference.key).isEqualTo(preferenceKey)
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun getDefaultKey() {
-        assertThat(preferenceWithDefaultKey.key).isEqualTo(SupervisionSupportedAppPreference.KEY)
+        val preference = getPreference()
+        assertThat(preference.key).isEqualTo(SupervisionSupportedAppPreference.KEY)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPPORTED_APPS_RETRIEVAL_UPDATES)
+    fun attachFooter() {
+        val mockLifecycleContext = mock(PreferenceLifecycleContext::class.java)
+        val learnMoreLink = "learn more link"
+        val spyFragment = spy(CatalystFragment())
+
+        whenever(mockLifecycleContext.getString(any())).thenReturn(learnMoreLink)
+        whenever(mockLifecycleContext.lifecycleOwner).thenReturn(spyFragment)
+
+        val metadata =
+            SupervisionSupportedAppPreference(
+                title,
+                summary,
+                appPackageName,
+                preferenceKey,
+                learnMoreLink,
+            )
+
+        metadata.onCreate(mockLifecycleContext)
+        assertThat(spyFragment.footerDataMap.containsKey(preferenceKey)).isTrue()
     }
 
     @Test
     fun createWidget_callsGetApplicationInfoWithCorrectFlags() {
+        getPreference()
         val expectedFlags = MATCH_UNINSTALLED_PACKAGES
-        verify(mockPackageManager, times(2))
+        verify(mockPackageManager, times(1))
             .getApplicationInfo(eq(appPackageName), eq(expectedFlags))
+    }
+
+    private fun getPreference(key: String? = null): Preference {
+        val spyContext = spy(context) { on { packageManager } doReturn mockPackageManager }
+        return SupervisionSupportedAppPreference(title, summary, appPackageName, key)
+            .createAndBindWidget(spyContext)
     }
 }
