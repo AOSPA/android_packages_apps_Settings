@@ -15,15 +15,24 @@
  */
 package com.android.settings.display
 
+import android.Manifest.permission.WRITE_SECURE_SETTINGS
+import android.app.Application
+import android.content.Context
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings
 import android.view.Display
 import android.view.Display.HdrCapabilities
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.display.HdrBrightnessApiScreen.Companion.HDR_BRIGHTNESS_ENABLED_KEY
+import com.android.settings.display.HdrBrightnessApiScreen.Companion.OFF
+import com.android.settings.display.HdrBrightnessApiScreen.Companion.ON
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
 import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.HardwareUnsupportedException
+import com.android.settings.testutils2.MissingPermissionException
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertFailsWith
 import org.junit.Before
@@ -32,15 +41,18 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
+import org.robolectric.shadows.ShadowApplication
 import org.robolectric.shadows.ShadowDisplay
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
-@Config(shadows = [ShadowDisplay::class])
+@Config(shadows = [ShadowApplication::class, ShadowDisplay::class])
 class HdrBrightnessApiScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val tester = ApiTester(HdrBrightnessApiScreen())
+    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val shadowApplication: ShadowApplication = shadowOf(context as Application)
     private val shadowDisplay: ShadowDisplay = shadowOf(ShadowDisplay.getDefaultDisplay())
 
     @Before
@@ -80,6 +92,62 @@ class HdrBrightnessApiScreenTest {
         assertThat(failure.reason).contains("not supported")
     }
 
+    @Test
+    fun getHdrBrightnessEnabled_returnsSettingsValue() {
+        // Default value is ON.
+        assertThat(tester.get<Boolean>(HDR_BRIGHTNESS_ENABLED_KEY)).isTrue()
+
+        setHdrBrightnessEnabledInSettingsProvider(OFF)
+        assertThat(tester.get<Boolean>(HDR_BRIGHTNESS_ENABLED_KEY)).isFalse()
+
+        setHdrBrightnessEnabledInSettingsProvider(ON)
+        assertThat(tester.get<Boolean>(HDR_BRIGHTNESS_ENABLED_KEY)).isTrue()
+    }
+
+    @Test
+    fun getHdrBrightnessEnabled_hardwareUnsupported_fails() {
+        disableHdrSupport()
+        val failure =
+            assertFailsWith<HardwareUnsupportedException> {
+                tester.get<Boolean>(HDR_BRIGHTNESS_ENABLED_KEY)
+            }
+        assertThat(failure.reason).contains("not supported")
+    }
+
+    @Test
+    fun setHdrBrightnessEnabled_updatesSettings() {
+        shadowApplication.grantPermissions(WRITE_SECURE_SETTINGS)
+        tester.set(HDR_BRIGHTNESS_ENABLED_KEY, false)
+        assertThat(getHdrBrightnessEnabledSettingsValue()).isEqualTo(OFF)
+
+        tester.set(HDR_BRIGHTNESS_ENABLED_KEY, true)
+        assertThat(getHdrBrightnessEnabledSettingsValue()).isEqualTo(ON)
+    }
+
+    @Test
+    fun setHdrBrightnessEnabled_hardwareUnsupported_fails() {
+        shadowApplication.grantPermissions(WRITE_SECURE_SETTINGS)
+        disableHdrSupport()
+        setHdrBrightnessEnabledInSettingsProvider(ON)
+        val failure =
+            assertFailsWith<HardwareUnsupportedException> {
+                tester.set(HDR_BRIGHTNESS_ENABLED_KEY, false)
+            }
+        assertThat(failure.reason).contains("not supported")
+        assertThat(getHdrBrightnessEnabledSettingsValue()).isEqualTo(ON)
+    }
+
+    @Test
+    fun setHdrBrightnessEnabled_missingPermission_fails() {
+        shadowApplication.denyPermissions(WRITE_SECURE_SETTINGS)
+        setHdrBrightnessEnabledInSettingsProvider(ON)
+        val failure =
+            assertFailsWith<MissingPermissionException> {
+                tester.set(HDR_BRIGHTNESS_ENABLED_KEY, false)
+            }
+        assertThat(getHdrBrightnessEnabledSettingsValue()).isEqualTo(ON)
+    }
+
     private fun disableHdrSupport() {
         shadowDisplay.setDisplayHdrCapabilities(
             /* displayId= */ Display.DEFAULT_DISPLAY,
@@ -89,5 +157,16 @@ class HdrBrightnessApiScreenTest {
         )
         shadowDisplay.setHdrSdrRatio(Float.NaN)
     }
+
+    private fun setHdrBrightnessEnabledInSettingsProvider(value: Int) {
+        Settings.Secure.putInt(
+            context.contentResolver,
+            Settings.Secure.HDR_BRIGHTNESS_ENABLED,
+            value,
+        )
+    }
+
+    private fun getHdrBrightnessEnabledSettingsValue(): Int =
+        Settings.Secure.getInt(context.contentResolver, Settings.Secure.HDR_BRIGHTNESS_ENABLED, -1)
 }
 // LINT.ThenChange(HdrBrightnessSettingsTest.java, HdrBrightnessPreferenceControllerTest.java)

@@ -48,6 +48,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class HdrBrightnessPreferenceControllerTest {
     private HdrBrightnessPreferenceController mPreferenceController;
@@ -133,3 +134,4 @@ public class HdrBrightnessPreferenceControllerTest {
                 HDR_BRIGHTNESS_ENABLED, /* def= */ -1));
     }
 }
+// LINT.ThenChange(HdrBrightnessApiScreenTest.kt)
