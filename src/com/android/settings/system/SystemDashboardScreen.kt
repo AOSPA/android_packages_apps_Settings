@@ -22,7 +22,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.SystemDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -37,7 +36,7 @@ open class SystemDashboardScreen : PreferenceScreenMixin, PreferenceIconProvider
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.top_level_system_purpose
 
@@ -57,8 +56,6 @@ open class SystemDashboardScreen : PreferenceScreenMixin, PreferenceIconProvider
         }
 
     override fun getMetricsCategory() = SettingsEnums.SETTINGS_SYSTEM_CATEGORY
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkSystem25q4()
 
     override fun hasCompleteHierarchy() = false
 
