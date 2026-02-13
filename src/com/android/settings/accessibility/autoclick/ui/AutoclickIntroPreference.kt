@@ -19,6 +19,7 @@ package com.android.settings.accessibility.autoclick.ui
 import android.content.Context
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
 
@@ -35,6 +36,8 @@ class AutoclickIntroPreference : PreferenceMetadata, PreferenceBinding {
 
     override val indexable
         get() = false
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 

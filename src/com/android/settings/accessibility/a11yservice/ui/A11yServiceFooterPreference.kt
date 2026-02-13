@@ -27,6 +27,7 @@ import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenc
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 /** Footer metadata for [AccessibilityServiceInfo]'s description. */
 class A11yServiceFooterPreference(
@@ -40,6 +41,8 @@ class A11yServiceFooterPreference(
     PreferenceTitleProvider,
     AccessibilityFooterPreferenceIntroductionTitleProvider,
     PreferenceAvailabilityProvider {
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? {
         if (loadHtmlFooter) {

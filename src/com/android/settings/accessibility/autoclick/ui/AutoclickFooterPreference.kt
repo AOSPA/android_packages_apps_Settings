@@ -16,9 +16,11 @@
 
 package com.android.settings.accessibility.autoclick.ui
 
+import android.content.Context
 import com.android.settings.R
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceBinding
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 class AutoclickFooterPreference :
     AccessibilityFooterPreferenceMetadata, AccessibilityFooterPreferenceBinding {
@@ -27,6 +29,8 @@ class AutoclickFooterPreference :
 
     override val purpose: Int
         get() = R.string.a11y_autoclick_footer_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val title: Int
         get() = R.string.accessibility_autoclick_description

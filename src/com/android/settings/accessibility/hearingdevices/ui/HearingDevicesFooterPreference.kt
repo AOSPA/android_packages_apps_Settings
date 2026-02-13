@@ -26,6 +26,7 @@ import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.FooterPreference
 
 class HearingDevicesFooterPreference(
@@ -52,6 +53,8 @@ class HearingDevicesFooterPreference(
         footerPreference.contentDescription =
             "$aboutTitle\n${context.getString(getSummaryResId(true))}"
     }
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? {
         // We use html tag inside footer string, so it is better to load from html to have better

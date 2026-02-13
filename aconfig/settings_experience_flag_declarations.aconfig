@@ -10,3 +10,13 @@ flag {
         purpose: PURPOSE_BUGFIX
     }
 }
+
+flag {
+    name: "receive_troubleshooting_message"
+    namespace: "settings_experience"
+    description: "Receive troubleshooting messages from another process."
+    bug: "443861431"
+    metadata {
+        purpose: PURPOSE_BUGFIX
+    }
+}

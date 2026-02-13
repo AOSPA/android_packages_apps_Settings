@@ -32,6 +32,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 // LINT.IfChange
 class MagnificationFooterPreference(override val helpResource: Int) :
@@ -70,6 +71,8 @@ class MagnificationFooterPreference(override val helpResource: Int) :
             mSettingsKeyedObserver = null
         }
     }
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? {
         val hasTouch =

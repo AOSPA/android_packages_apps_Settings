@@ -29,6 +29,7 @@ import com.android.settings.widget.FooterPreferenceBinding
 import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.FooterPreference
 
 class BluetoothFooterPreference(private val bluetoothDataStore: BluetoothDataStore) :
@@ -41,6 +42,8 @@ class BluetoothFooterPreference(private val bluetoothDataStore: BluetoothDataSto
         get() = R.string.bluetooth_screen_footer_purpose
 
     override fun dependencies(context: Context) = arrayOf(BluetoothPreference.KEY)
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun intent(context: Context): Intent? = subSettingLauncher(context).toIntent()
 

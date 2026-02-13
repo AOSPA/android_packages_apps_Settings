@@ -54,6 +54,7 @@ import com.android.settings.accounts.ManagedProfileApiScreen
 import com.android.settings.applications.AppDashboardScreen
 import com.android.settings.applications.contacts.ContactsStorageApiScreen
 import com.android.settings.applications.intentpicker.AppLaunchApiScreen
+import com.android.settings.applications.managedomainurls.OpeningLinksApiScreen
 import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen
 import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppListScreen
 import com.android.settings.applications.specialaccess.AllFilesAccessAppDetailScreen
@@ -112,6 +113,7 @@ import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
 import com.android.settings.gestures.ButtonNavigationSettingsScreen
+import com.android.settings.gestures.DoubleTapApiScreen
 import com.android.settings.gestures.DoubleTapPowerScreen
 import com.android.settings.gestures.DoubleTwistGestureApiFirstScreen
 import com.android.settings.gestures.GestureSettingsApiScreen
@@ -146,7 +148,11 @@ import com.android.settings.notification.modes.ZenModesListScreen
 import com.android.settings.print.PrintServiceApiScreen
 import com.android.settings.print.PrintSettingsApiScreen
 import com.android.settings.safetycenter.ui.AccountSecuritySubpageScreenApi
+import com.android.settings.safetycenter.ui.AppSecurityScreenApi
 import com.android.settings.safetycenter.ui.DeviceUnlockApiScreen
+import com.android.settings.safetycenter.ui.MoreSecurityPrivacyScreenApi
+import com.android.settings.safetycenter.ui.PrivacyControlsScreenApi
+import com.android.settings.safetycenter.ui.SystemAndUpdatesScreenApi
 import com.android.settings.security.ContentProtectionScreenApi
 import com.android.settings.security.CredentialManagementAppScreenApi
 import com.android.settings.security.EncryptionAndCredentialScreenApi
@@ -178,6 +184,7 @@ import com.android.settings.wifi.ConfigureWifiScreen
 import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.WifiDataUsageScreenApi
 import com.android.settings.wifi.calling.WifiCallingScreen
+import com.android.settings.wifi.details.WifiDetailsScreenApi
 import com.android.settings.wifi.p2p.WifiDirectApiScreen
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settings.wifi.tether.WifiHotspotScreen
@@ -575,6 +582,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = SwipeToNotificationApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PickupGestureApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TapScreenGestureApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DoubleTapApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDirectApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ContactsStorageApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PowerMenuSettingsScreenApi.KEY),
@@ -587,6 +595,10 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = UsbDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UnrestrictedDataAccessApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccountSecuritySubpageScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppSecurityScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = SystemAndUpdatesScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = MoreSecurityPrivacyScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = PrivacyControlsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TrustedCredentialsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserCredentialsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserAspectRatioAppsApiScreen.KEY),
@@ -603,6 +615,8 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceUnlockApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AvailableVirtualKeyboardApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDataUsageScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = OpeningLinksApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
     )
 
 private fun getDeviceStateItemList() =
@@ -731,6 +745,26 @@ private fun getDeviceStateItemList() =
             enabled = true,
             settingKey = "main_toggle_wifi",
             settingScreenKey = NetworkProviderScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "privacy_camera_toggle",
+            settingScreenKey = PrivacyControlsScreenApi.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "privacy_mic_toggle",
+            settingScreenKey = PrivacyControlsScreenApi.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "show_clip_access_notification",
+            settingScreenKey = PrivacyControlsScreenApi.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "show_password",
+            settingScreenKey = PrivacyControlsScreenApi.KEY,
         ),
         DeviceStateItemConfig(
             enabled = true,

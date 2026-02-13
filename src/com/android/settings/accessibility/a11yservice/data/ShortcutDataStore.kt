@@ -35,6 +35,7 @@ class ShortcutDataStore(
     private val serviceInfo: AccessibilityServiceInfo,
     coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default),
     settingsStore: KeyValueStore = SettingsSecureStore.get(context),
+    private val isInSetupWizard: Boolean,
 ) :
     AccessibilityShortcutDataStore(
         context,
@@ -57,7 +58,7 @@ class ShortcutDataStore(
         val hasQsTile = serviceInfo.tileServiceName?.isNotEmpty() == true
         val isAccessibilityTool = serviceInfo.isAccessibilityTool
         return if (serviceInfo.targetSdkIsAtLeast(Build.VERSION_CODES.R)) {
-            if (isAccessibilityTool && hasQsTile) {
+            if (isAccessibilityTool && hasQsTile && !isInSetupWizard) {
                 QUICK_SETTINGS
             } else {
                 super.getDefaultShortcutTypes()

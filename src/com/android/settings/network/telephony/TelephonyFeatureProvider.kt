@@ -19,4 +19,5 @@ package com.android.settings.network.telephony
 interface TelephonyFeatureProvider {
     val telephonyRepository: TelephonySettingsRepository
     val subscriptionRepository: SubscriptionSettingsRepository
+    val carrierConfigRepository: CarrierConfigRepository
 }

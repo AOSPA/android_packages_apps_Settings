@@ -35,7 +35,7 @@ class MagnifyKeyboardSwitchItemController(
     private val magnifyKeyboardMetadata = MagnifyKeyboardSwitchPreference()
     private var magnifyKeyboardObserver: KeyedObserver<String>? = null
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         if (item is SwitchItem) {
             item.isChecked =
                 magnifyKeyboardDataStore.getBoolean(MagnifyKeyboardSwitchPreference.KEY) ?: false
@@ -46,6 +46,7 @@ class MagnifyKeyboardSwitchItemController(
     }
 
     override fun onStart() {
+        super.onStart()
         val observer = KeyedObserver<String> { _, _ -> bindData(targetItem) }
         magnifyKeyboardObserver = observer
 

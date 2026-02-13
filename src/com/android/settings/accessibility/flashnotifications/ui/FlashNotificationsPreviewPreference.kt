@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.ButtonPreference
 import com.android.settingslib.widget.ButtonPreference.SIZE_EXTRA_LARGE
@@ -59,6 +60,8 @@ class FlashNotificationsPreviewPreference :
 
     override val indexable
         get() = false
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)

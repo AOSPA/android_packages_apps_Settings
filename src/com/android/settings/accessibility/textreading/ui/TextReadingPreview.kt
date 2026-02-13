@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -52,6 +53,8 @@ internal class TextReadingPreview(
     private var previewPagerAdapter: PreviewPagerAdapter? = null
     private val displaySize: Flow<DisplaySize> by lazy { displaySizeProvider.invoke() }
     private val fontSize: Flow<FontSize> by lazy { fontSizeProvider.invoke() }
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context) =
         TextReadingPreviewPreference(context, /* attrs= */ null).apply { isSelectable = false }

@@ -15,11 +15,14 @@
  */
 package com.android.settings.supervision.shared.widget
 
+import android.content.Context
 import com.android.settingslib.metadata.PreferenceCategory
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 /** A [PreferenceCategory] that is not search indexable, even though it has a non-empty title. */
 class NonIndexablePreferenceCategory(key: String, purpose: Int, title: Int) :
     PreferenceCategory(key, purpose, title) {
     override val indexable
         get() = false
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 }

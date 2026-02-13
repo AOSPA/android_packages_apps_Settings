@@ -755,6 +755,8 @@ public class Settings extends SettingsActivity {
                                 .createSessionArgs(mSessionId))
                         .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                         .launch();
+
+                finish();
             }
         }
 
@@ -783,6 +785,8 @@ public class Settings extends SettingsActivity {
                     .setArguments(SafetyCenterSessionUtils.INSTANCE.createSessionArgs(mSessionId))
                     .setSourceMetricsCategory(Instrumentable.METRICS_CATEGORY_UNKNOWN)
                     .launch();
+
+            finish();
         }
     }
 
