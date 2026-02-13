@@ -140,6 +140,7 @@ public class FloatingMenuTransparencyPreferenceController extends SliderPreferen
                 == FADE_ENABLED;
 
         mPreference.setEnabled(AccessibilityUtil.isFloatingMenuEnabled(mContext) && fadeEnabled);
+        mPreference.setSliderStateDescription(formatStateDescription(mPreference.getValue()));
     }
 
     private int convertTransparencyFloatToInt(float value) {
@@ -161,6 +162,10 @@ public class FloatingMenuTransparencyPreferenceController extends SliderPreferen
     }
 
     private CharSequence formatStateDescription(float percentage) {
+        if (!mPreference.isEnabled() && Flags.floatingMenuTransparencySliderAnnouncesDisabled()) {
+            return mContext.getString(com.android.settingslib.R.string.disabled);
+        }
+
         // Cache the locale-appropriate NumberFormat.  Configuration locale is guaranteed
         // non-null, so the first time this is called we will always get the appropriate
         // NumberFormat, then never regenerate it unless the locale changes on the fly.
