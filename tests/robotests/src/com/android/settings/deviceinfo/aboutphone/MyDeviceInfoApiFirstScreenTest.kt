@@ -26,6 +26,7 @@ import android.content.Context
 import android.net.wifi.SoftApConfiguration
 import android.net.wifi.WifiManager
 import android.os.Build
+import android.os.Looper
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -39,7 +40,9 @@ import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.FailedPreconditionException
 import com.android.settings.testutils2.MissingPermissionException
 import com.android.settingslib.datastore.SettingsGlobalStore
+import com.android.settingslib.utils.StringUtil
 import com.google.common.truth.Truth.assertThat
+import java.time.Duration
 import kotlin.test.assertFailsWith
 import org.junit.Before
 import org.junit.Rule
@@ -49,6 +52,7 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
+import org.robolectric.util.ReflectionHelpers
 
 @Config(shadows = [SettingsShadowResources::class])
 @RunWith(AndroidJUnit4::class)
@@ -167,6 +171,26 @@ class MyDeviceInfoApiFirstScreenTest {
         assertFailsWith<FailedPreconditionException> {
             tester.set(MyDeviceInfoApiFirstScreen.DEVICE_NAME_KEY, "A".repeat(MAX_LENGTH + 1))
         }
+    }
+
+    @Test
+    fun getBuildNumber_returnsValue() {
+        ReflectionHelpers.setStaticField(Build::class.java, "DISPLAY", "MYBUILD.456")
+        assertThat(tester.get<String>(MyDeviceInfoApiFirstScreen.BUILD_NUMBER_KEY))
+            .isEqualTo("MYBUILD.456")
+    }
+
+    @Test
+    fun getUptime_returnsFormattedValue() {
+        val uptime = Duration.ofDays(2).plusHours(3).plusMinutes(45).plusSeconds(12)
+
+        shadowOf(Looper.getMainLooper()).idleFor(uptime)
+
+        val expectedFormat =
+            StringUtil.formatElapsedTime(context, uptime.toMillis().toDouble(), false, false)
+                .toString()
+        val uptimeResult = tester.get<String>(MyDeviceInfoApiFirstScreen.UPTIME_KEY)
+        assertThat(uptimeResult).isEqualTo(expectedFormat)
     }
 
     companion object {
