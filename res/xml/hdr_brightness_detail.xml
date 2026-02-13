@@ -36,7 +36,7 @@
         settings:controller="com.android.settings.display.HdrBrightnessPreferenceController"/>
 
     <com.android.settingslib.widget.SliderPreference
-        android:key="hdr_brightness_level"
+        android:key="hdr_brightness_boost_level"
         android:title="@string/hdr_brightness_level_title"
         settings:keywords="@string/keywords_display_hdr_brightness"
         settings:textStart="@string/brightness_intensity_start_label"

@@ -26,12 +26,14 @@ import android.view.Display
 import android.view.Display.HdrCapabilities
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.display.HdrBrightnessApiScreen.Companion.HDR_BRIGHTNESS_BOOST_LEVEL_KEY
 import com.android.settings.display.HdrBrightnessApiScreen.Companion.HDR_BRIGHTNESS_ENABLED_KEY
 import com.android.settings.display.HdrBrightnessApiScreen.Companion.OFF
 import com.android.settings.display.HdrBrightnessApiScreen.Companion.ON
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
 import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.HardwareUnsupportedException
+import com.android.settings.testutils2.InvalidPreferenceException
 import com.android.settings.testutils2.MissingPermissionException
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertFailsWith
@@ -49,6 +51,8 @@ import org.robolectric.shadows.ShadowDisplay
 @Config(shadows = [ShadowApplication::class, ShadowDisplay::class])
 class HdrBrightnessApiScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
+
+    private val TOLERANCE = 1e-5f
 
     private val tester = ApiTester(HdrBrightnessApiScreen())
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -148,6 +152,93 @@ class HdrBrightnessApiScreenTest {
         assertThat(getHdrBrightnessEnabledSettingsValue()).isEqualTo(ON)
     }
 
+    @Test
+    fun getHdrBrightnessBoostLevel_returnsSettingsValue() {
+        setHdrBrightnessEnabledInSettingsProvider(ON)
+        // Default value is 100%.
+        assertThat(tester.get<Int>(HDR_BRIGHTNESS_BOOST_LEVEL_KEY)).isEqualTo(100)
+
+        setHdrBrightnessBoostLevelInSettingsProvider(0.0f)
+        assertThat(tester.get<Int>(HDR_BRIGHTNESS_BOOST_LEVEL_KEY)).isEqualTo(0)
+
+        setHdrBrightnessBoostLevelInSettingsProvider(0.521f)
+        assertThat(tester.get<Int>(HDR_BRIGHTNESS_BOOST_LEVEL_KEY)).isEqualTo(52)
+    }
+
+    @Test
+    fun getHdrBrightnessBoostLevel_hardwareUnsupported_fails() {
+        setHdrBrightnessEnabledInSettingsProvider(ON)
+        disableHdrSupport()
+        val failure =
+            assertFailsWith<HardwareUnsupportedException> {
+                tester.get<Int>(HDR_BRIGHTNESS_BOOST_LEVEL_KEY)
+            }
+        assertThat(failure.reason).contains("not supported")
+    }
+
+    @Test
+    fun getHdrBrightnessBoostLevel_hdrBrightnessDisabled_fails() {
+        setHdrBrightnessEnabledInSettingsProvider(OFF)
+        val failure =
+            assertFailsWith<InvalidPreferenceException> {
+                tester.get<Int>(HDR_BRIGHTNESS_BOOST_LEVEL_KEY)
+            }
+        assertThat(failure.reason).contains("is disabled")
+    }
+
+    @Test
+    fun setHdrBrightnessBoostLevel_updatesSettings() {
+        shadowApplication.grantPermissions(WRITE_SECURE_SETTINGS)
+        setHdrBrightnessEnabledInSettingsProvider(ON)
+        tester.set(HDR_BRIGHTNESS_BOOST_LEVEL_KEY, 0)
+        assertThat(getHdrBrightnessBoostLevelSettingsValue()).isEqualTo(0.0f)
+
+        tester.set(HDR_BRIGHTNESS_BOOST_LEVEL_KEY, 11)
+        assertThat(getHdrBrightnessBoostLevelSettingsValue()).isWithin(TOLERANCE).of(0.11f)
+
+        tester.set(HDR_BRIGHTNESS_BOOST_LEVEL_KEY, 100)
+        assertThat(getHdrBrightnessBoostLevelSettingsValue()).isWithin(TOLERANCE).of(1.0f)
+    }
+
+    @Test
+    fun setHdrBrightnessBoostLevel_hardwareUnsupported_fails() {
+        shadowApplication.grantPermissions(WRITE_SECURE_SETTINGS)
+        setHdrBrightnessEnabledInSettingsProvider(ON)
+        disableHdrSupport()
+        setHdrBrightnessBoostLevelInSettingsProvider(1.0f)
+        val failure =
+            assertFailsWith<HardwareUnsupportedException> {
+                tester.set(HDR_BRIGHTNESS_BOOST_LEVEL_KEY, 10)
+            }
+        assertThat(failure.reason).contains("not supported")
+        assertThat(getHdrBrightnessBoostLevelSettingsValue()).isEqualTo(1.0f)
+    }
+
+    @Test
+    fun setHdrBrightnessBoostLevel_hdrBrightnessDisabled_fails() {
+        shadowApplication.grantPermissions(WRITE_SECURE_SETTINGS)
+        setHdrBrightnessEnabledInSettingsProvider(OFF)
+        setHdrBrightnessBoostLevelInSettingsProvider(1.0f)
+        val failure =
+            assertFailsWith<InvalidPreferenceException> {
+                tester.set(HDR_BRIGHTNESS_BOOST_LEVEL_KEY, 10)
+            }
+        assertThat(failure.reason).contains("is disabled")
+        assertThat(getHdrBrightnessBoostLevelSettingsValue()).isEqualTo(1.0f)
+    }
+
+    @Test
+    fun setHdrBrightnessBoostLevel_missingPermission_fails() {
+        shadowApplication.denyPermissions(WRITE_SECURE_SETTINGS)
+        setHdrBrightnessEnabledInSettingsProvider(ON)
+        setHdrBrightnessBoostLevelInSettingsProvider(1.0f)
+        val failure =
+            assertFailsWith<MissingPermissionException> {
+                tester.set(HDR_BRIGHTNESS_BOOST_LEVEL_KEY, 10)
+            }
+        assertThat(getHdrBrightnessBoostLevelSettingsValue()).isEqualTo(1.0f)
+    }
+
     private fun disableHdrSupport() {
         shadowDisplay.setDisplayHdrCapabilities(
             /* displayId= */ Display.DEFAULT_DISPLAY,
@@ -168,5 +259,21 @@ class HdrBrightnessApiScreenTest {
 
     private fun getHdrBrightnessEnabledSettingsValue(): Int =
         Settings.Secure.getInt(context.contentResolver, Settings.Secure.HDR_BRIGHTNESS_ENABLED, -1)
+
+    private fun setHdrBrightnessBoostLevelInSettingsProvider(value: Float) {
+        Settings.Secure.putFloat(
+            context.contentResolver,
+            Settings.Secure.HDR_BRIGHTNESS_BOOST_LEVEL,
+            value,
+        )
+    }
+
+    private fun getHdrBrightnessBoostLevelSettingsValue(): Float =
+        Settings.Secure.getFloat(
+            context.contentResolver,
+            Settings.Secure.HDR_BRIGHTNESS_BOOST_LEVEL,
+            -1.0f,
+        )
 }
-// LINT.ThenChange(HdrBrightnessSettingsTest.java, HdrBrightnessPreferenceControllerTest.java)
+// LINT.ThenChange(HdrBrightnessSettingsTest.java, HdrBrightnessPreferenceControllerTest.java,
+// HdrBrightnessLevelPreferenceControllerTest.java)

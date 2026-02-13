@@ -16,6 +16,7 @@
 package com.android.settings.display
 
 import android.Manifest.permission.WRITE_SECURE_SETTINGS
+import android.content.Context
 import android.provider.Settings
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController.AVAILABLE
@@ -25,7 +26,10 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
+import com.android.settingslib.metadata.preferencesapi.types.IntInRange
+import kotlin.math.roundToInt
 
 // LINT.IfChange
 @ProvidePreferenceScreen(HdrBrightnessApiScreen.KEY)
@@ -52,15 +56,7 @@ class HdrBrightnessApiScreen :
             purpose = R.string.hdr_brightness_enabled_purpose,
             type = AnyBoolean,
         ) {
-            get {
-                execute {
-                    Settings.Secure.getInt(
-                        context.contentResolver,
-                        Settings.Secure.HDR_BRIGHTNESS_ENABLED,
-                        ON,
-                    ) == ON
-                }
-            }
+            get { execute { context.isHdrBrightnessEnabled() } }
 
             set {
                 permissions(WRITE_SECURE_SETTINGS)
@@ -73,13 +69,52 @@ class HdrBrightnessApiScreen :
                 }
             }
         }
+
+        preference(
+            key = HDR_BRIGHTNESS_BOOST_LEVEL_KEY,
+            purpose = R.string.hdr_brightness_boost_level_purpose,
+            type = IntInRange(min = 0, max = 100), // Use 0-100% in the API.
+        ) {
+            preconditions(R.string.hdr_brightness_boost_level_preconditions) {
+                if (context.isHdrBrightnessEnabled()) {
+                    Allowed
+                } else {
+                    InvalidPreference(
+                        otherPreferenceScreenKey = KEY,
+                        otherPreferenceKey = HDR_BRIGHTNESS_ENABLED_KEY,
+                        reason = R.string.hdr_brightness_disabled,
+                    )
+                }
+            }
+
+            get { execute { (context.getHdrBrightnessBoostLevel() * 100).roundToInt() } }
+
+            set {
+                permissions(WRITE_SECURE_SETTINGS)
+                execute { value ->
+                    Settings.Secure.putFloat(
+                        context.contentResolver,
+                        Settings.Secure.HDR_BRIGHTNESS_BOOST_LEVEL,
+                        value / 100.0f,
+                    )
+                }
+            }
+        }
     }
+
+    private fun Context.isHdrBrightnessEnabled(): Boolean =
+        Settings.Secure.getInt(contentResolver, Settings.Secure.HDR_BRIGHTNESS_ENABLED, ON) == ON
+
+    private fun Context.getHdrBrightnessBoostLevel(): Float =
+        Settings.Secure.getFloat(contentResolver, Settings.Secure.HDR_BRIGHTNESS_BOOST_LEVEL, 1.0f)
 
     companion object {
         const val KEY = "hdr_brightness_detail"
         internal const val HDR_BRIGHTNESS_ENABLED_KEY = "hdr_brightness_enabled"
+        internal const val HDR_BRIGHTNESS_BOOST_LEVEL_KEY = "hdr_brightness_boost_level"
         internal const val ON = 1
         internal const val OFF = 0
     }
 }
-// LINT.ThenChange(HdrBrightnessSettings.java, HdrBrightnessPreferenceController.java)
+// LINT.ThenChange(HdrBrightnessSettings.java, HdrBrightnessPreferenceController.java,
+// HdrBrightnessLevelPreferenceController.java)
