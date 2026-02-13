@@ -15,6 +15,8 @@
  */
 package com.android.settings.display
 
+import android.Manifest.permission.WRITE_SECURE_SETTINGS
+import android.provider.Settings
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.flags.Flags
@@ -23,6 +25,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 // LINT.IfChange
 @ProvidePreferenceScreen(HdrBrightnessApiScreen.KEY)
@@ -43,10 +46,40 @@ class HdrBrightnessApiScreen :
                 HardwareUnsupported(R.string.hdr_brightness_screen_unsupported)
             }
         }
+
+        preference(
+            key = HDR_BRIGHTNESS_ENABLED_KEY,
+            purpose = R.string.hdr_brightness_enabled_purpose,
+            type = AnyBoolean,
+        ) {
+            get {
+                execute {
+                    Settings.Secure.getInt(
+                        context.contentResolver,
+                        Settings.Secure.HDR_BRIGHTNESS_ENABLED,
+                        ON,
+                    ) == ON
+                }
+            }
+
+            set {
+                permissions(WRITE_SECURE_SETTINGS)
+                execute { value ->
+                    Settings.Secure.putInt(
+                        context.contentResolver,
+                        Settings.Secure.HDR_BRIGHTNESS_ENABLED,
+                        if (value) ON else OFF,
+                    )
+                }
+            }
+        }
     }
 
     companion object {
         const val KEY = "hdr_brightness_detail"
+        internal const val HDR_BRIGHTNESS_ENABLED_KEY = "hdr_brightness_enabled"
+        internal const val ON = 1
+        internal const val OFF = 0
     }
 }
 // LINT.ThenChange(HdrBrightnessSettings.java, HdrBrightnessPreferenceController.java)

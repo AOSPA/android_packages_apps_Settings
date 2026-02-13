@@ -31,7 +31,7 @@
         android:layout="@layout/hdr_brightness_preview"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
-        android:key="hdr_brightness_activated"
+        android:key="hdr_brightness_enabled"
         android:title="@string/hdr_brightness_main_switch_title"
         settings:controller="com.android.settings.display.HdrBrightnessPreferenceController"/>
 
