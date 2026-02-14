@@ -28,6 +28,7 @@ import com.android.settingslib.bluetooth.BluetoothCallback
 import com.android.settingslib.bluetooth.CachedBluetoothDevice
 import com.android.settingslib.bluetooth.LocalBluetoothManager
 import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 class AvailableHearingDevicePreferenceCategory(
     context: Context,
@@ -40,6 +41,8 @@ class AvailableHearingDevicePreferenceCategory(
         Utils.getLocalBluetoothManager(context)
     }
     private var fragmentManager: FragmentManager? = null
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createDeviceUpdater(context: Context): BluetoothDeviceUpdater? =
         AvailableHearingDeviceUpdater(context, this, metricsCategory)

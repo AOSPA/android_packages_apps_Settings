@@ -121,8 +121,8 @@ public class RegionSearchPicker extends BaseTimeZonePicker {
         if (requestCode == REQUEST_CODE_ZONE_PICKER) {
             if (resultCode == Activity.RESULT_OK) {
                 getActivity().setResult(Activity.RESULT_OK, data);
+                getActivity().finish();
             }
-            getActivity().finish();
         }
     }
 

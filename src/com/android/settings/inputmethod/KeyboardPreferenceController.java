@@ -20,11 +20,13 @@ import android.content.Context;
 import android.hardware.input.InputManager;
 
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
+import com.android.settings.utils.DesktopSettingsUtils;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
@@ -45,18 +47,24 @@ public class KeyboardPreferenceController extends BasePreferenceController
     }
 
     @Override
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+        mPreference = screen.findPreference(getPreferenceKey());
+    }
+
+    @Override
     public void onInputDeviceAdded(int deviceId) {
-        updateSummary();
+        updateState(mPreference);
     }
 
     @Override
     public void onInputDeviceRemoved(int deviceId) {
-        updateSummary();
+        updateState(mPreference);
     }
 
     @Override
     public void onInputDeviceChanged(int deviceId) {
-        updateSummary();
+        updateState(mPreference);
     }
 
     @Override
@@ -70,26 +78,20 @@ public class KeyboardPreferenceController extends BasePreferenceController
     }
 
     @Override
-    public void updateState(Preference preference) {
-        mPreference = preference;
-        updateSummary();
-    }
-
-    @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
     }
 
-    private void updateSummary() {
-        if (mPreference == null) {
-            return;
+    @Override
+    public CharSequence getSummary() {
+        if (DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(mContext)) {
+            return  mContext.getString(R.string.device_keyboard_settings_summary);
         }
+
         final List<HardKeyboardDeviceInfo> keyboards =
                 PhysicalKeyboardFragment.getHardKeyboards(mContext);
-        if (keyboards.isEmpty()) {
-            mPreference.setSummary(R.string.keyboard_settings_summary);
-        } else {
-            mPreference.setSummary(R.string.keyboard_settings_with_physical_keyboard_summary);
-        }
+
+        return mContext.getString(keyboards.isEmpty() ? R.string.keyboard_settings_summary :
+                 R.string.keyboard_settings_with_physical_keyboard_summary);
     }
 }

@@ -160,6 +160,9 @@ class SetupSupervisionActivity : FragmentActivity() {
         iconDrawable.mutate()
         iconDrawable.setTintList(layout?.getPrimaryColor())
         layout?.setIcon(iconDrawable)
+        layout
+            ?.getDescriptionTextView()
+            ?.setContentDescription(getString(R.string.supervision_intro_content_description))
 
         val footer = layout?.getMixin(FooterBarMixin::class.java)
         footer?.setPrimaryButton(

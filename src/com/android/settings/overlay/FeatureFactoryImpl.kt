@@ -61,6 +61,8 @@ import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvid
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProviderImpl
 import com.android.settings.localepicker.LocaleFeatureProviderImpl
+import com.android.settings.network.telephony.TelephonyFeatureProvider
+import com.android.settings.network.telephony.TelephonyFeatureProviderImpl
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProviderImpl
 import com.android.settings.panel.PanelFeatureProviderImpl
@@ -220,4 +222,8 @@ open class FeatureFactoryImpl : FeatureFactory() {
     }
 
     override val usbFeatureProvider by lazy { UsbFeatureProviderImpl(appContext) }
+
+    override val telephonyFeatureProvider: TelephonyFeatureProvider by lazy {
+        TelephonyFeatureProviderImpl(appContext)
+    }
 }

@@ -28,6 +28,7 @@ import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+// LINT.IfChange
 @SearchIndexable
 public class DoubleTapScreenSettings extends DashboardFragment {
 
@@ -71,3 +72,4 @@ public class DoubleTapScreenSettings extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.double_tap_screen_settings);
 }
+// LINT.ThenChange(DoubleTapApiScreen.kt)

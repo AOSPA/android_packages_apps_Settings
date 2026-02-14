@@ -54,11 +54,6 @@
             android:title="@string/system_and_updates_subpage_title"
             android:fragment="com.android.settings.safetycenter.ui.SystemAndUpdatesSubpageFragment"
             settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
-        <Preference
-            android:key="cellular_network_security_subpage"
-            android:title="@string/cellular_network_security_subpage_title"
-            android:fragment="com.android.settings.safetycenter.ui.CellularNetworkSecuritySubpageFragment"
-            settings:controller="com.android.settings.safetycenter.ui.SubpagePreferenceController"/>
     </PreferenceCategory>
     <PreferenceCategory
         android:key="privacy_category"

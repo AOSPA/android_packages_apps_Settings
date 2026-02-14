@@ -79,8 +79,13 @@ class DisplayBlockSurfaceRenderer(
     private var letterboxBackgroundSurface: SurfaceControl? = null
     private var wallpaperSurface: SurfaceControl? = null
 
-    init {
+    fun attach() {
         wallpaperView.holder.addCallback(holderCallback)
+    }
+
+    fun detach() {
+        wallpaperView.holder.removeCallback(holderCallback)
+        injector.handler.removeCallbacks(updateSurfaceViewRunnable)
     }
 
     fun reset(

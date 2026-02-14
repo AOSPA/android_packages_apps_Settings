@@ -30,6 +30,7 @@ import com.android.settingslib.accessibility.AccessibilityUtils
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.LayoutPreference
 import java.util.Locale
@@ -58,6 +59,8 @@ class CaptionAppearancePreviewPreference(context: Context) :
     }
 
     private var layoutPreference: LayoutPreference? = null
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context): Preference {
         return LayoutPreference(context, R.layout.captioning_preview).apply {

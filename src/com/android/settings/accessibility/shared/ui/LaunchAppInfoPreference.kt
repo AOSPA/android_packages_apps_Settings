@@ -23,6 +23,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 /**
  * Preference that launches the app info page for a given package name.
@@ -40,6 +41,8 @@ class LaunchAppInfoPreference(
 
     override val indexable
         get() = false
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun intent(context: Context): Intent? {
         return if (context.packageManager.isPackageAvailable(packageName)) {

@@ -90,7 +90,10 @@ class SupervisionDashboardFragment : CatalystFragment() {
         if (cachedData.isNotEmpty()) {
             preferenceDataMap = cachedData
         }
-        val shouldRedirectToSetupSupervision = supervisionManager?.isSupervisionEnabled == false
+
+        val isSupervisionEnabled = supervisionManager?.isSupervisionEnabled == true
+        val isPinSet = supervisionManager?.createConfirmSupervisionCredentialsIntent() != null
+        val shouldRedirectToSetupSupervision = !isSupervisionEnabled || !isPinSet
 
         preferences.forEach { preference ->
             val newSummary = preferenceDataMap?.get(preference.key)?.summary

@@ -36,15 +36,17 @@ fun <T> Context.telephonyCallbackFlow(
 
 /** Creates an instance of a cold Flow for Telephony callback. */
 fun <T> TelephonyManager.telephonyCallbackFlow(
-    block: ProducerScope<T>.() -> TelephonyCallback,
-): Flow<T> = callbackFlow {
-    val callback = block()
+    block: ProducerScope<T>.() -> TelephonyCallback
+): Flow<T> =
+    callbackFlow {
+            val callback = block()
 
-    registerTelephonyCallback(Dispatchers.Default.asExecutor(), callback)
+            registerTelephonyCallback(Dispatchers.Default.asExecutor(), callback)
 
-    awaitClose { unregisterTelephonyCallback(callback) }
-}.conflate().flowOn(Dispatchers.Default)
+            awaitClose { unregisterTelephonyCallback(callback) }
+        }
+        .conflate()
+        .flowOn(Dispatchers.Default)
 
 fun Context.telephonyManager(subId: Int): TelephonyManager =
-    getSystemService(TelephonyManager::class.java)!!
-        .createForSubscriptionId(subId)
+    getSystemService(TelephonyManager::class.java)!!.createForSubscriptionId(subId)

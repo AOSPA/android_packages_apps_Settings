@@ -28,3 +28,13 @@ flag {
   description: "Enables the binary transparency option in Safety Center"
   bug: "458810078"
 }
+
+flag {
+  name: "schedule_watch_ranging_availability_with_job_scheduler"
+  namespace: "safety_center"
+  description: "Moves watch ranging availability work to job scheduler"
+  bug: "468398472"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}

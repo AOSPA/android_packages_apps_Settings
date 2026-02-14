@@ -36,6 +36,8 @@
     <string name="double_twist_gesture_screen_usermanager_not_available" translatable="false">UserManager is null.</string>
     <string name="gesture_swipe_down_fingerprint_screen_preconditions" translatable="false">The device must have the fingerprint hardware.</string>
     <string name="gesture_swipe_down_fingerprint_screen_hardware_unsupported" translatable="false">This device does not support the fingerprint hardware.</string>
+    <string name="double_tap_screen_preconditions" translatable="false">The device must have a double-tap sensor.</string>
+    <string name="double_tap_screen_hardware_unsupported" translatable="false">This device does not support the double-tap sensor.</string>
     <string name="pickup_gesture_screen_preconditions" translatable="false">The device must have a pickup gesture sensor that is recognized by the system\'s Ambient Display configuration.</string>
     <string name="pickup_gesture_screen_hardware_unsupported" translatable="false">This device does not support the pickup gesture sensor.</string>
     <string name="tap_screen_gesture_preconditions" translatable="false">The device must support a tap sensor for Ambient Display configuration.</string>
@@ -61,7 +63,6 @@
     <string name="contacts_storage_screen_unsupported" translatable="false">Error reading the default account.</string>
     <string name="account_detail_screen_preconditions" translatable="false">Requires that the specific account name exists for the user.</string>
     <string name="account_security_subpage_screen_preconditions" translatable="false">Requires account security data to be available in Safety Center.</string>
-    <string name="account_security_subpage_unavailable" translatable="false">Account security is currently unavailable because no information or issues have been reported by security sources.</string>
     <string name="device_unlock_subpage_screen_preconditions" translatable="false">Requires device unlock data to be available in Safety Center.</string>
     <string name="device_unlock_subpage_screen_unavailable" translatable="false">No device unlock data has been reported to Safety Center.</string>
     <string name="terms_of_address_screen_preconditions" translatable="false">The default system language should be either any French locale (except for fr-CA) or one of the pseudo-locales (en-XA or ar-XB).</string>
@@ -76,4 +77,10 @@
     <string name="usb_charge_connected_device_unavailable" translatable="false">This option is only available when the connected device and cable support being charged via USB.</string>
     <string name="wifi_data_usage_screen_preconditions" translatable="false">The device must have a Wi-Fi radio.</string>
     <string name="wifi_data_usage_screen_unavailable" translatable="false">Wi-Fi data usage is not available on this device.</string>
+    <string name="auto_data_switching_preconditions" translatable="false">Requires a secondary SIM and mobile data capability to enable automatic switching.</string>
+    <string name="data_roaming_switch_preconditions" translatable="false">Available when the mobile network is active and a SIM is present.</string>
+    <string name="data_roaming_switch_availability_preconditions" translatable="false">Enabled when data roaming is not restricted by work policy and the carrier allows manual roaming configuration.</string>
+    <string name="sensor_toggle_unsupported" translatable="false">This device does not support hardware toggles for this sensor.</string>
+    <string name="safety_source_unavailable" translatable="false">These settings are not supported.</string>
+    <string name="content_capture_unavailable" translatable="false">This feature is not available on your device or has been disabled by your administrator.</string>
 </resources>

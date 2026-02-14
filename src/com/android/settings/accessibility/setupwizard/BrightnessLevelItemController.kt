@@ -35,9 +35,10 @@ class BrightnessLevelItemController(
     private val brightnessLevelMetadata: BrightnessLevelPreference = BrightnessLevelPreference()
     private var brightnessObserver: KeyedObserver<String>? = null
 
-    public override fun bindData(item: Item) = updateSummary()
+    override fun bindData(item: Item) = updateSummary()
 
     override fun onStart() {
+        super.onStart()
         val observer = KeyedObserver<String> { _, _ -> updateSummary() }
         brightnessObserver = observer
 

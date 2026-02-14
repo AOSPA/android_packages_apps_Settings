@@ -43,6 +43,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
 
+// LINT.IfChange
 /** The controller to handle main switch to turn on or turn off accessibility autoclick. */
 public class ToggleAutoclickMainSwitchPreferenceController
         extends TogglePreferenceController implements DefaultLifecycleObserver {
@@ -158,3 +159,4 @@ public class ToggleAutoclickMainSwitchPreferenceController
         return mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_PC);
     }
 }
+// LINT.ThenChange(autoclick/ui/AutoclickMainSwitchPreference.kt)

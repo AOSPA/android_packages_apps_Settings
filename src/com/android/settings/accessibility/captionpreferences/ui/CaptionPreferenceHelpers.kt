@@ -14,49 +14,13 @@
  * limitations under the License.
  */
 
+@file:Suppress("ktlint:standard:filename")
+
 package com.android.settings.accessibility.captionpreferences.ui
 
 import android.content.Context
-import androidx.annotation.ArrayRes
 import androidx.preference.Preference
 import com.android.settings.accessibility.ColorPreference
-
-/**
- * A helper class for managing lazy-initialized maps that associate preference values with their
- * corresponding summary strings.
- *
- * This is particularly useful for list-like preferences where the summary needs to be updated based
- * on the currently selected value from a set of resource arrays.
- *
- * @param K The type of the key used to look up summaries.
- */
-class SummaryMap<K>(
-    @param:ArrayRes private val valuesRes: Int,
-    @param:ArrayRes private val entriesRes: Int,
-    private val useIntValues: Boolean = true,
-    private val keySelector: (Context, Any) -> K,
-) {
-    private var map: Map<K, String>? = null
-
-    fun getSummary(context: Context, currentValue: K?): CharSequence? {
-        if (currentValue == null) return null
-        val currentMap =
-            map
-                ?: run {
-                    val values =
-                        if (useIntValues) {
-                            context.resources.getIntArray(valuesRes).toTypedArray()
-                        } else {
-                            context.resources.getStringArray(valuesRes)
-                        }
-                    val entries = context.resources.getStringArray(entriesRes)
-                    values.indices
-                        .associate { i -> keySelector(context, values[i]) to entries[i] }
-                        .also { map = it }
-                }
-        return currentMap[currentValue]
-    }
-}
 
 /** Helper for creating a [ColorPreference] widget. */
 fun createColorWidget(context: Context, valuesRes: Int, titlesRes: Int): Preference =

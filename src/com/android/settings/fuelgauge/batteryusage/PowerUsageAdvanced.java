@@ -25,6 +25,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.UserHandle;
 import android.provider.SearchIndexableResource;
 import android.util.Log;
 import android.util.Pair;
@@ -37,6 +38,7 @@ import androidx.loader.content.Loader;
 import androidx.preference.PreferenceScreen;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.internal.content.PackageMonitor;
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.fuelgauge.BatteryBroadcastReceiver;
@@ -88,6 +90,14 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                     restartBatteryStatsLoader(BatteryBroadcastReceiver.BatteryUpdateType.MANUAL);
                 }
             };
+    private final PackageMonitor mPackageMonitor =
+            new PackageMonitor() {
+                @Override
+                public void onPackageRemoved(String packageName, int uid) {
+                    Log.d(TAG, "onPackageRemoved: " + packageName + ", uid = " + uid);
+                    BatteryDiffEntry.clearCacheForUid(uid);
+                }
+            };
 
     @VisibleForTesting BatteryTipsController mBatteryTipsController;
     @VisibleForTesting BatteryChartPreferenceController mBatteryChartPreferenceController;
@@ -107,6 +117,8 @@ public class PowerUsageAdvanced extends PowerUsageBase {
                 BootBroadcastReceiver.invokeJobRecheck(getContext());
             }
         });
+        BatteryDiffEntry.clearCache();
+        mPackageMonitor.register(getContext(), Looper.getMainLooper(), UserHandle.ALL, false);
     }
 
     @Override
@@ -115,6 +127,7 @@ public class PowerUsageAdvanced extends PowerUsageBase {
         if (getActivity().isChangingConfigurations()) {
             BatteryEntry.clearUidCache();
         }
+        mPackageMonitor.unregister();
         mExecutor.shutdown();
     }
 

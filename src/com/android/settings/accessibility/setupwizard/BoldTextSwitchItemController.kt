@@ -35,7 +35,7 @@ class BoldTextSwitchItemController(
 
     private var boldTextObserver: KeyedObserver<String>? = null
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         if (item is SwitchItem) {
             item.isChecked = boldTextDataStore.getBoolean(BoldTextPreference.KEY) ?: false
             item.setOnCheckedChangeListener { _, isChecked -> updateDataStore(isChecked) }
@@ -43,6 +43,7 @@ class BoldTextSwitchItemController(
     }
 
     override fun onStart() {
+        super.onStart()
         val observer = KeyedObserver<String> { _, _ -> bindData(targetItem) }
         boldTextObserver = observer
 

@@ -238,6 +238,7 @@ public class DreamPickerController extends BasePreferenceController {
         @Nullable private RecyclerView mParentRecyclerView;
         @Nullable private Rect mParentViewRect;
         private long mDragScrollStartTimeInMs = SCROLL_NOT_STARTED;
+        private int mInitialDragPosition = RecyclerView.NO_POSITION;
 
         DreamItemTouchHelperCallback(@NonNull RecyclerView recyclerView) {
             super();
@@ -265,6 +266,7 @@ public class DreamPickerController extends BasePreferenceController {
             @Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
             super.onSelectedChanged(viewHolder, actionState);
             if (viewHolder != null && actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+                mInitialDragPosition = viewHolder.getBindingAdapterPosition();
                 viewHolder.itemView.setActivated(true);
                 mParentRecyclerView = findParentRecyclerView(mRecyclerView);
                 if (mParentRecyclerView != null) {
@@ -402,11 +404,17 @@ public class DreamPickerController extends BasePreferenceController {
             commitReordering();
             if (mAdapter != null) {
                 // Notify the adapter to update the displayed order on views.
+                final int currentPosition = viewHolder.getBindingAdapterPosition();
+                if (mInitialDragPosition != RecyclerView.NO_POSITION
+                        && currentPosition != mInitialDragPosition) {
+                    logDreamReordered(currentPosition);
+                }
                 mAdapter.notifyItemRangeChanged(0, mSelectedDreams.size());
             }
             mParentRecyclerView = null;
             mParentViewRect = null;
             mDragScrollStartTimeInMs = SCROLL_NOT_STARTED;
+            mInitialDragPosition = RecyclerView.NO_POSITION;
         }
 
         private void commitReordering() {
@@ -424,6 +432,19 @@ public class DreamPickerController extends BasePreferenceController {
             items.stream().map(DreamItem::getDreamInfo).forEach(mDreamInfos::add);
 
             commitReorderingForSelectedDreams();
+        }
+
+        private void logDreamReordered(int position) {
+            if (position < 0 || position >= mSelectedDreams.size()) {
+                return;
+            }
+
+            final DreamInfo item = mSelectedDreams.get(position);
+            mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
+                    SettingsEnums.ACTION_DREAM_MOVE_ORDER,
+                    SettingsEnums.DREAM,
+                    item.componentName.flattenToString(),
+                    item.order);
         }
     }
 
@@ -575,16 +596,19 @@ public class DreamPickerController extends BasePreferenceController {
 
         @Override
         public void onItemClicked() {
+            int logValue;
             if (dreamsSwitcher()) {
                 updateDreamSelection(mDreamInfo);
+                logValue = mDreamInfo.isActive ? 1 : 0;
             } else {
                 mActiveDream = mDreamInfo;
                 mBackend.setActiveDream(mDreamInfo.componentName);
+                logValue = 1;
             }
             mCallbacks.forEach(Callback::onActiveDreamChanged);
             mMetricsFeatureProvider.action(SettingsEnums.PAGE_UNKNOWN,
                     SettingsEnums.ACTION_DREAM_SELECT_TYPE, SettingsEnums.DREAM,
-                    mDreamInfo.componentName.flattenToString(), 1);
+                    mDreamInfo.componentName.flattenToString(), logValue);
         }
 
         @Override

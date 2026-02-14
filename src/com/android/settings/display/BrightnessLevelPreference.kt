@@ -191,6 +191,7 @@ class BrightnessLevelPreference :
                 android.R.anim.fade_out,
             )
         if (brightnessDialogOnSystemUser()) {
+            options.setOverrideTaskTransition(true)
             context.startActivityAsUser(intent(context)!!, options.toBundle(), UserHandle.SYSTEM)
         } else {
             context.startActivityForResult(preference.key, intent(context), 0, options.toBundle())

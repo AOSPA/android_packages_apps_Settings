@@ -239,10 +239,10 @@
     <string name="security_settings_face_enroll_introduction_message_setup" product="desktop">Use your face to unlock your device, authorize purchases, or sign in to apps</string>
     <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
     <string name="security_settings_face_enroll_improve_face_alert_body" product="default">Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
-    <string name="security_settings_face_enroll_improve_face_alert_body" product="desktop">Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your device or for authentication in apps.</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body" product="desktop">Delete your current face model to set up unlocking with face again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your PIN, pattern, or password to unlock your device or for authentication in apps.</string>
     <!-- Settings suggestion alert body text for re-enrolling a face. [CHAR LIMIT=300] -->
     <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" product="default">Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your phone or for authentication in apps.</string>
-    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" product="desktop">Delete your current face model to set up Face Unlock again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your device or for authentication in apps.</string>
+    <string name="security_settings_face_enroll_improve_face_alert_body_fingerprint" product="desktop">Delete your current face model to set up unlocking with face again.\n\nYour face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your device or for authentication in apps.</string>
     <!-- Text shown on the details of a toggle which disables/enables face unlock, depending if the user's eyes are open. [CHAR LIMIT=70] -->
     <string name="security_settings_face_settings_require_attention_details" product="default">To unlock the phone, your eyes must be open</string>
     <string name="security_settings_face_settings_require_attention_details" product="desktop">To unlock the device, your eyes must be open</string>
@@ -260,7 +260,7 @@
     <string name="security_settings_face_remove_dialog_details_fingerprint_conv" product="desktop">Your face model will be permanently and securely deleted.\n\nAfter deletion, you will need your fingerprint, PIN, pattern, or password to unlock your device.</string>
     <!-- Subtitle shown for contextual setting face enrollment [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_context_subtitle" product="default">Use Face Unlock to unlock your phone</string>
-    <string name="security_settings_face_settings_context_subtitle" product="desktop">Use Face Unlock to unlock your device</string>
+    <string name="security_settings_face_settings_context_subtitle" product="desktop">Unlock your device with your face</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer" product="default">Use your face to unlock your phone or for authentication in apps, like when you sign in or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the phone can unlock it when you don\u2019t intend to.\n\nYour phone can be unlocked by someone else if it\u2019s held up to your face.\n\nYour phone can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
     <!-- Text shown in face settings explaining what your face can be used for. [CHAR LIMIT=NONE] -->
@@ -401,7 +401,7 @@
     <string name="biometric_settings_hand_back_to_guardian" product="desktop">Hand the device back to your parent</string>
     <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_intro_with_activeunlock" product="default">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area.\n\nWatch Unlock is another convenient way to unlock your phone, for example, when your fingers are wet or face isn\u2019t recognized.</string>
-    <string name="biometric_settings_intro_with_activeunlock" product="desktop">When you set up Face Unlock and Fingerprint Unlock, your device will ask for your fingerprint when you wear a mask or are in a dark area.\n\nWatch Unlock is another convenient way to unlock your device, for example, when your fingers are wet or face isn\u2019t recognized.</string>
+    <string name="biometric_settings_intro_with_activeunlock" product="desktop">When you set up unlocking with face and Fingerprint Unlock, your device will ask for your fingerprint when you wear a mask or are in a dark area.\n\nWatch Unlock is another convenient way to unlock your device, for example, when your fingers are wet or face isn\u2019t recognized.</string>
     <!-- Introduction shown in fingerprint page to explain that watch unlock can be used if fingerprint isn't recognized. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_intro_with_fingerprint" product="default">Watch Unlock is another convenient way to unlock your phone, for example, when your fingerprint isn\u2019t recognized.</string>
     <string name="biometric_settings_intro_with_fingerprint" product="desktop">Watch Unlock is another convenient way to unlock your device, for example, when your fingerprint isn\u2019t recognized.</string>
@@ -410,7 +410,7 @@
     <string name="biometric_settings_intro_with_face" product="desktop">Watch Unlock is another convenient way to unlock your device, for example, when your face isn\u2019t recognized.</string>
     <!-- Introduction shown in face and fingerprint page to introduce the biometric feature. [CHAR LIMIT=NONE]-->
     <string name="biometric_settings_intro" product="default">When you set up Face Unlock and Fingerprint Unlock, your phone will ask for your fingerprint when you wear a mask or are in a dark area</string>
-    <string name="biometric_settings_intro" product="desktop">When you set up Face Unlock and Fingerprint Unlock, your device will ask for your fingerprint when you wear a mask or are in a dark area</string>
+    <string name="biometric_settings_intro" product="desktop">When you set up unlocking with face and Fingerprint Unlock, your device will ask for your fingerprint when you wear a mask or are in a dark area</string>
     <!-- Text shown on a toggle which allows or disallows the device to use biometric for unlocking the device. [CHAR LIMIT=50] -->
     <string name="biometric_settings_use_biometric_unlock_phone" product="default">Unlock your phone</string>
     <string name="biometric_settings_use_biometric_unlock_phone" product="desktop">Unlock your device</string>
@@ -561,11 +561,11 @@
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (default) [CHAR LIMIT=NONE] -->
     <string name="lock_screen_password_skip_face_message" product="default">A password is required to set up Face Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (desktop) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_face_message" product="desktop">A PIN is required to set up Face Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_face_message" product="desktop">A PIN is required to set up unlocking with face.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (desktop) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_face_message" product="desktop">A pattern is required to set up Face Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_face_message" product="desktop">A pattern is required to set up unlocking with face.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face. (desktop) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_face_message" product="desktop">A password is required to set up Face Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_face_message" product="desktop">A password is required to set up unlocking with face.\n\nA password protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
     <string name="lock_screen_pin_skip_biometrics_message" product="tablet">A PIN is required to set up Fingerprint Unlock and Face Unlock.\n\nA PIN protects the tablet if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (tablet) [CHAR LIMIT=NONE] -->
@@ -585,11 +585,11 @@
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (default) [CHAR LIMIT=NONE] -->
     <string name="lock_screen_password_skip_biometrics_message" product="default">A password is required to set up Fingerprint Unlock and Face Unlock.\n\nA password protects the phone if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (desktop) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pin_skip_biometrics_message" product="desktop">A PIN is required to set up Fingerprint Unlock and Face Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pin_skip_biometrics_message" product="desktop">A PIN is required to set up unlocking with face and Fingerprint Unlock.\n\nA PIN protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (desktop) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_pattern_skip_biometrics_message" product="desktop">A pattern is required to set up Fingerprint Unlock and Face Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_pattern_skip_biometrics_message" product="desktop">A pattern is required to set up unlocking with face and Fingerprint Unlock.\n\nA pattern protects the device if it\u2019s lost or stolen.</string>
     <!-- Dialog text shown when the user tries to skip setting up a screen lock, warning that they can't continue to set up face or fingerprint. (desktop) [CHAR LIMIT=NONE] -->
-    <string name="lock_screen_password_skip_biometrics_message" product="desktop">A password is required to set up Fingerprint Unlock and Face Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
+    <string name="lock_screen_password_skip_biometrics_message" product="desktop">A password is required to set up unlocking with face and Fingerprint Unlock.\n\nA password protects the device if it\u2019s lost or stolen.</string>
     <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
     <string name="fingerprint_v2_delete_message" product="default">This deletes the fingerprint images and model associated with \'<xliff:g id="fingerprint_id" example="Fingerprint 2">%1$s</xliff:g>\' that are stored on your phone</string>
     <!-- Message shown in a dialog which asks the user to confirm when a single fingerprint gets deleted. [CHAR LIMIT=NONE]-->
@@ -1372,4 +1372,178 @@
     <!-- Sound and vibration settings screen heading. [CHAR LIMIT=30] -->
     <string name="sound_settings" product="default">Sound &amp; vibration</string>
     <string name="sound_settings" product="desktop">Sound</string>
+
+    <!-- Introduction title shown in face enrollment when when asking for parental consent for the face unlock feature [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_consent_introduction_title" product="default">Allow face unlock</string>
+    <!-- Introduction title shown in face enrollment when when asking for parental consent for the face unlock feature [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_consent_introduction_title" product="desktop">Allow unlocking with face</string>
+    <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_introduction_title" product="default">Unlock with your face</string>
+    <!-- Introduction title shown in face enrollment to introduce the face unlock feature [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_introduction_title" product="desktop">Unlock with your face</string>
+    <!-- Footer learn more description shown on face settings page. -->
+    <string name="security_settings_face_footer_learn_more_description" product="default"></string>
+    <!-- Footer learn more description shown on face settings page. -->
+    <string name="security_settings_face_footer_learn_more_description" product="desktop"></string>
+
+    <!-- Description shown for fingerprint settings page. [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_description" product="default"></string>
+    <!-- Description shown for fingerprint settings page. [CHAR LIMIT=22] -->
+    <string name="security_settings_fingerprint_description" product="desktop"></string>
+
+    <!-- Footer learn more URL shown on face settings page  [DO NOT TRANSLATE] -->
+    <string name="security_settings_face_footer_learn_more_url" product="default" translatable="false"></string>
+    <!-- Footer learn more URL shown on face settings page  [DO NOT TRANSLATE] -->
+    <string name="security_settings_face_footer_learn_more_url" product="desktop" translatable="false"></string>
+
+    <!-- Note: Update FaceEnrollParentalConsent.CONSENT_STRING_RESOURCES when any _consent_ strings are added or removed. -->
+    <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
+    <string name="security_settings_face_preference_title" product="default">Face Unlock</string>
+    <!-- Title shown for menu item that launches face settings or enrollment. [CHAR LIMIT=32] -->
+    <string name="security_settings_face_preference_title" product="desktop">Unlock with face</string>
+    <!-- Title shown for menu item that launches face settings or enrollment, for work profile [CHAR LIMIT=50] -->
+    <string name="security_settings_face_profile_preference_title" product="default">Face Unlock for work</string>
+    <!-- Title shown for menu item that launches face settings or enrollment, for work profile [CHAR LIMIT=50] -->
+    <string name="security_settings_face_profile_preference_title" product="desktop">Unlock with face for work</string>
+    <!-- Introduction title shown in face enrollment education screen [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_education_title" product="default">How to set up Face Unlock</string>
+    <!-- Introduction title shown in face enrollment education screen [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_education_title" product="desktop">How to set up unlocking with face</string>
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility" product="default">Set up Face Unlock</string>
+    <!-- Introduction title shown in face enrollment education screen for accessibility [CHAR LIMIT=50]-->
+    <string name="security_settings_face_enroll_education_title_accessibility" product="desktop">Set up unlocking with face</string>
+    <!-- Confirmation dialog message shown when users with system accessibility features enabled try to start the non-accessibility version of enrollment [CHAR LIMIT=150] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" product="default">If accessibility Face Unlock is turned off, some setup steps may not work properly with TalkBack.</string>
+    <!-- Confirmation dialog message shown when users with system accessibility features enabled try to start the non-accessibility version of enrollment [CHAR LIMIT=150] -->
+    <string name="security_settings_face_enroll_education_accessibility_dialog_message" product="desktop">If accessibility unlocking with face is turned off, some setup steps may not work properly with TalkBack.</string>
+
+    <!-- Dialog message for dialog which shows when the Face HAL is not responding. [CHAR LIMIT=45] -->
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" product="default">Can\'t set up Face Unlock</string>
+    <!-- Dialog message for dialog which shows when the Face HAL is not responding. [CHAR LIMIT=65] -->
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" product="desktop">Can\'t set up unlocking with face</string>
+    <!-- Settings suggestion title text for re-enrolling a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_should_re_enroll_title" product="default">Improve Face Unlock performance</string>
+    <!-- Settings suggestion title text for re-enrolling a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_should_re_enroll_title" product="desktop">Improve unlocking with face performance</string>
+    <!-- Settings suggestion subtitle text for re-enrolling a face. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" product="default">Set up Face Unlock again</string>
+    <!-- Settings suggestion subtitle text for re-enrolling a face. [CHAR LIMIT=40] -->
+    <string name="security_settings_face_enroll_should_re_enroll_subtitle" product="desktop">Set up unlocking with face again</string>
+    <!-- Settings suggestion title text for mandatory re-enrolling of a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_must_re_enroll_title" product="default">Set up Face Unlock again</string>
+    <!-- Settings suggestion title text for mandatory re-enrolling of a face. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_enroll_must_re_enroll_title" product="desktop">Set up unlocking with face again</string>
+    <!-- Settings suggestion alert body title for re-enrolling a face. [CHAR LIMIT=60] -->
+    <string name="security_settings_face_enroll_improve_face_alert_title" product="default">Set up Face Unlock</string>
+    <!-- Settings suggestion alert body title for re-enrolling a face. [CHAR LIMIT=60] -->
+    <string name="security_settings_face_enroll_improve_face_alert_title" product="desktop">Set up unlocking with face</string>
+    <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
+    <string name="security_settings_face_settings_use_face_category" product="default">Use Face Unlock for</string>
+    <!-- Title for a category shown for the face settings page. [CHAR LIMIT=20] -->
+    <string name="security_settings_face_settings_use_face_category" product="desktop">Use unlocking with face for</string>
+    <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_settings_preferences_category" product="default">When using Face Unlock</string>
+    <!-- Title for a category shown for the face settings page, followed by items that the user can toggle on/off to require/disable. [CHAR LIMIT=50] -->
+    <string name="security_settings_face_settings_preferences_category" product="desktop">When using unlocking with face</string>
+    <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_confirmation_details" product="default">When using Face Unlock in apps, always require confirmation step</string>
+    <!-- When authenticating in apps, always require confirmation (e.g. confirm button) after a face is authenticated. [CHAR LIMIT=70] -->
+    <string name="security_settings_face_settings_require_confirmation_details" product="desktop">When using unlocking with face in apps, always require confirmation step</string>
+    <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
+    <string name="security_settings_face_settings_enroll" product="default">Set up Face Unlock</string>
+    <!-- Button text in face settings which lets the user enroll their face [CHAR LIMIT=40] -->
+    <string name="security_settings_face_settings_enroll" product="desktop">Set up unlocking with face</string>
+
+    <!-- Title shown in watch unlock require face or fingerprint setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" product="default">Set up Face or Fingerprint Unlock first</string>
+    <!-- Title shown in watch unlock require face or fingerprint setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" product="desktop">Set up to unlock with face or Fingerprint Unlock first</string>
+    <!-- Title shown in watch unlock require face setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_setup_title" product="default">Set up Face Unlock first</string>
+    <!-- Title shown in watch unlock require face setup page [CHAR LIMIT=60] -->
+    <string name="security_settings_activeunlock_require_face_setup_title" product="desktop">Set up unlocking with face first</string>
+
+    <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_biometric_preference_title" product="default">Face &amp; Fingerprint Unlock</string>
+    <!-- Title shown for menu item that launches biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_biometric_preference_title" product="desktop">Unlock with face &amp; Fingerprint Unlock</string>
+    <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_work_biometric_preference_title" product="default">Face &amp; Fingerprint Unlock for work</string>
+    <!-- Title shown for work menu item that launches biometric settings. [CHAR LIMIT=66] -->
+    <string name="security_settings_work_biometric_preference_title" product="desktop">Unlock with face &amp; Fingerprint Unlock for work</string>
+    <!-- Dialog title for dialog which shows when trying to add face in split mode. [CHAR LIMIT=NONE] -->
+    <string name="biometric_settings_add_face_in_split_mode_title" product="default">Can\u2019t set up Face Unlock</string>
+    <!-- Dialog title for dialog which shows when trying to add face in split mode. [CHAR LIMIT=NONE] -->
+    <string name="biometric_settings_add_face_in_split_mode_title" product="desktop">Can\u2019t set up unlocking with face</string>
+    <!-- Dialog message for dialog which shows when trying to add face in split mode. [CHAR LIMIT=NONE] -->
+    <string name="biometric_settings_add_face_in_split_mode_message" product="default">Exit split screen to set up Face Unlock</string>
+    <!-- Dialog message for dialog which shows when trying to add face in split mode. [CHAR LIMIT=NONE] -->
+    <string name="biometric_settings_add_face_in_split_mode_message" product="desktop">Exit split screen to set up unlocking with face</string>
+
+    <!-- Title for the Face and Fingerprint preference. [CHAR LIMIT=60] -->
+    <string name="private_space_biometric_title" product="default">Face &amp; Fingerprint Unlock</string>
+    <!-- Title for the Face and Fingerprint preference. [CHAR LIMIT=60] -->
+    <string name="private_space_biometric_title" product="desktop">Unlock with face &amp; Fingerprint Unlock</string>
+    <!-- Title for the Face and Fingerprint preference for private space. [CHAR LIMIT=60] -->
+    <string name="private_space_biometric_unlock_title" product="default">Face &amp; Fingerprint Unlock for private space</string>
+    <!-- Title for the Face and Fingerprint preference for private space. [CHAR LIMIT=60] -->
+    <string name="private_space_biometric_unlock_title" product="desktop">Unlocking with face &amp; Fingerprint Unlock for private space</string>
+    <!-- Title for the Face preference when fingerprint unlock is not supported on device. [CHAR LIMIT=40] -->
+    <string name="private_space_face_title" product="default">Face Unlock</string>
+    <!-- Title for the Face preference when fingerprint unlock is not supported on device. [CHAR LIMIT=40] -->
+    <string name="private_space_face_title" product="desktop">Unlock with face</string>
+    <!-- Title for the Face unlock for private space preference. [CHAR LIMIT=60] -->
+    <string name="private_space_face_unlock_title" product="default">Face Unlock for private space</string>
+    <!-- Title for the Face unlock for private space preference. [CHAR LIMIT=60] -->
+    <string name="private_space_face_unlock_title" product="desktop">Unlocking with face for private space</string>
+    <!-- Introduction title shown in private space face enrollment [CHAR LIMIT=90] -->
+    <string name="private_space_face_enroll_introduction_title" product="default">Set up Face Unlock for private space</string>
+    <!-- Introduction title shown in private space face enrollment [CHAR LIMIT=90] -->
+    <string name="private_space_face_enroll_introduction_title" product="desktop">Set up unlocking with face for private space</string>
+    <!-- Text shown on the details of a toggle which enables/disables confirmation (i.e. confirm button) each time face unlock is used for private space. [CHAR LIMIT=90] -->
+    <string name="private_space_face_settings_require_confirmation_details" product="default">When using Face Unlock, always require confirmation step</string>
+    <!-- Text shown on the details of a toggle which enables/disables confirmation (i.e. confirm button) each time face unlock is used for private space. [CHAR LIMIT=90] -->
+    <string name="private_space_face_settings_require_confirmation_details" product="desktop">When unlocking with face, always require confirmation step</string>
+
+    <!-- Title for preference that guides the user to skip Face Unlock setup [CHAR LIMIT=60]-->
+    <string name="face_unlock_skip_face" product="default">Continue without Face Unlock</string>
+    <!-- Title for preference that guides the user to skip Face Unlock setup [CHAR LIMIT=60]-->
+    <string name="face_unlock_skip_face" product="desktop">Continue without unlocking with face</string>
+
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has face enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys" product="default">"Your screen lock and Face Unlock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has face enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_face_authbound_keys" product="desktop">"Your screen lock and unlocking with face will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has face authentication and fingerprint enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" product="default">"Your screen lock and Face &amp; Fingerprint Unlock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+    <!-- Content of the dialog shown when the user removes any device screen lock and the user has face authentication and fingerprint enrolled and there are apps with auth-bound keys that will be affected [CHAR LIMIT=NONE] -->
+    <string name="unlock_disable_frp_warning_content_face_fingerprint_authbound_keys" product="desktop">"Your screen lock, unlocking with face, and Fingerprint Unlock will be removed.<xliff:g id="empty_line">\n\n</xliff:g>Tap to pay won\u2019t be available.<xliff:g id="empty_line">\n\n</xliff:g>Wallet, payment, and other apps that require authentication may not work properly."</string>
+
+    <!-- Header on first screen of choose password/PIN as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_password_header_for_face" product="default">To use Face Unlock, set password</string>
+    <!-- Header on first screen of choose password/PIN as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_password_header_for_face" product="desktop">To unlock with face, set a password</string>
+    <!-- Header on first screen of choose pattern as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pattern_header_for_face" product="default">To use Face Unlock, set pattern</string>
+    <!-- Header on first screen of choose pattern as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pattern_header_for_face" product="desktop">To unlock with face, set a pattern</string>
+    <!-- Header on first screen of choose password/PIN as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pin_header_for_face" product="default">To use Face Unlock, set PIN</string>
+    <!-- Header on first screen of choose password/PIN as backup for Face Unlock flow. If this string cannot be translated in under 40 characters, please translate "Set Face Unlock backup" [CHAR LIMIT=40] -->
+    <string name="lockpassword_choose_your_pin_header_for_face" product="desktop">To unlock with face, set PIN</string>
+
+    <!-- Summary on issue card for Identity Check in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="identity_check_issue_card_summary" product="default">Identity Check prevents unwanted access to your apps. Now available with any app that uses Fingerprint or Face Unlock.</string>
+    <!-- Summary on issue card for Identity Check in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="identity_check_issue_card_summary" product="desktop">Identity Check prevents unwanted access to your apps. Now available with any app that uses unlocking with face and Fingerprint Unlock.</string>
+    <!-- Summary for Identity Check promo card in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="identity_check_promo_card_summary" product="default">Updates:\n<ul><li>Identity Check adds protection to any app that uses Fingerprint or Face Unlock</li>\n<li>Over time, Identity Check may add more ways to verify it\'s you and secure apps on your device. <a href="https://support.google.com/android?p=identity_check">Learn more about when and where you’\re protected</a></li></ul></string>
+    <!-- Summary for Identity Check promo card in Safety Center [CHAR LIMIT=NONE] -->
+    <string name="identity_check_promo_card_summary" product="desktop">Updates:\n<ul><li>Identity Check adds protection to any app that uses unlocking with face or Fingerprint Unlock.</li>\n<li>Over time, Identity Check may add more ways to verify it\'s you and secure apps on your device. <a href="https://support.google.com/android?p=identity_check">Learn more about when and where you’\re protected</a></li></ul></string>
+
+    <!-- Summary for promo notification for Identity Check -->
+    <string name="identity_check_notification_summary" product="default">Identity Check prevents unwanted access to your apps. Now available with any app that uses Fingerprint or Face Unlock.</string>
+    <!-- Summary for promo notification for Identity Check -->
+    <string name="identity_check_notification_summary" product="desktop">Identity Check prevents unwanted access to your apps. Now available with any app that uses unlocking with face and Fingerprint Unlock.</string>
 </resources>
