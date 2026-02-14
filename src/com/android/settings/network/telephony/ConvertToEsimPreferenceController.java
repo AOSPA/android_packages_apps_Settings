@@ -36,6 +36,7 @@ import android.telephony.euicc.EuiccManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
@@ -61,6 +62,7 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
     private LifecycleOwner mLifecycleOwner;
     private MobileNetworkRepository mMobileNetworkRepository;
     private List<SubscriptionInfoEntity> mSubscriptionInfoEntityList = new ArrayList<>();
+    @Nullable
     private SubscriptionInfoEntity mSubscriptionInfoEntity;
     private static int sQueryFlag =
             PackageManager.MATCH_SYSTEM_ONLY | PackageManager.MATCH_DIRECT_BOOT_AUTO
@@ -84,6 +86,11 @@ public class ConvertToEsimPreferenceController extends TelephonyBasePreferenceCo
     public void init(int subId, SubscriptionInfoEntity subInfoEntity) {
         mSubId = subId;
         mSubscriptionInfoEntity = subInfoEntity;
+    }
+
+    public void init(int subId, LifecycleOwner lifecycleOwner) {
+        mSubId = subId;
+        mLifecycleOwner = lifecycleOwner;
     }
 
     @OnLifecycleEvent(ON_START)

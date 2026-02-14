@@ -47,6 +47,7 @@ import org.robolectric.RobolectricTestParameterInjector;
 
 import java.util.Locale;
 
+// LINT.IfChange
 @RunWith(RobolectricTestParameterInjector.class)
 public class HdrBrightnessLevelPreferenceControllerTest {
     private HdrBrightnessLevelPreferenceController mPreferenceController;
@@ -134,3 +135,4 @@ public class HdrBrightnessLevelPreferenceControllerTest {
         verify(mPreference).setSliderStateDescription(percentage);
     }
 }
+// LINT.ThenChange(HdrBrightnessApiScreenTest.kt)

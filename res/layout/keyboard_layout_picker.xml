@@ -24,7 +24,8 @@
     <FrameLayout
         android:id="@+id/keyboard_layout_preview_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginHorizontal="@dimen/keyboard_picker_margin_small"
         android:background="@drawable/keyboard_review_layout_background">
         <ImageView
@@ -59,7 +60,8 @@
         android:id="@+id/keyboard_layouts"
         android:layout_marginTop="@dimen/keyboard_picker_margin_small"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="@color/materialColorSurfaceContainer"/>
 
 </LinearLayout>

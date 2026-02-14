@@ -55,6 +55,7 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
     protected var supportedApps: List<SupportedApp> = emptyList()
     private var supervisionClient: SupervisionMessengerClient? = null
     private var settingsStore: SettingsStore? = null
+    private var lifecycleContext: PreferenceLifecycleContext? = null
 
     override fun getTitle(context: Context): CharSequence? =
         StringUtil.getIcuPluralsString(
@@ -80,44 +81,27 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
         get() = R.string.menu_key_supervision
 
     override fun onCreate(context: PreferenceLifecycleContext) {
-        supervisionClient = supervisionClient ?: SupervisionMessengerClient(context)
-
+        lifecycleContext = context
         settingsStore = settingsStore ?: SettingsSecureStore.get(context)
 
-        context.lifecycleScope.launch {
-            val rawSupportedApps =
-                withContext(Dispatchers.IO) {
-                        supervisionClient?.getSupportedApps(listOf(supportedAppsKey))
-                    }
-                    ?.get(supportedAppsKey) ?: emptyList()
+        if (Flags.enableSupportedAppsRetrievalUpdates()) {
+            if (!isContainer(context)) {
+                supervisionClient = supervisionClient ?: SupervisionMessengerClient(context)
+                context.lifecycleScope.launch {
+                    supportedApps =
+                        withContext(Dispatchers.IO) { filterSupportedApps(context, supportedApps) }
+                    context.notifyPreferenceChange(key)
+                }
+            }
+        } else {
+            supervisionClient = supervisionClient ?: SupervisionMessengerClient(context)
+            context.lifecycleScope.launch {
+                supportedApps =
+                    withContext(Dispatchers.IO) { filterSupportedApps(context, supportedApps) }
+                addSupportedAppsPreferences(context)
 
-            supportedApps =
-                rawSupportedApps
-                    .filter { it.packageName != null }
-                    .filter { supportedApp ->
-                        val packageName = supportedApp.packageName!!
-                        try {
-                            context.packageManager.getApplicationInfo(packageName, 0)
-                            true
-                        } catch (e: PackageManager.NameNotFoundException) {
-                            Log.d(
-                                TAG,
-                                "Package not found for supported app, skipping: $packageName",
-                                e,
-                            )
-                            false
-                        } catch (e: Exception) {
-                            Log.d(
-                                TAG,
-                                "Exception thrown for supported app, skipping: $packageName",
-                                e,
-                            )
-                            false
-                        }
-                    }
-            addSupportedAppsPreferences(context)
-
-            context.notifyPreferenceChange(key)
+                context.notifyPreferenceChange(key)
+            }
         }
     }
 
@@ -137,8 +121,53 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +UntitledPreferenceCategoryMetadata(SUPPORTED_APPS_GROUP, R.string.supported_apps_group_purpose)
+            +UntitledPreferenceCategoryMetadata(
+                SUPPORTED_APPS_GROUP,
+                R.string.supported_apps_group_purpose,
+            ) +=
+                {
+                    if (Flags.enableSupportedAppsRetrievalUpdates()) {
+                        addAsync(coroutineScope, Dispatchers.Default) {
+                            supervisionClient =
+                                supervisionClient ?: SupervisionMessengerClient(context)
+                            supportedApps = filterSupportedApps(context, supportedApps)
+                            for ((index, supportedApp) in supportedApps.withIndex()) {
+                                +SupervisionSupportedAppPreference(
+                                    supportedApp.title,
+                                    supportedApp.summary,
+                                    supportedApp.packageName!!,
+                                    SupervisionSupportedAppPreference.KEY + index.toString(),
+                                    supportedApp.learnMoreLink,
+                                )
+                            }
+                            lifecycleContext?.notifyPreferenceChange(key)
+                        }
+                    }
+                }
             +SupervisionWebContentFiltersFooterPreference()
+        }
+
+    private suspend fun filterSupportedApps(
+        context: Context,
+        supportedApps: List<SupportedApp>,
+    ): List<SupportedApp> =
+        supportedApps.ifEmpty {
+            (supervisionClient?.getSupportedApps(listOf(supportedAppsKey))?.get(supportedAppsKey)
+                    ?: emptyList())
+                .filter { it.packageName != null }
+                .filter { supportedApp ->
+                    val packageName = supportedApp.packageName!!
+                    try {
+                        context.packageManager.getApplicationInfo(packageName, 0)
+                        true
+                    } catch (e: PackageManager.NameNotFoundException) {
+                        Log.d(TAG, "Package not found for supported app, skipping: $packageName", e)
+                        false
+                    } catch (e: Exception) {
+                        Log.d(TAG, "Exception thrown for supported app, skipping: $packageName", e)
+                        false
+                    }
+                }
         }
 
     private fun addSupportedAppsPreferences(context: PreferenceLifecycleContext) {

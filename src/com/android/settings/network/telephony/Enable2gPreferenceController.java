@@ -19,6 +19,7 @@ import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.os.UserManager;
 import android.telephony.CarrierConfigManager;
@@ -36,6 +37,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.telephony.RILConstants;
 import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
@@ -66,6 +68,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         implements DefaultLifecycleObserver {
 
     private static final String LOG_TAG = "Enable2gPreferenceController";
+    public static final String REQUEST_KEY = "request_key";
     private static final long BITMASK_2G = TelephonyManager.NETWORK_TYPE_BITMASK_GSM
             | TelephonyManager.NETWORK_TYPE_BITMASK_GPRS
             | TelephonyManager.NETWORK_TYPE_BITMASK_EDGE
@@ -162,8 +165,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
                                 showNetworkProtectionDialog(
                                         R.string.network_protection_2g_off_alert_dialog_title,
                                         R.string.network_protection_2g_off_alert_dialog_desc,
-                                        R.string.network_protection_2g_alert_dialog_turn_off_btn,
-                                        false);
+                                        R.string.network_protection_2g_alert_dialog_turn_off_btn);
                             }
                             return false;
                         }
@@ -193,6 +195,11 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
         }
         if (!mShowSummaryAsSimName) {
             preference.setSummary(mContext.getString(R.string.enable_2g_summary));
+        }
+
+        if (isCarrierDisabled2gNetwork()) {
+            mFragment.getParentFragmentManager().setFragmentResultListener(REQUEST_KEY, mFragment,
+                    (requestKey, result) -> onDialogResult(result));
         }
     }
 
@@ -365,24 +372,28 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     }
 
 
-    private void showNetworkProtectionDialog(int titleResId, int descResId, int positiveBtntxtResId,
-                                             boolean isSetAllowedNetworkTypes) {
+    private void showNetworkProtectionDialog(int titleResId, int descResId,
+                                             int positiveBtntxtResId) {
         NetworkProtectionDialogFragment.show(mFragment, mContext.getString(titleResId),
                 mContext.getString(descResId, getSimCardName()),
-                mContext.getString(positiveBtntxtResId), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        if (id == DialogInterface.BUTTON_POSITIVE) {
-                            setAllowedNetworkTypes(isSetAllowedNetworkTypes);
-                            NotificationManager notificationManager = mContext.getSystemService(
-                                    NotificationManager.class);
-                            notificationManager.cancel(
-                                    NetworkChangeNotification.NETWORK_PROTECTION_2G_NOTIFICATION_ID
-                                    + mSubId);
-                        } else {
-                            mRestrictedPreference.setChecked(!isSetAllowedNetworkTypes);
-                        }
-                        dialog.dismiss();
-                    }
-                });
+                mContext.getString(positiveBtntxtResId));
+    }
+
+    @VisibleForTesting
+    protected void onDialogResult(@NonNull Bundle result) {
+        if (result.getInt(REQUEST_KEY) == DialogInterface.BUTTON_POSITIVE) {
+            if (mRestrictedPreference.isChecked()) {
+                mRestrictedPreference.setChecked(false);
+            }
+            setAllowedNetworkTypes(false);
+            NotificationManager notificationManager = mContext.getSystemService(
+                    NotificationManager.class);
+            notificationManager.cancel(
+                    NetworkChangeNotification.NETWORK_PROTECTION_2G_NOTIFICATION_ID + mSubId);
+        } else {
+            if (!mRestrictedPreference.isChecked()) {
+                mRestrictedPreference.setChecked(true);
+            }
+        }
     }
 }

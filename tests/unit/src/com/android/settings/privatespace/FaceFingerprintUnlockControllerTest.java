@@ -87,28 +87,14 @@ public class FaceFingerprintUnlockControllerTest {
 
     /** Tests that the controller is always available. */
     @Test
-    public void getAvailabilityStatus_whenFlagsEnabled_returnsAvailable() {
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_ENABLE_BIOMETRICS_TO_UNLOCK_PRIVATE_SPACE);
-
+    public void getAvailabilityStatus_returnsAvailable() {
         assertThat(mFaceFingerprintUnlockController.isAvailable()).isEqualTo(true);
-    }
-
-    /** Tests that the controller is not available when Biometrics flag is not enabled. */
-    @Test
-    public void getAvailabilityStatus_whenBiometricFlagDisabled_returnsFalse() {
-        mSetFlagsRule.disableFlags(
-                android.multiuser.Flags.FLAG_ENABLE_BIOMETRICS_TO_UNLOCK_PRIVATE_SPACE);
-
-        assertThat(mFaceFingerprintUnlockController.isAvailable()).isEqualTo(false);
     }
 
     /** Tests that preference is disabled and summary says same as device lock. */
     @Test
     public void getSummary_whenScreenLock() {
         doReturn(false).when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_ENABLE_BIOMETRICS_TO_UNLOCK_PRIVATE_SPACE);
 
         mFaceFingerprintUnlockController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isFalse();
@@ -119,8 +105,6 @@ public class FaceFingerprintUnlockControllerTest {
     @Test
     public void getSummary_whenSeparateProfileLock() {
         doReturn(true).when(mLockPatternUtils).isSeparateProfileChallengeEnabled(anyInt());
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_ENABLE_BIOMETRICS_TO_UNLOCK_PRIVATE_SPACE);
 
         mFaceFingerprintUnlockController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isTrue();
