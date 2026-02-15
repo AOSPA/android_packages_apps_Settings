@@ -125,6 +125,7 @@ import com.android.settings.gestures.SwipeToNotificationApiScreen
 import com.android.settings.gestures.SystemNavigationGestureScreen
 import com.android.settings.gestures.TapScreenGestureApiScreen
 import com.android.settings.inputmethod.AvailableVirtualKeyboardApiScreen
+import com.android.settings.inputmethod.SpellCheckerApiScreen
 import com.android.settings.inputmethod.UserDictionaryListApiScreen
 import com.android.settings.language.LanguageAndRegionApiFirstScreen
 import com.android.settings.language.LanguageAndRegionScreen
@@ -430,6 +431,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = AudioAdjustmentScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AutoclickScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ButtonShortcutSettingScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = SpellCheckerApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CaptioningPropertiesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CaptioningAppearanceScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CaptioningMoreOptionsScreen.KEY),
