@@ -48,6 +48,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 /** Preference screen for Apps -> Individual App Info -> Mobile data usage. */
 @ProvidePreferenceScreen(DataUsageAppDetailScreen.KEY, parameterized = true)
@@ -64,6 +65,7 @@ private constructor(
     PreferenceTitleProvider,
     PreferenceLifecycleProvider,
     PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA, TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
 
     private lateinit var keyedObserver: KeyedObserver<String>
 
@@ -104,8 +106,6 @@ private constructor(
 
     override fun getMetricsCategory() = SettingsEnums.APP_DATA_USAGE
 
-    override fun tags(context: Context) =
-        arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? =
         appInfo?.loadLabel(context.packageManager)

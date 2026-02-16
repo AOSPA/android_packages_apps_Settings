@@ -30,11 +30,13 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import java.util.Calendar
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /** Date Time settings. */
 // LINT.IfChange
 @ProvidePreferenceScreen(DateTimeSettingsScreen.KEY)
 open class DateTimeSettingsScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
     override val key: String
         get() = KEY

@@ -38,7 +38,6 @@ class DoubleTwistGestureApiFirstScreen :
         fragment = DoubleTwistGestureSettings::class,
         purpose = R.string.double_twist_gesture_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
         // This preconditions detect whether this screen will be available or not.

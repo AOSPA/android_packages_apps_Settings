@@ -33,7 +33,6 @@ class GestureSettingsApiScreen :
         fragment = GestureSettings::class,
         purpose = R.string.gesture_settings_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
         preconditions(R.string.gesture_settings_screen_preconditions) {

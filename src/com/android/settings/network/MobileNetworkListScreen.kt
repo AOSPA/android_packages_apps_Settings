@@ -52,7 +52,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 @ProvidePreferenceScreen(MobileNetworkListScreen.KEY)
 open class MobileNetworkListScreen(context: Context) :
     PreferenceScreenMixin,
@@ -62,6 +62,8 @@ open class MobileNetworkListScreen(context: Context) :
     PreferenceLifecycleProvider,
     PreferenceRestrictionMixin,
     OnPreferenceClickListener {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+
 
     private var subscriptionInfoList: List<SubscriptionInfo>? = null
     private var onSubscriptionsChangedListener: OnSubscriptionsChangedListener? = null

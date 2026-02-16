@@ -34,7 +34,6 @@ class ManagedProfileApiScreen :
         fragment = ManagedProfileSettings::class,
         purpose = R.string.managed_profile_settings_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 

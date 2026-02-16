@@ -40,10 +40,13 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_STORAGE
 
 @ProvidePreferenceScreen(StoragePreferenceScreen.KEY)
 open class StoragePreferenceScreen(private val context: Context) :
     PreferenceScreenMixin, PreferenceHierarchyGenerator<Int> {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_STORAGE)
+
 
     override val key: String
         get() = KEY

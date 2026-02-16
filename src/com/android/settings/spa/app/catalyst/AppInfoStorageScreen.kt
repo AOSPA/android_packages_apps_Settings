@@ -51,6 +51,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_STORAGE
 
 @ProvidePreferenceScreen(AppInfoStorageScreen.KEY, parameterized = true)
 open class AppInfoStorageScreen
@@ -66,6 +67,8 @@ private constructor(
     PreferenceSummaryProvider,
     PreferenceTitleProvider,
     PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_STORAGE, TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
 
     private val packageName: String =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -107,8 +110,7 @@ private constructor(
 
     override fun getMetricsCategory() = SettingsEnums.APPLICATIONS_APP_STORAGE
 
-    override fun tags(context: Context) =
-        arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
 
     override fun getTitle(context: Context): CharSequence? =
         appInfo?.loadLabel(context.packageManager)

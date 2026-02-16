@@ -31,7 +31,6 @@ class UnrestrictedDataAccessApiScreen :
         fragment = UnrestrictedDataAccess::class,
         purpose = R.string.unrestricted_data_settings_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 

@@ -25,6 +25,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_BATTERY
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -33,6 +34,8 @@ import kotlinx.coroutines.CoroutineScope
 // LINT.IfChange
 @ProvidePreferenceScreen(PowerUsageAdvancedScreen.KEY)
 open class PowerUsageAdvancedScreen : PreferenceScreenMixin, PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_BATTERY)
+
     override val key: String
         get() = KEY
 

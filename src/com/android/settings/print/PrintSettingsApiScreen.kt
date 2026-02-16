@@ -31,7 +31,6 @@ class PrintSettingsApiScreen :
         fragment = PrintSettingsFragment::class,
         purpose = R.string.print_settings_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 
