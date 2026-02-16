@@ -57,7 +57,7 @@ class DisplayBlockTest {
     fun setUp() {
         mockTransaction = mock(SurfaceControl.Transaction::class.java)
         injector = TestInjector(context, mockTransaction)
-        block = DisplayBlock(injector)
+        block = DisplayBlock(context, injector)
         parentView = FrameLayout(context)
 
         parentView.addView(block)
