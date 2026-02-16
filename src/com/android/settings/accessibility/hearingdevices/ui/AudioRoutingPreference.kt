@@ -25,6 +25,7 @@ import com.android.settings.accessibility.AccessibilityAudioRoutingFragment
 import com.android.settings.core.SubSettingLauncher
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 class AudioRoutingPreference : PreferenceMetadata, PreferenceAvailabilityProvider {
     override val key: String
@@ -38,6 +39,8 @@ class AudioRoutingPreference : PreferenceMetadata, PreferenceAvailabilityProvide
 
     override val summary: Int
         get() = R.string.bluetooth_audio_routing_summary
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun intent(context: Context): Intent? =
         SubSettingLauncher(context)
