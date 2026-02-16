@@ -145,8 +145,6 @@ val Context.getImeiList: List<String>
                     }
                 }
             }
-            Log.d(ImeiPreference.TAG, "each slot's IMEI: " +
-                    "${imeiListFromSlot.map {Rlog.pii(ImeiPreference.TAG, it)}}")
 
             imeiListFromSlot.sorted()
             if (primaryImei.isNotEmpty() && imeiListFromSlot.size >= 2) {

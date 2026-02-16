@@ -77,3 +77,13 @@ flag {
   description: "Add a progress bar to the positive button in the passkey or PIN dialog"
   bug: "347270238"
 }
+
+flag {
+  name: "enable_bonding_loss_ui_fix"
+  namespace: "cross_device_experiences"
+  description: "Gates whether to enable the UI fix for bluetooth bonding loss"
+  bug: "478718607"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}

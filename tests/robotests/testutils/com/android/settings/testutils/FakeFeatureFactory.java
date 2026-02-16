@@ -44,6 +44,7 @@ import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvid
 import com.android.settings.i18n.RegionalCustomizationFeatureProvider;
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider;
 import com.android.settings.localepicker.LocaleFeatureProvider;
+import com.android.settings.network.telephony.TelephonyFeatureProvider;
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider;
 import com.android.settings.onboarding.OnboardingFeatureProvider;
 import com.android.settings.overlay.DockUpdaterFeatureProvider;
@@ -113,6 +114,7 @@ public class FakeFeatureFactory extends FeatureFactory {
     public AudioSharingFeatureProvider mAudioSharingFeatureProvider;
     public RegionalCustomizationFeatureProvider mRegionalCustomizationFeatureProvider;
     public UsbFeatureProvider mUsbFeatureProvider;
+    public TelephonyFeatureProvider mTelephonyFeatureProvider;
 
     /**
      * Call this in {@code @Before} method of the test class to use fake factory.
@@ -377,5 +379,10 @@ public class FakeFeatureFactory extends FeatureFactory {
     @Override
     public @NotNull UsbFeatureProvider getUsbFeatureProvider() {
         return mUsbFeatureProvider;
+    }
+
+    @Override
+    public @NotNull TelephonyFeatureProvider getTelephonyFeatureProvider() {
+        return mTelephonyFeatureProvider;
     }
 }

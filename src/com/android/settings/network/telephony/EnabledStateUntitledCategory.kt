@@ -17,14 +17,15 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import com.android.settings.R
 import com.android.settings.network.SubscriptionsChangeListener
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceGroup
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.UntitledPreferenceCategory
-import com.android.settings.R
 
 // LINT.IfChange
 class EnabledStateUntitledCategory(val subId: Int) :
@@ -39,6 +40,8 @@ class EnabledStateUntitledCategory(val subId: Int) :
 
     override val purpose: Int
         get() = R.string.enabled_state_container_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context) = UntitledPreferenceCategory(context)
 

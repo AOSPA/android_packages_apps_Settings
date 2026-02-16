@@ -23,6 +23,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.PresetPreference
 import com.android.settings.accessibility.captionpreferences.data.CaptionFontSizeDataStore
 import com.android.settings.accessibility.captionpreferences.data.CaptionStyleDataStore
+import com.android.settings.accessibility.shared.utils.SummaryMap
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.DiscreteStringValue

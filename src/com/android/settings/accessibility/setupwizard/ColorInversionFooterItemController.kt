@@ -28,7 +28,7 @@ class ColorInversionFooterItemController(private val context: Context, item: Ite
     // helpResource = 0 avoids showing "Learn more" links in Setup Wizard flow
     private val colorInversionFooterMetadata = FooterPreference(helpResource = 0)
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         val title = colorInversionFooterMetadata.getTitle(context)
         val intro = context.getString(colorInversionFooterMetadata.introductionTitle)
         item.summary = title

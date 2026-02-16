@@ -54,6 +54,16 @@
     <string name="a11y_audio_adjustment_screen_purpose" translatable="false">Screen allows the users to customize their device\'s sound output to match their physical hearing needs or their specific listening environment</string>
     <string name="a11y_mono_audio_setting_purpose" translatable="false">Whether to combine left and right audio channels into a single track played through both speakers</string>
     <string name="a11y_audio_balance_purpose" translatable="false">The balance of audio volume between the left and right speakers</string>
+    <string name="a11y_autoclick_screen_purpose" translatable="false">Screen allows users to set a \'dwell time\' so the device automatically performs a click whenever the cursor stops moving. This enables full navigation of the interface without the need to physically press a button on an external pointer device.</string>
+    <string name="a11y_autoclick_intro_purpose" translatable="false">Short introduction on what autoclick feature is.</string>
+    <string name="a11y_autoclick_illustration_purpose" translatable="false">Shows an illustration of the autoclick feature.</string>
+    <string name="a11y_autoclick_main_switch_purpose" translatable="false">Allows users to turn on or off the autoclick feature.</string>
+    <string name="a11y_autoclick_shortcut_purpose" translatable="false">Allows users to quickly turn on or off the autoclick feature via the selected shortcuts.</string>
+    <string name="a11y_autoclick_delay_purpose" translatable="false">Allows users to configure the cursor \'dwell time\' before perform an action automatically.</string>
+    <string name="a11y_autoclick_cursor_area_size_purpose" translatable="false">Sets the tolerance threshold for cursor drift; determines how much a user can move the mouse before the dwell-click countdown resets.</string>
+    <string name="a11y_autoclick_ignore_minor_cursor_movement_purpose" translatable="false">Disables auto-clicking for small, unintentional cursor shifts to improve accuracy for users with high-sensitivity mice or steady-hand challenges.</string>
+    <string name="a11y_autoclick_revert_to_left_click_purpose" translatable="false">Automatically switches the click type back to a standard Left Click after a special action (like Right Click or Double Click) is performed, streamlining repetitive navigation.</string>
+    <string name="a11y_autoclick_footer_purpose" translatable="false">Explains when autoclick feature would be useful.</string>
     <string name="animator_duration_scale_purpose" translatable="false">Whether system animations are removed to reduce movement on the screen.</string>
     <string name="disable_window_blurs_purpose" translatable="false">Whether to reduce translucent blur effects on backgrounds and panels to make them easier to see.</string>
     <string name="accessibility_color_and_motion_feedback_purpose" translatable="false">feedback</string>
@@ -211,6 +221,10 @@
     <string name="double_twist_gesture_screen_purpose" translatable="false">Allows the user to toggle the feature that enables switching between the front and rear cameras by twisting the device twice</string>
     <string name="gesture_double_twist_purpose" translatable="false">Enables the gesture to switch cameras by twisting the device</string>
     <!-- Flip camera for selfie screen end -->
+    <!-- Double-tap to check device screen begin -->
+    <string name="double_tap_screen_purpose" translatable="false">Allows the user to wake the display to check notifications and other information by double-tapping the screen while it is off</string>
+    <string name="gesture_double_tap_screen_purpose" translatable="false">Enables the gesture to check device\'s time, notifications, and other info, double-tap device screen.</string>
+    <!-- Double-tap to check device screen end -->
     <!-- Lift to check device screen begin -->
     <string name="pickup_gesture_screen_purpose" translatable="false">Allows the user to toggle the feature that automatically wakes the screen or activates the ambient display when the device is physically lifted</string>
     <string name="gesture_pick_up_purpose" translatable="false">Whether the screen should automatically wake or show the ambient display when the device is physically lifted</string>
@@ -221,6 +235,9 @@
     <!-- Tap to check device screen end -->
     <!-- Battery information screen begin -->
     <string name="battery_info_screen_purpose" translatable="false">Allows users to enable and configure Battery Saver, including choosing between Standard and Extreme saving modes, and managing Adaptive Battery optimization.</string>
+    <string name="battery_info_manufacture_date_purpose" translatable="false">Displays the date the battery was manufactured.</string>
+    <string name="battery_info_first_usage_date_purpose" translatable="false">Displays the date the battery was first used.</string>
+    <string name="battery_info_cycle_count_purpose" translatable="false">Displays the battery charge cycle count.</string>
     <!-- Battery information screen end -->
     <!-- Spatial audio screen begin -->
     <string name="spatial_audio_screen_purpose" translatable="false">Allows users to configure Spatial Audio settings for an immersive sound experience with speakers and headphones.</string>
@@ -371,6 +388,7 @@
     <string name="access_switch_purpose" translatable="false">access_switch</string>
     <string name="app_info_header_purpose" translatable="false">app_info_header</string>
     <string name="footer_purpose" translatable="false">footer</string>
+    <string name="opening_links_screen_purpose" translatable="false">Allows users to manage how installed apps handle supported web links</string>
     <string name="special_access_all_files_access_app_detail_purpose" translatable="false">special_access_all_files_access_app_detail</string>
     <string name="special_access_all_files_access_app_list_purpose" translatable="false">Allows users to view and manage which applications have \'All files access\' permission, which enables them to access, modify, and delete any files on the device.</string>
     <string name="special_access_draw_overlay_app_detail_purpose" translatable="false">special_access_draw_overlay_app_detail</string>
@@ -517,11 +535,18 @@
     <string name="data_usage_summary_purpose" translatable="false">data_usage_summary</string>
     <string name="telephony_apn_key_purpose" translatable="false">telephony_apn_key</string>
     <string name="mobile_network_pref_screen_purpose" translatable="false">mobile_network_pref_screen</string>
+    <string name="mobile_network_pref_screen_parameter_sub_id_purpose" translatable="false">The subscription ID</string>
+    <string name="mobile_network_pref_screen_parameter_sub_id_description" translatable="false">The active subscription ID and display name of the current SIM.</string>
+    <string name="mobile_network_auto_data_switching_purpose" translatable="false">Allows your phone to automatically switch to this SIM for mobile data if your primary network loses coverage, ensuring you stay connected without interruption.</string>
+    <string name="mobile_network_data_roaming_switching_purpose" translatable="false">Allows your phone to connect to data services when roaming outside your primary network area.</string>
     <string name="device_state_bedtime_mode_screen_purpose" translatable="false">device_state_bedtime_mode_screen</string>
     <string name="device_state_dnd_mode_display_settings_purpose" translatable="false">device_state_dnd_mode_display_settings</string>
     <string name="device_state_dnd_mode_screen_purpose" translatable="false">device_state_dnd_mode_screen</string>
     <string name="wifi_calling_purpose" translatable="false">wifi_calling</string>
     <string name="wifi_network_details_purpose" translatable="false">wifi_network_details</string>
+    <string name="wifi_details_settings_purpose" translatable="false">Allows users to view and manage the details of a saved Wi-Fi network.</string>
+    <string name="wifi_details_parameter_purpose" translatable="false">The key of the saved network</string>
+    <string name="wifi_details_parameter_description" translatable="false">A unique key representing a saved Wi-Fi network</string>
     <string name="legal_information_purpose" translatable="false">Allows users to view legal documents and attributions related to the device\'s software and assets, including third-party licenses and source code information.</string>
     <string name="display_settings_screen_purpose" translatable="false">Allows users to manage display and touch settings such as brightness, theme, color profiles, screen timeout, and screen refresh rate.</string>
     <string name="screen_timeout_purpose" translatable="false">Allows users to configure how long the screen stays on before automatically turning off, including options for time-based intervals and intelligent features that monitor usage or attention.</string>
@@ -635,4 +660,21 @@
     <!-- Device unlock settings screens end -->
     <string name="available_virtual_keyboard_screen_purpose" translatable="false">Allows users to enable and disable input method editors and to invoke settings activities specific to each input method editor.</string>
     <string name="wifi_notify_open_networks_purpose" translatable="false">Allows users to manage notifications for available open Wi-Fi networks, including enabling or disabling alerts when a high-quality public network is detected nearby.</string>
+    <string name="wifi_allow_wep_networks_purpose" translatable="false">Allows the device to connect to legacy Wi-Fi networks using the insecure WEP security protocol.</string>
+    <string name="privacy_controls_screen_purpose" translatable="false">Allows users to manage privacy-related controls like camera and microphone access, and view location data sharing updates.</string>
+    <string name="privacy_camera_toggle_purpose" translatable="false">Controls whether apps can access the device camera.</string>
+    <string name="privacy_mic_toggle_purpose" translatable="false">Controls whether apps can access the device microphone.</string>
+    <string name="show_clip_access_notification_purpose" translatable="false">Controls whether a notification is shown when an app accesses the clipboard.</string>
+    <string name="show_password_purpose" translatable="false">Controls whether passwords are shown briefly as you type them.</string>
+    <string name="health_connect_purpose" translatable="false">Links to Health Connect settings to manage health and fitness data sharing.</string>
+    <string name="app_function_access_purpose" translatable="false">Links to App Function Access settings to manage app interaction with system functions.</string>
+    <string name="location_data_sharing_updates_purpose" translatable="false">Links to updates about how apps share location data.</string>
+    <string name="privacy_location_access_purpose" translatable="false">Links to general location settings.</string>
+    <!-- Privacy controls screen end -->
+    <string name="app_security_subpage_screen_purpose" translatable="false">Displays app security status and scanning information from safety sources.</string>
+    <string name="system_and_updates_subpage_screen_purpose" translatable="false">Displays system update status and Google Play system update information.</string>
+    <string name="more_security_privacy_screen_purpose" translatable="false">Displays additional security and privacy settings, including lock screen notifications and content capture.</string>
+    <string name="privacy_media_controls_lockscreen_purpose" translatable="false">Controls whether media controls are shown on the lock screen.</string>
+    <string name="privacy_camera_extensions_fallback_purpose" translatable="false">Controls whether software fallback is allowed for camera extensions.</string>
+    <string name="content_capture_purpose" translatable="false">Controls whether apps can use on-device intelligence to personalize experiences.</string>
 </resources>

@@ -40,8 +40,8 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider
 import com.android.settingslib.metadata.ValidatedKeyParameters
-import com.android.settingslib.metadata.preferencesapi.FlagContext
 import com.android.settingslib.metadata.preferencesapi.ApiOperationContext
+import com.android.settingslib.metadata.preferencesapi.FlagContext
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
@@ -124,10 +124,7 @@ class SettingsLaunchpadActivity : Activity() {
         if (screenMetadata is PreferencesApiScreen) {
             val checkScreenFlag = screenMetadata.flag?.check(FlagContext(this)) ?: true
             if (!checkScreenFlag) { // Do not launch the screen if flag is disabled.
-                Log.w(
-                    TAG,
-                    "Screen flag is disabled for key '$screenKey'. Aborting launch.",
-                )
+                Log.w(TAG, "Screen flag is disabled for key '$screenKey'. Aborting launch.")
                 return
             }
 
@@ -142,7 +139,9 @@ class SettingsLaunchpadActivity : Activity() {
             // the precondition checks are fast and won't cause ANRs.
             val screenPreconditionsCheck =
                 runBlocking { screenMetadata.screenPreconditions?.check(opContext) } ?: Allowed
-            if (screenPreconditionsCheck != Allowed) { // Do not launch the screen if preconditions are not met.
+            if (
+                screenPreconditionsCheck != Allowed
+            ) { // Do not launch the screen if preconditions are not met.
                 val reason = (screenPreconditionsCheck as Disallowed).getReason(opContext.context)
                 Log.w(
                     TAG,
@@ -151,25 +150,31 @@ class SettingsLaunchpadActivity : Activity() {
                 return
             }
 
-            val spaRoutePrefix = screenMetadata.spaRoutePrefix
-            if (!spaRoutePrefix.isNullOrEmpty()) {
+            val spaRoute = screenMetadata.getSpaRoute()
+            if (!spaRoute.isNullOrEmpty()) {
                 startScreen(
                     screenMetadata,
-                    { getSpaActivityIntent(spaRoutePrefix) },
-                    { startSpaActivity(spaRoutePrefix) },
+                    { getSpaActivityIntent(spaRoute) },
+                    { startSpaActivity(spaRoute) },
                 )
                 return
             }
         }
 
-        val fragmentClassName =
-            screenMetadata.fragmentClass()?.name
-                ?: run {
-                    Log.e(TAG, "Fragment class name is null for key: $screenKey")
-                    return
-                }
+        val fragmentClass =
+            try {
+                screenMetadata.fragmentClass()
+            } catch (e: IllegalStateException) {
+                Log.e(TAG, "Invalid screen implementation for key: $screenKey", e)
+                null
+            }
 
-        launchFragment(fragmentClassName, screenKey, screenArgsBundle, screenMetadata)
+        if (fragmentClass == null) {
+            Log.e(TAG, "Fragment class name is null for key: $screenKey")
+            return
+        }
+
+        launchFragment(fragmentClass.name, screenKey, screenArgsBundle, screenMetadata)
     }
 
     private fun launchFragment(

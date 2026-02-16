@@ -46,7 +46,7 @@ class AccessibilityServiceItemController(
     private val serviceComponentString: String,
 ) : BaseItemController(targetItem) {
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         ThreadUtils.postOnBackgroundThread {
             val info = findAccessibilityServiceInfo(serviceComponentString)
             val isVisible = info != null

@@ -114,13 +114,15 @@ class ShortcutDataStoreTest {
         value =
             [
                 "{targetSdkIsAtLeastR: true, isAccessibilityTool: true, " +
-                    "hasQsTileName: true, expectedDefaultShortcutType: $QUICK_SETTINGS}",
+                    "hasQsTileName: true, isInSetupWizard: false, expectedDefaultShortcutType: $QUICK_SETTINGS}",
                 "{targetSdkIsAtLeastR: true, isAccessibilityTool: true, " +
-                    "hasQsTileName: false, expectedDefaultShortcutType: $SOFTWARE}",
+                    "hasQsTileName: true, isInSetupWizard: true, expectedDefaultShortcutType: $SOFTWARE}",
+                "{targetSdkIsAtLeastR: true, isAccessibilityTool: true, " +
+                    "hasQsTileName: false, isInSetupWizard: false, expectedDefaultShortcutType: $SOFTWARE}",
                 "{targetSdkIsAtLeastR: true, isAccessibilityTool: false, " +
-                    "hasQsTileName: false, expectedDefaultShortcutType: $SOFTWARE}",
+                    "hasQsTileName: false, isInSetupWizard: false, expectedDefaultShortcutType: $SOFTWARE}",
                 "{targetSdkIsAtLeastR: false, isAccessibilityTool: true, " +
-                    "hasQsTileName: false, expectedDefaultShortcutType: $HARDWARE}",
+                    "hasQsTileName: false, isInSetupWizard: false, expectedDefaultShortcutType: $HARDWARE}",
             ]
     )
     @Test
@@ -128,19 +130,19 @@ class ShortcutDataStoreTest {
         targetSdkIsAtLeastR: Boolean,
         isAccessibilityTool: Boolean,
         hasQsTileName: Boolean,
+        isInSetupWizard: Boolean,
         expectedDefaultShortcutType: Int,
     ) {
-
         if (!targetSdkIsAtLeastR) {
             serviceInfo.resolveInfo.serviceInfo.applicationInfo.targetSdkVersion =
                 Build.VERSION_CODES.Q
         }
-        serviceInfo.isAccessibilityTool = isAccessibilityTool
+        whenever(serviceInfo.isAccessibilityTool).thenReturn(isAccessibilityTool)
 
         if (hasQsTileName) {
             whenever(serviceInfo.tileServiceName).thenReturn("Fake Tile name")
         }
-        val storage = createDataStore()
+        val storage = createDataStore(isInSetupWizard)
 
         storage.setBoolean("key", true)
 
@@ -148,11 +150,12 @@ class ShortcutDataStoreTest {
             .contains(serviceInfo.componentName.flattenToString())
     }
 
-    private fun createDataStore(): ShortcutDataStore =
+    private fun createDataStore(isInSetupWizard: Boolean = false): ShortcutDataStore =
         ShortcutDataStore(
             context,
             serviceInfo,
             testScope.backgroundScope,
             SettingsSecureStore.get(context),
+            isInSetupWizard = isInSetupWizard,
         )
 }

@@ -42,6 +42,7 @@ import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvid
 import com.android.settings.i18n.RegionalCustomizationFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
+import com.android.settings.network.telephony.TelephonyFeatureProvider
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.onboarding.OnboardingFeatureProvider
 import com.android.settings.overlay.FeatureFactory.Companion.setFactory
@@ -167,6 +168,9 @@ abstract class FeatureFactory {
     abstract val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider
     /** Gets implementation for USB related feature. */
     abstract val usbFeatureProvider: UsbFeatureProvider
+
+    /** Gets implementation for Telephony related feature. */
+    abstract val telephonyFeatureProvider: TelephonyFeatureProvider
 
     companion object {
         private var _factory: FeatureFactory? = null

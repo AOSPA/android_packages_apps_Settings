@@ -29,6 +29,7 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
+import java.util.stream.Collectors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -46,7 +47,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.shareIn
-import java.util.stream.Collectors
 
 private const val TAG = "SubscriptionRepository"
 
@@ -154,6 +154,13 @@ class SubscriptionRepository(private val context: Context) {
             .onEach { Log.d(TAG, "activeSubscriptionIdList: $it") }
             .flowOn(Dispatchers.Default)
 
+    fun activeSubscriptionListInfoFlow(): Flow<List<SubscriptionInfo>?> =
+        subscriptionsChangedFlow()
+            .map { subscriptionManager.getActiveSubscriptionInfoList() }
+            .distinctUntilChanged()
+            .conflate()
+            .flowOn(Dispatchers.Default)
+
     fun activeSubscriptionInfoFlow(subId: Int): Flow<SubscriptionInfo?> =
         subscriptionsChangedFlow()
             .map { subscriptionManager.getActiveSubscriptionInfo(subId) }
@@ -164,7 +171,8 @@ class SubscriptionRepository(private val context: Context) {
     fun removableSubscriptionInfoListFlow(): Flow<List<SubscriptionInfo>> {
         return subscriptionsChangedFlow()
             .map {
-                subscriptionManager.availableSubscriptionInfoList?.stream()
+                subscriptionManager.availableSubscriptionInfoList
+                    ?.stream()
                     ?.filter { sub: SubscriptionInfo -> !sub.isEmbedded }
                     ?.collect(Collectors.toList()) ?: emptyList()
             }
@@ -252,8 +260,9 @@ fun Context.subscriptionsChangedFlow(): Flow<Unit> =
 
 /** Subscription with invalid sim slot index has lowest sort order. */
 val SubscriptionInfo.sortableSimSlotIndex: Int
-    get() = if (simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
-        simSlotIndex
-    } else {
-        Int.MAX_VALUE
-    }
+    get() =
+        if (simSlotIndex != SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
+            simSlotIndex
+        } else {
+            Int.MAX_VALUE
+        }

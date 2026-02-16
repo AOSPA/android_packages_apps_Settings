@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.captionpreferences.ui
+package com.android.settings.accessibility.shared.utils
 
 import android.content.Context
 import android.content.res.Resources

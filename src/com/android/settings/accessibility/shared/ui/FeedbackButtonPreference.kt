@@ -25,6 +25,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.ButtonPreference
 
@@ -51,6 +52,8 @@ open class FeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManag
 
     override fun isAvailable(context: Context): Boolean =
         !context.isInSetupWizard() && feedbackManager.isAvailable()
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context): Preference =
         ButtonPreference(context).apply {

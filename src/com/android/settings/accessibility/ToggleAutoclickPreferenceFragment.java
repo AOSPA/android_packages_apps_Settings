@@ -23,8 +23,10 @@ import android.content.ComponentName;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.autoclick.ui.AutoclickScreen;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
@@ -65,12 +67,18 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.accessibility_autoclick_settings;
+        return Flags.catalystAutoclickScreen() ? 0 : R.xml.accessibility_autoclick_settings;
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
+        return AutoclickScreen.KEY;
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        if (Flags.catalystAutoclickScreen()) return;
 
         // Set up delay controller.
         use(ToggleAutoclickDelayBeforeClickController.class).setFragment(this);
@@ -91,5 +99,6 @@ public class ToggleAutoclickPreferenceFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.accessibility_autoclick_settings);
+            new BaseSearchIndexProvider(
+                    Flags.catalystAutoclickScreen() ? 0 : R.xml.accessibility_autoclick_settings);
 }

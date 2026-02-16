@@ -25,6 +25,7 @@ import com.android.settingslib.core.instrumentation.Instrumentable.METRICS_CATEG
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 class MagnificationSurveyButtonPreference(metricsCategory: Int = METRICS_CATEGORY_UNKNOWN) :
     BaseSurveyButtonPreference(metricsCategory) {
@@ -34,6 +35,8 @@ class MagnificationSurveyButtonPreference(metricsCategory: Int = METRICS_CATEGOR
 
     override val surveyKey: String
         get() = SURVEY_KEY
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)

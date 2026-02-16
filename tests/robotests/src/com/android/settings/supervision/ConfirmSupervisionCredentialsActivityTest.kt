@@ -448,7 +448,10 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    @DisableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+        com.android.systemui.Flags.FLAG_LARGE_SCREEN_BP,
+    )
     fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton_flagDisabled() {
         setupDefaultMocks()
         val recoveryInfo = SupervisionRecoveryInfo("email", "default", STATE_PENDING, null)
@@ -481,7 +484,10 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+        com.android.systemui.Flags.FLAG_LARGE_SCREEN_BP,
+    )
     fun getBiometricPrompt_recoveryEmailExist_showForgotPinButton_flagEnabled() {
         setupDefaultMocks()
         setCanLaunchPinRecovery(true)
@@ -490,7 +496,7 @@ class ConfirmSupervisionCredentialsActivityTest {
         val biometricPrompt = mActivity.getBiometricPrompt()
 
         assertThat(biometricPrompt.title)
-            .isEqualTo(mActivity.getString(R.string.supervision_full_screen_pin_verification_title))
+            .isEqualTo(mActivity.getString(R.string.supervision_pin_verification_title))
         assertThat(biometricPrompt.isConfirmationRequired).isTrue()
         assertThat(biometricPrompt.allowedAuthenticators)
             .isEqualTo(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
@@ -513,7 +519,10 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    @DisableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+        com.android.systemui.Flags.FLAG_LARGE_SCREEN_BP,
+    )
     fun getBiometricPrompt_recoveryInfoEmpty_noForgotPinButton_flagDisabled() {
         setupDefaultMocks()
         whenever(mockSupervisionManager.supervisionRecoveryInfo).thenReturn(null)
@@ -530,7 +539,10 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+        com.android.systemui.Flags.FLAG_LARGE_SCREEN_BP,
+    )
     fun getBiometricPrompt_recoveryInfoEmpty_noForgotPinButton_flagEnabled() {
         setupDefaultMocks()
         setCanLaunchPinRecovery(false)
@@ -539,7 +551,7 @@ class ConfirmSupervisionCredentialsActivityTest {
         val biometricPrompt = mActivity.getBiometricPrompt()
 
         assertThat(biometricPrompt.title)
-            .isEqualTo(mActivity.getString(R.string.supervision_full_screen_pin_verification_title))
+            .isEqualTo(mActivity.getString(R.string.supervision_pin_verification_title))
         assertThat(biometricPrompt.isConfirmationRequired).isTrue()
         assertThat(biometricPrompt.allowedAuthenticators)
             .isEqualTo(BiometricManager.Authenticators.DEVICE_CREDENTIAL)
@@ -629,6 +641,23 @@ class ConfirmSupervisionCredentialsActivityTest {
         val fallbackOptions = biometricPrompt.getFallbackOptions()
 
         assertThat(fallbackOptions).isEmpty()
+    }
+
+    @Test
+    @EnableFlags(com.android.systemui.Flags.FLAG_LARGE_SCREEN_BP)
+    fun getBiometricPrompt_withBpFlagEnabled_setsLogo() {
+        setupDefaultMocks()
+        mActivityController.setup()
+
+        val biometricPrompt = mActivity.getBiometricPrompt()
+
+        assertThat(biometricPrompt.title)
+            .isEqualTo(mActivity.getString(R.string.supervision_pin_verification_title))
+        assertThat(biometricPrompt.subtitle)
+            .isEqualTo(mActivity.getString(R.string.supervision_pin_verification_subtitle))
+        assertThat(biometricPrompt.logoDescription)
+            .isEqualTo(mActivity.getString(R.string.supervision_settings_title))
+        assertThat(biometricPrompt.logoBitmap).isNotNull()
     }
 
     @Test

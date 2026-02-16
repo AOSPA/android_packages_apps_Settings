@@ -22,10 +22,13 @@ import android.content.Context
 import android.net.Uri
 import com.android.settings.R
 import com.android.settings.accessibility.shared.ui.ImageUriPreference
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 internal class A11yActivityIllustrationPreference(
     private val shortcutInfo: AccessibilityShortcutInfo
 ) : ImageUriPreference() {
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getImageUri(context: Context): Uri? {
         return shortcutInfo.run {

@@ -38,7 +38,7 @@ class AccessibilityServiceFooterItemController(
             loadHtmlFooter = true,
         )
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         with(accessibilityServiceFooterMetadata) {
             val title = getTitle(context)
             val intro = getIntroductionTitle(context)

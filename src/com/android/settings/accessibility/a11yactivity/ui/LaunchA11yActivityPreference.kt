@@ -29,6 +29,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityStatsLogUtils
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.ButtonPreference
 
@@ -42,6 +43,8 @@ class LaunchA11yActivityPreference(private val shortcutInfo: AccessibilityShortc
 
     override val indexable
         get() = false
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? {
         val activityLabel = shortcutInfo.activityInfo.loadLabel(context.packageManager)

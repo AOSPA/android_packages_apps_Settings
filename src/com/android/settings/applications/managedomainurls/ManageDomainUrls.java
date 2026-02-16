@@ -31,6 +31,7 @@ import com.android.settingslib.search.SearchIndexable;
  * Activity to manage how Android handles URL resolution. Includes both per-app
  * handling as well as system handling for Web Actions.
  */
+// LINT.IfChange
 @SearchIndexable(forTarget = MOBILE)
 public class ManageDomainUrls extends DashboardFragment {
 
@@ -66,3 +67,4 @@ public class ManageDomainUrls extends DashboardFragment {
         AppIconCacheManager.getInstance().release();
     }
 }
+// LINT.ThenChange(ManageDomainUrlsApiScreen.kt)

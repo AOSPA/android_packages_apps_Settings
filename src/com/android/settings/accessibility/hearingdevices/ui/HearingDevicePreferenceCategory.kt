@@ -26,6 +26,7 @@ import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceCategoryBinding
 
 abstract class HearingDevicePreferenceCategory(key: String, purpose: Int, title: Int) :
@@ -37,6 +38,8 @@ abstract class HearingDevicePreferenceCategory(key: String, purpose: Int, title:
 
     var deviceUpdater: BluetoothDeviceUpdater? = null
     var category: androidx.preference.PreferenceCategory? = null
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context): androidx.preference.PreferenceCategory {
         return super.createWidget(context).apply { isVisible = false }
