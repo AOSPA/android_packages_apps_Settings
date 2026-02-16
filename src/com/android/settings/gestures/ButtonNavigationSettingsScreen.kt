@@ -29,9 +29,12 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(ButtonNavigationSettingsScreen.KEY)
 class ButtonNavigationSettingsScreen : PreferenceScreenMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override fun isFlagEnabled(context: Context): Boolean {
         return Flags.navbarFlipOrderOption()
     }

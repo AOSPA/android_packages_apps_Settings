@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_APPS
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AppLaunchApiScreen.KEY, parameterized = true)
@@ -39,9 +40,10 @@ class AppLaunchApiScreen :
         fragment = AppLaunchSettings::class,
         purpose = R.string.app_launch_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
+
+        tags(APP_FUNCTION_APPS)
 
         parameters {
             parameter(

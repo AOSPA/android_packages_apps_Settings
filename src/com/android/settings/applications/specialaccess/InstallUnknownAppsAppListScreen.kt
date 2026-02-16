@@ -27,9 +27,11 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import kotlinx.coroutines.flow.Flow
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(InstallUnknownAppsAppListScreen.KEY)
 open class InstallUnknownAppsAppListScreen : SpecialAccessAppListScreen() {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, TAG_DEVICE_STATE_SCREEN)
 
     override val key: String
         get() = KEY
@@ -48,7 +50,7 @@ open class InstallUnknownAppsAppListScreen : SpecialAccessAppListScreen() {
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
+
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         if (metadata == null) Intent(ACTION_MANAGE_UNKNOWN_APP_SOURCES) else null

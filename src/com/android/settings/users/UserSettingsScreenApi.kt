@@ -49,7 +49,6 @@ class UserSettingsScreenApi :
         fragment = UserSettings::class,
         purpose = R.string.user_settings_pref_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 

@@ -38,6 +38,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.notification.modes.ZenModesBackend
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NOTIFICATIONS
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ZenModesListScreen.KEY)
@@ -47,6 +48,8 @@ open class ZenModesListScreen :
     PreferenceIconProvider,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NOTIFICATIONS, TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
 
     private var zenSettingsObserver: ZenSettingsObserver? = null
 
@@ -91,8 +94,7 @@ open class ZenModesListScreen :
 
     override fun getMetricsCategory(): Int = SettingsEnums.ZEN_PRIORITY_MODES_LIST
 
-    override fun tags(context: Context) =
-        arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
 
     override fun hasCompleteHierarchy() = false
 

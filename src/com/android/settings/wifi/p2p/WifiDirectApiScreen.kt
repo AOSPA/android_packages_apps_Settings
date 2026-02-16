@@ -31,7 +31,6 @@ class WifiDirectApiScreen :
         fragment = WifiP2pSettings::class,
         purpose = R.string.wifi_direct_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 

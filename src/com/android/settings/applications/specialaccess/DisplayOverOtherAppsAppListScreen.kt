@@ -29,10 +29,12 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(DisplayOverOtherAppsAppListScreen.KEY)
 open class DisplayOverOtherAppsAppListScreen :
     SpecialAccessAppListScreen(), PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, TAG_DEVICE_STATE_SCREEN)
 
     override val key: String
         get() = KEY
@@ -51,7 +53,6 @@ open class DisplayOverOtherAppsAppListScreen :
 
     override fun getMetricsCategory() = SettingsEnums.SYSTEM_ALERT_WINDOW_APPS
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         if (metadata == null) Intent(ACTION_MANAGE_OVERLAY_PERMISSION) else null

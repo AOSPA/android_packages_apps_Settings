@@ -42,9 +42,7 @@ class PowerMenuSettingsScreenApi() :
         fragment = PowerMenuSettings::class,
         purpose = R.string.long_press_power_pref_purpose,
     ) {
-
     init {
-
         flag { catalystMigration26q2() }
 
         preconditions(R.string.long_press_power_category_precondition) {

@@ -36,10 +36,13 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(LocationScreen.KEY)
 open class LocationScreen :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceIconProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
 
     override val key: String
         get() = KEY

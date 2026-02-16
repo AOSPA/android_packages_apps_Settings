@@ -57,6 +57,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(HearingDevicesScreen.KEY)
 open class HearingDevicesScreen(context: Context) :
@@ -66,6 +67,7 @@ open class HearingDevicesScreen(context: Context) :
     PreferenceLifecycleProvider,
     BluetoothCallback,
     LocalBluetoothProfileManager.ServiceListener {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
     override val key: String
         get() = KEY

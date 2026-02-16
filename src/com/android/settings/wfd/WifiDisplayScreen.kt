@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /** The app detail catalyst screen for connections to remote displays */
 // LINT.IfChange
@@ -42,6 +43,8 @@ open class WifiDisplayScreen :
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider,
     PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
 
     private var router: MediaRouter? = null
     private lateinit var lifeCycleContext: PreferenceLifecycleContext

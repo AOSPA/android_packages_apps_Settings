@@ -33,7 +33,6 @@ class DeviceAdminApiScreen :
         fragment = DeviceAdminSettings::class,
         purpose = R.string.device_admin_settings_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
         preconditions(R.string.device_admin_settings_screen_preconditions) {

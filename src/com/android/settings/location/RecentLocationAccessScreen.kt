@@ -38,9 +38,12 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.utils.StringUtil
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(RecentLocationAccessScreen.KEY)
 open class RecentLocationAccessScreen: PreferenceScreenMixin, PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, TAG_DEVICE_STATE_SCREEN)
+
 
     override val key: String
         get() = KEY
@@ -57,7 +60,7 @@ open class RecentLocationAccessScreen: PreferenceScreenMixin, PreferenceAvailabi
 
     override fun getMetricsCategory() = SettingsEnums.LOCATION_RECENT_ACCESS_ALL
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
+
 
     override fun isFlagEnabled(context: Context) = Flags.catalystLocationSettings()
 

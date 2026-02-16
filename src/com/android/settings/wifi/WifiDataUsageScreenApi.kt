@@ -35,7 +35,6 @@ class WifiDataUsageScreenApi :
         fragment = DataUsageList::class,
         purpose = R.string.non_carrier_data_usage_screen_purpose,
     ) {
-
     private val repository =
         FeatureFactory.featureFactory.wifiFeatureProvider.wifiDataUsageRepository
 

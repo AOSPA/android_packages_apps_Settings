@@ -62,6 +62,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.wifi.WifiUtils.Companion.getWifiTetherSummaryForConnectedDevices
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 // LINT.IfChange
 @ProvidePreferenceScreen(WifiHotspotScreen.KEY)
@@ -73,6 +74,8 @@ open class WifiHotspotScreen(context: Context) :
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceRestrictionMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA, KEY_WIFI_HOTSPOT)
+
 
     private val wifiHotspotStore =
         WifiHotspotStore(context, DataSaverMainSwitchPreference.createDataStore(context))
@@ -112,7 +115,7 @@ open class WifiHotspotScreen(context: Context) :
     override val preferenceActionMetrics: Int
         get() = ACTION_WIFI_HOTSPOT
 
-    override fun tags(context: Context) = arrayOf(KEY_WIFI_HOTSPOT)
+
 
     override fun isAvailable(context: Context) =
         canShowWifiHotspot(context) &&

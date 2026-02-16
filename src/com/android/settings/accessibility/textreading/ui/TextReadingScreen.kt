@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 abstract class BaseTextReadingScreen : PreferenceScreenMixin {
     @EntryPoint abstract val entryPoint: Int
@@ -88,6 +89,8 @@ abstract class BaseTextReadingScreen : PreferenceScreenMixin {
 
 @ProvidePreferenceScreen(TextReadingScreen.KEY)
 open class TextReadingScreen : BaseTextReadingScreen() {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override val entryPoint: Int
         get() = EntryPoint.DISPLAY_SETTINGS
 
