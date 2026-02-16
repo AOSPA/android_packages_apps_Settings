@@ -465,4 +465,4 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
         }
     }
 }
-// LINT.ThenChange(ScreensaverScreen.kt)
+// LINT.ThenChange(ScreensaverScreen.kt, DreamSettingsApiScreen.kt)

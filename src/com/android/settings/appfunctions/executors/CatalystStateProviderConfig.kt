@@ -109,7 +109,9 @@ import com.android.settings.display.HdrBrightnessApiScreen
 import com.android.settings.display.NightDisplayScreen
 import com.android.settings.display.ScreenTimeoutScreen
 import com.android.settings.display.darkmode.DarkModeScreen
+import com.android.settings.dream.DreamSettingsApiScreen
 import com.android.settings.dream.ScreensaverScreen
+import com.android.settings.flags.Flags
 import com.android.settings.emergency.EmergencyDashboardScreen
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedScreen
@@ -371,6 +373,10 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(
             enabled = true,
+            screenKey = DreamSettingsApiScreen.KEY,
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
             screenKey = SystemNavigationGestureScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
         ),
@@ -613,7 +619,6 @@ private fun getCatalystScreenConfigs() =
             screenKey = InstallCertificateFromStorageScreenApi.KEY,
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = IccLockApiScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = ContentProtectionScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothScanningApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceUnlockApiScreen.KEY),
