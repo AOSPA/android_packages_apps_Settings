@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.display
 
+import android.content.Context
 import android.graphics.Outline
 import android.graphics.PointF
 import android.graphics.Rect
@@ -29,7 +30,8 @@ import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 
 /** Represents a draggable block in the topology pane. */
-class DisplayBlock(val injector: ConnectedDisplayInjector) : FrameLayout(injector.context!!) {
+class DisplayBlock(uiContext: Context, val injector: ConnectedDisplayInjector) :
+    FrameLayout(uiContext) {
     @VisibleForTesting
     internal val cornerRadiusPx =
         context.resources.getDimensionPixelSize(R.dimen.display_block_corner_radius)
