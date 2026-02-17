@@ -127,6 +127,10 @@ open class SupervisionDashboardScreen :
 
     override fun onResume(context: PreferenceLifecycleContext) {
         if (Flags.enableSupervisionSettingsUiUpdates() && isContainer(context)) {
+            // TODO(b/480262048): Temporary fix to refresh the PIN management preference. Remove
+            // this line once b/480262048 is fixed.
+            lifeCycleContext?.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+
             roleManager.addOnRoleHoldersChangedListenerAsUser(
                 context.mainExecutor,
                 this,
