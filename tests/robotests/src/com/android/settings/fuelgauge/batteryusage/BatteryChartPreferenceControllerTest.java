@@ -32,6 +32,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.content.Intent;
@@ -106,6 +107,9 @@ public final class BatteryChartPreferenceControllerTest {
         doReturn(Set.of("com.android.gms.persistent"))
                 .when(mFeatureFactory.powerUsageFeatureProvider)
                 .getHideApplicationSet();
+        doReturn(false)
+                .when(mFeatureFactory.powerUsageFeatureProvider)
+                .isBatteryAdvanceInfoEnabled();
         doReturn(mLayoutParams).when(mDailyChartView).getLayoutParams();
         doReturn(mIntent).when(mContext).registerReceiver(any(), any());
         doReturn(100).when(mIntent).getIntExtra(eq(BatteryManager.EXTRA_SCALE), anyInt());
@@ -344,6 +348,45 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
+    public void onBatteryLevelDataUpdate_featureEnabledAndFirstLaunch_selectDailyIndex() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryAdvanceInfoEnabled())
+                .thenReturn(true);
+        BatteryLevelData batteryLevelData =
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0);
+
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex).isEqualTo(2);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_featureEnabledButNotFirstLaunch_doesNotSelectIndex() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryAdvanceInfoEnabled())
+                .thenReturn(true);
+        Bundle savedState = new Bundle();
+        savedState.putBoolean("first_launch_state", false);
+        mBatteryChartPreferenceController.onCreate(savedState);
+
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0));
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex)
+                .isEqualTo(SELECTED_INDEX_ALL);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_featureDisabledAndFirstLaunch_doesNotSelectIndex() {
+        when(mFeatureFactory.powerUsageFeatureProvider.isBatteryAdvanceInfoEnabled())
+                .thenReturn(false);
+
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0));
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex)
+                .isEqualTo(SELECTED_INDEX_ALL);
+    }
+
+    @Test
     public void showEmptyChart_normalCase_showEmptyChart() {
         doReturn(View.GONE).when(mHourlyChartView).getVisibility();
 
@@ -402,7 +445,8 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mDailyChartIndex = SELECTED_INDEX_ALL;
         mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(false)).isEqualTo(null);
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
+                .isNull();
         assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
                 .isEqualTo("Battery level percentage from 100% to 66%");
     }
@@ -414,70 +458,72 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(false)).isEqualTo(null);
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
+                .isNull();
         assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
                 .isEqualTo("Battery level percentage from 100% to 66%");
     }
 
     @Test
-    public void selectedSlotText_selectADayAllHours_onlyDayText() {
+    public void selectedSlotText_selectADayAllHours_returnOnlyDayText() {
         mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
                 createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0));
         mBatteryChartPreferenceController.mDailyChartIndex = 1;
         mBatteryChartPreferenceController.mHourlyChartIndex = SELECTED_INDEX_ALL;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(false)).isEqualTo("Sunday");
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
+                .isEqualTo("Sunday");
         assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
                 .isEqualTo("Battery level percentage from 83% to 59%");
     }
 
     @Test
-    public void selectedSlotText_onlyOneDayDataSelectAnHour_onlyHourText() {
+    public void selectedSlotText_onlyOneDayDataSelectAnHour_returnOnlyHourText() {
         mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
                 createBatteryLevelData(/* numOfHours= */ 6, /* levelOffset= */ 0));
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 2;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(false))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
                 .isEqualTo("10 AM - 12 PM");
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(true))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ true))
                 .isEqualTo("10 AM to 12 PM");
         assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
                 .isEqualTo("Battery level percentage from 97% to 95%");
     }
 
     @Test
-    public void selectedSlotText_SelectADayAnHour_dayAndHourText() {
+    public void selectedSlotText_SelectADayAnHour_returnDayAndHourText() {
         mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
                 createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0));
         mBatteryChartPreferenceController.mDailyChartIndex = 1;
         mBatteryChartPreferenceController.mHourlyChartIndex = 8;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(false))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
                 .isEqualTo("Sunday 4 PM - 6 PM");
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(true))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ true))
                 .isEqualTo("Sunday 4 PM to 6 PM");
         assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
                 .isEqualTo("Battery level percentage from 67% to 65%");
     }
 
     @Test
-    public void selectedSlotText_selectFirstSlotAfterFullCharged_withMinuteText() {
+    public void selectedSlotText_selectFirstSlotAfterFullCharged_returnWithMinuteText() {
         mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
                 createBatteryLevelData(/* numOfHours= */ 6, /* levelOffset= */ 0));
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 0;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(false))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
                 .isEqualTo("7:01 AM - 8 AM");
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(true))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ true))
                 .isEqualTo("7:01 AM to 8 AM");
         assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
                 .isEqualTo("Battery level percentage from 100% to 99%");
     }
 
     @Test
-    public void selectedSlotText_selectFirstSlotAfterTimeUpdated_withMinuteText() {
+    public void selectedSlotText_selectFirstSlotAfterTimeUpdated_returnWithMinuteText() {
         BatteryLevelData batteryLevelData =
                 createBatteryLevelData(/* numOfHours= */ 6, /* levelOffset= */ 10);
         assertThat(batteryLevelData.getHourlyBatteryLevelsPerDay().get(0).isStartTimestamp())
@@ -487,42 +533,78 @@ public final class BatteryChartPreferenceControllerTest {
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 0;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(false))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
                 .isEqualTo("7:01 AM - 8 AM");
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(true))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ true))
                 .isEqualTo("7:01 AM to 8 AM");
         assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
                 .isEqualTo("Battery level percentage from 90% to 89%");
     }
 
     @Test
-    public void selectedSlotText_selectLastSlot_withNowText() {
+    public void selectedSlotText_selectLastSlot_returnWithNowText() {
         mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
                 createBatteryLevelData(/* numOfHours= */ 6, /* levelOffset= */ 0));
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 3;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(false))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
                 .isEqualTo("12 PM - now");
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(true))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ true))
                 .isEqualTo("12 PM to now");
         assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
                 .isEqualTo("Battery level percentage from 95% to 66%");
     }
 
     @Test
-    public void selectedSlotText_selectOnlySlot_withMinuteAndNowText() {
+    public void selectedSlotText_selectOnlySlot_returnWithMinuteAndNowText() {
         mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
                 createBatteryLevelData(/* numOfHours= */ 1, /* levelOffset= */ 0));
         mBatteryChartPreferenceController.mDailyChartIndex = 0;
         mBatteryChartPreferenceController.mHourlyChartIndex = 0;
 
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(false))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
                 .isEqualTo("7:01 AM - now");
-        assertThat(mBatteryChartPreferenceController.getSlotInformation(true))
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ true))
                 .isEqualTo("7:01 AM to now");
         assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
                 .isEqualTo("Battery level percentage from 100% to 66%");
+    }
+
+    @Test
+    public void getDailyInformation_selectAllDays_returnNull() {
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0));
+        mBatteryChartPreferenceController.mDailyChartIndex = SELECTED_INDEX_ALL;
+
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
+                .isNull();
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 66%");
+    }
+
+    @Test
+    public void getDailyInformation_onlyOneDayData_returnNull() {
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
+                createBatteryLevelData(/* numOfHours= */ 6, /* levelOffset= */ 0));
+        mBatteryChartPreferenceController.mDailyChartIndex = 0;
+
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
+                .isNull();
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 100% to 66%");
+    }
+
+    @Test
+    public void getDailyInformation_selectADay_returnDayText() {
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0));
+        mBatteryChartPreferenceController.mDailyChartIndex = 1;
+
+        assertThat(mBatteryChartPreferenceController.getSlotInformation(/* isA11y= */ false))
+                .isEqualTo("Sunday");
+        assertThat(mBatteryChartPreferenceController.getBatteryLevelPercentageInfo())
+                .isEqualTo("Battery level percentage from 83% to 59%");
     }
 
     @Test

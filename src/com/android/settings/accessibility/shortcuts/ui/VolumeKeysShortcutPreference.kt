@@ -21,6 +21,7 @@ import androidx.preference.Preference
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.settings.R
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 import com.android.settingslib.metadata.PreferenceMetadata
 
 class VolumeKeysShortcutPreference(context: Context, targets: Set<String>) :
@@ -40,7 +41,17 @@ class VolumeKeysShortcutPreference(context: Context, targets: Set<String>) :
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         if (preference is ShortcutOptionWidget) {
-            preference.setIntroImageResId(R.drawable.accessibility_shortcut_type_volume_keys)
+            // If device is keyboard enabled, then show the keyboard-specific volume key image.
+            if (
+                com.android.settings.accessibility.Flags.desktopMagnificationSettingsPolish() &&
+                    InputPeripheralsSettingsUtils.isHardKeyboard()
+            ) {
+                preference.setIntroImageResId(
+                    R.drawable.accessibility_shortcut_type_keyboard_volume_keys
+                )
+            } else {
+                preference.setIntroImageResId(R.drawable.accessibility_shortcut_type_volume_keys)
+            }
         }
     }
 

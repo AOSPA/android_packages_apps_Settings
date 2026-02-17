@@ -17,8 +17,10 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.Application
+import android.app.NotificationManager
 import android.app.StatusBarManager
 import android.content.Context
+import android.content.Intent
 import android.graphics.drawable.Icon
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
@@ -32,9 +34,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
 import org.mockito.Mockito.doAnswer
+import org.mockito.Mockito.never
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnit
@@ -47,6 +51,7 @@ class AddSatelliteTileActivityTest {
     @get:Rule val mocks = MockitoJUnit.rule()
 
     @Mock private lateinit var mockStatusBarManager: StatusBarManager
+    @Mock private lateinit var mockNotificationManager: NotificationManager
 
     private val context: Application = ApplicationProvider.getApplicationContext()
     private var tileServiceCallback: Consumer<Int>? = null
@@ -54,6 +59,13 @@ class AddSatelliteTileActivityTest {
     @Before
     fun setUp() {
         shadowOf(context).setSystemService(Context.STATUS_BAR_SERVICE, mockStatusBarManager)
+        shadowOf(context).setSystemService(Context.NOTIFICATION_SERVICE, mockNotificationManager)
+        // Reset the shared preferences to ensure test isolation.
+        context
+            .getSharedPreferences("SatelliteTilePromptPrefs", Context.MODE_PRIVATE)
+            .edit()
+            .clear()
+            .apply()
     }
 
     private fun mockRequestAddTileService() {
@@ -73,7 +85,7 @@ class AddSatelliteTileActivityTest {
     }
 
     @Test
-    fun requestAddTileService_whenTileAdded_finishesAndSetsPromptShown() {
+    fun requestAddTileService_whenTileAdded_finishesAndMarksPromptsShown() {
         val (satelliteTilePromptUtils, scenario) = setupAndLaunchActivity()
 
         invokeRequestAddTileServiceCallbackAndClose(
@@ -91,11 +103,11 @@ class AddSatelliteTileActivityTest {
                 any(),
             )
         assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
-        assertThat(satelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).isTrue()
+        assertThat(satelliteTilePromptUtils.areAllPromptsShown(context)).isTrue()
     }
 
     @Test
-    fun requestAddTileService_whenTileAlreadyAdded_finishesAndSetsPromptShown() {
+    fun requestAddTileService_whenTileAlreadyAdded_finishesAndMarksPromptsShown() {
         val (satelliteTilePromptUtils, scenario) = setupAndLaunchActivity()
 
         invokeRequestAddTileServiceCallbackAndClose(
@@ -105,11 +117,11 @@ class AddSatelliteTileActivityTest {
         )
 
         assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
-        assertThat(satelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).isTrue()
+        assertThat(satelliteTilePromptUtils.areAllPromptsShown(context)).isTrue()
     }
 
     @Test
-    fun requestAddTileService_whenTileNotAdded_finishesAndSetsPromptShown() {
+    fun requestAddTileService_whenTileNotAdded_finishesAndMarksPromptsShown() {
         val (satelliteTilePromptUtils, scenario) = setupAndLaunchActivity()
 
         invokeRequestAddTileServiceCallbackAndClose(
@@ -119,11 +131,11 @@ class AddSatelliteTileActivityTest {
         )
 
         assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
-        assertThat(satelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).isTrue()
+        assertThat(satelliteTilePromptUtils.areAllPromptsShown(context)).isTrue()
     }
 
     @Test
-    fun requestAddTileService_whenDialogDismissed_finishesAndSetsPromptShown() {
+    fun requestAddTileService_whenDialogDismissed_finishesAndMarksPromptsShown() {
         val (satelliteTilePromptUtils, scenario) = setupAndLaunchActivity()
 
         invokeRequestAddTileServiceCallbackAndClose(
@@ -133,11 +145,11 @@ class AddSatelliteTileActivityTest {
         )
 
         assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
-        assertThat(satelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).isTrue()
+        assertThat(satelliteTilePromptUtils.areAllPromptsShown(context)).isTrue()
     }
 
     @Test
-    fun requestAddTileService_whenError_finishesAndDoesNotSetPromptShown() {
+    fun requestAddTileService_whenError_finishesAndDoesNotMarkPromptsShown() {
         val (satelliteTilePromptUtils, scenario) = setupAndLaunchActivity()
 
         invokeRequestAddTileServiceCallbackAndClose(
@@ -147,13 +159,51 @@ class AddSatelliteTileActivityTest {
         )
 
         assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
-        assertThat(satelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).isFalse()
+        assertThat(satelliteTilePromptUtils.areAllPromptsShown(context)).isFalse()
+    }
+
+    @Test
+    fun requestAddTileService_whenNotCurrentUser_finishesAndMarksPromptsShown() {
+        val (satelliteTilePromptUtils, scenario) = setupAndLaunchActivity()
+
+        invokeRequestAddTileServiceCallbackAndClose(
+            scenario,
+            satelliteTilePromptUtils,
+            StatusBarManager.TILE_ADD_REQUEST_ERROR_NOT_CURRENT_USER,
+        )
+
+        assertThat(scenario.state).isEqualTo(Lifecycle.State.DESTROYED)
+        assertThat(satelliteTilePromptUtils.areAllPromptsShown(context)).isTrue()
+    }
+
+    @Test
+    fun onCreate_withNotificationId_cancelsNotification() {
+        val testNotificationId = R.id.satellite_prompt_notification_id
+        val intent =
+            Intent(context, AddSatelliteTileActivity::class.java).apply {
+                putExtra(AddSatelliteTileActivity.EXTRA_NOTIFICATION_ID, testNotificationId)
+            }
+        mockRequestAddTileService()
+
+        val scenario = ActivityScenario.launch<AddSatelliteTileActivity>(intent)
+
+        verify(mockNotificationManager).cancel(testNotificationId)
+        scenario.close()
+    }
+
+    @Test
+    fun onCreate_withoutNotificationId_doesNotCancelNotification() {
+        mockRequestAddTileService()
+
+        val scenario = ActivityScenario.launch(AddSatelliteTileActivity::class.java)
+
+        verify(mockNotificationManager, never()).cancel(anyInt())
+        scenario.close()
     }
 
     private fun setupAndLaunchActivity():
         Pair<SatelliteTilePromptUtils, ActivityScenario<AddSatelliteTileActivity>> {
         val satelliteTilePromptUtils = spy(SatelliteTilePromptUtils())
-        satelliteTilePromptUtils.setAddTilePromptShown(context, false)
         mockRequestAddTileService()
         val scenario = ActivityScenario.launch(AddSatelliteTileActivity::class.java)
         ShadowLooper.idleMainLooper()

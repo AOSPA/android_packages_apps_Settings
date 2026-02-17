@@ -17,8 +17,11 @@
 
 <com.google.android.setupdesign.GlifLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/setup_wizard_layout"
     style="?attr/fingerprint_layout_theme"
+    app:sudAnimationIcon="@raw/icon_lock"
+    app:sudIsAnimatedIconDelayed="false"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 

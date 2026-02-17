@@ -45,12 +45,13 @@ public class ShowPasswordPreferenceControllerTest {
     private Context mContext;
     private ShowPasswordPreferenceController mController;
     private Preference mPreference;
+    private boolean mIsSplitSystemEnabled;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mController = new ShowPasswordPreferenceController(mContext);
+        mController = new TestShowPasswordPreferenceController(mContext);
         mPreference = new Preference(mContext);
         mPreference.setKey(mController.getPreferenceKey());
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -58,7 +59,14 @@ public class ShowPasswordPreferenceControllerTest {
 
     @Test
     public void isAvailable_byDefault_isTrue() {
+        mIsSplitSystemEnabled = false;
         assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void isAvailable_splitEnabled_isFalse() {
+        mIsSplitSystemEnabled = true;
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
@@ -84,15 +92,42 @@ public class ShowPasswordPreferenceControllerTest {
 
     @Test
     public void changePref_turnOn_shouldChangeSettingTo1() {
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.System.putInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 0);
+        assertThat(Settings.System.getInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 1))
+                .isEqualTo(0);
+        assertThat(mController.isChecked()).isFalse();
+
         mController.onPreferenceChange(mPreference, true);
 
         assertThat(mController.isChecked()).isTrue();
+        assertThat(Settings.System.getInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 0))
+                .isEqualTo(1);
     }
 
     @Test
     public void changePref_turnOff_shouldChangeSettingTo0() {
+        final ContentResolver contentResolver = mContext.getContentResolver();
+        Settings.System.putInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 1);
+        assertThat(Settings.System.getInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 0))
+                .isEqualTo(1);
+        assertThat(mController.isChecked()).isTrue();
+
         mController.onPreferenceChange(mPreference, false);
 
         assertThat(mController.isChecked()).isFalse();
+        assertThat(Settings.System.getInt(contentResolver, Settings.System.TEXT_SHOW_PASSWORD, 1))
+                .isEqualTo(0);
+    }
+
+    private class TestShowPasswordPreferenceController extends ShowPasswordPreferenceController {
+        TestShowPasswordPreferenceController(Context context) {
+            super(context);
+        }
+
+        @Override
+        boolean areSplitSettingsEnabled() {
+            return mIsSplitSystemEnabled;
+        }
     }
 }

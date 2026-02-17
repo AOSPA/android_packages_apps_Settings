@@ -30,7 +30,6 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.datausage.BillingCycleScreen
 import com.android.settings.datausage.DataUsageListScreen
 import com.android.settings.deviceinfo.imei.getImeiList
-import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.apn.ApnSettings
 import com.android.settings.network.apn.ApnSettingsScreen
@@ -38,7 +37,7 @@ import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.utils.putSubId
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -72,7 +71,7 @@ private constructor(
     PreferenceRestrictionMixin {
 
     private val subId: Int =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!![Settings.EXTRA_SUB_ID]?.toIntOrNull()
                 ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         } else {
@@ -109,58 +108,53 @@ private constructor(
     override fun isAvailable(context: Context): Boolean =
         SubscriptionManager.isValidSubscriptionId(subId)
 
-    override fun isFlagEnabled(context: Context): Boolean = Flags.deeplinkNetworkAndInternet25q4()
-
     override fun fragmentClass(): Class<out Fragment>? = MobileNetworkSettings::class.java
 
     override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            if (Flags.deeplinkNetworkAndInternet25q4()) {
-                +MobileNetworkMainSwitchPreference(context, subId, coroutineScope) order +0
-                val data = MobileNetworkData(context, coroutineScope, subId)
-                +EnabledStateUntitledCategory(subId) += {
-                    +MobileNetworkDataUsagePreference(context, coroutineScope, subId)
-                    +MobileNetworkSpnPreference(context, subId)
-                    +MobileNetworkPhoneNumberPreference(data)
-                    +EnabledNetworkModePreference(data)
-                    val imeiList = context.getImeiList
-                    +MobileNetworkImeiPreference(context, subId, imeiList)
-                    if (CatalystFlags.catalystUseKeyParameters()) {
-                        +(DataUsageListScreen.KEY withParameters keyParameters!!)
-                    } else {
-                        +(DataUsageListScreen.KEY args arguments!!)
-                    }
-                    if (CatalystFlags.catalystUseKeyParameters()) {
-                        +(BillingCycleScreen.KEY withParameters keyParameters!!) order 115
-                    } else {
-                        +(BillingCycleScreen.KEY args arguments!!) order 115
-                    }
-                    +UntitledPreferenceCategoryMetadata(
-                        "apn_and_protection_container",
-                        R.string.mobile_network_apn_and_protection_purpose,
-                    ) +=
-                        {
-                            if (CatalystFlags.catalystUseKeyParameters()) {
-                                val newParameters =
-                                    ApnSettingsScreen.parametersSchema.prepare(
-                                        ApnSettings.SUB_ID to subId.toString()
-                                    )
-                                +(ApnSettingsScreen.KEY withParameters newParameters)
-                            } else {
-                                val bundle =
-                                    Bundle(1).also { it.putSubId(ApnSettings.SUB_ID, subId) }
-                                +(ApnSettingsScreen.KEY args bundle)
-                            }
-                        }
+            +MobileNetworkMainSwitchPreference(context, subId, coroutineScope) order +0
+            val data = MobileNetworkData(context, coroutineScope, subId)
+            +EnabledStateUntitledCategory(subId) += {
+                +MobileNetworkDataUsagePreference(context, coroutineScope, subId)
+                +MobileNetworkSpnPreference(context, subId)
+                +MobileNetworkPhoneNumberPreference(data)
+                +EnabledNetworkModePreference(data)
+                val imeiList = context.getImeiList
+                +MobileNetworkImeiPreference(context, subId, imeiList)
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                    +(DataUsageListScreen.KEY withParameters keyParameters!!)
+                } else {
+                    +(DataUsageListScreen.KEY args arguments!!)
                 }
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                    +(BillingCycleScreen.KEY withParameters keyParameters!!) order 115
+                } else {
+                    +(BillingCycleScreen.KEY args arguments!!) order 115
+                }
+                +UntitledPreferenceCategoryMetadata(
+                    "apn_and_protection_container",
+                    R.string.mobile_network_apn_and_protection_purpose,
+                ) +=
+                    {
+                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                            val newParameters =
+                                ApnSettingsScreen.parametersSchema.prepare(
+                                    ApnSettings.SUB_ID to subId.toString()
+                                )
+                            +(ApnSettingsScreen.KEY withParameters newParameters)
+                        } else {
+                            val bundle = Bundle(1).also { it.putSubId(ApnSettings.SUB_ID, subId) }
+                            +(ApnSettingsScreen.KEY args bundle)
+                        }
+                    }
             }
         }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
         val intent =
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 makeLaunchIntent(
                     context,
                     MobileNetworkActivity::class.java,

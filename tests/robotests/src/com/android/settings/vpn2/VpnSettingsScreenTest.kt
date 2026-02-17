@@ -16,24 +16,19 @@
 
 package com.android.settings.vpn2
 
-import android.widget.TextView
+import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings
-import com.android.settings.dashboard.RestrictedDashboardFragment
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.robolectric.annotation.Config
-import org.robolectric.annotation.Implementation
-import org.robolectric.annotation.Implements
+import org.junit.runner.RunWith
 
-@Config(shadows = [ShadowRestrictedDashboardFragment::class, ShadowUpdatePreferences::class])
-class VpnSettingsScreenTest : SettingsCatalystTestCase() {
-    override val preferenceScreenCreator = VpnSettingsScreen()
+@RunWith(AndroidJUnit4::class)
+class VpnSettingsScreenTest {
+    private val preferenceScreenCreator = VpnSettingsScreen()
 
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
 
     @Test
     fun key_isEqualToStatic() {
@@ -47,17 +42,11 @@ class VpnSettingsScreenTest : SettingsCatalystTestCase() {
         assertThat(underTest.component?.className)
             .isEqualTo(Settings.VpnSettingsActivity::class.java.getName())
     }
-}
 
-@Implements(VpnSettings.UpdatePreferences::class)
-class ShadowUpdatePreferences {
-    @Implementation fun run() {}
-}
-
-@Implements(RestrictedDashboardFragment::class)
-class ShadowRestrictedDashboardFragment {
-    @Implementation
-    fun getEmptyTextView(): TextView? {
-        return TextView(ApplicationProvider.getApplicationContext())
+    @Test
+    fun restrictionKeys_containsDisallowConfigVpn() {
+        assertThat(preferenceScreenCreator.restrictionKeys)
+            .asList()
+            .contains(android.os.UserManager.DISALLOW_CONFIG_VPN)
     }
 }

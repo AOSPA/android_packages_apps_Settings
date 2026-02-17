@@ -22,7 +22,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.applications.specialaccess.InteractAcrossProfilesAppDetailScreen.Companion.KEY_APP_PACKAGE_NAME
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,7 +56,7 @@ class InteractAcrossProfilesAppDetailScreenTest {
     }
 
     private fun createScreen(): InteractAcrossProfilesAppDetailScreen {
-        return if (CatalystFlags.catalystUseKeyParameters()) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             InteractAcrossProfilesAppDetailScreen(
                 context,
                 InteractAcrossProfilesAppDetailScreen.parametersSchema.prepare(

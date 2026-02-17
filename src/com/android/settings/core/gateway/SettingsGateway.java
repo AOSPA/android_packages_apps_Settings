@@ -158,7 +158,6 @@ import com.android.settings.network.telephony.MobileNetworkSettings;
 import com.android.settings.network.telephony.NetworkSelectSettings;
 import com.android.settings.network.telephony.satellite.SatelliteSetting;
 import com.android.settings.network.tether.TetherSettings;
-import com.android.settings.nfc.PaymentSettings;
 import com.android.settings.notification.BubbleNotificationSettings;
 import com.android.settings.notification.BundlePreferenceFragment;
 import com.android.settings.notification.ConfigureNotificationSettings;
@@ -195,6 +194,7 @@ import com.android.settings.regionalpreferences.RegionPickerFragment;
 import com.android.settings.regionalpreferences.TemperatureUnitFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
 import com.android.settings.safetycenter.ui.SafetyCenterFragment;
+import com.android.settings.safetycenter.ui.SafetyCenterQsFragment;
 import com.android.settings.security.ContentProtectionPreferenceFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.MemtagPage;
@@ -323,7 +323,6 @@ public class SettingsGateway {
             PrintSettingsFragment.class.getName(),
             PrintJobSettingsFragment.class.getName(),
             TrustedCredentialsSettings.class.getName(),
-            PaymentSettings.class.getName(),
             PhysicalKeyboardFragment.class.getName(),
             SoundSettings.class.getName(),
             ConversationListSettings.class.getName(),
@@ -434,6 +433,7 @@ public class SettingsGateway {
             SupervisionDashboardFragment.class.getName(),
             SummarizationPreferenceFragment.class.getName(),
             SafetyCenterFragment.class.getName(),
+            SafetyCenterQsFragment.class.getName(),
     };
 
     public static final String[] SETTINGS_FOR_RESTRICTED = {

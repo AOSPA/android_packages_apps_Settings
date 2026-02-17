@@ -40,6 +40,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.applications.defaultapps.DefaultAppPreferenceController;
+import com.android.settings.metrics.CredmanMetricsLogger;
 import com.android.settingslib.applications.DefaultAppInfo;
 import com.android.settingslib.widget.TwoTargetPreference;
 
@@ -56,6 +57,12 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
     private final AutofillManager mAutofillManager;
     private final CredentialManager mCredentialManager;
     private final Executor mExecutor;
+
+    private CredmanMetricsLogger mCredmanMetricsLogger;
+
+    public void setCredmanMetricsLogger(CredmanMetricsLogger logger) {
+        mCredmanMetricsLogger = logger;
+    }
 
     public DefaultCombinedPreferenceController(Context context,
             boolean isWorkProfile, boolean isPrivateSpace) {
@@ -140,11 +147,15 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
             primaryPref.setDelegate(
                     new PrimaryProviderPreference.Delegate() {
                         public void onOpenButtonClicked() {
-                            CombinedProviderInfo.launchSettingsActivityIntent(
-                                    mContext, packageName, settingsActivity, getUser());
+                            if (CombinedProviderInfo.launchSettingsActivityIntent(mContext,
+                                    packageName, settingsActivity, getUser())) {
+                                mCredmanMetricsLogger.recordPreferredServiceOutboundLaunch(
+                                        packageName);
+                            }
                         }
 
                         public void onChangeButtonClicked() {
+                            mCredmanMetricsLogger.logEditPreferredServiceEvent(packageName);
                             startActivity(createIntentToOpenPicker());
                         }
                     });
@@ -190,7 +201,7 @@ public class DefaultCombinedPreferenceController extends DefaultAppPreferenceCon
                 AutofillServiceInfo.getAvailableServices(mContext, userId);
         final String selectedAutofillProvider =
                 CredentialManagerPreferenceController
-                .getSelectedAutofillProvider(mContext, userId, TAG);
+                        .getSelectedAutofillProvider(mContext, userId, TAG);
 
         final List<CredentialProviderInfo> credManProviders = new ArrayList<>();
         if (mCredentialManager != null) {

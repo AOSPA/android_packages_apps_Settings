@@ -19,7 +19,6 @@ import android.annotation.MainThread
 import android.app.ActivityManager
 import android.app.ActivityTaskManager
 import android.app.TaskStackListener
-import android.app.supervision.flags.Flags
 import android.content.BroadcastReceiver
 import android.content.ComponentName
 import android.content.Context
@@ -68,14 +67,8 @@ class SupervisionAuthController private constructor(private val appContext: Cont
         object : TaskStackListener() {
             override fun onTaskStackChanged() {
                 handler.post {
-                    if (Flags.enableSupervisionAuthControllerUpdates()) {
-                        if (sessionStartTime != null && !isSupervisionActivityRunning()) {
-                            invalidateSession()
-                        }
-                    } else {
-                        if (currentTaskId != null && !isSupervisionActivityFocused()) {
-                            invalidateSession()
-                        }
+                    if (currentTaskId != null && !isSupervisionActivityFocused()) {
+                        invalidateSession()
                     }
                 }
             }
@@ -108,9 +101,6 @@ class SupervisionAuthController private constructor(private val appContext: Cont
             invalidateSession()
             return false
         }
-        if (Flags.enableSupervisionAuthControllerUpdates()) {
-            return isSupervisionActivityRunning()
-        }
         return currentTaskId == taskId
     }
 
@@ -132,7 +122,10 @@ class SupervisionAuthController private constructor(private val appContext: Cont
     private fun isSupervisionActivityRunning(): Boolean {
         val appTasks = activityManager.appTasks ?: emptyList()
         for (task in appTasks) {
-            if (task.taskInfo.isRunning && isSupervisionActivity(task.taskInfo.topActivity)) {
+            if (
+                task.taskInfo?.isRunning == true &&
+                    isSupervisionActivity(task.taskInfo?.topActivity)
+            ) {
                 return true
             }
         }
@@ -146,11 +139,11 @@ class SupervisionAuthController private constructor(private val appContext: Cont
     private fun isSupervisionActivityFocused(): Boolean {
         if (currentTaskId == null) return false
         val appTasks = activityManager.appTasks ?: emptyList()
-        val task = appTasks.find { it.taskInfo.taskId == currentTaskId }
+        val task = appTasks.find { it.taskInfo?.taskId == currentTaskId }
         if (task == null) return false
-        return task.taskInfo.isRunning &&
-            task.taskInfo.isFocused &&
-            isSupervisionActivity(task.taskInfo.topActivity)
+        return task.taskInfo?.isRunning == true &&
+            task.taskInfo?.isFocused == true &&
+            isSupervisionActivity(task.taskInfo?.topActivity)
     }
 
     private fun isSupervisionActivity(component: ComponentName?): Boolean {

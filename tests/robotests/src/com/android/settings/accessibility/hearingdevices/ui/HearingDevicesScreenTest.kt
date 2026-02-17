@@ -40,7 +40,6 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
-import org.robolectric.shadows.ShadowLog
 
 @Config(shadows = [ShadowBluetoothAdapter::class, ShadowBluetoothUtils::class])
 class HearingDevicesScreenTest : SettingsCatalystTestCase() {
@@ -94,7 +93,6 @@ class HearingDevicesScreenTest : SettingsCatalystTestCase() {
     @Before
     fun setUp() {
         bluetoothAdapter?.enable()
-        ShadowLog.stream = System.out
     }
 
     @Test override fun migration() {}

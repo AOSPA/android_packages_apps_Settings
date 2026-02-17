@@ -27,7 +27,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ApnSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.network.CarrierConfigCache
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
@@ -36,7 +35,7 @@ import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.utils.putSubId
 import com.android.settingslib.RestrictedPreference
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -66,7 +65,7 @@ private constructor(
     PreferenceBinding {
 
     private val subId: Int =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!![ApnSettings.SUB_ID]?.toIntOrNull() ?: INVALID_SUBSCRIPTION_ID
         } else {
             arguments!!.getSubId(ApnSettings.SUB_ID, INVALID_SUBSCRIPTION_ID)
@@ -102,8 +101,6 @@ private constructor(
     override fun isEnabled(context: Context): Boolean =
         super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkNetworkAndInternet25q4()
-
     override fun getMetricsCategory() = SettingsEnums.APN
 
     override fun hasCompleteHierarchy() = false
@@ -119,7 +116,7 @@ private constructor(
     override fun createWidget(context: Context) = RestrictedPreference(context)
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             makeLaunchIntent(
                 context,
                 ApnSettingsActivity::class.java,

@@ -17,6 +17,7 @@
 package com.android.settings.device
 
 import android.content.Context
+import androidx.test.core.app.ApplicationProvider
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.testutils.shadow.ShadowDesktopSettingsUtils
 import com.google.common.truth.Truth.assertThat
@@ -24,34 +25,33 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(shadows = [ShadowDesktopSettingsUtils::class])
 class TopLevelDevicePreferenceControllerTest {
 
-    private lateinit var mContext: Context
-    private lateinit var mController: TopLevelDevicePreferenceController
+    private lateinit var context: Context
+    private lateinit var controller: TopLevelDevicePreferenceController
 
     @Before
     fun setUp() {
-        mContext = RuntimeEnvironment.application
-        mController = TopLevelDevicePreferenceController(mContext, "top_level_device")
+        context = ApplicationProvider.getApplicationContext()
+        controller = TopLevelDevicePreferenceController(context, "top_level_device")
     }
 
     @Test
     fun getAvailabilityStatus_shouldShow_isAvailable() {
         ShadowDesktopSettingsUtils.setShouldShow(true)
 
-        assertThat(mController.availabilityStatus).isEqualTo(BasePreferenceController.AVAILABLE)
+        assertThat(controller.availabilityStatus).isEqualTo(BasePreferenceController.AVAILABLE)
     }
 
     @Test
     fun getAvailabilityStatus_shouldNotShow_isUnsupported() {
         ShadowDesktopSettingsUtils.setShouldShow(false)
 
-        assertThat(mController.availabilityStatus)
+        assertThat(controller.availabilityStatus)
             .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE)
     }
 }

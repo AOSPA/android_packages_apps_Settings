@@ -19,7 +19,7 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/nfc_quick_toggle_title">
 
-    <com.android.settings.widget.SettingsMainSwitchPreference
+    <com.android.settingslib.RestrictedSwitchPreference
         android:key="toggle_nfc"
         android:title="@string/nfc_main_switch_title"
         settings:userRestriction="no_near_field_communication_radio"
@@ -31,17 +31,21 @@
         settings:lottie_rawRes="@drawable/nfc_detection_point"
         settings:controller="com.android.settings.nfc.NfcDetectionPointController"/>
 
-    <com.android.settingslib.RestrictedSwitchPreference
-        android:key="nfc_secure_settings"
-        android:title="@string/nfc_secure_settings_title"
-        settings:userRestriction="no_near_field_communication_radio"
-        settings:controller="com.android.settings.nfc.SecureNfcPreferenceController"
-        android:summary="@string/nfc_secure_toggle_summary"/>
+    <PreferenceCategory
+        android:key="nfc_payment_category"
+        android:title="@string/nfc_payment_settings_title">
 
-    <Preference
-        android:key="default_payment_app"
-        android:title="@string/nfc_payment_settings_title"
-        android:fragment="com.android.settings.nfc.PaymentSettings"
-        settings:keywords="@string/keywords_default_payment_app"
-        settings:controller="com.android.settings.applications.specialaccess.DefaultPaymentSettingsPreferenceController"/>
+        <Preference
+            android:key="default_payment_app"
+            android:title="@string/nfc_payment_settings_title"
+            android:fragment="com.android.settings.connecteddevice.NfcAndPaymentFragment"
+            settings:keywords="@string/keywords_default_payment_app"
+            settings:controller="com.android.settings.applications.specialaccess.DefaultPaymentSettingsPreferenceController"/>
+        <com.android.settingslib.RestrictedSwitchPreference
+            android:key="nfc_secure_settings"
+            android:title="@string/nfc_secure_settings_title"
+            settings:userRestriction="no_near_field_communication_radio"
+            settings:controller="com.android.settings.nfc.SecureNfcPreferenceController"
+            android:summary="@string/nfc_secure_toggle_summary"/>
+    </PreferenceCategory>
 </PreferenceScreen>

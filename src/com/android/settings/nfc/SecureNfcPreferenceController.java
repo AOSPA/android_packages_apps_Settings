@@ -18,12 +18,14 @@ package com.android.settings.nfc;
 import android.content.Context;
 import android.nfc.NfcAdapter;
 import android.os.UserManager;
+import android.util.Log;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
-import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.RestrictedSwitchPreference;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
@@ -49,9 +51,29 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
             return;
         }
 
-        final TwoStatePreference switchPreference = screen.findPreference(getPreferenceKey());
+        final RestrictedSwitchPreference preference = screen.findPreference(getPreferenceKey());
+        updateState(preference);
+        mSecureNfcEnabler = new SecureNfcEnabler(mContext, preference);
+    }
 
-        mSecureNfcEnabler = new SecureNfcEnabler(mContext, switchPreference);
+    @Override
+    public void updateState(Preference preference) {
+        if (isNfcUserChangeRestricted() || !mNfcAdapter.isEnabled()) {
+            preference.setEnabled(false);
+        } else {
+            preference.setEnabled(true);
+        }
+        super.updateState(preference);
+    }
+
+    private boolean isNfcUserChangeRestricted() {
+        final UserManager userManager = mContext.getSystemService(UserManager.class);
+        if (userManager == null) {
+            Log.e("SecureNfcPreferenceController", "UserManager is null");
+            return false;
+        }
+        return userManager.hasUserRestriction(
+                UserManager.DISALLOW_CHANGE_NEAR_FIELD_COMMUNICATION_RADIO);
     }
 
     @Override
@@ -61,7 +83,11 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        return mNfcAdapter.enableSecureNfc(isChecked);
+        if (isToggleable()) {
+            return mNfcAdapter.enableSecureNfc(isChecked);
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -102,5 +128,11 @@ public class SecureNfcPreferenceController extends TogglePreferenceController
         if (mSecureNfcEnabler != null) {
             mSecureNfcEnabler.pause();
         }
+    }
+    private boolean isToggleable() {
+        if (mUserManager.isGuestUser()) {
+            return false;
+        }
+        return true;
     }
 }

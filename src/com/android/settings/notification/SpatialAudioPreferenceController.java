@@ -30,6 +30,7 @@ import com.android.settings.core.TogglePreferenceController;
 /**
  * The controller of the Spatial audio setting for speaker in the SoundSettings.
  */
+// LINT.IfChange
 public class SpatialAudioPreferenceController extends TogglePreferenceController {
 
     private final Spatializer mSpatializer;
@@ -69,3 +70,4 @@ public class SpatialAudioPreferenceController extends TogglePreferenceController
         return R.string.menu_key_sound;
     }
 }
+// LINT.ThenChange(SpatialAudioApiScreen.kt)

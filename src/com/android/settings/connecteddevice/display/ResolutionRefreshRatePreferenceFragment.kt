@@ -245,7 +245,7 @@ class ResolutionRefreshRatePreferenceFragment(
         }
         logInfo("Showing dialog to confirm resolution/refresh rate change")
         val dialog =
-            ResolutionChangeDialogFragment.newInstance(dialogInfo.newMode, dialogInfo.existingMode)
+            ResolutionChangeDialogFragment.newInstance(dialogInfo.newMode, dialogInfo.previousMode)
         dialog.show(parentFragmentManager, ResolutionChangeDialogFragment.TAG)
     }
 

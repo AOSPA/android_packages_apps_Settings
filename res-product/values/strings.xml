@@ -293,6 +293,8 @@
     <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="device">Use your face to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
     <!-- Text shown in face settings explaining what your face can be used for. Used when face is class 3 and attention checking is not supported. [CHAR LIMIT=NONE] -->
     <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="desktop">Use your face to unlock your device or verify it\u2019s you, like when you sign in to apps or approve a purchase.\n\nKeep in mind:\nYou can only have one face set up at a time. To add another face, delete the current one.\n\nLooking at the device can unlock it when you don\u2019t intend to.\n\nYour device can be unlocked by someone else if it\u2019s held up to your face, even if your eyes are closed.\n\nYour device can be unlocked by someone who looks a lot like you, like an identical sibling.</string>
+    <!-- Footer description shown on face settings page. -->
+    <string name="security_settings_face_footer_description_class3" product="default"></string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog [CHAR LIMIT=NONE]-->
     <string name="security_settings_fingerprint_enroll_introduction_v3_message">Use your fingerprint to unlock your <xliff:g id="deviceName" example="Pixel">%s</xliff:g> or verify it\u2019s you, like when you sign in to apps or approve a purchase</string>
     <!-- Introduction detail message shown in fingerprint enrollment dialog when asking for parental consent [CHAR LIMIT=NONE]-->
@@ -702,7 +704,7 @@
     <!--  Virtual device details. Footer [CHAR LIMIT=none] -->
     <string name="virtual_device_details_footer_title" product="desktop">If you forget <xliff:g id="device_name">%1$s</xliff:g>, it will no longer be associated to this device. Some permissions will be removed and some apps and app streaming may stop working.</string>
     <!-- Description of Secure NFC in the 1st level settings screen. [CHAR LIMIT=NONE] -->
-    <string name="nfc_secure_toggle_summary" product="default">Allow NFC use only when screen is unlocked</string>
+    <string name="nfc_secure_toggle_summary" product="default">Allow Contactless payments only when screen is unlocked</string>
     <!-- Summary for the panel of add Wi-Fi network from APP [CHAR LIMIT=NONE] -->
     <string name="wifi_add_app_single_network_summary" product="default"><xliff:g id="appName" example="ThirdPartyAppName">%1$s</xliff:g> wants to save a network to your phone</string>
     <!-- Summary for the panel of add Wi-Fi network from APP [CHAR LIMIT=NONE] -->
@@ -1363,4 +1365,11 @@
     <!-- The description of the screen saver setup page [CHAR LIMIT=none] -->
     <string name="dream_setup_description" product="default">Choose what you’ll see on your screen when your tablet is docked. Your device may use more energy when a screen saver is used.</string>
     <string name="dream_setup_description" product="desktop">Choose what you’ll see on your screen when your device is docked. Your device may use more energy when a screen saver is used.</string>
+
+    <!-- Title for Display settings [CHAR LIMIT=30] -->
+    <string name="display_settings" product="default">Display</string>
+
+    <!-- Sound and vibration settings screen heading. [CHAR LIMIT=30] -->
+    <string name="sound_settings" product="default">Sound &amp; vibration</string>
+    <string name="sound_settings" product="desktop">Sound</string>
 </resources>

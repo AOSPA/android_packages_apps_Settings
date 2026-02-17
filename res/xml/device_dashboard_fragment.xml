@@ -32,7 +32,7 @@
         android:key="trackpad_settings"
         android:title="@string/trackpad_settings"
         android:summary="@string/trackpad_settings_summary"
-        android:icon="@drawable/ic_settings_touchpad"
+        android:icon="@drawable/ic_settings_touchpad_mouse"
         android:fragment="com.android.settings.inputmethod.TouchpadAndMouseSettings"
         settings:keywords="@string/keywords_touchpad"
         settings:controller="com.android.settings.inputmethod.TouchpadAndMouseSettingsController"/>
@@ -41,7 +41,7 @@
         android:key="touchpad_settings"
         android:title="@string/trackpad_settings"
         android:summary="@string/trackpad_settings_summary"
-        android:icon="@drawable/ic_settings_touchpad"
+        android:icon="@drawable/ic_settings_touchpad_mouse"
         android:fragment="com.android.settings.inputmethod.TouchpadSettingFragment"
         settings:keywords="@string/keywords_touchpad"
         settings:controller="com.android.settings.inputmethod.TouchpadSettingsController"/>
@@ -56,7 +56,7 @@
     <!-- TODO: b/448125141 - Add new icons for display and sound. -->
     <Preference
         android:fragment="com.android.settings.DisplaySettings"
-        android:icon="@drawable/ic_settings_display_filled"
+        android:icon="@drawable/ic_settings_tv_displays"
         android:key="device_dashboard_display"
         android:title="@string/display_settings"
         android:summary="@string/display_dashboard_summary"
@@ -64,7 +64,7 @@
 
     <Preference
         android:fragment="com.android.settings.notification.SoundSettings"
-        android:icon="@drawable/ic_volume_up_filled"
+        android:icon="@drawable/ic_settings_mic"
         android:key="device_dashboard_sound"
         android:title="@string/sound_settings"
         android:summary="@string/sound_dashboard_summary" />

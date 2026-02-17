@@ -24,6 +24,7 @@ import android.hardware.input.IInputManager;
 import android.hardware.input.InputDeviceIdentifier;
 import android.hardware.input.InputManager;
 import android.hardware.input.InputManagerGlobal;
+import android.hardware.input.KeyGlyphMap;
 import android.os.Handler;
 import android.util.SparseArray;
 import android.view.InputDevice;
@@ -53,6 +54,7 @@ public class ShadowInputManager extends org.robolectric.shadows.ShadowInputManag
             new HashMap<>();
     private final Map<InputDeviceIdentifier, Map<Integer, Integer>> mAxisRemappings =
             new HashMap<>();
+    private final Map<Integer, KeyGlyphMap> mGlyphMaps = new HashMap<>();
 
     @Implementation
     protected static InputManager getInstance() {
@@ -165,6 +167,19 @@ public class ShadowInputManager extends org.robolectric.shadows.ShadowInputManag
     @Implementation
     public void clearAllControllerAxisRemappings(@NonNull InputDeviceIdentifier identifier) {
         mAxisRemappings.remove(identifier);
+    }
+
+    /**
+     * @see InputManager#getKeyGlyphMap(int)
+     */
+    @Implementation
+    public KeyGlyphMap getKeyGlyphMap(int deviceId) {
+        return mGlyphMaps.get(deviceId);
+    }
+
+    /** Sets {@link KeyGlyphMap} for {@code deviceId} */
+    public void setKeyGlyphMap(int deviceId, KeyGlyphMap map) {
+        mGlyphMaps.put(deviceId, map);
     }
 
     @Override

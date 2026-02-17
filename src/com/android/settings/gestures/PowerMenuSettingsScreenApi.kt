@@ -30,7 +30,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
-import com.android.settingslib.metadata.preferencesapi.types.EnumApi
+import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 
@@ -57,7 +57,10 @@ class PowerMenuSettingsScreenApi() :
         preference(
             key = "gesture_power_menu_long_press_category",
             purpose = R.string.long_press_power_category_purpose,
-            type = CustomEnum(LongPressPowerActions::class),
+            type = CustomEnum(
+                LongPressPowerActions::class,
+                R.string.long_press_power_actions_description
+            ),
         ) {
             get {
                 execute {
@@ -120,12 +123,11 @@ class PowerMenuSettingsScreenApi() :
                             ?: context.resources.getInteger(
                                 com.android.internal.R.integer.config_longPressOnPowerDurationMs
                             )
-                    settingsValue.createSensitivityGeneratedValue(context)
+                    settingsValue
                 }
             }
             set {
-                execute { generatedValue ->
-                    val value = generatedValue.value
+                execute { value ->
                     val values = context.resources.getIntArray(DURATIONS_ARRAY_ID)
                     val closestIndex = closestValueIndex(values, value)
                     SettingsGlobalStore.get(context)
@@ -147,14 +149,14 @@ class PowerMenuSettingsScreenApi() :
 
 private fun Int.createSensitivityGeneratedValue(context: Context): GeneratedValue<Int> {
     return GeneratedValue(
-        context.getString(R.string.long_press_power_sensitivity_value_description, this),
         this,
+        context.getString(R.string.long_press_power_sensitivity_value_description, this),
     )
 }
 
 @VisibleForTesting
 enum class LongPressPowerActions(override val asApiValue: Int, override val purpose: Int) :
-    EnumApi<Int> {
+    EnumApiWithRes<Int> {
     POWER_MENU(
         PowerMenuSettingsUtils.LONG_PRESS_POWER_GLOBAL_ACTIONS,
         R.string.power_menu_long_press_for_power_menu_title,

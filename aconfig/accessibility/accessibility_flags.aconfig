@@ -4,10 +4,10 @@ container: "system_ext"
 # NOTE: Keep alphabetized to help limit merge conflicts from multiple simultaneous editors.
 
 flag {
-  name: "audio_balance_state_description"
+  name: "allow_to_enter_dark_theme_settings_when_battery_saver"
   namespace: "accessibility"
-  description: "Provides a more valuable state description to the audio balance slider."
-  bug: "319575109"
+  description: "Allow users to enter the dark theme settings page to change the option config during battery saver mode."
+  bug: "467786619"
   metadata {
     purpose: PURPOSE_BUGFIX
   }
@@ -32,6 +32,13 @@ flag {
   namespace: "accessibility"
   description: "Migrate audio adjustment screen to the Catalyst infrastructure"
   bug: "421227414"
+}
+
+flag {
+  name: "catalyst_autoclick_screen"
+  namespace: "accessibility"
+  description: "Migrate autoclick screen to the Catalyst infrastructure"
+  bug: "440382182"
 }
 
 flag {
@@ -70,6 +77,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_caption_preferences_screen"
+  namespace: "accessibility"
+  description: "Migrate caption preferences screen to Catalyst infrastructure"
+  bug: "440381963"
+}
+
+flag {
   name: "catalyst_time_to_take_action_screen"
   namespace: "accessibility"
   description: "Migrate time to take action screen to Catalyst infrastructure"
@@ -88,6 +102,16 @@ flag {
   namespace: "accessibility"
   description: "Checks that all 'prebundled' components, used for grouping, are also preinstalled"
   bug: "353888087"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}
+
+flag {
+  name: "desktop_magnification_settings_polish"
+  namespace: "accessibility"
+  description: "Enables polish of magnification settings related to input form factors (touch and keyboard)."
+  bug: "422204290"
   metadata {
     purpose: PURPOSE_BUGFIX
   }
@@ -149,8 +173,11 @@ flag {
 }
 
 flag {
-  name: "voice_access_locale_notifications"
+  name: "text_cursor_blinking_user_setting"
   namespace: "accessibility"
-  description: "Provides notification to users when the chosen locale doesn't have an associated model."
-  bug: "453531997"
+  description: "Moves the text cursor blinking setting to the Color and Motion settings page."
+  bug: "405251212"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
 }

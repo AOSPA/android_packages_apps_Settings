@@ -83,10 +83,7 @@ class SupervisionChangePinPreference :
     @VisibleForTesting
     fun onChangePinComplete(result: ActivityResult) {
         // Assume success if the flow was not canceled.
-        if (
-            Flags.enableSupervisionPinSnackbarsToastMessage() &&
-                result.resultCode != Activity.RESULT_CANCELED
-        ) {
+        if (result.resultCode != Activity.RESULT_CANCELED) {
             Toast.makeText(
                     lifeCycleContext,
                     lifeCycleContext.getString(R.string.supervision_pin_changed),

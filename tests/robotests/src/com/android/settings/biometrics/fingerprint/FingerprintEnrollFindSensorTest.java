@@ -18,6 +18,7 @@ package com.android.settings.biometrics.fingerprint;
 
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_POWER_BUTTON;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_REAR;
+import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_STANDALONE;
 import static android.hardware.fingerprint.FingerprintSensorProperties.TYPE_UDFPS_OPTICAL;
 import static android.text.Layout.HYPHENATION_FREQUENCY_NONE;
 
@@ -35,19 +36,25 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 import static org.robolectric.RuntimeEnvironment.application;
+import static org.robolectric.RuntimeEnvironment.getApplication;
 
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.hardware.biometrics.ComponentInfoInternal;
+import android.hardware.biometrics.SensorLocationInternal;
 import android.hardware.biometrics.SensorProperties;
+import android.hardware.biometrics.fingerprint.SensorLocationData;
+import android.hardware.biometrics.fingerprint.location.StandaloneLocation;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintManager.EnrollmentCallback;
 import android.hardware.fingerprint.FingerprintSensorProperties;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.CancellationSignal;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.view.View;
 import android.widget.TextView;
 
@@ -56,8 +63,10 @@ import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
 import com.android.settings.biometrics.BiometricEnrollBase;
+import com.android.settings.flags.Flags;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.google.android.setupcompat.PartnerCustomizationLayout;
@@ -69,6 +78,7 @@ import com.google.android.setupdesign.template.HeaderMixin;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -83,10 +93,13 @@ import org.robolectric.shadows.ShadowActivity;
 import org.robolectric.shadows.ShadowActivity.IntentForResult;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowUtils.class)
+@Config(shadows = {ShadowUtils.class, SettingsShadowResources.class})
 public class FingerprintEnrollFindSensorTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final int DEFAULT_ACTIVITY_RESULT = Activity.RESULT_CANCELED;
 
@@ -142,6 +155,31 @@ public class FingerprintEnrollFindSensorTest {
         mActivityController.setup();
     }
 
+    private void ensureDetailedFingerprintSensorLocationEnabled() {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_show_detailed_fingerprint_find_sensor_instructions, true);
+    }
+
+    private void setupActivity_onStandaloneFpsDevice() {
+        ensureDetailedFingerprintSensorLocationEnabled();
+        final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
+        props.add(newStandaloneFingerprintSensorPropertiesInternal(
+                (byte) 0 /* PhysicalSensorLocation.UNKNOWN */));
+        doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
+
+        mActivityController.setup();
+    }
+
+    private void setupActivity_onStandaloneKeyboardTopRightFpsDevice() {
+        ensureDetailedFingerprintSensorLocationEnabled();
+        final ArrayList<FingerprintSensorPropertiesInternal> props = new ArrayList<>();
+        props.add(newStandaloneFingerprintSensorPropertiesInternal(
+                (byte) 3 /* PhysicalSensorLocation.KEYBOARD_TOP_RIGHT */));
+        doReturn(props).when(mFingerprintManager).getSensorPropertiesInternal();
+
+        mActivityController.setup();
+    }
+
     private FingerprintSensorPropertiesInternal newFingerprintSensorPropertiesInternal(
             @FingerprintSensorProperties.SensorType int sensorType) {
         return new FingerprintSensorPropertiesInternal(
@@ -153,9 +191,30 @@ public class FingerprintEnrollFindSensorTest {
                 true /* resetLockoutRequiresHardwareAuthToken */);
     }
 
+    private FingerprintSensorPropertiesInternal newStandaloneFingerprintSensorPropertiesInternal(
+            byte physicalSensorLocation) {
+        StandaloneLocation standaloneLocation = new StandaloneLocation();
+        standaloneLocation.location = physicalSensorLocation;
+
+        SensorLocationData sensorLocationData = SensorLocationData.standaloneLocation(
+                standaloneLocation);
+
+        SensorLocationInternal sensorLocationInternal = new SensorLocationInternal("", 0, 0, 0,
+                sensorLocationData);
+
+        return new FingerprintSensorPropertiesInternal(0 /* sensorId */,
+                SensorProperties.STRENGTH_STRONG, 1 /* maxEnrollmentsPerUser */,
+                new ArrayList<ComponentInfoInternal>(),
+                TYPE_STANDALONE,
+                false /* halControlsIllumination */,
+                true /* resetLockoutRequiresHardwareAuthToken */,
+                List.of(sensorLocationInternal));
+    }
+
     @After
     public void tearDown() {
         ShadowUtils.reset();
+        SettingsShadowResources.reset();
     }
 
     private void verifyStartEnrollingActivity() {
@@ -655,5 +714,26 @@ public class FingerprintEnrollFindSensorTest {
         if (sidecar != null) {
             assertThat(sidecar.isAdded()).isFalse();
         }
+    }
+
+    private CharSequence getDescription() {
+        GlifLayout layout = ((GlifLayout) mActivity.findViewById(R.id.setup_wizard_layout));
+        return layout.getDescriptionText();
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SHOW_DETAILED_FINGERPRINT_SENSOR_LOCATION)
+    public void checkDescription_onStandaloneFpsDevice() {
+        setupActivity_onStandaloneFpsDevice();
+        assertThat(getDescription()).isEqualTo(getApplication().getResources().getString(
+                R.string.security_settings_enroll_find_sensor_standalone_default_message));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SHOW_DETAILED_FINGERPRINT_SENSOR_LOCATION)
+    public void checkDescription_onStandaloneKeyboardTopRightFpsDevice() {
+        setupActivity_onStandaloneKeyboardTopRightFpsDevice();
+        assertThat(getDescription()).isEqualTo(getApplication().getResources().getString(
+                R.string.security_settings_enroll_find_sensor_keyboard_top_right_message));
     }
 }

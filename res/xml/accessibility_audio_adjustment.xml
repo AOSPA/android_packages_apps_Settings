@@ -29,7 +29,7 @@
         settings:controller="com.android.settings.accessibility.PrimaryMonoPreferenceController"/>
 
     <com.android.settings.accessibility.BalanceSeekBarPreference
-        android:key="seekbar_primary_balance"
+        android:key="master_balance"
         android:persistent="false"
         android:title="@string/accessibility_toggle_primary_balance_title"/>
 </PreferenceScreen>

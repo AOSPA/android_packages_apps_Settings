@@ -22,6 +22,7 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -31,7 +32,6 @@ import com.android.settings.R
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.framework.theme.SettingsDimension
-import com.android.settingslib.spa.framework.util.mapItem
 import com.android.settingslib.spa.lifecycle.collectAsCallbackWithLifecycle
 import com.android.settingslib.spa.widget.ui.SettingsIntro
 import com.android.settingslib.spaprivileged.model.app.AppEntry
@@ -42,6 +42,8 @@ import com.android.settingslib.spaprivileged.template.app.AppListPage
 import com.android.settingslib.spaprivileged.template.app.AppListSwitchItem
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 
 object ForceDarkAppExceptionsPageProvider : SettingsPageProvider {
     override val name = "ForceDarkAppExceptions"
@@ -60,6 +62,7 @@ object ForceDarkAppExceptionsPageProvider : SettingsPageProvider {
                     )
                 }
             },
+            noMoreOptions = true,
         )
     }
 }
@@ -69,11 +72,8 @@ data class ForceDarkAppExceptionRecord(
     val controller: ForceDarkAppExceptionsController,
 ) : AppRecord
 
-class ForceDarkAppExceptionsListModel(
-    private val context: Context,
-    private val repository: ForceDarkAppExceptionsRepository =
-        ForceDarkAppExceptionsRepository(context = context),
-) : AppListModel<ForceDarkAppExceptionRecord> {
+class ForceDarkAppExceptionsListModel(private val context: Context) :
+    AppListModel<ForceDarkAppExceptionRecord> {
 
     private val usageStatsManager =
         context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
@@ -86,6 +86,11 @@ class ForceDarkAppExceptionsListModel(
             usageStatsManager.queryAndAggregateUsageStats(startTime, now).toMutableMap().apply {
                 getPackagesToRemove().forEach { pkgName -> remove(pkgName) }
             }
+    }
+
+    @VisibleForTesting
+    var repositoryFactory: (Context, Int) -> ForceDarkAppExceptionsRepository = { context, userId ->
+        ForceDarkAppExceptionsRepository(context, userId)
     }
 
     /** Returns packages that should not be included in the recently accessed category. */
@@ -115,12 +120,16 @@ class ForceDarkAppExceptionsListModel(
     }
 
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
-        appListFlow.mapItem { app ->
-            ForceDarkAppExceptionRecord(
-                app = app,
-                controller = ForceDarkAppExceptionsController(app, repository),
-            )
-        }
+        userIdFlow
+            .map { userId -> userId to repositoryFactory(context, userId) }
+            .combine(appListFlow) { (userId, repository), appList ->
+                appList.map { app ->
+                    ForceDarkAppExceptionRecord(
+                        app = app,
+                        controller = ForceDarkAppExceptionsController(app, repository),
+                    )
+                }
+            }
 
     override fun getComparator(option: Int): Comparator<AppEntry<ForceDarkAppExceptionRecord>> =
         compareByDescending<AppEntry<ForceDarkAppExceptionRecord>> {

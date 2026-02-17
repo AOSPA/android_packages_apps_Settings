@@ -112,17 +112,17 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
         relatedIssueOnlySafetySources =
             SafetyCenterSubpageRegistry.getIssueOnlySafetySourceIds(preferenceKey)
         defaultSummaryResId = SafetyCenterSubpageRegistry.getDefaultSummaryResId(preferenceKey)
-        val model = viewModel
-        if (preference != null && model != null) {
-            updatePreferenceUi(preference!!, model.getCurrentSafetyCenterDataAsUiData())
+        val uiData = viewModel?.safetyCenterUiLiveData?.value
+        if (preference != null && uiData != null) {
+            updatePreferenceUi(preference!!, uiData)
         }
     }
 
     override fun updateState(preference: Preference?) {
         super.updateState(preference)
-        val model = viewModel
-        if (preference != null && model != null) {
-            updatePreferenceUi(preference, model.getCurrentSafetyCenterDataAsUiData())
+        val uiData = viewModel?.safetyCenterUiLiveData?.value
+        if (preference != null && uiData != null) {
+            updatePreferenceUi(preference, uiData)
         }
     }
 
@@ -148,7 +148,11 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
                 highestSeverityIssueOnlySafetySourceIssue,
                 subpageMaxSeverity,
             )
-        setVisibility(preference, relatedSafetySourcesData.isNotEmpty())
+        setVisibility(
+            preference,
+            relatedSafetySourcesData.isNotEmpty() ||
+                SafetyCenterSubpageRegistry.hasInjectedTiles(preferenceKey),
+        )
         Log.d(TAG, "[$preferenceKey] UI updated with max severity: $subpageMaxSeverity")
     }
 
@@ -326,19 +330,8 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
     }
 
     override fun updateNonIndexableKeys(keys: MutableList<String>) {
-        val uiData = SafetyCenterSearchIndexUtils.getCurrentSafetyCenterData(mContext)
-        if (uiData == null) {
-            Log.d(TAG, "[$preferenceKey] No SafetyCenterUiData, adding to non-indexable keys")
-            keys.add(preferenceKey)
-            return
-        }
-
-        val relatedSafetySourcesData = getRelatedSafetySourcesData(uiData)
-        if (relatedSafetySourcesData.isEmpty()) {
-            Log.d(
-                TAG,
-                "[$preferenceKey] No related entries for subpage, adding to non-indexable keys",
-            )
+        if (!SafetyCenterSubpageRegistry.isSubpageAvailable(mContext, preferenceKey)) {
+            Log.d(TAG, "[$preferenceKey] Subpage is not available, adding to non-indexable keys")
             keys.add(preferenceKey)
         }
     }

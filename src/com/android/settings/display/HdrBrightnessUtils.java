@@ -23,13 +23,8 @@ import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.view.Display;
 
-import com.android.server.display.feature.flags.Flags;
-
 public class HdrBrightnessUtils {
     static int getAvailabilityStatus(Context context) {
-        if (!Flags.hdrBrightnessSetting()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         DisplayManager dm = context.getSystemService(DisplayManager.class);
         for (Display display : dm.getDisplays(
                 DisplayManager.DISPLAY_CATEGORY_ALL_INCLUDING_DISABLED)) {

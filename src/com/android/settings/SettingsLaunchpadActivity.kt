@@ -17,16 +17,20 @@
 package com.android.settings
 
 import android.app.Activity
+import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_FORWARD_RESULT
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.util.Log
+import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolineIntent
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.core.SubSettingLauncher
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settings.spa.SpaActivity.Companion.getSpaActivityIntent
+import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settingslib.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.metadata.KeyParameters
@@ -34,8 +38,14 @@ import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider
+import com.android.settingslib.metadata.ValidatedKeyParameters
+import com.android.settingslib.metadata.preferencesapi.ApiOperationContext
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.toMap
+import kotlinx.coroutines.runBlocking
 
 /**
  * A trampoline Activity that launches a settings screen based on a generic screen key.
@@ -83,7 +93,17 @@ class SettingsLaunchpadActivity : Activity() {
     }
 
     private fun processIntentAndLaunch() {
-        val screenKey = intent.getStringExtra(EXTRA_SCREEN_KEY)
+        val screenKey =
+            intent.getStringExtra(EXTRA_SCREEN_KEY)
+                ?: intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)?.let {
+                    // update the high light key from the search result intent
+                    intent.putExtra(
+                        EXTRA_HIGHLIGHT_KEY,
+                        PreferenceSearchIndexablesProvider.getHighlightKey(it),
+                    )
+                    PreferenceSearchIndexablesProvider.getScreenKey(it)
+                }
+
         if (screenKey.isNullOrEmpty()) {
             Log.e(TAG, "Required extra '$EXTRA_SCREEN_KEY' is missing or empty.")
             return
@@ -99,6 +119,47 @@ class SettingsLaunchpadActivity : Activity() {
                     Log.e(TAG, "Cannot find screen metadata for key: $screenKey")
                     return
                 }
+
+        if (screenMetadata is PreferencesApiScreen) {
+            val checkScreenFlag = screenMetadata.flag?.check() ?: true
+            if (!checkScreenFlag) { // Do not launch the screen if flag is disabled.
+                Log.w(
+                    TAG,
+                    "Screen flag is disabled for key '$screenKey'. Aborting launch.",
+                )
+                return
+            }
+
+            val opContext =
+                ApiOperationContext(
+                    context = this@SettingsLaunchpadActivity.applicationContext,
+                    parameters = screenMetadata.keyParameters ?: ValidatedKeyParameters.EMPTY,
+                )
+
+            // Precondition checks are suspend functions. Since this is a trampoline
+            // activity that should execute quickly, we use runBlocking. This assumes
+            // the precondition checks are fast and won't cause ANRs.
+            val screenPreconditionsCheck =
+                runBlocking { screenMetadata.screenPreconditions?.check(opContext) } ?: Allowed
+            if (screenPreconditionsCheck != Allowed) { // Do not launch the screen if preconditions are not met.
+                val reason = (screenPreconditionsCheck as Disallowed).getReason(opContext.context)
+                Log.w(
+                    TAG,
+                    "Screen preconditions not met for key '$screenKey' with reason: $reason. Aborting launch.",
+                )
+                return
+            }
+
+            val spaRoutePrefix = screenMetadata.spaRoutePrefix
+            if (!spaRoutePrefix.isNullOrEmpty()) {
+                startScreen(
+                    screenMetadata,
+                    { getSpaActivityIntent(spaRoutePrefix) },
+                    { startSpaActivity(spaRoutePrefix) },
+                )
+                return
+            }
+        }
 
         val fragmentClassName =
             screenMetadata.fragmentClass()?.name
@@ -139,13 +200,25 @@ class SettingsLaunchpadActivity : Activity() {
                     METRICS_CATEGORY_UNKNOWN
                 ) // TODO(b/465855195): set a meaningful metrics category
 
+        startScreen(
+            metadata,
+            { launcher.toIntent() },
+            { launcher.addFlags(FLAG_ACTIVITY_NEW_TASK).launch() },
+        )
+    }
+
+    private fun startScreen(
+        metadata: PreferenceScreenMetadata,
+        intent: () -> Intent,
+        launch: () -> Unit,
+    ) {
         if (shouldLaunchDeepLinkTrampoline()) {
             val menuKey = resolveMenuKey(metadata)
             val deepLinkIntent =
-                getTrampolineIntent(launcher.toIntent(), menuKey).addFlags(FLAG_ACTIVITY_NEW_TASK)
+                getTrampolineIntent(intent(), menuKey).addFlags(FLAG_ACTIVITY_NEW_TASK)
             startActivity(deepLinkIntent)
         } else {
-            launcher.addFlags(FLAG_ACTIVITY_NEW_TASK).launch()
+            launch()
         }
     }
 
@@ -168,7 +241,7 @@ class SettingsLaunchpadActivity : Activity() {
     ): PreferenceScreenCoordinate {
         val screenCoordinate =
             if (
-                CatalystFlags.catalystUseKeyParameters() &&
+                CatalystFlagProviderFactory.catalystUseKeyParameters() &&
                     PreferenceScreenRegistry.isParameterized(this, screenKey)
             ) {
                 PreferenceScreenCoordinate(

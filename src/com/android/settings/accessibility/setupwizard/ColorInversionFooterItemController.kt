@@ -29,10 +29,10 @@ class ColorInversionFooterItemController(private val context: Context, item: Ite
     private val colorInversionFooterMetadata = FooterPreference(helpResource = 0)
 
     public override fun bindData(item: Item) {
-        colorInversionFooterMetadata.getTitle(context).let {
-            item.summary = it
-            item.contentDescription = it
-        }
+        val title = colorInversionFooterMetadata.getTitle(context)
+        val intro = context.getString(colorInversionFooterMetadata.introductionTitle)
+        item.summary = title
+        item.contentDescription = colorInversionFooterMetadata.getContentDescription(intro, title)
     }
 
     override fun onItemSelected(activity: FragmentActivity) {}

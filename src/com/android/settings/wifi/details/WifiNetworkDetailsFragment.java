@@ -153,7 +153,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {
+        if (!WifiUtils.isWifiMultiuserEnabled()) {
             setIfOnlyAvailableForAdmins(true);
         }
         mIsUiRestricted = isUiRestricted();
@@ -229,7 +229,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
             MenuItem item = menu.add(0, Menu.FIRST, 0, R.string.wifi_modify);
             item.setIcon(com.android.internal.R.drawable.ic_mode_edit);
             item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
-            if (com.android.settings.connectivity.Flags.wifiMultiuser()
+            if (WifiUtils.isWifiMultiuserEnabled()
                     && !mWifiDetailPreferenceController2.canModifyNetwork()) {
                 item.setTooltipText(
                         getContext().getString(R.string.edit_wifi_network_non_owner_message));

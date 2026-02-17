@@ -16,10 +16,12 @@
 
 package com.android.settings.print
 
+import android.content.ComponentName
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.print.PrintManager
 import android.printservice.PrintServiceInfo
+import android.util.Log
 import com.android.settings.R
 import com.android.settingslib.spa.framework.util.mapItem
 import kotlinx.coroutines.Dispatchers
@@ -29,8 +31,9 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
-class PrintRepository(private val context: Context) {
+open class PrintRepository(private val context: Context) {
 
     private val printManager = context.getSystemService(PrintManager::class.java)!!
     private val packageManager = context.packageManager
@@ -43,34 +46,72 @@ class PrintRepository(private val context: Context) {
         val componentName: String,
     )
 
-    fun printServiceDisplayInfosFlow(): Flow<List<PrintServiceDisplayInfo>> =
+    /**
+     * Checks if a specific print service is enabled.
+     *
+     * @param componentName The flattened component name string.
+     */
+    open suspend fun isEnabled(componentName: String): Boolean =
+        withContext(Dispatchers.IO) {
+            val services = printManager.getPrintServices(PrintManager.ALL_SERVICES)
+            services?.any { it.componentName.flattenToString() == componentName && it.isEnabled }
+                ?: false
+        }
+
+    /**
+     * Enables or disables a specific print service.
+     *
+     * @param componentName The component name of the print service.
+     * @param enable Whether to enable the service.
+     */
+    open suspend fun setEnabled(componentName: String, enable: Boolean) =
+        withContext(Dispatchers.IO) {
+            ComponentName.unflattenFromString(componentName)?.let {
+                try {
+                    printManager.setPrintServiceEnabled(it, enable)
+                } catch (e: Exception) {
+                    Log.e(TAG, "Failed to set print service state", e)
+                }
+            }
+        }
+
+    open fun printServiceDisplayInfosFlow(): Flow<List<PrintServiceDisplayInfo>> =
         printServicesFlow()
             .mapItem { printService -> printService.toPrintServiceDisplayInfo() }
             .conflate()
             .flowOn(Dispatchers.Default)
 
-    private fun PrintServiceInfo.toPrintServiceDisplayInfo() = PrintServiceDisplayInfo(
-        title = resolveInfo.loadLabel(packageManager).toString(),
-        isEnabled = isEnabled,
-        summary = context.getString(
-            if (isEnabled) R.string.print_feature_state_on else R.string.print_feature_state_off
-        ),
-        icon = resolveInfo.loadIcon(packageManager),
-        componentName = componentName.flattenToString(),
-    )
+    private fun PrintServiceInfo.toPrintServiceDisplayInfo() =
+        PrintServiceDisplayInfo(
+            title = resolveInfo.loadLabel(packageManager).toString(),
+            isEnabled = isEnabled,
+            summary =
+                context.getString(
+                    if (isEnabled) R.string.print_feature_state_on
+                    else R.string.print_feature_state_off
+                ),
+            icon = resolveInfo.loadIcon(packageManager),
+            componentName = componentName.flattenToString(),
+        )
 
     private fun printServicesFlow(): Flow<List<PrintServiceInfo>> =
-        printManager.printServicesChangeFlow()
+        printManager
+            .printServicesChangeFlow()
             .map { printManager.getPrintServices(PrintManager.ALL_SERVICES) }
             .conflate()
             .flowOn(Dispatchers.Default)
 
     private companion object {
-        fun PrintManager.printServicesChangeFlow(): Flow<Unit> = callbackFlow {
-            val listener = PrintManager.PrintServicesChangeListener { trySend(Unit) }
-            addPrintServicesChangeListener(listener, null)
-            trySend(Unit)
-            awaitClose { removePrintServicesChangeListener(listener) }
-        }.conflate().flowOn(Dispatchers.Default)
+        private const val TAG = "PrintRepository"
+
+        fun PrintManager.printServicesChangeFlow(): Flow<Unit> =
+            callbackFlow {
+                    val listener = PrintManager.PrintServicesChangeListener { trySend(Unit) }
+                    addPrintServicesChangeListener(listener, null)
+                    trySend(Unit)
+                    awaitClose { removePrintServicesChangeListener(listener) }
+                }
+                .conflate()
+                .flowOn(Dispatchers.Default)
     }
 }

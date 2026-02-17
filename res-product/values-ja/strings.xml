@@ -163,6 +163,7 @@
     <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="tablet" msgid="6790505667764631343">"顔認証を使用して、タブレットのロック解除や本人確認（アプリへのログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nタブレットに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもタブレットを顔に近づけられた場合、他のユーザーによってタブレットのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもタブレットのロックを解除されることがあります。"</string>
     <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="device" msgid="7858917821957779752">"顔認証を使用して、デバイスのロック解除や本人確認（アプリへのログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nデバイスに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもデバイスを顔に近づけられた場合、他のユーザーによってデバイスのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもデバイスのロックを解除されることがあります。"</string>
     <string name="security_settings_face_settings_footer_class3_attention_not_supported" product="desktop" msgid="7858917821957779752">"顔認証を使用して、デバイスのロック解除や本人確認（アプリへのログインや購入の承認など）を行います。\n\n注意事項:\n一度に設定できる顔は 1 つのみです。別の顔を追加するには、現在の顔を削除してください。\n\nデバイスに無意識に顔を向けても、ロックが解除されることがあります。\n\n目を閉じているときでもデバイスを顔に近づけられた場合、他のユーザーによってデバイスのロックが解除されることがあります。\n\n双子など、あなたによく似た人でもデバイスのロックを解除されることがあります。"</string>
+    <string name="security_settings_face_footer_description_class3" product="default" msgid="3460502249540215759"></string>
     <string name="security_settings_fingerprint_enroll_introduction_v3_message" msgid="2145273491174234191">"指紋を使って <xliff:g id="DEVICENAME">%s</xliff:g> のロック解除や本人確認（アプリへのログインや購入の承認など）を行えるようにします。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="default" msgid="5101253231118659496">"お子様に、指紋を使ってスマートフォンのロック解除や本人確認を行うことを許可します。アプリへのログインや購入の承認などに顔を使用できるようになります。"</string>
     <string name="security_settings_fingerprint_enroll_introduction_consent_message" product="tablet" msgid="3063978167545799342">"指紋を使ってタブレットのロック解除や本人確認を行うことをお子様に許可します。アプリへのログインや購入の承認などの際に利用できます。"</string>
@@ -415,7 +416,7 @@
     <string name="virtual_device_details_footer_title" product="tablet" msgid="1049988675804747535">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>を削除すると、このタブレットとの関連付けが解除されます。一部の権限が削除されます。また、一部のアプリやアプリ ストリーミングを使用できなくなる可能性があります。"</string>
     <string name="virtual_device_details_footer_title" product="device" msgid="7548402204973923744">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>を削除すると、このデバイスとの関連付けが解除されます。一部の権限が削除されます。また、一部のアプリやアプリ ストリーミングを使用できなくなる可能性があります。"</string>
     <string name="virtual_device_details_footer_title" product="desktop" msgid="7548402204973923744">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>を削除すると、このデバイスとの関連付けが解除されます。一部の権限が削除されます。また、一部のアプリやアプリ ストリーミングを使用できなくなる可能性があります。"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="3515508978581011683">"画面がロック解除されている場合のみ NFC の利用を許可します"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="3074277711174185931">"画面がロック解除されている場合のみ、タッチ決済を許可します"</string>
     <string name="wifi_add_app_single_network_summary" product="default" msgid="7742934005022827107">"<xliff:g id="APPNAME">%1$s</xliff:g> がスマートフォンにネットワークを保存しようとしています"</string>
     <string name="wifi_add_app_single_network_summary" product="tablet" msgid="93466057231937113">"<xliff:g id="APPNAME">%1$s</xliff:g> がタブレットにネットワークを保存しようとしています"</string>
     <string name="wifi_add_app_single_network_summary" product="desktop" msgid="2116663141004049983">"<xliff:g id="APPNAME">%1$s</xliff:g> がデバイスにネットワークを保存しようとしています"</string>
@@ -536,9 +537,9 @@
     <string name="data_usage_auto_sync_on_dialog" product="tablet" msgid="7137933271689383781">"ウェブでアカウントに変更を加えると自動的にタブレットに反映されます。\n\nアカウントによっては、デバイスで加えた変更が自動的にウェブに反映されます。Google アカウントはその一例です。"</string>
     <string name="data_usage_auto_sync_on_dialog" product="default" msgid="7207326473052484970">"ウェブでアカウントに変更を加えると自動的にスマートフォンに反映されます。\n\nアカウントによっては、スマートフォンで加えた変更が自動的にウェブに反映されます。Google アカウントはその一例です。"</string>
     <string name="data_usage_auto_sync_on_dialog" product="desktop" msgid="7386532649309389029">"ウェブでアカウントに変更を加えると自動的にデバイスに反映されます。\n\nアカウントによっては、デバイスで加えた変更が自動的にウェブに反映されます。Google アカウントはその一例です。"</string>
-    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5609616352941038118">"タブレットで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はタブレットで測定された値ですが、携帯通信会社による測定結果とは異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
-    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4552449053646826676">"スマートフォンで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はスマートフォンで測定された値ですが、携帯通信会社による測定結果とは異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
-    <string name="data_usage_limit_dialog_mobile" product="desktop" msgid="407387299340649944">"デバイスで設定した上限に達するとモバイルデータが OFF になります。\n\nデータ使用量はデバイスで測定された値ですが、携帯通信会社での使用量の計算はこれと異なることがあるため、余裕をもって上限を設定することをおすすめします。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="tablet" msgid="5609616352941038118">"タブレットで設定した上限に達した場合に、モバイルデータを OFF にします。\n\nデータ使用量はタブレットで測定された値であり、携帯通信会社側の値とは異なることがあるため、上限は余裕をもって設定することをおすすめします。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="default" msgid="4552449053646826676">"スマートフォンで設定した上限に達した場合に、モバイルデータを OFF にします。\n\nデータ使用量はスマートフォンで測定された値であり、携帯通信会社側の値とは異なることがあるため、上限は余裕をもって設定することをおすすめします。"</string>
+    <string name="data_usage_limit_dialog_mobile" product="desktop" msgid="407387299340649944">"デバイスで設定した上限に達した場合に、モバイルデータを OFF にします。\n\nデータ使用量はデバイスで測定された値であり、携帯通信会社側の値とは異なることがあるため、上限は余裕をもって設定することをおすすめします。"</string>
     <string name="user_settings_footer_text" product="device" msgid="8543171604218174424">"新しいユーザーを追加してデバイスを共有できます。デバイス上にユーザーごとのスペースが作られ、ホーム画面、アカウント、アプリ、設定などをカスタマイズできます。"</string>
     <string name="user_settings_footer_text" product="tablet" msgid="4749331578207116797">"新しいユーザーを追加してタブレットを共有できます。タブレット上にユーザーごとのスペースが作られ、ホーム画面、アカウント、アプリ、設定などをカスタマイズできます。"</string>
     <string name="user_settings_footer_text" product="default" msgid="5440172971747221370">"新しいユーザーを追加してスマートフォンを共有できます。スマートフォン上にユーザーごとのスペースが作られ、ホーム画面、アカウント、アプリ、設定などをカスタマイズできます。"</string>
@@ -635,11 +636,11 @@
     <string name="spatial_audio_speaker" product="tablet" msgid="5452617980485166854">"タブレットのスピーカー"</string>
     <string name="spatial_audio_speaker" product="device" msgid="6204289590128303795">"デバイスのスピーカー"</string>
     <string name="spatial_audio_speaker" product="desktop" msgid="6204289590128303795">"デバイスのスピーカー"</string>
-    <string name="audio_sharing_dialog_share_content" product="default" msgid="708698992481271057">"このスマートフォンの音楽と動画は、両方のヘ⁠ッ⁠ド⁠フ⁠ォ⁠ンで再生されます"</string>
+    <string name="audio_sharing_dialog_share_content" product="default" msgid="708698992481271057">"このスマートフォンの音楽と動画が、両方のヘ⁠ッ⁠ド⁠フ⁠ォ⁠ンで再生されます"</string>
     <string name="audio_sharing_dialog_share_content" product="tablet" msgid="3459594795397910145">"このタブレットの音楽と動画は、両方のヘッドフォンで再生されます"</string>
     <string name="audio_sharing_dialog_share_content" product="device" msgid="1297019559878011896">"このデバイスの音楽と動画は、両方のヘッドフォンで再生されます"</string>
     <string name="audio_sharing_dialog_share_content" product="desktop" msgid="1297019559878011896">"このデバイスの音楽と動画は、両方のヘッドフォンで再生されます"</string>
-    <string name="audio_sharing_dialog_share_more_content" product="default" msgid="4517503016262565607">"このスマートフォンの音楽と動画は、接続されているヘッドフォンで再生されます"</string>
+    <string name="audio_sharing_dialog_share_more_content" product="default" msgid="4517503016262565607">"このスマートフォンの音楽と動画が、接続されているヘッドフォンで再生されます"</string>
     <string name="audio_sharing_dialog_share_more_content" product="tablet" msgid="7742344946644657414">"このタブレットの音楽と動画は、接続されているヘッドフォンで再生されます"</string>
     <string name="audio_sharing_dialog_share_more_content" product="device" msgid="3409470560712324580">"このデバイスの音楽と動画は、接続されているヘッドフォンで再生されます"</string>
     <string name="audio_sharing_dialog_share_more_content" product="desktop" msgid="3409470560712324580">"このデバイスの音楽と動画は、接続されているヘッドフォンで再生されます"</string>

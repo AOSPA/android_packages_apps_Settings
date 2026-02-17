@@ -267,7 +267,7 @@ public class AppDataUsageTest {
         ReflectionHelpers.setField(mFragment, "mContext", RuntimeEnvironment.application);
         when(mFragment.getListView()).thenReturn(mock(RecyclerView.class));
 
-        ShadowRestrictedLockUtilsInternal.setRestricted(true);
+        ShadowRestrictedLockUtilsInternal.setRestrictedByAdmin(true);
         doReturn(NetworkPolicyManager.POLICY_NONE).when(networkPolicyManager)
                 .getUidPolicy(testUid);
 

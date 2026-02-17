@@ -20,20 +20,30 @@ import android.app.Application
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.os.Looper
 import android.os.PersistableBundle
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.satellite.SatelliteManager
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
@@ -41,120 +51,243 @@ import org.robolectric.shadow.api.Shadow
 import org.robolectric.shadows.ShadowSatelliteManager
 import org.robolectric.shadows.ShadowSubscriptionManager
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @RunWith(RobolectricTestRunner::class)
 class SatelliteLandingPageViewModelTest {
+    @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
+
     private lateinit var context: Application
     private lateinit var shadowSatelliteManager: ShadowSatelliteManager
     private val SUB_ID = 1
 
-    @Mock private lateinit var subInfo: SubscriptionInfo
+    private lateinit var subInfo: SubscriptionInfo
     @Mock private lateinit var packageManager: PackageManager
     @Mock private lateinit var appsRepository: SatelliteAppsRepository
+    @Mock private lateinit var satelliteStateRepository: SatelliteStateRepository
 
-    // Constants for common intents
-    private val SOS_INTENT = Intent("sos.intent")
-    private val SETTINGS_INTENT = Intent("settings.intent")
+    private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.NOT_AVAILABLE)
+    private val isTerrestrialConnectedFlow = MutableStateFlow(true)
+    private val satelliteDisallowedReasonsFlow = MutableStateFlow(intArrayOf())
+    private val activeSubIdFlow = MutableStateFlow(SUB_ID)
 
     @Before
     fun setUp() {
-        MockitoAnnotations.openMocks(this)
         context = RuntimeEnvironment.getApplication()
-        context.setTheme(com.android.settings.R.style.Theme_Settings)
+
         shadowSatelliteManager =
             Shadow.extract(context.getSystemService(SatelliteManager::class.java))
         ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
-        `when`(subInfo.subscriptionId).thenReturn(SUB_ID)
+
+        subInfo = SubscriptionInfo.Builder().setId(SUB_ID).build()
         val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
         shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo))
         val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
         shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, PersistableBundle())
+
+        `when`(satelliteStateRepository.satelliteStatus).thenReturn(satelliteStatusFlow)
+        `when`(satelliteStateRepository.isTerrestrialConnected)
+            .thenReturn(isTerrestrialConnectedFlow)
+        `when`(satelliteStateRepository.satelliteDisallowedReasons)
+            .thenReturn(satelliteDisallowedReasonsFlow)
+        `when`(satelliteStateRepository.activeSubIdFlow).thenReturn(activeSubIdFlow)
+        `when`(satelliteStateRepository.getAttachRestrictionReasons(SUB_ID)).thenReturn(emptySet())
     }
 
     @Test
-    fun satelliteAppItems_whenLteNtnSupported_loadsLteApps() {
+    fun areAppsEnabled_whenSatelliteNotAvailable_isFalse() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.NOT_AVAILABLE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.areAppsEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.areAppsEnabled.value).isFalse()
+        job.cancel()
+    }
+
+    @Test
+    fun isTryADemoButtonEnabled_whenSatelliteActive_isFalse() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.ACTIVE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.isTryADemoButtonEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.isTryADemoButtonEnabled.value).isFalse()
+        job.cancel()
+    }
+
+    @Test
+    fun isTryADemoButtonEnabled_whenSatelliteAvailable_isTrue() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.isTryADemoButtonEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.isTryADemoButtonEnabled.value).isTrue()
+        job.cancel()
+    }
+
+    @Test
+    fun isTryADemoButtonEnabled_whenSatelliteNotAvailable_isTrue() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.NOT_AVAILABLE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.isTryADemoButtonEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.isTryADemoButtonEnabled.value).isTrue()
+        job.cancel()
+    }
+
+    @Test
+    fun areAppsEnabled_whenSatelliteActive_isTrue() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.ACTIVE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.areAppsEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.areAppsEnabled.value).isTrue()
+        job.cancel()
+    }
+
+    @Test
+    fun areAppsEnabled_whenSatelliteAvailable_isTrue() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.areAppsEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.areAppsEnabled.value).isTrue()
+        job.cancel()
+    }
+
+    @Test
+    fun satelliteAppItems_whenLteNtnSupported_loadsLteApps() = runTest {
         setLteNtnSupported(true)
-        val lteAppPackages = listOf("com.app1", "com.app2")
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(lteAppPackages)
+        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf("com.app1"))
         mockAppsRepositoryIntents()
         setupPackageManagerForApp("com.app1", "App1", Intent("app1.intent"))
+        setupCommonPackageManagerApps()
+
+        val items = createViewModelAndGetItems()
+        waitForAsync()
+
+        assertThat(items).hasSize(2) // Phone, App1
+        assertThat(items.map { it.getAppLabel(packageManager) })
+            .containsExactly("Phone", "App1")
+            .inOrder()
+        assertThat(items[0].summary)
+            .isEqualTo(context.getString(com.android.settings.R.string.satellite_phone_summary))
+    }
+
+    @Test
+    fun satelliteAppItems_whenLteNtnNotSupported_loadsNbIotApps() = runTest {
+        setLteNtnSupported(false)
+        `when`(appsRepository.getAppsPackagesForNbNtnLandingPage()).thenReturn(listOf("com.app2"))
+        mockAppsRepositoryIntents()
         setupPackageManagerForApp("com.app2", "App2", Intent("app2.intent"))
         setupCommonPackageManagerApps()
 
         val items = createViewModelAndGetItems()
+        waitForAsync()
 
-        assertThat(items).hasSize(4)
+        assertThat(items).hasSize(2) // Phone, App2
         assertThat(items.map { it.getAppLabel(packageManager) })
-            .containsExactly(
-                context.getString(com.android.settings.R.string.satellite_emergency_sos),
-                "App1",
-                "App2",
-                "Settings",
-            )
+            .containsExactly("Phone", "App2")
             .inOrder()
+        assertThat(items[0].summary)
+            .isEqualTo(context.getString(com.android.settings.R.string.satellite_phone_summary))
     }
 
     @Test
-    fun satelliteAppItems_whenLteNtnNotSupported_loadsNbNtnApps() {
-        setLteNtnSupported(false)
-        val nbNtnAppPackages = listOf("com.app3")
-        `when`(appsRepository.getAppsPackagesForNbNtnLandingPage()).thenReturn(nbNtnAppPackages)
+    fun satelliteAppItems_whenAppNotFound_doesNotLoadApp() = runTest {
+        setLteNtnSupported(true)
+        val missingPackage = "com.missing.app"
+        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf(missingPackage))
         mockAppsRepositoryIntents()
-        setupPackageManagerForApp("com.app3", "App3", Intent("app3.intent"))
         setupCommonPackageManagerApps()
 
-        val items = createViewModelAndGetItems()
-
-        assertThat(items).hasSize(3)
-        assertThat(items.map { it.getAppLabel(packageManager) })
-            .containsExactly(
-                context.getString(com.android.settings.R.string.satellite_emergency_sos),
-                "App3",
-                "Settings",
-            )
-            .inOrder()
-    }
-
-    @Test
-    fun satelliteAppItems_whenAppNotFound_isNotAdded() {
-        setLteNtnSupported(true)
-        val lteAppPackages = listOf("com.app1", "com.app.notfound")
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(lteAppPackages)
-        mockAppsRepositoryIntents()
-        setupPackageManagerForApp("com.app1", "App1", Intent("app1.intent"))
-        `when`(packageManager.getApplicationInfo("com.app.notfound", 0))
+        `when`(packageManager.getApplicationInfo(missingPackage, 0))
             .thenThrow(PackageManager.NameNotFoundException())
-        `when`(packageManager.getLaunchIntentForPackage("com.app.notfound"))
-            .thenReturn(Intent("notfound.intent"))
-        setupCommonPackageManagerApps()
 
         val items = createViewModelAndGetItems()
+        waitForAsync()
 
-        assertThat(items).hasSize(3)
-        assertThat(items.map { it.getAppLabel(packageManager) })
-            .containsExactly(
-                context.getString(com.android.settings.R.string.satellite_emergency_sos),
-                "App1",
-                "Settings",
-            )
-            .inOrder()
+        assertThat(items).hasSize(1) // Phone
+        assertThat(items[0].getAppLabel(packageManager)).isEqualTo("Phone")
     }
 
     @Test
-    fun satelliteAppItems_whenIntentIsNull_isNotAdded() {
+    fun satelliteAppItems_whenAppLaunchIntentNull_doesNotLoadApp() = runTest {
         setLteNtnSupported(true)
-        val lteAppPackages = listOf("com.app1")
+        val noIntentPackage = "com.nointent.app"
         `when`(appsRepository.getAppsPackagesForLteLandingPage())
-            .thenReturn(lteAppPackages) // Null intent
-        mockAppsRepositoryIntents(sosIntent = null)
-        setupPackageManagerForApp("com.app1", "App1", Intent("app1.intent"))
-        setupCommonPackageManagerApps(sosIntent = null)
+            .thenReturn(listOf(noIntentPackage))
+        mockAppsRepositoryIntents()
+        setupCommonPackageManagerApps()
+        setupPackageManagerForApp(noIntentPackage, "NoIntentApp", null)
 
         val items = createViewModelAndGetItems()
+        waitForAsync()
 
-        assertThat(items).hasSize(2)
-        assertThat(items.map { it.getAppLabel(packageManager) })
-            .containsExactly("App1", "Settings")
-            .inOrder()
+        assertThat(items).hasSize(1) // Phone
+        assertThat(items[0].getAppLabel(packageManager)).isEqualTo("Phone")
+    }
+
+    @Test
+    fun satelliteAppItems_whenDialerIntentNull_doesNotLoadPhone() = runTest {
+        setLteNtnSupported(false)
+        `when`(appsRepository.getAppsPackagesForNbNtnLandingPage()).thenReturn(emptyList())
+        mockAppsRepositoryIntents(dialerIntent = null)
+        setupCommonPackageManagerApps()
+
+        val items = createViewModelAndGetItems()
+        waitForAsync()
+
+        assertThat(items).isEmpty()
+    }
+
+    @Test
+    fun refresh_updatesSupportedStates() = runTest {
+        setLteNtnSupported(true)
+        val viewModel = createViewModel()
+
+        viewModel.refresh()
+        waitForAsync()
+
+        assertThat(viewModel.isLteBasedNtnSupported.value).isTrue()
+        assertThat(viewModel.isCarrierRoamingNtnSupported.value).isTrue()
+    }
+
+    @Test
+    fun getSettingsIntent_delegatesToRepository() = runTest {
+        setupCommonPackageManagerApps()
+        val viewModel = createViewModel()
+        val expectedIntent = Intent("expected")
+        viewModel.refresh()
+        `when`(appsRepository.getSettingsIntent(false)).thenReturn(expectedIntent)
+
+        assertThat(viewModel.getSettingsIntent()).isEqualTo(expectedIntent)
+    }
+
+    @Test
+    fun refresh_lteSupported_userRestricted_setsBannerStateCorrectly() = runTest {
+        setLteNtnSupported(true)
+        `when`(satelliteStateRepository.getAttachRestrictionReasons(SUB_ID))
+            .thenReturn(setOf(SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_USER))
+
+        val viewModel = createViewModel()
+        viewModel.refresh()
+        waitForAsync()
+
+        val bannerState = viewModel.bannerState.value
+        assertThat(bannerState.isUserRestricted).isTrue()
+        assertThat(bannerState.isSatelliteAvailableInRegion).isTrue()
+        assertThat(bannerState.isEntitled).isTrue()
     }
 
     private fun setupPackageManagerForApp(packageName: String, appName: String, intent: Intent?) {
@@ -165,9 +298,6 @@ class SatelliteLandingPageViewModelTest {
     }
 
     private fun setLteNtnSupported(isSupported: Boolean) {
-        val reasons = if (isSupported) emptySet() else setOf(1)
-        shadowSatelliteManager.setAttachRestrictionReasonsForCarrier(SUB_ID, reasons)
-
         val config =
             PersistableBundle().apply {
                 putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, isSupported)
@@ -182,29 +312,70 @@ class SatelliteLandingPageViewModelTest {
         shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, config)
     }
 
-    private fun createViewModelAndGetItems(): List<SatelliteAppItem> {
-        val viewModel = SatelliteLandingPageViewModel(context, appsRepository, packageManager)
-        viewModel.loadSatelliteAppItems()
-        return viewModel.satelliteAppItems.value!!
+    private fun TestScope.createViewModel(): SatelliteLandingPageViewModel {
+        return SatelliteLandingPageViewModel(
+            context,
+            appsRepository,
+            packageManager,
+            satelliteStateRepository,
+            StandardTestDispatcher(testScheduler),
+        )
+    }
+
+    private fun TestScope.createViewModelAndGetItems(): List<SatelliteAppItem> {
+        val viewModel = createViewModel()
+        // refresh() is called from init, but we call it again to ensure test consistency
+        viewModel.refresh()
+        waitForAsync()
+        return viewModel.satelliteAppItems.value
+    }
+
+    @Test
+    fun activeSubId_change_refreshesViewModel() = runTest {
+        setLteNtnSupported(false) // isCarrierRoamingNtnSupported is false for SUB_ID
+        val viewModel = createViewModel()
+        waitForAsync() // for init
+
+        assertThat(viewModel.isCarrierRoamingNtnSupported.value).isFalse()
+
+        // Set up a new subscription with carrier support
+        val newSubId = 2
+        val newSubInfo = SubscriptionInfo.Builder().setId(newSubId).build()
+        val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
+        shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo, newSubInfo))
+        val config =
+            PersistableBundle().apply {
+                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
+            }
+        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
+        shadowOf(carrierConfigManager).setConfigForSubId(newSubId, config)
+
+        // Trigger subscription change
+        activeSubIdFlow.value = newSubId
+        waitForAsync()
+
+        assertThat(viewModel.isCarrierRoamingNtnSupported.value).isTrue()
+    }
+
+    private fun TestScope.waitForAsync() {
+        advanceUntilIdle() // start the listeners
+        shadowOf(Looper.getMainLooper()).idle() // executes work on main thread and updates flow
     }
 
     private fun mockAppsRepositoryIntents(
-        sosIntent: Intent? = SOS_INTENT,
-        settingsIntent: Intent? = SETTINGS_INTENT,
+        dialerIntent: Intent? = Intent("dialer"),
+        settingsIntent: Intent? = Intent("settings"),
     ) {
-        `when`(appsRepository.getEmergencySosIntent()).thenReturn(sosIntent)
-        `when`(appsRepository.getSettingsIntent()).thenReturn(settingsIntent)
+        `when`(appsRepository.getDialerIntent()).thenReturn(dialerIntent)
+        `when`(appsRepository.getSettingsIntent(org.mockito.ArgumentMatchers.anyBoolean()))
+            .thenReturn(settingsIntent)
     }
 
-    private fun setupCommonPackageManagerApps(
-        sosIntent: Intent? = SOS_INTENT,
-        settingsIntent: Intent? = SETTINGS_INTENT,
-    ) {
-        setupPackageManagerForApp(SatelliteAppsRepository.PACKAGE_NAME_SAFETY_HUB, "SOS", sosIntent)
+    private fun setupCommonPackageManagerApps() {
         setupPackageManagerForApp(
-            SatelliteAppsRepository.PACKAGE_NAME_SETTINGS,
-            "Settings",
-            settingsIntent,
+            SatelliteAppsRepository.PACKAGE_NAME_PHONE,
+            "Phone",
+            Intent("dialer"),
         )
     }
 }

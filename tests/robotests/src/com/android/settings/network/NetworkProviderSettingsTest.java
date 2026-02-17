@@ -48,6 +48,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.LocationManager;
 import android.net.EthernetManager;
@@ -56,7 +57,10 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.os.Process;
 import android.os.UserManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
@@ -99,7 +103,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -124,6 +127,8 @@ public class NetworkProviderSettingsTest {
 
     private static final int XML_RES = R.xml.wifi_tether_settings;
     private static final int NUM_NETWORKS = 4;
+    private static final int USER_ID_CURRENT = Process.myUserHandle().getIdentifier();
+    private static final int USER_ID_OTHER = USER_ID_CURRENT + 1;
     private static final String FAKE_URI_STRING = "fakeuri";
 
     @Rule
@@ -172,6 +177,8 @@ public class NetworkProviderSettingsTest {
     EthernetTracker mEthernetTracker;
     @Mock
     PreferenceCategory mEthernetPreferenceCategory;
+    @Mock
+    private PackageManager mPackageManager;
 
     private NetworkProviderSettings mNetworkProviderSettings;
 
@@ -193,9 +200,12 @@ public class NetworkProviderSettingsTest {
         doReturn(mPowerManager).when(mContext).getSystemService(PowerManager.class);
         doReturn(mWifiManager).when(mContext).getSystemService(WifiManager.class);
         doReturn(mUserManager).when(mContext).getSystemService(Context.USER_SERVICE);
+        doReturn(mUserManager).when(mFragmentActivity).getSystemService(UserManager.class);
+        doReturn(mPackageManager).when(mFragmentActivity).getPackageManager();
         doReturn(mLocationManager).when(mContext).getSystemService(LocationManager.class);
         doReturn(mEtherentManager).when(mContext).getSystemService(Context.ETHERNET_SERVICE);
         when(mUserManager.hasBaseUserRestriction(any(), any())).thenReturn(true);
+        when(mUserManager.isGuestUser()).thenReturn(false);
         doReturn(mContext).when(mPreferenceManager).getContext();
         mNetworkProviderSettings.mAddWifiNetworkPreference = new AddWifiNetworkPreference(mContext);
         mNetworkProviderSettings.mSavedNetworksPreference = new Preference(mContext);
@@ -213,6 +223,23 @@ public class NetworkProviderSettingsTest {
 
         ReflectionHelpers.setField(mNetworkProviderSettings, "mDashboardFeatureProvider",
                 mock(DashboardFeatureProvider.class));
+    }
+
+    private void createContextMenu() {
+        final LongPressWifiEntryPreference connectedWifiEntryPreference =
+                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
+        final View view = mock(View.class);
+        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
+
+        mNetworkProviderSettings.onCreateContextMenu(mContextMenu, view, null /* info */);
+    }
+
+    private void createNetworkConfig(boolean isOwner) {
+        final WifiConfiguration config = spy(new WifiConfiguration());
+        final int creatorUserId = isOwner ? USER_ID_CURRENT : USER_ID_OTHER;
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(config);
+        when(config.getCreatorUserId()).thenReturn(creatorUserId);
+        when(mUserManager.getUserCount()).thenReturn(2);
     }
 
     @Test
@@ -356,57 +383,242 @@ public class NetworkProviderSettingsTest {
     }
 
     @Test
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void onCreateContextMenu_shouldHaveForgetAndDisconnectMenuForConnectedWifiEntry() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_CONNECTED);
-
-        final LongPressWifiEntryPreference connectedWifiEntryPreference =
-                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
-        final View view = mock(View.class);
-        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
-
-        mNetworkProviderSettings.onCreateContextMenu(mContextMenu, view, null /* info */);
+        createContextMenu();
 
         verify(mContextMenu).add(anyInt(), eq(MENU_ID_FORGET), anyInt(), anyInt());
         verify(mContextMenu).add(anyInt(), eq(MENU_ID_DISCONNECT), anyInt(), anyInt());
     }
 
     @Test
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void onCreateContextMenu_canShare_shouldHaveShareMenuForConnectedWifiEntry() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(true);
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_CONNECTED);
-
-        final LongPressWifiEntryPreference connectedWifiEntryPreference =
-                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
-        final View view = mock(View.class);
-        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
-
-        mNetworkProviderSettings.onCreateContextMenu(mContextMenu, view, null /* info */);
+        createContextMenu();
 
         verify(mContextMenu).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
     }
 
     @Test
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     public void onCreateContextMenu_canNotShare_shouldDisappearShareMenuForConnectedWifiEntry() {
         when(mWifiEntry.canDisconnect()).thenReturn(true);
         when(mWifiEntry.canShare()).thenReturn(false);
         when(mWifiEntry.canForget()).thenReturn(true);
         when(mWifiEntry.isSaved()).thenReturn(true);
         when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_CONNECTED);
+        createContextMenu();
 
-        final LongPressWifiEntryPreference connectedWifiEntryPreference =
-                mNetworkProviderSettings.createLongPressWifiEntryPreference(mWifiEntry);
-        final View view = mock(View.class);
-        when(view.getTag()).thenReturn(connectedWifiEntryPreference);
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE),
+                anyInt(), anyInt());
+    }
 
-        mNetworkProviderSettings.onCreateContextMenu(mContextMenu, view, null /* info */);
+    @Test
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
+    public void onCreateContextMenu_multiUserDisabled_isNotAdminUser_showsShareForgetModify() {
+        mNetworkProviderSettings.mIsAdmin = false;
+        when(mWifiEntry.canDisconnect()).thenReturn(true);
+        when(mWifiEntry.canShare()).thenReturn(true);
+        when(mWifiEntry.canForget()).thenReturn(true);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        createContextMenu();
 
-        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_FORGET),
+                anyInt(), anyInt());
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_MODIFY),
+                anyInt(), anyInt());
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(),
+                anyInt());
+    }
+
+    @Test
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
+    public void onCreateContextMenu_multiUserDisabled_isAdminUser_hidesShareForgetModify() {
+        mNetworkProviderSettings.mIsAdmin = true;
+        when(mWifiEntry.canDisconnect()).thenReturn(true);
+        when(mWifiEntry.canShare()).thenReturn(true);
+        when(mWifiEntry.canForget()).thenReturn(true);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        createContextMenu();
+
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_FORGET), anyInt(),
+                anyInt());
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_MODIFY), anyInt(),
+                anyInt());
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_SHARE), anyInt(),
+                anyInt());
+    }
+
+    @Test
+    public void onCreateContextMenu_networkNotShareable_hidesShare() {
+        when(mWifiEntry.canDisconnect()).thenReturn(true);
+        when(mWifiEntry.canShare()).thenReturn(false);
+        createContextMenu();
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(),
+                anyInt());
+    }
+
+    @Test
+    public void onCreateContextMenu_networkNotForgettable_hidesForget() {
+        when(mWifiEntry.canForget()).thenReturn(false);
+        createContextMenu();
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_FORGET),
+                anyInt(), anyInt());
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_ownedNetwork_showsShareForgetModify() {
+        when(mWifiEntry.canDisconnect()).thenReturn(true);
+        when(mWifiEntry.canShare()).thenReturn(true);
+        when(mWifiEntry.canForget()).thenReturn(true);
+        createNetworkConfig(true);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        createContextMenu();
+
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_FORGET), anyInt(),
+                anyInt());
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_MODIFY), anyInt(),
+                anyInt());
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_SHARE), anyInt(),
+                anyInt());
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_notOwnedNetwork_hidesShare() {
+        when(mWifiEntry.canDisconnect()).thenReturn(true);
+        when(mWifiEntry.canShare()).thenReturn(true);
+        createNetworkConfig(false);
+        createContextMenu();
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(),
+                anyInt());
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_ownedNetwork_guestUser_hidesShare() {
+        when(mWifiEntry.canDisconnect()).thenReturn(true);
+        when(mWifiEntry.canShare()).thenReturn(true);
+        createNetworkConfig(true);
+        when(mUserManager.isGuestUser()).thenReturn(true);
+        createContextMenu();
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(),
+                anyInt());
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_notOwnedNetwork_hidesForget() {
+        when(mWifiEntry.canForget()).thenReturn(true);
+        createNetworkConfig(false);
+        createContextMenu();
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_FORGET),
+                anyInt(), anyInt());
+    }
+
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_notOwnedNetwork_adminUser_showsForget() {
+        when(mWifiEntry.canForget()).thenReturn(true);
+        createNetworkConfig(false);
+        when(mUserManager.isAdminUser()).thenReturn(true);
+        createContextMenu();
+
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_FORGET), anyInt(),
+                anyInt());
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_modifiableNetwork_showsModify() {
+        createNetworkConfig(false);
+        when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(
+                WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        createContextMenu();
+
+        verify(mContextMenu).add(anyInt(), eq(MENU_ID_MODIFY), anyInt(),
+                anyInt());
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_modifiableNetwork_guestUser_hidesModify() {
+        createNetworkConfig(false);
+        when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(true);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(
+                WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        when(mUserManager.isGuestUser()).thenReturn(true);
+        createContextMenu();
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_MODIFY),
+                anyInt(), anyInt());
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_notModifiableNetwork_hidesModify() {
+        createNetworkConfig(false);
+        when(mWifiEntry.isModifiableByOtherUsers()).thenReturn(false);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(
+                WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        createContextMenu();
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_MODIFY),
+                anyInt(), anyInt());
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_notSaved_hidesModify() {
+        createNetworkConfig(true);
+        when(mWifiEntry.isSaved()).thenReturn(false);
+        when(mWifiEntry.getConnectedState()).thenReturn(
+                WifiEntry.CONNECTED_STATE_DISCONNECTED);
+        createContextMenu();
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_MODIFY),
+                anyInt(), anyInt());
+    }
+
+    @Test
+    @EnableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void onCreateContextMenu_multiUserEnabled_isConnected_hidesModify() {
+        createNetworkConfig(true);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        when(mWifiEntry.getConnectedState()).thenReturn(
+                WifiEntry.CONNECTED_STATE_CONNECTED);
+        createContextMenu();
+
+        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_MODIFY),
+                anyInt(), anyInt());
     }
 
     @Test
@@ -749,69 +961,6 @@ public class NetworkProviderSettingsTest {
         verify(fragmentView).removeCallbacks(mNetworkProviderSettings.mHideProgressBarRunnable);
         verify(mAirplaneModeEnabler).stop();
     }
-
-    @Test
-    public void addShareMenuIfSuitable_isAdmin_addMenu() {
-        mNetworkProviderSettings.mIsAdmin = true;
-        Mockito.reset(mContextMenu);
-
-        mNetworkProviderSettings.addShareMenuIfSuitable(mContextMenu);
-
-        verify(mContextMenu).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
-    }
-
-    @Test
-    public void addShareMenuIfSuitable_isNotAdmin_notAddMenu() {
-        mNetworkProviderSettings.mIsAdmin = false;
-        Mockito.reset(mContextMenu);
-
-        mNetworkProviderSettings.addShareMenuIfSuitable(mContextMenu);
-
-        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_SHARE), anyInt(), anyInt());
-    }
-
-    @Test
-    public void addForgetMenuIfSuitable_isAdmin_addMenu() {
-        mNetworkProviderSettings.mIsAdmin = true;
-        Mockito.reset(mContextMenu);
-
-        mNetworkProviderSettings.addForgetMenuIfSuitable(mContextMenu);
-
-        verify(mContextMenu).add(anyInt(), eq(MENU_ID_FORGET), anyInt(), anyInt());
-    }
-
-    @Test
-    public void addForgetMenuIfSuitable_isNotAdmin_notAddMenu() {
-        mNetworkProviderSettings.mIsAdmin = false;
-        Mockito.reset(mContextMenu);
-
-        mNetworkProviderSettings.addForgetMenuIfSuitable(mContextMenu);
-
-        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_FORGET), anyInt(), anyInt());
-    }
-
-    @Test
-    public void addModifyMenuIfSuitable_isAdmin_addMenu() {
-        mNetworkProviderSettings.mIsAdmin = true;
-        when(mWifiEntry.isSaved()).thenReturn(true);
-        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_DISCONNECTED);
-
-        mNetworkProviderSettings.addModifyMenuIfSuitable(mContextMenu, mWifiEntry);
-
-        verify(mContextMenu).add(anyInt(), eq(MENU_ID_MODIFY), anyInt(), anyInt());
-    }
-
-    @Test
-    public void addModifyMenuIfSuitable_isNotAdmin_notAddMenu() {
-        mNetworkProviderSettings.mIsAdmin = false;
-        when(mWifiEntry.isSaved()).thenReturn(true);
-        when(mWifiEntry.getConnectedState()).thenReturn(CONNECTED_STATE_DISCONNECTED);
-
-        mNetworkProviderSettings.addModifyMenuIfSuitable(mContextMenu, mWifiEntry);
-
-        verify(mContextMenu, never()).add(anyInt(), eq(MENU_ID_MODIFY), anyInt(), anyInt());
-    }
-
     @Test
     public void getNonIndexableKeys_allowedChangeWifiState_keyNotReturned() {
         when(mWifiRestriction.isChangeWifiStateAllowed(mContext)).thenReturn(true);

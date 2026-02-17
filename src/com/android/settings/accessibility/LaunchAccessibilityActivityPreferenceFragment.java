@@ -29,6 +29,7 @@ import com.android.settings.accessibility.a11yactivity.ui.A11yActivityScreen;
 import com.android.settings.accessibility.extensions.ComponentNameBundleUtils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.metadata.CatalystFlagProviderFactory;
 import com.android.settingslib.metadata.ValidatedKeyParameters;
 
 import java.util.Map;
@@ -68,7 +69,8 @@ public class LaunchAccessibilityActivityPreferenceFragment extends DashboardFrag
     @Deprecated(since = "This method will be removed once the catalyst framework stops passing the "
             + "arguments as a bundle. Use getPreferenceScreenBindingKeyParameters instead.")
     public Bundle getPreferenceScreenBindingArgs(@NonNull Context context) {
-        if (com.android.settings.flags.Flags.catalystUseStringBundle()) {
+        if (com.android.settings.flags.Flags.catalystUseStringBundle() ||
+                CatalystFlagProviderFactory.INSTANCE.catalystUseKeyParameters()) {
             Bundle arguments = new Bundle();
             arguments.putString(
                     AccessibilitySettings.EXTRA_COMPONENT_NAME,

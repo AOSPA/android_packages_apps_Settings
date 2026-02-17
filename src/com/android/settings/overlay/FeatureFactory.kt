@@ -29,6 +29,7 @@ import com.android.settings.connecteddevice.audiosharing.AudioSharingFeatureProv
 import com.android.settings.connecteddevice.fastpair.FastPairFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFeatureProvider
+import com.android.settings.connecteddevice.usb.UsbFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProvider
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoFeatureProvider
@@ -164,6 +165,8 @@ abstract class FeatureFactory {
 
     /** Gets implementation for sync across devices related feature. */
     abstract val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider
+    /** Gets implementation for USB related feature. */
+    abstract val usbFeatureProvider: UsbFeatureProvider
 
     companion object {
         private var _factory: FeatureFactory? = null

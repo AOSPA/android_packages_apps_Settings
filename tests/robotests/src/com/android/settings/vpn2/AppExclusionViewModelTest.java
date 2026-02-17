@@ -19,11 +19,13 @@ package com.android.settings.vpn2;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -140,7 +142,7 @@ public class AppExclusionViewModelTest {
                         createApplicationInfo(PACKAGE_NAME_2),
                         createApplicationInfo(PACKAGE_NAME_3));
 
-        when(mVpnManager.getAppExclusionList(USER_ID, VPN_PACKAGE))
+        when(mVpnManager.getAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE))
                 .thenReturn(new ArrayList<>(exclusionList));
         when(mPackageManager.getInstalledApplicationsAsUser(
                         any(PackageManager.ApplicationInfoFlags.class), eq(USER_ID)))
@@ -169,8 +171,9 @@ public class AppExclusionViewModelTest {
     @Test
     public void addAppToExclusionList_shouldUpdateList() {
         // Arrange
-        when(mVpnManager.getAppExclusionList(USER_ID, VPN_PACKAGE)).thenReturn(new ArrayList<>());
-        when(mVpnManager.setAppExclusionList(anyInt(), anyString(), any())).thenReturn(true);
+        when(mVpnManager.getAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE))
+                .thenReturn(new ArrayList<>());
+        when(mVpnManager.setAppExclusionList(any(), anyString(), any())).thenReturn(true);
 
         // Act
         mViewModel.addAppToExclusionList(PACKAGE_NAME_1);
@@ -178,7 +181,9 @@ public class AppExclusionViewModelTest {
 
         // Assert
         ArgumentCaptor<List<String>> listCaptor = ArgumentCaptor.forClass(List.class);
-        verify(mVpnManager).setAppExclusionList(eq(USER_ID), eq(VPN_PACKAGE), listCaptor.capture());
+        verify(mVpnManager)
+                .setAppExclusionList(
+                        eq(UserHandle.of(USER_ID)), eq(VPN_PACKAGE), listCaptor.capture());
         assertThat(listCaptor.getValue()).containsExactly(PACKAGE_NAME_1);
 
         verify(mSetListObserver).onChanged(true);
@@ -188,8 +193,9 @@ public class AppExclusionViewModelTest {
     public void removeAppFromExclusionList_shouldUpdateList() {
         // Arrange
         List<String> initialList = new ArrayList<>(Arrays.asList(PACKAGE_NAME_1, PACKAGE_NAME_2));
-        when(mVpnManager.getAppExclusionList(USER_ID, VPN_PACKAGE)).thenReturn(initialList);
-        when(mVpnManager.setAppExclusionList(anyInt(), anyString(), any())).thenReturn(true);
+        when(mVpnManager.getAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE))
+                .thenReturn(initialList);
+        when(mVpnManager.setAppExclusionList(any(), anyString(), any())).thenReturn(true);
 
         // Mock that the pre-existing packages are launchable so they aren't filtered out
         mockIntentResolution(PACKAGE_NAME_1, true);
@@ -201,9 +207,28 @@ public class AppExclusionViewModelTest {
 
         // Assert
         ArgumentCaptor<List<String>> listCaptor = ArgumentCaptor.forClass(List.class);
-        verify(mVpnManager).setAppExclusionList(eq(USER_ID), eq(VPN_PACKAGE), listCaptor.capture());
+        verify(mVpnManager)
+                .setAppExclusionList(
+                        eq(UserHandle.of(USER_ID)), eq(VPN_PACKAGE), listCaptor.capture());
         assertThat(listCaptor.getValue()).containsExactly(PACKAGE_NAME_2);
 
         verify(mSetListObserver).onChanged(true);
+    }
+
+    @Test
+    public void addAppToExclusionList_alreadyExcluded_doesNotAddAgain() {
+        // Arrange
+        final List<String> initialList = new ArrayList<>(Arrays.asList(PACKAGE_NAME_1));
+        when(mVpnManager.getAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE))
+                .thenReturn(initialList);
+        mockIntentResolution(PACKAGE_NAME_1, true);
+
+        // Act
+        mViewModel.addAppToExclusionList(PACKAGE_NAME_1);
+        Shadows.shadowOf(Looper.getMainLooper()).idle();
+
+        // Assert
+        verify(mVpnManager, never()).setAppExclusionList(any(), anyString(), any());
+        verify(mSetListObserver, never()).onChanged(anyBoolean());
     }
 }

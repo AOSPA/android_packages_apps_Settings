@@ -369,6 +369,12 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
                 && userManager.isSystemUser();
     }
 
+    /** @return true if the multi user WiFi is enabled by flags. */
+    public static boolean isWifiMultiuserEnabled() {
+        return com.android.settings.connectivity.Flags.wifiMultiuser()
+            || com.android.settings.flags.Flags.enableWifiMultiuser();
+    }
+
     /**
      * Checks if the network is owned by the current user of the settings app or
      * if the userCount is one.
@@ -380,20 +386,17 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
      */
     public static boolean isCurrentUserNetworkOwner(
             @NonNull WifiEntry wifiEntry, @NonNull Context context) {
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()
+        if (!isWifiMultiuserEnabled()
                 || wifiEntry.getWifiConfiguration() == null) {
             return true;
         }
 
         UserManager userManager = context.getSystemService(UserManager.class);
         int userCount = userManager.getUserCount();
-        UserHandle currentUserHandle = Process.myUserHandle();
-        int currentUserId = currentUserHandle.getIdentifier();
-        int creatorUid = wifiEntry.getWifiConfiguration().creatorUid;
-        UserHandle userHandle = UserHandle.getUserHandleForUid(creatorUid);
+        int currentUserId = Process.myUserHandle().getIdentifier();
+        int creatorUserId = wifiEntry.getWifiConfiguration().getCreatorUserId();
 
-        return (userCount == 1)
-                || (userHandle != null && (currentUserId == userHandle.getIdentifier()));
+        return (userCount == 1) || (currentUserId == creatorUserId);
     }
 
     /**
@@ -426,7 +429,7 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
      */
     public static boolean isSharedFieldEditable(
             @Nullable WifiEntry wifiEntry, @NonNull Context context) {
-        if (!com.android.settings.connectivity.Flags.wifiMultiuser()) {
+        if (!isWifiMultiuserEnabled()) {
             return false;
         }
 
@@ -450,8 +453,8 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
     public static boolean isNetworkShareable(
             @NonNull WifiEntry wifiEntry, @NonNull Context context) {
         return wifiEntry.canShare()
-                && (isCurrentUserNetworkOwner(wifiEntry, context)
-                && !isGuestUser(context));
+                && isCurrentUserNetworkOwner(wifiEntry, context)
+                && !isGuestUser(context);
     }
 
     /**

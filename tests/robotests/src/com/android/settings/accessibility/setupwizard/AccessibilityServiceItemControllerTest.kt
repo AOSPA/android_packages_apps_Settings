@@ -16,59 +16,69 @@
 
 package com.android.settings.accessibility.setupwizard
 
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ComponentName
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
-import android.os.Looper
 import android.view.accessibility.AccessibilityManager
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.testutils.AccessibilityTestUtils
+import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.android.settings.EmptySetupWizardActivity
+import com.android.settings.R
+import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.testutils.shadow.ShadowAccessibilityManager
 import com.google.android.setupdesign.items.Item
+import com.google.common.truth.Truth.assertThat
+import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.spy
-import org.mockito.Mockito.verify
+import org.mockito.kotlin.argThat
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.whenever
+import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowLooper
 
 /** Tests for [AccessibilityServiceItemController]. */
 @RunWith(RobolectricTestRunner::class)
 class AccessibilityServiceItemControllerTest {
 
-    private val mockItem = mock<Item>()
+    @get:Rule val activityScenarioRule = ActivityScenarioRule(EmptySetupWizardActivity::class.java)
 
+    private val mockItem = mock<Item>()
     private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val a11yManager: ShadowAccessibilityManager =
         Shadow.extract(appContext.getSystemService(AccessibilityManager::class.java))
-    private lateinit var controller: AccessibilityServiceItemController
+    private val controller: AccessibilityServiceItemController =
+        AccessibilityServiceItemController(appContext, mockItem, TEST_COMPONENT_NAME)
 
     @Before
     fun setUp() {
         a11yManager.setInstalledAccessibilityServiceList(emptyList())
-        controller = AccessibilityServiceItemController(appContext, mockItem, TEST_COMPONENT_NAME)
+    }
+
+    @After
+    fun cleanUp() {
+        AccessibilityRepositoryProvider.resetInstanceForTesting()
     }
 
     @Test
     fun bindData_serviceInstalled_setsTitleAndIcon() {
         val serviceInfo =
-            createA11yServiceInfo(
-                serviceComponent = ComponentName.unflattenFromString(TEST_COMPONENT_NAME)!!,
-                label = TEST_LABEL,
+            createMockServiceInfo(
+                appContext,
+                ComponentName.unflattenFromString(TEST_COMPONENT_NAME)!!,
+                TEST_LABEL,
+                TEST_SUMMARY,
             )
         a11yManager.setInstalledAccessibilityServiceList(listOf(serviceInfo))
 
         controller.bindData(mockItem)
-        shadowOf(Looper.getMainLooper()).idle()
+        ShadowLooper.idleMainLooper()
 
-        verify(mockItem).title = TEST_LABEL
+        verify(mockItem).title = argThat { this.toString() == TEST_LABEL }
         verify(mockItem).isVisible = true
         verify(mockItem).notifyItemChanged()
     }
@@ -76,35 +86,47 @@ class AccessibilityServiceItemControllerTest {
     @Test
     fun bindData_noServicesInstalled_hidesItems() {
         controller.bindData(mockItem)
-        shadowOf(Looper.getMainLooper()).idle()
+        ShadowLooper.idleMainLooper()
 
         verify(mockItem).isVisible = false
         verify(mockItem).notifyItemChanged()
     }
 
-    private fun createA11yServiceInfo(
-        isAlwaysOnService: Boolean = false,
-        serviceComponent: ComponentName,
-        label: String,
-    ): AccessibilityServiceInfo =
-        AccessibilityTestUtils.createAccessibilityServiceInfo(
-                appContext,
-                serviceComponent,
-                isAlwaysOnService,
-            )
-            .apply {
-                isAccessibilityTool = true
-                resolveInfo =
-                    resolveInfo?.let {
-                        spy(it).apply {
-                            doReturn(label).whenever(this).loadLabel(any())
-                            doReturn(ColorDrawable(0)).whenever(this).loadIcon(any())
-                        }
-                    }
-            }
+    @Test
+    fun onItemSelected_navigatesToAccessibilityServiceSetupWizardFragmentWithCorrectArgs() {
+        val testComponentName = ComponentName.unflattenFromString(TEST_COMPONENT_NAME)!!
+        val serviceInfo =
+            createMockServiceInfo(appContext, testComponentName, TEST_LABEL, TEST_SUMMARY)
+        a11yManager.setInstalledAccessibilityServiceList(listOf(serviceInfo))
+        mockItem.stub { on { summary } doReturn TEST_SUMMARY }
+        controller.bindData(mockItem)
+        ShadowLooper.idleMainLooper()
+        activityScenarioRule.scenario.onActivity { activity ->
+            activity.setContentView(R.layout.accessibility_suw_activity)
+
+            controller.onItemSelected(activity)
+            activity.supportFragmentManager.executePendingTransactions()
+
+            val currentFragment =
+                activity.supportFragmentManager.findFragmentById(R.id.fragment_container)
+            assertThat(currentFragment)
+                .isInstanceOf(AccessibilityServiceSetupWizardFragment::class.java)
+            val args = currentFragment?.arguments
+            assertThat(
+                    args?.getParcelable(
+                        AccessibilityServiceSetupWizardFragment.ARG_COMPONENT_NAME,
+                        ComponentName::class.java,
+                    )
+                )
+                .isEqualTo(testComponentName)
+            assertThat(args?.getString(AccessibilityServiceSetupWizardFragment.ARG_DESCRIPTION))
+                .isEqualTo(TEST_SUMMARY)
+        }
+    }
 
     companion object {
         private const val TEST_COMPONENT_NAME = "com.test/.Service"
         private const val TEST_LABEL = "Test Service"
+        private const val TEST_SUMMARY = "This is a test summary description."
     }
 }

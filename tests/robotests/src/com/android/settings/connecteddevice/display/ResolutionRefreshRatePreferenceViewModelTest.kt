@@ -17,10 +17,16 @@
 package com.android.settings.connecteddevice.display
 
 import android.app.Application
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.view.Display.Mode
 import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_SYNCED_RESOLUTION_SWITCH
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.RefreshRateItem
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.ResolutionItem
 import com.android.settings.connecteddevice.display.ResolutionRefreshRatePreferenceViewModel.UiState
@@ -37,10 +43,17 @@ import org.mockito.kotlin.whenever
 
 /** Unit test for [ResolutionRefreshRatePreferenceViewModel] */
 @RunWith(AndroidJUnit4::class)
+@EnableFlags(
+    FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM,
+    FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM,
+    FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM,
+    FLAG_SYNCED_RESOLUTION_SWITCH,
+)
 class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
 
     // Rule to execute LiveData operations synchronously
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
+    @get:Rule val setFlagsRule: SetFlagsRule = SetFlagsRule()
 
     @Mock private lateinit var uiStateObserver: Observer<UiState?>
 
@@ -115,6 +128,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 /* isEnabled= */ DisplayIsEnabled.YES,
                 /* isConnectedDisplay= */ true,
                 /* rotation= */ 0,
+                isHdrSupported = externalDisplay.isHdrSupported,
             )
         )
         updateDisplaysAndTopology(updatedEnabledDisplays)
@@ -190,7 +204,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         val confirmationDialogEvent = viewModel.confirmationDialogEvent.value
         assertThat(confirmationDialogEvent).isNotNull()
         assertThat(confirmationDialogEvent!!.newMode).isEqualTo(pendingMode)
-        assertThat(confirmationDialogEvent.existingMode).isEqualTo(currentActiveMode)
+        assertThat(confirmationDialogEvent.previousMode).isEqualTo(currentActiveMode)
         verify(mMockedInjector).setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, false)
     }
 
@@ -248,7 +262,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 activeMode,
                 Mode(100, width, height, 60f), // 60Hz variant 1
                 Mode(101, width, height, 60f), // 60Hz variant 2 (duplicate refresh rate)
-                Mode(102, width, height, 50f) // 50Hz
+                Mode(102, width, height, 50f), // 50Hz
             )
 
         // Create a new display device with these modes.
@@ -261,7 +275,8 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 supportedModes,
                 isEnabled = DisplayIsEnabled.YES,
                 isConnectedDisplay = true,
-                rotation = 0
+                rotation = 0,
+                isHdrSupported = externalDisplay.isHdrSupported,
             )
         updateDisplaysAndTopology(listOf(displayWithDuplicates))
 
@@ -275,7 +290,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         assertThat(state.refreshRateItems)
             .containsExactly(
                 RefreshRateItem(modeId = 100, refreshRate = 60f),
-                RefreshRateItem(modeId = 102, refreshRate = 50f)
+                RefreshRateItem(modeId = 102, refreshRate = 50f),
             )
             .inOrder()
     }

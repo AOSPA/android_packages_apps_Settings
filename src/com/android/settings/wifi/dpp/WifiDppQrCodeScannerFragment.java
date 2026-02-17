@@ -277,9 +277,14 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
         if (qrSecurity == entrySecurity) {
             return true;
         }
-        // Default security type of PSK/SAE transition mode WifiEntry is SECURITY_PSK and
-        // there is no way to know if a WifiEntry is of transition mode. Give it a chance.
-        if (qrSecurity == WifiEntry.SECURITY_SAE && entrySecurity == WifiEntry.SECURITY_PSK) {
+        // WifiEntry.getSecurity for WPA3 transition may be SAE or PSK depending on connection
+        // state, and there is no way to know if a WifiEntry is of transition mode.
+        // Give it a chance.
+        boolean isQrPskSae = (qrSecurity == WifiEntry.SECURITY_PSK
+                || qrSecurity == WifiEntry.SECURITY_SAE);
+        boolean isEntryPskSae = (entrySecurity == WifiEntry.SECURITY_PSK
+                || entrySecurity == WifiEntry.SECURITY_SAE);
+        if (isQrPskSae && isEntryPskSae) {
             return true;
         }
         // If configured is no password, the Wi-Fi framework will attempt OPEN and OWE security.

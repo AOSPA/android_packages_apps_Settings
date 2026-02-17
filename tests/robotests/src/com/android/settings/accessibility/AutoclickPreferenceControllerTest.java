@@ -16,8 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static android.view.accessibility.AccessibilityManager.AUTOCLICK_DELAY_DEFAULT;
-
 import static com.android.settings.accessibility.AccessibilityUtil.State.OFF;
 import static com.android.settings.accessibility.AccessibilityUtil.State.ON;
 
@@ -64,15 +62,15 @@ public class AutoclickPreferenceControllerTest {
 
     @Test
     public void getSummary_enabledAutoclick_shouldReturnOnSummary() {
+        final int delayedInMs = 600;
         setAutoClickEnabled(true);
-        setAutoClickDelayed(AUTOCLICK_DELAY_DEFAULT);
-
+        setAutoClickDelayed(delayedInMs);
 
         assertThat(mController.getSummary().toString())
                 .isEqualTo(AutoclickUtils.getAutoclickDelaySummary(
                         mContext,
                         R.string.accessibilty_autoclick_preference_subtitle_medium_delay,
-                        AUTOCLICK_DELAY_DEFAULT).toString());
+                        delayedInMs).toString());
     }
 
     private void setAutoClickEnabled(boolean enabled) {

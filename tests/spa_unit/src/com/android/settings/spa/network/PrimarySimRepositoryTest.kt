@@ -18,11 +18,14 @@ package com.android.settings.spa.network
 
 import android.content.Context
 import android.content.res.Resources
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
 import com.android.settingslib.spa.widget.preference.ListPreferenceOption
 import com.google.common.truth.Truth.assertThat
@@ -40,6 +43,9 @@ import org.mockito.kotlin.stub
 class PrimarySimRepositoryTest {
     @get:Rule
     val composeTestRule = createComposeRule()
+
+    @get:Rule
+    val mSetFlagsRule = SetFlagsRule()
 
     private val mockSubscriptionManager = mock<SubscriptionManager> {
         on { addOnSubscriptionsChangedListener(any(), any()) } doAnswer {
@@ -192,11 +198,27 @@ class PrimarySimRepositoryTest {
         assertThat(primarySimInfo?.dataList).isEqualTo(expectedList)
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_IS_PRIVATE_NETWORK_API)
+    fun getPrimarySimInfo_excludeOpportunisticSubFromDsds_hideOpportunisticSub() {
+        val simList = listOf(
+            SUB_INFO_1,
+            SUB_INFO_OPPORTUNISTIC
+        )
+
+        val primarySimInfo = PrimarySimRepository(context).getPrimarySimInfo(simList)
+
+        assertThat(primarySimInfo).isNull()
+    }
+
+
     private companion object {
         const val SUB_ID_1 = 1
         const val SUB_ID_2 = 2
+        const val SUB_ID_3 = 3
         const val DISPLAY_NAME_1 = "Sub 1"
         const val DISPLAY_NAME_2 = "Sub 2"
+        const val DISPLAY_NAME_3 = "Opportunistic"
         const val NUMBER_1 = "000000001"
         const val NUMBER_2 = "000000002"
         const val MCC = "310"
@@ -211,6 +233,13 @@ class PrimarySimRepositoryTest {
             setId(SUB_ID_2)
             setDisplayName(DISPLAY_NAME_2)
             setMcc(MCC)
+        }.build()
+
+        val SUB_INFO_OPPORTUNISTIC: SubscriptionInfo = SubscriptionInfo.Builder().apply {
+            setId(SUB_ID_3)
+            setDisplayName(DISPLAY_NAME_3)
+            setMcc(MCC)
+            setOpportunistic(true)
         }.build()
     }
 }

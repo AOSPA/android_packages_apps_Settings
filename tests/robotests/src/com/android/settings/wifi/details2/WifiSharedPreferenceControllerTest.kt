@@ -24,8 +24,8 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.appcompat.app.AlertDialog
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.connectivity.Flags
 import com.android.settings.core.BasePreferenceController
+import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat
 import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.wifitrackerlib.WifiEntry
@@ -53,6 +53,7 @@ class WifiSharedPreferenceControllerTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     private var mockWifiEntry = mock<WifiEntry>()
+    private var mockWifiConfig = mock<WifiConfiguration>()
 
     private val context: Context = spy(RuntimeEnvironment.application)
 
@@ -71,7 +72,7 @@ class WifiSharedPreferenceControllerTest {
 
     @Before
     fun setUp() {
-        mockWifiEntry.stub { on { getWifiConfiguration() } doReturn WifiConfiguration() }
+        mockWifiEntry.stub { on { getWifiConfiguration() } doReturn mockWifiConfig }
         mockWifiEntry.stub { on { getSsid() } doReturn "testSSID" }
         mockWifiEntry.stub { on { getKey() } doReturn "testKey" }
 
@@ -86,7 +87,8 @@ class WifiSharedPreferenceControllerTest {
     }
 
     @Test
-    fun setChecked_conflictingEntry_showsAlertDialog_validateMessages() {
+    fun setChecked_conflictingSharedEntry_showsAlertDialog_validateMessages() {
+        mockWifiConfig.shared = true
         mockWifiPickerTrackerHelper.stub {
             on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
         }
@@ -99,20 +101,34 @@ class WifiSharedPreferenceControllerTest {
         val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
         assertThat(shadowDialog).isNotNull()
         assertThat(shadowDialog.getTitle().toString())
-            .isEqualTo(context.getString(R.string.wifi_conflict_dialog_title, "shared"))
+            .isEqualTo(context.getString(R.string.wifi_share_conflict_dialog_title))
         assertThat(shadowDialog.getMessage().toString())
-            .isEqualTo(
-                context.getString(
-                    R.string.wifi_conflict_dialog_message,
-                    "shared",
-                    "testSSID",
-                    "private",
-                )
-            )
+            .isEqualTo(context.getString(R.string.wifi_share_conflict_dialog_message, "testSSID"))
+    }
+
+    @Test
+    fun setChecked_conflictingPrivateEntry_showsAlertDialog_validateMessages() {
+        mockWifiConfig.shared = false
+        mockWifiPickerTrackerHelper.stub {
+            on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
+        }
+        whenever(mockWifiPickerTracker.wifiEntries).thenReturn(listOf(mockWifiEntry))
+        ShadowAlertDialogCompat.reset()
+
+        controller.setChecked(false)
+
+        val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
+        val shadowDialog = ShadowAlertDialogCompat.shadowOf(dialog)
+        assertThat(shadowDialog).isNotNull()
+        assertThat(shadowDialog.getTitle().toString())
+            .isEqualTo(context.getString(R.string.wifi_private_conflict_dialog_title))
+        assertThat(shadowDialog.getMessage().toString())
+            .isEqualTo(context.getString(R.string.wifi_private_conflict_dialog_message, "testSSID"))
     }
 
     @Test
     fun setChecked_conflictingConnectedEntry_showsAlertDialog() {
+        mockWifiConfig.shared = true
         mockWifiPickerTrackerHelper.stub {
             on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
         }
@@ -128,6 +144,7 @@ class WifiSharedPreferenceControllerTest {
 
     @Test
     fun setChecked_conflictingEntry_showsAlertDialog_clickNegativeButton() {
+        mockWifiConfig.shared = true
         mockWifiPickerTrackerHelper.stub {
             on { getWifiPickerTracker() } doReturn mockWifiPickerTracker
         }
@@ -172,14 +189,15 @@ class WifiSharedPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER)
     fun getAvailabilityStatus_flagDisabled() {
         assertThat(controller.getAvailabilityStatus())
             .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE)
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     fun getAvailabilityStatus_flagEnabled() {
         assertThat(controller.getAvailabilityStatus()).isEqualTo(BasePreferenceController.AVAILABLE)
     }

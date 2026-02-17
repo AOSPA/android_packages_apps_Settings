@@ -47,7 +47,8 @@ public abstract class AppCounter extends AsyncTask<Void, Void, Integer> {
             long flags = PackageManager.GET_DISABLED_COMPONENTS
                     | PackageManager.GET_DISABLED_UNTIL_USED_COMPONENTS
                     | (isArchivingEnabled() ? PackageManager.MATCH_ARCHIVED_PACKAGES : 0)
-                    | (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0);
+                    | (android.multiuser.Flags.dontShowOtherUsersAppsToAdmin() ? 0 :
+                                    (user.isAdmin() ? PackageManager.MATCH_ANY_USER : 0));
             ApplicationInfoFlags infoFlags = ApplicationInfoFlags.of(flags);
             final List<ApplicationInfo> list =
                     mPm.getInstalledApplicationsAsUser(infoFlags, user.id);

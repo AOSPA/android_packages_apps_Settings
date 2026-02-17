@@ -41,7 +41,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.accessibility.AccessibilityEvent;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -278,6 +277,9 @@ public class ChooseLockPattern extends SettingsActivity {
                     public void onPatternStart(InputMode inputMode) {
                         mInputMode = inputMode;
                         mLockPatternView.removeCallbacks(mClearPatternRunnable);
+                        if (Flags.patternInputClickSupport() && mUiStage == Stage.Introduction) {
+                            updateStage(Stage.FirstInputInProgress);
+                        }
                         if (inputMode == InputMode.Click) {
                             final String text = getResources().getString(
                                     R.string.lockpattern_recording_inprogress_click,
@@ -328,12 +330,17 @@ public class ChooseLockPattern extends SettingsActivity {
                         updateStage(Stage.ConfirmWrong);
                     }
                 }
-            } else if (mUiStage == Stage.Introduction || mUiStage == Stage.ChoiceTooShort) {
+            } else if (mUiStage == Stage.Introduction || mUiStage == Stage.FirstInputInProgress
+                    || mUiStage == Stage.ChoiceTooShort) {
                 if (pattern.size() < LockPatternUtils.MIN_LOCK_PATTERN_SIZE) {
                     updateStage(Stage.ChoiceTooShort);
                 } else {
                     mChosenPattern = LockscreenCredential.createPattern(pattern);
-                    updateStage(Stage.FirstChoiceValid);
+                    if (mInputMode == InputMode.Click) {
+                        updateStage(Stage.NeedToConfirm);
+                    } else {
+                        updateStage(Stage.FirstChoiceValid);
+                    }
                 }
             } else {
                 throw new IllegalStateException("Unexpected stage " + mUiStage + " when "
@@ -341,12 +348,10 @@ public class ChooseLockPattern extends SettingsActivity {
             }
         }
 
-
         @Override
         public int getMetricsCategory() {
             return SettingsEnums.CHOOSE_LOCK_PATTERN;
         }
-
 
         /**
          * The states of the left footer button.
@@ -397,11 +402,15 @@ public class ChooseLockPattern extends SettingsActivity {
          * Keep track internally of where the user is in choosing a pattern.
          */
         protected enum Stage {
-
             Introduction(
                     R.string.lock_settings_picker_biometrics_added_security_message,
                     R.string.lockpassword_choose_your_pattern_description,
                     LeftButtonMode.Gone, RightButtonMode.ContinueDisabled,
+                    ID_EMPTY_MESSAGE, true),
+            FirstInputInProgress(
+                    R.string.lock_settings_picker_biometrics_added_security_message,
+                    R.string.lockpassword_choose_your_pattern_description,
+                    LeftButtonMode.Retry, RightButtonMode.ContinueDisabled,
                     ID_EMPTY_MESSAGE, true),
             HelpScreen(
                     R.string.lockpattern_settings_help_how_to_record,
@@ -418,18 +427,17 @@ public class ChooseLockPattern extends SettingsActivity {
                     LeftButtonMode.Retry, RightButtonMode.Continue, ID_EMPTY_MESSAGE, false),
             NeedToConfirm(
                     R.string.lockpattern_need_to_confirm, R.string.lockpattern_need_to_confirm,
-                    LeftButtonMode.Gone, RightButtonMode.ConfirmDisabled,
+                    LeftButtonMode.Retry, RightButtonMode.ConfirmDisabled,
                     ID_EMPTY_MESSAGE, true),
             ConfirmWrong(
                     R.string.lockpattern_need_to_unlock_wrong,
                     R.string.lockpattern_need_to_unlock_wrong,
-                    LeftButtonMode.Gone, RightButtonMode.ConfirmDisabled,
+                    LeftButtonMode.Retry, RightButtonMode.ConfirmDisabled,
                     ID_EMPTY_MESSAGE, true),
             ChoiceConfirmed(
                     R.string.lockpattern_pattern_confirmed_header,
                     R.string.lockpattern_pattern_confirmed_header,
                     LeftButtonMode.Gone, RightButtonMode.Confirm, ID_EMPTY_MESSAGE, false);
-
 
             /**
              * @param messageForBiometrics The message displayed at the top, above header for
@@ -480,6 +488,8 @@ public class ChooseLockPattern extends SettingsActivity {
         static final String KEY_UI_STAGE = "uiStage";
         private static final String KEY_PATTERN_CHOICE = "chosenPattern";
         private static final String KEY_CURRENT_PATTERN = "currentPattern";
+        private static final String KEY_INPUT_MODE = "inputMode";
+        private static final String KEY_INPUT_PATTERN = "inputPattern";
 
         @Nullable
         private static Boolean sIsPatternInputClickSupportedForTesting;
@@ -614,6 +624,7 @@ public class ChooseLockPattern extends SettingsActivity {
             super.onViewCreated(view, savedInstanceState);
             final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
             mHeaderText = layout.getDescriptionTextView();
+            mHeaderText.setAccessibilityLiveRegion(ACCESSIBILITY_LIVE_REGION_POLITE);
             mHeaderText.setMinLines(2);
             mDefaultHeaderColorList = mHeaderText.getTextColors();
             mLockPatternView = (LockPatternView) view.findViewById(R.id.lockPattern);
@@ -670,6 +681,14 @@ public class ChooseLockPattern extends SettingsActivity {
                 // restore from previous state
                 mChosenPattern = savedInstanceState.getParcelable(KEY_PATTERN_CHOICE);
                 mCurrentCredential = savedInstanceState.getParcelable(KEY_CURRENT_PATTERN);
+                if (savedInstanceState.containsKey(KEY_INPUT_MODE)) {
+                    mInputMode = LockPatternView.InputMode.valueOf(
+                            savedInstanceState.getString(KEY_INPUT_MODE));
+                }
+                if (savedInstanceState.containsKey(KEY_INPUT_PATTERN)) {
+                    mInputPattern = LockPatternUtils.byteArrayToPattern(
+                            savedInstanceState.getString(KEY_INPUT_PATTERN).getBytes());
+                }
 
                 updateStage(Stage.values()[savedInstanceState.getInt(KEY_UI_STAGE)]);
 
@@ -726,7 +745,16 @@ public class ChooseLockPattern extends SettingsActivity {
         }
 
         public void handleLeftButton() {
-            if (mUiStage.leftMode == LeftButtonMode.Retry) {
+            if (mUiStage.leftMode != LeftButtonMode.Retry) {
+                throw new IllegalStateException("left footer button pressed, but stage of "
+                        + mUiStage + " doesn't make sense");
+            }
+
+            if (mUiStage == Stage.NeedToConfirm || mUiStage == Stage.ConfirmWrong) {
+                mLockPatternView.clearPattern();
+                updateStage(Stage.NeedToConfirm);
+            } else if (mUiStage == Stage.Introduction || mUiStage == Stage.FirstInputInProgress
+                    || mUiStage == Stage.ChoiceTooShort || mUiStage == Stage.FirstChoiceValid) {
                 if (mChosenPattern != null) {
                     mChosenPattern.zeroize();
                     mChosenPattern = null;
@@ -741,10 +769,11 @@ public class ChooseLockPattern extends SettingsActivity {
 
         public void handleRightButton() {
             if (mUiStage.rightMode == RightButtonMode.ContinueDisabled) {
-                if (mUiStage != Stage.Introduction && mUiStage != Stage.ChoiceTooShort) {
+                if (mUiStage != Stage.Introduction && mUiStage != Stage.FirstInputInProgress
+                        && mUiStage != Stage.ChoiceTooShort) {
                     throw new IllegalStateException("expected ui stage "
-                            + Stage.Introduction + " or " + Stage.ChoiceTooShort
-                            + " when button is " + RightButtonMode.Continue);
+                            + Stage.Introduction + ", " + Stage.FirstInputInProgress + " or "
+                            + Stage.ChoiceTooShort + " when button is " + RightButtonMode.Continue);
                 }
                 if (mInputMode == InputMode.Click && mInputPattern != null) {
                     verifyPattern(mInputPattern);
@@ -815,6 +844,17 @@ public class ChooseLockPattern extends SettingsActivity {
             if (mCurrentCredential != null) {
                 outState.putParcelable(KEY_CURRENT_PATTERN, mCurrentCredential.duplicate());
             }
+
+            if (mInputMode != null) {
+                outState.putString(KEY_INPUT_MODE, mInputMode.name());
+            }
+
+            if (mInputPattern != null && !mInputPattern.isEmpty()) {
+                byte[] patternBytes = LockPatternUtils.patternToByteArray(mInputPattern);
+                if (patternBytes != null) {
+                    outState.putString(KEY_INPUT_PATTERN, new String(patternBytes));
+                }
+            }
         }
 
         /**
@@ -824,7 +864,6 @@ public class ChooseLockPattern extends SettingsActivity {
          * @param stage
          */
         protected void updateStage(Stage stage) {
-            final Stage previousStage = mUiStage;
             final GlifLayout layout = getActivity().findViewById(R.id.setup_wizard_layout);
             mUiStage = stage;
 
@@ -866,10 +905,12 @@ public class ChooseLockPattern extends SettingsActivity {
             setRightButtonEnabled(stage.rightMode.enabled);
 
             // same for whether the pattern is enabled
-            if (stage.patternEnabled) {
-                mLockPatternView.enableInput();
-            } else {
-                mLockPatternView.disableInput();
+            if (mUiStage != Stage.FirstInputInProgress) {
+                if (stage.patternEnabled) {
+                    mLockPatternView.enableInput();
+                } else {
+                    mLockPatternView.disableInput();
+                }
             }
 
             // the rest of the stuff varies enough that it is easier just to handle
@@ -879,6 +920,8 @@ public class ChooseLockPattern extends SettingsActivity {
             switch (mUiStage) {
                 case Introduction:
                     mLockPatternView.clearPattern();
+                    break;
+                case FirstInputInProgress:
                     break;
                 case HelpScreen:
                     mLockPatternView.setPattern(DisplayMode.Animate, mAnimatePattern);
@@ -896,9 +939,6 @@ public class ChooseLockPattern extends SettingsActivity {
                 case ChoiceConfirmed:
                     break;
             }
-
-            mHeaderText.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
-
         }
 
         protected void updateFooterLeftButton(Stage stage) {

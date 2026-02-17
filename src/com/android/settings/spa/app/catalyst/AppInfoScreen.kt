@@ -44,7 +44,7 @@ import com.android.settings.applications.specialaccess.pictureinpicture.PictureI
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen.Companion.pictureInPictureFilter
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -75,7 +75,7 @@ private constructor(
 ) : PreferenceScreenMixin, PreferenceTitleProvider, PreferenceAvailabilityProvider {
 
     private val packageName: String =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!!.packageName
         } else {
             arguments!!.packageName
@@ -129,7 +129,7 @@ private constructor(
         preferenceHierarchy(context) {
             +PreferenceCategory("advanced_app_info",R.string.advanced_app_info_purpose, R.string.advanced_apps) += {
                 var newKeyParameters: ValidatedKeyParameters? = null
-                if (CatalystFlags.catalystUseKeyParameters()) {
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     newKeyParameters =
                         SpecialAccessAppDetailScreen.Companion.parametersSchema.prepareWith(
                             keyParameters,
@@ -141,7 +141,7 @@ private constructor(
 
                 appInfo?.let {
                     if (hasSpecialAccessPermission(context, it, ::displayOverOtherAppsFilter)) {
-                        if (CatalystFlags.catalystUseKeyParameters()) {
+                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                             +(DisplayOverOtherAppsAppDetailScreen.KEY withParameters
                                 newKeyParameters!!)
                         } else {
@@ -149,7 +149,7 @@ private constructor(
                         }
                     }
                     if (hasSpecialAccessPermission(context, it, ::manageWriteSettingsFilter)) {
-                        if (CatalystFlags.catalystUseKeyParameters()) {
+                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                             +(ManageWriteSettingsAppDetailScreen.KEY withParameters
                                 newKeyParameters!!)
                         } else {
@@ -157,14 +157,14 @@ private constructor(
                         }
                     }
                     if (hasSpecialAccessPermission(context, it, ::pictureInPictureFilter)) {
-                        if (CatalystFlags.catalystUseKeyParameters()) {
+                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                             +(PictureInPictureAppDetailScreen.KEY withParameters newKeyParameters!!)
                         } else {
                             +(PictureInPictureAppDetailScreen.KEY args arguments!!)
                         }
                     }
                     if (hasSpecialAccessPermission(context, it, ::installUnknownAppsFilter)) {
-                        if (CatalystFlags.catalystUseKeyParameters()) {
+                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                             +(InstallUnknownAppsAppDetailScreen.KEY withParameters
                                 newKeyParameters!!)
                         } else {
@@ -172,7 +172,7 @@ private constructor(
                         }
                     }
                     if (hasSpecialAccessPermission(context, it, ::alarmsAndRemindersFilter)) {
-                        if (CatalystFlags.catalystUseKeyParameters()) {
+                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                             +(AlarmsAndRemindersAppDetailScreen.KEY withParameters
                                 newKeyParameters!!)
                         } else {
@@ -180,7 +180,7 @@ private constructor(
                         }
                     }
                     if (hasSpecialAccessPermission(context, it, ::writeSystemPreferencesFilter)) {
-                        if (CatalystFlags.catalystUseKeyParameters()) {
+                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                             +(WriteSystemPreferencesAppDetailScreen.KEY withParameters
                                 newKeyParameters!!)
                         } else {

@@ -68,6 +68,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+// LINT.IfChange
 /**
  * Fragment with print service settings.
  */
@@ -560,6 +561,24 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
                         }
                     }
                 });
+            } else if (printer.getSetupIntent() != null) {
+                moreInfoView.setVisibility(View.VISIBLE);
+                moreInfoView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Bundle options = ActivityOptions.makeBasic()
+                                    .setPendingIntentBackgroundActivityStartMode(
+                                            ActivityOptions.MODE_BACKGROUND_ACTIVITY_START_ALLOWED)
+                                    .toBundle();
+                            getActivity().startIntentSender(
+                                    printer.getSetupIntent().getIntentSender(), null, 0, 0, 0,
+                                    options);
+                        } catch (SendIntentException e) {
+                            Log.e(LOG_TAG, "Could not execute pending setup intent: %s", e);
+                        }
+                    }
+                });
             } else {
                 moreInfoView.setVisibility(View.GONE);
             }
@@ -745,3 +764,4 @@ public class PrintServiceSettingsFragment extends SettingsPreferenceFragment
         }
     }
 }
+// LINT.ThenChange(PrintServiceSettingsApiScreen.kt)

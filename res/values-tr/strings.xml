@@ -412,6 +412,10 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Atla"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Maksimum sayıda yüz eklediniz"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Başka yüz ekleyemezsiniz"</string>
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
+    <skip />
+    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
+    <skip />
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Kayıt işlemi tamamlanmadı"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"Tamam"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Yüz kayıt işlemi için süre sınırı aşıldı. Tekrar deneyin."</string>
@@ -425,7 +429,6 @@
     <string name="security_settings_face_enroll_improve_face_alert_title" msgid="6194184776580066012">"Yüz Tanıma Kilidi\'ni ayarlayın"</string>
     <string name="security_settings_face_settings_use_face_category" msgid="1638314154119800188">"Yüz Tanıma Kilidi kullan:"</string>
     <string name="security_settings_face_description" msgid="4978624729863151372"></string>
-    <string name="security_settings_face_footer_description_class3" msgid="2639208414351635622"></string>
     <string name="security_settings_face_footer_learn_more_description" msgid="1418112576619086897"></string>
     <string name="security_settings_face_settings_face_category" msgid="60058016983772899">"Yüz"</string>
     <string name="security_settings_face_settings_use_face_to_category" msgid="3349153603335284583">"Yüzü kullanma amacı"</string>
@@ -556,6 +559,14 @@
     <string name="security_settings_fingerprint_enroll_find_sensor_title" msgid="886085239313346000">"Sensöre dokunun"</string>
     <string name="security_settings_sfps_enroll_find_sensor_title" msgid="8327884364635804363">"Bastırmadan güç düğmesine dokunun"</string>
     <string name="security_settings_udfps_enroll_find_sensor_title" msgid="8077484429913330179">"Parmak izinizi ayarlama"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_title" msgid="2560358942286362136">"Parmak izi sensörüne dokunun"</string>
+    <string name="security_settings_enroll_find_sensor_standalone_default_message" msgid="1440652109953064598">"Sensör; klavyenizde, güç düğmesinde veya cihazınızın yan tarafındadır"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_left_message" msgid="9114169763600792562">"Parmak izi sensörü, klavyenizin sol alt köşesindedir"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_bottom_right_message" msgid="1259481399128590523">"Parmak izi sensörü, klavyenizin sağ alt köşesindedir"</string>
+    <string name="security_settings_enroll_find_sensor_keyboard_top_right_message" msgid="3676793246782964274">"Parmak izi sensörü, klavyenizin sağ üst köşesindedir"</string>
+    <string name="security_settings_enroll_find_sensor_right_side_message" msgid="4935349088172995426">"Parmak izi sensörü, cihazınızın sağ tarafındadır"</string>
+    <string name="security_settings_enroll_find_sensor_left_side_message" msgid="5826609754513683067">"Parmak izi sensörü, cihazınızın sol tarafındadır"</string>
+    <string name="security_settings_enroll_find_sensor_left_of_power_button_top_right_message" msgid="4384349514752161995">"Parmak izi sensörü, klavyenizin sağ üst köşesinde, güç düğmesinin yanındadır"</string>
     <string name="security_settings_fingerprint_enroll_find_sensor_message" msgid="6160543980992596286">"Telefonunuzun arkasındadır. İşaret parmağınızı kullanın."</string>
     <string name="security_settings_udfps_enroll_find_sensor_message" msgid="8383106460819519961">"Parmak izi sensörü ekranınızın üzerindedir. Bir sonraki ekranda parmak iziniz kaydedilecek."</string>
     <string name="security_settings_udfps_enroll_find_sensor_start_button" msgid="3172268783620336357">"Başlat"</string>
@@ -958,6 +969,8 @@
     <string name="external_display_connection_preference_desktop" msgid="1132935527002697518">"Ayrı ekran olarak kullan"</string>
     <string name="external_display_connection_preference_mirroring" msgid="7389135903725596964">"Yerleşik ekranı yansıt"</string>
     <string name="external_display_connection_preference_show_dialog" msgid="6797743658612540027">"Bağlantı iletişim kutusunu göster"</string>
+    <string name="hdr_preference_title" msgid="1297374795868644828">"HDR kullan"</string>
+    <string name="hdr_preference_summary" msgid="2557507660147446325">"Daha geniş bir renk aralığı ve daha parlak vurgular sunar"</string>
     <string name="external_display_not_found" msgid="1912355133386555798">"Harici ekranın bağlantısı kesildi"</string>
     <string name="external_display_rotation" msgid="7160062306817490204">"Döndürme"</string>
     <string name="external_display_standard_rotation" msgid="545969032327487219">"Standart"</string>
@@ -1017,7 +1030,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"HDR/SDR oranını göster"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"Mevcut HDR/SDR oranını göster"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="4906958426927741485">"NFC için cihaz kilidinin açılmasını zorunlu kıl"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"Cihaz kilidi açıkken izin ver"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"NFC ile uygulama içeriği aktarmaya hazır"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"Kapalı"</string>
@@ -1146,14 +1159,14 @@
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"Bu ağa cihaz eklemek için QR kodu kullanın"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"QR kodu geçerli bir biçim değil"</string>
     <string name="retry" msgid="7542103800274026915">"Tekrar dene"</string>
-    <string name="shared_message" msgid="2104244057926025072">"paylaşılan"</string>
-    <string name="private_message" msgid="5897966950396765392">"gizli"</string>
     <string name="wifi_conflict_dialog_switch" msgid="5896926117413068886">"Geç"</string>
     <string name="wifi_conflict_dialog_cancel" msgid="5200571850377525343">"İptal"</string>
     <string name="wifi_share_preference_title" msgid="2000847347515149059">"Ağı paylaşın"</string>
     <string name="wifi_share_preference_summary" msgid="3642772041628058748">"Bu cihazdaki diğer kullanıcılar bu ağa erişebilir"</string>
-    <string name="wifi_conflict_dialog_title" msgid="2462232406209378294">"<xliff:g id="SHARED">%1$s</xliff:g> ağa geçilsin mi?"</string>
-    <string name="wifi_conflict_dialog_message" msgid="6900269406213437763">"\"<xliff:g id="NETWORK_NAME">%2$s</xliff:g>\" adlı bir <xliff:g id="SHARED_0">%1$s</xliff:g> ağ zaten var. <xliff:g id="SHARED_1">%1$s</xliff:g> ağa geçerseniz <xliff:g id="PRIVATE">%3$s</xliff:g> ağınızdan ayrılırsınız ve geçici olarak internet bağlantınız kesilebilir."</string>
+    <string name="wifi_share_conflict_dialog_title" msgid="3758584730708042014">"Paylaşılan ağa geçilsin mi?"</string>
+    <string name="wifi_share_conflict_dialog_message" msgid="4614968368961927940">"\"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>\" adlı bir paylaşılan ağ zaten var. Paylaşılan ağa geçerseniz özel ağınızdan ayrılırsınız ve geçici olarak internet bağlantınız kesilebilir."</string>
+    <string name="wifi_private_conflict_dialog_title" msgid="10940608988441770">"Özel ağa geçilsin mi?"</string>
+    <string name="wifi_private_conflict_dialog_message" msgid="495022893355731972">"\"<xliff:g id="NETWORK_NAME">%1$s</xliff:g>\" adlı bir özel ağ zaten var. Özel ağa geçerseniz paylaşılan ağınızdan ayrılırsınız ve geçici olarak internet bağlantınız kesilebilir."</string>
     <string name="wifi_unchanged" msgid="8026045290856150191">"(değişmedi)"</string>
     <string name="wifi_allow_edit_configuration_title" msgid="701463165569293">"Kullanıcıların ağı düzenlemesine izin ver"</string>
     <string name="wifi_allow_edit_configuration_summary" msgid="2133654391010089827">"Diğer kullanıcılar bu ağda değişiklik yapabilir"</string>
@@ -1367,7 +1380,7 @@
     <string name="auto_brightness_summary_off" msgid="8077066192887677956">"Kapalı"</string>
     <string name="hdr_brightness_title" msgid="6997980740096282616">"Gelişmiş HDR parlaklığı"</string>
     <string name="hdr_brightness_level_title" msgid="770342878327164738">"Yoğunluk"</string>
-    <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standart görsel"</string>
+    <string name="hdr_brightness_standard_image_label" msgid="8262353134660098785">"Standart görüntü"</string>
     <string name="hdr_brightness_hdr_image_label" msgid="8068442758910393158">"HDR görüntü"</string>
     <string name="hdr_brightness_warning" msgid="2755151579539607928">"Bu ayar yalnızca Yüksek Dinamik Aralık (HDR) özelliğini destekleyen görselleri ve videoları etkiler."</string>
     <string name="hdr_brightness_slider_description" msgid="3743611389738391772">"Yoğunluk: Yoğunluğu azaltın veya artırın."</string>
@@ -1438,7 +1451,7 @@
     <string name="dark_ui_text_force_invert" msgid="3776487375947497387">"Ekranınızı daha rahat görüntülemek ve bazı ekranlarda pil kullanımını azaltmak için koyu arka plan kullanın. Program kullanıyorsanız ekran kapandığında temanız değişir."</string>
     <string name="dark_ui_bedtime_footer_summary" msgid="5576501833145170581">"Koyu tema şu anda Uyku Vakti modu programınıza uyuyor."</string>
     <string name="dark_ui_bedtime_footer_action" msgid="1493095487994054339">"Uyku Vakti modu ayarları"</string>
-    <string name="dark_ui_modes_footer_summary" msgid="8005236983054795213">"{count,plural,offset:2 =0{Modlar koyu temayı açabilir.}=1{{mode_1} koyu temayı açabilir.}=2{{mode_1} ve {mode_2} koyu temayı açabilir.}=3{{mode_1}, {mode_2} ve {mode_3} koyu temayı açabilir.}other{{mode_1}, {mode_2} ve diğer # mod koyu temayı açabilir.}}"</string>
+    <string name="dark_ui_modes_footer_summary" msgid="8510284128378660986">"{count,plural,offset:2 =0{Modlar, koyu temayı da açabilir.}=1{{mode_1}, koyu temayı da açar.}=2{{mode_1} ve {mode_2} koyu temayı da açar.}=3{{mode_1}, {mode_2} ve {mode_3}, koyu temayı da açar.}other{{mode_1}, {mode_2} ve diğer # mod, koyu temayı da açar.}}"</string>
     <string name="dark_ui_modes_footer_action" msgid="80671811848446248">"Mod ayarları"</string>
     <string name="hdr_brigtness_text" msgid="1912629316654528876">"Yüksek Dinamik Aralık (HDR) özellikli görsel ve videolardaki renk aralığını/netliği artırın ve parlaklaştırın. HDR içerikler daha parlak görünür."</string>
     <string name="screen_timeout" msgid="7709947617767439410">"Ekran zaman aşımı"</string>
@@ -1475,7 +1488,7 @@
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Zayıf Işık modunu kullan"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Zayıf Işık modunda nelerin gösterileceğini seçin"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Zayıf ışıklı saat"</string>
-    <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Açık/<xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
+    <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Açık / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
     <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Kapalı"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Ortam karanlık olduğunda zayıf ışıklı saat gösterilir"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Ortam ekranı"</string>
@@ -1516,6 +1529,24 @@
     <string name="sim_pin_enable_failed" msgid="5156513975085380284">"PIN etkinleştirilemiyor."</string>
     <string name="sim_enter_ok" msgid="3401715290135787531">"Tamam"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"İptal"</string>
+    <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM kartı koru"</string>
+    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"Otomatik SIM kilidi koruması"</string>
+    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"Otomatik PIN yönetimi"</string>
+    <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android tarafından yönetiliyor"</string>
+    <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android tarafından yönetilmiyor"</string>
+    <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Kayıt başarılı"</string>
+    <string name="sim_enrollment_failed" msgid="342422651961251317">"Kayıt başarısız oldu"</string>
+    <string name="sim_display_platform_managed_pin_title" msgid="6889806433509624620">"Android tarafından yönetilen PIN\'i göster"</string>
+    <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android tarafından yönetilen PIN"</string>
+    <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Android tarafından yönetilen PIN\'in değeri:"</string>
+    <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"PIN alınamadı"</string>
+    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"SIM kartı hırsızlığa karşı koruyun"</string>
+    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM PIN\'i, Android tarafından yönetiliyor"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"SIM PIN\'i manuel olarak yönetiliyor"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"SIM korumasını etkinleştirmek için kilit ekranı ayarlanmalıdır"</string>
+    <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Geçerli SIM PIN\'ini girin"</string>
+    <string name="provide_current_sim_pin" msgid="2805396981527525822">"SIM kartın geçerli PIN\'ini girin"</string>
+    <string name="use_carrier_default_pin" msgid="4777399918806287607">"Operatör varsayılanını kullan"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Mobil veri için <xliff:g id="CARRIER">%1$s</xliff:g> kullanılsın mı?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Mobil veri için <xliff:g id="CARRIER2_0">%2$s</xliff:g> operatörünü kullanıyorsunuz. <xliff:g id="CARRIER1">%1$s</xliff:g> operatörüne geçiş yaparsanız mobil veri için <xliff:g id="CARRIER2_1">%2$s</xliff:g> operatörünü artık kullanamazsınız."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> adlı operatörü kullan"</string>
@@ -1558,6 +1589,8 @@
     <string name="scanning_status_text_off" msgid="4002352668313705132">"Kapalı"</string>
     <string name="status_meid_number" msgid="6040380838489162650">"MEID"</string>
     <string name="status_icc_id" msgid="7995690631650006970">"ICCID"</string>
+    <string name="status_gid1" msgid="2412033683972134982">"GID1"</string>
+    <string name="status_carrier_id" msgid="1053322454411977469">"Operatör Kimliği"</string>
     <string name="status_data_network_type" msgid="3689772955330665876">"Mobil veri ağı türü"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Mobil ses ağı türü"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Operatör bilgileri"</string>
@@ -1847,7 +1880,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"PIN belirleyin"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"İş PIN\'i ayarlayın"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Desen oluşturun"</string>
-    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Ekstra güvenlik için desenle kilit açmayı kullanın."</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Ekstra güvenlik için desenle kilit açmayı kullanın"</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"İş deseni oluşturun"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Parmak izi için şifre ayarlayın"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Parmak izi için desen ayarlayın"</string>
@@ -1895,12 +1928,12 @@
     <string name="lockpassword_confirm_your_pin_header_frp" msgid="8285647793164729982">"PIN\'i doğrulayın"</string>
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Şifreyi doğrulayın"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Kimliğinizi doğrulayın"</string>
-    <string name="lockpassword_remote_validation_pattern_details" msgid="4655537780358707983">"Google Hesapları, ayarlar ve diğer öğeleri aktarmak için diğer cihazınızın desenini girin. Deseniniz şifrelenir."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="2373654227583206297">"Google Hesapları, ayarlar ve diğer öğeleri aktarmak için diğer cihazınızın PIN\'ini girin. PIN\'iniz şifrelenir."</string>
-    <string name="lockpassword_remote_validation_password_details" msgid="3482328925925888340">"Google Hesapları, ayarlar ve diğer öğeleri aktarmak için diğer cihazınızın şifresini girin. Şifreniz şifrelenir."</string>
-    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="7595104317648465901">"Bu cihazın kilidini desenle de aç"</string>
-    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="509672303005547218">"Cihazın kilidini açmak için PIN de kullan"</string>
-    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="2066701840753591922">"Bu cihazın kilidini şifreyle de aç"</string>
+    <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Google Hesapları, ayarlar ve başka öğeleri aktarmak için diğer cihazınızın desenini girin. Deseniniz şifrelenir."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Google Hesapları, ayarlar ve başka öğeleri aktarmak için diğer cihazınızın PIN\'ini girin. PIN\'iniz şifrelenir."</string>
+    <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Google Hesapları, ayarlar ve başka öğeleri aktarmak için diğer cihazınızın şifresini girin. Şifreniz şifrelenir."</string>
+    <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Bu cihazın kilidini açmak için aynı deseni kullanın"</string>
+    <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Bu cihazın kilidini açmak için aynı PIN\'i kullanın"</string>
+    <string name="lockpassword_remote_validation_set_password_as_screenlock" msgid="3576706480264804892">"Bu cihazın kilidini açmak için aynı şifreyi kullanın"</string>
     <string name="lockpassword_confirm_repair_mode_pattern_header" msgid="6669435143987988314">"Deseni doğrulayın"</string>
     <string name="lockpassword_confirm_repair_mode_pin_header" msgid="2585263648322879131">"PIN\'i doğrulayın"</string>
     <string name="lockpassword_confirm_repair_mode_password_header" msgid="3064676176428495228">"Şifreyi doğrulayın"</string>
@@ -2115,6 +2148,13 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"“.” karakterini girmek için Boşluk tuşuna iki kez basın"</string>
     <string name="show_password" msgid="7101900779571040117">"Şifreleri göster"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Yazarken karakterleri kısa süreliğine göster"</string>
+    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
+    <skip />
+    <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Dokunmatik ekranda yazarken karakterleri kısa süreliğine göster"</string>
+    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
+    <skip />
+    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
+    <skip />
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Bu yazım denetleyici, şifreler ve kredi kartı numaraları gibi kişisel veriler de dahil olmak üzere yazdığınız tüm metni toplayabilir. Yazım denetleyici, <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> uygulamasından gelmektedir. Bu yazım denetleyiciyi kullanmak istiyor musunuz?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Ayarlar"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Dil"</string>
@@ -2493,7 +2533,6 @@
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"Ekrandaki içeriği büyütmek için hızlı yakınlaştırma özelliği"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;Yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Büyütmeyi başlatmak için kısayolu kullanın&lt;br/&gt; {1,number,integer}. Ekrana dokunun&lt;br/&gt; {2,number,integer}. Ekranda gezinmek için 2 parmağınızı sürükleyin&lt;br/&gt; {3,number,integer}. Yakınlaştırmayı ayarlamak için 2 parmağınızla sıkıştırın&lt;br/&gt; {4,number,integer}. Büyütmeyi durdurmak için kısayolu kullanın&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Geçici bir süreliğine yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Büyütme yönteminin tam ekran olarak ayarlandığından emin olun&lt;br/&gt; {1,number,integer}. Büyütmeyi başlatmak için kısayolu kullanın&lt;br/&gt; {2,number,integer}. Ekranda herhangi bir yere dokunup basılı tutun&lt;br/&gt; {3,number,integer}. Ekranda gezinmek için parmağınızı sürükleyin&lt;br/&gt; {4,number,integer}. Büyütmeyi durdurmak için parmağınızı kaldırın"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;Yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Büyütmeyi başlatmak için kısayol kullanın veya &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M tuşuna basın &lt;br/&gt; {1,number,integer}. Ekranda gezinmek için &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + ok tuşlarına basın&lt;br/&gt; {2,number,integer}. Yakınlaştırmayı ayarlamak için &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ve \"+\" veya \"-\" tuşuna basın&lt;br/&gt; {3,number,integer}. Büyütmeyi durdurmak için kısayol veya &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M tuşuna basın."</string>
-    <string name="accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary" msgid="4390658165464462006">"&lt;b&gt;Yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Büyütmeyi başlatmak için kısayol kullanın&lt;br/&gt; {1,number,integer}. Ekranda gezinmek için &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + ok tuşlarına basın&lt;br/&gt; {2,number,integer}. Yakınlaştırmayı ayarlamak için &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ve \"+\" veya \"-\" tuşuna basın&lt;br/&gt; {3,number,integer}. Büyütmeyi durdurmak için kısayol kullanın."</string>
     <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;Klavye&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Büyütmeyi başlatmak için kısayol kullanın veya &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M tuşuna basın &lt;br/&gt; {1,number,integer}. Ekranda gezinmek için &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + ok tuşlarına basın&lt;br/&gt; {2,number,integer}. Yakınlaştırmayı ayarlamak için &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; ve \"+\" veya \"-\" tuşuna basın&lt;br/&gt; {3,number,integer}. Büyütmeyi durdurmak için kısayol kullanın veya &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M tuşuna basın&lt;br/&gt;&lt;br/&gt; &lt;b&gt;Dokunmatik ekran&lt;/b&gt;&lt;br/&gt; Yakınlaştırmak için:&lt;br/&gt; {0,number,integer}. Büyütmeyi başlatmak için kısayol kullanın&lt;br/&gt; {1,number,integer}. Ekrana dokunun&lt;br/&gt; {2,number,integer}. Ekranda gezinmek için 2 parmağınızı sürükleyin&lt;br/&gt; {3,number,integer}. Yakınlaştırmayı ayarlamak için 2 parmağınızla sıkıştırın&lt;br/&gt; {4,number,integer}. Büyütmeyi durdurmak için kısayol kullanın&lt;br/&gt;&lt;br/&gt; Geçici olarak yakınlaştırmak için:&lt;br/&gt; {0,number,integer}. Büyütme türünün tam ekran olarak ayarlandığından emin olun&lt;br/&gt; {1,number,integer}. Büyütmeyi başlatmak için kısayol kullanın&lt;br/&gt; {2,number,integer}. Ekranda herhangi bir yere dokunup basılı tutun&lt;br/&gt; {3,number,integer}. Ekranda gezinmek için parmağınızı sürükleyin&lt;br/&gt; {4,number,integer}. Büyütmeyi durdurmak için parmağınızı kaldırın."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;Yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Büyütmeyi başlatmak için kısayol kullanın&lt;br/&gt; {1,number,integer}. Ekrana dokunun&lt;br/&gt; {2,number,integer}. Ekranda gezinmek için 2 parmağınızı sürükleyin&lt;br/&gt; {3,number,integer}. Yakınlaştırmayı ayarlamak için 2 parmağınızla sıkıştırın&lt;br/&gt; {4,number,integer}. Büyütmeyi durdurmak için kısayol kullanın&lt;br/&gt;&lt;br/&gt; Ayrıca geçici olarak yakınlaştırabilir ve diğer işlemleri yapabilirsiniz."</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;Yakınlaştırmak için:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Büyütmeyi başlatmak için kısayol kullanın&lt;br/&gt; {1,number,integer}. Ekrana dokunun&lt;br/&gt; {2,number,integer}. Ekranda hareket etmek için 1 veya 2 parmağınızı sürükleyin&lt;br/&gt; {3,number,integer}. Yakınlaştırmayı ayarlamak için 2 parmağınızla sıkıştırın&lt;br/&gt; {4,number,integer}. Büyütmeyi durdurmak için kısayol kullanın&lt;br/&gt;&lt;br/&gt; Ayrıca geçici olarak yakınlaştırabilir ve diğer işlemleri yapabilirsiniz."</string>
@@ -2533,6 +2572,8 @@
     <string name="accessibility_shortcut_edit_dialog_title_quick_settings" msgid="140959604014177304">"Hızlı Ayarlar"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings" msgid="739883998754165940">"{count,plural, =1{Ekranın üst kısmından aşağı doğru kaydırın}other{# parmağınızla ekranın üst kısmından aşağı doğru kaydırın}}"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_quick_settings_suw" msgid="4216628328191609785">"{count,plural, =1{Ekranın üst kısmından aşağı doğru kaydırın. Bu kısayol, cihaz kurulumu tamamlandıktan sonra kullanılabilir.}other{# parmağınızla ekranın üst kısmından aşağı doğru kaydırın. Bu kısayol, cihaz kurulumu tamamlandıktan sonra kullanılabilir.}}"</string>
+    <string name="accessibility_shortcut_edit_dialog_title_top_row_key" msgid="9079252650426357718">"Üst Sıradaki Tuş"</string>
+    <string name="accessibility_shortcut_edit_dialog_summary_top_row_key" msgid="8621163788222109641">"Klavyenin üst sırasındaki erişilebilirlik tuşuna basın"</string>
     <string name="accessibility_feature_shortcut_setting_summary_quick_settings" msgid="7006526933552889373">"Hızlı Ayarlar"</string>
     <string name="accessibility_shortcut_edit_dialog_title_hardware" msgid="844089763968552142">"Ses seviyesi tuşları"</string>
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"ses seviyesi tuşları"</string>
@@ -2559,15 +2600,11 @@
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Erişilebilirlik özelliklerine hızlıca erişin"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;Başlamak için&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Erişilebilirlik ayarlarına gidin&lt;br/&gt; {1,number,integer}. Bir özellik seçip kısayola dokunun&lt;br/&gt; {2,number,integer}. Özelliğe erişmek için kullanılacak düğmeyi seçin&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Yer"</string>
-    <!-- no translation found for accessibility_button_location_selector_floating (613662170240578361) -->
-    <skip />
-    <!-- no translation found for accessibility_button_location_selector_navigation_bar (8361525920513752108) -->
-    <skip />
+    <string name="accessibility_button_location_selector_floating" msgid="613662170240578361">"Diğer uygulamaların üzerinde kayan"</string>
+    <string name="accessibility_button_location_selector_navigation_bar" msgid="8361525920513752108">"Gezinme çubuğu"</string>
     <string name="accessibility_button_size_title" msgid="5785110470538960881">"Boyut"</string>
-    <!-- no translation found for accessibility_button_size_selector_large (6512615443356044467) -->
-    <skip />
-    <!-- no translation found for accessibility_button_size_selector_small (902858235689652571) -->
-    <skip />
+    <string name="accessibility_button_size_selector_large" msgid="6512615443356044467">"Büyük"</string>
+    <string name="accessibility_button_size_selector_small" msgid="902858235689652571">"Küçük"</string>
     <string name="accessibility_button_fade_title" msgid="8081993897680588829">"Kullanılmadığında şeffaflaştır"</string>
     <string name="accessibility_button_fade_summary" msgid="7865950833524973709">"Ekranı daha rahat görebilmeniz için birkaç saniye içinde şeffaflaşır"</string>
     <string name="accessibility_button_opacity_title" msgid="4727355657530362289">"Kullanımda değilken şeffaflık"</string>
@@ -2591,11 +2628,13 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Cihazınızda ve koyu temayı destekleyen uygulamalarda koyu temayı etkinleştirir."</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Genişletilmiş"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Genişletilmiş koyu tema"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="4726030053236818183">"Koyu temayı desteklemeyen çoğu uygulamada erişebilirliği artırmak için koyu temayı otomatik olarak uygular."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Koyu temayı desteklemeyen çoğu uygulamada erişilebilirliği iyileştirmek için koyu temayı otomatik olarak uygular"</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Genişletilmiş seçenekle ilgili sorun yaşarsanız standart seçeneği kullanın."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"zorla ters çevirme, rengi ters çevirme, kontrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Genişletilmiş koyu tema"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Genişletilmiş koyu tema ayarları"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Genişletilmiş koyu tema ayarlarını açın"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"Genişletilmiş koyu tema, okunabilirliği iyileştirebilir ancak bazı uygulamaların hatalı görünmesine neden olabilir.\n\nBu ayarın devre dışı olduğu uygulamalarda standart koyu tema seçeneği kullanılır."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animasyonları kaldır"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Ekrandaki hareketliliği azaltır"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Metin imlecinin yanıp sönmesi"</string>
@@ -2620,6 +2659,9 @@
     <string name="accessibility_control_timeout_preference_summary" msgid="4037051091059316310">"Bu zamanlama tercihi bazı uygulamalar tarafından desteklenmez"</string>
     <string name="accessibility_control_timeout_preference_intro_text" msgid="1398116710556762245">"İşlem yapmanızı isteyen ancak geçici olarak görüntülenen mesajların ne kadar süre gösterileceğini seçin"</string>
     <string name="accessibility_long_press_timeout_preference_title" msgid="5237764682976688855">"Dokunma ve basılı tutma süresi"</string>
+    <string name="accessibility_long_press_timeout_option_short" msgid="8850261347613740070">"Kısa"</string>
+    <string name="accessibility_long_press_timeout_option_medium" msgid="8887553723343603449">"Orta"</string>
+    <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"Uzun"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"Rengi ters çevirme"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"Rengi ters çevirme işlevini kullan"</string>
     <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"Rengi ters çevirme kısayolu"</string>
@@ -2730,6 +2772,12 @@
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"İşitme cihazları"</string>
     <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Kayıtlı cihazlar"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"İşitme cihazı denetimleri"</string>
+    <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Sesler"</string>
+    <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Bildirimler"</string>
+    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"Zil sesleri ve alarmlar"</string>
+    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Sesler, işitme cihazlarından çalınacak"</string>
+    <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"Sesler, cihazın hoparlöründen çalınacak"</string>
+    <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Sesler işitme cihazlarından ve cihazın hoparlöründen çalınacak"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"İşitme cihazı kısayolu"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"İşitme cihazı uyumluluğu"</string>
     <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Telecoil\'lerle uyumluluğu artırır ve istenmeyen gürültüyü azaltır"</string>
@@ -2916,11 +2964,7 @@
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"Son 24 saatteki kullanımı göster"</string>
     <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"Son tam şarjdan bu yana kullanımı görün"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
-    <string name="battery_advance_preference_loading_summary" msgid="2966765023875926220"></string>
-    <string name="battery_advance_info_profile_result_1" msgid="8527469020691518802"></string>
-    <string name="battery_advance_info_profile_result_2" msgid="6414461321691827366"></string>
-    <string name="battery_advance_info_profile_result_3" msgid="6475242560818793292"></string>
-    <string name="battery_advance_info_profile_result_4" msgid="6389652594597864717"></string>
+    <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
     <string name="battery_details_title" msgid="3289680399291090588">"Uygulamaların pil kullanımı"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Kullanım ayrıntıları"</string>
@@ -3395,7 +3439,7 @@
     <string name="vpn_missing_cert" msgid="5397309964971068272">"Bir sertifika eksik. Profili düzenlemeyi deneyin."</string>
     <string name="vpn_app_exclusion" msgid="250431833854129334">"Seçilen uygulamaları hariç tut"</string>
     <string name="vpn_app_exclusion_description" msgid="7695809822452196283">"Hariç tutulan uygulamalar bu VPN\'i kullanmaz"</string>
-    <string name="vpn_app_exclusion_selected_category_title" msgid="4737602697482017631">"Uygulamalar, VPN\'den hariç tutuldu"</string>
+    <string name="vpn_app_exclusion_selected_category_title" msgid="4737602697482017631">"VPN\'den hariç tutulan uygulamalar"</string>
     <string name="trusted_credentials_system_tab" msgid="675362923690364722">"Sistem"</string>
     <string name="trusted_credentials_user_tab" msgid="4978365619630094339">"Kullanıcı"</string>
     <string name="trusted_credentials_disable_label" msgid="6649583220519447947">"Devre dışı bırak"</string>
@@ -3449,8 +3493,7 @@
     <string name="user_add_on_lockscreen_menu" msgid="2539059062034644966">"Kilit ekranından kullanıcı eklensin"</string>
     <string name="user_add_on_signin_screen_menu" msgid="41745747918077302">"Oturum açma ekranından kullanıcı ekleyin"</string>
     <string name="switch_to_dock_user_when_docked" msgid="2324395443311905635">"Yuvaya yerleştirildiğinde yönetici kullanıcıya geç"</string>
-    <!-- no translation found for user_deleted_confirmation_toast (3688607113581096800) -->
-    <skip />
+    <string name="user_deleted_confirmation_toast" msgid="3688607113581096800">"Kullanıcı silindi"</string>
     <string name="user_confirm_remove_self_title" msgid="926265330805361832">"Kendinizi silmek istiyor musunuz?"</string>
     <string name="user_confirm_remove_title" msgid="3626559103278006002">"Bu kullanıcı silinsin mi?"</string>
     <string name="user_profile_confirm_remove_title" msgid="3131574314149375354">"Bu profil kaldırılsın mı?"</string>
@@ -3469,6 +3512,9 @@
     <string name="other_user_category_title" msgid="7089976887307643217">"Diğer kullanıcılar"</string>
     <string name="remove_guest_on_exit" msgid="8202972371459611066">"Misafir etkinliği silinsin"</string>
     <string name="remove_guest_on_exit_summary" msgid="3969962695703280353">"Misafir modundan çıkarken tüm misafir uygulamaları ve verileri silinir"</string>
+    <string name="add_guests_from_signin" msgid="7216948985431552154">"Misafirin cihazı kullanmasına izin ver"</string>
+    <string name="add_guests_from_signin_summary" msgid="5247734217614267234">"Misafir modundan çıkıldığında tüm misafir uygulamaları ve verileri silinir"</string>
+    <string name="add_guests_from_signin_keywords" msgid="9148491870475695341">"ekle, misafir"</string>
     <string name="remove_guest_on_exit_dialog_title" msgid="2310442892536079416">"Misafir etkinliği silinsin mi?"</string>
     <string name="remove_guest_on_exit_dialog_message" msgid="8112409834021851883">"Bu misafir oturumundaki uygulamalar ve veriler şimdi silinecektir. Bundan sonraki tüm misafir etkinlikleri ise misafir modundan her çıktığınızda silinir."</string>
     <string name="remove_guest_on_exit_keywords" msgid="4961310523576166193">"sil, misafir, etkinlik, veri, ziyaretçi"</string>
@@ -3618,7 +3664,9 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Cihaz"</string>
-    <string name="device_dashboard_summary" msgid="657619609434549473">"Klavye, Dokunmatik Alan, Ekran, Ses"</string>
+    <string name="device_dashboard_summary" msgid="3847551449956082389">"Klavye, dokunmatik alan, ekran, ses"</string>
+    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Ekran"</string>
+    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Ses"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC kapalı olduğundan kullanılamıyor"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Kullanmak için önce bir ödeme uygulaması yükleyin"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Son uygulamalar, varsayılan uygulamalar"</string>
@@ -3747,6 +3795,7 @@
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, etiket, okuyucu"</string>
     <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"klavye, dokunma teknolojisi, titreşim"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"harici ekran, bağlı ekran, genişletilmiş ekran, ikinci ekran, dahili ekran, ekranları düzenle, yansıtma, görüntü boyutu, döndürme, çözünürlük, yenileme hızı"</string>
+    <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"işaret, metin işareti, metin imleci, imleç, yanıp sönen, yanıp sönme aralığı, yanıp sönme oranı, animasyon, animasyonu azalt, animasyonu kaldır"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Ses düzeyi ve titreşim"</string>
     <string name="media_volume_option_title" msgid="5966569685119475630">"Medya ses düzeyi"</string>
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast ses düzeyi"</string>
@@ -3939,6 +3988,7 @@
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Uzun mesajların özetlerini hızlıca alın"</string>
     <string name="notification_summarization_main_control_title" msgid="3341727937605794607">"Bildirim özetlerini kullan"</string>
     <string name="notification_summarization_description" msgid="3185465631219791854">"Uzun mesajları ve grup görüşmelerini özetleyerek hızlı bir şekilde önemli noktaları yakalayın.\n\nÖzetler, cihazınızdaki yapay zekayı kullanır. Bu nedenle bazen hatalar olabilir. Mesajlarınız hiçbir zaman Google\'a gönderilmez."</string>
+    <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Uzun mesajları ve grup görüşmelerini özetleyerek hızlı bir şekilde önemli noktaları yakalayın.\n\nÖzetler, cihazınızdaki uygulamalar veya yapay zeka tarafından sağlanır ve hata içerebilir. Mesajlarınız hiçbir zaman Google\'a gönderilmez."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Bu uygulamalardan gelen görüşme bildirimleri paketlenemez"</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Uygulamaları yönet"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Bildirim özetleri için uygulamaları yönetin"</string>
@@ -4381,6 +4431,9 @@
     <string name="memtag_reboot_yes" msgid="5788896350697141429">"Yeniden başlat"</string>
     <string name="memtag_reboot_no" msgid="2860671356184849330">"Şimdi değil"</string>
     <string name="memtag_learn_more" msgid="1596145970669119776">"Gelişmiş bellek koruma hakkında daha fazla bilgi edinin."</string>
+    <string name="binary_transparency_title" msgid="8669346926803868809">"Android OS Teşhisleri"</string>
+    <string name="binary_transparency_summary" msgid="6556263563122917101">"OS derlemelerini doğrula"</string>
+    <string name="keywords_binary_transparency" msgid="4628341524132968893">"teşhis, şeffaflık, ikili"</string>
     <string name="opening_paragraph_delete_profile_unknown_company" msgid="2951348192319498135">"Bu iş profili şunun tarafından yönetiliyor:"</string>
     <string name="managing_admin" msgid="2633920317425356619">"<xliff:g id="ADMIN_APP_LABEL">%s</xliff:g> tarafından yönetiliyor"</string>
     <string name="launch_by_default" msgid="892824422067985734">"Varsayılan olarak aç"</string>
@@ -4427,6 +4480,9 @@
     <string name="unused_apps_switch_summary" msgid="2171098908014596802">"İzinleri kaldır, geçici dosyaları sil ve bildirimleri durdur"</string>
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Kullanılmayan uygulamayı yönet"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"İzinleri kaldır, geçici dosyaları sil, bildirimleri durdur ve uygulamayı arşivle"</string>
+    <string name="task_continuity_category" msgid="3736049711007817178">"Görev devamlılığı"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"Uygulama Görevleri"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"Diğer cihazlarda kaldığınız yerden sorunsuz bir şekilde devam edin"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Tüm uygulamalar"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Yüklü uygulamalar"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"Hazır uygulamalar"</string>
@@ -4498,6 +4554,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Varsayılan USB yapılandırması"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Güç seçenekleri"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Dosya aktarım seçenekleri"</string>
+    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Veri Erişimi Koruması"</string>
+    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"PCI tünel protokolüne izin ver"</string>
+    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Etkinleştirildiğinde USB ve Thunderbolt çevre birimleri, PCI tünelleri oluşturabilir ve sistem belleğine erişebilir"</string>
+    <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Bu ayarı değiştirmek için yönetici kullanıcı olmanız gerekir"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"BT yöneticiniz tarafından devre dışı bırakıldı"</string>
+    <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Gelişmiş Koruma Modu tarafından devre dışı bırakıldı"</string>
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB Tercihleri"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB\'yi kontrol eden:"</string>
@@ -5305,6 +5367,8 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Uydu"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Uydu bağlantısı"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"uydu bağlantısı"</string>
+    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
+    <skip />
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Desteklenen uygulamaların kullanımı, hesabınıza dahil edilir"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Tüm uygulamalardaki veriler hesabınıza dahildir"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Telefonunuzdaki desteklenen uygulamalar"</string>
@@ -5312,6 +5376,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Telefonunuzdaki desteklenen uygulamalar"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM eklenemiyor"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM eklemeden önce uydu bağlantısını sonlandırın"</string>
+    <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth kapalı"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetooth ile bağlandığında uçak modu, telefon ve kol saati gibi desteklenen cihazlar arasında senkronize edilir"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Erişim Noktası Adları"</string>
     <string name="keywords_access_point_names" msgid="8174967126858505945">"apn"</string>
@@ -5666,6 +5731,13 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> için 2G\'nin kullanılabilir olması gerekir"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Yalnızca şifrelenmiş ağlara izin ver"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Bu daha güvenli olsa da bazı konumlarda mobil ağ bağlantınızı sınırlayabilir. Acil durum aramasına her zaman izin verilir."</string>
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G ağ koruması devre dışı bırakılsın mı?"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM\'inin bağlı olduğu mevcut ağ 2G\'yi desteklemiyor. 2G korumasını devre dışı bıraktığınızda, zararlı sahte 2G ağlarına bağlanma riskiniz artar."</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Devre dışı bırak"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G ağ koruması"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G ağ koruması etkin"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM\'in mevcut ağında 2G korumasının etkinleştirilmesi gerekiyor. Tüm riski size ait olmak üzere 2G korumasını devre dışı bırakmayı yine de seçebilirsiniz."</string>
+    <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Ayarlar"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tüm hizmetler"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Panoya erişimi göster"</string>
     <string name="show_clip_access_notification_summary" msgid="474090757777203207">"Uygulamalar kopyaladığınız metne, resimlere veya diğer içeriklere eriştiğinde mesaj gösterilsin"</string>
@@ -5761,6 +5833,8 @@
     <string name="user_aspect_ratio_4_3" msgid="5196232982878982220">"4:3"</string>
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g> - <xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"En boy oranını değiştirdiğinizde uygulama yeniden başlatılır. Kaydedilmemiş değişiklikleri kaybedebilirsiniz. Bazı uygulamalar belirli en boy oranları için optimize edilmemiş olabilir."</string>
+    <string name="app_info_experience_category" msgid="6283332744508784886">"Deneyim"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Oyun kumandası"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Parmak izi sensörü"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Işıklı Bildirim"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Işıklı bildirimler hakkında"</string>
@@ -6089,13 +6163,21 @@
     <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Gizlilik, Gizlilik kontrol paneli"</string>
     <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Özel Alan"</string>
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Daha fazla uyarı"</string>
-    <string name="safety_center_issues_banner_group_collapsible_title" msgid="4417325786751907663">"Daha az uyarı"</string>
+    <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"Daha az uyarı"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Reddedilen uyarılar"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Bu uyarı kapatılsın mı?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Daha fazla korumaya sahip olmak için güvenlik ve gizlilik ayarlarınızı istediğiniz zaman gözden geçirin."</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"İşlem tamamlandı"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Güvenlik ve gizlilikle ilgili hızlı ayarlar"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Gizlilik kontrolleriniz"</string>
+    <string name="safety_center_review_settings" msgid="295527297192914772">"Ayarları incele"</string>
+    <string name="safety_center_qs_open_action" msgid="8683771989007581791">"Aç"</string>
+    <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"Değiştir. <xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>. <xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
+    <string name="safety_center_blocked_label" msgid="2315349461511071065">"Engellendi"</string>
+    <string name="safety_center_toggle" msgid="3349093870782510158">"Aç/Kapat"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"Mikrofon erişimi"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"Kamera erişimi"</string>
+    <string name="location_toggle_label_qs" msgid="1593489235177619829">"Konum erişimi"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"Eşleştirme"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> bağlandı"</string>
     <string name="safety_center_rescan_button" msgid="1290673104206018701">"Cihaz taraması yap"</string>
@@ -6108,14 +6190,31 @@
     <string name="satellite_landing_page_label" msgid="534906205317274253">"Uydu Açılış Sayfası"</string>
     <string name="try_a_demo" msgid="5053671464025495505">"Demo deneyin"</string>
     <string name="see_how_it_works" msgid="6358887025296144792">"İşleyiş şekli"</string>
-    <string name="landing_page_footer_text_lte" msgid="6768795590418158370">"Mobil veya kablosuz ağa bağlı olmadığınızda telefonunuz otomatik olarak uyduya bağlanır. En iyi bağlantıyı kurmak için gökyüzünü net bir şekilde görmeniz gerekir. Telefonunuz, mevcut olduğunda mobil ağa tekrar bağlanır. Uydu üzerinden arama yapılamaz. Acil durum aramaları yine de bağlanabilir."</string>
+    <string name="landing_page_footer_text_lte" msgid="8788085197575734787">"Mobil ve kablosuz ağ sinyalini kaybettiğinizde telefonunuz uyduya bağlanmaya çalışır. Telefonunuz, mevcut olduğunda mobil veya kablosuz ağa tekrar bağlanır.\n\nÖnemli: Uydu üzerinden arama yapılamaz. Ancak acil durum aramaları yine de bağlanabilir."</string>
     <string name="landing_page_footer_text_nbiot" msgid="8646871907270616646">"En iyi bağlantıyı kurmak için gökyüzünü net bir şekilde görmeniz gerekir. Telefonunuz, mevcut olduğunda mobil ağa tekrar bağlanır. Uydu üzerinden arama yapılamaz. Acil durum aramaları yine de bağlanabilir."</string>
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Uydu bağlantısı hakkında daha fazla bilgi"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Acil Uydu Bağlantısı demosunu aç"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Uydu uygulamaları"</string>
-    <string name="satellite_emergency_sos" msgid="5598135807261930736">"Acil Yardım"</string>
+    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
+    <skip />
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Uydu bağlantısı kullanılabilir"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Uydu kutusunu Hızlı Ayarlar\'a ekleyerek uydu bilgilerine kolayca erişin"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Kart ekle"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Uydu Kutusu İstemleri"</string>
+    <string name="satellite_icon_text" msgid="1080385642493133372">"UYD"</string>
+    <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Uydu kullanılamıyor"</string>
+    <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Mobil veya kablosuz ağa bağlıyken uydu kapsama alanı kullanılamaz."</string>
+    <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Uydu bağlantısı özelliği bu ülkede veya bölgede kullanılamıyor."</string>
+    <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Uydu bağlantısı şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin."</string>
+    <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Mobil tarifeniz uydu kapsama alanı içermiyor. Yardım almak için operatörünüzle iletişime geçin."</string>
+    <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Uydu üzerinden mesajlaşma özelliğinin kullanılabilmesi için Google Mesajlar varsayılan mesajlaşma uygulamanız olmalıdır."</string>
+    <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Uydu bağlantısı, operatörünüz tarafından etkinleştirilir. Daha fazla bilgi için operatörünüzün uydu ayarlarına bakın."</string>
+    <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Kullanılabildiği yerleri göster"</string>
+    <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Varsayılan uygulamayı değiştir"</string>
+    <string name="satellite_view_carrier_settings_button" msgid="3459000243785835031">"Operatör ayarlarını göster"</string>
+    <string name="unknown_location_warning" msgid="2547687229551053971">"Acil Uydu Bağlantısı özelliğinin bulunduğunuz yerde kullanılıp kullanılmadığını öğrenmek için Ayarlar\'da konumu açın."</string>
+    <string name="unknown_location_warning_button" msgid="2223709540054752411">"Konumu etkinleştir"</string>
+    <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Cihazınız, Acil Uydu Bağlantısı\'na kayıtlı değil. Cihazınızın kayıt işlemini otomatik olarak tamamlaması için internete bağlı olduğunuzdan emin olun."</string>
+    <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Web Uygulaması Yükleyici Hizmeti\'ni etkinleştirin"</string>
+    <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Web sitelerini doğrudan ana ekranınıza yüklemek ve normal uygulamalar gibi kullanmak için bu hizmeti etkinleştirin."</string>
 </resources>

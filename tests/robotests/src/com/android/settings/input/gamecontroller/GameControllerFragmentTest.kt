@@ -193,11 +193,16 @@ class GameControllerFragmentTest {
         val scenario = launchFragment(device.identifier)
 
         scenario.onFragment { fragment ->
-            fragment
-                .findPreference<ButtonPreference>(
+            // Scroll to the preference to ensure RecyclerView binds it and creates the View
+            fragment.scrollToPreference(GameControllerFragment.RESET_BUTTON_PREFERENCE_KEY)
+            ShadowLooper.idleMainLooper()
+            val preference =
+                fragment.findPreference<ButtonPreference>(
                     GameControllerFragment.RESET_BUTTON_PREFERENCE_KEY
                 )!!
-                .performClick()
+            val button = preference.button
+            assertThat(button).isNotNull()
+            button!!.performClick()
 
             ShadowLooper.idleMainLooper()
             val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()
@@ -243,11 +248,16 @@ class GameControllerFragmentTest {
         val scenario = launchFragment(device.identifier)
 
         scenario.onFragment { fragment ->
-            fragment
-                .findPreference<ButtonPreference>(
+            // Scroll to the preference to ensure RecyclerView binds it and creates the View
+            fragment.scrollToPreference(GameControllerFragment.RESET_BUTTON_PREFERENCE_KEY)
+            ShadowLooper.idleMainLooper()
+            val preference =
+                fragment.findPreference<ButtonPreference>(
                     GameControllerFragment.RESET_BUTTON_PREFERENCE_KEY
                 )!!
-                .performClick()
+            val button = preference.button
+            assertThat(button).isNotNull()
+            button!!.performClick()
 
             ShadowLooper.idleMainLooper()
             val dialog = ShadowAlertDialogCompat.getLatestAlertDialog()

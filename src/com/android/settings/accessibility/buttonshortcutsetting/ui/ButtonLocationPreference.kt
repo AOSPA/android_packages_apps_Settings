@@ -91,7 +91,7 @@ class ButtonLocationPreference(context: Context) :
     override fun storage(context: Context): KeyValueStore = dataStore
 
     override fun isAvailable(context: Context): Boolean {
-        return !AccessibilityUtil.isGestureNavigateEnabled(context)
+        return AccessibilityUtil.isAccessibilityButtonLocationConfigurable(context)
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {

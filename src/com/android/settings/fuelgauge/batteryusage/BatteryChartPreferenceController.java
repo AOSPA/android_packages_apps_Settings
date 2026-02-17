@@ -33,6 +33,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
 
@@ -74,6 +75,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     // Keys for bundle instance to restore configurations.
     private static final String KEY_DAILY_CHART_INDEX = "daily_chart_index";
     private static final String KEY_HOURLY_CHART_INDEX = "hourly_chart_index";
+    private static final String KEY_FIRST_LAUNCH_STATE = "first_launch_state";
 
     /** A callback listener for the selected index is updated. */
     interface OnSelectedIndexUpdatedListener {
@@ -91,6 +93,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     @VisibleForTesting int mHourlyHighlightSlotIndex = SELECTED_INDEX_INVALID;
 
     private boolean mIs24HourFormat;
+    private boolean mIsFirstLaunch = true;
     private View mBatteryChartViewGroup;
     private BatteryChartViewModel mDailyViewModel;
     private List<BatteryChartViewModel> mHourlyViewModels;
@@ -130,6 +133,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         mDailyChartIndex = savedInstanceState.getInt(KEY_DAILY_CHART_INDEX, mDailyChartIndex);
         mHourlyChartIndex = savedInstanceState.getInt(KEY_HOURLY_CHART_INDEX, mHourlyChartIndex);
+        mIsFirstLaunch = savedInstanceState.getBoolean(KEY_FIRST_LAUNCH_STATE, mIsFirstLaunch);
         Log.d(
                 TAG,
                 String.format(
@@ -150,6 +154,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         savedInstance.putInt(KEY_DAILY_CHART_INDEX, mDailyChartIndex);
         savedInstance.putInt(KEY_HOURLY_CHART_INDEX, mHourlyChartIndex);
+        savedInstance.putBoolean(KEY_FIRST_LAUNCH_STATE, mIsFirstLaunch);
         Log.d(
                 TAG,
                 String.format(
@@ -224,6 +229,13 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                             BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
                             mHourlyChartLabelTextGenerator.updateSpecialCaseContext(
                                     batteryLevelData)));
+        }
+        if (mIsFirstLaunch && FeatureFactory.getFeatureFactory()
+                .getPowerUsageFeatureProvider().isBatteryAdvanceInfoEnabled()) {
+            // Select last daily slot instead of all by default once available.
+            // -2 for last slot since mDailyViewModel's index start with -1 (for select all cases).
+            mDailyChartIndex = mDailyViewModel.size() - 2;
+            mIsFirstLaunch = false;
         }
         refreshUi();
     }
@@ -444,6 +456,19 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
         return mContext.getString(
                 R.string.battery_usage_day_and_hour, selectedDayText, selectedHourText);
+    }
+
+    @Nullable
+    String getDailyInformation() {
+        if (mDailyViewModel == null || mHourlyViewModels == null) {
+            // No data
+            return null;
+        }
+        if (isAllSelected()) {
+            return null;
+        }
+
+        return mDailyViewModel.getFullText(mDailyChartIndex);
     }
 
     @VisibleForTesting

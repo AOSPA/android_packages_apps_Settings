@@ -17,11 +17,11 @@
 package com.android.settings.network.telephony;
 
 import android.content.Context;
-import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
 import android.util.ArraySet;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 
@@ -31,9 +31,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-/** Helper class to manage listening to signal strength changes on a set of mobile network
- *  subscriptions */
+/**
+ * Helper class to manage listening to signal strength changes on a set of mobile network
+ * subscriptions
+ */
 public class SignalStrengthListener {
+
+    private static final String TAG = "SignalStrengthListener";
 
     private TelephonyManager mBaseTelephonyManager;
     private Callback mCallback;
@@ -52,8 +56,10 @@ public class SignalStrengthListener {
         mTelephonyCallbacks = new TreeMap<>();
     }
 
-    /** Resumes listening for signal strength changes for the set of ids from the last call to
-     * {@link #updateSubscriptionIds(Set)}  */
+    /**
+     * Resumes listening for signal strength changes for the set of ids from the last call to
+     * {@link #updateSubscriptionIds(Set)}
+     */
     public void resume() {
         for (int subId : mTelephonyCallbacks.keySet()) {
             startListening(subId);
@@ -67,8 +73,10 @@ public class SignalStrengthListener {
         }
     }
 
-    /** Updates the set of ids we want to be listening for, beginning to listen for any new ids and
-     * stopping listening for any ids not contained in the new set */
+    /**
+     * Updates the set of ids we want to be listening for, beginning to listen for any new ids and
+     * stopping listening for any ids not contained in the new set
+     */
     public void updateSubscriptionIds(Set<Integer> ids) {
         Set<Integer> currentIds = new ArraySet<>(mTelephonyCallbacks.keySet());
         for (int idToRemove : Sets.difference(currentIds, ids)) {
@@ -93,9 +101,13 @@ public class SignalStrengthListener {
     }
 
     private void startListening(int subId) {
+        SignalStrengthTelephonyCallback callback = mTelephonyCallbacks.get(subId);
+        if (callback.callback != null) {
+            Log.w(TAG, "startListening: Callback is already registered! subId:" + subId);
+            return;
+        }
         TelephonyManager mgr = mBaseTelephonyManager.createForSubscriptionId(subId);
-        mgr.registerTelephonyCallback(
-                mContext.getMainExecutor(), mTelephonyCallbacks.get(subId));
+        mgr.registerTelephonyCallback(mContext.getMainExecutor(), callback);
     }
 
     private void stopListening(int subId) {

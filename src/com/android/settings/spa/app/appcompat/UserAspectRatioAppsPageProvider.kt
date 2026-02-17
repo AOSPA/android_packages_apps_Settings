@@ -67,6 +67,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
+// LINT.IfChange
 object UserAspectRatioAppsPageProvider : SettingsPageProvider {
     override val name = "UserAspectRatioAppsPage"
     private val owner = createSettingsPage()
@@ -74,26 +75,26 @@ object UserAspectRatioAppsPageProvider : SettingsPageProvider {
     override fun isEnabled(arguments: Bundle?): Boolean =
         UserAspectRatioManager.isFeatureEnabled(SpaEnvironmentFactory.instance.appContext)
 
-    @Composable
-    override fun Page(arguments: Bundle?) =
-        UserAspectRatioAppList()
+    @Composable override fun Page(arguments: Bundle?) = UserAspectRatioAppList()
 
     @Composable
     @VisibleForTesting
     fun EntryItem() {
         val summary = getSummary()
-        Preference(object : PreferenceModel {
-            override val title = stringResource(R.string.aspect_ratio_title)
-            override val summary = { summary }
-            override val onClick = navigator(name)
-        })
+        Preference(
+            object : PreferenceModel {
+                override val title = stringResource(R.string.aspect_ratio_title)
+                override val summary = { summary }
+                override val onClick = navigator(name)
+            }
+        )
     }
 
     @VisibleForTesting
-    fun buildInjectEntry() = SettingsEntryBuilder
-        .createInject(owner)
-        .setSearchDataFn { null }
-        .setUiLayoutFn { EntryItem() }
+    fun buildInjectEntry() =
+        SettingsEntryBuilder.createInject(owner)
+            .setSearchDataFn { null }
+            .setUiLayoutFn { EntryItem() }
 
     @Composable
     @VisibleForTesting
@@ -102,8 +103,7 @@ object UserAspectRatioAppsPageProvider : SettingsPageProvider {
 
 @Composable
 fun UserAspectRatioAppList(
-    appList: @Composable AppListInput<UserAspectRatioAppListItemModel>.() -> Unit
-    = { AppList() },
+    appList: @Composable AppListInput<UserAspectRatioAppListItemModel>.() -> Unit = { AppList() }
 ) {
     AppListPage(
         title = stringResource(R.string.aspect_ratio_title),
@@ -113,10 +113,12 @@ fun UserAspectRatioAppList(
             Box(Modifier.padding(SettingsDimension.itemPadding)) {
                 SettingsIntro(stringResource(R.string.aspect_ratio_main_summary_text, Build.MODEL))
             }
-            Illustration(object : IllustrationModel {
-                override val resId = R.raw.user_aspect_ratio_education
-                override val resourceType = ResourceType.LOTTIE
-            })
+            Illustration(
+                object : IllustrationModel {
+                    override val resId = R.raw.user_aspect_ratio_education
+                    override val resourceType = ResourceType.LOTTIE
+                }
+            )
         },
         noMoreOptions = true,
     )
@@ -131,7 +133,7 @@ data class UserAspectRatioAppListItemModel(
 
 class UserAspectRatioAppListModel(
     private val context: Context,
-    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : AppListModel<UserAspectRatioAppListItemModel> {
 
     private val packageManager = context.packageManager
@@ -141,18 +143,14 @@ class UserAspectRatioAppListModel(
         recordList: List<UserAspectRatioAppListItemModel>
     ): List<SpinnerOption> {
         val hasSuggested = recordList.any { it.suggested }
-        val hasOverride = recordList.any {
-            userAspectRatioManager.isAppOverridden(it.app, it.userOverride)
-        }
+        val hasOverride =
+            recordList.any { userAspectRatioManager.isAppOverridden(it.app, it.userOverride) }
         val options = mutableListOf(SpinnerItem.All)
         // Add suggested filter first as default
         if (hasSuggested) options.add(0, SpinnerItem.Suggested)
         if (hasOverride) options += SpinnerItem.Overridden
         return options.map {
-            SpinnerOption(
-                id = it.ordinal,
-                text = context.getString(it.stringResId),
-            )
+            SpinnerOption(id = it.ordinal, text = context.getString(it.stringResId))
         }
     }
 
@@ -164,7 +162,7 @@ class UserAspectRatioAppListModel(
                 navigateToAppAspectRatioSettings(
                     context,
                     app,
-                    SettingsEnums.USER_ASPECT_RATIO_APP_LIST_SETTINGS
+                    SettingsEnums.USER_ASPECT_RATIO_APP_LIST_SETTINGS,
                 )
             }
         )
@@ -175,10 +173,12 @@ class UserAspectRatioAppListModel(
             appList.asyncMap { app ->
                 UserAspectRatioAppListItemModel(
                     app = app,
-                    suggested = !app.isSystemApp && getPackageAndActivityInfo(
-                                    app)?.isFixedOrientationOrAspectRatio() == true,
-                    userOverride = userAspectRatioManager.getUserMinAspectRatioValue(
-                                    app.packageName, uid),
+                    suggested =
+                        !app.isSystemApp &&
+                            getPackageAndActivityInfo(app)?.isFixedOrientationOrAspectRatio() ==
+                                true,
+                    userOverride =
+                        userAspectRatioManager.getUserMinAspectRatioValue(app.packageName, uid),
                     canDisplay = userAspectRatioManager.canDisplayAspectRatioUi(app),
                 )
             }
@@ -187,43 +187,58 @@ class UserAspectRatioAppListModel(
     override fun filter(
         userIdFlow: Flow<Int>,
         option: Int,
-        recordListFlow: Flow<List<UserAspectRatioAppListItemModel>>
-    ): Flow<List<UserAspectRatioAppListItemModel>> = recordListFlow.filterItem(
-        when (SpinnerItem.entries.getOrNull(option)) {
-            SpinnerItem.Suggested -> ({ it.canDisplay && it.suggested })
-            SpinnerItem.Overridden -> ({
-                userAspectRatioManager.isAppOverridden(it.app, it.userOverride)
-            })
-            else -> ({ it.canDisplay })
-        }
-    )
+        recordListFlow: Flow<List<UserAspectRatioAppListItemModel>>,
+    ): Flow<List<UserAspectRatioAppListItemModel>> =
+        recordListFlow.filterItem(
+            when (SpinnerItem.entries.getOrNull(option)) {
+                SpinnerItem.Suggested -> ({ it.canDisplay && it.suggested })
+                SpinnerItem.Overridden -> ({
+                        userAspectRatioManager.isAppOverridden(it.app, it.userOverride)
+                    })
+                else -> ({ it.canDisplay })
+            }
+        )
 
     @Composable
     override fun getSummary(option: Int, record: UserAspectRatioAppListItemModel): () -> String {
-        val summary by remember(record.userOverride) {
-            flow {
-                emit(userAspectRatioManager.getUserMinAspectRatioEntry(record.userOverride,
-                    record.app.packageName, record.app.userId))
-            }.flowOn(ioDispatcher)
-        }.collectAsStateWithLifecycle(initialValue = stringResource(R.string.summary_placeholder))
+        val summary by
+            remember(record.userOverride) {
+                    flow {
+                            emit(
+                                userAspectRatioManager.getUserMinAspectRatioEntry(
+                                    record.userOverride,
+                                    record.app.packageName,
+                                    record.app.userId,
+                                )
+                            )
+                        }
+                        .flowOn(ioDispatcher)
+                }
+                .collectAsStateWithLifecycle(
+                    initialValue = stringResource(R.string.summary_placeholder)
+                )
         return { summary }
     }
 
-    private fun getPackageAndActivityInfo(app: ApplicationInfo): PackageInfo? = try {
-        packageManager.getPackageInfoAsUser(app.packageName, GET_ACTIVITIES_FLAGS, app.userId)
-    } catch (e: Exception) {
-        // Query PackageManager.getPackageInfoAsUser() with GET_ACTIVITIES_FLAGS could cause
-        // exception sometimes. Since we reply on this flag to retrieve the Picture In Picture
-        // packages, we need to catch the exception to alleviate the impact before PackageManager
-        // fixing this issue or provide a better api.
-        Log.e(TAG, "Exception while getPackageInfoAsUser", e)
-        null
-    }
+    private fun getPackageAndActivityInfo(app: ApplicationInfo): PackageInfo? =
+        try {
+            packageManager.getPackageInfoAsUser(app.packageName, GET_ACTIVITIES_FLAGS, app.userId)
+        } catch (e: Exception) {
+            // Query PackageManager.getPackageInfoAsUser() with GET_ACTIVITIES_FLAGS could cause
+            // exception sometimes. Since we reply on this flag to retrieve the Picture In Picture
+            // packages, we need to catch the exception to alleviate the impact before
+            // PackageManager
+            // fixing this issue or provide a better api.
+            Log.e(TAG, "Exception while getPackageInfoAsUser", e)
+            null
+        }
 
     companion object {
         private const val TAG = "AspectRatioAppsListModel"
+
         private fun PackageInfo.isFixedOrientationOrAspectRatio() =
             activities?.any { a -> a.isFixedOrientation || a.hasFixedAspectRatio() } ?: false
+
         private val GET_ACTIVITIES_FLAGS =
             PackageManager.PackageInfoFlags.of(GET_ACTIVITIES.toLong())
     }
@@ -232,5 +247,6 @@ class UserAspectRatioAppListModel(
 private enum class SpinnerItem(val stringResId: Int) {
     Suggested(R.string.user_aspect_ratio_suggested_apps_label),
     All(R.string.filter_all_apps),
-    Overridden(R.string.user_aspect_ratio_changed_apps_label)
+    Overridden(R.string.user_aspect_ratio_changed_apps_label),
 }
+// LINT.ThenChange(UserAspectRatioAppsApiScreen.kt)

@@ -4,6 +4,6 @@ container: "system_ext"
 flag {
   name: "wifi_multiuser"
   namespace: "android_settings"
-  description: "Flag for WiFi Multiuser"
+  description: "Deprecated, use com.android.settings.flags.FLAGS.enable_wifi_multiluser instead"
   bug: "402214828"
 }

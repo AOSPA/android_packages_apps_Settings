@@ -42,12 +42,16 @@
 
     <dimen name="ring_progress_bar_thickness">4dp</dimen>
 
-    <dimen name="notification_importance_toggle_marginTop">28dp</dimen>
+    <dimen name="notification_importance_menu_margin">16dp</dimen>
     <dimen name="notification_importance_button_separation">8dp</dimen>
     <dimen name="notification_importance_drawable_padding">16dp</dimen>
     <dimen name="notification_importance_description_text">14sp</dimen>
-    <dimen name="notification_importance_button_text">16sp</dimen>
-    <dimen name="notification_importance_button_padding">14dp</dimen>
+
+    <!-- Padding for importance selection buttons in notification settings -->
+    <dimen name="notification_2025_importance_button_padding_vertical">12dp</dimen>
+    <dimen name="notification_2025_importance_button_padding_horizontal">16dp</dimen>
+
+    <dimen name="bubble_preference_button_padding">14dp</dimen>
 
     <dimen name="conversation_icon_size">32dp</dimen>
 
@@ -66,6 +70,7 @@
 
     <!-- Dashboard image tile size -->
     <dimen name="dashboard_tile_image_size">40dp</dimen>
+    <dimen name="dashboard_padding_bottom">16dp</dimen>
 
     <!-- Dashboard foreground image size -->
     <dimen name="dashboard_tile_foreground_image_size">24dp</dimen>
@@ -451,6 +456,8 @@
     <dimen name="dream_item_icon_padding_new">8dp</dimen>
     <dimen name="dream_item_title_margin_horizontal">8dp</dimen>
     <dimen name="dream_preference_card_padding">16dp</dimen>
+    <dimen name="dream_preference_card_fixed_space_around">8dp</dimen>
+    <dimen name="dream_preference_card_space_compensation">-8dp</dimen>
     <dimen name="dream_settings_padding_bottom">14dp</dimen>
     <dimen name="dream_preview_placeholder_width">52dp</dimen>
     <dimen name="dream_item_customize_button_margin_bottom">16dp</dimen>
@@ -567,7 +574,6 @@
 
     <dimen name="sc_list_margin">@dimen/sc_spacing_large</dimen>
 
-    <dimen name="sc_icon_button_touch_target_size">48dp</dimen>
     <dimen name="sc_card_corner_radius_large">28dp</dimen>
 
     <dimen name="sc_line_height_medium">20sp</dimen>

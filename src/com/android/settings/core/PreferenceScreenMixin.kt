@@ -22,8 +22,8 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import com.android.settings.CatalystFragment
 import com.android.settings.utils.makeLaunchpadIntent
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.core.instrumentation.Instrumentable
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.preference.PreferenceScreenCreator
 
@@ -36,7 +36,7 @@ interface PreferenceScreenMixin : PreferenceScreenCreator, Instrumentable {
     override fun fragmentClass(): Class<out Fragment>? = CatalystFragment::class.java
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
-        return if (CatalystFlags.catalystUseKeyParameters() && keyParameters != null) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters() && keyParameters != null) {
             makeLaunchpadIntent(context, key, keyParameters!!, metadata?.key)
         } else if (arguments != null) {
             makeLaunchpadIntent(context, key, arguments!!, metadata?.key)

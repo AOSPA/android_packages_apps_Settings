@@ -36,6 +36,7 @@ import java.util.List;
 /**
  * Encryption and Credential settings.
  */
+// LINT.IfChange
 @SearchIndexable
 public class EncryptionAndCredential extends DashboardFragment {
 
@@ -99,3 +100,4 @@ public class EncryptionAndCredential extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(EncryptionAndCredentialScreenApi.kt)

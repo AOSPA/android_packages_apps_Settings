@@ -37,7 +37,7 @@ import com.android.settings.accessibility.shared.utils.getA11yActivityFeatureNam
 import com.android.settings.accessibility.shared.utils.getA11yServiceFeatureName
 import com.android.settings.accessibility.shortcuts.EditShortcutsPreferenceFragment
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -66,7 +66,7 @@ private constructor(
 ) : PreferenceScreenMixin, PreferenceLifecycleProvider {
 
     private val shortcutTargets: Set<String> by lazy {
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             // TODO(b/440383851): understand whether we should provide parameters to any caller and
             // retrieve the shortcutTargets from keyParameters
             keyParameters
@@ -153,6 +153,7 @@ private constructor(
             +GestureShortcutPreference(context, shortcutTargets)
             +NavButtonShortcutPreference(context, shortcutTargets)
             +VolumeKeysShortcutPreference(context, shortcutTargets)
+            +TopRowKeyShortcutPreference(context, shortcutTargets)
             +advancedPreference
             +TripleTapShortcutPreference(
                 context,

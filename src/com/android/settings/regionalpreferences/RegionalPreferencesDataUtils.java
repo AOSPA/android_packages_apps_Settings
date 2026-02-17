@@ -17,8 +17,6 @@
 package com.android.settings.regionalpreferences;
 
 import android.content.Context;
-import android.icu.util.LocaleData;
-import android.icu.util.ULocale;
 import android.os.LocaleList;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -26,9 +24,12 @@ import android.text.TextUtils;
 import androidx.core.text.util.LocalePreferences;
 
 import com.android.internal.app.LocalePicker;
+import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 /** Provides utils for regional preferences. */
 public class RegionalPreferencesDataUtils {
@@ -137,16 +138,62 @@ public class RegionalPreferencesDataUtils {
         }
     }
 
-    static String getDefaultMeasurementSystem() {
+    static Set<Locale> getNumberingSystemLocales() {
         LocaleList localeList = LocaleList.getDefault();
-        Locale locale = localeList.get(0);
-        ULocale uLocale = ULocale.forLocale(locale);
-        if (LocaleData.getMeasurementSystem(uLocale) == LocaleData.MeasurementSystem.SI) {
-            return RegionalPreferencesDataUtils.MEASUREMENT_SYSTEM_METRIC;
+        Set<Locale> localesHasNumberingSystems = new HashSet<>();
+        for (int i = 0; i < localeList.size(); i++) {
+            Locale locale = localeList.get(i);
+            LocaleStore.LocaleInfo localeInfo = LocaleStore.getLocaleInfo(locale);
+            if (localeInfo.hasNumberingSystems()) {
+                localesHasNumberingSystems.add(locale);
+            }
         }
-        if (LocaleData.getMeasurementSystem(uLocale) == LocaleData.MeasurementSystem.UK) {
-            return RegionalPreferencesDataUtils.MEASUREMENT_SYSTEM_UK;
+        return localesHasNumberingSystems;
+    }
+
+    public static Locale appendLocaleExtension(Locale selectedLocale) {
+        Locale systemLocale = Locale.getDefault();
+        Set<Character> extensionKeys = systemLocale.getExtensionKeys();
+        Locale.Builder builder = new Locale.Builder();
+        builder.setLocale(selectedLocale);
+        for (Character extKey : extensionKeys) {
+            builder.setExtension(extKey, systemLocale.getExtension(extKey));
         }
-        return RegionalPreferencesDataUtils.MEASUREMENT_SYSTEM_US;
+        return builder.build();
+    }
+
+    public static void updateSelectedLocale(Locale selectedLocale) {
+        Locale[] newLocales = getUpdatedLocales(selectedLocale);
+        LocaleList localeList = new LocaleList(newLocales);
+        LocaleList.setDefault(localeList);
+        LocalePicker.updateLocales(localeList);
+    }
+
+    private static Locale[] getUpdatedLocales(Locale selectedLocale) {
+        LocaleList localeList = LocaleList.getDefault();
+        Locale[] newLocales = new Locale[localeList.size()];
+        for (int i = 0; i < localeList.size(); i++) {
+            Locale target = localeList.get(i);
+            if (sameLanguageAndScript(selectedLocale, target)) {
+                newLocales[i] = appendLocaleExtension(selectedLocale);
+            } else {
+                newLocales[i] = localeList.get(i);
+            }
+        }
+        return newLocales;
+    }
+
+    public static boolean sameLanguageAndScript(Locale source, Locale target) {
+        String sourceLanguage = source.getLanguage();
+        String targetLanguage = target.getLanguage();
+        String sourceLocaleScript = source.getScript();
+        String targetLocaleScript = target.getScript();
+        if (sourceLanguage.equals(targetLanguage)) {
+            if (!sourceLocaleScript.isEmpty() && !targetLocaleScript.isEmpty()) {
+                return sourceLocaleScript.equals(targetLocaleScript);
+            }
+            return true;
+        }
+        return false;
     }
 }

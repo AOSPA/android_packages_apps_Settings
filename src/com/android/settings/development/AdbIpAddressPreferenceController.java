@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -119,16 +120,17 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
     @Override
     protected void updateConnectivity() {
         String ipAddress = getIpv4Address();
-        if (ipAddress != null) {
-            int port = getPort();
-            if (port <= 0) {
-                mAdbIpAddrPref.setSummary(com.android.settingslib.R.string.status_unavailable);
-            } else {
-                ipAddress += ":" + port;
-            }
-            mAdbIpAddrPref.setSummary(ipAddress);
+        int port = getPort();
+        if (ipAddress == null) {
+            mAdbIpAddrPref.setSummary(mContext.getString(
+                    com.android.settingslib.R.string.adb_wireless_unavailable_disconnected
+            ));
+        } else if (port <= 0) {
+            mAdbIpAddrPref.setSummary(mContext.getString(
+                    com.android.settingslib.R.string.adb_wireless_unavailable_not_allowed
+            ));
         } else {
-            mAdbIpAddrPref.setSummary(com.android.settingslib.R.string.status_unavailable);
+            mAdbIpAddrPref.setSummary(TextUtils.formatSimple("%s:%d", ipAddress, port));
         }
     }
 

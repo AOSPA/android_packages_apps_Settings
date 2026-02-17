@@ -16,20 +16,12 @@
 
 package com.android.settings.development.qstile;
 
-import static com.android.settings.development.AdbPreferenceController.ADB_SETTING_OFF;
-import static com.android.settings.development.AdbPreferenceController.ADB_SETTING_ON;
-
 import android.app.KeyguardManager;
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.ContentObserver;
 import android.hardware.SensorPrivacyManager;
-import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
@@ -41,11 +33,9 @@ import android.util.Log;
 import android.view.IWindowManager;
 import android.view.ThreadedRenderer;
 import android.view.WindowManagerGlobal;
-import android.widget.Toast;
 
 import com.android.internal.app.LocalePicker;
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.settings.development.AdbWirelessDebuggingPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
@@ -236,80 +226,6 @@ public abstract class DevelopmentTiles extends TileService {
                     isEnabled);
             mIsEnabled = isEnabled;
             mSensorPrivacyManager.setAllSensorPrivacy(isEnabled);
-        }
-    }
-
-    /**
-     * Tile to control the "Wireless debugging" developer setting
-     */
-    public static class WirelessDebugging extends DevelopmentTiles {
-        private Context mContext;
-        private KeyguardManager mKeyguardManager;
-        private Toast mToast;
-        private final Handler mHandler = new Handler(Looper.getMainLooper());
-        private final ContentObserver mSettingsObserver = new ContentObserver(mHandler) {
-            @Override
-            public void onChange(boolean selfChange, Uri uri) {
-                refresh();
-            }
-        };
-
-        @Override
-        public void onCreate() {
-            super.onCreate();
-            mContext = getApplicationContext();
-            mKeyguardManager = (KeyguardManager) mContext.getSystemService(
-                    Context.KEYGUARD_SERVICE);
-            mToast = Toast.makeText(mContext,
-                    com.android.settingslib.R.string.adb_wireless_no_network_msg,
-                    Toast.LENGTH_LONG);
-        }
-
-        @Override
-        public void onStartListening() {
-            super.onStartListening();
-            getContentResolver().registerContentObserver(
-                    Settings.Global.getUriFor(Settings.Global.ADB_WIFI_ENABLED), false,
-                    mSettingsObserver);
-        }
-
-        @Override
-        public void onStopListening() {
-            super.onStopListening();
-            getContentResolver().unregisterContentObserver(mSettingsObserver);
-        }
-
-        @Override
-        protected boolean isEnabled() {
-            return isAdbWifiEnabled();
-        }
-
-        @Override
-        public void setIsEnabled(boolean isEnabled) {
-            // Don't allow Wireless Debugging to be enabled from the lock screen.
-            if (isEnabled && mKeyguardManager.isKeyguardLocked()) {
-                return;
-            }
-
-            // Show error toast if not connected to Wi-Fi
-            if (isEnabled && !AdbWirelessDebuggingPreferenceController.isWifiConnected(mContext)) {
-                // Close quick shade
-                sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-                mToast.show();
-                return;
-            }
-
-            writeAdbWifiSetting(isEnabled);
-        }
-
-        private boolean isAdbWifiEnabled() {
-            return Settings.Global.getInt(getContentResolver(), Settings.Global.ADB_WIFI_ENABLED,
-                    ADB_SETTING_OFF) != ADB_SETTING_OFF;
-        }
-
-        protected void writeAdbWifiSetting(boolean enabled) {
-            Settings.Global.putInt(getContentResolver(), Settings.Global.ADB_WIFI_ENABLED,
-                    enabled ? ADB_SETTING_ON : ADB_SETTING_OFF);
         }
     }
 

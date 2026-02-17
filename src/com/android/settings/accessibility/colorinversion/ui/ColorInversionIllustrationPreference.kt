@@ -36,12 +36,14 @@ class ColorInversionIllustrationPreference : PreferenceMetadata, PreferenceBindi
         IllustrationPreference(context).apply {
             isSelectable = false
             lottieAnimationResId = R.raw.accessibility_color_inversion_banner
-            contentDescription =
-                context.getString(
-                    R.string.accessibility_illustration_content_description,
-                    context.getText(R.string.accessibility_display_inversion_preference_title),
-                )
+            contentDescription = getContentDescription(context)
         }
+
+    fun getContentDescription(context: Context): CharSequence =
+        context.getString(
+            R.string.accessibility_illustration_content_description,
+            context.getText(R.string.accessibility_display_inversion_preference_title),
+        )
 
     companion object {
         const val KEY = "animated_image"

@@ -33,6 +33,7 @@ import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
@@ -581,6 +582,26 @@ class SetupSupervisionActivityTest {
                 assertThat(activity.isFinishing).isTrue()
             }
             assertThat(scenario.result.resultCode).isEqualTo(RESULT_CANCELED)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_onScreenRotation_keepsPinIntroductionUi() {
+        mockUserManager.stub { on { users } doReturn emptyList() }
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val layout = activity.findViewById<GlifLayout>(R.id.supervision_setup_introduction)
+                val footer = layout.getMixin(FooterBarMixin::class.java)
+                footer.getPrimaryButtonView().performClick()
+            }
+            scenario.recreate()
+            scenario.onActivity { activity ->
+                val layout = activity.findViewById<GlifLayout>(R.id.supervision_setup_introduction)
+                val footer = layout.getMixin(FooterBarMixin::class.java)
+                assertThat(layout.isProgressBarShown).isTrue()
+                assertThat(footer.buttonContainer.visibility).isEqualTo(View.GONE)
+            }
         }
     }
 

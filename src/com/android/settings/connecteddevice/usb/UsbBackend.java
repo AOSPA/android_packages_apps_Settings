@@ -161,6 +161,23 @@ public class UsbBackend {
                 && mPortStatus.isRoleCombinationSupported(POWER_ROLE_SOURCE, DATA_ROLE_HOST);
     }
 
+    public boolean isPciTunnelingEnabled() {
+        return mUsbManager.isPciTunnelingEnabled();
+    }
+
+    public int getPciTunnelingControlAllowedStatus() {
+        return mUsbManager.getPciTunnelingControlAllowedStatus();
+    }
+
+    /**
+     * Enable PCI tunneling over USB.
+     *
+     * @param enable Allow PCI tunneling.
+     */
+    public void setPciTunnelingEnabled(boolean enable) {
+        mUsbManager.setPciTunnelingEnabled(enable);
+    }
+
     public static String usbFunctionsToString(long functions) {
         // TODO replace with UsbManager.usbFunctionsToString once supported by Roboelectric
         return Long.toBinaryString(functions);

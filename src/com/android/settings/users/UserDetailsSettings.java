@@ -68,6 +68,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Arguments to this fragment must include the userId of the user (in EXTRA_USER_ID) for whom
  * to display controls.
  */
+// LINT.IfChange
 public class UserDetailsSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
@@ -779,3 +780,4 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
                 == UserManager.REMOVE_RESULT_ERROR_LAST_ADMIN_USER;
     }
 }
+// LINT.ThenChange(UserDetailsSettingsScreenApi.kt)

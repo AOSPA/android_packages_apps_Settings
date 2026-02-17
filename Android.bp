@@ -89,6 +89,7 @@ android_library {
         "android.hardware.dumpstate-V1-java",
         "android.hardware.dumpstate-V1.0-java",
         "android.hardware.dumpstate-V1.1-java",
+        "com.android.webapp.flags-aconfig-exported-java",
         "com_android_server_accessibility_flags_lib",
         "connectivity_flags_lib",
         "net-utils-framework-common",
@@ -127,6 +128,7 @@ android_library {
         "com.android.extensions.appfunctions.impl",
         "device-state-schema",
         "dynamiccolors",
+        "com.android.text.flags-aconfig-java",
     ],
 
     plugins: [
@@ -155,6 +157,7 @@ android_library {
         "aconfig_settingslib_flags",
         "android.app.flags-aconfig",
         "android.app.supervision.flags-aconfig",
+        "android.hardware.usb.flags-aconfig",
         "android.permission.flags-aconfig",
         "android.provider.flags-aconfig",
         "android.security.flags-aconfig",
@@ -174,12 +177,28 @@ platform_compat_config {
     system_ext_specific: true,
 }
 
+java_defaults {
+    name: "Settings_optimized_defaults",
+    optimize: {
+        enabled: true,
+        optimize: select(release_flag("RELEASE_SETTINGS_ENABLE_OPTIMIZE"), {
+            true: true,
+            default: false,
+        }),
+        shrink: true,
+        proguard_flags_files: [
+            ":Settings_proguard_flags",
+        ],
+    },
+}
+
 // Build the Settings APK
 android_app {
     name: "Settings",
     defaults: [
         "platform_app_defaults",
         "SpaPrivilegedLib-defaults",
+        "Settings_optimized_defaults",
     ],
     platform_apis: true,
     certificate: "platform",
@@ -193,9 +212,6 @@ android_app {
     uses_libs: ["org.apache.http.legacy"],
     use_resource_processor: true,
     resource_dirs: [],
-    optimize: {
-        proguard_flags_files: ["proguard.flags"],
-    },
     libs: [
         "extphonelib"
     ],

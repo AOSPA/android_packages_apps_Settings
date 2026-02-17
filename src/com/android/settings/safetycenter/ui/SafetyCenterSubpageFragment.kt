@@ -58,11 +58,12 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
 
     /** Redirects to the Safety Center home page if the subpage is empty. */
     open fun redirectIfEmpty() {
-        val entries =
-            viewModel
-                .getCurrentSafetyCenterDataAsUiData()
-                .getDynamicEntriesForSources(safetySourceIds)
-        if (entries.isEmpty()) {
+        if (SafetyCenterSubpageRegistry.hasInjectedTiles(subpageKey)) {
+            return
+        }
+        val uiData = viewModel.safetyCenterUiLiveData.value
+        val entries = uiData?.getDynamicEntriesForSources(safetySourceIds)
+        if (entries?.isEmpty() == true) {
             Log.d(logTag, "Redirecting from an empty subpage to Safety Center home")
             SubSettingLauncher(requireContext())
                 .setDestination(SafetyCenterFragment::class.java.getName())
@@ -96,6 +97,7 @@ abstract class SafetyCenterSubpageFragment : DashboardFragment() {
 
     override fun onResume() {
         super.onResume()
+        viewModel.pageOpen(safetySourceIds)
         logSafetyCenterViewedEvent()
     }
 

@@ -19,7 +19,6 @@ package com.android.settings.vpn2;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -108,16 +107,17 @@ public class AppExclusionUtilsTest {
 
     @Test
     public void removeUninstalledApp_noExclusionList_shouldDoNothing() {
-        when(mVpnManager.getAppExclusionList(USER_ID, VPN_PACKAGE)).thenReturn(null);
+        when(mVpnManager.getAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE)).thenReturn(null);
         AppExclusionUtils.removeUninstalledApp(mContext, USER_ID, VPN_PACKAGE);
-        verify(mVpnManager, never()).setAppExclusionList(anyInt(), anyString(), any());
+        verify(mVpnManager, never()).setAppExclusionList(any(), anyString(), any());
     }
 
     @Test
     public void removeUninstalledApp_oneAppUninstalled_shouldUpdateList()
             throws PackageManager.NameNotFoundException {
         List<String> exclusionList = Arrays.asList(PACKAGE_NAME_1, PACKAGE_NAME_2);
-        when(mVpnManager.getAppExclusionList(USER_ID, VPN_PACKAGE)).thenReturn(exclusionList);
+        when(mVpnManager.getAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE))
+                .thenReturn(exclusionList);
 
         when(mPackageManager.getPackageInfoAsUser(PACKAGE_NAME_1, 0, USER_ID))
                 .thenReturn(new PackageInfo());
@@ -127,14 +127,15 @@ public class AppExclusionUtilsTest {
         AppExclusionUtils.removeUninstalledApp(mContext, USER_ID, VPN_PACKAGE);
 
         List<String> expectedList = Arrays.asList(PACKAGE_NAME_1);
-        verify(mVpnManager).setAppExclusionList(USER_ID, VPN_PACKAGE, expectedList);
+        verify(mVpnManager).setAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE, expectedList);
     }
 
     @Test
     public void removeUninstalledApp_noAppUninstalled_shouldNotUpdateList()
             throws PackageManager.NameNotFoundException {
         final List<String> exclusionList = Arrays.asList(PACKAGE_NAME_1, PACKAGE_NAME_2);
-        when(mVpnManager.getAppExclusionList(USER_ID, VPN_PACKAGE)).thenReturn(exclusionList);
+        when(mVpnManager.getAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE))
+                .thenReturn(exclusionList);
 
         when(mPackageManager.getPackageInfoAsUser(PACKAGE_NAME_1, 0, USER_ID))
                 .thenReturn(new PackageInfo());
@@ -143,12 +144,12 @@ public class AppExclusionUtilsTest {
 
         AppExclusionUtils.removeUninstalledApp(mContext, USER_ID, VPN_PACKAGE);
 
-        verify(mVpnManager, never()).setAppExclusionList(anyInt(), anyString(), any());
+        verify(mVpnManager, never()).setAppExclusionList(any(), anyString(), any());
     }
 
     @Test
     public void getAppExclusionList_nullList_shouldReturnEmptyList() {
-        when(mVpnManager.getAppExclusionList(USER_ID, VPN_PACKAGE)).thenReturn(null);
+        when(mVpnManager.getAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE)).thenReturn(null);
 
         List<String> result = AppExclusionUtils.getAppExclusionList(mContext, USER_ID, VPN_PACKAGE);
 
@@ -159,7 +160,8 @@ public class AppExclusionUtilsTest {
     @Test
     public void getAppExclusionList_shouldReturnList() {
         List<String> exclusionList = Arrays.asList(PACKAGE_NAME_1, PACKAGE_NAME_2);
-        when(mVpnManager.getAppExclusionList(USER_ID, VPN_PACKAGE)).thenReturn(exclusionList);
+        when(mVpnManager.getAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE))
+                .thenReturn(exclusionList);
 
         List<String> result = AppExclusionUtils.getAppExclusionList(mContext, USER_ID, VPN_PACKAGE);
 
@@ -171,7 +173,7 @@ public class AppExclusionUtilsTest {
         List<String> exclusionList = Arrays.asList(PACKAGE_NAME_1, PACKAGE_NAME_2);
         AppExclusionUtils.setAppExclusionList(mContext, USER_ID, VPN_PACKAGE, exclusionList);
 
-        verify(mVpnManager).setAppExclusionList(USER_ID, VPN_PACKAGE, exclusionList);
+        verify(mVpnManager).setAppExclusionList(UserHandle.of(USER_ID), VPN_PACKAGE, exclusionList);
     }
 
     @Test

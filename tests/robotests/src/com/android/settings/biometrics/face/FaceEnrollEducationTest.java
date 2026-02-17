@@ -16,9 +16,12 @@
 
 package com.android.settings.biometrics.face;
 
+import static android.os.Looper.getMainLooper;
 import static android.util.DisplayMetrics.DENSITY_DEFAULT;
 import static android.util.DisplayMetrics.DENSITY_XXXHIGH;
 
+import static com.android.settings.accessibility.setupwizard.AccessibilitySetupTestUtilsKt.clearPartnerConfigCache;
+import static com.android.settings.accessibility.setupwizard.AccessibilitySetupTestUtilsKt.setupPartnerConfigMock;
 import static com.android.settingslib.widget.preference.illustration.R.string.settingslib_action_label_pause;
 import static com.android.settingslib.widget.preference.illustration.R.string.settingslib_illustration_content_description;
 import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_NEXT_LAUNCHED;
@@ -30,7 +33,10 @@ import static com.android.settings.biometrics.BiometricUtils.DEVICE_POSTURE_UNKN
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.robolectric.Shadows.shadowOf;
 
 import android.content.Context;
 import android.content.Intent;
@@ -51,6 +57,7 @@ import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowUtils;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
 import com.google.android.setupdesign.GlifLayout;
@@ -64,6 +71,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowLooper;
+
+import java.util.concurrent.TimeUnit;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {ShadowUtils.class, SettingsShadowResources.class})
@@ -317,17 +327,75 @@ public class FaceEnrollEducationTest {
         setupActivity();
 
         mScenario.onActivity(activity -> {
+            activity.adjustIllustrationLottiePosition();
+            shadowOf(getMainLooper()).idle();
+
             final GlifLayout glifLayout = activity.findViewById(R.id.setup_wizard_layout);
-            final TextView descView =  glifLayout.getDescriptionTextView();
+            final TextView descView = glifLayout.getDescriptionTextView();
             final int descBottomPos = activity.getOnScreenPositionTop(descView)
                     + descView.getHeight();
             final LottieAnimationView illustrationLottie = activity.findViewById(
                     R.id.illustration_lottie);
             final int illustrationLottieTop = activity.getOnScreenPositionTop(illustrationLottie);
-            if (illustrationLottieTop < descBottomPos) {
-                assertThat(activity.adjustIllustrationLottiePosition()).isTrue();
-            } else {
-                assertThat(activity.adjustIllustrationLottiePosition()).isFalse();
+
+            assertThat(illustrationLottieTop).isAtLeast(descBottomPos);
+        });
+    }
+
+    @Test
+    public void testFaceEnrollConfirmation_applyAnimatedIcon_shouldDelayHeroAnimation() {
+        setupActivity();
+        mScenario.onActivity(activity -> {
+            final GlifLayout glifLayout = activity.findViewById(R.id.setup_wizard_layout);
+            FaceEnrollEducation spyActivity = spy(activity);
+
+            try {
+                setupPartnerConfigMock(
+                        spyActivity,
+                        PartnerConfigHelper.IS_ANIMATED_ICON_ENABLED,
+                        /* enabled= */ true
+                );
+
+                LottieAnimationView illustrationView = glifLayout.findViewById(
+                        R.id.illustration_lottie);
+                LottieAnimationView spyView = spy(illustrationView);
+
+                spyActivity.playWithDelightAnimationIcon(spyView);
+                verify(spyView).cancelAnimation();
+
+                int delayMs = spyActivity.getResources().getInteger(
+                        com.google.android.setupdesign.R.integer.sud_lottie_animation_delay_ms);
+                ShadowLooper.idleMainLooper(delayMs, TimeUnit.MILLISECONDS);
+
+                verify(spyView).playAnimation();
+            } finally {
+                clearPartnerConfigCache();
+            }
+        });
+    }
+
+    @Test
+    public void testFaceEnrollConfirmation_notApplyAnimatedIcon_shouldPlayHeroAnimation() {
+        setupActivity();
+        mScenario.onActivity(activity -> {
+            final GlifLayout glifLayout = activity.findViewById(R.id.setup_wizard_layout);
+            FaceEnrollEducation spyActivity = spy(activity);
+
+            try {
+                setupPartnerConfigMock(
+                        spyActivity,
+                        PartnerConfigHelper.IS_ANIMATED_ICON_ENABLED,
+                        /* enabled= */ false
+                );
+
+                LottieAnimationView illustrationView = glifLayout.findViewById(
+                        R.id.illustration_lottie);
+                LottieAnimationView spyView = spy(illustrationView);
+
+                spyActivity.playWithDelightAnimationIcon(spyView);
+                verify(spyView).playAnimation();
+            } finally {
+                clearPartnerConfigCache();
             }
         });
     }

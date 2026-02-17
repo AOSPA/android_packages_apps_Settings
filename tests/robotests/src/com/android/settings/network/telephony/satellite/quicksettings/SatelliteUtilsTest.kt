@@ -76,7 +76,6 @@ class SatelliteUtilsTest {
 
     @Test
     fun isLteBasedNtnSupportedByCarrier_allConditionsMet_returnsTrue() {
-        setAttachRestrictionReasons(isLteNtnSupported = true)
         setupCarrierConfig(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
@@ -86,19 +85,30 @@ class SatelliteUtilsTest {
     }
 
     @Test
-    fun isLteBasedNtnSupportedByCarrier_attachRestricted_returnsFalse() {
-        setAttachRestrictionReasons(isLteNtnSupported = false)
+    fun isLteBasedNtnSupported_supportedConfig_hasUserRestriction_stillReturnsTrue() {
+        // Set attach restriction reason to true (user restriction)
+        setAttachRestrictionReasons(restricted = true)
         setupCarrierConfig(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
         )
 
-        assertThat(SatelliteUtils.isLteBasedNtnSupportedByCarrier(context, SUB_ID)).isFalse()
+        assertThat(SatelliteUtils.isLteBasedNtnSupportedByCarrier(context, SUB_ID)).isTrue()
+    }
+
+    @Test
+    fun isCarrierRoamingNtnSupported_invalidSubId_returnsFalse() {
+        assertThat(
+                SatelliteUtils.isCarrierRoamingNtnSupported(
+                    context,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                )
+            )
+            .isFalse()
     }
 
     @Test
     fun isLteBasedNtnSupportedByCarrier_satelliteAttachNotSupported_returnsFalse() {
-        setAttachRestrictionReasons(isLteNtnSupported = true)
         setupCarrierConfig(
             isAttachSupported = false,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
@@ -109,13 +119,43 @@ class SatelliteUtilsTest {
 
     @Test
     fun isLteBasedNtnSupportedByCarrier_connectTypeManual_returnsFalse() {
-        setAttachRestrictionReasons(isLteNtnSupported = true)
         setupCarrierConfig(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
         )
 
         assertThat(SatelliteUtils.isLteBasedNtnSupportedByCarrier(context, SUB_ID)).isFalse()
+    }
+
+    @Test
+    fun isCarrierRoamingNtnSupported_allConditionsMet_returnsTrue() {
+        setupCarrierConfig(
+            isAttachSupported = true,
+            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+        )
+
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isTrue()
+    }
+
+    @Test
+    fun isCarrierRoamingNtnSupported_attachRestricted_stillReturnsTrue() {
+        setAttachRestrictionReasons(restricted = true)
+        setupCarrierConfig(
+            isAttachSupported = true,
+            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+        )
+
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isTrue()
+    }
+
+    @Test
+    fun isCarrierRoamingNtnSupported_satelliteAttachNotSupported_returnsFalse() {
+        setupCarrierConfig(
+            isAttachSupported = false,
+            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+        )
+
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isFalse()
     }
 
     @Test
@@ -127,7 +167,6 @@ class SatelliteUtilsTest {
     @Test
     fun isLteBasedNtnSupportedByDevice_oneSubSupported_returnsTrue() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1))
-        setAttachRestrictionReasons(isLteNtnSupported = true, subId = SUB_ID)
         setupCarrierConfig(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
@@ -140,10 +179,9 @@ class SatelliteUtilsTest {
     @Test
     fun isLteBasedNtnSupportedByDevice_oneSubNotSupported_returnsFalse() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1))
-        setAttachRestrictionReasons(isLteNtnSupported = false, subId = SUB_ID)
         setupCarrierConfig(
             isAttachSupported = true,
-            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
             subId = SUB_ID,
         )
 
@@ -154,16 +192,14 @@ class SatelliteUtilsTest {
     fun isLteBasedNtnSupportedByDevice_twoSubsOneSupported_returnsTrue() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1, subInfo2))
         // SUB_ID is supported
-        setAttachRestrictionReasons(isLteNtnSupported = true, subId = SUB_ID)
         setupCarrierConfig(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
             subId = SUB_ID,
         )
         // SUB_ID_2 is not supported
-        setAttachRestrictionReasons(isLteNtnSupported = false, subId = SUB_ID_2)
         setupCarrierConfig(
-            isAttachSupported = true,
+            isAttachSupported = false,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
             subId = SUB_ID_2,
         )
@@ -175,17 +211,15 @@ class SatelliteUtilsTest {
     fun isLteBasedNtnSupportedByDevice_twoSubsNoneSupported_returnsFalse() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1, subInfo2))
         // SUB_ID is not supported
-        setAttachRestrictionReasons(isLteNtnSupported = false, subId = SUB_ID)
         setupCarrierConfig(
-            isAttachSupported = true,
+            isAttachSupported = false,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
             subId = SUB_ID,
         )
         // SUB_ID_2 is not supported
-        setAttachRestrictionReasons(isLteNtnSupported = false, subId = SUB_ID_2)
         setupCarrierConfig(
             isAttachSupported = true,
-            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+            connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
             subId = SUB_ID_2,
         )
 
@@ -193,8 +227,10 @@ class SatelliteUtilsTest {
     }
 
     /** Configures the test environment to simulate whether LTE NTN has restrictions */
-    private fun setAttachRestrictionReasons(isLteNtnSupported: Boolean, subId: Int = SUB_ID) {
-        val reasons = if (isLteNtnSupported) emptySet() else setOf(1)
+    private fun setAttachRestrictionReasons(restricted: Boolean, subId: Int = SUB_ID) {
+        val reasons =
+            if (restricted) setOf(SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_USER)
+            else emptySet()
         shadowSatelliteManager.setAttachRestrictionReasonsForCarrier(subId, reasons)
     }
 

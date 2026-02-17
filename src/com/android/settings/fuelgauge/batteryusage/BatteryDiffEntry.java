@@ -411,7 +411,8 @@ public class BatteryDiffEntry {
         }
     }
 
-    String getKey() {
+    /** Gets the key for this entry. */
+    public String getKey() {
         return mKey;
     }
 

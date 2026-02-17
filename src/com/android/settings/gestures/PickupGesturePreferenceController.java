@@ -26,6 +26,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 
+// LINT.IfChange
 public class PickupGesturePreferenceController extends GesturePreferenceController {
 
     private static final int ON = 1;
@@ -106,3 +107,4 @@ public class PickupGesturePreferenceController extends GesturePreferenceControll
         return mAmbientConfig;
     }
 }
+// LINT.ThenChange(PickupGestureApiScreen.kt)

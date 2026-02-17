@@ -46,6 +46,7 @@ import com.android.settings.connecteddevice.stylus.StylusFeatureProvider
 import com.android.settings.connecteddevice.stylus.StylusFeatureProviderImpl
 import com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFeatureProvider
 import com.android.settings.connecteddevice.threadnetwork.ThreadNetworkFeatureProviderImpl
+import com.android.settings.connecteddevice.usb.UsbFeatureProviderImpl
 import com.android.settings.core.instrumentation.SettingsMetricsFeatureProvider
 import com.android.settings.dashboard.DashboardFeatureProviderImpl
 import com.android.settings.dashboard.suggestions.SuggestionFeatureProvider
@@ -217,4 +218,6 @@ open class FeatureFactoryImpl : FeatureFactory() {
     override val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider by lazy {
         SyncAcrossDevicesFeatureProviderImpl()
     }
+
+    override val usbFeatureProvider by lazy { UsbFeatureProviderImpl(appContext) }
 }

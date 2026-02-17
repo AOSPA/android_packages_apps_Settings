@@ -58,7 +58,6 @@ import androidx.preference.Preference;
 import androidx.preference.SwitchPreference;
 
 import com.android.settings.R;
-import com.android.settings.connectivity.Flags;
 import com.android.settings.core.FeatureFlags;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.wifi.tether.WifiTetherPreferenceController;
@@ -150,7 +149,8 @@ public class TetherSettingsTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @DisableFlags({com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER,
+            com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER})
     @Config(shadows = ShadowRestrictedDashboardFragment.class)
     public void onCreate_isNotMultiUser_setIfOnlyAvailableForAdmins() {
         when(mTetherSettings.isUiRestricted()).thenReturn(true);

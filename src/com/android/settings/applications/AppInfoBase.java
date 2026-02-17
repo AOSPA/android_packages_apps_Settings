@@ -26,6 +26,7 @@ import android.app.admin.DevicePolicyIdentifiers;
 import android.app.admin.DevicePolicyManager;
 import android.app.admin.EnforcingAdmin;
 import android.app.admin.PolicyEnforcementInfo;
+import android.app.admin.flags.Flags;
 import android.app.settings.SettingsEnums;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -62,6 +63,8 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class AppInfoBase extends SettingsPreferenceFragment
         implements ApplicationsState.Callbacks {
@@ -116,11 +119,23 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
     @Override
     public void onResume() {
         super.onResume();
-        if (android.app.admin.flags.Flags.policyTransparencyRefactorEnabled()) {
-            PolicyEnforcementInfo appsControlEnforcementInfo = getActivity().getSystemService(
-                    DevicePolicyManager.class).getEnforcingAdminsForPolicy(
-                    DevicePolicyIdentifiers.getIdentifierForUserRestriction(
-                            UserManager.DISALLOW_APPS_CONTROL), mUserId);
+        if (Flags.policyTransparencyRefactorEnabled()) {
+            DevicePolicyManager dpm = getActivity().getSystemService(DevicePolicyManager.class);
+            PolicyEnforcementInfo appsControlEnforcementInfo;
+            if (Flags.userControlDisabledPackagesSettingsFix()) {
+                PolicyEnforcementInfo userRestrictionEnforcement = dpm.getEnforcingAdminsForPolicy(
+                        DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                                UserManager.DISALLOW_APPS_CONTROL), mUserId);
+                PolicyEnforcementInfo policyEnforcement = getUserControlDisabledPolicyForPackage();
+                List<EnforcingAdmin> combinedAdmins = new ArrayList<>(
+                        userRestrictionEnforcement.getAllAdmins());
+                combinedAdmins.addAll(policyEnforcement.getAllAdmins());
+                appsControlEnforcementInfo = new PolicyEnforcementInfo(combinedAdmins);
+            } else {
+                appsControlEnforcementInfo = dpm.getEnforcingAdminsForPolicy(
+                        DevicePolicyIdentifiers.getIdentifierForUserRestriction(
+                                UserManager.DISALLOW_APPS_CONTROL), mUserId);
+            }
             mAppsControlEnforcingAdmin =
                     appsControlEnforcementInfo.getMostImportantEnforcingAdmin();
             mAppsControlDisallowedBySystem = appsControlEnforcementInfo.isEnforcedBySystem();
@@ -129,10 +144,31 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
                     getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
             mAppsControlDisallowedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(
                     getActivity(), UserManager.DISALLOW_APPS_CONTROL, mUserId);
+            if (Flags.userControlDisabledPackagesSettingsFix()
+                    // If the admin is not null, it means the user restriction
+                    // DISALLOW_APPS_CONTROL is already enforced by an admin. This will show up
+                    // in as restricted by admin already so we don't need to do check for user
+                    // control disabled packages policy.
+                    && mAppsControlDisallowedAdmin == null) {
+                if (getUserControlDisabledPolicyForPackage().isEnforced()) {
+                    mAppsControlDisallowedAdmin = new EnforcedAdmin();
+                }
+            }
         }
         if (!refreshUi()) {
             setIntentAndFinish(true /* appChanged */);
         }
+    }
+
+    private PolicyEnforcementInfo getUserControlDisabledPolicyForPackage() {
+        DevicePolicyManager dpm = getActivity().getSystemService(DevicePolicyManager.class);
+        List<String> userControlDisabledPackages = dpm.getUserControlDisabledPackages(null);
+        if (userControlDisabledPackages.isEmpty()
+                || !userControlDisabledPackages.contains(mPackageName)) {
+            return new PolicyEnforcementInfo(Collections.emptyList());
+        }
+        return dpm.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.USER_CONTROL_DISABLED_PACKAGES_POLICY, mUserId);
     }
 
 

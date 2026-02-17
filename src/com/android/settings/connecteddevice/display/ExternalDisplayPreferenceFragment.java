@@ -63,6 +63,7 @@ import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfi
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.SettingsStatsLog;
 import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settings.utils.DesktopSettingsUtils;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.FooterPreference;
@@ -496,6 +497,13 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                     display -> display.isEnabled() == DisplayIsEnabled.YES).toList();
         }
 
+        var arguments = getArguments();
+        if (arguments != null && arguments.containsKey(DISPLAY_ID_ARG)) {
+            int displayId = arguments.getInt(DISPLAY_ID_ARG);
+            displaysToShow = displaysToShow.stream().filter(
+                    display -> display.getId() == displayId).toList();
+        }
+
         if (displaysToShow.isEmpty()) {
             showTextWhenNoDisplaysToShow(screen, /* position= */ 0);
         } else {
@@ -876,8 +884,12 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
                     indexInfo.title = context.getString(EXTERNAL_DISPLAY_TITLE_RESOURCE);
                     indexInfo.keywords = context.getString(
                             R.string.keywords_external_display_settings);
-                    indexInfo.screenTitle = context.getString(
-                            R.string.connected_devices_dashboard_title);
+                    if (DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(context)) {
+                        indexInfo.screenTitle = context.getString(R.string.display_settings);
+                    } else {
+                        indexInfo.screenTitle = context.getString(
+                                R.string.connected_devices_dashboard_title);
+                    }
                     rawData.add(indexInfo);
                     return rawData;
                 }

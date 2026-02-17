@@ -89,10 +89,7 @@ class SupervisionPinRecoveryPreference :
 
     @VisibleForTesting
     fun onRecoveryFlowComplete(result: ActivityResult) {
-        if (
-            Flags.enableSupervisionPinSnackbarsToastMessage() &&
-                result.resultCode == Activity.RESULT_OK
-        ) {
+        if (result.resultCode == Activity.RESULT_OK) {
             Toast.makeText(
                     lifeCycleContext,
                     lifeCycleContext.getString(R.string.supervision_pin_updated),

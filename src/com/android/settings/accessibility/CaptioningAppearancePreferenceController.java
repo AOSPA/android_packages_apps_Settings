@@ -25,6 +25,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.google.common.primitives.Floats;
 import com.google.common.primitives.Ints;
 
+// LINT.IfChange
 /** Controller that shows the captioning scale and style summary. */
 public class CaptioningAppearancePreferenceController extends BasePreferenceController {
 
@@ -77,3 +78,4 @@ public class CaptioningAppearancePreferenceController extends BasePreferenceCont
         return presetSummaries[idx];
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptioningAppearanceScreen.kt)

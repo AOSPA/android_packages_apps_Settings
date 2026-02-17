@@ -17,6 +17,7 @@
 package com.android.settings.safetycenter.ui
 
 import android.content.Context
+import android.content.res.Configuration
 import android.safetycenter.SafetyCenterIssue
 import android.util.Log
 import android.view.View
@@ -53,7 +54,11 @@ class SafetyIssueBannerPreference(
 
     init {
         key = bannerKey
-        setButtonOrientation(LinearLayout.VERTICAL)
+        if (context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            setButtonOrientation(LinearLayout.HORIZONTAL)
+        } else {
+            setButtonOrientation(LinearLayout.VERTICAL)
+        }
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {
@@ -237,7 +242,8 @@ class SafetyIssueBannerPreference(
                     banner.setPositiveButtonEnabled(false)
                     banner.setNegativeButtonEnabled(false)
                 }
-                viewModel.executeIssueAction(issue, action, activityTaskId)
+                val launchTaskId = calculateLaunchTaskId(issue.safetySourceIds, activityTaskId)
+                viewModel.executeIssueAction(issue, action, launchTaskId)
                 viewModel.interactionLogger.recordForIssue(
                     if (isPrimaryButton) {
                         Action.ISSUE_PRIMARY_ACTION_CLICKED
@@ -249,6 +255,12 @@ class SafetyIssueBannerPreference(
                 )
             }
         }
+
+        private fun calculateLaunchTaskId(safetySourceIds: Set<String>, activityTaskId: Int): Int? =
+            // If any of the related sources should be kept in the same task, use same task.
+            safetySourceIds
+                .map { PendingIntentSender.getTaskIdToSend(context, it, activityTaskId) }
+                .firstOrNull { it != null }
     }
 
     private companion object {

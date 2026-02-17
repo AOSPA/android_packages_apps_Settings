@@ -17,6 +17,7 @@
 package com.android.settings.safetycenter
 
 import android.app.Application
+import android.app.compat.CompatChanges
 import android.content.Context
 import android.hardware.SensorPrivacyManager
 import android.os.UserManager
@@ -25,10 +26,12 @@ import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.safetycenter.SafetyCenterData
 import android.safetycenter.SafetyCenterManager
+import android.text.ShowSecretsSetting
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.swipeUp
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
@@ -117,8 +120,20 @@ class PrivacyControlsFragmentTest {
                 .check(matches(isDisplayed()))
 
             onView(isRoot()).perform(swipeUp())
-            onView(withText(mApplication.getString(R.string.show_password)))
-                .check(matches(isDisplayed()))
+            if (
+                com.android.text.flags.Flags.splitShowPasswordsToTouchAndPhysical() &&
+                    CompatChanges.isChangeEnabled(
+                        ShowSecretsSetting.SPLIT_SHOW_PASSWORDS_TO_TOUCH_AND_PHYSICAL
+                    )
+            ) {
+                onView(withText(mApplication.getString(R.string.show_secrets_touch_summary)))
+                    .check(matches(isDisplayed()))
+                onView(withText(mApplication.getString(R.string.show_secrets_physical_summary)))
+                    .check(doesNotExist())
+            } else {
+                onView(withText(mApplication.getString(R.string.show_password)))
+                    .check(matches(isDisplayed()))
+            }
 
             onView(isRoot()).perform(swipeUp())
             onView(withText(mApplication.getString(R.string.location_settings)))

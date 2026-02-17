@@ -16,11 +16,16 @@
 
 package com.android.settings.security;
 
+import android.app.compat.CompatChanges;
 import android.content.Context;
 import android.provider.Settings;
+import android.text.ShowSecretsSetting;
+
+import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.text.flags.Flags;
 
 public class ShowPasswordPreferenceController extends TogglePreferenceController {
 
@@ -45,8 +50,18 @@ public class ShowPasswordPreferenceController extends TogglePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
+        if (areSplitSettingsEnabled()) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return mContext.getResources().getBoolean(R.bool.config_show_show_password)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @VisibleForTesting
+    boolean areSplitSettingsEnabled() {
+        return Flags.splitShowPasswordsToTouchAndPhysical()
+                && CompatChanges.isChangeEnabled(
+                        ShowSecretsSetting.SPLIT_SHOW_PASSWORDS_TO_TOUCH_AND_PHYSICAL);
     }
 
     @Override
@@ -54,4 +69,3 @@ public class ShowPasswordPreferenceController extends TogglePreferenceController
         return R.string.menu_key_security;
     }
 }
-

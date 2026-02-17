@@ -141,7 +141,7 @@ class MobileNetworkImeiPreference(
         var qtiImeiInfo: Array<QtiImeiInfo?>? = null
         try {
             if (isMinHalVersion2_1 && !TelephonyUtils.isDsdsToSsConfigValid(this)) {
-                imei = telephonyManager?.getImei(slot) ?: String()
+                imei = telephonyManager(subId)?.imei ?: String()
             } else {
                 qtiImeiInfo = TelephonyUtils.getImeiInfo()
                 if (qtiImeiInfo != null) {
@@ -153,7 +153,7 @@ class MobileNetworkImeiPreference(
                     }
                 }
                 if (TextUtils.isEmpty(imei)) {
-                    imei = telephonyManager?.getImei(slot) ?: String()
+                    imei = telephonyManager(subId)?.imei ?: String()
                 }
             }
         } catch (exception: Exception) {

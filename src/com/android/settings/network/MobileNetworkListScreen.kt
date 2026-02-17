@@ -40,8 +40,8 @@ import com.android.settings.spa.network.startAddSimFlow
 import com.android.settings.spa.network.startSatelliteWarningDialogFlow
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.RestrictedPreference
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
 import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -69,7 +69,7 @@ open class MobileNetworkListScreen(context: Context) :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.mobile_network_list_purpose
 
@@ -185,15 +185,13 @@ open class MobileNetworkListScreen(context: Context) :
         preferenceHierarchy(context) {
             +MobileDataPreference()
             addAsync(coroutineScope, Dispatchers.Default) {
-                if (Flags.deeplinkNetworkAndInternet25q4()) {
-                    if (CatalystFlags.catalystUseKeyParameters()) {
-                        MobileNetworkScreen.keyParameters(context).collect {
-                            +(MobileNetworkScreen.KEY withParameters it)
-                        }
-                    } else {
-                        MobileNetworkScreen.parameters(context).collect {
-                            +(MobileNetworkScreen.KEY args it)
-                        }
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                    MobileNetworkScreen.keyParameters(context).collect {
+                        +(MobileNetworkScreen.KEY withParameters it)
+                    }
+                } else {
+                    MobileNetworkScreen.parameters(context).collect {
+                        +(MobileNetworkScreen.KEY args it)
                     }
                 }
             }

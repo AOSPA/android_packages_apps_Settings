@@ -53,6 +53,8 @@ import com.android.settings.Settings.EXTRA_SHOW_FRAGMENT
 import com.android.settings.Settings.SafetyCenterActivity
 import com.android.settings.SubSettings
 import com.android.settings.core.instrumentation.SettingsStatsLog
+import com.android.settings.dashboard.DashboardFeatureProvider
+import com.android.settings.overlay.FeatureFactory
 import com.android.settings.safetycenter.SafetyCenterTestUtils.EMPTY_SC_DATA
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_ACTION
 import com.android.settings.safetycenter.SafetyCenterTestUtils.TEST_SESSION_ID
@@ -73,6 +75,9 @@ import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils.EXTRA_SESSI
 import com.android.settings.safetycenter.ui.SafetyCenterSubpageRegistry
 import com.android.settings.safetycenter.ui.SafetySourceProfileType
 import com.android.settings.safetycenter.ui.ViewType
+import com.android.settingslib.drawer.CategoryKey
+import com.android.settingslib.drawer.DashboardCategory
+import com.android.settingslib.drawer.Tile
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import com.android.settingslib.widget.BannerMessagePreference
 import com.android.settingslib.widget.BannerMessagePreferenceGroup
@@ -87,6 +92,10 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.any
+import org.mockito.Mock
+import org.mockito.Mockito.`when`
+import org.mockito.MockitoAnnotations
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
@@ -101,24 +110,53 @@ import org.robolectric.shadows.ShadowSafetyCenterManager
 @Config(shadows = [SafetyCenterTestUtils.ShadowSettingsStatsLog::class])
 class SafetyCenterFragmentTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
+
+    @Mock private lateinit var mockFeatureFactory: FeatureFactory
+    @Mock private lateinit var mockDashboardFeatureProvider: DashboardFeatureProvider
+    @Mock private lateinit var mockTile: Tile
+
     private lateinit var mApplication: Application
     private lateinit var shadowSafetyCenterManager: ShadowSafetyCenterManager
 
     @Before
     fun setUp() {
+        MockitoAnnotations.initMocks(this)
         mApplication = ApplicationProvider.getApplicationContext()
         val safetyCenterManager = mApplication.getSystemService(SafetyCenterManager::class.java)!!
         shadowSafetyCenterManager = Shadow.extract(safetyCenterManager)
         shadowSafetyCenterManager.setSafetyCenterEnabled(true)
         SafetyCenterTestUtils.ShadowSettingsStatsLog.reset()
+
+        FeatureFactory.setFactory(mApplication, mockFeatureFactory)
+        `when`(mockFeatureFactory.dashboardFeatureProvider).thenReturn(mockDashboardFeatureProvider)
     }
 
-    private fun runTest(data: SafetyCenterData, testBlock: (SafetyCenterFragment) -> Unit) {
+    @Test
+    fun newInstance_withQuickSettingsTrue_setsArgument() {
+        val fragment = SafetyCenterFragment.newInstance(isQuickSettings = true)
+
+        assertThat(fragment.arguments?.getBoolean(ARG_IS_QUICK_SETTINGS)).isTrue()
+    }
+
+    @Test
+    fun newInstance_withQuickSettingsFalse_setsArgument() {
+        val fragment = SafetyCenterFragment.newInstance(isQuickSettings = false)
+
+        assertThat(fragment.arguments?.getBoolean(ARG_IS_QUICK_SETTINGS, false)).isFalse()
+    }
+
+    private fun runTest(
+        data: SafetyCenterData,
+        isQuickSettings: Boolean = false,
+        navigationSource: NavigationSource = NavigationSource.SETTINGS,
+        testBlock: (SafetyCenterFragment) -> Unit,
+    ) {
         shadowSafetyCenterManager.setSafetyCenterData(data)
         val fragmentArgs =
             Bundle().apply {
                 putLong(EXTRA_SESSION_ID, TEST_SESSION_ID)
-                putAll(NavigationSource.SETTINGS.createArgs())
+                putAll(navigationSource.createArgs())
+                putBoolean(ARG_IS_QUICK_SETTINGS, isQuickSettings)
             }
         val scenario =
             launchFragmentInContainer<SafetyCenterFragment>(
@@ -126,9 +164,6 @@ class SafetyCenterFragmentTest {
                 themeResId = R.style.Theme_SubSettings,
             )
         scenario.onFragment { fragment ->
-            // TODO: b/460466023 - remove when fixed (now it serves to initiate live data values)
-            shadowSafetyCenterManager.setSafetyCenterData(data)
-
             ShadowLooper.idleMainLooper()
             testBlock(fragment)
         }
@@ -210,14 +245,70 @@ class SafetyCenterFragmentTest {
         }
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun fragment_onLaunchQuickSettings_showsIssuesAndStatusButNotSubpages() {
+        val activeIssue =
+            createIssue(
+                id = "activeIssue",
+                title = "Active Issue Title",
+                sourceIds = setOf("any"),
+            )
+        val entry =
+            createEntry(
+                id = "TestEntry",
+                title = "Entry with Severity Level OK",
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+
+        runTest(
+            createScData(entries = listOf(entry), activeIssues = listOf(activeIssue)),
+            isQuickSettings = true,
+            navigationSource = NavigationSource.QUICK_SETTINGS_TILE,
+        ) { _ ->
+            // Status banner and issues should be present in quick settings.
+            onView(withId(StatusBannerR.id.banner_container)).check(matches(isDisplayed()))
+            onView(withText(activeIssue.title.toString())).check(matches(isDisplayed()))
+
+            // Subpage preferences should NOT be displayed in quick settings.
+            onView(withText(mApplication.getString(R.string.device_unlock_subpage_title)))
+                .check(doesNotExist())
+            onView(withText(mApplication.getString(R.string.privacy_dashboard_title)))
+                .check(doesNotExist())
+            onView(withText(mApplication.getString(R.string.more_security_privacy_category_title)))
+                .check(doesNotExist())
+        }
+    }
+
     // Tests for Device Unlock preference summary and icon in Safety Center main page
 
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
-    fun deviceUnlockPref_whenNoData_subpageHidden() {
+    fun deviceUnlockPref_whenNoDataAndNoInjectedTiles_subpageHidden() {
+        `when`(mockDashboardFeatureProvider.getTilesForCategory(any())).thenReturn(null)
+
         runTest(EMPTY_SC_DATA) { fragment ->
             val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
             assertThat(preference?.isVisible).isFalse()
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun deviceUnlockPref_whenNoDataButHasInjectedTiles_subpageVisible() {
+        val categoryWithTiles = DashboardCategory(CategoryKey.CATEGORY_SC_DEVICE_UNLOCK)
+        categoryWithTiles.addTile(mockTile)
+        `when`(
+                mockDashboardFeatureProvider.getTilesForCategory(
+                    CategoryKey.CATEGORY_SC_DEVICE_UNLOCK
+                )
+            )
+            .thenReturn(categoryWithTiles)
+
+        runTest(EMPTY_SC_DATA) { fragment ->
+            val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
         }
     }
 
@@ -1075,6 +1166,7 @@ class SafetyCenterFragmentTest {
 
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isEnabled()))
+            onView(withText(R.string.safety_center_review_settings)).check(doesNotExist())
         }
     }
 
@@ -1100,6 +1192,26 @@ class SafetyCenterFragmentTest {
 
     @Test
     @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun statusBanner_whenSeverityOkAndHasActiveIssues_showsOkStateAndNoButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title OK", "Summary OK")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_OK)
+                .build()
+        val activeIssue = createIssue(id = "activeIssue", sourceIds = setOf("any"))
+
+        runTest(createScData(status = status, activeIssues = listOf(activeIssue))) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title OK")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary OK")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.LOW)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(doesNotExist())
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     fun statusBanner_whenSeverityUnknown_showsOkStateAndRescanButton() {
         val status =
             SafetyCenterStatus.Builder("Title OK", "Summary OK")
@@ -1115,6 +1227,7 @@ class SafetyCenterFragmentTest {
 
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isEnabled()))
+            onView(withText(R.string.safety_center_review_settings)).check(doesNotExist())
         }
     }
 
@@ -1135,6 +1248,26 @@ class SafetyCenterFragmentTest {
 
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isDisplayed()))
             onView(withText(R.string.safety_center_rescan_button)).check(matches(isNotEnabled()))
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun statusBanner_whenSeverityUnknownAndHasActiveIssues_showsOkStateAndNoButton() {
+        val status =
+            SafetyCenterStatus.Builder("Title Unknown", "Summary Unknown")
+                .setSeverityLevel(SafetyCenterStatus.OVERALL_SEVERITY_LEVEL_UNKNOWN)
+                .build()
+        val activeIssue = createIssue(id = "activeIssue", sourceIds = setOf("any"))
+
+        runTest(createScData(status = status, activeIssues = listOf(activeIssue))) { fragment ->
+            val preference = fragment.findPreference<StatusBannerPreference>(STATUS_BANNER_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.title.toString()).isEqualTo("Title Unknown")
+            assertThat(preference?.summary.toString()).isEqualTo("Summary Unknown")
+            assertThat(preference?.iconLevel).isEqualTo(BannerStatus.LOW)
+
+            onView(withText(R.string.safety_center_rescan_button)).check(doesNotExist())
         }
     }
 
@@ -1360,6 +1493,26 @@ class SafetyCenterFragmentTest {
     }
 
     @Test
+    fun interactionLogger_onLaunchWithQuickSettings_logsViewTypeAndNavigationSource() {
+        runTest(
+            EMPTY_SC_DATA,
+            isQuickSettings = true,
+            navigationSource = NavigationSource.QUICK_SETTINGS_TILE,
+        ) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(1)
+            val event = events[0]
+
+            assertThat(event.atomId).isEqualTo(SettingsStatsLog.SAFETY_CENTER_INTERACTION_REPORTED)
+            assertThat(event.sessionId).isEqualTo(TEST_SESSION_ID)
+            assertThat(event.action).isEqualTo(Action.SAFETY_CENTER_VIEWED.statsLogValue)
+            assertThat(event.viewType).isEqualTo(ViewType.QUICK_SETTINGS.statsLogValue)
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.QUICK_SETTINGS_TILE.statsLogValue)
+        }
+    }
+
+    @Test
     fun interactionLogger_onLaunchWithIntent_usesSessionIdFromIntent() {
         val intent =
             Intent(mApplication, SafetyCenterActivity::class.java).apply {
@@ -1430,6 +1583,23 @@ class SafetyCenterFragmentTest {
             val event = events[0]
 
             assertThat(event.navigationSource).isEqualTo(NavigationSource.SETTINGS.statsLogValue)
+        }
+    }
+
+    @Test
+    fun interactionLogger_onLaunchWithQuickSettingsIntent_logsNavigationSourceQuickSettingsTile() {
+        val intent =
+            Intent(mApplication, SafetyCenterActivity::class.java)
+                .setAction(Intent.ACTION_SAFETY_CENTER)
+        NavigationSource.QUICK_SETTINGS_TILE.addToIntent(intent)
+
+        runTestWithIntent(intent, EMPTY_SC_DATA) {
+            val events = SafetyCenterTestUtils.ShadowSettingsStatsLog.getWrittenEvents()
+            assertThat(events).hasSize(1)
+            val event = events[0]
+
+            assertThat(event.navigationSource)
+                .isEqualTo(NavigationSource.QUICK_SETTINGS_TILE.statsLogValue)
         }
     }
 
@@ -1535,6 +1705,7 @@ class SafetyCenterFragmentTest {
     }
 
     companion object {
+        private const val ARG_IS_QUICK_SETTINGS = "is_quick_settings"
         private const val DEVICE_UNLOCK_KEY = "device_unlock_subpage"
         private const val NETWORK_SECURITY_KEY = "cellular_network_security_subpage"
         private const val STATUS_BANNER_KEY = "safety_center_status_banner"

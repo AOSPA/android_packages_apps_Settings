@@ -17,25 +17,20 @@ package com.android.settings.wifi.details
 
 import android.os.Bundle
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class WifiNetworkDetailsScreenTest : SettingsCatalystTestCase() {
+class WifiNetworkDetailsScreenTest {
 
-    override val preferenceScreenCreator =
+    private val preferenceScreenCreator =
         createScreen(
             Bundle().apply {
                 putString(WifiNetworkDetailsScreen.KEY_ARGUMENT_WIFI_ENTRY_KEY, "test_key")
             }
         )
-
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_NETWORK_AND_INTERNET_25Q4
 
     @Test
     fun key() {
@@ -43,12 +38,10 @@ class WifiNetworkDetailsScreenTest : SettingsCatalystTestCase() {
     }
 
     private fun createScreen(args: Bundle): WifiNetworkDetailsScreen {
-        return if (CatalystFlags.catalystUseKeyParameters()) {
+        return if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             WifiNetworkDetailsScreen(WifiNetworkDetailsScreen.parametersSchema.prepare(args))
         } else {
             WifiNetworkDetailsScreen(args)
         }
     }
-
-    @Test override fun migration() {}
 }

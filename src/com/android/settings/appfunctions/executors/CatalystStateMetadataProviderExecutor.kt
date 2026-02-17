@@ -19,12 +19,14 @@ package com.android.settings.appfunctions.executors
 import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Binder
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateMetadataProviderExecutorResult
 import com.android.settingslib.graph.PreferenceGetterFlags
+import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.PreferenceHierarchyNode
@@ -32,8 +34,10 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceTitle
+import com.android.settingslib.metadata.isUiOnlyPreference
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenMetadata
@@ -125,6 +129,9 @@ class CatalystStateMetadataProviderExecutor(
         preferencesHierarchy.forEach {
             val metadata = it.metadata
             val config = settingConfigMap[metadata.key]
+            // skip over UI-only preferences
+            if(metadata.isUiOnlyPreference(context))
+                return@forEach
             // skip over explicitly disabled preferences
             val metadataProto =
                 metadata.toProto(
@@ -146,7 +153,7 @@ class CatalystStateMetadataProviderExecutor(
                 DeviceStateItemMetadata(
                     // TODO: Expose parameterization
                     key = "${screenMetaData.key}/${metadataProto.key}",
-                    purpose = metadataProto.key,
+                    purpose = metadataProto.getPurposeString(),
                     name =
                         LocalizedString(
                             english = metadata.getPreferenceTitle(englishContext).toString(),
@@ -165,11 +172,15 @@ class CatalystStateMetadataProviderExecutor(
 
         val launchingIntent = screenMetaData.getLaunchIntent(context, null)
         return PerScreenMetadata(
-            // This is a hack to remove the title from parametrised screens as it may contain
-            // some text referring to that specific parameter which could confuse the agent.
-            description =
-                if (isParameterized) ""
-                else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
+            description = (
+                    listOfNotNull(
+                        // This is a hack to remove the title from parametrised screens as it may contain
+                        // some text referring to that specific parameter which could confuse the agent.
+                        if (isParameterized) ""
+                            else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
+                        screenMetaData.getPreferencePurpose(context)
+                    ).filter{it.isNotBlank()}.joinToString(". ")
+                ),
             deviceStateItemsMetadata = deviceStateItemMetadataList,
             intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
             // This is a temporary hack to indicate to the agent that the screen is itemized, it
@@ -177,6 +188,18 @@ class CatalystStateMetadataProviderExecutor(
             itemizationType = if (isParameterized) "ITEMIZED SCREEN" else null,
         )
     }
+
+    private fun PreferenceProto.getPurposeString(): String =
+        if (this.purpose != 0) {
+            try {
+                context.getString(this.purpose)
+            } catch (e: Resources.NotFoundException) {
+                Log.w(TAG, "Cannot get purpose for: ${this.key}", e)
+                this.key
+            }
+        } else {
+            this.key
+        }
 
     companion object {
         private const val TAG = "CatalystStateMetadataProviderExecutor"

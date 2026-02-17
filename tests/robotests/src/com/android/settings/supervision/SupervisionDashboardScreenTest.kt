@@ -29,6 +29,7 @@ import android.content.pm.ResolveInfo
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Looper
 import android.os.Process
 import android.os.UserHandle
 import android.platform.test.annotations.DisableFlags
@@ -197,6 +198,8 @@ class SupervisionDashboardScreenTest {
             val webContentFilterPreference =
                 fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
+            shadowOf(Looper.getMainLooper()).idle()
+
             assertThat(webContentFilterPreference.summary).isEqualTo(initialSummary)
         }
     }
@@ -215,6 +218,8 @@ class SupervisionDashboardScreenTest {
             val webContentFilterPreference =
                 fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
+            shadowOf(Looper.getMainLooper()).idle()
+
             assertThat(webContentFilterPreference.summary).isEqualTo(initialSummary)
 
             // Update the preference summary.
@@ -224,6 +229,8 @@ class SupervisionDashboardScreenTest {
 
             // refreshDashboardTiles should restore the value from the data map.
             dashboardFragment.refreshDashboardTiles("test")
+
+            shadowOf(Looper.getMainLooper()).idle()
 
             assertThat(webContentFilterPreference.summary).isEqualTo(initialSummary)
         }
@@ -307,24 +314,23 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @DisableFlags(FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE)
-    fun isIndexable() {
-        assertThat(preferenceScreenCreator.indexable).isTrue()
+    fun isAvailable() {
+        assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
     }
 
     @Test
     @EnableFlags(FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE)
-    fun indexable_inDemoMode_configHidingTrue_isFalse() {
-        preferenceScreenCreator.onCreate(mockLifeCycleContext)
+    fun isAvailable_inDemoMode_configHidingTrue_isFalse() {
         SettingsGlobalStore.get(mockLifeCycleContext).setInt(Settings.Global.DEVICE_DEMO_MODE, 1)
 
         mockResources.stub {
             on { getBoolean(R.bool.config_hide_supervision_setting_in_demo_mode) }.thenReturn(true)
         }
 
-        assertThat(preferenceScreenCreator.indexable).isFalse()
+        assertThat(preferenceScreenCreator.isAvailable(mockLifeCycleContext)).isFalse()
 
         // Ensure reset to non-demo-mode at the end of test.
-        SettingsGlobalStore.get(mockLifeCycleContext).setInt(Settings.Global.DEVICE_DEMO_MODE, 0)
+        SettingsGlobalStore.get(context).setInt(Settings.Global.DEVICE_DEMO_MODE, 0)
     }
 
     @Test

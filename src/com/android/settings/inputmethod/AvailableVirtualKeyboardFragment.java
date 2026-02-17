@@ -45,6 +45,7 @@ import java.util.List;
 /**
  * The fragment for on-screen keyboard settings which used to display user installed IMEs.
  */
+// LINT.IfChange
 @SearchIndexable
 public class AvailableVirtualKeyboardFragment extends DashboardFragment
         implements InputMethodPreference.OnSavePreferenceListener {
@@ -208,3 +209,4 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
                 }
             };
 }
+// LINT.ThenChange(AvailableVirtualKeyboardApiScreen.kt)

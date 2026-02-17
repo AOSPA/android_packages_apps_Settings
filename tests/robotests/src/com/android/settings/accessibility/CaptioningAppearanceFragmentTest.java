@@ -20,6 +20,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.platform.test.annotations.RequiresFlagsDisabled;
+import android.platform.test.annotations.RequiresFlagsEnabled;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.provider.SearchIndexableResource;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -27,6 +32,7 @@ import com.android.settings.R;
 import com.android.settings.testutils.XmlTestUtils;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -36,6 +42,8 @@ import java.util.List;
 /** Tests for {@link CaptioningAppearanceFragment}. */
 @RunWith(RobolectricTestRunner.class)
 public class CaptioningAppearanceFragmentTest {
+    @Rule
+    public final CheckFlagsRule mCheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
 
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private CaptioningAppearanceFragment mFragment;
@@ -51,9 +59,16 @@ public class CaptioningAppearanceFragmentTest {
                 SettingsEnums.ACCESSIBILITY_CAPTION_APPEARANCE);
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
     @Test
     public void getPreferenceScreenResId_returnsCorrectXml() {
         assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(R.xml.captioning_appearance);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
+    @Test
+    public void getPreferenceScreenResId_returnsZero() {
+        assertThat(mFragment.getPreferenceScreenResId()).isEqualTo(0);
     }
 
     @Test
@@ -66,6 +81,7 @@ public class CaptioningAppearanceFragmentTest {
         assertThat(mFragment.getHelpResource()).isEqualTo(R.string.help_url_caption);
     }
 
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
         final List<String> niks = CaptioningAppearanceFragment.SEARCH_INDEX_DATA_PROVIDER
@@ -74,5 +90,25 @@ public class CaptioningAppearanceFragmentTest {
                 R.xml.captioning_appearance);
 
         assertThat(keys).containsAtLeastElementsIn(niks);
+    }
+
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
+    @Test
+    public void getSearchIndexDataProvider_verifyXmlResourcesToIndex() {
+        List<SearchIndexableResource> searchIndexableResource =
+                CaptioningAppearanceFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+        assertThat(searchIndexableResource.getFirst().xmlResId)
+                .isEqualTo(R.xml.captioning_appearance);
+    }
+
+    @RequiresFlagsEnabled(Flags.FLAG_CATALYST_CAPTION_PREFERENCES_SCREEN)
+    @Test
+    public void getSearchIndexDataProvider_returnsNull() {
+        List<SearchIndexableResource> searchIndexableResource =
+                CaptioningAppearanceFragment.SEARCH_INDEX_DATA_PROVIDER
+                        .getXmlResourcesToIndex(mContext, /* enabled= */ true);
+
+        assertThat(searchIndexableResource).isNull();
     }
 }

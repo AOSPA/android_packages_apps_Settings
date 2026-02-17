@@ -17,18 +17,17 @@
 package com.android.settings.accessibility.setupwizard
 
 import android.content.Context
-import android.os.Looper
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.accessibility.colorinversion.ui.FooterPreference
 import com.google.android.setupdesign.items.Item
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mockito.verify
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowLooper
 
 /** Tests for [ColorInversionFooterItemController]. */
 @RunWith(RobolectricTestRunner::class)
@@ -39,16 +38,22 @@ class ColorInversionFooterItemControllerTest {
     private val controller = ColorInversionFooterItemController(context, mockItem)
 
     @Test
-    fun bindData_setsFooterSummary() {
+    fun bindData_setsFooterSummaryAndContentDescription() {
         // Use 0 to hide help links, matching the implementation logic.
         val metadata = FooterPreference(helpResource = 0)
-        val expectedValue = metadata.getTitle(context)
+        val expectedTitle = metadata.getTitle(context)
+        val intro = context.getString(metadata.introductionTitle)
+        val expectedContentDescription = metadata.getContentDescription(intro, expectedTitle)
 
         controller.bindData(mockItem)
-        shadowOf(Looper.getMainLooper()).idle()
+        ShadowLooper.idleMainLooper()
 
-        val captor = argumentCaptor<CharSequence>()
-        verify(mockItem).summary = captor.capture()
-        assertThat(captor.firstValue.toString()).isEqualTo(expectedValue.toString())
+        val summaryCaptor = argumentCaptor<CharSequence>()
+        verify(mockItem).summary = summaryCaptor.capture()
+        assertThat(summaryCaptor.firstValue.toString()).isEqualTo(expectedTitle.toString())
+        val contentDescCaptor = argumentCaptor<CharSequence>()
+        verify(mockItem).contentDescription = contentDescCaptor.capture()
+        assertThat(contentDescCaptor.firstValue.toString())
+            .isEqualTo(expectedContentDescription.toString())
     }
 }

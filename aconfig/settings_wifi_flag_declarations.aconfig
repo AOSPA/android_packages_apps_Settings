@@ -16,3 +16,10 @@ flag {
     description: "Use WifiFeatureProvider to get the instance of WifiDppQrCodeGeneratorFragment."
     bug: "329012096"
 }
+
+flag {
+  name: "enable_wifi_multiuser"
+  namespace: "android_settings"
+  description: "Flag for WiFi Multiuser"
+  bug: "402214828"
+}

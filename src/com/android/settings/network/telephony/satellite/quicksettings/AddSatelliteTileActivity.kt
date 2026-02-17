@@ -17,6 +17,7 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.Activity
+import android.app.NotificationManager
 import android.app.StatusBarManager
 import android.content.ComponentName
 import android.graphics.drawable.Icon
@@ -41,6 +42,13 @@ class AddSatelliteTileActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Dismiss the notification that launched this activity.
+        val notificationId = intent.getIntExtra(EXTRA_NOTIFICATION_ID, 0)
+        if (notificationId != 0) {
+            getSystemService(NotificationManager::class.java)?.cancel(notificationId)
+        }
+
         val statusBarManager = getSystemService(StatusBarManager::class.java)
         val componentName = ComponentName(this, SatelliteTileService::class.java)
 
@@ -66,7 +74,8 @@ class AddSatelliteTileActivity : Activity() {
                     StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ADDED,
                     StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_NOT_ADDED,
                     StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ALREADY_ADDED,
-                    StatusBarManager.TILE_ADD_REQUEST_RESULT_DIALOG_DISMISSED -> {
+                    StatusBarManager.TILE_ADD_REQUEST_RESULT_DIALOG_DISMISSED,
+                    StatusBarManager.TILE_ADD_REQUEST_ERROR_NOT_CURRENT_USER -> {
                         // 1. If the tile was added, the user was prompted and accepted, so we
                         // should mark as shown so we don't prompt again.
                         // 2. If the tile was not added, the user was prompted and declined, so we
@@ -75,7 +84,10 @@ class AddSatelliteTileActivity : Activity() {
                         // been shown.
                         // 4. If the dialog was dismissed, the user was prompted and dismissed it,
                         // so we should mark as shown so we don't potentially spam the user.
-                        satelliteTilePromptUtils.setAddTilePromptShown(this, true)
+                        // 5. If the user is not the current user, then we should mark as shown to
+                        // avoid potentially spamming the user (the user likely does not have
+                        // permissions to add the tile).
+                        satelliteTilePromptUtils.markAllPromptsShown(this)
                     }
                     else -> {
                         // An error occurred, so we don't mark the prompt as shown so that we can
@@ -90,5 +102,11 @@ class AddSatelliteTileActivity : Activity() {
 
     companion object {
         private const val TAG = "AddSatelliteTileActivity"
+
+        /**
+         * Intent extra key for the ID of the notification that launched this activity. This is used
+         * to cancel the notification when the user interacts with it.
+         */
+        internal const val EXTRA_NOTIFICATION_ID = "notification_id"
     }
 }

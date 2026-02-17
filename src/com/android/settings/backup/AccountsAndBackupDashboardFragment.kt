@@ -24,15 +24,22 @@ import android.os.UserHandle.myUserId
 import android.os.UserManager
 import androidx.preference.Preference
 import com.android.settings.CatalystFragment
+import com.android.settings.R
 import com.android.settings.accounts.ManageAccountsScreen
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.EXTRA_PROFILE
-import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.ALL
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.PERSONAL
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.PRIVATE
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType.WORK
+import com.android.settings.flags.Flags
+import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.drawer.Tile
+import com.android.settingslib.search.SearchIndexable
+import android.provider.SearchIndexableResource
 
+@SearchIndexable
 class AccountsAndBackupDashboardFragment : CatalystFragment() {
+
+    override fun getPreferenceScreenResId() = R.xml.accounts_and_backup_dashboard
 
     /* User (personal, work or private space) for which the screen is launched. */
     private val user: UserHandle by lazy {
@@ -60,7 +67,7 @@ class AccountsAndBackupDashboardFragment : CatalystFragment() {
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         if (preference.key == ManageAccountsScreen.KEY) {
-            arguments?.getInt(EXTRA_PROFILE, ALL)?.let { profileType ->
+            arguments?.getInt(EXTRA_PROFILE, PERSONAL)?.let { profileType ->
                 preference.extras.putInt(EXTRA_PROFILE, profileType)
             }
         }
@@ -71,5 +78,23 @@ class AccountsAndBackupDashboardFragment : CatalystFragment() {
         // Ensure injected entries launch as the correct user.
         tile?.intent?.putExtra(EXTRA_USER, user)
         return super.displayTile(tile)
+    }
+
+    companion object {
+        @JvmField
+        val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =
+            object : BaseSearchIndexProvider() {
+                override fun getXmlResourcesToIndex(
+                    context: Context,
+                    enabled: Boolean,
+                ): List<SearchIndexableResource> {
+                    if (!Flags.enableAccountsAndBackupScreen()) {
+                        return emptyList()
+                    }
+                    val sir = SearchIndexableResource(context)
+                    sir.xmlResId = R.xml.accounts_and_backup_dashboard
+                    return listOf(sir)
+                }
+            }
     }
 }

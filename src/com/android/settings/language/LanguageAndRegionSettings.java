@@ -19,7 +19,6 @@ package com.android.settings.language;
 import static android.os.UserManager.DISALLOW_CONFIG_LOCALE;
 
 import static com.android.settings.flags.Flags.localeNotificationEnabled;
-import static com.android.settings.flags.Flags.regionalPreferencesApiEnabled;
 import static com.android.settings.localepicker.AppLocalePickerActivity.EXTRA_APP_LOCALE;
 import static com.android.settings.localepicker.LocaleDialogFragment.ARG_DIALOG_TYPE;
 import static com.android.settings.localepicker.LocaleDialogFragment.ARG_MENU_ITEM_ID;
@@ -86,6 +85,7 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
     private static final String KEY_TEXT_TO_SPEECH = "tts_settings_summary";
     private static final String KEY_PREFERENCE_USER_PREFERRED_LOCALE_LIST =
             "user_preferred_locale_list";
+    private static final String KEY_TEMPERATURE_PREFERENCE = "temperature_preference";
     private static final String TAG = "LanguageAndRegionSettings";
     private static final String CFGKEY_ADD_LOCALE = "localeAdded";
     private static final String KEY_ADD_A_LANGUAGE = "add_a_language";
@@ -147,6 +147,13 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(LanguageAndRegionViewModel.class);
         mViewModel.getDialogType().observe(this, this::showConfirmDialogByType);
+
+        Intent intent = getIntent();
+        String action = intent != null ? intent.getAction() : "";
+        Log.d(TAG, "action:" + action);
+        if (action.equals(Settings.ACTION_REGIONAL_PREFERENCES_SETTINGS)) {
+            scrollToPreference(KEY_TEMPERATURE_PREFERENCE);
+        }
     }
 
     @Override
@@ -159,7 +166,7 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
         if (activity == null) {
             return;
         }
-        activity.setTitle(R.string.languages_settings);
+        activity.setTitle(R.string.language_and_region_settings);
 
         final boolean previouslyRestricted = mIsUiRestricted;
         mIsUiRestricted = isUiRestricted();
@@ -432,11 +439,8 @@ public class LanguageAndRegionSettings extends RestrictedDashboardFragment {
             new BaseSearchIndexProvider(R.xml.language_and_region_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    if (regionalPreferencesApiEnabled()) {
-                        return true;
-                    }
-                    return false;
+                    return true;
                 }
             };
 }
-// LINT.ThenChange(LanguageAndRegionScreen.kt)
+// LINT.ThenChange(LanguageAndRegionScreen.kt, LanguageAndRegionApiFirstScreen.kt)

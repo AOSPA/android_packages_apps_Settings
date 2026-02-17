@@ -22,6 +22,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.annotation.XmlRes
 import com.android.settings.R
+import com.android.settings.dashboard.DashboardFragmentRegistry
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.safetycenter.SafetySourcePreference
 import org.xmlpull.v1.XmlPullParser
 
@@ -188,6 +190,21 @@ object SafetyCenterSubpageRegistry {
             )
 
         return subpageConfigs[subpageIdToPreferenceKey[subpageId]]?.subpageFragmentClassName
+    }
+
+    /**
+     * Checks if a given subpage has any injected tiles.
+     *
+     * @param preferenceKey The string key for the subpage.
+     * @return `true` if the subpage has injected tiles, `false` otherwise.
+     */
+    fun hasInjectedTiles(preferenceKey: String): Boolean {
+        val subpageClassName =
+            subpageConfigs[preferenceKey]?.subpageFragmentClassName ?: return false
+        val categoryKey =
+            DashboardFragmentRegistry.PARENT_TO_CATEGORY_KEY_MAP[subpageClassName] ?: return false
+        val category = featureFactory.dashboardFeatureProvider.getTilesForCategory(categoryKey)
+        return category?.tiles?.isNotEmpty() ?: false
     }
 
     /**
@@ -365,6 +382,44 @@ object SafetyCenterSubpageRegistry {
             Log.e(TAG, "Error parsing SafetySourcePreferences from XML $xmlResId", e)
         }
         return safetySourcePrefConfigs
+    }
+
+    /**
+     * Checks if a Safety Center subpage has any data to display.
+     *
+     * This is true if the subpage has:
+     * - Any dynamic entries from its related safety sources.
+     * - OR Any injected tiles.
+     *
+     * @param context Context to access resources and system services.
+     * @param preferenceKey The string key identifying the subpage.
+     * @return `true` if the subpage has content to display, `false` otherwise.
+     */
+    fun isSubpageAvailable(context: Context, preferenceKey: String): Boolean {
+        if (hasInjectedTiles(preferenceKey)) {
+            Log.d(TAG, "[$preferenceKey] Has injected tiles, subpage is available")
+            return true
+        }
+
+        val uiData = SafetyCenterSearchIndexUtils.getCurrentSafetyCenterData(context)
+        if (uiData == null) {
+            Log.d(TAG, "[$preferenceKey] No SafetyCenterUiData, subpage not available")
+            return false
+        }
+
+        val relatedSafetySources = getXmlSafetySourceIds(context, preferenceKey)
+        if (relatedSafetySources.isEmpty()) {
+            Log.d(TAG, "[$preferenceKey] No related safety sources, subpage not available")
+            return false
+        }
+
+        val entries = uiData.getDynamicEntriesForSources(relatedSafetySources)
+        val isAvailable = entries.isNotEmpty()
+        Log.d(
+            TAG,
+            "[$preferenceKey] Found ${entries.size} entries, subpage available: $isAvailable",
+        )
+        return isAvailable
     }
 }
 

@@ -51,7 +51,6 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
         LifecycleObserver, OnResume, OnPause {
     private static final String TAG =
             AdbWirelessDebuggingPreferenceController.class.getSimpleName();
-    private final IAdbManager mAdbManager;
     private final ContentResolver mContentResolver;
     private final ContentObserver mSettingsObserver;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
@@ -64,7 +63,6 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
-        mAdbManager = IAdbManager.Stub.asInterface(ServiceManager.getService(Context.ADB_SERVICE));
         mSettingsObserver = new ContentObserver(mHandler) {
             @Override
             public void onChange(boolean selfChange, Uri uri) {
@@ -81,8 +79,17 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
 
     @Override
     public boolean isAvailable() {
+        return isAvailable(mContext);
+    }
+
+    public static boolean isAvailable(Context context) {
+        final IAdbManager adbManager =
+                IAdbManager.Stub.asInterface(ServiceManager.getService(Context.ADB_SERVICE));
+        if (adbManager == null) {
+            return false;
+        }
         try {
-            return mAdbManager.isAdbWifiSupported();
+            return adbManager.isAdbWifiSupported();
         } catch (RemoteException e) {
             Log.e(TAG, "Unable to check if adb wifi is supported.", e);
         }
@@ -140,8 +147,7 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
      * Returns true if connected to Wi-Fi network.
      */
     public static boolean isWifiConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(
-                Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = context.getSystemService(ConnectivityManager.class);
         if (cm == null) {
             return false;
         }
@@ -150,7 +156,9 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
             if (nc == null) {
                 continue;
             }
-            if (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+            if (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+                    // NET_CAPABILITY_INTERNET to filter out hotspot networks.
+                    && nc.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {
                 return true;
             }
         }
@@ -161,12 +169,10 @@ public class AdbWirelessDebuggingPreferenceController extends DeveloperOptionsPr
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean enabled = (Boolean) newValue;
         if (enabled && !isWifiConnected(mContext)) {
-            // Cannot enable ADB over Wi-Fi if we're not connected to wifi.
             Toast.makeText(
                     mContext, com.android.settingslib.R.string.adb_wireless_no_network_msg,
                             Toast.LENGTH_LONG)
                     .show();
-            return false;
         }
 
         Settings.Global.putInt(mContext.getContentResolver(),

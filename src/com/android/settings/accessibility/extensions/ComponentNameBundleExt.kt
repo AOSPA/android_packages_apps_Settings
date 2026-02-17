@@ -20,36 +20,41 @@ package com.android.settings.accessibility.extensions
 import android.content.ComponentName
 import android.os.Bundle
 import com.android.settings.flags.Flags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 
 /**
  * Retrieves a [ComponentName] from a [Bundle] by a given [key].
  *
- * This function first attempts to retrieve the value as a flattened `String` and if a `String`
- * value is not found, then attempts to retrieve the value as a `Parcelable`. This dual approach
- * provides compatibility for cases where the [ComponentName] might be stored in either format.
+ * This function retrieves the value associated with the key and checks its type.
+ * If the value is a [String], it attempts to unflatten it into a [ComponentName].
+ * If the value is a [ComponentName], it is returned directly.
+ * This provides compatibility for cases where the [ComponentName] might be stored in either format.
  *
  * @param key The key to look up in the Bundle.
  * @return The [ComponentName] associated with the key, or `null` if the key is not found, the
- *   flattened string is malformed, or the value is not a valid ComponentName parcelable.
+ *   value is not a [String] or [ComponentName], or if the string value is malformed.
  */
 fun Bundle.getComponentName(key: String): ComponentName? {
-    return getString(key)?.let { ComponentName.unflattenFromString(it) }
-        ?: getParcelable(key, ComponentName::class.java)
+    return when (@Suppress("DEPRECATION") val value = get(key)) {
+        is String -> ComponentName.unflattenFromString(value)
+        is ComponentName -> value
+        else -> null
+    }
 }
 
 /**
  * Puts a [ComponentName] into a [Bundle] with a given [key].
  *
  * This function is the counterpart to [getComponentName] and is useful for migrations where a
- * feature flag controls the data type of a parameter. It checks the
- * `Flags.catalystUseStringBundle()` flag to determine whether to store the value as a flattened
- * `String` or as a `Parcelable`.
+ * feature flag controls the data type of a parameter. It checks [Flags.catalystUseStringBundle]
+ * and [CatalystFlagProviderFactory.catalystUseKeyParameters] to determine whether to store the
+ * value as a flattened `String` or as a `Parcelable`.
  *
  * @param key The key with which to associate the value.
  * @param componentName The [ComponentName] to store.
  */
 fun Bundle.putComponentName(key: String, componentName: ComponentName) {
-    if (Flags.catalystUseStringBundle()) {
+    if (Flags.catalystUseStringBundle() || CatalystFlagProviderFactory.catalystUseKeyParameters()) {
         putString(key, componentName.flattenToString())
     } else {
         putParcelable(key, componentName)

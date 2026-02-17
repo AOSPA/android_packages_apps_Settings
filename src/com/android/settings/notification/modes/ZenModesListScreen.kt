@@ -22,10 +22,10 @@ import android.os.UserManager.DISALLOW_ADJUST_VOLUME
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.ModesSettingsActivity
+import com.android.settings.Utils
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceIconProvider
@@ -53,7 +53,7 @@ open class ZenModesListScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.top_level_priority_modes_purpose
 
@@ -80,7 +80,12 @@ open class ZenModesListScreen :
             else -> com.android.internal.R.drawable.ic_zen_priority_modes
         }
 
-    override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
+    override fun isEnabled(context: Context): Boolean {
+        if (Utils.shouldHideModesInDemoMode(context)) {
+            return false
+        }
+        return super<PreferenceRestrictionMixin>.isEnabled(context)
+    }
 
     override val restrictionKeys: Array<String> = arrayOf(DISALLOW_ADJUST_VOLUME)
 
@@ -88,8 +93,6 @@ open class ZenModesListScreen :
 
     override fun tags(context: Context) =
         arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkModes25q4()
 
     override fun hasCompleteHierarchy() = false
 

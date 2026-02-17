@@ -58,7 +58,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.android.settings.R;
-import com.android.settings.connectivity.Flags;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.utils.AndroidKeystoreAliasLoader;
 import com.android.settings.widget.EnhancedSettingsSpinnerAdapter;
@@ -97,6 +97,8 @@ import java.util.stream.IntStream;
 @Config(shadows = {WifiConfigController2Test.ShadowWifiUtils.class})
 public class WifiConfigController2Test {
 
+    static final int USER_ID_CURRENT = Process.myUserHandle().getIdentifier();
+    static final int USER_ID_OTHER = USER_ID_CURRENT + 1;
     static final String WIFI_EAP_TLS_V1_3 = "TLS v1.3";
 
     @Rule
@@ -246,7 +248,7 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void saveSharedField() {
         when(mUserManager.getUserCount()).thenReturn(2);
         createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
@@ -262,7 +264,7 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void editConfigurationFieldState() {
         when(mUserManager.getUserCount()).thenReturn(2);
         createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
@@ -281,7 +283,7 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkSharingFieldsVisibility() {
         when(mUserManager.getUserCount()).thenReturn(1);
         createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
@@ -296,7 +298,7 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkSharingFieldsVisibilityHSU_joinNetwork() {
         ShadowWifiUtils.setIsAtLoginScreen(true);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -319,7 +321,7 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkSharingFieldsVisibilityHSU_addNetwork() {
         ShadowWifiUtils.setIsAtLoginScreen(true);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -338,7 +340,7 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkSharingFieldsVisibility_modifyNetwork() {
         when(mUserManager.getUserCount()).thenReturn(2);
         when(mWifiEntry.isSaved()).thenReturn(true);
@@ -360,14 +362,14 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkIpSpinnerState_networkNotOwned_multipleUsers() {
         when(mUserManager.getUserCount()).thenReturn(2);
         when(mWifiEntry.isSaved()).thenReturn(true);
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
@@ -375,14 +377,14 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkIpSpinnerState_networkNotOwned_singleUser() {
         when(mUserManager.getUserCount()).thenReturn(1);
         when(mWifiEntry.isSaved()).thenReturn(true);
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
@@ -390,14 +392,14 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkIpSpinnerState_networkOwned_multipleUsers() {
         when(mUserManager.getUserCount()).thenReturn(2);
         when(mWifiEntry.isSaved()).thenReturn(true);
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Process.myUid();
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View ipSettingsSpinner = mView.findViewById(R.id.ip_settings);
@@ -405,14 +407,14 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkProxySpinnerState_networkNotOwned_multipleUsers() {
         when(mUserManager.getUserCount()).thenReturn(2);
         when(mWifiEntry.isSaved()).thenReturn(true);
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
@@ -420,14 +422,14 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkProxySpinnerState_networkNotOwned_singleUser() {
         when(mUserManager.getUserCount()).thenReturn(1);
         when(mWifiEntry.isSaved()).thenReturn(true);
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
@@ -435,14 +437,14 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkProxySpinnerState_networkOwned_multipleUsers() {
         when(mUserManager.getUserCount()).thenReturn(2);
         when(mWifiEntry.isSaved()).thenReturn(true);
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Process.myUid();
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         final View proxySettingsSpinner = mView.findViewById(R.id.proxy_settings);
@@ -450,14 +452,14 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkFieldsState_networkNotEditable_allFieldsDisabled() {
         when(mUserManager.getUserCount()).thenReturn(2);
         when(mWifiEntry.isSaved()).thenReturn(true);
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Integer.MAX_VALUE;
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_OTHER);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
 
         // Check sharing switches
@@ -493,7 +495,7 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkSharingSwitchDisablement_guestUser() {
         ShadowWifiUtils.setIsGuestUser(true);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -509,7 +511,7 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_WIFI_MULTIUSER)
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkFieldsState_networkEditable_allFieldsEnabled() {
         ShadowWifiUtils.setIsGuestUser(false);
         when(mUserManager.getUserCount()).thenReturn(2);
@@ -517,7 +519,7 @@ public class WifiConfigController2Test {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
         when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
         when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        mockWifiConfig.creatorUid = Process.myUid();
+        when(mockWifiConfig.getCreatorUserId()).thenReturn(USER_ID_CURRENT);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
         shadowOf(Looper.getMainLooper()).idle();
 

@@ -30,6 +30,7 @@ import com.android.settings.core.TogglePreferenceController;
 /**
  * The controller of the Spatial audio setting for wired headphones in the SoundSettings.
  */
+// LINT.IfChange
 public class SpatialAudioWiredHeadphonesController extends TogglePreferenceController {
 
     private final Spatializer mSpatializer;
@@ -70,3 +71,4 @@ public class SpatialAudioWiredHeadphonesController extends TogglePreferenceContr
         return R.string.menu_key_sound;
     }
 }
+// LINT.ThenChange(SpatialAudioApiScreen.kt)

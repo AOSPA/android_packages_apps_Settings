@@ -17,7 +17,9 @@
 package com.android.settings.users;
 
 import static com.android.settings.flags.Flags.showAddUsersFromSigninToggle;
+import static com.android.settings.flags.Flags.showAddUsersFromSigninToggle2;
 import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf;
+import static com.android.settings.flags.Flags.showUserDetailsSettingsForSelf2;
 import static com.android.settingslib.Utils.getColorAttrDefaultColor;
 
 import android.Manifest;
@@ -119,6 +121,7 @@ import java.util.stream.Collectors;
  * The first user in the list is always the current user.
  * Owner is the primary user.
  */
+// LINT.IfChange
 @SearchIndexable
 public class UserSettings extends SettingsPreferenceFragment
         implements Preference.OnPreferenceClickListener,
@@ -139,6 +142,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private static final String KEY_ADD_SUPERVISED_USER = "supervised_user_add";
     private static final String KEY_ADD_USER_WHEN_LOCKED = "user_settings_add_users_when_locked";
     private static final String KEY_ADD_USER_FROM_SIGNIN = "add_users_from_signin";
+    private static final String KEY_ADD_GUEST_FROM_SIGNIN = "add_guests_from_signin";
     private static final String KEY_ADD_USER_SETTINGS_CATEGORY = "add_user_settings_category";
     private static final String KEY_ENABLE_GUEST_TELEPHONY = "enable_guest_calling";
     private static final String KEY_MULTIUSER_TOP_INTRO = "multiuser_top_intro";
@@ -247,6 +251,8 @@ public class UserSettings extends SettingsPreferenceFragment
     private AddUserWhenLockedPreferenceController mAddUserWhenLockedPreferenceController;
     @SuppressWarnings("NullAway")
     private AddUserFromSignInPreferenceController mAddUserFromSignInPreferenceController;
+    @SuppressWarnings("NullAway")
+    private AddGuestFromSignInPreferenceController mAddGuestFromSignInPreferenceController;
     private GuestTelephonyPreferenceController mGuestTelephonyPreferenceController;
     private RemoveGuestOnExitPreferenceController mRemoveGuestOnExitPreferenceController;
     private MultiUserTopIntroPreferenceController mMultiUserTopIntroPreferenceController;
@@ -335,6 +341,9 @@ public class UserSettings extends SettingsPreferenceFragment
         mAddUserFromSignInPreferenceController = new AddUserFromSignInPreferenceController(
                 activity, KEY_ADD_USER_FROM_SIGNIN);
 
+        mAddGuestFromSignInPreferenceController = new AddGuestFromSignInPreferenceController(
+                activity, KEY_ADD_GUEST_FROM_SIGNIN);
+
         mGuestTelephonyPreferenceController = new GuestTelephonyPreferenceController(
                 activity, KEY_ENABLE_GUEST_TELEPHONY);
 
@@ -353,6 +362,7 @@ public class UserSettings extends SettingsPreferenceFragment
         final PreferenceScreen screen = getPreferenceScreen();
         mAddUserWhenLockedPreferenceController.displayPreference(screen);
         mAddUserFromSignInPreferenceController.displayPreference(screen);
+        mAddGuestFromSignInPreferenceController.displayPreference(screen);
         mGuestTelephonyPreferenceController.displayPreference(screen);
         mRemoveGuestOnExitPreferenceController.displayPreference(screen);
         mMultiUserTopIntroPreferenceController.displayPreference(screen);
@@ -365,6 +375,9 @@ public class UserSettings extends SettingsPreferenceFragment
 
         screen.findPreference(mAddUserFromSignInPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mAddUserFromSignInPreferenceController);
+
+        screen.findPreference(mAddGuestFromSignInPreferenceController.getPreferenceKey())
+                .setOnPreferenceChangeListener(mAddGuestFromSignInPreferenceController);
 
         screen.findPreference(mGuestTelephonyPreferenceController.getPreferenceKey())
                 .setOnPreferenceChangeListener(mGuestTelephonyPreferenceController);
@@ -395,7 +408,7 @@ public class UserSettings extends SettingsPreferenceFragment
         mMePreference = new UserPreference(getPrefContext(), null /* attrs */, myUserId);
         mMePreference.setKey(KEY_USER_ME);
         mMePreference.setOnPreferenceClickListener(this);
-        if (showUserDetailsSettingsForSelf()) {
+        if (flagShowUserDetailsSettingsForSelf()) {
             mMePreference.setOnEditClickListener((view) -> showDialog(DIALOG_USER_PROFILE_EDITOR));
         }
 
@@ -446,6 +459,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 mAddUserWhenLockedPreferenceController.getPreferenceKey()));
         mAddUserFromSignInPreferenceController.updateState(screen.findPreference(
                 mAddUserFromSignInPreferenceController.getPreferenceKey()));
+        mAddGuestFromSignInPreferenceController.updateState(screen.findPreference(
+                mAddGuestFromSignInPreferenceController.getPreferenceKey()));
         mGuestTelephonyPreferenceController.updateState(screen.findPreference(
                 mGuestTelephonyPreferenceController.getPreferenceKey()));
         mTimeoutToDockUserPreferenceController.updateState(screen.findPreference(
@@ -500,7 +515,7 @@ public class UserSettings extends SettingsPreferenceFragment
         if (!mUserCaps.mIsMain
                 && !isCurrentUserGuest()
                 && !mUserManager.isProfile()
-                && !showUserDetailsSettingsForSelf()) {
+                && !flagShowUserDetailsSettingsForSelf()) {
             String nickname = mUserManager.getUserName();
             MenuItem removeThisUser = menu.add(0, MENU_REMOVE_USER, pos++,
                     getResources().getString(R.string.user_remove_user_menu, nickname));
@@ -709,7 +724,7 @@ public class UserSettings extends SettingsPreferenceFragment
     private void onUserCreated(UserInfo userInfo, Context context) {
         hideUserCreatingDialog();
         mAddingUser = false;
-        if (showAddUsersFromSigninToggle()
+        if (flagShowAddUsersFromSigninToggle()
                 && getPrefContext()
                         .getResources()
                         .getBoolean(
@@ -1043,7 +1058,7 @@ public class UserSettings extends SettingsPreferenceFragment
     }
 
     private boolean canEditUserInfo() {
-        return !showAddUsersFromSigninToggle()
+        return !flagShowAddUsersFromSigninToggle()
                 || !getPrefContext()
                         .getResources()
                         .getBoolean(com.android.internal.R.bool.config_enableUserInfoSetupInSuw);
@@ -1563,6 +1578,12 @@ public class UserSettings extends SettingsPreferenceFragment
             // "reset guest on exit" preference is shown hence also make guest category visible
             mGuestUserCategory.setVisible(true);
         }
+        final Preference allowAddGuests = getPreferenceScreen().findPreference(
+                mAddGuestFromSignInPreferenceController.getPreferenceKey());
+        mAddGuestFromSignInPreferenceController.updateState(allowAddGuests);
+        if (mAddGuestFromSignInPreferenceController.isAvailable()) {
+            mGuestUserCategory.setVisible(true);
+        }
         if (isCurrentUserGuest()) {
             // guest category is not visible for guest user.
             mGuestUserCategory.setVisible(false);
@@ -1839,7 +1860,7 @@ public class UserSettings extends SettingsPreferenceFragment
         }
         if (pref == mMePreference) {
             if (!isCurrentUserGuest()) {
-                if (showUserDetailsSettingsForSelf()) {
+                if (flagShowUserDetailsSettingsForSelf()) {
                     UserInfo userInfo = mUserManager.getUserInfo(UserHandle.myUserId());
                     openUserDetails(userInfo, false);
                 } else {
@@ -2042,4 +2063,13 @@ public class UserSettings extends SettingsPreferenceFragment
                     return niks;
                 }
             };
+
+    private boolean flagShowAddUsersFromSigninToggle() {
+        return showAddUsersFromSigninToggle() || showAddUsersFromSigninToggle2();
+    }
+
+    private boolean flagShowUserDetailsSettingsForSelf() {
+        return showUserDetailsSettingsForSelf() || showUserDetailsSettingsForSelf2();
+    }
 }
+// LINT.ThenChange(UserSettingsScreenApi.kt)

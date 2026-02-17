@@ -18,6 +18,7 @@ package com.android.settings.connecteddevice.display
 
 import android.content.Context
 import android.os.Bundle
+import android.view.Display
 import android.view.InputDevice
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -30,12 +31,12 @@ import com.android.settings.R
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settings.flags.Flags
 import com.android.settings.search.BaseSearchIndexProvider
+import com.android.settings.utils.DesktopSettingsUtils
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
 import com.android.settingslib.search.SearchIndexable
 import com.android.settingslib.search.SearchIndexableRaw
 import com.google.android.material.appbar.AppBarLayout
 import com.google.common.collect.HashBiMap
-import kotlin.math.min
 
 /**
  * The main fragment that holds both the DisplayTopologyPreferenceView and the
@@ -60,6 +61,23 @@ open class TabbedDisplayPreferenceFragment(
     // Map toolbar indices to display IDs
     private val toolbarIdxToDisplayIdMapping: HashBiMap<Int, Int> = HashBiMap.create()
 
+    private var floatingToolbar: View? = null
+    private val toolbarLayoutListener =
+        View.OnLayoutChangeListener { v, _, _, _, _, _, _, _, _ ->
+            val params = v.layoutParams as? ViewGroup.MarginLayoutParams
+            val bottomMargin = params?.bottomMargin ?: 0
+            val totalPadding = v.height + bottomMargin * 2
+            // Font / display size might be set to be big enough to start obscuring the content
+            // behind. Add toolbar height as pref padding to let scrolling beyond the item list to
+            // show prefs behind the toolbar.
+            selectedDisplayPrefContainer.setPadding(
+                selectedDisplayPrefContainer.paddingLeft,
+                selectedDisplayPrefContainer.paddingTop,
+                selectedDisplayPrefContainer.paddingRight,
+                totalPadding,
+            )
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (testViewModel != null) {
@@ -67,6 +85,25 @@ open class TabbedDisplayPreferenceFragment(
             viewModel = testViewModel
         } else {
             viewModel = ViewModelProvider(this).get(DisplayPreferenceViewModel::class.java)
+        }
+
+        arguments?.let { args ->
+            if (args.containsKey(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG)) {
+                val displayId = args.getInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG)
+
+                // Ensure the display is valid and enabled before selecting it to avoid invalid
+                // state
+                val isDisplayEnabled =
+                    viewModel.injector.getDisplays().any {
+                        it.id == displayId &&
+                            it.isEnabled == DisplayIsEnabled.YES &&
+                            (it.id == Display.DEFAULT_DISPLAY || it.isConnectedDisplay)
+                    }
+
+                if (isDisplayEnabled) {
+                    viewModel.updateSelectedDisplay(displayId)
+                }
+            }
         }
     }
 
@@ -88,6 +125,12 @@ open class TabbedDisplayPreferenceFragment(
             view.findViewById(R.id.selected_display_preference_container) as FocusAwareFrameLayout
         noDisplayConnectedLayout = view.findViewById(R.id.no_display_connected_layout)
 
+        floatingToolbar =
+            activity.findViewById<View?>(
+                com.android.settingslib.collapsingtoolbar.R.id.floating_toolbar
+            )
+        floatingToolbar?.addOnLayoutChangeListener(toolbarLayoutListener)
+
         setupAppBarLayout()
         setupDisplayTopologyPreferenceView(view)
         setupSelectedDisplayPreferenceFragment(savedInstanceState)
@@ -108,11 +151,17 @@ open class TabbedDisplayPreferenceFragment(
             appBarLayout.setOnGenericMotionListener(null)
         }
         getCurrentActivity()?.removeOnItemSelectedListener()
+        floatingToolbar?.removeOnLayoutChangeListener(toolbarLayoutListener)
     }
 
     @VisibleForTesting
     internal open fun createDisplayTopologyPreferenceView(): DisplayTopologyPreferenceView {
-        return DisplayTopologyPreferenceView(viewModel.injector)
+        val selectedId = viewModel.uiState.value?.selectedDisplayId
+        return if (selectedId != null && selectedId != -1) {
+            DisplayTopologyPreferenceView(viewModel.injector, selectedId)
+        } else {
+            DisplayTopologyPreferenceView(viewModel.injector)
+        }
     }
 
     @VisibleForTesting
@@ -172,9 +221,13 @@ open class TabbedDisplayPreferenceFragment(
             // Propagate scroll events to selectedDisplayPrefContainer to match the
             // `appbar_scrolling_view_behavior` property
             val newEvent = MotionEvent.obtain(event)
-            // Limit the Y position as any yCoord >= target.height will be ignored
-            val maxY = min(newEvent.y, (selectedDisplayPrefContainer.height - 1).toFloat())
-            newEvent.offsetLocation(/* deltaX= */ 0f, maxY - newEvent.y)
+            // When settings window is resized to minimum, and container is not visible, the
+            // rendered bounds of selectedDisplayPrefContainer might be smaller than the fetched
+            // width/height. So height/2 could overshoot the set location. Setting 0 for y would be
+            // safer to ensure that events are sent. Meanwhile, for x, setting it as 0 might hit
+            // padding / margins, as the width is not affected by scrolling, it's safe to set
+            // width/2 here.
+            newEvent.setLocation((selectedDisplayPrefContainer.width / 2).toFloat(), 0f)
             selectedDisplayPrefContainer.dispatchGenericMotionEvent(newEvent)
             newEvent.recycle()
             return@setOnGenericMotionListener true
@@ -318,8 +371,13 @@ open class TabbedDisplayPreferenceFragment(
                     indexInfo.title = context.getString(R.string.external_display_settings_title)
                     indexInfo.keywords =
                         context.getString(R.string.keywords_external_display_settings)
-                    indexInfo.screenTitle =
-                        context.getString(R.string.connected_devices_dashboard_title)
+                    if (DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(context)) {
+                        indexInfo.screenTitle =
+                            context.getString(R.string.display_settings)
+                    } else {
+                        indexInfo.screenTitle =
+                            context.getString(R.string.connected_devices_dashboard_title)
+                    }
                     rawData.add(indexInfo)
                     return rawData
                 }

@@ -28,11 +28,13 @@ import static com.android.internal.accessibility.common.ShortcutConstants.UserSh
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.KEY_GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.QUICK_SETTINGS;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TOP_ROW_KEY;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.TRIPLETAP;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Insets;
 import android.graphics.Rect;
@@ -74,7 +76,8 @@ public final class AccessibilityUtil {
             SOFTWARE, // FAB displays before gesture. Navbar displays without gesture.
             GESTURE,
             HARDWARE,
-            TRIPLETAP
+            TOP_ROW_KEY,
+            TRIPLETAP,
     };
     // LINT.ThenChange(/src/com/android/settings/accessibility/shortcuts/ui/EditShortcutsScreen.kt:shortcut_type_ui_order)
 
@@ -164,6 +167,23 @@ public final class AccessibilityUtil {
                 == NAV_BAR_MODE_GESTURAL;
     }
 
+    /**
+     * Determines if the accessibility button location can be configured.
+     */
+    public static boolean isAccessibilityButtonLocationConfigurable(Context context) {
+        // 3-button navigation always allows configuring the button location.
+        if (!isGestureNavigateEnabled(context)) {
+            return true;
+        }
+
+        // Conditions to force floating menu mode:
+        // 1. Flag is off (original behavior): Always use floating menu in gestural nav.
+        // 2. Flag is on: Only use floating menu if nav bar can move (i.e. not persistent).
+        final boolean navBarCanMove = context.getResources().getBoolean(
+                com.android.internal.R.bool.config_navBarCanMove);
+        return android.view.accessibility.Flags.allowA11yButtonOnLargeScreen() && !navBarCanMove;
+    }
+
     /** Determines if a accessibility floating menu is being used. */
     public static boolean isFloatingMenuEnabled(Context context) {
         return Settings.Secure.getIntForUser(context.getContentResolver(),
@@ -175,6 +195,16 @@ public final class AccessibilityUtil {
     public static boolean isTouchExploreEnabled(Context context) {
         final AccessibilityManager am = context.getSystemService(AccessibilityManager.class);
         return am.isTouchExplorationEnabled();
+    }
+
+    /** Determines if a touch shortcut should be made available. */
+    public static boolean isTouchShortcutAvailable(Context context) {
+        final boolean isTouchEnabled = context.getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_TOUCHSCREEN)
+                || context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_FAKETOUCH);
+
+        return isTouchEnabled
+                || !com.android.settings.accessibility.Flags.desktopMagnificationSettingsPolish();
     }
 
     /**

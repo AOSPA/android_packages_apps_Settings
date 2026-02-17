@@ -26,12 +26,11 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.BillingCycleActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.subscriptionManager
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -61,7 +60,7 @@ private constructor(
     PreferenceBindingPlaceholder {
 
     private val subId: Int =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!![Settings.EXTRA_SUB_ID]?.toIntOrNull()
                 ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         } else {
@@ -90,8 +89,6 @@ private constructor(
 
     override fun getMetricsCategory() = SettingsEnums.BILLING_CYCLE
 
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkNetworkAndInternet25q4()
-
     override fun fragmentClass(): Class<out Fragment> = BillingCycleSettings::class.java
 
     override fun hasCompleteHierarchy() = false
@@ -100,7 +97,7 @@ private constructor(
         preferenceHierarchy(context) {}
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             makeLaunchIntent(
                 context,
                 BillingCycleActivity::class.java,

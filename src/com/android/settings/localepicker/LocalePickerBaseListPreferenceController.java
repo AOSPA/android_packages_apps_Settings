@@ -20,6 +20,7 @@ import static com.android.settings.localepicker.LocaleUtils.getFirstTranslatedLo
 import static com.android.settings.localepicker.LocaleUtils.getUserLocaleList;
 import static com.android.settings.localepicker.LocaleUtils.mayAppendUnicodeTags;
 import static com.android.settings.localepicker.RegionAndNumberingSystemPickerFragment.EXTRA_IS_NUMBERING_SYSTEM;
+import static com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.sameLanguageAndScript;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -27,7 +28,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.LocaleList;
 import android.provider.Settings;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 
@@ -46,7 +46,6 @@ import com.android.internal.app.LocaleStore;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.SubSettingLauncher;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.regionalpreferences.RegionDialogFragment;
 import com.android.settingslib.core.instrumentation.Instrumentable;
@@ -302,27 +301,23 @@ public abstract class LocalePickerBaseListPreferenceController extends
             localeInfo = mLocaleList.iterator().next();
         }
         if (shouldShowLocaleEditor) {
-            if (Flags.regionalPreferencesApiEnabled()) {
-                int index = indexOfSameLanguageAndScript(localeInfo.getLocale());
-                switch(getDialogEvent(index)) {
-                    case SHOW_DIALOG_FOR_SYSTEM_LANGUAGE:
-                        showDialogForRegionChanged(
-                                localeInfo,
-                                null,
-                                DIALOG_CHANGE_SYSTEM_LOCALE_REGION);
-                        break;
-                    case SHOW_DIALOG_FOR_PREFERRED_LANGUAGE:
-                        Locale replacedLocale = LocaleList.getDefault().get(index);
-                        showDialogForRegionChanged(
-                                localeInfo,
-                                replacedLocale,
-                                DIALOG_CHANGE_PREFERRED_LOCALE_REGION);
-                        break;
-                    default:
-                        dispose(localeInfo);
-                }
-            } else {
-                dispose(localeInfo);
+            int index = indexOfSameLanguageAndScript(localeInfo.getLocale());
+            switch(getDialogEvent(index)) {
+                case SHOW_DIALOG_FOR_SYSTEM_LANGUAGE:
+                    showDialogForRegionChanged(
+                            localeInfo,
+                            null,
+                            DIALOG_CHANGE_SYSTEM_LOCALE_REGION);
+                    break;
+                case SHOW_DIALOG_FOR_PREFERRED_LANGUAGE:
+                    Locale replacedLocale = LocaleList.getDefault().get(index);
+                    showDialogForRegionChanged(
+                            localeInfo,
+                            replacedLocale,
+                            DIALOG_CHANGE_PREFERRED_LOCALE_REGION);
+                    break;
+                default:
+                    dispose(localeInfo);
             }
         } else {
             showRegionAndNumberingSystemPickerFragment(localeInfo);
@@ -429,19 +424,5 @@ public abstract class LocalePickerBaseListPreferenceController extends
             }
         }
         return index;
-    }
-
-    private static boolean sameLanguageAndScript(Locale source, Locale target) {
-        String sourceLanguage = source.getLanguage();
-        String targetLanguage = target.getLanguage();
-        String sourceLocaleScript = source.getScript();
-        String targetLocaleScript = target.getScript();
-        if (sourceLanguage.equals(targetLanguage)) {
-            if (!sourceLocaleScript.isEmpty() && !targetLocaleScript.isEmpty()) {
-                return sourceLocaleScript.equals(targetLocaleScript);
-            }
-            return true;
-        }
-        return false;
     }
 }

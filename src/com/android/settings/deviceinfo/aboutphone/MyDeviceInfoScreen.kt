@@ -31,7 +31,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.MyDeviceInfoActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.deviceinfo.DeviceNamePreference
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoScreen
 import com.android.settings.deviceinfo.imei.ImeiPreference
@@ -51,6 +50,7 @@ import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
+// LINT.IfChange
 @ProvidePreferenceScreen(MyDeviceInfoScreen.KEY)
 open class MyDeviceInfoScreen :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceIconProvider {
@@ -89,16 +89,6 @@ open class MyDeviceInfoScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            if (Flags.catalystAboutPhoneDeviceName()) {
-                +PreferenceCategory(
-                    key = BASIC_INFO_CATEGORY,
-                    purpose = R.string.basic_info_category_purpose,
-                    title = R.string.my_device_info_basic_info_category_title,
-                ) +=
-                    {
-                        +DeviceNamePreference(context) order 1
-                    }
-            }
             +PreferenceCategory(
                 key = DEVICE_DETAIL_CATEGORY,
                 purpose = R.string.device_detail_category_purpose,
@@ -123,7 +113,7 @@ open class MyDeviceInfoScreen :
     companion object {
         const val KEY = "my_device_info_pref_screen"
 
-        internal const val BASIC_INFO_CATEGORY = "basic_info_category"
         internal const val DEVICE_DETAIL_CATEGORY = "device_detail_category"
     }
 }
+// LINT.ThenChange(MyDeviceInfoFragment.java, MyDeviceInfoApiFirstScreen.kt)

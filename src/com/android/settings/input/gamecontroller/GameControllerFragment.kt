@@ -23,6 +23,7 @@ import android.hardware.input.InputDeviceIdentifier
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.VisibleForTesting
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -32,6 +33,8 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.dashboard.DashboardFragment
+import com.android.settings.input.gamecontroller.GameControllerRemappingDialogFragment.Companion.ARGS_FROM_PREFERENCE_KEY
+import com.android.settings.input.gamecontroller.GameControllerRemappingDialogFragment.Companion.ARGS_TO_PREFERENCE_KEY
 import com.android.settingslib.widget.ButtonPreference
 import kotlinx.coroutines.launch
 
@@ -72,21 +75,25 @@ internal constructor(private var viewModelFactory: ViewModelProvider.Factory? = 
         viewModel.buttonRemapping.observe(viewLifecycleOwner) { newMap -> updatePreferenceStates() }
         viewModel.axisRemapping.observe(viewLifecycleOwner) { newMap -> updatePreferenceStates() }
 
-        findPreference<ButtonPreference>(RESET_BUTTON_PREFERENCE_KEY)
-            ?.setOnPreferenceClickListener {
-                val dialog = GameControllerResetDialogFragment(viewModel)
-                dialog.show(parentFragmentManager, RESET_DIALOG_TAG)
-                true
-            }
+        findPreference<ButtonPreference>(RESET_BUTTON_PREFERENCE_KEY)?.setOnClickListener {
+            val dialog = GameControllerResetDialogFragment(viewModel)
+            dialog.show(parentFragmentManager, RESET_DIALOG_TAG)
+            true
+        }
 
         // Observe requests to show the remapping dialog
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.showRemappingDialog.collect { request ->
-                    GameControllerRemappingDialogFragment.show(
+                    val dialog = GameControllerRemappingDialogFragment(viewModel)
+                    dialog.arguments =
+                        bundleOf(
+                            ARGS_FROM_PREFERENCE_KEY to request.fromPreferenceKey,
+                            ARGS_TO_PREFERENCE_KEY to request.toPreferenceKey,
+                        )
+                    dialog.show(
                         parentFragmentManager,
-                        request.fromPreferenceKey,
-                        request.toPreferenceKey,
+                        GameControllerRemappingDialogFragment::class.simpleName,
                     )
                 }
             }

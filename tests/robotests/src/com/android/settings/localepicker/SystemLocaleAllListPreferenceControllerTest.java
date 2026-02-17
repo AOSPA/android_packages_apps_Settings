@@ -15,8 +15,6 @@
  */
 package com.android.settings.localepicker;
 
-import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
-import static com.android.settings.flags.Flags.FLAG_REGIONAL_PREFERENCES_API_ENABLED;
 import static com.android.settings.localepicker.LocalePickerBaseListPreferenceController.TAG_DIALOG_CHANGE_REGION_FOR_SYSTEM_LANGUAGE;
 import static com.android.settings.localepicker.LocalePickerBaseListPreferenceController.TAG_DIALOG_CHANGE_REGION_PREFERRED_LANGUAGE;
 
@@ -35,14 +33,10 @@ import static org.mockito.Mockito.when;
 import android.app.Activity;
 import android.app.IActivityManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.LocaleList;
 import android.os.Looper;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 
@@ -60,7 +54,6 @@ import com.android.settings.testutils.shadow.ShadowActivityManager;
 import com.android.settings.testutils.shadow.ShadowFragment;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -105,8 +98,6 @@ public class SystemLocaleAllListPreferenceControllerTest {
     private FragmentTransaction mFragmentTransaction;
     @Mock
     private FragmentManager mFragmentManager;
-
-    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setUp() throws Exception {
@@ -347,40 +338,6 @@ public class SystemLocaleAllListPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(FLAG_REGIONAL_PREFERENCES_API_ENABLED)
-    public void switchFragment_shouldShowLocaleEditor() {
-        when(mSupportedLocaleInfo_1.isSuggested()).thenReturn(true);
-
-        mController.setFragmentManager(mFragmentManager);
-        mController.shouldShowLocaleEditor(mSupportedLocaleInfo_1);
-        mController.switchFragment(mSupportedLocaleInfo_1);
-
-        verify(mFragmentManager).popBackStack(
-                anyString(), eq(FragmentManager.POP_BACK_STACK_INCLUSIVE));
-    }
-
-    @Test
-    @DisableFlags(FLAG_REGIONAL_PREFERENCES_API_ENABLED)
-    public void switchFragment_shouldShowRegionNumberingPicker() {
-        mController.displayPreference(mPreferenceScreen);
-        Context activityContext = spy(Robolectric.setupActivity(Activity.class));
-        mController = new SystemLocaleAllListPreferenceController(activityContext, KEY_SUPPORTED,
-                null);
-        when(mSupportedLocaleInfo_1.isSuggested()).thenReturn(false);
-        when(mSupportedLocaleInfo_1.isSystemLocale()).thenReturn(false);
-        when(mSupportedLocaleInfo_1.getParent()).thenReturn(null);
-
-        mController.setFragmentManager(mFragmentManager);
-        mController.shouldShowLocaleEditor(mSupportedLocaleInfo_1);
-        mController.switchFragment(mSupportedLocaleInfo_1);
-
-        Intent intent = Shadows.shadowOf(mActivity.getApplication()).getNextStartedActivity();
-        assertThat(intent.getStringExtra(EXTRA_SHOW_FRAGMENT))
-                .isEqualTo(RegionAndNumberingSystemPickerFragment.class.getName());
-    }
-
-    @Test
-    @EnableFlags(FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void disposedEvent_switchFragment_shouldShowLocaleEditor() {
         ShadowLocaleList.reset();
         Locale defaultLocale1 = new Locale("de", "DE");
@@ -398,7 +355,6 @@ public class SystemLocaleAllListPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void changeSystemLanguageRegion_switchFragment_showDialogForTheEvent() {
         ShadowLocaleList.reset();
         Locale defaultLocale1 = new Locale("en", "IN"); //mSupportedLocaleInfo_1 is en_US
@@ -416,7 +372,6 @@ public class SystemLocaleAllListPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(FLAG_REGIONAL_PREFERENCES_API_ENABLED)
     public void changePreferredLanguageRegion_switchFragment_showDialogForTheEvent() {
         ShadowLocaleList.reset();
         Locale defaultLocale1 = new Locale("fr", "FR");

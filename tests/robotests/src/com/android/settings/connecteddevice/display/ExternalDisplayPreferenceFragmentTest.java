@@ -83,6 +83,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settings.R;
 import com.android.settings.RestrictedListPreference;
 import com.android.settings.connecteddevice.display.ExternalDisplayPreferenceFragment.PrefBasics;
+import com.android.settings.testutils.shadow.ShadowDesktopSettingsUtils;
 import com.android.settingslib.search.Indexable;
 import com.android.settingslib.search.SearchIndexableRaw;
 import com.android.settingslib.widget.MainSwitchPreference;
@@ -94,12 +95,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.robolectric.annotation.Config;
 
 import java.util.List;
 import java.util.Locale;
 
 /** Unit tests for {@link ExternalDisplayPreferenceFragment}.  */
 @RunWith(AndroidJUnit4.class)
+@Config(shadows = {ShadowDesktopSettingsUtils.class})
 public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBase {
 
     @Rule
@@ -157,6 +160,52 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
             }
         }
         assertThat(actualCount).isEqualTo(expectedCount);
+    }
+
+    @Test
+    @UiThreadTest
+    public void testShowDisplayList_withExistentDisplayIdArg_showsOnlyThatDisplay() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
+
+        mFragment = new TestableExternalDisplayPreferenceFragment();
+        Bundle args = new Bundle();
+        args.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, mDisplays.get(1).getId());
+        mFragment.setArguments(args);
+        mFragment.onCreateCallback(null);
+        mFragment.onActivityCreatedCallback(null);
+        mFragment.onStartCallback();
+        mHandler.flush();
+
+        assertDisplayListCount(1);
+        assertThat("" + getExternalDisplayCategory(0).getTitle()).isEqualTo("Overlay #1");
+    }
+
+    @Test
+    @UiThreadTest
+    public void testShowDisplayList_withNonExistentDisplayIdArg_showsNoDisplays() {
+        mFlags.setFlag(FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, false);
+
+        mFragment = new TestableExternalDisplayPreferenceFragment();
+        Bundle args = new Bundle();
+        args.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, 123456789);
+        mFragment.setArguments(args);
+        mFragment.onCreateCallback(null);
+        mFragment.onActivityCreatedCallback(null);
+        mFragment.onStartCallback();
+        mHandler.flush();
+
+        assertDisplayListCount(0);
+
+        // Verify empty state is shown
+        var mainPref = (MainSwitchPreference) mPreferenceScreen.findPreference(
+                PrefBasics.EXTERNAL_DISPLAY_USE.keyForNth(0));
+        assertThat(mainPref).isNotNull();
+        assertThat(mainPref.isEnabled()).isFalse();
+
+        var footerPref = mPreferenceScreen.findPreference(PrefBasics.FOOTER.key);
+        assertThat(footerPref).isNotNull();
+        assertThat("" + footerPref.getTitle())
+                .isEqualTo(getText(EXTERNAL_DISPLAY_NOT_FOUND_FOOTER_RESOURCE));
     }
 
     @Test
@@ -755,6 +804,7 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
     @Test
     @DisableFlags({FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING})
     public void testSearchIndexProvider_getRawIndexData() {
+        ShadowDesktopSettingsUtils.setShouldShow(false);
         final Indexable.SearchIndexProvider provider =
                 ExternalDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER;
 
@@ -763,6 +813,24 @@ public class ExternalDisplayPreferenceFragmentTest extends ExternalDisplayTestBa
         assertThat(indexData).hasSize(1);
         assertThat(indexData.getFirst().screenTitle).contains(
                 mContext.getString(R.string.connected_devices_dashboard_title));
+        assertThat(indexData.getFirst().keywords).isEqualTo(
+                mContext.getString(R.string.keywords_external_display_settings));
+        assertThat(indexData.getFirst().title).isEqualTo(
+                mContext.getString(EXTERNAL_DISPLAY_TITLE_RESOURCE));
+    }
+
+    @Test
+    @DisableFlags({FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING})
+    public void testSearchIndexProvider_getRawIndexData_topLevelDeviceEnabled() {
+        ShadowDesktopSettingsUtils.setShouldShow(true);
+        final Indexable.SearchIndexProvider provider =
+                ExternalDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER;
+
+        final List<SearchIndexableRaw> indexData = provider.getRawDataToIndex(
+                mContext, /* enabled= */ true);
+        assertThat(indexData).hasSize(1);
+        assertThat(indexData.getFirst().screenTitle).contains(
+                mContext.getString(R.string.display_settings));
         assertThat(indexData.getFirst().keywords).isEqualTo(
                 mContext.getString(R.string.keywords_external_display_settings));
         assertThat(indexData.getFirst().title).isEqualTo(

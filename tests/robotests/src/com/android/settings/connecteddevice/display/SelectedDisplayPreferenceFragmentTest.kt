@@ -34,12 +34,18 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceScreen
+import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM
+import com.android.graphics.surfaceflinger.flags.Flags.FLAG_SYNCED_RESOLUTION_SWITCH
 import com.android.settings.RestrictedListPreference
 import com.android.settings.connecteddevice.display.SelectedDisplayPreferenceFragment.PrefInfo
 import com.android.settings.flags.Flags.FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING
 import com.android.settings.testutils.InstantTaskExecutorRule
+import com.android.window.flags.Flags.FLAG_ENABLE_USER_PREFERRED_HDR_MODE
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertNull
 import org.junit.Assert.assertFalse
@@ -220,6 +226,7 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
+    @EnableFlags(FLAG_ENABLE_USER_PREFERRED_HDR_MODE)
     fun testExternalDisplaySelected_showsExternalPreferences() {
         fragment = initFragment()
         val display = mDisplays.first { it.id == EXTERNAL_DISPLAY_ID }
@@ -234,6 +241,7 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         assertVisible(category, PrefInfo.DISPLAY_RESOLUTION.key, true)
         assertVisible(category, PrefInfo.DISPLAY_ROTATION.key, true)
         assertVisible(category, PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key, true)
+        assertVisible(category, PrefInfo.DISPLAY_HDR_PREFERENCE.key, true)
     }
 
     @Test
@@ -269,7 +277,13 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    @EnableFlags(FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING)
+    @EnableFlags(
+        FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING,
+        FLAG_FOLLOWER_ARBITRARY_REFRESH_RATE_SELECTION_PLATFORM,
+        FLAG_FOLLOWER_DISPLAY_BACKPRESSURE_PLATFORM,
+        FLAG_FORCE_SLOWER_FOLLOWER_GPU_COMPOSITION_PLATFORM,
+        FLAG_SYNCED_RESOLUTION_SWITCH,
+    )
     fun testExternalDisplaySelected_launchingResolutionSelector() {
         fragment = initFragment()
         val display = mDisplays.first { it.id == EXTERNAL_DISPLAY_ID }
@@ -374,6 +388,56 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         connectionPref = category.findPreference(PrefInfo.DISPLAY_CONNECTION_PREFERENCE.key)!!
         assertThat(connectionPref.isEnabled).isEqualTo(true)
         assertThat(connectionPref.value).isEqualTo("0")
+    }
+
+    @Test
+    @EnableFlags(FLAG_ENABLE_USER_PREFERRED_HDR_MODE)
+    fun testExternalDisplaySelected_hdrNotSupported() {
+        fragment = initFragment()
+        val displayId = 123
+        val updatedEnabledDisplays = mDisplays.toMutableList()
+        updatedEnabledDisplays.add(
+            DisplayDevice(
+                id = displayId,
+                uniqueId = "",
+                name = "",
+                mode = null,
+                supportedModes = listOf(),
+                isEnabled = DisplayIsEnabled.YES,
+                isConnectedDisplay = true,
+                rotation = 0,
+                isHdrSupported = false,
+            )
+        )
+        updateDisplaysAndTopology(updatedEnabledDisplays)
+
+        viewModel.updateSelectedDisplay(displayId)
+
+        val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        assertVisible(category, PrefInfo.DISPLAY_HDR_PREFERENCE.key, false)
+    }
+
+    @Test
+    @EnableFlags(FLAG_ENABLE_USER_PREFERRED_HDR_MODE)
+    fun testHdrPreference_onToggle_updatesHdrPreference() {
+        fragment = initFragment()
+        val display = mDisplays.first { it.id == EXTERNAL_DISPLAY_ID }
+
+        viewModel.updateSelectedDisplay(display.id)
+        val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        val hdrPref = category.findPreference<Preference>(PrefInfo.DISPLAY_HDR_PREFERENCE.key)!!
+
+        (hdrPref as SwitchPreferenceCompat).isChecked = false
+        hdrPref.onPreferenceClickListener!!.onPreferenceClick(hdrPref)
+
+        verify(mMockedInjector)
+            .setUserHdrPreference(EXTERNAL_DISPLAY_ID, DisplayManager.HDR_PREFERENCE_SDR_ONLY)
+
+        (hdrPref as SwitchPreferenceCompat).isChecked = true
+        hdrPref.onPreferenceClickListener!!.onPreferenceClick(hdrPref)
+
+        verify(mMockedInjector)
+            .setUserHdrPreference(EXTERNAL_DISPLAY_ID, DisplayManager.HDR_PREFERENCE_HDR_ALLOWED)
     }
 
     private fun setMirroringMode(enable: Boolean) {

@@ -23,6 +23,7 @@ import static com.android.settings.regionalpreferences.RegionDialogFragment.ARG_
 import static com.android.settings.regionalpreferences.RegionDialogFragment.CALLING_PAGE_LANGUAGE_CHOOSE_A_REGION;
 import static com.android.settings.regionalpreferences.RegionDialogFragment.DIALOG_CHANGE_PREFERRED_LOCALE_REGION;
 import static com.android.settings.regionalpreferences.RegionDialogFragment.DIALOG_CHANGE_SYSTEM_LOCALE_REGION;
+import static com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateSelectedLocale;
 
 import static org.junit.Assert.assertEquals;
 
@@ -78,7 +79,7 @@ public class RegionDialogFragmentTest {
         LocaleStore.LocaleInfo localeInfo =
                 (LocaleStore.LocaleInfo) arguments.getSerializable(ARG_TARGET_LOCALE);
 
-        controller.updateRegion(localeInfo.getLocale().toLanguageTag());
+        updateSelectedLocale(localeInfo.getLocale());
         String resultForDefaultLocale = Locale.getDefault().toLanguageTag();
         // The new expected LocaleList: en-AU,ja-JP,fr-FR
         String resultForDefaultLocaleList = LocaleList.getDefault().get(0).toLanguageTag();
@@ -99,7 +100,7 @@ public class RegionDialogFragmentTest {
         LocaleStore.LocaleInfo localeInfo =
                 (LocaleStore.LocaleInfo) arguments.getSerializable(ARG_TARGET_LOCALE);
 
-        controller.updateRegion(localeInfo.getLocale().toLanguageTag());
+        updateSelectedLocale(localeInfo.getLocale());
         String resultForDefaultLocale = Locale.getDefault().toLanguageTag();
         // The new expected list: en-US,ja-JP,fr-DZ
         String resultForDefaultLocaleList = LocaleList.getDefault().get(2).toLanguageTag();

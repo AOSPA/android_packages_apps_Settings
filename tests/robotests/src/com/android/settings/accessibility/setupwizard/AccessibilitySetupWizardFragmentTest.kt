@@ -39,9 +39,9 @@ import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.spy
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.spy
 import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
@@ -106,11 +106,12 @@ class AccessibilitySetupWizardFragmentTest {
             scenario.onFragment { fragment ->
                 val screenReaderItem = findItem(fragment, R.id.screen_reader_in_suw)
                 assertThat(screenReaderItem?.isVisible).isTrue()
-                assertThat(screenReaderItem?.title).isEqualTo(TEST_SCREEN_READER_LABEL)
+                assertThat(screenReaderItem?.title.toString()).isEqualTo(TEST_SCREEN_READER_LABEL)
 
                 val selectToSpeakItem = findItem(fragment, R.id.select_to_speak_in_suw)
                 assertThat(selectToSpeakItem?.isVisible).isTrue()
-                assertThat(selectToSpeakItem?.title).isEqualTo(TEST_SELECT_TO_SPEAK_LABEL)
+                assertThat(selectToSpeakItem?.title.toString())
+                    .isEqualTo(TEST_SELECT_TO_SPEAK_LABEL)
             }
         }
     }
@@ -147,10 +148,8 @@ class AccessibilitySetupWizardFragmentTest {
         val originalResolveInfo = info.resolveInfo
         if (originalResolveInfo != null) {
             val spyResolveInfo = spy(originalResolveInfo)
-            doReturn(label).whenever(spyResolveInfo).loadLabel(any(PackageManager::class.java))
-            doReturn(ColorDrawable(0))
-                .whenever(spyResolveInfo)
-                .loadIcon(any(PackageManager::class.java))
+            doReturn(label).whenever(spyResolveInfo).loadLabel(any<PackageManager>())
+            doReturn(ColorDrawable(0)).whenever(spyResolveInfo).loadIcon(any<PackageManager>())
             info.resolveInfo = spyResolveInfo
         }
 

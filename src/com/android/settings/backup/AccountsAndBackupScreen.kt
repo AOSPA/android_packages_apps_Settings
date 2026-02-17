@@ -43,6 +43,9 @@ open class AccountsAndBackupScreen : PreferenceScreenMixin, PreferenceIconProvid
     override val summary: Int
         get() = R.string.accounts_and_backup_summary
 
+    override val indexable
+        get() = Flags.enableAccountsAndBackupScreen()
+
     // TODO(b/446191970): Add search keywords.
     override val keywords: Int
         get() = 0
@@ -58,7 +61,7 @@ open class AccountsAndBackupScreen : PreferenceScreenMixin, PreferenceIconProvid
         }
 
     override val highlightMenuKey: Int
-        get() = R.string.menu_key_accounts
+        get() = R.string.menu_key_accounts_and_backup
 
     override fun isFlagEnabled(context: Context): Boolean = Flags.enableAccountsAndBackupScreen()
 
@@ -66,6 +69,8 @@ open class AccountsAndBackupScreen : PreferenceScreenMixin, PreferenceIconProvid
         AccountsAndBackupDashboardFragment::class.java
 
     override fun getMetricsCategory() = SettingsEnums.ACCOUNTS_AND_BACKUP
+
+    override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {

@@ -39,7 +39,6 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.EXTERNAL_DISPLAY_HELP_URL
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.core.instrumentation.SettingsStatsLog
-import com.android.settings.flags.Flags
 import java.util.Locale
 
 /**
@@ -87,10 +86,9 @@ open class SelectedDisplayPreferenceFragment(
             Bundle().apply {
                 putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, displayId)
             }
-        val isRefreshRatePrefEnabled = Flags.enableResolutionRefreshRateSetting()
         SubSettingLauncher(requireContext())
             .setDestination(
-                if (isRefreshRatePrefEnabled) {
+                if (ConnectedDisplayInjector.isRefreshRateFlagsEnabled()) {
                     ResolutionRefreshRatePreferenceFragment::class.java.name
                 } else {
                     ResolutionPreferenceFragment::class.java.name
@@ -163,12 +161,16 @@ open class SelectedDisplayPreferenceFragment(
         prefComponents.add(
             PrefComponent(builtinDisplayDensityPreference(), PrefInfo.BUILTIN_DISPLAY_DENSITY)
         )
+
         // External display preferences
         prefComponents.add(
             PrefComponent(externalDisplayDensityPreference(), PrefInfo.EXTERNAL_DISPLAY_DENSITY)
         )
         prefComponents.add(PrefComponent(resolutionPreference(), PrefInfo.DISPLAY_RESOLUTION))
         prefComponents.add(PrefComponent(rotationPreference(), PrefInfo.DISPLAY_ROTATION))
+        if (ConnectedDisplayInjector.isUserPreferredHdrModeEnabled()) {
+            prefComponents.add(PrefComponent(hdrPreference(), PrefInfo.DISPLAY_HDR_PREFERENCE))
+        }
         if (shouldShowDisplayConnectionPref) {
             // Since `shouldShowDisplayConnectionPref` is static until reboot, instead of updating
             // visibility like the other preferences, just skip setting up connection pref
@@ -233,6 +235,11 @@ open class SelectedDisplayPreferenceFragment(
             selectedDisplayPreference
                 .findPreference<ListPreference>(PrefInfo.DISPLAY_ROTATION.key)
                 ?.let { updateRotationPreference(it, display) }
+            if (com.android.window.flags.Flags.enableUserPreferredHdrMode()) {
+                selectedDisplayPreference
+                    .findPreference<SwitchPreferenceCompat>(PrefInfo.DISPLAY_HDR_PREFERENCE.key)
+                    ?.let { updateHdrPreference(it, display) }
+            }
             if (shouldShowDisplayConnectionPref) {
                 selectedDisplayPreference
                     .findPreference<RestrictedListPreference>(
@@ -370,8 +377,7 @@ open class SelectedDisplayPreferenceFragment(
         val formattedHeight = numberFormatter.format(height)
         ExternalDisplaySettingsLoggerStore.getLogger(display.id).updateResolution(width, height)
 
-        val isRefreshRatePrefEnabled = Flags.enableResolutionRefreshRateSetting()
-        if (isRefreshRatePrefEnabled) {
+        if (ConnectedDisplayInjector.isRefreshRateFlagsEnabled()) {
             val formattedRefreshRate = refreshRateFormatter.format(displayMode.refreshRate)
             val displayText =
                 resources.getString(
@@ -453,6 +459,35 @@ open class SelectedDisplayPreferenceFragment(
             setValueIndex(rotation)
             setSummary(rotationEntries[rotation])
         }
+    }
+
+    private fun hdrPreference(): SwitchPreferenceCompat {
+        return SwitchPreferenceCompat(requireContext()).apply {
+            setTitle(PrefInfo.DISPLAY_HDR_PREFERENCE.titleResource)
+            setSummary(R.string.hdr_preference_summary)
+            key = PrefInfo.DISPLAY_HDR_PREFERENCE.key
+            onPreferenceClickListener =
+                Preference.OnPreferenceClickListener { preference ->
+                    writePreferenceClickMetric(preference)
+
+                    val displayId =
+                        viewModel.uiState.value?.selectedDisplayId
+                            ?: return@OnPreferenceClickListener false
+                    viewModel.updateUserHdrPreference(
+                        displayId,
+                        (preference as SwitchPreferenceCompat).isChecked(),
+                    )
+                    true
+                }
+        }
+    }
+
+    private fun updateHdrPreference(
+        preference: SwitchPreferenceCompat,
+        display: DisplayDeviceAdditionalInfo,
+    ) {
+        preference.isVisible = display.isHdrSupported
+        preference.isChecked = display.hdrPreference == DisplayManager.HDR_PREFERENCE_HDR_ALLOWED
     }
 
     private fun connectionPreference(): RestrictedListPreference {
@@ -572,7 +607,7 @@ open class SelectedDisplayPreferenceFragment(
             ParentPrefCategory.ROOT,
         ),
         DISPLAY_RESOLUTION(
-            if (Flags.enableResolutionRefreshRateSetting()) {
+            if (ConnectedDisplayInjector.isRefreshRateFlagsEnabled()) {
                 R.string.external_display_resolution_refresh_rate_settings_title
             } else {
                 R.string.external_display_resolution_settings_title
@@ -584,6 +619,12 @@ open class SelectedDisplayPreferenceFragment(
         DISPLAY_ROTATION(
             R.string.external_display_rotation,
             "pref_key_external_display_rotation",
+            DisplayType.EXTERNAL_DISPLAY,
+            ParentPrefCategory.ROOT,
+        ),
+        DISPLAY_HDR_PREFERENCE(
+            R.string.hdr_preference_title,
+            "pref_key_external_display_hdr_preference",
             DisplayType.EXTERNAL_DISPLAY,
             ParentPrefCategory.ROOT,
         ),

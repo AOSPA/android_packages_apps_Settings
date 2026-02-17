@@ -200,7 +200,7 @@ public class AudioStreamsQrCodeScanFragment extends InstrumentedFragment
 
     @Override
     public void setTransform(Matrix transform) {
-        mTextureView.setTransform(transform);
+        mContext.getMainExecutor().execute(() -> mTextureView.setTransform(transform));
     }
 
     @Override

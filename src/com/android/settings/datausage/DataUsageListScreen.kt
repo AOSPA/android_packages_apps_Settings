@@ -30,12 +30,11 @@ import com.android.settings.datausage.lib.BillingCycleRepository
 import com.android.settings.datausage.lib.DataUsageLib
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkStatsRepository.Companion.AllTimeRange
-import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.subscriptionManager
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
-import com.android.settingslib.catalyst.flags.Flags as CatalystFlags
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -60,7 +59,7 @@ private constructor(
 ) : PreferenceScreenMixin, PreferenceSummaryProvider {
 
     private val subId: Int =
-        if (CatalystFlags.catalystUseKeyParameters()) {
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!![Settings.EXTRA_SUB_ID]?.toIntOrNull()
                 ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
         } else {
@@ -92,8 +91,6 @@ private constructor(
 
     override fun getMetricsCategory() = SettingsEnums.DATA_USAGE_LIST
 
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkNetworkAndInternet25q4()
-
     override fun fragmentClass(): Class<out Fragment> = DataUsageList::class.java
 
     override fun hasCompleteHierarchy() = false
@@ -103,7 +100,7 @@ private constructor(
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
         val intent =
-            if (CatalystFlags.catalystUseKeyParameters()) {
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                 makeLaunchIntent(
                     context,
                     MobileDataUsageListActivity::class.java,

@@ -47,6 +47,7 @@ import java.util.List;
  * Setting page for managed profile.
  * FIXME: It currently assumes there is only one managed profile.
  */
+// LINT.IfChange
 @SearchIndexable
 public class ManagedProfileSettings extends DashboardFragment {
 
@@ -176,3 +177,4 @@ public class ManagedProfileSettings extends DashboardFragment {
         }
     }
 }
+// LINT.ThenChange(ManagedProfileApiScreen.kt)

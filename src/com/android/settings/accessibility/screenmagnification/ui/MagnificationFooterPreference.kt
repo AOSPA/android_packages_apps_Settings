@@ -128,74 +128,38 @@ class MagnificationFooterPreference(override val helpResource: Int) :
     private fun getKeyboardOnlySummary(context: Context): String {
         val meta: String? = context.getString(R.string.modifier_keys_meta)
         val alt: String? = context.getString(R.string.modifier_keys_alt)
-        if (com.android.hardware.input.Flags.enableTalkbackAndMagnifierKeyGestures()) {
-            return MessageFormat.format(
-                context.getString(
-                    R.string.accessibility_screen_magnification_keyboard_summary,
-                    meta,
-                    alt,
-                ),
-                1,
-                2,
-                3,
-                4,
-            )
-        } else {
-            return MessageFormat.format(
-                context.getString(
-                    R.string.accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary,
-                    meta,
-                    alt,
-                ),
-                1,
-                2,
-                3,
-                4,
-            )
-        }
+        return MessageFormat.format(
+            context.getString(
+                R.string.accessibility_screen_magnification_keyboard_summary,
+                meta,
+                alt,
+            ),
+            1,
+            2,
+            3,
+            4,
+        )
     }
 
     private fun getKeyboardTouchSummary(context: Context): String {
         val meta: String? = context.getString(R.string.modifier_keys_meta)
         val alt: String? = context.getString(R.string.modifier_keys_alt)
-        if (com.android.hardware.input.Flags.enableTalkbackAndMagnifierKeyGestures()) {
-            return MessageFormat.format(
-                context.getString(
-                    R.string.accessibility_screen_magnification_keyboard_touch_summary,
-                    meta,
-                    alt,
-                ),
-                1,
-                2,
-                3,
-                4,
-                5,
-            )
-        } else {
-            val stringBuilder = StringBuilder()
-            stringBuilder.append(
-                MessageFormat.format(
-                    context.getString(
-                        R.string
-                            .accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary,
-                        meta,
-                        alt,
-                    ),
-                    1,
-                    2,
-                    3,
-                    4,
-                )
-            )
-
-            stringBuilder.append("<br/><br/>")
-            stringBuilder.append(getTouchOnlySummary(context))
-            return stringBuilder.toString()
-        }
+        return MessageFormat.format(
+            context.getString(
+                R.string.accessibility_screen_magnification_keyboard_touch_summary,
+                meta,
+                alt,
+            ),
+            1,
+            2,
+            3,
+            4,
+            5,
+        )
     }
 
     companion object {
         const val KEY = "html_description"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FooterPreferenceController.java)
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FooterPreferenceController.kt)

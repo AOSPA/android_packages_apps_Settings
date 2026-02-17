@@ -26,6 +26,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Rect;
 import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -34,6 +35,7 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.AccessibilityNodeInfo;
@@ -63,6 +65,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.DelightHelper;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.util.LottieAnimationHelper;
@@ -177,7 +180,7 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
             mIllustrationLottie.addAnimatorListener(mA11yUpdater);
             configureA11yDelegate(true);
-            mIllustrationLottie.playAnimation();
+            playWithDelightAnimationIcon(mIllustrationLottie);
 
             mIllustrationLottie.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -418,22 +421,32 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
     }
 
     @VisibleForTesting
-    public boolean adjustIllustrationLottiePosition() {
-        boolean alreadyAdjustedPos = false;
+    public void adjustIllustrationLottiePosition() {
         final GlifLayout glifLayout = findViewById(R.id.setup_wizard_layout);
         final TextView descView =  glifLayout.getDescriptionTextView();
-        final int descBottomPos = getOnScreenPositionTop(descView) + descView.getHeight();
-        final int illustrationLottieTop = getOnScreenPositionTop(mIllustrationLottie);
-        if (illustrationLottieTop < descBottomPos) {
-            final int posDiff = descBottomPos - illustrationLottieTop;
-            FrameLayout.LayoutParams layoutParams =
-                    (FrameLayout.LayoutParams) mIllustrationLottie.getLayoutParams();
-            layoutParams.topMargin += posDiff;
-            mIllustrationLottie.setLayoutParams(layoutParams);
-            mIllustrationLottie.requestLayout();
-            alreadyAdjustedPos = true;
-        }
-        return alreadyAdjustedPos;
+        Rect rectDescView = new Rect();
+        descView.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        descView.getGlobalVisibleRect(rectDescView);
+                        final int descBottomPos = getOnScreenPositionTop(descView)
+                                + descView.getHeight();
+                        final int illustrationLottieTop = getOnScreenPositionTop(
+                                mIllustrationLottie);
+                        if (illustrationLottieTop < descBottomPos) {
+                            final int posDiff = descBottomPos - illustrationLottieTop;
+                            FrameLayout.LayoutParams layoutParams =
+                                    (FrameLayout.LayoutParams)
+                                            mIllustrationLottie.getLayoutParams();
+                            layoutParams.topMargin += posDiff;
+                            mIllustrationLottie.setLayoutParams(layoutParams);
+                            mIllustrationLottie.requestLayout();
+                        }
+
+                        descView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
     }
 
     @VisibleForTesting
@@ -530,6 +543,23 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
         return SettingsEnums.FACE_ENROLL_INTRO;
     }
 
+
+    @VisibleForTesting
+    void playWithDelightAnimationIcon(@Nullable LottieAnimationView lottieView) {
+        if (lottieView == null) {
+            return;
+        }
+
+        if (DelightHelper.shouldApplyAnimatedIcon(this)) {
+            lottieView.cancelAnimation();
+            lottieView.postDelayed(lottieView::playAnimation, getResources().getInteger(
+                    com.google.android.setupdesign.R.integer.sud_lottie_animation_delay_ms)
+            );
+        } else {
+            lottieView.playAnimation();
+        }
+    }
+
     private void hideDefaultIllustration() {
         if (mIsUsingLottie) {
             forceConfigureA11yDelegate(false);
@@ -550,8 +580,8 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
             }
             mIllustrationLottie.setVisibility(View.VISIBLE);
             forceConfigureA11yDelegate(true);
-            mIllustrationLottie.playAnimation();
             mIllustrationLottie.setProgress(0f);
+            playWithDelightAnimationIcon(mIllustrationLottie);
         } else {
             mIllustrationDefault.setVisibility(View.VISIBLE);
             mIllustrationDefault.start();

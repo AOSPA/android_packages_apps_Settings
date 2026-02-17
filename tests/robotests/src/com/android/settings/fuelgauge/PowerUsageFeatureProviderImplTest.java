@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Process;
 
+import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoController;
 import com.android.settings.fuelgauge.batteryusage.DataProcessor;
 
 import org.junit.Before;
@@ -143,6 +144,15 @@ public class PowerUsageFeatureProviderImplTest {
     @Test
     public void isTypeSystem_uidOther_returnFalse() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_OTHER, null)).isFalse();
+    }
+
+    @Test
+    public void getBatteryAdvanceInfoController_returnNull() {
+        BatteryAdvanceInfoController controller =
+                mPowerFeatureProvider.getBatteryAdvanceInfoController(
+                        mContext, /* lifecycle= */ null, /* fragment= */ null);
+
+        assertThat(controller).isNull();
     }
 
     @Test

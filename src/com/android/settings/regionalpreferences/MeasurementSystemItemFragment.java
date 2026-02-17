@@ -33,7 +33,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -45,6 +44,7 @@ import java.util.Collection;
 import java.util.List;
 
 /** Main fragment to display measurement system. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class MeasurementSystemItemFragment extends DashboardFragment {
 
@@ -124,10 +124,8 @@ public class MeasurementSystemItemFragment extends DashboardFragment {
             new BaseSearchIndexProvider(R.xml.regional_preferences_measurement_system) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    if (!Flags.regionalPreferencesApiEnabled()) {
-                        return false;
-                    }
                     return true;
                 }
             };
 }
+// LINT.ThenChange(MeasurementSystemApiFirstScreen.kt)

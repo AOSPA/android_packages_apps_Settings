@@ -56,6 +56,8 @@
     <color name="homepage_network_background">@color/homepage_blue_variant_bg</color>
     <color name="homepage_connected_device_foreground">@color/homepage_blue_variant_fg</color>
     <color name="homepage_connected_device_background">@color/homepage_blue_variant_bg</color>
+    <color name="homepage_device_foreground">@color/homepage_blue_fg</color>
+    <color name="homepage_device_background">@color/homepage_blue_bg</color>
     <color name="homepage_apps_foreground">@color/homepage_blue_fg</color>
     <color name="homepage_apps_background">@color/homepage_blue_bg</color>
     <color name="homepage_notification_foreground">@color/homepage_pink_fg</color>
@@ -196,6 +198,20 @@
     <!-- Fingerprint enrollment color -->
     <color name="fingerprint_enrollment_finish_color_outline">#1A73E8</color>
 
+    <!-- Fingerprint sensor guided enrollment fill colors -->
+    <color name="fingerprint_enrollment_fp_captured_color">#d2e3fc</color> <!-- Blue 100 -->
+    <color name="fingerprint_enrollment_fp_error_color">#fad2cf</color> <!-- Red 100 -->
+    <color name="fingerprint_enrollment_progress_bar_bg_color">#E8EAED</color> <!-- Gray 200 -->
+    <color name="fingerprint_enrollment_progress_bar_fill_color">#1a73e8</color> <!-- Blue 600 -->
+    <color name="fingerprint_enrollment_progress_bar_error_color">#d93025</color> <!-- Red 600 -->
+
+    <!-- Fingerprint sensor guided enrollment fill colors for expressive style -->
+    <color name="fingerprint_enrollment_fp_captured_color_expressive">@android:color/system_primary_light</color>
+    <color name="fingerprint_enrollment_fp_error_color_expressive">@android:color/system_on_error_container_light</color>
+    <color name="fingerprint_enrollment_progress_bar_bg_color_expressive">@android:color/system_outline_variant_light</color>
+    <color name="fingerprint_enrollment_progress_bar_fill_color_expressive">@android:color/system_primary_light</color>
+    <color name="fingerprint_enrollment_progress_bar_error_color_expressive">@android:color/system_error_container_light</color>
+
     <!-- Side fingerprint sensor guided enrollment fill colors -->
     <color name="sfps_enrollment_fp_captured_color">#d2e3fc</color> <!-- Blue 100 -->
     <color name="sfps_enrollment_fp_error_color">#fad2cf</color> <!-- Red 100 -->
@@ -273,24 +289,18 @@
     <color name="pointer_fill_hovered_color">#1C201A1E</color>
 
     <!-- Safety Center Icon Colors -->
-    <color name="sc_icon_info_light">@color/gm_green_500</color>
-    <color name="sc_icon_recommend_light">@color/gm_yellow_500</color>
-    <color name="sc_icon_warn_light">@color/gm_red_500</color>
+    <color name="sc_icon_info_light">@color/m3_ref_palette_green60</color>
+    <color name="sc_icon_recommend_light">@color/m3_ref_palette_yellow80</color>
+    <color name="sc_icon_warn_light">@color/m3_ref_palette_red50</color>
     <color name="sc_icon_null_light">@color/gm_grey_600</color>
 
-    <color name="gm_green_500">#34A853</color>
-    <color name="gm_yellow_500">#FBBC04</color>
-    <color name="gm_red_500">#EA4335</color>
     <color name="gm_grey_600">#80868B</color>
 
-    <color name="sc_icon_info_dark">@color/gm_green_400</color>
-    <color name="sc_icon_recommend_dark">@color/gm_yellow_400</color>
-    <color name="sc_icon_warn_dark">@color/gm_red_400</color>
+    <color name="sc_icon_info_dark">@color/m3_ref_palette_green60</color>
+    <color name="sc_icon_recommend_dark">@color/m3_ref_palette_yellow80</color>
+    <color name="sc_icon_warn_dark">@color/m3_ref_palette_red50</color>
     <color name="sc_icon_null_dark">@color/gm_grey_400</color>
 
-    <color name="gm_green_400">#5BB974</color>
-    <color name="gm_yellow_400">#FCC934</color>
-    <color name="gm_red_400">#EE675C</color>
     <color name="gm_grey_400">#BDC1C6</color>
 
     <color name="sc_shield_accent">#FFFFFF</color>

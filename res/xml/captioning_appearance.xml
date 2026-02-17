@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 
+<!-- LINT.IfChange -->
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
@@ -42,7 +43,7 @@
         settings:controller="com.android.settings.accessibility.CaptioningPresetController"/>
 
     <PreferenceCategory
-        android:key="custom"
+        android:key="captioning_custom_options_category"
         android:title="@string/captioning_custom_options_title"
         settings:controller="com.android.settings.accessibility.CaptioningCustomController">
 
@@ -106,3 +107,4 @@
         settings:searchable="false"
         settings:controller="com.android.settings.accessibility.CaptioningFooterPreferenceController"/>
 </PreferenceScreen>
+<!-- LINT.ThenChange(/src/com/android/settings/accessibility/captionpreferences/ui/CaptioningScreens.kt:caption_appearance_screen) -->

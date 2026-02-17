@@ -23,12 +23,20 @@
         android:key="landing_page_topintro"
         android:title="@string/satellite_connectivity_topintro"/>
 
+    <com.android.settingslib.widget.BannerMessagePreference
+        android:key="satellite_settings_warning_banner"
+        app:isPreferenceVisible="false" />
+
+    <com.android.settingslib.widget.BannerMessagePreference
+        android:key="satellite_settings_secondary_warning_banner"
+        app:isPreferenceVisible="false" />
+
     <!-- The satellite landing page illustration. -->
     <com.android.settingslib.widget.IllustrationPreference
         android:key="illustration" />
 
     <!-- The try demo button. -->
-    <Preference
+    <com.android.settings.network.telephony.satellite.quicksettings.SatelliteDemoPreference
         android:layout_marginTop="16dp"
         android:key="try_a_demo_button"
         android:title="@string/try_a_demo"

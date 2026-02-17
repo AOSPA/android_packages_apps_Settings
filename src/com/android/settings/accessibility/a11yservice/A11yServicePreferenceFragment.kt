@@ -39,6 +39,7 @@ import com.android.settings.accessibility.extensions.isServiceEnabled
 import com.android.settings.dashboard.DashboardFragment
 import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 import com.android.settingslib.metadata.ValidatedKeyParameters
 
@@ -195,7 +196,8 @@ open class A11yServicePreferenceFragment : DashboardFragment() {
         "This method will be removed once the catalyst framework stops passing the arguments as a bundle. Use getPreferenceScreenBindingKeyParameters instead."
     )
     override fun getPreferenceScreenBindingArgs(context: Context): Bundle? {
-        return if (Flags.catalystUseStringBundle()) {
+        return if (Flags.catalystUseStringBundle() ||
+            CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             Bundle(1).apply {
                 putString(
                     AccessibilitySettings.EXTRA_COMPONENT_NAME,

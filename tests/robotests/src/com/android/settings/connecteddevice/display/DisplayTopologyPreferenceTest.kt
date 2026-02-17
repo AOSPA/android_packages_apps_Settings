@@ -41,7 +41,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.view.MotionEventBuilder
 import com.android.settings.R
 import com.android.settings.flags.FakeFeatureFlagsImpl
-import com.android.settings.flags.Flags
 import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.google.common.truth.Truth.assertThat
 import java.util.function.Consumer
@@ -65,7 +64,6 @@ class DisplayTopologyPreferenceTest {
         preference.controller.topologyHint.disableAnimation()
 
         featureFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, false)
-        featureFlags.setFlag(Flags.FLAG_ENABLE_DISPLAY_BLOCK_ARROW_MOVEMENT_BUGFIX, true)
     }
 
     class TestInjector(context: Context, featureFlags: FakeFeatureFlagsImpl) :
@@ -106,6 +104,7 @@ class DisplayTopologyPreferenceTest {
                         /* isEnabled= */ DisplayIsEnabled.YES,
                         /* isConnectedDisplay= */ true,
                         /* rotation= */ 0,
+                        /* isHdrSupported= */ true,
                     )
                 }
                 .toList()

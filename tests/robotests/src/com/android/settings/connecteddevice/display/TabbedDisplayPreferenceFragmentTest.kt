@@ -17,10 +17,12 @@
 package com.android.settings.connecteddevice.display
 
 import android.app.Application
+import android.os.Bundle
 import android.os.SystemClock
 import android.view.InputDevice
 import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -32,6 +34,7 @@ import com.android.settings.Settings
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.android.settings.testutils.InstantTaskExecutorRule
+import com.android.settings.testutils.shadow.ShadowDesktopSettingsUtils
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
 import com.android.settingslib.search.Indexable
 import com.google.android.material.appbar.AppBarLayout
@@ -45,15 +48,18 @@ import org.mockito.ArgumentCaptor
 import org.mockito.Captor
 import org.mockito.kotlin.any
 import org.mockito.kotlin.atLeastOnce
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.reset
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.annotation.Config
 
 /** Unit tests for [TabbedDisplayPreferenceFragment]. */
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowDesktopSettingsUtils::class])
 class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     @get:Rule val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -67,6 +73,8 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     private lateinit var toolbarItemsCaptor:
         ArgumentCaptor<List<ScrollableToolbarItemLayout.ToolbarItem>>
     @Captor private lateinit var motionEventCaptor: ArgumentCaptor<MotionEvent>
+    @Captor
+    private lateinit var layoutChangeListenerCaptor: ArgumentCaptor<View.OnLayoutChangeListener>
 
     private lateinit var viewModel: DisplayPreferenceViewModel
     private lateinit var fragment: TestableTabbedDisplayPreferenceFragment
@@ -74,6 +82,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     private lateinit var topologyView: FakeDisplayTopologyPreferenceView
     private lateinit var appBarLayoutSpy: AppBarLayout
     private lateinit var selectedDisplayPrefContainerSpy: FocusAwareFrameLayout
+    private lateinit var floatingToolbar: View
 
     @Before
     override fun setUp() {
@@ -92,6 +101,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
                 mDevicePolicyManager,
             )
         topologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        floatingToolbar = spy(View(application))
         initFragment()
 
         // Spy on the container to verify propagated events
@@ -102,6 +112,100 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
         verify(settingsActivity, atLeastOnce()).setOnItemSelectedListener(toolbarListener.capture())
         reset(settingsActivity)
+    }
+
+    @Test
+    fun onCreate_withExistentDisplayIdArg_updatesSelectedDisplay() {
+        val selectedDisplayId = mDisplays[1].id
+        val bundle = Bundle()
+        bundle.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, selectedDisplayId)
+
+        val newTopologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        val newFragment =
+            TestableTabbedDisplayPreferenceFragment(newTopologyView, settingsActivity, viewModel)
+        newFragment.arguments = bundle
+
+        activityScenarioRule.scenario.onActivity { activity ->
+            activity.supportFragmentManager
+                .beginTransaction()
+                .add(newFragment, "testTagWithArgs")
+                .commitNow()
+        }
+
+        val updatedState = viewModel.uiState.value
+        assertThat(updatedState?.selectedDisplayId).isEqualTo(selectedDisplayId)
+    }
+
+    @Test
+    fun onCreate_withNonExistentDisplayIdArg_doesNotUpdateSelectedDisplay() {
+        val selectedDisplayId = 123456789
+        val bundle = Bundle()
+        bundle.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, selectedDisplayId)
+
+        val newTopologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        val newFragment =
+            TestableTabbedDisplayPreferenceFragment(newTopologyView, settingsActivity, viewModel)
+        newFragment.arguments = bundle
+
+        activityScenarioRule.scenario.onActivity { activity ->
+            activity.supportFragmentManager
+                .beginTransaction()
+                .add(newFragment, "testTagWithArgs")
+                .commitNow()
+        }
+
+        val updatedState = viewModel.uiState.value
+        assertThat(updatedState?.selectedDisplayId).isNotEqualTo(selectedDisplayId)
+    }
+
+    @Test
+    fun onCreate_withDisabledDisplayIdArg_doesNotUpdateSelectedDisplay() {
+        val disabledDisplay = createExternalDisplay(DisplayIsEnabled.NO)
+        val displays = listOf(disabledDisplay, createOverlayDisplay(DisplayIsEnabled.YES))
+        updateDisplaysAndTopology(displays)
+        val selectedDisplayId = disabledDisplay.id
+        val bundle = Bundle()
+        bundle.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, selectedDisplayId)
+
+        val newTopologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        val newFragment =
+            TestableTabbedDisplayPreferenceFragment(newTopologyView, settingsActivity, viewModel)
+        newFragment.arguments = bundle
+
+        activityScenarioRule.scenario.onActivity { activity ->
+            activity.supportFragmentManager
+                .beginTransaction()
+                .add(newFragment, "testTagWithArgsDisabled")
+                .commitNow()
+        }
+
+        val updatedState = viewModel.uiState.value
+        assertThat(updatedState?.selectedDisplayId).isNotEqualTo(selectedDisplayId)
+    }
+
+    @Test
+    fun onCreate_withDefaultDisplayIdArg_updatesSelectedDisplay() {
+        // Built-in display is not an external connected display (isConnectedDisplay=false),
+        // but it is the default display, so it should be allowed.
+        val builtinDisplay = includeBuiltinDisplay()
+        val selectedDisplayId = builtinDisplay.id
+        val bundle = Bundle()
+        bundle.putInt(ExternalDisplaySettingsConfiguration.DISPLAY_ID_ARG, selectedDisplayId)
+
+        val newTopologyView = FakeDisplayTopologyPreferenceView(mMockedInjector)
+        val newFragment =
+            TestableTabbedDisplayPreferenceFragment(newTopologyView, settingsActivity, viewModel)
+        newFragment.arguments = bundle
+
+        activityScenarioRule.scenario.onActivity { activity ->
+            activity.supportFragmentManager
+                .beginTransaction()
+                .add(newFragment, "testTagWithArgsDefaultDisplay")
+                .commitNow()
+        }
+
+        val updatedState = viewModel.uiState.value
+        assertThat(updatedState?.selectedDisplayId).isEqualTo(selectedDisplayId)
     }
 
     @Test
@@ -198,11 +302,11 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun setupAppBarLayout_onMouseScroll_propagatesEventWithClampedY() {
-        // Verifies that a mouse scroll event is propagated to the container below the app bar.
-        // Also verifies that the Y coordinate of the event is clamped to the container's height.
+    fun setupAppBarLayout_onMouseScroll_propagatesEvent() {
         val containerSpy = fragment.selectedDisplayPrefContainer
+        val containerWidth = 100
         val containerHeight = 100
+        whenever(containerSpy.width).thenReturn(containerWidth)
         whenever(containerSpy.height).thenReturn(containerHeight)
         val uptime = SystemClock.uptimeMillis()
         val motionEvent =
@@ -221,8 +325,8 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         assertThat(result).isTrue()
         verify(containerSpy).dispatchGenericMotionEvent(motionEventCaptor.capture())
         val capturedEvent = motionEventCaptor.value
-        // Expected Y is min(150f, 100 - 1) = 99f. The event is offset to have this new Y.
-        assertThat(capturedEvent.y).isEqualTo(99f)
+        assertThat(capturedEvent.x).isEqualTo(50.0f)
+        assertThat(capturedEvent.y).isEqualTo(0.0f)
         motionEvent.recycle()
     }
 
@@ -250,6 +354,39 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
+    fun toolbarLayoutListener_onLayoutChange_updatesPaddingWithMargin() {
+        // Verifies that the toolbar layout listener correctly updates the bottom padding of the
+        // preference container when the toolbar has margins.
+        verify(floatingToolbar).addOnLayoutChangeListener(layoutChangeListenerCaptor.capture())
+        val listener = layoutChangeListenerCaptor.value
+
+        // Define toolbar dimensions
+        val toolbarHeight = 50
+        val bottomMargin = 10
+        val expectedPadding = toolbarHeight + bottomMargin * 2
+        val layoutParams =
+            ViewGroup.MarginLayoutParams(0, 0).apply { this.bottomMargin = bottomMargin }
+        doReturn(toolbarHeight).whenever(floatingToolbar).height
+        doReturn(layoutParams).whenever(floatingToolbar).layoutParams
+
+        // Trigger the layout change
+        listener.onLayoutChange(
+            floatingToolbar,
+            /* left= */ 0,
+            /* top= */ 0,
+            /* right= */ 0,
+            /* bottom= */ 0,
+            /* oldLeft= */ 0,
+            /* oldTop= */ 0,
+            /* oldRight= */ 0,
+            /* oldBottom= */ 0,
+        )
+
+        // Verify the padding state was set correctly
+        assertThat(selectedDisplayPrefContainerSpy.paddingBottom).isEqualTo(expectedPadding)
+    }
+
+    @Test
     fun setupAppBarLayout_onNonMouseScrollSource_doesNotPropagateEvent() {
         // Verifies that a scroll event from a non-mouse source is not propagated.
         val containerSpy = fragment.selectedDisplayPrefContainer
@@ -273,14 +410,16 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun onDestroyView_removesGenericMotionListener() {
-        // Verifies that the motion listener on the app bar is removed when the view is destroyed.
-        val appBarLayoutSpy = spy(fragment.appBarLayout)
-        fragment.appBarLayout = appBarLayoutSpy
+    fun onDestroyView_removesListeners() {
+        // Verifies that listeners on the app bar and floating toolbar are removed when the view is
+        // destroyed.
+        verify(floatingToolbar).addOnLayoutChangeListener(layoutChangeListenerCaptor.capture())
+        val listener = layoutChangeListenerCaptor.value
 
         fragment.onDestroyView()
 
         verify(appBarLayoutSpy).setOnGenericMotionListener(null)
+        verify(floatingToolbar).removeOnLayoutChangeListener(listener)
     }
 
     @Test
@@ -340,22 +479,49 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
     @Test
     fun searchIndexProvider_getRawIndexData() {
+        ShadowDesktopSettingsUtils.setShouldShow(false)
         val provider: Indexable.SearchIndexProvider =
             TabbedDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
 
         val indexData = provider.getRawDataToIndex(mContext, /* enabled= */ true)
         assertThat(indexData).hasSize(1)
-        assertThat(indexData.first().screenTitle)
+        val resource = indexData.first()
+        assertThat(resource).isNotNull()
+        assertThat(resource.screenTitle)
             .contains(mContext.getString(R.string.connected_devices_dashboard_title))
-        assertThat(indexData.first().keywords)
+        assertThat(resource.keywords)
             .isEqualTo(mContext.getString(R.string.keywords_external_display_settings))
-        assertThat(indexData.first().title)
+        assertThat(resource.title)
+            .isEqualTo(mContext.getString(R.string.external_display_settings_title))
+    }
+
+    @Test
+    fun searchIndexProvider_getRawIndexData_topLevelDeviceEnabled() {
+        ShadowDesktopSettingsUtils.setShouldShow(true)
+        val provider: Indexable.SearchIndexProvider =
+            TabbedDisplayPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER
+
+        val indexData = provider.getRawDataToIndex(mContext, /* enabled= */ true)
+        assertThat(indexData).hasSize(1)
+        val resource = indexData.first()
+        assertThat(resource).isNotNull()
+        assertThat(resource.screenTitle)
+            .contains(mContext.getString(R.string.display_settings))
+        assertThat(resource.keywords)
+            .isEqualTo(mContext.getString(R.string.keywords_external_display_settings))
+        assertThat(resource.title)
             .isEqualTo(mContext.getString(R.string.external_display_settings_title))
     }
 
     private fun initFragment(): TestableTabbedDisplayPreferenceFragment {
         activityScenarioRule.scenario.onActivity { activity ->
             settingsActivity = spy(activity)
+            whenever(
+                    settingsActivity.findViewById<View?>(
+                        com.android.settingslib.collapsingtoolbar.R.id.floating_toolbar
+                    )
+                )
+                .thenReturn(floatingToolbar)
             fragment =
                 TestableTabbedDisplayPreferenceFragment(topologyView, settingsActivity, viewModel)
             activity.supportFragmentManager.beginTransaction().add(fragment, "testTag").commitNow()
@@ -391,20 +557,14 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         }
     }
 
-    class FakeDisplayTopologyPreferenceView(injector: ConnectedDisplayInjector) :
-        DisplayTopologyPreferenceView(injector) {
+    class FakeDisplayTopologyPreferenceView(
+        injector: ConnectedDisplayInjector,
+        initialSelectedDisplayId: Int? = null,
+    ) : DisplayTopologyPreferenceView(injector, initialSelectedDisplayId) {
 
         var selectedListener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener? =
             null
         var selectedDisplay: Int = -1
-
-        override fun onAttachedToWindow() {
-            super.onAttachedToWindow()
-        }
-
-        override fun onDetachedFromWindow() {
-            super.onDetachedFromWindow()
-        }
 
         override fun setOnDisplayBlockSelectedListener(
             listener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener

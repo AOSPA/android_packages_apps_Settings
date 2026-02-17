@@ -23,6 +23,7 @@ import android.view.accessibility.CaptioningManager.CaptionStyle;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
+// LINT.IfChange
 /** Preference controller for captioning type face. */
 public class CaptioningTypefaceController extends BaseCaptioningCustomController
         implements Preference.OnPreferenceChangeListener {
@@ -50,3 +51,4 @@ public class CaptioningTypefaceController extends BaseCaptioningCustomController
         return true;
     }
 }
+// LINT.ThenChange(captionpreferences/ui/CaptionCustomProperties.kt:caption_font_family_pref)

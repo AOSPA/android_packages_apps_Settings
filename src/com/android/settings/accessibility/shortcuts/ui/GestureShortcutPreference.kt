@@ -74,7 +74,9 @@ class GestureShortcutPreference(context: Context, targets: Set<String>) :
     }
 
     override fun isAvailable(context: Context): Boolean {
-        return !context.isInSetupWizard() && AccessibilityUtil.isGestureNavigateEnabled(context)
+        return !context.isInSetupWizard() &&
+            AccessibilityUtil.isGestureNavigateEnabled(context) &&
+            AccessibilityUtil.isTouchShortcutAvailable(context)
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {

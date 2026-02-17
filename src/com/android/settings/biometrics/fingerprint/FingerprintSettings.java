@@ -33,7 +33,6 @@ import static com.android.settings.biometrics.BiometricEnrollBase.EXTRA_KEY_CHAL
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
-import android.animation.ArgbEvaluator;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -46,6 +45,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ResourceId;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.hardware.fingerprint.Fingerprint;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
@@ -2117,17 +2117,34 @@ public class FingerprintSettings extends SubSettings {
             clearHighlight();
             final int backgroundFrom = getBackgroundRes(false /* isHighlighted */);
             final int backgroundTo = getBackgroundRes(true /* isHighlighted */);
-            if (backgroundTo == 0 || backgroundFrom == 0) {
+            if (backgroundFrom == 0 || backgroundTo == 0) {
                 return;
             }
-            mHighlightAnimator = ValueAnimator.ofObject(
-                    new ArgbEvaluator(), backgroundFrom, backgroundTo);
+
+            final Drawable fromDrawable = getContext().getDrawable(backgroundFrom);
+            final Drawable toDrawable = getContext().getDrawable(backgroundTo);
+            if (fromDrawable == null || toDrawable == null) {
+                return;
+            }
+            fromDrawable.mutate();
+            toDrawable.mutate();
+            toDrawable.setAlpha(0);
+
+            final LayerDrawable layerDrawable = new LayerDrawable(
+                    new Drawable[]{fromDrawable, toDrawable});
+            layerDrawable.setPaddingMode(LayerDrawable.PADDING_MODE_STACK);
+            mView.setBackground(layerDrawable);
+
+            mHighlightAnimator = ValueAnimator.ofFloat(0f, 1f);
             mHighlightAnimator.setDuration(HIGHLIGHT_DURATION);
-            mHighlightAnimator.addUpdateListener(
-                    animator -> mView.setBackgroundResource((int) animator.getAnimatedValue()));
             mHighlightAnimator.setRepeatMode(ValueAnimator.REVERSE);
             mHighlightAnimator.setRepeatCount(4);
+            mHighlightAnimator.addUpdateListener(animator -> {
+                final float fraction = (float) animator.getAnimatedValue();
+                toDrawable.setAlpha((int) (255 * fraction));
+            });
             mHighlightAnimator.start();
+
             mView.postDelayed(mClearHighlightRunnable, RESET_HIGHLIGHT_DURATION);
         }
 

@@ -58,7 +58,10 @@ open class AudioAdjustmentScreen : PreferenceScreenMixin {
     override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_AUDIO_ADJUSTMENT
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { +MonoAudioPreference() }
+        preferenceHierarchy(context) {
+            +MonoAudioPreference()
+            +AudioBalancePreference(context)
+        }
 
     companion object {
         const val KEY = "audio_adjustment_preference_screen"

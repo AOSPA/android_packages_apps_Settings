@@ -42,7 +42,6 @@ import android.safetycenter.SafetyEvent;
 import android.safetycenter.SafetySourceData;
 import android.safetycenter.SafetySourceIssue;
 import android.safetycenter.SafetySourceStatus;
-import android.safetycenter.SafetySourceStatus.IconAction;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -468,7 +467,6 @@ public class LockScreenSafetySourceTest {
         when(mScreenLockPreferenceDetailsUtils.getPasswordQualityManagedEnforcingAdmin(
                 anyInt())).thenReturn(null);
         when(mScreenLockPreferenceDetailsUtils.isLockPatternSecure()).thenReturn(true);
-        when(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).thenReturn(true);
 
         LockScreenSafetySource.setSafetySourceData(
                 mApplicationContext, mScreenLockPreferenceDetailsUtils, EVENT_SOURCE_STATE_CHANGED);
@@ -485,43 +483,16 @@ public class LockScreenSafetySourceTest {
 
         assertThat(safetySourceStatus.isEnabled()).isTrue();
         assertThat(safetySourceStatus.getPendingIntent()).isNotNull();
-        assertThat(safetySourceStatus.getIconAction()).isNotNull();
+        assertThat(safetySourceStatus.getIconAction()).isNull();
         assertThat(safetySourceStatus.getSeverityLevel())
                 .isEqualTo(SafetySourceData.SEVERITY_LEVEL_INFORMATION);
         assertThat(safetySourceStatus.getSummary().toString()).isEqualTo(SUMMARY);
     }
 
     @Test
-    public void setSafetySourceData_whenShouldShowGearMenu_setGearMenuActionIcon() {
+    public void setSafetySourceData_doesNotSetGearMenuActionIcon() {
         whenScreenLockIsEnabled();
         when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        when(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).thenReturn(true);
-
-        LockScreenSafetySource.setSafetySourceData(
-                mApplicationContext, mScreenLockPreferenceDetailsUtils, EVENT_SOURCE_STATE_CHANGED);
-
-        final ArgumentCaptor<SafetySourceData> captor =
-                ArgumentCaptor.forClass(SafetySourceData.class);
-        verify(mSafetyCenterManagerWrapper)
-                .setSafetySourceData(
-                        any(),
-                        eq(LockScreenSafetySource.SAFETY_SOURCE_ID),
-                        captor.capture(),
-                        any());
-        final IconAction iconAction = captor.getValue().getStatus().getIconAction();
-
-        assertThat(iconAction.getIconType()).isEqualTo(IconAction.ICON_TYPE_GEAR);
-        assertThat(iconAction.getPendingIntent().getIntent().getAction())
-                .isEqualTo(FAKE_ACTION_OPEN_SUB_SETTING);
-        assertThat(iconAction.getPendingIntent().getIntent().getStringExtra(EXTRA_DESTINATION))
-                .isEqualTo(FAKE_SCREEN_LOCK_SETTINGS);
-    }
-
-    @Test
-    public void setSafetySourceData_whenShouldNotShowGearMenu_doesNotSetGearMenuActionIcon() {
-        whenScreenLockIsEnabled();
-        when(mSafetyCenterManagerWrapper.isEnabled(mApplicationContext)).thenReturn(true);
-        when(mScreenLockPreferenceDetailsUtils.shouldShowGearMenu()).thenReturn(false);
 
         LockScreenSafetySource.setSafetySourceData(
                 mApplicationContext, mScreenLockPreferenceDetailsUtils, EVENT_SOURCE_STATE_CHANGED);
@@ -600,7 +571,5 @@ public class LockScreenSafetySourceTest {
 
         Intent launchScreenLockSettings = new Intent(FAKE_ACTION_OPEN_SUB_SETTING);
         launchScreenLockSettings.putExtra(EXTRA_DESTINATION, FAKE_SCREEN_LOCK_SETTINGS);
-        when(mScreenLockPreferenceDetailsUtils.getLaunchScreenLockSettingsIntent(anyInt()))
-                .thenReturn(launchScreenLockSettings);
     }
 }

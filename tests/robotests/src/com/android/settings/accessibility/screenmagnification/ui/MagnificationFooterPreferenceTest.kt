@@ -112,23 +112,6 @@ class MagnificationFooterPreferenceTest {
                 Html.FROM_HTML_MODE_COMPACT,
             )
             .toString()
-    private val keyboardOnlyShortcutsFlagOffSummary =
-        Html.fromHtml(
-                MessageFormat.format(
-                    context.getString(
-                        R.string
-                            .accessibility_screen_magnification_keyboard_shortcuts_flag_off_summary,
-                        metaString,
-                        altString,
-                    ),
-                    1,
-                    2,
-                    3,
-                    4,
-                ),
-                Html.FROM_HTML_MODE_COMPACT,
-            )
-            .toString()
     private val keyboardTouchSummary =
         Html.fromHtml(
                 MessageFormat.format(
@@ -157,24 +140,9 @@ class MagnificationFooterPreferenceTest {
         assertThat(preference.indexable).isFalse()
     }
 
-    @DisableFlags(
-        Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-        com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
-    @Test
-    fun getTitle_touchScreenSupported_hasHardKeyboard_oneFingerPanningFlagOff_shortcutsFlagOff() {
-        assertContentDescriptionAndTitle(
-            touchScreenSupported = true,
-            hardKeyboardAvailable = true,
-            oneFingerPanningEnabled = false,
-            expectedSummary = "$keyboardOnlyShortcutsFlagOffSummary\n\n$touchOnlyDefaultSummary",
-        )
-    }
-
     @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
-    @EnableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
-    fun getTitle_touchScreenSupported_hasHardKeyboard_oneFingerPanningFlagOff_shortcutsFlagOn() {
+    fun getTitle_touchScreenSupported_hasHardKeyboard_oneFingerPanningFlagOff() {
         assertContentDescriptionAndTitle(
             touchScreenSupported = true,
             hardKeyboardAvailable = true,
@@ -194,24 +162,9 @@ class MagnificationFooterPreferenceTest {
         )
     }
 
-    @DisableFlags(
-        Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-        com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
-    @Test
-    fun getTitle_touchScreenNotSupported_hasHardKeyboard_oneFingerPanningFlagOff_shortcutsFlagOff() {
-        assertContentDescriptionAndTitle(
-            touchScreenSupported = false,
-            hardKeyboardAvailable = true,
-            oneFingerPanningEnabled = false,
-            expectedSummary = keyboardOnlyShortcutsFlagOffSummary,
-        )
-    }
-
     @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
-    @EnableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @Test
-    fun getTitle_touchScreenNotSupported_hasHardKeyboard_oneFingerPanningFlagOff_shortcutsFlagOn() {
+    fun getTitle_touchScreenNotSupported_hasHardKeyboard_oneFingerPanningFlagOff() {
         assertContentDescriptionAndTitle(
             touchScreenSupported = false,
             hardKeyboardAvailable = true,
@@ -231,25 +184,9 @@ class MagnificationFooterPreferenceTest {
         )
     }
 
-    @DisableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
     @Test
-    fun getTitle_touchScreenSupported_hasHardKeyboard_oneFingerSettingsOff_shortcutsFlagOff() {
-        assertContentDescriptionAndTitle(
-            touchScreenSupported = true,
-            hardKeyboardAvailable = true,
-            oneFingerPanningEnabled = false,
-            expectedSummary =
-                "$keyboardOnlyShortcutsFlagOffSummary\n\n$oneFingerPanningOffDefaultSummary",
-        )
-    }
-
-    @EnableFlags(
-        Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-        com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
-    @Test
-    fun getTitle_touchScreenSupported_hasHardKeyboard_oneFingerSettingsOff_shortcutsFlagOn() {
+    fun getTitle_touchScreenSupported_hasHardKeyboard_oneFingerSettingsOff() {
         assertContentDescriptionAndTitle(
             touchScreenSupported = true,
             hardKeyboardAvailable = true,
@@ -258,30 +195,14 @@ class MagnificationFooterPreferenceTest {
         )
     }
 
-    @EnableFlags(
-        Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-        com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
     @Test
-    fun getTitle_touchScreenSupported_hasHardKeyboard_oneFingerSettingsOn_shortcutsFlagOn() {
+    fun getTitle_touchScreenSupported_hasHardKeyboard_oneFingerSettingsOn() {
         assertContentDescriptionAndTitle(
             touchScreenSupported = true,
             hardKeyboardAvailable = true,
             oneFingerPanningEnabled = true,
             expectedSummary = keyboardTouchSummary,
-        )
-    }
-
-    @DisableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
-    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
-    @Test
-    fun getTitle_touchScreenSupported_hasHardKeyboard_oneFingerSettingsOn_shortcutsFlagOff() {
-        assertContentDescriptionAndTitle(
-            touchScreenSupported = true,
-            hardKeyboardAvailable = true,
-            oneFingerPanningEnabled = true,
-            expectedSummary =
-                "$keyboardOnlyShortcutsFlagOffSummary\n\n$oneFingerPanningOnDefaultSummary",
         )
     }
 
@@ -296,24 +217,9 @@ class MagnificationFooterPreferenceTest {
         )
     }
 
-    @DisableFlags(com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES)
     @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
     @Test
     fun getTitle_touchScreenNotSupported_hasHardKeyboard_oneFingerSettingsOff() {
-        assertContentDescriptionAndTitle(
-            touchScreenSupported = false,
-            hardKeyboardAvailable = true,
-            oneFingerPanningEnabled = false,
-            expectedSummary = keyboardOnlyShortcutsFlagOffSummary,
-        )
-    }
-
-    @EnableFlags(
-        Flags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE,
-        com.android.hardware.input.Flags.FLAG_ENABLE_TALKBACK_AND_MAGNIFIER_KEY_GESTURES,
-    )
-    @Test
-    fun getTitle_touchScreenNotSupported_hasHardKeyboard_oneFingerSettingsOff_shortcutsFlagOn() {
         assertContentDescriptionAndTitle(
             touchScreenSupported = false,
             hardKeyboardAvailable = true,

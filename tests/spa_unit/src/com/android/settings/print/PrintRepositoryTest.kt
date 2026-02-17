@@ -16,6 +16,7 @@
 
 package com.android.settings.print
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.pm.ResolveInfo
 import android.content.pm.ServiceInfo
@@ -34,31 +35,37 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class PrintRepositoryTest {
 
-    private val printServiceInfo = PrintServiceInfo(
-        /* resolveInfo = */ ResolveInfo().apply { serviceInfo = MockServiceInfo },
-        /* settingsActivityName = */ "",
-        /* addPrintersActivityName = */ "",
-        /* advancedPrintOptionsActivityName = */ "",
-    )
+    private val printServiceInfo =
+        PrintServiceInfo(
+            /* resolveInfo = */ ResolveInfo().apply { serviceInfo = MockServiceInfo },
+            /* settingsActivityName = */ "",
+            /* addPrintersActivityName = */ "",
+            /* advancedPrintOptionsActivityName = */ "",
+        )
 
-    private val mockPrintManager = mock<PrintManager> {
-        on { getPrintServices(PrintManager.ALL_SERVICES) } doReturn listOf(printServiceInfo)
-    }
+    private val mockPrintManager =
+        mock<PrintManager> {
+            on { getPrintServices(PrintManager.ALL_SERVICES) } doReturn listOf(printServiceInfo)
+        }
 
-    private val context: Context = spy(ApplicationProvider.getApplicationContext()) {
-        on { getSystemService(PrintManager::class.java) } doReturn mockPrintManager
-    }
+    private val context: Context =
+        spy(ApplicationProvider.getApplicationContext()) {
+            on { getSystemService(PrintManager::class.java) } doReturn mockPrintManager
+        }
 
     private val repository = PrintRepository(context)
+    private val component = ComponentName(PACKAGE_NAME, SERVICE_NAME)
+    private val componentString = component.flattenToString()
 
     @Test
     fun printServiceDisplayInfosFlow_title() = runBlocking {
-        val displayInfo = repository.printServiceDisplayInfosFlow().firstWithTimeoutOrNull()!!
-            .single()
+        val displayInfo =
+            repository.printServiceDisplayInfosFlow().firstWithTimeoutOrNull()!!.single()
 
         assertThat(displayInfo.title).isEqualTo(LABEL)
     }
@@ -67,8 +74,8 @@ class PrintRepositoryTest {
     fun printServiceDisplayInfosFlow_isEnabled() = runBlocking {
         printServiceInfo.setIsEnabled(true)
 
-        val displayInfo = repository.printServiceDisplayInfosFlow().firstWithTimeoutOrNull()!!
-            .single()
+        val displayInfo =
+            repository.printServiceDisplayInfosFlow().firstWithTimeoutOrNull()!!.single()
 
         assertThat(displayInfo.isEnabled).isTrue()
         assertThat(displayInfo.summary)
@@ -79,8 +86,8 @@ class PrintRepositoryTest {
     fun printServiceDisplayInfosFlow_notEnabled() = runBlocking {
         printServiceInfo.setIsEnabled(false)
 
-        val displayInfo = repository.printServiceDisplayInfosFlow().firstWithTimeoutOrNull()!!
-            .single()
+        val displayInfo =
+            repository.printServiceDisplayInfosFlow().firstWithTimeoutOrNull()!!.single()
 
         assertThat(displayInfo.isEnabled).isFalse()
         assertThat(displayInfo.summary)
@@ -89,22 +96,57 @@ class PrintRepositoryTest {
 
     @Test
     fun printServiceDisplayInfosFlow_componentName() = runBlocking {
-        val displayInfo = repository.printServiceDisplayInfosFlow().firstWithTimeoutOrNull()!!
-            .single()
+        val displayInfo =
+            repository.printServiceDisplayInfosFlow().firstWithTimeoutOrNull()!!.single()
 
         assertThat(displayInfo.componentName).isEqualTo("$PACKAGE_NAME/$SERVICE_NAME")
+    }
+
+    @Test
+    fun isEnabled_serviceEnabled_returnsTrue() = runBlocking {
+        printServiceInfo.setIsEnabled(true)
+
+        assertThat(repository.isEnabled(componentString)).isTrue()
+    }
+
+    @Test
+    fun isEnabled_serviceDisabled_returnsFalse() = runBlocking {
+        printServiceInfo.setIsEnabled(false)
+
+        assertThat(repository.isEnabled(componentString)).isFalse()
+    }
+
+    @Test
+    fun isEnabled_serviceNotFound_returnsFalse() = runBlocking {
+        assertThat(repository.isEnabled("other.package/OtherService")).isFalse()
+    }
+
+    @Test
+    fun setEnabled_enableService_callsPrintManager() = runBlocking {
+        repository.setEnabled(componentString, true)
+
+        verify(mockPrintManager).setPrintServiceEnabled(component, true)
+    }
+
+    @Test
+    fun setEnabled_disableService_callsPrintManager() = runBlocking {
+        repository.setEnabled(componentString, false)
+
+        verify(mockPrintManager).setPrintServiceEnabled(component, false)
     }
 
     private companion object {
         const val PACKAGE_NAME = "package.name"
         const val SERVICE_NAME = "ServiceName"
         const val LABEL = "Label"
-        val MockServiceInfo = mock<ServiceInfo> {
-            on { loadLabel(any()) } doReturn LABEL
-            on { loadIcon(any()) } doReturn mock<Drawable>()
-        }.apply {
-            packageName = PACKAGE_NAME
-            name = SERVICE_NAME
-        }
+        val MockServiceInfo =
+            mock<ServiceInfo> {
+                    on { loadLabel(any()) } doReturn LABEL
+                    on { loadIcon(any()) } doReturn mock<Drawable>()
+                }
+                .apply {
+                    packageName = PACKAGE_NAME
+                    name = SERVICE_NAME
+                }
     }
 }

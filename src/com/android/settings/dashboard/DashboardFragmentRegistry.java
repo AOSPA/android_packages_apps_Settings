@@ -44,7 +44,13 @@ import com.android.settings.notification.ConfigureNotificationSettings;
 import com.android.settings.notification.SoundSettings;
 import com.android.settings.privacy.PrivacyDashboardFragment;
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment;
+import com.android.settings.safetycenter.ui.AccountSecuritySubpageFragment;
+import com.android.settings.safetycenter.ui.AppSecuritySubpageFragment;
+import com.android.settings.safetycenter.ui.CellularNetworkSecuritySubpageFragment;
+import com.android.settings.safetycenter.ui.DeviceFindersSubpageFragment;
+import com.android.settings.safetycenter.ui.DeviceUnlockSubpageFragment;
 import com.android.settings.safetycenter.ui.PrivacyControlsFragment;
+import com.android.settings.safetycenter.ui.SystemAndUpdatesSubpageFragment;
 import com.android.settings.security.LockscreenDashboardFragment;
 import com.android.settings.security.SecurityAdvancedSettings;
 import com.android.settings.security.SecuritySettings;
@@ -141,6 +147,18 @@ public class DashboardFragmentRegistry {
                 CategoryKey.CATEGORY_MEDIA_CONTROLS_SETTINGS);
         PARENT_TO_CATEGORY_KEY_MAP.put(PrivacyControlsFragment.class.getName(),
                 CategoryKey.CATEGORY_PRIVACY_CONTROLS);
+        PARENT_TO_CATEGORY_KEY_MAP.put(AppSecuritySubpageFragment.class.getName(),
+                CategoryKey.CATEGORY_SC_APP_SECURITY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(DeviceUnlockSubpageFragment.class.getName(),
+                CategoryKey.CATEGORY_SC_DEVICE_UNLOCK);
+        PARENT_TO_CATEGORY_KEY_MAP.put(AccountSecuritySubpageFragment.class.getName(),
+                CategoryKey.CATEGORY_SC_ACCOUNT_SECURITY);
+        PARENT_TO_CATEGORY_KEY_MAP.put(DeviceFindersSubpageFragment.class.getName(),
+                CategoryKey.CATEGORY_SC_DEVICE_FINDERS);
+        PARENT_TO_CATEGORY_KEY_MAP.put(SystemAndUpdatesSubpageFragment.class.getName(),
+                CategoryKey.CATEGORY_SC_SYSTEM_AND_UPDATES);
+        PARENT_TO_CATEGORY_KEY_MAP.put(CellularNetworkSecuritySubpageFragment.class.getName(),
+                CategoryKey.CATEGORY_SC_CELLULAR_NETWORK_SECURITY);
 
         CATEGORY_KEY_TO_PARENT_MAP = new ArrayMap<>(PARENT_TO_CATEGORY_KEY_MAP.size());
 

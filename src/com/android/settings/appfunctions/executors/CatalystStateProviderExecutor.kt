@@ -28,9 +28,11 @@ import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
+import com.android.settingslib.metadata.isUiOnlyPreference
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
@@ -130,6 +132,8 @@ class CatalystStateProviderExecutor(
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
+            if(metadata.isUiOnlyPreference(context))
+                return@forEach
             val config = settingConfigMap[metadata.key]
             val jsonValue =
                 when {
@@ -148,7 +152,7 @@ class CatalystStateProviderExecutor(
                         // Binding key is either equal to the key or contains the package name or
                         // other item specific id necessary to distinguish the items.
                         key = "${screenMetaData.key}/${metadata.bindingKey}",
-                        purpose = metadata.key,
+                        purpose = metadata.getPreferencePurpose(context).toString(),
                         name =
                             LocalizedString(
                                 english = metadata.getPreferenceTitle(englishContext).toString(),
@@ -163,9 +167,13 @@ class CatalystStateProviderExecutor(
 
         // This is hack because in general parameters are not human readable. We remove known
         // internal keys then just dump the rest in the description.
-        val basicDescription =
-            (screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "") +
-                (additionalDescription ?: "")
+        val basicDescription = listOfNotNull(
+            screenMetaData.getPreferenceScreenTitle(context)?.toString(),
+            additionalDescription,
+            screenMetaData.getPreferencePurpose(context).toString()
+        ).filter { it.isNotBlank() }
+            .joinToString(". ")
+
         val arguments = screenMetaData.arguments?.clone() as? BaseBundle
         arguments?.remove("source")
         val descriptionSuffix =

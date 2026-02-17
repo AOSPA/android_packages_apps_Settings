@@ -18,6 +18,8 @@ package com.android.settings.accessibility.screenmagnification
 
 import android.content.Context
 import android.content.Intent
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import androidx.activity.ComponentActivity
@@ -26,6 +28,7 @@ import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
+import com.android.server.accessibility.Flags
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.screenmagnification.FollowKeyboardPreferenceController.Companion.SETTING_KEY
 import com.android.settings.core.BasePreferenceController.AVAILABLE
@@ -89,9 +92,16 @@ class FollowKeyboardPreferenceControllerTest {
         )
     }
 
+    @DisableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_VIEWPORT_PRIORITIZATION)
     @Test
     fun isChecked_default_returnFalse() {
         assertThat(controller.isChecked).isFalse()
+    }
+
+    @EnableFlags(Flags.FLAG_ENABLE_MAGNIFICATION_VIEWPORT_PRIORITIZATION)
+    @Test
+    fun isChecked_default_returnTrue() {
+        assertThat(controller.isChecked).isTrue()
     }
 
     @Test

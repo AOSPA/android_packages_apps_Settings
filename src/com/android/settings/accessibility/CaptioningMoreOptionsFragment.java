@@ -21,11 +21,16 @@ import android.content.Context;
 import android.provider.Settings;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.captionpreferences.ui.CaptioningMoreOptionsScreen;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 /** Settings fragment containing more options of captioning properties. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class CaptioningMoreOptionsFragment extends DashboardFragment {
 
@@ -38,7 +43,12 @@ public class CaptioningMoreOptionsFragment extends DashboardFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.captioning_more_options;
+        return Flags.catalystCaptionPreferencesScreen() ? 0 : R.xml.captioning_more_options;
+    }
+
+    @Override
+    public @Nullable String getPreferenceScreenBindingKey(@NotNull Context context) {
+        return CaptioningMoreOptionsScreen.KEY;
     }
 
     @Override
@@ -52,7 +62,8 @@ public class CaptioningMoreOptionsFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.captioning_more_options) {
+            new BaseSearchIndexProvider(
+                    Flags.catalystCaptionPreferencesScreen() ? 0 : R.xml.captioning_more_options) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
                     // CaptioningMoreOptions is only searchable if captions are enabled, so that we
@@ -62,3 +73,4 @@ public class CaptioningMoreOptionsFragment extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(captionpreferences/ui/CaptioningScreens.kt:more_options_screen)

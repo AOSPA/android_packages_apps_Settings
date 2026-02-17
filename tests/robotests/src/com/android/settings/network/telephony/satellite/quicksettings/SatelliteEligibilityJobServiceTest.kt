@@ -25,6 +25,7 @@ import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -32,6 +33,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.Mock
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
@@ -44,7 +46,9 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowJobScheduler
 import org.robolectric.shadows.ShadowLooper
+import org.robolectric.shadows.ShadowProcess
 import org.robolectric.shadows.ShadowSubscriptionManager
+import org.robolectric.shadows.ShadowSystemProperties
 import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
@@ -55,6 +59,7 @@ class SatelliteEligibilityJobServiceTest {
     @Mock private lateinit var mockTelephonyManager: TelephonyManager
     @Mock private lateinit var mockSatelliteTilePromptUtils: SatelliteTilePromptUtils
     @Mock private lateinit var mockServiceState: ServiceState
+    @Mock private lateinit var mockSatelliteStateRepository: SatelliteStateRepository
 
     private lateinit var service: SatelliteEligibilityJobService
     private lateinit var context: Context
@@ -62,6 +67,7 @@ class SatelliteEligibilityJobServiceTest {
     private lateinit var shadowJobScheduler: ShadowJobScheduler
     private val subId = 1
     private var jobId = 0
+    private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.NOT_AVAILABLE)
 
     @Before
     fun setUp() {
@@ -95,26 +101,78 @@ class SatelliteEligibilityJobServiceTest {
 
         // Mock Utils
         SatelliteEligibilityJobService.satelliteTilePromptUtils = mockSatelliteTilePromptUtils
-        `when`(mockSatelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).thenReturn(false)
+        // schedule() and onStartJob() use different contexts, so we need to mock both.
+        `when`(mockSatelliteTilePromptUtils.areAllPromptsShown(context)).thenReturn(false)
+        `when`(mockSatelliteTilePromptUtils.shouldShowSatelliteTilePrompt(context)).thenReturn(true)
+        `when`(mockSatelliteTilePromptUtils.areAllPromptsShown(service)).thenReturn(false)
+        `when`(mockSatelliteTilePromptUtils.shouldShowSatelliteTilePrompt(service)).thenReturn(true)
 
         // Default JobParameters
         `when`(mockJobParameters.jobId).thenReturn(jobId)
+
+        // Mock Repository
+        SatelliteStateRepository.setInstance(mockSatelliteStateRepository)
+        `when`(mockSatelliteStateRepository.satelliteStatus).thenReturn(satelliteStatusFlow)
     }
 
     @After
     fun tearDown() {
         SatelliteEligibilityJobService.satelliteTilePromptUtils = SatelliteTilePromptUtils()
+        SatelliteStateRepository.setInstance(null)
+        ShadowSystemProperties.reset()
     }
 
     @Test
-    fun onStartJob_inService_reschedulesAndReturnsFalse() {
+    fun schedule_featureDisabled_doesNothing() {
+        ShadowSystemProperties.override("ro.test_harness", "true")
+
+        SatelliteEligibilityJobService.schedule(context)
+
+        assertThat(jobScheduler.getAllPendingJobs()).isEmpty()
+    }
+
+    @Test
+    fun onStartJob_featureDisabled_returnsFalse() {
+        ShadowSystemProperties.override("ro.test_harness", "true")
+
+        val result = service.onStartJob(mockJobParameters)
+
+        assertThat(result).isFalse()
+        verify(service, never()).getSystemService(TelephonyManager::class.java)
+    }
+
+    @Test
+    fun onStartJob_notSystemUser_returnsFalse() {
+        // UID for user 1. USER_SYSTEM is 0.
+        ShadowProcess.setUid(100000)
+
+        val result = service.onStartJob(mockJobParameters)
+
+        assertThat(result).isFalse()
+        verify(mockTelephonyManager, never()).registerTelephonyCallback(any(), any())
+    }
+
+    @Test
+    fun onStartJob_inService_terrestrial_reschedulesAndReturnsFalse() {
         `when`(mockServiceState.state).thenReturn(ServiceState.STATE_IN_SERVICE)
+        `when`(mockServiceState.isUsingNonTerrestrialNetwork()).thenReturn(false)
 
         val result = service.onStartJob(mockJobParameters)
 
         assertThat(result).isFalse()
         verify(mockTelephonyManager, never()).registerTelephonyCallback(any(), any())
         assertThat(shadowJobScheduler.getPendingJob(jobId)).isNotNull()
+    }
+
+    @Test
+    fun onStartJob_inService_satellite_returnsTrueAndRegistersCallback() {
+        `when`(mockServiceState.state).thenReturn(ServiceState.STATE_IN_SERVICE)
+        `when`(mockServiceState.isUsingNonTerrestrialNetwork()).thenReturn(true)
+
+        val result = service.onStartJob(mockJobParameters)
+
+        assertThat(result).isTrue()
+        verify(mockTelephonyManager).registerTelephonyCallback(any(), any())
     }
 
     @Test
@@ -138,8 +196,8 @@ class SatelliteEligibilityJobServiceTest {
     }
 
     @Test
-    fun onStartJob_promptAlreadyShown_returnsFalse() {
-        `when`(mockSatelliteTilePromptUtils.hasAddTilePromptBeenShown(context)).thenReturn(true)
+    fun onStartJob_allPromptsShown_returnsFalse() {
+        `when`(mockSatelliteTilePromptUtils.areAllPromptsShown(service)).thenReturn(true)
 
         val result = service.onStartJob(mockJobParameters)
 
@@ -148,7 +206,16 @@ class SatelliteEligibilityJobServiceTest {
     }
 
     @Test
-    fun callback_onServiceStateChanged_toInService_reschedulesAndFinishesJob() {
+    fun schedule_allPromptsShown_doesNothing() {
+        `when`(mockSatelliteTilePromptUtils.areAllPromptsShown(context)).thenReturn(true)
+
+        SatelliteEligibilityJobService.schedule(context)
+
+        assertThat(jobScheduler.getAllPendingJobs()).isEmpty()
+    }
+
+    @Test
+    fun callback_onServiceStateChanged_toInService_terrestrial_reschedulesAndFinishesJob() {
         `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
         service.onStartJob(mockJobParameters)
         // Clear previous schedule call
@@ -161,6 +228,7 @@ class SatelliteEligibilityJobServiceTest {
         // Trigger change to IN_SERVICE
         val newServiceState = mock(ServiceState::class.java)
         `when`(newServiceState.state).thenReturn(ServiceState.STATE_IN_SERVICE)
+        `when`(newServiceState.isUsingNonTerrestrialNetwork()).thenReturn(false)
         callback.onServiceStateChanged(newServiceState)
 
         verify(service).jobFinished(mockJobParameters, false)
@@ -169,44 +237,52 @@ class SatelliteEligibilityJobServiceTest {
     }
 
     @Test
-    fun callback_onCarrierRoamingNtnEligibleStateChanged_true_showsPromptAndFinishesJob_reschedules() {
+    fun callback_onServiceStateChanged_toInService_satellite_doesNothing() {
         `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
         service.onStartJob(mockJobParameters)
-        // Clear previous schedule call
-        jobScheduler.cancel(jobId)
 
         val callbackCaptor = ArgumentCaptor.forClass(TelephonyCallback::class.java)
         verify(mockTelephonyManager).registerTelephonyCallback(any(), callbackCaptor.capture())
-        val callback = callbackCaptor.value as TelephonyCallback.CarrierRoamingNtnListener
+        val callback = callbackCaptor.value as TelephonyCallback.ServiceStateListener
 
-        // Trigger eligibility
-        callback.onCarrierRoamingNtnEligibleStateChanged(true)
+        // Trigger change to IN_SERVICE on satellite
+        val newServiceState = mock(ServiceState::class.java)
+        `when`(newServiceState.state).thenReturn(ServiceState.STATE_IN_SERVICE)
+        `when`(newServiceState.isUsingNonTerrestrialNetwork()).thenReturn(true)
+        callback.onServiceStateChanged(newServiceState)
 
-        verify(mockSatelliteTilePromptUtils)
-            .showSatelliteTileAvailableNotification(any(Context::class.java) ?: context)
-        verify(service).jobFinished(mockJobParameters, false)
-        verify(mockTelephonyManager).unregisterTelephonyCallback(any<TelephonyCallback>())
-        assertThat(shadowJobScheduler.getPendingJob(jobId)).isNotNull()
+        verify(service, never()).jobFinished(any(), anyBoolean())
+        verify(mockTelephonyManager, never()).unregisterTelephonyCallback(any<TelephonyCallback>())
     }
 
     @Test
-    fun callback_onCarrierRoamingNtnModeChanged_true_showsPromptAndFinishesJob_reschedules() {
+    fun satelliteStatus_available_showsPromptAndFinishesJob_reschedules() {
         `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
         service.onStartJob(mockJobParameters)
         // Clear previous schedule call
         jobScheduler.cancel(jobId)
-        val callbackCaptor = ArgumentCaptor.forClass(TelephonyCallback::class.java)
-        verify(mockTelephonyManager).registerTelephonyCallback(any(), callbackCaptor.capture())
-        val callback = callbackCaptor.value as TelephonyCallback.CarrierRoamingNtnListener
 
-        // Trigger mode active
-        callback.onCarrierRoamingNtnModeChanged(true)
+        // Trigger status available
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        ShadowLooper.runUiThreadTasks()
 
-        verify(mockSatelliteTilePromptUtils)
-            .showSatelliteTileAvailableNotification(any(Context::class.java) ?: context)
-        verify(service).jobFinished(mockJobParameters, false)
-        verify(mockTelephonyManager).unregisterTelephonyCallback(any<TelephonyCallback>())
-        assertThat(shadowJobScheduler.getPendingJob(jobId)).isNotNull()
+        verify(mockSatelliteTilePromptUtils).showSatelliteTileAvailableNotification(service)
+        verify(mockSatelliteTilePromptUtils).recordPromptShown(service)
+    }
+
+    @Test
+    fun satelliteStatus_active_showsPromptAndFinishesJob_reschedules() {
+        `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
+        service.onStartJob(mockJobParameters)
+        // Clear previous schedule call
+        jobScheduler.cancel(jobId)
+
+        // Trigger status active
+        satelliteStatusFlow.value = SatelliteStatus.ACTIVE
+        ShadowLooper.runUiThreadTasks()
+
+        verify(mockSatelliteTilePromptUtils).showSatelliteTileAvailableNotification(service)
+        verify(mockSatelliteTilePromptUtils).recordPromptShown(service)
     }
 
     @Test
@@ -216,8 +292,8 @@ class SatelliteEligibilityJobServiceTest {
         // Clear previous schedule call
         jobScheduler.cancel(jobId)
 
-        // Fast forward time
-        ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
+        // Fast forward time to trigger timeout
+        ShadowLooper.idleMainLooper(10 * 60 * 1000L + 1000)
 
         verify(service).jobFinished(mockJobParameters, false)
         verify(mockTelephonyManager).unregisterTelephonyCallback(any<TelephonyCallback>())
@@ -235,5 +311,24 @@ class SatelliteEligibilityJobServiceTest {
         verify(mockTelephonyManager).unregisterTelephonyCallback(any<TelephonyCallback>())
         // Cannot easily verify handler removal without more injection, but assuming cleanup logic
         // is consistent
+    }
+
+    @Test
+    fun satelliteStatus_available_shouldNotShowPrompt_doesNotShowPrompt() {
+        `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
+        // Mock that the prompt should not be shown
+        `when`(mockSatelliteTilePromptUtils.shouldShowSatelliteTilePrompt(service))
+            .thenReturn(false)
+        service.onStartJob(mockJobParameters)
+        // Clear previous schedule call
+        jobScheduler.cancel(jobId)
+
+        // Trigger status available
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        ShadowLooper.runUiThreadTasks()
+
+        verify(mockSatelliteTilePromptUtils, never())
+            .showSatelliteTileAvailableNotification(service)
+        verify(mockSatelliteTilePromptUtils, never()).recordPromptShown(service)
     }
 }

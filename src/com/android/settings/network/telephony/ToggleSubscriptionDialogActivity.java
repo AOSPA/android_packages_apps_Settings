@@ -661,8 +661,10 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
                     + " satisfied.");
             return true;
         }
-        Log.d(TAG, "DSDS condition not satisfied.");
-        return false;
+        boolean satisfied = mIsEsimOperation && (mTelMgr.isMultiSimSupported() ==
+                TelephonyManager.MULTISIM_ALLOWED);
+        Log.d(TAG, "isDsdsConditionSatisfied: = " + satisfied);
+        return satisfied;
     }
 
     private boolean isRemovableSimEnabled() {

@@ -16,11 +16,13 @@
 
 package com.android.settings.dream;
 
+import static android.service.dreams.Flags.dreamsSwitcher;
 import static android.service.dreams.Flags.dreamsV2;
 
 import android.annotation.LayoutRes;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.icu.text.MessageFormat;
 import android.text.TextUtils;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -31,18 +33,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settingslib.utils.ColorUtil;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * RecyclerView adapter which displays list of items for the user to select.
  */
-public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final List<IDreamItem> mItemList;
+public class DreamAdapter<DreamItemT extends IDreamItem>
+        extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final List<DreamItemT> mItemList;
+    private final MessageFormat mOrdinalFormat =
+        new MessageFormat("{0,ordinal}", Locale.getDefault());
+    private final boolean mAllowMultiSelection;
     private int mLastSelectedPos = -1;
     private boolean mEnabled = true;
     private SparseIntArray mLayouts = new SparseIntArray();
@@ -82,9 +93,15 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 mSummaryView.setVisibility(View.VISIBLE);
             }
 
-            final Drawable icon = item.isActive()
-                    ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
-                    : item.getIcon().mutate();
+            final Drawable icon;
+            if (supportMultipleSelection() && item.getOrder() >= 0) {
+                icon = new NumberedIconDrawable(
+                    mContext, item.getOrder() + 1, R.color.dream_card_color_state_list);
+            } else {
+                icon = item.isActive()
+                        ? mContext.getDrawable(R.drawable.ic_dream_check_circle)
+                        : item.getIcon().mutate();
+            }
             final int iconSize = mContext.getResources().getDimensionPixelSize(
                     R.dimen.dream_item_icon_size);
             icon.setBounds(0, 0, iconSize, iconSize);
@@ -101,19 +118,42 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
             itemView.setOnClickListener(v -> {
                 item.onItemClicked();
-                if (mLastSelectedPos > -1 && mLastSelectedPos != position) {
-                    notifyItemChanged(mLastSelectedPos);
+                if (!supportMultipleSelection()) {
+                    if (mLastSelectedPos > -1 && mLastSelectedPos != position) {
+                        notifyItemChanged(mLastSelectedPos);
+                    }
+                    notifyItemChanged(position);
                 }
-                notifyItemChanged(position);
             });
 
-            if (item.isActive()) {
-                mLastSelectedPos = position;
-                itemView.setSelected(true);
-                itemView.setClickable(false);
-            } else {
-                itemView.setSelected(false);
+            final boolean isActive = item.isActive();
+            itemView.setSelected(isActive);
+            if (supportMultipleSelection()) {
+                ViewCompat.setAccessibilityDelegate(itemView, new AccessibilityDelegateCompat() {
+                    @Override
+                    public void onInitializeAccessibilityNodeInfo(View host,
+                            AccessibilityNodeInfoCompat info) {
+                        super.onInitializeAccessibilityNodeInfo(host, info);
+                        info.setCheckable(true);
+                        info.setChecked(isActive);
+                        // To avoid Talkback announcing "selected, checked...", we unset
+                        // selected here for the accessibility service. The view itself is
+                        // still selected to reflect the correct visual state.
+                        info.setSelected(false);
+                    }
+                });
                 itemView.setClickable(true);
+                if (item.getOrder() >= 0) {
+                    String ordinal = mOrdinalFormat.format(new Object[]{item.getOrder() + 1});
+                    itemView.setContentDescription(item.getTitle() + ", " + ordinal);
+                } else {
+                    itemView.setContentDescription(item.getTitle());
+                }
+            } else {
+                if (isActive) {
+                    mLastSelectedPos = position;
+                }
+                itemView.setClickable(!isActive);
             }
 
             if (item.viewType() != DreamItemViewTypes.NO_DREAM_ITEM) {
@@ -198,17 +238,29 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
     }
 
-    public DreamAdapter(SparseIntArray layouts, List<IDreamItem> itemList) {
+    public DreamAdapter(SparseIntArray layouts, List<DreamItemT> itemList) {
+        this(layouts, itemList, /* allowMultiSelection= */ false);
+    }
+
+    public DreamAdapter(
+            SparseIntArray layouts, List<DreamItemT> itemList, boolean allowMultiSelection) {
         mItemList = itemList;
         mLayouts = layouts;
+        mAllowMultiSelection = allowMultiSelection;
     }
 
-    public DreamAdapter(@LayoutRes int layoutRes, List<IDreamItem> itemList) {
+    public DreamAdapter(@LayoutRes int layoutRes, List<DreamItemT> itemList) {
+        this(layoutRes, itemList, /* allowMultiSelection= */ false);
+    }
+
+    public DreamAdapter(
+            @LayoutRes int layoutRes, List<DreamItemT> itemList, boolean allowMultiSelection) {
         mItemList = itemList;
         mLayouts.append(DreamItemViewTypes.DREAM_ITEM, layoutRes);
+        mAllowMultiSelection = allowMultiSelection;
     }
 
-    void setItemList(List<IDreamItem> itemList) {
+    void setItemList(List<DreamItemT> itemList) {
         mItemList.clear();
         mItemList.addAll(itemList);
     }
@@ -237,6 +289,10 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return mItemList.size();
     }
 
+    private boolean supportMultipleSelection() {
+        return dreamsSwitcher() && mAllowMultiSelection;
+    }
+
     /**
      * Sets the enabled state of all items.
      */
@@ -252,5 +308,32 @@ public class DreamAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
      */
     public boolean getEnabled() {
         return mEnabled;
+    }
+
+    /**
+     * Rotates the items in the list.
+     *
+     * @param fromPos The position to start rotating from.
+     * @param toPos The position to rotate to.
+     */
+    public void rotateItems(int fromPos, int toPos) {
+        if (fromPos == toPos) {
+            return;
+        }
+
+        if (fromPos < toPos) {
+            // Move down, rotate other items up.
+            List<DreamItemT> subList = mItemList.subList(fromPos, toPos + 1);
+            Collections.rotate(subList, -1);
+        } else {
+            // Move up, rotate other items down.
+            List<DreamItemT> subList = mItemList.subList(toPos, fromPos + 1);
+            Collections.rotate(subList, 1);
+        }
+        notifyItemMoved(fromPos, toPos);
+    }
+
+    List<DreamItemT> getItems() {
+        return mItemList;
     }
 }

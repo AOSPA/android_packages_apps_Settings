@@ -20,8 +20,6 @@ import static com.android.settings.widget.EntityHeaderController.PREF_KEY_APP_HE
 
 import android.app.Activity;
 import android.content.Context;
-import android.text.BidiFormatter;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -84,6 +82,7 @@ public class HeaderPreferenceController extends NotificationPreferenceController
                     .setLabel(getSummary())
                     .setSummary(getSecondSummary())
                     .setPackageName(mAppRow.pkg)
+                    .setIconContentDescription(mAppRow.label.toString())
                     .setUid(mAppRow.uid)
                     .setButtonActions(EntityHeaderController.ActionType.ACTION_NOTIF_PREFERENCE,
                             EntityHeaderController.ActionType.ACTION_NONE)

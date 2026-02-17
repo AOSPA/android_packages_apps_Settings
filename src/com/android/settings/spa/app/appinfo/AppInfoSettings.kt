@@ -135,6 +135,7 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         val app = packageInfo.applicationInfo ?: return@RegularScaffold
         val appInfoProvider = remember(packageInfo) { AppInfoProvider(packageInfo) }
         val isHibernationSwitchEnabledStateFlow = MutableStateFlow(false)
+        val isContinueAcrossDevicesSwitchEnabledStateFlow = MutableStateFlow(false)
 
         appInfoProvider.AppInfo()
 
@@ -157,8 +158,23 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             DefaultAppShortcuts(app)
         }
 
+        if (com.android.window.flags.Flags.virtualGamepadOverride()) {
+            Category(title = stringResource(R.string.app_info_experience_category)) {
+                VirtualGamepadPreference(app)
+            }
+        }
+
         Category(title = stringResource(R.string.unused_apps_category)) {
             HibernationSwitchPreference(app, isHibernationSwitchEnabledStateFlow)
+        }
+
+        if (android.companion.Flags.taskContinuity()) {
+            Category(title = stringResource(R.string.task_continuity_category)) {
+                ContinueAcrossDevicesSwitchPreference(
+                    app,
+                    isContinueAcrossDevicesSwitchEnabledStateFlow,
+                )
+            }
         }
 
         Category(title = stringResource(R.string.advanced_apps)) {

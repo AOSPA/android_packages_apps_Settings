@@ -17,13 +17,15 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.PersistableBundle
+import android.provider.Settings
 import android.telephony.CarrierConfigManager
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
 import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
 import android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL
 import android.telephony.SubscriptionManager
-import android.telephony.satellite.SatelliteManager
 import android.util.Log
 
 /** Utility class for satellite/telephony-related functionalities. */
@@ -55,19 +57,17 @@ object SatelliteUtils {
     }
 
     /**
-     * Returns true if LTE-based NTN is supported for the carrier.
+     * Returns true if Carrier Roaming NTN is supported for the carrier.
      *
-     * If the attach restriction reasons are empty and Satellite Attach is supported in the carrier
-     * config, it means that LTE-based NTN is supported.
+     * This checks if satellite attach is supported by carrier config. It does NOT check the
+     * connection type (LTE vs NB-IoT).
+     *
+     * "Support" is defined as inherent capability REGARDLESS of current availability or status.
+     *
+     * @param context The context to use for fetching carrier config.
+     * @param activeSubId The active subscription ID to check carrier support for.
      */
-    fun isLteBasedNtnSupportedByCarrier(context: Context, activeSubId: Int): Boolean {
-        val satelliteManager: SatelliteManager? =
-            context.getSystemService(SatelliteManager::class.java)
-        if (satelliteManager == null) {
-            Log.w(TAG, "SatelliteManager is null")
-            return false
-        }
-
+    fun isCarrierRoamingNtnSupported(context: Context, activeSubId: Int): Boolean {
         if (activeSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.w(TAG, "ActiveSubId is invalid")
             return false
@@ -76,6 +76,26 @@ object SatelliteUtils {
         val configBundle = fetchCarrierConfigData(context, activeSubId)
         val isSatelliteAttachSupported =
             configBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
+
+        Log.d(
+            TAG,
+            "isCarrierRoamingNtnSupported: isSatelliteAttachSupported: $isSatelliteAttachSupported",
+        )
+        return isSatelliteAttachSupported
+    }
+
+    /**
+     * Returns true if LTE-based NTN is supported for the carrier.
+     *
+     * If carrier roaming NTN is supported by carrier, attach restriction reasons are empty and
+     * carrier roaming NTN connect type is automatic, it means that LTE-based NTN is supported.
+     */
+    fun isLteBasedNtnSupportedByCarrier(context: Context, activeSubId: Int): Boolean {
+        if (!isCarrierRoamingNtnSupported(context, activeSubId)) {
+            return false
+        }
+
+        val configBundle = fetchCarrierConfigData(context, activeSubId)
         // TODO(b/434793872): May need to handle extra logic for if connect type is
         // CARRIER_ROAMING_NTN_CONNECT_HYBRID. In certain cases, we may want to show NBIOT landing
         // page instead of LTE landing page.
@@ -85,30 +105,20 @@ object SatelliteUtils {
                 KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 /* default= */ CARRIER_ROAMING_NTN_CONNECT_MANUAL,
             ) != CARRIER_ROAMING_NTN_CONNECT_MANUAL
-        val hasNoAttachRestrictionReasons =
-            satelliteManager.getAttachRestrictionReasonsForCarrier(activeSubId).isEmpty()
-        Log.i(
-            TAG,
-            "isLteBasedNtnSupported: ${hasNoAttachRestrictionReasons && isSatelliteAttachSupported && isCarrierRoamingNtnConnectTypeAutomatic} " +
-                "[hasNoAttachRestrictionReasons=$hasNoAttachRestrictionReasons, " +
-                "isSatelliteAttachSupported=$isSatelliteAttachSupported, " +
-                "isCarrierRoamingNtnConnectTypeAutomatic=$isCarrierRoamingNtnConnectTypeAutomatic]",
-        )
-        return hasNoAttachRestrictionReasons &&
-            isSatelliteAttachSupported &&
-            isCarrierRoamingNtnConnectTypeAutomatic
+
+        Log.d(TAG, "isLteBasedNtnSupportedByCarrier: $isCarrierRoamingNtnConnectTypeAutomatic")
+        return isCarrierRoamingNtnConnectTypeAutomatic
     }
 
     private fun fetchCarrierConfigData(context: Context, subId: Int): PersistableBundle {
         val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)
-        var bundle = CarrierConfigManager.getDefaultConfig()
 
         if (carrierConfigManager == null) {
             Log.e(TAG, "CarrierConfigManager is null, returning default config.")
-            return bundle
+            return CarrierConfigManager.getDefaultConfig()
         }
 
-        try {
+        return try {
             val fetchedBundle =
                 carrierConfigManager.getConfigForSubId(
                     subId,
@@ -116,16 +126,43 @@ object SatelliteUtils {
                     KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 )
             if (!fetchedBundle.isEmpty) {
-                bundle = fetchedBundle
+                fetchedBundle
             } else {
                 Log.e(TAG, "Fetched bundle is null or empty, using default config.")
+                CarrierConfigManager.getDefaultConfig()
             }
         } catch (exception: IllegalStateException) {
             Log.e(TAG, "Exception fetching carrier config: $exception")
+            CarrierConfigManager.getDefaultConfig()
         }
+    }
 
-        return bundle
+    /**
+     * Returns the Intent to view the Satellite SOS supported countries Google Help Center Article
+     */
+    fun getSatelliteCoverageIntent(): Intent {
+        return Intent(Intent.ACTION_VIEW, Uri.parse(SATELLITE_SOS_COVERAGE_URL))
+    }
+
+    /** Returns the Intent to change the default SMS application. */
+    fun getDefaultSmsAppIntent(): Intent {
+        return Intent(android.provider.Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+    }
+
+    /** Returns the Intent to view the location source settings. */
+    fun getLocationSourceSettingsIntent(): Intent {
+        return Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+    }
+
+    /** Returns the Intent for the carrier satellite settings. */
+    fun getCarrierSettingsIntent(context: Context): Intent {
+        val intent = Intent(Settings.ACTION_SATELLITE_SETTING)
+        intent.putExtra(":settings:show_fragment_as_subsetting", true)
+        intent.putExtra("sub_id", SubscriptionManager.getActiveDataSubscriptionId())
+        return intent
     }
 
     private const val TAG = "SatelliteUtils"
+    private const val SATELLITE_SOS_COVERAGE_URL =
+        "https://support.google.com/pixelphone?p=satellitesos"
 }

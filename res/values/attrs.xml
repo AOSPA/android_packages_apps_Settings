@@ -206,4 +206,9 @@
     <attr name="colorScStatusIconBackgroundInfo" format="color" />
     <attr name="colorScStatusIconBackgroundRecommend" format="color" />
     <attr name="colorScStatusIconBackgroundWarn" format="color" />
+
+    <declare-styleable name="IllustrationItem">
+        <attr name="android:drawable" />
+        <attr name="lottie_rawRes" format="reference" />
+    </declare-styleable>
 </resources>

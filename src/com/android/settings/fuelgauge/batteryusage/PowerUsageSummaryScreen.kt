@@ -40,7 +40,7 @@ open class PowerUsageSummaryScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.power_usage_summary_screen_purpose
 
@@ -76,20 +76,20 @@ open class PowerUsageSummaryScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +BatteryHeaderPreference()
-            if (Flags.deeplinkBattery25q4()) {
-                +UntitledPreferenceCategoryMetadata(
-                    key = "power_usage_summary_category",
-                    purpose = R.string.power_usage_summary_category_purpose,
-                ) += {
+            +UntitledPreferenceCategoryMetadata(
+                key = "power_usage_summary_category",
+                purpose = R.string.power_usage_summary_category_purpose,
+            ) +=
+                {
                     +PowerUsageAdvancedScreen.KEY
                 }
-            }
             +UntitledPreferenceCategoryMetadata(
                 key = "percentage_category",
                 purpose = R.string.percentage_category_purpose,
-            ) += {
-                +BatteryPercentageSwitchPreference()
-            }
+            ) +=
+                {
+                    +BatteryPercentageSwitchPreference()
+                }
         }
 
     companion object {
