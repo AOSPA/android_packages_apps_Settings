@@ -23,6 +23,7 @@ import android.annotation.NonNull;
 import android.annotation.RequiresPermission;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -47,6 +48,7 @@ import androidx.annotation.Nullable;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.os.SomeArgs;
+import com.android.settings.R;
 
 import com.google.android.material.slider.Slider;
 import com.google.android.material.slider.Slider.OnChangeListener;
@@ -151,15 +153,14 @@ public class SliderVolumizer implements OnSliderTouchListener, OnChangeListener,
     private boolean mAllowMedia;
     private boolean mAllowRinger;
 
-    public SliderVolumizer(Context context, int streamType, Uri defaultUri, Callback callback) {
-        this(context, streamType, defaultUri, callback, true /* playSample */);
+    public SliderVolumizer(Context context, int streamType, Callback callback) {
+        this(context, streamType, callback, true /* playSample */);
     }
 
     @RequiresPermission(Manifest.permission.READ_DEVICE_CONFIG)
     public SliderVolumizer(
             Context context,
             int streamType,
-            Uri defaultUri,
             Callback callback,
             boolean playSample) {
         mContext = context;
@@ -194,16 +195,26 @@ public class SliderVolumizer implements OnSliderTouchListener, OnChangeListener,
         if (mCallback != null) {
             mCallback.onMuted(mMuted, isZenMuted());
         }
-        if (defaultUri == null) {
-            if (mStreamType == AudioManager.STREAM_RING) {
-                defaultUri = System.DEFAULT_RINGTONE_URI;
-            } else if (mStreamType == AudioManager.STREAM_NOTIFICATION) {
-                defaultUri = System.DEFAULT_NOTIFICATION_URI;
-            } else {
-                defaultUri = System.DEFAULT_ALARM_ALERT_URI;
-            }
+        switch(mStreamType) {
+            case AudioManager.STREAM_MUSIC:
+            case AudioManager.STREAM_ASSISTANT:
+                mDefaultUri = getMediaVolumeUri();
+                break;
+            case AudioManager.STREAM_RING:
+                mDefaultUri = System.DEFAULT_RINGTONE_URI;
+                break;
+            case AudioManager.STREAM_NOTIFICATION:
+                mDefaultUri = System.DEFAULT_NOTIFICATION_URI;
+                break;
+            default:
+                mDefaultUri = System.DEFAULT_ALARM_ALERT_URI;
         }
-        mDefaultUri = defaultUri;
+    }
+
+    private Uri getMediaVolumeUri() {
+        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
+                + mContext.getPackageName()
+                + "/" + R.raw.media_volume);
     }
 
     /**
