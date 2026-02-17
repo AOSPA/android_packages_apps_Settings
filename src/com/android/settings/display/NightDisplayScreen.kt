@@ -39,6 +39,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 @ProvidePreferenceScreen(NightDisplayScreen.KEY)
@@ -48,6 +49,8 @@ open class NightDisplayScreen(val context: Context) :
     PrimarySwitchPreferenceBinding,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
 
     val colorDisplayManager: ColorDisplayManager? =
         context.getSystemService(ColorDisplayManager::class.java)

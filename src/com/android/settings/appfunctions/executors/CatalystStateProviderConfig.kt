@@ -109,7 +109,9 @@ import com.android.settings.display.HdrBrightnessApiScreen
 import com.android.settings.display.NightDisplayScreen
 import com.android.settings.display.ScreenTimeoutScreen
 import com.android.settings.display.darkmode.DarkModeScreen
+import com.android.settings.dream.DreamSettingsApiScreen
 import com.android.settings.dream.ScreensaverScreen
+import com.android.settings.flags.Flags
 import com.android.settings.emergency.EmergencyDashboardScreen
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedScreen
@@ -187,6 +189,7 @@ import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.WifiDataUsageScreenApi
 import com.android.settings.wifi.calling.WifiCallingScreen
 import com.android.settings.wifi.details.WifiDetailsScreenApi
+import com.android.settings.wifi.details2.WifiPrivacyScreenApi
 import com.android.settings.wifi.p2p.WifiDirectApiScreen
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settings.wifi.tether.WifiHotspotScreen
@@ -367,6 +370,10 @@ private fun getCatalystScreenConfigs() =
             enabled = true,
             screenKey = ScreensaverScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = DreamSettingsApiScreen.KEY,
         ),
         PerScreenCatalystConfig(
             enabled = true,
@@ -612,7 +619,6 @@ private fun getCatalystScreenConfigs() =
             screenKey = InstallCertificateFromStorageScreenApi.KEY,
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = IccLockApiScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = ContentProtectionScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothScanningApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceUnlockApiScreen.KEY),
@@ -620,6 +626,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDataUsageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OpeningLinksApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
     )
 

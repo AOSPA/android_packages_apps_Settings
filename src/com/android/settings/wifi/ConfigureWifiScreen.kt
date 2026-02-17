@@ -35,11 +35,14 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ConfigureWifiScreen.KEY)
 open class ConfigureWifiScreen(context: Context) :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceLifecycleProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+
 
     private val airplaneModeDataStore = AirplaneModePreference.createDataStore(context)
     private lateinit var keyedObserver: KeyedObserver<String>

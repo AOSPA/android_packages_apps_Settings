@@ -49,7 +49,6 @@ class MyDeviceInfoApiFirstScreen :
         purpose = R.string.my_device_info_pref_screen_purpose,
         alreadyPartiallyMigrated = MyDeviceInfoScreen::class,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
         preference(

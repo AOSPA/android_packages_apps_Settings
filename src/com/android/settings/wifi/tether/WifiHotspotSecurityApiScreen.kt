@@ -31,7 +31,6 @@ class WifiHotspotSecurityApiScreen :
         fragment = WifiHotspotSecuritySettings::class,
         purpose = R.string.wifi_hotspot_security_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 

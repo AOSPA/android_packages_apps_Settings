@@ -36,10 +36,13 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 @ProvidePreferenceScreen(NetworkProviderScreen.KEY)
 open class NetworkProviderScreen :
     PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceRestrictionMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+
     override val key: String
         get() = KEY
 

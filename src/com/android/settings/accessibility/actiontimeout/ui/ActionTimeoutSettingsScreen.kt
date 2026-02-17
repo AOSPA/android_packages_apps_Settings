@@ -33,11 +33,14 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /** Preference screen for "Time to take action (Accessibility timeout)" settings. */
 @ProvidePreferenceScreen(ActionTimeoutSettingsScreen.KEY)
 open class ActionTimeoutSettingsScreen(context: Context) :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceLifecycleProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 

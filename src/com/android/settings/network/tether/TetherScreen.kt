@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 // LINT.IfChange
 @ProvidePreferenceScreen(TetherScreen.KEY)
@@ -44,6 +45,8 @@ open class TetherScreen :
     PreferenceTitleProvider,
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+
 
     override val key: String
         get() = KEY

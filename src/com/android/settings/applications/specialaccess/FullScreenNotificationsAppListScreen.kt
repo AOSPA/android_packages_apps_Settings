@@ -25,6 +25,7 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /**
  * Catalyst screen to display the list of special apps with "Full-screen notifications" permission.
@@ -33,6 +34,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
  */
 @ProvidePreferenceScreen(FullScreenNotificationsAppListScreen.KEY)
 open class FullScreenNotificationsAppListScreen : SpecialAccessAppListScreen() {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, TAG_DEVICE_STATE_SCREEN)
 
     override val key: String
         get() = KEY
@@ -46,7 +48,6 @@ open class FullScreenNotificationsAppListScreen : SpecialAccessAppListScreen() {
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 

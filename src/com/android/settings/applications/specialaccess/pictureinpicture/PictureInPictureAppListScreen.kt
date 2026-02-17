@@ -25,9 +25,11 @@ import com.android.settings.applications.specialaccess.SpecialAccessAppListScree
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(PictureInPictureAppListScreen.KEY)
 open class PictureInPictureAppListScreen : SpecialAccessAppListScreen() {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, TAG_DEVICE_STATE_SCREEN)
 
     override val key: String
         get() = KEY
@@ -43,7 +45,7 @@ open class PictureInPictureAppListScreen : SpecialAccessAppListScreen() {
 
     override fun getMetricsCategory() = SettingsEnums.SETTINGS_MANAGE_PICTURE_IN_PICTURE
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
+
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         if (metadata == null) Intent(ACTION_PICTURE_IN_PICTURE_SETTINGS) else null

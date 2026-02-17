@@ -31,6 +31,8 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settings.appfunctions.DeviceStateAppFunctionType
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /** Accessibility settings for vibration intensities. */
 // TODO(b/368360218): investigate if we still need this screen once we finish the migration.
@@ -39,6 +41,8 @@ import kotlinx.coroutines.CoroutineScope
 // LINT.IfChange
 @ProvidePreferenceScreen(VibrationIntensityScreen.KEY)
 open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override val key: String
         get() = KEY
 

@@ -23,9 +23,11 @@ import com.android.settings.R
 import com.android.settingslib.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(WriteSystemPreferencesAppListScreen.KEY)
 open class WriteSystemPreferencesAppListScreen : SpecialAccessAppListScreen() {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
     override val key: String
         get() = KEY

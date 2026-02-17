@@ -32,9 +32,12 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NOTIFICATIONS
 
 @ProvidePreferenceScreen(SoundScreen.KEY)
 open class SoundScreen : PreferenceScreenMixin, PreferenceIconProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NOTIFICATIONS)
+
     override val key: String
         get() = KEY
 

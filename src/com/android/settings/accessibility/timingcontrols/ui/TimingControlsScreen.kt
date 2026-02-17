@@ -27,10 +27,13 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /** Provides the preference screen for Timing Controls settings. */
 @ProvidePreferenceScreen(TimingControlsScreen.KEY)
 open class TimingControlsScreen : PreferenceScreenMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override val highlightMenuKey: Int
         get() = R.string.menu_key_accessibility
 

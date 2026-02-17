@@ -13,30 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.android.settings.spa.app.specialaccess
 
+package com.android.settings.dream
+
+import android.content.Context
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_APPS
 
-@ProvidePreferenceScreen(LongBackgroundTasksAppsApiScreen.KEY)
-class LongBackgroundTasksAppsApiScreen :
+// LINT.IfChange
+@ProvidePreferenceScreen(DreamSettingsApiScreen.KEY)
+class DreamSettingsApiScreen :
     PreferencesApiScreen(
         key = KEY,
-        topLevelSettingsCategory = Category.APPS,
-        spaRoutePrefix = LongBackgroundTasksAppListProvider.getAppListRoute(),
-        purpose = R.string.special_access_long_background_tasks_apps_list_purpose,
+        topLevelSettingsCategory = Category.DISPLAY,
+        fragment = DreamSettings::class,
+        purpose = R.string.screensaver_purpose,
+        alreadyPartiallyMigrated = ScreensaverScreen::class,
     ) {
+
     init {
         flag { Flags.catalystMigration26q2() }
-
-        tags(APP_FUNCTION_APPS)
     }
 
     companion object {
-        const val KEY = "long_background_tasks_apps"
+        const val KEY = "api_screensaver"
     }
 }
+// LINT.ThenChange(DreamSettings.java)

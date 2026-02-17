@@ -32,8 +32,7 @@ class ContactsStorageApiScreen :
         fragment = ContactsStorageSettings::class,
         purpose = R.string.contacts_storage_settings_purpose,
     ) {
-    init {
-        // TODO(b/464954587): Add preference migration for the screen.
+    init {        // TODO(b/464954587): Add preference migration for the screen.
         flag { Flags.catalystMigration26q2() }
         preconditions(R.string.contacts_storage_screen_preconditions) {
             if (ContactsStoragePreferenceController.isContactsStorageAvailable(context)) {
