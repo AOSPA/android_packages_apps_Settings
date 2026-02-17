@@ -135,6 +135,7 @@ import com.android.settings.location.LocationScreen
 import com.android.settings.location.LocationServicesScreen
 import com.android.settings.location.RecentLocationAccessScreen
 import com.android.settings.network.AdaptiveConnectivityScreen
+import com.android.settings.network.AdaptiveConnectivityApiScreen
 import com.android.settings.network.AirplaneModeSettingsScreen
 import com.android.settings.network.MobileNetworkListScreen
 import com.android.settings.network.NetworkDashboardScreen
@@ -257,6 +258,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = ColorCorrectionScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ExtraDimScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AdaptiveConnectivityScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AdaptiveConnectivityApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AutoBrightnessScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HdrBrightnessApiScreen.KEY),
         PerScreenCatalystConfig(
@@ -656,6 +658,16 @@ private fun getDeviceStateItemList() =
             enabled = true,
             settingKey = "adaptive_connectivity_enabled",
             settingScreenKey = AdaptiveConnectivityScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "adaptive_connectivity_wifi_enabled",
+            settingScreenKey = AdaptiveConnectivityApiScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = true,
+            settingKey = "adaptive_connectivity_mobile_network_enabled",
+            settingScreenKey = AdaptiveConnectivityApiScreen.KEY,
         ),
         DeviceStateItemConfig(
             enabled = true,
