@@ -104,6 +104,7 @@ import com.android.settings.deviceinfo.storage.StoragePreferenceScreen
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreen
 import com.android.settings.display.AutoBrightnessScreen
 import com.android.settings.display.ColorModeScreen
+import com.android.settings.display.ColorModeApiScreen
 import com.android.settings.display.DisplayScreen
 import com.android.settings.display.HdrBrightnessApiScreen
 import com.android.settings.display.NightDisplayScreen
@@ -628,6 +629,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ColorModeApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =

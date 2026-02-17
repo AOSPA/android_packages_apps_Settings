@@ -99,4 +99,4 @@ public class ColorModePreferenceController extends BasePreferenceController
         return ColorModeUtils.getActiveColorModeName(mContext);
     }
 }
-// LINT.ThenChange(ColorModeScreen.kt)
+// LINT.ThenChange(ColorModeScreen.kt, ColorModeApiScreen.kt)

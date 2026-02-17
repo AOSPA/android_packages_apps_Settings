@@ -456,4 +456,4 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
                 }
             };
 }
-// LINT.ThenChange(ColorModeScreen.kt)
+// LINT.ThenChange(ColorModeScreen.kt, ColorModeApiScreen.kt)
