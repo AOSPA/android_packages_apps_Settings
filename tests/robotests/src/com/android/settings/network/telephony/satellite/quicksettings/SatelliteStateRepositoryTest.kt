@@ -47,6 +47,7 @@ import org.mockito.ArgumentMatchers.any
 import org.mockito.Mock
 import org.mockito.Mockito.atLeastOnce
 import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.doThrow
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
@@ -315,6 +316,27 @@ class SatelliteStateRepositoryTest {
             advanceUntilIdle()
 
             assertThat(values.last()).isEqualTo(SatelliteStatus.AVAILABLE)
+        }
+
+    @Test
+    fun satelliteDisallowedReasons_phoneProcessNotReady_doesNotCrash() =
+        testScope.runTest {
+            doThrow(IllegalStateException("Telephony service is null"))
+                .`when`(satelliteManager)
+                .registerForSatelliteDisallowedReasonsChanged(any(), any())
+
+            repository = createRepository(backgroundScope)
+
+            // Act: Collect the flow
+            // We expect this NOT to throw an exception.
+            try {
+                repository.satelliteDisallowedReasons.launchIn(backgroundScope)
+                advanceUntilIdle()
+            } catch (e: Exception) {
+                org.junit.Assert.fail(
+                    "Repository crashed when phone process was down: ${e.message}"
+                )
+            }
         }
 
     // Helpers to capture callbacks and trigger updates
