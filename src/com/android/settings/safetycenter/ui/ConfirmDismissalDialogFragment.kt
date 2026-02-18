@@ -36,18 +36,27 @@ class ConfirmDismissalDialogFragment : DialogFragment() {
         )
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val issue = requireArguments().getParcelable(ISSUE_KEY, SafetyCenterIssue::class.java)!!
+        val arguments = requireArguments()
+        val issue = arguments.getParcelable(ISSUE_KEY, SafetyCenterIssue::class.java)!!
+        val bannerKey = arguments.getString(BANNER_KEY_EXTRA)!!
 
         return AlertDialog.Builder(requireContext())
             .setTitle(R.string.safety_center_issue_card_dismiss_confirmation_title)
             .setMessage(R.string.safety_center_issue_card_dismiss_confirmation_message)
             .setPositiveButton(R.string.dismiss) { _, _ ->
-                viewModel.dismissIssue(issue)
-                viewModel.interactionLogger.recordForIssue(
-                    Action.ISSUE_DISMISS_CLICKED,
-                    issue,
-                    isDismissed = false,
-                )
+                val host =
+                    (requireParentFragment() as? androidx.preference.PreferenceFragmentCompat)
+                val banner = host?.findPreference<SafetyIssueBannerPreference>(bannerKey)
+                val capturedViewModel = viewModel
+
+                banner?.animateDismiss {
+                    capturedViewModel.dismissIssue(issue)
+                    viewModel.interactionLogger.recordForIssue(
+                        Action.ISSUE_DISMISS_CLICKED,
+                        issue,
+                        isDismissed = false,
+                    )
+                }
             }
             .setNegativeButton(R.string.cancel, /* listener= */ null)
             .create()
@@ -55,18 +64,19 @@ class ConfirmDismissalDialogFragment : DialogFragment() {
 
     companion object {
         private const val ISSUE_KEY = "issue"
+        private const val BANNER_KEY_EXTRA = "banner_key"
 
-        /**
-         * Creates a new instance of the dialog.
-         *
-         * @param issue The SafetyCenterIssue to be dismissed.
-         */
-        fun newInstance(issue: SafetyCenterIssue): ConfirmDismissalDialogFragment {
-            val fragment = ConfirmDismissalDialogFragment()
-            val args = Bundle()
-            args.putParcelable(ISSUE_KEY, issue)
-            fragment.arguments = args
-            return fragment
+        fun newInstance(
+            issue: SafetyCenterIssue,
+            bannerKey: String,
+        ): ConfirmDismissalDialogFragment {
+            return ConfirmDismissalDialogFragment().apply {
+                arguments =
+                    Bundle().apply {
+                        putParcelable(ISSUE_KEY, issue)
+                        putString(BANNER_KEY_EXTRA, bannerKey)
+                    }
+            }
         }
     }
 }

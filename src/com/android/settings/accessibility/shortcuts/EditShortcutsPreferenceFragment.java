@@ -78,8 +78,10 @@ import com.android.settingslib.metadata.ValidatedKeyParameters;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.util.DelightHelper;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.google.android.setupdesign.template.IconMixin;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -304,6 +306,11 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
                     R.drawable.ic_accessibility_visibility);
             AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                     /* description= */ null, icon);
+
+            if (DelightHelper.shouldApplyAnimatedIcon(getContext())) {
+                final IconMixin iconMixin = layout.getMixin(IconMixin.class);
+                iconMixin.setAnimatedIcon(R.raw.icon_visibility);
+            }
 
             FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
             AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done,

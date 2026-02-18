@@ -66,6 +66,7 @@ public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenc
                         .setDestination(SafetyCenterFragment.class.getName())
                         .setArguments(args)
                         .setSourceMetricsCategory(SettingsEnums.SETTINGS_HOMEPAGE)
+                        .setIsSecondLayerPage(true)
                         .launch();
             } else {
                 Log.d(TAG, "Launching SafetyCenter in PermissionController");
