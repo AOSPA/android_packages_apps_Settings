@@ -17,9 +17,12 @@
 package com.android.settings.accessibility.buttonshortcutsetting.ui
 
 import android.content.Context
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.buttonshortcutsetting.data.FloatingMenuTransparencyDataStore
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.inflateViewHolder
@@ -47,6 +50,7 @@ class FloatingMenuTransparencyPreferenceTest {
 
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
     @get:Rule val settingsStoreRule = SettingsStoreRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Mock private lateinit var mockPrefLifecycleContext: PreferenceLifecycleContext
 
@@ -132,6 +136,37 @@ class FloatingMenuTransparencyPreferenceTest {
 
         val widget =
             preference.createAndBindWidget<SliderPreference>(context).apply { inflateViewHolder() }
+
+        assertThat(widget.slider!!.stateDescription).isEqualTo(expectedDescription)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FLOATING_MENU_TRANSPARENCY_SLIDER_ANNOUNCES_DISABLED)
+    fun bind_onEnabled_setsPercentageStateDescription() {
+        setFloatingMenuEnabled(true)
+        setFadeEnabled(true)
+
+        // sets transparency progress
+        preference.storage(context).setInt(preference.key, 27)
+        val numberFormat =
+            NumberFormat.getPercentInstance(context.resources.configuration.getLocales().get(0))
+        val expectedDescription = numberFormat.format(0.27)
+
+        val widget =
+            preference.createAndBindWidget<SliderPreference>(context).apply { inflateViewHolder() }
+
+        assertThat(widget.slider!!.stateDescription).isEqualTo(expectedDescription)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_FLOATING_MENU_TRANSPARENCY_SLIDER_ANNOUNCES_DISABLED)
+    fun bind_onDisabled_setsDisabledStateDescription() {
+        setFloatingMenuEnabled(true)
+        setFadeEnabled(false)
+
+        val widget =
+            preference.createAndBindWidget<SliderPreference>(context).apply { inflateViewHolder() }
+        val expectedDescription = context.getString(com.android.settingslib.R.string.disabled)
 
         assertThat(widget.slider!!.stateDescription).isEqualTo(expectedDescription)
     }
