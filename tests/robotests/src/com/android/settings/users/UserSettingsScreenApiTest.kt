@@ -239,7 +239,6 @@ class UserSettingsScreenApiTest {
         // Set up precondition requirements to pass
         val shadowPackageManager = shadowOf(context.packageManager)
         shadowUserManager.setIsAdminUser(true)
-        ShadowUserManager.setHeadlessSystemUserMode(false)
         shadowPackageManager.setSystemFeature(PackageManager.FEATURE_TELEPHONY, true)
         val application: Application = ApplicationProvider.getApplicationContext()
         shadowOf(application).grantPermissions(MANAGE_USERS)
@@ -265,7 +264,6 @@ class UserSettingsScreenApiTest {
         // Set up precondition requirements to pass
         val shadowPackageManager = shadowOf(context.packageManager)
         shadowUserManager.setIsAdminUser(true)
-        ShadowUserManager.setHeadlessSystemUserMode(false)
         shadowPackageManager.setSystemFeature(PackageManager.FEATURE_TELEPHONY, true)
         val application: Application = ApplicationProvider.getApplicationContext()
         shadowOf(application).grantPermissions(MANAGE_USERS)

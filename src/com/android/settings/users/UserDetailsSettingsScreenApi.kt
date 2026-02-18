@@ -103,8 +103,7 @@ class UserDetailsSettingsScreenApi :
                 val userManager = context.getSystemService(UserManager::class.java)
                 val paramUserId = Integer.parseInt(parameters[PARAM_TARGET_USER_ID])
                 val paramUserInfo = userManager.getUserInfo(paramUserId)
-                // TODO(b/474008291) : Remove HSUM since it is no longer a blocker for telephony
-                if (!Utils.isVoiceCapable(context) || UserManager.isHeadlessSystemUserMode()) {
+                if (!Utils.isVoiceCapable(context)) {
                     HardwareUnsupported(R.string.user_details_enable_calling_unsupported)
                 } else if (!userManager.isAdminUser()) {
                     Custom(R.string.user_details_setting_unavailable_user_not_admin)
