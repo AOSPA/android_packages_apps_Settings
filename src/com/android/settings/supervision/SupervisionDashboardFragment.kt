@@ -28,6 +28,7 @@ import com.android.settings.CatalystFragment
 import com.android.settings.supervision.ipc.PreferenceData
 import com.android.settings.supervision.ipc.SupervisionMessengerClient
 import com.android.settingslib.preference.forEachRecursively
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -62,7 +63,7 @@ class SupervisionDashboardFragment : CatalystFragment() {
             val preferences = featurePreferences()
             val preferenceKeys = preferences.map { it.key }
             preferenceDataMap =
-                withContext(Dispatchers.IO) { supervisionClient.getPreferenceData(preferenceKeys) }
+                withContext(ioDispatcher) { supervisionClient.getPreferenceData(preferenceKeys) }
             preferences.forEach { preference ->
                 val newSummary = preferenceDataMap?.get(preference.key)?.summary
                 if (newSummary != null) {
@@ -133,4 +134,8 @@ class SupervisionDashboardFragment : CatalystFragment() {
                 }
             }
         }
+
+    companion object {
+        @VisibleForTesting var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
+    }
 }
