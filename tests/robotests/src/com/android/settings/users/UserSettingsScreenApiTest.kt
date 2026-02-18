@@ -246,14 +246,12 @@ class UserSettingsScreenApiTest {
 
         // Turn the setting ON
         val guestRestrictions1: Bundle = userManager.getDefaultGuestRestrictions()
-        guestRestrictions1.putBoolean(UserManager.DISALLOW_SMS, true)
         guestRestrictions1.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS, false)
         userManager.setDefaultGuestRestrictions(guestRestrictions1)
         assertThat(tester.get<AnyBoolean>("enable_guest_calling")).isEqualTo(true)
 
         // Turn the setting OFF
         val guestRestrictions2: Bundle = userManager.getDefaultGuestRestrictions()
-        guestRestrictions2.putBoolean(UserManager.DISALLOW_SMS, true)
         guestRestrictions2.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS, true)
         userManager.setDefaultGuestRestrictions(guestRestrictions2)
         assertThat(tester.get<AnyBoolean>("enable_guest_calling")).isEqualTo(false)
