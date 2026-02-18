@@ -44,6 +44,7 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference
 import java.util.Locale
 import kotlin.properties.Delegates
 
+// LINT.IfChange
 class ResolutionRefreshRatePreferenceFragment(
     private val testViewModel: ResolutionRefreshRatePreferenceViewModel? = null
 ) : SettingsPreferenceFragment(), MenuProvider {
@@ -331,3 +332,4 @@ class ResolutionRefreshRatePreferenceFragment(
         private const val TAG = "ResRefreshRatePref"
     }
 }
+// LINT.ThenChange(ResolutionRefreshRateApiScreen.kt)

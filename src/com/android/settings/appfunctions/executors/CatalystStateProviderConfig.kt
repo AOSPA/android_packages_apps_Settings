@@ -84,6 +84,8 @@ import com.android.settings.connecteddevice.BluetoothDashboardScreen
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardScreen
 import com.android.settings.connecteddevice.NfcAndPaymentScreen
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceScreen
+import com.android.settings.connecteddevice.display.ResolutionRefreshRateApiScreen
+import com.android.settings.connecteddevice.display.TabbedDisplayApiScreen
 import com.android.settings.connecteddevice.usb.UsbDetailsApiScreen
 import com.android.settings.datausage.BillingCycleScreen
 import com.android.settings.datausage.DataSaverScreen
@@ -647,7 +649,9 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TabbedDisplayApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ResolutionRefreshRateApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
     )
 
