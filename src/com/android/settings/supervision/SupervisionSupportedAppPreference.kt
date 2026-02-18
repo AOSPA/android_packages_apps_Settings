@@ -26,6 +26,7 @@ import com.android.settingslib.HelpUtils
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
@@ -46,6 +47,8 @@ class SupervisionSupportedAppPreference(
 
     override val indexable
         get() = false
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         if (Flags.enableSupportedAppsRetrievalUpdates()) {

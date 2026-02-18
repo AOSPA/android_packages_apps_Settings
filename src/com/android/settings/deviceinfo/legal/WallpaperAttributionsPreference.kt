@@ -20,6 +20,7 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -30,6 +31,8 @@ class WallpaperAttributionsPreference :
 
     override val purpose: Int
         get() = R.string.wallpaper_attributions_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val title: Int
         get() = R.string.wallpaper_attributions
