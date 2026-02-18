@@ -16,27 +16,19 @@
 
 package com.android.settings.datetime
 
-import android.app.time.TimeCapabilitiesAndConfig
-import android.app.time.TimeManager
-import android.app.time.TimeZoneCapabilitiesAndConfig
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
-import org.robolectric.RuntimeEnvironment
-import org.robolectric.annotation.Config
-import org.robolectric.annotation.Implementation
-import org.robolectric.annotation.Implements
-import org.robolectric.shadow.api.Shadow
+import org.junit.runner.RunWith
 
-@Config(shadows = [ShadowTimeManager::class])
-class DateTimeSettingsScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class DateTimeSettingsScreenTest {
 
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_SYSTEM_25Q4
-
-    override val preferenceScreenCreator = DateTimeSettingsScreen()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
+    private val preferenceScreenCreator = DateTimeSettingsScreen()
 
     @Test
     fun key_isEqualToStatic() {
@@ -54,50 +46,5 @@ class DateTimeSettingsScreenTest : SettingsCatalystTestCase() {
 
         assertThat(underTest.component?.className)
             .isEqualTo(Settings.DateTimeSettingsActivity::class.java.getName())
-    }
-
-    @Test
-    override fun migration() {
-        ShadowTimeManager.getShadow()
-            .setTimeCapabilitiesAndConfigInstance(
-                DatePreferenceControllerTest.createCapabilitiesAndConfig(true)
-            )
-        ShadowTimeManager.getShadow()
-            .setTimeZoneCapabilitiesAndConfig(
-                TimeZonePreferenceControllerTest.createCapabilitiesAndConfig(true)
-            )
-        super.migration()
-    }
-}
-
-@Implements(TimeManager::class)
-class ShadowTimeManager {
-    private var capabilitiesAndConfig: TimeCapabilitiesAndConfig? = null
-    private var timeZoneCapabilitiesAndConfig: TimeZoneCapabilitiesAndConfig? = null
-
-    @Implementation
-    fun getTimeCapabilitiesAndConfig(): TimeCapabilitiesAndConfig? {
-        return capabilitiesAndConfig
-    }
-
-    @Implementation
-    fun getTimeZoneCapabilitiesAndConfig(): TimeZoneCapabilitiesAndConfig? {
-        return timeZoneCapabilitiesAndConfig
-    }
-
-    fun setTimeCapabilitiesAndConfigInstance(instance: TimeCapabilitiesAndConfig?) {
-        this.capabilitiesAndConfig = instance
-    }
-
-    fun setTimeZoneCapabilitiesAndConfig(instance: TimeZoneCapabilitiesAndConfig?) {
-        this.timeZoneCapabilitiesAndConfig = instance
-    }
-
-    companion object {
-        fun getShadow(): ShadowTimeManager {
-            return Shadow.extract(
-                RuntimeEnvironment.getApplication().getSystemService(TimeManager::class.java)
-            )
-        }
     }
 }

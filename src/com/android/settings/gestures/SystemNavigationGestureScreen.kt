@@ -26,7 +26,6 @@ import com.android.internal.R as InternalR
 import com.android.settings.R
 import com.android.settings.Settings.NavigationModeSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -46,7 +45,7 @@ class SystemNavigationGestureScreen :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.gesture_system_navigation_input_summary_purpose
 
@@ -57,8 +56,6 @@ class SystemNavigationGestureScreen :
         get() = R.string.menu_key_system
 
     override fun getMetricsCategory() = SettingsEnums.SETTINGS_GESTURE_SWIPE_UP
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkSystem25q4()
 
     override fun fragmentClass() = SystemNavigationGestureSettings::class.java
 

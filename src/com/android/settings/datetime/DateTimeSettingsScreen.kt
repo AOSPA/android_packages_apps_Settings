@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.core.PreferenceScreenMixin
-import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datetime.ZoneGetter
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -41,7 +40,7 @@ open class DateTimeSettingsScreen : PreferenceScreenMixin, PreferenceSummaryProv
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.date_time_settings_purpose
 
@@ -53,8 +52,6 @@ open class DateTimeSettingsScreen : PreferenceScreenMixin, PreferenceSummaryProv
 
     override val keywords: Int
         get() = R.string.keywords_date_and_time
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkSystem25q4()
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {}
