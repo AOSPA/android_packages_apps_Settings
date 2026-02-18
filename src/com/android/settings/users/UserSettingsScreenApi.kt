@@ -233,8 +233,6 @@ class UserSettingsScreenApi :
                 execute { value ->
                     val userManager = context.getSystemService(UserManager::class.java)
                     val guestRestrictions: Bundle = userManager.getDefaultGuestRestrictions()
-                    // TODO(b/474010197) : Investigate if there is a better way to handle it
-                    guestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true)
                     guestRestrictions.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS, !value)
                     userManager.setDefaultGuestRestrictions(guestRestrictions)
                 }
