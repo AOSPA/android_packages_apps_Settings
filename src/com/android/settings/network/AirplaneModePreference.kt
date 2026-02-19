@@ -42,7 +42,6 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 // LINT.IfChange
@@ -184,8 +183,6 @@ class AirplaneModeTogglePreference : AirplaneModePreference() {
 class AirplaneModeDetailsPreference : AirplaneModePreference(), MainSwitchPreferenceBinding {
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && context.hasPairedWatchForAirplaneModeSync()
-
-    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     // Since the AirplaneModeSettingsScreen is indexed and already points to this main switch, we
     // don't want this to also be indexed causing 2 results for Settings search.

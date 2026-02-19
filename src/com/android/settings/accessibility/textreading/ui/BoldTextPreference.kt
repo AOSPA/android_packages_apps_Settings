@@ -25,28 +25,15 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
 /** Preference metadata for the bold text toggle preference. */
-class BoldTextPreference(
-    context: Context,
-    @EntryPoint private val entryPoint: Int,
-    val isUiOnly: Boolean,
-) :
+class BoldTextPreference(context: Context, @EntryPoint private val entryPoint: Int) :
     SwitchPreference(
         key = KEY,
         purpose = R.string.font_weight_adjustment_purpose,
         title = R.string.force_bold_text,
-    ),
-    SwitchPreferenceBinding {
-
-    override fun tags(context: Context): Array<String> {
-        if (isUiOnly) {
-            return arrayOf(UI_ONLY_PREFERENCE)
-        }
-        return super.tags(context)
-    }
+    ), SwitchPreferenceBinding {
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 

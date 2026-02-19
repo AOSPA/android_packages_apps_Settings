@@ -26,15 +26,10 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
 /** Preference metadata for the outline text toggle preference. */
-class OutlineTextPreference(
-    context: Context,
-    @EntryPoint private val entryPoint: Int,
-    val isUiOnly: Boolean,
-) :
+class OutlineTextPreference(context: Context, @EntryPoint private val entryPoint: Int) :
     SwitchPreference(
         key = KEY,
         purpose = R.string.high_text_contrast_enabled_purpose,
@@ -42,13 +37,6 @@ class OutlineTextPreference(
         summary = R.string.accessibility_toggle_maximize_text_contrast_preference_summary,
     ),
     SwitchPreferenceBinding {
-
-    override fun tags(context: Context): Array<String> {
-        if (isUiOnly) {
-            return arrayOf(UI_ONLY_PREFERENCE)
-        }
-        return super.tags(context)
-    }
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
