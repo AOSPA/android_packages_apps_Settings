@@ -84,6 +84,11 @@ public class FloatingMenuTransparencyPreferenceControllerTest {
         mSliderPreference = new SliderPreference(mContext);
         mSliderPreference.setKey("test_key");
         when(mScreen.findPreference("test_key")).thenReturn(mSliderPreference);
+
+        Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
+                ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU);
+        Settings.Secure.putInt(mContentResolver,
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, /* ON */ 1);
     }
 
     @Test
@@ -254,7 +259,7 @@ public class FloatingMenuTransparencyPreferenceControllerTest {
         Settings.Secure.putInt(mContentResolver, Settings.Secure.ACCESSIBILITY_BUTTON_MODE,
                 ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU);
         Settings.Secure.putInt(mContentResolver,
-                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, /* ON */ 0);
+                Settings.Secure.ACCESSIBILITY_FLOATING_MENU_FADE_ENABLED, /* OFF */ 0);
 
         PreferenceExtKt.inflateViewHolder(mSliderPreference);
         mController.displayPreference(mScreen);
