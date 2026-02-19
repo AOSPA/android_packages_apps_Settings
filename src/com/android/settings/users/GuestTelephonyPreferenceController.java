@@ -51,7 +51,7 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
-                || UserManager.isHeadlessSystemUserMode() || !mUserCaps.isAdmin()) {
+                || !mUserCaps.isAdmin()) {
             return DISABLED_FOR_USER;
         }
         return AVAILABLE;
