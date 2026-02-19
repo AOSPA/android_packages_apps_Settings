@@ -6235,6 +6235,19 @@
             </intent-filter>
         </activity>
 
+        <service
+            android:name=".appfunctions.DeviceStateAppFunctionService"
+            android:permission="android.permission.BIND_APP_FUNCTION_SERVICE"
+            android:exported="true"
+            android:enabled="@bool/config_device_state_app_functions_enabled"
+            android:featureFlag="com.android.settings.flags.device_state">
+            <property android:name="android.app.appfunctions"
+                android:value="appfunctions.xml"/>
+            <intent-filter>
+                <action android:name="android.app.appfunctions.AppFunctionService"/>
+            </intent-filter>
+        </service>
+
         <!-- This is the longest AndroidManifest.xml ever. -->
 
     </application>
