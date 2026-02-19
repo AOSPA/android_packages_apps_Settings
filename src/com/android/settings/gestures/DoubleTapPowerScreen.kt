@@ -77,8 +77,6 @@ open class DoubleTapPowerScreen(context: Context) :
 
     override fun getMetricsCategory() = SettingsEnums.SETTINGS_GESTURE_DOUBLE_TAP_POWER
 
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkSystem25q4()
-
     override fun hasCompleteHierarchy() = false
 
     override fun fragmentClass(): Class<out Fragment>? = DoubleTapPowerSettings::class.java

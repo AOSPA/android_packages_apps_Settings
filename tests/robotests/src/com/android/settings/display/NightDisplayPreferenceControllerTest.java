@@ -1,9 +1,17 @@
 package com.android.settings.display;
 
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.mock;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+import android.hardware.display.DisplayManagerGlobal;
+import android.view.Display;
+import android.view.DisplayAdjustments;
+import android.view.DisplayInfo;
 
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
@@ -24,10 +32,15 @@ public class NightDisplayPreferenceControllerTest {
     private Context mContext;
     private ColorDisplayManager mColorDisplayManager;
     private NightDisplayPreferenceController mPreferenceController;
+    private final DisplayInfo mDisplayInfo = new DisplayInfo();
 
     @Before
     public void setUp() {
-        mContext = RuntimeEnvironment.application;
+        mDisplayInfo.type = Display.TYPE_INTERNAL;
+        DisplayAdjustments daj = null;
+        Display display = new Display(mock(DisplayManagerGlobal.class),
+                Display.DEFAULT_DISPLAY, mDisplayInfo, daj);
+        mContext = RuntimeEnvironment.application.createDisplayContext(display);
         mColorDisplayManager = mContext.getSystemService(ColorDisplayManager.class);
         mPreferenceController = new NightDisplayPreferenceController(mContext, "test");
     }
@@ -96,6 +109,14 @@ public class NightDisplayPreferenceControllerTest {
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
         assertThat(mPreferenceController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void configuredNightDisplayAvailableAndNotBlocked_externalDisplay_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
+        mDisplayInfo.type = Display.TYPE_EXTERNAL;
+        assertThat(mPreferenceController.getAvailabilityStatus()).isEqualTo(
+                CONDITIONALLY_UNAVAILABLE);
     }
 
     @Test

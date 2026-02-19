@@ -180,10 +180,13 @@ public class ScreenLockPreferenceDetailsUtils {
         if (!mLockPatternUtils.isSecure(userId)) {
             if (userId == mProfileChallengeUserId
                     || mLockPatternUtils.isLockScreenDisabled(userId)) {
+                if (mContext.getResources().getBoolean(
+                        R.bool.config_hide_pattern_security_option)) {
+                    return R.string.unlock_set_unlock_mode_off_new_without_pattern;
+                }
                 return R.string.unlock_set_unlock_mode_off_new;
-            } else {
-                return R.string.unlock_set_unlock_mode_none;
             }
+            return R.string.unlock_set_unlock_mode_none;
         } else {
             int keyguardStoredPasswordQuality =
                     mLockPatternUtils.getKeyguardStoredPasswordQuality(userId);

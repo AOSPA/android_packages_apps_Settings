@@ -16,8 +16,8 @@
 package com.android.settings.gestures
 
 import android.content.ComponentName
+import android.content.Context
 import android.content.ContextWrapper
-import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
@@ -26,25 +26,24 @@ import android.content.res.Resources
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON
 import android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.internal.R
 import com.android.settings.Settings
-import com.android.settings.flags.Flags
-import com.android.settings.testutils.SystemProperty
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
-import org.robolectric.Shadows
 
-class SystemNavigationGestureScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class SystemNavigationGestureScreenTest {
 
-    override val preferenceScreenCreator = SystemNavigationGestureScreen()
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_SYSTEM_25Q4
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
+    private val preferenceScreenCreator = SystemNavigationGestureScreen()
 
     private val mockResources = mock<Resources>()
     private val mockPackageManager = mock<PackageManager>()
@@ -160,39 +159,6 @@ class SystemNavigationGestureScreenTest : SettingsCatalystTestCase() {
     @Test
     fun key_isEqualToStatic() {
         assertThat(preferenceScreenCreator.key).isEqualTo(SystemNavigationGestureScreen.KEY)
-    }
-
-    @Test
-    override fun migration() {
-        // avoid UnsupportedOperationException when getDisplay from context
-        SystemProperty("robolectric.createActivityContexts", "true").use {
-
-            // Make sure resolve info for quickstep intent is added to the package manager
-            val recentsComponentName =
-                ComponentName.unflattenFromString(
-                    appContext.getString(R.string.config_recentsComponentName)
-                )
-
-            val quickStepIntent =
-                Intent(ACTION_QUICKSTEP).apply { setPackage(recentsComponentName?.packageName) }
-
-            val resolveInfo =
-                ResolveInfo().apply {
-                    resolvePackageName = recentsComponentName?.packageName
-                    serviceInfo =
-                        ServiceInfo().apply {
-                            packageName = resolvePackageName
-                            name = recentsComponentName?.className
-                            applicationInfo =
-                                ApplicationInfo().apply { flags = ApplicationInfo.FLAG_SYSTEM }
-                        }
-                }
-
-            val shadowPackageManager = Shadows.shadowOf(appContext.packageManager)
-            shadowPackageManager.addResolveInfoForIntent(quickStepIntent, resolveInfo)
-
-            super.migration()
-        }
     }
 
     companion object {

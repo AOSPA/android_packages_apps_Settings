@@ -1630,12 +1630,16 @@
     <string name="no_screen_lock_issue_title">Set a screen lock</string>
     <!-- Summary of the issue card in Safety Center when no screen lock is set [CHAR LIMIT=NONE] -->
     <string name="no_screen_lock_issue_summary">For added security, set a PIN, pattern, or password for this device.</string>
+    <!-- Summary of the issue card in Safety Center when no screen lock is set and pattern is unsupported [CHAR LIMIT=NONE] -->
+    <string name="no_screen_lock_issue_summary_without_pattern">For added security, set a PIN or password for this device.</string>
     <!-- Action label for the issue card in Safety Center when no screen lock is set [CHAR LIMIT=50] -->
     <string name="no_screen_lock_issue_action_label">Set screen lock</string>
     <!-- Title of the notification shown by Safety Center when no screen lock is set. This notification is shown in the notification shade, outside of the main Safety Center UI. [CHAR LIMIT=50] -->
     <string name="no_screen_lock_issue_notification_title">Set a screen lock</string>
     <!-- Summary/body text of the notification shown by Safety Center when no screen lock is set. This notification is shown in the notification shade, outside of the main Safety Center UI. [CHAR LIMIT=NONE] -->
     <string name="no_screen_lock_issue_notification_text">For added security, set a PIN, pattern, or password for this device.</string>
+    <!-- Summary/body text of the notification shown by Safety Center when no screen lock is set and pattern is unsupported. This notification is shown in the notification shade, outside of the main Safety Center UI. [CHAR LIMIT=NONE] -->
+    <string name="no_screen_lock_issue_notification_text_without_pattern">For added security, set a PIN or password for this device.</string>
 
     <!-- Unlock Picker Settings -->
     <skip />
@@ -1756,6 +1760,8 @@
     <string name="unlock_set_unlock_mode_off">None</string>
     <!-- Summary for "Configure lockscreen" when lock screen is off [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_off_new">Add PIN, pattern, password, or swipe</string>
+    <!-- Summary for "Configure lockscreen" when lock screen is off and pattern is unsupported [CHAR LIMIT=45] -->
+    <string name="unlock_set_unlock_mode_off_new_without_pattern">Add PIN, password, or swipe</string>
     <!-- Summary for "Configure lockscreen" when security is disabled [CHAR LIMIT=45] -->
     <string name="unlock_set_unlock_mode_none">Swipe</string>
     <!-- Summary for "Configure lockscreen" when security pattern is enabled [CHAR LIMIT=45] -->
@@ -2413,6 +2419,12 @@
     <string name="wifi_settings_wep_networks_disconnect_title">Stop allowing WEP networks?</string>
     <!-- Wi-Fi settings dialog. Summary text of dialog displayed when the user turns off “Allow WEP networks” while connected to a WEP network. [CHAR LIMIT=NONE] -->
     <string name="wifi_settings_wep_networks_disconnect_summary">You\u0027re connected to a WEP network. If you stop allowing these networks, you\u0027ll be disconnected.</string>
+    <!-- Precondition text shown when the device hardware does not support WEP [CHAR LIMIT=NONE] -->
+    <string name="wifi_allow_wep_networks_precondition" translatable="false">This setting is only available on devices that support WEP networks.</string>
+    <!-- Precondition text shown when trying to disable WEP while currently connected to a WEP network [CHAR LIMIT=NONE] -->
+    <string name="wifi_allow_wep_networks_set_value_precondition" translatable="false">You cannot turn off this setting while connected to a WEP network.</string>
+    <!-- Error message shown when the user is connected to WEP and tries to disable the setting [CHAR LIMIT=NONE] -->
+    <string name="wifi_allow_wep_networks_set_invalid_preference" translatable="false">This device is connected to a WEP network. Disabling WEP support will disconnect the device.</string>
 
     <!-- Dialog for Access Points -->
     <skip />

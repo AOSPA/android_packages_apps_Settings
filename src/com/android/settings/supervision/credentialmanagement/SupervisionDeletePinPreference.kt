@@ -56,6 +56,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
@@ -78,6 +79,8 @@ class SupervisionDeletePinPreference() :
 
     override val purpose: Int
         get() = R.string.supervision_delete_pin_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence {
         if (!Flags.enableSupervisionSettingsUiUpdates()) {

@@ -23,6 +23,7 @@ import androidx.annotation.StringRes
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 // LINT.IfChange
 class LegalPreference(
@@ -31,6 +32,8 @@ class LegalPreference(
     @StringRes val defaultTitle: Int = 0,
     val intentAction: String,
 ) : PreferenceMetadata, PreferenceTitleProvider, PreferenceAvailabilityProvider {
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? {
         val resolveInfo =

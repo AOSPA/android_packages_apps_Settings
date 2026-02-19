@@ -26,6 +26,7 @@ import com.android.settings.supervision.credentialmanagement.SupervisionPinManag
 import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 
 /** Preference on the Supervision dashboard the invokes the flow to create a device PIN. */
@@ -45,6 +46,8 @@ class SupervisionSetUpPinPreference :
         get() = R.string.supervision_set_up_pin_preference_title
 
     override fun dependencies(context: Context) = arrayOf(SupervisionPinManagementScreen.KEY)
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet()
 

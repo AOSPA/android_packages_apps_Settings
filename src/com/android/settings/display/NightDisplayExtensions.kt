@@ -17,8 +17,21 @@ package com.android.settings.display
 
 import android.content.Context
 import android.hardware.display.ColorDisplayManager
+import com.android.settings.core.BasePreferenceController.AVAILABLE
+import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
+import com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE
 
 val Context.isNightDisplaySettingsAvailable: Boolean
-  get() =
-    ColorDisplayManager.isNightDisplayAvailable(this) &&
-      !resources.getBoolean(NightDisplayConstants.NIGHT_DISPLAY_SETTINGS_PAGE_BLOCKER_RES_ID)
+    get() = nightDisplayAvailabilityStatus == AVAILABLE
+
+val Context.nightDisplayAvailabilityStatus: Int
+    get() {
+        val nightDisplayAvailable =
+            ColorDisplayManager.isNightDisplayAvailable(this) &&
+                !resources.getBoolean(
+                    NightDisplayConstants.NIGHT_DISPLAY_SETTINGS_PAGE_BLOCKER_RES_ID
+                )
+        return if (nightDisplayAvailable)
+            if (display.isInternal) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+        else UNSUPPORTED_ON_DEVICE
+    }

@@ -16,26 +16,24 @@
 
 package com.android.settings.language
 
+import android.content.Context
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.Settings
-import com.android.settings.flags.Flags
-import com.android.settings.testutils2.SettingsCatalystTestCase
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class LanguageAndRegionScreenTest : SettingsCatalystTestCase() {
-    override val preferenceScreenCreator = LanguageAndRegionScreen()
-
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_SYSTEM_25Q4
+@RunWith(AndroidJUnit4::class)
+class LanguageAndRegionScreenTest {
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
+    private val preferenceScreenCreator = LanguageAndRegionScreen()
 
     @Test
     fun getLaunchIntent_correctActivity() {
         val underTest = preferenceScreenCreator.getLaunchIntent(appContext, null)
 
-        Truth.assertThat(underTest.component?.className)
+        assertThat(underTest.component?.className)
             .isEqualTo(Settings.LanguageAndRegionSettingsActivity::class.java.getName())
     }
-
-    @Test
-    override fun migration() {}
 }

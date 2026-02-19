@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 
 class SupervisionPinRecoveryPreference :
@@ -58,6 +59,8 @@ class SupervisionPinRecoveryPreference :
         get() = R.string.supervision_add_forgot_pin_preference_title
 
     override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionPinRecoveryScreen()) {
