@@ -85,10 +85,4 @@
         settings:safetySource="AndroidWearUnlock"
         settings:profile="work_profile" />
 
-    <com.android.settingslib.safetycenter.SafetySourcePreference
-        android:key="android_theft_protection"
-        android:order="100"
-        settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
-        settings:safetySource="@string/config_safety_center_auto_lock_source_id"
-        settings:profile="personal_profile" />
 </PreferenceScreen>
