@@ -48,6 +48,7 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -204,6 +205,7 @@ private constructor(
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +A11yServiceScreenPreference(this@A11yServiceScreen)
             val serviceInfo = accessibilityServiceInfo ?: return@preferenceHierarchy
             +IntroPreference(serviceInfo)
             +A11yServiceIllustrationPreference(serviceInfo)
@@ -247,6 +249,27 @@ private constructor(
                 highlightPreference(arguments!!, metadata?.bindingKey)
             }
         }
+    }
+
+    class A11yServiceScreenPreference(
+        private val screenMetadata : A11yServiceScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceTitleProvider {
+
+        override val key : String
+            get() = "a11y_service_detail_screen_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
     }
 
     companion object : ParameterizedPreferenceScreenArgumentsFactory {

@@ -141,7 +141,11 @@ class CatalystStateProviderExecutor(
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
+            // skip over UI-ONLY preferences
             if (metadata.isUiOnlyPreference(context))
+                return@forEach
+            // skip if metadata is a PreferenceScreen
+            if (metadata.key == screenMetaData.key)
                 return@forEach
             val config = settingConfigMap[metadata.key]
             val jsonValue =

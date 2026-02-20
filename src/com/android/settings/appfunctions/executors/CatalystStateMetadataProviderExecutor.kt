@@ -142,6 +142,9 @@ class CatalystStateMetadataProviderExecutor(
             // skip over UI-only preferences
             if(metadata.isUiOnlyPreference(context))
                 return@forEach
+            // skip if metadata is screen
+            if(metadata is PreferenceScreenMetadata)
+                return@forEach
             // skip over explicitly disabled preferences
             val metadataProto = try {
                 metadata.toProto(

@@ -33,6 +33,7 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
 import kotlinx.coroutines.CoroutineScope
@@ -125,6 +126,8 @@ class AirplaneModeSettingsFooter : FooterPreferenceMetadata, FooterPreferenceBin
 
     override val purpose: Int
         @StringRes get() = R.string.airplane_mode_footer_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val title: Int
         @StringRes get() = R.string.airplane_mode_sync_description
