@@ -301,7 +301,7 @@
     <string name="activity_picker_label" msgid="351250401590691126">"Sélectionnez une activité"</string>
     <string name="cancel" msgid="5780102414089664898">"Annuler"</string>
     <string name="okay" msgid="4827099303045669054">"OK"</string>
-    <string name="forget" msgid="3754013654135912783">"Retirer"</string>
+    <string name="forget" msgid="3754013654135912783">"Oublier"</string>
     <string name="save" msgid="3125033126936493822">"Enregistrer"</string>
     <string name="done" msgid="7497982645646431310">"Terminé"</string>
     <string name="apply" msgid="7834684883190163536">"Appliquer"</string>
@@ -725,12 +725,16 @@
     <string name="fingerprint_delete_title" msgid="5412123164503407098">"Supprimer « <xliff:g id="FINGERPRINT_ID">%1$s</xliff:g> »"</string>
     <string name="fingerprint_last_delete_message_profile_challenge" msgid="4104208067277655068">"Vous ne pourrez pas utiliser votre empreinte digitale pour déverrouiller votre profil professionnel, autoriser vos achats ni vous connecter à des applis professionnelles."</string>
     <string name="encryption_settings_title" msgid="2848716008695618360">"Chiffrement"</string>
-    <string name="encrypted_summary" msgid="545623487587251207">"Chiffrement activé"</string>
+    <string name="encrypted_summary" msgid="545623487587251207">"Chiffré"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Configurer le verrouillage de l\'écran"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Pour renforcer la sécurité, définissez un NIP, un schéma ou un mot de passe pour cet appareil."</string>
+    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
+    <skip />
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Configurer le verrouillage de l\'écran"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Configurer le verrouillage de l\'écran"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Pour renforcer la sécurité, définissez un NIP, un schéma ou un mot de passe pour cet appareil."</string>
+    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
+    <skip />
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Ajouter empreinte digitale pour déverrouiller"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Sélect. verr. écran"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisissez un verrouillage d\'écran"</string>
@@ -772,6 +776,8 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continuer sans l\'empreinte digitale ou le visage"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Aucun"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Ajoutez un NIP/schéma/mot de passe ou balayez"</string>
+    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
+    <skip />
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Balayage d\'écran"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Schéma"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"NIP"</string>
@@ -864,7 +870,7 @@
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Impossible de se connecter à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Appareils détectés"</string>
-    <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Connexion"</string>
+    <string name="bluetooth_device_context_connect" msgid="4913860372216815855">"Connecter"</string>
     <string name="bluetooth_device_context_disconnect" msgid="4464167389972513232">"Déconnecter"</string>
     <string name="bluetooth_device_context_pair_connect" msgid="2406032703622371826">"Associer et connecter"</string>
     <string name="bluetooth_connecting" msgid="5315496594905010438">"Connexion en cours…"</string>
@@ -2723,7 +2729,7 @@
     <string name="accessibility_hearingaid_more_device_summary" msgid="8092641784056942546">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> +1 autre"</string>
     <string name="accessibility_hearing_device_pairing_title" msgid="2701812183769537320">"Associer un appareil"</string>
     <string name="accessibility_hearing_device_connected_title" msgid="3785140037249487287">"Appareils auditifs"</string>
-    <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Appareils consignés"</string>
+    <string name="accessibility_hearing_device_saved_title" msgid="7573926212664909296">"Appareils enregistrés"</string>
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Commandes de l\'appareil auditif"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Sons"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Notifications"</string>
@@ -2733,7 +2739,7 @@
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Les sons seront diffusés par les appareils auditifs et le haut-parleur de l\'appareil"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Raccourci pour appareils auditifs"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"Compatibilité : prothèses auditives"</string>
-    <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Améliore la compatibilité avec les phonocapteurs et réduit les bruits indésirables"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"Améliore la compatibilité avec les bobines téléphoniques et réduit les bruits indésirables"</string>
     <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"À propos des appareils auditifs"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"Pour trouver d\'autres appareils auditifs qui ne sont pas pris en charge par ASHA ou LE Audio, touchez &lt;b&gt;Associer un appareil&lt;b&gt; &gt; &lt;b&gt;Afficher d\'autres appareils&lt;b&gt;"</string>
@@ -3148,9 +3154,9 @@
     <string name="credentials_install" msgid="3933218407598415827">"Installer un certificat"</string>
     <string name="credentials_reset" msgid="4246628389366452655">"Effacer les authentifiants"</string>
     <string name="credentials_reset_summary" msgid="5400585520572874255">"Retirez tous les certificats"</string>
-    <string name="trusted_credentials" msgid="2522784976058244683">"Certificats de confiance"</string>
+    <string name="trusted_credentials" msgid="2522784976058244683">"Authentifiants de confiance"</string>
     <string name="trusted_credentials_summary" msgid="345822338358409468">"Affichez les certificats d\'autorités de confiance"</string>
-    <string name="user_credentials" msgid="4044405430790970775">"Certificats utilisateur"</string>
+    <string name="user_credentials" msgid="4044405430790970775">"Authentifiants d\'utilisateur"</string>
     <string name="user_credentials_summary" msgid="686471637627271856">"Affichez et modifiez les authentifiants stockés"</string>
     <string name="advanced_security_title" msgid="7117581975877192652">"Paramètres avancés"</string>
     <string name="credentials_settings_not_available" msgid="7433088409177429600">"Les authentifiants ne sont pas accessibles pour cet utilisateur"</string>
@@ -3758,6 +3764,8 @@
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Volume de Google Cast"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Volume des appels"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Volume des alarmes"</string>
+    <!-- no translation found for assistant_volume_option_title (7206008753384831048) -->
+    <skip />
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Volume sonnerie et notifications"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Volume de la sonnerie"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Volume des notifications"</string>
@@ -4993,7 +5001,7 @@
     <string name="enterprise_privacy_always_on_vpn_personal" msgid="8395903360175064841">"Le RPV permanent est activé dans votre profil personnel"</string>
     <string name="enterprise_privacy_always_on_vpn_work" msgid="2496961514592522377">"Le RPV permanent est activé dans votre profil professionnel"</string>
     <string name="enterprise_privacy_global_http_proxy" msgid="4350347418068037051">"Le serveur mandataire HTTP global a été défini"</string>
-    <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Certificats de confiance"</string>
+    <string name="enterprise_privacy_ca_certs_device" msgid="1816495877258727663">"Authentifiants de confiance"</string>
     <string name="enterprise_privacy_ca_certs_personal" msgid="1516422660828485795">"Certificats de confiance installés dans votre profil personnel"</string>
     <string name="enterprise_privacy_ca_certs_work" msgid="4318941788592655561">"Certificats de confiance installés dans votre profil professionnel"</string>
     <string name="enterprise_privacy_number_ca_certs" msgid="4540897122831942658">"{count,plural, =1{Minimum de # certificat CA}one{Minimum de # certificat CA}other{Minimum de # certificats CA}}"</string>
@@ -5996,8 +6004,7 @@
     <string name="supervision_settings_summary" msgid="6304257872307136073">"Règles de base numériques et limites de temps d\'écran"</string>
     <string name="supervision_intro_title" msgid="2686370837216266390">"Créer un NIP des contrôles parentaux pour cet appareil"</string>
     <string name="supervision_intro_description" msgid="101353421249918460">"Vous utiliserez ce NIP pour gérer les paramètres de contrôles parentaux et les applis sur cet appareil.\n\nVous pouvez modifier ou supprimer le NIP à partir des paramètres Android &gt; Contrôles parentaux."</string>
-    <!-- no translation found for supervision_intro_content_description (246960664721689995) -->
-    <skip />
+    <string name="supervision_intro_content_description" msgid="246960664721689995">"Vous utiliserez ce NIP pour gérer les paramètres de contrôles parentaux et les applis sur cet appareil. Vous pouvez modifier ou supprimer le NIP à partir des paramètres Android sous Contrôles parentaux."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"Configurez un NIP"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"Configurer un NIP des contrôles parentaux"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"supervision, contrôles parentaux, parents, nip de supervision, nip"</string>
@@ -6118,6 +6125,10 @@
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Plus d\'alertes"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"Moins d\'alertes"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Alertes fermées"</string>
+    <!-- no translation found for safety_center_collapse_dismissed_issues (1906333435017081366) -->
+    <skip />
+    <!-- no translation found for safety_center_expand_dismissed_issues (6075170862549670397) -->
+    <skip />
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Fermer cette alerte?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Passez en revue les paramètres de sécurité et de confidentialité à tout moment pour renforcer votre protection."</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Action terminée"</string>
