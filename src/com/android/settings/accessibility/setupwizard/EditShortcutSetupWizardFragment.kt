@@ -51,6 +51,12 @@ class EditShortcutSetupWizardFragment : BaseSetupWizardFragment() {
                     EditKeyboardShortcutController.create(context, it, shortcutTargets),
                 )
             }
+            findItem(adapter, R.id.edit_quick_settings_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_quick_settings_shortcut_in_suw,
+                    EditQuickSettingsShortcutController.create(context, it, shortcutTargets),
+                )
+            }
             findItem(adapter, R.id.edit_floating_button_shortcut_in_suw)?.let {
                 put(
                     R.id.edit_floating_button_shortcut_in_suw,

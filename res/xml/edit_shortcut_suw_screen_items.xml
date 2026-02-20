@@ -23,6 +23,10 @@
         android:title="@string/accessibility_shortcut_edit_dialog_title_keyboard" />
 
     <com.android.settings.accessibility.setupwizard.items.IllustrationCheckBoxItem
+        android:id="@+id/edit_quick_settings_shortcut_in_suw"
+        android:title="@string/accessibility_shortcut_edit_dialog_title_quick_settings" />
+
+    <com.android.settings.accessibility.setupwizard.items.IllustrationCheckBoxItem
         android:id="@+id/edit_floating_button_shortcut_in_suw"
         android:title="@string/accessibility_shortcut_edit_dialog_title_software" />
 </ItemGroup>
