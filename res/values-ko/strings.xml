@@ -728,9 +728,13 @@
     <string name="encrypted_summary" msgid="545623487587251207">"암호화됨"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"화면 잠금 설정"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"보안 강화를 위해 기기의 PIN, 패턴 또는 비밀번호를 설정하세요."</string>
+    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
+    <skip />
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"화면 잠금 설정"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"화면 잠금 설정"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"보안 강화를 위해 기기의 PIN, 패턴 또는 비밀번호를 설정하세요."</string>
+    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
+    <skip />
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"잠금 해제에 사용할 지문 추가"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"화면 잠금 선택"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"화면 잠금 선택"</string>
@@ -772,6 +776,8 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"지문 또는 얼굴 인식 설정 건너뛰기"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"없음"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"PIN, 패턴, 비밀번호 또는 스와이프 추가"</string>
+    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
+    <skip />
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"스와이프"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"패턴"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -1774,7 +1780,7 @@
     <string name="location_app_level_permissions" msgid="907206607664629759">"앱 위치 정보 액세스 권한"</string>
     <string name="location_app_permission_summary_location_off" msgid="2711822936853500335">"위치 정보 사용 안함"</string>
     <string name="location_app_permission_summary_location_on" msgid="7552095451731948984">"{count,plural, =1{{total}개 중 #개의 앱이 위치 정보에 액세스할 수 있음}other{{total}개 중 #개의 앱이 위치 정보에 액세스할 수 있음}}"</string>
-    <string name="location_category_recent_location_access" msgid="2558063524482178146">"최근에 위치 정보에 액세스한 앱"</string>
+    <string name="location_category_recent_location_access" msgid="2558063524482178146">"최근 액세스"</string>
     <string name="location_recent_location_access_see_all" msgid="4203102419355323325">"모두 보기"</string>
     <string name="location_recent_location_access_view_details" msgid="5803264082558504544">"세부정보 보기"</string>
     <string name="location_no_recent_apps" msgid="6814206631456177033">"최근에 위치 정보를 요청한 앱이 없습니다."</string>
@@ -3758,6 +3764,8 @@
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast 볼륨"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"통화 볼륨"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"알람 볼륨"</string>
+    <!-- no translation found for assistant_volume_option_title (7206008753384831048) -->
+    <skip />
     <string name="ring_volume_option_title" msgid="1520802026403038560">"벨소리 및 알림 볼륨"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"벨소리 볼륨"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"알림 볼륨"</string>
@@ -5996,8 +6004,7 @@
     <string name="supervision_settings_summary" msgid="6304257872307136073">"디지털 기기 사용 규칙 및 기기 사용 시간 한도"</string>
     <string name="supervision_intro_title" msgid="2686370837216266390">"이 기기에 대한 자녀 보호 기능 PIN 만들기"</string>
     <string name="supervision_intro_description" msgid="101353421249918460">"이 PIN은 이 기기의 자녀 보호 기능 설정 및 앱을 관리하는 데 사용됩니다.\n\nAndroid 설정 &gt; 자녀 보호 기능에서 PIN을 수정하거나 삭제할 수 있습니다."</string>
-    <!-- no translation found for supervision_intro_content_description (246960664721689995) -->
-    <skip />
+    <string name="supervision_intro_content_description" msgid="246960664721689995">"이 PIN은 이 기기의 자녀 보호 기능 설정 및 앱을 관리하는 데 사용됩니다. Android 설정의 자녀 보호 기능에서 PIN을 수정하거나 삭제할 수 있습니다."</string>
     <string name="device_supervision_switch_no_pin_summary" msgid="4869563544571033220">"PIN 설정"</string>
     <string name="supervision_set_up_pin_preference_title" msgid="4191271096152722137">"자녀 보호 기능 PIN 설정"</string>
     <string name="keywords_supervision_settings" msgid="43064288661561602">"감독, 자녀 보호 기능, 부모, 감독 PIN, PIN"</string>
@@ -6118,6 +6125,10 @@
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"알림 더보기"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"알림 적게 보기"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"닫은 알림"</string>
+    <!-- no translation found for safety_center_collapse_dismissed_issues (1906333435017081366) -->
+    <skip />
+    <!-- no translation found for safety_center_expand_dismissed_issues (6075170862549670397) -->
+    <skip />
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"이 알림을 닫으시겠습니까?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"언제든지 보안 및 개인 정보 보호 설정을 검토하고 보안을 추가하세요."</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"작업 완료"</string>
