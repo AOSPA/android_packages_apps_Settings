@@ -24,7 +24,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.R
-import com.android.settings.accessibility.setupwizard.items.ShortcutOptionCheckBoxItem
+import com.android.settings.accessibility.setupwizard.items.IllustrationCheckBoxItem
 import com.android.settings.accessibility.shortcuts.ui.KeyboardShortcutPreference
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.datastore.KeyValueStore
@@ -52,7 +52,7 @@ class EditKeyboardShortcutControllerTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
     private val appContext: Application = ApplicationProvider.getApplicationContext()
     private val mockDataStore = mock<KeyValueStore>()
-    private val item = ShortcutOptionCheckBoxItem()
+    private val item = IllustrationCheckBoxItem()
 
     @Before
     fun setUp() {

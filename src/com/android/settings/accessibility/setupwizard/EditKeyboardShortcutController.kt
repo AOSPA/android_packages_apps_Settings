@@ -19,7 +19,7 @@ package com.android.settings.accessibility.setupwizard
 import android.content.Context
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
-import com.android.settings.accessibility.setupwizard.items.ShortcutOptionCheckBoxItem
+import com.android.settings.accessibility.setupwizard.items.IllustrationCheckBoxItem
 import com.android.settings.accessibility.shortcuts.ui.KeyboardShortcutPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
@@ -36,13 +36,13 @@ class EditKeyboardShortcutController(
     private var keyboardShortcutObserver: KeyedObserver<String>? = null
 
     init {
-        (item as? ShortcutOptionCheckBoxItem)?.setOnCheckedChangeListener { _, isChecked ->
+        (item as? IllustrationCheckBoxItem)?.setOnCheckedChangeListener { _, isChecked ->
             updateDataStore(isChecked)
         }
     }
 
     override fun bindData(item: Item) {
-        if (item is ShortcutOptionCheckBoxItem) {
+        if (item is IllustrationCheckBoxItem) {
             with(keyboardShortcutMetadata) {
                 item.summary = getSummary(context)
                 val resId = getIconResId(context)
@@ -74,7 +74,7 @@ class EditKeyboardShortcutController(
     }
 
     override fun onItemSelected(activity: FragmentActivity) {
-        val checkBoxItem = targetItem as? ShortcutOptionCheckBoxItem ?: return
+        val checkBoxItem = targetItem as? IllustrationCheckBoxItem ?: return
         updateDataStore(!checkBoxItem.isChecked)
     }
 
