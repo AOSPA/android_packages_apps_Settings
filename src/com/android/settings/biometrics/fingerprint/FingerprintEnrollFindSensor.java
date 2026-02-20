@@ -570,5 +570,6 @@ public class FingerprintEnrollFindSensor extends BiometricEnrollBase implements
             mIllustrationLottie.setAnimation(
                     R.raw.fingerprint_edu_keyboard_left_of_power_button_top_right_lottie);
         }
+        LottieColorUtils.applyIlloColors(getApplicationContext(), mIllustrationLottie);
     }
 }
