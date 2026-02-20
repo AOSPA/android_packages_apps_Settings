@@ -71,6 +71,7 @@ class DeviceStateMetadataProviderAggregator(private val executors: List<DeviceSt
         return DeviceStateMetadataResponse(
             perScreenMetadata = allStates,
             deviceLocale = deviceLocale,
+            itemizationTypes = emptyList(),
         )
     }
 }

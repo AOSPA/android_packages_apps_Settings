@@ -36,7 +36,8 @@ import org.robolectric.RobolectricTestParameterInjector
 class StandardDarkModeSelectorPreferenceTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
-    private val preference = StandardDarkModeSelectorPreference(DarkThemeModeStorage(context))
+    private val preference =
+        StandardDarkModeSelectorPreference(DarkThemeModeStorage(context), false)
 
     @Test
     fun key() {

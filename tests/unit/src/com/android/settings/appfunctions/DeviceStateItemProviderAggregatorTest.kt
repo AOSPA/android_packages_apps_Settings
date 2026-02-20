@@ -40,7 +40,9 @@ class DeviceStateItemProviderAggregatorTest {
     @Mock private lateinit var executor2: DeviceStateExecutor
 
     private val itemResponse =
-        DeviceStateItemResponse(deviceStateItem = DeviceStateItem(key = "key", jsonValue = "value"))
+        DeviceStateItemResponse(
+            deviceStateItem = DeviceStateItem(key = "key", purpose = "purpose", jsonValue = "value")
+        )
     private val params = GenericDocument.Builder<GenericDocument.Builder<*>>("", "", "").build()
 
     @Test

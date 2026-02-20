@@ -83,6 +83,7 @@ class CatalystStateGetterExecutor(private val context: Context) : DeviceStateExe
                 val item =
                     DeviceStateItem(
                         key = fullKey,
+                        purpose = fullKey,
                         jsonValue = settingsPreferenceValueToString(value),
                     )
                 val itemResponse = DeviceStateItemResponse(deviceStateItem = item)
