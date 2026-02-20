@@ -30,11 +30,7 @@ class OutlineTextSwitchItemController(
     private val context: Context,
     item: Item,
     private val outlineTextDataStore: KeyValueStore =
-        OutlineTextPreference(
-                context,
-                TextReadingPreferenceFragment.EntryPoint.SUW_VISION_SETTINGS,
-                true,
-            )
+        OutlineTextPreference(context, TextReadingPreferenceFragment.EntryPoint.SUW_VISION_SETTINGS)
             .storage(context),
 ) : BaseItemController(item) {
 

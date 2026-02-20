@@ -32,7 +32,6 @@ import com.android.settingslib.metadata.PreferenceIndexableTitleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
-import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 
@@ -74,7 +73,7 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
 }
 
 /** The "Standard Dark Theme" preference. */
-class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val isUiOnly: Boolean) :
+class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
     DarkModeSelectorPreference(dataStore) {
 
     override val key
@@ -89,13 +88,6 @@ class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val is
     override val summary
         get() = R.string.accessibility_standard_dark_theme_summary
 
-    override fun tags(context: Context): Array<String> {
-        if (isUiOnly) {
-            return arrayOf(UI_ONLY_PREFERENCE)
-        }
-        return super.tags(context)
-    }
-
     override fun getIndexableTitle(context: Context): CharSequence? =
         context.getText(R.string.accessibility_standard_dark_theme_title_in_search)
 
@@ -105,7 +97,7 @@ class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val is
 }
 
 /** The "Expanded Dark Theme" preference. */
-class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val isUiOnly: Boolean) :
+class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage) :
     DarkModeSelectorPreference(dataStore), View.OnClickListener {
 
     override val key
@@ -130,13 +122,6 @@ class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val is
         if (v != null) {
             v.context.startSpaActivity(ForceDarkAppExceptionsPageProvider.name)
         }
-    }
-
-    override fun tags(context: Context): Array<String> {
-        if (isUiOnly) {
-            return arrayOf(UI_ONLY_PREFERENCE)
-        }
-        return super.tags(context)
     }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

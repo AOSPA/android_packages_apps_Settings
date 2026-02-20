@@ -54,7 +54,6 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
-import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.packageName
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -205,12 +204,7 @@ private constructor(
         preferenceHierarchy(context) {
             val packageInfoProvider = this@SpecialAccessAppDetailScreen
             +AppInfoHeaderPreference(packageInfoProvider)
-            +SpecialAccessSwitchPreference(
-                switchPreferenceTitle,
-                dataStore,
-                packageInfoProvider,
-                key,
-            )
+            +SpecialAccessSwitchPreference(switchPreferenceTitle, dataStore, packageInfoProvider)
             +FooterPreference(footerPreferenceTitle)
         }
 
@@ -333,6 +327,4 @@ private class FooterPreference(override val title: Int) :
 
     override val purpose: Int
         get() = R.string.footer_purpose
-
-    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 }
