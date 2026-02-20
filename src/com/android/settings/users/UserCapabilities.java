@@ -175,7 +175,8 @@ public class UserCapabilities {
             // policyEnforcementInfo contains both the base restrictions (system enforced) and
             // admin restrictions.
             mDisallowAddUser = !policyEnforcementInfo.getAllAdmins().isEmpty();
-            mDisallowAddUserSetByAdmin = !policyEnforcementInfo.isOnlyEnforcedBySystem();
+            mDisallowAddUserSetByAdmin =
+                    mDisallowAddUser && !policyEnforcementInfo.isOnlyEnforcedBySystem();
             mDisallowAddUserRestrictionEnforcementInfo = policyEnforcementInfo;
         } else {
             mEnforcedAdmin = RestrictedLockUtilsInternal.checkIfRestrictionEnforced(context,
