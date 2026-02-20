@@ -31,7 +31,15 @@ val Context.nightDisplayAvailabilityStatus: Int
                 !resources.getBoolean(
                     NightDisplayConstants.NIGHT_DISPLAY_SETTINGS_PAGE_BLOCKER_RES_ID
                 )
-        return if (nightDisplayAvailable)
-            if (display.isInternal) AVAILABLE else CONDITIONALLY_UNAVAILABLE
-        else UNSUPPORTED_ON_DEVICE
+        return if (nightDisplayAvailable) {
+            try {
+                // These settings are not available if shown on an external display.
+                if (display.isInternal) AVAILABLE else CONDITIONALLY_UNAVAILABLE
+            } catch (e: UnsupportedOperationException) {
+                // This context is not associated with a display, no reason to hide the settings.
+                AVAILABLE
+            }
+        } else {
+            UNSUPPORTED_ON_DEVICE
+        }
     }

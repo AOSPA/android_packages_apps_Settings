@@ -64,7 +64,6 @@ open class NightDisplayScreen(val context: Context) :
     override val key: String
         get() = KEY
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.night_display_purpose
 
@@ -132,4 +131,4 @@ internal class NightDisplayTopIntroPreference :
 
     override fun isAvailable(context: Context): Boolean = context.isNightDisplaySettingsAvailable
 }
-// LINT.ThenChange(NightDisplaySettings.java)
+// LINT.ThenChange(NightDisplaySettings.java, NightDisplayApiScreen.kt)
