@@ -32,6 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
+import com.android.settings.utils.HsuUtils
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.flags.Flags
@@ -122,6 +123,7 @@ object AppInfoSettingsProvider : SettingsPageProvider {
 @Composable
 private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     val packageInfoState = packageInfoPresenter.flow.collectAsStateWithLifecycle()
+    val context = LocalContext.current
     RegularScaffold(
         title = stringResource(R.string.application_info_label),
         actions = {
@@ -196,6 +198,13 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         Category(title = stringResource(R.string.app_install_details_group_title)) {
             AppInstallerInfoPreference(app)
         }
+
+        // For non-admin users viewing an HSU app, show a message that they cannot manage the app.
+        if (android.multiuser.Flags.hsuAppManagement() &&
+            HsuUtils.isHsuApp(context, app) && !HsuUtils.isAdmin(context)) {
+            Category(title = stringResource(R.string.hsu_app_admin_only_explanation)) {}
+        }
+
         appInfoProvider.FooterAppVersion()
     }
 }
