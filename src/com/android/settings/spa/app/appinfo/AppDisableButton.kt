@@ -25,6 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.utils.HsuUtils
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.spa.widget.button.ActionButton
 import com.android.settingslib.spa.widget.dialog.AlertDialogButton
@@ -89,7 +90,7 @@ class AppDisableButton(
 
     @Composable
     private fun disableButton(app: ApplicationInfo): ActionButton {
-        val dialogPresenter = confirmDialogPresenter()
+        val dialogPresenter = confirmDialogPresenter(app)
         return ActionButton(
             text = context.getString(R.string.disable_text),
             imageVector = Icons.Outlined.HideSource,
@@ -109,12 +110,28 @@ class AppDisableButton(
     ) { packageInfoPresenter.enable() }
 
     @Composable
-    private fun confirmDialogPresenter() = rememberAlertDialogPresenter(
+    private fun confirmDialogPresenter(app: ApplicationInfo) = rememberAlertDialogPresenter(
         confirmButton = AlertDialogButton(
             text = stringResource(R.string.app_disable_dlg_positive),
             onClick = packageInfoPresenter::disable,
         ),
         dismissButton = AlertDialogButton(stringResource(R.string.cancel)),
-        text = { Text(stringResource(R.string.app_disable_dlg_text)) },
+        // If it's an HSU app, show a specific warning title and message to inform the admin
+        // that changes will affect all users.
+        title = if (android.multiuser.Flags.hsuAppManagement() &&
+            HsuUtils.isHsuApp(context, app)) {
+            stringResource(R.string.hsu_app_warning_dialog_title)
+        } else {
+            null
+        },
+        text = {
+            Text(
+                stringResource(
+                    if (android.multiuser.Flags.hsuAppManagement() && HsuUtils.isHsuApp(context, app))
+                        R.string.hsu_app_warning_dialog_message
+                    else R.string.app_disable_dlg_text
+                )
+            )
+        },
     )
 }
