@@ -34,6 +34,7 @@ import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 class WifiScorerTogglePreference() :
     SwitchPreference(
@@ -53,7 +54,7 @@ class WifiScorerTogglePreference() :
     override val purpose: Int
         get() = R.string.adaptive_connectivity_wifi_enabled_purpose
 
-    override fun tags(context: Context) = arrayOf(KEY_ADAPTIVE_WIFI_SCORER)
+    override fun tags(context: Context) = arrayOf(KEY_ADAPTIVE_WIFI_SCORER, UI_ONLY_PREFERENCE)
 
     override fun storage(context: Context): KeyValueStore = WifiScorerToggleStorage(context)
 

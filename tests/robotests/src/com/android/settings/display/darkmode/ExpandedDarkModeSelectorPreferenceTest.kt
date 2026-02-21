@@ -40,8 +40,7 @@ class ExpandedDarkModeSelectorPreferenceTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
     @get:Rule val setFlagsRule = SetFlagsRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
-    private val preference =
-        ExpandedDarkModeSelectorPreference(DarkThemeModeStorage(context), false)
+    private val preference = ExpandedDarkModeSelectorPreference(DarkThemeModeStorage(context))
 
     @Test
     fun key() {

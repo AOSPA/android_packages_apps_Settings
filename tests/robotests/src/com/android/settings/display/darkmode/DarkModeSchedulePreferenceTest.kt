@@ -61,7 +61,7 @@ class DarkModeSchedulePreferenceTest {
     private val bedtimeActivityInfo = ActivityInfo()
     private val bedtimeSettingsUtils: BedtimeSettingsUtils = BedtimeSettingsUtils(context)
     private val shadowPowerManager = shadowOf(context.getSystemService(PowerManager::class.java))
-    private val preference = DarkModeSchedulePreference(context, false)
+    private val preference = DarkModeSchedulePreference(context)
 
     @Before
     fun setUp() {
