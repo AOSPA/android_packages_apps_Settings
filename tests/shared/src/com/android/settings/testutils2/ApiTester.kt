@@ -319,6 +319,12 @@ class ApiTester(
             )
     }
 
+    /** Helper method that returns the tags associated with the screen. */
+    fun getScreenTags(): Set<String> = instance.tags(context).toSet()
+
+    /** Helper method that returns the tags associated with a preference. */
+    fun getPreferenceTags(key: String): Set<String> = getPreference<Any>(key).tags(context).toSet()
+
     /** Get the screen extras associated with this parameterized screen. */
     fun getLaunchScreenExtras() = instance.launchScreenExtra
 

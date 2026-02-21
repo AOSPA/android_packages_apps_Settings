@@ -25,7 +25,6 @@ import android.hardware.display.DisplayTopology.POSITION_LEFT
 import android.hardware.display.DisplayTopology.POSITION_RIGHT
 import android.hardware.display.DisplayTopology.POSITION_TOP
 import android.provider.Settings
-import android.util.DisplayMetrics
 import android.util.Size
 import android.view.Display.DEFAULT_DISPLAY
 import android.view.Display.Mode
@@ -55,7 +54,7 @@ class DisplayTopologyPreferenceTest {
     val context = ApplicationProvider.getApplicationContext<Context>()
     val featureFlags = FakeFeatureFlagsImpl()
     val injector = TestInjector(context, featureFlags)
-    val preference = DisplayTopologyPreference(injector)
+    val preference = DisplayTopologyPreference(context, injector)
     val rootView = View.inflate(context, preference.layoutResource, /* root= */ null)
     val holder = PreferenceViewHolder.createInstanceForTests(rootView)
 
@@ -84,8 +83,6 @@ class DisplayTopologyPreferenceTest {
 
         /** A log of events related to wallpaper revealing. */
         val revealLog = mutableListOf<String>()
-
-        override val densityDpi = DisplayMetrics.DENSITY_DEFAULT
 
         override fun getLogicalSize(displayId: Int): Size? {
             return displaysSize[displayId]

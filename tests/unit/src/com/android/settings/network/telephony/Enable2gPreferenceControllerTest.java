@@ -23,6 +23,8 @@ import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.anyInt;
+import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -30,8 +32,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Looper;
 import android.os.PersistableBundle;
 import android.platform.test.annotations.EnableFlags;
@@ -43,6 +48,7 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -79,6 +85,8 @@ public final class Enable2gPreferenceControllerTest {
     private SubscriptionManager mSubscriptionManager;
     @Mock
     private Fragment mFragment;
+    @Mock
+    private FragmentManager mFragmentManager;
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
@@ -88,7 +96,8 @@ public final class Enable2gPreferenceControllerTest {
     private Context mContext;
     @Mock
     private CarrierConfigManager mCarrierConfigManager;
-
+    @Mock
+    private NotificationManager mNotificationManager;
     private PersistableBundle mCarrierConfig;
 
     @Before
@@ -100,6 +109,9 @@ public final class Enable2gPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
 
         mContext = spy(ApplicationProvider.getApplicationContext());
+        when(mContext.getSystemService(Context.NOTIFICATION_SERVICE)).thenReturn(
+                mNotificationManager);
+        when(mContext.getSystemService(NotificationManager.class)).thenReturn(mNotificationManager);
         when(mContext.getSystemService(Context.TELEPHONY_SERVICE)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(CarrierConfigManager.class)).thenReturn(
@@ -314,6 +326,33 @@ public final class Enable2gPreferenceControllerTest {
 
         assertThat(mPreference.getSummary().toString()).isEqualTo(
                 mContext.getString(R.string.enable_2g_summary));
+    }
+
+    @Test
+    public void onDialogResult_positiveButtonEvent() {
+        when2gIsDisabledByAdmin(false);
+        when(mTelephonyManager.getAllowedNetworkTypesForReason(
+                TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_ENABLE_2G)).thenReturn(0L);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Enable2gPreferenceController.REQUEST_KEY, DialogInterface.BUTTON_POSITIVE);
+        mPreference.setChecked(true);
+
+        mController.onDialogResult(bundle);
+
+        assertFalse(mPreference.isChecked());
+        verify(mNotificationManager).cancel(anyInt());
+        verify(mTelephonyManager).setAllowedNetworkTypesForReason(anyInt(), anyLong());
+    }
+    @Test
+    public void onDialogResult_NegariveButtonEvent() {
+        mController.displayPreference(mPreferenceScreen);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Enable2gPreferenceController.REQUEST_KEY, DialogInterface.BUTTON_NEGATIVE);
+        mPreference.setChecked(false);
+
+        mController.onDialogResult(bundle);
+
+        assertTrue(mPreference.isChecked());
     }
 
     @Test

@@ -46,6 +46,7 @@ import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.LayoutPreference;
 
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class HdrBrightnessSettings extends DashboardFragment {
     private static final String TAG = "HdrBrightnessSettings";
@@ -140,3 +141,4 @@ public class HdrBrightnessSettings extends DashboardFragment {
                 }
             };
 }
+// LINT.ThenChange(HdrBrightnessScreenApi.kt)

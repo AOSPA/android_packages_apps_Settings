@@ -16,19 +16,24 @@
 
 package com.android.settings.connecteddevice.display
 
+import android.content.Context
 import android.view.LayoutInflater
 import com.android.settings.R
 
 /** View representation to manage display topology arrangement */
 open class DisplayTopologyPreferenceView(
+    uiContext: Context,
     val injector: ConnectedDisplayInjector,
-    private val initialSelectedDisplayId: Int? = injector.displayTopology?.primaryDisplayId
-) : FocusAwareFrameLayout(injector.context!!) {
+    private val initialSelectedDisplayId: Int? = injector.displayTopology?.primaryDisplayId,
+) : FocusAwareFrameLayout(uiContext) {
 
-    private val controller = DisplayTopologyPreferenceController(context, injector)
+    // TODO(b/430493225): Pass injector without passing injector.context separately.
+    //  The null check is just to ensure Controller class is clean of injector context null checking
+    private val controller =
+        DisplayTopologyPreferenceController(uiContext, injector.context!!, injector)
 
     init {
-        LayoutInflater.from(context)
+        LayoutInflater.from(uiContext)
             .inflate(R.layout.display_topology_preference, this, /* attachToRoot= */ true)
     }
 

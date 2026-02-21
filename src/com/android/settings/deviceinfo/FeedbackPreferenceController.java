@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.DeviceInfoUtils;
 import com.android.settingslib.core.AbstractPreferenceController;
@@ -72,7 +73,14 @@ public class FeedbackPreferenceController extends AbstractPreferenceController i
             return false;
         }
 
-        this.mHost.startActivityForResult(intent, 0);
+        if (mContext.getResources().getBoolean(
+                R.bool.config_launch_feedback_reporter_in_new_task)) {
+            Intent launchIntent = new Intent(intent);
+            launchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            this.mHost.startActivity(launchIntent);
+        } else {
+            this.mHost.startActivityForResult(intent, 0);
+        }
         return true;
     }
 }
