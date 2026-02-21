@@ -69,6 +69,12 @@ class EditShortcutSetupWizardFragment : BaseSetupWizardFragment() {
                     EditNavButtonShortcutController.create(context, it, shortcutTargets),
                 )
             }
+            findItem(adapter, R.id.edit_volume_keys_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_volume_keys_shortcut_in_suw,
+                    EditVolumeKeysShortcutController.create(context, it, shortcutTargets),
+                )
+            }
         }
 
     override val fragmentLayoutResId: Int = R.layout.edit_shortcut_suw_screen
