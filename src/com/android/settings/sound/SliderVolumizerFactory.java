@@ -17,7 +17,6 @@
 package com.android.settings.sound;
 
 import android.content.Context;
-import android.net.Uri;
 
 /**
  * Testable wrapper around {@link SliderVolumizer} constructor.
@@ -37,7 +36,7 @@ public class SliderVolumizerFactory {
      * @param svcb       callback of the slider volumizer.
      * @return a SliderVolumizer.
      */
-    public SliderVolumizer create(int streamType, Uri defaultUri, SliderVolumizer.Callback svcb) {
-        return new SliderVolumizer(mContext, streamType, defaultUri, svcb);
+    public SliderVolumizer create(int streamType, SliderVolumizer.Callback svcb) {
+        return new SliderVolumizer(mContext, streamType, svcb);
     }
 }

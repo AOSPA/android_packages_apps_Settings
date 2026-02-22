@@ -20,6 +20,7 @@ import android.content.Context
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.android.settings.accessibility.shared.utils.adjustIllustrationLayoutForSetupWizard
+import com.android.settings.accessibility.shared.utils.handleIllustrationAnimationForSetupWizard
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
@@ -53,9 +54,11 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
             lottieAnimationResId = lottieResId
             contentDescription = getContentDescription(context)
             applyDynamicColor()
-
             setOnBindListener { view: LottieAnimationView? ->
-                view?.let { adjustIllustrationLayoutForSetupWizard(it) }
+                view?.let { animationView ->
+                    adjustIllustrationLayoutForSetupWizard(animationView)
+                    handleIllustrationAnimationForSetupWizard(animationView)
+                }
             }
         }
     }

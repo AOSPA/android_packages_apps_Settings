@@ -24,7 +24,10 @@
 
     <com.android.settingslib.widget.BannerMessagePreferenceGroup
         android:key="device_unlock_issues_banner_group"
-        android:order="20" />
+        android:order="20"
+        settings:showDismissedPreferences="true"
+        settings:expandDismissedTitle="@string/safety_center_expand_dismissed_issues"
+        settings:collapseDismissedTitle="@string/safety_center_collapse_dismissed_issues" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="android_lock_screen"

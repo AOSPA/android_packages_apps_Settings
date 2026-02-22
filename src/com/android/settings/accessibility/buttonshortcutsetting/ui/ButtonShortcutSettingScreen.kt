@@ -29,11 +29,14 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /** Provides the preference screen for the Accessibility Button shortcut settings. */
 @ProvidePreferenceScreen(ButtonShortcutSettingScreen.KEY)
 open class ButtonShortcutSettingScreen :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceIndexableProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override val title: Int
         get() = R.string.accessibility_button_title
 

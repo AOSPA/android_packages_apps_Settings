@@ -34,7 +34,6 @@ class UserDictionaryListApiScreen :
         fragment = UserDictionaryList::class,
         purpose = R.string.user_dict_list_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 

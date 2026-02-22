@@ -35,6 +35,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_STORAGE
 
 @ProvidePreferenceScreen(AppStorageAppListScreen.KEY)
 open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyGenerator<Boolean> {
@@ -53,7 +54,7 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_STORAGE, TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
 

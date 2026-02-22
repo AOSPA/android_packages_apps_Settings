@@ -33,7 +33,6 @@ class SwipeToNotificationApiScreen :
         fragment = SwipeToNotificationSettings::class,
         purpose = R.string.gesture_swipe_down_fingerprint_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
         preconditions(R.string.gesture_swipe_down_fingerprint_screen_preconditions) {

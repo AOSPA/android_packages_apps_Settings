@@ -19,7 +19,9 @@ package com.android.settings.accessibility.shared.utils
 import android.view.ViewGroup
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.accessibility.extensions.isInSetupWizard
+import com.android.settingslib.widget.LottieColorUtils
 import com.android.settingslib.widget.SettingsThemeHelper
+import com.google.android.setupcompat.util.DelightHelper
 
 // TODO(b/407080818): Delete this function when we no longer need to adjust the layout
 /**
@@ -42,5 +44,28 @@ fun adjustIllustrationLayoutForSetupWizard(view: LottieAnimationView) {
             lp.width = ViewGroup.LayoutParams.MATCH_PARENT
             illustrationFrame.layoutParams = lp
         }
+    }
+}
+
+/**
+ * Handles the animation playback logic, applying a delay if the 'Delight' helper requires it for
+ * SUW transitions.
+ */
+fun handleIllustrationAnimationForSetupWizard(view: LottieAnimationView) {
+    val context = view.context
+    if (DelightHelper.shouldApplyAnimatedIcon(context) && context.isInSetupWizard()) {
+        // Cancel any pending playback to prevent premature triggers during the delay period.
+        view.cancelAnimation()
+
+        // Ensure the animation color palette matches the Material Expressive theme once stopped.
+        if (SettingsThemeHelper.isExpressiveTheme(context)) {
+            LottieColorUtils.applyMaterialColor(context, view)
+        }
+
+        val delayMs =
+            context.resources
+                .getInteger(com.google.android.setupdesign.R.integer.sud_lottie_animation_delay_ms)
+                .toLong()
+        view.postDelayed({ view.playAnimation() }, delayMs)
     }
 }

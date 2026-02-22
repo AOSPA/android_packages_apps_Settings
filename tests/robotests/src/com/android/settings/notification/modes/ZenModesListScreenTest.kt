@@ -133,7 +133,7 @@ class ZenModesListScreenTest {
     @Test
     fun tags_correct() {
         assertThat(preferenceScreenCreator.tags(appContext).toList())
-            .containsExactly(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+            .containsExactly("getNotificationsDeviceState", TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
     }
 
     @Test

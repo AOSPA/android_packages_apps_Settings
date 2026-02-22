@@ -45,6 +45,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /** Activity to display [SupervisionWebContentFiltersScreen]. */
 class SupervisionWebContentFiltersActivity :
@@ -69,6 +70,8 @@ class SupervisionWebContentFiltersActivity :
 /** Web content filters landing page (Settings > Supervision > Web content filters). */
 @ProvidePreferenceScreen(SupervisionWebContentFiltersScreen.KEY)
 open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, PreferenceLifecycleProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     private var supervisionClient: SupervisionMessengerClient? = null
 
     override fun isFlagEnabled(context: Context) = Flags.enableWebContentFiltersScreen()

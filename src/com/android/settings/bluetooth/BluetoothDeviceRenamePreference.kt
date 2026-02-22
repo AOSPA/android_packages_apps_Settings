@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -57,6 +58,8 @@ class BluetoothDeviceRenamePreference(private val bluetoothDataStore: BluetoothD
         get() = R.string.bluetooth_device_name
 
     override fun dependencies(context: Context) = arrayOf(BluetoothPreference.KEY)
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         lifeCycleContext = context

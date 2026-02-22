@@ -24,6 +24,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.R
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /**
  * Catalyst screen to display the list of special apps with "Alarms & reminders" permission.
@@ -32,6 +33,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
  */
 @ProvidePreferenceScreen(AlarmsAndRemindersAppListScreen.KEY)
 open class AlarmsAndRemindersAppListScreen : SpecialAccessAppListScreen() {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
     override val key: String
         get() = KEY

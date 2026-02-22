@@ -57,7 +57,13 @@ import org.robolectric.shadows.ShadowNetworkInfo
 import org.robolectric.shadows.ShadowWifiManager
 
 @RunWith(AndroidJUnit4::class)
-@Config(shadows = [ConfigureWifiApiScreenTest.ShadowWifiManagerExtension::class])
+@Config(
+    shadows =
+        [
+            ConfigureWifiApiScreenTest.ShadowWifiManagerExtension::class,
+            ConfigureWifiApiScreenTest.ShadowWifiUtils::class,
+        ]
+)
 class ConfigureWifiApiScreenTest {
     private val tester = ApiTester(ConfigureWifiApiScreen())
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -66,9 +72,20 @@ class ConfigureWifiApiScreenTest {
     private val shadowWifiManager: ShadowWifiManagerExtension
         get() = Shadows.shadowOf(wifiManager) as ShadowWifiManagerExtension
 
-    private val directExecutor = Executor { it.run() }
-
     @get:Rule val setFlagsRule = SetFlagsRule()
+
+    @Implements(WifiUtils::class)
+    class ShadowWifiUtils {
+        companion object {
+            var isMultiuserEnabled = false
+
+            @Implementation
+            @JvmStatic
+            fun isWifiMultiuserEnabled(): Boolean {
+                return isMultiuserEnabled
+            }
+        }
+    }
 
     @Implements(WifiManager::class)
     class ShadowWifiManagerExtension : ShadowWifiManager() {
@@ -110,10 +127,6 @@ class ConfigureWifiApiScreenTest {
         }
     }
 
-    private fun setNotifierEnabled(enabled: Boolean) {
-        openNetworkNotifierHelper.setEnabled(wifiManager, directExecutor, enabled)
-    }
-
     private fun grantPermission(permission: String) {
         val application = ApplicationProvider.getApplicationContext<Application>()
         Shadows.shadowOf(application).grantPermissions(permission)
@@ -124,7 +137,7 @@ class ConfigureWifiApiScreenTest {
         val application: Application = ApplicationProvider.getApplicationContext()
         // Reset permissions before each test
         Shadows.shadowOf(application).denyPermissions(NETWORK_SETTINGS, NETWORK_SETUP_WIZARD)
-        setNotifierEnabled(false)
+        ShadowWifiUtils.isMultiuserEnabled = false
         shadowWifiManager.setWepSupported(true)
         shadowWifiManager.setWepAllowed(false)
         shadowWifiManager.setConnectionInfo(null)
@@ -144,19 +157,6 @@ class ConfigureWifiApiScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
-    fun notifyOpenNetworksPreference_get_whenEnabled_noPermissionsNeeded() {
-        setNotifierEnabled(true)
-        assertThat(tester.get<AnyBoolean>("wifi_notify_open_networks")).isEqualTo(true)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
-    fun notifyOpenNetworksPreference_get_whenDisabled_noPermissionsNeeded() {
-        assertThat(tester.get<AnyBoolean>("wifi_notify_open_networks")).isEqualTo(false)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun notifyOpenNetworksPreference_set_noPermissions_throwsException() {
         assertFailsWith<MissingPermissionException> {
             tester.set("wifi_notify_open_networks", true)
@@ -168,7 +168,12 @@ class ConfigureWifiApiScreenTest {
     fun notifyOpenNetworksPreference_set_onlyNetworkSettings_succeeds() {
         grantPermission(NETWORK_SETTINGS)
 
+        tester.set("wifi_notify_open_networks", false)
+
+        assertThat(tester.get<AnyBoolean>("wifi_notify_open_networks")).isEqualTo(false)
+
         tester.set("wifi_notify_open_networks", true)
+
         assertThat(tester.get<AnyBoolean>("wifi_notify_open_networks")).isEqualTo(true)
     }
 
@@ -176,9 +181,28 @@ class ConfigureWifiApiScreenTest {
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun notifyOpenNetworksPreference_set_onlyNetworkSetupWizard_succeeds() {
         grantPermission(NETWORK_SETUP_WIZARD)
-        setNotifierEnabled(true)
 
         tester.set("wifi_notify_open_networks", false)
+
+        assertThat(tester.get<AnyBoolean>("wifi_notify_open_networks")).isEqualTo(false)
+
+        tester.set("wifi_notify_open_networks", true)
+
+        assertThat(tester.get<AnyBoolean>("wifi_notify_open_networks")).isEqualTo(true)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun notifyOpenNetworksPreference_set_multiuserEnabled_succeeds() {
+        grantPermission(NETWORK_SETTINGS)
+        ShadowWifiUtils.isMultiuserEnabled = true
+
+        tester.set("wifi_notify_open_networks", true)
+
+        assertThat(tester.get<AnyBoolean>("wifi_notify_open_networks")).isEqualTo(true)
+
+        tester.set("wifi_notify_open_networks", false)
+
         assertThat(tester.get<AnyBoolean>("wifi_notify_open_networks")).isEqualTo(false)
     }
 
@@ -207,7 +231,7 @@ class ConfigureWifiApiScreenTest {
                 tester.set("wifi_allow_wep_networks", true)
             }
         assertThat(e.reason)
-            .contains(context.getString(R.string.wifi_allow_wep_networks_summary_carrier_not_allow))
+            .contains(context.getString(R.string.wifi_allow_wep_networks_precondition))
     }
 
     @Test
@@ -280,6 +304,6 @@ class ConfigureWifiApiScreenTest {
                 tester.set("wifi_allow_wep_networks", false)
             }
         assertThat(e.reason)
-            .contains(context.getString(R.string.wifi_settings_wep_networks_disconnect_summary))
+            .contains(context.getString(R.string.wifi_allow_wep_networks_set_invalid_preference))
     }
 }

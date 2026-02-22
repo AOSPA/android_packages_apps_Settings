@@ -46,6 +46,7 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(AutoBrightnessScreen.KEY)
 open class AutoBrightnessScreen :
@@ -55,6 +56,8 @@ open class AutoBrightnessScreen :
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin,
     BooleanValuePreference {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, KEY_ADAPTIVE_BRIGHTNESS)
+
     override val key: String
         get() = KEY
 
@@ -73,7 +76,7 @@ open class AutoBrightnessScreen :
     override val preferenceActionMetrics: Int
         get() = ACTION_ADAPTIVE_BRIGHTNESS
 
-    override fun tags(context: Context) = arrayOf(KEY_ADAPTIVE_BRIGHTNESS)
+
 
     override fun isFlagEnabled(context: Context) = Flags.catalystScreenBrightnessMode()
 

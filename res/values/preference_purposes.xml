@@ -284,6 +284,7 @@
     <string name="system_locale_region_picker_purpose" translatable="false">Allows users to choose their geographical region, which affects system-wide formatting for dates, times, temperatures, and other measurement systems.</string>
     <string name="system_locale_region_picker_preference_purpose" translatable="false">The geographical region used by the system to determine regional formatting for dates, times, and measurements.</string>
     <string name="default_system_language_purpose" translatable="false">The primary language used by the device, apps, and websites.</string>
+    <string name="spellchecker_language_purpose" translatable="false">Service that underlines typos in your edit area and lets you select different languages and providers</string>
     <string name="first_day_of_week_purpose" translatable="false">Allows users to choose which day is considered the first day of the week for apps and system features.</string>
     <string name="first_day_of_week_item_preference_purpose" translatable="false">The day considered the first day of the week</string>
     <string name="terms_of_address_purpose" translatable="false">Allows users to personalize how they\’re addressed</string>
@@ -359,7 +360,7 @@
     <string name="reset_dashboard_purpose" translatable="false">Allows users to reset various system settings and connections, remove eSIMs, delete the private space, or perform a full factory reset to erase all device data.</string>
     <string name="restrict_background_parent_entry_purpose" translatable="false">Navigation to Data Saver configuration</string>
     <string name="saved_networks_purpose" translatable="false">Displays a list of Wi-Fi networks that the device has previously connected to and remembered, allowing users to view, manage, or forget them.</string>
-    <string name="screensaver_purpose" translatable="false">Allows users to enable and customize the screen saver, including when it should be displayed and which visual theme to use.</string>
+    <string name="screensaver_purpose" translatable="false">Allows users to manage the device\'s screensaver (Dream) settings, including when the screensaver is shown, what content is displayed, and low-light mode options.</string>
     <string name="use_data_saver_purpose" translatable="false">Whether or not Data Saver is enabled to reduce background data usage.</string>
     <string name="reverse_charging_purpose" translatable="false">Allows users to wirelessly share their phone\'s battery power with other compatible devices, such as earbuds or other phones.</string>
     <string name="reverse_charging_detail_footer_purpose" translatable="false">reverse_charging_detail_footer</string>
@@ -372,6 +373,7 @@
     <string name="app_parameter_purpose" translatable="false">The package to configure.</string>
     <string name="software_update_settings_v2_purpose" translatable="false">Allows users to view the current software update status of the device and access detailed settings for system updates, system updates, and app updates.</string>
     <string name="alarm_volume_purpose" translatable="false">The system volume level for alarms</string>
+    <string name="assistant_volume_purpose" translatable="false">This slider adjusts the assistant volume level.</string>
     <string name="audio_category_purpose" translatable="false">audio_category</string>
     <string name="call_volume_purpose" translatable="false">The system volume level for phone calls</string>
     <string name="charging_sounds_enabled_purpose" translatable="false">Whether sounds and vibrations are triggered when the device is connected to a power source</string>
@@ -552,6 +554,9 @@
     <string name="wifi_details_settings_purpose" translatable="false">Allows users to view and manage the details of a saved Wi-Fi network.</string>
     <string name="wifi_details_parameter_purpose" translatable="false">The key of the saved network</string>
     <string name="wifi_details_parameter_description" translatable="false">A unique key representing a saved Wi-Fi network</string>
+    <string name="wifi_privacy_settings_purpose" translatable="false">Allows users to view and manage the privacy settings of a saved Wi-Fi network.</string>
+    <string name="wifi_privacy_parameter_purpose" translatable="false">The key of the saved network</string>
+    <string name="wifi_privacy_parameter_description" translatable="false">A unique key representing a saved Wi-Fi network</string>
     <string name="legal_information_purpose" translatable="false">Allows users to view legal documents and attributions related to the device\'s software and assets, including third-party licenses and source code information.</string>
     <string name="display_settings_screen_purpose" translatable="false">Allows users to manage display and touch settings such as brightness, theme, color profiles, screen timeout, and screen refresh rate.</string>
     <string name="screen_timeout_purpose" translatable="false">Allows users to configure how long the screen stays on before automatically turning off, including options for time-based intervals and intelligent features that monitor usage or attention.</string>
@@ -664,7 +669,7 @@
     <string name="device_unlock_pref_screen_purpose" translatable="false">Allows users to manage their screen lock settings. This includes setting or modifying their device credential, like a PIN or password, as well as managing their biometrics and other authenticators, like watches, and related preferences for each of these modalities.</string>
     <!-- Device unlock settings screens end -->
     <string name="available_virtual_keyboard_screen_purpose" translatable="false">Allows users to enable and disable input method editors and to invoke settings activities specific to each input method editor.</string>
-    <string name="wifi_notify_open_networks_purpose" translatable="false">Allows users to manage notifications for available open Wi-Fi networks, including enabling or disabling alerts when a high-quality public network is detected nearby.</string>
+    <string name="wifi_notify_open_networks_purpose" translatable="false">Whether or not to show a notification when a high-quality public Wi-Fi network is available.</string>
     <string name="wifi_allow_wep_networks_purpose" translatable="false">Allows the device to connect to legacy Wi-Fi networks using the insecure WEP security protocol.</string>
     <string name="privacy_controls_screen_purpose" translatable="false">Allows users to manage privacy-related controls like camera and microphone access, and view location data sharing updates.</string>
     <string name="privacy_camera_toggle_purpose" translatable="false">Controls whether apps can access the device camera.</string>

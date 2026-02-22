@@ -204,7 +204,8 @@ public class FingerprintStatusUtilsTest {
     }
 
     @Test
-    @EnableFlags(android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS)
+    @EnableFlags({android.app.supervision.flags.Flags.FLAG_DEPRECATE_DPM_SUPERVISION_APIS,
+            android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void getEnforcingAdmin_whenFingerprintDisabled_returnsRestriction() {
         when(mSupervisionManager.isSupervisionEnabledForUser(USER_ID)).thenReturn(true);
         when(mSupervisionManager.getActiveSupervisionAppPackage()).thenReturn("supervision.pkg");
@@ -217,6 +218,7 @@ public class FingerprintStatusUtilsTest {
     }
 
     @Test
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void getEnforcingAdmin_withFingerprintEnabled_returnsNull() {
         when(mDevicePolicyManager.getKeyguardDisabledFeatures(COMPONENT_NAME)).thenReturn(0);
 

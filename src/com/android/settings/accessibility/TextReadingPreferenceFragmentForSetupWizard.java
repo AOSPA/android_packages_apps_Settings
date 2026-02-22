@@ -37,7 +37,9 @@ import com.android.settingslib.Utils;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
+import com.google.android.setupcompat.util.DelightHelper;
 import com.google.android.setupdesign.GlifPreferenceLayout;
+import com.google.android.setupdesign.template.IconMixin;
 
 /**
  * A {@link androidx.preference.PreferenceFragmentCompat} that displays the settings page related
@@ -74,6 +76,11 @@ public class TextReadingPreferenceFragmentForSetupWizard extends TextReadingPref
             icon.setTintList(Utils.getColorAttr(getContext(), android.R.attr.colorPrimary));
             AccessibilitySetupWizardUtils.updateGlifPreferenceLayout(getContext(), layout, title,
                     /* description= */ null, icon);
+
+            if (DelightHelper.shouldApplyAnimatedIcon(getContext())) {
+                final IconMixin iconMixin = layout.getMixin(IconMixin.class);
+                iconMixin.setAnimatedIcon(R.raw.icon_visibility);
+            }
 
             final FooterBarMixin mixin = layout.getMixin(FooterBarMixin.class);
             AccessibilitySetupWizardUtils.setPrimaryButton(getContext(), mixin, R.string.done,

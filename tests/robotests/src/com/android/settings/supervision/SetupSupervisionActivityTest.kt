@@ -605,6 +605,21 @@ class SetupSupervisionActivityTest {
         }
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onCreate_setsContentDescriptionForIntro() {
+        ActivityScenario.launch(SetupSupervisionActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val layout = activity.findViewById<GlifLayout>(R.id.supervision_setup_introduction)
+                val descriptionView = layout.getDescriptionTextView()
+                assertThat(descriptionView.contentDescription)
+                    .isEqualTo(
+                        context.getString(R.string.supervision_intro_content_description)
+                    )
+            }
+        }
+    }
+
     private fun clickNextOnIntroductionScreen(activity: SetupSupervisionActivity) {
         val layout = activity.findViewById<GlifLayout>(R.id.supervision_setup_introduction)
         val footer = layout.getMixin(FooterBarMixin::class.java)

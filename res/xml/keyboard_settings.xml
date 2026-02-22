@@ -31,6 +31,12 @@
             android:key="physical_keyboard_pref"
             android:title="@string/physical_keyboard_title"
             android:summary="@string/summary_placeholder"/>
+
+        <SwitchPreferenceCompat
+            android:key="ime_switcher_button_in_navbar_enabled"
+            android:title="@string/ime_switcher_button_in_navbar_title"
+            android:summary="@string/ime_switcher_button_in_navbar_summary"
+            settings:controller="com.android.settings.inputmethod.ImeSwitcherButtonInNavBarPreferenceController"/>
     </PreferenceCategory>
 
     <PreferenceCategory

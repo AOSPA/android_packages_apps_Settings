@@ -29,12 +29,17 @@ import com.android.settingslib.testutils.GraphTestUtils.createPersistentPreferen
 import com.android.settingslib.testutils.GraphTestUtils.createScreen
 import com.android.settingslib.testutils.GraphTestUtils.createSimplePreference
 import com.android.settingslib.testutils.GraphTestUtils.setRegistryFactories
+import android.os.Build
+import android.provider.Settings
 import com.google.common.truth.Truth.assertThat
 import java.util.Locale
 import kotlinx.coroutines.test.runTest
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.shadows.ShadowBuild
+import org.robolectric.shadows.ShadowSettings
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateMetadataProviderExecutorTest {
@@ -45,6 +50,13 @@ class CatalystStateMetadataProviderExecutorTest {
             it.setLocale(Locale.ENGLISH)
         }
     )
+
+    @Before
+    fun setUp() {
+        ShadowBuild.setType(Build.TYPE)
+        ShadowSettings.reset()
+    }
+
 
     @Test
     fun execute_onWritablePreference_returnsWritableDeviceStateItem() = runTest {
@@ -498,4 +510,93 @@ class CatalystStateMetadataProviderExecutorTest {
             writePermit
     }
 
+    @Test
+    fun execute_onDebuggableBuildWithSetting_includesScreenKeyInDescription() = runTest {
+        ShadowBuild.setType("userdebug")
+        Settings.Global.putInt(
+            context.contentResolver,
+            "com.android.settings.APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION",
+            1,
+        )
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig(
+                    "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    title = R.string.preference_screen_title,
+                    preferences = emptyList(),
+                )
+            )
+        )
+        val executor =
+            CatalystStateMetadataProviderExecutor(
+                buildConfig("screen_key", emptyList()),
+                context,
+                englishContext
+            )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(result.metadata[0].description).contains("[key=screen_key]")
+    }
+
+    @Test
+    fun execute_onDebuggableBuildWithoutSetting_doesNotIncludeScreenKeyInDescription() = runTest {
+        ShadowBuild.setType("userdebug")
+        Settings.Global.putInt(
+            context.contentResolver,
+            "com.android.settings.APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION",
+            0,
+        )
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig(
+                    "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    title = R.string.preference_screen_title,
+                    preferences = emptyList(),
+                )
+            )
+        )
+        val executor =
+            CatalystStateMetadataProviderExecutor(
+                buildConfig("screen_key", emptyList()),
+                context,
+                englishContext
+            )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(result.metadata[0].description).doesNotContain("[key=screen_key]")
+    }
+
+    @Test
+    fun execute_onNonDebuggableBuildWithSetting_doesNotIncludeScreenKeyInDescription() = runTest {
+        ShadowBuild.setType("user")
+        Settings.Global.putInt(
+            context.contentResolver,
+            "com.android.settings.APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION",
+            1,
+        )
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig(
+                    "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    title = R.string.preference_screen_title,
+                    preferences = emptyList(),
+                )
+            )
+        )
+        val executor =
+            CatalystStateMetadataProviderExecutor(
+                buildConfig("screen_key", emptyList()),
+                context,
+                englishContext
+            )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(result.metadata[0].description).doesNotContain("[key=screen_key]")
+    }
 }

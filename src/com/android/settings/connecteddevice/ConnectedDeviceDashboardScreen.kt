@@ -30,11 +30,14 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ConnectedDeviceDashboardScreen.KEY)
 open class ConnectedDeviceDashboardScreen :
     PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceIconProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override val key: String
         get() = KEY
 
