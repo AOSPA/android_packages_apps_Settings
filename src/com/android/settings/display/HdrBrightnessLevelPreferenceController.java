@@ -34,6 +34,7 @@ import com.android.settingslib.widget.SliderPreference;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+// LINT.IfChange
 public class HdrBrightnessLevelPreferenceController extends SliderPreferenceController {
 
     private Locale mLocale;
@@ -118,3 +119,4 @@ public class HdrBrightnessLevelPreferenceController extends SliderPreferenceCont
         return Math.floor(Math.max(0.0f, Math.min(1.0f, percent)) * 100) / 100;
     }
 }
+// LINT.ThenChange(HdrBrightnessScreenApi.kt)

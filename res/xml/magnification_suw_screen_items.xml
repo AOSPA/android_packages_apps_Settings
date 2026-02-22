@@ -25,6 +25,9 @@
         android:id="@+id/magnification_option_in_suw"
         android:title="@string/accessibility_screen_option">
 
+        <com.android.settings.accessibility.setupwizard.items.TwoTargetItem
+            android:id="@+id/magnification_shortcut_in_suw" />
+
         <SwitchItem
             android:id="@+id/magnify_keyboard_in_suw"
             android:title="@string/accessibility_screen_magnification_nav_ime_title"

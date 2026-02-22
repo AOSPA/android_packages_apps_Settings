@@ -505,8 +505,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
         assertThat(indexData).hasSize(1)
         val resource = indexData.first()
         assertThat(resource).isNotNull()
-        assertThat(resource.screenTitle)
-            .contains(mContext.getString(R.string.display_settings))
+        assertThat(resource.screenTitle).contains(mContext.getString(R.string.display_settings))
         assertThat(resource.keywords)
             .isEqualTo(mContext.getString(R.string.keywords_external_display_settings))
         assertThat(resource.title)
@@ -560,7 +559,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     class FakeDisplayTopologyPreferenceView(
         injector: ConnectedDisplayInjector,
         initialSelectedDisplayId: Int? = null,
-    ) : DisplayTopologyPreferenceView(injector, initialSelectedDisplayId) {
+    ) : DisplayTopologyPreferenceView(injector.context!!, injector, initialSelectedDisplayId) {
 
         var selectedListener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener? =
             null

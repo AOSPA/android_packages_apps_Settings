@@ -31,7 +31,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.RemoteException
 import android.os.SystemProperties
-import android.util.DisplayMetrics
 import android.util.Log
 import android.util.Size
 import android.view.Display
@@ -65,6 +64,7 @@ import kotlinx.coroutines.coroutineScope
  */
 data class RevealedWallpaper(val displayId: Int, val revealer: View, val viewManager: ViewManager)
 
+// TODO(b/430493225): Clean up nullable context
 open class ConnectedDisplayInjector(open val context: Context?) {
 
     open val flags: DesktopExperienceFlags by lazy { DesktopExperienceFlags(FeatureFlagsImpl()) }
@@ -353,22 +353,6 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             // from crashing.
             Log.e(TAG, "NPE while mirroring wallpaper of display $displayId - already detached?", e)
             return null
-        }
-    }
-
-    /**
-     * This density is the density of the current display (showing the Settings app UI). It is
-     * necessary to use this density here because the topology pane coordinates are in physical
-     * pixels, and the display bounds and accessibility constraints are in density-independent
-     * pixels.
-     */
-    open val densityDpi: Int by lazy {
-        val c = context
-        val info = DisplayInfo()
-        if (c != null && c.display.getDisplayInfo(info)) {
-            info.logicalDensityDpi
-        } else {
-            DisplayMetrics.DENSITY_DEFAULT
         }
     }
 

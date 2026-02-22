@@ -16,9 +16,11 @@
 
 package com.android.settings.network.telephony.networkchange;
 
+import static com.android.settings.network.telephony.Enable2gPreferenceController.REQUEST_KEY;
+
 import android.app.Dialog;
 import android.app.settings.SettingsEnums;
-import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,26 +31,20 @@ import androidx.fragment.app.FragmentManager;
 import com.android.settings.R;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 
-public class NetworkProtectionDialogFragment extends InstrumentedDialogFragment {
+public class NetworkProtectionDialogFragment extends InstrumentedDialogFragment
+        implements DialogInterface.OnClickListener {
 
     private static final String TAG = "NetworkProtectionDialogFragment";
     private static final String DIALOG_DESC_BUNDLE_KEY = "arg_key_dialog_desc";
     private static final String DIALOG_TITLE_BUNDLE_KEY = "arg_key_dialog_title";
     private static final String DIALOG_POSITIVE_BTN_TXT_BUNDLE_KEY = "arg_key_dialog_positive_btn";
 
-    private final OnClickListener mBtnListener;
-
-    private NetworkProtectionDialogFragment(OnClickListener listener) {
-        mBtnListener = listener;
-    }
-
     /**
      * Start the dialog and display it on screen.
      */
     public static void show(@NonNull Fragment host, @NonNull String dialogTitle,
-                            @NonNull String dialogDesc, @NonNull String positiveBtnTxt,
-                            OnClickListener listener) {
-        show(host.getChildFragmentManager(), dialogTitle, dialogDesc, positiveBtnTxt, listener);
+                            @NonNull String dialogDesc, @NonNull String positiveBtnTxt) {
+        show(host.getParentFragmentManager(), dialogTitle, dialogDesc, positiveBtnTxt);
     }
 
     /**
@@ -56,14 +52,13 @@ public class NetworkProtectionDialogFragment extends InstrumentedDialogFragment 
      */
     public static void show(@NonNull FragmentManager childFragmentManager,
                             @NonNull String dialogTitle, @NonNull String dialogDesc,
-                            @NonNull String positiveBtnTxt, OnClickListener listener) {
+                            @NonNull String positiveBtnTxt) {
         if (childFragmentManager.findFragmentByTag(TAG) == null) {
             final Bundle bundle = new Bundle();
             bundle.putString(DIALOG_TITLE_BUNDLE_KEY, dialogTitle);
             bundle.putString(DIALOG_DESC_BUNDLE_KEY, dialogDesc);
             bundle.putString(DIALOG_POSITIVE_BTN_TXT_BUNDLE_KEY, positiveBtnTxt);
-            final NetworkProtectionDialogFragment dialog =
-                    new NetworkProtectionDialogFragment(listener);
+            final NetworkProtectionDialogFragment dialog = new NetworkProtectionDialogFragment();
             dialog.setArguments(bundle);
             dialog.show(childFragmentManager, TAG);
         }
@@ -83,10 +78,18 @@ public class NetworkProtectionDialogFragment extends InstrumentedDialogFragment 
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
                 .setTitle(dialogTitle).setMessage(dialogDesc)
-                .setPositiveButton(positiveBtnTxt, mBtnListener)
-                .setNegativeButton(R.string.cancel, mBtnListener);
+                .setPositiveButton(positiveBtnTxt, this)
+                .setNegativeButton(R.string.cancel, this);
         AlertDialog dialog = builder.create();
         setCancelable(false);
         return dialog;
+    }
+
+    @Override
+    public void onClick(DialogInterface dialog, int id) {
+        Bundle bundle = new Bundle();
+        bundle.putInt(REQUEST_KEY, id);
+        getParentFragmentManager().setFragmentResult(REQUEST_KEY, bundle);
+        dialog.dismiss();
     }
 }

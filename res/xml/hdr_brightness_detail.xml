@@ -18,6 +18,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="hdr_brightness_detail"
     android:title="@string/hdr_brightness_title">
 
     <com.android.settingslib.widget.TopIntroPreference
@@ -30,12 +31,12 @@
         android:layout="@layout/hdr_brightness_preview"/>
 
     <com.android.settingslib.widget.MainSwitchPreference
-        android:key="hdr_brightness_activated"
+        android:key="hdr_brightness_enabled"
         android:title="@string/hdr_brightness_main_switch_title"
         settings:controller="com.android.settings.display.HdrBrightnessPreferenceController"/>
 
     <com.android.settingslib.widget.SliderPreference
-        android:key="hdr_brightness_level"
+        android:key="hdr_brightness_boost_level"
         android:title="@string/hdr_brightness_level_title"
         settings:keywords="@string/keywords_display_hdr_brightness"
         settings:textStart="@string/brightness_intensity_start_label"

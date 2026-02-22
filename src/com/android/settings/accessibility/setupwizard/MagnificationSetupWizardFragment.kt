@@ -38,6 +38,12 @@ class MagnificationSetupWizardFragment : BaseSetupWizardFragment() {
                     MagnificationIllustrationItemController(context, it),
                 )
             }
+            findItem(adapter, R.id.magnification_shortcut_in_suw)?.let {
+                put(
+                    R.id.magnification_shortcut_in_suw,
+                    MagnificationShortcutTwoTargetItemController.create(context, it),
+                )
+            }
             findItem(adapter, R.id.magnify_keyboard_in_suw)?.let {
                 put(R.id.magnify_keyboard_in_suw, MagnifyKeyboardSwitchItemController(context, it))
             }

@@ -22,6 +22,7 @@ import android.graphics.RectF
 import android.hardware.display.DisplayTopology
 import android.hardware.display.DisplayTopology.TreeNode
 import android.os.SystemClock
+import android.util.DisplayMetrics
 import android.util.Log
 import android.util.Size
 import android.view.Display.DEFAULT_DISPLAY
@@ -42,7 +43,8 @@ import kotlin.math.min
  * This class is framework-agnostic and can be used by both a Preference and a custom View.
  */
 class DisplayTopologyPreferenceController(
-    private val context: Context,
+    private val uiContext: Context,
+    private val appContext: Context,
     private val injector: ConnectedDisplayInjector,
 ) {
     @VisibleForTesting lateinit var paneContent: FrameLayout
@@ -57,12 +59,14 @@ class DisplayTopologyPreferenceController(
      */
     @VisibleForTesting
     val accidentalDragDistancePx
-        get() = DisplayTopology.dpToPx(4f, injector.densityDpi)
+        get() = DisplayTopology.dpToPx(4f, currentDisplayDensityDpi)
 
     /** How long before until a tap is considered a drag regardless of distance moved. */
     @VisibleForTesting val accidentalDragTimeLimitMs = 800L
     @VisibleForTesting var timesRefreshedBlocks = 0
 
+    // Decide density based on the display this view is currently placed on
+    private var currentDisplayDensityDpi: Int = DisplayMetrics.DENSITY_DEFAULT
     private val topologyListener = Consumer<DisplayTopology> { applyTopology(it) }
     private val displayListener =
         object : ExternalDisplaySettingsConfiguration.DisplayListener() {
@@ -214,6 +218,8 @@ class DisplayTopologyPreferenceController(
             topologyInfo = null
             return
         }
+        val currentDisplayId = paneContent.display?.displayId ?: DEFAULT_DISPLAY
+        currentDisplayDensityDpi = topology.getLogicalDensityForDisplay(currentDisplayId)
         applyTopology(topology)
         applyDisplayUpdateInMirroringMode()
     }
@@ -228,7 +234,7 @@ class DisplayTopologyPreferenceController(
     private fun applyTopology(topology: DisplayTopology) {
         // If mirroring display is turned on, updates will come from DisplayListener since there's
         // no more topology update when display is added / removed
-        if (!isAttached || isDisplayInMirroringMode(context)) {
+        if (!isAttached || isDisplayInMirroringMode(appContext)) {
             return
         }
         val topologyBounds = topology.absoluteBounds
@@ -259,9 +265,13 @@ class DisplayTopologyPreferenceController(
         val scaling =
             TopologyScale(
                 paneContent.width,
-                minEdgeLength = DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, injector.densityDpi),
+                minEdgeLength =
+                    DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, currentDisplayDensityDpi),
                 maxEdgeLength =
-                    DisplayTopology.dpToPx(getMaxEdgeLengthDp(newBounds.size), injector.densityDpi),
+                    DisplayTopology.dpToPx(
+                        getMaxEdgeLengthDp(newBounds.size),
+                        currentDisplayDensityDpi,
+                    ),
                 newBounds.map { it.second },
             )
         setupDisplayPaneAndBlocks(
@@ -285,7 +295,7 @@ class DisplayTopologyPreferenceController(
      */
     private fun applyDisplayUpdateInMirroringMode() {
         // If mirroring display is turned off, update will be handled by topology update
-        if (!isAttached || !isDisplayInMirroringMode(context)) {
+        if (!isAttached || !isDisplayInMirroringMode(appContext)) {
             return
         }
         // Step 1
@@ -297,8 +307,10 @@ class DisplayTopologyPreferenceController(
         val scaling =
             TopologyScale(
                 paneContent.width,
-                minEdgeLength = DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, injector.densityDpi),
-                maxEdgeLength = DisplayTopology.dpToPx(MAX_EDGE_LENGTH_DP, injector.densityDpi),
+                minEdgeLength =
+                    DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, currentDisplayDensityDpi),
+                maxEdgeLength =
+                    DisplayTopology.dpToPx(MAX_EDGE_LENGTH_DP, currentDisplayDensityDpi),
                 newBounds.map { it.second },
             )
         setupDisplayPaneAndBlocks(
@@ -346,7 +358,7 @@ class DisplayTopologyPreferenceController(
 
         val bounds = mutableListOf<Pair<Int, RectF>>()
         val mirroringDiagonalStackOffsetPx =
-            DisplayTopology.dpToPx(MIRRORING_DIAGONAL_STACK_OFFSET_DP, injector.densityDpi)
+            DisplayTopology.dpToPx(MIRRORING_DIAGONAL_STACK_OFFSET_DP, currentDisplayDensityDpi)
 
         // Displays are arranged 45 degrees diagonally, with DEFAULT_DISPLAY on the front and
         // leftmost, and other displays on the back, top-right of the display on the front.
@@ -467,7 +479,7 @@ class DisplayTopologyPreferenceController(
         block: DisplayBlock,
         direction: Direction,
     ) {
-        val moveDistancePx = DisplayTopology.dpToPx(A11Y_MOVE_DISTANCE_DP, injector.densityDpi)
+        val moveDistancePx = DisplayTopology.dpToPx(A11Y_MOVE_DISTANCE_DP, currentDisplayDensityDpi)
 
         val startPoint = PointF(block.x + block.width / 2, block.y + block.height / 2)
         val endPoint =
@@ -521,25 +533,25 @@ class DisplayTopologyPreferenceController(
         val announcement =
             when (direction) {
                 Direction.UP ->
-                    context.getString(
+                    uiContext.getString(
                         R.string.external_display_topology_a11y_display_moved_up,
                         displayId,
                     )
 
                 Direction.DOWN ->
-                    context.getString(
+                    uiContext.getString(
                         R.string.external_display_topology_a11y_display_moved_down,
                         displayId,
                     )
 
                 Direction.LEFT ->
-                    context.getString(
+                    uiContext.getString(
                         R.string.external_display_topology_a11y_display_moved_left,
                         displayId,
                     )
 
                 Direction.RIGHT ->
-                    context.getString(
+                    uiContext.getString(
                         R.string.external_display_topology_a11y_display_moved_right,
                         displayId,
                     )
@@ -725,6 +737,12 @@ class DisplayTopologyPreferenceController(
     }
 
     private companion object {
+
+        private fun DisplayTopology.getLogicalDensityForDisplay(displayId: Int): Int {
+            val displayNode = DisplayTopology.findDisplay(displayId, this.root)
+            return displayNode?.logicalDensity ?: DisplayMetrics.DENSITY_DEFAULT
+        }
+
         private fun getMaxEdgeLengthDp(displayCount: Int): Float {
             // Larger size is important to depict the relative size between 1 display with another,
             // if the size of large display is capped too small, the other display will look very

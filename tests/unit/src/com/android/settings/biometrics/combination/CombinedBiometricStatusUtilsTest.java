@@ -335,8 +335,6 @@ public class CombinedBiometricStatusUtilsTest {
     @Test
     public void getPrivateProfileSettingsClassName_returnsPrivateSpaceBiometricSettings() {
         when(mFaceManager.hasEnrolledTemplates(anyInt())).thenReturn(false);
-        mSetFlagsRule.enableFlags(
-                android.multiuser.Flags.FLAG_ENABLE_BIOMETRICS_TO_UNLOCK_PRIVATE_SPACE);
 
         assertThat(mCombinedBiometricStatusUtils.getPrivateProfileSettingsClassName())
                 .isEqualTo(Settings.PrivateSpaceBiometricSettingsActivity.class.getName());

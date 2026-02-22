@@ -70,25 +70,17 @@ public class ConfirmDeviceCredentialUtils {
             DevicePolicyManager dpm, int userId, boolean isStrongAuth) {
         if (isStrongAuth) {
             utils.reportSuccessfulPasswordAttempt(userId);
-            if (isBiometricUnlockEnabledForPrivateSpace()) {
-                final UserInfo userInfo = userManager.getUserInfo(userId);
-                if (userInfo != null) {
-                    if (isProfileThatAlwaysRequiresAuthToDisableQuietMode(userManager, userInfo)
-                            || userInfo.isManagedProfile()) {
-                        // Keyguard is responsible to disable StrongAuth for primary user. Disable
-                        // StrongAuth for profile challenges only here.
-                        utils.userPresent(userId);
-                    }
+            final UserInfo userInfo = userManager.getUserInfo(userId);
+            if (userInfo != null) {
+                if (isProfileThatAlwaysRequiresAuthToDisableQuietMode(userManager, userInfo)
+                        || userInfo.isManagedProfile()) {
+                    // Keyguard is responsible to disable StrongAuth for primary user. Disable
+                    // StrongAuth for profile challenges only here.
+                    utils.userPresent(userId);
                 }
             }
         } else {
             dpm.reportSuccessfulBiometricAttempt(userId);
-        }
-        if (!isBiometricUnlockEnabledForPrivateSpace()) {
-            if (userManager.isManagedProfile(userId)) {
-                // Disable StrongAuth for work challenge only here.
-                utils.userPresent(userId);
-            }
         }
     }
 
@@ -101,10 +93,6 @@ public class ConfirmDeviceCredentialUtils {
         final UserProperties userProperties =
                     userManager.getUserProperties(userInfo.getUserHandle());
         return userProperties.isAuthAlwaysRequiredToDisableQuietMode() && userInfo.isProfile();
-    }
-
-    private static boolean isBiometricUnlockEnabledForPrivateSpace() {
-        return android.multiuser.Flags.enableBiometricsToUnlockPrivateSpace();
     }
 
     /**
