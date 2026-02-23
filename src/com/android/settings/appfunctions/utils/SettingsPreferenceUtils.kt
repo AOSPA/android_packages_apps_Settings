@@ -17,16 +17,19 @@
 package com.android.settings.appfunctions.utils
 
 import android.content.Context
+import android.service.settings.preferences.SetValueResult
 import android.service.settings.preferences.SettingsPreferenceValue
 import android.util.Log
 import com.android.settings.appfunctions.PreferenceServiceClient
 import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.PreferenceGetterRequest
+import com.android.settingslib.graph.PreferenceSetterRequest
+import com.android.settingslib.graph.preferenceValueProto
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.PreferenceCoordinate
-import com.android.settingslib.metadata.contentEquals
+import com.android.settingslib.metadata.PreferenceScreenRegistry
 
 private const val TAG = "SettingsPreferenceUtils"
 private const val SETTINGS_PACKAGE_NAME = "com.android.settings"
@@ -49,24 +52,10 @@ suspend fun getPreference(
 
     return try {
         val client = PreferenceServiceClient(context)
-        val response =
-            client.use { it.getPreferences(SETTINGS_PACKAGE_NAME, catalystRequest).await() }
+        val response = client.use { it.getPreferences(catalystRequest) }
 
         // Find the preference proto by matching the coordinate
-        val preferenceProto =
-            response.preferences.entries
-                .find { (k, _) ->
-                    val screenMatch = k.screenKey == coord.screenKey
-                    val keyMatch = k.key == coord.key
-                    val paramsMatch =
-                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                            k.keyParameters == coord.keyParameters
-                        } else {
-                            k.args contentEquals coord.args
-                        }
-                    screenMatch && keyMatch && paramsMatch
-                }
-                ?.value
+        val preferenceProto = response.preferences[coord]
 
         Log.d(TAG, "Found preferenceProto: $preferenceProto")
         val result = preferenceProto?.toSettingsPreferenceValue()
@@ -78,7 +67,52 @@ suspend fun getPreference(
     }
 }
 
-private fun PreferenceProto.toSettingsPreferenceValue(): SettingsPreferenceValue? {
+/** Helper method to set a preference value using the SettingsPreferenceServiceClient. */
+suspend fun setPreference(
+    context: Context,
+    screenKey: String,
+    key: String,
+    value: SettingsPreferenceValue,
+    keyParameters: KeyParameters? = null,
+): Int {
+    Log.d(TAG, "setPreference started for $screenKey/$key")
+    val valueProto =
+        when (value.type) {
+            SettingsPreferenceValue.TYPE_BOOLEAN ->
+                preferenceValueProto { booleanValue = value.booleanValue }
+            SettingsPreferenceValue.TYPE_INT -> preferenceValueProto { intValue = value.intValue }
+            SettingsPreferenceValue.TYPE_STRING ->
+                preferenceValueProto { stringValue = value.stringValue }
+            else -> return SetValueResult.RESULT_INVALID_REQUEST
+        }
+
+    val catalystRequest =
+        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+            PreferenceSetterRequest(
+                screenKey = screenKey,
+                keyParameters = keyParameters,
+                key = key,
+                value = valueProto,
+            )
+        } else {
+            PreferenceSetterRequest(
+                screenKey = screenKey,
+                args = keyParameters?.toBundle(),
+                key = key,
+                value = valueProto,
+            )
+        }
+
+    return try {
+        val client = PreferenceServiceClient(context)
+        client.use { it.setPreferenceValue(catalystRequest) }
+    } catch (e: Exception) {
+        Log.e(TAG, "Error setting preference value", e)
+        SetValueResult.RESULT_INTERNAL_ERROR
+    }
+}
+
+fun PreferenceProto.toSettingsPreferenceValue(): SettingsPreferenceValue? {
     if (hasValue()) {
         val protoValue = value
         return when {
@@ -149,4 +183,23 @@ fun toSettingsPreferenceValue(value: String, type: Int?): SettingsPreferenceValu
             null
         }
     }
+}
+
+fun determineParamName(screenKey: String): String? {
+    val schema = PreferenceScreenRegistry.getScreenParametersSchema(screenKey)
+    if (schema != null) {
+        try {
+            val field = schema.javaClass.getDeclaredField("schema")
+            // TODO b/483316989: get the schema without altering the `isAccessible` field.
+            field.isAccessible = true
+            val map = field.get(schema) as? Map<*, *>
+            if (!map.isNullOrEmpty()) {
+                // TODO b/483316989: handle all parameters.
+                return map.keys.first() as? String
+            }
+        } catch (e: Exception) {
+            Log.w(TAG, "Failed to determine param name from schema via reflection", e)
+        }
+    }
+    return null
 }
