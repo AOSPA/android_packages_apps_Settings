@@ -125,7 +125,7 @@ public final class TelephonyUtils {
      * Checks if the DSDS-to-SS configuration is valid.
      *
      * This configuration is considered valid if:
-     *     The status flag for this configuration is enabled.
+     *     The status flag for this configuration is enabled for PSIM or ESIM .
      *     The device has more than one physical UICC slot.
      *     Information for the second slot (index 1) is available.
      *
@@ -136,15 +136,16 @@ public final class TelephonyUtils {
         if (sSlotsInfo == null) {
             sSlotsInfo = getUiccSlotsInfo(context);
         }
-        return sDsdsToSsConfigStatus == 1 && sSlotsInfo != null
+        return (sDsdsToSsConfigStatus == 1 || sDsdsToSsConfigStatus == 2) && sSlotsInfo != null
                 && sSlotsInfo.length > 1 && sSlotsInfo[1] != null;
     }
 
     /**
      * Querying the DSDS to SSSS configuration status.
      *
-     * If sDsdsToSsConfigStatus is 1, it means the dsds_to_ss property is enabled.
      * If sDsdsToSsConfigStatus is 0, it means the dsds_to_ss property is not enabled.
+     * If sDsdsToSsConfigStatus is 1, it means the dsds_to_ss property is enabled for PSIM.
+     * If sDsdsToSsConfigStatus is 2, it means the dsds_to_ss property is enabled for PSIM and ESIM.
      */
     private static void queryDsdsToSsConfig() {
         if (sDsdsToSsConfigStatus == -1) {
