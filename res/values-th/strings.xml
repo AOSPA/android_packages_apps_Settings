@@ -728,13 +728,11 @@
     <string name="encrypted_summary" msgid="545623487587251207">"เข้ารหัสแล้ว"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"ตั้งล็อกหน้าจอ"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"ตั้งค่า PIN, รูปแบบ หรือรหัสผ่านสำหรับอุปกรณ์นี้เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
-    <skip />
+    <string name="no_screen_lock_issue_summary_without_pattern" msgid="3709234873257859534">"ตั้งค่า PIN หรือรหัสผ่านสำหรับอุปกรณ์เครื่องนี้เพื่อเพิ่มความปลอดภัย"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"ตั้งล็อกหน้าจอ"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"ตั้งค่าการล็อกหน้าจอ"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"ตั้งค่า PIN, รูปแบบ หรือรหัสผ่านสำหรับอุปกรณ์นี้เพื่อให้ปลอดภัยยิ่งขึ้น"</string>
-    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"ตั้งค่า PIN หรือรหัสผ่านสำหรับอุปกรณ์เครื่องนี้เพื่อเพิ่มความปลอดภัย"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"เพิ่มลายนิ้วมือเพื่อปลดล็อก"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"เลือกการล็อกหน้าจอ"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"เลือกการล็อกหน้าจอ"</string>
@@ -776,8 +774,7 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"ดำเนินการต่อโดยไม่ใช้ลายนิ้วมือหรือใบหน้า"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"ไม่มี"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"เพิ่ม PIN, รูปแบบ, รหัสผ่าน หรือการปัด"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off_new_without_pattern" msgid="1848366515765800557">"เพิ่ม PIN, รหัสผ่าน หรือการปัด"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"ปัด"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"รูปแบบ"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -2038,6 +2035,12 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"แอปอาจทำงานผิดพลาดหากคุณบังคับให้หยุด"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"ปิดใช้แอป"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"หากคุณปิดใช้แอปนี้ Android และแอปอื่นๆ อาจไม่ทำงานตามที่ควรจะเป็นอีกต่อไป โปรดทราบว่าคุณลบแอปนี้ไม่ได้เนื่องจากเป็นแอปที่ติดตั้งมาล่วงหน้าในอุปกรณ์ การปิดใช้จะปิดแอปนี้และซ่อนในอุปกรณ์"</string>
+    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
+    <skip />
+    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
+    <skip />
+    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
+    <skip />
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"รายละเอียดแอป"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"แอปที่ติดตั้งจาก <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2114,10 +2117,8 @@
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"การตั้งค่า"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"ภาษา"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"แป้นพิมพ์"</string>
-    <!-- no translation found for ime_switcher_button_in_navbar_title (3909360598089922591) -->
-    <skip />
-    <!-- no translation found for ime_switcher_button_in_navbar_summary (7202853456799949367) -->
-    <skip />
+    <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"แสดงปุ่มสวิตช์แป้นพิมพ์"</string>
+    <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"อนุญาตให้แสดงปุ่มตัวสลับแป้นพิมพ์ในแถบนำทาง เมื่อเลือกช่องป้อนข้อมูล"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"แป้นพิมพ์บนหน้าจอ"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"แป้นพิมพ์บนหน้าจอที่พร้อมใช้งาน"</string>
@@ -3764,8 +3765,7 @@
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"ระดับเสียง Google Cast"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"ระดับเสียงการโทร"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"ระดับเสียงปลุก"</string>
-    <!-- no translation found for assistant_volume_option_title (7206008753384831048) -->
-    <skip />
+    <string name="assistant_volume_option_title" msgid="7206008753384831048">"ระดับเสียงของผู้ช่วย"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"ระดับเสียงเรียกเข้าและการแจ้งเตือน"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"ระดับเสียงเรียกเข้า"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"ระดับเสียงการแจ้งเตือน"</string>
@@ -6125,10 +6125,8 @@
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"การแจ้งเตือนเพิ่มเติม"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"ลดปริมาณการแจ้งเตือน"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"การแจ้งเตือนที่ปิดไป"</string>
-    <!-- no translation found for safety_center_collapse_dismissed_issues (1906333435017081366) -->
-    <skip />
-    <!-- no translation found for safety_center_expand_dismissed_issues (6075170862549670397) -->
-    <skip />
+    <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"ยุบการแจ้งเตือนที่ปิดแล้ว"</string>
+    <string name="safety_center_expand_dismissed_issues" msgid="6075170862549670397">"ดูการแจ้งเตือนที่ปิดแล้ว"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"ปิดการแจ้งเตือนนี้ใช่ไหม"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"ตรวจสอบการตั้งค่าการรักษาความปลอดภัยและความเป็นส่วนตัวได้ทุกเมื่อเพื่อเพิ่มการป้องกัน"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"การดำเนินการเสร็จสมบูรณ์"</string>
