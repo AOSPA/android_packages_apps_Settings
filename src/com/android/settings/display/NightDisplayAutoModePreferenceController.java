@@ -42,9 +42,7 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return NightDisplayExtensionsKt.isNightDisplaySettingsAvailable(mContext)
-                ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return NightDisplayExtensionsKt.getNightDisplayAvailabilityStatus(mContext);
     }
 
     @Override

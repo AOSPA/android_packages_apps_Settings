@@ -30,7 +30,6 @@ class IccLockApiScreen :
         fragment = IccLockSettings::class,
         purpose = R.string.sim_lock_settings_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 

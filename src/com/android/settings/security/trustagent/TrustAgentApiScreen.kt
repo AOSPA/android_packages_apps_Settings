@@ -35,7 +35,6 @@ class TrustAgentApiScreen :
         fragment = TrustAgentSettings::class,
         purpose = R.string.trust_agents_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
         preconditions(R.string.trust_agents_preconditions) {

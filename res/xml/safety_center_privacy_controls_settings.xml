@@ -20,7 +20,10 @@
 
     <com.android.settingslib.widget.BannerMessagePreferenceGroup
         android:key="privacy_controls_issues_banner_group"
-        android:order="5" />
+        android:order="5"
+        settings:showDismissedPreferences="true"
+        settings:expandDismissedTitle="@string/safety_center_expand_dismissed_issues"
+        settings:collapseDismissedTitle="@string/safety_center_collapse_dismissed_issues" />
 
     <!-- App permissions -->
     <Preference

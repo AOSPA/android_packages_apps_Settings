@@ -66,6 +66,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(A11yServiceScreen.KEY, parameterized = true)
 open class A11yServiceScreen
@@ -82,6 +83,7 @@ private constructor(
     PreferenceTitleProvider,
     PreferenceBinding,
     PreferenceLifecycleProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
     @Deprecated(
         "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."

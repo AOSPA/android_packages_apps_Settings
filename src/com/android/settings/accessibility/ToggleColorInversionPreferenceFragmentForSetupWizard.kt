@@ -29,7 +29,9 @@ import com.android.settingslib.widget.MainSwitchPreference
 import com.android.settingslib.widget.SettingsThemeHelper
 import com.android.settingslib.widget.TopIntroPreference
 import com.google.android.setupcompat.template.FooterBarMixin
+import com.google.android.setupcompat.util.DelightHelper.shouldApplyAnimatedIcon
 import com.google.android.setupdesign.GlifPreferenceLayout
+import com.google.android.setupdesign.template.IconMixin
 
 /** Fragment for toggling color inversion in Setup Wizard. */
 class ToggleColorInversionPreferenceFragmentForSetupWizard :
@@ -52,14 +54,15 @@ class ToggleColorInversionPreferenceFragmentForSetupWizard :
                 layout,
                 title,
                 description,
-                icon
+                icon,
             )
+            if (shouldApplyAnimatedIcon(getContext())) {
+                val iconMixin = layout.getMixin(IconMixin::class.java)
+                iconMixin.setAnimatedIcon(R.raw.icon_visibility)
+                iconMixin.setAnimatedIconDelayed(false)
+            }
             val mixin = layout.getMixin(FooterBarMixin::class.java)
-            AccessibilitySetupWizardUtils.setPrimaryButton(
-                requireContext(),
-                mixin,
-                R.string.done
-            ) {
+            AccessibilitySetupWizardUtils.setPrimaryButton(requireContext(), mixin, R.string.done) {
                 setResult(Activity.RESULT_OK)
                 finish()
             }
@@ -78,8 +81,7 @@ class ToggleColorInversionPreferenceFragmentForSetupWizard :
         val topIntroPreference: TopIntroPreference? = findPreference(IntroPreference.KEY)
         topIntroPreference?.isVisible = false
 
-        val preference: MainSwitchPreference? =
-            findPreference(MAIN_SWITCH_PREF_KEY)
+        val preference: MainSwitchPreference? = findPreference(MAIN_SWITCH_PREF_KEY)
         if (preference != null) {
             toggleSwitchWasInitiallyChecked = preference.isChecked
         }
@@ -88,7 +90,7 @@ class ToggleColorInversionPreferenceFragmentForSetupWizard :
     override fun onCreateRecyclerView(
         inflater: LayoutInflater,
         parent: ViewGroup,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): RecyclerView {
         if (parent is GlifPreferenceLayout) {
             val layout = parent
@@ -103,13 +105,12 @@ class ToggleColorInversionPreferenceFragmentForSetupWizard :
         SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_COLOR_INVERSION
 
     override fun onStop() {
-        val preference: MainSwitchPreference? =
-            findPreference(MAIN_SWITCH_PREF_KEY)
+        val preference: MainSwitchPreference? = findPreference(MAIN_SWITCH_PREF_KEY)
         if (preference!!.isChecked != toggleSwitchWasInitiallyChecked) {
             mMetricsFeatureProvider.action(
                 context,
                 SettingsEnums.SUW_ACCESSIBILITY_TOGGLE_SCREEN_COLOR_INVERSION,
-                preference.isChecked
+                preference.isChecked,
             )
         }
         super.onStop()

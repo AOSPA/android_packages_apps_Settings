@@ -399,7 +399,7 @@ class DisplayTopologyPreferenceController(
         newBounds.forEach { (id, pos) ->
             val block =
                 displayBlocks.removeFirstOrNull()
-                    ?: DisplayBlock(injector).apply { paneContent.addView(this) }
+                    ?: DisplayBlock(uiContext, injector).apply { paneContent.addView(this) }
 
             // Mirroring is only supported for DEFAULT_DISPLAY for now
             val displayIdToShowWallpaper = if (isMirroring) DEFAULT_DISPLAY else id

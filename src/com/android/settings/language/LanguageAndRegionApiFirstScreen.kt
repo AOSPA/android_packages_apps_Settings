@@ -45,7 +45,6 @@ class LanguageAndRegionApiFirstScreen :
         purpose = R.string.language_and_region_settings_purpose,
         alreadyPartiallyMigrated = LanguageAndRegionScreen::class,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 

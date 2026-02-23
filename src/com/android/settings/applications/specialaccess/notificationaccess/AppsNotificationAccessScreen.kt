@@ -41,10 +41,12 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NOTIFICATIONS
 
 /** "Apps" -> "Special app access" -> "Notification read, reply & control" */
 @ProvidePreferenceScreen(AppsNotificationAccessScreen.KEY)
 open class AppsNotificationAccessScreen : PreferenceScreenMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NOTIFICATIONS, TAG_DEVICE_STATE_SCREEN)
 
     override val key: String
         get() = KEY
@@ -61,7 +63,6 @@ open class AppsNotificationAccessScreen : PreferenceScreenMixin {
 
     override fun getMetricsCategory() = SettingsEnums.NOTIFICATION_ACCESS
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
 

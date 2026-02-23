@@ -23,6 +23,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NOTIFICATIONS
 
 // LINT.IfChange
 @ProvidePreferenceScreen(SoundWorkApiScreen.KEY)
@@ -33,9 +34,10 @@ class SoundWorkApiScreen :
         fragment = SoundWorkSettings::class,
         purpose = R.string.sound_work_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
+
+        tags(APP_FUNCTION_NOTIFICATIONS)
 
         preconditions(R.string.sound_work_screen_preconditions) {
             if (SoundWorkSettings.isSupportWorkProfileSound(context)) {

@@ -14,7 +14,18 @@
 
 package com.android.settings.display;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
+
+import static org.mockito.Mockito.mock;
+
+import android.hardware.display.DisplayManagerGlobal;
+import android.view.Display;
+import android.view.DisplayAdjustments;
+import android.view.DisplayInfo;
 
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
@@ -31,11 +42,17 @@ import org.robolectric.annotation.Config;
 public class NightDisplayCustomEndTimePreferenceControllerTest {
 
     private NightDisplayCustomEndTimePreferenceController mController;
+    private final DisplayInfo mDisplayInfo = new DisplayInfo();
 
     @Before
     public void setUp() {
+        mDisplayInfo.type = Display.TYPE_INTERNAL;
+        DisplayAdjustments daj = null;
+        Display display = new Display(mock(DisplayManagerGlobal.class),
+                Display.DEFAULT_DISPLAY, mDisplayInfo, daj);
         mController = new NightDisplayCustomEndTimePreferenceController(
-                RuntimeEnvironment.application, "night_display_end_time");
+                RuntimeEnvironment.application.createDisplayContext(display),
+                "night_display_end_time");
     }
 
     @After
@@ -46,6 +63,7 @@ public class NightDisplayCustomEndTimePreferenceControllerTest {
     @Test
     public void configuredNightDisplayAvailableAndNotBlocked_isAvailable() {
         NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE_UNSEARCHABLE);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -53,6 +71,7 @@ public class NightDisplayCustomEndTimePreferenceControllerTest {
     public void configuredNightDisplayUnavailableAndNotBlocked_isUnavailable() {
         NightDisplayTestUtils.setNightDisplayAvailable(false);
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -60,6 +79,7 @@ public class NightDisplayCustomEndTimePreferenceControllerTest {
     public void configuredNightDisplayAvailableAndBlocked_isUnavailable() {
         NightDisplayTestUtils.setNightDisplayAvailable(true);
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -67,6 +87,15 @@ public class NightDisplayCustomEndTimePreferenceControllerTest {
     public void configuredNightDisplayUnavailableAndBlocked_isUnavailable() {
         NightDisplayTestUtils.setNightDisplayAvailable(false);
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void configuredNightDisplayAvailableAndNotBlocked_externalDisplay_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
+        mDisplayInfo.type = Display.TYPE_EXTERNAL;
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
         assertThat(mController.isAvailable()).isFalse();
     }
 }

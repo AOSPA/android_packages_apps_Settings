@@ -34,6 +34,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -43,6 +45,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -51,6 +54,9 @@ import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class BiometricNavigationUtilsTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private static final String SETTINGS_CLASS_NAME = "SettingsClassName";
     private static final String EXTRA_KEY = "EXTRA_KEY";
@@ -216,6 +222,7 @@ public class BiometricNavigationUtilsTest {
     }
 
     @Test
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void getBiometricSettingsIntent_whenDisabledByEnforcingAdmin_quietMode_returnsBlockedIntent() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(true);
         final EnforcingAdmin enforcingAdmin = new EnforcingAdmin(
@@ -229,6 +236,7 @@ public class BiometricNavigationUtilsTest {
     }
 
     @Test
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void getBiometricSettingsIntent_whenDisabledByEnforcingAdmin_emptyExtras_returnsBlockedIntent() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
         final EnforcingAdmin enforcingAdmin = new EnforcingAdmin(
@@ -242,6 +250,7 @@ public class BiometricNavigationUtilsTest {
     }
 
     @Test
+    @EnableFlags({android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
     public void getBiometricSettingsIntent_whenDisabledByEnforcingAdmin_withExtras_returnsBlockedIntent() {
         when(mUserManager.isQuietModeEnabled(any())).thenReturn(false);
         final EnforcingAdmin enforcingAdmin = new EnforcingAdmin(

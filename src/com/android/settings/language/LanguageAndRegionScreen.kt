@@ -20,21 +20,23 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings.LanguageAndRegionSettingsActivity
-import com.android.settings.flags.Flags
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 @ProvidePreferenceScreen(LanguageAndRegionScreen.KEY)
 open class LanguageAndRegionScreen : PreferenceScreenMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.language_and_region_settings_purpose
 
@@ -51,8 +53,6 @@ open class LanguageAndRegionScreen : PreferenceScreenMixin {
 
     override val highlightMenuKey
         get() = R.string.menu_key_system
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkSystem25q4()
 
     override fun hasCompleteHierarchy() = false
 

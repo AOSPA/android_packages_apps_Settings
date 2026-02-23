@@ -16,30 +16,34 @@
 
 package com.android.settings.gestures
 
+import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings.Secure.CAMERA_DOUBLE_TAP_POWER_GESTURE_DISABLED
 import android.service.quickaccesswallet.Flags as QuickFlags
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.flags.Flags
 import com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE
 import com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_LAUNCH_CAMERA_MODE
 import com.android.settings.gestures.DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_MULTI_TARGET_MODE
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
 // LINT.IfChange
-class DoubleTapPowerScreenTest : SettingsCatalystTestCase() {
-    override val flagName: String
-        get() = Flags.FLAG_DEEPLINK_SYSTEM_25Q4
-
+@RunWith(AndroidJUnit4::class)
+class DoubleTapPowerScreenTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
+    private val appContext: Context = ApplicationProvider.getApplicationContext()
     private val mockResources = mock<Resources>()
 
     private val context =
@@ -47,7 +51,7 @@ class DoubleTapPowerScreenTest : SettingsCatalystTestCase() {
             override fun getResources(): Resources = mockResources
         }
 
-    override val preferenceScreenCreator = DoubleTapPowerScreen(context)
+    private val preferenceScreenCreator = DoubleTapPowerScreen(context)
 
     val doubleTapPowerToOpenCameraDataStore =
         DoubleTapPowerToOpenCameraPreference.createDataStore(context)

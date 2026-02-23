@@ -31,8 +31,9 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
-import com.android.settingslib.utils.ThreadUtils
-import java.util.concurrent.CountDownLatch
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asExecutor
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ConfigureWifiApiScreen.KEY)
@@ -58,14 +59,12 @@ class ConfigureWifiApiScreen :
                     val helper = OpenNetworkNotifierHelper.getInstance(context.applicationContext)
                     if (WifiUtils.isWifiMultiuserEnabled()) {
                         val wifiManager = context.getSystemService(WifiManager::class.java)
-                        val bgExecutor = ThreadUtils.getBackgroundExecutor()
+                        val bgExecutor = Dispatchers.Default.asExecutor()
 
-                        kotlinx.coroutines.runBlocking {
-                            kotlinx.coroutines.suspendCancellableCoroutine { continuation ->
-                                helper.loadValue(wifiManager, bgExecutor, bgExecutor) {
-                                    if (continuation.isActive) {
-                                        continuation.resumeWith(Result.success(Unit))
-                                    }
+                        kotlinx.coroutines.suspendCancellableCoroutine { continuation ->
+                            helper.loadValue(wifiManager, bgExecutor, bgExecutor) {
+                                if (continuation.isActive) {
+                                    continuation.resumeWith(Result.success(Unit))
                                 }
                             }
                         }
@@ -77,11 +76,28 @@ class ConfigureWifiApiScreen :
             set {
                 permissions(anyOf(NETWORK_SETTINGS, NETWORK_SETUP_WIZARD))
                 execute { enabled: Boolean ->
-                    val wifiManager = context.getSystemService(WifiManager::class.java)
-                    val bgExecutor = ThreadUtils.getBackgroundExecutor()
+                    val wifiManager = context.getSystemService(WifiManager::class.java)!!
+                    val helper = OpenNetworkNotifierHelper.getInstance(context.applicationContext)
 
-                    OpenNetworkNotifierHelper.getInstance(context.applicationContext)
-                        .setEnabled(wifiManager, bgExecutor, enabled)
+                    if (WifiUtils.isWifiMultiuserEnabled()) {
+                        val bgExecutor = Dispatchers.Default.asExecutor()
+                        kotlinx.coroutines.suspendCancellableCoroutine { continuation ->
+                            helper.setEnabled(
+                                wifiManager,
+                                { command ->
+                                    bgExecutor.execute {
+                                        command.run()
+                                        if (continuation.isActive) {
+                                            continuation.resumeWith(Result.success(Unit))
+                                        }
+                                    }
+                                },
+                                enabled,
+                            )
+                        }
+                    } else {
+                        helper.setEnabled(null, null, enabled)
+                    }
                 }
             }
         }
@@ -91,12 +107,12 @@ class ConfigureWifiApiScreen :
             purpose = R.string.wifi_allow_wep_networks_purpose,
             type = AnyBoolean,
         ) {
-            preconditions(R.string.wifi_allow_wep_networks_summary_carrier_not_allow) {
+            preconditions(R.string.wifi_allow_wep_networks_precondition) {
                 val wifiManager = context.getSystemService(WifiManager::class.java)!!
                 if (wifiManager.isWepSupported) {
                     Allowed
                 } else {
-                    HardwareUnsupported(R.string.wifi_allow_wep_networks_summary_carrier_not_allow)
+                    HardwareUnsupported(R.string.wifi_allow_wep_networks_precondition)
                 }
             }
 
@@ -104,23 +120,21 @@ class ConfigureWifiApiScreen :
                 permissions(anyOf(NETWORK_SETTINGS, NETWORK_SETUP_WIZARD))
                 execute {
                     val wifiManager = context.getSystemService(WifiManager::class.java)!!
-                    var isWepAllowed = false
-                    val latch = CountDownLatch(1)
-                    val bgExecutor = ThreadUtils.getBackgroundExecutor()
+                    val bgExecutor = Dispatchers.Default.asExecutor()
+                    val deferred = CompletableDeferred<Boolean>()
 
                     wifiManager.queryWepAllowed(bgExecutor) { allowed ->
-                        isWepAllowed = allowed
-                        latch.countDown()
+                        deferred.complete(allowed)
                     }
-                    latch.await()
-                    isWepAllowed
+
+                    deferred.await()
                 }
             }
 
             set {
                 permissions(anyOf(NETWORK_SETTINGS, NETWORK_SETUP_WIZARD))
-                valuePreconditions(R.string.wifi_settings_wep_networks_disconnect_title) { newValue
-                    ->
+                valuePreconditions(R.string.wifi_allow_wep_networks_set_value_precondition) {
+                    newValue ->
                     val connectivityManager =
                         context.getSystemService(ConnectivityManager::class.java)
                     val wifiInfo =
@@ -134,7 +148,7 @@ class ConfigureWifiApiScreen :
                         InvalidPreference(
                             "internet_settings",
                             "main_toggle_wifi",
-                            R.string.wifi_settings_wep_networks_disconnect_summary,
+                            R.string.wifi_allow_wep_networks_set_invalid_preference,
                         )
                     } else {
                         // Otherwise, the value is allowed to be set

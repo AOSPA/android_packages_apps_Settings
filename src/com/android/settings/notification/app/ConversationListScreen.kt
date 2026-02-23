@@ -30,10 +30,13 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.utils.StringUtil
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NOTIFICATIONS
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ConversationListScreen.KEY)
 open class ConversationListScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NOTIFICATIONS)
+
     override val key: String
         get() = KEY
 

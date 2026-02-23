@@ -20,8 +20,11 @@ import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
 import androidx.preference.PreferenceScreen
+import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.android.settings.accessibility.IllustrationPreferenceController
+import com.android.settings.accessibility.shared.utils.adjustIllustrationLayoutForSetupWizard
+import com.android.settings.accessibility.shared.utils.handleIllustrationAnimationForSetupWizard
 import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import java.lang.String
@@ -58,6 +61,12 @@ class MagnificationIllustrationPreferenceController(context: Context, prefKey: k
         super.displayPreference(screen)
         val illustrationPref: IllustrationPreference? = screen?.findPreference(preferenceKey)
         illustrationPref?.applyDynamicColor()
+        illustrationPref?.setOnBindListener { view: LottieAnimationView? ->
+            view?.let { animationView ->
+                adjustIllustrationLayoutForSetupWizard(animationView)
+                handleIllustrationAnimationForSetupWizard(animationView)
+            }
+        }
     }
 }
 // LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ui/MagnificationIllustrationPreference.kt)

@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.utils.StringUtil
 import com.android.wifitrackerlib.WifiPickerTracker
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 // LINT.IfChange
 @ProvidePreferenceScreen(SavedAccessPointsWifiScreen.KEY)
@@ -45,6 +46,8 @@ open class SavedAccessPointsWifiScreen :
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider,
     WifiPickerTracker.WifiPickerTrackerCallback {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
     private var wifiTracker: WifiPickerTracker? = null
 

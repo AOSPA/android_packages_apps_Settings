@@ -156,21 +156,26 @@ class SafetyIssueBannerPreference(
     private fun configureDismissButton(issue: SafetyCenterIssue, isDismissed: Boolean) {
         if (issue.isDismissible && !isDismissed) {
             setDismissButtonVisible(true)
-            setDismissButtonOnClickListener {
-                Log.d(TAG, "Dismiss button clicked for issue '${issue.id}'")
-                if (issue.shouldConfirmDismissal()) {
-                    Log.d(TAG, "Showing dismiss confirmation for issue '${issue.id}'")
-                    ConfirmDismissalDialogFragment.newInstance(issue)
-                        .showNow(fragmentManager, /* tag= */ null)
-                } else {
-                    viewModel.dismissIssue(issue)
-                    viewModel.interactionLogger.recordForIssue(
-                        Action.ISSUE_DISMISS_CLICKED,
-                        issue,
-                        isDismissed = false,
-                    )
-                }
-            }
+            setDismissButtonOnClickListener(
+                {
+                    Log.d(TAG, "Dismiss button clicked for issue '${issue.id}'")
+                    if (issue.shouldConfirmDismissal()) {
+                        Log.d(TAG, "Showing dismiss confirmation for issue '${issue.id}'")
+                        ConfirmDismissalDialogFragment.newInstance(issue, this.key)
+                            .showNow(fragmentManager, /* tag= */ null)
+                    } else {
+                        this.animateDismiss {
+                            viewModel.dismissIssue(issue)
+                            viewModel.interactionLogger.recordForIssue(
+                                Action.ISSUE_DISMISS_CLICKED,
+                                issue,
+                                isDismissed = false,
+                            )
+                        }
+                    }
+                },
+                /* autoCollapse= */ false,
+            )
         } else {
             setDismissButtonVisible(false)
             setDismissButtonOnClickListener(null)

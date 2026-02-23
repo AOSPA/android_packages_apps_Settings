@@ -20,6 +20,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_APPS
 
 @ProvidePreferenceScreen(MediaRoutingControlApiScreen.KEY)
 class MediaRoutingControlApiScreen :
@@ -31,6 +32,8 @@ class MediaRoutingControlApiScreen :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
+
+        tags(APP_FUNCTION_APPS)
     }
 
     companion object {

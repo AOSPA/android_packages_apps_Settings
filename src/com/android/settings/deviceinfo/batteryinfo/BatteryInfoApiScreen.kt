@@ -26,6 +26,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_BATTERY
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import java.util.concurrent.TimeUnit
@@ -42,6 +43,7 @@ class BatteryInfoApiScreen :
 
     init {
         flag { Flags.catalystMigration26q2() }
+        tags(APP_FUNCTION_BATTERY)
 
         preconditions(R.string.battery_info_screen_preconditions) {
             if (context.isBatteryInfoEnabled()) {

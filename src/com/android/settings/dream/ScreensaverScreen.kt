@@ -43,6 +43,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ScreensaverScreen.KEY)
@@ -51,6 +52,8 @@ open class ScreensaverScreen(private val context: Context) :
     AbstractKeyedDataObservable<String>(),
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
 
     private var dreamBackend: DreamBackend = DreamBackend.getInstance(context)
     private var settingsStore: KeyValueStore = SettingsSecureStore.get(context)
