@@ -20,6 +20,7 @@ import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.Intent
 import android.os.BaseBundle
+import android.os.Process
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
@@ -29,6 +30,7 @@ import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.ReadWritePermit.Companion.ALLOW
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
@@ -39,7 +41,6 @@ import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.async
@@ -48,6 +49,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
+import kotlin.time.Duration.Companion.seconds
 
 /* A [DeviceStateProvider] that provides device state information for Settings that are
 exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
@@ -134,18 +136,16 @@ class CatalystStateProviderExecutor(
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            if(metadata.isUiOnlyPreference(context))
+            if (metadata.isUiOnlyPreference(context))
                 return@forEach
             val config = settingConfigMap[metadata.key]
             val jsonValue =
                 when {
                     // TODO(b/444419242): Handle IMEI redaction properly.
                     isImeiPreference(metadata.key) -> "REDACTED"
-                    metadata is PersistentPreference<*> ->
-                        metadata
-                            .storage(context)
-                            .getValue(metadata.key, metadata.valueType as Class<Any>)
-                            ?.toString()
+                    metadata is PersistentPreference<*> -> {
+                        getDeviceStateItemValueForPreference(metadata)
+                    }
                     else -> metadata.getPreferenceSummary(context)?.toString()
                 }
             jsonValue?.let {
@@ -195,6 +195,20 @@ class CatalystStateProviderExecutor(
                 intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
             )
         return states
+    }
+
+    private fun getDeviceStateItemValueForPreference(metadata: PersistentPreference<*>): String? {
+        val allowedRead = metadata.getReadPermit(
+            context, Process.myPid(),
+            Process.myUid()
+        ) == ALLOW
+        return if (allowedRead) {
+            metadata.storage(context)
+                .getValue(metadata.key, metadata.valueType as Class<Any>)
+                ?.toString()
+        } else {
+            "null"
+        }
     }
 
     /**
