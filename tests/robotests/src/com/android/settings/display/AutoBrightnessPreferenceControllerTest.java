@@ -21,13 +21,20 @@ import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
 import static android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
+
 import android.content.ContentResolver;
 import android.content.Context;
+import android.hardware.display.DisplayManagerGlobal;
 import android.provider.Settings;
+import android.view.Display;
+import android.view.DisplayAdjustments;
+import android.view.DisplayInfo;
 
 import com.android.settings.R;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
@@ -53,12 +60,17 @@ public class AutoBrightnessPreferenceControllerTest {
     private Context mContext;
     private AutoBrightnessPreferenceController mController;
     private ContentResolver mContentResolver;
+    private final DisplayInfo mDisplayInfo = new DisplayInfo();
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        mContext = RuntimeEnvironment.application;
+        mDisplayInfo.type = Display.TYPE_INTERNAL;
+        DisplayAdjustments daj = null;
+        Display display = new Display(mock(DisplayManagerGlobal.class),
+                Display.DEFAULT_DISPLAY, mDisplayInfo, daj);
+        mContext = RuntimeEnvironment.application.createDisplayContext(display);
         mContentResolver = mContext.getContentResolver();
         mController = new AutoBrightnessPreferenceController(mContext, PREFERENCE_KEY);
     }
@@ -138,6 +150,15 @@ public class AutoBrightnessPreferenceControllerTest {
                 com.android.internal.R.bool.config_automatic_brightness_available, false);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_externalDisplay_shouldReturnConditionallyUnavailable() {
+        SettingsShadowResources.overrideResource(
+                com.android.internal.R.bool.config_automatic_brightness_available, true);
+        mDisplayInfo.type = Display.TYPE_EXTERNAL;
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 }
 // LINT.ThenChange(AutoBrightnessScreenTest.kt)
