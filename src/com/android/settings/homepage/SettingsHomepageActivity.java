@@ -62,6 +62,7 @@ import androidx.window.embedding.SplitInfo;
 import androidx.window.embedding.SplitRule;
 import androidx.window.java.embedding.SplitControllerCallbackAdapter;
 
+import com.android.settings.PccAwareUidComparator;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.SettingsActivity;
@@ -639,7 +640,7 @@ public class SettingsHomepageActivity extends FragmentActivity implements
 
         // When activityInfo.exported is false, Activity still can be launched if applications have
         // the same user ID.
-        if (UserHandle.isSameApp(callerUid, targetUid)) {
+        if (PccAwareUidComparator.isSameApp(this, callerUid, targetUid)) {
             return true;
         }
 
