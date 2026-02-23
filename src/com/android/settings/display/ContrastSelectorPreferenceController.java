@@ -46,6 +46,7 @@ import java.util.concurrent.Executor;
 /**
  * Controller for contrast selector.
  */
+// LINT.IfChange
 public class ContrastSelectorPreferenceController extends BasePreferenceController
         implements LifecycleObserver, OnStart, OnStop, UiModeManager.ContrastChangeListener {
 
@@ -120,3 +121,4 @@ public class ContrastSelectorPreferenceController extends BasePreferenceControll
         });
     }
 }
+// LINT.ThenChange(ColorContrastApiScreen.java)
