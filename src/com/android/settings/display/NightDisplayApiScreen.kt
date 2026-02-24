@@ -16,6 +16,8 @@
 
 package com.android.settings.display
 
+import android.Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS
+import android.hardware.display.ColorDisplayManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -23,6 +25,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 // LINT.IfChange
 @ProvidePreferenceScreen(NightDisplayApiScreen.KEY)
@@ -44,10 +47,35 @@ class NightDisplayApiScreen :
                 HardwareUnsupported(R.string.night_display_unsupported)
             }
         }
+
+        preference(
+            key = NIGHT_DISPLAY_ACTIVATED_KEY,
+            purpose = R.string.night_display_activated_purpose,
+            type = AnyBoolean,
+        ) {
+            get {
+                execute {
+                    context
+                        .getSystemService(ColorDisplayManager::class.java)
+                        .isNightDisplayActivated
+                }
+            }
+
+            set {
+                permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
+                execute { value ->
+                    context.getSystemService(ColorDisplayManager::class.java)?.let {
+                        it.setNightDisplayActivated(value)
+                    }
+                }
+            }
+        }
     }
 
     companion object {
         const val KEY = "api_night_display"
+        const val NIGHT_DISPLAY_ACTIVATED_KEY = "night_display_activated"
     }
 }
-// LINT.ThenChange(NightDisplaySettings.java, NightDisplayScreen.kt)
+// LINT.ThenChange(NightDisplaySettings.java, NightDisplayScreen.kt,
+// NightDisplayActivationPreferenceController.java)
