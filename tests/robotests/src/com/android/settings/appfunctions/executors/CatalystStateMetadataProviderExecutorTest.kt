@@ -499,7 +499,7 @@ class CatalystStateMetadataProviderExecutorTest {
         override val purpose: Int = R.string.preference_purpose,
         private val isPersistent: Boolean,
         val writePermit: Int?,
-    ) : PersistentPreference<Any> {
+    ) : PersistentPreference<Boolean> {
         override val key: String
             get() = bindingKey
 
@@ -507,11 +507,13 @@ class CatalystStateMetadataProviderExecutorTest {
 
         override fun isPersistent(context: Context): Boolean = isPersistent
 
-        override val valueType: Class<Any> = Any::class.java
+        override val valueType: Class<Boolean> = Boolean::class.java
         override val sensitivityLevel: Int = SensitivityLevel.NO_SENSITIVITY
 
         override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int): Int? =
             writePermit
+
+        override fun storage(context: Context) = GraphTestUtils.createStorage(null, bindingKey)
     }
 
     private class ApiFirstTestScreen : PreferencesApiScreen(
@@ -725,7 +727,9 @@ class CatalystStateMetadataProviderExecutorTest {
         val prefMetadata = result.metadata[0].deviceStateItemsMetadata[1]
         assertThat(prefMetadata.key).isEqualTo("preconditions_screen/pref_with_preconditions")
         assertThat(prefMetadata.hintText).contains(
-            "Preconditions to reading: Screen precondition, Preference precondition, Get precondition."
+            "Preconditions to accessing: Screen precondition, Preference precondition.\n" +
+                "Preconditions to reading: Get precondition.\n" +
+                "Preconditions to writing: Set precondition."
         )
         assertThat(prefMetadata.hintText).contains("Preconditions to writing: Set precondition.")
     }

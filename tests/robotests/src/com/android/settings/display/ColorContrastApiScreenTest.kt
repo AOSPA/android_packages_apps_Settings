@@ -66,7 +66,7 @@ class ColorContrastApiScreenTest {
                         UiModeManager.ContrastUtils.fromContrastLevel(testContrast),
                     )
                 assertThat(
-                        tester.get<ContrastLevelApiWithRes>("color_contrast_selector").asApiValue
+                        tester.get<ContrastLevelApiWithRes>("color_contrast_selector")
                     )
                     .isEqualTo(testContrast)
             }
@@ -81,7 +81,7 @@ class ColorContrastApiScreenTest {
                 ContrastLevelApiWithRes.DEFAULT,
             )
             .forEach { testContrast ->
-                tester.set("color_contrast_selector", testContrast)
+                tester.set("color_contrast_selector", testContrast.asApiValue)
                 val contrastFromSettings = SettingsSecureStore.get(context).getFloat(CONTRAST_LEVEL)
                 assertThat(contrastFromSettings).isNotNull()
                 assertThat(UiModeManager.ContrastUtils.toContrastLevel(contrastFromSettings!!))

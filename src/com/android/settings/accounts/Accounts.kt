@@ -24,6 +24,8 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 
 /** Provides a list of accounts associated with a associated with the current process user. */
 class Accounts : FiniteOptionsType<String> {
+    override fun getType(): Class<String> = String::class.java
+
     override fun getDescription(context: Context): String =
         context.getString(R.string.accounts_as_user_type_description)
 
@@ -33,4 +35,6 @@ class Accounts : FiniteOptionsType<String> {
             account ->
             account.name to account.name
         }
+
+    override fun getKey(): String = "Accounts"
 }

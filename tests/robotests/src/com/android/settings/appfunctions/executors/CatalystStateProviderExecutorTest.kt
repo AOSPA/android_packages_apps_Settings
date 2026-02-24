@@ -377,7 +377,7 @@ class CatalystStateProviderExecutorTest {
         val result = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
 
         assertThat(result.states).hasSize(1)
-        assertThat(result.states[0].description).contains("Preconditions to reading: Screen precondition.")
+        assertThat(result.states[0].description).contains("Preconditions to accessing: Screen precondition.")
     }
 
     @Test

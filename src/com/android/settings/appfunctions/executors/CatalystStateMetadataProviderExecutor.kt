@@ -34,6 +34,9 @@ import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.accessPreconditionsAsString
+import com.android.settingslib.metadata.getPreconditionsAsString
+import com.android.settingslib.metadata.setPreconditionsAsString
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
@@ -138,7 +141,7 @@ class CatalystStateMetadataProviderExecutor(
             if(metadata.isUiOnlyPreference(context))
                 return@forEach
             // skip over explicitly disabled preferences
-            val metadataProto =
+            val metadataProto = try {
                 metadata.toProto(
                     context,
                     Binder.getCallingPid(),
@@ -147,6 +150,10 @@ class CatalystStateMetadataProviderExecutor(
                     isRoot = false,
                     flags = PreferenceGetterFlags.METADATA or PreferenceGetterFlags.VALUE_DESCRIPTOR,
                 )
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to convert preference to proto: ${metadata.key}", e)
+                return@forEach
+            }
 
             val sensitivityLevel =
                 when (metadataProto.sensitivityLevel) {
@@ -248,10 +255,14 @@ class CatalystStateMetadataProviderExecutor(
                 PreferenceValueDescriptorProto.TypeCase.FLOAT_TYPE -> "FLOAT"
                 PreferenceValueDescriptorProto.TypeCase.LONG_TYPE -> "LONG"
                 PreferenceValueDescriptorProto.TypeCase.RANGE_VALUE -> {
-                    val range = rangeValue
-                    val stepString =
-                        if (range.hasStep() && range.step != 0) ", step=${range.step}" else ""
-                    "INTEGER(min=${range.min}, max=${range.max}$stepString)"
+                    if (hasRangeValue()) {
+                        val range = rangeValue
+                        val stepString =
+                            if (range.hasStep() && range.step != 0) ", step=${range.step}" else ""
+                        "INTEGER(min=${range.min}, max=${range.max}$stepString)"
+                    } else {
+                        "INTEGER"
+                    }
                 }
                 else -> ""
             }
