@@ -24,6 +24,7 @@ import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
@@ -34,6 +35,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserManager;
 import android.print.PrintJob;
+import android.print.PrintJobId;
 import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
@@ -41,6 +43,7 @@ import android.printservice.PrintServiceInfo;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.utils.StringUtil;
@@ -53,12 +56,14 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowThreadUtils.class})
 public class PrintSettingsPreferenceControllerTest {
 
     @Mock
@@ -86,6 +91,7 @@ public class PrintSettingsPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         ReflectionHelpers.setField(mController, "mPrintManager", mPrintManager);
         ReflectionHelpers.setField(mController, "mPackageManager", mPackageManager);
+        ReflectionHelpers.setField(mController, "mPreference", mPreference);
         mLifecycle.addObserver(mController);
     }
 
@@ -117,7 +123,7 @@ public class PrintSettingsPreferenceControllerTest {
         when(job.getInfo().getState()).thenReturn(PrintJobInfo.STATE_STARTED);
         when(mPrintManager.getPrintJobs()).thenReturn(printJobs);
 
-        mController.updateState(mPreference);
+        mController.onStart();
 
         assertThat(mPreference.getSummary())
                 .isEqualTo(StringUtil.getIcuPluralsString(mContext, 1,
@@ -125,27 +131,68 @@ public class PrintSettingsPreferenceControllerTest {
     }
 
     @Test
+    public void onPrintJobStateChanged_shouldUpdateSummaryAsynchronously() {
+        final List<PrintJob> printJobs = new ArrayList<>();
+        when(mPrintManager.getPrintJobs()).thenReturn(printJobs);
+
+        // Initial state: no jobs
+        mController.onStart();
+
+        // Mock a new job appearing
+        final PrintJob job = mock(PrintJob.class, Mockito.RETURNS_DEEP_STUBS);
+        printJobs.add(job);
+        when(job.getInfo().getState()).thenReturn(PrintJobInfo.STATE_STARTED);
+
+        // Trigger the listener
+        mController.onPrintJobStateChanged(mock(PrintJobId.class));
+
+        // Verify the summary was updated with the new data
+        verify(mPreference, atLeastOnce()).setSummary(StringUtil.getIcuPluralsString(mContext, 1,
+                R.string.print_jobs_summary));
+    }
+
+    @Test
     public void updateState_shouldSetSummaryToNumberOfPrintServices() {
-        final List<PrintServiceInfo> printServices = mock(List.class);
-        when(printServices.isEmpty()).thenReturn(false);
-        when(printServices.size()).thenReturn(2);
+        final List<PrintServiceInfo> printServices = new ArrayList<>();
+        final PrintServiceInfo service = mock(PrintServiceInfo.class);
+        printServices.add(service);
+        printServices.add(service);
+
         // 2 services
         when(mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES))
                 .thenReturn(printServices);
 
-        mController.updateState(mPreference);
+        mController.onStart();
 
         assertThat(mPreference.getSummary())
                 .isEqualTo(StringUtil.getIcuPluralsString(mContext, 2,
                         R.string.print_settings_summary));
 
         // No service
-        when(mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES)).thenReturn(null);
-
-        mController.updateState(mPreference);
+        printServices.clear();
+        mController.onStart();
 
         assertThat(mPreference.getSummary())
                 .isEqualTo(mContext.getString(R.string.print_settings_summary_no_service));
+    }
+
+    @Test
+    public void onStop_shouldClearCache() {
+        final List<PrintJob> printJobs = new ArrayList<>();
+        when(mPrintManager.getPrintJobs()).thenReturn(printJobs);
+        final List<PrintServiceInfo> printServices = new ArrayList<>();
+        when(mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES))
+                .thenReturn(printServices);
+
+        mController.onStart();
+
+        assertThat((Object) ReflectionHelpers.getField(mController, "mPrintJobs")).isNotNull();
+        assertThat((Object) ReflectionHelpers.getField(mController, "mPrintServices")).isNotNull();
+
+        mController.onStop();
+
+        assertThat((Object) ReflectionHelpers.getField(mController, "mPrintJobs")).isNull();
+        assertThat((Object) ReflectionHelpers.getField(mController, "mPrintServices")).isNull();
     }
 
     @Test
