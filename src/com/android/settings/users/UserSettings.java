@@ -1101,10 +1101,8 @@ public class UserSettings extends SettingsPreferenceFragment
                 mRemovingUserId = -1;
                 mUserRemovalCredentialConfirmationPending = false;
             }
-            if (Flags.showConfirmationToastOnUserDeletion()) {
-                Toast.makeText(getPrefContext(), R.string.user_deleted_confirmation_toast,
-                        Toast.LENGTH_LONG).show();
-            }
+            Toast.makeText(getPrefContext(), R.string.user_deleted_confirmation_toast,
+                    Toast.LENGTH_LONG).show();
         }
     }
 
