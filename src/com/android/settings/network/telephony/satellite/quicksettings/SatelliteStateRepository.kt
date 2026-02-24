@@ -158,13 +158,20 @@ constructor(
                     trySend(reasons)
                 }
 
-                satelliteManager?.registerForSatelliteDisallowedReasonsChanged(
-                    callbackExecutor,
-                    callback,
-                )
+                try {
+                    satelliteManager?.registerForSatelliteDisallowedReasonsChanged(
+                        callbackExecutor,
+                        callback,
+                    )
+                } catch (e: IllegalStateException) {
+                    Log.w(TAG, "Failed to register for satellite disallowed reasons: ${e.message}")
+                }
+
                 awaitClose {
-                    runCatching {
+                    try {
                         satelliteManager?.unregisterForSatelliteDisallowedReasonsChanged(callback)
+                    } catch (e: IllegalStateException) {
+                        Log.w(TAG, "Failed to unregister for satellite disallowed reasons", e)
                     }
                 }
             }
