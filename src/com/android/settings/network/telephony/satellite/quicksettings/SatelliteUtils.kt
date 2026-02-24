@@ -84,6 +84,28 @@ object SatelliteUtils {
         return isSatelliteAttachSupported
     }
 
+    /** Returns true if LTE-based NTN is supported for the given carrier config. */
+    fun isLteBasedNtnSupported(carrierConfig: PersistableBundle): Boolean {
+        val isSatelliteAttachSupported =
+            carrierConfig.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
+        if (!isSatelliteAttachSupported) {
+            return false
+        }
+
+        // TODO(b/434793872): May need to handle extra logic for if connect type is
+        // CARRIER_ROAMING_NTN_CONNECT_HYBRID. In certain cases, we may want to show NBIOT landing
+        // page instead of LTE landing page.
+        // If connect type is not manual, then automatic NTN connect is supported.
+        val isCarrierRoamingNtnConnectTypeAutomatic =
+            carrierConfig.getInt(
+                KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                /* default= */ CARRIER_ROAMING_NTN_CONNECT_MANUAL,
+            ) != CARRIER_ROAMING_NTN_CONNECT_MANUAL
+
+        Log.d(TAG, "isLteBasedNtnSupported: $isCarrierRoamingNtnConnectTypeAutomatic")
+        return isCarrierRoamingNtnConnectTypeAutomatic
+    }
+
     /**
      * Returns true if LTE-based NTN is supported for the carrier.
      *
@@ -91,23 +113,12 @@ object SatelliteUtils {
      * carrier roaming NTN connect type is automatic, it means that LTE-based NTN is supported.
      */
     fun isLteBasedNtnSupportedByCarrier(context: Context, activeSubId: Int): Boolean {
-        if (!isCarrierRoamingNtnSupported(context, activeSubId)) {
+        if (activeSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+            Log.w(TAG, "ActiveSubId is invalid")
             return false
         }
-
         val configBundle = fetchCarrierConfigData(context, activeSubId)
-        // TODO(b/434793872): May need to handle extra logic for if connect type is
-        // CARRIER_ROAMING_NTN_CONNECT_HYBRID. In certain cases, we may want to show NBIOT landing
-        // page instead of LTE landing page.
-        // If connect type is not manual, then automatic NTN connect is supported.
-        val isCarrierRoamingNtnConnectTypeAutomatic =
-            configBundle.getInt(
-                KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                /* default= */ CARRIER_ROAMING_NTN_CONNECT_MANUAL,
-            ) != CARRIER_ROAMING_NTN_CONNECT_MANUAL
-
-        Log.d(TAG, "isLteBasedNtnSupportedByCarrier: $isCarrierRoamingNtnConnectTypeAutomatic")
-        return isCarrierRoamingNtnConnectTypeAutomatic
+        return isLteBasedNtnSupported(configBundle)
     }
 
     private fun fetchCarrierConfigData(context: Context, subId: Int): PersistableBundle {

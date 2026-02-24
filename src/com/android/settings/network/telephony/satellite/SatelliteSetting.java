@@ -43,6 +43,7 @@ import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
+import com.android.settings.flags.Flags;
 
 import java.util.Arrays;
 import java.util.List;
@@ -96,6 +97,10 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
             mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
         }
 
+        if (Flags.enableSatelliteToggle()) {
+            use(SatelliteSettingMainSwitchController.class).init(mSubId, mConfigBundle,
+                    mSatelliteManager);
+        }
         use(SatelliteAppListCategoryController.class).init(mSubId, mConfigBundle);
         use(SatelliteSettingAboutContentController.class).init(mSubId);
         use(SatelliteSettingAccountInfoController.class).init(mSubId, mConfigBundle);
