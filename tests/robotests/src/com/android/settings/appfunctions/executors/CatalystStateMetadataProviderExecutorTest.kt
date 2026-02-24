@@ -40,6 +40,13 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.shadows.ShadowBuild
 import org.robolectric.shadows.ShadowSettings
+import androidx.fragment.app.Fragment
+import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateMetadataProviderExecutorTest {
@@ -59,7 +66,7 @@ class CatalystStateMetadataProviderExecutorTest {
 
 
     @Test
-    fun execute_onWritablePreference_returnsWritableDeviceStateItem() = runTest {
+    fun execute_onWritablePreference_notApiFirst_returnsNonWritableDeviceStateItem() = runTest {
         val metadata = TestPreferenceMetadata(
                 bindingKey = "test_key_writable",
                 isPersistent = true,
@@ -81,14 +88,11 @@ class CatalystStateMetadataProviderExecutorTest {
         )
 
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-        // single screen
-        assertThat(result.metadata).hasSize(1)
-        // the screen itself and the preference
         assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(2)
         assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
             "screen_key/test_key_writable"
         )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].writable).isTrue()
+        assertThat(result.metadata[0].deviceStateItemsMetadata[1].writable).isFalse()
     }
 
 
@@ -495,7 +499,7 @@ class CatalystStateMetadataProviderExecutorTest {
         override val purpose: Int = R.string.preference_purpose,
         private val isPersistent: Boolean,
         val writePermit: Int?,
-    ) : PersistentPreference<Any> {
+    ) : PersistentPreference<Boolean> {
         override val key: String
             get() = bindingKey
 
@@ -503,11 +507,39 @@ class CatalystStateMetadataProviderExecutorTest {
 
         override fun isPersistent(context: Context): Boolean = isPersistent
 
-        override val valueType: Class<Any> = Any::class.java
+        override val valueType: Class<Boolean> = Boolean::class.java
         override val sensitivityLevel: Int = SensitivityLevel.NO_SENSITIVITY
 
         override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int): Int? =
             writePermit
+
+        override fun storage(context: Context) = GraphTestUtils.createStorage(null, bindingKey)
+    }
+
+    private class ApiFirstTestScreen : PreferencesApiScreen(
+        key = "api_first_screen",
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = Fragment::class,
+        purpose = R.string.preference_screen_purpose,
+    ) {
+        init {
+            preference(
+                key = "writable_pref",
+                purpose = R.string.preference_purpose,
+                type = AnyString,
+            ) {
+                get { execute { "true" } }
+                set { execute {} }
+            }
+
+            preference(
+                key = "non_writable_pref",
+                purpose = R.string.preference_purpose,
+                type = AnyString,
+            ) {
+                get { execute { "true" } }
+            }
+        }
     }
 
     @Test
@@ -598,5 +630,139 @@ class CatalystStateMetadataProviderExecutorTest {
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
 
         assertThat(result.metadata[0].description).doesNotContain("[key=screen_key]")
+    }
+
+    @Test
+    fun execute_onApiFirstPreferenceWithSetter_isWritable() = runTest {
+        setRegistryFactories(ApiFirstTestScreen())
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("api_first_screen", listOf("writable_pref")),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[1]
+        assertThat(prefMetadata.key).isEqualTo("api_first_screen/writable_pref")
+        assertThat(prefMetadata.writable).isTrue()
+    }
+
+    @Test
+    fun execute_onApiFirstPreferenceWithoutSetter_isNotWritable() = runTest {
+        setRegistryFactories(ApiFirstTestScreen())
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("api_first_screen", listOf("non_writable_pref")),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[2]
+        assertThat(prefMetadata.key).isEqualTo("api_first_screen/non_writable_pref")
+        assertThat(prefMetadata.writable).isFalse()
+    }
+
+    @Test
+    fun execute_onApiFirstScreen_isNotWritable() = runTest {
+        setRegistryFactories(ApiFirstTestScreen())
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("api_first_screen", emptyList()), // empty list means all prefs on screen
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        val screenMetadata = result.metadata[0].deviceStateItemsMetadata[0]
+        assertThat(screenMetadata.key).isEqualTo("api_first_screen/api_first_screen")
+        assertThat(screenMetadata.writable).isFalse()
+        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
+            "api_first_screen/writable_pref"
+        )
+        assertThat(result.metadata[0].deviceStateItemsMetadata[2].key).isEqualTo(
+            "api_first_screen/non_writable_pref"
+        )
+    }
+
+    private class PreconditionsTestScreen : PreferencesApiScreen(
+        key = "preconditions_screen",
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = Fragment::class,
+        purpose = R.string.preference_screen_purpose,
+    ) {
+        init {
+            preconditions("Screen precondition") { Allowed }
+
+            preference(
+                key = "pref_with_preconditions",
+                purpose = R.string.preference_purpose,
+                type = AnyString,
+            ) {
+                preconditions("Preference precondition") { Allowed }
+                get {
+                    preconditions("Get precondition") { Allowed }
+                    execute { "value" }
+                }
+                set {
+                    preconditions("Set precondition") { Allowed }
+                    execute { }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun execute_onPreferenceWithPreconditions_includesPreconditionsInHintText() = runTest {
+        setRegistryFactories(PreconditionsTestScreen())
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("preconditions_screen", listOf("pref_with_preconditions")),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[1]
+        assertThat(prefMetadata.key).isEqualTo("preconditions_screen/pref_with_preconditions")
+        assertThat(prefMetadata.hintText).contains(
+            "Preconditions to accessing: Screen precondition, Preference precondition.\n" +
+                "Preconditions to reading: Get precondition.\n" +
+                "Preconditions to writing: Set precondition."
+        )
+        assertThat(prefMetadata.hintText).contains("Preconditions to writing: Set precondition.")
+    }
+
+    @Test
+    fun execute_onApiFirstScreen_doesNotIncludeName() = runTest {
+        setRegistryFactories(ApiFirstTestScreen())
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("api_first_screen", emptyList()),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        val screenMetadata = result.metadata[0].deviceStateItemsMetadata[0]
+        assertThat(screenMetadata.key).isEqualTo("api_first_screen/api_first_screen")
+        assertThat(screenMetadata.name).isNull()
+    }
+
+    @Test
+    fun execute_onApiFirstPreference_doesNotIncludeName() = runTest {
+        setRegistryFactories(ApiFirstTestScreen())
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("api_first_screen", listOf("writable_pref")),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[1]
+        assertThat(prefMetadata.key).isEqualTo("api_first_screen/writable_pref")
+        assertThat(prefMetadata.name).isNull()
     }
 }
