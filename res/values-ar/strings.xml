@@ -2038,6 +2038,12 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"في حال فرض إيقاف التطبيق، قد لا يعمل بشكل صحيح."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"إيقاف التطبيق"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"‏قد يؤدي إيقاف هذا التطبيق إلى عدم عمل نظام Android وتطبيقات أخرى على النحو المنشود. تجدر الإشارة إلى أنه لا يمكنك حذف هذا التطبيق لأنه من التطبيقات المثبّتة تلقائيًا على جهازك. ويعني إيقاف التطبيق أنه سيتم إيقافه وإخفاؤه على جهازك."</string>
+    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
+    <skip />
+    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
+    <skip />
+    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
+    <skip />
     <string name="app_install_details_group_title" msgid="1172114479073704677">"المتجر"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"تفاصيل التطبيق"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"تم تثبيت التطبيق من <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2114,10 +2120,8 @@
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"الإعدادات"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"اللغة"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"لوحات المفاتيح"</string>
-    <!-- no translation found for ime_switcher_button_in_navbar_title (3909360598089922591) -->
-    <skip />
-    <!-- no translation found for ime_switcher_button_in_navbar_summary (7202853456799949367) -->
-    <skip />
+    <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"عرض مفتاح التحكّم في لوحة المفاتيح"</string>
+    <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"يمكنك السماح بعرض مفتاح التحكّم في لوحة المفاتيح على شريط التنقّل عند اختيار حقل إدخال"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"لوحة المفاتيح على الشاشة"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"لوحة المفاتيح على الشاشة متاحة"</string>
@@ -3764,8 +3768,7 @@
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"‏مستوى صوت Google Cast"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"مستوى صوت المكالمة"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"مستوى صوت المنبّه"</string>
-    <!-- no translation found for assistant_volume_option_title (7206008753384831048) -->
-    <skip />
+    <string name="assistant_volume_option_title" msgid="7206008753384831048">"‏مستوى صوت \"مساعد Google\""</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"مستوى صوت الرنين والإشعار"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"مستوى صوت الرنين"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"مستوى صوت الإشعارات"</string>
@@ -5691,7 +5694,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"رقم الهاتف مفقود."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"حسنًا"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"الحماية من شبكات الجيل الثاني"</string>
-    <string name="enable_2g_summary" msgid="6194875539424151678">"يؤدي هذا الخيار إلى تجنُّب شبكات الجيل الثاني التي تتسم بمستوى أمان أقل، ما قد يحدّ من إمكانية الاتصال في بعض الأماكن. ويُسمح باستخدام شبكات الجيل الثاني دائمًا لمكالمات الطوارئ، ولكن قد لا يتم إجراء المكالمات في حال التجوال بالهاتف دوليًا."</string>
+    <string name="enable_2g_summary" msgid="6194875539424151678">"يؤدي هذا الخيار إلى تجنُّب شبكات الجيل الثاني التي تتسم بمستوى أمان أقل، ما قد يحدّ من إمكانية الاتصال في بعض الأماكن. ويُسمح باستخدام شبكات الجيل الثاني دائمًا لإجراء مكالمات الطوارئ، ولكن قد لا تنجح في حال التجوال بالهاتف دوليًا."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"يطلب مشغّل شبكة الجوال <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> توفّر شبكة الجيل الثاني"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"السماح بالشبكات المشفَّرة فقط"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"إجراء أكثر أمانًا، ولكن قد يؤدي إلى الحد من إمكانية الاتصال بشبكة الجوّال في بعض المواقع الجغرافية، ويُسمح بإجراء مكالمات الطوارئ دائمًا"</string>
@@ -5832,7 +5835,7 @@
     <string name="dock_multi_instances_not_supported_text" msgid="3513493664467667084">"لا يمكن فتح هذا التطبيق إلا في نافذة واحدة."</string>
     <string name="generic_accessibility_service_on" msgid="4466229372357726824">"الميزة مفعّلة"</string>
     <string name="generic_accessibility_service_off" msgid="4759859497651675724">"الميزة غير مفعّلة"</string>
-    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"الاختصار غير مفعَّل"</string>
+    <string name="generic_accessibility_feature_shortcut_off" msgid="4022872394514077907">"غير مفعّل"</string>
     <string name="accessibility_shortcut_state_off" msgid="8158137799007601475">"الاختصار غير مفعَّل"</string>
     <string name="daltonizer_state_on" msgid="131013270022603983">"الميزة مفعَّلة"</string>
     <string name="daltonizer_state_off" msgid="1162285688069856179">"الميزة غير مفعَّلة"</string>
@@ -6129,10 +6132,8 @@
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"تنبيهات إضافية"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"تنبيهات أقل"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"التنبيهات التي تم إغلاقها"</string>
-    <!-- no translation found for safety_center_collapse_dismissed_issues (1906333435017081366) -->
-    <skip />
-    <!-- no translation found for safety_center_expand_dismissed_issues (6075170862549670397) -->
-    <skip />
+    <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"تصغير التنبيهات التي تم إغلاقها"</string>
+    <string name="safety_center_expand_dismissed_issues" msgid="6075170862549670397">"عرض التنبيهات التي تم إغلاقها"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"إغلاق هذا التنبيه؟"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"يمكنك مراجعة إعدادات الأمان والخصوصية في أي وقت لإضافة المزيد من إجراءات الحماية"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"اكتمل الإجراء"</string>

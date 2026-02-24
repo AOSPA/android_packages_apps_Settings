@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.contract.KEY_ADAPTIVE_BRIGHTNESS
+import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.metrics.PreferenceActionMetricsProvider
@@ -45,8 +46,8 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
-import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(AutoBrightnessScreen.KEY)
 open class AutoBrightnessScreen :
@@ -56,12 +57,13 @@ open class AutoBrightnessScreen :
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin,
     BooleanValuePreference {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, KEY_ADAPTIVE_BRIGHTNESS)
+    override fun tags(context: Context) =
+        arrayOf(APP_FUNCTION_UNCATEGORIZED, KEY_ADAPTIVE_BRIGHTNESS)
 
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.auto_brightness_entry_purpose
 
@@ -75,8 +77,6 @@ open class AutoBrightnessScreen :
 
     override val preferenceActionMetrics: Int
         get() = ACTION_ADAPTIVE_BRIGHTNESS
-
-
 
     override fun isFlagEnabled(context: Context) = Flags.catalystScreenBrightnessMode()
 
@@ -111,9 +111,7 @@ open class AutoBrightnessScreen :
         makeLaunchIntent(context, Settings.AdaptiveBrightnessActivity::class.java, metadata?.key)
 
     override fun isAvailable(context: Context) =
-        context.resources.getBoolean(
-            com.android.internal.R.bool.config_automatic_brightness_available
-        )
+        context.autoBrightnessAvailabilityStatus == AVAILABLE
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 

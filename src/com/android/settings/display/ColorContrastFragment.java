@@ -31,6 +31,7 @@ import com.android.settingslib.search.SearchIndexable;
 import com.google.android.material.appbar.AppBarLayout;
 
 /** Accessibility settings for color contrast. */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class ColorContrastFragment extends DashboardFragment {
 
@@ -96,3 +97,4 @@ public class ColorContrastFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.accessibility_color_contrast);
 }
+// LINT.ThenChange(ColorContrastApiScreen.java)

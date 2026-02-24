@@ -17,29 +17,29 @@
 package com.android.settings.appfunctions.executors
 
 import android.app.appsearch.GenericDocument
-import android.os.OutcomeReceiver
-import android.service.settings.preferences.GetValueRequest
-import android.service.settings.preferences.GetValueResult
-import android.service.settings.preferences.SetValueRequest
+import android.content.Context
 import android.service.settings.preferences.SetValueResult
-import android.service.settings.preferences.SettingsPreferenceValue
 import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateSetterExecutorResult
 import com.android.settings.appfunctions.GenericDeviceStateItemSetterParams
-import com.android.settings.appfunctions.SettingsPreferenceServiceClientManager
+import com.android.settings.appfunctions.utils.determineParamName
+import com.android.settings.appfunctions.utils.getPreference
+import com.android.settings.appfunctions.utils.setPreference
+import com.android.settings.appfunctions.utils.settingsPreferenceValueToString
+import com.android.settings.appfunctions.utils.toSettingsPreferenceValue
+import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.service.transformCatalystSetValueResponse
 import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemResponse
-import kotlin.coroutines.resume
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.asExecutor
-import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 
 /**
  * A [DeviceStateExecutor] that sets device state for Settings that are exposed using Catalyst
  * framework. Configured in [CatalystStateProviderConfig].
  */
-class CatalystStateSetterExecutor() : DeviceStateExecutor {
+class CatalystStateSetterExecutor(private val context: Context) : DeviceStateExecutor {
+
     /**
      * Asynchronously executes the device state set request.
      *
@@ -97,32 +97,13 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
     private suspend fun setDeviceState(
         genericParams: GenericDeviceStateItemSetterParams
     ): SetDeviceStateItemResponse {
-        val client = SettingsPreferenceServiceClientManager.client
-        if (client == null) {
-            Log.e(TAG, "SettingsPreferenceServiceClient is not available.")
-            return SetDeviceStateItemResponse(
-                isSuccessful = false,
-                currentValue = "",
-                failureReason = "Service client not available",
-            )
-        }
-
         val params = genericParams.getSetDeviceStateItemParams()
         val fullKey = params.key
-        val keyParts = fullKey.split("/", limit = 2)
-        val screenKey = keyParts.getOrNull(0)
-        val key = keyParts.getOrElse(1) { fullKey }
+        val (screenKey, key) = splitFullKey(fullKey)
 
-        if (screenKey == null) {
-            Log.e(TAG, "Unsupported key: ${params.key}")
-            return SetDeviceStateItemResponse(
-                isSuccessful = false,
-                currentValue = "",
-                failureReason = "Unsupported key value",
-            )
-        }
+        val keyParameters = buildKeyParameters(screenKey, params.itemizationKeys)
 
-        val currentValue = getPreference(screenKey, key)
+        val currentValue = getPreference(context, screenKey, key, keyParameters)
         val settingsPreferenceValue =
             toSettingsPreferenceValue(params.value, currentValue?.type)
                 ?: return SetDeviceStateItemResponse(
@@ -131,88 +112,30 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
                     failureReason = "Unsupported value type or value",
                 )
 
-        val request = SetValueRequest.Builder(screenKey, key, settingsPreferenceValue).build()
-
-        return suspendCancellableCoroutine { continuation ->
-            client.setPreferenceValue(
-                request,
-                Dispatchers.Default.asExecutor(),
-                object : OutcomeReceiver<SetValueResult, Exception> {
-                    override fun onResult(result: SetValueResult) {
-                        continuation.resume(
-                            SetDeviceStateItemResponse(
-                                isSuccessful = result.resultCode == SetValueResult.RESULT_OK,
-                                currentValue =
-                                    settingsPreferenceValueToString(settingsPreferenceValue),
-                            )
-                        )
-                    }
-
-                    override fun onError(error: Exception) {
-                        Log.e(TAG, "Error setting preference value", error)
-                        continuation.resume(
-                            // TODO(461469319): set the failure reason
-                            SetDeviceStateItemResponse(
-                                isSuccessful = false,
-                                currentValue = settingsPreferenceValueToString(currentValue),
-                                failureReason = "Error: ${error.message}",
-                            )
-                        )
-                    }
-                },
-            )
-        }
-    }
-
-    // This should probably be moved to a common file when getDeviceStateItem is implemented in
-    // order to reuse this.
-    private suspend fun getPreference(screenKey: String, key: String): SettingsPreferenceValue? {
-        val client = SettingsPreferenceServiceClientManager.client ?: return null
-        val request = GetValueRequest.Builder(screenKey, key).build()
-        return suspendCancellableCoroutine { continuation ->
-            client.getPreferenceValue(
-                request,
-                Dispatchers.Default.asExecutor(),
-                object : OutcomeReceiver<GetValueResult, Exception> {
-                    override fun onResult(result: GetValueResult) {
-                        continuation.resume(result.value)
-                    }
-
-                    override fun onError(error: Exception) {
-                        Log.e(TAG, "Error getting preference value", error)
-                        continuation.resume(null)
-                    }
-                },
-            )
-        }
-    }
-
-    private fun toSettingsPreferenceValue(value: String, type: Int?): SettingsPreferenceValue? {
-        return when (type) {
-            SettingsPreferenceValue.TYPE_BOOLEAN ->
-                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_BOOLEAN)
-                    .setBooleanValue(value.toBooleanStrictOrNull() ?: return null)
-                    .build()
-            SettingsPreferenceValue.TYPE_INT ->
-                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_INT)
-                    .setIntValue(value.toIntOrNull() ?: return null)
-                    .build()
-            SettingsPreferenceValue.TYPE_STRING ->
-                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_STRING)
-                    .setStringValue(value)
-                    .build()
-            SettingsPreferenceValue.TYPE_LONG ->
-                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_LONG)
-                    .setLongValue(value.toLongOrNull() ?: return null)
-                    .build()
-            SettingsPreferenceValue.TYPE_DOUBLE ->
-                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_DOUBLE)
-                    .setDoubleValue(value.toDoubleOrNull() ?: return null)
-                    .build()
-            else -> {
-                Log.e(TAG, "Unsupported value type from preference: $type")
-                null
+        return try {
+            val resultInt =
+                setPreference(context, screenKey, key, settingsPreferenceValue, keyParameters)
+            val setValueResult = transformCatalystSetValueResponse(resultInt)
+            return if (setValueResult.resultCode == SetValueResult.RESULT_OK) {
+                SetDeviceStateItemResponse(
+                    isSuccessful = true,
+                    currentValue = settingsPreferenceValueToString(settingsPreferenceValue),
+                )
+            } else {
+                SetDeviceStateItemResponse(
+                    isSuccessful = false,
+                    currentValue = settingsPreferenceValueToString(currentValue),
+                    // TODO b/484302113: Show the error in an AI friendly format such as String
+                    failureReason = setValueResult.resultCode.toString(),
+                )
             }
+        } catch (e: Exception) {
+            Log.e(TAG, "Error setting preference value", e)
+            SetDeviceStateItemResponse(
+                isSuccessful = false,
+                currentValue = settingsPreferenceValueToString(currentValue),
+                failureReason = "Error: ${e.message}",
+            )
         }
     }
 
@@ -225,21 +148,32 @@ class CatalystStateSetterExecutor() : DeviceStateExecutor {
         return null
     }
 
-    private fun settingsPreferenceValueToString(value: SettingsPreferenceValue?): String {
-        return when (value?.type) {
-            SettingsPreferenceValue.TYPE_BOOLEAN -> value.booleanValue.toString()
-            SettingsPreferenceValue.TYPE_INT -> value.intValue.toString()
-            SettingsPreferenceValue.TYPE_STRING -> value.stringValue ?: ""
-            else -> ""
-        }
-    }
-
     private fun adjustNumericDeviceStateByPercentage(
         genericParams: GenericDeviceStateItemSetterParams
     ): SetDeviceStateItemResponse? {
         val params = genericParams.getAdjustNumericDeviceStateItemByPercentageParams()
         // TODO: call into appropriate setter APIs
 
+        return null
+    }
+
+    private fun splitFullKey(fullKey: String): Pair<String, String> {
+        val keyParts = fullKey.split("/", limit = 2)
+        val screenKey = keyParts[0]
+        val key = keyParts.getOrElse(1) { fullKey }
+        return screenKey to key
+    }
+
+    private fun buildKeyParameters(
+        screenKey: String,
+        itemizationKeys: List<String>,
+    ): KeyParameters? {
+        if (itemizationKeys.isEmpty()) return null
+        val paramName = determineParamName(screenKey)
+        if (paramName != null) {
+            Log.d(TAG, "Determined paramName: $paramName for screen: $screenKey")
+            return KeyParameters(mapOf(paramName to itemizationKeys.joinToString(",")))
+        }
         return null
     }
 
