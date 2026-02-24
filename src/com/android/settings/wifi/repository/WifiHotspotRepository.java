@@ -284,11 +284,15 @@ public class WifiHotspotRepository {
         } else {
             passphrase = generatePassword(config);
         }
+        if (securityType == SECURITY_TYPE_OPEN && has6Ghz(config)) {
+            securityType = SECURITY_TYPE_WPA3_OWE;
+        }
         if (securityType == SECURITY_TYPE_WPA3_OWE) {
-           if (config.getChannels().size() > 1) {
+           if (config.getChannels().size() > 1 && !has6Ghz(config)) {
                log("Setting band to 2GHz for Enhanced open");
                configBuilder.setBand(BAND_2GHZ);
-           } else if (config.getBand() == BAND_2GHZ || config.getBand() == BAND_2GHZ_5GHZ) {
+           } else if ((config.getBand() == BAND_2GHZ || config.getBand() == BAND_2GHZ_5GHZ)
+                   && !has6Ghz(config)) {
                if (!isEnhancedOpenOweOnlyEnabled()) {
                    log("OWE to OWE_TRANSITION for 2.4 or 5 GHz");
                    securityType = SECURITY_TYPE_WPA3_OWE_TRANSITION;
@@ -327,33 +331,42 @@ public class WifiHotspotRepository {
         boolean specifies5ghz = false;
         boolean specifies6ghz = false;
         SparseIntArray configuredChannels = config.getChannels();
-        for (int i = 0; i < configuredChannels.size(); i++) {
+        int numChannels = configuredChannels.size();
+        for (int i = 0; i < numChannels; i++) {
             int band = configuredChannels.keyAt(i);
             if ((band & BAND_2GHZ) != 0) specifies2ghz = true;
             if ((band & BAND_5GHZ) != 0) specifies5ghz = true;
             if ((band & BAND_6GHZ) != 0) specifies6ghz = true;
         }
+
         log("getSpeedTypeOfConfiguration(): channels=" + configuredChannels
                 + ", specifies2ghz=" + specifies2ghz
                 + ", specifies5ghz=" + specifies5ghz
                 + ", specifies6ghz=" + specifies6ghz
+                + ", numChannels="   + numChannels
         );
 
-        // Check configured bands in order of compatibility.
-        if (specifies6ghz && is6gAvailable()) {
-            if (isDualBand() && Flags.enable2And6GhzHotspotSpeed()) return SPEED_2GHZ_6GHZ;
-            return SPEED_6GHZ;
+        // If DBS (Multiple instances)
+        if (numChannels > 1) {
+            if (specifies2ghz && specifies6ghz) return SPEED_2GHZ_6GHZ;
+            if (specifies2ghz && specifies5ghz) return SPEED_2GHZ_5GHZ;
         }
 
-        if (specifies5ghz && is5gAvailable()) {
-            if (isDualBand() && (configuredChannels.size() > 1)) return SPEED_2GHZ_5GHZ;
-            return SPEED_5GHZ;
-        }
+        // If Single AP
+        if (numChannels == 1) {
+            int band = configuredChannels.keyAt(0);
+            if (band == BAND_6GHZ) return SPEED_6GHZ;
+            if (band == BAND_5GHZ) return SPEED_5GHZ;
+            if (band == BAND_2GHZ) return SPEED_2GHZ;
 
-        if (specifies2ghz) { // Assume 2 GHz is always available
-            // Upgrade to 2 + 5 GHz if available
-            if (isDualBand() && is5gAvailable()) return SPEED_2GHZ_5GHZ;
-            return SPEED_2GHZ;
+            // Handle Masks (System Upgrades)
+            if (band == BAND_2GHZ_5GHZ_6GHZ) return SPEED_6GHZ;
+            if (band == BAND_2GHZ_5GHZ) return SPEED_5GHZ;
+
+            // Fallback if weird mask
+            if (specifies6ghz) return SPEED_6GHZ;
+            if (specifies5ghz) return SPEED_5GHZ;
+            if (specifies2ghz) return SPEED_2GHZ;
         }
 
         return SPEED_UNKNOWN;
@@ -414,54 +427,59 @@ public class WifiHotspotRepository {
                 configBuilder.setBand(BAND_2GHZ);
                 break;
             case SPEED_5GHZ:
-                log("setSpeedType(), setBand(BAND_2GHZ_5GHZ)");
-                configBuilder.setBand(BAND_2GHZ_5GHZ);
+                log("setSpeedType(), setBand(BAND_5GHZ)");
+                configBuilder.setBand(BAND_5GHZ);
                 break;
             case SPEED_6GHZ:
-                log("setSpeedType(), setBand(BAND_2GHZ_5GHZ_6GHZ)");
-                configBuilder.setBand(BAND_2GHZ_5GHZ_6GHZ);
+                log("setSpeedType(), setBand(BAND_6GHZ)");
+                configBuilder.setBand(BAND_6GHZ);
                 newSpeedHas6g = true;
                 break;
             case SPEED_2GHZ_5GHZ:
-                log("setSpeedType(), setBands({BAND_2GHZ, BAND_2GHZ_5GHZ})");
-                configBuilder.setBands(new int[]{BAND_2GHZ, BAND_2GHZ_5GHZ});
+                log("setSpeedType(), setBands({BAND_2GHZ, BAND_5GHZ})");
+                configBuilder.setBands(new int[]{BAND_2GHZ, BAND_5GHZ});
                 break;
             case SPEED_2GHZ_6GHZ:
-                log("setSpeedType(), setBands({BAND_2GHZ, BAND_2GHZ_5GHZ_6GHZ})");
-                configBuilder.setBands(new int[]{BAND_2GHZ, BAND_2GHZ_5GHZ_6GHZ});
+                log("setSpeedType(), setBands({BAND_2GHZ, BAND_6GHZ})");
+                configBuilder.setBands(new int[]{BAND_2GHZ, BAND_6GHZ});
                 newSpeedHas6g = true;
                 break;
         }
 
-        if (newSpeedHas6g && config.getSecurityType() != SECURITY_TYPE_WPA3_SAE) {
-            // If we're moving to 6Ghz, set the security type to WPA3-SAE since 6GHz requires it.
-            String password = generatePassword(config);
-            if (speedType == SPEED_2GHZ_6GHZ && isWpa3TransitionAllowedFor2g6gDbs()) {
-                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE_TRANSITION)");
-                configBuilder.setPassphrase(password, SECURITY_TYPE_WPA3_SAE_TRANSITION);
-            } else {
-                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
-                configBuilder.setPassphrase(password, SECURITY_TYPE_WPA3_SAE);
+        if (newSpeedHas6g) {
+            if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE ||
+                config.getSecurityType() == SECURITY_TYPE_WPA3_OWE_TRANSITION ||
+                config.getSecurityType() == SECURITY_TYPE_OPEN) {
+                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_OWE)");
+                configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE);
+            } else if (config.getSecurityType() != SECURITY_TYPE_WPA3_SAE) {
+                // If we're moving to 6Ghz, set the security type to WPA3-SAE since 6GHz requires it.
+                String password = generatePassword(config);
+                if (speedType == SPEED_2GHZ_6GHZ && isWpa3TransitionAllowedFor2g6gDbs()) {
+                    log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE_TRANSITION)");
+                    configBuilder.setPassphrase(password, SECURITY_TYPE_WPA3_SAE_TRANSITION);
+                } else {
+                    log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE)");
+                    configBuilder.setPassphrase(password, SECURITY_TYPE_WPA3_SAE);
+                }
             }
         } else if (has6Ghz(config) && !newSpeedHas6g) {
             // If we're moving away from 6Ghz, reset the security type back to WPA2/WPA3 transition
             // for maximum compatibility.
-            String passphrase = generatePassword(config);
-            if (passphrase.length() >= 8) {
-                if (config.getSecurityType() == SECURITY_TYPE_WPA3_OWE &&
+            if ((config.getSecurityType() == SECURITY_TYPE_WPA3_OWE ||
+                    config.getSecurityType() == SECURITY_TYPE_WPA3_OWE_TRANSITION) &&
                     speedType != SPEED_2GHZ_5GHZ) {
-                    if (!isEnhancedOpenOweOnlyEnabled()) {
-                        configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE_TRANSITION);
-                    } else {
-                        configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE);
-                    }
+                if (!isEnhancedOpenOweOnlyEnabled()) {
+                    configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE_TRANSITION);
                 } else {
-                    log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE_TRANSITION)");
-                    configBuilder.setPassphrase(
-                            generatePassword(config), SECURITY_TYPE_WPA3_SAE_TRANSITION);
+                    configBuilder.setPassphrase(null, SECURITY_TYPE_WPA3_OWE);
                 }
-
+            } else {
+                log("setSpeedType(), setPassphrase(SECURITY_TYPE_WPA3_SAE_TRANSITION)");
+                configBuilder.setPassphrase(
+                        generatePassword(config), SECURITY_TYPE_WPA3_SAE_TRANSITION);
             }
+
         }
 
         setSoftApConfiguration(configBuilder.build());
