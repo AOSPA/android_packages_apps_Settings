@@ -3057,7 +3057,7 @@
         <activity android:name=".supervision.SupervisionRestrictionBypassActivity"
             android:exported="false"
             android:excludeFromRecents="true"
-            android:theme="@style/Theme.Settings.NoActionBar"
+            android:theme="@style/Transparent"
             android:featureFlag="android.app.supervision.flags.supervision_manager_apis">
             <intent-filter>
                 <action android:name="android.settings.BYPASS_SUPERVISION_RESTRICTION" />
