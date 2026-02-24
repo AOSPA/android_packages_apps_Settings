@@ -27,9 +27,11 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.R
+import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupdesign.GlifLayout
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -39,6 +41,11 @@ import org.robolectric.RobolectricTestRunner
 class EditShortcutSetupWizardFragmentTest {
 
     private val appContext: Context = ApplicationProvider.getApplicationContext()
+
+    @After
+    fun cleanUp() {
+        AccessibilityRepositoryProvider.resetInstanceForTesting()
+    }
 
     @Test
     fun newInstance_withMagnification_setsCorrectTarget() {
