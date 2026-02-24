@@ -114,7 +114,7 @@ public class BrightnessLevelPreferenceController extends BasePreferenceControlle
 
     @Override
     public int getAvailabilityStatus() {
-        return AVAILABLE;
+        return BrightnessLevelExtensionsKt.getBrightnessLevelAvailabilityStatus(mContext);
     }
 
     @Override
