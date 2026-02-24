@@ -29,6 +29,7 @@ import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.ReadWritePermit.Companion.ALLOW
 import com.android.settingslib.metadata.getPreferencePurpose
@@ -36,6 +37,8 @@ import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isUiOnlyPreference
+import com.android.settingslib.metadata.preferencesapi.ApiPreference
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
@@ -155,8 +158,8 @@ class CatalystStateProviderExecutor(
                         // other item specific id necessary to distinguish the items.
                         key = "${screenMetaData.key}/${metadata.bindingKey}",
                         purpose = metadata.getPreferencePurpose(context).toString(),
-                        name =
-                            LocalizedString(
+                        name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*>) null
+                            else LocalizedString(
                                 english = metadata.getPreferenceTitle(englishContext).toString(),
                                 localized = metadata.getPreferenceTitle(context).toString(),
                             ),
@@ -172,9 +175,11 @@ class CatalystStateProviderExecutor(
         val basicDescription = listOfNotNull(
             screenMetaData.getPreferenceScreenTitle(context)?.toString(),
             additionalDescription,
-            screenMetaData.getPreferencePurpose(context).toString()
+            screenMetaData.getPreferencePurpose(context).toString(),
+            screenMetaData.accessPreconditionsAsString(context),
         ).filter { it.isNotBlank() }
             .joinToString(". ")
+            .replace("..", ".")
 
         val arguments = screenMetaData.arguments?.clone() as? BaseBundle
         arguments?.remove("source")
