@@ -20,6 +20,7 @@ import android.app.Activity.RESULT_OK
 import android.app.Application
 import android.app.KeyguardManager
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ENABLE_SUPERVISION
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_PIN_SET_UP
 import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
@@ -256,6 +257,8 @@ class SetupSupervisionActivityTest {
 
                 verify(metricsRule.metricsFeatureProvider)
                     .action(eq(activity), eq(ACTION_SUPERVISION_ENABLE_SUPERVISION))
+                verify(metricsRule.metricsFeatureProvider, never())
+                    .action(eq(activity), eq(ACTION_SUPERVISION_PIN_SET_UP))
             }
         }
     }
@@ -364,6 +367,8 @@ class SetupSupervisionActivityTest {
 
                 verify(metricsRule.metricsFeatureProvider)
                     .action(eq(activity), eq(ACTION_SUPERVISION_ENABLE_SUPERVISION))
+                verify(metricsRule.metricsFeatureProvider)
+                    .action(eq(activity), eq(ACTION_SUPERVISION_PIN_SET_UP))
             }
         }
     }
@@ -613,9 +618,7 @@ class SetupSupervisionActivityTest {
                 val layout = activity.findViewById<GlifLayout>(R.id.supervision_setup_introduction)
                 val descriptionView = layout.getDescriptionTextView()
                 assertThat(descriptionView.contentDescription)
-                    .isEqualTo(
-                        context.getString(R.string.supervision_intro_content_description)
-                    )
+                    .isEqualTo(context.getString(R.string.supervision_intro_content_description))
             }
         }
     }
