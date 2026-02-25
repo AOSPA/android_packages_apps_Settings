@@ -45,6 +45,10 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.graph.proto.PossibleValueProto
+import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
+import com.android.settingslib.graph.proto.PreferenceValueProto
+import com.android.settingslib.graph.proto.RangeValueProto
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 
@@ -764,5 +768,112 @@ class CatalystStateMetadataProviderExecutorTest {
         val prefMetadata = result.metadata[0].deviceStateItemsMetadata[1]
         assertThat(prefMetadata.key).isEqualTo("api_first_screen/writable_pref")
         assertThat(prefMetadata.name).isNull()
+    }
+
+    @Test
+    fun toDeviceStateString_booleanType_returnsBOOL() {
+        val proto = PreferenceValueDescriptorProto.newBuilder()
+            .setBooleanType(true)
+            .build()
+
+        with(CatalystStateMetadataProviderExecutor) {
+            assertThat(proto.toDeviceStateString()).isEqualTo("BOOL")
+        }
+    }
+
+    @Test
+    fun toDeviceStateString_floatType_returnsFLOAT() {
+        val proto = PreferenceValueDescriptorProto.newBuilder()
+            .setFloatType(true)
+            .build()
+
+        with(CatalystStateMetadataProviderExecutor) {
+            assertThat(proto.toDeviceStateString()).isEqualTo("FLOAT")
+        }
+    }
+
+    @Test
+    fun toDeviceStateString_longType_returnsLONG() {
+        val proto = PreferenceValueDescriptorProto.newBuilder()
+            .setLongType(true)
+            .build()
+
+        with(CatalystStateMetadataProviderExecutor) {
+            assertThat(proto.toDeviceStateString()).isEqualTo("LONG")
+        }
+    }
+
+    @Test
+    fun toDeviceStateString_stringType_returnsSTRING() {
+        val proto = PreferenceValueDescriptorProto.newBuilder()
+            .setStringType(true)
+            .build()
+
+        with(CatalystStateMetadataProviderExecutor) {
+            assertThat(proto.toDeviceStateString()).isEqualTo("STRING")
+        }
+    }
+
+    @Test
+    fun toDeviceStateString_rangeType_withMinMaxStep_returnsINTEGERWithValues() {
+        val range = RangeValueProto.newBuilder()
+            .setMin(0)
+            .setMax(10)
+            .setStep(2)
+            .build()
+        val proto = PreferenceValueDescriptorProto.newBuilder()
+            .setRangeValue(range)
+            .build()
+
+        with(CatalystStateMetadataProviderExecutor) {
+            assertThat(proto.toDeviceStateString()).isEqualTo("INTEGER(min=0, max=10, step=2)")
+        }
+    }
+
+    @Test
+    fun toDeviceStateString_rangeType_withMinOnly_returnsINTEGERWithMin() {
+        val range = RangeValueProto.newBuilder()
+            .setMin(5)
+            .build()
+        val proto = PreferenceValueDescriptorProto.newBuilder()
+            .setRangeValue(range)
+            .build()
+
+        with(CatalystStateMetadataProviderExecutor) {
+            assertThat(proto.toDeviceStateString()).isEqualTo("INTEGER(min=5)")
+        }
+    }
+
+    @Test
+    fun toDeviceStateString_rangeType_empty_returnsINTEGER() {
+        val range = RangeValueProto.newBuilder().build()
+        val proto = PreferenceValueDescriptorProto.newBuilder()
+            .setRangeValue(range)
+            .build()
+
+        with(CatalystStateMetadataProviderExecutor) {
+            assertThat(proto.toDeviceStateString()).isEqualTo("INTEGER")
+        }
+    }
+
+    @Test
+    fun toDeviceStateString_possibleValues_returnsValuesAndDescriptions() {
+        val value1 = PossibleValueProto.newBuilder()
+            .setValue(PreferenceValueProto.newBuilder().setBooleanValue(true))
+            .setDescription("On")
+            .build()
+        val value2 = PossibleValueProto.newBuilder()
+            .setValue(PreferenceValueProto.newBuilder().setBooleanValue(false))
+            .setDescription("Off")
+            .build()
+
+        val proto = PreferenceValueDescriptorProto.newBuilder()
+            .addPossibleValues(value1)
+            .addPossibleValues(value2)
+            .build()
+
+        with(CatalystStateMetadataProviderExecutor) {
+            assertThat(proto.toDeviceStateString()).isEqualTo("true (On), false (Off)")
+        }
     }
 }

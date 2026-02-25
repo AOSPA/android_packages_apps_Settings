@@ -29,6 +29,7 @@ import com.android.settings.appfunctions.DeviceStateMetadataProviderExecutorResu
 import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
+import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -249,21 +250,42 @@ class CatalystStateMetadataProviderExecutor(
         private val PER_SCREEN_TIMEOUT_MS = 5.seconds
 
         /** Returns an LLM readable string describing the value type. */
-        internal fun PreferenceValueDescriptorProto.toDeviceStateString(): String =
-            when (typeCase) {
+        internal fun PreferenceValueDescriptorProto.toDeviceStateString(): String {
+            if (possibleValuesCount > 0) {
+                return possibleValuesList.joinToString(separator = ", ") {
+                    "${it.value.toValueString()} (${it.description})"
+                }
+            }
+            return when (typeCase) {
                 PreferenceValueDescriptorProto.TypeCase.BOOLEAN_TYPE -> "BOOL"
                 PreferenceValueDescriptorProto.TypeCase.FLOAT_TYPE -> "FLOAT"
                 PreferenceValueDescriptorProto.TypeCase.LONG_TYPE -> "LONG"
                 PreferenceValueDescriptorProto.TypeCase.RANGE_VALUE -> {
-                    if (hasRangeValue()) {
-                        val range = rangeValue
-                        val stepString =
-                            if (range.hasStep() && range.step != 0) ", step=${range.step}" else ""
-                        "INTEGER(min=${range.min}, max=${range.max}$stepString)"
-                    } else {
+                    val range = rangeValue
+                    val filter = listOf(
+                        if (range.hasMin()) "min=${range.min}" else null,
+                        if (range.hasMax()) "max=${range.max}" else null,
+                        if (range.hasStep() && range.step > 1) "step=${range.step}" else null,
+                    ).filterNotNull().joinToString(separator = ", ")
+
+                    if (filter.isEmpty()) {
                         "INTEGER"
+                    } else {
+                        "INTEGER($filter)"
                     }
                 }
+                PreferenceValueDescriptorProto.TypeCase.STRING_TYPE -> "STRING"
+                else -> ""
+            }
+        }
+
+        private fun PreferenceValueProto.toValueString(): String =
+            when {
+                hasBooleanValue() -> booleanValue.toString()
+                hasFloatValue() -> floatValue.toString()
+                hasIntValue() -> intValue.toString()
+                hasLongValue() -> longValue.toString()
+                hasStringValue() -> stringValue
                 else -> ""
             }
     }
