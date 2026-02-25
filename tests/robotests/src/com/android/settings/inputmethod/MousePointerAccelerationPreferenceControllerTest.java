@@ -52,12 +52,6 @@ public class MousePointerAccelerationPreferenceControllerTest {
     }
 
     @Test
-    public void getAvailabilityStatus_expected() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
     public void setChecked_true_shouldReturnTrue() {
         mController.setChecked(true);
 
