@@ -31,6 +31,7 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.contract.KEY_BRIGHTNESS_LEVEL
+import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.restriction.PreferenceRestrictionMixin
@@ -45,6 +46,7 @@ import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MAX
 import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN
 import com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat
 import com.android.settingslib.metadata.IntRangeValuePreference
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -63,7 +65,8 @@ class BrightnessLevelPreference :
     PreferenceRestrictionMixin,
     PreferenceActionMetricsProvider,
     PreferenceSummaryProvider,
-    Preference.OnPreferenceClickListener {
+    Preference.OnPreferenceClickListener,
+    PreferenceAvailabilityProvider {
 
     override val key: String
         get() = KEY
@@ -198,6 +201,9 @@ class BrightnessLevelPreference :
         }
         return true
     }
+
+    override fun isAvailable(context: Context) =
+        context.brightnessLevelAvailabilityStatus == AVAILABLE
 
     companion object {
         const val KEY = "brightness"
