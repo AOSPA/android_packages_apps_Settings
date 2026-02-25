@@ -45,6 +45,7 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.graph.proto.KeyParametersProto
 import com.android.settingslib.graph.proto.PossibleValueProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
@@ -874,6 +875,22 @@ class CatalystStateMetadataProviderExecutorTest {
 
         with(CatalystStateMetadataProviderExecutor) {
             assertThat(proto.toDeviceStateString()).isEqualTo("true (On), false (Off)")
+        }
+    }
+
+    @Test
+    fun toDeviceStateString_withParameters_returnsStringWithParameters() {
+        val parameters = KeyParametersProto.newBuilder()
+            .putValues("param1", "value1")
+            .putValues("param2", "value2")
+            .build()
+        val proto = PreferenceValueDescriptorProto.newBuilder()
+            .setStringType(true)
+            .setParameters(parameters)
+            .build()
+
+        with(CatalystStateMetadataProviderExecutor) {
+            assertThat(proto.toDeviceStateString()).isEqualTo("STRING [param1=value1,param2=value2]")
         }
     }
 }

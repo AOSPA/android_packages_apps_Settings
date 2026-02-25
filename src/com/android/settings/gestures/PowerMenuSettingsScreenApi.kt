@@ -89,7 +89,8 @@ class PowerMenuSettingsScreenApi() :
             purpose = R.string.long_press_power_assistant_sensitivity_purpose,
             type =
                 GeneratedType(
-                    description = R.string.long_press_power_assistant_sensitivity_ms_description
+                    description = R.string.long_press_power_assistant_sensitivity_ms_description,
+                    unit = "ms"
                 ) {
                     context.resources.getIntArray(DURATIONS_ARRAY_ID).map {
                         it.createSensitivityGeneratedValue(context)
