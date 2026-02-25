@@ -200,7 +200,7 @@ open class SatelliteTileStateReceiver(
      * This flow short-circuits and returns `true` immediately if LTE-based NTN is supported.
      */
     private fun isAnyNtnSupportedFlow(context: Context): Flow<Boolean> {
-        if (SatelliteUtils.isLteBasedNtnSupportedByDevice(context)) {
+        if (SatelliteUtils.isLteBasedNtnSupportedByAnySub(context)) {
             return flowOf(true)
         }
         return isNbIotBasedNtnSupportedFlow(context)
@@ -329,7 +329,7 @@ internal object SatelliteSupportedStateChangeHandler {
                         "onSatelliteSupportedStateChanged: isSupported=$isNbIotBasedNtnSupported",
                     )
                     val isLteBasedNtnSupported =
-                        SatelliteUtils.isLteBasedNtnSupportedByDevice(appContext)
+                        SatelliteUtils.isLteBasedNtnSupportedByAnySub(appContext)
                     SatelliteTileStateReceiver.updateTileServiceEnabledState(
                         appContext,
                         isLteBasedNtnSupported || isNbIotBasedNtnSupported,
