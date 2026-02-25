@@ -37,6 +37,9 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.flags.Flags;
+import com.android.settingslib.utils.ThreadUtils;
+
 import com.android.settings.R;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.password.ChooseLockSettingsHelper;
@@ -58,6 +61,9 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     private final Activity mActivity;
     @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
     private RestrictedSwitchPreference mPreference;
+
+    private boolean mIsSimLockedDevice;
+    private boolean mIsOemUnlockAllowedByUserAndCarrier;
 
     public OemUnlockPreferenceController(Context context, Activity activity,
             @Nullable DevelopmentSettingsDashboardFragment fragment) {
@@ -112,13 +118,39 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     public void updateState(Preference preference) {
         super.updateState(preference);
         mPreference.setChecked(isOemUnlockedAllowed());
-        updateOemUnlockSettingDescription();
-        // Showing mEnableOemUnlock preference as device has persistent data block.
-        mPreference.setDisabledByAdmin((EnforcingAdmin) null);
-        mPreference.setEnabled(enableOemUnlockPreference());
-        if (mPreference.isEnabled()) {
-            // Check restriction, disable mEnableOemUnlock and apply policy transparency.
-            mPreference.checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
+
+        if (Flags.developmentOemUnlockAnrFix()) {
+            // Offload blocking telephony and carrier checks to a background thread
+            var unused = ThreadUtils.postOnBackgroundThread(() -> {
+                mIsSimLockedDevice = isSimLockedDevice();
+                mIsOemUnlockAllowedByUserAndCarrier = isOemUnlockAllowedByUserAndCarrier();
+
+                // Return to the main thread to safely update UI components
+                ThreadUtils.postOnMainThread(() -> {
+                    if (mPreference == null) {
+                        return;
+                    }
+                    updateOemUnlockSettingDescription();
+                    // Showing mEnableOemUnlock preference as device has persistent data block.
+                    mPreference.setDisabledByAdmin((EnforcingAdmin) null);
+                    mPreference.setEnabled(enableOemUnlockPreference());
+                    if (mPreference.isEnabled()) {
+                        // Check restriction, disable mEnableOemUnlock and apply policy
+                        // transparency.
+                        mPreference.checkRestrictionAndSetDisabled(
+                                UserManager.DISALLOW_FACTORY_RESET);
+                    }
+                });
+            });
+        } else {
+            updateOemUnlockSettingDescription();
+            // Showing mEnableOemUnlock preference as device has persistent data block.
+            mPreference.setDisabledByAdmin((EnforcingAdmin) null);
+            mPreference.setEnabled(enableOemUnlockPreference());
+            if (mPreference.isEnabled()) {
+                // Check restriction, disable mEnableOemUnlock and apply policy transparency.
+                mPreference.checkRestrictionAndSetDisabled(UserManager.DISALLOW_FACTORY_RESET);
+            }
         }
     }
 
@@ -163,11 +195,17 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
 
     private void updateOemUnlockSettingDescription() {
         int oemUnlockSummary = com.android.settingslib.R.string.oem_unlock_enable_summary;
+
+        boolean isSimLocked = Flags.developmentOemUnlockAnrFix()
+                ? mIsSimLockedDevice : isSimLockedDevice();
+        boolean isAllowedOemUnlock = Flags.developmentOemUnlockAnrFix()
+                ? mIsOemUnlockAllowedByUserAndCarrier : isOemUnlockAllowedByUserAndCarrier();
+
         if (isBootloaderUnlocked()) {
             oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_bootloader_unlocked;
-        } else if (isSimLockedDevice()) {
+        } else if (isSimLocked) {
             oemUnlockSummary = R.string.oem_unlock_enable_disabled_summary_sim_locked_device;
-        } else if (!isOemUnlockAllowedByUserAndCarrier()) {
+        } else if (!isAllowedOemUnlock) {
             // If the device isn't SIM-locked but OEM unlock is disallowed by some party, this
             // means either some other carrier restriction is in place or the device hasn't been
             // able to confirm which restrictions (SIM-lock or otherwise) apply.
@@ -204,7 +242,9 @@ public class OemUnlockPreferenceController extends DeveloperOptionsPreferenceCon
     }
 
     private boolean enableOemUnlockPreference() {
-        return !isBootloaderUnlocked() && isOemUnlockAllowedByUserAndCarrier();
+        boolean isOemUnlockAllowed = Flags.developmentOemUnlockAnrFix()
+                ? mIsOemUnlockAllowedByUserAndCarrier : isOemUnlockAllowedByUserAndCarrier();
+        return !isBootloaderUnlocked() && isOemUnlockAllowed;
     }
 
 
