@@ -28,6 +28,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 /**
  * Controller that updates the night display.
  */
+// LINT.IfChange
 public class NightDisplayActivationPreferenceController extends TogglePreferenceController {
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -84,3 +85,4 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     }
 
 }
+// LINT.ThenChange(NightDisplayApiScreen.kt)
