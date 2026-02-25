@@ -96,7 +96,7 @@ class SatelliteStateRepositoryTest {
             satelliteManager,
             connectivityManager,
             scope,
-            isLteNtnSupportedChecker = { isLteNtnSupported },
+            isLteNtnSupportedChecker = { _, _ -> isLteNtnSupported },
         )
     }
 

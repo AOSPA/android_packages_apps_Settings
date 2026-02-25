@@ -116,7 +116,7 @@ class SatelliteLandingPageViewModel(
         // Fetch support status on a background thread to avoid blocking the UI.
         val isLteSupported =
             withContext(backgroundDispatcher) {
-                SatelliteUtils.isLteBasedNtnSupportedByDevice(context)
+                SatelliteUtils.isLteBasedNtnSupported(context, subId)
             }
         _isLteBasedNtnSupported.value = isLteSupported
 
