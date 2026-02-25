@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.ReadWritePermit.Companion.ALLOW
 import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreferencePurpose
@@ -171,8 +172,6 @@ class CatalystStateProviderExecutor(
             }
         }
 
-        // This is hack because in general parameters are not human readable. We remove known
-        // internal keys then just dump the rest in the description.
         val basicDescription = listOfNotNull(
             screenMetaData.getPreferenceScreenTitle(context)?.toString(),
             additionalDescription,
@@ -182,14 +181,19 @@ class CatalystStateProviderExecutor(
             .joinToString(". ")
             .replace("..", ".")
 
-        val arguments = screenMetaData.arguments?.clone() as? BaseBundle
-        arguments?.remove("source")
-        val descriptionSuffix =
+        val keyParameters = screenMetaData.keyParameters
+
+        val descriptionSuffix = if (keyParameters != null && keyParameters != ValidatedKeyParameters.EMPTY) {
+             "${keyParameters.toParametersString()}"
+        } else {
+            val arguments = screenMetaData.arguments?.clone() as? BaseBundle
+            arguments?.remove("source")
             if (arguments == null) {
                 ""
             } else {
                 ". " + arguments.keySet().joinToString(", ") { "$it=${arguments.get(it)}" }
             }
+        }
         val descriptionPrefix = if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else ""
         val description = descriptionPrefix + basicDescription + descriptionSuffix
 
