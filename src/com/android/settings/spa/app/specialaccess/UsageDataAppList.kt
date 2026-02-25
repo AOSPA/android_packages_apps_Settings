@@ -124,7 +124,12 @@ class UsageDataAppListModel(
     }
 
     companion object {
-        private val APP_OPS = AppOps(op = AppOpsManager.OP_GET_USAGE_STATS, setModeByUid = true)
+        private val APP_OPS =
+            AppOps(
+                op = AppOpsManager.OP_GET_USAGE_STATS,
+                modeForNotAllowed = AppOpsManager.MODE_IGNORED,
+                setModeByUid = true,
+            )
 
         private const val PERMISSION: String = Manifest.permission.PACKAGE_USAGE_STATS
     }
