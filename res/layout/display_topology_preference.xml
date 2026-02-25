@@ -52,10 +52,10 @@
         <com.android.settings.connecteddevice.display.TopologyHintTextView
             android:id="@+id/topology_hint"
             android:background="@drawable/display_topology_background"
-            android:paddingHorizontal="5dp"
+            android:paddingHorizontal="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:minHeight="48dp"
+            android:minHeight="@dimen/topology_hint_text_view_height"
             android:textColor="@color/materialColorOnPrimaryContainer"
             android:textAlignment="center"
             android:textSize="12sp"
