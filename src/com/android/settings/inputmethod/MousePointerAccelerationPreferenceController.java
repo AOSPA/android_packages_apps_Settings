@@ -44,9 +44,6 @@ public class MousePointerAccelerationPreferenceController extends TogglePreferen
 
     @Override
     public int getAvailabilityStatus() {
-        if (!InputSettings.isPointerAccelerationFeatureFlagEnabled()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         return AVAILABLE;
     }
 
