@@ -256,11 +256,22 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     }
 
     /** Register display listener. */
-    open fun registerDisplayListener(listener: DisplayManager.DisplayListener) {
+    @JvmOverloads
+    open fun registerDisplayListener(
+        listener: DisplayManager.DisplayListener,
+        includeRefreshRateEvents: Boolean = false,
+    ) {
+        var eventFlags =
+            EVENT_TYPE_DISPLAY_ADDED or EVENT_TYPE_DISPLAY_CHANGED or EVENT_TYPE_DISPLAY_REMOVED
+
+        if (includeRefreshRateEvents) {
+            eventFlags = eventFlags or DisplayManager.EVENT_TYPE_DISPLAY_REFRESH_RATE
+        }
+
         displayManager?.registerDisplayListener(
             listener,
             handler,
-            EVENT_TYPE_DISPLAY_ADDED or EVENT_TYPE_DISPLAY_CHANGED or EVENT_TYPE_DISPLAY_REMOVED,
+            eventFlags,
             PRIVATE_EVENT_TYPE_DISPLAY_CONNECTION_CHANGED,
         )
     }

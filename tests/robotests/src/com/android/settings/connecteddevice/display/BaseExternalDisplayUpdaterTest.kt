@@ -46,6 +46,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers.any
+import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.eq
 import org.mockito.Mock
@@ -77,7 +78,7 @@ class BaseExternalDisplayUpdaterTest : ExternalDisplayTestBase() {
     @Test
     fun registerCallback_registersListener() {
         updater.registerCallback()
-        verify(mMockedInjector).registerDisplayListener(safeAny(DisplayManager.DisplayListener::class.java))
+        verify(mMockedInjector).registerDisplayListener(safeAny(DisplayManager.DisplayListener::class.java), anyBoolean())
     }
 
     @Test
