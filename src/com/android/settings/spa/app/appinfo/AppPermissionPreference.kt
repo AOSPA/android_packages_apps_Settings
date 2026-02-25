@@ -26,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.utils.HsuUtils
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spaprivileged.framework.compose.placeholder
@@ -62,9 +63,21 @@ private fun startManagePermissionsActivity(context: Context, app: ApplicationInf
     val intent = Intent(Intent.ACTION_MANAGE_APP_PERMISSIONS).apply {
         putExtra(Intent.EXTRA_PACKAGE_NAME, app.packageName)
         putExtra(EXTRA_HIDE_INFO_BUTTON, true)
+
+        // When managing an HSU app's permissions, pass the HSU user handle as EXTRA_USER
+        // so the permission controller knows which user's permissions to manage.
+        if (android.multiuser.Flags.hsuAppManagement() && HsuUtils.isHsuApp(context, app)) {
+            putExtra(Intent.EXTRA_USER, app.userHandle)
+        }
     }
     try {
-        context.startActivityAsUser(intent, app.userHandle)
+        if (android.multiuser.Flags.hsuAppManagement() && HsuUtils.isHsuApp(context, app)) {
+            // Start the activity in the current user's context. Headless System User runs in the
+            // background and does not have a UI context to launch activities.
+            context.startActivity(intent)
+        } else {
+            context.startActivityAsUser(intent, app.userHandle)
+        }
     } catch (e: ActivityNotFoundException) {
         Log.w(TAG, "No app can handle android.intent.action.MANAGE_APP_PERMISSIONS")
     }
