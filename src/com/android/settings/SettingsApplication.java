@@ -23,16 +23,12 @@
 package com.android.settings;
 
 import android.app.Application;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.IntentFilter;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.hardware.fingerprint.FingerprintManager;
 import android.net.Uri;
 import android.provider.Settings;
-import android.telephony.TelephonyManager;
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 
@@ -77,15 +73,6 @@ public class SettingsApplication extends Application {
     private WeakReference<SettingsHomepageActivity> mHomeActivity = new WeakReference<>(null);
     @Nullable volatile private BiometricsEnvironment mBiometricsEnvironment;
 
-    private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (action.equals(TelephonyManager.ACTION_MULTI_SIM_CONFIG_CHANGED)) {
-                System.exit(0);
-            }
-        }
-    };
-
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -128,9 +115,6 @@ public class SettingsApplication extends Application {
                 new DeviceProvisionedObserver().registerContentObserver();
             }
         }
-
-        registerReceiver(mBroadcastReceiver,
-                new IntentFilter(TelephonyManager.ACTION_MULTI_SIM_CONFIG_CHANGED));
 
         registerActivityLifecycleCallbacks(new DeveloperOptionsActivityLifecycle());
 
