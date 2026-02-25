@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -57,6 +58,8 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
+
 import com.android.settings.R;
 import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
@@ -67,6 +70,7 @@ import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.wifitrackerlib.WifiEntry;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.common.collect.ImmutableList;
 
 import org.junit.After;
@@ -1396,6 +1400,36 @@ public class WifiConfigController2Test {
         mController.setAnonymousIdVisible();
 
         verify(mController.mEapAnonymousView, never()).setText(any(String.class));
+    }
+
+    @Test
+    public void verifyPasswordAccessibilityDelegate_removesPasswordPrefix() {
+        Context themeContext = new android.view.ContextThemeWrapper(mContext,
+                androidx.appcompat.R.style.Theme_AppCompat);
+        TextInputLayout realLayout = new TextInputLayout(themeContext);
+        View mockHost = mock(View.class);
+        Context mockContext = mock(Context.class);
+        AccessibilityNodeInfoCompat mockInfo = mock(AccessibilityNodeInfoCompat.class);
+
+        when(mockHost.getContext()).thenReturn(mockContext);
+        when(mockContext.getString(R.string.wifi_password)).thenReturn("Password");
+
+        WifiConfigController2.PasswordTextInputLayoutAccessibilityDelegate delegate =
+                new WifiConfigController2.PasswordTextInputLayoutAccessibilityDelegate(realLayout);
+
+        when(mockInfo.getText()).thenReturn("Password1234");
+        delegate.onInitializeAccessibilityNodeInfo(mockHost, mockInfo);
+        verify(mockInfo).setText("1234");
+
+        reset(mockInfo);
+        when(mockInfo.getText()).thenReturn("password");
+        delegate.onInitializeAccessibilityNodeInfo(mockHost, mockInfo);
+        verify(mockInfo).setText(null);
+
+        reset(mockInfo);
+        when(mockInfo.getText()).thenReturn("MyNetwork");
+        delegate.onInitializeAccessibilityNodeInfo(mockHost, mockInfo);
+        verify(mockInfo, never()).setText(any());
     }
 
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,
