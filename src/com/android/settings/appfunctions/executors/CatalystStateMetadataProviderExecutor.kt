@@ -158,8 +158,8 @@ class CatalystStateMetadataProviderExecutor(
 
             val sensitivityLevel =
                 when (metadataProto.sensitivityLevel) {
-                    SensitivityLevel.LOW_SENSITIVITY -> Sensitivity.MUST_PROVIDE_UNDO
-                    SensitivityLevel.MEDIUM_SENSITIVITY -> Sensitivity.REQUIRES_CONFIRMATION
+                    SensitivityLevel.MUST_PROVIDE_UNDO -> Sensitivity.MUST_PROVIDE_UNDO
+                    SensitivityLevel.REQUIRES_CONFIRMATION -> Sensitivity.REQUIRES_CONFIRMATION
                     else -> null
                 }
 

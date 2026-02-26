@@ -48,11 +48,13 @@ import kotlinx.coroutines.launch
 class BluetoothTetherSwitchPreference(
     private val coroutineScope: CoroutineScope,
     private val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter(),
-) :     SwitchPreference(
+) :
+    SwitchPreference(
         key = KEY,
         purpose = R.string.enable_bluetooth_tethering_purpose,
         title = R.string.bluetooth_tether_checkbox_text,
-    ), PreferenceAvailabilityProvider {
+    ),
+    PreferenceAvailabilityProvider {
 
     override val summary: Int
         get() = R.string.bluetooth_tethering_subtext
@@ -101,7 +103,7 @@ class BluetoothTetherSwitchPreference(
         ReadWritePermit.ALLOW
 
     override val sensitivityLevel: Int
-        get() = SensitivityLevel.LOW_SENSITIVITY
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     @Suppress("UNCHECKED_CAST")
     private class BluetoothTetherStore(
