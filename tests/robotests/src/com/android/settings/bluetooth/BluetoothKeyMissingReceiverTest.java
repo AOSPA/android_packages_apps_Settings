@@ -128,7 +128,19 @@ public class BluetoothKeyMissingReceiverTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_BONDING_LOSS_UI_FIX)
+    public void broadcastReceiver_receiveKeyMissingIntentNewBondingLossUi_doNothing() {
+        Intent intent = spy(new Intent(BluetoothDevice.ACTION_KEY_MISSING));
+        when(intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)).thenReturn(mBluetoothDevice);
+        BluetoothKeyMissingReceiver bluetoothKeyMissingReceiver = getReceiver(intent);
+        bluetoothKeyMissingReceiver.onReceive(mContext, intent);
+
+        verifyNoInteractions(mNm);
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_BLUETOOTH_KEY_MISSING_DIALOG)
+    @DisableFlags(Flags.FLAG_ENABLE_BONDING_LOSS_UI_FIX)
     public void broadcastReceiver_exclusiveManaged_skip() throws Exception {
         Intent intent = spy(new Intent(BluetoothDevice.ACTION_KEY_MISSING));
         when(intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)).thenReturn(mBluetoothDevice);
@@ -148,6 +160,7 @@ public class BluetoothKeyMissingReceiverTest {
     @Test
     @Ignore("Cannot test reflection")
     @EnableFlags(Flags.FLAG_ENABLE_BLUETOOTH_KEY_MISSING_DIALOG)
+    @DisableFlags(Flags.FLAG_ENABLE_BONDING_LOSS_UI_FIX)
     public void broadcastReceiver_background_showNotification() {
         Intent intent = spy(new Intent(BluetoothDevice.ACTION_KEY_MISSING));
         when(intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)).thenReturn(mBluetoothDevice);
@@ -162,6 +175,7 @@ public class BluetoothKeyMissingReceiverTest {
     @Test
     @Ignore("Cannot test reflection")
     @EnableFlags(Flags.FLAG_ENABLE_BLUETOOTH_KEY_MISSING_DIALOG)
+    @DisableFlags(Flags.FLAG_ENABLE_BONDING_LOSS_UI_FIX)
     public void broadcastReceiver_foreground_receiveKeyMissingIntent_showDialog() {
         when(mLocalBtManager.isForegroundActivity()).thenReturn(true);
         Intent intent = spy(new Intent(BluetoothDevice.ACTION_KEY_MISSING));
