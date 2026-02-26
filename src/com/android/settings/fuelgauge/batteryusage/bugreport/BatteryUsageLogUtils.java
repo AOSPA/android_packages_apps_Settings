@@ -20,6 +20,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Base64;
 
+import androidx.annotation.Nullable;
+
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLog;
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry;
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
@@ -30,12 +32,17 @@ import com.google.common.annotations.VisibleForTesting;
 
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 /** Writes and reads a historical log of battery usage periodic job events. */
 public final class BatteryUsageLogUtils {
     private static final String TAG = "BatteryUsageLogUtils";
     private static final String BATTERY_USAGE_FILE_NAME = "battery_usage_historical_logs";
     private static final String LOGS_KEY = "battery_usage_logs_key";
+
+    @Nullable
+    private static Executor sExecutor = null;
 
     // 24 hours x 4 events every hour x 3 days
     static final int MAX_ENTRIES = 288;
@@ -51,19 +58,7 @@ public final class BatteryUsageLogUtils {
                         .setAction(action)
                         .setActionDescription(actionDescription)
                         .build();
-
-        final BatteryUsageHistoricalLog existingLog =
-                parseLogFromString(sharedPreferences.getString(LOGS_KEY, ""));
-        final BatteryUsageHistoricalLog.Builder newLogBuilder = existingLog.toBuilder();
-        // Prune old entries to limit the max logging data count.
-        if (existingLog.getLogEntryCount() >= MAX_ENTRIES) {
-            newLogBuilder.removeLogEntry(0);
-        }
-        newLogBuilder.addLogEntry(newLogEntry);
-
-        final String loggingContent =
-                Base64.encodeToString(newLogBuilder.build().toByteArray(), Base64.DEFAULT);
-        sharedPreferences.edit().putString(LOGS_KEY, loggingContent).apply();
+        getExecutor().execute(() -> writeLogInternal(sharedPreferences, newLogEntry));
     }
 
     /** Prints the historical log that has previously been stored by this utility. */
@@ -82,6 +77,35 @@ public final class BatteryUsageLogUtils {
     static SharedPreferences getSharedPreferences(Context context) {
         return context.getApplicationContext()
                 .getSharedPreferences(BATTERY_USAGE_FILE_NAME, Context.MODE_PRIVATE);
+    }
+
+    private static Executor getExecutor() {
+        if (sExecutor == null) {
+            sExecutor = Executors.newSingleThreadExecutor();
+        }
+        return sExecutor;
+    }
+
+    @VisibleForTesting
+    static void setExecutor(Executor executor) {
+        sExecutor = executor;
+    }
+
+    private static void writeLogInternal(final SharedPreferences sharedPreferences,
+                                         final BatteryUsageHistoricalLogEntry newLogEntry) {
+        final BatteryUsageHistoricalLog existingLog =
+                parseLogFromString(sharedPreferences.getString(LOGS_KEY, ""));
+        final BatteryUsageHistoricalLog.Builder newLogBuilder = existingLog.toBuilder();
+        // Prune old entries to limit the max logging data count.
+        if (existingLog.getLogEntryCount() >= MAX_ENTRIES) {
+            newLogBuilder.removeLogEntry(0);
+        }
+        newLogBuilder.addLogEntry(newLogEntry);
+
+        final String loggingContent =
+                Base64.encodeToString(newLogBuilder.build().toByteArray(), Base64.DEFAULT);
+
+        sharedPreferences.edit().putString(LOGS_KEY, loggingContent).commit();
     }
 
     private static BatteryUsageHistoricalLog parseLogFromString(String storedLogs) {
