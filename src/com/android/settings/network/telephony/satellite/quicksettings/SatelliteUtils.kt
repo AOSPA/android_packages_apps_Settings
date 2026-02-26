@@ -31,11 +31,17 @@ import android.util.Log
 /** Utility class for satellite/telephony-related functionalities. */
 object SatelliteUtils {
     /**
-     * Returns true if LTE-based NTN is supported by the device.
-     *
-     * Checks if LTE-based NTN is supported for any of the active subscription IDs.
+     * Returns true if LTE-based NTN is supported by the carrier associated with the given subId.
      */
-    fun isLteBasedNtnSupportedByDevice(context: Context): Boolean {
+    fun isLteBasedNtnSupported(context: Context, subId: Int): Boolean {
+        Log.i(TAG, "Checking LTE-based NTN support for SubId: $subId")
+        return isLteBasedNtnSupportedByCarrier(context, subId)
+    }
+
+    /**
+     * Returns true if LTE-based NTN is supported by any active subscription on the device.
+     */
+    fun isLteBasedNtnSupportedByAnySub(context: Context): Boolean {
         val subscriptionManager: SubscriptionManager? =
             context.getSystemService(SubscriptionManager::class.java)
         if (subscriptionManager == null) {
@@ -45,11 +51,7 @@ object SatelliteUtils {
         val activeSubscriptionInfoList =
             subscriptionManager.getActiveSubscriptionInfoList() ?: emptyList()
         for (subscriptionInfo in activeSubscriptionInfoList) {
-            Log.i(
-                TAG,
-                "Checking LTE-based NTN support for ${subscriptionInfo.getDisplayName()}, SubId: ${subscriptionInfo.subscriptionId}",
-            )
-            if (isLteBasedNtnSupportedByCarrier(context, subscriptionInfo.subscriptionId)) {
+            if (isLteBasedNtnSupported(context, subscriptionInfo.subscriptionId)) {
                 return true
             }
         }

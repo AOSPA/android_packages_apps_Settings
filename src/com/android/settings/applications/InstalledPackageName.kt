@@ -40,8 +40,12 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 class InstalledPackageName(private val flags: ApplicationInfoFlags? = null) :
     FiniteOptionsType<String> {
 
+    override fun getType(): Class<String> = String::class.java
+
     override fun getDescription(context: Context): String =
         context.getString(R.string.installed_package_name_type_description)
+
+    override fun getKey(): String = "InstalledPackageName:${flags ?: 0}"
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun getOptions(context: Context): List<Pair<String, String>> {

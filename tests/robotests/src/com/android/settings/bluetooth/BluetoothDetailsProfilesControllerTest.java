@@ -626,7 +626,6 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void classicAudioDeviceWithLeAudio_showLeAudioToggle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_HIDE_LE_AUDIO_TOGGLE_FOR_LE_AUDIO_ONLY_DEVICE);
         setupDevice(makeDefaultDeviceConfig());
         addLeAudioProfileToDevice(false);
         addA2dpProfileToDevice(false, false, false);
@@ -639,7 +638,6 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void leAudioOnlyDevice_hideLeAudioToggle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_HIDE_LE_AUDIO_TOGGLE_FOR_LE_AUDIO_ONLY_DEVICE);
         setupDevice(makeDefaultDeviceConfig());
         addLeAudioProfileToDevice(false);
 
@@ -651,7 +649,6 @@ public class BluetoothDetailsProfilesControllerTest extends BluetoothDetailsCont
 
     @Test
     public void leAudioOnlyDevice_becomesDualMode_showLeAudioToggle() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_HIDE_LE_AUDIO_TOGGLE_FOR_LE_AUDIO_ONLY_DEVICE);
         setupDevice(makeDefaultDeviceConfig());
         // Initially, it's an LE Audio only device.
         addLeAudioProfileToDevice(false);

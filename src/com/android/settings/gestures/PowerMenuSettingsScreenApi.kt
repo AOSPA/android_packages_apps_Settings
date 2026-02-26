@@ -61,7 +61,7 @@ class PowerMenuSettingsScreenApi() :
             ),
         ) {
             get {
-                execute {
+                executeEnum {
                     val invokeAssistant =
                         PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(context)
                     if (invokeAssistant) {
@@ -73,7 +73,7 @@ class PowerMenuSettingsScreenApi() :
             }
 
             set {
-                execute { value ->
+                executeEnum { value ->
                     when (value) {
                         LongPressPowerActions.POWER_MENU ->
                             PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(context)

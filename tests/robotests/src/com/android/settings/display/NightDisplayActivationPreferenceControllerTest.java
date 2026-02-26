@@ -46,6 +46,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class NightDisplayActivationPreferenceControllerTest {
@@ -160,3 +161,4 @@ public class NightDisplayActivationPreferenceControllerTest {
         assertThat(mColorDisplayManager.isNightDisplayActivated()).isEqualTo(false);
     }
 }
+// LINT.ThenChange(NightDisplayApiScreenTest.kt)

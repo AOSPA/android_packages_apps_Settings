@@ -20,13 +20,19 @@ import static com.android.settings.development.DevelopmentOptionsActivityRequest
         .REQUEST_CODE_ENABLE_OEM_UNLOCK;
 
 import static com.google.common.truth.Truth.assertThat;
-
+import static com.google.common.truth.Truth.assertWithMessage;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.content.Context;
@@ -36,13 +42,18 @@ import android.os.SystemProperties;
 import android.os.UserManager;
 import android.service.oemlock.OemLockManager;
 import android.telephony.TelephonyManager;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.PreferenceScreen;
 
+import com.android.settings.flags.Flags;
 import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Answers;
@@ -82,6 +93,9 @@ public class OemUnlockPreferenceControllerTest {
     @Mock
     private Resources mResources;
     private OemUnlockPreferenceController mController;
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Before
     public void setup() {
@@ -223,4 +237,59 @@ public class OemUnlockPreferenceControllerTest {
 
         verify(mOemLockManager).setOemUnlockAllowedByUser(true);
     }
+
+    @Test
+    @EnableFlags(Flags.FLAG_DEVELOPMENT_OEM_UNLOCK_ANR_FIX)
+    public void updateState_flagEnabled_shouldOffloadToBackgroundThread()
+            throws InterruptedException {
+        when(mTelephonyManager.getPhoneCount()).thenReturn(1);
+        final CountDownLatch latch = new CountDownLatch(1);
+        final AtomicBoolean calledViaBackgroundUtility = new AtomicBoolean(false);
+
+        when(mTelephonyManager.getAllowedCarriers(anyInt())).thenAnswer(invocation -> {
+            // Check if 'ThreadUtils.postOnBackgroundThread' is in the current execution path
+            for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+                if (element.getClassName().contains("ThreadUtils") &&
+                    element.getMethodName().contains("postOnBackgroundThread")) {
+                    calledViaBackgroundUtility.set(true);
+                    break;
+                }
+            }
+            latch.countDown(); // Signals background thread reached this point
+            return new ArrayList<>();
+        });
+
+        mController.updateState(mPreference);
+        boolean reached = latch.await(2, TimeUnit.SECONDS);
+        assertWithMessage("Background thread did not reach telephony call in time")
+            .that(reached).isTrue();
+        assertWithMessage("Telephony call was not offloaded to background utility (ANR Risk)")
+            .that(calledViaBackgroundUtility.get())
+            .isTrue();
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_DEVELOPMENT_OEM_UNLOCK_ANR_FIX)
+    public void updateState_flagDisabled_shouldNotOffloadToBackgroundThread() {
+        when(mTelephonyManager.getPhoneCount()).thenReturn(1);
+
+        final AtomicBoolean calledViaBackgroundUtility = new AtomicBoolean(false);
+        when(mTelephonyManager.getAllowedCarriers(anyInt())).thenAnswer(invocation -> {
+            // Check if 'ThreadUtils.postOnBackgroundThread' is in the current execution path
+            for (StackTraceElement element : Thread.currentThread().getStackTrace()) {
+                if (element.getClassName().contains("ThreadUtils") &&
+                    element.getMethodName().contains("postOnBackgroundThread")) {
+                    calledViaBackgroundUtility.set(true);
+                    break;
+                }
+            }
+            return new ArrayList<>();
+        });
+
+        mController.updateState(mPreference);
+        assertWithMessage("Telephony call was not offloaded to background utility (ANR Risk)")
+            .that(calledViaBackgroundUtility.get())
+            .isFalse();
+    }
+
 }

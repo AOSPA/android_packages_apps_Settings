@@ -120,7 +120,7 @@ class PowerMenuSettingsScreenApiTest {
         PowerMenuSettingsUtils.setLongPressPowerForAssistant(context)
 
         assertThat(apiTester.get<LongPressPowerActions>(CATEGORY_PREFERENCE_KEY))
-            .isEqualTo(LongPressPowerActions.ASSISTANT)
+            .isEqualTo(LongPressPowerActions.ASSISTANT.asApiValue)
     }
 
     @Test
@@ -130,14 +130,14 @@ class PowerMenuSettingsScreenApiTest {
         PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(context)
 
         assertThat(apiTester.get<LongPressPowerActions>(CATEGORY_PREFERENCE_KEY))
-            .isEqualTo(LongPressPowerActions.POWER_MENU)
+            .isEqualTo(LongPressPowerActions.POWER_MENU.asApiValue)
     }
 
     @Test
     fun longPressPowerCategory_setToAssistant() {
         setLongPressPowerSettingAvailability(true)
 
-        apiTester.set(CATEGORY_PREFERENCE_KEY, LongPressPowerActions.ASSISTANT)
+        apiTester.set(CATEGORY_PREFERENCE_KEY, LongPressPowerActions.ASSISTANT.asApiValue)
 
         assertThat(PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(context)).isTrue()
     }
@@ -146,7 +146,7 @@ class PowerMenuSettingsScreenApiTest {
     fun longPressPowerCategory_setToPowerMenu() {
         setLongPressPowerSettingAvailability(true)
 
-        apiTester.set(CATEGORY_PREFERENCE_KEY, LongPressPowerActions.POWER_MENU)
+        apiTester.set(CATEGORY_PREFERENCE_KEY, LongPressPowerActions.POWER_MENU.asApiValue)
 
         assertThat(PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(context)).isFalse()
     }

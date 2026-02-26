@@ -31,14 +31,20 @@ import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.PreferenceHierarchyNode
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.accessPreconditionsAsString
+import com.android.settingslib.metadata.getPreconditionsAsString
+import com.android.settingslib.metadata.setPreconditionsAsString
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isUiOnlyPreference
+import com.android.settingslib.metadata.preferencesapi.ApiPreference
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
@@ -135,7 +141,7 @@ class CatalystStateMetadataProviderExecutor(
             if(metadata.isUiOnlyPreference(context))
                 return@forEach
             // skip over explicitly disabled preferences
-            val metadataProto =
+            val metadataProto = try {
                 metadata.toProto(
                     context,
                     Binder.getCallingPid(),
@@ -144,6 +150,10 @@ class CatalystStateMetadataProviderExecutor(
                     isRoot = false,
                     flags = PreferenceGetterFlags.METADATA or PreferenceGetterFlags.VALUE_DESCRIPTOR,
                 )
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to convert preference to proto: ${metadata.key}", e)
+                return@forEach
+            }
 
             val sensitivityLevel =
                 when (metadataProto.sensitivityLevel) {
@@ -151,23 +161,38 @@ class CatalystStateMetadataProviderExecutor(
                     SensitivityLevel.MEDIUM_SENSITIVITY -> Sensitivity.REQUIRES_CONFIRMATION
                     else -> null
                 }
+
+            val writable = if (metadata is ApiPreference<*>) {
+                metadata.set != null
+            } else {
+                false // Legacy preferences are not writable
+            }
             deviceStateItemMetadataList.add(
                 DeviceStateItemMetadata(
                     // TODO: Expose parameterization
                     key = "${screenMetaData.key}/${metadataProto.key}",
                     purpose = metadataProto.getPurposeString(),
-                    name =
-                        LocalizedString(
+                    // Currently api-first screens and preferences do not have
+                    // titles
+                    name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*>) null
+                    else LocalizedString(
                             english = metadata.getPreferenceTitle(englishContext).toString(),
                             localized = metadata.getPreferenceTitle(context).toString(),
                         ),
                     sensitivity = sensitivityLevel,
-                    writable =
-                        ReadWritePermit.getWritePermit(metadataProto.readWritePermit) ==
-                            ReadWritePermit.ALLOW && metadataProto.persistent,
+                    writable = writable,
                     // TODO: properly expose possible values
                     possibleValues = metadataProto.valueDescriptor.toDeviceStateString(),
-                    hintText = config?.hintText(englishContext, metadata),
+
+                    hintText = listOfNotNull(
+                        metadata.accessPreconditionsAsString(context),
+                        metadata.getPreconditionsAsString(context),
+                        metadata.setPreconditionsAsString(context),
+                        config?.hintText(englishContext, metadata)
+                    ).joinToString(separator = "\n").replace("..", "."),
+                        // We replace .. with . because sometimes the strings
+                        // contain a full stop at the end and this joins with
+                        // the separator
                 )
             )
         }
@@ -181,7 +206,8 @@ class CatalystStateMetadataProviderExecutor(
                         // some text referring to that specific parameter which could confuse the agent.
                         if (isParameterized) ""
                             else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
-                        screenMetaData.getPreferencePurpose(context)
+                        screenMetaData.getPreferencePurpose(context),
+                        screenMetaData.accessPreconditionsAsString(context),
                     ).filter{it.isNotBlank()}.joinToString(". ")
                 ),
             deviceStateItemsMetadata = deviceStateItemMetadataList,
@@ -229,10 +255,14 @@ class CatalystStateMetadataProviderExecutor(
                 PreferenceValueDescriptorProto.TypeCase.FLOAT_TYPE -> "FLOAT"
                 PreferenceValueDescriptorProto.TypeCase.LONG_TYPE -> "LONG"
                 PreferenceValueDescriptorProto.TypeCase.RANGE_VALUE -> {
-                    val range = rangeValue
-                    val stepString =
-                        if (range.hasStep() && range.step != 0) ", step=${range.step}" else ""
-                    "INTEGER(min=${range.min}, max=${range.max}$stepString)"
+                    if (hasRangeValue()) {
+                        val range = rangeValue
+                        val stepString =
+                            if (range.hasStep() && range.step != 0) ", step=${range.step}" else ""
+                        "INTEGER(min=${range.min}, max=${range.max}$stepString)"
+                    } else {
+                        "INTEGER"
+                    }
                 }
                 else -> ""
             }
