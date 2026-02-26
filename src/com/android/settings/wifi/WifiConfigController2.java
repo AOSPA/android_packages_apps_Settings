@@ -49,6 +49,7 @@ import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -379,12 +380,16 @@ public class WifiConfigController2 implements TextWatcher,
             mSharedSwitch.setChecked(sharedDefault);
             boolean canModifyShareSettings =
                     WifiUtils.isSharedFieldEditable(mWifiEntry, mContext);
-            mSharedSwitch.setEnabled(canModifyShareSettings);
+            updateNetworkFieldState(R.id.sharing_toggle_fields, mSharedSwitch,
+                    canModifyShareSettings);
             mEditConfigurationSwitch.setChecked(editConfigDefault);
-            mEditConfigurationSwitch.setEnabled(sharedDefault
-                    && canModifyShareSettings);
+            updateNetworkFieldState(R.id.edit_wifi_network_configuration_fields,
+                    mEditConfigurationSwitch, sharedDefault && canModifyShareSettings);
 
             mSharedSwitch.setOnCheckedChangeListener(this);
+
+            setAccessibilityDelegateForNetworkFields();
+
             if (WifiUtils.isAtLoginScreen(mContext)
                     || mMode == WifiConfigUiBase2.MODE_MODIFY) {
                 setSharedNetworkFieldsInvisible();
@@ -1297,6 +1302,89 @@ public class WifiConfigController2 implements TextWatcher,
         }
     }
 
+    @VisibleForTesting
+    class SwitchRowAccessibilityDelegate extends View.AccessibilityDelegate {
+        private final MaterialSwitch mSwitch;
+        private final String mTitle;
+        private final String mSummary;
+
+        SwitchRowAccessibilityDelegate(MaterialSwitch switchView, String title, String summary) {
+            mSwitch = switchView;
+            mTitle = title;
+            mSummary = summary;
+        }
+
+        @Override
+        public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+            super.onInitializeAccessibilityNodeInfo(host, info);
+            // Force the "Switch" role.
+            info.setClassName(android.widget.Switch.class.getName());
+
+            if (mSwitch != null) {
+                info.setContentDescription(TextUtils.concat(mTitle, ". ", mSummary));
+                String stateText = mSwitch.isChecked()
+                        ? mContext.getString(R.string.switch_on_text)
+                        : mContext.getString(R.string.switch_off_text);
+                info.setStateDescription(stateText);
+            }
+        }
+    }
+
+    @VisibleForTesting
+    void updateNetworkFieldState(int containerId, MaterialSwitch switchView, boolean enabled) {
+        // Handle the actual switch widget.
+        if (switchView != null) {
+            switchView.setEnabled(enabled);
+        }
+
+        // Handle the container view and hide it from TalkBack if disabled.
+        View container = mView.findViewById(containerId);
+        if (container != null) {
+            container.setEnabled(enabled);
+            // Ensure the entire row is hidden from TalkBack if it's disabled.
+            container.setImportantForAccessibility(enabled
+                    ? View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
+                    : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+        }
+    }
+
+    @VisibleForTesting
+    void setupNetworkField(int viewId, MaterialSwitch switchView, String title, String summary) {
+        View view = mView.findViewById(viewId);
+
+        if (view != null && switchView != null) {
+            view.setAccessibilityDelegate(
+                    new SwitchRowAccessibilityDelegate(switchView, title, summary));
+
+            view.setOnClickListener(v -> {
+                switchView.toggle();
+                boolean newState = switchView.isChecked();
+
+                String stateText = newState
+                        ? mContext.getString(R.string.switch_on_text)
+                        : mContext.getString(R.string.switch_off_text);
+                v.setStateDescription(stateText);
+            });
+        }
+    }
+
+    @VisibleForTesting
+    void setAccessibilityDelegateForNetworkFields() {
+        setupNetworkField(
+                R.id.sharing_toggle_fields,
+                mSharedSwitch,
+                mContext.getString(R.string.wifi_share_preference_title),
+                mContext.getString(R.string.wifi_share_preference_summary)
+        );
+
+        setupNetworkField(
+                R.id.edit_wifi_network_configuration_fields,
+                mEditConfigurationSwitch,
+                mContext.getString(R.string.wifi_allow_edit_configuration_title),
+                mContext.getString(R.string.wifi_allow_edit_configuration_summary)
+        );
+    }
+
     /**
      * EAP-PWD valid fields include
      *   identity
@@ -1805,7 +1893,8 @@ public class WifiConfigController2 implements TextWatcher,
                 ((EditText) mPasswordView).setSelection(pos);
             }
         } else if (view.getId() == R.id.share_wifi_network) {
-            mEditConfigurationSwitch.setEnabled(isChecked);
+            updateNetworkFieldState(R.id.edit_wifi_network_configuration_fields,
+                    mEditConfigurationSwitch, isChecked);
             if (!isChecked) {
                 mEditConfigurationSwitch.setChecked(false);
             }
