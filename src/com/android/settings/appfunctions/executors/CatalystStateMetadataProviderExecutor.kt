@@ -251,32 +251,39 @@ class CatalystStateMetadataProviderExecutor(
 
         /** Returns an LLM readable string describing the value type. */
         internal fun PreferenceValueDescriptorProto.toDeviceStateString(): String {
-            if (possibleValuesCount > 0) {
-                return possibleValuesList.joinToString(separator = ", ") {
+            val typeString = if (possibleValuesCount > 0) {
+                possibleValuesList.joinToString(separator = ", ") {
                     "${it.value.toValueString()} (${it.description})"
                 }
-            }
-            return when (typeCase) {
-                PreferenceValueDescriptorProto.TypeCase.BOOLEAN_TYPE -> "BOOL"
-                PreferenceValueDescriptorProto.TypeCase.FLOAT_TYPE -> "FLOAT"
-                PreferenceValueDescriptorProto.TypeCase.LONG_TYPE -> "LONG"
-                PreferenceValueDescriptorProto.TypeCase.RANGE_VALUE -> {
-                    val range = rangeValue
-                    val filter = listOf(
-                        if (range.hasMin()) "min=${range.min}" else null,
-                        if (range.hasMax()) "max=${range.max}" else null,
-                        if (range.hasStep() && range.step > 1) "step=${range.step}" else null,
-                    ).filterNotNull().joinToString(separator = ", ")
+            } else {
+                when (typeCase) {
+                    PreferenceValueDescriptorProto.TypeCase.BOOLEAN_TYPE -> "BOOL"
+                    PreferenceValueDescriptorProto.TypeCase.FLOAT_TYPE -> "FLOAT"
+                    PreferenceValueDescriptorProto.TypeCase.LONG_TYPE -> "LONG"
+                    PreferenceValueDescriptorProto.TypeCase.RANGE_VALUE -> {
+                        val range = rangeValue
+                        val filter = listOf(
+                            if (range.hasMin()) "min=${range.min}" else null,
+                            if (range.hasMax()) "max=${range.max}" else null,
+                            if (range.hasStep() && range.step > 1) "step=${range.step}" else null,
+                        ).filterNotNull().joinToString(separator = ", ")
 
-                    if (filter.isEmpty()) {
-                        "INTEGER"
-                    } else {
-                        "INTEGER($filter)"
+                        if (filter.isEmpty()) {
+                            "INTEGER"
+                        } else {
+                            "INTEGER($filter)"
+                        }
                     }
-                }
-                PreferenceValueDescriptorProto.TypeCase.STRING_TYPE -> "STRING"
+                    PreferenceValueDescriptorProto.TypeCase.STRING_TYPE -> "STRING"
                 else -> ""
+                }
             }
+            val parametersString = if (hasParameters() && parameters.valuesMap.isNotEmpty()) {
+                " [" + parameters.valuesMap.entries.sortedBy { it.key }.joinToString(",") { "${it.key}=${it.value}" } + "]"
+            } else {
+                ""
+            }
+            return typeString + parametersString
         }
 
         private fun PreferenceValueProto.toValueString(): String =
