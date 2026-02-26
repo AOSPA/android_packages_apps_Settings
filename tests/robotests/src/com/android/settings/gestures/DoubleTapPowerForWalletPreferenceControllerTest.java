@@ -43,7 +43,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-// LINT.IfChange
 @RunWith(AndroidJUnit4.class)
 public class DoubleTapPowerForWalletPreferenceControllerTest {
 
@@ -169,4 +168,3 @@ public class DoubleTapPowerForWalletPreferenceControllerTest {
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 }
-// LINT.ThenChange(DoubleTapPowerForWalletPreferenceTest.kt)
