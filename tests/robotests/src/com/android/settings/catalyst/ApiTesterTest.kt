@@ -548,6 +548,30 @@ class ApiTesterTest {
     }
 
     @Test
+    fun launchIntent_onFailingPreconditionParameterizedScreen_throwsException() {
+        // Initialize screen with parameters that cause the screen precondition to fail.
+        testerFailingPreconditionsParameterized.initializeScreenParameters(
+            Parameters("package" to "parameter2")
+        )
+
+        // Verify that getLaunchIntent throws an exception due to the failed precondition.
+        assertFailsWith<HardwareUnsupportedException> {
+            testerFailingPreconditionsParameterized.getLaunchIntent()
+        }
+    }
+
+    @Test
+    fun launchIntent_onPassedPreconditionParameterizedScreen_isCorrect() {
+        // Initialize screen with parameters that allow the screen precondition to pass.
+        testerFailingPreconditionsParameterized.initializeScreenParameters(
+            Parameters("package" to "parameter1")
+        )
+
+        // Verify that getLaunchIntent returns a non-null intent.
+        Truth.assertThat(testerFailingPreconditionsParameterized.getLaunchIntent()).isNotNull()
+    }
+
+    @Test
     fun getPreferenceOptions_generatedType_areCorrect() {
         Truth.assertThat(tester.getPreferenceOptions<String>("preference_with_generated_type"))
             .containsExactly(("value1" to "first"), ("value2" to "second"))
