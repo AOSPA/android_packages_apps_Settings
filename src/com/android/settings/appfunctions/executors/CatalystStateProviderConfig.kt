@@ -124,6 +124,7 @@ import com.android.settings.gestures.DoubleTapApiScreen
 import com.android.settings.gestures.DoubleTapPowerScreen
 import com.android.settings.gestures.DoubleTwistGestureApiFirstScreen
 import com.android.settings.gestures.GestureSettingsApiScreen
+import com.android.settings.gestures.OneHandedApiScreen
 import com.android.settings.gestures.PickupGestureApiScreen
 import com.android.settings.gestures.PowerMenuSettingsScreenApi
 import com.android.settings.gestures.SwipeToNotificationApiScreen
@@ -644,6 +645,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =
