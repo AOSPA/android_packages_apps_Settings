@@ -22,6 +22,7 @@ import android.Manifest.permission.MANAGE_USERS
 import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ENABLE_SUPERVISION
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_PIN_SET_UP
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Intent
@@ -329,6 +330,10 @@ class SetupSupervisionActivity : FragmentActivity() {
             FeatureFactory.featureFactory.metricsFeatureProvider.action(
                 this,
                 ACTION_SUPERVISION_ENABLE_SUPERVISION,
+            )
+            FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                this,
+                ACTION_SUPERVISION_PIN_SET_UP,
             )
         }
 
