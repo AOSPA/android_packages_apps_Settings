@@ -1,29 +1,10 @@
-/*
- * Copyright (C) 2026 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.android.settings.troubleshooting
 
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo
 import android.content.res.Resources
-import android.os.Bundle
-import android.os.IBinder
 import android.os.ResultReceiver
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
@@ -36,10 +17,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
-import org.mockito.Mockito.any
-import org.mockito.Mockito.doAnswer
 import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
+import org.mockito.kotlin.any
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
@@ -49,43 +29,48 @@ class TroubleshootingServiceConnectionTest {
     @Mock private lateinit var mockResources: Resources
     @Mock private lateinit var mockPackageManager: PackageManager
     @Mock private lateinit var mockService: ITroubleshootingInfoProviderService
-    @Mock private lateinit var mockBinder: IBinder
     @Mock private lateinit var mockReceiver: ResultReceiver
+    @Mock
+    private lateinit var mockListener: TroubleshootingServiceConnection.ServiceConnectionListener
 
-    private val serviceName = "com.android.test/.TroubleshootingService"
+    private val servicePkg = "com.android.test"
+    private val serviceClass = "com.android.test.TroubleshootingService"
+    private val flattenedName = "$servicePkg/$serviceClass"
+
     private lateinit var connection: TroubleshootingServiceConnection
 
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
 
-        // Reset the companion object static variable
-        TroubleshootingServiceConnection.isTroubleshootingServiceExists = null
+        // Reset static cache for test isolation
+        TroubleshootingServiceConnection.cachedExists = null
 
         whenever(mockContext.resources).thenReturn(mockResources)
         whenever(mockContext.packageManager).thenReturn(mockPackageManager)
         whenever(mockResources.getString(R.string.config_connectivity_troubleshooting_service_name))
-            .thenReturn(serviceName)
+            .thenReturn(flattenedName)
 
         val receivers = mapOf("test_type" to mockReceiver)
         connection = TroubleshootingServiceConnection(receivers)
+        connection.serviceConnectionListener = mockListener
     }
 
     @Test
     fun isTroubleshootingServiceExists_whenServiceExists_returnsTrue() {
-        val componentName = ComponentName.unflattenFromString(serviceName)!!
-        whenever(mockPackageManager.getServiceInfo(componentName, 0)).thenReturn(ServiceInfo())
+        val component = ComponentName(servicePkg, serviceClass)
+        whenever(mockPackageManager.getServiceInfo(component, 0)).thenReturn(ServiceInfo())
 
         val result = connection.isTroubleshootingServiceExists(mockContext)
 
         assertTrue(result)
-        assertEquals(true, TroubleshootingServiceConnection.isTroubleshootingServiceExists)
+        assertEquals(true, TroubleshootingServiceConnection.cachedExists)
     }
 
     @Test
     fun isTroubleshootingServiceExists_whenServiceMissing_returnsFalse() {
-        val componentName = ComponentName.unflattenFromString(serviceName)!!
-        whenever(mockPackageManager.getServiceInfo(componentName, 0))
+        val component = ComponentName(servicePkg, serviceClass)
+        whenever(mockPackageManager.getServiceInfo(component, 0))
             .thenThrow(PackageManager.NameNotFoundException())
 
         val result = connection.isTroubleshootingServiceExists(mockContext)
@@ -94,35 +79,35 @@ class TroubleshootingServiceConnectionTest {
     }
 
     @Test
-    fun bindService_successfullyConnectsAndRegisters() {
-        val testBundle = Bundle().apply { putString("key", "value") }
+    fun bindService_successfulBind_callsContextBindService() {
+        whenever(mockContext.bindService(any(), any(), anyInt())).thenReturn(true)
 
-        whenever(mockService.getDiagnosticUiInfo("test_type")).thenReturn(testBundle)
+        connection.bindService(mockContext)
 
-        doAnswer { invocation ->
-                val conn = invocation.arguments[3] as TroubleshootingServiceConnection
-                conn.onServiceConnected(ComponentName.unflattenFromString(serviceName), mockBinder)
-                true
-            }
-            .whenever(mockContext)
-            .bindService(any(Intent::class.java), anyInt(), any(), any())
-
-        connection.onServiceConnected(null, mockBinder)
+        verify(mockContext).bindService(any(), any(), anyInt())
     }
 
     @Test
-    fun unbindService_unregistersCallbacks() {
-        // Setup internal state as if connected
-        val field =
-            TroubleshootingServiceConnection::class
-                .java
-                .getDeclaredField("mITroubleshootingInfoProviderService")
-        field.isAccessible = true
-        field.set(connection, mockService)
+    fun onServiceDisconnected_updatesStateAndNotifiesListener() {
+        connection.onServiceDisconnected(ComponentName(servicePkg, serviceClass))
+
+        verify(mockListener).onServiceConnectedState(false)
+    }
+
+    @Test
+    fun unbindService_unregistersCallbacksAndCleansUp() {
+        injectMockService(mockService)
 
         connection.unbindService(mockContext)
 
         verify(mockService).unregisterIssueDetectionCallback("test_type", mockReceiver)
         verify(mockContext).unbindService(connection)
+    }
+
+    private fun injectMockService(service: ITroubleshootingInfoProviderService?) {
+        val field =
+            TroubleshootingServiceConnection::class.java.getDeclaredField("troubleshootingService")
+        field.isAccessible = true
+        field.set(connection, service)
     }
 }
