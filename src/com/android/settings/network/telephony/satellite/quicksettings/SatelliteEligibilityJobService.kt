@@ -69,6 +69,12 @@ open class SatelliteEligibilityJobService : JobService() {
                 return
             }
 
+            // Guard against scheduling if the tile component has been disabled (e.g., by runtime modem check)
+            if (!SatelliteTileStateReceiver.isTileServiceEnabled(context)) {
+                Log.d(TAG, "SatelliteTileService component is disabled. Skipping job scheduling.")
+                return
+            }
+
             val subId = SubscriptionManager.getDefaultDataSubscriptionId()
             if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
                 Log.d(TAG, "Invalid subscription ID, skipping job scheduling.")
@@ -135,6 +141,11 @@ open class SatelliteEligibilityJobService : JobService() {
         // Guard against executing if the feature is disabled (kills legacy jobs)
         if (!SatelliteTileStateReceiver.isSatelliteTileFeatureEnabled(this)) {
             Log.d(TAG, "Feature disabled. Stopping job.")
+            return false // Job is done, do not reschedule
+        }
+
+        if (!SatelliteTileStateReceiver.isTileServiceEnabled(this)) {
+            Log.d(TAG, "SatelliteTileService component is disabled. Stopping job.")
             return false // Job is done, do not reschedule
         }
 
@@ -232,6 +243,13 @@ open class SatelliteEligibilityJobService : JobService() {
     }
 
     private fun showPromptAndFinish(params: JobParameters) {
+        if (!SatelliteTileStateReceiver.isTileServiceEnabled(this)) {
+            Log.w(TAG, "SatelliteTileService component is disabled. Aborting prompt.")
+            cleanup()
+            jobFinished(params, false)
+            return
+        }
+
         if (satelliteTilePromptUtils.shouldShowSatelliteTilePrompt(this)) {
             satelliteTilePromptUtils.showSatelliteTileAvailableNotification(this)
             satelliteTilePromptUtils.recordPromptShown(this)
