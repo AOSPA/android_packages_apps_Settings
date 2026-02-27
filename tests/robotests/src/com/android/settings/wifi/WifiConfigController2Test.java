@@ -193,7 +193,8 @@ public class WifiConfigController2Test {
     private void createController(
             WifiEntry mWifiEntry, int modeConnect, boolean hideMeteredAndPrivacy) {
         mController = new WifiConfigController2(mConfigUiBase, mView, mWifiEntry,
-                modeConnect, hideMeteredAndPrivacy, mWifiManager, mAndroidKeystoreAliasLoader);
+                modeConnect, hideMeteredAndPrivacy, /*showFocusRingIndicator=*/false,
+                mWifiManager, mAndroidKeystoreAliasLoader);
     }
 
     @Test
@@ -1458,6 +1459,29 @@ public class WifiConfigController2Test {
         assertThat(switchView.isChecked()).isTrue();
         assertThat(container.getStateDescription().toString())
                 .isEqualTo(mContext.getString(R.string.switch_on_text));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void shouldShowFocusRingsInSuw_showFocusRing() {
+        mController = new WifiConfigController2(mConfigUiBase, mView, null,
+                WifiConfigUiBase2.MODE_CONNECT, false, /*showFocusRingIndicator=*/true,
+                mWifiManager, mAndroidKeystoreAliasLoader);
+
+        assertThat(mView.findViewById(R.id.sharing_toggle_fields).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.edit_wifi_network_configuration_fields).getForeground())
+                .isNotNull();
+        assertThat(mView.findViewById(R.id.password_input_layout)
+                .findViewById(com.google.android.material.R.id.text_input_end_icon)
+                .getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.ssid_scanner_button).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.ip_settings).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.proxy_settings).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.metered_settings).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.security).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.advanced_options_layout).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.privacy_settings).getForeground()).isNotNull();
+        assertThat(mHiddenSettingsSpinner.getForeground()).isNotNull();
     }
 
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,

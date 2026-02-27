@@ -77,6 +77,7 @@ public final class FocusIndicatorDrawable {
         private float[] mCornerRadiiPx;
         private int mOutlineWidthDp = DEFAULT_OUTLINE_WIDTH_DP;
         private int mInsetDp = DEFAULT_INSET_DP;
+        private int[] mStateSet = new int[] {android.R.attr.state_focused};
 
         private @ColorInt int mColor;
 
@@ -104,6 +105,17 @@ public final class FocusIndicatorDrawable {
          */
         public Builder withVerticalPaddingAdjustment(int dp) {
             mVerticalPaddingAdjustmentDp = dp;
+            return this;
+        }
+
+        /**
+         * Sets the state set for which the indicator drawable will be shown.
+         * Defaults to {android.R.attr.state_focused}.
+         *
+         * @param stateSet The array of state attributes.
+         */
+        public Builder withStateSet(int[] stateSet) {
+            mStateSet = stateSet;
             return this;
         }
 
@@ -259,8 +271,7 @@ public final class FocusIndicatorDrawable {
             Drawable defaultDrawable = new ColorDrawable(Color.TRANSPARENT);
 
             StateListDrawable foregroundStateList = new StateListDrawable();
-            foregroundStateList.addState(
-                    new int[] {android.R.attr.state_focused}, focusedDrawable);
+            foregroundStateList.addState(mStateSet, focusedDrawable);
             foregroundStateList.addState(StateSet.WILD_CARD, defaultDrawable);
 
             return foregroundStateList;
