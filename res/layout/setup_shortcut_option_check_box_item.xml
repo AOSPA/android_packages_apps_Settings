@@ -70,7 +70,7 @@
         android:layout_gravity="center_vertical"
         android:gravity="start">
 
-        <com.airbnb.lottie.LottieAnimationView
+        <ImageView
             android:id="@+id/sud_items_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,5 +79,13 @@
             android:scaleType="fitCenter" />
 
     </FrameLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/sud_items_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/settingslib_expressive_space_small1"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter" />
 
 </LinearLayout>
