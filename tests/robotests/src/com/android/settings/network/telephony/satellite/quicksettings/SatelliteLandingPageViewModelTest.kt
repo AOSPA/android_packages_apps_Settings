@@ -142,6 +142,59 @@ class SatelliteLandingPageViewModelTest {
     }
 
     @Test
+    fun isTryADemoButtonEnabled_whenLoading_isFalse() = runTest {
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        // Use a separate dispatcher to control background work execution
+        val delayedDispatcher = StandardTestDispatcher()
+        val viewModel =
+            SatelliteLandingPageViewModel(
+                context,
+                appsRepository,
+                packageManager,
+                satelliteStateRepository,
+                delayedDispatcher,
+            )
+
+        val job = launch { viewModel.isTryADemoButtonEnabled.collect {} }
+
+        // Execute main thread work (init block), but background work will be suspended
+        waitForAsync()
+
+        // Button should be disabled while loading
+        assertThat(viewModel.isTryADemoButtonEnabled.value).isFalse()
+
+        // Complete the background work. There are two background operations in refreshInternal,
+        // so we need to drain the queue twice.
+        delayedDispatcher.scheduler.advanceUntilIdle()
+        waitForAsync()
+
+        delayedDispatcher.scheduler.advanceUntilIdle()
+        waitForAsync()
+
+        // Button should be enabled now
+        assertThat(viewModel.isTryADemoButtonEnabled.value).isTrue()
+        job.cancel()
+    }
+
+    @Test
+    fun isTryADemoButtonEnabled_whenRegionRestricted_isFalse() = runTest {
+        setLteNtnSupported(true)
+        `when`(satelliteStateRepository.getAttachRestrictionReasons(SUB_ID))
+            .thenReturn(
+                setOf(SatelliteManager.SATELLITE_COMMUNICATION_RESTRICTION_REASON_GEOLOCATION)
+            )
+
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        val viewModel = createViewModel()
+
+        val job = launch { viewModel.isTryADemoButtonEnabled.collect {} }
+        waitForAsync()
+
+        assertThat(viewModel.isTryADemoButtonEnabled.value).isFalse()
+        job.cancel()
+    }
+
+    @Test
     fun areAppsEnabled_whenSatelliteActive_isTrue() = runTest {
         satelliteStatusFlow.value = SatelliteStatus.ACTIVE
         val viewModel = createViewModel()
