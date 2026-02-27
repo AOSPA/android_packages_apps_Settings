@@ -17,38 +17,37 @@
 package com.android.settings.accessibility.setupwizard
 
 import android.content.Context
+import com.android.settings.R
 import com.android.settings.accessibility.setupwizard.items.IllustrationCheckBoxItem
-import com.android.settings.accessibility.shortcuts.ui.KeyboardShortcutPreference
+import com.android.settings.accessibility.shortcuts.ui.FloatingButtonShortcutPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.google.android.setupdesign.items.Item
 
-/** Controller for the edit keyboard shortcut item in the Accessibility Setup Wizard. */
-class EditKeyboardShortcutController(
+/** Controller for the edit floating button shortcut item in the Accessibility Setup Wizard. */
+class EditFloatingButtonShortcutController(
     context: Context,
     item: Item,
-    private val metadata: KeyboardShortcutPreference,
+    private val metadata: FloatingButtonShortcutPreference,
     dataStore: KeyValueStore,
 ) : BaseShortcutController(context, item, dataStore, KEY) {
 
     override fun updateItemVisuals(item: IllustrationCheckBoxItem) {
-        with(metadata) {
-            item.summary = getSummary(context)
-            item.imageResId = getIconResId(context)
-        }
+        item.summary = metadata.getSummary(context)
+        item.imageRawResId = R.raw.accessibility_shortcut_type_fab
     }
 
     companion object {
-        const val KEY = "shortcut_keyboard_pref"
+        const val KEY = "shortcut_fab_pref"
 
-        /** Creates a new instance of [EditKeyboardShortcutController]. */
+        /** Creates a new instance of [EditFloatingButtonShortcutController]. */
         @JvmStatic
         fun create(
             context: Context,
             item: Item,
             targets: Set<String>,
-        ): EditKeyboardShortcutController {
-            val metadata = KeyboardShortcutPreference(context, targets)
-            return EditKeyboardShortcutController(
+        ): EditFloatingButtonShortcutController {
+            val metadata = FloatingButtonShortcutPreference(context, targets)
+            return EditFloatingButtonShortcutController(
                 context,
                 item,
                 metadata,
