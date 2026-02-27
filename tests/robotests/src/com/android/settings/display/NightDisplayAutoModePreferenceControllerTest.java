@@ -43,6 +43,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class NightDisplayAutoModePreferenceControllerTest {
@@ -118,3 +119,4 @@ public class NightDisplayAutoModePreferenceControllerTest {
                 .isEqualTo(ColorDisplayManager.AUTO_MODE_TWILIGHT);
     }
 }
+// LINT.ThenChange(NightDisplayApiScreenTest.kt)

@@ -19,15 +19,19 @@ package com.android.settings.display
 import android.Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS
 import android.content.Context
 import android.hardware.display.ColorDisplayManager
+import android.location.LocationManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
+import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
+import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.IntInRange
 import kotlin.math.roundToInt
 
@@ -91,10 +95,43 @@ class NightDisplayApiScreen :
                 execute { value -> context.setNightDisplayIntensity(value) }
             }
         }
+
+        preference(
+            key = NIGHT_DISPLAY_AUTO_MODE_KEY,
+            purpose = R.string.night_display_auto_mode_purpose,
+            type =
+                CustomEnum(
+                    enumClass = NightDisplayAutoMode::class,
+                    description = R.string.night_display_auto_mode_description_purpose,
+                ),
+        ) {
+            get {
+                permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
+                executeEnum { context.getNightDisplayAutoMode() }
+            }
+
+            set {
+                permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
+                valuePreconditions(R.string.night_display_auto_mode_preconditions) { value ->
+                    if (
+                        value == ColorDisplayManager.AUTO_MODE_TWILIGHT &&
+                            !context.isLocationEnabled
+                    ) {
+                        Disallowed(R.string.night_display_auto_mode_twilight_location_disabled)
+                    } else {
+                        Allowed
+                    }
+                }
+                executeEnum { value -> context.colorDisplayManager.setNightDisplayAutoMode(value.asApiValue) }
+            }
+        }
     }
 
     private val Context.colorDisplayManager: ColorDisplayManager
         get() = getSystemService(ColorDisplayManager::class.java)!!
+
+    private val Context.isLocationEnabled: Boolean
+        get() = getSystemService(LocationManager::class.java).isLocationEnabled
 
     private fun Context.getNightDisplayIntensity(): Int {
         val min = ColorDisplayManager.getMinimumColorTemperature(this)
@@ -114,11 +151,25 @@ class NightDisplayApiScreen :
         colorDisplayManager.setNightDisplayColorTemperature(temperature.roundToInt())
     }
 
+    private fun Context.getNightDisplayAutoMode(): NightDisplayAutoMode =
+        colorDisplayManager.getNightDisplayAutoMode().let { apiValue ->
+            NightDisplayAutoMode.entries.first { it.asApiValue == apiValue }
+        } ?: NightDisplayAutoMode.NEVER
+
     companion object {
         const val KEY = "api_night_display"
         const val NIGHT_DISPLAY_ACTIVATED_KEY = "night_display_activated"
         const val NIGHT_DISPLAY_TEMPERATURE_KEY = "night_display_temperature"
+        const val NIGHT_DISPLAY_AUTO_MODE_KEY = "night_display_auto_mode"
     }
 }
+
+enum class NightDisplayAutoMode(override val asApiValue: Int, override val purpose: Int) :
+    EnumApiWithRes<Int> {
+    NEVER(ColorDisplayManager.AUTO_MODE_DISABLED, R.string.night_display_auto_mode_never),
+    CUSTOM_TIME(ColorDisplayManager.AUTO_MODE_CUSTOM_TIME, R.string.night_display_auto_mode_custom),
+    TWILIGHT(ColorDisplayManager.AUTO_MODE_TWILIGHT, R.string.night_display_auto_mode_twilight),
+}
 // LINT.ThenChange(NightDisplaySettings.java, NightDisplayScreen.kt,
-// NightDisplayActivationPreferenceController.java, NightDisplayIntensityPreferenceController.java)
+// NightDisplayActivationPreferenceController.java, NightDisplayIntensityPreferenceController.java,
+// NightDisplayAutoModePreferenceController.java)
