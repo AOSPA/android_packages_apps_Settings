@@ -67,6 +67,30 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     @VisibleForTesting
     long mPreviousFunction;
 
+    private boolean mRetryingEnableTethering = false;
+    private int mTetheringEnableRetryCount = 0;
+
+    // UsbDeviceManager's SET_FUNCTIONS_TIMEOUT_MS is 3000ms. When we pass that timeout, additional
+    // setCurrentFunctions() will be called to revert the function, which might complicate the retry
+    // flow. To avoid that, we keep the window for retrying shorter.
+    @VisibleForTesting
+    static final long RETRY_TETHERING_TIMEOUT_MS = 2000;
+
+    @VisibleForTesting
+    static final int MAX_TETHERING_ENABLE_RETRY_COUNT = 3;
+
+    private final Runnable mRetryingTetheringTimeout = () -> {
+        if (mRetryingEnableTethering) {
+            Log.w(TAG, "Timeout waiting for USB function to get back to None for tethering retry");
+            mRetryingEnableTethering = false;
+            // `refresh()` might be delayed if broadcast is delayed for some reason, so we double
+            // check the current data role here.
+            // The logic in UsbBackend.getDataRole() already makes sure the port is connected.
+            boolean shouldEnable = mUsbBackend.getDataRole() == DATA_ROLE_DEVICE;
+            requireNonNull(mProfilesContainer).setEnabled(shouldEnable);
+        }
+    };
+
     public UsbDetailsFunctionsController(
             Context context, UsbDetailsFragment fragment, UsbBackend backend) {
         super(context, fragment, backend);
@@ -118,6 +142,25 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
                             + ", dataRole : "
                             + dataRole);
         }
+
+        if (mRetryingEnableTethering) {
+            // Retry tethering if we are "pretty sure" that we get here due to a duplicate tethering
+            // request. Any other reasons for the refresh should stop the retry flow.
+            mRetryingEnableTethering = false;
+            mHandler.removeCallbacks(mRetryingTetheringTimeout);
+            if (functions == UsbManager.FUNCTION_NONE) {
+                // USB function might have been set to None by `mTetheringManager.stopTethering()`.
+                // Double check other conditions, as the function might have been set to None due to
+                // a USB disconnection.
+                if (connected && dataRole == DATA_ROLE_DEVICE) {
+                    Log.w(TAG, "Retrying tethering due to duplicated tethering request.");
+                    requireNonNull(mProfilesContainer).setEnabled(true);
+                    startTethering();
+                    return;
+                }
+            }
+        }
+
         if (!connected || dataRole != DATA_ROLE_DEVICE) {
             requireNonNull(mProfilesContainer).setEnabled(false);
         } else {
@@ -190,13 +233,17 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
         if (function == UsbManager.FUNCTION_RNDIS || function == UsbManager.FUNCTION_NCM) {
             // We need to have entitlement check for usb tethering, so use API in
             // TetheringManager.
-            mTetheringManager.startTethering(
-                    TetheringManager.TETHERING_USB,
-                    new HandlerExecutor(mHandler),
-                    mOnStartTetheringCallback);
+            startTethering();
         } else {
             mUsbBackend.setCurrentFunctions(function);
         }
+    }
+
+    private void startTethering() {
+        mTetheringManager.startTethering(
+                TetheringManager.TETHERING_USB,
+                new HandlerExecutor(mHandler),
+                mOnStartTetheringCallback);
     }
 
     private boolean isAuthRequired(long function) {
@@ -235,9 +282,46 @@ public class UsbDetailsFunctionsController extends UsbDetailsController
     final class OnStartTetheringCallback implements TetheringManager.StartTetheringCallback {
 
         @Override
+        public void onTetheringStarted() {
+            Log.i(TAG, "onTetheringStarted()");
+            mTetheringEnableRetryCount = 0;
+        }
+
+        @Override
         public void onTetheringFailed(int error) {
             Log.w(TAG, "onTetheringFailed() error : " + error);
             long currentOption = mUsbBackend.getCurrentFunctions();
+
+            if (error == TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST
+                    && mTetheringEnableRetryCount < MAX_TETHERING_ENABLE_RETRY_COUNT) {
+                mTetheringEnableRetryCount++;
+
+                // b/470201989 If we get into this state, the "USB Tethering" option will not be
+                // usable anymore. Until we have an official fix, we will try to work-around by
+                // stopping tethering and retrying to remove the stuck tethering request.
+                mTetheringManager.stopTethering(TetheringManager.TETHERING_USB);
+                if (currentOption == UsbManager.FUNCTION_NONE) {
+                    // The API to stop tethering will set USB function to None, but if we get to
+                    // this by switching from none -> ncm, setting USB function to none again will
+                    // be a no-op, we can just start tethering again immediately.
+                    startTethering();
+                } else {
+                    // The API to stop tethering will set USB function to None, so we will start the
+                    // retry when the `refresh()` function reports that.
+                    //
+                    // The UI is disabled during the retry flow to avoid further complications. If
+                    // user changes USB function during this flow, the set USB function called by
+                    // the UI will race with the one called by `stopTethering()`. This will not
+                    // likely to cause any functional issues, but the `previousFunction` might be
+                    // set incorrectly, leading to temporary inconsistencies in the UI (which will
+                    // eventually self-correct when the final USB state broadcast is received).
+                    mRetryingEnableTethering = true;
+                    requireNonNull(mProfilesContainer).setEnabled(false);
+                    mHandler.postDelayed(mRetryingTetheringTimeout, RETRY_TETHERING_TIMEOUT_MS);
+                }
+                return;
+            }
+
             Integer titleId = FUNCTIONS_MAP.get(currentOption);
             if (titleId != null) {
                 getProfilePreference(UsbBackend.usbFunctionsToString(currentOption), titleId)

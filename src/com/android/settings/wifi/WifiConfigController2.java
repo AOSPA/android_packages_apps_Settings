@@ -63,6 +63,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 import com.android.net.module.util.NetUtils;
 import com.android.net.module.util.ProxyUtils;
@@ -85,6 +86,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -94,6 +96,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -318,6 +321,8 @@ public class WifiConfigController2 implements TextWatcher,
         mSsidInputGroup = new TextInputGroup(mView, R.id.ssid_layout, R.id.ssid,
                 R.string.wifi_ssid_hint);
         mPasswordInput = new WifiPasswordInput(mView, mWifiEntrySecurity);
+        mPasswordInput.getLayout().setTextInputAccessibilityDelegate(
+                new PasswordTextInputLayoutAccessibilityDelegate(mPasswordInput.getLayout()));
         mValidator.addTextInput(mSsidInputGroup);
         mValidator.addTextInput(mPasswordInput);
 
@@ -1266,6 +1271,30 @@ public class WifiConfigController2 implements TextWatcher,
         mEapMinTlsVerSpinner.setAccessibilityDelegate(selectedEventBlocker);
         mEapOcspSpinner.setAccessibilityDelegate(selectedEventBlocker);
         mEapUserCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
+    }
+
+    @VisibleForTesting
+    static class PasswordTextInputLayoutAccessibilityDelegate
+            extends TextInputLayout.AccessibilityDelegate {
+        PasswordTextInputLayoutAccessibilityDelegate(TextInputLayout layout) {
+            super(layout);
+        }
+
+        @Override
+        public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
+            super.onInitializeAccessibilityNodeInfo(host, info);
+
+            final String passwordText = host.getContext().getString(R.string.wifi_password);
+            final CharSequence currentText = info.getText();
+
+            if (currentText != null && currentText.toString().toLowerCase(Locale.getDefault())
+                    .startsWith(passwordText.toLowerCase(Locale.getDefault()))) {
+                // If the text starts with "password", remove it.
+                // This prevents TalkBack from saying "Password [Role] Password [Hint]".
+                String newText = currentText.toString().substring(passwordText.length()).trim();
+                info.setText(TextUtils.isEmpty(newText) ? null : newText);
+            }
+        }
     }
 
     /**

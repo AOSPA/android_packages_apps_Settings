@@ -39,6 +39,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.KeyParametersSchema
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateProviderExecutorTest {
@@ -394,6 +395,32 @@ class CatalystStateProviderExecutorTest {
         val item = result.states[0].deviceStateItems[0]
         assertThat(item.key).isEqualTo("api_first_screen/writable_pref")
         assertThat(item.name).isNull()
+    }
+
+    @Test
+    fun execute_onScreenWithKeyParameters_includesKeyParametersInDescription() = runTest {
+        setRegistryFactories(ScreenWithKeyParameters())
+        val executor = CatalystStateProviderExecutor(
+            buildConfig("screen_with_params", listOf()),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+
+        assertThat(result.states).hasSize(1)
+        assertThat(result.states[0].description).endsWith("[param=value]")
+    }
+
+    private class ScreenWithKeyParameters : PreferencesApiScreen(
+        key = "screen_with_params",
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = Fragment::class,
+        purpose = R.string.preference_screen_purpose,
+    ) {
+        override val keyParameters = KeyParametersSchema {
+            parameter("param", R.string.preference_purpose)
+        }.prepare("param" to "value")
     }
 
     private class ApiFirstTestScreen : PreferencesApiScreen(
