@@ -15,22 +15,89 @@
  */
 package com.android.settings.display
 
+import android.content.Context
+import android.hardware.display.ColorDisplayManager
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.display.ColorModeApiScreen.Companion.COLOR_MODE_KEY
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
+import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils2.ApiTester
+import com.android.settings.testutils2.FailedPreconditionException
+import com.android.settingslib.testutils.shadow.ShadowColorDisplayManager
 import com.google.common.truth.Truth.assertThat
+import org.junit.Assert.assertThrows
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
+import org.robolectric.shadow.api.Shadow
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
+@Config(shadows = [ShadowColorDisplayManager::class, SettingsShadowResources::class])
 class ColorModeApiScreenTest {
     private val tester = ApiTester(ColorModeApiScreen())
+    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val CONFIG_AVAILABLE_COLOR_MODES_RES_ID =
+        com.android.internal.R.array.config_availableColorModes
+
     @get:Rule val setFlagsRule = SetFlagsRule()
+
+    private lateinit var shadowColorDisplayManager: ShadowColorDisplayManager
+    private var originalAccessibilityTransformsEnabledValue: Int = 0
+
+    @Before
+    fun setUp() {
+        originalAccessibilityTransformsEnabledValue =
+            Settings.Secure.getInt(
+                context.contentResolver,
+                Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED,
+                0,
+            )
+        SettingsShadowResources.overrideResource(
+            CONFIG_AVAILABLE_COLOR_MODES_RES_ID,
+            intArrayOf(
+                ColorDisplayManager.COLOR_MODE_NATURAL,
+                ColorDisplayManager.COLOR_MODE_BOOSTED,
+                ColorDisplayManager.COLOR_MODE_SATURATED,
+                ColorDisplayManager.COLOR_MODE_AUTOMATIC,
+            ),
+        )
+        shadowColorDisplayManager =
+            Shadow.extract(context.getSystemService(ColorDisplayManager::class.java))
+        shadowColorDisplayManager.setDeviceColorManaged(true)
+        setAccessibilityTransformsEnabled(false)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getLaunchIntent_isNotNull() {
+        assertThat(tester.getLaunchIntent()).isNotNull()
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getLaunchIntent_accessibilityTransformsEnabled_disallowed() {
+        shadowColorDisplayManager.setDeviceColorManaged(true)
+        setAccessibilityTransformsEnabled(true)
+
+        assertThrows(FailedPreconditionException::class.java) { tester.getLaunchIntent() }
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getLaunchIntent_deviceColorManaged_disallowed() {
+        shadowColorDisplayManager.setDeviceColorManaged(false)
+        setAccessibilityTransformsEnabled(false)
+
+        assertThrows(FailedPreconditionException::class.java) { tester.getLaunchIntent() }
+    }
 
     @Test
     @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
@@ -42,6 +109,67 @@ class ColorModeApiScreenTest {
     @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getSetting() {
+        shadowColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_BOOSTED)
+        shadowColorDisplayManager.setDeviceColorManaged(true)
+        setAccessibilityTransformsEnabled(false)
+
+        assertThat(tester.get<Int>(COLOR_MODE_KEY))
+            .isEqualTo(ColorDisplayManager.COLOR_MODE_BOOSTED)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getSetting_notSet_returnsDefault() {
+        assertThat(tester.get<Int>(COLOR_MODE_KEY))
+            .isEqualTo(ColorDisplayManager.COLOR_MODE_NATURAL)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun setSetting() {
+        shadowColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_BOOSTED)
+        shadowColorDisplayManager.setDeviceColorManaged(true)
+        setAccessibilityTransformsEnabled(false)
+
+        tester.set(COLOR_MODE_KEY, ColorDisplayManager.COLOR_MODE_SATURATED)
+
+        assertThat(shadowColorDisplayManager.colorMode)
+            .isEqualTo(ColorDisplayManager.COLOR_MODE_SATURATED)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun setSetting_accessibilityTransformsEnabled_disallowed() {
+        shadowColorDisplayManager.setDeviceColorManaged(true)
+        setAccessibilityTransformsEnabled(true)
+
+        assertThrows(FailedPreconditionException::class.java) {
+            tester.set(COLOR_MODE_KEY, ColorDisplayManager.COLOR_MODE_SATURATED)
+        }
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun setSetting_deviceColorManaged_disallowed() {
+        shadowColorDisplayManager.setDeviceColorManaged(false)
+        setAccessibilityTransformsEnabled(false)
+
+        assertThrows(FailedPreconditionException::class.java) {
+            tester.set(COLOR_MODE_KEY, ColorDisplayManager.COLOR_MODE_SATURATED)
+        }
+    }
+
+    fun setAccessibilityTransformsEnabled(enabled: Boolean) {
+        Settings.Secure.putInt(
+            context.contentResolver,
+            Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED,
+            if (enabled) 1 else 0,
+        )
     }
 }
 // LINT.ThenChange(ColorModePreferenceFragmentTest.java, ColorModeScreenTest.kt)
