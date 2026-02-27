@@ -23,6 +23,7 @@ import com.android.settings.Utils
 import com.android.settings.contract.KEY_DIAL_PAD_TONE
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -33,14 +34,14 @@ class DialPadTonePreference :
     SwitchPreference(
         key = DTMF_TONE_WHEN_DIALING,
         purpose = R.string.dtmf_tone_purpose,
-        title = R.string.dial_pad_tones_title
+        title = R.string.dial_pad_tones_title,
     ),
     PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider {
     override val preferenceActionMetrics: Int
         get() = ACTION_DIAL_PAD_TONE
 
-    override fun tags(context: Context) = arrayOf(KEY_DIAL_PAD_TONE)
+    override fun tags(context: Context) = arrayOf(KEY_DIAL_PAD_TONE, MUSTPASS_SET)
 
     override fun storage(context: Context) = SettingsSystemStore.get(context)
 

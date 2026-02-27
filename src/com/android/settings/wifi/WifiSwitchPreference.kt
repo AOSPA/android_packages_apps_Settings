@@ -47,6 +47,7 @@ import com.android.settingslib.WirelessUtils
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -80,7 +81,7 @@ class WifiSwitchPreference(private val scope: CoroutineScope) :
     override val preferenceActionMetrics: Int
         get() = ACTION_WIFI
 
-    override fun tags(context: Context) = arrayOf(KEY_WIFI)
+    override fun tags(context: Context) = arrayOf(KEY_WIFI, MUSTPASS_SET)
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
