@@ -51,6 +51,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
+import com.android.settings.supervision.SupervisionSessionController.Companion.SUPERVISION_AUTH_SESSION_KEY
 import com.android.settings.supervision.credentialmanagement.SupervisionPinRecoveryActivity
 import com.android.settings.supervision.shared.canLaunchPinRecovery
 import com.android.settings.supervision.shared.isSupervisingCredentialSet
@@ -205,10 +206,12 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
                     return
                 }
                 val forceConfirmation = intent.getBooleanExtra(EXTRA_FORCE_CONFIRMATION, false)
-                if (
-                    !forceConfirmation &&
-                        SupervisionAuthController.getInstance(this).isSessionActive(taskId)
-                ) {
+                val isSessionActive =
+                    if (Flags.enableSupervisionSettingsSessionUpdates())
+                        SupervisionSessionController.getInstance(this)
+                            .isSessionActive(SUPERVISION_AUTH_SESSION_KEY)
+                    else SupervisionAuthController.getInstance(this).isSessionActive(taskId)
+                if (!forceConfirmation && isSessionActive) {
                     Log.i(TAG, "Bypassing authentication due to active session")
                     setResult(RESULT_OK)
                     finish()
@@ -240,10 +243,12 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
             } else {
                 // --- SUPERVISION CREDENTIAL IS SET ---
                 val forceConfirmation = intent.getBooleanExtra(EXTRA_FORCE_CONFIRMATION, false)
-                if (
-                    forceConfirmation ||
-                        !SupervisionAuthController.getInstance(this).isSessionActive(taskId)
-                ) {
+                val isSessionActive =
+                    if (Flags.enableSupervisionSettingsSessionUpdates())
+                        SupervisionSessionController.getInstance(this)
+                            .isSessionActive(SUPERVISION_AUTH_SESSION_KEY)
+                    else SupervisionAuthController.getInstance(this).isSessionActive(taskId)
+                if (forceConfirmation || !isSessionActive) {
                     val activityManager = getSystemService(ActivityManager::class.java)
                     if (!activityManager.startProfile(mSupervisingUser)) {
                         errorHandler("Unable to start supervising user, cannot verify credentials.")
@@ -398,9 +403,15 @@ class ConfirmSupervisionCredentialsActivity : FragmentActivity() {
     }
 
     private fun setSuccessfulAuthenticationResultAndFinish() {
-        val authController =
-            SupervisionAuthController.getInstance(this@ConfirmSupervisionCredentialsActivity)
-        authController.startSession(taskId)
+        if (Flags.enableSupervisionSettingsSessionUpdates()) {
+            val sessionsRepository =
+                SupervisionSessionController.getInstance(this@ConfirmSupervisionCredentialsActivity)
+            sessionsRepository.startSession(taskId, SUPERVISION_AUTH_SESSION_KEY)
+        } else {
+            val authController =
+                SupervisionAuthController.getInstance(this@ConfirmSupervisionCredentialsActivity)
+            authController.startSession(taskId)
+        }
         setResult(RESULT_OK)
         finish()
     }
