@@ -366,6 +366,10 @@ public class AmbientVolumePreference extends PreferenceGroup implements AmbientV
         return true;
     }
 
+    // No-op, as this preference is always expanded. See isExpanded().
+    @Override
+    public void setExpanded(boolean expanded) {}
+
     @VisibleForTesting
     Map<Integer, AmbientVolumeSliderPreference> getSliders() {
         return mSideToSliderMap;
