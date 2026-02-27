@@ -50,11 +50,14 @@ public final class BluetoothPairingRequest extends BroadcastReceiver {
             PowerManager powerManager = context.getSystemService(PowerManager.class);
             int pairingVariant = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
                     BluetoothDevice.ERROR);
+            int pairingContext = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_CONTEXT,
+                    BluetoothDevice.ERROR);
             boolean shouldShowDialog = LocalBluetoothPreferences.shouldShowDialogInForeground(
                     context, device);
 
             Log.d(TAG,
                 "Receive ACTION_PAIRING_REQUEST pairingVariant=" + pairingVariant
+                    + " pairingContext=" + pairingContext
                     + " canBondWithoutDialog=" + device.canBondWithoutDialog()
                     + " isOngoingPairByCsip="
                     + mBluetoothManager.getCachedDeviceManager().isOngoingPairByCsip(device)

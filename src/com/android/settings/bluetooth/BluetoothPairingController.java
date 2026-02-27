@@ -71,6 +71,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
     private boolean mIsCoordinatedSetMember;
     private boolean mIsLeAudio;
     private boolean mIsLateBonding;
+    private boolean mIsRepairing;
 
     /**
      * Creates an instance of a BluetoothPairingController.
@@ -98,6 +99,8 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         mPbapClientProfile = mBluetoothManager.getProfileManager().getPbapClientProfile();
         mPasskeyFormatted = formatKey(mPasskey);
         mIsLateBonding = mBluetoothManager.getCachedDeviceManager().isLateBonding(mDevice);
+        mIsRepairing = BluetoothDevice.PAIRING_CONTEXT_REPAIRING == intent.getIntExtra(
+                BluetoothDevice.EXTRA_PAIRING_CONTEXT, BluetoothDevice.ERROR);
 
         final CachedBluetoothDevice cachedDevice =
                 mBluetoothManager.getCachedDeviceManager().findDevice(mDevice);
@@ -413,6 +416,11 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
         }
     }
 
+    /** Whether it's a repairing request(caused by bonding loss). */
+    public boolean isRepairing() {
+        return Flags.enableBondingLossUiFix() && mIsRepairing;
+    }
+
     /**
      * A method that exists to allow the fragment to update the controller with input the user has
      * provided in the fragment.
@@ -492,7 +500,7 @@ public class BluetoothPairingController implements OnCheckedChangeListener,
      * @return - A boolean indicating if the devices were equal.
      */
     public boolean deviceEquals(BluetoothDevice device) {
-        return mDevice == device;
+        return mDevice.equals(device);
     }
 
     @VisibleForTesting
