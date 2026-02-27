@@ -61,11 +61,6 @@ class TextReadingScreenOnAccessibilityTest {
     }
 
     @Test
-    fun getLaunchIntent() {
-        assertThat(preferenceScreenCreator.getLaunchIntent(context, null)).isNull()
-    }
-
-    @Test
     fun getEntryPoint() {
         assertThat(preferenceScreenCreator.entryPoint)
             .isEqualTo(TextReadingPreferenceFragment.EntryPoint.ACCESSIBILITY_SETTINGS)

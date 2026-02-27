@@ -133,8 +133,6 @@ open class TextReadingScreenOnAccessibility : BaseTextReadingScreen() {
     override val icon: Int
         get() = R.drawable.ic_adaptive_font_download
 
-    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? = null
-
     companion object {
         const val KEY = "text_reading_options_in_a11y"
     }
