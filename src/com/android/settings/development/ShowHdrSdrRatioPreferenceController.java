@@ -29,7 +29,6 @@ import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.flags.Flags;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 /**
@@ -90,7 +89,7 @@ public class ShowHdrSdrRatioPreferenceController extends DeveloperOptionsPrefere
 
     @Override
     public boolean isAvailable() {
-        return Flags.developmentHdrSdrRatio() && mIsHdrSdrRatioAvailable;
+        return mIsHdrSdrRatioAvailable;
     }
 
     @Override
