@@ -190,4 +190,4 @@ public class NightDisplaySettings extends DashboardFragment
                 }
             };
 }
-// LINT.ThenChange(NightDisplayScreen.kt)
+// LINT.ThenChange(NightDisplayScreen.kt, NightDisplayApiScreen.kt)

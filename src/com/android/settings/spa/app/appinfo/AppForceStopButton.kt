@@ -28,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+import com.android.settings.utils.HsuUtils
 import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedLockUtils.EnforcedAdmin
 import com.android.settingslib.RestrictedLockUtilsInternal
@@ -47,7 +48,7 @@ class AppForceStopButton(
 
     @Composable
     fun getActionButton(app: ApplicationInfo): ActionButton {
-        val dialogPresenter = confirmDialogPresenter()
+        val dialogPresenter = confirmDialogPresenter(app)
         return ActionButton(
             text = stringResource(R.string.force_stop),
             imageVector = Icons.Outlined.Report,
@@ -80,13 +81,27 @@ class AppForceStopButton(
     }
 
     @Composable
-    private fun confirmDialogPresenter() = rememberAlertDialogPresenter(
+    private fun confirmDialogPresenter(app: ApplicationInfo) = rememberAlertDialogPresenter(
         confirmButton = AlertDialogButton(
             text = stringResource(R.string.okay),
             onClick = packageInfoPresenter::forceStop,
         ),
         dismissButton = AlertDialogButton(stringResource(R.string.cancel)),
-        title = stringResource(R.string.force_stop_dlg_title),
-        text = { Text(stringResource(R.string.force_stop_dlg_text)) },
+        // If it's an HSU app, show a specific warning title and message to inform the admin
+        // that changes will affect all users. Otherwise, show the standard force stop dialog.
+        title = stringResource(
+            if (android.multiuser.Flags.hsuAppManagement() && HsuUtils.isHsuApp(context, app))
+                R.string.hsu_app_warning_dialog_title
+            else R.string.force_stop_dlg_title
+        ),
+        text = {
+            Text(
+                stringResource(
+                    if (android.multiuser.Flags.hsuAppManagement() && HsuUtils.isHsuApp(context, app))
+                        R.string.hsu_app_warning_dialog_message
+                    else R.string.force_stop_dlg_text
+                )
+            )
+        },
     )
 }

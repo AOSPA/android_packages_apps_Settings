@@ -28,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.language.PointerSpeedController;
 import com.android.settings.search.BaseSearchIndexProvider;
@@ -73,6 +74,15 @@ public class KeyboardSettings extends DashboardFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        // TODO(b/483182050): Temporary mitigation by disabling keyboard settings.
+        if (Utils.shouldDisableKeyboardSettingsInDemoMode(getPrefContext())) {
+            getPreferenceScreen().setEnabled(false);
+        }
+    }
+
+    @Override
     protected int getPreferenceScreenResId() {
         return R.xml.keyboard_settings;
     }
@@ -110,5 +120,11 @@ public class KeyboardSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.keyboard_settings);
+            new BaseSearchIndexProvider(R.xml.keyboard_settings) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    // TODO(b/483182050): Temporary mitigation by hiding keyboard settings.
+                    return !Utils.shouldDisableKeyboardSettingsInDemoMode(context);
+                }
+            };
 }

@@ -34,6 +34,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
+// LINT.IfChange
 @RunWith(AndroidJUnit4::class)
 class NightDisplayScreenTest {
     private val mockResources = mock<Resources>()
@@ -157,3 +158,4 @@ class NightDisplayScreenTest {
         assertThat(colorDM.isNightDisplayActivated).isFalse()
     }
 }
+// LINT.ThenChange(NightDisplaySettingsTest.java, NightDisplayApiScreenTest.kt)

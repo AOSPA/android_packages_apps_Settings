@@ -477,7 +477,7 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
             if (!Utils.isVoiceCapable(context)) { // no telephony
                 removePreference(KEY_ENABLE_TELEPHONY_CALLING);
             }
-            if (mUserInfo.isMain() || UserManager.isHeadlessSystemUserMode()) {
+            if (mUserInfo.isMain()) {
                 removePreference(KEY_ENABLE_TELEPHONY_CALLING);
             }
             if (mUserInfo.isRestricted()) {

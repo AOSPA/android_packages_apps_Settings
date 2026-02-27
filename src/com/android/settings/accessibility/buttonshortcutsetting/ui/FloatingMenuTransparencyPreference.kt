@@ -21,6 +21,7 @@ import android.provider.Settings
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
+import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.buttonshortcutsetting.data.FloatingMenuTransparencyDataStore
 import com.android.settings.accessibility.buttonshortcutsetting.data.FloatingMenuTransparencyDataStore.Companion.MAX_TRANSPARENCY_PROGRESS
 import com.android.settings.accessibility.buttonshortcutsetting.data.FloatingMenuTransparencyDataStore.Companion.MIN_TRANSPARENCY_PROGRESS
@@ -118,6 +119,10 @@ class FloatingMenuTransparencyPreference(context: Context) :
     }
 
     private fun formatStateDescription(context: Context, sliderValue: Int): CharSequence {
+        if (!isEnabled(context) && Flags.floatingMenuTransparencySliderAnnouncesDisabled()) {
+            return context.getString(com.android.settingslib.R.string.disabled)
+        }
+
         val transparency = sliderValue / PRECISION
         if (percentFormat == null) {
             percentFormat =

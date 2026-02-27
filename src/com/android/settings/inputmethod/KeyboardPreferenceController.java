@@ -23,6 +23,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
@@ -79,6 +80,10 @@ public class KeyboardPreferenceController extends BasePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
+        // TODO(b/483182050): Temporary mitigation by hiding keyboard settings.
+        if (Utils.shouldDisableKeyboardSettingsInDemoMode(mContext)) {
+            return UNSUPPORTED_ON_DEVICE;
+        }
         return AVAILABLE;
     }
 

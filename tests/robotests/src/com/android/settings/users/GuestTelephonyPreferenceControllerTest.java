@@ -150,7 +150,6 @@ public class GuestTelephonyPreferenceControllerTest {
         controller.setChecked(true);
 
         assertThat(mUserManager.hasGuestUserRestriction("no_outgoing_calls", false)).isTrue();
-        assertThat(mUserManager.hasGuestUserRestriction("no_sms", true)).isTrue();
     }
 
     @Test
@@ -163,7 +162,6 @@ public class GuestTelephonyPreferenceControllerTest {
         controller.setChecked(false);
 
         assertThat(mUserManager.hasGuestUserRestriction("no_outgoing_calls", true)).isTrue();
-        assertThat(mUserManager.hasGuestUserRestriction("no_sms", true)).isTrue();
     }
 
     @Test

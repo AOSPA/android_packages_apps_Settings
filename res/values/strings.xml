@@ -4899,6 +4899,12 @@
     <string name="app_disable_dlg_positive">Disable app</string>
     <!-- [CHAR LIMIT=NONE] Manage applications, text for dialog when disabling apps -->
     <string name="app_disable_dlg_text">If you disable this app, Android and other apps may no longer function as intended. Keep in mind, you can\u2019t delete this app since it came pre-installed on your device. By disabling, you turn this app off and hide it on your device.</string>
+    <!-- Title for the warning dialog when modifying an app owned by the Headless System User [CHAR LIMIT=NONE] -->
+    <string name="hsu_app_warning_dialog_title">System User App</string>
+    <!-- Message for the warning dialog when modifying an app owned by the Headless System User [CHAR LIMIT=NONE] -->
+    <string name="hsu_app_warning_dialog_message">This app is running for the System User. Changes you make will affect all users on this device.</string>
+    <!-- Explanation for non-admin users viewing an app owned by the Headless System User [CHAR LIMIT=NONE] -->
+    <string name="hsu_app_admin_only_explanation">Only the device admin can manage this app.</string>
     <!-- Manage applications, individual application info screen, section heading for information about the app installer [CHAR_LIMIT=25] -->
     <string name="app_install_details_group_title">Store</string>
     <!-- Manage applications, individual application info screen, title for the option which will trigger application info in it's installer [CHAR_LIMIT=25] -->

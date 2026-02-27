@@ -163,6 +163,16 @@ flag {
 }
 
 flag {
+    name: "floating_menu_transparency_slider_announces_disabled"
+    namespace: "accessibility"
+    description: "updates state description so slider handle reads 'disabled' when the setting is disabled."
+    bug: "456649436"
+    metadata {
+      purpose: PURPOSE_BUGFIX
+    }
+}
+
+flag {
   name: "never_restrict_accessibility_activity"
   namespace: "accessibility"
   description: "Stops possibly restricting AccessibilityActivityPreferences"
