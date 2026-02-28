@@ -73,7 +73,7 @@ class MobileNetworkPhoneNumberPreference(private val data: MobileNetworkData) :
         ReadWritePermit.DISALLOW
 
     override val sensitivityLevel
-        get() = SensitivityLevel.LOW_SENSITIVITY
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     @Suppress("UNCHECKED_CAST")
     class PhoneNumberStore(private val data: MobileNetworkData) :

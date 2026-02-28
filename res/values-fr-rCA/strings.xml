@@ -150,7 +150,7 @@
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Autres appareils"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Appareils enregistrés"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Associé au compte"</string>
-    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Utilisés précédemment avec ce compte"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Utilisés avec ce compte précédemment"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"Le Bluetooth s\'activera pour l\'association"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Préférences de connexion"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Connecté précedemment"</string>
@@ -728,13 +728,11 @@
     <string name="encrypted_summary" msgid="545623487587251207">"Chiffré"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Configurer le verrouillage de l\'écran"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Pour renforcer la sécurité, définissez un NIP, un schéma ou un mot de passe pour cet appareil."</string>
-    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
-    <skip />
+    <string name="no_screen_lock_issue_summary_without_pattern" msgid="3709234873257859534">"Pour renforcer la sécurité, définissez un NIP ou un mot de passe pour cet appareil."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Configurer le verrouillage de l\'écran"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Configurer le verrouillage de l\'écran"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Pour renforcer la sécurité, définissez un NIP, un schéma ou un mot de passe pour cet appareil."</string>
-    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"Pour renforcer la sécurité, définissez un NIP ou un mot de passe pour cet appareil."</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Ajouter empreinte digitale pour déverrouiller"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Sélect. verr. écran"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Choisissez un verrouillage d\'écran"</string>
@@ -776,8 +774,7 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continuer sans l\'empreinte digitale ou le visage"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Aucun"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Ajoutez un NIP/schéma/mot de passe ou balayez"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off_new_without_pattern" msgid="1848366515765800557">"Ajouter NIP, mot de passe ou balayer l\'écran"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Balayage d\'écran"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Schéma"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"NIP"</string>
@@ -2592,7 +2589,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Étendu"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Thème Sombre étendu"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Applique automatiquement le thème Sombre à la plupart des applis qui ne le prennent pas en charge, ce qui contribue à en améliorer l\'accessibilité"</string>
-    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Si vous rencontrez des problèmes avec l\'option développée, utilisez l\'option standard."</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Si vous rencontrez des problèmes avec l\'option étendue, utilisez l\'option standard."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"forcer l\'inversion, inversion des couleurs, contraste"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Thème Sombre étendu"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Paramètres du thème Sombre étendu"</string>
@@ -3552,7 +3549,7 @@
     <string name="enhanced_4g_lte_mode_summary" msgid="1067066329756036427">"Utiliser les services LTE pour améliorer les appels vocaux (recommandé)"</string>
     <string name="enhanced_4g_lte_mode_summary_4g_calling" msgid="2575004054914178405">"Utiliser les services 4G pour améliorer les appels vocaux (recommandé)"</string>
     <string name="nr_advanced_calling_title" msgid="6106286679535355939">"Voix sur 5G"</string>
-    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Utiliser le réseau 5G pour passer des appels vocaux"</string>
+    <string name="nr_advanced_calling_summary" msgid="6926192539172030330">"Utilisez le réseau 5G pour passer des appels vocaux"</string>
     <string name="contact_discovery_opt_in_title" msgid="8708034790649773814">"Envoyer les contacts au fournisseur de services"</string>
     <string name="contact_discovery_opt_in_summary" msgid="6539010458256667300">"Envoyer les numéros de téléphone de vos contacts pour accéder à des fonctionnalités améliorées"</string>
     <string name="contact_discovery_opt_in_dialog_title" msgid="2230536282911854114">"Envoyer les contacts à <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
@@ -3624,16 +3621,11 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Appareil"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Clavier, pavé tactile, affichage, son"</string>
-    <!-- no translation found for device_display_dashboard_summary (3247324964824296389) -->
-    <skip />
-    <!-- no translation found for device_keyboard_settings_summary (3836352140707901919) -->
-    <skip />
-    <!-- no translation found for device_mouse_settings_summary (3326654487979268054) -->
-    <skip />
-    <!-- no translation found for device_sound_dashboard_summary (7078513370754684554) -->
-    <skip />
-    <!-- no translation found for device_trackpad_settings_summary (1658492396087895698) -->
-    <skip />
+    <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Luminosité, couleur, thème Sombre, écran de verrouillage, texte"</string>
+    <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Sélection du clavier, outils"</string>
+    <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Vitesse du curseur, personnalisation des boutons, défilement"</string>
+    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"Volume, haut-parleurs, microphones"</string>
+    <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Personnalisation du curseur, actions de clic, défilement"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Non accessible parce que la technologie CCP est désactivée"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour utiliser la fonctionnalité, installez d\'abord une appli de paiement"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Applis récentes, applis par défaut"</string>
@@ -3950,7 +3942,7 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Principales actualités, contenu non publicitaire et plus encore"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Mentions J\'aime, publications et plus encore"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Bulletins d\'information, contenu multimédia recommandé et plus encore"</string>
-    <string name="notification_bundle_no_apps_desc" msgid="6357770877341582580">"Toutes les applis utilisent actuellement l\'organisateur de notifications"</string>
+    <string name="notification_bundle_no_apps_desc" msgid="6357770877341582580">"Toutes les applis utilisent actuellement l\'Organisateur de notifications"</string>
     <string name="notification_ai_features_title" msgid="2241618579100257538">"Gérer avec l\'IA"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Résumés des notifications"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Obtenez des récapitulations rapides de messages plus longs"</string>
@@ -4040,7 +4032,7 @@
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"Aucune conversation prioritaire"</string>
     <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{# conversation prioritaire}one{# conversation prioritaire}other{# conversations prioritaires}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"Conversations prioritaires"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"Afficher dans le haut de la section des conversations comme bulles flottantes"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"S\'affichent dans le haut de la section des conversations comme bulles flottantes"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"Afficher dans le haut de la section des conversations"</string>
     <string name="other_conversations" msgid="551178916855139870">"Conversations non prioritaires"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"Conversations auxquelles vous avez apporté des modifications"</string>
@@ -4113,12 +4105,12 @@
     <string name="notification_polite_work_summary" msgid="5014189280132951378">"Appliquez ce paramètre aux applis du profil professionnel"</string>
     <string name="notification_bundle_title" msgid="6679586974995981433">"Organisateur de notifications"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Groupez les notifications à faible priorité et désactivez leur son"</string>
-    <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"Utiliser l\'organisateur de notifications"</string>
-    <string name="notification_bundle_description" msgid="4202633316211056848">"Choisissez les types de notifications pour lesquelles vous voulez désactiver le son et regroupez-les pour minimiser les interruptions.\n\nL\'organisateur utilise l\'IA sur votre appareil, et peut parfois faire des erreurs. Vos notifications ne sont jamais envoyées à Google."</string>
+    <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"Utiliser l\'Organisateur de notifications"</string>
+    <string name="notification_bundle_description" msgid="4202633316211056848">"Choisissez les types de notifications pour lesquelles vous voulez désactiver le son et regroupez-les pour minimiser les interruptions.\n\nL\'Organisateur utilise l\'IA sur votre appareil et peut parfois faire des erreurs. Vos notifications ne sont jamais envoyées à Google."</string>
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Organisateur de notifications"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Groupez les notifications à faible priorité et désactivez leur son"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Gérer les applis pour l\'organisateur de notifications"</string>
-    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Développement de l\'ensemble"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"Développement des groupes"</string>
     <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"Automatique"</string>
     <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"Toujours développer"</string>
     <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"Ne jamais développer"</string>
@@ -4301,7 +4293,7 @@
     <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{Rien ne peut provoquer d\'interruption}=1{{sound_category_1} peut provoquer des interruptions}=2{{sound_category_1} et {sound_category_2} peuvent provoquer des interruptions}=3{{sound_category_1}, {sound_category_2} et {sound_category_3} peuvent provoquer des interruptions}one{{sound_category_1}, {sound_category_2} et # autre appli peuvent provoquer des interruptions}other{{sound_category_1}, {sound_category_2} et # autres applis peuvent provoquer des interruptions}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"Rien ne peut provoquer d\'interruption"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"Personne ne peut provoquer d\'interruption"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"Certaines personnes peuvent interrompre le mode"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"Certaines personnes peuvent provoquer des interruptions"</string>
     <string name="zen_mode_people_repeat_callers" msgid="4499084111069828761">"Les appelants fréquents peuvent vous interrompre"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"Tout le monde peut provoquer des interruptions"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"Appelants fréquents"</string>
@@ -4762,7 +4754,7 @@
     <string name="home_app" msgid="6056850504746902747">"Appli d\'accueil"</string>
     <string name="suggestion_additional_fingerprints" msgid="4726777300101156208">"Ajouter une empreinte digitale"</string>
     <string name="suggestion_additional_fingerprints_summary" msgid="2825364645039666674">"Déverrouiller avec un autre doigt"</string>
-    <string name="battery_saver_on_summary" msgid="4605146593966255848">"Activée"</string>
+    <string name="battery_saver_on_summary" msgid="4605146593966255848">"Activé"</string>
     <string name="battery_saver_off_scheduled_summary" msgid="2193875981740829819">"S\'active lorsque la pile atteint <xliff:g id="BATTERY_PERCENTAGE">%1$s</xliff:g>"</string>
     <string name="battery_saver_off_summary" msgid="4411561435493109261">"Désactivé"</string>
     <string name="app_battery_usage_title" msgid="346558380609793334">"Utilisation de la pile par les applis"</string>
@@ -5284,7 +5276,7 @@
     <string name="preferred_network_mode_dialogtitle" msgid="4179420486180351631">"Type de réseau préféré"</string>
     <string name="carrier_settings_version" msgid="3364919669057317776">"Version des paramètres de l\'opérateur"</string>
     <string name="call_category" msgid="641461844504128789">"Appels"</string>
-    <string name="video_calling_settings_title" msgid="5490466306783552190">"Appels vidéo par l\'entremise du fournisseur de services"</string>
+    <string name="video_calling_settings_title" msgid="5490466306783552190">"Appels vidéo par l\'entremise de l\'opérateur"</string>
     <string name="cdma_system_select_title" msgid="8261408056382123386">"Sélection système"</string>
     <string name="cdma_system_select_summary" msgid="384128007068464145">"Modifier le mode d\'itinérance CDMA"</string>
     <string name="cdma_system_select_dialogtitle" msgid="6143586810486936984">"Sélection système"</string>
@@ -5326,12 +5318,15 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Un réseau cellulaire ou Wi-Fi est requis pour afficher les liens externes."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Il se peut que l\'envoi d\'un message texte aux services d\'urgence ne soit pas accessible dans toutes les régions."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Il peut s\'écouler un certain temps avant que les modifications apportées à votre compte s\'affichent dans les paramètres. Communiquez avec <xliff:g id="CARRIER_NAME">%1$s</xliff:g> pour en savoir plus."</string>
+    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
+    <skip />
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"En savoir plus sur la connectivité par satellite"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Impossible d\'activer la fonctionnalité <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Pour activer la fonctionnalité <xliff:g id="FUNCTION">%1$s</xliff:g>, mettez d\'abord fin à la connexion par satellite"</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Connectivité par satellite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"Connectivité par satellite"</string>
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Utiliser la connectivité par satellite"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"L\'utilisation des applis prises en charge est comprise dans votre compte"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Les données pour toutes les applis sont incluses dans votre compte"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Applis prises en charge sur votre téléphone"</string>
@@ -5339,6 +5334,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Applis prises en charge sur votre téléphone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Impossible d\'ajouter une carte SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Mettez fin à la connexion satellite avant d\'ajouter une carte SIM"</string>
+    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
+    <skip />
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Le Bluetooth est désactivé"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Lorsque connecté par Bluetooth, le mode Avion se synchronisera sur les appareils pris en charge, comme le téléphone et la montre"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms des points d\'accès"</string>
@@ -5771,7 +5768,7 @@
     <string name="enable_notes_role_title" msgid="7662702013496114763">"Forcer l\'activation de la fonction Notes"</string>
     <string name="enable_notes_role_summary" msgid="5495721409392395089">"Activez les intégrations de systèmes de prise de notes par le biais de la fonction Notes. Si la fonction Notes est déjà activée, l\'activer à nouveau ne change rien. Nécessite un redémarrage."</string>
     <string name="find_broadcast_password_dialog_title" msgid="3176988702535737484">"Entrer le mot de passe"</string>
-    <string name="convert_to_esim_title" msgid="71037864129009206">"Convertir à une carte eSIM"</string>
+    <string name="convert_to_esim_title" msgid="71037864129009206">"Convertir en carte eSIM"</string>
     <string name="transfer_esim_to_another_device_title" msgid="5286117866086383192">"Transférer la carte eSIM à un autre appareil"</string>
     <string name="background_install_preference_summary" msgid="3065219346519340364">"{count,plural, =1{# appli}one{# appli}other{# applis}}"</string>
     <string name="background_install_title" msgid="607913515188276168">"Applis installées en arrière-plan"</string>
@@ -6050,10 +6047,8 @@
     <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"En savoir plus"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"Lorsque ces paramètres sont désactivés, d\'autres paramètres de compte peuvent toujours s\'appliquer."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"Entrer le NIP des contrôles parentaux"</string>
-    <!-- no translation found for supervision_pin_verification_title (3541655137030495659) -->
-    <skip />
-    <!-- no translation found for supervision_pin_verification_subtitle (8757525057231945220) -->
-    <skip />
+    <string name="supervision_pin_verification_title" msgid="3541655137030495659">"Confirmer que vous êtes un parent"</string>
+    <string name="supervision_pin_verification_subtitle" msgid="8757525057231945220">"Entrez votre NIP des contrôles parentaux"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"Définir un NIP des contrôles parentaux"</string>
     <string name="supervision_choose_your_new_pin_header" msgid="7770532284777963661">"Configurer un nouveau NIP des contrôles parentaux"</string>
     <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"Confirmer le NIP des contrôles parentaux"</string>
@@ -6094,7 +6089,8 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Sécurité des applis"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Déverrouillage de l\'appareil"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Sécurité du compte"</string>
-    <string name="device_finders_subpage_title" msgid="2390688647994924006">"Localisateurs d\'appareils"</string>
+    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
+    <skip />
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Système et mises à jour"</string>
     <string name="location_settings" msgid="6833222354060094170">"Accès à la position"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Voyez les applis et les services qui ont accès à votre position"</string>

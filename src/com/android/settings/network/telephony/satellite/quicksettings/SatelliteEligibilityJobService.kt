@@ -34,6 +34,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 private const val TAG = "SatelliteEligibilityJobService"
@@ -51,6 +52,7 @@ open class SatelliteEligibilityJobService : JobService() {
 
     companion object {
         private const val TIMEOUT_MS = 10 * 60 * 1000L // 10 minutes
+        private const val OOS_DEBOUNCE_MS = 3 * 60 * 1000L // 3 minutes
 
         @VisibleForTesting internal var satelliteTilePromptUtils = SatelliteTilePromptUtils()
 
@@ -66,6 +68,12 @@ open class SatelliteEligibilityJobService : JobService() {
             // Guard against scheduling if the feature is disabled (or in test harness)
             if (!SatelliteTileStateReceiver.isSatelliteTileFeatureEnabled(context)) {
                 Log.d(TAG, "Feature disabled. Skipping job scheduling.")
+                return
+            }
+
+            // Guard against scheduling if the tile component has been disabled (e.g., by runtime modem check)
+            if (!SatelliteTileStateReceiver.isTileServiceEnabled(context)) {
+                Log.d(TAG, "SatelliteTileService component is disabled. Skipping job scheduling.")
                 return
             }
 
@@ -138,6 +146,11 @@ open class SatelliteEligibilityJobService : JobService() {
             return false // Job is done, do not reschedule
         }
 
+        if (!SatelliteTileStateReceiver.isTileServiceEnabled(this)) {
+            Log.d(TAG, "SatelliteTileService component is disabled. Stopping job.")
+            return false // Job is done, do not reschedule
+        }
+
         val subId = SubscriptionManager.getDefaultDataSubscriptionId()
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.w(TAG, "Invalid subscription ID, finishing job.")
@@ -185,9 +198,11 @@ open class SatelliteEligibilityJobService : JobService() {
             // Monitor satellite status
             SatelliteStateRepository.getInstance(this@SatelliteEligibilityJobService)
                 .satelliteStatus
-                .collect { status ->
+                .collectLatest { status ->
                     if (status == SatelliteStatus.AVAILABLE || status == SatelliteStatus.ACTIVE) {
-                        Log.i(TAG, "Satellite Status: $status. Showing prompt.")
+                        Log.i(TAG, "Satellite Status: $status. Waiting for 3-minute debounce.")
+                        kotlinx.coroutines.delay(OOS_DEBOUNCE_MS)
+                        Log.i(TAG, "Satellite Status sustained at $status. Showing prompt.")
                         showPromptAndFinish(params)
                     }
                 }
@@ -232,6 +247,13 @@ open class SatelliteEligibilityJobService : JobService() {
     }
 
     private fun showPromptAndFinish(params: JobParameters) {
+        if (!SatelliteTileStateReceiver.isTileServiceEnabled(this)) {
+            Log.w(TAG, "SatelliteTileService component is disabled. Aborting prompt.")
+            cleanup()
+            jobFinished(params, false)
+            return
+        }
+
         if (satelliteTilePromptUtils.shouldShowSatelliteTilePrompt(this)) {
             satelliteTilePromptUtils.showSatelliteTileAvailableNotification(this)
             satelliteTilePromptUtils.recordPromptShown(this)

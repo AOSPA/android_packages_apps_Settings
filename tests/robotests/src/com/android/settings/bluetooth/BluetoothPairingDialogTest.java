@@ -59,8 +59,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.androidx.fragment.FragmentController;
 import org.robolectric.shadows.ShadowToast;
+import org.robolectric.shadows.androidx.fragment.FragmentController;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = ShadowAlertDialogCompat.class)
@@ -478,6 +478,44 @@ public class BluetoothPairingDialogTest {
         // verify message is what we expect it to be and is visible
         TextView message = frag.getmDialog().findViewById(R.id.pairing_group_message);
         assertThat(message.getVisibility()).isEqualTo(View.GONE);
+    }
+
+    @Test
+    public void confirmationDialog_isRepairingAndHasContent_showRepairingUi() {
+        when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
+        when(controller.isRepairing()).thenReturn(true);
+        when(controller.hasPairingContent()).thenReturn(true);
+        when(controller.getDeviceName()).thenReturn(FAKE_DEVICE_NAME);
+
+        // build the fragment
+        BluetoothPairingDialogFragment frag = makeFragment();
+
+        AlertDialog dialog = frag.getmDialog();
+        assertThat(ShadowAlertDialogCompat.shadowOf(dialog).getTitle())
+                .isEqualTo(frag.getString(R.string.bluetooth_pairing_again_confirmation_title));
+        TextView message = frag.getmDialog().findViewById(R.id.pairing_confirmation_hint);
+        assertThat(message.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(message.getText()).isEqualTo(
+                frag.getString(R.string.bluetooth_pairing_confirmation_msg, FAKE_DEVICE_NAME));
+    }
+
+    @Test
+    public void confirmationDialog_isRepairingAndNoContent_showRepairingUi() {
+        when(controller.getDialogType()).thenReturn(BluetoothPairingController.CONFIRMATION_DIALOG);
+        when(controller.isRepairing()).thenReturn(true);
+        when(controller.hasPairingContent()).thenReturn(false);
+        when(controller.getDeviceName()).thenReturn(FAKE_DEVICE_NAME);
+
+        // build the fragment
+        BluetoothPairingDialogFragment frag = makeFragment();
+
+        AlertDialog dialog = frag.getmDialog();
+        assertThat(ShadowAlertDialogCompat.shadowOf(dialog).getTitle())
+                .isEqualTo(frag.getString(R.string.bluetooth_pairing_again_request,
+                        FAKE_DEVICE_NAME));
+        TextView message = frag.getmDialog().findViewById(R.id.pairing_confirmation_hint);
+        assertThat(message.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(message.getText()).isEqualTo(frag.getString(R.string.bluetooth_repairing_msg));
     }
 
     @Test

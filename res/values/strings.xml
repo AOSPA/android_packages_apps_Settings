@@ -1977,6 +1977,9 @@
     <!-- Title for the dialog to enter PIN. [CHAR LIMIT=40] -->
     <string name="bluetooth_pairing_request">Pair with <xliff:g id="device_name">%1$s</xliff:g>?</string>
 
+    <!-- Title for the dialog to pairing again with a bluetooth device. [CHAR LIMIT=40] -->
+    <string name="bluetooth_pairing_again_request">Pair again with <xliff:g id="device_name">%1$s</xliff:g>?</string>
+
     <!-- Message when a bluetooth device from a coordinated set is bonding late. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_pairing_group_late_bonding">Confirm to add the second piece of your audio device</string>
 
@@ -2015,8 +2018,14 @@
     <!-- Title for the dialog to confirm PIN. [CHAR LIMIT=40] -->
     <string name="bluetooth_pairing_confirmation_title">Check pairing codes</string>
 
+    <!-- Title for the dialog to confirm PIN when repairing. [CHAR LIMIT=40] -->
+    <string name="bluetooth_pairing_again_confirmation_title">Pair again</string>
+
     <!-- Message for the dialog to confirm PIN. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_pairing_confirmation_msg">Check if this code matches the one on <xliff:g id="device_name">%1$s</xliff:g>.\n\nFor your security, do not enter this code anywhere.</string>
+
+    <!-- Message for the dialog to repair. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_repairing_msg">This device was paired previously, and is trying to re-pair.\nIf you are in a public space, proceed with caution.</string>
 
     <!-- Title for BT error dialogs. -->
     <string name="bluetooth_error_title"></string>
@@ -2093,7 +2102,7 @@
     <!-- Content Description for battery charging icon in device details screen [CHAR LIMIT=NONE]-->
     <string name="device_details_battery_charging">Battery, charging</string>
     <!-- Title of item to let user know the bluetooth key is missing [CHAR LIMIT=NONE]-->
-    <string name="device_details_key_missing_title">Try restarting <xliff:g id="device_name">%1$s</xliff:g>. If that doesn’t work, forget the device. For your security, only pair it again when you aren’t in a public space.\n\nIf this device isn’t nearby, you don’t need to do anything.</string>
+    <string name="device_details_key_missing_title">Put the <xliff:g id="device_name">%1$s</xliff:g> in pairing mode and try connecting again.\n\nIf this device isn\u2019t nearby, you don\u2019t need to do anything.</string>
 
     <!-- Title for a toggle that enables additional logs for printing [CHAR LIMIT=NONE]-->
     <string name="verbose_printer_logging_title">Verbose print logging</string>
@@ -8689,8 +8698,8 @@
 
     <!-- Title for setting tile leading to Device settings [CHAR LIMIT=40]-->
     <string name="device_dashboard_title">Device</string>
-    <!-- Summary for Device settings, explaining it contains Keyboard, Touchpad, Display, and Sound setting [CHAR LIMIT=NONE]-->
-    <string name="device_dashboard_summary">Keyboard, touchpad, display, sound</string>
+    <!-- Summary for Device settings, explaining it contains Touchpad, Keyboard, Display, and Sound setting [CHAR LIMIT=NONE]-->
+    <string name="device_dashboard_summary">Touchpad, keyboard, display, sound</string>
     <!-- Summary for Display settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_display_dashboard_summary">Brightness, color, dark theme, lock screen, text</string>
     <!-- Summary for Keyboard settings under Device dashboard [CHAR LIMIT=NONE]-->
@@ -8698,7 +8707,7 @@
     <!-- Summary for Mouse settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_mouse_settings_summary">Cursor speed, button customization, scrolling</string>
     <!-- Summary for Sound settings under Device dashboard [CHAR LIMIT=NONE]-->
-    <string name="device_sound_dashboard_summary">Volume, Speakers, Microphones</string>
+    <string name="device_sound_dashboard_summary">Volume, speakers, microphones</string>
     <!-- Summary for Trackpad settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_trackpad_settings_summary">Cursor customization, click actions, scrolling</string>
 

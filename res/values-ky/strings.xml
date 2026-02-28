@@ -728,13 +728,11 @@
     <string name="encrypted_summary" msgid="545623487587251207">"Шифрленген"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Экран кулпусун коюу"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Коопсуздукту бекемдөө үчүн бул түзмөккө PIN код, графикалык ачкыч же сырсөз коюңуз"</string>
-    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
-    <skip />
+    <string name="no_screen_lock_issue_summary_without_pattern" msgid="3709234873257859534">"Коопсуздукту бекемдөө үчүн бул түзмөккө PIN код же сырсөз коюңуз."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Экран кулпусун коюу"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Экранга кулпу коюңуз"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Коопсуздукту бекемдөө үчүн бул түзмөккө PIN код, графикалык ачкыч же сырсөз коюңуз."</string>
-    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"Коопсуздукту бекемдөө үчүн бул түзмөккө PIN код же сырсөз коюңуз."</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Кулпуну ачуу үчүн манжа изин кошуңуз"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Экранды кулпулоо"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Экран кулпусун тандаңыз"</string>
@@ -776,8 +774,7 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Манжа изи же жүзүнөн таануу функциясы жок эле улантуу"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Жок"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"PIN код, графикалык ачкыч, сырсөз кошуңуз же сүрүп коюңуз"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off_new_without_pattern" msgid="1848366515765800557">"PIN код, сырсөз кошуңуз же сүрүп коюңуз"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Экранды сүрүү"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Графикалык ачкыч"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -5321,12 +5318,15 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Тышкы шилтемелерди көрүү үчүн мобилдик Интернет же Wi-Fi тармагы талап кылынат."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Айрым аймактарда кырсыктаганда жардамга келчү кызматтарга SMS жөнөтүлбөшү мүмкүн."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Аккаунтка киргизилген өзгөртүүлөр Параметрлерде бир аздан кийин көрүнөт. Кеңири маалымат алуу үчүн <xliff:g id="CARRIER_NAME">%1$s</xliff:g> менен байланышыңыз."</string>
+    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
+    <skip />
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Спутник байланышы жөнүндө кеңири маалымат"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> күйгүзүлбөй жатат"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> функциясын иштетүү үчүн алгач спутник менен байланышты токтотуңуз"</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Спутник"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Спутник байланышы"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"спутник байланышы"</string>
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Спутник байланышын колдонуу"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Аккаунтуңузда колдоого алынган колдонмолорду пайдалануу мүмкүнчүлүгү камтылган"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Аккаунтуңузда бардык колдонмолордо мобилдик трафикти колдонууга болот"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Телефонуңузда колдоого алынган колдонмолор"</string>
@@ -5334,6 +5334,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Телефонуңузда колдоого алынган колдонмолор"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM картаны кошууга болбойт"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM картаны кошуудан мурун спутник менен байланышыңызды аягына чыгарыңыз"</string>
+    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
+    <skip />
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth өчүк"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetooth аркылуу туташып турганда Учак режими телефон жана саат сыяктуу колдоого алынган түзмөктөрдө шайкештирилет"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Байланыш түйүнүнүн аталыштары"</string>
@@ -6087,7 +6089,8 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Колдонмолордун коопсуздугу"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Түзмөктүн кулпусун ачуу"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Аккаунттун коопсуздугу"</string>
-    <string name="device_finders_subpage_title" msgid="2390688647994924006">"Түзмөк тапкычтар"</string>
+    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
+    <skip />
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Система жана жаңыртуулар"</string>
     <string name="location_settings" msgid="6833222354060094170">"Жүргөн жерди аныктоо"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Кайда жүргөнүңүздү көрө алган колдонмолор менен кызматтардын тизмеси"</string>

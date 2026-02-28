@@ -53,6 +53,10 @@
     <string name="content_protection_unsupported" translatable="false">The device does not support changing Content Protection settings.</string>
     <string name="user_dict_list_preconditions" translatable="false">Personal dictionaries for more than one language must exist.</string>
     <string name="user_dict_list_not_supported" translatable="false">There is only one language with a personal dictionary.</string>
+    <string name="user_aspect_ratio_screen_unavailable" translatable="false">The aspect ratio feature is not available on your device.</string>
+    <string name="user_aspect_ratio_apps_screen_preconditions" translatable="false">The device must support users changing aspect ratio of apps.</string>
+    <string name="user_aspect_ratio_app_screen_preconditions" translatable="false">The device must support users changing aspect ratio of apps and the app must be launchable.</string>
+    <string name="user_aspect_ratio_app_not_launchable" translatable="false">This app is not launchable.</string>
     <string name="battery_info_screen_preconditions" translatable="false">The battery settings provider must provide the battery information feature.</string>
     <string name="battery_info_screen_battery_information_feature_disabled" translatable="false">The battery information feature is not enabled.</string>
     <string name="sound_work_screen_preconditions" translatable="false">The device must have a work profile and must not use a single volume for all audio streams.</string>
@@ -90,4 +94,8 @@
     <string name="adaptive_connectivity_mobile_network_preconditions" translatable="false">The mobile subscription must allow the adaptive connectivity toggle to be configured.</string>
     <string name="night_display_preconditions" translatable="false">The device must support the Night Light feature.</string>
     <string name="night_display_unsupported" translatable="false">Night Light is not supported on this device.</string>
+    <string name="night_display_temperature_preconditions" translatable="false">Night Light must be enabled.</string>
+    <string name="night_display_disabled" translatable="false">Night Light is disabled.</string>
+    <string name="night_display_auto_mode_preconditions" translatable="false">Device location must be enabled for automatic activation based on sunset and sunrise times.</string>
+    <string name="night_display_auto_mode_twilight_location_disabled" translatable="false">Device location is not enabled.</string>
 </resources>

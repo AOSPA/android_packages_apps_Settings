@@ -147,7 +147,7 @@ class WifiSwitchPreference(private val scope: CoroutineScope) :
         }
 
     override val sensitivityLevel
-        get() = SensitivityLevel.LOW_SENSITIVITY
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     override fun storage(context: Context): KeyValueStore = WifiSwitchStore(context, scope)
 

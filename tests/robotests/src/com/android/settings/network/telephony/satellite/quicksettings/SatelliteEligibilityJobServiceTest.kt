@@ -18,13 +18,16 @@ package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.job.JobParameters
 import android.app.job.JobScheduler
+import android.content.ComponentName
 import android.content.Context
+import android.content.pm.PackageManager
 import android.telephony.ServiceState
 import android.telephony.TelephonyCallback
 import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.After
 import org.junit.Before
@@ -113,6 +116,14 @@ class SatelliteEligibilityJobServiceTest {
         // Mock Repository
         SatelliteStateRepository.setInstance(mockSatelliteStateRepository)
         `when`(mockSatelliteStateRepository.satelliteStatus).thenReturn(satelliteStatusFlow)
+
+        // Enable the SatelliteTileService component by default so existing tests pass
+        val componentName = ComponentName(context, SatelliteTileService::class.java)
+        context.packageManager.setComponentEnabledSetting(
+            componentName,
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP,
+        )
     }
 
     @After
@@ -132,6 +143,21 @@ class SatelliteEligibilityJobServiceTest {
     }
 
     @Test
+    fun schedule_tileServiceDisabled_doesNothing() {
+        // Disable the component
+        val componentName = ComponentName(context, SatelliteTileService::class.java)
+        context.packageManager.setComponentEnabledSetting(
+            componentName,
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP,
+        )
+
+        SatelliteEligibilityJobService.schedule(context)
+
+        assertThat(jobScheduler.getAllPendingJobs()).isEmpty()
+    }
+
+    @Test
     fun onStartJob_featureDisabled_returnsFalse() {
         ShadowSystemProperties.override("ro.test_harness", "true")
 
@@ -139,6 +165,22 @@ class SatelliteEligibilityJobServiceTest {
 
         assertThat(result).isFalse()
         verify(service, never()).getSystemService(TelephonyManager::class.java)
+    }
+
+    @Test
+    fun onStartJob_tileServiceDisabled_returnsFalse() {
+        // Disable the component
+        val componentName = ComponentName(context, SatelliteTileService::class.java)
+        context.packageManager.setComponentEnabledSetting(
+            componentName,
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP,
+        )
+
+        val result = service.onStartJob(mockJobParameters)
+
+        assertThat(result).isFalse()
+        verify(mockTelephonyManager, never()).registerTelephonyCallback(any(), any())
     }
 
     @Test
@@ -264,7 +306,7 @@ class SatelliteEligibilityJobServiceTest {
 
         // Trigger status available
         satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
-        ShadowLooper.runUiThreadTasks()
+        ShadowLooper.idleMainLooper(3 * 60 * 1000L + 1000, TimeUnit.MILLISECONDS)
 
         verify(mockSatelliteTilePromptUtils).showSatelliteTileAvailableNotification(service)
         verify(mockSatelliteTilePromptUtils).recordPromptShown(service)
@@ -279,10 +321,33 @@ class SatelliteEligibilityJobServiceTest {
 
         // Trigger status active
         satelliteStatusFlow.value = SatelliteStatus.ACTIVE
-        ShadowLooper.runUiThreadTasks()
+        ShadowLooper.idleMainLooper(3 * 60 * 1000L + 1000, TimeUnit.MILLISECONDS)
 
         verify(mockSatelliteTilePromptUtils).showSatelliteTileAvailableNotification(service)
         verify(mockSatelliteTilePromptUtils).recordPromptShown(service)
+    }
+
+    @Test
+    fun satelliteStatus_transientAvailable_doesNotShowPrompt() {
+        `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
+        service.onStartJob(mockJobParameters)
+        // Clear previous schedule call
+        jobScheduler.cancel(jobId)
+
+        // Trigger status available
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        // Advance time partially (e.g. 1 minute)
+        ShadowLooper.idleMainLooper(60 * 1000L, TimeUnit.MILLISECONDS)
+
+        // Trigger status not available (transient)
+        satelliteStatusFlow.value = SatelliteStatus.NOT_AVAILABLE
+        // Advance time to complete the original 3 minutes
+        ShadowLooper.idleMainLooper(3 * 60 * 1000L, TimeUnit.MILLISECONDS)
+
+        // Verify prompt was NOT shown
+        verify(mockSatelliteTilePromptUtils, never())
+            .showSatelliteTileAvailableNotification(service)
+        verify(mockSatelliteTilePromptUtils, never()).recordPromptShown(service)
     }
 
     @Test
@@ -293,7 +358,7 @@ class SatelliteEligibilityJobServiceTest {
         jobScheduler.cancel(jobId)
 
         // Fast forward time to trigger timeout
-        ShadowLooper.idleMainLooper(10 * 60 * 1000L + 1000)
+        ShadowLooper.idleMainLooper(10 * 60 * 1000L + 1000, TimeUnit.MILLISECONDS)
 
         verify(service).jobFinished(mockJobParameters, false)
         verify(mockTelephonyManager).unregisterTelephonyCallback(any<TelephonyCallback>())
@@ -325,10 +390,34 @@ class SatelliteEligibilityJobServiceTest {
 
         // Trigger status available
         satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
-        ShadowLooper.runUiThreadTasks()
+        ShadowLooper.idleMainLooper(3 * 60 * 1000L + 1000, TimeUnit.MILLISECONDS)
 
         verify(mockSatelliteTilePromptUtils, never())
             .showSatelliteTileAvailableNotification(service)
         verify(mockSatelliteTilePromptUtils, never()).recordPromptShown(service)
+    }
+
+    @Test
+    fun satelliteStatus_available_tileServiceDisabled_abortsPrompt() {
+        `when`(mockServiceState.state).thenReturn(ServiceState.STATE_OUT_OF_SERVICE)
+        service.onStartJob(mockJobParameters)
+        // Clear previous schedule call
+        jobScheduler.cancel(jobId)
+
+        // Disable the component mid-flight (e.g. modem check finished and disabled it)
+        val componentName = ComponentName(context, SatelliteTileService::class.java)
+        context.packageManager.setComponentEnabledSetting(
+            componentName,
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP,
+        )
+
+        // Trigger status available
+        satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
+        ShadowLooper.runUiThreadTasks()
+
+        verify(mockSatelliteTilePromptUtils, never())
+            .showSatelliteTileAvailableNotification(service)
+        verify(service).jobFinished(mockJobParameters, false)
     }
 }
