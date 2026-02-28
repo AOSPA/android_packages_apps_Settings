@@ -27,7 +27,7 @@ import java.util.Set;
  * A collection of shared utility methods to work with dream settings.
  */
 public class DreamUtils {
-    protected static String[] getWhenToDreamEntries(Resources resources) {
+    static String[] getWhenToDreamEntries(Resources resources) {
         return resources.getStringArray(
                 resources.getBoolean(com.android.internal.R.bool.config_dreamsEnabledOnBattery)
                         ? R.array.when_to_start_screensaver_entries
@@ -35,14 +35,14 @@ public class DreamUtils {
     }
 
 
-    protected static String[] getWhenToDreamKeys(Resources resources) {
+    public static String[] getWhenToDreamKeys(Resources resources) {
         return resources.getStringArray(
                 resources.getBoolean(com.android.internal.R.bool.config_dreamsEnabledOnBattery)
                         ? R.array.when_to_start_screensaver_values
                         : R.array.when_to_start_screensaver_values_no_battery);
     }
 
-    protected static int[] getWhenToDreamOptions(Resources resources) {
+    public static int[] getWhenToDreamOptions(Resources resources) {
         String[] keys = getWhenToDreamKeys(resources);
         int[] options = new int[keys.length];
 
@@ -60,12 +60,12 @@ public class DreamUtils {
      * platform offers. Note that the supported list is not used directly in case the available
      * options is more restrictive or the values do not exist.
      */
-    protected static Set<String> getLowLightBehaviors(Resources resources) {
+    public static Set<String> getLowLightBehaviors(Resources resources) {
         final Set<String> values = new HashSet<>(Arrays.asList(
                 resources.getStringArray(R.array.low_light_display_behavior_supported_values)));
 
-        values.retainAll(Set.of(
-                        resources.getStringArray(R.array.low_light_display_behavior_values)));
+        values.retainAll(Arrays.asList(
+                resources.getStringArray(R.array.low_light_display_behavior_values)));
 
         return values;
     }
