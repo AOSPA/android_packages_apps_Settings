@@ -38,6 +38,8 @@ android_test {
         "androidx.fragment_fragment-testing",
         "flag-junit",
         "mockito-target-extended-minus-junit4",
+        "truth",
+        "androidx.test.espresso.intents",
     ],
     jni_libs: [
         "libdexmakerjvmtiagent",
