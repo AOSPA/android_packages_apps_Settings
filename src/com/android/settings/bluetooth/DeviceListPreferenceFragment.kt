@@ -342,7 +342,7 @@ abstract class DeviceListPreferenceFragment(restrictedKey: String?) :
         val settings = ScanSettings.Builder()
             .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
             .build()
-        scanner.startScan(leScanFilters, settings, leScanCallback)
+        scanner!!.startScan(leScanFilters, settings, leScanCallback)
     }
 
     private fun stopLeScanning() {

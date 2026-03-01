@@ -35,6 +35,7 @@ import java.util.Map;
 /**
  * Controller for {@link ColorContrastFragment}.
  */
+// LINT.IfChange
 public class ContrastPreferenceController extends BasePreferenceController {
 
     public ContrastPreferenceController(@NonNull Context context, @NonNull String preferenceKey) {
@@ -58,3 +59,4 @@ public class ContrastPreferenceController extends BasePreferenceController {
         return mContext.getString(mContrastLevelToResId.get(toContrastLevel(contrastLevel)));
     }
 }
+// LINT.ThenChange(ColorContrastApiScreen.java)

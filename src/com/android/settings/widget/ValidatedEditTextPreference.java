@@ -16,6 +16,8 @@
 
 package com.android.settings.widget;
 
+import static android.view.View.TEXT_DIRECTION_LOCALE;
+
 import android.content.Context;
 import android.text.Editable;
 import android.text.InputType;
@@ -69,6 +71,7 @@ public class ValidatedEditTextPreference extends CustomEditTextPreferenceCompat 
         final EditText editText = view.findViewById(android.R.id.edit);
         if (editText != null) {
             editText.setHint(getDialogTitle());
+            editText.setTextDirection(TEXT_DIRECTION_LOCALE);
         }
         if (editText != null && !TextUtils.isEmpty(editText.getText())) {
             editText.setSelection(editText.getText().length());

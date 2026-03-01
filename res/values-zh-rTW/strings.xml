@@ -150,7 +150,7 @@
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"其他裝置"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"已儲存的裝置"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"與帳戶建立關聯"</string>
-    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"先前與帳戶搭配使用過的裝置"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"與帳戶配對過的裝置"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"系統將開啟藍牙以配對裝置"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"連線偏好設定"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"先前連線的裝置"</string>
@@ -728,13 +728,11 @@
     <string name="encrypted_summary" msgid="545623487587251207">"已加密"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"設定螢幕鎖定"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"為提升安全性，請在這部裝置上設定 PIN 碼、解鎖圖案或密碼。"</string>
-    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
-    <skip />
+    <string name="no_screen_lock_issue_summary_without_pattern" msgid="3709234873257859534">"為提升安全性，請為這部裝置設定 PIN 碼或密碼。"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"設定螢幕鎖定"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"設定螢幕鎖定"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"為提升安全性，請在這部裝置上設定 PIN 碼、解鎖圖案或密碼。"</string>
-    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"為提升安全性，請為這部裝置設定 PIN 碼或密碼。"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"新增用於解鎖的指紋"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"選擇螢幕鎖定方式"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"選擇螢幕鎖定方式"</string>
@@ -776,8 +774,7 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"不設定指紋與人臉解鎖並繼續操作"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"無"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"新增 PIN 碼、圖案、密碼或滑動解鎖"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off_new_without_pattern" msgid="1848366515765800557">"新增 PIN 碼、密碼或滑動解鎖"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑動"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"圖案"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN 碼"</string>
@@ -866,7 +863,7 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"一併允許存取聯絡人和通話記錄"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"資訊將用於來電通知等用途"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"檢查配對碼"</string>
-    <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"請檢查這組代碼是否與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」上的代碼相符。\n\n為了安全起見，請勿在任何地方輸入這組代碼。"</string>
+    <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"請檢查下方代碼是否與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」上的代碼相符。\n\n為了安全起見，請勿在任何地方輸入這組代碼。"</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"無法連線至「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」。"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"可用的裝置"</string>
@@ -2038,6 +2035,12 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"如果你強制停止應用程式，應用程式可能無法正常運作。"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"停用應用程式"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"如果你停用這個應用程式，Android 和其他應用程式可能無法正常運作。請注意，這是預先安裝在裝置上的應用程式，因此無法刪除。不過，只要停用這個應用程式，即可關閉該程式並在裝置上隱藏。"</string>
+    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
+    <skip />
+    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
+    <skip />
+    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
+    <skip />
     <string name="app_install_details_group_title" msgid="1172114479073704677">"商店"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"應用程式詳細資料"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"應用程式安裝來源：<xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2114,10 +2117,8 @@
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"設定"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"語言"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"鍵盤"</string>
-    <!-- no translation found for ime_switcher_button_in_navbar_title (3909360598089922591) -->
-    <skip />
-    <!-- no translation found for ime_switcher_button_in_navbar_summary (7202853456799949367) -->
-    <skip />
+    <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"顯示鍵盤切換鍵"</string>
+    <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"選取輸入欄位時，允許導覽列顯示「鍵盤切換工具」按鈕"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"螢幕小鍵盤"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"可用的螢幕小鍵盤"</string>
@@ -3145,7 +3146,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"網路通知"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"發生下列情況時接收通知：裝置連上未加密網路，或是網路記錄你的裝置專屬 ID/SIM 卡 ID"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"網路世代"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G 網路安全防護功能會避免使用安全性較低的 2G 網路，這可能會導致在某些地點無法連線。你隨時都能透過 2G 撥打緊急電話，但如果是在國外漫遊，可能無法接通電話。"</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"避免使用 2G 網路 (安全性較低)，可能會導致在某些地點無法連線。你隨時都能透過 2G 撥打緊急電話，但在國外漫遊時可能無法接通。"</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G 網路安全防護"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"加密"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"各代網路"</string>
@@ -3759,8 +3760,7 @@
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast 音量"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"通話音量"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"鬧鐘音量"</string>
-    <!-- no translation found for assistant_volume_option_title (7206008753384831048) -->
-    <skip />
+    <string name="assistant_volume_option_title" msgid="7206008753384831048">"助理音量"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"鈴聲和通知音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"鈴聲音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
@@ -3940,7 +3940,7 @@
     <string name="notification_bundles" msgid="496852738958148317">"通知整理工具"</string>
     <string name="notification_bundle_promotions_summary" msgid="3196830882575438887">"特價優惠、新功能等等"</string>
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"焦點新聞、社論等等"</string>
-    <string name="notification_bundle_social_summary" msgid="1880042768055317701">"喜歡的項目、貼文等等"</string>
+    <string name="notification_bundle_social_summary" msgid="1880042768055317701">"按讚的項目、貼文等等"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"電子報、推薦媒體等等"</string>
     <string name="notification_bundle_no_apps_desc" msgid="6357770877341582580">"所有應用程式目前都使用通知整理工具"</string>
     <string name="notification_ai_features_title" msgid="2241618579100257538">"使用 AI 管理"</string>
@@ -4032,7 +4032,7 @@
     <string name="priority_conversation_count_zero" msgid="3862289535537564713">"沒有重要對話"</string>
     <string name="priority_conversation_count" msgid="7291234530844412077">"{count,plural, =1{# 個重要對話}other{# 個重要對話}}"</string>
     <string name="important_conversations" msgid="1233893707189659401">"重要對話"</string>
-    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以浮動對話框的形式顯示在對話區的最上方"</string>
+    <string name="important_conversations_summary_bubbles" msgid="614327166808117644">"以浮動泡泡形式顯示在對話區的最上方"</string>
     <string name="important_conversations_summary" msgid="3184022761562676418">"顯示在對話部分的頂端"</string>
     <string name="other_conversations" msgid="551178916855139870">"非重要對話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"你已變更的對話"</string>
@@ -4109,7 +4109,7 @@
     <string name="notification_bundle_title" msgid="6679586974995981433">"通知整理工具"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"集中優先順序較低的通知並設為靜音"</string>
     <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"使用通知整理工具"</string>
-    <string name="notification_bundle_description" msgid="4202633316211056848">"選擇要靜音處理的通知類型，系統會加以分類，盡量減少干擾。\n\n通知整理工具採用裝置上的 AI 技術，因此有時可能會出錯。通知內容絕不會傳送給 Google。"</string>
+    <string name="notification_bundle_description" msgid="4202633316211056848">"選擇要靜音處理的通知類型，系統會加以分類，盡量減少干擾。\n\n通知整理工具採用裝置上的 AI 技術，有時可能會出錯。通知內容絕不會傳送給 Google。"</string>
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"通知整理工具"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"將優先順序較低的通知分類並設為靜音"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"管理適用通知整理工具的應用程式"</string>
@@ -5684,7 +5684,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"缺少電話號碼。"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"確定"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"2G 網路安全防護"</string>
-    <string name="enable_2g_summary" msgid="6194875539424151678">"避免使用安全性較低的 2G 網路，這可能會導致在某些地點無法連線。你隨時都能透過 2G 撥打緊急電話，但如果是在國外漫遊，可能無法接通電話。"</string>
+    <string name="enable_2g_summary" msgid="6194875539424151678">"避免使用 2G 網路 (安全性較低)，可能會導致在某些地點無法連線。你隨時都能透過 2G 撥打緊急電話，但在國外漫遊時可能無法接通。"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"必須啟用 2G 才能使用「<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g>」的服務"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"僅允許加密網路"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"這麼做雖然更加安全，但行動網路連線在某些地區可能會受到限制。緊急電話撥號服務則隨時可用，不會受到影響"</string>
@@ -6120,10 +6120,8 @@
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"顯示更多警示"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"減少快訊"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"已關閉的警示"</string>
-    <!-- no translation found for safety_center_collapse_dismissed_issues (1906333435017081366) -->
-    <skip />
-    <!-- no translation found for safety_center_expand_dismissed_issues (6075170862549670397) -->
-    <skip />
+    <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"收合已關閉的警告"</string>
+    <string name="safety_center_expand_dismissed_issues" msgid="6075170862549670397">"查看已關閉的警告"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"要關閉這個警示嗎？"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"請隨時查看安全性與隱私權設定，上網更安全"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"動作已完成"</string>

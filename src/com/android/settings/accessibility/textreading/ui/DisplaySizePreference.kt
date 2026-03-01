@@ -32,6 +32,7 @@ import com.android.settings.accessibility.textreading.data.DisplaySizeDataStore
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.IntRangeValuePreference
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -49,7 +50,8 @@ internal class DisplaySizePreference(context: Context, @EntryPoint private val e
     SliderPreferenceBinding,
     Slider.OnSliderTouchListener,
     Slider.OnChangeListener,
-    PreferenceLifecycleProvider {
+    PreferenceLifecycleProvider,
+    PreferenceAvailabilityProvider {
 
     override fun getReadPermissions(context: Context) = Permissions.EMPTY
 
@@ -186,6 +188,8 @@ internal class DisplaySizePreference(context: Context, @EntryPoint private val e
             commitChange(CHANGE_BY_BUTTON_DELAY, value.toInt())
         }
     }
+
+    override fun isAvailable(context: Context) = context.display.isInternal
 
     @VisibleForTesting
     internal fun commitChange(delay: Duration, index: Int) {

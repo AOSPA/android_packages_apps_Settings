@@ -19,7 +19,6 @@ package com.android.settings.appfunctions
 import android.content.Context
 import android.os.CancellationSignal
 import android.os.OutcomeReceiver
-import android.service.settings.preferences.SettingsPreferenceServiceClient
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.extensions.appfunctions.AppFunctionException
@@ -30,7 +29,6 @@ import com.android.settings.metrics.toMetricsId
 import com.android.settingslib.metadata.AppFunctionMetricsLoggerInterface
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
-import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -38,7 +36,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.doAnswer
-import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnit
 import org.mockito.kotlin.any
@@ -75,21 +72,6 @@ class AbstractDeviceStateAppFunctionServiceTest {
 
     @Before
     fun setUp() {
-        val managerClass = SettingsPreferenceServiceClientManager::class.java
-
-        // Set client
-        val clientField = managerClass.getDeclaredField("client")
-        clientField.isAccessible = true
-        clientField.set(null, mock(SettingsPreferenceServiceClient::class.java))
-
-        // Complete initializationComplete
-        val deferredField = managerClass.getDeclaredField("initializationComplete")
-        deferredField.isAccessible = true
-        val deferred = deferredField.get(null) as CompletableDeferred<Unit>
-        if (!deferred.isCompleted) {
-            deferred.complete(Unit)
-        }
-
         service = TestDeviceStateAppFunctionService(listOf(mockProvider), mockMetricsLogger)
         service.onCreate()
     }

@@ -16,7 +16,10 @@
 
 package com.android.settings.display;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+
 import android.app.settings.SettingsEnums;
+import android.content.Context;
 import android.os.Bundle;
 
 import com.android.settings.R;
@@ -55,5 +58,11 @@ public class AutoBrightnessSettings extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.auto_brightness_detail);
+            new BaseSearchIndexProvider(R.xml.auto_brightness_detail) {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return AutoBrightnessExtensionsKt.getAutoBrightnessAvailabilityStatus(context)
+                            == AVAILABLE;
+                }
+            };
 }

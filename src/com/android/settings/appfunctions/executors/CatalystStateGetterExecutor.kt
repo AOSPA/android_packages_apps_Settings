@@ -21,10 +21,10 @@ import android.content.Context
 import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateItemProviderExecutorResult
+import com.android.settings.appfunctions.utils.determineParamName
 import com.android.settings.appfunctions.utils.getPreference
 import com.android.settings.appfunctions.utils.settingsPreferenceValueToString
 import com.android.settingslib.metadata.KeyParameters
-import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemResponse
 import kotlinx.coroutines.Dispatchers
@@ -93,24 +93,6 @@ class CatalystStateGetterExecutor(private val context: Context) : DeviceStateExe
                 DeviceStateItemProviderExecutorResult(result = null)
             }
         }
-
-    private fun determineParamName(screenKey: String): String? {
-        val schema = PreferenceScreenRegistry.getScreenParametersSchema(screenKey)
-        if (schema != null) {
-            try {
-                val field = schema.javaClass.getDeclaredField("schema")
-                field.isAccessible = true
-                val map = field.get(schema) as? Map<String, *>
-                // TODO b/483316948331698989: handle all parameters
-                if (map != null && map.isNotEmpty()) {
-                    return map.keys.first()
-                }
-            } catch (e: Exception) {
-                Log.w(TAG, "Failed to determine param name from schema via reflection", e)
-            }
-        }
-        return null
-    }
 
     companion object {
         private const val TAG = "DeviceStateItemProviderExecutor"

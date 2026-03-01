@@ -85,6 +85,20 @@ class SatelliteUtilsTest {
     }
 
     @Test
+    fun isLteBasedNtnSupported_bundle_returnsTrue() {
+        val config =
+            PersistableBundle().apply {
+                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
+                putInt(
+                    CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                    CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+                )
+            }
+
+        assertThat(SatelliteUtils.isLteBasedNtnSupported(config)).isTrue()
+    }
+
+    @Test
     fun isLteBasedNtnSupported_supportedConfig_hasUserRestriction_stillReturnsTrue() {
         // Set attach restriction reason to true (user restriction)
         setAttachRestrictionReasons(restricted = true)
