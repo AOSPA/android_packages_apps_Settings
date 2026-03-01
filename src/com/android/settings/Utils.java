@@ -1772,10 +1772,31 @@ public final class Utils extends com.android.settingslib.Utils {
     }
 
     /**
+     * Returns true if the device is in demo mode and should disable keyboard settings.
+     */
+    public static boolean shouldDisableKeyboardSettingsInDemoMode(Context context) {
+        if (context == null) {
+            Log.e(TAG, "Context is null.");
+            return false;
+        }
+        try {
+            return Flags.disableKeyboardSettingsInDemoMode()
+                && UserManager.isDeviceInDemoMode(context)
+                && context.getResources().getBoolean(
+                    R.bool.config_disable_keyboard_settings_in_demo_mode);
+        } catch (Exception e) {
+            // Some tests may not setup context content resolver. Should not happen on real device.
+            Log.e(TAG, "Error getting demo mode status.");
+            return false;
+        }
+    }
+
+    /**
      * Returns true if the device is in demo mode and should hide Modes settings.
      */
     public static boolean shouldHideModesInDemoMode(Context context) {
         if (context == null) {
+            Log.e(TAG, "Context is null.");
             return false;
         }
         try {

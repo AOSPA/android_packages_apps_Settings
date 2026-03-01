@@ -58,6 +58,11 @@ import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import java.util.concurrent.Executor
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.runTest
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -86,8 +91,10 @@ class FakeSupervisionDashboardScreenMessengerService :
 
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.INSTRUMENTATION_TEST)
+@ExperimentalCoroutinesApi
 class SupervisionDashboardScreenTest {
     private val preferenceScreenCreator = SupervisionDashboardScreen()
+    private val testDispatcher = UnconfinedTestDispatcher()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
 
@@ -110,6 +117,7 @@ class SupervisionDashboardScreenTest {
 
     @Before
     fun setUp() {
+        SupervisionDashboardFragment.ioDispatcher = testDispatcher
         mockLifeCycleContext.stub {
             on { preferenceScreenKey } doReturn preferenceScreenCreator.bindingKey
             on { getSystemService(SupervisionManager::class.java) } doReturn mockSupervisionManager
@@ -124,26 +132,31 @@ class SupervisionDashboardScreenTest {
         )
     }
 
+    @After
+    fun tearDown() {
+        SupervisionDashboardFragment.ioDispatcher = Dispatchers.IO
+    }
+
     @Test
-    fun key() {
+    fun key() = runTest {
         assertThat(preferenceScreenCreator.key).isEqualTo(SupervisionDashboardScreen.KEY)
     }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SCREEN)
-    fun flagEnabled() {
+    fun flagEnabled() = runTest {
         assertThat(preferenceScreenCreator.isFlagEnabled(context)).isTrue()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SCREEN)
-    fun flagDisabled() {
+    fun flagDisabled() = runTest {
         assertThat(preferenceScreenCreator.isFlagEnabled(context)).isFalse()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun toggleMainSwitch_pinVerificationSucceeded_enablesChildPreferences() {
+    fun toggleMainSwitch_pinVerificationSucceeded_enablesChildPreferences() = runTest {
         preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
             val mainSwitchPreference =
                 fragment.findPreference<MainSwitchPreference>(SupervisionMainSwitchPreference.KEY)!!
@@ -166,7 +179,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun toggleMainSwitch_pinVerificationFailed_childPreferencesRemainDisabled() {
+    fun toggleMainSwitch_pinVerificationFailed_childPreferencesRemainDisabled() = runTest {
         preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
             val mainSwitchPreference =
                 fragment.findPreference<MainSwitchPreference>(SupervisionMainSwitchPreference.KEY)!!
@@ -189,7 +202,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onResume_updatesDependentPreferenceSummary() {
+    fun onResume_updatesDependentPreferenceSummary() = runTest {
         val initialSummary = "Initial Summary"
         fakePreferenceDataApi.preferenceData =
             mapOf(
@@ -208,7 +221,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun refreshDashboardTiles_updatesDependentPreferenceSummary() {
+    fun refreshDashboardTiles_updatesDependentPreferenceSummary() = runTest {
         val initialSummary = "Initial Summary"
         fakePreferenceDataApi.preferenceData =
             mapOf(
@@ -240,58 +253,61 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun clickDashboardPreference_withSupervisionDisabled_launchesSetupSupervisionActivity() {
-        shadowOf(context as Application)
-            .setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
+    fun clickDashboardPreference_withSupervisionDisabled_launchesSetupSupervisionActivity() =
+        runTest {
+            shadowOf(context as Application)
+                .setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
 
-        preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
-            val dashboardFragment = fragment as SupervisionDashboardFragment
-            val childPreference =
-                fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
+            preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
+                val dashboardFragment = fragment as SupervisionDashboardFragment
+                val childPreference =
+                    fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
-            // With supervision disabled, the preference click should redirect to
-            // SetupSupervisionActivity after refreshDashboardTiles is called.
-            mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn false }
-            dashboardFragment.refreshDashboardTiles("test")
+                // With supervision disabled, the preference click should redirect to
+                // SetupSupervisionActivity after refreshDashboardTiles is called.
+                mockSupervisionManager.stub { on { isSupervisionEnabled } doReturn false }
+                dashboardFragment.refreshDashboardTiles("test")
 
-            childPreference.performClick()
+                childPreference.performClick()
 
-            val intent = shadowOf(fragment.activity).nextStartedActivity
-            assertThat(intent.component?.className)
-                .isEqualTo(SetupSupervisionActivity::class.java.name)
+                val intent = shadowOf(fragment.activity).nextStartedActivity
+                assertThat(intent.component?.className)
+                    .isEqualTo(SetupSupervisionActivity::class.java.name)
+            }
         }
-    }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun clickDashboardPreference_supervisionEnabled_noPinSet_launchesSetupSupervisionActivity() {
-        val supervisionManager = context.getSystemService(SupervisionManager::class.java)
-        val shadowSupervisionManager: ShadowSupervisionManager = Shadow.extract(supervisionManager)
+    fun clickDashboardPreference_supervisionEnabled_noPinSet_launchesSetupSupervisionActivity() =
+        runTest {
+            val supervisionManager = context.getSystemService(SupervisionManager::class.java)
+            val shadowSupervisionManager: ShadowSupervisionManager =
+                Shadow.extract(supervisionManager)
 
-        // Supervision enabled
-        shadowSupervisionManager.overrideSupervisionEnabled(true)
-        // Pin not set
-        shadowSupervisionManager.overrideCredentialType(-1)
+            // Supervision enabled
+            shadowSupervisionManager.overrideSupervisionEnabled(true)
+            // Pin not set
+            shadowSupervisionManager.overrideCredentialType(-1)
 
-        preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
-            val dashboardFragment = fragment as SupervisionDashboardFragment
-            val childPreference =
-                fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
+            preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
+                val dashboardFragment = fragment as SupervisionDashboardFragment
+                val childPreference =
+                    fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
-            dashboardFragment.refreshDashboardTiles("test")
+                dashboardFragment.refreshDashboardTiles("test")
 
-            childPreference.performClick()
+                childPreference.performClick()
 
-            val intent = shadowOf(fragment.activity).nextStartedActivity
-            assertThat(intent).isNotNull()
-            assertThat(intent.component?.className)
-                .isEqualTo(SetupSupervisionActivity::class.java.name)
+                val intent = shadowOf(fragment.activity).nextStartedActivity
+                assertThat(intent).isNotNull()
+                assertThat(intent.component?.className)
+                    .isEqualTo(SetupSupervisionActivity::class.java.name)
+            }
         }
-    }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun refreshDashboardTiles_withSupervisionEnabled_restoresOriginalListener() {
+    fun refreshDashboardTiles_withSupervisionEnabled_restoresOriginalListener() = runTest {
         shadowOf(context as Application)
             .setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
 
@@ -324,7 +340,7 @@ class SupervisionDashboardScreenTest {
     }
 
     @Test
-    fun getPreferenceScreenBindingKey_returnsScreenKey() {
+    fun getPreferenceScreenBindingKey_returnsScreenKey() = runTest {
         preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
             assertThat(
                     (fragment as SupervisionDashboardFragment).getPreferenceScreenBindingKey(
@@ -336,25 +352,25 @@ class SupervisionDashboardScreenTest {
     }
 
     @Test
-    fun getTitle() {
+    fun getTitle() = runTest {
         assertThat(preferenceScreenCreator.title).isEqualTo(R.string.supervision_settings_title)
     }
 
     @Test
-    fun getKeywords() {
+    fun getKeywords() = runTest {
         assertThat(preferenceScreenCreator.keywords)
             .isEqualTo(R.string.keywords_supervision_settings)
     }
 
     @Test
     @DisableFlags(FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE)
-    fun isAvailable() {
+    fun isAvailable() = runTest {
         assertThat(preferenceScreenCreator.isAvailable(context)).isTrue()
     }
 
     @Test
     @EnableFlags(FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE)
-    fun isAvailable_inDemoMode_configHidingTrue_isFalse() {
+    fun isAvailable_inDemoMode_configHidingTrue_isFalse() = runTest {
         SettingsGlobalStore.get(mockLifeCycleContext).setInt(Settings.Global.DEVICE_DEMO_MODE, 1)
 
         mockResources.stub {
@@ -369,14 +385,14 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onCreate_registersListener() {
+    fun onCreate_registersListener() = runTest {
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(any())
     }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onDestroy_unregistersListener() {
+    fun onDestroy_unregistersListener() = runTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
@@ -388,7 +404,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onResume_addsOnRoleHoldersChangedListener() {
+    fun onResume_addsOnRoleHoldersChangedListener() = runTest {
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
         verify(mockRoleManager)
@@ -401,7 +417,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onStart_registerSupervisionListener() {
+    fun onStart_registerSupervisionListener() = runTest {
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onStart(mockLifeCycleContext)
         verify(mockSupervisionManager).registerSupervisionListener(any())
@@ -409,7 +425,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onPause_removeOnRoleHoldersChangedListener() {
+    fun onPause_removeOnRoleHoldersChangedListener() = runTest {
         val roleListenerCaptor = argumentCaptor<OnRoleHoldersChangedListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
@@ -428,7 +444,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onStop_unregisterSupervisionListener() {
+    fun onStop_unregisterSupervisionListener() = runTest {
         val supervisionListenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
@@ -443,7 +459,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun listener_withoutUiUpdates_onSupervisionDisabled_refreshesPreferences() {
+    fun listener_withoutUiUpdates_onSupervisionDisabled_refreshesPreferences() = runTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
@@ -458,7 +474,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun listener_withoutUiUpdates_onSupervisionEnabled_refreshesPreferences() {
+    fun listener_withoutUiUpdates_onSupervisionEnabled_refreshesPreferences() = runTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
@@ -473,7 +489,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun listener_onSupervisionDisabled_refreshesPreferences() {
+    fun listener_onSupervisionDisabled_refreshesPreferences() = runTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
@@ -489,7 +505,7 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun listener_onSupervisionEnabled_refreshesPreferences() {
+    fun listener_onSupervisionEnabled_refreshesPreferences() = runTest {
         val listenerCaptor = argumentCaptor<SupervisionManager.SupervisionListener>()
 
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
@@ -505,84 +521,88 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onResume_supervisionSettingsUiUpdatesEnabled_nonEmptySupervisionAppsList_supervisionAppsGroupVisible() {
-        val testPackageName = "com.android.settings.test"
-        val testLabel = "testLabel"
-        val testActivity = "com.android.settings.test.TestActivity"
-        val testIcon = ColorDrawable(Color.RED)
+    fun onResume_supervisionSettingsUiUpdatesEnabled_nonEmptySupervisionAppsList_supervisionAppsGroupVisible() =
+        runTest {
+            val testPackageName = "com.android.settings.test"
+            val testLabel = "testLabel"
+            val testActivity = "com.android.settings.test.TestActivity"
+            val testIcon = ColorDrawable(Color.RED)
 
-        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(testPackageName) }
+            mockRoleManager.stub { on { getRoleHolders(any()) } doReturn listOf(testPackageName) }
 
-        val testActivityInfo =
-            mock<ActivityInfo>() {
-                on { loadIcon(any()) } doReturn testIcon
-                on { loadLabel(any()) } doReturn testLabel
+            val testActivityInfo =
+                mock<ActivityInfo>() {
+                    on { loadIcon(any()) } doReturn testIcon
+                    on { loadLabel(any()) } doReturn testLabel
+                }
+            testActivityInfo.packageName = testPackageName
+            testActivityInfo.name = testActivity
+            val resolveInfoList = listOf(ResolveInfo().apply { activityInfo = testActivityInfo })
+            val mockPackageManager =
+                mock<PackageManager> {
+                    on { queryIntentActivities(any<Intent>(), anyInt()) } doReturn resolveInfoList
+                }
+            mockLifeCycleContext.stub { on { packageManager } doReturn mockPackageManager }
+            val supervisionAppsGroup = PreferenceCategory(context)
+            PreferenceManager(context)
+                .createPreferenceScreen(context)
+                .addPreference(supervisionAppsGroup)
+            mockLifeCycleContext.stub {
+                on {
+                    findPreference<PreferenceGroup>(
+                        SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
+                    )
+                } doReturn supervisionAppsGroup
             }
-        testActivityInfo.packageName = testPackageName
-        testActivityInfo.name = testActivity
-        val resolveInfoList = listOf(ResolveInfo().apply { activityInfo = testActivityInfo })
-        val mockPackageManager =
-            mock<PackageManager> {
-                on { queryIntentActivities(any<Intent>(), anyInt()) } doReturn resolveInfoList
-            }
-        mockLifeCycleContext.stub { on { packageManager } doReturn mockPackageManager }
-        val supervisionAppsGroup = PreferenceCategory(context)
-        PreferenceManager(context)
-            .createPreferenceScreen(context)
-            .addPreference(supervisionAppsGroup)
-        mockLifeCycleContext.stub {
-            on {
-                findPreference<PreferenceGroup>(
-                    SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
-                )
-            } doReturn supervisionAppsGroup
+
+            preferenceScreenCreator.onCreate(mockLifeCycleContext)
+            preferenceScreenCreator.onResume(mockLifeCycleContext)
+
+            assertThat(supervisionAppsGroup.isVisible).isTrue()
+            assertThat(supervisionAppsGroup.preferenceCount).isEqualTo(1)
+            val preference = supervisionAppsGroup.getPreference(0)
+            assertThat(preference.intent?.action)
+                .isEqualTo(Settings.MANAGE_SUPERVISION_APP_SETTINGS)
+            assertThat(preference.widgetLayoutResource)
+                .isEqualTo(R.layout.preference_external_action_icon)
         }
-
-        preferenceScreenCreator.onCreate(mockLifeCycleContext)
-        preferenceScreenCreator.onResume(mockLifeCycleContext)
-
-        assertThat(supervisionAppsGroup.isVisible).isTrue()
-        assertThat(supervisionAppsGroup.preferenceCount).isEqualTo(1)
-        val preference = supervisionAppsGroup.getPreference(0)
-        assertThat(preference.intent?.action).isEqualTo(Settings.MANAGE_SUPERVISION_APP_SETTINGS)
-        assertThat(preference.widgetLayoutResource)
-            .isEqualTo(R.layout.preference_external_action_icon)
-    }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onResume_supervisionSettingsUiUpdatesDisabled_emptySupervisionAppsList_supervisionAppsGroupIsNotVisible() {
-        mockRoleManager.stub { on { getRoleHolders(any()) } doReturn emptyList() }
-        val supervisionAppsGroup = PreferenceCategory(context, null)
-        mockLifeCycleContext.stub {
-            on {
-                findPreference<PreferenceGroup>(
-                    SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
-                )
-            } doReturn supervisionAppsGroup
+    fun onResume_supervisionSettingsUiUpdatesDisabled_emptySupervisionAppsList_supervisionAppsGroupIsNotVisible() =
+        runTest {
+            mockRoleManager.stub { on { getRoleHolders(any()) } doReturn emptyList() }
+            val supervisionAppsGroup = PreferenceCategory(context, null)
+            mockLifeCycleContext.stub {
+                on {
+                    findPreference<PreferenceGroup>(
+                        SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
+                    )
+                } doReturn supervisionAppsGroup
+            }
+
+            preferenceScreenCreator.onCreate(mockLifeCycleContext)
+            preferenceScreenCreator.onResume(mockLifeCycleContext)
+
+            assertThat(supervisionAppsGroup.isVisible).isFalse()
+            assertThat(supervisionAppsGroup.preferenceCount).isEqualTo(0)
         }
-
-        preferenceScreenCreator.onCreate(mockLifeCycleContext)
-        preferenceScreenCreator.onResume(mockLifeCycleContext)
-
-        assertThat(supervisionAppsGroup.isVisible).isFalse()
-        assertThat(supervisionAppsGroup.preferenceCount).isEqualTo(0)
-    }
 
     @Test
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onResume_supervisionSettingsUiUpdatesDisabled_doNotAttemptToLoadSupervisionAppsList() {
-        preferenceScreenCreator.onResume(mockLifeCycleContext)
+    fun onResume_supervisionSettingsUiUpdatesDisabled_doNotAttemptToLoadSupervisionAppsList() =
+        runTest {
+            preferenceScreenCreator.onResume(mockLifeCycleContext)
 
-        verify(mockLifeCycleContext, never())
-            .findPreference<PreferenceGroup>(
-                SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
-            )
-    }
+            verify(mockLifeCycleContext, never())
+                .findPreference<PreferenceGroup>(
+                    SupervisionDashboardScreen.ACTIVE_SUPERVISION_APPS_GROUP
+                )
+        }
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onResume_supervisionSettingsUiUpdatesEnabled_refreshPinManagementPreference() {
+    fun onResume_supervisionSettingsUiUpdatesEnabled_refreshPinManagementPreference() = runTest {
         preferenceScreenCreator.onCreate(mockLifeCycleContext)
         preferenceScreenCreator.onResume(mockLifeCycleContext)
 

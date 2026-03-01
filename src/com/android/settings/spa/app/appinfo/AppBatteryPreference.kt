@@ -33,6 +33,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.utils.HsuUtils
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.fuelgauge.AdvancedPowerUsageDetail
 import com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController
@@ -140,13 +141,19 @@ private class AppBatteryPresenter(private val context: Context, private val app:
             AdvancedPowerUsageDetail.EXTRA_POWER_USAGE_PERCENT to Utils.formatPercentage(0),
             AdvancedPowerUsageDetail.EXTRA_UID to app.uid,
         )
-        SubSettingLauncher(context)
+        val launcher = SubSettingLauncher(context)
             .setDestination(AdvancedPowerUsageDetail::class.java.name)
             .setTitleRes(R.string.battery_details_title)
             .setArguments(args)
-            .setUserHandle(app.userHandle)
             .setSourceMetricsCategory(AppInfoSettingsProvider.METRICS_CATEGORY)
-            .launch()
+
+        // For HSU apps, we must launch the activity in the current user's context (e.g. user 10)
+        // because the System User (User 0) is headless and cannot display UI.
+        // The fragment will handle data fetching for the target user (User 0) based on the UID.
+        if (!android.multiuser.Flags.hsuAppManagement() || !HsuUtils.isHsuApp(context, app)) {
+            launcher.setUserHandle(app.userHandle)
+        }
+        launcher.launch()
     }
 
     companion object {

@@ -49,6 +49,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -217,6 +218,22 @@ public class UserCapabilitiesTest {
         userCapabilities.updateAddUserCapabilities(mContext);
 
         assertThat(userCapabilities.mDisallowAddUser).isTrue();
+        assertThat(userCapabilities.mDisallowAddUserSetByAdmin).isFalse();
+        assertThat(userCapabilities.mDisallowAddUserRestrictionEnforcementInfo).isEqualTo(
+                policyEnforcementInfo);
+    }
+
+    @Test
+    @EnableFlags({Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
+    public void addUserDisallowed_policyTransparencyRefactorEnabled_notRestricted() {
+        PolicyEnforcementInfo policyEnforcementInfo = new PolicyEnforcementInfo(
+                Collections.emptyList());
+        mDpm.setPolicyEnforcementInfoForUserRestriction(DISALLOW_ADD_USER, policyEnforcementInfo);
+
+        UserCapabilities userCapabilities = UserCapabilities.create(mContext);
+        userCapabilities.updateAddUserCapabilities(mContext);
+
+        assertThat(userCapabilities.mDisallowAddUser).isFalse();
         assertThat(userCapabilities.mDisallowAddUserSetByAdmin).isFalse();
         assertThat(userCapabilities.mDisallowAddUserRestrictionEnforcementInfo).isEqualTo(
                 policyEnforcementInfo);

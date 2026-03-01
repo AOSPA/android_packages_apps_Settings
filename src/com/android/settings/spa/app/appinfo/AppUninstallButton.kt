@@ -22,6 +22,7 @@ import android.content.pm.ApplicationInfo
 import android.os.UserHandle
 import android.os.UserManager
 import androidx.compose.runtime.Composable
+import com.android.settings.utils.HsuUtils
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -47,16 +48,29 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
     }
 
     @Composable
-    private fun uninstallButton(app: ApplicationInfo) = ActionButton(
-        text = if (isCloneApp(app)) context.getString(R.string.delete) else
-            context.getString(R.string.uninstall_text),
-        imageVector = ImageVector.vectorResource(R.drawable.ic_settings_delete),
-        enabled = remember(app) {
-            flow {
-                emit(appButtonRepository.isAllowUninstallOrArchive(context, app))
-            }.flowOn(Dispatchers.Default)
-        }.collectAsStateWithLifecycle(false).value,
-    ) { onUninstallClicked(app) }
+    private fun uninstallButton(app: ApplicationInfo): ActionButton {
+        val hsuWarningDialogPresenter = HsuUtils.rememberHsuAppWarningDialogPresenter {
+            onUninstallClicked(app)
+        }
+        return ActionButton(
+            text = if (isCloneApp(app)) context.getString(R.string.delete) else
+                context.getString(R.string.uninstall_text),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_settings_delete),
+            enabled = remember(app) {
+                flow {
+                    emit(appButtonRepository.isAllowUninstallOrArchive(context, app))
+                }.flowOn(Dispatchers.Default)
+            }.collectAsStateWithLifecycle(false).value,
+        ) {
+            // If it's an HSU app, show a warning dialog first.
+            // Otherwise, proceed with the uninstallation directly.
+            if (android.multiuser.Flags.hsuAppManagement() && HsuUtils.isHsuApp(context, app)) {
+                hsuWarningDialogPresenter.open()
+            } else {
+                onUninstallClicked(app)
+            }
+        }
+    }
 
     private fun onUninstallClicked(app: ApplicationInfo) {
         if (appButtonRepository.isUninstallBlockedByAdmin(app)) {
@@ -73,7 +87,7 @@ class AppUninstallButton(private val packageInfoPresenter: PackageInfoPresenter)
         packageInfoPresenter.startUninstallActivity()
     }
 
-    private fun isCloneApp(app: ApplicationInfo): Boolean  {
+    private fun isCloneApp(app: ApplicationInfo): Boolean {
         val userInfo = userManager.getUserInfo(UserHandle.getUserId(app.uid))
         return userInfo != null && userInfo.isCloneProfile
     }

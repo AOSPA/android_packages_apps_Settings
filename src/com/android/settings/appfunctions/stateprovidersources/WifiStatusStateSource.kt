@@ -75,16 +75,19 @@ class WifiStatusStateSource : DeviceStateSource {
                         listOf(
                             DeviceStateItem(
                                 key = "wifi_name_$networkId",
+                                purpose = "wifi_name networkId:$networkId",
                                 jsonValue = ssid,
                                 hintText = "Wifi name of saved network",
                             ),
                             DeviceStateItem(
                                 key = "is_connected_$networkId",
+                                purpose = "wifi_is_connected networkId:$networkId",
                                 jsonValue = isConnected.toString(),
                                 hintText = "Whether currently connected to $ssid",
                             ),
                             DeviceStateItem(
                                 key = "auto_connect_$networkId",
+                                purpose = "wifi_auto_connect networkId:$networkId",
                                 jsonValue = network.allowAutojoin.toString(),
                                 hintText = "Whether $ssid is set to auto-connect",
                             ),

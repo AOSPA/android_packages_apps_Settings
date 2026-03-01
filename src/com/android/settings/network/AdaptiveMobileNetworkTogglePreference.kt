@@ -29,6 +29,7 @@ import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 class AdaptiveMobileNetworkTogglePreference() :
     SwitchPreference(
@@ -48,7 +49,7 @@ class AdaptiveMobileNetworkTogglePreference() :
     override val purpose: Int
         get() = R.string.adaptive_connectivity_mobile_network_enabled_purpose
 
-    override fun tags(context: Context) = arrayOf(KEY_ADAPTIVE_MOBILE_NETWORK)
+    override fun tags(context: Context) = arrayOf(KEY_ADAPTIVE_MOBILE_NETWORK, UI_ONLY_PREFERENCE)
 
     override fun storage(context: Context): KeyValueStore =
         AdaptiveMobileNetworkToggleStorage(context)

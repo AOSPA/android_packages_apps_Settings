@@ -188,7 +188,7 @@ class CatalystStateMetadataProviderExecutor(
             intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
             // This is a temporary hack to indicate to the agent that the screen is itemized, it
             // should eventually state the type of itemization (e.g. package, sim, etc)
-            itemizationType = if (isParameterized) "ITEMIZED SCREEN" else null,
+            itemizationTypes = if (isParameterized) listOf("ITEMIZED SCREEN") else emptyList(),
         )
     }
 

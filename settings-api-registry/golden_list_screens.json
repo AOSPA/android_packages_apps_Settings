@@ -690,11 +690,6 @@
     "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_my_device_info_pref_screen}"
   },
   {
-    "file_name": "NumberingSystemLocaleListApiFirstScreen.kt",
-    "item_name": "regional_preference_numbering_system",
-    "intent": "precondition present"
-  },
-  {
     "file_name": "UserAspectRatioAppsApiScreen.kt",
     "item_name": "aspect_ratio_apps",
     "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=aspect_ratio_apps}"
@@ -773,6 +768,56 @@
     "file_name": "UsageDataAppListApiScreen.kt",
     "item_name": "usage_data_app_list",
     "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=usage_data_app_list}"
+  },
+  {
+    "file_name": "AutoclickScreen.kt",
+    "item_name": "autoclick_preference",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) } extras={screen_key=autoclick_preference}"
+  },
+  {
+    "file_name": "AppSecurityScreenApi.kt",
+    "item_name": "app_security_subpage",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=app_security_subpage}"
+  },
+  {
+    "file_name": "DoubleTapApiScreen.kt",
+    "item_name": "double_tap_screen",
+    "intent": "precondition present"
+  },
+  {
+    "file_name": "MobileNetworkScreenApi.kt",
+    "item_name": "api_mobile_network_pref_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={launch_screen_extra=Bundle[{android.provider.extra.SUB_ID=1}], screen_key=api_mobile_network_pref_screen, screen_args=Bundle[{android.provider.extra.SUB_ID=1}]}"
+  },
+  {
+    "file_name": "MoreSecurityPrivacyScreenApi.kt",
+    "item_name": "more_security_privacy_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=more_security_privacy_settings}"
+  },
+  {
+    "file_name": "OpeningLinksApiScreen.kt",
+    "item_name": "manage_domain_url_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=manage_domain_url_screen}"
+  },
+  {
+    "file_name": "PrivacyControlsScreenApi.kt",
+    "item_name": "privacy_controls_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=privacy_controls_screen}"
+  },
+  {
+    "file_name": "SystemAndUpdatesScreenApi.kt",
+    "item_name": "system_and_updates_subpage",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=system_and_updates_subpage}"
+  },
+  {
+    "file_name": "TapScreenGestureApiScreen.kt",
+    "item_name": "tap_screen_gesture",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=tap_screen_gesture}"
+  },
+  {
+    "file_name": "WifiDataUsageScreenApi.kt",
+    "item_name": "non_carrier_data_usage_settings",
+    "intent": "precondition present"
   }
-
 ]
+
