@@ -33,6 +33,7 @@ object SatelliteUtils {
     /**
      * Returns true if LTE-based NTN is supported by the carrier associated with the given subId.
      */
+    @JvmStatic
     fun isLteBasedNtnSupported(context: Context, subId: Int): Boolean {
         Log.i(TAG, "Checking LTE-based NTN support for SubId: $subId")
         return isLteBasedNtnSupportedByCarrier(context, subId)
@@ -41,6 +42,7 @@ object SatelliteUtils {
     /**
      * Returns true if LTE-based NTN is supported by any active subscription on the device.
      */
+    @JvmStatic
     fun isLteBasedNtnSupportedByAnySub(context: Context): Boolean {
         val subscriptionManager: SubscriptionManager? =
             context.getSystemService(SubscriptionManager::class.java)
@@ -69,6 +71,7 @@ object SatelliteUtils {
      * @param context The context to use for fetching carrier config.
      * @param activeSubId The active subscription ID to check carrier support for.
      */
+    @JvmStatic
     fun isCarrierRoamingNtnSupported(context: Context, activeSubId: Int): Boolean {
         if (activeSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.w(TAG, "ActiveSubId is invalid")
@@ -87,6 +90,7 @@ object SatelliteUtils {
     }
 
     /** Returns true if LTE-based NTN is supported for the given carrier config. */
+    @JvmStatic
     fun isLteBasedNtnSupported(carrierConfig: PersistableBundle): Boolean {
         val isSatelliteAttachSupported =
             carrierConfig.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
@@ -114,6 +118,7 @@ object SatelliteUtils {
      * If carrier roaming NTN is supported by carrier, attach restriction reasons are empty and
      * carrier roaming NTN connect type is automatic, it means that LTE-based NTN is supported.
      */
+    @JvmStatic
     fun isLteBasedNtnSupportedByCarrier(context: Context, activeSubId: Int): Boolean {
         if (activeSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.w(TAG, "ActiveSubId is invalid")

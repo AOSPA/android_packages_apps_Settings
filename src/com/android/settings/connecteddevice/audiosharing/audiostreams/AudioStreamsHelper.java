@@ -34,8 +34,10 @@ import static java.util.stream.Collectors.toMap;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeAudioContentMetadata;
+import android.bluetooth.BluetoothLeBroadcastChannel;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothLeBroadcastSubgroup;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -44,7 +46,6 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.accessibility.AccessibilityManager;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
@@ -92,7 +93,6 @@ public class AudioStreamsHelper {
      *
      * @param source The LE broadcast metadata representing the audio source.
      */
-    @VisibleForTesting
     public void addSource(BluetoothLeBroadcastMetadata source) {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "addSource(): LeBroadcastAssistant is null!");
@@ -119,7 +119,6 @@ public class AudioStreamsHelper {
     }
 
     /** Removes sources from LE broadcasts associated for all active sinks based on broadcast Id. */
-    @VisibleForTesting
     public void removeSource(int broadcastId) {
         if (mLeBroadcastAssistant == null) {
             Log.w(TAG, "removeSource(): LeBroadcastAssistant is null!");
@@ -152,13 +151,14 @@ public class AudioStreamsHelper {
     /**
      * Gets a map of connected broadcast IDs to their corresponding local broadcast source states.
      *
-     * <p>If multiple sources have the same broadcast ID, the state of the source that is
-     * {@code STREAMING} is preferred.
+     * <p>If multiple sources have the same broadcast ID, the state of the source that is {@code
+     * STREAMING} is preferred.
      */
     public Map<Integer, LocalBluetoothLeBroadcastSourceState> getConnectedBroadcastIdAndState(
             boolean hysteresisModeFixAvailable) {
         if (mBluetoothManager == null || mLeBroadcastAssistant == null) {
-            Log.w(TAG,
+            Log.w(
+                    TAG,
                     "getConnectedBroadcastIdAndState(): BluetoothManager or LeBroadcastAssistant "
                             + "is null!");
             return emptyMap();
@@ -166,14 +166,16 @@ public class AudioStreamsHelper {
         return getConnectedBluetoothDevices(mBluetoothManager, /* inSharingOnly= */ true).stream()
                 .flatMap(sink -> mLeBroadcastAssistant.getAllSources(sink).stream())
                 .map(state -> new Pair<>(state.getBroadcastId(), getLocalSourceState(state)))
-                .filter(pair -> pair.second == STREAMING
-                        || (hysteresisModeFixAvailable && pair.second == PAUSED))
-                .collect(toMap(
-                        p -> p.first,
-                        p -> p.second,
-                        (existingState, newState) -> existingState == STREAMING ? existingState
-                                : newState
-                ));
+                .filter(
+                        pair ->
+                                pair.second == STREAMING
+                                        || (hysteresisModeFixAvailable && pair.second == PAUSED))
+                .collect(
+                        toMap(
+                                p -> p.first,
+                                p -> p.second,
+                                (existingState, newState) ->
+                                        existingState == STREAMING ? existingState : newState));
     }
 
     /** Retrieves a list of all LE broadcast receive states keyed by each active device. */
@@ -251,10 +253,10 @@ public class AudioStreamsHelper {
     }
 
     /**
-     * Check if {@link CachedBluetoothDevice} has a broadcast source that is in STREAMING, PAUSED
-     * or DECRYPTION_FAILED state.
+     * Check if {@link CachedBluetoothDevice} has a broadcast source that is in STREAMING, PAUSED or
+     * DECRYPTION_FAILED state.
      *
-     * @param cachedDevice   The cached bluetooth device to check.
+     * @param cachedDevice The cached bluetooth device to check.
      * @param localBtManager The BT manager to provide BT functions.
      * @return Whether the device has a broadcast source.
      */
@@ -272,8 +274,8 @@ public class AudioStreamsHelper {
         }
         List<BluetoothLeBroadcastReceiveState> sourceList =
                 assistant.getAllSources(cachedDevice.getDevice());
-        boolean hysteresisModeFixAvailable = isAudioSharingHysteresisModeFixAvailable(
-                localBtManager.getContext());
+        boolean hysteresisModeFixAvailable =
+                isAudioSharingHysteresisModeFixAvailable(localBtManager.getContext());
         if (hasReceiveState(sourceList, hysteresisModeFixAvailable)) {
             Log.d(
                     TAG,
@@ -296,16 +298,20 @@ public class AudioStreamsHelper {
         return false;
     }
 
-    private static boolean hasReceiveState(List<BluetoothLeBroadcastReceiveState> states,
-            boolean hysteresisModeFixAvailable) {
-        return states.stream().anyMatch(state -> {
-            var localSourceState = getLocalSourceState(state);
-            if (hysteresisModeFixAvailable) {
-                return localSourceState == STREAMING || localSourceState == DECRYPTION_FAILED
-                        || localSourceState == PAUSED;
-            }
-            return localSourceState == STREAMING || localSourceState == DECRYPTION_FAILED;
-        });
+    private static boolean hasReceiveState(
+            List<BluetoothLeBroadcastReceiveState> states, boolean hysteresisModeFixAvailable) {
+        return states.stream()
+                .anyMatch(
+                        state -> {
+                            var localSourceState = getLocalSourceState(state);
+                            if (hysteresisModeFixAvailable) {
+                                return localSourceState == STREAMING
+                                        || localSourceState == DECRYPTION_FAILED
+                                        || localSourceState == PAUSED;
+                            }
+                            return localSourceState == STREAMING
+                                    || localSourceState == DECRYPTION_FAILED;
+                        });
     }
 
     /**
@@ -410,13 +416,13 @@ public class AudioStreamsHelper {
     /**
      * Retrieves a set of enabled screen reader services that are pre-installed.
      *
-     * <p>This method checks the accessibility manager for enabled accessibility services
-     * and filters them based on a list of pre-installed screen reader service component names
-     * defined in the {@code config_preinstalled_screen_reader_services} resource array.</p>
+     * <p>This method checks the accessibility manager for enabled accessibility services and
+     * filters them based on a list of pre-installed screen reader service component names defined
+     * in the {@code config_preinstalled_screen_reader_services} resource array.
      *
      * @param context The context.
-     * @return A set of {@link ComponentName} objects representing the enabled pre-installed
-     * screen reader services, or an empty set if no services are found, or if an error occurs.
+     * @return A set of {@link ComponentName} objects representing the enabled pre-installed screen
+     *     reader services, or an empty set if no services are found, or if an error occurs.
      */
     public static Set<ComponentName> getEnabledScreenReaderServices(Context context) {
         AccessibilityManager manager = context.getSystemService(AccessibilityManager.class);
@@ -424,14 +430,17 @@ public class AudioStreamsHelper {
             return Collections.emptySet();
         }
         Set<String> screenReaderServices = new HashSet<>();
-        Collections.addAll(screenReaderServices, context.getResources()
-                .getStringArray(R.array.config_preinstalled_screen_reader_services));
+        Collections.addAll(
+                screenReaderServices,
+                context.getResources()
+                        .getStringArray(R.array.config_preinstalled_screen_reader_services));
         if (screenReaderServices.isEmpty()) {
             return Collections.emptySet();
         }
         Set<ComponentName> enabledScreenReaderServices = new HashSet<>();
-        List<AccessibilityServiceInfo> enabledServices = manager.getEnabledAccessibilityServiceList(
-                AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
+        List<AccessibilityServiceInfo> enabledServices =
+                manager.getEnabledAccessibilityServiceList(
+                        AccessibilityServiceInfo.FEEDBACK_ALL_MASK);
         for (AccessibilityServiceInfo service : enabledServices) {
             ComponentName componentName = service.getComponentName();
             if (screenReaderServices.contains(componentName.flattenToString())) {
@@ -445,7 +454,7 @@ public class AudioStreamsHelper {
     /**
      * Turns off the specified accessibility services.
      *
-     * This method iterates through a set of ComponentName objects, each representing an
+     * <p>This method iterates through a set of ComponentName objects, each representing an
      * accessibility service, and disables them.
      *
      * @param context The application context.
@@ -456,5 +465,70 @@ public class AudioStreamsHelper {
             Log.d(TAG, "setScreenReaderOff(): " + service);
             setAccessibilityServiceState(context, service, false);
         }
+    }
+
+    /**
+     * Returns a new BluetoothLeBroadcastMetadata instance with all channels deselected.
+     *
+     * @param originalMetadata The original BluetoothLeBroadcastMetadata.
+     * @return A new BluetoothLeBroadcastMetadata instance with all channels set to not selected, or
+     *     the original instance if no changes were made. Returns null if input is null.
+     */
+    @Nullable
+    public static BluetoothLeBroadcastMetadata deselectAllChannels(
+            BluetoothLeBroadcastMetadata originalMetadata) {
+        if (originalMetadata == null) {
+            return null;
+        }
+        List<BluetoothLeBroadcastSubgroup> originalSubgroups = originalMetadata.getSubgroups();
+        if (originalSubgroups.isEmpty()) {
+            Log.d(TAG, "deselectAllChannels: No subgroups to modify.");
+            return originalMetadata;
+        }
+
+        List<BluetoothLeBroadcastSubgroup> updatedSubgroupsList = new ArrayList<>();
+        boolean anySubgroupChanged = false;
+
+        for (BluetoothLeBroadcastSubgroup originalSubgroup : originalSubgroups) {
+            List<BluetoothLeBroadcastChannel> originalChannels = originalSubgroup.getChannels();
+            if (originalChannels.isEmpty()) {
+                updatedSubgroupsList.add(originalSubgroup);
+                continue;
+            }
+
+            List<BluetoothLeBroadcastChannel> updatedChannelsList = new ArrayList<>();
+            boolean anyChannelChanged = false;
+            for (BluetoothLeBroadcastChannel channel : originalChannels) {
+                if (channel.isSelected()) {
+                    updatedChannelsList.add(
+                            new BluetoothLeBroadcastChannel.Builder(channel)
+                                    .setSelected(false)
+                                    .build());
+                    anyChannelChanged = true;
+                } else {
+                    updatedChannelsList.add(channel);
+                }
+            }
+
+            if (anyChannelChanged) {
+                BluetoothLeBroadcastSubgroup.Builder subgroupBuilder =
+                        new BluetoothLeBroadcastSubgroup.Builder(originalSubgroup).clearChannel();
+                updatedChannelsList.forEach(subgroupBuilder::addChannel);
+                updatedSubgroupsList.add(subgroupBuilder.build());
+                anySubgroupChanged = true;
+            } else {
+                updatedSubgroupsList.add(originalSubgroup);
+            }
+        }
+
+        if (!anySubgroupChanged) {
+            Log.d(TAG, "deselectAllChannels: No channels needed to be deselected.");
+            return originalMetadata;
+        }
+
+        BluetoothLeBroadcastMetadata.Builder metadataBuilder =
+                new BluetoothLeBroadcastMetadata.Builder(originalMetadata).clearSubgroup();
+        updatedSubgroupsList.forEach(metadataBuilder::addSubgroup);
+        return metadataBuilder.build();
     }
 }
