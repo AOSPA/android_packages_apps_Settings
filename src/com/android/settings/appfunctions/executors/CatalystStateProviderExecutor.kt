@@ -130,14 +130,14 @@ class CatalystStateProviderExecutor(
                 )
             Log.v(TAG, "Built per screen device states for $screenKey")
             states
-        }
+        }.filterNotNull()
     }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenMetaData: PreferenceScreenMetadata,
         preferencesHierarchy: List<PreferenceHierarchyNode>,
         additionalDescription: String?,
-    ): PerScreenDeviceStates {
+    ): PerScreenDeviceStates? {
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
@@ -204,6 +204,7 @@ class CatalystStateProviderExecutor(
                 deviceStateItems = deviceStateItemList,
                 intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
             )
+
         return states
     }
 

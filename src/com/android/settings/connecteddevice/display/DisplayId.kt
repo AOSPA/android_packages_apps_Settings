@@ -35,7 +35,7 @@ class DisplayId(
     override fun getDescription(context: Context): String =
         context.getString(R.string.display_id_type_description)
 
-    override fun getOptions(context: Context): List<Pair<String, String>> {
+    override suspend fun getOptions(context: Context): List<Pair<String, String>> {
         val displayManager =
             context.getSystemService(DisplayManager::class.java) ?: return emptyList()
         val displayInjector = ConnectedDisplayInjector(context)

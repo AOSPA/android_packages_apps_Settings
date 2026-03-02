@@ -38,7 +38,10 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
  * @param flags - The flags used to query apps when retrieving all the options.
  * @param heldPermissions - Permissions which must be held by the packages.
  */
-sealed class InstalledPackageName(
+// This is only open to enable the companion object to call the constructor.
+// We should close this down but for now no point in changing all the current
+// callers.
+open class InstalledPackageName(
     private val flags: Long? = null,
     private val heldPermissions: Array<String>? = null,
 ) : FiniteOptionsType<String> {

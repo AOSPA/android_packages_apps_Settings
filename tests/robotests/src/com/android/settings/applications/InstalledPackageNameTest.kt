@@ -90,12 +90,7 @@ class InstalledPackageNameTest {
                 ) {
                 init {
                     parameters {
-                        parameter(
-                            "package",
-                            R.string.parameter_purpose,
-                            true,
-                            InstalledPackageName(),
-                        )
+                        parameter("package", R.string.parameter_purpose, true, InstalledPackageName)
                     }
                 }
             }
@@ -119,7 +114,7 @@ class InstalledPackageNameTest {
     fun getOptions_appFlagsAssigned_useAssignedFlags() {
         val assignedFlags = 0L
 
-        InstalledPackageName(flags = assignedFlags).getOptions(context)
+        runBlocking { InstalledPackageName(flags = assignedFlags).getOptions(context) }
 
         val captor = argumentCaptor<ApplicationInfoFlags>()
         verify(spyPackageManager).getInstalledApplications(captor.capture())
@@ -131,7 +126,7 @@ class InstalledPackageNameTest {
     fun getOptions_flagEnabled_admin_useDefaultFlagsSelf() {
         shadowUserManager.setIsAdminUser(true)
 
-        InstalledPackageName().getOptions(context)
+        runBlocking { InstalledPackageName().getOptions(context) }
 
         val captor = argumentCaptor<ApplicationInfoFlags>()
         verify(spyPackageManager).getInstalledApplications(captor.capture())
@@ -143,7 +138,7 @@ class InstalledPackageNameTest {
     fun getOptions_flagDisabled_admin_useDefaultFlagsAll() {
         shadowUserManager.setIsAdminUser(true)
 
-        InstalledPackageName().getOptions(context)
+        runBlocking { InstalledPackageName().getOptions(context) }
 
         val captor = argumentCaptor<ApplicationInfoFlags>()
         verify(spyPackageManager).getInstalledApplications(captor.capture())
@@ -155,7 +150,7 @@ class InstalledPackageNameTest {
     fun getOptions_flagDisabled_user_useDefaultFlagsSelf() {
         shadowUserManager.setIsAdminUser(false)
 
-        InstalledPackageName().getOptions(context)
+        runBlocking { InstalledPackageName().getOptions(context) }
 
         val captor = argumentCaptor<ApplicationInfoFlags>()
         verify(spyPackageManager).getInstalledApplications(captor.capture())
@@ -167,7 +162,9 @@ class InstalledPackageNameTest {
         shadowUserManager.setIsAdminUser(false)
 
         try {
-            InstalledPackageName(heldPermissions = PERM).getOptions(context)
+            runBlocking {
+                InstalledPackageName(heldPermissions = PERM).getOptions(context)
+            }
         } catch (e: UnsupportedOperationException) {}
 
         val captor = argumentCaptor<Array<String>>()

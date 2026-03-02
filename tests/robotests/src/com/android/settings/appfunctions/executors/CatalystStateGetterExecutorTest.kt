@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.PreferenceCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -52,7 +53,7 @@ class CatalystStateGetterExecutorTest {
         ShadowPreferenceServiceClient.reset()
         executor = CatalystStateGetterExecutor(context)
 
-        val parameterizedSchema = KeyParametersSchema { parameter("pkg", 0) }
+        val parameterizedSchema = KeyParametersSchema { parameter("pkg", 0, type = AnyString) }
         val mockParameterizedFactory =
             mock(PreferenceScreenMetadataParameterizedFactory::class.java)
         `when`(mockParameterizedFactory.parametersSchema).thenReturn(parameterizedSchema)
