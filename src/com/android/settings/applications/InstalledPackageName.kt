@@ -51,7 +51,7 @@ sealed class InstalledPackageName(
     override fun getKey(): String = "InstalledPackageName:${flags ?: 0}"
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    override fun getOptions(context: Context): List<Pair<String, String>> {
+    override suspend fun getOptions(context: Context): List<Pair<String, String>> {
         val pm = context.packageManager
         val appList: List<ApplicationInfo> =
             if (heldPermissions != null) {

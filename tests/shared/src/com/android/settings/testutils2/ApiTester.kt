@@ -311,7 +311,7 @@ class ApiTester(
         val type = preference.type
         if (type is FiniteOptionsType<*>) {
             val enforcedType = type as FiniteOptionsType<V>
-            return enforcedType.getOptions(context)
+            return runBlocking { enforcedType.getOptions(context) }
         } else
             throw Exception(
                 "Attempting to get all preference options on a " +

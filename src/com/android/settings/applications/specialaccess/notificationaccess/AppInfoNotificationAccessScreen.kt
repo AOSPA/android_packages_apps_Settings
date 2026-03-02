@@ -74,13 +74,13 @@ private constructor(
 
     private val packageName: String =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-            keyParameters!!.getRequired(KEY_APP_PACKAGE_NAME)
+            keyParameters!!.getRequired(KEY_SERVICE)!!.split("/", limit = 2)[0]
         } else {
             arguments!!.getString(KEY_APP_PACKAGE_NAME)!!
         }
     private val serviceName: String =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-            keyParameters!!.getRequired(KEY_SERVICE_NAME)
+            keyParameters!!.getRequired(KEY_SERVICE)!!.split("/", limit = 2)[1]
         } else {
             arguments!!.getString(KEY_SERVICE_NAME)!!
         }
@@ -161,13 +161,11 @@ private constructor(
         const val KEY_EXTRA_PACKAGE_NAME = "package_name"
         const val KEY_APP_PACKAGE_NAME = "app"
         const val KEY_SERVICE_NAME = "serviceName"
+        const val KEY_SERVICE = "service"
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            // TODO(scottjonathan): Replace with a custom type that encompasses both the package name
-            // and the service name.
-            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true, type = InstalledPackageName)
-            parameter(KEY_SERVICE_NAME, "The name of the service", required = true, type = AnyString) // TODO(scottjonathan):Is there a better type to use here
+            parameter(KEY_SERVICE, "The componentname of the service", required = true, type = NotificationListenerService)
         }
 
         @JvmStatic
@@ -176,7 +174,10 @@ private constructor(
             // bundle: replace the parameters(context) call to the actual implementation,
             // or make this function the primary implementation and the legacy parameters() should
             // call this one.
-            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+            return parameters(context).map { bundle ->
+                val service = bundle.getString(KEY_APP_PACKAGE_NAME)!! + "/" + bundle.getString(KEY_SERVICE_NAME)!!
+                parametersSchema.prepare(Bundle(1).apply { putString(KEY_SERVICE, service) })
+            }
         }
 
         @Deprecated(

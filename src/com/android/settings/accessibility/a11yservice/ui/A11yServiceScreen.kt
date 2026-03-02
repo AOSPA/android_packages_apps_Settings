@@ -68,6 +68,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import com.android.settings.accessibility.a11yservice.data.AccessibilityService
 
 @ProvidePreferenceScreen(A11yServiceScreen.KEY, parameterized = true)
 open class A11yServiceScreen
@@ -255,9 +256,9 @@ private constructor(
         override val parametersSchema = KeyParametersSchema {
             parameter(
                 AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                "The flattened string representation of the ComponentName of the AccessibilityService that implements an accessibility feature",
+                "The accessibility component to be configured",
                 required = true,
-                type = AnyString,  // TODO(scottjonathan):Is there a better type to use here
+                type = AccessibilityService,
             )
         }
 
