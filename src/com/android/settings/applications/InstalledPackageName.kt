@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.ApplicationInfoFlags
+import android.content.pm.PackageManager.PackageInfoFlags
 import android.multiuser.Flags
 import android.os.Build
 import android.os.UserHandle
@@ -34,11 +35,13 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
  * This implementation lives within Settings because most library clients do not possess the
  * required permissions to list all packages on the device.
  *
- * @param flags - The flags used to query the underlying `getInstalledApplications` method from the
- *   package manager, when retrieving all the options.
+ * @param flags - The flags used to query apps when retrieving all the options.
+ * @param heldPermissions - Permissions which must be held by the packages.
  */
-class InstalledPackageName(private val flags: ApplicationInfoFlags? = null) :
-    FiniteOptionsType<String> {
+class InstalledPackageName(
+    private val flags: Long? = null,
+    private val heldPermissions: Array<String>? = null,
+) : FiniteOptionsType<String> {
 
     override fun getType(): Class<String> = String::class.java
 
@@ -50,13 +53,23 @@ class InstalledPackageName(private val flags: ApplicationInfoFlags? = null) :
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun getOptions(context: Context): List<Pair<String, String>> {
         val pm = context.packageManager
-        return pm.getInstalledApplications(flags ?: getDefaultFlags(context)).map {
-            appInfo: ApplicationInfo ->
+        val appList: List<ApplicationInfo> =
+            if (heldPermissions != null) {
+                pm.getPackagesHoldingPermissions(heldPermissions, PackageInfoFlags.of(flags ?: 0L))
+                    .mapNotNull { it.applicationInfo }
+                    .filter { it.enabled }
+            } else {
+                pm.getInstalledApplications(
+                    ApplicationInfoFlags.of(flags ?: getDefaultFlags(context))
+                )
+            }
+
+        return appList.map { appInfo ->
             appInfo.packageName to (appInfo.loadLabel(pm)?.toString() ?: appInfo.packageName)
         }
     }
 
-    private fun getDefaultFlags(context: Context): ApplicationInfoFlags {
+    private fun getDefaultFlags(context: Context): Long {
         val um = context.getSystemService(UserManager::class.java)
         var retrieveFlags =
             PackageManager.MATCH_DISABLED_COMPONENTS or
@@ -64,6 +77,6 @@ class InstalledPackageName(private val flags: ApplicationInfoFlags? = null) :
         if (!Flags.dontShowOtherUsersAppsToAdmin() && um.isUserAdmin(UserHandle.myUserId())) {
             retrieveFlags = retrieveFlags or PackageManager.MATCH_ANY_USER
         }
-        return ApplicationInfoFlags.of(retrieveFlags.toLong())
+        return retrieveFlags.toLong()
     }
 }
