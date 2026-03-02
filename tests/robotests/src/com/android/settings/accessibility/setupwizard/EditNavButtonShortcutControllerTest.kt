@@ -26,9 +26,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
-/** Tests for [EditFloatingButtonShortcutController]. */
+/** Tests for [EditNavButtonShortcutController]. */
 @RunWith(RobolectricTestRunner::class)
-class EditFloatingButtonShortcutControllerTest {
+class EditNavButtonShortcutControllerTest {
 
     private val appContext: Application = ApplicationProvider.getApplicationContext()
     private val item = IllustrationCheckBoxItem()
@@ -48,10 +48,10 @@ class EditFloatingButtonShortcutControllerTest {
 
         controller.bindData(item)
 
-        assertThat(item.imageRawResId).isEqualTo(R.raw.accessibility_shortcut_type_fab)
+        assertThat(item.imageResId).isEqualTo(R.drawable.accessibility_shortcut_type_navbar)
     }
 
     /** Creates the controller and its associated store. */
     private fun createController(targets: Set<String>) =
-        EditFloatingButtonShortcutController.create(appContext, item, targets)
+        EditNavButtonShortcutController.create(appContext, item, targets)
 }
