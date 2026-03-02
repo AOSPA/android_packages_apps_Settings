@@ -29,6 +29,7 @@ import com.android.settings.accessibility.AccessibilitySetupWizardUtils
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.items.RecyclerItemAdapter
+import kotlinx.coroutines.flow.MutableStateFlow
 
 /** Edit Shortcut for Setup Wizard. */
 class EditShortcutSetupWizardFragment : BaseSetupWizardFragment() {
@@ -79,6 +80,15 @@ class EditShortcutSetupWizardFragment : BaseSetupWizardFragment() {
                 put(
                     R.id.edit_top_row_key_shortcut_in_suw,
                     EditTopRowKeyShortcutController.create(context, it, shortcutTargets),
+                )
+            }
+            val expandableStateFlow = MutableStateFlow(false)
+            findItem(adapter, R.id.edit_triple_tap_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_triple_tap_shortcut_in_suw,
+                    EditTripleTapShortcutController.create(context, it, shortcutTargets) {
+                        expandableStateFlow
+                    },
                 )
             }
         }
