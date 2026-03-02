@@ -25,7 +25,6 @@ import com.android.internal.accessibility.AccessibilityShortcutController.COLOR_
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.setupwizard.items.IllustrationCheckBoxItem
-import com.android.settings.accessibility.shortcuts.ui.KeyboardShortcutPreference
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -112,15 +111,8 @@ class EditKeyboardShortcutControllerTest {
     }
 
     /** Creates the controller and its associated store. */
-    private fun createController(targets: Set<String>): EditKeyboardShortcutController {
-        val metadata = KeyboardShortcutPreference(appContext, targets)
-        return EditKeyboardShortcutController(
-            appContext,
-            item,
-            metadata,
-            metadata.storage(appContext),
-        )
-    }
+    private fun createController(targets: Set<String>) =
+        EditKeyboardShortcutController.create(appContext, item, targets)
 
     private fun assertSummaryContainsMetaKey() {
         val metaKeyLabel = appContext.getString(R.string.modifier_keys_meta)

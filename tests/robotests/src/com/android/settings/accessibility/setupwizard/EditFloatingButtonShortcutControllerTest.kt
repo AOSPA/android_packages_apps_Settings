@@ -21,7 +21,6 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.setupwizard.items.IllustrationCheckBoxItem
-import com.android.settings.accessibility.shortcuts.ui.FloatingButtonShortcutPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,13 +52,6 @@ class EditFloatingButtonShortcutControllerTest {
     }
 
     /** Creates the controller and its associated store. */
-    private fun createController(targets: Set<String>): EditFloatingButtonShortcutController {
-        val metadata = FloatingButtonShortcutPreference(appContext, targets)
-        return EditFloatingButtonShortcutController(
-            appContext,
-            item,
-            metadata,
-            metadata.storage(appContext),
-        )
-    }
+    private fun createController(targets: Set<String>) =
+        EditFloatingButtonShortcutController.create(appContext, item, targets)
 }
