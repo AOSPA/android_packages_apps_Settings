@@ -2038,6 +2038,12 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Jos pakotat sovelluksen pysähtymään, se saattaa alkaa toimia virheellisesti."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Poista sovellus käytöstä"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Jos poistat sovelluksen käytöstä, Android ja muut sovellukset eivät välttämättä enää toimi oikein. Muista, ettet voi poistaa sovellusta, sillä se tuli laitteesi mukana. Poistamalla sovelluksen käytöstä suljet sen ja piilotat sen laitteella."</string>
+    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
+    <skip />
+    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
+    <skip />
+    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
+    <skip />
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Kauppa"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Sovelluksen tiedot"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Sovelluksen asennuslähde: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2114,10 +2120,8 @@
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Asetukset"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Kieli"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Näppäimistöt"</string>
-    <!-- no translation found for ime_switcher_button_in_navbar_title (3909360598089922591) -->
-    <skip />
-    <!-- no translation found for ime_switcher_button_in_navbar_summary (7202853456799949367) -->
-    <skip />
+    <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Näytä näppäimistön vaihtopainike"</string>
+    <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Salli näppäimistön vaihtopainikkeen näkyminen navigointipalkissa, kun syötekenttä on valittu"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Näyttönäppäimistö"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Saatavilla oleva näyttönäppäimistö"</string>
@@ -3764,8 +3768,7 @@
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Castin äänenvoimakkuus"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"Puhelun äänenvoimakkuus"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"Herätyksen äänenvoimakkuus"</string>
-    <!-- no translation found for assistant_volume_option_title (7206008753384831048) -->
-    <skip />
+    <string name="assistant_volume_option_title" msgid="7206008753384831048">"Assistantin äänenvoimakkuus"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"Soittoäänen/ilmoitusten voimakkuus"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"Soittoäänen voimakkuus"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"Ilmoituksen äänenvoimakkuus"</string>
@@ -3943,7 +3946,7 @@
     <string name="snooze_options_title" msgid="2109795569568344617">"Salli ilmoitusten torkuttaminen"</string>
     <string name="notification_badging_title" msgid="5469616894819568917">"Sovelluskuvakkeen pistemerkki"</string>
     <string name="notification_bundles" msgid="496852738958148317">"Ilmoitusten järjestäjä"</string>
-    <string name="notification_bundle_promotions_summary" msgid="3196830882575438887">"Esimerkiksi myynti ja uudet ominaisuudet"</string>
+    <string name="notification_bundle_promotions_summary" msgid="3196830882575438887">"Esimerkiksi tarjoukset ja uudet ominaisuudet"</string>
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Esimerkiksi pääuutiset ja toimitukselliset sisällöt"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Esimerkiksi tykkäykset ja postaukset"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Esimerkiksi uutiskirjeet ja suositeltu media"</string>
@@ -4114,7 +4117,7 @@
     <string name="notification_bundle_title" msgid="6679586974995981433">"Ilmoitusten järjestäjä"</string>
     <string name="notification_bundle_summary" msgid="8924550009829960969">"Niputa ja hiljennä vähemmän tärkeät ilmoitukset"</string>
     <string name="notification_bundle_main_control_title" msgid="6413211155343788835">"Käytä ilmoitusten järjestäjää"</string>
-    <string name="notification_bundle_description" msgid="4202633316211056848">"Valitse ilmoitustyypit, jotka haluat hiljentää ja niputtaa yhteen häiriöiden minimoimiseksi.\n\nJärjestäjä käyttää laitteellasi olevaa tekoälyä, joka voi joskus tehdä virheitä. Ilmoituksia ei koskaan lähetetä Googlelle."</string>
+    <string name="notification_bundle_description" msgid="4202633316211056848">"Vähennä keskeytyksiä valitsemalla ilmoitustyypit, jotka haluat hiljentää ja niputtaa yhteen.\n\nJärjestäjä käyttää laitteellasi olevaa tekoälyä, joka voi joskus tehdä virheitä. Ilmoituksia ei koskaan lähetetä Googlelle."</string>
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"Ilmoitusten järjestäjä"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"Niputa ja hiljennä vähemmän tärkeät ilmoitukset"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"Hallinnoi ilmoitusten järjestäjän sovelluksia"</string>
@@ -6127,10 +6130,8 @@
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Lisää ilmoituksia"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"Vähemmän ilmoituksia"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Hylätyt hälytykset"</string>
-    <!-- no translation found for safety_center_collapse_dismissed_issues (1906333435017081366) -->
-    <skip />
-    <!-- no translation found for safety_center_expand_dismissed_issues (6075170862549670397) -->
-    <skip />
+    <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"Tiivistä hylätyt ilmoitukset"</string>
+    <string name="safety_center_expand_dismissed_issues" msgid="6075170862549670397">"Näytä hylätyt ilmoitukset"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Hylätäänkö tämä hälytys?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Tarkista tietoturva- ja yksityisyysasetuksesi milloin tahansa parantaaksesi suojausta"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Toiminto suoritettu"</string>

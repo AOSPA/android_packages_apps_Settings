@@ -214,6 +214,9 @@ class SupervisionDashboardScreenTest {
                 fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
             shadowOf(Looper.getMainLooper()).idle()
+            // Add another idle() to ensure all asynchronous tasks triggered by onResume
+            // and the first idle() are completed.
+            shadowOf(Looper.getMainLooper()).idle()
 
             assertThat(webContentFilterPreference.summary).isEqualTo(initialSummary)
         }
@@ -233,6 +236,9 @@ class SupervisionDashboardScreenTest {
             val webContentFilterPreference =
                 fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
+            shadowOf(Looper.getMainLooper()).idle()
+            // Add another idle() to ensure all asynchronous tasks triggered by onResume
+            // and the first idle() are completed.
             shadowOf(Looper.getMainLooper()).idle()
 
             assertThat(webContentFilterPreference.summary).isEqualTo(initialSummary)

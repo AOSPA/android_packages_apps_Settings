@@ -728,13 +728,11 @@
     <string name="encrypted_summary" msgid="545623487587251207">"已加密"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"設定螢幕鎖定"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"為加強安全，建議你為此裝置設定 PIN、解鎖圖案或密碼。"</string>
-    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
-    <skip />
+    <string name="no_screen_lock_issue_summary_without_pattern" msgid="3709234873257859534">"為提升安全性，請為這部裝置設定 PIN 碼或密碼。"</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"設定螢幕鎖定"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"設定螢幕鎖定"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"為加強安全，建議你為此裝置設定 PIN、解鎖圖案或密碼。"</string>
-    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"為提升安全性，請為這部裝置設定 PIN 碼或密碼。"</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"新增用於解鎖的指紋"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"選擇螢幕鎖定方式"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"選擇螢幕鎖定方式"</string>
@@ -776,8 +774,7 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"不使用指紋或面孔解鎖並繼續操作"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"無"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"新增 PIN、圖案、密碼或滑動"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off_new_without_pattern" msgid="1848366515765800557">"新增 PIN 碼、密碼或滑動解鎖"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"滑動"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"圖案"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -2038,6 +2035,12 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"強制停止應用程式，可能會導致操作不正常。"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"停用應用程式"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"如果你停用此應用程式，Android 和其他應用程式可能無法正常運作。請謹記，由於此應用程式已預先安裝至你的裝置，因此無法刪除。停用後，你便可在裝置上關閉並隱藏此應用程式。"</string>
+    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
+    <skip />
+    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
+    <skip />
+    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
+    <skip />
     <string name="app_install_details_group_title" msgid="1172114479073704677">"商店"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"應用程式詳細資料"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"從「<xliff:g id="APP_STORE">%1$s</xliff:g>」安裝的應用程式"</string>
@@ -2114,10 +2117,8 @@
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"設定"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"語言"</string>
     <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"鍵盤"</string>
-    <!-- no translation found for ime_switcher_button_in_navbar_title (3909360598089922591) -->
-    <skip />
-    <!-- no translation found for ime_switcher_button_in_navbar_summary (7202853456799949367) -->
-    <skip />
+    <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"顯示鍵盤按掣"</string>
+    <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"在選取輸入欄位時，允許在導覽列中顯示鍵盤切換按鈕"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"屏幕鍵盤"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"可用的屏幕鍵盤"</string>
@@ -3759,8 +3760,7 @@
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast 音量"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"通話音量"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"鬧鐘音量"</string>
-    <!-- no translation found for assistant_volume_option_title (7206008753384831048) -->
-    <skip />
+    <string name="assistant_volume_option_title" msgid="7206008753384831048">"數碼助理音量"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"鈴聲和通知音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"鈴聲音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
@@ -6120,10 +6120,8 @@
     <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"更多警示"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"減少警示"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"已關閉的警示"</string>
-    <!-- no translation found for safety_center_collapse_dismissed_issues (1906333435017081366) -->
-    <skip />
-    <!-- no translation found for safety_center_expand_dismissed_issues (6075170862549670397) -->
-    <skip />
+    <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"收合已關閉的警示"</string>
+    <string name="safety_center_expand_dismissed_issues" msgid="6075170862549670397">"查看已關閉的警示"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"要關閉此警示嗎？"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"隨時查看安全性和私隱設定並加強保護"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"動作已完成"</string>

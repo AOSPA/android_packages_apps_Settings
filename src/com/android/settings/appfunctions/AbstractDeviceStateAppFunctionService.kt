@@ -50,7 +50,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
  * An abstract [AppFunctionService] that provides device state information.
@@ -103,7 +102,10 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
     }
 
     open val deviceStateSetterExecutors: List<DeviceStateExecutor> by lazy {
-        listOf(CatalystStateSetterExecutor(), AndroidApiStateSetterExecutor(applicationContext))
+        listOf(
+            CatalystStateSetterExecutor(applicationContext),
+            AndroidApiStateSetterExecutor(applicationContext),
+        )
     }
     val deviceStateSetterAggregator by lazy {
         DeviceStateSetterAggregator(deviceStateSetterExecutors)
@@ -128,7 +130,6 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
 
     override fun onCreate() {
         super.onCreate()
-        SettingsPreferenceServiceClientManager.initialize(applicationContext)
         englishContext = createEnglishContext()
     }
 
@@ -175,10 +176,6 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
         }
 
         backgroundScope.launch(NonCancellable) {
-            withContext(Dispatchers.IO) {
-                SettingsPreferenceServiceClientManager.awaitInitialized()
-            }
-
             Trace.beginSection("DeviceStateAppFunction ${request.functionIdentifier}")
             Log.d(TAG, "device state app function ${request.functionIdentifier} called.")
             if (!aggregators.containsKey(appFunctionType)) {

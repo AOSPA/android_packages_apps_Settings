@@ -244,7 +244,7 @@ class ApiTester(
         val preference = getPreference<V>(key)
         if (parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
-        val operationContext = ApiOperationContext(context, keyParameters)
+        val operationContext = ApiOperationContext(context = context, parameters = keyParameters)
 
         checkGetPermissions(preference)
         checkGetPreconditions(preference, operationContext)
@@ -271,7 +271,7 @@ class ApiTester(
         val setConfig = preference.set ?: throw CannotSetException()
         if (parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
-        val operationContext = ApiOperationContext(context, keyParameters)
+        val operationContext = ApiOperationContext(context = context, parameters = keyParameters)
 
         checkSetPermissions(preference)
         checkSetPreconditions(preference, value, operationContext)
@@ -286,7 +286,7 @@ class ApiTester(
      */
     fun getLaunchIntent(): Intent {
         val operationContext =
-            ApiOperationContext(context, instance.keyParameters ?: ValidatedKeyParameters.EMPTY)
+            ApiOperationContext(context = context, parameters = instance.keyParameters ?: ValidatedKeyParameters.EMPTY)
         val screenPermissions = runBlocking { instance.screenPermissions }
         if (screenPermissions != null) {
             val pid = android.os.Process.myPid()
