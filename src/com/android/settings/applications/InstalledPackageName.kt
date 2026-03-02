@@ -38,7 +38,7 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
  * @param flags - The flags used to query apps when retrieving all the options.
  * @param heldPermissions - Permissions which must be held by the packages.
  */
-class InstalledPackageName(
+sealed class InstalledPackageName(
     private val flags: Long? = null,
     private val heldPermissions: Array<String>? = null,
 ) : FiniteOptionsType<String> {
@@ -79,4 +79,6 @@ class InstalledPackageName(
         }
         return retrieveFlags.toLong()
     }
+
+    companion object : InstalledPackageName()
 }

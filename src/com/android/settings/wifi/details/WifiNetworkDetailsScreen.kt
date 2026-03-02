@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.preference.PreferenceFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -119,7 +120,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(KEY_ARGUMENT_WIFI_ENTRY_KEY, "The chosen WiFi entry key", required = true)
+            parameter(KEY_ARGUMENT_WIFI_ENTRY_KEY, "The chosen WiFi entry key", required = true, type = AnyString) // TODO(scottjonathan): What is a wifi entry key?
         }
 
         @JvmStatic

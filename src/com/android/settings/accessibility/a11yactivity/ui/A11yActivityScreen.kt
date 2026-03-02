@@ -50,6 +50,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TwoTargetPreference
 import kotlinx.coroutines.CoroutineScope
@@ -205,6 +206,7 @@ private constructor(
                 AccessibilitySettings.EXTRA_COMPONENT_NAME,
                 "The flattened string representation of the ComponentName of the Activity that implements an accessibility feature",
                 required = true,
+                type = AnyString,  // TODO(scottjonathan):Is there a better type to use here
             )
         }
 

@@ -50,7 +50,7 @@ class AppLaunchApiScreen :
                 name = ARG_PACKAGE_NAME,
                 purpose = R.string.app_parameter_purpose,
                 required = true,
-                type = InstalledPackageName(),
+                type = InstalledPackageName,
             )
 
             prepareScreenExtras { keyParameters, extras ->
