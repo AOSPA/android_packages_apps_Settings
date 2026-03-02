@@ -29,8 +29,8 @@ import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
-import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.ReadWritePermit.Companion.ALLOW
 import com.android.settingslib.metadata.accessPreconditionsAsString
@@ -38,7 +38,7 @@ import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
-import com.android.settingslib.metadata.isUiOnlyPreference
+import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
@@ -83,10 +83,13 @@ class CatalystStateProviderExecutor(
                                 withTimeout(PER_SCREEN_TIMEOUT_MS) {
                                     semaphore.withPermit {
                                         try {
-                                            buildPerScreenDeviceStates(
-                                                screenKey,
-                                                appFunctionType
-                                            )
+                                            val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
+                                            if(screenMetadata != null && screenMetadata.isExposable(context)) {
+                                                buildPerScreenDeviceStates(
+                                                    screenKey,
+                                                    appFunctionType
+                                                )
+                                            } else null
                                         } catch (e: Exception) {
                                             Log.e(TAG, "error building $screenKey", e)
                                             null
@@ -136,9 +139,6 @@ class CatalystStateProviderExecutor(
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            // skip over UI-ONLY preferences
-            if (metadata.isUiOnlyPreference(context))
-                return@forEach
             // skip if metadata is a PreferenceScreen
             if (metadata.key == screenMetaData.key)
                 return@forEach

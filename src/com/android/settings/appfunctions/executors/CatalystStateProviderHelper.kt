@@ -21,13 +21,11 @@ import android.os.Bundle
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
-import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
-import com.android.settingslib.metadata.SensitivityLevel
-import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
+import com.android.settingslib.metadata.isExposable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.toList
 
@@ -137,9 +135,8 @@ private suspend fun CoroutineScope.getPreferenceHierarchy(
     val preferenceHierarchy = mutableListOf<PreferenceHierarchyNode>()
     screenMetaData.getPreferenceHierarchy(context, this).forEachRecursivelyAsync {
         val metadata = it.metadata
-        val tags = metadata.tags(context)
 
-        if (tags.contains(UI_ONLY_PREFERENCE)) return@forEachRecursivelyAsync
+        if (!metadata.isExposable(context)) return@forEachRecursivelyAsync
         preferenceHierarchy.add(it)
     }
     return screenMetaData to preferenceHierarchy
