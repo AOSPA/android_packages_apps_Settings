@@ -26,6 +26,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.PersistableBundle
+import android.os.UserHandle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -413,24 +414,6 @@ class SatelliteTileStateReceiverTest {
         TestShadowActivityManager.setIsRunningInUserTestHarness(true)
 
         assertThat(SatelliteTileStateReceiver.isSatelliteTileFeatureEnabled(context)).isFalse()
-    }
-
-    @Test
-    fun isTileServiceEnabled_componentEnabled_returnsTrue() {
-        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-        assertThat(SatelliteTileStateReceiver.isTileServiceEnabled(context)).isTrue()
-    }
-
-    @Test
-    fun isTileServiceEnabled_componentDisabled_returnsFalse() {
-        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-        assertThat(SatelliteTileStateReceiver.isTileServiceEnabled(context)).isFalse()
-    }
-
-    @Test
-    fun isTileServiceEnabled_componentDefault_returnsFalse() {
-        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
-        assertThat(SatelliteTileStateReceiver.isTileServiceEnabled(context)).isFalse()
     }
 
     private fun sendBootCompletedBroadcast() {

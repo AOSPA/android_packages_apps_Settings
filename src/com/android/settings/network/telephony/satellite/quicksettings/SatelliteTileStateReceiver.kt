@@ -250,20 +250,8 @@ open class SatelliteTileStateReceiver(
                 return false
             }
 
-            Log.d(TAG, "Satellite tile static feature configs are enabled for this device.")
+            Log.d(TAG, "Satellite tile feature enabled for this device.")
             return true
-        }
-
-        /**
-         * Checks if the SatelliteTileService component is explicitly enabled based on runtime capability.
-         */
-        fun isTileServiceEnabled(context: Context): Boolean {
-            val componentName = ComponentName(context, SatelliteTileService::class.java)
-            val isEnabled =
-                context.packageManager.getComponentEnabledSetting(componentName) ==
-                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-            Log.d(TAG, "SatelliteTileService runtime component state enabled: $isEnabled")
-            return isEnabled
         }
 
         /**
