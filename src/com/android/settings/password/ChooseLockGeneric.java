@@ -16,6 +16,7 @@
 
 package com.android.settings.password;
 
+import static android.app.admin.flags.Flags.useHardenedFrpActiveCheck;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PARENT_PROFILE_PASSWORD;
 import static android.app.admin.DevicePolicyManager.ACTION_SET_NEW_PASSWORD;
 import static android.app.admin.DevicePolicyManager.PASSWORD_COMPLEXITY_HIGH;
@@ -418,7 +419,11 @@ public class ChooseLockGeneric extends SettingsActivity {
 
             // Can only run during setup if factory reset protection has already been cleared
             // or if the device does not support FRP.
-            return (pdbm == null || pdbm.getDataBlockSize() == 0);
+            if (useHardenedFrpActiveCheck()) {
+                return (pdbm == null || !pdbm.isFactoryResetProtectionActive());
+            } else {
+                return (pdbm == null || pdbm.getDataBlockSize() == 0);
+            }
         }
 
         protected Class<? extends ChooseLockGeneric.InternalActivity> getInternalActivityClass() {
