@@ -33,6 +33,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment;
 import com.android.settings.accessibility.screenmagnification.ui.MagnificationTopIntroPreference;
+import com.android.settings.accessibility.shared.utils.TogglePreferenceAdapterInSuw;
 import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.widget.TopIntroPreference;
 
@@ -76,7 +77,7 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
         if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
-            return new PreferenceAdapterInSuw(preferenceScreen);
+            return new TogglePreferenceAdapterInSuw(preferenceScreen);
         }
         return super.onCreateAdapter(preferenceScreen);
     }

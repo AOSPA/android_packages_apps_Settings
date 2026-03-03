@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.shared.ui;
+package com.android.settings.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;

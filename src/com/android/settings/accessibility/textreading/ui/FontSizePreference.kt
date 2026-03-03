@@ -31,6 +31,7 @@ import com.android.settings.accessibility.shared.utils.DebounceConfigurationChan
 import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.CHANGE_BY_BUTTON_DELAY
 import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.CHANGE_BY_SLIDER_DELAY
 import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.MIN_COMMIT_DELAY
+import com.android.settings.accessibility.shared.utils.shouldShowFocusRingsInSuw
 import com.android.settings.accessibility.textreading.data.FontSizeDataStore
 import com.android.settingslib.R as SettingsLibR
 import com.android.settingslib.datastore.KeyValueStore
@@ -105,8 +106,8 @@ internal class FontSizePreference(
     ): @ReadWritePermit Int {
         return ReadWritePermit.ALLOW
     }
-    override val supportsWrite = true
 
+    override val supportsWrite = true
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
@@ -125,7 +126,6 @@ internal class FontSizePreference(
 
     override val keywords: Int
         get() = R.string.keywords_font_size
-
 
     override fun createWidget(context: Context) =
         TooltipSliderPreference(context).apply {
@@ -162,6 +162,11 @@ internal class FontSizePreference(
             value = _fontSizePreview.value.currentIndex
             setSliderStateDescription(fontSizesLabel[value])
             isPersistent = false
+            // This change makes the row that contains the "Font size" slider unable to be focused,
+            // but allows the slider and its buttons to be focusable.
+            if (shouldShowFocusRingsInSuw(context)) {
+                isSelectable = false
+            }
         }
     }
 
