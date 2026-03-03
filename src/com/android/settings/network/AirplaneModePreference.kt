@@ -36,6 +36,7 @@ import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsGlobalStore
+import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -60,7 +61,7 @@ open class AirplaneModePreference :
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_airplanemode_active
 
-    override fun tags(context: Context) = arrayOf(KEY_AIRPLANE_MODE)
+    override fun tags(context: Context) = arrayOf(KEY_AIRPLANE_MODE, HERO_SET)
 
     override fun isAvailable(context: Context) = context.isAirplaneModeEligible()
 

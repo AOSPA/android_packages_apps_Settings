@@ -20,6 +20,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.telephony.SubscriptionManager
 import com.android.settings.R
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -54,6 +55,8 @@ class SimCallsPreference() :
             .activeSubscriptionIdList
             .size > 1
     }
+
+    override fun tags(context: Context) = arrayOf(MUSTPASS_SET)
 
     override fun getSummary(context: Context): CharSequence? {
         val subInfo =

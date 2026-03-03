@@ -30,6 +30,7 @@ import com.android.settings.Utils
 import com.android.settings.flags.Flags
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.datastore.Permissions.Companion.anyOf
+import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
@@ -268,6 +269,8 @@ class UserSettingsScreenApi :
                     Allowed
                 }
             }
+
+            tags(HERO_SET)
 
             get {
                 execute {

@@ -26,6 +26,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -114,6 +115,8 @@ private class LocationMainSwitch : BooleanValuePreference, MainSwitchPreferenceB
         ReadWritePermit.DISALLOW
 
     override fun storage(context: Context) = LocationStorage(context)
+
+    override fun tags(context: Context) = arrayOf(HERO_SET)
 
     companion object {
         const val KEY = "location_main_switch"
