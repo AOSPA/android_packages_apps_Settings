@@ -17,7 +17,6 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
-import static com.android.settingslib.Utils.KEY_WIRELESS_INCOMPATIBLE_CHARGING_STATE;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -140,11 +139,6 @@ public class PowerUsageSummary extends PowerUsageBase
         getContentResolver()
                 .registerContentObserver(
                         Global.getUriFor(Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
-                        false,
-                        mSettingsObserver);
-        getContentResolver()
-                .registerContentObserver(
-                        Global.getUriFor(KEY_WIRELESS_INCOMPATIBLE_CHARGING_STATE),
                         false,
                         mSettingsObserver);
     }

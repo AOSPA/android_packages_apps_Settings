@@ -370,11 +370,6 @@ public class BatteryInfo {
                 currentTimeMs);
     }
 
-    /** Whether it is wireless charging or not. */
-    public boolean isWirelessCharging() {
-        return pluggedStatus == BatteryManager.BATTERY_PLUGGED_WIRELESS;
-    }
-
     private static void updateBatteryInfoCharging(
             Context context,
             Intent batteryBroadcast,
