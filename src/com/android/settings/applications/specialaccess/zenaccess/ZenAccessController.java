@@ -38,6 +38,7 @@ import com.android.settings.overlay.FeatureFactory;
 import java.util.List;
 import java.util.Set;
 
+// LINT.IfChange
 public class ZenAccessController extends BasePreferenceController {
 
     private static final String TAG = "ZenAccessController";
@@ -124,3 +125,4 @@ public class ZenAccessController extends BasePreferenceController {
                 logCategory, packageName);
     }
 }
+// LINT.ThenChange(ZenAccessDetailsApiScreen.java)

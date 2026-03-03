@@ -48,6 +48,7 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import com.google.common.truth.Truth
 import kotlin.test.assertFailsWith
+import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -67,11 +68,7 @@ class ApiTesterTest {
             flag { Flags.catalystMigration26q2() }
             tags("a", "b")
 
-            preference(
-                key = "preference_with_tags",
-                purpose = 0,
-                type = AnyString,
-            ) {
+            preference(key = "preference_with_tags", purpose = 0, type = AnyString) {
                 tags("a", "b", "c")
                 get { execute { "Hello" } }
             }
@@ -392,11 +389,7 @@ class ApiTesterTest {
         init {
             flag { Flags.catalystMigration26q2() }
             tags(PreferencesApiScreen.APP_FUNCTION_STORAGE)
-            preference(
-                key = "preference_with_device_state_tag",
-                purpose = 0,
-                type = AnyString,
-            ) {
+            preference(key = "preference_with_device_state_tag", purpose = 0, type = AnyString) {
                 tags(PreferencesApiScreen.APP_FUNCTION_BATTERY)
                 get { execute { "Hello" } }
             }
@@ -573,8 +566,10 @@ class ApiTesterTest {
 
     @Test
     fun getPreferenceOptions_generatedType_areCorrect() {
-        Truth.assertThat(tester.getPreferenceOptions<String>("preference_with_generated_type"))
-            .containsExactly(("value1" to "first"), ("value2" to "second"))
+        runBlocking {
+            Truth.assertThat(tester.getPreferenceOptions<String>("preference_with_generated_type"))
+                .containsExactly(("value1" to "first"), ("value2" to "second"))
+        }
     }
 
     @Test
@@ -585,8 +580,12 @@ class ApiTesterTest {
 
     @Test
     fun getPreferenceOptions_onInfiniteType_throwsException() {
-        assertFailsWith<Exception> {
-            tester.getPreferenceOptions<String>("preference_which_has_value_hello_and_no_setter")
+        runBlocking {
+            assertFailsWith<Exception> {
+                tester.getPreferenceOptions<String>(
+                    "preference_which_has_value_hello_and_no_setter"
+                )
+            }
         }
     }
 
@@ -881,30 +880,18 @@ class ApiTesterTest {
     @Test
     fun getScreenTags_returnsScreenTags() {
         Truth.assertThat(tester.getScreenTags())
-            .containsExactly(
-                "a",
-                "b",
-                "api-first",
-                PreferencesApiScreen.APP_FUNCTION_UNCATEGORIZED,
-            )
+            .containsExactly("a", "b", "api-first", PreferencesApiScreen.APP_FUNCTION_UNCATEGORIZED)
     }
 
     @Test
     fun getPreferenceTags_forPreferenceWithTags_returnsPreferenceTags() {
         Truth.assertThat(tester.getPreferenceTags("preference_with_tags"))
-            .containsExactly(
-                "a",
-                "b",
-                "c",
-                "api-first",
-            )
+            .containsExactly("a", "b", "c", "api-first")
     }
 
     @Test
     fun getPreferenceTags_forPreferenceWithoutTags_returnsApiFirst() {
-        Truth.assertThat(
-                tester.getPreferenceTags("preference_which_has_value_hello_and_no_setter")
-            )
+        Truth.assertThat(tester.getPreferenceTags("preference_which_has_value_hello_and_no_setter"))
             .containsExactly("api-first")
     }
 
@@ -917,9 +904,7 @@ class ApiTesterTest {
     @Test
     fun getPreferenceTags_withDeviceStateTag_doesNotAddUncategorizedTag() {
         Truth.assertThat(
-                testerScreenWithDeviceStateTag.getPreferenceTags(
-                    "preference_with_device_state_tag"
-                )
+                testerScreenWithDeviceStateTag.getPreferenceTags("preference_with_device_state_tag")
             )
             .containsExactly(PreferencesApiScreen.APP_FUNCTION_BATTERY, "api-first")
     }

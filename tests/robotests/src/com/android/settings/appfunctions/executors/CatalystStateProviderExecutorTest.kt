@@ -419,7 +419,7 @@ class CatalystStateProviderExecutorTest {
         purpose = R.string.preference_screen_purpose,
     ) {
         override val keyParameters = KeyParametersSchema {
-            parameter("param", R.string.preference_purpose)
+            parameter("param", R.string.preference_purpose, type = AnyString)
         }.prepare("param" to "value")
     }
 

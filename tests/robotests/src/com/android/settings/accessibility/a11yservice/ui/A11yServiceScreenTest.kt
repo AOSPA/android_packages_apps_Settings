@@ -31,6 +31,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.a11yservice.A11yServicePreferenceFragment
+import com.android.settings.accessibility.a11yservice.data.AccessibilityService
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.extensions.putComponentName
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
@@ -108,6 +109,16 @@ class A11yServiceScreenTest {
     @Test
     fun getKey() {
         assertThat(preferenceScreenCreator.key).isEqualTo(A11yServiceScreen.KEY)
+    }
+
+    @Test
+    fun parametersSchema_isCorrect() {
+        val schema = A11yServiceScreen.parametersSchema
+        val parameter = schema.getParameters()[AccessibilitySettings.EXTRA_COMPONENT_NAME]
+
+        assertThat(parameter).isNotNull()
+        assertThat(parameter!!.type).isEqualTo(AccessibilityService)
+        assertThat(parameter.required).isTrue()
     }
 
     @Test

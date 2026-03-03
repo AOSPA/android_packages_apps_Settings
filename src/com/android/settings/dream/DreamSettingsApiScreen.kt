@@ -80,7 +80,7 @@ class DreamSettingsApiScreen :
     }
 
     private object WhenToDreamType : FiniteOptionsType<WhenToDream> {
-        override fun getOptions(context: Context): List<Pair<WhenToDream, String>> {
+        override suspend fun getOptions(context: Context): List<Pair<WhenToDream, String>> {
             val validValues = DreamUtils.getWhenToDreamOptions(context.resources).toSet()
             val posturingSupported =
                 context.resources.getBoolean(R.bool.config_posturing_supported)

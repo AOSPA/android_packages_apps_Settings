@@ -15,7 +15,7 @@
   -->
 
 <resources>
-    <string name="a11y_activity_detail_screen_purpose" translatable="false">a11y_activity_detail_screen</string>
+    <string name="a11y_activity_detail_screen_purpose" translatable="false">Allows users to manage accessibility components which do not require additional accessibility capabilities.</string>
     <string name="accessibility_activity_app_info_purpose" translatable="false">accessibility_activity_app_info</string>
     <string name="accessibility_activity_settings_purpose" translatable="false">accessibility_activity_settings</string>
     <string name="a11y_activity_detail_screen_animated_image_purpose" translatable="false">animated_image</string>
@@ -34,7 +34,7 @@
     <string name="a11y_floating_menu_shortcut_fade_enabled_purpose" translatable="false">Whether the accessibility button fades when not in use</string>
     <string name="a11y_button_shortcut_transparency_purpose" translatable="false">The transparency level of the accessibility button when it is faded</string>
     <string name="a11y_button_shortcut_setting_footer_purpose" translatable="false">provides a guide for users on how to set up the accessibility button as a shortcut for a specific accessibility feature</string>
-    <string name="a11y_service_detail_screen_purpose" translatable="false">a11y_service_detail_screen</string>
+    <string name="a11y_service_detail_screen_purpose" translatable="false">Allows users to manage accessibility components which make use of AccessibilityService for additional capabilities.</string>
     <string name="accessibility_service_app_info_purpose" translatable="false">accessibility_service_app_info</string>
     <string name="accessibility_service_settings_purpose" translatable="false">accessibility_service_settings</string>
     <string name="a11y_service_detail_screen_animated_image_purpose" translatable="false">animated_image</string>
@@ -116,8 +116,9 @@
     <string name="navbar_order_preference_default_purpose" translatable="false">Whether the navigation button order is set to Back, Home, Recents</string>
     <string name="navbar_order_preference_reverse_purpose" translatable="false">Whether the navigation button order is set to Recents, Home, Back</string>
     <string name="color_mode_purpose" translatable="false">Allows the user to change the color profile of the display to suit their visual preferences. This will adjust how colors are rendered on the screen.</string>
+    <string name="color_mode_options_purpose" translatable="false">Color modes.</string>
     <string name="color_contrast_screen_purpose" translatable="false">Allows users to customize the contrast. Includes the ability to change contrast of UI elements and the ability to outline all text with a black or white background.</string>
-    <string name ="color_contrast_selector_preference_purpose">The contrast level of UI elements on the screen</string>
+    <string name="color_contrast_selector_preference_purpose">The contrast level of UI elements on the screen</string>
     <string name="caption_preferences_screen_purpose" translatable="false">Allows users to enable or disable system-wide captions and access settings to customize their visual appearance.</string>
     <string name="caption_preferences_top_intro_purpose" translatable="false">Shows a short introduction of what caption preferences are for.</string>
     <string name="caption_preferences_main_switch_purpose" translatable="false">Whether system-wide captions are enabled for media content.</string>
@@ -428,6 +429,8 @@
     <string name="special_access_nfc_tag_apps_settings_list_purpose" translatable="false">Determines whether an app is permitted to automatically launch or execute actions when the device scans a compatible Near Field Communication (NFC) tag.</string>
     <string name="special_access_turn_screen_on_apps_list_purpose" translatable="false">Grants an app the permission to wake up your device\'s display, typically to light up the screen for incoming notifications or alarms.</string>
     <string name="special_access_usage_data_app_list_purpose" translatable="false">Grants an app the ability to track your general device usage habits, including which other apps you use, how frequently you open them, and the duration of their use.</string>
+    <string name="zen_access_detail_screen_purpose" translatable="false">Grants the app permission to read the state of or modify system-level focus modes, such as Do Not Disturb, Bedtime mode, or Driving mode.</string>
+    <string name="zen_access_parameter_purpose" translatable="false">The package whose modes access will be modified.</string>
     <string name="no_app_purpose" translatable="false">no_app</string>
     <string name="special_access_write_system_preferences_app_list_purpose" translatable="false">Allows users to manage which apps are permitted to modify system settings.</string>
     <string name="free_up_space_purpose" translatable="false">free_up_space</string>
@@ -703,4 +706,7 @@
     <string name="hardware_info_serial_purpose" translatable="false">The unique serial number of the device.</string>
     <string name="hardware_info_mfg_year_purpose" translatable="false">The year the device was manufactured.</string>
     <!-- About phone > Model API end -->
+    <string name="external_display_screen_purpose" translatable="false">Allows users to manage and configure connected external monitors. This includes selecting the display mode (such as mirroring the device screen or extending it), adjusting screen rotation, and toggling High Dynamic Range (HDR) capabilities.</string>
+    <string name="external_display_resolution_screen_purpose" translatable="false">Allows users to fine-tune the visual output for a connected external monitor by selecting a specific physical screen resolution and adjusting the refresh rate (Hz) to optimize clarity and performance.</string>
+    <string name="external_display_id_parameter_purpose" translatable="false">The unique system identifier of the specific external display the user wants to configure or query.</string>
 </resources>

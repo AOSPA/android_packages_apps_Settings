@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameter
 import kotlin.test.assertFailsWith
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -213,9 +214,9 @@ class DreamSettingsApiScreenTest {
             false
         )
 
-        var options = tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
+        var options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
-        ).map { it.first }
+        ).map { it.first } }
 
         assertThat(options).contains(
             DreamSettingsApiScreen.WhenToDream.WHILE_CHARGING
@@ -236,9 +237,9 @@ class DreamSettingsApiScreenTest {
             true
         )
 
-        options = tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
+        options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
-        ).map { it.first }
+        ).map { it.first } }
 
         assertThat(options).contains(DreamSettingsApiScreen.WhenToDream.WHILE_POSTURED)
     }
@@ -257,9 +258,9 @@ class DreamSettingsApiScreenTest {
             arrayOf("never")
         )
 
-        var options = tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
+        var options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
-        ).map { it.first }
+        ).map { it.first } }
 
         assertThat(options).containsExactly(DreamSettingsApiScreen.WhenToDream.NEVER)
 
@@ -269,9 +270,9 @@ class DreamSettingsApiScreenTest {
             arrayOf("while_charging_only", "never")
         )
 
-        options = tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
+        options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
-        ).map { it.first }
+        ).map { it.first } }
 
         assertThat(options).containsExactly(
             DreamSettingsApiScreen.WhenToDream.WHILE_CHARGING,
@@ -284,9 +285,9 @@ class DreamSettingsApiScreenTest {
             arrayOf("while_docked_only", "never")
         )
 
-        options = tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
+        options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
-        ).map { it.first }
+        ).map { it.first } }
 
         assertThat(options).containsExactly(
             DreamSettingsApiScreen.WhenToDream.WHILE_DOCKED,
@@ -306,9 +307,9 @@ class DreamSettingsApiScreenTest {
             arrayOf("while_docked_only", "never")
         )
 
-        val options = tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
+        val options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
-        ).map { it.first }
+        ).map { it.first } }
 
         assertThat(options).containsExactly(
             DreamSettingsApiScreen.WhenToDream.WHILE_DOCKED,

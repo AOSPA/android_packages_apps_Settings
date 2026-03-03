@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreconditionsAsString
+import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import com.android.settingslib.metadata.setPreconditionsAsString
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -168,6 +169,16 @@ class CatalystStateMetadataProviderExecutor(
             } else {
                 false // Legacy preferences are not writable
             }
+
+            // We replace .. with . because sometimes the strings
+            // contain a full stop at the end and this joins with
+            // the separator
+            val hintText = listOfNotNull(
+                        metadata.accessPreconditionsAsString(context),
+                        metadata.getPreconditionsAsString(context),
+                        metadata.setPreconditionsAsString(context),
+                        config?.hintText(englishContext, metadata)
+                    ).joinToString(separator = "\n").replace("..", ".")
             deviceStateItemMetadataList.add(
                 DeviceStateItemMetadata(
                     // TODO: Expose parameterization
@@ -182,18 +193,21 @@ class CatalystStateMetadataProviderExecutor(
                         ),
                     sensitivity = sensitivityLevel,
                     writable = writable,
-                    // TODO: properly expose possible values
-                    possibleValues = metadataProto.valueDescriptor.toDeviceStateString(),
+                    possibleValues = if (metadata is ApiPreference<*>) {
+                        val type = metadata.type
+                        if (type is FiniteOptionsType) {
+                            type.getOptions(context).map {
+                                "${it.first.toString()} (${it.second.toString()})"
+                            }.joinToString(", ")
+                        } else {
+                            null
+                        }
+                    } else {
+                        val str = metadataProto.valueDescriptor.toDeviceStateString()
+                        if (str.isEmpty()) null else str
+                    },
 
-                    hintText = listOfNotNull(
-                        metadata.accessPreconditionsAsString(context),
-                        metadata.getPreconditionsAsString(context),
-                        metadata.setPreconditionsAsString(context),
-                        config?.hintText(englishContext, metadata)
-                    ).joinToString(separator = "\n").replace("..", "."),
-                        // We replace .. with . because sometimes the strings
-                        // contain a full stop at the end and this joins with
-                        // the separator
+                    hintText = if (hintText.isNotEmpty()) { hintText } else { null },
                 )
             )
         }
@@ -209,13 +223,22 @@ class CatalystStateMetadataProviderExecutor(
                             else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
                         screenMetaData.getPreferencePurpose(context),
                         screenMetaData.accessPreconditionsAsString(context),
-                    ).filter{it.isNotBlank()}.joinToString(". ")
+                    ).filter{it.isNotBlank()}.joinToString(". ").replace("..", ".")
                 ),
             deviceStateItemsMetadata = deviceStateItemMetadataList,
-            intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
-            // This is a temporary hack to indicate to the agent that the screen is itemized, it
-            // should eventually state the type of itemization (e.g. package, sim, etc)
-            itemizationTypes = if (isParameterized) listOf("ITEMIZED SCREEN") else emptyList(),
+            // intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
+
+            // Ideally itemizationTypes should be 1) nullable and 2) more
+            // complex than a string so we can communicate more detail
+            itemizationTypes = screenMetaData.keyParametersSchema?.getParameters()?.values?.map {
+                    val type = it.type
+                    if (type is FiniteOptionsType) {
+                        val optionsString = type.getOptions(context).map { "${it.first} (${it.second})" }.joinToString(",")
+                        "${type.getKey()} - ${type.getDescription(context)} - options: $optionsString"
+                    } else {
+                        "${type.getKey()} - ${type.getDescription(context)}"
+                    }
+                }?.toList() ?: emptyList(),
         )
     }
 
