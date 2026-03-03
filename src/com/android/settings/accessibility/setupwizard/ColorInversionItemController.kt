@@ -16,14 +16,19 @@
 
 package com.android.settings.accessibility.setupwizard
 
+import android.content.Context
 import androidx.fragment.app.FragmentActivity
+import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.google.android.setupdesign.items.Item
 
 /** Controller for the color inversion item in the Accessibility Setup Wizard. */
-class ColorInversionItemController(item: Item) : BaseItemController(item) {
+class ColorInversionItemController(private val context: Context, item: Item) :
+    BaseItemController(item) {
 
-    override fun bindData(item: Item) {}
+    override fun bindData(item: Item) {
+        item.isVisible = isAvailable()
+    }
 
     override fun onItemSelected(activity: FragmentActivity) {
         activity.supportFragmentManager
@@ -32,4 +37,10 @@ class ColorInversionItemController(item: Item) : BaseItemController(item) {
             .addToBackStack(null)
             .commit()
     }
+
+    private fun isAvailable() =
+        Flags.enableColorInversionInSuw() &&
+            context.resources.getBoolean(
+                com.android.internal.R.bool.config_enableColorInversionInSetupWizard
+            )
 }
