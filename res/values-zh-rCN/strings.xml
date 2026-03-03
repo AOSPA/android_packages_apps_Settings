@@ -850,6 +850,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"蓝牙"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"蓝牙"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"要与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”配对吗？"</string>
+    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
+    <skip />
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"确认添加第 2 部音频设备"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"蓝牙配对码"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"输入配对码，然后按回车键"</string>
@@ -863,7 +865,11 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"同时允许访问通讯录和通话记录"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"相关信息将用于来电通知等用途"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"检查配对码"</string>
+    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
+    <skip />
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"请检查此代码是否与“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”上的代码一致。\n\n为安全起见，请勿在任何位置输入此代码。"</string>
+    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"无法连接到<xliff:g id="DEVICE_NAME">%1$s</xliff:g>。"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"可用设备"</string>
@@ -899,7 +905,8 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"实验性功能。可改善音频质量。"</string>
     <string name="device_details_battery" msgid="5466987755790847884">"电池"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"电池，正在充电"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"请尝试重新启动“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”。如果这样做无法解决问题，请取消保存设备。为了安全起见，请勿在公共场所重新配对。\n\n如果此设备不在附近，您无需执行任何操作。"</string>
+    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
+    <skip />
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"详细的打印日志记录"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"更多调试日志，包括可能含有私密信息的互联网打印协议 (IPP) 日志。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"取消保存"</string>
@@ -1425,7 +1432,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"屏保"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"屏保"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"睡眠模式开启时无法使用"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"不可用"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"启用屏保"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充电或插入基座时"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"插入基座充电时"</string>
@@ -2035,12 +2043,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"强行停止应用可能会导致应用出现异常。"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"停用应用"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"如果停用此应用，Android 及其他应用可能无法再正常运行。请注意，此应用属于设备预装应用，无法删除。停用后，系统将关闭此应用，并在设备上将其隐藏。"</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"系统用户应用"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"此应用正在为系统用户运行。您所做的更改将影响此设备上的所有用户。"</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"只有设备管理员才能管理此应用。"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"商店"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"应用详情"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"应用安装来源：<xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2176,7 +2181,7 @@
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"按“<xliff:g id="CLICK_LABEL">%s</xliff:g>”键可点击鼠标主键"</string>
     <string name="mouse_keys_press_hold_summary" msgid="112969663769147732">"按“<xliff:g id="PRESS_HOLD_LABEL">%s</xliff:g>”键可按住鼠标主键"</string>
     <string name="mouse_keys_release_summary" msgid="7209370896835993434">"按“<xliff:g id="RELEASE_LABEL">%s</xliff:g>”键可松开鼠标主键"</string>
-    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"按“<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>”键可切换滚动模式，这样按“<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>”键就会向上、向下、向左或向右滚动视图"</string>
+    <string name="mouse_keys_toggle_scroll_summary" msgid="7492663135290108272">"按“<xliff:g id="RELEASE_LABEL_1">%1$s</xliff:g>”键可切换滚动模式，而后按“<xliff:g id="RELEASE_LABEL_2">%2$s</xliff:g>”键可向上、向下、向左或向右滚动视图"</string>
     <string name="mouse_keys_release2_summary" msgid="5504548339731577210">"按“<xliff:g id="RELEASE_2_LABEL">%s</xliff:g>”键可点击鼠标辅助键"</string>
     <string name="mouse_keys_acceleration_seekbar_title" msgid="2329098889930361504">"加速"</string>
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"快速"</string>
@@ -2434,18 +2439,18 @@
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"光标跟随"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"选择放大功能的光标跟随模式。"</string>
     <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"如果仅放大局部屏幕，则无法使用此设置"</string>
-    <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"屏幕随着鼠标指针的移动而持续移动"</string>
+    <string name="accessibility_magnification_cursor_following_continuous" msgid="1119319218662522794">"鼠标指针移动时，画面随之移动"</string>
     <string name="accessibility_magnification_cursor_following_center" msgid="3504798009192014460">"屏幕跟随移动并保持鼠标指针位于屏幕中央"</string>
     <string name="accessibility_magnification_cursor_following_edge" msgid="8675207762416655758">"鼠标指针触及屏幕边缘时才移动屏幕"</string>
     <string name="accessibility_screen_magnification_follow_typing_title" msgid="494025442124701045">"跟随输入文字"</string>
     <string name="accessibility_screen_magnification_follow_typing_summary" msgid="2678347754211619662">"输入时放大镜跟随文字移动"</string>
     <string name="accessibility_screen_magnification_follow_keyboard_title" msgid="3412060515554192262">"跟随键盘焦点"</string>
-    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"当您使用键盘导航时，放大镜会跟随焦点所在项移动"</string>
+    <string name="accessibility_screen_magnification_follow_keyboard_summary" msgid="2379353603675828805">"使用键盘导航时，放大镜跟随焦点所在项移动"</string>
     <string name="accessibility_screen_magnification_nav_ime_title" msgid="8804501318161774285">"放大键盘"</string>
     <string name="accessibility_screen_magnification_nav_ime_summary" msgid="2102651227079047801">"使用全屏放大功能时，放大键盘以查看表情符号和字母"</string>
     <string name="accessibility_screen_magnification_nav_ime_unavailable_summary" msgid="2248787024685382054">"如果仅放大局部屏幕，则无法使用此设置"</string>
     <string name="accessibility_screen_magnification_always_on_title" msgid="3814297443759580936">"切换应用时保持开启"</string>
-    <string name="accessibility_screen_magnification_always_on_summary" msgid="642275893256862796">"切换应用时，放大镜会保持开启并缩小画面"</string>
+    <string name="accessibility_screen_magnification_always_on_summary" msgid="642275893256862796">"切换应用时，放大镜保持开启并缩小画面"</string>
     <string name="accessibility_screen_magnification_always_on_unavailable_summary" msgid="3844732482037416038">"如果仅放大局部屏幕，则无法使用此设置"</string>
     <string name="accessibility_screen_magnification_joystick_title" msgid="1803769708582404964">"操纵杆"</string>
     <string name="accessibility_screen_magnification_joystick_summary" msgid="4640300148573982720">"使用屏幕上的操纵杆激活和移动放大器。点按并按住，然后在操纵杆上拖动即可控制放大器。点按并拖动即可移动操纵杆自身。"</string>
@@ -2493,7 +2498,7 @@
     <string name="accessibility_screen_magnification_intro_text" msgid="3856180549393526339">"快速放大屏幕，更清晰地查看内容"</string>
     <string name="accessibility_screen_magnification_summary" msgid="8267672508057326959">"&lt;b&gt;如需放大屏幕，请执行以下操作：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 使用快捷方式启动放大功能&lt;br/&gt; {1,number,integer}. 点按屏幕&lt;br/&gt; {2,number,integer}. 拖动双指在屏幕上四处移动&lt;br/&gt; {3,number,integer}. 张合双指以调整缩放比例&lt;br/&gt; {4,number,integer}. 使用快捷方式停止放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;如需暂时放大屏幕，请执行以下操作：&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 确保已将放大类型设为“全屏”&lt;br/&gt; {1,number,integer}. 使用快捷方式启动放大功能&lt;br/&gt; {2,number,integer}. 按住屏幕上的任意位置&lt;br/&gt; {3,number,integer}. 拖动单指在屏幕上四处移动&lt;br/&gt; {4,number,integer}. 抬起手指以停止放大功能"</string>
     <string name="accessibility_screen_magnification_keyboard_summary" msgid="5376202602229533488">"&lt;b&gt;如需放大画面，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt;{0,number,integer}. 使用快捷方式或同时按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M 键，启动放大功能&lt;br/&gt; {1,number,integer}. 同时按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + 箭头键，在屏幕上移动&lt;br/&gt; {2,number,integer}.按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; 的同时，按 + 键或 - 键，调整缩放级别&lt;br/&gt; {3,number,integer}.使用快捷方式或同时按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M 键，停用放大功能"</string>
-    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;键盘&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 使用快捷方式或同时按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M 键，启动放大功能&lt;br/&gt; {1,number,integer}. 同时按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + 箭头键，在屏幕上移动&lt;br/&gt; {2,number,integer}.按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; 的同时，按 + 键或 - 键，调整缩放级别&lt;br/&gt; {3,number,integer}.使用快捷方式或同时按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M，停用放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;触摸屏&lt;/b&gt;&lt;br/&gt; 如需放大画面，请按以下步骤操作：&lt;br/&gt; {0,number,integer}. 使用快捷方式启动放大功能&lt;br/&gt; {1,number,integer}. 点按屏幕&lt;br/&gt; {2,number,integer}. 拖动双指在屏幕上四处移动&lt;br/&gt; {3,number,integer}. 双指张合以调整缩放比例&lt;br/&gt; {4,number,integer}. 使用快捷方式停用放大功能&lt;br/&gt;&lt;br/&gt; 如需暂时放大屏幕，请执行以下操作：&lt;br/&gt; {0,number,integer}. 确保已将放大类型设为“全屏”&lt;br/&gt; {1,number,integer}. 使用快捷方式启动放大功能&lt;br/&gt; {2,number,integer}. 按住屏幕上的任意位置&lt;br/&gt; {3,number,integer}. 拖动单指在屏幕上四处移动&lt;br/&gt; {4,number,integer}. 抬起手指以停用放大功能"</string>
+    <string name="accessibility_screen_magnification_keyboard_touch_summary" msgid="7623681880843239997">"&lt;b&gt;键盘&lt;/b&gt;&lt;br/&gt; {0,number,integer}. 使用快捷方式或同时按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M 键可启动放大功能&lt;br/&gt; {1,number,integer}. 同时按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + 箭头键可在屏幕上移动&lt;br/&gt; {2,number,integer}. 按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; 的同时，按 + 键或 - 键可调整缩放级别&lt;br/&gt; {3,number,integer}. 使用快捷方式或同时按下 &lt;xliff:g id=meta&gt;%1$s&lt;/xliff:g&gt; + &lt;xliff:g id=alt&gt;%2$s&lt;/xliff:g&gt; + M 键可停用放大功能&lt;br/&gt;&lt;br/&gt; &lt;b&gt;触摸屏&lt;/b&gt;&lt;br/&gt; 如需放大画面，请执行以下操作：&lt;br/&gt; {0,number,integer}. 使用快捷方式启动放大功能&lt;br/&gt; {1,number,integer}. 点按屏幕&lt;br/&gt; {2,number,integer}. 拖动双指在屏幕上移动&lt;br/&gt; {3,number,integer}. 双指张合以调整缩放比例&lt;br/&gt; {4,number,integer}. 使用快捷方式停用放大功能&lt;br/&gt;&lt;br/&gt; 如需暂时放大屏幕，请执行以下操作：&lt;br/&gt; {0,number,integer}. 确保已将放大类型设为“全屏”&lt;br/&gt; {1,number,integer}. 使用快捷方式启动放大功能&lt;br/&gt; {2,number,integer}. 按住屏幕上的任意位置&lt;br/&gt; {3,number,integer}. 拖动单指在屏幕上移动&lt;br/&gt; {4,number,integer}. 抬起手指即可停用放大功能"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_off" msgid="1779959623535122324">"&lt;b&gt;如需放大画面，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt;{0,number,integer}. 使用快捷手势开始放大&lt;br/&gt; {1,number,integer}. 点按画面&lt;br/&gt; {2,number,integer}. 拖动 2 指在画面上四处移动&lt;br/&gt; {3,number,integer}. 张合 2 指以调整缩放比例&lt;br/&gt; {4,number,integer}. 使用快捷手势停止放大&lt;br/&gt;&lt;br/&gt; 您还可以暂时放大画面及执行其他操作。"</string>
     <string name="accessibility_screen_magnification_summary_one_finger_panning_on" msgid="7323930759240678965">"&lt;b&gt;如需放大画面，请按以下步骤操作：&lt;/b&gt;&lt;br/&gt;{0,number,integer}. 使用快捷手势开始放大&lt;br/&gt; {1,number,integer}. 点按画面&lt;br/&gt; {2,number,integer}. 拖动 1 或 2 根手指在画面上四处移动&lt;br/&gt; {3,number,integer}. 张合 2 指以调整缩放比例&lt;br/&gt; {4,number,integer}. 使用快捷手势停止放大&lt;br/&gt;&lt;br/&gt; 您还可以暂时放大画面及执行其他操作。"</string>
     <string name="accessibility_screen_magnification_navbar_summary" msgid="807985499898802296">"开启放大功能后，您就可以放大屏幕上的内容。\n\n"<b>"要放大内容"</b>"，请先启动放大功能，然后点按屏幕上的任意位置。\n"<ul><li>"拖动双指或多指即可进行滚动"</li>\n<li>"张合双指或多指即可调整缩放级别"</li></ul>\n\n<b>"要暂时性放大内容"</b>"，请先启动放大功能，然后按住屏幕上的任意位置。\n"<ul><li>"拖动手指即可在屏幕上四处移动"</li>\n<li>"松开手指即可缩小回原来的状态"</li></ul>\n\n"您无法针对键盘或导航栏使用放大功能。"</string>
@@ -2585,10 +2590,10 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"时间"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"标准"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"标准版深色主题"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"为设备和支持深色主题的应用开启深色主题。"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"为设备和支持深色主题的应用开启深色主题"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"扩展"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"扩展深色主题"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"自动将深色主题应用于大多数不支持深色主题的应用，帮助提升无障碍体验。"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"自动将深色主题应用于大多数不支持深色主题的应用，帮助提升无障碍体验"</string>
     <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"如果在使用扩展选项时遇到问题，请使用标准选项。"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"强制反转、颜色反转、对比"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"扩展深色主题"</string>
@@ -2759,7 +2764,7 @@
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"音频调整"</string>
     <string name="accessibility_audio_adjustment_subtext" msgid="2190523175597700025">"单声道音频、音频平衡"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"语音描述"</string>
-    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"以语音的形式描述当前画面呈现的内容（仅限支持该设置的电影或电视节目）"</string>
+    <string name="accessibility_audio_description_summary" msgid="2554789094873781056">"用语音描述当前画面内容（仅限支持该设置的电影或电视节目）"</string>
     <string name="keywords_audio_description" msgid="6202816411593281252">"语音描述, 语音, 描述, 低视力, audio description, audio, description, low vision,"</string>
     <string name="accessibility_summary_shortcut_enabled" msgid="4030427268146752644">"快捷方式已开启"</string>
     <string name="accessibility_summary_shortcut_disabled" msgid="564005462092499068">"已关闭"</string>
@@ -3059,9 +3064,9 @@
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"每小时电池用量图表"</string>
     <string name="battery_level_percentage" msgid="1433178290838842146">"电池电量百分比：<xliff:g id="START_PERCENTAGE">%1$s</xliff:g> &gt; <xliff:g id="END_PERCENTAGE">%2$s</xliff:g>"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"自上次充满电后的电池使用情况"</string>
-    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"“<xliff:g id="SLOT">%s</xliff:g>”的电池用量"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"<xliff:g id="SLOT">%s</xliff:g>的电池用量"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"自上次充满电后的屏幕使用时间"</string>
-    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"“<xliff:g id="SLOT">%s</xliff:g>”的屏幕使用时间"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"<xliff:g id="SLOT">%s</xliff:g>的屏幕使用时间"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"按应用查看"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"按系统查看"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
@@ -3620,11 +3625,13 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"蓝牙、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"蓝牙、Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"设备"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"键盘、触控板、显示、声音"</string>
+    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
+    <skip />
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"亮度、颜色、深色主题、锁屏、文本"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"键盘选择、工具"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"光标速度、按钮自定义、滚动"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"音量、扬声器、麦克风"</string>
+    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
+    <skip />
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"光标自定义、点击操作、滚动"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"无法使用，因为 NFC 已关闭"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"先安装付款应用，然后才能使用感应式付款功能"</string>
@@ -3811,8 +3818,8 @@
     <string name="zen_mode_settings_schedules_summary" msgid="2047688589286811617">"{count,plural, =0{无}=1{已设置 1 个时间表}other{已设置 # 个时间表}}"</string>
     <string name="zen_mode_settings_title" msgid="682676757791334259">"勿扰模式"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"模式"</string>
-    <string name="zen_modes_list_intro" msgid="1879511587535247228">"利用适合睡眠、工作、驾车等场景的各种模式，减少干扰、保持专注"</string>
-    <string name="zen_modes_add_mode" msgid="5926457160307593664">"创建您的专属模式"</string>
+    <string name="zen_modes_list_intro" msgid="1879511587535247228">"利用睡眠、工作、驾车等模式，减少干扰、保持专注"</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"创建专属模式"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"仅接收来自重要联系人和重要应用的通知"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"设置时间表"</string>
     <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"时间表设置依据："</string>
@@ -5098,9 +5105,9 @@
     <string name="credman_on_off_switch_content_description" msgid="2930826358220917851">"开启/关闭%1$s"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"关闭"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"更改"</string>
-    <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"您只能开启 5 项服务"</string>
-    <string name="credman_limit_error_msg" msgid="2521803280130310063">"至少关闭 1 项服务才能添加另 1 项服务"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"选择您的首选服务，用于保存相关数据，为您提供登录和自动填充建议。如果您希望其他服务也提供建议，请开启相应服务。"</string>
+    <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"最多只能开启 5 项服务"</string>
+    <string name="credman_limit_error_msg" msgid="2521803280130310063">"如要添加另一项服务，请至少关闭 1 项服务"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"选择首选服务，用于保存相关数据，为您提供登录和自动填充建议。如要其他服务也提供建议，请开启相应服务。"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s会根据屏幕上的内容判断可以自动填充的内容。"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"密码、通行密钥和数据服务限制"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"同时最多可以启用 5 个密码、通行密钥和数据服务。若要添加其他服务，请先关闭一个已启用的服务。"</string>
@@ -6081,7 +6088,7 @@
     <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"身份检查和手表"</string>
     <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"连接手表后，身份检查功能会增加更多身份验证方式，防止他人未经授权访问应用"</string>
     <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"身份检查和手表"</string>
-    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"更新内容：\n"<ul><li>"连接手表后，当您不在可信地点时，可以使用生物识别信息或锁屏密码来访问应用"</li>\n<li>"身份检查功能未来可能会增加更多身份验证方式，进一步提升设备上应用的安全性。"<a href="https://support.google.com/android?p=identity_check">"详细了解保护机制启动的时机和场景"</a></li></ul></string>
+    <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"更新内容：\n"<ul><li>"连接手表后，如果您不在可信地点，则可以使用生物识别信息或数字密码来访问应用"</li>\n<li>"身份检查功能未来可能会增加更多方式来验证身份并保护设备上的应用。"<a href="https://support.google.com/android?p=identity_check">"详细了解身份检查启动的时机和场景"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"其他设置"</string>
     <string name="more_security_privacy_summary" msgid="8049801531406061219">"自动填充、通知等"</string>
     <string name="privacy_sources_title" msgid="7648842637181479352">"隐私控制"</string>

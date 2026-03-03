@@ -452,8 +452,8 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_setup" msgid="6255210343107484206">"Если вы видите этот значок, значит вы можете подтвердить личность с помощью отпечатка пальца, например для входа в приложение или одобрения покупки."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_1" msgid="4360262371633254407">"Важно!"</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_title_2" msgid="2580899232734177771">"Как это работает"</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Функция разблокировки по отпечатку пальца использует уникальную модель вашего отпечатка, чтобы узнавать вас во время аутентификации. Для создания модели необходимо отсканировать ваш палец в разных положениях."</string>
-    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Функция разблокировки по отпечатку пальца использует уникальную модель отпечатка, чтобы узнавать вашего ребенка во время аутентификации. Для создания модели необходимо отсканировать палец в разных положениях."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_2" msgid="5909924864816776516">"Чтобы подтверждать вашу личность, функция создаст уникальную модель вашего отпечатка пальца. Для этого вам нужно будет отсканировать палец в разных положениях."</string>
+    <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_2" msgid="3493356605815124807">"Чтобы подтверждать личность ребенка, функция создаст уникальную модель его отпечатка пальца. Для этого ему нужно будет отсканировать палец в разных положениях."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_6" msgid="5314031490467481499">"Рекомендуем использовать защитное стекло или пленку, сертифицированные по программе \"Сделано для Google\". Устройства с другими стеклами или пленками могут не распознавать отпечаток пальца."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_footer_message_consent_6" msgid="3563942520716110478">"Рекомендуем использовать защитное стекло или пленку из серии \"Сделано для Google\". Устройства с другими стеклами или пленками могут не распознавать отпечаток пальца ребенка."</string>
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
@@ -850,6 +850,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Подключить устройство <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_again_request" msgid="1394430519292575085">"Подключить устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" снова?"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Подтвердите добавление второго компонента вашего аудиоустройства."</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Код подключения Bluetooth:"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Введите код подключения и нажмите клавишу ввода"</string>
@@ -863,7 +864,9 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Разрешить доступ к контактам и журналу звонков"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Эта информация будет использоваться для оповещений о звонках и других функций"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Сравните коды подключения"</string>
+    <string name="bluetooth_pairing_again_confirmation_title" msgid="838944639700876861">"Подключить снова"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Проверьте, совпадает ли этот код с показанным на устройстве \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\".\n\nВ целях безопасности нигде его не вводите."</string>
+    <string name="bluetooth_repairing_msg" msgid="4359999881389087827">"Это устройство уже было подключено и пытается подключиться снова.\nЕсли вы находитесь в общественном месте, будьте осторожны."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Не удалось подключиться к <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Доступные устройства"</string>
@@ -899,7 +902,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Улучш. качества звука (экспериментальн.)"</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Батарея"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Батарея, идет зарядка"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Перезагрузите устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". Если это не поможет, удалите его из списка. Чтобы не подвергать устройство опасности, не следует заново подключать его в общественном месте.\n\nЕсли этого устройства поблизости нет, никаких действий не требуется."</string>
+    <string name="device_details_key_missing_title" msgid="3747991896959671040">"Переведите устройство \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\" в режим подключения и повторите попытку.\n\nЕсли этого устройства поблизости нет, никаких действий не требуется."</string>
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Вести подробные журналы печати"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Дополнительные журналы отладки, в том числе Internet Printing Protocol (IPP), могут содержать конфиденциальную информацию"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Удалить устройство"</string>
@@ -1425,7 +1428,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Заставка"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"заставка"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Недоступно в ночном режиме"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Недоступна"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Заставка"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Во время зарядки и на док-станции"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"На док-станции и во время зарядки"</string>
@@ -1884,7 +1888,7 @@
     <string name="lockpassword_confirm_your_password_header_frp" msgid="7932240547542564033">"Подтверждение пароля"</string>
     <string name="lockpassword_remote_validation_header" msgid="4992647285784962073">"Подтвердите, что это вы"</string>
     <string name="lockpassword_remote_validation_pattern_details" msgid="8348747138206521324">"Чтобы перенести аккаунты Google, настройки и прочее, введите графический ключ от другого вашего устройства. Ключ зашифрован."</string>
-    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Чтобы перенести аккаунты Google, настройки и прочее, введите PIN-код от другого вашего устройства. PIN-код зашифрован."</string>
+    <string name="lockpassword_remote_validation_pin_details" msgid="174386531179588449">"Чтобы перенести аккаунты Google, настройки и другие данные с другого устройства, введите PIN-код от него. PIN-код зашифрован."</string>
     <string name="lockpassword_remote_validation_password_details" msgid="2015394005797749659">"Чтобы перенести аккаунты Google, настройки и прочее, введите пароль от другого вашего устройства. Пароль зашифрован."</string>
     <string name="lockpassword_remote_validation_set_pattern_as_screenlock" msgid="8904754912508423524">"Использовать тот же графический ключ для разблокировки этого устройства"</string>
     <string name="lockpassword_remote_validation_set_pin_as_screenlock" msgid="5342076966047671535">"Использовать тот же PIN-код для разблокировки этого устройства"</string>
@@ -2035,12 +2039,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Принудительное закрытие приложения может отразиться на его функциональности."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Отключить приложение"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Если вы отключите это приложение, система и другие программы могут работать неправильно. Приложение установлено производителем, поэтому его нельзя удалить с устройства. После отключения оно перестанет работать и будет скрыто."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"Приложение системного пользователя"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"Это приложение запущено для системного пользователя. Изменения затронут всех пользователей устройства."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"Управлять этим приложением может только администратор устройства."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Магазин"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Описание приложения"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Установлено из <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2145,7 +2146,7 @@
     <string name="sticky_keys_summary" msgid="1844953803625480623">"Вводить сочетания клавиш не одновременными нажатиями, а последовательными"</string>
     <string name="mouse_keys" msgid="6237254627808525540">"Клавиши управления указателем"</string>
     <string name="mouse_keys_main_title" msgid="3570638931365221460">"Управлять указателем с помощью клавиш"</string>
-    <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Сочетания клавиш управления указателем"</string>
+    <string name="accessibility_mouse_keys_shortcut_title" msgid="7621635104533584115">"Быстрый запуск управления указателем с клавиатуры"</string>
     <string name="mouse_keys_summary" msgid="6512910710030108693">"Управлять указателем с помощью клавиатуры"</string>
     <string name="mouse_keys_max_speed_title" msgid="2651688711606971145">"Скорость"</string>
     <string name="mouse_keys_seek_bar_decrease_button_description" msgid="9077624857206032509">"Уменьшить"</string>
@@ -2381,7 +2382,7 @@
     <string name="accessibility_pointer_title" msgid="7427650233669997010">"Указатель"</string>
     <string name="accessibility_touchpad_title" msgid="5798458334122685642">"Сенсорная панель"</string>
     <string name="accessibility_touchpad_system_gestures_enable_title" msgid="1867179109603472062">"Управление жестами тремя или четырьмя пальцами"</string>
-    <string name="accessibility_touchpad_system_gestures_enable_summary" msgid="7076378989016181266">"Включите, чтобы сенсорная панель реагировала на жесты тремя или четырьмя пальцами"</string>
+    <string name="accessibility_touchpad_system_gestures_enable_summary" msgid="7076378989016181266">"Если выключено, сенсорная панель не реагирует на жесты тремя или четырьмя пальцами"</string>
     <string name="keywords_accessibility_touchpad_system_gestures_enable" msgid="4406441971607855466">"сенсорная панель, пролистывание"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Цветовая контрастность"</string>
     <string name="accessibility_color_contrast_intro" msgid="7795090401101214930">"Настройте контрастность. Чем она выше, тем заметнее текст, кнопки и значки."</string>
@@ -2588,7 +2589,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Включать тёмную тему на устройстве и в приложениях, которые ее поддерживают"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Расширенная"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Тёмная тема с расширенными параметрами"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Автоматически включать тёмную тему в приложениях без ее поддержки, чтобы снижать нагрузку на глаза"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Автоматически включать тёмную тему в большинстве приложений без ее поддержки, чтобы снижать нагрузку на глаза"</string>
     <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Если у вас возникли проблемы с расширенной темой, используйте стандартную."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"принудительная инверсия, инверсия цветов, контрастность"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Расширенная тёмная тема"</string>
@@ -3059,9 +3060,9 @@
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Диаграмма расхода заряда батареи по часам"</string>
     <string name="battery_level_percentage" msgid="1433178290838842146">"Уровень заряда батареи в процентах от <xliff:g id="START_PERCENTAGE">%1$s</xliff:g> до <xliff:g id="END_PERCENTAGE">%2$s</xliff:g>"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Расход заряда батареи с момента последней полной зарядки"</string>
-    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Расход заряда батареи (<xliff:g id="SLOT">%s</xliff:g>)"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Расход заряда батареи: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Время использования устройства с момента последней полной зарядки"</string>
-    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Время использования устройства (<xliff:g id="SLOT">%s</xliff:g>)"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Время использования устройства: <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Приложения"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Системные сервисы"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
@@ -3167,7 +3168,7 @@
     <string name="credential_using_for_wifi" msgid="6134471366188592845">"Используется для сети \"<xliff:g id="SSID">%s</xliff:g>\""</string>
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Установлено для Wi-Fi (используется)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Удалить все содержимое?"</string>
-    <string name="credentials_erased" msgid="9121052044566053345">"Хранилище учетных данных очищено"</string>
+    <string name="credentials_erased" msgid="9121052044566053345">"Хранилище учетных данных очищено."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Не удалось очистить хранилище."</string>
     <string name="usage_access_title" msgid="8784394396356369568">"Приложения с доступом к статистике"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"Сертификат центра сертификации"</string>
@@ -3620,11 +3621,11 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Устройство"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"Клавиатура, сенсорная панель, экран и звук"</string>
+    <string name="device_dashboard_summary" msgid="534835339280267939">"Сенсорная панель, клавиатура, экран и звук"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Яркость, цвет, тёмная тема, текст и заблокированный экран"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Выбор клавиатуры и инструменты"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Скорость указателя, настройка кнопок и прокрутка"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"Громкость, колонки и микрофоны"</string>
+    <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Громкость, колонки и микрофоны"</string>
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Действия при нажатии, настройка указателя и прокрутка"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Недоступно, так как функция NFC выключена"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Для работы функции необходимо установить платежное приложение"</string>
@@ -5318,8 +5319,7 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Для просмотра внешних ссылок требуется подключение к Wi-Fi или мобильной сети."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Обмен текстовыми сообщениями с экстренными службами может быть доступен не во всех регионах."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Изменения в аккаунте могут отразиться в настройках не сразу. За дополнительной информацией обратитесь к оператору \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"."</string>
-    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
-    <skip />
+    <string name="satellite_footer_content_section_8" msgid="7617809843970032785">"Чтобы посмотреть все приложения, оптимизированные для спутниковой связи, перейдите на сайт оператора."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Подробнее о спутниковой связи…"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Не удается включить функцию \"<xliff:g id="FUNCTION">%1$s</xliff:g>\""</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Чтобы включить функцию \"<xliff:g id="FUNCTION">%1$s</xliff:g>\", сначала отключите спутниковую связь."</string>
@@ -5334,8 +5334,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Совместимые приложения на устройстве"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Не удалось добавить SIM-карту"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Прежде чем добавить SIM-карту, отключите спутниковую связь."</string>
-    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
-    <skip />
+    <string name="satellite_toggle_error" msgid="4533772077620854258">"Что-то пошло не так. Не удалось включить или отключить спутниковую связь."</string>
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth отключен"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Когда поддерживаемые устройства, например телефон и часы, подключены по Bluetooth, режим полета на них синхронизируется."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Точки доступа"</string>
@@ -6091,8 +6090,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Безопасность приложений"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Разблокировка устройства"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Безопасность аккаунта"</string>
-    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
-    <skip />
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"Защита потерянного устройства"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Система и обновления"</string>
     <string name="location_settings" msgid="6833222354060094170">"Доступ к геоданным"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Приложения и сервисы, которым доступны сведения о местоположении"</string>
@@ -6123,7 +6121,7 @@
     <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"Данные, передача данных, обновление сведений о передаче данных, обновление сведений о передаче геоданных, передача"</string>
     <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"Конфиденциальность, панель управления разрешениями"</string>
     <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Частное пространство"</string>
-    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Больше оповещений"</string>
+    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Ещё оповещения"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"Меньше оповещений"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Закрытые оповещения"</string>
     <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"Свернуть закрытые оповещения"</string>

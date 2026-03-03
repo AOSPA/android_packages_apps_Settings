@@ -850,6 +850,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Підключити пристрій <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
+    <skip />
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Підтвердьте, щоб додати другий компонент аудіопристрою"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Код підключення через Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Введіть код підключення й натисніть Return або Enter."</string>
@@ -863,7 +865,11 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Надати доступ також до контактів і історії викликів"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Інформація використовуватиметься для сповіщень про виклики тощо"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Перевірте коди зв’язування"</string>
+    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
+    <skip />
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Перевірте, чи цей код збігається з кодом на пристрої \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\".\n\nЗ міркувань безпеки ніде не вводьте цей код."</string>
+    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Не вдалося з’єднатися з пристроєм <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Доступні пристрої"</string>
@@ -899,7 +905,8 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Експерим. функція. Покращує якість аудіо"</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Акумулятор"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Заряджання акумулятора"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Спробуйте перезавантажити пристрій \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". Якщо це не допоможе, забудьте пристрій. З міркувань безпеки повторне підключення потрібно виконувати не в громадському місці.\n\nЯкщо цей пристрій не поруч, нічого робити не потрібно."</string>
+    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
+    <skip />
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Ведення детального журналу друку"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Додаткові журнали налагодження, зокрема протокол інтернет-друку (IPP), які можуть містити приватну інформацію."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Забути пристрій"</string>
@@ -1425,7 +1432,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Заставка"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"заставка"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Недоступно в нічному режимі"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Недоступно"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Використовувати заставку"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Під час заряджання чи в док-станції"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"У док-станції і під час заряджання"</string>
@@ -2035,12 +2043,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Примусове припинення роботи додатка може призвести до збою в ньому."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Вимкнути додаток"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Якщо вимкнути цей додаток, система Android і інші додатки можуть працювати неналежним чином. Важливо: ви не можете видалити цей додаток, оскільки він був попередньо встановлений на пристрої. Вимкнений додаток буде приховано."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"Додаток системного користувача"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"Цей додаток запущено для системного користувача. Внесені зміни вплинуть на всіх користувачів цього пристрою."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"Керувати цим додатком може лише адміністратор пристрою."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Магазин"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Про додаток"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Додаток установлено звідси: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2154,7 +2159,7 @@
     <string name="mouse_keys_seek_bar_end_label" msgid="3225448426565556589">"Швидше"</string>
     <string name="mouse_reverse_vertical_scrolling" msgid="4067297170762853966">"Зворотне прокручування"</string>
     <string name="mouse_keys_use_primary_keys_title" msgid="525897583406210252">"Використовувати основні клавіші"</string>
-    <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"Керувати клавіатурою за допомогою літер і цифр замість цифрової клавіатури"</string>
+    <string name="mouse_keys_use_primary_keys_summary" msgid="5057949666957911577">"Керувати клавіатурою з літерами й цифрами замість цифрової клавіатури"</string>
     <string name="mouse_keys_reset_button_label" msgid="513004295662247230">"Скинути налаштування"</string>
     <string name="mouse_keys_primary_keys_image_list_title" msgid="7470827693078490251">"Як використовувати основні клавіші"</string>
     <string name="mouse_keys_numpad_keys_image_list_title" msgid="6682341389811538017">"Як використовувати цифр. клавіатуру"</string>
@@ -3620,11 +3625,13 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Пристрій"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"Клавіатура, сенсорна панель, дисплей, звук"</string>
+    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
+    <skip />
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Яскравість, колір, темна тема, заблокований екран, текст"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Вибір клавіатури, інструменти"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Швидкість курсора, налаштування кнопок, прокручування"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"Гучність, динаміки, мікрофони"</string>
+    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
+    <skip />
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Налаштування курсора, дії для кліків, прокручування"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Недоступно, оскільки вимкнено NFC"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Щоб користуватись, установіть платіжний додаток"</string>
