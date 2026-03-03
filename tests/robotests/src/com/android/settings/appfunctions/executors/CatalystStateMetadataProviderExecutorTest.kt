@@ -52,6 +52,9 @@ import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.proto.RangeValueProto
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.types.ApiType
+import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateMetadataProviderExecutorTest {
@@ -892,5 +895,53 @@ class CatalystStateMetadataProviderExecutorTest {
         with(CatalystStateMetadataProviderExecutor) {
             assertThat(proto.toDeviceStateString()).isEqualTo("STRING [param1=value1,param2=value2]")
         }
+    }
+
+    @Test
+    fun execute_includesItemizationTypes() = runTest {
+        setRegistryFactories(ScreenWithItemizationType())
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("screen_with_itemization", listOf("pref_with_itemization")),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(result.itemizationTypes).hasSize(1)
+        val itemizationType = result.itemizationTypes.first()
+        assertThat(itemizationType.key).isEqualTo("test_enum")
+        assertThat(itemizationType.hintText).isEqualTo("Test Enum Description")
+        assertThat(itemizationType.values).containsExactly(
+            ItemizationDetail(key = "OPTION_1", value = "Option 1"),
+            ItemizationDetail(key = "OPTION_2", value = "Option 2")
+        )
+    }
+
+    private class ScreenWithItemizationType : PreferencesApiScreen(
+        key = "screen_with_itemization",
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = Fragment::class,
+        purpose = R.string.preference_screen_purpose,
+    ) {
+        init {
+            preference(
+                key = "pref_with_itemization",
+                purpose = R.string.preference_purpose,
+                type = TestEnumType,
+            ) {
+                get { execute { "OPTION_1" } }
+            }
+        }
+    }
+
+    private object TestEnumType : FiniteOptionsType<String> {
+        override fun getType(): Class<String> = String::class.java
+        override fun getKey(): String = "test_enum"
+        override fun getDescription(context: Context): String = "Test Enum Description"
+        override suspend fun getOptions(context: Context): List<Pair<String, String>> = listOf(
+            "OPTION_1" to "Option 1",
+            "OPTION_2" to "Option 2"
+        )
     }
 }
