@@ -39,6 +39,7 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.ValidatedKeyParameters
 
 @ProvidePreferenceScreen(DisplayOverOtherAppsAppDetailScreen.KEY, parameterized = true)
@@ -81,6 +82,8 @@ open class DisplayOverOtherAppsAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val footerPreferenceTitle
         get() = R.string.allow_overlay_description
+
+    override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
 
     override fun tags(context: Context) =
         arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)

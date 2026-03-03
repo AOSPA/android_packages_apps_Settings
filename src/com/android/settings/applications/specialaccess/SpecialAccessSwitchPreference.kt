@@ -22,6 +22,7 @@ import com.android.settings.R
 import com.android.settings.widget.FilterTouchesSwitchPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 
 internal class SpecialAccessSwitchPreference(
@@ -36,6 +37,8 @@ internal class SpecialAccessSwitchPreference(
 
     override val purpose: Int
         get() = R.string.access_switch_purpose
+
+    override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
 
     override fun storage(context: Context) = dataStore
 

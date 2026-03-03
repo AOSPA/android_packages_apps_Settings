@@ -27,6 +27,7 @@ import com.android.settings.R.string.install_type_instant
 import com.android.settings.Utils
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.LayoutPreference
@@ -42,6 +43,8 @@ class AppInfoHeaderPreference(private val packageInfoProvider: PackageInfoProvid
         get() = com.android.settings.R.string.app_info_header_purpose
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
+
+    override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
 
     override fun createWidget(context: Context): Preference {
         val view = LayoutInflater.from(context).inflate(R.layout.settings_entity_header, null)
