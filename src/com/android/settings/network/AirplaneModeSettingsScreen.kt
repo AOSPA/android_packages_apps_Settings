@@ -33,6 +33,7 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
@@ -49,6 +50,9 @@ open class AirplaneModeSettingsScreen(context: Context) :
     PreferenceBindingPlaceholder {
     override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
 
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     private val storage = createDataStore(context)
     private var airplaneModeObserver: KeyedObserver<String?>? = null
