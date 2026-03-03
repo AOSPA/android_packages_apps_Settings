@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -110,6 +111,25 @@ public class BatterySettingsFeatureProviderImpl implements BatterySettingsFeatur
     @Nullable
     @Override
     public CharSequence getForceFullChargeLabel(@NonNull Context context) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public Uri getBatteryStatusUri() {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getBatteryStatusLabel(@NonNull Context context, @NonNull BatteryInfo info) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public CharSequence getBatteryStatusShortLabel(
+            @NonNull Context context, @NonNull BatteryInfo info) {
         return null;
     }
 }

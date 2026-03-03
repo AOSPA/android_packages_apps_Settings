@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge;
 
 import android.content.Context;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -89,4 +90,16 @@ public interface BatterySettingsFeatureProvider {
     /** Returns a label for forcing a full charge. */
     @Nullable
     CharSequence getForceFullChargeLabel(@NonNull Context context);
+
+    /** Returns the URI to monitor for battery status changes. */
+    @Nullable
+    Uri getBatteryStatusUri();
+
+    /** Returns the battery status label; return null if built-in status should be used. */
+    @Nullable
+    CharSequence getBatteryStatusLabel(@NonNull Context context, @NonNull BatteryInfo info);
+
+    /** Returns the battery status short label; return null if built-in status should be used. */
+    @Nullable
+    CharSequence getBatteryStatusShortLabel(@NonNull Context context, @NonNull BatteryInfo info);
 }
