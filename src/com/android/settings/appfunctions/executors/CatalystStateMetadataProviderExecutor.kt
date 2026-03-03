@@ -32,7 +32,6 @@ import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.PreferenceHierarchyNode
-import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.accessPreconditionsAsString
@@ -40,7 +39,6 @@ import com.android.settingslib.metadata.getPreconditionsAsString
 import com.android.settingslib.metadata.preferencesapi.types.ApiType
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import com.android.settingslib.metadata.setPreconditionsAsString
-import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
@@ -48,6 +46,7 @@ import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isUiOnlyPreference
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.setWarningAsString
 import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
@@ -204,6 +203,7 @@ class CatalystStateMetadataProviderExecutor(
                         metadata.accessPreconditionsAsString(context),
                         metadata.getPreconditionsAsString(context),
                         metadata.setPreconditionsAsString(context),
+                        metadata.setWarningAsString(context),
                         config?.hintText(englishContext, metadata)
                     ).joinToString(separator = "\n").replace("..", ".")
             deviceStateItemMetadataList.add(
