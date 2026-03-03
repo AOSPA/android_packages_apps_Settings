@@ -1625,15 +1625,11 @@ public class UserSettings extends SettingsPreferenceFragment
             }
             // A restriction can be enforced by the system or an admin.
             if (mUserCaps.mDisallowAddUserRestrictionEnforcementInfo.isOnlyEnforcedBySystem()) {
-                if (Flags.showPolicyTransparencyForSystemRestrictions()) {
-                    mAddGuest.setDisabledByAdmin(
-                            mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
-                                    .getMostImportantEnforcingAdmin());
-                    mAddGuest.setSummary(getPrefContext().getString(
-                            R.string.add_user_summary_action_restricted));
-                } else {
-                    mAddGuest.setEnabled(false);
-                }
+                mAddGuest.setDisabledByAdmin(
+                        mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
+                                .getMostImportantEnforcingAdmin());
+                mAddGuest.setSummary(getPrefContext().getString(
+                        R.string.add_user_summary_action_restricted));
             } else {
                 mAddGuest.setDisabledByAdmin(
                         mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
@@ -1650,14 +1646,10 @@ public class UserSettings extends SettingsPreferenceFragment
                     final UserManager.EnforcingUser enforcingUser = enforcingUsers.get(0);
                     final int restrictionSource = enforcingUser.getUserRestrictionSource();
                     if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
-                        if (Flags.showPolicyTransparencyForSystemRestrictions()) {
-                            mAddGuest.setDisabledByAdmin(new EnforcingAdmin("android",
-                                    new SystemAuthority("system"), UserHandle.CURRENT));
-                            mAddGuest.setSummary(getPrefContext().getString(
-                                    R.string.add_user_summary_action_restricted));
-                        } else {
-                            mAddGuest.setEnabled(false);
-                        }
+                        mAddGuest.setDisabledByAdmin(new EnforcingAdmin("android",
+                                new SystemAuthority("system"), UserHandle.CURRENT));
+                        mAddGuest.setSummary(getPrefContext().getString(
+                                R.string.add_user_summary_action_restricted));
                     } else {
                         mAddGuest.setVisible(false);
                     }
@@ -1710,15 +1702,11 @@ public class UserSettings extends SettingsPreferenceFragment
                             mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
                                     .getMostImportantEnforcingAdmin());
                 } else {
-                    if (Flags.showPolicyTransparencyForSystemRestrictions()) {
-                        addUser.setDisabledByAdmin(
-                                mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
-                                        .getMostImportantEnforcingAdmin());
-                        addUser.setSummary(context.getString(
-                                R.string.add_user_summary_action_restricted));
-                    } else {
-                        addUser.setEnabled(false);
-                    }
+                    addUser.setDisabledByAdmin(
+                            mUserCaps.mDisallowAddUserRestrictionEnforcementInfo
+                                    .getMostImportantEnforcingAdmin());
+                    addUser.setSummary(context.getString(
+                            R.string.add_user_summary_action_restricted));
                 }
             } else {
                 addUser.setVisible(false);
@@ -1755,15 +1743,11 @@ public class UserSettings extends SettingsPreferenceFragment
                     final int restrictionSource = enforcingUser.getUserRestrictionSource();
                     if (restrictionSource == UserManager.RESTRICTION_SOURCE_SYSTEM) {
                         addUser.setVisible(true);
-                        if (Flags.showPolicyTransparencyForSystemRestrictions()) {
-                            addUser.setDisabledByAdmin(
-                                    new EnforcingAdmin("android", new SystemAuthority("system"),
-                                            UserHandle.CURRENT));
-                            addUser.setSummary(context.getString(
-                                    R.string.add_user_summary_action_restricted));
-                        } else {
-                            addUser.setEnabled(false);
-                        }
+                        addUser.setDisabledByAdmin(
+                                new EnforcingAdmin("android", new SystemAuthority("system"),
+                                        UserHandle.CURRENT));
+                        addUser.setSummary(context.getString(
+                                R.string.add_user_summary_action_restricted));
                     } else {
                         addUser.setVisible(false);
                     }
