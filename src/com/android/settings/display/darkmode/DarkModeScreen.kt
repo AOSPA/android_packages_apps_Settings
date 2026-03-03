@@ -40,6 +40,7 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -50,8 +51,8 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
-import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 abstract class BaseDarkModeScreen(context: Context) :
@@ -195,7 +196,7 @@ abstract class BaseDarkModeScreen(context: Context) :
 
 @ProvidePreferenceScreen(DarkModeScreen.KEY)
 open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context) {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, MUSTPASS_SET)
 
     override val key
         get() = KEY

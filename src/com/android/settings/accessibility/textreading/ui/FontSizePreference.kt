@@ -36,6 +36,7 @@ import com.android.settingslib.R as SettingsLibR
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.IntRangeValuePreference
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -111,6 +112,8 @@ internal class FontSizePreference(context: Context, @EntryPoint private val entr
 
     override val keywords: Int
         get() = R.string.keywords_font_size
+
+    override fun tags(context: Context) = arrayOf(MUSTPASS_SET)
 
     override fun createWidget(context: Context) =
         TooltipSliderPreference(context).apply {

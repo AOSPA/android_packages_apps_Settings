@@ -26,6 +26,7 @@ import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -41,7 +42,7 @@ class TouchSoundPreference(context: Context) :
     SwitchPreference(
         KEY,
         purpose = R.string.sound_effects_enabled_purpose,
-        R.string.touch_sounds_title
+        R.string.touch_sounds_title,
     ),
     SwitchPreferenceBinding,
     PreferenceActionMetricsProvider,
@@ -52,7 +53,7 @@ class TouchSoundPreference(context: Context) :
     override val preferenceActionMetrics: Int
         get() = ACTION_TOUCH_SOUND
 
-    override fun tags(context: Context) = arrayOf(KEY_TOUCH_SOUNDS)
+    override fun tags(context: Context) = arrayOf(KEY_TOUCH_SOUNDS, MUSTPASS_SET)
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_touch_sounds)

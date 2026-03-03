@@ -32,6 +32,7 @@ import com.android.settings.accessibility.textreading.data.DisplaySizeDataStore
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.IntRangeValuePreference
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -107,6 +108,8 @@ internal class DisplaySizePreference(context: Context, @EntryPoint private val e
 
     override val keywords: Int
         get() = R.string.keywords_display_size
+
+    override fun tags(context: Context) = arrayOf(MUSTPASS_SET)
 
     override fun createWidget(context: Context): SliderPreference {
         val widget =
