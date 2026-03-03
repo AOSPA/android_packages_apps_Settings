@@ -28,6 +28,7 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.utils.wifiManager
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -98,7 +99,10 @@ open class ConfigureWifiScreen(context: Context) :
     override fun fragmentClass(): Class<out Fragment>? = ConfigureWifiSettings::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) { +WifiWakeupSwitchPreference() }
+        preferenceHierarchy(context) {
+            +ConfigureWifiScreenPreference(this@ConfigureWifiScreen)
+            +WifiWakeupSwitchPreference()
+        }
 
     private fun Context.isWifiWakeupEnabled(): Boolean {
         val wifiManager = this.wifiManager ?: return false
@@ -107,6 +111,24 @@ open class ConfigureWifiScreen(context: Context) :
             wifiManager.isAutoWakeupEnabled &&
             wifiManager.isScanAlwaysAvailable &&
             !powerManager.isPowerSaveMode
+    }
+
+    class ConfigureWifiScreenPreference(
+        private val screenMetadata : ConfigureWifiScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider {
+        override val key : String
+            get() = "configure_network_settings_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
     }
 
     companion object {

@@ -96,11 +96,11 @@ class CatalystStateMetadataProviderExecutorTest {
         )
 
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(2)
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
             "screen_key/test_key_writable"
         )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].writable).isFalse()
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isFalse()
     }
 
 
@@ -131,12 +131,12 @@ class CatalystStateMetadataProviderExecutorTest {
 
         // single screen
         assertThat(result.metadata).hasSize(1)
-        // the screen itself and the preference
-        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(2)
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
+        // the preference
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
             "screen_key/test_key_writable"
         )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].writable).isFalse()
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isFalse()
     }
 
     @Test
@@ -166,12 +166,12 @@ class CatalystStateMetadataProviderExecutorTest {
 
         // single screen
         assertThat(result.metadata).hasSize(1)
-        // the screen itself and the preference
-        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(2)
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
+        // the preference
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
             "screen_key/test_key_not_writable"
         )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].writable).isFalse()
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isFalse()
     }
 
     @Test
@@ -202,12 +202,12 @@ class CatalystStateMetadataProviderExecutorTest {
 
         // single screen
         assertThat(result.metadata).hasSize(1)
-        // the screen itself and the preference
-        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(2)
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
+        // the preference
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
             "screen_key/test_key_writable"
         )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].purpose).isEqualTo(
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].purpose).isEqualTo(
             context.getString(R.string.preference_purpose)
         )
     }
@@ -402,15 +402,12 @@ class CatalystStateMetadataProviderExecutorTest {
 
         // single screen
         assertThat(result.metadata).hasSize(1)
-        // the screen itself and the 2 preferences
-        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(3)
+        // the 2 preferences
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(2)
         assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
-            "screen_key/screen_key"
-        )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
             "screen_key/preference_key_1"
         )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[2].key).isEqualTo(
+        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
             "screen_key/preference_key_2"
         )
     }
@@ -454,12 +451,9 @@ class CatalystStateMetadataProviderExecutorTest {
 
         // single screen
         assertThat(result.metadata).hasSize(1)
-        // the screen itself and the non-ui only preference
-        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(2)
+        // the non-ui only preference
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
         assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
-            "screen_key/screen_key"
-        )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
             "screen_key/preference_key_2"
         )
     }
@@ -495,11 +489,8 @@ class CatalystStateMetadataProviderExecutorTest {
 
         // single screen
         assertThat(result.metadata).hasSize(1)
-        // the screen itself only
-        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
-        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
-            "screen_key/screen_key"
-        )
+        // no preferences
+        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(0)
     }
 
     class TestPreferenceMetadata(
@@ -651,7 +642,7 @@ class CatalystStateMetadataProviderExecutorTest {
 
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
 
-        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[1]
+        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[0]
         assertThat(prefMetadata.key).isEqualTo("api_first_screen/writable_pref")
         assertThat(prefMetadata.writable).isTrue()
     }
@@ -667,31 +658,9 @@ class CatalystStateMetadataProviderExecutorTest {
 
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
 
-        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[2]
+        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[1]
         assertThat(prefMetadata.key).isEqualTo("api_first_screen/non_writable_pref")
         assertThat(prefMetadata.writable).isFalse()
-    }
-
-    @Test
-    fun execute_onApiFirstScreen_isNotWritable() = runTest {
-        setRegistryFactories(ApiFirstTestScreen())
-        val executor = CatalystStateMetadataProviderExecutor(
-            buildConfig("api_first_screen", emptyList()), // empty list means all prefs on screen
-            context,
-            englishContext
-        )
-
-        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-
-        val screenMetadata = result.metadata[0].deviceStateItemsMetadata[0]
-        assertThat(screenMetadata.key).isEqualTo("api_first_screen/api_first_screen")
-        assertThat(screenMetadata.writable).isFalse()
-        assertThat(result.metadata[0].deviceStateItemsMetadata[1].key).isEqualTo(
-            "api_first_screen/writable_pref"
-        )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[2].key).isEqualTo(
-            "api_first_screen/non_writable_pref"
-        )
     }
 
     private class PreconditionsTestScreen : PreferencesApiScreen(
@@ -732,7 +701,7 @@ class CatalystStateMetadataProviderExecutorTest {
 
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
 
-        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[1]
+        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[0]
         assertThat(prefMetadata.key).isEqualTo("preconditions_screen/pref_with_preconditions")
         assertThat(prefMetadata.hintText).contains(
             "Preconditions to accessing: Screen precondition, Preference precondition.\n" +
@@ -740,22 +709,6 @@ class CatalystStateMetadataProviderExecutorTest {
                 "Preconditions to writing: Set precondition."
         )
         assertThat(prefMetadata.hintText).contains("Preconditions to writing: Set precondition.")
-    }
-
-    @Test
-    fun execute_onApiFirstScreen_doesNotIncludeName() = runTest {
-        setRegistryFactories(ApiFirstTestScreen())
-        val executor = CatalystStateMetadataProviderExecutor(
-            buildConfig("api_first_screen", emptyList()),
-            context,
-            englishContext
-        )
-
-        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-
-        val screenMetadata = result.metadata[0].deviceStateItemsMetadata[0]
-        assertThat(screenMetadata.key).isEqualTo("api_first_screen/api_first_screen")
-        assertThat(screenMetadata.name).isNull()
     }
 
     @Test
@@ -769,7 +722,7 @@ class CatalystStateMetadataProviderExecutorTest {
 
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
 
-        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[1]
+        val prefMetadata = result.metadata[0].deviceStateItemsMetadata[0]
         assertThat(prefMetadata.key).isEqualTo("api_first_screen/writable_pref")
         assertThat(prefMetadata.name).isNull()
     }
