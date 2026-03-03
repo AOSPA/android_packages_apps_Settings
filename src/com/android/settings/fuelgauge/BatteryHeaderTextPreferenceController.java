@@ -79,10 +79,6 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_not_charging);
         }
-        if (info.isWirelessCharging()
-                && Utils.isWirelessIncompatibleCharging(mContext)) {
-            return mContext.getString(R.string.battery_tip_incompatible_charging_title);
-        }
         if (BatteryUtils.isBatteryDefenderOn(info)
                 || FeatureFactory.getFeatureFactory()
                         .getPowerUsageFeatureProvider()
