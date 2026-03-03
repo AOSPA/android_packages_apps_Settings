@@ -38,6 +38,7 @@ import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 
 /** Preference controller for content protection toggle switch bar. */
+// LINT.IfChange
 public class ContentProtectionTogglePreferenceController extends TogglePreferenceController
         implements OnCheckedChangeListener {
 
@@ -179,3 +180,4 @@ public class ContentProtectionTogglePreferenceController extends TogglePreferenc
         return ContentProtectionPreferenceUtils.getContentProtectionPolicy(mContext, userHandle);
     }
 }
+// LINT.ThenChange(ContentProtectionScreenApi.kt)
