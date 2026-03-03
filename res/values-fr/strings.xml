@@ -728,13 +728,11 @@
     <string name="encrypted_summary" msgid="545623487587251207">"Chiffré"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Configurer le déverrouillage de l\'écran"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Pour plus de sécurité, définissez un code PIN, un schéma ou un mot de passe pour cet appareil."</string>
-    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
-    <skip />
+    <string name="no_screen_lock_issue_summary_without_pattern" msgid="3709234873257859534">"Pour plus de sécurité, définissez un code ou un mot de passe pour cet appareil."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Configurer le déverrouillage de l\'écran"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Définir le verrouillage de l\'écran"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Pour plus de sécurité, définissez un code, un schéma ou un mot de passe pour cet appareil."</string>
-    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"Pour plus de sécurité, définissez un code ou un mot de passe pour cet appareil."</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Ajouter empreinte digitale pour déverrouiller"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Verrouillage de l\'écran"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Méthode de déverrouillage de l\'écran"</string>
@@ -776,8 +774,7 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continuer sans configurer l\'empreinte ou le visage"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Aucun"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Ajouter un code, un schéma, un mot de passe, ou balayer"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off_new_without_pattern" msgid="1848366515765800557">"Ajouter un code, mot de passe ou balayage"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Balayage"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Schéma"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"Code"</string>
@@ -5323,12 +5320,15 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Un réseau mobile ou Wi-Fi est requis pour ouvrir les liens externes."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Il se peut que l\'envoi de messages aux services d\'urgence ne soit pas disponible dans toutes les zones."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"La prise en compte de ces modifications dans les paramètres peut prendre un certain temps. Contactez <xliff:g id="CARRIER_NAME">%1$s</xliff:g> pour plus d\'informations."</string>
+    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
+    <skip />
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"En savoir plus sur la connectivité par satellite"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Impossible d\'activer le <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Pour activer le <xliff:g id="FUNCTION">%1$s</xliff:g>, coupez d\'abord la connexion satellite"</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satellite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Connectivité satellite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"connectivité satellite"</string>
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Utiliser la connectivité satellite"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"L\'utilisation des applis compatibles est incluse dans votre compte"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Les données de toutes les applis sont incluses dans votre compte"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Applis compatibles sur votre téléphone"</string>
@@ -5336,6 +5336,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Applis compatibles sur votre téléphone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Impossible d\'ajouter une carte SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Mettez fin à la connexion satellite avant d\'ajouter une carte SIM"</string>
+    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
+    <skip />
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth désactivé"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Lorsque les appareils compatibles (téléphone et montre, par exemple) sont connectés par Bluetooth, le mode Avion se synchronise sur les deux"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Noms des points d\'accès"</string>
@@ -5846,7 +5848,7 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Les applis que vous avez installées ont accès au nom de votre appareil. D\'autres personnes peuvent aussi le voir lorsque vous vous connectez à des appareils Bluetooth ou à un réseau Wi-Fi, ou lorsque vous configurez un point d\'accès Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Genre grammatical"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Sélectionner le genre grammatical"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"Détection applis trompeuses"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Détection d\'applis trompeuses"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"Vérifier l\'activité des applications pour détecter un éventuel hameçonnage"</string>
     <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Utiliser la détection des applications trompeuses"</string>
     <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Utiliser la détection des applications trompeuses (profil professionnel)"</string>
@@ -6089,7 +6091,8 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Sécurité des applications"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Déverrouillage de l\'appareil"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Sécurité du compte"</string>
-    <string name="device_finders_subpage_title" msgid="2390688647994924006">"Localisateurs d\'appareil"</string>
+    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
+    <skip />
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Système et mises à jour"</string>
     <string name="location_settings" msgid="6833222354060094170">"Accès à la position"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Voir les applis et services ayant accès aux données de localisation"</string>

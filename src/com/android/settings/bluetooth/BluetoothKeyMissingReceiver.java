@@ -53,6 +53,9 @@ public final class BluetoothKeyMissingReceiver extends BroadcastReceiver {
         if (!Flags.enableBluetoothKeyMissingDialog()) {
             return;
         }
+        if (Flags.enableBondingLossUiFix()) {
+            return;
+        }
         String action = intent.getAction();
         if (action == null) {
             return;

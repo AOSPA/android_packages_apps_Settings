@@ -47,6 +47,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.types.AnyInt
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -196,7 +197,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(Settings.EXTRA_SUB_ID, "The subscription ID")
+            parameter(Settings.EXTRA_SUB_ID, "The subscription ID", type = AnyInt) // TODO(scottjonathan): Is there a better type to use here
         }
 
         @JvmStatic

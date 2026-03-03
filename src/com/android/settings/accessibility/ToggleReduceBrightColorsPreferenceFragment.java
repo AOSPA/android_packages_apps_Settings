@@ -16,6 +16,8 @@
 
 package com.android.settings.accessibility;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 
@@ -24,8 +26,11 @@ import androidx.annotation.Nullable;
 
 import com.android.settings.accessibility.extradim.ui.ExtraDimScreen;
 import com.android.settings.dashboard.DashboardFragment;
+import com.android.settings.search.BaseSearchIndexProvider;
+import com.android.settingslib.search.SearchIndexable;
 
 /** Settings for reducing brightness. */
+@SearchIndexable
 public class ToggleReduceBrightColorsPreferenceFragment extends DashboardFragment {
     private static final String TAG = "ToggleReduceBrightColorsPreferenceFragment";
 
@@ -54,4 +59,13 @@ public class ToggleReduceBrightColorsPreferenceFragment extends DashboardFragmen
     public @Nullable String getPreferenceScreenBindingKey(@NonNull Context context) {
         return ExtraDimScreen.KEY;
     }
+
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                protected boolean isPageSearchEnabled(Context context) {
+                    return ReduceBrightColorsExtensionsKt.getReduceBrightColorsAvailabilityStatus(
+                            context) == AVAILABLE;
+                }
+            };
 }

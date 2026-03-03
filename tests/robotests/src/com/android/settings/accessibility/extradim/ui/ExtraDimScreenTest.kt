@@ -18,7 +18,11 @@ package com.android.settings.accessibility.extradim.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.hardware.display.DisplayManagerGlobal
 import android.provider.Settings.ACTION_REDUCE_BRIGHT_COLORS_SETTINGS
+import android.view.Display
+import android.view.DisplayAdjustments
+import android.view.DisplayInfo
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.internal.R as AndroidInternalR
@@ -37,17 +41,30 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import org.robolectric.annotation.Config
 
 @Config(shadows = [SettingsShadowResources::class])
 @RunWith(AndroidJUnit4::class)
 class ExtraDimScreenTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
-    private val appContext: Context = ApplicationProvider.getApplicationContext()
+
+    private var appContext: Context = ApplicationProvider.getApplicationContext()
     private val preferenceScreenCreator by lazy { ExtraDimScreen(appContext) }
+    private val displayInfo = DisplayInfo()
 
     @Before
     fun setUp() {
+        displayInfo.type = Display.TYPE_INTERNAL
+        val displayManagerGlobal = mock<DisplayManagerGlobal>()
+        val daj: DisplayAdjustments? = null
+        appContext =
+            appContext.createDisplayContext(
+                Display(displayManagerGlobal, Display.DEFAULT_DISPLAY, displayInfo, daj)
+            )
+        whenever(displayManagerGlobal.getDisplayInfo(Display.DEFAULT_DISPLAY))
+            .thenReturn(displayInfo)
+
         SettingsShadowResources.overrideResource(
             AndroidInternalR.bool.config_reduceBrightColorsAvailable,
             true,
@@ -110,6 +127,10 @@ class ExtraDimScreenTest {
             AndroidInternalR.bool.config_reduceBrightColorsAvailable,
             true,
         )
+        SettingsShadowResources.overrideResource(
+            AndroidInternalR.bool.config_evenDimmerEnabled,
+            false,
+        )
         assertThat(preferenceScreenCreator.isAvailable(appContext)).isTrue()
     }
 
@@ -119,6 +140,29 @@ class ExtraDimScreenTest {
             AndroidInternalR.bool.config_reduceBrightColorsAvailable,
             false,
         )
+        assertThat(preferenceScreenCreator.isAvailable(appContext)).isFalse()
+    }
+
+    @Test
+    fun isAvailable_evenDimmerEnabled_returnFalse() {
+        SettingsShadowResources.overrideResource(
+            AndroidInternalR.bool.config_evenDimmerEnabled,
+            true,
+        )
+        assertThat(preferenceScreenCreator.isAvailable(appContext)).isFalse()
+    }
+
+    @Test
+    fun isAvailable_externalDisplay_returnFalse() {
+        SettingsShadowResources.overrideResource(
+            AndroidInternalR.bool.config_reduceBrightColorsAvailable,
+            true,
+        )
+        SettingsShadowResources.overrideResource(
+            AndroidInternalR.bool.config_evenDimmerEnabled,
+            false,
+        )
+        displayInfo.type = Display.TYPE_EXTERNAL
         assertThat(preferenceScreenCreator.isAvailable(appContext)).isFalse()
     }
 

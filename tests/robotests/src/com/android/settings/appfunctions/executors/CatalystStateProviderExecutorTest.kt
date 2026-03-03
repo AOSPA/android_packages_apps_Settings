@@ -34,6 +34,12 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import androidx.fragment.app.Fragment
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.KeyParametersSchema
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateProviderExecutorTest {
@@ -360,4 +366,80 @@ class CatalystStateProviderExecutorTest {
         assertThat(result.states[0].deviceStateItems).hasSize(0)
     }
 
+    @Test
+    fun execute_onScreenWithPreconditions_includesPreconditionsInDescription() = runTest {
+        setRegistryFactories(ApiFirstTestScreen())
+        val executor = CatalystStateProviderExecutor(
+            buildConfig("api_first_screen", listOf()),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+
+        assertThat(result.states).hasSize(1)
+        assertThat(result.states[0].description).contains("Preconditions to accessing: Screen precondition.")
+    }
+
+    @Test
+    fun execute_onApiFirstPreference_doesNotIncludeName() = runTest {
+        setRegistryFactories(ApiFirstTestScreen())
+        val executor = CatalystStateProviderExecutor(
+            buildConfig("api_first_screen", listOf("writable_pref")),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+
+        val item = result.states[0].deviceStateItems[0]
+        assertThat(item.key).isEqualTo("api_first_screen/writable_pref")
+        assertThat(item.name).isNull()
+    }
+
+    @Test
+    fun execute_onScreenWithKeyParameters_includesKeyParametersInDescription() = runTest {
+        setRegistryFactories(ScreenWithKeyParameters())
+        val executor = CatalystStateProviderExecutor(
+            buildConfig("screen_with_params", listOf()),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+
+        assertThat(result.states).hasSize(1)
+        assertThat(result.states[0].description).endsWith("[param=value]")
+    }
+
+    private class ScreenWithKeyParameters : PreferencesApiScreen(
+        key = "screen_with_params",
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = Fragment::class,
+        purpose = R.string.preference_screen_purpose,
+    ) {
+        override val keyParameters = KeyParametersSchema {
+            parameter("param", R.string.preference_purpose, type = AnyString)
+        }.prepare("param" to "value")
+    }
+
+    private class ApiFirstTestScreen : PreferencesApiScreen(
+        key = "api_first_screen",
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = Fragment::class,
+        purpose = R.string.preference_screen_purpose,
+    ) {
+        init {
+            preconditions("Screen precondition") { Allowed }
+
+            preference(
+                key = "writable_pref",
+                purpose = R.string.preference_purpose,
+                type = AnyString,
+            ) {
+                get { execute { "true" } }
+                set { execute {} }
+            }
+        }
+    }
 }

@@ -29,6 +29,7 @@ import com.android.settings.accessibility.AccessibilitySetupWizardUtils
 import com.google.android.setupcompat.template.FooterBarMixin
 import com.google.android.setupdesign.GlifLayout
 import com.google.android.setupdesign.items.RecyclerItemAdapter
+import kotlinx.coroutines.flow.MutableStateFlow
 
 /** Edit Shortcut for Setup Wizard. */
 class EditShortcutSetupWizardFragment : BaseSetupWizardFragment() {
@@ -49,6 +50,51 @@ class EditShortcutSetupWizardFragment : BaseSetupWizardFragment() {
                 put(
                     R.id.edit_keyboard_shortcut_in_suw,
                     EditKeyboardShortcutController.create(context, it, shortcutTargets),
+                )
+            }
+            findItem(adapter, R.id.edit_quick_settings_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_quick_settings_shortcut_in_suw,
+                    EditQuickSettingsShortcutController.create(context, it, shortcutTargets),
+                )
+            }
+            findItem(adapter, R.id.edit_floating_button_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_floating_button_shortcut_in_suw,
+                    EditFloatingButtonShortcutController.create(context, it, shortcutTargets),
+                )
+            }
+            findItem(adapter, R.id.edit_nav_button_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_nav_button_shortcut_in_suw,
+                    EditNavButtonShortcutController.create(context, it, shortcutTargets),
+                )
+            }
+            findItem(adapter, R.id.edit_volume_keys_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_volume_keys_shortcut_in_suw,
+                    EditVolumeKeysShortcutController.create(context, it, shortcutTargets),
+                )
+            }
+            findItem(adapter, R.id.edit_top_row_key_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_top_row_key_shortcut_in_suw,
+                    EditTopRowKeyShortcutController.create(context, it, shortcutTargets),
+                )
+            }
+            val expandableStateFlow = MutableStateFlow(false)
+            findItem(adapter, R.id.edit_advanced_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_advanced_shortcut_in_suw,
+                    EditAdvancedItemController(it) { expandableStateFlow },
+                )
+            }
+            findItem(adapter, R.id.edit_triple_tap_shortcut_in_suw)?.let {
+                put(
+                    R.id.edit_triple_tap_shortcut_in_suw,
+                    EditTripleTapShortcutController.create(context, it, shortcutTargets) {
+                        expandableStateFlow
+                    },
                 )
             }
         }

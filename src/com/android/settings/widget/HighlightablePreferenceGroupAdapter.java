@@ -46,6 +46,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 import com.android.settings.R;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.accessibility.AccessibilityUtil;
+import com.android.settingslib.widget.Expandable;
 import com.android.settingslib.widget.SettingsPreferenceGroupAdapter;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
@@ -65,6 +66,7 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
     @VisibleForTesting boolean mHighlightVisible;
 
     private final Context mContext;
+    private final PreferenceGroup mRootGroup;
     private final @DrawableRes int mNormalBackgroundRes;
     private final @Nullable String mHighlightKey;
     private boolean mHighlightRequested;
@@ -106,6 +108,7 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
             @Nullable String key,
             boolean highlightRequested) {
         super(preferenceGroup);
+        mRootGroup = preferenceGroup;
         mHighlightKey = key;
         mHighlightRequested = highlightRequested;
         mContext = preferenceGroup.getContext();
@@ -121,6 +124,7 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
             java.util.Map<String, com.android.settingslib.widget.FooterData> footerDataMap) {
         super(preferenceGroup, footerDataMap);
 
+        mRootGroup = preferenceGroup;
         mHighlightKey = key;
         mHighlightRequested = highlightRequested;
         mContext = preferenceGroup.getContext();
@@ -160,6 +164,9 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
         if (mHighlightRequested || recyclerView == null || TextUtils.isEmpty(mHighlightKey)) {
             return;
         }
+
+        expandGroupIfNecessary(mRootGroup, mHighlightKey);
+
         final int position = getPreferenceAdapterPosition(mHighlightKey);
         if (position < 0) {
             return;
@@ -247,6 +254,44 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
                     removeHighlightBackground(holder, true /* animate */, position);
                 },
                 HIGHLIGHT_DURATION);
+    }
+
+    /**
+     * Recursively traverses the preference tree to find the target highlight key.
+     * If the key is found inside an expandable preference group, it programmatically
+     * expands the group to ensure the target preference is visible before highlighting.
+     *
+     * @param group The current preference group being inspected.
+     * @param targetKey The preference key requested to be highlighted.
+     * @return True if the target key was found within this group or its children, false otherwise.
+     */
+    private boolean expandGroupIfNecessary(PreferenceGroup group, String targetKey) {
+        if (group == null || TextUtils.isEmpty(targetKey)) {
+            return false;
+        }
+
+        for (int i = 0; i < group.getPreferenceCount(); i++) {
+            Preference pref = group.getPreference(i);
+
+            // Target preference found directly
+            if (TextUtils.equals(pref.getKey(), targetKey)) {
+                return true;
+            }
+
+            // If it's a nested group, search recursively
+            if (pref instanceof PreferenceGroup) {
+                if (expandGroupIfNecessary((PreferenceGroup) pref, targetKey)) {
+
+                    // Target is inside this group. Expand it if it supports programmed expansion.
+                    if (pref instanceof Expandable) {
+                        ((Expandable) pref).setExpanded(true);
+                        Log.d(TAG, "Automatically expanded group for target key: " + targetKey);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void addHighlightBackground(

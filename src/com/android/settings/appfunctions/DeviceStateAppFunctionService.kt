@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-package com.android.settings.accessibility.setupwizard.items
+package com.android.settings.appfunctions
 
-import android.content.Context
-import android.util.AttributeSet
-import com.android.settings.R
-import com.google.android.setupdesign.items.CheckBoxItem
+import androidx.annotation.Keep
 
-/** A custom [CheckBoxItem] with an Illustration. */
-class ShortcutOptionCheckBoxItem : CheckBoxItem {
-
-    constructor() : super()
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
-
-    override fun getDefaultLayoutResource(): Int = R.layout.setup_shortcut_option_check_box_item
-}
+/**
+ * An AOSP implementation of [AbstractDeviceStateAppFunctionService] which exposes
+ * device-state-related AppFunctions.
+ */
+@Keep class DeviceStateAppFunctionService : AbstractDeviceStateAppFunctionService()

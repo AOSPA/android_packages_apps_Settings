@@ -42,7 +42,7 @@
     <string name="pickup_gesture_screen_hardware_unsupported" translatable="false">This device does not support the pickup gesture sensor.</string>
     <string name="tap_screen_gesture_preconditions" translatable="false">The device must support a tap sensor for Ambient Display configuration.</string>
     <string name="tap_screen_gesture_hardware_unsupported" translatable="false">This device does not support the tap sensor.</string>
-    <string name="device_admin_settings_screen_preconditions" translatable="false">Allow to show the device admin settings screen.</string>
+    <string name="device_admin_settings_screen_preconditions" translatable="false">The device must support the device admin settings screen.</string>
     <string name="device_admin_settings_screen_not_available" translatable="false">The config of the device admin settings is not available.</string>
     <string name="device_name_preconditions" translatable="false">Allow to show the device name settings.</string>
     <string name="device_name_not_available" translatable="false">The config of the device name settings is not available.</string>
@@ -53,6 +53,10 @@
     <string name="content_protection_unsupported" translatable="false">The device does not support changing Content Protection settings.</string>
     <string name="user_dict_list_preconditions" translatable="false">Personal dictionaries for more than one language must exist.</string>
     <string name="user_dict_list_not_supported" translatable="false">There is only one language with a personal dictionary.</string>
+    <string name="user_aspect_ratio_screen_unavailable" translatable="false">The aspect ratio feature is not available on your device.</string>
+    <string name="user_aspect_ratio_apps_screen_preconditions" translatable="false">The device must support users changing aspect ratio of apps.</string>
+    <string name="user_aspect_ratio_app_screen_preconditions" translatable="false">The device must support users changing aspect ratio of apps and the app must be launchable.</string>
+    <string name="user_aspect_ratio_app_not_launchable" translatable="false">This app is not launchable.</string>
     <string name="battery_info_screen_preconditions" translatable="false">The battery settings provider must provide the battery information feature.</string>
     <string name="battery_info_screen_battery_information_feature_disabled" translatable="false">The battery information feature is not enabled.</string>
     <string name="sound_work_screen_preconditions" translatable="false">The device must have a work profile and must not use a single volume for all audio streams.</string>
@@ -88,6 +92,19 @@
     <string name="hdr_brightness_boost_level_preconditions" translatable="false">High Dynamic Range (HDR) brightness must be enabled.</string>
     <string name="hdr_brightness_disabled" translatable="false">High Dynamic Range (HDR) brightness is disabled.</string>
     <string name="adaptive_connectivity_mobile_network_preconditions" translatable="false">The mobile subscription must allow the adaptive connectivity toggle to be configured.</string>
+    <string name="color_mode_preconditions" translatable="false">Requires device to support color mode configuration</string>
+    <string name="color_mode_unsupported" translatable="false">Accessibility transforms are disabled for this user.</string>
+
     <string name="night_display_preconditions" translatable="false">The device must support the Night Light feature.</string>
     <string name="night_display_unsupported" translatable="false">Night Light is not supported on this device.</string>
+    <string name="external_display_connected_unavailable" translatable="false">There is no external display connected to the device.</string>
+    <string name="external_display_invalid_id" translatable="false">Required parameter display_id is missing or not a valid integer string.</string>
+    <string name="external_display_connected_preconditions" translatable="false">The device must have at least one external display connected.</string>
+    <string name="night_display_temperature_preconditions" translatable="false">Night Light must be enabled.</string>
+    <string name="night_display_disabled" translatable="false">Night Light is disabled.</string>
+    <string name="night_display_auto_mode_preconditions" translatable="false">Device location must be enabled for automatic activation based on sunset and sunrise times.</string>
+    <string name="night_display_auto_mode_twilight_location_disabled" translatable="false">Device location is not enabled.</string>
+    <string name="when_to_dream_preconditions" translatable="false">The device must support configuring when to start screensaver.</string>
+    <string name="when_to_dream_unavailable" translatable="false">The device does not support configuring when to start screensaver.</string>
+    <string name="low_light_mode_preconditions" translatable="false">The device must support low light mode for screensaver.</string>
 </resources>

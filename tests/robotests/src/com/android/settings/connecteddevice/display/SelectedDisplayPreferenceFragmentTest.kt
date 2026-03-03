@@ -23,6 +23,7 @@ import android.app.Application
 import android.app.TaskStackListener
 import android.content.Context
 import android.hardware.display.DisplayManager
+import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
@@ -438,6 +439,60 @@ class SelectedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
 
         verify(mMockedInjector)
             .setUserHdrPreference(EXTERNAL_DISPLAY_ID, DisplayManager.HDR_PREFERENCE_HDR_ALLOWED)
+    }
+
+    @Test
+    fun testIncludeDefaultDisplayInTopology_onToggle_updatesSettings() {
+        // Setup: Ensure the preference is visible
+        fragment = initFragment()
+        includeBuiltinDisplay()
+        viewModel.updateEnabledDisplays()
+        viewModel.updateSelectedDisplay(DEFAULT_DISPLAY)
+        setMirroringMode(false)
+
+        val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        val preference =
+            category.findPreference<SwitchPreferenceCompat>(PrefInfo.INCLUDE_DEFAULT_DISPLAY.key)!!
+
+        // Action 1: Toggle the switch ON
+        preference.isChecked = true
+        preference.onPreferenceClickListener!!.onPreferenceClick(preference)
+
+        // Verification 1
+        val valueAfterToggleOn =
+            Settings.Secure.getInt(
+                application.contentResolver,
+                Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY
+            )
+        assertThat(valueAfterToggleOn).isEqualTo(1)
+
+        // Action 2: Toggle the switch OFF
+        preference.isChecked = false
+        preference.onPreferenceClickListener!!.onPreferenceClick(preference)
+
+        // Verification 2
+        val valueAfterToggleOff =
+            Settings.Secure.getInt(
+                application.contentResolver,
+                Settings.Secure.INCLUDE_DEFAULT_DISPLAY_IN_TOPOLOGY
+            )
+        assertThat(valueAfterToggleOff).isEqualTo(0)
+    }
+
+    @Test
+    @DisableFlags(FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING)
+    fun testExternalDisplaySelected_resolutionRefreshRateFlagDisabled_showsOnlyResolution() {
+        // Setup: Do NOT enable FLAG_ENABLE_RESOLUTION_REFRESH_RATE_SETTING
+        fragment = initFragment()
+        val display = mDisplays.first { it.id == EXTERNAL_DISPLAY_ID }
+        viewModel.updateSelectedDisplay(display.id)
+
+        val category = mPreferenceScreen.getPreference(0) as PreferenceCategory
+        val resolutionPref = category.findPreference<Preference>(PrefInfo.DISPLAY_RESOLUTION.key)!!
+
+        val expectedSummary = "${display.mode?.physicalWidth} x ${display.mode?.physicalHeight}"
+        assertThat(resolutionPref.summary.toString()).isEqualTo(expectedSummary)
+        assertThat(resolutionPref.summary.toString()).doesNotContain("Hz")
     }
 
     private fun setMirroringMode(enable: Boolean) {

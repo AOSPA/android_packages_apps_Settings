@@ -27,6 +27,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -51,11 +52,14 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 import com.android.settings.R;
 import com.android.settings.flags.Flags;
@@ -67,6 +71,7 @@ import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
 import com.android.wifitrackerlib.WifiEntry;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.common.collect.ImmutableList;
 
 import org.junit.After;
@@ -1396,6 +1401,119 @@ public class WifiConfigController2Test {
         mController.setAnonymousIdVisible();
 
         verify(mController.mEapAnonymousView, never()).setText(any(String.class));
+    }
+
+    @Test
+    public void verifyPasswordAccessibilityDelegate_removesPasswordPrefix() {
+        Context themeContext = new android.view.ContextThemeWrapper(mContext,
+                androidx.appcompat.R.style.Theme_AppCompat);
+        TextInputLayout realLayout = new TextInputLayout(themeContext);
+        View mockHost = mock(View.class);
+        Context mockContext = mock(Context.class);
+        AccessibilityNodeInfoCompat mockInfo = mock(AccessibilityNodeInfoCompat.class);
+
+        when(mockHost.getContext()).thenReturn(mockContext);
+        when(mockContext.getString(R.string.wifi_password)).thenReturn("Password");
+
+        WifiConfigController2.PasswordTextInputLayoutAccessibilityDelegate delegate =
+                new WifiConfigController2.PasswordTextInputLayoutAccessibilityDelegate(realLayout);
+
+        when(mockInfo.getText()).thenReturn("Password1234");
+        delegate.onInitializeAccessibilityNodeInfo(mockHost, mockInfo);
+        verify(mockInfo).setText("1234");
+
+        reset(mockInfo);
+        when(mockInfo.getText()).thenReturn("password");
+        delegate.onInitializeAccessibilityNodeInfo(mockHost, mockInfo);
+        verify(mockInfo).setText(null);
+
+        reset(mockInfo);
+        when(mockInfo.getText()).thenReturn("MyNetwork");
+        delegate.onInitializeAccessibilityNodeInfo(mockHost, mockInfo);
+        verify(mockInfo, never()).setText(any());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void updateEditConfigurationFieldState_disabled_hidesFromAccessibility() {
+        createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
+        MaterialSwitch switchView = mView.findViewById(R.id.edit_wifi_network_configuration);
+
+        mController.updateNetworkFieldState(R.id.edit_wifi_network_configuration_fields, switchView,
+                false);
+
+        View container = mView.findViewById(R.id.edit_wifi_network_configuration_fields);
+
+
+        assertThat(switchView.isEnabled()).isFalse();
+        assertThat(container.isEnabled()).isFalse();
+        assertThat(container.getImportantForAccessibility())
+                .isEqualTo(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void updateEditConfigurationFieldState_enabled_showsForAccessibility() {
+        createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
+        MaterialSwitch switchView = mView.findViewById(R.id.edit_wifi_network_configuration);
+
+        mController.updateNetworkFieldState(R.id.edit_wifi_network_configuration_fields, switchView,
+                true);
+
+        View container = mView.findViewById(R.id.edit_wifi_network_configuration_fields);
+
+        assertThat(switchView.isEnabled()).isTrue();
+        assertThat(container.isEnabled()).isTrue();
+        assertThat(container.getImportantForAccessibility())
+                .isEqualTo(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void setAccessibilityDelegate_initializesNodeInfoCorrectly() {
+        createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        mController.setAccessibilityDelegateForNetworkFields();
+
+        // Verify delegate is attached.
+        View container = mView.findViewById(R.id.sharing_toggle_fields);
+        View.AccessibilityDelegate delegate = container.getAccessibilityDelegate();
+        assertThat(delegate).isNotNull();
+
+        AccessibilityNodeInfo info = new AccessibilityNodeInfo();
+        MaterialSwitch switchView = mView.findViewById(R.id.share_wifi_network);
+        switchView.setChecked(true);
+
+        delegate.onInitializeAccessibilityNodeInfo(container, info);
+
+        assertThat(info.getClassName().toString()).isEqualTo("android.widget.Switch");
+        assertThat(info.getContentDescription().toString()).isEqualTo(
+                mContext.getString(R.string.wifi_share_preference_title) + ". "
+                        + mContext.getString(R.string.wifi_share_preference_summary));
+        assertThat(info.getStateDescription().toString())
+                .isEqualTo(mContext.getString(R.string.switch_on_text));
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void setAccessibilityDelegate_clickListener_togglesSwitchAndUpdatesState() {
+        createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        mController.setAccessibilityDelegateForNetworkFields();
+
+        View container = mView.findViewById(R.id.sharing_toggle_fields);
+        MaterialSwitch switchView = mView.findViewById(R.id.share_wifi_network);
+
+        // Ensure initial state is Off.
+        switchView.setChecked(false);
+
+        // Click the container
+        container.performClick();
+
+        // Verify the toggle changed and the accessibility state description reflects the new state.
+        assertThat(switchView.isChecked()).isTrue();
+        assertThat(container.getStateDescription().toString())
+                .isEqualTo(mContext.getString(R.string.switch_on_text));
     }
 
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,

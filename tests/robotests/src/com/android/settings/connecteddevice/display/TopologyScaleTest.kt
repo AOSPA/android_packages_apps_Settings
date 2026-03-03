@@ -48,14 +48,14 @@ class TopologyScaleTest {
                 paneWidth = 640,
                 minEdgeLength = 48f,
                 maxEdgeLength = 64f,
+                paddingTop = 24,
+                paddingBottom = 24,
                 listOf(RectF(0f, 0f, 640f, 480f)),
             )
 
         // blockRatio is set in order to make the smallest display edge (480 dp) 48dp in the pane
-        // Ratio=0.1 (minEdge/minDim=48/480). Height=Ratio*480 + 48 = 48 + 48 = 96.
-        // OriginY = (96 - 48) / 2 = 24.
-        // For single display, vertical padding around display is set to minimum as there's neither
-        // topology hint text nor other displays to be dragged around
+        // Ratio=0.1 (minEdge/minDim=48/480). Height=Ratio*480 + 24 + 24 = 48 + 48 = 96.
+        // OriginY = paddingTop - top*ratio = 24 - 0 = 24.
         assertEquals(
             "{TopologyScale blockRatio=0.100000 originPaneXY=288.0,24.0 paneHeight=96.0}",
             "" + scale,
@@ -81,11 +81,13 @@ class TopologyScaleTest {
                 paneWidth = 300,
                 minEdgeLength = 48f,
                 maxEdgeLength = 96f,
+                paddingTop = 84,
+                paddingBottom = 84,
                 listOf(RectF(0f, 0f, 1920f, 1200f), RectF(1920f, -300f, 3840f, 900f)),
             )
 
-        // Ratio=(300 * 0.6) / 3840 = 0.046875. Height=0.046875*1500 + 3.5*48 = 70.3125 + 168 =
-        // 238.3125.
+        // Ratio=(300 * 0.6) / 3840 = 0.046875.
+        // Pane Height = 70.3125 + 84 + 84 = 238.3125.
         assertEquals(
             "{TopologyScale blockRatio=0.046875 originPaneXY=60.0,98.1 paneHeight=238.3}",
             "" + scale,
@@ -114,12 +116,14 @@ class TopologyScaleTest {
                 paneWidth = 192,
                 minEdgeLength = 48f,
                 maxEdgeLength = 64f,
+                paddingTop = 84,
+                paddingBottom = 84,
                 listOf(RectF(0f, 0f, 240f, 320f), RectF(-240f, -320f, 0f, 0f)),
             )
 
         // blockRatio is higher than 0.05 in order to make the smallest display edge (240 dp) 48dp
         // in the pane.
-        // Ratio=0.2 (minEdge/minDim=48/240). Height=0.2*640 + 3.5*48 = 128+168 = 296.
+        // Ratio=0.2 (minEdge/minDim=48/240). Height=0.2*640 + 84 + 84 = 128+168 = 296.
         assertEquals(
             "{TopologyScale blockRatio=0.200000 originPaneXY=96.0,148.0 paneHeight=296.0}",
             "" + scale,
@@ -145,6 +149,8 @@ class TopologyScaleTest {
                 paneWidth = 300,
                 minEdgeLength = 48f,
                 maxEdgeLength = 80f,
+                paddingTop = 84,
+                paddingBottom = 84,
                 listOf(
                     RectF(0f, 0f, 640f, 480f),
                     RectF(0f, 480f, 640f, 960f),
@@ -155,7 +161,7 @@ class TopologyScaleTest {
                 ),
             )
 
-        // Ratio=0.125 (maxEdge/maxDim=80/640). Height=0.125*2880 + 3.5*48 = 360+168 = 528.
+        // Ratio=0.125 (maxEdge/maxDim=80/640). Height=0.125*2880 + 84 + 84 = 360+168 = 528.
         assertEquals(
             "{TopologyScale blockRatio=0.125000 originPaneXY=110.0,84.0 paneHeight=528.0}",
             "" + scale,
@@ -178,10 +184,12 @@ class TopologyScaleTest {
                 paneWidth = 300,
                 minEdgeLength = 24f,
                 maxEdgeLength = 77f,
+                paddingTop = 42,
+                paddingBottom = 42,
                 listOf(RectF(0f, 0f, 640f, 480f), RectF(0f, 480f, 640f, 960f)),
             )
 
-        // Ratio=0.1203125 (77/640). Height=Ratio*960 + 3.5*24 = 115.5+84 = 199.5.
+        // Ratio=0.1203125 (77/640). Height=Ratio*960 + 42 + 42 = 115.5+84 = 199.5.
         assertEquals(
             "{TopologyScale blockRatio=0.120312 originPaneXY=111.5,42.0 paneHeight=199.5}",
             "" + scale,
@@ -205,10 +213,12 @@ class TopologyScaleTest {
                 paneWidth = 300,
                 minEdgeLength = 80f,
                 maxEdgeLength = 100f,
+                paddingTop = 140,
+                paddingBottom = 140,
                 listOf(RectF(0f, 0f, 640f, 480f), RectF(0f, 480f, 640f, 960f)),
             )
 
-        // Ratio=1/6. Height=(1/6)*960 + 3.5*80 = 160 + 280 = 440.
+        // Ratio=1/6. Height=(1/6)*960 + 140 + 140 = 160 + 280 = 440.
         assertEquals(
             "{TopologyScale blockRatio=0.166667 originPaneXY=96.7,140.0 paneHeight=440.0}",
             "" + scale,

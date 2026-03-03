@@ -1992,6 +1992,9 @@
     <!-- Title for the dialog to enter PIN. [CHAR LIMIT=40] -->
     <string name="bluetooth_pairing_request">Pair with <xliff:g id="device_name">%1$s</xliff:g>?</string>
 
+    <!-- Title for the dialog to pairing again with a bluetooth device. [CHAR LIMIT=40] -->
+    <string name="bluetooth_pairing_again_request">Pair again with <xliff:g id="device_name">%1$s</xliff:g>?</string>
+
     <!-- Message when a bluetooth device from a coordinated set is bonding late. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_pairing_group_late_bonding">Confirm to add the second piece of your audio device</string>
 
@@ -2030,8 +2033,14 @@
     <!-- Title for the dialog to confirm PIN. [CHAR LIMIT=40] -->
     <string name="bluetooth_pairing_confirmation_title">Check pairing codes</string>
 
+    <!-- Title for the dialog to confirm PIN when repairing. [CHAR LIMIT=40] -->
+    <string name="bluetooth_pairing_again_confirmation_title">Pair again</string>
+
     <!-- Message for the dialog to confirm PIN. [CHAR LIMIT=NONE] -->
     <string name="bluetooth_pairing_confirmation_msg">Check if this code matches the one on <xliff:g id="device_name">%1$s</xliff:g>.\n\nFor your security, do not enter this code anywhere.</string>
+
+    <!-- Message for the dialog to repair. [CHAR LIMIT=NONE] -->
+    <string name="bluetooth_repairing_msg">This device was paired previously, and is trying to re-pair.\nIf you are in a public space, proceed with caution.</string>
 
     <!-- Title for BT error dialogs. -->
     <string name="bluetooth_error_title"></string>
@@ -2108,7 +2117,7 @@
     <!-- Content Description for battery charging icon in device details screen [CHAR LIMIT=NONE]-->
     <string name="device_details_battery_charging">Battery, charging</string>
     <!-- Title of item to let user know the bluetooth key is missing [CHAR LIMIT=NONE]-->
-    <string name="device_details_key_missing_title">Try restarting <xliff:g id="device_name">%1$s</xliff:g>. If that doesn’t work, forget the device. For your security, only pair it again when you aren’t in a public space.\n\nIf this device isn’t nearby, you don’t need to do anything.</string>
+    <string name="device_details_key_missing_title">Put the <xliff:g id="device_name">%1$s</xliff:g> in pairing mode and try connecting again.\n\nIf this device isn\u2019t nearby, you don\u2019t need to do anything.</string>
 
     <!-- Title for a toggle that enables additional logs for printing [CHAR LIMIT=NONE]-->
     <string name="verbose_printer_logging_title">Verbose print logging</string>
@@ -3426,7 +3435,7 @@
     <!-- Summary for screensaver unavailable when Bedtime mode is on [CHAR LIMIT=50] -->
     <string name="screensaver_settings_when_to_dream_bedtime">Unavailable because bedtime mode is on</string>
     <!-- Summary for screensaver unavailable because it is suppressed by a mode. [CHAR LIMIT=50] -->
-    <string name="screensaver_unavailable_due_to_mode">Not available</string>
+    <string name="screensaver_unavailable_due_to_mode">Not available on this device</string>
     <!-- The title for the toggle which disables/enables screen savers [CHAR_LIMIT=30] -->
     <string name="screensaver_settings_toggle_title">Use screen saver</string>
     <!-- Display settings screen, summary fragment for screen saver options, activated when docked or asleep and charging [CHAR LIMIT=40] -->
@@ -6473,11 +6482,11 @@
     <string name="accessibility_hearingaid_left_and_right_side_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> / Left and right</string>
     <!-- Summary for the accessibility preference for hearing aid when there are more than one set of devices are active. [CHAR LIMIT=50] -->
     <string name="accessibility_hearingaid_more_device_summary"><xliff:g id="device_name" example="GN Hearing Aids">%1$s</xliff:g> +1 more</string>
-    <!-- Title for the hearing device pairing preference. [CHAR LIMIT=20] -->
+    <!-- Title for the hearing device pairing preference. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearing_device_pairing_title">Pair new device</string>
-    <!-- Title for the preference category containing the connected hearing device group. [CHAR LIMIT=20]-->
+    <!-- Title for the preference category containing the connected hearing device group. [CHAR LIMIT=NONE]-->
     <string name="accessibility_hearing_device_connected_title">Hearing devices</string>
-    <!-- Title for the preference category containing the previously connected hearing device group. [CHAR LIMIT=20]-->
+    <!-- Title for the preference category containing the previously connected hearing device group. [CHAR LIMIT=NONE]-->
     <string name="accessibility_hearing_device_saved_title">Saved devices</string>
     <!-- Title for the preference category containing the controls of the hearing device. [CHAR LIMIT=35] -->
     <string name="accessibility_hearing_device_control">Hearing device controls</string>
@@ -8790,8 +8799,8 @@
 
     <!-- Title for setting tile leading to Device settings [CHAR LIMIT=40]-->
     <string name="device_dashboard_title">Device</string>
-    <!-- Summary for Device settings, explaining it contains Keyboard, Touchpad, Display, and Sound setting [CHAR LIMIT=NONE]-->
-    <string name="device_dashboard_summary">Keyboard, touchpad, display, sound</string>
+    <!-- Summary for Device settings, explaining it contains Touchpad, Keyboard, Display, and Sound setting [CHAR LIMIT=NONE]-->
+    <string name="device_dashboard_summary">Touchpad, keyboard, display, sound</string>
     <!-- Summary for Display settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_display_dashboard_summary">Brightness, color, dark theme, lock screen, text</string>
     <!-- Summary for Keyboard settings under Device dashboard [CHAR LIMIT=NONE]-->
@@ -8799,7 +8808,7 @@
     <!-- Summary for Mouse settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_mouse_settings_summary">Cursor speed, button customization, scrolling</string>
     <!-- Summary for Sound settings under Device dashboard [CHAR LIMIT=NONE]-->
-    <string name="device_sound_dashboard_summary">Volume, Speakers, Microphones</string>
+    <string name="device_sound_dashboard_summary">Volume, speakers, microphones</string>
     <!-- Summary for Trackpad settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_trackpad_settings_summary">Cursor customization, click actions, scrolling</string>
 
@@ -13544,6 +13553,8 @@
     <string name="satellite_footer_content_section_6">Texting with emergency services may not be available in all areas.</string>
     <!-- learn more text - part 7 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
     <string name="satellite_footer_content_section_7">It may take some time for account changes to show in Settings. Contact <xliff:g id="carrier_name" example="T-Mobile">%1$s</xliff:g> for details.</string>
+    <!-- learn more text - part 8 of disclaimer of satellite connectivity [CHAR_LIMIT=NONE] -->
+    <string name="satellite_footer_content_section_8">To see all apps optimized for satellite connectivity, visit your carrier\u2019s website.</string>
     <!-- more about satellite connectivity with link resource [CHAR_LIMIT=NONE] -->
     <string name="more_about_satellite_connectivity">More about satellite connectivity</string>
     <!-- Title for satellite warning dialog to avoid user using wifi/bluetooth/airplane mode [CHAR_LIMIT=NONE] -->
@@ -15430,7 +15441,7 @@
     <!-- The title of the subpage for safety settings related to account security [CHAR LIMIT=60] -->
     <string name="account_security_subpage_title">Account security</string>
     <!-- The title of the subpage for safety settings related to device finders [CHAR LIMIT=60] -->
-    <string name="device_finders_subpage_title">Device finders</string>
+    <string name="device_finders_subpage_title">Lost device protection</string>
     <!-- The title of the subpage for safety settings related to system updates [CHAR LIMIT=60] -->
     <string name="system_and_updates_subpage_title">System and updates</string>
     <!-- Title that leads to location settings in Safety Center [CHAR LIMIT=60] -->
@@ -15620,7 +15631,7 @@
     <string name="unprovisioned_device_warning">Your device isn\'t registered for Satellite SOS. Make sure you\'re connected to the internet for your device to automatically complete registration</string>
 
     <string name="long_press_power_actions_description" translatable="false">Actions that can be performed when the power button is long pressed</string>
-    <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time in ms.</string>
+    <string name="long_press_power_assistant_sensitivity_ms_description" translatable="false">A length of time.</string>
     <string name="long_press_power_category_precondition" translatable="false">Requires that long pressing the power button can be configured for Assistant</string>
     <string name="long_press_power_category_unavailable" translatable="false">This device does not support setting the power button to open assistant on long press</string>
     <string name="long_press_power_sensitivity_precondition" translatable="false">Requires that the device is currently set to launch the Assistant on long press of the power button, and that there are multiple durations available for the long press.</string>

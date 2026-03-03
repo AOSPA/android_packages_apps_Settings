@@ -54,7 +54,9 @@ public class RecentLocationAccessSeeAllFragment extends DashboardFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mController = use(RecentLocationAccessSeeAllPreferenceController.class);
-        mController.init(this);
+        if (mController != null) {
+            mController.init(this);
+        }
     }
 
     @Override

@@ -15,11 +15,13 @@
  */
 package com.android.settings.applications
 
+import android.Manifest.permission.ACCESS_NOTIFICATION_POLICY
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.ApplicationInfoFlags
+import android.content.pm.PackageManager.PackageInfoFlags
 import android.multiuser.Flags
 import android.os.UserManager
 import android.platform.test.annotations.DisableFlags
@@ -40,8 +42,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
-import org.mockito.kotlin.eq
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.robolectric.Shadows.shadowOf
@@ -88,12 +90,7 @@ class InstalledPackageNameTest {
                 ) {
                 init {
                     parameters {
-                        parameter(
-                            "package",
-                            R.string.parameter_purpose,
-                            true,
-                            InstalledPackageName(),
-                        )
+                        parameter("package", R.string.parameter_purpose, true, InstalledPackageName)
                     }
                 }
             }
@@ -115,11 +112,13 @@ class InstalledPackageNameTest {
 
     @Test
     fun getOptions_appFlagsAssigned_useAssignedFlags() {
-        val assignedFlags = ApplicationInfoFlags.of(0)
+        val assignedFlags = 0L
 
-        InstalledPackageName(assignedFlags).getOptions(context)
+        runBlocking { InstalledPackageName(flags = assignedFlags).getOptions(context) }
 
-        verify(spyPackageManager).getInstalledApplications(eq(assignedFlags))
+        val captor = argumentCaptor<ApplicationInfoFlags>()
+        verify(spyPackageManager).getInstalledApplications(captor.capture())
+        assertThat(captor.firstValue.value).isEqualTo(assignedFlags)
     }
 
     @Test
@@ -127,7 +126,7 @@ class InstalledPackageNameTest {
     fun getOptions_flagEnabled_admin_useDefaultFlagsSelf() {
         shadowUserManager.setIsAdminUser(true)
 
-        InstalledPackageName().getOptions(context)
+        runBlocking { InstalledPackageName().getOptions(context) }
 
         val captor = argumentCaptor<ApplicationInfoFlags>()
         verify(spyPackageManager).getInstalledApplications(captor.capture())
@@ -139,7 +138,7 @@ class InstalledPackageNameTest {
     fun getOptions_flagDisabled_admin_useDefaultFlagsAll() {
         shadowUserManager.setIsAdminUser(true)
 
-        InstalledPackageName().getOptions(context)
+        runBlocking { InstalledPackageName().getOptions(context) }
 
         val captor = argumentCaptor<ApplicationInfoFlags>()
         verify(spyPackageManager).getInstalledApplications(captor.capture())
@@ -151,11 +150,27 @@ class InstalledPackageNameTest {
     fun getOptions_flagDisabled_user_useDefaultFlagsSelf() {
         shadowUserManager.setIsAdminUser(false)
 
-        InstalledPackageName().getOptions(context)
+        runBlocking { InstalledPackageName().getOptions(context) }
 
         val captor = argumentCaptor<ApplicationInfoFlags>()
         verify(spyPackageManager).getInstalledApplications(captor.capture())
         assertThat(captor.firstValue.value).isEqualTo(FLAGS_SELF.toLong())
+    }
+
+    @Test
+    fun getOptions_hasHeldPermissions_callGetPackagesHoldingPermissions() {
+        shadowUserManager.setIsAdminUser(false)
+
+        try {
+            runBlocking {
+                InstalledPackageName(heldPermissions = PERM).getOptions(context)
+            }
+        } catch (e: UnsupportedOperationException) {}
+
+        val captor = argumentCaptor<Array<String>>()
+        verify(spyPackageManager)
+            .getPackagesHoldingPermissions(captor.capture(), any<PackageInfoFlags>())
+        assertThat(captor.firstValue).asList().containsExactlyElementsIn(PERM)
     }
 
     private fun buildPackageInfo(packageName: String): PackageInfo {
@@ -169,5 +184,6 @@ class InstalledPackageNameTest {
             PackageManager.MATCH_DISABLED_COMPONENTS or
                 PackageManager.MATCH_DISABLED_UNTIL_USED_COMPONENTS
         private const val FLAGS_ALL = FLAGS_SELF or PackageManager.MATCH_ANY_USER
+        private val PERM = arrayOf(ACCESS_NOTIFICATION_POLICY)
     }
 }

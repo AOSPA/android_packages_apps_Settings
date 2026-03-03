@@ -40,7 +40,6 @@ import androidx.preference.SwitchPreferenceCompat;
 import androidx.preference.TwoStatePreference;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.A2dpProfile;
 import com.android.settingslib.bluetooth.BluetoothUtils;
@@ -202,7 +201,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
 
         if (profile instanceof LeAudioProfile) {
             boolean showLeAudioToggle = mIsLeAudioToggleEnabled;
-            if (Flags.hideLeAudioToggleForLeAudioOnlyDevice() && mIsLeAudioOnlyDevice) {
+            if (mIsLeAudioOnlyDevice) {
                 showLeAudioToggle = false;
                 Log.d(
                         TAG,

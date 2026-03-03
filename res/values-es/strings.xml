@@ -150,7 +150,7 @@
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Otros dispositivos"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Dispositivos guardados"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Asociado a la cuenta"</string>
-    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Usados previamente con la cuenta"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Usados antes con la cuenta"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"El Bluetooth se activará para emparejar"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Preferencias de conexión"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Conectado anteriormente"</string>
@@ -728,13 +728,11 @@
     <string name="encrypted_summary" msgid="545623487587251207">"Cifrado"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Configura un bloqueo de pantalla"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Para añadir una capa de seguridad, configura un PIN, patrón o contraseña en este dispositivo."</string>
-    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
-    <skip />
+    <string name="no_screen_lock_issue_summary_without_pattern" msgid="3709234873257859534">"Para añadir una capa de seguridad, configura un PIN o una contraseña en este dispositivo."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Configurar bloqueo de pantalla"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Establece un bloqueo de pantalla"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Para añadir una capa de seguridad, configura un PIN, patrón o contraseña en este dispositivo."</string>
-    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"Para añadir una capa de seguridad, configura un PIN o una contraseña en este dispositivo."</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Añadir huella digital para desbloquear"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Elige un bloqueo de pantalla"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Elige un bloqueo de pantalla"</string>
@@ -776,8 +774,7 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continuar sin huella digital ni cara"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Ninguno"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Añade un PIN, patrón o contraseña, o desliza"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off_new_without_pattern" msgid="1848366515765800557">"Añadir PIN, contraseña o gesto de deslizar"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Deslizar"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Patrón"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -1941,7 +1938,7 @@
     <string name="lock_settings_profile_unification_dialog_confirm" msgid="6276915393736137843">"Usar un único bloqueo"</string>
     <string name="lock_settings_profile_unification_dialog_uncompliant_confirm" msgid="8509287115116369677">"Usar un único bloqueo"</string>
     <string name="lock_settings_profile_unified_summary" msgid="777095092175037385">"Igual que el bloqueo de pantalla del dispositivo"</string>
-    <string name="manageapplications_settings_title" msgid="9198876415524237657">"Gestionar apps"</string>
+    <string name="manageapplications_settings_title" msgid="9198876415524237657">"Gestionar aplicaciones"</string>
     <string name="applications_settings" msgid="1941993743933425622">"Información de las apps"</string>
     <string name="applications_settings_header" msgid="3154670675856048015">"Ajustes de aplicación"</string>
     <string name="install_applications" msgid="3921609656584369901">"Fuentes desconocidas"</string>
@@ -3945,7 +3942,7 @@
     <string name="notification_bundle_news_summary" msgid="2524877244105778120">"Noticias destacadas, editoriales y más"</string>
     <string name="notification_bundle_social_summary" msgid="1880042768055317701">"Me gusta, publicaciones y más"</string>
     <string name="notification_bundle_recs_summary" msgid="9200357300848343691">"Newsletters, contenido multimedia recomendado y más"</string>
-    <string name="notification_bundle_no_apps_desc" msgid="6357770877341582580">"Todas las apps usan el organizador de notificaciones"</string>
+    <string name="notification_bundle_no_apps_desc" msgid="6357770877341582580">"Todas las aplicaciones usan el organizador de notificaciones"</string>
     <string name="notification_ai_features_title" msgid="2241618579100257538">"Gestionar con IA"</string>
     <string name="notification_summarization_title" msgid="1516039882005781529">"Resúmenes de notificaciones"</string>
     <string name="notification_summarization_summary" msgid="1963425736716175590">"Obtén resúmenes rápidos de mensajes largos"</string>
@@ -3953,9 +3950,9 @@
     <string name="notification_summarization_description" msgid="3185465631219791854">"Resume mensajes largos y conversaciones de grupo para obtener resúmenes rápidos.\n\nLos resúmenes usan IA en tu dispositivo, por lo que a veces puede cometer errores. Tus mensajes nunca se envían a Google."</string>
     <string name="notification_summarization_description_with_apps" msgid="3914029781564962054">"Resume mensajes largos y conversaciones de grupo para obtener resúmenes rápidos.\n\nLos resúmenes los proporcionan aplicaciones o la IA de tu dispositivo y pueden contener errores. Tus mensajes nunca se envían a Google."</string>
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"Las notificaciones de estas apps no se resumirán"</string>
-    <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gestionar apps"</string>
+    <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"Gestionar aplicaciones"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"Gestionar apps para obtener resúmenes de notificaciones"</string>
-    <string name="notification_excluded_apps" msgid="317898848790046528">"No incluir estas apps"</string>
+    <string name="notification_excluded_apps" msgid="317898848790046528">"No incluir estas aplicaciones"</string>
     <string name="notification_app_level_summarize_title" msgid="488390574186154905">"Resúmenes de notificaciones"</string>
     <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"Obtén resúmenes rápidos de mensajes largos"</string>
     <string name="notification_summarization_no_apps_desc" msgid="6058658379217986963">"Todas las apps pertinentes usan los resúmenes de notificaciones"</string>
@@ -5325,12 +5322,15 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Se necesita una red móvil o Wi-Fi para ver enlaces externos."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Puede que no se puedan intercambiar mensajes de texto con los servicios de emergencias en determinadas zonas."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Los cambios en tu cuenta pueden tardar un poco en aparecer en Ajustes. Contacta con <xliff:g id="CARRIER_NAME">%1$s</xliff:g> para saber más."</string>
+    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
+    <skip />
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Más información sobre la conectividad por satélite"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"No se puede activar el <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para activar el <xliff:g id="FUNCTION">%1$s</xliff:g>, primero finaliza la conexión por satélite"</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satélite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conectividad por satélite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conectividad por satélite"</string>
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Usar conectividad por satélite"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"El uso de apps compatibles está incluido en tu cuenta"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"El uso de datos para todas las apps está incluido en tu cuenta"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Apps compatibles en tu teléfono"</string>
@@ -5338,6 +5338,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Apps compatibles en tu teléfono"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"No se puede añadir una SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Finaliza la conexión por satélite antes de añadir una SIM"</string>
+    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
+    <skip />
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"El Bluetooth está desactivado"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Cuando estén conectados por Bluetooth, el modo Avión se sincronizará en los dispositivos compatibles, como el teléfono y el reloj"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nombres de puntos de acceso"</string>
@@ -6091,7 +6093,8 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Seguridad de las aplicaciones"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Desbloqueo del dispositivo"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Seguridad de la cuenta"</string>
-    <string name="device_finders_subpage_title" msgid="2390688647994924006">"Buscadores de dispositivos"</string>
+    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
+    <skip />
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Sistema y actualizaciones"</string>
     <string name="location_settings" msgid="6833222354060094170">"Acceso a la ubicación"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Consulta las apps y servicios que tienen acceso a tu ubicación"</string>

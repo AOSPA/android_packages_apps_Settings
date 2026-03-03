@@ -23,6 +23,7 @@ import android.os.Bundle
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
+import com.android.settings.applications.InstalledPackageName
 import com.android.settings.applications.getApplicationInfo
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
@@ -169,7 +170,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true)
+            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true, type = InstalledPackageName)
         }
 
         @JvmStatic

@@ -21,18 +21,12 @@ import static com.google.common.truth.Truth.assertThat;
 import android.content.Context;
 import android.hardware.input.InputSettings;
 import android.os.UserHandle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
-
-import com.android.hardware.input.Flags;
 import com.android.settings.core.BasePreferenceController;
 
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
@@ -44,9 +38,6 @@ import org.robolectric.annotation.Config;
         com.android.settings.testutils.shadow.ShadowSystemSettings.class,
 })
 public class MousePointerAccelerationPreferenceControllerTest {
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
-
     private static final String PREFERENCE_KEY = "mouse_pointer_acceleration";
     private static final String SETTING_KEY = Settings.System.MOUSE_POINTER_ACCELERATION_ENABLED;
 
@@ -61,21 +52,6 @@ public class MousePointerAccelerationPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_POINTER_ACCELERATION)
-    public void getAvailabilityStatus_expected() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.AVAILABLE);
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_POINTER_ACCELERATION)
-    public void getAvailabilityStatus_flagIsDisabled_notSupport() {
-        assertThat(mController.getAvailabilityStatus())
-                .isEqualTo(BasePreferenceController.UNSUPPORTED_ON_DEVICE);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_POINTER_ACCELERATION)
     public void setChecked_true_shouldReturnTrue() {
         mController.setChecked(true);
 
@@ -84,7 +60,6 @@ public class MousePointerAccelerationPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_POINTER_ACCELERATION)
     public void setChecked_false_shouldReturnFalse() {
         mController.setChecked(false);
 
@@ -93,7 +68,6 @@ public class MousePointerAccelerationPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_POINTER_ACCELERATION)
     public void isChecked_providerPutInt1_returnTrue() {
         Settings.System.putIntForUser(
                 mContext.getContentResolver(),
@@ -107,7 +81,6 @@ public class MousePointerAccelerationPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_POINTER_ACCELERATION)
     public void isChecked_providerPutInt0_returnFalse() {
         Settings.System.putIntForUser(
                 mContext.getContentResolver(),

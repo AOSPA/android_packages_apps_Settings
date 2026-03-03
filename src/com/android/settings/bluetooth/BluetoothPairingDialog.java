@@ -74,6 +74,12 @@ public class BluetoothPairingDialog extends FragmentActivity {
                 if (device == null || mBluetoothPairingController.deviceEquals(device)) {
                     dismiss();
                 }
+            } else if (Flags.enableBondingLossUiFix()
+                    && BluetoothDevice.ACTION_KEY_MISSING.equals(action)) {
+                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+                if (device == null || mBluetoothPairingController.deviceEquals(device)) {
+                    dismiss();
+                }
             }
         }
     };
@@ -138,6 +144,9 @@ public class BluetoothPairingDialog extends FragmentActivity {
          */
         registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_PAIRING_CANCEL));
         registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED));
+        if (Flags.enableBondingLossUiFix()) {
+            registerReceiver(mReceiver, new IntentFilter(BluetoothDevice.ACTION_KEY_MISSING));
+        }
         mReceiverRegistered = true;
 
         closeSystemDialogs();

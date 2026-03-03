@@ -44,6 +44,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.supervision.ConfirmSupervisionCredentialsActivity.Companion.EXTRA_FORCE_CONFIRMATION
+import com.android.settings.supervision.SupervisionSessionController.Companion.SUPERVISION_AUTH_SESSION_KEY
 import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -93,6 +94,7 @@ class ConfirmSupervisionCredentialsActivityTest {
     fun setUp() {
         setUpActivity(forceConfirm = false)
         SupervisionAuthController.sInstance = null
+        SupervisionSessionController.instance = null
         ShadowServiceManager.addBinderService(
             Context.SUPERVISION_SERVICE,
             ISupervisionManager::class.java,
@@ -125,7 +127,8 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun onCreate_authSessionActive_finishWithResultOK() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES)
+    fun onCreate_authSessionActiveUsingLegacyAuthController_finishWithResultOK() {
         setupDefaultMocks()
         setupActiveAuthSession()
 
@@ -136,9 +139,41 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun onCreate_authSessionActive_forceConfirmation_doesNotFinish() {
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES)
+    fun onCreate_authSessionActive_finishWithResultOK() {
+        setupDefaultMocks()
+        SupervisionSessionController.getInstance(context)
+            .startSession(mActivity.taskId, SUPERVISION_AUTH_SESSION_KEY)
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
+    }
+
+    @Test
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES)
+    fun onCreate_authSessionActiveUsingLegacyAuthController_forceConfirmation_doesNotFinish() {
         setupDefaultMocks()
         setupActiveAuthSession()
+
+        setUpActivity(forceConfirm = true)
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isFalse()
+
+        // Ensure that the supervising profile is started
+        val userCaptor = argumentCaptor<UserHandle>()
+        verify(mockActivityManager).startProfile(userCaptor.capture())
+        assert(userCaptor.lastValue.identifier == SUPERVISING_USER_ID)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES)
+    fun onCreate_authSessionActive_forceConfirmation_doesNotFinish() {
+        setupDefaultMocks()
+        SupervisionSessionController.getInstance(context)
+            .startSession(mActivity.taskId, SUPERVISION_AUTH_SESSION_KEY)
 
         setUpActivity(forceConfirm = true)
         mActivityController.setup()
@@ -244,7 +279,8 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onCreate_noSupervisingCredential_oneApprovalMethod_launchesMethodAndHandlesResult() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES)
+    fun onCreate_legacyAuthController_noSupervisingCredential_oneApprovalMethod_launchesMethodAndHandlesResult() {
         setupDefaultMocks(isDeviceSecure = false)
         val resolveInfo = createApprovalResolveInfo("com.example.approval", "ApprovalActivity")
         whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
@@ -268,8 +304,39 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES,
+    )
+    fun onCreate_noSupervisingCredential_oneApprovalMethod_launchesMethodAndHandlesResult() {
+        setupDefaultMocks(isDeviceSecure = false)
+        val resolveInfo = createApprovalResolveInfo("com.example.approval", "ApprovalActivity")
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo))
+
+        mActivityController.setup()
+
+        assertThat(mActivity.isFinishing).isFalse()
+        val nextActivity = shadowActivity.nextStartedActivity
+        assertThat(nextActivity.action)
+            .isEqualTo(SupervisionManager.ACTION_CONFIRM_SUPERVISION_APPROVAL)
+        assertThat(nextActivity.component?.className).isEqualTo("ApprovalActivity")
+
+        shadowActivity.receiveResult(nextActivity, Activity.RESULT_OK, null)
+
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
+        assertThat(
+                SupervisionSessionController.getInstance(context)
+                    .isSessionActive(SUPERVISION_AUTH_SESSION_KEY)
+            )
+            .isTrue()
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onCreate_noSupervisingCredential_oneApprovalMethod_handlingFailureResult() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES)
+    fun onCreate_legacyAuthController_noSupervisingCredential_oneApprovalMethod_handlingFailureResult() {
         setupDefaultMocks(isDeviceSecure = false)
         val resolveInfo = createApprovalResolveInfo("com.example.approval", "ApprovalActivity")
         whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
@@ -285,6 +352,33 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(mActivity.isFinishing).isTrue()
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
         assertThat(SupervisionAuthController.getInstance(context).isSessionActive(mActivity.taskId))
+            .isFalse()
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES,
+    )
+    fun onCreate_noSupervisingCredential_oneApprovalMethod_handlingFailureResult() {
+        setupDefaultMocks(isDeviceSecure = false)
+        val resolveInfo = createApprovalResolveInfo("com.example.approval", "ApprovalActivity")
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo))
+
+        mActivityController.setup()
+
+        val nextActivity = shadowActivity.nextStartedActivity
+        assertThat(nextActivity).isNotNull()
+
+        shadowActivity.receiveResult(nextActivity, Activity.RESULT_CANCELED, null)
+
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        assertThat(
+                SupervisionSessionController.getInstance(context)
+                    .isSessionActive(SUPERVISION_AUTH_SESSION_KEY)
+            )
             .isFalse()
     }
 
@@ -327,7 +421,8 @@ class ConfirmSupervisionCredentialsActivityTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    fun onCreate_noSupervisingCredential_multipleApprovalMethods_handlingFailureResult() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES)
+    fun onCreate_legacyAuthController_noSupervisingCredential_multipleApprovalMethods_handlingFailureResult() {
         setupDefaultMocks(isDeviceSecure = false)
         val resolveInfo1 = createApprovalResolveInfo("com.example.approval", "ApprovalActivity1")
         val resolveInfo2 = createApprovalResolveInfo("com.example.approval", "ApprovalActivity2")
@@ -351,6 +446,41 @@ class ConfirmSupervisionCredentialsActivityTest {
         assertThat(mActivity.isFinishing).isTrue()
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
         assertThat(SupervisionAuthController.getInstance(context).isSessionActive(mActivity.taskId))
+            .isFalse()
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES,
+    )
+    fun onCreate_noSupervisingCredential_multipleApprovalMethods_handlingFailureResult() {
+        setupDefaultMocks(isDeviceSecure = false)
+        val resolveInfo1 = createApprovalResolveInfo("com.example.approval", "ApprovalActivity1")
+        val resolveInfo2 = createApprovalResolveInfo("com.example.approval", "ApprovalActivity2")
+        whenever(mockISupervisionManager.querySupervisionApprovalActivities(any()))
+            .thenReturn(listOf(resolveInfo1, resolveInfo2))
+
+        mActivityController.setup()
+
+        val resultBundle =
+            Bundle().apply {
+                putInt(
+                    ApprovalMethodChooserDialogFragment.BUNDLE_KEY_RESULT_CODE,
+                    Activity.RESULT_CANCELED,
+                )
+            }
+        mActivity.supportFragmentManager.setFragmentResult(
+            ApprovalMethodChooserDialogFragment.REQUEST_KEY_APPROVAL_RESULT,
+            resultBundle,
+        )
+
+        assertThat(mActivity.isFinishing).isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_CANCELED)
+        assertThat(
+                SupervisionSessionController.getInstance(context)
+                    .isSessionActive(SUPERVISION_AUTH_SESSION_KEY)
+            )
             .isFalse()
     }
 
@@ -661,13 +791,29 @@ class ConfirmSupervisionCredentialsActivityTest {
     }
 
     @Test
-    fun onAuthenticationSucceeded_startsAuthSession_returnsResultOK() {
+    @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES)
+    fun onAuthenticationSucceededUsingLegacyAuthController_startsAuthSession_returnsResultOK() {
         setupDefaultMocks()
         setupDashboardAsRunningTask()
 
         mActivity.mAuthenticationCallback.onAuthenticationSucceeded(null)
 
         assertThat(SupervisionAuthController.getInstance(context).isSessionActive(mActivity.taskId))
+            .isTrue()
+        assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_SESSION_UPDATES)
+    fun onAuthenticationSucceeded_startsAuthSession_returnsResultOK() {
+        setupDefaultMocks()
+
+        mActivity.mAuthenticationCallback.onAuthenticationSucceeded(null)
+
+        assertThat(
+                SupervisionSessionController.getInstance(context)
+                    .isSessionActive(SUPERVISION_AUTH_SESSION_KEY)
+            )
             .isTrue()
         assertThat(shadowActivity.resultCode).isEqualTo(Activity.RESULT_OK)
     }
