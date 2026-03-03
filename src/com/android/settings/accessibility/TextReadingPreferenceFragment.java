@@ -82,13 +82,11 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
             rootView.setAccessibilityPaneTitle(getString(
                     R.string.accessibility_text_reading_options_title));
         }
-        if (com.android.graphics.hwui.flags.Flags.highContrastTextSmallTextRect()) {
-            updateEntryPoint();
-            if (mEntryPoint == EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION
-                    // Only log this counter during the first launch, not during activity refresh
-                    && savedInstanceState == null) {
-                Counter.logIncrement("accessibility.value_hct_notification_opened_settings");
-            }
+        updateEntryPoint();
+        if (mEntryPoint == EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION
+                // Only log this counter during the first launch, not during activity refresh
+                && savedInstanceState == null) {
+            Counter.logIncrement("accessibility.value_hct_notification_opened_settings");
         }
     }
 
