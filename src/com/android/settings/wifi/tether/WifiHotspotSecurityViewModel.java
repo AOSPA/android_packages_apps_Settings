@@ -58,6 +58,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
 
     protected Map<Integer, ViewItem> mViewItemMap = new HashMap<>();
     protected MutableLiveData<List<ViewItem>> mViewInfoListData;
+    protected Integer mCurrentSpeedType;
 
     protected final WifiHotspotRepository mWifiHotspotRepository;
     protected final Observer<Integer> mSecurityTypeObserver = st -> onSecurityTypeChanged(st);
@@ -76,6 +77,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
                 .getWifiHotspotRepository();
         mWifiHotspotRepository.getSecurityType().observeForever(mSecurityTypeObserver);
         mWifiHotspotRepository.getSpeedType().observeForever(mSpeedTypeObserver);
+        mCurrentSpeedType = mWifiHotspotRepository.getSpeedType().getValue();
 
         if (!mWifiHotspotRepository.isDualBand()) {
             for (Map.Entry<Integer, ViewItem> entry : mViewItemMap.entrySet()) {
@@ -99,6 +101,14 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
             if (entry.getKey() == SECURITY_TYPE_WPA3_OWE &&
                 securityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
                 entry.getValue().mIsChecked = true;
+            } else if (mCurrentSpeedType != null && mCurrentSpeedType == SPEED_2GHZ_6GHZ) {
+                if (entry.getKey() == SECURITY_TYPE_OPEN && securityType == SECURITY_TYPE_WPA3_OWE) {
+                    entry.getValue().mIsChecked = true;
+                } else if (entry.getKey() == SECURITY_TYPE_WPA3_OWE) {
+                    entry.getValue().mIsChecked = false;
+                } else {
+                    entry.getValue().mIsChecked = entry.getKey().equals(securityType);
+                }
             } else {
                 entry.getValue().mIsChecked = entry.getKey().equals(securityType);
             }
@@ -107,6 +117,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
     }
 
     protected void onSpeedTypeChanged(Integer speedType) {
+        mCurrentSpeedType = speedType;
         log("onSpeedTypeChanged(), speedType:" + speedType);
 
         // Certain speed types require specific security types. Specify an allowlist if the speed
@@ -117,6 +128,7 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
             allowedSecurityTypes.add(SECURITY_TYPE_WPA3_OWE);
         } else if (speedType == SPEED_2GHZ_6GHZ) {
             allowedSecurityTypes.add(SECURITY_TYPE_WPA3_SAE);
+            allowedSecurityTypes.add(SECURITY_TYPE_OPEN);
             if (mWifiHotspotRepository.isWpa3TransitionAllowedFor2g6gDbs()) {
                 allowedSecurityTypes.add(SECURITY_TYPE_WPA3_SAE_TRANSITION);
             }
@@ -131,6 +143,10 @@ public class WifiHotspotSecurityViewModel extends AndroidViewModel {
                     || allowedSecurityTypes.contains(securityType);
         }
 
+        Integer currentSecurityType = mWifiHotspotRepository.getSecurityType().getValue();
+        if (currentSecurityType != null) {
+            onSecurityTypeChanged(currentSecurityType);
+        }
         updateViewItemListData();
     }
 

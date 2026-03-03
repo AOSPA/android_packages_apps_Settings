@@ -172,7 +172,11 @@ public class WifiTetherViewModel extends AndroidViewModel {
 
     protected void onSecurityTypeChanged(int securityType) {
         int resId = R.string.summary_placeholder;
-        if (sSecuritySummaryResMap.containsKey(securityType)) {
+        Integer speedType = mWifiHotspotRepository.getSpeedType().getValue();
+        if (speedType != null && speedType == SPEED_2GHZ_6GHZ
+                && securityType == SECURITY_TYPE_WPA3_OWE) {
+            resId = sSecuritySummaryResMap.get(SECURITY_TYPE_OPEN);
+        } else if (sSecuritySummaryResMap.containsKey(securityType)) {
             resId = sSecuritySummaryResMap.get(securityType);
         }
         mSecuritySummary.setValue(resId);
@@ -195,6 +199,10 @@ public class WifiTetherViewModel extends AndroidViewModel {
             resId = sSpeedSummaryResMap.get(speedType);
         }
         mSpeedSummary.setValue(resId);
+        Integer securityType = mWifiHotspotRepository.getSecurityType().getValue();
+        if (securityType != null) {
+            onSecurityTypeChanged(securityType);
+        }
     }
 
     /**
