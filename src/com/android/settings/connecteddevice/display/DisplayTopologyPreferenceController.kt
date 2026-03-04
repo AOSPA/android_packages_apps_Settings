@@ -638,10 +638,6 @@ class DisplayTopologyPreferenceController(
         val drag = blockDrag ?: return false
         val topology = topologyInfo ?: return false
         paneContent.requestDisallowInterceptTouchEvent(false)
-        if (!injector.flags.showTabbedConnectedDisplaySetting()) {
-            // Highlight must be removed after drag finished in non-tabbed setting
-            selectDisplay(-1)
-        }
         // DisplayBlock has been highlighted on touch down, touch up should only notify the listener
         onDisplayBlockSelectedListener?.onSelected(drag.displayId)
 
@@ -706,9 +702,6 @@ class DisplayTopologyPreferenceController(
     }
 
     private fun setDisplayToShowArrows(displayId: Int) {
-        if (!injector.flags.showTabbedConnectedDisplaySetting()) {
-            return
-        }
         showArrowMovementDisplayId = displayId
         topologyHint.updateState(
             arrowsShown = (showArrowMovementDisplayId != -1),

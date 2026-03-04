@@ -319,7 +319,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     open fun freezeDisplayRotation(displayId: Int, rotation: Int): Boolean {
         val wm = windowManager ?: return false
         try {
-            wm.freezeDisplayRotation(displayId, rotation, "ExternalDisplayPreferenceFragment")
+            wm.freezeDisplayRotation(displayId, rotation, "SelectedDisplayPreferenceFragment")
             return true
         } catch (e: RemoteException) {
             Log.e(TAG, "Error while freezing user rotation of display $displayId", e)
