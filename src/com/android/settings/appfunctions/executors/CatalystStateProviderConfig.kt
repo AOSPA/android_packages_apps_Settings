@@ -143,6 +143,7 @@ import com.android.settings.location.BluetoothScanningApiScreen
 import com.android.settings.location.LocationScreen
 import com.android.settings.location.LocationServicesScreen
 import com.android.settings.location.RecentLocationAccessScreen
+import com.android.settings.location.WifiScanningApiScreen
 import com.android.settings.network.AdaptiveConnectivityApiScreen
 import com.android.settings.network.AdaptiveConnectivityScreen
 import com.android.settings.network.AirplaneModeSettingsScreen
@@ -676,6 +677,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ResolutionRefreshRateApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiScanningApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =
