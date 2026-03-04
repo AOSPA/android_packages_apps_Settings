@@ -39,7 +39,7 @@ public abstract class BaseSimProtectionModePreferenceController extends
 
     @Nullable protected SelectorWithWidgetPreference mPreference;
     protected final int mSubId;
-    @Nullable protected ControlAutoSimPinManagementFragment mFragment;
+    @Nullable protected BaseSimPinFragment mFragment;
 
     protected AutoManagedSimPinHelper mAutoManagedSimPinHelper;
     protected TelephonyManager mTelephonyManager;
@@ -90,7 +90,7 @@ public abstract class BaseSimProtectionModePreferenceController extends
     @VisibleForTesting
     public abstract boolean isModeCurrentlyActive();
 
-    public void setFragment(ControlAutoSimPinManagementFragment fragment) {
+    public void setFragment(BaseSimPinFragment fragment) {
         mFragment = fragment;
     }
 
