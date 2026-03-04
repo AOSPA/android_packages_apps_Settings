@@ -16,11 +16,18 @@
 
 package com.android.settings.location
 
+import android.Manifest.permission.NETWORK_SETTINGS
+import android.net.wifi.WifiManager
+import android.os.UserManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 // LINT.IfChange
 @ProvidePreferenceScreen(WifiScanningApiScreen.KEY)
@@ -33,6 +40,52 @@ open class WifiScanningApiScreen :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
+
+        preference(
+            key = "wifi_scanning",
+            purpose = R.string.wifi_scanning_purpose,
+            type = AnyBoolean,
+        ) {
+            preconditions(R.string.wifi_scanning_hardware_unsupported) {
+                if (context.getResources().getBoolean(R.bool.config_show_location_scanning)) {
+                    Allowed
+                } else {
+                    HardwareUnsupported(R.string.wifi_scanning_hardware_unsupported)
+                }
+            }
+            get {
+                execute {
+                    // Deprecated for apps, but currently used by
+                    // WifiScanningMainSwitchPreferenceController.
+                    // Retaining for parity with existing Settings logic during Catalyst migration.
+                    @Suppress("DEPRECATION")
+                    context.getSystemService(WifiManager::class.java)?.isScanAlwaysAvailable == true
+                }
+            }
+            set {
+                permissions(NETWORK_SETTINGS)
+                preconditions(R.string.wifi_scanning_user_restricted) {
+                    val userManager =
+                        context.getSystemService(UserManager::class.java)
+                            ?: error("UserManager service not found")
+
+                    if (userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_LOCATION)) {
+                        Custom(R.string.wifi_scanning_user_restricted)
+                    } else {
+                        Allowed
+                    }
+                }
+                execute { enabled: Boolean ->
+                    val wifiManager =
+                        context.getSystemService(WifiManager::class.java)
+                            ?: error(
+                                "WifiManager service not found, could not set scan always available"
+                            )
+
+                    wifiManager.setScanAlwaysAvailable(enabled)
+                }
+            }
+        }
     }
 
     companion object {

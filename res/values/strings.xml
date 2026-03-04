@@ -2434,6 +2434,10 @@
     <string name="wifi_allow_wep_networks_set_value_precondition" translatable="false">You cannot turn off this setting while connected to a WEP network.</string>
     <!-- Error message shown when the user is connected to WEP and tries to disable the setting [CHAR LIMIT=NONE] -->
     <string name="wifi_allow_wep_networks_set_invalid_preference" translatable="false">This device is connected to a WEP network. Disabling WEP support will disconnect the device.</string>
+    <!-- Precondition text shown when the device hardware does not support WiFi scanning [CHAR LIMIT=NONE] -->
+    <string name="wifi_scanning_hardware_unsupported" translatable="false">This setting is only available on devices that support WiFi scanning.</string>
+    <!-- Precondition text shown when the user is restricted from WiFi scanning [CHAR LIMIT=NONE] -->
+    <string name="wifi_scanning_user_restricted" translatable="false">The user must not be restricted from changing location settings by a device owner or a profile owner.</string>
 
     <!-- Dialog for Access Points -->
     <skip />
