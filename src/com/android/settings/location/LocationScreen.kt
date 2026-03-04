@@ -33,21 +33,20 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(LocationScreen.KEY)
 open class LocationScreen :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceIconProvider {
     override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
-
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.location_settings_purpose
 
@@ -81,7 +80,7 @@ open class LocationScreen :
             else -> R.drawable.ic_settings_location_filled
         }
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystLocationSettings()
+    override fun isFlagEnabled(context: Context) = Flags.catalystMigration26q2()
 
     override fun hasCompleteHierarchy() = false
 
@@ -90,7 +89,7 @@ open class LocationScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +LocationMainSwitch()
-            if (Flags.catalystLocationSettings()) +RecentLocationAccessScreen.KEY
+            if (Flags.catalystMigration26q2()) +RecentLocationAccessScreen.KEY
         }
 
     companion object {
