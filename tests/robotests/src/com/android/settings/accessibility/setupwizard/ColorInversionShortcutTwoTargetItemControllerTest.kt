@@ -25,23 +25,21 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
-/** Tests for [MagnificationShortcutTwoTargetItemController]. */
+/** Tests for [ColorInversionShortcutTwoTargetItemController]. */
 @RunWith(RobolectricTestRunner::class)
-class MagnificationShortcutTwoTargetItemControllerTest {
+class ColorInversionShortcutTwoTargetItemControllerTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val item = TwoTargetItem()
-    private val controller: MagnificationShortcutTwoTargetItemController =
-        MagnificationShortcutTwoTargetItemController.create(context, item)
+    private val controller: ColorInversionShortcutTwoTargetItemController =
+        ColorInversionShortcutTwoTargetItemController.create(context, item)
 
     @Test
     fun bindData_setsItemPropertiesFromMetadata() {
         controller.bindData(item)
 
         assertThat(item.title.toString())
-            .isEqualTo(
-                context.getString(R.string.accessibility_screen_magnification_shortcut_title)
-            )
+            .isEqualTo(context.getString(R.string.accessibility_display_inversion_shortcut_title))
         assertThat(item.summary.toString()).isNotNull()
     }
 }

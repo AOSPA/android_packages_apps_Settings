@@ -18,14 +18,16 @@ package com.android.settings.accessibility.setupwizard
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME
+import com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
 import com.android.settingslib.datastore.KeyValueStore
 import com.google.android.setupdesign.items.Item
 
-/** Controller for the Magnification shortcut two target item in the Accessibility Setup Wizard. */
-class MagnificationShortcutTwoTargetItemController(
+/**
+ * Controller for the Color Inversion shortcut two target item in the Accessibility Setup Wizard.
+ */
+class ColorInversionShortcutTwoTargetItemController(
     context: Context,
     item: Item,
     metadata: AccessibilityShortcutPreference,
@@ -35,20 +37,20 @@ class MagnificationShortcutTwoTargetItemController(
     override val key = KEY
 
     companion object {
-        private const val KEY = "magnification_shortcut_preference"
+        private const val KEY = "color_inversion_shortcut_key"
 
-        fun create(context: Context, item: Item): MagnificationShortcutTwoTargetItemController {
+        fun create(context: Context, item: Item): ColorInversionShortcutTwoTargetItemController {
             val metadata =
                 AccessibilityShortcutPreference(
                     context = context,
                     key = KEY,
-                    purpose = R.string.magnification_shortcut_preference_purpose,
-                    title = R.string.accessibility_screen_magnification_shortcut_title,
-                    componentName = MAGNIFICATION_COMPONENT_NAME,
-                    featureName = R.string.accessibility_screen_magnification_title,
-                    metricsCategory = SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION,
+                    purpose = R.string.color_inversion_shortcut_key_purpose,
+                    title = R.string.accessibility_display_inversion_shortcut_title,
+                    componentName = COLOR_INVERSION_COMPONENT_NAME,
+                    featureName = R.string.accessibility_display_inversion_preference_title,
+                    metricsCategory = SettingsEnums.ACCESSIBILITY_COLOR_INVERSION_SETTINGS,
                 )
-            return MagnificationShortcutTwoTargetItemController(
+            return ColorInversionShortcutTwoTargetItemController(
                 context,
                 item,
                 metadata,
