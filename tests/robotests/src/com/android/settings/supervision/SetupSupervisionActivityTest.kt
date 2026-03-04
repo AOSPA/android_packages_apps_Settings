@@ -21,6 +21,7 @@ import android.app.Application
 import android.app.KeyguardManager
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ENABLE_SUPERVISION
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_PIN_SET_UP
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SKIP_PIN_RECOVERY
 import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
@@ -420,7 +421,7 @@ class SetupSupervisionActivityTest {
         Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
         Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
     )
-    fun canLaunchPinRecovery_onPinRecoveryResult_finishesOk() = runTest {
+    fun canLaunchPinRecovery_onPinRecoveryResultOk_finishesOk() = runTest {
         whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
         shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
 
@@ -449,6 +450,50 @@ class SetupSupervisionActivityTest {
                     null,
                 )
 
+                verify(metricsRule.metricsFeatureProvider, never())
+                    .action(eq(activity), eq(ACTION_SUPERVISION_SKIP_PIN_RECOVERY))
+                assertThat(activity.isFinishing).isTrue()
+            }
+            assertThat(scenario.result.resultCode).isEqualTo(RESULT_OK)
+        }
+    }
+
+    @Test
+    @EnableFlags(
+        Flags.FLAG_ENABLE_SUPERVISION_PIN_RECOVERY_SCREEN,
+        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
+    )
+    fun canLaunchPinRecovery_onPinRecoveryResultCancelled_finishesOkWithLog() = runTest {
+        whenever(mockISupervisionManager.canLaunchPinRecovery(any())).thenReturn(false)
+        shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, false)
+
+        ActivityScenario.launchActivityForResult(SetupSupervisionActivity::class.java).use {
+            scenario ->
+            scenario.onActivity { activity ->
+                clickNextOnIntroductionScreen(activity)
+                val shadowActivity = shadowOf(activity)
+                shadowKeyguardManager.setIsDeviceSecure(SUPERVISING_USER_ID, true)
+                // Set PIN result.
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_OK,
+                    null,
+                )
+
+                // PIN recovery set up activity was invoked
+                val nextActivity = shadowActivity.nextStartedActivity
+                assertThat(nextActivity.component?.className)
+                    .isEqualTo(SupervisionPinRecoveryActivity::class.java.name)
+
+                // PIN recovery result.
+                shadowActivity.receiveResult(
+                    shadowActivity.nextStartedActivityForResult.intent,
+                    RESULT_CANCELED,
+                    null,
+                )
+
+                verify(metricsRule.metricsFeatureProvider)
+                    .action(eq(activity), eq(ACTION_SUPERVISION_SKIP_PIN_RECOVERY))
                 assertThat(activity.isFinishing).isTrue()
             }
             assertThat(scenario.result.resultCode).isEqualTo(RESULT_OK)
