@@ -36,7 +36,7 @@ class DarkModeMainSwitchPreferenceTest {
     @get:Rule val mSetFlagsRule = SetFlagsRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val shadowPowerManager = shadowOf(context.getSystemService(PowerManager::class.java))!!
-    private val mainSwitchPreference = DarkModeMainSwitchPreference(DarkModeStorage(context))
+    private val mainSwitchPreference = DarkModeMainSwitchPreference(DarkModeStorage(context), false)
 
     @Test
     fun key() {

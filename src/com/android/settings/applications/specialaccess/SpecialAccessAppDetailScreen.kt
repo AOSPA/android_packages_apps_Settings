@@ -207,7 +207,12 @@ private constructor(
         preferenceHierarchy(context) {
             val packageInfoProvider = this@SpecialAccessAppDetailScreen
             +AppInfoHeaderPreference(packageInfoProvider)
-            +SpecialAccessSwitchPreference(switchPreferenceTitle, dataStore, packageInfoProvider)
+            +SpecialAccessSwitchPreference(
+                switchPreferenceTitle,
+                dataStore,
+                packageInfoProvider,
+                key,
+            )
             +FooterPreference(footerPreferenceTitle)
         }
 

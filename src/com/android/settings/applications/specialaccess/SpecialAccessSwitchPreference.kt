@@ -28,10 +28,11 @@ internal class SpecialAccessSwitchPreference(
     override val title: Int,
     private val dataStore: KeyValueStore,
     private val onPreferenceChangeListener: Preference.OnPreferenceChangeListener,
+    private val keyPrefix: String,
 ) : BooleanValuePreference, BooleanValuePreferenceBinding {
 
     override val key
-        get() = KEY
+        get() = "${keyPrefix}_$KEY"
 
     override val purpose: Int
         get() = R.string.access_switch_purpose
