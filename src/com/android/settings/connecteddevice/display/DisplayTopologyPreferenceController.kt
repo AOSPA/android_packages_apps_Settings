@@ -34,6 +34,7 @@ import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 import com.android.settings.core.instrumentation.SettingsStatsLog
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 import java.util.function.Consumer
 import kotlin.math.abs
 import kotlin.math.min
@@ -47,6 +48,15 @@ class DisplayTopologyPreferenceController(
     private val appContext: Context,
     private val injector: ConnectedDisplayInjector,
 ) {
+
+    private val displayBlockToPaneMarginPx =
+        uiContext.resources.getDimensionPixelSize(R.dimen.display_block_to_pane_margin)
+    private val topologyHintHeightPx =
+        uiContext.resources.getDimensionPixelSize(R.dimen.topology_hint_text_view_height)
+    private val isViewOnDisplaySupportingDesktopMode =
+        injector.desktopState?.isDesktopModeSupportedOnDisplay(uiContext.displayId) ?: false
+    private val isCursorPointingDeviceAvailable = InputPeripheralsSettingsUtils.isMouse()
+
     @VisibleForTesting lateinit var paneContent: FrameLayout
     @VisibleForTesting lateinit var paneHolder: FrameLayout
     @VisibleForTesting lateinit var topologyHint: TopologyHintTextView
@@ -266,12 +276,11 @@ class DisplayTopologyPreferenceController(
             TopologyScale(
                 paneContent.width,
                 minEdgeLength =
-                    DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, currentDisplayDensityDpi),
+                    DisplayTopology.dpToPx(getMinEdgeLengthDp(), currentDisplayDensityDpi),
                 maxEdgeLength =
-                    DisplayTopology.dpToPx(
-                        getMaxEdgeLengthDp(newBounds.size),
-                        currentDisplayDensityDpi,
-                    ),
+                    DisplayTopology.dpToPx(getMaxEdgeLengthDp(), currentDisplayDensityDpi),
+                displayBlockToPaneMarginPx + if (newBounds.size > 1) topologyHintHeightPx else 0,
+                displayBlockToPaneMarginPx,
                 newBounds.map { it.second },
             )
         setupDisplayPaneAndBlocks(
@@ -308,9 +317,11 @@ class DisplayTopologyPreferenceController(
             TopologyScale(
                 paneContent.width,
                 minEdgeLength =
-                    DisplayTopology.dpToPx(MIN_EDGE_LENGTH_DP, currentDisplayDensityDpi),
+                    DisplayTopology.dpToPx(getMinEdgeLengthDp(), currentDisplayDensityDpi),
                 maxEdgeLength =
-                    DisplayTopology.dpToPx(MAX_EDGE_LENGTH_DP, currentDisplayDensityDpi),
+                    DisplayTopology.dpToPx(getMaxEdgeLengthDp(), currentDisplayDensityDpi),
+                displayBlockToPaneMarginPx,
+                displayBlockToPaneMarginPx,
                 newBounds.map { it.second },
             )
         setupDisplayPaneAndBlocks(
@@ -736,6 +747,17 @@ class DisplayTopologyPreferenceController(
         }
     }
 
+    private fun useDesktopModeLayout() =
+        isViewOnDisplaySupportingDesktopMode && isCursorPointingDeviceAvailable
+
+    private fun getMinEdgeLengthDp(): Float {
+        return if (useDesktopModeLayout()) MIN_EDGE_LENGTH_DESKTOP_MODE_DP else MIN_EDGE_LENGTH_DP
+    }
+
+    private fun getMaxEdgeLengthDp(): Float {
+        return if (useDesktopModeLayout()) MAX_EDGE_LENGTH_DESKTOP_MODE_DP else MAX_EDGE_LENGTH_DP
+    }
+
     private companion object {
 
         private fun DisplayTopology.getLogicalDensityForDisplay(displayId: Int): Int {
@@ -743,18 +765,10 @@ class DisplayTopologyPreferenceController(
             return displayNode?.logicalDensity ?: DisplayMetrics.DENSITY_DEFAULT
         }
 
-        private fun getMaxEdgeLengthDp(displayCount: Int): Float {
-            // Larger size is important to depict the relative size between 1 display with another,
-            // if the size of large display is capped too small, the other display will look very
-            // small in proportion.
-            // However, when there is only a single display, this relative size is not important,
-            // and it's better to give the extra space to show the display settings.
-            return if (displayCount > 1) MAX_EDGE_LENGTH_DP else MAX_EDGE_LENGTH_DP_SINGLE_DISPLAY
-        }
-
         private const val MIN_EDGE_LENGTH_DP = 48f
-        private const val MAX_EDGE_LENGTH_DP_SINGLE_DISPLAY = 128f
         private const val MAX_EDGE_LENGTH_DP = 256f
+        private const val MIN_EDGE_LENGTH_DESKTOP_MODE_DP = 32f
+        private const val MAX_EDGE_LENGTH_DESKTOP_MODE_DP = 192f
         private const val MIRRORING_DIAGONAL_STACK_OFFSET_DP = 120f
         private const val TAG = "DisplayTopologyPref"
     }

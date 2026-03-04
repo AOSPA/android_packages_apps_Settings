@@ -17,6 +17,7 @@
 package com.android.settings.connecteddevice.usb;
 
 import static android.hardware.usb.UsbPortStatus.DATA_ROLE_DEVICE;
+import static android.hardware.usb.UsbPortStatus.DATA_ROLE_NONE;
 import static android.hardware.usb.UsbPortStatus.POWER_ROLE_SINK;
 
 import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
@@ -26,9 +27,11 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -61,6 +64,7 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -68,6 +72,7 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -118,7 +123,7 @@ public class UsbDetailsFunctionsControllerTest {
 
         mDetailsFunctionsController =
                 new UsbDetailsFunctionsController(mContext, mFragment, mUsbBackend);
-        mPreferenceCategory = new PreferenceCategory(mContext);
+        mPreferenceCategory = spy(new PreferenceCategory(mContext));
         mPreferenceCategory.setKey(mDetailsFunctionsController.getPreferenceKey());
         mScreen.addPreference(mPreferenceCategory);
         mDetailsFunctionsController.displayPreference(mScreen);
@@ -147,7 +152,12 @@ public class UsbDetailsFunctionsControllerTest {
 
         mDetailsFunctionsController.refresh(
                 false, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
-        assertThat(mPreferenceCategory.isEnabled()).isFalse();
+
+        // PreferenceCategory.isEnabled() always returns false, so we check the argument in the last
+        // call to setEnabled() instead.
+        ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
+        verify(mPreferenceCategory, atLeastOnce()).setEnabled(captor.capture());
+        assertThat(captor.getValue()).isFalse();
     }
 
     @Test
@@ -467,5 +477,182 @@ public class UsbDetailsFunctionsControllerTest {
         assertThat(prefs.get(1).getKey())
                 .isEqualTo(UsbBackend.usbFunctionsToString(UsbManager.FUNCTION_RNDIS));
         assertThat(prefs.get(1).isChecked()).isFalse();
+    }
+
+    @Test
+    public void onTetheringFailed_duplicateRequest_shouldStopTetheringAndRetry() {
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MTP);
+
+        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(
+                TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST);
+
+        verify(mTetheringManager).stopTethering(TetheringManager.TETHERING_USB);
+
+        ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
+        verify(mPreferenceCategory, atLeastOnce()).setEnabled(captor.capture());
+        assertThat(captor.getValue()).isFalse();
+
+        // Trigger refresh with FUNCTION_NONE, connected, and device data role
+        mDetailsFunctionsController.refresh(
+                true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        verify(mTetheringManager).startTethering(
+                eq(TetheringManager.TETHERING_USB),
+                any(),
+                eq(mDetailsFunctionsController.mOnStartTetheringCallback));
+        verify(mPreferenceCategory, atLeastOnce()).setEnabled(captor.capture());
+        assertThat(captor.getValue()).isTrue();
+    }
+
+    @Test
+    public void onTetheringFailed_duplicateRequest_fromNone_shouldStopTetheringAndRetry() {
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_NONE);
+
+        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(
+                TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST);
+
+        verify(mTetheringManager).stopTethering(TetheringManager.TETHERING_USB);
+        verify(mTetheringManager).startTethering(
+                eq(TetheringManager.TETHERING_USB),
+                any(),
+                eq(mDetailsFunctionsController.mOnStartTetheringCallback));
+    }
+
+    @Test
+    public void onTetheringFailed_duplicateRequest_timeout_shouldResetState() {
+        when(mUsbBackend.getDataRole()).thenReturn(DATA_ROLE_DEVICE);
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MTP);
+
+        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(
+                TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST);
+
+        ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
+        verify(mPreferenceCategory, atLeastOnce()).setEnabled(captor.capture());
+        assertThat(captor.getValue()).isFalse();
+
+        // Fast forward time to trigger timeout
+        Shadows.shadowOf(mContext.getMainLooper()).idleFor(
+                Duration.ofMillis(UsbDetailsFunctionsController.RETRY_TETHERING_TIMEOUT_MS + 100));
+
+        verify(mPreferenceCategory, atLeastOnce()).setEnabled(captor.capture());
+        assertThat(captor.getValue()).isTrue();
+
+        // Ensure that a subsequent refresh does NOT trigger startTethering
+        mDetailsFunctionsController.refresh(
+                true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        verify(mTetheringManager, never()).startTethering(
+                eq(TetheringManager.TETHERING_USB),
+                any(),
+                any());
+    }
+
+    @Test
+    public void onTetheringFailed_duplicateRequest_disconnected_timeout_shouldNotResetState() {
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MTP);
+
+        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(
+                TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST);
+
+        ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
+        verify(mPreferenceCategory, atLeastOnce()).setEnabled(captor.capture());
+        assertThat(captor.getValue()).isFalse();
+
+        // Disconnected state
+        when(mUsbBackend.getDataRole()).thenReturn(DATA_ROLE_NONE);
+
+        // Fast forward time to trigger timeout
+        Shadows.shadowOf(mContext.getMainLooper()).idleFor(
+                Duration.ofMillis(UsbDetailsFunctionsController.RETRY_TETHERING_TIMEOUT_MS + 100));
+
+        verify(mPreferenceCategory, atLeastOnce()).setEnabled(captor.capture());
+        assertThat(captor.getValue()).isFalse();
+
+        // Ensure that a subsequent refresh does NOT trigger startTethering
+        mDetailsFunctionsController.refresh(
+                true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        verify(mTetheringManager, never()).startTethering(
+                eq(TetheringManager.TETHERING_USB),
+                any(),
+                any());
+    }
+
+    @Test
+    public void onTetheringFailed_duplicateRequest_disconnected_shouldNotRetry() {
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_MTP);
+
+        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(
+                TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST);
+
+        verify(mTetheringManager).stopTethering(TetheringManager.TETHERING_USB);
+
+        // Refresh with disconnected state
+        mDetailsFunctionsController.refresh(
+                false, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+
+        verify(mTetheringManager, never()).startTethering(
+                eq(TetheringManager.TETHERING_USB),
+                any(),
+                any());
+        // Since disconnected, it should be disabled anyway
+        ArgumentCaptor<Boolean> captor = ArgumentCaptor.forClass(Boolean.class);
+        verify(mPreferenceCategory, atLeastOnce()).setEnabled(captor.capture());
+        assertThat(captor.getValue()).isFalse();
+
+        // Also mRetryingEnableTethering should be set to false now.
+        // If we connect now, it shouldn't retry.
+        mDetailsFunctionsController.refresh(
+                true, UsbManager.FUNCTION_NONE, POWER_ROLE_SINK, DATA_ROLE_DEVICE);
+        verify(mTetheringManager, never()).startTethering(
+                eq(TetheringManager.TETHERING_USB),
+                any(),
+                any());
+    }
+
+    @Test
+    public void onTetheringFailed_reachMaxRetries_shouldStopRetrying() {
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_NONE);
+
+        for (int i = 0; i < UsbDetailsFunctionsController.MAX_TETHERING_ENABLE_RETRY_COUNT; i++) {
+            mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(
+                    TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST);
+        }
+
+        verify(mTetheringManager,
+                times(UsbDetailsFunctionsController.MAX_TETHERING_ENABLE_RETRY_COUNT))
+                .stopTethering(TetheringManager.TETHERING_USB);
+
+        // Fail one more time
+        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(
+                TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST);
+
+        // Verify stopTethering is not called again
+        verify(mTetheringManager,
+                times(UsbDetailsFunctionsController.MAX_TETHERING_ENABLE_RETRY_COUNT))
+                .stopTethering(TetheringManager.TETHERING_USB);
+    }
+
+    @Test
+    public void onTetheringStarted_shouldResetRetryCount() {
+        when(mUsbBackend.getCurrentFunctions()).thenReturn(UsbManager.FUNCTION_NONE);
+
+        // Fail once
+        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(
+                TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST);
+        verify(mTetheringManager, times(1)).stopTethering(TetheringManager.TETHERING_USB);
+
+        // Success
+        mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringStarted();
+
+        // Fail MAX times
+        for (int i = 0; i < UsbDetailsFunctionsController.MAX_TETHERING_ENABLE_RETRY_COUNT; i++) {
+            mDetailsFunctionsController.mOnStartTetheringCallback.onTetheringFailed(
+                    TetheringManager.TETHER_ERROR_DUPLICATE_REQUEST);
+        }
+
+        verify(mTetheringManager,
+                times(1 + UsbDetailsFunctionsController.MAX_TETHERING_ENABLE_RETRY_COUNT))
+                .stopTethering(TetheringManager.TETHERING_USB);
     }
 }

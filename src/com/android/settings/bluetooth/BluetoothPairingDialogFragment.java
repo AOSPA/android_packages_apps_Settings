@@ -317,10 +317,19 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
      */
     private AlertDialog createConfirmationDialog() {
         if (mPairingController.hasPairingContent()) {
-            mBuilder.setTitle(getString(R.string.bluetooth_pairing_confirmation_title));
+            if (mPairingController.isRepairing()) {
+                mBuilder.setTitle(getString(R.string.bluetooth_pairing_again_confirmation_title));
+            } else {
+                mBuilder.setTitle(getString(R.string.bluetooth_pairing_confirmation_title));
+            }
         } else {
-            mBuilder.setTitle(getString(R.string.bluetooth_pairing_request,
-                    mPairingController.getDeviceName()));
+            if (mPairingController.isRepairing()) {
+                mBuilder.setTitle(getString(R.string.bluetooth_pairing_again_request,
+                        mPairingController.getDeviceName()));
+            } else {
+                mBuilder.setTitle(getString(R.string.bluetooth_pairing_request,
+                        mPairingController.getDeviceName()));
+            }
         }
         mBuilder.setView(createView());
         AlertDialog dialog = mBuilder.create();
@@ -384,6 +393,9 @@ public class BluetoothPairingDialogFragment extends InstrumentedDialogFragment i
             }
             pairingViewContent.setVisibility(View.VISIBLE);
             pairingViewContent.setText(mPairingController.getPairingContent());
+        } else if (mPairingController.isRepairing()) {
+            pairingConfirmationHint.setText(getString(R.string.bluetooth_repairing_msg));
+            pairingConfirmationHint.setVisibility(View.VISIBLE);
         }
         final TextView messagePairingSet = (TextView) view.findViewById(R.id.pairing_group_message);
         if (mPairingController.isLateBonding()) {

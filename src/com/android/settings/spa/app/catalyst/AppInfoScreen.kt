@@ -24,6 +24,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settings.applications.InstalledPackageName
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.applications.applicationInfoComparator
 import com.android.settings.applications.getApplicationInfo
@@ -45,6 +46,7 @@ import com.android.settings.applications.specialaccess.pictureinpicture.PictureI
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.KEY_PACKAGE_NAME
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -55,7 +57,6 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.packageName
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.metadata.withAppPackageName
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import kotlin.let
 import kotlinx.coroutines.CoroutineScope
@@ -198,7 +199,9 @@ private constructor(
         const val KEY = "installed_app_detail_settings_screen"
         const val SOURCE = "appinfo"
 
-        @JvmStatic override val parametersSchema = KeyParametersSchema { withAppPackageName() }
+        @JvmStatic override val parametersSchema = KeyParametersSchema {
+            parameter(KEY_PACKAGE_NAME, "The package name of the app", required = true, type = InstalledPackageName)
+         }
 
         @JvmStatic
         override fun keyParameters(context: Context): Flow<ValidatedKeyParameters> {

@@ -65,10 +65,13 @@ public final class BluetoothPairingService extends Service {
         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
         int type = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,
                 BluetoothDevice.ERROR);
+        int pairingContext = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_CONTEXT,
+                BluetoothDevice.ERROR);
         Intent pairingIntent = new Intent();
         pairingIntent.setClass(context, BluetoothPairingDialog.class);
         pairingIntent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
         pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT, type);
+        pairingIntent.putExtra(BluetoothDevice.EXTRA_PAIRING_CONTEXT, pairingContext);
         if (type == BluetoothDevice.PAIRING_VARIANT_PASSKEY_CONFIRMATION ||
                 type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PASSKEY ||
                 type == BluetoothDevice.PAIRING_VARIANT_DISPLAY_PIN) {

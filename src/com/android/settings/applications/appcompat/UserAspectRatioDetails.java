@@ -58,6 +58,7 @@ import com.google.common.collect.HashBiMap;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 /**
  * App specific activity to show aspect ratio overrides
  */
@@ -317,3 +318,4 @@ public class UserAspectRatioDetails extends AppInfoBase implements
         return mUserAspectRatioManager;
     }
 }
+// LINT.ThenChange(UserAspectRatioAppApiScreen.kt)

@@ -17,6 +17,7 @@
 package com.android.settings.accessibility.buttonshortcutsetting.ui
 
 import android.content.Context
+import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
@@ -127,7 +128,8 @@ class FloatingMenuTransparencyPreferenceTest {
     }
 
     @Test
-    fun bind_setsStateDescription() {
+    @DisableFlags(Flags.FLAG_FLOATING_MENU_TRANSPARENCY_SLIDER_ANNOUNCES_DISABLED)
+    fun bind_flagOff_setsStateDescription() {
         // sets transparency progress
         preference.storage(context).setInt(preference.key, 27)
         val numberFormat =

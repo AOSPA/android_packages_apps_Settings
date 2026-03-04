@@ -16,17 +16,9 @@
 package com.android.settings.supervision.webcontentfilters
 
 import android.app.settings.SettingsEnums
-import android.content.Context
 import android.provider.Settings.Secure.BROWSER_CONTENT_FILTERS_ENABLED
-import com.android.settings.CatalystSettingsActivity
 import com.android.settings.R
-import com.android.settings.utils.makeLaunchIntent
-import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
-
-/** Activity to display [SupervisionWebContentFiltersBrowserSupportedAppsScreen]. */
-class SupervisionWebContentFiltersBrowserSupportedAppsActivity :
-    CatalystSettingsActivity(SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY)
 
 /**
  * Websites filters supported apps landing page (Settings > Supervision > Web content filters >
@@ -52,13 +44,6 @@ open class SupervisionWebContentFiltersBrowserSupportedAppsScreen :
 
     override fun getMetricsCategory() =
         SettingsEnums.SUPERVISION_WEB_CONTENT_FILTERS_BROWSER_SUPPORTED_APPS
-
-    override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
-        makeLaunchIntent(
-            context,
-            SupervisionWebContentFiltersBrowserSupportedAppsActivity::class.java,
-            metadata?.key,
-        )
 
     companion object {
         const val KEY = "supervision_web_content_filters_browser_supported_apps"

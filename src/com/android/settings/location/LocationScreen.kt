@@ -33,21 +33,20 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(LocationScreen.KEY)
 open class LocationScreen :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceIconProvider {
     override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
-
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.location_settings_purpose
 
@@ -109,7 +108,7 @@ private class LocationMainSwitch : BooleanValuePreference, MainSwitchPreferenceB
     override val title: Int
         get() = R.string.location_settings_primary_switch_title
 
-    override val sensitivityLevel = SensitivityLevel.HIGH_SENSITIVITY
+    override val sensitivityLevel = SensitivityLevel.DEEP_LINK_ONLY
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW

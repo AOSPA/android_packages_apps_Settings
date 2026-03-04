@@ -44,6 +44,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import com.android.settingslib.spa.framework.util.KEY_DESTINATION
@@ -53,6 +54,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.MockitoAnnotations
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
@@ -643,7 +645,7 @@ class SettingsLaunchpadActivityTest {
         }
 
         override val parametersSchema: KeyParametersSchema
-            get() = KeyParametersSchema { parameter("test_arg_key", "The test argument") }
+            get() = KeyParametersSchema { parameter("test_arg_key", "The test argument", type = AnyString) }
 
         fun hasParameters(): Boolean =
             if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {

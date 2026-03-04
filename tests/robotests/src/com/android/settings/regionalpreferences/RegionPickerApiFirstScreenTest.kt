@@ -1,19 +1,16 @@
 /**
  * Copyright (C) 2026 The Android Open Source Project
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
-
 package com.android.settings.regionalpreferences
 
 import android.app.IActivityManager
@@ -32,6 +29,8 @@ import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.ShadowActivityManager
 import com.android.settings.testutils2.ApiTester
 import com.google.common.truth.Truth.assertThat
+import java.util.Locale
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -43,13 +42,11 @@ import org.mockito.kotlin.whenever
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowTelephonyManager
-import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowActivityManager::class])
 class RegionPickerApiFirstScreenTest {
-    @get:Rule
-    val setFlagsRule = SetFlagsRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val iActivityManager = mock<IActivityManager>()
     private val tester = ApiTester(RegionPickerApiFirstScreen())
@@ -63,7 +60,7 @@ class RegionPickerApiFirstScreenTest {
         setupLocaleInfoList(
             Locale.US,
             "en-US" to "English (United States)",
-            "es-US" to "Español (Estados Unidos)"
+            "es-US" to "Español (Estados Unidos)",
         )
         val shadowTelephonyManager: ShadowTelephonyManager =
             Shadows.shadowOf(context.getSystemService(TelephonyManager::class.java))
@@ -95,7 +92,7 @@ class RegionPickerApiFirstScreenTest {
         setupLocaleInfoList(
             Locale.forLanguageTag("fr-FR"),
             "fr-FR" to "Français (France)",
-            "en-US" to "English (United States)"
+            "en-US" to "English (United States)",
         )
 
         assertThat(tester.get<String>(KEY_PREFERENCE)).isEqualTo("FR")
@@ -106,9 +103,8 @@ class RegionPickerApiFirstScreenTest {
         tester.set(KEY_PREFERENCE, "GB")
 
         assertThat(Locale.getDefault().toLanguageTag()).isEqualTo("en-GB")
-        assertThat(
-            LocaleStore.getLocaleInfo(Locale.getDefault()).fullCountryNameNative
-        ).isEqualTo("United Kingdom")
+        assertThat(LocaleStore.getLocaleInfo(Locale.getDefault()).fullCountryNameNative)
+            .isEqualTo("United Kingdom")
 
         Locale.setDefault(Locale.forLanguageTag("fr-FR"))
         tester.set(KEY_PREFERENCE, "FR")
@@ -124,23 +120,23 @@ class RegionPickerApiFirstScreenTest {
         Locale.setDefault(Locale.forLanguageTag("en-US-u-ms-ussystem"))
         tester.set(KEY_PREFERENCE, "IN")
 
-        assertThat(
-            Locale.getDefault().toLanguageTag()
-        ).isEqualTo("en-IN-u-ms-ussystem")
+        assertThat(Locale.getDefault().toLanguageTag()).isEqualTo("en-IN-u-ms-ussystem")
         assertThat(LocaleStore.getLocaleInfo(Locale.getDefault()).fullCountryNameNative)
             .isEqualTo("India")
     }
 
     @Test
     fun systemLocaleRegion_optionsAreInSupportedList() {
-        Locale.setDefault(Locale.US)
+        runBlocking {
+            Locale.setDefault(Locale.US)
 
-        assertThat(tester.getPreferenceOptions<String>(KEY_PREFERENCE))
-            .containsAtLeast(
-                ("US" to "United States"),
-                ("GB" to "United Kingdom"),
-                ("IN" to "India"),
-            )
+            assertThat(tester.getPreferenceOptions<String>(KEY_PREFERENCE))
+                .containsAtLeast(
+                    ("US" to "United States"),
+                    ("GB" to "United Kingdom"),
+                    ("IN" to "India"),
+                )
+        }
     }
 
     private fun setupLocaleInfoList(defaultLocale: Locale, vararg languages: Pair<String, String>) {
@@ -148,17 +144,18 @@ class RegionPickerApiFirstScreenTest {
         config.setLocales(getLocaleList(*languages))
         whenever(iActivityManager.getConfiguration()).thenReturn(config)
         ShadowActivityManager.setService(iActivityManager)
-        Locale.setDefault(defaultLocale);
+        Locale.setDefault(defaultLocale)
     }
 
     private fun getLocaleList(vararg languages: Pair<String, String>): LocaleList {
-        val localeInfoList = languages.map { (languageTag, languageName) ->
-            mock<LocaleStore.LocaleInfo>().apply {
-                whenever(fullNameNative).thenReturn(languageName)
-                whenever(isTranslated).thenReturn(true)
-                whenever(locale).thenReturn(Locale.forLanguageTag(languageTag))
+        val localeInfoList =
+            languages.map { (languageTag, languageName) ->
+                mock<LocaleStore.LocaleInfo>().apply {
+                    whenever(fullNameNative).thenReturn(languageName)
+                    whenever(isTranslated).thenReturn(true)
+                    whenever(locale).thenReturn(Locale.forLanguageTag(languageTag))
+                }
             }
-        }
 
         val locales = localeInfoList.map { it.locale }.toTypedArray()
         return LocaleList(*locales)

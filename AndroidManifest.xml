@@ -3107,7 +3107,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
         <activity android:name=".supervision.SupervisionRestrictionBypassActivity"
             android:exported="false"
             android:excludeFromRecents="true"
-            android:theme="@style/Theme.Settings.NoActionBar"
+            android:theme="@style/Transparent"
             android:featureFlag="android.app.supervision.flags.supervision_manager_apis">
             <intent-filter>
                 <action android:name="android.settings.BYPASS_SUPERVISION_RESTRICTION" />
@@ -4334,7 +4334,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetails" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
+                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -4348,7 +4348,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
                        android:value="com.android.settings.notification.zen.ZenAccessSettings" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
-                       android:value="@string/menu_key_notifications"/>
+                       android:value="@string/menu_key_apps"/>
         </activity>
 
         <activity
@@ -5159,6 +5159,31 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_system"/>
         </activity-alias>
+
+        <activity android:name=".backup.UserBackupSettingsActivity"
+                  android:label="@string/privacy_settings_title"
+                  android:exported="true"
+                  android:icon="@drawable/ic_settings_backup">
+            <intent-filter android:priority="1">
+                <action android:name="com.android.settings.BACKUP_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE_LAUNCH" />
+            </intent-filter>
+            <!-- Mark the activity as a dynamic setting -->
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <!-- Tell Settings app which category it belongs to -->
+            <meta-data android:name="com.android.settings.category"
+                       android:value="com.android.settings.category.ia.system" />
+            <meta-data android:name="com.android.settings.icon"
+                       android:resource="@drawable/ic_settings_backup" />
+            <meta-data android:name="com.android.settings.order" android:value="-60"/>
+        </activity>
 
         <activity
             android:name="Settings$AutomaticStorageManagerSettingsActivity"
@@ -6311,6 +6336,19 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".appfunctions.DeviceStateAppFunctionService"
+            android:permission="android.permission.BIND_APP_FUNCTION_SERVICE"
+            android:exported="true"
+            android:enabled="@bool/config_device_state_app_functions_enabled"
+            android:featureFlag="com.android.settings.flags.device_state">
+            <property android:name="android.app.appfunctions"
+                android:value="appfunctions.xml"/>
+            <intent-filter>
+                <action android:name="android.app.appfunctions.AppFunctionService"/>
+            </intent-filter>
+        </service>
 
         <!-- This is the longest AndroidManifest.xml ever. -->
 

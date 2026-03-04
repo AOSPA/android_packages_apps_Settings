@@ -29,13 +29,18 @@ import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.ReadWritePermit.Companion.ALLOW
+import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isUiOnlyPreference
+import com.android.settingslib.metadata.preferencesapi.ApiPreference
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
@@ -125,14 +130,14 @@ class CatalystStateProviderExecutor(
                 )
             Log.v(TAG, "Built per screen device states for $screenKey")
             states
-        }
+        }.filterNotNull()
     }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenMetaData: PreferenceScreenMetadata,
         preferencesHierarchy: List<PreferenceHierarchyNode>,
         additionalDescription: String?,
-    ): PerScreenDeviceStates {
+    ): PerScreenDeviceStates? {
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
@@ -155,8 +160,8 @@ class CatalystStateProviderExecutor(
                         // other item specific id necessary to distinguish the items.
                         key = "${screenMetaData.key}/${metadata.bindingKey}",
                         purpose = metadata.getPreferencePurpose(context).toString(),
-                        name =
-                            LocalizedString(
+                        name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*>) null
+                            else LocalizedString(
                                 english = metadata.getPreferenceTitle(englishContext).toString(),
                                 localized = metadata.getPreferenceTitle(context).toString(),
                             ),
@@ -167,23 +172,28 @@ class CatalystStateProviderExecutor(
             }
         }
 
-        // This is hack because in general parameters are not human readable. We remove known
-        // internal keys then just dump the rest in the description.
         val basicDescription = listOfNotNull(
             screenMetaData.getPreferenceScreenTitle(context)?.toString(),
             additionalDescription,
-            screenMetaData.getPreferencePurpose(context).toString()
+            screenMetaData.getPreferencePurpose(context).toString(),
+            screenMetaData.accessPreconditionsAsString(context),
         ).filter { it.isNotBlank() }
             .joinToString(". ")
+            .replace("..", ".")
 
-        val arguments = screenMetaData.arguments?.clone() as? BaseBundle
-        arguments?.remove("source")
-        val descriptionSuffix =
+        val keyParameters = screenMetaData.keyParameters
+
+        val descriptionSuffix = if (keyParameters != null && keyParameters != ValidatedKeyParameters.EMPTY) {
+             "${keyParameters.toParametersString()}"
+        } else {
+            val arguments = screenMetaData.arguments?.clone() as? BaseBundle
+            arguments?.remove("source")
             if (arguments == null) {
                 ""
             } else {
                 ". " + arguments.keySet().joinToString(", ") { "$it=${arguments.get(it)}" }
             }
+        }
         val descriptionPrefix = if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else ""
         val description = descriptionPrefix + basicDescription + descriptionSuffix
 
@@ -194,6 +204,7 @@ class CatalystStateProviderExecutor(
                 deviceStateItems = deviceStateItemList,
                 intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
             )
+
         return states
     }
 

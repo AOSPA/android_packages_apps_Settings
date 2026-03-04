@@ -311,4 +311,21 @@ class DisplayPreferenceViewModelTest : ExternalDisplayTestBase() {
         val display = viewModel.uiState.value!!.enabledDisplays[displayId]!!
         assertThat(display.hdrPreference).isEqualTo(DisplayManager.HDR_PREFERENCE_HDR_ALLOWED)
     }
+
+    @Test
+    fun updateUserHdrPreference_disableHdr_callsInjectorAndUpdatesDisplays() {
+        setupViewModel()
+        val displayId = EXTERNAL_DISPLAY_ID
+
+        // Action: update user HDR preference to disable
+        viewModel.updateUserHdrPreference(displayId, /* enable= */ false)
+
+        // Verify injector is called with SDR_ONLY preference
+        verify(mMockedInjector)
+            .setUserHdrPreference(displayId, DisplayManager.HDR_PREFERENCE_SDR_ONLY)
+
+        // Verify UI state is updated with the new preference
+        val display = viewModel.uiState.value!!.enabledDisplays[displayId]!!
+        assertThat(display.hdrPreference).isEqualTo(DisplayManager.HDR_PREFERENCE_SDR_ONLY)
+    }
 }

@@ -29,6 +29,7 @@ import android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE
 import android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_ONGOING
 import android.service.notification.NotificationListenerService.FLAG_FILTER_TYPE_SILENT
 import com.android.settings.R
+import com.android.settings.applications.InstalledPackageName
 import com.android.settings.applications.getApplicationInfo
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
@@ -47,6 +48,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.preference.SwitchPreferenceBinding
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import kotlinx.coroutines.CoroutineScope
@@ -72,13 +74,13 @@ private constructor(
 
     private val packageName: String =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-            keyParameters!!.getRequired(KEY_APP_PACKAGE_NAME)
+            keyParameters!!.getRequired(KEY_SERVICE)!!.split("/", limit = 2)[0]
         } else {
             arguments!!.getString(KEY_APP_PACKAGE_NAME)!!
         }
     private val serviceName: String =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-            keyParameters!!.getRequired(KEY_SERVICE_NAME)
+            keyParameters!!.getRequired(KEY_SERVICE)!!.split("/", limit = 2)[1]
         } else {
             arguments!!.getString(KEY_SERVICE_NAME)!!
         }
@@ -159,11 +161,11 @@ private constructor(
         const val KEY_EXTRA_PACKAGE_NAME = "package_name"
         const val KEY_APP_PACKAGE_NAME = "app"
         const val KEY_SERVICE_NAME = "serviceName"
+        const val KEY_SERVICE = "service"
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true)
-            parameter(KEY_SERVICE_NAME, "The name of the service", required = true)
+            parameter(KEY_SERVICE, "The componentname of the service", required = true, type = NotificationListenerService)
         }
 
         @JvmStatic
@@ -172,7 +174,10 @@ private constructor(
             // bundle: replace the parameters(context) call to the actual implementation,
             // or make this function the primary implementation and the legacy parameters() should
             // call this one.
-            return parameters(context).map { bundle -> parametersSchema.prepare(bundle) }
+            return parameters(context).map { bundle ->
+                val service = bundle.getString(KEY_APP_PACKAGE_NAME)!! + "/" + bundle.getString(KEY_SERVICE_NAME)!!
+                parametersSchema.prepare(Bundle(1).apply { putString(KEY_SERVICE, service) })
+            }
         }
 
         @Deprecated(

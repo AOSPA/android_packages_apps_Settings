@@ -43,9 +43,6 @@ public class TouchpadAccelerationPreferenceController extends TogglePreferenceCo
 
     @Override
     public int getAvailabilityStatus() {
-        if (!InputSettings.isPointerAccelerationFeatureFlagEnabled()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         return InputPeripheralsSettingsUtils.isTouchpad() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
     }
 

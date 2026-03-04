@@ -39,8 +39,12 @@ import static org.mockito.Mockito.when;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothLeAudioCodecConfigMetadata;
+import android.bluetooth.BluetoothLeAudioContentMetadata;
+import android.bluetooth.BluetoothLeBroadcastChannel;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
+import android.bluetooth.BluetoothLeBroadcastSubgroup;
 import android.bluetooth.BluetoothStatusCodes;
 import android.content.ComponentName;
 import android.content.Context;
@@ -88,7 +92,7 @@ import java.util.Set;
 @RunWith(RobolectricTestRunner.class)
 @Config(
         shadows = {
-                ShadowAccessibilityManager.class,
+            ShadowAccessibilityManager.class,
             ShadowThreadUtils.class,
             ShadowBluetoothAdapter.class,
         })
@@ -109,19 +113,18 @@ public class AudioStreamsHelperTest {
     @Mock private CachedBluetoothDevice mCachedDevice;
     @Mock private BluetoothDevice mDevice;
     @Mock private BluetoothDevice mSourceDevice;
-    @Mock
-    private AccessibilityServiceInfo mTalkbackServiceInfo;
+    @Mock private AccessibilityServiceInfo mTalkbackServiceInfo;
     private ShadowAccessibilityManager mShadowAccessibilityManager;
     private AudioStreamsHelper mHelper;
 
     @Before
     public void setUp() {
         mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
-        mShadowAccessibilityManager = Shadow.extract(
-                mContext.getSystemService(AccessibilityManager.class));
+        mShadowAccessibilityManager =
+                Shadow.extract(mContext.getSystemService(AccessibilityManager.class));
         mShadowAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
-        ShadowBluetoothAdapter shadowBluetoothAdapter = Shadow.extract(
-                BluetoothAdapter.getDefaultAdapter());
+        ShadowBluetoothAdapter shadowBluetoothAdapter =
+                Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         shadowBluetoothAdapter.setEnabled(true);
         shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
@@ -238,8 +241,8 @@ public class AudioStreamsHelperTest {
         when(mLocalBluetoothProfileManager.getLeAudioBroadcastAssistantProfile()).thenReturn(null);
         mHelper = new AudioStreamsHelper(mLocalBluetoothManager);
 
-        assertThat(mHelper.getConnectedBroadcastIdAndState(/* hysteresisModeFixAvailable= */
-                false)).isEmpty();
+        assertThat(mHelper.getConnectedBroadcastIdAndState(/* hysteresisModeFixAvailable= */ false))
+                .isEmpty();
     }
 
     @Test
@@ -376,9 +379,8 @@ public class AudioStreamsHelperTest {
         Resources resources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(resources);
         when(resources.getStringArray(R.array.config_preinstalled_screen_reader_services))
-                .thenReturn(new String[]{"pkg/serviceClassName"});
-        mShadowAccessibilityManager.setEnabledAccessibilityServiceList(
-                new ArrayList<>());
+                .thenReturn(new String[] {"pkg/serviceClassName"});
+        mShadowAccessibilityManager.setEnabledAccessibilityServiceList(new ArrayList<>());
         Set<ComponentName> result = AudioStreamsHelper.getEnabledScreenReaderServices(mContext);
 
         assertThat(result).isEmpty();
@@ -389,7 +391,7 @@ public class AudioStreamsHelperTest {
         Resources resources = spy(mContext.getResources());
         when(mContext.getResources()).thenReturn(resources);
         when(resources.getStringArray(R.array.config_preinstalled_screen_reader_services))
-                .thenReturn(new String[]{"pkg/serviceClassName"});
+                .thenReturn(new String[] {"pkg/serviceClassName"});
         ComponentName expected = new ComponentName("pkg", "serviceClassName");
         when(mTalkbackServiceInfo.getComponentName()).thenReturn(expected);
         mShadowAccessibilityManager.setEnabledAccessibilityServiceList(
@@ -409,6 +411,138 @@ public class AudioStreamsHelperTest {
 
         assertThat(AccessibilityUtils.getEnabledServicesFromSettings(mContext,
                 UserHandle.myUserId())).isEmpty();
+    }
+
+    @Test
+    public void deselectAllChannels_nullMetadata_returnsNull() {
+        assertThat(AudioStreamsHelper.deselectAllChannels(null)).isNull();
+    }
+
+    @Test
+    public void deselectAllChannels_channelsNotSelected_returnsOriginal() {
+        BluetoothLeBroadcastChannel channel =
+                new BluetoothLeBroadcastChannel.Builder()
+                        .setChannelIndex(42)
+                        .setSelected(false)
+                        .setCodecMetadata(new BluetoothLeAudioCodecConfigMetadata.Builder().build())
+                        .build();
+        BluetoothLeBroadcastSubgroup subgroup = createBroadcastSubgroup(channel);
+        BluetoothLeBroadcastMetadata metadata =
+                new BluetoothLeBroadcastMetadata.Builder()
+                        .setSourceDevice(mSourceDevice, BluetoothDevice.ADDRESS_TYPE_RANDOM)
+                        .addSubgroup(subgroup)
+                        .build();
+
+        assertThat(AudioStreamsHelper.deselectAllChannels(metadata)).isSameInstanceAs(metadata);
+    }
+
+    @Test
+    public void deselectAllChannels_someChannelsSelected_returnsNewWithDeselected() {
+        BluetoothLeBroadcastChannel channel1 =
+                new BluetoothLeBroadcastChannel.Builder()
+                        .setChannelIndex(1)
+                        .setSelected(true)
+                        .setCodecMetadata(new BluetoothLeAudioCodecConfigMetadata.Builder().build())
+                        .build();
+        BluetoothLeBroadcastChannel channel2 =
+                new BluetoothLeBroadcastChannel.Builder()
+                        .setChannelIndex(2)
+                        .setSelected(false)
+                        .setCodecMetadata(new BluetoothLeAudioCodecConfigMetadata.Builder().build())
+                        .build();
+        BluetoothLeBroadcastSubgroup subgroup = createBroadcastSubgroup(channel1, channel2);
+        BluetoothLeBroadcastMetadata metadata =
+                new BluetoothLeBroadcastMetadata.Builder()
+                        .setSourceDevice(mSourceDevice, BluetoothDevice.ADDRESS_TYPE_RANDOM)
+                        .addSubgroup(subgroup)
+                        .build();
+
+        BluetoothLeBroadcastMetadata result = AudioStreamsHelper.deselectAllChannels(metadata);
+
+        assertThat(result).isNotNull();
+        assertThat(result).isNotSameInstanceAs(metadata);
+        assertThat(result.getSubgroups()).hasSize(1);
+        BluetoothLeBroadcastSubgroup resultSubgroup = result.getSubgroups().getFirst();
+        assertThat(resultSubgroup.getChannels()).hasSize(2);
+        assertThat(resultSubgroup.getChannels().get(0).isSelected()).isFalse();
+        assertThat(resultSubgroup.getChannels().get(0).getChannelIndex()).isEqualTo(1);
+        assertThat(resultSubgroup.getChannels().get(1).isSelected()).isFalse();
+        assertThat(resultSubgroup.getChannels().get(1).getChannelIndex()).isEqualTo(2);
+    }
+
+    @Test
+    public void deselectAllChannels_multipleSubgroups_returnsNewWithDeselected() {
+        BluetoothLeBroadcastChannel channel1 =
+                new BluetoothLeBroadcastChannel.Builder()
+                        .setChannelIndex(1)
+                        .setSelected(true)
+                        .setCodecMetadata(new BluetoothLeAudioCodecConfigMetadata.Builder().build())
+                        .build();
+        BluetoothLeBroadcastSubgroup subgroup1 = createBroadcastSubgroup(channel1);
+        BluetoothLeBroadcastChannel channel2 =
+                new BluetoothLeBroadcastChannel.Builder()
+                        .setChannelIndex(1)
+                        .setSelected(false)
+                        .setCodecMetadata(new BluetoothLeAudioCodecConfigMetadata.Builder().build())
+                        .build();
+        BluetoothLeBroadcastSubgroup subgroup2 = createBroadcastSubgroup(channel2);
+        BluetoothLeBroadcastChannel channel3 =
+                new BluetoothLeBroadcastChannel.Builder()
+                        .setChannelIndex(1)
+                        .setSelected(true)
+                        .setCodecMetadata(new BluetoothLeAudioCodecConfigMetadata.Builder().build())
+                        .build();
+        BluetoothLeBroadcastChannel channel4 =
+                new BluetoothLeBroadcastChannel.Builder()
+                        .setChannelIndex(2)
+                        .setSelected(true)
+                        .setCodecMetadata(new BluetoothLeAudioCodecConfigMetadata.Builder().build())
+                        .build();
+        BluetoothLeBroadcastSubgroup subgroup3 = createBroadcastSubgroup(channel3, channel4);
+
+        BluetoothLeBroadcastMetadata metadata =
+                new BluetoothLeBroadcastMetadata.Builder()
+                        .setSourceDevice(mSourceDevice, BluetoothDevice.ADDRESS_TYPE_RANDOM)
+                        .addSubgroup(subgroup1)
+                        .addSubgroup(subgroup2)
+                        .addSubgroup(subgroup3)
+                        .build();
+
+        BluetoothLeBroadcastMetadata result = AudioStreamsHelper.deselectAllChannels(metadata);
+
+        assertThat(result).isNotNull();
+        assertThat(result).isNotSameInstanceAs(metadata);
+        assertThat(result.getSubgroups()).hasSize(3);
+
+        BluetoothLeBroadcastSubgroup resultSubgroup1 = result.getSubgroups().getFirst();
+        assertThat(resultSubgroup1.getChannels()).hasSize(1);
+        assertThat(resultSubgroup1.getChannels().getFirst().isSelected()).isFalse();
+
+        BluetoothLeBroadcastSubgroup resultSubgroup2 = result.getSubgroups().get(1);
+        assertThat(resultSubgroup2.getChannels()).hasSize(1);
+        assertThat(resultSubgroup2.getChannels().getFirst().isSelected()).isFalse();
+
+        BluetoothLeBroadcastSubgroup resultSubgroup3 = result.getSubgroups().get(2);
+        assertThat(resultSubgroup3.getChannels()).hasSize(2);
+        assertThat(resultSubgroup3.getChannels().get(0).isSelected()).isFalse();
+        assertThat(resultSubgroup3.getChannels().get(1).isSelected()).isFalse();
+    }
+
+    private static BluetoothLeBroadcastSubgroup createBroadcastSubgroup(
+            BluetoothLeBroadcastChannel... channel) {
+        BluetoothLeAudioCodecConfigMetadata codecMetadata =
+                new BluetoothLeAudioCodecConfigMetadata.Builder().build();
+        BluetoothLeAudioContentMetadata contentMetadata =
+                new BluetoothLeAudioContentMetadata.Builder().build();
+        var subgroup =
+                new BluetoothLeBroadcastSubgroup.Builder()
+                        .setCodecId(42)
+                        .setCodecSpecificConfig(codecMetadata)
+                        .setContentMetadata(contentMetadata);
+        for (var c : channel) {
+            subgroup.addChannel(c);
+        }
+        return subgroup.build();
     }
 
     private void setUpFragment(

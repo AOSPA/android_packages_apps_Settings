@@ -147,7 +147,7 @@ class EnabledNetworkModePreference(
         ReadWritePermit.DISALLOW
 
     override val sensitivityLevel
-        get() = SensitivityLevel.LOW_SENSITIVITY
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     @Suppress("UNCHECKED_CAST")
     private class Store(private val data: MobileNetworkData) :

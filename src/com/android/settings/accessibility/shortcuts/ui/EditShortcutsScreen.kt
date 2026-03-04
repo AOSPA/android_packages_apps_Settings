@@ -46,6 +46,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -191,6 +192,7 @@ private constructor(
                 EditShortcutsPreferenceFragment.ARG_KEY_SHORTCUT_TARGETS,
                 "A string array of targets",
                 required = true,
+                type = AnyString, // TODO(scottjonathan):Is there a better type to use here
             )
         }
 

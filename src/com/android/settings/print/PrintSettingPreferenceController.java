@@ -25,6 +25,7 @@ import android.print.PrintJobInfo;
 import android.print.PrintManager;
 import android.printservice.PrintServiceInfo;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
 
@@ -35,6 +36,7 @@ import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnStart;
 import com.android.settingslib.core.lifecycle.events.OnStop;
 import com.android.settingslib.utils.StringUtil;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.util.List;
 
@@ -50,6 +52,8 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
     private final PrintManager mPrintManager;
 
     private Preference mPreference;
+    private @Nullable List<PrintJob> mPrintJobs;
+    private @Nullable List<PrintServiceInfo> mPrintServices;
 
     public PrintSettingPreferenceController(Context context) {
         super(context, KEY_PRINTING_SETTINGS);
@@ -75,6 +79,7 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
     public void onStart() {
         if (mPrintManager != null) {
             mPrintManager.addPrintJobStateChangeListener(this);
+            updatePrintJobs();
         }
     }
 
@@ -83,11 +88,29 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
         if (mPrintManager != null) {
             mPrintManager.removePrintJobStateChangeListener(this);
         }
+        mPrintJobs = null;
+        mPrintServices = null;
     }
 
     @Override
     public void onPrintJobStateChanged(PrintJobId printJobId) {
+        updatePrintJobs();
+    }
+
+    private void updatePrintJobs() {
         updateState(mPreference);
+        ThreadUtils.postOnBackgroundThread(
+                () -> {
+                    final List<PrintJob> printJobs = mPrintManager.getPrintJobs();
+                    final List<PrintServiceInfo> printServices =
+                            mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES);
+                    ThreadUtils.postOnMainThread(
+                            () -> {
+                                mPrintJobs = printJobs;
+                                mPrintServices = printServices;
+                                updateState(mPreference);
+                            });
+                });
     }
 
     @Override
@@ -99,14 +122,14 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
 
     @Override
     public CharSequence getSummary() {
-        final List<PrintJob> printJobs = mPrintManager.getPrintJobs();
+        if (mPrintJobs == null) {
+            return "";
+        }
 
         int numActivePrintJobs = 0;
-        if (printJobs != null) {
-            for (PrintJob job : printJobs) {
-                if (shouldShowToUser(job.getInfo())) {
-                    numActivePrintJobs++;
-                }
+        for (PrintJob job : mPrintJobs) {
+            if (shouldShowToUser(job.getInfo())) {
+                numActivePrintJobs++;
             }
         }
 
@@ -114,12 +137,10 @@ public class PrintSettingPreferenceController extends BasePreferenceController i
             return StringUtil.getIcuPluralsString(mContext, numActivePrintJobs,
                     R.string.print_jobs_summary);
         } else {
-            final List<PrintServiceInfo> services =
-                    mPrintManager.getPrintServices(PrintManager.ENABLED_SERVICES);
-            if (services == null || services.isEmpty()) {
+            if (mPrintServices == null || mPrintServices.isEmpty()) {
                 return mContext.getText(R.string.print_settings_summary_no_service);
             } else {
-                return StringUtil.getIcuPluralsString(mContext, services.size(),
+                return StringUtil.getIcuPluralsString(mContext, mPrintServices.size(),
                         R.string.print_settings_summary);
             }
         }

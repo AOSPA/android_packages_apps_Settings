@@ -150,7 +150,7 @@
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"다른 기기"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"저장된 기기"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"계정과 연결됨"</string>
-    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"이전에 계정에 연결하여 사용한 기기"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"이전에 계정에 연결해 사용한 기기"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"페어링을 위해 블루투스가 켜집니다."</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"연결 환경설정"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"이전에 연결됨"</string>
@@ -3952,7 +3952,7 @@
     <string name="notification_summarization_excluded_description" msgid="5819160700526641394">"이 앱의 알림은 요약되지 않습니다."</string>
     <string name="notification_summarization_manage_excluded_apps" msgid="1691177835156220384">"앱 관리"</string>
     <string name="notification_summarization_manage_excluded_apps_title" msgid="8021261855337614327">"알림 요약을 위한 앱 관리"</string>
-    <string name="notification_excluded_apps" msgid="317898848790046528">"이 앱을 포함하지 않음"</string>
+    <string name="notification_excluded_apps" msgid="317898848790046528">"다음 앱 제외"</string>
     <string name="notification_app_level_summarize_title" msgid="488390574186154905">"알림 요약"</string>
     <string name="notification_app_level_summarize_subtext" msgid="2064371198044287108">"긴 메시지의 요약을 빠르게 확인할 수 있습니다."</string>
     <string name="notification_summarization_no_apps_desc" msgid="6058658379217986963">"현재 모든 관련 앱에서 알림 요약을 사용 중입니다."</string>
@@ -4113,10 +4113,10 @@
     <string name="notification_app_level_bundle_title" msgid="2154075763770894707">"알림 정리 도구"</string>
     <string name="notification_app_level_bundle_subtext" msgid="8652218688050450291">"우선순위가 낮은 알림을 번들로 묶고 무음 처리"</string>
     <string name="notification_bundle_manage_excluded_apps_title" msgid="6825808714530730009">"알림 정리 도구의 앱 관리"</string>
-    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"번들 확장"</string>
+    <string name="notification_bundle_expansion_category_title" msgid="3539828718885113409">"번들 펼치기"</string>
     <string name="notification_bundle_expand_auto_title" msgid="3804244187360463325">"자동"</string>
     <string name="notification_bundle_expand_always_title" msgid="8281397405786291111">"항상 펼치기"</string>
-    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"확장 안 함"</string>
+    <string name="notification_bundle_expand_never_title" msgid="7244439435307954523">"펼치기 안 함"</string>
     <string name="notification_adjustment_work_switch_title" msgid="5858034709870660002">"직장 프로필 앱에 적용"</string>
     <string name="vr_listeners_title" msgid="4960357292472540964">"VR 도우미 서비스"</string>
     <string name="no_vr_listeners" msgid="8442646085375949755">"설치된 앱 중에서 VR 도우미 서비스로 실행되도록 요청한 앱이 없습니다."</string>
@@ -5320,12 +5320,15 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"외부 링크를 보려면 모바일 또는 Wi‑Fi 네트워크가 필요합니다."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"일부 지역에서는 응급 서비스에 문자 메시지를 전송할 수 없습니다."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"계정 변경사항이 설정에 표시되는 데 다소 시간이 걸릴 수 있습니다. 자세한 정보는 <xliff:g id="CARRIER_NAME">%1$s</xliff:g>에 문의하세요."</string>
+    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
+    <skip />
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"위성 연결에 관해 자세히 알아보기"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> 기능을 사용 설정할 수 없음"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> 기능을 사용 설정하려면 먼저 위성 연결을 해제하세요."</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"위성"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"위성 연결"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"위성 연결"</string>
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"위성 연결 사용"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"내 계정으로 지원되는 앱을 사용할 수 있습니다"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"내 계정으로 모든 앱에서 데이터를 사용할 수 있습니다"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"휴대전화에 설치된 지원되는 앱"</string>
@@ -5333,6 +5336,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"휴대전화에 설치된 지원되는 앱"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM을 추가할 수 없음"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"SIM을 추가하기 전에 위성 연결을 종료하세요."</string>
+    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
+    <skip />
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"블루투스가 사용 중지됨"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"블루투스로 연결되어 있으면 비행기 모드가 휴대전화, 워치 등 지원되는 기기 간에 동기화됩니다."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"액세스 포인트 네임(APN)"</string>
@@ -6086,7 +6091,8 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"앱 보안"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"기기 잠금 해제"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"계정 보안"</string>
-    <string name="device_finders_subpage_title" msgid="2390688647994924006">"기기 찾기"</string>
+    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
+    <skip />
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"시스템 및 업데이트"</string>
     <string name="location_settings" msgid="6833222354060094170">"위치 정보 액세스"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"위치에 액세스할 수 있는 앱과 서비스 보기"</string>

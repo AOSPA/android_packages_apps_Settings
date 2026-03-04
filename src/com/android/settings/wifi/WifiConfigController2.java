@@ -49,6 +49,7 @@ import android.view.View;
 import android.view.View.AccessibilityDelegate;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -63,6 +64,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 
 import com.android.net.module.util.NetUtils;
 import com.android.net.module.util.ProxyUtils;
@@ -85,6 +87,7 @@ import com.android.wifitrackerlib.WifiEntry;
 import com.android.wifitrackerlib.WifiEntry.ConnectedInfo;
 
 import com.google.android.material.materialswitch.MaterialSwitch;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -94,6 +97,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -318,6 +322,8 @@ public class WifiConfigController2 implements TextWatcher,
         mSsidInputGroup = new TextInputGroup(mView, R.id.ssid_layout, R.id.ssid,
                 R.string.wifi_ssid_hint);
         mPasswordInput = new WifiPasswordInput(mView, mWifiEntrySecurity);
+        mPasswordInput.getLayout().setTextInputAccessibilityDelegate(
+                new PasswordTextInputLayoutAccessibilityDelegate(mPasswordInput.getLayout()));
         mValidator.addTextInput(mSsidInputGroup);
         mValidator.addTextInput(mPasswordInput);
 
@@ -374,12 +380,16 @@ public class WifiConfigController2 implements TextWatcher,
             mSharedSwitch.setChecked(sharedDefault);
             boolean canModifyShareSettings =
                     WifiUtils.isSharedFieldEditable(mWifiEntry, mContext);
-            mSharedSwitch.setEnabled(canModifyShareSettings);
+            updateNetworkFieldState(R.id.sharing_toggle_fields, mSharedSwitch,
+                    canModifyShareSettings);
             mEditConfigurationSwitch.setChecked(editConfigDefault);
-            mEditConfigurationSwitch.setEnabled(sharedDefault
-                    && canModifyShareSettings);
+            updateNetworkFieldState(R.id.edit_wifi_network_configuration_fields,
+                    mEditConfigurationSwitch, sharedDefault && canModifyShareSettings);
 
             mSharedSwitch.setOnCheckedChangeListener(this);
+
+            setAccessibilityDelegateForNetworkFields();
+
             if (WifiUtils.isAtLoginScreen(mContext)
                     || mMode == WifiConfigUiBase2.MODE_MODIFY) {
                 setSharedNetworkFieldsInvisible();
@@ -1270,6 +1280,113 @@ public class WifiConfigController2 implements TextWatcher,
         mEapUserCertSpinner.setAccessibilityDelegate(selectedEventBlocker);
     }
 
+    @VisibleForTesting
+    static class PasswordTextInputLayoutAccessibilityDelegate
+            extends TextInputLayout.AccessibilityDelegate {
+        PasswordTextInputLayoutAccessibilityDelegate(TextInputLayout layout) {
+            super(layout);
+        }
+
+        @Override
+        public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfoCompat info) {
+            super.onInitializeAccessibilityNodeInfo(host, info);
+
+            final String passwordText = host.getContext().getString(R.string.wifi_password);
+            final CharSequence currentText = info.getText();
+
+            if (currentText != null && currentText.toString().toLowerCase(Locale.getDefault())
+                    .startsWith(passwordText.toLowerCase(Locale.getDefault()))) {
+                // If the text starts with "password", remove it.
+                // This prevents TalkBack from saying "Password [Role] Password [Hint]".
+                String newText = currentText.toString().substring(passwordText.length()).trim();
+                info.setText(TextUtils.isEmpty(newText) ? null : newText);
+            }
+        }
+    }
+
+    @VisibleForTesting
+    class SwitchRowAccessibilityDelegate extends View.AccessibilityDelegate {
+        private final MaterialSwitch mSwitch;
+        private final String mTitle;
+        private final String mSummary;
+
+        SwitchRowAccessibilityDelegate(MaterialSwitch switchView, String title, String summary) {
+            mSwitch = switchView;
+            mTitle = title;
+            mSummary = summary;
+        }
+
+        @Override
+        public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+            super.onInitializeAccessibilityNodeInfo(host, info);
+            // Force the "Switch" role.
+            info.setClassName(android.widget.Switch.class.getName());
+
+            if (mSwitch != null) {
+                info.setContentDescription(TextUtils.concat(mTitle, ". ", mSummary));
+                String stateText = mSwitch.isChecked()
+                        ? mContext.getString(R.string.switch_on_text)
+                        : mContext.getString(R.string.switch_off_text);
+                info.setStateDescription(stateText);
+            }
+        }
+    }
+
+    @VisibleForTesting
+    void updateNetworkFieldState(int containerId, MaterialSwitch switchView, boolean enabled) {
+        // Handle the actual switch widget.
+        if (switchView != null) {
+            switchView.setEnabled(enabled);
+        }
+
+        // Handle the container view and hide it from TalkBack if disabled.
+        View container = mView.findViewById(containerId);
+        if (container != null) {
+            container.setEnabled(enabled);
+            // Ensure the entire row is hidden from TalkBack if it's disabled.
+            container.setImportantForAccessibility(enabled
+                    ? View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
+                    : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
+        }
+    }
+
+    @VisibleForTesting
+    void setupNetworkField(int viewId, MaterialSwitch switchView, String title, String summary) {
+        View view = mView.findViewById(viewId);
+
+        if (view != null && switchView != null) {
+            view.setAccessibilityDelegate(
+                    new SwitchRowAccessibilityDelegate(switchView, title, summary));
+
+            view.setOnClickListener(v -> {
+                switchView.toggle();
+                boolean newState = switchView.isChecked();
+
+                String stateText = newState
+                        ? mContext.getString(R.string.switch_on_text)
+                        : mContext.getString(R.string.switch_off_text);
+                v.setStateDescription(stateText);
+            });
+        }
+    }
+
+    @VisibleForTesting
+    void setAccessibilityDelegateForNetworkFields() {
+        setupNetworkField(
+                R.id.sharing_toggle_fields,
+                mSharedSwitch,
+                mContext.getString(R.string.wifi_share_preference_title),
+                mContext.getString(R.string.wifi_share_preference_summary)
+        );
+
+        setupNetworkField(
+                R.id.edit_wifi_network_configuration_fields,
+                mEditConfigurationSwitch,
+                mContext.getString(R.string.wifi_allow_edit_configuration_title),
+                mContext.getString(R.string.wifi_allow_edit_configuration_summary)
+        );
+    }
+
     /**
      * EAP-PWD valid fields include
      *   identity
@@ -1778,7 +1895,8 @@ public class WifiConfigController2 implements TextWatcher,
                 ((EditText) mPasswordView).setSelection(pos);
             }
         } else if (view.getId() == R.id.share_wifi_network) {
-            mEditConfigurationSwitch.setEnabled(isChecked);
+            updateNetworkFieldState(R.id.edit_wifi_network_configuration_fields,
+                    mEditConfigurationSwitch, isChecked);
             if (!isChecked) {
                 mEditConfigurationSwitch.setChecked(false);
             }
