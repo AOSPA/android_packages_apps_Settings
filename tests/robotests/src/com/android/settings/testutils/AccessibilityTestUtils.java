@@ -214,10 +214,21 @@ public class AccessibilityTestUtils {
     }
 
     /**
+     * Set desktop support in the shadow package manager.
+     *
+     * @param context context for the package manager.
+     * @param supported Whether desktop support should be enabled.
+     */
+    public static void setDesktopSupported(Context context, boolean supported) {
+        ShadowPackageManager shadowPackageManager = Shadows.shadowOf(context.getPackageManager());
+        shadowPackageManager.setSystemFeature(PackageManager.FEATURE_PC, supported);
+    }
+
+    /**
      * Set touch screen support in the shadow package manager.
      *
      * @param context context for the package manager.
-     * @param supported true if touch screen support should be enabled, false otherwise.
+     * @param supported Whether touch screen support should be enabled.
      */
     public static void setTouchScreenSupported(Context context, boolean supported) {
         ShadowPackageManager shadowPackageManager = Shadows.shadowOf(context.getPackageManager());
