@@ -16,13 +16,8 @@
 
 package com.android.settings.gestures;
 
-import static android.app.contextualsearch.ContextualSearchManager.FEATURE_CONTEXTUAL_SEARCH;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_2BUTTON_OVERLAY;
-import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON_OVERLAY;
-
 import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.view.accessibility.Flags;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,27 +61,6 @@ public class ButtonNavigationSettingsFragment extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(
-                    (Flags.navbarFlipOrderOption()
-                            && com.android.settings.flags.Flags.catalystSettingsSearch())
-                            ? 0 : R.xml.button_navigation_settings) {
-
-                @Override
-                protected boolean isPageSearchEnabled(Context context) {
-                    if (Flags.navbarFlipOrderOption()) {
-                        return true;
-                    }
-                    /*  Hide button navigation settings from search when contextual search is
-                     *   enable to match button navigation preferences logic.
-                     */
-                    if (context.getPackageManager().hasSystemFeature(FEATURE_CONTEXTUAL_SEARCH)) {
-                        return false;
-                    }
-                    return SystemNavigationPreferenceController.isOverlayPackageAvailable(context,
-                            NAV_BAR_MODE_2BUTTON_OVERLAY)
-                            || SystemNavigationPreferenceController.isOverlayPackageAvailable(
-                            context,
-                            NAV_BAR_MODE_3BUTTON_OVERLAY);
-                }
-            };
+            new BaseSearchIndexProvider(com.android.settings.flags.Flags.catalystSettingsSearch()
+                    ? 0 : R.xml.button_navigation_settings);
 }
