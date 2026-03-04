@@ -170,7 +170,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
      * displays that are relying on external display settings page to modify their settings (e.g.
      * rotation)
      */
-    private fun isConnectedDisplay(display: Display): Boolean =
+    fun isConnectedDisplay(display: Display): Boolean =
         display.type == Display.TYPE_EXTERNAL ||
             display.type == Display.TYPE_OVERLAY ||
             isVirtualDisplayAllowed(display)

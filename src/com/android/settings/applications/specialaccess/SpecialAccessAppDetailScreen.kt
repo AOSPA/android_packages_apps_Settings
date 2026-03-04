@@ -30,6 +30,7 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.applications.AppInfoHeaderPreference
 import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAULT_SHOW_SYSTEM
+import com.android.settings.applications.InstalledPackageName
 import com.android.settings.applications.PackageInfoProvider
 import com.android.settings.applications.applicationInfoComparator
 import com.android.settings.applications.appops.AppOpsModeDataStore
@@ -46,6 +47,7 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.KEY_PACKAGE_NAME
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
@@ -57,7 +59,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.packageName
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.metadata.withAppPackageName
+import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.utils.applications.PackageObservable
@@ -234,8 +236,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            withAppPackageName()
-            parameter(KEY_INTENT_SOURCE, "Indicates where this intent is coming from")
+            parameter(KEY_PACKAGE_NAME,  "The package name of the app", required = true, type = InstalledPackageName)
         }
 
         /**
@@ -313,7 +314,10 @@ private constructor(
      */
     private fun isFromAppInfo(): Boolean =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-            keyParameters!![KEY_INTENT_SOURCE] == AppInfoScreen.SOURCE
+            // Since we removed this from the parameterSchema it will always
+            // return false, but screens never launch this via the api anyway.
+            //keyParameters!![KEY_INTENT_SOURCE] == AppInfoScreen.SOURCE
+            false
         } else {
             arguments!!.source == AppInfoScreen.SOURCE
         }

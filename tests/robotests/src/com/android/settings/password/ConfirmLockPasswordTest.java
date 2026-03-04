@@ -48,11 +48,14 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.UserHandle;
+import android.os.Bundle;
 import android.service.remotelockscreenvalidation.IRemoteLockscreenValidationCallback;
 import android.service.remotelockscreenvalidation.RemoteLockscreenValidationClient;
 import android.text.InputType;
 import android.util.FeatureFlagUtils;
 import android.widget.ImeAwareEditText;
+import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -81,6 +84,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowApplicationPackageManager;
+import org.robolectric.shadows.ShadowLooper;
 import org.robolectric.util.ReflectionHelpers;
 
 import java.time.Duration;
@@ -209,6 +213,69 @@ public class ConfirmLockPasswordTest {
         ImeAwareTextInputEditText editText = activity.findViewById(R.id.password_entry);
         assertThat(editText.getInputType()).isEqualTo(
                 InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+    }
+
+    @Test
+    public void passwordEntry_hasAccessibilityClickAction() {
+        ConfirmLockPassword activity = Robolectric.buildActivity(
+                ConfirmLockPassword.class, new Intent()).setup().get();
+
+        ImeAwareEditText passwordEntry = activity.findViewById(R.id.password_entry);
+        View.AccessibilityDelegate delegate = passwordEntry.getAccessibilityDelegate();
+        assertThat(delegate).isNotNull();
+
+        AccessibilityNodeInfo info = AccessibilityNodeInfo.obtain();
+        delegate.onInitializeAccessibilityNodeInfo(passwordEntry, info);
+        boolean hasClickAction = false;
+        for (AccessibilityNodeInfo.AccessibilityAction action : info.getActionList()) {
+            if (action.getId() == AccessibilityNodeInfo.AccessibilityAction.ACTION_CLICK.getId()) {
+                hasClickAction = true;
+                assertThat(action.getLabel().toString()).isEqualTo(
+                        mContext.getString(R.string.lockpassword_confirm_label));
+                break;
+            }
+        }
+        assertThat(hasClickAction).isTrue();
+    }
+
+    @Test
+    public void passwordEntry_performAccessibilityAction_clickWithEmptyEntry_doesNotValidate() {
+        ConfirmLockPassword activity = Robolectric.buildActivity(
+                ConfirmLockPassword.class, new Intent()).setup().get();
+        ConfirmLockPasswordFragment fragment =
+                (ConfirmLockPasswordFragment) getConfirmDeviceCredentialBaseFragment(activity);
+        ImeAwareEditText passwordEntry = activity.findViewById(R.id.password_entry);
+
+        passwordEntry.setText("");
+
+        boolean result = passwordEntry.getAccessibilityDelegate().performAccessibilityAction(
+                passwordEntry,
+                AccessibilityNodeInfo.ACTION_CLICK,
+                new Bundle());
+        assertThat(result).isTrue();
+
+        Object pendingLockCheck = ReflectionHelpers.getField(fragment, "mPendingLockCheck");
+        assertThat(pendingLockCheck).isNull();
+    }
+
+    @Test
+    public void passwordEntry_performAccessibilityAction_clickWithEntry_startsValidation() {
+        ConfirmLockPassword activity = Robolectric.buildActivity(
+                ConfirmLockPassword.class, new Intent()).setup().get();
+        ConfirmLockPasswordFragment fragment =
+                (ConfirmLockPasswordFragment) getConfirmDeviceCredentialBaseFragment(activity);
+        ImeAwareEditText passwordEntry = activity.findViewById(R.id.password_entry);
+
+        passwordEntry.setText("1234");
+
+        boolean result = passwordEntry.getAccessibilityDelegate().performAccessibilityAction(
+                passwordEntry,
+                AccessibilityNodeInfo.ACTION_CLICK,
+                new Bundle());
+        assertThat(result).isTrue();
+
+        Object pendingLockCheck = ReflectionHelpers.getField(fragment, "mPendingLockCheck");
+        assertThat(pendingLockCheck).isNotNull();
     }
 
     @Test

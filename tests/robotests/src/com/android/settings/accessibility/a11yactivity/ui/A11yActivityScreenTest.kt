@@ -32,6 +32,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceFragment
+import com.android.settings.accessibility.a11yactivity.AccessibilityShortcut
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.extensions.putComponentName
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
@@ -112,6 +113,16 @@ class A11yActivityScreenTest {
     @Test
     fun getKey() {
         assertThat(preferenceScreenCreator.key).isEqualTo(A11yActivityScreen.KEY)
+    }
+
+    @Test
+    fun parametersSchema_isCorrect() {
+        val schema = A11yActivityScreen.parametersSchema
+        val parameter = schema.getParameters()[AccessibilitySettings.EXTRA_COMPONENT_NAME]
+
+        assertThat(parameter).isNotNull()
+        assertThat(parameter!!.type).isEqualTo(AccessibilityShortcut)
+        assertThat(parameter.required).isTrue()
     }
 
     @Test

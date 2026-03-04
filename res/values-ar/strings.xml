@@ -728,13 +728,11 @@
     <string name="encrypted_summary" msgid="545623487587251207">"مشفّر"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"ضبط قفل للشاشة"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"لمزيد من الأمان، عليك ضبط رقم تعريف شخصي أو نقش أو كلمة مرور لهذا الجهاز."</string>
-    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
-    <skip />
+    <string name="no_screen_lock_issue_summary_without_pattern" msgid="3709234873257859534">"لمزيد من الأمان، عليك ضبط رقم تعريف شخصي أو كلمة مرور لهذا الجهاز."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"ضبط قفل الشاشة"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"ضبط قفل للشاشة"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"لمزيد من الأمان، عليك ضبط رقم تعريف شخصي أو نقش أو كلمة مرور لهذا الجهاز."</string>
-    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"لمزيد من الأمان، عليك ضبط رقم تعريف شخصي أو كلمة مرور لهذا الجهاز."</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"إضافة بصمة الإصبع لإلغاء القفل"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"اختيار قفل الشاشة"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"اختَر قفل شاشة"</string>
@@ -776,8 +774,7 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"يمكنك المتابعة بدون استخدام الوجه أو بصمة الإصبع"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"بدون قفل"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"التمرير السريع أو إضافة رقم تعريف شخصي أو نقش أو كلمة مرور"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off_new_without_pattern" msgid="1848366515765800557">"‏إضافة رقم PIN أو كلمة مرور أو التمرير السريع"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"التمرير السريع"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"نقش"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"رقم التعريف الشخصي"</string>
@@ -3624,16 +3621,11 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"‏بلوتوث وAndroid Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"الجهاز"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"لوحة المفاتيح، لوحة اللمس، الشاشة، الصوت"</string>
-    <!-- no translation found for device_display_dashboard_summary (3247324964824296389) -->
-    <skip />
-    <!-- no translation found for device_keyboard_settings_summary (3836352140707901919) -->
-    <skip />
-    <!-- no translation found for device_mouse_settings_summary (3326654487979268054) -->
-    <skip />
-    <!-- no translation found for device_sound_dashboard_summary (7078513370754684554) -->
-    <skip />
-    <!-- no translation found for device_trackpad_settings_summary (1658492396087895698) -->
-    <skip />
+    <string name="device_display_dashboard_summary" msgid="3247324964824296389">"السطوع، اللون، المظهر الداكن، شاشة القفل، نص"</string>
+    <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"اختيار لوحة المفاتيح، الأدوات"</string>
+    <string name="device_mouse_settings_summary" msgid="3326654487979268054">"سرعة المؤشر، تخصيص الأزرار، الانتقال"</string>
+    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"مستوى الصوت، مكبّرات الصوت، الميكروفونات"</string>
+    <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"تخصيص المؤشر، إجراءات النقر، الانتقال"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"‏الإعداد غير متاح بسبب إيقاف تقنية الاتصال القصير المدى (NFC)"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"لاستخدام هذه الميزة، يجب تثبيت تطبيق دفع أولاً."</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"التطبيقات المُستخدِمة مؤخرًا، التطبيقات التلقائية"</string>
@@ -5328,12 +5320,15 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"‏يجب الاتصال بشبكة الجوّال أو Wi‑Fi لعرض الروابط الخارجية."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"قد لا تتوفّر ميزة المراسلة النصية عبر خدمات الطوارئ في كل المناطق."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"قد يستغرق ظهور التغييرات في حسابك ضِمن \"الإعدادات\" بعض الوقت. لمعرفة التفاصيل، يُرجى التواصل مع \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"."</string>
+    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
+    <skip />
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"مزيد من المعلومات حول الاتصال بالقمر الصناعي"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"يتعذّر تفعيل <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"لتفعيل <xliff:g id="FUNCTION">%1$s</xliff:g>، عليك أولاً إنهاء الاتصال بالقمر الصناعي"</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"القمر الصناعي"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"إمكانية الاتصال بالقمر الصناعي"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"إمكانية الاتصال بالقمر الصناعي"</string>
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"استخدام الاتصال بالقمر الصناعي"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"يتيح لك حسابك استخدام التطبيقات المتوافقة"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"يتيح لك حسابك استخدام التطبيقات من خلال اتصال بيانات الجوّال"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"التطبيقات المتوافقة على هاتفك"</string>
@@ -5341,6 +5336,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"التطبيقات المتوافقة على هاتفك"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"‏يتعذّر إضافة شريحة SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"‏يجب إنهاء الاتصال بالقمر الصناعي قبل إضافة شريحة SIM"</string>
+    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
+    <skip />
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"البلوتوث غير مفعّل"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"عندما تكون الأجهزة متصلة عبر البلوتوث، ستتم مزامنة \"وضع الطيران\" على الأجهزة المتوافقة، مثل الهاتف والساعة"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"أسماء نقاط الوصول"</string>
@@ -6056,10 +6053,8 @@
     <string name="supervision_web_content_filters_learn_more_title" msgid="1221723141263328405">"مزيد من المعلومات"</string>
     <string name="supervision_web_content_filters_footer_title" msgid="1741897040916039165">"عند إيقاف هذه الإعدادات، قد تظل بعض إعدادات الحساب الأخرى سارية."</string>
     <string name="supervision_full_screen_pin_verification_title" msgid="7685279446792771815">"إدخال رقم التعريف الشخصي لأدوات رقابة الأهل"</string>
-    <!-- no translation found for supervision_pin_verification_title (3541655137030495659) -->
-    <skip />
-    <!-- no translation found for supervision_pin_verification_subtitle (8757525057231945220) -->
-    <skip />
+    <string name="supervision_pin_verification_title" msgid="3541655137030495659">"مطلوب إثبات أنّك أحد الوالدَين"</string>
+    <string name="supervision_pin_verification_subtitle" msgid="8757525057231945220">"يُرجى إدخال رقم التعريف الشخصي لأدوات رقابة الأهل"</string>
     <string name="supervision_choose_your_pin_header" msgid="3872062168986738629">"ضبط رقم تعريف شخصي لأدوات رقابة الأهل"</string>
     <string name="supervision_choose_your_new_pin_header" msgid="7770532284777963661">"ضبط رقم تعريف شخصي جديد لأدوات رقابة الأهل"</string>
     <string name="supervision_confirm_your_pin_header" msgid="1560013211840245690">"يجب تأكيد رقم التعريف الشخصي لأدوات رقابة الأهل"</string>
@@ -6100,7 +6095,8 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"أمان التطبيقات"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"فتح قفل الجهاز"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"أمان الحساب"</string>
-    <string name="device_finders_subpage_title" msgid="2390688647994924006">"أدوات العثور على الأجهزة"</string>
+    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
+    <skip />
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"النظام والتحديثات"</string>
     <string name="location_settings" msgid="6833222354060094170">"الوصول إلى الموقع الجغرافي"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"عرض التطبيقات والخدمات التي يمكنها الوصول إلى الموقع الجغرافي"</string>

@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.accessibility.a11yactivity.AccessibilityShortcut
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceFragment
 import com.android.settings.accessibility.a11yactivity.ui.A11yActivityFooterPreference.Companion.FOOTER_KEY
@@ -50,6 +51,8 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TwoTargetPreference
 import kotlinx.coroutines.CoroutineScope
@@ -203,8 +206,9 @@ private constructor(
         override val parametersSchema = KeyParametersSchema {
             parameter(
                 AccessibilitySettings.EXTRA_COMPONENT_NAME,
-                "The flattened string representation of the ComponentName of the Activity that implements an accessibility feature",
+                "The accessibility component to be configured",
                 required = true,
+                type = AccessibilityShortcut,
             )
         }
 
@@ -223,6 +227,10 @@ private constructor(
         @OptIn(ExperimentalCoroutinesApi::class)
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
+            // This has been left unchanged to aoid risk to the Settings UI
+            // for 26Q2. Ideally this would depend on the
+            // AccessibilityComponent via reading the type in the schema. We
+            // can change that when we remove the non-keyParameters parameters.
             return flow {
                 AccessibilityRepositoryProvider.get(context)
                     .accessibilityShortcutInfos

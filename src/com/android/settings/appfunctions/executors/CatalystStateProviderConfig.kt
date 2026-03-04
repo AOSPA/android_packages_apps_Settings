@@ -78,11 +78,14 @@ import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminAp
 import com.android.settings.applications.specialaccess.notificationaccess.AppsNotificationAccessScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppListScreen
+import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetailsApiScreen
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceScreen
 import com.android.settings.connecteddevice.BluetoothDashboardScreen
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardScreen
 import com.android.settings.connecteddevice.NfcAndPaymentScreen
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceScreen
+import com.android.settings.connecteddevice.display.ResolutionRefreshRateApiScreen
+import com.android.settings.connecteddevice.display.TabbedDisplayApiScreen
 import com.android.settings.connecteddevice.usb.UsbDetailsApiScreen
 import com.android.settings.datausage.BillingCycleScreen
 import com.android.settings.datausage.DataSaverScreen
@@ -104,8 +107,8 @@ import com.android.settings.deviceinfo.storage.StoragePreferenceScreen
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreen
 import com.android.settings.display.AutoBrightnessScreen
 import com.android.settings.display.ColorContrastApiScreen
-import com.android.settings.display.ColorModeScreen
 import com.android.settings.display.ColorModeApiScreen
+import com.android.settings.display.ColorModeScreen
 import com.android.settings.display.DisplayScreen
 import com.android.settings.display.HdrBrightnessApiScreen
 import com.android.settings.display.NightDisplayApiScreen
@@ -114,7 +117,6 @@ import com.android.settings.display.ScreenTimeoutScreen
 import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.dream.DreamSettingsApiScreen
 import com.android.settings.dream.ScreensaverScreen
-import com.android.settings.flags.Flags
 import com.android.settings.emergency.EmergencyDashboardScreen
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedScreen
@@ -124,6 +126,7 @@ import com.android.settings.gestures.DoubleTapApiScreen
 import com.android.settings.gestures.DoubleTapPowerScreen
 import com.android.settings.gestures.DoubleTwistGestureApiFirstScreen
 import com.android.settings.gestures.GestureSettingsApiScreen
+import com.android.settings.gestures.OneHandedApiScreen
 import com.android.settings.gestures.PickupGestureApiScreen
 import com.android.settings.gestures.PowerMenuSettingsScreenApi
 import com.android.settings.gestures.SwipeToNotificationApiScreen
@@ -138,8 +141,8 @@ import com.android.settings.location.BluetoothScanningApiScreen
 import com.android.settings.location.LocationScreen
 import com.android.settings.location.LocationServicesScreen
 import com.android.settings.location.RecentLocationAccessScreen
-import com.android.settings.network.AdaptiveConnectivityScreen
 import com.android.settings.network.AdaptiveConnectivityApiScreen
+import com.android.settings.network.AdaptiveConnectivityScreen
 import com.android.settings.network.AirplaneModeSettingsScreen
 import com.android.settings.network.MobileNetworkListScreen
 import com.android.settings.network.NetworkDashboardScreen
@@ -149,6 +152,7 @@ import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.MobileNetworkScreenApi
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.BubbleNotificationScreen
+import com.android.settings.notification.SoundApiScreen
 import com.android.settings.notification.SoundScreen
 import com.android.settings.notification.SoundWorkApiScreen
 import com.android.settings.notification.SpatialAudioApiScreen
@@ -162,13 +166,13 @@ import com.android.settings.safetycenter.ui.DeviceUnlockApiScreen
 import com.android.settings.safetycenter.ui.MoreSecurityPrivacyScreenApi
 import com.android.settings.safetycenter.ui.PrivacyControlsScreenApi
 import com.android.settings.safetycenter.ui.SystemAndUpdatesScreenApi
-import com.android.settings.security.ContentProtectionScreenApi
 import com.android.settings.security.CredentialManagementAppScreenApi
 import com.android.settings.security.EncryptionAndCredentialScreenApi
 import com.android.settings.security.InstallCertificateFromStorageScreenApi
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.security.trustagent.TrustAgentApiScreen
 import com.android.settings.sound.MediaControlsScreen
+import com.android.settings.spa.app.appcompat.UserAspectRatioAppApiScreen
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppsApiScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
@@ -338,6 +342,11 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(
             enabled = true,
+            screenKey = SoundApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
             screenKey = SoundWorkApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
@@ -377,10 +386,7 @@ private fun getCatalystScreenConfigs() =
             screenKey = ScreensaverScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
         ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = DreamSettingsApiScreen.KEY,
-        ),
+        PerScreenCatalystConfig(enabled = true, screenKey = DreamSettingsApiScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = SystemNavigationGestureScreen.KEY,
@@ -524,6 +530,11 @@ private fun getCatalystScreenConfigs() =
             screenKey = UsageDataAppListApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
         ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = ZenAccessDetailsApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = SupervisionWebContentFiltersScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TextReadingScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccessibilityScreen.KEY),
@@ -621,6 +632,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = TrustedCredentialsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserCredentialsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserAspectRatioAppsApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = UserAspectRatioAppApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CredentialManagementAppScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = EncryptionAndCredentialScreenApi.KEY),
         PerScreenCatalystConfig(
@@ -637,7 +649,10 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TabbedDisplayApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ResolutionRefreshRateApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
     )
 
 private fun getDeviceStateItemList() =

@@ -17,9 +17,19 @@
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
 enum SourceOriginForLogging {
-    UNKNOWN,
-    QR_CODE_SCAN_SETTINGS,
-    QR_CODE_SCAN_OTHER,
-    BROADCAST_SEARCH,
-    REPOSITORY,
+    UNKNOWN(0),
+    QR_CODE_SCAN_SETTINGS(1),
+    QR_CODE_SCAN_OTHER(2),
+    BROADCAST_SEARCH(3),
+    GET_SOURCE_BLUETOOTH_API(4);
+
+    private final int mValue;
+
+    SourceOriginForLogging(int value) {
+        mValue = value;
+    }
+
+    public int getValue() {
+        return mValue;
+    }
 }

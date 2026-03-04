@@ -190,16 +190,23 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
                 mPackageName = intent.getData().getSchemeSpecificPart();
             }
         }
-        if (intent != null && intent.hasExtra(Intent.EXTRA_USER_HANDLE)) {
+        if (android.multiuser.Flags.hsuAppManagement()
+                && args != null && args.containsKey(ARG_PACKAGE_UID)) {
+            // For HSU (Headless System User) apps, we intentionally avoid setting EXTRA_USER_HANDLE
+            // when launching sub-settings to prevent framework attempts to launch activities
+            // directly on the headless user. Instead, we explicitly pass the UID as an argument.
+            mUserId = UserHandle.getUserId(args.getInt(ARG_PACKAGE_UID));
+        } else if (intent != null && intent.hasExtra(Intent.EXTRA_USER_HANDLE)) {
             mUserId = ((UserHandle) intent.getParcelableExtra(Intent.EXTRA_USER_HANDLE))
                     .getIdentifier();
-            if (mUserId != UserHandle.myUserId() && !hasInteractAcrossUsersFullPermission()) {
-                Log.w(TAG, "Intent not valid.");
-                finish();
-                return "";
-            }
         } else {
             mUserId = UserHandle.myUserId();
+        }
+
+        if (mUserId != UserHandle.myUserId() && !hasInteractAcrossUsersFullPermission()) {
+            Log.w(TAG, "Intent not valid.");
+            finish();
+            return "";
         }
         mAppEntry = mState.getEntry(mPackageName, mUserId);
         if (mAppEntry != null) {

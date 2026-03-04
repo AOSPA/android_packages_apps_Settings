@@ -195,7 +195,7 @@ class ApiTester(
         throw FailedPreconditionException()
     }
 
-    private fun <V : Any> checkPotentialFiniteValue(preference: ApiPreference<V>, value: V) {
+    private suspend fun <V : Any> checkPotentialFiniteValue(preference: ApiPreference<V>, value: V) {
         if (preference.type is FiniteOptionsType<*>) {
             if (!getPreferenceOptions<V>(preference.key).map { it.first }.contains(value))
                 throw InvalidValueException(
@@ -275,9 +275,11 @@ class ApiTester(
 
         checkSetPermissions(preference)
         checkSetPreconditions(preference, value, operationContext)
-        // TODO(b/470285824) add this functionality in the setter
-        checkPotentialFiniteValue(preference, value)
-        runBlocking { setConfig.execute.invoke(operationContext, value) }
+        runBlocking {
+            // TODO(b/470285824) add this functionality in the setter
+            checkPotentialFiniteValue(preference, value)
+            setConfig.execute.invoke(operationContext, value)
+        }
     }
 
     /**
@@ -306,12 +308,12 @@ class ApiTester(
     /**
      * Helper method to get all the options of a preference which has the FiniteOptionsType type.
      */
-    fun <V : Any> getPreferenceOptions(key: String): List<Pair<V, String>> {
+    suspend fun <V : Any> getPreferenceOptions(key: String): List<Pair<V, String>> {
         val preference = getPreference<FiniteOptionsType<V>>(key)
         val type = preference.type
         if (type is FiniteOptionsType<*>) {
             val enforcedType = type as FiniteOptionsType<V>
-            return enforcedType.getOptions(context)
+            return runBlocking { enforcedType.getOptions(context) }
         } else
             throw Exception(
                 "Attempting to get all preference options on a " +

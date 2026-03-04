@@ -22,8 +22,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_APP_PACKAGE_NAME
-import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_SERVICE_NAME
+import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_SERVICE
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -82,8 +81,7 @@ class AppInfoNotificationAccessScreenTest {
             AppInfoNotificationAccessScreen(
                 context,
                 AppInfoNotificationAccessScreen.parametersSchema.prepare(
-                    KEY_APP_PACKAGE_NAME to packageName,
-                    KEY_SERVICE_NAME to "service",
+                    KEY_SERVICE to packageName + "/service"
                 ),
             )
         } else {

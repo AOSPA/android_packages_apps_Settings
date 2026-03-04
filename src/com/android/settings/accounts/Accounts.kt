@@ -24,13 +24,17 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 
 /** Provides a list of accounts associated with a associated with the current process user. */
 class Accounts : FiniteOptionsType<String> {
+    override fun getType(): Class<String> = String::class.java
+
     override fun getDescription(context: Context): String =
         context.getString(R.string.accounts_as_user_type_description)
 
     // TODO(b/479499461): Add support for multiple users.
-    override fun getOptions(context: Context): List<Pair<String, String>> =
+    override suspend fun getOptions(context: Context): List<Pair<String, String>> =
         AccountManager.get(context).getAccountsAsUser(Process.myUserHandle().identifier).map {
             account ->
             account.name to account.name
         }
+
+    override fun getKey(): String = "Accounts"
 }

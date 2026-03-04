@@ -150,7 +150,7 @@
     <string name="connected_device_other_device_title" msgid="4652120430615729193">"Outros dispositivos"</string>
     <string name="connected_device_saved_title" msgid="5607274378851905959">"Dispositivos salvos"</string>
     <string name="connected_device_fast_pair_device_title" msgid="543124539265592392">"Associado com a conta"</string>
-    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Usados anteriormente com a conta"</string>
+    <string name="connected_device_previously_associated_fast_pair_device_title" msgid="8353405823992023457">"Usados anteriorm. com a conta"</string>
     <string name="connected_device_add_device_summary" msgid="8671009879957120802">"O Bluetooth será ativado para o pareamento"</string>
     <string name="connected_device_connections_title" msgid="4164120115341579170">"Preferências de conexão"</string>
     <string name="connected_device_previously_connected_screen_title" msgid="8823331744788100605">"Conectados anteriormente"</string>
@@ -728,13 +728,11 @@
     <string name="encrypted_summary" msgid="545623487587251207">"Criptografado"</string>
     <string name="no_screen_lock_issue_title" msgid="1814109590692792891">"Defina um bloqueio de tela"</string>
     <string name="no_screen_lock_issue_summary" msgid="2383217853510608406">"Para aumentar a segurança, defina um PIN, um padrão ou uma senha para este dispositivo."</string>
-    <!-- no translation found for no_screen_lock_issue_summary_without_pattern (3709234873257859534) -->
-    <skip />
+    <string name="no_screen_lock_issue_summary_without_pattern" msgid="3709234873257859534">"Para aumentar a segurança, defina um PIN ou uma senha para este dispositivo."</string>
     <string name="no_screen_lock_issue_action_label" msgid="2691229130486382863">"Definir bloqueio de tela"</string>
     <string name="no_screen_lock_issue_notification_title" msgid="1214876733592830628">"Defina um bloqueio de tela"</string>
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"Para aumentar a segurança, defina um PIN, um padrão ou uma senha para este dispositivo."</string>
-    <!-- no translation found for no_screen_lock_issue_notification_text_without_pattern (3887560771313258705) -->
-    <skip />
+    <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"Para aumentar a segurança, defina um PIN ou uma senha para este dispositivo."</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"Adicionar impressão digital para desbloqueio"</string>
     <string name="lock_settings_picker_title" msgid="9219376327364915334">"Escolher bloqueio de tela"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"Escolha um bloqueio de tela"</string>
@@ -776,8 +774,7 @@
     <string name="biometrics_unlock_skip_biometrics" msgid="7399882488272450182">"Continuar sem configurar a impressão digital ou o rosto"</string>
     <string name="unlock_set_unlock_mode_off" msgid="4632139864722236359">"Nenhum"</string>
     <string name="unlock_set_unlock_mode_off_new" msgid="865396805830816266">"Adicione um PIN, padrão, senha ou ação de deslizar"</string>
-    <!-- no translation found for unlock_set_unlock_mode_off_new_without_pattern (1848366515765800557) -->
-    <skip />
+    <string name="unlock_set_unlock_mode_off_new_without_pattern" msgid="1848366515765800557">"Adicione um PIN, senha ou ação de deslizar"</string>
     <string name="unlock_set_unlock_mode_none" msgid="5596049938457028214">"Deslizar"</string>
     <string name="unlock_set_unlock_mode_pattern" msgid="1926480143883094896">"Padrão"</string>
     <string name="unlock_set_unlock_mode_pin" msgid="9028659554829888373">"PIN"</string>
@@ -1087,7 +1084,7 @@
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"Centralize o QR code abaixo para adicionar o dispositivo a “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"Faça a leitura do QR code"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"Centralize o QR code abaixo para conectar a “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
-    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Para acessar a rede Wi-Fi, aponte a câmera para o QR code"</string>
+    <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"Para acessar a rede Wi-Fi, aponte a câmera para o QR code."</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"Compartilhar Wi‑Fi"</string>
     <string name="wifi_dpp_scan_qr_code_with_another_device" msgid="6967364080214325016">"Faça a leitura deste QR code com outro dispositivo para entrar na rede “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
     <string name="wifi_dpp_scan_open_network_qr_code_with_another_device" msgid="5398619697898444311">"Faça a leitura deste QR code para conectar-se a “<xliff:g id="SSID">%1$s</xliff:g>”"</string>
@@ -1445,7 +1442,7 @@
     <string name="screensaver_restrict_to_wireless_charging_title" msgid="8016059995446029358">"Restringir ao carregamento sem fio"</string>
     <string name="blur_switch" msgid="1391073945502754948">"Reduzir efeitos de desfoque"</string>
     <string name="blur_switch_summary" msgid="5025895302219948597">"Facilita ver planos de fundo e painéis"</string>
-    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Desativado temporariamente pela Economia de Bateria"</string>
+    <string name="blur_switch_disabled_summary" msgid="4664341513589412290">"Desativado temporariamente pela economia de bateria"</string>
     <string name="low_light_display_behavior_main_switch_title" msgid="7138165032358139627">"Usar o Modo Pouca Luz"</string>
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Escolha o que vai aparecer no Modo Pouca Luz"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Relógio de pouca luz"</string>
@@ -1841,7 +1838,7 @@
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Defina um PIN"</string>
     <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Defina um PIN de trabalho"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Defina um padrão"</string>
-    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Para aumentar a segurança, defina um padrão para desbloquear o dispositivo"</string>
+    <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Para aumentar a segurança, defina um padrão para desbloquear o dispositivo."</string>
     <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Defina um padrão p/ o perfil de trabalho"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Para usar a impressão digital, defina uma senha"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Para usar a impressão digital, defina um padrão"</string>
@@ -2248,12 +2245,12 @@
     <string name="three_finger_tap_launch_gemini" msgid="4030401656711588982">"Iniciar Assistente"</string>
     <string name="three_finger_tap_launch_default_assistant" msgid="7947939159617292478">"Abrir <xliff:g id="APP_NAME">%s</xliff:g>"</string>
     <string name="three_finger_tap_launch_generic_assistant_name" msgid="1893057235983949817">"Google Assistente"</string>
-    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Ir para a página inicial"</string>
+    <string name="three_finger_tap_go_home" msgid="6526301745535089812">"Acessar página inicial"</string>
     <string name="three_finger_tap_go_back" msgid="2898205524575684271">"Voltar"</string>
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"Ver os apps recentes"</string>
     <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"Abrir outro app"</string>
     <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"Escolha em uma lista de apps instalados"</string>
-    <string name="gesture_title_go_home" msgid="3682238648647225933">"Ir para a tela inicial"</string>
+    <string name="gesture_title_go_home" msgid="3682238648647225933">"Acessar a tela inicial"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"Deslize para cima com três dedos em qualquer lugar do touchpad"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"Voltar"</string>
     <string name="gesture_summary_go_back" msgid="4981604277892236888">"Deslize da esquerda ou direita com três dedos"</string>
@@ -2931,13 +2928,13 @@
     <string name="packages_subtitle" msgid="8687690644931499428">"Pacotes incluídos"</string>
     <string name="battery_tip_summary_title" msgid="321127485145626939">"Os apps estão funcionando normalmente"</string>
     <string name="battery_tip_low_battery_title" msgid="4155239078744100997">"Nível da bateria baixo"</string>
-    <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Ativar a Economia de bateria para prolongar a duração da carga"</string>
+    <string name="battery_tip_low_battery_summary" msgid="2629633757244297436">"Ativar a economia de bateria para prolongar a duração da carga"</string>
     <string name="battery_tip_smart_battery_title" msgid="8925025450214912325">"Melhorar a duração da bateria"</string>
     <string name="battery_tip_smart_battery_summary" msgid="3592965553502362965">"Ative o Gerenciador de bateria"</string>
-    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Ativar a Economia de bateria"</string>
+    <string name="battery_tip_early_heads_up_title" msgid="4411387863476629452">"Ativar a economia de bateria"</string>
     <string name="battery_tip_early_heads_up_summary" msgid="578523794827443977">"A bateria pode acabar antes do normal"</string>
     <string name="battery_tip_early_heads_up_done_title" msgid="7705597228709143337">"Economia de bateria ativada"</string>
-    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"Saiba mais sobre a Economia de bateria"</string>
+    <string name="battery_saver_link_a11y" msgid="6613079613524512257">"Saiba mais sobre a economia de bateria"</string>
     <string name="battery_tip_early_heads_up_done_summary" msgid="7858923105760361208">"Alguns recursos podem ser limitados"</string>
     <string name="battery_tip_high_usage_title" msgid="9110720762506146697">"Maior uso da bateria"</string>
     <string name="battery_tip_high_usage_summary" msgid="3938999581403084551">"Ver apps com maior uso"</string>
@@ -3016,7 +3013,7 @@
     <string name="battery_saver_auto_routine" msgid="4656495097900848608">"Com base na sua rotina"</string>
     <string name="battery_saver_pref_auto_routine_summary" msgid="4739240095966241508">"Será ativada com base na sua rotina"</string>
     <string name="battery_saver_auto_percentage" msgid="558533724806281980">"Com base na porcentagem"</string>
-    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"A Economia de bateria é ativada quando há possibilidade de a bateria acabar antes da próxima carga usual"</string>
+    <string name="battery_saver_auto_routine_summary" msgid="3913145448299472628">"A economia de bateria é ativada quando há possibilidade de a bateria acabar antes da próxima carga usual"</string>
     <string name="battery_saver_auto_percentage_summary" msgid="6190884450723824287">"Será ativada em <xliff:g id="PERCENT">%1$s</xliff:g>"</string>
     <string name="battery_saver_schedule_settings_title" msgid="3688019979950082237">"Definir uma programação"</string>
     <string name="battery_saver_turn_on_summary" msgid="1433919417587171160">"Prolongar a duração da bateria"</string>
@@ -3026,7 +3023,7 @@
     <!-- no translation found for battery_saver_seekbar_title (3712266470054006641) -->
     <skip />
     <string name="battery_saver_seekbar_title_placeholder" msgid="7141264642540687540">"Ativar"</string>
-    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Usar a Economia de bateria"</string>
+    <string name="battery_saver_master_switch_title" msgid="3474312070095834915">"Usar a economia de bateria"</string>
     <string name="battery_saver_turn_on_automatically_title" msgid="7857393318205740864">"Ativar automaticamente"</string>
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Nunca"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"com <xliff:g id="PERCENT">%1$s</xliff:g> de bateria"</string>
@@ -4835,10 +4832,10 @@
     <string name="bluetooth_connected_multiple_devices_summary" msgid="2294954614327771844">"Conectado a vários dispositivos"</string>
     <string name="demo_mode" msgid="6566167465451386728">"Modo de demonstração da interface do sistema"</string>
     <string name="dark_ui_mode" msgid="898146394425795281">"Tema escuro"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Desativado temporariamente pela Economia de bateria"</string>
-    <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Desativado temporariamente pela Economia de bateria"</string>
-    <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Desativar a Economia de bateria"</string>
-    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Temporariamente ativado devido à Economia de bateria"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_on" msgid="4554134480159161533">"Desativado temporariamente pela economia de bateria"</string>
+    <string name="ambient_camera_summary_battery_saver_on" msgid="1787784892047029560">"Desativado temporariamente pela economia de bateria"</string>
+    <string name="ambient_camera_battery_saver_off" msgid="689825730569761613">"Desativar a economia de bateria"</string>
+    <string name="dark_ui_mode_disabled_summary_dark_theme_off" msgid="4154227921313505702">"Temporariamente ativado devido à economia de bateria"</string>
     <string name="dark_theme_slice_title" msgid="2376057429427046530">"Teste o tema escuro"</string>
     <string name="dark_theme_slice_subtitle" msgid="5555724345330434268">"Ajuda a aumentar a duração da bateria"</string>
     <string name="quick_settings_developer_tiles" msgid="7336007844525766623">"Blocos de desenvolvedor para configurações rápidas"</string>
@@ -5320,12 +5317,15 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"É necessário ter uma rede móvel ou Wi-Fi para acessar links externos."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"O envio de mensagens de texto para serviços de emergência pode não estar disponível em todas as áreas."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Pode levar algum tempo para que as mudanças na conta apareçam nas Configurações. Entre em contato com a <xliff:g id="CARRIER_NAME">%1$s</xliff:g> para mais detalhes."</string>
+    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
+    <skip />
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Mais informações sobre a conectividade via satélite"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Não é possível ativar o <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para ativar o <xliff:g id="FUNCTION">%1$s</xliff:g>, primeiro encerre a conexão via satélite"</string>
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satélite"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conectividade via satélite"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conectividade via satélite"</string>
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Usar a conectividade via satélite"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"O uso de apps compatíveis está incluído na sua conta"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Os dados móveis para todos os apps estão incluídos na sua conta"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Apps compatíveis no seu smartphone"</string>
@@ -5333,6 +5333,8 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Apps compatíveis no seu smartphone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Não é possível adicionar um chip"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Encerre a conexão via satélite antes de adicionar um chip"</string>
+    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
+    <skip />
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"O Bluetooth está desativado"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Quando conectados por Bluetooth, o modo avião será sincronizado entre os dispositivos compatíveis, como celular e relógio"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomes dos pontos de acesso"</string>
@@ -6086,7 +6088,8 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Segurança de apps"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Desbloqueio do dispositivo"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Segurança da conta"</string>
-    <string name="device_finders_subpage_title" msgid="2390688647994924006">"Localizadores de dispositivos"</string>
+    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
+    <skip />
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Sistema e atualizações"</string>
     <string name="location_settings" msgid="6833222354060094170">"Acesso ao local"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Veja apps e serviços que têm acesso à localização"</string>

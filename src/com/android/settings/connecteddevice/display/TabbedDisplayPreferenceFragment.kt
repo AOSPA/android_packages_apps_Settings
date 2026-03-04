@@ -42,6 +42,7 @@ import com.google.common.collect.HashBiMap
  * The main fragment that holds both the DisplayTopologyPreferenceView and the
  * SelectedDisplayPreferenceFragment, isolating them from each other to prevent redraw issues.
  */
+// LINT.IfChange
 @SearchIndexable
 open class TabbedDisplayPreferenceFragment(
     private val testViewModel: DisplayPreferenceViewModel? = null
@@ -384,3 +385,4 @@ open class TabbedDisplayPreferenceFragment(
             }
     }
 }
+// LINT.ThenChange(TabbedDisplayApiScreen.kt)

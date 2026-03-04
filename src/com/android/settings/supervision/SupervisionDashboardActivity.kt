@@ -20,6 +20,7 @@ import android.app.supervision.flags.Flags
 import android.content.Intent
 import android.util.Log
 import com.android.settings.CatalystSettingsActivity
+import com.android.settings.supervision.SupervisionSessionController.Companion.SUPERVISION_AUTH_SESSION_KEY
 import com.android.settings.supervision.shared.SupervisionHelper
 import com.android.settings.supervision.shared.getSupervisionAppInstallActivityInfo
 import com.android.settings.supervision.shared.hasNecessarySupervisionComponent
@@ -85,6 +86,15 @@ class SupervisionDashboardActivity :
             finish()
             return
         }
+    }
+
+    override fun onDestroy() {
+        if (Flags.enableSupervisionSettingsSessionUpdates() && isFinishing) {
+            val sessionsRepository =
+                SupervisionSessionController.getInstance(this@SupervisionDashboardActivity)
+            sessionsRepository.stopSession(SUPERVISION_AUTH_SESSION_KEY)
+        }
+        super.onDestroy()
     }
 
     private fun shouldRedirectToSupervisionApp(): Boolean {

@@ -86,17 +86,7 @@ public class ReduceBrightColorsPreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        // Successor to this feature is Even Dimmer
-        // found in display/EvenDimmerPreferenceController
-        // Only allow RBC if even dimmer is not possible on this device
-        if (mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_evenDimmerEnabled)) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
-
-
-        return ColorDisplayManager.isReduceBrightColorsAvailable(mContext) ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return ReduceBrightColorsExtensionsKt.getReduceBrightColorsAvailabilityStatus(mContext);
     }
 
     @Override

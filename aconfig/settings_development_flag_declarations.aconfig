@@ -12,3 +12,10 @@ flag {
   description: "Shows hdr/sdr dev opton on the development options page from aconfig"
   bug: "291863102"
 }
+
+flag {
+  name: "development_oem_unlock_anr_fix"
+  namespace: "pixel_telephony"
+  description: "Offload blocking telephony and carrier checks in OEM Unlock to background thread to prevent ANRs"
+  bug: "468851087"
+}

@@ -40,6 +40,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class NightDisplayIntensityPreferenceControllerTest {
@@ -164,3 +165,4 @@ public class NightDisplayIntensityPreferenceControllerTest {
         assertThat(mPreferenceController.isPublicSlice()).isTrue();
     }
 }
+// LINT.ThenChange(NightDisplayApiScreenTest.kt)

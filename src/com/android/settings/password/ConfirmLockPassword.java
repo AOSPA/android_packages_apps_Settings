@@ -52,6 +52,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -177,6 +179,29 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
             }
             mPasswordEntry = (EditText) view.findViewById(R.id.password_entry);
             mPasswordEntry.setOnEditorActionListener(this);
+
+            // Support a11y actions to submit the input
+            mPasswordEntry.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+                @Override
+                public void onInitializeAccessibilityNodeInfo(View host,
+                        AccessibilityNodeInfo info) {
+                    super.onInitializeAccessibilityNodeInfo(host, info);
+                    info.addAction(new AccessibilityAction(
+                            AccessibilityNodeInfo.ACTION_CLICK,
+                            getContext().getString(R.string.lockpassword_confirm_label)));
+                }
+
+                @Override
+                public boolean performAccessibilityAction(View host, int action, Bundle args) {
+                    if (action == AccessibilityNodeInfo.ACTION_CLICK
+                            && !TextUtils.isEmpty(mPasswordEntry.getText())) {
+                        handleNext();
+                        return true;
+                    }
+                    return super.performAccessibilityAction(host, action, args);
+                }
+            });
+
             // EditText inside ScrollView doesn't automatically get focus.
             mPasswordEntry.requestFocus();
             mPasswordEntryInputDisabler = new TextViewInputDisabler(mPasswordEntry);

@@ -818,6 +818,91 @@
     "file_name": "WifiDataUsageScreenApi.kt",
     "item_name": "non_carrier_data_usage_settings",
     "intent": "precondition present"
+  },
+  {
+    "file_name": "AdaptiveBatteryScreen.kt",
+    "item_name": "adaptive_battery_entry",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/com.google.android.settings.fuelgauge.batterysaver.AdaptiveBatteryTrampoline }"
+  },
+  {
+    "file_name": "AdaptiveVibrationScreen.kt",
+    "item_name": "adaptive_vibration_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) } extras={screen_key=adaptive_vibration_settings}"
+  },
+  {
+    "file_name": "ColorModeApiScreen.kt",
+    "item_name": "api_color_mode_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_color_mode_settings}"
+  },
+  {
+    "file_name": "HardwareInfoApiScreen.kt",
+    "item_name": "api_device_model",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_device_model}"
+  },
+  {
+    "file_name": "DreamSettingsApiScreen.kt",
+    "item_name": "api_screensaver",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_screensaver}"
+  },
+  {
+    "file_name": "BatterySaverScheduleScreen.kt",
+    "item_name": "battery_saver_schedule",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/com.google.android.settings.fuelgauge.batterysaver.BatterySaverScheduleTrampoline }"
+  },
+  {
+    "file_name": "BillingCycleScreen.kt",
+    "item_name": "billing_preference_catalyst",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$BillingCycleActivity (has extras) } extras={settingslib:binding_screen_args=Bundle[{android.provider.extra.SUB_ID=1}]}"
+  },
+  {
+    "file_name": "DataUsageListScreen.kt",
+    "item_name": "data_usage_summary",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$MobileDataUsageListActivity (has extras) } extras={android.provider.extra.SUB_ID=1, settingslib:binding_screen_args=Bundle[{android.provider.extra.SUB_ID=1}]}"
+  },
+  {
+    "file_name": "AppInfoNotificationAccessScreen.kt",
+    "item_name": "device_state_app_info_notification_access",
+    "intent": "Intent { act=android.settings.NOTIFICATION_LISTENER_DETAIL_SETTINGS (has extras) } extras={android.provider.extra.NOTIFICATION_LISTENER_COMPONENT_NAME=com.google.android.apps.pixel.dcservice}"
+  },
+  {
+    "file_name": "HdrBrightnessApiScreen.kt",
+    "item_name": "hdr_brightness_detail",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=hdr_brightness_detail}"
+  },
+  {
+    "file_name": "AppInfoScreen.kt",
+    "item_name": "installed_app_detail_settings_screen",
+    "intent": "Intent { act=android.settings.APPLICATION_DETAILS_SETTINGS dat=package: }"
+  },
+  {
+    "file_name": "ReverseChargingScreen.kt",
+    "item_name": "reverse_charging",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) } extras={screen_key=reverse_charging}"
+  },
+  {
+    "file_name": "SoftwareUpdateScreen.kt",
+    "item_name": "software_update_settings_v2",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/com.google.android.settings.update.SoftwareUpdateActivity }"
+  },
+  {
+    "file_name": "SpellCheckerApiScreen.kt",
+    "item_name": "spellchecker_language",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=spellchecker_language}"
+  },
+  {
+    "file_name": "TextReadingScreen.kt",
+    "item_name": "text_reading_options_in_anything_else",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) } extras={screen_key=text_reading_options_in_anything_else}"
+  },
+  {
+    "file_name": "TextReadingScreen.kt",
+    "item_name": "text_reading_options_in_outline_text_notification",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) } extras={screen_key=text_reading_options_in_outline_text_notification}"
+  },
+  {
+    "file_name": "TextReadingScreen.kt",
+    "item_name": "text_reading_options_in_suw",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) } extras={screen_key=text_reading_options_in_suw}"
   }
 ]
 

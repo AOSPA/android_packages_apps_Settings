@@ -61,7 +61,7 @@ class PowerMenuSettingsScreenApi() :
             ),
         ) {
             get {
-                execute {
+                executeEnum {
                     val invokeAssistant =
                         PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(context)
                     if (invokeAssistant) {
@@ -73,7 +73,7 @@ class PowerMenuSettingsScreenApi() :
             }
 
             set {
-                execute { value ->
+                executeEnum { value ->
                     when (value) {
                         LongPressPowerActions.POWER_MENU ->
                             PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(context)
@@ -89,7 +89,8 @@ class PowerMenuSettingsScreenApi() :
             purpose = R.string.long_press_power_assistant_sensitivity_purpose,
             type =
                 GeneratedType(
-                    description = R.string.long_press_power_assistant_sensitivity_ms_description
+                    description = R.string.long_press_power_assistant_sensitivity_ms_description,
+                    unit = "ms"
                 ) {
                     context.resources.getIntArray(DURATIONS_ARRAY_ID).map {
                         it.createSensitivityGeneratedValue(context)
