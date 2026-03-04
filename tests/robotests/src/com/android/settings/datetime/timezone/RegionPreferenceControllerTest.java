@@ -41,7 +41,8 @@ public class RegionPreferenceControllerTest {
     @Test
     public void updateState_matchCountryName() {
         Preference preference = new Preference(mActivity);
-        RegionPreferenceController controller = new RegionPreferenceController(mActivity);
+        RegionPreferenceController controller =
+            new RegionPreferenceController(mActivity, "test_key");
         controller.setRegionId("US");
         controller.updateState(preference);
         assertThat(controller.getSummary()).isEqualTo("United States");

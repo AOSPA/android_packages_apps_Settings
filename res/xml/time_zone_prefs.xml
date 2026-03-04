@@ -22,11 +22,11 @@
     <com.android.settingslib.widget.UntitledPreferenceCategory
         android:key="time_zone_region_preference_category">
         <com.android.settingslib.RestrictedPreference
-            android:key="region"
+            android:key="time_zone_region"
             android:title="@string/date_time_select_region"
             android:summary="@string/summary_placeholder" />
         <com.android.settingslib.RestrictedPreference
-            android:key="region_zone"
+            android:key="time_zone_region_zone"
             android:title="@string/date_time_set_timezone_title"
             android:summary="@string/summary_placeholder" />
         <com.android.settingslib.widget.FooterPreference

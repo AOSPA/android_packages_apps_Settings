@@ -67,6 +67,7 @@ public class TimeZoneSettings extends DashboardFragment {
     private static final int REQUEST_CODE_FIXED_OFFSET_ZONE_PICKER = 3;
 
     private static final String PREF_KEY_REGION = "time_zone_region";
+    private static final String PREF_KEY_REGION_ZONE = "time_zone_region_zone";
     private static final String PREF_KEY_REGION_CATEGORY = "time_zone_region_preference_category";
     private static final String PREF_KEY_FIXED_OFFSET_CATEGORY =
             "time_zone_fixed_offset_preference_category";
@@ -104,10 +105,10 @@ public class TimeZoneSettings extends DashboardFragment {
         mTimeZoneInfoFormatter = new TimeZoneInfo.Formatter(mLocale, new Date());
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         RegionPreferenceController regionPreferenceController =
-                new RegionPreferenceController(context);
+                new RegionPreferenceController(context, PREF_KEY_REGION);
         regionPreferenceController.setOnClickListener(this::startRegionPicker);
         RegionZonePreferenceController regionZonePreferenceController =
-                new RegionZonePreferenceController(context);
+                new RegionZonePreferenceController(context, PREF_KEY_REGION_ZONE);
         regionZonePreferenceController.setOnClickListener(this::onRegionZonePreferenceClicked);
         FixedOffsetPreferenceController fixedOffsetPreferenceController =
                 new FixedOffsetPreferenceController(context);
