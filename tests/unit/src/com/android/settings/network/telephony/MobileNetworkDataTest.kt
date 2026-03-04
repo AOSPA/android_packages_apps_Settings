@@ -26,6 +26,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mockito.anyInt
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
@@ -57,6 +58,7 @@ class MobileNetworkDataTest {
         mockTelephonyManager.stub {
             on { isDataCapable } doReturn true
             on { isDeviceVoiceCapable } doReturn true
+            on { createForSubscriptionId(anyInt()) } doReturn mockTelephonyManager
         }
         mockSubscriptionInfo.stub { on { getMccString() } doReturn MCC }
         mockSubscriptionManager.stub {
