@@ -3348,7 +3348,8 @@ public final class DataProcessorTest {
         appUsagePeriodList.add(buildAppUsagePeriod(35, 40));
         appUsagePeriodList.add(buildAppUsagePeriod(25, 30));
 
-        assertThat(DataProcessor.getScreenOnTime(appUsageMap, userId, packageName)).isEqualTo(24);
+        assertThat(DataProcessor.getScreenOnTime(appUsageMap, userId, packageName, null, null))
+                .isEqualTo(24);
     }
 
     @Test
@@ -3358,10 +3359,37 @@ public final class DataProcessorTest {
         final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap = new HashMap<>();
         appUsageMap.put(userId, new HashMap<>());
 
-        assertThat(DataProcessor.getScreenOnTime(null, userId, packageName)).isEqualTo(0);
-        assertThat(DataProcessor.getScreenOnTime(new HashMap<>(), userId, packageName))
+        assertThat(DataProcessor.getScreenOnTime(null, userId, packageName, null, null))
                 .isEqualTo(0);
-        assertThat(DataProcessor.getScreenOnTime(appUsageMap, userId, packageName)).isEqualTo(0);
+        assertThat(DataProcessor.getScreenOnTime(new HashMap<>(), userId, packageName, null, null))
+                .isEqualTo(0);
+        assertThat(DataProcessor.getScreenOnTime(appUsageMap, userId, packageName, null, null))
+                .isEqualTo(0);
+    }
+
+    @Test
+    public void getScreenOnTime_periodHasPotentialTimeDefect_appendMetadataErrorMsg() {
+        final long userId = 1;
+        final String packageName = "com.android.settings";
+        final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap = new HashMap<>();
+        final Set<DataErrorType> dataErrorTypes = new HashSet<>();
+        final StringBuilder mergedErrorMsg = new StringBuilder();
+        appUsageMap.put(userId, new HashMap<>());
+        appUsageMap.get(userId).put(packageName, List.of(
+                buildAppUsagePeriod(0, 5, true),
+                buildAppUsagePeriod(2, 3, false),
+                buildAppUsagePeriod(6, 7, true)
+        ));
+
+        assertThat(DataProcessor.getScreenOnTime(appUsageMap, userId, packageName, dataErrorTypes,
+                mergedErrorMsg))
+                .isEqualTo(6);
+        assertThat(dataErrorTypes)
+                .containsExactly(DataErrorType.ERROR_TYPE_POTENTIAL_SCREEN_TIME_DEFECT);
+        assertThat(mergedErrorMsg.toString()).contains(
+                String.format("[SCREEN_ON] userId=%d, pkg=%s", userId, packageName));
+        assertThat(mergedErrorMsg.toString()).contains("[0, 5],");
+        assertThat(mergedErrorMsg.toString()).contains("[6, 7],");
     }
 
     private static Map<Long, Map<String, BatteryHistEntry>> createHistoryMap(
@@ -3487,7 +3515,16 @@ public final class DataProcessorTest {
     }
 
     private AppUsagePeriod buildAppUsagePeriod(final long start, final long end) {
-        return AppUsagePeriod.newBuilder().setStartTime(start).setEndTime(end).build();
+        return buildAppUsagePeriod(start, end, false);
+    }
+
+    private AppUsagePeriod buildAppUsagePeriod(
+            final long start, final long end, final boolean hasIssue) {
+        return AppUsagePeriod.newBuilder()
+                .setStartTime(start)
+                .setEndTime(end)
+                .setPotentialTimeDefect(hasIssue)
+                .build();
     }
 
     private void assertAppUsageEvent(

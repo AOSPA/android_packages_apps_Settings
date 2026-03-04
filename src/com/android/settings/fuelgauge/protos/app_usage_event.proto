@@ -43,6 +43,8 @@ message AppUsagePeriod {
   optional int64 end_time = 2;
   // Last interactive event of the usage period.
   optional int64 last_active_time_ms = 3;
+  // Whether the usage period has a potential time defect.
+  optional bool potential_time_defect = 4;
 }
 
 enum AppUsageEndPointType {
