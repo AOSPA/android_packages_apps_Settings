@@ -37,6 +37,7 @@ import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.IntRangeValuePreference
+import com.android.settingslib.metadata.MUSTPASS
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -67,7 +68,7 @@ class CallVolumePreference(private val audioHelper: AudioHelper) :
     override val preferenceActionMetrics: Int
         get() = ACTION_CALL_VOLUME
 
-    override fun tags(context: Context) = arrayOf(KEY_CALL_VOLUME)
+    override fun tags(context: Context) = arrayOf(KEY_CALL_VOLUME, MUSTPASS)
 
     override fun getIcon(context: Context) = R.drawable.ic_local_phone_24_lib
 
