@@ -23,6 +23,7 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoi
 import com.android.settings.accessibility.textreading.data.OutlineTextDataStore
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
@@ -45,6 +46,8 @@ class OutlineTextPreference(context: Context, @EntryPoint private val entryPoint
 
     override val keywords: Int
         get() = R.string.keywords_maximize_text_contrast
+
+    override fun tags(context: Context) = arrayOf(HERO_SET)
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 

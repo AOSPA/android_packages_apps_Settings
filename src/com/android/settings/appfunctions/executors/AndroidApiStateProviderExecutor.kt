@@ -33,7 +33,6 @@ import com.android.settings.appfunctions.stateprovidersources.ManagedProfileStat
 import com.android.settings.appfunctions.stateprovidersources.MediaOutputStateSource
 import com.android.settings.appfunctions.stateprovidersources.MobileDataUsageStateSource
 import com.android.settings.appfunctions.stateprovidersources.MobileNetworkStateSource
-import com.android.settings.appfunctions.stateprovidersources.NfcStateSource
 import com.android.settings.appfunctions.stateprovidersources.NotificationHistoryStateSource
 import com.android.settings.appfunctions.stateprovidersources.NotificationsStateSource
 import com.android.settings.appfunctions.stateprovidersources.OpenByDefaultStateSource
@@ -74,7 +73,6 @@ class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStat
             MediaOutputStateSource(),
             MobileDataUsageStateSource(),
             MobileNetworkStateSource(),
-            NfcStateSource(),
             NotificationHistoryStateSource(),
             NotificationsStateSource(),
             OpenByDefaultStateSource(),

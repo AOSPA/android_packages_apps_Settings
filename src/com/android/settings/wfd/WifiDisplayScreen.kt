@@ -25,6 +25,7 @@ import com.android.settings.R
 import com.android.settings.Settings.WifiDisplaySettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -104,7 +105,7 @@ open class WifiDisplayScreen :
     override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +WifiDisplayScreenPreference(this@WifiDisplayScreen) }
 
     override fun getMetricsCategory() = SettingsEnums.WFD_WIFI_DISPLAY
 
@@ -150,6 +151,26 @@ open class WifiDisplayScreen :
 
     override fun onStop(context: PreferenceLifecycleContext) {
         router?.removeCallback(routerCallback)
+    }
+
+    class WifiDisplayScreenPreference(
+        private val screenMetadata : WifiDisplayScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+        override val key : String
+            get() = "wifi_display_settings_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }
 
     companion object {
