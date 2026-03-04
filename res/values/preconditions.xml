@@ -131,4 +131,10 @@
     <string name="use_nfc_unavailable" translatable="false">NFC is not available on this device.</string>
     <string name="require_device_unlock_for_nfc_preconditions" translatable="false">The device must support require device unlock for NFC paymentys feature.</string>
     <string name="require_device_unlock_for_nfc_unavailable" translatable="false">Require device unlock for NFC payments is not supported on this device.</string>
+    <string name="uwb_settings_general_precondition" translatable="false">The use of ultra-wideband must be supported by the hardware and must not be restricted by device policy</string>
+    <string name="uwb_settings_set_precondition" translatable="false">Ultra-wideband settings cannot be changed during airplane mode.</string>
+    <string name="uwb_settings_unavailable_user_restriction" translatable="false">Ultra-wideband is disabled based on your current settings.</string>
+    <string name="uwb_settings_unavailable_hardware" translatable="false">Ultra-wideband is not supported on this device.</string>
+    <string name="uwb_settings_unavailable_regulation" translatable="false">Ultra-wideband is unavailable due to local regulatory restrictions in your current region.</string>
+    <string name="uwb_settings_unavailable_airplane_mode" translatable="false">Ultra-wideband is disabled while Airplane Mode is active.</string>
 </resources>
