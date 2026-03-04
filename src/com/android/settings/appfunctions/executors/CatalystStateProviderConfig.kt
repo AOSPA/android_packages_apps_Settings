@@ -162,6 +162,7 @@ import com.android.settings.notification.app.ConversationListScreen
 import com.android.settings.notification.modes.ZenModesListScreen
 import com.android.settings.print.PrintServiceApiScreen
 import com.android.settings.print.PrintSettingsApiScreen
+import com.android.settings.regionalpreferences.RegionPickerApiFirstScreen
 import com.android.settings.safetycenter.ui.AccountSecuritySubpageScreenApi
 import com.android.settings.safetycenter.ui.AppSecurityScreenApi
 import com.android.settings.safetycenter.ui.DeviceUnlockApiScreen
@@ -241,7 +242,6 @@ data class PerScreenCatalystConfig(
     // TODO(b/405344827): map categories to PreferenceMetadata#tags
     val appFunctionTypes: Set<DeviceStateAppFunctionType> =
         setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
-    val additionalDescription: String? = null,
 )
 
 /**
@@ -276,9 +276,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = BatterySaverScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
-            additionalDescription =
-                "The Battery Saver screen allows users to set the device to Standard or Extreme Battery Saver mode. Users can also configure schedules and reminders for Battery Saver",
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY)
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LockScreenPreferenceScreen.KEY),
@@ -291,14 +289,11 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = LanguageAndRegionScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LanguageAndRegionApiFirstScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = RegionPickerApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ModuleLicensesScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LegalSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreen.KEY),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = LocationScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
-        ),
+        PerScreenCatalystConfig(enabled = true, screenKey = LocationScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = RecentLocationAccessScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
@@ -390,24 +385,14 @@ private fun getCatalystScreenConfigs() =
             screenKey = StoragePreferenceScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_STORAGE),
         ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = ScreensaverScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
-        ),
+        PerScreenCatalystConfig(enabled = true, screenKey = ScreensaverScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DreamSettingsApiScreen.KEY),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = SystemNavigationGestureScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
-        ),
+        PerScreenCatalystConfig(enabled = true, screenKey = SystemNavigationGestureScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = A11yActivityScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = A11yServiceScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = AmbientDisplayAlwaysOnPreferenceScreen.KEY,
-            additionalDescription =
-                "Always-on-display settings indicates whether the lock screen, including the time, is visible when the phone is off",
         ),
         PerScreenCatalystConfig(
             enabled = true,
@@ -434,9 +419,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = ConversationListScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
-            additionalDescription =
-                "Settings to manage and customize how conversations are displayed in notifications",
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS)
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceAdminApiScreen.KEY),
@@ -486,9 +469,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = BubbleNotificationScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
-            additionalDescription =
-                "Settings to manage and customize how bubbles are displayed for notifications",
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS)
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ResetDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DisplayOverOtherAppsAppListScreen.KEY),
@@ -503,9 +484,7 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(
             enabled = true,
-            screenKey = InteractAcrossProfilesAppListScreen.KEY,
-            additionalDescription =
-                "Apps that share permissions and can access each other's data between personal and work profiles",
+            screenKey = InteractAcrossProfilesAppListScreen.KEY
         ),
         PerScreenCatalystConfig(
             enabled = true,
@@ -593,15 +572,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = WifiDisplayScreen.KEY,
-            additionalDescription =
-                "Settings to configure Cast options to send screen or media to other devices",
         ),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = AppsNotificationAccessScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
-            additionalDescription =
-                "Settings to manage apps that can read, reply and control notifications",
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS)
         ),
         PerScreenCatalystConfig(
             enabled = true,
@@ -611,14 +586,8 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = PreviouslyConnectedDeviceScreen.KEY,
-            additionalDescription =
-                "Settings to show the list of previously connected Bluetooth devices",
         ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = ButtonNavigationSettingsScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_UNCATEGORIZED),
-        ),
+        PerScreenCatalystConfig(enabled = true, screenKey = ButtonNavigationSettingsScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = SavedAccessPointsWifiScreen.KEY,
@@ -628,8 +597,6 @@ private fun getCatalystScreenConfigs() =
             enabled = true,
             screenKey = DataUsageListScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
-            additionalDescription =
-                "This SIM data usage screen shows the amount of data each app has consumed from a specific SIM card",
         ),
         PerScreenCatalystConfig(
             enabled = true,

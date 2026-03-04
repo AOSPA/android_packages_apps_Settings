@@ -29,7 +29,6 @@ object CatalystConfigBuilder {
     fun buildConfig(
         screenKey: String,
         preferenceKeys: List<String>,
-        additionalDescription: String? = null,
     ) = CatalystConfig(
         deviceStateItems =
             preferenceKeys.map {
@@ -43,7 +42,6 @@ object CatalystConfigBuilder {
                 PerScreenCatalystConfig(
                     enabled = true,
                     screenKey = screenKey,
-                    additionalDescription = additionalDescription
                 )
             )
     )

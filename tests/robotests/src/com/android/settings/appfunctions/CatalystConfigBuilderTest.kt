@@ -30,36 +30,20 @@ class CatalystConfigBuilderTest {
         val screenKey = "test_screen"
         val pref1 = "pref1"
         val pref2 = "pref2"
-        val additionalDescription = "test description"
 
         val config = CatalystConfigBuilder.buildConfig(
             screenKey,
-            listOf(pref1, pref2),
-            additionalDescription
+            listOf(pref1, pref2)
         )
 
         assertThat(config.screenConfigs).hasSize(1)
         assertThat(config.screenConfigs[0].screenKey).isEqualTo(screenKey)
         assertThat(config.screenConfigs[0].enabled).isTrue()
-        assertThat(config.screenConfigs[0].additionalDescription).isEqualTo(additionalDescription)
 
         assertThat(config.deviceStateItems).hasSize(2)
         assertThat(config.deviceStateItems[0].settingKey).isEqualTo(pref1)
         assertThat(config.deviceStateItems[0].settingScreenKey).isEqualTo(screenKey)
         assertThat(config.deviceStateItems[1].settingKey).isEqualTo(pref2)
         assertThat(config.deviceStateItems[1].settingScreenKey).isEqualTo(screenKey)
-    }
-
-    @Test
-    fun buildConfig_noAdditionalDescription_createsCorrectConfig() {
-        val screenKey = "test_screen"
-        val pref1 = "pref1"
-
-        val config = CatalystConfigBuilder.buildConfig(
-            screenKey,
-            listOf(pref1)
-        )
-
-        assertThat(config.screenConfigs[0].additionalDescription).isNull()
     }
 }
