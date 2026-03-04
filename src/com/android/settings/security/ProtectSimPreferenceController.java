@@ -18,17 +18,25 @@ package com.android.settings.security;
 
 import android.content.Context;
 
-public class AutoSimPinPreferenceController extends SimLockPreferenceController {
-    public AutoSimPinPreferenceController(Context context, String key) {
+/**
+ * Preference controller for the "Protect SIM" card preference. The only difference in behaviour
+ * from the {@code SimLockPreferenceController} is that it makes the preference available if the
+ * flag for automatic SIM PIN management is on, while {@code SimLockPreferenceController} does
+ * the opposite.
+ */
+public class ProtectSimPreferenceController extends SimLockPreferenceController {
+    public ProtectSimPreferenceController(Context context, String key) {
         super(context, key);
     }
 
     @Override
     public int getAvailabilityStatus() {
-        if (!android.security.Flags.autoSimPinManagement()) {
+        int availabilityStatus = super.getAvailabilityStatusExcludingFlag();
+
+        if (availabilityStatus == AVAILABLE && !android.security.Flags.autoSimPinManagement()) {
             return CONDITIONALLY_UNAVAILABLE;
         }
 
-        return super.getAvailabilityStatus();
+        return availabilityStatus;
     }
 }
