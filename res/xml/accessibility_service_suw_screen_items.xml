@@ -23,6 +23,15 @@
     <com.android.settings.accessibility.setupwizard.items.MainSwitchItem
         android:id="@+id/accessibility_service_main_switch_in_suw" />
 
+    <SectionItem
+        android:id="@+id/accessibility_service_option_in_suw"
+        android:title="@string/accessibility_screen_option">
+
+        <com.android.settings.accessibility.setupwizard.items.TwoTargetItem
+            android:id="@+id/accessibility_service_shortcut_in_suw" />
+
+    </SectionItem>
+
     <com.android.settings.accessibility.setupwizard.items.FooterItem
         android:id="@+id/accessibility_service_footer_in_suw"/>
 </ItemGroup>

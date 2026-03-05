@@ -61,7 +61,7 @@ class FontSizePreferenceTest {
     @Before
     fun setUp() {
         activityScenario.scenario.onActivity { activity -> context = activity }
-        preference = FontSizePreference(context, entryPoint)
+        preference = FontSizePreference(context, entryPoint, false)
         dataStore = preference.storage(context) as FontSizeDataStore
         preferenceManager = PreferenceManager(context)
         preferenceScreen = preferenceManager.createPreferenceScreen(context)

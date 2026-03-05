@@ -28,6 +28,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
+import com.android.settings.deviceinfo.imei.ImeiData
 import com.android.settings.network.SubscriptionInfoListViewModel
 import com.android.settings.network.SubscriptionUtil
 import com.google.common.truth.Truth.assertThat
@@ -247,6 +248,6 @@ class MobileNetworkImeiPreferenceControllerTest {
         const val IMEI_2 = "222222222222225"
         const val IMEI_INDEXING_1 = 1
         const val IMEI_INDEXING_2 = 2
-        val imeiList = listOf(IMEI_1, IMEI_2)
+        val imeiList = listOf(ImeiData(IMEI_1, 0), ImeiData(IMEI_2, 1))
     }
 }

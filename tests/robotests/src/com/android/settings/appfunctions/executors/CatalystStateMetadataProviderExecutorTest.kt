@@ -711,6 +711,100 @@ class CatalystStateMetadataProviderExecutorTest {
         assertThat(prefMetadata.hintText).contains("Preconditions to writing: Set precondition.")
     }
 
+    private class SetWarningTestScreen : PreferencesApiScreen(
+        key = "set_warning_screen",
+        topLevelSettingsCategory = Category.SYSTEM,
+        fragment = Fragment::class,
+        purpose = R.string.preference_screen_purpose,
+    ) {
+        init {
+            preference(
+                key = "pref_with_set_warning_without_preconditions",
+                purpose = R.string.preference_purpose,
+                type = AnyString,
+            ) {
+                get {
+                    execute { "value" }
+                }
+                set {
+                    warning {
+                        warn("Set warning 1")
+                    }
+                    execute { }
+                }
+            }
+
+            preference(
+                key = "pref_with_set_warning_with_preconditions",
+                purpose = R.string.preference_purpose,
+                type = AnyString,
+            ) {
+                get {
+                    execute { "value" }
+                }
+                set {
+                    warning {
+                        preconditions("Set preconditions") {
+                            Allowed
+                        }
+                        warn("Set warning 2")
+                    }
+                    execute { }
+                }
+            }
+
+            preference(
+                key = "pref_with_set_warning_with_value_preconditions",
+                purpose = R.string.preference_purpose,
+                type = AnyString,
+            ) {
+                get {
+                    execute { "value" }
+                }
+                set {
+                    warning {
+                        valuePreconditions("Set value preconditions") { _ ->
+                            Allowed
+                        }
+                        warn("Set warning 3")
+                    }
+                    execute { }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun execute_onPreferenceWithSetWarning_includesPreconditionsAndValuePreconditionsAndWarningMessageInHintText() = runTest {
+        setRegistryFactories(SetWarningTestScreen())
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig(
+                "set_warning_screen",
+                listOf(
+                    "pref_with_set_warning_without_preconditions",
+                    "pref_with_set_warning_with_preconditions",
+                    "pref_with_set_warning_with_value_preconditions"
+                )
+            ),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        val prefSetWarningWithoutPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[1]
+        assertThat(prefSetWarningWithoutPreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_without_preconditions")
+        assertThat(prefSetWarningWithoutPreconditionsMetadata.hintText).contains("Warning before writing: Set warning 1 (must be shown).")
+
+        val prefSetWarningWithPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[2]
+        assertThat(prefSetWarningWithPreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_with_preconditions")
+        assertThat(prefSetWarningWithPreconditionsMetadata.hintText).contains("Warning before writing: Set warning 2 (must be shown if preconditions are met: Set preconditions).")
+
+        val prefSetWarningWithValuePreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[3]
+        assertThat(prefSetWarningWithValuePreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_with_value_preconditions")
+        assertThat(prefSetWarningWithValuePreconditionsMetadata.hintText).contains("Warning before writing: Set warning 3 (must be shown if preconditions are met: Set value preconditions).")
+    }
+
     @Test
     fun execute_onApiFirstPreference_doesNotIncludeName() = runTest {
         setRegistryFactories(ApiFirstTestScreen())

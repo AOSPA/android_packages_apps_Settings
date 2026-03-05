@@ -25,6 +25,7 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.deviceinfo.PhoneNumberUtil
+import com.android.settings.deviceinfo.imei.ImeiData
 import com.android.settings.deviceinfo.imei.ImeiInfoDialogFragment
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
@@ -43,7 +44,7 @@ import com.android.settingslib.preference.PreferenceBinding
 class MobileNetworkImeiPreference(
     private val context: Context,
     private val subId: Int,
-    private val imeiList: List<String> = listOf<String>(),
+    private val imeiList: List<ImeiData> = listOf(),
 ) :
     PreferenceMetadata,
     PreferenceBinding,
@@ -57,7 +58,7 @@ class MobileNetworkImeiPreference(
             (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)) &&
             (Flags.isDualSimOnboardingEnabled() && SubscriptionManager.isValidSubscriptionId(subId))
     private var imei: String? = if (isAvailable) context.telephonyManager(subId)?.imei else ""
-    private var indexing: Int = imeiList.indexOf(imei)
+    private var indexing: Int = imeiList.map { it.imei }.indexOf(imei)
     private val formattedTitle: String = getFormattedTitle()
 
     override val key: String

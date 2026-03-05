@@ -59,7 +59,7 @@ class DarkModeEndTimePreferenceTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val mockUiModeManager = mock<UiModeManager>()
-    private val preference = EndTimePreference(mockUiModeManager)
+    private val preference = EndTimePreference(mockUiModeManager, false)
     private val shadowPowerManager = shadowOf(context.getSystemService(PowerManager::class.java))!!
 
     @Before

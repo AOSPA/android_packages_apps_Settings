@@ -22,6 +22,7 @@ import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.deviceinfo.imei.ImeiData
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -93,7 +94,7 @@ class MobileNetworkImeiPreferenceTest {
 
     @Test
     fun getSummary_index0_returnImei1() {
-        assertThat(preference.getSummary(context)).isEqualTo(IMEI_1)
+        assertThat(preference.getSummary(context).toString()).isEqualTo(IMEI_1)
     }
 
     @Test
@@ -102,7 +103,7 @@ class MobileNetworkImeiPreferenceTest {
 
         preference = MobileNetworkImeiPreference(context, 1, imeiList)
 
-        assertThat(preference.getSummary(context)).isEqualTo(IMEI_2)
+        assertThat(preference.getSummary(context).toString()).isEqualTo(IMEI_2)
     }
 
     @Test
@@ -126,7 +127,7 @@ class MobileNetworkImeiPreferenceTest {
     @Test
     fun getTitle_imeiListNotMultiSim_returnDefaultTitle() {
         // Scenario: The list of IMEIs has less than 2 entries, so it's not considered multi-SIM.
-        val singleImeiList = listOf(IMEI_1)
+        val singleImeiList = listOf(ImeiData(IMEI_1, 0))
         mockTelephonyManagerForSubId.stub { on { imei } doReturn IMEI_1 }
 
         // Create preference with a single IMEI in the list.
@@ -154,6 +155,6 @@ class MobileNetworkImeiPreferenceTest {
         const val IMEI_2 = "222222222222225"
         const val IMEI_INDEXING_1 = 1
         const val IMEI_INDEXING_2 = 2
-        val imeiList = listOf(IMEI_1, IMEI_2)
+        val imeiList = listOf(ImeiData(IMEI_1, 0), ImeiData(IMEI_2, 1))
     }
 }

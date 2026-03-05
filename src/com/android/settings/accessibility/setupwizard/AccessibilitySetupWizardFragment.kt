@@ -45,7 +45,7 @@ class AccessibilitySetupWizardFragment : BaseSetupWizardFragment() {
                 put(R.id.text_reading_options_in_suw, TextReadingItemController(it))
             }
             findItem(adapter, R.id.color_inversion_in_suw)?.let {
-                put(R.id.color_inversion_in_suw, ColorInversionItemController(it))
+                put(R.id.color_inversion_in_suw, ColorInversionItemController(context, it))
             }
             findItem(adapter, R.id.screen_magnification_in_suw)?.let {
                 put(R.id.screen_magnification_in_suw, MagnificationItemController(it))

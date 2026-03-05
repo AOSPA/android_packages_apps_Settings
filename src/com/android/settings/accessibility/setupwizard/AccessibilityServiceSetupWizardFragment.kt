@@ -70,6 +70,16 @@ class AccessibilityServiceSetupWizardFragment : BaseSetupWizardFragment() {
                     AccessibilityServiceMainSwitchItemController(context, serviceInfo, item),
                 )
             }
+            findItem(adapter, R.id.accessibility_service_shortcut_in_suw)?.let {
+                put(
+                    R.id.accessibility_service_shortcut_in_suw,
+                    AccessibilityServiceShortcutTwoTargetItemController.create(
+                        context,
+                        it,
+                        serviceInfo,
+                    ),
+                )
+            }
             findItem(adapter, R.id.accessibility_service_footer_in_suw)?.let { item ->
                 put(
                     R.id.accessibility_service_footer_in_suw,

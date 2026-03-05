@@ -50,7 +50,8 @@ public class RegionZonePreferenceControllerTest {
                 .setGmtOffset("GMT-08:00")
                 .build();
         Preference preference = new Preference(mActivity);
-        RegionZonePreferenceController controller = new RegionZonePreferenceController(mActivity);
+        RegionZonePreferenceController controller =
+            new RegionZonePreferenceController(mActivity, "test_key");
         controller.setTimeZoneInfo(tzInfo);
         controller.setClickable(false);
         controller.updateState(preference);

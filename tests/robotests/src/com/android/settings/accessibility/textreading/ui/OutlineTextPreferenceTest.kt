@@ -40,7 +40,7 @@ class OutlineTextPreferenceTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
     @EntryPoint private val entryPoint = EntryPoint.DISPLAY_SETTINGS
-    private val outlineTextPreference = OutlineTextPreference(context, entryPoint)
+    private val outlineTextPreference = OutlineTextPreference(context, entryPoint, false)
     private val preferenceManager = PreferenceManager(context)
     private val preferenceScreen = preferenceManager.createPreferenceScreen(context)
 

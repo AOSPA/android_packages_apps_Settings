@@ -52,7 +52,7 @@ import org.robolectric.RobolectricTestRunner
 class DisplaySizePreferenceTest {
     private var context = ApplicationProvider.getApplicationContext<Context>()
     @EntryPoint private val entryPoint = EntryPoint.DISPLAY_SETTINGS
-    private val preference = DisplaySizePreference(context, entryPoint)
+    private val preference = DisplaySizePreference(context, entryPoint, false)
     private val dataStore = preference.storage(context) as DisplaySizeDataStore
     private val preferenceManager = PreferenceManager(context)
     private val preferenceScreen = preferenceManager.createPreferenceScreen(context)

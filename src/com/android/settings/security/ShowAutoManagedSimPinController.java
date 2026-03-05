@@ -27,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
+import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 
@@ -34,7 +35,8 @@ import com.android.settings.core.BasePreferenceController;
  * Controller for showing the automatically-generated SIM PIN. Ensures that the user is
  * authenticated before calling into the TelephonyManager for retrieving the SIM PIN.
  */
-public class ShowAutoManagedSimPinController extends BasePreferenceController {
+public class ShowAutoManagedSimPinController extends BasePreferenceController implements
+        Preference.OnPreferenceClickListener {
     private static final String TAG = "AutoManagedSimPin";
     // The tag used for the DialogFragment's showNow method.
     private static final String FRAGMENT_TAG = "PinShow";
@@ -46,6 +48,8 @@ public class ShowAutoManagedSimPinController extends BasePreferenceController {
 
     @Nullable
     private Fragment mFragment;
+
+    private Preference mPreference;
 
     private AutoManagedSimPinHelper mAutoManagedSimPinHelper;
 
@@ -75,7 +79,22 @@ public class ShowAutoManagedSimPinController extends BasePreferenceController {
     }
 
     @Override
-    public boolean handlePreferenceTreeClick(Preference preference) {
+    public void displayPreference(PreferenceScreen screen) {
+        super.displayPreference(screen);
+
+        mPreference = screen.findPreference(getPreferenceKey());
+        mPreference.setOnPreferenceClickListener(this);
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+
+        preference.setEnabled(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(mSubId));
+    }
+
+    @Override
+    public boolean onPreferenceClick(@NonNull Preference preference) {
         showAuthenticationDialog();
         return true;
     }
