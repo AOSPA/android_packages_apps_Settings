@@ -621,10 +621,8 @@ public class UserDetailsSettings extends SettingsPreferenceFragment
     }
 
     private void removeUser() {
-        if (android.multiuser.Flags.showConfirmationToastOnUserDeletion()) {
-            Toast.makeText(getPrefContext(), R.string.user_deleted_confirmation_toast,
-                    Toast.LENGTH_LONG).show();
-        }
+        Toast.makeText(getPrefContext(), R.string.user_deleted_confirmation_toast,
+                Toast.LENGTH_LONG).show();
         if (mUserInfo.id == UserHandle.myUserId()) {
             removeThisUser();
         } else {

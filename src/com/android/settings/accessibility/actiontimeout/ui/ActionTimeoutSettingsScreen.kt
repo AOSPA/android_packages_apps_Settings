@@ -27,8 +27,10 @@ import com.android.settings.accessibility.actiontimeout.data.ActionTimeoutOption
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -72,6 +74,7 @@ open class ActionTimeoutSettingsScreen(context: Context) :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +ActionTimeoutSettingsScreenPreference(this@ActionTimeoutSettingsScreen)
             +ActionTimeoutIntroPreference()
             +ActionTimeoutIllustrationPreference()
             DISCRETE_TIMEOUT_OPTIONS.keys.sorted().forEach { timeoutOption ->
@@ -115,6 +118,25 @@ open class ActionTimeoutSettingsScreen(context: Context) :
             timeoutOptionDataStore.removeObserver(bindingKey, it)
             keyedObserver = null
         }
+    }
+
+    class ActionTimeoutSettingsScreenPreference(
+        private val screenMetadata : ActionTimeoutSettingsScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider {
+
+        override val key : String
+            get() = "accessibility_control_timeout_preference_fragment_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
     }
 
     companion object {

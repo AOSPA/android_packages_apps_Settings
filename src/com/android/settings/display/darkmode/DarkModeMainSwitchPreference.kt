@@ -22,6 +22,7 @@ import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.extensions.isPowerSaveMode
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -42,6 +43,8 @@ class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage) :
 
     override val indexable
         get() = false
+
+    override fun tags(context: Context) = arrayOf(MUSTPASS_SET)
 
     override fun isEnabled(context: Context): Boolean =
         if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) !context.isPowerSaveMode()

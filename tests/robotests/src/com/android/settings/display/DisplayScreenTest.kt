@@ -26,6 +26,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 
+// LINT.IfChange
 class DisplayScreenTest : SettingsCatalystTestCase() {
 
     override val preferenceScreenCreator = DisplayScreen()
@@ -60,3 +61,5 @@ class DisplayScreenTest : SettingsCatalystTestCase() {
         // compared
     }
 }
+// LINT.ThenChange(com.android.settings.DisplaySettingsTest.java, DisplayApiScreenTest.kt)
+

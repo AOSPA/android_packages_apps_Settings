@@ -18,6 +18,7 @@ import org.robolectric.RobolectricTestRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class DisplaySettingsTest {
 
@@ -45,3 +46,5 @@ public class DisplaySettingsTest {
         assertThat(preferenceScreenKeys).containsAtLeastElementsIn(preferenceKeys);
     }
 }
+// LINT.ThenChange(com.android.settings.display.DisplayScreenTest.kt,
+// com.android.settings.display.DisplayApiScreenTest.kt)
