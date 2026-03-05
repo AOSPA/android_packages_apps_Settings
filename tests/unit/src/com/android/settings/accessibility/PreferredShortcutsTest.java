@@ -16,9 +16,12 @@
 
 package com.android.settings.accessibility;
 
+import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
+
 import static com.android.internal.accessibility.AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME;
 import static com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.GESTURE;
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -27,6 +30,7 @@ import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
@@ -235,6 +239,36 @@ public class PreferredShortcutsTest {
         assertThat(PreferredShortcuts.retrieveUserShortcutType(mContext, target,
                 UserShortcutType.SOFTWARE))
                 .isEqualTo(UserShortcutType.HARDWARE);
+    }
+
+    @DisableFlags(com.android.settings.accessibility.Flags
+            .FLAG_PREFERRED_SHORTCUT_FILTERS_NAVIGATION_MODE)
+    @Test
+    public void retrieveUserShortcutType_preferGesture_buttonNav_flagOff_returnsGesture() {
+        String target = COMPONENT_NAME_1.flattenToString();
+        final PreferredShortcut shortcut = new PreferredShortcut(target, GESTURE);
+        PreferredShortcuts.saveUserShortcutType(mContext, shortcut);
+
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, NAV_BAR_MODE_3BUTTON, mContext.getUserId());
+
+        assertThat(PreferredShortcuts.retrieveUserShortcutType(mContext, target, GESTURE))
+                .isEqualTo(GESTURE);
+    }
+
+    @EnableFlags(com.android.settings.accessibility.Flags
+            .FLAG_PREFERRED_SHORTCUT_FILTERS_NAVIGATION_MODE)
+    @Test
+    public void retrieveUserShortcutType_preferGesture_buttonNav_returnsSoftware() {
+        String target = COMPONENT_NAME_1.flattenToString();
+        final PreferredShortcut shortcut = new PreferredShortcut(target, GESTURE);
+        PreferredShortcuts.saveUserShortcutType(mContext, shortcut);
+
+        Settings.Secure.putIntForUser(mContext.getContentResolver(),
+                Settings.Secure.NAVIGATION_MODE, NAV_BAR_MODE_3BUTTON, mContext.getUserId());
+
+        assertThat(PreferredShortcuts.retrieveUserShortcutType(mContext, target, GESTURE))
+                .isEqualTo(SOFTWARE);
     }
 
     private static void clearShortcuts() {
