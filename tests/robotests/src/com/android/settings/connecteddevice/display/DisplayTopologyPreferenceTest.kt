@@ -121,7 +121,10 @@ class DisplayTopologyPreferenceTest {
             topologyListener = null
         }
 
-        override fun registerDisplayListener(listener: DisplayManager.DisplayListener) {
+        override fun registerDisplayListener(
+            listener: DisplayManager.DisplayListener,
+            includeRefreshRateEvents: Boolean,
+        ) {
             if (displayListener != null) {
                 throw IllegalStateException("already have a listener registered: $displayListener")
             }
