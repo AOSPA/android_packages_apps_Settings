@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import java.time.LocalTime
@@ -141,6 +142,9 @@ class StartTimePreference(uiModeManager: UiModeManager, val isUiOnly: Boolean) :
         uiModeManager.customNightModeStart = time
     }
 
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
+
     companion object {
         const val KEY = "dark_theme_start_time"
     }
@@ -182,6 +186,10 @@ class EndTimePreference(uiModeManager: UiModeManager, val isUiOnly: Boolean) :
     override fun updateCustomTime(time: LocalTime) {
         uiModeManager.customNightModeEnd = time
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
+
 
     companion object {
         const val KEY = "dark_theme_end_time"

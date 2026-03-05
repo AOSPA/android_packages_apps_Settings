@@ -23,6 +23,7 @@ import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
 
@@ -64,6 +65,9 @@ class SimCallsPreference() :
         }
         return subInfo.displayName
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = "sim_calls_preference_key"

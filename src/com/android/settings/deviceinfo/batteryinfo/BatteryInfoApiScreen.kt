@@ -23,6 +23,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.fuelgauge.BatteryUtils
 import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -58,6 +59,8 @@ class BatteryInfoApiScreen :
             purpose = R.string.battery_info_manufacture_date_purpose,
             type = AnyString,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 execute {
                     val mBatteryManager =
@@ -81,6 +84,8 @@ class BatteryInfoApiScreen :
             purpose = R.string.battery_info_first_usage_date_purpose,
             type = AnyString,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 execute {
                     val mBatteryManager =
@@ -105,6 +110,8 @@ class BatteryInfoApiScreen :
             purpose = R.string.battery_info_cycle_count_purpose,
             type = AnyString,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 execute {
                     val batteryIntent = BatteryUtils.getBatteryIntent(context)

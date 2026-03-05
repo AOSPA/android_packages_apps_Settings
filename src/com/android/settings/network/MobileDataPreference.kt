@@ -83,7 +83,7 @@ class MobileDataPreference :
     ) = ReadWritePermit.ALLOW
 
     override val sensitivityLevel
-        get() = SensitivityLevel.MUST_PROVIDE_UNDO
+        get() = SensitivityLevel.REQUIRES_CONFIRMATION
 
     @Suppress("UNCHECKED_CAST")
     private class MobileDataStorage(private val context: Context) :

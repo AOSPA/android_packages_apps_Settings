@@ -31,6 +31,7 @@ import com.android.settings.datausage.lib.DataUsageFormatter
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.net.DataUsageController
 
 class WifiDataUsagePreference(context: Context):
@@ -85,6 +86,9 @@ class WifiDataUsagePreference(context: Context):
     override fun isEnabled(context: Context): Boolean = isEnabled
 
     override fun intent(context: Context): Intent? = launchIntent
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val TAG = "WifiDataUsagePreference"

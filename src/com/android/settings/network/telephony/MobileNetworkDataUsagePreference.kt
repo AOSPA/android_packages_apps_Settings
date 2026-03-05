@@ -40,6 +40,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import kotlin.math.max
 import kotlinx.coroutines.CoroutineScope
@@ -191,6 +192,9 @@ class MobileNetworkDataUsagePreference(
 
             else -> null
         }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val TAG = "MobileNetworkDataUsagePreference"

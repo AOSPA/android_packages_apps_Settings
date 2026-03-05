@@ -448,6 +448,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "true" } }
                 set { execute {} }
             }
@@ -457,6 +458,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "true" } }
             }
         }
@@ -598,6 +600,8 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
                 preconditions("Preference precondition") { Allowed }
                 get {
                     preconditions("Get precondition") { Allowed }
@@ -644,6 +648,8 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
                 get {
                     execute { "value" }
                 }
@@ -660,6 +666,8 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
                 get {
                     execute { "value" }
                 }
@@ -679,6 +687,8 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
                 get {
                     execute { "value" }
                 }
@@ -898,6 +908,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = TestEnumType,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "OPTION_1" } }
             }
         }

@@ -28,6 +28,7 @@ import com.android.settings.wifi.utils.isAdminUser
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 
 // LINT.IfChange
 @SuppressLint("MissingPermission")
@@ -61,6 +62,9 @@ class MobileNetworkSpnPreference(private val context: Context, private val subId
                 carrierName
             } ?: "".also { Log.w(TAG, "getCarrierName(), subId=$subId, subscription is empty") }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val TAG = "MobileNetworkSpnPreference"

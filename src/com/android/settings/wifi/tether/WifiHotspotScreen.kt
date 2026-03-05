@@ -164,7 +164,7 @@ open class WifiHotspotScreen(context: Context) :
         ReadWritePermit.ALLOW
 
     override val sensitivityLevel
-        get() = SensitivityLevel.DEEP_LINK_ONLY
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     override fun storage(context: Context): KeyValueStore = wifiHotspotStore
 

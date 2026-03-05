@@ -40,6 +40,7 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.SensitivityLevel
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateProviderExecutorTest {
@@ -357,6 +358,7 @@ class CatalystStateProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "true" } }
                 set { execute {} }
             }

@@ -22,6 +22,7 @@ import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -51,6 +52,10 @@ class HardwareVersionPreference :
             isCopyingEnabled = true
             isSelectable = false
         }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
+
 
     companion object {
         const val KEY = "hardware_info_device_revision"

@@ -84,6 +84,6 @@ class WifiHotspotMainSwitchPreferenceTest {
 
     @Test
     fun sensitivityLevel_returnNoSensitivity() {
-        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.MUST_PROVIDE_UNDO)
     }
 }

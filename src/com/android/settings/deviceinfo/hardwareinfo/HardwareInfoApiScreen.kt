@@ -23,6 +23,7 @@ import android.os.SystemProperties
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
@@ -47,6 +48,8 @@ class HardwareInfoApiScreen :
             purpose = R.string.hardware_info_serial_purpose,
             type = AnyString,
         ) {
+            sensitivityLevel(SensitivityLevel.DO_NOT_EXPOSE)
+
             get {
                 permissions(READ_PRIVILEGED_PHONE_STATE)
                 execute { Build.getSerial() }
@@ -58,6 +61,8 @@ class HardwareInfoApiScreen :
             purpose = R.string.hardware_info_mfg_year_purpose,
             type = AnyString,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get { execute { getManufacturedYear(context) } }
         }
     }
