@@ -23,6 +23,7 @@ import com.android.settings.Settings
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datetime.ZoneGetter
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -54,7 +55,7 @@ open class DateTimeSettingsScreen : PreferenceScreenMixin, PreferenceSummaryProv
         get() = R.string.keywords_date_and_time
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +DateTimeSettingsScreenPreference(this@DateTimeSettingsScreen) }
 
     override fun getSummary(context: Context): CharSequence? {
         val now = Calendar.getInstance()
@@ -72,6 +73,24 @@ open class DateTimeSettingsScreen : PreferenceScreenMixin, PreferenceSummaryProv
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, Settings.DateTimeSettingsActivity::class.java, metadata?.key)
+
+    class DateTimeSettingsScreenPreference(
+        private val screenMetadata : DateTimeSettingsScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider {
+        override val key : String
+            get() = "date_time_settings_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+    }
 
     companion object {
         const val KEY = "date_time_settings"

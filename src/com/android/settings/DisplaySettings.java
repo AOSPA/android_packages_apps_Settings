@@ -43,6 +43,7 @@ import com.android.settingslib.search.SearchIndexable;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DisplaySettings extends DashboardFragment {
     private static final String TAG = "DisplaySettings";
@@ -117,3 +118,5 @@ public class DisplaySettings extends DashboardFragment {
         return DisplayScreen.KEY;
     }
 }
+// LINT.ThenChange(com.android.settings.display.DisplayScreen.kt,
+// com.android.settings.display.DisplayApiScreen.kt)

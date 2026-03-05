@@ -73,8 +73,6 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
     private static final String EXTRA_AUTO_SELECTION = "auto_selection";
     public static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
     private static final String TAG = "KeyboardAndTouchA11yFragment";
-    private static final Uri sVirtualKeyboardSettingsUri = Secure.getUriFor(
-            Secure.SHOW_IME_WITH_HARD_KEYBOARD);
     private static final Uri sAccessibilityBounceKeysUri = Secure.getUriFor(
             Secure.ACCESSIBILITY_BOUNCE_KEYS);
     private static final Uri sAccessibilitySlowKeysUri = Secure.getUriFor(
@@ -341,11 +339,6 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
     private void registerSettingsObserver() {
         unregisterSettingsObserver();
         ContentResolver contentResolver = getActivity().getContentResolver();
-        contentResolver.registerContentObserver(
-                sVirtualKeyboardSettingsUri,
-                false,
-                mContentObserver,
-                UserHandle.myUserId());
         contentResolver.registerContentObserver(
                 sAccessibilityBounceKeysUri,
                 false,

@@ -154,6 +154,12 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
                     com.android.settingslib.R.string.power_incompatible_charging_settings_home_page,
                     info.batteryPercentString);
         }
+        if (info.isWirelessCharging()
+                && Utils.isWirelessIncompatibleCharging(mContext)) {
+            return mContext.getString(
+                    com.android.settingslib.R.string.power_incompatible_charging_settings_home_page,
+                    info.batteryPercentString);
+        }
         if (BatteryUtils.isBatteryDefenderOn(info)) {
             return mContext.getString(
                     com.android.settingslib.R.string.power_charging_on_hold_settings_home_page,
