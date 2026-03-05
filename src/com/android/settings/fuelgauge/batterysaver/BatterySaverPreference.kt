@@ -132,7 +132,7 @@ class BatterySaverPreference :
     }
 
     companion object {
-        private const val KEY = "battery_saver"
+        const val KEY = "battery_saver"
         private const val SWITCH_ANIMATION_DURATION: Long = 350L
     }
 }

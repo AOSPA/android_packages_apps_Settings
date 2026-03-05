@@ -94,8 +94,7 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
         }
     }
 
-    override val availabilityDescription =
-        "The device must be configured for scheduled dark mode."
+    override val availabilityDescription = "The device must be configured for scheduled dark mode."
 
     override fun isAvailable(context: Context) =
         uiModeManager.nightMode == UiModeManager.MODE_NIGHT_CUSTOM &&
@@ -135,10 +134,7 @@ class StartTimePreference(uiModeManager: UiModeManager, val isUiOnly: Boolean) :
     }
 
     override fun tags(context: Context): Array<String> {
-        if (isUiOnly) {
-            return arrayOf(UI_ONLY_PREFERENCE)
-        }
-        return super.tags(context)
+        return arrayOf(UI_ONLY_PREFERENCE)
     }
 
     override fun updateCustomTime(time: LocalTime) {
@@ -180,10 +176,7 @@ class EndTimePreference(uiModeManager: UiModeManager, val isUiOnly: Boolean) :
     }
 
     override fun tags(context: Context): Array<String> {
-        if (isUiOnly) {
-            return arrayOf(UI_ONLY_PREFERENCE)
-        }
-        return super.tags(context)
+        return arrayOf(UI_ONLY_PREFERENCE)
     }
 
     override fun updateCustomTime(time: LocalTime) {
@@ -193,9 +186,8 @@ class EndTimePreference(uiModeManager: UiModeManager, val isUiOnly: Boolean) :
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
-
     companion object {
         const val KEY = "dark_theme_end_time"
     }
 }
-// LINT.ThenChange(DarkModeCustomPreferenceController.java)
+// LINT.ThenChange(DarkModeCustomPreferenceController.java, DarkModeApiFirstScreen.kt)
