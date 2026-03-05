@@ -35,6 +35,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -127,6 +128,9 @@ class CursorFollowingPreference :
         )
         return true
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     private fun isMagnificationCursorFollowingModeDialogSupported(): Boolean {
         return InputPeripheralsSettingsUtils.isMouse()

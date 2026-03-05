@@ -37,6 +37,7 @@ import com.android.settings.accessibility.shared.ui.ShortcutFeatureNameProvider
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.SensitivityLevel
 
 /**
  * A preference that allows users to configure the accessibility shortcut for an accessibility
@@ -183,6 +184,10 @@ class A11yServiceShortcutPreference(
             context.notifyPreferenceChange(key)
         }
     }
+
+    //marked with DO_NOT_EXPOSE due to security concerns, changing sensitivity will require a check with security
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     companion object {
         const val KEY = "service_shortcut"
