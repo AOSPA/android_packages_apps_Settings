@@ -17,6 +17,7 @@
 package com.android.settings.wifi.details2
 
 import android.content.Context
+import android.net.wifi.WifiConfiguration
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -36,9 +37,12 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class WifiPrivacyScreenApiTest {
@@ -47,6 +51,7 @@ class WifiPrivacyScreenApiTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val mockSavedNetworkRepository = mock<SavedNetworkRepository>()
+    private val mockWifiConfiguration = mock<WifiConfiguration>()
     private lateinit var provider: WifiFeatureProvider
     private lateinit var screen: WifiPrivacyScreenApi
     private lateinit var tester: ApiTester
@@ -96,6 +101,64 @@ class WifiPrivacyScreenApiTest {
         val options = tester.getParameterOptions(WifiPrivacyScreenApi.PARAMETER_KEY)
 
         assertThat(options).containsExactly(TEST_LOOKUP_KEY)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getSendDeviceName_valueIsTrue_returnsTrue() = runTest {
+        mockWifiConfiguration.stub { on { isSendDhcpHostnameEnabled } doReturn true }
+        mockSavedNetworkRepository.stub {
+            on { getWifiConfiguration(TEST_LOOKUP_KEY) } doReturn mockWifiConfiguration
+        }
+        val allParameters = screen.getAllPossibleParameters(context).first()
+        screen.initializeParameters(allParameters)
+
+        val value = tester.get<Boolean>(WifiPrivacyScreenApi.SEND_DEVICES_NAME_SWITCH_KEY)
+
+        assertThat(value).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getSendDeviceName_valueIsFalse_returnsFalse() = runTest {
+        mockWifiConfiguration.stub { on { isSendDhcpHostnameEnabled } doReturn false }
+        mockSavedNetworkRepository.stub {
+            on { getWifiConfiguration(TEST_LOOKUP_KEY) } doReturn mockWifiConfiguration
+        }
+        val allParameters = screen.getAllPossibleParameters(context).first()
+        screen.initializeParameters(allParameters)
+
+        val value = tester.get<Boolean>(WifiPrivacyScreenApi.SEND_DEVICES_NAME_SWITCH_KEY)
+
+        assertThat(value).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setSendDeviceName_valueIsTrue_setWifiConfiguration() = runTest {
+        mockSavedNetworkRepository.stub {
+            on { getWifiConfiguration(TEST_LOOKUP_KEY) } doReturn mockWifiConfiguration
+        }
+        val allParameters = screen.getAllPossibleParameters(context).first()
+        screen.initializeParameters(allParameters)
+
+        tester.set(WifiPrivacyScreenApi.SEND_DEVICES_NAME_SWITCH_KEY, true)
+
+        verify(mockSavedNetworkRepository).setWifiConfiguration(eq(TEST_LOOKUP_KEY), any())
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setSendDeviceName_valueIsFalse_setWifiConfiguration() = runTest {
+        mockSavedNetworkRepository.stub {
+            on { getWifiConfiguration(TEST_LOOKUP_KEY) } doReturn mockWifiConfiguration
+        }
+        val allParameters = screen.getAllPossibleParameters(context).first()
+        screen.initializeParameters(allParameters)
+
+        tester.set(WifiPrivacyScreenApi.SEND_DEVICES_NAME_SWITCH_KEY, false)
+
+        verify(mockSavedNetworkRepository).setWifiConfiguration(eq(TEST_LOOKUP_KEY), any())
     }
 
     private companion object {
