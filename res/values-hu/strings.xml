@@ -412,10 +412,8 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Kihagyás"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Elérte a hozzáadható arcok maximális számát"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Nem lehet további arcokat hozzáadni"</string>
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
-    <skip />
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" msgid="2276422963933723362">"Nem sikerült az Arcalapú feloldás beállítása"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message" msgid="2680132270879475080">"Nincs internetkapcsolata. Lépjen vissza, és csatlakozzon az internethez, vagy állítsa be ezt később a beállításokban."</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"A rögzítés nincs kész"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Letelt az arcregisztráció időkorlátja. Próbálja újra."</string>
@@ -1343,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Aktiválja a Wi-Fi-hívást"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Kapcsolja be a Wi-Fi-hívásokat"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"<xliff:g id="SSID">%1$s</xliff:g> – leválasztva"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Hang és rezgés"</string>
     <string name="account_settings" msgid="255404935489127404">"Fiókok"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"„Munkaprofil” fiókok – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"„Személyes profil” fiókok"</string>
@@ -1351,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Munkahelyi fiók – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Személyes fiók – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Keresés"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Megjelenítés"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Automatikus képernyőforgatás"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Ki"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Be"</string>
@@ -2148,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"A \".\" beillesztéséhez kétszer kell lenyomni a szóköz billentyűt"</string>
     <string name="show_password" msgid="7101900779571040117">"Jelszavak mutatása"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Gépelés közben rövid ideig megjeleníti a karaktereket"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"Jelszavak megjelenítése érintőképernyő esetén"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Érintőképernyőn való gépelés közben rövid ideig megjeleníti a karaktereket"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"Jelszavak megjelenítése a billentyűzet esetén"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"A billentyűzeten való gépelés közben rövid ideig megjeleníti a karaktereket"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Lehetséges, hogy ez a helyesírás-ellenőrző összegyűjti a beírt szövegeket, beleértve a személyes adatokat, mint amilyenek a jelszavak és bankkártyaszámok. A(z) <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> alkalmazástól származik. Használja ezt a helyesírás-ellenőrzőt?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Beállítások"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Nyelv"</string>
@@ -3664,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Eszköz"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Billentyűzet, érintőpad, kijelző, hang"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Kijelző"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Hang"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Nem áll rendelkezésre, mert az NFC ki van kapcsolva"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"A használathoz előbb telepítsen egy fizetési alkalmazást"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Legutóbbi alkalmazások, alapértelmezett alkalmazások"</string>
@@ -4369,7 +4360,7 @@
     <string name="zen_mode_trigger_title_generic" msgid="1347753445938095789">"Alkalmazásbeállítások"</string>
     <string name="zen_mode_trigger_summary_settings_in_app" msgid="4860667191183702601">"Információk és beállítások a(z) <xliff:g id="APP_NAME">%1$s</xliff:g> appban"</string>
     <string name="zen_mode_trigger_summary_managed_by_app" msgid="8631011868193102098">"Kezelő: <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
-    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Tiltja a(z) <xliff:g id="MODE_NAME">%1$s</xliff:g> módot?"</string>
+    <string name="zen_mode_confirm_disable_mode_title" msgid="7314998098582325018">"Letiltja ezt: <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
     <string name="zen_mode_confirm_disable_message" msgid="2703882646066764140">"Ez a mód soha nem kapcsol be, ha tiltva van"</string>
     <string name="zen_mode_action_disable" msgid="3552921561331044881">"Tiltás"</string>
     <string name="zen_mode_confirm_enable_mode_title" msgid="6020902148457106017">"Engedélyezi ezt: <xliff:g id="MODE_NAME">%1$s</xliff:g>?"</string>
@@ -4553,9 +4544,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Alapértelmezett USB-beállítás"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Bekapcsológomb beállításai"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Fájlátviteli lehetőségek"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Adathozzáférés elleni védelem"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"PCI-protokollok egymásba ágyazásának engedélyezése"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Ha engedélyezve van, akkor az USB- és Thunderbolt-perifériák PCI-alagutakat hozhatnak létre, és hozzáférhetnek a rendszermemóriához"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"A beállítás módosításához adminisztrátor felhasználónak kell lennie"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"A rendszergazda által letiltva"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"A Speciális védelem mód által letiltva"</string>
@@ -5366,8 +5360,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Műhold"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Műholdas kapcsolat"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"műholdas kapcsolat"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Műholdas kapcsolat használata"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Fiókjával használhatja a támogatott alkalmazásokat"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Fiókjával használhat adatokat az összes alkalmazásban"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Támogatott alkalmazások a telefonon"</string>
@@ -5517,7 +5510,7 @@
     <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"Szolgáltatója gyűjtheti a helyadatokat, ha Ön segélyhívásra használja ezt a szolgáltatást.\n\nEzzel kapcsolatban bővebben a szolgáltató adatvédelmi irányelvei nyújtanak tájékoztatást."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"Elveszítheti hozzáférését a fennmaradó idő- vagy adatmennyiséghez. Az eltávolítás előtt egyeztessen szolgáltatójával."</string>
     <string name="content_capture" msgid="868372905432812238">"Alkalmazástartalom"</string>
-    <string name="content_capture_summary" msgid="49720773699715531">"Engedélyezi, hogy az alkalmazások tartalmakat küldjenek az Android rendszernek"</string>
+    <string name="content_capture_summary" msgid="49720773699715531">"Engedélyezi, hogy az alkalmazások tartalmakat küldjenek az Android rendszernek."</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"A rendszer memória-pillanatfelvételeinek rögzítése"</string>
     <string name="development_memtag_page_title" msgid="3546667618748029188">"Memory Tagging Extension"</string>
     <string name="development_memtag_intro" msgid="8032596625527637164">"A Memory Tagging Extension (MTE) segítségével könnyebben találhatja meg a memóriabiztonsági problémákat az alkalmazásában, és biztonságosabbá teheti az alkalmazásában lévő natív kódot."</string>
@@ -6194,19 +6187,24 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"További információ a műholdas kapcsolatról"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Műholdas SOS demójának megnyitása"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Műholdas alkalmazások"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"Csak segélyhívás"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Rendelkezésre áll műholdas kapcsolat"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"A Műhold mozaik Gyorsbeállításokhoz való hozzáadásával könnyen hozzáférhet a műholdas információkhoz"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Mozaik hozzáadása"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Utasítások a Műhold mozaikhoz"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_apps_see_all_supported_apps_text (1053383406430986034) -->
+    <skip />
+    <!-- no translation found for satellite_apps_see_less_text (3776624493969066217) -->
+    <skip />
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"A műhold nem áll rendelkezésre"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Ha csatlakozva van mobil- vagy Wi‑Fi-hálózathoz, akkor a műholdas lefedettség nem áll rendelkezésre."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Ebben az országban vagy régióban nem áll rendelkezésre a műholdas kapcsolat."</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"A műholdas kapcsolat jelenleg nem áll rendelkezésre. Próbálja újra később."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"A mobil-előfizetése nem tartalmaz műholdas lefedettséget. Segítségért forduljon a szolgáltatóhoz."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"A műholdas üzenetváltás használatához a Google Messagest kell beállítani alapértelmezett üzenetküldő alkalmazásként."</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"A műholdas kapcsolatot a szolgáltatója engedélyezi. További információt a szolgáltató műholdas beállításaiban találhat."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Rendelkezésre álló helyek megtekintése"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Alapértelmezett alkalmazás módosítása"</string>

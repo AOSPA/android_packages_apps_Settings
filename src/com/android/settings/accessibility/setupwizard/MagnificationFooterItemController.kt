@@ -28,7 +28,7 @@ class MagnificationFooterItemController(private val context: Context, item: Item
     // helpResource = 0 avoids showing "Learn more" links in Setup Wizard flow
     private val magnificationFooterMetadata = MagnificationFooterPreference(helpResource = 0)
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         val title = magnificationFooterMetadata.getTitle(context)
         val intro = context.getString(magnificationFooterMetadata.introductionTitle)
         item.summary = title

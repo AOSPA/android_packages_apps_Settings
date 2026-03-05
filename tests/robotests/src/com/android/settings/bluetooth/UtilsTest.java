@@ -33,6 +33,9 @@ import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
 import android.os.SystemProperties;
 
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroup;
+
 import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.bluetooth.A2dpProfile;
@@ -411,5 +414,86 @@ public class UtilsTest {
 
         verify(mLeAudioProfile).setEnabled(device1, false);
         verify(mHearingAidProfile, never()).setEnabled(device1, true);
+    }
+
+    @Test
+    public void updateVisibilityAccordingToChildren_oneVisibleChild_groupIsVisible() {
+        // Setup: Create a preference group with one visible child preference.
+        PreferenceGroup group = mock(PreferenceGroup.class);
+        Preference visiblePreference = mock(Preference.class);
+        when(group.getPreferenceCount()).thenReturn(1);
+        when(group.getPreference(0)).thenReturn(visiblePreference);
+        when(visiblePreference.isVisible()).thenReturn(true);
+
+        // Call the method under test.
+        Utils.updateVisibilityAccordingToChildren(group);
+
+        // Verify: The group's visibility is set to true.
+        verify(group).setVisible(true);
+    }
+
+    @Test
+    public void updateVisibilityAccordingToChildren_allChildrenInvisible_groupIsInvisible() {
+        // Setup: Create a preference group with two invisible child preferences.
+        PreferenceGroup group = mock(PreferenceGroup.class);
+        Preference invisiblePreference1 = mock(Preference.class);
+        Preference invisiblePreference2 = mock(Preference.class);
+        when(group.getPreferenceCount()).thenReturn(2);
+        when(group.getPreference(0)).thenReturn(invisiblePreference1);
+        when(group.getPreference(1)).thenReturn(invisiblePreference2);
+        when(invisiblePreference1.isVisible()).thenReturn(false);
+        when(invisiblePreference2.isVisible()).thenReturn(false);
+
+        // Call the method under test.
+        Utils.updateVisibilityAccordingToChildren(group);
+
+        // Verify: The group's visibility is set to false.
+        verify(group).setVisible(false);
+    }
+
+    @Test
+    public void updateVisibilityAccordingToChildren_noChildren_groupIsInvisible() {
+        // Setup: Create a preference group with no children.
+        PreferenceGroup group = mock(PreferenceGroup.class);
+        when(group.getPreferenceCount()).thenReturn(0);
+
+        // Call the method under test.
+        Utils.updateVisibilityAccordingToChildren(group);
+
+        // Verify: The group's visibility is set to false.
+        verify(group).setVisible(false);
+    }
+
+    @Test
+    public void updateVisibilityAccordingToChildren_mixedVisibilityChildren_groupIsVisible() {
+        // Setup: Create a preference group with one visible and one invisible child.
+        PreferenceGroup group = mock(PreferenceGroup.class);
+        Preference invisiblePreference = mock(Preference.class);
+        Preference visiblePreference = mock(Preference.class);
+        when(group.getPreferenceCount()).thenReturn(2);
+        when(group.getPreference(0)).thenReturn(invisiblePreference);
+        when(group.getPreference(1)).thenReturn(visiblePreference);
+        when(invisiblePreference.isVisible()).thenReturn(false);
+        when(visiblePreference.isVisible()).thenReturn(true);
+
+        // Call the method under test.
+        Utils.updateVisibilityAccordingToChildren(group);
+
+        // Verify: The group's visibility is set to true because at least one child is visible.
+        verify(group).setVisible(true);
+    }
+
+    @Test
+    public void updateVisibilityAccordingToChildren_invisibleCategoryKey_doesNothing() {
+        // Setup: Create a preference group with the special INVISIBLE_CATEGORY key.
+        PreferenceGroup group = mock(PreferenceGroup.class);
+        when(group.getKey()).thenReturn(Utils.INVISIBLE_CATEGORY);
+
+        // Call the method under test.
+        Utils.updateVisibilityAccordingToChildren(group);
+
+        // Verify: The method returns early and does not change the group's visibility.
+        verify(group, never()).setVisible(anyBoolean());
+        verify(group, never()).getPreferenceCount();
     }
 }

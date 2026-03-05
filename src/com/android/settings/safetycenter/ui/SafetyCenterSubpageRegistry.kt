@@ -56,7 +56,6 @@ object SafetyCenterSubpageRegistry {
     const val ACCOUNT_SECURITY_SUBPAGE_KEY = "account_security_subpage"
     const val DEVICE_FINDERS_SUBPAGE_KEY = "device_finders_subpage"
     const val SYSTEM_AND_UPDATES_SUBPAGE_KEY = "system_and_updates_subpage"
-    const val CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY = "cellular_network_security_subpage"
     const val PRIVACY_CONTROLS_SUBPAGE_KEY = "privacy_controls_page"
 
     // Illustration Preference Keys
@@ -65,8 +64,6 @@ object SafetyCenterSubpageRegistry {
     private const val ACCOUNT_SECURITY_ILLUSTRATION_KEY = "account_security_illustration"
     private const val DEVICE_FINDERS_ILLUSTRATION_KEY = "device_finders_illustration"
     private const val SYSTEM_AND_UPDATES_ILLUSTRATION_KEY = "system_and_updates_illustration"
-    private const val CELLULAR_NETWORK_SECURITY_ILLUSTRATION_KEY =
-        "cellular_network_security_illustration"
 
     // Issues Banner Group Preference Keys
     private const val APP_SECURITY_ISSUES_KEY = "app_security_issues_banner_group"
@@ -74,8 +71,6 @@ object SafetyCenterSubpageRegistry {
     private const val ACCOUNT_SECURITY_ISSUES_KEY = "account_security_issues_banner_group"
     private const val DEVICE_FINDERS_ISSUES_KEY = "device_finders_issues_banner_group"
     private const val SYSTEM_AND_UPDATES_ISSUES_KEY = "system_and_updates_issues_banner_group"
-    private const val CELLULAR_NETWORK_SECURITY_ISSUES_KEY =
-        "cellular_network_security_issues_banner_group"
     private const val PRIVACY_CONTROLS_ISSUES_KEY = "privacy_controls_issues_banner_group"
 
     /**
@@ -140,18 +135,6 @@ object SafetyCenterSubpageRegistry {
                         R.drawable.safety_center_system_and_updates_subpage_illustration,
                     issuesBannerGroupPrefKey = SYSTEM_AND_UPDATES_ISSUES_KEY,
                 ),
-            CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY to
-                SubpageConfig(
-                    xmlResId = R.xml.safety_center_cellular_network_security_subpage,
-                    titleResId = R.string.cellular_network_security_subpage_title,
-                    defaultSummaryResId = R.string.safety_center_cellular_network_security_summary,
-                    subpageFragmentClassName =
-                        CellularNetworkSecuritySubpageFragment::class.qualifiedName!!,
-                    illustrationPrefKey = CELLULAR_NETWORK_SECURITY_ILLUSTRATION_KEY,
-                    illustrationResId =
-                        R.drawable.safety_center_cellular_network_security_subpage_illustration,
-                    issuesBannerGroupPrefKey = CELLULAR_NETWORK_SECURITY_ISSUES_KEY,
-                ),
             PRIVACY_CONTROLS_SUBPAGE_KEY to
                 SubpageConfig(
                     xmlResId = R.xml.safety_center_privacy_controls_settings,
@@ -183,8 +166,6 @@ object SafetyCenterSubpageRegistry {
                     SYSTEM_AND_UPDATES_SUBPAGE_KEY,
                 context.getString(R.string.config_safety_center_lock_screen_subpage_id) to
                     DEVICE_UNLOCK_SUBPAGE_KEY,
-                context.getString(R.string.config_safety_center_network_security_subpage_id) to
-                    CELLULAR_NETWORK_SECURITY_SUBPAGE_KEY,
                 context.getString(R.string.config_safety_center_privacy_controls_subpage_id) to
                     PRIVACY_CONTROLS_SUBPAGE_KEY,
             )

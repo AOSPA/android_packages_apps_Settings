@@ -27,6 +27,7 @@ import com.android.settings.accessibility.EdgeTypePreference as EdgeTypeWidget
 import com.android.settings.accessibility.captionpreferences.data.CaptionEdgeColorDataStore
 import com.android.settings.accessibility.captionpreferences.data.CaptionEdgeTypeDataStore
 import com.android.settings.accessibility.captionpreferences.data.CaptionFontFamilyDataStore
+import com.android.settings.accessibility.shared.utils.SummaryMap
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.DiscreteStringValue
@@ -88,6 +89,7 @@ class CaptionFontFamilyPreference(context: Context) :
         private const val KEY = "captioning_typeface"
     }
 }
+
 // LINT.ThenChange()
 
 // LINT.IfChange(caption_edge_type_pref)
@@ -132,6 +134,7 @@ class CaptionEdgeTypePreference(context: Context) :
         const val KEY = "captioning_edge_type"
     }
 }
+
 // LINT.ThenChange()
 
 // LINT.IfChange(caption_edge_color_pref)

@@ -358,7 +358,7 @@
     <string name="owner_info_settings_edit_text_hint" msgid="841926875876050274">"De ex., dispozitivul Android al lui Andrei."</string>
     <string name="location_settings_title" msgid="8375074508036087178">"Locație"</string>
     <string name="location_settings_primary_switch_title" msgid="8849081766644685127">"Folosește locația"</string>
-    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Dezactivat"</string>
+    <string name="location_settings_summary_location_off" msgid="4797932754681162262">"Dezactivată"</string>
     <string name="location_settings_summary_location_on" msgid="4273299717586679786">"{count,plural, =1{Activată / # aplicație are acces la locație}few{Activată / # aplicații au acces la locație}other{Activată / # de aplicații au acces la locație}}"</string>
     <string name="location_settings_loading_app_permission_stats" msgid="6054103701535557342">"Se încarcă…"</string>
     <string name="location_settings_footer_general" msgid="3447585552176173502">"Aplicațiile cu permisiunea Dispozitive din apropiere pot stabili poziția relativă a dispozitivelor conectate."</string>
@@ -412,10 +412,8 @@
     <string name="security_settings_face_enroll_enrolling_skip" msgid="5568617401632528567">"Omite"</string>
     <string name="face_intro_error_max" msgid="2474735057709291626">"Ai adăugat numărul maxim de chipuri"</string>
     <string name="face_intro_error_unknown" msgid="1626057493054989995">"Nu se pot adăuga mai multe chipuri"</string>
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_title (2276422963933723362) -->
-    <skip />
-    <!-- no translation found for security_settings_face_enroll_intro_timeout_dialog_message (2680132270879475080) -->
-    <skip />
+    <string name="security_settings_face_enroll_intro_timeout_dialog_title" msgid="2276422963933723362">"Nu poți configura Deblocarea facială"</string>
+    <string name="security_settings_face_enroll_intro_timeout_dialog_message" msgid="2680132270879475080">"Nu există conexiune la internet. Reia pașii anteriori și conectează-te la internet sau configurează mai târziu în setări."</string>
     <string name="security_settings_face_enroll_error_dialog_title" msgid="2460820099922775936">"Înregistrarea nu a fost finalizată"</string>
     <string name="security_settings_face_enroll_dialog_ok" msgid="1674650455786434426">"OK"</string>
     <string name="security_settings_face_enroll_error_timeout_dialog_message" msgid="7768349698547951750">"Timpul limită pentru înregistrarea feței a expirat. Încearcă din nou."</string>
@@ -1343,7 +1341,6 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"Activează Apelarea prin Wi-Fi"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"Activează Apelarea prin Wi-Fi"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"Deconectat de la <xliff:g id="SSID">%1$s</xliff:g>"</string>
-    <string name="sound_settings" msgid="7622986039384531304">"Sunete și vibrații"</string>
     <string name="account_settings" msgid="255404935489127404">"Conturi"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"Conturi cu profil de serviciu – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"Conturi cu profil personal"</string>
@@ -1351,7 +1348,6 @@
     <string name="accessibility_work_account_title" msgid="7622485151217943839">"Cont de serviciu – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_personal_account_title" msgid="8535265881509557013">"Cont personal – <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="search_settings" msgid="7573686516434589771">"Caută"</string>
-    <string name="display_settings" msgid="7197750639709493852">"Afișaj"</string>
     <string name="accelerometer_title" msgid="7745991950833748909">"Rotire automată a ecranului"</string>
     <string name="auto_rotate_option_off" msgid="2788096269396290731">"Dezactivată"</string>
     <string name="auto_rotate_option_on" msgid="5776678230808498171">"Activată"</string>
@@ -1876,25 +1872,25 @@
     <string name="settings_license_activity_loading" msgid="1653151990366578827">"Se încarcă…"</string>
     <string name="settings_safetylegal_activity_loading" msgid="1757860124583063395">"Se încarcă…"</string>
     <string name="lockpassword_choose_your_password_header" msgid="2407205113298094824">"Setează o parolă"</string>
-    <string name="lockpassword_choose_your_profile_password_header" msgid="7038997227611893312">"Setează o parolă de serviciu"</string>
+    <string name="lockpassword_choose_your_profile_password_header" msgid="7038997227611893312">"Setează o parolă pentru serviciu"</string>
     <string name="lockpassword_choose_your_pin_header" msgid="7754265746504679473">"Setează un cod PIN"</string>
-    <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Setează un cod PIN de serviciu"</string>
+    <string name="lockpassword_choose_your_profile_pin_header" msgid="4581749963670819048">"Setează un cod PIN pentru serviciu"</string>
     <string name="lockpassword_choose_your_pattern_header" msgid="5674909390779586252">"Setează un model"</string>
     <string name="lockpassword_choose_your_pattern_description" msgid="6808109256008481046">"Pentru mai multă siguranță, setează un model pentru deblocarea dispozitivului"</string>
-    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Setează un model de serviciu"</string>
+    <string name="lockpassword_choose_your_profile_pattern_header" msgid="3101811498330756641">"Setează un model pentru serviciu"</string>
     <string name="lockpassword_choose_your_password_header_for_fingerprint" msgid="3167261267229254090">"Pentru a utiliza amprenta, setează parola"</string>
     <string name="lockpassword_choose_your_pattern_header_for_fingerprint" msgid="4707788269512303400">"Pentru a utiliza amprenta, setați modelul"</string>
     <string name="lockpassword_choose_your_pin_message" msgid="7230665212172041837">"Din motive de securitate, setați un cod PIN"</string>
     <string name="lockpassword_choose_your_pin_header_for_fingerprint" msgid="2783879743691792556">"Pentru a utiliza amprenta, setează codul PIN"</string>
     <string name="lockpassword_confirm_your_password_header" msgid="4988519671035171367">"Introdu parola dispozitivului"</string>
     <string name="lockpassword_reenter_your_password_header" msgid="7257189484651655897">"Reintrodu parola"</string>
-    <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Reintrodu parola de serviciu"</string>
-    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Introdu parola de la serviciu"</string>
+    <string name="lockpassword_reenter_your_profile_password_header" msgid="3812040127714827685">"Reintrodu parola pentru serviciu"</string>
+    <string name="lockpassword_confirm_your_work_password_header" msgid="4647071231702288305">"Introdu parola pentru serviciu"</string>
     <string name="lockpassword_confirm_your_pattern_header" msgid="2473024535487015289">"Introdu modelul dispozitivului"</string>
     <string name="lockpassword_confirm_your_work_pattern_header" msgid="2668883108969165844">"Introdu modelul pentru serviciu"</string>
     <string name="lockpassword_confirm_your_pin_header" msgid="541025103892074808">"Introdu codul PIN al dispozitivului"</string>
     <string name="lockpassword_reenter_your_pin_header" msgid="373337443492549650">"Reintrodu codul PIN"</string>
-    <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Reintrodu codul PIN de serviciu"</string>
+    <string name="lockpassword_reenter_your_profile_pin_header" msgid="2890233614560435538">"Reintrodu codul PIN pentru serviciu"</string>
     <string name="lockpassword_confirm_your_work_pin_header" msgid="4229765521391960255">"Introdu codul PIN pentru serviciu"</string>
     <string name="lockpassword_confirm_passwords_dont_match" msgid="2100071354970605232">"Parolele nu corespund"</string>
     <string name="lockpassword_confirm_pins_dont_match" msgid="1103699575489401030">"Codurile PIN nu corespund"</string>
@@ -2148,13 +2144,10 @@
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Apasă de două ori pe tasta de spațiu pentru a insera „.”"</string>
     <string name="show_password" msgid="7101900779571040117">"Afișează parolele"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Caracterele se afișează pentru scurt timp, pe măsură ce tastezi"</string>
-    <!-- no translation found for show_secrets_touch_title (84204071484216549) -->
-    <skip />
+    <string name="show_secrets_touch_title" msgid="84204071484216549">"Afișează parolele pentru ecranul tactil"</string>
     <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Caracterele se afișează pentru scurt timp, pe măsură ce tastezi pe ecranul tactil"</string>
-    <!-- no translation found for show_secrets_physical_title (3789582834699960816) -->
-    <skip />
-    <!-- no translation found for show_secrets_physical_summary (8230461852128151893) -->
-    <skip />
+    <string name="show_secrets_physical_title" msgid="3789582834699960816">"Afișează parolele pentru tastatură"</string>
+    <string name="show_secrets_physical_summary" msgid="8230461852128151893">"Afișează caracterele pentru scurt timp atunci când tastezi pe tastatură"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Acest instrument de verificare a ortografiei poate, de asemenea, să culeagă în întregime textul pe care îl introduci, inclusiv datele personale, cum ar fi parolele și numerele cardurilor de credit. Instrumentul provine de la aplicația <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Folosești acest instrument de verificare ortografică?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Setări"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Limbă"</string>
@@ -3325,8 +3318,8 @@
     <string name="select_all" msgid="7898929601615536401">"Selectează-le pe toate"</string>
     <string name="data_usage_summary_title" msgid="394067070764360142">"Utilizarea datelor"</string>
     <string name="data_usage_app_summary_title" msgid="4933742247928064178">"Date mobile și Wi-Fi"</string>
-    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Sincronizare automată a datelor"</string>
-    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Sincronizare automată a datelor"</string>
+    <string name="account_settings_menu_auto_sync_personal" msgid="2905595464540145671">"Autosincronizare date pers."</string>
+    <string name="account_settings_menu_auto_sync_work" msgid="8561102487795657789">"Autosincronizare date serviciu"</string>
     <string name="account_settings_menu_auto_sync_private" msgid="2315144351530596228">"Sincronizează automat datele private"</string>
     <string name="data_usage_change_cycle" msgid="4501026427365283899">"Schimbă data ciclului..."</string>
     <string name="data_usage_pick_cycle_day" msgid="3548922497494790123">"Ziua din lună pentru resetarea ciclului de utilizare a datelor:"</string>
@@ -3664,8 +3657,6 @@
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispozitiv"</string>
     <string name="device_dashboard_summary" msgid="3847551449956082389">"Tastatură, touchpad, afișaj, sunet"</string>
-    <string name="device_dashboard_display_title" msgid="6053173876299389437">"Afișaj"</string>
-    <string name="device_dashboard_sound_title" msgid="1474805168827021884">"Sunet"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Indisponibile, deoarece NFC este dezactivat"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pentru a folosi funcția, trebuie întâi să instalezi o aplicație pentru plăți"</string>
     <string name="app_and_notification_dashboard_summary" msgid="8047683010984186106">"Aplicații recente, aplicații prestabilite"</string>
@@ -4553,9 +4544,12 @@
     <string name="usb_default_label" msgid="3372838450371060750">"Configurație USB prestabilită"</string>
     <string name="usb_power_title" msgid="5602112548385798646">"Opțiuni pentru alimentare"</string>
     <string name="usb_file_transfer_title" msgid="2261577861371481478">"Opțiuni pentru transferul de fișiere"</string>
-    <string name="usb_pci_tunnel_title" msgid="3005345509895837923">"Protecția accesului la date"</string>
-    <string name="usb_pci_tunnel_control" msgid="6336380624215965491">"Permite tunneling PCI"</string>
-    <string name="usb_pci_tunnel_control_summary" msgid="5979721828896955730">"Când este activat, perifericele USB și Thunderbolt pot crea tuneluri PCI și pot accesa memoria de sistem"</string>
+    <!-- no translation found for usb_pci_tunnel_title (2748798863335212013) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control (3567906081072788607) -->
+    <skip />
+    <!-- no translation found for usb_pci_tunnel_control_summary (3993635413468540397) -->
+    <skip />
     <string name="usb_pci_tunnel_control_disallowed_nonadmin_summary" msgid="5117546225327785011">"Trebuie să fii administrator pentru a modifica această setare"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_enterprise_summary" msgid="5735179482503540735">"Dezactivat de administratorul IT"</string>
     <string name="usb_pci_tunnel_control_disallowed_by_apm_summary" msgid="2082174070822927730">"Dezactivat de modul Protecție avansată"</string>
@@ -5366,8 +5360,7 @@
     <string name="category_title_satellite_connectivity" msgid="7740500012311192133">"Satelit"</string>
     <string name="title_satellite_setting_connectivity" msgid="488626710934668313">"Conectivitate prin satelit"</string>
     <string name="description_satellite_setting_connectivity" msgid="7337311015334186655">"conectivitate prin satelit"</string>
-    <!-- no translation found for satellite_setting_main_switch_title (1808116906972594874) -->
-    <skip />
+    <string name="satellite_setting_main_switch_title" msgid="1808116906972594874">"Folosește conectivitatea prin satelit"</string>
     <string name="title_have_satellite_constrained_data_plan" msgid="8275865334911177900">"Folosirea aplicațiilor acceptate este inclusă în contul tău"</string>
     <string name="title_have_satellite_unconstrained_data_plan" msgid="5437095773679990375">"Datele pentru toate aplicațiile sunt incluse în contul tău"</string>
     <string name="category_title_satellite_supported_apps" msgid="8445659428502119518">"Aplicații acceptate pe telefon"</string>
@@ -6195,19 +6188,24 @@
     <string name="satellite_more_info_text" msgid="6053516592568119780"><u>"Mai multe despre conectivitatea prin satelit"</u></string>
     <string name="forward_arrow_content_desc" msgid="5027233524587883868">"Deschide versiunea demonstrativă a funcției SOS prin satelit"</string>
     <string name="satellite_apps_title" msgid="3693252720266491323">"Aplicații prin satelit"</string>
-    <!-- no translation found for satellite_phone_summary (8809730389477550449) -->
-    <skip />
+    <string name="satellite_phone_summary" msgid="8809730389477550449">"Numai apeluri de urgență"</string>
     <string name="satellite_tile_prompt_notification_title" msgid="208155187034621285">"Conectivitate prin satelit disponibilă"</string>
     <string name="satellite_tile_prompt_notification_summary" msgid="1108842668552812176">"Accesează cu ușurință informațiile din satelit adăugând cardul Satelit în Setările rapide"</string>
     <string name="add_tile_action" msgid="5271301747196740442">"Adaugă un card"</string>
     <string name="satellite_tile_prompt_channel_title" msgid="5240494188833271282">"Solicitări pentru cardul Satelit"</string>
     <string name="satellite_icon_text" msgid="1080385642493133372">"SAT"</string>
+    <!-- no translation found for satellite_apps_see_all_supported_apps_text (1053383406430986034) -->
+    <skip />
+    <!-- no translation found for satellite_apps_see_less_text (3776624493969066217) -->
+    <skip />
     <string name="satellite_not_available_warning_title" msgid="3448838339621037508">"Funcția SOS prin satelit nu este disponibilă"</string>
     <string name="satellite_network_connected_warning_summary" msgid="3252410685526769324">"Acoperirea prin satelit nu este disponibilă când ai o conexiune activă la o rețea mobilă sau Wi-Fi."</string>
     <string name="satellite_unavailable_in_region_warning_summary" msgid="6113727472208461087">"Conectivitatea prin satelit nu este disponibilă în această țară sau regiune"</string>
     <string name="satellite_unavailable_generic_warning_summary" msgid="8686231390499556096">"Conectarea prin satelit nu este disponibilă acum Încearcă din nou mai târziu."</string>
     <string name="satellite_plan_warning_summary" msgid="4033700318847986474">"Abonamentul tău de telefonie mobilă nu include acoperire prin satelit. Contactează operatorul pentru ajutor."</string>
     <string name="satellite_default_app_warning_summary" msgid="1508886758034910436">"Ca să folosești mesageria prin satelit, trebuie ca Mesaje Google să fie aplicația ta de mesagerie prestabilită."</string>
+    <!-- no translation found for satellite_user_restricted_warning_summary (6863113114703813898) -->
+    <skip />
     <string name="satellite_carrier_enabled_info_summary" msgid="6914881458573108229">"Conectivitatea prin satelit este activată de operator. Află mai multe din setările pentru satelit ale operatorului."</string>
     <string name="satellite_view_coverage_button" msgid="4658208635014009964">"Vezi locațiile disponibile"</string>
     <string name="satellite_change_default_app_button" msgid="2473564922032869945">"Schimbă aplicația prestabilită"</string>

@@ -23,6 +23,7 @@ import com.android.settings.accessibility.shared.utils.getAccessibilityFeatureNa
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
 
@@ -35,6 +36,8 @@ class IntroPreference(private val targets: Set<String>) :
         get() = R.string.shortcut_description_purpose
 
     override val indexable = false
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 

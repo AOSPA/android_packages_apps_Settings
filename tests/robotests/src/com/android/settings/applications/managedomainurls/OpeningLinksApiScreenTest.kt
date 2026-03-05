@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.settings.wifi
+package com.android.settings.applications.managedomainurls
 
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
@@ -22,25 +22,26 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.ApiTester
-import com.google.common.truth.Truth.assertThat
+import com.google.common.truth.Truth
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class ConfigureWifiApiScreenTest {
-    private val tester = ApiTester(ConfigureWifiApiScreen())
+class OpeningLinksApiScreenTest {
+    private val tester = ApiTester(OpeningLinksApiScreen())
+
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
-    fun getScreen_flagEnabled_isNotNull() {
-        assertThat(tester.getScreen()).isNotNull()
+    fun getScreen_isNotNull() {
+        Truth.assertThat(tester.getScreen()).isNotNull()
     }
 
     @Test
     @DisableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_flagDisabled_isNull() {
-        assertThat(tester.getScreen()).isNull()
+        Truth.assertThat(tester.getScreen()).isNull()
     }
 }

@@ -41,6 +41,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
+import org.mockito.kotlin.reset
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.verify
@@ -127,6 +128,7 @@ class BrightnessLevelItemControllerTest {
         controller.onStart()
         verify(mockDataStore)
             .addObserver(eq(BrightnessLevelPreference.KEY), captor.capture(), any())
+        reset(mockItem)
 
         captor.firstValue.onKeyChanged(BrightnessLevelPreference.KEY, brightnessPercentage)
 

@@ -30,31 +30,34 @@ import com.google.android.setupdesign.items.Item
 abstract class BaseItemController(val targetItem: Item) {
 
     /**
-     * Initializes the controller by locating the target [Item].
+     * Prepares the controller's structural state.
      *
-     * This should be called after the adapter's hierarchy has been constructed.
+     * This is called once when the view hierarchy is created (e.g., in onViewCreated). Unlike
+     * [onStart], this should be used for one-time setup that does not depend on dynamic state that
+     * might change while the fragment is stopped.
      */
-    fun initialize() {
-        bindData(targetItem)
-    }
+    open fun initialize() {}
 
     /**
      * Binds data to the managed [item].
      *
-     * Implementations should use this method to set properties like the title, summary, icon, or
-     * visibility state of the item.
+     * Implementations must ensure this method is safe to call multiple times during the lifecycle
+     * (e.g., on initial start, after dynamic data changes, or when returning from the backstack).
      *
      * @param item The non-null item instance managed by this controller.
      */
-    protected abstract fun bindData(item: Item)
+    abstract fun bindData(item: Item)
 
     /**
-     * Called when the controller becomes active or visible to the user.
+     * Called when the controller becomes visible. Synchronizes the UI state.
      *
-     * Use this to register listeners, start observers, or refresh data that may have changed while
-     * the controller was stopped.
+     * This method triggers [bindData] to ensure the item reflects the latest information, including
+     * changes that occurred while the screen was in the background. It should also be used to
+     * register observers or listeners.
      */
-    open fun onStart() {}
+    open fun onStart() {
+        bindData(targetItem)
+    }
 
     /**
      * Called when the controller is no longer active or visible.

@@ -161,6 +161,7 @@ public class BrightnessLevelPreferenceController extends BasePreferenceControlle
         final ActivityOptions options = ActivityOptions.makeCustomAnimation(mContext,
                 android.R.anim.fade_in, android.R.anim.fade_out);
         if (brightnessDialogOnSystemUser()) {
+            options.setOverrideTaskTransition(true);
             mContext.startActivityAsUser(intent, options.toBundle(), UserHandle.SYSTEM);
         } else {
             mContext.startActivityForResult(preference.getKey(), intent, 0, options.toBundle());

@@ -24,6 +24,7 @@ import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
 
@@ -39,6 +40,8 @@ class IntroPreference(private val serviceInfo: AccessibilityServiceInfo) :
 
     override val indexable
         get() = false
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence? =
         serviceInfo.loadIntro(context.packageManager)

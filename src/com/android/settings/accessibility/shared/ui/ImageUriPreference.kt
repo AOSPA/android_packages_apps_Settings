@@ -20,14 +20,15 @@ import android.content.Context
 import android.net.Uri
 import androidx.preference.Preference
 import com.airbnb.lottie.LottieAnimationView
+import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.shared.utils.adjustIllustrationLayoutForSetupWizard
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.utils.ThreadUtils
 import com.android.settingslib.widget.IllustrationPreference
-import com.android.settings.R
 
 /**
  * PreferenceMetadata for showing image uri illustration with the [IllustrationPreference] widget.
@@ -44,6 +45,8 @@ abstract class ImageUriPreference :
 
     override val indexable
         get() = false
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     abstract fun getImageUri(context: Context): Uri?
 

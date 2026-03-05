@@ -42,6 +42,7 @@ import com.android.settings.fuelgauge.PowerUsageFeatureProvider
 import com.android.settings.homepage.contextualcards.ContextualCardFeatureProvider
 import com.android.settings.inputmethod.KeyboardSettingsFeatureProvider
 import com.android.settings.localepicker.LocaleFeatureProvider
+import com.android.settings.network.telephony.TelephonyFeatureProvider
 import com.android.settings.notification.syncacrossdevices.SyncAcrossDevicesFeatureProvider
 import com.android.settings.overlay.DockUpdaterFeatureProvider
 import com.android.settings.overlay.FeatureFactory
@@ -66,117 +67,106 @@ class FakeFeatureFactory : FeatureFactory() {
         setFactory(appContext, this)
     }
 
-    override val suggestionFeatureProvider: SuggestionFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val suggestionFeatureProvider: SuggestionFeatureProvider =
+        mock<SuggestionFeatureProvider>()
 
-    override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val hardwareInfoFeatureProvider: HardwareInfoFeatureProvider =
+        mock<HardwareInfoFeatureProvider>()
 
     override val metricsFeatureProvider = mock<MetricsFeatureProvider>()
 
     override val powerUsageFeatureProvider = mock<PowerUsageFeatureProvider>()
 
-    override val batteryStatusFeatureProvider: BatteryStatusFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val batteryStatusFeatureProvider: BatteryStatusFeatureProvider =
+        mock<BatteryStatusFeatureProvider>()
 
-    override val batterySettingsFeatureProvider: BatterySettingsFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val batterySettingsFeatureProvider: BatterySettingsFeatureProvider =
+        mock<BatterySettingsFeatureProvider>()
 
-    override val dashboardFeatureProvider: DashboardFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val dashboardFeatureProvider: DashboardFeatureProvider =
+        mock<DashboardFeatureProvider>()
 
-    override val dockUpdaterFeatureProvider: DockUpdaterFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val dockUpdaterFeatureProvider: DockUpdaterFeatureProvider =
+        mock<DockUpdaterFeatureProvider>()
 
     override val applicationFeatureProvider = mockApplicationFeatureProvider
 
-    override val localeFeatureProvider: LocaleFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val localeFeatureProvider: LocaleFeatureProvider = mock<LocaleFeatureProvider>()
 
-    override val enterprisePrivacyFeatureProvider: EnterprisePrivacyFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val enterprisePrivacyFeatureProvider: EnterprisePrivacyFeatureProvider =
+        mock<EnterprisePrivacyFeatureProvider>()
 
-    override val searchFeatureProvider: SearchFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val searchFeatureProvider: SearchFeatureProvider = mock<SearchFeatureProvider>()
 
     override fun getSurveyFeatureProvider(context: Context) = null
 
-    override val securityFeatureProvider: SecurityFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val securityFeatureProvider: SecurityFeatureProvider = mock<SecurityFeatureProvider>()
 
-    override val userFeatureProvider: UserFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val userFeatureProvider: UserFeatureProvider = mock<UserFeatureProvider>()
 
-    override val slicesFeatureProvider: SlicesFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val slicesFeatureProvider: SlicesFeatureProvider = mock<SlicesFeatureProvider>()
 
-    override val accountFeatureProvider: AccountFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val accountFeatureProvider: AccountFeatureProvider = mock<AccountFeatureProvider>()
 
-    override val panelFeatureProvider: PanelFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val panelFeatureProvider: PanelFeatureProvider = mock<PanelFeatureProvider>()
 
     override fun getContextualCardFeatureProvider(context: Context): ContextualCardFeatureProvider {
-        TODO("Not yet implemented")
+        return mock<ContextualCardFeatureProvider>()
     }
 
-    override val bluetoothFeatureProvider: BluetoothFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val bluetoothFeatureProvider: BluetoothFeatureProvider =
+        mock<BluetoothFeatureProvider>()
 
-    override val biometricsFeatureProvider: BiometricsFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val biometricsFeatureProvider: BiometricsFeatureProvider =
+        mock<BiometricsFeatureProvider>()
 
-    override val faceFeatureProvider: FaceFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val faceFeatureProvider: FaceFeatureProvider = mock<FaceFeatureProvider>()
 
-    override val fingerprintFeatureProvider: FingerprintFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val fingerprintFeatureProvider: FingerprintFeatureProvider =
+        mock<FingerprintFeatureProvider>()
 
-    override val wifiTrackerLibProvider: WifiTrackerLibProvider
-        get() = TODO("Not yet implemented")
+    override val wifiTrackerLibProvider: WifiTrackerLibProvider = mock<WifiTrackerLibProvider>()
 
-    override val securitySettingsFeatureProvider: SecuritySettingsFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val securitySettingsFeatureProvider: SecuritySettingsFeatureProvider =
+        mock<SecuritySettingsFeatureProvider>()
 
-    override val accessibilityFeedbackFeatureProvider: AccessibilityFeedbackFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val accessibilityFeedbackFeatureProvider: AccessibilityFeedbackFeatureProvider =
+        mock<AccessibilityFeedbackFeatureProvider>()
 
-    override val accessibilitySearchFeatureProvider: AccessibilitySearchFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val accessibilitySearchFeatureProvider: AccessibilitySearchFeatureProvider =
+        mock<AccessibilitySearchFeatureProvider>()
 
-    override val accessibilityPageIdFeatureProvider: AccessibilityPageIdFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val accessibilityPageIdFeatureProvider: AccessibilityPageIdFeatureProvider =
+        mock<AccessibilityPageIdFeatureProvider>()
 
-    override val advancedVpnFeatureProvider: AdvancedVpnFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val advancedVpnFeatureProvider: AdvancedVpnFeatureProvider =
+        mock<AdvancedVpnFeatureProvider>()
 
-    override val wifiFeatureProvider: WifiFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val wifiFeatureProvider: WifiFeatureProvider = mock<WifiFeatureProvider>()
 
-    override val keyboardSettingsFeatureProvider: KeyboardSettingsFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val keyboardSettingsFeatureProvider: KeyboardSettingsFeatureProvider =
+        mock<KeyboardSettingsFeatureProvider>()
 
-    override val stylusFeatureProvider: StylusFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val stylusFeatureProvider: StylusFeatureProvider = mock<StylusFeatureProvider>()
 
-    override val threadNetworkFeatureProvider: ThreadNetworkFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val threadNetworkFeatureProvider: ThreadNetworkFeatureProvider =
+        mock<ThreadNetworkFeatureProvider>()
 
-    override val fastPairFeatureProvider: FastPairFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val fastPairFeatureProvider: FastPairFeatureProvider = mock<FastPairFeatureProvider>()
 
-    override val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val privateSpaceLoginFeatureProvider: PrivateSpaceLoginFeatureProvider =
+        mock<PrivateSpaceLoginFeatureProvider>()
 
-    override val displayFeatureProvider: DisplayFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val displayFeatureProvider: DisplayFeatureProvider = mock<DisplayFeatureProvider>()
 
-    override val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val syncAcrossDevicesFeatureProvider: SyncAcrossDevicesFeatureProvider =
+        mock<SyncAcrossDevicesFeatureProvider>()
 
-    override val audioSharingFeatureProvider: AudioSharingFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val audioSharingFeatureProvider: AudioSharingFeatureProvider =
+        mock<AudioSharingFeatureProvider>()
 
-    override val usbFeatureProvider: UsbFeatureProvider
-        get() = TODO("Not yet implemented")
+    override val usbFeatureProvider: UsbFeatureProvider = mock<UsbFeatureProvider>()
+
+    override val telephonyFeatureProvider: TelephonyFeatureProvider =
+        mock<TelephonyFeatureProvider>()
 }

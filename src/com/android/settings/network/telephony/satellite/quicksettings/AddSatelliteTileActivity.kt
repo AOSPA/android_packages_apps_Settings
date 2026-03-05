@@ -19,6 +19,7 @@ package com.android.settings.network.telephony.satellite.quicksettings
 import android.app.Activity
 import android.app.NotificationManager
 import android.app.StatusBarManager
+import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.graphics.drawable.Icon
 import android.os.Bundle
@@ -26,6 +27,7 @@ import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.core.graphics.drawable.toBitmap
 import com.android.settings.R
+import com.android.settings.overlay.FeatureFactory
 
 /**
  * An activity that is launched from a notification to prompt the user to add the satellite quick
@@ -70,6 +72,15 @@ class AddSatelliteTileActivity : Activity() {
             mainExecutor,
             { result ->
                 Log.d(TAG, "requestAddTileService result: $result")
+
+                // Log success only when the tile is actually added
+                if (result == StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ADDED) {
+                    FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                        this,
+                        SettingsEnums.ACTION_SATELLITE_NOTIFICATION_ADD_TILE,
+                    )
+                }
+
                 when (result) {
                     StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ADDED,
                     StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_NOT_ADDED,

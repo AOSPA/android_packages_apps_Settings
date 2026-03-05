@@ -17,6 +17,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:settings="http://schemas.android.com/apk/res-auto"
         android:title="@string/account_settings_title"
+        android:key="account_detail_screen"
         settings:keywords="@string/keywords_accounts">
 
     <com.android.settingslib.widget.LayoutPreference

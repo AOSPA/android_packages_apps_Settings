@@ -18,7 +18,6 @@ package com.android.settings.security;
 
 import android.app.compat.CompatChanges;
 import android.content.Context;
-import android.os.Process;
 import android.text.ShowSecretsSetting;
 
 import androidx.annotation.VisibleForTesting;
@@ -37,14 +36,12 @@ public class ShowSecretsPhysicalPreferenceController extends TogglePreferenceCon
 
     @Override
     public boolean isChecked() {
-        return ShowSecretsSetting.shouldShowPhysicalInputForUser(
-                mContext.getContentResolver(), Process.myUserHandle());
+        return ShowSecretsSetting.shouldShowPhysicalInput(mContext);
     }
 
     @Override
     public boolean setChecked(boolean isChecked) {
-        ShowSecretsSetting.setShouldShowPhysicalInputForUser(
-                mContext.getContentResolver(), isChecked, Process.myUserHandle());
+        ShowSecretsSetting.setShouldShowPhysicalInput(mContext, isChecked);
         return true;
     }
 

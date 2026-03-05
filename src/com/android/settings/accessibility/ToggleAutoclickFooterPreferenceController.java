@@ -23,6 +23,7 @@ import com.android.settings.R;
 /**
  * Preference controller for accessibility autoclick footer.
  */
+// LINT.IfChange
 public class ToggleAutoclickFooterPreferenceController extends
         AccessibilityFooterPreferenceController {
 
@@ -46,3 +47,4 @@ public class ToggleAutoclickFooterPreferenceController extends
         return R.string.help_url_autoclick;
     }
 }
+// LINT.ThenChange(autoclick/ui/AutoclickFooterPreference.kt)

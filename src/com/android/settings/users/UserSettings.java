@@ -1384,7 +1384,11 @@ public class UserSettings extends SettingsPreferenceFragment
             } else {
                 pref.setSummary(null);
             }
-            if (user.id != UserHandle.myUserId() && !user.isGuest() && !user.isInitialized()) {
+            boolean isUserSetupComplete = Flags.upgradeUserSummaryBehaviour()
+                    ? Settings.Secure.getIntForUser(getContentResolver(),
+                            Settings.Secure.USER_SETUP_COMPLETE, 0, user.id) == 1
+                    : user.isInitialized();
+            if (user.id != UserHandle.myUserId() && !user.isGuest() && !isUserSetupComplete) {
                 // sometimes after creating a guest the initialized flag isn't immediately set
                 // and we don't want to show "Not set up" summary for them
                 if (user.isRestricted()) {

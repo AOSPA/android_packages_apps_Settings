@@ -16,14 +16,17 @@
 
 package com.android.settings.accessibility.captionpreferences.ui
 
+import android.content.Context
 import com.android.settings.R
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceBinding
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 class CaptioningFooterPreference(override val key: String) :
     AccessibilityFooterPreferenceMetadata, AccessibilityFooterPreferenceBinding {
     override val purpose: Int
         get() = R.string.caption_preferences_footer_purpose
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val title: Int
         get() = R.string.accessibility_captioning_preference_summary

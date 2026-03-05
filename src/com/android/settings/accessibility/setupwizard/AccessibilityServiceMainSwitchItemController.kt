@@ -37,7 +37,7 @@ class AccessibilityServiceMainSwitchItemController(
 
     private var useServiceObserver: KeyedObserver<String>? = null
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         if (item is MainSwitchItem) {
             with(useServiceMetadata) {
                 item.isVisible = isAvailable(context)
@@ -50,6 +50,7 @@ class AccessibilityServiceMainSwitchItemController(
     }
 
     override fun onStart() {
+        super.onStart()
         if (useServiceObserver != null) {
             return
         }

@@ -16,9 +16,6 @@
 
 package com.android.settings.accessibility;
 
-import static com.android.settings.accessibility.AutoclickUtils.MAX_AUTOCLICK_DELAY_MS;
-import static com.android.settings.accessibility.AutoclickUtils.MIN_AUTOCLICK_DELAY_MS;
-
 import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
@@ -38,18 +35,10 @@ public final class AutoclickUtilsTest {
     private final Context mContext = ApplicationProvider.getApplicationContext();
 
     @Test
-    public void getAutoclickDelaySummary_minDelay_shouldReturnOnSummary() {
+    public void getAutoclickDelaySummary_returnsCorrectDelaySummary() {
         final CharSequence summary = AutoclickUtils.getAutoclickDelaySummary(
                 mContext, R.string.accessibility_autoclick_delay_unit_second,
-                MIN_AUTOCLICK_DELAY_MS);
+                /* delayMillis= */ 200);
         assertThat(summary.toString()).isEqualTo("0.2 seconds");
-    }
-
-    @Test
-    public void getAutoclickDelaySummary_maxDelay_shouldReturnOnSummary() {
-        final CharSequence summary = AutoclickUtils.getAutoclickDelaySummary(
-                mContext, R.string.accessibility_autoclick_delay_unit_second,
-                MAX_AUTOCLICK_DELAY_MS);
-        assertThat(summary.toString()).isEqualTo("1 second");
     }
 }

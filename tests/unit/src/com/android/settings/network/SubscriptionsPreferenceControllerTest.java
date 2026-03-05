@@ -74,6 +74,8 @@ import com.android.internal.hidden_from_bootclasspath.com.android.settingslib.fl
 import com.android.settings.Utils;
 import com.android.settings.network.SubscriptionsPreferenceController.SubsPrefCtrlInjector;
 import com.android.settings.testutils.ResourcesUtils;
+import com.android.settings.widget.GearPreference;
+import com.android.settings.widget.MutableGearPreference;
 import com.android.settings.wifi.WifiPickerTrackerHelper;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.mobile.MobileMappings;
@@ -87,6 +89,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -665,6 +668,44 @@ public class SubscriptionsPreferenceControllerTest {
         sInjector.getNoInternetIcon(mContext, SignalStrength.NUM_SIGNAL_STRENGTH_BINS);
 
         verify(spyResources).getDrawable(anyInt(), any());
+    }
+
+    @Test
+    @UiThreadTest
+    public void displayPreference_admin_gearEnabled() {
+        final List<SubscriptionInfo> sub = setupMockSubscriptions(1);
+        doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        when(mUserManager.isAdminUser()).thenReturn(true);
+
+        mController.onResume();
+        mController.displayPreference(mPreferenceScreen);
+
+        MutableGearPreference pref = (MutableGearPreference) mPreferenceCategory.getPreference(0);
+        assertThat(isGearEnabled(pref)).isTrue();
+    }
+
+    @Test
+    @UiThreadTest
+    public void displayPreference_notAdmin_gearDisabled() {
+        final List<SubscriptionInfo> sub = setupMockSubscriptions(1);
+        doReturn(sub.get(0)).when(mSubscriptionManager).getDefaultDataSubscriptionInfo();
+        when(mUserManager.isAdminUser()).thenReturn(false);
+
+        mController.onResume();
+        mController.displayPreference(mPreferenceScreen);
+
+        MutableGearPreference pref = (MutableGearPreference) mPreferenceCategory.getPreference(0);
+        assertThat(isGearEnabled(pref)).isFalse();
+    }
+
+    private boolean isGearEnabled(GearPreference preference) {
+        try {
+            Field field = GearPreference.class.getDeclaredField("mGearState");
+            field.setAccessible(true);
+            return field.getBoolean(preference);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setupGetIconConditions(int subId, boolean isActiveCellularNetwork,

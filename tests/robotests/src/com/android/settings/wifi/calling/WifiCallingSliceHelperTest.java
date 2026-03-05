@@ -33,6 +33,7 @@ import static org.mockito.Mockito.when;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ims.ImsMmTelManager;
 
@@ -55,9 +56,11 @@ import com.android.settings.slices.SliceBroadcastReceiver;
 import com.android.settings.slices.SliceData;
 import com.android.settings.slices.SlicesFeatureProvider;
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowTelecomDependencies;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -65,12 +68,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = ShadowTelecomDependencies.class)
 public class WifiCallingSliceHelperTest {
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     private static final int SUB_ID = 1;
 
     private Context mContext;
@@ -90,6 +98,7 @@ public class WifiCallingSliceHelperTest {
 
     @Before
     public void setUp() {
+        mSetFlagsRule.enableFlags(android.telecom.flags.Flags.FLAG_TELECOM_MAINLINE_API);
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
 

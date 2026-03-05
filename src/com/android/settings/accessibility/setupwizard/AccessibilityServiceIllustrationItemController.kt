@@ -34,7 +34,7 @@ class AccessibilityServiceIllustrationItemController(
     private val accessibilityServiceIllustrationMetadata =
         A11yServiceIllustrationPreference(serviceInfo)
 
-    public override fun bindData(item: Item) {
+    override fun bindData(item: Item) {
         if (item is IllustrationItem) {
             with(accessibilityServiceIllustrationMetadata) {
                 item.imageUri = getImageUri(context)

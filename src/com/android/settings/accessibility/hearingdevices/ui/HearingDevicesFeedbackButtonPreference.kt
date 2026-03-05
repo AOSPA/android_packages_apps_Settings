@@ -23,6 +23,7 @@ import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
 import com.android.settingslib.bluetooth.hearingdevices.metrics.HearingDeviceStatsLogUtils
 import com.android.settingslib.bluetooth.hearingdevices.metrics.HearingDeviceStatsLogUtils.HistoryType
 import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.ButtonPreference
 
 /**
@@ -33,6 +34,8 @@ import com.android.settingslib.widget.ButtonPreference
  */
 class HearingDevicesFeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManager) :
     FeedbackButtonPreference(feedbackManagerProvider) {
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     /**
      * Sets up the button preference and its click listener.

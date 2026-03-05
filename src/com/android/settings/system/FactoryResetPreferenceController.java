@@ -19,6 +19,7 @@ import static com.android.settings.flags.Flags.owlV2Enabled;
 
 import android.Manifest;
 import android.annotation.RequiresPermission;
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -38,6 +39,7 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.factory_reset.Flags;
 import com.android.settings.i18n.RegionalCustomizationFeatureProvider;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 public class FactoryResetPreferenceController extends BasePreferenceController {
 
@@ -48,6 +50,7 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
             "com.android.settings.ACTION_PREPARE_FACTORY_RESET";
 
     private final UserManager mUm;
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     @VisibleForTesting
     ActivityResultLauncher<Intent> mFactoryResetPreparationLauncher;
@@ -57,6 +60,7 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
     public FactoryResetPreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mUm = (UserManager) context.getSystemService(Context.USER_SERVICE);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     /** Hide "Factory reset" settings for secondary users. */
@@ -124,7 +128,11 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
             mEmoneyResetLauncher = fragment.registerForActivityResult(
                     new ActivityResultContracts.StartActivityForResult(),
                     result -> {
-                        //  TODO: log the metrics
+                        Log.d(TAG, "EmoneyResetLauncher: resultCode: " + result.getResultCode());
+                        mMetricsFeatureProvider.action(
+                                mContext,
+                                SettingsEnums.ACTION_FACTORY_RESET_ERASE_EMONEY_SERVICES_RESULT,
+                                result.getResultCode());
                         startFactoryResetActivity();
                     });
         }
@@ -146,6 +154,8 @@ public class FactoryResetPreferenceController extends BasePreferenceController {
             Intent emoneyIntent = getEmoneyResetIntent();
             if (emoneyIntent != null && mEmoneyResetLauncher != null) {
                 mEmoneyResetLauncher.launch(emoneyIntent);
+                mMetricsFeatureProvider.action(
+                        mContext, SettingsEnums.ACTION_FACTORY_RESET_ERASE_EMONEY_SERVICES);
                 return;
             }
         }

@@ -16,9 +16,11 @@
 
 package com.android.settings.accessibility.actiontimeout.ui
 
+import android.content.Context
 import com.android.settings.R
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceBinding
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 class ActionTimeoutFooterPreference :
     AccessibilityFooterPreferenceMetadata, AccessibilityFooterPreferenceBinding {
@@ -30,6 +32,8 @@ class ActionTimeoutFooterPreference :
 
     override val purpose: Int
         get() = R.string.a11y_action_timeout_footer_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val introductionTitle: Int
         get() = R.string.accessibility_control_timeout_about_title

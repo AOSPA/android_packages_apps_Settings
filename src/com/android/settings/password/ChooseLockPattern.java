@@ -895,7 +895,8 @@ public class ChooseLockPattern extends SettingsActivity {
             }
 
 
-            if (stage == Stage.ConfirmWrong || stage == Stage.NeedToConfirm) {
+            if (stage == Stage.ConfirmWrong || stage == Stage.NeedToConfirm
+                    || stage == Stage.ChoiceConfirmed) {
                 layout.setHeaderText(R.string.lockpassword_draw_your_pattern_again_header);
             }
 

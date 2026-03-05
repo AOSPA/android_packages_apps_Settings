@@ -28,6 +28,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 
+// LINT.IfChange
 public class DoubleTapScreenPreferenceController extends GesturePreferenceController {
 
     private final int ON = 1;
@@ -105,3 +106,4 @@ public class DoubleTapScreenPreferenceController extends GesturePreferenceContro
         return mAmbientConfig;
     }
 }
+// LINT.ThenChange(DoubleTapApiScreen.kt)

@@ -798,6 +798,60 @@ public class WifiConfigController2Test {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void loadSavedShared_shouldCorrectSharedValue() {
+        checkSavedSharedValue(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void loadSavedPrivate_shouldCorrectSharedValue() {
+        checkSavedSharedValue(false);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void loadSavedEditable_shouldCorrectEditConfigValue() {
+        checkSavedEditConfigValue(true);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void loadSavedNotEditable_shouldCorrectEditConfigValue() {
+        checkSavedEditConfigValue(false);
+    }
+
+    private void checkSavedSharedValue(boolean shared) {
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.shared = shared;
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        final MaterialSwitch sharedSwitch = mView.findViewById(R.id.share_wifi_network);
+
+        assertThat(sharedSwitch.isChecked()).isEqualTo(shared);
+    }
+
+    private void checkSavedEditConfigValue(boolean allowEditsByOtherUsers) {
+        when(mUserManager.getUserCount()).thenReturn(2);
+        when(mWifiEntry.isSaved()).thenReturn(true);
+        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
+        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
+        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
+        mockWifiConfig.shared = true;
+        when(mockWifiConfig.isAllowedToUpdateByOtherUsers()).thenReturn(allowEditsByOtherUsers);
+        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
+
+        final MaterialSwitch editConfigSwitch =
+                mView.findViewById(R.id.edit_wifi_network_configuration);
+
+        assertThat(editConfigSwitch.isChecked()).isEqualTo(allowEditsByOtherUsers);
+    }
+
+    @Test
     public void loadSavedDhcpValue_true() {
         checkSavedDhcpValue(true);
     }

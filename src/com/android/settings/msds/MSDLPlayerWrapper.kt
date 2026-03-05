@@ -18,10 +18,13 @@ package com.android.settings.msds
 import android.content.Context
 import android.os.VibratorManager
 import android.util.Log
+import androidx.annotation.VisibleForTesting
+import com.android.settingslib.utils.ThreadUtils
 import com.google.android.msdl.data.model.MSDLToken
 import com.google.android.msdl.domain.InteractionProperties
 import com.google.android.msdl.domain.MSDLPlayer
 import com.google.android.msdl.logging.MSDLEvent
+import com.google.common.util.concurrent.ListenableFuture
 
 /**
  * A wrapper to ensure that a single instance of the [MSDLPlayer] is provided all across Settings
@@ -30,7 +33,7 @@ object MSDLPlayerWrapper {
 
     private const val TAG = "MSDLPlayerWrapper"
 
-    private lateinit var internalPlayer: MSDLPlayer
+    private var internalPlayer: MSDLPlayer? = null
 
     /**
      * Create the singleton of the [MSDLPlayer].
@@ -38,38 +41,44 @@ object MSDLPlayerWrapper {
      * This function is only meant to be called once during initialization of the client app
      *
      * @param context The context in which the player is created. Used to access system services.
-     * @param explicitPlayer An explicit player to use. It should only be set for testing purposes.
      */
-    @JvmOverloads
-    fun createPlayer(context: Context, explicitPlayer: MSDLPlayer? = null) {
-        if (explicitPlayer != null) {
-            internalPlayer = explicitPlayer
-        } else {
-            if (::internalPlayer.isInitialized) return
+    fun createPlayer(context: Context) {
+        if (internalPlayer != null) return
 
-            val vibratorManager =
-                context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-            internalPlayer = MSDLPlayer.createPlayer(vibratorManager.defaultVibrator)
-        }
+        val unused: ListenableFuture<*>? =
+            ThreadUtils.postOnBackgroundThread {
+                val vibratorManager = context.getSystemService(VibratorManager::class.java)
+                internalPlayer = MSDLPlayer.createPlayer(vibratorManager.defaultVibrator)
+            }
+    }
+
+    /**
+     * Define the internal MSDL player explicitly. It should only be used for testing purposes
+     *
+     * @param explicitPlayer An explicit player to use.
+     */
+    @VisibleForTesting
+    fun setPlayer(explicitPlayer: MSDLPlayer?) {
+        internalPlayer = explicitPlayer
     }
 
     @JvmOverloads
     fun playToken(token: MSDLToken, properties: InteractionProperties? = null) {
-        if (!::internalPlayer.isInitialized) {
-            Log.e(TAG, "Cannot play $token because the MSDLPlayer has not been created")
-            return
+        val player = internalPlayer
+        if (player != null) {
+            player.playToken(token, properties)
+        } else {
+            Log.e(TAG, "Cannot play $token at this time because the internal player is null")
         }
-
-        internalPlayer.playToken(token, properties)
     }
 
-    @JvmOverloads
     fun getHistory(): List<MSDLEvent> {
-        if (!::internalPlayer.isInitialized) {
-            Log.e(TAG, "The MSDLPlayer has not been created. Returning an empty list of events")
+        val history = internalPlayer?.getHistory()
+        if (history != null) {
+            return history
+        } else {
+            Log.e(TAG, "The internal player is null. Returning an empty list of events")
             return listOf()
         }
-
-        return internalPlayer.getHistory()
     }
 }

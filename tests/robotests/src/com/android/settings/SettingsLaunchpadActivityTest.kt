@@ -44,6 +44,8 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import com.android.settingslib.spa.framework.util.KEY_DESTINATION
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.Flow
@@ -64,7 +66,8 @@ class SettingsLaunchpadActivityTest {
     companion object {
         const val TEST_SCREEN_KEY = "test_screen_key"
         const val API_SCREEN_KEY = "api_screen_key"
-        const val SPA_SCREEN_KEY = "spa_screen_key"
+        const val DYNAMIC_SPA_SCREEN_KEY = "dynamic_spa_screen_key"
+        const val STATIC_SPA_SCREEN_KEY = "static_spa_screen_key"
         const val SPA_ROUTE_PREFIX = "spa_route_prefix"
 
         var screenEnabled = true
@@ -74,7 +77,8 @@ class SettingsLaunchpadActivityTest {
     private lateinit var context: Context
     private lateinit var fakeFactory: FakeParameterizedFactory
     private lateinit var fakeApiFactory: PreferenceScreenMetadataFactory
-    private lateinit var fakeSpaApiFactory: PreferenceScreenMetadataFactory
+    private lateinit var fakeDynamicSpaApiFactory: PreferenceScreenMetadataParameterizedFactory
+    private lateinit var fakeStaticSpaApiFactory: PreferenceScreenMetadataFactory
 
     // Dummy class for testing fragment launching
     class TestFragment : Fragment()
@@ -103,14 +107,24 @@ class SettingsLaunchpadActivityTest {
         }
     }
 
-    class FakeSpaScreen :
+    class FakeDynamicSpaScreen :
         PreferencesApiScreen(
-            key = SPA_SCREEN_KEY,
+            key = DYNAMIC_SPA_SCREEN_KEY,
             topLevelSettingsCategory = Category.APPS,
-            spaRoutePrefix = SPA_ROUTE_PREFIX,
-            purpose = 0,
+            purpose = 0, // Use constructor for dynamic SPA screens
         ) {
         init {
+            parameters {
+                parameter(
+                    "package",
+                    0,
+                    true,
+                    GeneratedParameterType(0) {
+                        listOf(GeneratedValue("value", "type_description"))
+                    },
+                )
+                prepareSpaRoute { params -> "$SPA_ROUTE_PREFIX/${params["package"]}" }
+            }
             preconditions("Test preconditions") {
                 if (preconditionsAreMet) {
                     Allowed
@@ -119,6 +133,74 @@ class SettingsLaunchpadActivityTest {
                 }
             }
         }
+    }
+
+    class FakeStaticSpaScreen :
+        PreferencesApiScreen(
+            key = STATIC_SPA_SCREEN_KEY,
+            topLevelSettingsCategory = Category.APPS,
+            spaRoutePrefix = SPA_ROUTE_PREFIX,
+            purpose = 0,
+        ) {
+        init {
+            preconditions("Test preconditions") {
+                if (preconditionsAreMet) Allowed else Disallowed("Test preconditions not met")
+            }
+        }
+    }
+
+    class TestDynamicSpaScreenFactory :
+        PreferenceScreenMetadataParameterizedFactory, PreferenceScreenMixin {
+        override val key: String
+            get() = DYNAMIC_SPA_SCREEN_KEY
+
+        override fun create(context: Context, args: Bundle): PreferenceScreenMetadata {
+            val screen = FakeDynamicSpaScreen()
+            if (args.containsKey("package")) {
+                val keyParameters =
+                    screen.parametersSchema!!.prepare("package" to args.getString("package")!!)
+                screen.initializeParameters(keyParameters)
+            }
+            return screen
+        }
+
+        override fun createWithKeyParameters(
+            context: Context,
+            keyParameters: ValidatedKeyParameters,
+        ): PreferenceScreenMetadata {
+            val screen = FakeDynamicSpaScreen()
+            screen.initializeParameters(keyParameters)
+            return screen
+        }
+
+        // Add stubs for PreferenceScreenMixin
+        override val title: Int
+            get() = 0
+
+        override val highlightMenuKey: Int
+            get() = 0
+
+        override fun getMetricsCategory(): Int = 0
+
+        override fun fragmentClass(): Class<out Fragment>? = null
+
+        override val purpose: Int
+            get() = 0
+
+        override fun getPreferenceHierarchy(
+            context: Context,
+            coroutineScope: kotlinx.coroutines.CoroutineScope,
+        ): com.android.settingslib.metadata.PreferenceHierarchy =
+            throw NotImplementedError("Factory only")
+
+        override fun parameters(context: Context): Flow<Bundle> =
+            throw NotImplementedError("Factory only")
+
+        override fun keyParameters(context: Context): Flow<ValidatedKeyParameters> =
+            throw NotImplementedError("Factory only")
+
+        override val parametersSchema: KeyParametersSchema
+            get() = FakeDynamicSpaScreen().parametersSchema!!
     }
 
     @Before
@@ -134,12 +216,14 @@ class SettingsLaunchpadActivityTest {
 
         fakeFactory = FakeParameterizedFactory()
         fakeApiFactory = PreferenceScreenMetadataFactory { FakeApiScreen() }
-        fakeSpaApiFactory = PreferenceScreenMetadataFactory { FakeSpaScreen() }
+        fakeDynamicSpaApiFactory = TestDynamicSpaScreenFactory()
+        fakeStaticSpaApiFactory = PreferenceScreenMetadataFactory { FakeStaticSpaScreen() }
 
         PreferenceScreenRegistry.preferenceScreenMetadataFactories =
-            FixedArrayMap(3) {
+            FixedArrayMap(4) {
                 it.put(API_SCREEN_KEY, fakeApiFactory)
-                it.put(SPA_SCREEN_KEY, fakeSpaApiFactory)
+                it.put(DYNAMIC_SPA_SCREEN_KEY, fakeDynamicSpaApiFactory)
+                it.put(STATIC_SPA_SCREEN_KEY, fakeStaticSpaApiFactory)
                 it.put(TEST_SCREEN_KEY, fakeFactory)
             }
     }
@@ -256,12 +340,15 @@ class SettingsLaunchpadActivityTest {
     }
 
     @Test
-    fun launch_withSpaRoutePrefix_shouldLaunchSpaActivity() {
+    fun launch_withSpaRoute_shouldLaunchSpaActivityWithDynamicRoute() {
         // Arrange
+        val packageName = "com.example.app"
+        val screenArgs = Bundle().apply { putString("package", packageName) }
         ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(false)
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, SPA_SCREEN_KEY)
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, DYNAMIC_SPA_SCREEN_KEY)
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_ARGS, screenArgs)
             }
 
         // Act
@@ -272,7 +359,8 @@ class SettingsLaunchpadActivityTest {
         val nextActivity = shadowOf(activity).nextStartedActivity
         assertThat(nextActivity).isNotNull()
         assertThat(nextActivity.component?.className).isEqualTo(SpaActivity::class.java.name)
-        assertThat(nextActivity.getStringExtra(KEY_DESTINATION)).isEqualTo(SPA_ROUTE_PREFIX)
+        assertThat(nextActivity.getStringExtra(KEY_DESTINATION))
+            .isEqualTo("$SPA_ROUTE_PREFIX/$packageName")
         assertThat(activity.isFinishing).isTrue()
     }
 
@@ -282,7 +370,7 @@ class SettingsLaunchpadActivityTest {
         ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true)
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, SPA_SCREEN_KEY)
+                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, STATIC_SPA_SCREEN_KEY)
             }
 
         // Act
