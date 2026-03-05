@@ -792,15 +792,15 @@ class CatalystStateMetadataProviderExecutorTest {
 
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
 
-        val prefSetWarningWithoutPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[1]
+        val prefSetWarningWithoutPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[0]
         assertThat(prefSetWarningWithoutPreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_without_preconditions")
         assertThat(prefSetWarningWithoutPreconditionsMetadata.hintText).contains("Warning before writing: Set warning 1 (must be shown).")
 
-        val prefSetWarningWithPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[2]
+        val prefSetWarningWithPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[1]
         assertThat(prefSetWarningWithPreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_with_preconditions")
         assertThat(prefSetWarningWithPreconditionsMetadata.hintText).contains("Warning before writing: Set warning 2 (must be shown if preconditions are met: Set preconditions).")
 
-        val prefSetWarningWithValuePreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[3]
+        val prefSetWarningWithValuePreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[2]
         assertThat(prefSetWarningWithValuePreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_with_value_preconditions")
         assertThat(prefSetWarningWithValuePreconditionsMetadata.hintText).contains("Warning before writing: Set warning 3 (must be shown if preconditions are met: Set value preconditions).")
     }
