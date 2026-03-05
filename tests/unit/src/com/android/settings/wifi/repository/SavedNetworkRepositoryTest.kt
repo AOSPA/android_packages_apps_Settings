@@ -17,6 +17,7 @@
 package com.android.settings.wifi.repository
 
 import android.content.ContextWrapper
+import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -36,10 +37,13 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 /** Unit tests for [SavedNetworkRepository]. */
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -146,6 +150,105 @@ class SavedNetworkRepositoryTest {
 
         assertThat(result).isNotEmpty()
         assertThat(result[0].key).isEqualTo(TEST_KEY)
+    }
+
+    @Test
+    fun getWifiConfiguration_validKey_returnsConfig() = runTest {
+        val mockWifiConfiguration = mock<WifiConfiguration>()
+        mockTracker.stub { on { savedWifiEntries } doReturn listOf(mockWifiEntry) }
+        mockWifiEntry.stub { on { wifiConfiguration } doReturn mockWifiConfiguration }
+        mockWifiManager.stub {
+            on { privilegedConfiguredNetworks } doReturn listOf(mockWifiConfiguration)
+        }
+        repository = SavedNetworkRepository(context, backgroundScope, mockTracker)
+        runCurrent()
+
+        val result = repository.getWifiConfiguration(TEST_LOOKUP_KEY)
+
+        assertThat(result).isSameInstanceAs(mockWifiConfiguration)
+    }
+
+    @Test
+    fun getWifiConfiguration_invalidKey_returnsNull() = runTest {
+        mockTracker.stub { on { savedWifiEntries } doReturn emptyList() }
+        repository = SavedNetworkRepository(context, backgroundScope, mockTracker)
+        runCurrent()
+
+        val result = repository.getWifiConfiguration(TEST_LOOKUP_KEY)
+
+        assertThat(result).isNull()
+    }
+
+    @Test
+    fun getWifiConfiguration_nullKey_returnsNull() = runTest {
+        repository = SavedNetworkRepository(context, backgroundScope, mockTracker)
+        runCurrent()
+
+        val result = repository.getWifiConfiguration(null)
+
+        assertThat(result).isNull()
+    }
+
+    @Test
+    fun getWifiConfiguration_entryNotFound_returnsNull() = runTest {
+        mockTracker.stub { on { savedWifiEntries } doReturn emptyList() }
+        repository = SavedNetworkRepository(context, backgroundScope, mockTracker)
+        runCurrent()
+
+        val result = repository.getWifiConfiguration(TEST_LOOKUP_KEY)
+
+        assertThat(result).isNull()
+    }
+
+    @Test
+    fun getWifiConfiguration_configNotFound_returnsNull() = runTest {
+        val mockWifiConfiguration = mock<WifiConfiguration>()
+        mockTracker.stub { on { savedWifiEntries } doReturn listOf(mockWifiEntry) }
+        mockWifiEntry.stub { on { wifiConfiguration } doReturn mockWifiConfiguration }
+        mockWifiManager.stub { on { privilegedConfiguredNetworks } doReturn emptyList() }
+        repository = SavedNetworkRepository(context, backgroundScope, mockTracker)
+        runCurrent()
+
+        val result = repository.getWifiConfiguration(TEST_LOOKUP_KEY)
+
+        assertThat(result).isNull()
+    }
+
+    @Test
+    fun setWifiConfiguration_updatesNetwork() = runTest {
+        val mockWifiConfiguration = mock<WifiConfiguration>()
+        mockTracker.stub { on { savedWifiEntries } doReturn listOf(mockWifiEntry) }
+        mockWifiEntry.stub { on { wifiConfiguration } doReturn mockWifiConfiguration }
+        mockWifiManager.stub {
+            on { privilegedConfiguredNetworks } doReturn listOf(mockWifiConfiguration)
+        }
+        repository = SavedNetworkRepository(context, backgroundScope, mockTracker)
+        runCurrent()
+
+        repository.setWifiConfiguration(TEST_LOOKUP_KEY) { config -> config.SSID = "newSSID" }
+
+        verify(mockWifiManager).save(mockWifiConfiguration, null)
+    }
+
+    @Test
+    fun setWifiConfiguration_nullKey_doesNothing() = runTest {
+        repository = SavedNetworkRepository(context, backgroundScope, mockTracker)
+        runCurrent()
+
+        repository.setWifiConfiguration(null) { config -> config.SSID = "newSSID" }
+
+        verify(mockWifiManager, never()).save(any(), any())
+    }
+
+    @Test
+    fun setWifiConfiguration_configNotFound_doesNothing() = runTest {
+        mockTracker.stub { on { savedWifiEntries } doReturn emptyList() }
+        repository = SavedNetworkRepository(context, backgroundScope, mockTracker)
+        runCurrent()
+
+        repository.setWifiConfiguration(TEST_LOOKUP_KEY) { config -> config.SSID = "newSSID" }
+
+        verify(mockWifiManager, never()).save(any(), any())
     }
 
     private companion object {
