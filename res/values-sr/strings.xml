@@ -850,6 +850,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Желите да упарите са <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_again_request" msgid="1394430519292575085">"Желите поново да упарите са уређајем <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Потврдите да бисте додали други део аудио уређаја"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Кôд за упаривање са Bluetooth уређајем"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Унесите кôд за упаривање, па притисните Return или Enter"</string>
@@ -863,7 +864,9 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Дозволи и приступ контактима и историји позива"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Информације ће се користити за обавештења о позивима и друго"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Проверите кôд за упаривање"</string>
+    <string name="bluetooth_pairing_again_confirmation_title" msgid="838944639700876861">"Упари поново"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Проверите да ли се овај кôд подудара са оним на уређају <xliff:g id="DEVICE_NAME">%1$s</xliff:g>.\n\nИз безбедносних разлога не уносите нигде овај кôд."</string>
+    <string name="bluetooth_repairing_msg" msgid="4359999881389087827">"Овај уређај је раније био упарен и покушава поново да се упари.\nАко сте на јавном месту, будите опрезни."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Није могуће повезати се са уређајем <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Доступни уређаји"</string>
@@ -892,14 +895,14 @@
     <string name="bluetooth_device_tip_support" msgid="6072338493592606897">"Савети и подршка"</string>
     <string name="bluetooth_device_mac_address" msgid="4873325074786732703">"Bluetooth адреса уређаја: <xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
     <string name="bluetooth_multuple_devices_mac_address" msgid="4974301550897923376">"Bluetooth адреса уређаја:\n<xliff:g id="ADDRESS">%1$s</xliff:g>"</string>
-    <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Желите ли да се уређај заборави?"</string>
+    <string name="bluetooth_unpair_dialog_title" msgid="6943633443716052995">"Желите да се уређај заборави?"</string>
     <string name="remove_association_button" msgid="5004208145998061135">"Уклони повезивање"</string>
     <string name="bluetooth_companion_app_remove_association_dialog_title" msgid="1344518601377991897">"Желите да прекинете везу са апликацијом?"</string>
     <string name="bluetooth_companion_app_body" msgid="8442643629075687761">"Апликација <xliff:g id="APP_NAME">%1$s</xliff:g> се више неће повезивати са уређајем <xliff:g id="DEVICE_NAME">%2$s</xliff:g>"</string>
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Експериментално. Бољи квалитет звука."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Батерија"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Батерија се пуни"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Покушајте да рестартујете уређај <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Ако то не успе, заборавите га. Ради ваше безбедности, поново га упарите када не будете на јавном месту.\n\nАко овај уређај није у близини, не морате ништа да предузмете."</string>
+    <string name="device_details_key_missing_title" msgid="3747991896959671040">"Поставите уређај <xliff:g id="DEVICE_NAME">%1$s</xliff:g> у режим упаривања и пробајте поново да се повежете.\n\nАко овај уређај није у близини, не морате ништа да предузмете."</string>
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Детаљно евидентирање штампања"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Додатне евиденције отклањања грешака, укључујући Internet Printing Protocol (IPP), које могу да садрже приватне податке."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Заборави уређај"</string>
@@ -1425,7 +1428,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Чувар екрана"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"чувар екрана"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Недоступно је јер је режим за спавање укључен"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Није доступан"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Користи чувар екрана"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Током пуњења или на базној станици"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Док је на базној станици и пуни се"</string>
@@ -2035,12 +2039,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Ако принудно зауставите апликацију, можда ће се понашати неочекивано."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Онемогући апликацију"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Ако онемогућите ову апликацију, Android и друге апликације можда више неће радити исправно. Имајте на уму да не можете да избришете ову апликацију јер је била унапред инсталирана на уређају. Ако је онемогућите, искључићете ову апликацију и сакрићете је на уређају."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"Апликација корисника система"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"Ова апликација ради за корисника система. Промене које унесете утичу на све кориснике на овом уређају."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"Само администратор уређаја може да управља овом апликацијом."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Продавница"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Детаљи о апликацији"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Апликација је инсталирана из: <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -3620,11 +3621,11 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Уређај"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"Тастатура, тачпед, екран, звук"</string>
+    <string name="device_dashboard_summary" msgid="534835339280267939">"Тачпед, тастатура, екран, звук"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Осветљеност, боја, тамна тема, закључани екран, текст"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Избор тастатуре, алатке"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Брзина курсора, прилагођавање дугмади, скроловање"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"Јачина звука, звучници, микрофони"</string>
+    <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Јачина звука, звучници, микрофони"</string>
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Прилагођавање курсора, радње кликом, скроловање"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Није доступно зато што је NFC искључен"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Да бисте ово користили, прво инсталирајте апликацију за плаћање"</string>
@@ -5318,8 +5319,7 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Да бисте видели спољне линкове, треба вам мобилна или WiFi мрежа."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Размена порука са хитним службама можда није доступна у свим областима."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Може да прође неко време пре него што се промене налога прикажу у Подешавањима. Обратите се мобилном оператеру <xliff:g id="CARRIER_NAME">%1$s</xliff:g> за више детаља."</string>
-    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
-    <skip />
+    <string name="satellite_footer_content_section_8" msgid="7617809843970032785">"Да бисте видели све апликације оптимизоване за сателитску везу, посетите веб-сајт мобилног оператера."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Више о сателитској вези"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Не може да се укључи <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Да бисте укључили <xliff:g id="FUNCTION">%1$s</xliff:g>, прво завршите сателитску везу"</string>
@@ -5334,8 +5334,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Подржане апликације на телефону"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Додавање SIM-а није успело"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Прекините сателитску везу пре него што додате SIM"</string>
-    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
-    <skip />
+    <string name="satellite_toggle_error" msgid="4533772077620854258">"Дошло је до грешке. Укључивање/искључивање сателитске везе није успело."</string>
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth је искључен"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Када су подржани уређаји, попут телефона и сата, повезани помоћу Bluetooth-а, режим рада у авиону се синхронизује на њима."</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Називи приступних тачака"</string>
@@ -6090,8 +6089,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Безбедност апликација"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Откључавање уређаја"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Безбедност налога"</string>
-    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
-    <skip />
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"Заштита изгубљеног уређаја"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Систем и ажурирања"</string>
     <string name="location_settings" msgid="6833222354060094170">"Приступ локацији"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Погледајте апликације и услуге које имају приступ локацији"</string>

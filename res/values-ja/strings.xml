@@ -850,6 +850,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>をペア設定しますか？"</string>
+    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
+    <skip />
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"2 台目のオーディオ機器の追加を確認してください"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetoothペア設定コード"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"ペア設定コードを入力してからReturnキーまたはEnterキーを押してください"</string>
@@ -863,7 +865,11 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"連絡先と通話履歴へのアクセスも許可"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"情報は着信の通知などに使用されます"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"ペア設定コードの確認"</string>
+    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
+    <skip />
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"このコードが <xliff:g id="DEVICE_NAME">%1$s</xliff:g> のコードと一致していることを確認してください。\n\n安全のため、このコードをどこにも入力しないでください。"</string>
+    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>に接続できませんでした。"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"使用可能なデバイス"</string>
@@ -899,7 +905,8 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"試験運用中。音声の品質が向上します。"</string>
     <string name="device_details_battery" msgid="5466987755790847884">"バッテリー"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"バッテリー、充電中"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> を再起動してみてください。それでも問題が解決しない場合は、デバイスを削除してください。セキュリティ保護のため、公共の場所以外でペア設定をやり直してください。\n\nこのデバイスが近くにない場合は、何もする必要はありません。"</string>
+    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
+    <skip />
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"出力の詳細ログ"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"追加のデバッグログ（個人情報が含まれる可能性がある Internet Printing Protocol（IPP）を含む）"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"このデバイスとのペア設定を解除"</string>
@@ -1425,7 +1432,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"スクリーン セーバー"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"スクリーンセーバー"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"おやすみ時間モードが ON のため利用できません"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"利用できません"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"スクリーン セーバーを使用する"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充電時またはドッキング時"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"ホルダーで充電中"</string>
@@ -2035,12 +2043,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"アプリを強制停止すると、アプリが正常に機能しないことがあります。"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"アプリを無効にする"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"このアプリを無効にすると、Android などの他のアプリが正しく動作しなくなる恐れがあります。このアプリはデバイスにプリインストールされているため削除できません。無効にすることで、このアプリが OFF になり、デバイスで非表示になります。"</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"システム ユーザー アプリ"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"このアプリはシステム ユーザー用に実行されています。変更を加えると、このデバイスのすべてのユーザーに影響します。"</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"このアプリを管理できるのはデバイスの管理者のみです。"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"ストア"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"アプリの詳細"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"<xliff:g id="APP_STORE">%1$s</xliff:g> からインストールしたアプリ"</string>
@@ -3620,11 +3625,13 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth、Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"デバイス"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"キーボード、タッチパッド、ディスプレイ、サウンド"</string>
+    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
+    <skip />
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"明るさ、色、ダークモード、ロック画面、テキスト"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"キーボードの選択、ツール"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"カーソルの速度、ボタンのカスタマイズ、スクロール"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"音量、スピーカー、マイク"</string>
+    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
+    <skip />
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"カーソルのカスタマイズ、クリック操作、スクロール"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC が OFF のため使用できません"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"使用するには、まずお支払いアプリをインストールしてください"</string>
@@ -5098,7 +5105,7 @@
     <string name="credman_on_off_switch_content_description" msgid="2930826358220917851">"%1$s ON / OFF"</string>
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"OFF にする"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"変更"</string>
-    <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"有効にできるサービスは 5 個だけです"</string>
+    <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"有効にできるサービスは最大 5 件です"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"他のサービスを追加するには、サービスを 1 つ以上無効にしてください"</string>
     <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"ログイン情報や自動入力候補のデータを優先的に保存するサービスを選択してください。候補の提示も必要な場合は、追加サービスを有効にしてください。"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"%1$s は自動入力できる情報を判断するために画面上に表示される情報を使用します。"</string>
@@ -6080,7 +6087,7 @@
     <string name="identity_check_issue_card_button_text" msgid="9194407367671256494">"詳細を表示"</string>
     <string name="identity_check_promo_card_title" msgid="4467736415491327717">"ID チェックがさらに多くのアプリで利用できるようになりました"</string>
     <string name="identity_check_watch_issue_card_title" msgid="6381107354718121574">"ID チェックとスマートウォッチ"</string>
-    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"スマートウォッチを接続すると、ID チェック機能により、アプリへの不要なアクセスを防ぐため本人確認が強化されます"</string>
+    <string name="identity_check_watch_issue_card_summary" msgid="3887632285786695570">"スマートウォッチを接続すると、アプリへの不正アクセスを防ぐための、ID チェック機能による本人確認方法が増えます"</string>
     <string name="identity_check_watch_promo_card_title" msgid="8159072228404620911">"ID チェックとスマートウォッチ"</string>
     <string name="identity_check_promo_card_watch_summary" msgid="830666785343476988">"更新内容:\n"<ul><li>"スマートウォッチを接続すると、信頼できる場所以外の場所でアプリにアクセスする場合に生体認証または PIN のいずれかを使用できるようになりました"</li>\n<li>"今後、ID チェックでは、本人確認やデバイス上のアプリの保護を行うための方法が追加される可能性があります。"<a href="https://support.google.com/android?p=identity_check">"保護が適用されるタイミングと場所の詳細"</a></li></ul></string>
     <string name="more_security_privacy_category_title" msgid="6107292123094705732">"その他の設定"</string>
@@ -6097,7 +6104,7 @@
     <string name="location_settings_subtitle" msgid="8471780117911010030">"位置情報にアクセスできるアプリとサービスを確認"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"ID チェックがさらに多くのアプリで利用できるようになりました"</string>
     <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"ID チェックとスマートウォッチ"</string>
-    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"スマートウォッチを接続すると、ID チェック機能により、アプリへの不要なアクセスを防ぐため本人確認が強化されます"</string>
+    <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"スマートウォッチを接続すると、アプリへの不正アクセスを防ぐための、ID チェック機能による本人確認方法が増えます"</string>
     <string name="identity_check_view_details" msgid="8752343542345818128">"詳細を表示"</string>
     <string name="safety_center_refresh_error" msgid="1735955120364376704">"設定を確認できませんでした"</string>
     <string name="safety_center_subpage_unknown_summary" msgid="874864620851714312">"まだ情報がありません"</string>

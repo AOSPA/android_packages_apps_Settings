@@ -850,6 +850,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"బ్లూటూత్"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"బ్లూటూత్"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>తో పెయిర్ చేయాలా?"</string>
+    <string name="bluetooth_pairing_again_request" msgid="1394430519292575085">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>‌తో మళ్లీ పెయిర్ చేయాలా?"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"మీ ఆడియో పరికరంలో రెండవ భాగాన్ని జోడించడాన్ని నిర్ధారించండి"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"బ్లూటూత్ పెయిరింగ్ కోడ్"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"జత చేసే కోడ్‌ను టైప్ చేసి, ఆపై Return లేదా Enter నొక్కండి"</string>
@@ -863,7 +864,9 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"కాంటాక్ట్‌లకు, కాల్ హిస్టరీకి కూడా యాక్సెస్‌ను అనుమతించండి"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"ఈ సమాచారాన్ని కాల్ అనౌన్స్‌మెంట్లు చేయడానికి, మరిన్నింటికి ఉపయోగిస్తాము"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"పెయిరింగ్ కోడ్‌లను చెక్ చేయండి"</string>
+    <string name="bluetooth_pairing_again_confirmation_title" msgid="838944639700876861">"మళ్లీ పెయిర్ చేయండి"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"ఈ కోడ్, <xliff:g id="DEVICE_NAME">%1$s</xliff:g>లో ఉన్న దానితో సరిపోతుందో లేదో చెక్ చేయండి.\n\nమీ భద్రతా కారణాల దృష్ట్యా, ఈ కోడ్‌ను ఎక్కడా ఎంటర్ చేయకండి."</string>
+    <string name="bluetooth_repairing_msg" msgid="4359999881389087827">"ఈ డివైజ్ మునుపు పెయిర్ చేయబడింది, మళ్లీ పెయిర్ చేయడానికి ట్రై చేస్తోంది.\nమీరు పబ్లిక్ స్పేస్‌లో ఉంటే, జాగ్రత్తగా ఉండండి."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>కి కనెక్ట్ చేయడం సాధ్యపడలేదు."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"అందుబాటులో ఉన్న డివైజ్‌లు"</string>
@@ -899,7 +902,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"ప్రయోగం. ఆడియో క్వాలిటీని బాగుచేస్తుంది."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"బ్యాటరీ"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"బ్యాటరీ, ఛార్జ్ అవుతోంది"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>‌ను రీస్టార్ట్ చేయడానికి ట్రై చేయండి. అది పని చేయకపోతే, డివైజ్‌ను ఫర్‌గెట్ చేయండి మీ సెక్యూరిటీ కోసం, మీరు పబ్లిక్ స్పేస్‌లో లేనప్పుడు మాత్రమే దాన్ని మళ్లీ పెయిర్ చేయండి.\n\nఈ డివైజ్ సమీపంలో లేకపోతే, మీరు ఏమీ చేయనవసరం లేదు."</string>
+    <string name="device_details_key_missing_title" msgid="3747991896959671040">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>‌ను పెయిరింగ్ మోడ్‌లో ఉంచి, మళ్లీ కనెక్ట్ చేయడానికి ట్రై చేయండి.\n\nఈ డివైజ్ సమీపంలో లేకపోతే, మీరు ఏమీ చేయనవసరం లేదు."</string>
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"వివరణాత్మక ప్రింట్ లాగింగ్"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"ప్రైవేట్ సమాచారం ఉన్న ఇంటర్నెట్ ప్రింటింగ్ ప్రోటోకాల్ (IPP)తో సహా అదనపు డీబగ్ లాగ్‌లు."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"డివైజ్‌ను విస్మరించండి"</string>
@@ -1425,7 +1428,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"స్క్రీన్ సేవర్"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"స్క్రీన్ సేవర్"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"బెడ్ టైమ్ మోడ్ ఆన్‌లో ఉండడం వల్ల అందుబాటులో లేదు"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"అందుబాటులో లేదు"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"స్క్రీన్ సేవర్‌ను ఉపయోగించండి"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ఛార్జ్ చేసేటప్పుడు లేదా డాక్ చేసినప్పుడు"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"డాక్ అయి, ఛార్జింగ్ చేస్తున్నప్పుడు"</string>
@@ -2035,12 +2039,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"ఏదైనా యాప్‌ను మీరు ఫోర్స్ స్టాప్ చేస్తే, అది సరిగ్గా పని చేయకపోవచ్చు."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"యాప్‌ను డిజేబుల్‌ చేయండి"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"ఈ యాప్‌ను మీరు డిజేబుల్ చేస్తే, Androidతో పాటు ఇతర యాప్‌లు ఇకపై ఉద్దేశించిన రీతిలో పని చేయకపోవచ్చు. గమనిక: ఈ యాప్ మీ డివైజ్‌లో ప్రీ-ఇన్‌స్టాల్ అయి ఉంది, అందువల్ల మీరు దీన్ని తొలగించలేరు. మీరు ఈ యాప్‌ను డిజేబుల్ చేయడం ద్వారా, దాన్ని ఆఫ్ చేసి, మీ డివైజ్‌లో దాస్తున్నారు."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"సిస్టమ్ యూజర్ యాప్"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"ఈ యాప్ సిస్టమ్ యూజర్ కోసం రన్ అవుతోంది. మీరు చేసే మార్పులు ఈ డివైజ్‌లోని యూజర్‌లందరినీ ప్రభావితం చేస్తాయి."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"డివైజ్ అడ్మిన్ మాత్రమే ఈ యాప్‌ను మేనేజ్ చేయగలరు."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"స్టోర్"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"యాప్ వివరాలు"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"యాప్ <xliff:g id="APP_STORE">%1$s</xliff:g> నుండి ఇన్‌స్టాల్ అయింది"</string>
@@ -3167,7 +3168,7 @@
     <string name="credential_using_for_wifi" msgid="6134471366188592845">"<xliff:g id="SSID">%s</xliff:g> కోసం ఉపయోగించబడుతోంది"</string>
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Wi-Fi (ఉపయోగంలో ఉంటే) కోసం ఇన్‌స్టాల్ చేయబడింది"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"అన్ని కంటెంట్‌లను తీసివేయాలా?"</string>
-    <string name="credentials_erased" msgid="9121052044566053345">"ఆధారాల స్టోరేజ్‌ ఎరేజ్ చేయబడింది."</string>
+    <string name="credentials_erased" msgid="9121052044566053345">"ఆధారాల స్టోరేజ్ ఎరేజ్ అయింది."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"ఆధారాల నిల్వను ఎరేజ్ చేయడం సాధ్యపడలేదు."</string>
     <string name="usage_access_title" msgid="8784394396356369568">"యాప్ వినియోగ డేటాకు యాక్సెస్ గల యాప్స్"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"CA సర్టిఫికెట్"</string>
@@ -3620,11 +3621,11 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"బ్లూటూత్, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"బ్లూటూత్, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"డివైజ్"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"కీబోర్డ్, టచ్‌ప్యాడ్, డిస్‌ప్లే, సౌండ్"</string>
+    <string name="device_dashboard_summary" msgid="534835339280267939">"టచ్‌ప్యాడ్, కీబోర్డ్, డిస్‌ప్లే, సౌండ్"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"బ్రైట్‌నెస్, రంగు, డార్క్ థీమ్, లాక్ స్క్రీన్, టెక్స్ట్"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"కీబోర్డ్ ఎంపిక, టూల్స్"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"కర్సర్ వేగం, బటన్ అనుకూలంగా మార్చడం, స్క్రోలింగ్"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"వాల్యూమ్, స్పీకర్‌లు, మైక్రోఫోన్‌లు"</string>
+    <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"వాల్యూమ్, స్పీకర్‌లు, మైక్రోఫోన్‌లు"</string>
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"కర్సర్ అనుకూలంగా మార్చడం, క్లిక్ చర్యలు, స్క్రోలింగ్"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC ఆఫ్‌లో ఉన్నందున అందుబాటులో లేదు"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ఉపయోగించాలంటే, ముందు ఒక పేమెంట్ యాప్‌ను ఇన్‌స్టాల్ చేయండి"</string>
@@ -5318,8 +5319,7 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"ఎక్స్‌టర్నల్ లింక్‌లను చూడటానికి మొబైల్ లేదా Wi‑Fi నెట్‌వర్క్ అవసరం."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"ఎమర్జెన్సీ సర్వీసులకు టెక్స్ట్ మెసేజ్‌లను పంపడం, స్వీకరించడం అన్ని ప్రాంతాలలో అందుబాటులో ఉండకపోవచ్చు."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"ఖాతా మార్పులు సెట్టింగ్‌లలో కనిపించడానికి కొంత సమయం పట్టవచ్చు. వివరాల కోసం <xliff:g id="CARRIER_NAME">%1$s</xliff:g>‌ను సంప్రదించండి."</string>
-    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
-    <skip />
+    <string name="satellite_footer_content_section_8" msgid="7617809843970032785">"శాటిలైట్ కనెక్టివిటీ కోసం ఆప్టిమైజ్ చేసిన అన్ని యాప్‌లను చూడటానికి, మీ క్యారియర్ వెబ్‌సైట్‌కు వెళ్లండి."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"శాటిలైట్ కనెక్టివిటీ గురించి మరిన్ని వివరాలు"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g>‌ను ఆన్ చేయడం సాధ్యపడలేదు"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g>‌ను ఆన్ చేయడానికి, ముందుగా శాటిలైట్ కనెక్షన్‌ను డిస్‌కనెక్ట్ చేయండి"</string>
@@ -5334,8 +5334,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"మీ ఫోన్‌లో సపోర్ట్ ఇచ్చే యాప్‌లు"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIMను జోడించడం సాధ్యం కాదు"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"మీరు SIMను జోడించే ముందు శాటిలైట్ కనెక్షన్‌ను ముగించండి"</string>
-    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
-    <skip />
+    <string name="satellite_toggle_error" msgid="4533772077620854258">"ఏదో పొరపాటు జరిగింది. శాటిలైట్ కనెక్టివిటీని ఆన్/ఆఫ్ చేయడం సాధ్యపడలేదు."</string>
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"బ్లూటూత్ ఆఫ్‌లో ఉంది"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"బ్లూటూత్ ద్వారా కనెక్ట్ చేసినప్పుడు, ఫోన్, వాచ్ వంటి సపోర్ట్ ఉన్న డివైజ్‌లలో విమానం మోడ్ సింక్ చేయబడుతుంది"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"యాక్సెస్ పాయింట్ పేర్లు"</string>
@@ -6090,8 +6089,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"యాప్ సెక్యూరిటీ"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"డివైజ్ అన్‌లాక్"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"ఖాతా సెక్యూరిటీ"</string>
-    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
-    <skip />
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"పోగొట్టుకున్న డివైజ్ ప్రొటెక్షన్"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"సిస్టమ్, అప్‌డేట్‌లు"</string>
     <string name="location_settings" msgid="6833222354060094170">"లొకేషన్ యాక్సెస్"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"లొకేషన్‌కు యాక్సెస్ ఉన్న యాప్‌లను, సర్వీస్‌లను చూడండి"</string>
