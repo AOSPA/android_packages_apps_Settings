@@ -80,7 +80,7 @@ open class LocationScreen :
             else -> R.drawable.ic_settings_location_filled
         }
 
-    override fun isFlagEnabled(context: Context) = Flags.catalystLocationSettings()
+    override fun isFlagEnabled(context: Context) = Flags.catalystMigration26q2()
 
     override fun hasCompleteHierarchy() = false
 
@@ -89,7 +89,7 @@ open class LocationScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
             +LocationMainSwitch()
-            if (Flags.catalystLocationSettings()) +RecentLocationAccessScreen.KEY
+            if (Flags.catalystMigration26q2()) +RecentLocationAccessScreen.KEY
         }
 
     companion object {
