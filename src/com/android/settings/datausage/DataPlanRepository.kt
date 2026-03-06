@@ -18,6 +18,7 @@ package com.android.settings.datausage
 
 import android.net.NetworkPolicy
 import android.telephony.SubscriptionPlan
+import android.util.Log
 import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkCycleDataRepository.Companion.getCycles
 import com.android.settings.datausage.lib.NetworkStatsRepository
@@ -66,10 +67,23 @@ class DataPlanRepositoryImpl(private val networkCycleDataRepository: INetworkCyc
 
     companion object {
         private const val PETA = 1_000_000_000_000_000L
+        private const val TAG = "DataPlanRepository"
 
         private fun getPrimaryPlan(plans: List<SubscriptionPlan>): SubscriptionPlan? =
             plans.firstOrNull()?.takeIf { plan ->
-                plan.dataLimitBytes > 0 && validSize(plan.dataUsageBytes) && plan.cycleRule != null
+                when {
+                    plan.dataLimitBytes <= 0 -> {
+                        Log.w(TAG, "getPrimaryPlan failed: dataLimitBytes <= 0")
+                        false
+                    }
+
+                    !validSize(plan.dataUsageBytes) -> {
+                        Log.w(TAG, "getPrimaryPlan failed: invalid dataUsageBytes")
+                        false
+                    }
+
+                    else -> true
+                }
             }
 
         private fun validSize(value: Long): Boolean = value in 0L until PETA
