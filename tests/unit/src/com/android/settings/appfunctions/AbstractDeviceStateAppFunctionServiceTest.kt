@@ -16,14 +16,15 @@
 
 package com.android.settings.appfunctions
 
+import android.app.appfunctions.AppFunctionException
+import android.app.appfunctions.ExecuteAppFunctionRequest
+import android.app.appfunctions.ExecuteAppFunctionResponse
 import android.content.Context
+import android.content.pm.SigningInfo
 import android.os.CancellationSignal
 import android.os.OutcomeReceiver
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.extensions.appfunctions.AppFunctionException
-import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
-import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
 import com.android.settings.appfunctions.executors.DeviceStateExecutor
 import com.android.settings.metrics.toMetricsId
 import com.android.settingslib.metadata.AppFunctionMetricsLoggerInterface
@@ -87,7 +88,13 @@ class AbstractDeviceStateAppFunctionServiceTest {
             .whenever(mockCallback)
             .onError(any())
 
-        service.onExecuteFunction(request, "test.package", CancellationSignal(), mockCallback)
+        service.onExecuteFunction(
+            request,
+            "test.package",
+            SigningInfo(),
+            CancellationSignal(),
+            mockCallback
+        )
         latch.await(5, TimeUnit.SECONDS)
 
         verify(mockMetricsLogger)
@@ -115,7 +122,13 @@ class AbstractDeviceStateAppFunctionServiceTest {
             .whenever(mockCallback)
             .onResult(any())
 
-        service.onExecuteFunction(request, "test.package", CancellationSignal(), mockCallback)
+        service.onExecuteFunction(
+            request,
+            "test.package",
+            SigningInfo(),
+            CancellationSignal(),
+            mockCallback
+        )
         latch.await(5, TimeUnit.SECONDS)
 
         verify(mockMetricsLogger)

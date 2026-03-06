@@ -17,9 +17,15 @@
 package com.android.settings.appfunctions
 
 import android.app.KeyguardManager
+import android.app.appfunctions.AppFunctionException
 import android.app.appfunctions.AppFunctionException.ERROR_DENIED
+import android.app.appfunctions.AppFunctionException.ERROR_FUNCTION_NOT_FOUND
+import android.app.appfunctions.AppFunctionService
+import android.app.appfunctions.ExecuteAppFunctionRequest
+import android.app.appfunctions.ExecuteAppFunctionResponse
 import android.app.appsearch.GenericDocument
 import android.content.Context
+import android.content.pm.SigningInfo
 import android.content.res.Configuration
 import android.os.CancellationSignal
 import android.os.OutcomeReceiver
@@ -27,11 +33,6 @@ import android.os.SystemClock
 import android.os.Trace
 import android.util.Log
 import androidx.annotation.Keep
-import com.android.extensions.appfunctions.AppFunctionException
-import com.android.extensions.appfunctions.AppFunctionException.ERROR_FUNCTION_NOT_FOUND
-import com.android.extensions.appfunctions.AppFunctionService
-import com.android.extensions.appfunctions.ExecuteAppFunctionRequest
-import com.android.extensions.appfunctions.ExecuteAppFunctionResponse
 import com.android.settings.appfunctions.executors.AndroidApiStateMetadataProviderExecutor
 import com.android.settings.appfunctions.executors.AndroidApiStateProviderExecutor
 import com.android.settings.appfunctions.executors.AndroidApiStateSetterExecutor
@@ -136,6 +137,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
     final override fun onExecuteFunction(
         request: ExecuteAppFunctionRequest,
         callingPackage: String,
+        callingPackageSigningInfo: SigningInfo,
         cancellationSignal: CancellationSignal,
         callback: OutcomeReceiver<ExecuteAppFunctionResponse, AppFunctionException>,
     ) {

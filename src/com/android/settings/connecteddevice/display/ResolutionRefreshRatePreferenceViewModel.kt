@@ -25,8 +25,14 @@ import android.view.Display.Mode
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.android.settings.R
 import com.android.settings.core.instrumentation.SettingsStatsLog
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ResolutionRefreshRatePreferenceViewModel
 @JvmOverloads
@@ -44,6 +50,9 @@ constructor(
         val moreResolutionItems: List<ResolutionItem> = emptyList(),
         val refreshRateItems: List<RefreshRateItem> = emptyList(),
         val areMoreOptionsExpanded: Boolean = false,
+        // `isApplying` covers the state from starting display mode change transaction showing
+        // confirmation dialog, and up to dialog being dismissed (mode change confirmed / rejected)
+        val isApplying: Boolean = false,
     )
 
     data class ResolutionItem(val physicalWidth: Int, val physicalHeight: Int)
@@ -60,6 +69,8 @@ constructor(
     private var isRefreshRateSyncEnabled: Boolean = false
     private var allowedResolutions: Set<Point> = emptySet()
 
+    private var pendingTransaction: ModeChangeTransaction? = null
+
     private val _uiState = MutableLiveData<UiState?>(null)
     val uiState: LiveData<UiState?> = _uiState
     private val _confirmationDialogEvent = MutableLiveData<ConfirmationDialogEvent?>(null)
@@ -68,17 +79,80 @@ constructor(
     private val displayListener =
         object : ExternalDisplaySettingsConfiguration.DisplayListener() {
             override fun update(updatedDisplayId: Int) {
-                if (displayId != updatedDisplayId) {
+                if (displayId != updatedDisplayId) return
+
+                val display = injector.getDisplay(displayId)
+                if (display == null) {
+                    // Let reloadData handles null display disconnection to clear UI states
+                    reloadData(null)
                     return
                 }
-                reloadData()
+
+                if (pendingTransaction?.handleDisplayUpdate(display) == true) {
+                    pendingTransaction = null
+                }
+                // If a transaction is still pending, skip reloadData to prevent UI flickering
+                if (pendingTransaction != null) {
+                    logDebug(
+                        "Display update received but hasn't matched target mode yet. " +
+                            "Skipping UI refresh."
+                    )
+                    return
+                }
+                // Ignore updating states until confirmation dialog is resolved
+                if (_confirmationDialogEvent.value != null) {
+                    logDebug("Ignoring display update event during confirmation dialog.")
+                    return
+                }
+                reloadData(display)
             }
         }
+
+    /**
+     * Mode change request to DisplayManager is async and there is unfortunately no signal or
+     * callback to know whether request was succeed or failed. The only indicator is to check
+     * whether activeMode is updated to what Settings has requested (updated via onDisplayChange).
+     * The problem is onDisplayChange events could also be emitted multiple times during the update,
+     * with the stale activeModeId. Therefore, the only way to track the request status is to have a
+     * timeout that indicates failure if activeMode hasn't been set to the requested mode change.
+     */
+    private class ModeChangeTransaction(
+        private val targetMode: Mode,
+        private val previousMode: Mode,
+        scope: CoroutineScope,
+        private val onSuccess: (target: Mode, previous: Mode) -> Unit,
+        private val onFailure: (target: Mode, previous: Mode) -> Unit,
+    ) {
+        // Automatically start the "failure" timer upon creation
+        private val timeoutJob =
+            scope.launch {
+                delay(RESOLVING_MODE_CHANGE_WAIT_TIMEOUT.inWholeMilliseconds)
+                onFailure(targetMode, previousMode)
+            }
+
+        /** Checks if the current display mode matches target mode change */
+        fun handleDisplayUpdate(display: DisplayDevice): Boolean {
+            val displayMode = display.mode ?: return false
+
+            if (displayMode.modeId == targetMode.modeId) {
+                timeoutJob.cancel()
+                onSuccess(targetMode, previousMode)
+                return true
+            }
+            return false
+        }
+
+        fun cancel() = timeoutJob.cancel()
+
+        private companion object {
+            private val RESOLVING_MODE_CHANGE_WAIT_TIMEOUT: Duration = 3.seconds
+        }
+    }
 
     init {
         loadFilterConfiguration()
         reloadData()
-        injector.registerDisplayListener(displayListener)
+        injector.registerDisplayListener(displayListener, includeRefreshRateEvents = true)
     }
 
     override fun onCleared() {
@@ -86,15 +160,17 @@ constructor(
         injector.unregisterDisplayListener(displayListener)
     }
 
-    private fun reloadData() {
-        val display = injector.getDisplay(displayId)
+    private fun reloadData(display: DisplayDevice? = injector.getDisplay(displayId)) {
+        val currentActiveMode = display?.mode
         // Display is disconnected, reset state
-        if (display == null || display.mode == null) {
-            // Fragment should close itself if UiState is null
+        if (currentActiveMode == null) {
+            // Fragment should close itself if display is not found
             _uiState.value = null
+            _confirmationDialogEvent.value = null
+            pendingTransaction?.cancel()
+            pendingTransaction = null
             return
         }
-        val currentActiveMode = display.mode
         val supportedModes = display.supportedModes
         allowedModes =
             supportedModes.filter { isAllowed(it, supportedModes) }.associateBy { it.modeId }
@@ -244,9 +320,34 @@ constructor(
         val currentPendingMode = currentState.pendingMode
         val currentActiveMode = currentState.currentActiveMode
 
-        _confirmationDialogEvent.value =
-            ConfirmationDialogEvent(currentPendingMode, currentActiveMode)
         logInfo("Try applying mode: $currentPendingMode")
+        updateState { it.copy(isApplying = true) }
+
+        pendingTransaction?.cancel()
+        pendingTransaction =
+            ModeChangeTransaction(
+                currentPendingMode,
+                currentActiveMode,
+                viewModelScope,
+                onSuccess = { target, previous ->
+                    logInfo(
+                        "Active modeId ${target.modeId} has matched the requested mode change, " +
+                            "proceed with confirm dialog"
+                    )
+                    _confirmationDialogEvent.value = ConfirmationDialogEvent(target, previous)
+                },
+                onFailure = { target, previous ->
+                    // Revert UI state, mode change request wasn't confirmed by DisplayManager to be
+                    // success. We treat request as rejected, and revert the UI states
+                    logWarn(
+                        "Active modeId ${previous.modeId} doesn't match with requested modeId " +
+                            "${previous.modeId} after timeout, reverting UI"
+                    )
+                    pendingTransaction = null
+                    updateState { it.copy(isApplying = false, pendingMode = previous) }
+                },
+            )
+
         injector.setUserPreferredDisplayMode(displayId, currentPendingMode, storeMode = false)
     }
 
@@ -257,12 +358,20 @@ constructor(
         if (confirmed) {
             logInfo("Mode change confirmed: $newMode")
             injector.setUserPreferredDisplayMode(displayId, newMode, storeMode = true)
-            updateState { it.copy(currentActiveMode = newMode) }
+            updateState {
+                it.copy(pendingMode = newMode, currentActiveMode = newMode, isApplying = false)
+            }
             logResolutionChange(newMode)
         } else {
             logInfo("Mode change rejected, reverting to: $previousMode")
             injector.resetUserPreferredDisplayMode(displayId)
-            updateState { it.copy(pendingMode = previousMode) }
+            updateState {
+                it.copy(
+                    pendingMode = previousMode,
+                    currentActiveMode = previousMode,
+                    isApplying = false,
+                )
+            }
         }
         _confirmationDialogEvent.value = null
     }

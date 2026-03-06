@@ -20,18 +20,33 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.telephony.SubscriptionManager
 import android.util.Log
+import androidx.annotation.VisibleForTesting
+import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settings.deviceinfo.PhoneNumberUtil
+import com.android.settings.deviceinfo.imei.ImeiData
+import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.wifi.utils.isAdminUser
+import com.android.settings.wifi.utils.telephonyManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 data class EnabledNetworkModeData(
     val isAvailable: Boolean = false,
+    val summary: CharSequence? = null,
+)
+
+data class ImeiInfoData(
+    val imeiData: ImeiData? = null,
+    val isAvailable: Boolean = false,
+    val title: CharSequence? = null,
     val summary: CharSequence? = null,
 )
 
@@ -52,11 +67,22 @@ open class MobileNetworkData(
     val enabledNetworkModeEntriesBuilder =
         EnabledNetworkModePreferenceController.PreferenceEntriesBuilder(context, subId)
 
+    @VisibleForTesting val _imeiInfoDataFlow = MutableStateFlow(ImeiInfoData())
+    val imeiInfoDataFlow: StateFlow<ImeiInfoData> = _imeiInfoDataFlow.asStateFlow()
+    val imeiList = context.getImeiList
+
     init {
         refresh()
+        registerActiveSubscriptionChanged()
     }
 
     fun refresh() {
+        refreshPhoneNumberData()
+        refreshEnabledNetworkModeData()
+        refreshImeiData()
+    }
+
+    private fun refreshPhoneNumberData() {
         coroutineScope?.launch {
             withContext(Dispatchers.Default) {
                 phoneNumberDataFlow.value =
@@ -65,7 +91,13 @@ open class MobileNetworkData(
                         summary = getPhoneNumber(),
                     )
                 Log.d(TAG, "subId=$subId,phoneNumberData=${phoneNumberDataFlow.value}")
+            }
+        }
+    }
 
+    private fun refreshEnabledNetworkModeData() {
+        coroutineScope?.launch {
+            withContext(Dispatchers.Default) {
                 enabledNetworkModeEntriesBuilder.refresh()
                 enabledNetworkModeFlow.value =
                     EnabledNetworkModeData(
@@ -73,6 +105,44 @@ open class MobileNetworkData(
                         summary = enabledNetworkModeEntriesBuilder.summary,
                     )
                 Log.d(TAG, "subId=$subId,enabledNetworkMode=${enabledNetworkModeFlow.value}")
+            }
+        }
+    }
+
+    @VisibleForTesting
+    fun refreshImeiData() {
+        coroutineScope?.launch {
+            withContext(Dispatchers.Default) {
+                val currentImei =
+                    if (isMobileNetworkAvailable()) context.telephonyManager(subId)?.imei else ""
+                val indexing = imeiList.indexOfFirst { it.imei == currentImei }
+                val currentImeiData = if (indexing != -1) imeiList[indexing] else null
+                val title =
+                    if (indexing != -1 && imeiList.size >= 2) {
+                        context.getString(R.string.imei_multi_sim, indexing + 1)
+                    } else {
+                        context.getString(R.string.status_imei)
+                    }
+
+                val summary = currentImei?.let { PhoneNumberUtil.expandByTts(it) } ?: ""
+
+                _imeiInfoDataFlow.value =
+                    ImeiInfoData(
+                        imeiData = currentImeiData,
+                        isAvailable = isMobileNetworkAvailable(),
+                        title = title,
+                        summary = summary,
+                    )
+                Log.d(TAG, "subId=$subId,refreshImeiData")
+            }
+        }
+    }
+
+    private fun registerActiveSubscriptionChanged() {
+        coroutineScope?.launch {
+            SubscriptionRepository(context).activeSubscriptionIdListFlow().collect {
+                Log.d(TAG, "subId=$subId,activeSubscriptionIdListFlow changed")
+                refreshImeiData()
             }
         }
     }
