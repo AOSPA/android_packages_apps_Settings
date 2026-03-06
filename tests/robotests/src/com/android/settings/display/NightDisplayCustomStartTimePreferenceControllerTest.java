@@ -37,6 +37,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class NightDisplayCustomStartTimePreferenceControllerTest {
@@ -99,3 +100,4 @@ public class NightDisplayCustomStartTimePreferenceControllerTest {
         assertThat(mController.isAvailable()).isFalse();
     }
 }
+// LINT.ThenChange(NightDisplayApiScreenTest.kt)
