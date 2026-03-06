@@ -122,6 +122,10 @@ public class TopLevelSafetyCenterEntryPreferenceControllerTest {
                         .isEqualTo(SettingsEnums.SETTINGS_HOMEPAGE);
         assertThat(intentCaptor.getValue().getExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT))
                 .isEqualTo(SafetyCenterFragment.class.getName());
+        // Verifies that the fragment is launched as a second layer page to ensure the back
+        // button is not shown in two-pane mode.
+        assertThat(intentCaptor.getValue()
+                .getBooleanExtra(SettingsActivity.EXTRA_IS_SECOND_LAYER_PAGE, false)).isTrue();
 
     }
 
