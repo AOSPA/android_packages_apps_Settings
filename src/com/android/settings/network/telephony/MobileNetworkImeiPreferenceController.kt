@@ -40,6 +40,7 @@ import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.deviceinfo.PhoneNumberUtil
+import com.android.settings.deviceinfo.imei.ImeiData
 import com.android.settings.deviceinfo.imei.ImeiInfoDialogFragment
 import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.flags.Flags
@@ -67,7 +68,7 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
     private var simSlot = -1
     private var imei = String()
     private var title = String()
-    private var imeiList: List<String> = listOf<String>()
+    private var imeiList: List<ImeiData> = listOf<ImeiData>()
     private var qtiImeiInfo: Array<QtiImeiInfo?>? = null
 
     private val isMinHalVersion2_1: Boolean
@@ -82,7 +83,7 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
         init(fragment, subId, mContext.getImeiList)
     }
 
-    fun init(fragment: Fragment, subId: Int, imeiList: List<String> = mContext.getImeiList) {
+    fun init(fragment: Fragment, subId: Int, imeiList: List<ImeiData> = mContext.getImeiList) {
         this.fragment = fragment
         lazyViewModel = fragment.viewModels()
         mSubId = subId
@@ -194,7 +195,7 @@ class MobileNetworkImeiPreferenceController(context: Context, key: String) :
      * IMEI 2 = non-primary IMEI
      */
     private fun getTitleForGsmPhone(): String {
-        val indexing = imeiList.indexOf(imei)
+        val indexing = imeiList.map { it.imei }.indexOf(imei)
         return when {
             indexing != -1 && imeiList.size >= 2 ->
                 mContext.getString(R.string.imei_multi_sim, indexing + 1)

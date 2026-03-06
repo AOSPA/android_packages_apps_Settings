@@ -15,6 +15,7 @@
  */
 package com.android.settings.datetime.timezone.model;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.collection.ArraySet;
 
@@ -78,7 +79,7 @@ public class TimeZoneData {
         return regionIds;
     }
 
-    public FilteredCountryTimeZones lookupCountryTimeZones(String regionId) {
+    public FilteredCountryTimeZones lookupCountryTimeZones(@Nullable String regionId) {
         CountryTimeZones finder = regionId == null ? null
                 : mCountryZonesFinder.lookupCountryTimeZones(regionId);
        return finder == null ? null : new FilteredCountryTimeZones(finder);

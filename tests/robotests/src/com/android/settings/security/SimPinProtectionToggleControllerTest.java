@@ -19,21 +19,14 @@ package com.android.settings.security;
 import static android.security.Flags.FLAG_AUTO_SIM_PIN_MANAGEMENT;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
-import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.app.KeyguardManager;
-import android.content.Context;
 import android.platform.test.annotations.EnableFlags;
 import android.telephony.SubscriptionInfo;
-import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
 import com.android.settings.R;
@@ -41,56 +34,17 @@ import com.android.settings.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
-public class AutoSimPinManagementControllerTest {
-    @Mock
-    private TelephonyManager mTelephonyManager;
-    @Mock
-    private SubscriptionManager mSubscriptionManager;
-    @Mock
-    private KeyguardManager mKeyguardManager;
-    private SubscriptionInfo mSubscriptionInfo;
-    private Context mContext;
-    private final int mSubscriptionId = 1234;
-    private List<SubscriptionInfo> mSubscriptionInfoList;
-    private AutoSimPinManagementController mController;
+public class SimPinProtectionToggleControllerTest extends BaseSimProtectionControllerTest {
+    private SimPinProtectionToggleController mController;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(RuntimeEnvironment.application.getApplicationContext());
+        super.setUp();
 
-        when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
-        when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
-        when(mContext.getSystemService(KeyguardManager.class)).thenReturn(mKeyguardManager);
-
-        SubscriptionInfo.Builder builder = new SubscriptionInfo.Builder();
-        builder.setDisplayName("Test");
-        builder.setCarrierName("fake carrier name");
-        builder.setId(mSubscriptionId);
-        builder.setSimSlotIndex(1);
-        builder.setEmbedded(false);
-        mSubscriptionInfo = builder.build();
-        mSubscriptionInfoList = new ArrayList<>();
-        mSubscriptionInfoList.add(mSubscriptionInfo);
-        when(mSubscriptionManager.getAvailableSubscriptionInfoList()).thenReturn(
-                mSubscriptionInfoList);
-
-        when(mSubscriptionManager.setDisplayName(any(), anyInt(), anyInt())).thenReturn(0);
-        when(mSubscriptionManager.getEnabledSubscriptionId(eq(1))).thenReturn(mSubscriptionId);
-        when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(
-                mTelephonyManager);
-        when(mKeyguardManager.isDeviceSecure()).thenReturn(true);
-
-        mController = new AutoSimPinManagementController(mContext, "key");
+        mController = new SimPinProtectionToggleController(mContext, "key");
     }
 
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
@@ -127,7 +81,7 @@ public class AutoSimPinManagementControllerTest {
         builder.setEmbedded(true);
 
         when(mSubscriptionManager.getActiveSubscriptionInfo(anyInt())).thenReturn(builder.build());
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)

@@ -537,7 +537,8 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       style="@style/wifi_item_label"
-                      android:text="@string/wifi_hidden_network"/>
+                      android:text="@string/wifi_hidden_network"
+                      android:accessibilityHeading="true"/>
 
             <Spinner
                 android:id="@+id/hidden_settings"
@@ -563,7 +564,8 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       style="@style/wifi_item_label"
-                      android:text="@string/data_usage_metered_yes"/>
+                      android:text="@string/data_usage_metered_yes"
+                      android:accessibilityHeading="true"/>
 
             <Spinner
                 android:id="@+id/metered_settings"
@@ -582,7 +584,8 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       style="@style/wifi_item_label"
-                      android:text="@string/proxy_settings_title"/>
+                      android:text="@string/proxy_settings_title"
+                      android:accessibilityHeading="true"/>
 
             <Spinner
                 android:id="@+id/proxy_settings"
@@ -705,7 +708,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/wifi_item_label"
-                android:text="@string/wifi_ip_settings"/>
+                android:text="@string/wifi_ip_settings"
+                android:accessibilityHeading="true"/>
 
             <Spinner
                 android:id="@+id/ip_settings"
@@ -824,7 +828,8 @@
                       android:layout_width="wrap_content"
                       android:layout_height="wrap_content"
                       style="@style/wifi_item_label"
-                      android:text="@string/wifi_privacy_settings"/>
+                      android:text="@string/wifi_privacy_settings"
+                      android:accessibilityHeading="true"/>
 
             <Spinner
                 android:id="@+id/privacy_settings"

@@ -59,7 +59,7 @@ class DarkModeStartTimePreferenceTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val mockUiModeManager = mock<UiModeManager>()
-    private val preference = StartTimePreference(mockUiModeManager)
+    private val preference = StartTimePreference(mockUiModeManager, false)
     private val shadowPowerManager = shadowOf(context.getSystemService(PowerManager::class.java))!!
 
     @Before
@@ -156,7 +156,7 @@ class DarkModeStartTimePreferenceTest {
             )
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
-        verify(mockLifecycleContext).notifyPreferenceChange(StartTimePreference.KEY)
+        verify(mockLifecycleContext).notifyPreferenceChange(preference.key)
     }
 
     @Test

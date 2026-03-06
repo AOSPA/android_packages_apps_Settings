@@ -23,13 +23,15 @@ import com.android.settings.accessibility.extensions.isPowerSaveMode
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.MUSTPASS_SET
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 // LINT.IfChange
-class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage) :
+class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage, val isUiOnly: Boolean) :
     PreferenceMetadata, MainSwitchPreferenceBinding, BooleanValuePreference {
 
     override val key: String
@@ -44,7 +46,12 @@ class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage) :
     override val indexable
         get() = false
 
-    override fun tags(context: Context) = arrayOf(MUSTPASS_SET)
+    override fun tags(context: Context): Array<String> {
+        if (isUiOnly) {
+            return arrayOf(UI_ONLY_PREFERENCE)
+        }
+        return arrayOf(MUSTPASS_SET)
+    }
 
     override fun isEnabled(context: Context): Boolean =
         if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) !context.isPowerSaveMode()

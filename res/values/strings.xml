@@ -782,6 +782,16 @@
     <string name="time_format_category_title">Time format</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_timezone_title">Time zone</string>
+    <!-- Date & time setting screen setting option title for home time zone [CHAR LIMIT=30] -->
+    <string name="home_time_zone_title">Home time zone</string>
+    <!-- Home time zone settings screen title [CHAR LIMIT=30] -->
+    <string name="home_time_zone_select_title">Select a time zone</string>
+    <!-- Date & time setting screen setting option summary for home time zone [CHAR LIMIT=NONE] -->
+    <string name="home_time_zone_summary">Set a home time zone for when you are away</string>
+    <!-- Date & time setting screen setting option title for using home time zone [CHAR LIMIT=30] -->
+    <string name="use_home_time_zone_title">Use home time zone</string>
+    <!-- Home time zone settings screen category title [CHAR LIMIT=30] -->
+    <string name="suggestions_category_title">Suggestions</string>
     <!-- Date & time setting screen setting option title -->
     <string name="date_time_set_timezone">Select time zone</string>
     <!-- Text hint to search time zone in time zone setting screen -->
@@ -3574,7 +3584,7 @@
     <!-- More security and Privacy, SIM protection setting option name  [CHAR LIMIT=40] -->
     <string name="automatic_sim_lock_settings_title">Protect SIM card</string>
     <!-- More security and Privacy, SIM protection setting screen title  [CHAR LIMIT=40] -->
-    <string name="automatic_sim_lock_protection">Automatic SIM lock protection</string>
+    <string name="automatic_sim_lock_protection">SIM lock protection mode</string>
     <!-- SIM protection settings screen, primary setting for turning on automatic PIN management. [CHAR LIMIT=40] -->
     <string name="sim_auto_pin_management_toggle">Automatic PIN management</string>
     <!-- SIM protection settings screen, primary setting, description for automatic PIN management on [CHAR LIMIT=NONE] -->
@@ -3600,13 +3610,27 @@
     <!-- Automatic SIM card lock protection screen, preference summary when the SIM PIN is manually managed. [CHAR LIMIT=NONE] -->
     <string name="sim_protection_mode_manually_managed">SIM PIN manually managed</string>
     <!-- Automatic SIM card lock protection screen, preference summary when there is no lockscreen so the feature cannot be turned on. [CHAR LIMIT=NONE] -->
-    <string name="sim_protection_mode_lskf_required">Lockscreen must be set up to turn on SIM protection</string>
+    <string name="sim_protection_mode_lskf_required">Lockscreen required for automatic SIM protection, manual only available now</string>
     <!-- Enrollment into automatic SIM PIN management dialog, title. [CHAR LIMIT=40] -->
     <string name="provide_current_sim_pin_title">Enter current SIM PIN</string>
     <!-- Enrollment into automatic SIM PIN management dialog, text. [CHAR LIMIT=NONE] -->
     <string name="provide_current_sim_pin">Enter the SIM card current PIN</string>
     <!-- Enrollment into automatic SIM PIN management dialog, button for using carrier default PIN. [CHAR LIMIT=25] -->
     <string name="use_carrier_default_pin">Use carrier default</string>
+    <!-- Protecting SIM card via PIN, enrolling into automatic or manual management. [CHAR LIMIT=NONE] -->
+    <string name="choose_sim_pin_protection_mode">Choose SIM protection mode</string>
+    <!-- Protecting SIM card via PIN, manual management mode. [CHAR LIMIT=NONE] -->
+    <string name="sim_pin_protection_mode_manual">Manual</string>
+    <!-- Protecting SIM card via PIN, automatic management mode. [CHAR LIMIT=NONE] -->
+    <string name="sim_pin_protection_mode_automatic">Automatic (Android-managed)</string>
+    <!-- Dialog for entering the SIM PIN, title. [CHAR LIMIT=NONE] -->
+    <string name="provide_new_sim_pin_title">New SIM PIN</string>
+    <!-- Dialog for confirming the SIM PIN, title. [CHAR LIMIT=NONE] -->
+    <string name="confirm_new_sim_pin_title">Confirm new SIM PIN</string>
+    <!-- Error message shown to the user if the confirmed PIN does not match the new PIN entered. [CHAR LIMIT=NONE] -->
+    <string name="confirm_new_sim_pin_after_mismatch">PINs do not match. Confirm the new SIM PIN.</string>
+    <!-- Error message shown to the user if the current PIN provided is wrong. [CHAR LIMIT=NONE] -->
+    <string name="enter_current_sim_pin_after_mismatch">Wrong PIN. Attempts remaining: <xliff:g id="num_attempts">%1$d</xliff:g></string>
 
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=40] -->
     <string name="sim_change_data_title">

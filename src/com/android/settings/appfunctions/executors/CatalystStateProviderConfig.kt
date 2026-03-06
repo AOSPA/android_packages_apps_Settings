@@ -176,6 +176,7 @@ import com.android.settings.security.trustagent.TrustAgentApiScreen
 import com.android.settings.sound.MediaControlsScreen
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppApiScreen
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppsApiScreen
+import com.android.settings.spa.app.battery.AppBatteryUsageListApiScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
@@ -335,6 +336,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = PowerUsageAdvancedScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = AppBatteryUsageListApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ScreenTimeoutScreen.KEY),

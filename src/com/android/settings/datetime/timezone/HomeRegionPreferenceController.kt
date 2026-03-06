@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
-package com.android.settings.security;
+package com.android.settings.datetime.timezone
 
-import android.content.Context;
+import android.content.Context
+import androidx.preference.Preference
 
-public class AutoSimPinPreferenceController extends SimLockPreferenceController {
-    public AutoSimPinPreferenceController(Context context, String key) {
-        super(context, key);
+class HomeRegionPreferenceController(context: Context, preferenceKey: String) :
+    RegionPreferenceController(context, preferenceKey) {
+
+    private var mHomeTimeZoneSettings: HomeTimeZoneSettings? = null
+
+    fun setParentFragment(fragment: HomeTimeZoneSettings) {
+        mHomeTimeZoneSettings = fragment
     }
 
-    @Override
-    public int getAvailabilityStatus() {
-        if (!android.security.Flags.autoSimPinManagement()) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
-
-        return super.getAvailabilityStatus();
+    override fun updateState(preference: Preference) {
+        super.updateState(preference)
+        preference.isEnabled = (mHomeTimeZoneSettings?.isHomeTimeZoneEnabled() ?: false)
     }
 }
