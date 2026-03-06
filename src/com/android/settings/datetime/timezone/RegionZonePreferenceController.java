@@ -18,18 +18,18 @@ package com.android.settings.datetime.timezone;
 
 import android.content.Context;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
 
 public class RegionZonePreferenceController extends BaseTimeZonePreferenceController {
-    private static final String PREFERENCE_KEY = "region_zone";
 
-    private TimeZoneInfo mTimeZoneInfo;
+    private @Nullable TimeZoneInfo mTimeZoneInfo;
     private boolean mIsClickable;
 
-    public RegionZonePreferenceController(Context context) {
-        super(context, PREFERENCE_KEY);
+    public RegionZonePreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
     }
 
     @Override
@@ -51,11 +51,11 @@ public class RegionZonePreferenceController extends BaseTimeZonePreferenceContro
                 mTimeZoneInfo.getExemplarLocation(), mTimeZoneInfo.getGmtOffset());
     }
 
-    public void setTimeZoneInfo(TimeZoneInfo timeZoneInfo) {
+    public void setTimeZoneInfo(@Nullable TimeZoneInfo timeZoneInfo) {
         mTimeZoneInfo = timeZoneInfo;
     }
 
-    public TimeZoneInfo getTimeZoneInfo() {
+    public @Nullable TimeZoneInfo getTimeZoneInfo() {
         return mTimeZoneInfo;
     }
 

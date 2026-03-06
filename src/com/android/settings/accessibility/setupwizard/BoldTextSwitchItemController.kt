@@ -30,7 +30,7 @@ class BoldTextSwitchItemController(
     private val context: Context,
     item: Item,
     private val boldTextDataStore: KeyValueStore =
-        BoldTextPreference(context, EntryPoint.SUW_VISION_SETTINGS).storage(context),
+        BoldTextPreference(context, EntryPoint.SUW_VISION_SETTINGS, true).storage(context),
 ) : BaseItemController(item) {
 
     private var boldTextObserver: KeyedObserver<String>? = null

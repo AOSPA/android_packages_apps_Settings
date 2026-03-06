@@ -23,14 +23,13 @@ import android.icu.text.LocaleDisplayNames;
 import java.util.Locale;
 
 public class RegionPreferenceController extends BaseTimeZonePreferenceController {
-    private static final String PREFERENCE_KEY = "region";
 
     private final Locale mLocale;
     private final LocaleDisplayNames mLocaleDisplayNames;
     private String mRegionId = "";
 
-    public RegionPreferenceController(Context context) {
-        super(context, PREFERENCE_KEY);
+    public RegionPreferenceController(Context context, String preferenceKey) {
+        super(context, preferenceKey);
         Locale locale = context.getResources().getConfiguration().getLocales().get(0);
         mLocale = locale;
         mLocaleDisplayNames = LocaleDisplayNames.getInstance(locale);

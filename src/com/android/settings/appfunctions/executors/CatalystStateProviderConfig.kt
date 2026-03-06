@@ -75,6 +75,7 @@ import com.android.settings.applications.specialaccess.WifiControlAppListScreen
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen
 import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppListScreen
 import com.android.settings.applications.specialaccess.deviceadmin.DeviceAdminApiScreen
+import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen
 import com.android.settings.applications.specialaccess.notificationaccess.AppsNotificationAccessScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppListScreen
@@ -106,6 +107,7 @@ import com.android.settings.deviceinfo.legal.ModuleLicensesScreen
 import com.android.settings.deviceinfo.storage.StoragePreferenceScreen
 import com.android.settings.display.AmbientDisplayAlwaysOnPreferenceScreen
 import com.android.settings.display.AutoBrightnessScreen
+import com.android.settings.display.AutoBrightnessApiScreen
 import com.android.settings.display.ColorContrastApiScreen
 import com.android.settings.display.ColorModeApiScreen
 import com.android.settings.display.ColorModeScreen
@@ -174,6 +176,7 @@ import com.android.settings.security.trustagent.TrustAgentApiScreen
 import com.android.settings.sound.MediaControlsScreen
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppApiScreen
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppsApiScreen
+import com.android.settings.spa.app.battery.AppBatteryUsageListApiScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
@@ -268,6 +271,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = AdaptiveConnectivityScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AdaptiveConnectivityApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AutoBrightnessScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AutoBrightnessApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HdrBrightnessApiScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
@@ -332,6 +336,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = PowerUsageAdvancedScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = AppBatteryUsageListApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ScreenTimeoutScreen.KEY),
@@ -406,7 +415,9 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = InstallUnknownAppsAppListScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = InstallUnknownAppsAppDetailScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ManageWriteSettingsAppListScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ManageWriteSettingsAppDetailScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = AppLaunchApiScreen.KEY,
@@ -481,9 +492,14 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ResetDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DisplayOverOtherAppsAppListScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DisplayOverOtherAppsAppDetailScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = FullScreenNotificationsAppListScreen.KEY,
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = FullScreenNotificationsAppDetailScreen.KEY,
         ),
         PerScreenCatalystConfig(
             enabled = true,
@@ -491,14 +507,22 @@ private fun getCatalystScreenConfigs() =
             additionalDescription =
                 "Apps that share permissions and can access each other's data between personal and work profiles",
         ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = InteractAcrossProfilesAppDetailScreen.KEY,
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = PictureInPictureAppListScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = PictureInPictureAppDetailScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiControlAppListScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiControlAppDetailScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = WriteSystemPreferencesAppListScreen.KEY,
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = AllFilesAccessAppListScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AllFilesAccessAppDetailScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AlarmsAndRemindersAppListScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AlarmsAndRemindersAppDetailScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SpecialAccessSettingsScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
@@ -578,6 +602,11 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
             additionalDescription =
                 "Settings to manage apps that can read, reply and control notifications",
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = AppInfoNotificationAccessScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
         PerScreenCatalystConfig(
             enabled = true,
@@ -938,7 +967,7 @@ private fun getDeviceStateItemList() =
             settingScreenKey = HardwareInfoScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = AppInfoStorageScreen.KEY,
             settingScreenKey = AppStorageAppListScreen.KEY,
             hintText = { context, metadata ->
@@ -1023,55 +1052,64 @@ private fun getDeviceStateItemList() =
             settingScreenKey = StoragePreferenceScreen.KEY,
             hintText = { _, _ -> "Total device storage used by temporary system files" },
         ),
+        /* Marking all the following item configs as `false` since the settingKey represents a
+        parameterized inner screen. This is a hack that would allow each parameterized screen expose
+        its own instantiations instead of being exposed as the parent screens' child preferences.
+        We keep the parent screens in this config only for exposing their intents. */
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = DisplayOverOtherAppsAppDetailScreen.KEY,
             settingScreenKey = DisplayOverOtherAppsAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = FullScreenNotificationsAppDetailScreen.KEY,
             settingScreenKey = FullScreenNotificationsAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = InteractAcrossProfilesAppDetailScreen.KEY,
             settingScreenKey = InteractAcrossProfilesAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = PictureInPictureAppDetailScreen.KEY,
             settingScreenKey = PictureInPictureAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = WifiControlAppDetailScreen.KEY,
             settingScreenKey = WifiControlAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = WriteSystemPreferencesAppDetailScreen.KEY,
             settingScreenKey = WriteSystemPreferencesAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = AllFilesAccessAppDetailScreen.KEY,
             settingScreenKey = AllFilesAccessAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = AlarmsAndRemindersAppDetailScreen.KEY,
             settingScreenKey = AlarmsAndRemindersAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = ManageWriteSettingsAppDetailScreen.KEY,
             settingScreenKey = ManageWriteSettingsAppListScreen.KEY,
         ),
         DeviceStateItemConfig(
-            enabled = true,
+            enabled = false,
             settingKey = InstallUnknownAppsAppDetailScreen.KEY,
             settingScreenKey = InstallUnknownAppsAppListScreen.KEY,
+        ),
+        DeviceStateItemConfig(
+            enabled = false,
+            settingKey = AppInfoNotificationAccessScreen.KEY,
+            settingScreenKey = AppsNotificationAccessScreen.KEY,
         ),
         DeviceStateItemConfig(
             enabled = true,

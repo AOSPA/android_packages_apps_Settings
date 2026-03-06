@@ -26,7 +26,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.os.PersistableBundle
-import android.os.UserHandle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -198,7 +197,7 @@ class SatelliteTileStateReceiverTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_bootCompleted_noNtnSupport_disablesTileAndSchedulesJob() =
+    fun onReceive_bootCompleted_noNtnSupport_disablesTileDoesNotScheduleJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(false)
             shadowSatelliteManager.setIsSupportedResponse(false, null)
@@ -207,7 +206,7 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
-            verifyJobScheduled()
+            verify(mockJobScheduler, never()).schedule(any())
             verify(pendingResult).finish()
         }
 
@@ -249,7 +248,7 @@ class SatelliteTileStateReceiverTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_simCardStateChanged_noNtnSupport_disablesTileAndSchedulesJob() =
+    fun onReceive_simCardStateChanged_noNtnSupport_disablesTileDoesNotScheduleJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(false)
             shadowSatelliteManager.setIsSupportedResponse(false, null)
@@ -258,7 +257,7 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
-            verifyJobScheduled()
+            verify(mockJobScheduler, never()).schedule(any())
             verify(pendingResult).finish()
         }
 
@@ -278,7 +277,7 @@ class SatelliteTileStateReceiverTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SATELLITE_TILE)
-    fun onReceive_carrierConfigChanged_noNtnSupport_disablesTileAndSchedulesJob() =
+    fun onReceive_carrierConfigChanged_noNtnSupport_disablesTileDoesNotScheduleJob() =
         runTest(testDispatcher) {
             setLteNtnSupported(false)
             shadowSatelliteManager.setIsSupportedResponse(false, null)
@@ -287,7 +286,7 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
-            verifyJobScheduled()
+            verify(mockJobScheduler, never()).schedule(any())
             verify(pendingResult).finish()
         }
 
@@ -414,6 +413,24 @@ class SatelliteTileStateReceiverTest {
         TestShadowActivityManager.setIsRunningInUserTestHarness(true)
 
         assertThat(SatelliteTileStateReceiver.isSatelliteTileFeatureEnabled(context)).isFalse()
+    }
+
+    @Test
+    fun isTileServiceEnabled_componentEnabled_returnsTrue() {
+        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+        assertThat(SatelliteTileStateReceiver.isTileServiceEnabled(context)).isTrue()
+    }
+
+    @Test
+    fun isTileServiceEnabled_componentDisabled_returnsFalse() {
+        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+        assertThat(SatelliteTileStateReceiver.isTileServiceEnabled(context)).isFalse()
+    }
+
+    @Test
+    fun isTileServiceEnabled_componentDefault_returnsFalse() {
+        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
+        assertThat(SatelliteTileStateReceiver.isTileServiceEnabled(context)).isFalse()
     }
 
     private fun sendBootCompletedBroadcast() {

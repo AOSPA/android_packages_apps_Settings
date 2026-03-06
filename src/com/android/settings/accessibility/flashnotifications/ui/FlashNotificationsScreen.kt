@@ -29,6 +29,7 @@ import com.android.settings.accessibility.FlashNotificationsUtil
 import com.android.settings.accessibility.FlashNotificationsUtil.State
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -77,6 +78,7 @@ open class FlashNotificationsScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +FlashNotificationsScreenPreference(this@FlashNotificationsScreen)
             +FlashNotificationsTopIntroPreference()
             +FlashNotificationsIllustrationPreference()
             +UntitledPreferenceCategoryMetadata(
@@ -100,6 +102,26 @@ open class FlashNotificationsScreen :
             State.CAMERA_SCREEN -> context.getString(R.string.flash_notifications_summary_on)
             else -> context.getString(R.string.flash_notifications_summary_off)
         }
+    }
+
+    class FlashNotificationsScreenPreference(
+        private val screenMetadata : FlashNotificationsScreen
+    ) : PreferenceMetadata, PreferenceAvailabilityProvider, PreferenceSummaryProvider {
+        override val key : String
+            get() = "flash_notifications_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }
 
     companion object {

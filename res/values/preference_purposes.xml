@@ -29,7 +29,7 @@
     <string name="a11y_volume_keys_shortcut_setting_on_lock_screen_purpose" translatable="false">Whether the volume keys shortcut can be used to trigger accessibility features while the device is on the lock screen</string>
     <string name="a11y_button_shortcut_setting_screen_purpose" translatable="false">Allows users to customize the appearance and behavior of the accessibility button shortcut, including its size, fading effect, and transparency level.</string>
     <string name="a11y_button_shortcut_top_intro_purpose" translatable="false">short intro on what Accessibility button is</string>
-    <string name="a11y_button_shortcut_location_purpose" translatable="false">set up whether the Accessibility button show show up as floating menu or on the navigation bar</string>
+    <string name="a11y_button_shortcut_location_purpose" translatable="false">set up whether the Accessibility button show up as floating menu or on the navigation bar</string>
     <string name="a11y_button_shortcut_size_purpose" translatable="false">The size of the accessibility button</string>
     <string name="a11y_floating_menu_shortcut_fade_enabled_purpose" translatable="false">Whether the accessibility button fades when not in use</string>
     <string name="a11y_button_shortcut_transparency_purpose" translatable="false">The transparency level of the accessibility button when it is faded</string>
@@ -68,18 +68,9 @@
     <string name="disable_window_blurs_purpose" translatable="false">Whether to reduce translucent blur effects on backgrounds and panels to make them easier to see.</string>
     <string name="accessibility_color_and_motion_feedback_purpose" translatable="false">feedback</string>
     <string name="accessibility_text_cursor_blink_rate_purpose" translatable="false">Controls whether the text cursor blink rate is sped up, slowed down, or stopped completely, which can help with photosensitivity or focus.</string>
-    <string name="adaptive_battery_entry_purpose" translatable="false">Allows users to enable or disable Adaptive Battery, which optimizes app battery usage based on phone usage patterns to extend battery life.</string>
-    <string name="adaptive_battery_illustration_purpose" translatable="false">adaptive_battery_illustration</string>
-    <string name="adaptive_battery_management_enabled_purpose" translatable="false">Whether Adaptive Battery is enabled to optimize battery usage based on app usage patterns.</string>
-    <string name="adaptive_battery_top_intro_purpose" translatable="false">adaptive_battery_top_intro</string>
     <string name="adaptive_connectivity_purpose" translatable="false">Allows users to manage adaptive connectivity features, such as automatically switching between Wi-Fi and mobile networks to ensure connection stability or optimize battery life.</string>
     <string name="adaptive_connectivity_mobile_network_enabled_purpose" translatable="false">Whether to automatically select the best network connection to extend battery life.</string>
     <string name="adaptive_connectivity_wifi_enabled_purpose" translatable="false">Whether to automatically switch to the mobile network when the Wi-Fi connection is poor or unavailable.</string>
-    <string name="adaptive_haptics_v2_enable_purpose" translatable="false">Whether or not the phone should automatically adjust vibration intensity based on the environment.</string>
-    <string name="adaptive_vibration_footer_purpose" translatable="false">adaptive_vibration_footer</string>
-    <string name="adaptive_vibration_illustration_purpose" translatable="false">adaptive_vibration_illustration</string>
-    <string name="adaptive_vibration_settings_purpose" translatable="false">Allows users to enable or disable adaptive vibration, which automatically adjusts vibration intensity based on the device\'s environment using microphone and other sensors.</string>
-    <string name="adaptive_vibration_top_intro_purpose" translatable="false">adaptive_vibration_top_intro</string>
     <string name="airplane_mode_footer_purpose" translatable="false">airplane_mode_footer</string>
     <string name="airplane_mode_settings_airplane_mode_on_purpose" translatable="false">Whether or not airplane mode is currently enabled, which disables wireless communications.</string>
     <string name="airplane_mode_settings_purpose" translatable="false">airplane_mode_settings</string>
@@ -92,20 +83,13 @@
     <string name="doze_always_on_wallpaper_enabled_purpose" translatable="false">Whether the lock screen wallpaper should be shown when the always-on display is active</string>
     <string name="app_data_usage_screen_purpose" translatable="false">app_data_usage_screen</string>
     <string name="auto_brightness_entry_purpose" translatable="false">Allows users to enable or disable Adaptive brightness, which automatically adjusts the screen brightness based on environment and activities.</string>
-    <string name="battery_saver_reminder_entry_purpose" translatable="false">battery_saver_reminder_entry</string>
-    <string name="battery_saver_schedule_purpose" translatable="false">Allows users to configure Battery Saver schedules, including automatic activation based on battery percentage and automatic deactivation when charged, as well as managing low-battery notification reminders.</string>
-    <string name="low_power_mode_reminder_enabled_purpose" translatable="false">Whether to receive notification reminders when the battery is low</string>
-    <string name="adaptive_battery_category_purpose" translatable="false">adaptive_battery_category</string>
-    <string name="basic_battery_saver_purpose" translatable="false">Enables Standard Battery Saver mode which limits visual effects and background activity</string>
     <string name="battery_saver_purpose" translatable="false">Whether or not Battery Saver is enabled</string>
-    <string name="battery_saver_group_purpose" translatable="false">battery_saver_group</string>
-    <string name="battery_saver_schedule_category_purpose" translatable="false">battery_saver_schedule_category</string>
-    <string name="extreme_battery_saver_purpose" translatable="false">Enables Extreme Battery Saver mode which pauses non-essential apps and notifications</string>
     <string name="battery_usage_summary_purpose" translatable="false">Provides a detailed summary of battery consumption since the last full charge, including a usage chart, total screen time, and a breakdown of consumption by apps or system services.</string>
     <string name="screen_time_since_last_full_charge_purpose" translatable="false">Total seconds any app has been active on screen since the last full charge</string>
     <string name="battery_usage_screen_time_package_purpose" translatable="false">Seconds the app has been used on screen since the last full charge</string>
     <string name="battery_usage_background_time_package_purpose" translatable="false">Seconds the app spent active in background since the last full charge</string>
     <string name="battery_usage_percentage_package_purpose" translatable="false">Percentage of battery used by an app</string>
+    <string name="app_battery_usage_list_screen_purpose" translatable="false">Allows users to manage background power consumption for all installed applications. This includes auditing per-app battery usage metrics and configuring background policies to balance application performance with device battery life.</string>
     <string name="bluetooth_scanning_screen_purpose" translatable="false">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
     <string name="bluetooth_screen_bt_pair_rename_devices_purpose" translatable="false">bluetooth_screen_bt_pair_rename_devices</string>
     <string name="bluetooth_screen_footer_purpose" translatable="false">bluetooth_screen_footer</string>
@@ -188,13 +172,12 @@
     <string name="hdr_brightness_screen_purpose" translatable="false">Allows the user to brighten and expand the color range and clarity in High Dynamic Range (HDR) images and videos.</string>
     <string name="hdr_brightness_enabled_purpose" translatable="false">Allows the user to enable High Dynamic Range (HDR) images and videos.</string>
     <string name="hdr_brightness_boost_level_purpose" translatable="false">Allows the user to control the High Dynamic Range (HDR) brightness intensity as a percentage to make HDR images and videos dimmer or brighter.</string>
-    <string name="category_brightness_purpose" translatable="false">category_brightness</string>
-    <string name="category_key_appearance_purpose" translatable="false">category_key_appearance</string>
-    <string name="category_lock_display_purpose" translatable="false">category_lock_display</string>
-    <string name="category_other_purpose" translatable="false">category_other</string>
-    <string name="category_touch_purpose" translatable="false">category_touch</string>
+    <string name="category_brightness_purpose" translatable="false">A section containing options for display brightness controls.</string>
+    <string name="category_key_appearance_purpose" translatable="false">A section containing options for color theme, font size, and text appearance.</string>
+    <string name="category_lock_display_purpose" translatable="false">A section containing general controls for the lock screen.</string>
+    <string name="category_other_purpose" translatable="false">A section containing general options for display controls.</string>
+    <string name="category_touch_purpose" translatable="false">A section containing controls for the touch screen.</string>
     <string name="peak_refresh_rate_purpose" translatable="false">Whether or not the screen refresh rate is automatically raised for smoother motion and animations</string>
-    <string name="touch_sensitivity_settings_page_purpose" translatable="false">Allows users to adjust the touch screen sensitivity, enabling automatic adjustments or a manual increase for better responsiveness to lighter touches.</string>
     <string name="base_band_purpose" translatable="false">The baseband version of the device</string>
     <string name="firmware_version_purpose" translatable="false">Provides information about the device Android version and other firmware components</string>
     <string name="kernel_version_purpose" translatable="false">The kernel version of the device</string>
@@ -300,7 +283,6 @@
     <string name="regional_preference_numbering_system_preference_purpose" translatable="false">Set the numbering system for the selected language</string>
     <string name="regional_preference_numbering_system_parameter_purpose" translatable="false">Language code of the selected language</string>
     <string name="copyright_purpose" translatable="false">copyright</string>
-    <string name="legal_source_code_purpose" translatable="false">Information about the availability of open-source code for device components.</string>
     <string name="license_purpose" translatable="false">Access licenses for third-party software components.</string>
     <string name="terms_purpose" translatable="false">View legal terms and conditions.</string>
     <string name="wallpaper_attributions_purpose" translatable="false">View credits and attributions for wallpaper and satellite imagery.</string>
@@ -372,16 +354,10 @@
     <string name="when_to_dream_description" translatable="false">Scheduling restrictions</string>
     <string name="low_light_mode_purpose" translatable="false">Low light mode dims the screen brightness and filters blue light to reduce eye strain in low-light environments.</string>
     <string name="use_data_saver_purpose" translatable="false">Whether or not Data Saver is enabled to reduce background data usage.</string>
-    <string name="reverse_charging_purpose" translatable="false">Allows users to wirelessly share their phone\'s battery power with other compatible devices, such as earbuds or other phones.</string>
-    <string name="reverse_charging_detail_footer_purpose" translatable="false">reverse_charging_detail_footer</string>
-    <string name="reverse_charging_illustration_purpose" translatable="false">reverse_charging_illustration</string>
-    <string name="reverse_charging_summary_purpose" translatable="false">reverse_charging_summary</string>
     <string name="adaptive_sleep_purpose" translatable="false">Whether the screen should remain on while the user is looking at it</string>
-    <string name="contextual_screen_timeout_enabled_purpose" translatable="false">Whether the screen should automatically turn off when the device is not in use</string>
     <string name="see_all_apps_purpose" translatable="false">Provides a complete list of all installed applications, enabling users to find and access management settings for specific apps.</string>
     <string name="app_launch_screen_purpose" translatable="false">Whether the app automatically intercepts and opens specific supported web links (URLs) directly, bypassing the web browser.</string>
     <string name="app_parameter_purpose" translatable="false">The package to configure.</string>
-    <string name="software_update_settings_v2_purpose" translatable="false">Allows users to view the current software update status of the device and access detailed settings for system updates, system updates, and app updates.</string>
     <string name="alarm_volume_purpose" translatable="false">The system volume level for alarms</string>
     <string name="assistant_volume_purpose" translatable="false">This slider adjusts the assistant volume level.</string>
     <string name="audio_category_purpose" translatable="false">audio_category</string>
@@ -517,10 +493,6 @@
     <string name="supervision_set_up_pin_purpose" translatable="false">Allows the user to set up a PIN for parental controls</string>
     <string name="top_level_supervision_purpose" translatable="false">Allows parents to set up and manage parental controls for this device, including screen time limits, app restrictions, and content filters.</string>
     <string name="top_level_system_purpose" translatable="false">Provides access to core system settings, including software updates, language and regional preferences, navigation methods, keyboard tools, gestures, date and time settings, and user management.</string>
-    <string name="adaptive_touch_sensitivity_enabled_purpose" translatable="false">Whether touch sensitivity automatically adjusts based on environment, activities, and screen protector presence.</string>
-    <string name="touch_sensitivity_enabled_purpose" translatable="false">Whether the screen is made more responsive to lighter touches, which is often helpful when using a screen protector.</string>
-    <string name="touch_sensitivity_illustration_purpose" translatable="false">touch_sensitivity_illustration</string>
-    <string name="touch_sensitivity_settings_top_intro_purpose" translatable="false">touch_sensitivity_settings_top_intro</string>
     <string name="alarm_vibration_intensity_purpose" translatable="false">The intensity level of vibration for alarms.</string>
     <string name="apply_ramping_ringer_purpose" translatable="false">Whether the phone should vibrate first and then ring gradually for incoming calls.</string>
     <string name="haptic_feedback_intensity_purpose" translatable="false">haptic_feedback_intensity</string>
@@ -669,6 +641,7 @@
     <string name="install_certificate_from_storage_purpose" translatable="false">Allows users to install different types of digital certificate, including ca certificates, VPN and app certificates, or Wi-Fi certificates.</string>
     <string name="encryption_and_credential_purpose" translatable="false">Allows users to manage disk encryption and credentials on their device, including adding and removing certificates.</string>
     <string name="content_protection_purpose" translatable="false">Allows users to enable or disable scanning for deceptive apps.</string>
+    <string name="content_protection_switch_purpose" translatable="false">Controls whether scanning for deceptive apps is enabled.</string>
     <!-- Enterprise owned security screens end -->
     <!-- Account detail screen begin -->
     <string name="account_detail_screen_purpose" translatable="false">Allow the user to tap on an individual account to view its details, such as sync items.</string>

@@ -38,6 +38,12 @@ class ColorInversionSetupWizardFragment : BaseSetupWizardFragment() {
                     ColorInversionIllustrationItemController(context, it),
                 )
             }
+            findItem(adapter, R.id.color_inversion_shortcut_in_suw)?.let {
+                put(
+                    R.id.color_inversion_shortcut_in_suw,
+                    ColorInversionShortcutTwoTargetItemController.create(context, it),
+                )
+            }
             findItem(adapter, R.id.color_inversion_footer_in_suw)?.let {
                 put(
                     R.id.color_inversion_footer_in_suw,

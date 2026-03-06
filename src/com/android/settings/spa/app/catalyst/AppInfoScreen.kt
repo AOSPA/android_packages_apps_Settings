@@ -29,20 +29,6 @@ import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.applications.applicationInfoComparator
 import com.android.settings.applications.getApplicationInfo
 import com.android.settings.applications.packageName
-import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen
-import com.android.settings.applications.specialaccess.AlarmsAndRemindersAppDetailScreen.Companion.alarmsAndRemindersFilter
-import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen
-import com.android.settings.applications.specialaccess.DisplayOverOtherAppsAppDetailScreen.Companion.displayOverOtherAppsFilter
-import com.android.settings.applications.specialaccess.InstallUnknownAppsAppDetailScreen
-import com.android.settings.applications.specialaccess.InstallUnknownAppsAppDetailScreen.Companion.installUnknownAppsFilter
-import com.android.settings.applications.specialaccess.ManageWriteSettingsAppDetailScreen
-import com.android.settings.applications.specialaccess.ManageWriteSettingsAppDetailScreen.Companion.manageWriteSettingsFilter
-import com.android.settings.applications.specialaccess.SpecialAccessAppDetailScreen
-import com.android.settings.applications.specialaccess.SpecialAccessAppDetailScreen.Companion.hasSpecialAccessPermission
-import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen
-import com.android.settings.applications.specialaccess.WriteSystemPreferencesAppDetailScreen.Companion.writeSystemPreferencesFilter
-import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen
-import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppDetailScreen.Companion.pictureInPictureFilter
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
@@ -50,20 +36,18 @@ import com.android.settingslib.metadata.KEY_PACKAGE_NAME
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.packageName
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
-import kotlin.let
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(AppInfoScreen.KEY, parameterized = true)
 open class AppInfoScreen
@@ -76,7 +60,6 @@ private constructor(
     final override val keyParameters: ValidatedKeyParameters?,
 ) : PreferenceScreenMixin, PreferenceTitleProvider, PreferenceAvailabilityProvider {
     override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
-
 
     private val packageName: String =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -100,7 +83,7 @@ private constructor(
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.installed_app_detail_settings_screen_purpose
 
@@ -131,68 +114,7 @@ private constructor(
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +PreferenceCategory("advanced_app_info",R.string.advanced_app_info_purpose, R.string.advanced_apps) += {
-                var newKeyParameters: ValidatedKeyParameters? = null
-                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                    newKeyParameters =
-                        SpecialAccessAppDetailScreen.Companion.parametersSchema.prepareWith(
-                            keyParameters,
-                            SpecialAccessAppDetailScreen.KEY_INTENT_SOURCE to SOURCE,
-                        )
-                } else {
-                    arguments!!.putString("source", SOURCE)
-                }
-
-                appInfo?.let {
-                    if (hasSpecialAccessPermission(context, it, ::displayOverOtherAppsFilter)) {
-                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                            +(DisplayOverOtherAppsAppDetailScreen.KEY withParameters
-                                newKeyParameters!!)
-                        } else {
-                            +(DisplayOverOtherAppsAppDetailScreen.KEY args arguments!!)
-                        }
-                    }
-                    if (hasSpecialAccessPermission(context, it, ::manageWriteSettingsFilter)) {
-                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                            +(ManageWriteSettingsAppDetailScreen.KEY withParameters
-                                newKeyParameters!!)
-                        } else {
-                            +(ManageWriteSettingsAppDetailScreen.KEY args arguments!!)
-                        }
-                    }
-                    if (hasSpecialAccessPermission(context, it, ::pictureInPictureFilter)) {
-                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                            +(PictureInPictureAppDetailScreen.KEY withParameters newKeyParameters!!)
-                        } else {
-                            +(PictureInPictureAppDetailScreen.KEY args arguments!!)
-                        }
-                    }
-                    if (hasSpecialAccessPermission(context, it, ::installUnknownAppsFilter)) {
-                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                            +(InstallUnknownAppsAppDetailScreen.KEY withParameters
-                                newKeyParameters!!)
-                        } else {
-                            +(InstallUnknownAppsAppDetailScreen.KEY args arguments!!)
-                        }
-                    }
-                    if (hasSpecialAccessPermission(context, it, ::alarmsAndRemindersFilter)) {
-                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                            +(AlarmsAndRemindersAppDetailScreen.KEY withParameters
-                                newKeyParameters!!)
-                        } else {
-                            +(AlarmsAndRemindersAppDetailScreen.KEY args arguments!!)
-                        }
-                    }
-                    if (hasSpecialAccessPermission(context, it, ::writeSystemPreferencesFilter)) {
-                        if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                            +(WriteSystemPreferencesAppDetailScreen.KEY withParameters
-                                newKeyParameters!!)
-                        } else {
-                            +(WriteSystemPreferencesAppDetailScreen.KEY args arguments!!)
-                        }
-                    }
-                }
-            }
+            // TODO (b/484948332)
         }
 
     companion object : ParameterizedPreferenceScreenArgumentsFactory {

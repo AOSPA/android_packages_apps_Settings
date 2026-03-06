@@ -32,14 +32,13 @@ import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
 import com.android.settingslib.metadata.PreferenceHierarchyNode
-import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreconditionsAsString
+import com.android.settingslib.metadata.preferencesapi.types.ApiType
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import com.android.settingslib.metadata.setPreconditionsAsString
-import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
@@ -47,8 +46,11 @@ import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isUiOnlyPreference
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.setWarningAsString
 import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemMetadata
+import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
+import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationType
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.Sensitivity
@@ -78,6 +80,7 @@ class CatalystStateMetadataProviderExecutor(
         params: GenericDocument?,
     ): DeviceStateMetadataProviderExecutorResult {
         val perScreenDeviceStatesList = mutableListOf<PerScreenMetadata>()
+        val itemizationTypes = mutableSetOf<ItemizationType>()
         coroutineScope {
             val semaphore = Semaphore(MAX_PARALLELISM)
             val deferredList =
@@ -100,15 +103,19 @@ class CatalystStateMetadataProviderExecutor(
                         }
                     }
                 }
-            val results = deferredList.awaitAll()
-            perScreenDeviceStatesList.addAll(results.filterNotNull().flatten())
+            val results = deferredList.awaitAll().filterNotNull()
+            perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
+            itemizationTypes.addAll(results.flatMap { it.itemizationTypes })
         }
-        return DeviceStateMetadataProviderExecutorResult(metadata = perScreenDeviceStatesList)
+        return DeviceStateMetadataProviderExecutorResult(
+            metadata = perScreenDeviceStatesList,
+            itemizationTypes = itemizationTypes,
+        )
     }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
         screenKey: String
-    ): List<PerScreenMetadata> {
+    ): DeviceStateMetadataProviderExecutorResult {
         val isParameterized = PreferenceScreenRegistry.isParameterized(context, screenKey)
         val hierarchy =
             getEnabledPreferencesHierarchy(
@@ -119,15 +126,31 @@ class CatalystStateMetadataProviderExecutor(
                 removeDuplicates = isParameterized,
             )
 
-        return hierarchy.map { entry ->
-            val screenMetaData = entry.key
-            val preferencesHierarchy = entry.value
-            buildPerScreenDeviceStatesMetadata(
-                screenMetaData,
-                preferencesHierarchy,
-                isParameterized,
-            )
+        val metadata =
+            hierarchy.map { entry ->
+                val screenMetaData = entry.key
+                val preferencesHierarchy = entry.value
+                buildPerScreenDeviceStatesMetadata(
+                    screenMetaData,
+                    preferencesHierarchy,
+                    isParameterized,
+                )
+            }
+
+        val types = mutableSetOf<ItemizationType>()
+        hierarchy.values.flatten().forEach { node ->
+            (node.metadata as? ApiPreference<*>)?.let { types.add(it.type.toItemizationType(context)) }
         }
+        hierarchy.keys.forEach { screenMetaData ->
+            screenMetaData.keyParametersSchema?.getParameters()?.values?.forEach { param ->
+                types.add(param.type.toItemizationType(context))
+            }
+        }
+
+        return DeviceStateMetadataProviderExecutorResult(
+            metadata = metadata,
+            itemizationTypes = types,
+        )
     }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
@@ -141,6 +164,9 @@ class CatalystStateMetadataProviderExecutor(
             val config = settingConfigMap[metadata.key]
             // skip over UI-only preferences
             if(metadata.isUiOnlyPreference(context))
+                return@forEach
+            // skip if metadata is screen
+            if(metadata is PreferenceScreenMetadata)
                 return@forEach
             // skip over explicitly disabled preferences
             val metadataProto = try {
@@ -177,6 +203,7 @@ class CatalystStateMetadataProviderExecutor(
                         metadata.accessPreconditionsAsString(context),
                         metadata.getPreconditionsAsString(context),
                         metadata.setPreconditionsAsString(context),
+                        metadata.setWarningAsString(context),
                         config?.hintText(englishContext, metadata)
                     ).joinToString(separator = "\n").replace("..", ".")
             deviceStateItemMetadataList.add(
@@ -319,4 +346,18 @@ class CatalystStateMetadataProviderExecutor(
                 else -> ""
             }
     }
+}
+
+suspend fun ApiType<*>.toItemizationType(context: Context): ItemizationType {
+    return ItemizationType(
+        key = getKey(),
+        hintText = getDescription(context),
+        values = if (this is FiniteOptionsType) {
+            getOptions(context).map {
+                ItemizationDetail(key = it.first.toString(), value = it.second.toString())
+            }.toList()
+        } else {
+            emptyList()
+        },
+    )
 }

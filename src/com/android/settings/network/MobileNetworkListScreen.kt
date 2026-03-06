@@ -42,6 +42,7 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -185,6 +186,7 @@ open class MobileNetworkListScreen(context: Context) :
     // Keep it for the external apps may retrieve it through the Setting Graph.
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +MobileNetworkListScreenPreference(this@MobileNetworkListScreen)
             +MobileDataPreference()
             addAsync(coroutineScope, Dispatchers.Default) {
                 if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -201,6 +203,26 @@ open class MobileNetworkListScreen(context: Context) :
             +SimSmsPreference() order +140
             +SimMobileDataPreference() order +150
         }
+
+    class MobileNetworkListScreenPreference(
+        private val screenMetadata : MobileNetworkListScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+        override val key : String
+            get() = "mobile_network_list_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+    }
 
     companion object {
         const val KEY = "mobile_network_list"

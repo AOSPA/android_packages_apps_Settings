@@ -18,7 +18,6 @@ package com.android.settings.users;
 
 import static android.os.UserManager.SWITCHABILITY_STATUS_OK;
 import static android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED;
-import static android.multiuser.Flags.FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS;
 import static android.multiuser.Flags.FLAG_UPGRADE_USER_SUMMARY_BEHAVIOUR;
 
 import static com.android.settings.flags.Flags.FLAG_SHOW_USER_DETAILS_SETTINGS_FOR_SELF;
@@ -748,11 +747,9 @@ public class UserSettingsTest {
         verify(mAddUserPreference).setEnabled(true);
     }
 
-    @DisableFlags({
-            FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
-            FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS})
+    @DisableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
     @Test
-    public void updateUserList_disallowAddUser_refactoringDisabled_shouldShowButDisableAddActions() {
+    public void updateUserList_disallowAddUser_refactoringDisabled_shouldShowActionsDisabledBySystem() {
         givenUsers(getAdminUser(true));
         mUserCapabilities.mCanAddGuest = true;
         mUserCapabilities.mCanAddUser = false;
@@ -771,39 +768,19 @@ public class UserSettingsTest {
 
         mFragment.updateUserList();
 
+        ArgumentCaptor<EnforcingAdmin> enforcingAdminCaptor = ArgumentCaptor.forClass(
+                EnforcingAdmin.class);
         verify(mAddGuestPreference).setVisible(true);
-        verify(mAddGuestPreference).setEnabled(false);
+        verify(mAddGuestPreference).setDisabledByAdmin(enforcingAdminCaptor.capture());
+        EnforcingAdmin guestEnforcingAdminValue = enforcingAdminCaptor.getValue();
+        assertThat(guestEnforcingAdminValue.getAuthority()).isInstanceOf(SystemAuthority.class);
         verify(mAddUserPreference).setVisible(true);
-        verify(mAddUserPreference).setEnabled(false);
+        verify(mAddUserPreference).setDisabledByAdmin(enforcingAdminCaptor.capture());
+        EnforcingAdmin userEnforcingAdminValue = enforcingAdminCaptor.getValue();
+        assertThat(userEnforcingAdminValue.getAuthority()).isInstanceOf(SystemAuthority.class);
     }
 
     @EnableFlags(FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED)
-    @DisableFlags(FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS)
-    @Test
-    public void updateUserList_disallowAddUser_refactoringEnabled_shouldShowButDisableAddActions() {
-        givenUsers(getAdminUser(true));
-        mUserCapabilities.mCanAddGuest = true;
-        mUserCapabilities.mCanAddUser = false;
-        mUserCapabilities.mDisallowAddUser = true;
-        mUserCapabilities.mDisallowAddUserSetByAdmin = false;
-        mUserCapabilities.mDisallowAddUserRestrictionEnforcementInfo =
-                new PolicyEnforcementInfo(List.of(SYSTEM_ADMIN));
-        doReturn(true)
-                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_GUEST));
-        doReturn(true)
-                .when(mUserManager).canAddMoreUsers(eq(UserManager.USER_TYPE_FULL_SECONDARY));
-
-        mFragment.updateUserList();
-
-        verify(mAddGuestPreference).setVisible(true);
-        verify(mAddGuestPreference).setEnabled(false);
-        verify(mAddUserPreference).setVisible(true);
-        verify(mAddUserPreference).setEnabled(false);
-    }
-
-    @EnableFlags({
-            FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED,
-            FLAG_SHOW_POLICY_TRANSPARENCY_FOR_SYSTEM_RESTRICTIONS})
     @Test
     public void updateUserList_disallowAddUser_refactoringEnabled_shouldShowActionsDisabledByAdmin() {
         givenUsers(getAdminUser(true));

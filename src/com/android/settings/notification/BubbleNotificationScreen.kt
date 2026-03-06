@@ -25,6 +25,7 @@ import com.android.settings.Settings.BubbleNotificationSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -53,7 +54,7 @@ open class BubbleNotificationScreen :
         get() = R.string.bubbles_app_toggle_title
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +BubbleNotificationScreenPreference(this@BubbleNotificationScreen) }
 
     override fun fragmentClass(): Class<out Fragment>? = BubbleNotificationSettings::class.java
 
@@ -79,6 +80,26 @@ open class BubbleNotificationScreen :
     }
 
     override fun isAvailable(context: Context): Boolean = BubbleHelper.isSupportedByDevice(context)
+
+    class BubbleNotificationScreenPreference(
+        private val screenMetadata : BubbleNotificationScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+        override val key : String
+            get() = "notification_bubbles_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+    }
 
     companion object {
         const val KEY = "notification_bubbles"

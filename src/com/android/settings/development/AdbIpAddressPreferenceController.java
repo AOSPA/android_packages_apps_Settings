@@ -121,7 +121,7 @@ public class AdbIpAddressPreferenceController extends AbstractConnectivityPrefer
     protected void updateConnectivity() {
         String ipAddress = getIpv4Address();
         int port = getPort();
-        if (ipAddress == null) {
+        if (!AdbWirelessDebuggingPreferenceController.isWifiConnected(mContext)) {
             mAdbIpAddrPref.setSummary(mContext.getString(
                     com.android.settingslib.R.string.adb_wireless_unavailable_disconnected
             ));

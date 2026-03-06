@@ -20,7 +20,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
-import com.android.settings.accessibility.Flags.enableDisabilitySupport
 import com.android.settings.core.BasePreferenceController
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.widget.ButtonPreference
@@ -37,8 +36,7 @@ class DisabilitySupportButtonPreferenceController(context: Context, prefKey: Str
         )
 
     override fun getAvailabilityStatus(): Int =
-        if (enableDisabilitySupport() && helpIntent != null) AVAILABLE
-        else CONDITIONALLY_UNAVAILABLE
+        if (helpIntent != null) AVAILABLE else CONDITIONALLY_UNAVAILABLE
 
     override fun displayPreference(screen: PreferenceScreen) {
         super.displayPreference(screen)

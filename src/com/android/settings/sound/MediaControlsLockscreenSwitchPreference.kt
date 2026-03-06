@@ -24,6 +24,7 @@ import com.android.settings.contract.KEY_SHOW_MEDIA_ON_LOCK_SCREEN
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
@@ -41,7 +42,7 @@ class MediaControlsLockscreenSwitchPreference :
     override val preferenceActionMetrics: Int
         get() = ACTION_SHOW_MEDIA_ON_LOCK_SCREEN
 
-    override fun tags(context: Context) = arrayOf(KEY_SHOW_MEDIA_ON_LOCK_SCREEN)
+    override fun tags(context: Context) = arrayOf(KEY_SHOW_MEDIA_ON_LOCK_SCREEN, MUSTPASS_SET)
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY

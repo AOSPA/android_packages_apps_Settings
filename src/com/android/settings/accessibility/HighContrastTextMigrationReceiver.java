@@ -35,7 +35,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.android.graphics.hwui.flags.Flags;
 import com.android.modules.expresslog.Counter;
 import com.android.settings.R;
 
@@ -76,10 +75,6 @@ public class HighContrastTextMigrationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(@NonNull Context context, @NonNull Intent intent) {
-        if (!Flags.highContrastTextSmallTextRect()) {
-            return;
-        }
-
         if (ACTION_OPEN_SETTINGS.equals(intent.getAction())) {
             // Close notification drawer before opening the HCT setting.
             context.sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
