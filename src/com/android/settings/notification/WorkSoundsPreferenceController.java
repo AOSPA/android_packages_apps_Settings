@@ -21,7 +21,6 @@ import android.content.Context;
 import com.android.settings.core.BasePreferenceController;
 
 /** This controller manages the work profile sounds preference. */
-// LINT.IfChange
 public class WorkSoundsPreferenceController extends BasePreferenceController {
 
     public WorkSoundsPreferenceController(Context context, String preferenceKey) {
@@ -34,4 +33,3 @@ public class WorkSoundsPreferenceController extends BasePreferenceController {
                 : DISABLED_FOR_USER;
     }
 }
-// LINT.ThenChange(SoundWorkApiScreen.kt)
