@@ -26,32 +26,34 @@ interface DataPlanRepository {
     fun getDataPlanInfo(policy: NetworkPolicy, plans: List<SubscriptionPlan>): DataPlanInfo
 }
 
-class DataPlanRepositoryImpl(
-    private val networkCycleDataRepository: INetworkCycleDataRepository,
-) : DataPlanRepository {
+class DataPlanRepositoryImpl(private val networkCycleDataRepository: INetworkCycleDataRepository) :
+    DataPlanRepository {
     override fun getDataPlanInfo(
         policy: NetworkPolicy,
         plans: List<SubscriptionPlan>,
     ): DataPlanInfo {
+        val cycle = policy.getCycles().firstOrNull()
+        val dataUsage =
+            networkCycleDataRepository
+                .queryUsage(cycle ?: NetworkStatsRepository.AllTimeRange)
+                .usage
+
         getPrimaryPlan(plans)?.let { primaryPlan ->
-            val dataPlanSize = when (primaryPlan.dataLimitBytes) {
-                SubscriptionPlan.BYTES_UNLIMITED -> SubscriptionPlan.BYTES_UNKNOWN
-                else -> primaryPlan.dataLimitBytes
-            }
+            val dataPlanSize =
+                when (primaryPlan.dataLimitBytes) {
+                    SubscriptionPlan.BYTES_UNLIMITED -> SubscriptionPlan.BYTES_UNKNOWN
+                    else -> primaryPlan.dataLimitBytes
+                }
             return DataPlanInfo(
                 dataPlanCount = plans.size,
                 dataPlanSize = dataPlanSize,
                 dataBarSize = dataPlanSize,
-                dataPlanUse = primaryPlan.dataUsageBytes,
+                dataPlanUse = dataUsage, // Always use the reconciled value
                 cycleEnd = primaryPlan.cycleRule.end?.toInstant()?.toEpochMilli(),
                 snapshotTime = primaryPlan.dataUsageTime,
             )
         }
 
-        val cycle = policy.getCycles().firstOrNull()
-        val dataUsage = networkCycleDataRepository.queryUsage(
-            cycle ?: NetworkStatsRepository.AllTimeRange
-        ).usage
         return DataPlanInfo(
             dataPlanCount = 0,
             dataPlanSize = SubscriptionPlan.BYTES_UNKNOWN,
