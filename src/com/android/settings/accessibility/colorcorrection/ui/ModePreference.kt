@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 
@@ -119,6 +120,9 @@ class DeuteranomalyModePreference(storage: ColorCorrectionModeDataStore) : ModeP
     override val summary: Int
         get() = R.string.daltonizer_mode_deuteranomaly_summary
 
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
+
     companion object {
         private const val KEY = "daltonizer_mode_deuteranomaly"
     }
@@ -137,6 +141,9 @@ class ProtanomalyModePreference(storage: ColorCorrectionModeDataStore) : ModePre
     override val summary: Int
         get() = R.string.daltonizer_mode_protanomaly_summary
 
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
+
     companion object {
         private const val KEY = "daltonizer_mode_protanomaly"
     }
@@ -154,6 +161,9 @@ class TritanomalyModePreference(storage: ColorCorrectionModeDataStore) : ModePre
 
     override val summary: Int
         get() = R.string.daltonizer_mode_tritanomaly_summary
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = "daltonizer_mode_tritanomaly"

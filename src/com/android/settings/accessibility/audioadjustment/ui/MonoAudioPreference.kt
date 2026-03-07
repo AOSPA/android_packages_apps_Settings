@@ -21,6 +21,7 @@ import android.provider.Settings
 import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 /** Preference for controlling mono audio. */
@@ -33,6 +34,9 @@ class MonoAudioPreference :
     ) {
 
     override fun storage(context: Context): KeyValueStore = SettingsSystemStore.get(context)
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = Settings.System.MASTER_MONO
