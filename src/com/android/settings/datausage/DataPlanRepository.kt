@@ -18,6 +18,7 @@ package com.android.settings.datausage
 
 import android.net.NetworkPolicy
 import android.telephony.SubscriptionPlan
+import android.util.Log
 import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkCycleDataRepository.Companion.getCycles
 import com.android.settings.datausage.lib.NetworkStatsRepository
@@ -26,32 +27,34 @@ interface DataPlanRepository {
     fun getDataPlanInfo(policy: NetworkPolicy, plans: List<SubscriptionPlan>): DataPlanInfo
 }
 
-class DataPlanRepositoryImpl(
-    private val networkCycleDataRepository: INetworkCycleDataRepository,
-) : DataPlanRepository {
+class DataPlanRepositoryImpl(private val networkCycleDataRepository: INetworkCycleDataRepository) :
+    DataPlanRepository {
     override fun getDataPlanInfo(
         policy: NetworkPolicy,
         plans: List<SubscriptionPlan>,
     ): DataPlanInfo {
+        val cycle = policy.getCycles().firstOrNull()
+        val dataUsage =
+            networkCycleDataRepository
+                .queryUsage(cycle ?: NetworkStatsRepository.AllTimeRange)
+                .usage
+
         getPrimaryPlan(plans)?.let { primaryPlan ->
-            val dataPlanSize = when (primaryPlan.dataLimitBytes) {
-                SubscriptionPlan.BYTES_UNLIMITED -> SubscriptionPlan.BYTES_UNKNOWN
-                else -> primaryPlan.dataLimitBytes
-            }
+            val dataPlanSize =
+                when (primaryPlan.dataLimitBytes) {
+                    SubscriptionPlan.BYTES_UNLIMITED -> SubscriptionPlan.BYTES_UNKNOWN
+                    else -> primaryPlan.dataLimitBytes
+                }
             return DataPlanInfo(
                 dataPlanCount = plans.size,
                 dataPlanSize = dataPlanSize,
                 dataBarSize = dataPlanSize,
-                dataPlanUse = primaryPlan.dataUsageBytes,
+                dataPlanUse = dataUsage, // Always use the reconciled value
                 cycleEnd = primaryPlan.cycleRule.end?.toInstant()?.toEpochMilli(),
                 snapshotTime = primaryPlan.dataUsageTime,
             )
         }
 
-        val cycle = policy.getCycles().firstOrNull()
-        val dataUsage = networkCycleDataRepository.queryUsage(
-            cycle ?: NetworkStatsRepository.AllTimeRange
-        ).usage
         return DataPlanInfo(
             dataPlanCount = 0,
             dataPlanSize = SubscriptionPlan.BYTES_UNKNOWN,
@@ -64,10 +67,23 @@ class DataPlanRepositoryImpl(
 
     companion object {
         private const val PETA = 1_000_000_000_000_000L
+        private const val TAG = "DataPlanRepository"
 
         private fun getPrimaryPlan(plans: List<SubscriptionPlan>): SubscriptionPlan? =
             plans.firstOrNull()?.takeIf { plan ->
-                plan.dataLimitBytes > 0 && validSize(plan.dataUsageBytes) && plan.cycleRule != null
+                when {
+                    plan.dataLimitBytes <= 0 -> {
+                        Log.w(TAG, "getPrimaryPlan failed: dataLimitBytes <= 0")
+                        false
+                    }
+
+                    !validSize(plan.dataUsageBytes) -> {
+                        Log.w(TAG, "getPrimaryPlan failed: invalid dataUsageBytes")
+                        false
+                    }
+
+                    else -> true
+                }
             }
 
         private fun validSize(value: Long): Boolean = value in 0L until PETA
