@@ -63,3 +63,10 @@ flag {
   description: "Enables alert indicator on homepage tiles"
   bug: "403326850"
 }
+
+flag {
+  name: "storage_summary_percentage_alignment"
+  namespace: "mediaprovider"
+  description: "Isolate percentage formatting in storage summary to ensure correct alignment in RTL locales."
+  bug: "394910107"
+}
