@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 class UseServicePreference(
@@ -152,6 +153,11 @@ class UseServicePreference(
                 false
             }
     }
+
+
+    //marked with DO_NOT_EXPOSE due to security concerns, changing sensitivity will require a check with security
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     companion object {
         const val KEY = "use_service"

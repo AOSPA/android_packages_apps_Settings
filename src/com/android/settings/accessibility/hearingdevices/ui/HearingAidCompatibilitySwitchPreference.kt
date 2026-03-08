@@ -74,7 +74,7 @@ class HearingAidCompatibilitySwitchPreference(private val context: Context) :
     ) = ReadWritePermit.ALLOW
 
     override val sensitivityLevel
-        get() = SensitivityLevel.NO_SENSITIVITY
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)

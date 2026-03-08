@@ -21,6 +21,7 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 
@@ -39,6 +40,9 @@ class ActionTimeoutOptionPreference(
         get() = R.string.a11y_action_timeout_option_purpose
 
     private val dataStore by lazy { dataStoreProvider.invoke() }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     override fun storage(context: Context): KeyValueStore = dataStore
 
