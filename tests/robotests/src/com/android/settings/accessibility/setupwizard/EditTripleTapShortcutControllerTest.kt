@@ -78,7 +78,7 @@ class EditTripleTapShortcutControllerTest {
     }
 
     @Test
-    fun bindData_setsInvisible() {
+    fun bindData_default_hidesItem() {
         val controller = createController(setOf(MAGNIFICATION_CONTROLLER_NAME))
 
         controller.bindData(item)
