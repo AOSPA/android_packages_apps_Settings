@@ -82,10 +82,9 @@ object SatelliteUtils {
         val isSatelliteAttachSupported =
             configBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
 
-        Log.d(
-            TAG,
-            "isCarrierRoamingNtnSupported: isSatelliteAttachSupported: $isSatelliteAttachSupported",
-        )
+        logd {
+            "isCarrierRoamingNtnSupported: $isSatelliteAttachSupported, activeSubId: $activeSubId"
+        }
         return isSatelliteAttachSupported
     }
 
@@ -108,7 +107,7 @@ object SatelliteUtils {
                 /* default= */ CARRIER_ROAMING_NTN_CONNECT_MANUAL,
             ) != CARRIER_ROAMING_NTN_CONNECT_MANUAL
 
-        Log.d(TAG, "isLteBasedNtnSupported: $isCarrierRoamingNtnConnectTypeAutomatic")
+        logd { "isLteBasedNtnSupported: $isCarrierRoamingNtnConnectTypeAutomatic" }
         return isCarrierRoamingNtnConnectTypeAutomatic
     }
 
@@ -183,4 +182,10 @@ object SatelliteUtils {
     private const val TAG = "SatelliteUtils"
     private const val SATELLITE_SOS_COVERAGE_URL =
         "https://support.google.com/pixelphone?p=satellitesos"
+
+    private inline fun logd(message: () -> String) {
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, message())
+        }
+    }
 }

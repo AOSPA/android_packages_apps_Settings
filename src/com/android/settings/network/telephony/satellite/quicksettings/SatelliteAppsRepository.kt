@@ -52,7 +52,7 @@ open class SatelliteAppsRepository(private val context: Context) {
     open fun getDialerIntent(): Intent? {
         val intent = Intent(Intent.ACTION_DIAL)
         if (intent.resolveActivity(context.packageManager) == null) {
-            Log.d(TAG, "Intent for dialer cannot be resolved.")
+            Log.i(TAG, "Intent for dialer cannot be resolved.")
             return null
         }
         return intent
@@ -109,10 +109,9 @@ open class SatelliteAppsRepository(private val context: Context) {
                 OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG_KEY,
                 DEFAULT_OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG_VALUE,
             )
-        Log.d(
-            TAG,
-            "getAppsPackagesForLteLandingPage: overrideSatelliteAppsForLteLandingPageWithConfig=$overrideSatelliteAppsForLteLandingPageWithConfig",
-        )
+        logd {
+            "getAppsPackagesForLteLandingPage: overrideSatelliteAppsForLteLandingPageWithConfig=$overrideSatelliteAppsForLteLandingPageWithConfig"
+        }
 
         val packages =
             if (overrideSatelliteAppsForLteLandingPageWithConfig) {
@@ -131,7 +130,7 @@ open class SatelliteAppsRepository(private val context: Context) {
             context.packageManager.getPackageInfo(packageName, 0)
             true
         } catch (e: PackageManager.NameNotFoundException) {
-            Log.d(TAG, "$packageName is not installed.")
+            logd { "$packageName is not installed." }
             false
         }
     }
@@ -144,8 +143,14 @@ open class SatelliteAppsRepository(private val context: Context) {
         try {
             return satelliteManager.getSatelliteDataOptimizedApps()
         } catch (e: IllegalStateException) {
-            Log.d(TAG, "getSatelliteDataOptimizedApps failed due to $e")
+            Log.w(TAG, "getSatelliteDataOptimizedApps failed due to $e")
         }
         return emptyList()
+    }
+
+    private inline fun logd(message: () -> String) {
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, message())
+        }
     }
 }
