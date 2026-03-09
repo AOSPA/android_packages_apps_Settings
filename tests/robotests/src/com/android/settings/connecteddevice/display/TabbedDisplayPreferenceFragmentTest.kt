@@ -32,7 +32,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.core.SettingsBaseActivity
-import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.android.settings.testutils.InstantTaskExecutorRule
 import com.android.settings.testutils.shadow.ShadowDesktopSettingsUtils
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
@@ -87,7 +86,6 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     @Before
     override fun setUp() {
         super.setUp()
-        mFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, true)
         val application = ApplicationProvider.getApplicationContext() as Application
 
         includeBuiltinDisplay()
