@@ -25,151 +25,126 @@ import android.os.Bundle
 import android.os.IBinder
 import android.os.RemoteException
 import android.os.ResultReceiver
-import android.text.TextUtils
 import android.util.Log
 import com.android.settings.R
 import com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService
-import java.util.concurrent.Executors
-import kotlin.collections.iterator
-import kotlin.concurrent.atomics.AtomicBoolean
-import kotlin.concurrent.atomics.ExperimentalAtomicApi
+import java.util.concurrent.atomic.AtomicBoolean
 
-class TroubleshootingServiceConnection(val receivers: Map<String, ResultReceiver> = emptyMap()) :
-    ServiceConnection {
-    protected val mLock: Any = Any()
+class TroubleshootingServiceConnection(
+    private val receivers: Map<String, ResultReceiver> = emptyMap()
+) : ServiceConnection {
 
-    private var mITroubleshootingInfoProviderService: ITroubleshootingInfoProviderService? = null
+    private var troubleshootingService: ITroubleshootingInfoProviderService? = null
+    var serviceConnectionListener: ServiceConnectionListener? = null
 
-    @OptIn(ExperimentalAtomicApi::class)
-    private val mIsServiceConnected: AtomicBoolean = AtomicBoolean(false)
+    private val isServiceConnected = AtomicBoolean(false)
 
     /** Gets the troubleshooting UI content from the service. */
-    var diagnosticUiInfos: Map<String, Bundle?> = emptyMap()
+    var diagnosticUiInfos: Map<String, Bundle> = emptyMap()
+        private set
 
-    @OptIn(ExperimentalAtomicApi::class)
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-        mIsServiceConnected.store(true)
-        mITroubleshootingInfoProviderService =
-            ITroubleshootingInfoProviderService.Stub.asInterface(service)
+        Log.d(LOG_TAG, "onServiceConnected")
+        val binder = ITroubleshootingInfoProviderService.Stub.asInterface(service)
+        troubleshootingService = binder
+        isServiceConnected.set(true)
+
+        initializeServiceCommunication(binder)
     }
 
-    @OptIn(ExperimentalAtomicApi::class)
     override fun onServiceDisconnected(name: ComponentName?) {
-        mIsServiceConnected.store(false)
+        Log.i(LOG_TAG, "onServiceDisconnected")
+        isServiceConnected.set(false)
+        troubleshootingService = null
+        serviceConnectionListener?.onServiceConnectedState(false)
     }
 
-    @OptIn(ExperimentalAtomicApi::class)
-    fun bindService(context: Context) {
-        val intent = Intent(ITroubleshootingInfoProviderService::class.java.name)
-        intent.setComponent(
-            ComponentName.unflattenFromString(
-                context.resources.getString(
-                    R.string.config_connectivity_troubleshooting_service_name
-                )
-            )
-        )
-
-        Log.d(LOG_TAG, "Binding to service, intent=" + intent)
+    private fun initializeServiceCommunication(service: ITroubleshootingInfoProviderService) {
+        val infoMap = mutableMapOf<String, Bundle>()
         try {
-            if (
-                context.bindService(
-                    intent,
-                    Context.BIND_IMPORTANT or Context.BIND_AUTO_CREATE,
-                    Executors.newSingleThreadExecutor(),
-                    this,
-                )
-            ) {
-                synchronized(mLock) {
-                    while (receivers.isNotEmpty() && !mIsServiceConnected.load()) {
-                        try {
-                            (mLock as Object).wait(3000) // Added timeout for safety
-                        } catch (e: InterruptedException) {
-                            Log.e(LOG_TAG, "Error while waiting for service connection: $e")
-                        }
-                    }
-                    if (mIsServiceConnected.load()) {
-                        Log.e(LOG_TAG, "The binding is invalid.")
-                        return
-                    }
-                    val service = mITroubleshootingInfoProviderService
-                    if (service == null) {
-                        Log.e(LOG_TAG, "The binding is invalid or timed out.")
-                        return
-                    }
-                    val infoMap = mutableMapOf<String, Bundle?>()
-                    try {
-                        for ((functionType, receiver) in receivers) {
-                            Log.d(LOG_TAG, "Registering $functionType")
-
-                            infoMap[functionType] = service.getDiagnosticUiInfo(functionType)
-
-                            service.registerIssueDetectionCallback(functionType, receiver)
-                        }
-                        // 4. Update the public map
-                        this.diagnosticUiInfos = infoMap as Map<String, Bundle?>
-                    } catch (e: RemoteException) {
-                        Log.e(LOG_TAG, "Error during service registration: $e")
-                    }
-                }
-            } else {
-                Log.e(LOG_TAG, "unable to bind to service from intent=$intent")
+            receivers.mapValues { (functionType, receiver) ->
+                Log.d(LOG_TAG, "Registering $functionType")
+                infoMap[functionType] = service.getDiagnosticUiInfo(functionType)
+                service.registerIssueDetectionCallback(functionType, receiver)
             }
-        } catch (e: SecurityException) {
-            Log.e(LOG_TAG, "Error applying troubleshoot interaction from service: $e")
+            this.diagnosticUiInfos = infoMap
+            serviceConnectionListener?.onServiceConnectedState(true)
+        } catch (e: RemoteException) {
+            Log.e(LOG_TAG, "Error during service registration", e)
         }
     }
 
-    @OptIn(ExperimentalAtomicApi::class)
+    fun bindService(context: Context) {
+        val serviceInfo = getTroubleshootingServiceInfo(context)
+        if (serviceInfo.isNullOrBlank()) {
+            Log.w(LOG_TAG, "Service info is empty, cannot bind.")
+            return
+        }
+
+        val component = ComponentName.unflattenFromString(serviceInfo)
+        val intent =
+            Intent(ITroubleshootingInfoProviderService::class.java.name).apply {
+                setComponent(component)
+            }
+
+        Log.i(LOG_TAG, "Binding to service: $component")
+        try {
+            val success = context.bindService(intent, this, Context.BIND_AUTO_CREATE)
+            if (!success) {
+                Log.e(LOG_TAG, "Unable to bind to service")
+            }
+        } catch (e: java.lang.SecurityException) {
+            Log.e(LOG_TAG, "SecurityException while binding service", e)
+        }
+    }
+
     fun unbindService(context: Context) {
-        val service = mITroubleshootingInfoProviderService
-        if (service != null) {
-            try {
-                // Unregister all receivers stored in the initial map
-                for ((functionType, receiver) in receivers) {
-                    service.unregisterIssueDetectionCallback(functionType, receiver)
-                }
-            } catch (e: RemoteException) {
-                Log.e(LOG_TAG, "Error unregistering callbacks: $e")
-            } finally {
-                context.unbindService(this)
-                synchronized(mLock) {
-                    mITroubleshootingInfoProviderService = null
-                    mIsServiceConnected.store(false)
-                }
+        val service = troubleshootingService ?: return
+        try {
+            for ((functionType, receiver) in receivers) {
+                service.unregisterIssueDetectionCallback(functionType, receiver)
             }
+        } catch (e: RemoteException) {
+            Log.e(LOG_TAG, "Error unregistering callbacks", e)
+        } finally {
+            context.unbindService(this)
+            troubleshootingService = null
+            isServiceConnected.set(false)
         }
     }
+
+    private fun getTroubleshootingServiceInfo(context: Context): String? =
+        context.resources.getString(R.string.config_connectivity_troubleshooting_service_name)
 
     fun isTroubleshootingServiceExists(context: Context): Boolean {
-        if (isTroubleshootingServiceExists != null) {
-            return isTroubleshootingServiceExists == true
+        cachedExists?.let {
+            return it
         }
-        try {
-            val serviceInfo =
-                context.resources.getString(
-                    R.string.config_connectivity_troubleshooting_service_name
-                )
-            Log.d(LOG_TAG, "service name : $serviceInfo")
-            if (TextUtils.isEmpty(serviceInfo)) {
-                isTroubleshootingServiceExists = false
-            } else {
-                val componentName = ComponentName.unflattenFromString(serviceInfo)
-                if (componentName == null) {
-                    isTroubleshootingServiceExists = false
-                } else {
-                    val serviceObject = context.packageManager.getServiceInfo(componentName, 0)
-                    isTroubleshootingServiceExists = serviceObject != null
-                    return isTroubleshootingServiceExists!!
-                }
-            }
+
+        val serviceInfo = getTroubleshootingServiceInfo(context)
+        if (serviceInfo.isNullOrBlank()) {
+            cachedExists = false
+            return false
+        }
+
+        return try {
+            val componentName = ComponentName.unflattenFromString(serviceInfo)
+            val exists =
+                componentName?.let { context.packageManager.getServiceInfo(it, 0) != null } ?: false
+            cachedExists = exists
+            exists
         } catch (e: PackageManager.NameNotFoundException) {
-            isTroubleshootingServiceExists = false
+            cachedExists = false
+            false
         }
-        return false
+    }
+
+    fun interface ServiceConnectionListener {
+        fun onServiceConnectedState(isConnected: Boolean)
     }
 
     companion object {
-        private const val LOG_TAG = "TroubleshootingServiceConnection"
-        var isTroubleshootingServiceExists: Boolean? = null
+        private const val LOG_TAG = "TroubleshootSvcConn"
+        var cachedExists: Boolean? = null
     }
 }
