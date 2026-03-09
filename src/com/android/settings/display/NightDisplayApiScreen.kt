@@ -32,7 +32,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPref
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
-import com.android.settingslib.metadata.preferencesapi.types.IntInRange
+import com.android.settingslib.metadata.preferencesapi.types.PercentageInt
 import com.android.settingslib.metadata.preferencesapi.types.TimeOfDay
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -78,7 +78,7 @@ class NightDisplayApiScreen :
         preference(
             key = NIGHT_DISPLAY_TEMPERATURE_KEY,
             purpose = R.string.night_display_temperature_purpose,
-            type = IntInRange(min = 0, max = 100), // Use 0-100% in the API.
+            type = PercentageInt,
         ) {
             preconditions(R.string.night_display_temperature_preconditions) {
                 if (context.colorDisplayManager.isNightDisplayActivated) {
