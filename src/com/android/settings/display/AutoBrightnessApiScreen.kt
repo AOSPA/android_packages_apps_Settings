@@ -36,7 +36,10 @@ class AutoBrightnessApiScreen :
         alreadyPartiallyMigrated = AutoBrightnessScreen::class,
     ) {
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
 
         preconditions(R.string.auto_brightness_preconditions) {
             if (context.autoBrightnessAvailabilityStatus == AVAILABLE) {

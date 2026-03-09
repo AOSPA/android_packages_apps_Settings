@@ -41,7 +41,10 @@ class HdrBrightnessApiScreen :
         purpose = R.string.hdr_brightness_screen_purpose,
     ) {
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
 
         preconditions(R.string.hdr_brightness_screen_preconditions) {
             if (HdrBrightnessUtils.getAvailabilityStatus(context) == AVAILABLE) {

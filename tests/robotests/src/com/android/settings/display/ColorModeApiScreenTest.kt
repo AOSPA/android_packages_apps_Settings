@@ -23,6 +23,7 @@ import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.server.display.feature.flags.Flags.FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT
 import com.android.settings.display.ColorModeApiScreen.Companion.COLOR_MODE_KEY
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
 import com.android.settings.testutils.shadow.SettingsShadowResources
@@ -76,13 +77,11 @@ class ColorModeApiScreenTest {
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchIntent_isNotNull() {
         assertThat(tester.getLaunchIntent()).isNotNull()
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchIntent_accessibilityTransformsEnabled_disallowed() {
         shadowColorDisplayManager.setDeviceColorManaged(true)
         setAccessibilityTransformsEnabled(true)
@@ -91,7 +90,6 @@ class ColorModeApiScreenTest {
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchIntent_deviceColorManaged_disallowed() {
         shadowColorDisplayManager.setDeviceColorManaged(false)
         setAccessibilityTransformsEnabled(false)
@@ -100,19 +98,18 @@ class ColorModeApiScreenTest {
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2, FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT)
     fun getScreen_isNotNull() {
         assertThat(tester.getScreen()).isNotNull()
     }
 
     @Test
-    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2, FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getSetting() {
         shadowColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_BOOSTED)
         shadowColorDisplayManager.setDeviceColorManaged(true)
@@ -123,14 +120,12 @@ class ColorModeApiScreenTest {
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getSetting_notSet_returnsDefault() {
         assertThat(tester.get<Int>(COLOR_MODE_KEY))
             .isEqualTo(ColorDisplayManager.COLOR_MODE_NATURAL)
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun setSetting() {
         shadowColorDisplayManager.setColorMode(ColorDisplayManager.COLOR_MODE_BOOSTED)
         shadowColorDisplayManager.setDeviceColorManaged(true)
@@ -143,7 +138,6 @@ class ColorModeApiScreenTest {
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun setSetting_accessibilityTransformsEnabled_disallowed() {
         shadowColorDisplayManager.setDeviceColorManaged(true)
         setAccessibilityTransformsEnabled(true)
@@ -154,7 +148,6 @@ class ColorModeApiScreenTest {
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun setSetting_deviceColorManaged_disallowed() {
         shadowColorDisplayManager.setDeviceColorManaged(false)
         setAccessibilityTransformsEnabled(false)

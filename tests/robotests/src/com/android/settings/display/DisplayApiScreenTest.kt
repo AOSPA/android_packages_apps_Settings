@@ -25,6 +25,7 @@ import android.platform.test.flag.junit.SetFlagsRule
 import android.view.Display
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.server.display.feature.flags.Flags.FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT
 import com.android.settings.R
 import com.android.settings.display.DisplayApiScreen.Companion.BRIGHTNESS_LEVEL_KEY
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
@@ -59,13 +60,13 @@ class DisplayApiScreenTest {
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2, FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT)
     fun getScreen_isNotNull() {
         assertThat(tester.getScreen()).isNotNull()
     }
 
     @Test
-    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2, FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
     }
