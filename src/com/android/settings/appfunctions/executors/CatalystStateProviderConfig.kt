@@ -120,6 +120,7 @@ import com.android.settings.display.HdrBrightnessApiScreen
 import com.android.settings.display.NightDisplayApiScreen
 import com.android.settings.display.NightDisplayScreen
 import com.android.settings.display.ScreenTimeoutScreen
+import com.android.settings.display.darkmode.DarkModeApiFirstScreen
 import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.dream.DreamSettingsApiScreen
 import com.android.settings.dream.ScreensaverScreen
@@ -281,6 +282,7 @@ fun getSettingsCatalystConfig() =
 private fun getCatalystScreenConfigs() =
     listOf(
         PerScreenCatalystConfig(enabled = true, screenKey = DarkModeScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DarkModeApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorAndMotionScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorInversionScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorCorrectionScreen.KEY),
