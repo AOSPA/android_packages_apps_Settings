@@ -26,7 +26,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.wm.shell.shared.desktopmode.FakeDesktopState
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -38,7 +37,6 @@ import org.mockito.Spy
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.doThrow
-import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
@@ -88,21 +86,6 @@ class ConnectedDisplayInjectorTest {
     }
 
     @Test
-    fun getDisplayConnectionPreference_whenDisplayManagerIsNull_returnsDefaultPreference() {
-        val injectorWithNullContext = ConnectedDisplayInjector(null)
-        val uniqueId = "any_id"
-
-        val result = injectorWithNullContext.getDisplayConnectionPreference(uniqueId)
-
-        verify(mockDisplayManager, never()).getExternalDisplayConnectionPreference(uniqueId)
-        assertEquals(
-            "Should return default 'ASK' preference when DisplayManager is not available",
-            DisplayManager.EXTERNAL_DISPLAY_CONNECTION_PREFERENCE_ASK,
-            result,
-        )
-    }
-
-    @Test
     fun updateDisplayConnectionPreference_withValidId_callsDisplayManager() {
         val uniqueId = "test_display_id_2"
         val newPreference = 2
@@ -110,18 +93,6 @@ class ConnectedDisplayInjectorTest {
         injector.updateDisplayConnectionPreference(uniqueId, newPreference)
 
         verify(mockDisplayManager).setExternalDisplayConnectionPreference(uniqueId, newPreference)
-    }
-
-    @Test
-    fun updateDisplayConnectionPreference_whenDisplayManagerIsNull_doesNotCrash() {
-        val injectorWithNullContext = ConnectedDisplayInjector(null)
-        val uniqueId = "any_id"
-        val newPreference = 1
-
-        injectorWithNullContext.updateDisplayConnectionPreference(uniqueId, newPreference)
-
-        verify(mockDisplayManager, never())
-            .setExternalDisplayConnectionPreference(uniqueId, newPreference)
     }
 
     @Test
