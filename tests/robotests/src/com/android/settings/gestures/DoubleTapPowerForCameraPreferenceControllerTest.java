@@ -39,7 +39,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-// LINT.IfChange
 @RunWith(AndroidJUnit4.class)
 public class DoubleTapPowerForCameraPreferenceControllerTest {
 
@@ -103,4 +102,3 @@ public class DoubleTapPowerForCameraPreferenceControllerTest {
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
 }
-// LINT.ThenChange(DoubleTapPowerForCameraPreferenceTest.kt)
