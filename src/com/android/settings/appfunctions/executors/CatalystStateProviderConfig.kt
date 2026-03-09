@@ -159,6 +159,7 @@ import com.android.settings.network.MobileNetworkListScreen
 import com.android.settings.network.NetworkDashboardScreen
 import com.android.settings.network.NetworkProviderScreen
 import com.android.settings.network.apn.ApnSettingsScreen
+import com.android.settings.network.telephony.CellularSecurityScreenApi
 import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.MobileNetworkScreenApi
 import com.android.settings.network.tether.TetherApiScreen
@@ -705,6 +706,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = ResolutionRefreshRateApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiScanningApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = CellularSecurityScreenApi.KEY),
     )
 
 private fun getDeviceStateItemList() =
