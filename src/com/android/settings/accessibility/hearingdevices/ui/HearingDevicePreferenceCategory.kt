@@ -78,6 +78,8 @@ abstract class HearingDevicePreferenceCategory(key: String, purpose: Int, title:
         deviceUpdater?.apply { unregisterCallback() }
     }
 
+    override val availabilityDescription = "The device must support Bluetooth."
+
     override fun isAvailable(context: Context): Boolean =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
 

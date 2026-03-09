@@ -44,6 +44,8 @@ internal class MagnificationTopIntroPreference :
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean = !context.isInSetupWizard()
 
     companion object {

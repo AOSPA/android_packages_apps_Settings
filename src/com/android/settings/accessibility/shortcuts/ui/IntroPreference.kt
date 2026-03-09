@@ -51,6 +51,8 @@ class IntroPreference(private val targets: Set<String>) :
             null
         }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean = targets.size > 1
 
     private fun getFormattedFeatureList(context: Context): String {

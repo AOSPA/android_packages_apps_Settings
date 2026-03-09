@@ -69,6 +69,9 @@ class FloatingButtonShortcutPreference(context: Context, targets: Set<String>) :
         return sb
     }
 
+    override val availabilityDescription =
+        "The device must be in gesture navigation mode, or in the 'floating menu' mode."
+
     override fun isAvailable(context: Context): Boolean {
         // FAB should be available when in gesture navigation mode,
         // or if we're in the FAB button mode while in navbar navigation mode.

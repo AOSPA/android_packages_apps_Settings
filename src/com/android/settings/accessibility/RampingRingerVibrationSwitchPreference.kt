@@ -76,6 +76,9 @@ class RampingRingerVibrationSwitchPreference(
     override val keywords: Int
         get() = R.string.keywords_ramping_ringer_vibration
 
+    override val availabilityDescription =
+        "The device must be voice capable and ramping ringer must not be enabled by telephony config."
+
     override fun isAvailable(context: Context) =
         deviceConfig.isVoiceCapable(context) && !deviceConfig.isTelephonyRampingRingerEnabled()
 

@@ -85,6 +85,9 @@ class MagnifyKeyboardSwitchPreference :
         storage(context).removeObserver(this)
     }
 
+    override val availabilityDescription =
+        "The device must support window magnification."
+
     override fun isAvailable(context: Context): Boolean {
         return context.isWindowMagnificationSupported()
     }

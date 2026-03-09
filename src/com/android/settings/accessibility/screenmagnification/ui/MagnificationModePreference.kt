@@ -93,6 +93,9 @@ class MagnificationModePreference :
         lifecycleContext = context
     }
 
+    override val availabilityDescription =
+        "The device must not be during setup and must support window magnification."
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && context.isWindowMagnificationSupported()
     }

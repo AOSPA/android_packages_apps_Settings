@@ -82,6 +82,9 @@ open class ExtraDimScreen(private val context: Context) :
 
     override fun getMetricsCategory(): Int = SettingsEnums.REDUCE_BRIGHT_COLORS_SETTINGS
 
+    override val availabilityDescription =
+        "The device must support the reduce bright colors feature."
+
     override fun isAvailable(context: Context) =
         context.reduceBrightColorsAvailabilityStatus == AVAILABLE
 

@@ -87,6 +87,8 @@ class FlashNotificationsPreviewPreference :
             setOnClickListener(this@FlashNotificationsPreviewPreference)
         }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         val currentState = FlashNotificationsUtil.getFlashNotificationsState(context)
         return currentState != FlashNotificationsUtil.State.OFF

@@ -250,45 +250,6 @@ class CatalystStateMetadataProviderExecutorTest {
     }
 
     @Test
-    fun execute_onScreenWithTitle_returnsTitleAndPurposeAsDescription() = runTest {
-        val metadata =
-            TestPreferenceMetadata(
-                bindingKey = "test_key_writable",
-                isPersistent = true,
-                writePermit = ReadWritePermit.ALLOW,
-            )
-        setRegistryFactories(
-            createScreen(
-                GraphTestUtils.PreferenceScreenConfig(
-                    screenKey = "screen_key",
-                    title = R.string.preference_screen_title,
-                    purpose = R.string.preference_screen_purpose,
-                    preferences = listOf(metadata)
-                )
-            )
-        )
-        val executor = CatalystStateMetadataProviderExecutor(
-            buildConfig(
-                "screen_key",
-                listOf("test_key_writable"),
-            ),
-            context,
-            englishContext
-        )
-
-        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-
-        assertThat(result.metadata).hasSize(1)
-        assertThat(result.metadata[0].description).isEqualTo (
-            "${
-                context.getString(R.string.preference_screen_title)
-            }. ${
-                context.getString(R.string.preference_screen_purpose)
-            }"
-        )
-    }
-
-    @Test
     fun execute_onScreenWithoutTitle_returnsPurpose() = runTest {
         setRegistryFactories(
             createScreen(

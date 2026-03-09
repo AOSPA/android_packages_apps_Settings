@@ -57,6 +57,9 @@ class FollowKeyboardSwitchPreference :
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val availabilityDescription =
+        "The device must not be during setup and must have a keyboard connected."
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && InputPeripheralsSettingsUtils.isHardKeyboard()
     }

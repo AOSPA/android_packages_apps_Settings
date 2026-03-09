@@ -61,6 +61,8 @@ class A11yActivitySettingPreference(private val shortcutInfo: AccessibilityShort
         }
     }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && intent(context) != null
     }

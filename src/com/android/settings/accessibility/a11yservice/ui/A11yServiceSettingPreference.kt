@@ -63,6 +63,9 @@ class A11yServiceSettingPreference(private val serviceInfo: AccessibilityService
     override val sensitivityLevel: Int
         get() = SensitivityLevel.DO_NOT_EXPOSE
 
+    override val availabilityDescription =
+        "The device must not be during setup and there must be an activity that display the activity service settings."
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && intent(context) != null
     }

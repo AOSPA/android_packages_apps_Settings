@@ -42,6 +42,9 @@ class PowerButtonEndsCallPreference :
     override val preferenceActionMetrics: Int
         get() = ACTION_POWER_BUTTON_ENDS_CALL
 
+    override val availabilityDescription =
+        "The device must have a power button. The device must be voice capable."
+
     override fun isAvailable(context: Context) =
         KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_POWER) && Utils.isVoiceCapable(context)
 

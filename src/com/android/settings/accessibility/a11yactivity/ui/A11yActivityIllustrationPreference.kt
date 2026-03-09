@@ -28,6 +28,8 @@ internal class A11yActivityIllustrationPreference(
     private val shortcutInfo: AccessibilityShortcutInfo
 ) : ImageUriPreference() {
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getImageUri(context: Context): Uri? {

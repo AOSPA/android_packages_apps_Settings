@@ -95,6 +95,8 @@ class HearingDevicesFooterPreference(
         return if (isTts) ttsResId else htmlResId
     }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean = helper.isHearingAidSupported
 
     companion object {

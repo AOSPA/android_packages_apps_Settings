@@ -70,6 +70,8 @@ class TripleTapShortcutPreference(
         preference.isVisible = expandableState.value && isAvailable(preference.context)
     }
 
+    override val availabilityDescription = "The target must be Magnification."
+
     override fun isAvailable(context: Context): Boolean {
         // This preference is always available from a data perspective if the target is
         // magnification.
