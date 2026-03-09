@@ -71,7 +71,6 @@ class CatalystStateMetadataProviderExecutor(
     private val context: Context,
     private val englishContext: Context,
 ) : DeviceStateExecutor {
-    private val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
     private val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     private val screenKeyList = perScreenConfigMap.keys.toList()
 
@@ -161,7 +160,6 @@ class CatalystStateMetadataProviderExecutor(
         val deviceStateItemMetadataList = mutableListOf<DeviceStateItemMetadata>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            val config = settingConfigMap[metadata.key]
             // skip over UI-only preferences
             if(metadata.isUiOnlyPreference(context))
                 return@forEach
@@ -204,7 +202,6 @@ class CatalystStateMetadataProviderExecutor(
                         metadata.getPreconditionsAsString(context),
                         metadata.setPreconditionsAsString(context),
                         metadata.setWarningAsString(context),
-                        config?.hintText(englishContext, metadata)
                     ).joinToString(separator = "\n").replace("..", ".")
             deviceStateItemMetadataList.add(
                 DeviceStateItemMetadata(
