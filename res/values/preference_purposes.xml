@@ -710,4 +710,7 @@
     <string name="api_stylus_screen_purpose" translatable="false">Allows configuring behavior and viewing details for a specific connected stylus, including enabling handwriting in text fields and managing physical button presses.</string>
     <string name="api_stylus_device_input_id_purpose" translatable="false">The unique input device identifier representing the specific connected stylus to be configured.</string>
     <string name="api_stylus_device_input_id_type_description" translatable="false">System identifiers for all currently connected and active stylus input devices.</string>
+    <string name="api_stylus_handwriting_purpose" translatable="false">Controls whether the user can use a stylus to handwrite directly into standard text input fields across the system.</string>
+    <string name="stylus_handwriting_precondition" translatable="false">Requires the current system input method (keyboard) to support stylus handwriting.</string>
+    <string name="stylus_handwriting_precondition_failed" translatable="false">Current input method does not support stylus handwriting</string>
 </resources>

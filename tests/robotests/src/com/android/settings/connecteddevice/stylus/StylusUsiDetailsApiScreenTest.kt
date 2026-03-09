@@ -23,11 +23,15 @@ import android.os.Bundle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.provider.Settings
 import android.view.InputDevice
+import android.view.inputmethod.InputMethodInfo
+import android.view.inputmethod.InputMethodManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
 import com.android.settings.testutils2.ApiTester
+import com.android.settings.testutils2.FailedPreconditionException
 import com.android.settings.testutils2.Parameters
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -38,6 +42,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.kotlin.mock
 import org.robolectric.shadow.api.Shadow.extract
 import org.robolectric.shadows.ShadowContextImpl
+import kotlin.test.assertFailsWith
 
 @RunWith(AndroidJUnit4::class)
 class StylusUsiDetailsApiScreenTest {
@@ -51,10 +56,14 @@ class StylusUsiDetailsApiScreenTest {
     private val mockInputManager = mock<InputManager>()
     private val mockInputDevice = mock<InputDevice>()
 
+    private val mockInputMethodManager = mock<InputMethodManager>()
+    private val mockInputMethodInfo = mock<InputMethodInfo>()
+
     @Before
     fun setUp() {
         val shadowContext = extract<ShadowContextImpl>((context as Application).baseContext)
         shadowContext.setSystemService(Context.INPUT_SERVICE, mockInputManager)
+        shadowContext.setSystemService(Context.INPUT_METHOD_SERVICE, mockInputMethodManager)
     }
 
     private fun setupMockStylus(id: Int, isStylus: Boolean) {
@@ -64,6 +73,16 @@ class StylusUsiDetailsApiScreenTest {
         if (isStylus) {
             `when`(mockInputDevice.name).thenReturn("Fake USI Stylus")
         }
+    }
+
+    private fun setupMockHandwritingSupport(supported: Boolean) {
+        `when`(mockInputMethodManager.currentInputMethodInfo).thenReturn(mockInputMethodInfo)
+        `when`(mockInputMethodInfo.supportsStylusHandwriting()).thenReturn(supported)
+
+        // We also need to initialize the screen parameters for these tests,
+        // because preferences on parameterized screens require the parameters to be set!
+        setupMockStylus(id = 42, isStylus = true)
+        tester.initializeScreenParameters(Parameters(StylusUsiDetailsApiScreen.PARAM_KEY to "42"))
     }
 
     @Test
@@ -107,5 +126,81 @@ class StylusUsiDetailsApiScreenTest {
         val options = tester.getParameterOptions(StylusUsiDetailsApiScreen.PARAM_KEY)
 
         assertThat(options).isEmpty()
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun handwriting_preconditionNotMet_throwsException() {
+        setupMockHandwritingSupport(supported = false)
+
+        assertFailsWith<FailedPreconditionException> {
+            tester.get<Boolean>(StylusUsiDetailsApiScreen.HANDWRITING_SWITCH_KEY)
+        }
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun handwriting_get_whenEnabled_returnsTrue() {
+        // Arrange
+        setupMockHandwritingSupport(supported = true)
+        Settings.Secure.putInt(
+            context.contentResolver,
+            Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+            StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_ENABLED
+        )
+
+        // Act & Assert
+        assertThat(tester.get<Boolean>(StylusUsiDetailsApiScreen.HANDWRITING_SWITCH_KEY)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun handwriting_get_whenDisabled_returnsFalse() {
+        // Arrange
+        setupMockHandwritingSupport(supported = true)
+        Settings.Secure.putInt(
+            context.contentResolver,
+            Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+            StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_DISABLED
+        )
+
+        // Act & Assert
+        assertThat(tester.get<Boolean>(StylusUsiDetailsApiScreen.HANDWRITING_SWITCH_KEY)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun handwriting_set_true_savesEnabledState() {
+        // Arrange
+        setupMockHandwritingSupport(supported = true)
+
+        // Act
+        tester.set(StylusUsiDetailsApiScreen.HANDWRITING_SWITCH_KEY, true)
+
+        // Assert
+        val savedValue = Settings.Secure.getInt(
+            context.contentResolver,
+            Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+            -1
+        )
+        assertThat(savedValue).isEqualTo(StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_ENABLED)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun handwriting_set_false_savesDisabledState() {
+        // Arrange
+        setupMockHandwritingSupport(supported = true)
+
+        // Act
+        tester.set(StylusUsiDetailsApiScreen.HANDWRITING_SWITCH_KEY, false)
+
+        // Assert
+        val savedValue = Settings.Secure.getInt(
+            context.contentResolver,
+            Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+            -1
+        )
+        assertThat(savedValue).isEqualTo(StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_DISABLED)
     }
 }

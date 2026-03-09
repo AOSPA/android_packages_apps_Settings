@@ -17,12 +17,18 @@
 package com.android.settings.connecteddevice.stylus
 
 import android.hardware.input.InputManager
+import android.provider.Settings
 import android.view.InputDevice
+import android.view.inputmethod.InputMethodManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 
@@ -70,11 +76,54 @@ class StylusUsiDetailsApiScreen : PreferencesApiScreen(
                 }
             }
         }
+
+        preference(
+            key = HANDWRITING_SWITCH_KEY,
+            purpose = R.string.api_stylus_handwriting_purpose,
+            type = AnyBoolean
+        ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+            preconditions(R.string.stylus_handwriting_precondition) {
+                val imm = context.getSystemService(InputMethodManager::class.java)
+                val inputMethod = imm?.currentInputMethodInfo
+
+                if (inputMethod != null && inputMethod.supportsStylusHandwriting()) {
+                    Allowed
+                } else {
+                    Custom(R.string.stylus_handwriting_precondition_failed)
+                }
+            }
+
+            get {
+                execute {
+                    // Default value is 1 (true) according to Secure.STYLUS_HANDWRITING_DEFAULT_VALUE
+                    Settings.Secure.getInt(
+                        context.contentResolver,
+                        Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+                        STYLUS_HANDWRITING_ENABLED
+                    ) == STYLUS_HANDWRITING_ENABLED
+                }
+            }
+
+            set {
+                execute { enabled ->
+                    Settings.Secure.putInt(
+                        context.contentResolver,
+                        Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+                        if (enabled) STYLUS_HANDWRITING_ENABLED else STYLUS_HANDWRITING_DISABLED
+                    )
+                }
+            }
+        }
     }
 
     companion object {
         const val KEY = "stylus_usi_details_api_screen"
         const val PARAM_KEY = "device_input_id"
+        const val HANDWRITING_SWITCH_KEY = "handwriting_switch"
+
+        const val STYLUS_HANDWRITING_ENABLED = 1
+        const val STYLUS_HANDWRITING_DISABLED = 0
     }
 }
 // LINT.ThenChange(StylusUsiDetailsFragment.kt)
