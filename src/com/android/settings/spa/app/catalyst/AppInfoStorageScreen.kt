@@ -120,6 +120,8 @@ private constructor(
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
 
+    override val availabilityDescription = "The app must be installed."
+
     override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =

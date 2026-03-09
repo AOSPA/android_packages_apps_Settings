@@ -62,6 +62,8 @@ open class AirplaneModePreference :
 
     override fun tags(context: Context) = arrayOf(KEY_AIRPLANE_MODE)
 
+    override val availabilityDescription = "The device must support configuring airplane mode."
+
     override fun isAvailable(context: Context) = context.isAirplaneModeEligible()
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
@@ -176,12 +178,18 @@ open class AirplaneModePreference :
 
 /** Preference for the Airplane Mode toggle in the Network & Internet screen. */
 class AirplaneModeTogglePreference : AirplaneModePreference() {
+
+    override val availabilityDescription = "The device must support configuring airplane mode and must not have a paired watch."
+
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && !context.hasPairedWatchForAirplaneModeSync()
 }
 
 /** Preference for the Airplane Mode toggle in the Airplane Mode Settings screen. */
 class AirplaneModeDetailsPreference : AirplaneModePreference(), MainSwitchPreferenceBinding {
+
+    override val availabilityDescription = "The device must support configuring airplane mode and must not have a paired watch."
+
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && context.hasPairedWatchForAirplaneModeSync()
 

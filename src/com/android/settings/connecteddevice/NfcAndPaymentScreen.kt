@@ -88,6 +88,9 @@ open class NfcAndPaymentScreen :
         )
     }
 
+    override val availabilityDescription =
+        "The device must support the 'nfc' and 'nfc_host_card_emulation' features."
+
     override fun isAvailable(context: Context): Boolean =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_NFC) &&
             context.packageManager.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
@@ -111,6 +114,8 @@ open class NfcAndPaymentScreen :
         override fun isEnabled(context: Context) : Boolean = super<PreferenceRestrictionMixin>.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

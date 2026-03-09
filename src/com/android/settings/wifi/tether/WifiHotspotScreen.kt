@@ -114,6 +114,8 @@ open class WifiHotspotScreen(context: Context) :
     override val preferenceActionMetrics: Int
         get() = ACTION_WIFI_HOTSPOT
 
+    override val availabilityDescription = "The device must support wifi hotspot."
+
     override fun isAvailable(context: Context) =
         canShowWifiHotspot(context) &&
             TetherUtil.isTetherAvailable(context) &&

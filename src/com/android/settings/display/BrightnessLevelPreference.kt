@@ -201,6 +201,9 @@ class BrightnessLevelPreference :
         return true
     }
 
+    override val availabilityDescription =
+        "The default display must be internal."
+
     override fun isAvailable(context: Context) = context.isBrightnessLevelSettingsAvailable
 
     companion object {

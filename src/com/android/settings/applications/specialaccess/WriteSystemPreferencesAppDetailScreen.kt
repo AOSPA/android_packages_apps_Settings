@@ -73,6 +73,9 @@ open class WriteSystemPreferencesAppDetailScreen : SpecialAccessAppDetailScreen 
     override val footerPreferenceTitle
         get() = R.string.write_system_preferences_footer_description
 
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested write system preferences permission."
+
     // Edge case: what if the app's read permission is revoked/granted
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&

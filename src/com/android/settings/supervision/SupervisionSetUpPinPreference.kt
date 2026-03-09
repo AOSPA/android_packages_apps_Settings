@@ -49,6 +49,8 @@ class SupervisionSetUpPinPreference :
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
+    override val availabilityDescription = "The device must not have a supervising credential."
+
     override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet()
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

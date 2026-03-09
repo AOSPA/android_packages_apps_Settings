@@ -61,6 +61,8 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
+    override val availabilityDescription = "The device must support dark mode in the API."
+
     override fun isAvailable(context: Context) = Flags.catalystDarkUiMode()
 
     override fun createWidget(context: Context) = SelectorWithWidgetPreference(context)

@@ -89,6 +89,9 @@ open class AlarmsAndRemindersAppDetailScreen : SpecialAccessAppDetailScreen {
     override val footerPreferenceTitle
         get() = R.string.alarms_and_reminders_footer_title
 
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested exact alarm permission."
+
     // Edge case: what if the app's read permission is revoked/granted
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&

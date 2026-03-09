@@ -47,6 +47,8 @@ class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStor
     override val disableWidgetOnCheckedChanged: Boolean
         get() = false
 
+    override val availabilityDescription = "Wifi hotspot must be enabled."
+
     override fun isAvailable(context: Context) =
         context.wifiApState == WIFI_AP_STATE_ENABLED ||
             !(featureFactory.wifiFeatureProvider.wifiHotspotRepository?.isRestarting ?: false)

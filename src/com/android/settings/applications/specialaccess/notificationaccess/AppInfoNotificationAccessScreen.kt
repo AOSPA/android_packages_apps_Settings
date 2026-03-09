@@ -133,6 +133,8 @@ private constructor(
 
     override fun isFlagEnabled(context: Context) = false
 
+    override val availabilityDescription = "The app must be enabled."
+
     override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =
@@ -173,6 +175,8 @@ private constructor(
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 

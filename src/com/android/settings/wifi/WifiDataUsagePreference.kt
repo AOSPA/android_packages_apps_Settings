@@ -80,6 +80,8 @@ class WifiDataUsagePreference(context: Context):
 
     override fun getSummary(context: Context): CharSequence? = dataUsage
 
+    override val availabilityDescription = "The device must have a wifi radio."
+
     override fun isAvailable(context: Context): Boolean = isAvailable
 
     override fun isEnabled(context: Context): Boolean = isEnabled

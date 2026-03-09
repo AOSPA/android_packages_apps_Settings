@@ -107,6 +107,8 @@ private constructor(
 
     override fun getMetricsCategory() = SettingsEnums.MOBILE_NETWORK
 
+    override val availabilityDescription = "The subscription id must be valid."
+
     override fun isAvailable(context: Context): Boolean =
         SubscriptionManager.isValidSubscriptionId(subId)
 

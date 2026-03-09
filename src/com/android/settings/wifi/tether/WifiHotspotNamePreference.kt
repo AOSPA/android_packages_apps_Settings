@@ -77,6 +77,8 @@ class WifiHotspotNamePreference(
     override val title: Int
         get() = R.string.wifi_hotspot_name_title
 
+    override val availabilityDescription = "The device must support wifi hotspot."
+
     override fun isAvailable(context: Context) =
         WifiUtils.canShowWifiHotspot(context) &&
                 TetherUtil.isTetherAvailable(context) &&

@@ -81,6 +81,9 @@ open class WifiControlAppDetailScreen : SpecialAccessAppDetailScreen {
     override val footerPreferenceTitle
         get() = R.string.change_wifi_state_app_detail_summary
 
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested change wifi state permission."
+
     // Edge case: what if the app's change wifi state permission is revoked/granted
     override fun isAvailable(context: Context) =
         super.isAvailable(context) && wifiStateControlFilter(context, packageInfo?.applicationInfo)

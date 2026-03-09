@@ -51,6 +51,9 @@ class MobileNetworkImeiPreference(private val data: MobileNetworkData) :
 
     override fun getSummary(context: Context): CharSequence? = data.imeiInfoDataFlow.value.summary
 
+    override val availabilityDescription =
+        "The user must be an admin user, and the device must have mobile data or voice capability, and the subscription ID must be valid."
+
     override fun isAvailable(context: Context) = data.imeiInfoDataFlow.value.isAvailable
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

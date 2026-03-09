@@ -34,6 +34,8 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 class MobileNetworkSpnPreference(private val context: Context, private val subId: Int) :
     PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
 
+    override val availabilityDescription = "The user must be an admin user, the device must be mobile data capable or voice capable, and the subscription id must be valid."
+
     private val isAvailable =
         context.isAdminUser == true &&
             (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)) &&

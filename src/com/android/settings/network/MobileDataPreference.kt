@@ -50,6 +50,9 @@ class MobileDataPreference :
 
     override fun tags(context: Context) = arrayOf(KEY_MOBILE_DATA)
 
+    override val availabilityDescription =
+        "There must be at least one subscription available and visible to the user."
+
     override fun isAvailable(context: Context) =
         SubscriptionRepository(context).getSelectableSubscriptionInfoList().any {
             it.simSlotIndex > -1

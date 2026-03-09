@@ -125,6 +125,8 @@ private constructor(
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
+    override val availabilityDescription = "The app must be enabled."
+
     override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =

@@ -93,6 +93,9 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
         }
     }
 
+    override val availabilityDescription =
+        "The device must be configured for scheduled dark mode."
+
     override fun isAvailable(context: Context) =
         uiModeManager.nightMode == UiModeManager.MODE_NIGHT_CUSTOM &&
             uiModeManager.nightModeCustomType == UiModeManager.MODE_NIGHT_CUSTOM_TYPE_SCHEDULE

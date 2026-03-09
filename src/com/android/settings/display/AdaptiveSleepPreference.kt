@@ -84,6 +84,9 @@ class AdaptiveSleepPreference :
     override val restrictionKeys: Array<String>
         get() = arrayOf(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT)
 
+    override val availabilityDescription =
+        "The device must support adaptive sleep."
+
     override fun isAvailable(context: Context) = context.isAdaptiveSleepSupported()
 
     override fun createWidget(context: Context) = RestrictedSwitchPreference(context)

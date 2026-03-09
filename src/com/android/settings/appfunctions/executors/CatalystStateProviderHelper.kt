@@ -140,9 +140,6 @@ private suspend fun CoroutineScope.getPreferenceHierarchy(
             PreferenceScreenRegistry.create(context, screenKey, args)
         } ?: return null
 
-    if (screenMetaData is PreferenceAvailabilityProvider && !screenMetaData.isAvailable(context)) {
-        return null
-    }
     val preferenceHierarchy = mutableListOf<PreferenceHierarchyNode>()
     // TODO if child node is PreferenceScreen, recursively process it
     screenMetaData.getPreferenceHierarchy(context, this).forEachRecursivelyAsync {

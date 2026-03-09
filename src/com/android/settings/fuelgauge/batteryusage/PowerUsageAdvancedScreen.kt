@@ -70,6 +70,9 @@ open class PowerUsageAdvancedScreen : PreferenceScreenMixin, PreferenceAvailabil
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, PowerUsageAdvancedActivity::class.java, metadata?.key)
 
+    override val availabilityDescription =
+        "The device must support showing battery usage in settings."
+
     override fun isAvailable(context: Context) =
         featureFactory.powerUsageFeatureProvider.isBatteryUsageEnabled()
 

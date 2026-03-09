@@ -88,6 +88,9 @@ class MainlineModuleVersionPreference :
         return MODULE_UPDATE_ACTION_V2.resolveIntent() ?: MODULE_UPDATE_ACTION.resolveIntent()
     }
 
+    override val availabilityDescription =
+        "The device must have a mainline module version."
+
     override fun isAvailable(context: Context) = getModuleVersion(context).isNotEmpty()
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

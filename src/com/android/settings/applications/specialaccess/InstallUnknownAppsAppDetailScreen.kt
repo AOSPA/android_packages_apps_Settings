@@ -79,6 +79,9 @@ open class InstallUnknownAppsAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested install unknown apps permission."
+
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&
             installUnknownAppsFilter(context, packageInfo?.applicationInfo)

@@ -87,6 +87,9 @@ open class DisplayOverOtherAppsAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
+    override val availabilityDescription =
+        "The user must not be a managed profile. The app must be enabled, and must have requested system alert window permission."
+
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&
             !UserManager.get(context).isManagedProfile &&

@@ -135,6 +135,8 @@ open class WifiDisplayScreen :
         return summary
     }
 
+    override val availabilityDescription = WifiDisplaySettings.AVAILABILITY_DESCRIPTION
+
     override fun isAvailable(context: Context) = WifiDisplaySettings.isAvailable(context)
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
@@ -169,6 +171,8 @@ open class WifiDisplayScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

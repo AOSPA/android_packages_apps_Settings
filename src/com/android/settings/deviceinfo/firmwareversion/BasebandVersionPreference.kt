@@ -45,6 +45,9 @@ class BasebandVersionPreference :
     override fun getSummary(context: Context): CharSequence? =
         SystemProperties.get(BASEBAND_PROPERTY, context.getString(R.string.device_info_default))
 
+    override val availabilityDescription =
+        "The device must be mobile data capable or voice capable."
+
     override fun isAvailable(context: Context) =
         Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)
 
