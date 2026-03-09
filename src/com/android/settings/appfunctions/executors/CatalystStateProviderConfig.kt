@@ -115,6 +115,7 @@ import com.android.settings.display.AutoBrightnessScreen
 import com.android.settings.display.ColorContrastApiScreen
 import com.android.settings.display.ColorModeApiScreen
 import com.android.settings.display.ColorModeScreen
+import com.android.settings.display.DeviceStateAutoRotateApiScreen
 import com.android.settings.display.DisplayScreen
 import com.android.settings.display.HdrBrightnessApiScreen
 import com.android.settings.display.NightDisplayApiScreen
@@ -291,6 +292,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = AutoBrightnessScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AutoBrightnessApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HdrBrightnessApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DeviceStateAutoRotateApiScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = BatterySaverScreen.KEY,
