@@ -42,7 +42,10 @@ class DisplayApiScreen :
         alreadyPartiallyMigrated = DisplayScreen::class,
     ) {
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
 
         preconditions(R.string.display_settings_screen_preconditions) {
             if (context.resources.getBoolean(R.bool.config_show_top_level_display)) {

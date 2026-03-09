@@ -50,7 +50,10 @@ class NightDisplayApiScreen :
         alreadyPartiallyMigrated = NightDisplayScreen::class,
     ) {
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
 
         preconditions(R.string.night_display_preconditions) {
             if (context.isNightDisplaySettingsAvailable) {

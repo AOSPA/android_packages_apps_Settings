@@ -20,6 +20,7 @@ import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.internal.R
+import com.android.server.display.feature.flags.Flags.FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils2.ApiTester
@@ -39,19 +40,18 @@ class AutoBrightnessApiScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2, FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT)
     fun getScreen_isNotNull() {
         assertThat(tester.getScreen()).isNotNull()
     }
 
     @Test
-    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2, FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchIntent_preconditionNotMet_isNull() {
         SettingsShadowResources.overrideResource(
             R.bool.config_automatic_brightness_available,
@@ -62,7 +62,6 @@ class AutoBrightnessApiScreenTest {
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchIntent_preconditionMet_isNotNull() {
         SettingsShadowResources.overrideResource(R.bool.config_automatic_brightness_available, true)
 

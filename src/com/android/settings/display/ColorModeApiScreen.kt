@@ -43,7 +43,10 @@ class ColorModeApiScreen :
     private lateinit var colorModesToSummaries: Map<Int, CharSequence>
 
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
 
         preconditions(R.string.color_mode_preconditions) {
             if (
