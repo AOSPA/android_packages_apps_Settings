@@ -24,6 +24,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.safetycenter.MoreSecurityPrivacyFragment
 import com.android.settings.utils.ContentCaptureUtils
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -53,6 +54,8 @@ class MoreSecurityPrivacyScreenApi :
             purpose = R.string.privacy_media_controls_lockscreen_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             get {
                 execute {
                     Settings.Secure.getInt(
@@ -79,6 +82,8 @@ class MoreSecurityPrivacyScreenApi :
             purpose = R.string.privacy_camera_extensions_fallback_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             get {
                 execute {
                     Settings.Secure.getInt(
@@ -105,6 +110,8 @@ class MoreSecurityPrivacyScreenApi :
             purpose = R.string.content_capture_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             preconditions(R.string.content_capture_unavailable) {
                 if (
                     !ContentCaptureUtils.isFeatureAvailable() ||

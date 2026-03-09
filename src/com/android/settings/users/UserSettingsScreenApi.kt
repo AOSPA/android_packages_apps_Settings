@@ -31,6 +31,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.datastore.Permissions.Companion.anyOf
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -69,6 +70,8 @@ class UserSettingsScreenApi :
             purpose = R.string.user_settings_main_switch_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.DEEP_LINK_ONLY)
+
             permissions(anyOf(MANAGE_USERS, CREATE_USERS, QUERY_USERS))
             // TODO(b/476520565): Tidy this section when the improved way of defining user
             //  restrictions is added.
@@ -163,6 +166,8 @@ class UserSettingsScreenApi :
             purpose = R.string.user_settings_remove_guest_on_exit_pref_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.DO_NOT_EXPOSE)
+
             preconditions(R.string.user_settings_remove_guest_on_exit_precondition) {
                 val userManager = context.getSystemService(UserManager::class.java)
                 if (
@@ -203,6 +208,8 @@ class UserSettingsScreenApi :
             purpose = R.string.user_settings_enable_guest_calling_pref_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.DEEP_LINK_ONLY)
+
             permissions(MANAGE_USERS)
             preconditions(R.string.user_settings_enable_guest_calling_precondition) {
                 val userManager = context.getSystemService(UserManager::class.java)
@@ -240,6 +247,8 @@ class UserSettingsScreenApi :
             purpose = R.string.user_settings_add_users_when_locked_pref_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             preconditions(R.string.user_settings_add_users_from_lockscreen_precondition) {
                 val userManager = context.getSystemService(UserManager::class.java)
                 val userCaps = UserCapabilities.create(context)

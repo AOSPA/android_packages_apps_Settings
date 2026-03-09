@@ -24,6 +24,7 @@ import com.android.settings.Utils
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -53,6 +54,9 @@ class BasebandVersionPreference :
         preference.isSelectable = false
         preference.isCopyingEnabled = true
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val BASEBAND_PROPERTY: String = "gsm.version.baseband"

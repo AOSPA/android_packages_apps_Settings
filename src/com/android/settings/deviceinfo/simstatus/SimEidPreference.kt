@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -109,6 +110,11 @@ class SimEidPreference(private val context: Context) :
         }
         return null
     }
+
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
+
 
     private fun getEidMetadataWithAssociatedSlotId(): EidMetadata? {
         val subscriptionManager =

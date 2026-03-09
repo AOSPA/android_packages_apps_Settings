@@ -83,7 +83,7 @@ open class AirplaneModePreference :
         }
 
     override val sensitivityLevel
-        get() = SensitivityLevel.DEEP_LINK_ONLY
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     override val preferenceActionMetrics: Int
         get() = ACTION_AIRPLANE_TOGGLE

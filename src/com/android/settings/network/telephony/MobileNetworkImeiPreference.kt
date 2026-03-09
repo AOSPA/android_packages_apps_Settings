@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.launch
 
@@ -96,6 +97,9 @@ class MobileNetworkImeiPreference(private val data: MobileNetworkData) :
             INVALID_SIM_SLOT_INDEX
         }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     companion object {
         private const val TAG = "MobileNetworkImeiPreference"

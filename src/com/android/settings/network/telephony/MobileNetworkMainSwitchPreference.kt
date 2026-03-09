@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -101,6 +102,9 @@ class MobileNetworkMainSwitchPreference(
             }
         }
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.REQUIRES_CONFIRMATION
 
     override fun storage(context: Context): KeyValueStore =
         MobileNetworkSwitchStorage(

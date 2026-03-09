@@ -42,6 +42,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -193,6 +194,9 @@ class WifiHotspotNamePreference(
             context.startActivity(intent)
         }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val TAG = "WifiHotspotNamePreference"

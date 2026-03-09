@@ -103,7 +103,7 @@ class BluetoothTetherSwitchPreference(
         ReadWritePermit.ALLOW
 
     override val sensitivityLevel: Int
-        get() = SensitivityLevel.MUST_PROVIDE_UNDO
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     @Suppress("UNCHECKED_CAST")
     private class BluetoothTetherStore(
