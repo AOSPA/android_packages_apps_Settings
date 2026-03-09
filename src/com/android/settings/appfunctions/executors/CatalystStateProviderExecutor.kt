@@ -63,7 +63,6 @@ class CatalystStateProviderExecutor(
     private val context: Context,
     private val englishContext: Context,
 ) : DeviceStateExecutor {
-    private val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
     private val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     private val screenKeyList = perScreenConfigMap.keys.toList()
 
@@ -143,7 +142,6 @@ class CatalystStateProviderExecutor(
             // skip if metadata is a PreferenceScreen
             if (metadata.key == screenMetaData.key)
                 return@forEach
-            val config = settingConfigMap[metadata.key]
             val jsonValue =
                 when {
                     // TODO(b/444419242): Handle IMEI redaction properly.
@@ -166,7 +164,6 @@ class CatalystStateProviderExecutor(
                                 localized = metadata.getPreferenceTitle(context).toString(),
                             ),
                         jsonValue = it,
-                        hintText = config?.hintText(englishContext, metadata),
                     )
                 )
             }
