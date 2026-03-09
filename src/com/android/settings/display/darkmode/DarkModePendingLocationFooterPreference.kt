@@ -55,6 +55,8 @@ class DarkModePendingLocationFooterPreference :
     override val icon: Int
         get() = R.drawable.ic_settings_location_filled
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         val uiModeManager = context.getSystemService(UiModeManager::class.java) ?: return false
         val locationManager = context.getSystemService(LocationManager::class.java) ?: return false

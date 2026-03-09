@@ -49,6 +49,9 @@ class BatteryPercentageSwitchPreference :
     override fun storage(context: Context): KeyValueStore =
         BatteryPercentageStorage(context, SettingsSystemStore.get(context))
 
+    override val availabilityDescription =
+        "The device must have a battery present and the device must support making the battery percentage setting available."
+
     override fun isAvailable(context: Context): Boolean =
         Utils.isBatteryPresent(context) &&
             context.resources.getBoolean(

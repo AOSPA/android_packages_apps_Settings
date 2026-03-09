@@ -86,6 +86,9 @@ open class AllFilesAccessAppDetailScreen : SpecialAccessAppDetailScreen {
     override val footerPreferenceTitle
         get() = R.string.allow_manage_external_storage_description
 
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested manage external storage permission."
+
     // Edge case: what if the app's read permission is revoked/granted
     override fun isAvailable(context: Context) =
         super.isAvailable(context) && allFilesAccessFilter(context, packageInfo?.applicationInfo)

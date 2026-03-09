@@ -87,6 +87,9 @@ class UseServicePreference(
             }
         }
 
+    override val availabilityDescription =
+        "The service must be targeting SDK R or later if it is using the accessibility button."
+
     override fun isAvailable(context: Context): Boolean {
         return serviceInfo.run {
             !targetSdkIsAtLeast(Build.VERSION_CODES.R) ||

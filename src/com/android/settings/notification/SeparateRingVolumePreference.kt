@@ -89,6 +89,8 @@ class SeparateRingVolumePreference(private val audioHelper: AudioHelper) :
 
     override fun getIcon(context: Context) = context.getIconRes()
 
+    override val availabilityDescription = "The device must support separate volume controls."
+
     override fun isAvailable(context: Context) = !audioHelper.isSingleVolume
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)

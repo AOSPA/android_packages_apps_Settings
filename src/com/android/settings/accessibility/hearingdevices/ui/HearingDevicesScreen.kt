@@ -57,6 +57,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import kotlinx.coroutines.CoroutineScope
@@ -207,6 +208,9 @@ open class HearingDevicesScreen(context: Context) :
             +HearingDevicesFeedbackButtonPreference { FeedbackManager(context, metricsCategory) }
         }
 
+    override val availabilityDescription =
+        "The device must support hearing devices (Hearing Aid or HAP Client Bluetooth Profile)."
+
     override fun isAvailable(context: Context): Boolean = hearingAidHelper.isHearingAidSupported
 
     override fun getSummary(context: Context): CharSequence? {
@@ -274,6 +278,10 @@ open class HearingDevicesScreen(context: Context) :
         purpose: Int = R.string.hearing_device_audio_routing_purpose,
         title: Int = R.string.accessibility_hearing_device_routing_title,
     ) : PreferenceCategory(key, purpose, title), PreferenceAvailabilityProvider {
+        override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
+
+        override val availabilityDescription = UI_ONLY_PREFERENCE
+
         override fun isAvailable(context: Context): Boolean =
             SettingsLibFlags.hearingDevicesGranularOutputRouting()
     }
@@ -313,6 +321,8 @@ open class HearingDevicesScreen(context: Context) :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

@@ -41,7 +41,6 @@ class HearingDeviceAudioRoutingSwitchPreference(
 ) :
     SwitchPreference(key, title = titleRes, purpose = purpose),
     SwitchPreferenceBinding,
-    PreferenceAvailabilityProvider,
     PreferenceLifecycleProvider {
 
     private val dataStore by lazy {
@@ -67,8 +66,6 @@ class HearingDeviceAudioRoutingSwitchPreference(
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
-
-    override fun isAvailable(context: Context): Boolean = true
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)

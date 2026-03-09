@@ -62,6 +62,8 @@ open class RecentLocationAccessScreen : PreferenceScreenMixin, PreferenceAvailab
 
     override fun isFlagEnabled(context: Context) = Flags.catalystMigration26q2()
 
+    override val availabilityDescription = "Location must be enabled."
+
     override fun isAvailable(context: Context) = LocationEnabler(context, null, null).isEnabled(
         Settings.Secure.getInt(
             context.contentResolver,

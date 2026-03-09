@@ -61,6 +61,9 @@ class ImeiPreference(
     override val purpose: Int
         get() = R.string.imei_info_purpose
 
+    override val availabilityDescription =
+        "The user must be admin user and the device must be mobile data capable or voice capable."
+
     override fun isAvailable(context: Context): Boolean =
         context.isAdminUser == true &&
             (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context))

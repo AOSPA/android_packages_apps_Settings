@@ -48,6 +48,9 @@ class SimMobileDataPreference :
     override val icon: Int
         get() = R.drawable.ic_settings_data_usage
 
+    override val availabilityDescription =
+        "The device must have more than one active subscription available."
+
     override fun isAvailable(context: Context): Boolean {
         return context
             .getSystemService(SubscriptionManager::class.java)

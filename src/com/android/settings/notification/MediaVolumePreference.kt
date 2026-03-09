@@ -72,6 +72,8 @@ class MediaVolumePreference(private val audioHelper: AudioHelper) :
             else -> R.drawable.ic_media_stream
         }
 
+    override val availabilityDescription = "The device must support configuring media volume in Settings."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_media_volume)
 

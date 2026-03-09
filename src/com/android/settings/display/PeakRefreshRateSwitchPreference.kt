@@ -77,6 +77,9 @@ class PeakRefreshRateSwitchPreference :
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
+    override val availabilityDescription =
+        "The device must support smooth display settings."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_smooth_display) &&
             context.peakRefreshRate > DEFAULT_REFRESH_RATE

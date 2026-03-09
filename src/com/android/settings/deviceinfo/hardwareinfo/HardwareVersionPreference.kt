@@ -43,6 +43,9 @@ class HardwareVersionPreference :
     override fun getSummary(context: Context): CharSequence? =
         SystemProperties.get("ro.boot.hardware.revision")
 
+    override val availabilityDescription =
+        "The device must support showing the device model and must declare a device revision."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_device_model) &&
             getSummary(context)?.isNotEmpty() == true

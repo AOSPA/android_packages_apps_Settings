@@ -78,6 +78,8 @@ class MobileNetworkMainSwitchPreference(
     override val disableWidgetOnCheckedChanged: Boolean
         get() = false
 
+    override val availabilityDescription = "Always available."
+
     override fun isAvailable(context: Context): Boolean = true
 
     override fun tags(context: Context) = arrayOf(KEY_MOBILE_DATA)

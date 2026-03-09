@@ -52,6 +52,9 @@ class DoubleTapPowerMainSwitchPreference :
 
     override fun storage(context: Context): KeyValueStore = createDataStore(context)
 
+    override val availabilityDescription =
+        "The device must support the double tap power button gesture."
+
     override fun isAvailable(context: Context): Boolean =
         DoubleTapPowerSettingsUtils.isMultiTargetDoubleTapPowerButtonGestureAvailable(context)
 

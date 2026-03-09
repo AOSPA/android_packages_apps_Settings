@@ -81,6 +81,9 @@ open class DoubleTapPowerScreen(context: Context) :
 
     override fun fragmentClass(): Class<out Fragment>? = DoubleTapPowerSettings::class.java
 
+    override val availabilityDescription =
+        "The double tap power gesture must not be disabled."
+
     override fun isAvailable(context: Context) = context.isGestureAvailable()
 
     override fun getTitle(context: Context): CharSequence? =
@@ -188,6 +191,8 @@ open class DoubleTapPowerScreen(context: Context) :
             screenMetadata.getSummary(context)
 
         override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context): Boolean = screenMetadata.isAvailable(context)
     }

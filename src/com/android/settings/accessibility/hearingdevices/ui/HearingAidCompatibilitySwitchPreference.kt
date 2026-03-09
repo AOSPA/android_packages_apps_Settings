@@ -81,6 +81,9 @@ class HearingAidCompatibilitySwitchPreference(private val context: Context) :
         preference.onPreferenceChangeListener = this
     }
 
+    override val availabilityDescription =
+        "The device must support hearing aid compatibility."
+
     override fun isAvailable(context: Context): Boolean =
         telephonyManager.isHearingAidCompatibilitySupported()
 

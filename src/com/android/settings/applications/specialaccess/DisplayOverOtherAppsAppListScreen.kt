@@ -74,6 +74,9 @@ open class DisplayOverOtherAppsAppListScreen :
         const val KEY = "special_access_draw_overlay_app_list"
     }
 
+    override val availabilityDescription =
+        "This must not be a low ram device OR Android must be version P or below."
+
     override fun isAvailable(context: Context) = isSystemAlertWindowEnabled(context)
 }
 

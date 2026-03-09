@@ -89,6 +89,9 @@ class AlwaysOnSwitchPreference :
         storage(context).removeObserver(this)
     }
 
+    override val availabilityDescription =
+        "The device must not be during setup, must support window mangnification, and must support the 'always on' setting."
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() &&
             context.isWindowMagnificationSupported() &&

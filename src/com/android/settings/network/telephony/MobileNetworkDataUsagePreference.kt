@@ -120,6 +120,9 @@ class MobileNetworkDataUsagePreference(
     override val purpose: Int
         get() = R.string.status_header_purpose
 
+    override val availabilityDescription =
+        "The subscription ID must be valid."
+
     override fun isAvailable(context: Context) = subInfo != null
 
     override fun getSummary(context: Context) = dataUsageDataFlow.value.summary

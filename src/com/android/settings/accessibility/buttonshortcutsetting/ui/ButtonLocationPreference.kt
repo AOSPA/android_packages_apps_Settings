@@ -90,6 +90,9 @@ class ButtonLocationPreference(context: Context) :
 
     override fun storage(context: Context): KeyValueStore = dataStore
 
+    override val availabilityDescription =
+        "The device must be using 3-button navigation, or the operating system must be configured to enable customising the button location."
+
     override fun isAvailable(context: Context): Boolean {
         return AccessibilityUtil.isAccessibilityButtonLocationConfigurable(context)
     }

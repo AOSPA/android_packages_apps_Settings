@@ -68,6 +68,8 @@ open class TetherScreen :
             context.getText(Utils.getTetheringLabel(tetheringManager))
         }
 
+    override val availabilityDescription = "The device must support tethering."
+
     override fun isAvailable(context: Context) = TetherUtil.isTetherAvailable(context)
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)

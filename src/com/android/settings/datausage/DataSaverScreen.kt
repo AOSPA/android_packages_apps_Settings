@@ -75,6 +75,9 @@ open class DataSaverScreen(context: Context) :
             else -> context.getString(R.string.data_saver_off)
         }
 
+    override val availabilityDescription =
+        "The device must support the data saver setting."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_data_saver)
 

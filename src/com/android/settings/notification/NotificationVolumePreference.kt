@@ -77,6 +77,8 @@ class NotificationVolumePreference(private val audioHelper: AudioHelper) :
 
     override fun tags(context: Context) = arrayOf(KEY_NOTIFICATION_VOLUME)
 
+    override val availabilityDescription = "The device must support configuring notification volume and must support separate volume controls."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_notification_volume) &&
             !audioHelper.isSingleVolume

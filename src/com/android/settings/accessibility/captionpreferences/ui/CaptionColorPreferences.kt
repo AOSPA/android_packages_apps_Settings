@@ -63,6 +63,9 @@ class CaptionTextColorPreference(context: Context) : BaseCaptionColorPreference(
     override val key: String
         get() = KEY
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_text_color_purpose
 
@@ -91,6 +94,9 @@ class CaptionTextOpacityPreference(context: Context) :
     override val key: String
         get() = KEY
 
+       override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_text_opacity_purpose
 
@@ -112,6 +118,9 @@ class CaptionTextOpacityPreference(context: Context) :
 class CaptionBackgroundColorPreference(context: Context) : BaseCaptionColorPreference() {
     override val key: String
         get() = KEY
+
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
 
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_background_color_purpose
@@ -141,6 +150,9 @@ class CaptionBackgroundOpacityPreference(context: Context) :
     override val key: String
         get() = KEY
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_background_opacity_purpose
 
@@ -162,6 +174,9 @@ class CaptionBackgroundOpacityPreference(context: Context) :
 class CaptionWindowColorPreference(context: Context) : BaseCaptionColorPreference() {
     override val key: String
         get() = KEY
+
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
 
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_window_color_purpose
@@ -190,6 +205,9 @@ class CaptionWindowOpacityPreference(context: Context) :
     BaseCaptionOpacityPreference(CaptionWindowColorPreference.KEY) {
     override val key: String
         get() = KEY
+
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
 
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_window_opacity_purpose

@@ -92,6 +92,9 @@ open class FullScreenNotificationsAppDetailScreen : SpecialAccessAppDetailScreen
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested full screen intent permission."
+
     // Edge case: what if the app's read permission is revoked/granted
     override fun isAvailable(context: Context) =
         super.isAvailable(context) && fullScreenIntentFilter(context, packageInfo?.applicationInfo)

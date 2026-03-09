@@ -79,6 +79,9 @@ open class ManageWriteSettingsAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested write settings permission."
+
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&
             manageWriteSettingsFilter(context, packageInfo?.applicationInfo)

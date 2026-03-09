@@ -103,6 +103,9 @@ class TextCursorBlinkRatePreference(context: Context) :
     override fun getWritePermit(context: Context, value: Int?, callingPid: Int, callingUid: Int) =
         ReadWritePermit.Companion.ALLOW
 
+    override val availabilityDescription =
+        "The device must have text cursor blinking user setting."
+
     override fun isAvailable(context: Context): Boolean {
         return Flags.textCursorBlinkingUserSetting()
     }

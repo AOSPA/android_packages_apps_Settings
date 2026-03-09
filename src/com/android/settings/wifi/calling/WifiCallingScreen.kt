@@ -91,6 +91,8 @@ private constructor(
 
     override fun getMetricsCategory() = SettingsEnums.WIFI_CALLING_FOR_SUB
 
+    override val availabilityDescription = "The subscription ID must be valid."
+
     override fun isAvailable(context: Context) = isValidSubscriptionId(subId)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystWifiCalling()

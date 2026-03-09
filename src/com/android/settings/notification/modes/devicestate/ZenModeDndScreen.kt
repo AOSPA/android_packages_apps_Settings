@@ -55,6 +55,8 @@ open class ZenModeDndScreen :
 
     override fun isFlagEnabled(context: Context) = false
 
+    override val availabilityDescription = "The DND mode must be available."
+
     override fun isAvailable(context: Context) = context.hasDndMode()
 
     override fun getTitle(context: Context): CharSequence? = context.getDndMode()?.name
@@ -89,6 +91,8 @@ open class ZenModeDndScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 

@@ -93,6 +93,9 @@ class SupervisionPinManagementScreen :
             SupervisionDeletePinPreference.KEY,
         )
 
+    override val availabilityDescription =
+        "The device must have a supervising credential."
+
     override fun isAvailable(context: Context) = context.isSupervisingCredentialSet()
 
     override fun getSummary(context: Context): CharSequence? {

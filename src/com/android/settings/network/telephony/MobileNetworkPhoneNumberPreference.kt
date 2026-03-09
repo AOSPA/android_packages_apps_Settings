@@ -48,6 +48,8 @@ class MobileNetworkPhoneNumberPreference(private val data: MobileNetworkData) :
     override val title: Int
         get() = R.string.status_number
 
+    override val availabilityDescription = "A mobile network must be available."
+
     override fun isAvailable(context: Context) = data.phoneNumberDataFlow.value.isAvailable
 
     override fun getSummary(context: Context) = data.phoneNumberDataFlow.value.summary
