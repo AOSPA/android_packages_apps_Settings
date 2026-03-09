@@ -34,6 +34,7 @@ import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.FailedPreconditionException
 import com.android.settings.testutils2.Parameters
 import com.google.common.truth.Truth.assertThat
+import kotlin.test.assertFailsWith
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -42,13 +43,11 @@ import org.mockito.Mockito.`when`
 import org.mockito.kotlin.mock
 import org.robolectric.shadow.api.Shadow.extract
 import org.robolectric.shadows.ShadowContextImpl
-import kotlin.test.assertFailsWith
 
 @RunWith(AndroidJUnit4::class)
 class StylusUsiDetailsApiScreenTest {
 
-    @get:Rule
-    val setFlagsRule = SetFlagsRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val tester = ApiTester(StylusUsiDetailsApiScreen())
     private val context = ApplicationProvider.getApplicationContext<Context>()
@@ -146,7 +145,7 @@ class StylusUsiDetailsApiScreenTest {
         Settings.Secure.putInt(
             context.contentResolver,
             Settings.Secure.STYLUS_HANDWRITING_ENABLED,
-            StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_ENABLED
+            StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_ENABLED,
         )
 
         // Act & Assert
@@ -161,7 +160,7 @@ class StylusUsiDetailsApiScreenTest {
         Settings.Secure.putInt(
             context.contentResolver,
             Settings.Secure.STYLUS_HANDWRITING_ENABLED,
-            StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_DISABLED
+            StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_DISABLED,
         )
 
         // Act & Assert
@@ -178,11 +177,12 @@ class StylusUsiDetailsApiScreenTest {
         tester.set(StylusUsiDetailsApiScreen.HANDWRITING_SWITCH_KEY, true)
 
         // Assert
-        val savedValue = Settings.Secure.getInt(
-            context.contentResolver,
-            Settings.Secure.STYLUS_HANDWRITING_ENABLED,
-            -1
-        )
+        val savedValue =
+            Settings.Secure.getInt(
+                context.contentResolver,
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+                -1,
+            )
         assertThat(savedValue).isEqualTo(StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_ENABLED)
     }
 
@@ -196,11 +196,84 @@ class StylusUsiDetailsApiScreenTest {
         tester.set(StylusUsiDetailsApiScreen.HANDWRITING_SWITCH_KEY, false)
 
         // Assert
-        val savedValue = Settings.Secure.getInt(
-            context.contentResolver,
-            Settings.Secure.STYLUS_HANDWRITING_ENABLED,
-            -1
-        )
+        val savedValue =
+            Settings.Secure.getInt(
+                context.contentResolver,
+                Settings.Secure.STYLUS_HANDWRITING_ENABLED,
+                -1,
+            )
         assertThat(savedValue).isEqualTo(StylusUsiDetailsApiScreen.STYLUS_HANDWRITING_DISABLED)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun ignoreButton_get_whenButtonsDisabled_returnsTrue() {
+        // Arrange
+        setupMockStylus(id = 42, isStylus = true)
+        tester.initializeScreenParameters(Parameters(StylusUsiDetailsApiScreen.PARAM_KEY to "42"))
+        Settings.Secure.putInt(
+            context.contentResolver,
+            Settings.Secure.STYLUS_BUTTONS_ENABLED,
+            StylusUsiDetailsApiScreen.STYLUS_BUTTONS_DISABLED,
+        )
+
+        // Act & Assert
+        assertThat(tester.get<Boolean>(StylusUsiDetailsApiScreen.IGNORE_BUTTON_KEY)).isTrue()
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun ignoreButton_get_whenButtonsEnabled_returnsFalse() {
+        // Arrange
+        setupMockStylus(id = 42, isStylus = true)
+        tester.initializeScreenParameters(Parameters(StylusUsiDetailsApiScreen.PARAM_KEY to "42"))
+        Settings.Secure.putInt(
+            context.contentResolver,
+            Settings.Secure.STYLUS_BUTTONS_ENABLED,
+            StylusUsiDetailsApiScreen.STYLUS_BUTTONS_ENABLED,
+        )
+
+        // Act & Assert
+        assertThat(tester.get<Boolean>(StylusUsiDetailsApiScreen.IGNORE_BUTTON_KEY)).isFalse()
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun ignoreButton_set_true_savesDisabledState() {
+        // Arrange
+        setupMockStylus(id = 42, isStylus = true)
+        tester.initializeScreenParameters(Parameters(StylusUsiDetailsApiScreen.PARAM_KEY to "42"))
+
+        // Act
+        tester.set(StylusUsiDetailsApiScreen.IGNORE_BUTTON_KEY, true)
+
+        // Assert
+        val savedValue =
+            Settings.Secure.getInt(
+                context.contentResolver,
+                Settings.Secure.STYLUS_BUTTONS_ENABLED,
+                -1,
+            )
+        assertThat(savedValue).isEqualTo(StylusUsiDetailsApiScreen.STYLUS_BUTTONS_DISABLED)
+    }
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun ignoreButton_set_false_savesEnabledState() {
+        // Arrange
+        setupMockStylus(id = 42, isStylus = true)
+        tester.initializeScreenParameters(Parameters(StylusUsiDetailsApiScreen.PARAM_KEY to "42"))
+
+        // Act
+        tester.set(StylusUsiDetailsApiScreen.IGNORE_BUTTON_KEY, false)
+
+        // Assert
+        val savedValue =
+            Settings.Secure.getInt(
+                context.contentResolver,
+                Settings.Secure.STYLUS_BUTTONS_ENABLED,
+                -1,
+            )
+        assertThat(savedValue).isEqualTo(StylusUsiDetailsApiScreen.STYLUS_BUTTONS_ENABLED)
     }
 }

@@ -34,39 +34,44 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 
 // LINT.IfChange
 @ProvidePreferenceScreen(StylusUsiDetailsApiScreen.KEY, parameterized = true)
-class StylusUsiDetailsApiScreen : PreferencesApiScreen(
-    key = KEY,
-    topLevelSettingsCategory = Category.CONNECTED_DEVICES,
-    fragment = StylusUsiDetailsFragment::class,
-    purpose = R.string.api_stylus_screen_purpose
-) {
+class StylusUsiDetailsApiScreen :
+    PreferencesApiScreen(
+        key = KEY,
+        topLevelSettingsCategory = Category.CONNECTED_DEVICES,
+        fragment = StylusUsiDetailsFragment::class,
+        purpose = R.string.api_stylus_screen_purpose,
+    ) {
     init {
-        flag {
-            Flags.catalystMigration26q2()
-        }
+        flag { Flags.catalystMigration26q2() }
 
         parameters {
             parameter(
                 name = PARAM_KEY,
                 purpose = R.string.api_stylus_device_input_id_purpose,
                 required = true,
-                type = GeneratedParameterType(
-                    R.string.api_stylus_device_input_id_type_description
-                ) {
-                    val inputManager = context.getSystemService(InputManager::class.java)
+                type =
+                    GeneratedParameterType(R.string.api_stylus_device_input_id_type_description) {
+                        val inputManager = context.getSystemService(InputManager::class.java)
 
-                    inputManager?.inputDeviceIds?.toList()?.mapNotNull { id ->
-                        val device = inputManager.getInputDevice(id)
-                        if (device != null && device.supportsSource(InputDevice.SOURCE_STYLUS)) {
-                            GeneratedValue(
-                                value = id.toString(),
-                                description = device.name ?: "Stylus $id"
-                            )
-                        } else {
-                            null
-                        }
-                    }?.toSet() ?: emptySet()
-                }
+                        inputManager
+                            ?.inputDeviceIds
+                            ?.toList()
+                            ?.mapNotNull { id ->
+                                val device = inputManager.getInputDevice(id)
+                                if (
+                                    device != null &&
+                                        device.supportsSource(InputDevice.SOURCE_STYLUS)
+                                ) {
+                                    GeneratedValue(
+                                        value = id.toString(),
+                                        description = device.name ?: "Stylus $id",
+                                    )
+                                } else {
+                                    null
+                                }
+                            }
+                            ?.toSet() ?: emptySet()
+                    },
             )
 
             prepareScreenExtras { parameters, extras ->
@@ -80,7 +85,7 @@ class StylusUsiDetailsApiScreen : PreferencesApiScreen(
         preference(
             key = HANDWRITING_SWITCH_KEY,
             purpose = R.string.api_stylus_handwriting_purpose,
-            type = AnyBoolean
+            type = AnyBoolean,
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             preconditions(R.string.stylus_handwriting_precondition) {
@@ -96,11 +101,12 @@ class StylusUsiDetailsApiScreen : PreferencesApiScreen(
 
             get {
                 execute {
-                    // Default value is 1 (true) according to Secure.STYLUS_HANDWRITING_DEFAULT_VALUE
+                    // Default value is 1 (true) according to
+                    // Secure.STYLUS_HANDWRITING_DEFAULT_VALUE
                     Settings.Secure.getInt(
                         context.contentResolver,
                         Settings.Secure.STYLUS_HANDWRITING_ENABLED,
-                        STYLUS_HANDWRITING_ENABLED
+                        STYLUS_HANDWRITING_ENABLED,
                     ) == STYLUS_HANDWRITING_ENABLED
                 }
             }
@@ -110,7 +116,36 @@ class StylusUsiDetailsApiScreen : PreferencesApiScreen(
                     Settings.Secure.putInt(
                         context.contentResolver,
                         Settings.Secure.STYLUS_HANDWRITING_ENABLED,
-                        if (enabled) STYLUS_HANDWRITING_ENABLED else STYLUS_HANDWRITING_DISABLED
+                        if (enabled) STYLUS_HANDWRITING_ENABLED else STYLUS_HANDWRITING_DISABLED,
+                    )
+                }
+            }
+        }
+
+        preference(
+            key = IGNORE_BUTTON_KEY,
+            purpose = R.string.api_stylus_ignore_button_purpose,
+            type = AnyBoolean,
+        ) {
+            sensitivityLevel(SensitivityLevel.DEEP_LINK_ONLY)
+            get {
+                execute {
+                    // Logic is inverted: 0 means buttons are disabled (ignore is TRUE)
+                    Settings.Secure.getInt(
+                        context.contentResolver,
+                        Settings.Secure.STYLUS_BUTTONS_ENABLED,
+                        STYLUS_BUTTONS_ENABLED,
+                    ) == STYLUS_BUTTONS_DISABLED
+                }
+            }
+
+            set {
+                execute { disabled ->
+                    // Logic is inverted: If API passes true (ignore buttons), write 0 to DB
+                    Settings.Secure.putInt(
+                        context.contentResolver,
+                        Settings.Secure.STYLUS_BUTTONS_ENABLED,
+                        if (disabled) STYLUS_BUTTONS_DISABLED else STYLUS_BUTTONS_ENABLED,
                     )
                 }
             }
@@ -121,9 +156,13 @@ class StylusUsiDetailsApiScreen : PreferencesApiScreen(
         const val KEY = "stylus_usi_details_api_screen"
         const val PARAM_KEY = "device_input_id"
         const val HANDWRITING_SWITCH_KEY = "handwriting_switch"
+        const val IGNORE_BUTTON_KEY = "ignore_button"
 
         const val STYLUS_HANDWRITING_ENABLED = 1
         const val STYLUS_HANDWRITING_DISABLED = 0
+
+        const val STYLUS_BUTTONS_ENABLED = 1
+        const val STYLUS_BUTTONS_DISABLED = 0
     }
 }
 // LINT.ThenChange(StylusUsiDetailsFragment.kt)
