@@ -499,7 +499,7 @@
     <string name="security_settings_remoteauth_enroll_introduction_more" msgid="1644105894631257595">"Más"</string>
     <string name="security_settings_remoteauth_enroll_introduction_how_title" msgid="6604152528267830349">"Cómo funciona"</string>
     <string name="security_settings_remoteauth_enroll_introduction_youre_in_control_title" msgid="7974976673323638524">"Tú tienes el control"</string>
-    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Puedes quitar tu smartwatch de Desbloqueo con reloj en cualquier momento desde Ajustes"</string>
+    <string name="security_settings_remoteauth_enroll_introduction_info_remove_watch" msgid="1888318677088986801">"Puedes quitar tu reloj de Desbloqueo con reloj en cualquier momento desde Ajustes"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_tap_notification" msgid="1597397399097952974">"Toca una notificación"</string>
     <string name="security_settings_remoteauth_enroll_introduction_animation_swipe_up" msgid="2129230804324634653">"Deslizar hacia arriba en la pantalla de bloqueo"</string>
     <string name="security_settings_remoteauth_enroll_enrolling_title" msgid="313016997943607675">"Elige tu reloj"</string>
@@ -850,6 +850,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"¿Emparejar con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
+    <skip />
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Confirma para añadir la segunda pieza de tu dispositivo de audio"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Código de emparejamiento por Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Escribe el código de vinculación y, a continuación, pulsa la tecla Intro"</string>
@@ -863,7 +865,11 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Permitir también acceder a los contactos y al historial de llamadas"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"La información se usará para avisos de llamada y más"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Comprobar códigos de emparejamiento"</string>
+    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
+    <skip />
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Comprueba si este código coincide con el del <xliff:g id="DEVICE_NAME">%1$s</xliff:g>.\n\nPor tu seguridad, no introduzcas este código en ningún sitio."</string>
+    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"No se ha podido establecer conexión con <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Dispositivos disponibles"</string>
@@ -899,7 +905,8 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Mejor calidad de audio."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Batería"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Batería, cargándose"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Prueba a reiniciar <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Si no funciona, olvida el dispositivo. Por seguridad, vuelve a emparejarlo cuando no estés en un espacio público.\n\nSi el dispositivo no está cerca, no tienes que hacer nada."</string>
+    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
+    <skip />
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Registro de impresión detallado"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Registros de depuración adicionales, incluido el protocolo de impresión de Internet (IPP), que pueden contener información privada"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Olvidar dispositivo"</string>
@@ -1425,7 +1432,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Salvapantallas"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"salvapantallas"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"No disponible con el modo Descanso activado"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"No disponible"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Usar salvapantallas"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Durante la carga o en una base"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Mientras el dispositivo esté cargándose en la base"</string>
@@ -2035,12 +2043,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Si fuerzas que se detenga una aplicación, puede que no funcione correctamente."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Inhabilitar app"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Si inhabilitas esta aplicación, es posible que Android y otras aplicaciones no funcionen como deberían. Recuerda que no puedes eliminar esta aplicación, ya que estaba preinstalada en tu dispositivo. Al inhabilitarla, desactivas la aplicación y la ocultas en tu dispositivo."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"Aplicación de usuario del sistema"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"Esta aplicación se está ejecutando para el usuario del sistema. Los cambios que hagas afectarán a todos los usuarios de este dispositivo."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"Solo el administrador del dispositivo puede gestionar esta aplicación."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Tienda"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detalles de la aplicación"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Aplicación instalada desde <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -3620,11 +3625,13 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"Teclado, panel táctil, pantalla, sonido"</string>
+    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
+    <skip />
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Brillo, color, tema oscuro, pantalla de bloqueo, texto"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Selección de teclado, herramientas"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Velocidad del cursor, personalización de botones, desplazamiento"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"Volumen, altavoces, micrófonos"</string>
+    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
+    <skip />
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Personalización del cursor, acciones de clic, desplazamiento"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"No está disponible porque el NFC está desactivado"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar esta opción, primero tienes que instalar una aplicación de pagos"</string>
@@ -3795,8 +3802,8 @@
     <string name="work_profile_sound_category_title" msgid="1708926655170323454">"Sonido del perfil de trabajo"</string>
     <string name="live_caption_title" msgid="8617086825712756983">"Subtítulos automáticos"</string>
     <string name="live_caption_summary" msgid="7290150167089515457">"Subtitula llamadas, vídeos y otro contenido multimedia"</string>
-    <string name="live_caption_on_summary" msgid="8921561021882989495">"Activado / Subtitula llamadas, vídeos y otro contenido multimedia"</string>
-    <string name="live_caption_off_summary" msgid="6761535729357010911">"Desactivado / Subtitula llamadas, vídeos y otro contenido multimedia"</string>
+    <string name="live_caption_on_summary" msgid="8921561021882989495">"Activados / Subtitula llamadas, vídeos y otro contenido multimedia"</string>
+    <string name="live_caption_off_summary" msgid="6761535729357010911">"Desactivados / Subtitula llamadas, vídeos y otro contenido multimedia"</string>
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Auriculares con cable"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"El audio del contenido multimedia compatible se hace más inmersivo"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Desactivado"</string>
@@ -5841,8 +5848,8 @@
     <string name="color_inversion_feature_summary" msgid="1199876648549627647">"Hace que las pantallas claras se vuelvan oscuras y que las pantallas oscuras se vuelven claras"</string>
     <string name="magnification_feature_summary" msgid="4403387702011660253">"Amplía el contenido de la pantalla"</string>
     <string name="autoclick_disabled" msgid="3213396804955002120">"Desactivado"</string>
-    <string name="show_captions_disabled" msgid="924366862253349790">"Desactivado / Personaliza el tamaño y estilo de los subtítulos"</string>
-    <string name="show_captions_enabled" msgid="3495595825041704052">"Activado / Personaliza el tamaño y estilo de los subtítulos"</string>
+    <string name="show_captions_disabled" msgid="924366862253349790">"Desactivadas / Personaliza el tamaño y estilo de los subtítulos"</string>
+    <string name="show_captions_enabled" msgid="3495595825041704052">"Activadas / Personaliza el tamaño y estilo de los subtítulos"</string>
     <string name="live_caption_disabled" msgid="3562035026547887366">"Desactivado"</string>
     <string name="live_caption_enabled" msgid="5269360946200718949">"Activado"</string>
     <string name="audio_seek_bar_state_left_first" msgid="1641359989891833888">"Audio: <xliff:g id="PERCENT_LEFT">%1$s</xliff:g> a la izquierda y <xliff:g id="PERCENT_RIGHT">%2$s</xliff:g> a la derecha"</string>

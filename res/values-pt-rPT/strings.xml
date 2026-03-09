@@ -850,6 +850,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Sincronizar com o dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <string name="bluetooth_pairing_again_request" msgid="1394430519292575085">"Sincronizar novamente com o <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Confirme para adicionar o segundo componente do seu dispositivo de áudio"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Código de sincronização Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Insira o código de sincronização e prima Return ou Enter"</string>
@@ -863,7 +864,9 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Permitir também o acesso aos contactos e ao histórico de chamadas"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"As informações vão ser usadas para anúncios por chamadas e outros"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Verifique os códigos de sincronização"</string>
+    <string name="bluetooth_pairing_again_confirmation_title" msgid="838944639700876861">"Sincronize novamente"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Verifique se este código corresponde ao que está no dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>.\n\nPara sua segurança, não introduza este código em lado algum."</string>
+    <string name="bluetooth_repairing_msg" msgid="4359999881389087827">"Este dispositivo foi sincronizado anteriormente e está a tentar sincronizar novamente.\nSe estiver num espaço público, continue com cuidado."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Não foi possível ligar a <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Dispositivos disponíveis"</string>
@@ -899,7 +902,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Melhora qualidade de áudio"</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Bateria"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Bateria, a carregar"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Experimentar reiniciar o dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Se isso não funcionar, esqueça o dispositivo. Para sua segurança, só deve sincronizar novamente o dispositivo quando não estiver num espaço público.\n\nSe o dispositivo não estiver por perto, não tem de fazer nada."</string>
+    <string name="device_details_key_missing_title" msgid="3747991896959671040">"Ative o modo de sincronização no dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g> e tente estabelecer ligação novamente.\n\nSe o dispositivo não estiver por perto, não tem de fazer nada."</string>
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Registo de impressão verboso"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Registos de depuração adicionais, incluindo o protocolo de impressão na Internet (IPP) que pode conter informações privadas."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Esquecer dispositivo"</string>
@@ -1425,7 +1428,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Proteção de ecrã"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"proteção de ecrã"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Indisponível, modo de hora de dormir ativado"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Não disponível"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Usar proteção de ecrã"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Ao carregar ou na estação de carregamento"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Durante o carregamento e na estação"</string>
@@ -2035,12 +2039,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Se forçar a paragem de uma app, esta poderá apresentar um comportamento anormal."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Desativar app"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Se desativar esta app, o Android e outras apps podem deixar de funcionar corretamente. Não se esqueça de que não pode eliminar esta app por ter sido pré-instalada no dispositivo. Ao desativá-la, irá ocultá-la no dispositivo."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"App de utilizador do sistema"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"Esta app está a ser executada para o utilizador do sistema. As alterações que fizer vão afetar todos os utilizadores neste dispositivo."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"Apenas o administrador do dispositivo pode gerir esta app."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Loja"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Detalhes da aplicação"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App instalada a partir da <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2755,7 +2756,7 @@
     <string name="accessibility_hearing_device_pairing_hap_only_intro" msgid="2233661046254311681">"Pode sincronizar os dispositivos auditivos LE Audio nesta página. Certifique-se de que o dispositivo auditivo está ativado e pronto para ser sincronizado."</string>
     <string name="accessibility_found_hearing_devices" msgid="637407580358386553">"Dispositivos auditivos disponíveis"</string>
     <string name="accessibility_found_all_devices" msgid="7817834722148556520">"Não está a ver o seu dispositivo auditivo?"</string>
-    <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Veja mais dispositivos"</string>
+    <string name="accessibility_list_all_devices_title" msgid="161495343959211216">"Ver mais dispositivos"</string>
     <string name="accessibility_audio_adjustment_title" msgid="1332113739136802997">"Ajuste de áudio"</string>
     <string name="accessibility_audio_adjustment_subtext" msgid="2190523175597700025">"Áudio mono, equilíbrio de áudio"</string>
     <string name="accessibility_toggle_audio_description_preference_title" msgid="8916473886256061220">"Descrição de áudio"</string>
@@ -3620,11 +3621,11 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"Teclado, touchpad, ecrã e som"</string>
+    <string name="device_dashboard_summary" msgid="534835339280267939">"Touchpad, teclado, ecrã e som"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Brilho, cor, tema escuro, ecrã de bloqueio e texto"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Seleção de teclado e ferramentas"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Velocidade do cursor, personalização dos botões e deslocamento"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"Volume, altifalantes e microfones"</string>
+    <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Volume, altifalantes e microfones"</string>
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Personalização do cursor, ações de clique e deslocamento"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Não disponível com o NFC desativado"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale primeiro uma app de pagamento"</string>
@@ -5320,8 +5321,7 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"É necessária uma rede móvel ou Wi-Fi para ver links externos."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"O envio de mensagens de texto para os serviços de emergência pode não estar disponível em todas as zonas."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Pode demorar algum tempo até que as alterações à conta sejam apresentadas nas Definições. Contacte a operadora <xliff:g id="CARRIER_NAME">%1$s</xliff:g> para mais detalhes."</string>
-    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
-    <skip />
+    <string name="satellite_footer_content_section_8" msgid="7617809843970032785">"Para ver todas as apps otimizadas para a conetividade por satélite, visite o Website da sua operadora."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Mais acerca da conetividade por satélite"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Não é possível ativar a função <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"Para ativar a função <xliff:g id="FUNCTION">%1$s</xliff:g>, termine primeiro a ligação por satélite"</string>
@@ -5336,8 +5336,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Apps compatíveis no telemóvel"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Não é possível adicionar um SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Termine a ligação por satélite antes de adicionar um SIM"</string>
-    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
-    <skip />
+    <string name="satellite_toggle_error" msgid="4533772077620854258">"Algo correu mal. Não foi possível ativar/desativar a conetividade por satélite."</string>
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"O Bluetooth está desativado"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Quando a ligação é feita através de Bluetooth, o modo de avião é sincronizado nos dispositivos compatíveis, como o telemóvel e o relógio"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Nomes dos pontos de acesso"</string>
@@ -6091,8 +6090,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Segurança das apps"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Desbloqueio do dispositivo"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Segurança da conta"</string>
-    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
-    <skip />
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"Proteção do dispositivo perdido"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Sistema e atualizações"</string>
     <string name="location_settings" msgid="6833222354060094170">"Acesso à localização"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Veja as apps e os serviços que têm acesso à localização"</string>

@@ -23,9 +23,15 @@ import android.telephony.SubscriptionManager
 import android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID
 import android.telephony.TelephonyManager
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Mockito.anyInt
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
@@ -50,6 +56,7 @@ class MobileNetworkDataTest {
         }
 
     private lateinit var mobileNetworkData: MobileNetworkData
+    private val testScope = TestScope(UnconfinedTestDispatcher())
 
     @Before
     fun setUp() {
@@ -57,12 +64,16 @@ class MobileNetworkDataTest {
         mockTelephonyManager.stub {
             on { isDataCapable } doReturn true
             on { isDeviceVoiceCapable } doReturn true
+            on { createForSubscriptionId(anyInt()) } doReturn mockTelephonyManager
+            on { primaryImei } doReturn IMEI_1
         }
         mockSubscriptionInfo.stub { on { getMccString() } doReturn MCC }
         mockSubscriptionManager.stub {
             on { getActiveSubscriptionInfo(0) } doReturn mockSubscriptionInfo
             on { getPhoneNumber(0) } doReturn PHONE_NUMBER
+            on { activeSubscriptionIdList } doReturn intArrayOf(0)
         }
+
         mobileNetworkData = MobileNetworkData(context, null, 0)
     }
 
@@ -104,9 +115,46 @@ class MobileNetworkDataTest {
         assertThat(mobileNetworkData.getPhoneNumber()).isEqualTo(FORMATTED_PHONE_NUMBER)
     }
 
+    @Test
+    fun imeiDataFlow_refresh_updated() = runBlocking {
+        mockTelephonyManager.stub {
+            on { imei } doReturn IMEI_1
+            on { getImei(0) } doReturn IMEI_1
+            on { activeModemCount } doReturn 1
+        }
+
+        mobileNetworkData = MobileNetworkData(context, testScope, 0)
+        delay(500)
+
+        val imeiInfoData = mobileNetworkData.imeiInfoDataFlow.value
+        assertThat(imeiInfoData.isAvailable).isTrue()
+        assertThat(imeiInfoData.imeiData?.imei).isEqualTo(IMEI_1)
+        assertThat(imeiInfoData.title).isEqualTo(context.getString(R.string.status_imei))
+        assertThat(imeiInfoData.summary.toString()).isEqualTo(IMEI_1)
+    }
+
+    @Test
+    fun refreshImeiData_multiSim_setsMultiSimTitle() = runBlocking {
+        mockTelephonyManager.stub {
+            on { activeModemCount } doReturn 2
+            on { getImei(0) } doReturn IMEI_1
+            on { getImei(1) } doReturn IMEI_2
+            on { imei } doReturn IMEI_1
+        }
+
+        mobileNetworkData = MobileNetworkData(context, testScope, 0)
+        delay(500)
+
+        val imeiInfoData = mobileNetworkData.imeiInfoDataFlow.value
+        assertThat(imeiInfoData.title).isEqualTo(context.getString(R.string.imei_multi_sim, 1))
+        assertThat(imeiInfoData.imeiData?.imei).isEqualTo(IMEI_1)
+    }
+
     companion object {
         private const val MCC = "310"
         private const val PHONE_NUMBER = "8881234567"
         private const val FORMATTED_PHONE_NUMBER = "(888) 123-4567"
+        private const val IMEI_1 = "111111111111115"
+        private const val IMEI_2 = "222222222222225"
     }
 }

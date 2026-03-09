@@ -24,6 +24,7 @@ import static android.service.usb.UsbPortStatusProto.POWER_ROLE_SINK;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
@@ -35,6 +36,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides access to underlying system USB functionality.
@@ -176,6 +178,10 @@ public class UsbBackend {
      */
     public void setPciTunnelingEnabled(boolean enable) {
         mUsbManager.setPciTunnelingEnabled(enable);
+    }
+
+    public Map<String, UsbDevice> getUsbDevices() {
+        return mUsbManager.getDeviceList();
     }
 
     public static String usbFunctionsToString(long functions) {

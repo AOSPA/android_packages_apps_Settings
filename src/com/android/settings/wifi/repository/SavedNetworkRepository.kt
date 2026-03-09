@@ -18,6 +18,7 @@ package com.android.settings.wifi.repository
 
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiManager
 import android.os.Handler
 import android.os.HandlerThread
@@ -230,6 +231,50 @@ constructor(
             Log.e(TAG, "Error fetching saved networks info: $e")
             emptyList()
         }
+    }
+
+    /** Returns the latest WifiConfiguration from WifiManager for the given lookupKey. */
+    open fun getWifiConfiguration(lookupKey: String?): WifiConfiguration? {
+        if (lookupKey == null) return null
+        val entry = findWifiEntry(lookupKey)
+        if (entry == null) {
+            Log.w(TAG, "getWifiConfiguration: Entry not found for $lookupKey")
+            return null
+        }
+        val networkId = entry.wifiConfiguration?.networkId ?: WifiConfiguration.INVALID_NETWORK_ID
+        val config = findWifiConfiguration(networkId)
+        if (config == null) {
+            Log.w(TAG, "getWifiConfiguration: Config not found for networkId $networkId")
+        }
+        return config
+    }
+
+    /** Saves modifications to the WifiConfiguration for the given lookupKey. */
+    open fun setWifiConfiguration(lookupKey: String?, action: (WifiConfiguration) -> Unit) {
+        if (wifiManager == null) {
+            Log.e(TAG, "setWifiConfiguration: WifiManager is null")
+            return
+        }
+        val config = getWifiConfiguration(lookupKey)
+        if (config == null) {
+            Log.w(TAG, "setWifiConfiguration: Cannot update, config is null for $lookupKey")
+            return
+        }
+        action(config)
+        wifiManager.save(config, null)
+    }
+
+    /** Internal helper to find a WifiEntry by lookupKey. */
+    private fun findWifiEntry(lookupKey: String): WifiEntry? {
+        val currentSnapshot = getCurrentModel()
+        val allEntries = currentSnapshot.savedEntries + currentSnapshot.subscriptionEntries
+        return allEntries.find { SavedNetworkInfo(it.title, it.key).lookupKey == lookupKey }
+    }
+
+    /** Finds the latest WifiConfiguration by networkId using privileged configs. */
+    private fun findWifiConfiguration(networkId: Int): WifiConfiguration? {
+        if (networkId == WifiConfiguration.INVALID_NETWORK_ID || wifiManager == null) return null
+        return wifiManager.privilegedConfiguredNetworks?.find { it.networkId == networkId }
     }
 
     private fun <T> Flow<T>.mergeWith(other: Flow<T>): Flow<T> = merge(this, other)

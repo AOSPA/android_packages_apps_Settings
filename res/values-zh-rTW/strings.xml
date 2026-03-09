@@ -322,7 +322,7 @@
     <string name="roaming_warning" msgid="7703647889040229013">"可能要支付漫遊費用。"</string>
     <string name="date_time_auto" msgid="1759599045100040686">"自動判斷日期和時間"</string>
     <string name="date_time_auto_summary" msgid="8294938565417729698">"使用網路和無線訊號自動設定"</string>
-    <string name="zone_auto_title" msgid="3520584257065861479">"自動判定時區"</string>
+    <string name="zone_auto_title" msgid="3520584257065861479">"自動偵測時區"</string>
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"根據附近的行動網路自動設定"</string>
     <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"使用裝置位置資訊自動設定 (如有)"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"使用地區設定預設值"</string>
@@ -850,6 +850,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"藍牙"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"藍牙"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"要與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」配對嗎？"</string>
+    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
+    <skip />
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"確認新增第二部音訊裝置"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"藍牙配對碼"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"輸入配對碼，然後按下返回鍵或 Enter 鍵"</string>
@@ -863,7 +865,11 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"一併允許存取聯絡人和通話記錄"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"資訊將用於來電通知等用途"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"檢查配對碼"</string>
+    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
+    <skip />
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"請檢查下方代碼是否與「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」上的代碼相符。\n\n為了安全起見，請勿在任何地方輸入這組代碼。"</string>
+    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"無法連線至「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」。"</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"可用的裝置"</string>
@@ -899,7 +905,8 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"實驗功能，用於改善音質。"</string>
     <string name="device_details_battery" msgid="5466987755790847884">"電池"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"電池充電中"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"建議重新啟動「<xliff:g id="DEVICE_NAME">%1$s</xliff:g>」。如果無法解決問題，請清除裝置。為安全起見，請勿在公共場所重新配對這部裝置。\n\n如果這部裝置不在附近，就不必採取任何行動。"</string>
+    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
+    <skip />
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"詳細列印記錄"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"更多偵錯記錄檔，包括可能含有私人資訊的網際網路列印通訊協定 (IPP)。"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"清除裝置"</string>
@@ -1425,7 +1432,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"螢幕保護程式"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"螢幕保護程式"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"就寢模式開啟時無法使用"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"無法使用"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"使用螢幕保護程式"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"充電或安置於座架上時"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"在座架上充電時"</string>
@@ -1801,7 +1809,7 @@
     <string name="location_time_zone_detection_location_is_off_dialog_ok_button" msgid="2685647335717750297">"位置資訊設定"</string>
     <string name="location_time_zone_provider_fix_dialog_ok_button" msgid="9026666001835079126">"修正這個問題"</string>
     <string name="location_time_zone_detection_location_is_off_dialog_cancel_button" msgid="3968729678789071154">"取消"</string>
-    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"自動判定時區功能關閉時無法使用"</string>
+    <string name="location_time_zone_detection_auto_is_off" msgid="4785540862935730060">"自動偵測時區功能關閉時無法使用"</string>
     <string name="location_time_zone_detection_not_applicable" msgid="6757964612836952714">"位置時區偵測已停用"</string>
     <string name="location_time_zone_detection_not_supported" msgid="3251181656388306501">"不支援位置時區偵測"</string>
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"不允許變更位置時區偵測"</string>
@@ -2035,12 +2043,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"如果你強制停止應用程式，應用程式可能無法正常運作。"</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"停用應用程式"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"如果你停用這個應用程式，Android 和其他應用程式可能無法正常運作。請注意，這是預先安裝在裝置上的應用程式，因此無法刪除。不過，只要停用這個應用程式，即可關閉該程式並在裝置上隱藏。"</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"系統使用者應用程式"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"這個應用程式正在以系統使用者的身分執行。您所做的變更會影響這台裝置上的所有使用者。"</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"只有裝置管理員可以管理這個應用程式。"</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"商店"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"應用程式詳細資料"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"應用程式安裝來源：<xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2430,7 +2435,7 @@
     <string name="accessibility_captioning_about_title" msgid="3542171637334191563">"關於字幕偏好設定"</string>
     <string name="accessibility_captioning_footer_learn_more_content_description" msgid="5730040700677017706">"進一步瞭解字幕偏好設定"</string>
     <string name="accessibility_screen_magnification_title" msgid="1211169976144629087">"放大"</string>
-    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"放大功能捷徑"</string>
+    <string name="accessibility_screen_magnification_shortcut_title" msgid="2387963646377987780">"「放大功能」捷徑"</string>
     <string name="accessibility_magnification_cursor_following_title" msgid="29531257984012743">"游標跟隨"</string>
     <string name="accessibility_magnification_cursor_following_header" msgid="7283095798622223509">"選擇放大功能追隨游標的方式。"</string>
     <string name="accessibility_magnification_cursor_following_unavailable_summary" msgid="1683880243856242269">"只放大部分畫面時無法使用"</string>
@@ -2588,8 +2593,8 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"在裝置和支援的應用程式中啟用深色主題"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"擴展"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"擴展深色主題"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"自動在大多數不支援的應用程式中套用深色主題，提升無障礙體驗"</string>
-    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"如果使用展開選項時遇到問題，請改用標準選項。"</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"自動將深色主題套用在大多數不支援的應用程式中，提升無障礙體驗"</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"使用擴展選項時如遇到問題，請改用標準選項。"</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"強制反轉, 色彩反轉, 對比"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"擴展深色主題"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"擴展深色主題設定"</string>
@@ -2624,7 +2629,7 @@
     <string name="accessibility_long_press_timeout_option_long" msgid="5174318185201698155">"長"</string>
     <string name="accessibility_display_inversion_preference_title" msgid="5476133104746207952">"色彩反轉"</string>
     <string name="accessibility_display_inversion_switch_title" msgid="7458595722552743503">"使用色彩反轉"</string>
-    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"色彩反轉捷徑"</string>
+    <string name="accessibility_display_inversion_shortcut_title" msgid="6889624526691513462">"「色彩反轉」捷徑"</string>
     <string name="accessibility_display_inversion_preference_intro_text" msgid="1159663288481145318">"「色彩反轉」功能可將螢幕上的淺色部分轉成深色，並將深色部分轉成淺色。"</string>
     <string name="accessibility_display_inversion_preference_subtitle" msgid="8748527808247125417">"&lt;b&gt;注意事項&lt;/b&gt;&lt;br/&gt; &lt;ol&gt; &lt;li&gt; 媒體和圖像中的色彩都會改變&lt;/li&gt; &lt;li&gt; 色彩反轉的效果會套用到所有應用程式&lt;/li&gt; &lt;li&gt; 如要顯示深色背景，可以改用深色主題&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="accessibility_action_label_panel_slice" msgid="1313725957071602932">"輸入設定"</string>
@@ -3620,11 +3625,13 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"藍牙、Android Auto、NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"藍牙、Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"裝置"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"鍵盤、觸控板、螢幕、音效"</string>
+    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
+    <skip />
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"亮度、顏色、深色主題、螢幕鎖定、文字"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"鍵盤選取、工具"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"游標速度、自訂按鈕、捲動"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"音量、喇叭、麥克風"</string>
+    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
+    <skip />
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"游標自訂、點擊動作、捲動"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC 已關閉，因此無法使用"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"如要使用，請先安裝付款應用程式"</string>
@@ -3812,7 +3819,7 @@
     <string name="zen_mode_settings_title" msgid="682676757791334259">"零打擾"</string>
     <string name="zen_modes_list_title" msgid="4796033710444068729">"模式"</string>
     <string name="zen_modes_list_intro" msgid="1879511587535247228">"運用睡眠、工作、行車等模式減少干擾，保持專注"</string>
-    <string name="zen_modes_add_mode" msgid="5926457160307593664">"建立自己的模式"</string>
+    <string name="zen_modes_add_mode" msgid="5926457160307593664">"建立專屬模式"</string>
     <string name="zen_mode_settings_summary" msgid="6040862775514495191">"僅接收重要聯絡人和應用程式的通知"</string>
     <string name="zen_mode_select_schedule" msgid="663163931596092952">"設定時間表"</string>
     <string name="zen_mode_select_schedule_title" msgid="4260344424438327309">"根據以下資料安排時間表"</string>
@@ -5102,7 +5109,7 @@
     <string name="credman_confirmation_turn_off_positive_button" msgid="5678773011513369161">"關閉"</string>
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"變更"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"最多只能開啟 5 項服務"</string>
-    <string name="credman_limit_error_msg" msgid="2521803280130310063">"關閉至少 1 項服務並新增其他服務"</string>
+    <string name="credman_limit_error_msg" msgid="2521803280130310063">"如要新增其他服務，請先關閉至少 1 項服務"</string>
     <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"選擇你想使用的服務，以便儲存登入及自動填入建議的資料。如果也想收到其他服務提供的建議，請開啟相關服務。"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"「%1$s」會根據畫面內容判斷要自動填入的資訊。"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"密碼、密碼金鑰和資料服務限制"</string>

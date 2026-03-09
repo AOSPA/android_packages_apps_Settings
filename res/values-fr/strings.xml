@@ -850,6 +850,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Associer à <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ?"</string>
+    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
+    <skip />
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Confirmez pour ajouter le deuxième élément de votre appareil audio."</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Code d\'association Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Saisissez le code d\'association, puis appuyez sur Retour ou Entrée."</string>
@@ -863,7 +865,11 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Autoriser l\'accès aux contacts et à l\'historique des appels"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Ces infos seront utilisées pour les notifications d\'appels, entre autres"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Vérifier les codes d\'association"</string>
+    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
+    <skip />
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Vérifiez si ce code correspond à celui indiqué sur l\'appareil <xliff:g id="DEVICE_NAME">%1$s</xliff:g>.\n\nPour des raisons de sécurité, ne saisissez pas ce code ailleurs."</string>
+    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Impossible de se connecter à <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Appareils disponibles"</string>
@@ -899,7 +905,8 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Expérimental. Améliore la qualité audio."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Batterie"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Batterie, en charge"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Essayez de redémarrer <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Si cela ne fonctionne pas, dissociez l\'appareil. Pour votre sécurité, veillez à ne pas vous trouver dans un espace public lorsque vous l\'associerez à nouveau.\n\nSi cet appareil n\'est pas à proximité, vous n\'avez rien à faire."</string>
+    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
+    <skip />
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Journalisation détaillée des impressions"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Journaux de débogage supplémentaires, y compris le protocole d\'impression Internet (IPP), qui peuvent contenir des informations privées"</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Dissocier l\'appareil"</string>
@@ -1425,7 +1432,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Économiseur d\'écran"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"économiseur d\'écran"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Indisponible, car Heure du coucher est activé"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Non disponible"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Utiliser l\'économiseur d\'écran"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Lorsque l\'appareil est en charge ou connecté à une station d\'accueil"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Pendant la recharge sur station"</string>
@@ -2035,12 +2043,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"L\'arrêt forcé d\'une application peut provoquer un fonctionnement instable."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Désactiver l\'application"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Si vous désactivez cette application, il est possible qu\'Android et d\'autres applications ne fonctionnent plus comme prévu. N\'oubliez pas que vous ne pouvez pas supprimer cette application, car elle est préinstallée sur votre appareil. Si vous la désactivez, elle ne sera plus visible sur votre appareil."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"Application utilisateur système"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"Cette application est exécutée par l\'utilisateur système. Les modifications que vous apporterez affecteront tous les utilisateurs de l\'appareil."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"Seul l\'administrateur de l\'appareil peut gérer cette application."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Magasin d\'applications"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Infos sur l\'appli"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Application installée depuis : <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2585,10 +2590,10 @@
     <string name="dark_theme_timing_category" msgid="8115211396437085819">"Programmation"</string>
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"Standard"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"Thème sombre standard"</string>
-    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Active le thème sombre pour votre appareil et les applis qui le prennent en charge"</string>
+    <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Active le thème sombre pour votre appareil et les applis compatibles"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Étendu"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Thème sombre étendu"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Applique automatiquement le thème sombre à la plupart des applis qui ne le prennent pas en charge, ce qui contribue à améliorer l\'accessibilité."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Applique automatiquement le thème sombre à la plupart des applis non compatibles, afin d\'améliorer l\'accessibilité."</string>
     <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"En cas de problème avec l\'option étendue, utilisez l\'option standard."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"forcer l\'inversion, inversion des couleurs, contraste"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Thème sombre étendu"</string>
@@ -3167,7 +3172,7 @@
     <string name="credential_using_for_wifi" msgid="6134471366188592845">"En cours d\'utilisation pour <xliff:g id="SSID">%s</xliff:g>"</string>
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"Installé pour le Wi-Fi (en cours d\'utilisation)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"Supprimer l\'intégralité du contenu ?"</string>
-    <string name="credentials_erased" msgid="9121052044566053345">"Les identifiants sont effacés."</string>
+    <string name="credentials_erased" msgid="9121052044566053345">"Le stockage des identifiants est effacé."</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"Impossible eff. stockage identifiants."</string>
     <string name="usage_access_title" msgid="8784394396356369568">"Applis ayant accès aux données d\'utilisation des applis"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"Certificat CA"</string>
@@ -3620,11 +3625,13 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Appareil"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"Clavier, pavé tactile, écran, son"</string>
+    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
+    <skip />
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Luminosité, couleur, thème sombre, écran de verrouillage, texte"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Sélection du clavier, outils"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Vitesse du curseur, personnalisation des boutons, défilement"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"Volume, haut-parleurs, micros"</string>
+    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
+    <skip />
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Personnalisation du curseur, actions au clic, défilement"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Indisponible, car le NFC est désactivé"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Pour utiliser cette option, vous devez d\'abord installer une application de paiement"</string>

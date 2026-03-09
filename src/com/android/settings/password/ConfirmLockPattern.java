@@ -254,6 +254,7 @@ public class ConfirmLockPattern extends ConfirmDeviceCredentialBaseActivity {
                 }
                 return false;
             });
+            mLockPatternView.setClickable(false);
             mLockPatternView.setClickInputSupported(isPatternInputClickSupported());
             updateStage(Stage.NeedToUnlock);
 

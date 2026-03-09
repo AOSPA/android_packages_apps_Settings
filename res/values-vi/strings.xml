@@ -850,6 +850,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Ghép nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
+    <skip />
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Xác nhận để thêm bộ phận thứ hai của thiết bị âm thanh"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Mã ghép nối Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Nhập mã ghép nối, sau đó nhấn Quay lại hoặc Enter"</string>
@@ -863,7 +865,11 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Cho phép truy cập cả danh bạ và nhật ký cuộc gọi"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Thông tin sẽ được sử dụng cho tính năng thông báo cuộc gọi và nhiều tính năng khác"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Kiểm tra mã ghép nối"</string>
+    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
+    <skip />
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Kiểm tra xem mã này có khớp với mã trên <xliff:g id="DEVICE_NAME">%1$s</xliff:g> hay không.\n\nĐể bảo mật, bạn không nên nhập mã này ở bất cứ đâu."</string>
+    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Không thể kết nối với <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Thiết bị có sẵn"</string>
@@ -899,7 +905,8 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Thử nghiệm. Tăng chất lượng âm thanh."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Pin"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Pin, đang sạc"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Thử khởi động lại <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Nếu cách này không hiệu quả, hãy xoá thiết bị. Để đảm bảo tính bảo mật, bạn chỉ nên ghép nối lại thiết bị này khi không ở nơi công cộng.\n\nNếu thiết bị này không ở gần, bạn không cần làm gì cả."</string>
+    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
+    <skip />
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Ghi nhật ký chi tiết về quá trình in"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Nhật ký gỡ lỗi bổ sung, bao gồm cả Internet Printing Protocol (IPP) có thể chứa thông tin riêng tư."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Xóa thiết bị"</string>
@@ -1425,7 +1432,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Trình bảo vệ màn hình"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"trình bảo vệ màn hình"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Không dùng được vì chế độ giờ đi ngủ đang bật"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Không hoạt động"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Sử dụng trình bảo vệ màn hình"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Trong khi sạc hoặc gắn vào đế sạc"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Khi gắn vào đế và đang sạc"</string>
@@ -2035,12 +2043,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"Nếu bạn buộc dừng một ứng dụng, ứng dụng đó có thể hoạt động không đúng cách."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Tắt ứng dụng"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"Nếu bạn tắt ứng dụng này, Android và các ứng dụng khác có thể không hoạt động như dự kiến nữa. Lưu ý rằng bạn không thể xóa vì ứng dụng này được cài đặt trước trên thiết bị. Khi vô hiệu hóa, bạn sẽ tắt và ẩn ứng dụng này trên thiết bị của mình."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"Ứng dụng cho người dùng hệ thống"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"Ứng dụng này đang chạy cho Người dùng hệ thống. Những thay đổi bạn thực hiện sẽ ảnh hưởng đến tất cả người dùng trên thiết bị này."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"Chỉ quản trị viên thiết bị mới có thể quản lý ứng dụng này."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Cửa hàng"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"Chi tiết ứng dụng"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"Ứng dụng đã được cài đặt từ <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2292,7 +2297,7 @@
     <string name="modifier_keys_reset" msgid="551170906710422041">"Đặt lại"</string>
     <string name="modifier_keys_picker_title" msgid="244545904150587851">"Chọn phím bổ trợ"</string>
     <string name="modifier_keys_picker_summary" msgid="739397232249560785">"Chọn một phím mới cho <xliff:g id="MODIFIER_KEY_DEFAULT_NAME">%1$s</xliff:g>:"</string>
-    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Hỗ trợ tiếp cận cho bàn phím vật lý"</string>
+    <string name="keyboard_a11y_settings" msgid="2564659018555385728">"Hỗ trợ tiếp cận bằng bàn phím vật lý"</string>
     <string name="keyboard_a11y_settings_summary" msgid="1698531156574098722">"Phím cố định, Phím nảy, Phím chuột"</string>
     <string name="keyboard_repeat_keys_title" msgid="6346877755243280735">"Lặp lại phím"</string>
     <string name="keyboard_repeat_keys_timeout_title" msgid="3411871149974652293">"Độ trễ trước khi lặp lại"</string>
@@ -3059,9 +3064,9 @@
     <string name="hourly_battery_usage_chart" msgid="3098314511076561272">"Biểu đồ mức sử dụng pin hằng giờ"</string>
     <string name="battery_level_percentage" msgid="1433178290838842146">"Phần trăm pin từ <xliff:g id="START_PERCENTAGE">%1$s</xliff:g> đến <xliff:g id="END_PERCENTAGE">%2$s</xliff:g>"</string>
     <string name="battery_usage_breakdown_title_since_last_full_charge" msgid="435006273323199906">"Mức sử dụng pin từ lần sạc đầy gần nhất"</string>
-    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Mức sử dụng pin: <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="battery_usage_breakdown_title_for_slot" msgid="4823179483667671406">"Mức sử dụng pin vào <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="screen_time_category_last_full_charge" msgid="8856908320256057753">"Thời gian sử dụng thiết bị kể từ lần sạc đầy gần đây nhất"</string>
-    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Thời gian sử dụng thiết bị: <xliff:g id="SLOT">%s</xliff:g>"</string>
+    <string name="screen_time_category_for_slot" msgid="8287722270554654959">"Thời gian sử dụng thiết bị vào <xliff:g id="SLOT">%s</xliff:g>"</string>
     <string name="battery_usage_spinner_view_by_apps" msgid="8769276544072098082">"Xem theo ứng dụng"</string>
     <string name="battery_usage_spinner_view_by_systems" msgid="7904104223212160541">"Xem theo hệ thống"</string>
     <string name="battery_usage_less_than_percent" msgid="5873099028895001082">"&lt; <xliff:g id="PERCENTAGE">%1$s</xliff:g>"</string>
@@ -3620,11 +3625,13 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Thiết bị"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"Bàn phím, bàn di chuột, màn hình, âm thanh"</string>
+    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
+    <skip />
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Độ sáng, màu sắc, giao diện tối, màn hình khoá, văn bản"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Chọn bàn phím, công cụ"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Tốc độ con trỏ, tuỳ chỉnh nút, cuộn"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"Âm lượng, loa, micrô"</string>
+    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
+    <skip />
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Tuỳ chỉnh con trỏ, thao tác nhấp, cuộn"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Không dùng được vì NFC đang ở trạng thái tắt"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Để sử dụng tính năng này, trước tiên, hãy cài đặt một ứng dụng thanh toán"</string>

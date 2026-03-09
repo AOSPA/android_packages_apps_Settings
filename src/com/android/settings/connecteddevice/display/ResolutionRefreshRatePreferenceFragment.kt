@@ -20,11 +20,13 @@ import android.app.settings.SettingsEnums
 import android.icu.text.NumberFormat
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
@@ -54,6 +56,9 @@ class ResolutionRefreshRatePreferenceFragment(
     private lateinit var moreOptionsPreference: PreferenceCategory
     private lateinit var refreshRatePreference: PreferenceCategory
     private var displayId: Int by Delegates.notNull()
+
+    private var applyActionView: View? = null
+    private var spinnerActionView: View? = null
 
     private val resolutionFormatter =
         NumberFormat.getNumberInstance(Locale.getDefault()).apply { isGroupingUsed = false }
@@ -121,6 +126,12 @@ class ResolutionRefreshRatePreferenceFragment(
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        applyActionView = null
+        spinnerActionView = null
+    }
+
     private fun setupPreferences() {
         val screen = preferenceScreen ?: return
         topOptionsPreference =
@@ -138,7 +149,8 @@ class ResolutionRefreshRatePreferenceFragment(
     private fun update(state: UiState) {
         // Render resolution preferences
         updateResolutionCategory(topOptionsPreference, state, state.topResolutionItems)
-        topOptionsPreference.isEnabled = state.topResolutionItems.size > 1
+        topOptionsPreference.isEnabled =
+            enablePrefSelection(state) && state.topResolutionItems.size > 1
         updateResolutionCategory(moreOptionsPreference, state, state.moreResolutionItems)
 
         moreOptionsPreference.apply {
@@ -150,6 +162,7 @@ class ResolutionRefreshRatePreferenceFragment(
                 }
             setOnExpandButtonClickListener { viewModel.onMoreOptionsExpanded() }
         }
+        moreOptionsPreference.isEnabled = enablePrefSelection(state)
 
         // Render refresh rate preferences
         refreshRatePreference.apply {
@@ -177,7 +190,7 @@ class ResolutionRefreshRatePreferenceFragment(
                     }
                 addPreference(pref)
             }
-            isEnabled = state.refreshRateItems.size > 1
+            isEnabled = enablePrefSelection(state) && state.refreshRateItems.size > 1
         }
 
         activity?.invalidateMenu()
@@ -263,6 +276,12 @@ class ResolutionRefreshRatePreferenceFragment(
             when (confirmed) {
                 ResolutionChangeConfirmationState.ACCEPT -> viewModel.onConfirmationResult(true)
                 ResolutionChangeConfirmationState.REVERT -> viewModel.onConfirmationResult(false)
+                ResolutionChangeConfirmationState.NO_ACTION -> {
+                    // Expected behavior during resolution change, if this view is located on the
+                    // display being updated.
+                    // Do nothing, ViewModel will retain state and reshow the dialog.
+                    logInfo("Dialog dismissed due to configuration change. Waiting for recreation.")
+                }
                 else -> {
                     logError("Unexpected confirmed state $confirmed, this should never happen")
                 }
@@ -270,38 +289,53 @@ class ResolutionRefreshRatePreferenceFragment(
         }
     }
 
+    private fun enablePrefSelection(uiState: UiState): Boolean = !uiState.isApplying
+
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         val applyItem = menu.add(Menu.NONE, Menu.FIRST, 0, R.string.apply)
         applyItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS)
-        applyItem.setActionView(R.layout.resolution_change_apply_button)
-        val actionView = applyItem.actionView
-        if (actionView == null) {
-            logError("Missing action view even after setActionView(), this should never happen")
-            return
-        }
-        actionView
-            .findViewById<Button>(R.id.resolution_change_apply_button_view)
-            .setOnClickListener { viewModel.onApplyClicked() }
+
+        val inflater = LayoutInflater.from(requireContext())
+
+        applyActionView =
+            inflater.inflate(R.layout.resolution_change_apply_button, null).apply {
+                findViewById<Button>(R.id.resolution_change_apply_button_view).setOnClickListener {
+                    viewModel.onApplyClicked()
+                }
+            }
+
+        spinnerActionView =
+            ProgressBar(requireContext(), null, android.R.attr.progressBarStyleSmall).apply {
+                val padding = (16 * resources.displayMetrics.density).toInt()
+                setPadding(padding, 0, padding, 0)
+            }
+
+        applyItem.actionView = applyActionView
     }
 
     override fun onPrepareMenu(menu: Menu) {
-        if (viewModel.uiState.value == null) {
+        val uiState = viewModel.uiState.value
+        if (uiState == null) {
             // If state is null, fragment will exit on ViewModel#observe
             logWarn("Missing UiState, fragment will exit")
             return
         }
-        val applyItem = menu.findItem(Menu.FIRST)
-        val actionView = applyItem.actionView
-        if (actionView == null) {
-            logError("Missing action view even after setActionView(), this should never happen")
-            return
-        }
+        val applyItem = menu.findItem(Menu.FIRST) ?: return
 
-        val isVisible =
-            viewModel.uiState.value?.let { it.pendingMode.modeId != it.currentActiveMode.modeId }
-                ?: false
-        val applyButton: Button = actionView.findViewById(R.id.resolution_change_apply_button_view)
-        applyButton.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+        if (uiState.isApplying) {
+            if (applyItem.actionView !== spinnerActionView) {
+                applyItem.actionView = spinnerActionView
+            }
+        } else {
+            if (applyItem.actionView !== applyActionView) {
+                applyItem.actionView = applyActionView
+            }
+
+            val isVisible = uiState.pendingMode.modeId != uiState.currentActiveMode.modeId
+            val applyButton: Button? =
+                applyActionView?.findViewById(R.id.resolution_change_apply_button_view)
+            applyButton?.visibility = if (isVisible) View.VISIBLE else View.INVISIBLE
+        }
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean = false

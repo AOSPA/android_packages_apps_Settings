@@ -79,6 +79,25 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         viewModel.uiState.observeForever(uiStateObserver)
     }
 
+    private fun simulateModeApplied(mode: Mode) {
+        val updatedEnabledDisplays = mDisplays.toMutableList()
+        val displayIndex = updatedEnabledDisplays.indexOfFirst { it.id == EXTERNAL_DISPLAY_ID }
+        updatedEnabledDisplays[displayIndex] =
+            DisplayDevice(
+                EXTERNAL_DISPLAY_ID,
+                externalDisplay.uniqueId,
+                externalDisplay.name,
+                mode,
+                externalDisplay.supportedModes,
+                DisplayIsEnabled.YES,
+                true,
+                0,
+                isHdrSupported = externalDisplay.isHdrSupported,
+            )
+        updateDisplaysAndTopology(updatedEnabledDisplays)
+        mListener.update(EXTERNAL_DISPLAY_ID)
+    }
+
     @Test
     fun init_loadsCorrectInitialState() {
         setupViewModel()
@@ -88,6 +107,7 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         assertThat(state.currentActiveMode).isEqualTo(mode)
         assertThat(state.pendingMode).isEqualTo(mode)
         assertThat(viewModel.confirmationDialogEvent.value).isNull()
+        assertThat(state.isApplying).isFalse()
 
         assertThat(state.topResolutionItems)
             .containsExactly(
@@ -153,6 +173,46 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
     }
 
     @Test
+    fun displayDisconnected_duringConfirmationDialog_clearsUiState() {
+        // Setup ViewModel and enter "Applying" state
+        setupViewModel()
+        viewModel.onResolutionSelected(viewModel.uiState.value!!.moreResolutionItems.first())
+        val pendingMode = viewModel.uiState.value!!.pendingMode
+
+        // Trigger the confirmation dialog state
+        viewModel.onApplyClicked()
+        simulateModeApplied(pendingMode)
+
+        // Verify confirmation state
+        assertThat(viewModel.confirmationDialogEvent.value).isNotNull()
+
+        // Simulate display disconnection
+        whenever(mMockedInjector.getDisplay(EXTERNAL_DISPLAY_ID)).thenReturn(null)
+        mListener.update(EXTERNAL_DISPLAY_ID)
+
+        // Assert UI state is cleared despite the active dialog
+        assertThat(viewModel.uiState.value).isNull()
+        assertThat(viewModel.confirmationDialogEvent.value).isNull()
+    }
+
+    @Test
+    fun displayDisconnected_whileApplying_clearsUiState() {
+        setupViewModel()
+        viewModel.onResolutionSelected(viewModel.uiState.value!!.moreResolutionItems.first())
+
+        // Start the mode change (isApplying = true)
+        viewModel.onApplyClicked()
+
+        // Simulate disconnect before activeMode is updated
+        whenever(mMockedInjector.getDisplay(EXTERNAL_DISPLAY_ID)).thenReturn(null)
+        mListener.update(EXTERNAL_DISPLAY_ID)
+
+        // Assert UI state is cleared
+        assertThat(viewModel.uiState.value).isNull()
+        assertThat(viewModel.confirmationDialogEvent.value).isNull()
+    }
+
+    @Test
     fun onResolutionSelected_newResolution_selectsHighestRefreshRateAndUpdatesState() {
         setupViewModel()
         // This resolution has 50Hz and 60Hz refresh rate variants
@@ -192,20 +252,34 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    fun onApplyClicked_setsConfirmationEventAndStartsPreview() {
+    fun onApplyClicked_setsApplyingStateAndCallsInjector() {
         setupViewModel()
         viewModel.onResolutionSelected(viewModel.uiState.value!!.moreResolutionItems.first())
         val uiState = viewModel.uiState.value!!
         val pendingMode = uiState.pendingMode
-        val currentActiveMode = uiState.currentActiveMode
 
         viewModel.onApplyClicked()
+
+        val updatedState = viewModel.uiState.value!!
+        assertThat(updatedState.isApplying).isTrue()
+        assertThat(viewModel.confirmationDialogEvent.value).isNull()
+        verify(mMockedInjector).setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, false)
+    }
+
+    @Test
+    fun displayUpdate_afterApply_showsConfirmationDialog() {
+        setupViewModel()
+        val originalMode = viewModel.uiState.value!!.currentActiveMode
+        viewModel.onResolutionSelected(viewModel.uiState.value!!.moreResolutionItems.first())
+        val pendingMode = viewModel.uiState.value!!.pendingMode
+        viewModel.onApplyClicked()
+
+        simulateModeApplied(pendingMode)
 
         val confirmationDialogEvent = viewModel.confirmationDialogEvent.value
         assertThat(confirmationDialogEvent).isNotNull()
         assertThat(confirmationDialogEvent!!.newMode).isEqualTo(pendingMode)
-        assertThat(confirmationDialogEvent.previousMode).isEqualTo(currentActiveMode)
-        verify(mMockedInjector).setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, false)
+        assertThat(confirmationDialogEvent.previousMode).isEqualTo(originalMode)
     }
 
     @Test
@@ -216,6 +290,8 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         val pendingMode = uiState.pendingMode
         viewModel.onApplyClicked()
 
+        simulateModeApplied(pendingMode)
+
         viewModel.onConfirmationResult(true)
         val updatedState = viewModel.uiState.value!!
 
@@ -223,6 +299,8 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         assertThat(updatedState.currentActiveMode).isEqualTo(pendingMode)
         // The pending mode should be synced to the new original mode
         assertThat(updatedState.pendingMode).isEqualTo(pendingMode)
+        // Applying state is concluded
+        assertThat(updatedState.isApplying).isFalse()
         // The dialog event should be cleared
         assertThat(viewModel.confirmationDialogEvent.value).isNull()
         verify(mMockedInjector).setUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID, pendingMode, true)
@@ -234,7 +312,10 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         val uiState = viewModel.uiState.value!!
         val currentActiveMode = uiState.currentActiveMode
         viewModel.onResolutionSelected(uiState.moreResolutionItems.first())
+        val pendingMode = viewModel.uiState.value!!.pendingMode
         viewModel.onApplyClicked()
+
+        simulateModeApplied(pendingMode)
 
         viewModel.onConfirmationResult(false)
         val updatedState = viewModel.uiState.value!!
@@ -243,6 +324,8 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
         assertThat(updatedState.currentActiveMode).isEqualTo(currentActiveMode)
         // The pending mode should be reverted back to the original mode
         assertThat(updatedState.pendingMode).isEqualTo(currentActiveMode)
+        // Applying state is concluded
+        assertThat(updatedState.isApplying).isFalse()
         // The dialog event should be cleared
         assertThat(viewModel.confirmationDialogEvent.value).isNull()
         verify(mMockedInjector).resetUserPreferredDisplayMode(EXTERNAL_DISPLAY_ID)

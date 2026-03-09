@@ -850,6 +850,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"બ્લૂટૂથ"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"બ્લૂટૂથ"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> સાથે જોડાણ કરીએ?"</string>
+    <string name="bluetooth_pairing_again_request" msgid="1394430519292575085">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> સાથે ફરી જોડાણ કરીએ?"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"તમારા ઑડિયો ડિવાઇસના બીજા ભાગને ઉમેરવાનું કન્ફર્મ કરો"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"બ્લૂટૂથનો જોડી બનાવવાનો કોડ"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"જોડી બનાવવાનો કોડ લખો તે પછી Return અથવા Enter દબાવો"</string>
@@ -863,7 +864,9 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"સંપર્કો અને કૉલ ઇતિહાસના ઍક્સેસની પણ મંજૂરી આપો"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"માહિતીનો ઉપયોગ કૉલની ઘોષણાઓ અને વધુ બાબતો માટે કરવામાં આવશે"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"જોડાણ કરવાના કોડ ચેક કરો"</string>
+    <string name="bluetooth_pairing_again_confirmation_title" msgid="838944639700876861">"ફરીથી જોડાણ કરો"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"આ કોડ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> પરના કોડ સાથે મેળ ખાય છે કે નહીં તે ચેક કરો.\n\nતમારી સુરક્ષા માટે, આ કોડ ક્યાંય પણ દાખલ કરશો નહીં."</string>
+    <string name="bluetooth_repairing_msg" msgid="4359999881389087827">"આ ડિવાઇસનું અગાઉ જોડાણ કરવામાં આવ્યું હતું અને તે ફરીથી જોડાણ કરવાનો પ્રયાસ કરી રહ્યું છે.\nજો તમે સાર્વજનિક જગ્યાએ હો, તો સાવચેતી સાથે આગળ વધો."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> સાથે કનેક્ટ કરી શકાયું નથી."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"ઉપલબ્ધ ડિવાઇસ"</string>
@@ -899,7 +902,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"પ્રાયોગિક. ઑડિયો ક્વૉલિટી બહેતર બનાવે છે."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"બૅટરી"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"બૅટરી, ચાર્જિંગ"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ને ફરી શરૂ કરવાનો પ્રયાસ કરો. જો તે કામ ન કરે, તો ડિવાઇસને ભૂલી જાઓ. તમારી સુરક્ષા માટે, જ્યારે તમે સાર્વજનિક જગ્યા પર ન હોવ ત્યારે જ તેને ફરીથી જોડો.\n\nજો આ ડિવાઇસ નજીકમાં ન હોય, તો તમારે કંઈ કરવાની જરૂર નથી."</string>
+    <string name="device_details_key_missing_title" msgid="3747991896959671040">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>ને જોડાણ બનાવવાના મોડમાં મૂકો અને ફરીથી કનેક્ટ કરવાનો પ્રયાસ કરો.\n\nજો આ ડિવાઇસ નજીકમાં ન હોય, તો તમારે કંઈ કરવાની જરૂર નથી."</string>
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"વર્બોઝ પ્રિન્ટ લૉગિંગ"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"જેમાં ખાનગી માહિતી હોઈ શકે એવા ઇન્ટરનેટ પ્રિન્ટિંગ પ્રોટોકૉલ (IPP) સહિતના વધારાના ડિબગ લૉગ."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ડિવાઇસને ભૂલી જાઓ"</string>
@@ -1425,7 +1428,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"સ્ક્રીન સેવર"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"સ્ક્રીનસેવર"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"ઉપલબ્ધ નથી, કારણ કે બેડટાઇમ મોડ ચાલુ છે"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"ઉપલબ્ધ નથી"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"સ્ક્રીન સેવરનો ઉપયોગ કરો"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ચાર્જ થતું હોય અથવા ડૉક કરેલ હોય ત્યારે"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"ડૉક અને ચાર્જ કરતી વખતે"</string>
@@ -2035,12 +2039,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"જો તમે કોઈ ઍપને ફરજિયાત બંધ કરો, તો તે અયોગ્ય વર્તન કરી શકે છે."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"ઍપ બંધ કરો"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"જો તમે આ ઍપ બંધ કરશો, તો Android અને અન્ય ઍપ અપેક્ષા પ્રમાણે કાર્ય કરી શકશે નહીં. યાદ રાખો, તમે આ ઍપને ડિલીટ નહીં કરી શકો, કારણ કે તે તમારા ડિવાઇસમાં પહેલેથી ઇન્સ્ટૉલ થયેલી હતી. બંધ કરીને, તમે આ ઍપને માત્ર બંધ કરો છો અને તમારા ડિવાઇસમાં છુપાવો છો."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"સિસ્ટમના વપરાશકર્તાની ઍપ"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"આ ઍપ સિસ્ટમના વપરાશકર્તા માટે ચાલી રહી છે. તમે કરેલા ફેરફારો આ ડિવાઇસ પરના બધા વપરાશકર્તાઓને અસર કરશે."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"માત્ર ડિવાઇસના ઍડમિન જ આ ઍપ મેનેજ કરી શકે છે."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"ઍપની વિગતો"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"<xliff:g id="APP_STORE">%1$s</xliff:g>માંથી ઇન્સ્ટૉલ કરેલી ઍપ"</string>
@@ -2250,7 +2251,7 @@
     <string name="three_finger_tap_recent_apps" msgid="5578228979519733605">"તાજેતરની ઍપ જુઓ"</string>
     <string name="three_finger_tap_launch_app_title" msgid="55761877549896819">"બીજી ઍપ ખોલો"</string>
     <string name="three_finger_tap_launch_app_summary" msgid="2015894823281420733">"ઇન્સ્ટૉલ કરેલી ઍપની સૂચિમાંથી પસંદ કરો"</string>
-    <string name="gesture_title_go_home" msgid="3682238648647225933">"હોમ પર જાઓ"</string>
+    <string name="gesture_title_go_home" msgid="3682238648647225933">"હોમ સ્ક્રીન પર જાઓ"</string>
     <string name="gesture_summary_go_home" msgid="6409031586904205741">"તમારા ટચપૅડ પર ગમે ત્યાં ત્રણ આંગળી વડે ઉપરની તરફ સ્વાઇપ કરો"</string>
     <string name="gesture_title_go_back" msgid="6619462058488419802">"પાછા જાઓ"</string>
     <string name="gesture_summary_go_back" msgid="4981604277892236888">"ડાબે કે જમણેથી ત્રણ આંગળી વડે સ્વાઇપ કરો"</string>
@@ -2586,10 +2587,10 @@
     <string name="accessibility_standard_dark_theme_title" msgid="7755139172613415921">"સ્ટૅન્ડર્ડ"</string>
     <string name="accessibility_standard_dark_theme_title_in_search" msgid="3200639364802344024">"સ્ટૅન્ડર્ડ ડાર્ક થીમ"</string>
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"આ સુવિધા, ડાર્ક થીમને સપોર્ટ કરતા તમારા ડિવાઇસ અને ઍપ માટે ડાર્ક થીમ ચાલુ કરે છે"</string>
-    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"મોટું કરેલું"</string>
+    <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"વિસ્તૃત"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"મોટી કરેલી ડાર્ક થીમ"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"આ સુવિધા, ડાર્ક થીમને સપોર્ટ ન કરતી મોટાભાગની ઍપ પર ઑટોમૅટિક રીતે ડાર્ક થીમ લાગુ કરે છે, જેને કારણે ઍક્સેસિબિલિટી બહેતર બનાવવામાં મદદ મળે છે"</string>
-    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"જો તમને મોટું કરેલા વિકલ્પ સાથે સમસ્યાઓ જોવા મળે, તો સ્ટૅન્ડર્ડ વિકલ્પનો ઉપયોગ કરો."</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"જો તમને \'વિસ્તૃત\' વિકલ્પ સાથે સમસ્યાઓ જોવા મળે, તો \'સ્ટૅન્ડર્ડ\' વિકલ્પનો ઉપયોગ કરો."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"ઉલટાવવાની ફરજ પાડો, વિપરીત રંગમાં બદલવું, કૉન્ટ્રાસ્ટ"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"વિસ્તૃત ડાર્ક થીમ"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"ડાર્ક થીમના મોટા કરેલા સેટિંગ"</string>
@@ -3167,7 +3168,7 @@
     <string name="credential_using_for_wifi" msgid="6134471366188592845">"<xliff:g id="SSID">%s</xliff:g> માટે ઉપયોગ કરી રહ્યાં છીએ"</string>
     <string name="credential_for_wifi_in_use" msgid="7276290656840986618">"વાઇ-ફાઇ માટે ઇન્સ્ટૉલ કરેલા છે (ઉપયોગમાં છે)"</string>
     <string name="credentials_reset_hint" msgid="4054601857203464867">"તમામ કન્ટેન્ટ કાઢી નાખીએ?"</string>
-    <string name="credentials_erased" msgid="9121052044566053345">"ઓળખપત્ર સ્ટોરેજ ભૂસી નાખ્યું છે."</string>
+    <string name="credentials_erased" msgid="9121052044566053345">"ક્રિડેન્શ્યલ સ્ટોરેજ કાઢી નાખ્યો"</string>
     <string name="credentials_not_erased" msgid="3611058412683184031">"ઓળખપત્ર સ્ટોરેજ ભૂસી શકાયો નથી."</string>
     <string name="usage_access_title" msgid="8784394396356369568">"ઍપ વપરાશના ડેટાનો ઍક્સેસ ધરાવતી ઍપ"</string>
     <string name="ca_certificate" msgid="3076484307693855611">"CA સર્ટિફિકેટ"</string>
@@ -3620,11 +3621,11 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"બ્લૂટૂથ, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"બ્લૂટૂથ, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"ડિવાઇસ"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"કીબોર્ડ, ટચપૅડ, ડિસ્પ્લે, સાઉન્ડ"</string>
+    <string name="device_dashboard_summary" msgid="534835339280267939">"ટચપૅડ, કીબોર્ડ, ડિસ્પ્લે, સાઉન્ડ"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"બ્રાઇટનેસ, રંગ, ડાર્ક થીમ, લૉક સ્ક્રીન, ટેક્સ્ટ"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"કીબોર્ડની પસંદગી, ટૂલ"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"કર્સરની સ્પીડ, બટન કસ્ટમાઇઝેશન, સ્ક્રોલિંગ"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"વૉલ્યૂમ, સ્પીકર, માઇક્રોફોન"</string>
+    <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"વૉલ્યૂમ, સ્પીકર, માઇક્રોફોન"</string>
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"કર્સર કસ્ટમાઇઝેશન, ક્લિક ઍક્શન, સ્ક્રોલિંગ"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"ઉપલબ્ધ નથી કારણ કે NFC બંધ છે"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ઉપયોગ કરવા માટે, પહેલાં ચુકવણી ઍપ ઇન્સ્ટૉલ કરો"</string>
@@ -5320,8 +5321,7 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"બાહ્ય લિંક જોવા માટે મોબાઇલ કે વાઇ-ફાઇ નેટવર્ક જરૂરી છે."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"ઇમર્જન્સી સર્વિસવાળી ટેક્સ્ટિંગ સુવિધા કદાચ બધા વિસ્તારોમાં ઉપલબ્ધ ન પણ હોય."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"સેટિંગમાં એકાઉન્ટ સંબંધિત ફેરફારો દેખાવામાં થોડો સમય લાગી શકે છે. વિગતો માટે <xliff:g id="CARRIER_NAME">%1$s</xliff:g>નો સંપર્ક કરો."</string>
-    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
-    <skip />
+    <string name="satellite_footer_content_section_8" msgid="7617809843970032785">"સૅટલાઇટ કનેક્ટિવિટી માટે ઑપ્ટિમાઇઝ કરેલી બધી ઍપ જોવા માટે, તમારા મોબાઇલ ઑપરેટરની વેબસાઇટની મુલાકાત લો."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"સૅટલાઇટની કનેક્ટિવિટી વિશે વધુ"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> ચાલુ કરી શકતા નથી"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> ચાલુ કરવા માટે, પહેલા સૅટલાઇટ કનેક્શન સમાપ્ત કરો"</string>
@@ -5336,8 +5336,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"તમારા ફોનમાં સપોર્ટ કરતી ઍપ"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"સિમ કાર્ડ ઉમેરી શકાતું નથી"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"તમે સિમ કાર્ડ ઉમેરતાં પહેલાં સૅટલાઇટ કનેક્શન સમાપ્ત કરો"</string>
-    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
-    <skip />
+    <string name="satellite_toggle_error" msgid="4533772077620854258">"કંઈક ખોટું થયું. સૅટલાઇટ કનેક્ટિવિટી ચાલુ/બંધ કરી શક્યા નથી."</string>
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"બ્લૂટૂથ બંધ છે"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"બ્લૂટૂથ સાથે કનેક્ટ કરેલું હોય ત્યારે એરપ્લેન મોડ ફોન અને વૉચ જેવા સપોર્ટેડ ડિવાઇસ પર સિંક થશે"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ઍક્સેસ પૉઇન્ટના નામ"</string>
@@ -6092,8 +6091,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"ઍપની સુરક્ષા"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"ડિવાઇસ અનલૉક કરવું"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"એકાઉન્ટની સુરક્ષા"</string>
-    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
-    <skip />
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"ખોવાયેલા ડિવાઇસની સુરક્ષા"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"સિસ્ટમ અને અપડેટ"</string>
     <string name="location_settings" msgid="6833222354060094170">"લોકેશનનો ઍક્સેસ"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"લોકેશનનો ઍક્સેસ ધરાવતી ઍપ અને સેવાઓ જુઓ"</string>
