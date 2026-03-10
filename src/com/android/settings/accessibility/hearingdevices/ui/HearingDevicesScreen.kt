@@ -274,7 +274,7 @@ open class HearingDevicesScreen(context: Context) :
     }
 
     class HearingDeviceRoutingPreferenceCategory(
-        key: String = "hearing_routing_category",
+        key: String = "hearing_device_routing_category",
         purpose: Int = R.string.hearing_device_audio_routing_purpose,
         title: Int = R.string.accessibility_hearing_device_routing_title,
     ) : PreferenceCategory(key, purpose, title), PreferenceAvailabilityProvider {
