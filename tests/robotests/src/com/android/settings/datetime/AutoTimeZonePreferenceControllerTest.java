@@ -29,7 +29,16 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.never;
 
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.DevicePolicyResourcesManager;
+import android.app.admin.DpcAuthority;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyEnforcementInfo;
+import android.app.admin.PolicyIdentifier;
+import android.app.admin.flags.Flags;
 import android.app.time.Capabilities;
 import android.app.time.LocationTimeZoneAlgorithmStatus;
 import android.app.time.TelephonyTimeZoneAlgorithmStatus;
@@ -40,29 +49,41 @@ import android.app.time.TimeZoneConfiguration;
 import android.app.time.TimeZoneDetectorStatus;
 import android.content.Context;
 import android.os.UserHandle;
-
-import androidx.preference.Preference;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import com.google.testing.junit.testparameterinjector.TestParameters;
+import java.util.List;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import com.android.settings.R;
+import com.android.settings.testutils.DevicePolicyUtils;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricTestParameterInjector;
 import org.robolectric.RuntimeEnvironment;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricTestParameterInjector.class)
 public class AutoTimeZonePreferenceControllerTest {
 
     @Mock
     private UpdateTimeAndDateCallback mCallback;
     private Context mContext;
-    private Preference mPreference;
+    private RestrictedSwitchPreference mPreference;
     @Mock
     private TimeManager mTimeManager;
+    @Mock
+    private DevicePolicyManager mDpm;
+    @Mock
+    private DevicePolicyResourcesManager mResources;
+
+    @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private AutoTimeZonePreferenceController mController;
 
@@ -71,9 +92,11 @@ public class AutoTimeZonePreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = spy(RuntimeEnvironment.application);
 
-        mPreference = new Preference(mContext);
+        mPreference = spy(new RestrictedSwitchPreference(mContext));
 
         when(mContext.getSystemService(TimeManager.class)).thenReturn(mTimeManager);
+        when(mContext.getSystemService(DevicePolicyManager.class)).thenReturn(mDpm);
+        when(mDpm.getResources()).thenReturn(mResources);
 
         mController = new AutoTimeZonePreferenceController(mContext, "test_key");
         mController.setFromSUW(false);
@@ -257,6 +280,89 @@ public class AutoTimeZonePreferenceControllerTest {
         verify(mTimeManager).updateTimeZoneConfiguration(configuration);
     }
 
+    @Test
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_DISABLED +"}")
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_ENABLED +"}")
+    @EnableFlags(Flags.FLAG_POLICY_STREAMLINING_AUTO_TIME_ZONE)
+    public void updateState_autoTimeZonePolicyForcedValues_shouldDisableSetting(
+            int autoTimeZonePolicyValue) {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mDpm.getResolvedDeviceWidePolicy(
+                PolicyIdentifier.AUTO_TIME_ZONE)).thenReturn(autoTimeZonePolicyValue);
+        EnforcingAdmin admin = setupEnforcingAdminForPolicy();
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setDisabledByAdmin(admin);
+    }
+
+    @Test
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_DISABLED +"}")
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_ENABLED +"}")
+    @DisableFlags(Flags.FLAG_POLICY_STREAMLINING_AUTO_TIME_ZONE)
+    public void updateState_autoTimeZonePolicyForcedValues_shouldNotDisableSetting_flagDisabled(
+            int autoTimeZonePolicyValue) {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mDpm.getResolvedDeviceWidePolicy(
+                PolicyIdentifier.AUTO_TIME_ZONE)).thenReturn(autoTimeZonePolicyValue);
+        EnforcingAdmin admin = setupEnforcingAdminForPolicy();
+
+        mController.updateState(mPreference);
+
+        verify(mPreference, never()).setDisabledByAdmin(admin);
+    }
+
+    @Test
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_USER_CHOICE +"}")
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_DISABLED_UNENFORCED +
+        "}")
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_ENABLED_UNENFORCED +
+        "}")
+    @EnableFlags(Flags.FLAG_POLICY_STREAMLINING_AUTO_TIME_ZONE)
+    public void updateState_autoTimeZoneUnenforced_settingDisabled_userRestrictionChecked(
+            int autoTimeZonePolicyValue) {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mDpm.getResolvedDeviceWidePolicy(
+                PolicyIdentifier.AUTO_TIME_ZONE)).thenReturn(autoTimeZonePolicyValue);
+        setupEnforcingAdminForPolicy();
+
+        mController.updateState(mPreference);
+
+        verify(mPreference).setDisabledByAdmin((EnforcingAdmin) null);
+        verify(mPreference).checkRestrictionAndSetDisabled(
+                android.os.UserManager.DISALLOW_CONFIG_DATE_TIME, UserHandle.myUserId());
+    }
+
+    @Test
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_USER_CHOICE +"}")
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_DISABLED_UNENFORCED +
+        "}")
+    @TestParameters("{autoTimeZonePolicyValue: " + PolicyIdentifier.AUTO_TIME_ENABLED_UNENFORCED +
+        "}")
+    @DisableFlags(Flags.FLAG_POLICY_STREAMLINING_AUTO_TIME_ZONE)
+    public void
+        updateState_autoTimeZoneUnenforced_settingDisabled_userRestrictionSkipped_flagDisabled(
+            int autoTimeZonePolicyValue) {
+        TimeZoneCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
+                /* autoSupported= */true, /* autoEnabled= */true);
+        when(mTimeManager.getTimeZoneCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mDpm.getResolvedDeviceWidePolicy(
+                PolicyIdentifier.AUTO_TIME_ZONE)).thenReturn(autoTimeZonePolicyValue);
+        setupEnforcingAdminForPolicy();
+
+        mController.updateState(mPreference);
+
+        verify(mPreference, never()).setDisabledByAdmin((EnforcingAdmin) null);
+        verify(mPreference, never()).checkRestrictionAndSetDisabled(
+                android.os.UserManager.DISALLOW_CONFIG_DATE_TIME, UserHandle.myUserId());
+    }
+
     private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
             boolean autoSupported, boolean autoEnabled, boolean telephonySupported) {
         return createCapabilitiesAndConfig(autoSupported, autoEnabled, telephonySupported, false);
@@ -297,5 +403,13 @@ public class AutoTimeZonePreferenceControllerTest {
     private static TimeZoneCapabilitiesAndConfig createCapabilitiesAndConfig(
             boolean autoSupported, boolean autoEnabled) {
         return createCapabilitiesAndConfig(autoSupported, autoEnabled, false);
+    }
+
+    private EnforcingAdmin setupEnforcingAdminForPolicy() {
+        EnforcingAdmin admin = DevicePolicyUtils.DPC_ADMIN;
+        when(mDpm.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.AUTO_TIMEZONE_POLICY,
+                UserHandle.myUserId())).thenReturn(new PolicyEnforcementInfo(List.of(admin)));
+        return admin;
     }
 }

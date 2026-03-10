@@ -45,10 +45,8 @@ import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
-import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [36]) // BAKLAVA
 class ShadePanelsFragmentTest {
 
     @get:Rule val setFlagsRule = SetFlagsRule()
@@ -109,7 +107,7 @@ class ShadePanelsFragmentTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SCENE_CONTAINER)
+    @EnableFlags(Flags.FLAG_SCENE_CONTAINER, Flags.FLAG_DUAL_SHADE)
     fun searchIndexProvider_sceneContainerEnabled_isIndexed() {
         val allKeys =
             ShadePanelsFragment.SEARCH_INDEX_DATA_PROVIDER.getRawDataToIndex(

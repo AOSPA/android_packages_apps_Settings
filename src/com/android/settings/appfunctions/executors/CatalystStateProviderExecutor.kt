@@ -86,8 +86,7 @@ class CatalystStateProviderExecutor(
                                         try {
                                             buildPerScreenDeviceStates(
                                                 screenKey,
-                                                appFunctionType,
-                                                perScreenConfigMap[screenKey]?.additionalDescription,
+                                                appFunctionType
                                             )
                                         } catch (e: Exception) {
                                             Log.e(TAG, "error building $screenKey", e)
@@ -114,7 +113,6 @@ class CatalystStateProviderExecutor(
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenKey: String,
         appFunctionType: DeviceStateAppFunctionType,
-        additionalDescription: String?,
     ): List<PerScreenDeviceStates> {
         Log.v(TAG, "Building per screen device states for $screenKey")
         val hierarchy = getEnabledPreferencesHierarchy(config, context, appFunctionType, screenKey)
@@ -126,7 +124,6 @@ class CatalystStateProviderExecutor(
                 buildPerScreenDeviceStates(
                     screenMetaData,
                     preferencesHierarchy,
-                    additionalDescription,
                 )
             Log.v(TAG, "Built per screen device states for $screenKey")
             states
@@ -136,7 +133,6 @@ class CatalystStateProviderExecutor(
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenMetaData: PreferenceScreenMetadata,
         preferencesHierarchy: List<PreferenceHierarchyNode>,
-        additionalDescription: String?,
     ): PerScreenDeviceStates? {
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
@@ -178,7 +174,6 @@ class CatalystStateProviderExecutor(
 
         val basicDescription = listOfNotNull(
             screenMetaData.getPreferenceScreenTitle(context)?.toString(),
-            additionalDescription,
             screenMetaData.getPreferencePurpose(context).toString(),
             screenMetaData.accessPreconditionsAsString(context),
         ).filter { it.isNotBlank() }

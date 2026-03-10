@@ -75,6 +75,11 @@ public class BatteryHeaderTextPreferenceController extends BasePreferenceControl
 
     @NonNull
     private CharSequence generateLabel(@NonNull BatteryInfo info) {
+        final CharSequence batteryStatusLabel =
+                mBatterySettingsFeatureProvider.getBatteryStatusLabel(mContext, info);
+        if (batteryStatusLabel != null) {
+            return batteryStatusLabel;
+        }
         if (Utils.containsIncompatibleChargers(mContext, TAG)) {
             return mContext.getString(
                     com.android.settingslib.R.string.battery_info_status_not_charging);

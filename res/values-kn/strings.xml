@@ -850,6 +850,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"ಬ್ಲೂಟೂತ್‌‌"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"ಬ್ಲೂಟೂತ್‌‌"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಜೊತೆ ಪೇರ್ ಮಾಡಬೇಕೇ?"</string>
+    <string name="bluetooth_pairing_again_request" msgid="1394430519292575085">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಜೊತೆ ಪುನಃ ಪೇರ್ ಮಾಡಬೇಕೇ?"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"ನಿಮ್ಮ ಆಡಿಯೊ ಸಾಧನದ ಎರಡನೇ ಭಾಗವನ್ನು ಸೇರಿಸಲು ದೃಢೀಕರಿಸಿ"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"ಬ್ಲೂಟೂತ್ ಜೋಡಿಸುವ ಕೋಡ್"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"ಜೋಡಣೆ ಕೋಡ್‌ ಟೈಪ್‌ ಮಾಡಿ ತದನಂತರ ರಿಟರ್ನ್‌ ಅಥವಾ ಎಂಟರ್‌ ಒತ್ತಿ."</string>
@@ -863,7 +864,9 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"ಸಂಪರ್ಕಗಳು ಮತ್ತು ಕರೆ ಇತಿಹಾಸಕ್ಕೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ಸಹ ಅನುಮತಿಸಿ"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"ಮಾಹಿತಿಯನ್ನು ಕರೆ ಪ್ರಕಟಣೆಗಳು ಮತ್ತು ಇನ್ನಷ್ಟಕ್ಕಾಗಿ ಬಳಸಲಾಗುತ್ತದೆ"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"ಪೇರಿಂಗ್ ಕೋಡ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸಿ"</string>
+    <string name="bluetooth_pairing_again_confirmation_title" msgid="838944639700876861">"ಮತ್ತೆ ಪೇರ್ ಮಾಡಿ"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"ಈ ಕೋಡ್ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ನಲ್ಲಿರುವ ಕೋಡ್‌ಗೆ ಹೊಂದಿಕೆಯಾಗುತ್ತದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ.\n\nನಿಮ್ಮ ಸುರಕ್ಷತೆಗಾಗಿ, ಈ ಕೋಡ್ ಅನ್ನು ಎಲ್ಲಿಯೂ ನಮೂದಿಸಬೇಡಿ."</string>
+    <string name="bluetooth_repairing_msg" msgid="4359999881389087827">"ಈ ಸಾಧನವನ್ನು ಈ ಹಿಂದೆ ಪೇರ್ ಮಾಡಲಾಗಿತ್ತು ಮತ್ತು ಪುನಃ ಪೇರ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದೆ.\nನೀವು ಸಾರ್ವಜನಿಕ ಸ್ಥಳದಲ್ಲಿದ್ದರೆ, ಎಚ್ಚರಿಕೆಯಿಂದ ಮುಂದುವರಿಯಿರಿ."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಗೆ ಸಂಪರ್ಕಪಡಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"ಲಭ್ಯವಿರುವ ಸಾಧನಗಳು"</string>
@@ -899,7 +902,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"ಪ್ರಾಯೋಗಿಕ. ಆಡಿಯೋ ಗುಣಮಟ್ಟ ಸುಧಾರಿಸುತ್ತದೆ."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"ಬ್ಯಾಟರಿ"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"ಬ್ಯಾಟರಿ ಚಾರ್ಜ್ ಆಗುತ್ತಿದೆ"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಅನ್ನು ಮರುಪ್ರಾರಂಭಿಸಲು ಪ್ರಯತ್ನಿಸಿ. ಇದು ಕೆಲಸ ಮಾಡದಿದ್ದರೆ, ಸಾಧನವನ್ನು ತೆಗೆದುಹಾಕಿ. ನಿಮ್ಮ ಭದ್ರತೆಗಾಗಿ, ನೀವು ಸಾರ್ವಜನಿಕ ಸ್ಥಳದಲ್ಲಿ ಇಲ್ಲದಿರುವಾಗ ಮಾತ್ರ ಇದನ್ನು ಪುನಃ ಪೇರ್ ಮಾಡಿ.\n\nಈ ಸಾಧನ ಸಮೀಪದಲ್ಲಿಲ್ಲದಿದ್ದರೆ, ನೀವು ಏನನ್ನೂ ಮಾಡುವ ಅಗತ್ಯವಿಲ್ಲ."</string>
+    <string name="device_details_key_missing_title" msgid="3747991896959671040">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g> ಅನ್ನು ಪೇರಿಂಗ್ ಮೋಡ್‌ನಲ್ಲಿ ಇರಿಸಿ ಮತ್ತು ಪುನಃ ಕನೆಕ್ಟ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸಿ.\n\nಈ ಸಾಧನ ಸಮೀಪದಲ್ಲಿಲ್ಲದಿದ್ದರೆ, ನೀವು ಏನನ್ನೂ ಮಾಡುವ ಅಗತ್ಯವಿಲ್ಲ."</string>
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"ವರ್ಬೋಸ್ ಪ್ರಿಂಟ್ ಲಾಗಿಂಗ್"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"ಖಾಸಗಿ ಮಾಹಿತಿಯನ್ನು ಒಳಗೊಂಡಿರಬಹುದಾದ ಇಂಟರ್ನೆಟ್ ಪ್ರಿಂಟಿಂಗ್ ಪ್ರೊಟೊಕಾಲ್ (IPP) ಸೇರಿದಂತೆ ಹೆಚ್ಚುವರಿ ಡೀಬಗ್ ಲಾಗ್‌ಗಳು."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"ಸಾಧನವನ್ನು ಮರೆತುಬಿಡಿ"</string>
@@ -1425,7 +1428,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"ಸ್ಕ್ರೀನ್ ಸೇವರ್"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"ಸ್ಕ್ರೀನ್‌ಸೇವರ್"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"ಬೆಡ್‌ಟೈಮ್ ಮೋಡ್ ಆನ್ ಆಗಿರುವ ಕಾರಣ ಲಭ್ಯವಿಲ್ಲ"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"ಲಭ್ಯವಿಲ್ಲ"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ಸ್ಕ್ರೀನ್ ಸೇವರ್ ಅನ್ನು ಬಳಸಿ"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ಚಾರ್ಜ್ ಮಾಡುವಾಗ ಅಥವಾ ಡಾಕ್ ಮಾಡುವಾಗ"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"ಡಾಕ್ ಮಾಡಿ ಚಾರ್ಜ್ ಮಾಡುತ್ತಿರುವಾಗ"</string>
@@ -2035,12 +2039,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"ಆ್ಯಪ್‌ ಅನ್ನು ಬಲವಂತವಾಗಿ ಸ್ಥಗಿತಗೊಳಿಸಿದರೆ, ಅದು ಸರಿಯಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸದಿರಬಹುದು."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"ಆ್ಯಪ್‌ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿ"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"ನೀವು ಈ ಆ್ಯಪ್ ಅನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಿದರೆ, Android ಮತ್ತು ಇತರ ಆ್ಯಪ್‌ಗಳು ಇನ್ನು ಮುಂದೆ ಉದ್ದೇಶಿಸಿದ ಹಾಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸದಿರಬಹುದು. ಈ ಆ್ಯಪ್ ಅನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಪೂರ್ವ-ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿರುವುದರಿಂದ, ನೀವು ಅದನ್ನು ಅಳಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ ಎಂಬುದನ್ನು ನೆನಪಿನಲ್ಲಿಡಿ. ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುವ ಮೂಲಕ, ಈ ಆ್ಯಪ್ ಅನ್ನು ನೀವು ಆಫ್ ಮಾಡಬಹುದು ಮತ್ತು ಅದನ್ನು ನಿಮ್ಮ ಸಾಧನದಲ್ಲಿ ಮರೆ ಮಾಡಬಹುದು."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"ಸಿಸ್ಟಂ ಬಳಕೆದಾರರ ಆ್ಯಪ್"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"ಈ ಆ್ಯಪ್ ಸಿಸ್ಟಮ್ ಬಳಕೆದಾರರಿಗಾಗಿ ರನ್ ಆಗುತ್ತಿದೆ. ನೀವು ಮಾಡುವ ಬದಲಾವಣೆಗಳು ಈ ಸಾಧನದಲ್ಲಿರುವ ಎಲ್ಲಾ ಬಳಕೆದಾರರ ಮೇಲೆ ಪರಿಣಾಮ ಬೀರುತ್ತವೆ."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"ಸಾಧನದ ನಿರ್ವಾಹಕರು ಮಾತ್ರ ಈ ಆ್ಯಪ್ ಅನ್ನು ನಿರ್ವಹಿಸಬಹುದು."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"ಸ್ಟೋರ್"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"ಆ್ಯಪ್‌ ವಿವರಗಳು"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"<xliff:g id="APP_STORE">%1$s</xliff:g> ನಿಂದ ಆ್ಯಪ್ ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಲಾಗಿದೆ"</string>
@@ -3620,11 +3621,11 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"ಬ್ಲೂಟೂತ್, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"ಬ್ಲೂಟೂತ್, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"ಸಾಧನ"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"ಕೀಬೋರ್ಡ್, ಟಚ್‌ಪ್ಯಾಡ್, ಡಿಸ್‌ಪ್ಲೇ, ಧ್ವನಿ"</string>
+    <string name="device_dashboard_summary" msgid="534835339280267939">"ಟಚ್‌ಪ್ಯಾಡ್, ಕೀಬೋರ್ಡ್, ಡಿಸ್‌ಪ್ಲೇ, ಸೌಂಡ್"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"ಪ್ರಖರತೆ, ಬಣ್ಣ, ಡಾರ್ಕ್ ಥೀಮ್, ಲಾಕ್ ಸ್ಕ್ರೀನ್, ಪಠ್ಯ"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"ಕೀಬೋರ್ಡ್ ಆಯ್ಕೆ, ಟೂಲ್‌ಗಳು"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"ಕರ್ಸರ್ ವೇಗ, ಬಟನ್ ಕಸ್ಟಮೈಸೇಶನ್, ಸ್ಕ್ರಾಲ್ ಮಾಡುವಿಕೆ"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"ವಾಲ್ಯೂಮ್, ಸ್ಪೀಕರ್‌ಗಳು, ಮೈಕ್ರೊಫೋನ್‌ಗಳು"</string>
+    <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"ವಾಲ್ಯೂಮ್, ಸ್ಪೀಕರ್‌ಗಳು, ಮೈಕ್ರೊಫೋನ್‌ಗಳು"</string>
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"ಕರ್ಸರ್ ಕಸ್ಟಮೈಸೇಶನ್, ಕ್ಲಿಕ್ ಆ್ಯಕ್ಷನ್‌ಗಳು, ಸ್ಕ್ರಾಲ್ ಮಾಡುವಿಕೆ"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC ಆಫ್ ಆಗಿರುವ ಕಾರಣ ಲಭ್ಯವಿಲ್ಲ"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"ಬಳಸಲು, ಮೊದಲು ಪಾವತಿ ಆ್ಯಪ್‌ ಅನ್ನು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಿ"</string>
@@ -5320,8 +5321,7 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"ಬಾಹ್ಯ ಲಿಂಕ್‌ಗಳನ್ನು ವೀಕ್ಷಿಸಲು ಮೊಬೈಲ್ ಅಥವಾ ವೈ-ಫೈ ನೆಟ್‌ವರ್ಕ್ ಅಗತ್ಯವಿದೆ."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"ತುರ್ತು ಸೇವೆಗಳ ಮೂಲಕ ಪಠ್ಯ ಸಂದೇಶ ಕಳುಹಿಸುವಿಕೆಯು ಎಲ್ಲಾ ಪ್ರದೇಶಗಳಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲದಿರಬಹುದು."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"ಖಾತೆ ಬದಲಾವಣೆಗಳು ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳಲು ಸ್ವಲ್ಪ ಸಮಯ ತೆಗೆದುಕೊಳ್ಳಬಹುದು. ವಿವರಗಳಿಗಾಗಿ <xliff:g id="CARRIER_NAME">%1$s</xliff:g> ಸಂಪರ್ಕಿಸಿ."</string>
-    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
-    <skip />
+    <string name="satellite_footer_content_section_8" msgid="7617809843970032785">"ಸ್ಯಾಟಲೈಟ್ ಕನೆಕ್ಟಿವಿಟಿಗಾಗಿ ಆಪ್ಟಿಮೈಸ್ ಮಾಡಲಾದ ಎಲ್ಲಾ ಆ್ಯಪ್‌ಗಳನ್ನು ನೋಡಲು, ನಿಮ್ಮ ವಾಹಕದ ವೆಬ್‌ಸೈಟ್‌ಗೆ ಭೇಟಿ ನೀಡಿ."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"ಸ್ಯಾಟಲೈಟ್ ಕನೆಕ್ಟಿವಿಟಿ ಕುರಿತು ಇನ್ನಷ್ಟು"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g> ಅನ್ನು ಆನ್ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g> ಅನ್ನು ಆನ್ ಮಾಡಲು, ಮೊದಲು ಸ್ಯಾಟಲೈಟ್ ಕನೆಕ್ಷನ್ ಅನ್ನು ಕೊನೆಗೊಳಿಸಿ"</string>
@@ -5336,8 +5336,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲಿ ಬೆಂಬಲಿಸುವ ಆ್ಯಪ್‌ಗಳು"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM ಅನ್ನು ಸೇರಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"ನೀವು SIM ಸೇರಿಸುವ ಮೊದಲು ಸೆಟಲೈಟ್ ಕನೆಕ್ಷನ್ ಅನ್ನು ಕೊನೆಗೊಳಿಸಿ"</string>
-    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
-    <skip />
+    <string name="satellite_toggle_error" msgid="4533772077620854258">"ಏನೋ ತಪ್ಪಾಗಿದೆ. ಸ್ಯಾಟಲೈಟ್ ಕನೆಕ್ಟಿವಿಟಿಯನ್ನು ಟಾಗಲ್ ಆನ್/ಆಫ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ."</string>
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"ಬ್ಲೂಟೂತ್ ಆಫ್ ಆಗಿದೆ"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"ಬ್ಲೂಟೂತ್ ಮೂಲಕ ಕನೆಕ್ಟ್ ಮಾಡಿದಾಗ, ಏರ್‌ಪ್ಲೇನ್ ಮೋಡ್, ಫೋನ್ ಮತ್ತು ವಾಚ್ ರೀತಿಯ ಬೆಂಬಲಿತ ಸಾಧನಗಳಾದ್ಯಂತ ಸಿಂಕ್ ಆಗುತ್ತದೆ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"ಆ್ಯಕ್ಸೆಸ್ ಪಾಯಿಂಟ್ ಹೆಸರುಗಳು"</string>
@@ -6092,8 +6091,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"ಆ್ಯಪ್ ಭದ್ರತೆ"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"ಸಾಧನದ ಅನ್‌ಲಾಕ್"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"ಖಾತೆ ಭದ್ರತೆ"</string>
-    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
-    <skip />
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"ಕಳೆದುಹೋದ ಸಾಧನದ ರಕ್ಷಣೆ"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"ಸಿಸ್ಟಂ ಮತ್ತು ಅಪ್‌ಡೇಟ್‌ಗಳು"</string>
     <string name="location_settings" msgid="6833222354060094170">"ಸ್ಥಳದ ಆ್ಯಕ್ಸೆಸ್"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"ಸ್ಥಳಕ್ಕೆ ಆ್ಯಕ್ಸೆಸ್ ಹೊಂದಿರುವ ಆ್ಯಪ್‌ಗಳು ಹಾಗೂ ಸೇವೆಗಳನ್ನು ನೋಡಿ"</string>

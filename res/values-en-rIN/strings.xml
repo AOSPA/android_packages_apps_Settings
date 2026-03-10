@@ -850,6 +850,8 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Pair with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
+    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
+    <skip />
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Confirm to add the second piece of your audio device"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth pairing code"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Type the pairing code then press Return or Enter"</string>
@@ -863,7 +865,11 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Also allow access to contacts and call history"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Info will be used for call announcements and more"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Check pairing codes"</string>
+    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
+    <skip />
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Check if this code matches the one on <xliff:g id="DEVICE_NAME">%1$s</xliff:g>.\n\nFor your security, do not enter this code anywhere."</string>
+    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
+    <skip />
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Couldn\'t connect to <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Available devices"</string>
@@ -899,7 +905,8 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Improves audio quality."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Battery"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Battery, charging"</string>
-    <string name="device_details_key_missing_title" msgid="3568401701538114387">"Try restarting <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. If that doesn\'t work, forget the device. For your security, only pair it again when you aren\'t in a public space.\n\nIf this device isn\'t nearby, you don\'t need to do anything."</string>
+    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
+    <skip />
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Verbose print logging"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Additional debug logs, including Internet Printing Protocol (IPP) that may contain private information."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Forget device"</string>
@@ -1425,7 +1432,8 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Screen saver"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"screensaver"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Unavailable because bedtime mode is on"</string>
-    <string name="screensaver_unavailable_due_to_mode" msgid="6659447961090743083">"Not available"</string>
+    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
+    <skip />
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Use screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"While charging or docked"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"While docked and charging"</string>
@@ -2035,12 +2043,9 @@
     <string name="force_stop_dlg_text" msgid="1527286468544457368">"If you force stop an app, it may misbehave."</string>
     <string name="app_disable_dlg_positive" msgid="1414218905322009505">"Disable app"</string>
     <string name="app_disable_dlg_text" msgid="2449382902751908916">"If you disable this app, Android and other apps may no longer function as intended. Keep in mind that you can’t delete this app since it came pre-installed on your device. By disabling, you\'ll turn this app off and hide it on your device."</string>
-    <!-- no translation found for hsu_app_warning_dialog_title (3592774932265338674) -->
-    <skip />
-    <!-- no translation found for hsu_app_warning_dialog_message (6322037379880072092) -->
-    <skip />
-    <!-- no translation found for hsu_app_admin_only_explanation (5126471515079300857) -->
-    <skip />
+    <string name="hsu_app_warning_dialog_title" msgid="3592774932265338674">"System user app"</string>
+    <string name="hsu_app_warning_dialog_message" msgid="6322037379880072092">"This app is running for the system user. Changes that you make will affect all users on this device."</string>
+    <string name="hsu_app_admin_only_explanation" msgid="5126471515079300857">"Only the device admin can manage this app."</string>
     <string name="app_install_details_group_title" msgid="1172114479073704677">"Store"</string>
     <string name="app_install_details_title" msgid="7783556181897142187">"App details"</string>
     <string name="app_install_details_summary" msgid="2013043219249992373">"App installed from <xliff:g id="APP_STORE">%1$s</xliff:g>"</string>
@@ -2380,7 +2385,7 @@
     <string name="accessibility_pointer_color_customization_title" msgid="2841888132681075999">"Cursor colour"</string>
     <string name="accessibility_pointer_title" msgid="7427650233669997010">"Cursor"</string>
     <string name="accessibility_touchpad_title" msgid="5798458334122685642">"Touchpad"</string>
-    <string name="accessibility_touchpad_system_gestures_enable_title" msgid="1867179109603472062">"Use 3 or 4-finger gestures"</string>
+    <string name="accessibility_touchpad_system_gestures_enable_title" msgid="1867179109603472062">"Use 3- or 4-finger gestures"</string>
     <string name="accessibility_touchpad_system_gestures_enable_summary" msgid="7076378989016181266">"When turned off, your touchpad will ignore 3 or 4-finger gestures"</string>
     <string name="keywords_accessibility_touchpad_system_gestures_enable" msgid="4406441971607855466">"touchpad, trackpad, swipe"</string>
     <string name="accessibility_color_contrast_title" msgid="5757724357142452378">"Colour contrast"</string>
@@ -2588,7 +2593,7 @@
     <string name="accessibility_standard_dark_theme_summary" msgid="5266722109397649822">"Turns on Dark theme for your device and apps that support Dark theme"</string>
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Expanded"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Expanded Dark theme"</string>
-    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Automatically applies dark theme to most apps that don\'t support it, helping to improve accessibility."</string>
+    <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Automatically applies Dark theme to most apps that don\'t support it, helping to improve accessibility."</string>
     <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"If you experience issues with the expanded option, use the standard option."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"force invert, colour inversion, contrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Expanded Dark theme"</string>
@@ -3620,11 +3625,13 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Device"</string>
-    <string name="device_dashboard_summary" msgid="3847551449956082389">"Keyboard, touchpad, display, sound"</string>
+    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
+    <skip />
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Brightness, colour, dark theme, lock screen, text"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Keyboard selection, tools"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Cursor speed, button customisation, scrolling"</string>
-    <string name="device_sound_dashboard_summary" msgid="7078513370754684554">"Volume, speakers, microphones"</string>
+    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
+    <skip />
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Cursor customisation, click actions, scrolling"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Unavailable because NFC is off"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"To use, first install a payment app"</string>

@@ -249,87 +249,8 @@ class CatalystStateMetadataProviderExecutorTest {
         )
     }
 
-    //TODO (b/481263255) Additional description is ignored in metadata
     @Test
-    fun execute_onScreenWithTitleAndAdditionalDescription_returnsTitleAndPurposeAsDescription() = runTest {
-        val metadata =
-            TestPreferenceMetadata(
-                bindingKey = "test_key_writable",
-                isPersistent = true,
-                writePermit = ReadWritePermit.ALLOW,
-            )
-        setRegistryFactories(
-            createScreen(
-                GraphTestUtils.PreferenceScreenConfig(
-                    screenKey = "screen_key",
-                    title = R.string.preference_screen_title,
-                    purpose = R.string.preference_screen_purpose,
-                    preferences = listOf(metadata)
-                )
-            )
-        )
-        val executor = CatalystStateMetadataProviderExecutor(
-            buildConfig(
-                "screen_key",
-                listOf("test_key_writable"),
-                "Additional screen description"
-            ),
-            context,
-            englishContext
-        )
-
-        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-
-        assertThat(result.metadata).hasSize(1)
-        assertThat(result.metadata[0].description).isEqualTo (
-            "${
-                context.getString(R.string.preference_screen_title)
-            }. ${
-                context.getString(R.string.preference_screen_purpose)
-            }"
-        )
-    }
-
-    //TODO (b/481263255) Additional description is ignored in metadata
-    @Test
-    fun execute_onScreenWithoutTitleAndAdditionalDescription_returnsPurpose() = runTest {
-        setRegistryFactories(
-            createScreen(
-                GraphTestUtils.PreferenceScreenConfig (
-                    "screen_key",
-                    purpose = R.string.preference_screen_purpose,
-                    title = 0,
-                    preferences = listOf(
-                        createSimplePreference(
-                            GraphTestUtils.PreferenceConfig(
-                                key = "preference_key",
-                                purpose = R.string.preference_purpose,
-                            )
-                        )
-                    )
-                )
-            )
-        )
-        val executor = CatalystStateMetadataProviderExecutor(
-            buildConfig(
-                "screen_key",
-                listOf("preference_key"),
-                "Additional screen description"
-            ),
-            context,
-            englishContext
-        )
-
-        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-
-        assertThat(result.metadata).hasSize(1)
-        assertThat(result.metadata[0].description).isEqualTo (
-                context.getString(R.string.preference_screen_purpose)
-        )
-    }
-
-    @Test
-    fun execute_onScreenWithoutTitleAndWithoutAdditionalDescription_returnsPurposeAsDescription() = runTest {
+    fun execute_onScreenWithoutTitle_returnsPurposeAsDescription() = runTest {
         setRegistryFactories(
             createScreen(
                 GraphTestUtils.PreferenceScreenConfig(
