@@ -16,7 +16,6 @@
 
 package com.android.settings.notification.history;
 
-import static android.app.Notification.COLOR_DEFAULT;
 import static android.content.pm.PackageManager.MATCH_ANY_USER;
 import static android.content.pm.PackageManager.NameNotFoundException;
 import static android.os.UserHandle.USER_ALL;
@@ -24,7 +23,6 @@ import static android.provider.Settings.EXTRA_APP_PACKAGE;
 import static android.provider.Settings.EXTRA_CHANNEL_ID;
 import static android.provider.Settings.EXTRA_CONVERSATION_ID;
 
-import android.annotation.ColorInt;
 import android.annotation.UserIdInt;
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -32,16 +30,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
 import android.service.notification.StatusBarNotification;
-import android.text.TextUtils;
-import android.util.IconDrawableFactory;
 import android.util.Log;
 import android.util.Slog;
 import android.view.LayoutInflater;
@@ -52,7 +45,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.internal.logging.UiEventLogger;
-import com.android.internal.util.ContrastColorUtil;
 import com.android.settings.R;
 import com.android.settingslib.Utils;
 
@@ -113,8 +105,8 @@ public class NotificationSbnAdapter extends
                 holder.setSummary(mContext.getString(
                         com.android.internal.R.string.notification_hidden_text));
             } else {
-                holder.setTitle(getTitleString(sbn.getNotification()));
-                holder.setSummary(getTextString(mContext, sbn.getNotification()));
+                holder.setTitle(sbn.getNotification().getHistoryTitle(mContext));
+                holder.setSummary(sbn.getNotification().getHistoryText(mContext));
             }
             holder.setPostedTime(sbn.getPostTime());
             int userId = normalizeUserId(sbn);
@@ -195,33 +187,6 @@ public class NotificationSbnAdapter extends
             title = n.extras.getCharSequence(Notification.EXTRA_TITLE);
         }
         return title == null? null : String.valueOf(title);
-    }
-
-    /**
-     * Returns the appropriate substring for this notification based on the style of notification.
-     */
-    private static String getTextString(Context appContext, Notification n) {
-        CharSequence text = null;
-        if (n.extras != null) {
-            text = n.extras.getCharSequence(Notification.EXTRA_TEXT);
-
-            Notification.Builder nb = Notification.Builder.recoverBuilder(appContext, n);
-
-            if (nb.getStyle() instanceof Notification.BigTextStyle) {
-                text = ((Notification.BigTextStyle) nb.getStyle()).getBigText();
-            } else if (nb.getStyle() instanceof Notification.MessagingStyle) {
-                Notification.MessagingStyle ms = (Notification.MessagingStyle) nb.getStyle();
-                final List<Notification.MessagingStyle.Message> messages = ms.getMessages();
-                if (messages != null && messages.size() > 0) {
-                    text = messages.get(messages.size() - 1).getText();
-                }
-            }
-
-            if (TextUtils.isEmpty(text)) {
-                text = n.extras.getCharSequence(Notification.EXTRA_TEXT);
-            }
-        }
-        return text == null ? null : String.valueOf(text);
     }
 
     private int normalizeUserId(StatusBarNotification sbn) {
