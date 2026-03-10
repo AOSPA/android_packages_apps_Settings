@@ -47,10 +47,6 @@ import com.android.settings.accessibility.shortcuts.ui.EditShortcutsScreen
 import com.android.settings.accessibility.shortcutssettings.ui.ShortcutsSettingsScreen
 import com.android.settings.accessibility.systemcontrols.ui.SystemControlsScreen
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
-import com.android.settings.accessibility.textreading.ui.TextReadingScreenFromNotification
-import com.android.settings.accessibility.textreading.ui.TextReadingScreenInAnythingElse
-import com.android.settings.accessibility.textreading.ui.TextReadingScreenInSuw
-import com.android.settings.accessibility.textreading.ui.TextReadingScreenOnAccessibility
 import com.android.settings.accessibility.timingcontrols.ui.TimingControlsScreen
 import com.android.settings.accounts.AccountDetailApiScreen
 import com.android.settings.accounts.AccountScreen
@@ -218,6 +214,7 @@ import com.android.settings.vpn2.VpnSettingsScreen
 import com.android.settings.wfd.WifiDisplayScreen
 import com.android.settings.wifi.ConfigureWifiApiScreen
 import com.android.settings.wifi.ConfigureWifiScreen
+import com.android.settings.wifi.WifiAppDataUsageScreenApi
 import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.WifiDataUsageScreenApi
 import com.android.settings.wifi.calling.WifiCallingScreen
@@ -325,42 +322,15 @@ private fun getCatalystScreenConfigs() =
             screenKey = ApnSettingsScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = ConfigureWifiApiScreen.KEY
-        ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = DateTimeSettingsApiScreen.KEY,
-        ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = TetherApiScreen.KEY,
-        ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = ContentProtectionScreenApi.KEY,
-        ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = SystemLocalePickerApiFirstScreen.KEY,
-        ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = FirstDayOfWeekApiFirstScreen.KEY,
-        ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = MeasurementSystemApiFirstScreen.KEY,
-        ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = TemperatureUnitApiFirstScreen.KEY,
-        ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = TermsOfAddressApiFirstScreen.KEY,
-        ),
+        PerScreenCatalystConfig(enabled = true, screenKey = ConfigureWifiApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TetherApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ContentProtectionScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = SystemLocalePickerApiFirstScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = FirstDayOfWeekApiFirstScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = MeasurementSystemApiFirstScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TemperatureUnitApiFirstScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TermsOfAddressApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = MyDeviceInfoApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = MyDeviceInfoScreen.KEY),
         PerScreenCatalystConfig(
@@ -416,19 +386,33 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
         PerScreenCatalystConfig(enabled = false, screenKey = SupervisionPinManagementScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = SupervisionWebContentFiltersSearchSupportedAppsScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = SupervisionWebContentFiltersSearchSupportedAppsScreen.KEY,
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY,
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = SupervisionAppStoreFiltersScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = WriteSystemPreferencesAppDetailScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = WriteSystemPreferencesAppDetailScreen.KEY,
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiControlAppDetailScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = PictureInPictureAppDetailScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ManageWriteSettingsAppDetailScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = InstallUnknownAppsAppDetailScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = FullScreenNotificationsAppDetailScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = DisplayOverOtherAppsAppDetailScreen.KEY),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = FullScreenNotificationsAppDetailScreen.KEY,
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = DisplayOverOtherAppsAppDetailScreen.KEY,
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = AllFilesAccessAppDetailScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AlarmsAndRemindersAppDetailScreen.KEY),
-
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = TetherScreen.KEY,
@@ -653,23 +637,14 @@ private fun getCatalystScreenConfigs() =
             screenKey = AppsNotificationAccessScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
-        PerScreenCatalystConfig(
-          enabled = true,
-          screenKey = ManageAccountsScreen.KEY
-        ),
+        PerScreenCatalystConfig(enabled = true, screenKey = ManageAccountsScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = AppInfoNotificationAccessScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = PreviouslyConnectedDeviceScreen.KEY,
-        ),
-        PerScreenCatalystConfig(
-          enabled = true,
-          screenKey = AppInfoNotificationAccessScreen.KEY
-        ),
+        PerScreenCatalystConfig(enabled = true, screenKey = PreviouslyConnectedDeviceScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppInfoNotificationAccessScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ButtonNavigationSettingsScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
@@ -724,6 +699,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceUnlockApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AvailableVirtualKeyboardApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDataUsageScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiAppDataUsageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OpeningLinksApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
