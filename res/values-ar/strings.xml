@@ -330,6 +330,16 @@
     <string name="date_time_set_time_title" msgid="2870083415922991906">"الوقت"</string>
     <string name="time_format_category_title" msgid="7108616745509689991">"تنسيق الوقت"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"المنطقة الزمنية"</string>
+    <!-- no translation found for home_time_zone_title (3824736095532816255) -->
+    <skip />
+    <!-- no translation found for home_time_zone_select_title (9158012099148340770) -->
+    <skip />
+    <!-- no translation found for home_time_zone_summary (1494773352044636274) -->
+    <skip />
+    <!-- no translation found for use_home_time_zone_title (8026361707497256390) -->
+    <skip />
+    <!-- no translation found for suggestions_category_title (669819615912272575) -->
+    <skip />
     <string name="date_time_set_timezone" msgid="2915125337941495746">"اختيار المنطقة الزمنية"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"البحث عن منطقة زمنية"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"التاريخ"</string>
@@ -1432,8 +1442,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"شاشة الاستراحة"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"شاشة الاستراحة"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"الميزة غير متاحة لأن وضع \"وقت النوم\" مفعّل."</string>
-    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
-    <skip />
+    <string name="screensaver_unavailable_due_to_mode" msgid="8515924546767264225">"هذه الميزة غير متاحة على هذا الجهاز"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"استخدام ميزة \"شاشة الاستراحة\""</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"أثناء الشحن أو الإرساء"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"أثناء الإرساء والشحن"</string>
@@ -1496,7 +1505,8 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"حسنًا"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"إلغاء"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"‏حماية شريحة SIM"</string>
-    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"‏قفل شريحة SIM التلقائي"</string>
+    <!-- no translation found for automatic_sim_lock_protection (455534553760066231) -->
+    <skip />
     <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"إدارة رقم التعريف الشخصي تلقائيًا"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"‏مُدار بواسطة Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"‏غير مُدار بواسطة Android"</string>
@@ -1509,10 +1519,25 @@
     <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"‏حماية شريحة SIM من السرقة"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"‏رقم التعريف الشخصي لشريحة SIM مُدار بواسطة Android"</string>
     <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"‏تتم إدارة رقم التعريف الشخصي لشريحة SIM يدويًا"</string>
-    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"‏يجب إعداد قفل الشاشة لتفعيل ميزة \"حماية شريحة SIM\""</string>
+    <!-- no translation found for sim_protection_mode_lskf_required (3092348651156624481) -->
+    <skip />
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"‏يُرجى إدخال رقم التعريف الشخصي الحالي لشريحة SIM"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"‏يُرجى إدخال رقم التعريف الشخصي الحالي لشريحة SIM"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"استخدام رقم التعريف الشخصي التلقائي لمشغّل شبكة الجوّال"</string>
+    <!-- no translation found for choose_sim_pin_protection_mode (3008087116785955704) -->
+    <skip />
+    <!-- no translation found for sim_pin_protection_mode_manual (6394394529094030608) -->
+    <skip />
+    <!-- no translation found for sim_pin_protection_mode_automatic (7382457994105124365) -->
+    <skip />
+    <!-- no translation found for provide_new_sim_pin_title (7858611936347465648) -->
+    <skip />
+    <!-- no translation found for confirm_new_sim_pin_title (8260672663421256888) -->
+    <skip />
+    <!-- no translation found for confirm_new_sim_pin_after_mismatch (8358717933025894071) -->
+    <skip />
+    <!-- no translation found for enter_current_sim_pin_after_mismatch (6910905505364979098) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"هل تريد بيانات الجوّال من <xliff:g id="CARRIER">%1$s</xliff:g>؟"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"أنت تستخدم <xliff:g id="CARRIER2_0">%2$s</xliff:g> للاتصال ببيانات الجوّال. عند التبديل إلى <xliff:g id="CARRIER1">%1$s</xliff:g>، لن يتم استخدام <xliff:g id="CARRIER2_1">%2$s</xliff:g> مرة أخرى للاتصال ببيانات الجوّال."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"استخدام <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -4527,6 +4552,8 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"‏إعدادات USB المفضّلة"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"‏يتم التحكم في USB بواسطة"</string>
+    <!-- no translation found for usb_connected_devices (535238470176122197) -->
+    <skip />
     <string name="usb_control_host" msgid="7404215921555021871">"جهاز متّصل"</string>
     <string name="usb_control_device" msgid="527916783743021577">"هذا الجهاز"</string>
     <string name="usb_switching" msgid="3654709188596609354">"جارٍ التبديل…"</string>
@@ -4543,6 +4570,10 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"‏PTP والإمداد بالطاقة"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"‏MIDI والإمداد بالطاقة"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"كاميرا الويب والإمداد بالطاقة"</string>
+    <!-- no translation found for usb_device_name_unknown_with_manufacturer_name (9075986054227881069) -->
+    <skip />
+    <!-- no translation found for usb_device_name_unknown_with_vendor_id_and_product_id (8750941211592531562) -->
+    <skip />
     <string name="background_check_pref" msgid="5304564658578987535">"فحص الخلفية"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"استخدام النص من الشاشة"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"السماح للتطبيق المساعد بالوصول إلى محتوى الشاشة كنص"</string>
@@ -5325,8 +5356,7 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"‏يجب الاتصال بشبكة الجوّال أو Wi‑Fi لعرض الروابط الخارجية."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"قد لا تتوفّر ميزة المراسلة النصية عبر خدمات الطوارئ في كل المناطق."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"قد يستغرق ظهور التغييرات في حسابك ضِمن \"الإعدادات\" بعض الوقت. لمعرفة التفاصيل، يُرجى التواصل مع \"<xliff:g id="CARRIER_NAME">%1$s</xliff:g>\"."</string>
-    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
-    <skip />
+    <string name="satellite_footer_content_section_8" msgid="7617809843970032785">"للاطّلاع على جميع التطبيقات التي تم تحسينها للاتصال بالقمر الصناعي، يُرجى الانتقال إلى الموقع الإلكتروني الخاص بمشغّل شبكة الجوّال."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"مزيد من المعلومات حول الاتصال بالقمر الصناعي"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"يتعذّر تفعيل <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"لتفعيل <xliff:g id="FUNCTION">%1$s</xliff:g>، عليك أولاً إنهاء الاتصال بالقمر الصناعي"</string>
@@ -5341,8 +5371,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"التطبيقات المتوافقة على هاتفك"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"‏يتعذّر إضافة شريحة SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"‏يجب إنهاء الاتصال بالقمر الصناعي قبل إضافة شريحة SIM"</string>
-    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
-    <skip />
+    <string name="satellite_toggle_error" msgid="4533772077620854258">"حدث خطأ. تعذَّر تفعيل إمكانية الاتصال بالقمر الصناعي."</string>
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"البلوتوث غير مفعّل"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"عندما تكون الأجهزة متصلة عبر البلوتوث، ستتم مزامنة \"وضع الطيران\" على الأجهزة المتوافقة، مثل الهاتف والساعة"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"أسماء نقاط الوصول"</string>
@@ -6100,8 +6129,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"أمان التطبيقات"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"فتح قفل الجهاز"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"أمان الحساب"</string>
-    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
-    <skip />
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"حماية الأجهزة المفقودة"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"النظام والتحديثات"</string>
     <string name="location_settings" msgid="6833222354060094170">"الوصول إلى الموقع الجغرافي"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"عرض التطبيقات والخدمات التي يمكنها الوصول إلى الموقع الجغرافي"</string>

@@ -330,6 +330,11 @@
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Время"</string>
     <string name="time_format_category_title" msgid="7108616745509689991">"Формат времени"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Часовой пояс"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"Домашний часовой пояс"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"Выберите часовой пояс"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"Задать домашний часовой пояс (например, для использования при поездках)"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"Использовать дом. часовой пояс"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"Предложения"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Часовой пояс"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"Поиск часового пояса"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Дата"</string>
@@ -1428,8 +1433,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Заставка"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"заставка"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Недоступно в ночном режиме"</string>
-    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
-    <skip />
+    <string name="screensaver_unavailable_due_to_mode" msgid="8515924546767264225">"Недоступно на этом устройстве"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Заставка"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Во время зарядки и на док-станции"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"На док-станции и во время зарядки"</string>
@@ -1492,7 +1496,7 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"ОК"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Отмена"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Защита SIM-карты"</string>
-    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"Автоматическая защита SIM-карты"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Режим защиты SIM-карты"</string>
     <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"Автоматическое управление PIN-кодами"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Управляется Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Не управляется Android"</string>
@@ -1505,10 +1509,17 @@
     <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"Защитить SIM-карту от кражи"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"PIN-код SIM-карты управляется Android"</string>
     <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"PIN-код SIM-карты управляется вручную"</string>
-    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"Чтобы включить защиту SIM-карты, настройте блокировку экрана"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Для автоматической защиты SIM-карты требуется блокировка экрана. Сейчас доступен только вариант защиты вручную."</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Введите нынешний PIN-код"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Введите текущий PIN-код SIM-карты."</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"Использовать код оператора"</string>
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"Выбрать режим защиты SIM-карты"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"Вручную"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"Автоматически (управляется Android)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"Новый PIN-код SIM-карты"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Подтвердите новый PIN-код SIM-карты"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN-коды не совпадают. Подтвердите новый PIN-код SIM-карты."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Неверный PIN-код. Осталось попыток: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>."</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Переключиться на оператора \"<xliff:g id="CARRIER">%1$s</xliff:g>\"?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Вы пользуетесь мобильным Интернетом в сети оператора \"<xliff:g id="CARRIER2_0">%2$s</xliff:g>\". После переключения на SIM-карту \"<xliff:g id="CARRIER1">%1$s</xliff:g>\" вы не сможете использовать мобильный Интернет оператора \"<xliff:g id="CARRIER2_1">%2$s</xliff:g>\"."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Выбрать сеть оператора \"<xliff:g id="CARRIER">%1$s</xliff:g>\""</string>
@@ -4521,6 +4532,8 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Настройки USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"Устройство, управляющее USB"</string>
+    <!-- no translation found for usb_connected_devices (535238470176122197) -->
+    <skip />
     <string name="usb_control_host" msgid="7404215921555021871">"Подключенное устройство"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Это устройство"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Подождите…"</string>
@@ -4537,6 +4550,10 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"Режим PTP и зарядка"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"Режим MIDI и зарядка"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"Режим веб-камеры и зарядка"</string>
+    <!-- no translation found for usb_device_name_unknown_with_manufacturer_name (9075986054227881069) -->
+    <skip />
+    <!-- no translation found for usb_device_name_unknown_with_vendor_id_and_product_id (8750941211592531562) -->
+    <skip />
     <string name="background_check_pref" msgid="5304564658578987535">"Проверка разрешений для фонового режима"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Использовать текст с экрана"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Разрешить приложению-помощнику доступ к содержимому экрана в виде текста"</string>
