@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.ValidatedKeyParameters
 
 /**
@@ -88,6 +89,8 @@ open class AllFilesAccessAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val availabilityDescription =
         "The app must be enabled, and must have requested manage external storage permission."
+
+    override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
 
     // Edge case: what if the app's read permission is revoked/granted
     override fun isAvailable(context: Context) =

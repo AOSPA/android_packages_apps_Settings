@@ -25,6 +25,7 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /**
@@ -56,6 +57,8 @@ open class AllFilesAccessAppListScreen : SpecialAccessAppListScreen() {
 
     override val appDetailScreenKey: String
         get() = AllFilesAccessAppDetailScreen.KEY
+
+    override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
 
     @Deprecated(
         message =

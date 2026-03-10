@@ -18,6 +18,7 @@ package com.android.settings
 
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 
@@ -32,6 +33,7 @@ class TrustedCredentialsScreenApi :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
+        sensitivityLevel(SensitivityLevel.DO_NOT_EXPOSE)
     }
 
     companion object {
