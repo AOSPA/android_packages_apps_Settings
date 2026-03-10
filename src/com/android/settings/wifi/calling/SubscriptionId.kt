@@ -23,7 +23,8 @@ import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 
 /** A subscription ID. */
-class SubscriptionId(
+// This is only open to allow the companion object to be created. Do not subclass.
+open class SubscriptionId(
     private val includeActive: Boolean = true,
     private val includeInactive: Boolean = false,
 ) : FiniteOptionsType<Int> {
@@ -69,4 +70,6 @@ class SubscriptionId(
             emptyList()
         }
     }
+
+    companion object : SubscriptionId()
 }

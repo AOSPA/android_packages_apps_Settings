@@ -99,6 +99,9 @@ private constructor(
     override val key: String
         get() = KEY
 
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
+
     override val purpose: Int
         get() = R.string.device_state_app_info_storage_purpose
 
