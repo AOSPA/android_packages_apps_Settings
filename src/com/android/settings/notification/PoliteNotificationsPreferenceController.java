@@ -27,6 +27,7 @@ import com.android.settings.core.BasePreferenceController;
 /**
  * Controller for polite notifications settings page.
  */
+// LINT.IfChange
 public class PoliteNotificationsPreferenceController extends BasePreferenceController {
 
     public PoliteNotificationsPreferenceController(@NonNull Context context,
@@ -40,3 +41,4 @@ public class PoliteNotificationsPreferenceController extends BasePreferenceContr
     }
 
 }
+// LINT.ThenChange(PoliteNotificationsApiScreen.kt)

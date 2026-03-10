@@ -16,7 +16,6 @@
 
 package com.android.settings.appfunctions
 
-import android.content.Context
 import com.android.server.connectivity.Flags as ConnectivityFlags
 import com.android.settings.IccLockApiScreen
 import com.android.settings.TrustedCredentialsScreenApi
@@ -102,10 +101,8 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoApiFirstScreen
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoScreen
 import com.android.settings.deviceinfo.batteryinfo.BatteryInfoApiScreen
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
-import com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreference
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoApiScreen
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoScreen
-import com.android.settings.deviceinfo.hardwareinfo.HardwareVersionPreference
 import com.android.settings.deviceinfo.legal.LegalSettingsScreen
 import com.android.settings.deviceinfo.legal.ModuleLicensesScreen
 import com.android.settings.deviceinfo.storage.StoragePreferenceScreen
@@ -167,6 +164,7 @@ import com.android.settings.network.telephony.MobileNetworkScreenApi
 import com.android.settings.network.tether.TetherApiScreen
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.BubbleNotificationScreen
+import com.android.settings.notification.PoliteNotificationsApiScreen
 import com.android.settings.notification.SoundApiScreen
 import com.android.settings.notification.SoundScreen
 import com.android.settings.notification.SpatialAudioApiScreen
@@ -219,7 +217,6 @@ import com.android.settings.wfd.WifiDisplayScreen
 import com.android.settings.wifi.ConfigureWifiApiScreen
 import com.android.settings.wifi.ConfigureWifiScreen
 import com.android.settings.wifi.WifiAppDataUsageScreenApi
-import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.WifiDataUsageScreenApi
 import com.android.settings.wifi.calling.WifiCallingScreen
 import com.android.settings.wifi.details.WifiDetailsScreenApi
@@ -229,8 +226,6 @@ import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settings.wifi.tether.WifiHotspotScreen
 import com.android.settings.wifi.tether.WifiHotspotSecurityApiScreen
 import com.android.settings.wifi.tether.WifiHotspotSpeedApiScreen
-import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.getPreferenceSummary
 
 /**
  * Configuration of a screen converting to device states.
@@ -253,14 +248,9 @@ data class PerScreenCatalystConfig(
  *
  * @param screenConfigs a list of catalyst screen configurations
  */
-data class CatalystConfig(
-    val screenConfigs: List<PerScreenCatalystConfig>,
-)
+data class CatalystConfig(val screenConfigs: List<PerScreenCatalystConfig>)
 
-fun getSettingsCatalystConfig() =
-    CatalystConfig(
-        screenConfigs = getCatalystScreenConfigs(),
-    )
+fun getSettingsCatalystConfig() = CatalystConfig(screenConfigs = getCatalystScreenConfigs())
 
 private fun getCatalystScreenConfigs() =
     listOf(
@@ -510,6 +500,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = BubbleNotificationScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = PoliteNotificationsApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ResetDashboardScreen.KEY),
