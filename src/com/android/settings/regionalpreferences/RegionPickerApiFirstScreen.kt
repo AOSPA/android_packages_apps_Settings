@@ -66,6 +66,9 @@ class RegionPickerApiFirstScreen :
 
             get { execute { Locale.getDefault().country } }
             set {
+                warning {
+                    warn(R.string.change_region_warning)
+                }
                 execute { value ->
                     val locale =
                         Locale.Builder().setLocale(Locale.getDefault()).setRegion(value).build()
