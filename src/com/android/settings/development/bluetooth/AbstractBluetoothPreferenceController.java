@@ -27,8 +27,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.PreferenceControllerMixin;
-import com.android.settings.development.BluetoothA2dpConfigStore;
-import com.android.settings.development.BluetoothServiceConnectionListener;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
@@ -40,7 +38,7 @@ import java.util.List;
  * Abstract class for Bluetooth A2DP config controller in developer option.
  */
 public abstract class AbstractBluetoothPreferenceController extends
-        DeveloperOptionsPreferenceController implements BluetoothServiceConnectionListener,
+        DeveloperOptionsPreferenceController implements ServiceConnectionListener,
         LifecycleObserver, OnDestroy, PreferenceControllerMixin {
 
     @Nullable protected volatile BluetoothA2dp mBluetoothA2dp;

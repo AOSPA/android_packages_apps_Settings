@@ -31,24 +31,6 @@ import android.os.UserManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.dashboard.RestrictedDashboardFragment
-import com.android.settings.development.BluetoothA2dpConfigStore
-import com.android.settings.development.BluetoothA2dpHwOffloadPreferenceController
-import com.android.settings.development.BluetoothAbsoluteVolumePreferenceController
-import com.android.settings.development.BluetoothAvrcpVersionPreferenceController
-import com.android.settings.development.BluetoothDeviceNoNamePreferenceController
-import com.android.settings.development.BluetoothLeAudioAllowListPreferenceController
-import com.android.settings.development.BluetoothLeAudioDeviceDetailsPreferenceController
-import com.android.settings.development.BluetoothLeAudioHwOffloadPreferenceController
-import com.android.settings.development.BluetoothLeAudioModePreferenceController
-import com.android.settings.development.BluetoothMapVersionPreferenceController
-import com.android.settings.development.BluetoothMaxConnectedAudioDevicesPreferenceController
-import com.android.settings.development.BluetoothRebootDialog
-import com.android.settings.development.BluetoothServiceConnectionListener
-import com.android.settings.development.BluetoothSnoopLogFilterProfileMapPreferenceController
-import com.android.settings.development.BluetoothSnoopLogFilterProfilePbapPreferenceController
-import com.android.settings.development.BluetoothSnoopLogHost
-import com.android.settings.development.BluetoothSnoopLogPreferenceController
-import com.android.settings.development.BluetoothSnoopLogSocketPreferenceController
 import com.android.settings.development.DefaultLaunchPreferenceController
 import com.android.settings.development.DeveloperOptionAwareMixin
 import com.android.settings.search.BaseSearchIndexProvider
@@ -60,9 +42,9 @@ import com.android.settingslib.search.SearchIndexable
 @SearchIndexable
 class BluetoothDevelopmentSettingsFragment :
     RestrictedDashboardFragment(UserManager.DISALLOW_CONFIG_BLUETOOTH),
-    BluetoothRebootDialog.OnRebootDialogListener,
+    RebootDialog.OnRebootDialogListener,
     AbstractBluetoothPreferenceController.Callback,
-    BluetoothSnoopLogHost,
+    SnoopLogHost,
     DeveloperOptionAwareMixin {
 
     private val adapter: BluetoothAdapter? by lazy {
@@ -77,7 +59,7 @@ class BluetoothDevelopmentSettingsFragment :
                 Log.d(TAG, "a2dpReceiver.onReceive intent=$intent")
                 preferenceControllers
                     .flatten()
-                    .filterIsInstance<BluetoothServiceConnectionListener>()
+                    .filterIsInstance<ServiceConnectionListener>()
                     .forEach { it.onBluetoothCodecUpdated() }
             }
         }
@@ -88,7 +70,7 @@ class BluetoothDevelopmentSettingsFragment :
                 a2dp = proxy as BluetoothA2dp
                 preferenceControllers
                     .flatten()
-                    .filterIsInstance<BluetoothServiceConnectionListener>()
+                    .filterIsInstance<ServiceConnectionListener>()
                     .forEach { it.onBluetoothServiceConnected(a2dp) }
             }
 
@@ -96,7 +78,7 @@ class BluetoothDevelopmentSettingsFragment :
                 a2dp = null
                 preferenceControllers
                     .flatten()
-                    .filterIsInstance<BluetoothServiceConnectionListener>()
+                    .filterIsInstance<ServiceConnectionListener>()
                     .forEach { it.onBluetoothServiceDisconnected() }
             }
         }
@@ -134,9 +116,9 @@ class BluetoothDevelopmentSettingsFragment :
     }
 
     override fun onRebootDialogCanceled() {
-        use(BluetoothA2dpHwOffloadPreferenceController::class.java)?.onRebootDialogCanceled()
-        use(BluetoothLeAudioHwOffloadPreferenceController::class.java)?.onRebootDialogCanceled()
-        use(BluetoothLeAudioModePreferenceController::class.java)?.onRebootDialogCanceled()
+        use(A2dpHwOffloadPreferenceController::class.java)?.onRebootDialogCanceled()
+        use(LeAudioHwOffloadPreferenceController::class.java)?.onRebootDialogCanceled()
+        use(LeAudioModePreferenceController::class.java)?.onRebootDialogCanceled()
     }
 
     override fun onBluetoothCodecChanged() {
@@ -154,8 +136,8 @@ class BluetoothDevelopmentSettingsFragment :
     }
 
     override fun onSettingChanged() {
-        use(BluetoothSnoopLogFilterProfileMapPreferenceController::class.java)?.onSettingChanged()
-        use(BluetoothSnoopLogFilterProfilePbapPreferenceController::class.java)?.onSettingChanged()
+        use(SnoopLogFilterProfileMapPreferenceController::class.java)?.onSettingChanged()
+        use(SnoopLogFilterProfilePbapPreferenceController::class.java)?.onSettingChanged()
     }
 
     override fun createPreferenceControllers(context: Context) =
@@ -171,37 +153,28 @@ class BluetoothDevelopmentSettingsFragment :
             a2dpConfigStore: BluetoothA2dpConfigStore?,
         ): List<AbstractPreferenceController> {
             return listOf(
-                BluetoothSnoopLogPreferenceController(context, fragment),
-                BluetoothSnoopLogSocketPreferenceController(context),
-                BluetoothStackLogPreferenceController(context),
+                SnoopLogPreferenceController(context, fragment),
+                SnoopLogSocketPreferenceController(context),
+                StackLogPreferenceController(context),
                 DefaultLaunchPreferenceController(context, "snoop_logger_filters_dashboard"),
-                BluetoothSnoopLogFilterProfilePbapPreferenceController(context),
-                BluetoothSnoopLogFilterProfileMapPreferenceController(context),
-                BluetoothDeviceNoNamePreferenceController(context),
-                BluetoothAbsoluteVolumePreferenceController(context),
-                BluetoothAvrcpVersionPreferenceController(context),
-                BluetoothMapVersionPreferenceController(context),
-                BluetoothLeAudioModePreferenceController(context, fragment),
-                BluetoothLeAudioDeviceDetailsPreferenceController(context),
-                BluetoothLeAudioAllowListPreferenceController(context),
-                BluetoothA2dpHwOffloadPreferenceController(context, fragment),
-                BluetoothLeAudioHwOffloadPreferenceController(context, fragment),
-                BluetoothMaxConnectedAudioDevicesPreferenceController(context),
-                BluetoothCodecListPreferenceController(
-                    context,
-                    lifecycle,
-                    a2dpConfigStore,
-                    fragment,
-                ),
-                BluetoothSampleRateDialogPreferenceController(context, lifecycle, a2dpConfigStore),
-                BluetoothBitPerSampleDialogPreferenceController(
-                    context,
-                    lifecycle,
-                    a2dpConfigStore,
-                ),
-                BluetoothQualityDialogPreferenceController(context, lifecycle, a2dpConfigStore),
-                BluetoothChannelModeDialogPreferenceController(context, lifecycle, a2dpConfigStore),
-                BluetoothHDAudioPreferenceController(context, lifecycle, a2dpConfigStore, fragment),
+                SnoopLogFilterProfilePbapPreferenceController(context),
+                SnoopLogFilterProfileMapPreferenceController(context),
+                DeviceNoNamePreferenceController(context),
+                AbsoluteVolumePreferenceController(context),
+                AvrcpVersionPreferenceController(context),
+                MapVersionPreferenceController(context),
+                LeAudioModePreferenceController(context, fragment),
+                LeAudioDeviceDetailsPreferenceController(context),
+                LeAudioAllowListPreferenceController(context),
+                A2dpHwOffloadPreferenceController(context, fragment),
+                LeAudioHwOffloadPreferenceController(context, fragment),
+                MaxConnectedAudioDevicesPreferenceController(context),
+                CodecListPreferenceController(context, lifecycle, a2dpConfigStore, fragment),
+                SampleRateDialogPreferenceController(context, lifecycle, a2dpConfigStore),
+                BitPerSampleDialogPreferenceController(context, lifecycle, a2dpConfigStore),
+                QualityDialogPreferenceController(context, lifecycle, a2dpConfigStore),
+                ChannelModeDialogPreferenceController(context, lifecycle, a2dpConfigStore),
+                HDAudioPreferenceController(context, lifecycle, a2dpConfigStore, fragment),
             )
         }
 

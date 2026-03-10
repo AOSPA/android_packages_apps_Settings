@@ -27,7 +27,6 @@ import android.util.Log;
 
 import androidx.preference.Preference;
 
-import com.android.settings.development.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.List;

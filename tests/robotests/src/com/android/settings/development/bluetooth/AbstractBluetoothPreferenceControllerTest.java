@@ -27,7 +27,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.settings.development.BluetoothA2dpConfigStore;
+import com.android.settings.development.bluetooth.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
