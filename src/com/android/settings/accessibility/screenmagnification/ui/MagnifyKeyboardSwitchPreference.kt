@@ -38,7 +38,6 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
-// LINT.IfChange
 class MagnifyKeyboardSwitchPreference :
     SwitchPreference(
         KEY,
@@ -86,8 +85,7 @@ class MagnifyKeyboardSwitchPreference :
         storage(context).removeObserver(this)
     }
 
-    override val availabilityDescription =
-        "The device must support window magnification."
+    override val availabilityDescription = "The device must support window magnification."
 
     override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
@@ -137,4 +135,3 @@ class MagnifyKeyboardSwitchPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/MagnifyKeyboardPreferenceController.kt)

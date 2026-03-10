@@ -41,7 +41,6 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
-// LINT.IfChange
 class AlwaysOnSwitchPreference :
     SwitchPreference(
         KEY,
@@ -162,4 +161,3 @@ class AlwaysOnSwitchPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/AlwaysOnPreferenceController.kt)

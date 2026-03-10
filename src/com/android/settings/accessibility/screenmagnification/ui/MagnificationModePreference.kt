@@ -37,7 +37,6 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
-// LINT.IfChange
 class MagnificationModePreference :
     PreferenceBinding,
     PersistentPreference<Int>,
@@ -85,6 +84,7 @@ class MagnificationModePreference :
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
     override val supportsWrite = true
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         preference.onPreferenceClickListener = this
@@ -120,4 +120,3 @@ class MagnificationModePreference :
         private const val MODE_CHOOSER_REQUEST_KEY = "magnificationModeChooser"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ModePreferenceController.kt)

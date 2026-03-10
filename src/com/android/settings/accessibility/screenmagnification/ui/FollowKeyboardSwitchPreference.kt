@@ -30,7 +30,6 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
-// LINT.IfChange
 class FollowKeyboardSwitchPreference :
     SwitchPreference(
         KEY,
@@ -81,4 +80,3 @@ class FollowKeyboardSwitchPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowKeyboardPreferenceController.kt)

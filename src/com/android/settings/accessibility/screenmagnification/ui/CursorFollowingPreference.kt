@@ -39,7 +39,6 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
-// LINT.IfChange
 class CursorFollowingPreference :
     PreferenceBinding,
     PersistentPreference<Int>,
@@ -160,4 +159,3 @@ class CursorFollowingPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/CursorFollowingModePreferenceController.kt)
