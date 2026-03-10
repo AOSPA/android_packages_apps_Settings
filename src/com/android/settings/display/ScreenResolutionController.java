@@ -33,6 +33,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+// LINT.IfChange
 /** Controller that switch the screen resolution. */
 public class ScreenResolutionController extends BasePreferenceController {
     private static final String TAG = "ScreenResolutionController";
@@ -81,14 +82,11 @@ public class ScreenResolutionController extends BasePreferenceController {
         mFullHeight = resolutionList.get(FULLRESOLUTION_IDX).y;
     }
 
-    /** Return true if the device contains two (or more) resolutions. */
-    protected boolean checkSupportedResolutions() {
-        return getHighWidth() != 0 && getFullWidth() != 0;
-    }
-
     @Override
     public int getAvailabilityStatus() {
-        return (checkSupportedResolutions()) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+        return ScreenResolutionExtensionsKt.checkSupportedResolutions(mContext)
+                ? AVAILABLE
+                : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override
@@ -141,3 +139,4 @@ public class ScreenResolutionController extends BasePreferenceController {
         return mDisplay.getSupportedModes();
     }
 }
+// LINT.ThenChange(ScreenResolutionApiScreen.kt)

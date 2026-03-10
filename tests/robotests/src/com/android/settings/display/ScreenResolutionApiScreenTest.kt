@@ -1,0 +1,68 @@
+/*
+ * Copyright (C) 2026 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.android.settings.display
+
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
+import android.platform.test.flag.junit.SetFlagsRule
+import android.view.Display
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
+import com.android.settings.testutils2.ApiTester
+import com.android.settings.testutils2.HardwareUnsupportedException
+import com.google.common.truth.Truth.assertThat
+import org.junit.Assert.assertThrows
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.shadows.ShadowDisplayManager
+
+@RunWith(AndroidJUnit4::class)
+class ScreenResolutionApiScreenTest {
+    private val tester = ApiTester(ScreenResolutionApiScreen())
+
+    @get:Rule val setFlagsRule = SetFlagsRule()
+
+    @Test
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getScreen_isNotNull() {
+        assertThat(tester.getScreen()).isNotNull()
+    }
+
+    @Test
+    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    fun getScreen_flagDisabled_isNull() {
+        assertThat(tester.getScreen()).isNull()
+    }
+
+    @Test
+    fun getLaunchIntent_notEnoughModes_throwsException() {
+        val modeA = Display.Mode(0, 1080, 1920, 60f)
+        ShadowDisplayManager.setSupportedModes(Display.DEFAULT_DISPLAY, modeA)
+
+        assertThrows(HardwareUnsupportedException::class.java) { tester.getLaunchIntent() }
+    }
+
+    @Test
+    fun getLaunchIntent_enoughModes_isNotNull() {
+        val modeA = Display.Mode(0, 1080, 1920, 60f)
+        val modeB = Display.Mode(1, 1440, 2560, 60f)
+        ShadowDisplayManager.setSupportedModes(Display.DEFAULT_DISPLAY, modeA, modeB)
+
+        assertThat(tester.getLaunchIntent()).isNotNull()
+    }
+}
