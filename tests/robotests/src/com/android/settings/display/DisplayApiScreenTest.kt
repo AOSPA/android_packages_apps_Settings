@@ -30,6 +30,7 @@ import com.android.settings.R
 import com.android.settings.display.DisplayApiScreen.Companion.BRIGHTNESS_LEVEL_KEY
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
 import com.android.settings.testutils.shadow.SettingsShadowResources
+import com.android.settings.testutils.shadow.ShadowDisplayManager
 import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.HardwareUnsupportedException
 import com.android.settings.testutils2.MissingPermissionException
@@ -45,7 +46,10 @@ import org.robolectric.shadows.ShadowApplication
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
-@Config(shadows = [ShadowApplication::class, SettingsShadowResources::class])
+@Config(
+    shadows =
+        [ShadowApplication::class, ShadowDisplayManager::class, SettingsShadowResources::class]
+)
 class DisplayApiScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -85,17 +89,27 @@ class DisplayApiScreenTest {
 
     @Test
     fun getBrightnessLevel_returnsSettingsValue() {
-        // TODO(b/487938911): Add more values once the shadow display manager is updated.
         setDefaultDisplayBrightnessPercentage(0.0f)
         assertThat(tester.get<Int>(BRIGHTNESS_LEVEL_KEY)).isEqualTo(0)
+
+        setDefaultDisplayBrightnessPercentage(25.36f)
+        assertThat(tester.get<Int>(BRIGHTNESS_LEVEL_KEY)).isEqualTo(25)
+
+        setDefaultDisplayBrightnessPercentage(100.0f)
+        assertThat(tester.get<Int>(BRIGHTNESS_LEVEL_KEY)).isEqualTo(100)
     }
 
     @Test
     fun setBrightnessLevel_updatesSettings() {
-        // TODO(b/487938911): Add more values once the shadow display manager is updated.
         shadowApplication.grantPermissions(WRITE_SETTINGS)
         tester.set(BRIGHTNESS_LEVEL_KEY, 0)
         assertThat(getDefaultDisplayBrightnessPercentage()).isEqualTo(0.0f)
+
+        tester.set(BRIGHTNESS_LEVEL_KEY, 50)
+        assertThat(getDefaultDisplayBrightnessPercentage()).isEqualTo(50.0f)
+
+        tester.set(BRIGHTNESS_LEVEL_KEY, 100)
+        assertThat(getDefaultDisplayBrightnessPercentage()).isEqualTo(100.0f)
     }
 
     @Test
