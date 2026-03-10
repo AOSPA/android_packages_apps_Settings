@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseR
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.preconditions.MissingPermission
+import com.android.settingslib.metadata.preferencesapi.preconditions.RegionalRestriction
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
@@ -63,6 +64,12 @@ class HardwareUnsupportedException(val reason: String) : FailedPreconditionExcep
  * failed due to an invalid state of another preference.
  */
 class InvalidPreferenceException(val reason: String) : FailedPreconditionException()
+
+/**
+ * This exception is thrown if the preconditions for a get/set operation made through the ApiTester
+ * failed due to a regional restriction.
+ */
+class RegionalRestrictionException(val reason: String) : FailedPreconditionException()
 
 /**
  * This exception is thrown if there is a set operation about to be performed on a preference with
@@ -191,6 +198,8 @@ class ApiTester(
             throw InvalidPreferenceException(result.getReason(context))
         } else if (result is MissingPermission) {
             throw MissingPermissionException(result.getReason(context))
+        } else if (result is RegionalRestriction) {
+            throw RegionalRestrictionException(result.getReason(context))
         }
         throw FailedPreconditionException()
     }
