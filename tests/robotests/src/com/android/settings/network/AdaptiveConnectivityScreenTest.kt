@@ -18,8 +18,6 @@ package com.android.settings.network
 
 import android.content.Context
 import android.content.res.Resources
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
 import android.provider.Settings
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_ENABLED
 import android.provider.Settings.Secure.ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED
@@ -63,17 +61,6 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     @Test override fun migration() {}
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
-    fun getPreferenceHierarchy_returnsHierarchy() {
-        val hierarchy: PreferenceHierarchy =
-            preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
-        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_ENABLED)).isNotNull()
-        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED)).isNull()
-        assertThat(hierarchy.find(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED)).isNull()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
     fun getPreferenceHierarchy_flagEnabled_returnsHierarchyWithNestedToggle() {
         val hierarchy: PreferenceHierarchy =
             preferenceScreenCreator.getPreferenceHierarchy(mContext, testScope)
@@ -83,26 +70,6 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
-    fun flagDefaultDisabled_noSwitchPreferenceCompatExists() {
-        val scenario = launchFragmentInContainer<AdaptiveConnectivitySettings>()
-        scenario.onFragment { fragment ->
-            this.fragment = fragment
-            assertSwitchPreferenceCompatVisibility(
-                ADAPTIVE_CONNECTIVITY_WIFI_ENABLED,
-                fragment,
-                false,
-            )
-            assertSwitchPreferenceCompatVisibility(
-                ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED,
-                fragment,
-                false,
-            )
-        }
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
     fun flagEnabled_switchPreferenceCompatExists() {
         val scenario = launchFragmentInContainer<AdaptiveConnectivitySettings>()
         scenario.onFragment { fragment ->
@@ -121,7 +88,6 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
     fun flagEnabled_onWifiScorerSwitchClick_shouldUpdateSetting() {
         val scenario = launchFragmentInContainer<AdaptiveConnectivitySettings>()
         scenario.onFragment { fragment: AdaptiveConnectivitySettings ->
@@ -139,7 +105,6 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
     fun flagEnabled_onAdaptiveMobileNetworkSwitchClick_shouldUpdateSetting() {
         val scenario = launchFragmentInContainer<AdaptiveConnectivitySettings>()
         scenario.onFragment { fragment: AdaptiveConnectivitySettings ->
@@ -167,7 +132,6 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
     fun getPreferenceHierarchy_mobileToggleHiddenForCarrier_mobileNetworkToggleIsHidden() {
         val subId = 1
         val carrierId = 1234
@@ -199,7 +163,6 @@ class AdaptiveConnectivityScreenTest() : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
     fun getPreferenceHierarchy_mobileToggleShownForCarrier_mobileNetworkToggleIsShown() {
         val subId = 1
         val carrierId = 1234
