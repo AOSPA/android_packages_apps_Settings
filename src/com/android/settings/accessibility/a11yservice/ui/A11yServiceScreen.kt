@@ -120,6 +120,9 @@ private constructor(
     override val key: String
         get() = KEY
 
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
+
     // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.a11y_service_detail_screen_purpose
