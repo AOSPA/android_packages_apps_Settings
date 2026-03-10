@@ -20,6 +20,7 @@ import android.app.Dialog;
 import android.app.settings.SettingsEnums;
 import android.app.timedetector.TimeDetectorHelper;
 import android.content.Context;
+import android.timezone.flags.Flags;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,6 +54,9 @@ public class DateTimeSettings extends DashboardFragment implements
 
     @Override
     protected int getPreferenceScreenResId() {
+        if (Flags.enableTernaryTimeFormatSetting()) {
+            return R.xml.date_time_new_prefs;
+        }
         return R.xml.date_time_prefs;
     }
 
@@ -73,9 +77,16 @@ public class DateTimeSettings extends DashboardFragment implements
         use(AutoTimeZonePreferenceController.class)
                 .setTimeAndDateCallback(this)
                 .setFromSUW(isFromSUW);
-        use(TimeFormatPreferenceController.class)
-                .setTimeAndDateCallback(this)
-                .setFromSUW(isFromSUW);
+
+        if (Flags.enableTernaryTimeFormatSetting()) {
+            use(TimeFormatTernaryPreferenceController.class)
+                    .setTimeAndDateCallback(this)
+                    .setFromSUW(isFromSUW);
+        } else {
+            use(TimeFormatPreferenceController.class)
+                    .setTimeAndDateCallback(this)
+                    .setFromSUW(isFromSUW);
+        }
 
         // All the elements in the category are optional, so we must ensure the category is only
         // available if any of the elements are available.
@@ -140,6 +151,9 @@ public class DateTimeSettings extends DashboardFragment implements
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.date_time_prefs);
+            new BaseSearchIndexProvider(
+                    Flags.enableTernaryTimeFormatSetting()
+                            ? R.xml.date_time_new_prefs
+                            : R.xml.date_time_prefs);
 }
 // LINT.ThenChange(DateTimeSettingsScreen.kt, DateTimeSettingsApiScreen.kt)
