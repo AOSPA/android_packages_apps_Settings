@@ -19,19 +19,24 @@ package com.android.settings.datausage
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.net.NetworkPolicyManager
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.applications.AppInfoBase
+import com.android.settings.datausage.AppDataUsageScreenApi.Companion.APP_BACKGROUND_DATA_SWITCH_KEY
 import com.android.settings.datausage.AppDataUsageScreenApi.Companion.KEY_APP_PACKAGE_NAME
+import com.android.settings.datausage.AppDataUsageScreenApi.Companion.getBackgroundDataEnabled
 import com.android.settings.datausage.AppDataUsageScreenApi.Companion.getPackageUid
+import com.android.settings.datausage.AppDataUsageScreenApi.Companion.setBackgroundDataEnabled
 import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.Parameters
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
@@ -43,9 +48,12 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.doThrow
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 
 @RunWith(AndroidJUnit4::class)
 class AppDataUsageScreenApiTest {
@@ -54,8 +62,19 @@ class AppDataUsageScreenApiTest {
 
     private lateinit var context: Context
     private val mockPm = mock<PackageManager>()
+    private val mockNpm = mock<NetworkPolicyManager>()
+    private val mockDataSaverBackend = mock<DataSaverBackend>()
     private lateinit var screen: AppDataUsageScreenApi
     private lateinit var tester: ApiTester
+
+    private val packageName = "com.android.settings"
+    private val testUid = 1000
+    private val unknownPackage = "unknown.package"
+    private val unknownAppInfo =
+        ApplicationInfo().apply {
+            packageName = unknownPackage
+            uid = -1
+        }
 
     @Before
     fun setUp() = runTest {
@@ -69,16 +88,18 @@ class AppDataUsageScreenApiTest {
 
         val appInfo =
             ApplicationInfo().apply {
-                packageName = "com.android.settings"
-                uid = 1000
+                this.packageName = packageName
+                this.uid = testUid
             }
         mockPm.stub {
             on { getInstalledApplications(any<PackageManager.ApplicationInfoFlags>()) } doReturn
                 listOf(appInfo)
+            on { getPackageUid(eq(packageName), any<Int>()) } doReturn testUid
         }
 
         screen = AppDataUsageScreenApi()
         tester = ApiTester(screen)
+        tester.initializeScreenParameters(Parameters(KEY_APP_PACKAGE_NAME to packageName))
     }
 
     @Test
@@ -122,10 +143,6 @@ class AppDataUsageScreenApiTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchScreenExtra_returnsCorrectExtras() = runTest {
-        val packageName = "com.android.settings"
-        val testUid = 1234
-        mockPm.stub { on { getPackageUid(packageName, 0) } doReturn testUid }
-
         val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
 
         val schema = screen.parametersSchema!!
@@ -158,20 +175,95 @@ class AppDataUsageScreenApiTest {
 
     @Test
     fun getPackageUid_packageFound_returnsUid() {
-        val packageName = "com.test.app"
-        val testUid = 5678
-        mockPm.stub { on { getPackageUid(packageName, 0) } doReturn testUid }
-
         assertThat(context.getPackageUid(packageName)).isEqualTo(testUid)
     }
 
     @Test
-    fun getPackageUid_packageNotFound_returnsMinusOne() {
-        val packageName = "com.unknown.app"
-        mockPm.stub {
-            on { getPackageUid(packageName, 0) } doThrow PackageManager.NameNotFoundException()
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun appBackgroundDataSwitch_sensitivityLevel_isNoSensitivity() {
+        val preference = screen.preferences.first { it.key == APP_BACKGROUND_DATA_SWITCH_KEY }
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBackgroundDataEnabled_policySet_returnsFalse() {
+        mockNpm.stub {
+            on { getUidPolicy(testUid) } doReturn
+                NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND
         }
 
-        assertThat(context.getPackageUid(packageName)).isEqualTo(-1)
+        val result = context.getBackgroundDataEnabled(packageName, mockNpm)
+
+        assertThat(result).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBackgroundDataEnabled_policyUnset_returnsTrue() {
+        mockNpm.stub { on { getUidPolicy(testUid) } doReturn NetworkPolicyManager.POLICY_NONE }
+
+        val result = context.getBackgroundDataEnabled(packageName, mockNpm)
+
+        assertThat(result).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBackgroundDataEnabled_packageNotFound_returnsTrue() {
+        mockNpm.stub {
+            on { getUidPolicy(testUid) } doReturn
+                NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND
+        }
+        mockPm.stub {
+            on { getPackageUid(eq(unknownPackage), any<Int>()) } doThrow
+                PackageManager.NameNotFoundException()
+        }
+
+        val result = context.getBackgroundDataEnabled(unknownPackage, mockNpm)
+
+        assertThat(result).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBackgroundDataEnabled_policyManagerIsNull_returnsTrue() {
+        mockNpm.stub {
+            on { getUidPolicy(testUid) } doReturn
+                NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND
+        }
+        val result = context.getBackgroundDataEnabled(packageName, null)
+
+        assertThat(result).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBackgroundDataEnabled_true_enablesBackgroundData() {
+        context.setBackgroundDataEnabled(packageName, true, mockDataSaverBackend)
+
+        verify(mockDataSaverBackend).setIsDenylisted(testUid, packageName, false)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBackgroundDataEnabled_false_disablesBackgroundData() {
+        context.setBackgroundDataEnabled(packageName, false, mockDataSaverBackend)
+
+        verify(mockDataSaverBackend).setIsDenylisted(testUid, packageName, true)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBackgroundDataEnabled_packageNotFound_doesNothing() {
+        val unknownPackageName = "com.unknown.app"
+        mockPm.stub {
+            on { getPackageUid(unknownPackageName, 0) } doThrow
+                PackageManager.NameNotFoundException()
+        }
+
+        context.setBackgroundDataEnabled(unknownPackageName, true, mockDataSaverBackend)
+
+        verify(mockDataSaverBackend, never()).setIsDenylisted(any(), any(), any())
     }
 }
