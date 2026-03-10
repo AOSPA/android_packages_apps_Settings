@@ -30,6 +30,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
 
+import com.android.media.flags.Flags;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.Utils;
 import com.android.settingslib.media.LocalMediaManager;
@@ -76,14 +77,18 @@ public class MediaDeviceUpdateWorker extends SliceBackgroundWorker
         mLocalMediaManager.registerCallback(this);
         final IntentFilter intentFilter = new IntentFilter(STREAM_DEVICES_CHANGED_ACTION);
         mContext.registerReceiver(mReceiver, intentFilter);
-        mLocalMediaManager.startScan();
+        if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+            mLocalMediaManager.startScan();
+        }
     }
 
     @Override
     protected void onSliceUnpinned() {
         mLocalMediaManager.unregisterCallback(this);
         mContext.unregisterReceiver(mReceiver);
-        mLocalMediaManager.stopScan();
+        if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+            mLocalMediaManager.stopScan();
+        }
     }
 
     @Override
