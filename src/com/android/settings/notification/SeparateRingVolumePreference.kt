@@ -49,6 +49,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.and
+import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
@@ -85,7 +86,7 @@ class SeparateRingVolumePreference(private val audioHelper: AudioHelper) :
     override val preferenceActionMetrics: Int
         get() = ACTION_RING_VOLUME
 
-    override fun tags(context: Context) = arrayOf(KEY_RING_VOLUME)
+    override fun tags(context: Context) = arrayOf(KEY_RING_VOLUME, HERO_SET)
 
     override fun getIcon(context: Context) = context.getIconRes()
 
