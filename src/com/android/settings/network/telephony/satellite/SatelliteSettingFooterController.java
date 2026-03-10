@@ -126,6 +126,7 @@ public class SatelliteSettingFooterController extends TelephonyBasePreferenceCon
                     }
                     result += getHtmlStringCombination(R.string.satellite_footer_content_section_7,
                             mSimOperatorName);
+                    result += getHtmlStringCombination(R.string.satellite_footer_content_section_8);
                     break;
                 case CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC:
                     result += getHtmlStringCombination(R.string.satellite_footer_content_section_5);
