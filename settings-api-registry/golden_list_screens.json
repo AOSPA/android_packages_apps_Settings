@@ -903,6 +903,136 @@
     "file_name": "TextReadingScreen.kt",
     "item_name": "text_reading_options_in_suw",
     "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) } extras={screen_key=text_reading_options_in_suw}"
+  },
+  {
+    "file_name": "A11yActivityScreen.kt",
+    "item_name": "a11y_activity_detail_screen",
+    "intent": "Intent { act=android.settings.ACCESSIBILITY_DETAILS_SETTINGS (has extras) } extras={android.intent.extra.COMPONENT_NAME=${component_name}, settingslib:binding_screen_args=Bundle[{component_name=${component_name}}]}"
+  },
+  {
+    "file_name": "A11yServiceScreen.kt",
+    "item_name": "a11y_service_detail_screen",
+    "intent": "Intent { act=android.settings.ACCESSIBILITY_DETAILS_SETTINGS (has extras) } extras={android.intent.extra.COMPONENT_NAME=${component_name}, settingslib:binding_screen_args=Bundle[{component_name=${component_name}}]}"
+  },
+  {
+    "file_name": "AdaptiveConnectivityApiScreen.kt",
+    "item_name": "api_adaptive_connectivity",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_adaptive_connectivity}"
+  },
+  {
+    "file_name": "AutoBrightnessApiScreen.kt",
+    "item_name": "api_auto_brightness_entry",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_auto_brightness_entry}"
+  },
+  {
+    "file_name": "DisplayApiScreen.kt",
+    "item_name": "api_display_settings_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_display_settings_screen}"
+  },
+  {
+    "file_name": "NightDisplayApiScreen.kt",
+    "item_name": "api_night_display",
+    "intent": "The device must support the Night Light feature."
+  },
+  {
+    "file_name": "AppBatteryUsageListApiScreen.kt",
+    "item_name": "app_battery_usage_list",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=app_battery_usage_list}"
+  },
+  {
+    "file_name": "DataUsageAppDetailScreen.kt",
+    "item_name": "app_data_usage_screen",
+    "intent": "Intent { act=android.intent.action.MAIN dat=package: cmp=com.android.settings/.datausage.AppDataUsageActivity (has extras) } extras={settingslib:binding_screen_args=Bundle[{app=${app}}]}"
+  },
+  {
+    "file_name": "UserAspectRatioAppApiScreen.kt",
+    "item_name": "aspect_ratio_app",
+    "intent": "The device must support users changing aspect ratio of apps and the app must be launchable."
+  },
+  {
+    "file_name": "ColorContrastApiScreen.kt",
+    "item_name": "color_contrast_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=color_contrast_screen}"
+  },
+  {
+    "file_name": "AppInfoStorageScreen.kt",
+    "item_name": "device_state_app_info_storage",
+    "intent": "Intent { act=com.android.settings.APP_STORAGE_SETTINGS dat=package: (has extras) } extras={settingslib:binding_screen_args=Bundle[{app=${app}}]}"
+  },
+  {
+    "file_name": "TabbedDisplayApiScreen.kt",
+    "item_name": "external_display_screen",
+    "intent": "The device must have at least one external display connected."
+  },
+  {
+    "file_name": "OneHandedApiScreen.kt",
+    "item_name": "one_handed_preference_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=one_handed_preference_screen}"
+  },
+  {
+    "file_name": "PrintServiceApiScreen.kt",
+    "item_name": "print_service_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={launch_screen_extra=Bundle[{EXTRA_CHECKED=true, EXTRA_TITLE=Default print service, EXTRA_SERVICE_COMPONENT_NAME=${EXTRA_SERVICE_COMPONENT_NAME}}], screen_key=print_service_settings, screen_args=Bundle[{EXTRA_SERVICE_COMPONENT_NAME=${EXTRA_SERVICE_COMPONENT_NAME}}]}"
+  },
+  {
+    "file_name": "AlarmsAndRemindersAppDetailScreen.kt",
+    "item_name": "special_access_alarms_and_reminders_app_detail",
+    "intent": "Intent { act=android.settings.REQUEST_SCHEDULE_EXACT_ALARM dat=package: (has extras) } extras={settingslib:binding_screen_args=Bundle[{pkg=${pkg}}]}"
+  },
+  {
+    "file_name": "AllFilesAccessAppDetailScreen.kt",
+    "item_name": "special_access_all_files_access_app_detail",
+    "intent": "Intent { act=android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION dat=package: (has extras) } extras={settingslib:binding_screen_args=Bundle[{pkg=${pkg}}]}"
+  },
+  {
+    "file_name": "DisplayOverOtherAppsAppDetailScreen.kt",
+    "item_name": "special_access_draw_overlay_app_detail",
+    "intent": "Intent { act=android.settings.MANAGE_APP_OVERLAY_PERMISSION dat=package: (has extras) } extras={settingslib:binding_screen_args=Bundle[{pkg=${pkg}}]}"
+  },
+  {
+    "file_name": "FullScreenNotificationsAppDetailScreen.kt",
+    "item_name": "special_access_full_screen_notifications_app_detail",
+    "intent": "Intent { act=android.settings.MANAGE_APP_USE_FULL_SCREEN_INTENT dat=package: (has extras) } extras={settingslib:binding_screen_args=Bundle[{pkg=${pkg}}]}"
+  },
+  {
+    "file_name": "InstallUnknownAppsAppDetailScreen.kt",
+    "item_name": "special_access_install_unknown_apps_app_detail",
+    "intent": "Intent { act=android.settings.MANAGE_UNKNOWN_APP_SOURCES dat=package: (has extras) } extras={settingslib:binding_screen_args=Bundle[{pkg=${pkg}}]}"
+  },
+  {
+    "file_name": "ManageWriteSettingsAppDetailScreen.kt",
+    "item_name": "special_access_manage_write_settings_app_detail",
+    "intent": "Intent { act=android.settings.action.MANAGE_WRITE_SETTINGS dat=package: (has extras) } extras={settingslib:binding_screen_args=Bundle[{pkg=${pkg}}]}"
+  },
+  {
+    "file_name": "PictureInPictureAppDetailScreen.kt",
+    "item_name": "special_access_picture_in_picture_app_detail",
+    "intent": "Intent { act=android.settings.PICTURE_IN_PICTURE_SETTINGS dat=package: (has extras) } extras={settingslib:binding_screen_args=Bundle[{pkg=${pkg}}]}"
+  },
+  {
+    "file_name": "WifiControlAppDetailScreen.kt",
+    "item_name": "special_access_wifi_control_app_detail",
+    "intent": "Intent { dat=package: cmp=com.android.settings/.WifiControlAppDetailIntent (has extras) } extras={settingslib:binding_screen_args=Bundle[{pkg=${pkg}}]}"
+  },
+  {
+    "file_name": "WriteSystemPreferencesAppDetailScreen.kt",
+    "item_name": "special_access_write_system_preferences_app_detail",
+    "intent": "Intent { act=android.settings.action.WRITE_SYSTEM_PREFERENCES dat=package: }"
+  },
+  {
+    "file_name": "ApnSettingsScreen.kt",
+    "item_name": "telephony_apn_key",
+    "intent": "Intent { act=android.intent.action.MAIN cmp=com.android.settings/.Settings$ApnSettingsActivity (has extras) } extras={settingslib:binding_screen_args=Bundle[{sub_id=${sub_id}}]}"
+  },
+  {
+    "file_name": "TextReadingScreen.kt",
+    "item_name": "text_reading_options_in_a11y",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES cmp=com.android.settings/.SettingsLaunchpadActivity (has extras) } extras={screen_key=text_reading_options_in_a11y}"
+  },
+  {
+    "file_name": "ZenAccessDetailsApiScreen.kt",
+    "item_name": "zen_access_detail",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={launch_screen_extra=Bundle[{package=${package}}], screen_key=zen_access_detail, screen_args=Bundle[{package=${package}}]}"
   }
 ]
 
