@@ -50,6 +50,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /** Preference fragment used for switch screen resolution */
+// LINT.IfChange
 @SearchIndexable
 public class ScreenResolutionFragment extends RadioButtonPickerFragment {
     private static final String TAG = "ScreenResolution";
@@ -303,9 +304,7 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
             new BaseSearchIndexProvider(R.xml.screen_resolution_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    ScreenResolutionController mController =
-                            new ScreenResolutionController(context, SCREEN_RESOLUTION_KEY);
-                    return mController.checkSupportedResolutions();
+                    return ScreenResolutionExtensionsKt.checkSupportedResolutions(context);
                 }
             };
 
@@ -422,3 +421,4 @@ public class ScreenResolutionFragment extends RadioButtonPickerFragment {
         }
     }
 }
+// LINT.ThenChange(ScreenResolutionApiScreen.kt)
