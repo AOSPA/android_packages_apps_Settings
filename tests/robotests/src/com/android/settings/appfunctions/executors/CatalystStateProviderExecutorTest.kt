@@ -437,7 +437,7 @@ class CatalystStateProviderExecutorTest {
     }
 
     @Test
-    fun execute_onNoSensitivityNestedScreens_includesBothScreens() = runTest {
+    fun execute_onNoSensitivityNestedScreens_includesOnlyOuterScreen() = runTest {
         val innerSensitiveScreen = createScreen(
             PreferenceScreenConfig(
                 screenKey = "inner_no_sensitivity_screen_key",
@@ -486,9 +486,8 @@ class CatalystStateProviderExecutorTest {
         val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
 
         assertThat(deviceStateResult.states).hasSize(1)
-        assertThat(deviceStateResult.states[0].deviceStateItems).hasSize(2)
+        assertThat(deviceStateResult.states[0].deviceStateItems).hasSize(1)
         assertThat(deviceStateResult.states[0].deviceStateItems[0].key).isEqualTo("outer_no_sensitivity_screen_key/outer_no_sensitivity_preference")
-        assertThat(deviceStateResult.states[0].deviceStateItems[1].key).isEqualTo("outer_no_sensitivity_screen_key/inner_no_sensitivity_screen_key")
     }
 
     @Test

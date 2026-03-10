@@ -163,9 +163,6 @@ class CatalystStateMetadataProviderExecutor(
         val deviceStateItemMetadataList = mutableListOf<DeviceStateItemMetadata>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            // skip if metadata is screen
-            if(metadata is PreferenceScreenMetadata)
-                return@forEach
             // skip over explicitly disabled preferences
             val metadataProto = try {
                 metadata.toProto(
