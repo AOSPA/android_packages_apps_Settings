@@ -28,6 +28,7 @@ import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.isExposable
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 
 /**
@@ -35,11 +36,7 @@ import kotlinx.coroutines.flow.toList
  * of fetching, validating, and iterating over preferences.
  *
  * @param screenKey The key of the preference screen to process.
- * @param additionalConfigCheck An optional lambda to perform extra validation on the screen's
- *   config.
- * @param itemProcessor A suspendable lambda that takes a preference's metadata and config, and
- *   returns a processed item of type T, or null to skip it.
- * @return A Pair containing the screen's metadata and the list of processed items, or null if the
+ * @return A Map containing the screen's metadata and the list of processed items, or empty map if the
  *   screen is invalid or disabled.
  */
 suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
@@ -61,50 +58,25 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
 
     val hierarchies =
         if (PreferenceScreenRegistry.isParameterized(context, screenKey)) {
-            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                if (removeDuplicates) {
-                    listOf(
-                        getPreferenceHierarchy(
-                            context,
-                            screenKey,
-                            args = null,
-                            keyParameters =
-                                PreferenceScreenRegistry.getKeyParameters(context, screenKey)
-                                    .toList()[0],
-                        )
-                    )
-                } else {
-                    PreferenceScreenRegistry.getKeyParameters(context, screenKey).toList().map {
-                        getPreferenceHierarchy(
-                            context,
-                            screenKey,
-                            args = null,
-                            keyParameters = it,
-                        )
-                    }
-                }
+            val paramsFlow = if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                PreferenceScreenRegistry.getKeyParameters(context, screenKey)
             } else {
-                if (removeDuplicates) {
-                    listOf(
-                        getPreferenceHierarchy(
-                            context,
-                            screenKey,
-                            args =
-                                PreferenceScreenRegistry.getParameters(context, screenKey)
-                                    .toList()[0],
-                            keyParameters = null,
-                        )
-                    )
-                } else {
-                    PreferenceScreenRegistry.getParameters(context, screenKey).toList().map {
-                        getPreferenceHierarchy(
-                            context,
-                            screenKey,
-                            args = it,
-                            keyParameters = null,
-                        )
-                    }
-                }
+                PreferenceScreenRegistry.getParameters(context, screenKey)
+            }
+
+            val targetParams = if (removeDuplicates) {
+                paramsFlow.take(1).toList()
+            } else {
+                paramsFlow.toList()
+            }
+
+            targetParams.map { param ->
+                getPreferenceHierarchy(
+                    context,
+                    screenKey,
+                    args = param as? Bundle,
+                    keyParameters = param as? ValidatedKeyParameters,
+                )
             }
         } else {
             listOf(
