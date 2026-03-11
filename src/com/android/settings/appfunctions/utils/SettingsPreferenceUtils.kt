@@ -48,6 +48,12 @@ data class PreferenceDetails(
     val isAvailable: Boolean,
     val isEnabled: Boolean,
     val isWriteable: Boolean,
+    val hasError: Boolean
+)
+
+data class SettingsPreferenceValueResult(
+    val value: SettingsPreferenceValue?,
+    val hasError: Boolean
 )
 
 /** Helper method to get a preference value using the SettingsPreferenceServiceClient. */
@@ -84,11 +90,12 @@ suspend fun getPreference(
         val sensitivityLevelString = getSensitivityLevelString(preferenceProto)
 
         PreferenceDetails(
-            result,
-            sensitivityLevelString,
-            preferenceProto.available,
-            preferenceProto.enabled,
-            preferenceProto.writable,
+            settingsPreferenceValue = result.value,
+            sensitivityLevel = sensitivityLevelString,
+            isAvailable = preferenceProto.available,
+            isEnabled = preferenceProto.enabled,
+            isWriteable = preferenceProto.writable,
+            hasError = result.hasError
         )
     } catch (e: Exception) {
         Log.e(TAG, "Error getting preference value", e)
@@ -154,29 +161,63 @@ suspend fun setPreference(
     }
 }
 
-fun PreferenceProto.toSettingsPreferenceValue(): SettingsPreferenceValue? {
-    if (hasValue()) {
+private fun PreferenceProto.toSettingsPreferenceValue(): SettingsPreferenceValueResult {
+    var hasError = false
+
+    val settingsPreferenceValue = if (hasValue()) {
         val protoValue = value
-        return when {
+        when {
             protoValue.hasBooleanValue() -> {
                 SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_BOOLEAN)
                     .setBooleanValue(protoValue.booleanValue)
                     .build()
             }
+
             protoValue.hasIntValue() -> {
                 SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_INT)
                     .setIntValue(protoValue.intValue)
                     .build()
             }
+
             protoValue.hasStringValue() -> {
                 SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_STRING)
                     .setStringValue(protoValue.stringValue)
                     .build()
             }
-            else -> null
+
+            protoValue.hasLongValue() -> {
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_LONG)
+                    .setLongValue(protoValue.longValue)
+                    .build()
+            }
+
+            protoValue.hasFloatValue() -> {
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_DOUBLE)
+                    .setDoubleValue(protoValue.floatValue.toDouble())
+                    .build()
+            }
+
+            protoValue.hasError() -> {
+                hasError = true
+                SettingsPreferenceValue.Builder(SettingsPreferenceValue.TYPE_STRING)
+                    .setStringValue("${protoValue.error.error}")
+                    .build()
+            }
+
+            else -> {
+                hasError = true
+                null
+            }
         }
+    } else {
+        hasError = true
+        null
     }
-    return null
+
+    return SettingsPreferenceValueResult(
+        value = settingsPreferenceValue,
+        hasError = hasError
+    )
 }
 
 /** Helper method to convert a SettingsPreferenceValue to its string representation. */
@@ -187,6 +228,8 @@ fun settingsPreferenceValueToString(value: SettingsPreferenceValue?): String {
             SettingsPreferenceValue.TYPE_BOOLEAN -> value.booleanValue.toString()
             SettingsPreferenceValue.TYPE_INT -> value.intValue.toString()
             SettingsPreferenceValue.TYPE_STRING -> value.stringValue ?: ""
+            SettingsPreferenceValue.TYPE_LONG -> value.longValue.toString()
+            SettingsPreferenceValue.TYPE_DOUBLE -> value.doubleValue.toString()
             else -> ""
         }
     } catch (e: Exception) {
