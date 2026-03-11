@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/time_notifications_title">
+
+    <SwitchPreferenceCompat
+        android:key="time_zone_change_notifications"
+        android:title="@string/time_zone_change_notifications_toggle_title"
+        android:summary="@string/summary_placeholder"
+        settings:keywords="@string/keywords_time_notification_category"
+        settings:controller="com.android.settings.datetime.TimeZoneNotificationsPreferenceController" />
+
+    <SwitchPreferenceCompat
+        android:key="time_zone_offset_change_notification"
+        android:title="@string/time_zone_offset_change_notification_toggle_title"
+        android:summary="@string/time_zone_offset_change_notification_toggle_summary"
+        settings:keywords="@string/keywords_time_zone_offset_change_notification_category"
+        settings:controller="com.android.settings.datetime.TimeZoneOffsetChangeNotificationsPreferenceController" />
+
+    <Preference
+        android:key="time_zone_offset_change_footer"
+        android:title="@string/footer_time_zone_offset_change_next_change"
+        android:summary="@string/summary_placeholder"
+        settings:controller="com.android.settings.datetime.TimeZoneOffsetInfoPreferenceController" />
+
+</PreferenceScreen>
