@@ -32,7 +32,9 @@ import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFac
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.google.common.truth.Truth.assertThat
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -136,14 +138,16 @@ class CatalystStateGetterExecutorTest {
     }
 
     @Test
-    fun execute_missingParams_returnsNullResult() = runTest {
-        val result = executor.execute(DeviceStateAppFunctionType.GET_DEVICE_STATE, null)
-
-        assertThat(result.result).isNull()
+    fun execute_missingParams_throwsException() = runTest {
+        val exception =
+            assertThrows(IllegalArgumentException::class.java) {
+                runBlocking { executor.execute(DeviceStateAppFunctionType.GET_DEVICE_STATE, null) }
+            }
+        assertThat(exception.message).isEqualTo("Provided params are null.")
     }
 
     @Test
-    fun execute_invalidKey_returnsNullResult() = runTest {
+    fun execute_invalidKey_throwsException() = runTest {
         val coord = PreferenceCoordinate("invalid_key", "invalid_key")
         val response =
             PreferenceGetterResponse(
@@ -161,8 +165,12 @@ class CatalystStateGetterExecutorTest {
                 .setPropertyDocument("getDeviceStateItemParams", innerDoc)
                 .build()
 
-        val result = executor.execute(DeviceStateAppFunctionType.GET_DEVICE_STATE, params)
-
-        assertThat(result.result).isNull()
+        val exception =
+            assertThrows(IllegalArgumentException::class.java) {
+                runBlocking {
+                    executor.execute(DeviceStateAppFunctionType.GET_DEVICE_STATE, params)
+                }
+            }
+        assertThat(exception.message).isEqualTo("Key [invalid_key] not found")
     }
 }
