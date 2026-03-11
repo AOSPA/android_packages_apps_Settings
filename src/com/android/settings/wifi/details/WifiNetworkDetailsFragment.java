@@ -148,6 +148,17 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
                 .setWifiEntry(wifiEntry);
         use(WepLessSecureWarningController.class)
                 .setWifiEntry(wifiEntry);
+        List<AbstractPreferenceController> wifiNetworkDetailsUiControllers =
+                useGroup(AbstractWifiNetworkDetailsUiController.class);
+        wifiNetworkDetailsUiControllers.forEach(
+                controller -> {
+                    AbstractWifiNetworkDetailsUiController uiController =
+                            (AbstractWifiNetworkDetailsUiController) controller;
+                    uiController.setWifiNetworkDetailsFragment(this);
+                    uiController.setWifiEntry(wifiEntry);
+                }
+        );
+
     }
 
     @Override

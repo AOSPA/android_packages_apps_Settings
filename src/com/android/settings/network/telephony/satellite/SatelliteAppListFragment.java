@@ -25,6 +25,7 @@ import android.graphics.drawable.Drawable;
 import android.os.UserManager;
 import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
@@ -79,8 +80,8 @@ public class SatelliteAppListFragment extends RestrictedDashboardFragment {
     static class SatelliteAppListPreferenceController extends BasePreferenceController {
         private static final String TAG = "SatelliteAppListPreferenceController";
         private static final String KEY = "key_satellite_app_list";
-
-        private List<ApplicationInfo> mApplicationInfoList = List.of();
+        @Nullable
+        private SatelliteRepository mSatelliteRepository = null;
 
         SatelliteAppListPreferenceController(@NonNull Context context) {
             super(context, KEY);
@@ -92,20 +93,24 @@ public class SatelliteAppListFragment extends RestrictedDashboardFragment {
         }
 
         void init(@NonNull SatelliteRepository satelliteRepository) {
-            mApplicationInfoList =
-                    satelliteRepository.getSatelliteDataOptimizedApps()
-                            .stream()
-                            .map(name -> getApplicationInfo(mContext, name))
-                            .collect(Collectors.toList());
+            mSatelliteRepository = satelliteRepository;
         }
 
         @Override
         public void displayPreference(PreferenceScreen screen) {
             super.displayPreference(screen);
-            if (mApplicationInfoList.isEmpty()) {
+            if (mSatelliteRepository == null) {
                 return;
             }
-            mApplicationInfoList.forEach(appInfo -> {
+            List<ApplicationInfo> applicationInfoList =
+                    mSatelliteRepository.getSatelliteDataOptimizedApps()
+                            .stream()
+                            .map(name -> getApplicationInfo(mContext, name))
+                            .collect(Collectors.toList());
+            if (applicationInfoList.isEmpty()) {
+                return;
+            }
+            applicationInfoList.forEach(appInfo -> {
                 if (appInfo != null) {
                     Log.i(TAG, "Add preference to UI : " + appInfo.packageName);
                     Drawable icon = Utils.getBadgedIcon(mContext, appInfo);

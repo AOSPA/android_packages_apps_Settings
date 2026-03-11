@@ -71,7 +71,6 @@ class CatalystStateMetadataProviderExecutor(
     private val context: Context,
     private val englishContext: Context,
 ) : DeviceStateExecutor {
-    private val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
     private val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     private val screenKeyList = perScreenConfigMap.keys.toList()
 
@@ -161,7 +160,6 @@ class CatalystStateMetadataProviderExecutor(
         val deviceStateItemMetadataList = mutableListOf<DeviceStateItemMetadata>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            val config = settingConfigMap[metadata.key]
             // skip over UI-only preferences
             if(metadata.isUiOnlyPreference(context))
                 return@forEach
@@ -204,20 +202,14 @@ class CatalystStateMetadataProviderExecutor(
                         metadata.getPreconditionsAsString(context),
                         metadata.setPreconditionsAsString(context),
                         metadata.setWarningAsString(context),
-                        config?.hintText(englishContext, metadata)
                     ).joinToString(separator = "\n").replace("..", ".")
             deviceStateItemMetadataList.add(
                 DeviceStateItemMetadata(
-                    // TODO: Expose parameterization
                     key = "${screenMetaData.key}/${metadataProto.key}",
                     purpose = metadataProto.getPurposeString(),
-                    // Currently api-first screens and preferences do not have
-                    // titles
-                    name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*>) null
-                    else LocalizedString(
-                            english = metadata.getPreferenceTitle(englishContext).toString(),
-                            localized = metadata.getPreferenceTitle(context).toString(),
-                        ),
+                    // Name contains values so should not be in metadata. The
+                    // valuable information here is now in the purpose.
+                    name = null,
                     sensitivity = sensitivityLevel,
                     writable = writable,
                     possibleValues = if (metadata is ApiPreference<*>) {
@@ -244,7 +236,7 @@ class CatalystStateMetadataProviderExecutor(
             description = (
                     listOfNotNull(
                         if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else "",
-                        // This is a hack to remove the title from parametrised screens as it may contain
+                        // This is a hack to remove the title from parameterised screens as it may contain
                         // some text referring to that specific parameter which could confuse the agent.
                         if (isParameterized) ""
                             else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
@@ -259,12 +251,7 @@ class CatalystStateMetadataProviderExecutor(
             // complex than a string so we can communicate more detail
             itemizationTypes = screenMetaData.keyParametersSchema?.getParameters()?.values?.map {
                     val type = it.type
-                    if (type is FiniteOptionsType) {
-                        val optionsString = type.getOptions(context).map { "${it.first} (${it.second})" }.joinToString(",")
-                        "${type.getKey()} - ${type.getDescription(context)} - options: $optionsString"
-                    } else {
-                        "${type.getKey()} - ${type.getDescription(context)}"
-                    }
+                    "${type.getKey()} - ${type.getDescription(context)}"
                 }?.toList() ?: emptyList(),
         )
     }

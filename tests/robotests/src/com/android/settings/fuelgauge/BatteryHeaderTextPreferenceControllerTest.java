@@ -186,6 +186,20 @@ public class BatteryHeaderTextPreferenceControllerTest {
     }
 
     @Test
+    public void updateHeaderPreference_withBatteryStatusLabel_showsStatusLabel() {
+        final String expectedLabel = "Custom Battery Status Label";
+        when(mFactory.batterySettingsFeatureProvider.getBatteryStatusLabel(mContext, mBatteryInfo))
+                .thenReturn(expectedLabel);
+        // Set some other info to ensure it's ignored.
+        mBatteryInfo.remainingLabel = TIME_LEFT;
+        mBatteryInfo.statusLabel = BATTERY_STATUS;
+
+        mController.updateHeaderPreference(mBatteryInfo);
+
+        verify(mBatteryHeaderTextPreference).setText(expectedLabel);
+    }
+
+    @Test
     public void updatePreference_triggerBatteryStatusUpdateFalse_updateBatteryInfo() {
         setChargingState(/* isDischarging */ true, /* updatedByStatusFeature */ false);
 

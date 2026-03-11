@@ -105,6 +105,9 @@ class SupervisionUpdateRecoveryEmailPreference :
         return spannableEmail
     }
 
+    override val availabilityDescription =
+        "The device must support the PIN recovery screen and the recovery email must be verified."
+
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionPinRecoveryScreen()) {
             return false

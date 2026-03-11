@@ -73,6 +73,8 @@ class WifiCallingMainSwitchPreference(private val subId: Int) :
         context.isCallStateIdle(subId) &&
             WifiCallingQueryImsState(context, subId).isAllowUserControl
 
+    override val availabilityDescription = "The subscription ID must be valid and wifi calling must be ready."
+
     override fun isAvailable(context: Context) =
         SubscriptionManager.isValidSubscriptionId(subId) &&
             runBlocking { WifiCallingRepository(context, subId).wifiCallingReadyFlow().first() }

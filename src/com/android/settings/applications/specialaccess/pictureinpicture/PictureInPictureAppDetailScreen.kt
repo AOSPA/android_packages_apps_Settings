@@ -88,6 +88,9 @@ open class PictureInPictureAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override fun isFlagEnabled(context: Context) = context.isPictureInPictureEnabled()
 
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested picture in picture permission."
+
     override fun isAvailable(context: Context) =
         super.isAvailable(context) && pictureInPictureFilter(context, packageInfo?.applicationInfo)
 

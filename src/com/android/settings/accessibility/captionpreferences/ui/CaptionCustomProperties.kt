@@ -39,6 +39,7 @@ import com.android.settingslib.preference.PreferenceBinding
 
 /** Mixin for preferences only available when custom caption style is selected. */
 interface CustomCaptionPreference : PreferenceMetadata, PreferenceAvailabilityProvider {
+
     override fun isAvailable(context: Context): Boolean =
         context.getSystemService<CaptioningManager>()?.rawUserStyle ==
             CaptioningManager.CaptionStyle.PRESET_CUSTOM
@@ -85,6 +86,9 @@ class CaptionFontFamilyPreference(context: Context) :
     override fun getSummary(context: Context): CharSequence? =
         summaryMap.getSummary(context, storage(context).getString(key))
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     companion object {
         private const val KEY = "captioning_typeface"
     }
@@ -117,6 +121,9 @@ class CaptionEdgeTypePreference(context: Context) :
     override val valueType: Class<Int>
         get() = Int::class.javaObjectType
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     private val summaryMap by lazy {
         SummaryMap(values, valuesDescription, useIntValues = true) { _, v -> v as Int }
     }
@@ -142,6 +149,9 @@ class CaptionEdgeColorPreference(context: Context) :
     PersistentPreference<Int>, PreferenceBinding, DiscreteIntValue, CustomCaptionPreference {
     override val key: String
         get() = KEY
+
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
 
     override val title: Int
         get() = R.string.captioning_edge_color

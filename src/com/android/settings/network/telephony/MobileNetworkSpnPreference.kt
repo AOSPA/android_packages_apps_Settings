@@ -28,11 +28,14 @@ import com.android.settings.wifi.utils.isAdminUser
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 
 // LINT.IfChange
 @SuppressLint("MissingPermission")
 class MobileNetworkSpnPreference(private val context: Context, private val subId: Int) :
     PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+
+    override val availabilityDescription = "The user must be an admin user, the device must be mobile data capable or voice capable, and the subscription id must be valid."
 
     private val isAvailable =
         context.isAdminUser == true &&
@@ -61,6 +64,9 @@ class MobileNetworkSpnPreference(private val context: Context, private val subId
                 carrierName
             } ?: "".also { Log.w(TAG, "getCarrierName(), subId=$subId, subscription is empty") }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val TAG = "MobileNetworkSpnPreference"

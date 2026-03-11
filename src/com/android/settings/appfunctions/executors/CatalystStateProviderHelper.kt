@@ -20,12 +20,13 @@ import android.content.Context
 import android.os.Bundle
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
-import com.android.settings.appfunctions.DeviceStateItemConfig
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.toList
@@ -49,7 +50,6 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
     screenKey: String,
     removeDuplicates: Boolean = false,
 ): Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>> {
-    val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
     val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     val perScreenConfig = perScreenConfigMap[screenKey]
     if (
@@ -72,7 +72,6 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
                             keyParameters =
                                 PreferenceScreenRegistry.getKeyParameters(context, screenKey)
                                     .toList()[0],
-                            settingConfigMap,
                         )
                     )
                 } else {
@@ -82,7 +81,6 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
                             screenKey,
                             args = null,
                             keyParameters = it,
-                            settingConfigMap,
                         )
                     }
                 }
@@ -96,7 +94,6 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
                                 PreferenceScreenRegistry.getParameters(context, screenKey)
                                     .toList()[0],
                             keyParameters = null,
-                            settingConfigMap,
                         )
                     )
                 } else {
@@ -106,7 +103,6 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
                             screenKey,
                             args = it,
                             keyParameters = null,
-                            settingConfigMap,
                         )
                     }
                 }
@@ -118,7 +114,6 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
                     screenKey,
                     args = null,
                     keyParameters = null,
-                    settingConfigMap,
                 )
             )
         }
@@ -131,7 +126,6 @@ private suspend fun CoroutineScope.getPreferenceHierarchy(
     screenKey: String,
     args: Bundle?,
     keyParameters: ValidatedKeyParameters?,
-    settingConfigMap: Map<String, DeviceStateItemConfig>,
 ): Pair<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>? {
     val screenMetaData =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -140,17 +134,12 @@ private suspend fun CoroutineScope.getPreferenceHierarchy(
             PreferenceScreenRegistry.create(context, screenKey, args)
         } ?: return null
 
-    if (screenMetaData is PreferenceAvailabilityProvider && !screenMetaData.isAvailable(context)) {
-        return null
-    }
     val preferenceHierarchy = mutableListOf<PreferenceHierarchyNode>()
-    // TODO if child node is PreferenceScreen, recursively process it
     screenMetaData.getPreferenceHierarchy(context, this).forEachRecursivelyAsync {
         val metadata = it.metadata
-        val config = settingConfigMap[metadata.key]
-        // Skip over explicitly disabled preferences
-        if (config?.enabled == false) return@forEachRecursivelyAsync
+        val tags = metadata.tags(context)
 
+        if (tags.contains(UI_ONLY_PREFERENCE)) return@forEachRecursivelyAsync
         preferenceHierarchy.add(it)
     }
     return screenMetaData to preferenceHierarchy

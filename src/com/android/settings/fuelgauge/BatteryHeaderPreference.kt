@@ -76,6 +76,8 @@ class BatteryHeaderPreference :
         }
     }
 
+    override val availabilityDescription = "The device must have a battery"
+
     override fun isAvailable(context: Context) =
         com.android.settings.Utils.isBatteryPresent(context)
 

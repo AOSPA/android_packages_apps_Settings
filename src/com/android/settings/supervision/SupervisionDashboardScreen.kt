@@ -174,6 +174,8 @@ open class SupervisionDashboardScreen :
     override val icon: Int
         get() = R.drawable.ic_account_child_invert
 
+    override val availabilityDescription = "The device must not be in demo mode, or the device must support supervision during demo mode."
+
     override fun isAvailable(context: Context) = !Utils.shouldHideSupervisionInDemoMode(context)
 
     override val indexable

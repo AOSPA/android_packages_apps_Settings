@@ -73,8 +73,8 @@
     <string name="adaptive_connectivity_wifi_enabled_purpose" translatable="false">Whether to automatically switch to the mobile network when the Wi-Fi connection is poor or unavailable.</string>
     <string name="airplane_mode_footer_purpose" translatable="false">airplane_mode_footer</string>
     <string name="airplane_mode_settings_airplane_mode_on_purpose" translatable="false">Whether or not airplane mode is currently enabled, which disables wireless communications.</string>
-    <string name="airplane_mode_settings_purpose" translatable="false">airplane_mode_settings</string>
-    <string name="airplane_mode_sync_purpose" translatable="false">airplane_mode_sync</string>
+    <string name="airplane_mode_settings_purpose" translatable="false">Describes the page within settings where Airplane Mode can be toggled and related options can be configured.</string>
+    <string name="airplane_mode_sync_purpose" translatable="false">Controls whether enabling or disabling Airplane Mode on this device should also change the state on other connected devices, like a smartwatch.</string>
     <string name="ambient_display_always_on_intro_purpose" translatable="false">ambient_display_always_on_intro</string>
     <string name="ambient_display_always_on_key_purpose" translatable="false">Whether to keep the display on to show info like time and date when the device is idle</string>
     <string name="ambient_display_always_on_screen_purpose" translatable="false">Allows users to enable and customize the Always-on display, which shows time, date, and other information even when the screen is off.</string>
@@ -160,6 +160,7 @@
     <string name="hardware_info_device_revision_purpose" translatable="false">The hardware version of the device</string>
     <string name="device_state_all_recent_location_access_purpose" translatable="false">Allows users to view a list of applications that have recently accessed the device\'s location.</string>
     <string name="device_state_app_info_notification_access_purpose" translatable="false">device_state_app_info_notification_access_purpose</string>
+    <string name="device_state_auto_rotate_pref_screen_purpose" translatable="false">Allows the user to view and enable automatic screen rotation, also known as auto-rotate.</string>
     <string name="device_state_notification_access_alerting_preference_purpose" translatable="false">device_state_notification_access_alerting_preference</string>
     <string name="device_state_notification_access_approval_preference_purpose" translatable="false">device_state_notification_access_approval_preference</string>
     <string name="device_state_notification_access_conversations_preference_purpose" translatable="false">device_state_notification_access_conversations_preference</string>
@@ -168,7 +169,7 @@
     <string name="app_size_purpose" translatable="false">app_size</string>
     <string name="cache_size_purpose" translatable="false">cache_size</string>
     <string name="data_size_purpose" translatable="false">data_size</string>
-    <string name="device_state_app_info_storage_purpose" translatable="false">The amount of storage space used by a specific application.</string>
+    <string name="device_state_app_info_storage_purpose" translatable="false">Allows users to view a detailed breakdown of storage usage for a specific application and manage its space by clearing data or cache.</string>
     <string name="total_size_purpose" translatable="false">total_size</string>
     <string name="device_state_apps_storage_purpose" translatable="false">Allows users to view a list of all installed applications and the amount of storage space each occupies on the device.</string>
     <string name="brightness_purpose" translatable="false">The current brightness level of the screen</string>
@@ -262,7 +263,8 @@
     <string name="internet_settings_purpose" translatable="false">Allows users to manage Wi-Fi connectivity, including toggling Wi-Fi on or off, selecting from available networks, and viewing non-carrier data usage.</string>
     <string name="main_toggle_wifi_purpose" translatable="false">Whether Wi-Fi is enabled on the device</string>
     <string name="non_carrier_data_usage_purpose" translatable="false">View the amount of data used over Wi-Fi connections</string>
-    <string name="non_carrier_data_usage_screen_purpose" translatable="false">non_carrier_data_usage_screen</string>
+    <string name="non_carrier_data_usage_screen_purpose" translatable="false">Displays the amount of data used over Wi-Fi connections</string>
+    <string name="non_carrier_app_data_usage_screen_purpose">Displays the amount of data used by the app over Wi-Fi connections</string>
     <string name="wifi_category_purpose" translatable="false">wifi_category</string>
     <string name="wifi_ext_category_purpose" translatable="false">wifi_ext_category</string>
     <string name="language_and_region_settings_purpose" translatable="false">Allows users to manage preferred system languages and customize regional preferences such as region, temperature units, measurement systems, and the first day of the week.</string>
@@ -692,4 +694,6 @@
     <string name="external_display_screen_purpose" translatable="false">Allows users to manage and configure connected external monitors. This includes selecting the display mode (such as mirroring the device screen or extending it), adjusting screen rotation, and toggling High Dynamic Range (HDR) capabilities.</string>
     <string name="external_display_resolution_screen_purpose" translatable="false">Allows users to fine-tune the visual output for a connected external monitor by selecting a specific physical screen resolution and adjusting the refresh rate (Hz) to optimize clarity and performance.</string>
     <string name="external_display_id_parameter_purpose" translatable="false">The unique system identifier of the specific external display the user wants to configure or query.</string>
+
+    <string name="cellular_security_purpose" translatable="false">Allows the user to manage mobile network security features, including 2G network protection and encryption settings.</string>
 </resources>

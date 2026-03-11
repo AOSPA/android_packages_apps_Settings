@@ -18,6 +18,7 @@ package com.android.settings.security.screenlock;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
@@ -50,7 +51,9 @@ public class PowerButtonInstantLockPreferenceController extends AbstractPreferen
 
     @Override
     public boolean isAvailable() {
-        if (!mLockPatternUtils.isSecure(mUserId)) {
+        boolean isLaptopDevice =
+                mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_PC);
+        if (!mLockPatternUtils.isSecure(mUserId) || isLaptopDevice) {
             return false;
         }
         switch (mLockPatternUtils.getKeyguardStoredPasswordQuality(mUserId)) {

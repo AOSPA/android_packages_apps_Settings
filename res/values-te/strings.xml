@@ -330,6 +330,11 @@
     <string name="date_time_set_time_title" msgid="2870083415922991906">"సమయం"</string>
     <string name="time_format_category_title" msgid="7108616745509689991">"టైమ్ ఫార్మాట్‌"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"టైమ్ జోన్"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"ఇంటి టైమ్‌జోన్"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"టైమ్ జోన్‌ను ఎంచుకోండి"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"మీరు దూరంగా ఉన్నప్పుడు ఇంటి టైమ్ జోన్‌ను సెట్ చేయండి"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"ఇంటి టైమ్‌జోన్‌ను ఉపయోగించండి"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"సూచనలు"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"టైమ్ జోన్‌ను ఎంచుకోండి"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"టైమ్ జోన్ కోసం సెర్చ్ చేయండి"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"తేదీ"</string>
@@ -1428,8 +1433,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"స్క్రీన్ సేవర్"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"స్క్రీన్ సేవర్"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"బెడ్ టైమ్ మోడ్ ఆన్‌లో ఉండడం వల్ల అందుబాటులో లేదు"</string>
-    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
-    <skip />
+    <string name="screensaver_unavailable_due_to_mode" msgid="8515924546767264225">"ఈ డివైజ్‌లో అందుబాటులో లేదు"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"స్క్రీన్ సేవర్‌ను ఉపయోగించండి"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ఛార్జ్ చేసేటప్పుడు లేదా డాక్ చేసినప్పుడు"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"డాక్ అయి, ఛార్జింగ్ చేస్తున్నప్పుడు"</string>
@@ -1492,7 +1496,7 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"సరే"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"రద్దు చేయండి"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM కార్డ్‌ను రక్షించండి"</string>
-    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"ఆటోమేటిక్ SIM లాక్ రక్షణ"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM లాక్ ప్రొటెక్షన్ మోడ్"</string>
     <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"ఆటోమేటిక్ PIN మేనేజ్‌మెంట్"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android ద్వారా మేనేజ్ అవుతోంది"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android ద్వారా మేనేజ్ కావడం లేదు"</string>
@@ -1505,10 +1509,17 @@
     <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"దొంగతనం నుండి SIM కార్డ్‌ను రక్షించండి"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Android ద్వారా మేనేజ్ అయ్యే SIM PIN"</string>
     <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"SIM PIN మాన్యువల్‌గా మేనేజ్ అవుతుంది"</string>
-    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"SIM ప్రొటెక్షన్‌ను ఆన్ చేయడానికి లాక్‌స్క్రీన్‌ను తప్పనిసరిగా సెటప్ చేయాలి"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"ఆటోమేటిక్ SIM రక్షణ కోసం లాక్‌స్క్రీన్ అవసరం, మాన్యువల్ మాత్రమే ఇప్పుడు అందుబాటులో ఉంది"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"ప్రస్తుత SIM PINను ఎంటర్ చేయండి"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"SIM కార్డ్ ప్రస్తుత PINను ఎంటర్ చేయండి"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"క్యారియర్ డిఫాల్ట్ వాడండి"</string>
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"SIM రక్షణ మోడ్‌ను ఎంచుకోండి"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"మాన్యువల్"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"ఆటోమేటిక్ (Android ద్వారా మేనేజ్ చేయబడింది)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"కొత్త SIM కార్డ్ PIN"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"కొత్త SIM PINను నిర్ధారించండి"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PINలు మ్యాచ్ కాలేదు. కొత్త SIM PINను నిర్ధారించండి."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"పిన్ తప్పు. మిగిలిన ప్రయత్నాలు: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"మొబైల్ డేటా కోసం <xliff:g id="CARRIER">%1$s</xliff:g> ఉపయోగించాలా?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"మీరు మొబైల్ డేటా కోసం <xliff:g id="CARRIER2_0">%2$s</xliff:g>ను వినియోగిస్తున్నారు. మీరు <xliff:g id="CARRIER1">%1$s</xliff:g>కు మారితే, <xliff:g id="CARRIER2_1">%2$s</xliff:g> ఇప్పటి నుండి మొబైల్ డేటా కోసం ఉపయోగించబడదు."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>ని ఉపయోగించండి"</string>
@@ -3435,7 +3446,7 @@
     <string name="user_settings_title" msgid="9208831545558787202">"యూజర్‌లు"</string>
     <string name="user_list_title" msgid="1387379079186123404">"వినియోగదారులు &amp; ప్రొఫైళ్లు"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"వినియోగదారు లేదా ప్రొఫైల్‌ను జోడించండి"</string>
-    <string name="user_summary_restricted_profile" msgid="451650609582185813">"పరిమితం చేయబడిన ప్రొఫైల్"</string>
+    <string name="user_summary_restricted_profile" msgid="451650609582185813">"పరిమితి ఉన్న (రిస్ట్రిక్టెడ్) ప్రొఫైల్"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"సెటప్ చేయలేదు"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"సెటప్ చేయలేదు - పరిమితం చేయబడిన ప్రొఫైల్"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"సెటప్ చేయలేదు - కార్యాలయ ప్రొఫైల్"</string>
@@ -4521,6 +4532,8 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB ప్రాధాన్యతలు"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USBని ఏది కంట్రోల్ చేయాలి"</string>
+    <!-- no translation found for usb_connected_devices (535238470176122197) -->
+    <skip />
     <string name="usb_control_host" msgid="7404215921555021871">"కనెక్ట్ అయిన డివైజ్"</string>
     <string name="usb_control_device" msgid="527916783743021577">"ఈ డివైజ్"</string>
     <string name="usb_switching" msgid="3654709188596609354">"స్విచ్ అవుతోంది…"</string>
@@ -4537,6 +4550,10 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP మరియు విద్యుత్తు శక్తి సరఫరా"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI మరియు విద్యుత్తు శక్తి సరఫరా"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"వెబ్‌క్యామ్, విద్యుత్తు సరఫరా"</string>
+    <!-- no translation found for usb_device_name_unknown_with_manufacturer_name (9075986054227881069) -->
+    <skip />
+    <!-- no translation found for usb_device_name_unknown_with_vendor_id_and_product_id (8750941211592531562) -->
+    <skip />
     <string name="background_check_pref" msgid="5304564658578987535">"బ్యాక్‌గ్రౌండ్ చెక్"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"స్క్రీన్‌పై ఉన్న టెక్స్ట్‌ను ఉపయోగించడం"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"స్క్రీన్‌పై ఉన్న కంటెంట్‌ను టెక్స్ట్ రూపంలో యాక్సెస్ చేయడానికి సహాయక యాప్‌ను అనుమతిస్తుంది"</string>

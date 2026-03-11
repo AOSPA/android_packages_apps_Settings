@@ -31,9 +31,11 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.PreferenceSetWarningProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
+import com.android.settingslib.metadata.WarningInfo
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
 class HearingAidCompatibilitySwitchPreference(private val context: Context) :
@@ -46,6 +48,7 @@ class HearingAidCompatibilitySwitchPreference(private val context: Context) :
     SwitchPreferenceBinding,
     PreferenceAvailabilityProvider,
     Preference.OnPreferenceChangeListener,
+    PreferenceSetWarningProvider,
     PreferenceLifecycleProvider {
     private var telephonyManager: TelephonyManager =
         context.getSystemService(TelephonyManager::class.java)!!
@@ -73,6 +76,20 @@ class HearingAidCompatibilitySwitchPreference(private val context: Context) :
         callingUid: Int,
     ) = ReadWritePermit.ALLOW
 
+    private fun getWarningMessage(): String? {
+        val hearingAidCompatibilityDisclaimerMessage =
+            context.getText(R.string.hac_disclaimer_message)
+
+        if (!TextUtils.isEmpty(hearingAidCompatibilityDisclaimerMessage)) {
+            return hearingAidCompatibilityDisclaimerMessage.toString()
+        }
+
+        return null
+    }
+
+    override val setWarning =
+        getWarningMessage()?.let { warningMessage -> WarningInfo(warningMessage = warningMessage) }
+
     override val sensitivityLevel
         get() = SensitivityLevel.DEEP_LINK_ONLY
 
@@ -80,6 +97,9 @@ class HearingAidCompatibilitySwitchPreference(private val context: Context) :
         super.bind(preference, metadata)
         preference.onPreferenceChangeListener = this
     }
+
+    override val availabilityDescription =
+        "The device must support hearing aid compatibility."
 
     override fun isAvailable(context: Context): Boolean =
         telephonyManager.isHearingAidCompatibilitySupported()

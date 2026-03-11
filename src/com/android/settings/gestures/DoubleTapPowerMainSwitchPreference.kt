@@ -26,6 +26,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 // LINT.IfChange
@@ -51,6 +52,9 @@ class DoubleTapPowerMainSwitchPreference :
 
     override fun storage(context: Context): KeyValueStore = createDataStore(context)
 
+    override val availabilityDescription =
+        "The device must support the double tap power button gesture."
+
     override fun isAvailable(context: Context): Boolean =
         DoubleTapPowerSettingsUtils.isMultiTargetDoubleTapPowerButtonGestureAvailable(context)
 
@@ -63,6 +67,9 @@ class DoubleTapPowerMainSwitchPreference :
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = Settings.Secure.DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED

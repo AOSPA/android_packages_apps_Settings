@@ -112,6 +112,9 @@ private constructor(
 
     override fun isEnabled(context: Context) = DataUsageUtils.hasMobileData(context)
 
+    override val availabilityDescription =
+        "The subscription ID must be active."
+
     override fun isAvailable(context: Context) =
         context.subscriptionManager?.isActiveSubscriptionId(subId) ?: false
 

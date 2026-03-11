@@ -23,6 +23,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.print.PrintRepository.PrintServiceDisplayInfo
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
@@ -72,6 +73,8 @@ class PrintServiceApiScreen :
         }
 
         preference(PRINT_SWITCH_KEY, PRINT_SWITCH_PURPOSE, AnyBoolean) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 permissions(Manifest.permission.READ_PRINT_SERVICES)
                 execute {

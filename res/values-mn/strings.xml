@@ -330,6 +330,11 @@
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Цаг"</string>
     <string name="time_format_category_title" msgid="7108616745509689991">"Цагийн формат"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Цагийн бүс"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"Гэрийн цагийн бүс"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"Цагийн бүс сонгох"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"Та гэрээсээ хол байхдаа гэрийнхээ цагийн бүсийг тохируулна уу"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"Гэрийн цагийн бүсийг ашиглах"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"Зөвлөмж"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Цагийн бүсийг сонгоно уу"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"Цагийн бүсээс хайх"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Огноо"</string>
@@ -850,8 +855,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-тай хослуулах уу?"</string>
-    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
-    <skip />
+    <string name="bluetooth_pairing_again_request" msgid="1394430519292575085">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-тай дахин хослуулах уу?"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Аудио төхөөрөмжийнхөө хоёр дахь хэсгийг нэмэхийн тулд баталгаажуулна уу"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth хослуулах код"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Хослуулах кодыг оруулаад Return буюу Enter дарна уу"</string>
@@ -865,11 +869,9 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Мөн харилцагчид болон дуудлагын түүхэд хандахыг зөвшөөрнө үү"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Мэдээллийг дуудлагын мэдэгдэл болон бусад зүйлд ашиглана"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Хослуулах кодуудыг шалгана уу"</string>
-    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
-    <skip />
+    <string name="bluetooth_pairing_again_confirmation_title" msgid="838944639700876861">"Дахин хослуулах"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Энэ код <xliff:g id="DEVICE_NAME">%1$s</xliff:g> дээрх кодтой таарч байгаа эсэхийг шалгана уу.\n\nАюулгүй байдлынхаа үүднээс энэ кодыг хаана ч бүү оруулаарай."</string>
-    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
-    <skip />
+    <string name="bluetooth_repairing_msg" msgid="4359999881389087827">"Энэ төхөөрөмжийг өмнө нь хослуулсан бөгөөд дахин хослуулахаар оролдож байна.\nХэрэв та олон нийтийн газар байвал болгоомжтой үргэлжлүүлнэ үү."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-д холбогдож чадсангүй."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Боломжтой төхөөрөмжүүд"</string>
@@ -905,8 +907,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Туршилтын. Аудио чанарыг сайжруулна."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Батарей"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Батарей, цэнэглэж байна"</string>
-    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
-    <skip />
+    <string name="device_details_key_missing_title" msgid="3747991896959671040">"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>-г хослуулах горимд оруулаад, дахин холбогдохоор оролдоно уу.\n\nХэрэв энэ төхөөрөмж ойрхон байхгүй байвал та юу ч хийх хэрэггүй."</string>
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Маш нарийвчилсан хэвлэлийн лог"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Хувийн мэдээлэл агуулж болзошгүй интернэтийн хэвлэлийн протокол (IPP) зэрэг нэмэлт дебагийн лог."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Төхөөрөмжийг мартах"</string>
@@ -1432,8 +1433,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Дэлгэц амраагч"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"дэлгэц амраагч"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Унтлагын цагийн горим асаалттай тул боломжгүй"</string>
-    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
-    <skip />
+    <string name="screensaver_unavailable_due_to_mode" msgid="8515924546767264225">"Энэ төхөөрөмж дээр боломжгүй"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Дэлгэц амраагчийг ашиглах"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Цэнэглэх эсвэл суурилуулах үед"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Суурилуулсан бөгөөд цэнэглэж байхад"</string>
@@ -1496,7 +1496,7 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Цуцлах"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM картыг хамгаалах"</string>
-    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"SIM түгжээний автомат хамгаалалт"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM түгжээний хамгаалалтын горим"</string>
     <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"ПИН-гийн автомат удирдлага"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android-с удирддаг"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android-с удирддаггүй"</string>
@@ -1509,10 +1509,17 @@
     <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"SIM картыг хулгайнаас хамгаалах"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM-н ПИН-г Android-с удирддаг"</string>
     <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"SIM-н ПИН-г гар аргаар удирддаг"</string>
-    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"SIM-н хамгаалалтыг асаахын тулд түгжээтэй дэлгэцийг тохируулах ёстой"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"SIM-н автомат хамгаалалтад түгжээтэй дэлгэц шаардлагатай бөгөөд одоогоор зөвхөн гараар удирдах боломжтой"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"SIM-н одоогийн ПИН-г оруулна уу"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"SIM картын одоогийн ПИН-г оруулна уу"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"Оператор компанийн өгөгдмөлийг ашиглах"</string>
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"SIM-н хамгаалалтын горимыг сонгох"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"Гар"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"Автомат (Android-н удирддаг)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"Шинэ SIM-н ПИН"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Шинэ SIM-н ПИН-г баталгаажуулах"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"ПИН-үүд тохирохгүй байна. Шинэ SIM-н ПИН-г баталгаажуулна уу."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"ПИН буруу байна. Үлдсэн оролдлогын тоо: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"<xliff:g id="CARRIER">%1$s</xliff:g>-г мобайл датад ашиглах уу?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Та <xliff:g id="CARRIER2_0">%2$s</xliff:g>-г мобайл датад ашиглаж байна. Хэрэв та <xliff:g id="CARRIER1">%1$s</xliff:g> руу сэлгэвэл <xliff:g id="CARRIER2_1">%2$s</xliff:g>-г мобайл датад ашиглах боломжгүй."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>-г ашиглах"</string>
@@ -3625,13 +3632,11 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Авто, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Авто"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Төхөөрөмж"</string>
-    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="534835339280267939">"Мэдрэгч самбар, гар, дэлгэц, дуу чимээ"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Гэрэлтүүлэг, өнгө, бараан загвар, түгжээтэй дэлгэц, текст"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Товчлуурт гарын сонголт, хэрэгсэл"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Курсорын хурд, товчийг тусгайлан өөрчлөх, гүйлгэх"</string>
-    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
-    <skip />
+    <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Дууны түвшин, чанга яригч, микрофон"</string>
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Курсорыг тусгайлан өөрчлөх, товших үйлдэл, гүйлгэх"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"NFC унтраалттай тул боломжгүй"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Ашиглахын тулд эхлээд төлбөр төлөх аппыг суулгана уу"</string>
@@ -4527,6 +4532,8 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB сонголт"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB-г дараахаар хянасан"</string>
+    <!-- no translation found for usb_connected_devices (535238470176122197) -->
+    <skip />
     <string name="usb_control_host" msgid="7404215921555021871">"Холбогдсон төхөөрөмж"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Энэ төхөөрөмж"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Сэлгэж байна…"</string>
@@ -4543,6 +4550,10 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP болон цэнэглэгч"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI болон цэнэглэгч"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"Вебкамер болон цэнэглэх"</string>
+    <!-- no translation found for usb_device_name_unknown_with_manufacturer_name (9075986054227881069) -->
+    <skip />
+    <!-- no translation found for usb_device_name_unknown_with_vendor_id_and_product_id (8750941211592531562) -->
+    <skip />
     <string name="background_check_pref" msgid="5304564658578987535">"Дэвсгэрийг шалгах"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Дэлгэцийн текстийг ашиглах"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Туслах аппад дэлгэцийн агуулгад текстээр хандахыг зөвшөөрөх"</string>
@@ -5325,8 +5336,7 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"Гаднын холбоосыг харахын тулд хөдөлгөөнт холбооны, Wi-Fi сүлжээ шаардлагатай."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Зарим бүсэд яаралтай тусламжийн үйлчилгээтэй мессеж бичих боломжгүй байж болзошгүй."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"Бүртгэлийн өөрчлөлтийг Тохиргоонд харуулахад хэсэг хугацаа зарцуулж болно. Дэлгэрэнгүй мэдээлэл авах бол <xliff:g id="CARRIER_NAME">%1$s</xliff:g>-тай холбогдоно уу."</string>
-    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
-    <skip />
+    <string name="satellite_footer_content_section_8" msgid="7617809843970032785">"Хиймэл дагуулын холболтод зориулж оновчилсон бүх аппыг харахын тулд оператор компанийнхаа вебсайтад зочилно уу."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"Хиймэл дагуулын холболтын талаарх нэмэлт мэдээлэл"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"<xliff:g id="FUNCTION">%1$s</xliff:g>-г асаах боломжгүй"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"<xliff:g id="FUNCTION">%1$s</xliff:g>-г асаахын тулд эхлээд хиймэл дагуулын холболтыг тасална уу"</string>
@@ -5341,8 +5351,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Таны утсан дээр дэмжигдсэн аппууд"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"SIM нэмэх боломжгүй"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"Та SIM нэмэхээсээ өмнө хиймэл дагуулын холболтыг салгана уу"</string>
-    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
-    <skip />
+    <string name="satellite_toggle_error" msgid="4533772077620854258">"Алдаа гарлаа. Хиймэл дагуулын холболтыг асааж/унтрааж чадсангүй."</string>
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth унтраалттай байна"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"Bluetooth-р холбогдсон үед Нислэгийн горим утас, цаг зэрэг дэмжигдсэн төхөөрөмжүүд дээр синк хийнэ"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Хандах цэгийн нэрс (APN)"</string>
@@ -6096,8 +6105,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Аппын аюулгүй байдал"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Төхөөрөмжийн түгжээг тайлах"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Бүртгэлийн аюулгүй байдал"</string>
-    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
-    <skip />
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"Алдсан төхөөрөмж хамгаалагч"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Систем, шинэчлэлтүүд"</string>
     <string name="location_settings" msgid="6833222354060094170">"Байршилд хандах"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Байршилд хандах эрхтэй апп, үйлчилгээг харах"</string>

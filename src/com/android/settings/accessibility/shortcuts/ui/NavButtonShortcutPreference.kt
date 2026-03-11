@@ -121,6 +121,9 @@ class NavButtonShortcutPreference(context: Context, targets: Set<String>) :
         return spannableMessage
     }
 
+    override val availabilityDescription =
+        "The device must not be in gesture navigation mode and the floating menu must be disabled."
+
     override fun isAvailable(context: Context): Boolean {
         return !AccessibilityUtil.isFloatingMenuEnabled(context) &&
             !AccessibilityUtil.isGestureNavigateEnabled(context)

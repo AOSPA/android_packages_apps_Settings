@@ -44,6 +44,8 @@ class IntroPreference(private val shortcutInfo: AccessibilityShortcutInfo) :
     override fun getTitle(context: Context): CharSequence? =
         shortcutInfo.loadIntro(context.packageManager)
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         return !TextUtils.isEmpty(getTitle(context))
     }

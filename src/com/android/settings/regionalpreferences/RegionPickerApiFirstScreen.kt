@@ -23,6 +23,7 @@ import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateSelectedLocale
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
@@ -61,8 +62,13 @@ class RegionPickerApiFirstScreen :
                     }
                 },
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get { execute { Locale.getDefault().country } }
             set {
+                warning {
+                    warn(R.string.change_region_warning)
+                }
                 execute { value ->
                     val locale =
                         Locale.Builder().setLocale(Locale.getDefault()).setRegion(value).build()

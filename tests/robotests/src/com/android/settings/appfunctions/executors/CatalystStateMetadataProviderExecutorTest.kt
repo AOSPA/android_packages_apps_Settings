@@ -250,6 +250,42 @@ class CatalystStateMetadataProviderExecutorTest {
     }
 
     @Test
+    fun execute_onScreenWithoutTitle_returnsPurpose() = runTest {
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig (
+                    "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    title = 0,
+                    preferences = listOf(
+                        createSimplePreference(
+                            GraphTestUtils.PreferenceConfig(
+                                key = "preference_key",
+                                purpose = R.string.preference_purpose,
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig(
+                "screen_key",
+                listOf("preference_key"),
+            ),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(result.metadata).hasSize(1)
+        assertThat(result.metadata[0].description).isEqualTo (
+                context.getString(R.string.preference_screen_purpose)
+        )
+    }
+
+    @Test
     fun execute_onScreenWithoutTitle_returnsPurposeAsDescription() = runTest {
         setRegistryFactories(
             createScreen(
@@ -448,6 +484,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "true" } }
                 set { execute {} }
             }
@@ -457,6 +494,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "true" } }
             }
         }
@@ -598,6 +636,8 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
                 preconditions("Preference precondition") { Allowed }
                 get {
                     preconditions("Get precondition") { Allowed }
@@ -644,6 +684,8 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
                 get {
                     execute { "value" }
                 }
@@ -660,6 +702,8 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
                 get {
                     execute { "value" }
                 }
@@ -679,6 +723,8 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
                 get {
                     execute { "value" }
                 }
@@ -715,15 +761,15 @@ class CatalystStateMetadataProviderExecutorTest {
 
         val prefSetWarningWithoutPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[0]
         assertThat(prefSetWarningWithoutPreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_without_preconditions")
-        assertThat(prefSetWarningWithoutPreconditionsMetadata.hintText).contains("Warning before writing: Set warning 1 (must be shown).")
+        assertThat(prefSetWarningWithoutPreconditionsMetadata.hintText).contains("[Must show to user]: Set warning 1.")
 
         val prefSetWarningWithPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[1]
         assertThat(prefSetWarningWithPreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_with_preconditions")
-        assertThat(prefSetWarningWithPreconditionsMetadata.hintText).contains("Warning before writing: Set warning 2 (must be shown if preconditions are met: Set preconditions).")
+        assertThat(prefSetWarningWithPreconditionsMetadata.hintText).contains("[Must show to user]: Set warning 2 (if preconditions are met: Set preconditions).")
 
         val prefSetWarningWithValuePreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[2]
         assertThat(prefSetWarningWithValuePreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_with_value_preconditions")
-        assertThat(prefSetWarningWithValuePreconditionsMetadata.hintText).contains("Warning before writing: Set warning 3 (must be shown if preconditions are met: Set value preconditions).")
+        assertThat(prefSetWarningWithValuePreconditionsMetadata.hintText).contains("[Must show to user]: Set warning 3 (if preconditions are met: Set value preconditions).")
     }
 
     @Test
@@ -898,6 +944,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = TestEnumType,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "OPTION_1" } }
             }
         }

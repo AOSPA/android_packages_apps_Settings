@@ -51,6 +51,8 @@ class ZenModeButtonPreference(val zenMode: ZenMode) :
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_PREFERENCE)
 
+    override val availabilityDescription = "The DND mode must be enabled and be allowed to be manually invoked."
+
     override fun isAvailable(context: Context) =
         zenMode.isEnabled && (zenMode.isActive || zenMode.isManualInvocationAllowed)
 

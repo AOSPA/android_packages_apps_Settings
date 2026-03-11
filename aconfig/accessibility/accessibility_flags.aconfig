@@ -132,6 +132,16 @@ flag {
 }
 
 flag {
+    name: "enable_inset_focus_rings_in_suw"
+    namespace: "accessibility"
+    description: "Decides whether to enable inset focus rings in Accessibility surfaces during the SuW."
+    bug: "484084632"
+    metadata {
+      purpose: PURPOSE_BUGFIX
+    }
+}
+
+flag {
   name: "enable_magnification_focus_following_dialog"
   namespace: "accessibility"
   description: "Decides whether to show the magnification focus following dialog in Settings app."

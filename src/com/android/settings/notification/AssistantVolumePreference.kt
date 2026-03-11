@@ -72,6 +72,8 @@ class AssistantVolumePreference(private val audioHelper: AudioHelper) :
             else -> AndroidR.drawable.ic_volume_voice_chat
         }
 
+    override val availabilityDescription = "The device must support stream assistant, must not be a single volume device, and must not be a watch."
+
     override fun isAvailable(context: Context) =
         streamAssistantPublic() && !audioHelper.isSingleVolume && !hasFeatureWatch(context)
 

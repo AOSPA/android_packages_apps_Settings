@@ -321,7 +321,7 @@ public final class AccessibilityShortcutsTutorial {
         };
     }
 
-    private static CharSequence getShortcutInstruction(
+    public static CharSequence getShortcutInstruction(
             @NonNull Context context, @UserShortcutType int shortcutType, int buttonMode,
             @NonNull CharSequence featureName, boolean inSetupWizard) {
         return switch (shortcutType) {

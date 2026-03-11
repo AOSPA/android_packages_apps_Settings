@@ -49,7 +49,6 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
     @VisibleForTesting
     static final int MAXIMUM_OF_PREFERENCE_AMOUNT = 3;
 
-    private List<String> mPackageNameList;
     private boolean mIsSmsAvailable;
     private boolean mIsDataAvailable;
     private boolean mIsSatelliteEligible;
@@ -66,7 +65,7 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
     public void init(int subId, @NonNull PersistableBundle configBundle) {
         mSubId = subId;
         mConfigBundle = configBundle;
-        mPackageNameList = getSatelliteDataOptimizedApps();
+
     }
 
     void setCarrierRoamingNtnAvailability(boolean isSmsAvailable, boolean isDataAvailable,
@@ -80,9 +79,10 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
+        List<String> packageNameList = getSatelliteDataOptimizedApps();
         PreferenceCategory preferenceCategory = screen.findPreference(getPreferenceKey());
-        for (int i = 0; i < mPackageNameList.size() && i < MAXIMUM_OF_PREFERENCE_AMOUNT; i++) {
-            String packageName = mPackageNameList.get(i);
+        for (int i = 0; i < packageNameList.size() && i < MAXIMUM_OF_PREFERENCE_AMOUNT; i++) {
+            String packageName = packageNameList.get(i);
             ApplicationInfo appInfo = getApplicationInfo(mContext, packageName);
             if (appInfo != null) {
                 Drawable icon = Utils.getBadgedIcon(mContext, appInfo);
@@ -102,11 +102,12 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
                 && !mIsSatelliteEligible) {
             return CONDITIONALLY_UNAVAILABLE;
         }
-        Log.d(TAG, "Supported apps have " + mPackageNameList.size());
+        List<String> packageNameList = getSatelliteDataOptimizedApps();
+        Log.d(TAG, "Supported apps have " + packageNameList.size());
 
         return mIsDataAvailable
                 && mDataMode == SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED
-                && !mPackageNameList.isEmpty() ? AVAILABLE_UNSEARCHABLE : CONDITIONALLY_UNAVAILABLE;
+                && !packageNameList.isEmpty() ? AVAILABLE_UNSEARCHABLE : CONDITIONALLY_UNAVAILABLE;
     }
 
     @VisibleForTesting

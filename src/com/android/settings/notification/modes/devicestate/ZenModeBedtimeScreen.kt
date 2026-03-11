@@ -57,6 +57,8 @@ open class ZenModeBedtimeScreen :
 
     override fun isFlagEnabled(context: Context) = false
 
+    override val availabilityDescription = "The device must support bedtime mode."
+
     override fun isAvailable(context: Context) = context.hasBedtimeMode()
 
     override fun getTitle(context: Context): CharSequence? = context.getBedtimeMode()?.name
@@ -90,6 +92,8 @@ open class ZenModeBedtimeScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 

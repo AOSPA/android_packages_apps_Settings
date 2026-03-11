@@ -22,6 +22,7 @@ import com.android.settings.deviceinfo.HardwareInfoPreferenceController
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -42,6 +43,9 @@ class DeviceModelPreference :
     override fun getSummary(context: Context): CharSequence? =
         HardwareInfoPreferenceController.getDeviceModel()
 
+    override val availabilityDescription =
+        "The device must support showing the device model."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_device_model)
 
@@ -50,6 +54,9 @@ class DeviceModelPreference :
             isCopyingEnabled = true
             isSelectable = false
         }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = "hardware_info_device_model"

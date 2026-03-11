@@ -154,7 +154,7 @@ constructor(
     open val satelliteDisallowedReasons: StateFlow<IntArray> =
         callbackFlow {
                 val callback = SatelliteDisallowedReasonsCallback { reasons ->
-                    Log.d(TAG, "onSatelliteDisallowedReasonsChanged: $reasons")
+                    logd { "onSatelliteDisallowedReasonsChanged: $reasons" }
                     trySend(reasons)
                 }
 
@@ -403,6 +403,12 @@ constructor(
                 state == SatelliteManager.SATELLITE_MODEM_STATE_DATAGRAM_RETRYING ||
                 state == SatelliteManager.SATELLITE_MODEM_STATE_LISTENING ||
                 state == SatelliteManager.SATELLITE_MODEM_STATE_ENABLING_SATELLITE
+        }
+    }
+
+    private inline fun logd(message: () -> String) {
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, message())
         }
     }
 }

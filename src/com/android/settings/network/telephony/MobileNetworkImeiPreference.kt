@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.launch
 
@@ -50,6 +51,9 @@ class MobileNetworkImeiPreference(private val data: MobileNetworkData) :
         get() = R.string.network_mode_imei_info_purpose
 
     override fun getSummary(context: Context): CharSequence? = data.imeiInfoDataFlow.value.summary
+
+    override val availabilityDescription =
+        "The user must be an admin user, and the device must have mobile data or voice capability, and the subscription ID must be valid."
 
     override fun isAvailable(context: Context) = data.imeiInfoDataFlow.value.isAvailable
 
@@ -96,6 +100,9 @@ class MobileNetworkImeiPreference(private val data: MobileNetworkData) :
             INVALID_SIM_SLOT_INDEX
         }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     companion object {
         private const val TAG = "MobileNetworkImeiPreference"

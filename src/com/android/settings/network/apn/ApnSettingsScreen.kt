@@ -136,6 +136,9 @@ private constructor(
             )
         }
 
+    override val availabilityDescription =
+        "The subscription must have a GSM APN."
+
     override fun isAvailable(context: Context): Boolean {
         val carrierConfig: PersistableBundle? =
             CarrierConfigCache.getInstance(context).getConfigForSubId(subId)

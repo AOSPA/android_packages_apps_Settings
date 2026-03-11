@@ -45,6 +45,8 @@ class DialPadTonePreference :
 
     override fun storage(context: Context) = SettingsSystemStore.get(context)
 
+    override val availabilityDescription = "The device must be voice capable."
+
     override fun isAvailable(context: Context) = Utils.isVoiceCapable(context)
 
     override fun getReadPermissions(context: Context) = SettingsSystemStore.getReadPermissions()

@@ -40,6 +40,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import kotlin.math.max
 import kotlinx.coroutines.CoroutineScope
@@ -119,6 +120,9 @@ class MobileNetworkDataUsagePreference(
     override val purpose: Int
         get() = R.string.status_header_purpose
 
+    override val availabilityDescription =
+        "The subscription ID must be valid."
+
     override fun isAvailable(context: Context) = subInfo != null
 
     override fun getSummary(context: Context) = dataUsageDataFlow.value.summary
@@ -191,6 +195,9 @@ class MobileNetworkDataUsagePreference(
 
             else -> null
         }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val TAG = "MobileNetworkDataUsagePreference"

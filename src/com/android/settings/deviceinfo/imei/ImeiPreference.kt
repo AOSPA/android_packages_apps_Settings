@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
 
@@ -59,6 +60,9 @@ class ImeiPreference(
 
     override val purpose: Int
         get() = R.string.imei_info_purpose
+
+    override val availabilityDescription =
+        "The user must be admin user and the device must be mobile data capable or voice capable."
 
     override fun isAvailable(context: Context): Boolean =
         context.isAdminUser == true &&
@@ -97,6 +101,9 @@ class ImeiPreference(
             }
         }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     companion object {
         const val TAG = "ImeiPreference"

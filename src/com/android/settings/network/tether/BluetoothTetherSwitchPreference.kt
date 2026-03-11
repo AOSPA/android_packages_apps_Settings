@@ -65,6 +65,8 @@ class BluetoothTetherSwitchPreference(
     override fun storage(context: Context): KeyValueStore =
         BluetoothTetherStore(context, coroutineScope, bluetoothAdapter)
 
+    override val availabilityDescription = "The device must support bluetooth tethering."
+
     override fun isAvailable(context: Context): Boolean {
         bluetoothAdapter ?: return false
         val tetheringManager = context.getSystemService(TetheringManager::class.java)
@@ -103,7 +105,7 @@ class BluetoothTetherSwitchPreference(
         ReadWritePermit.ALLOW
 
     override val sensitivityLevel: Int
-        get() = SensitivityLevel.MUST_PROVIDE_UNDO
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     @Suppress("UNCHECKED_CAST")
     private class BluetoothTetherStore(

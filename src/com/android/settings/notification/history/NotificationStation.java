@@ -340,33 +340,6 @@ public class NotificationStation extends SettingsPreferenceFragment {
         return title == null? "" : String.valueOf(title);
     }
 
-    /**
-     * Returns the appropriate substring for this notification based on the style of notification.
-     */
-    private static String getTextString(Context appContext, Notification n) {
-        CharSequence text = null;
-        if (n.extras != null) {
-            text = n.extras.getCharSequence(Notification.EXTRA_TEXT);
-
-            Notification.Builder nb = Notification.Builder.recoverBuilder(appContext, n);
-
-            if (nb.getStyle() instanceof Notification.BigTextStyle) {
-                text = ((Notification.BigTextStyle) nb.getStyle()).getBigText();
-            } else if (nb.getStyle() instanceof Notification.MessagingStyle) {
-                Notification.MessagingStyle ms = (Notification.MessagingStyle) nb.getStyle();
-                final List<Notification.MessagingStyle.Message> messages = ms.getMessages();
-                if (messages != null && messages.size() > 0) {
-                    text = messages.get(messages.size() - 1).getText();
-                }
-            }
-
-            if (TextUtils.isEmpty(text)) {
-                text = n.extras.getCharSequence(Notification.EXTRA_TEXT);
-            }
-        }
-        return text == null ? "" : String.valueOf(text);
-    }
-
     private Drawable loadIcon(HistoricalNotificationInfo info, StatusBarNotification sbn) {
         Drawable draw = sbn.getNotification().getSmallIcon().loadDrawableAsUser(
                 sbn.getPackageContext(mContext), info.user);
@@ -440,8 +413,9 @@ public class NotificationStation extends SettingsPreferenceFragment {
             info.icon = loadPackageIconDrawable(info.pkg, info.user);
         }
         info.pkgname = loadPackageName(info.pkg);
-        info.title = getTitleString(n);
-        info.text = getTextString(sbn.getPackageContext(mContext), n);
+        Context appContext = sbn.getPackageContext(mContext);
+        info.title = n.getHistoryTitle(appContext);
+        info.text = n.getHistoryText(appContext);
 
         info.timestamp = sbn.getPostTime();
         info.priority = n.priority;

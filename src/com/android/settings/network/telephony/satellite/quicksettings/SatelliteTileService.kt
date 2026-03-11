@@ -54,7 +54,7 @@ open class SatelliteTileService : TileService() {
         updateJob =
             scope.launch {
                 repo.satelliteStatus.collect { status ->
-                    Log.d(TAG, "onStartListening: status=$status")
+                    logd { "onStartListening: status=$status" }
                     updateTile(status)
                 }
             }
@@ -131,5 +131,11 @@ open class SatelliteTileService : TileService() {
     companion object {
         private const val TAG = "SatelliteTileService"
         private const val REQUEST_CODE_SATELLITE_LANDING_PAGE = 1987
+    }
+
+    private inline fun logd(message: () -> String) {
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, message())
+        }
     }
 }

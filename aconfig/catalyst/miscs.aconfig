@@ -15,3 +15,10 @@ flag {
   description: "Flag for core migrations in 26Q2"
   bug: "441443762"
 }
+
+flag {
+  name: "catalyst_migration_26q3"
+  namespace: "android_settings"
+  description: "Flag for core migrations in 26Q3"
+  bug: "491062278"
+}

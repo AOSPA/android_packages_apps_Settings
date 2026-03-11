@@ -62,6 +62,7 @@ class CaptionColorPreferencesTest {
             object : CustomCaptionPreference {
                 override val key = "test_key"
                 override val purpose = 0
+                override val availabilityDescription = "availability description"
             }
         whenever(captioningManager.rawUserStyle)
             .thenReturn(CaptioningManager.CaptionStyle.PRESET_CUSTOM)
@@ -75,6 +76,7 @@ class CaptionColorPreferencesTest {
             object : CustomCaptionPreference {
                 override val key = "test_key"
                 override val purpose = 0
+                override val availabilityDescription = "availability description"
             }
         // Use 0 as a representative non-custom preset value
         whenever(captioningManager.rawUserStyle).thenReturn(0)
@@ -88,6 +90,7 @@ class CaptionColorPreferencesTest {
             object : CustomCaptionPreference {
                 override val key = "test_key"
                 override val purpose = 0
+                override val availabilityDescription = "availability description"
             }
         assertThat(customPreference.dependencies(context).toList())
             .isEqualTo(listOf(CustomCaptionOptionsPreference.KEY))

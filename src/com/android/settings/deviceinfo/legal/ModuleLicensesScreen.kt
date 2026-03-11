@@ -61,6 +61,9 @@ open class ModuleLicensesScreen :
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {}
 
+    override val availabilityDescription =
+        "The device must expose module licenses."
+
     override fun isAvailable(context: Context): Boolean {
         val modules = context.packageManager.getInstalledModules(/* flags= */ 0)
         return modules.any {

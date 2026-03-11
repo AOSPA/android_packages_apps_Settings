@@ -203,6 +203,8 @@ internal class DisplaySizePreference(
         }
     }
 
+    override val availabilityDescription = "The main display must be internal."
+
     override fun isAvailable(context: Context) = context.display.isInternal
 
     @VisibleForTesting

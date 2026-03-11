@@ -69,19 +69,19 @@ open class SatelliteTileStateReceiver(
 
     override fun onReceive(context: Context, intent: Intent) {
         if (UserHandle.myUserId() != UserHandle.USER_SYSTEM) {
-            Log.d(TAG, "Not running on system user, ignoring.")
+            Log.i(TAG, "Not running on system user, ignoring.")
             return
         }
 
         if (!isSatelliteTileFeatureEnabled(context)) {
-            Log.v(TAG, "Satellite tile feature is disabled. Ignoring intent.")
+            Log.i(TAG, "Satellite tile feature is disabled. Ignoring intent.")
             // EXPLICITLY disable the tile service to clean up legacy state
             updateTileServiceEnabledState(context, false)
             return
         }
 
         val action = intent.action
-        Log.d(TAG, "onReceive: $action")
+        logd { "onReceive: $action" }
 
         val job: (suspend () -> Unit)? =
             when (action) {
@@ -149,7 +149,7 @@ open class SatelliteTileStateReceiver(
             val jobScheduler = context.getSystemService(android.app.job.JobScheduler::class.java)
             val jobId = context.resources.getInteger(R.integer.satellite_eligibility_job)
             jobScheduler?.cancel(jobId)
-            Log.d(TAG, "Default data subscription is invalid, cancelled job.")
+            Log.i(TAG, "Default data subscription is invalid, cancelled job.")
         } else {
             SatelliteEligibilityJobService.schedule(context, forceImmediate = true)
         }
@@ -172,12 +172,12 @@ open class SatelliteTileStateReceiver(
             Log.w(TAG, "SatelliteManager is null, returning false")
             return flowOf(false)
         }
-        Log.d(TAG, "isNbIotBasedNtnSupportedFlow started")
+        logd { "isNbIotBasedNtnSupportedFlow started" }
         return callbackFlow {
             val callback =
                 object : OutcomeReceiver<Boolean, SatelliteManager.SatelliteException> {
                     override fun onResult(isSupported: Boolean) {
-                        Log.d(TAG, "isNbIotBasedNtnSupportedFlow onResult: $isSupported")
+                        logd { "isNbIotBasedNtnSupportedFlow onResult: $isSupported" }
                         trySend(isSupported)
                         close()
                     }
@@ -226,13 +226,13 @@ open class SatelliteTileStateReceiver(
                 ActivityManager.isRunningInTestHarness() ||
                     ActivityManager.isRunningInUserTestHarness()
             ) {
-                Log.d(TAG, "isRunningInTestHarness is true. Suppressing satellite tile.")
+                Log.i(TAG, "isRunningInTestHarness is true. Suppressing satellite tile.")
                 return false
             }
 
             // Master aconfig flag check for the entire feature
             if (!Flags.enableSatelliteTile()) {
-                Log.d(TAG, "enable_satellite_tile aconfig flag is false.")
+                Log.i(TAG, "enable_satellite_tile aconfig flag is false.")
                 return false
             }
 
@@ -240,17 +240,17 @@ open class SatelliteTileStateReceiver(
             if (
                 !context.packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_SATELLITE)
             ) {
-                Log.d(TAG, "FEATURE_TELEPHONY_SATELLITE not supported.")
+                Log.i(TAG, "FEATURE_TELEPHONY_SATELLITE not supported.")
                 return false
             }
 
             // OEM opt-in for the feature
             if (!context.resources.getBoolean(R.bool.config_show_satellite_tile)) {
-                Log.d(TAG, "config_show_satellite_tile is false, feature disabled.")
+                Log.i(TAG, "config_show_satellite_tile is false, feature disabled.")
                 return false
             }
 
-            Log.d(TAG, "Satellite tile static feature configs are enabled for this device.")
+            Log.i(TAG, "Satellite tile static feature configs are enabled for this device.")
             return true
         }
 
@@ -262,7 +262,7 @@ open class SatelliteTileStateReceiver(
             val isEnabled =
                 context.packageManager.getComponentEnabledSetting(componentName) ==
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-            Log.d(TAG, "SatelliteTileService runtime component state enabled: $isEnabled")
+            Log.i(TAG, "SatelliteTileService runtime component state enabled: $isEnabled")
             return isEnabled
         }
 
@@ -321,7 +321,7 @@ internal object SatelliteSupportedStateChangeHandler {
     fun register(context: Context, dispatcher: CoroutineDispatcher) {
         synchronized(lock) {
             if (isSatelliteSupportedRegistered) {
-                Log.d(TAG, "Already registered for satellite state changes.")
+                logd { "Already registered for satellite state changes." }
                 return
             }
 
@@ -336,10 +336,9 @@ internal object SatelliteSupportedStateChangeHandler {
             try {
                 satelliteManager.registerForSupportedStateChanged(dispatcher.asExecutor()) {
                     isNbIotBasedNtnSupported ->
-                    Log.d(
-                        TAG,
-                        "onSatelliteSupportedStateChanged: isSupported=$isNbIotBasedNtnSupported",
-                    )
+                    logd {
+                        "onSatelliteSupportedStateChanged: isSupported=$isNbIotBasedNtnSupported"
+                    }
                     val isLteBasedNtnSupported =
                         SatelliteUtils.isLteBasedNtnSupportedByAnySub(appContext)
                     SatelliteTileStateReceiver.updateTileServiceEnabledState(
@@ -353,7 +352,13 @@ internal object SatelliteSupportedStateChangeHandler {
             }
 
             isSatelliteSupportedRegistered = true
-            Log.d(TAG, "Successfully registered callbacks for satellite state changes.")
+            logd { "Successfully registered callbacks for satellite state changes." }
         }
+    }
+}
+
+private inline fun logd(message: () -> String) {
+    if (Log.isLoggable(TAG, Log.DEBUG)) {
+        Log.d(TAG, message())
     }
 }

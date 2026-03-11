@@ -24,6 +24,7 @@ import com.android.settings.flags.Flags.catalystMigration26q2
 import com.android.settings.gestures.LongPressPowerSensitivityPreferenceController.closestValueIndex
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -60,6 +61,8 @@ class PowerMenuSettingsScreenApi() :
                 R.string.long_press_power_actions_description
             ),
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 executeEnum {
                     val invokeAssistant =
@@ -97,6 +100,8 @@ class PowerMenuSettingsScreenApi() :
                     }
                 },
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             preconditions(R.string.long_press_power_sensitivity_precondition) {
                 when {
                     !PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(context) -> {

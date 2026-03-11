@@ -26,6 +26,7 @@ import android.view.Display
 import android.view.Display.HdrCapabilities
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.android.server.display.feature.flags.Flags.FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT
 import com.android.settings.display.HdrBrightnessApiScreen.Companion.HDR_BRIGHTNESS_BOOST_LEVEL_KEY
 import com.android.settings.display.HdrBrightnessApiScreen.Companion.HDR_BRIGHTNESS_ENABLED_KEY
 import com.android.settings.display.HdrBrightnessApiScreen.Companion.OFF
@@ -73,13 +74,13 @@ class HdrBrightnessApiScreenTest {
     }
 
     @Test
-    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2, FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT)
     fun getScreen_isNotNull() {
         assertThat(tester.getScreen()).isNotNull()
     }
 
     @Test
-    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2)
+    @DisableFlags(FLAG_CATALYST_MIGRATION_26Q2, FLAG_DISPLAY_SETTINGS_API_SCREEN_SUPPORT)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
     }

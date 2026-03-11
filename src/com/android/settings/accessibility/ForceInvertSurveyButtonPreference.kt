@@ -38,6 +38,8 @@ class ForceInvertSurveyButtonPreference(metricsCategory: Int = METRICS_CATEGORY_
     override val surveyKey: String
         get() = SURVEY_KEY
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun onCreate(context: PreferenceLifecycleContext) {

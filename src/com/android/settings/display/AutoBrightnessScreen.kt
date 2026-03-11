@@ -110,6 +110,9 @@ open class AutoBrightnessScreen :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, Settings.AdaptiveBrightnessActivity::class.java, metadata?.key)
 
+    override val availabilityDescription =
+        "The device must support adaptive brightness."
+
     override fun isAvailable(context: Context) =
         context.autoBrightnessAvailabilityStatus == AVAILABLE
 
@@ -176,6 +179,8 @@ open class AutoBrightnessScreen :
         override val indexable = false
 
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 
