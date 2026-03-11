@@ -140,9 +140,6 @@ class CatalystStateProviderExecutor(
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            // skip if metadata is a PreferenceScreen
-            if (metadata.key == screenMetaData.key)
-                return@forEach
             val jsonValue =
                 when {
                     // TODO(b/444419242): Handle IMEI redaction properly.

@@ -21,6 +21,7 @@ import android.os.Bundle
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
@@ -133,11 +134,27 @@ private suspend fun CoroutineScope.getPreferenceHierarchy(
         } ?: return null
 
     val preferenceHierarchy = mutableListOf<PreferenceHierarchyNode>()
-    screenMetaData.getPreferenceHierarchy(context, this).forEachRecursivelyAsync {
+    screenMetaData.getPreferenceHierarchy(context, this).forEachRecursivelyAsyncExceptRoot {
         val metadata = it.metadata
-
-        if (!metadata.isExposable(context)) return@forEachRecursivelyAsync
+        if (!metadata.isExposable(context)) return@forEachRecursivelyAsyncExceptRoot
+        if(metadata is PreferenceScreenMetadata) return@forEachRecursivelyAsyncExceptRoot
         preferenceHierarchy.add(it)
     }
     return screenMetaData to preferenceHierarchy
+}
+
+/**
+ * Runs an action over a preference hierarchy, except the root node of the hierarchy, which contains
+ * the screen metadata when called on a screen hierarchy.
+ */
+private suspend fun PreferenceHierarchy.forEachRecursivelyAsyncExceptRoot(isRoot: Boolean = true, action: suspend (PreferenceHierarchyNode) -> Unit) {
+    if(!isRoot)
+        action(this)
+    // async hierarchy is included by forEachAsync
+    forEachAsync {
+        when (it) {
+            is PreferenceHierarchy -> it.forEachRecursivelyAsyncExceptRoot(false, action)
+            else -> action(it)
+        }
+    }
 }
