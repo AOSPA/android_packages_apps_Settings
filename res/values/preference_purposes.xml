@@ -95,6 +95,12 @@
     <string name="bluetooth_screen_bt_pair_rename_devices_purpose" translatable="false">bluetooth_screen_bt_pair_rename_devices</string>
     <string name="bluetooth_screen_footer_purpose" translatable="false">bluetooth_screen_footer</string>
     <string name="bluetooth_switchbar_screen_purpose" translatable="false">Allows users to control whether apps and services can scan for nearby Bluetooth devices even when Bluetooth is turned off, primarily to enhance location accuracy.</string>
+    <string name="bluetooth_auto_on_toggle_purpose" translatable="false">Controls the feature that automatically turns Bluetooth back on.</string>
+    <string name="bluetooth_auto_on_preconditions" translatable="false">Checks if the device hardware and Bluetooth adapter support Bluetooth and the Auto-On feature.</string>
+    <string name="bluetooth_not_supported_error" translatable="false">Bluetooth is not supported on this device.</string>
+    <string name="bluetooth_auto_on_not_supported_error" translatable="false">Bluetooth Auto-On is not supported by this hardware or adapter.</string>
+    <string name="bluetooth_auto_on_hardware_check_failed_error" translatable="false">Hardware check failed due to an exception.</string>
+    <string name="bluetooth_auto_on_api_missing_error" translatable="false">System API for Auto-On is missing.</string>
     <string name="use_bluetooth_purpose" translatable="false">use_bluetooth</string>
     <string name="button_navigation_settings_page_purpose" translatable="false">Allows users to choose the order of the navigation buttons (Back, Home, Recents) on the navigation bar.</string>
     <string name="button_order_group_purpose" translatable="false">button_order_group</string>
@@ -340,6 +346,7 @@
     <string name="night_display_auto_mode_description_purpose" translatable="false">Options for the automatic activation of the Night Light feature.</string>
     <string name="night_display_custom_start_time_purpose" translatable="false">Allows users to set the start time for the automatic activation of the Night Light feature.</string>
     <string name="night_display_custom_end_time_purpose" translatable="false">Allows users to set the end time for the automatic deactivation of the Night Light feature.</string>
+    <string name="screen_resolution_screen_purpose" translatable="false">Allows users to change the screen resolution.</string>
     <string name="notification_access_purpose" translatable="false">Allows users to grant or deny specific applications the permission to read, reply to, and control notifications, providing them with special access to the system\'s notification stream.</string>
     <string name="notification_bubbles_purpose" translatable="false">Allows users to enable or disable notification bubbles, which let some conversations appear as floating icons on top of other apps.</string>
     <string name="battery_header_purpose" translatable="false">Displays the current battery level as a percentage</string>
@@ -378,6 +385,8 @@
     <string name="lockscreen_sounds_enabled_purpose" translatable="false">Whether sounds are played when locking or unlocking the screen</string>
     <string name="media_volume_purpose" translatable="false">The system volume level for media playback</string>
     <string name="notification_volume_purpose" translatable="false">The system volume level for notification sounds</string>
+    <string name="notification_cooldown_screen_purpose" translatable="false">Allows users to manage notification cooldown settings, which automatically reduce the volume of successive notifications to minimize distractions and alert fatigue</string>
+    <string name="polite_notification_global_pref_purpose" translatable="false">Enable the notification cooldown feature to reduce the volume of successive notifications</string>
     <string name="separate_ring_volume_purpose" translatable="false">The system volume level for incoming call ringtones</string>
     <string name="sound_effects_enabled_purpose" translatable="false">Whether audible feedback is played during common UI interactions like tapping or clicking</string>
     <string name="sound_screen_purpose" translatable="false">Allows users to manage device audio settings, including adjusting volume levels for various streams, selecting sound patterns for ringtones and notifications, and toggling specific system-wide sounds and vibration behaviors.</string>

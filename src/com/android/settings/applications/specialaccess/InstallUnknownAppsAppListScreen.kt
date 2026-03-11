@@ -26,6 +26,7 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import kotlinx.coroutines.flow.Flow
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
@@ -45,6 +46,8 @@ open class InstallUnknownAppsAppListScreen : SpecialAccessAppListScreen() {
 
     override val keywords: Int
         get() = R.string.keywords_install_other_apps
+
+    override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
 
     override fun getMetricsCategory() = SettingsEnums.SCREEN_UNKNOWN
 

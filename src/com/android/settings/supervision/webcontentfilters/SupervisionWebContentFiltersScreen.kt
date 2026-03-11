@@ -39,13 +39,13 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import com.android.settingslib.supervision.SupervisionLog.TAG
 import com.android.settingslib.utils.StringUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /** Activity to display [SupervisionWebContentFiltersScreen]. */
 class SupervisionWebContentFiltersActivity :
@@ -73,8 +73,6 @@ open class SupervisionWebContentFiltersScreen : PreferenceScreenMixin, Preferenc
     override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
     private var supervisionClient: SupervisionMessengerClient? = null
-
-    override fun isFlagEnabled(context: Context) = Flags.enableWebContentFiltersScreen()
 
     override val key: String
         get() = KEY

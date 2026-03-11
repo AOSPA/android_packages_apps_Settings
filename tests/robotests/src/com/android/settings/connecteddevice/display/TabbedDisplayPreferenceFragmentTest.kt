@@ -557,7 +557,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     class FakeDisplayTopologyPreferenceView(
         injector: ConnectedDisplayInjector,
         initialSelectedDisplayId: Int? = null,
-    ) : DisplayTopologyPreferenceView(injector.context!!, injector, initialSelectedDisplayId) {
+    ) : DisplayTopologyPreferenceView(injector.context, injector, initialSelectedDisplayId) {
 
         var selectedListener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener? =
             null

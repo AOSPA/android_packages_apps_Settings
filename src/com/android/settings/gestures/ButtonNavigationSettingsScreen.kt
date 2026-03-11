@@ -19,7 +19,6 @@ package com.android.settings.gestures
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
-import android.view.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.core.PreferenceScreenMixin
@@ -28,21 +27,17 @@ import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(ButtonNavigationSettingsScreen.KEY)
 class ButtonNavigationSettingsScreen : PreferenceScreenMixin {
     override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
-    override fun isFlagEnabled(context: Context): Boolean {
-        return Flags.navbarFlipOrderOption()
-    }
-
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.button_navigation_settings_page_purpose
 

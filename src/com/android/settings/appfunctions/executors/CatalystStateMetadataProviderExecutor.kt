@@ -43,7 +43,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceTitle
-import com.android.settingslib.metadata.isUiOnlyPreference
+import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.setWarningAsString
@@ -89,7 +89,10 @@ class CatalystStateMetadataProviderExecutor(
                             withTimeout(PER_SCREEN_TIMEOUT_MS) {
                                 semaphore.withPermit {
                                     try {
-                                        buildPerScreenDeviceStatesMetadata(screenKey)
+                                        val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
+                                        if(screenMetadata != null && screenMetadata.isExposable(context)) {
+                                            buildPerScreenDeviceStatesMetadata(screenKey)
+                                        } else null
                                     } catch (e: Exception) {
                                         Log.e(TAG, "error building $screenKey", e)
                                         null
@@ -160,12 +163,6 @@ class CatalystStateMetadataProviderExecutor(
         val deviceStateItemMetadataList = mutableListOf<DeviceStateItemMetadata>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            // skip over UI-only preferences
-            if(metadata.isUiOnlyPreference(context))
-                return@forEach
-            // skip if metadata is screen
-            if(metadata is PreferenceScreenMetadata)
-                return@forEach
             // skip over explicitly disabled preferences
             val metadataProto = try {
                 metadata.toProto(

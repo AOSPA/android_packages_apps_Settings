@@ -16,7 +16,6 @@
 
 package com.android.settings.appfunctions
 
-import android.content.Context
 import com.android.server.connectivity.Flags as ConnectivityFlags
 import com.android.settings.IccLockApiScreen
 import com.android.settings.TrustedCredentialsScreenApi
@@ -84,6 +83,7 @@ import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetail
 import com.android.settings.backup.AccountsAndBackupScreen
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceScreen
 import com.android.settings.connecteddevice.BluetoothDashboardScreen
+import com.android.settings.connecteddevice.BluetoothDashboardScreenApi
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardScreen
 import com.android.settings.connecteddevice.NfcAndPaymentScreen
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceScreen
@@ -102,10 +102,8 @@ import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoApiFirstScreen
 import com.android.settings.deviceinfo.aboutphone.MyDeviceInfoScreen
 import com.android.settings.deviceinfo.batteryinfo.BatteryInfoApiScreen
 import com.android.settings.deviceinfo.firmwareversion.FirmwareVersionScreen
-import com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreference
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoApiScreen
 import com.android.settings.deviceinfo.hardwareinfo.HardwareInfoScreen
-import com.android.settings.deviceinfo.hardwareinfo.HardwareVersionPreference
 import com.android.settings.deviceinfo.legal.LegalSettingsScreen
 import com.android.settings.deviceinfo.legal.ModuleLicensesScreen
 import com.android.settings.deviceinfo.storage.StoragePreferenceScreen
@@ -120,6 +118,7 @@ import com.android.settings.display.DisplayScreen
 import com.android.settings.display.HdrBrightnessApiScreen
 import com.android.settings.display.NightDisplayApiScreen
 import com.android.settings.display.NightDisplayScreen
+import com.android.settings.display.ScreenResolutionApiScreen
 import com.android.settings.display.ScreenTimeoutScreen
 import com.android.settings.display.darkmode.DarkModeApiFirstScreen
 import com.android.settings.display.darkmode.DarkModeScreen
@@ -166,6 +165,7 @@ import com.android.settings.network.telephony.MobileNetworkScreenApi
 import com.android.settings.network.tether.TetherApiScreen
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.BubbleNotificationScreen
+import com.android.settings.notification.PoliteNotificationsApiScreen
 import com.android.settings.notification.SoundApiScreen
 import com.android.settings.notification.SoundScreen
 import com.android.settings.notification.SpatialAudioApiScreen
@@ -218,7 +218,6 @@ import com.android.settings.wfd.WifiDisplayScreen
 import com.android.settings.wifi.ConfigureWifiApiScreen
 import com.android.settings.wifi.ConfigureWifiScreen
 import com.android.settings.wifi.WifiAppDataUsageScreenApi
-import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.WifiDataUsageScreenApi
 import com.android.settings.wifi.calling.WifiCallingScreen
 import com.android.settings.wifi.details.WifiDetailsScreenApi
@@ -228,8 +227,6 @@ import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settings.wifi.tether.WifiHotspotScreen
 import com.android.settings.wifi.tether.WifiHotspotSecurityApiScreen
 import com.android.settings.wifi.tether.WifiHotspotSpeedApiScreen
-import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.getPreferenceSummary
 
 /**
  * Configuration of a screen converting to device states.
@@ -252,14 +249,9 @@ data class PerScreenCatalystConfig(
  *
  * @param screenConfigs a list of catalyst screen configurations
  */
-data class CatalystConfig(
-    val screenConfigs: List<PerScreenCatalystConfig>,
-)
+data class CatalystConfig(val screenConfigs: List<PerScreenCatalystConfig>)
 
-fun getSettingsCatalystConfig() =
-    CatalystConfig(
-        screenConfigs = getCatalystScreenConfigs(),
-    )
+fun getSettingsCatalystConfig() = CatalystConfig(screenConfigs = getCatalystScreenConfigs())
 
 private fun getCatalystScreenConfigs() =
     listOf(
@@ -511,6 +503,11 @@ private fun getCatalystScreenConfigs() =
             screenKey = BubbleNotificationScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = PoliteNotificationsApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = ResetDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DisplayOverOtherAppsAppListScreen.KEY),
         PerScreenCatalystConfig(
@@ -688,7 +685,9 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = TabbedDisplayApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ResolutionRefreshRateApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ScreenResolutionApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiScanningApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CellularSecurityScreenApi.KEY),
     )

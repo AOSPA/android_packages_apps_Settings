@@ -305,6 +305,24 @@ constructor(
             .stateIn(scope, SharingStarted.WhileSubscribed(), SatelliteStatus.NOT_AVAILABLE)
 
     /**
+     * Returns the satellite data support mode for the carrier.
+     *
+     * Includes restricted, constrained, and unrestricted modes.
+     *
+     * @param subId The subscription ID.
+     * @return The [SatelliteManager.SatelliteDataSupportMode].
+     */
+    open fun getSatelliteDataSupportMode(subId: Int): Int {
+        return try {
+            satelliteManager?.getSatelliteDataSupportMode(subId)
+                ?: SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting satellite data support mode", e)
+            SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN
+        }
+    }
+
+    /**
      * Returns the attach restriction reasons for the carrier.
      *
      * @param subId The subscription ID.

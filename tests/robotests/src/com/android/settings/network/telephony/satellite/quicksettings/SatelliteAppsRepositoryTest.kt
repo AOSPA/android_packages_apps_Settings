@@ -97,6 +97,27 @@ class SatelliteAppsRepositoryTest {
     }
 
     @Test
+    fun getAppsPackagesForLteLandingPage_restrictedMode_returnsOnlyMessagesApp() {
+        DeviceConfig.setProperty(
+            DeviceConfig.NAMESPACE_TELEPHONY,
+            OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG,
+            "true",
+            false,
+        )
+        val messagesPackage = "com.google.android.apps.messaging"
+        `when`(context.getString(R.string.config_satellite_messages_app_package))
+            .thenReturn(messagesPackage)
+        setupPackageManagerForApps(installedApps = listOf(APP1_PACKAGE, messagesPackage))
+        `when`(resources.getStringArray(R.array.config_satellite_apps_for_lte_landing_page))
+            .thenReturn(arrayOf(APP1_PACKAGE, messagesPackage))
+
+        val packages =
+            satelliteAppsRepository.getAppsPackagesForLteLandingPage(isRestrictedMode = true)
+
+        assertThat(packages).containsExactly(messagesPackage)
+    }
+
+    @Test
     fun getAppsPackagesForNbNtnLandingPage_oneAppNotInstalled_returnsOnlyInstalledApps() {
         setupPackageManagerForApps(installedApps = listOf(APP1_PACKAGE))
         `when`(resources.getStringArray(R.array.config_satellite_apps_for_nbntn_landing_page))
@@ -175,23 +196,27 @@ class SatelliteAppsRepositoryTest {
 
     @Test
     fun getSettingsIntent_carrierRoamingNotSupported_returnsSconeIntent() {
+        val sconePackage = "com.google.android.apps.scone"
+        val sconeActivity =
+            "com.google.android.apps.scone.satellite.settings.gateway.SettingsGatewayActivity"
+        `when`(context.getString(R.string.config_satellite_settings_gateway_package))
+            .thenReturn(sconePackage)
+        `when`(context.getString(R.string.config_satellite_settings_gateway_class))
+            .thenReturn(sconeActivity)
+
         val resolveInfo =
             ResolveInfo().apply {
                 activityInfo =
                     ActivityInfo().apply {
-                        applicationInfo =
-                            ApplicationInfo().apply {
-                                packageName = SatelliteAppsRepository.PACKAGE_NAME_SCONE
-                            }
+                        applicationInfo = ApplicationInfo().apply { packageName = sconePackage }
                         name = "SettingsGatewayActivity"
                     }
             }
         `when`(
                 packageManager.resolveActivity(
                     argThat {
-                        it.component?.packageName == SatelliteAppsRepository.PACKAGE_NAME_SCONE &&
-                            it.component?.className ==
-                                SatelliteAppsRepository.COMPONENT_NAME_SETTINGS_GATEWAY_ACTIVITY
+                        it.component?.packageName == sconePackage &&
+                            it.component?.className == sconeActivity
                     },
                     anyInt(),
                 )
@@ -201,10 +226,8 @@ class SatelliteAppsRepositoryTest {
         val result = satelliteAppsRepository.getSettingsIntent(false)
 
         assertThat(result).isNotNull()
-        assertThat(result!!.component?.packageName)
-            .isEqualTo(SatelliteAppsRepository.PACKAGE_NAME_SCONE)
-        assertThat(result.component?.className)
-            .isEqualTo(SatelliteAppsRepository.COMPONENT_NAME_SETTINGS_GATEWAY_ACTIVITY)
+        assertThat(result!!.component?.packageName).isEqualTo(sconePackage)
+        assertThat(result.component?.className).isEqualTo(sconeActivity)
     }
 
     @Test

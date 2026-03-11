@@ -25,6 +25,7 @@ import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
 /** Represents the preference for navigating to the settings screen of an accessibility service. */
 class A11yServiceSettingPreference(private val serviceInfo: AccessibilityServiceInfo) :
@@ -37,6 +38,8 @@ class A11yServiceSettingPreference(private val serviceInfo: AccessibilityService
 
     override val title: Int
         get() = R.string.accessibility_menu_item_settings
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val indexable
         get() = false

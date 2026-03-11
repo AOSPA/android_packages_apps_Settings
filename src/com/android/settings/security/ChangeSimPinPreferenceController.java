@@ -61,7 +61,7 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
     @Nullable private String mCurrentPin;
     @Nullable private String mNewPin;
     @Nullable private Preference mPreference;
-    @Nullable private ControlAutoSimPinManagementFragment mFragment;
+    @Nullable private BaseSimPinFragment mFragment;
 
     public ChangeSimPinPreferenceController(
             @NonNull Context context,
@@ -122,7 +122,7 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
         }
     }
 
-    public void setFragment(ControlAutoSimPinManagementFragment fragment) {
+    public void setFragment(BaseSimPinFragment fragment) {
         mFragment = fragment;
     }
 

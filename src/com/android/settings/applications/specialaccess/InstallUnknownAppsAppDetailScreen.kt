@@ -32,9 +32,11 @@ import com.android.settings.applications.isPermissionRequested
 import com.android.settings.flags.Flags
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.ValidatedKeyParameters
 
 @ProvidePreferenceScreen(InstallUnknownAppsAppDetailScreen.KEY, parameterized = true)
@@ -52,6 +54,9 @@ open class InstallUnknownAppsAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val key
         get() = KEY
+
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
 
     //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
@@ -74,6 +79,8 @@ open class InstallUnknownAppsAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val footerPreferenceTitle
         get() = R.string.install_all_warning
+
+    override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
