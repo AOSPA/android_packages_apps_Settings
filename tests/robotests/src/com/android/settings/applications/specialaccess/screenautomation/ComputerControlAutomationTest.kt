@@ -18,15 +18,19 @@ package com.android.settings.applications.specialaccess.screenautomation
 
 import android.app.AppOpsManager
 import android.app.Application
+import android.companion.virtual.VirtualDeviceManager
+import android.companion.virtual.computercontrol.ComputerControlConsentManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.spa.app.specialaccess.ComputerAutomationController
 import com.android.settings.spa.app.specialaccess.ComputerControlAppRecord
 import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListModel
+import com.android.settings.spa.app.specialaccess.ComputerControlConsentController
+import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -40,11 +44,16 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
+@Suppress("MissingPermission")
 class ComputerControlAutomationTest {
 
     @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @Mock private lateinit var appOpsManager: AppOpsManager
+    @Mock private lateinit var virtualDeviceManager: VirtualDeviceManager
+    @Mock private lateinit var consentManager: ComputerControlConsentManager
+    @Mock private lateinit var packageManagers: IPackageManagers
+    @Mock private lateinit var packageManager: PackageManager
 
     private lateinit var context: Context
     private lateinit var listModel: ComputerControlAutomationAppListModel
@@ -53,6 +62,10 @@ class ComputerControlAutomationTest {
     fun setUp() {
         context = spy(ApplicationProvider.getApplicationContext<Application>())
         whenever(context.getSystemService(AppOpsManager::class.java)).thenReturn(appOpsManager)
+        whenever(context.getSystemService(VirtualDeviceManager::class.java))
+            .thenReturn(virtualDeviceManager)
+        whenever(virtualDeviceManager.computerControlConsentManager).thenReturn(consentManager)
+        whenever(context.packageManager).thenReturn(packageManager)
 
         listModel = ComputerControlAutomationAppListModel()
     }
@@ -79,7 +92,13 @@ class ComputerControlAutomationTest {
     @Test
     fun getSummary_modeAllowed_returnsAllowedString() {
         val app = mockApp("test.app", 123, hasPermission = true)
-        whenever(appOpsManager.checkOpNoThrow(listModel.appOps.op, app.uid, app.packageName))
+        whenever(
+                appOpsManager.checkOpNoThrow(
+                    AppOpsManager.OP_COMPUTER_CONTROL,
+                    app.uid,
+                    app.packageName,
+                )
+            )
             .thenReturn(AppOpsManager.MODE_ALLOWED)
 
         val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
@@ -91,7 +110,13 @@ class ComputerControlAutomationTest {
     @Test
     fun getSummary_modeIgnored_returnsNotAllowedString() {
         val app = mockApp("test.app", 123, hasPermission = true)
-        whenever(appOpsManager.checkOpNoThrow(listModel.appOps.op, app.uid, app.packageName))
+        whenever(
+                appOpsManager.checkOpNoThrow(
+                    AppOpsManager.OP_COMPUTER_CONTROL,
+                    app.uid,
+                    app.packageName,
+                )
+            )
             .thenReturn(AppOpsManager.MODE_IGNORED)
 
         val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
@@ -103,7 +128,13 @@ class ComputerControlAutomationTest {
     @Test
     fun getSummary_modeDefault_returnsAskString() {
         val app = mockApp("test.app", 123, hasPermission = true)
-        whenever(appOpsManager.checkOpNoThrow(listModel.appOps.op, app.uid, app.packageName))
+        whenever(
+                appOpsManager.checkOpNoThrow(
+                    AppOpsManager.OP_COMPUTER_CONTROL,
+                    app.uid,
+                    app.packageName,
+                )
+            )
             .thenReturn(AppOpsManager.MODE_DEFAULT)
 
         val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
@@ -113,11 +144,11 @@ class ComputerControlAutomationTest {
     }
 
     @Test
-    fun controller_setMode_callsAppOpsManager() {
+    fun consentController_setAppOpMode_callsAppOpsManager() {
         val app = mockApp("test.app", 123, hasPermission = true)
-        val controller = ComputerAutomationController(context, app, listModel.appOps)
+        val controller = ComputerControlConsentController(context, app)
 
-        controller.setMode(AppOpsManager.MODE_ALLOWED)
+        controller.setAppOpMode(AppOpsManager.MODE_ALLOWED)
 
         verify(appOpsManager)
             .setMode(
@@ -126,5 +157,40 @@ class ComputerControlAutomationTest {
                 app.packageName,
                 AppOpsManager.MODE_ALLOWED,
             )
+    }
+
+    @Test
+    fun consentController_getAutomatablePackages_callsConsentManager() {
+        val app = mockApp("test.app", 123, hasPermission = true)
+        val controller = ComputerControlConsentController(context, app)
+        val expectedPackages = arrayOf("com.example.app1", "com.example.app2")
+        whenever(consentManager.getAutomatableAppListForAgent(app.uid, app.packageName))
+            .thenReturn(expectedPackages)
+
+        val packages = controller.getAutomatablePackages()
+
+        assertThat(packages).containsExactlyElementsIn(expectedPackages)
+    }
+
+    @Test
+    fun consentController_clearAutomatablePackages_callsConsentManager() {
+        val app = mockApp("test.app", 123, hasPermission = true)
+        val controller = ComputerControlConsentController(context, app)
+
+        controller.clearAutomatablePackages()
+
+        verify(consentManager).clearAutomatableAppListForAgent(app.uid, app.packageName)
+    }
+
+    @Test
+    fun consentController_removeAutomatablePackage_callsConsentManager() {
+        val app = mockApp("test.app", 123, hasPermission = true)
+        val controller = ComputerControlConsentController(context, app)
+        val targetPackage = "com.example.target"
+
+        controller.removeAutomatablePackage(targetPackage)
+
+        verify(consentManager)
+            .removeAppFromAutomatableAppListForAgent(app.uid, app.packageName, targetPackage)
     }
 }
