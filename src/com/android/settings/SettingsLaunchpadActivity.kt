@@ -159,6 +159,19 @@ class SettingsLaunchpadActivity : Activity() {
             }
         }
 
+        // Does this screenMetadata define a custom launch intent?
+        val metadataIntent = screenMetadata.getLaunchIntent(this, null)
+        if (metadataIntent != null &&
+            metadataIntent.action != PreferenceScreenMetadata.LAUNCH_SETTINGS_PAGES_ACTION
+        ) {
+            try {
+                startActivity(metadataIntent.addFlags(FLAG_ACTIVITY_NEW_TASK))
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to launch custom intent for $screenKey", e)
+            }
+            return
+        }
+
         val fragmentClass =
             try {
                 screenMetadata.fragmentClass()
