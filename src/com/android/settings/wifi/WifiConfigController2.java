@@ -210,7 +210,6 @@ public class WifiConfigController2 implements TextWatcher,
     private TextView mDns1View;
     private TextView mDns2View;
 
-    private LinearLayout mSharedNetworkLoginScreenWarning;
     private MaterialSwitch mSharedSwitch;
     private MaterialSwitch mEditConfigurationSwitch;
     private Spinner mProxySettingsSpinner;
@@ -360,8 +359,6 @@ public class WifiConfigController2 implements TextWatcher,
         mSharedSwitch = (MaterialSwitch) mView.findViewById(R.id.share_wifi_network);
         mEditConfigurationSwitch =
             (MaterialSwitch) mView.findViewById(R.id.edit_wifi_network_configuration);
-        mSharedNetworkLoginScreenWarning =
-            (LinearLayout) mView.findViewById(R.id.shared_network_login_screen_warning);
 
         if (WifiUtils.isWifiMultiuserEnabled()) {
             mView.findViewById(R.id.sharing_toggle_fields)
@@ -370,10 +367,10 @@ public class WifiConfigController2 implements TextWatcher,
                     .setVisibility(mIsMultiUser ? View.VISIBLE : View.GONE);
 
             boolean sharedDefault = WifiUtils.isGuestUser(mContext)
-                    ? false : WifiUtils.isAtLoginScreen(mContext) ? true :
+                    ? false :
                     mContext.getResources().getBoolean(R.bool.config_share_network_by_default);
             boolean editConfigDefault = WifiUtils.isGuestUser(mContext)
-                    ? false : WifiUtils.isAtLoginScreen(mContext) ? true :
+                    ? false :
                     mContext.getResources()
                         .getBoolean(R.bool.config_allow_edit_network_configuration_by_default);
 
@@ -390,12 +387,8 @@ public class WifiConfigController2 implements TextWatcher,
 
             setAccessibilityDelegateForNetworkFields();
 
-            if (WifiUtils.isAtLoginScreen(mContext)
-                    || mMode == WifiConfigUiBase2.MODE_MODIFY) {
+            if (mMode == WifiConfigUiBase2.MODE_MODIFY) {
                 setSharedNetworkFieldsInvisible();
-            }
-            if (WifiUtils.isAtLoginScreen(mContext)) {
-                mSharedNetworkLoginScreenWarning.setVisibility(View.VISIBLE);
             }
         }
 
