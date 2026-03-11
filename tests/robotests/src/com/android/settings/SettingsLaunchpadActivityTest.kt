@@ -36,6 +36,8 @@ import com.android.settingslib.metadata.FixedArrayMap
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_ARGS
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_KEY
 import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
@@ -249,7 +251,7 @@ class SettingsLaunchpadActivityTest {
     fun onCreate_screenNotFound_shouldFinish() {
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, "non_existent_key")
+                putExtra(EXTRA_SCREEN_KEY, "non_existent_key")
             }
         val activity =
             Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
@@ -264,7 +266,7 @@ class SettingsLaunchpadActivityTest {
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, API_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, API_SCREEN_KEY)
             }
         val activity =
             Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
@@ -279,7 +281,7 @@ class SettingsLaunchpadActivityTest {
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, API_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, API_SCREEN_KEY)
             }
         val activity =
             Robolectric.buildActivity(SettingsLaunchpadActivity::class.java, intent).create().get()
@@ -325,7 +327,7 @@ class SettingsLaunchpadActivityTest {
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
             }
 
         // Act
@@ -349,8 +351,8 @@ class SettingsLaunchpadActivityTest {
         ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(false)
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, DYNAMIC_SPA_SCREEN_KEY)
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_ARGS, screenArgs)
+                putExtra(EXTRA_SCREEN_KEY, DYNAMIC_SPA_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_ARGS, screenArgs)
             }
 
         // Act
@@ -372,7 +374,7 @@ class SettingsLaunchpadActivityTest {
         ShadowActivityEmbeddingUtils.setIsEmbeddingActivityEnabled(true)
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, STATIC_SPA_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, STATIC_SPA_SCREEN_KEY)
             }
 
         // Act
@@ -394,7 +396,7 @@ class SettingsLaunchpadActivityTest {
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
             }
 
         // Act
@@ -423,8 +425,8 @@ class SettingsLaunchpadActivityTest {
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_ARGS, screenArgs)
+                putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_ARGS, screenArgs)
             }
 
         // Act
@@ -455,7 +457,7 @@ class SettingsLaunchpadActivityTest {
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
                 putExtra(SettingsLaunchpadActivity.EXTRA_HIGHLIGHT_KEY, highlightKeyValue)
             }
 
@@ -481,7 +483,7 @@ class SettingsLaunchpadActivityTest {
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
             }
 
         // Act
@@ -501,7 +503,7 @@ class SettingsLaunchpadActivityTest {
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
             }
 
         // Act
@@ -533,7 +535,7 @@ class SettingsLaunchpadActivityTest {
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
                 // Use the key for our new PreferencesApiScreen fake
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, API_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, API_SCREEN_KEY)
             }
 
         // Act
@@ -572,7 +574,7 @@ class SettingsLaunchpadActivityTest {
 
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
-                putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+                putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
                 putExtra(EXTRA_LAUNCH_SCREEN, launchScreenExtra)
             }
 

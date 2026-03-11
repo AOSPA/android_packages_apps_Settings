@@ -23,12 +23,14 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import android.util.Log
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
+import com.android.settings.SettingsLaunchpadActivity.Companion.EXTRA_HIGHLIGHT_KEY
 import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolineIntent
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.spa.SpaActivity.Companion.getSpaActivityIntent
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
+import com.android.settings.utils.unflattenBundles
 import com.android.settingslib.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
@@ -37,6 +39,8 @@ import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_ARGS
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_KEY
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider
 import com.android.settingslib.metadata.ValidatedKeyParameters
@@ -69,15 +73,6 @@ import kotlinx.coroutines.runBlocking
  *   highlight within the target screen.
  */
 class SettingsLaunchpadActivity : Activity() {
-
-    companion object {
-        const val EXTRA_SCREEN_KEY = "screen_key"
-        const val EXTRA_SCREEN_ARGS = "screen_args"
-        const val EXTRA_HIGHLIGHT_KEY = "highlight_key"
-
-        private const val TAG = "SettingsLaunchpad"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (isFinishing) return
@@ -88,6 +83,9 @@ class SettingsLaunchpadActivity : Activity() {
             finish()
             return
         }
+
+        // Transform raw string extras back into Bundles before any processing
+        intent.unflattenBundles()
 
         processIntentAndLaunch()
         finish()
@@ -188,7 +186,7 @@ class SettingsLaunchpadActivity : Activity() {
                 putString(EXTRA_BINDING_SCREEN_KEY, key)
                 putBundle(EXTRA_BINDING_SCREEN_ARGS, args)
                 putString(
-                    SettingsActivity.EXTRA_FRAGMENT_ARG_KEY,
+                    EXTRA_FRAGMENT_ARG_KEY,
                     intent.getStringExtra(EXTRA_HIGHLIGHT_KEY),
                 )
 
@@ -233,12 +231,13 @@ class SettingsLaunchpadActivity : Activity() {
             is PreferencesApiScreen -> metadata.topLevelSettingsCategory.value
             is PreferenceScreenMixin ->
                 metadata.highlightMenuKey.takeIf { it != 0 }?.let { getString(it) }
+
             else -> null
         }
 
     private fun shouldLaunchDeepLinkTrampoline(): Boolean {
         return ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) &&
-            !ActivityEmbeddingUtils.isAlreadyEmbedded(this)
+                !ActivityEmbeddingUtils.isAlreadyEmbedded(this)
     }
 
     private fun createScreenCoordinate(
@@ -248,7 +247,7 @@ class SettingsLaunchpadActivity : Activity() {
         val screenCoordinate =
             if (
                 CatalystFlagProviderFactory.catalystUseKeyParameters() &&
-                    PreferenceScreenRegistry.isParameterized(this, screenKey)
+                PreferenceScreenRegistry.isParameterized(this, screenKey)
             ) {
                 PreferenceScreenCoordinate(
                     screenKey,
@@ -270,5 +269,11 @@ class SettingsLaunchpadActivity : Activity() {
         // check permission
         // check signature
         return true
+    }
+
+    companion object {
+        const val EXTRA_HIGHLIGHT_KEY = "highlight_key"
+
+        private const val TAG = "SettingsLaunchpad"
     }
 }

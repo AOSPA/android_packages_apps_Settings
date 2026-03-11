@@ -22,9 +22,13 @@ import android.content.Intent
 import android.os.Bundle
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
 import com.android.settings.SettingsLaunchpadActivity
-import com.android.settings.SettingsLaunchpadActivity.Companion.EXTRA_SCREEN_ARGS
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_ARGS
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_KEY
 import com.android.settingslib.metadata.ValidatedKeyParameters
+import com.android.settingslib.metadata.deserializeToMap
+import com.android.settingslib.metadata.toBundle
+import com.android.settingslib.metadata.toSerializableString
 
 /**
  * Returns the [Intent] to start given settings activity and highlight a specific preference.
@@ -74,7 +78,7 @@ fun makeLaunchIntent(
 fun makeLaunchpadIntent(context: Context, screenKey: String, key: String?) =
     Intent(context, SettingsLaunchpadActivity::class.java).apply {
         action = "com.android.settings.action.LAUNCH_SETTINGS_PAGES"
-        putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, screenKey)
+        putExtra(EXTRA_SCREEN_KEY, screenKey)
         highlightPreference(key)
     }
 
@@ -83,18 +87,17 @@ fun makeLaunchpadIntent(
     screenKey: String,
     keyParameters: ValidatedKeyParameters,
     key: String?,
-) =
-    Intent(context, SettingsLaunchpadActivity::class.java).apply {
-        action = "com.android.settings.action.LAUNCH_SETTINGS_PAGES"
-        putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, screenKey)
-        putExtra(EXTRA_SCREEN_ARGS, keyParameters.toBundle())
-        highlightPreference(key)
-    }
+) = Intent(context, SettingsLaunchpadActivity::class.java).apply {
+    action = "com.android.settings.action.LAUNCH_SETTINGS_PAGES"
+    putExtra(EXTRA_SCREEN_KEY, screenKey)
+    putExtra(EXTRA_SCREEN_ARGS, keyParameters.toBundle())
+    highlightPreference(key)
+}
 
 fun makeLaunchpadIntent(context: Context, screenKey: String, arguments: Bundle, key: String?) =
     Intent(context, SettingsLaunchpadActivity::class.java).apply {
         action = "com.android.settings.action.LAUNCH_SETTINGS_PAGES"
-        putExtra(SettingsLaunchpadActivity.EXTRA_SCREEN_KEY, screenKey)
+        putExtra(EXTRA_SCREEN_KEY, screenKey)
         putExtra(EXTRA_SCREEN_ARGS, arguments)
         highlightPreference(key)
     }
@@ -135,4 +138,45 @@ fun Intent.highlightPreference(keyParameters: ValidatedKeyParameters, key: Strin
 /** Sets the intent extra to highlight given preference. */
 fun Intent.highlightPreference(key: String?) {
     if (key != null) putExtra(EXTRA_FRAGMENT_ARG_KEY, key)
+}
+
+/**
+ * Replaces all nested [Bundle] extras with their serialized raw string representations.
+ *
+ * For example, a Bundle extra with key "screen_args" will be removed and replaced
+ * with a String extra with key "screen_args_raw".
+ */
+fun Intent.flattenBundles() {
+    val extras = this.extras ?: return
+    val bundleKeys = extras.keySet().filter { extras.get(it) is Bundle }
+
+    for (key in bundleKeys) {
+        val bundle = extras.getBundle(key) ?: continue
+        val map = mutableMapOf<String, String>()
+
+        for (k in bundle.keySet()) {
+            bundle.get(k)?.let { map[k] = it.toString() }
+        }
+
+        this.putExtra("${key}_raw", map.toSerializableString())
+        this.removeExtra(key)
+    }
+}
+
+/**
+ * Detects extras ending in "_raw", deserializes them from strings back into Bundles,
+ * and restores them to their original keys.
+ */
+fun Intent.unflattenBundles() {
+    val extras = this.extras ?: return
+    val rawKeys = extras.keySet().filter { it.endsWith("_raw") }
+
+    for (rawKey in rawKeys) {
+        val rawValue = extras.getString(rawKey)
+        if (!rawValue.isNullOrEmpty()) {
+            val originalKey = rawKey.removeSuffix("_raw")
+            this.putExtra(originalKey, rawValue.deserializeToMap().toBundle())
+            this.removeExtra(rawKey)
+        }
+    }
 }

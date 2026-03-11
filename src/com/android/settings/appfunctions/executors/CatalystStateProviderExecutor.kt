@@ -27,6 +27,7 @@ import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.deviceinfo.imei.ImeiPreference
+import com.android.settings.utils.flattenBundles
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
@@ -193,7 +194,10 @@ class CatalystStateProviderExecutor(
         val descriptionPrefix = if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else ""
         val description = descriptionPrefix + basicDescription + descriptionSuffix
 
-        val launchingIntent = screenMetaData.getLaunchIntent(context, null)
+        val launchingIntent = screenMetaData.getLaunchIntent(context, null)?.apply {
+            // Use flattenBundles since launchingIntent.toUri drops the bundles
+            flattenBundles()
+        }
         val states =
             PerScreenDeviceStates(
                 description = description,
