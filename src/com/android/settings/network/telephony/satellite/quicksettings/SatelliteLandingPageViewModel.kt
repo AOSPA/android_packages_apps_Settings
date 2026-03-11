@@ -132,7 +132,12 @@ class SatelliteLandingPageViewModel(
             }
         _isCarrierRoamingNtnSupported.value = isCarrierSupported
 
-        loadSatelliteAppItems(isLteSupported, isCarrierSupported)
+        val dataSupportMode =
+            withContext(backgroundDispatcher) {
+                satelliteStateRepository.getSatelliteDataSupportMode(subId)
+            }
+
+        loadSatelliteAppItems(isLteSupported, isCarrierSupported, dataSupportMode)
 
         updateBannerState(subId)
     }
@@ -220,12 +225,18 @@ class SatelliteLandingPageViewModel(
     private fun loadSatelliteAppItems(
         isLteBasedNtnSupported: Boolean,
         isCarrierRoamingNtnSupported: Boolean,
+        dataSupportMode: Int,
     ) {
         val items = mutableListOf<SatelliteAppItem>()
 
+        val isRestrictedMode =
+            isLteBasedNtnSupported &&
+                dataSupportMode == SatelliteManager.SATELLITE_DATA_SUPPORT_RESTRICTED
+
         // Phone app
+        val phonePackage = context.getString(R.string.config_satellite_phone_app_package)
         createSatelliteAppItem(
-                packageName = SatelliteAppsRepository.PACKAGE_NAME_PHONE,
+                packageName = phonePackage,
                 intent = appsRepository.getDialerIntent(),
                 appSummary = context.getString(R.string.satellite_phone_summary),
             )
@@ -234,7 +245,7 @@ class SatelliteLandingPageViewModel(
         // Configurable apps based on NTN support
         val appPackages =
             if (isLteBasedNtnSupported) {
-                appsRepository.getAppsPackagesForLteLandingPage()
+                appsRepository.getAppsPackagesForLteLandingPage(isRestrictedMode)
             } else {
                 appsRepository.getAppsPackagesForNbNtnLandingPage()
             }
