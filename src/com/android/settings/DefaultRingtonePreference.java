@@ -19,8 +19,10 @@ package com.android.settings;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.audio.Flags;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.telecom.PhoneAccountHandle;
 import android.util.AttributeSet;
 import android.util.Log;
 
@@ -44,21 +46,27 @@ public class DefaultRingtonePreference extends RingtonePreference {
         ringtonePickerIntent.putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, false);
     }
 
+
     @Override
     protected void onSaveRingtone(Uri ringtoneUri) {
-        if (ringtoneUri == null) {
-            setActualDefaultRingtoneUri(ringtoneUri);
-            return;
-        }
-
-        if (!isValidRingtoneUri(ringtoneUri)) {
+        if (ringtoneUri != null && !isValidRingtoneUri(ringtoneUri)) {
             Log.e(TAG, "onSaveRingtone for URI:" + ringtoneUri
                     + " ignored: invalid ringtone Uri");
             return;
         }
 
-        setActualDefaultRingtoneUri(ringtoneUri);
+        if (Flags.supportPerPhoneAccountRingtone() && getPhoneAccountHandle() != null) {
+            setRingtoneUri(ringtoneUri, getPhoneAccountHandle());
+        } else {
+            setActualDefaultRingtoneUri(ringtoneUri);
+        }
     }
+
+    @VisibleForTesting
+    void setRingtoneUri(Uri ringtoneUri, PhoneAccountHandle phoneAccountHandle) {
+        RingtoneManager.setRingtoneUri(mUserContext, ringtoneUri, phoneAccountHandle);
+    }
+
 
     @VisibleForTesting
     void setActualDefaultRingtoneUri(Uri ringtoneUri) {
@@ -67,6 +75,17 @@ public class DefaultRingtonePreference extends RingtonePreference {
 
     @Override
     protected Uri onRestoreRingtone() {
+        if (Flags.supportPerPhoneAccountRingtone() && getPhoneAccountHandle() != null) {
+            // Cache the URI to avoid multiple lookups
+            Uri ringtoneUri = RingtoneManager.getRingtoneUriForPhoneAccountHandle(
+                    mUserContext, getPhoneAccountHandle());
+
+            if (ringtoneUri != null) {
+                return ringtoneUri;
+            }
+        }
+
+        // Fallback to the global default if the flag is off or no specific URI exists
         return RingtoneManager.getActualDefaultRingtoneUri(mUserContext, getRingtoneType());
     }
 

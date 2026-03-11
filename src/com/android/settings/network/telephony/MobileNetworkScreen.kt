@@ -19,6 +19,7 @@ package com.android.settings.network.telephony
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
+import android.media.audio.Flags as AudioFlags
 import android.os.Bundle
 import android.os.UserManager
 import android.provider.Settings
@@ -126,6 +127,9 @@ private constructor(
                 +MobileNetworkPhoneNumberPreference(data)
                 +EnabledNetworkModePreference(data)
                 +MobileNetworkImeiPreference(data)
+                if (AudioFlags.supportPerPhoneAccountRingtone()) {
+                    +SimRingtonePreference(context, subId) order 110
+                }
                 if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     +(DataUsageListScreen.KEY withParameters keyParameters!!)
                 } else {
