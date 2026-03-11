@@ -34,7 +34,10 @@ class ScreenResolutionApiScreen :
         purpose = R.string.screen_resolution_screen_purpose,
     ) {
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
         preconditions(R.string.screen_resolution_preconditions) {
             if (context.checkSupportedResolutions()) {
                 Allowed
