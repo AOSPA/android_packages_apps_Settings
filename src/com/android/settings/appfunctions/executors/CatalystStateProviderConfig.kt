@@ -149,7 +149,9 @@ import com.android.settings.localepicker.SystemLocalePickerApiFirstScreen
 import com.android.settings.localepicker.TermsOfAddressApiFirstScreen
 import com.android.settings.location.BluetoothScanningApiScreen
 import com.android.settings.location.LocationScreen
+import com.android.settings.location.LocationServicesScreenApi
 import com.android.settings.location.LocationServicesScreen
+import com.android.settings.location.LocationSettingsScreenApi
 import com.android.settings.location.RecentLocationAccessScreen
 import com.android.settings.location.WifiScanningApiScreen
 import com.android.settings.network.AdaptiveConnectivityApiScreen
@@ -690,4 +692,6 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiScanningApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CellularSecurityScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = LocationSettingsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreenApi.KEY),
     )
