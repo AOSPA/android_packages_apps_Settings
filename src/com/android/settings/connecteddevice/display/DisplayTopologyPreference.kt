@@ -32,7 +32,7 @@ class DisplayTopologyPreference(uiContext: Context, val injector: ConnectedDispl
     Preference(uiContext), GroupSectionDividerMixin {
 
     @VisibleForTesting
-    val controller = DisplayTopologyPreferenceController(uiContext, injector.context!!, injector)
+    val controller = DisplayTopologyPreferenceController(uiContext, injector.context, injector)
 
     init {
         layoutResource = R.layout.display_topology_preference

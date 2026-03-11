@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.display;
 
-import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -27,10 +26,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
 
 public class ExternalDisplayUpdater extends BaseExternalDisplayUpdater {
 
@@ -73,9 +69,6 @@ public class ExternalDisplayUpdater extends BaseExternalDisplayUpdater {
             return null;
         }
         var context = injector.getContext();
-        if (context == null) {
-            return null;
-        }
 
         var allDisplays = injector.getDisplays().stream().filter(
                 DisplayDevice::isConnectedDisplay).toList();
