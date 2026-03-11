@@ -26,6 +26,7 @@ import com.android.settingslib.search.SearchIndexable;
 /**
  * Fragment for polite notifications.
  */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class PoliteNotificationsPreferenceFragment extends DashboardFragment {
 
@@ -48,3 +49,4 @@ public class PoliteNotificationsPreferenceFragment extends DashboardFragment {
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
             new BaseSearchIndexProvider(R.xml.polite_notifications_settings);
 }
+// LINT.ThenChange(PoliteNotificationsApiScreen.kt)

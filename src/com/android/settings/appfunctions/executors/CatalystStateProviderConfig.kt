@@ -165,6 +165,7 @@ import com.android.settings.network.telephony.MobileNetworkScreenApi
 import com.android.settings.network.tether.TetherApiScreen
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.BubbleNotificationScreen
+import com.android.settings.notification.PoliteNotificationsApiScreen
 import com.android.settings.notification.SoundApiScreen
 import com.android.settings.notification.SoundScreen
 import com.android.settings.notification.SpatialAudioApiScreen
@@ -500,6 +501,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = BubbleNotificationScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = PoliteNotificationsApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ResetDashboardScreen.KEY),
