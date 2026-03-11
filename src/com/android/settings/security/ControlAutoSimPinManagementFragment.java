@@ -16,13 +16,9 @@
 
 package com.android.settings.security;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 
-import androidx.annotation.Nullable;
-
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
 
 /**
  * Fragment for SIM PIN management features (starting with automatic SIM PIN management, manual
@@ -30,12 +26,7 @@ import com.android.settings.dashboard.DashboardFragment;
  *
  * This is the container fragment for showing the automatically-generated SIM PIN.
  */
-public class ControlAutoSimPinManagementFragment extends DashboardFragment implements
-        EnterSimPinDialogFragment.SimPinEntryListener {
-    private static final String TAG = ControlAutoSimPinManagementFragment.class.getSimpleName();
-    @Nullable
-    private EnterSimPinDialogFragment.SimPinEntryListener mCurrentListener;
-
+public class ControlAutoSimPinManagementFragment extends BaseSimPinFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -49,46 +40,5 @@ public class ControlAutoSimPinManagementFragment extends DashboardFragment imple
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.sim_protection_settings;
-    }
-
-    @Override
-    protected String getLogTag() {
-        return TAG;
-    }
-
-    @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.AUTOMATIC_SIM_PIN_MANAGEMENT;
-    }
-
-    public void setCurrentListener(EnterSimPinDialogFragment.SimPinEntryListener listener) {
-        mCurrentListener = listener;
-    }
-
-    @Nullable
-    private EnterSimPinDialogFragment.SimPinEntryListener getAndClearListener() {
-        EnterSimPinDialogFragment.SimPinEntryListener listener = mCurrentListener;
-        mCurrentListener = null;
-        return listener;
-    }
-
-    @Override
-    public void onPinEntered(String pin) {
-        EnterSimPinDialogFragment.SimPinEntryListener listener = getAndClearListener();
-        if (listener == null) {
-            return;
-        }
-
-        listener.onPinEntered(pin);
-    }
-
-    @Override
-    public void onEntryCancelled() {
-        EnterSimPinDialogFragment.SimPinEntryListener listener = getAndClearListener();
-        if (listener == null) {
-            return;
-        }
-
-        listener.onEntryCancelled();
     }
 }
