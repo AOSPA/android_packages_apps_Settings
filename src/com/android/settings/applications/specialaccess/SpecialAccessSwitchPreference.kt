@@ -42,6 +42,8 @@ internal class SpecialAccessSwitchPreference(
 
     override fun storage(context: Context) = dataStore
 
+    override val supportsWrite = true
+
     override fun createWidget(context: Context) =
         FilterTouchesSwitchPreference(context).also {
             it.onPreferenceChangeListener = onPreferenceChangeListener

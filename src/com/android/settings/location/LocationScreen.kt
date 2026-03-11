@@ -114,6 +114,7 @@ private class LocationMainSwitch : BooleanValuePreference, MainSwitchPreferenceB
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
+    override val supportsWrite = false
     override fun storage(context: Context) = LocationStorage(context)
 
     override fun tags(context: Context) = arrayOf(HERO_SET)

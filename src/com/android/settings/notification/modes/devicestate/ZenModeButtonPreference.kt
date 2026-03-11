@@ -69,6 +69,8 @@ class ZenModeButtonPreference(val zenMode: ZenMode) :
             override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {}
         }
 
+    override val supportsWrite = false
+
     companion object {
         const val KEY = "device_state_activate" // only for device state.
     }

@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 
 class AutoclickCursorAreaSizePreference :
     PersistentPreference<Int>,
@@ -66,6 +67,11 @@ class AutoclickCursorAreaSizePreference :
         SettingsSecureStore.get(context).apply {
             setDefaultValue(SETTING_KEY, AccessibilityManager.AUTOCLICK_CURSOR_AREA_SIZE_DEFAULT)
         }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override fun onStart(context: PreferenceLifecycleContext) {
         super.onStart(context)

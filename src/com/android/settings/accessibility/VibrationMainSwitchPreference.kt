@@ -66,6 +66,7 @@ class VibrationMainSwitchPreference(override val key: String, override val purpo
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY
 

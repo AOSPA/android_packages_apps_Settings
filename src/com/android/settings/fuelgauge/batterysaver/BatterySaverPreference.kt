@@ -77,6 +77,7 @@ class BatterySaverPreference :
         callingUid: Int,
     ) = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 

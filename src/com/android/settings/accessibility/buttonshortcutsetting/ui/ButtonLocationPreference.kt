@@ -34,6 +34,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
 
 // TODO(b/426597986): Update permissions, permit and sensitivity level
@@ -57,6 +58,11 @@ class ButtonLocationPreference(context: Context) :
             }
         )
     }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override fun getSummary(context: Context): CharSequence? {
         val selectedMode = storage(context).getInt(KEY)

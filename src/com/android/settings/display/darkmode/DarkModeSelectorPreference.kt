@@ -58,6 +58,7 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 

@@ -190,6 +190,7 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 

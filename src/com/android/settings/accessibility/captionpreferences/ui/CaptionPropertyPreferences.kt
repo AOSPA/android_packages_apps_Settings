@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.DiscreteStringValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
 
 /** Preference for caption font size. */
@@ -64,6 +65,11 @@ class CaptionFontSizePreference(context: Context) :
     private val dataStore by lazy { CaptionFontSizeDataStore(context) }
 
     override fun storage(context: Context): KeyValueStore = dataStore
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override fun createWidget(context: Context) = ListPreference(context)
 
@@ -102,6 +108,11 @@ class CaptionStylePreference(context: Context) :
     private val summaryMap by lazy { SummaryMap(values, valuesDescription) { _, v -> v as Int } }
 
     private val dataStore by lazy { CaptionStyleDataStore(context) }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override fun storage(context: Context): KeyValueStore = dataStore
 

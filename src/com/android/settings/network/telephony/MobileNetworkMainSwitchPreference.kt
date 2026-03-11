@@ -95,6 +95,8 @@ class MobileNetworkMainSwitchPreference(
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
+    override val supportsWrite = false
+
     override fun onStart(context: PreferenceLifecycleContext) {
         super.onStart(context)
         context.lifecycleScope.launch(Dispatchers.Default) {

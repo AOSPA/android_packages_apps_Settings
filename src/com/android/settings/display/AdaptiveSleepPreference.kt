@@ -107,6 +107,7 @@ class AdaptiveSleepPreference :
         callingUid: Int,
     ) = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.DEEP_LINK_ONLY
 

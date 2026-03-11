@@ -87,6 +87,7 @@ class UseServicePreference(
             }
         }
 
+    override val supportsWrite = true
     override val availabilityDescription =
         "The service must be targeting SDK R or later if it is using the accessibility button."
 

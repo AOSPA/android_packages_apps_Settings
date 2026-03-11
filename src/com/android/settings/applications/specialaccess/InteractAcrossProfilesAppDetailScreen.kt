@@ -202,6 +202,8 @@ private class InteractAcrossProfilesMainSwitch(private val storage: KeyValueStor
 
     override fun storage(context: Context) = storage
 
+    override val supportsWrite = false
+
     companion object {
         const val KEY = "device_state_interact_across_profiles_settings_switch"
     }

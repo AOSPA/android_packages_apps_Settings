@@ -69,6 +69,7 @@ sealed class ModePreference(private val storage: ColorCorrectionModeDataStore) :
         callingUid: Int,
     ): @ReadWritePermit Int = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun createWidget(context: Context): Preference =
         SelectorWithWidgetPreference(context).apply {
             // We don't want to truncate the text on the detail page,

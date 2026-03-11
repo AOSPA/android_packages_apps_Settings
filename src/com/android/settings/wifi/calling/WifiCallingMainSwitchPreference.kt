@@ -105,6 +105,8 @@ class WifiCallingMainSwitchPreference(private val subId: Int) :
             else -> ReadWritePermit.ALLOW
         }
 
+    override val supportsWrite = true
+
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
