@@ -80,6 +80,7 @@ class IntensityPreference(
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun onCreate(context: PreferenceLifecycleContext) {
         if (settingsKeyedObserver == null) {
             settingsKeyedObserver = KeyedObserver { _, _ ->

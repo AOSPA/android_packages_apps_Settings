@@ -105,6 +105,8 @@ internal class FontSizePreference(
     ): @ReadWritePermit Int {
         return ReadWritePermit.ALLOW
     }
+    override val supportsWrite = true
+
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY

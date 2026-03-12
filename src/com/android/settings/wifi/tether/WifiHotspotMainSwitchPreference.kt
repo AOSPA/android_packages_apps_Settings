@@ -67,6 +67,8 @@ class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStor
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
+
     override val sensitivityLevel
         get() = SensitivityLevel.MUST_PROVIDE_UNDO
 

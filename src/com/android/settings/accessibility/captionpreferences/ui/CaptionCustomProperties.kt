@@ -35,6 +35,7 @@ import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
 
 /** Mixin for preferences only available when custom caption style is selected. */
@@ -74,6 +75,11 @@ class CaptionFontFamilyPreference(context: Context) :
         get() = String::class.javaObjectType
 
     private val dataStore by lazy { CaptionFontFamilyDataStore(context) }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override fun storage(context: Context): KeyValueStore = dataStore
 
@@ -130,6 +136,11 @@ class CaptionEdgeTypePreference(context: Context) :
 
     private val dataStore by lazy { CaptionEdgeTypeDataStore(context) }
 
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
+
     override fun storage(context: Context): KeyValueStore = dataStore
 
     override fun createWidget(context: Context): Preference = EdgeTypeWidget(context, null)
@@ -169,6 +180,11 @@ class CaptionEdgeColorPreference(context: Context) :
         get() = Int::class.javaObjectType
 
     private val dataStore by lazy { CaptionEdgeColorDataStore(context) }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     private val captionHelper by lazy { CaptionHelper(context) }
 

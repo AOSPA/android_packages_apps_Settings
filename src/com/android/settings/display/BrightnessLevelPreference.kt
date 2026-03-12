@@ -129,6 +129,7 @@ class BrightnessLevelPreference :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
+    override val supportsWrite = false
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 

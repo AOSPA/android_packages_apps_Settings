@@ -470,6 +470,8 @@ class CatalystStateMetadataProviderExecutorTest {
         override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int): Int? =
             writePermit
 
+        override val supportsWrite = writePermit != null
+
         override fun storage(context: Context) = GraphTestUtils.createStorage(null, bindingKey)
     }
 

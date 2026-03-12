@@ -106,6 +106,7 @@ open class ExtraDimScreen(private val context: Context) :
         callingUid: Int,
     ): @ReadWritePermit Int = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         Intent(Settings.ACTION_REDUCE_BRIGHT_COLORS_SETTINGS).apply {
             highlightPreference(metadata?.key)

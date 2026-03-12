@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
 
 // TODO(b/426597986): Update permissions, permit and sensitivity level
@@ -57,6 +58,12 @@ class ButtonSizePreference(context: Context) :
             SettingsSecureStore.get(context).apply { setDefaultValue(KEY, SIZE_SMALL) }
         )
     }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
+
     private var buttonModeObserver: KeyedObserver<String>? = null
 
     override val values: Int

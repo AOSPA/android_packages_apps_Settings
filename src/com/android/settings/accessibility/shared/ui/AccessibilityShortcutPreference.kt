@@ -158,6 +158,7 @@ open class AccessibilityShortcutPreference(
         WarningInfo(warningMessage = warningMessage)
     }
 
+    override val supportsWrite = true
     private val inputDeviceListener by lazy {
         object : InputManager.InputDeviceListener {
             override fun onInputDeviceAdded(deviceId: Int) {

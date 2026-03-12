@@ -128,6 +128,8 @@ class SeparateRingVolumePreference(private val audioHelper: AudioHelper) :
     override fun getWritePermit(context: Context, value: Int?, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
+
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
