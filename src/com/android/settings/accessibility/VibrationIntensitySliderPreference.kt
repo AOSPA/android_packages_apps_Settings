@@ -27,6 +27,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 import kotlin.math.min
@@ -80,6 +81,11 @@ open class VibrationIntensitySliderPreference(
     override fun getSummary(context: Context) = storage.getSummary()
 
     override fun createWidget(context: Context) = SliderPreference(context)
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     @CallSuper
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

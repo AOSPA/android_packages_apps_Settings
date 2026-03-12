@@ -122,10 +122,11 @@
     <string name="night_display_auto_mode_twilight_location_disabled" translatable="false">Device location is not enabled.</string>
     <string name="night_display_auto_mode_custom_time_disabled" translatable="false">Night Light is not set to activate automatically at custom times.</string>
     <string name="night_display_custom_start_end_times_preconditions" translatable="false">Night Light must be set to activate automatically at custom times.</string>
-    <string name="auto_brightness_preconditions" translatable="false">This device must support auto-brightness.</string>
+    <string name="auto_brightness_preconditions" translatable="false">This device must support auto-brightness and must not be disallowed by a device administrator.</string>
     <string name="auto_brightness_unavailable" translatable="false">Auto-brightness is not supported on this device.</string>
     <string name="screen_resolution_preconditions" translatable="false">The device must support screen resolution configuration.</string>
     <string name="screen_resolution_unsupported" translatable="false">Screen resolution configuration is not supported on this device.</string>
+    <string name="auto_brightness_disallowed" translatable="false">Auto-brightness has disabled by device administrator.</string>
     <string name="when_to_dream_preconditions" translatable="false">The device must support configuring when to start screensaver.</string>
     <string name="when_to_dream_unavailable" translatable="false">The device does not support configuring when to start screensaver.</string>
     <string name="low_light_mode_preconditions" translatable="false">The device must support low light mode for screensaver.</string>
@@ -133,4 +134,10 @@
     <string name="use_nfc_unavailable" translatable="false">NFC is not available on this device.</string>
     <string name="require_device_unlock_for_nfc_preconditions" translatable="false">The device must support require device unlock for NFC paymentys feature.</string>
     <string name="require_device_unlock_for_nfc_unavailable" translatable="false">Require device unlock for NFC payments is not supported on this device.</string>
+    <string name="uwb_settings_general_precondition" translatable="false">The use of ultra-wideband must be supported by the hardware and must not be restricted by device policy</string>
+    <string name="uwb_settings_set_precondition" translatable="false">Ultra-wideband settings cannot be changed during airplane mode.</string>
+    <string name="uwb_settings_unavailable_user_restriction" translatable="false">Ultra-wideband is disabled based on your current settings.</string>
+    <string name="uwb_settings_unavailable_hardware" translatable="false">Ultra-wideband is not supported on this device.</string>
+    <string name="uwb_settings_unavailable_regulation" translatable="false">Ultra-wideband is unavailable due to local regulatory restrictions in your current region.</string>
+    <string name="uwb_settings_unavailable_airplane_mode" translatable="false">Ultra-wideband is disabled while Airplane Mode is active.</string>
 </resources>

@@ -83,7 +83,9 @@
     <string name="doze_always_on_wallpaper_enabled_purpose" translatable="false">Whether the lock screen wallpaper should be shown when the always-on display is active</string>
     <string name="app_data_usage_screen_purpose" translatable="false">app_data_usage_screen</string>
     <string name="app_data_usage_parameter_purpose" translatable="false">The package name of the app</string>
+    <string name="app_background_data_switch_purpose" translatable="false">Whether the app can use mobile data in the background</string>
     <string name="auto_brightness_entry_purpose" translatable="false">Allows users to enable or disable Adaptive brightness, which automatically adjusts the screen brightness based on environment and activities.</string>
+    <string name="auto_brightness_purpose" translatable="false">Whether or not Adaptive brightness is enabled</string>
     <string name="battery_saver_purpose" translatable="false">Whether or not Battery Saver is enabled</string>
     <string name="battery_usage_summary_purpose" translatable="false">Provides a detailed summary of battery consumption since the last full charge, including a usage chart, total screen time, and a breakdown of consumption by apps or system services.</string>
     <string name="screen_time_since_last_full_charge_purpose" translatable="false">Total seconds any app has been active on screen since the last full charge</string>
@@ -134,6 +136,7 @@
     <string name="configure_network_settings_purpose" translatable="false">Allows users to manage advanced Wi-Fi settings, including automatic Wi-Fi activation based on location, public network notifications, and the usage of less secure WEP networks.</string>
     <string name="enable_wifi_wakeup_purpose" translatable="false">Whether or not Wi-Fi is automatically turned on when the device is near high-quality saved networks</string>
     <string name="connection_preferences_purpose" translatable="false">Allows users to manage various device connection settings, including Bluetooth, NFC, file sharing, printing, and cross-device integration.</string>
+    <string name="connection_preferences_uwb_purpose" translatable="false">Controls the device\'s ability to perform position ranging through UWB technology.</string>
     <string name="conversations_purpose" translatable="false">Allows users to view and manage their priority conversations and any conversations with modified notification settings.</string>
     <string name="daltonizer_preference_purpose" translatable="false">Enables color correction settings for users with color vision deficiency.</string>
     <string name="accessibility_display_daltonizer_enabled_purpose" translatable="false">Whether or not color correction is active</string>
@@ -541,6 +544,7 @@
     <string name="billing_preference_catalyst_purpose" translatable="false">billing_preference_catalyst</string>
     <string name="data_usage_summary_purpose" translatable="false">This SIM data usage screen shows the amount of data each app has consumed from a specific SIM card</string>
     <string name="telephony_apn_key_purpose" translatable="false">telephony_apn_key</string>
+    <string name="sim_ringtone_pref_purpose" translatable="false">Allows the user to select and set a unique ringtone for a specific SIM card.</string>
     <string name="mobile_network_pref_screen_purpose" translatable="false">mobile_network_pref_screen</string>
     <string name="mobile_network_pref_screen_parameter_sub_id_purpose" translatable="false">The subscription ID</string>
     <string name="mobile_network_pref_screen_parameter_sub_id_description" translatable="false">The active subscription ID and display name of the current SIM.</string>
@@ -705,4 +709,13 @@
     <string name="external_display_id_parameter_purpose" translatable="false">The unique system identifier of the specific external display the user wants to configure or query.</string>
 
     <string name="cellular_security_purpose" translatable="false">Allows the user to manage mobile network security features, including 2G network protection and encryption settings.</string>
+
+    <!-- Stylus -->
+    <string name="api_stylus_screen_purpose" translatable="false">Allows configuring behavior and viewing details for a specific connected stylus, including enabling handwriting in text fields and managing physical button presses.</string>
+    <string name="api_stylus_device_input_id_purpose" translatable="false">The unique input device identifier representing the specific connected stylus to be configured.</string>
+    <string name="api_stylus_device_input_id_type_description" translatable="false">System identifiers for all currently connected and active stylus input devices.</string>
+    <string name="api_stylus_handwriting_purpose" translatable="false">Controls whether the user can use a stylus to handwrite directly into standard text input fields across the system.</string>
+    <string name="stylus_handwriting_precondition" translatable="false">Requires the current system input method (keyboard) to support stylus handwriting.</string>
+    <string name="stylus_handwriting_precondition_failed" translatable="false">Current input method does not support stylus handwriting</string>
+    <string name="api_stylus_ignore_button_purpose" translatable="false">Prevents accidental inputs by globally ignoring all physical button presses on the stylus.</string>
 </resources>

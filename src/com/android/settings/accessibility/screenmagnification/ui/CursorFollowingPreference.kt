@@ -101,6 +101,7 @@ class CursorFollowingPreference :
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         preference.onPreferenceClickListener = this

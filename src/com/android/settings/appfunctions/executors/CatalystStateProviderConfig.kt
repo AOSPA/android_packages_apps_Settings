@@ -82,6 +82,7 @@ import com.android.settings.applications.specialaccess.pictureinpicture.PictureI
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetailsApiScreen
 import com.android.settings.backup.AccountsAndBackupScreen
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceScreen
+import com.android.settings.connecteddevice.AdvancedConnectedDeviceApiScreen
 import com.android.settings.connecteddevice.BluetoothDashboardScreen
 import com.android.settings.connecteddevice.BluetoothDashboardScreenApi
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardScreen
@@ -89,6 +90,7 @@ import com.android.settings.connecteddevice.NfcAndPaymentScreen
 import com.android.settings.connecteddevice.PreviouslyConnectedDeviceScreen
 import com.android.settings.connecteddevice.display.ResolutionRefreshRateApiScreen
 import com.android.settings.connecteddevice.display.TabbedDisplayApiScreen
+import com.android.settings.connecteddevice.stylus.StylusUsiDetailsApiScreen
 import com.android.settings.connecteddevice.usb.UsbDetailsApiScreen
 import com.android.settings.datausage.AppDataUsageScreenApi
 import com.android.settings.datausage.BillingCycleScreen
@@ -149,7 +151,9 @@ import com.android.settings.localepicker.SystemLocalePickerApiFirstScreen
 import com.android.settings.localepicker.TermsOfAddressApiFirstScreen
 import com.android.settings.location.BluetoothScanningApiScreen
 import com.android.settings.location.LocationScreen
+import com.android.settings.location.LocationServicesScreenApi
 import com.android.settings.location.LocationServicesScreen
+import com.android.settings.location.LocationSettingsScreenApi
 import com.android.settings.location.RecentLocationAccessScreen
 import com.android.settings.location.WifiScanningApiScreen
 import com.android.settings.network.AdaptiveConnectivityApiScreen
@@ -165,7 +169,6 @@ import com.android.settings.network.telephony.MobileNetworkScreenApi
 import com.android.settings.network.tether.TetherApiScreen
 import com.android.settings.network.tether.TetherScreen
 import com.android.settings.notification.BubbleNotificationScreen
-import com.android.settings.notification.PoliteNotificationsApiScreen
 import com.android.settings.notification.SoundApiScreen
 import com.android.settings.notification.SoundScreen
 import com.android.settings.notification.SpatialAudioApiScreen
@@ -447,6 +450,7 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = AdvancedConnectedDeviceScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AdvancedConnectedDeviceApiScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = ConversationListScreen.KEY,
@@ -501,11 +505,6 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = BubbleNotificationScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
-        ),
-        PerScreenCatalystConfig(
-            enabled = true,
-            screenKey = PoliteNotificationsApiScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = ResetDashboardScreen.KEY),
@@ -688,6 +687,9 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = ScreenResolutionApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiScanningApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = StylusUsiDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CellularSecurityScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = LocationSettingsScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreenApi.KEY),
     )

@@ -104,6 +104,7 @@ open class AutoBrightnessScreen :
         callingUid: Int,
     ) = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
@@ -204,6 +205,7 @@ open class AutoBrightnessScreen :
             callingPid: Int,
             callingUid: Int,
         ) : @ReadWritePermit Int = screenMetadata.getWritePermit(context, value,  callingPid, callingUid)
+        override val supportsWrite = true
     }
 
     companion object {

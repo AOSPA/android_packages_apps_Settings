@@ -307,7 +307,7 @@ class ToggleShortcutPreferenceControllerTest {
 
         a11yManager.enableShortcutsForTargets(
             /* enable=*/ true,
-            GESTURE,
+            SOFTWARE,
             setOf(testComponentString),
             context.userId,
         )
@@ -315,17 +315,17 @@ class ToggleShortcutPreferenceControllerTest {
             .getContentObserverForTesting()
             .onChange(
                 /* selfChange= */ false,
-                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_GESTURE_TARGETS),
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS),
             )
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
         assertThat(shortcutPreference.isChecked).isTrue()
         assertThat(shortcutPreference.summary)
-            .isEqualTo(AccessibilityUtil.getShortcutSummaryList(context, GESTURE))
+            .isEqualTo(AccessibilityUtil.getShortcutSummaryList(context, SOFTWARE))
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(context, testComponentString, DEFAULT)
             )
-            .isEqualTo(GESTURE)
+            .isEqualTo(SOFTWARE)
     }
 
     private fun setHardwareKeyboard(hasConnectedKeyboard: Boolean) {

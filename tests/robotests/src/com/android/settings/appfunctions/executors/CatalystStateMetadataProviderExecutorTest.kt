@@ -75,7 +75,7 @@ class CatalystStateMetadataProviderExecutorTest {
 
 
     @Test
-    fun execute_onWritablePreference_notApiFirst_returnsNonWritableDeviceStateItem() = runTest {
+    fun execute_onWritablePreference_notApiFirst_returnsWritableDeviceStateItem() = runTest {
         val metadata = TestPreferenceMetadata(
                 bindingKey = "test_key_writable",
                 isPersistent = true,
@@ -101,17 +101,15 @@ class CatalystStateMetadataProviderExecutorTest {
         assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
             "screen_key/test_key_writable"
         )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isFalse()
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isTrue()
     }
 
-
     @Test
-    fun execute_onNonPersistentPreference_returnsUnwritableDeviceStateItem() = runTest {
-        val metadata =
-            TestPreferenceMetadata(
+    fun execute_onWritablePreference_notApiFirst_notWritable_returnsNotWritableDeviceStateItem() = runTest {
+        val metadata = TestPreferenceMetadata(
                 bindingKey = "test_key_writable",
-                isPersistent = false,
-                writePermit = ReadWritePermit.ALLOW,
+                isPersistent = true,
+                writePermit = null,
             )
         setRegistryFactories(
             createScreen(
@@ -129,48 +127,9 @@ class CatalystStateMetadataProviderExecutorTest {
         )
 
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-
-        // single screen
-        assertThat(result.metadata).hasSize(1)
-        // the preference
         assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
         assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
             "screen_key/test_key_writable"
-        )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isFalse()
-    }
-
-    @Test
-    fun execute_onDisallowedPermitPreference_returnsUnwritableDeviceStateItem() = runTest {
-        val metadata =
-            TestPreferenceMetadata(
-                bindingKey = "test_key_not_writable",
-                isPersistent = true,
-                writePermit = ReadWritePermit.DISALLOW,
-            )
-        setRegistryFactories(
-            createScreen(
-                GraphTestUtils.PreferenceScreenConfig(
-                    "screen_key",
-                    purpose = R.string.preference_screen_purpose,
-                    preferences = listOf(metadata)
-                )
-            )
-        )
-        val executor = CatalystStateMetadataProviderExecutor(
-            buildConfig("screen_key", listOf("test_key_not_writable")),
-            context,
-            englishContext
-        )
-
-        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-
-        // single screen
-        assertThat(result.metadata).hasSize(1)
-        // the preference
-        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
-        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
-            "screen_key/test_key_not_writable"
         )
         assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isFalse()
     }
@@ -469,6 +428,8 @@ class CatalystStateMetadataProviderExecutorTest {
 
         override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int): Int? =
             writePermit
+
+        override val supportsWrite = writePermit != null
 
         override fun storage(context: Context) = GraphTestUtils.createStorage(null, bindingKey)
     }

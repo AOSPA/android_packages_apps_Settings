@@ -4335,6 +4335,8 @@
 
     <!-- Date&Time settings screen, title of the notification category [CHAR LIMIT=60] -->
     <string name="time_notifications_title">Notifications</string>
+    <!-- Date&Time settings screen, summary of the notification category [CHAR LIMIT=NONE] -->
+    <string name="time_notifications_summary">Get notified when your time changes automatically</string>
     <!-- Date&Time settings screen, title of the time zone change notification toggle [CHAR LIMIT=60] -->
     <string name="time_zone_change_notifications_toggle_title">Time zone change</string>
     <!-- Date&Time settings screen, summary of the time zone change notification toggle [CHAR_LIMIT=NONE] -->
@@ -6132,7 +6134,7 @@
     <!-- Hint for the Expanded dark theme per-app settings gear icon. [CHAR LIMIT=NONE] -->
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint">Open expanded dark theme settings</string>
     <!-- header description for the Expanded dark theme per-app settings. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description">Expanded dark theme can improve readability, but may cause some apps to display incorrectly.\n\nApps with this setting off will use the standard dark theme option.</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description">Expanded dark theme automatically darkens more apps for better readability.\n\nKeep an app\'s toggle on to use expanded dark theme. If an app doesn\'t look right, turn its toggle off to use the app\'s own theme.</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -6422,8 +6424,6 @@
     <string name="accessibility_hearing_device_routing_title">Sounds</string>
     <!-- Title for the "Notifications" toggle in the Sounds category. [CHAR LIMIT=35] -->
     <string name="accessibility_hearing_device_notification_routing_title">Notifications</string>
-    <!-- Title for the "Ringtones and alarms" toggle in the Sounds category. [CHAR LIMIT=35] -->
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title">Ringtones and alarms</string>
     <!-- Summary for when audio is routed to the hearing device. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearing_device_routing_hearing_device_summary">Sounds will play through hearing devices</string>
     <!-- Summary for when audio is routed to the device speaker. (user's device speaker, e.g. phone, tablet, car) [CHAR LIMIT=NONE] -->
@@ -9011,6 +9011,12 @@
 
     <!-- Sound: Summary for when notification volume is disabled. [CHAR LIMIT=100] -->
     <string name="notification_volume_disabled_summary">Unavailable because ring is muted</string>
+
+    <!-- Search keywords for the sim specific ringtone preference. [CHAR LIMIT=NONE] -->
+    <string name="keywords_sim_ringtone">Ringtone, Ringtone alert, SIM, SIM Ringtone</string>
+
+    <!-- Sound: Title for the sim specific ringtone preference. [CHAR LIMIT=30] -->
+    <string name="sim_ringtone_title">Ringtone</string>
 
     <!-- Sound: Title for the option defining the phone ringtone. [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>

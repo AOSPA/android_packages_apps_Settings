@@ -71,6 +71,7 @@ class DoubleTapPowerMainSwitchPreference :
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY
 
+    override val supportsWrite = true
     companion object {
         const val KEY = Settings.Secure.DOUBLE_TAP_POWER_BUTTON_GESTURE_ENABLED
 

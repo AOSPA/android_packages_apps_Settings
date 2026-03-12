@@ -31,6 +31,7 @@ import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
@@ -79,7 +80,7 @@ class CatalystStateMetadataProviderExecutor(
         params: GenericDocument?,
     ): DeviceStateMetadataProviderExecutorResult {
         val perScreenDeviceStatesList = mutableListOf<PerScreenMetadata>()
-        val itemizationTypes = mutableSetOf<ItemizationType>()
+        val itemizationTypes = mutableMapOf<String, ItemizationType>()
         coroutineScope {
             val semaphore = Semaphore(MAX_PARALLELISM)
             val deferredList =
@@ -107,11 +108,11 @@ class CatalystStateMetadataProviderExecutor(
                 }
             val results = deferredList.awaitAll().filterNotNull()
             perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
-            itemizationTypes.addAll(results.flatMap { it.itemizationTypes })
+            results.flatMap { it.itemizationTypes }.forEach { itemizationTypes[it.key] = it }
         }
         return DeviceStateMetadataProviderExecutorResult(
             metadata = perScreenDeviceStatesList,
-            itemizationTypes = itemizationTypes,
+            itemizationTypes = itemizationTypes.values.toSet(),
         )
     }
 
@@ -139,19 +140,19 @@ class CatalystStateMetadataProviderExecutor(
                 )
             }
 
-        val types = mutableSetOf<ItemizationType>()
+        val types = mutableMapOf<String, ItemizationType>()
         hierarchy.values.flatten().forEach { node ->
-            (node.metadata as? ApiPreference<*>)?.let { types.add(it.type.toItemizationType(context)) }
+            (node.metadata as? ApiPreference<*>)?.let { types[it.type.toItemizationType(context).key] = it.type.toItemizationType(context) }
         }
         hierarchy.keys.forEach { screenMetaData ->
             screenMetaData.keyParametersSchema?.getParameters()?.values?.forEach { param ->
-                types.add(param.type.toItemizationType(context))
+                types[param.type.toItemizationType(context).key] = param.type.toItemizationType(context)
             }
         }
 
         return DeviceStateMetadataProviderExecutorResult(
             metadata = metadata,
-            itemizationTypes = types,
+            itemizationTypes = types.values.toSet(),
         )
     }
 
@@ -187,8 +188,10 @@ class CatalystStateMetadataProviderExecutor(
 
             val writable = if (metadata is ApiPreference<*>) {
                 metadata.set != null
+            } else if (metadata is PersistentPreference<*>) {
+                metadata.supportsWrite
             } else {
-                false // Legacy preferences are not writable
+                false
             }
 
             // We replace .. with . because sometimes the strings

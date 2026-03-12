@@ -142,6 +142,8 @@ class NotificationVolumePreference(private val audioHelper: AudioHelper) :
     override fun getWritePermit(context: Context, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
+
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 

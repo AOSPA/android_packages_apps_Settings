@@ -90,6 +90,7 @@ open class NightDisplayScreen(val context: Context) :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun storage(context: Context): KeyValueStore = NightDisplayStorage(context)
 
     override fun fragmentClass(): Class<out Fragment>? = NightDisplaySettings::class.java
@@ -156,6 +157,7 @@ open class NightDisplayScreen(val context: Context) :
             callingPid: Int,
             callingUid: Int
         ) : @ReadWritePermit Int = screenMetadata.getWritePermit(context, callingPid, callingUid)
+        override val supportsWrite = true
     }
 
     companion object {

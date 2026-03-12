@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.DiscreteStringValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
@@ -94,6 +95,11 @@ class DarkModeSchedulePreference(
 
     override fun getWritePermissions(context: Context) =
         DarkModeScheduleStorage.getWritePermissions()
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override fun getSummary(context: Context): CharSequence? = "%s"
 

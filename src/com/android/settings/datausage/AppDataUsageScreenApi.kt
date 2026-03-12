@@ -18,6 +18,7 @@ package com.android.settings.datausage
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.net.NetworkPolicyManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
@@ -25,8 +26,10 @@ import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.appContext
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 /**
  * The [PreferencesApiScreen] for the App Data Usage screen.
@@ -59,12 +62,37 @@ class AppDataUsageScreenApi :
                 extras.putInt(AppInfoBase.ARG_PACKAGE_UID, appContext.getPackageUid(packageName))
             }
         }
+
+        preference(
+            key = APP_BACKGROUND_DATA_SWITCH_KEY,
+            purpose = APP_BACKGROUND_DATA_SWITCH_PURPOSE,
+            type = AnyBoolean,
+        ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+            get {
+                execute {
+                    keyParameters?.get(KEY_APP_PACKAGE_NAME)?.let {
+                        context.getBackgroundDataEnabled(it)
+                    } ?: false
+                }
+            }
+            set {
+                execute { value ->
+                    keyParameters?.get(KEY_APP_PACKAGE_NAME)?.let {
+                        context.setBackgroundDataEnabled(it, value)
+                    } ?: false
+                }
+            }
+        }
     }
 
     companion object {
         private const val TAG = "AppDataUsageScreenApi"
         const val KEY = "api_app_data_usage_screen"
         const val KEY_APP_PACKAGE_NAME = "app"
+
+        const val APP_BACKGROUND_DATA_SWITCH_KEY = "app_background_data_switch"
+        private val APP_BACKGROUND_DATA_SWITCH_PURPOSE = R.string.app_background_data_switch_purpose
 
         /**
          * Gets the UID for a given package name.
@@ -79,6 +107,44 @@ class AppDataUsageScreenApi :
                 Log.e(TAG, "Package not found: $packageName", e)
                 -1
             }
+        }
+
+        /**
+         * Checks if background data is enabled for the specified package.
+         *
+         * @param packageName The target package name to check.
+         * @return True if background data is enabled, false otherwise.
+         */
+        fun Context.getBackgroundDataEnabled(
+            packageName: String,
+            policyManager: NetworkPolicyManager? =
+                getSystemService(NetworkPolicyManager::class.java),
+        ): Boolean {
+            val uid = getPackageUid(packageName)
+            if (uid == -1 || policyManager == null) {
+                return true
+            }
+            val uidPolicy = policyManager.getUidPolicy(uid)
+            // POLICY_REJECT_METERED_BACKGROUND means background data is restricted.
+            // If the bit is not set (result is 0), background data is enabled.
+            return (uidPolicy and NetworkPolicyManager.POLICY_REJECT_METERED_BACKGROUND) == 0
+        }
+
+        /**
+         * Sets whether background data is enabled for the specified package.
+         *
+         * @param packageName The target package name.
+         * @param enabled True to enable background data, false to disable.
+         * @param dataSaverBackend Optional DataSaverBackend instance.
+         */
+        fun Context.setBackgroundDataEnabled(
+            packageName: String,
+            enabled: Boolean,
+            dataSaverBackend: DataSaverBackend = DataSaverBackend(this),
+        ) {
+            val uid = getPackageUid(packageName)
+            if (uid == -1) return
+            dataSaverBackend.setIsDenylisted(uid, packageName, !enabled)
         }
     }
 }
