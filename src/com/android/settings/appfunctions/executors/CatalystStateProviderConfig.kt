@@ -82,6 +82,7 @@ import com.android.settings.applications.specialaccess.pictureinpicture.PictureI
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetailsApiScreen
 import com.android.settings.backup.AccountsAndBackupScreen
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceScreen
+import com.android.settings.connecteddevice.AdvancedConnectedDeviceApiScreen
 import com.android.settings.connecteddevice.BluetoothDashboardScreen
 import com.android.settings.connecteddevice.BluetoothDashboardScreenApi
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardScreen
@@ -447,6 +448,7 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = AdvancedConnectedDeviceScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AdvancedConnectedDeviceApiScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = ConversationListScreen.KEY,
