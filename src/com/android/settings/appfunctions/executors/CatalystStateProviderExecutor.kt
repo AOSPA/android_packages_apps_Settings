@@ -149,10 +149,7 @@ class CatalystStateProviderExecutor(
                     metadata is PersistentPreference<*> -> {
                         getDeviceStateItemValueForPreference(metadata)
                     }
-                    else ->
-                        metadata.getPreferenceSummary(context)?.toString()?.let {
-                            markStringAsExternalData(it)
-                        }
+                    else -> null
                 }
             jsonValue?.let {
                 deviceStateItemList.add(
