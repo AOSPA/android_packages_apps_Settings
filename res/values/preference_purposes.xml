@@ -267,7 +267,13 @@
     <string name="hearing_options_category_purpose" translatable="false">A section containing general options for hearing devices.</string>
     <string name="previously_connected_hearing_devices_purpose" translatable="false">Displays a list of hearing devices that were previously paired with the device.</string>
     <string name="advanced_app_info_purpose" translatable="false">advanced_app_info</string>
-    <string name="installed_app_detail_settings_screen_purpose" translatable="false">installed_app_detail_settings_screen</string>
+    <string name="installed_app_detail_settings_screen_purpose">Provides detailed information and management options for a specific installed application, including permissions, storage, notifications, and state.</string>
+    <string name="installed_app_detail_manage_app_unused_parameter_purpose" translatable="false">Specifies the exact package name of the installed application.</string>
+    <string name="installed_app_detail_manage_app_unused_toggle_purpose" translatable="false">Controls whether the system can automatically revoke permissions, stop notifications, and free up space if this specific application remains unused for an extended period.</string>
+    <string name="installed_app_detail_manage_app_unused_precondition_disabled_globally">The \'Manage app if unused\' feature is currently disabled at the device level.</string>
+    <string name="installed_app_detail_manage_app_unused_precondition_archived_app">Archived applications cannot be managed as unused.</string>
+    <string name="installed_app_detail_manage_app_unused_precondition_exempt_app">This application is a critical system app and is exempt from the \'Manage app if unused\' feature.</string>
+    <string name="installed_app_detail_manage_app_unused_precondition_null_app">The specified application could not be found on the device.</string>
     <string name="special_access_alarms_and_reminders_app_detail_purpose" translatable="false">special_access_alarms_and_reminders_app_detail</string>
     <string name="internet_settings_purpose" translatable="false">Allows users to manage Wi-Fi connectivity, including toggling Wi-Fi on or off, selecting from available networks, and viewing non-carrier data usage.</string>
     <string name="main_toggle_wifi_purpose" translatable="false">Whether Wi-Fi is enabled on the device</string>

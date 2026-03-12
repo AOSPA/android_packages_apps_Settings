@@ -198,6 +198,7 @@ import com.android.settings.spa.app.appcompat.UserAspectRatioAppsApiScreen
 import com.android.settings.spa.app.battery.AppBatteryUsageListApiScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
+import com.android.settings.spa.app.catalyst.AppInfoScreenApiFirst
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppsApiScreen
@@ -689,6 +690,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiScanningApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = StylusUsiDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreenApiFirst.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CellularSecurityScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreenApi.KEY),
