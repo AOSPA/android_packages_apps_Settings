@@ -178,6 +178,7 @@ public abstract class SettingsPreferenceFragment extends InstrumentedPreferenceF
             @NonNull ViewGroup parent, @Nullable Bundle savedInstanceState) {
         RecyclerView recyclerView =
                 super.onCreateRecyclerView(inflater, parent, savedInstanceState);
+        recyclerView.setFocusable(false);
         return AccessibilityFragmentUtils.addCollectionInfoToAccessibilityDelegate(recyclerView);
     }
 
