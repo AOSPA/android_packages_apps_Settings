@@ -55,6 +55,8 @@ class AutoclickCursorAreaSizePreference :
     override val valuesDescription: Int
         get() = R.array.autoclick_cursor_area_size_selector_titles
 
+    override fun getUnitOfMeasurement() = "pixels"
+
     private val summaryMap by lazy {
         SummaryMap(values, valuesDescription, useIntValues = true) { _, v -> v as Int }
     }

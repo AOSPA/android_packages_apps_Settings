@@ -27,6 +27,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.types.Year
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -59,7 +60,7 @@ class HardwareInfoApiScreen :
         preference(
             key = MANUFACTURED_YEAR_KEY,
             purpose = R.string.hardware_info_mfg_year_purpose,
-            type = AnyString,
+            type = Year,
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
 

@@ -55,6 +55,8 @@ class AutoclickDelayPreference(context: Context) :
 
     override fun getIncrementStep(context: Context): Int = AUTOCLICK_DELAY_STEP
 
+    override fun getUnitOfMeasurement() = "milliseconds"
+
     override val key: String
         get() = SETTING_KEY
 

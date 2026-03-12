@@ -29,7 +29,7 @@
     <string name="a11y_volume_keys_shortcut_setting_on_lock_screen_purpose" translatable="false">Whether the volume keys shortcut can be used to trigger accessibility features while the device is on the lock screen</string>
     <string name="a11y_button_shortcut_setting_screen_purpose" translatable="false">Allows users to customize the appearance and behavior of the accessibility button shortcut, including its size, fading effect, and transparency level.</string>
     <string name="a11y_button_shortcut_top_intro_purpose" translatable="false">short intro on what Accessibility button is</string>
-    <string name="a11y_button_shortcut_location_purpose" translatable="false">set up whether the Accessibility button show up as floating menu or on the navigation bar</string>
+    <string name="a11y_button_shortcut_location_purpose" translatable="false">Whether the Accessibility button shows as a floating menu or on the navigation bar.</string>
     <string name="a11y_button_shortcut_size_purpose" translatable="false">The size of the accessibility button</string>
     <string name="a11y_floating_menu_shortcut_fade_enabled_purpose" translatable="false">Whether the accessibility button fades when not in use</string>
     <string name="a11y_button_shortcut_transparency_purpose" translatable="false">The transparency level of the accessibility button when it is faded</string>
@@ -53,13 +53,13 @@
     <string name="a11y_touch_hold_delay_purpose" translatable="false">Controls how long you must press and hold a screen item before it registers as a long-press</string>
     <string name="a11y_audio_adjustment_screen_purpose" translatable="false">Screen allows the users to customize their device\'s sound output to match their physical hearing needs or their specific listening environment</string>
     <string name="a11y_mono_audio_setting_purpose" translatable="false">Whether to combine left and right audio channels into a single track played through both speakers</string>
-    <string name="a11y_audio_balance_purpose" translatable="false">The balance of audio volume between the left and right speakers</string>
+    <string name="a11y_audio_balance_purpose" translatable="false">The balance of audio volume between the left and right speakers. 100 is equal balance.</string>
     <string name="a11y_autoclick_screen_purpose" translatable="false">Screen allows users to set a \'dwell time\' so the device automatically performs a click whenever the cursor stops moving. This enables full navigation of the interface without the need to physically press a button on an external pointer device.</string>
     <string name="a11y_autoclick_intro_purpose" translatable="false">Short introduction on what autoclick feature is.</string>
     <string name="a11y_autoclick_illustration_purpose" translatable="false">Shows an illustration of the autoclick feature.</string>
     <string name="a11y_autoclick_main_switch_purpose" translatable="false">Allows users to turn on or off the autoclick feature.</string>
     <string name="a11y_autoclick_shortcut_purpose" translatable="false">Allows users to quickly turn on or off the autoclick feature via the selected shortcuts.</string>
-    <string name="a11y_autoclick_delay_purpose" translatable="false">Allows users to configure the cursor \'dwell time\' before perform an action automatically.</string>
+    <string name="a11y_autoclick_delay_purpose" translatable="false">Allows users to configure the cursor \'dwell time\' before performing an action automatically.</string>
     <string name="a11y_autoclick_cursor_area_size_purpose" translatable="false">Sets the tolerance threshold for cursor drift; determines how much a user can move the mouse before the dwell-click countdown resets.</string>
     <string name="a11y_autoclick_ignore_minor_cursor_movement_purpose" translatable="false">Disables auto-clicking for small, unintentional cursor shifts to improve accuracy for users with high-sensitivity mice or steady-hand challenges.</string>
     <string name="a11y_autoclick_revert_to_left_click_purpose" translatable="false">Automatically switches the click type back to a standard Left Click after a special action (like Right Click or Double Click) is performed, streamlining repetitive navigation.</string>
@@ -120,17 +120,17 @@
     <string name="caption_preferences_appearance_purpose" translatable="false">Allows users to configure the caption\'s text size and style.</string>
     <string name="caption_preferences_appearance_preview_purpose" translatable="false">The preview shows exactly how the captions will look over a real video. This helps the user make sure the text is easy to read before saving the settings.</string>
     <string name="caption_preferences_appearance_caption_size_purpose" translatable="false">The size of the text used for captions</string>
-    <string name="caption_preferences_appearance_caption_style_purpose" translatable="false">The predefined visual style and color combination for captions</string>
+    <string name="caption_preferences_appearance_caption_style_purpose" translatable="false">Predefined visual style and color combinations for captions</string>
     <string name="caption_preferences_appearance_custom_options_purpose" translatable="false">Custom options let the user change specific details like text color and font to make captions easier for them to see, especially if standard presets don\'t provide enough contrast against the videos they watch.</string>
     <string name="caption_preferences_appearance_custom_font_family_purpose" translatable="false">Allows users to choose a lettering style that is most comfortable for their eyes to read quickly.</string>
-    <string name="caption_preferences_appearance_custom_text_color_purpose" translatable="false">Allows users to pick a high-contrast color so the words don\'t blend into the video background.</string>
-    <string name="caption_preferences_appearance_custom_text_opacity_purpose" translatable="false">Allows users to adjust how solid the letters appear to ensure they are clear without being distracting.</string>
-    <string name="caption_preferences_appearance_custom_edge_type_purpose" translatable="false">Allows users to select a visual effect, like a shadow or outline, to help letters stand out against similar colors</string>
-    <string name="caption_preferences_appearance_custom_edge_color_purpose" translatable="false">Allows users to choose a specific color for the text border to create a sharper contrast with the background</string>
-    <string name="caption_preferences_appearance_custom_background_color_purpose" translatable="false">Allows users to pick a color to appear directly behind the text to make it readable regardless of the video scene</string>
-    <string name="caption_preferences_appearance_custom_background_opacity_purpose" translatable="false">Allows users to control how see-through the background box is so they can read clearly without blocking too much of the video</string>
-    <string name="caption_preferences_appearance_custom_window_color_purpose" translatable="false">Allows users to set a color for the overall text area to provide a consistent visual base for captions</string>
-    <string name="caption_preferences_appearance_custom_window_opacity_purpose" translatable="false">Allows users to adjust the transparency of the text area to balance readability with a clear view of the content</string>
+    <string name="caption_preferences_appearance_custom_text_color_purpose" translatable="false">The foreground color of captions.</string>
+    <string name="caption_preferences_appearance_custom_text_opacity_purpose" translatable="false">The opacity of caption text.</string>
+    <string name="caption_preferences_appearance_custom_edge_type_purpose" translatable="false">Configures a visual effect, like a shadow or outline, to help letters in a caption stand out against similar colors</string>
+    <string name="caption_preferences_appearance_custom_edge_color_purpose" translatable="false">The color for the text border of captions. Used to create a sharper contrast with the background</string>
+    <string name="caption_preferences_appearance_custom_background_color_purpose" translatable="false">The color to appear behind caption text to make it readable regardless of the video scene</string>
+    <string name="caption_preferences_appearance_custom_background_opacity_purpose" translatable="false">How see-through the background box is on captions - allows them to be read clearly without blocking too much of the video</string>
+    <string name="caption_preferences_appearance_custom_window_color_purpose" translatable="false">The color of the overall text area when showing captions. Used to provide a consistent visual base.</string>
+    <string name="caption_preferences_appearance_custom_window_opacity_purpose" translatable="false">The transparency of the text area used for captions. Allows balancing readability with a clear view of the content</string>
     <string name="caption_preferences_more_options_screen_purpose" translatable="false">Allows users to customize additional caption settings, such as selecting the preferred language for system captions.</string>
     <string name="caption_preferences_locale_purpose" translatable="false">The language used for system captions</string>
     <string name="configure_network_settings_purpose" translatable="false">Allows users to manage advanced Wi-Fi settings, including automatic Wi-Fi activation based on location, public network notifications, and the usage of less secure WEP networks.</string>
@@ -154,7 +154,7 @@
     <string name="dark_theme_group_purpose" translatable="false">dark_theme_group</string>
     <string name="dark_theme_start_time_purpose" translatable="false">The specific time when dark theme is scheduled to turn on</string>
     <string name="dark_ui_activated_purpose" translatable="false">Whether the system dark theme is manually enabled</string>
-    <string name="dark_ui_auto_mode_purpose" translatable="false">dark_ui_auto_mode</string>
+    <string name="dark_ui_auto_mode_purpose" translatable="false">The schedule for switching dark mode on and off.</string>
     <string name="dark_ui_location_off_purpose" translatable="false">dark_ui_location_off</string>
     <string name="dark_ui_mode_purpose" translatable="false">Allows users to enable and customize the system-wide dark theme, including options for forcing dark theme on unsupported apps and setting an automatic schedule.</string>
     <string name="dark_ui_mode_accessibility_purpose" translatable="false">Whether or not the system-wide dark theme is enabled.</string>
@@ -378,19 +378,19 @@
     <string name="see_all_apps_purpose" translatable="false">Provides a complete list of all installed applications, enabling users to find and access management settings for specific apps.</string>
     <string name="app_launch_screen_purpose" translatable="false">Whether the app automatically intercepts and opens specific supported web links (URLs) directly, bypassing the web browser.</string>
     <string name="app_parameter_purpose" translatable="false">The package to configure.</string>
-    <string name="alarm_volume_purpose" translatable="false">The system volume level for alarms</string>
-    <string name="assistant_volume_purpose" translatable="false">This slider adjusts the assistant volume level.</string>
+    <string name="alarm_volume_purpose" translatable="false">The system volume level for alarms. Higher is louder.</string>
+    <string name="assistant_volume_purpose" translatable="false">The volume level for assistant. Higher is louder.</string>
     <string name="audio_category_purpose" translatable="false">audio_category</string>
-    <string name="call_volume_purpose" translatable="false">The system volume level for phone calls</string>
+    <string name="call_volume_purpose" translatable="false">The system volume level for phone calls. Higher is louder.</string>
     <string name="charging_sounds_enabled_purpose" translatable="false">Whether sounds and vibrations are triggered when the device is connected to a power source</string>
     <string name="dock_sounds_enabled_purpose" translatable="false">dock_sounds_enabled</string>
     <string name="dtmf_tone_purpose" translatable="false">Whether tones are played when dialing numbers on the phone dial pad</string>
     <string name="lockscreen_sounds_enabled_purpose" translatable="false">Whether sounds are played when locking or unlocking the screen</string>
-    <string name="media_volume_purpose" translatable="false">The system volume level for media playback</string>
-    <string name="notification_volume_purpose" translatable="false">The system volume level for notification sounds</string>
+    <string name="media_volume_purpose" translatable="false">The system volume level for media playback. Higher is louder.</string>
+    <string name="notification_volume_purpose" translatable="false">The system volume level for notification sounds. Higher is louder.</string>
     <string name="notification_cooldown_screen_purpose" translatable="false">Allows users to manage notification cooldown settings, which automatically reduce the volume of successive notifications to minimize distractions and alert fatigue</string>
     <string name="polite_notification_global_pref_purpose" translatable="false">Enable the notification cooldown feature to reduce the volume of successive notifications</string>
-    <string name="separate_ring_volume_purpose" translatable="false">The system volume level for incoming call ringtones</string>
+    <string name="separate_ring_volume_purpose" translatable="false">The system volume level for incoming call ringtones. Higher is louder.</string>
     <string name="sound_effects_enabled_purpose" translatable="false">Whether audible feedback is played during common UI interactions like tapping or clicking</string>
     <string name="sound_screen_purpose" translatable="false">Allows users to manage device audio settings, including adjusting volume levels for various streams, selecting sound patterns for ringtones and notifications, and toggling specific system-wide sounds and vibration behaviors.</string>
     <string name="sound_always_show_vibration_icon_purpose" translatable="false">Controls whether a vibration indicator icon appears in the status bar when the device is set to vibrate.</string>
@@ -474,9 +474,9 @@
     <string name="enable_bluetooth_tethering_purpose" translatable="false">Enable or disable Bluetooth tethering to share the device\'s internet connection with other devices.</string>
     <string name="ether_tether_switch_purpose" translatable="false">Whether or not Ethernet tethering is enabled</string>
     <string name="text_reading_options_purpose" translatable="false">Allows users to customize the size of fonts and UI elements, and toggle text styles like bolding and outlining to improve visual accessibility.</string>
-    <string name="display_size_purpose" translatable="false">Adjusts the scale of UI elements and items on the screen.</string>
+    <string name="display_size_purpose" translatable="false">Adjusts the scale of UI elements and items on the screen. Bigger is larger.</string>
     <string name="display_text_size_purpose" translatable="false">display_text_size</string>
-    <string name="font_size_purpose" translatable="false">Adjusts the scale of system text.</string>
+    <string name="font_size_purpose" translatable="false">Adjusts the scale of system text. Bigger is larger.</string>
     <string name="font_weight_adjustment_purpose" translatable="false">Whether system text should be displayed in bold.</string>
     <string name="high_text_contrast_enabled_purpose" translatable="false">Whether to add high-contrast outlines to text for better readability.</string>
     <string name="preview_purpose" translatable="false">preview</string>
@@ -512,13 +512,13 @@
     <string name="supervision_set_up_pin_purpose" translatable="false">Allows the user to set up a PIN for parental controls</string>
     <string name="top_level_supervision_purpose" translatable="false">Allows parents to set up and manage parental controls for this device, including screen time limits, app restrictions, and content filters.</string>
     <string name="top_level_system_purpose" translatable="false">Provides access to core system settings, including software updates, language and regional preferences, navigation methods, keyboard tools, gestures, date and time settings, and user management.</string>
-    <string name="alarm_vibration_intensity_purpose" translatable="false">The intensity level of vibration for alarms.</string>
+    <string name="alarm_vibration_intensity_purpose" translatable="false">The intensity level of vibration for alarms. Higher is more intense.</string>
     <string name="apply_ramping_ringer_purpose" translatable="false">Whether the phone should vibrate first and then ring gradually for incoming calls.</string>
-    <string name="haptic_feedback_intensity_purpose" translatable="false">haptic_feedback_intensity</string>
+    <string name="haptic_feedback_intensity_purpose" translatable="false">The intensity of haptic feedback. Bigger is more intense.</string>
     <string name="keyboard_vibration_enabled_purpose" translatable="false">Whether or not the on-screen keyboard provides haptic feedback when typing.</string>
-    <string name="media_vibration_intensity_purpose" translatable="false">media_vibration_intensity</string>
-    <string name="notification_vibration_intensity_purpose" translatable="false">The intensity level of vibration for notifications.</string>
-    <string name="ring_vibration_intensity_purpose" translatable="false">The intensity level of vibration for incoming calls.</string>
+    <string name="media_vibration_intensity_purpose" translatable="false">The intensity of vibration during media playback. Higher is more intense.</string>
+    <string name="notification_vibration_intensity_purpose" translatable="false">The intensity level of vibration for notifications. Higher is more intense.</string>
+    <string name="ring_vibration_intensity_purpose" translatable="false">The intensity level of vibration for incoming calls. Higher is more intense.</string>
     <string name="vibrate_on_purpose" translatable="false">Whether or not vibration and haptics are enabled globally for the device.</string>
     <string name="vibration_category_call_purpose" translatable="false">vibration_category_call</string>
     <string name="vibration_category_haptics_purpose" translatable="false">vibration_category_haptics</string>
