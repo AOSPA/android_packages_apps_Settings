@@ -71,12 +71,13 @@ class DeviceStateMetadataProviderAggregator(private val executors: List<DeviceSt
         val allItemizationTypes =
             executorResults
                 .flatMap { it.itemizationTypes }
-                .distinct()
+                .distinctBy { it.key }
+                .toSet()
 
         return DeviceStateMetadataResponse(
             perScreenMetadata = allStates,
             deviceLocale = deviceLocale,
-            itemizationTypes = allItemizationTypes,
+            itemizationTypes = allItemizationTypes.toList(),
         )
     }
 }
