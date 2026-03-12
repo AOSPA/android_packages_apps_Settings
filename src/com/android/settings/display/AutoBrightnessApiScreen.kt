@@ -16,6 +16,14 @@
 
 package com.android.settings.display
 
+import android.Manifest.permission.WRITE_SETTINGS
+import android.os.Process
+import android.os.UserManager
+import android.os.UserManager.DISALLOW_CONFIG_BRIGHTNESS
+import android.provider.Settings
+import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE
+import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.flags.Flags
@@ -23,7 +31,9 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseRestriction
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AutoBrightnessApiScreen.KEY)
@@ -48,10 +58,52 @@ class AutoBrightnessApiScreen :
                 HardwareUnsupported(R.string.auto_brightness_unavailable)
             }
         }
+
+        preference(
+            key = PREFERENCE_KEY,
+            type = AnyBoolean,
+            purpose = R.string.auto_brightness_purpose,
+        ) {
+            get {
+                execute {
+                    Settings.System.getInt(
+                        context.contentResolver,
+                        SCREEN_BRIGHTNESS_MODE,
+                        SCREEN_BRIGHTNESS_MODE_MANUAL,
+                    ) == SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+                }
+            }
+            set {
+                permissions(WRITE_SETTINGS)
+                preconditions(R.string.auto_brightness_preconditions) {
+                    if (
+                        UserManager.get(context)
+                            .hasBaseUserRestriction(
+                                UserManager.DISALLOW_CONFIG_BRIGHTNESS,
+                                Process.myUserHandle(),
+                            )
+                    ) {
+                        EnterpriseRestriction(R.string.auto_brightness_disallowed)
+                    } else {
+                        Allowed
+                    }
+                }
+
+                execute { value ->
+                    Settings.System.putInt(
+                        context.contentResolver,
+                        SCREEN_BRIGHTNESS_MODE,
+                        if (value) SCREEN_BRIGHTNESS_MODE_AUTOMATIC
+                        else SCREEN_BRIGHTNESS_MODE_MANUAL,
+                    )
+                }
+            }
+        }
     }
 
     companion object {
         const val KEY = "api_auto_brightness_entry"
+        const val PREFERENCE_KEY = "auto_brightness_entry_preference"
     }
 }
 // LINT.ThenChange(AutoBrightnessSettings.java, AutoBrightnessPreferenceController.java)
