@@ -60,6 +60,8 @@ class IntensityPreference(
 
     override fun getMaxValue(context: Context): Int = IntensityDataStore.MAX_VALUE
 
+    override fun getUnitOfMeasurement() = "%"
+
     override fun isEnabled(context: Context): Boolean = extraDimStorage.getBoolean(KEY) == true
 
     override fun storage(context: Context): KeyValueStore = storage

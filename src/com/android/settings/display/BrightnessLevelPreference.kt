@@ -139,6 +139,8 @@ class BrightnessLevelPreference :
 
     override fun getMaxValue(context: Context) = 100
 
+    override fun getUnitOfMeasurement() = "%"
+
     private class BrightnessStorage(private val context: Context) :
         AbstractKeyedDataObservable<String>(),
         KeyValueStore,

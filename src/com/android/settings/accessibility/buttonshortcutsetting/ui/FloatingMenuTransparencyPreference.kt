@@ -87,6 +87,8 @@ class FloatingMenuTransparencyPreference(context: Context) :
 
     override fun getMaxValue(context: Context): Int = MAX_TRANSPARENCY_PROGRESS
 
+    override fun getUnitOfMeasurement() = "%"
+
     override fun storage(context: Context): KeyValueStore = dataStore
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
