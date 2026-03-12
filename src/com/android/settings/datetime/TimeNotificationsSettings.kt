@@ -17,13 +17,16 @@
 package com.android.settings.datetime
 
 import android.app.settings.SettingsEnums
+import android.content.Context
+import android.os.UserManager
 import com.android.settings.R
-import com.android.settings.dashboard.DashboardFragment
+import com.android.settings.dashboard.RestrictedDashboardFragment
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settingslib.search.SearchIndexable
 
 @SearchIndexable
-class TimeNotificationsSettings : DashboardFragment() {
+class TimeNotificationsSettings :
+    RestrictedDashboardFragment(UserManager.DISALLOW_CONFIG_DATE_TIME) {
 
     override fun getMetricsCategory(): Int {
         return SettingsEnums.DATE_TIME_NOTIFICATIONS
