@@ -34,8 +34,9 @@ import com.google.android.setupcompat.util.WizardManagerHelper;
 
 // LINT.IfChange
 @SearchIndexable
-public class DateTimeSettings extends DashboardFragment implements
-        TimePreferenceController.TimePreferenceHost, DatePreferenceController.DatePreferenceHost {
+public class DateTimeSettings extends DashboardFragment
+        implements TimePreferenceController.TimePreferenceHost,
+                DatePreferenceController.DatePreferenceHost {
 
     private static final String TAG = "DateTimeSettings";
 
@@ -88,6 +89,18 @@ public class DateTimeSettings extends DashboardFragment implements
                     .setFromSUW(isFromSUW);
         }
 
+        if (Flags.enableTernaryTimeFormatSetting()) {
+            // Those two controllers are only available in {@link TimeFormatSettings} fragment but
+            // required here to hide the Notifications preference when they child controllers are
+            // not available.
+            addPreferenceController(
+                    new TimeZoneNotificationsPreferenceController(
+                            context, "time_zone_change_notifications"));
+            addPreferenceController(
+                    new TimeZoneOffsetChangeNotificationsPreferenceController(
+                            context, "time_zone_offset_change_notification"));
+        }
+
         // All the elements in the category are optional, so we must ensure the category is only
         // available if any of the elements are available.
         TimeFeedbackPreferenceCategoryController helpAndFeedbackCategoryController =
@@ -97,15 +110,12 @@ public class DateTimeSettings extends DashboardFragment implements
 
         // All the elements in the category are optional, so we must ensure the category is only
         // available if any of the elements are available.
-        NotificationsPreferenceCategoryController
-                notificationsPreferenceCategoryController =
+        NotificationsPreferenceCategoryController notificationsPreferenceCategoryController =
                 use(NotificationsPreferenceCategoryController.class);
         use(TimeZoneNotificationsPreferenceController.class)
-                .registerIn(
-                        notificationsPreferenceCategoryController);
+                .registerIn(notificationsPreferenceCategoryController);
         use(TimeZoneOffsetChangeNotificationsPreferenceController.class)
-                .registerIn(
-                        notificationsPreferenceCategoryController);
+                .registerIn(notificationsPreferenceCategoryController);
     }
 
     @Override
@@ -120,8 +130,7 @@ public class DateTimeSettings extends DashboardFragment implements
                 return use(DatePreferenceController.class)
                         .buildDatePicker(getActivity(), TimeDetectorHelper.INSTANCE);
             case TimePreferenceController.DIALOG_TIMEPICKER:
-                return use(TimePreferenceController.class)
-                        .buildTimePicker(getActivity());
+                return use(TimePreferenceController.class).buildTimePicker(getActivity());
             default:
                 throw new IllegalArgumentException();
         }

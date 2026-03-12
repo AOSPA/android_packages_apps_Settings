@@ -90,6 +90,7 @@
         <Preference
             android:key="time_format_preference"
             android:title="@string/time_format_category_title"
+            android:summary="@string/summary_placeholder"
             settings:keywords="@string/keywords_time_format"
             android:fragment="com.android.settings.datetime.TimeFormatSettings"
             settings:controller="com.android.settings.datetime.TimeFormatTernaryPreferenceController" />
@@ -97,8 +98,10 @@
         <Preference
             android:key="time_notifications_category"
             android:title="@string/time_notifications_title"
+            android:summary="@string/time_notifications_summary"
             settings:keywords="@string/keywords_time_notifications"
-            android:fragment="com.android.settings.datetime.TimeNotificationsSettings" />
+            android:fragment="com.android.settings.datetime.TimeNotificationsSettings"
+            settings:controller="com.android.settings.datetime.NotificationsPreferenceCategoryController" />
     </PreferenceCategory>
 
     <!-- An optional preference category for feedback. Only displayed up if enabled via flags and config. Always put time feedback at the end. -->
