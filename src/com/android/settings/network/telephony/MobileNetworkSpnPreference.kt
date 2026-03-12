@@ -25,6 +25,8 @@ import com.android.settings.Utils
 import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.wifi.utils.isAdminUser
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -33,7 +35,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 // LINT.IfChange
 @SuppressLint("MissingPermission")
 class MobileNetworkSpnPreference(private val context: Context, private val subId: Int) :
-    PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+    PersistentPreference<String>, PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
 
     override val availabilityDescription = "The user must be an admin user, the device must be mobile data capable or voice capable, and the subscription id must be valid."
 
@@ -51,6 +53,12 @@ class MobileNetworkSpnPreference(private val context: Context, private val subId
 
     override val title: Int
         get() = R.string.mobile_network_spn_title
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? = carrierName
 

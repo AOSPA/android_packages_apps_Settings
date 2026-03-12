@@ -21,6 +21,8 @@ import android.os.SystemProperties
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -29,6 +31,7 @@ import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
 class BasebandVersionPreference :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider,
@@ -42,6 +45,12 @@ class BasebandVersionPreference :
 
     override val title: Int
         get() = R.string.baseband_version
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? =
         SystemProperties.get(BASEBAND_PROPERTY, context.getString(R.string.device_info_default))

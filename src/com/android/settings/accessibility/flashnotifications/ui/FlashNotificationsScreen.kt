@@ -29,7 +29,9 @@ import com.android.settings.accessibility.FlashNotificationsUtil
 import com.android.settings.accessibility.FlashNotificationsUtil.State
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -109,7 +111,7 @@ open class FlashNotificationsScreen :
 
     class FlashNotificationsScreenPreference(
         private val screenMetadata : FlashNotificationsScreen
-    ) : PreferenceMetadata, PreferenceAvailabilityProvider, PreferenceSummaryProvider {
+    ) : PreferenceMetadata, PreferenceAvailabilityProvider, PreferenceSummaryProvider, PersistentPreference<String> {
         override val key : String
             get() = "flash_notifications_preference"
 
@@ -123,6 +125,12 @@ open class FlashNotificationsScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val supportsWrite = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
 

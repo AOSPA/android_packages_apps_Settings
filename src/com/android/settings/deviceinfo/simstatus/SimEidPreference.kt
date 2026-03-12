@@ -24,6 +24,8 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.deviceinfo.PhoneNumberUtil
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -40,6 +42,7 @@ import kotlinx.coroutines.withContext
 /** Preference to show EID information. */
 // LINT.IfChange
 class SimEidPreference(private val context: Context) :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceAvailabilityProvider,
@@ -66,6 +69,12 @@ class SimEidPreference(private val context: Context) :
             eidMetadata?.eid?.isNotEmpty() == true
 
     override fun getTitle(context: Context): CharSequence? = eidMetadata.getTitle(context)
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? =
         eidMetadata?.let { PhoneNumberUtil.expandByTts(it.eid) }

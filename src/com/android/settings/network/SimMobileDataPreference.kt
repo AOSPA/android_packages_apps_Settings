@@ -20,6 +20,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.telephony.SubscriptionManager
 import com.android.settings.R
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -30,6 +32,7 @@ import com.android.settingslib.preference.PreferenceBindingPlaceholder
 /** Show primary mobile data's preference in dual active SIMs. */
 @SuppressLint("MissingPermission")
 class SimMobileDataPreference :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceBindingPlaceholder,
@@ -57,6 +60,12 @@ class SimMobileDataPreference :
             .activeSubscriptionIdList
             .size > 1
     }
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? {
         val subInfo =

@@ -20,7 +20,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.telephony.SubscriptionManager
 import com.android.settings.R
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.MUSTPASS_SET
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -31,6 +33,7 @@ import com.android.settingslib.preference.PreferenceBindingPlaceholder
 /** Show primary call's preference in dual active SIMs. */
 @SuppressLint("MissingPermission")
 class SimCallsPreference() :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceBindingPlaceholder,
@@ -60,6 +63,12 @@ class SimCallsPreference() :
     }
 
     override fun tags(context: Context) = arrayOf(MUSTPASS_SET)
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? {
         val subInfo =

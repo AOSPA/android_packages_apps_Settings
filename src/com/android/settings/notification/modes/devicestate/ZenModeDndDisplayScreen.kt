@@ -25,7 +25,9 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.notification.modes.ZenHelperBackend
 import com.android.settings.notification.modes.ZenModeSummaryHelper
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -76,7 +78,8 @@ open class ZenModeDndDisplayScreen :
 
     class ZenModeDndDisplayScreenPreference(
         private val screenMetadata : ZenModeDndDisplayScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider,
+        PersistentPreference<String> {
         override val key : String
             get() = "device_state_dnd_mode_display_settings_preference"
 
@@ -94,6 +97,14 @@ open class ZenModeDndDisplayScreen :
         override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
+
     }
 
     companion object {

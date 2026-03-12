@@ -23,6 +23,8 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.utils.getLocale
 import com.android.settingslib.DeviceInfoUtils
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -30,6 +32,7 @@ import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
 class SecurityPatchLevelPreference :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
@@ -54,6 +57,12 @@ class SecurityPatchLevelPreference :
         "The device must have a security patch level."
 
     override fun isAvailable(context: Context) = context.getPatch().isNotEmpty()
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context) = context.getPatch()
 
