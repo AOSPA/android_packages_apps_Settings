@@ -37,4 +37,12 @@ public class ShadowDashboardFragment {
     public void onCreate(Bundle icicle) {
         // do nothing
     }
+
+    /**
+     * Shadow of {@link DashboardFragment#onViewCreated(android.view.View, Bundle)}.
+     */
+    @Implementation
+    public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
+        // do nothing
+    }
 }

@@ -29,7 +29,7 @@ import android.platform.test.annotations.RequiresFlagsEnabled
 import android.platform.test.flag.junit.CheckFlagsRule
 import android.platform.test.flag.junit.DeviceFlagsValueProvider
 import android.security.Flags
-import android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN
+import android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN_V2
 import android.security.advancedprotection.AdvancedProtectionManager
 import android.security.advancedprotection.AdvancedProtectionManager.FEATURE_ID_DISALLOW_CELLULAR_2G
 import android.security.advancedprotection.AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_BLOCKED_INTERACTION
@@ -63,7 +63,7 @@ import org.mockito.kotlin.spy
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
-@RequiresFlagsEnabled(Flags.FLAG_AAPM_API, FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
+@RequiresFlagsEnabled(Flags.FLAG_AAPM_API, FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN_V2)
 @RunWith(AndroidJUnit4::class)
 class ActionDisabledByAdvancedProtectionDialogTest {
     @get:Rule val composeTestRule = createEmptyComposeRule()

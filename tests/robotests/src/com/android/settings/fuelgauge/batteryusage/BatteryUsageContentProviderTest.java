@@ -166,6 +166,31 @@ public final class BatteryUsageContentProviderTest {
     }
 
     @Test
+    public void query_getBatteryUsagePrevSlots_returnsExpectedResult() {
+        mProvider.onCreate();
+        ContentValues values1 = new ContentValues();
+        values1.put(BatteryUsageSlotEntity.KEY_TIMESTAMP, 10001L);
+        values1.put(BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT, "TEST_STRING1");
+        mProvider.insert(DatabaseUtils.BATTERY_USAGE_SLOT_URI, values1);
+        ContentValues values2 = new ContentValues();
+        values2.put(BatteryUsageSlotEntity.KEY_TIMESTAMP, 10002L);
+        values2.put(BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT, "TEST_STRING2");
+        mProvider.insert(DatabaseUtils.BATTERY_USAGE_SLOT_URI, values2);
+
+        final Cursor cursor = getCursorOfBatteryUsageSlotBeforeTimestampMs(10002L);
+
+        assertThat(cursor.getCount()).isEqualTo(1);
+        cursor.moveToFirst();
+        assertThat(cursor.getLong(cursor.getColumnIndex(BatteryUsageSlotEntity.KEY_TIMESTAMP)))
+                .isEqualTo(10001L);
+        assertThat(
+                cursor.getString(
+                        cursor.getColumnIndex(
+                                BatteryUsageSlotEntity.KEY_BATTERY_USAGE_SLOT)))
+                .isEqualTo("TEST_STRING1");
+    }
+
+    @Test
     public void query_batteryState_returnsExpectedResult() throws Exception {
         mProvider.onCreate();
         final Duration currentTime = Duration.ofHours(52);
@@ -214,7 +239,7 @@ public final class BatteryUsageContentProviderTest {
     }
 
     @Test
-    public void query_getBatteryStateLatestTimestamp_returnsExpectedResult() throws Exception {
+    public void query_getBatteryStateLatestTimestampMs_returnsExpectedResult() throws Exception {
         mProvider.onCreate();
         final Duration currentTime = Duration.ofHours(52);
         insertBatteryState(currentTime, Long.toString(currentTime.toMillis()));
@@ -266,18 +291,18 @@ public final class BatteryUsageContentProviderTest {
     public void query_appUsageTimestamp_returnsExpectedResult() throws Exception {
         insertAppUsageEvent();
 
-        final Cursor cursor1 = getCursorOfLatestTimestamp(USER_ID1);
+        final Cursor cursor1 = getCursorOfLatestTimestampMs(USER_ID1);
         assertThat(cursor1.getCount()).isEqualTo(1);
         cursor1.moveToFirst();
         assertThat(cursor1.getLong(0)).isEqualTo(TIMESTAMP3);
 
-        final Cursor cursor2 = getCursorOfLatestTimestamp(USER_ID2);
+        final Cursor cursor2 = getCursorOfLatestTimestampMs(USER_ID2);
         assertThat(cursor2.getCount()).isEqualTo(1);
         cursor2.moveToFirst();
         assertThat(cursor2.getLong(0)).isEqualTo(TIMESTAMP2);
 
         final long notExistingUserId = 3;
-        final Cursor cursor3 = getCursorOfLatestTimestamp(notExistingUserId);
+        final Cursor cursor3 = getCursorOfLatestTimestampMs(notExistingUserId);
         assertThat(cursor3.getCount()).isEqualTo(1);
         cursor3.moveToFirst();
         assertThat(cursor3.getLong(0)).isEqualTo(0);
@@ -505,7 +530,7 @@ public final class BatteryUsageContentProviderTest {
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(DatabaseUtils.AUTHORITY)
                         .appendPath(DatabaseUtils.BATTERY_STATE_TABLE)
-                        .appendQueryParameter(DatabaseUtils.QUERY_KEY_TIMESTAMP, queryTimestamp)
+                        .appendQueryParameter(DatabaseUtils.QUERY_KEY_TIMESTAMP_MS, queryTimestamp)
                         .build();
 
         final Cursor cursor = query(batteryStateQueryContentUri);
@@ -531,7 +556,7 @@ public final class BatteryUsageContentProviderTest {
                         .authority(DatabaseUtils.AUTHORITY)
                         .appendPath(DatabaseUtils.BATTERY_STATE_LATEST_TIMESTAMP_PATH)
                         .appendQueryParameter(
-                                DatabaseUtils.QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                                DatabaseUtils.QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
                         .build();
 
         return query(batteryStateLatestTimestampUri);
@@ -548,7 +573,7 @@ public final class BatteryUsageContentProviderTest {
                 mContext, USER_ID1, TIMESTAMP3, PACKAGE_NAME3);
     }
 
-    private Cursor getCursorOfLatestTimestamp(final long userId) {
+    private Cursor getCursorOfLatestTimestampMs(final long userId) {
         final Uri appUsageLatestTimestampQueryContentUri =
                 new Uri.Builder()
                         .scheme(ContentResolver.SCHEME_CONTENT)
@@ -571,7 +596,7 @@ public final class BatteryUsageContentProviderTest {
                         .authority(DatabaseUtils.AUTHORITY)
                         .appendPath(DatabaseUtils.APP_USAGE_EVENT_TABLE)
                         .appendQueryParameter(
-                                DatabaseUtils.QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                                DatabaseUtils.QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
                         .appendQueryParameter(DatabaseUtils.QUERY_KEY_USERID, queryUserIdString)
                         .build();
 
@@ -590,7 +615,7 @@ public final class BatteryUsageContentProviderTest {
                         .authority(DatabaseUtils.AUTHORITY)
                         .appendPath(DatabaseUtils.BATTERY_EVENT_TABLE)
                         .appendQueryParameter(
-                                DatabaseUtils.QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                                DatabaseUtils.QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
                         .appendQueryParameter(
                                 DatabaseUtils.QUERY_BATTERY_EVENT_TYPE, batteryEventTypesString)
                         .build();
@@ -605,10 +630,23 @@ public final class BatteryUsageContentProviderTest {
                         .authority(DatabaseUtils.AUTHORITY)
                         .appendPath(DatabaseUtils.BATTERY_USAGE_SLOT_TABLE)
                         .appendQueryParameter(
-                                DatabaseUtils.QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                                DatabaseUtils.QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
                         .build();
 
         return query(batteryUsageSlotUri);
+    }
+
+    private Cursor getCursorOfBatteryUsageSlotBeforeTimestampMs(final long queryTimestamp) {
+        final Uri batteryUsageHistSlotUri =
+                new Uri.Builder()
+                        .scheme(ContentResolver.SCHEME_CONTENT)
+                        .authority(DatabaseUtils.AUTHORITY)
+                        .appendPath(DatabaseUtils.BATTERY_USAGE_SLOT_BEFORE_TIMESTAMP_MS_TABLE)
+                        .appendQueryParameter(
+                                DatabaseUtils.QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
+                        .build();
+
+        return query(batteryUsageHistSlotUri);
     }
 
     private Cursor query(Uri uri) {

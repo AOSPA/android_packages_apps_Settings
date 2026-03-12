@@ -195,4 +195,4 @@ public class BrightnessLevelPreferenceController extends BasePreferenceControlle
         return (value - min) / (max - min);
     }
 }
-// LINT.ThenChange(BrightnessLevelPreference.kt)
+// LINT.ThenChange(BrightnessLevelPreference.kt, DisplayApiScreen.kt)

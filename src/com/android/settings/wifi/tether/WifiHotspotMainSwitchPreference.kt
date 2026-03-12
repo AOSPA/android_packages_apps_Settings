@@ -66,7 +66,7 @@ class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStor
         ReadWritePermit.ALLOW
 
     override val sensitivityLevel
-        get() = SensitivityLevel.DEEP_LINK_ONLY
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     @Suppress("UNCHECKED_CAST")
     private class UseWifiHotspotStore(private val wifiHotspotStore: KeyValueStore) :

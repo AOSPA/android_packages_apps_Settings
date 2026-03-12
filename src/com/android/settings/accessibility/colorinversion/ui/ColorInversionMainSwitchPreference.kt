@@ -23,6 +23,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.shared.data.ToggleFeatureDataStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
@@ -52,6 +53,10 @@ class ColorInversionMainSwitchPreference(context: Context) :
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED

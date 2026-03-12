@@ -85,7 +85,11 @@ public class NotificationAccessDetails extends DashboardFragment {
             }
         }
         mPm = getPackageManager();
-        retrieveAppEntry();
+        if (!retrieveAppEntry()) {
+            finish();
+            return;
+        }
+
         loadNotificationListenerService();
         NotificationBackend backend = new NotificationBackend();
         int listenerTargetSdk = Build.VERSION_CODES.S;
@@ -170,6 +174,7 @@ public class NotificationAccessDetails extends DashboardFragment {
 
         if (!refreshUi()) {
             finish();
+            return;
         }
         Preference apps = getPreferenceScreen().findPreference(
                 use(BridgedAppsLinkPreferenceController.class).getPreferenceKey());
@@ -193,7 +198,7 @@ public class NotificationAccessDetails extends DashboardFragment {
         }
     }
 
-    protected void retrieveAppEntry() {
+    private boolean retrieveAppEntry() {
         final Bundle args = getArguments();
         mPackageName = (args != null) ? args.getString(ARG_PACKAGE_NAME) : null;
         Intent intent = (args == null) ?
@@ -208,7 +213,7 @@ public class NotificationAccessDetails extends DashboardFragment {
                 mUserId = ((UserHandle) intent.getParcelableExtra(
                         Intent.EXTRA_USER_HANDLE)).getIdentifier();
             } else {
-                finish();
+                return false;
             }
         } else {
             mUserId = UserHandle.myUserId();
@@ -220,8 +225,10 @@ public class NotificationAccessDetails extends DashboardFragment {
                             PackageManager.GET_SIGNING_CERTIFICATES |
                             PackageManager.GET_PERMISSIONS, mUserId);
         } catch (PackageManager.NameNotFoundException e) {
-            // oh well
+            return false;
         }
+
+        return true;
     }
 
     private boolean hasInteractAcrossUsersPermission() {

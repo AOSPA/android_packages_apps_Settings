@@ -82,6 +82,7 @@
     <string name="doze_always_on_inactivity_detection_purpose" translatable="false">Whether to turn off the always-on display automatically when no user activity is detected to save power</string>
     <string name="doze_always_on_wallpaper_enabled_purpose" translatable="false">Whether the lock screen wallpaper should be shown when the always-on display is active</string>
     <string name="app_data_usage_screen_purpose" translatable="false">app_data_usage_screen</string>
+    <string name="app_data_usage_parameter_purpose" translatable="false">The package name of the app</string>
     <string name="auto_brightness_entry_purpose" translatable="false">Allows users to enable or disable Adaptive brightness, which automatically adjusts the screen brightness based on environment and activities.</string>
     <string name="battery_saver_purpose" translatable="false">Whether or not Battery Saver is enabled</string>
     <string name="battery_usage_summary_purpose" translatable="false">Provides a detailed summary of battery consumption since the last full charge, including a usage chart, total screen time, and a breakdown of consumption by apps or system services.</string>
@@ -150,6 +151,8 @@
     <string name="dark_ui_mode_accessibility_purpose" translatable="false">Whether or not the system-wide dark theme is enabled.</string>
     <string name="dark_ui_top_intro_purpose" translatable="false">dark_ui_top_intro</string>
     <string name="display_category_purpose" translatable="false">display_category</string>
+    <string name="dark_theme_mode_selector_purpose" translatable="false">Allows users to configure dark theme mode, selecting between standard mode or expanded mode</string>
+    <string name="dark_theme_mode_selector_customenum_description" translatable="false">Options for dark theme mode</string>
     <string name="expanded_dark_theme_purpose" translatable="false">Sets the system to automatically apply dark theme to most apps, including those without native support</string>
     <string name="standard_dark_theme_purpose" translatable="false">Sets the system to use standard dark theme mode for compatible apps</string>
     <string name="device_model_purpose" translatable="false">Provides detailed information about the device\'s hardware, including its model name, serial number, hardware version, and manufacturing year.</string>
@@ -200,8 +203,8 @@
     <string name="gesture_double_tap_power_input_summary_purpose" translatable="false">Allows the user to open an application when they quickly press the power button twice. The available options are Camera or Wallet</string>
     <string name="gesture_double_tap_power_actions_purpose" translatable="false">Allows the user to configure the action performed when the power button is double-tapped, such as launching the camera or opening the wallet</string>
     <string name="double_tap_power_button_gesture_enabled_purpose" translatable="false">Whether double-pressing the power button triggers a shortcut</string>
-    <string name="gesture_double_power_tap_camera_purpose" translatable="false">Sets the double-press shortcut to open the Camera app</string>
-    <string name="gesture_double_power_tap_wallet_purpose" translatable="false">Sets the double-press shortcut to open the Wallet app</string>
+    <string name="gesture_double_power_tap_app_purpose" translatable="false">The action to be performed when using the double-press shortcut</string>
+    <string name="gesture_double_power_tap_app_custom_enum_description" translatable="false">Options for actions to perform when the power button is double pressed.</string>
     <!-- Double press power button screen end -->
     <!-- Swipe fingerprint for notifications screen begin -->
     <string name="gesture_swipe_down_fingerprint_screen_purpose" translatable="false">Allows the user to enable or disable the gesture of swiping down on the fingerprint sensor to open the notification panel</string>
@@ -324,12 +327,17 @@
     <string name="network_provider_and_internet_screen_airplane_mode_on_purpose" translatable="false">Whether or not airplane mode is currently enabled, which disables wireless communications.</string>
     <string name="network_provider_and_internet_screen_purpose" translatable="false">Allows users to manage the device\'s network and internet connections, including mobile data, airplane mode, hotspot, data usage, and advanced settings like VPN and DNS.</string>
     <string name="nfc_and_payment_settings_purpose" translatable="false">Allows users to toggle NFC for data exchange and contactless payments, select a default payment app, and manage security settings for contactless transactions.</string>
+    <string name="nfc_and_payment_screen_purpose" translatable="false">Manage NFC and require device unlock for NFC payments settings</string>
+    <string name="use_nfc_purpose" translatable="false">Enable or disable NFC (Near Field Communication)</string>
+    <string name="require_device_unlock_for_nfc_purpose" translatable="false">Require device to be unlocked to use NFC</string>
     <string name="night_display_purpose" translatable="false">Allows users to manage Night Light, which tints the screen in warmer colors to make it easier to look at the screen or read in dim light, and may help users to fall asleep more easily.</string>
     <string name="night_display_top_intro_purpose" translatable="false">Short introduction to the Night Light feature.</string>
     <string name="night_display_activated_purpose" translatable="false">Whether the Night Light feature is enabled. Night Light tints the screen in warmer colors to make it easier to read in dim light and may help users to fall asleep more easily.</string>
     <string name="night_display_temperature_purpose" translatable="false">Allows users to adjust the intensity of the night light feature as a percentage. The higher the intensity, the warmer the screen colors will be.</string>
     <string name="night_display_auto_mode_purpose" translatable="false">Allows users to manage the automatic activation of the Night Light feature based on sunset and sunrise or a custom schedule. The Night Light tints the screen in warmer colors to make it easier to read in dim light and may help users to fall asleep more easily.</string>
     <string name="night_display_auto_mode_description_purpose" translatable="false">Options for the automatic activation of the Night Light feature.</string>
+    <string name="night_display_custom_start_time_purpose" translatable="false">Allows users to set the start time for the automatic activation of the Night Light feature.</string>
+    <string name="night_display_custom_end_time_purpose" translatable="false">Allows users to set the end time for the automatic deactivation of the Night Light feature.</string>
     <string name="notification_access_purpose" translatable="false">Allows users to grant or deny specific applications the permission to read, reply to, and control notifications, providing them with special access to the system\'s notification stream.</string>
     <string name="notification_bubbles_purpose" translatable="false">Allows users to enable or disable notification bubbles, which let some conversations appear as floating icons on top of other apps.</string>
     <string name="battery_header_purpose" translatable="false">Displays the current battery level as a percentage</string>
@@ -372,9 +380,6 @@
     <string name="sound_effects_enabled_purpose" translatable="false">Whether audible feedback is played during common UI interactions like tapping or clicking</string>
     <string name="sound_screen_purpose" translatable="false">Allows users to manage device audio settings, including adjusting volume levels for various streams, selecting sound patterns for ringtones and notifications, and toggling specific system-wide sounds and vibration behaviors.</string>
     <string name="sound_always_show_vibration_icon_purpose" translatable="false">Controls whether a vibration indicator icon appears in the status bar when the device is set to vibrate.</string>
-    <!-- Work profile sounds screen begin -->
-    <string name="sound_work_screen_purpose" translatable="false">Allows the user to configure sound settings for their work profile, such as ringtones and notification sounds.</string>
-    <!-- Work profile sounds screen end -->
     <string name="system_sounds_and_vibrations_category_purpose" translatable="false">system_sounds_and_vibrations_category</string>
     <string name="volume_controls_category_purpose" translatable="false">volume_controls_category</string>
     <string name="special_access_purpose" translatable="false">Provides a dashboard for managing specialized app access privileges, including device administration, notification access, and the ability to modify system settings or access all files.</string>
@@ -544,6 +549,8 @@
     <string name="wifi_privacy_send_device_name_purpose" translatable="false">Whether to send the device name to the network</string>
     <string name="legal_information_purpose" translatable="false">Allows users to view legal documents and attributions related to the device\'s software and assets, including third-party licenses and source code information.</string>
     <string name="display_settings_screen_purpose" translatable="false">Allows users to manage display and touch settings such as brightness, theme, color profiles, screen timeout, and screen refresh rate.</string>
+    <string name="display_settings_api_screen_purpose" translatable="false">Allows users to manage the display and touch settings of the device screen such as brightness, theme, color profiles, screen timeout, and screen refresh rate.</string>
+    <string name="display_settings_api_screen_brightness_level_purpose" translatable="false">The brightness level of the device screen</string>
     <string name="screen_timeout_purpose" translatable="false">Allows users to configure how long the screen stays on before automatically turning off, including options for time-based intervals and intelligent features that monitor usage or attention.</string>
     <string name="battery_saver_screen_purpose" translatable="false">Provides options to save power and extend battery life, including a manual toggle, mode selection between Standard and Extreme, scheduling, and adaptive battery management.</string>
     <string name="lockscreen_from_display_settings_purpose" translatable="false">Allows users to configure what information and controls are visible on the lock screen and when the screen should wake up.</string>
@@ -659,6 +666,8 @@
     <string name="available_virtual_keyboard_screen_purpose" translatable="false">Allows users to enable and disable input method editors and to invoke settings activities specific to each input method editor.</string>
     <string name="wifi_notify_open_networks_purpose" translatable="false">Whether or not to show a notification when a high-quality public Wi-Fi network is available.</string>
     <string name="wifi_allow_wep_networks_purpose" translatable="false">Allows the device to connect to legacy Wi-Fi networks using the insecure WEP security protocol.</string>
+    <string name="wifi_scanning_screen_purpose" translatable="false">Allow apps to scan for Wi-Fi networks at any time, even when Wi-Fi is off, to improve location-based features.</string>
+    <string name="wifi_scanning_purpose" translatable="false">Let apps use Wi-Fi for more accurate location detection, even when Wi-Fi is off.</string>
     <string name="privacy_controls_screen_purpose" translatable="false">Allows users to manage privacy-related controls like camera and microphone access, and view location data sharing updates.</string>
     <string name="privacy_camera_toggle_purpose" translatable="false">Controls whether apps can access the device camera.</string>
     <string name="privacy_mic_toggle_purpose" translatable="false">Controls whether apps can access the device microphone.</string>

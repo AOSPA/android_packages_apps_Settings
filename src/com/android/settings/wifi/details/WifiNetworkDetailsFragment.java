@@ -275,7 +275,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (Flags.aapmFeatureDisableInsecureWifiAutojoin()) {
+        if (Flags.aapmFeatureDisableInsecureWifiAutojoinV2()) {
             WifiAutoConnectPreferenceController2 controller =
                     use(WifiAutoConnectPreferenceController2.class);
             if (controller != null) {
@@ -314,7 +314,7 @@ public class WifiNetworkDetailsFragment extends RestrictedDashboardFragment impl
         final WifiAutoConnectPreferenceController2 wifiAutoConnectPreferenceController2 =
                 new WifiAutoConnectPreferenceController2(context);
         wifiAutoConnectPreferenceController2.setWifiEntry(wifiEntry);
-        if (Flags.aapmFeatureDisableInsecureWifiAutojoin()) {
+        if (Flags.aapmFeatureDisableInsecureWifiAutojoinV2()) {
             wifiAutoConnectPreferenceController2.setRefreshCallback(this);
             wifiAutoConnectPreferenceController2.setParentFragment(this);
         }

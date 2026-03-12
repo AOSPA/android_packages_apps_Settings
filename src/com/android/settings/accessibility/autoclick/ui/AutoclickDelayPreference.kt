@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 
 /** Preference for the delay before an automatic click is performed. */
 class AutoclickDelayPreference(context: Context) :
@@ -87,6 +88,9 @@ class AutoclickDelayPreference(context: Context) :
                 true
             }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     companion object {
         const val SETTING_KEY = Settings.Secure.ACCESSIBILITY_AUTOCLICK_DELAY
