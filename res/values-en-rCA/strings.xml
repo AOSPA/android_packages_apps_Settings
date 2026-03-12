@@ -328,7 +328,15 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Use locale default"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Use 24-hour format"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Time"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"Time format"</string>
+    <string name="time_format_category_title" msgid="3122743852067365261">"12-hour / 24-hour format"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"Time format"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"More settings"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"Applications will use your time format based on this setting"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"Select a time format"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"Automatic"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"Apps use 12-hour / 24-hour format based on app language"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"12-hour format"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"24-hour format"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Time zone"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Home time zone"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Select a time zone"</string>
@@ -1497,7 +1505,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Cancel"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Protect SIM card"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM lock protection mode"</string>
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"Automatic PIN management"</string>
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Lock SIM"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Managed by Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Not managed by Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Enrollment succeeded"</string>
@@ -1506,9 +1514,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android-managed PIN"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Value of the Android-managed PIN:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Failed getting PIN"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"Protect SIM card from theft"</string>
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Require PIN to use phone"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM PIN managed by Android"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"SIM PIN manually managed"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"PIN required to use phone"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Lockscreen required for automatic SIM protection, manual only available now"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Enter current SIM PIN"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Enter the SIM card current PIN"</string>
@@ -1520,6 +1528,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Confirm new SIM PIN"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PINs do not match. Confirm the new SIM PIN."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Wrong PIN. Attempts remaining: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Enter the current PIN code of the SIM card"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Use <xliff:g id="CARRIER">%1$s</xliff:g> for mobile data?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"You\'re using <xliff:g id="CARRIER2_0">%2$s</xliff:g> for mobile data. If you switch to <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> will no longer be used for mobile data."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Use <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1822,6 +1831,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Location time zone detection changes are not allowed"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"If your device location is available, it may be used to set your time zone"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Notifications"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Time zone change"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Receive a notification when your time zone is automatically updated"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, time, zone, timezone"</string>
@@ -2106,9 +2117,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"Language &amp; region"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Keyboard"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"You don’t have permission to change the device language."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Languages &amp; input"</string>
     <string name="input_assistance" msgid="3437568284144952104">"Tools"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"Keyboard &amp; input methods"</string>
     <string name="system_language" msgid="1146762166579643257">"System Languages"</string>
     <string name="phone_language" msgid="5986939176239963826">"Languages"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2117,7 +2126,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"Auto-capitalization"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"Capitalize first letter in sentences"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"Auto-punctuate"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"Physical keyboard settings"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Press Space key twice to insert \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Show passwords"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Display characters briefly as you type"</string>
@@ -2128,13 +2136,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"This spell checker may be able to collect all the text you type, including personal data like passwords and credit card numbers. It comes from the app <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Use this spell checker?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Settings"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Language"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Keyboards"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Show the keyboard switch key"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Allow the keyboard switcher button to be shown in the navigation bar, when an input field is selected"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"On-screen keyboard"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Available On-screen keyboard"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"Manage on-screen keyboards"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibility"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Physical keyboard"</string>
@@ -2194,9 +2200,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Fast"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Slow"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"View keyboard shortcuts"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Show list of shortcuts"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"On-screen keyboard for work"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Default"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"Game Controller"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Customize the actions triggered by your controller’s buttons"</string>
@@ -2315,7 +2319,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"Increase repeat rate"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"Decrease repeat rate"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> layout"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"Default"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatic: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"User selected: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Speech"</string>
@@ -2329,10 +2332,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Game Controller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirect vibration"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Send vibration to game controller when connected"</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"Choose keyboard layout"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"Set up keyboard layouts"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"To switch, press Control-Spacebar"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"Default"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Keyboard layouts"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Physical keyboard layouts"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Personal dictionary"</string>
@@ -2380,7 +2379,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"You can customize this device to fit your needs. These accessibility features can be changed later in Settings."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Change font size"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Screen reader"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"Physical keyboard options"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Captions"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
@@ -2606,7 +2604,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Expanded dark theme"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Expanded dark theme settings"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Open expanded dark theme settings"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"Expanded dark theme can improve readability, but may cause some apps to display incorrectly.\n\nApps with this setting off will use the standard dark theme option."</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Expanded dark theme automatically darkens more apps for better readability.\n\nKeep an app\'s toggle on to use expanded dark theme. If an app doesn\'t look right, turn its toggle off to use the app\'s own theme."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remove animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce movement on the screen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Text cursor blinking"</string>
@@ -2746,7 +2744,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Hearing device controls"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Sounds"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Notifications"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"Ringtones and alarms"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Sounds will play through hearing devices"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"Sounds will play through device speaker"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Sounds will play through hearing devices and device speaker"</string>
@@ -3114,7 +3111,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"Voice input &amp; output"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"Voice input &amp; output settings"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"Voice search"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"Android keyboard"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"Voice input settings"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"Voice input"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Voice input services"</string>
@@ -3661,6 +3657,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi notification, wifi notification"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"data usage"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Use 24-hour format"</string>
+    <string name="keywords_time_notifications" msgid="401122178351164403">"time notifications, time zone notifications, DST, daylight savings, time zone offset"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Open with"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Applications"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"timezone"</string>
@@ -3781,6 +3778,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Notification volume muted, notifications will vibrate"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> muted"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Unavailable because ring is muted"</string>
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Ringtone, Ringtone alert, SIM, SIM Ringtone"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Ringtone"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Phone ringtone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Default notification sound"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"App provided sound"</string>
@@ -4604,11 +4603,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Can access all files"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Screen automation"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"This app will be able to see and interact with other apps\' screen content to help you complete tasks, even when the apps are in the background"</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> will be able to see and interact with other apps\' screen content to help you complete tasks"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"If you don\'t allow screen automation, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Allow apps to help you complete tasks by interacting with other apps\' screen content"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ask every time"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Always allow"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Don\'t allow"</string>
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Allow screen automation"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"No apps are always allowed"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Apps that are allowed to always use the screen automation by <xliff:g id="ID_1">%1$s</xliff:g> will be shown here. Apps that only get a per-session permission will not be shown."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Allowed"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Not allowed"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Full-screen notifications"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Allow full-screen notifications from this app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls, or other urgent notifications."</string>
@@ -6192,4 +6197,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Your device isn\'t registered for Satellite SOS. Make sure you\'re connected to the internet for your device to automatically complete registration"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Enable Web App Installer Service"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Enable this service to install websites directly to your home screen, to use them like regular apps."</string>
+    <string name="access_hid_title" msgid="3937436196813998587">"Human interface device access"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"Allow app to discover human interface devices (HIDs)"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"If you allow access, malicious apps may reprogram your HIDs to compromise your system. For example, apps could simulate your keyboard or mouse inputs to control your system when it isn\'t open. Make sure you trust apps when allowing access."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"hid, human, access, device"</string>
 </resources>

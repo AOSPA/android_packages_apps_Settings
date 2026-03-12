@@ -328,18 +328,30 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"언어 기본값 사용"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24시간 형식 사용"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"시간"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"시간 형식"</string>
+    <!-- no translation found for time_format_category_title (3122743852067365261) -->
+    <skip />
+    <!-- no translation found for time_format_page_title (2599662358219245734) -->
+    <skip />
+    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
+    <skip />
+    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
+    <skip />
+    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
+    <skip />
+    <!-- no translation found for time_format_automatic (8627801531369181488) -->
+    <skip />
+    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
+    <skip />
+    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
+    <skip />
+    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
+    <skip />
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"시간대"</string>
-    <!-- no translation found for home_time_zone_title (3824736095532816255) -->
-    <skip />
-    <!-- no translation found for home_time_zone_select_title (9158012099148340770) -->
-    <skip />
-    <!-- no translation found for home_time_zone_summary (1494773352044636274) -->
-    <skip />
-    <!-- no translation found for use_home_time_zone_title (8026361707497256390) -->
-    <skip />
-    <!-- no translation found for suggestions_category_title (669819615912272575) -->
-    <skip />
+    <string name="home_time_zone_title" msgid="3824736095532816255">"기본 시간대"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"시간대 선택"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"외출 시 기본 시간대 설정"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"기본 시간대 사용"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"추천"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"시간대 선택"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"시간대 검색"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"날짜"</string>
@@ -1501,9 +1513,9 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"확인"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"취소"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM 카드 보호"</string>
-    <!-- no translation found for automatic_sim_lock_protection (455534553760066231) -->
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM 잠금 보호 모드"</string>
+    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
     <skip />
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"자동 PIN 관리"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android에서 관리함"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android에서 관리하지 않음"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"등록에 성공함"</string>
@@ -1512,27 +1524,23 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android 관리 PIN"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Android 관리 PIN 값:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"PIN을 가져올 수 없음"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"SIM 카드 도난 방지"</string>
-    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM PIN을 Android에서 관리함"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"SIM PIN을 수동 관리함"</string>
-    <!-- no translation found for sim_protection_mode_lskf_required (3092348651156624481) -->
+    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
     <skip />
+    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM PIN을 Android에서 관리함"</string>
+    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
+    <skip />
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"자동 SIM 보호를 사용하려면 잠금 화면을 설정해야 하며, 현재는 수동으로만 설정할 수 있습니다."</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"현재 SIM의 PIN 입력"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"SIM 카드의 현재 PIN을 입력하세요"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"이동통신사 기본값 사용"</string>
-    <!-- no translation found for choose_sim_pin_protection_mode (3008087116785955704) -->
-    <skip />
-    <!-- no translation found for sim_pin_protection_mode_manual (6394394529094030608) -->
-    <skip />
-    <!-- no translation found for sim_pin_protection_mode_automatic (7382457994105124365) -->
-    <skip />
-    <!-- no translation found for provide_new_sim_pin_title (7858611936347465648) -->
-    <skip />
-    <!-- no translation found for confirm_new_sim_pin_title (8260672663421256888) -->
-    <skip />
-    <!-- no translation found for confirm_new_sim_pin_after_mismatch (8358717933025894071) -->
-    <skip />
-    <!-- no translation found for enter_current_sim_pin_after_mismatch (6910905505364979098) -->
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"SIM 보호 모드 선택"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"수동"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"자동(Android 관리)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"새 SIM PIN"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"새 SIM PIN 확인"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN이 일치하지 않습니다. 새 SIM PIN을 확인하세요."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"잘못된 PIN입니다. 남은 시도 횟수: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>회"</string>
+    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
     <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"<xliff:g id="CARRIER">%1$s</xliff:g>의 모바일 데이터를 사용하시겠습니까?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"<xliff:g id="CARRIER2_0">%2$s</xliff:g> 모바일 데이터를 사용하고 있습니다. <xliff:g id="CARRIER1">%1$s</xliff:g>(으)로 전환하면 <xliff:g id="CARRIER2_1">%2$s</xliff:g> 모바일 데이터를 더 이상 사용하지 않게 됩니다."</string>
@@ -1836,6 +1844,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"위치 시간대 감지 변경이 허용되지 않습니다."</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"기기 위치를 사용할 수 있는 경우 시간대를 설정하는 데 기기 위치가 사용될 수도 있습니다."</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"알림"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"시간대 변경"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"시간대가 자동으로 업데이트되면 알림을 받습니다."</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"알림, 시간, 시간대"</string>
@@ -2120,9 +2130,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"언어 및 지역"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"키보드"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"기기 언어를 변경할 수 있는 권한이 없습니다."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"언어 및 입력"</string>
     <string name="input_assistance" msgid="3437568284144952104">"도구"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"키보드 및 입력 방법"</string>
     <string name="system_language" msgid="1146762166579643257">"시스템 언어"</string>
     <string name="phone_language" msgid="5986939176239963826">"언어"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2131,7 +2139,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"자동 대문자화"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"문장의 첫 글자를 대문자로"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"자동 구두점 입력"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"물리적 키보드 설정"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"스페이스바를 두 번 눌러 \'.\' 삽입"</string>
     <string name="show_password" msgid="7101900779571040117">"비밀번호 표시"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"입력할 때 잠깐 표시"</string>
@@ -2142,13 +2149,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"<xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> 앱에서 지원하는 이 맞춤법 검사기를 사용하면 비밀번호 및 신용카드 번호와 같은 개인 정보를 비롯하여 입력한 모든 텍스트가 수집될 수 있습니다. 사용하시겠습니까?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"설정"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"언어"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"키보드"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"키보드 전환기 버튼 표시"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"입력란이 선택되면 탐색 메뉴에 키보드 전환기 버튼이 표시되도록 허용합니다."</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"터치 키보드"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"사용 가능한 터치 키보드"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"터치 키보드 관리"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"옵션"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"접근성"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"물리적 키보드"</string>
@@ -2208,9 +2213,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"빠름"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"느림"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"단축키 보기"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"단축키 목록 표시"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"직장 프로필 키보드 및 도구"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"업무용 터치 키보드"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"기본"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"게임 컨트롤러"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"컨트롤러 버튼으로 실행되는 동작 맞춤설정"</string>
@@ -2329,7 +2332,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"반복 속도 높이기"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"반복 속도 줄이기"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> 레이아웃"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"기본"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"자동: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"사용자 선택: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"음성"</string>
@@ -2343,10 +2345,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"게임 컨트롤러"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"진동 리디렉션"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"게임 컨트롤러가 연결되어 있으면 진동을 컨트롤러로 전송합니다."</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"키보드 레이아웃 선택"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"키보드 레이아웃 설정"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"전환하려면 Control-Spacebar를 누름"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"기본값"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"키보드 레이아웃"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"실제 키보드 레이아웃"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"개인 사전"</string>
@@ -2394,7 +2392,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"필요에 따라 기기를 맞춤설정할 수 있습니다. 다음 접근성 기능은 언제든지 설정에서 변경할 수 있습니다."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"글꼴 크기 변경"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"스크린 리더"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"실제 키보드 옵션"</string>
     <string name="captions_category_title" msgid="574490148949400274">"자막"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"오디오"</string>
     <string name="general_category_title" msgid="6298579528716834157">"일반"</string>
@@ -2620,7 +2617,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"확장형 어두운 테마"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"확장형 어두운 테마 설정"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"확장형 어두운 테마 설정 열기"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"확장형 어두운 테마로 가독성이 개선될 수 있지만, 일부 앱이 잘못 표시될 수도 있습니다.\n\n이 설정이 사용 중지된 앱에는 표준 어두운 테마 옵션이 사용됩니다."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"애니메이션 삭제"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"화면상의 움직임 줄이기"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"텍스트 커서 깜박임"</string>
@@ -2760,7 +2758,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"보청기 제어"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"소리"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"알림"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"벨소리 및 알람"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"청각 보조 기기를 통해 소리가 재생됩니다"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"기기 스피커를 통해 소리가 재생됩니다."</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"청각 보조 기기 및 기기 스피커를 통해 소리가 재생됩니다."</string>
@@ -3128,7 +3125,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"음성 입력 &amp; 출력"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"음성 입력 &amp; 출력 설정"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"음성 검색"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"Android 키보드"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"음성 입력 설정"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"음성 입력"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"음성 입력 서비스"</string>
@@ -3675,6 +3671,8 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi 알림, Wi‑Fi 알림"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"데이터 사용"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24시간 형식 사용"</string>
+    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
+    <skip />
     <string name="keywords_app_default" msgid="8977706259156428770">"연결 앱"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"애플리케이션"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"시간대"</string>
@@ -3795,6 +3793,10 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"알림음 소리가 음소거되며 진동이 울립니다."</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> 소리가 음소거됩니다."</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"벨소리가 음소거되어 있으므로 사용할 수 없음"</string>
+    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
+    <skip />
+    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"전화 벨소리"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"기본 알림 소리"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"앱에서 제공된 소리"</string>
@@ -4319,7 +4321,7 @@
     <string name="zen_mode_other_sounds_summary" msgid="8784400697494837032">"{count,plural,offset:2 =0{예외 소리 없음}=1{{sound_category_1}만 예외}=2{{sound_category_1} 및 {sound_category_2}만 예외}=3{{sound_category_1}, {sound_category_2}, {sound_category_3}만 예외}other{{sound_category_1}, {sound_category_2} 외 #가지만 예외}}"</string>
     <string name="zen_mode_sounds_none" msgid="6557474361948269420">"예외 소리 없음"</string>
     <string name="zen_mode_people_none" msgid="4613147461974255046">"예외가 적용되는 사람 없음"</string>
-    <string name="zen_mode_people_some" msgid="9101872681298810281">"일부 사람만 예외"</string>
+    <string name="zen_mode_people_some" msgid="9101872681298810281">"일부 사람의 알림 허용"</string>
     <string name="zen_mode_people_repeat_callers" msgid="4499084111069828761">"반복 발신자의 방해 허용"</string>
     <string name="zen_mode_people_all" msgid="311036110283015205">"모든 사람 예외"</string>
     <string name="zen_mode_repeat_callers" msgid="2270356100287792138">"반복 발신자"</string>
@@ -4546,8 +4548,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB 환경설정"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB 제어 기기"</string>
-    <!-- no translation found for usb_connected_devices (535238470176122197) -->
-    <skip />
+    <string name="usb_connected_devices" msgid="535238470176122197">"연결된 기기"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"연결된 기기"</string>
     <string name="usb_control_device" msgid="527916783743021577">"이 기기"</string>
     <string name="usb_switching" msgid="3654709188596609354">"전환 중…"</string>
@@ -4564,10 +4565,8 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP 및 전원 공급"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI 및 전원 공급"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"웹캠 및 전원 공급"</string>
-    <!-- no translation found for usb_device_name_unknown_with_manufacturer_name (9075986054227881069) -->
-    <skip />
-    <!-- no translation found for usb_device_name_unknown_with_vendor_id_and_product_id (8750941211592531562) -->
-    <skip />
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"<xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g>의 알 수 없는 기기"</string>
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"알 수 없는 기기 [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"백그라운드 확인"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"화면의 텍스트 사용"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"지원 앱이 화면의 텍스트 콘텐츠를 사용하도록 허용합니다."</string>
@@ -4621,11 +4620,23 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"모든 파일에 액세스 가능"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"화면 자동화"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"이 앱은 사용자가 작업을 완료할 수 있도록 앱이 백그라운드에 있는 경우에도 다른 앱의 화면 콘텐츠를 보고 상호작용할 수 있습니다"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
+    <skip />
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"화면 자동화를 허용하지 않더라도 <xliff:g id="ID_1">%1$s</xliff:g>에서 다른 방법으로 <xliff:g id="ID_2">%1$s</xliff:g>에 연결된 앱과 상호작용할 수 있습니다."</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"앱이 다른 앱의 화면 콘텐츠와 상호작용하여 작업을 완료할 수 있도록 허용"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"항상 확인"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"항상 허용"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"허용 안함"</string>
+    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"전체 화면 알림"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"이 앱에 전체 화면 알림 허용"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"기기가 잠겨 있을 때 앱에서 알림을 전체 화면에 표시할 수 있도록 허용합니다. 앱에서는 이러한 방식으로 알람, 수신 전화 또는 기타 긴급 알림을 강조 표시할 수 있습니다."</string>
@@ -6209,4 +6220,12 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"기기가 위성 긴급 SOS에 등록되어 있지 않습니다. 자동으로 등록을 완료하려면 기기가 인터넷에 연결되어 있는지 확인하세요."</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"웹 앱 설치 프로그램 서비스 사용 설정"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"웹사이트를 홈 화면에 직접 설치하고 일반 앱처럼 사용하려면 이 서비스를 사용 설정하세요."</string>
+    <!-- no translation found for access_hid_title (3937436196813998587) -->
+    <skip />
+    <!-- no translation found for permit_access_hid (870824396872060949) -->
+    <skip />
+    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
+    <skip />
+    <!-- no translation found for keywords_access_hid (682455265293135353) -->
+    <skip />
 </resources>

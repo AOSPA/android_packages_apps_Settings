@@ -328,18 +328,30 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"استفاده از پیش‌فرض منطقه زبانی"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"استفاده از قالب ۲۴ ساعته"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"زمان"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"قالب زمان"</string>
+    <!-- no translation found for time_format_category_title (3122743852067365261) -->
+    <skip />
+    <!-- no translation found for time_format_page_title (2599662358219245734) -->
+    <skip />
+    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
+    <skip />
+    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
+    <skip />
+    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
+    <skip />
+    <!-- no translation found for time_format_automatic (8627801531369181488) -->
+    <skip />
+    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
+    <skip />
+    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
+    <skip />
+    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
+    <skip />
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"منطقه زمانی"</string>
-    <!-- no translation found for home_time_zone_title (3824736095532816255) -->
-    <skip />
-    <!-- no translation found for home_time_zone_select_title (9158012099148340770) -->
-    <skip />
-    <!-- no translation found for home_time_zone_summary (1494773352044636274) -->
-    <skip />
-    <!-- no translation found for use_home_time_zone_title (8026361707497256390) -->
-    <skip />
-    <!-- no translation found for suggestions_category_title (669819615912272575) -->
-    <skip />
+    <string name="home_time_zone_title" msgid="3824736095532816255">"منطقهٔ زمانی مبدأ"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"انتخاب منطقهٔ زمانی"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"منطقه زمانی خانه را برای زمانی که در خانه نیستید تنظیم کنید"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"استفاده از منطقه زمانی محلی"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"پیشنهادها"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"انتخاب منطقهٔ زمانی"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"جستجوی منطقه زمانی"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"تاریخ"</string>
@@ -744,7 +756,7 @@
     <string name="no_screen_lock_issue_notification_text" msgid="8696194459170873345">"برای امنیت بیشتر، پین، الگو، یا گذرواژه‌ای برای این دستگاه تنظیم کنید."</string>
     <string name="no_screen_lock_issue_notification_text_without_pattern" msgid="3887560771313258705">"برای امنیت بیشتر، پین یا گذرواژه‌ای برای این دستگاه تنظیم کنید."</string>
     <string name="suggested_fingerprint_lock_settings_title" msgid="3140266181874137984">"برای باز کردن قفل، اثر انگشت اضافه کنید"</string>
-    <string name="lock_settings_picker_title" msgid="9219376327364915334">"انتخاب قفل صفحه‌نمایش"</string>
+    <string name="lock_settings_picker_title" msgid="9219376327364915334">"انتخاب کردن قفل صفحه‌نمایش"</string>
     <string name="lock_settings_picker_new_lock_title" msgid="3113042086804290919">"قفل صفحه انتخاب کردن"</string>
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"انتخاب قفل صفحه جدید"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"انتخاب قفل برای برنامه کاری"</string>
@@ -1501,9 +1513,9 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"تأیید"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"لغو"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"محافظت از سیم‌کارت"</string>
-    <!-- no translation found for automatic_sim_lock_protection (455534553760066231) -->
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"حالت محافظت از قفل سیم‌کارت"</string>
+    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
     <skip />
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"مدیریت خودکار پی"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"‏تحت مدیریت Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"‏تحت‌مدیریت Android نیست"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"ثبت انجام شد"</string>
@@ -1512,27 +1524,23 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"‏پین مدیریت‌شده Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"‏مقدار پین مدیریت‌شده Android:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"پین دریافت نشد"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"محافظت از سیم‌کارت دربرابر سرق"</string>
-    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"‏پین سیم‌کارت مدیریت‌شده توسط Android"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"پین سیم‌کارت به‌صورت دستی مدیریت می‌شو"</string>
-    <!-- no translation found for sim_protection_mode_lskf_required (3092348651156624481) -->
+    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
     <skip />
+    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"‏پین سیم‌کارت مدیریت‌شده توسط Android"</string>
+    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
+    <skip />
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"برای محافظت خودکار از سیم‌کارت، صفحه قفل لازم است، اکنون فقط محافظت دستی دردسترس است"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"پین سیم‌کارت فعلی را وارد کنید"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"پین فعلی سیم‌کارت را وارد کنید"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"استفاده از پیش‌فرض شرکت مخابراتی"</string>
-    <!-- no translation found for choose_sim_pin_protection_mode (3008087116785955704) -->
-    <skip />
-    <!-- no translation found for sim_pin_protection_mode_manual (6394394529094030608) -->
-    <skip />
-    <!-- no translation found for sim_pin_protection_mode_automatic (7382457994105124365) -->
-    <skip />
-    <!-- no translation found for provide_new_sim_pin_title (7858611936347465648) -->
-    <skip />
-    <!-- no translation found for confirm_new_sim_pin_title (8260672663421256888) -->
-    <skip />
-    <!-- no translation found for confirm_new_sim_pin_after_mismatch (8358717933025894071) -->
-    <skip />
-    <!-- no translation found for enter_current_sim_pin_after_mismatch (6910905505364979098) -->
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"انتخاب حالت محافظت از سیم‌کارت"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"دستی"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"‏خودکار (مدیریت‌شده توسط Android)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"پین سیم کارت جدید"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"تأیید پین سیم‌کارت جدید"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"کدهای پین با هم مطابقت ندارند. پین سیم‌کارت جدید را تأیید کنید."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"پین اشتباه است. <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> تلاش باقی مانده است"</string>
+    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
     <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"استفاده از <xliff:g id="CARRIER">%1$s</xliff:g> برای داده همراه؟"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"برای داده تلفن همراه، از <xliff:g id="CARRIER2_0">%2$s</xliff:g> استفاده می‌کنید. اگر به <xliff:g id="CARRIER1">%1$s</xliff:g> جابه‌جا شوید، دیگر <xliff:g id="CARRIER2_1">%2$s</xliff:g> برای داده تلفن همراه استفاده نمی‌شود."</string>
@@ -1836,6 +1844,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"تغییر تشخیص منطقه زمانی بااستفاده از مکان مجاز نیست"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"اگر مکان دستگاهتان دردسترس باشد، می‌توان از آن برای مشخص کردن منطقه زمانی‌تان استفاده کرد"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"اعلان‌ها"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"تغییر منطقه زمانی"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"هرگاه منطقه زمانی‌تان به‌طور خودکار به‌روز شود، اعلان دریافت کنید"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"اعلان، زمان، منطقه، منطقه زمانی"</string>
@@ -2120,9 +2130,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"زبان و منطقه"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"صفحه‌کلید"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"اجازه ندارید زبان دستگاه را تغییر دهید."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"زبان‌ها و ورودی"</string>
     <string name="input_assistance" msgid="3437568284144952104">"ابزارها"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"صفحه‌کلید و روش‌های ورودی"</string>
     <string name="system_language" msgid="1146762166579643257">"زبان‌های سیستم"</string>
     <string name="phone_language" msgid="5986939176239963826">"زبان‌ها"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2131,7 +2139,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"بزرگ‌نویسی خودکار"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"حرف اول در جمله ها بزرگ نوشته شود"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"علامت‌گذاری خودکار"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"تنظیمات صفحه‌کلید فیزیکی"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"برای وارد کردن \".\"، کلید فاصله را دو بار فشار دهید."</string>
     <string name="show_password" msgid="7101900779571040117">"نمایش گذرواژه‌ها"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"همان‌طور که تایپ می‌کنید، نویسه‌ها را برای مدت کوتاهی نشان داده می‌شوند"</string>
@@ -2142,13 +2149,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"این غلط‌یاب املا ممکن است بتواند همه متنی را که شما وارد می‌کنید از جمله، داده‌های شخصی مانند گذرواژه‌ها و شماره‌های کارت اعتباری را جمع‌آوری کند. این ویژگی توسط برنامه <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> ارائه می‌شود. از این غلط‌یاب املا استفاده شود؟"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"تنظیمات"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"زبان"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"صفحه‌کلیدها"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"نمایش دکمه تعویض‌کننده صفحه‌کلید"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"وقتی فیلد ورودی انتخاب شده است، دکمه تعویض‌کننده صفحه‌کلید در نوار پیمایش نشان داده می‌شود"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"صفحه‌کلید مجازی"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"صفحه‌کلید مجازی دردسترس است"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"مدیریت صفحه‌کلیدهای روی صفحه"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"گزینه‌ها"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"دسترس‌پذیری"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"صفحه‌کلید فیزیکی"</string>
@@ -2208,9 +2213,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"سریع"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"آهسته"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"مشاهده میان‌برهای صفحه‌کلید"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"نمایش فهرست میان‌برها"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"نمایه کاری صفحه‌کلیدها و ابزارها"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"صفحه‌کلید مجازی برای کار"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"پیش‌فرض"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"کنترل بازی"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"کنش‌های راه‌اندازی‌شده با دکمه‌های کنترل را سفارشی‌سازی کنید"</string>
@@ -2329,7 +2332,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"افزایش سرعت تکرار"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"کاهش دادن سرعت تکرار"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"چیدمان <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"پیش‌فرض"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"خودکار: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"انتخاب کاربر: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"گفتار"</string>
@@ -2343,10 +2345,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"دسته کنترل بازی"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"تغییر مسیر لرزش"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"وقتی متصل شد، لرزش به دسته کنترل بازی ارسال شود"</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"انتخاب جانمایی صفحه‌کلید"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"تنظیم طرح‌بندی‌های صفحه‌کلید"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"‏برای تغییر، Control-کلید فاصله را فشار هید"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"پیش‌فرض"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"طرح‌بندی‌های صفحه‌کلید"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"طرح‌بندی‌های صفحه‌کلید فیزیکی"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"واژه‌نامه شخصی"</string>
@@ -2394,7 +2392,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"می‌توانید این دستگاه را متناسب با نیازهایتان سفارشی‌سازی کنید. این ویژگی‌های دسترس‌پذیری را می‌توانید بعداً در «تنظیمات» تغییر دهید."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"تغییر اندازه قلم"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"صفحه‌خوان"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"گزینه‌های صفحه‌کلید فیزیکی"</string>
     <string name="captions_category_title" msgid="574490148949400274">"زیرنویس"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"صوتی"</string>
     <string name="general_category_title" msgid="6298579528716834157">"عمومی"</string>
@@ -2622,7 +2619,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"زمینه تیره گسترش‌یافته"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"تنظیمات «زمینه تیره گسترش‌یافته»"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"باز کردن تنظیمات «زمینه تیره گسترش‌یافته»"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"«زمینه تیره» گسترش‌یافته می‌تواند خوانایی را بهبود بخشد، اما ممکن است باعث شود برخی‌از برنامه‌ها به‌صورت نادرست نمایش داده شوند.\n\nبرنامه‌هایی که این تنظیم را خاموش کرده‌اند از گزینه استاندارد «زمینه تیره» استفاده خواهند کرد."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"برداشتن پویانمایی‌ها"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"کاهش حرکت در صفحه‌نمایش"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"چشمک زدن مکان‌نمای نوشتار"</string>
@@ -2762,7 +2760,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"کنترل‌های دستگاه کمک‌شنوایی"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"صداها"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"اعلان‌ها"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"آهنگ‌های زنگ و هشدارها"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"صداها ازطریق دستگاه‌های کمک‌شنوایی پخش خواهد شد"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"صداها ازطریق بلندگوی دستگاه پخش خواهد شد"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"صداها ازطریق سمعک‌ها و بلندگوی دستگاه پخش خواهد شد"</string>
@@ -3130,7 +3127,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"ورودی و خروجی گفتاری"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"تنظیمات ورودی و خروجی گفتاری"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"جستجوی گفتاری"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"‏صفحه‌کلید Android"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"تنظیمات ورودی گفتاری"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"ورودی گفتاری"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"سرویس‌های ورودی گفتاری"</string>
@@ -3254,7 +3250,7 @@
     <string name="device_admin_status" msgid="6332571781623084064">"این برنامه سرپرست فعال است و به برنامه <xliff:g id="APP_NAME">%1$s</xliff:g> اجازه می‌دهد عملیات زیر را اجرا کند:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"مدیر نمایه فعال شود؟"</string>
     <string name="supervision_confirmation_title" msgid="8094974031562728585">"به «<xliff:g id="APP_NAME">%1$s</xliff:g>» اجازه می‌دهید بر این دستگاه نظارت کند؟"</string>
-    <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"نظارت مجاز شود؟"</string>
+    <string name="profile_owner_add_title_simplified" msgid="2320828996993774182">"اجازه نظارت می‌دهید؟"</string>
     <string name="adding_profile_owner_warning" msgid="6868275476058020513">"با ادامه دادن، کاربرتان توسط سرپرست مدیریت می‌شود، که همچنین ممکن است بتواند داده‌های کاربر و نیز داده‌های شخصی شما را ذخیره کند.\n\nسرپرستتان می‌تواند بر تنظیمات، دسترسی‌ها، برنامه‌ها و داده‌ها مربوط به این کاربر (ازجمله فعالیت شبکه و اطلاعات مکان دستگاه) نظارت داشته باشد و آن‌ها را مدیریت کند."</string>
     <string name="admin_disabled_other_options" msgid="8122039047419172139">"گزینه‌های دیگر را سرپرستتان غیرفعال کرده است"</string>
     <string name="admin_more_details" msgid="6091028872148388357">"درباره گزینه‌های غیرفعال شدن زمان خاموش شدن صفحه بیشتر بدانید"</string>
@@ -3677,6 +3673,8 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"‏اعلان Wi-Fi، اعلان wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"مصرف داده"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"استفاده از قالب ۲۴ ساعته"</string>
+    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
+    <skip />
     <string name="keywords_app_default" msgid="8977706259156428770">"باز کردن با"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"برنامه‌ها"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"منطقه زمانی"</string>
@@ -3797,6 +3795,10 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"اعلان‌ها بی‌صدا شد، اعلان‌ها دستگاه را به لرزش درمی‌آورد"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> بی‌صدا شد"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"دردسترس نیست، چون زنگ بی‌صدا شده است"</string>
+    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
+    <skip />
+    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"آهنگ زنگ تلفن"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"صدای اعلان پیش‌فرض"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"صدای ارائه‌شده توسط برنامه"</string>
@@ -4548,8 +4550,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"‏اولویت‌های USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"‏USB تحت کنترل"</string>
-    <!-- no translation found for usb_connected_devices (535238470176122197) -->
-    <skip />
+    <string name="usb_connected_devices" msgid="535238470176122197">"دستگاه‌های متصل‌شده"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"دستگاه متصل‌شده"</string>
     <string name="usb_control_device" msgid="527916783743021577">"این دستگاه"</string>
     <string name="usb_switching" msgid="3654709188596609354">"درحال رفتن به…"</string>
@@ -4566,10 +4567,8 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"‏PTP و شارژ دستگاه"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"‏حالت MIDI و شارژ دستگاه"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"وب‌کم و تأمین برق"</string>
-    <!-- no translation found for usb_device_name_unknown_with_manufacturer_name (9075986054227881069) -->
-    <skip />
-    <!-- no translation found for usb_device_name_unknown_with_vendor_id_and_product_id (8750941211592531562) -->
-    <skip />
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"دستگاه نامشخص از <xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g>"</string>
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"دستگاه نامشخص ‫[<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"بررسی پس‌زمینه"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"استفاده از نوشتار صفحه"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"اجازه به برنامه همیار برای دسترسی به محتوای صفحه به‌عنوان نوشتار"</string>
@@ -4623,11 +4622,23 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"می‌توانند به همه فایل‌ها دسترسی داشته باشند"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"خودکارسازی صفحه"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"این برنامه می‌تواند محتوای صفحه برنامه‌های دیگر را ببیند و با آن‌ها تعامل داشته باشد تا به شما در انجام تکالیف کمک کند، حتی زمانی‌که برنامه‌ها در پس‌زمینه هستند"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
+    <skip />
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"اگر خودکارسازی صفحه را مجاز نکنید، <xliff:g id="ID_1">%1$s</xliff:g> ممکن است همچنان بتواند از راه‌های دیگر با برنامه‌هایی که به <xliff:g id="ID_2">%1$s</xliff:g> متصل هستند تعامل داشته باشد"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"به برنامه‌ها اجازه دهید ازطریق تعامل با محتوای صفحه برنامه‌های دیگر به شما در انجام تکالیف کمک کنند"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"هربار پرسیده شود"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"همیشه اجازه داشتن"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"اجازه ندادن"</string>
+    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"اعلان‌های تمام‌صفحه"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"مجاز کردن اعلان‌های تمام‌صفحه از این برنامه"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"به این برنامه اجازه می‌دهد وقتی دستگاه قفل است، اعلان‌ها را روی کل صفحه نشان دهد. برنامه‌ها ممکن است از این قابلیت برای برجسته کردن هشدارها، تماس ورودی، یا دیگر اعلان‌های فوری استفاده کنند."</string>
@@ -6211,4 +6222,12 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"دستگاهتان برای «درخواست کمک ماهواره‌ای» ثبت نشده است. حتماً به اینترنت متصل باشید تا دستگاه بتواند فرایند ثبت را به‌طور خودکار تکمیل کند"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"فعال کردن «سرویس نصب‌کننده برنامه وب»"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"برای نصب مستقیم وب‌سایت‌ها در صفحه اصلی و استفاده از آن‌ها مانند برنامه‌های معمولی، این سرویس را فعال کنید."</string>
+    <!-- no translation found for access_hid_title (3937436196813998587) -->
+    <skip />
+    <!-- no translation found for permit_access_hid (870824396872060949) -->
+    <skip />
+    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
+    <skip />
+    <!-- no translation found for keywords_access_hid (682455265293135353) -->
+    <skip />
 </resources>

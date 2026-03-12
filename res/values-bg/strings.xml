@@ -328,18 +328,30 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Използване на стандартния формат за локала"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-часов формат"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Час"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"Формат за часа"</string>
+    <!-- no translation found for time_format_category_title (3122743852067365261) -->
+    <skip />
+    <!-- no translation found for time_format_page_title (2599662358219245734) -->
+    <skip />
+    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
+    <skip />
+    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
+    <skip />
+    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
+    <skip />
+    <!-- no translation found for time_format_automatic (8627801531369181488) -->
+    <skip />
+    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
+    <skip />
+    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
+    <skip />
+    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
+    <skip />
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Часова зона"</string>
-    <!-- no translation found for home_time_zone_title (3824736095532816255) -->
-    <skip />
-    <!-- no translation found for home_time_zone_select_title (9158012099148340770) -->
-    <skip />
-    <!-- no translation found for home_time_zone_summary (1494773352044636274) -->
-    <skip />
-    <!-- no translation found for use_home_time_zone_title (8026361707497256390) -->
-    <skip />
-    <!-- no translation found for suggestions_category_title (669819615912272575) -->
-    <skip />
+    <string name="home_time_zone_title" msgid="3824736095532816255">"Часова зона у дома"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"Избор на часова зона"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"Задайте часова зона за у дома, когато сте другаде"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"Използв. на часов. зона у дома"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"Предложения"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Часова зона"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"Потърсете часова зона"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Датa"</string>
@@ -1501,9 +1513,9 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Отказ"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Защита на SIM картата"</string>
-    <!-- no translation found for automatic_sim_lock_protection (455534553760066231) -->
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Режим на защита чрез закл. на SIM карт."</string>
+    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
     <skip />
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"Автоматично управление на ПИН кодовете"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Управлява се от Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Не се управлява от Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Регистрацията бе успешна"</string>
@@ -1512,27 +1524,23 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"ПИН код, управляван от Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Стойност на управлявания от Android ПИН код:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Извличането на ПИН кода не бе успешно"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"Защита на SIM картата от кражба"</string>
-    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"ПИН кодът за SIM картата се управлява от Android"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"ПИН кодът за SIM картата се управлява ръчно"</string>
-    <!-- no translation found for sim_protection_mode_lskf_required (3092348651156624481) -->
+    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
     <skip />
+    <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"ПИН кодът за SIM картата се управлява от Android"</string>
+    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
+    <skip />
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"За автоматичната защита на SIM картата се изисква опция за заключване на екрана. В момента е налице само ръчната защита"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Въведете текущия ПИН код за SIM картата"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Въведете текущия ПИН код за SIM картата"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"Ползване на осн. настройка на оператора"</string>
-    <!-- no translation found for choose_sim_pin_protection_mode (3008087116785955704) -->
-    <skip />
-    <!-- no translation found for sim_pin_protection_mode_manual (6394394529094030608) -->
-    <skip />
-    <!-- no translation found for sim_pin_protection_mode_automatic (7382457994105124365) -->
-    <skip />
-    <!-- no translation found for provide_new_sim_pin_title (7858611936347465648) -->
-    <skip />
-    <!-- no translation found for confirm_new_sim_pin_title (8260672663421256888) -->
-    <skip />
-    <!-- no translation found for confirm_new_sim_pin_after_mismatch (8358717933025894071) -->
-    <skip />
-    <!-- no translation found for enter_current_sim_pin_after_mismatch (6910905505364979098) -->
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"Изберете режим на защита на SIM картата"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"Ръчно"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"Автоматично (управлява се от Android)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"Нов ПИН код за SIM картата"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Потвърждаване на новия ПИН код за SIM картата"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"ПИН кодовете не съвпадат. Потвърдете новия ПИН код за SIM картата."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Грешен ПИН код. Оставащи опити: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
+    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
     <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"Да се използва ли <xliff:g id="CARRIER">%1$s</xliff:g> за моб. данни?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Използвате <xliff:g id="CARRIER2_0">%2$s</xliff:g> за мобилни данни. Ако превключите към <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> вече няма да се използва за мобилни данни."</string>
@@ -1836,6 +1844,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Не се разрешават промени в установяването на часовата зона чрез местоположението"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Ако местоположението на устройството ви е налице, то може да се използва за задаване на часовата ви зона"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Известия"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Промяна на часовата зона"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Получаване на известие, когато часовата ви зона бъде актуализирана автоматично"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"известие, час, зона, часова зона"</string>
@@ -2120,9 +2130,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"Език и регион"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Клавиатура"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Нямате разрешение за промяна на езика на устройството."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Езици и въвеждане"</string>
     <string name="input_assistance" msgid="3437568284144952104">"Инструменти"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"Клавиатура и методи за въвеждане"</string>
     <string name="system_language" msgid="1146762166579643257">"Системни езици"</string>
     <string name="phone_language" msgid="5986939176239963826">"Езици"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2131,7 +2139,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"Автоматични главни букви"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"Прави всяка първа буква на изреченията главна"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"Автоматично поставяне на пунктуация"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"Настройки за физическа клавиатура"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Натискане на интервал два пъти, за вмъкване на „.“"</string>
     <string name="show_password" msgid="7101900779571040117">"Показване на паролите"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Кратко показване на знаците, докато пишете"</string>
@@ -2142,13 +2149,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Тази програма за проверка на правописа може да събира целия въвеждан от вас текст, включително лични данни, като пароли и номера на кредитни карти. Тя произлиза от приложението <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Искате ли да я активирате?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Настройки"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Език"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Клавиатури"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Показване на клавиша за превключване на клавиатурата"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Разрешаване на показването на бутона за превключване на клавиатурата в лентата за навигация, когато е избрано поле за въвеждане"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Екранна клавиатура"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Налична екранна клавиатура"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"Управление на екранните клавиатури"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Опции"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Достъпност"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Физическа клавиатура"</string>
@@ -2208,9 +2213,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Бърза"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Бавна"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Преглед на клавишните комбинации"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Показване на списък с клавишните комбинации"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Клавиатури и инструменти за служебния потр. профил"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Екранна клавиатура за работа"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"По подразбиране"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"Контролер за игри"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Персонализирайте действията, задействани от бутоните на контролера ви"</string>
@@ -2329,7 +2332,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"Увеличаване на честотата на повторение"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"Намаляване на честотата на повторение"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Подредба: <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"По подразбиране"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Автоматично: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Избрано от потребителя: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Говор"</string>
@@ -2343,10 +2345,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Контролер за игри"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Пренасочване на вибрирането"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Пренасочване на вибрирането към контролера за игри, когато е свързан"</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"Избор на клавиатурна подредба"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"Настройка на клавиатурните подредби"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"За превключване натиснете „Ctrl“-интервал"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"По подразбиране"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Клавиатурни подредби"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Подредби на физически клавиатури"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Личен речник"</string>
@@ -2394,7 +2392,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Можете да персонализирате устройството така, че да отговаря на нуждите ви. Тези функции за достъпност могат да бъдат променени по-късно от „Настройки“."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Промяна на размера на шрифта"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Екранен четец"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"Опции за физическата клавиатура"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Надписи"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Аудио"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Общи"</string>
@@ -2620,7 +2617,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Разширена тъмна тема"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Настройки за разширената тъмна тема"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Отваряне на настройките за разширената тъмна тема"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"Разгънатата тъмна тема може да подобри четимостта, но е възможно някои приложения да се показват неправилно.\n\nПриложенията, за които тази настройка е изключена, ще използват стандартната опция за тъмна тема."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Премахване на анимациите"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Намаляване на движенията по екрана"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Мигане на текстовия курсор"</string>
@@ -2760,7 +2758,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Контроли за слуховия апарат"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Звуци"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Известия"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"Мелодии и будилници"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Звуците ще се възпроизвеждат чрез слуховите апарати"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"Звуците ще се възпроизвеждат чрез високоговорителя на устройството"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Звуците ще се възпроизвеждат чрез слуховите апарати и високоговорителя на устройството"</string>
@@ -3128,7 +3125,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"Въвеждане и синтезиране на глас"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"Настройки за въвеждане и синтезиране на глас"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"Гласово търсене"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"Клавиатура на Android"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"Настройки за гласово въвеждане"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"Гласово въвеждане"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Услуги за гласово въвеждане"</string>
@@ -3675,6 +3671,8 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"известие за Wi‑Fi, известие за wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"пренос на данни"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Използване на 24-часов формат"</string>
+    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
+    <skip />
     <string name="keywords_app_default" msgid="8977706259156428770">"Отваряне чрез"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Приложения"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"часова зона"</string>
@@ -3795,6 +3793,10 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Силата на звука на известията е спряна. При известия ще се вибрира"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"Звукът на „<xliff:g id="VOLUME_TYPE">%1$s</xliff:g>“ е спрян"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Не е налице, защото звъненето е спряно"</string>
+    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
+    <skip />
+    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"Мелодия на телефона"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Стандартен звук за известяване"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Звук от приложението"</string>
@@ -4546,8 +4548,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Предпочитания за USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB се контролира от"</string>
-    <!-- no translation found for usb_connected_devices (535238470176122197) -->
-    <skip />
+    <string name="usb_connected_devices" msgid="535238470176122197">"Свързани устройства"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"свързаното устройство"</string>
     <string name="usb_control_device" msgid="527916783743021577">"това устройство"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Превключва се…"</string>
@@ -4564,10 +4565,8 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP и осигуряване на захранване"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI и осигуряване на захранване"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"Уебкамера и осигуряване на захранване"</string>
-    <!-- no translation found for usb_device_name_unknown_with_manufacturer_name (9075986054227881069) -->
-    <skip />
-    <!-- no translation found for usb_device_name_unknown_with_vendor_id_and_product_id (8750941211592531562) -->
-    <skip />
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"Неизвестно устройство от <xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g>"</string>
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"Неизвестно устройство [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Проверка на заден план"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Използване на текста от екрана"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Разрешаване на помощното приложение да осъществява достъп до текстовото съдържание на екрана"</string>
@@ -4621,11 +4620,23 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Може да осъществява достъп до всички файлове"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Автоматизиране на екрана"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Това приложение ще може да вижда съдържанието на екрана на други приложения и да взаимодейства с него, за да ви помага да изпълнявате задачи дори когато приложенията са на заден план"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
+    <skip />
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Ако не разрешите автоматизирането на екрана, <xliff:g id="ID_1">%1$s</xliff:g> пак може да взаимодейства с приложенията, свързани с(ъс) <xliff:g id="ID_2">%1$s</xliff:g>, по други начини"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Разрешаване на приложенията да ви помагат да изпълнявате задачи, като взаимодействат със съдържанието на екрана на други приложения"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Извеждане на запитване всеки път"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Разрешаване винаги"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Забраняване"</string>
+    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Известия на цял екран"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Разрешаване на известията на цял екран от това приложение"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Разрешаване на това приложение да показва известия, които заемат целия екран, когато устройството е заключено. Приложенията могат да ги използват, за да открояват будилници, входящи обаждания или други спешни известия."</string>
@@ -6209,4 +6220,12 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Устройството ви не е регистрирано за функцията „SOS чрез сателит“. Уверете се, че имате връзка с интернет, така че то да завърши регистрацията автоматично"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Активиране на услугата за инсталиране на уеб приложения"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Активирайте тази услуга, за да инсталирате уебсайтове директно на началния си екран и да ги използвате като обикновени приложения."</string>
+    <!-- no translation found for access_hid_title (3937436196813998587) -->
+    <skip />
+    <!-- no translation found for permit_access_hid (870824396872060949) -->
+    <skip />
+    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
+    <skip />
+    <!-- no translation found for keywords_access_hid (682455265293135353) -->
+    <skip />
 </resources>
