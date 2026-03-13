@@ -16,21 +16,23 @@
 
 package com.android.settings
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_FORWARD_RESULT
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Process
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
-import com.android.settings.SettingsLaunchpadActivity.Companion.EXTRA_HIGHLIGHT_KEY
 import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolineIntent
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.core.SubSettingLauncher
 import com.android.settings.spa.SpaActivity.Companion.getSpaActivityIntent
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
-import com.android.settings.utils.unflattenBundles
 import com.android.settingslib.core.instrumentation.Instrumentable.METRICS_CATEGORY_UNKNOWN
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
@@ -39,8 +41,6 @@ import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
-import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_ARGS
-import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_KEY
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider
 import com.android.settingslib.metadata.ValidatedKeyParameters
@@ -72,23 +72,42 @@ import kotlinx.coroutines.runBlocking
  * - **[EXTRA_HIGHLIGHT_KEY] (String, Optional):** The key of a preference to scroll to and
  *   highlight within the target screen.
  */
-class SettingsLaunchpadActivity : Activity() {
+open class SettingsLaunchpadActivity : Activity() {
+
+    companion object {
+        const val EXTRA_SCREEN_KEY = "screen_key"
+        const val EXTRA_SCREEN_ARGS = "screen_args"
+        const val EXTRA_HIGHLIGHT_KEY = "highlight_key"
+
+        private const val TAG = "SettingsLaunchpad"
+
+        /** Permissions that allow a caller to enter this trampoline activity. */
+        private val USE_TRAMPOLINE_PERMISSIONS =
+            listOf(
+                Manifest.permission.READ_SYSTEM_PREFERENCES,
+                Manifest.permission.EXECUTE_APP_FUNCTIONS,
+            )
+
+        /** Permissions that allow a caller to bypass screen-specific permission checks. */
+        private val TRUSTED_SCREEN_BYPASS_PERMISSIONS =
+            listOf(Manifest.permission.EXECUTE_APP_FUNCTIONS)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (isFinishing) return
 
-        if (!checkCallerPermission()) {
-            val callingPackage = callingPackage ?: "unknown"
-            Log.w(TAG, "Permission check failed for caller: $callingPackage")
+        try {
+            if (!checkCallerPermission()) {
+                val callingPackage = getLaunchedFromPackage() ?: "unknown"
+                Log.w(TAG, "Permission check failed for caller: $callingPackage")
+                return
+            }
+
+            processIntentAndLaunch()
+        } finally {
             finish()
-            return
         }
-
-        // Transform raw string extras back into Bundles before any processing
-        intent.unflattenBundles()
-
-        processIntentAndLaunch()
-        finish()
     }
 
     private fun processIntentAndLaunch() {
@@ -96,10 +115,8 @@ class SettingsLaunchpadActivity : Activity() {
             intent.getStringExtra(EXTRA_SCREEN_KEY)
                 ?: intent.getStringExtra(EXTRA_FRAGMENT_ARG_KEY)?.let {
                     // update the high light key from the search result intent
-                    intent.putExtra(
-                        EXTRA_HIGHLIGHT_KEY,
-                        PreferenceSearchIndexablesProvider.getHighlightKey(it),
-                    )
+                    val searchHighlightKey = PreferenceSearchIndexablesProvider.getHighlightKey(it)
+                    intent.putExtra(EXTRA_HIGHLIGHT_KEY, searchHighlightKey)
                     PreferenceSearchIndexablesProvider.getScreenKey(it)
                 }
 
@@ -108,6 +125,7 @@ class SettingsLaunchpadActivity : Activity() {
             return
         }
 
+        val highlightKey = intent.getStringExtra(EXTRA_HIGHLIGHT_KEY)
         val screenArgsBundle = intent.getBundleExtra(EXTRA_SCREEN_ARGS)
         val screenCoordinate = createScreenCoordinate(screenKey, screenArgsBundle)
 
@@ -124,6 +142,22 @@ class SettingsLaunchpadActivity : Activity() {
             if (!checkScreenFlag) { // Do not launch the screen if flag is disabled.
                 Log.w(TAG, "Screen flag is disabled for key '$screenKey'. Aborting launch.")
                 return
+            }
+
+            // Check screen-specific permissions unless the caller holds trusted system-level
+            // permissions.
+            val launchedUid = getLaunchedFromUid()
+            val isTrustedCaller =
+                TRUSTED_SCREEN_BYPASS_PERMISSIONS.any { permission ->
+                    validatePermission(permission, launchedUid) == PackageManager.PERMISSION_GRANTED
+                }
+
+            if (!isTrustedCaller) {
+                val screenPermissions = screenMetadata.screenPermissions
+                if (screenPermissions != null && !screenPermissions.check(this, -1, launchedUid)) {
+                    Log.w(TAG, "Caller does not have required permissions for screen: $screenKey")
+                    return
+                }
             }
 
             val opContext =
@@ -185,23 +219,27 @@ class SettingsLaunchpadActivity : Activity() {
             return
         }
 
-        launchFragment(fragmentClass.name, screenKey, screenArgsBundle, screenMetadata)
+        launchFragment(
+            fragmentClass.name,
+            screenKey,
+            args = screenArgsBundle,
+            highlightKey = highlightKey,
+            metadata = screenMetadata,
+        )
     }
 
     private fun launchFragment(
         fragmentClass: String,
         key: String,
         args: Bundle?,
+        highlightKey: String?,
         metadata: PreferenceScreenMetadata,
     ) {
         val launchArgs =
             Bundle().apply {
                 putString(EXTRA_BINDING_SCREEN_KEY, key)
                 putBundle(EXTRA_BINDING_SCREEN_ARGS, args)
-                putString(
-                    EXTRA_FRAGMENT_ARG_KEY,
-                    intent.getStringExtra(EXTRA_HIGHLIGHT_KEY),
-                )
+                putString(EXTRA_FRAGMENT_ARG_KEY, highlightKey)
 
                 // add all values from the launchScreenExtra to this bundle
                 val launchScreenExtra = intent.getBundleExtra(EXTRA_LAUNCH_SCREEN)
@@ -244,13 +282,12 @@ class SettingsLaunchpadActivity : Activity() {
             is PreferencesApiScreen -> metadata.topLevelSettingsCategory.value
             is PreferenceScreenMixin ->
                 metadata.highlightMenuKey.takeIf { it != 0 }?.let { getString(it) }
-
             else -> null
         }
 
     private fun shouldLaunchDeepLinkTrampoline(): Boolean {
         return ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) &&
-                !ActivityEmbeddingUtils.isAlreadyEmbedded(this)
+            !ActivityEmbeddingUtils.isAlreadyEmbedded(this)
     }
 
     private fun createScreenCoordinate(
@@ -260,7 +297,7 @@ class SettingsLaunchpadActivity : Activity() {
         val screenCoordinate =
             if (
                 CatalystFlagProviderFactory.catalystUseKeyParameters() &&
-                PreferenceScreenRegistry.isParameterized(this, screenKey)
+                    PreferenceScreenRegistry.isParameterized(this, screenKey)
             ) {
                 PreferenceScreenCoordinate(
                     screenKey,
@@ -272,21 +309,40 @@ class SettingsLaunchpadActivity : Activity() {
         return screenCoordinate
     }
 
-    /** A dummy function to check caller's permission. */
+    /** A function to check caller's permission. */
     private fun checkCallerPermission(): Boolean {
-        // TODO: Implement real permission check.
+        val launchedFromPackage = getLaunchedFromPackage()
+        val launchedFromUid = getLaunchedFromUid()
 
-        // Get the UID of the calling process.
-        // If the caller is the system or the app itself, allow it.
+        if (launchedFromPackage == null) {
+            Log.w(
+                TAG,
+                "launchedFromPackage is null. " +
+                    "Callers must use ActivityOptions.setShareIdentityEnabled(true).",
+            )
+            return false
+        }
 
-        // check permission
-        // check signature
-        return true
+        // If the caller is the app itself or a PCC isolated process of the app, allow it.
+        if (PccAwareUidComparator.isSameApp(this, Process.myUid(), launchedFromUid)) {
+            return true
+        }
+
+        return USE_TRAMPOLINE_PERMISSIONS.any { permission ->
+            validatePermission(permission, launchedFromUid) == PackageManager.PERMISSION_GRANTED
+        }
     }
 
-    companion object {
-        const val EXTRA_HIGHLIGHT_KEY = "highlight_key"
-
-        private const val TAG = "SettingsLaunchpad"
+    /** A helper method to validate permissions. This is made open for testing purposes. */
+    @VisibleForTesting
+    open fun validatePermission(permission: String, uid: Int): Int {
+        return checkPermission(permission, -1, uid)
     }
+
+    /** Returns the package name of the application that launched this activity. */
+    @VisibleForTesting
+    override fun getLaunchedFromPackage(): String? = super.getLaunchedFromPackage()
+
+    /** Returns the UID of the application that launched this activity. */
+    @VisibleForTesting override fun getLaunchedFromUid(): Int = super.getLaunchedFromUid()
 }

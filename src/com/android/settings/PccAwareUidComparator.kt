@@ -34,7 +34,12 @@ object PccAwareUidComparator {
 
     private fun getAppUid(context: Context, uid: Int): Int {
         if (Flags.enablePccFrameworkSupport() && Process.isPrivateComputeCoreUid(uid)) {
-            val appUid = context.packageManager.getAppUidForPrivateComputeCoreUid(uid)
+            val appUid =
+                try {
+                    context.packageManager.getAppUidForPrivateComputeCoreUid(uid)
+                } catch (e: Exception) {
+                    Process.INVALID_UID
+                }
             // A result of INVALID_UID (-1) indicates an invalid mapping.
             // Fall back to the original UID for the comparison.
             if (appUid != Process.INVALID_UID) {
