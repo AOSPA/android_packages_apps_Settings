@@ -299,6 +299,62 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
+    public void onBatteryLevelDataUpdate_validIndexes_keepSelectedIndex() {
+        final BatteryLevelData batteryLevelData =
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0);
+        final int
+                dailyChartSlotCount =
+                batteryLevelData.getDailyBatteryLevels().getLevels().size() - 1;
+        final int hourlyChartSlotCountOfLastDay =
+                batteryLevelData.getHourlyBatteryLevelsPerDay().get(
+                        dailyChartSlotCount - 1).getLevels().size() - 1;
+
+        mBatteryChartPreferenceController.mDailyChartIndex = dailyChartSlotCount - 1;
+        mBatteryChartPreferenceController.mHourlyChartIndex = hourlyChartSlotCountOfLastDay - 1;
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex).isEqualTo(
+                dailyChartSlotCount - 1);
+        assertThat(mBatteryChartPreferenceController.mHourlyChartIndex).isEqualTo(
+                hourlyChartSlotCountOfLastDay - 1);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_dailyIndexOutOfBound_dailyChartSelectAll() {
+        final BatteryLevelData batteryLevelData =
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0);
+
+        mBatteryChartPreferenceController.mDailyChartIndex =
+                batteryLevelData.getDailyBatteryLevels().getLevels().size() - 1;
+        mBatteryChartPreferenceController.mHourlyChartIndex = 1;
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex)
+                .isEqualTo(SELECTED_INDEX_ALL);
+        assertThat(mBatteryChartPreferenceController.mHourlyChartIndex).isEqualTo(1);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_hourlyIndexOutOfBound_hourlyChartSelectAll() {
+        final BatteryLevelData batteryLevelData =
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0);
+        final int dailyChartSlotCount =
+                batteryLevelData.getDailyBatteryLevels().getLevels().size() - 1;
+        final int hourlyChartSlotCountOfLastDay =
+                batteryLevelData.getHourlyBatteryLevelsPerDay().get(
+                        dailyChartSlotCount - 1).getLevels().size() - 1;
+
+        mBatteryChartPreferenceController.mDailyChartIndex = dailyChartSlotCount - 1;
+        mBatteryChartPreferenceController.mHourlyChartIndex = hourlyChartSlotCountOfLastDay;
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex).isEqualTo(
+                dailyChartSlotCount - 1);
+        assertThat(mBatteryChartPreferenceController.mHourlyChartIndex)
+                .isEqualTo(SELECTED_INDEX_ALL);
+    }
+
+    @Test
     public void onBatteryLevelDataUpdate_oneDay_showHourlyChartOnly() {
         doReturn(View.GONE).when(mHourlyChartView).getVisibility();
 
