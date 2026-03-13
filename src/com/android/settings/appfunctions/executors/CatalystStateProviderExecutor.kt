@@ -18,7 +18,6 @@ package com.android.settings.appfunctions.executors
 
 import android.app.appsearch.GenericDocument
 import android.content.Context
-import android.content.Intent
 import android.os.BaseBundle
 import android.os.Process
 import android.provider.Settings
@@ -27,7 +26,6 @@ import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.deviceinfo.imei.ImeiPreference
-import com.android.settings.utils.flattenBundles
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
@@ -39,7 +37,6 @@ import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
-import com.android.settingslib.metadata.getTrampolinedLaunchIntent
 import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
@@ -192,15 +189,10 @@ class CatalystStateProviderExecutor(
         val descriptionPrefix = if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else ""
         val description = descriptionPrefix + basicDescription + descriptionSuffix
 
-        val launchingIntent = screenMetaData.getTrampolinedLaunchIntent(context, null)?.apply {
-            // Use flattenBundles since launchingIntent.toUri drops the bundles
-            flattenBundles()
-        }
         val states =
             PerScreenDeviceStates(
                 description = description,
                 deviceStateItems = deviceStateItemList,
-                intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
             )
 
         return states
