@@ -114,4 +114,4 @@ public class DoubleTapPowerForCameraPreferenceController extends BasePreferenceC
         DoubleTapPowerSettingsUtils.unregisterObserver(mContext, mSettingsObserver);
     }
 }
-// LINT.ThenChange(DoubleTapPowerForCameraPreference.kt)
+// LINT.ThenChange(DoubleTapPowerApiFirstScreen.kt)

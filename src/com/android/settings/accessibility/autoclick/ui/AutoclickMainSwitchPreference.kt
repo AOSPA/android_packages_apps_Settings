@@ -27,6 +27,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 class AutoclickMainSwitchPreference :
@@ -61,6 +62,9 @@ class AutoclickMainSwitchPreference :
                 true
             }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     private fun isGestureNavigationEnabled(context: Context): Boolean =
         SettingsSecureStore.get(context).getInt(Secure.NAVIGATION_MODE) == NAV_BAR_MODE_GESTURAL

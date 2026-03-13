@@ -588,6 +588,23 @@ public final class BatteryDiffEntryTest {
         assertThat(entry.getPackageName()).isEqualTo(expectedPackageName);
     }
 
+    @Test
+    public void testClone_withDataError_skipCopyErrorField() {
+        final BatteryDiffEntry entry =
+                createBatteryDiffEntry(
+                        ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                        /* uid= */ 123,
+                        /* isHidden= */ false);
+        entry.mDataMetadata =  new BatteryDiffEntry.DataMetadata(
+                List.of(DataErrorType.ERROR_TYPE_UNKNOWN),
+                "ERROR_MSG"
+        );
+
+        final BatteryDiffEntry clonedEntry = entry.clone();
+        assertThat(clonedEntry.mUid).isEqualTo(123L);
+        assertThat(clonedEntry.mDataMetadata).isNull();
+    }
+
     private BatteryDiffEntry createBatteryDiffEntry(int consumerType, long uid, boolean isHidden) {
         return new BatteryDiffEntry(
                 mContext,

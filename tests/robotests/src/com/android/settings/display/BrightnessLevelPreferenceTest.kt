@@ -30,6 +30,7 @@ import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
+// LINT.IfChange
 @RunWith(AndroidJUnit4::class)
 class BrightnessLevelPreferenceTest {
     private var context = ApplicationProvider.getApplicationContext<Context>()
@@ -60,3 +61,4 @@ class BrightnessLevelPreferenceTest {
         assertThat(preference.isAvailable(context)).isFalse()
     }
 }
+// LINT.ThenChange(BrightnessLevelPreferenceControllerTest.java, DisplayApiScreenTest.kt)

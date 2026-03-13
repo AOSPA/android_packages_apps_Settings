@@ -88,6 +88,10 @@ public final class DatabaseUtils {
     /** A table name for battery usage slot. */
     public static final String BATTERY_USAGE_SLOT_TABLE = "BatteryUsageSlot";
 
+    /** A table name for battery usage slots before the query timestamp. */
+    public static final String BATTERY_USAGE_SLOT_BEFORE_TIMESTAMP_MS_TABLE =
+            "BatteryUsageSlotBeforeTimestamp";
+
     /** A path name for last full charge time query. */
     public static final String LAST_FULL_CHARGE_TIMESTAMP_PATH = "lastFullChargeTimestamp";
 
@@ -98,7 +102,7 @@ public final class DatabaseUtils {
     public static final String APP_USAGE_LATEST_TIMESTAMP_PATH = "appUsageLatestTimestamp";
 
     /** Key for query parameter timestamp used in BATTERY_CONTENT_URI */
-    public static final String QUERY_KEY_TIMESTAMP = "timestamp";
+    public static final String QUERY_KEY_TIMESTAMP_MS = "timestamp";
 
     /** Key for query parameter userid used in APP_USAGE_EVENT_URI */
     public static final String QUERY_KEY_USERID = "userid";
@@ -204,7 +208,7 @@ public final class DatabaseUtils {
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(AUTHORITY)
                         .appendPath(APP_USAGE_EVENT_TABLE)
-                        .appendQueryParameter(QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .appendQueryParameter(QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
                         .appendQueryParameter(QUERY_KEY_USERID, queryUserIdString)
                         .build();
 
@@ -241,7 +245,7 @@ public final class DatabaseUtils {
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(AUTHORITY)
                         .appendPath(BATTERY_EVENT_TABLE)
-                        .appendQueryParameter(QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .appendQueryParameter(QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
                         .appendQueryParameter(
                                 QUERY_BATTERY_EVENT_TYPE, queryBatteryEventTypesString)
                         .build();
@@ -272,7 +276,7 @@ public final class DatabaseUtils {
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(AUTHORITY)
                         .appendPath(BATTERY_USAGE_SLOT_TABLE)
-                        .appendQueryParameter(QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .appendQueryParameter(QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
                         .build();
 
         final List<BatteryUsageSlot> batteryUsageSlotList =
@@ -319,7 +323,7 @@ public final class DatabaseUtils {
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(AUTHORITY)
                         .appendPath(BATTERY_STATE_LATEST_TIMESTAMP_PATH)
-                        .appendQueryParameter(QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .appendQueryParameter(QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
                         .build();
         final long batteryStateLatestTimestamp =
                 loadLongFromContentProvider(
@@ -348,7 +352,7 @@ public final class DatabaseUtils {
                         .scheme(ContentResolver.SCHEME_CONTENT)
                         .authority(AUTHORITY)
                         .appendPath(BATTERY_STATE_TABLE)
-                        .appendQueryParameter(QUERY_KEY_TIMESTAMP, Long.toString(queryTimestamp))
+                        .appendQueryParameter(QUERY_KEY_TIMESTAMP_MS, Long.toString(queryTimestamp))
                         .build();
 
         final List<BatteryHistEntry> batteryHistEntryList =

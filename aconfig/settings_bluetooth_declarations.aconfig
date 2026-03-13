@@ -87,3 +87,13 @@ flag {
       purpose: PURPOSE_BUGFIX
   }
 }
+
+flag {
+  name: "enable_dialog_for_user_initiated_android_auto_disconnect"
+  namespace: "cross_device_experiences"
+  description: "Show a confirmation dialog before disconnecting an Android Auto device from bluetooth."
+  bug: "481187402"
+  metadata {
+      purpose: PURPOSE_BUGFIX
+  }
+}

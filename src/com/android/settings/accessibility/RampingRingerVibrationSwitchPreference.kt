@@ -28,6 +28,7 @@ import com.android.settings.Utils
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
@@ -101,6 +102,9 @@ class RampingRingerVibrationSwitchPreference(
         }
         return true
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     /** Telephony config wrapper for testing. */
     interface TelephonyConfigProvider {

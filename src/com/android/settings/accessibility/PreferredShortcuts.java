@@ -17,6 +17,8 @@
 package com.android.settings.accessibility;
 
 import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.GESTURE;
+import static com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.SOFTWARE;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -75,7 +77,18 @@ public final class PreferredShortcuts {
         }
 
         if (type == DEFAULT) {
-            return defaultTypes;
+            type = defaultTypes;
+        }
+
+        if (Flags.preferredShortcutFiltersNavigationMode()) {
+            // GESTURE is only usable in gesture navigation mode.
+            if ((type & UserShortcutType.GESTURE) == UserShortcutType.GESTURE
+                    && !AccessibilityUtil.isGestureNavigateEnabled(context)) {
+                // Replace GESTURE with SOFTWARE
+                type = type & ~GESTURE;
+                type = type | SOFTWARE;
+            }
+            // SOFTWARE is usable in all navigation modes.
         }
 
         return type;

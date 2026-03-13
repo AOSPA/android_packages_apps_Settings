@@ -35,6 +35,7 @@ class EditNavButtonShortcutController(
         with(metadata) {
             item.summary = getSummary(context)
             item.imageResId = R.drawable.accessibility_shortcut_type_navbar
+            item.isVisible = isAvailable(context)
         }
     }
 

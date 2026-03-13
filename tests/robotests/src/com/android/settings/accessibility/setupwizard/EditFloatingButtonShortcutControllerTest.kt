@@ -21,13 +21,15 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.setupwizard.items.IllustrationCheckBoxItem
+import com.android.settings.testutils.AccessibilityTestUtils
 import com.google.common.truth.Truth.assertThat
+import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.robolectric.RobolectricTestParameterInjector
 
 /** Tests for [EditFloatingButtonShortcutController]. */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(RobolectricTestParameterInjector::class)
 class EditFloatingButtonShortcutControllerTest {
 
     private val appContext: Application = ApplicationProvider.getApplicationContext()
@@ -49,6 +51,33 @@ class EditFloatingButtonShortcutControllerTest {
         controller.bindData(item)
 
         assertThat(item.imageRawResId).isEqualTo(R.raw.accessibility_shortcut_type_fab)
+    }
+
+    @TestParameters(
+        value =
+            [
+                "{gestureNavEnabled: false, floatingButtonEnabled: false, expectedValue: false}",
+                "{gestureNavEnabled: false, floatingButtonEnabled: true, expectedValue: true}",
+                "{gestureNavEnabled: true, floatingButtonEnabled: false, expectedValue: true}",
+                "{gestureNavEnabled: true, floatingButtonEnabled: true, expectedValue: true}",
+            ]
+    )
+    @Test
+    fun bindData_updatesItemVisibility(
+        gestureNavEnabled: Boolean,
+        floatingButtonEnabled: Boolean,
+        expectedValue: Boolean,
+    ) {
+        AccessibilityTestUtils.setSoftwareShortcutMode(
+            appContext,
+            gestureNavEnabled,
+            floatingButtonEnabled,
+        )
+        val controller = createController(setOf(MAGNIFICATION_CONTROLLER_NAME))
+
+        controller.bindData(item)
+
+        assertThat(item.isVisible).isEqualTo(expectedValue)
     }
 
     /** Creates the controller and its associated store. */
