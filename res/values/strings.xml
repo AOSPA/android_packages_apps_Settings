@@ -11512,6 +11512,12 @@
     <!-- Summary of apps [CHAR LIMIT=NONE] -->
     <string name="apps_summary"><xliff:g id="count" example="24">%1$d</xliff:g> apps installed</string>
 
+    <!-- Format for the percentage part of storage summary. [CHAR LIMIT=10] -->
+    <string name="storage_percentage_format"
+        translation_description="Percentage of storage used (e.g., 16%). For RTL languages like Persian, ensure the percentage symbol is correctly placed on the visual left of the numeral.">
+        <xliff:g id="percentage" example="16%">%1$s%%</xliff:g>
+    </string>
+
     <!-- Summary of storage usage [CHAR LIMIT=NONE] -->
     <string name="storage_toplevel_summary"><xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
 
