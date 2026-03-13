@@ -214,6 +214,7 @@ import com.android.settings.supervision.webcontentfilters.SupervisionWebContentF
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersSearchSupportedAppsScreen
 import com.android.settings.system.ResetDashboardScreen
 import com.android.settings.system.SystemDashboardScreen
+import com.android.settings.tts.TextToSpeechApiScreen
 import com.android.settings.users.UserDetailsSettingsScreenApi
 import com.android.settings.users.UserSettingsScreenApi
 import com.android.settings.vpn2.VpnSettingsScreen
@@ -692,4 +693,5 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = CellularSecurityScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TextToSpeechApiScreen.KEY),
     )
