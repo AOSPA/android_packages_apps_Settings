@@ -331,11 +331,15 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     }
 
     private void showFooterPreference(boolean isAllBatteryUsageEmpty) {
-        mFooterPreference.setTitle(
-                mPrefContext.getString(
-                        isAllBatteryUsageEmpty
-                                ? R.string.battery_usage_screen_footer_empty
-                                : R.string.battery_usage_screen_footer));
+        int titleResId = R.string.battery_usage_screen_footer;
+        if (isAllBatteryUsageEmpty) {
+            titleResId = R.string.battery_usage_screen_footer_empty;
+        } else if (FeatureFactory.getFeatureFactory()
+                    .getPowerUsageFeatureProvider().isBatteryAdvanceInfoEnabled()) {
+            titleResId = R.string.battery_usage_screen_advance_footer;
+        }
+
+        mFooterPreference.setTitle(mPrefContext.getString(titleResId));
         mFooterPreference.setVisible(true);
     }
 
