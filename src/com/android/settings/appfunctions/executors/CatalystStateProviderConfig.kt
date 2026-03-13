@@ -129,7 +129,9 @@ import com.android.settings.dream.DreamSettingsApiScreen
 import com.android.settings.dream.ScreensaverScreen
 import com.android.settings.emergency.EmergencyDashboardScreen
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
+import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedApiScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedScreen
+import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryApiScreen
 import com.android.settings.fuelgauge.batteryusage.PowerUsageSummaryScreen
 import com.android.settings.gestures.ButtonNavigationSettingsScreen
 import com.android.settings.gestures.DoubleTapApiScreen
@@ -340,8 +342,18 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(
             enabled = true,
+            screenKey = PowerUsageSummaryApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY)
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
             screenKey = PowerUsageAdvancedScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = PowerUsageAdvancedApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY)
         ),
         PerScreenCatalystConfig(
             enabled = true,
