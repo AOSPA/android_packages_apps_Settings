@@ -34,6 +34,9 @@ import android.telephony.euicc.EuiccManager
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import java.util.concurrent.atomic.AtomicInteger
+import java.util.function.ToIntFunction
+import java.util.stream.Collectors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -46,13 +49,8 @@ import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.concurrent.atomic.AtomicInteger
-import java.util.function.ToIntFunction
-import java.util.stream.Collectors
 
-class SimOnboardingViewModel(
-    private val application: Application,
-) : AndroidViewModel(application) {
+class SimOnboardingViewModel(private val application: Application) : AndroidViewModel(application) {
 
     data class SimSwitchingInfo(
         val targetSubInfo: SubscriptionInfo,
@@ -97,10 +95,7 @@ class SimOnboardingViewModel(
                 when (_euiccSlotSwitchingState.value) {
                     SwitchingState.COMPLETED -> {
                         // success
-                        Log.i(
-                            TAG,
-                            "Successfully SimSlotMapping. Start to enable/disable esim"
-                        )
+                        Log.i(TAG, "Successfully SimSlotMapping. Start to enable/disable esim")
                         // reset _euiccSlotSwitchingState
                         _euiccSlotSwitchingState.value = SwitchingState.NOT_STARTED
                         // do next action: switchToSubscription
@@ -108,11 +103,8 @@ class SimOnboardingViewModel(
                     }
 
                     SwitchingState.FAILED -> {
-                        //error
-                        Log.i(
-                            TAG,
-                            "Failed to set SimSlotMapping"
-                        )
+                        // error
+                        Log.i(TAG, "Failed to set SimSlotMapping")
                         // reset _euiccSlotSwitchingState
                         _euiccSlotSwitchingState.value = SwitchingState.NOT_STARTED
                         _uiState.value = SwitchingState.FAILED
@@ -131,10 +123,7 @@ class SimOnboardingViewModel(
                 when (_removableSlotSwitchingState.value) {
                     SwitchingState.COMPLETED -> {
                         // success
-                        Log.i(
-                            TAG,
-                            "Successfully switched to removable slot."
-                        )
+                        Log.i(TAG, "Successfully switched to removable slot.")
 
                         // reset _removableSlotSwitchingState
                         _removableSlotSwitchingState.value = SwitchingState.NOT_STARTED
@@ -144,11 +133,8 @@ class SimOnboardingViewModel(
                     }
 
                     SwitchingState.FAILED -> {
-                        //error
-                        Log.i(
-                            TAG,
-                            "Failed to switch to removable slot."
-                        )
+                        // error
+                        Log.i(TAG, "Failed to switch to removable slot.")
 
                         // reset _removableSlotSwitchingState
                         _removableSlotSwitchingState.value = SwitchingState.NOT_STARTED
@@ -171,46 +157,52 @@ class SimOnboardingViewModel(
         }
     }
 
-    fun Application.sidecarReceiverFlow(): Flow<Int> = callbackFlow {
-        val broadcastReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                Log.d(TAG, "onReceive: $intent")
-                if (ACTION_SWITCH_TO_SUBSCRIPTION == intent.action
-                    && euiccOpId == intent.getIntExtra(EXTRA_OP_ID, -1)
-                ) {
-                    Log.d(TAG, "onReceive: onEuiccSimSwitchingCallback $intent")
-                    /* TODO: This relies on our LUI and LPA to coexist, should think about how
-                        to generalize this further. */
-                    var detailedCode =
-                        intent.getIntExtra(
-                            EuiccManager.EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE,
-                            0 /* defaultValue*/
-                        )
-                    Log.d(
-                        TAG,
-                        "Result code : $resultCode; detailed code : $detailedCode"
-                    )
-                    trySend(resultCode)
+    fun Application.sidecarReceiverFlow(): Flow<Int> =
+        callbackFlow {
+                val broadcastReceiver =
+                    object : BroadcastReceiver() {
+                        override fun onReceive(context: Context, intent: Intent) {
+                            Log.d(TAG, "onReceive: $intent")
+                            if (
+                                ACTION_SWITCH_TO_SUBSCRIPTION == intent.action &&
+                                    euiccOpId == intent.getIntExtra(EXTRA_OP_ID, -1)
+                            ) {
+                                Log.d(TAG, "onReceive: sidecarReceiverFlow $intent")
+                                /* TODO: This relies on our LUI and LPA to coexist, should think about how
+                                to generalize this further. */
+                                var detailedCode =
+                                    intent.getIntExtra(
+                                        EuiccManager.EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE,
+                                        0, /* defaultValue*/
+                                    )
+                                Log.d(
+                                    TAG,
+                                    "Result code : $resultCode; detailed code : $detailedCode",
+                                )
+                                trySend(resultCode)
+                            }
+                        }
+                    }
+                Log.d(TAG, "registerReceiver: $ACTION_SWITCH_TO_SUBSCRIPTION")
+
+                application.registerReceiver(
+                    broadcastReceiver,
+                    IntentFilter(ACTION_SWITCH_TO_SUBSCRIPTION),
+                    Manifest.permission.WRITE_EMBEDDED_SUBSCRIPTIONS,
+                    null,
+                    Context.RECEIVER_VISIBLE_TO_INSTANT_APPS,
+                )
+
+                awaitClose {
+                    Log.d(TAG, "unregisterReceiver: $broadcastReceiver")
+                    application.unregisterReceiver(broadcastReceiver)
                 }
             }
-        }
-        Log.d(TAG, "registerReceiver: $ACTION_SWITCH_TO_SUBSCRIPTION")
-
-        application.registerReceiver(
-            broadcastReceiver,
-            IntentFilter(ACTION_SWITCH_TO_SUBSCRIPTION),
-            Manifest.permission.WRITE_EMBEDDED_SUBSCRIPTIONS,
-            null,
-            Context.RECEIVER_VISIBLE_TO_INSTANT_APPS
-        )
-
-        awaitClose {
-            Log.d(TAG, "unregisterReceiver: $broadcastReceiver")
-            application.unregisterReceiver(broadcastReceiver)
-        }
-    }.catch { e ->
-        Log.e(SimOnboardingActivity.Companion.TAG, "Error while sidecarReceiverFlow", e)
-    }.conflate().flowOn(Dispatchers.Default)
+            .catch { e ->
+                Log.e(SimOnboardingActivity.Companion.TAG, "Error while sidecarReceiverFlow", e)
+            }
+            .conflate()
+            .flowOn(Dispatchers.Default)
 
     fun startSimSwitching(targetSubInfo: SubscriptionInfo, removedSubInfo: SubscriptionInfo?) {
         currentSimSwitchingInfo = SimSwitchingInfo(targetSubInfo, removedSubInfo)
@@ -222,13 +214,10 @@ class SimOnboardingViewModel(
                 startEuiccSimSwitching(
                     targetSubInfo.subscriptionId,
                     UiccSlotUtil.INVALID_PORT_ID,
-                    removedSubInfo
+                    removedSubInfo,
                 )
             } else {
-                startRemovableSimSwitching(
-                    UiccSlotUtil.INVALID_PHYSICAL_SLOT_ID,
-                    removedSubInfo
-                )
+                startRemovableSimSwitching(UiccSlotUtil.INVALID_PHYSICAL_SLOT_ID, removedSubInfo)
             }
         }
     }
@@ -239,12 +228,9 @@ class SimOnboardingViewModel(
         }
         callbackIntent = createCallbackIntent(ACTION_SWITCH_TO_SUBSCRIPTION)
 
-        val targetSlot: Int = UiccSlotUtil.getEsimSlotId(application, subId);
+        val targetSlot: Int = UiccSlotUtil.getEsimSlotId(application, subId)
         if (targetSlot < 0) {
-            Log.d(
-                TAG,
-                "There is no esim, the TargetSlot is $targetSlot"
-            )
+            Log.d(TAG, "There is no esim, the TargetSlot is $targetSlot")
             _uiState.value = SwitchingState.FAILED
             return
         }
@@ -264,20 +250,24 @@ class SimOnboardingViewModel(
             TAG,
             String.format(
                 "Set esim into the SubId%d Physical Slot%d:Port%d",
-                subId, targetSlot, targetPortId
-            )
+                subId,
+                targetSlot,
+                targetPortId,
+            ),
         )
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             // If the subId is INVALID_SUBSCRIPTION_ID, disable the esim (the default esim slot
             // which is selected by the framework).
             euiccManager?.switchToSubscription(
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID, targetPortId,
-                callbackIntent
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                targetPortId,
+                callbackIntent,
             )
         } else if (
-            (telephonyManager?.isMultiSimEnabled() == true && removedSubInfo != null
-                    && removedSubInfo.isEmbedded)
-            || isEsimEnabledAtTargetSlotPort(targetSlot, targetPortId)
+            (telephonyManager?.isMultiSimEnabled() == true &&
+                removedSubInfo != null &&
+                removedSubInfo.isEmbedded) ||
+                isEsimEnabledAtTargetSlotPort(targetSlot, targetPortId)
         ) {
             // Case 1: In DSDS mode+MEP, if the replaced esim is active, then the replaced esim
             // should be disabled before changing SimSlotMapping process.
@@ -291,14 +281,12 @@ class SimOnboardingViewModel(
             // 2) Switches the SimSlotMapping if the target slot:port is not active.
             // 3) Enables the target esim.
             // Note: Use INVALID_SUBSCRIPTION_ID to disable the esim profile.
-            Log.d(
-                TAG,
-                "Disable the enabled esim before the settings enables the target esim"
-            )
+            Log.d(TAG, "Disable the enabled esim before the settings enables the target esim")
             isDuringSimSlotMapping = true
             euiccManager?.switchToSubscription(
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID, targetPortId,
-                callbackIntent
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                targetPortId,
+                callbackIntent,
             )
         } else {
             startEuiccSlotSwitching(targetSlot, targetPortId, removedSubInfo)
@@ -313,14 +301,11 @@ class SimOnboardingViewModel(
         activeSubInfos = SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
 
         when {
-            telephonyManager?.isMultiSimEnabled() == false
-                    && activeSubInfos != null
-                    && activeSubInfos!!.stream().anyMatch { it.isEmbedded } -> {
+            telephonyManager?.isMultiSimEnabled() == false &&
+                activeSubInfos != null &&
+                activeSubInfos!!.stream().anyMatch { it.isEmbedded } -> {
                 // In SS mode, the esim is active, then inactivate the esim.
-                Log.i(
-                    TAG,
-                    "There is an active eSIM profile. Disable the profile first."
-                )
+                Log.i(TAG, "There is an active eSIM profile. Disable the profile first.")
 
                 // Use INVALID_SUBSCRIPTION_ID to disable the only active profile.
                 isDuringSimSlotMapping = true
@@ -335,14 +320,14 @@ class SimOnboardingViewModel(
                 Log.i(
                     TAG,
                     "In MEP mode, there is an active eSIM profile. Disable the profile first" +
-                            "($removedSubInfo)"
+                        "($removedSubInfo)",
                 )
 
                 isDuringSimSlotMapping = true
                 startEuiccSimSwitching(
                     SubscriptionManager.INVALID_SUBSCRIPTION_ID,
                     removedSubInfo.portIndex,
-                    null
+                    null,
                 )
             }
 
@@ -356,14 +341,17 @@ class SimOnboardingViewModel(
     suspend fun startEuiccSlotSwitching(
         targetPhysicalSlotId: Int,
         targetPortId: Int,
-        removedSubInfo: SubscriptionInfo?
+        removedSubInfo: SubscriptionInfo?,
     ) {
         _euiccSlotSwitchingState.value = SwitchingState.IN_PROGRESS
         withContext(Dispatchers.Default) {
             try {
                 Log.i(TAG, "Start to switch to euicc slot.")
                 UiccSlotUtil.switchToEuiccSlot(
-                    application, targetPhysicalSlotId, targetPortId, removedSubInfo
+                    application,
+                    targetPhysicalSlotId,
+                    targetPortId,
+                    removedSubInfo,
                 )
                 _euiccSlotSwitchingState.value = SwitchingState.COMPLETED
             } catch (e: UiccSlotsException) {
@@ -375,14 +363,16 @@ class SimOnboardingViewModel(
 
     suspend fun startRemovableSlotSwitching(
         targetPhysicalSlotId: Int,
-        removedSubInfo: SubscriptionInfo?
+        removedSubInfo: SubscriptionInfo?,
     ) {
         _removableSlotSwitchingState.value = SwitchingState.IN_PROGRESS
         withContext(Dispatchers.Default) {
             try {
                 Log.i(TAG, "Start to switch to removable slot.")
                 UiccSlotUtil.switchToRemovableSlot(
-                    application, targetPhysicalSlotId, removedSubInfo
+                    application,
+                    targetPhysicalSlotId,
+                    removedSubInfo,
                 )
                 _removableSlotSwitchingState.value = SwitchingState.COMPLETED
             } catch (e: UiccSlotsException) {
@@ -394,18 +384,14 @@ class SimOnboardingViewModel(
 
     private fun getTargetEuiccPortId(
         physicalEsimSlotIndex: Int,
-        removedSubInfo: SubscriptionInfo?
+        removedSubInfo: SubscriptionInfo?,
     ): Int {
         if (!isMultipleEnabledProfilesSupported(physicalEsimSlotIndex)) {
-            Log.d(
-                TAG,
-                "The slotId$physicalEsimSlotIndex is no MEP, port is 0"
-            )
+            Log.d(TAG, "The slotId$physicalEsimSlotIndex is no MEP, port is 0")
             return 0
         }
 
-        val uiccSlotMappings: Collection<UiccSlotMapping?>? =
-            telephonyManager?.getSimSlotMapping()
+        val uiccSlotMappings: Collection<UiccSlotMapping?>? = telephonyManager?.getSimSlotMapping()
         Log.d(TAG, "The UiccSlotMapping: $uiccSlotMappings")
         telephonyManager?.isMultiSimEnabled()?.let {
             if (!it) {
@@ -414,15 +400,17 @@ class SimOnboardingViewModel(
                 // If there is no esim slot in device, then the esim's port is 0.
                 Log.d(
                     TAG,
-                    "In SS mode, to find the active esim slot's port."
-                            + "If no active esim slot, the port is 0"
+                    "In SS mode, to find the active esim slot's port." +
+                        "If no active esim slot, the port is 0",
                 )
-                return uiccSlotMappings!!.stream()
+                return uiccSlotMappings!!
+                    .stream()
                     .filter { i: UiccSlotMapping? ->
                         i!!.physicalSlotIndex == physicalEsimSlotIndex
                     }
                     .mapToInt { i: UiccSlotMapping? -> i!!.getPortIndex() }
-                    .findFirst().orElse(0)
+                    .findFirst()
+                    .orElse(0)
             }
         }
 
@@ -447,10 +435,14 @@ class SimOnboardingViewModel(
             return port
         }
         val activeEsimSubInfos: MutableList<SubscriptionInfo> =
-            activeSubInfos!!.stream()
+            activeSubInfos!!
+                .stream()
                 .filter { i: SubscriptionInfo? -> i!!.isEmbedded }
-                .sorted(Comparator.comparingInt<SubscriptionInfo?>(ToIntFunction {
-                    obj: SubscriptionInfo? -> obj!!.portIndex }))
+                .sorted(
+                    Comparator.comparingInt<SubscriptionInfo?>(
+                        ToIntFunction { obj: SubscriptionInfo? -> obj!!.portIndex }
+                    )
+                )
                 .collect(Collectors.toList())
 
         // In DSDS+MEP mode, if there is the active esim slot and no active esim at that slot,
@@ -459,14 +451,16 @@ class SimOnboardingViewModel(
         if (activeEsimSubInfos.isEmpty()) {
             Log.d(
                 TAG,
-                "In DSDS+MEP mode, no active esim. return the active esim slot's port."
-                        + "If no active esim slot, the port is 0"
+                "In DSDS+MEP mode, no active esim. return the active esim slot's port." +
+                    "If no active esim slot, the port is 0",
             )
-            return uiccSlotMappings!!.stream()
+            return uiccSlotMappings!!
+                .stream()
                 .filter { i: UiccSlotMapping? -> i!!.physicalSlotIndex == physicalEsimSlotIndex }
                 .mapToInt { i: UiccSlotMapping? -> i!!.portIndex }
                 .sorted()
-                .findFirst().orElse(0)
+                .findFirst()
+                .orElse(0)
         }
 
         for (subscriptionInfo in activeEsimSubInfos) {
@@ -479,11 +473,10 @@ class SimOnboardingViewModel(
 
     private fun isMultipleEnabledProfilesSupported(physicalEsimSlotIndex: Int): Boolean {
         val cardInfos: MutableList<UiccCardInfo?> = telephonyManager.getUiccCardsInfo()
-        return cardInfos.stream()
-            .anyMatch { cardInfo: UiccCardInfo? ->
-                cardInfo!!.physicalSlotIndex == physicalEsimSlotIndex
-                        && cardInfo.isMultipleEnabledProfilesSupported
-            }
+        return cardInfos.stream().anyMatch { cardInfo: UiccCardInfo? ->
+            cardInfo!!.physicalSlotIndex == physicalEsimSlotIndex &&
+                cardInfo.isMultipleEnabledProfilesSupported
+        }
     }
 
     private fun switchEuiccSimAfterSlotReady() {
@@ -496,13 +489,13 @@ class SimOnboardingViewModel(
         Log.d(
             TAG,
             "switchEuiccSimAfterSlotReady: subId${currentSimSwitchingInfo.targetSubId} " +
-                    "port${currentSimSwitchingInfo.targetPortId}"
+                "port${currentSimSwitchingInfo.targetPortId}",
         )
 
         euiccManager?.switchToSubscription(
             currentSimSwitchingInfo.targetSubId,
             currentSimSwitchingInfo.targetPortId,
-            callbackIntent
+            callbackIntent,
         )
     }
 
@@ -515,16 +508,19 @@ class SimOnboardingViewModel(
         }
         if (subscriptionManager?.canDisablePhysicalSubscription() == true) {
             Log.d(
-                TAG, "switchRemovableSimAfterSlotReady: subId${currentSimSwitchingInfo.targetSubId}"
+                TAG,
+                "switchRemovableSimAfterSlotReady: subId${currentSimSwitchingInfo.targetSubId}",
             )
             // TODO: to support disable case.
             subscriptionManager?.setUiccApplicationsEnabled(
-                currentSimSwitchingInfo.targetSubId, /*enabled=*/true
+                currentSimSwitchingInfo.targetSubId,
+                /*enabled=*/ true,
             )
         } else {
             Log.i(
-                TAG, "The device does not support toggling pSIM. It is enough to just "
-                        + "enable the removable slot."
+                TAG,
+                "The device does not support toggling pSIM. It is enough to just " +
+                    "enable the removable slot.",
             )
         }
     }
@@ -534,15 +530,19 @@ class SimOnboardingViewModel(
         if (logicalSlotId == SubscriptionManager.INVALID_SIM_SLOT_INDEX) {
             return false
         }
-        return activeSubInfos != null
-                && activeSubInfos!!.stream()
-            .anyMatch { i: SubscriptionInfo -> i.isEmbedded && i.simSlotIndex == logicalSlotId }
+        return activeSubInfos != null &&
+            activeSubInfos!!.stream().anyMatch { i: SubscriptionInfo ->
+                i.isEmbedded && i.simSlotIndex == logicalSlotId
+            }
     }
 
     private fun getLogicalSlotIndex(physicalSlotIndex: Int, portIndex: Int): Int {
         val slotInfos: Array<UiccSlotInfo?>? = telephonyManager.getUiccSlotsInfo()
-        if (slotInfos != null && physicalSlotIndex >= 0
-            && physicalSlotIndex < slotInfos.size && slotInfos[physicalSlotIndex] != null
+        if (
+            slotInfos != null &&
+                physicalSlotIndex >= 0 &&
+                physicalSlotIndex < slotInfos.size &&
+                slotInfos[physicalSlotIndex] != null
         ) {
             for (portInfo in slotInfos[physicalSlotIndex]!!.ports) {
                 if (portInfo.portIndex == portIndex) {
@@ -559,8 +559,10 @@ class SimOnboardingViewModel(
         val intent = Intent(action)
         intent.putExtra(EXTRA_OP_ID, euiccOpId)
         return PendingIntent.getBroadcast(
-            application, REQUEST_CODE, intent,
-            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            application,
+            REQUEST_CODE,
+            intent,
+            PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE,
         )
     }
 
@@ -568,20 +570,20 @@ class SimOnboardingViewModel(
         Log.d(TAG, "onReceive: onEuiccSimSwitchingCallback $resultCode")
 
         when {
-            resultCode == EuiccManager.EMBEDDED_SUBSCRIPTION_RESULT_OK
-                    && isDuringSimSlotMapping -> {
+            resultCode == EuiccManager.EMBEDDED_SUBSCRIPTION_RESULT_OK &&
+                isDuringSimSlotMapping -> {
                 // Continue to switch the SimSlotMapping, after the esim is disabled.
                 isDuringSimSlotMapping = false
                 if (currentSimSwitchingInfo.isEmbedded) {
                     startEuiccSlotSwitching(
                         currentSimSwitchingInfo.targetPhysicalSlotId,
                         currentSimSwitchingInfo.targetPortId,
-                        currentSimSwitchingInfo.removedSubInfo
+                        currentSimSwitchingInfo.removedSubInfo,
                     )
                 } else {
                     startRemovableSlotSwitching(
                         currentSimSwitchingInfo.targetPhysicalSlotId,
-                        currentSimSwitchingInfo.removedSubInfo
+                        currentSimSwitchingInfo.removedSubInfo,
                     )
                 }
             }
