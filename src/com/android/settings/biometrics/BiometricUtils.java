@@ -30,14 +30,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.hardware.biometrics.BiometricManager;
+import android.hardware.biometrics.SensorLocationInternal;
 import android.hardware.biometrics.SensorProperties;
+import android.hardware.display.DisplayManager;
 import android.hardware.face.FaceManager;
 import android.hardware.face.FaceSensorPropertiesInternal;
+import android.hardware.fingerprint.FingerprintSensorPropertiesInternal;
 import android.os.Bundle;
 import android.os.storage.StorageManager;
 import android.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
+import android.view.Display;
+import android.view.DisplayInfo;
 import android.view.Surface;
 
 import androidx.annotation.NonNull;
@@ -57,6 +62,7 @@ import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.SetupChooseLockGeneric;
 import com.android.settingslib.activityembedding.ActivityEmbeddingUtils;
 import com.android.settingslib.widget.SettingsThemeHelper;
+import com.android.systemui.biometrics.UdfpsUtils;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
@@ -590,5 +596,40 @@ public class BiometricUtils {
 
         return hostActivity.isInMultiWindowMode() &&
                 !ActivityEmbeddingUtils.isActivityEmbedded(hostActivity);
+    }
+
+    /**
+     * Returns true if the device has a low-positioned UDFPS sensor.
+     * On low-positioned UDFPS devices, the sensor is close to the bottom of the screen,
+     * which causes the standard Setup Wizard footer button to overlap the enrollment UI.
+     */
+    public static boolean isLowUdfps(@NonNull Context context,
+            @Nullable FingerprintSensorPropertiesInternal prop) {
+        if (prop == null || !prop.isAnyUdfpsType()) {
+            return false;
+        }
+        Display display = context.getDisplay();
+        if (display == null) {
+            final DisplayManager dm = context.getSystemService(DisplayManager.class);
+            if (dm != null) {
+                display = dm.getDisplay(Display.DEFAULT_DISPLAY);
+            }
+        }
+        if (display == null) {
+            return false;
+        }
+        final DisplayInfo displayInfo = new DisplayInfo();
+        display.getDisplayInfo(displayInfo);
+        final int naturalHeight = displayInfo.getNaturalHeight();
+        if (naturalHeight <= 0) {
+            return false;
+        }
+        final SensorLocationInternal location = prop.getLocation();
+        if (location == null) {
+            return false;
+        }
+        final float scaleFactor = new UdfpsUtils().getScaleFactor(displayInfo);
+        final float scaledSensorY = location.sensorLocationY * scaleFactor;
+        return (scaledSensorY / naturalHeight) >= 0.75f;
     }
 }
