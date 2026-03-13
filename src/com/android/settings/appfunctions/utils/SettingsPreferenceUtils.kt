@@ -17,7 +17,6 @@
 package com.android.settings.appfunctions.utils
 
 import android.content.Context
-import android.service.settings.preferences.SetValueResult
 import android.service.settings.preferences.SettingsPreferenceValue
 import android.util.Log
 import com.android.settings.appfunctions.PreferenceServiceClient
@@ -25,13 +24,17 @@ import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.PreferenceGetterRequest
 import com.android.settingslib.graph.PreferenceGetterResponse
 import com.android.settingslib.graph.PreferenceSetterRequest
+import com.android.settingslib.graph.PreferenceSetterResponse
+import com.android.settingslib.graph.PreferenceSetterResult
 import com.android.settingslib.graph.preferenceValueProto
 import com.android.settingslib.graph.proto.PreferenceProto
+import com.android.settingslib.graph.toPreferenceSetterResponse
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.PreferenceCoordinate
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.SensitivityLevel
+import kotlin.Boolean
 
 private const val TAG = "SettingsPreferenceUtils"
 private const val SETTINGS_PACKAGE_NAME = "com.android.settings"
@@ -123,7 +126,7 @@ suspend fun setPreference(
     key: String,
     value: SettingsPreferenceValue,
     keyParameters: KeyParameters? = null,
-): Int {
+): PreferenceSetterResponse {
     Log.d(TAG, "setPreference started for $screenKey/$key")
     val valueProto =
         when (value.type) {
@@ -132,7 +135,7 @@ suspend fun setPreference(
             SettingsPreferenceValue.TYPE_INT -> preferenceValueProto { intValue = value.intValue }
             SettingsPreferenceValue.TYPE_STRING ->
                 preferenceValueProto { stringValue = value.stringValue }
-            else -> return SetValueResult.RESULT_INVALID_REQUEST
+            else -> return PreferenceSetterResult.INVALID_REQUEST.toPreferenceSetterResponse()
         }
 
     val catalystRequest =
@@ -157,7 +160,7 @@ suspend fun setPreference(
         client.use { it.setPreferenceValue(catalystRequest) }
     } catch (e: Exception) {
         Log.e(TAG, "Error setting preference value", e)
-        SetValueResult.RESULT_INTERNAL_ERROR
+        PreferenceSetterResult.INTERNAL_ERROR.toPreferenceSetterResponse(failureReason = e.message)
     }
 }
 
