@@ -80,6 +80,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
 
     private UdfpsEnrollView mUdfpsEnrollView;
     private View mHeaderView;
+    private TextView mSideSkipTextView;
     private AccessibilityManager mAccessibilityManager;
 
     private ObjectAnimator mHeaderScrollAnimator;
@@ -103,6 +104,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
         super.onFinishInflate();
         mHeaderView = findViewById(com.google.android.setupdesign.R.id.sud_landscape_header_area);
         mUdfpsEnrollView = findViewById(R.id.udfps_animation_view);
+        mSideSkipTextView = findViewById(R.id.side_skip_button);
     }
 
     @Override
@@ -282,14 +284,27 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
         setOnHoverListener();
     }
 
+    void showSideSkipButton(@NonNull View.OnClickListener onClickListener) {
+        if (mIsLandscape || mSideSkipTextView == null) {
+            return;
+        }
+        mSideSkipTextView.setOnClickListener(onClickListener);
+        mSideSkipTextView.setVisibility(View.VISIBLE);
+        mSideSkipTextView.bringToFront();
+    }
+
     void setSecondaryButtonBackground(@ColorInt int color) {
         // Set the button background only when the button is not under udfps overlay to avoid UI
         // overlap.
         if (!mIsLandscape || mShouldUseReverseLandscape) {
             return;
         }
+        final FooterBarMixin footerBarMixin = getMixin(FooterBarMixin.class);
         final Button secondaryButtonView =
-                getMixin(FooterBarMixin.class).getSecondaryButtonView();
+                footerBarMixin != null ? footerBarMixin.getSecondaryButtonView() : null;
+        if (secondaryButtonView == null) {
+            return;
+        }
         secondaryButtonView.setBackgroundColor(color);
         if (mRotation == Surface.ROTATION_90) {
             secondaryButtonView.setGravity(Gravity.START);
