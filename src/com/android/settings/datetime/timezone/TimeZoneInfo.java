@@ -197,4 +197,32 @@ public class TimeZoneInfo {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "TimeZoneInfo{" +
+                "mId='" + mId + '\'' +
+                ", mTimeZone=" + mTimeZone +
+                ", mGenericName='" + mGenericName + '\'' +
+                ", mStandardName='" + mStandardName + '\'' +
+                ", mDaylightName='" + mDaylightName + '\'' +
+                ", mExemplarLocation='" + mExemplarLocation + '\'' +
+                ", mGmtOffset=" + mGmtOffset +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other instanceof TimeZoneInfo that) {
+            return mId.equals(that.mId);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return mId.hashCode();
+    }
 }
