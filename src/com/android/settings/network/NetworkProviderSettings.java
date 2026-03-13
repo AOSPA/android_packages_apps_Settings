@@ -433,8 +433,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         }
         mAirplaneModeEnabler = new AirplaneModeEnabler(getContext(), this);
 
-        // TODO(b/37429702): Add animations and preference comparator back after initial screen is
-        // loaded (ODR).
+        // Animations and preference comparator are disabled. See b/37429702 for context.
         setAnimationAllowed(false);
 
         addPreferences();
