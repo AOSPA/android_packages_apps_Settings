@@ -35,17 +35,17 @@ import java.util.List;
  */
 public class ProtectSimPrimaryScreenFragment extends BaseSimPinFragment {
     @Nullable
-    private SimPinProtectionToggleController mController;
-
-    @Nullable
     private ChangeSimPinPreferenceController mChangePinController;
+    private List<SimPinProtectionToggleController> mControllers;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        mController = use(SimPinProtectionToggleController.class);
-        mController.setFragment(this);
+        mControllers = useAll(SimPinProtectionToggleController.class);
+        for (SimPinProtectionToggleController controller : mControllers) {
+            controller.setFragment(this);
+        }
 
         mChangePinController = use(ChangeSimPinPreferenceController.class);
         mChangePinController.setFragment(this);
@@ -84,16 +84,20 @@ public class ProtectSimPrimaryScreenFragment extends BaseSimPinFragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mController != null) {
-            mController.storeEnrollmentState(outState);
+        for (SimPinProtectionToggleController controller : mControllers) {
+            if (controller.isAvailable()) {
+                controller.storeEnrollmentState(outState);
+            }
         }
     }
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        if (mController != null) {
-            mController.loadEnrollmentState(bundle);
+        for (SimPinProtectionToggleController controller : mControllers) {
+            if (controller.isAvailable()) {
+                controller.loadEnrollmentState(bundle);
+            }
         }
     }
 }
