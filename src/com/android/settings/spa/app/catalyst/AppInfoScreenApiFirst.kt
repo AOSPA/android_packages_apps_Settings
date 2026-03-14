@@ -81,7 +81,7 @@ class AppInfoScreenApiFirst :
             type = AnyBoolean,
             appliesTo = PreferenceTarget.USER(canManage = ManagementScope.PROFILE_GROUP),
         ) {
-            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
             preconditions(R.string.installed_app_detail_manage_app_unused_parameter_purpose) {
                 val appInfo =
