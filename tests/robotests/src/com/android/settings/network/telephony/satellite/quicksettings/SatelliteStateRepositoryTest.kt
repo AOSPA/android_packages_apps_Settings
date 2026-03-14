@@ -367,6 +367,21 @@ class SatelliteStateRepositoryTest {
             assertThat(mode).isEqualTo(SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN)
         }
 
+    @Test
+     fun satelliteStatus_whenOemSatelliteNotConnected_returnsActive() =
+         testScope.runTest {
+             repository = createRepository(backgroundScope)
+             val values = mutableListOf<SatelliteStatus>()
+             repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+             advanceUntilIdle()
+
+             val callback = captureSatelliteModemStateCallback()
+             callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_NOT_CONNECTED)
+             advanceUntilIdle()
+
+             assertThat(values.last()).isEqualTo(SatelliteStatus.ACTIVE)
+        }
+
     // Helpers to capture callbacks and trigger updates
 
     private fun setCarrierSupported(subId: Int, supported: Boolean) {
