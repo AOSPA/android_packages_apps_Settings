@@ -153,7 +153,6 @@ class SetupRedactionInterstitialFragment : Fragment(), RadioButtonItem.OnChecked
         button: RestrictedRadioButtonItem,
         keyguardNotifications: Int,
     ) {
-        // Below line will crash the app. Have no idea why.
         val admin: EnforcedAdmin? =
             RestrictedLockUtilsInternal.checkIfKeyguardFeaturesDisabled(
                 activity,
