@@ -52,7 +52,13 @@ class TextReadingResetDialog : InstrumentedDialogFragment() {
                 resetTextReadingRelatedSettings()
             }
             .setNegativeButton(R.string.cancel, /* listener= */ null)
-            .create()
+            .create().apply {
+                setOnShowListener {
+                    val titleView = findViewById<android.widget.TextView>(
+                        androidx.appcompat.R.id.alertTitle)
+                    titleView?.isAccessibilityHeading = true
+                }
+            }
     }
 
     private fun resetTextReadingRelatedSettings() {

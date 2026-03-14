@@ -16,6 +16,7 @@
 
 package com.android.settings.regionalpreferences
 
+import androidx.core.text.util.LocalePreferences
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -23,6 +24,8 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
+import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithString
 
 // LINT.IfChange
 @ProvidePreferenceScreen(FirstDayOfWeekApiFirstScreen.KEY)
@@ -40,44 +43,46 @@ class FirstDayOfWeekApiFirstScreen :
         preference(
             key = KEY_FIRST_DAY_OF_WEEK,
             purpose = R.string.first_day_of_week_item_preference_purpose,
-            type = AnyString,
+            type = CustomEnum(FirstDayOfWeekOptions::class, "A day of the week"),
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
 
             get {
                 execute {
-                    // Use the converter to convert the data to a human-readable value,
-                    // for example: "Sunday", "Monday" and "Tuesday"...etc
-                    RegionalPreferencesDataUtils.dayConverter(
+                    val value =RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
                         context,
-                        RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
-                            context,
-                            ExtensionTypes.FIRST_DAY_OF_WEEK,
-                        ),
+                        ExtensionTypes.FIRST_DAY_OF_WEEK,
                     )
+                    if (value == null) {
+                        FirstDayOfWeekOptions.DEFAULT.asApiValue
+                    } else {
+                        value
+                    }
                 }
             }
             set {
                 execute { value ->
-                    val unitValues = context.resources.getStringArray(R.array.first_day_of_week)
-                    for (item in unitValues) {
-                        // If the human-readable value contains the input,
-                        // 1. the human-readable value is Sunday and the input is sun
-                        // 2. the human-readable value is Use default and the input is default
-                        if (
-                            RegionalPreferencesDataUtils.dayConverter(context, item)
-                                .contains(value, ignoreCase = true)
-                        ) {
-                            RegionalPreferencesDataUtils.savePreference(
-                                context, ExtensionTypes.FIRST_DAY_OF_WEEK,
-                                item.takeIf { it != RegionalPreferencesDataUtils.DEFAULT_VALUE }
-                            )
-                            break
-                        }
-                    }
+                    RegionalPreferencesDataUtils.savePreference(
+                        context, ExtensionTypes.FIRST_DAY_OF_WEEK,
+                            value.takeIf { it != "default" }
+                    )
                 }
             }
         }
+    }
+
+    enum class FirstDayOfWeekOptions(
+        override val asApiValue: String,
+        override val purpose: String,
+    ) : EnumApiWithString<String> {
+        DEFAULT("default", "Default"),
+        SUNDAY(LocalePreferences.FirstDayOfWeek.SUNDAY, "Sunday"),
+        MONDAY(LocalePreferences.FirstDayOfWeek.MONDAY, "Monday"),
+        TUESDAY(LocalePreferences.FirstDayOfWeek.TUESDAY, "Tuesday"),
+        WEDNESDAY(LocalePreferences.FirstDayOfWeek.WEDNESDAY, "Wednesday"),
+        THURSDAY(LocalePreferences.FirstDayOfWeek.THURSDAY, "Thursday"),
+        FRIDAY(LocalePreferences.FirstDayOfWeek.FRIDAY, "Friday"),
+        SATURDAY(LocalePreferences.FirstDayOfWeek.SATURDAY, "Saturday")
     }
 
     companion object {

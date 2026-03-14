@@ -35,6 +35,8 @@ import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 
@@ -85,7 +87,13 @@ public class TopLevelStoragePreferenceControllerTest {
                 .thenReturn(0L);
         when(mController.getStorageManagerVolumeProvider())
                 .thenReturn(mStorageManagerVolumeProvider);
-        final String percentage = NumberFormat.getPercentInstance().format(1);
+        final String percentage;
+        if (Flags.storageSummaryPercentageAlignment()) {
+            final String localizedDigits = NumberFormat.getIntegerInstance().format(100);
+            percentage = mContext.getString(R.string.storage_percentage_format, localizedDigits);
+        } else {
+            percentage = NumberFormat.getPercentInstance().format(1);
+        }
         final String freeSpace = Formatter.formatFileSize(mContext, 0);
         final Preference preference = new Preference(mContext);
 

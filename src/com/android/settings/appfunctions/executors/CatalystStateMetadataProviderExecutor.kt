@@ -214,12 +214,14 @@ class CatalystStateMetadataProviderExecutor(
                     writable = writable,
                     possibleValues = if (metadata is ApiPreference<*>) {
                         val type = metadata.type
-                        if (type is FiniteOptionsType) {
-                            type.getOptions(context).map {
-                                "${it.first.toString()} (${it.second.toString()})"
-                            }.joinToString(", ")
+
+                        val str = "itemization:${type.getKey()}"
+                        val parameters = type.getParameters()
+
+                        if (parameters != null) {
+                            str + " ${parameters.toParametersString()}"
                         } else {
-                            null
+                            str
                         }
                     } else {
                         val str = metadataProto.valueDescriptor.toDeviceStateString()

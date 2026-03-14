@@ -65,7 +65,7 @@ public class UiccSlotUtil {
         public void registerOn(Context context) {
             context.registerReceiver(this,
                     new IntentFilter(TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED),
-                    Context.RECEIVER_NOT_EXPORTED);
+                    Context.RECEIVER_EXPORTED);
         }
 
         @Override

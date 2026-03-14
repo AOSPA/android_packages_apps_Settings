@@ -39,6 +39,7 @@ import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
+import com.android.settingslib.metadata.getTrampolinedLaunchIntent
 import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
@@ -191,7 +192,7 @@ class CatalystStateProviderExecutor(
         val descriptionPrefix = if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else ""
         val description = descriptionPrefix + basicDescription + descriptionSuffix
 
-        val launchingIntent = screenMetaData.getLaunchIntent(context, null)?.apply {
+        val launchingIntent = screenMetaData.getTrampolinedLaunchIntent(context, null)?.apply {
             // Use flattenBundles since launchingIntent.toUri drops the bundles
             flattenBundles()
         }

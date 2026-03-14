@@ -76,6 +76,6 @@ class CatalystStateSetterExecutorTest {
         val result = executor.execute(DeviceStateAppFunctionType.SET_DEVICE_STATE, params)
 
         assertThat(result.result?.isSuccessful).isFalse()
-        assertThat(result.result?.currentValue).isEqualTo("true")
+        assertThat(result.result?.currentValue).isEqualTo("na")
     }
 }

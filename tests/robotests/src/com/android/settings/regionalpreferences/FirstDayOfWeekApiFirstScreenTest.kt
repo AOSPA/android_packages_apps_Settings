@@ -93,31 +93,31 @@ class FirstDayOfWeekApiFirstScreenTest {
         Locale.setDefault(Locale.forLanguageTag("en-US-u-fw-sun"))
 
         assertThat(tester.get<String>(FirstDayOfWeekApiFirstScreen.KEY_FIRST_DAY_OF_WEEK))
-            .isEqualTo("Sunday")
+            .isEqualTo("sun")
     }
 
     @Test
-    fun getPreference_defaultIsDefault_returnUseDefault() {
+    fun getPreference_defaultIsDefault_returnDefault() {
         RegionalPreferenceTestUtils.setSettingsProviderContent(context, "")
         Locale.setDefault(Locale.forLanguageTag("en-US"))
 
         assertThat(tester.get<String>(FirstDayOfWeekApiFirstScreen.KEY_FIRST_DAY_OF_WEEK))
-            .isEqualTo("Use default")
+            .isEqualTo("default")
     }
 
     @Test
-    fun setPreference_valueIsDefault_returnUseDefault() {
+    fun setPreference_valueIsDefault_returnDefault() {
         tester.set(FirstDayOfWeekApiFirstScreen.KEY_FIRST_DAY_OF_WEEK, "default")
 
         assertThat(tester.get<String>(FirstDayOfWeekApiFirstScreen.KEY_FIRST_DAY_OF_WEEK))
-            .isEqualTo("Use default")
+            .isEqualTo("default")
     }
 
     @Test
     fun setPreference_valueIsMonday_returnMonday() {
-        tester.set(FirstDayOfWeekApiFirstScreen.KEY_FIRST_DAY_OF_WEEK, "monday")
+        tester.set(FirstDayOfWeekApiFirstScreen.KEY_FIRST_DAY_OF_WEEK, "mon")
 
         assertThat(tester.get<String>(FirstDayOfWeekApiFirstScreen.KEY_FIRST_DAY_OF_WEEK))
-            .isEqualTo("Monday")
+            .isEqualTo("mon")
     }
 }

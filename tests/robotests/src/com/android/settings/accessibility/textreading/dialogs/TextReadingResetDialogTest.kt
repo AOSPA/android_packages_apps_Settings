@@ -95,6 +95,10 @@ class TextReadingResetDialogTest {
             )
         assertThat(alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).text.toString())
             .isEqualTo(context.getString(com.android.settings.R.string.cancel))
+
+        val titleView =
+            alertDialog.findViewById<android.widget.TextView>(androidx.appcompat.R.id.alertTitle)
+        assertThat(titleView?.isAccessibilityHeading).isTrue()
     }
 
     @Test

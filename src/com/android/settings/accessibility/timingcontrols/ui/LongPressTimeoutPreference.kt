@@ -77,6 +77,8 @@ class LongPressTimeoutPreference(context: Context) :
     override val valuesDescription: Int
         get() = R.array.long_press_timeout_selector_list_titles
 
+    override fun getUnitOfMeasurement() = "milliseconds"
+
     override fun storage(context: Context): KeyValueStore = dataStore
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
