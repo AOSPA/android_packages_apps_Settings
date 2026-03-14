@@ -156,10 +156,10 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void onItemClicked_dreamsSwitcherDisabled_setsActiveDream() {
         final DreamInfo dream1 = createDreamInfo("dream1", true, 0);
         final DreamInfo dream2 = createDreamInfo("dream2", false, -1);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(false);
         when(mBackend.getDreamInfos()).thenReturn(Arrays.asList(dream1, dream2));
         final DreamPickerController controller = buildController();
         controller.updateState(mPreference);
@@ -180,11 +180,11 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void onItemClicked_notSelected_dreamsSwitcherEnabled_selectsDream() {
         // setup
         final DreamInfo dream1 = createDreamInfo("dream1", false, -1);
         final DreamInfo dream2 = createDreamInfo("dream2", false, -1);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(true);
         when(mBackend.getDreamInfos()).thenReturn(Arrays.asList(dream1, dream2));
         final DreamPickerController controller = buildController();
         controller.updateState(mPreference);
@@ -221,11 +221,11 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void onItemClicked_selected_dreamsSwitcherEnabled_deselectsDream() {
         // setup
         final DreamInfo dream1 = createDreamInfo("dream1", true, 1);
         final DreamInfo dream2 = createDreamInfo("dream2", true, 0);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(true);
         when(mBackend.getDreamInfos()).thenReturn(Arrays.asList(dream1, dream2));
         final DreamPickerController controller = buildController();
         controller.updateState(mPreference);
@@ -262,12 +262,12 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void onMove_up_dreamsSwitcherEnabled_reordersDreams() {
         // setup
         final DreamInfo dream1 = createDreamInfo("dream1", true, 0);
         final DreamInfo dream2 = createDreamInfo("dream2", true, 1);
         final DreamInfo dream3 = createDreamInfo("dream3", true, 2);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(true);
         when(mBackend.getDreamInfos()).thenReturn(
                 new ArrayList<>(Arrays.asList(dream1, dream2, dream3)));
         final DreamPickerController controller = buildController();
@@ -300,12 +300,12 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void onMove_down_dreamsSwitcherEnabled_reordersDreams() {
         // setup
         final DreamInfo dream1 = createDreamInfo("dream1", true, 0);
         final DreamInfo dream2 = createDreamInfo("dream2", true, 1);
         final DreamInfo dream3 = createDreamInfo("dream3", true, 2);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(true);
         when(mBackend.getDreamInfos()).thenReturn(
                 new ArrayList<>(Arrays.asList(dream1, dream2, dream3)));
         final DreamPickerController controller = buildController();
@@ -338,7 +338,6 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void onMove_middle_dreamsSwitcherEnabled_reordersDreams() {
         // setup
         final DreamInfo dream1 = createDreamInfo("dream1", true, 0);
@@ -346,6 +345,7 @@ public class DreamPickerControllerTest {
         final DreamInfo dream3 = createDreamInfo("dream3", true, 2);
         final DreamInfo dream4 = createDreamInfo("dream4", true, 3);
         final DreamInfo dream5 = createDreamInfo("dream5", true, 4);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(true);
         when(mBackend.getDreamInfos()).thenReturn(
                 new ArrayList<>(Arrays.asList(dream1, dream2, dream3, dream4, dream5)));
         final DreamPickerController controller = buildController();
@@ -413,10 +413,10 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void displayPreference_dreamsSwitcherEnabled_itemTouchHelperAttached() {
         // setup
         final DreamInfo dream1 = createDreamInfo("dream1", true, 0);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(true);
         when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(List.of(dream1)));
         final DreamPickerController controller = buildController();
         controller.updateState(mPreference);
@@ -433,10 +433,10 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void displayPreference_dreamsSwitcherDisabled_itemTouchHelperNotAttached() {
         // setup
         final DreamInfo dream1 = createDreamInfo("dream1", true, 0);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(false);
         when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(List.of(dream1)));
         final DreamPickerController controller = buildController();
         controller.updateState(mPreference);
@@ -451,7 +451,6 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void getMovementFlags_forInactiveItem_returnsZero() {
         // setup
         final DreamInfo dream1 = createDreamInfo("dream1", true, 0);
@@ -478,6 +477,7 @@ public class DreamPickerControllerTest {
     public void onBindView_setsCorrectAccessibilityInfo(@TestParameter boolean isActive) {
         // Setup
         final DreamInfo dream = createDreamInfo("dream1", isActive, isActive ? 0 : -1);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(true);
         when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(List.of(dream)));
         final DreamPickerController controller = buildController();
         controller.updateState(mPreference);

@@ -83,7 +83,11 @@
     <string name="doze_always_on_wallpaper_enabled_purpose" translatable="false">Whether the lock screen wallpaper should be shown when the always-on display is active</string>
     <string name="app_data_usage_screen_purpose" translatable="false">app_data_usage_screen</string>
     <string name="app_data_usage_parameter_purpose" translatable="false">The package name of the app</string>
+    <string name="app_package_name_unavailable" translatable="false">The application package information is currently unavailable</string>
     <string name="app_background_data_switch_purpose" translatable="false">Whether the app can use mobile data in the background</string>
+    <string name="app_unrestricted_mobile_data_usage_switch_purpose" translatable="false">Whether the app can use mobile data without restrictions when Data Saver is on</string>
+    <string name="app_unrestricted_mobile_data_usage_switch_preconditions" translatable="false">Unrestricted mobile data usage requires background data to be enabled first</string>
+    <string name="app_unrestricted_mobile_data_usage_switch_unavailable" translatable="false">Unrestricted mobile data usage is not available for this app</string>
     <string name="auto_brightness_entry_purpose" translatable="false">Allows users to enable or disable Adaptive brightness, which automatically adjusts the screen brightness based on environment and activities.</string>
     <string name="auto_brightness_purpose" translatable="false">Whether or not Adaptive brightness is enabled</string>
     <string name="battery_saver_purpose" translatable="false">Whether or not Battery Saver is enabled</string>
@@ -209,6 +213,12 @@
     <!-- Gestures screen begin -->
     <string name="gesture_settings_screen_purpose" translatable="false">Provides a centralized menu for users to manage gesture-based shortcuts and device interactions, such as back-of-phone taps, power button shortcuts, and motion-activated features like flip-to-shhh.</string>
     <!-- Gestures screen end -->
+    <string name="app_storage_screen_purpose" translatable="false">Provides detailed storage and cache usage statistics for a specific installed application.</string>
+    <string name="app_storage_package_purpose" translatable="false">Specifies the exact package name of the installed application to inspect.</string>
+    <string name="app_storage_app_size_purpose" translatable="false">Retrieves the size of the application\'s core code and executable files, measured in kilobytes (KB).</string>
+    <string name="app_storage_data_size_purpose" translatable="false">Retrieves the size of the user data and settings stored by the application, measured in kilobytes (KB).</string>
+    <string name="app_storage_cache_size_purpose" translatable="false">Retrieves the size of the temporary cache files created by the application, measured in kilobytes (KB).</string>
+    <string name="app_storage_total_size_purpose" translatable="false">Retrieves the total storage space consumed by the application (including code, data, and cache), measured in kilobytes (KB).</string>
     <!-- Double press power button screen begin -->
     <string name="gesture_double_tap_power_input_summary_purpose" translatable="false">Allows the user to open an application when they quickly press the power button twice. The available options are Camera or Wallet</string>
     <string name="gesture_double_tap_power_actions_purpose" translatable="false">Allows the user to configure the action performed when the power button is double-tapped, such as launching the camera or opening the wallet</string>
@@ -267,7 +277,13 @@
     <string name="hearing_options_category_purpose" translatable="false">A section containing general options for hearing devices.</string>
     <string name="previously_connected_hearing_devices_purpose" translatable="false">Displays a list of hearing devices that were previously paired with the device.</string>
     <string name="advanced_app_info_purpose" translatable="false">advanced_app_info</string>
-    <string name="installed_app_detail_settings_screen_purpose" translatable="false">installed_app_detail_settings_screen</string>
+    <string name="installed_app_detail_settings_screen_purpose">Provides detailed information and management options for a specific installed application, including permissions, storage, notifications, and state.</string>
+    <string name="installed_app_detail_manage_app_unused_parameter_purpose" translatable="false">Specifies the exact package name of the installed application.</string>
+    <string name="installed_app_detail_manage_app_unused_toggle_purpose" translatable="false">Controls whether the system can automatically revoke permissions, stop notifications, and free up space if this specific application remains unused for an extended period.</string>
+    <string name="installed_app_detail_manage_app_unused_precondition_disabled_globally">The \'Manage app if unused\' feature is currently disabled at the device level.</string>
+    <string name="installed_app_detail_manage_app_unused_precondition_archived_app">Archived applications cannot be managed as unused.</string>
+    <string name="installed_app_detail_manage_app_unused_precondition_exempt_app">This application is a critical system app and is exempt from the \'Manage app if unused\' feature.</string>
+    <string name="installed_app_detail_manage_app_unused_precondition_null_app">The specified application could not be found on the device.</string>
     <string name="special_access_alarms_and_reminders_app_detail_purpose" translatable="false">special_access_alarms_and_reminders_app_detail</string>
     <string name="internet_settings_purpose" translatable="false">Allows users to manage Wi-Fi connectivity, including toggling Wi-Fi on or off, selecting from available networks, and viewing non-carrier data usage.</string>
     <string name="main_toggle_wifi_purpose" translatable="false">Whether Wi-Fi is enabled on the device</string>
@@ -502,6 +518,9 @@
     <string name="top_level_connected_devices_purpose" translatable="false">Allows users to manage and configure connections to other devices, including Bluetooth pairing, USB settings, and various connection protocols such as NFC and Android Auto.</string>
     <string name="top_level_emergency_purpose" translatable="false">Allows users to manage safety and emergency settings, including medical info, emergency contacts, SOS triggers, and various emergency alerts.</string>
     <string name="top_level_priority_modes_purpose" translatable="false">Allows users to manage and create focus modes that control how notifications and other distractions are handled during specific activities or times of day.</string>
+    <string name="zen_mode_screen_purpose" translatable="false">Allows users to manage and customize a specific mode (include Do Not Disturb, Bedtime, Driving, etc.) , including its name, icon, people, apps, display settings, and automatic activation triggers.</string>
+    <string name="zen_mode_screen_parameter_purpose" translatable="false">The mode to be managed.</string>
+    <string name="zen_mode_type_description" translatable="false">The name of the mode on the device.</string>
     <string name="active_supervision_apps_group_purpose" translatable="false">active_supervision_apps_group</string>
     <string name="aoc_footer_purpose" translatable="false">aoc_footer</string>
     <string name="available_supervision_apps_group_purpose" translatable="false">available_supervision_apps_group</string>
@@ -718,4 +737,8 @@
     <string name="stylus_handwriting_precondition" translatable="false">Requires the current system input method (keyboard) to support stylus handwriting.</string>
     <string name="stylus_handwriting_precondition_failed" translatable="false">Current input method does not support stylus handwriting</string>
     <string name="api_stylus_ignore_button_purpose" translatable="false">Prevents accidental inputs by globally ignoring all physical button presses on the stylus.</string>
+
+    <string name="text_to_speech_purpose" translatable="false">Allows the user to manage default text-to-speech settings, including preferred engine, default language, speech rate, and pitch.</string>
+    <string name="text_to_speech_rate_purpose" translatable="false">Speech speed at which the text is spoken with normal value 100 in range of 10 to 600.</string>
+    <string name="text_to_speech_pitch_purpose" translatable="false">Pitch value that affects the tone of the synthesized speech with normal value 100 in range of 25 to 400.</string>
 </resources>

@@ -52,6 +52,7 @@ import com.android.settings.accounts.AccountScreen
 import com.android.settings.accounts.ManageAccountsScreen
 import com.android.settings.accounts.ManagedProfileApiScreen
 import com.android.settings.applications.AppDashboardScreen
+import com.android.settings.applications.AppStorageSettingsScreenApi
 import com.android.settings.applications.contacts.ContactsStorageApiScreen
 import com.android.settings.applications.intentpicker.AppLaunchApiScreen
 import com.android.settings.applications.managedomainurls.OpeningLinksApiScreen
@@ -81,8 +82,8 @@ import com.android.settings.applications.specialaccess.pictureinpicture.PictureI
 import com.android.settings.applications.specialaccess.pictureinpicture.PictureInPictureAppListScreen
 import com.android.settings.applications.specialaccess.zenaccess.ZenAccessDetailsApiScreen
 import com.android.settings.backup.AccountsAndBackupScreen
-import com.android.settings.connecteddevice.AdvancedConnectedDeviceScreen
 import com.android.settings.connecteddevice.AdvancedConnectedDeviceApiScreen
+import com.android.settings.connecteddevice.AdvancedConnectedDeviceScreen
 import com.android.settings.connecteddevice.BluetoothDashboardScreen
 import com.android.settings.connecteddevice.BluetoothDashboardScreenApi
 import com.android.settings.connecteddevice.ConnectedDeviceDashboardScreen
@@ -151,8 +152,8 @@ import com.android.settings.localepicker.SystemLocalePickerApiFirstScreen
 import com.android.settings.localepicker.TermsOfAddressApiFirstScreen
 import com.android.settings.location.BluetoothScanningApiScreen
 import com.android.settings.location.LocationScreen
-import com.android.settings.location.LocationServicesScreenApi
 import com.android.settings.location.LocationServicesScreen
+import com.android.settings.location.LocationServicesScreenApi
 import com.android.settings.location.LocationSettingsScreenApi
 import com.android.settings.location.RecentLocationAccessScreen
 import com.android.settings.location.WifiScanningApiScreen
@@ -173,6 +174,7 @@ import com.android.settings.notification.SoundApiScreen
 import com.android.settings.notification.SoundScreen
 import com.android.settings.notification.SpatialAudioApiScreen
 import com.android.settings.notification.app.ConversationListScreen
+import com.android.settings.notification.modes.ZenModeApiScreen
 import com.android.settings.notification.modes.ZenModesListScreen
 import com.android.settings.print.PrintServiceApiScreen
 import com.android.settings.print.PrintSettingsApiScreen
@@ -198,6 +200,7 @@ import com.android.settings.spa.app.appcompat.UserAspectRatioAppsApiScreen
 import com.android.settings.spa.app.battery.AppBatteryUsageListApiScreen
 import com.android.settings.spa.app.catalyst.AllAppsScreen
 import com.android.settings.spa.app.catalyst.AppInfoScreen
+import com.android.settings.spa.app.catalyst.AppInfoScreenApiFirst
 import com.android.settings.spa.app.catalyst.AppInfoStorageScreen
 import com.android.settings.spa.app.catalyst.AppStorageAppListScreen
 import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppsApiScreen
@@ -214,6 +217,7 @@ import com.android.settings.supervision.webcontentfilters.SupervisionWebContentF
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersSearchSupportedAppsScreen
 import com.android.settings.system.ResetDashboardScreen
 import com.android.settings.system.SystemDashboardScreen
+import com.android.settings.tts.TextToSpeechApiScreen
 import com.android.settings.users.UserDetailsSettingsScreenApi
 import com.android.settings.users.UserSettingsScreenApi
 import com.android.settings.vpn2.VpnSettingsScreen
@@ -591,6 +595,11 @@ private fun getCatalystScreenConfigs() =
             screenKey = ZenModesListScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = ZenModeApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
         PerScreenCatalystConfig(enabled = true, screenKey = SystemDashboardScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UserDictionaryListApiScreen.KEY),
         PerScreenCatalystConfig(
@@ -687,9 +696,12 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = ScreenResolutionApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiScanningApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppStorageSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = StylusUsiDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreenApiFirst.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = CellularSecurityScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreenApi.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = TextToSpeechApiScreen.KEY),
     )

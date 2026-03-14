@@ -69,6 +69,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
 
+// LINT.IfChange
 public class AppStorageSettings extends AppInfoWithHeader
         implements OnClickListener, Callbacks, DialogInterface.OnClickListener,
         LoaderManager.LoaderCallbacks<AppStorageStats> {
@@ -662,3 +663,4 @@ public class AppStorageSettings extends AppInfoWithHeader
         }
     }
 }
+// LINT.ThenChange(AppStorageSettingsScreenApi.kt, AppInfoStorageScreen.kt)
