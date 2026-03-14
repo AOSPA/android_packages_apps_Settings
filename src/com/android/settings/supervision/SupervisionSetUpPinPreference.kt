@@ -15,9 +15,15 @@
  */
 package com.android.settings.supervision
 
+import android.app.Activity
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SET_UP_PIN_ENTRY
+import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.Preference
 import androidx.preference.Preference.OnPreferenceClickListener
 import com.android.settings.R
@@ -25,6 +31,8 @@ import com.android.settings.overlay.FeatureFactory
 import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceLifecycleContext
+import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
@@ -34,7 +42,12 @@ class SupervisionSetUpPinPreference :
     PreferenceMetadata,
     PreferenceAvailabilityProvider,
     PreferenceBinding,
-    OnPreferenceClickListener {
+    OnPreferenceClickListener,
+    PreferenceLifecycleProvider {
+
+    private lateinit var lifeCycleContext: PreferenceLifecycleContext
+
+    private lateinit var confirmCredentialsLauncher: ActivityResultLauncher<Intent>
 
     override val key: String
         get() = KEY
@@ -53,6 +66,15 @@ class SupervisionSetUpPinPreference :
 
     override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet()
 
+    override fun onCreate(context: PreferenceLifecycleContext) {
+        lifeCycleContext = context
+        confirmCredentialsLauncher =
+            context.registerForActivityResult(
+                ActivityResultContracts.StartActivityForResult(),
+                ::onConfirmCredentials,
+            )
+    }
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         preference.onPreferenceClickListener = this
@@ -64,9 +86,32 @@ class SupervisionSetUpPinPreference :
             ACTION_SUPERVISION_SET_UP_PIN_ENTRY,
         )
 
-        val intent = Intent(preference.context, SetupSupervisionActivity::class.java)
-        preference.context.startActivity(intent)
+        if (Flags.enableParentApprovalForPinSetup()) {
+            val supervisionManager =
+                preference.context.getSystemService(SupervisionManager::class.java)
+
+            val confirmCredentialsIntent =
+                supervisionManager.createConfirmSupervisionCredentialsIntent()
+            if (confirmCredentialsIntent != null) {
+                confirmCredentialsLauncher.launch(confirmCredentialsIntent)
+            } else {
+                startPinSetupFlow(preference.context)
+            }
+        } else {
+            startPinSetupFlow(preference.context)
+        }
         return true
+    }
+
+    fun onConfirmCredentials(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            startPinSetupFlow(lifeCycleContext)
+        }
+    }
+
+    private fun startPinSetupFlow(context: Context) {
+        val intent = Intent(context, SetupSupervisionActivity::class.java)
+        context.startActivity(intent)
     }
 
     companion object {
