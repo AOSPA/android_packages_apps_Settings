@@ -52,6 +52,7 @@ import com.android.settings.accounts.AccountScreen
 import com.android.settings.accounts.ManageAccountsScreen
 import com.android.settings.accounts.ManagedProfileApiScreen
 import com.android.settings.applications.AppDashboardScreen
+import com.android.settings.applications.AppStorageSettingsScreenApi
 import com.android.settings.applications.contacts.ContactsStorageApiScreen
 import com.android.settings.applications.intentpicker.AppLaunchApiScreen
 import com.android.settings.applications.managedomainurls.OpeningLinksApiScreen
@@ -151,8 +152,8 @@ import com.android.settings.localepicker.SystemLocalePickerApiFirstScreen
 import com.android.settings.localepicker.TermsOfAddressApiFirstScreen
 import com.android.settings.location.BluetoothScanningApiScreen
 import com.android.settings.location.LocationScreen
-import com.android.settings.location.LocationServicesScreenApi
 import com.android.settings.location.LocationServicesScreen
+import com.android.settings.location.LocationServicesScreenApi
 import com.android.settings.location.LocationSettingsScreenApi
 import com.android.settings.location.RecentLocationAccessScreen
 import com.android.settings.location.WifiScanningApiScreen
@@ -695,6 +696,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = ScreenResolutionApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiScanningApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppStorageSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = StylusUsiDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreenApiFirst.KEY),
