@@ -89,4 +89,55 @@ public class SatelliteAppListFragmentTest {
 
         assertThat(preferenceScreen.getPreferenceCount() == PACKAGE_NAMES.size()).isTrue();
     }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SATELLITE_25Q4_APIS)
+    public void displayPreference_nullRepository_doesNotAddPreferences() {
+        // Verifies that if the repository is not initialized, no preferences are added.
+        mController = new SatelliteAppListFragment.SatelliteAppListPreferenceController(mContext);
+        // Do not call init(mRepository) to leave mSatelliteRepository as null
+        PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
+
+        mController.displayPreference(preferenceScreen);
+
+        assertThat(preferenceScreen.getPreferenceCount()).isEqualTo(0);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SATELLITE_25Q4_APIS)
+    public void displayPreference_emptyAppList_doesNotAddPreferences() {
+        // Verifies that if the repository returns an empty list, no preferences are added.
+        when(mRepository.getSatelliteDataOptimizedApps()).thenReturn(List.of());
+        mController = new SatelliteAppListFragment.SatelliteAppListPreferenceController(mContext);
+        mController.init(mRepository);
+        PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
+
+        mController.displayPreference(preferenceScreen);
+
+        assertThat(preferenceScreen.getPreferenceCount()).isEqualTo(0);
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_SATELLITE_25Q4_APIS)
+    public void displayPreference_someAppsNotFound_addsOnlyFoundApps() throws Exception {
+        // Verifies that preferences are only added for apps that are successfully found by
+        // PackageManager.
+        when(mRepository.getSatelliteDataOptimizedApps()).thenReturn(PACKAGE_NAMES);
+        // Return ApplicationInfo for the first package, throw NameNotFoundException for others
+        when(mPackageManager.getApplicationInfoAsUser(any(), anyInt(), anyInt()))
+                .thenReturn(new ApplicationInfo())
+                .thenThrow(new PackageManager.NameNotFoundException());
+
+        mController = new SatelliteAppListFragment.SatelliteAppListPreferenceController(mContext);
+        mController.init(mRepository);
+        PreferenceManager preferenceManager = new PreferenceManager(mContext);
+        PreferenceScreen preferenceScreen = preferenceManager.createPreferenceScreen(mContext);
+
+        mController.displayPreference(preferenceScreen);
+
+        // Only 1 app was found, so only 1 preference should be added
+        assertThat(preferenceScreen.getPreferenceCount()).isEqualTo(1);
+    }
 }
