@@ -233,8 +233,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         if (mIsFirstLaunch && FeatureFactory.getFeatureFactory()
                 .getPowerUsageFeatureProvider().isBatteryAdvanceInfoEnabled()) {
             // Select last daily slot instead of all by default once available.
-            // -2 for last slot since mDailyViewModel's index start with -1 (for select all cases).
-            mDailyChartIndex = mDailyViewModel.size() - 2;
+            mDailyChartIndex = mDailyViewModel.getLastSlotIndex();
             mIsFirstLaunch = false;
         }
         refreshUi();
@@ -401,7 +400,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mDailyChartIndex = 0;
         } else {
             mDailyChartView.setVisibility(View.VISIBLE);
-            if (mDailyChartIndex >= mDailyViewModel.size()) {
+            if (mDailyChartIndex > mDailyViewModel.getLastSlotIndex()) {
                 mDailyChartIndex = SELECTED_INDEX_ALL;
             }
             mDailyViewModel.setSelectedIndex(mDailyChartIndex);
@@ -415,7 +414,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         } else {
             animateBatteryHourlyChartView(/* visible= */ true);
             final BatteryChartViewModel hourlyViewModel = mHourlyViewModels.get(mDailyChartIndex);
-            if (mHourlyChartIndex >= hourlyViewModel.size()) {
+            if (mHourlyChartIndex > hourlyViewModel.getLastSlotIndex()) {
                 mHourlyChartIndex = SELECTED_INDEX_ALL;
             }
             hourlyViewModel.setSelectedIndex(mHourlyChartIndex);
