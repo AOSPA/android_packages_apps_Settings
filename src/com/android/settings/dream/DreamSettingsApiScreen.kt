@@ -29,7 +29,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DreamSettingsApiScreen.KEY)
@@ -79,7 +79,7 @@ class DreamSettingsApiScreen :
         }
     }
 
-    private object WhenToDreamType : FiniteOptionsType<WhenToDream> {
+    private object WhenToDreamType : DirectFiniteOptionsType<WhenToDream> {
         override suspend fun getOptions(context: Context): List<Pair<WhenToDream, String>> {
             val validValues = DreamUtils.getWhenToDreamOptions(context.resources).toSet()
             val posturingSupported =

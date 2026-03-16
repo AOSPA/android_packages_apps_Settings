@@ -281,7 +281,7 @@ class ApiTesterTest {
                     extras.putString("pkg", parameters["package"])
                 }
             }
-            preference<String>(
+            preference(
                 key = "preference_with_parameter_precondition",
                 purpose = 0,
                 type = AnyString,
@@ -293,7 +293,7 @@ class ApiTesterTest {
                 }
                 get { execute { "hello" } }
             }
-            preference<String>(
+            preference(
                 key = "preference_of_parameterized_screen",
                 purpose = 0,
                 type = AnyString,
@@ -315,7 +315,7 @@ class ApiTesterTest {
                 }
             }
 
-            preference<String>(
+            preference(
                 key = "preference_of_parameterized_screen_with_missing_permission",
                 purpose = 0,
                 type = AnyString,
@@ -330,7 +330,7 @@ class ApiTesterTest {
                 }
             }
 
-            preference<String>(
+            preference(
                 key = "get_preference_of_parameterized_screen",
                 purpose = 0,
                 type = AnyString,

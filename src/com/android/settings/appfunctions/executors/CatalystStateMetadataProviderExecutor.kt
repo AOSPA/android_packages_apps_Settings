@@ -142,7 +142,7 @@ class CatalystStateMetadataProviderExecutor(
 
         val types = mutableMapOf<String, ItemizationType>()
         hierarchy.values.flatten().forEach { node ->
-            (node.metadata as? ApiPreference<*>)?.let { types[it.type.toItemizationType(context).key] = it.type.toItemizationType(context) }
+            (node.metadata as? ApiPreference<*, *>)?.let { types[it.type.toItemizationType(context).key] = it.type.toItemizationType(context) }
         }
         hierarchy.keys.forEach { screenMetaData ->
             screenMetaData.keyParametersSchema?.getParameters()?.values?.forEach { param ->
@@ -186,7 +186,7 @@ class CatalystStateMetadataProviderExecutor(
                     else -> null
                 }
 
-            val writable = if (metadata is ApiPreference<*>) {
+            val writable = if (metadata is ApiPreference<*, *>) {
                 metadata.set != null
             } else if (metadata is PersistentPreference<*>) {
                 metadata.supportsWrite
@@ -212,7 +212,7 @@ class CatalystStateMetadataProviderExecutor(
                     name = null,
                     sensitivity = sensitivityLevel,
                     writable = writable,
-                    possibleValues = if (metadata is ApiPreference<*>) {
+                    possibleValues = if (metadata is ApiPreference<*, *>) {
                         val type = metadata.type
 
                         val str = "itemization:${type.getKey()}"
@@ -337,7 +337,7 @@ class CatalystStateMetadataProviderExecutor(
     }
 }
 
-suspend fun ApiType<*>.toItemizationType(context: Context): ItemizationType {
+suspend fun ApiType<*, *>.toItemizationType(context: Context): ItemizationType {
     return ItemizationType(
         key = getKey(),
         hintText = getDescription(context),

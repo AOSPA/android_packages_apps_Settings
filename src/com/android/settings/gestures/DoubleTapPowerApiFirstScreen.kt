@@ -68,7 +68,7 @@ class DoubleTapPowerApiFirstScreen :
                 ),
         ) {
             get {
-                executeEnum {
+                execute {
                     val launchApp =
                         Settings.Secure.getInt(
                             context.contentResolver,
@@ -105,7 +105,7 @@ class DoubleTapPowerApiFirstScreen :
                         }
                     }
                 }
-                executeEnum { value ->
+                execute { value ->
                     val launchApp =
                         if (value == PowerButtonLaunchApp.CAMERA) {
                             CAMERA_LAUNCH_VALUE

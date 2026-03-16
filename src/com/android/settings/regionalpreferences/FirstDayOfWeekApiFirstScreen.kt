@@ -54,9 +54,9 @@ class FirstDayOfWeekApiFirstScreen :
                         ExtensionTypes.FIRST_DAY_OF_WEEK,
                     )
                     if (value == null) {
-                        FirstDayOfWeekOptions.DEFAULT.asApiValue
+                        FirstDayOfWeekOptions.DEFAULT
                     } else {
-                        value
+                        FirstDayOfWeekOptions.values().firstOrNull { it.asApiValue == value } ?: error("Unknown first day of week: $value")
                     }
                 }
             }
@@ -64,7 +64,7 @@ class FirstDayOfWeekApiFirstScreen :
                 execute { value ->
                     RegionalPreferencesDataUtils.savePreference(
                         context, ExtensionTypes.FIRST_DAY_OF_WEEK,
-                            value.takeIf { it != "default" }
+                            value.takeIf { it != FirstDayOfWeekOptions.DEFAULT }?.asApiValue
                     )
                 }
             }
