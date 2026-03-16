@@ -142,5 +142,4 @@ public class ForceInvertPreferenceController extends BasePreferenceController
         }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/display/darkmode/DarkModeSelectorPreference.kt
-//                 /src/com/android/settings/display/darkmode/DarkModeApiFirstScreen.kt)
+// LINT.ThenChange(/src/com/android/settings/display/darkmode/DarkModeSelectorPreference.kt)

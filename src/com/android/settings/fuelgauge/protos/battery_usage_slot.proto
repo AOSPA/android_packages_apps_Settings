@@ -21,16 +21,6 @@ enum BatteryOptimizationMode {
   MODE_OPTIMIZED = 3;
 }
 
-enum DataErrorType {
-  ERROR_TYPE_UNKNOWN = 0;
-  ERROR_TYPE_UNEXPECTED_RESET = 1;
-}
-
-message DataMetadata {
-  repeated DataErrorType data_error_types = 1;
-  optional string error_msg = 2;
-}
-
 message BatteryUsageDiff {
   optional int64 uid = 1;
   optional int64 user_id = 2;
@@ -51,5 +41,4 @@ message BatteryUsageDiff {
   optional int64 foreground_service_usage_time = 17;
   optional BatteryOptimizationMode app_optimization_mode = 18;
   optional bool is_app_optimization_mode_mutable = 19;
-  optional DataMetadata data_metadata = 20;
 }

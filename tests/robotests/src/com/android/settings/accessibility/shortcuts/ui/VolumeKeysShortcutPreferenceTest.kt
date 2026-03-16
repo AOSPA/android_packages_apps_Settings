@@ -24,7 +24,6 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.R
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
-import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.ShadowInputDevice
 import com.android.settingslib.preference.createAndBindWidget
@@ -82,8 +81,8 @@ class VolumeKeysShortcutPreferenceTest {
     @DisableFlags(
         com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
     )
-    fun bind_setsCorrectImageResource_flagOff_desktopSupported_mobileImage() {
-        AccessibilityTestUtils.setDesktopSupported(appContext, true)
+    fun bind_setsCorrectImageResource_flagOff_keyboardAttached_mobileImage() {
+        setHardwareKeyboard(true)
         val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
         val imageResId = ReflectionHelpers.getField<Int>(widget, "mIntroImageResId")
 
@@ -94,8 +93,8 @@ class VolumeKeysShortcutPreferenceTest {
     @DisableFlags(
         com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
     )
-    fun bind_setsCorrectImageResource_flagOff_desktopNotSupported_mobileImage() {
-        AccessibilityTestUtils.setDesktopSupported(appContext, false)
+    fun bind_setsCorrectImageResource_flagOff_keyboardDetached_mobileImage() {
+        setHardwareKeyboard(false)
         val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
         val imageResId = ReflectionHelpers.getField<Int>(widget, "mIntroImageResId")
 
@@ -106,8 +105,8 @@ class VolumeKeysShortcutPreferenceTest {
     @EnableFlags(
         com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
     )
-    fun bind_setsCorrectImageResource_flagOn_desktopSupported_desktopImage() {
-        AccessibilityTestUtils.setDesktopSupported(appContext, true)
+    fun bind_setsCorrectImageResource_flagOn_keyboardAttached_desktopImage() {
+        setHardwareKeyboard(true)
         val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
         val imageResId = ReflectionHelpers.getField<Int>(widget, "mIntroImageResId")
 
@@ -119,11 +118,20 @@ class VolumeKeysShortcutPreferenceTest {
     @EnableFlags(
         com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
     )
-    fun bind_setsCorrectImageResource_flagOn_desktopNotSupported_mobileImage() {
-        AccessibilityTestUtils.setDesktopSupported(appContext, false)
+    fun bind_setsCorrectImageResource_flagOn_keyboardDetached_mobileImage() {
+        setHardwareKeyboard(false)
         val widget = preference.createAndBindWidget<ShortcutOptionWidget>(appContext)
         val imageResId = ReflectionHelpers.getField<Int>(widget, "mIntroImageResId")
 
         assertThat(imageResId).isEqualTo(R.drawable.accessibility_shortcut_type_volume_keys)
+    }
+
+    private fun setHardwareKeyboard(hasConnectedKeyboard: Boolean) {
+        if (hasConnectedKeyboard) {
+            val device = ShadowInputDevice.makeFullKeyboardInputDevicebyId(/* id= */ 1)
+            ShadowInputDevice.addDevice(device.id, device)
+        } else {
+            ShadowInputDevice.reset()
+        }
     }
 }

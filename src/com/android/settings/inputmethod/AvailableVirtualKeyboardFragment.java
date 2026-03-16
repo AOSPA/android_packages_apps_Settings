@@ -27,9 +27,7 @@ import android.provider.SearchIndexableResource;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
-import androidx.annotation.VisibleForTesting;
-import androidx.preference.PreferenceScreen;
-
+import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.dashboard.DashboardFragment;
@@ -196,36 +194,19 @@ public class AvailableVirtualKeyboardFragment extends DashboardFragment
             InputMethodAndSubtypeUtilCompat.removeUnnecessaryNonPersistentPreference(pref);
             pref.updatePreferenceViews();
         }
-
-        // Disable the entire preference screen to gray out buttons.
-        if (Utils.shouldDisableKeyboardSettingsInDemoMode(getContext())) {
-            final PreferenceScreen screen = getPreferenceScreen();
-            if (screen != null) {
-                screen.setEnabled(false);
-            }
-        }
     }
 
-    @VisibleForTesting
-    public static class SearchIndexProvider extends BaseSearchIndexProvider {
-        @Override
-        public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
-                boolean enabled) {
-            List<SearchIndexableResource> res = new ArrayList<>();
-            SearchIndexableResource index = new SearchIndexableResource(context);
-            index.xmlResId = R.xml.available_virtual_keyboard;
-            res.add(index);
-            return res;
-        }
-
-        @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-        @Override
-        public boolean isPageSearchEnabled(Context context) {
-            return !Utils.shouldDisableKeyboardSettingsInDemoMode(context);
-        }
-    }
-
-    @VisibleForTesting
-    public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER = new SearchIndexProvider();
+    public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
+            new BaseSearchIndexProvider() {
+                @Override
+                public List<SearchIndexableResource> getXmlResourcesToIndex(Context context,
+                        boolean enabled) {
+                    List<SearchIndexableResource> res = new ArrayList<>();
+                    SearchIndexableResource index = new SearchIndexableResource(context);
+                    index.xmlResId = R.xml.available_virtual_keyboard;
+                    res.add(index);
+                    return res;
+                }
+            };
 }
 // LINT.ThenChange(AvailableVirtualKeyboardApiScreen.kt)

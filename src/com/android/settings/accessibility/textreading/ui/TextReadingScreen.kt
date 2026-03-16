@@ -31,7 +31,6 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
-import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import kotlinx.coroutines.CoroutineScope
@@ -151,8 +150,6 @@ open class TextReadingScreenOnAccessibility : BaseTextReadingScreen(true) {
 
     override val key: String = KEY
 
-    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
-
     // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.text_reading_options_in_a11y_purpose
@@ -183,8 +180,6 @@ open class TextReadingScreenInSuw : BaseTextReadingScreen(true) {
         get() = R.string.menu_key_accessibility
 
     override val key: String = KEY
-
-    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
@@ -217,8 +212,6 @@ open class TextReadingScreenInSuw : BaseTextReadingScreen(true) {
 open class TextReadingScreenInAnythingElse : BaseTextReadingScreen(true) {
     override val entryPoint: Int
         get() = EntryPoint.SUW_ANYTHING_ELSE
-
-    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val key: String = KEY
 
@@ -257,8 +250,6 @@ open class TextReadingScreenFromNotification : BaseTextReadingScreen(true) {
         get() = EntryPoint.HIGH_CONTRAST_TEXT_NOTIFICATION
 
     override val key: String = KEY
-
-    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int

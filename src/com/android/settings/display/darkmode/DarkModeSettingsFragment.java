@@ -47,7 +47,6 @@ import java.util.List;
 /**
  * Settings screen for Dark UI Mode
  */
-// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class DarkModeSettingsFragment extends DashboardFragment {
 
@@ -204,4 +203,3 @@ public class DarkModeSettingsFragment extends DashboardFragment {
                     };
 
 }
-// LINT.ThenChange(DarkModeApiFirstScreen.kt)

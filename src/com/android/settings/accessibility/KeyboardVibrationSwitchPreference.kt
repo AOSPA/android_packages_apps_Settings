@@ -28,7 +28,6 @@ import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
@@ -92,9 +91,6 @@ class KeyboardVibrationSwitchPreference(
         }
         return false
     }
-
-    override val sensitivityLevel: Int
-        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val DEFAULT_VALUE = true

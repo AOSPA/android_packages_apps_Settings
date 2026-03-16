@@ -32,11 +32,8 @@ class EditFloatingButtonShortcutController(
 ) : BaseShortcutController(context, item, dataStore, KEY) {
 
     override fun updateItemVisuals(item: IllustrationCheckBoxItem) {
-        with(metadata) {
-            item.summary = getSummary(context)
-            item.imageRawResId = R.raw.accessibility_shortcut_type_fab
-            item.isVisible = isAvailable(context)
-        }
+        item.summary = metadata.getSummary(context)
+        item.imageRawResId = R.raw.accessibility_shortcut_type_fab
     }
 
     companion object {

@@ -124,5 +124,4 @@ public class DarkUIPreferenceController extends TogglePreferenceController imple
         return AVAILABLE;
     }
 }
-// LINT.ThenChange(darkmode/DarkModeScreen.kt,
-//                 darkmode/DarkModeApiFirstScreen.kt)
+// LINT.ThenChange(darkmode/DarkModeScreen.kt)

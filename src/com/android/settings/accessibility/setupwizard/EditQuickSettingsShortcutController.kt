@@ -35,7 +35,6 @@ class EditQuickSettingsShortcutController(
         with(metadata) {
             item.summary = getSummary(context)
             item.imageResId = R.drawable.accessibility_shortcut_type_quick_settings
-            item.isVisible = isAvailable(context)
         }
     }
 

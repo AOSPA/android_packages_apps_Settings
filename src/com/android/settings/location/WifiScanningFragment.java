@@ -31,7 +31,6 @@ import java.util.List;
 /**
  * A page that configures the Wi-Fi scanning setting.
  */
-// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class WifiScanningFragment extends DashboardFragment {
     private static final String TAG = "WifiScanningFragment";
@@ -80,4 +79,3 @@ public class WifiScanningFragment extends DashboardFragment {
                 }
             };
 }
-// LINT.ThenChange(WifiScanningApiScreen.kt)

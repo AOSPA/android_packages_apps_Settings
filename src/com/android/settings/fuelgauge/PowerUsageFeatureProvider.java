@@ -56,23 +56,13 @@ public interface PowerUsageFeatureProvider {
     /** Check whether to log the optimization mode of app entry in period job */
     boolean isAppOptimizationModeLogged();
 
-    /** Returns a threshold (milliseconds) for the minimal screen on time in battery usage list */
-    double getBatteryUsageListScreenOnTimeThresholdMs();
+    /**
+     * Returns a threshold (in milliseconds) for the minimal screen on time in battery usage list
+     */
+    double getBatteryUsageListScreenOnTimeThresholdInMs();
 
     /** Returns a threshold (mA) for the minimal consume power in battery usage list */
     double getBatteryUsageListConsumePowerThreshold();
-
-    /**
-     * Returns a threshold (milliseconds) for the unexpected reset error detected in the app battery
-     * usage time.
-     */
-    long getBatteryUsageResetErrorTimeThresholdMs();
-
-    /**
-     * Returns a threshold (mA) for the unexpected reset error detected in the app battery usage
-     * consume power.
-     */
-    double getBatteryUsageResetErrorPowerThreshold();
 
     /** Returns an allowlist of app names combined into the system-apps item */
     List<String> getSystemAppsAllowlist();

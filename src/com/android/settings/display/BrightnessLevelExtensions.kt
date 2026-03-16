@@ -17,13 +17,8 @@
 package com.android.settings.display
 
 import android.content.Context
-import android.hardware.display.DisplayManager
-import android.view.Display
 import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
-
-val Context.isBrightnessLevelSettingsAvailable: Boolean
-    get() = brightnessLevelAvailabilityStatus == AVAILABLE
 
 val Context.brightnessLevelAvailabilityStatus: Int
     get() =

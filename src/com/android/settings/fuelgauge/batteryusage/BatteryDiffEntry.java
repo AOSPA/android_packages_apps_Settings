@@ -28,7 +28,6 @@ import android.util.Log;
 import android.util.Pair;
 
 import androidx.annotation.GuardedBy;
-import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
@@ -37,7 +36,6 @@ import com.android.settings.fuelgauge.batteryusage.BatteryEntry.NameAndIcon;
 import com.android.settingslib.utils.StringUtil;
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -102,20 +100,6 @@ public class BatteryDiffEntry {
     public double mForegroundServiceUsageConsumePower;
     public double mBackgroundUsageConsumePower;
     public double mCachedUsageConsumePower;
-    @Nullable
-    public DataMetadata mDataMetadata = null;
-
-    public static final class DataMetadata {
-        public final List<DataErrorType> mErrorTypes;
-        public final String mErrorMsg;
-
-        public DataMetadata(
-                List<DataErrorType> errorTypes,
-                final String errorMsg) {
-            mErrorTypes = errorTypes;
-            mErrorMsg = errorMsg;
-        }
-    }
 
     protected Context mContext;
 
@@ -191,11 +175,6 @@ public class BatteryDiffEntry {
                 /* foregroundServiceUsageConsumePower= */ 0,
                 /* backgroundUsageConsumePower= */ 0,
                 /* cachedUsageConsumePower= */ 0);
-    }
-
-    /** Sets the detected battery usage data issues.  */
-    public void setDataMetadata(@Nullable final DataMetadata dataMetadata) {
-        mDataMetadata = dataMetadata;
     }
 
     /** Sets the total consumed power in a specific time slot. */
@@ -582,12 +561,6 @@ public class BatteryDiffEntry {
                 String.format(
                         "\n\tpackage:%s|%s uid:%d userId:%d",
                         mLegacyPackageName, getPackageName(), mUid, mUserId));
-        if (mDataMetadata != null) {
-            builder.append("\n\terrorType: ");
-            mDataMetadata.mErrorTypes.forEach(
-                    errorType -> builder.append(errorType.name() + ","));
-            builder.append(String.format(" | errorMsg = %s", mDataMetadata.mErrorMsg));
-        }
         return builder.toString();
     }
 

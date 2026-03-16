@@ -205,7 +205,7 @@ public class WifiAutoConnectPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN_V2)
+    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
     public void onPreferenceClick_aapmActiveInsecureNetwork_showsDialogAndDoesNotToggle() {
         when(mAdvancedProtectionManager.isAdvancedProtectionEnabled()).thenReturn(true);
         when(mWifiConfiguration.isAutoJoinInAdvancedProtectionModeEnabled()).thenReturn(false);
@@ -224,7 +224,7 @@ public class WifiAutoConnectPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN_V2)
+    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
     public void handleDialogResult_resultCanceled_remainsOff() {
         mController.handleDialogResult(
                 WifiAutoConnectPreferenceController2.REQUEST_CODE_AUTOCONNECT_OVERRIDE,
@@ -235,7 +235,7 @@ public class WifiAutoConnectPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN_V2)
+    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
     public void handleDialogResult_resultOk_turnsOnAndSavesOverride() {
         when(mAdvancedProtectionManager.isAdvancedProtectionEnabled()).thenReturn(true);
         when(mWifiConfiguration.isAutoJoinInAdvancedProtectionModeEnabled()).thenReturn(false);
@@ -253,7 +253,7 @@ public class WifiAutoConnectPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN_V2)
+    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
     public void onPreferenceClick_aapmActive_overrideAlreadyOn_turnsOffImmediately() {
         // AAPM is active and we are on an insecure network
         when(mAdvancedProtectionManager.isAdvancedProtectionEnabled()).thenReturn(true);
@@ -276,7 +276,7 @@ public class WifiAutoConnectPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN_V2)
+    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
     public void isChecked_aapmActive_readsFromConfigOverride() {
         // AAPM is active on insecure network
         when(mAdvancedProtectionManager.isAdvancedProtectionEnabled()).thenReturn(true);
@@ -291,7 +291,7 @@ public class WifiAutoConnectPreferenceController2Test {
     }
 
     @Test
-    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN_V2)
+    @EnableFlags(android.security.Flags.FLAG_AAPM_FEATURE_DISABLE_INSECURE_WIFI_AUTOJOIN)
     public void onPreferenceClick_aapmActive_secureNetwork_standardBehavior() {
         // AAPM is active on Secure network
         when(mAdvancedProtectionManager.isAdvancedProtectionEnabled()).thenReturn(true);

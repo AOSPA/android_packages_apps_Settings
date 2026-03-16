@@ -24,7 +24,6 @@ import com.android.settings.R
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
-import com.android.settingslib.metadata.SensitivityLevel
 
 /** Represents the preference for navigating to the settings screen of an accessibility service. */
 class A11yServiceSettingPreference(private val serviceInfo: AccessibilityServiceInfo) :
@@ -58,10 +57,6 @@ class A11yServiceSettingPreference(private val serviceInfo: AccessibilityService
             null
         }
     }
-
-    //marked with DO_NOT_EXPOSE due to security concerns, changing sensitivity will require a check with security
-    override val sensitivityLevel: Int
-        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && intent(context) != null

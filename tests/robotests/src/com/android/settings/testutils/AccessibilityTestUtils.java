@@ -17,6 +17,7 @@
 package com.android.settings.testutils;
 
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
+import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_GESTURE;
 import static android.provider.Settings.Secure.ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_3BUTTON;
 import static android.view.WindowManagerPolicyConstants.NAV_BAR_MODE_GESTURAL;
@@ -88,12 +89,12 @@ public class AccessibilityTestUtils {
 
     public static void setSoftwareShortcutMode(
             Context context, boolean gestureNavEnabled, boolean floatingButtonEnabled) {
-        // If gestures are on, modern Android FORCES the floating menu.
-        // Otherwise, it depends on the floatingButtonEnabled flag.
-        int buttonMode = (gestureNavEnabled || floatingButtonEnabled)
-                ? ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU
-                : ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
-
+        int buttonMode = ACCESSIBILITY_BUTTON_MODE_NAVIGATION_BAR;
+        if (floatingButtonEnabled) {
+            buttonMode = ACCESSIBILITY_BUTTON_MODE_FLOATING_MENU;
+        } else if (gestureNavEnabled) {
+            buttonMode = ACCESSIBILITY_BUTTON_MODE_GESTURE;
+        }
         int navMode = gestureNavEnabled ? NAV_BAR_MODE_GESTURAL : NAV_BAR_MODE_3BUTTON;
 
         Settings.Secure.putIntForUser(context.getContentResolver(),
@@ -213,21 +214,10 @@ public class AccessibilityTestUtils {
     }
 
     /**
-     * Set desktop support in the shadow package manager.
-     *
-     * @param context context for the package manager.
-     * @param supported Whether desktop support should be enabled.
-     */
-    public static void setDesktopSupported(Context context, boolean supported) {
-        ShadowPackageManager shadowPackageManager = Shadows.shadowOf(context.getPackageManager());
-        shadowPackageManager.setSystemFeature(PackageManager.FEATURE_PC, supported);
-    }
-
-    /**
      * Set touch screen support in the shadow package manager.
      *
      * @param context context for the package manager.
-     * @param supported Whether touch screen support should be enabled.
+     * @param supported true if touch screen support should be enabled, false otherwise.
      */
     public static void setTouchScreenSupported(Context context, boolean supported) {
         ShadowPackageManager shadowPackageManager = Shadows.shadowOf(context.getPackageManager());

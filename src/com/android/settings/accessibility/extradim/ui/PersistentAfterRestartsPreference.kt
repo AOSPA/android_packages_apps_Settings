@@ -27,7 +27,6 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
-import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 class PersistentAfterRestartsPreference(
@@ -84,9 +83,6 @@ class PersistentAfterRestartsPreference(
         settingsKeyedObserver?.let { observer -> extraDimStorage.removeObserver(observer) }
         settingsKeyedObserver = null
     }
-
-    override val sensitivityLevel: Int
-        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val KEY = Settings.Secure.REDUCE_BRIGHT_COLORS_PERSIST_ACROSS_REBOOTS

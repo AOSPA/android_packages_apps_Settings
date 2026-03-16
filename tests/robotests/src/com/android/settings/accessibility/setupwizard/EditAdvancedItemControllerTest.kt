@@ -16,10 +16,7 @@
 
 package com.android.settings.accessibility.setupwizard
 
-import android.app.Application
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.rules.ActivityScenarioRule
-import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIFICATION_CONTROLLER_NAME
 import com.android.settings.Settings.TestingSettingsActivity
 import com.google.android.setupdesign.items.Item
 import com.google.common.truth.Truth.assertThat
@@ -43,10 +40,10 @@ import org.robolectric.RobolectricTestRunner
 class EditAdvancedItemControllerTest {
 
     @get:Rule val activityScenarioRule = ActivityScenarioRule(TestingSettingsActivity::class.java)
-    private val appContext: Application = ApplicationProvider.getApplicationContext()
     private val item = Item()
     private val testDispatcher = StandardTestDispatcher()
     private val expandableState = MutableStateFlow(false)
+    private val controller = EditAdvancedItemController.create(item) {expandableState }
 
     @Before
     fun setUp() {
@@ -60,8 +57,6 @@ class EditAdvancedItemControllerTest {
 
     @Test
     fun bindData_setsVisible() {
-        val controller = createController(setOf(MAGNIFICATION_CONTROLLER_NAME))
-
         controller.bindData(item)
 
         assertThat(item.isVisible).isTrue()
@@ -70,7 +65,6 @@ class EditAdvancedItemControllerTest {
     @Test
     fun onItemSelected_setsExpandableStateToTrue() = runTest {
         activityScenarioRule.scenario.onActivity { activity ->
-            val controller = createController(setOf(MAGNIFICATION_CONTROLLER_NAME))
             controller.bindData(item)
 
             controller.onItemSelected(activity)
@@ -82,7 +76,6 @@ class EditAdvancedItemControllerTest {
     @Test
     fun onItemSelected_triggersVisibilityChange() = runTest {
         activityScenarioRule.scenario.onActivity { activity ->
-            val controller = createController(setOf(MAGNIFICATION_CONTROLLER_NAME))
             controller.bindData(item)
 
             controller.onItemSelected(activity)
@@ -91,8 +84,4 @@ class EditAdvancedItemControllerTest {
             assertThat(item.isVisible).isFalse()
         }
     }
-
-    /** Creates the controller and its associated store. */
-    private fun createController(targets: Set<String>) =
-        EditAdvancedItemController.create(appContext, item, targets) { expandableState }
 }

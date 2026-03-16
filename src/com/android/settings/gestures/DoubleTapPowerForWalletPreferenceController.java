@@ -165,5 +165,5 @@ public class DoubleTapPowerForWalletPreferenceController extends BasePreferenceC
                 && mQuickAccessWalletClient.isWalletServiceAvailable();
     }
 }
-// LINT.ThenChange(DoubleTapPowerApiFirstScreen.kt)
+// LINT.ThenChange(DoubleTapPowerForWalletPreference.kt)
 

@@ -28,7 +28,6 @@ import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
-import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 /**
@@ -88,9 +87,6 @@ class LongPressTimeoutPreference(context: Context) :
     }
 
     override fun createWidget(context: Context) = ListPreference(context)
-
-    override val sensitivityLevel: Int
-        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     companion object {
         const val KEY = Settings.Secure.LONG_PRESS_TIMEOUT

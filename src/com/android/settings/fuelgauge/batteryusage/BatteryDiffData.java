@@ -147,7 +147,7 @@ public class BatteryDiffData {
     private static void purgeBatteryDiffData(
             final PowerUsageFeatureProvider featureProvider, final List<BatteryDiffEntry> entries) {
         final double screenOnTimeThresholdInMs =
-                featureProvider.getBatteryUsageListScreenOnTimeThresholdMs();
+                featureProvider.getBatteryUsageListScreenOnTimeThresholdInMs();
         final double consumePowerThreshold =
                 featureProvider.getBatteryUsageListConsumePowerThreshold();
         final Set<Integer> hideSystemComponentSet = featureProvider.getHideSystemComponentSet();

@@ -28,7 +28,6 @@ import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
-import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 
@@ -95,9 +94,6 @@ class IntensityPreference(
         settingsKeyedObserver?.let { observer -> extraDimStorage.removeObserver(observer) }
         settingsKeyedObserver = null
     }
-
-    override val sensitivityLevel: Int
-        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val KEY = IntensityDataStore.SETTING_KEY

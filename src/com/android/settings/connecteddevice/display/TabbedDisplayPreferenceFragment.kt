@@ -29,6 +29,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.internal.annotations.VisibleForTesting
 import com.android.settings.R
 import com.android.settings.core.SettingsBaseActivity
+import com.android.settings.flags.Flags
 import com.android.settings.search.BaseSearchIndexProvider
 import com.android.settings.utils.DesktopSettingsUtils
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
@@ -364,6 +365,9 @@ open class TabbedDisplayPreferenceFragment(
                     enabled: Boolean,
                 ): MutableList<SearchIndexableRaw?> {
                     val rawData: MutableList<SearchIndexableRaw?> = mutableListOf()
+                    if (!Flags.showTabbedConnectedDisplaySetting()) {
+                        return rawData
+                    }
                     val indexInfo = SearchIndexableRaw(context)
                     indexInfo.key = "external_display_screen_title"
                     indexInfo.title = context.getString(R.string.external_display_settings_title)

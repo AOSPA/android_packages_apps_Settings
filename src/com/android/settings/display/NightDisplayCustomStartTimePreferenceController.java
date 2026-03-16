@@ -24,7 +24,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.settings.core.BasePreferenceController;
 
-// LINT.IfChange
 public class NightDisplayCustomStartTimePreferenceController extends BasePreferenceController {
 
     private ColorDisplayManager mColorDisplayManager;
@@ -66,4 +65,3 @@ public class NightDisplayCustomStartTimePreferenceController extends BasePrefere
                 mColorDisplayManager.getNightDisplayCustomStartTime()));
     }
 }
-// LINT.ThenChange(NightDisplayApiScreen.kt)

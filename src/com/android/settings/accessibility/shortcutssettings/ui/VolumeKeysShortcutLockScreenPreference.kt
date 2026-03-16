@@ -24,7 +24,6 @@ import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceSummaryProvider
-import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 class VolumeKeysShortcutLockScreenPreference() :
@@ -61,9 +60,6 @@ class VolumeKeysShortcutLockScreenPreference() :
             }
         return context.getString(stringResId)
     }
-
-    override val sensitivityLevel: Int
-        get() = SensitivityLevel.REQUIRES_CONFIRMATION
 
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_SHORTCUT_ON_LOCK_SCREEN

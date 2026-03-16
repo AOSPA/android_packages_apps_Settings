@@ -17,12 +17,12 @@
 package com.android.settings.accessibility.shortcuts.ui
 
 import android.content.Context
-import android.content.pm.PackageManager
 import androidx.preference.Preference
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 import com.android.settingslib.metadata.PreferenceMetadata
 
 class VolumeKeysShortcutPreference(context: Context, targets: Set<String>) :
@@ -54,8 +54,7 @@ class VolumeKeysShortcutPreference(context: Context, targets: Set<String>) :
     }
 
     fun isDesktopKeyboardShortcutEnabled() =
-        Flags.desktopMagnificationSettingsPolish() &&
-            context.packageManager.run { hasSystemFeature(PackageManager.FEATURE_PC) }
+        Flags.desktopMagnificationSettingsPolish() && InputPeripheralsSettingsUtils.isHardKeyboard()
 
     companion object {
         private const val KEY = "shortcut_volume_keys_pref"

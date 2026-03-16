@@ -34,7 +34,6 @@ class EditKeyboardShortcutController(
         with(metadata) {
             item.summary = getSummary(context)
             item.imageResId = getIconResId(context)
-            item.isVisible = isAvailable(context)
         }
     }
 

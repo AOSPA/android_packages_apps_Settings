@@ -18,11 +18,7 @@ package com.android.settings.nfc;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-
 import android.content.Context;
-import android.os.UserManager;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -30,8 +26,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 @RunWith(AndroidJUnit4.class)
 public class SecureNfcPreferenceControllerTest {
@@ -39,30 +33,14 @@ public class SecureNfcPreferenceControllerTest {
     private Context mContext;
     private SecureNfcPreferenceController mController;
 
-    @Mock
-    private UserManager mUserManager;
-
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        mContext = spy(ApplicationProvider.getApplicationContext());
-
-        when(mContext.getSystemService(UserManager.class)).thenReturn(mUserManager);
-
+        mContext = ApplicationProvider.getApplicationContext();
         mController = new SecureNfcPreferenceController(mContext, "nfc_secure_settings");
     }
 
     @Test
     public void isPublicSlice_returnsTrue() {
         assertThat(mController.isPublicSlice()).isTrue();
-    }
-
-    @Test
-    public void setChecked_guestUser_shouldReturnFalse() {
-        when(mUserManager.isGuestUser()).thenReturn(true);
-
-        boolean result = mController.setChecked(true);
-
-        assertThat(result).isFalse();
     }
 }

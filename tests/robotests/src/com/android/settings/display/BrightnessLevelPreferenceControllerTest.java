@@ -66,7 +66,6 @@ import org.robolectric.shadows.ShadowContentResolver;
 /**
  * Tests for {@link BrightnessLevelPreferenceController}.
  */
-// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class BrightnessLevelPreferenceControllerTest {
     @Mock
@@ -205,4 +204,3 @@ public class BrightnessLevelPreferenceControllerTest {
                 .isEqualTo(SettingsTransitionHelper.TransitionType.TRANSITION_NONE);
     }
 }
-// LINT.ThenChange(BrightnessLevelPreferenceTest.kt, DisplayApiScreenTest.kt)

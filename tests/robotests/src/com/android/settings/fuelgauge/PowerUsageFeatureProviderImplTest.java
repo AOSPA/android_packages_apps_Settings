@@ -100,19 +100,6 @@ public class PowerUsageFeatureProviderImplTest {
         assertThat(mPowerFeatureProvider.getBatteryUsageListConsumePowerThreshold()).isEqualTo(0.0);
     }
 
-
-    @Test
-    public void getBatteryUsageResetErrorTimeThresholdMs_returnExpectedResult() {
-        assertThat(mPowerFeatureProvider.getBatteryUsageResetErrorTimeThresholdMs())
-                .isEqualTo(Long.MAX_VALUE);
-    }
-
-    @Test
-    public void getBatteryUsageResetErrorPowerThreshold_returnExpectedResult() {
-        assertThat(mPowerFeatureProvider.getBatteryUsageResetErrorPowerThreshold())
-                .isEqualTo(Double.MAX_VALUE);
-    }
-
     @Test
     public void getBatteryUsageStatsMaxAgeMs_returnUnsetValue() {
         assertThat(mPowerFeatureProvider.getBatteryUsageStatsMaxAgeMs(/* isFromPeriodJob= */true))

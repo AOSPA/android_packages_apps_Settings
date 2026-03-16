@@ -559,15 +559,6 @@ public final class ConvertUtils {
             builder.setAppOptimizationMode(batteryOptimizationModeInfo.first)
                     .setIsAppOptimizationModeMutable(batteryOptimizationModeInfo.second);
         }
-        final BatteryDiffEntry.DataMetadata dataMetadata = batteryDiffEntry.mDataMetadata;
-        if (dataMetadata != null) {
-            builder.setDataMetadata(
-                    com.android.settings.fuelgauge.batteryusage.DataMetadata.newBuilder()
-                            .addAllDataErrorTypes(dataMetadata.mErrorTypes)
-                            .setErrorMsg(dataMetadata.mErrorMsg)
-                            .build()
-            );
-        }
         return builder.build();
     }
 
@@ -596,7 +587,7 @@ public final class ConvertUtils {
 
     private static BatteryDiffEntry convertToBatteryDiffEntry(
             Context context, final BatteryUsageDiff batteryUsageDiff) {
-        final BatteryDiffEntry batteryDiffEntry = new BatteryDiffEntry(
+        return new BatteryDiffEntry(
                 context,
                 batteryUsageDiff.getUid(),
                 batteryUsageDiff.getUserId(),
@@ -615,16 +606,6 @@ public final class ConvertUtils {
                 batteryUsageDiff.getForegroundServiceUsageConsumePower(),
                 batteryUsageDiff.getBackgroundUsageConsumePower(),
                 batteryUsageDiff.getCachedUsageConsumePower());
-        if (batteryUsageDiff.hasDataMetadata()) {
-            final DataMetadata dataMetadata = batteryUsageDiff.getDataMetadata();
-            batteryDiffEntry.setDataMetadata(
-                    new BatteryDiffEntry.DataMetadata(
-                            dataMetadata.getDataErrorTypesList(),
-                            dataMetadata.getErrorMsg()
-                    )
-            );
-        }
-        return batteryDiffEntry;
     }
 
     static BatteryDiffData convertToBatteryDiffData(

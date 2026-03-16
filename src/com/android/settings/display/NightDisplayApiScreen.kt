@@ -33,10 +33,6 @@ import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.IntInRange
-import com.android.settingslib.metadata.preferencesapi.types.TimeOfDay
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit.MINUTES
 import kotlin.math.roundToInt
 
 // LINT.IfChange
@@ -126,79 +122,7 @@ class NightDisplayApiScreen :
                         Allowed
                     }
                 }
-                executeEnum { value ->
-                    context.colorDisplayManager.setNightDisplayAutoMode(value.asApiValue)
-                }
-            }
-        }
-
-        preference(
-            key = NIGHT_DISPLAY_CUSTOM_START_TIME_KEY,
-            purpose = R.string.night_display_custom_start_time_purpose,
-            type = TimeOfDay,
-        ) {
-            preconditions(R.string.night_display_custom_start_end_times_preconditions) {
-                if (context.getNightDisplayAutoMode() == NightDisplayAutoMode.CUSTOM_TIME) {
-                    Allowed
-                } else {
-                    InvalidPreference(
-                        otherPreferenceScreenKey = KEY,
-                        otherPreferenceKey = NIGHT_DISPLAY_AUTO_MODE_KEY,
-                        reason = R.string.night_display_auto_mode_custom_time_disabled,
-                    )
-                }
-            }
-
-            get {
-                execute {
-                    customTimeFormatter.format(
-                        context.colorDisplayManager.getNightDisplayCustomStartTime()
-                    )
-                }
-            }
-
-            set {
-                permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
-                execute { value ->
-                    context.colorDisplayManager.setNightDisplayCustomStartTime(
-                        value.toLocalTimeMinutes()
-                    )
-                }
-            }
-        }
-
-        preference(
-            key = NIGHT_DISPLAY_CUSTOM_END_TIME_KEY,
-            purpose = R.string.night_display_custom_end_time_purpose,
-            type = TimeOfDay,
-        ) {
-            preconditions(R.string.night_display_custom_start_end_times_preconditions) {
-                if (context.getNightDisplayAutoMode() == NightDisplayAutoMode.CUSTOM_TIME) {
-                    Allowed
-                } else {
-                    InvalidPreference(
-                        otherPreferenceScreenKey = KEY,
-                        otherPreferenceKey = NIGHT_DISPLAY_AUTO_MODE_KEY,
-                        reason = R.string.night_display_auto_mode_custom_time_disabled,
-                    )
-                }
-            }
-
-            get {
-                execute {
-                    customTimeFormatter.format(
-                        context.colorDisplayManager.getNightDisplayCustomEndTime()
-                    )
-                }
-            }
-
-            set {
-                permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
-                execute { value ->
-                    context.colorDisplayManager.setNightDisplayCustomEndTime(
-                        value.toLocalTimeMinutes()
-                    )
-                }
+                executeEnum { value -> context.colorDisplayManager.setNightDisplayAutoMode(value.asApiValue) }
             }
         }
     }
@@ -208,8 +132,6 @@ class NightDisplayApiScreen :
 
     private val Context.isLocationEnabled: Boolean
         get() = getSystemService(LocationManager::class.java).isLocationEnabled
-
-    private fun String.toLocalTimeMinutes(): LocalTime = LocalTime.parse(this).truncatedTo(MINUTES)
 
     private fun Context.getNightDisplayIntensity(): Int {
         val min = ColorDisplayManager.getMinimumColorTemperature(this)
@@ -234,15 +156,11 @@ class NightDisplayApiScreen :
             NightDisplayAutoMode.entries.first { it.asApiValue == apiValue }
         } ?: NightDisplayAutoMode.NEVER
 
-    private val customTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
-
     companion object {
         const val KEY = "api_night_display"
         const val NIGHT_DISPLAY_ACTIVATED_KEY = "night_display_activated"
         const val NIGHT_DISPLAY_TEMPERATURE_KEY = "night_display_temperature"
         const val NIGHT_DISPLAY_AUTO_MODE_KEY = "night_display_auto_mode"
-        const val NIGHT_DISPLAY_CUSTOM_START_TIME_KEY = "night_display_start_time"
-        const val NIGHT_DISPLAY_CUSTOM_END_TIME_KEY = "night_display_end_time"
     }
 }
 
@@ -254,6 +172,4 @@ enum class NightDisplayAutoMode(override val asApiValue: Int, override val purpo
 }
 // LINT.ThenChange(NightDisplaySettings.java, NightDisplayScreen.kt,
 // NightDisplayActivationPreferenceController.java, NightDisplayIntensityPreferenceController.java,
-// NightDisplayAutoModePreferenceController.java,
-// NightDisplayCustomStartTimePreferenceController.java,
-// NightDisplayCustomEndTimePreferenceController.java)
+// NightDisplayAutoModePreferenceController.java)

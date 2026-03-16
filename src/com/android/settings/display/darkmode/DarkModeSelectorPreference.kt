@@ -56,8 +56,6 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
-    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
-
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 

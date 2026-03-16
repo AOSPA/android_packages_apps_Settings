@@ -86,9 +86,7 @@ class EditShortcutSetupWizardFragment : BaseSetupWizardFragment() {
             findItem(adapter, R.id.edit_advanced_shortcut_in_suw)?.let {
                 put(
                     R.id.edit_advanced_shortcut_in_suw,
-                    EditAdvancedItemController.create(context, it, shortcutTargets) {
-                        expandableStateFlow
-                    },
+                    EditAdvancedItemController(it) { expandableStateFlow },
                 )
             }
             findItem(adapter, R.id.edit_triple_tap_shortcut_in_suw)?.let {

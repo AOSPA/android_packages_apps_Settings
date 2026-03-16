@@ -19,7 +19,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.UserHandle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -47,7 +46,7 @@ public class PromotedNotificationsPreferenceController extends
 
     @Override
     public boolean isAvailable() {
-        return super.isAvailable() && isPermissionRequested() && canPermissionBeRevoked();
+        return super.isAvailable() && isPermissionRequested();
     }
 
     private boolean isPermissionRequested() {
@@ -70,11 +69,6 @@ public class PromotedNotificationsPreferenceController extends
         return false;
     }
 
-    private boolean canPermissionBeRevoked() {
-        // Permissions for packages with sharedUserId="android.uid.system" cannot be effectively
-        // taken away (PermissionManager always returns GRANTED).
-        return !UserHandle.isSameApp(mAppRow.uid, android.os.Process.SYSTEM_UID);
-    }
 
     @Override
     boolean isIncludedInFilter() {

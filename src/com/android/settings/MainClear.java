@@ -347,7 +347,6 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         }
         mScrollView = mContentView.findViewById(
                 com.google.android.setupdesign.R.id.sud_scroll_view);
-        mScrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
 
         /*
          * If the external storage is emulated, it will be erased with a factory

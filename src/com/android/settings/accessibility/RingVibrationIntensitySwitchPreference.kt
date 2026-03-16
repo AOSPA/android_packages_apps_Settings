@@ -19,7 +19,6 @@ import android.content.Context
 import android.os.VibrationAttributes
 import android.provider.Settings.System.RING_VIBRATION_INTENSITY
 import com.android.settings.R
-import com.android.settingslib.metadata.SensitivityLevel
 
 /** Accessibility settings for ring vibration, using a switch toggle. */
 // LINT.IfChange
@@ -38,9 +37,6 @@ class RingVibrationIntensitySwitchPreference(
         vibrationUsage = VibrationAttributes.USAGE_RINGTONE,
         title = R.string.accessibility_ring_vibration_title,
     ) {
-    override val sensitivityLevel: Int
-        get() = SensitivityLevel.NO_SENSITIVITY
-
     override val keywords: Int
         get() = R.string.keywords_ring_vibration
 }

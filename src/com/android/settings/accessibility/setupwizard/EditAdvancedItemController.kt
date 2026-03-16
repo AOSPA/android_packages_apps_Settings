@@ -16,9 +16,7 @@
 
 package com.android.settings.accessibility.setupwizard
 
-import android.content.Context
 import androidx.fragment.app.FragmentActivity
-import com.android.settings.accessibility.shortcuts.ui.AdvancedPreference
 import com.google.android.setupdesign.items.Item
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,9 +32,7 @@ import kotlinx.coroutines.launch
  * the advanced section has been expanded.
  */
 class EditAdvancedItemController(
-    private val context: Context,
     item: Item,
-    private val metadata: AdvancedPreference,
     private val expandableStateProvider: () -> StateFlow<Boolean>,
 ) : BaseItemController(item) {
 
@@ -48,7 +44,7 @@ class EditAdvancedItemController(
 
     override fun bindData(item: Item) {
         val isExpanded = expandableStateProvider().value
-        item.isVisible = !isExpanded && metadata.isAvailable(context)
+        item.isVisible = !isExpanded
     }
 
     override fun onItemSelected(activity: FragmentActivity) {
@@ -64,13 +60,11 @@ class EditAdvancedItemController(
         /** Creates a new instance of [EditAdvancedItemController]. */
         @JvmStatic
         fun create(
-            context: Context,
             item: Item,
-            targets: Set<String>,
             expandableStateProvider: () -> StateFlow<Boolean>,
         ): EditAdvancedItemController {
-            val metadata = AdvancedPreference(targets)
-            return EditAdvancedItemController(context, item, metadata, expandableStateProvider)
+            return EditAdvancedItemController( item, expandableStateProvider)
         }
     }
 }
+

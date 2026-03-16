@@ -20,6 +20,7 @@ import android.app.admin.DevicePolicyIdentifiers
 import android.app.admin.DevicePolicyManager
 import android.app.admin.EnforcingAdmin
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.UserHandle
 import androidx.annotation.VisibleForTesting
@@ -27,6 +28,7 @@ import com.android.settings.R
 import com.android.settings.connecteddevice.DevicePreferenceCallback
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.DisplayListener
 import com.android.settings.core.SubSettingLauncher
+import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedLockUtilsInternal
@@ -93,8 +95,14 @@ abstract class BaseExternalDisplayUpdater(
 
     @VisibleForTesting
     protected open fun launchSettings(context: Context, args: Bundle?) {
+        val destination =
+            if (Flags.showTabbedConnectedDisplaySetting()) {
+                TabbedDisplayPreferenceFragment::class.java.name
+            } else {
+                ExternalDisplayPreferenceFragment::class.java.name
+            }
         SubSettingLauncher(context)
-            .setDestination(TabbedDisplayPreferenceFragment::class.java.name)
+            .setDestination(destination)
             .setTitleRes(R.string.external_display_settings_title)
             .setSourceMetricsCategory(metricsCategory)
             .setArguments(args)

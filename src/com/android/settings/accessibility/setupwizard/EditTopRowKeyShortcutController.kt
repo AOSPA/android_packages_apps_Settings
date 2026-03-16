@@ -24,18 +24,13 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.google.android.setupdesign.items.Item
 
 /** Controller for the edit top row key shortcut item in the Accessibility Setup Wizard. */
-class EditTopRowKeyShortcutController(
-    context: Context,
-    item: Item,
-    private val metadata: TopRowKeyShortcutPreference,
-    dataStore: KeyValueStore,
-) : BaseShortcutController(context, item, dataStore, KEY) {
+class EditTopRowKeyShortcutController(context: Context, item: Item, dataStore: KeyValueStore) :
+    BaseShortcutController(context, item, dataStore, KEY) {
 
     override fun updateItemVisuals(item: IllustrationCheckBoxItem) {
         item.summary =
             context.getString(R.string.accessibility_shortcut_edit_dialog_summary_top_row_key)
         item.imageResId = R.drawable.accessibility_shortcut_type_top_row
-        item.isVisible = metadata.isAvailable(context)
     }
 
     companion object {
@@ -49,12 +44,7 @@ class EditTopRowKeyShortcutController(
             targets: Set<String>,
         ): EditTopRowKeyShortcutController {
             val metadata = TopRowKeyShortcutPreference(context, targets)
-            return EditTopRowKeyShortcutController(
-                context,
-                item,
-                metadata,
-                metadata.storage(context),
-            )
+            return EditTopRowKeyShortcutController(context, item, metadata.storage(context))
         }
     }
 }

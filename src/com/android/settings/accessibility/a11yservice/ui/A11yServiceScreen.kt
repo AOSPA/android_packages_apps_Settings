@@ -70,7 +70,6 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import com.android.settings.accessibility.a11yservice.data.AccessibilityService
-import com.android.settingslib.metadata.SensitivityLevel
 
 @ProvidePreferenceScreen(A11yServiceScreen.KEY, parameterized = true)
 open class A11yServiceScreen
@@ -271,10 +270,6 @@ private constructor(
         override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
-
-        //marked with DO_NOT_EXPOSE due to security concerns, changing sensitivity will require a check with security
-        override val sensitivityLevel: Int
-            get() = SensitivityLevel.DO_NOT_EXPOSE
     }
 
     companion object : ParameterizedPreferenceScreenArgumentsFactory {

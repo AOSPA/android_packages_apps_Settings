@@ -176,16 +176,6 @@ flag {
 }
 
 flag {
-  name: "preferred_shortcut_filters_navigation_mode"
-  namespace: "accessibility"
-  description: "Retrieving a user's preferred shortcuts filters out types that aren't available in the current navigation mode."
-  bug: "488115037"
-  metadata {
-    purpose: PURPOSE_BUGFIX
-  }
-}
-
-flag {
   name: "text_cursor_blinking_user_setting"
   namespace: "accessibility"
   description: "Moves the text cursor blinking setting to the Color and Motion settings page."

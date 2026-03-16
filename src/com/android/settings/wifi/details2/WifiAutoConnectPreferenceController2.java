@@ -157,7 +157,7 @@ public class WifiAutoConnectPreferenceController2 extends TogglePreferenceContro
     }
 
     private boolean isAapmActiveAndInsecureNetwork() {
-        if (!Flags.aapmFeatureDisableInsecureWifiAutojoinV2()) {
+        if (!Flags.aapmFeatureDisableInsecureWifiAutojoin()) {
             return false;
         }
 

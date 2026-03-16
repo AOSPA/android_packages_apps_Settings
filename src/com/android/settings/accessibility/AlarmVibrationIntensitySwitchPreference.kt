@@ -19,7 +19,6 @@ import android.content.Context
 import android.os.VibrationAttributes
 import android.provider.Settings.System.ALARM_VIBRATION_INTENSITY
 import com.android.settings.R
-import com.android.settingslib.metadata.SensitivityLevel
 
 /** Accessibility settings for alarm vibration, as a switch toggle. */
 // LINT.IfChange
@@ -38,9 +37,6 @@ class AlarmVibrationIntensitySwitchPreference(
         vibrationUsage = VibrationAttributes.USAGE_ALARM,
         title = R.string.accessibility_alarm_vibration_title,
     ) {
-    override val sensitivityLevel: Int
-        get() = SensitivityLevel.NO_SENSITIVITY
-
     override val keywords: Int
         get() = R.string.keywords_alarm_vibration
 }
