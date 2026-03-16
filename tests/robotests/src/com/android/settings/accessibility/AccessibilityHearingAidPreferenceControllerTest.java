@@ -28,10 +28,10 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothHapClient;
 import android.bluetooth.BluetoothHearingAid;
-import android.bluetooth.BluetoothProfile;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.SystemProperties;
 
 import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
@@ -59,7 +59,6 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowApplication;
 import org.robolectric.shadows.ShadowLooper;
 
@@ -79,9 +78,11 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     private static final String TEST_DEVICE_ADDRESS_2 = "00:A2:A2:A2:A2:A2";
     private static final String TEST_DEVICE_NAME = "TEST_HEARING_AID_BT_DEVICE_NAME";
     private static final String HEARING_AID_PREFERENCE = "hearing_aid_preference";
+    private static final String ASHA_PROFILE_CENTRAL_PROPERTY =
+            "bluetooth.profile.asha.central.enabled";
+    private static final String HAP_PROFILE_CLIENT_PROPERTY =
+            "bluetooth.profile.hap.client.enabled";
 
-    private BluetoothAdapter mBluetoothAdapter;
-    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
     private BluetoothDevice mBluetoothDevice;
 
     private BluetoothDevice mSubBluetoothDevice;
@@ -124,6 +125,8 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     @After
     public void tearDown() {
         ShadowBluetoothUtils.reset();
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "");
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "");
     }
 
     @Test
@@ -304,13 +307,12 @@ public class AccessibilityHearingAidPreferenceControllerTest {
     private void setupEnvironment() {
         ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
         mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HAP_CLIENT);
-        mBluetoothDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS));
-        mSubBluetoothDevice = spy(mBluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2));
-        mBluetoothAdapter.enable();
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "true");
+        mBluetoothDevice = spy(bluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS));
+        mSubBluetoothDevice = spy(bluetoothAdapter.getRemoteDevice(TEST_DEVICE_ADDRESS_2));
+        bluetoothAdapter.enable();
 
         doReturn(mEventManager).when(mLocalBluetoothManager).getEventManager();
         when(mLocalBluetoothManager.getCachedDeviceManager()).thenReturn(mCachedDeviceManager);
