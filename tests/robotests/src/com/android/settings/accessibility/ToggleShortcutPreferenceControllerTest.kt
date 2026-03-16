@@ -32,7 +32,6 @@ import androidx.lifecycle.Lifecycle.State.INITIALIZED
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
-import com.android.hardware.input.Flags
 import com.android.internal.accessibility.AccessibilityShortcutController.AUTOCLICK_COMPONENT_NAME
 import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT
@@ -154,6 +153,11 @@ class ToggleShortcutPreferenceControllerTest {
 
     @Test
     fun displayPreferenceAndUpdateState_softwareOrGestureShortcut_updateCheckStateAndSummary() {
+        AccessibilityTestUtils.setSoftwareShortcutMode(
+            context,
+            /* gestureNavEnabled= */ true,
+            /* floatingButtonEnabled= */ false,
+        )
         a11yManager.enableShortcutsForTargets(
             /* enable= */ true,
             SOFTWARE or GESTURE,
