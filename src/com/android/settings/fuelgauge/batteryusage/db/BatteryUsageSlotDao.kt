@@ -38,6 +38,13 @@ interface BatteryUsageSlotDao {
     )
     fun getAllAfter(timestamp: Long): Cursor
 
+    /** Gets the [Cursor] of all recorded data exactly before a specific timestamp. */
+    @Query(
+        "SELECT * FROM BatteryUsageSlotEntity WHERE timestamp < :timestamp" +
+            " ORDER BY timestamp ASC"
+    )
+    fun getAllBefore(timestamp: Long): Cursor
+
     /** Gets all recorded data after a specific timestamp for log. */
     @Query(
         "SELECT * FROM BatteryUsageSlotEntity WHERE timestamp >= :timestamp" +

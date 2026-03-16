@@ -16,6 +16,8 @@
 
 package com.android.settings.inputmethod;
 
+import static com.android.settings.flags.Flags.FLAG_DISABLE_KEYBOARD_SETTINGS_IN_DEMO_MODE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.mock;
@@ -27,13 +29,21 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
+import android.provider.Settings;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.core.text.BidiFormatter;
 import androidx.preference.Preference;
 
+import com.android.settings.R;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -46,7 +56,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = SettingsShadowResources.class)
 public class VirtualKeyboardPreferenceControllerTest {
+
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private Context mContext;
@@ -70,6 +84,12 @@ public class VirtualKeyboardPreferenceControllerTest {
         mController = new VirtualKeyboardPreferenceController(mContext);
     }
 
+    @After
+    public void tearDown() {
+        Settings.Global.putInt(RuntimeEnvironment.application.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 0);
+    }
+
     @Test
     public void testVirtualKeyboard_byDefault_shouldBeShown() {
         final Context context = spy(RuntimeEnvironment.application);
@@ -82,6 +102,22 @@ public class VirtualKeyboardPreferenceControllerTest {
     public void testVirtualKeyboard_ifDisabled_shouldNotBeShown() {
         final Context context = spy(RuntimeEnvironment.application);
         mController = new VirtualKeyboardPreferenceController(context);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_DISABLE_KEYBOARD_SETTINGS_IN_DEMO_MODE)
+    public void isAvailable_inDemoMode_returnsFalse() {
+        final Context context = spy(RuntimeEnvironment.application);
+        mController = new VirtualKeyboardPreferenceController(context);
+
+        // Put the device in demo mode.
+        Settings.Global.putInt(context.getContentResolver(),
+                Settings.Global.DEVICE_DEMO_MODE, 1);
+
+        SettingsShadowResources.overrideResource(
+                R.bool.config_disable_keyboard_settings_in_demo_mode, true);
+
         assertThat(mController.isAvailable()).isFalse();
     }
 

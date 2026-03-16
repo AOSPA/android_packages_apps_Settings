@@ -19,6 +19,7 @@ import android.content.Context
 import android.os.VibrationAttributes
 import android.provider.Settings.System.HAPTIC_FEEDBACK_INTENSITY
 import com.android.settings.R
+import com.android.settingslib.metadata.SensitivityLevel
 
 /** Accessibility settings for touch haptic feedback, as a switch toggle */
 // LINT.IfChange
@@ -37,6 +38,9 @@ class TouchVibrationIntensitySwitchPreference(
         vibrationUsage = VibrationAttributes.USAGE_TOUCH,
         title = R.string.accessibility_touch_vibration_title,
     ) {
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
+
     override val keywords: Int
         get() = R.string.keywords_touch_vibration
 }

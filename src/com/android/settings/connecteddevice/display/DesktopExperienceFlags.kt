@@ -32,14 +32,4 @@ class DesktopExperienceFlags(private val featureFlagsImpl: FeatureFlags) :
 
     override fun displayTopologyPaneInDisplayList(): Boolean =
         displayTopologyPaneInDisplayListFlag.isTrue
-
-    private val showTabbedConnectedDisplaySettingFlag =
-        DesktopExperienceFlag(
-            featureFlagsImpl::showTabbedConnectedDisplaySetting,
-            /* shouldOverrideByDevOption= */ false,
-            Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING,
-        )
-
-    override fun showTabbedConnectedDisplaySetting(): Boolean =
-        showTabbedConnectedDisplaySettingFlag.isTrue
 }

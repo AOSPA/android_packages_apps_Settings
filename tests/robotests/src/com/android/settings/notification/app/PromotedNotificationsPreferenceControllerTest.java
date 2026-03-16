@@ -16,6 +16,7 @@
 package com.android.settings.notification.app;
 
 import static android.Manifest.permission.POST_PROMOTED_NOTIFICATIONS;
+import static android.os.Process.SYSTEM_UID;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -29,7 +30,6 @@ import static org.mockito.Mockito.verify;
 import static org.robolectric.Shadows.shadowOf;
 
 import android.Manifest;
-import android.app.Flags;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.platform.test.flag.junit.SetFlagsRule;
@@ -91,6 +91,13 @@ public class PromotedNotificationsPreferenceControllerTest {
     public void testIsAvailable_permissionRequested_isTrue() {
         installMyPackage(new String[] { POST_PROMOTED_NOTIFICATIONS });
         assertThat(mPrefController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void testIsAvailable_system_isFalse() {
+        mAppRow.uid = SYSTEM_UID;
+        installMyPackage(new String[] { POST_PROMOTED_NOTIFICATIONS });
+        assertThat(mPrefController.isAvailable()).isFalse();
     }
 
     private void installMyPackage(@Nullable String[] withPermissions) {

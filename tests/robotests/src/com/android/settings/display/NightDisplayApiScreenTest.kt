@@ -27,6 +27,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.display.NightDisplayApiScreen.Companion.NIGHT_DISPLAY_ACTIVATED_KEY
 import com.android.settings.display.NightDisplayApiScreen.Companion.NIGHT_DISPLAY_AUTO_MODE_KEY
+import com.android.settings.display.NightDisplayApiScreen.Companion.NIGHT_DISPLAY_CUSTOM_END_TIME_KEY
+import com.android.settings.display.NightDisplayApiScreen.Companion.NIGHT_DISPLAY_CUSTOM_START_TIME_KEY
 import com.android.settings.display.NightDisplayApiScreen.Companion.NIGHT_DISPLAY_TEMPERATURE_KEY
 import com.android.settings.flags.Flags.FLAG_CATALYST_MIGRATION_26Q2
 import com.android.settings.testutils.shadow.SettingsShadowResources
@@ -35,7 +37,11 @@ import com.android.settings.testutils2.FailedPreconditionException
 import com.android.settings.testutils2.HardwareUnsupportedException
 import com.android.settings.testutils2.InvalidPreferenceException
 import com.android.settings.testutils2.MissingPermissionException
+import com.android.settingslib.testutils.shadow.ShadowColorDisplayManager
 import com.google.common.truth.Truth.assertThat
+import java.time.LocalTime
+import java.time.format.DateTimeParseException
+import java.util.Locale
 import kotlin.test.assertFailsWith
 import org.junit.Before
 import org.junit.Rule
@@ -47,7 +53,10 @@ import org.robolectric.shadows.ShadowApplication
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
-@Config(shadows = [ShadowApplication::class, SettingsShadowResources::class])
+@Config(
+    shadows =
+        [ShadowApplication::class, ShadowColorDisplayManager::class, SettingsShadowResources::class]
+)
 class NightDisplayApiScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -120,10 +129,9 @@ class NightDisplayApiScreenTest {
     fun setNightDisplayActivated_missingPermission_fails() {
         shadowApplication.denyPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
         colorDisplayManager.setNightDisplayActivated(true)
-        val failure =
-            assertFailsWith<MissingPermissionException> {
-                tester.set(NIGHT_DISPLAY_ACTIVATED_KEY, false)
-            }
+        assertFailsWith<MissingPermissionException> {
+            tester.set(NIGHT_DISPLAY_ACTIVATED_KEY, false)
+        }
         assertThat(colorDisplayManager.isNightDisplayActivated).isTrue()
     }
 
@@ -202,10 +210,9 @@ class NightDisplayApiScreenTest {
         shadowApplication.denyPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
         colorDisplayManager.setNightDisplayActivated(true)
         colorDisplayManager.setNightDisplayColorTemperature(minTemperature)
-        val failure =
-            assertFailsWith<MissingPermissionException> {
-                tester.set(NIGHT_DISPLAY_TEMPERATURE_KEY, 100)
-            }
+        assertFailsWith<MissingPermissionException> {
+            tester.set(NIGHT_DISPLAY_TEMPERATURE_KEY, 100)
+        }
         assertThat(colorDisplayManager.getNightDisplayColorTemperature()).isEqualTo(minTemperature)
     }
 
@@ -214,10 +221,9 @@ class NightDisplayApiScreenTest {
         shadowApplication.grantPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
         colorDisplayManager.setNightDisplayActivated(false)
         colorDisplayManager.setNightDisplayColorTemperature(minTemperature)
-        val failure =
-            assertFailsWith<InvalidPreferenceException> {
-                tester.set(NIGHT_DISPLAY_TEMPERATURE_KEY, 100)
-            }
+        assertFailsWith<InvalidPreferenceException> {
+            tester.set(NIGHT_DISPLAY_TEMPERATURE_KEY, 100)
+        }
         assertThat(colorDisplayManager.getNightDisplayColorTemperature()).isEqualTo(minTemperature)
     }
 
@@ -240,10 +246,9 @@ class NightDisplayApiScreenTest {
     @Test
     fun getNightDisplayAutoMode_missingPermission_fails() {
         shadowApplication.denyPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
-        val failure =
-            assertFailsWith<MissingPermissionException> {
-                tester.get<NightDisplayAutoMode>(NIGHT_DISPLAY_AUTO_MODE_KEY)
-            }
+        assertFailsWith<MissingPermissionException> {
+            tester.get<NightDisplayAutoMode>(NIGHT_DISPLAY_AUTO_MODE_KEY)
+        }
     }
 
     @Test
@@ -268,10 +273,9 @@ class NightDisplayApiScreenTest {
         shadowApplication.grantPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
         locationManager.setLocationEnabledForUser(false, context.getUser())
         colorDisplayManager.setNightDisplayAutoMode(ColorDisplayManager.AUTO_MODE_DISABLED)
-        val failure =
-            assertFailsWith<FailedPreconditionException> {
-                tester.set(NIGHT_DISPLAY_AUTO_MODE_KEY, ColorDisplayManager.AUTO_MODE_TWILIGHT)
-            }
+        assertFailsWith<FailedPreconditionException> {
+            tester.set(NIGHT_DISPLAY_AUTO_MODE_KEY, ColorDisplayManager.AUTO_MODE_TWILIGHT)
+        }
         assertThat(colorDisplayManager.getNightDisplayAutoMode())
             .isEqualTo(ColorDisplayManager.AUTO_MODE_DISABLED)
     }
@@ -280,15 +284,85 @@ class NightDisplayApiScreenTest {
     fun setNightDisplayAutoMode_missingPermission_fails() {
         shadowApplication.denyPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
         colorDisplayManager.setNightDisplayAutoMode(ColorDisplayManager.AUTO_MODE_DISABLED)
-        val failure =
-            assertFailsWith<MissingPermissionException> {
-                tester.set(NIGHT_DISPLAY_AUTO_MODE_KEY, ColorDisplayManager.AUTO_MODE_CUSTOM_TIME)
-            }
+        assertFailsWith<MissingPermissionException> {
+            tester.set(NIGHT_DISPLAY_AUTO_MODE_KEY, ColorDisplayManager.AUTO_MODE_CUSTOM_TIME)
+        }
         assertThat(colorDisplayManager.getNightDisplayAutoMode())
             .isEqualTo(ColorDisplayManager.AUTO_MODE_DISABLED)
+    }
+
+    @Test
+    fun getNightDisplayCustomTimes_returns24HoursFormattedValue() {
+        Locale.setDefault(Locale.US) // Context locale is ignored for time formatting.
+        colorDisplayManager.setNightDisplayAutoMode(ColorDisplayManager.AUTO_MODE_CUSTOM_TIME)
+        colorDisplayManager.setNightDisplayCustomStartTime(LocalTime.of(22, 30))
+        colorDisplayManager.setNightDisplayCustomEndTime(LocalTime.of(9, 10))
+        assertThat(tester.get<String>(NIGHT_DISPLAY_CUSTOM_START_TIME_KEY)).isEqualTo("22:30")
+        assertThat(tester.get<String>(NIGHT_DISPLAY_CUSTOM_END_TIME_KEY)).isEqualTo("09:10")
+    }
+
+    @Test
+    fun getNightDisplayCustomTimes_autoModeNotCustomTime_fails() {
+        colorDisplayManager.setNightDisplayAutoMode(ColorDisplayManager.AUTO_MODE_DISABLED)
+        assertFailsWith<InvalidPreferenceException> {
+            tester.get<Int>(NIGHT_DISPLAY_CUSTOM_START_TIME_KEY)
+        }
+        assertFailsWith<InvalidPreferenceException> {
+            tester.get<Int>(NIGHT_DISPLAY_CUSTOM_END_TIME_KEY)
+        }
+    }
+
+    @Test
+    fun setNightDisplayCustomTimes_updatesSettings() {
+        shadowApplication.grantPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
+        colorDisplayManager.setNightDisplayAutoMode(ColorDisplayManager.AUTO_MODE_CUSTOM_TIME)
+        tester.set(NIGHT_DISPLAY_CUSTOM_START_TIME_KEY, "22:45")
+        tester.set(NIGHT_DISPLAY_CUSTOM_END_TIME_KEY, "06:15")
+        assertThat(colorDisplayManager.getNightDisplayCustomStartTime())
+            .isEqualTo(LocalTime.of(22, 45))
+        assertThat(colorDisplayManager.getNightDisplayCustomEndTime())
+            .isEqualTo(LocalTime.of(6, 15))
+    }
+
+    @Test
+    fun setNightDisplayCustomTimes_missingPermission_fails() {
+        shadowApplication.denyPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
+        colorDisplayManager.setNightDisplayAutoMode(ColorDisplayManager.AUTO_MODE_CUSTOM_TIME)
+        assertFailsWith<MissingPermissionException> {
+            tester.set(NIGHT_DISPLAY_CUSTOM_START_TIME_KEY, "22:10")
+        }
+        assertFailsWith<MissingPermissionException> {
+            tester.set(NIGHT_DISPLAY_CUSTOM_END_TIME_KEY, "08:30")
+        }
+    }
+
+    @Test
+    fun setNightDisplayCustomTimes_autoModeNotCustomTime_fails() {
+        shadowApplication.grantPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
+        colorDisplayManager.setNightDisplayAutoMode(ColorDisplayManager.AUTO_MODE_DISABLED)
+        assertFailsWith<InvalidPreferenceException> {
+            tester.set(NIGHT_DISPLAY_CUSTOM_START_TIME_KEY, "22:10")
+        }
+        assertFailsWith<InvalidPreferenceException> {
+            tester.set(NIGHT_DISPLAY_CUSTOM_END_TIME_KEY, "06:45")
+        }
+    }
+
+    @Test
+    fun setNightDisplayCustomTimes_invalidTime_fails() {
+        shadowApplication.grantPermissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
+        colorDisplayManager.setNightDisplayAutoMode(ColorDisplayManager.AUTO_MODE_CUSTOM_TIME)
+        assertFailsWith<DateTimeParseException> {
+            tester.set(NIGHT_DISPLAY_CUSTOM_START_TIME_KEY, "22:100")
+        }
+        assertFailsWith<DateTimeParseException> {
+            tester.set(NIGHT_DISPLAY_CUSTOM_END_TIME_KEY, "25:45")
+        }
     }
 }
 // LINT.ThenChange(NightDisplaySettingsTest.java, NightDisplayScreenTest.kt,
 // NightDisplayActivationPreferenceControllerTest.java,
 // NightDisplayIntensityPreferenceControllerTest.java,
-// NightDisplayAutoModePreferenceControllerTest.java)
+// NightDisplayAutoModePreferenceControllerTest.java,
+// NightDisplayCustomStartTimePreferenceControllerTest.java,
+// NightDisplayCustomEndTimePreferenceControllerTest.java)

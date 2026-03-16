@@ -2461,6 +2461,10 @@
     <string name="wifi_allow_wep_networks_set_value_precondition" translatable="false">You cannot turn off this setting while connected to a WEP network.</string>
     <!-- Error message shown when the user is connected to WEP and tries to disable the setting [CHAR LIMIT=NONE] -->
     <string name="wifi_allow_wep_networks_set_invalid_preference" translatable="false">This device is connected to a WEP network. Disabling WEP support will disconnect the device.</string>
+    <!-- Precondition text shown when the device hardware does not support WiFi scanning [CHAR LIMIT=NONE] -->
+    <string name="wifi_scanning_hardware_unsupported" translatable="false">This setting is only available on devices that support WiFi scanning.</string>
+    <!-- Precondition text shown when the user is restricted from WiFi scanning [CHAR LIMIT=NONE] -->
+    <string name="wifi_scanning_user_restricted" translatable="false">The user must not be restricted from changing location settings by a device owner or a profile owner.</string>
 
     <!-- Dialog for Access Points -->
     <skip />
@@ -5069,12 +5073,8 @@
     <string name="keyboard_settings">Keyboard</string>
     <!-- Text displayed when user has restriction DISALLOW_CONFIG_LOCALE [CHAR LIMIT=NONE]-->
     <string name="language_empty_list_user_restricted">You don\u2019t have permission to change the device language.</string>
-    <!-- Title of Languages & input settings screen -->
-    <string name="language_keyboard_settings_title">Languages&#160;&amp; input</string>
     <!-- Title of preference category that lists all settings about helping user text input such as spell checker [CHAR LIMIT=60]-->
     <string name="input_assistance">Tools</string>
-    <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
-    <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
     <!-- On Languages settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
     <string name="system_language">System Languages</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
@@ -5091,8 +5091,6 @@
     <string name="auto_caps_summary">Capitalize first letter in sentences</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to enable automatic punctuation of entered text.  for example, it will change an entered "youre" to "you're". -->
     <string name="auto_punctuate">Auto-punctuate</string>
-    <!-- On Text & language settings screen, category for physical keyboard text entry options. -->
-    <string name="hardkeyboard_category">Physical keyboard settings</string>
     <!-- On Text & language settings screen, setting summary for the Auto-punctuate setting. -->
     <string name="auto_punctuate_summary">Press Space key twice to insert \u0022.\u0022</string>
     <!-- On Security & location settings screen, setting check box name. Title of the checkbox to set whether password edit fields will show the most recent character typed and then hide it, or just hide it right away.  By hide, I mean mask it out. -->
@@ -5118,8 +5116,6 @@
     <string name="spellchecker_quick_settings">Settings</string>
     <!-- Image button description for spell checker language. -->
     <string name="spellchecker_language">Language</string>
-    <!-- Title for the 'keyboard and input methods' preference category. [CHAR LIMIT=45] -->
-    <string name="keyboard_and_input_methods_category">Keyboards</string>
     <!-- Title for the button to toggle the 'IME Switcher Button' preference visibility.[CHAR LIMIT=60] -->
     <string name="ime_switcher_button_in_navbar_title">Show the keyboard switch key</string>
     <!-- Summary for the button to toggle the 'IME Switcher Button' preference visibility.[CHAR LIMIT=NONE] -->
@@ -5130,8 +5126,6 @@
     <string name="keywords_virtual_keyboard">Gboard</string>
     <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="available_virtual_keyboard_category">Available On-screen keyboard</string>
-    <!-- Title for the button to trigger the 'Manage keyboards' preference sub-screen, where the user can turn on/off installed virtual keyboards.[CHAR LIMIT=35] -->
-    <string name="add_virtual_keyboard">Manage on-screen keyboards</string>
     <!-- Title for the 'keyboard options' preference category. [CHAR LIMIT=35] -->
     <string name="keyboard_options_category">Options</string>
     <!-- Title for the 'keyboard accessibility options' preference category. [CHAR LIMIT=35] -->
@@ -5252,12 +5246,8 @@
 
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
     <string name="keyboard_shortcuts_helper">View keyboard shortcuts</string>
-    <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
-    <string name="keyboard_shortcuts_helper_summary">Show list of shortcuts</string>
     <!-- Title for the 'Work profile keyboards & tools' preference category inside Languages and inputs'. [CHAR LIMIT=50] -->
     <string name="language_and_input_for_work_category_title">Work profile keyboards &amp; tools</string>
-    <!-- Title for the 'Virtual keyboards for work' preference. [CHAR LIMIT=45] -->
-    <string name="virtual_keyboards_for_work_title">On-screen keyboard for work</string>
     <!-- Summary text for none selected keyboard default layout -->
     <string name="keyboard_default_layout">Default</string>
 
@@ -5517,8 +5507,6 @@
 
     <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
     <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
-    <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
-    <string name="default_keyboard_layout">Default</string>
     <!-- Summary text for keyboards when a layout is automatically selected. [CHAR LIMIT=35] -->
     <string name="automatic_keyboard_layout_label">Automatic: <xliff:g id="layout_label" example="English(US)">%s</xliff:g></string>
     <!-- Summary text for keyboards when a layout is user selected. [CHAR LIMIT=35] -->
@@ -5548,17 +5536,6 @@
     <string name="vibrate_input_devices">Redirect vibration</string>
     <!-- On Languages & input settings screen, setting summary.  Setting to redirect vibration to input devices. [CHAR LIMIT=100] -->
     <string name="vibrate_input_devices_summary">Send vibration to game controller when connected</string>
-
-    <!-- Keyboard Layout Preference Dialog -->
-    <skip />
-    <!-- Title for the keyboard layout preference dialog. [CHAR LIMIT=35] -->
-    <string name="keyboard_layout_dialog_title">Choose keyboard layout</string>
-    <!-- Button to configure keyboard layouts.  [CHAR LIMIT=35] -->
-    <string name="keyboard_layout_dialog_setup_button">Set up keyboard layouts</string>
-    <!-- Hint describing how to switch keyboard layouts using the keyboard.  [CHAR LIMIT=48] -->
-    <string name="keyboard_layout_dialog_switch_hint">To switch, press Control-Spacebar</string>
-    <!-- Label of the default keyboard layout.  [CHAR LIMIT=35] -->
-    <string name="keyboard_layout_default_label">Default</string>
 
     <!-- Keyboard Layout Picker -->
     <skip />
@@ -5679,8 +5656,6 @@
     <string name="vision_settings_suggestion_title">Change font size</string>
     <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
     <string name="screen_reader_category_title">Screen reader</string>
-    <!-- Title for the accessibility preference category of physical keyboard options. [CHAR LIMIT=50] -->
-    <string name="keyboard_category_title">Physical keyboard options</string>
     <!-- Title for the accessibility preference category of caption services and settings. [CHAR LIMIT=50] -->
     <string name="captions_category_title">Captions</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
@@ -7404,8 +7379,6 @@
     <string name="voice_input_output_settings_title">Voice input &amp; output settings</string>
     <!-- Title of voice search settings list item within voice input/output settings -->
     <string name="voice_search_settings_title">Voice search</string>
-    <!-- Title of keyboard settings list item within voice input/output settings -->
-    <string name="keyboard_settings_title">Android keyboard</string>
 
     <!-- Voice input settings -->
     <skip />

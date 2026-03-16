@@ -27,6 +27,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.preference.Preference;
 
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.AbstractPreferenceController;
 
@@ -49,7 +50,11 @@ public class VirtualKeyboardPreferenceController extends AbstractPreferenceContr
 
     @Override
     public boolean isAvailable() {
-        return mContext.getResources().getBoolean(R.bool.config_show_virtual_keyboard_pref);
+        final boolean configShowVirtualKeyboardPref = mContext
+                .getResources().getBoolean(R.bool.config_show_virtual_keyboard_pref);
+        final boolean shouldDisableKeyboardSettingsInDemoMode =
+                Utils.shouldDisableKeyboardSettingsInDemoMode(mContext);
+        return configShowVirtualKeyboardPref && !shouldDisableKeyboardSettingsInDemoMode;
     }
 
     @Override

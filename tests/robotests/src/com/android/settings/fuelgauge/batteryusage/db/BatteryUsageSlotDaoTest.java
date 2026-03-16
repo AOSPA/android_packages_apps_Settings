@@ -92,6 +92,23 @@ public final class BatteryUsageSlotDaoTest {
     }
 
     @Test
+    public void getAllBefore_normalFlow_expectedBehavior() throws Exception {
+        final Cursor cursor1 = mBatteryUsageSlotDao.getAllBefore(TIMESTAMP2 + 1);
+        assertThat(cursor1.getCount()).isEqualTo(2);
+        assertThat(cursor1.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
+        cursor1.moveToFirst();
+        assertThat(cursor1.getLong(1 /*timestamp*/)).isEqualTo(TIMESTAMP1);
+        cursor1.moveToNext();
+        assertThat(cursor1.getLong(1 /*timestamp*/)).isEqualTo(TIMESTAMP2);
+
+        final Cursor cursor2 = mBatteryUsageSlotDao.getAllBefore(TIMESTAMP2);
+        assertThat(cursor2.getCount()).isEqualTo(1);
+        assertThat(cursor2.getColumnCount()).isEqualTo(CURSOR_COLUMN_SIZE);
+        cursor2.moveToFirst();
+        assertThat(cursor2.getLong(1 /*timestamp*/)).isEqualTo(TIMESTAMP1);
+    }
+
+    @Test
     public void clearAllBefore_normalFlow_expectedBehavior() throws Exception {
         mBatteryUsageSlotDao.clearAllBefore(TIMESTAMP1);
 

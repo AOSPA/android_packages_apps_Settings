@@ -39,6 +39,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
@@ -158,6 +159,9 @@ open class AutoclickScreen :
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+
+        override val sensitivityLevel
+            get() = SensitivityLevel.DEEP_LINK_ONLY
     }
 
     companion object {

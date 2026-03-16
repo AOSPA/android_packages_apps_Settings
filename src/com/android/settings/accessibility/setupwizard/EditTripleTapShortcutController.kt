@@ -48,7 +48,7 @@ class EditTripleTapShortcutController(
             item.summary = getSummary(context)
             item.imageRawResId = R.raw.accessibility_shortcut_type_tripletap
             // Start hidden, and show only when the state is expanded
-            item.isVisible = isExpanded
+            item.isVisible = isExpanded && isAvailable(context)
         }
     }
 

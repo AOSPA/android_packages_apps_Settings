@@ -30,6 +30,7 @@ import com.android.settingslib.widget.MainSwitchPreference;
 /**
  * Preference controller for Wi-Fi scanning main switch.
  */
+// LINT.IfChange
 public class WifiScanningMainSwitchPreferenceController extends TogglePreferenceController
         implements OnCheckedChangeListener {
 
@@ -85,3 +86,4 @@ public class WifiScanningMainSwitchPreferenceController extends TogglePreference
         }
     }
 }
+// LINT.ThenChange(WifiScanningApiScreen.kt)

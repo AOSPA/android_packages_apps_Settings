@@ -41,6 +41,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 /**
@@ -95,6 +96,9 @@ open class AccessibilityShortcutPreference(
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun getReadPermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW

@@ -113,13 +113,23 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
-    public double getBatteryUsageListScreenOnTimeThresholdInMs() {
+    public double getBatteryUsageListScreenOnTimeThresholdMs() {
         return 0;
     }
 
     @Override
     public double getBatteryUsageListConsumePowerThreshold() {
         return 0;
+    }
+
+    @Override
+    public long getBatteryUsageResetErrorTimeThresholdMs() {
+        return Long.MAX_VALUE;
+    }
+
+    @Override
+    public double getBatteryUsageResetErrorPowerThreshold() {
+        return Double.MAX_VALUE;
     }
 
     @Override

@@ -95,4 +95,4 @@ public class DoubleTapPowerSettings extends DashboardFragment {
         return DoubleTapPowerScreen.KEY;
     }
 }
-// LINT.ThenChange(DoubleTapPowerScreen.kt)
+// LINT.ThenChange(DoubleTapPowerScreen.kt, DoubleTapPowerApiFirstScreen.kt)
