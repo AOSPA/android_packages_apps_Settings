@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController.SlotUpdateSource.HIGHLIGHT_SLOT;
 import static com.android.settings.fuelgauge.batteryusage.BatteryChartViewModel.SELECTED_INDEX_ALL;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -711,7 +712,7 @@ public final class BatteryChartPreferenceControllerTest {
 
         // Assert: Verify that refreshUi() and the listener are not called.
         verify(controller, never()).refreshUi();
-        verify(mOnSelectedIndexUpdatedListener, never()).onSelectedIndexUpdated();
+        verify(mOnSelectedIndexUpdatedListener, never()).onSelectedIndexUpdated(HIGHLIGHT_SLOT);
 
         // Action: Call with different indices.
         controller.onHighlightSlotIndexUpdate(3, 4);
@@ -721,7 +722,7 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(controller.mHourlyHighlightSlotIndex).isEqualTo(4);
         // Assert: Verify that refreshUi() and the listener are called.
         verify(controller).refreshUi();
-        verify(mOnSelectedIndexUpdatedListener).onSelectedIndexUpdated();
+        verify(mOnSelectedIndexUpdatedListener).onSelectedIndexUpdated(HIGHLIGHT_SLOT);
     }
 
     private static Long generateTimestamp(int index) {
