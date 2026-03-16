@@ -26,10 +26,12 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action
 import com.android.settings.fuelgauge.PowerBackgroundUsageDetail.EXTRA_LAUNCH_SOURCE
 import com.android.settings.fuelgauge.PowerBackgroundUsageDetail.EXTRA_PACKAGE_NAME
 import com.android.settings.fuelgauge.PowerBackgroundUsageDetail.EXTRA_UID
 import com.android.settings.fuelgauge.PowerBackgroundUsageDetail.LaunchSourceType
+import com.android.settings.fuelgauge.PowerBackgroundUsageDetailScreen.Companion.SWITCH_KEY
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.FailedPreconditionException
@@ -147,6 +149,91 @@ class PowerBackgroundUsageDetailScreenTest {
         assertThrows(FailedPreconditionException::class.java) { tester.getLaunchIntent() }
     }
 
+    @Test
+    @Config(shadows = [ShadowBatteryOptimizeUtils::class])
+    fun getBackgroundUsageAllowabilitySwitch_returnExpectedResult() {
+        setupTesterAndShadows()
+
+        ShadowBatteryOptimizeUtils.setMode(BatteryOptimizeUtils.MODE_OPTIMIZED)
+        assertThat(tester.get<Boolean>(SWITCH_KEY)).isTrue()
+
+        ShadowBatteryOptimizeUtils.setMode(BatteryOptimizeUtils.MODE_UNRESTRICTED)
+        assertThat(tester.get<Boolean>(SWITCH_KEY)).isTrue()
+
+        ShadowBatteryOptimizeUtils.setMode(BatteryOptimizeUtils.MODE_RESTRICTED)
+        assertThat(tester.get<Boolean>(SWITCH_KEY)).isFalse()
+    }
+
+    @Test
+    @Config(shadows = [ShadowBatteryOptimizeUtils::class])
+    fun setBackgroundUsageAllowabilitySwitch_toggleOn_returnExpectedResult() {
+        setupTesterAndShadows()
+
+        // Original mode: Restricted
+        ShadowBatteryOptimizeUtils.setMode(BatteryOptimizeUtils.MODE_RESTRICTED)
+        tester.set(SWITCH_KEY, true)
+        ShadowBatteryOptimizeUtils.assertAppUsageState(
+            BatteryOptimizeUtils.MODE_OPTIMIZED,
+            Action.SETTINGS_API_APPLY,
+        )
+
+        // Original mode: Optimized
+        ShadowBatteryOptimizeUtils.setMode(BatteryOptimizeUtils.MODE_OPTIMIZED)
+        tester.set(SWITCH_KEY, true)
+        ShadowBatteryOptimizeUtils.assertAppUsageState(
+            BatteryOptimizeUtils.MODE_OPTIMIZED,
+            Action.UNKNOWN,
+        ) // skip for the same mode
+
+        // Original mode: Unrestricted
+        ShadowBatteryOptimizeUtils.setMode(BatteryOptimizeUtils.MODE_UNRESTRICTED)
+        tester.set(SWITCH_KEY, true)
+        ShadowBatteryOptimizeUtils.assertAppUsageState(
+            BatteryOptimizeUtils.MODE_UNRESTRICTED,
+            Action.UNKNOWN,
+        ) // skip for the same mode
+    }
+
+    @Test
+    @Config(shadows = [ShadowBatteryOptimizeUtils::class])
+    fun setBackgroundUsageAllowabilitySwitch_toggleOff_returnExpectedResult() {
+        setupTesterAndShadows()
+
+        // Original mode: Restricted
+        ShadowBatteryOptimizeUtils.setMode(BatteryOptimizeUtils.MODE_RESTRICTED)
+        tester.set(SWITCH_KEY, false)
+        ShadowBatteryOptimizeUtils.assertAppUsageState(
+            BatteryOptimizeUtils.MODE_RESTRICTED,
+            Action.UNKNOWN,
+        ) // skip for the same mode
+
+        // Original mode: Optimized
+        ShadowBatteryOptimizeUtils.setMode(BatteryOptimizeUtils.MODE_OPTIMIZED)
+        tester.set(SWITCH_KEY, false)
+        ShadowBatteryOptimizeUtils.assertAppUsageState(
+            BatteryOptimizeUtils.MODE_RESTRICTED,
+            Action.SETTINGS_API_APPLY,
+        )
+
+        // Original mode: Unrestricted
+        ShadowBatteryOptimizeUtils.setMode(BatteryOptimizeUtils.MODE_UNRESTRICTED)
+        tester.set(SWITCH_KEY, false)
+        ShadowBatteryOptimizeUtils.assertAppUsageState(
+            BatteryOptimizeUtils.MODE_RESTRICTED,
+            Action.SETTINGS_API_APPLY,
+        )
+    }
+
+    private fun setupTesterAndShadows(
+        disableForOptimizeModeOnly: Boolean = false,
+        isSystemOrDefaultApp: Boolean = false,
+    ) {
+        ShadowBatteryOptimizeUtils.setDisableForOptimizeModeOnly(disableForOptimizeModeOnly)
+        ShadowBatteryOptimizeUtils.setSystemOrDefaultApp(isSystemOrDefaultApp)
+        tester.initializeScreenParameters(Parameters(EXTRA_PACKAGE_NAME to PACKAGE_NAME))
+        tester.getLaunchIntent()
+    }
+
     companion object {
         const val PACKAGE_NAME = "com.abc"
         const val UID = 10123
@@ -166,9 +253,28 @@ internal class ShadowBatteryOptimizeUtils {
         return systemOrDefaultApp
     }
 
+    @Implementation
+    fun setAppUsageState(mode: Int, action: Action) {
+        optMode = mode
+        optAction = action
+    }
+
+    @Implementation
+    fun getAppOptimizationMode(): Int {
+        return optMode
+    }
+
     companion object {
         private var disableForOptimizeModeOnly = false
         private var systemOrDefaultApp = false
+
+        private var optMode = BatteryOptimizeUtils.MODE_OPTIMIZED
+        private var optAction = Action.UNKNOWN
+
+        fun assertAppUsageState(mode: Int, action: Action) {
+            assertThat(optMode).isEqualTo(mode)
+            assertThat(optAction).isEqualTo(action)
+        }
 
         @JvmStatic
         internal fun setDisableForOptimizeModeOnly(disable: Boolean) {
@@ -178,6 +284,12 @@ internal class ShadowBatteryOptimizeUtils {
         @JvmStatic
         internal fun setSystemOrDefaultApp(isSystem: Boolean) {
             systemOrDefaultApp = isSystem
+        }
+
+        @JvmStatic
+        internal fun setMode(mode: Int, action: Action = Action.UNKNOWN) {
+            optMode = mode
+            optAction = action
         }
     }
 }
