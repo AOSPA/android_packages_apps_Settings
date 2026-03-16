@@ -20,14 +20,14 @@ import android.content.Context
 import android.telephony.SubscriptionManager
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 
 /** A subscription ID. */
 // This is only open to allow the companion object to be created. Do not subclass.
 open class SubscriptionId(
     private val includeActive: Boolean = true,
     private val includeInactive: Boolean = false,
-) : FiniteOptionsType<Int> {
+) : DirectFiniteOptionsType<Int> {
     init {
         require(includeActive && !includeInactive) {
             "SubscriptionId currently only supports active subscriptions."

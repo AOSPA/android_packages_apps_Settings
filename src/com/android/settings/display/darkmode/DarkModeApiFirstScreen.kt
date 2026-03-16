@@ -75,7 +75,7 @@ class DarkModeApiFirstScreen :
                 ),
         ) {
             get {
-                executeEnum {
+                execute {
                     val isExpanded =
                         Settings.Secure.getInt(
                             context.contentResolver,
@@ -92,7 +92,7 @@ class DarkModeApiFirstScreen :
 
             set {
                 permissions(WRITE_SECURE_SETTINGS)
-                executeEnum { value ->
+                execute { value ->
                     var darkThemeMode = STANDARD_DARK_THEME
                     when (value) {
                         DarkThemeMode.STANDARD -> darkThemeMode = STANDARD_DARK_THEME

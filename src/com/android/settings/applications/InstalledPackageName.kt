@@ -27,7 +27,7 @@ import android.os.UserHandle
 import android.os.UserManager
 import androidx.annotation.RequiresApi
 import com.android.settingslib.metadata.R
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 
 /**
  * Any package installed on the device.
@@ -44,7 +44,7 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 open class InstalledPackageName(
     private val flags: Long? = null,
     private val heldPermissions: Array<String>? = null,
-) : FiniteOptionsType<String> {
+) : DirectFiniteOptionsType<String> {
 
     override fun getType(): Class<String> = String::class.java
 

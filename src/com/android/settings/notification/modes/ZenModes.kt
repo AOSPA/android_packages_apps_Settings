@@ -18,11 +18,11 @@ package com.android.settings.notification.modes
 
 import android.content.Context
 import com.android.settings.R
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 import com.android.settingslib.notification.modes.ZenModesBackend
 
 /** Provides a list of zen modes on the device. */
-object ZenModes : FiniteOptionsType<String> {
+object ZenModes : DirectFiniteOptionsType<String> {
     override fun getType(): Class<String> = String::class.java
 
     override fun getDescription(context: Context): String =

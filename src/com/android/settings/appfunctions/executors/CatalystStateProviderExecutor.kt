@@ -157,7 +157,7 @@ class CatalystStateProviderExecutor(
                         // other item specific id necessary to distinguish the items.
                         key = "${screenMetaData.key}/${metadata.bindingKey}",
                         purpose = metadata.getPreferencePurpose(context).toString(),
-                        name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*>) null
+                        name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*, *>) null
                             else LocalizedString(
                                 english = metadata.getPreferenceTitle(englishContext).toString(),
                                 localized = metadata.getPreferenceTitle(context).toString(),

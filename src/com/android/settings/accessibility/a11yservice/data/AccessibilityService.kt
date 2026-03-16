@@ -28,13 +28,13 @@ import android.os.UserManager
 import androidx.annotation.RequiresApi
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settingslib.metadata.R
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 import kotlinx.coroutines.flow.first
 
 /**
  * The flattened string representation of the ComponentName of a service implementing an accessibility feature
  */
-object AccessibilityService : FiniteOptionsType<String> {
+object AccessibilityService : DirectFiniteOptionsType<String> {
     override fun getType() = String::class.java
 
     override fun getDescription(context: Context): String =

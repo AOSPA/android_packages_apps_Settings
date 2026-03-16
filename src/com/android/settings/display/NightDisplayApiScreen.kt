@@ -114,7 +114,7 @@ class NightDisplayApiScreen :
         ) {
             get {
                 permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
-                executeEnum { context.getNightDisplayAutoMode() }
+                execute { context.getNightDisplayAutoMode() }
             }
 
             set {
@@ -129,7 +129,7 @@ class NightDisplayApiScreen :
                         Allowed
                     }
                 }
-                executeEnum { value ->
+                execute { value ->
                     context.colorDisplayManager.setNightDisplayAutoMode(value.asApiValue)
                 }
             }

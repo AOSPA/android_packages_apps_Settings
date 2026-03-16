@@ -49,7 +49,7 @@ class ColorContrastApiScreen :
             purpose = R.string.color_contrast_selector_preference_purpose,
         ) {
             get {
-                executeEnum {
+                execute {
                     SettingsSecureStore.get(context).getFloat(CONTRAST_LEVEL)?.let { contrast ->
                         val level = UiModeManager.ContrastUtils.toContrastLevel(contrast)
                         ContrastLevelApiWithRes.entries.find { it.asApiValue == level }
@@ -58,7 +58,7 @@ class ColorContrastApiScreen :
             }
 
             set {
-                executeEnum { value ->
+                execute { value ->
                     val contrast = UiModeManager.ContrastUtils.fromContrastLevel(value.asApiValue)
                     SettingsSecureStore.get(context).setFloat(CONTRAST_LEVEL, contrast)
                 }

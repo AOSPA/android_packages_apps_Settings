@@ -104,9 +104,9 @@ class ApiTester(
     }
 
     private fun <V> getPreference(key: String) =
-        instance.preferences.first { it.key == key } as ApiPreference<V>
+        instance.preferences.first { it.key == key } as ApiPreference<*, V>
 
-    private fun checkGetPermissions(preference: ApiPreference<*>) {
+    private fun checkGetPermissions(preference: ApiPreference<*, *>) {
         val pid = android.os.Process.myPid()
         val uid = android.os.Process.myUid()
 
@@ -126,7 +126,7 @@ class ApiTester(
         }
     }
 
-    private fun checkSetPermissions(preference: ApiPreference<*>) {
+    private fun checkSetPermissions(preference: ApiPreference<*, *>) {
         val pid = android.os.Process.myPid()
         val uid = android.os.Process.myUid()
 
@@ -147,7 +147,7 @@ class ApiTester(
     }
 
     private fun checkGetPreconditions(
-        preference: ApiPreference<*>,
+        preference: ApiPreference<*, *>,
         operationContext: ApiOperationContext,
     ) {
         val screenPrecondition = runBlocking {
@@ -165,7 +165,7 @@ class ApiTester(
     }
 
     private fun <V : Any> checkSetPreconditions(
-        preference: ApiPreference<V>,
+        preference: ApiPreference<*, V>,
         value: V,
         operationContext: ApiOperationContext,
     ) {
@@ -204,8 +204,8 @@ class ApiTester(
         throw FailedPreconditionException()
     }
 
-    private suspend fun <V : Any> checkPotentialFiniteValue(preference: ApiPreference<V>, value: V) {
-        if (preference.type is FiniteOptionsType<*>) {
+    private suspend fun <V : Any> checkPotentialFiniteValue(preference: ApiPreference<*, V>, value: V) {
+        if (preference.type is FiniteOptionsType<*, *>) {
             if (!getPreferenceOptions<V>(preference.key).map { it.first }.contains(value))
                 throw InvalidValueException(
                     "Value $value should be among the allowed " + "finite values for this type."
@@ -318,10 +318,10 @@ class ApiTester(
      * Helper method to get all the options of a preference which has the FiniteOptionsType type.
      */
     suspend fun <V : Any> getPreferenceOptions(key: String): List<Pair<V, String>> {
-        val preference = getPreference<FiniteOptionsType<V>>(key)
+        val preference = getPreference<FiniteOptionsType<*, V>>(key)
         val type = preference.type
-        if (type is FiniteOptionsType<*>) {
-            val enforcedType = type as FiniteOptionsType<V>
+        if (type is FiniteOptionsType<*, *>) {
+            val enforcedType = type as FiniteOptionsType<*, V>
             return runBlocking { enforcedType.getOptions(context) }
         } else
             throw Exception(
