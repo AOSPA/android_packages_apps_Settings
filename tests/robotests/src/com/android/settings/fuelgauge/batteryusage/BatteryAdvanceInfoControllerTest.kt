@@ -19,6 +19,7 @@ package com.android.settings.fuelgauge.batteryusage
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE
+import com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController.SlotUpdateSource.INITIAL_REFRESH
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -53,6 +54,7 @@ class BatteryAdvanceInfoControllerTest {
         controller.onBatteryUsageUpdated(
             batteryDiffDataMap = null,
             selectedDailyIndex = 0,
+            slotUpdateSource = INITIAL_REFRESH,
             description = "test"
         )
 
@@ -61,6 +63,7 @@ class BatteryAdvanceInfoControllerTest {
         controller.onBatteryUsageUpdated(
             batteryDiffDataMap = emptyData,
             selectedDailyIndex = 1,
+            slotUpdateSource = INITIAL_REFRESH,
             description = null
         )
     }

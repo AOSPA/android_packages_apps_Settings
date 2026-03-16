@@ -31,11 +31,13 @@ open class BatteryAdvanceInfoController(
      *
      * @param batteryDiffDataMap The data of battery usage.
      * @param selectedDailyIndex The index of the selected daily slot.
+     * @param slotUpdateSource The source of the slot update event.
      * @param description The localized text of the selected battery usage slot.
      */
     open fun onBatteryUsageUpdated(
         batteryDiffDataMap: MutableMap<Int?, MutableMap<Int?, BatteryDiffData?>?>?,
         selectedDailyIndex: Int,
+        slotUpdateSource: Int,
         description: String?) {}
 
     private companion object {
