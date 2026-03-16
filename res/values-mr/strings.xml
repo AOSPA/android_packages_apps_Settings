@@ -328,18 +328,21 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"लोकॅल डीफॉल्ट वापरा"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"२४ तास फॉरमॅट वापरा"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"वेळ"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"टाइम फॉरमॅट"</string>
+    <string name="time_format_category_title" msgid="3122743852067365261">"१२ तासांचा / २४ तासांचा फॉरमॅट"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"वेळेचा फॉरमॅट"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"अधिक सेटिंग्ज"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"या सेटिंगच्या आधारे अ‍ॅप्लिकेशन तुमचा वेळेचा फॉरमॅट वापरतील"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"वेळेचा फॉरमॅट निवडा"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"ऑटोमॅटिक"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"अ‍ॅप्स ही अ‍ॅपच्या भाषेनुसार १२ तासांचा / २४ तासांचा फॉरमॅट वापरतात"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"१२ तासांचा फॉरमॅट"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"२४ तासांचा फॉरमॅट"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"टाइम झोन"</string>
-    <!-- no translation found for home_time_zone_title (3824736095532816255) -->
-    <skip />
-    <!-- no translation found for home_time_zone_select_title (9158012099148340770) -->
-    <skip />
-    <!-- no translation found for home_time_zone_summary (1494773352044636274) -->
-    <skip />
-    <!-- no translation found for use_home_time_zone_title (8026361707497256390) -->
-    <skip />
-    <!-- no translation found for suggestions_category_title (669819615912272575) -->
-    <skip />
+    <string name="home_time_zone_title" msgid="3824736095532816255">"होम टाइम झोन"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"टाइम झोन निवडा"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"तुम्ही घराबाहेर असताना घराचा टाइम झोन सेट करा"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"होम टाइम झोन वापरा"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"सूचना"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"टाइम झोन निवडा"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"टाइम झोन शोधा"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"तारीख"</string>
@@ -1501,9 +1504,8 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"ठीक"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"रद्द करा"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"सिम कार्डचे संरक्षण करा"</string>
-    <!-- no translation found for automatic_sim_lock_protection (455534553760066231) -->
-    <skip />
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"ऑटोमॅटिक पिन व्यवस्थापन"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"सिम लॉक संरक्षण मोड"</string>
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"सिम लॉक करा"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android द्वारे व्यवस्थापित केलेला आहे"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android द्वारे व्यवस्थापित केलेला नाही"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"नोंदणी यशस्वी झाली"</string>
@@ -1512,28 +1514,21 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android द्वारे व्यवस्थापित केलेला पिन"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Android द्वारे व्यवस्थापित केलेल्या पिनचे मूल्य:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"पिन मिळवता आला नाही"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"सिम कार्डचे चोरी होण्यापासून संरक्षण करा"</string>
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"फोन वापरण्यासाठी पिन आवश्यक"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Android द्वारे व्यवस्थापित केलेला सिम पिन"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"सिम पिन मॅन्युअली व्यवस्थापित केला आहे"</string>
-    <!-- no translation found for sim_protection_mode_lskf_required (3092348651156624481) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"फोन वापरण्यासाठी पिन आवश्यक"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"ऑटोमॅटिक सिम संरक्षणासाठी लॉकस्क्रीन आवश्यक आहे, आता फक्त मॅन्युअल उपलब्ध आहे"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"सिमचा सद्य पिन एंटर करा"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"सिम कार्डचा सद्य पिन एंटर करा"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"वाहक डीफॉल्ट वापरा"</string>
-    <!-- no translation found for choose_sim_pin_protection_mode (3008087116785955704) -->
-    <skip />
-    <!-- no translation found for sim_pin_protection_mode_manual (6394394529094030608) -->
-    <skip />
-    <!-- no translation found for sim_pin_protection_mode_automatic (7382457994105124365) -->
-    <skip />
-    <!-- no translation found for provide_new_sim_pin_title (7858611936347465648) -->
-    <skip />
-    <!-- no translation found for confirm_new_sim_pin_title (8260672663421256888) -->
-    <skip />
-    <!-- no translation found for confirm_new_sim_pin_after_mismatch (8358717933025894071) -->
-    <skip />
-    <!-- no translation found for enter_current_sim_pin_after_mismatch (6910905505364979098) -->
-    <skip />
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"सिम संरक्षण मोड निवडा"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"मॅन्युअल"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"ऑटोमॅटिक (Android द्वारे व्यवस्थापित)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"नवीन सिम पिन"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"नवीन सिम पिन कन्फर्म करा"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"पिन जुळत नाहीत. नवीन सिम पिन कन्फर्म करा."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"पिन चुकीचा आहे. शिल्लक प्रयत्न: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"सिम कार्डचा सद्य पिन कोड एंटर करा"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"मोबाइल डेटासाठी <xliff:g id="CARRIER">%1$s</xliff:g> वापरायचे?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"तुम्ही मोबाइल डेटासाठी <xliff:g id="CARRIER2_0">%2$s</xliff:g> वापरत आहात. तुम्ही <xliff:g id="CARRIER1">%1$s</xliff:g> वर स्विच केल्यास, मोबाइल डेटासाठी <xliff:g id="CARRIER2_1">%2$s</xliff:g> वापरले जाणार नाही."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> वापरा"</string>
@@ -1836,6 +1831,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"स्थानाच्या टाइमझोन डिटेक्शनमधील बदलांना अनुमती नाही"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"तुमचे डिव्हाइस स्थान उपलब्ध असल्यास, ते तुमचा टाइम झोन सेट करण्यासाठी वापरले जाऊ शकते"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"नोटिफिकेशन"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"टाइम झोनमधील बदल"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"तुमचा टाइम झोन आपोआप अपडेट झाल्यावर नोटिफिकेशन मिळवा"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"नोटिफिकेशन, वेळ, झोन, टाइमझोन"</string>
@@ -2120,9 +2117,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"भाषा आणि प्रदेश"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"कीबोर्ड"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"तुमच्याकडे डिव्हाइसची भाषा बदलण्याची परवानगी नाही."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"भाषा आणि इनपुट"</string>
     <string name="input_assistance" msgid="3437568284144952104">"टूल"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"कीबोर्ड आणि इनपुट पद्धती"</string>
     <string name="system_language" msgid="1146762166579643257">"सिस्टीमच्या भाषा"</string>
     <string name="phone_language" msgid="5986939176239963826">"भाषा"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2131,7 +2126,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"ऑटो-कॅपिटलायझेशन"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"वाक्यांमधील प्रथम अक्षर कॅपिटलाइझ करा"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"स्वयं-विरामचिन्हे घाला"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"वास्तविक कीबोर्ड सेटिंग्ज"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"\".\" घालण्यासाठी Space की दोनदा प्रेस करा"</string>
     <string name="show_password" msgid="7101900779571040117">"पासवर्ड दाखवा"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"तुम्ही टाइप कराल त्‍याप्रमाणे वर्ण थोडक्‍यात डिस्प्ले करा"</string>
@@ -2142,13 +2136,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"हा शब्दलेखन तपासक तुम्ही पासवर्ड आणि क्रेडिट कार्ड नंबर यासारख्या वैयक्तिक डेटासह, टाइप करता तो सर्व मजकूर संकलित करण्यात सक्षम होऊ शकतो. हा <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> ॲपवरून येतो. हा शब्दलेखन तपासक वापरायचा?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"सेटिंग्ज"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"भाषा"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"कीबोर्ड"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"कीबोर्ड स्विच की दाखवा"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"इनपुट फील्ड निवडल्यावर, नेव्हिगेशन बारमध्ये कीबोर्ड स्विचर बटण दाखवण्याची अनुमती द्या"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ऑन-स्क्रीन कीबोर्ड"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"उपलब्ध ऑन-स्क्रीन कीबोर्ड"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"ऑन-स्क्रीन कीबोर्ड व्यवस्थापित करा"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"पर्याय"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"अ‍ॅक्सेसिबिलिटी"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"प्रत्यक्ष कीबोर्ड"</string>
@@ -2208,9 +2200,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"थोडे जलद"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"धीमे"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"कीबोर्ड शॉर्टकट पहा"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"शॉर्टकटची सूची दाखवा"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"कार्य प्रोफाइल कीबोर्ड आणि टूल"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"ऑफिसमध्ये वापरण्यायोग्य ऑन-स्क्रीन कीबोर्ड"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"डीफॉल्ट"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"गेम कंट्रोलर"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"तुमच्या कंट्रोलरच्या बटणांद्वारे ट्रिगर केलेल्या कृती कस्टमाइझ करा"</string>
@@ -2329,7 +2319,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"रिपीट करण्याचा दर वाढवा"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"रिपीट करण्याचा दर कमी करा"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> लेआउट"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"डीफॉल्ट"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"ऑटोमॅटिक: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"वापरकर्त्याने निवडले आहे: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"भाषण"</string>
@@ -2343,10 +2332,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"गेम नियंत्रक"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"व्हायब्रेट पुनर्निर्देशित करा"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"कनेक्ट केले असताना गेम नियंत्रकाला व्हायब्रेशन पाठवा"</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"किबोर्ड लेआउट निवडा"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"किबोर्ड लेआउट सेट करा"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"स्विच करण्यासाठी, Control-Spacebar प्रेस करा"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"डीफॉल्ट"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"किबोर्ड लेआउट"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"वास्तविक कीबोर्ड लेआउट"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"वैयक्तिक शब्दकोश"</string>
@@ -2394,7 +2379,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"तुम्ही तुमच्या गरजेनुसार हे डिव्हाइस कस्टमाइझ करू शकता. ही अ‍ॅक्सेसिबिलिटी वैशिष्ट्ये नंतर सेटिंग्जमध्ये बदलता येतात."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"फाँटचा आकार बदला"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"स्क्रीन रीडर"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"वास्तविक कीबोर्ड पर्याय"</string>
     <string name="captions_category_title" msgid="574490148949400274">"कॅप्शन"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"ऑडिओ"</string>
     <string name="general_category_title" msgid="6298579528716834157">"सर्वसाधारण"</string>
@@ -2620,7 +2604,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"विस्तारित गडद थीम"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"विस्तार केलेली गडद थीम सेटिंग्ज"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"विस्तार केलेली गडद थीम सेटिंग्ज उघडा"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"विस्तारित गडद थीममुळे वाचनीयता सुधारू शकते, पण काही अ‍ॅप्स चुकीच्या पद्धतीने प्रदर्शित होऊ शकतात.\n\nहे सेटिंग बंद असलेली अ‍ॅप्स साधारण गडद थीम पर्याय वापरतील."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"अ‍ॅनिमेशन काढून टाका"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"स्क्रीनवरील हालचाल कमी करा"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"मजकुराचा कर्सर ब्लिंक होणे"</string>
@@ -2760,7 +2745,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"श्रवणयंत्र डिव्हाइसची नियंत्रणे"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"आवाज"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"नोटिफिकेशन"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"रिंगटोन आणि अलार्म"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"श्रवणयंत्रांद्वारे आवाज प्ले केले जातील"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"आवाज डिव्हाइस स्पीकरद्वारे प्ले केले जातील"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"आवाज श्रवणयंत्रांद्वारे आणि डिव्हाइस स्पीकरद्वारे प्ले केले जातील"</string>
@@ -3128,7 +3112,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"आवाज इनपुट आणि आउटपुट"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"आवाज इनपुट आणि आउटपुट सेटिंग्ज"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"व्हॉइस शोध"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"Android कीबोर्ड"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"व्‍हॉइस इनपुट सेटिंग्‍ज"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"व्हॉइस इनपुट"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"व्‍हॉइस इनपुट सेवा"</string>
@@ -3675,6 +3658,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"वाय-फाय सूचना, वायफाय सूचना"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"डेटा वापर"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"२४-तास फॉरमॅट वापरा"</string>
+    <string name="keywords_time_notifications" msgid="401122178351164403">"वेळेसंबंधित नोटिफिकेशन, टाइम झोनसंबंधित नोटिफिकेशन, DST, डेलाइट सेव्हिंग, टाइम झोन ऑफसेट"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"याने उघडा"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"ॲप्लिकेशन"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"टाइमझोन"</string>
@@ -3795,6 +3779,10 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"सूचनेचा व्हॉल्यूम म्यूट केला, सूचना आल्यावर व्हायब्रेट होईल"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> म्यूट केलेला"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"रिंग म्यूट केल्यामुळे उपलब्ध नाही"</string>
+    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
+    <skip />
+    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"फोन रिंगटोन"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"डीफॉल्ट नोटिफिकेशन आवाज"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"ॲपने प्रदान केलेला ध्वनी"</string>
@@ -4546,8 +4534,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB प्राधान्ये"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB वर यांचे नियंत्रण आहे"</string>
-    <!-- no translation found for usb_connected_devices (535238470176122197) -->
-    <skip />
+    <string name="usb_connected_devices" msgid="535238470176122197">"कनेक्‍ट केलेली डिव्‍हाइस"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"कनेक्ट केलेले डिव्हाइस"</string>
     <string name="usb_control_device" msgid="527916783743021577">"हे डिव्हाइस"</string>
     <string name="usb_switching" msgid="3654709188596609354">"स्विच करत आहे…"</string>
@@ -4564,10 +4551,8 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP आणि विद्युत पुरवठा करत आहे"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI आणि विद्युत पुरवठा करणे"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"वेबकॅम आणि विद्युत पुरवठा करणे"</string>
-    <!-- no translation found for usb_device_name_unknown_with_manufacturer_name (9075986054227881069) -->
-    <skip />
-    <!-- no translation found for usb_device_name_unknown_with_vendor_id_and_product_id (8750941211592531562) -->
-    <skip />
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"<xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g> कडील अज्ञात डिव्हाइस"</string>
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"अज्ञात डिव्हाइस [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"बॅकग्राउंड तपासणे"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"स्क्रीनवरील मजकूर वापरा"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"स्क्रीनवरील आशय मजकूर म्हणून अ‍ॅक्सेस करण्याची साहाय्य अ‍ॅपला अनुमती द्या"</string>
@@ -4621,11 +4606,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सर्व फाइल अ‍ॅक्सेस करू शकते"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"स्क्रीन ऑटोमेशन"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"तुम्हाला टास्क पूर्ण करण्यात मदत करण्यासाठी, ॲप्स बॅकग्राउंडमध्ये असतानादेखील हे ॲप इतर ॲप्सच्या स्क्रीनवरील आशय पाहू शकेल आणि त्याच्याशी संवाद साधू शकेल"</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"तुम्हाला टास्क पूर्ण करण्यात मदत करण्यासाठी <xliff:g id="ID_1">%1$s</xliff:g> हे इतर ॲप्सच्या स्क्रीनवरील आशय पाहू शकेल आणि त्याच्याशी संवाद साधू शकेल"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"तुम्ही स्क्रीन ऑटोमेशनला अनुमती न दिल्यास, <xliff:g id="ID_1">%1$s</xliff:g> हे तरीही <xliff:g id="ID_2">%1$s</xliff:g> शी कनेक्ट केलेल्या अ‍ॅप्सशी इतर मार्गांनी संवाद साधू शकते"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"इतर अ‍ॅप्सच्या स्क्रीन आशयाशी संवाद साधून तुम्हाला टास्क पूर्ण करण्यात मदत करण्यासाठी अ‍ॅप्सना अनुमती द्या"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"प्रत्येक वेळी विचारा"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"नेहमी अनुमती द्या"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"अनुमती देऊ नका"</string>
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"स्क्रीन ऑटोमेशनला अनुमती द्या"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"कोणत्याही अ‍ॅप्सना नेहमी अनुमती दिलेली नाही"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"<xliff:g id="ID_1">%1$s</xliff:g> द्वारे स्क्रीन ऑटोमेशन नेहमी वापरण्याची अनुमती असलेली ॲप्स इथे दाखवली जातील. फक्त प्रति-सेशन परवानगी मिळणारी ॲप्स दाखवली जाणार नाहीत."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"अनुमती आहे"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"अनुमती नाही"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"फुल-स्क्रीन नोटिफिकेशन"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"या ॲपवरील फुल-स्क्रीन नोटिफिकेशनना अनुमती द्या"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"डिव्‍हाइस लॉक असताना या ॲपला फुल स्क्रीन वापरणाऱ्या सूचना दाखवण्‍याची अनुमती द्या. ॲप्स यांचा वापर अलार्म, इनकमिंग कॉल किंवा इतर तातडीच्या सूचना हायलाइट करण्यासाठी करू शकतात."</string>
@@ -6209,4 +6200,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"तुमच्या डिव्हाइसची सॅटेलाइट SOS साठी नोंदणी केलेली नाही. तुमच्या डिव्हाइसने आपोआप नोंदणी पूर्ण करण्यासाठी तुम्ही इंटरनेटशी कनेक्ट केले असल्याची खात्री करा"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"वेब अ‍ॅप इंस्टॉलर सेवा सुरू करा"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"वेबसाइट थेट तुमच्या होम स्क्रीनवर इंस्टॉल करण्यासाठी, नियमित अ‍ॅप्सप्रमाणे वापरण्यासाठी ही सेवा सुरू करा."</string>
+    <string name="access_hid_title" msgid="3937436196813998587">"ह्यूमन इंटरफेस डिव्हाइस अ‍ॅक्सेस"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"ह्यूमन इंटरफेस डिव्हाइस (HIDs) डिस्कव्हर करण्यासाठी ॲपला अनुमती द्या"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"तुम्ही अ‍ॅक्सेसला अनुमती दिल्यास, दुर्भावनापूर्ण अ‍ॅप्स तुमची सिस्टीम धोक्यात आणण्यासाठी तुमची HIDs पुन्हा प्रोग्राम करू शकतात. उदाहरणार्थ, तुमची सिस्टीम उघडी नसताना ती नियंत्रित करण्यासाठी ॲप्स तुमचा कीबोर्ड किंवा माउस इनपुट सिम्युलेट करू शकतात. अ‍ॅक्सेसला अनुमती देताना तुमचा अ‍ॅप्सवर विश्वास असल्याची खात्री करा."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"hid, ह्यूमन, अ‍ॅक्सेस, डिव्हाइस"</string>
 </resources>

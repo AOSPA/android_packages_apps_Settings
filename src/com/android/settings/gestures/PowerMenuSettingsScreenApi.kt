@@ -64,7 +64,7 @@ class PowerMenuSettingsScreenApi() :
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
 
             get {
-                executeEnum {
+                execute {
                     val invokeAssistant =
                         PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(context)
                     if (invokeAssistant) {
@@ -76,7 +76,7 @@ class PowerMenuSettingsScreenApi() :
             }
 
             set {
-                executeEnum { value ->
+                execute { value ->
                     when (value) {
                         LongPressPowerActions.POWER_MENU ->
                             PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(context)

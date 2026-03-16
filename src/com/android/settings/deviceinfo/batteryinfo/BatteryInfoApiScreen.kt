@@ -79,7 +79,6 @@ class BatteryInfoApiScreen :
                     java.time.Instant.ofEpochMilli(mManufactureDateInMs)
                         .atZone(java.time.ZoneId.systemDefault())
                         .toLocalDate()
-                        .toString()
                 }
             }
         }
@@ -108,7 +107,6 @@ class BatteryInfoApiScreen :
                     java.time.Instant.ofEpochMilli(firstUseDateMs)
                         .atZone(java.time.ZoneId.systemDefault())
                         .toLocalDate()
-                        .toString()
                 }
             }
         }

@@ -54,7 +54,7 @@ import com.android.settingslib.graph.proto.RangeValueProto
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.metadata.preferencesapi.types.ApiType
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
 
 @RunWith(RobolectricTestRunner::class)
@@ -1188,7 +1188,7 @@ class CatalystStateMetadataProviderExecutorTest {
         }
     }
 
-    private object TestEnumType : FiniteOptionsType<String> {
+    private object TestEnumType : DirectFiniteOptionsType<String> {
         override fun getType(): Class<String> = String::class.java
         override fun getKey(): String = "test_enum"
         override fun getDescription(context: Context): String = "Test Enum Description"

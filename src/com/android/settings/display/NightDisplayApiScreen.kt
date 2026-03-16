@@ -114,7 +114,7 @@ class NightDisplayApiScreen :
         ) {
             get {
                 permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
-                executeEnum { context.getNightDisplayAutoMode() }
+                execute { context.getNightDisplayAutoMode() }
             }
 
             set {
@@ -129,7 +129,7 @@ class NightDisplayApiScreen :
                         Allowed
                     }
                 }
-                executeEnum { value ->
+                execute { value ->
                     context.colorDisplayManager.setNightDisplayAutoMode(value.asApiValue)
                 }
             }
@@ -154,9 +154,7 @@ class NightDisplayApiScreen :
 
             get {
                 execute {
-                    customTimeFormatter.format(
-                        context.colorDisplayManager.getNightDisplayCustomStartTime()
-                    )
+                    context.colorDisplayManager.getNightDisplayCustomStartTime()
                 }
             }
 
@@ -164,7 +162,7 @@ class NightDisplayApiScreen :
                 permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
                 execute { value ->
                     context.colorDisplayManager.setNightDisplayCustomStartTime(
-                        value.toLocalTimeMinutes()
+                        value
                     )
                 }
             }
@@ -189,9 +187,7 @@ class NightDisplayApiScreen :
 
             get {
                 execute {
-                    customTimeFormatter.format(
-                        context.colorDisplayManager.getNightDisplayCustomEndTime()
-                    )
+                    context.colorDisplayManager.getNightDisplayCustomEndTime()
                 }
             }
 
@@ -199,7 +195,7 @@ class NightDisplayApiScreen :
                 permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
                 execute { value ->
                     context.colorDisplayManager.setNightDisplayCustomEndTime(
-                        value.toLocalTimeMinutes()
+                        value
                     )
                 }
             }
@@ -211,8 +207,6 @@ class NightDisplayApiScreen :
 
     private val Context.isLocationEnabled: Boolean
         get() = getSystemService(LocationManager::class.java).isLocationEnabled
-
-    private fun String.toLocalTimeMinutes(): LocalTime = LocalTime.parse(this).truncatedTo(MINUTES)
 
     private fun Context.getNightDisplayIntensity(): Int {
         val min = ColorDisplayManager.getMinimumColorTemperature(this)
@@ -236,8 +230,6 @@ class NightDisplayApiScreen :
         colorDisplayManager.getNightDisplayAutoMode().let { apiValue ->
             NightDisplayAutoMode.entries.first { it.asApiValue == apiValue }
         } ?: NightDisplayAutoMode.NEVER
-
-    private val customTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
     companion object {
         const val KEY = "api_night_display"
