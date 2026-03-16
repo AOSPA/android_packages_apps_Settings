@@ -19,6 +19,7 @@ import android.content.Context
 import android.os.VibrationAttributes
 import android.provider.Settings.System.ALARM_VIBRATION_INTENSITY
 import com.android.settings.R
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 
 /** Accessibility settings for alarm vibration, as a switch toggle. */
@@ -38,6 +39,16 @@ class AlarmVibrationIntensitySwitchPreference(
         vibrationUsage = VibrationAttributes.USAGE_ALARM,
         title = R.string.accessibility_alarm_vibration_title,
     ) {
+
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
+
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY
 
