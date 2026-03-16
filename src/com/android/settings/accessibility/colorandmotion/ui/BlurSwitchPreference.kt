@@ -49,7 +49,8 @@ class BlurSwitchPreference :
     override val keywords: Int
         get() = R.string.keywords_blur_switch
 
-    override fun storage(context: Context): KeyValueStore = SettingsGlobalStore.get(context)
+    override fun storage(context: Context): KeyValueStore =
+        SettingsGlobalStore.get(context).apply { setDefaultValue(KEY, false) }
 
     override fun getSummary(context: Context): CharSequence? {
         return context.getString(

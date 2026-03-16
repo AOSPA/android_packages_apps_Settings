@@ -36,7 +36,8 @@ class CameraFlashSwitchPreference : SwitchPreference(
 ),
     SwitchPreferenceBinding, PreferenceAvailabilityProvider {
 
-    override fun storage(context: Context): KeyValueStore = SettingsSystemStore.get(context)
+    override fun storage(context: Context): KeyValueStore =
+        SettingsSystemStore.get(context).apply { setDefaultValue(KEY, false) }
 
     override val availabilityDescription =
         "The device must have a back-facing camera with a flash."
