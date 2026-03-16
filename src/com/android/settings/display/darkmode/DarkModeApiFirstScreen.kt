@@ -136,7 +136,7 @@ class DarkModeApiFirstScreen :
             get {
                 execute {
                     val uiModeManager = context.getSystemService(UiModeManager::class.java)
-                    uiModeManager?.customNightModeStart?.toString() ?: "00:00"
+                    uiModeManager?.customNightModeStart ?: LocalTime.of(0, 0)
                 }
             }
 
@@ -154,8 +154,7 @@ class DarkModeApiFirstScreen :
                 }
                 execute { value ->
                     val uiModeManager = context.getSystemService(UiModeManager::class.java)
-                    val time = LocalTime.parse(value)
-                    uiModeManager?.customNightModeStart = time
+                    uiModeManager?.customNightModeStart = value
                 }
             }
         }
@@ -188,7 +187,7 @@ class DarkModeApiFirstScreen :
             get {
                 execute {
                     val uiModeManager = context.getSystemService(UiModeManager::class.java)
-                    uiModeManager?.customNightModeEnd?.toString() ?: "00:00"
+                    uiModeManager?.customNightModeEnd ?: LocalTime.of(0, 0)
                 }
             }
 
@@ -207,8 +206,7 @@ class DarkModeApiFirstScreen :
 
                 execute { value ->
                     val uiModeManager = context.getSystemService(UiModeManager::class.java)
-                    val time = LocalTime.parse(value)
-                    uiModeManager?.customNightModeEnd = time
+                    uiModeManager?.customNightModeEnd = value
                 }
             }
         }
