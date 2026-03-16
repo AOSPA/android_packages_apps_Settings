@@ -48,7 +48,6 @@ import android.view.WindowManagerGlobal
 import androidx.annotation.OpenForTesting
 import com.android.server.display.feature.flags.Flags
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY
-import com.android.settings.flags.FeatureFlagsImpl
 import com.android.wm.shell.shared.desktopmode.DesktopState
 import java.util.function.Consumer
 import kotlinx.coroutines.Dispatchers
@@ -66,7 +65,6 @@ data class RevealedWallpaper(val displayId: Int, val revealer: View, val viewMan
 
 open class ConnectedDisplayInjector(open val context: Context) {
 
-    open val flags: DesktopExperienceFlags by lazy { DesktopExperienceFlags(FeatureFlagsImpl()) }
     open val handler: Handler by lazy { Handler(Looper.getMainLooper()) }
 
     /**
