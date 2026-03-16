@@ -21,6 +21,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.google.android.material.slider.Slider
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -115,5 +116,52 @@ class SliderItemTest {
 
         assertThat(startIconFrame.visibility).isEqualTo(View.GONE)
         assertThat(endIconFrame.visibility).isEqualTo(View.GONE)
+    }
+
+    @Test
+    fun onBindView_setsContentDescriptionFromProperty() {
+        val customDescription = "Custom Accessibility Label"
+        item.sliderContentDescription = customDescription
+
+        item.onBindView(rootView)
+
+        val slider = rootView.findViewById<Slider>(R.id.slider)
+        assertThat(slider.contentDescription).isEqualTo(customDescription)
+    }
+
+    @Test
+    fun onBindView_setsContentDescriptionFromTitle_whenPropertyIsNull() {
+        val title = "Font Size"
+        item.title = title
+        item.sliderContentDescription = null
+
+        item.onBindView(rootView)
+
+        val slider = rootView.findViewById<Slider>(R.id.slider)
+        assertThat(slider.contentDescription).isEqualTo(title)
+    }
+
+    @Test
+    fun onBindView_setsStateDescription() {
+        val stateDescription = "Level 5 of 10"
+        item.sliderStateDescription = stateDescription
+
+        item.onBindView(rootView)
+
+        val slider = rootView.findViewById<Slider>(R.id.slider)
+        assertThat(slider.stateDescription).isEqualTo(stateDescription)
+    }
+
+    @Test
+    fun onBindView_clearsDescriptions_whenNull() {
+        item.sliderContentDescription = null
+        item.sliderStateDescription = null
+        item.title = null
+
+        item.onBindView(rootView)
+
+        val slider = rootView.findViewById<Slider>(R.id.slider)
+        assertThat(slider.contentDescription).isNull()
+        assertThat(slider.stateDescription).isNull()
     }
 }

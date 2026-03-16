@@ -20,6 +20,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
+import android.view.accessibility.AccessibilityNodeInfo
+import android.widget.Button
 import android.widget.ImageView
 import com.android.settings.R
 import com.google.android.material.slider.LabelFormatter
@@ -46,6 +48,17 @@ class SliderItem : Item {
         val thumbTrackGapSize: Int,
         val tickRadius: Int,
     )
+
+    private val buttonAccessibilityDelegate =
+        object : View.AccessibilityDelegate() {
+            override fun onInitializeAccessibilityNodeInfo(
+                host: View,
+                info: AccessibilityNodeInfo,
+            ) {
+                super.onInitializeAccessibilityNodeInfo(host, info)
+                info.className = Button::class.java.name
+            }
+        }
 
     var sliderValue: Int = 0
         set(value) {
@@ -136,6 +149,22 @@ class SliderItem : Item {
             }
         }
 
+    var sliderContentDescription: CharSequence? = null
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyChanged()
+            }
+        }
+
+    var sliderStateDescription: CharSequence? = null
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyChanged()
+            }
+        }
+
     constructor() : super()
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -181,6 +210,21 @@ class SliderItem : Item {
                 _sliderIncrement = stepSize.toInt()
             }
 
+            val title = getTitle()
+            if (!sliderContentDescription.isNullOrEmpty()) {
+                view.setContentDescription(sliderContentDescription)
+                setContentDescription(sliderContentDescription)
+            } else if (!title.isNullOrEmpty()) {
+                setContentDescription(title)
+            } else {
+                setContentDescription(null)
+            }
+            if (!sliderStateDescription.isNullOrEmpty()) {
+                setStateDescription(sliderStateDescription)
+            } else {
+                setStateDescription(null)
+            }
+
             valueFrom = min.toFloat()
             valueTo = max.toFloat()
             value = sliderValue.toFloat()
@@ -192,6 +236,7 @@ class SliderItem : Item {
                     sliderValue = value.toInt()
                 }
             }
+            isClickable = false
 
             if (PartnerConfigHelper.isGlifExpressiveEnabled(context)) {
                 applyExpressiveStyles(dimensions)
@@ -249,6 +294,7 @@ class SliderItem : Item {
 
         iconFrame.setOnClickListener { if (sliderValue > min) sliderValue -= sliderIncrement }
         iconFrame.visibility = View.VISIBLE
+        setIconViewAndFrameEnabled(iconView, iconFrame, sliderValue > min)
     }
 
     private fun updateIconEndIfNeeded(iconView: ImageView?) {
@@ -265,5 +311,12 @@ class SliderItem : Item {
 
         iconFrame.setOnClickListener { if (sliderValue < max) sliderValue += sliderIncrement }
         iconFrame.visibility = View.VISIBLE
+        setIconViewAndFrameEnabled(iconView, iconFrame, sliderValue < max)
+    }
+
+    private fun setIconViewAndFrameEnabled(iconView: View, iconFrame: ViewGroup, enabled: Boolean) {
+        iconView.isEnabled = enabled
+        iconFrame.isEnabled = enabled
+        iconFrame.accessibilityDelegate = buttonAccessibilityDelegate
     }
 }
