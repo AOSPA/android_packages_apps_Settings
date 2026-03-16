@@ -476,7 +476,7 @@ class CatalystStateProviderExecutorTest {
                 sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
             )
         )
-        setRegistryFactories(outerNoSensitivityScreen)
+        setRegistryFactories(innerSensitiveScreen, outerNoSensitivityScreen)
         val executor = CatalystStateProviderExecutor(
             buildConfig("outer_no_sensitivity_screen_key", listOf()),
             context,
@@ -491,7 +491,7 @@ class CatalystStateProviderExecutorTest {
     }
 
     @Test
-    fun invoke_onExposableScreenWithInnerNonExposableScreen_onlyIncludesOuterScreen() = runTest {
+    fun execute_onExposableScreenWithInnerNonExposableScreen_onlyIncludesOuterScreen() = runTest {
         val innerSensitiveScreen = createScreen(
             PreferenceScreenConfig(
                 screenKey = "inner_sensitive_screen_key",
@@ -531,7 +531,7 @@ class CatalystStateProviderExecutorTest {
                 summary = R.string.preference_screen_summary,
             )
         )
-        setRegistryFactories(outerNoSensitivityScreen)
+        setRegistryFactories(innerSensitiveScreen, outerNoSensitivityScreen)
 
         val executor = CatalystStateProviderExecutor(
             buildConfig("outer_no_sensitivity_screen_key", listOf()),

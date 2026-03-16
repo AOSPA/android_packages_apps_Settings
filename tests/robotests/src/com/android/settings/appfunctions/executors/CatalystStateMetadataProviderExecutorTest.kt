@@ -892,7 +892,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
             )
         )
-        setRegistryFactories(outerNoSensitivityScreen)
+        setRegistryFactories(innerSensitiveScreen, outerNoSensitivityScreen)
         val executor = CatalystStateMetadataProviderExecutor(
             buildConfig("outer_no_sensitivity_screen_key", listOf()),
             context,
@@ -947,7 +947,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 summary = R.string.preference_screen_summary,
             )
         )
-        setRegistryFactories(outerNoSensitivityScreen)
+        setRegistryFactories(innerSensitiveScreen, outerNoSensitivityScreen)
 
         val executor = CatalystStateMetadataProviderExecutor(
             buildConfig("outer_no_sensitivity_screen_key", listOf()),
