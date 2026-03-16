@@ -32,6 +32,15 @@
             settings:iconEnd="@drawable/ic_add_24dp"
             settings:iconEndContentDescription="@string/font_size_make_larger_desc" />
 
+        <com.android.settings.accessibility.setupwizard.items.SliderItem
+            android:id="@+id/display_size_in_suw"
+            android:title="@string/screen_zoom_title"
+            android:summary="@string/screen_zoom_short_summary"
+            settings:iconStart="@drawable/ic_remove_24dp"
+            settings:iconStartContentDescription="@string/screen_zoom_make_smaller_desc"
+            settings:iconEnd="@drawable/ic_add_24dp"
+            settings:iconEndContentDescription="@string/screen_zoom_make_larger_desc" />
+
     </SectionItem>
 
     <SectionItem
