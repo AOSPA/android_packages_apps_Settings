@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.RegionalRes
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
+import com.android.settingslib.metadata.preferencesapi.extractSafety
 
 /**
  * Generic exception thrown if the preconditions of a get/set operation made through the ApiTester
@@ -322,7 +323,7 @@ class ApiTester(
         val type = preference.type
         if (type is FiniteOptionsType<*, *>) {
             val enforcedType = type as FiniteOptionsType<*, V>
-            return runBlocking { enforcedType.getOptions(context) }
+            return runBlocking { enforcedType.getOptions(context).map { extractSafety(it.first) as V to extractSafety(it.second) as String } }
         } else
             throw Exception(
                 "Attempting to get all preference options on a " +

@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterT
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 // LINT.IfChange
 /**
@@ -57,7 +58,7 @@ class PrintServiceApiScreen :
                 purpose = R.string.print_service_parameter_purpose,
                 type =
                     GeneratedParameterType(R.string.print_service_parameter_description) {
-                        fetchDisplayInfos().map { GeneratedValue(it.componentName, it.title) }
+                        fetchDisplayInfos().map { GeneratedValue(it.componentName.unsafe(), it.title.unsafe()) }
                     },
             )
 

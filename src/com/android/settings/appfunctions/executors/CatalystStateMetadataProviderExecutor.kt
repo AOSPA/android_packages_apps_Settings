@@ -64,6 +64,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
+import com.android.settingslib.metadata.preferencesapi.extractSafety
 
 /* A [DeviceStateExecutor] that provides device state metadata information for Settings that are
 exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
@@ -343,7 +344,7 @@ suspend fun ApiType<*, *>.toItemizationType(context: Context): ItemizationType {
         hintText = getDescription(context),
         values = if (this is FiniteOptionsType) {
             getOptions(context).map {
-                ItemizationDetail(key = it.first.toString(), value = it.second.toString())
+                ItemizationDetail(key = extractSafety(it.first).toString(), value = extractSafety(it.second).toString())
             }.toList()
         } else {
             emptyList()
