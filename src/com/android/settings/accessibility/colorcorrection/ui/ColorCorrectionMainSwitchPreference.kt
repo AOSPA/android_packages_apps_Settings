@@ -38,7 +38,7 @@ class ColorCorrectionMainSwitchPreference(context: Context) :
     private val storage by lazy {
         ToggleFeatureDataStore(
             AccessibilityShortcutController.DALTONIZER_COMPONENT_NAME,
-            SettingsSecureStore.get(context),
+            SettingsSecureStore.get(context).apply { setDefaultValue(KEY, false) },
         )
     }
 
