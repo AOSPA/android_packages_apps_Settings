@@ -25,11 +25,27 @@ import com.android.settings.R
 import com.google.android.material.slider.LabelFormatter
 import com.google.android.material.slider.Slider
 import com.google.android.material.slider.TickVisibilityMode
+import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper
 import com.google.android.setupdesign.items.Item
 import kotlin.math.abs
 
 /** A custom slider item used in Setup Wizard accessibility screens. */
 class SliderItem : Item {
+
+    private lateinit var dimensions: SliderDimensions
+
+    // Data class to host track-related dimensions
+    private data class SliderDimensions(
+        val trackHeight: Int,
+        val trackInsideCornerSize: Int,
+        val trackStopIndicatorSize: Int,
+        val thumbWidth: Int,
+        val thumbHeight: Int,
+        val thumbElevation: Int,
+        val thumbStrokeWidth: Int,
+        val thumbTrackGapSize: Int,
+        val tickRadius: Int,
+    )
 
     var sliderValue: Int = 0
         set(value) {
@@ -144,8 +160,11 @@ class SliderItem : Item {
 
     override fun onBindView(view: View) {
         super.onBindView(view)
-        view.isClickable = false
+        if (!::dimensions.isInitialized) {
+            initDimensions(view.context)
+        }
 
+        view.isClickable = false
         view.findViewById<Slider>(R.id.slider)?.apply {
             labelBehavior =
                 if (showSliderValue) {
@@ -173,10 +192,46 @@ class SliderItem : Item {
                     sliderValue = value.toInt()
                 }
             }
+
+            if (PartnerConfigHelper.isGlifExpressiveEnabled(context)) {
+                applyExpressiveStyles(dimensions)
+            }
         }
 
         updateIconStartIfNeeded(view.findViewById(R.id.icon_start))
         updateIconEndIfNeeded(view.findViewById(R.id.icon_end))
+    }
+
+    private fun initDimensions(context: Context) {
+        val res = context.resources
+        dimensions =
+            SliderDimensions(
+                trackHeight = res.getDimensionPixelSize(R.dimen.sud_slider_track_height),
+                trackInsideCornerSize =
+                    res.getDimensionPixelSize(R.dimen.sud_slider_track_inside_corner_size),
+                trackStopIndicatorSize =
+                    res.getDimensionPixelSize(R.dimen.sud_slider_track_stop_indicator_size),
+                thumbWidth = res.getDimensionPixelSize(R.dimen.sud_slider_thumb_width),
+                thumbHeight = res.getDimensionPixelSize(R.dimen.sud_slider_thumb_height),
+                thumbElevation = res.getDimensionPixelSize(R.dimen.sud_slider_thumb_elevation),
+                thumbStrokeWidth = res.getDimensionPixelSize(R.dimen.sud_slider_thumb_stroke_width),
+                thumbTrackGapSize =
+                    res.getDimensionPixelSize(R.dimen.sud_slider_thumb_track_gap_size),
+                tickRadius = res.getDimensionPixelSize(R.dimen.sud_slider_tick_radius),
+            )
+    }
+
+    private fun Slider.applyExpressiveStyles(dims: SliderDimensions) {
+        trackHeight = dims.trackHeight
+        trackInsideCornerSize = dims.trackInsideCornerSize
+        trackStopIndicatorSize = dims.trackStopIndicatorSize
+        thumbWidth = dims.thumbWidth
+        thumbHeight = dims.thumbHeight
+        thumbElevation = dims.thumbElevation.toFloat()
+        thumbStrokeWidth = dims.thumbStrokeWidth.toFloat()
+        thumbTrackGapSize = dims.thumbTrackGapSize
+        tickActiveRadius = dims.tickRadius
+        tickInactiveRadius = dims.tickRadius
     }
 
     private fun updateIconStartIfNeeded(iconView: ImageView?) {
