@@ -25,8 +25,11 @@ import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.android.settings.R
+import com.android.settings.accessibility.shared.ui.FocusIndicatorDrawable
 
-class WifiConfigAdvancedLayout(val view: View) {
+class WifiConfigAdvancedLayout
+@JvmOverloads
+constructor(val view: View, private val showFocusRingIndicator: Boolean = false) {
 
     private val layout = view.requireViewById<LinearLayout>(R.id.advanced_options_layout)
     private val icon = view.requireViewById<ImageView>(R.id.advanced_options_icon)
@@ -41,6 +44,9 @@ class WifiConfigAdvancedLayout(val view: View) {
 
     init {
         layout.setOnClickListener { expanded = !isExpanded }
+        if (showFocusRingIndicator) {
+            layout.foreground = FocusIndicatorDrawable.Builder(view.context).build()
+        }
         ViewCompat.setAccessibilityDelegate(
             layout,
             object : AccessibilityDelegateCompat() {
