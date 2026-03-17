@@ -58,6 +58,7 @@ import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptions
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
 import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
 import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.types.EType
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateMetadataProviderExecutorTest {
@@ -1191,7 +1192,7 @@ class CatalystStateMetadataProviderExecutorTest {
     }
 
     private object TestEnumType : DirectFiniteOptionsType<String> {
-        override fun getType(): Class<String> = String::class.java
+        override val externalType = EType.String
         override fun getKey(): String = "test_enum"
         override fun getDescription(context: Context): String = "Test Enum Description"
         override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<String>, SafetyAnnotated<String>>> = listOf(
