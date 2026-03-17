@@ -36,6 +36,8 @@ import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
+import android.text.SpannableString
+import android.text.style.TtsSpan
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceGroup
@@ -61,6 +63,7 @@ import java.util.concurrent.Executor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -224,6 +227,40 @@ class SupervisionDashboardScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun onResume_updatesDependentPreferenceSummary_withContentDescription() = runTest {
+        val initialSummary = "Initial Summary"
+        val initialSummaryContentDescription = "Initial Content Description"
+        fakePreferenceDataApi.preferenceData =
+            mapOf(
+                SupervisionWebContentFiltersScreen.KEY to
+                    PreferenceData(
+                        summary = initialSummary,
+                        summaryContentDescription = initialSummaryContentDescription,
+                    )
+            )
+
+        preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
+            val webContentFilterPreference =
+                fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
+
+            // Idle to ensure all tasks in onResume are completed.
+            advanceUntilIdle()
+            shadowOf(Looper.getMainLooper()).idle()
+            // Add another idle() to ensure all asynchronous tasks triggered by onResume
+            // and the first idle() are completed.
+            shadowOf(Looper.getMainLooper()).idle()
+
+            val summary = webContentFilterPreference.summary as SpannableString
+            assertThat(summary.toString()).isEqualTo(initialSummary)
+            val ttsSpans = summary.getSpans(0, summary.length, TtsSpan::class.java)
+            assertThat(ttsSpans.size).isEqualTo(1)
+            assertThat(ttsSpans[0].args.getString(TtsSpan.ARG_TEXT))
+                .isEqualTo(initialSummaryContentDescription)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun refreshDashboardTiles_updatesDependentPreferenceSummary() = runTest {
         val initialSummary = "Initial Summary"
         fakePreferenceDataApi.preferenceData =
@@ -254,6 +291,58 @@ class SupervisionDashboardScreenTest {
             shadowOf(Looper.getMainLooper()).idle()
 
             assertThat(webContentFilterPreference.summary).isEqualTo(initialSummary)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun refreshDashboardTiles_updatesDependentPreferenceSummary_withContentDescription() = runTest {
+        val initialSummary = "Initial Summary"
+        val initialSummaryContentDescription = "Initial Content Description"
+        fakePreferenceDataApi.preferenceData =
+            mapOf(
+                SupervisionWebContentFiltersScreen.KEY to
+                    PreferenceData(
+                        summary = initialSummary,
+                        summaryContentDescription = initialSummaryContentDescription,
+                    )
+            )
+
+        preferenceScreenCreator.launchFragmentScenario().onFragment { fragment ->
+            val dashboardFragment = fragment as SupervisionDashboardFragment
+            val webContentFilterPreference =
+                fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
+
+            // Idle to ensure all tasks in onResume are completed.
+            advanceUntilIdle()
+            shadowOf(Looper.getMainLooper()).idle()
+            // Add another idle() to ensure all asynchronous tasks triggered by onResume
+            // and the first idle() are completed.
+            shadowOf(Looper.getMainLooper()).idle()
+
+            var summary = webContentFilterPreference.summary as SpannableString
+            assertThat(summary.toString()).isEqualTo(initialSummary)
+            var ttsSpans = summary.getSpans(0, summary.length, TtsSpan::class.java)
+            assertThat(ttsSpans.size).isEqualTo(1)
+            assertThat(ttsSpans[0].args.getString(TtsSpan.ARG_TEXT))
+                .isEqualTo(initialSummaryContentDescription)
+
+            // Update the preference summary.
+            val updatedSummary = "Updated summary"
+            webContentFilterPreference.summary = updatedSummary
+            assertThat(webContentFilterPreference.summary).isEqualTo(updatedSummary)
+
+            // refreshDashboardTiles should restore the value from the data map.
+            dashboardFragment.refreshDashboardTiles("test")
+
+            shadowOf(Looper.getMainLooper()).idle()
+
+            summary = webContentFilterPreference.summary as SpannableString
+            assertThat(summary.toString()).isEqualTo(initialSummary)
+            ttsSpans = summary.getSpans(0, summary.length, TtsSpan::class.java)
+            assertThat(ttsSpans.size).isEqualTo(1)
+            assertThat(ttsSpans[0].args.getString(TtsSpan.ARG_TEXT))
+                .isEqualTo(initialSummaryContentDescription)
         }
     }
 
