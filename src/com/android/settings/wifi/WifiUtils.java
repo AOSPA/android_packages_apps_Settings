@@ -386,15 +386,15 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
      */
     public static boolean isCurrentUserNetworkOwner(
             @NonNull WifiEntry wifiEntry, @NonNull Context context) {
-        if (!isWifiMultiuserEnabled()
-                || wifiEntry.getWifiConfiguration() == null) {
+        WifiConfiguration config = wifiEntry.getWifiConfiguration();
+        if (!isWifiMultiuserEnabled() || config == null) {
             return true;
         }
 
         UserManager userManager = context.getSystemService(UserManager.class);
         int userCount = userManager.getUserCount();
         int currentUserId = Process.myUserHandle().getIdentifier();
-        int creatorUserId = wifiEntry.getWifiConfiguration().getCreatorUserId();
+        int creatorUserId = config.getCreatorUserId();
 
         return (userCount == 1) || (currentUserId == creatorUserId);
     }
