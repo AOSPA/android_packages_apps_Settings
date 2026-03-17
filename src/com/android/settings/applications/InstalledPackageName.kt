@@ -28,6 +28,7 @@ import android.os.UserManager
 import androidx.annotation.RequiresApi
 import com.android.settingslib.metadata.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.unsafe
 import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
@@ -49,7 +50,7 @@ open class InstalledPackageName(
     private val heldPermissions: Array<String>? = null,
 ) : DirectFiniteOptionsType<String> {
 
-    override fun getType(): Class<String> = String::class.java
+    override val externalType: EType<String> = EType.String
 
     override fun getDescription(context: Context): String =
         context.getString(R.string.installed_package_name_type_description)

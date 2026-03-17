@@ -21,6 +21,7 @@ import android.telephony.SubscriptionManager
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.unsafe
 import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
@@ -55,7 +56,7 @@ open class SubscriptionId(
                 }
             )
 
-    override fun getType(): Class<Int> = Int::class.java
+    override val externalType: EType<Int> = EType.Int
 
     override fun getDescription(context: Context): String = "An ID of a network subscription"
 

@@ -20,6 +20,7 @@ import android.content.Context
 import android.hardware.display.DisplayManager
 import com.android.settingslib.metadata.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.unsafe
 import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
@@ -66,5 +67,5 @@ class DisplayId(
 
     override fun getKey(): String = "DisplayId_${allowInternal}_$allowExternal"
 
-    override fun getType(): Class<String> = String::class.java
+    override val externalType: EType<String> = EType.String
 }
