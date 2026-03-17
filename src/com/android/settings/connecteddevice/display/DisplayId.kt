@@ -20,6 +20,9 @@ import android.content.Context
 import android.hardware.display.DisplayManager
 import com.android.settingslib.metadata.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
 
 /**
  * A system display identifier.
@@ -35,7 +38,7 @@ class DisplayId(
     override fun getDescription(context: Context): String =
         context.getString(R.string.display_id_type_description)
 
-    override suspend fun getOptions(context: Context): List<Pair<String, String>> {
+    override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<String>, SafetyAnnotated<String>>> {
         val displayManager =
             context.getSystemService(DisplayManager::class.java) ?: return emptyList()
         val displayInjector = ConnectedDisplayInjector(context)
@@ -57,7 +60,7 @@ class DisplayId(
                         "${display.name} (external)"
                     }
 
-                display.displayId.toString() to description
+                display.displayId.toString().safe() to description.unsafe()
             }
     }
 

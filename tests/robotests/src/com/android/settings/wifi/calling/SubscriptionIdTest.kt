@@ -29,6 +29,8 @@ import org.mockito.Mock
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 @RunWith(AndroidJUnit4::class)
 class SubscriptionIdTest {
@@ -89,7 +91,7 @@ class SubscriptionIdTest {
 
             val options = SubscriptionId().getOptions(context)
 
-            assertThat(options).containsExactly(1 to "Sub 1", 2 to "Sub 2")
+            assertThat(options).containsExactly(1.safe() to "Sub 1".unsafe(), 2.safe() to "Sub 2".unsafe())
         }
     }
 

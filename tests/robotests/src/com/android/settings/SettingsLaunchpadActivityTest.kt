@@ -62,6 +62,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
+import com.android.settingslib.metadata.preferencesapi.safe
 
 @RunWith(RobolectricTestRunner::class)
 @Config(shadows = [ShadowActivityEmbeddingUtils::class])
@@ -166,7 +167,7 @@ class SettingsLaunchpadActivityTest {
                     0,
                     true,
                     GeneratedParameterType(0) {
-                        listOf(GeneratedValue("value", "type_description"))
+                        listOf(GeneratedValue("value".safe(), "type_description".safe()))
                     },
                 )
                 prepareSpaRoute { params -> "$SPA_ROUTE_PREFIX/${params["package"]}" }

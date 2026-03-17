@@ -34,6 +34,7 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
+import com.android.settingslib.metadata.preferencesapi.safe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(LanguageAndRegionApiFirstScreen.KEY)
@@ -65,7 +66,7 @@ class LanguageAndRegionApiFirstScreen :
                         }
                     )
                     localeInfoList.map {
-                        GeneratedValue(it.locale.toLanguageTag(), it.fullNameNative)
+                        GeneratedValue(it.locale.toLanguageTag().safe(), it.fullNameNative.safe())
                     }
                 },
         ) {

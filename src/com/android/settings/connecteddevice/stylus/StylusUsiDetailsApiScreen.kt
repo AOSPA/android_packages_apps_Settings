@@ -31,6 +31,8 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(StylusUsiDetailsApiScreen.KEY, parameterized = true)
@@ -63,8 +65,8 @@ class StylusUsiDetailsApiScreen :
                                         device.supportsSource(InputDevice.SOURCE_STYLUS)
                                 ) {
                                     GeneratedValue(
-                                        value = id.toString(),
-                                        description = device.name ?: "Stylus $id",
+                                        value = id.toString().safe(),
+                                        description = device.name.unsafe() ?: "Stylus $id".safe(),
                                     )
                                 } else {
                                     null
