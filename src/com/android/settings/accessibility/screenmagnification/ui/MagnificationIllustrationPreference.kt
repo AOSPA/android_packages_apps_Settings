@@ -21,6 +21,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.android.settings.accessibility.shared.utils.adjustIllustrationLayoutForSetupWizard
 import com.android.settings.accessibility.shared.utils.handleIllustrationAnimationForSetupWizard
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
@@ -44,7 +45,11 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
     override fun createWidget(context: Context): IllustrationPreference {
         val lottieResId =
             if (SettingsThemeHelper.isExpressiveTheme(context)) {
-                R.raw.accessibility_magnification_banner_expressive
+                if (InputPeripheralsSettingsUtils.isMouse()) {
+                    R.raw.accessibility_magnification_with_cursor_banner
+                } else {
+                    R.raw.accessibility_magnification_banner_expressive
+                }
             } else {
                 R.raw.accessibility_magnification_banner
             }
@@ -53,7 +58,11 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
             isSelectable = false
             lottieAnimationResId = lottieResId
             contentDescription = getContentDescription(context)
-            applyDynamicColor()
+            if (InputPeripheralsSettingsUtils.isMouse()) {
+                applyIlloColors()
+            } else {
+                applyDynamicColor()
+            }
             setOnBindListener { view: LottieAnimationView? ->
                 view?.let { animationView ->
                     adjustIllustrationLayoutForSetupWizard(animationView)

@@ -25,6 +25,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.IllustrationPreferenceController
 import com.android.settings.accessibility.shared.utils.adjustIllustrationLayoutForSetupWizard
 import com.android.settings.accessibility.shared.utils.handleIllustrationAnimationForSetupWizard
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import java.lang.String
@@ -42,7 +43,11 @@ class MagnificationIllustrationPreferenceController(context: Context, prefKey: k
                 .appendPath(
                     String.valueOf(
                         if (isExpressiveTheme(context)) {
-                            R.raw.accessibility_magnification_banner_expressive
+                            if (InputPeripheralsSettingsUtils.isMouse()) {
+                                R.raw.accessibility_magnification_with_cursor_banner
+                            } else {
+                                R.raw.accessibility_magnification_banner_expressive
+                            }
                         } else {
                             R.raw.accessibility_magnification_banner
                         }
@@ -60,7 +65,11 @@ class MagnificationIllustrationPreferenceController(context: Context, prefKey: k
     override fun displayPreference(screen: PreferenceScreen?) {
         super.displayPreference(screen)
         val illustrationPref: IllustrationPreference? = screen?.findPreference(preferenceKey)
-        illustrationPref?.applyDynamicColor()
+        if (InputPeripheralsSettingsUtils.isMouse()) {
+            illustrationPref?.applyIlloColors()
+        } else {
+            illustrationPref?.applyDynamicColor()
+        }
         illustrationPref?.setOnBindListener { view: LottieAnimationView? ->
             view?.let { animationView ->
                 adjustIllustrationLayoutForSetupWizard(animationView)
