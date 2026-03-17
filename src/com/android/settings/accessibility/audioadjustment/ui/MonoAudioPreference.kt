@@ -21,6 +21,7 @@ import android.provider.Settings
 import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
@@ -37,6 +38,15 @@ class MonoAudioPreference :
 
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY
+
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     companion object {
         const val KEY = Settings.System.MASTER_MONO
