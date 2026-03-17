@@ -40,6 +40,7 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
@@ -307,8 +308,15 @@ open class SettingsLaunchpadActivity : Activity() {
         context: Context,
         metadata: PreferenceScreenMetadata
     ): Boolean {
+        // If the screen is not exposable => block.
         if (!metadata.isExposable(context)) {
             Log.w(TAG, "Screen ${metadata.key} is not exposable. Blocking launch.")
+            return true
+        }
+
+        // If the screen is not available => block.
+        if (metadata is PreferenceAvailabilityProvider && !metadata.isAvailable(context)) {
+            Log.w(TAG, "Screen ${metadata.key} is not available. Blocking launch.")
             return true
         }
 

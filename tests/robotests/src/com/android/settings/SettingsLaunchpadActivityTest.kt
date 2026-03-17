@@ -35,6 +35,7 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.metadata.FixedArrayMap
 import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
@@ -779,9 +780,26 @@ class SettingsLaunchpadActivityTest {
     }
 
     @Test
-    fun onCreate_screenIsExposable_shouldAllowLaunch() {
+    fun onCreate_isNotAvailable_shouldBlockLaunch() {
+        fakeFactory.isAvailableToReturn = false
+
+        val intent = Intent(context, SettingsLaunchpadActivity::class.java).apply {
+            putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+        }
+
+        val controller = setupActivity(intent)
+        val activity = controller.get()
+        controller.create()
+
+        assertThat(activity.isFinishing).isTrue()
+        assertThat(getNextStartedActivity(activity)).isNull()
+    }
+
+    @Test
+    fun onCreate_allChecksPass_shouldAllowLaunch() {
         fakeFactory.sensitivityLevelToReturn = SensitivityLevel.NO_SENSITIVITY
         fakeFactory.tagsToReturn = emptyArray()
+        fakeFactory.isAvailableToReturn = true
 
         val intent = Intent(context, SettingsLaunchpadActivity::class.java).apply {
             putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
@@ -797,13 +815,14 @@ class SettingsLaunchpadActivityTest {
     }
 
     class FakeParameterizedFactory :
-        PreferenceScreenMetadataParameterizedFactory, PreferenceScreenMixin {
+        PreferenceScreenMetadataParameterizedFactory,
+        PreferenceScreenMixin,
+        PreferenceAvailabilityProvider {
         var fragmentClassToReturn: Class<out Fragment>? = TestFragment::class.java
-
         var launchIntentToReturn: Intent? = null
-
         var sensitivityLevelToReturn: Int = SensitivityLevel.NO_SENSITIVITY
         var tagsToReturn: Array<String> = emptyArray()
+        var isAvailableToReturn: Boolean = true
 
         private var receivedBundle: Bundle? = null
         private var receivedKeyParameters: ValidatedKeyParameters? = null
@@ -814,6 +833,11 @@ class SettingsLaunchpadActivityTest {
         }
 
         override fun acceptEmptyArguments(): Boolean = true
+
+        override val availabilityDescription: String
+            get() = ""
+
+        override fun isAvailable(context: Context): Boolean = isAvailableToReturn
 
         override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
             launchIntentToReturn
