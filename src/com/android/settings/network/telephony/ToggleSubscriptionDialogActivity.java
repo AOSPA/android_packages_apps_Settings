@@ -47,7 +47,7 @@ import com.android.settings.network.SwitchToEuiccSubscriptionSidecar;
 import com.android.settings.network.SwitchToRemovableSlotSidecar;
 import com.android.settings.network.UiccSlotUtil;
 import com.android.settings.sim.SimActivationNotifier;
-
+import com.android.settings.network.telephony.TelephonyUtils;
 import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
@@ -406,8 +406,13 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     /* Handles the enabling SIM action. */
     private void showEnableSubDialog() {
         Log.d(TAG, "Handle subscription enabling.");
+        TelephonyUtils.connectExtTelephonyService(this);
         if (isDsdsConditionSatisfied()) {
-            showEnableDsdsConfirmDialog();
+            if (TelephonyUtils.getDsdsToSsConfigValue() == 2) {
+                handleEnableEsimProfileForDsdsToSsConfig();
+            } else {
+                showEnableDsdsConfirmDialog();
+            }
             return;
         }
         if (!mIsEsimOperation && isRemovableSimEnabled()) {
@@ -419,6 +424,25 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             return;
         }
         showEnableSimConfirmDialog();
+    }
+
+    /**
+     * If eSIM operation and DSDS condition satisfied, move device to DSDS Mode.
+     */
+    private void handleEnableEsimProfileForDsdsToSsConfig() {
+        Log.i(TAG, "handleEnableEsimProfileForDsdsToSsConfig ..");
+        if (mIsEsimOperation) {
+            if (mTelMgr.doesSwitchMultiSimConfigTriggerReboot()) {
+                Log.i(TAG, "Device does not support reboot free DSDS.");
+                showRebootConfirmDialog();
+                return;
+            }
+            Log.i(TAG, "Enabling DSDS without rebooting.");
+            showProgressDialog(
+                        getString(R.string.sim_action_enabling_sim_without_carrier_name));
+            mEnableMultiSimSidecar.run(NUM_OF_SIMS_FOR_DSDS);
+            return;
+        }
     }
 
     private void showEnableDsdsConfirmDialog() {
