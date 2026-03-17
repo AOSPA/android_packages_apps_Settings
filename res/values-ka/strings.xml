@@ -930,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"გსურთ მოწყობილობის გადატვირთვა?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"დეტალური NFC აღრიცხვა გათვალისწინებულია მხოლოდ დეველოპერული მიზნებისთვის. დამატებითი NFC მონაცემები მოყვანილია სისტემის ხარვეზის ანგარიშებში, რომლებიც შეიძლება მოიცავდეს პირად ინფორმაციას. გადატვირთეთ თქვენი მოწყობილობა ამ პარამეტრის შესაცვლელად."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"გადატვირთვა"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"ჩართული"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"გამორთული"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"გარე ეკრანები"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"ჩაშენებული ეკრანი"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"უნივერსალური კურსორი"</string>
@@ -1158,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"მდებარეობის ზუსტი განსაზღვრის გასაუმჯობესებლად და სხვა მიზნებისთვის, უცნობ აპს სურს, ჩართოს ქსელის სკანირება, თუნდაც Wi-Fi გამორთული იყოს.\n\nდაუშვებთ ამას ყველა აპისთვის, რომელსაც სკანირება სურს?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"უარყოფა"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*სავალდებულო"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"ეს გაზიარებული ქსელია. ცვლილებების შესატანად საჭიროა შესვლა."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"ცვლილებების შესატანად დაუკავშირდით ქსელის მფლობელს ან მოწყობილობის ადმინისტრატორს."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"ამ ქსელს არ აქვს ინტერნეტზე წვდომა. შენარჩუნდეს კავშირი?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"ზოგიერთმა აპმა და სერვისმა შეიძლება არ იმუშაოს შეზღუდული კავშირის გამო. მაინც გამოიყენებთ?"</string>
@@ -1505,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"გაუქმება"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM ბარათის დაცვა"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM-ის ჩაკეტვის დაცვის რეჟიმი"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"SIM-ის ჩაკეტვა"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"იმართება Android-ის მიერ"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"არ იმართება Android-ის მიერ"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"რეგისტრაცია წარმატებით დასრულდა"</string>
@@ -1515,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android-ის მიერ მართული PIN-კოდი"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Android-ის მიერ მართული PIN-კოდის მნიშვნელობა:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"PIN-კოდის მიღება ვერ მოხერხდა"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"ტელეფონზე წვდომისთვის PIN-კოდის მოთხოვნა"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM-ის PIN-კოდს მართავს Android"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"ტელეფონის გამოსაყენებლად საჭიროა PIN-კოდი"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"SIM-ის ავტომატური დაცვისთვის საჭიროა ეკრანის დაბლოკვის ფუნქცია, ახლა ხელმისაწვდომია მხოლოდ მექანიკური ვარიანტი"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"შეიყვანეთ SIM ბარათის მიმდინარე PIN-კოდი"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"შეიყვანეთ SIM ბარათის მიმდინარე PIN-კოდი"</string>
@@ -1531,8 +1525,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"SIM ბარათის ახალი PIN-კოდის დადასტურება"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN-ები არ ემთხვევა. დაადასტურეთ SIM-ის ახალი PIN-კოდი."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"PIN-კოდი არასწორია. დარჩა <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> ცდა"</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
-    <skip />
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"შეიყვანეთ SIM ბარათის მიმდინარე PIN-კოდი"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"გამოიყენებთ <xliff:g id="CARRIER">%1$s</xliff:g>-ს მობ. ინტ.-თვის?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"თქვენ იყენებთ <xliff:g id="CARRIER2_0">%2$s</xliff:g>-ს მობილური ინტერნეტისთვის. თუ <xliff:g id="CARRIER1">%1$s</xliff:g>-ზე გადაერთვებით, <xliff:g id="CARRIER2_1">%2$s</xliff:g> აღარ იქნება გამოყენებული მობილური ინტერნეტისთვის."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>-ის გამოყენება"</string>
@@ -1835,8 +1828,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"მდებარეობის სასაათო სარტყლის განსაზღვრის ცვლილებები არ არის დაშვებული"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"თუ თქვენი მოწყობილობის მდებარეობა ხელმისაწვდომია, ის შეიძლება გამოყენებულ იქნას თქვენი სასაათო სარტყელის დაყენებისთვის"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"შეტყობინებები"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"მიიღეთ შეტყობინება, როცა თქვენი დრო ავტომატურად შეიცვლება"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"სასაათო სარტყელის შეცვლა"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"მიიღეთ შეტყობინება, როცა თქვენი სასაათო სარტყელი ავტომატურად განახლდება"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"შეტყობინება, დრო, ზონა, სასაათო სარტყელი"</string>
@@ -2608,8 +2600,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"გაფართოებული მუქი თემა"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"გაფართოებული მუქი თემის პარამეტრები"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"გაფართოებული მუქი თემის პარამეტრების გახსნა"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"გაფართოებული მუქი თემა ავტომატურად ამუქებს მეტ აპს უკეთესი წაკითხვადობისთვის.\n\nგაფართოებული მუქი თემის გამოსაყენებლად ჩართული დატოვეთ აპის გადამრთველი. თუ აპის გამოსახულება არ ვარგა, გამორთეთ მისი გადამრთველი, რათა გამოიყენოთ აპის საკუთარი თემა."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ანიმაციის გათიშვა"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"ეკრანზე მოძრაობის შემცირება"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"ტექსტის კურსორის ციმციმი"</string>
@@ -2936,6 +2927,8 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
+    <skip />
     <string name="battery_details_title" msgid="3289680399291090588">"აპლიკაციის ბატარეის გამოყენება"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"გამოყენების დეტალები"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"ენერგიის მოხმარების მორგება"</string>
@@ -3662,8 +3655,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi შეტყობინება, wifi შეტყობინება"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"მონაცემთა მოხმარება"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24-საათიანი ფორმატის გამოყენება"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"დროის შეტყობინებები, სასაათო სარტყელის შეტყობინებები, DST, ზაფხულის დრო, სასაათო სარტყელის წანაცვლება"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"გახსნა აპით"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"აპლიკაციები"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"სასაათო სარტყელი"</string>
@@ -3784,10 +3776,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"შეტყობინების ხმა დადუმებულია, შეტყობინებისას ვიბრაციას იგრძნობთ"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> დადუმებულია"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"მიუწვდომელია, რადგან დარეკვა დადუმებულია"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"ზარი, ზარის გაფრთხილება, SIM, SIM-ის ზარი"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"ზარი"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"ტელეფონის ზარი"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"შეტყობინებების ნაგულისხმევი ხმა"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"აპის მიერ უზრუნველყოფილი ხმა"</string>
@@ -4611,23 +4601,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"შეუძლია ჰქონდეს წვდომა ყველა ფაილზე"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"ეკრანის ავტომატიზაცია"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"ეს აპი შეძლებს სხვა აპების ეკრანის კონტენტის ნახვას და მათთან ინტერაქციას, რათა დაგეხმაროთ ამოცანების შესრულებაში, მაშინაც კი, როცა აპები ფონურ რეჟიმშია"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> შეძლებს სხვა აპების ეკრანის კონტენტის ნახვას და მათთან ინტერაქციას, რათა დაგეხმაროთ ამოცანების შესრულებაში"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"თუ ეკრანის ავტომატიზაციას არ დაუშვებთ, <xliff:g id="ID_1">%1$s</xliff:g> მაინც შეძლებს <xliff:g id="ID_2">%1$s</xliff:g>-თან დაკავშირებულ აპებთან ინტერაქციას სხვა გზებით"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"ნება დართეთ აპებს, დაგეხმარონ ამოცანების შესრულებაში სხვა აპების ეკრანის კონტენტთან ინტერაქციის გზით"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ყოველთვის მკითხეთ"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"ყოველთვის დაშვება"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"უარყოფა"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
-    <skip />
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"ეკრანის ავტომატიზაციის დაშვება"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"არცერთი აპი არ არის ყოველთვის დაშვებული"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"აპები, რომლებსაც ნებადართული აქვს ეკრანის ავტომატიზაციის ყოველთვის გამოყენება <xliff:g id="ID_1">%1$s</xliff:g>-ის მიერ, აქ გამოჩნდება. აპები, რომლებიც მხოლოდ სესიის ნებართვას იღებს, არ გამოჩნდება."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"დაშვებულია"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"არ არის დაშვებული"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"სრული ეკრანის შეტყობინებები"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ამ აპიდან შეტყობინებების დაშვება სრულ ეკრანზე"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ნება დართეთ ამ აპს, აჩვენოს შეტყობინებები, რომლებიც სრულ ეკრანს იკავებს, როდესაც მოწყობილობა ჩაკეტილია. აპმა ისინი შეიძლება გამოიყენოს გამაფრთხილებელი სიგნალების და შემომავალი ზარების გამოყოფისთვის ან სხვა გადაუდებელი შეტყობინებებისთვის."</string>
@@ -4664,6 +4648,8 @@
     <string name="disconnected" msgid="3469373726996129247">"არ არის დაკავშირებული"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"არ არის დაკავშირებული"</string>
     <string name="apps_summary" msgid="4007416751775414252">"დაინსტალირებულია <xliff:g id="COUNT">%1$d</xliff:g> აპი"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"გამოყენებულია <xliff:g id="PERCENTAGE">%1$s</xliff:g> — თავისუფალია <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"მუქი თემა, შრიფტის ზომა, სიკაშკაშე"</string>
     <string name="memory_summary" msgid="8221954450951651735">"გამოყენებულია საშ. <xliff:g id="USED_MEMORY">%1$s</xliff:g> / <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>დან"</string>
@@ -5826,7 +5812,8 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> (<xliff:g id="DENOMINATOR">%2$s</xliff:g>)"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"აპი გადაიტვირთება, როდესაც შეცვლით თანაფარდობას. შეიძლება დაკარგოთ შეუნახავი ცვლილებები. ზოგიერთი აპი შესაძლოა არ იყოს ოპტიმიზებული კონკრეტული თანაფარდობებისადმი."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"სამუშაო გამოცდილება"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"გეიმპედი"</string>
+    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"თითის ანაბეჭდის სენსორი"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ბლიც გაფრთხილებები"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ბლიც გაფრთხილებების შესახებ"</string>
@@ -6211,12 +6198,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"თქვენი მოწყობილობა არ არის დარეგისტრირებული სატელიტური SOS-ისთვის. დარწმუნდით, რომ დაკავშირებული ხართ ინტერნეტთან, რათა მოწყობილობამ ავტომატურად დაასრულოს რეგისტრაცია"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"ვებ-აპის ინსტალატორის სერვისის ჩართვა"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"ჩართეთ ეს სერვისი, რათა ვებსაიტები დააინსტალიროთ პირდაპირ მთავარ ეკრანზე და ისინი ჩვეულებრივი აპებივით გამოიყენოთ."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"ადამიანის ინტერფ. მოწყობ. წვდომა"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"დაუშვით აპის მიერ ადამიანის ინტერფეისის მოწყობილობების (HIDs) აღმოჩენა"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"თუ წვდომას დაუშვებთ, მავნე აპებმა შეიძლება გადააპროგრამოს HID-ები თქვენი სისტემის კომპრომეტირებისთვის. მაგალითად, აპებს შეუძლია თქვენი კლავიატურის ან მაუსისგან შემომავალი მონაცემების სიმულაცია, რათა მართოს თქვენი სისტემა, როდესაც ის არ არის გახსნილი. წვდომის დაშვებისას დარწმუნდით, რომ ენდობით აპებს."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"დამალული, ადამიანი, წვდომა, მოწყობილობა"</string>
 </resources>

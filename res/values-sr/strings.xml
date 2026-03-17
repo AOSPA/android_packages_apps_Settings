@@ -930,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Желите да рестартујете уређај?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFC евидентирање детаља је намењено само у сврхе програмирања. Додатни NFC подаци уврштени су у извештаје о грешкама, који могу да садрже приватне податке. Рестартујте уређај да бисте променили ово подешавање."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Рестартуј"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Укључено"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Искључено"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Спољни екрани"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Уграђени екран"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Универзални курсор"</string>
@@ -1158,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Ради побољшања прецизности локације и у друге сврхе, непозната апликација жели да укључи скенирање мреже чак и када је WiFi искључен.\n\nЖелите да дозволите ово за све апликације које желе да скенирају?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Одбиј"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*обавезно"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Ово је дељена мрежа. Морате да се пријавите да бисте унели промене."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Обратите се власнику мреже или администратору уређаја да бисте унели промене."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ова мрежа нема приступ интернету. Желите ли да останете повезани?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Неке апликације и услуге неће радити услед ограничене везе. Желите ли да се ипак користи?"</string>
@@ -1831,8 +1828,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Промене откривања временске зоне локације нису дозвољене"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Ако је локација уређаја доступна, може да се користи за подешавање временске зоне"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Обавештења"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Добијајте обавештења када се време аутоматски промени"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Промена временске зоне"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Добијте обавештење када се временска зона аутоматски ажурира"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"обавештење, време, зона, временска зона"</string>
@@ -2604,8 +2600,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Проширена тамна тема"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Подешавања проширене тамне теме"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Отворите подешавања проширене тамне теме"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Проширена тамна тема аутоматски потамњује више апликација ради боље читљивости.\n\nНе искључујте прекидач апликације да бисте користили проширену тамну тему. Ако апликација не изгледа добро, искључите њен прекидач да бисте користили тему апликације."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Уклони анимације"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Смањите померања на екрану"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Трептање курсора за текст"</string>
@@ -2932,6 +2927,8 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
+    <skip />
     <string name="battery_details_title" msgid="3289680399291090588">"Потрошња батерије за апликације"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Коришћење детаља"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Прилагођавање коришћења напајања"</string>
@@ -3779,10 +3776,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Звук обавештења је искључен, обавештења ће вибрирати"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"Искључен је звук за: <xliff:g id="VOLUME_TYPE">%1$s</xliff:g>"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Недоступно јер је звук искључен"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Мелодија звона, упозорење о долазном позиву, SIM, мелодија звона за SIM"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Мелодија звона"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Звук звона телефона"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Подразумевани звук обавештења"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Звук апликације"</string>
@@ -4653,6 +4648,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Није повезано"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Није повезана"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Инсталираних апликација: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"Користи се <xliff:g id="PERCENTAGE">%1$s</xliff:g> – доступно је <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Тамна тема, величина фонта, осветљеност"</string>
     <string name="memory_summary" msgid="8221954450951651735">"У просеку је у употреби <xliff:g id="USED_MEMORY">%1$s</xliff:g> од <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> меморије"</string>
@@ -5816,7 +5813,8 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> пута <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Апликација ће се рестартовати када промените размеру. Можда ћете изгубити несачуване промене. Неке апликације можда неће бити оптимизоване за одређене размере."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Доживљај"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Џојпед"</string>
+    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Сензор за отисак прста"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Треперућа обавештења"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"О треперућим обавештењима"</string>

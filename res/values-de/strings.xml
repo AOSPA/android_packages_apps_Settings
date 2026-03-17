@@ -328,24 +328,15 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Standardformat für die gewählte Spracheinstellung verwenden"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-Stunden-Format"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Uhrzeit"</string>
-    <!-- no translation found for time_format_category_title (3122743852067365261) -->
-    <skip />
-    <!-- no translation found for time_format_page_title (2599662358219245734) -->
-    <skip />
-    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
-    <skip />
-    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
-    <skip />
-    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
-    <skip />
-    <!-- no translation found for time_format_automatic (8627801531369181488) -->
-    <skip />
-    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
-    <skip />
-    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
-    <skip />
-    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
-    <skip />
+    <string name="time_format_category_title" msgid="3122743852067365261">"12-Stunden-/24-Stunden-Format"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"Zeitformat"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"Weitere Einstellungen"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"In Apps wird das Zeitformat basierend auf dieser Einstellung verwendet"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"Zeitformat auswählen"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"Automatisch"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"In Apps wird je nach Sprache der jeweiligen App das 12-Stunden- oder 24-Stunden-Format verwendet"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"12-Stunden-Format"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"24-Stunden-Format"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Zeitzone"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Heimatzeitzone"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Zeitzone auswählen"</string>
@@ -939,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Gerät neu starten?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Die detaillierte NFC-Protokollierung wird nur zu Entwicklungszwecken verwendet. Dazu gehören auch zusätzliche NFC-Daten in Fehlerberichten, die private Informationen enthalten können. Starte dein Gerät neu, um diese Einstellung zu ändern."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Neu starten"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"An"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Aus"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Externe Displays und Bildschirme"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Integriertes Display"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universeller Cursor"</string>
@@ -1167,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Zur Optimierung der Standortgenauigkeit und zu anderen Zwecken möchte eine unbekannte App nach WLANs suchen können, auch wenn die WLAN-Funktion deaktiviert ist.\n\nSollen alle Apps nach WLANs suchen können?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Ablehnen"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* erforderlich"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Dies ist ein freigegebenes Netzwerk. Du musst dich anmelden, um Änderungen vornehmen zu können."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Wenn du Änderungen vornehmen möchtest, wende dich an den Netzwerkinhaber oder Geräteadministrator."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Dieses Netzwerk hat keinen Internetzugriff. Verbindung beibehalten?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Wegen beschränkter Konnektivität funktionieren Apps und Dienste eventuell nicht. Trotzdem verwenden?"</string>
@@ -1514,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Abbrechen"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM-Karte schützen"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Sicherheitsmodus für SIM-Lock"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"SIM sperren"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Von Android verwaltet"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Nicht von Android verwaltet"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Registrierung erfolgreich"</string>
@@ -1524,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Von Android verwaltete PIN"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Wert der von Android verwalteten PIN:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"PIN konnte nicht abgerufen werden"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Smartphone kann nur mit PIN genutzt werden"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM-PIN von Android verwaltet"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"PIN zur Nutzung des Smartphones erforderlich"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Für den automatischen SIM-Schutz ist ein Sperrbildschirm erforderlich; nur manueller SIM-Schutz verfügbar"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Aktuelle SIM-PIN eingeben"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Aktuelle PIN der SIM-Karte eingeben"</string>
@@ -1540,8 +1525,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Neue PIN für SIM-Karte bestätigen"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Die PINs stimmen nicht überein. Bestätige die neue PIN für die SIM-Karte."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Falsche PIN. Verbleibende Versuche: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
-    <skip />
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Gib die aktuelle PIN der SIM-Karte ein"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"<xliff:g id="CARRIER">%1$s</xliff:g> für mobile Daten nutzen?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Du verwendest <xliff:g id="CARRIER2_0">%2$s</xliff:g> für mobile Daten. Wenn du zu <xliff:g id="CARRIER1">%1$s</xliff:g> wechselst, wird <xliff:g id="CARRIER2_1">%2$s</xliff:g> nicht mehr für mobile Daten verwendet."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> verwenden"</string>
@@ -2617,8 +2601,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Erweitertes dunkles Design"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Einstellungen für das erweiterte dunkle Design"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Einstellungen für das erweiterte dunkle Design öffnen"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Durch das erweiterte dunkle Design werden automatisch mehr Apps im dunklen Modus dargestellt, um die Lesbarkeit zu verbessern.\n\nWenn du das erweiterte dunkle Design für eine App verwenden möchtest, stelle den entsprechenden Schalter auf „Ein“. Wird eine App nicht richtig dargestellt, stelle den entsprechenden Schalter auf „Aus“, damit wieder das eigene Design der App verwendet wird."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Animationen entfernen"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Bewegung auf dem Bildschirm verringern"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Blinken des Textcursors"</string>
@@ -2945,6 +2928,8 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
+    <skip />
     <string name="battery_details_title" msgid="3289680399291090588">"Akkunutzung der App"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Details"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Energieverbrauch anpassen"</string>
@@ -3671,8 +3656,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"WLAN-Benachrichtigung, WLAN-Benachrichtigung"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"Datennutzung"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24-Stunden-Format verwenden"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"Zeitbenachrichtigungen, Zeitzonenbenachrichtigungen, SZ, Sommerzeit, Zeitzonenverschiebung"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Öffnen mit"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Anwendungen"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"Zeitzone"</string>
@@ -3793,10 +3777,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Benachrichtigungen sind stummgeschaltet, Gerät vibriert bei Benachrichtigungen"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> stummgeschaltet"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Nicht verfügbar, da Klingelton stummgeschaltet ist"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Klingelton, Klingelton für Anrufe, SIM, SIM-Klingelton"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Klingelton"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Klingelton"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Standard-Benachrichtigungston"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Von App erzeugter Ton"</string>
@@ -4620,23 +4602,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Auf alle Dateien zugreifen"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Bildschirmautomatisierung"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Diese App kann Bildschirminhalte anderer Apps abrufen und mit ihnen interagieren, um dir beim Erledigen von Aufgaben zu helfen, auch wenn die Apps im Hintergrund ausgeführt werden"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> kann Bildschirminhalte anderer Apps abrufen und mit ihnen interagieren, um dir beim Erledigen von Aufgaben zu helfen"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Wenn du die Bildschirmautomatisierung nicht zulässt, kann <xliff:g id="ID_1">%1$s</xliff:g> möglicherweise trotzdem auf andere Weise mit Apps interagieren, die mit <xliff:g id="ID_2">%1$s</xliff:g> verbunden sind"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Apps erlauben, mit Bildschirminhalten anderer Apps zu interagieren, um dir beim Erledigen von Aufgaben zu helfen"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Jedes Mal fragen"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Immer erlauben"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Nicht zulassen"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
-    <skip />
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Bildschirmautomatisierung zulassen"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"Keine Apps sind immer erlaubt"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Hier werden Apps angezeigt, die immer die Bildschirmautomatisierung von <xliff:g id="ID_1">%1$s</xliff:g> verwenden dürfen. Apps, die nur eine Sitzungsberechtigung haben, werden nicht angezeigt."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Zugelassen"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Nicht zugelassen"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Vollbildbenachrichtigungen"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Vollbildbenachrichtigungen von dieser App erlauben"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Diese App darf Benachrichtigungen anzeigen, die das gesamte Display ausfüllen, wenn das Gerät gesperrt ist. Apps können diese verwenden, um Wecker, eingehende Anrufe oder andere dringende Benachrichtigungen hervorzuheben."</string>
@@ -4673,6 +4649,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Nicht verbunden"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Nicht verbunden"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> Apps installiert"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> belegt – <xliff:g id="FREE_SPACE">%2$s</xliff:g> verfügbar"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Dunkles Design, Schriftgröße, Helligkeit"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Im Mittel werden <xliff:g id="USED_MEMORY">%1$s</xliff:g> von <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> genutzt"</string>
@@ -5835,7 +5813,8 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> zu <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Wenn du das Seitenverhältnis änderst, wird die App neu gestartet. Dadurch können nicht gespeicherte Änderungen verloren gehen. Einige Apps sind möglicherweise nicht für bestimmte Seitenverhältnisse optimiert."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Nutzerfreundlichkeit"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
+    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerabdrucksensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Aufleuchten bei Benachrichtigungen"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Infos zum Aufleuchten bei Benachrichtigungen"</string>
@@ -6220,12 +6199,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Dein Gerät ist nicht für die Funktion „Notruf über Satellit“ registriert. Prüfe, ob eine Internetverbindung besteht, damit dein Gerät die Registrierung automatisch vornehmen kann"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Web-App-Installationsdienst aktivieren"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Wenn du diesen Dienst aktivierst, lassen sich Websites direkt auf deinem Startbildschirm hinzufügen und wie normale Apps verwenden."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"Zugriff auf Human Interface Device"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"App erlauben, Human Interface Devices (HID) zu erkennen"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"Wenn du den Zugriff zulässt, können schädliche Apps deine HIDs umprogrammieren und so dein System gefährden. Apps könnten beispielsweise Tastatur- oder Mauseingaben simulieren, um dein System zu steuern, wenn es nicht geöffnet ist. Du solltest nur vertrauenswürdigen Apps Zugriff gewähren."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"HID, Mensch, Zugriff, Gerät"</string>
 </resources>

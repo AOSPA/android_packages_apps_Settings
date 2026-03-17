@@ -328,24 +328,15 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"언어 기본값 사용"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24시간 형식 사용"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"시간"</string>
-    <!-- no translation found for time_format_category_title (3122743852067365261) -->
-    <skip />
-    <!-- no translation found for time_format_page_title (2599662358219245734) -->
-    <skip />
-    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
-    <skip />
-    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
-    <skip />
-    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
-    <skip />
-    <!-- no translation found for time_format_automatic (8627801531369181488) -->
-    <skip />
-    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
-    <skip />
-    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
-    <skip />
-    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
-    <skip />
+    <string name="time_format_category_title" msgid="3122743852067365261">"12시간/24시간 형식"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"시간 형식"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"설정 더보기"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"애플리케이션에서 이 설정을 기준으로 시간 형식을 사용합니다"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"시간 형식 선택"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"자동"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"앱 언어에 따라 앱에서 12시간/24시간 형식을 사용합니다."</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"12시간 형식"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"24시간 형식"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"시간대"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"기본 시간대"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"시간대 선택"</string>
@@ -939,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"기기를 다시 시작하시겠습니까?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"세부 NFC 로깅은 개발용으로만 사용됩니다. 추가 NFC 데이터는 버그 신고에 포함되며, 여기에는 개인 정보가 포함될 수 있습니다. 이 설정을 변경하려면 기기를 다시 시작하세요."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"다시 시작"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"사용"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"사용 안함"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"외부 디스플레이"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"내장 디스플레이"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"범용 커서"</string>
@@ -1167,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"알 수 없는 앱에서 위치 정확성 개선 등의 목적으로 Wi-Fi가 꺼져 있을 때도 네트워크 검색 기능을 사용 설정하려 합니다.\n\n기능을 요청하는 모든 앱에 네트워크 검색을 허용하시겠습니까?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"거부"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*필수 입력란"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"공유 네트워크입니다. 변경하려면 로그인해야 합니다."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"변경하려면 네트워크 소유자 또는 기기 관리자에게 문의하세요."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"이 네트워크에는 인터넷이 연결되어 있지 않습니다. 연결 상태를 유지하시겠습니까?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"제한된 연결로 인해 일부 앱과 서비스가 작동하지 않을 수 있습니다. 계속 사용하시겠습니까?"</string>
@@ -1514,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"취소"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM 카드 보호"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM 잠금 보호 모드"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"SIM 잠금"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android에서 관리함"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android에서 관리하지 않음"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"등록에 성공함"</string>
@@ -1524,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android 관리 PIN"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Android 관리 PIN 값:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"PIN을 가져올 수 없음"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"휴대전화를 사용하려면 PIN 필요"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM PIN을 Android에서 관리함"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"휴대전화를 사용하려면 PIN이 필요합니다."</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"자동 SIM 보호를 사용하려면 잠금 화면을 설정해야 하며, 현재는 수동으로만 설정할 수 있습니다."</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"현재 SIM의 PIN 입력"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"SIM 카드의 현재 PIN을 입력하세요"</string>
@@ -1540,8 +1525,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"새 SIM PIN 확인"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN이 일치하지 않습니다. 새 SIM PIN을 확인하세요."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"잘못된 PIN입니다. 남은 시도 횟수: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>회"</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
-    <skip />
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"SIM 카드의 현재 PIN 코드 입력"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"<xliff:g id="CARRIER">%1$s</xliff:g>의 모바일 데이터를 사용하시겠습니까?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"<xliff:g id="CARRIER2_0">%2$s</xliff:g> 모바일 데이터를 사용하고 있습니다. <xliff:g id="CARRIER1">%1$s</xliff:g>(으)로 전환하면 <xliff:g id="CARRIER2_1">%2$s</xliff:g> 모바일 데이터를 더 이상 사용하지 않게 됩니다."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> 사용"</string>
@@ -2617,8 +2601,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"확장형 어두운 테마"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"확장형 어두운 테마 설정"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"확장형 어두운 테마 설정 열기"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"확장형 어두운 테마는 더 많은 앱을 자동으로 어둡게 만들어 가독성을 높입니다.\n\n확장형 어두운 테마를 사용하려면 앱의 전환 버튼을 켜 두세요. 앱이 제대로 표시되지 않으면 앱의 전환 버튼을 끄고 앱의 자체 테마를 사용하세요."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"애니메이션 삭제"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"화면상의 움직임 줄이기"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"텍스트 커서 깜박임"</string>
@@ -2945,6 +2928,8 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
+    <skip />
     <string name="battery_details_title" msgid="3289680399291090588">"앱 배터리 사용량"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"사용 세부정보"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"전원 사용 조절"</string>
@@ -3671,8 +3656,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi 알림, Wi‑Fi 알림"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"데이터 사용"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24시간 형식 사용"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"시간 알림, 시간대 알림, DST, 일광 절약, 시간대 오프셋"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"연결 앱"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"애플리케이션"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"시간대"</string>
@@ -3793,10 +3777,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"알림음 소리가 음소거되며 진동이 울립니다."</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> 소리가 음소거됩니다."</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"벨소리가 음소거되어 있으므로 사용할 수 없음"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"벨소리, 벨소리 알림, SIM, SIM 벨소리"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"벨소리"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"전화 벨소리"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"기본 알림 소리"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"앱에서 제공된 소리"</string>
@@ -4620,23 +4602,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"모든 파일에 액세스 가능"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"화면 자동화"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"이 앱은 사용자가 작업을 완료할 수 있도록 앱이 백그라운드에 있는 경우에도 다른 앱의 화면 콘텐츠를 보고 상호작용할 수 있습니다"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g>에서 사용자가 작업을 완료할 수 있도록 다른 앱의 화면 콘텐츠를 보고 상호작용할 수 있습니다"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"화면 자동화를 허용하지 않더라도 <xliff:g id="ID_1">%1$s</xliff:g>에서 다른 방법으로 <xliff:g id="ID_2">%1$s</xliff:g>에 연결된 앱과 상호작용할 수 있습니다."</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"앱이 다른 앱의 화면 콘텐츠와 상호작용하여 작업을 완료할 수 있도록 허용"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"항상 확인"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"항상 허용"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"허용 안함"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
-    <skip />
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"화면 자동화 허용"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"항상 허용된 앱 없음"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"<xliff:g id="ID_1">%1$s</xliff:g>에서 화면 자동화를 항상 사용하도록 허용한 앱이 여기에 표시됩니다. 세션당 권한만 부여받는 앱은 표시되지 않습니다"</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"허용됨"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"허용되지 않음"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"전체 화면 알림"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"이 앱에 전체 화면 알림 허용"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"기기가 잠겨 있을 때 앱에서 알림을 전체 화면에 표시할 수 있도록 허용합니다. 앱에서는 이러한 방식으로 알람, 수신 전화 또는 기타 긴급 알림을 강조 표시할 수 있습니다."</string>
@@ -4673,6 +4649,8 @@
     <string name="disconnected" msgid="3469373726996129247">"연결되지 않음"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"연결되지 않음"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g>개의 앱이 설치됨"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> 사용 - <xliff:g id="FREE_SPACE">%2$s</xliff:g> 사용 가능"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"어두운 테마, 글꼴 크기, 밝기"</string>
     <string name="memory_summary" msgid="8221954450951651735">"<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> 중 평균 <xliff:g id="USED_MEMORY">%1$s</xliff:g> 사용됨"</string>
@@ -5835,7 +5813,8 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> 대 <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"가로세로 비율을 변경하면 앱이 다시 시작됩니다. 저장하지 않은 변경사항은 손실될 수 있습니다. 일부 앱은 특정 가로세로 비율에 최적화되어 있지 않을 수 있습니다."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"경험"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"게임패드"</string>
+    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"지문 센서"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"플래시 알림"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"플래시 알림 정보"</string>
@@ -6220,12 +6199,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"기기가 위성 긴급 SOS에 등록되어 있지 않습니다. 자동으로 등록을 완료하려면 기기가 인터넷에 연결되어 있는지 확인하세요."</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"웹 앱 설치 프로그램 서비스 사용 설정"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"웹사이트를 홈 화면에 직접 설치하고 일반 앱처럼 사용하려면 이 서비스를 사용 설정하세요."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"휴먼 인터페이스 기기 액세스"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"앱에서 인간 인터페이스 기기(HID)를 검색하도록 허용"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"액세스를 허용하면 악성 앱이 HID를 재프로그래밍하여 시스템을 손상시킬 수 있습니다. 예를 들어 시스템이 닫혀 있을 때 앱이 키보드 또는 마우스 입력을 시뮬레이션하여 시스템을 제어할 수 있습니다. 액세스를 허용할 때는 신뢰할 수 있는 앱인지 확인하세요."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"hid, 인간, 액세스, 기기"</string>
 </resources>
