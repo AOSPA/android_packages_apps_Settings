@@ -19,14 +19,11 @@ package com.android.settings.wifi.details
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.flags.Flags
-import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.wifi.details.WifiNetworkDetailsFragment.KEY_CHOSEN_WIFIENTRY_KEY
+import com.android.settings.wifi.repository.SavedNetworkInfo
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
-import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
-import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
-import com.android.settingslib.metadata.preferencesapi.unsafe
 
 /**
  * The [PreferencesApiScreen] for the Wifi Details screen.
@@ -41,7 +38,6 @@ class WifiDetailsScreenApi :
         fragment = WifiNetworkDetailsFragment::class,
         purpose = R.string.wifi_details_settings_purpose,
     ) {
-    private val repository = featureFactory.wifiFeatureProvider.savedNetworkRepository
 
     init {
         flag { Flags.catalystMigration26q2() }
@@ -50,19 +46,12 @@ class WifiDetailsScreenApi :
             parameter(
                 name = PARAMETER_KEY,
                 purpose = R.string.wifi_details_parameter_purpose,
-                type =
-                    GeneratedParameterType(R.string.wifi_details_parameter_description) {
-                        repository.fetchSavedNetworksInfo().map {
-                            GeneratedValue(it.lookupKey.unsafe(), it.ssid.unsafe())
-                        }
-                    },
+                type = SavedNetwork
             )
 
             prepareScreenExtras { keyParameters, extras ->
-                val lookupKey = keyParameters[PARAMETER_KEY] ?: return@prepareScreenExtras
-                repository.findSavedNetworkInfo(lookupKey)?.let { info ->
-                    extras.putString(KEY_CHOSEN_WIFIENTRY_KEY, info.key)
-                } ?: Log.e(TAG, "Saved network info not found!")
+                val savedNetwork = keyParameters.getTyped<SavedNetworkInfo>(PARAMETER_KEY) ?: return@prepareScreenExtras
+                extras.putString(KEY_CHOSEN_WIFIENTRY_KEY, savedNetwork.key)
             }
         }
     }

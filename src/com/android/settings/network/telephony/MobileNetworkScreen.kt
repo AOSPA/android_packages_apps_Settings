@@ -200,7 +200,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(Settings.EXTRA_SUB_ID, "The subscription ID", type = SubscriptionId())
+            parameter(Settings.EXTRA_SUB_ID, "The subscription ID", type = SubscriptionId)
         }
 
         @JvmStatic

@@ -164,7 +164,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(ApnSettings.SUB_ID, "The subscription ID", type = SubscriptionId())
+            parameter(ApnSettings.SUB_ID, "The subscription ID", type = SubscriptionId)
         }
 
         @JvmStatic
