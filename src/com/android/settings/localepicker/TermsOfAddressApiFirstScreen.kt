@@ -27,6 +27,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import com.android.settingslib.metadata.preferencesapi.safe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(TermsOfAddressApiFirstScreen.KEY)
@@ -58,7 +59,7 @@ class TermsOfAddressApiFirstScreen :
                 ) {
                     val termOfAddress = context.resources.getStringArray(R.array.terms_of_address)
                     termOfAddress.map {
-                        GeneratedValue(termOfAddress.indexOf(it), it)
+                        GeneratedValue(termOfAddress.indexOf(it).safe(), it.safe())
                     }
                 },
         ) {

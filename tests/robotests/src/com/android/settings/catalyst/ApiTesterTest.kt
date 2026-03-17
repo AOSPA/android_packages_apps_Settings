@@ -53,6 +53,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
+import com.android.settingslib.metadata.preferencesapi.safe
 
 @RunWith(AndroidJUnit4::class)
 class ApiTesterTest {
@@ -194,8 +195,8 @@ class ApiTesterTest {
                 type =
                     GeneratedType<String>(R.string.generated_type_description) {
                         listOf(
-                            GeneratedValue<String>("value1", "first"),
-                            GeneratedValue<String>("value2", "second"),
+                            GeneratedValue<String>("value1".safe(), "first".safe()),
+                            GeneratedValue<String>("value2".safe(), "second".safe()),
                         )
                     },
             ) {
@@ -210,8 +211,8 @@ class ApiTesterTest {
                 type =
                     GeneratedType<String>(R.string.generated_type_description) {
                         listOf(
-                            GeneratedValue<String>("value1", "first"),
-                            GeneratedValue<String>("value2", "second"),
+                            GeneratedValue<String>("value1".safe(), "first".safe()),
+                            GeneratedValue<String>("value2".safe(), "second".safe()),
                         )
                     },
             ) {
@@ -272,8 +273,8 @@ class ApiTesterTest {
                     type =
                         GeneratedParameterType(R.string.parameter_type_description) {
                             listOf(
-                                GeneratedValue("parameter1", "first parameter description"),
-                                GeneratedValue("parameter2", "second parameter description"),
+                                GeneratedValue("parameter1".safe(), "first parameter description".safe()),
+                                GeneratedValue("parameter2".safe(), "second parameter description".safe()),
                             )
                         },
                 )
@@ -363,8 +364,8 @@ class ApiTesterTest {
                     type =
                         GeneratedParameterType(R.string.parameter_type_description) {
                             listOf(
-                                GeneratedValue("parameter1", "first parameter description"),
-                                GeneratedValue("parameter2", "second parameter description"),
+                                GeneratedValue("parameter1".safe(), "first parameter description".safe()),
+                                GeneratedValue("parameter2".safe(), "second parameter description".safe()),
                             )
                         },
                 )

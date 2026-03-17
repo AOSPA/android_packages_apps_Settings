@@ -162,6 +162,7 @@ public class BluetoothHDAudioPreferenceControllerTest {
         verify(mBluetoothA2dp).setOptionalCodecsEnabled(mActiveDevice,
                 BluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED);
         verify(mCallback).onBluetoothHDAudioEnabled(enabled);
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
@@ -176,5 +177,6 @@ public class BluetoothHDAudioPreferenceControllerTest {
         verify(mBluetoothA2dp).setOptionalCodecsEnabled(mActiveDevice,
                 BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
         verify(mCallback).onBluetoothHDAudioEnabled(enabled);
+        assertThat(mPreference.isEnabled()).isFalse();
     }
 }

@@ -57,6 +57,7 @@ import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
 import kotlin.time.Duration.Companion.seconds
+import com.android.settingslib.metadata.preferencesapi.markStringAsExternalData
 
 /* A [DeviceStateProvider] that provides device state information for Settings that are
 exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
@@ -148,7 +149,10 @@ class CatalystStateProviderExecutor(
                     metadata is PersistentPreference<*> -> {
                         getDeviceStateItemValueForPreference(metadata)
                     }
-                    else -> metadata.getPreferenceSummary(context)?.toString()
+                    else ->
+                        metadata.getPreferenceSummary(context)?.toString()?.let {
+                            markStringAsExternalData(it)
+                        }
                 }
             jsonValue?.let {
                 deviceStateItemList.add(
@@ -212,11 +216,19 @@ class CatalystStateProviderExecutor(
             Process.myUid()
         ) == ALLOW
         return if (allowedRead) {
-            metadata.storage(context)
-                .getValue(metadata.key, metadata.valueType as Class<Any>)
-                ?.toString()
+            if (metadata.valueType == String::class.java) {
+                // We should be smarter here and only mark external if the data is
+                // actually unsafe.
+                metadata.storage(context)
+                    .getValue(metadata.key, metadata.valueType as Class<Any>)
+                    ?.toString()?.let { markStringAsExternalData(it) }
+            } else {
+                metadata.storage(context)
+                    .getValue(metadata.key, metadata.valueType as Class<Any>)
+                    ?.toString()
+            }
         } else {
-            "null"
+            "Error: Not allowed to read value"
         }
     }
 

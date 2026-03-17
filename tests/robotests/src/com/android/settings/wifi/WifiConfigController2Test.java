@@ -193,7 +193,8 @@ public class WifiConfigController2Test {
     private void createController(
             WifiEntry mWifiEntry, int modeConnect, boolean hideMeteredAndPrivacy) {
         mController = new WifiConfigController2(mConfigUiBase, mView, mWifiEntry,
-                modeConnect, hideMeteredAndPrivacy, mWifiManager, mAndroidKeystoreAliasLoader);
+                modeConnect, hideMeteredAndPrivacy, /*showFocusRingIndicator=*/false,
+                mWifiManager, mAndroidKeystoreAliasLoader);
     }
 
     @Test
@@ -304,48 +305,6 @@ public class WifiConfigController2Test {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
-    public void checkSharingFieldsVisibilityHSU_joinNetwork() {
-        ShadowWifiUtils.setIsAtLoginScreen(true);
-        when(mUserManager.getUserCount()).thenReturn(2);
-        when(mWifiEntry.isSaved()).thenReturn(false);
-        final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
-        when(mockWifiConfig.getIpConfiguration()).thenReturn(mock(IpConfiguration.class));
-        when(mWifiEntry.getWifiConfiguration()).thenReturn(mockWifiConfig);
-        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
-        shadowOf(Looper.getMainLooper()).idle();
-
-        final View warningFields =
-                mView.findViewById(R.id.shared_network_login_screen_warning);
-        final View sharingFields = mView.findViewById(R.id.sharing_toggle_fields);
-        final View editConfigFields =
-                mView.findViewById(R.id.edit_wifi_network_configuration_fields);
-
-        assertThat(sharingFields.getVisibility()).isEqualTo(View.GONE);
-        assertThat(editConfigFields.getVisibility()).isEqualTo(View.GONE);
-        assertThat(warningFields.getVisibility()).isEqualTo(View.VISIBLE);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
-    public void checkSharingFieldsVisibilityHSU_addNetwork() {
-        ShadowWifiUtils.setIsAtLoginScreen(true);
-        when(mUserManager.getUserCount()).thenReturn(2);
-        createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
-        shadowOf(Looper.getMainLooper()).idle();
-
-        final View warningFields =
-                mView.findViewById(R.id.shared_network_login_screen_warning);
-        final View sharingFields = mView.findViewById(R.id.sharing_toggle_fields);
-        final View editConfigFields =
-                mView.findViewById(R.id.edit_wifi_network_configuration_fields);
-
-        assertThat(sharingFields.getVisibility()).isEqualTo(View.GONE);
-        assertThat(editConfigFields.getVisibility()).isEqualTo(View.GONE);
-        assertThat(warningFields.getVisibility()).isEqualTo(View.VISIBLE);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void checkSharingFieldsVisibility_modifyNetwork() {
         when(mUserManager.getUserCount()).thenReturn(2);
         when(mWifiEntry.isSaved()).thenReturn(true);
@@ -358,12 +317,9 @@ public class WifiConfigController2Test {
         final View sharingFields = mView.findViewById(R.id.sharing_toggle_fields);
         final View editConfigFields =
                 mView.findViewById(R.id.edit_wifi_network_configuration_fields);
-        final View warningFields =
-                mView.findViewById(R.id.shared_network_login_screen_warning);
 
         assertThat(sharingFields.getVisibility()).isEqualTo(View.GONE);
         assertThat(editConfigFields.getVisibility()).isEqualTo(View.GONE);
-        assertThat(warningFields.getVisibility()).isEqualTo(View.GONE);
     }
 
     @Test
@@ -997,17 +953,6 @@ public class WifiConfigController2Test {
     }
 
     @Test
-    public void checkDefaultSharedEditable_loginScreenMode() {
-        ShadowWifiUtils.setIsAtLoginScreen(true);
-        createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
-        shadowOf(Looper.getMainLooper()).idle();
-
-        WifiConfiguration wifiConfiguration = mController.getConfig();
-        assertThat(wifiConfiguration.shared).isTrue();
-        assertThat(wifiConfiguration.isAllowedToUpdateByOtherUsers()).isTrue();
-    }
-
-    @Test
     public void checkDefaultPrivate_guestMode() {
         ShadowWifiUtils.setIsGuestUser(true);
         createController(mWifiEntry, WifiConfigUiBase2.MODE_CONNECT, false);
@@ -1516,6 +1461,29 @@ public class WifiConfigController2Test {
                 .isEqualTo(mContext.getString(R.string.switch_on_text));
     }
 
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
+    public void shouldShowFocusRingsInSuw_showFocusRing() {
+        mController = new WifiConfigController2(mConfigUiBase, mView, null,
+                WifiConfigUiBase2.MODE_CONNECT, false, /*showFocusRingIndicator=*/true,
+                mWifiManager, mAndroidKeystoreAliasLoader);
+
+        assertThat(mView.findViewById(R.id.sharing_toggle_fields).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.edit_wifi_network_configuration_fields).getForeground())
+                .isNotNull();
+        assertThat(mView.findViewById(R.id.password_input_layout)
+                .findViewById(com.google.android.material.R.id.text_input_end_icon)
+                .getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.ssid_scanner_button).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.ip_settings).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.proxy_settings).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.metered_settings).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.security).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.advanced_options_layout).getForeground()).isNotNull();
+        assertThat(mView.findViewById(R.id.privacy_settings).getForeground()).isNotNull();
+        assertThat(mHiddenSettingsSpinner.getForeground()).isNotNull();
+    }
+
     private void setUpModifyingSavedCertificateConfigController(String savedCaCertificate,
             String savedUserCertificate) {
         final WifiConfiguration mockWifiConfig = spy(new WifiConfiguration());
@@ -1572,18 +1540,7 @@ public class WifiConfigController2Test {
      */
     @Implements(com.android.settings.wifi.WifiUtils.class)
     public static class ShadowWifiUtils {
-        private static boolean sIsAtLoginScreen = false;
         private static boolean sIsGuestUser = false;
-
-         /** Shadow implementation of isAtLoginScreen */
-        @Implementation
-        public static boolean isAtLoginScreen(Context context) {
-            return sIsAtLoginScreen;
-        }
-
-        public static void setIsAtLoginScreen(boolean isAtLoginScreen) {
-            sIsAtLoginScreen = isAtLoginScreen;
-        }
 
          /** Shadow implementation of isGuestUser */
         @Implementation
@@ -1599,7 +1556,6 @@ public class WifiConfigController2Test {
         @Resetter
         public static void reset() {
             sIsGuestUser = false;
-            sIsAtLoginScreen = false;
         }
     }
 }

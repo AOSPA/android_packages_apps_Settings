@@ -31,6 +31,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.android.media.flags.Flags;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.bluetooth.BluetoothCallback;
@@ -94,7 +95,9 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
                 mLocalMediaManager = new LocalMediaManager(mContext, mPackageName);
             }
             mLocalMediaManager.registerCallback(this);
-            mLocalMediaManager.startScan();
+            if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+                mLocalMediaManager.startScan();
+            }
         });
     }
 
@@ -102,7 +105,9 @@ public class MediaOutputIndicatorWorker extends SliceBackgroundWorker implements
     protected void onSliceUnpinned() {
         if (mLocalMediaManager != null) {
             mLocalMediaManager.unregisterCallback(this);
-            mLocalMediaManager.stopScan();
+            if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+                mLocalMediaManager.stopScan();
+            }
         }
 
         if (mLocalBluetoothManager == null) {

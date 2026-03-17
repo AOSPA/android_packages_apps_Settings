@@ -56,6 +56,8 @@ import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.metadata.preferencesapi.types.ApiType
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
+import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
+import com.android.settingslib.metadata.preferencesapi.safe
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateMetadataProviderExecutorTest {
@@ -1192,9 +1194,9 @@ class CatalystStateMetadataProviderExecutorTest {
         override fun getType(): Class<String> = String::class.java
         override fun getKey(): String = "test_enum"
         override fun getDescription(context: Context): String = "Test Enum Description"
-        override suspend fun getOptions(context: Context): List<Pair<String, String>> = listOf(
-            "OPTION_1" to "Option 1",
-            "OPTION_2" to "Option 2"
+        override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<String>, SafetyAnnotated<String>>> = listOf(
+            "OPTION_1".safe() to "Option 1".safe(),
+            "OPTION_2".safe() to "Option 2".safe()
         )
     }
 }
