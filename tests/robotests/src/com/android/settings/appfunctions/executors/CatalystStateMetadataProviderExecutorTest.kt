@@ -58,6 +58,7 @@ import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptions
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
 import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
 import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.types.EType
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateMetadataProviderExecutorTest {
@@ -891,7 +892,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
             )
         )
-        setRegistryFactories(outerNoSensitivityScreen)
+        setRegistryFactories(innerSensitiveScreen, outerNoSensitivityScreen)
         val executor = CatalystStateMetadataProviderExecutor(
             buildConfig("outer_no_sensitivity_screen_key", listOf()),
             context,
@@ -946,7 +947,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 summary = R.string.preference_screen_summary,
             )
         )
-        setRegistryFactories(outerNoSensitivityScreen)
+        setRegistryFactories(innerSensitiveScreen, outerNoSensitivityScreen)
 
         val executor = CatalystStateMetadataProviderExecutor(
             buildConfig("outer_no_sensitivity_screen_key", listOf()),
@@ -963,32 +964,48 @@ class CatalystStateMetadataProviderExecutorTest {
 
     @Test
     fun execute_onNoSensitivityScreenWithCategoriesAndVariousSensitivities_hasOnlyNonSensitivityPreferences() = runTest {
-        val noSensPref = createSimplePreference(
-            GraphTestUtils.PreferenceConfig(
-                key = "no_sens_pref",
-                purpose = R.string.preference_purpose,
-                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+        val noSensPref = createPersistentPreference<Boolean>(
+            GraphTestUtils.PersistentPreferenceConfig(
+                GraphTestUtils.PreferenceConfig(
+                    key = "no_sens_pref",
+                    purpose = R.string.preference_purpose,
+                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                ),
+                readPermission = null,
+                writePermission = null
             )
         )
-        val sensPref = createSimplePreference(
-            GraphTestUtils.PreferenceConfig(
-                key = "sens_pref",
-                purpose = R.string.preference_purpose,
-                sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
+        val sensPref = createPersistentPreference<Boolean>(
+            GraphTestUtils.PersistentPreferenceConfig(
+                GraphTestUtils.PreferenceConfig(
+                    key = "sens_pref",
+                    purpose = R.string.preference_purpose,
+                    sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
+                ),
+                readPermission = null,
+                writePermission = null
             )
         )
-        val noSensPrefInOuter = createSimplePreference(
-            GraphTestUtils.PreferenceConfig(
-                key = "no_sens_outer",
-                purpose = R.string.preference_purpose,
-                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+        val noSensPrefInOuter = createPersistentPreference<Boolean>(
+            GraphTestUtils.PersistentPreferenceConfig(
+                GraphTestUtils.PreferenceConfig(
+                    key = "no_sens_outer",
+                    purpose = R.string.preference_purpose,
+                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY,
+                ),
+                readPermission = null,
+                writePermission = null
             )
         )
-        val sensPrefInInner = createSimplePreference(
-            GraphTestUtils.PreferenceConfig(
-                key = "sens_inner",
-                purpose = R.string.preference_purpose,
-                sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
+        val sensPrefInInner = createPersistentPreference<Boolean>(
+            GraphTestUtils.PersistentPreferenceConfig(
+                    GraphTestUtils.PreferenceConfig(
+                    key = "sens_inner",
+                    purpose = R.string.preference_purpose,
+                    sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
+                ),
+                readPermission = null,
+                writePermission = null
             )
         )
 
@@ -1191,7 +1208,7 @@ class CatalystStateMetadataProviderExecutorTest {
     }
 
     private object TestEnumType : DirectFiniteOptionsType<String> {
-        override fun getType(): Class<String> = String::class.java
+        override val externalType = EType.String
         override fun getKey(): String = "test_enum"
         override fun getDescription(context: Context): String = "Test Enum Description"
         override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<String>, SafetyAnnotated<String>>> = listOf(

@@ -26,7 +26,9 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.WifiPickerTrackerHelper
 import com.android.settings.wifi.utils.wifiManager
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -166,7 +168,7 @@ open class SavedAccessPointsWifiScreen :
 
     class SavedAccessPointsWifiScreenPreference(
         private val screenMetadata : SavedAccessPointsWifiScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PersistentPreference<String> {
         override val key : String
             get() = "saved_networks_preference"
 
@@ -182,6 +184,13 @@ open class SavedAccessPointsWifiScreen :
         override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
     }
 
     companion object {

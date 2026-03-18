@@ -150,7 +150,6 @@ open class DoubleTapPowerScreen(context: Context) :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +DoubleTapPowerScreenPreference(this@DoubleTapPowerScreen)
             if (Flags.catalystMigration26q2()) {
                 if (!context.isNonLaunchWalletOrNonMultiTargetDoubleTap()) {
                     +DoubleTapPowerMainSwitchPreference()
@@ -169,33 +168,6 @@ open class DoubleTapPowerScreen(context: Context) :
             resources.getInteger(IR.integer.config_doubleTapPowerGestureMode) !=
                 DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE
         }
-
-    class DoubleTapPowerScreenPreference(private val screenMetadata: DoubleTapPowerScreen) :
-        PreferenceMetadata,
-        PreferenceSummaryProvider,
-        PreferenceTitleProvider,
-        PreferenceAvailabilityProvider {
-        override val key: String
-            get() = "gesture_double_tap_power_input_summary_preference"
-
-        override val purpose: Int
-            get() = screenMetadata.purpose
-
-        override fun tags(context: Context): Array<String> = arrayOf(METADATA_IN_UI)
-
-        override val indexable = false
-
-        override fun isEnabled(context: Context): Boolean = screenMetadata.isEnabled(context)
-
-        override fun getSummary(context: Context): CharSequence? =
-            screenMetadata.getSummary(context)
-
-        override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
-
-        override val availabilityDescription = screenMetadata.availabilityDescription
-
-        override fun isAvailable(context: Context): Boolean = screenMetadata.isAvailable(context)
-    }
 
     companion object {
         const val KEY = "gesture_double_tap_power_input_summary"

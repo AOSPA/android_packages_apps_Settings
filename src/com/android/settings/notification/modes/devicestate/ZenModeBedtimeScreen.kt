@@ -24,7 +24,9 @@ import com.android.settings.R
 import com.android.settings.Settings.ModeSettingsActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -78,7 +80,7 @@ open class ZenModeBedtimeScreen :
 
     class ZenModeBedtimeScreenPreference(
         private val screenMetadata : ZenModeBedtimeScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PreferenceTitleProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PreferenceTitleProvider, PersistentPreference<String> {
         override val key : String
             get() = "device_state_bedtime_mode_screen_preference"
 
@@ -92,6 +94,13 @@ open class ZenModeBedtimeScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
 

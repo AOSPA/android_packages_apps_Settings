@@ -28,6 +28,7 @@ import com.android.settings.Utils
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
@@ -105,6 +106,15 @@ class RampingRingerVibrationSwitchPreference(
         }
         return true
     }
+
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY

@@ -33,6 +33,8 @@ import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.supervision.credentialmanagement.SupervisionUpdateRecoveryEmailPreference.Companion.asMaskedEmail
 import com.android.settings.supervision.shared.shouldDisplayPinRecoveryReminders
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -48,6 +50,7 @@ import com.android.settingslib.preference.PreferenceBinding
  * add the device PIN recovery method or verify an unverified PIN recovery method.
  */
 class SupervisionSetupRecoveryPreference :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceAvailabilityProvider,
     PreferenceLifecycleProvider,
@@ -67,8 +70,6 @@ class SupervisionSetupRecoveryPreference :
     override val purpose: Int
         get() = R.string.supervision_setup_recovery_purpose
 
-    override fun tags(context: Context): Array<String> = arrayOf(UI_ONLY_PREFERENCE)
-
     override fun getTitle(context: Context): CharSequence {
         return if (hasAccountNameToVerify(context)) {
             context.getString(R.string.supervision_verify_pin_recovery_title)
@@ -76,6 +77,12 @@ class SupervisionSetupRecoveryPreference :
             context.getString(R.string.supervision_add_pin_recovery_title)
         }
     }
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? {
         return accountNameToVerify(context)?.asMaskedEmail()

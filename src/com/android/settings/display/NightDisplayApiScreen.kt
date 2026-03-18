@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUns
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.PercentageInt
 import com.android.settingslib.metadata.preferencesapi.types.TimeOfDay

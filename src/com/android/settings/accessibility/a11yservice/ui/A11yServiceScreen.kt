@@ -209,7 +209,6 @@ private constructor(
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +A11yServiceScreenPreference(this@A11yServiceScreen)
             val serviceInfo = accessibilityServiceInfo ?: return@preferenceHierarchy
             +IntroPreference(serviceInfo)
             +A11yServiceIllustrationPreference(serviceInfo)
@@ -253,31 +252,6 @@ private constructor(
                 highlightPreference(arguments!!, metadata?.bindingKey)
             }
         }
-    }
-
-    class A11yServiceScreenPreference(
-        private val screenMetadata : A11yServiceScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceTitleProvider {
-
-        override val key : String
-            get() = "a11y_service_detail_screen_preference"
-
-        override val purpose : Int
-            get() = screenMetadata.purpose
-
-        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
-
-        override val indexable = false
-
-        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
-
-        override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
-
-        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
-
-        //marked with DO_NOT_EXPOSE due to security concerns, changing sensitivity will require a check with security
-        override val sensitivityLevel: Int
-            get() = SensitivityLevel.DO_NOT_EXPOSE
     }
 
     companion object : ParameterizedPreferenceScreenArgumentsFactory {

@@ -74,25 +74,6 @@ import kotlinx.coroutines.runBlocking
  */
 open class SettingsLaunchpadActivity : Activity() {
 
-    companion object {
-        const val EXTRA_SCREEN_KEY = "screen_key"
-        const val EXTRA_SCREEN_ARGS = "screen_args"
-        const val EXTRA_HIGHLIGHT_KEY = "highlight_key"
-
-        private const val TAG = "SettingsLaunchpad"
-
-        /** Permissions that allow a caller to enter this trampoline activity. */
-        private val USE_TRAMPOLINE_PERMISSIONS =
-            listOf(
-                Manifest.permission.READ_SYSTEM_PREFERENCES,
-                Manifest.permission.EXECUTE_APP_FUNCTIONS,
-            )
-
-        /** Permissions that allow a caller to bypass screen-specific permission checks. */
-        private val TRUSTED_SCREEN_BYPASS_PERMISSIONS =
-            listOf(Manifest.permission.EXECUTE_APP_FUNCTIONS)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (isFinishing) return
@@ -126,7 +107,22 @@ open class SettingsLaunchpadActivity : Activity() {
         }
 
         val highlightKey = intent.getStringExtra(EXTRA_HIGHLIGHT_KEY)
-        val screenArgsBundle = intent.getBundleExtra(EXTRA_SCREEN_ARGS)
+        var screenArgsBundle = intent.getBundleExtra(EXTRA_SCREEN_ARGS)
+
+        if (screenArgsBundle == null) {
+            val itemization = intent.getStringExtra(PreferenceScreenMetadata.EXTRA_ITEMIZATION)
+            if (!itemization.isNullOrEmpty()) {
+                val schema = PreferenceScreenRegistry.getScreenParametersSchema(screenKey)
+                val firstParamName = schema?.getParameters()?.keys?.firstOrNull()
+
+                if (firstParamName != null) {
+                    // Map the itemization value to the screen's first formal parameter
+                    screenArgsBundle = Bundle().apply { putString(firstParamName, itemization) }
+                    Log.d(TAG, "Mapped itemization to '$firstParamName' for screen: $screenKey")
+                }
+            }
+        }
+
         val screenCoordinate = createScreenCoordinate(screenKey, screenArgsBundle)
 
         // Using PreferenceScreenRegistry.create() to get screen metadata
@@ -345,4 +341,23 @@ open class SettingsLaunchpadActivity : Activity() {
 
     /** Returns the UID of the application that launched this activity. */
     @VisibleForTesting override fun getLaunchedFromUid(): Int = super.getLaunchedFromUid()
+
+    companion object {
+        const val EXTRA_SCREEN_KEY = "screen_key"
+        const val EXTRA_SCREEN_ARGS = "screen_args"
+        const val EXTRA_HIGHLIGHT_KEY = "highlight_key"
+
+        private const val TAG = "SettingsLaunchpad"
+
+        /** Permissions that allow a caller to enter this trampoline activity. */
+        private val USE_TRAMPOLINE_PERMISSIONS =
+            listOf(
+                Manifest.permission.READ_SYSTEM_PREFERENCES,
+                Manifest.permission.EXECUTE_APP_FUNCTIONS,
+            )
+
+        /** Permissions that allow a caller to bypass screen-specific permission checks. */
+        private val TRUSTED_SCREEN_BYPASS_PERMISSIONS =
+            listOf(Manifest.permission.EXECUTE_APP_FUNCTIONS)
+    }
 }

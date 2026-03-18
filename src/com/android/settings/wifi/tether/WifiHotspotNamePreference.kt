@@ -37,6 +37,7 @@ import com.android.settingslib.TetherUtil
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -56,7 +57,8 @@ class WifiHotspotNamePreference(
     context: Context,
     private val scope: CoroutineScope,
     private val wifiHotspotStore: KeyValueStore,
-) : PreferenceMetadata,
+) : PersistentPreference<String>,
+    PreferenceMetadata,
     PreferenceAvailabilityProvider,
     PreferenceBinding,
     PreferenceSummaryProvider,
@@ -84,6 +86,12 @@ class WifiHotspotNamePreference(
         WifiUtils.canShowWifiHotspot(context) &&
                 TetherUtil.isTetherAvailable(context) &&
                 !Utils.isMonkeyRunning()
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? = ssidFlow.value
 

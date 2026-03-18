@@ -28,7 +28,9 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -124,7 +126,7 @@ open class ZenModesListScreen :
 
     class ZenModesListScreenPreference(
         private val screenMetadata : ZenModesListScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PersistentPreference<String> {
         override val key : String
             get() = "top_level_priority_modes_preference"
 
@@ -138,6 +140,13 @@ open class ZenModesListScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
     }
 
     companion object {

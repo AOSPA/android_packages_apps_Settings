@@ -27,7 +27,9 @@ import com.android.settings.Settings.NfcSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -97,7 +99,8 @@ open class NfcAndPaymentScreen :
 
     class NfcAndPaymentScreenPreference(
         private val screenMetadata : NfcAndPaymentScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PreferenceRestrictionMixin {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PreferenceRestrictionMixin,
+        PersistentPreference<String> {
         override val key : String
             get() = "nfc_and_payment_settings_preference"
 
@@ -108,6 +111,13 @@ open class NfcAndPaymentScreen :
 
         override val restrictionKeys
             get() = arrayOf(UserManager.DISALLOW_NEAR_FIELD_COMMUNICATION_RADIO)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override val indexable = false
 

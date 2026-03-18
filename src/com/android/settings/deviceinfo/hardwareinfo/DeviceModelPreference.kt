@@ -19,6 +19,8 @@ package com.android.settings.deviceinfo.hardwareinfo
 import android.content.Context
 import com.android.settings.R
 import com.android.settings.deviceinfo.HardwareInfoPreferenceController
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -27,6 +29,7 @@ import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
 class DeviceModelPreference :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceSummaryProvider,
@@ -39,6 +42,12 @@ class DeviceModelPreference :
 
     override val title: Int
         get() = R.string.model_info
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? =
         HardwareInfoPreferenceController.getDeviceModel()

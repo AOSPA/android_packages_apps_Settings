@@ -152,7 +152,6 @@ private constructor(
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +AppInfoNotificationAccessScreenPreference(this@AppInfoNotificationAccessScreen)
             // Main switch preference
             +NotificationAccessApprovalPreference(storage)
             // Filter type preferences
@@ -161,30 +160,6 @@ private constructor(
             +NotificationAccessAlertingPreference(storage)
             +NotificationAccessSilentPreference(storage)
         }
-
-    class AppInfoNotificationAccessScreenPreference(
-        private val screenMetadata : AppInfoNotificationAccessScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceTitleProvider, PreferenceAvailabilityProvider {
-        override val key : String
-            get() = "device_state_app_info_notification_access_preference"
-
-        override val purpose : Int
-            get() = screenMetadata.purpose
-
-        override val indexable = false
-
-        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
-
-        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
-
-        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
-
-        override val availabilityDescription = screenMetadata.availabilityDescription
-
-        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
-
-        override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
-    }
 
     companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "device_state_app_info_notification_access"
