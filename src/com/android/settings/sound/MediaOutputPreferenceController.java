@@ -16,8 +16,6 @@
 
 package com.android.settings.sound;
 
-import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
-
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
 import android.bluetooth.BluetoothLeBroadcastMetadata;
@@ -151,8 +149,7 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        mPreference.setVisible(!Utils.isAudioModeOngoingCall(mContext)
-                && (enableOutputSwitcherForSystemRouting() ? true : mMediaController != null));
+        mPreference.setVisible(!Utils.isAudioModeOngoingCall(mContext));
     }
 
     @Override
@@ -172,14 +169,7 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        if (enableOutputSwitcherForSystemRouting()) {
-            mMediaController = MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager);
-        } else {
-            if (mMediaController == null) {
-                // No active local playback
-                return;
-            }
-        }
+        mMediaController = MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager);
 
         mPreference.setEnabled(true);
         if (Utils.isAudioModeOngoingCall(mContext) &&
@@ -269,11 +259,11 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            if (enableOutputSwitcherForSystemRouting() && mMediaController == null) {
+            if (mMediaController == null) {
                 mContext.sendBroadcast(new Intent()
                         .setAction(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG)
                         .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME));
-            } else if (mMediaController != null) {
+            } else {
                 mContext.sendBroadcast(new Intent()
                         .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
                         .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)

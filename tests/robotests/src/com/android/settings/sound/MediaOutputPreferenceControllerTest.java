@@ -23,7 +23,6 @@ import static android.media.AudioSystem.DEVICE_OUT_EARPIECE;
 import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 
 import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
-import static com.android.settingslib.media.flags.Flags.FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -52,7 +51,6 @@ import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
 import android.platform.test.annotations.EnableFlags;
-import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
@@ -78,7 +76,6 @@ import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
@@ -116,9 +113,6 @@ public class MediaOutputPreferenceControllerTest {
     private static final String TEST_DEVICE_ADDRESS_5 = "00:E5:E5:E5:E5:E5";
     private static final String TEST_PACKAGE_NAME = "com.test.packagename";
     private static final String TEST_APPLICATION_LABEL = "APP Test Label";
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     @Mock
     private PackageManager mPackageManager;
@@ -362,22 +356,7 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_noActiveLocalPlayback_noTitle() {
-        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
-        mPlaybackState = new PlaybackState.Builder()
-                .setState(PlaybackState.STATE_NONE, 0, 1)
-                .build();
-        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
-        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.getTitle()).isNull();
-    }
-
-    @Test
     public void updateState_noActiveLocalPlayback_checkTitle() {
-        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         mPlaybackState = new PlaybackState.Builder()
                 .setState(PlaybackState.STATE_NONE, 0, 1)
                 .build();
@@ -393,19 +372,7 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
-    public void updateState_withNullMediaController_noTitle() {
-        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
-        mMediaControllers.clear();
-        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
-
-        mController.updateState(mPreference);
-
-        assertThat(mPreference.getTitle()).isNull();
-    }
-
-    @Test
     public void updateState_withNullMediaController_checkTitle() {
-        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         mMediaControllers.clear();
         mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
         mController.displayPreference(mScreen);
@@ -442,8 +409,7 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_WithNoLocalPlaybackFlagEnabled_verifyIntentExtra() {
-        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+    public void handlePreferenceTreeClick_withNoLocalPlayback_verifyIntentExtra() {
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         mPlaybackState = new PlaybackState.Builder()
                 .setState(PlaybackState.STATE_NONE, 0, 1)
@@ -460,8 +426,7 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
-    public void handlePreferenceTreeClick_WithNullControllerFlagEnabled_verifyIntentExtra() {
-        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+    public void handlePreferenceTreeClick_withNullController_verifyIntentExtra() {
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         mMediaControllers.clear();
         mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
