@@ -43,16 +43,14 @@ import com.android.settingslib.metadata.setPreconditionsAsString
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
-import com.android.settingslib.metadata.getPreferenceTitle
+import com.android.settingslib.metadata.getTrampolinedLaunchIntent
 import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.setWarningAsString
 import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationType
-import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.Sensitivity
 import kotlin.time.Duration.Companion.seconds
@@ -114,6 +112,7 @@ class CatalystStateMetadataProviderExecutor(
         return DeviceStateMetadataProviderExecutorResult(
             metadata = perScreenDeviceStatesList,
             itemizationTypes = itemizationTypes.values.toSet(),
+            hintText = "When an intentUri includes '%24itemization', that must be replaced by an actual itemization value before launching.",
         )
     }
 
@@ -234,7 +233,17 @@ class CatalystStateMetadataProviderExecutor(
             )
         }
 
-        val launchingIntent = screenMetaData.getLaunchIntent(context, null)
+        val launchingIntent = screenMetaData.getTrampolinedLaunchIntent(null).apply {
+            // .toUri() will drop the parameter's bundle. In the end, this
+            // launchingIntent will contain only the screenKey and (if parameterized) the
+            // itemization extra. The SettingsLaunchpadActivity is able to launch the correct screen
+            // based on this.
+            if (isParameterized) {
+                // Add the literal '$itemization' string as the value for the itemization extra
+                putExtra(PreferenceScreenMetadata.EXTRA_ITEMIZATION, $$"$itemization")
+            }
+        }.toUri(Intent.URI_INTENT_SCHEME)
+
         return PerScreenMetadata(
             description = (
                     listOfNotNull(
@@ -248,7 +257,7 @@ class CatalystStateMetadataProviderExecutor(
                     ).filter{it.isNotBlank()}.joinToString(". ").replace("..", ".")
                 ),
             deviceStateItemsMetadata = deviceStateItemMetadataList,
-            // intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
+            intentUri = launchingIntent,
 
             // Ideally itemizationTypes should be 1) nullable and 2) more
             // complex than a string so we can communicate more detail
