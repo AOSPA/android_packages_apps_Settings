@@ -35,7 +35,6 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
-import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.TimeOfDay
 import java.time.LocalTime
@@ -82,6 +81,7 @@ class DarkModeApiFirstScreen :
                         Settings.Secure.getInt(
                             context.contentResolver,
                             Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED,
+                            STANDARD_DARK_THEME,
                         ) == EXPANDED_DARK_THEME
 
                     if (isExpanded) {
