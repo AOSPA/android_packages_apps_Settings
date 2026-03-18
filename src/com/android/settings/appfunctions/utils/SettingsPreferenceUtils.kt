@@ -41,11 +41,13 @@ const val NO_SENSITIVITY = "NO_SENSITIVITY"
 const val MUST_PROVIDE_UNDO = "MUST_PROVIDE_UNDO"
 const val REQUIRES_CONFIRMATION = "REQUIRES_CONFIRMATION"
 const val DEEP_LINK_ONLY = "DEEP_LINK_ONLY"
+
 data class PreferenceDetails(
     val settingsPreferenceValue: SettingsPreferenceValue?,
     val sensitivityLevel: String,
-    val isAvailable : Boolean,
-    val isEnabled : Boolean,
+    val isAvailable: Boolean,
+    val isEnabled: Boolean,
+    val isWriteable: Boolean,
 )
 
 /** Helper method to get a preference value using the SettingsPreferenceServiceClient. */
@@ -81,7 +83,13 @@ suspend fun getPreference(
 
         val sensitivityLevelString = getSensitivityLevelString(preferenceProto)
 
-        PreferenceDetails(result, sensitivityLevelString, preferenceProto.available, preferenceProto.enabled)
+        PreferenceDetails(
+            result,
+            sensitivityLevelString,
+            preferenceProto.available,
+            preferenceProto.enabled,
+            preferenceProto.writable,
+        )
     } catch (e: Exception) {
         Log.e(TAG, "Error getting preference value", e)
         null
@@ -89,14 +97,15 @@ suspend fun getPreference(
 }
 
 private fun getSensitivityLevelString(preferenceProto: PreferenceProto): String {
-    val sensitivityLevelString = when (preferenceProto.sensitivityLevel) {
-        SensitivityLevel.DO_NOT_EXPOSE -> DO_NOT_EXPOSE
-        SensitivityLevel.NO_SENSITIVITY -> NO_SENSITIVITY
-        SensitivityLevel.MUST_PROVIDE_UNDO -> MUST_PROVIDE_UNDO
-        SensitivityLevel.REQUIRES_CONFIRMATION -> REQUIRES_CONFIRMATION
-        SensitivityLevel.DEEP_LINK_ONLY -> DEEP_LINK_ONLY
-        else -> "UNKNOWN"
-    }
+    val sensitivityLevelString =
+        when (preferenceProto.sensitivityLevel) {
+            SensitivityLevel.DO_NOT_EXPOSE -> DO_NOT_EXPOSE
+            SensitivityLevel.NO_SENSITIVITY -> NO_SENSITIVITY
+            SensitivityLevel.MUST_PROVIDE_UNDO -> MUST_PROVIDE_UNDO
+            SensitivityLevel.REQUIRES_CONFIRMATION -> REQUIRES_CONFIRMATION
+            SensitivityLevel.DEEP_LINK_ONLY -> DEEP_LINK_ONLY
+            else -> "UNKNOWN"
+        }
     return sensitivityLevelString
 }
 
