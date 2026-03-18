@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.ApplicationInfoFlags
 import android.content.pm.PackageManager.ResolveInfoFlags
 import android.content.pm.ResolveInfo
 import android.content.pm.UserInfo
@@ -78,7 +79,7 @@ import org.robolectric.shadows.ShadowLocaleManager
 )
 class AppLocalePickerApiFirstScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
-    private val tester = ApiTester(AppLocalePickerApiFirstScreen())
+    private lateinit var tester: ApiTester
     private val resources =
         mock<Resources> {
             on { getStringArray(R.array.config_hideWhenDisabled_packageNames) } doReturn
@@ -96,6 +97,8 @@ class AppLocalePickerApiFirstScreenTest {
                 }
             on { queryIntentActivitiesAsUser(any(), any<ResolveInfoFlags>(), any<Int>()) } doReturn
                 listOf(resolveInfoOf(packageName = IN_LAUNCHER_APP.packageName))
+            on { getInstalledApplications(any<ApplicationInfoFlags>()) } doReturn
+                listOf(CHROME_APP, CLOCK_APP)
         }
 
     private val mockUserManager =
@@ -120,6 +123,7 @@ class AppLocalePickerApiFirstScreenTest {
         // Mock labels for apps
         whenever(packageManager.getApplicationLabel(CHROME_APP)).thenReturn("Chrome")
         whenever(packageManager.getApplicationLabel(CLOCK_APP)).thenReturn("Clock")
+        tester = ApiTester(AppLocalePickerApiFirstScreen(), context)
     }
 
     @After

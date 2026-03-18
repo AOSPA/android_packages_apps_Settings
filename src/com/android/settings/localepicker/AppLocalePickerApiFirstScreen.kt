@@ -21,6 +21,7 @@ import android.text.TextUtils
 import com.android.internal.app.AppLocaleCollector
 import com.android.internal.app.LocaleStore
 import com.android.settings.R
+import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
 import com.android.settings.localepicker.AppLocalePickerFragment.ARG_PACKAGE_NAME
 import com.android.settings.localepicker.LocaleUtils.canDisplayLocaleUi
@@ -54,14 +55,7 @@ class AppLocalePickerApiFirstScreen :
             parameter(
                 name = ARG_PACKAGE_NAME,
                 purpose = R.string.app_locale_picker_parameter_purpose,
-                type =
-                    GeneratedParameterType(R.string.app_locale_picker_parameter_description) {
-                        getAppList(context, context.packageManager).map { it ->
-                            val packageName = it.packageName
-                            val appLabel = it.loadLabel(context.packageManager).toString()
-                            GeneratedValue(packageName.unsafe(), appLabel.unsafe())
-                        }
-                    },
+                type = InstalledPackageName
             )
 
             prepareScreenExtras { parameters, extras ->
