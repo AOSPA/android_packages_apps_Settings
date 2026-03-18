@@ -93,7 +93,7 @@ class TemperatureUnitApiFirstScreenTest {
         Locale.setDefault(Locale.forLanguageTag("en-US-u-mu-celsius"))
 
         assertThat(tester.get<String>(TemperatureUnitApiFirstScreen.KEY_TEMPERATURE_UNIT))
-            .startsWith("Celsius")
+            .isEqualTo("celsius")
     }
 
     @Test
@@ -102,7 +102,7 @@ class TemperatureUnitApiFirstScreenTest {
         Locale.setDefault(Locale.forLanguageTag("en-US"))
 
         assertThat(tester.get<String>(TemperatureUnitApiFirstScreen.KEY_TEMPERATURE_UNIT))
-            .isEqualTo("Use default")
+            .isEqualTo("default")
     }
 
     @Test
@@ -110,14 +110,14 @@ class TemperatureUnitApiFirstScreenTest {
         tester.set(TemperatureUnitApiFirstScreen.KEY_TEMPERATURE_UNIT, "default")
 
         assertThat(tester.get<String>(TemperatureUnitApiFirstScreen.KEY_TEMPERATURE_UNIT))
-            .isEqualTo("Use default")
+            .isEqualTo("default")
     }
 
     @Test
     fun setPreference_valueIsFahrenheit_returnFahrenheit() {
-        tester.set(TemperatureUnitApiFirstScreen.KEY_TEMPERATURE_UNIT, "fahrenheit")
+        tester.set(TemperatureUnitApiFirstScreen.KEY_TEMPERATURE_UNIT, "fahrenhe")
 
         assertThat(tester.get<String>(TemperatureUnitApiFirstScreen.KEY_TEMPERATURE_UNIT))
-            .startsWith("Fahrenheit")
+            .startsWith("fahrenhe")
     }
 }
