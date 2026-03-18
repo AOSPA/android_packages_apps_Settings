@@ -30,8 +30,7 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
-import com.android.settings.spa.app.specialaccess.ComputerControlAppRecord
-import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListModel
+import com.android.settings.spa.app.specialaccess.ComputerControlAgentPageModel
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -56,7 +55,7 @@ class ComputerControlAgentPageProviderTest {
     @Mock private lateinit var packageManager: PackageManager
 
     private lateinit var context: Context
-    private lateinit var listModel: ComputerControlAutomationAppListModel
+    private lateinit var listModel: ComputerControlAgentPageModel
 
     @Before
     fun setUp() {
@@ -66,7 +65,7 @@ class ComputerControlAgentPageProviderTest {
             .thenReturn(virtualDeviceManager)
         whenever(virtualDeviceManager.computerControlConsentManager).thenReturn(consentManager)
         whenever(context.packageManager).thenReturn(packageManager)
-        listModel = ComputerControlAutomationAppListModel()
+        listModel = ComputerControlAgentPageModel(context)
     }
 
     private fun mockApp(packageName: String, uid: Int, hasPermission: Boolean): ApplicationInfo {
@@ -101,10 +100,10 @@ class ComputerControlAgentPageProviderTest {
             )
             .thenReturn(AppOpsManager.MODE_ALLOWED)
 
-        val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
+        val summary = listModel.getSummary(context, app)
 
         assertThat(summary)
-            .isEqualTo(context.getString(R.string.computer_control_automation_always_allowed))
+            .isEqualTo(context.getString(R.string.computer_control_automation_always_allow))
     }
 
     @Test
@@ -120,7 +119,7 @@ class ComputerControlAgentPageProviderTest {
             )
             .thenReturn(AppOpsManager.MODE_IGNORED)
 
-        val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
+        val summary = listModel.getSummary(context, app)
 
         assertThat(summary)
             .isEqualTo(context.getString(R.string.computer_control_automation_dont_allow))
@@ -139,7 +138,7 @@ class ComputerControlAgentPageProviderTest {
             )
             .thenReturn(AppOpsManager.MODE_DEFAULT)
 
-        val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
+        val summary = listModel.getSummary(context, app)
 
         assertThat(summary)
             .isEqualTo(context.getString(R.string.computer_control_automation_ask_every_time))
@@ -147,39 +146,38 @@ class ComputerControlAgentPageProviderTest {
 
     @Test
     @EnableFlags(android.companion.virtualdevice.flags.Flags.FLAG_COMPUTER_CONTROL_PER_APP_CONSENT)
-    fun getSummary_perAppConsentEnabled_modeAllowed_returnsAllowedString() {
+    fun getSummary_perAppConsentEnabled_noAppsAllowed_returnsNoAppsAllowedString() {
         val app = mockApp("test.app", 123, hasPermission = true)
-        whenever(
-                appOpsManager.checkOpNoThrow(
-                    AppOpsManager.OP_COMPUTER_CONTROL,
-                    app.uid,
-                    app.packageName,
-                )
-            )
-            .thenReturn(AppOpsManager.MODE_ALLOWED)
+        whenever(consentManager.getAutomatableAppListForAgent(app.uid, app.packageName))
+            .thenReturn(arrayOf())
 
-        val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
+        val summary = listModel.getSummary(context, app)
 
         assertThat(summary)
-            .isEqualTo(context.getString(R.string.computer_control_automation_allowed))
+            .isEqualTo(context.getString(R.string.computer_control_automation_no_apps_allowed))
     }
 
     @Test
     @EnableFlags(android.companion.virtualdevice.flags.Flags.FLAG_COMPUTER_CONTROL_PER_APP_CONSENT)
-    fun getSummary_perAppConsentEnabled_modeIgnored_returnsNotAllowedString() {
+    fun getSummary_perAppConsentEnabled_oneAppAllowed_returnsOneAppAllowedString() {
         val app = mockApp("test.app", 123, hasPermission = true)
-        whenever(
-                appOpsManager.checkOpNoThrow(
-                    AppOpsManager.OP_COMPUTER_CONTROL,
-                    app.uid,
-                    app.packageName,
-                )
-            )
-            .thenReturn(AppOpsManager.MODE_IGNORED)
+        whenever(consentManager.getAutomatableAppListForAgent(app.uid, app.packageName))
+            .thenReturn(arrayOf("target.app"))
 
-        val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
+        val summary = listModel.getSummary(context, app)
 
-        assertThat(summary)
-            .isEqualTo(context.getString(R.string.computer_control_automation_not_allowed))
+        assertThat(summary).contains("1 app allowed")
+    }
+
+    @Test
+    @EnableFlags(android.companion.virtualdevice.flags.Flags.FLAG_COMPUTER_CONTROL_PER_APP_CONSENT)
+    fun getSummary_perAppConsentEnabled_multipleAppsAllowed_returnsCountString() {
+        val app = mockApp("test.app", 123, hasPermission = true)
+        whenever(consentManager.getAutomatableAppListForAgent(app.uid, app.packageName))
+            .thenReturn(arrayOf("target.app1", "target.app2"))
+
+        val summary = listModel.getSummary(context, app)
+
+        assertThat(summary).contains("2 apps allowed")
     }
 }
