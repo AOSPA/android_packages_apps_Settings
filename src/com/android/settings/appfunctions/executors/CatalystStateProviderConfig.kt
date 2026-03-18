@@ -35,6 +35,7 @@ import com.android.settings.accessibility.captionpreferences.ui.CaptioningAppear
 import com.android.settings.accessibility.captionpreferences.ui.CaptioningMoreOptionsScreen
 import com.android.settings.accessibility.captionpreferences.ui.CaptioningPropertiesScreen
 import com.android.settings.accessibility.colorandmotion.ui.ColorAndMotionScreen
+import com.android.settings.accessibility.colorcorrection.ui.ColorCorrectionApiFirstScreen
 import com.android.settings.accessibility.colorcorrection.ui.ColorCorrectionScreen
 import com.android.settings.accessibility.colorinversion.ui.ColorInversionScreen
 import com.android.settings.accessibility.extradim.ui.ExtraDimScreen
@@ -269,6 +270,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = DarkModeApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorAndMotionScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorInversionScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = ColorCorrectionApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorCorrectionScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ExtraDimScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AdaptiveConnectivityScreen.KEY),
@@ -344,7 +346,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = PowerUsageSummaryApiScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY)
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
         ),
         PerScreenCatalystConfig(
             enabled = true,
@@ -354,7 +356,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = PowerUsageAdvancedApiScreen.KEY,
-            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY)
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_BATTERY),
         ),
         PerScreenCatalystConfig(
             enabled = true,

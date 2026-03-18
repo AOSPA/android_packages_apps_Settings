@@ -30,6 +30,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 
@@ -42,6 +43,7 @@ import com.android.settingslib.widget.SelectorWithWidgetPreference
  *
  * @property storage The [ColorCorrectionModeDataStore] used to persist the selected mode.
  */
+// LINT.IfChange
 sealed class ModePreference(private val storage: ColorCorrectionModeDataStore) :
     BooleanValuePreference,
     BooleanValuePreferenceBinding,
@@ -70,6 +72,9 @@ sealed class ModePreference(private val storage: ColorCorrectionModeDataStore) :
     ): @ReadWritePermit Int = ReadWritePermit.ALLOW
 
     override val supportsWrite = true
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
+
     override fun createWidget(context: Context): Preference =
         SelectorWithWidgetPreference(context).apply {
             // We don't want to truncate the text on the detail page,
@@ -109,6 +114,8 @@ sealed class ModePreference(private val storage: ColorCorrectionModeDataStore) :
         emiter.isChecked = true
     }
 }
+
+// LINT.ThenChange(ColorCorrectionApiFirstScreen.kt)
 
 class DeuteranomalyModePreference(storage: ColorCorrectionModeDataStore) : ModePreference(storage) {
     override val key: String
