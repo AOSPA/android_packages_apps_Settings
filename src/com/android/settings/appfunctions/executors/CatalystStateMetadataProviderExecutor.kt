@@ -254,7 +254,7 @@ class CatalystStateMetadataProviderExecutor(
             // complex than a string so we can communicate more detail
             itemizationTypes = screenMetaData.keyParametersSchema?.getParameters()?.values?.map {
                     val type = it.type
-                    "${type.getKey()} - ${type.getDescription(context)}"
+                    "${type.getKey()}"
                 }?.toList() ?: emptyList(),
         )
     }
