@@ -52,6 +52,8 @@ abstract class BaseCaptionOpacityPreference(private val dependentColorPrefKey: S
     override val valuesDescription: Int
         get() = R.array.captioning_opacity_selector_titles
 
+    override fun getEnabledDescription(): String = "A valid caption color must be selected."
+
     override fun isEnabled(context: Context): Boolean = dataStore.hasValidColor()
 
     override fun dependencies(context: Context): Array<String> =

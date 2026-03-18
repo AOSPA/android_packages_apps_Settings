@@ -74,6 +74,8 @@ open class ButtonShortcutSettingScreen :
             ?.isNotEmpty() ?: false
     }
 
+    override fun getEnabledDescription() = "At least one accessibility feature must be assigned to the accessibility button."
+
     override fun isIndexable(context: Context): Boolean {
         return isEnabled(context)
     }

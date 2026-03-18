@@ -77,6 +77,8 @@ class CallVolumePreference(private val audioHelper: AudioHelper) :
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_call_volume) && !audioHelper.isSingleVolume
 
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val restrictionKeys

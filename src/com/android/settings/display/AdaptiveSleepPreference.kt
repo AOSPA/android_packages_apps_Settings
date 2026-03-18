@@ -78,6 +78,8 @@ class AdaptiveSleepPreference :
 
     override fun tags(context: Context) = arrayOf(KEY_SCREEN_ATTENTION, MUSTPASS)
 
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator, and your device must support adaptive sleep."
+
     override fun isEnabled(context: Context) =
         super<PreferenceRestrictionMixin>.isEnabled(context) && context.canBeEnabled()
 

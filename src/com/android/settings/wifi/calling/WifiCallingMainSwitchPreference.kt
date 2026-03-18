@@ -69,6 +69,8 @@ class WifiCallingMainSwitchPreference(private val subId: Int) :
 
     override fun tags(context: Context) = arrayOf(KEY_WIFI_CALLING)
 
+    override fun getEnabledDescription(): String = "There must be no active calls and your carrier must allow changing this setting."
+
     override fun isEnabled(context: Context) =
         context.isCallStateIdle(subId) &&
             WifiCallingQueryImsState(context, subId).isAllowUserControl

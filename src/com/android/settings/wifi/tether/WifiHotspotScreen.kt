@@ -146,6 +146,8 @@ open class WifiHotspotScreen(context: Context) :
                 }
         }
 
+    override fun getEnabledDescription(): String = "Data saver must be turned off and this setting must not be restricted by a device administrator."
+
     override fun isEnabled(context: Context) =
         wifiHotspotStore.dataSaverStore.getBoolean(DATA_SAVER_KEY) != true &&
             super<PreferenceRestrictionMixin>.isEnabled(context)

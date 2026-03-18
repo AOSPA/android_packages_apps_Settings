@@ -81,6 +81,8 @@ class BatterySaverPreference :
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
+    override fun getEnabledDescription(): String = "This device must not be plugged in."
+
     override fun isEnabled(context: Context) =
         !BatteryStatus(BatteryUtils.getBatteryIntent(context)).isPluggedIn
 

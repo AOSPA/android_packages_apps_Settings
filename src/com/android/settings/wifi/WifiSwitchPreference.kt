@@ -83,6 +83,8 @@ class WifiSwitchPreference(private val scope: CoroutineScope) :
 
     override fun tags(context: Context) = arrayOf(KEY_WIFI, MUSTPASS_SET)
 
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val restrictionKeys

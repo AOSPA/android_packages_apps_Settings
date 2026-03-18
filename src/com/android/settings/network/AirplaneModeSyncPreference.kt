@@ -49,6 +49,8 @@ class AirplaneModeSyncPreference(context: Context) :
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_sync
 
+    override fun getEnabledDescription(): String = "Bluetooth must be enabled and a supported watch must be connected."
+
     override fun isEnabled(context: Context) =
         context.isBluetoothEnabled() && storage.isSyncSupportedWatchPresent.get()
 

@@ -79,6 +79,8 @@ class IntensityPreference(context: Context) :
         ReadWritePermit.ALLOW
 
     override val supportsWrite = true
+    override fun getEnabledDescription(): String = "Color correction must be enabled and the mode must not be grayscale."
+
     override fun isEnabled(context: Context): Boolean {
         val colorCorrectionEnabled =
             dataStore.getBoolean(SETTING_KEY_COLOR_CORRECTION_ENABLED) ?: false

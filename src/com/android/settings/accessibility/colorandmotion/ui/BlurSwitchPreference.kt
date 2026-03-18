@@ -42,6 +42,8 @@ class BlurSwitchPreference :
 
     override fun isAvailable(context: Context) = CROSS_WINDOW_BLUR_SUPPORTED
 
+    override fun getEnabledDescription(): String = "Battery saver must be turned off."
+
     override fun isEnabled(context: Context) = !context.isPowerSaveMode()
 
     override val icon: Int

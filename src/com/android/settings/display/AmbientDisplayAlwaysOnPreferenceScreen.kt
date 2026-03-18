@@ -110,6 +110,8 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override val restrictionKeys: Array<String>
         get() = arrayOf(UserManager.DISALLOW_AMBIENT_DISPLAY)
 
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val availabilityDescription =

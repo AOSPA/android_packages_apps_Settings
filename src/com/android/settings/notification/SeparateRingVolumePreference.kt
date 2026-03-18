@@ -94,6 +94,8 @@ class SeparateRingVolumePreference(private val audioHelper: AudioHelper) :
 
     override fun isAvailable(context: Context) = !audioHelper.isSingleVolume
 
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val restrictionKeys
