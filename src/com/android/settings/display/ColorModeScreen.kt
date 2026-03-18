@@ -27,9 +27,11 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.ColorModeUtils.getActiveColorModeName
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -110,7 +112,7 @@ open class ColorModeScreen :
 
     class ColorModeScreenPreference(
         private val screenMetadata : ColorModeScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PersistentPreference<String> {
         override val key : String
             get() = "color_mode_preference"
 
@@ -118,6 +120,13 @@ open class ColorModeScreen :
             get() = screenMetadata.purpose
 
         override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override val indexable = false
 

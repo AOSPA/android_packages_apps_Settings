@@ -166,7 +166,6 @@ open class HearingDevicesScreen(context: Context) :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +HearingDevicesScreenPreference(this@HearingDevicesScreen)
             +HearingDevicesTopIntroPreference(context)
             +AvailableHearingDevicePreferenceCategory(context, metricsCategory)
             if (com.android.settings.flags.Flags.catalystMigration26q2()) {
@@ -301,28 +300,6 @@ open class HearingDevicesScreen(context: Context) :
             metricsCategory = metricsCategory,
         ) {
         override val sensitivityLevel = SensitivityLevel.DEEP_LINK_ONLY
-    }
-
-    class HearingDevicesScreenPreference(private val screenMetadata: HearingDevicesScreen) :
-        PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
-        override val key: String
-            get() = "hearing_devices_preference"
-
-        override val purpose: Int
-            get() = screenMetadata.purpose
-
-        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
-
-        override val indexable = false
-
-        override fun isEnabled(context: Context): Boolean = screenMetadata.isEnabled(context)
-
-        override fun getSummary(context: Context): CharSequence? =
-            screenMetadata.getSummary(context)
-
-        override val availabilityDescription = screenMetadata.availabilityDescription
-
-        override fun isAvailable(context: Context): Boolean = screenMetadata.isAvailable(context)
     }
 
     companion object {

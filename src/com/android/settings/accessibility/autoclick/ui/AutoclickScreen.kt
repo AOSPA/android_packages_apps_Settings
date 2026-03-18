@@ -122,7 +122,6 @@ open class AutoclickScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +AutoclickScreenPreference(this@AutoclickScreen)
             +AutoclickIntroPreference()
             +AutoclickIllustrationPreference()
             +AutoclickMainSwitchPreference()
@@ -141,32 +140,6 @@ open class AutoclickScreen :
             +AutoclickRevertToLeftClickPreference()
             +AutoclickFooterPreference()
         }
-
-    class AutoclickScreenPreference(
-        private val screenMetadata : AutoclickScreen
-    ) : PreferenceMetadata, PreferenceAvailabilityProvider, PreferenceSummaryProvider {
-
-        override val key : String
-            get() = "autoclick_preference_preference"
-
-        override val purpose : Int
-            get() = screenMetadata.purpose
-
-        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
-
-        override val indexable = false
-
-        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
-
-        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
-
-        override val availabilityDescription = screenMetadata.availabilityDescription
-
-        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
-
-        override val sensitivityLevel
-            get() = SensitivityLevel.DEEP_LINK_ONLY
-    }
 
     companion object {
         const val KEY = "autoclick_preference"

@@ -28,6 +28,8 @@ import com.android.settings.core.SubSettingLauncher
 import com.android.settings.datausage.DataUsageList
 import com.android.settings.datausage.DataUsageUtils
 import com.android.settings.datausage.lib.DataUsageFormatter
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -35,6 +37,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.net.DataUsageController
 
 class WifiDataUsagePreference(context: Context):
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider {
@@ -78,6 +81,12 @@ class WifiDataUsagePreference(context: Context):
 
     override val title
         get() = R.string.non_carrier_data_usage
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? = dataUsage
 
