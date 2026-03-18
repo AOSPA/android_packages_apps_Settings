@@ -158,10 +158,8 @@ class UseServicePreference(
             }
     }
 
-
-    //marked with DO_NOT_EXPOSE due to security concerns, changing sensitivity will require a check with security
     override val sensitivityLevel: Int
-        get() = SensitivityLevel.DO_NOT_EXPOSE
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     companion object {
         const val KEY = "use_service"
