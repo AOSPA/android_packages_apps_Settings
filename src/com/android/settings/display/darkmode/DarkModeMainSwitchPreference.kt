@@ -53,6 +53,8 @@ class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage, val i
         return arrayOf(MUSTPASS_SET)
     }
 
+    override fun getEnabledDescription(): String = if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) "Battery saver must be turned off." else "Always enabled."
+
     override fun isEnabled(context: Context): Boolean =
         if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) !context.isPowerSaveMode()
         else true

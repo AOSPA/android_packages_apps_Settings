@@ -45,6 +45,8 @@ class VolumeKeysShortcutLockScreenPreference() :
         }
     }
 
+    override fun getEnabledDescription(): String = "At least one accessibility shortcut must be assigned to the volume keys."
+
     override fun isEnabled(context: Context): Boolean {
         return context
             .getSystemService(AccessibilityManager::class.java)

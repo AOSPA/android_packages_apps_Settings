@@ -130,6 +130,8 @@ open class NightDisplayScreen(val context: Context) :
 
         override val indexable = false
 
+        override fun getEnabledDescription(): String? = screenMetadata.getEnabledDescription()
+
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
