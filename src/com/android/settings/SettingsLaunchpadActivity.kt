@@ -18,6 +18,7 @@ package com.android.settings
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_FORWARD_RESULT
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
@@ -47,6 +48,7 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider
 import com.android.settingslib.metadata.ValidatedKeyParameters
+import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiOperationContext
 import com.android.settingslib.metadata.preferencesapi.FlagContext
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
@@ -135,6 +137,10 @@ open class SettingsLaunchpadActivity : Activity() {
                     Log.e(TAG, "Cannot find screen metadata for key: $screenKey")
                     return
                 }
+
+        if (shouldBlockScreenLaunch(this, screenMetadata)) {
+            return
+        }
 
         val menuKey = resolveMenuKey(screenMetadata)
 
@@ -296,6 +302,18 @@ open class SettingsLaunchpadActivity : Activity() {
 
             else -> null
         }
+
+    private fun shouldBlockScreenLaunch(
+        context: Context,
+        metadata: PreferenceScreenMetadata
+    ): Boolean {
+        if (!metadata.isExposable(context)) {
+            Log.w(TAG, "Screen ${metadata.key} is not exposable. Blocking launch.")
+            return true
+        }
+
+        return false
+    }
 
     private fun shouldLaunchDeepLinkTrampoline(): Boolean {
         return ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) &&

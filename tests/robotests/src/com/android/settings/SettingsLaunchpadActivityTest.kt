@@ -43,6 +43,8 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA
 import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -744,11 +746,65 @@ class SettingsLaunchpadActivityTest {
         assertThat(fragmentArgs.getInt(extraKey2)).isEqualTo(extraValue2)
     }
 
+    @Test
+    fun onCreate_screenIsSensitive_shouldBlockLaunch() {
+        fakeFactory.sensitivityLevelToReturn = SensitivityLevel.DO_NOT_EXPOSE
+
+        val intent = Intent(context, SettingsLaunchpadActivity::class.java).apply {
+            putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+        }
+
+        val controller = setupActivity(intent)
+        val activity = controller.get()
+        controller.create()
+
+        assertThat(activity.isFinishing).isTrue()
+        assertThat(getNextStartedActivity(activity)).isNull()
+    }
+
+    @Test
+    fun onCreate_screenIsUiOnly_shouldBlockLaunch() {
+        fakeFactory.tagsToReturn = arrayOf(UI_ONLY_PREFERENCE)
+        fakeFactory.sensitivityLevelToReturn = SensitivityLevel.NO_SENSITIVITY
+
+        val intent = Intent(context, SettingsLaunchpadActivity::class.java).apply {
+            putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+        }
+
+        val controller = setupActivity(intent)
+        val activity = controller.get()
+        controller.create()
+
+        assertThat(activity.isFinishing).isTrue()
+        assertThat(getNextStartedActivity(activity)).isNull()
+    }
+
+    @Test
+    fun onCreate_screenIsExposable_shouldAllowLaunch() {
+        fakeFactory.sensitivityLevelToReturn = SensitivityLevel.NO_SENSITIVITY
+        fakeFactory.tagsToReturn = emptyArray()
+
+        val intent = Intent(context, SettingsLaunchpadActivity::class.java).apply {
+            putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+        }
+
+        val controller = setupActivity(intent)
+        val activity = controller.get()
+        controller.create()
+
+        val nextActivity = getNextStartedActivity(activity)
+        assertThat(nextActivity).isNotNull()
+        assertThat(nextActivity!!.component?.className).isEqualTo(SubSettings::class.java.name)
+    }
+
     class FakeParameterizedFactory :
         PreferenceScreenMetadataParameterizedFactory, PreferenceScreenMixin {
         var fragmentClassToReturn: Class<out Fragment>? = TestFragment::class.java
 
         var launchIntentToReturn: Intent? = null
+
+        var sensitivityLevelToReturn: Int = SensitivityLevel.NO_SENSITIVITY
+        var tagsToReturn: Array<String> = emptyArray()
 
         private var receivedBundle: Bundle? = null
         private var receivedKeyParameters: ValidatedKeyParameters? = null
@@ -775,6 +831,11 @@ class SettingsLaunchpadActivityTest {
         override fun getMetricsCategory(): Int = 0
 
         override fun fragmentClass(): Class<out Fragment>? = fragmentClassToReturn
+
+        override val sensitivityLevel: Int
+            get() = sensitivityLevelToReturn
+
+        override fun tags(context: Context): Array<String> = tagsToReturn
 
         override val purpose: Int
             get() = 0
