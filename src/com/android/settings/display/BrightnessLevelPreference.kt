@@ -87,6 +87,8 @@ class BrightnessLevelPreference :
     override fun getSummary(context: Context): CharSequence? =
         NumberFormat.getPercentInstance().format(context.brightnessPercent)
 
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val restrictionKeys

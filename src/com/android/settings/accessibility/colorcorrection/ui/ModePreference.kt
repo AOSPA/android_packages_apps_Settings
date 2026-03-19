@@ -78,6 +78,8 @@ sealed class ModePreference(private val storage: ColorCorrectionModeDataStore) :
             setOnClickListener(this@ModePreference)
         }
 
+    override fun getEnabledDescription(): String = "Color correction must be enabled."
+
     override fun isEnabled(context: Context): Boolean {
         return SettingsSecureStore.get(context).getBoolean(ColorCorrectionMainSwitchPreference.KEY)
             ?: false

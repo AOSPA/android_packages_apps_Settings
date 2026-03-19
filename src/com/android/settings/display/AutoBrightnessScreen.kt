@@ -117,6 +117,8 @@ open class AutoBrightnessScreen :
     override fun isAvailable(context: Context) =
         context.autoBrightnessAvailabilityStatus == AVAILABLE
 
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val restrictionKeys

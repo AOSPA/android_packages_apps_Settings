@@ -328,24 +328,15 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Používat výchozí nastavení jazyka"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Používat 24hodinový formát"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Čas"</string>
-    <!-- no translation found for time_format_category_title (3122743852067365261) -->
-    <skip />
-    <!-- no translation found for time_format_page_title (2599662358219245734) -->
-    <skip />
-    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
-    <skip />
-    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
-    <skip />
-    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
-    <skip />
-    <!-- no translation found for time_format_automatic (8627801531369181488) -->
-    <skip />
-    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
-    <skip />
-    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
-    <skip />
-    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
-    <skip />
+    <string name="time_format_category_title" msgid="3122743852067365261">"12hodinový / 24hodinový formát"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"Formát času"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"Další nastavení"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"Aplikace budou používat formát času na základě tohoto nastavení"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"Vyberte formát času"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"Automaticky"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"Aplikace používají 12hodinový / 24hodinový formát podle jazyka aplikace"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"12hodinový formát"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"24hodinový formát"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Časové pásmo"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Domácí časové pásmo"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Zvolte časové pásmo"</string>
@@ -939,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Restartovat zařízení?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Podrobné protokolování funkce NFC je určeno pouze pro účely vývoje. Další data funkce NFC budou zahrnuta ve zprávách o chybě, které mohou obsahovat soukromé informace. Pokud toto nastavení chcete změnit, restartujte zařízení."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Restartovat"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Zapnuto"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Vypnuto"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Externí displeje"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Vestavěný displej"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Univerzální kurzor"</string>
@@ -1167,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Neznámá aplikace chce zapnout vyhledávání sítí (kvůli lepšímu určení polohy a dalším účelům) i v případě, že je vypnutá Wi-Fi. \n\nChcete tuto možnost povolit všem aplikacím, které chtějí vyhledávat sítě?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Zamítnout"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*povinné"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Toto je sdílená síť. Pokud chcete provádět změny, musíte se přihlásit."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Pokud chcete provést změny, kontaktujte vlastníka sítě nebo administrátora zařízení."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Tato síť nemá přístup k internetu. Chcete zůstat připojeni?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Některé aplikace služby kvůli omezenému připojení nebudou fungovat. Přesto použít?"</string>
@@ -1514,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Zrušit"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Chránit SIM kartu"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Režim ochrany zámkem SIM karty"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Zamykat SIM kartu"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Spravováno systémem Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Nespravováno systémem Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Registrace byla úspěšná"</string>
@@ -1524,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"PIN spravovaný systémem Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Hodnota kódu PIN spravovaného systémem Android:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"PIN se nepodařilo získat"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"K použití telefonu vyžadovat PIN"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"PIN SIM karty spravovaný systémem Android"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"K použití telefonu je vyžadován PIN"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Automatická ochrana SIM karty vyžaduje zámek obrazovky, teď je k dispozici pouze manuální"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Zadejte aktuální PIN SIM karty"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Zadejte aktuální PIN SIM karty"</string>
@@ -1540,8 +1525,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Potvrďte nový PIN SIM karty"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Kódy PIN se neshodují. Potvrďte nový PIN SIM karty."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Chybný PIN. Zbývající počet pokusů: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
-    <skip />
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Zadejte aktuální PIN kód SIM karty"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Používat pro mobilní data <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Pro mobilní data používáte <xliff:g id="CARRIER2_0">%2$s</xliff:g>. Pokud přepnete na operátora <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> už se používat nebude."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Použít <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1844,8 +1828,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Změny zjišťování časového pásma nejsou povoleny"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Pokud je k dispozici poloha vašeho zařízení, může být použita k nastavení časového pásma"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Oznámení"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Nechte si zaslat oznámení, když se vám automaticky změní čas"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Změna časového pásma"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Dostávat upozornění, když se časové pásmo automaticky aktualizuje"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"oznámení, čas, pásmo, časové pásmo"</string>
@@ -2617,8 +2600,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Rozšířený tmavý motiv"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Nastavení rozšířeného tmavého motivu"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Otevřít nastavení rozšířeného tmavého motivu"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Rozšířený tmavý motiv automaticky ztmaví víc aplikací, aby se lépe četly.\n\nPokud chcete rozšířený tmavý motiv používat, nechte u aplikace zapnutý přepínač. Pokud aplikace nevypadá správně, vypněte u ní přepínač, aby používala vlastní motiv."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Odstranit animace"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Omezit pohyb na obrazovce"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Blikání textového kurzoru"</string>
@@ -2945,6 +2927,8 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
+    <skip />
     <string name="battery_details_title" msgid="3289680399291090588">"Využití baterie aplikací"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Podrobnosti využívání"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Upravit spotřebu energie"</string>
@@ -3671,8 +3655,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Oznámení Wi‑Fi, oznámení wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"využití dat"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Používat 24hodinový formát"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"oznámení o čase, oznámení o časovém pásmu, letní čas, posun časového pásma"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Otevřít pomocí aplikace"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Aplikace"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"časové pásmo"</string>
@@ -3793,10 +3776,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Oznámení jsou ztlumena a budou vibrovat"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> má vypnutý zvuk"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Nedostupné, protože vyzvánění je ztlumené"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Vyzvánění, SIM, vyzvánění SIM"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Vyzvánění"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Vyzvánění telefonu"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Výchozí zvuk oznámení"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Zvuk z aplikace"</string>
@@ -4620,23 +4601,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mají přístup ke všem souborům"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatizace obrazovky"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Tato aplikace bude moct zobrazit obsah obrazovky ostatních aplikací a interagováním s ním vám pomáhat provádět úkoly i v případě, že tyto aplikace budou na pozadí"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"Aplikace <xliff:g id="ID_1">%1$s</xliff:g> bude moct zobrazit obsah obrazovky ostatních aplikací a interagováním s ním vám pomáhat provádět úkoly"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Pokud automatizaci obrazovky nepovolíte, aplikace <xliff:g id="ID_1">%1$s</xliff:g> může přesto s aplikacemi připojenými k aplikaci <xliff:g id="ID_2">%1$s</xliff:g> interagovat jinými způsoby."</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Povolit aplikacím pomáhat vám s prováděním úkolů interagováním s obsahem obrazovek jiných aplikací"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Pokaždé se zeptat"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Vždy povolit"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Nepovolovat"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
-    <skip />
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Povolit automatizaci obrazovky"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"Žádné aplikace nejsou vždy povolené"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Tady se zobrazí aplikace, které mají od uživatele <xliff:g id="ID_1">%1$s</xliff:g> povolenou automatizaci obrazovky. Aplikace, které získají pouze oprávnění pro jednotlivé relace, se nebudou zobrazovat."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Povoleno"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Nepovoleno"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Oznámení na celou obrazovku"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Povolit oznámení z této aplikace na celou obrazovku"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Aplikaci můžete povolit zobrazovat oznámení přes celou obrazovku, když bude zařízení zamknuté. Aplikace tak mohou zvýraznit budíky, příchozí hovory a další důležitá oznámení."</string>
@@ -4673,6 +4648,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Nepřipojeno"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Nepřipojena"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Nainstalované aplikace: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"Využito: <xliff:g id="PERCENTAGE">%1$s</xliff:g> – volné místo: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tmavý motiv, velikost písma, jas"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Přibližné využití paměti: <xliff:g id="USED_MEMORY">%1$s</xliff:g> z <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
@@ -5837,7 +5814,8 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g>: <xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Když změníte poměr stran, aplikace se restartuje. Můžete přijít o neuložené změny. Některé aplikace nemusí být optimalizované pro určité poměry stran."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Prostředí"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
+    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Snímač otisků prstů"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Světelná oznámení"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Informace o světelných oznámeních"</string>
@@ -6222,12 +6200,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Vaše zařízení není zaregistrováno v SOS přes satelit. Zkontrolujte, zda jste připojený k internetu, aby zařízení mohlo registraci automaticky dokončit."</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Povolit službu instalátoru webových aplikací"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Po aktivování této služby můžete instalovat weby přímo na plochu a používat je jako běžné aplikace."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"Přístup k zařízení HID"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"Povolit aplikaci vyhledávat zařízení HID"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"Pokud přístup povolíte, škodlivé aplikace mohou vaše zařízení HID přeprogramovat a ohrozit váš systém. Aplikace by například mohly simulovat vstupy z klávesnice nebo myši a ovládat váš systém, i když není otevřený. Při povolování přístupu se ujistěte, že aplikacím důvěřujete."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"hid, člověk, přístup, zařízení"</string>
 </resources>

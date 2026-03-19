@@ -36,6 +36,8 @@ class AmbientWallpaperPreference(context: Context) :
 
     override fun dependencies(context: Context) = arrayOf(AmbientDisplayMainSwitchPreference.KEY)
 
+    override fun getEnabledDescription(): String = "Always-on display must be enabled."
+
     override fun isEnabled(context: Context) = dozeAlwaysOnDataStore.getBoolean(DOZE_ALWAYS_ON)!!
 
     override fun storage(context: Context) = dataStore

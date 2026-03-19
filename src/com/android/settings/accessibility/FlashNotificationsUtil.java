@@ -26,6 +26,8 @@ import android.util.Log;
 import androidx.annotation.ColorInt;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -64,6 +66,8 @@ public class FlashNotificationsUtil {
         int CAMERA_SCREEN = 3;
     }
 
+    @Nullable private static Boolean sIsTorchAvailable = null;
+
     /**
      * Checks if a back-facing camera with a flash (torch) is available on the device.
      * <p>
@@ -75,10 +79,13 @@ public class FlashNotificationsUtil {
      * otherwise.
      */
     public static boolean isTorchAvailable(@NonNull Context context) {
+        if (sIsTorchAvailable != null) {
+            return sIsTorchAvailable;
+        }
+
         // TODO This is duplicated logic of FlashNotificationsController.getCameraId.
         final CameraManager cameraManager = context.getSystemService(CameraManager.class);
         if (cameraManager == null) return false;
-
         try {
             final String[] ids = cameraManager.getCameraIdList();
 
@@ -92,12 +99,15 @@ public class FlashNotificationsUtil {
                 if (lensFacing == null) continue;
 
                 if (flashAvailable && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
+                    sIsTorchAvailable = true;
                     return true;
                 }
             }
         } catch (CameraAccessException ignored) {
             Log.w(LOG_TAG, "Failed to get valid camera for camera flash notification.");
+            return false;
         }
+        sIsTorchAvailable = false;
         return false;
     }
 
@@ -137,6 +147,11 @@ public class FlashNotificationsUtil {
 
         return ((isTorchAvailable && isCameraFlashEnabled) ? State.CAMERA : State.OFF)
                 | (isScreenFlashEnabled ? State.SCREEN : State.OFF);
+    }
+
+    @VisibleForTesting
+    static void reset() {
+        sIsTorchAvailable = null;
     }
 
     static class ScreenColorNotFoundException extends Exception {

@@ -53,6 +53,8 @@ class FloatingMenuFadePreference :
         }
     }
 
+    override fun getEnabledDescription(): String = "The accessibility floating menu must be enabled."
+
     override fun isEnabled(context: Context): Boolean {
         return AccessibilityUtil.isFloatingMenuEnabled(context)
     }

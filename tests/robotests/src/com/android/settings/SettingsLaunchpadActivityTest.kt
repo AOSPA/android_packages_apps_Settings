@@ -27,6 +27,7 @@ import android.provider.Settings
 import androidx.fragment.app.Fragment
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
+import com.android.settings.SettingsLaunchpadActivityTest.Companion.preconditionsAreMet
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.spa.SpaActivity
 import com.android.settings.testutils.shadow.ShadowActivityEmbeddingUtils
@@ -34,6 +35,8 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.metadata.FixedArrayMap
 import com.android.settingslib.metadata.KeyParametersSchema
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_ARGS
@@ -41,6 +44,8 @@ import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA
 import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -151,7 +156,7 @@ class SettingsLaunchpadActivityTest {
             permissions(TEST_PERMISSION)
         }
 
-        override fun fragmentClass(): Class<out Fragment>? = TestFragment::class.java
+        override fun fragmentClass(): Class<out Fragment> = TestFragment::class.java
     }
 
     class FakeDynamicSpaScreen :
@@ -290,7 +295,8 @@ class SettingsLaunchpadActivityTest {
     private fun clearAllStartedActivities() {
         // Clear from application shadow
         val app = ApplicationProvider.getApplicationContext<Application>()
-        while (shadowOf(app).nextStartedActivity != null) {}
+        while (shadowOf(app).nextStartedActivity != null) {
+        }
     }
 
     private fun setupActivity(intent: Intent): ActivityController<SpySettingsLaunchpadActivity> {
@@ -638,7 +644,7 @@ class SettingsLaunchpadActivityTest {
         assertThat(nextActivity).isNotNull()
         val fragmentArgs =
             nextActivity!!.getBundleExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT_ARGUMENTS)
-        assertThat(fragmentArgs!!.getString(SettingsActivity.EXTRA_FRAGMENT_ARG_KEY))
+        assertThat(fragmentArgs!!.getString(EXTRA_FRAGMENT_ARG_KEY))
             .isEqualTo(highlightKeyValue)
     }
 
@@ -674,10 +680,10 @@ class SettingsLaunchpadActivityTest {
         assertThat(nextActivity).isNotNull()
         val expectedMenuKey = context.getString(R.string.menu_key_display)
         assertThat(
-                nextActivity!!.getStringExtra(
-                    Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY
-                )
+            nextActivity!!.getStringExtra(
+                Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY
             )
+        )
             .isEqualTo(expectedMenuKey)
     }
 
@@ -698,10 +704,10 @@ class SettingsLaunchpadActivityTest {
         assertThat(nextActivity).isNotNull()
         val expectedMenuKey = context.getString(R.string.menu_key_apps)
         assertThat(
-                nextActivity!!.getStringExtra(
-                    Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY
-                )
+            nextActivity!!.getStringExtra(
+                Settings.EXTRA_SETTINGS_EMBEDDED_DEEP_LINK_HIGHLIGHT_MENU_KEY
             )
+        )
             .isEqualTo(expectedMenuKey)
     }
 
@@ -718,10 +724,15 @@ class SettingsLaunchpadActivityTest {
                 putInt(extraKey2, extraValue2)
             }
 
+        fakeFactory.launchIntentToReturn =
+            Intent(PreferenceScreenMetadata.LAUNCH_SETTINGS_PAGES_ACTION).apply {
+                putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+                putExtra(EXTRA_LAUNCH_SCREEN, launchScreenExtra)
+            }
+
         val intent =
             Intent(context, SettingsLaunchpadActivity::class.java).apply {
                 putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
-                putExtra(EXTRA_LAUNCH_SCREEN, launchScreenExtra)
             }
 
         val controller = setupActivity(intent)
@@ -736,9 +747,83 @@ class SettingsLaunchpadActivityTest {
         assertThat(fragmentArgs.getInt(extraKey2)).isEqualTo(extraValue2)
     }
 
+    @Test
+    fun onCreate_screenIsSensitive_shouldBlockLaunch() {
+        fakeFactory.sensitivityLevelToReturn = SensitivityLevel.DO_NOT_EXPOSE
+
+        val intent = Intent(context, SettingsLaunchpadActivity::class.java).apply {
+            putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+        }
+
+        val controller = setupActivity(intent)
+        val activity = controller.get()
+        controller.create()
+
+        assertThat(activity.isFinishing).isTrue()
+        assertThat(getNextStartedActivity(activity)).isNull()
+    }
+
+    @Test
+    fun onCreate_screenIsUiOnly_shouldBlockLaunch() {
+        fakeFactory.tagsToReturn = arrayOf(UI_ONLY_PREFERENCE)
+        fakeFactory.sensitivityLevelToReturn = SensitivityLevel.NO_SENSITIVITY
+
+        val intent = Intent(context, SettingsLaunchpadActivity::class.java).apply {
+            putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+        }
+
+        val controller = setupActivity(intent)
+        val activity = controller.get()
+        controller.create()
+
+        assertThat(activity.isFinishing).isTrue()
+        assertThat(getNextStartedActivity(activity)).isNull()
+    }
+
+    @Test
+    fun onCreate_isNotAvailable_shouldBlockLaunch() {
+        fakeFactory.isAvailableToReturn = false
+
+        val intent = Intent(context, SettingsLaunchpadActivity::class.java).apply {
+            putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+        }
+
+        val controller = setupActivity(intent)
+        val activity = controller.get()
+        controller.create()
+
+        assertThat(activity.isFinishing).isTrue()
+        assertThat(getNextStartedActivity(activity)).isNull()
+    }
+
+    @Test
+    fun onCreate_allChecksPass_shouldAllowLaunch() {
+        fakeFactory.sensitivityLevelToReturn = SensitivityLevel.NO_SENSITIVITY
+        fakeFactory.tagsToReturn = emptyArray()
+        fakeFactory.isAvailableToReturn = true
+
+        val intent = Intent(context, SettingsLaunchpadActivity::class.java).apply {
+            putExtra(EXTRA_SCREEN_KEY, TEST_SCREEN_KEY)
+        }
+
+        val controller = setupActivity(intent)
+        val activity = controller.get()
+        controller.create()
+
+        val nextActivity = getNextStartedActivity(activity)
+        assertThat(nextActivity).isNotNull()
+        assertThat(nextActivity!!.component?.className).isEqualTo(SubSettings::class.java.name)
+    }
+
     class FakeParameterizedFactory :
-        PreferenceScreenMetadataParameterizedFactory, PreferenceScreenMixin {
+        PreferenceScreenMetadataParameterizedFactory,
+        PreferenceScreenMixin,
+        PreferenceAvailabilityProvider {
         var fragmentClassToReturn: Class<out Fragment>? = TestFragment::class.java
+        var launchIntentToReturn: Intent? = null
+        var sensitivityLevelToReturn: Int = SensitivityLevel.NO_SENSITIVITY
+        var tagsToReturn: Array<String> = emptyArray()
+        var isAvailableToReturn: Boolean = true
 
         private var receivedBundle: Bundle? = null
         private var receivedKeyParameters: ValidatedKeyParameters? = null
@@ -749,6 +834,14 @@ class SettingsLaunchpadActivityTest {
         }
 
         override fun acceptEmptyArguments(): Boolean = true
+
+        override val availabilityDescription: String
+            get() = ""
+
+        override fun isAvailable(context: Context): Boolean = isAvailableToReturn
+
+        override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
+            launchIntentToReturn
 
         override val key: String
             get() = TEST_SCREEN_KEY
@@ -762,6 +855,11 @@ class SettingsLaunchpadActivityTest {
         override fun getMetricsCategory(): Int = 0
 
         override fun fragmentClass(): Class<out Fragment>? = fragmentClassToReturn
+
+        override val sensitivityLevel: Int
+            get() = sensitivityLevelToReturn
+
+        override fun tags(context: Context): Array<String> = tagsToReturn
 
         override val purpose: Int
             get() = 0

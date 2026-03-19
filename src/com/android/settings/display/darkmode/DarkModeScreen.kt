@@ -176,6 +176,8 @@ abstract class BaseDarkModeScreen(context: Context, val isUiOnly: Boolean) :
         if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) true
         else !context.isPowerSaveMode()
 
+    override fun getEnabledDescription() = if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) "Always enabled." else "Battery saver must be turned off."
+
     override fun isIndexable(context: Context) =
         Flags.catalystDarkUiMode() &&
             (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver() || !context.isPowerSaveMode())

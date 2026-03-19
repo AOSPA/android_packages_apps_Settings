@@ -83,6 +83,8 @@ class NotificationVolumePreference(private val audioHelper: AudioHelper) :
         context.resources.getBoolean(R.bool.config_show_notification_volume) &&
             !audioHelper.isSingleVolume
 
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator, and the ringer mode must be set to normal."
+
     override fun isEnabled(context: Context) =
         super<PreferenceRestrictionMixin>.isEnabled(context) &&
             audioHelper.ringerModeInternal == RINGER_MODE_NORMAL

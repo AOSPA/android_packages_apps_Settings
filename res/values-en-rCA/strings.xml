@@ -930,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Restart Device?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detail NFC logging is intended for development purposes only. Additional NFC data is included in bug reports, which may contain private information. Restart your device to change this setting."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Restart"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"On"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Off"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"External displays"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Built-in display"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universal cursor"</string>
@@ -1158,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"To improve location accuracy and for other purposes, an unknown app wants to turn on network scanning, even when Wi‑Fi is off.\n\nAllow this for all apps that want to scan?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Deny"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*required"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"This is a shared network. You need to sign in to make changes."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contact the network owner or device admin to make changes."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"This network has no internet access. Stay connected?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Some apps and services may not work due to limited connectivity. Use anyway?"</string>
@@ -1831,8 +1828,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Location time zone detection changes are not allowed"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"If your device location is available, it may be used to set your time zone"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Notifications"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Get notified when your time changes automatically"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Time zone change"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Receive a notification when your time zone is automatically updated"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, time, zone, timezone"</string>
@@ -2931,6 +2927,7 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"Battery usage and screen time are not measured while the phone is charging"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"App battery usage"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Use details"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Adjust power use"</string>
@@ -4650,6 +4647,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Not connected"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Not connected"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps installed"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> used - <xliff:g id="FREE_SPACE">%2$s</xliff:g> free"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Dark theme, font size, brightness"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Avg <xliff:g id="USED_MEMORY">%1$s</xliff:g> of <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memory used"</string>
@@ -5812,7 +5811,7 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> by <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"The app will restart when you change aspect ratio. You may lose unsaved changes. Some apps may not be optimized for certain aspect ratios."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Experience"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
+    <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtual gamepad"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerprint sensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash notifications"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"About flash notifications"</string>
