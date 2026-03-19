@@ -57,6 +57,7 @@ abstract class ShortcutOptionPreference(
     override fun createWidget(context: Context): ShortcutOptionWidget {
         return ShortcutOptionWidget(context)
     }
+    override fun getEnabledDescription(): String = "Clients can only set the value to 'false'"
 
     override fun storage(context: Context): KeyValueStore = dataStore
 
