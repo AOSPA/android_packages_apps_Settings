@@ -64,7 +64,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -455,7 +454,6 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_showGid1_shouldSetGid1ToSetting() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_SHOW_SIM_STATUS_DETAILED_INFO);
         final String gid1 = "test_gid1";
         mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL, true);
         doReturn(gid1).when(mTelephonyManager).getGroupIdLevel1();
@@ -478,7 +476,6 @@ public class SimStatusDialogControllerTest {
 
     @Test
     public void initialize_showCarrierId_shouldSetCarrierIdToSetting() {
-        mSetFlagsRule.enableFlags(Flags.FLAG_SHOW_SIM_STATUS_DETAILED_INFO);
         final int carrierId = 1234;
         mPersistableBundle.putBoolean(
                 CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL, true);
@@ -487,17 +484,5 @@ public class SimStatusDialogControllerTest {
         mController.initialize();
 
         verify(mDialog).setText(CARRIER_ID_VALUE_ID, String.valueOf(carrierId));
-    }
-
-    @Test
-    public void initialize_flagDisabled_shouldRemoveGid1Setting() {
-        mSetFlagsRule.disableFlags(Flags.FLAG_SHOW_SIM_STATUS_DETAILED_INFO);
-        mPersistableBundle.putBoolean(CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL, true);
-        doReturn("gid1").when(mTelephonyManager).getGroupIdLevel1();
-
-        mController.initialize();
-
-        verify(mDialog).removeSettingFromScreen(GID1_LABEL_ID);
-        verify(mDialog).removeSettingFromScreen(GID1_VALUE_ID);
     }
 }
