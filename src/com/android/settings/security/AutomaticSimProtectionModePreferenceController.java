@@ -66,7 +66,7 @@ public class AutomaticSimProtectionModePreferenceController extends
     @Override
     public int getAvailabilityStatus() {
         if (!isDeviceSecure()) {
-            return CONDITIONALLY_UNAVAILABLE;
+            return DISABLED_DEPENDENT_SETTING;
         }
 
         return super.getAvailabilityStatus();

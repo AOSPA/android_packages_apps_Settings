@@ -21,6 +21,7 @@ import android.content.Context;
 import android.hardware.biometrics.BiometricPrompt;
 import android.os.Bundle;
 import android.os.OutcomeReceiver;
+import android.security.Flags;
 import android.telephony.PinResult;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -34,6 +35,7 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.PrimarySwitchPreference;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -49,6 +51,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 public class SimPinProtectionToggleController extends TogglePreferenceController implements
         EnterSimPinDialogFragment.SimPinEntryListener {
     private static final String TAG = "AutoManagedSimPin";
+    private static final String MANUAL_PIN_ONLY_KEY = "sim_pin_manual_management_only_toggle";
+    private static final String AUTO_PIN_KEY = "sim_pin_auto_management_toggle";
     private KeyguardManager mKeyguardManager;
 
     public enum EnrollmentState {
@@ -108,8 +112,13 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
 
     private EnrollmentState mEnrollmentState;
 
+    // Used when android.security.Flags.enableAutoSimPinUi() is false.
     @Nullable
-    private SwitchPreferenceCompat mPreference = null;
+    private SwitchPreferenceCompat mSwitchPreference = null;
+
+    // Used when android.security.Flags.enableAutoSimPinUi() is true.
+    @Nullable
+    private PrimarySwitchPreference mPrimarySwitchPreference = null;
 
     @Nullable
     private BaseSimPinFragment mFragment;
@@ -138,7 +147,6 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
     public boolean isChecked() {
         boolean isPlatformManaged = mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
                 mSubId);
-
         boolean isIccLockEnabled = mAutoManagedSimPinHelper.isIccLockEnabled(mSubId);
 
         return isPlatformManaged || isIccLockEnabled;
@@ -175,12 +183,12 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
                 isValidSubscription && mSubscriptionManager.getActiveSubscriptionInfo(
                         mSubId).isEmbedded();
 
-        boolean isAutoSimPinUiEnabled = android.security.Flags.enableAutoSimPinUi();
-
-        if (isDeviceSecure() && !isEmbeddedSim && isAutoSimPinUiEnabled) {
+        if (isDeviceSecure() && !isEmbeddedSim && Flags.enableAutoSimPinUi()) {
             mEnrollmentState = EnrollmentState.ENROLL_TO_AUTOMATIC_PIN_MANAGEMENT;
+            Log.i(TAG, "Enrolling into automatic PIN management.");
             showAuthenticationDialogSimEnrollment();
         } else {
+            Log.i(TAG, "Enrolling into manual PIN management.");
             mEnrollmentState = EnrollmentState.ENROLL_TO_MANUAL_PIN_MANAGEMENT;
             showPinEntryDialog();
         }
@@ -188,8 +196,24 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
 
     @Override
     public int getAvailabilityStatus() {
-        boolean isFlagEnabled = android.security.Flags.autoSimPinManagement();
-        return isFlagEnabled ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+        boolean isFlagEnabled = Flags.autoSimPinManagement();
+        if (!isFlagEnabled) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        // Manual PIN management only available: Show this preference as available but not
+        // the other one.
+        if (getPreferenceKey().equals(MANUAL_PIN_ONLY_KEY) && !Flags.enableAutoSimPinUi()) {
+            return AVAILABLE;
+        }
+
+        // Automatic PIN management as well as manual PIN management: Show this preference as
+        // available but not the other one.
+        if (getPreferenceKey().equals(AUTO_PIN_KEY) && Flags.enableAutoSimPinUi()) {
+            return AVAILABLE;
+        }
+
+        return CONDITIONALLY_UNAVAILABLE;
     }
 
     @Override
@@ -202,7 +226,7 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
             return R.string.sim_protection_mode_protected_by_platform;
         } else if (mAutoManagedSimPinHelper.isIccLockEnabled(mSubId)) {
             return R.string.sim_protection_mode_manually_managed;
-        } else if (!isDeviceSecure() && android.security.Flags.enableAutoSimPinUi()) {
+        } else if (!isDeviceSecure() && Flags.enableAutoSimPinUi()) {
             return R.string.sim_protection_mode_lskf_required;
         }
         return R.string.sim_choose_protection_mode_title;
@@ -216,9 +240,16 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        mPreference = screen.findPreference(getPreferenceKey());
+        if (getPreferenceKey().equals(AUTO_PIN_KEY)) {
+            mPrimarySwitchPreference = screen.findPreference(getPreferenceKey());
+        } else if (getPreferenceKey().equals(MANUAL_PIN_ONLY_KEY)) {
+            mSwitchPreference = screen.findPreference(getPreferenceKey());
+        } else {
+            Log.e(TAG, "Ambiguous preference key: " + getPreferenceKey());
+            return;
+        }
 
-        mPreference.setSummary(getSummary());
+        setPreferenceSummary(getSummary());
     }
 
     /**
@@ -269,15 +300,26 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
         }
     }
 
+    private void setPreferenceSummary(CharSequence summary) {
+        if (mPrimarySwitchPreference != null) {
+            mPrimarySwitchPreference.setSummary(summary);
+        } else if (mSwitchPreference != null) {
+            mSwitchPreference.setSummary(summary);
+        }
+    }
+
     private void setPreferenceState(boolean isChecked) {
         setPreferenceState(isChecked, null);
     }
+
     private void setPreferenceState(boolean isChecked, @Nullable CharSequence summary) {
-        if (mPreference == null) {
-            return;
+        if (mPrimarySwitchPreference != null) {
+            mPrimarySwitchPreference.setChecked(isChecked);
+            mPrimarySwitchPreference.setSummary(summary);
+        } else if (mSwitchPreference != null) {
+            mSwitchPreference.setChecked(isChecked);
+            mSwitchPreference.setSummary(summary);
         }
-        mPreference.setChecked(isChecked);
-        mPreference.setSummary(summary);
         // Required to ensure that the checked state of the preference is updated.
         if (mFragment != null) {
             mFragment.forceUpdatePreferences();
