@@ -1343,7 +1343,7 @@
 
         <activity android:name="Settings$AvailableVirtualKeyboardActivity"
             android:exported="true"
-            android:label="@string/available_virtual_keyboard_category">
+            android:label="@string/available_keyboard_apps_category">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
