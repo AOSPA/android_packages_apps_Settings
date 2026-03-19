@@ -21,10 +21,12 @@ import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.android.settings.flags.Flags
 import com.android.settings.R
+import com.android.settings.flags.Flags
 import com.android.settings.spa.app.appinfo.AppInfoSettingsProvider
+import com.android.settings.utils.HsuUtils
 import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.common.createSettingsPage
@@ -154,7 +156,16 @@ class AllAppListModel(
 
     @Composable
     override fun AppListItemModel<AppRecordWithSize>.AppItem() {
-        AppListItem(onClick = AppInfoSettingsProvider.navigator(app = record.app))
+        val context = LocalContext.current
+        // In Headless System User Mode, non-admin users are restricted from controlling HSU apps
+        // to prevent system-wide impact. HSU app entries are shown but greyed out and unclickable.
+        val enabled =
+            !android.multiuser.Flags.hsuAppManagement() ||
+                HsuUtils.canControlHsuApp(context, record.app)
+        AppListItem(
+            onClick = if (enabled) AppInfoSettingsProvider.navigator(app = record.app) else null,
+            enabled = enabled,
+        )
     }
 }
 
@@ -162,5 +173,5 @@ private enum class SpinnerItem(val stringResId: Int) {
     All(R.string.filter_all_apps),
     Enabled(R.string.filter_enabled_apps),
     Disabled(R.string.filter_apps_disabled),
-    Instant(R.string.filter_instant_apps);
+    Instant(R.string.filter_instant_apps),
 }
