@@ -78,13 +78,13 @@ class AppInfoScreenApiFirst :
 
         preference(
             key = "unused_apps_switch",
-            purpose = R.string.installed_app_detail_manage_app_unused_parameter_purpose,
+            purpose = R.string.installed_app_detail_unused_apps_switch_purpose,
             type = AnyBoolean,
             appliesTo = PreferenceTarget.USER(canManage = ManagementScope.PROFILE_GROUP),
         ) {
             sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
-            preconditions(R.string.installed_app_detail_manage_app_unused_parameter_purpose) {
+            preconditions("App hibernation must be available on the device and the app must not be archived.") {
                 val appInfo =
                     context.getApplicationInfo(parameters.getRequired(PARAM_PACKAGE))
                         ?: return@preconditions Custom(
@@ -101,12 +101,12 @@ class AppInfoScreenApiFirst :
 
                 if (!isFeatureEnabled)
                     return@preconditions Custom(
-                        R.string.installed_app_detail_manage_app_unused_parameter_purpose,
+                        "App hibernation is not available on this device",
                         stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
                     )
                 if (appInfo.isArchived)
                     return@preconditions Custom(
-                        R.string.installed_app_detail_manage_app_unused_parameter_purpose,
+                        "The app is archived",
                         stability = PreconditionStability.UNSTABLE,
                     )
 
@@ -132,7 +132,7 @@ class AppInfoScreenApiFirst :
             }
 
             set {
-                preconditions(R.string.installed_app_detail_settings_screen_purpose) {
+                preconditions("The app must not be a critical system app.") {
                     val appInfo =
                         context.packageManager.getApplicationInfoAsUser(
                             parameters.getRequired(PARAM_PACKAGE),
