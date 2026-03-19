@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
 import com.android.settingslib.metadata.preferencesapi.unsafe
 import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AppLocalePickerApiFirstScreen.KEY, parameterized = true)
@@ -68,7 +69,7 @@ class AppLocalePickerApiFirstScreen :
             if (!TextUtils.isEmpty(packageName) && canDisplayLocaleUi(context, packageName)) {
                 Allowed
             } else {
-                Custom(R.string.app_locale_picker_screen_unavailable)
+                Custom(R.string.app_locale_picker_screen_unavailable, stability = PreconditionStability.UNSTABLE)
             }
         }
 

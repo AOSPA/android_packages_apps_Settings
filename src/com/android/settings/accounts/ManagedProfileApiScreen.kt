@@ -24,6 +24,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ManagedProfileApiScreen.KEY)
@@ -42,7 +43,7 @@ class ManagedProfileApiScreen :
             if (Utils.isNewTabNeeded(context)) {
                 Allowed
             } else {
-                Custom(R.string.managed_profile_settings_screen_not_supported)
+                Custom(R.string.managed_profile_settings_screen_not_supported, stability = PreconditionStability.UNSTABLE)
             }
         }
     }

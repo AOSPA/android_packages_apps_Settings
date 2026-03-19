@@ -25,7 +25,6 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
@@ -33,6 +32,8 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DreamSettingsApiScreen.KEY)
@@ -120,7 +121,7 @@ class DreamSettingsApiScreen :
                 ) {
                     Allowed
                 } else {
-                    Disallowed(R.string.when_to_dream_unavailable)
+                    Custom(R.string.when_to_dream_unavailable, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
                 }
             }
 
@@ -149,7 +150,7 @@ class DreamSettingsApiScreen :
                     !DreamUtils.getLowLightBehaviors(context.resources).isEmpty()) {
                     Allowed
                 } else {
-                    Disallowed(R.string.screensaver_unavailable_due_to_mode)
+                    Custom(R.string.screensaver_unavailable_due_to_mode, stability = PreconditionStability.UNSTABLE)
                 }
             }
 
