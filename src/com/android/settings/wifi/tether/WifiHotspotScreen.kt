@@ -53,6 +53,7 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -115,6 +116,8 @@ open class WifiHotspotScreen(context: Context) :
         get() = ACTION_WIFI_HOTSPOT
 
     override val availabilityDescription = "The device must support wifi hotspot."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         canShowWifiHotspot(context) &&

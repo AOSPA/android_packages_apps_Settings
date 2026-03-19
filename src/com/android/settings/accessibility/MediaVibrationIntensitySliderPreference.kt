@@ -20,6 +20,7 @@ import android.os.VibrationAttributes
 import android.provider.Settings
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 /** Accessibility settings for media vibration, as a slider. */
 // LINT.IfChange
@@ -38,6 +39,8 @@ class MediaVibrationIntensitySliderPreference(context: Context) :
 
     override val availabilityDescription =
         "The device must support media vibration settings."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = context.isMediaVibrationPreferenceSupported()
 

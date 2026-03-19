@@ -33,6 +33,7 @@ import com.android.settings.spa.network.getActivity
 import com.android.settings.supervision.shared.canLaunchPinRecovery
 import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -64,6 +65,8 @@ class SupervisionPinRecoveryPreference :
 
     override val availabilityDescription =
         "The device must support the PIN recovery screen and be able to launch it."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionPinRecoveryScreen()) {

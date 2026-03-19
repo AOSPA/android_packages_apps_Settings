@@ -28,6 +28,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -57,7 +58,9 @@ open class ZenModeDndScreen :
 
     override fun isFlagEnabled(context: Context) = false
 
-    override val availabilityDescription = "The DND mode must be available."
+    override val availabilityDescription = "The device must support DND mode."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = context.hasDndMode()
 
@@ -96,6 +99,8 @@ open class ZenModeDndScreen :
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 

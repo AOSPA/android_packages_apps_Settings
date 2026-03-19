@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.specialaccess
 
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.Manifest.permission.SYSTEM_ALERT_WINDOW
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
@@ -96,6 +97,8 @@ open class DisplayOverOtherAppsAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val availabilityDescription =
         "The user must not be a managed profile. The app must be enabled, and must have requested system alert window permission."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&

@@ -30,6 +30,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -86,6 +87,8 @@ class OneFingerPanningSwitchPreference :
 
     override val availabilityDescription =
         "The device must not be during setup, must support the one finger panning gesture, and must support window magnification."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         return Flags.enableMagnificationOneFingerPanningGesture() &&

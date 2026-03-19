@@ -27,6 +27,7 @@ import com.android.settings.Settings.VibrationIntensitySettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -60,6 +61,8 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
 
     override val availabilityDescription =
         "The device must have a vibrator and support at least two vibration intensity levels."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.hasVibrator && context.getSupportedVibrationIntensityLevels() > 1

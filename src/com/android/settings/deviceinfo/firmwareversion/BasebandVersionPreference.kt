@@ -24,6 +24,7 @@ import com.android.settings.Utils
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
@@ -57,6 +58,8 @@ class BasebandVersionPreference :
 
     override val availabilityDescription =
         "The device must be mobile data capable or voice capable."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)

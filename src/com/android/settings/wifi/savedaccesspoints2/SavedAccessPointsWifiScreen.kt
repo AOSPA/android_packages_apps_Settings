@@ -30,6 +30,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -80,6 +81,8 @@ open class SavedAccessPointsWifiScreen :
         makeLaunchIntent(context, SavedAccessPointsSettingsActivity::class.java, metadata?.key)
 
     override val availabilityDescription = "There must be at least one saved network or subscription."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         val wifiManager = context.wifiManager ?: return false
@@ -182,6 +185,8 @@ open class SavedAccessPointsWifiScreen :
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 

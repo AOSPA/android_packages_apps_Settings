@@ -27,6 +27,7 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -79,6 +80,8 @@ class RampingRingerVibrationSwitchPreference(
 
     override val availabilityDescription =
         "The device must be voice capable and ramping ringer must not be enabled by telephony config."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         deviceConfig.isVoiceCapable(context) && !deviceConfig.isTelephonyRampingRingerEnabled()

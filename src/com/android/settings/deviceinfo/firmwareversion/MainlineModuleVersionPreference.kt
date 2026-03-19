@@ -27,6 +27,7 @@ import com.android.settings.utils.getLocale
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
@@ -100,6 +101,8 @@ class MainlineModuleVersionPreference :
 
     override val availabilityDescription =
         "The device must have a mainline module version."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = getModuleVersion(context).isNotEmpty()
 

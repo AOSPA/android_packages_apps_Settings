@@ -31,6 +31,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -93,6 +94,8 @@ open class NfcAndPaymentScreen :
     override val availabilityDescription =
         "The device must support the 'nfc' and 'nfc_host_card_emulation' features."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context): Boolean =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_NFC) &&
             context.packageManager.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
@@ -126,6 +129,8 @@ open class NfcAndPaymentScreen :
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+    override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

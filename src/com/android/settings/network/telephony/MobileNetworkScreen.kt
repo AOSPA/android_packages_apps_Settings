@@ -41,6 +41,7 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -109,6 +110,8 @@ private constructor(
     override fun getMetricsCategory() = SettingsEnums.MOBILE_NETWORK
 
     override val availabilityDescription = "The subscription id must be valid."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean =
         SubscriptionManager.isValidSubscriptionId(subId)

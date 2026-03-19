@@ -39,6 +39,7 @@ import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.MUSTPASS
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
@@ -73,6 +74,8 @@ class CallVolumePreference(private val audioHelper: AudioHelper) :
     override fun getIcon(context: Context) = R.drawable.ic_local_phone_24_lib
 
     override val availabilityDescription = "The device must support configuring call volume in Settings and not be a single volume device."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_call_volume) && !audioHelper.isSingleVolume

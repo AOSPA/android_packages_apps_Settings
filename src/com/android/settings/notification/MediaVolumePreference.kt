@@ -35,6 +35,7 @@ import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
@@ -73,6 +74,8 @@ class MediaVolumePreference(private val audioHelper: AudioHelper) :
         }
 
     override val availabilityDescription = "The device must support configuring media volume in Settings."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_media_volume)

@@ -31,6 +31,7 @@ import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.fuelgauge.BatteryUtils
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -77,6 +78,8 @@ class BatteryHeaderPreference :
     }
 
     override val availabilityDescription = "The device must have a battery"
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         com.android.settings.Utils.isBatteryPresent(context)

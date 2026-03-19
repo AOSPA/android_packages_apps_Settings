@@ -52,6 +52,7 @@ import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -91,6 +92,8 @@ class SeparateRingVolumePreference(private val audioHelper: AudioHelper) :
     override fun getIcon(context: Context) = context.getIconRes()
 
     override val availabilityDescription = "The device must support separate volume controls."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = !audioHelper.isSingleVolume
 

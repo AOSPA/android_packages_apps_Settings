@@ -38,6 +38,7 @@ import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
@@ -76,6 +77,8 @@ class WifiCallingMainSwitchPreference(private val subId: Int) :
             WifiCallingQueryImsState(context, subId).isAllowUserControl
 
     override val availabilityDescription = "The subscription ID must be valid and wifi calling must be ready."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         SubscriptionManager.isValidSubscriptionId(subId) &&

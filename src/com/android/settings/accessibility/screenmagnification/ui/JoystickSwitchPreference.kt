@@ -25,6 +25,7 @@ import com.android.settings.accessibility.extensions.isWindowMagnificationSuppor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
@@ -58,6 +59,8 @@ class JoystickSwitchPreference :
 
     override val availabilityDescription =
         "The device must not be during setup, must support window magnification, and must support the joystick magnification setting."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() &&

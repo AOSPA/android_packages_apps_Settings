@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -95,6 +96,8 @@ private constructor(
     override fun getMetricsCategory() = SettingsEnums.WIFI_CALLING_FOR_SUB
 
     override val availabilityDescription = "The subscription ID must be valid."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = isValidSubscriptionId(subId)
 

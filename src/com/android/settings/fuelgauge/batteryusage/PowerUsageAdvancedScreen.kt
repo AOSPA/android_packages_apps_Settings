@@ -25,6 +25,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_BATTERY
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -72,6 +73,8 @@ open class PowerUsageAdvancedScreen : PreferenceScreenMixin, PreferenceAvailabil
 
     override val availabilityDescription =
         "The device must support showing battery usage in settings."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         featureFactory.powerUsageFeatureProvider.isBatteryUsageEnabled()
