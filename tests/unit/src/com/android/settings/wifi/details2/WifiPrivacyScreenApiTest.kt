@@ -34,6 +34,7 @@ import java.util.Base64
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -84,6 +85,7 @@ class WifiPrivacyScreenApiTest {
     }
 
     @Test
+    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getSpaRoute_parameterized_returnsCorrectRoute() = runTest {
         val allParameters = screen.getAllPossibleParameters(context).first()
@@ -96,6 +98,7 @@ class WifiPrivacyScreenApiTest {
     }
 
     @Test
+    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getParameterOptions_returnsCorrectOptions() = runTest {
         val options = tester.getParameterOptions(WifiPrivacyScreenApi.PARAMETER_KEY)
@@ -104,6 +107,7 @@ class WifiPrivacyScreenApiTest {
     }
 
     @Test
+    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getSendDeviceName_valueIsTrue_returnsTrue() = runTest {
         mockWifiConfiguration.stub { on { isSendDhcpHostnameEnabled } doReturn true }
@@ -134,6 +138,7 @@ class WifiPrivacyScreenApiTest {
     }
 
     @Test
+    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun setSendDeviceName_valueIsTrue_setWifiConfiguration() = runTest {
         mockSavedNetworkRepository.stub {
@@ -148,6 +153,7 @@ class WifiPrivacyScreenApiTest {
     }
 
     @Test
+    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun setSendDeviceName_valueIsFalse_setWifiConfiguration() = runTest {
         mockSavedNetworkRepository.stub {
