@@ -15,6 +15,7 @@
  */
 package com.android.settings.supervision
 
+import android.app.Application
 import android.app.KeyguardManager
 import android.app.supervision.ISupervisionManager
 import android.app.supervision.SupervisionManager
@@ -27,6 +28,7 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.UserInfo
+import android.os.Looper
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
 import android.platform.test.annotations.DisableFlags
@@ -35,7 +37,9 @@ import android.platform.test.flag.junit.SetFlagsRule
 import android.widget.Button
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.Lifecycle
 import androidx.preference.Preference
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
@@ -43,6 +47,7 @@ import com.android.settings.supervision.credentialmanagement.SupervisionPinRecov
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
+import com.android.settingslib.preference.launchFragmentScenario
 import com.android.settingslib.widget.BannerMessagePreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
@@ -56,6 +61,7 @@ import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowServiceManager
 
 @RunWith(AndroidJUnit4::class)
@@ -277,6 +283,42 @@ class SupervisionRecoveryBannerPreferenceTest {
                 .findViewById<Button>(R.id.banner_positive_btn)
         positiveButton.performClick()
         verifyPinRecoveryActivityStarted(SupervisionPinRecoveryActivity.ACTION_POST_SETUP_VERIFY)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
+    fun recoveryBannerBecomesVisible_recyclerViewScrollsToTop() {
+        val app = ApplicationProvider.getApplicationContext<Application>()
+        shadowOf(app).setSystemService(Context.USER_SERVICE, mockUserManager)
+        shadowOf(app).setSystemService(Context.KEYGUARD_SERVICE, mockKeyguardManager)
+        shadowOf(app).setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
+
+        whenever(mockSupervisionManager.getSupervisionRecoveryInfo()).thenReturn(null)
+        setHasValidRecoveryMethod(true)
+
+        val screen = SupervisionDashboardScreen()
+        val scenario = screen.launchFragmentScenario()
+        scenario.onFragment { fragment ->
+            val bannerPreference =
+                fragment.findPreference<Preference>(SupervisionRecoveryBannerPreference.KEY)!!
+            assertThat(bannerPreference.isVisible).isFalse()
+
+            val recyclerView = fragment.listView!!
+            recyclerView.scrollToPosition(1)
+            shadowOf(Looper.getMainLooper()).idle()
+            assertThat(bannerPreference.isVisible).isFalse()
+
+            setSupervisionRecoveryInfo(STATE_PENDING)
+            setHasValidRecoveryMethod(false)
+
+            scenario.moveToState(Lifecycle.State.STARTED)
+            scenario.moveToState(Lifecycle.State.RESUMED)
+            shadowOf(Looper.getMainLooper()).idle()
+
+            val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+            assertThat(bannerPreference.isVisible).isTrue()
+            assertThat(layoutManager.findFirstCompletelyVisibleItemPosition()).isEqualTo(0)
+        }
     }
 
     private fun setHasValidRecoveryMethod(hasValidRecoveryMethod: Boolean) {
