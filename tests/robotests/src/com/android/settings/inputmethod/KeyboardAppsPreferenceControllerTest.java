@@ -140,7 +140,8 @@ public class KeyboardAppsPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary("label");
+        verify(mPreference)
+                .setSummary(mContext.getString(R.string.keyboard_apps_category_summary, "label"));
     }
 
     @Test
@@ -162,6 +163,12 @@ public class KeyboardAppsPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setSummary(formatter.unicodeWrap(label1) + " and " + formatter.unicodeWrap(label2));
+        verify(mPreference)
+                .setSummary(
+                        mContext.getString(
+                                R.string.keyboard_apps_category_summary,
+                                formatter.unicodeWrap(label1)
+                                        + " and "
+                                        + formatter.unicodeWrap(label2)));
     }
 }

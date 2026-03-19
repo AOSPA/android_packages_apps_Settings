@@ -92,6 +92,9 @@ public class KeyboardAppsPreferenceController extends AbstractPreferenceControll
         for (String label : labels) {
             summaries.add(bidiFormatter.unicodeWrap(label));
         }
-        preference.setSummary(ListFormatter.getInstance().format(summaries));
+        preference.setSummary(
+                mContext.getString(
+                        R.string.keyboard_apps_category_summary,
+                        ListFormatter.getInstance().format(summaries)));
     }
 }
