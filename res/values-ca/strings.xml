@@ -328,24 +328,15 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Utilitza la configuració regional predeterminada"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Utilitza el format de 24 hores"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Hora"</string>
-    <!-- no translation found for time_format_category_title (3122743852067365261) -->
-    <skip />
-    <!-- no translation found for time_format_page_title (2599662358219245734) -->
-    <skip />
-    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
-    <skip />
-    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
-    <skip />
-    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
-    <skip />
-    <!-- no translation found for time_format_automatic (8627801531369181488) -->
-    <skip />
-    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
-    <skip />
-    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
-    <skip />
-    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
-    <skip />
+    <string name="time_format_category_title" msgid="3122743852067365261">"Format de 12 hores o 24 hores"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"Format d\'hora"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"Més opcions de configuració"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"Les aplicacions utilitzaran el teu format d\'hora segons aquesta opció de configuració"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"Selecciona un format d\'hora"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"Automàtic"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"Les aplicacions utilitzen el format de 12 hores o 24 hores segons l\'idioma de l\'aplicació"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"Format de 12 hores"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"Format de 24 hores"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Zona horària"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Zona horària de casa"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Selecciona una zona horària"</string>
@@ -939,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Vols reiniciar el dispositiu?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"El registre detallat de l\'NFC només està indicat per a activitats de desenvolupament. Les dades de l\'NFC addicionals estan incloses als informes d\'errors, que poden contenir informació privada. Reinicia el dispositiu per canviar aquesta configuració."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Reinicia"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Activat"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Desactivat"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Pantalles externes"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Pantalla integrada"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Cursor universal"</string>
@@ -1167,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Per millorar la precisió de la ubicació i per a altres finalitats, una aplicació desconeguda vol activar la cerca de xarxes tot i que la Wi‑Fi està desactivada.\n\nVols permetre-ho per a totes les aplicacions?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Denega"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligatori"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Aquesta és una xarxa compartida. Has d\'iniciar la sessió per fer canvis."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contacta amb el propietari de la xarxa o amb l\'administrador del dispositiu per fer canvis."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Aquesta xarxa no té accés a Internet. Vols mantenir-hi la connexió?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Alguns serveis i aplicacions poden no funcionar amb una connectivitat limitada. Utilitzar igualment?"</string>
@@ -1514,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Cancel·la"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Protegeix la targeta SIM"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Mode de protecció amb bloqueig de SIM"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Bloqueja la SIM"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Gestionat per Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"No gestionat per Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"La inscripció s\'ha fet correctament"</string>
@@ -1524,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"PIN gestionat per Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Valor del PIN gestionat per Android:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"No s\'ha pogut obtenir el PIN"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Sol·licita el PIN per utilitzar el telèfon"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"PIN de la SIM gestionat per Android"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"Cal el PIN per utilitzar el telèfon"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Cal una pantalla de bloqueig per a la protecció automàtica de la SIM; ara només està disponible el mode manual."</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Introdueix el PIN actual de la SIM"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Introdueix el PIN actual de la targeta SIM"</string>
@@ -1540,8 +1525,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Confirma el PIN de la SIM nou"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Els PIN no coincideixen. Confirma el PIN de la SIM nou."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"El PIN no és correcte. Intents restants: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
-    <skip />
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Introdueix el codi PIN actual de la targeta SIM"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Utilitzar <xliff:g id="CARRIER">%1$s</xliff:g> per a dades mòbils?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Estàs utilitzant <xliff:g id="CARRIER2_0">%2$s</xliff:g> per a les dades mòbils. Si canvies a <xliff:g id="CARRIER1">%1$s</xliff:g>, ja no es farà servir <xliff:g id="CARRIER2_1">%2$s</xliff:g> per a les dades mòbils."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Utilitza <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2617,8 +2601,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema fosc ampliat"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Configuració del tema fosc ampliat"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Obre la configuració del tema fosc ampliat"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"El tema fosc ampliat enfosqueix automàticament més aplicacions per millorar la llegibilitat.\n\nPer utilitzar el tema fosc ampliat en una aplicació, mantén activat el commutador corresponent. Si una aplicació no es veu bé, desactiva el commutador per utilitzar el tema propi de l\'aplicació."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Suprimeix les animacions"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Redueix el moviment a la pantalla"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Parpelleig del cursor de text"</string>
@@ -2947,6 +2930,8 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
+    <skip />
     <string name="battery_details_title" msgid="3289680399291090588">"Ús de la bateria de l\'aplicació"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalls d\'ús"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Redueix el consum de la bateria"</string>
@@ -3673,8 +3658,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"notificació Wi‑Fi, notificació wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ús de dades"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Utilitza el format de 24 hores"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"notificacions d\'hora, notificacions de zona horària, DST, horari d\'estiu, marc de zona horària"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Obre amb"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Aplicacions"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"zona horària"</string>
@@ -3795,10 +3779,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"S\'ha silenciat el volum de les notificacions; les notificacions vibraran"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> (silenciat)"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"No disponible perquè el so s\'ha silenciat"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"So de trucada, alerta de so de trucada, SIM, so de trucada de la SIM"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"So de trucada"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"So de trucada del telèfon"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"So de notificació predeterminat"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"So proporcionat per l\'app"</string>
@@ -4622,23 +4604,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pot accedir a tots els fitxers"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatització de la pantalla"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Aquesta aplicació podrà veure el contingut de la pantalla d\'altres aplicacions i interaccionar-hi per ajudar-te a completar tasques, fins i tot quan les aplicacions estiguin en segon pla"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> podrà veure el contingut de la pantalla d\'altres aplicacions i interaccionar-hi per ajudar-te a completar tasques"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Si no permets l\'automatització de la pantalla, és possible que <xliff:g id="ID_1">%1$s</xliff:g> pugui continuar interaccionant amb les aplicacions que estan connectades a <xliff:g id="ID_2">%1$s</xliff:g> d\'altres maneres"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Permet que les aplicacions t\'ajudin a completar tasques interaccionant amb el contingut de la pantalla d\'altres aplicacions"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Pregunta sempre"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Permet sempre"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"No permetis"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
-    <skip />
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Permet l\'automatització de pantalla"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"No hi ha cap aplicació permesa sempre"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Aquí es mostraran les aplicacions que tinguin permís per utilitzar sempre l\'automatització de pantalla de <xliff:g id="ID_1">%1$s</xliff:g>. Les aplicacions que només obtinguin un permís per sessió no es mostraran."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Amb permís"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Sense permís"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificacions de pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permet les notificacions de pantalla completa d\'aquesta aplicació"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permet que aquesta aplicació mostri notificacions que ocupen tota la pantalla quan el dispositiu està bloquejat. Les aplicacions poden utilitzar aquesta opció per destacar alarmes, trucades entrants o altres notificacions urgents."</string>
@@ -4675,6 +4651,8 @@
     <string name="disconnected" msgid="3469373726996129247">"No connectat"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"No connectat"</string>
     <string name="apps_summary" msgid="4007416751775414252">"S\'han instal·lat <xliff:g id="COUNT">%1$d</xliff:g> aplicacions"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> utilitzat - <xliff:g id="FREE_SPACE">%2$s</xliff:g> lliures"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema fosc, cos de font, brillantor"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Ús mitjà de memòria: <xliff:g id="USED_MEMORY">%1$s</xliff:g> de <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
@@ -5837,7 +5815,8 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> per <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"L\'aplicació es reiniciarà quan canviïs la relació d\'aspecte. És possible que es perdin els canvis sense desar. Pot ser que algunes aplicacions no estiguin optimitzades per a determinades relacions d\'aspecte."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Experiència"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Comandament de joc"</string>
+    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor d\'empremtes digitals"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificacions amb flaix"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Sobre les notificacions amb flaix"</string>
@@ -6222,12 +6201,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"El dispositiu no està registrat a SOS per satèl·lit. Comprova que tinguis connexió a Internet perquè el dispositiu completi el registre automàticament."</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Activa el servei d\'instal·lador d\'aplicacions web"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Activa aquest servei per instal·lar llocs web directament a la pantalla d\'inici a fi d\'utilitzar-los com si fossin aplicacions normals."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"Accés a dispositius d\'interfície humana"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"Permet que l\'aplicació detecti dispositius d\'interfície humana (HID)"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"Si permets l\'accés, és possible que les aplicacions malicioses reprogramin els teus HID per posar en perill el sistema. Per exemple, les aplicacions podrien simular entrades del teclat o del ratolí per controlar el teu sistema quan no està obert. Assegura\'t que confies en les aplicacions quan permetis l\'accés."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"hid, humà, accés, dispositiu"</string>
 </resources>

@@ -328,24 +328,15 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Sebenzisa okuzenzakalelayo kwasendaweni"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Sebenzisa ifomethi ye-24 amahora"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Isikhathi"</string>
-    <!-- no translation found for time_format_category_title (3122743852067365261) -->
-    <skip />
-    <!-- no translation found for time_format_page_title (2599662358219245734) -->
-    <skip />
-    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
-    <skip />
-    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
-    <skip />
-    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
-    <skip />
-    <!-- no translation found for time_format_automatic (8627801531369181488) -->
-    <skip />
-    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
-    <skip />
-    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
-    <skip />
-    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
-    <skip />
+    <string name="time_format_category_title" msgid="3122743852067365261">"Ifomethi yamahora angu-12 / yamahora ayi-24"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"Ifomethi yesikhathi"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"Amanye amasethingi"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"Ama-application azosebenzisa ifomethi yakho yesikhathi ngokusekelwe kule sethingi"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"Khetha ifomethi yesikhathi"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"Okuzenzakalelayo"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"Ama-app asebenzisa ifomethi yamahora ayi-12 / yamahora angu-24 ngokusekelwe olimini lwe-app"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"Ifomethi yamahora ayi-12"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"Ifomethi yamahora angama-24"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Indawo yesikhathi"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Izoni yesikhathi sasekhaya"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Khetha izoni yesikhathi"</string>
@@ -939,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Qalisa kabusha idivayisi?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Ukungena kwe-NFC okuningiliziwe kuhloselwe izinjongo zokuthuthukiswa kuphela. Idatha ye-NFC eyengeziwe ifakwe phakathi kwimibiko yeziphazamisi, engase ibe nolwazi olugodliwe. Qala kabusha idivayisi ukuze ushintshe le sethingi."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Qala kabusha"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Kuvuliwe"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Kuvaliwe"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Izibonisi zangaphandle"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Isibonisi esakhelwe phakathi"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"I-cursor kawonkewonke"</string>
@@ -1167,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Ukuze uthuthukse ukunemba kwendawo nangezinye izinhloso, uhlelo lokusebenza olungaziwa lufuna ukuvula ukuskena inethiwekhi, ngisho noma i-Wi‑Fi ivaliwe.\n\nVumela lokhu kuzo zonke izinhlelo zokusebenza ezifuna ukuskena?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Phika"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*kudingekile"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Lena yinethiwekhi eyabiwe. Udinga ukungena ngemvume ukuze wenze izinguquko."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Xhumana nomnikazi wenethiwekhi noma umlawuli wedivayisi ukuze wenze izinguquko."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Le nethiwekhi ayinakho ukufinyelela kwe-inthanethi. Hlala uxhumekile?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Ezinye izinhlelo zokusebenza namasevisi kungenzeka zingasebenzi ngenxa yokuxhumeka okukhawulelwe. Sebenzisa noma kunjalo?"</string>
@@ -1514,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Khansela"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Vikela i-SIM card"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Imodi yokuvikela ukukhiya i-SIM"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Khiya i-SIM"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Ilawulwa yi-Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Ayilawulwa yi-Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Ukubhaliswa kuphumelele"</string>
@@ -1524,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Iphinikhodi elawulwa yi-Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Inani Lephinikhodi elawulwa yi-Android:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Yehlulekile ukuthola Iphinikhodi"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Dinga Iphinikhodi ukusebenzisa ifoni"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Iphinikhodi ye-SIM ilawulwa yi-Android"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"Iphinikhodi iyadingeka ukuze usebenzise ifoni"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Kudingeka ukukhiya isikrini ukuze kuvikelwe i-SIM ngokuzenzekelayo, okwenziwa ngesandla kuphela okutholakalayo manje"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Faka Iphinikhodi ye-SIM yamanje"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Faka Iphinikhodi yamanje ye-SIM card"</string>
@@ -1540,8 +1525,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Qinisekisa Iphinikhodi entsha ye-SIM"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Amaphinikhodi awafani. Qinisekisa Iphinikhodi entsha ye-SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Iphinikhodi okungeyona. Imizamo esele: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
-    <skip />
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Faka ikhodi yephinikhodi yamanje ye-SIM card"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Sebenzisa i-<xliff:g id="CARRIER">%1$s</xliff:g> yedatha yeselula?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Usebenzisa i-<xliff:g id="CARRIER2_0">%2$s</xliff:g> yedatha yeselula. Uma ushintshela ku-<xliff:g id="CARRIER1">%1$s</xliff:g>, i-<xliff:g id="CARRIER2_1">%2$s</xliff:g> ngeke isasetshenziselwa idatha yeselula"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Sebenzisa i-<xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2618,8 +2602,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Itimu emnyama enwetshiwe"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Amasethingi anwetshiwe etimu emnyama"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Vula amasethingi anwetshiwe etimu emnyama"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Itimu emnyama eyengeziwe yenza ngokuzenzekelayo ama-app amaningi abe mnyama ukuze kufundeke kangcono.\n\nGcina ukuguqula kwe-app kuvuliwe ukuze usebenzise itimu emnyama eyengeziwe Uma i-app ingabukeki kahle, vala ukuguqula kwayo ukuze usebenzise itimu ye-app."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Susa ukugqwayiza"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Yehlisa ukunyakaza esikrinini"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Ukucwayiza kwe-cursor yombhalo"</string>
@@ -2946,6 +2929,8 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
+    <skip />
     <string name="battery_details_title" msgid="3289680399291090588">"Ukusetshenziswa kwebhethri yi-app"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Sebenzisa imininingwane"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Lungisa amandla okusebenza"</string>
@@ -3672,8 +3657,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Isaziso se-Wi-Fi, isaziso se-wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ukusetshenziswa kwedatha"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Sebenzisa ifomethi ye-24 amahora"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"izaziso zesikhathi, izaziso zezoni yesikhathi, i-DST, ukusetha amawashi isikhathi sokukhanya, i-offset yezoni yesikhathi"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Vula nge-"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Izinhlelo zokusebenza"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"izoni yendawo"</string>
@@ -3794,10 +3778,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Ivolumu yezaziso ithulisiwe, izaziso zizodlidliza"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> kuthulisiwe"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Ayitholakali ngoba ukukhala kuthulisiwe"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Ithoni yokukhala, Umsindo wesaziso, I-SIM, Ithoni Yokukhala ye-SIM"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Ithoni yokukhala"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Iringithoni yefoni"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Umsindo wesaziso ozenzakalelayo"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Uhlelo lokusebenza lunikezele ngomsindo"</string>
@@ -4621,23 +4603,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Ingafinyelela kuwo wonke amafayela"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Ukuzenzekela kwesikrini"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Le app izokwazi ukubona nokuxhumana nekhontenti yesikrini samanye ama-app ukuze ikusize uqedele imisebenzi, ngisho noma ama-app angemuva"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"I-<xliff:g id="ID_1">%1$s</xliff:g> izokwazi ukubona nokuxhumana nekhontenti yesikrini samanye ama-app ukuze ikusize uqedele imisebenzi"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Uma ungakuvumeli ukuzenzekela kwesikrini, i-<xliff:g id="ID_1">%1$s</xliff:g> isengakwazi ukuxhumana nama-app axhunywe ku-<xliff:g id="ID_2">%1$s</xliff:g> ngezinye izindlela"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Vumela ama-app ukuthi akusize uqedele imisebenzi ngokuxhumana nekhontenti yesikrini samanye ama-app"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Buza njalo"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Vumela njalo"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Ungavumeli"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
-    <skip />
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Vumela ukuziqalisa kwesikrini"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"Awekho ama-app avunyelwe njalo"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Ama-app avunyelwe ukusebenzisa njalo ukuzenzekela kwesikrini nge-<xliff:g id="ID_1">%1$s</xliff:g> azoboniswa lapha. Ama-app athola imvume yeseshini ngayinye kuphela ngeke aboniswe."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Kuvumelekile"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Akuvunyelwe"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Izaziso zesikrini esigcwele"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Vumela izaziso zesikrini esigcwele ukusuka kule app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Vumela i-app ukuthi ibonise izaziso ezithatha isikrini esigcwele lapho idivayisi ikhiyiwe. Ama-app angasebenzisa lokhu ukuze agqamise ama-alamu, amakholi angenayo, noma ezinye izaziso eziphuthumayo."</string>
@@ -4674,6 +4650,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Akuxhunyiwe"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Akuxhunyiwe"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> izinhlelo zokusebenza ezifakiwe"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"U-<xliff:g id="PERCENTAGE">%1$s</xliff:g> usetshenzisiwe - u-<xliff:g id="FREE_SPACE">%2$s</xliff:g> uvulekile"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Itimu emnyama, usayizi wefonti, ukukhanya"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Okumaphakathi okungu-<xliff:g id="USED_MEMORY">%1$s</xliff:g> kokungu-<xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> imemori esetshenzisiwe"</string>
@@ -5836,7 +5814,8 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"I-<xliff:g id="NUMERATOR">%1$s</xliff:g> ka-<xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"I-app izoqala kabusha uma ushintsha ukubukeka kwesilinganiselo. Ungase ulahlekelwe yizinguquko ezingalondoloziwe. Amanye ama-app kungenzeka angalungiselelwa ukubukeka kwesilinganiselo okuthile."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Isipiliyoni"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
+    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Inzwa yesigxivizo somunwe"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Izaziso zokukhanya"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Mayelana nezaziso ze-flash"</string>
@@ -6221,12 +6200,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Idivayisi yakho ayibhaliselwanga Isethelayithi yokuxhumana ngezimo eziphuthumayo. Qinisekisa ukuthi uxhumeke ku-inthanethi ukuze idivayisi yakho iqedele ukubhalisa ngokuzenzakalelayo"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Vula Isevisi Yesifaki se-App Yewebhu"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Vula le sevisi ukuze ufake amawebhusayithi ngokuqondile esikrinini sakho sasekhaya, ukuze uwasebenzise njengama-app avamile."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"Ukufinyelela idivayisi yesixhumi esibonakalayo somuntu"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"Vumela i-app ukuthi ithole amadivayisi esixhumi esibonakalayo somuntu (ama-HID)"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"Uma uvumela ukufinyelela, ama-app anonya angase ahlele kabusha ama-HID akho ukuze ahlasele isistimu yakho. Ngokwesibonelo, ama-app angalingisa ikhibhodi yakho noma okokufaka kwemawusi ukuze alawule isistimu yakho uma ingavuliwe. Qiniseka ukuthi uwathembile ama-app uma uvumela ukufinyelela."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"fihla, umuntu, ukufinyelela, idivayisi"</string>
 </resources>

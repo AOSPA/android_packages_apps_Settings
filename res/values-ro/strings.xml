@@ -328,24 +328,15 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Folosește codul local prestabilit"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Folosește formatul de 24 de ore"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Oră"</string>
-    <!-- no translation found for time_format_category_title (3122743852067365261) -->
-    <skip />
-    <!-- no translation found for time_format_page_title (2599662358219245734) -->
-    <skip />
-    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
-    <skip />
-    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
-    <skip />
-    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
-    <skip />
-    <!-- no translation found for time_format_automatic (8627801531369181488) -->
-    <skip />
-    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
-    <skip />
-    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
-    <skip />
-    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
-    <skip />
+    <string name="time_format_category_title" msgid="3122743852067365261">"Format de 12 / 24 de ore"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"Formatul orei"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"Mai multe setări"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"Aplicațiile vor folosi formatul orei în funcție de această setare"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"Selectează un format de oră"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"Automat"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"Aplicațiile folosesc formatul de 12 / 24 de ore în funcție de limba aplicației"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"Format de 12 ore"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"Format de 24 de ore"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Fus orar"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Fusul orar de acasă"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Selectează un fus orar"</string>
@@ -939,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Repornești dispozitivul?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Înregistrarea NFC detaliată este menită exclusiv pentru dezvoltare Datele NFC suplimentare sunt incluse în rapoartele de eroare, care pot conține informații private. Repornește dispozitivul ca să schimbi setarea."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Repornește"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Activat"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Dezactivat"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Ecrane externe"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Ecran încorporat"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Cursor universal"</string>
@@ -1167,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Pentru a îmbunătăți precizia locației, dar și în alte scopuri, o aplicație necunoscută solicită activarea scanării rețelei, chiar și când rețeaua Wi-Fi este dezactivată.\n\nAcorzi permisiune pentru toate aplicațiile care solicită scanarea?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Respinge"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*obligatoriu"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Aceasta este o rețea comună. Trebuie să te conectezi pentru a aduce modificări."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contactează proprietarul rețelei sau administratorul dispozitivului pentru a aduce modificări."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Această rețea nu are acces la internet. Menții conexiunea?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Unele aplicații și servicii pot să nu funcționeze din cauza conectivității limitate. Folosești oricum?"</string>
@@ -1514,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Anulează"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Protejează cardul SIM"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Mod de protecție prin blocarea SIM-ului"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Blochează cardul SIM"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Gestionată de Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Nu este gestionată de Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Înscrierea a reușit"</string>
@@ -1524,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"PIN gestionat de Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Valoarea PIN-ului gestionat de Android:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Nu s-a putut prelua codul PIN"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Necesită un cod PIN pentru a folosi telefonul."</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"PIN-ul SIM-ului este gestionat de Android"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"Este necesar un cod PIN pentru a folosi telefonul."</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Pentru protecția automată a cardului SIM, este necesar un ecran de blocare. Momentan, este disponibilă doar protecția manuală."</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Introdu codul PIN actual al SIM"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Introdu codul PIN actual al cardului SIM"</string>
@@ -1540,8 +1525,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Confirmă noul PIN al cardului SIM"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Codurile PIN nu corespund. Confirmă noul PIN al cardului SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Codul PIN este greșit. Încercări rămase: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>."</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
-    <skip />
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Introdu codul PIN actual al cardului SIM"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Folosești <xliff:g id="CARRIER">%1$s</xliff:g> pentru date mobile?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Folosești <xliff:g id="CARRIER2_0">%2$s</xliff:g> pentru datele mobile. Când comuți la <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> nu va mai fi folosit pentru date mobile."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Folosește <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2617,8 +2601,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema întunecată extinsă"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Setări pentru tema întunecată extinsă"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Deschide setările pentru tema întunecată extinsă"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Tema întunecată extinsă întunecă automat mai multe aplicații pentru o lizibilitate mai bună.\n\nLasă comutatorul unei aplicații activat pentru a folosi tema întunecată extinsă. Dacă o aplicație nu se afișează adecvat, dezactivează comutatorul pentru a folosi tema aplicației."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Elimină animațiile"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Redu mișcarea de pe ecran"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Clipirea cursorului de text"</string>
@@ -2945,6 +2928,8 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
+    <skip />
     <string name="battery_details_title" msgid="3289680399291090588">"Utilizarea bateriei pentru aplicații"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Detalii despre utilizare"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajustează utilizarea de energie"</string>
@@ -3671,8 +3656,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notificare Wi-Fi, notificare Wi-Fi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"utilizarea datelor"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Folosește formatul de 24 de ore"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"notificări despre oră, notificări despre fusul orar, ora de vară, decalajul fusului orar"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Deschide cu"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Aplicații"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"fus orar"</string>
@@ -3793,10 +3777,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Volumul pentru notificări este dezactivat, dispozitivul va vibra la notificări"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> este dezactivat"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Indisponibil deoarece soneria este dezactivată"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Ton de apel, Alertă pentru ton de apel, SIM, Ton de apel SIM"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Ton de apel"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Ton de apel al telefonului"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Sunet de notificare prestabilit"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Sunet oferit de aplicație"</string>
@@ -4620,23 +4602,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Poate accesa toate fișierele"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatizarea ecranului"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Aplicația va putea să vadă conținutul de pe ecran din alte aplicații și să interacționeze cu acesta pentru a te ajuta să finalizezi activități, chiar și atunci când aplicațiile sunt în fundal"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> va putea să vadă conținutul de pe ecran din alte aplicații și să interacționeze cu acesta pentru a te ajuta să finalizezi activități"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Dacă nu permiți automatizarea ecranului, <xliff:g id="ID_1">%1$s</xliff:g> poate interacționa în continuare cu aplicațiile conectate la <xliff:g id="ID_2">%1$s</xliff:g> în alte moduri"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Permite aplicațiilor să te ajute să finalizezi activități interacționând cu conținutul de pe ecran al altor aplicații"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Întreabă de fiecare dată"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Permite întotdeauna"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Nu permite"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
-    <skip />
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Permite automatizarea ecranului"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"Nu există aplicații permise întotdeauna"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Aplicațiile cărora <xliff:g id="ID_1">%1$s</xliff:g> le permite să folosească întotdeauna automatizarea ecranului vor fi afișate aici. Aplicațiile care primesc numai o permisiune pentru fiecare sesiune nu vor fi afișate."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Permisă"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Nepermisă"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificări pe ecran complet"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permite notificările pe ecran complet de la această aplicație"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permite aplicației să afișeze notificări care ocupă întregul ecran când dispozitivul e blocat. Aplicațiile le pot folosi pentru a evidenția alarme, apeluri primite sau alte informații urgente."</string>
@@ -4673,6 +4649,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Neconectat"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Neconectată"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> aplicații instalate"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"Spațiu folosit: <xliff:g id="PERCENTAGE">%1$s</xliff:g>; spațiu liber: <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema întunecată, mărimea fontului, luminozitate"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Memorie folosită în medie: <xliff:g id="USED_MEMORY">%1$s</xliff:g> din <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g>"</string>
@@ -5836,7 +5814,8 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> de la <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Aplicația va reporni când schimbi raportul de dimensiuni. Este posibil să pierzi modificările nesalvate. Unele aplicații pot să nu fie optimizate pentru anumite raporturi de dimensiuni."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Experiență"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
+    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Senzor de amprentă"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificări flash"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Despre notificările flash"</string>
@@ -6221,12 +6200,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Dispozitivul nu este înregistrat pentru SOS prin satelit. Asigură-te că te-ai conectat la internet pentru ca dispozitivul să se înregistreze automat."</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Activează serviciul de instalare a aplicațiilor web"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Activează acest serviciu pentru a instala site-uri direct pe ecranul de pornire, pentru a le folosi ca aplicații obișnuite."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"Acces la dispozitivele de interfață umană"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"Permite ca aplicația să găsească dispozitivele de interfață umană (HID-uri)"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"Dacă permiți accesul, aplicațiile rău intenționate îți pot reprograma dispozitivele de interfață umană pentru a-ți compromite sistemul. De exemplu, aplicațiile ar putea să simuleze intrările de la tastatură sau mouse pentru a-ți controla sistemul când nu sunt deschise. Asigură-te că ai încredere în aplicații înainte de a le permite accesul."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"hid, uman, acces, dispozitiv"</string>
 </resources>
