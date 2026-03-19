@@ -19,6 +19,7 @@ package com.android.settings.media;
 import static android.app.slice.Slice.EXTRA_RANGE_VALUE;
 import static android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
 
+import static com.android.media.flags.Flags.fixOutputSwitcherMultiuserSupport;
 import static com.android.settings.slices.CustomSliceRegistry.REMOTE_MEDIA_SLICE_URI;
 
 import android.app.PendingIntent;
@@ -27,6 +28,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.RoutingSessionInfo;
 import android.net.Uri;
+import android.os.UserHandle;
 import android.text.SpannableString;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
@@ -80,11 +82,18 @@ public class RemoteMediaSlice implements CustomSliceable {
         if (TextUtils.equals(ACTION_LAUNCH_DIALOG, intent.getStringExtra(CUSTOMIZED_ACTION))) {
             // Launch Media Output Dialog
             final RoutingSessionInfo info = intent.getParcelableExtra(SESSION_INFO);
-            mContext.sendBroadcast(new Intent()
+            var outputDialogIntent = new Intent()
                     .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
                     .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
                     .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
-                            info.getClientPackageName()));
+                            info.getClientPackageName());
+            if (fixOutputSwitcherMultiuserSupport()) {
+                outputDialogIntent.putExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
+                        mContext.getUser());
+                mContext.sendBroadcastAsUser(outputDialogIntent, UserHandle.SYSTEM);
+            } else {
+                mContext.sendBroadcast(outputDialogIntent);
+            }
             // Dismiss volume panel
             mContext.sendBroadcast(new Intent()
                     .setPackage(MediaOutputConstants.SETTINGS_PACKAGE_NAME)

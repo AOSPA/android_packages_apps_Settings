@@ -16,6 +16,7 @@
 
 package com.android.settings.media;
 
+import static com.android.media.flags.Flags.fixOutputSwitcherMultiuserSupport;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
 
 import android.annotation.ColorInt;
@@ -24,6 +25,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.session.MediaController;
 import android.net.Uri;
+import android.os.UserHandle;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -129,17 +131,33 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
 
         // Launch media output dialog
         if (mediaController == null) {
-            mContext.sendBroadcast(new Intent()
+            var outputDialogIntent = new Intent()
                     .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
-                    .setAction(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG));
+                    .setAction(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
+            if (fixOutputSwitcherMultiuserSupport()) {
+                outputDialogIntent.putExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
+                        mContext.getUser());
+                mContext.sendBroadcastAsUser(outputDialogIntent, UserHandle.SYSTEM);
+            } else {
+                mContext.sendBroadcast(outputDialogIntent);
+            }
         } else {
-            mContext.sendBroadcast(new Intent()
+            var outputDialogIntent = new Intent()
                     .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
                     .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
                     .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
                             mediaController.getSessionToken())
                     .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
-                            mediaController.getPackageName()));
+                            mediaController.getPackageName());
+            if (fixOutputSwitcherMultiuserSupport()) {
+                var mediaSessionUser = UserHandle.getUserHandleForUid(
+                        mediaController.getSessionToken().getUid());
+                outputDialogIntent.putExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
+                        mediaSessionUser);
+                mContext.sendBroadcastAsUser(outputDialogIntent, UserHandle.SYSTEM);
+            } else {
+                mContext.sendBroadcast(outputDialogIntent);
+            }
         }
 
         // Dismiss volume panel
