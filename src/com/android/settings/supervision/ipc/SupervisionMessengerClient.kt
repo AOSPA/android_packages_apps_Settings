@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 The Android Open Source Project
+ * Copyright (C) 2026 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,12 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.content.edit
 import com.android.settings.supervision.PreferenceDataProvider
+import com.android.settings.supervision.IsSupervisorAccountProvider
 import com.android.settings.supervision.SupportedAppsProvider
 import com.android.settings.supervision.shared.systemSupervisionPackageName
 import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.supervision.SupervisionLog
+import kotlin.Unit
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -37,7 +39,10 @@ import org.json.JSONObject
  * @param context The Android Context used for binding to the service.
  */
 class SupervisionMessengerClient(context: Context) :
-    MessengerServiceClient(context), PreferenceDataProvider, SupportedAppsProvider {
+    MessengerServiceClient(context),
+    PreferenceDataProvider,
+    SupportedAppsProvider,
+    IsSupervisorAccountProvider {
 
     override val serviceIntentFactory = { Intent(SUPERVISION_MESSENGER_SERVICE_BIND_ACTION) }
 
@@ -119,6 +124,30 @@ class SupervisionMessengerClient(context: Context) :
             Log.e(SupervisionLog.TAG, "Error fetching supported apps from supervision app", e)
             mapOf()
         }
+
+    /**
+     * Retrieves whether the current user is a supervisor account.
+     *
+     * This suspend function sends a request to the supervision app for the current user's
+     * supervision account status and returns the result. If an error occurs during the
+     * communication, false is returned and the error is logged.
+     *
+     * @return True if the current user is a supervisor account, false otherwise.
+     */
+    override suspend fun getIsSupervisorAccount(): Boolean =
+        try {
+            val targetPackageName = packageName ?: return false
+            invoke(targetPackageName, IsSupervisorAccountApi(), Unit)
+                .await()
+        } catch (e: Exception) {
+            Log.e(
+                SupervisionLog.TAG,
+                "Error fetching account's supervision status from supervision app",
+                e,
+            )
+            false
+        }
+
 
     /**
      * Generates a deterministic cache key from a list of preference keys. The keys are sorted to
