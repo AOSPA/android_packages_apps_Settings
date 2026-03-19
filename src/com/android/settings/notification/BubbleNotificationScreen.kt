@@ -29,6 +29,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -83,6 +84,8 @@ open class BubbleNotificationScreen :
 
     override val availabilityDescription = "The device must support bubbles and must not be a low-ram device."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context): Boolean = BubbleHelper.isSupportedByDevice(context)
 
     class BubbleNotificationScreenPreference(
@@ -110,6 +113,8 @@ open class BubbleNotificationScreen :
         override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

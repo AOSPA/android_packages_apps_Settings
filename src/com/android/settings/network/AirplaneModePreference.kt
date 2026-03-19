@@ -38,6 +38,7 @@ import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -65,9 +66,13 @@ open class AirplaneModePreference :
 
     override val availabilityDescription = "The device must support configuring airplane mode."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context) = context.isAirplaneModeEligible()
 
     override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
@@ -184,6 +189,8 @@ class AirplaneModeTogglePreference : AirplaneModePreference() {
 
     override val availabilityDescription = "The device must support configuring airplane mode and must not have a paired watch."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && !context.hasPairedWatchForAirplaneModeSync()
 }
@@ -192,6 +199,8 @@ class AirplaneModeTogglePreference : AirplaneModePreference() {
 class AirplaneModeDetailsPreference : AirplaneModePreference(), MainSwitchPreferenceBinding {
 
     override val availabilityDescription = "The device must support configuring airplane mode and must not have a paired watch."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && context.hasPairedWatchForAirplaneModeSync()

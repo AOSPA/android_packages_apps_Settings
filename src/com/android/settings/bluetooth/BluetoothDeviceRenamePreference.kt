@@ -30,6 +30,7 @@ import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -106,6 +107,8 @@ class BluetoothDeviceRenamePreference(private val bluetoothDataStore: BluetoothD
     }
 
     override val availabilityDescription = "The device must support Bluetooth."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         return bluetoothDataStore.bluetoothAdapter?.isEnabled == true

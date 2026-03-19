@@ -34,6 +34,7 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -77,6 +78,8 @@ open class AutoclickScreen :
     override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_TOGGLE_AUTOCLICK
 
     override val availabilityDescription = "The device must have a mouse connected."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean = InputPeripheralsSettingsUtils.isMouse()
 
@@ -140,6 +143,34 @@ open class AutoclickScreen :
             +AutoclickRevertToLeftClickPreference()
             +AutoclickFooterPreference()
         }
+
+    class AutoclickScreenPreference(
+        private val screenMetadata : AutoclickScreen
+    ) : PreferenceMetadata, PreferenceAvailabilityProvider, PreferenceSummaryProvider {
+
+        override val key : String
+            get() = "autoclick_preference_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
+
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+
+        override val sensitivityLevel
+            get() = SensitivityLevel.DEEP_LINK_ONLY
+    }
 
     companion object {
         const val KEY = "autoclick_preference"

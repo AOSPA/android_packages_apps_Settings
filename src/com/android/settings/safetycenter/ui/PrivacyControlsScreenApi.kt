@@ -24,8 +24,9 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 /**
@@ -169,7 +170,10 @@ class PrivacyControlsScreenApi :
                 if (isSafetySourceVisible(context, "AndroidHealthConnect")) {
                     Allowed
                 } else {
-                    Disallowed(R.string.safety_source_unavailable)
+                    Custom(
+                        R.string.safety_source_unavailable,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
             }
             get { execute { true } }
@@ -185,7 +189,10 @@ class PrivacyControlsScreenApi :
                 if (isSafetySourceVisible(context, "AndroidAppFunctionAccess")) {
                     Allowed
                 } else {
-                    Disallowed(R.string.safety_source_unavailable)
+                    Custom(
+                        R.string.safety_source_unavailable,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
             }
             get { execute { true } }
@@ -201,7 +208,10 @@ class PrivacyControlsScreenApi :
                 if (isSafetySourceVisible(context, "AndroidPrivacyAppDataSharingUpdates")) {
                     Allowed
                 } else {
-                    Disallowed(R.string.safety_source_unavailable)
+                    Custom(
+                        R.string.safety_source_unavailable,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
             }
             get { execute { true } }

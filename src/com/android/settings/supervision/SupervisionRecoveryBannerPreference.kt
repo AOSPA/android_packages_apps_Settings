@@ -30,6 +30,7 @@ import com.android.settings.supervision.credentialmanagement.SupervisionPinRecov
 import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settings.supervision.shared.shouldDisplayPinRecoveryReminders
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -57,6 +58,8 @@ class SupervisionRecoveryBannerPreference :
         get() = false
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionSettingsUiUpdates()) {

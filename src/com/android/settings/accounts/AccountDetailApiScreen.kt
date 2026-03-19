@@ -35,6 +35,7 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import kotlin.time.measureTimedValue
 
 // LINT.IfChange
@@ -68,7 +69,7 @@ class AccountDetailApiScreen :
                         extras.putString(KEY_ACCOUNT_TYPE, it.type)
                         extras.putParcelable(KEY_USER_HANDLE, Process.myUserHandle())
                         extras.putParcelable(EXTRA_USER, Process.myUserHandle())
-                    } ?: Custom("Can't find account with name $accountName")
+                    } ?: Custom("Can't find account with name $accountName", stability = PreconditionStability.UNSTABLE)
             }
         }
 

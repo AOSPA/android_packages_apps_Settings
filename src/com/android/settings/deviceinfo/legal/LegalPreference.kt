@@ -21,6 +21,7 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.ResolveInfo
 import androidx.annotation.StringRes
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
@@ -42,6 +43,8 @@ class LegalPreference(
     }
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = (findMatchingSpecificActivity(context) != null)
 

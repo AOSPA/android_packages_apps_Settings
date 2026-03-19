@@ -39,6 +39,7 @@ import com.android.settingslib.dream.DreamBackend
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -146,6 +147,8 @@ open class ScreensaverScreen(private val context: Context) :
     override val availabilityDescription =
         "The device must not be in demo mode (unless dreams are enabled in demo mode), dreams must be supported on the device, and either the user must be the 'dock' user or dreams must be supported on all users for this device."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context) = Utils.areDreamsAvailableToCurrentUser(context)
 
     @VisibleForTesting
@@ -217,6 +220,8 @@ open class ScreensaverScreen(private val context: Context) :
         override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+    override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

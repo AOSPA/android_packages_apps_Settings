@@ -23,6 +23,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.NoOpKeyedObservable
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.notification.modes.ZenMode
@@ -52,6 +53,8 @@ class ZenModeButtonPreference(val zenMode: ZenMode) :
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_PREFERENCE)
 
     override val availabilityDescription = "The DND mode must be enabled and be allowed to be manually invoked."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         zenMode.isEnabled && (zenMode.isActive || zenMode.isManualInvocationAllowed)

@@ -25,6 +25,7 @@ import com.android.settings.R
 import com.android.settings.Settings.LocationSettingsActivity
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
@@ -50,6 +51,8 @@ class TwilightLocationPreference :
 
     override val availabilityDescription =
         "The device must have location turned off."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         val locationManager =

@@ -24,6 +24,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
@@ -54,6 +55,8 @@ class SimCallsPreference() :
 
     override val availabilityDescription =
         "The device must have more than one active subscription available."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         return context

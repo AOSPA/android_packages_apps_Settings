@@ -30,6 +30,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -109,6 +110,8 @@ open class NightDisplayScreen(val context: Context) :
     override val availabilityDescription =
         "The device must support night display settings."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context): Boolean = context.isNightDisplaySettingsAvailable
 
     override fun getMetricsCategory(): Int = SettingsEnums.NIGHT_DISPLAY_SETTINGS
@@ -137,6 +140,8 @@ open class NightDisplayScreen(val context: Context) :
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 
@@ -187,6 +192,8 @@ internal class NightDisplayTopIntroPreference :
     override fun createWidget(context: Context) = TopIntroPreference(context)
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean = context.isNightDisplaySettingsAvailable
 }

@@ -31,6 +31,7 @@ import com.android.settings.datausage.lib.DataUsageFormatter
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
@@ -91,6 +92,8 @@ class WifiDataUsagePreference(context: Context):
     override fun getSummary(context: Context): CharSequence? = dataUsage
 
     override val availabilityDescription = "The device must have a wifi radio."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean = isAvailable
 
