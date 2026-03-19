@@ -50,7 +50,7 @@ import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
@@ -68,6 +68,7 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
 import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 @RunWith(RobolectricTestRunner::class)
 @Config(shadows = [ShadowActivityEmbeddingUtils::class])
@@ -139,7 +140,7 @@ class SettingsLaunchpadActivityTest {
                 if (preconditionsAreMet) {
                     Allowed
                 } else {
-                    Disallowed("Test preconditions not met")
+                    Custom("Test preconditions not met", stability = PreconditionStability.UNSTABLE)
                 }
             }
         }
@@ -181,7 +182,7 @@ class SettingsLaunchpadActivityTest {
                 if (preconditionsAreMet) {
                     Allowed
                 } else {
-                    Disallowed("Test preconditions not met")
+                    Custom("Test preconditions not met", stability = PreconditionStability.UNSTABLE)
                 }
             }
         }
@@ -196,7 +197,7 @@ class SettingsLaunchpadActivityTest {
         ) {
         init {
             preconditions("Test preconditions") {
-                if (preconditionsAreMet) Allowed else Disallowed("Test preconditions not met")
+                if (preconditionsAreMet) Allowed else Custom("Test preconditions not met", stability = PreconditionStability.UNSTABLE)
             }
         }
     }
@@ -839,6 +840,8 @@ class SettingsLaunchpadActivityTest {
             get() = ""
 
         override fun isAvailable(context: Context): Boolean = isAvailableToReturn
+
+        override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
         override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
             launchIntentToReturn

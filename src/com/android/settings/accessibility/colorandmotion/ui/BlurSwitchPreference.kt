@@ -47,6 +47,8 @@ class BlurSwitchPreference :
 
     override fun getEnabledDescription(): String = "Battery saver must be turned off."
 
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context) = !context.isPowerSaveMode()
 
     override val icon: Int

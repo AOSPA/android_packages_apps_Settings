@@ -55,6 +55,8 @@ abstract class BaseCaptionOpacityPreference(private val dependentColorPrefKey: S
 
     override fun getEnabledDescription(): String = "A valid caption color must be selected."
 
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context): Boolean = dataStore.hasValidColor()
 
     override fun dependencies(context: Context): Array<String> =

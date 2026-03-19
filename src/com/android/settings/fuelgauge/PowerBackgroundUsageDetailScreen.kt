@@ -36,8 +36,9 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.multiusers.ManagementScope
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(PowerBackgroundUsageDetailScreen.KEY, parameterized = true)
@@ -84,19 +85,21 @@ open class PowerBackgroundUsageDetailScreen :
             batteryOptimizeUtils = BatteryOptimizeUtils(context, uid, packageName)
             when {
                 batteryOptimizeUtils.isDisabledForOptimizeModeOnly -> {
-                    Disallowed(
+                    Custom(
                         context.getString(
                             R.string.manager_battery_usage_footer_limited,
                             context.getString(R.string.manager_battery_usage_optimized_only),
-                        )
+                        ),
+                        stability = PreconditionStability.UNSTABLE
                     )
                 }
                 batteryOptimizeUtils.isSystemOrDefaultApp -> {
-                    Disallowed(
+                    Custom(
                         context.getString(
                             R.string.manager_battery_usage_footer_limited,
                             context.getString(R.string.manager_battery_usage_unrestricted_only),
-                        )
+                        ),
+                        stability = PreconditionStability.UNSTABLE
                     )
                 }
                 else -> Allowed

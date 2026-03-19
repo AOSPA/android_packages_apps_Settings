@@ -80,6 +80,8 @@ class AlarmVolumePreference(private val audioHelper: AudioHelper) :
 
     override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
 
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val restrictionKeys: Array<String>

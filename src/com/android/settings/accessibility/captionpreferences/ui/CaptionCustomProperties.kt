@@ -202,6 +202,8 @@ class CaptionEdgeColorPreference(context: Context) :
 
     override fun getEnabledDescription(): String = "A caption edge type other than 'None' must be selected."
 
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context): Boolean =
         captionHelper.edgeType != CaptioningManager.CaptionStyle.EDGE_TYPE_NONE
 

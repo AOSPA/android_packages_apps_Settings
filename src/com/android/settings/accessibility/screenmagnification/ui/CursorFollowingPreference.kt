@@ -124,6 +124,8 @@ class CursorFollowingPreference :
 
     override fun getEnabledDescription(): String = "Screen magnification must be set to full screen or both."
 
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context): Boolean {
         @MagnificationCapabilities.MagnificationMode
         val mode = MagnificationCapabilities.getCapabilities(context)

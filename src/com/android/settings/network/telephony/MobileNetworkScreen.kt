@@ -193,6 +193,8 @@ private constructor(
 
     override fun getEnabledDescription() = "There must be no restrictions on configuring mobile networks imposed by device administrators."
 
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isIndexable(context: Context) =
         // Shoudln't be indexable on ARC (Android on Chrome OS) and this seems to be the way to
         // detect that. See https://stackoverflow.com/a/44868935 or isArc() implementation in

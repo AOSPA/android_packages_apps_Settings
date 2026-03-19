@@ -81,6 +81,8 @@ class AdaptiveSleepPreference :
 
     override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator, and your device must support adaptive sleep."
 
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context) =
         super<PreferenceRestrictionMixin>.isEnabled(context) && context.canBeEnabled()
 
