@@ -57,7 +57,7 @@ import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
-public class VirtualKeyboardPreferenceControllerTest {
+public class KeyboardAppsPreferenceControllerTest {
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -73,7 +73,7 @@ public class VirtualKeyboardPreferenceControllerTest {
     @Mock
     private Preference mPreference;
 
-    private VirtualKeyboardPreferenceController mController;
+    private KeyboardAppsPreferenceController mController;
 
     @Before
     public void setUp() {
@@ -81,7 +81,7 @@ public class VirtualKeyboardPreferenceControllerTest {
         when(mContext.getSystemService(Context.DEVICE_POLICY_SERVICE)).thenReturn(mDpm);
         when(mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).thenReturn(mImm);
         when(mContext.getPackageManager()).thenReturn(mPm);
-        mController = new VirtualKeyboardPreferenceController(mContext);
+        mController = new KeyboardAppsPreferenceController(mContext);
     }
 
     @After
@@ -91,17 +91,17 @@ public class VirtualKeyboardPreferenceControllerTest {
     }
 
     @Test
-    public void testVirtualKeyboard_byDefault_shouldBeShown() {
+    public void testKeyboardApps_byDefault_shouldBeShown() {
         final Context context = spy(RuntimeEnvironment.application);
-        mController = new VirtualKeyboardPreferenceController(context);
+        mController = new KeyboardAppsPreferenceController(context);
         assertThat(mController.isAvailable()).isTrue();
     }
 
     @Test
     @Config(qualifiers = "mcc999")
-    public void testVirtualKeyboard_ifDisabled_shouldNotBeShown() {
+    public void testKeyboardApps_ifDisabled_shouldNotBeShown() {
         final Context context = spy(RuntimeEnvironment.application);
-        mController = new VirtualKeyboardPreferenceController(context);
+        mController = new KeyboardAppsPreferenceController(context);
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -109,7 +109,7 @@ public class VirtualKeyboardPreferenceControllerTest {
     @EnableFlags(FLAG_DISABLE_KEYBOARD_SETTINGS_IN_DEMO_MODE)
     public void isAvailable_inDemoMode_returnsFalse() {
         final Context context = spy(RuntimeEnvironment.application);
-        mController = new VirtualKeyboardPreferenceController(context);
+        mController = new KeyboardAppsPreferenceController(context);
 
         // Put the device in demo mode.
         Settings.Global.putInt(context.getContentResolver(),
