@@ -20,14 +20,17 @@ import android.app.Application
 import android.graphics.Point
 import android.os.Build
 import android.os.SystemProperties
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Display.Mode
+import android.view.WindowManager.LARGE_SCREEN_SMALLEST_SCREEN_WIDTH_DP
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.android.settings.R
 import com.android.settings.core.instrumentation.SettingsStatsLog
+import com.android.settingslib.display.DisplayDensityConfiguration
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CoroutineScope
@@ -66,6 +69,10 @@ constructor(
     private var peakWidth: Int = 0
     private var peakHeight: Int = 0
     private var peakRefreshRate: Int = 0
+    private var physicalXDpi: Float = 0f
+    private var physicalYDpi: Float = 0f
+    private var currentActivePhysicalWidth: Int = 0
+    private var currentActivePhysicalHeight: Int = 0
     private var isRefreshRateSyncEnabled: Boolean = false
     private var allowedResolutions: Set<Point> = emptySet()
 
@@ -171,6 +178,8 @@ constructor(
             pendingTransaction = null
             return
         }
+        currentActivePhysicalWidth = currentActiveMode.physicalWidth
+        currentActivePhysicalHeight = currentActiveMode.physicalHeight
         val supportedModes = display.supportedModes
         allowedModes =
             supportedModes.filter { isAllowed(it, supportedModes) }.associateBy { it.modeId }
@@ -221,6 +230,26 @@ constructor(
             logDebug("$mode width is above the allowed limit")
             return false
         }
+        val adjXDpi = currentActivePhysicalWidth * physicalXDpi / mode.physicalWidth
+        val adjYDpi = currentActivePhysicalHeight * physicalYDpi / mode.physicalHeight
+
+        val densityForMode =
+            DisplayDensityConfiguration.calculateBaseDensity(
+                adjXDpi,
+                adjYDpi,
+                mode.physicalWidth,
+                mode.physicalHeight,
+            )
+        if (densityForMode > 0) {
+            val widthDp =
+                (mode.physicalWidth * DisplayMetrics.DENSITY_DEFAULT.toFloat()) / densityForMode
+            if (widthDp < LARGE_SCREEN_SMALLEST_SCREEN_WIDTH_DP) {
+                logDebug(
+                    "$mode width in dp ($widthDp) is below the allowed limit ($LARGE_SCREEN_SMALLEST_SCREEN_WIDTH_DP)"
+                )
+                return false
+            }
+        }
         if (peakRefreshRate > 0 && mode.refreshRate > peakRefreshRate) {
             logDebug("$mode refresh rate is above the allowed limit")
             return false
@@ -252,7 +281,9 @@ constructor(
         isRefreshRateSyncEnabled =
             res.getBoolean(com.android.internal.R.bool.config_refreshRateSynchronizationEnabled) ||
                 (!ConnectedDisplayInjector.isRefreshRateFlagsEnabled())
-
+        val physicalDpi = injector.getPhysicalDpi(displayId)
+        physicalXDpi = physicalDpi.first
+        physicalYDpi = physicalDpi.second
         val resolutionsArray = res.getIntArray(R.array.config_resolutionsShownOnExternalDisplay)
         allowedResolutions =
             resolutionsArray
