@@ -123,6 +123,7 @@ import com.android.settings.display.NightDisplayApiScreen
 import com.android.settings.display.NightDisplayScreen
 import com.android.settings.display.ScreenResolutionApiScreen
 import com.android.settings.display.ScreenTimeoutScreen
+import com.android.settings.display.SmartAutoRotateApiScreen
 import com.android.settings.display.darkmode.DarkModeApiFirstScreen
 import com.android.settings.display.darkmode.DarkModeScreen
 import com.android.settings.dream.DreamSettingsApiScreen
@@ -277,6 +278,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = AutoBrightnessApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HdrBrightnessApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceStateAutoRotateApiScreen.KEY),
+	PerScreenCatalystConfig(enabled = true, screenKey = SmartAutoRotateApiScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
             screenKey = BatterySaverScreen.KEY,
