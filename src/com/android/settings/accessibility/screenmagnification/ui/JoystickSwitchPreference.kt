@@ -29,7 +29,6 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Preconditio
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
-// LINT.IfChange
 class JoystickSwitchPreference :
     SwitchPreference(
         KEY,
@@ -80,4 +79,3 @@ class JoystickSwitchPreference :
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_JOYSTICK_ENABLED
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/JoystickPreferenceController.kt)

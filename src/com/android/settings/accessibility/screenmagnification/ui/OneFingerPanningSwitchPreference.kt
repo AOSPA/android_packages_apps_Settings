@@ -37,7 +37,6 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
-// LINT.IfChange
 class OneFingerPanningSwitchPreference :
     SwitchPreference(
         KEY,
@@ -122,6 +121,11 @@ class OneFingerPanningSwitchPreference :
 
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED
+
+        fun isOneFingerPanningEnabled(context: Context): Boolean {
+            return context.dataStore.getBoolean(KEY) == true
+        }
+
         private val Context.dataStore: KeyValueStore
             get() =
                 SettingsSecureStore.get(this).apply {
@@ -136,4 +140,3 @@ class OneFingerPanningSwitchPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/OneFingerPanningPreferenceController.kt)

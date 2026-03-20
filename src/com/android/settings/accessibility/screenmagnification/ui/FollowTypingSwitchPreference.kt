@@ -29,7 +29,6 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
-// LINT.IfChange
 class FollowTypingSwitchPreference :
     SwitchPreference(
         KEY,
@@ -75,4 +74,3 @@ class FollowTypingSwitchPreference :
             get() = SettingsSecureStore.get(this).apply { setDefaultValue(KEY, true) }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FollowTypingPreferenceController.kt)
