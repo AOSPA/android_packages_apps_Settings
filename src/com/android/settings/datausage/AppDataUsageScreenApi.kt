@@ -77,7 +77,7 @@ class AppDataUsageScreenApi :
             purpose = R.string.app_background_data_switch_purpose,
             type = AnyBoolean,
         ) {
-            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+            //not reviewed by security & privacy
             get {
                 execute {
                     val packageName = getPackageName() ?: return@execute false
@@ -97,7 +97,7 @@ class AppDataUsageScreenApi :
             purpose = R.string.app_unrestricted_mobile_data_usage_switch_purpose,
             type = AnyBoolean,
         ) {
-            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+            //not reviewed by security & privacy
             preconditions(R.string.app_unrestricted_mobile_data_usage_switch_preconditions) {
                 val packageName =
                     getPackageName()

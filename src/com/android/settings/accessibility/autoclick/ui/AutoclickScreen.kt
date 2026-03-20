@@ -128,21 +128,27 @@ open class AutoclickScreen :
             +AutoclickIntroPreference()
             +AutoclickIllustrationPreference()
             +AutoclickMainSwitchPreference()
-            +AccessibilityShortcutPreference(
-                context = context,
-                key = "autoclick_shortcut_preference",
-                purpose = R.string.a11y_autoclick_shortcut_purpose,
-                title = R.string.accessibility_autoclick_shortcut_title,
-                componentName = AccessibilityShortcutController.AUTOCLICK_COMPONENT_NAME,
-                featureName = R.string.accessibility_autoclick_preference_title,
-                metricsCategory = metricsCategory,
-            )
+            +AutoClickShortcutPreference(context, metricsCategory)
             +AutoclickDelayPreference(context)
             +AutoclickCursorAreaSizePreference()
             +AutoclickIgnoreMinorCursorMovementPreference()
             +AutoclickRevertToLeftClickPreference()
             +AutoclickFooterPreference()
         }
+
+    class AutoClickShortcutPreference(context: Context, metricsCategory: Int) :
+        AccessibilityShortcutPreference(
+            context = context,
+            key = "autoclick_shortcut_preference",
+            purpose = R.string.a11y_autoclick_shortcut_purpose,
+            title = R.string.accessibility_autoclick_shortcut_title,
+            componentName = AccessibilityShortcutController.AUTOCLICK_COMPONENT_NAME,
+            featureName = R.string.accessibility_autoclick_preference_title,
+            metricsCategory = metricsCategory,
+        ) {
+        //not reviewed by security & privacy
+        override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
+    }
 
     class AutoclickScreenPreference(
         private val screenMetadata : AutoclickScreen
