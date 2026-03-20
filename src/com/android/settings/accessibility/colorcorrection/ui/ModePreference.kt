@@ -187,9 +187,8 @@ class GrayscaleModePreference(storage: ColorCorrectionModeDataStore) : ModePrefe
     override val title: Int
         get() = R.string.daltonizer_mode_grayscale_title
 
-    //not reviewed by security & privacy
     override val sensitivityLevel: Int
-        get() = SensitivityLevel.DO_NOT_EXPOSE
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val KEY = "daltonizer_mode_grayscale"
