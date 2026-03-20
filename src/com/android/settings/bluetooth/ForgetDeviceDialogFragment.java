@@ -24,6 +24,7 @@ import android.app.settings.SettingsEnums;
 import android.bluetooth.BluetoothDevice;
 import android.companion.AssociationInfo;
 import android.companion.CompanionDeviceManager;
+import android.companion.DeviceId;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageItemInfo;
@@ -43,8 +44,6 @@ import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.flags.Flags;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
-
-import com.google.common.base.Objects;
 
 import java.util.HashSet;
 import java.util.List;
@@ -142,7 +141,20 @@ public class ForgetDeviceDialogFragment extends InstrumentedDialogFragment {
     private List<AssociationInfo> getAssociations(String address) {
         return filter(
                 mCompanionDeviceManager.getAllAssociations(),
-                a -> Objects.equal(address, a.getDeviceMacAddressAsString()));
+                a -> {
+                    if (address == null) return false;
+
+                    String macAddress = a.getDeviceMacAddressAsString();
+                    String deviceIdMac = null;
+
+                    DeviceId deviceId = a.getDeviceId();
+                    if (deviceId != null && deviceId.getMacAddress() != null) {
+                        deviceIdMac = deviceId.getMacAddress().toString();
+                    }
+
+                    return address.equalsIgnoreCase(macAddress)
+                            || address.equalsIgnoreCase(deviceIdMac);
+                });
     }
 
     private String buildUnpairMessage(Context context, CachedBluetoothDevice device,
