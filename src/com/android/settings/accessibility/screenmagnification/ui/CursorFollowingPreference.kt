@@ -38,9 +38,11 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
+import com.android.settingslib.metadata.DiscreteIntValue
 
 class CursorFollowingPreference :
     PreferenceBinding,
+    DiscreteIntValue,
     PersistentPreference<Int>,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider,
@@ -60,6 +62,12 @@ class CursorFollowingPreference :
 
     override val title: Int
         get() = R.string.accessibility_magnification_cursor_following_title
+
+    override val values: Int
+        get() = R.array.magnification_cursor_following_mode_values
+
+    override val valuesDescription: Int
+        get() = R.array.magnification_cursor_following_mode_summaries
 
     override fun getSummary(context: Context): CharSequence? {
         if (isEnabled(context)) {

@@ -40,6 +40,8 @@ import com.android.settingslib.metadata.getPreconditionsAsString
 import com.android.settingslib.metadata.preferencesapi.types.ApiType
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import com.android.settingslib.metadata.setPreconditionsAsString
+import com.android.settingslib.metadata.stableAccessPreconditionFailuresAsString
+import com.android.settingslib.metadata.stableSetPreconditionFailuresAsString
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
@@ -202,6 +204,8 @@ class CatalystStateMetadataProviderExecutor(
                         metadata.getPreconditionsAsString(context),
                         metadata.setPreconditionsAsString(context),
                         metadata.setWarningAsString(context),
+                        metadata.stableAccessPreconditionFailuresAsString(context),
+                        metadata.stableSetPreconditionFailuresAsString(context),
                     ).joinToString(separator = "\n").replace("..", ".")
             deviceStateItemMetadataList.add(
                 DeviceStateItemMetadata(

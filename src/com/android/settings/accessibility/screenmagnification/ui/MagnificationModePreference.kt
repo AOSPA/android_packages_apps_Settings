@@ -26,6 +26,7 @@ import com.android.settings.accessibility.extensions.isWindowMagnificationSuppor
 import com.android.settings.accessibility.screenmagnification.dialogs.MagnificationModeChooser
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
@@ -39,6 +40,7 @@ import com.android.settingslib.preference.PreferenceBinding
 
 class MagnificationModePreference :
     PreferenceBinding,
+    DiscreteIntValue,
     PersistentPreference<Int>,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider,
@@ -64,6 +66,12 @@ class MagnificationModePreference :
             MagnificationCapabilities.getCapabilities(context),
         )
     }
+
+    override val values: Int
+        get() = R.array.magnification_mode_values
+
+    override val valuesDescription: Int
+        get() = R.array.magnification_mode_summaries
 
     override fun storage(context: Context): KeyValueStore = SettingsSecureStore.get(context)
 
