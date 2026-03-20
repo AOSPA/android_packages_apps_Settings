@@ -46,10 +46,12 @@ import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mock
 import org.mockito.Mockito.atLeastOnce
+import org.mockito.Mockito.doAnswer
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.doThrow
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
@@ -84,6 +86,16 @@ class SatelliteStateRepositoryTest {
             shadowOf(context.getSystemService(CarrierConfigManager::class.java))
         shadowSubscriptionManager =
             shadowOf(context.getSystemService(SubscriptionManager::class.java))
+
+        doAnswer { invocation ->
+            val callback = invocation.getArgument<TelephonyCallback>(1)
+            if (callback is TelephonyCallback.CarrierRoamingNtnListener) {
+                // Trigger an emission by changing the state from its default (false, false)
+                callback.onCarrierRoamingNtnEligibleStateChanged(true)
+                callback.onCarrierRoamingNtnEligibleStateChanged(false)
+            }
+            null
+        }.`when`(telephonyManager).registerTelephonyCallback(any(), any())
     }
 
     private fun createRepository(

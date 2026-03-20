@@ -6207,6 +6207,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+		<action android:name="android.intent.action.SCREEN_ON"/>
                 <action android:name="android.telephony.action.DEFAULT_DATA_SUBSCRIPTION_CHANGED"/>
                 <action android:name="android.telephony.action.CARRIER_CONFIG_CHANGED"/>
                 <action android:name="android.telephony.action.SIM_CARD_STATE_CHANGED"/>
