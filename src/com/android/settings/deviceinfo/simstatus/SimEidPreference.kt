@@ -27,13 +27,13 @@ import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -80,7 +80,7 @@ class SimEidPreference(private val context: Context) :
     override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? =
-        eidMetadata?.let { PhoneNumberUtil.expandByTts(it.eid) }
+        eidMetadata?.let { PhoneNumberUtil.expandByTts(it.eid).toString() }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
@@ -127,10 +127,8 @@ class SimEidPreference(private val context: Context) :
         return null
     }
 
-
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
-
 
     private fun getEidMetadataWithAssociatedSlotId(): EidMetadata? {
         val subscriptionManager =
