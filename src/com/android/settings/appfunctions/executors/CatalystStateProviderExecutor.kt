@@ -38,6 +38,8 @@ import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isExposable
+import com.android.settingslib.metadata.resolvedAccessAndGetPreconditionsAsString
+import com.android.settingslib.metadata.resolvedSetPreconditionsAsString
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
@@ -161,6 +163,10 @@ class CatalystStateProviderExecutor(
                                 localized = metadata.getPreferenceTitle(context).toString(),
                             ),
                         jsonValue = it,
+                        hintText = listOfNotNull(
+                            metadata.resolvedAccessAndGetPreconditionsAsString(context),
+                            metadata.resolvedSetPreconditionsAsString(context),
+                        ).joinToString(". "),
                     )
                 )
             }
@@ -169,7 +175,8 @@ class CatalystStateProviderExecutor(
         val basicDescription = listOfNotNull(
             screenMetaData.getPreferenceScreenTitle(context)?.toString(),
             screenMetaData.getPreferencePurpose(context).toString(),
-            screenMetaData.accessPreconditionsAsString(context),
+            screenMetaData.resolvedAccessAndGetPreconditionsAsString(context),
+            screenMetaData.resolvedSetPreconditionsAsString(context),
         ).filter { it.isNotBlank() }
             .joinToString(". ")
             .replace("..", ".")
