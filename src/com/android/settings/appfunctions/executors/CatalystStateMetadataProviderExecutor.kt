@@ -188,7 +188,10 @@ class CatalystStateMetadataProviderExecutor(
                     else -> null
                 }
 
-            val writable = if (metadata is ApiPreference<*, *>) {
+            val writable =
+            if (metadataProto.sensitivityLevel > 2) { // requires confirmation or do not expose
+                false
+            } else if (metadata is ApiPreference<*, *>) {
                 metadata.set != null
             } else if (metadata is PersistentPreference<*>) {
                 metadata.supportsWrite
