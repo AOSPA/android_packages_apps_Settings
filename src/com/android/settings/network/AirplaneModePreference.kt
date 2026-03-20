@@ -70,7 +70,7 @@ open class AirplaneModePreference :
 
     override fun isAvailable(context: Context) = context.isAirplaneModeEligible()
 
-    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator. Airplane mode cannot be changed during an emergency call. Airplane mode cannot be changed while satellite messaging is active."
 
     override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
