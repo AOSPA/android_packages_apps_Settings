@@ -68,8 +68,9 @@ class AdaptiveMobileNetworkTogglePreference() :
         callingUid: Int,
     ) = ReadWritePermit.ALLOW
 
+    //not reviewed by security & privacy
     override val sensitivityLevel
-        get() = SensitivityLevel.NO_SENSITIVITY
+        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     @Suppress("UNCHECKED_CAST")
     private class AdaptiveMobileNetworkToggleStorage(
