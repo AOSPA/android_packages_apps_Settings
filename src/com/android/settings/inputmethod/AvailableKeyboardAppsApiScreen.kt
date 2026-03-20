@@ -23,13 +23,13 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 
 // LINT.IfChange
-@ProvidePreferenceScreen(AvailableVirtualKeyboardApiScreen.KEY)
-class AvailableVirtualKeyboardApiScreen :
+@ProvidePreferenceScreen(AvailableKeyboardAppsApiScreen.KEY)
+class AvailableKeyboardAppsApiScreen :
     PreferencesApiScreen(
         key = KEY,
         topLevelSettingsCategory = Category.SYSTEM,
-        fragment = AvailableVirtualKeyboardFragment::class,
-        purpose = R.string.available_virtual_keyboard_screen_purpose,
+        fragment = AvailableKeyboardAppsFragment::class,
+        purpose = R.string.available_keyboard_apps_screen_purpose,
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
@@ -39,4 +39,4 @@ class AvailableVirtualKeyboardApiScreen :
         const val KEY = "available_virtual_keyboard_screen"
     }
 }
-// LINT.ThenChange(AvailableVirtualKeyboardFragment.java)
+// LINT.ThenChange(AvailableKeyboardAppsFragment.java)

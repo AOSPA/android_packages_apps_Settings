@@ -28,8 +28,8 @@ import org.junit.Rule
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class AvailableVirtualKeyboardApiScreenTest {
-    private val tester = ApiTester(AvailableVirtualKeyboardApiScreen())
+class AvailableKeyboardAppsApiScreenTest {
+    private val tester = ApiTester(AvailableKeyboardAppsApiScreen())
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 

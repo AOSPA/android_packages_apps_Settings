@@ -34,14 +34,14 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VirtualKeyboardPreferenceController extends AbstractPreferenceController
+public class KeyboardAppsPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
     private final InputMethodManager mImm;
     private final DevicePolicyManager mDpm;
     private final PackageManager mPm;
 
-    public VirtualKeyboardPreferenceController(Context context) {
+    public KeyboardAppsPreferenceController(Context context) {
         super(context);
         mPm = mContext.getPackageManager();
         mDpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
@@ -92,6 +92,9 @@ public class VirtualKeyboardPreferenceController extends AbstractPreferenceContr
         for (String label : labels) {
             summaries.add(bidiFormatter.unicodeWrap(label));
         }
-        preference.setSummary(ListFormatter.getInstance().format(summaries));
+        preference.setSummary(
+                mContext.getString(
+                        R.string.keyboard_apps_category_summary,
+                        ListFormatter.getInstance().format(summaries)));
     }
 }
