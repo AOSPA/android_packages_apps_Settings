@@ -340,7 +340,7 @@
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Tímabelti"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Heimatímabelti"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Veldu tímabelti"</string>
-    <string name="home_time_zone_summary" msgid="1494773352044636274">"Stilltu tímabelti heimilisins fyrir þegar þú ert í burtu"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"Stilltu tímabelti heimilisins til að sjá á ferðalögum"</string>
     <string name="use_home_time_zone_title" msgid="8026361707497256390">"Nota heimatímabelti"</string>
     <string name="suggestions_category_title" msgid="669819615912272575">"Tillögur"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Velja tímabelti"</string>
@@ -1828,8 +1828,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Breytingar á staðsetningargreiningu tímabeltis eru ekki leyfðar"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Ef staðsetning tækis er tiltæk þá kann hún að vera notuð til að stilla tímabeltið þitt"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Tilkynningar"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Fáðu tilkynningu þegar tíminn breytist sjálfkrafa"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Breyting á tímabelti"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Fáðu tilkynningu þegar tímabeltið þitt uppfærist sjálfkrafa"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"tilkynning, tími, belti, tímabelti"</string>
@@ -2135,13 +2134,22 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Tungumál"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Sýna hnapp fyrir lyklaborðsval"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Leyfa að hnappurinn fyrir lyklaborðsval birtist á yfirlitsstikunni þegar innsláttarreitur er valinn"</string>
-    <string name="virtual_keyboard_category" msgid="2339505603075527212">"Skjályklaborð"</string>
-    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tiltækt skjályklaborð"</string>
+    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
+    <skip />
+    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
+    <skip />
+    <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
+    <skip />
+    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
+    <skip />
     <string name="keyboard_options_category" msgid="8040137073401152608">"Valkostir"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Aðgengi"</string>
-    <string name="physical_keyboard_title" msgid="3328134097512350958">"Vélbúnaðarlyklaborð"</string>
-    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Val á hnappasetningu lyklaborðs"</string>
+    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Endurkastslyklar"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Láttu lyklaborðið hunsa það þegar þú ýtir snöggt og endurtekið á sama lykilinn"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Töf endurkastslykla"</string>
@@ -2330,7 +2338,8 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Endurbeina titringi"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Senda titring í leikjafjarstýringu þegar hún er tengd"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Lyklaskipan"</string>
-    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Uppsetningar vélbúnaðarlyklaborðs"</string>
+    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
+    <skip />
     <string name="user_dict_settings_title" msgid="680410651924276991">"Sérsniðin orðabók"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Eigin orðabók fyrir vinnuna"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Bættu við orðum til að nota í forritum á borð við ritvilluleit"</string>
@@ -2352,9 +2361,12 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Fyrir öll tungumál"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Fleiri tungumál…"</string>
     <string name="testing" msgid="6294172343766732037">"Prófun"</string>
-    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Skjályklaborð, verkfæri"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Skjályklaborð, vélbúnaðarlyklaborð, verkfæri"</string>
-    <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Vélbúnaðarlyklaborð"</string>
+    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
+    <skip />
+    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
+    <skip />
+    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
+    <skip />
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Uppsetning"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Veldu græju"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Veldu græju"</string>
@@ -2928,8 +2940,7 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
-    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
-    <skip />
+    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"Rafhlöðunotkun og skjátími eru ekki mæld á meðan síminn er í hleðslu"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Rafhlöðunotkun forrits"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Notkunarupplýsingar"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Stilla orkunotkun"</string>
@@ -3760,7 +3771,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"textastærð, stórt letur, stór leturgerð, stór texti, sjónskerðing, stækka texta, leturstækkari, leturstækkun"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"alltaf kveikt á hvíldarskjá, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, merki, lesari"</string>
-    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"lyklaborð, snertisvörun, titra,"</string>
+    <!-- no translation found for keywords_keyboard_vibration (5870649353180725920) -->
+    <skip />
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"ytri skjár, tengdur skjár, framlengdur skjár, annar skjár, innbyggður skjár, raða skjám, spegill, stærð skjás, snúningur, upplausn, endurnýjunartíðni"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"innskotsmerki, textabendill, bendill, blikkandi, blikktíðni, blikkhraði, hreyfimynd, minnka hreyfimynd, fjarlægja hreyfimynd"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Hljóðstyrkur og titringur"</string>
@@ -5762,6 +5774,8 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"Velja skjávara"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Sérsníða"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Sérsníða <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for dream_preview_button_description (1752727543834253129) -->
+    <skip />
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Endurræsingar er krafist til að kveikja á stuðningi við glugga á frjálsu sniði."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Endurræsingar er krafist til að uppfæra tiltækileika glugga á frjálsu sniði."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Endurræsingar er krafist til að virkja glugga á frjálsu sniði á aukaskjáum."</string>
@@ -5813,8 +5827,7 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> sinnum <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Forritið verður endurræst þegar þú breytir myndhlutfallinu. Óvistaðar breytingar gætu glatast. Sum forrit eru ef til vill ekki fínstillt fyrir tiltekin myndhlutföll."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Reynsla"</string>
-    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
-    <skip />
+    <string name="virtual_gamepad_title" msgid="8888343036739485679">"Sýndar-leikjafjarstýring"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingrafaralesari"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flasstilkynningar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Um flasstilkynningar"</string>
