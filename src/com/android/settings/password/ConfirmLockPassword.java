@@ -52,8 +52,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.accessibility.AccessibilityNodeInfo.AccessibilityAction;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -74,7 +74,9 @@ import com.android.internal.widget.VerifyCredentialResponse;
 import com.android.settings.R;
 import com.android.settings.SetupRedactionInterstitial;
 import com.android.settings.Utils;
+import com.android.settings.accessibility.shared.utils.SetupWizardUtilKt;
 import com.android.settings.flags.Flags;
+import com.android.settings.widget.FocusIndicatorDrawable;
 import com.android.settings.widget.ImeAwareTextInputEditText;
 import com.android.settingslib.animation.AppearAnimationUtils;
 import com.android.settingslib.animation.DisappearAnimationUtils;
@@ -82,6 +84,7 @@ import com.android.settingslib.animation.DisappearAnimationUtils;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
+import com.google.android.setupcompat.util.WizardManagerHelper;
 import com.google.android.setupdesign.util.ThemeHelper;
 
 import java.time.Duration;
@@ -144,6 +147,12 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
         private boolean mIsManagedProfile;
         private CharSequence mCheckBoxLabel;
         private boolean mIsExpressiveStyle;
+
+        // Focus ring indicator dimensions
+        private static final int FOCUS_RING_HORIZONTAL_PADDING_ADJUSTMENT_DP = -12;
+        private static final int FOCUS_RING_VERTICAL_PADDING_ADJUSTMENT_DP = -4;
+        // Use "999" to specify a circular corner radius
+        private static final int FOCUS_RING_CORNER_RADIUS_DP = 999;
 
         // required constructor for fragments
         public ConfirmLockPasswordFragment() {
@@ -349,6 +358,24 @@ public class ConfirmLockPassword extends ConfirmDeviceCredentialBaseActivity {
                     }
                 }
                 updateRemoteLockscreenValidationViews();
+            }
+
+            final boolean shouldShowFocusRingsInSuw =
+                    SetupWizardUtilKt.shouldShowFocusRingsInSuw(getActivity())
+                    ||
+                    (com.android.settings.accessibility.Flags.enableInsetFocusRingsInSuwReadOnly()
+                    && getResources().getBoolean(
+                        com.android.internal.R.bool.config_enableInsetFocusRingsInSuw)
+                    && !WizardManagerHelper.isUserSetupComplete(getContext()));
+            if (mCheckBox != null && shouldShowFocusRingsInSuw) {
+                mCheckBox.setForeground(
+                        new FocusIndicatorDrawable.Builder(getContext())
+                                .withHorizontalPaddingAdjustment(
+                                    FOCUS_RING_HORIZONTAL_PADDING_ADJUSTMENT_DP)
+                                .withVerticalPaddingAdjustment(
+                                    FOCUS_RING_VERTICAL_PADDING_ADJUSTMENT_DP)
+                                .withCornerRadius(FOCUS_RING_CORNER_RADIUS_DP)
+                                .build());
             }
 
             if (mForgotButton != null) {
