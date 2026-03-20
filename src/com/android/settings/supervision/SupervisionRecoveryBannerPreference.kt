@@ -24,6 +24,7 @@ import android.content.SharedPreferences
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.Preference
+import androidx.recyclerview.widget.RecyclerView
 import com.android.settings.R
 import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.credentialmanagement.SupervisionPinRecoveryActivity
@@ -47,6 +48,7 @@ class SupervisionRecoveryBannerPreference :
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
     private lateinit var setUpRecoveryLauncher: ActivityResultLauncher<Intent>
     private lateinit var prefs: SharedPreferences
+    private var isVisible: Boolean? = null
 
     override val key: String
         get() = KEY
@@ -124,6 +126,15 @@ class SupervisionRecoveryBannerPreference :
             banner.isVisible = false
             lifeCycleContext.notifyPreferenceChange(KEY)
         }
+
+        if (isVisible == false && banner.isVisible) {
+            val fragment = lifeCycleContext.lifecycleOwner
+            if (fragment is SupervisionDashboardFragment) {
+                val recyclerView: RecyclerView? = fragment.listView
+                recyclerView?.post { recyclerView.scrollToPosition(0) }
+            }
+        }
+        isVisible = banner.isVisible
     }
 
     private fun hasAccountNameSet(info: SupervisionRecoveryInfo?): Boolean {
