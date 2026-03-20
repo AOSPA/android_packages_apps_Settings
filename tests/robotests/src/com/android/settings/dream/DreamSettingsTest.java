@@ -63,7 +63,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
+import org.junit.After;
 import org.robolectric.annotation.Config;
+import org.robolectric.util.ReflectionHelpers;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -127,6 +129,11 @@ public class DreamSettingsTest {
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
+    @After
+    public void tearDown() {
+        ReflectionHelpers.setStaticField(DreamBackend.class, "sInstance", null);
+    }
 
     @Test
     public void getSettingFromPrefKey() {
@@ -281,6 +288,12 @@ public class DreamSettingsTest {
         MockitoAnnotations.initMocks(this);
 
         final Context context = ApplicationProvider.getApplicationContext();
+
+        final DreamBackend mockBackend = mock(DreamBackend.class);
+        when(mockBackend.isDreamSwitcherEnabled()).thenReturn(true);
+        when(mockBackend.isEnabled()).thenReturn(true);
+        ReflectionHelpers.setStaticField(DreamBackend.class, "sInstance", mockBackend);
+
         final DreamSettings dreamSettings = prepareDreamSettings(context);
 
         // One dream supports complications, one does not
@@ -305,6 +318,12 @@ public class DreamSettingsTest {
         MockitoAnnotations.initMocks(this);
 
         final Context context = ApplicationProvider.getApplicationContext();
+
+        final DreamBackend mockBackend = mock(DreamBackend.class);
+        when(mockBackend.isDreamSwitcherEnabled()).thenReturn(true);
+        when(mockBackend.isEnabled()).thenReturn(true);
+        ReflectionHelpers.setStaticField(DreamBackend.class, "sInstance", mockBackend);
+
         final DreamSettings dreamSettings = prepareDreamSettings(context);
 
         // Neither dream supports complications
@@ -420,6 +439,12 @@ public class DreamSettingsTest {
         MockitoAnnotations.initMocks(this);
 
         final Context context = ApplicationProvider.getApplicationContext();
+
+        final DreamBackend mockBackend = mock(DreamBackend.class);
+        when(mockBackend.isDreamSwitcherEnabled()).thenReturn(true);
+        when(mockBackend.isEnabled()).thenReturn(true);
+        ReflectionHelpers.setStaticField(DreamBackend.class, "sInstance", mockBackend);
+
         final DreamSettings dreamSettings = prepareDreamSettings(context);
 
         // One compatible dream, one incompatible dream
@@ -443,6 +468,12 @@ public class DreamSettingsTest {
         MockitoAnnotations.initMocks(this);
 
         final Context context = ApplicationProvider.getApplicationContext();
+
+        final DreamBackend mockBackend = mock(DreamBackend.class);
+        when(mockBackend.isDreamSwitcherEnabled()).thenReturn(true);
+        when(mockBackend.isEnabled()).thenReturn(true);
+        ReflectionHelpers.setStaticField(DreamBackend.class, "sInstance", mockBackend);
+
         final DreamSettings dreamSettings = prepareDreamSettings(context);
 
         // Only incompatible dreams

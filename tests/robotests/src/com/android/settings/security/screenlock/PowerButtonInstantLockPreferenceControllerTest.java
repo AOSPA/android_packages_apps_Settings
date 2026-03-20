@@ -18,11 +18,14 @@ package com.android.settings.security.screenlock;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
+import android.content.pm.PackageManager;
 
 import androidx.preference.SwitchPreference;
 
@@ -48,6 +51,7 @@ public class PowerButtonInstantLockPreferenceControllerTest {
     private LockPatternUtils mLockPatternUtils;
     @Mock
     private TrustAgentManager mTrustAgentManager;
+    @Mock private PackageManager mPackageManager;
 
     private Context mContext;
     private PowerButtonInstantLockPreferenceController mController;
@@ -57,7 +61,8 @@ public class PowerButtonInstantLockPreferenceControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mContext = RuntimeEnvironment.application;
+        mContext = spy(RuntimeEnvironment.application);
+        doReturn(mPackageManager).when(mContext).getPackageManager();
         mFeatureFactory = FakeFeatureFactory.setupForTest();
         when(mFeatureFactory.securityFeatureProvider.getTrustAgentManager())
                 .thenReturn(mTrustAgentManager);
@@ -97,6 +102,18 @@ public class PowerButtonInstantLockPreferenceControllerTest {
     @Test
     public void isAvailable_lockSetToNone_shouldReturnFalse() {
         when(mLockPatternUtils.isSecure(TEST_USER_ID)).thenReturn(false);
+
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void isAvailable_onLaptop_shouldReturnFalse() {
+        // Configure a password, which would normally enable the setting.
+        when(mLockPatternUtils.isSecure(TEST_USER_ID)).thenReturn(true);
+        when(mLockPatternUtils.getKeyguardStoredPasswordQuality(TEST_USER_ID))
+                .thenReturn(DevicePolicyManager.PASSWORD_QUALITY_ALPHANUMERIC);
+
+        doReturn(true).when(mPackageManager).hasSystemFeature(PackageManager.FEATURE_PC);
 
         assertThat(mController.isAvailable()).isFalse();
     }

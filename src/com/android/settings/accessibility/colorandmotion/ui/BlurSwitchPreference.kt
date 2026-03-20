@@ -37,6 +37,8 @@ class BlurSwitchPreference :
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
 
+    override val availabilityDescription = "The device must support cross window blur."
+
     override fun isAvailable(context: Context) = CROSS_WINDOW_BLUR_SUPPORTED
 
     override fun isEnabled(context: Context) = !context.isPowerSaveMode()

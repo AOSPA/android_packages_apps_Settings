@@ -20,10 +20,10 @@ import android.accounts.AccountManager
 import android.content.Context
 import android.os.Process
 import com.android.settings.R
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 
 /** Provides a list of accounts associated with a associated with the current process user. */
-class Accounts : FiniteOptionsType<String> {
+class Accounts : DirectFiniteOptionsType<String> {
     override fun getType(): Class<String> = String::class.java
 
     override fun getDescription(context: Context): String =

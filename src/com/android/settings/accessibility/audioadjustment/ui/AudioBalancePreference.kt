@@ -31,6 +31,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 import com.google.android.material.slider.Slider
@@ -49,6 +50,11 @@ class AudioBalancePreference(context: Context) :
 
     override val key: String
         get() = KEY
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override val purpose: Int
         get() = R.string.a11y_audio_balance_purpose

@@ -31,6 +31,7 @@ import com.android.settings.network.telephony.subscriptionManager
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -79,6 +80,9 @@ private constructor(
     override val key: String
         get() = KEY
 
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
+
     // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.billing_preference_catalyst_purpose
@@ -111,6 +115,9 @@ private constructor(
         }
 
     override fun isEnabled(context: Context) = DataUsageUtils.hasMobileData(context)
+
+    override val availabilityDescription =
+        "The subscription ID must be active."
 
     override fun isAvailable(context: Context) =
         context.subscriptionManager?.isActiveSubscriptionId(subId) ?: false

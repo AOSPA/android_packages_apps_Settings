@@ -20,6 +20,7 @@ import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import com.google.common.truth.Truth.assertThat
+import java.util.TimeZone
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -51,9 +52,11 @@ class HomeTimeZoneSuggestorTest {
     }
 
     @Test
-    fun getTimeZoneSuggestions_noSim_shouldReturnEmptyList() {
+    fun getTimeZoneSuggestions_noSim_shouldReturnCurrentTimeZone() {
         `when`(mSubscriptionManager.getActiveSubscriptionInfoList()).thenReturn(null)
-        assertThat(mSuggestor.getTimeZoneSuggestions()).isEmpty()
+        assertThat(mSuggestor.getTimeZoneSuggestions().size).isEqualTo(1)
+        assertThat(mSuggestor.getTimeZoneSuggestions()[0].getId())
+            .isEqualTo(TimeZone.getDefault().getID())
     }
 
     @Test
@@ -76,5 +79,66 @@ class HomeTimeZoneSuggestorTest {
 
         // Check that one of the suggestions is in the US
         assertThat(suggestions.any { "America/Los_Angeles" == it.getId() }).isTrue()
+    }
+
+    @Test
+    fun getTimeZoneSuggestions_differentTimeZone_shouldReturnBoth() {
+        val originalTimeZone = TimeZone.getDefault()
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("America/Los_Angeles"))
+
+            val subscriptionInfo =
+                SubscriptionInfo.Builder()
+                    .setId(0)
+                    .setSimSlotIndex(0)
+                    .setDisplayName("Vodafone UK")
+                    .setCarrierName("Vodafone UK")
+                    .setMcc("234")
+                    .setMnc("15")
+                    .setCountryIso("GB")
+                    .build()
+
+            `when`(mSubscriptionManager.getActiveSubscriptionInfoList())
+                .thenReturn(listOf(subscriptionInfo))
+
+            val suggestions = mSuggestor.getTimeZoneSuggestions()
+
+            // It should contain both the current default timezone and the SIM-based suggestions.
+            assertThat(suggestions.size).isEqualTo(2) // 1 UK suggestion + current timezone
+            assertThat(suggestions.any { "Europe/London" == it.getId() }).isTrue()
+            assertThat(suggestions.any { "America/Los_Angeles" == it.getId() }).isTrue()
+        } finally {
+            TimeZone.setDefault(originalTimeZone)
+        }
+    }
+
+    @Test
+    fun getTimeZoneSuggestions_sameTimeZone_shouldNotHaveDuplicates() {
+        val originalTimeZone = TimeZone.getDefault()
+        try {
+            TimeZone.setDefault(TimeZone.getTimeZone("America/Los_Angeles"))
+
+            val subscriptionInfo =
+                SubscriptionInfo.Builder()
+                    .setId(0)
+                    .setSimSlotIndex(0)
+                    .setDisplayName("Google Fi")
+                    .setCarrierName("Google Fi")
+                    .setMcc("310")
+                    .setMnc("110")
+                    .setCountryIso("US")
+                    .build()
+
+            `when`(mSubscriptionManager.getActiveSubscriptionInfoList())
+                .thenReturn(listOf(subscriptionInfo))
+
+            val suggestions = mSuggestor.getTimeZoneSuggestions()
+
+            // Check that it only appears once to ensure deduplication works.
+            assertThat(suggestions.size).isEqualTo(8) // 8 US suggestions
+            assertThat(suggestions.any { "America/Los_Angeles" == it.getId() }).isTrue()
+        } finally {
+            TimeZone.setDefault(originalTimeZone)
+        }
     }
 }

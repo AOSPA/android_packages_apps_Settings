@@ -67,6 +67,7 @@ sealed class ButtonNavigationSettingsOrderPreference(
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun getReadPermissions(context: Context): Permissions? =
         ButtonNavigationSettingsOrderStore.readPermissions
 

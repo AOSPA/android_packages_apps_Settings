@@ -16,6 +16,9 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController.SlotUpdateSource.CLICK_DAILY_CHART;
+import static com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController.SlotUpdateSource.CLICK_HOURLY_CHART;
+import static com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController.SlotUpdateSource.HIGHLIGHT_SLOT;
 import static com.android.settings.fuelgauge.batteryusage.BatteryChartViewModel.SELECTED_INDEX_ALL;
 import static com.android.settings.fuelgauge.batteryusage.BatteryChartViewModel.SELECTED_INDEX_INVALID;
 
@@ -32,6 +35,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -53,6 +57,8 @@ import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
 import com.google.common.base.Objects;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -77,10 +83,26 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private static final String KEY_HOURLY_CHART_INDEX = "hourly_chart_index";
     private static final String KEY_FIRST_LAUNCH_STATE = "first_launch_state";
 
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({
+            SlotUpdateSource.INITIAL_REFRESH,
+            SlotUpdateSource.DATA_UPDATE_REFRESH,
+            SlotUpdateSource.CLICK_DAILY_CHART,
+            SlotUpdateSource.CLICK_HOURLY_CHART,
+            SlotUpdateSource.HIGHLIGHT_SLOT
+    })
+    public @interface SlotUpdateSource {
+        int INITIAL_REFRESH = 0;
+        int DATA_UPDATE_REFRESH = 1;
+        int CLICK_DAILY_CHART = 2;
+        int CLICK_HOURLY_CHART = 3;
+        int HIGHLIGHT_SLOT = 4;
+    }
+
     /** A callback listener for the selected index is updated. */
     interface OnSelectedIndexUpdatedListener {
         /** The callback function for the selected index is updated. */
-        void onSelectedIndexUpdated();
+        void onSelectedIndexUpdated(@SlotUpdateSource int source);
     }
 
     @VisibleForTesting Context mPrefContext;
@@ -233,8 +255,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         if (mIsFirstLaunch && FeatureFactory.getFeatureFactory()
                 .getPowerUsageFeatureProvider().isBatteryAdvanceInfoEnabled()) {
             // Select last daily slot instead of all by default once available.
-            // -2 for last slot since mDailyViewModel's index start with -1 (for select all cases).
-            mDailyChartIndex = mDailyViewModel.size() - 2;
+            mDailyChartIndex = mDailyViewModel.getLastSlotIndex();
             mIsFirstLaunch = false;
         }
         refreshUi();
@@ -256,7 +277,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mHourlyHighlightSlotIndex = hourlyHighlightSlotIndex;
         refreshUi();
         if (mOnSelectedIndexUpdatedListener != null) {
-            mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+            mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated(HIGHLIGHT_SLOT);
         }
     }
 
@@ -283,7 +304,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                         mDailyChartView.setAccessibilityPaneTitle(
                                 getAccessibilityAnnounceMessage(/* isSlotSelected= */ true)));
         if (mOnSelectedIndexUpdatedListener != null) {
-            mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+            mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated(HIGHLIGHT_SLOT);
         }
     }
 
@@ -331,7 +352,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                                     : SettingsEnums.ACTION_BATTERY_USAGE_DAILY_TIME_SLOT,
                             mDailyChartIndex);
                     if (mOnSelectedIndexUpdatedListener != null) {
-                        mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+                        mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated(CLICK_DAILY_CHART);
                     }
                 });
         mHourlyChartView = hourlyChartView;
@@ -359,7 +380,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                                     : SettingsEnums.ACTION_BATTERY_USAGE_TIME_SLOT,
                             mHourlyChartIndex);
                     if (mOnSelectedIndexUpdatedListener != null) {
-                        mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated();
+                        mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated(CLICK_HOURLY_CHART);
                     }
                 });
         refreshUi();
@@ -401,7 +422,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
             mDailyChartIndex = 0;
         } else {
             mDailyChartView.setVisibility(View.VISIBLE);
-            if (mDailyChartIndex >= mDailyViewModel.size()) {
+            if (mDailyChartIndex > mDailyViewModel.getLastSlotIndex()) {
                 mDailyChartIndex = SELECTED_INDEX_ALL;
             }
             mDailyViewModel.setSelectedIndex(mDailyChartIndex);
@@ -415,7 +436,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         } else {
             animateBatteryHourlyChartView(/* visible= */ true);
             final BatteryChartViewModel hourlyViewModel = mHourlyViewModels.get(mDailyChartIndex);
-            if (mHourlyChartIndex >= hourlyViewModel.size()) {
+            if (mHourlyChartIndex > hourlyViewModel.getLastSlotIndex()) {
                 mHourlyChartIndex = SELECTED_INDEX_ALL;
             }
             hourlyViewModel.setSelectedIndex(mHourlyChartIndex);

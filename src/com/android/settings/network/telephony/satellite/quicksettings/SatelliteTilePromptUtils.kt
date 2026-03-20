@@ -89,13 +89,13 @@ open class SatelliteTilePromptUtils {
     open fun shouldShowSatelliteTilePrompt(context: Context): Boolean {
         val count = getPromptCount(context)
         if (areAllPromptsShown(context)) {
-            Log.d(TAG, "shouldShowSatelliteTilePrompt: false, all prompts shown.")
+            Log.i(TAG, "shouldShowSatelliteTilePrompt: false, all prompts shown.")
             return false
         }
 
         // The first prompt is always shown.
         if (count == 0) {
-            Log.d(TAG, "shouldShowSatelliteTilePrompt: true, first prompt.")
+            Log.i(TAG, "shouldShowSatelliteTilePrompt: true, first prompt.")
             return true
         }
 
@@ -104,7 +104,7 @@ open class SatelliteTilePromptUtils {
         val requiredInterval = RETRY_INTERVALS_MS.getOrElse(count) { Long.MAX_VALUE }
 
         val shouldShow = timeSinceLastPrompt >= requiredInterval
-        Log.d(
+        Log.i(
             TAG,
             "shouldShowSatelliteTilePrompt: $shouldShow. " +
                 "Count=$count, " +
@@ -124,7 +124,13 @@ open class SatelliteTilePromptUtils {
             .putInt(PREF_PROMPT_COUNT, newCount)
             .putLong(PREF_LAST_PROMPT_TIMESTAMP, System.currentTimeMillis())
             .apply()
-        Log.d(TAG, "recordPromptShown: newCount=$newCount")
+        logd { "recordPromptShown: newCount=$newCount" }
+    }
+
+    private inline fun logd(message: () -> String) {
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, message())
+        }
     }
 
     /**

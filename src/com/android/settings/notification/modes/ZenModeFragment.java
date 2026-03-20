@@ -39,6 +39,7 @@ import com.android.settingslib.widget.SettingsThemeHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 public class ZenModeFragment extends ZenModeFragmentBase {
 
     // for mode context menu
@@ -215,3 +216,4 @@ public class ZenModeFragment extends ZenModeFragmentBase {
         }
     }
 }
+// LINT.ThenChange(ZenModeApiScreen.kt)

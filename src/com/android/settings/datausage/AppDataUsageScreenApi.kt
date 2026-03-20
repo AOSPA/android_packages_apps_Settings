@@ -16,17 +16,21 @@
 
 package com.android.settings.datausage
 
-import android.content.Context
-import android.content.pm.PackageManager
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
-import com.android.settings.overlay.FeatureFactory.Companion.appContext
+import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 /**
  * The [PreferencesApiScreen] for the App Data Usage screen.
@@ -43,6 +47,10 @@ class AppDataUsageScreenApi :
         alreadyPartiallyMigrated = DataUsageAppDetailScreen::class,
     ) {
 
+    private val repository = featureFactory.wifiFeatureProvider.dataUsageRepository
+
+    private fun getPackageName(): String? = keyParameters?.get(KEY_APP_PACKAGE_NAME)
+
     init {
         flag { Flags.catalystMigration26q2() }
 
@@ -54,9 +62,68 @@ class AppDataUsageScreenApi :
             )
 
             prepareScreenExtras { keyParameters, extras ->
-                val packageName = keyParameters[KEY_APP_PACKAGE_NAME] ?: return@prepareScreenExtras
+                val packageName: String =
+                    keyParameters[KEY_APP_PACKAGE_NAME] ?: return@prepareScreenExtras
                 extras.putString(KEY_APP_PACKAGE_NAME, packageName)
-                extras.putInt(AppInfoBase.ARG_PACKAGE_UID, appContext.getPackageUid(packageName))
+
+                val uid: Int = runBlocking(Dispatchers.IO) { repository.getPackageUid(packageName) }
+                extras.putInt(AppInfoBase.ARG_PACKAGE_UID, uid)
+            }
+        }
+
+        preference(
+            key = KEY_APP_BACKGROUND_DATA_SWITCH,
+            purpose = R.string.app_background_data_switch_purpose,
+            type = AnyBoolean,
+        ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+            get {
+                execute {
+                    val packageName = getPackageName() ?: return@execute false
+                    !repository.isPolicyReject(packageName)
+                }
+            }
+            set {
+                execute { value: Boolean ->
+                    val packageName = getPackageName() ?: return@execute
+                    repository.setPolicyReject(packageName, !value)
+                }
+            }
+        }
+
+        preference(
+            key = KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH,
+            purpose = R.string.app_unrestricted_mobile_data_usage_switch_purpose,
+            type = AnyBoolean,
+        ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+            preconditions(R.string.app_unrestricted_mobile_data_usage_switch_preconditions) {
+                val packageName =
+                    getPackageName()
+                        ?: return@preconditions Disallowed(R.string.app_package_name_unavailable)
+
+                runBlocking(Dispatchers.IO) {
+                    if (repository.isPolicyAllowAvailable(packageName)) {
+                        Allowed
+                    } else {
+                        Log.w(TAG, "Unrestricted Mobile Data is unavailable for $packageName")
+
+                        // TODO(b/474027987) Catalyst: migrate the Disallowed to InvalidPreference
+                        Disallowed(R.string.app_unrestricted_mobile_data_usage_switch_unavailable)
+                    }
+                }
+            }
+            get {
+                execute {
+                    val packageName = getPackageName() ?: return@execute false
+                    repository.isPolicyAllow(packageName)
+                }
+            }
+            set {
+                execute { value: Boolean ->
+                    val packageName = getPackageName() ?: return@execute
+                    repository.setPolicyAllow(packageName, value)
+                }
             }
         }
     }
@@ -65,20 +132,8 @@ class AppDataUsageScreenApi :
         private const val TAG = "AppDataUsageScreenApi"
         const val KEY = "api_app_data_usage_screen"
         const val KEY_APP_PACKAGE_NAME = "app"
-
-        /**
-         * Gets the UID for a given package name.
-         *
-         * @param packageName The target package name.
-         * @return The UID of the package, or -1 if the package is not found.
-         */
-        fun Context.getPackageUid(packageName: String): Int {
-            return try {
-                packageManager.getPackageUid(packageName, 0)
-            } catch (e: PackageManager.NameNotFoundException) {
-                Log.e(TAG, "Package not found: $packageName", e)
-                -1
-            }
-        }
+        const val KEY_APP_BACKGROUND_DATA_SWITCH = "app_background_data_switch"
+        const val KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH =
+            "app_unrestricted_mobile_data_usage_switch"
     }
 }

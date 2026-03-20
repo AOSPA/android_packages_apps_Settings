@@ -50,6 +50,9 @@ class SecurityPatchLevelPreference :
         Intent(Intent.ACTION_VIEW)
             .setData(Uri.parse("https://source.android.com/docs/security/bulletin/"))
 
+    override val availabilityDescription =
+        "The device must have a security patch level."
+
     override fun isAvailable(context: Context) = context.getPatch().isNotEmpty()
 
     override fun getSummary(context: Context) = context.getPatch()

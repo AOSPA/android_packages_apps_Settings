@@ -29,6 +29,7 @@ import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
 import com.android.settings.dashboard.profileselector.ProfileSelectFragment.ProfileType;
 import com.android.settings.deviceinfo.storage.StorageCacheHelper;
+import com.android.settings.flags.Flags;
 import com.android.settingslib.deviceinfo.PrivateStorageInfo;
 import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider;
 import com.android.settingslib.utils.ThreadUtils;
@@ -91,10 +92,27 @@ public class TopLevelStoragePreferenceController extends BasePreferenceControlle
     }
 
     private String getSummary(long usedBytes, long totalBytes) {
-        NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+        if (Flags.storageSummaryPercentageAlignment()) {
+            NumberFormat numberFormat = NumberFormat.getIntegerInstance();
+            int percentValue = totalBytes == 0L ? 0
+                    : (int) ((((double) usedBytes) / totalBytes) * 100);
+            String localizedDigits = numberFormat.format(percentValue);
 
-        return mContext.getString(R.string.storage_toplevel_summary,
-                totalBytes == 0L ? "0" : percentageFormat.format(((double) usedBytes) / totalBytes),
-                Formatter.formatFileSize(mContext, totalBytes - usedBytes));
+            // Wrap digits in the dedicated percentage formatting resource
+            // This allows the L10n team to control sign placement visually.
+            String formattedPercentage = mContext.getString(R.string.storage_percentage_format,
+                    localizedDigits);
+            String fileSize = Formatter.formatFileSize(mContext, totalBytes - usedBytes);
+
+            return mContext.getString(R.string.storage_toplevel_summary,
+                    formattedPercentage, fileSize);
+        } else {
+            NumberFormat percentageFormat = NumberFormat.getPercentInstance();
+
+            return mContext.getString(R.string.storage_toplevel_summary,
+                    totalBytes == 0L ? "0"
+                            : percentageFormat.format(((double) usedBytes) / totalBytes),
+                    Formatter.formatFileSize(mContext, totalBytes - usedBytes));
+        }
     }
 }

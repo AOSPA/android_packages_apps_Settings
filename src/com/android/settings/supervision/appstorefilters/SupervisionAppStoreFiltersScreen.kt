@@ -46,6 +46,8 @@ class SupervisionAppStoreFiltersActivity :
 open class SupervisionAppStoreFiltersScreen :
     PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceLifecycleProvider {
 
+    override val availabilityDescription = "The device must support the app store filters screen."
+
     override fun isAvailable(context: Context) = Flags.enableAppStoreFiltersScreen()
 
     override val key: String

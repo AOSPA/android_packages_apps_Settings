@@ -23,6 +23,7 @@ import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
 class AutoclickRevertToLeftClickPreference : BooleanValuePreference, SwitchPreferenceBinding {
@@ -45,6 +46,11 @@ class AutoclickRevertToLeftClickPreference : BooleanValuePreference, SwitchPrefe
                 AccessibilityManager.AUTOCLICK_REVERT_TO_LEFT_CLICK_DEFAULT,
             )
         }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     companion object {
         const val SETTING_KEY = Settings.Secure.ACCESSIBILITY_AUTOCLICK_REVERT_TO_LEFT_CLICK

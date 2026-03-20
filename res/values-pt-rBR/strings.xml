@@ -328,8 +328,30 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Usar o padrão do local"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Usar formato de 24 horas"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Horário"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"Formato de hora"</string>
+    <!-- no translation found for time_format_category_title (3122743852067365261) -->
+    <skip />
+    <!-- no translation found for time_format_page_title (2599662358219245734) -->
+    <skip />
+    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
+    <skip />
+    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
+    <skip />
+    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
+    <skip />
+    <!-- no translation found for time_format_automatic (8627801531369181488) -->
+    <skip />
+    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
+    <skip />
+    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
+    <skip />
+    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
+    <skip />
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Fuso horário"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"Fuso horário da casa"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"Selecione um fuso horário"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"Defina um fuso horário para quando você estiver fora de casa"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"Usar fuso horário da casa"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"Sugestões"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Selecionar fuso horário"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"Pesquisar fuso horário"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Data"</string>
@@ -739,7 +761,7 @@
     <string name="lock_settings_picker_update_lock_title" msgid="536853138943415927">"Escolha um novo bloqueio de tela"</string>
     <string name="lock_settings_picker_new_profile_lock_title" msgid="2270462215256413800">"Escolha um bloqueio para apps de trabalho"</string>
     <string name="lock_settings_picker_update_profile_lock_title" msgid="5929068163516308927">"Escolha um novo bloqueio de trabalho"</string>
-    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Para aumentar a segurança, defina um bloqueio de tela alternativo"</string>
+    <string name="lock_settings_picker_biometrics_added_security_message" msgid="1105247657304421299">"Para aumentar a segurança, defina um bloqueio de tela alternativo."</string>
     <string name="lock_settings_picker_biometric_message" msgid="2609666443527262781">"Escolha seu método de bloqueio de tela alternativo"</string>
     <string name="lock_settings_picker_admin_restricted_personal_message" msgid="3532653662159888328">"Se o bloqueio de tela for esquecido, ele não poderá ser redefinido pelo administrador de TI."</string>
     <string name="lock_settings_picker_admin_restricted_personal_message_action" msgid="5956615234246626264">"Defina um bloqueio diferente para o trabalho"</string>
@@ -850,8 +872,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Parear com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
-    <skip />
+    <string name="bluetooth_pairing_again_request" msgid="1394430519292575085">"Parear outra vez com <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Confirme para adicionar a segunda peça do seu dispositivo de áudio"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Código de pareamento Bluetooth"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Digite o código de pareamento e pressione \"Return\" ou \"Enter\""</string>
@@ -865,11 +886,9 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Permitir o acesso a contatos e ao histórico de ligações também"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"As informações serão usadas para fazer o anúncio de ligações e muito mais"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Verificar códigos de pareamento"</string>
-    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
-    <skip />
+    <string name="bluetooth_pairing_again_confirmation_title" msgid="838944639700876861">"Refazer pareamento"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Verifique se o código é igual ao que aparece no <xliff:g id="DEVICE_NAME">%1$s</xliff:g>.\n\nPara sua segurança, não digite esse código em nenhum lugar."</string>
-    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
-    <skip />
+    <string name="bluetooth_repairing_msg" msgid="4359999881389087827">"Este dispositivo já foi pareado antes e está tentando refazer essa conexão.\nSe você estiver em um local público, prossiga com cautela."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Não foi possível conectar ao <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Dispositivos encontrados"</string>
@@ -905,8 +924,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Melhora a qualidade do som."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Bateria"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Bateria, carregamento"</string>
-    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
-    <skip />
+    <string name="device_details_key_missing_title" msgid="3747991896959671040">"Coloque o <xliff:g id="DEVICE_NAME">%1$s</xliff:g> no modo de pareamento e tente se conectar de novo.\n\nSe o dispositivo não está por perto, você não precisa fazer nada."</string>
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Gerar registros de impressão detalhada"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Registros de depuração adicionais, incluindo o Internet Printing Protocol (IPP), que podem conter informações particulares."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Esquecer dispositivo"</string>
@@ -1432,8 +1450,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Protetor de tela"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"protetor de tela"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Indisponível durante o modo Hora de Dormir"</string>
-    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
-    <skip />
+    <string name="screensaver_unavailable_due_to_mode" msgid="8515924546767264225">"Indisponível neste dispositivo"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Usar o protetor de tela"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"Ao carregar ou quando encaixado na base"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"Ao carregar na base"</string>
@@ -1496,8 +1513,9 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Cancelar"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Proteção do chip"</string>
-    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"Proteção automática do bloqueio do chip"</string>
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"Gerenciamento automático do PIN"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Modo de proteção do bloqueio do chip"</string>
+    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
+    <skip />
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Gerenciado pelo Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Não gerenciado pelo Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Registro concluído"</string>
@@ -1506,13 +1524,24 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"PIN gerenciado pelo Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Valor do PIN gerenciado pelo Android:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Falha ao receber o PIN"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"Proteja o chip contra roubo"</string>
+    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
+    <skip />
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"PIN do chip gerenciado pelo Android"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"PIN do chip gerenciado manualmente"</string>
-    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"A tela de bloqueio precisa ser configurada para ativar a proteção do chip"</string>
+    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
+    <skip />
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"A tela de bloqueio é necessária para a proteção automática do chip. No momento, só é possível usar a manual"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Insira o PIN atual do chip"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Insira o PIN atual do chip"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"Usar padrão da operadora"</string>
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"Escolha o modo de proteção do chip"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"Manual"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"Automático (gerenciado pelo Android)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"Novo PIN do chip"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Confirmar novo PIN do chip"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Os PINs não correspondem. Confirme o novo PIN do chip."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"PIN incorreto. Tentativas restantes: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
+    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"Usar <xliff:g id="CARRIER">%1$s</xliff:g> para dados móveis?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Você está usando <xliff:g id="CARRIER2_0">%2$s</xliff:g> para dados móveis. Se alterar para <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> não será mais usada para dados móveis."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1815,6 +1844,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Não são permitidas mudanças na detecção de fuso horário do local"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Se a localização do dispositivo estiver disponível, ela poderá ser usada para definir seu fuso horário"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Notificações"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Mudança de fuso horário"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Receber uma notificação quando o fuso horário for atualizado automaticamente"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notificação, horário, fuso, fuso horário"</string>
@@ -1876,7 +1907,7 @@
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Esqueceu seu padrão?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Esqueceu seu PIN?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"Seu padrão confirma sua identidade"</string>
-    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"Seu PIN confirma sua identidade"</string>
+    <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"Seu PIN confirma sua identidade."</string>
     <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"Sua senha confirma sua identidade"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="2552062474449423029">"Seu padrão de trabalho confirma sua identidade"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6556640367641079244">"Seu PIN de trabalho confirma sua identidade"</string>
@@ -2099,9 +2130,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"Idioma e região"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Teclado"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"Você não tem permissão para alterar o idioma do dispositivo."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Idiomas e entrada"</string>
     <string name="input_assistance" msgid="3437568284144952104">"Ferramentas"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"Teclado e métodos de entrada"</string>
     <string name="system_language" msgid="1146762166579643257">"Idiomas do sistema"</string>
     <string name="phone_language" msgid="5986939176239963826">"Idiomas"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2110,7 +2139,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"Capitalização automática"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"Escrever a primeira letra nas sentenças com letra maiúscula"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"Pontuação automática"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"Configurações de teclado físico"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Pressione a tecla de Espaço duas vezes para inserir \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Mostrar senhas"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Mostrar os caracteres rapidamente enquanto você digita"</string>
@@ -2121,13 +2149,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Este corretor ortográfico pode coletar todo o texto que você digita, incluindo dados pessoais, como senhas e números de cartão de crédito. É um corretor do app <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Utilizar este corretor ortográfico?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Configurações"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Idioma"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Teclados"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Mostrar o botão do seletor do teclado"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Permitir que o botão do seletor de teclado apareça na barra de navegação quando um campo de entrada for selecionado"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"Teclado na tela"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Teclado na tela disponível"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"Gerenciar teclados na tela"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opções"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Acessibilidade"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Teclado físico"</string>
@@ -2187,9 +2213,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Rápida"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Lenta"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"Ver atalhos do teclado"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Mostrar lista de atalhos"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Teclados e ferramentas de perfil de trabalho"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"Teclado na tela para o trabalho"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Padrão"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"Controle de jogo"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Personalize as ações realizadas pelos botões do seu controle"</string>
@@ -2308,7 +2332,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"Aumentar taxa de repetição"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"Diminuir taxa de repetição"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"Layout do <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"Padrão"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automático: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"Usuário selecionado: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Fala"</string>
@@ -2322,10 +2345,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Controlador de jogos"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirecionar vibração"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Enviar vibração para o controlador de jogo quando conectado"</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"Escolha o layout do teclado"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"Configurar os layouts do teclado"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"Para alterar, pressione Ctrl+espaço"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"Padrão"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Layouts de teclado"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Layouts de teclado físico"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Dicionário pessoal"</string>
@@ -2373,7 +2392,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"Você pode personalizar este dispositivo do jeito que quiser. Estes recursos de acessibilidade podem ser alterados depois nas Configurações."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Mudar o tamanho da fonte"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Leitor de tela"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"Opções de teclado físico"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Legendas"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Áudio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"Geral"</string>
@@ -2599,7 +2617,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema escuro ampliado"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Configurações do tema escuro ampliado"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Abrir configurações do tema escuro ampliado"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"O tema escuro ampliado pode melhorar a legibilidade, mas talvez alguns apps sejam mostrados incorretamente.\n\nOs apps com essa configuração desativada vão usar a opção padrão do tema escuro."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remover animações"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduza o movimento na tela"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Cursor de texto piscando"</string>
@@ -2739,7 +2758,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Controles de aparelhos auditivos"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Sons"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Notificações"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"Toques e alarmes"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Os sons vão tocar nos aparelhos auditivos"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"Os sons vão tocar no alto-falante do dispositivo"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Os sons vão tocar nos aparelhos auditivos e no alto-falante do dispositivo"</string>
@@ -2777,7 +2795,7 @@
     <string name="enable_quick_setting" msgid="6648073323202243604">"Mostrar em \"Configurações Rápidas\""</string>
     <string name="daltonizer_mode_deuteranomaly_title" msgid="3229433065035047931">"Vermelho e verde, dificuldade com a cor verde"</string>
     <string name="daltonizer_mode_protanomaly_title" msgid="2572040492905945405">"Vermelho e verde, dificuldade com a cor vermelha"</string>
-    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Azul-amarelo"</string>
+    <string name="daltonizer_mode_tritanomaly_title" msgid="2278786218762602022">"Azul e amarelo"</string>
     <string name="daltonizer_mode_grayscale_title" msgid="152005391387952588">"Escala de cinza"</string>
     <string name="daltonizer_saturation_title" msgid="2999486412114963068">"Intensidade"</string>
     <string name="daltonizer_saturation_unavailable_summary" msgid="8319753055567798775">"Indisponível para o modo escala de cinza ou quando a correção de cor está desativada"</string>
@@ -3049,7 +3067,7 @@
     <string name="battery_usage_screen_time_less_than_one_minute" msgid="578511021578427369">"Tempo de tela: menos de um minuto"</string>
     <string name="power_usage_time_less_than_one_minute" msgid="1599706998204418081">"Menos de um minuto"</string>
     <string name="battery_usage_for_total_time" msgid="8402254046930910905">"Total: <xliff:g id="TIME">%s</xliff:g>"</string>
-    <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Segundo plano: <xliff:g id="TIME">%s</xliff:g>"</string>
+    <string name="battery_usage_for_background_time" msgid="9109637210617095188">"Tempo em segundo plano: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_time" msgid="3973865893520804115">"Tempo de tela: <xliff:g id="TIME">%s</xliff:g>"</string>
     <string name="battery_usage_screen_footer_empty" msgid="3301144846133808193">"Os dados de uso da bateria ficam disponíveis algumas horas depois do carregamento total"</string>
     <string name="battery_usage_chart_label_now" msgid="4598282721949430165">"agora"</string>
@@ -3107,7 +3125,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"Entrada e saída de voz"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"Configurações de entrada e saída de voz"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"Pesquisa por voz"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"Teclado Android"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"Configurações da entrada de texto por voz"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"Entrada de texto por voz"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Serviços de entrada de texto por voz"</string>
@@ -3227,7 +3244,7 @@
     <string name="device_admin_add_title" msgid="6087481040932322289">"Admin do dispositivo"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"A ativação deste administrador permitirá que o app <xliff:g id="APP_NAME">%1$s</xliff:g> execute as seguintes operações:"</string>
     <string name="supervision_role_holder_warning" msgid="167724047638694522">"Este dispositivo será gerenciado e monitorado por <xliff:g id="APP_NAME_0">%1$s</xliff:g>. \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> poderá gerenciar as configurações dos controles da família, como bloqueio de apps e restrições de conteúdo."</string>
-    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"Este dispositivo será gerenciado e monitorado por <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
+    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"Este dispositivo será gerenciado e monitorado pelo app <xliff:g id="APP_NAME">%1$s</xliff:g>."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"Este app de administrador está ativado e permite que o <xliff:g id="APP_NAME">%1$s</xliff:g> execute as seguintes operações:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"Ativar Gerenciador de perfis?"</string>
     <string name="supervision_confirmation_title" msgid="8094974031562728585">"Permitir que <xliff:g id="APP_NAME">%1$s</xliff:g> supervisione este dispositivo?"</string>
@@ -3625,13 +3642,11 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
-    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="534835339280267939">"Touchpad, teclado, tela e som"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Brilho, cor, tema escuro, tela de bloqueio, texto"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Seleção do teclado, ferramentas"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Velocidade do cursor, personalização de botões, rolagem"</string>
-    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
-    <skip />
+    <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Volume, alto-falantes e microfones"</string>
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Personalização do cursor, ações de clique, rolagem"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Indisponível porque a NFC está desativada"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"Para usar, instale um app de pagamento"</string>
@@ -3656,6 +3671,8 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Notificação de Wi‑Fi, notificação de wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"uso de dados"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Usar formato de 24 horas"</string>
+    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
+    <skip />
     <string name="keywords_app_default" msgid="8977706259156428770">"Abrir com"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Apps"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"fuso horário"</string>
@@ -3776,6 +3793,10 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"O som das notificações está desativado. Elas só farão o dispositivo vibrar."</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"Desativado: <xliff:g id="VOLUME_TYPE">%1$s</xliff:g>"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Indisponível porque o toque foi silenciado"</string>
+    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
+    <skip />
+    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"Toque do telefone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Som de notificação padrão"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Som fornecido pelo app"</string>
@@ -4473,7 +4494,7 @@
     <string name="app_link_open_always_summary" msgid="4524005594295855117">"{count,plural, =1{O app vai processar # link}one{O app vai processar # link}other{O app vai processar # links}}"</string>
     <string name="open_supported_links_footer" msgid="3188808142432787933">"O app processará estes links:"</string>
     <string name="assist_and_voice_input_title" msgid="6317935163145135914">"Assistivo e voz"</string>
-    <string name="default_assist_title" msgid="1182435129627493758">"App assistente digital"</string>
+    <string name="default_assist_title" msgid="1182435129627493758">"App de assistente digital"</string>
     <string name="default_digital_assistant_title" msgid="5654663086385490838">"App padrão de assistentes digitais"</string>
     <string name="assistant_security_warning_agree" msgid="9013334158753473359">"Aceito"</string>
     <string name="default_browser_title" msgid="8342074390782390458">"App de navegação"</string>
@@ -4527,6 +4548,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"Preferências de USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB controlado por"</string>
+    <string name="usb_connected_devices" msgid="535238470176122197">"Dispositivos conectados"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"Dispositivo conectado"</string>
     <string name="usb_control_device" msgid="527916783743021577">"Este dispositivo"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Alternando…"</string>
@@ -4543,6 +4565,8 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP e fornecimento de energia"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI e fornecimento de energia"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"Webcam e fornecimento de energia"</string>
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"Dispositivo desconhecido de <xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g>"</string>
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"Dispositivo desconhecido [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Verificação em segundo plano"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Usar texto da tela"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Permite que o app assistivo acesse o conteúdo da tela como texto"</string>
@@ -4596,11 +4620,23 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pode acessar todos os arquivos"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automação de tela"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Este app poderá acessar e interagir com o conteúdo da tela de outros apps para ajudar você a concluir tarefas, mesmo quando os apps estiverem em segundo plano"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
+    <skip />
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Se você não permitir a automação de tela, o <xliff:g id="ID_1">%1$s</xliff:g> ainda poderá interagir com apps conectados ao <xliff:g id="ID_2">%1$s</xliff:g> de outras maneiras"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Permite que apps ajudem a concluir tarefas interagindo com o conteúdo da tela de outros apps"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Perguntar sempre"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Sempre permitir"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Não permitir"</string>
+    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificações em tela cheia"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permitir que esse app mostre notificações em tela cheia"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permita que o app mostre notificações que ocupam a tela inteira quando o dispositivo estiver bloqueado. Os apps poderão usar essa permissão para destacar alarmes, ligações recebidas ou outras notificações urgentes."</string>
@@ -6183,4 +6219,12 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"O dispositivo não está registrado para SOS via satélite. Conecte o aparelho à internet para concluir o registro automaticamente"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Ativar o serviço de instalação de apps da web"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Ative este serviço para instalar sites diretamente na tela inicial e usá-los como apps comuns."</string>
+    <!-- no translation found for access_hid_title (3937436196813998587) -->
+    <skip />
+    <!-- no translation found for permit_access_hid (870824396872060949) -->
+    <skip />
+    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
+    <skip />
+    <!-- no translation found for keywords_access_hid (682455265293135353) -->
+    <skip />
 </resources>

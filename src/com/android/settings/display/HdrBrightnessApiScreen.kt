@@ -28,7 +28,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
-import com.android.settingslib.metadata.preferencesapi.types.IntInRange
+import com.android.settingslib.metadata.preferencesapi.types.PercentageInt
 import kotlin.math.roundToInt
 
 // LINT.IfChange
@@ -41,7 +41,10 @@ class HdrBrightnessApiScreen :
         purpose = R.string.hdr_brightness_screen_purpose,
     ) {
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
 
         preconditions(R.string.hdr_brightness_screen_preconditions) {
             if (HdrBrightnessUtils.getAvailabilityStatus(context) == AVAILABLE) {
@@ -73,7 +76,7 @@ class HdrBrightnessApiScreen :
         preference(
             key = HDR_BRIGHTNESS_BOOST_LEVEL_KEY,
             purpose = R.string.hdr_brightness_boost_level_purpose,
-            type = IntInRange(min = 0, max = 100), // Use 0-100% in the API.
+            type = PercentageInt,
         ) {
             preconditions(R.string.hdr_brightness_boost_level_preconditions) {
                 if (context.isHdrBrightnessEnabled()) {

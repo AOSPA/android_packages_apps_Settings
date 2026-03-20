@@ -38,6 +38,9 @@ class CameraFlashSwitchPreference : SwitchPreference(
 
     override fun storage(context: Context): KeyValueStore = SettingsSystemStore.get(context)
 
+    override val availabilityDescription =
+        "The device must have a back-facing camera with a flash."
+
     override fun isAvailable(context: Context) = FlashNotificationsUtil.isTorchAvailable(context)
 
     override fun getReadPermissions(context: Context) = SettingsSystemStore.getReadPermissions()

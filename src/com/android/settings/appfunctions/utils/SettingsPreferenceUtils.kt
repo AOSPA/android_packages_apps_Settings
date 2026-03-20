@@ -23,6 +23,7 @@ import android.util.Log
 import com.android.settings.appfunctions.PreferenceServiceClient
 import com.android.settingslib.graph.PreferenceGetterFlags
 import com.android.settingslib.graph.PreferenceGetterRequest
+import com.android.settingslib.graph.PreferenceGetterResponse
 import com.android.settingslib.graph.PreferenceSetterRequest
 import com.android.settingslib.graph.preferenceValueProto
 import com.android.settingslib.graph.proto.PreferenceProto
@@ -30,9 +31,22 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.PreferenceCoordinate
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.SensitivityLevel
 
 private const val TAG = "SettingsPreferenceUtils"
 private const val SETTINGS_PACKAGE_NAME = "com.android.settings"
+
+const val DO_NOT_EXPOSE = "DO_NOT_EXPOSE"
+const val NO_SENSITIVITY = "NO_SENSITIVITY"
+const val MUST_PROVIDE_UNDO = "MUST_PROVIDE_UNDO"
+const val REQUIRES_CONFIRMATION = "REQUIRES_CONFIRMATION"
+const val DEEP_LINK_ONLY = "DEEP_LINK_ONLY"
+data class PreferenceDetails(
+    val settingsPreferenceValue: SettingsPreferenceValue?,
+    val sensitivityLevel: String,
+    val isAvailable : Boolean,
+    val isEnabled : Boolean,
+)
 
 /** Helper method to get a preference value using the SettingsPreferenceServiceClient. */
 suspend fun getPreference(
@@ -40,7 +54,7 @@ suspend fun getPreference(
     screenKey: String,
     key: String,
     keyParameters: KeyParameters? = null,
-): SettingsPreferenceValue? {
+): PreferenceDetails? {
     Log.d(TAG, "getPreference started for $screenKey/$key")
     val coord =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -52,19 +66,38 @@ suspend fun getPreference(
 
     return try {
         val client = PreferenceServiceClient(context)
-        val response = client.use { it.getPreferences(catalystRequest) }
+        val response: PreferenceGetterResponse = client.use { it.getPreferences(catalystRequest) }
 
         // Find the preference proto by matching the coordinate
-        val preferenceProto = response.preferences[coord]
+        val preferenceProto: PreferenceProto? = response.preferences[coord]
 
         Log.d(TAG, "Found preferenceProto: $preferenceProto")
-        val result = preferenceProto?.toSettingsPreferenceValue()
+        if (preferenceProto == null) {
+            return null
+        }
+
+        val result = preferenceProto.toSettingsPreferenceValue()
         Log.d(TAG, "Result value: $result")
-        result
+
+        val sensitivityLevelString = getSensitivityLevelString(preferenceProto)
+
+        PreferenceDetails(result, sensitivityLevelString, preferenceProto.available, preferenceProto.enabled)
     } catch (e: Exception) {
         Log.e(TAG, "Error getting preference value", e)
         null
     }
+}
+
+private fun getSensitivityLevelString(preferenceProto: PreferenceProto): String {
+    val sensitivityLevelString = when (preferenceProto.sensitivityLevel) {
+        SensitivityLevel.DO_NOT_EXPOSE -> DO_NOT_EXPOSE
+        SensitivityLevel.NO_SENSITIVITY -> NO_SENSITIVITY
+        SensitivityLevel.MUST_PROVIDE_UNDO -> MUST_PROVIDE_UNDO
+        SensitivityLevel.REQUIRES_CONFIRMATION -> REQUIRES_CONFIRMATION
+        SensitivityLevel.DEEP_LINK_ONLY -> DEEP_LINK_ONLY
+        else -> "UNKNOWN"
+    }
+    return sensitivityLevelString
 }
 
 /** Helper method to set a preference value using the SettingsPreferenceServiceClient. */

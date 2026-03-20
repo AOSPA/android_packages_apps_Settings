@@ -35,10 +35,12 @@ import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
 
 /** Mixin for preferences only available when custom caption style is selected. */
 interface CustomCaptionPreference : PreferenceMetadata, PreferenceAvailabilityProvider {
+
     override fun isAvailable(context: Context): Boolean =
         context.getSystemService<CaptioningManager>()?.rawUserStyle ==
             CaptioningManager.CaptionStyle.PRESET_CUSTOM
@@ -74,6 +76,11 @@ class CaptionFontFamilyPreference(context: Context) :
 
     private val dataStore by lazy { CaptionFontFamilyDataStore(context) }
 
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
+
     override fun storage(context: Context): KeyValueStore = dataStore
 
     private val summaryMap by lazy {
@@ -84,6 +91,9 @@ class CaptionFontFamilyPreference(context: Context) :
 
     override fun getSummary(context: Context): CharSequence? =
         summaryMap.getSummary(context, storage(context).getString(key))
+
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
 
     companion object {
         private const val KEY = "captioning_typeface"
@@ -117,11 +127,19 @@ class CaptionEdgeTypePreference(context: Context) :
     override val valueType: Class<Int>
         get() = Int::class.javaObjectType
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     private val summaryMap by lazy {
         SummaryMap(values, valuesDescription, useIntValues = true) { _, v -> v as Int }
     }
 
     private val dataStore by lazy { CaptionEdgeTypeDataStore(context) }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override fun storage(context: Context): KeyValueStore = dataStore
 
@@ -143,6 +161,9 @@ class CaptionEdgeColorPreference(context: Context) :
     override val key: String
         get() = KEY
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     override val title: Int
         get() = R.string.captioning_edge_color
 
@@ -159,6 +180,11 @@ class CaptionEdgeColorPreference(context: Context) :
         get() = Int::class.javaObjectType
 
     private val dataStore by lazy { CaptionEdgeColorDataStore(context) }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     private val captionHelper by lazy { CaptionHelper(context) }
 

@@ -32,6 +32,7 @@ import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.MUSTPASS
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -57,6 +58,8 @@ class MyDeviceInfoApiFirstScreen :
             purpose = R.string.device_name_purpose,
             type = AnyString,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             tags(MUSTPASS)
             preconditions(R.string.device_name_preconditions) {
                 if (context.resources.getBoolean(R.bool.config_show_device_name)) {
@@ -92,6 +95,8 @@ class MyDeviceInfoApiFirstScreen :
             purpose = R.string.my_device_info_build_number_purpose,
             type = AnyString,
         ) {
+            sensitivityLevel(SensitivityLevel.DO_NOT_EXPOSE)
+
             get { execute { Build.DISPLAY } }
         }
 
@@ -100,6 +105,8 @@ class MyDeviceInfoApiFirstScreen :
             purpose = R.string.my_device_info_uptime_purpose,
             type = AnyString,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 execute {
                     val uptimeMillis = SystemClock.elapsedRealtime()

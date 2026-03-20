@@ -80,6 +80,8 @@ abstract class ShortcutOptionPreference(
         }
     }
 
+    override val supportsWrite = true
+
     companion object {
         @JvmStatic
         fun getCustomizeAccessibilityButtonLink(context: Context): CharSequence {

@@ -22,6 +22,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.network.tether.TetheringRepository.TetherType
 import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
@@ -43,6 +44,8 @@ class TetherApiScreen :
         flag { Flags.catalystMigration26q2() }
 
         preference(USB_TETHER_KEY, USB_TETHER_PURPOSE, AnyBoolean) {
+            sensitivityLevel(SensitivityLevel.DEEP_LINK_ONLY)
+
             get { execute { tetheringRepository.isEnabled(TetherType.USB) } }
             set {
                 permissions(Manifest.permission.TETHER_PRIVILEGED)
@@ -51,6 +54,8 @@ class TetherApiScreen :
         }
 
         preference(ETH_TETHER_KEY, ETH_TETHER_PURPOSE, AnyBoolean) {
+            sensitivityLevel(SensitivityLevel.DEEP_LINK_ONLY)
+
             get { execute { tetheringRepository.isEnabled(TetherType.ETHERNET) } }
             set {
                 permissions(Manifest.permission.TETHER_PRIVILEGED)

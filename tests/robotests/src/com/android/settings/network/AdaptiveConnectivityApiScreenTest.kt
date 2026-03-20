@@ -48,10 +48,7 @@ class AdaptiveConnectivityApiScreenTest {
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_CATALYST_MIGRATION_26Q2,
-        Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES,
-    )
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getScreen_flagsEnabled_isNotNull() {
         assertThat(tester.getScreen()).isNotNull()
     }
@@ -64,36 +61,20 @@ class AdaptiveConnectivityApiScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
-    @DisableFlags(Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES)
-    fun getScreen_featureFlagDisabled_isNull() {
-        assertThat(tester.getScreen()).isNull()
-    }
-
-    @Test
-    @EnableFlags(
-        Flags.FLAG_CATALYST_MIGRATION_26Q2,
-        Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES,
-    )
     fun getWifiEnabled_notSet_returnsTrueDefault() {
         // Default is 1 (True)
         assertThat(tester.get<Boolean>(PREF_KEY_WIFI)).isTrue()
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_CATALYST_MIGRATION_26Q2,
-        Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES,
-    )
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getWifiEnabled_setOff_returnsFalse() {
         Settings.Secure.putInt(context.contentResolver, PREF_KEY_WIFI, 0)
         assertThat(tester.get<Boolean>(PREF_KEY_WIFI)).isFalse()
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_CATALYST_MIGRATION_26Q2,
-        Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES,
-    )
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun setWifiEnabled_booleanToIntegerConversionIsCorrect() {
         tester.set(PREF_KEY_WIFI, true)
         assertThat(Settings.Secure.getInt(context.contentResolver, PREF_KEY_WIFI, -1)).isEqualTo(1)
@@ -102,30 +83,21 @@ class AdaptiveConnectivityApiScreenTest {
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_CATALYST_MIGRATION_26Q2,
-        Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES,
-    )
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getMobileEnabled_notSet_returnsTrueDefault() {
         // Default is 1 (True)
         assertThat(tester.get<Boolean>(PREF_KEY_MOBILE)).isTrue()
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_CATALYST_MIGRATION_26Q2,
-        Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES,
-    )
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getMobileEnabled_setOff_returnsFalse() {
         Settings.Secure.putInt(context.contentResolver, PREF_KEY_MOBILE, 0)
         assertThat(tester.get<Boolean>(PREF_KEY_MOBILE)).isFalse()
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_CATALYST_MIGRATION_26Q2,
-        Flags.FLAG_ENABLE_ADAPTIVE_CONNECTIVITY_TOGGLE_SWITCHES,
-    )
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun setMobileEnabled_booleanToIntegerConversionIsCorrect() {
         tester.set(PREF_KEY_MOBILE, true)
         assertThat(Settings.Secure.getInt(context.contentResolver, PREF_KEY_MOBILE, -1))

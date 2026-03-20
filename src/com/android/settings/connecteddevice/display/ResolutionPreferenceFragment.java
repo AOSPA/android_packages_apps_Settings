@@ -457,10 +457,7 @@ public class ResolutionPreferenceFragment extends SettingsPreferenceFragmentBase
         mConfirmationViewModel.startConfirmation(selectedMode, existingMode);
     }
 
-    private void updateDisplayModeLimits(@Nullable Context context) {
-        if (context == null) {
-            return;
-        }
+    private void updateDisplayModeLimits(Context context) {
         mExternalDisplayPeakRefreshRate =
                 getResources(context)
                         .getInteger(

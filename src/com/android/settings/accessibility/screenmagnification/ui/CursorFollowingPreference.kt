@@ -101,6 +101,7 @@ class CursorFollowingPreference :
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         preference.onPreferenceClickListener = this
@@ -110,6 +111,9 @@ class CursorFollowingPreference :
         super.onCreate(context)
         lifecycleContext = context
     }
+
+    override val availabilityDescription =
+        "The device must not be during setup and must have a mouse connected."
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && isMagnificationCursorFollowingModeDialogSupported()

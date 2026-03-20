@@ -28,6 +28,8 @@ import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 class A11yServiceIllustrationPreference(private val serviceInfo: AccessibilityServiceInfo) :
     ImageUriPreference() {
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getImageUri(context: Context): Uri? {

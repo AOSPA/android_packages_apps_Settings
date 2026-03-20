@@ -17,7 +17,6 @@
 package com.android.settings.testutils.appfunctions
 
 import com.android.settings.appfunctions.CatalystConfig
-import com.android.settings.appfunctions.DeviceStateItemConfig
 import com.android.settings.appfunctions.PerScreenCatalystConfig
 
 object CatalystConfigBuilder {
@@ -30,13 +29,6 @@ object CatalystConfigBuilder {
         screenKey: String,
         preferenceKeys: List<String>,
     ) = CatalystConfig(
-        deviceStateItems =
-            preferenceKeys.map {
-                DeviceStateItemConfig(
-                    settingKey = it,
-                    settingScreenKey = screenKey,
-                )
-            },
         screenConfigs =
             listOf(
                 PerScreenCatalystConfig(

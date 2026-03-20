@@ -129,6 +129,7 @@ class BrightnessLevelPreference :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
+    override val supportsWrite = false
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
@@ -137,6 +138,8 @@ class BrightnessLevelPreference :
     override fun getMinValue(context: Context) = 0
 
     override fun getMaxValue(context: Context) = 100
+
+    override fun getUnitOfMeasurement() = "%"
 
     private class BrightnessStorage(private val context: Context) :
         AbstractKeyedDataObservable<String>(),
@@ -200,6 +203,9 @@ class BrightnessLevelPreference :
         }
         return true
     }
+
+    override val availabilityDescription =
+        "The default display must be internal."
 
     override fun isAvailable(context: Context) = context.isBrightnessLevelSettingsAvailable
 

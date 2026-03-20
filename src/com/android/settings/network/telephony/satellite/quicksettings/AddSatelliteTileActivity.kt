@@ -54,7 +54,7 @@ class AddSatelliteTileActivity : Activity() {
         val statusBarManager = getSystemService(StatusBarManager::class.java)
         val componentName = ComponentName(this, SatelliteTileService::class.java)
 
-        Log.d(TAG, "Requesting to add SatelliteTileService")
+        Log.i(TAG, "Requesting to add SatelliteTileService")
 
         val drawable = getDrawable(R.drawable.ic_satellite_tile)
         if (drawable == null) {
@@ -71,7 +71,7 @@ class AddSatelliteTileActivity : Activity() {
             icon,
             mainExecutor,
             { result ->
-                Log.d(TAG, "requestAddTileService result: $result")
+                Log.i(TAG, "requestAddTileService result: $result")
 
                 // Log success only when the tile is actually added
                 if (result == StatusBarManager.TILE_ADD_REQUEST_RESULT_TILE_ADDED) {

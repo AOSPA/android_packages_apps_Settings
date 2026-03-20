@@ -19,6 +19,7 @@ package com.android.settings.wifi.tether
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 
@@ -33,7 +34,7 @@ class WifiHotspotSecurityApiScreen :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
-
+        sensitivityLevel(SensitivityLevel.DO_NOT_EXPOSE)
         // TODO(b/471297805) CatalystApi: migrate the preferences
     }
 

@@ -29,6 +29,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.datastore.Permissions.Companion.allOf
 import com.android.settingslib.datastore.Permissions.Companion.anyOf
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -50,6 +51,7 @@ class UserDetailsSettingsScreenApi :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
+        sensitivityLevel(SensitivityLevel.DO_NOT_EXPOSE)
         parameters {
             parameter(
                 name = PARAM_TARGET_USER_ID,
@@ -99,6 +101,7 @@ class UserDetailsSettingsScreenApi :
             purpose = R.string.user_details_settings_enable_calling_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.DO_NOT_EXPOSE)
             preconditions(R.string.user_details_enable_calling_precondition) {
                 val userManager = context.getSystemService(UserManager::class.java)
                 val paramUserId = Integer.parseInt(parameters[PARAM_TARGET_USER_ID])
@@ -152,6 +155,7 @@ class UserDetailsSettingsScreenApi :
             purpose = R.string.user_details_settings_grant_admin_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.DO_NOT_EXPOSE)
             preconditions(R.string.user_details_grant_admin_precondition) {
                 val userManager = context.getSystemService(UserManager::class.java)
                 val paramUserId = Integer.parseInt(parameters[PARAM_TARGET_USER_ID])

@@ -160,15 +160,8 @@ public class SystemNavigationGestureSettings extends RadioButtonPickerFragment i
             addClickHintForExtra(pref, R.string.gesture_settings_extra_button_hint);
         }
 
-        // With flag enabled, the button order preference will always be available
-        boolean navbarAvailable = android.view.accessibility.Flags.navbarFlipOrderOption()
-                || !PreferenceControllerListHelper.areAllPreferencesUnavailable(
-                        getContext(), getPreferenceManager(), R.xml.button_navigation_settings);
-
         if ((KEY_SYSTEM_NAV_2BUTTONS.equals(info.getKey())
-                || KEY_SYSTEM_NAV_3BUTTONS.equals(info.getKey()))
-                // Don't add the settings button if that page will be blank.
-                && navbarAvailable) {
+                || KEY_SYSTEM_NAV_3BUTTONS.equals(info.getKey()))) {
             pref.setExtraWidgetOnClickListener((v) ->
                     new SubSettingLauncher(getContext())
                             .setDestination(ButtonNavigationSettingsFragment.class.getName())

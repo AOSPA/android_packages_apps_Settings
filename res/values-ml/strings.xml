@@ -328,8 +328,21 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"ഡിഫോൾട്ട് ഭാഷ ഉപയോഗിക്കുക"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-മണിക്കൂർ ഫോർമാറ്റ് ഉപയോഗിക്കുക"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"സമയം"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"സമയ ഫോർമാറ്റ്"</string>
+    <string name="time_format_category_title" msgid="3122743852067365261">"12-മണിക്കൂർ / 24-മണിക്കൂർ ഫോർമാറ്റ്"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"സമയ ഫോർമാറ്റ്"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"കൂടുതൽ ക്രമീകരണം"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"ഈ ക്രമീകരണം അടിസ്ഥാനമാക്കി ആപ്പുകൾ നിങ്ങളുടെ സമയ ഫോർമാറ്റ് ഉപയോഗിക്കും"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"സമയ ഫോർമാറ്റ് തിരഞ്ഞെടുക്കുക"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"സ്വയമേവ"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"ആപ്പ് ഭാഷയെ അടിസ്ഥാനമാക്കി ആപ്പുകൾ 12-മണിക്കൂർ / 24-മണിക്കൂർ ഫോർമാറ്റ് ഉപയോഗിക്കുന്നു"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"12 മണിക്കൂർ ഫോർമാറ്റ്"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"24 മണിക്കൂർ ഫോർമാറ്റ്"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"സമയ മേഖല"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"ഹോം സമയമേഖല"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"ഒരു സമയമേഖല തിരഞ്ഞെടുക്കുക"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"നിങ്ങൾ നാട്ടിലില്ലാത്ത സമയത്തേക്കായി ഒരു ഹോം സമയമേഖല സജ്ജീകരിക്കുക"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"ഹോം സമയമേഖല ഉപയോഗിക്കുക"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"നിർദ്ദേശങ്ങൾ"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"സമയമേഖല തിരഞ്ഞെടുക്കൂ"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"സമയമേഖല തിരയുക"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"തീയതി"</string>
@@ -592,7 +605,7 @@
     <string name="lock_screen_pattern_skip_title" msgid="7214938393640060932">"പാറ്റേൺ സജ്ജീകരണം ഒഴിവാക്കണോ?"</string>
     <string name="lock_screen_pattern_skip_face_title" msgid="145100333454316334">"പാറ്റേൺ, മുഖം, എന്നിവയുടെ സജ്ജീകരണം ഒഴിവാക്കണോ?"</string>
     <string name="lock_screen_pattern_skip_fingerprint_title" msgid="2513110208722100495">"പാറ്റേൺ, ഫിംഗർപ്രിന്റ് സജ്ജീകരണം ഒഴിവാക്കണോ?"</string>
-    <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"പാറ്റേൺ, മുഖം, ഫിംഗർപ്രിന്റ് എന്നിവയുടെ സജ്ജീകരണം ഒഴിവാക്കണോ?"</string>
+    <string name="lock_screen_pattern_skip_biometrics_title" msgid="2434258106825380187">"പാറ്റേൺ, മുഖം, ഫിംഗർപ്രിന്റ് സജ്ജീകരണം ഒഴിവാക്കണോ?"</string>
     <string name="resume_animation" msgid="5259729861893297887">"ആനിമേഷൻ പുനരാരംഭിക്കുക"</string>
     <string name="pause_animation" msgid="2209064682137909056">"ആനിമേഷൻ താൽക്കാലികമായി നിർത്തുക"</string>
     <string name="security_settings_fingerprint_enroll_setup_screen_lock" msgid="3538784524778508018">"സ്‌ക്രീൻ ലോക്ക് സജ്ജമാക്കുക"</string>
@@ -1428,8 +1441,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"സ്ക്രീൻ സേവർ"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"സ്‌ക്രീൻ സേവർ"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"ഉറക്ക സമയ മോഡ് ഓണായതിനാൽ ലഭ്യമല്ല"</string>
-    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
-    <skip />
+    <string name="screensaver_unavailable_due_to_mode" msgid="8515924546767264225">"ഈ ഉപകരണത്തിൽ ലഭ്യമല്ല"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"സ്ക്രീൻ സേവർ ഉപയോഗിക്കുക"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ചാർജ്/ഡോക്ക് ചെയ്യുമ്പോൾ"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"ഡോക്ക് ചെയ്ത് ചാർജ് ചെയ്യുമ്പോൾ"</string>
@@ -1492,8 +1504,8 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"ശരി"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"റദ്ദാക്കുക"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"സിം കാർഡ് പരിരക്ഷിക്കുക"</string>
-    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"സ്വയമേവയുള്ള സിം ലോക്ക് പരിരക്ഷ"</string>
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"പിൻ സ്വയമേവ മാനേജ് ചെയ്യൽ"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"സിം ലോക്ക് പരിരക്ഷാ മോഡ്"</string>
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"സിം ലോക്ക് ചെയ്യുക"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android മാനേജ് ചെയ്യുന്നത്"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android മാനേജ് ചെയ്യാത്തത്"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"എൻറോൾമെന്റ് വിജയിച്ചു"</string>
@@ -1502,13 +1514,21 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android മാനേജ് ചെയ്യുന്ന പിൻ"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Android മാനേജ് ചെയ്യുന്ന പിന്നിന്റെ മൂല്യം:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"പിൻ നേടാനായില്ല"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"സിം കാർഡ് മോഷ്ടിക്കുന്നതിൽ നിന്ന് പരിരക്ഷിക്കുക"</string>
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"ഫോൺ ഉപയോഗിക്കുന്നതിന് പിൻ ആവശ്യമാണ്"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Android മാനേജ് ചെയ്യുന്ന സിം പിൻ"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"സിം പിൻ നേരിട്ട് മാനേജ് ചെയ്യുന്നു"</string>
-    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"സിം പരിരക്ഷ ഓണാക്കാൻ ലോക്ക് സ്ക്രീൻ സജ്ജീകരിക്കണം"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"ഫോൺ ഉപയോഗിക്കുന്നതിന് പിൻ ആവശ്യമാണ്"</string>
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"സ്വയമേവയുള്ള സിം പരിരക്ഷയ്ക്ക് ലോക്ക് സ്ക്രീൻ ആവശ്യമാണ്, ഇപ്പോൾ നേരിട്ടുള്ളത് മാത്രമേ ലഭ്യമാകൂ"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"നിലവിലെ സിം പിൻ നൽകുക"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"സിം കാർഡിന്റെ നിലവിലെ പിൻ നൽകുക"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"കാരിയർ ഡിഫോൾട്ട് മതി"</string>
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"സിം പരിരക്ഷാ മോഡ് തിരഞ്ഞെടുക്കുക"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"നേരിട്ടുള്ളത്"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"സ്വയമേവ (Android മാനേജ് ചെയ്യുന്നത്)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"പുതിയ സിം പിൻ"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"പുതിയ സിം പിൻ സ്ഥിരീകരിക്കുക"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"പിന്നുകൾ പൊരുത്തപ്പെടുന്നില്ല. പുതിയ സിം പിൻ സ്ഥിരീകരിക്കുക."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"പിൻ തെറ്റാണ്. ശേഷിക്കുന്ന ശ്രമങ്ങൾ: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"സിം കാർഡിന്റെ നിലവിലെ പിൻ കോഡ് നൽകുക"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"മൊബൈൽ ഡാറ്റയ്ക്ക് <xliff:g id="CARRIER">%1$s</xliff:g> വേണോ?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"നിങ്ങൾ മൊബൈൽ ഡാറ്റയ്ക്ക് <xliff:g id="CARRIER2_0">%2$s</xliff:g> ഉപയോഗിക്കുന്നു. നിങ്ങൾ <xliff:g id="CARRIER1">%1$s</xliff:g> എന്നതിലേക്ക് മാറുകയാണെങ്കിൽ മൊബൈൽ ഡാറ്റ ലഭിക്കാൻ <xliff:g id="CARRIER2_1">%2$s</xliff:g> എന്നത് ഇനിമുതൽ ഉപയോഗിക്കാനാവില്ല."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> ഉപയോഗിക്കുക"</string>
@@ -1811,6 +1831,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"ലൊക്കേഷൻ ഉപയോഗിച്ചുള്ള സമയമേഖല കണ്ടെത്തലിൽ മാറ്റങ്ങൾ അനുവദനീയമല്ല"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"നിങ്ങളുടെ ഉപകരണ ലൊക്കേഷൻ ലഭ്യമാണെങ്കിൽ, സമയമേഖല സജ്ജീകരിക്കാൻ അത് ഉപയോഗിച്ചേക്കാം"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"അറിയിപ്പുകൾ"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"സമയമേഖലയിലെ മാറ്റം"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"നിങ്ങളുടെ സമയമേഖല സ്വയമേവ അപ്‌ഡേറ്റ് ചെയ്യുമ്പോൾ അറിയിപ്പ് നേടുക"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"അറിയിപ്പ്, സമയം, മേഖല, സമയമേഖല"</string>
@@ -2095,9 +2117,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"ഭാഷയും പ്രദേശവും"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"കീബോർഡ്"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"ഉപകരണ ഭാഷ മാറ്റാൻ നിങ്ങൾക്ക് അനുമതിയില്ല."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"ഭാഷകളും ഇൻപുട്ടും"</string>
     <string name="input_assistance" msgid="3437568284144952104">"ടൂളുകൾ"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"കീബോർഡും ടൈപ്പുചെയ്യൽ രീതികളും"</string>
     <string name="system_language" msgid="1146762166579643257">"സിസ്‌റ്റം ഭാഷകൾ"</string>
     <string name="phone_language" msgid="5986939176239963826">"ഭാഷകൾ"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2106,7 +2126,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"സ്വയം വലിയക്ഷരമാക്കുക"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"വാക്യങ്ങളിലെ ആദ്യ അക്ഷരം വലിയക്ഷരമാക്കുക"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"സ്വയമേവ ചിഹ്നമിടൽ"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"ഫിസിക്കൽ കീബോർഡ് ക്രമീകരണങ്ങൾ"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"\".\" ചേർക്കുന്നതിന് സ്‌പേസ് കീ രണ്ടുതവണ അമർത്തുക"</string>
     <string name="show_password" msgid="7101900779571040117">"പാസ്‌വേ‌ഡുകൾ കാണിക്കുക"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"ടൈപ്പ് ചെയ്യുന്ന അക്ഷരങ്ങൾ പ്രദർശിപ്പിക്കുക"</string>
@@ -2117,13 +2136,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"പാസ്‌വേഡുകൾ, ക്രെഡിറ്റ് കാർഡ് നമ്പറുകൾ എന്നിവ പോലുള്ള വ്യക്തിഗതമായ ഡാറ്റയുൾപ്പെടെ നിങ്ങൾ ടൈപ്പുചെയ്യുന്ന എല്ലാ വാചകവും ഈ അക്ഷരത്തെറ്റ് പരിശോധനയ്‌ക്ക് ശേഖരിക്കാനായേക്കും. ഇത് <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> അപ്ലിക്കേഷനിൽ നിന്നും വരുന്നു. ഈ അക്ഷരത്തെറ്റ് പരിശോധന ഉപയോഗിക്കണോ?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"ക്രമീകരണം"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"ഭാഷ"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"കീബോർഡുകൾ"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"കീബോർഡ് സ്വിച്ച് കീ കാണിക്കുക"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"ഇൻപുട്ട് ഫീൽഡ് തിരഞ്ഞെടുക്കുമ്പോൾ, നാവിഗേഷൻ ബാറിൽ കീബോർഡ് സ്വിച്ചർ ബട്ടൺ കാണിക്കാൻ അനുവദിക്കുക"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ്"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ് ലഭ്യമാണ്"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"ഓൺ-സ്‌ക്രീൻ കീബോർഡ് മാനേജ് ചെയ്യുക"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"ഓപ്‌ഷനുകൾ"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ഉപയോഗസഹായി"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ഫിസിക്കൽ കീബോർഡ്"</string>
@@ -2183,9 +2200,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"വേഗത്തിൽ"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"പതുക്കെ"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"കീബോഡ് കുറുക്കുവഴികൾ കാണുക"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"കുറുക്കുവഴികളുടെ ലിസ്റ്റ് കാണിക്കുക"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"ഔദ്യോഗിക പ്രൊഫൈൽ കീബോർഡുകളും ടൂളുകളും"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"ജോലിക്കുള്ള ഓൺ-സ്‌ക്രീൻ കീബോർഡ്"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ഡിഫോൾട്ട്"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"ഗെയിം കൺട്രോളർ"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"നിങ്ങളുടെ കൺട്രോളറിന്റെ ബട്ടണുകൾ ട്രിഗർ ചെയ്യുന്ന പ്രവർത്തനങ്ങൾ ഇഷ്ടാനുസൃതമാക്കുക"</string>
@@ -2304,7 +2319,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"ആവർത്തന നിരക്ക് വർദ്ധിപ്പിക്കുക"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"ആവർത്തന നിരക്ക് കുറയ്ക്കുക"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> ലേഔട്ട്"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"ഡിഫോൾട്ട്"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"സ്വയമേവ: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"തിരഞ്ഞെടുത്ത ഉപയോക്താവ്: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"സംഭാഷണം"</string>
@@ -2318,10 +2332,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"ഗെയിം കൺട്രോളർ"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"വൈബ്രേഷൻ റീഡയറക്റ്റ് ചെയ്യുക"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"കണക്‌റ്റ് ചെയ്‌തിരിക്കുമ്പോൾ, ഗെയിം കൺട്രോളറിലേക്ക് വൈബ്രേഷൻ അയയ്‌ക്കുക"</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"കീബോർഡ് ലേഔട്ട് തിരഞ്ഞെടുക്കുക"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"കീബോർഡ് ലേഔട്ടുകൾ സജ്ജീകരിക്കുക"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"മാറാൻ, Control-Spacebar അമർത്തുക"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"ഡിഫോൾട്ട്"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"കീബോർഡ് ലേഔട്ടുകൾ"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"ഫിസിക്കൽ കീബോർഡ് ലേഔട്ടുകൾ"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"വ്യക്തിപരമായ നിഘണ്ടു"</string>
@@ -2369,7 +2379,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"ആവശ്യങ്ങൾക്ക് അനുസരിച്ച് നിങ്ങൾക്ക് ഈ ഉപകരണം ഇഷ്ടാനുസൃതമാക്കാം. ഈ ഉപയോഗസഹായി ഫീച്ചറുകൾ പിന്നീട് ക്രമീകരണത്തിൽ മാറ്റാവുന്നതാണ്."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"ഫോണ്ട് വലുപ്പം മാറ്റുക"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"സ്‌ക്രീൻ റീഡർ"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"ഫിസിക്കൽ കീബോർഡ് ഓപ്ഷനുകൾ"</string>
     <string name="captions_category_title" msgid="574490148949400274">"സബ്ടൈറ്റിലുകൾ"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"ഓഡിയോ"</string>
     <string name="general_category_title" msgid="6298579528716834157">"പൊതുവായവ"</string>
@@ -2595,7 +2604,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"വിപുലീകരിച്ച ഡാർക്ക് തീം"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"വിപുലീകരിച്ച ഡാർക്ക് തീം ക്രമീകരണം"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"വിപുലീകരിച്ച ഡാർക്ക് തീം ക്രമീകരണം തുറക്കുക"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"വിപുലീകരിച്ച ഡാർക്ക് തീം വായനാക്ഷമത മെച്ചപ്പെടുത്തും, എന്നാൽ ചില ആപ്പുകൾ തെറ്റായി ദൃശ്യമായേക്കാം.\n\nഈ ക്രമീകരണം ഓഫാക്കിയിരിക്കുന്ന ആപ്പുകൾ സ്റ്റാൻഡേർഡ് ഡാർക്ക് തീം ഓപ്ഷൻ ഉപയോഗിക്കും."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"ആനിമേഷനുകൾ നീക്കം ചെയ്യുക"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"സ്‌ക്രീനിലെ ചലനം കുറയ്‌ക്കുക"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"ടെക്സ്റ്റ് കഴ്‌സർ ബ്ലിങ്കിംഗ്"</string>
@@ -2735,7 +2745,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"ശ്രവണ ഉപകരണ നിയന്ത്രണങ്ങൾ"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"ശബ്‌ദങ്ങൾ"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"അറിയിപ്പുകൾ"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"റിംഗ്ടോണുകളും അലാറങ്ങളും"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"കേൾവിക്കുള്ള ഉപകരണങ്ങളിലൂടെ ശബ്ദങ്ങൾ പ്ലേ ചെയ്യും"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"ഉപകരണത്തിന്റെ സ്പീക്കറിലൂടെ ശബ്ദങ്ങൾ പ്ലേ ചെയ്യും"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"കേൾവിക്കുള്ള ഉപകരണങ്ങളിലൂടെയും ഉപകരണത്തിന്റെ സ്പീക്കറിലൂടെയും ശബ്ദങ്ങൾ പ്ലേ ചെയ്യും"</string>
@@ -3103,7 +3112,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"വോയ്‌സ് ഇൻപുട്ടും ഔട്ട്പുട്ടും"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"വോയ്‌സ് ഇൻപുട്ട്, ഔട്ട് പുട്ട് ക്രമീകരണങ്ങൾ"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"ശബ്ദതിരയൽ"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"Android കീബോർഡ്"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"വോയ്‌സ് ഇൻപുട്ട് ക്രമീകരണങ്ങൾ"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"വോയ്‌സ് ഇൻപുട്ട്"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"വോയ്‌സ് ഇൻപുട്ട് സേവനങ്ങൾ"</string>
@@ -3650,6 +3658,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"വൈഫൈ അറിയിപ്പ്, വൈഫൈ അറിയിപ്പ്"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ഡാറ്റ ഉപയോഗം"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24-മണിക്കൂർ ഫോർമാറ്റ് ഉപയോഗിക്കുക"</string>
+    <string name="keywords_time_notifications" msgid="401122178351164403">"സമയ അറിയിപ്പുകൾ, സമയമേഖലാ അറിയിപ്പുകൾ, DST, പകൽ ലാഭിച്ച സമയം, സമയമേഖലാ ഓഫ്‌സെറ്റ്"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"ഇത് ഉപയോഗിച്ച് തുറക്കുക"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"ആപ്പുകൾ"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"സമയ മേഖല"</string>
@@ -3770,6 +3779,10 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"അറിയിപ്പ് ശബ്ദം മ്യൂട്ട് ചെയ്തു, അറിയിപ്പുകൾ വൈബ്രേറ്റ് ചെയ്യും"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> മ്യൂട്ട് ചെയ്‌തു"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"റിംഗ് ചെയ്യൽ മ്യൂട്ട് ചെയ്തിരിക്കുന്നതിനാൽ ലഭ്യമല്ല"</string>
+    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
+    <skip />
+    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"ഫോൺ റിംഗ്ടോൺ"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"ഡിഫോൾട്ട് അറിയിപ്പ് ശബ്‌ദം"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"ആപ്പ് നൽകുന്ന ശബ്‌ദം"</string>
@@ -4524,6 +4537,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB മുൻഗണനകൾ"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB നിയന്ത്രിക്കുന്നത്"</string>
+    <string name="usb_connected_devices" msgid="535238470176122197">"കണക്‌റ്റ് ചെയ്‌ത ഉപകരണങ്ങൾ"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"കണക്റ്റ് ചെയ്‌ത ഉപകരണം"</string>
     <string name="usb_control_device" msgid="527916783743021577">"ഈ ഉപകരണം"</string>
     <string name="usb_switching" msgid="3654709188596609354">"മാറുന്നു…"</string>
@@ -4540,6 +4554,8 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP-യും പവർ വിതരണവും"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI-യും പവർ വിതരണവും"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"വെബ്ക്യാമും പവർ വിതരണവും"</string>
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"<xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g> എന്നതിൽ നിന്നുള്ള അജ്ഞാത ഉപകരണം"</string>
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"അജ്ഞാത ഉപകരണം [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"പശ്ചാത്തല പരിശോധന"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"സ്ക്രീനിലെ ടെക്‌സ്റ്റ് ഉപയോഗിക്കുക"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"ടെക്സ്റ്റ് ആയി സ്ക്രീൻ ഉള്ളടക്കങ്ങൾ ആക്സസ് ചെയ്യാൻ സഹായ ആപ്പിനെ അനുവദിക്കുക"</string>
@@ -4593,11 +4609,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"എല്ലാ ഫയലുകളും ആക്സസ് ചെയ്യാനാവും"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"സ്ക്രീൻ ഓട്ടോമേഷൻ"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"ആപ്പുകൾ പശ്ചാത്തലത്തിലാണെങ്കിൽ പോലും, ടാസ്‌ക്കുകൾ പൂർത്തിയാക്കാൻ നിങ്ങളെ സഹായിക്കുന്നതിന് മറ്റ് ആപ്പുകളുടെ സ്ക്രീൻ ഉള്ളടക്കം കാണാനും അവയുമായി ഇടപഴകാനും ഈ ആപ്പിന് കഴിയും"</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"ടാസ്‌ക്കുകൾ പൂർത്തിയാക്കാൻ നിങ്ങളെ സഹായിക്കുന്നതിന് മറ്റ് ആപ്പുകളുടെ സ്ക്രീൻ ഉള്ളടക്കം കാണാനും അവയുമായി ഇടപഴകാനും <xliff:g id="ID_1">%1$s</xliff:g> എന്നതിന് കഴിയും"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"നിങ്ങൾ സ്ക്രീൻ ഓട്ടോമേഷൻ അനുവദിക്കുന്നില്ലെങ്കിൽ, <xliff:g id="ID_2">%1$s</xliff:g> എന്നതിലേക്ക് കണക്റ്റ് ചെയ്തിരിക്കുന്ന ആപ്പുകളുമായി മറ്റ് മാർഗ്ഗങ്ങളിലൂടെ <xliff:g id="ID_1">%1$s</xliff:g> എന്നതിന് തുടർന്നും ഇടപഴകാൻ കഴിഞ്ഞേക്കാം"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"മറ്റ് ആപ്പുകളുടെ സ്ക്രീൻ ഉള്ളടക്കവുമായി ഇടപഴകിക്കൊണ്ട്, ടാസ്ക്കുകൾ പൂർത്തിയാക്കാൻ നിങ്ങളെ സഹായിക്കുന്നതിന് ആപ്പുകളെ അനുവദിക്കുക"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"എല്ലായ്‌പ്പോഴും ചോദിക്കുക"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"എപ്പോഴും അനുവദിക്കുക"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"അനുവദിക്കരുത്"</string>
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"സ്ക്രീൻ ഓട്ടോമേഷൻ അനുവദിക്കുക"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"ആപ്പുകളൊന്നും എപ്പോഴും അനുവദനീയമല്ല"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"<xliff:g id="ID_1">%1$s</xliff:g> എന്ന കുട്ടിയെ സ്ക്രീൻ ഓട്ടോമേഷൻ എപ്പോഴും ഉപയോഗിക്കാൻ അനുവദിച്ചിട്ടുള്ള ആപ്പുകൾ ഇവിടെ കാണിക്കും. ഓരോ സെഷനുമുള്ള അനുമതി മാത്രം ലഭിക്കുന്ന ആപ്പുകൾ കാണിക്കില്ല."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"അനുവദനീയം"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"അനുവദനീയമല്ല"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"പൂർണ്ണ സ്ക്രീൻ അറിയിപ്പുകൾ"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ഈ ആപ്പിൽ നിന്നുള്ള പൂർണ്ണ സ്ക്രീൻ അറിയിപ്പുകൾ അനുവദിക്കുക"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ഉപകരണം ലോക്ക് ചെയ്‌തിരിക്കുമ്പോൾ അറിയിപ്പുകൾ പൂർണ്ണ സ്‌ക്രീനിൽ കാണിക്കാൻ ഈ ആപ്പിനെ അനുവദിക്കുക. അലാറങ്ങൾ, ഇൻകമിംഗ് കോളുകൾ അല്ലെങ്കിൽ മറ്റ് അടിയന്തര അറിയിപ്പുകൾ ഹെെലെെറ്റ് ചെയ്യാൻ ആപ്പുകൾ ഇവ ഉപയോഗിച്ചേക്കാം."</string>
@@ -6180,4 +6202,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"നിങ്ങളുടെ ഉപകരണം സാറ്റലൈറ്റ് SOS-നായി രജിസ്റ്റർ ചെയ്തിട്ടില്ല. നിങ്ങളുടെ ഉപകരണം സ്വയമേവ രജിസ്ട്രേഷൻ പൂർത്തിയാക്കുന്നതിന് നിങ്ങൾ ഇന്റർനെറ്റിലേക്ക് കണക്റ്റ് ചെയ്‌തിട്ടുണ്ടെന്ന് ഉറപ്പാക്കുക"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"വെബ് ആപ്പ് ഇൻസ്റ്റാളർ സേവനം പ്രവർത്തനക്ഷമമാക്കുക"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"സാധാരണ ആപ്പുകൾ പോലെ ഉപയോഗിക്കുന്നതിന് നിങ്ങളുടെ ഹോം സ്ക്രീനിലേക്ക് വെബ്‌സൈറ്റുകൾ നേരിട്ട് ഇൻസ്റ്റാൾ ചെയ്യാൻ ഈ സേവനം പ്രവർത്തനക്ഷമമാക്കുക."</string>
+    <string name="access_hid_title" msgid="3937436196813998587">"ഹ്യൂമൻ ഇന്റർഫേസ് ഉപകരണ ആക്‌സസ്"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"ഹ്യൂമൻ ഇന്റർഫേസ് ഉപകരണങ്ങൾ (HID-കൾ) കണ്ടെത്താൻ ആപ്പിനെ അനുവദിക്കുക"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"നിങ്ങൾ ആക്‌സസ് അനുവദിക്കുകയാണെങ്കിൽ, നിങ്ങളുടെ സിസ്റ്റം അപകടത്തിലാക്കാൻ ക്ഷുദ്രകരമായ ആപ്പുകൾ നിങ്ങളുടെ HID-കൾ റീപ്രോഗ്രാം ചെയ്തേക്കാം. ഉദാഹരണത്തിന്, നിങ്ങളുടെ സിസ്റ്റം തുറന്നിട്ടില്ലാത്തപ്പോൾ അത് നിയന്ത്രിക്കാൻ ആപ്പുകൾക്ക് നിങ്ങളുടെ കീബോർഡ് അല്ലെങ്കിൽ മൗസ് ഇൻപുട്ടുകൾ അനുകരിക്കാനാകും. ആക്‌സസ് അനുവദിക്കുമ്പോൾ, നിങ്ങൾ ആപ്പുകളെ വിശ്വസിക്കുന്നുണ്ടെന്ന് ഉറപ്പാക്കുക."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"HID, ഹ്യൂമൻ, ആക്സസ്, ഉപകരണം"</string>
 </resources>

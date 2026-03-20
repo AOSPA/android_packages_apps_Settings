@@ -84,6 +84,9 @@ class AdaptiveSleepPreference :
     override val restrictionKeys: Array<String>
         get() = arrayOf(UserManager.DISALLOW_CONFIG_SCREEN_TIMEOUT)
 
+    override val availabilityDescription =
+        "The device must support adaptive sleep."
+
     override fun isAvailable(context: Context) = context.isAdaptiveSleepSupported()
 
     override fun createWidget(context: Context) = RestrictedSwitchPreference(context)
@@ -104,8 +107,9 @@ class AdaptiveSleepPreference :
         callingUid: Int,
     ) = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override val sensitivityLevel
-        get() = SensitivityLevel.NO_SENSITIVITY
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     @Suppress("UNCHECKED_CAST")
     private class Storage(

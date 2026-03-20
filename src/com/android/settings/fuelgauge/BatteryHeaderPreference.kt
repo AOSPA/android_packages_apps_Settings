@@ -76,6 +76,8 @@ class BatteryHeaderPreference :
         }
     }
 
+    override val availabilityDescription = "The device must have a battery"
+
     override fun isAvailable(context: Context) =
         com.android.settings.Utils.isBatteryPresent(context)
 
@@ -129,6 +131,7 @@ class BatteryHeaderPreference :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
+    override val supportsWrite = false
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY
 

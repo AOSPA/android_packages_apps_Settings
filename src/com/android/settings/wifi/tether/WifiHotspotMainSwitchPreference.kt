@@ -47,6 +47,8 @@ class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStor
     override val disableWidgetOnCheckedChanged: Boolean
         get() = false
 
+    override val availabilityDescription = "Wifi hotspot must be enabled."
+
     override fun isAvailable(context: Context) =
         context.wifiApState == WIFI_AP_STATE_ENABLED ||
             !(featureFactory.wifiFeatureProvider.wifiHotspotRepository?.isRestarting ?: false)
@@ -65,8 +67,10 @@ class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStor
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
+
     override val sensitivityLevel
-        get() = SensitivityLevel.NO_SENSITIVITY
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     @Suppress("UNCHECKED_CAST")
     private class UseWifiHotspotStore(private val wifiHotspotStore: KeyValueStore) :

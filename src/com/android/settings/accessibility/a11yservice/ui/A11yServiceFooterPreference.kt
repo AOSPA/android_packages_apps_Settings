@@ -70,6 +70,8 @@ class A11yServiceFooterPreference(
         )
     }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         return getTitle(context)?.isNotBlank() == true
     }

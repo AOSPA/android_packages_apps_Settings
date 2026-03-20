@@ -62,6 +62,9 @@ class SupervisionPinRecoveryPreference :
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
+    override val availabilityDescription =
+        "The device must support the PIN recovery screen and be able to launch it."
+
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionPinRecoveryScreen()) {
             return false

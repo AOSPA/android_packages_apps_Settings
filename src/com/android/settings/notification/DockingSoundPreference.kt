@@ -44,6 +44,8 @@ class DockingSoundPreference :
 
     override fun storage(context: Context) = context.dataStore
 
+    override val availabilityDescription = "The device must support configuring docking sounds in Settings."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.has_dock_settings)
 

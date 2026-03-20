@@ -152,7 +152,7 @@ class SatelliteLandingPageFragmentTest {
             .thenReturn(null)
 
         // Mock Apps Repository
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf())
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(anyBoolean())).thenReturn(listOf())
         `when`(appsRepository.getAppsPackagesForNbNtnLandingPage()).thenReturn(listOf())
         `when`(appsRepository.getDialerIntent()).thenReturn(null)
         doReturn(null).`when`(appsRepository).getSettingsIntent(anyBoolean())
@@ -217,13 +217,15 @@ class SatelliteLandingPageFragmentTest {
     @Test
     fun onResume_refreshesAppsList() {
         setLteNtnSupported(true)
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(emptyList())
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(anyBoolean()))
+            .thenReturn(emptyList())
         val scenario = launchFragment()
         // Verify initially empty
         scenario.onFragment { fragment ->
             assertThat(fragment.viewModel.satelliteAppItems.value).isEmpty()
         }
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf(APP1_PACKAGE))
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(anyBoolean()))
+            .thenReturn(listOf(APP1_PACKAGE))
         setupPackageManagerForApp(APP1_PACKAGE, APP1_NAME, Intent(APP1_INTENT_ACTION))
 
         // Trigger onResume via lifecycle
@@ -239,7 +241,8 @@ class SatelliteLandingPageFragmentTest {
     @Test
     fun satelliteApps_whenStatusNotAvailable_appsAreDisabled() {
         setLteNtnSupported(true)
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf("com.app1"))
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(anyBoolean()))
+            .thenReturn(listOf("com.app1"))
         setupPackageManagerForApp("com.app1", "App1", Intent("action"))
         satelliteStatusFlow.value = SatelliteStatus.NOT_AVAILABLE
 
@@ -332,7 +335,8 @@ class SatelliteLandingPageFragmentTest {
     fun satelliteApps_whenHasApps_listIsVisible() {
         setLteNtnSupported(true) // for LTE page
         val lteAppPackages = listOf(APP1_PACKAGE)
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(lteAppPackages)
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(anyBoolean()))
+            .thenReturn(lteAppPackages)
         setupPackageManagerForApp(APP1_PACKAGE, APP1_NAME, Intent(APP1_INTENT_ACTION))
 
         val scenario = launchFragment()
@@ -348,7 +352,7 @@ class SatelliteLandingPageFragmentTest {
     fun satelliteApps_when9Apps_showsAllAndNoExpandButton() {
         setLteNtnSupported(true)
         val apps = (1..9).map { "com.app$it" }
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(apps)
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(anyBoolean())).thenReturn(apps)
         apps.forEachIndexed { index, pkg ->
             setupPackageManagerForApp(pkg, "App${index + 1}", Intent("action${index + 1}"))
         }
@@ -367,7 +371,7 @@ class SatelliteLandingPageFragmentTest {
     fun satelliteApps_when10Apps_showsCollapsedAndExpandButton() {
         setLteNtnSupported(true)
         val apps = (1..10).map { "com.app$it" }
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(apps)
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(anyBoolean())).thenReturn(apps)
         apps.forEachIndexed { index, pkg ->
             setupPackageManagerForApp(pkg, "App${index + 1}", Intent("action${index + 1}"))
         }
@@ -405,7 +409,8 @@ class SatelliteLandingPageFragmentTest {
     @Test
     fun satelliteApps_whenNoApps_listIsHidden() {
         setLteNtnSupported(true)
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(emptyList())
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(anyBoolean()))
+            .thenReturn(emptyList())
 
         val scenario = launchFragment()
 
@@ -602,7 +607,7 @@ class SatelliteLandingPageFragmentTest {
         setLteNtnSupported(true)
         satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
         val messagingPackage = "com.google.android.apps.messaging"
-        `when`(appsRepository.getAppsPackagesForLteLandingPage())
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(anyBoolean()))
             .thenReturn(listOf(messagingPackage))
         setupPackageManagerForApp(messagingPackage, "Messages", Intent("action"))
         val scenario = launchFragment()

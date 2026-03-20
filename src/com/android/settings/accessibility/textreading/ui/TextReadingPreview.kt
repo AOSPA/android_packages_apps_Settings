@@ -183,6 +183,8 @@ internal class TextReadingPreview(
         }
     }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         // TODO(b/428700479): Preview preference is hidden in non default displays as preview is
         //  created via default display density configuration which results in unrealistic

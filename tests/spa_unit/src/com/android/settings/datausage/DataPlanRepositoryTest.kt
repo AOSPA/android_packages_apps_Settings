@@ -59,6 +59,15 @@ class DataPlanRepositoryTest {
                     .iterator()
         }
 
+    private val NO_PLAN_INFO = DataPlanInfo(
+        dataPlanCount = 0,
+        dataPlanSize = SubscriptionPlan.BYTES_UNKNOWN,
+        dataBarSize = CYCLE_BYTES,
+        dataPlanUse = CYCLE_BYTES,
+        cycleEnd = CYCLE_CYCLE_END_TIME,
+        snapshotTime = SubscriptionPlan.TIME_UNKNOWN,
+    )
+
     @Test
     fun getDataPlanInfo_hasSubscriptionPlan() {
         val dataPlanInfo = repository.getDataPlanInfo(policy, listOf(SUBSCRIPTION_PLAN))
@@ -80,17 +89,64 @@ class DataPlanRepositoryTest {
     fun getDataPlanInfo_noSubscriptionPlan() {
         val dataPlanInfo = repository.getDataPlanInfo(policy, emptyList())
 
-        assertThat(dataPlanInfo)
-            .isEqualTo(
-                DataPlanInfo(
-                    dataPlanCount = 0,
-                    dataPlanSize = SubscriptionPlan.BYTES_UNKNOWN,
-                    dataBarSize = CYCLE_BYTES,
-                    dataPlanUse = CYCLE_BYTES,
-                    cycleEnd = CYCLE_CYCLE_END_TIME,
-                    snapshotTime = SubscriptionPlan.TIME_UNKNOWN,
-                )
+        assertThat(dataPlanInfo).isEqualTo(NO_PLAN_INFO)
+    }
+
+    @Test
+    fun getDataPlanInfo_withPlan_zeroDataLimit_returnsNoPlanInfo() {
+        val plan =
+            SubscriptionPlan.Builder.createNonrecurring(
+                zonedDateTime(PLAN_CYCLE_START_TIME),
+                zonedDateTime(PLAN_CYCLE_END_TIME),
             )
+                .apply {
+                    setDataLimit(0, SubscriptionPlan.LIMIT_BEHAVIOR_DISABLED)
+                    setDataUsage(DATA_USAGE_BYTES, DATA_USAGE_TIME)
+                }
+                .build()
+
+        val dataPlanInfo = repository.getDataPlanInfo(policy, listOf(plan))
+
+        // Expect behavior as if there's no valid plan.
+        assertThat(dataPlanInfo).isEqualTo(NO_PLAN_INFO)
+    }
+
+    @Test
+    fun getDataPlanInfo_withPlan_negativeDataLimit_returnsNoPlanInfo() {
+        val plan =
+            SubscriptionPlan.Builder.createNonrecurring(
+                zonedDateTime(PLAN_CYCLE_START_TIME),
+                zonedDateTime(PLAN_CYCLE_END_TIME),
+            )
+                .apply {
+                    setDataLimit(-1, SubscriptionPlan.LIMIT_BEHAVIOR_DISABLED)
+                    setDataUsage(DATA_USAGE_BYTES, DATA_USAGE_TIME)
+                }
+                .build()
+
+        val dataPlanInfo = repository.getDataPlanInfo(policy, listOf(plan))
+
+        // Expect behavior as if there's no valid plan.
+        assertThat(dataPlanInfo).isEqualTo(NO_PLAN_INFO)
+    }
+
+    @Test
+    fun getDataPlanInfo_withPlan_negativeDataUsage_returnsNoPlanInfo() {
+        val plan =
+            SubscriptionPlan.Builder.createNonrecurring(
+                zonedDateTime(PLAN_CYCLE_START_TIME),
+                zonedDateTime(PLAN_CYCLE_END_TIME),
+            )
+                .apply {
+                    setDataLimit(DATA_LIMIT_BYTES, SubscriptionPlan.LIMIT_BEHAVIOR_DISABLED)
+                    setDataUsage(-1, DATA_USAGE_TIME)
+                }
+                .build()
+
+        val dataPlanInfo = repository.getDataPlanInfo(policy, listOf(plan))
+
+        // Expect behavior as if there's no valid plan.
+        assertThat(dataPlanInfo).isEqualTo(NO_PLAN_INFO)
     }
 
     private companion object {

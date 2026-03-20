@@ -104,6 +104,9 @@ private constructor(
     override val key: String
         get() = KEY
 
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
+
     //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.device_state_app_info_notification_access_purpose
@@ -132,6 +135,8 @@ private constructor(
         )
 
     override fun isFlagEnabled(context: Context) = false
+
+    override val availabilityDescription = "The app must be enabled."
 
     override fun isAvailable(context: Context) = appInfo != null
 
@@ -173,6 +178,8 @@ private constructor(
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 
@@ -242,6 +249,8 @@ class NotificationAccessApprovalPreference(private val storage: KeyValueStore) :
 
     override fun storage(context: Context) = storage
 
+    override val supportsWrite = false // The passed in storage doesn't support write.
+
     companion object {
         const val KEY = "device_state_notification_access_approval_preference"
     }
@@ -266,6 +275,8 @@ class NotificationAccessOngoingPreference(private val storage: KeyValueStore) :
         get() = R.string.notif_type_ongoing
 
     override fun storage(context: Context) = storage
+
+    override val supportsWrite = false // The passed in storage doesn't support write.
 
     companion object {
         const val KEY = "device_state_notification_access_ongoing_preference"
@@ -292,6 +303,8 @@ class NotificationAccessConversationsPreference(private val storage: KeyValueSto
 
     override fun storage(context: Context) = storage
 
+    override val supportsWrite = false // The passed in storage doesn't support write.
+
     companion object {
         const val KEY = "device_state_notification_access_conversations_preference"
     }
@@ -317,6 +330,8 @@ class NotificationAccessAlertingPreference(private val storage: KeyValueStore) :
 
     override fun storage(context: Context) = storage
 
+    override val supportsWrite = false // The passed in storage doesn't support write.
+
     companion object {
         const val KEY = "device_state_notification_access_alerting_preference"
     }
@@ -341,6 +356,8 @@ class NotificationAccessSilentPreference(private val storage: KeyValueStore) :
         get() = R.string.notif_type_silent
 
     override fun storage(context: Context) = storage
+
+    override val supportsWrite = false // The passed in storage doesn't support write.
 
     companion object {
         const val KEY = "device_state_notification_access_silent_preference"

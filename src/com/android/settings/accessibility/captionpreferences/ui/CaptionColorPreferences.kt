@@ -26,6 +26,7 @@ import com.android.settings.accessibility.captionpreferences.data.ColorOpacityDa
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
 
 /** Base class for caption color-related preferences. */
@@ -63,6 +64,9 @@ class CaptionTextColorPreference(context: Context) : BaseCaptionColorPreference(
     override val key: String
         get() = KEY
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_text_color_purpose
 
@@ -79,6 +83,11 @@ class CaptionTextColorPreference(context: Context) : BaseCaptionColorPreference(
         CaptionTextColorDataStore(context.applicationContext, isColor = true)
     }
 
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
+
     companion object {
         const val KEY = "captioning_foreground_color"
     }
@@ -91,6 +100,9 @@ class CaptionTextOpacityPreference(context: Context) :
     override val key: String
         get() = KEY
 
+       override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_text_opacity_purpose
 
@@ -100,6 +112,11 @@ class CaptionTextOpacityPreference(context: Context) :
     override val dataStore by lazy {
         CaptionTextColorDataStore(context.applicationContext, isColor = false)
     }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     companion object {
         const val KEY = "captioning_foreground_opacity"
@@ -112,6 +129,9 @@ class CaptionTextOpacityPreference(context: Context) :
 class CaptionBackgroundColorPreference(context: Context) : BaseCaptionColorPreference() {
     override val key: String
         get() = KEY
+
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
 
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_background_color_purpose
@@ -129,6 +149,11 @@ class CaptionBackgroundColorPreference(context: Context) : BaseCaptionColorPrefe
         CaptionBackgroundColorDataStore(context, isColor = true)
     }
 
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
+
     companion object {
         const val KEY = "captioning_background_color"
     }
@@ -141,6 +166,9 @@ class CaptionBackgroundOpacityPreference(context: Context) :
     override val key: String
         get() = KEY
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_background_opacity_purpose
 
@@ -150,6 +178,11 @@ class CaptionBackgroundOpacityPreference(context: Context) :
     override val dataStore: ColorOpacityDataStore by lazy {
         CaptionBackgroundColorDataStore(context, isColor = false)
     }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     companion object {
         const val KEY = "captioning_background_opacity"
@@ -162,6 +195,9 @@ class CaptionBackgroundOpacityPreference(context: Context) :
 class CaptionWindowColorPreference(context: Context) : BaseCaptionColorPreference() {
     override val key: String
         get() = KEY
+
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
 
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_window_color_purpose
@@ -179,6 +215,11 @@ class CaptionWindowColorPreference(context: Context) : BaseCaptionColorPreferenc
         CaptionWindowColorDataStore(context, isColor = true)
     }
 
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
+
     companion object {
         const val KEY = "captioning_window_color"
     }
@@ -191,6 +232,9 @@ class CaptionWindowOpacityPreference(context: Context) :
     override val key: String
         get() = KEY
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_window_opacity_purpose
 
@@ -200,6 +244,11 @@ class CaptionWindowOpacityPreference(context: Context) :
     override val dataStore: ColorOpacityDataStore by lazy {
         CaptionWindowColorDataStore(context, isColor = false)
     }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     companion object {
         const val KEY = "captioning_window_opacity"

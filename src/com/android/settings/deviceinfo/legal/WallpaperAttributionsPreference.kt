@@ -45,6 +45,8 @@ class WallpaperAttributionsPreference :
         preference.isSelectable = false
     }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_wallpaper_attribution)
 

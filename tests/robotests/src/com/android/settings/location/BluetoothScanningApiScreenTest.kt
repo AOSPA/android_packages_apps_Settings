@@ -16,11 +16,9 @@
 
 package com.android.settings.location
 
-import android.content.Context
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
 import com.android.settings.testutils2.ApiTester
@@ -34,7 +32,6 @@ class BluetoothScanningApiScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val tester = ApiTester(BluetoothScanningApiScreen())
-    private val context: Context = ApplicationProvider.getApplicationContext()
 
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)

@@ -32,6 +32,7 @@ import com.android.settings.network.telephony.DataUsagePreferenceController.Comp
 import com.android.settings.network.telephony.MmsMessagePreferenceController.Companion.MmsMessageSearchItem
 import com.android.settings.network.telephony.NrAdvancedCallingPreferenceController.Companion.NrAdvancedCallingSearchItem
 import com.android.settings.network.telephony.RoamingPreferenceController.Companion.RoamingSearchItem
+import com.android.settings.network.telephony.SimRingtonePreference.Companion.SimRingtoneSearchItem
 import com.android.settings.network.telephony.VideoCallingPreferenceController.Companion.VideoCallingSearchItem
 import com.android.settings.network.telephony.WifiCallingPreferenceController.Companion.WifiCallingSearchItem
 import com.android.settings.network.telephony.satellite.SatelliteSettingPreferenceController.Companion.SatelliteConnectivitySearchItem
@@ -125,6 +126,7 @@ class MobileNetworkSettingsSearchIndex(
                 VideoCallingSearchItem(context),
                 WifiCallingSearchItem(context),
                 SatelliteConnectivitySearchItem(context),
+                SimRingtoneSearchItem(context),
             )
     }
 }

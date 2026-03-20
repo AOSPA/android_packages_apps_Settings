@@ -17,6 +17,7 @@
 package com.android.settings.connecteddevice.display;
 
 import static com.google.common.truth.Truth.assertThat;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
@@ -32,8 +33,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settings.flags.Flags;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
@@ -59,21 +58,20 @@ public class ExternalDisplayUpdaterTest extends ExternalDisplayTestBase {
     @Before
     public void setUp() throws RemoteException {
         super.setUp();
-        mUpdater = new TestableExternalDisplayUpdater(mMockedCallback, /*metricsCategory=*/ 0);
+        mUpdater = new TestableExternalDisplayUpdater(mMockedCallback, /* metricsCategory= */ 0);
         ReflectionHelpers.setField(mUpdater, "metricsFeatureProvider", mMetricsFeatureProvider);
     }
 
     @Test
-    public void testPreferenceAdded_displayEnabled_summaryOn() {
+    public void testPreferenceAdded_displayEnabled() {
         doAnswer(
-                (v) -> {
-                    mPreferenceAdded = v.getArgument(0);
-                    return null;
-                })
+                        (v) -> {
+                            mPreferenceAdded = v.getArgument(0);
+                            return null;
+                        })
                 .when(mMockedCallback)
                 .onDeviceAdded(any());
 
-        // Setup: One enabled external display
         updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.YES)));
 
         mUpdater.initPreference(mContext, mMockedInjector);
@@ -82,71 +80,23 @@ public class ExternalDisplayUpdaterTest extends ExternalDisplayTestBase {
         mHandler.flush();
 
         assertThat(mPreferenceAdded).isNotNull();
-        assertThat(mPreferenceAdded.getSummary().toString())
-                .isEqualTo(mContext.getString(R.string.external_display_on));
     }
 
     @Test
-    public void testPreferenceAdded_displayDisabled_summaryOff() {
+    public void testPreferenceRemoved_displayDisabled() {
         doAnswer(
-                (v) -> {
-                    mPreferenceAdded = v.getArgument(0);
-                    return null;
-                })
-                .when(mMockedCallback)
-                .onDeviceAdded(any());
-
-        // Setup: One disabled external display
-        updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.NO)));
-
-        mUpdater.initPreference(mContext, mMockedInjector);
-        mUpdater.refreshPreference();
-        mUpdater.registerCallback();
-        mHandler.flush();
-
-        assertThat(mPreferenceAdded).isNotNull();
-        assertThat(mPreferenceAdded.getSummary().toString())
-                .isEqualTo(mContext.getString(R.string.external_display_off));
-    }
-
-    @Test
-    public void testPreferenceAdded_topologyPaneEnabled_summaryEmptyOrNull() {
-        mFlags.setFlag(Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST, true);
-        doAnswer(
-                (v) -> {
-                    mPreferenceAdded = v.getArgument(0);
-                    return null;
-                })
-                .when(mMockedCallback)
-                .onDeviceAdded(any());
-
-        // Case 1: Enabled display -> Summary empty
-        updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.YES)));
-        mUpdater.initPreference(mContext, mMockedInjector);
-        mUpdater.refreshPreference();
-        mHandler.flush();
-
-        assertThat(mPreferenceAdded).isNotNull();
-        assertThat(mPreferenceAdded.getSummary().toString()).isEqualTo("");
-
-        // Case 2: Disabled display -> Preference not added (or removed if previously added)
-        // Here we simulate a fresh update with only disabled displays
-        mPreferenceAdded = null; // Reset
-        updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.NO)));
-        mUpdater.refreshPreference();
-        mHandler.flush();
-
-        // The logic says if topology flag is on, and no enabled displays, return null summary.
-        // If summary is null, onDeviceRemoved is called.
-        doAnswer(
-                (v) -> {
-                    mPreferenceRemoved = v.getArgument(0);
-                    return null;
-                })
+                        (v) -> {
+                            mPreferenceRemoved = v.getArgument(0);
+                            return null;
+                        })
                 .when(mMockedCallback)
                 .onDeviceRemoved(any());
 
+        updateDisplaysAndTopology(List.of(createExternalDisplay(DisplayIsEnabled.NO)));
+
+        mUpdater.initPreference(mContext, mMockedInjector);
         mUpdater.refreshPreference();
+        mUpdater.registerCallback();
         mHandler.flush();
 
         assertThat(mPreferenceRemoved).isNotNull();
@@ -155,17 +105,17 @@ public class ExternalDisplayUpdaterTest extends ExternalDisplayTestBase {
     @Test
     public void testPreferenceRemoved() {
         doAnswer(
-                (v) -> {
-                    mPreferenceAdded = v.getArgument(0);
-                    return null;
-                })
+                        (v) -> {
+                            mPreferenceAdded = v.getArgument(0);
+                            return null;
+                        })
                 .when(mMockedCallback)
                 .onDeviceAdded(any());
         doAnswer(
-                (v) -> {
-                    mPreferenceRemoved = v.getArgument(0);
-                    return null;
-                })
+                        (v) -> {
+                            mPreferenceRemoved = v.getArgument(0);
+                            return null;
+                        })
                 .when(mMockedCallback)
                 .onDeviceRemoved(any());
         mUpdater.initPreference(mContext, mMockedInjector);
@@ -184,10 +134,10 @@ public class ExternalDisplayUpdaterTest extends ExternalDisplayTestBase {
     @Test
     public void testPreferenceClick_logsMetric() {
         doAnswer(
-                (v) -> {
-                    mPreferenceAdded = v.getArgument(0);
-                    return null;
-                })
+                        (v) -> {
+                            mPreferenceAdded = v.getArgument(0);
+                            return null;
+                        })
                 .when(mMockedCallback)
                 .onDeviceAdded(any());
 
@@ -203,14 +153,13 @@ public class ExternalDisplayUpdaterTest extends ExternalDisplayTestBase {
         verify(mMetricsFeatureProvider).logClickedPreference(any(), anyInt());
     }
 
-
     @Test
     public void testInitPreference_propertiesSet() {
         doAnswer(
-                (v) -> {
-                    mPreferenceAdded = v.getArgument(0);
-                    return null;
-                })
+                        (v) -> {
+                            mPreferenceAdded = v.getArgument(0);
+                            return null;
+                        })
                 .when(mMockedCallback)
                 .onDeviceAdded(any());
 
@@ -219,8 +168,8 @@ public class ExternalDisplayUpdaterTest extends ExternalDisplayTestBase {
         mUpdater.refreshPreference();
         mHandler.flush();
 
-        assertThat(mPreferenceAdded.getTitle().toString()).isEqualTo(
-                mContext.getString(R.string.external_display_settings_title));
+        assertThat(mPreferenceAdded.getTitle().toString())
+                .isEqualTo(mContext.getString(R.string.external_display_settings_title));
         assertThat(mPreferenceAdded.getKey()).isEqualTo(ExternalDisplayUpdater.PREF_KEY);
         assertThat(mPreferenceAdded.getIcon()).isEqualTo(mMockedDrawable);
     }
@@ -228,10 +177,10 @@ public class ExternalDisplayUpdaterTest extends ExternalDisplayTestBase {
     @Test
     public void testPreferenceClick_launchesSettings() {
         doAnswer(
-                (v) -> {
-                    mPreferenceAdded = v.getArgument(0);
-                    return null;
-                })
+                        (v) -> {
+                            mPreferenceAdded = v.getArgument(0);
+                            return null;
+                        })
                 .when(mMockedCallback)
                 .onDeviceAdded(any());
 

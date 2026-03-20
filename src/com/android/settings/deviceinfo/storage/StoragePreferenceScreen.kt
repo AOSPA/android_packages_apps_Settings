@@ -38,6 +38,7 @@ import com.android.settingslib.deviceinfo.StorageManagerVolumeProvider
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_STORAGE
@@ -127,6 +128,7 @@ open class StoragePreferenceScreen(private val context: Context) :
                     }
                 },
                 { c -> c.getString(R.string.storage_free_up_space_summary) },
+                tags = listOf(UI_ONLY_PREFERENCE)
             )
 
             // Apps

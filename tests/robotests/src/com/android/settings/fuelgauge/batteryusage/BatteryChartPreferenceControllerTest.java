@@ -16,6 +16,7 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController.SlotUpdateSource.HIGHLIGHT_SLOT;
 import static com.android.settings.fuelgauge.batteryusage.BatteryChartViewModel.SELECTED_INDEX_ALL;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -296,6 +297,62 @@ public final class BatteryChartPreferenceControllerTest {
                                         1619460120000L /* now (6:02 PM) */),
                                 BatteryChartViewModel.AxisLabelPosition.BETWEEN_TRAPEZOIDS,
                                 mBatteryChartPreferenceController.mHourlyChartLabelTextGenerator));
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_validIndexes_keepSelectedIndex() {
+        final BatteryLevelData batteryLevelData =
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0);
+        final int
+                dailyChartSlotCount =
+                batteryLevelData.getDailyBatteryLevels().getLevels().size() - 1;
+        final int hourlyChartSlotCountOfLastDay =
+                batteryLevelData.getHourlyBatteryLevelsPerDay().get(
+                        dailyChartSlotCount - 1).getLevels().size() - 1;
+
+        mBatteryChartPreferenceController.mDailyChartIndex = dailyChartSlotCount - 1;
+        mBatteryChartPreferenceController.mHourlyChartIndex = hourlyChartSlotCountOfLastDay - 1;
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex).isEqualTo(
+                dailyChartSlotCount - 1);
+        assertThat(mBatteryChartPreferenceController.mHourlyChartIndex).isEqualTo(
+                hourlyChartSlotCountOfLastDay - 1);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_dailyIndexOutOfBound_dailyChartSelectAll() {
+        final BatteryLevelData batteryLevelData =
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0);
+
+        mBatteryChartPreferenceController.mDailyChartIndex =
+                batteryLevelData.getDailyBatteryLevels().getLevels().size() - 1;
+        mBatteryChartPreferenceController.mHourlyChartIndex = 1;
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex)
+                .isEqualTo(SELECTED_INDEX_ALL);
+        assertThat(mBatteryChartPreferenceController.mHourlyChartIndex).isEqualTo(1);
+    }
+
+    @Test
+    public void onBatteryLevelDataUpdate_hourlyIndexOutOfBound_hourlyChartSelectAll() {
+        final BatteryLevelData batteryLevelData =
+                createBatteryLevelData(/* numOfHours= */ 60, /* levelOffset= */ 0);
+        final int dailyChartSlotCount =
+                batteryLevelData.getDailyBatteryLevels().getLevels().size() - 1;
+        final int hourlyChartSlotCountOfLastDay =
+                batteryLevelData.getHourlyBatteryLevelsPerDay().get(
+                        dailyChartSlotCount - 1).getLevels().size() - 1;
+
+        mBatteryChartPreferenceController.mDailyChartIndex = dailyChartSlotCount - 1;
+        mBatteryChartPreferenceController.mHourlyChartIndex = hourlyChartSlotCountOfLastDay;
+        mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
+
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex).isEqualTo(
+                dailyChartSlotCount - 1);
+        assertThat(mBatteryChartPreferenceController.mHourlyChartIndex)
+                .isEqualTo(SELECTED_INDEX_ALL);
     }
 
     @Test
@@ -655,7 +712,7 @@ public final class BatteryChartPreferenceControllerTest {
 
         // Assert: Verify that refreshUi() and the listener are not called.
         verify(controller, never()).refreshUi();
-        verify(mOnSelectedIndexUpdatedListener, never()).onSelectedIndexUpdated();
+        verify(mOnSelectedIndexUpdatedListener, never()).onSelectedIndexUpdated(HIGHLIGHT_SLOT);
 
         // Action: Call with different indices.
         controller.onHighlightSlotIndexUpdate(3, 4);
@@ -665,7 +722,7 @@ public final class BatteryChartPreferenceControllerTest {
         assertThat(controller.mHourlyHighlightSlotIndex).isEqualTo(4);
         // Assert: Verify that refreshUi() and the listener are called.
         verify(controller).refreshUi();
-        verify(mOnSelectedIndexUpdatedListener).onSelectedIndexUpdated();
+        verify(mOnSelectedIndexUpdatedListener).onSelectedIndexUpdated(HIGHLIGHT_SLOT);
     }
 
     private static Long generateTimestamp(int index) {

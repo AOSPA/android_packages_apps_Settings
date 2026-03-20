@@ -16,7 +16,6 @@
 
 package com.android.settings.connecteddevice.display;
 
-import android.app.admin.EnforcingAdmin;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -27,17 +26,12 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.connecteddevice.DevicePreferenceCallback;
-import com.android.settingslib.RestrictedLockUtils;
 import com.android.settingslib.RestrictedPreference;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
-
 
 public class ExternalDisplayUpdater extends BaseExternalDisplayUpdater {
 
-    @VisibleForTesting
-    public static final String PREF_KEY = "external_display_settings";
-    @Nullable
-    private RestrictedPreference mPreference;
+    @VisibleForTesting public static final String PREF_KEY = "external_display_settings";
+    @Nullable private RestrictedPreference mPreference;
 
     public ExternalDisplayUpdater(@NonNull DevicePreferenceCallback callback, int metricsCategory) {
         super(callback, metricsCategory);
@@ -50,15 +44,15 @@ public class ExternalDisplayUpdater extends BaseExternalDisplayUpdater {
 
         mPreference = new RestrictedPreference(context, null /* AttributeSet */);
         mPreference.setTitle(R.string.external_display_settings_title);
-        mPreference.setSummary(getSummary());
         mPreference.setIcon(getDrawable(context));
         mPreference.setKey(PREF_KEY);
         applyUsbDataSignalingPolicy(mPreference, context);
-        mPreference.setOnPreferenceClickListener((Preference p) -> {
-            metricsFeatureProvider.logClickedPreference(p, metricsCategory);
-            launchSettings(context, /* args= */ null);
-            return true;
-        });
+        mPreference.setOnPreferenceClickListener(
+                (Preference p) -> {
+                    metricsFeatureProvider.logClickedPreference(p, metricsCategory);
+                    launchSettings(context, /* args= */ null);
+                    return true;
+                });
     }
 
     @VisibleForTesting
@@ -67,47 +61,26 @@ public class ExternalDisplayUpdater extends BaseExternalDisplayUpdater {
         return context.getDrawable(R.drawable.ic_external_display_32dp);
     }
 
-    @Nullable
-    private CharSequence getSummary() {
-        if (injector == null) {
-            return null;
-        }
-        var context = injector.getContext();
-        if (context == null) {
-            return null;
-        }
-
-        var allDisplays = injector.getDisplays().stream().filter(
-                DisplayDevice::isConnectedDisplay).toList();
-        for (var display : allDisplays) {
-            if (display.isEnabled() == DisplayIsEnabled.YES) {
-                if (injector.getFlags().displayTopologyPaneInDisplayList()) {
-                    // In the new DisplayTopology settings, "External display" preference should
-                    // be displayed without a summary as there's no longer "on" / "off" toggle
-                    return "";
-                }
-                return context.getString(R.string.external_display_on);
-            }
-        }
-        if (injector.getFlags().displayTopologyPaneInDisplayList()) {
-            // In the new DisplayTopology settings, connected display settings should be hidden
-            // when there's no enabled connected displays
-            return null;
-        }
-        return allDisplays.isEmpty() ? null : context.getString(R.string.external_display_off);
-    }
-
     @Override
     protected void update() {
-        var summary = getSummary();
         if (mPreference == null) {
             return;
         }
-        mPreference.setSummary(summary);
-        if (summary != null) {
+        if (hasEnabledConnectedDisplay()) {
             devicePreferenceCallback.onDeviceAdded(mPreference);
         } else {
             devicePreferenceCallback.onDeviceRemoved(mPreference);
         }
+    }
+
+    private boolean hasEnabledConnectedDisplay() {
+        if (injector == null) {
+            return false;
+        }
+        return injector.getDisplays().stream()
+                .anyMatch(
+                        display ->
+                                display.isConnectedDisplay()
+                                        && display.isEnabled() == DisplayIsEnabled.YES);
     }
 }

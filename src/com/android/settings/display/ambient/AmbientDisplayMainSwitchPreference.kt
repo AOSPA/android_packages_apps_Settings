@@ -19,6 +19,8 @@ import android.content.Context
 import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
 class AmbientDisplayMainSwitchPreference : BooleanValuePreference, MainSwitchPreferenceBinding {
@@ -39,6 +41,14 @@ class AmbientDisplayMainSwitchPreference : BooleanValuePreference, MainSwitchPre
         get() = false
 
     override fun storage(context: Context): KeyValueStore = AmbientDisplayStorage(context)
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         val KEY = "ambient_display_always_on_key"

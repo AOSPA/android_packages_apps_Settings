@@ -56,6 +56,9 @@ class JoystickSwitchPreference :
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val availabilityDescription =
+        "The device must not be during setup, must support window magnification, and must support the joystick magnification setting."
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() &&
             context.isWindowMagnificationSupported() &&

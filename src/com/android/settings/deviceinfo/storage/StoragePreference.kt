@@ -28,11 +28,13 @@ class StoragePreference(
     override val title: Int,
     val provideIntent: (Context) -> Intent?,
     val provideSummary: (Context) -> CharSequence?,
-    val provideTitle: (Context) -> CharSequence? = { it.getString(title) }
+    val provideTitle: (Context) -> CharSequence? = { it.getString(title) },
+    private val tags: List<String> = emptyList(),
 ) : PreferenceMetadata,
     PreferenceTitleProvider,
     PreferenceSummaryProvider {
     override fun getSummary(context: Context) = provideSummary(context)
     override fun getTitle(context: Context) = provideTitle(context)
     override fun intent(context: Context) = provideIntent(context)
+    override fun tags(context: Context) = tags.toTypedArray()
 }

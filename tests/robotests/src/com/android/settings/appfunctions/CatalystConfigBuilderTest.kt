@@ -39,11 +39,5 @@ class CatalystConfigBuilderTest {
         assertThat(config.screenConfigs).hasSize(1)
         assertThat(config.screenConfigs[0].screenKey).isEqualTo(screenKey)
         assertThat(config.screenConfigs[0].enabled).isTrue()
-
-        assertThat(config.deviceStateItems).hasSize(2)
-        assertThat(config.deviceStateItems[0].settingKey).isEqualTo(pref1)
-        assertThat(config.deviceStateItems[0].settingScreenKey).isEqualTo(screenKey)
-        assertThat(config.deviceStateItems[1].settingKey).isEqualTo(pref2)
-        assertThat(config.deviceStateItems[1].settingScreenKey).isEqualTo(screenKey)
     }
 }

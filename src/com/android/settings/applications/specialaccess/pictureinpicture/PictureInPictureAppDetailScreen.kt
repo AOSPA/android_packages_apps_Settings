@@ -37,6 +37,7 @@ import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -57,6 +58,9 @@ open class PictureInPictureAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val key
         get() = KEY
+
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
 
     //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
@@ -87,6 +91,9 @@ open class PictureInPictureAppDetailScreen : SpecialAccessAppDetailScreen {
         arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
 
     override fun isFlagEnabled(context: Context) = context.isPictureInPictureEnabled()
+
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested picture in picture permission."
 
     override fun isAvailable(context: Context) =
         super.isAvailable(context) && pictureInPictureFilter(context, packageInfo?.applicationInfo)

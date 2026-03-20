@@ -27,10 +27,8 @@ open class DisplayTopologyPreferenceView(
     private val initialSelectedDisplayId: Int? = injector.displayTopology?.primaryDisplayId,
 ) : FocusAwareFrameLayout(uiContext) {
 
-    // TODO(b/430493225): Pass injector without passing injector.context separately.
-    //  The null check is just to ensure Controller class is clean of injector context null checking
     private val controller =
-        DisplayTopologyPreferenceController(uiContext, injector.context!!, injector)
+        DisplayTopologyPreferenceController(uiContext, injector.context, injector)
 
     init {
         LayoutInflater.from(uiContext)
