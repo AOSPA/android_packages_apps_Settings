@@ -60,7 +60,7 @@ class TripleTapShortcutPreference(
         get() = R.string.accessibility_shortcut_edit_screen_title_triple_tap
 
     override fun getSummary(context: Context): CharSequence? {
-        return context.getString(R.string.accessibility_shortcut_edit_screen_summary_triple_tap, 3)
+        return context.getString(R.string.accessibility_shortcut_edit_screen_summary_triple_tap)
     }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
