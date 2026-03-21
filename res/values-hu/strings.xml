@@ -340,7 +340,7 @@
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Időzóna"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Otthoni időzóna"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Válasszon időzónát"</string>
-    <string name="home_time_zone_summary" msgid="1494773352044636274">"Állítson be otthoni időzónát akkorra, amikor távol van"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"Állítson be otthoni időzónát az utazások idejére"</string>
     <string name="use_home_time_zone_title" msgid="8026361707497256390">"Otthoni időzóna használata"</string>
     <string name="suggestions_category_title" msgid="669819615912272575">"Javaslatok"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Időzóna kiválasztása"</string>
@@ -1828,8 +1828,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"A helyalapú időzóna-meghatározásra vonatkozó módosítások nem engedélyezettek"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Ha az eszköz helyadatai rendelkezésre állnak, felhasználhatók az időzóna beállításához"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Értesítések"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Értesítést kaphat, amikor az idő automatikusan módosul"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Időzóna-módosítás"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Értesítést kaphat, amikor az időzónája automatikusan módosul"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"értesítés, idő, zóna, időzóna"</string>
@@ -2135,13 +2134,22 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Nyelv"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"A billentyűzetváltó gomb megjelenítése"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"A billentyűzetváltó gomb megjelenítésének engedélyezése a navigációs sávon beviteli mező kiválasztásakor"</string>
-    <string name="virtual_keyboard_category" msgid="2339505603075527212">"Képernyő-billentyűzet"</string>
-    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Használható képernyő-billentyűzet"</string>
+    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
+    <skip />
+    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
+    <skip />
+    <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
+    <skip />
+    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
+    <skip />
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opciók"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Kisegítő lehetőségek"</string>
-    <string name="physical_keyboard_title" msgid="3328134097512350958">"Fizikai billentyűzet"</string>
-    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Fizikai billentyűzetkiosztás választója"</string>
+    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Billentyűblokkolás"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Annak a figyelmen kívül hagyása, ha ugyanazt a billentyűt gyorsan egymás után többször is lenyomja."</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Billentyűblokkolás késleltetése"</string>
@@ -2330,7 +2338,8 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Rezgés átirányítása"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Rezgés küldése a játékvezérlőre kapcsolódáskor"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Billentyűzetkiosztások"</string>
-    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Fizikaibillentyűzet-elrendezések"</string>
+    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
+    <skip />
     <string name="user_dict_settings_title" msgid="680410651924276991">"Személyes szótár"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Munkahelyi személyes szótár"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Az alkalmazásokban (pl. a helyesírás-ellenőrzőben) használni kívánt szavak hozzáadása"</string>
@@ -2352,9 +2361,12 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Minden nyelven"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"További nyelvek…"</string>
     <string name="testing" msgid="6294172343766732037">"Tesztelés"</string>
-    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Képernyő-billentyűzet, eszközök"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Képernyő-billentyűzet, fizikai billentyűzet, eszközök"</string>
-    <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fizikai billentyűzet"</string>
+    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
+    <skip />
+    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
+    <skip />
+    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
+    <skip />
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Elrendezés"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Modul kiválasztása"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Modul kiválasztása"</string>
@@ -2928,8 +2940,7 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
-    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
-    <skip />
+    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"Az akkumulátorhasználatot és a képernyőidőt a rendszer nem méri a telefon töltése közben."</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Alkalmazás akkuhasználata"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Használat részletei"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Az energiafelhasználás beállítása"</string>
@@ -3760,7 +3771,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"betűméret, nagybetű, nagy betűtípus, nagy szöveg, gyengénlátó, szöveg nagyítása, betűtípusnagyító, betűtípus-nagyítás"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"Mindig bekapcsolt környezeti kijelző (Always on Ambient Display, AOD)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, címke, olvasó"</string>
-    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"billentyűzet, rezgés, vibrálás,"</string>
+    <!-- no translation found for keywords_keyboard_vibration (5870649353180725920) -->
+    <skip />
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"külső kijelző, csatlakoztatott kijelző, kibővített kijelző, második kijelző, beépített kijelző, kijelzők elrendezése, tükrözés, megjelenítési méret, elforgatás, felbontás, frissítési gyakoriság"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"beszúrási jel, szövegbeszúrási jel, szövegkurzor, kurzor, villogás, villogási intervallum, villogási sebesség, animáció, animáció csökkentése, animáció eltávolítása"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Hangerő és rezgés"</string>
@@ -5762,6 +5774,8 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"Képernyőkímélő kiválasztása"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Szerkesztés"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> személyre szabása"</string>
+    <!-- no translation found for dream_preview_button_description (1752727543834253129) -->
+    <skip />
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"A szabad formátumú ablak támogatásának engedélyezéséhez újraindításra van szükség."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"A szabad formájú ablakok rendelkezésre állásának frissítéséhez újraindításra van szükség."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"A szabad formájú ablakok másodlagos kijelzőkön való engedélyezéséhez újraindításra van szükség."</string>
@@ -5813,8 +5827,7 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"Szélesség: <xliff:g id="NUMERATOR">%1$s</xliff:g>, magasság: <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Az alkalmazás újraindul a méretarány módosításakor. A nem mentett módosításai elveszhetnek. Előfordulhat, hogy egyes alkalmazások nem optimalizálhatók bizonyos méretarányokra."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Élmény"</string>
-    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
-    <skip />
+    <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtuális kontroller"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Ujjlenyomat-érzékelő"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Villogó értesítések"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"A villogó értesítésekről"</string>
