@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility.shared.utils
 
+import android.content.Context
 import android.view.ViewGroup
 import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.accessibility.extensions.isInSetupWizard
@@ -69,3 +70,16 @@ fun handleIllustrationAnimationForSetupWizard(view: LottieAnimationView) {
         view.postDelayed({ view.playAnimation() }, delayMs)
     }
 }
+
+/**
+ * Determines if the focus rings should be shown in the Setup Wizard.
+ *
+ * @param context the current context.
+ * @return `true` if the focus rings should be shown.
+ */
+fun shouldShowFocusRingsInSuw(context: Context): Boolean =
+    com.android.settings.accessibility.Flags.enableInsetFocusRingsInSuw() &&
+        context.resources.getBoolean(
+            com.android.internal.R.bool.config_enableInsetFocusRingsInSuw
+        ) &&
+        context.isInSetupWizard()

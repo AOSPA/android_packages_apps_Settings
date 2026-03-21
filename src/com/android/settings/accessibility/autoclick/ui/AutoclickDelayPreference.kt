@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.ReadWritePermit
 
 /** Preference for the delay before an automatic click is performed. */
 class AutoclickDelayPreference(context: Context) :
@@ -54,6 +55,8 @@ class AutoclickDelayPreference(context: Context) :
 
     override fun getIncrementStep(context: Context): Int = AUTOCLICK_DELAY_STEP
 
+    override fun getUnitOfMeasurement() = "milliseconds"
+
     override val key: String
         get() = SETTING_KEY
 
@@ -65,6 +68,11 @@ class AutoclickDelayPreference(context: Context) :
 
     override fun storage(context: Context): KeyValueStore =
         SettingsSecureStore.get(context).apply { setDefaultValue(SETTING_KEY, DEFAULT_DELAY) }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override fun getSummary(context: Context): CharSequence {
         val autoclickDelay = storage(context).getInt(SETTING_KEY) ?: DEFAULT_DELAY

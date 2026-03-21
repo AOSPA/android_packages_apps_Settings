@@ -48,6 +48,8 @@ class MobileNetworkPhoneNumberPreference(private val data: MobileNetworkData) :
     override val title: Int
         get() = R.string.status_number
 
+    override val availabilityDescription = "A mobile network must be available."
+
     override fun isAvailable(context: Context) = data.phoneNumberDataFlow.value.isAvailable
 
     override fun getSummary(context: Context) = data.phoneNumberDataFlow.value.summary
@@ -72,8 +74,10 @@ class MobileNetworkPhoneNumberPreference(private val data: MobileNetworkData) :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
+    override val supportsWrite = false
+
     override val sensitivityLevel
-        get() = SensitivityLevel.MUST_PROVIDE_UNDO
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     @Suppress("UNCHECKED_CAST")
     class PhoneNumberStore(private val data: MobileNetworkData) :

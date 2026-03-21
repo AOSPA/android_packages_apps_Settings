@@ -48,6 +48,9 @@ class TwilightLocationPreference :
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
+    override val availabilityDescription =
+        "The device must have location turned off."
+
     override fun isAvailable(context: Context): Boolean {
         val locationManager =
             context.getSystemService<LocationManager?>(LocationManager::class.java)

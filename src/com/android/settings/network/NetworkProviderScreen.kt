@@ -59,6 +59,9 @@ open class NetworkProviderScreen :
     override val keywords: Int
         get() = R.string.keywords_internet
 
+    override val availabilityDescription =
+        "The device must support showing internet settings in Settings."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_internet_settings)
 

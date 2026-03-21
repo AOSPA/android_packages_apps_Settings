@@ -28,7 +28,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
-import com.android.settingslib.metadata.preferencesapi.types.IntInRange
+import com.android.settingslib.metadata.preferencesapi.types.PercentageInt
 import kotlin.math.roundToInt
 
 // LINT.IfChange
@@ -42,7 +42,10 @@ class DisplayApiScreen :
         alreadyPartiallyMigrated = DisplayScreen::class,
     ) {
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
 
         preconditions(R.string.display_settings_screen_preconditions) {
             if (context.resources.getBoolean(R.bool.config_show_top_level_display)) {
@@ -55,7 +58,7 @@ class DisplayApiScreen :
         preference(
             key = BRIGHTNESS_LEVEL_KEY,
             purpose = R.string.display_settings_api_screen_brightness_level_purpose,
-            type = IntInRange(min = 0, max = 100, unitOfMeasurement = "percentage"),
+            type = PercentageInt,
         ) {
             preconditions(R.string.brightness_level_preconditions) {
                 if (context.isBrightnessLevelSettingsAvailable) {

@@ -72,6 +72,8 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
 
     override fun isEnabled(context: Context): Boolean = isFilterEnabled()
 
+    override val availabilityDescription = "The device must support the new supervision settings UI."
+
     override fun isAvailable(context: Context) = Flags.enableSupervisionSettingsUiUpdates()
 
     override val indexable

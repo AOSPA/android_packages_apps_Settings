@@ -20,8 +20,11 @@
     <string name="spatial_audio_wired_headphones_preconditions" translatable="false">The device must support wired headphones.</string>
     <string name="spatial_audio_screen_hardware_unsupported" translatable="false">Spatialization is not enabled.</string>
     <string name="spatial_audio_phone_speaker_hardware_unsupported" translatable="false">Spatialization is not available for the device speaker.</string>
-    <string name="api_dark_theme_screen_preconditions" translatable="false">Battery Saver must be off or the device must allow Dark theme settings during Battery Saver.</string>
+    <string name="api_dark_theme_screen_preconditions" translatable="false">Battery Saver must be off or the device must allow Dark theme settings during Battery Saver</string>
     <string name="api_dark_theme_screen_invalid_preference" translatable="false">The Battery Saver is turned on.</string>
+    <string name="dark_theme_custom_time_precondition" translatable="false">The device must be configured to use a custom dark theme schedule.</string>
+    <string name="dark_theme_custom_time_invalid_preference" translatable="false">Dark theme schedule is not set to custom time.</string>
+    <string name="dark_theme_power_saver_precondition" translatable="false">The Battery Saver must be off. </string>
     <string name="managed_profile_settings_screen_preconditions" translatable="false">The device must have a work profile.</string>
     <string name="managed_profile_settings_screen_not_supported" translatable="false">The work profile is not set up on this device.</string>
     <string name="app_launch_settings_screen_preconditions" translatable="false">The app must be installed and enabled, and must not be an instant app or a browser app.</string>
@@ -52,8 +55,8 @@
     <string name="tap_screen_gesture_hardware_unsupported" translatable="false">This device does not support the tap sensor.</string>
     <string name="device_admin_settings_screen_preconditions" translatable="false">The device must support the device admin settings screen.</string>
     <string name="device_admin_settings_screen_not_available" translatable="false">The config of the device admin settings is not available.</string>
-    <string name="device_name_preconditions" translatable="false">Allow to show the device name settings.</string>
-    <string name="device_name_not_available" translatable="false">The config of the device name settings is not available.</string>
+    <string name="device_name_preconditions" translatable="false">The device must support showing and editing the device name.</string>
+    <string name="device_name_not_available" translatable="false">The device does not support showing and editing the device name.</string>
     <string name="trust_agents_preconditions" translatable="false">Allow to show the Trust agents screen.</string>
     <string name="trust_agents_not_available" translatable="false">The config of the device admin settings is not available.</string>
     <string name="trust_agents_unset_lock_screen" translatable="false">The secure screen lock is not set up.</string>
@@ -71,6 +74,10 @@
     <string name="user_aspect_ratio_app_not_launchable" translatable="false">This app is not launchable.</string>
     <string name="battery_info_screen_preconditions" translatable="false">The battery settings provider must provide the battery information feature.</string>
     <string name="battery_info_screen_battery_information_feature_disabled" translatable="false">The battery information feature is not enabled.</string>
+    <string name="battery_usage_screen_preconditions" translatable="false">The device must support showing battery usage in settings.</string>
+    <string name="battery_usage_screen_feature_disabled" translatable="false">Battery usage is not supported on this device.</string>
+    <string name="battery_settings_screen_preconditions" translatable="false">The device must support showing the top level battery category in settings.</string>
+    <string name="battery_settings_screen_feature_disabled" translatable="false">The top level battery category in settings is not supported on this device.</string>
     <string name="sound_vibration_precondition" translatable="false">This device must have a vibration motor.</string>
     <string name="sound_vibration_hardware_unsupported" translatable="false">This device does not have a vibration motor.</string>
     <string name="contacts_storage_screen_preconditions" translatable="false">The device must have a valid default account.</string>
@@ -119,8 +126,11 @@
     <string name="night_display_auto_mode_twilight_location_disabled" translatable="false">Device location is not enabled.</string>
     <string name="night_display_auto_mode_custom_time_disabled" translatable="false">Night Light is not set to activate automatically at custom times.</string>
     <string name="night_display_custom_start_end_times_preconditions" translatable="false">Night Light must be set to activate automatically at custom times.</string>
-    <string name="auto_brightness_preconditions" translatable="false">This device must support auto-brightness.</string>
+    <string name="auto_brightness_preconditions" translatable="false">This device must support auto-brightness and must not be disallowed by a device administrator.</string>
     <string name="auto_brightness_unavailable" translatable="false">Auto-brightness is not supported on this device.</string>
+    <string name="screen_resolution_preconditions" translatable="false">The device must support screen resolution configuration.</string>
+    <string name="screen_resolution_unsupported" translatable="false">Screen resolution configuration is not supported on this device.</string>
+    <string name="auto_brightness_disallowed" translatable="false">Auto-brightness has disabled by device administrator.</string>
     <string name="when_to_dream_preconditions" translatable="false">The device must support configuring when to start screensaver.</string>
     <string name="when_to_dream_unavailable" translatable="false">The device does not support configuring when to start screensaver.</string>
     <string name="low_light_mode_preconditions" translatable="false">The device must support low light mode for screensaver.</string>
@@ -128,4 +138,10 @@
     <string name="use_nfc_unavailable" translatable="false">NFC is not available on this device.</string>
     <string name="require_device_unlock_for_nfc_preconditions" translatable="false">The device must support require device unlock for NFC paymentys feature.</string>
     <string name="require_device_unlock_for_nfc_unavailable" translatable="false">Require device unlock for NFC payments is not supported on this device.</string>
+    <string name="uwb_settings_general_precondition" translatable="false">The use of ultra-wideband must be supported by the hardware and must not be restricted by device policy</string>
+    <string name="uwb_settings_set_precondition" translatable="false">Ultra-wideband settings cannot be changed during airplane mode.</string>
+    <string name="uwb_settings_unavailable_user_restriction" translatable="false">Ultra-wideband is disabled based on your current settings.</string>
+    <string name="uwb_settings_unavailable_hardware" translatable="false">Ultra-wideband is not supported on this device.</string>
+    <string name="uwb_settings_unavailable_regulation" translatable="false">Ultra-wideband is unavailable due to local regulatory restrictions in your current region.</string>
+    <string name="uwb_settings_unavailable_airplane_mode" translatable="false">Ultra-wideband is disabled while Airplane Mode is active.</string>
 </resources>

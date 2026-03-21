@@ -19,6 +19,7 @@ package com.android.settings.network.telephony
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
+import android.media.audio.Flags as AudioFlags
 import android.os.Bundle
 import android.os.UserManager
 import android.provider.Settings
@@ -47,7 +48,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
-import com.android.settingslib.metadata.preferencesapi.types.AnyInt
+import com.android.settingslib.metadata.preferencesapi.types.SubscriptionId
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -107,6 +108,8 @@ private constructor(
 
     override fun getMetricsCategory() = SettingsEnums.MOBILE_NETWORK
 
+    override val availabilityDescription = "The subscription id must be valid."
+
     override fun isAvailable(context: Context): Boolean =
         SubscriptionManager.isValidSubscriptionId(subId)
 
@@ -124,6 +127,9 @@ private constructor(
                 +MobileNetworkPhoneNumberPreference(data)
                 +EnabledNetworkModePreference(data)
                 +MobileNetworkImeiPreference(data)
+                if (AudioFlags.supportPerPhoneAccountRingtone()) {
+                    +SimRingtonePreference(context, subId) order 110
+                }
                 if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     +(DataUsageListScreen.KEY withParameters keyParameters!!)
                 } else {
@@ -194,11 +200,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(
-                Settings.EXTRA_SUB_ID,
-                "The subscription ID",
-                type = AnyInt,
-            ) // TODO(scottjonathan): Is there a better type to use here
+            parameter(Settings.EXTRA_SUB_ID, "The subscription ID", type = SubscriptionId())
         }
 
         @JvmStatic

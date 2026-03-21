@@ -316,10 +316,21 @@ abstract public class NotificationSettings extends DashboardFragment {
         Intent intent = new Intent(Intent.ACTION_MAIN)
                 .addCategory(Notification.INTENT_CATEGORY_NOTIFICATION_PREFERENCES)
                 .setPackage(mAppRow.pkg);
-        final List<ResolveInfo> resolveInfos = mPm.queryIntentActivities(
-                intent,
-                0 //PackageManager.MATCH_DEFAULT_ONLY
-        );
+        final List<ResolveInfo> resolveInfos;
+        if (android.multiuser.Flags.hsuAppManagement()) {
+            // For HSU (Headless System User) apps, we must query activities for the specific user
+            // because they might only exist or be configured for the headless user.
+            resolveInfos = mPm.queryIntentActivitiesAsUser(
+                    intent,
+                    0, //PackageManager.MATCH_DEFAULT_ONLY
+                    mUserId
+            );
+        } else {
+            resolveInfos = mPm.queryIntentActivities(
+                    intent,
+                    0 //PackageManager.MATCH_DEFAULT_ONLY
+            );
+        }
         if (DEBUG) {
             Log.d(TAG, "Found " + resolveInfos.size() + " preference activities"
                     + (resolveInfos.size() == 0 ? " ;_;" : ""));
@@ -359,8 +370,18 @@ abstract public class NotificationSettings extends DashboardFragment {
                 final String p = packages[i];
                 if (pkg.equals(p)) {
                     try {
-                        return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES
-                                | PackageManager.GET_PERMISSIONS);
+                        if (android.multiuser.Flags.hsuAppManagement()) {
+                            // For HSU (Headless System User) apps, we must get the package info
+                            // for the specific user to retrieve the correct state.
+                            return mPm.getPackageInfoAsUser(pkg,
+                                    PackageManager.PackageInfoFlags.of(
+                                            PackageManager.GET_SIGNATURES
+                                                    | PackageManager.GET_PERMISSIONS),
+                                    UserHandle.getUserId(uid));
+                        } else {
+                            return mPm.getPackageInfo(pkg, PackageManager.GET_SIGNATURES
+                                    | PackageManager.GET_PERMISSIONS);
+                        }
                     } catch (NameNotFoundException e) {
                         Log.w(TAG, "Failed to load package " + pkg, e);
                     }

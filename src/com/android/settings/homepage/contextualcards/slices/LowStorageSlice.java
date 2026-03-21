@@ -34,6 +34,7 @@ import com.android.settings.R;
 import com.android.settings.SubSettings;
 import com.android.settings.Utils;
 import com.android.settings.deviceinfo.StorageDashboardFragment;
+import com.android.settings.flags.Flags;
 import com.android.settings.slices.CustomSliceRegistry;
 import com.android.settings.slices.CustomSliceable;
 import com.android.settings.slices.SliceBuilderUtils;
@@ -63,8 +64,21 @@ public class LowStorageSlice implements CustomSliceable {
         final double usedPercentage = (double) (info.totalBytes - info.freeBytes) / info.totalBytes;
 
         // Generate Low storage Slice.
-        final String percentageString = NumberFormat.getPercentInstance().format(usedPercentage);
         final String freeSizeString = Formatter.formatFileSize(mContext, info.freeBytes);
+
+        final String percentageString;
+        if (Flags.storageSummaryPercentageAlignment()) {
+            // Use semantic deconstruction to ensure the percentage sign is
+            // correctly placed visually on the left for RTL languages like Persian.
+            final NumberFormat numberFormatter = NumberFormat.getIntegerInstance();
+            final int percentValue = (int) (usedPercentage * 100);
+            final String localizedDigits = numberFormatter.format(percentValue);
+            percentageString = mContext.getString(
+                    R.string.storage_percentage_format, localizedDigits);
+        } else {
+            percentageString = NumberFormat.getPercentInstance().format(usedPercentage);
+        }
+
         final ListBuilder listBuilder = new ListBuilder(mContext,
                 CustomSliceRegistry.LOW_STORAGE_SLICE_URI, ListBuilder.INFINITY).setAccentColor(
                 Utils.getColorAccentDefaultColor(mContext));

@@ -17,22 +17,25 @@
 package com.android.settings.datausage
 
 import android.content.Context
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.applications.AppInfoBase
+import com.android.settings.datausage.AppDataUsageScreenApi.Companion.KEY_APP_BACKGROUND_DATA_SWITCH
 import com.android.settings.datausage.AppDataUsageScreenApi.Companion.KEY_APP_PACKAGE_NAME
-import com.android.settings.datausage.AppDataUsageScreenApi.Companion.getPackageUid
+import com.android.settings.datausage.AppDataUsageScreenApi.Companion.KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH
 import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.Parameters
+import com.android.settings.wifi.repository.DataUsageRepository
+import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.preferencesapi.ApiOperationContext
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -40,11 +43,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.kotlin.any
+import org.mockito.Mock
+import org.mockito.Mockito.verify
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
 import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.doThrow
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
 
 @RunWith(AndroidJUnit4::class)
@@ -52,33 +55,30 @@ class AppDataUsageScreenApiTest {
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
+    @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
+
+    @Mock private lateinit var repository: DataUsageRepository
+
     private lateinit var context: Context
-    private val mockPm = mock<PackageManager>()
     private lateinit var screen: AppDataUsageScreenApi
     private lateinit var tester: ApiTester
 
+    private val packageName = "com.android.settings"
+    private val testUid = 1000
+
     @Before
     fun setUp() = runTest {
-        context = spy(ApplicationProvider.getApplicationContext<Context>())
-        context.stub {
-            on { applicationContext } doReturn context
-            on { packageManager } doReturn mockPm
-        }
+        context = ApplicationProvider.getApplicationContext<Context>()
         val factory = FakeFeatureFactory.setupForTest()
-        FeatureFactory.setFactory(context, factory)
+        FeatureFactory.setFactory(context.applicationContext, factory)
 
-        val appInfo =
-            ApplicationInfo().apply {
-                packageName = "com.android.settings"
-                uid = 1000
-            }
-        mockPm.stub {
-            on { getInstalledApplications(any<PackageManager.ApplicationInfoFlags>()) } doReturn
-                listOf(appInfo)
-        }
+        factory.mWifiFeatureProvider.stub { on { dataUsageRepository } doReturn repository }
+
+        repository.stub { onBlocking { getPackageUid(packageName) } doReturn testUid }
 
         screen = AppDataUsageScreenApi()
         tester = ApiTester(screen)
+        tester.initializeScreenParameters(Parameters(KEY_APP_PACKAGE_NAME to packageName))
     }
 
     @Test
@@ -122,17 +122,13 @@ class AppDataUsageScreenApiTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchScreenExtra_returnsCorrectExtras() = runTest {
-        val packageName = "com.android.settings"
-        val testUid = 1234
-        mockPm.stub { on { getPackageUid(packageName, 0) } doReturn testUid }
-
         val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
-
         val schema = screen.parametersSchema!!
         val validated = schema.prepare(parameters.values)
         screen.initializeParameters(validated)
 
         val extras = screen.launchScreenExtra
+
         assertThat(extras.getString(KEY_APP_PACKAGE_NAME)).isEqualTo(packageName)
         assertThat(extras.getInt(AppInfoBase.ARG_PACKAGE_UID)).isEqualTo(testUid)
     }
@@ -157,21 +153,139 @@ class AppDataUsageScreenApiTest {
     }
 
     @Test
-    fun getPackageUid_packageFound_returnsUid() {
-        val packageName = "com.test.app"
-        val testUid = 5678
-        mockPm.stub { on { getPackageUid(packageName, 0) } doReturn testUid }
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun backgroundDataSwitch_sensitivityLevel_isNoSensitivity() {
+        val preference = screen.preferences.first { it.key == KEY_APP_BACKGROUND_DATA_SWITCH }
 
-        assertThat(context.getPackageUid(packageName)).isEqualTo(testUid)
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
     }
 
     @Test
-    fun getPackageUid_packageNotFound_returnsMinusOne() {
-        val packageName = "com.unknown.app"
-        mockPm.stub {
-            on { getPackageUid(packageName, 0) } doThrow PackageManager.NameNotFoundException()
-        }
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBackgroundDataSwitch_policyIsNotReject_returnsTrue() = runTest {
+        repository.stub { onBlocking { isPolicyReject(packageName) } doReturn false }
+        val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
 
-        assertThat(context.getPackageUid(packageName)).isEqualTo(-1)
+        val result = tester.get<Boolean>(KEY_APP_BACKGROUND_DATA_SWITCH, parameters)
+
+        assertThat(result).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getBackgroundDataSwitch_policyIsReject_returnsFalse() = runTest {
+        repository.stub { onBlocking { isPolicyReject(packageName) } doReturn true }
+        val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
+
+        val result = tester.get<Boolean>(KEY_APP_BACKGROUND_DATA_SWITCH, parameters)
+
+        assertThat(result).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBackgroundDataSwitch_setValueTrue_setPolicyRejectFalse() = runTest {
+        val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
+
+        tester.set(KEY_APP_BACKGROUND_DATA_SWITCH, true, parameters)
+
+        verify(repository).setPolicyReject(packageName, false)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setBackgroundDataSwitch_setValueFalse_setPolicyRejectTrue() = runTest {
+        val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
+
+        tester.set(KEY_APP_BACKGROUND_DATA_SWITCH, false, parameters)
+
+        verify(repository).setPolicyReject(packageName, true)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun unrestrictedMobileDataSwitch_sensitivityLevel_isNoSensitivity() {
+        val preference =
+            screen.preferences.first { it.key == KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH }
+
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun unrestrictedMobileDataSwitchPreconditions_policyAllowAvailable_isAllowed() = runTest {
+        repository.stub { onBlocking { isPolicyAllowAvailable(packageName) } doReturn true }
+        val preference =
+            screen.preferences.first { it.key == KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH }
+        val parameters = screen.parametersSchema!!.prepare(KEY_APP_PACKAGE_NAME to packageName)
+        val operationContext = ApiOperationContext(context, parameters = parameters)
+
+        val result = preference.preconditions?.check?.invoke(operationContext)
+
+        assertThat(result).isEqualTo(Allowed)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun unrestrictedMobileDataSwitchPreconditions_policyAllowNotAvailable_isNotAllowed() = runTest {
+        repository.stub { onBlocking { isPolicyAllowAvailable(packageName) } doReturn false }
+        val preference =
+            screen.preferences.first { it.key == KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH }
+        val parameters = screen.parametersSchema!!.prepare(KEY_APP_PACKAGE_NAME to packageName)
+        val operationContext = ApiOperationContext(context, parameters = parameters)
+
+        val result = preference.preconditions?.check?.invoke(operationContext)
+
+        assertThat(result).isNotEqualTo(Allowed)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getUnrestrictedMobileDataSwitch_policyIsAllow_returnsTrue() = runTest {
+        repository.stub {
+            onBlocking { isPolicyAllowAvailable(packageName) } doReturn true
+            onBlocking { isPolicyAllow(packageName) } doReturn true
+        }
+        val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
+
+        val result = tester.get<Boolean>(KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH, parameters)
+
+        assertThat(result).isTrue()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun getUnrestrictedMobileDataSwitch_policyIsNotAllow_returnsFalse() = runTest {
+        repository.stub {
+            onBlocking { isPolicyAllowAvailable(packageName) } doReturn true
+            onBlocking { isPolicyAllow(packageName) } doReturn false
+        }
+        val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
+
+        val result = tester.get<Boolean>(KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH, parameters)
+
+        assertThat(result).isFalse()
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setUnrestrictedMobileDataSwitch_setValueTrue_setPolicyAllowTrue() = runTest {
+        repository.stub { onBlocking { isPolicyAllowAvailable(packageName) } doReturn true }
+        val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
+
+        tester.set(KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH, true, parameters)
+
+        verify(repository).setPolicyAllow(packageName, true)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    fun setUnrestrictedMobileDataSwitch_setValueFalse_setPolicyAllowFalse() = runTest {
+        repository.stub { onBlocking { isPolicyAllowAvailable(packageName) } doReturn true }
+        val parameters = Parameters(KEY_APP_PACKAGE_NAME to packageName)
+
+        tester.set(KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH, false, parameters)
+
+        verify(repository).setPolicyAllow(packageName, false)
     }
 }

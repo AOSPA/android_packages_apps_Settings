@@ -43,8 +43,10 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_STORAGE
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.spaprivileged.model.app.AppStorageRepository
 import com.android.settingslib.spaprivileged.model.app.AppStorageRepositoryImpl
@@ -52,8 +54,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_STORAGE
 
+// LINT.IfChange
 @ProvidePreferenceScreen(AppInfoStorageScreen.KEY, parameterized = true)
 open class AppInfoStorageScreen
 private constructor(
@@ -68,8 +70,8 @@ private constructor(
     PreferenceSummaryProvider,
     PreferenceTitleProvider,
     PreferenceAvailabilityProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_STORAGE, TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
-
+    override fun tags(context: Context) =
+        arrayOf(APP_FUNCTION_STORAGE, TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
 
     private val packageName: String =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -99,7 +101,9 @@ private constructor(
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
+
     override val purpose: Int
         get() = R.string.device_state_app_info_storage_purpose
 
@@ -111,14 +115,14 @@ private constructor(
 
     override fun getMetricsCategory() = SettingsEnums.APPLICATIONS_APP_STORAGE
 
-
-
     override fun getTitle(context: Context): CharSequence? =
         appInfo?.loadLabel(context.packageManager)
 
     override fun getSummary(context: Context): CharSequence? = appInfo?.let { repo.formatSize(it) }
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
+
+    override val availabilityDescription = "The app must be installed."
 
     override fun isAvailable(context: Context) = appInfo != null
 
@@ -166,7 +170,12 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true, type = InstalledPackageName)
+            parameter(
+                KEY_APP_PACKAGE_NAME,
+                "The package name of the app",
+                required = true,
+                type = InstalledPackageName,
+            )
         }
 
         @JvmStatic
@@ -206,6 +215,8 @@ private class AppSizePreference(
     override val title: Int
         get() = R.string.application_size_label
 
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
+
     override fun getSummary(context: Context): CharSequence? = repo.formatSizeBytes(stats.codeBytes)
 }
 
@@ -222,6 +233,8 @@ private class AppUserDataSizePreference(
 
     override val title: Int
         get() = R.string.data_size_label
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun getSummary(context: Context): CharSequence? =
         repo.formatSizeBytes(stats.dataBytes - stats.cacheBytes)
@@ -241,6 +254,8 @@ private class AppCacheSizePreference(
     override val title: Int
         get() = R.string.cache_size_label
 
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
+
     override fun getSummary(context: Context): CharSequence? =
         repo.formatSizeBytes(stats.cacheBytes)
 }
@@ -259,6 +274,9 @@ private class AppTotalSizePreference(
     override val title: Int
         get() = R.string.total_size_label
 
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
+
     override fun getSummary(context: Context): CharSequence? =
         repo.formatSizeBytes(stats.totalBytes)
 }
+// LINT.ThenChange(AppStorageSettings.java, AppStorageSettingsScreenApi.kt)

@@ -66,6 +66,8 @@ class AdvancedPreference(private val targets: Set<String>) :
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         return !_expandableState.value &&
             targets.size == 1 &&

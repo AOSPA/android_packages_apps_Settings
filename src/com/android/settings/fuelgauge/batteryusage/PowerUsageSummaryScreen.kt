@@ -67,6 +67,9 @@ open class PowerUsageSummaryScreen :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, PowerUsageSummaryActivity::class.java, metadata?.key)
 
+    override val availabilityDescription =
+        "The device must support showing the top level battery category in settings."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_top_level_battery)
 

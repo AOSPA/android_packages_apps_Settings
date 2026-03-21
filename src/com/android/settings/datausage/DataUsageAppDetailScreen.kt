@@ -92,6 +92,9 @@ private constructor(
     override val key: String
         get() = KEY
 
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
+
     //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.app_data_usage_screen_purpose
@@ -112,6 +115,9 @@ private constructor(
         appInfo?.loadLabel(context.packageManager)
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
+
+    override val availabilityDescription =
+        "The app must be enabled."
 
     override fun isAvailable(context: Context) = appInfo != null
 

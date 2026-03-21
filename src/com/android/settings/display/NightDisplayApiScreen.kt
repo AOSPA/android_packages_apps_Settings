@@ -32,7 +32,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPref
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
-import com.android.settingslib.metadata.preferencesapi.types.IntInRange
+import com.android.settingslib.metadata.preferencesapi.types.PercentageInt
 import com.android.settingslib.metadata.preferencesapi.types.TimeOfDay
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -50,7 +50,10 @@ class NightDisplayApiScreen :
         alreadyPartiallyMigrated = NightDisplayScreen::class,
     ) {
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
 
         preconditions(R.string.night_display_preconditions) {
             if (context.isNightDisplaySettingsAvailable) {
@@ -78,7 +81,7 @@ class NightDisplayApiScreen :
         preference(
             key = NIGHT_DISPLAY_TEMPERATURE_KEY,
             purpose = R.string.night_display_temperature_purpose,
-            type = IntInRange(min = 0, max = 100), // Use 0-100% in the API.
+            type = PercentageInt,
         ) {
             preconditions(R.string.night_display_temperature_preconditions) {
                 if (context.colorDisplayManager.isNightDisplayActivated) {
@@ -111,7 +114,7 @@ class NightDisplayApiScreen :
         ) {
             get {
                 permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
-                executeEnum { context.getNightDisplayAutoMode() }
+                execute { context.getNightDisplayAutoMode() }
             }
 
             set {
@@ -126,7 +129,7 @@ class NightDisplayApiScreen :
                         Allowed
                     }
                 }
-                executeEnum { value ->
+                execute { value ->
                     context.colorDisplayManager.setNightDisplayAutoMode(value.asApiValue)
                 }
             }
@@ -151,9 +154,7 @@ class NightDisplayApiScreen :
 
             get {
                 execute {
-                    customTimeFormatter.format(
-                        context.colorDisplayManager.getNightDisplayCustomStartTime()
-                    )
+                    context.colorDisplayManager.getNightDisplayCustomStartTime()
                 }
             }
 
@@ -161,7 +162,7 @@ class NightDisplayApiScreen :
                 permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
                 execute { value ->
                     context.colorDisplayManager.setNightDisplayCustomStartTime(
-                        value.toLocalTimeMinutes()
+                        value
                     )
                 }
             }
@@ -186,9 +187,7 @@ class NightDisplayApiScreen :
 
             get {
                 execute {
-                    customTimeFormatter.format(
-                        context.colorDisplayManager.getNightDisplayCustomEndTime()
-                    )
+                    context.colorDisplayManager.getNightDisplayCustomEndTime()
                 }
             }
 
@@ -196,7 +195,7 @@ class NightDisplayApiScreen :
                 permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
                 execute { value ->
                     context.colorDisplayManager.setNightDisplayCustomEndTime(
-                        value.toLocalTimeMinutes()
+                        value
                     )
                 }
             }
@@ -208,8 +207,6 @@ class NightDisplayApiScreen :
 
     private val Context.isLocationEnabled: Boolean
         get() = getSystemService(LocationManager::class.java).isLocationEnabled
-
-    private fun String.toLocalTimeMinutes(): LocalTime = LocalTime.parse(this).truncatedTo(MINUTES)
 
     private fun Context.getNightDisplayIntensity(): Int {
         val min = ColorDisplayManager.getMinimumColorTemperature(this)
@@ -233,8 +230,6 @@ class NightDisplayApiScreen :
         colorDisplayManager.getNightDisplayAutoMode().let { apiValue ->
             NightDisplayAutoMode.entries.first { it.asApiValue == apiValue }
         } ?: NightDisplayAutoMode.NEVER
-
-    private val customTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
     companion object {
         const val KEY = "api_night_display"

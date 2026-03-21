@@ -189,6 +189,14 @@
     </Preference>
 
     <Preference
+        android:key="access_hid"
+        android:title="@string/access_hid_title"
+        android:order="-450"
+        settings:controller="com.android.settings.spa.app.specialaccess.HidAccessPreferenceController"
+        settings:keywords="@string/keywords_access_hid">
+    </Preference>
+
+    <Preference
         android:key="enabled_vr_listeners"
         android:title="@string/vr_listeners_title"
         android:order="-400"

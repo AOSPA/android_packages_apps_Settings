@@ -79,6 +79,8 @@ open class BubbleNotificationScreen :
         )
     }
 
+    override val availabilityDescription = "The device must support bubbles and must not be a low-ram device."
+
     override fun isAvailable(context: Context): Boolean = BubbleHelper.isSupportedByDevice(context)
 
     class BubbleNotificationScreenPreference(
@@ -97,6 +99,8 @@ open class BubbleNotificationScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

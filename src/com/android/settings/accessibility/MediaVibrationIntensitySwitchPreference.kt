@@ -46,6 +46,9 @@ class MediaVibrationIntensitySwitchPreference(
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY
 
+    override val availabilityDescription =
+        "The device must support media vibration settings."
+
     override fun isAvailable(context: Context) = context.isMediaVibrationPreferenceSupported()
 }
 

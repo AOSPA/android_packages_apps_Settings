@@ -92,6 +92,9 @@ class SupervisionSetupRecoveryPreference :
         return R.drawable.exclamation_icon
     }
 
+    override val availabilityDescription =
+        "The device must support the PIN recovery screen and the recovery email must be pending."
+
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionPinRecoveryScreen()) {
             return false

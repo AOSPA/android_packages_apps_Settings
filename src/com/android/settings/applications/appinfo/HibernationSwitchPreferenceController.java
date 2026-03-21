@@ -44,6 +44,7 @@ import com.google.common.annotations.VisibleForTesting;
 /**
  * A PreferenceController handling the logic for exempting hibernation of app
  */
+// Lint.IfChange
 public final class HibernationSwitchPreferenceController extends AppInfoPreferenceControllerBase
         implements Preference.OnPreferenceChangeListener {
     private static final String TAG = "HibernationSwitchPrefController";
@@ -158,3 +159,4 @@ public final class HibernationSwitchPreferenceController extends AppInfoPreferen
                 NAMESPACE_APP_HIBERNATION, PROPERTY_HIBERNATION_TARGETS_PRE_S_APPS, false);
     }
 }
+// Lint.ThenChange(AppInfoDashboardFragment.java, AppInfoScreenApiFirst.kt)

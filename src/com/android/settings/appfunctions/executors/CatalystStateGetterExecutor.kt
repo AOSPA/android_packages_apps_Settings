@@ -37,61 +37,51 @@ class CatalystStateGetterExecutor(private val context: Context) : DeviceStateExe
         params: GenericDocument?,
     ): DeviceStateItemProviderExecutorResult =
         withContext(Dispatchers.IO) {
-            try {
-                check(appFunctionType == DeviceStateAppFunctionType.GET_DEVICE_STATE) {
-                    "Requesting getSetDeviceStateItemParams for a $appFunctionType params."
+            check(appFunctionType == DeviceStateAppFunctionType.GET_DEVICE_STATE) {
+                "Requesting getSetDeviceStateItemParams for a $appFunctionType params."
+            }
+            if (params == null) {
+                throw IllegalArgumentException("Provided params are null.")
+            }
+
+            val unparsedParams =
+                requireNotNull(params.getPropertyDocument(GET_DEVICE_STATE_ITEM_PARAMS)) {
+                    "Missing getDeviceStateItemParams in the request: $params"
                 }
-                if (params == null) {
-                    throw IllegalArgumentException("Provided params are null.")
-                }
 
-                val unparsedParams =
-                    requireNotNull(params.getPropertyDocument(GET_DEVICE_STATE_ITEM_PARAMS)) {
-                        "Missing getDeviceStateItemParams in the request: $params"
-                    }
+            val fullKey = unparsedParams.getPropertyString(PREFERENCE_KEY)
+            requireNotNull(fullKey) { "Missing key in parameters $params" }
 
-                val fullKey = unparsedParams.getPropertyString(PREFERENCE_KEY)
-                if (fullKey == null) {
-                    Log.e(TAG, "Missing key in parameters")
-                    return@withContext DeviceStateItemProviderExecutorResult(result = null)
-                }
-                val keyParts = fullKey.split("/", limit = 2)
-                val screenKey = keyParts[0]
-                val key = keyParts.getOrElse(1) { fullKey }
+            val keyParts = fullKey.split("/", limit = 2)
+            val screenKey = keyParts[0]
+            val key = keyParts.getOrElse(1) { fullKey }
 
-                val itemizationKeys =
-                    unparsedParams.getPropertyStringArray(ITEMIZATION_KEYS)?.toList() ?: emptyList()
+            val itemizationKeys =
+                unparsedParams.getPropertyStringArray(ITEMIZATION_KEYS)?.toList() ?: emptyList()
 
-                val keyParameters =
-                    if (itemizationKeys.isNotEmpty()) {
-                        val paramName = determineParamName(screenKey)
-                        if (paramName != null) {
-                            Log.d(TAG, "Determined paramName: $paramName for screen: $screenKey")
-                            KeyParameters(mapOf(paramName to itemizationKeys.joinToString(",")))
-                        } else {
-                            null
-                        }
+            val keyParameters =
+                if (itemizationKeys.isNotEmpty()) {
+                    val paramName = determineParamName(screenKey)
+                    if (paramName != null) {
+                        Log.d(TAG, "Determined paramName: $paramName for screen: $screenKey")
+                        KeyParameters(mapOf(paramName to itemizationKeys.joinToString(",")))
                     } else {
                         null
                     }
-
-                val value = getPreference(context, screenKey, key, keyParameters)
-                if (value == null) {
-                    Log.e(TAG, "Key not found: $fullKey")
-                    return@withContext DeviceStateItemProviderExecutorResult(result = null)
+                } else {
+                    null
                 }
-                val item =
-                    DeviceStateItem(
-                        key = fullKey,
-                        purpose = fullKey,
-                        jsonValue = settingsPreferenceValueToString(value),
-                    )
-                val itemResponse = DeviceStateItemResponse(deviceStateItem = item)
-                DeviceStateItemProviderExecutorResult(result = itemResponse)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error executing $appFunctionType", e)
-                DeviceStateItemProviderExecutorResult(result = null)
-            }
+
+            val value = getPreference(context, screenKey, key, keyParameters)
+            requireNotNull(value) { "Key [$fullKey] not found" }
+            val item =
+                DeviceStateItem(
+                    key = fullKey,
+                    purpose = fullKey,
+                    jsonValue = settingsPreferenceValueToString(value.settingsPreferenceValue),
+                )
+            val itemResponse = DeviceStateItemResponse(deviceStateItem = item)
+            DeviceStateItemProviderExecutorResult(result = itemResponse)
         }
 
     companion object {

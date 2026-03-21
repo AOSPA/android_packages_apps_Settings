@@ -20,13 +20,32 @@ import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.ComponentName
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
+import com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService.KEY_ACTION_OF_BTN_POSITIVE
+import com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService.KEY_CLASS_NAME
+import com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService.KEY_PACKAGE_NAME
 
 class TroubleshootingUtils {
 
     companion object {
         private const val TAG = "TroubleshootingUtils"
         private const val EXTRA_WIFI_SSID = "ssid"
+
+        @JvmStatic
+        fun startWifiTroubleShootingActivity(activity: Activity, bundle: Bundle, ssid: String) {
+            val action = bundle.getString(KEY_ACTION_OF_BTN_POSITIVE, "")
+            val packageName = bundle.getString(KEY_PACKAGE_NAME, "")
+            val className = bundle.getString(KEY_CLASS_NAME, "")
+            Log.d(
+                TAG,
+                "startWifiTroubleShootingActivity - " +
+                    "package name: $packageName, " +
+                    "class name: $className, " +
+                    "action: $action",
+            )
+            startWifiTroubleShootingActivity(activity, packageName, className, action, ssid)
+        }
 
         @JvmStatic
         fun startWifiTroubleShootingActivity(

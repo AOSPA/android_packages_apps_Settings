@@ -28,12 +28,12 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceScreen;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
-import com.android.settings.dashboard.DashboardFragment;
-import com.android.settingslib.PrimarySwitchPreference;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -46,7 +46,8 @@ import com.google.common.util.concurrent.ListenableFuture;
  * or automatically managed), triggering the authentication dialog for enrollment/unenrollment and
  * reporting the correct status for the toggle.
  */
-public class SimPinProtectionToggleController extends TogglePreferenceController {
+public class SimPinProtectionToggleController extends TogglePreferenceController implements
+        EnterSimPinDialogFragment.SimPinEntryListener {
     private static final String TAG = "AutoManagedSimPin";
     private KeyguardManager mKeyguardManager;
 
@@ -108,18 +109,24 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
     private EnrollmentState mEnrollmentState;
 
     @Nullable
-    private PrimarySwitchPreference mPreference = null;
+    private SwitchPreferenceCompat mPreference = null;
 
     @Nullable
-    private DashboardFragment mFragment;
+    private BaseSimPinFragment mFragment;
     private AutoManagedSimPinHelper mAutoManagedSimPinHelper;
 
     public SimPinProtectionToggleController(@NonNull Context context,
             @NonNull String preferenceKey) {
+        this(context, preferenceKey, new AutoManagedSimPinHelper(context));
+    }
+
+    @VisibleForTesting
+    public SimPinProtectionToggleController(@NonNull Context context,
+            @NonNull String preferenceKey, AutoManagedSimPinHelper autoManagedSimPinHelper) {
         super(context, preferenceKey);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        mAutoManagedSimPinHelper = new AutoManagedSimPinHelper(mContext);
+        mAutoManagedSimPinHelper = autoManagedSimPinHelper;
         mKeyguardManager = mContext.getSystemService(KeyguardManager.class);
 
         // TODO: b/476046816 - Support multiple physical SIM card slots in the UI.
@@ -168,7 +175,9 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
                 isValidSubscription && mSubscriptionManager.getActiveSubscriptionInfo(
                         mSubId).isEmbedded();
 
-        if (isDeviceSecure() && !isEmbeddedSim) {
+        boolean isAutoSimPinUiEnabled = android.security.Flags.enableAutoSimPinUi();
+
+        if (isDeviceSecure() && !isEmbeddedSim && isAutoSimPinUiEnabled) {
             mEnrollmentState = EnrollmentState.ENROLL_TO_AUTOMATIC_PIN_MANAGEMENT;
             showAuthenticationDialogSimEnrollment();
         } else {
@@ -193,7 +202,7 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
             return R.string.sim_protection_mode_protected_by_platform;
         } else if (mAutoManagedSimPinHelper.isIccLockEnabled(mSubId)) {
             return R.string.sim_protection_mode_manually_managed;
-        } else if (!isDeviceSecure()) {
+        } else if (!isDeviceSecure() && android.security.Flags.enableAutoSimPinUi()) {
             return R.string.sim_protection_mode_lskf_required;
         }
         return R.string.sim_choose_protection_mode_title;
@@ -232,7 +241,7 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
         return mKeyguardManager != null ? mKeyguardManager.isDeviceSecure() : false;
     }
 
-    public void setFragment(DashboardFragment fragment) {
+    public void setFragment(BaseSimPinFragment fragment) {
         mFragment = fragment;
     }
 
@@ -292,10 +301,17 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
         }
     }
 
-    private void showPinEntryDialog() {
-        EnterSimPinDialogFragment df = EnterSimPinDialogFragment.newEnterCurrentPin();
+    private void showPinEntryDialog(int attemptsRemaining) {
+        showPinEntryDialog(EnterSimPinDialogFragment.newEnterCurrentPin(attemptsRemaining));
+    }
 
+    private void showPinEntryDialog() {
+        showPinEntryDialog(EnterSimPinDialogFragment.newEnterCurrentPin());
+    }
+
+    private void showPinEntryDialog(EnterSimPinDialogFragment df) {
         if (mFragment != null) {
+            mFragment.setCurrentListener(this);
             df.showNow(mFragment.getChildFragmentManager(), "CurrentPin");
         }
     }
@@ -306,7 +322,8 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
      *
      * @param pin The current SIM PIN as provided by the user.
      */
-    public void handlePinEntered(String pin) {
+    @Override
+    public void onPinEntered(String pin) {
         switch (mEnrollmentState) {
             case ENROLL_TO_MANUAL_PIN_MANAGEMENT -> {
                 Log.d(TAG, "Enrolling into manual PIN management mode.");
@@ -326,6 +343,10 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
 
                         setPreferenceState(success,
                                 mContext.getResources().getString(summaryResId));
+                        if (result.getResult() == PinResult.PIN_RESULT_TYPE_INCORRECT
+                                && result.getAttemptsRemaining() > 0) {
+                            showPinEntryDialog(result.getAttemptsRemaining());
+                        }
                     }
 
                     @Override
@@ -359,6 +380,10 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
 
                         setPreferenceState(!success,
                                 mContext.getResources().getString(summaryResId));
+                        if (result.getResult() == PinResult.PIN_RESULT_TYPE_INCORRECT
+                                && result.getAttemptsRemaining() > 0) {
+                            showPinEntryDialog(result.getAttemptsRemaining());
+                        }
                     }
 
                     @Override
@@ -375,8 +400,9 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
     /**
      * To be called by the SIM PIN entry dialog when the user cancels the enrollment.
      */
-    public void cancelEnrollment() {
-        setPreferenceState(false);
+    @Override
+    public void onEntryCancelled() {
+        setPreferenceState(isChecked());
     }
 
     private void showAuthenticationDialogSimEnrollment() {

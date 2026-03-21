@@ -145,26 +145,12 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
-    fun flagEnabled() {
-        assertThat(supervisionWebContentFiltersScreen.isFlagEnabled(context)).isTrue()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
-    fun flagDisabled() {
-        assertThat(supervisionWebContentFiltersScreen.isFlagEnabled(context)).isFalse()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun getMetricsCategory() {
         assertThat(supervisionWebContentFiltersScreen.getMetricsCategory())
             .isEqualTo(SettingsEnums.SUPERVISION_WEB_CONTENT_FILTERS)
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun topIntroExists() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val topIntroPreference =
@@ -176,7 +162,6 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun switchSafeSitesPreferences_succeedWithParentPin() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val browserSwitchPreference =
@@ -202,7 +187,6 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun switchSafeSitesPreferences_failWithoutParentPin() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val browserSwitchPreference =
@@ -228,7 +212,6 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun switchSafeSearchPreferences_succeedWithParentPin() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val searchSwitchWidget =
@@ -254,7 +237,6 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun switchSafeSearchPreferences_failedWithParentPin() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val searchSwitchWidget =
@@ -280,7 +262,6 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     @DisableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun supportedApps() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
@@ -309,10 +290,7 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
-        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
-    )
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun browserSupportedAppsEntryTitle() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val title =
@@ -332,10 +310,7 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
-        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
-    )
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun filterDisabled_browserSupportedAppsEntryDisabledWithGreyedOutIcon() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
@@ -378,10 +353,7 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
-        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
-    )
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun filterEnabled_browserSupportedAppsEntryEnabledWithColoredIcon() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
@@ -441,10 +413,7 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(
-        Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN,
-        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
-    )
+    @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
     fun searchSupportedAppsEntryTitle() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val title =
@@ -464,7 +433,6 @@ class SupervisionWebContentFiltersScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun footerPreference() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val footerPreference: FooterPreference =

@@ -328,8 +328,21 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"ఈ భాష‌లో వాడే ఫార్మాట్‌ను ఆటోమేటిక్‌ సెట్టింగ్‌గా ఉప‌యోగించండి"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"24-గంటల ఫార్మాట్‌ను ఉప‌యోగించండి"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"సమయం"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"టైమ్ ఫార్మాట్‌"</string>
+    <string name="time_format_category_title" msgid="3122743852067365261">"12-గంటల / 24-గంటల ఫార్మాట్"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"సమయ ఫార్మాట్"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"మరిన్ని సెట్టింగ్‌లు"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"ఈ సెట్టింగ్ ఆధారంగా అప్లికేషన్‌లు మీ టైమ్ ఫార్మాట్‌ను ఉపయోగిస్తాయి"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"సమయ ఫార్మాట్‌ను ఎంచుకోండి"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"ఆటోమేటిక్"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"యాప్ భాష ఆధారంగా 12-గంటల / 24-గంటల ఫార్మాట్‌ను యాప్‌లు ఉపయోగిస్తాయి"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"12‑గంటల ఫార్మాట్"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"24‑గంటల ఫార్మాట్"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"టైమ్ జోన్"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"ఇంటి టైమ్‌జోన్"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"టైమ్ జోన్‌ను ఎంచుకోండి"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"మీరు దూరంగా ఉన్నప్పుడు ఇంటి టైమ్ జోన్‌ను సెట్ చేయండి"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"ఇంటి టైమ్‌జోన్‌ను ఉపయోగించండి"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"సూచనలు"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"టైమ్ జోన్‌ను ఎంచుకోండి"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"టైమ్ జోన్ కోసం సెర్చ్ చేయండి"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"తేదీ"</string>
@@ -1428,8 +1441,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"స్క్రీన్ సేవర్"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"స్క్రీన్ సేవర్"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"బెడ్ టైమ్ మోడ్ ఆన్‌లో ఉండడం వల్ల అందుబాటులో లేదు"</string>
-    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
-    <skip />
+    <string name="screensaver_unavailable_due_to_mode" msgid="8515924546767264225">"ఈ డివైజ్‌లో అందుబాటులో లేదు"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"స్క్రీన్ సేవర్‌ను ఉపయోగించండి"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ఛార్జ్ చేసేటప్పుడు లేదా డాక్ చేసినప్పుడు"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"డాక్ అయి, ఛార్జింగ్ చేస్తున్నప్పుడు"</string>
@@ -1492,8 +1504,9 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"సరే"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"రద్దు చేయండి"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM కార్డ్‌ను రక్షించండి"</string>
-    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"ఆటోమేటిక్ SIM లాక్ రక్షణ"</string>
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"ఆటోమేటిక్ PIN మేనేజ్‌మెంట్"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM లాక్ ప్రొటెక్షన్ మోడ్"</string>
+    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
+    <skip />
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android ద్వారా మేనేజ్ అవుతోంది"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android ద్వారా మేనేజ్ కావడం లేదు"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"ఎన్‌రోల్‌మెంట్ విజయవంతమైంది"</string>
@@ -1502,13 +1515,24 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android ద్వారా మేనేజ్ అయ్యే PIN"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Android ద్వారా మేనేజ్ అయ్యే PIN విలువ:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"PINను పొందడంలో విఫలమైంది"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"దొంగతనం నుండి SIM కార్డ్‌ను రక్షించండి"</string>
+    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
+    <skip />
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Android ద్వారా మేనేజ్ అయ్యే SIM PIN"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"SIM PIN మాన్యువల్‌గా మేనేజ్ అవుతుంది"</string>
-    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"SIM ప్రొటెక్షన్‌ను ఆన్ చేయడానికి లాక్‌స్క్రీన్‌ను తప్పనిసరిగా సెటప్ చేయాలి"</string>
+    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
+    <skip />
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"ఆటోమేటిక్ SIM రక్షణ కోసం లాక్‌స్క్రీన్ అవసరం, మాన్యువల్ మాత్రమే ఇప్పుడు అందుబాటులో ఉంది"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"ప్రస్తుత SIM PINను ఎంటర్ చేయండి"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"SIM కార్డ్ ప్రస్తుత PINను ఎంటర్ చేయండి"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"క్యారియర్ డిఫాల్ట్ వాడండి"</string>
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"SIM రక్షణ మోడ్‌ను ఎంచుకోండి"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"మాన్యువల్"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"ఆటోమేటిక్ (Android ద్వారా మేనేజ్ చేయబడింది)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"కొత్త SIM కార్డ్ PIN"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"కొత్త SIM PINను నిర్ధారించండి"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PINలు మ్యాచ్ కాలేదు. కొత్త SIM PINను నిర్ధారించండి."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"పిన్ తప్పు. మిగిలిన ప్రయత్నాలు: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
+    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"మొబైల్ డేటా కోసం <xliff:g id="CARRIER">%1$s</xliff:g> ఉపయోగించాలా?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"మీరు మొబైల్ డేటా కోసం <xliff:g id="CARRIER2_0">%2$s</xliff:g>ను వినియోగిస్తున్నారు. మీరు <xliff:g id="CARRIER1">%1$s</xliff:g>కు మారితే, <xliff:g id="CARRIER2_1">%2$s</xliff:g> ఇప్పటి నుండి మొబైల్ డేటా కోసం ఉపయోగించబడదు."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>ని ఉపయోగించండి"</string>
@@ -1811,6 +1835,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"లొకేషన్ టైమ్ జోన్ గుర్తింపు మార్పులు అనుమతించబడవు"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"మీ డివైజ్‌ లొకేషన్ అందుబాటులో ఉంటే గనుక, దాన్ని మీ టైమ్ జోన్‌ను సెట్ చేయడానికి ఉపయోగించే అవకాశం ఉంది"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"నోటిఫికేషన్‌లు"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"టైమ్ జోన్‌ మారినప్పుడు నోటిఫికేషన్"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"మీ టైమ్ జోన్ ఆటోమేటిక్‌గా అప్‌డేట్ అయినప్పుడు నోటిఫికేషన్ వస్తుంది"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"నోటిఫికేషన్, టైమ్, జోన్, టైమ్ జోన్"</string>
@@ -2095,9 +2121,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"భాష &amp; ప్రాంతం"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"కీబోర్డ్"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"డివైజ్‌ భాషను మార్చడానికి మీకు అనుమతి లేదు."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"భాషలు &amp; ఇన్‌పుట్"</string>
     <string name="input_assistance" msgid="3437568284144952104">"టూల్స్"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"కీబోర్డ్ &amp; ఇన్‌పుట్ పద్ధతులు"</string>
     <string name="system_language" msgid="1146762166579643257">"సిస్టమ్ భాషలు"</string>
     <string name="phone_language" msgid="5986939176239963826">"భాషలు"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2106,7 +2130,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"స్వీయ-పెద్ద అక్షరాలు"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"వాక్యాల్లో మొదటి అక్షరాన్ని పెద్ద అక్షరం చేయి"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"విరామచిహ్నాన్ని ఆటోమేటిక్‌గా ఉంచు"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"భౌతిక కీబోర్డ్ సెట్టింగ్‌లు"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"\".\"ని చొప్పించడానికి రెండుసార్లు Space కీని నొక్కండి"</string>
     <string name="show_password" msgid="7101900779571040117">"పాస్‌వర్డ్‌లను చూపించు"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"మీరు టైప్ చేస్తున్నప్పుడు అక్షరాలను క్లుప్తంగా చూపిస్తుంది"</string>
@@ -2117,13 +2140,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"ఈ స్పెల్ చెకర్ మీరు టైప్ చేసే మొత్తం వచనాన్ని అలాగే పాస్‌వర్డ్‌లు మరియు క్రెడిట్ కార్డు నంబర్‌ల వంటి వ్యక్తిగత డేటాను సేకరించగలదు. ఇది యాప్ <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>లో అందించబడుతుంది. ఈ స్పెల్ చెకర్‌ను ఉపయోగించాలా?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"సెట్టింగ్‌లు"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"భాష"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"కీబోర్డ్‌లు"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"కీబోర్డ్ స్విచ్ కీని చూపండి"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"ఇన్‌పుట్ ఫీల్డ్‌ను ఎంచుకున్నప్పుడు నావిగేషన్ బార్‌లో కీబోర్డ్ స్విచ్చర్ బటన్‌ను చూపడానికి అనుమతించండి"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"స్క్రీన్‌పై కీబోర్డ్"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"స్క్రీన్‌పై కీబోర్డ్ అందుబాటులోఉంది"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"స్క్రీన్‌పై కీబోర్డ్స్ మేనేజ్ చేయండి"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"ఆప్షన్‌లు"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"యాక్సెసిబిలిటీ"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ఫిజికల్‌ కీబోర్డ్"</string>
@@ -2183,9 +2204,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"వేగం"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"నెమ్మది"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"కీబోర్డ్ షార్ట్‌కట్‌లను చూడండి"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"షార్ట్‌కట్‌ల లిస్ట్‌ను చూడండి"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"కార్యాలయ ప్రొఫైల్ కీబోర్డ్‌లు &amp; సాధనాలు"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"ఆఫీస్ కోసం స్క్రీన్‌పై కీబోర్డ్"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"ఆటోమేటిక్ సెట్టింగ్"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"గేమ్ కంట్రోలర్"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"మీ కంట్రోలర్ బటన్‌ల ద్వారా ట్రిగ్గర్ అయిన చర్యలను అనుకూలంగా మార్చండి"</string>
@@ -2304,7 +2323,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"రిపీట్ రేట్‌ను పెంచండి"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"రిపీట్ రేట్‌ను తగ్గించండి"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> లేఅవుట్"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"ఆటోమేటిక్"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"ఆటోమేటిక్: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"యూజర్ ఎంచుకున్నది: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"స్పీచ్"</string>
@@ -2318,10 +2336,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"గేమ్ కంట్రోలర్"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"వైబ్రేషన్ దారి మళ్లించు"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"కనెక్ట్ చేసినప్పుడు గేమ్ కంట్రోలర్‌కు వైబ్రేషన్‌ని పంపు"</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"కీబోర్డ్ లేఅవుట్‌ను ఎంచుకోండి"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"కీబోర్డ్ లేఅవుట్‌లను సెటప్ చేయండి"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"మారడానికి Control-Spacebar నొక్కండి"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"ఆటోమేటిక్"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"కీబోర్డ్ లేఅవుట్‌లు"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"ఫిజికల్ కీబోర్డ్ లేఅవుట్‌లు"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"వ్యక్తిగత డిక్షనరీ"</string>
@@ -2369,7 +2383,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"మీ అవసరాలకు అనుగుణంగా ఈ డివైజ్‌ను అనుకూలంగా మార్చవచ్చు. ఈ యాక్సెసిబిలిటీ ఫీచర్లను సెట్టింగ్స్‌లో తర్వాత మార్చవచ్చు."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"ఫాంట్ సైజ్‌ను మార్చండి"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"స్క్రీన్ రీడర్"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"ఫిజికల్ కీబోర్డ్ ఆప్షన్‌లు"</string>
     <string name="captions_category_title" msgid="574490148949400274">"క్యాప్షన్‌లు"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"ఆడియో"</string>
     <string name="general_category_title" msgid="6298579528716834157">"సాధారణం"</string>
@@ -2595,7 +2608,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"విస్తరించిన డార్క్ థీమ్"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"విస్తరించిన డార్క్ థీమ్ సెట్టింగ్‌లు"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"విస్తరించిన డార్క్ థీమ్ సెట్టింగ్‌లను తెరవండి"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"విస్తరించిన డార్క్ థీమ్ రీడబిలిటీని మెరుగుపరుస్తుంది, కానీ కొన్ని యాప్‌లు తప్పుగా డిస్‌ప్లే అవ్వడానికి కారణం కావచ్చు.\n\nఈ సెట్టింగ్ ఆఫ్ చేసిన యాప్‌లు స్టాండర్డ్ డార్క్ థీమ్ ఆప్షన్‌ను ఉపయోగిస్తాయి."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"యానిమేషన్‌లను తీసివేయండి"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"స్క్రీన్ మీద కదలికను తగ్గించండి"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"టెక్స్ట్ కర్సర్ బ్లింకింగ్"</string>
@@ -2735,7 +2749,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"వినికిడి డివైజ్ కంట్రోల్స్"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"సౌండ్‌లు"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"నోటిఫికేషన్‌లు"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"రింగ్‌టోన్‌లు, అలారాలు"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"హియరింగ్ డివైజ్‌ల ద్వారా సౌండ్‌లు ప్లే అవుతాయి"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"సౌండ్‌లు డివైజ్ స్పీకర్ ద్వారా ప్లే అవుతాయి"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"సౌండ్‌లు హియరింగ్ డివైజ్‌లు, డివైజ్ స్పీకర్ ద్వారా ప్లే అవుతాయి"</string>
@@ -3103,7 +3116,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"వాయిస్ ఇన్‌పుట్ &amp; అవుట్‌పుట్"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"వాయిస్ ఇన్‌పుట్ &amp; అవుట్‌పుట్ సెట్టింగ్‌లు"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"వాయిస్ సెర్చ్"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"Android కీబోర్డ్"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"వాయిస్ ఇన్‌పుట్ సెట్టింగ్‌లు"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"వాయిస్ ఇన్‌పుట్"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"వాయిస్ ఇన్‌పుట్ సర్వీస్‌లు"</string>
@@ -3223,7 +3235,7 @@
     <string name="device_admin_add_title" msgid="6087481040932322289">"డివైజ్ అడ్మిన్"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"ఈ \'అడ్మిన్‌ యాప్‌\'ను యాక్టివేట్‌ చేస్తే, <xliff:g id="APP_NAME">%1$s</xliff:g> యాప్, ఈ కింది పనులు చేయగలుగుతుంది:"</string>
     <string name="supervision_role_holder_warning" msgid="167724047638694522">"<xliff:g id="APP_NAME_0">%1$s</xliff:g> ఈ డివైజ్‌ను మేనేజ్ చేస్తారు, ఇంకా మానిటర్ చేస్తారు. \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> యాప్ బ్లాకింగ్, కంటెంట్ పరిమితుల వంటి తల్లిదండ్రుల కంట్రోల్స్ సెట్టింగ్‌లను మేనేజ్ చేయగలదు."</string>
-    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"ఈ పరికరం <xliff:g id="APP_NAME">%1$s</xliff:g> ద్వారా నిర్వహించబడుతుంది, పర్యవేక్షించబడుతుంది."</string>
+    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"ఈ డివైజ్‌ను <xliff:g id="APP_NAME">%1$s</xliff:g> మేనేజ్ చేస్తుంది, పర్యవేక్షిస్తుంది."</string>
     <string name="device_admin_status" msgid="6332571781623084064">"ఈ అడ్మిన్ యాప్ యాక్టివ్‌గా ఉంది. కింది చర్యలు చేయడానికి <xliff:g id="APP_NAME">%1$s</xliff:g> యాప్‌ను అనుమతిస్తుంది:"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"ప్రొఫైల్ మేనేజర్‌ను యాక్టివేట్ చేయాలా?"</string>
     <string name="supervision_confirmation_title" msgid="8094974031562728585">"ఈ డివైజ్‌ను పర్యవేక్షించడానికి <xliff:g id="APP_NAME">%1$s</xliff:g>‌ను అనుమతించాలా?"</string>
@@ -3435,7 +3447,7 @@
     <string name="user_settings_title" msgid="9208831545558787202">"యూజర్‌లు"</string>
     <string name="user_list_title" msgid="1387379079186123404">"వినియోగదారులు &amp; ప్రొఫైళ్లు"</string>
     <string name="user_add_user_or_profile_menu" msgid="305851380425838287">"వినియోగదారు లేదా ప్రొఫైల్‌ను జోడించండి"</string>
-    <string name="user_summary_restricted_profile" msgid="451650609582185813">"పరిమితం చేయబడిన ప్రొఫైల్"</string>
+    <string name="user_summary_restricted_profile" msgid="451650609582185813">"పరిమితి ఉన్న (రిస్ట్రిక్టెడ్) ప్రొఫైల్"</string>
     <string name="user_summary_not_set_up" msgid="4602868481732886115">"సెటప్ చేయలేదు"</string>
     <string name="user_summary_restricted_not_set_up" msgid="1658946988920104613">"సెటప్ చేయలేదు - పరిమితం చేయబడిన ప్రొఫైల్"</string>
     <string name="user_summary_managed_profile_not_set_up" msgid="5739207307082458746">"సెటప్ చేయలేదు - కార్యాలయ ప్రొఫైల్"</string>
@@ -3650,6 +3662,8 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi నోటిఫికేషన్, wifi నోటిఫికేషన్"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"డేటా వినియోగం"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"24-గంటల ఫార్మాట్‌ను ఉపయోగించండి"</string>
+    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
+    <skip />
     <string name="keywords_app_default" msgid="8977706259156428770">"దీనితో తెరువు"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"అప్లికేషన్‌లు"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"సమయ మండలి"</string>
@@ -3770,6 +3784,10 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"నోటిఫికేషన్ వాల్యూమ్ మ్యూట్ చేయబడింది, నోటిఫికేషన్‌లు వైబ్రేట్ అవుతాయి"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> మ్యూట్ చేయబడింది"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"రింగ్ వాల్యూమ్ మ్యూట్ చేయబడినందున అందుబాటులో లేదు"</string>
+    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
+    <skip />
+    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"ఫోన్ రింగ్‌టోన్"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"నోటిఫికేషన్ ఆటోమేటిక్ సౌండ్"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"యాప్ అందించిన ధ్వని"</string>
@@ -4524,6 +4542,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB ప్రాధాన్యతలు"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USBని ఏది కంట్రోల్ చేయాలి"</string>
+    <string name="usb_connected_devices" msgid="535238470176122197">"కనెక్ట్ అయిన డివైజ్‌లు"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"కనెక్ట్ అయిన డివైజ్"</string>
     <string name="usb_control_device" msgid="527916783743021577">"ఈ డివైజ్"</string>
     <string name="usb_switching" msgid="3654709188596609354">"స్విచ్ అవుతోంది…"</string>
@@ -4540,6 +4559,8 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP మరియు విద్యుత్తు శక్తి సరఫరా"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI మరియు విద్యుత్తు శక్తి సరఫరా"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"వెబ్‌క్యామ్, విద్యుత్తు సరఫరా"</string>
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"<xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g> నుండి తెలియని డివైజ్"</string>
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"తెలియని డివైజ్ [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"బ్యాక్‌గ్రౌండ్ చెక్"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"స్క్రీన్‌పై ఉన్న టెక్స్ట్‌ను ఉపయోగించడం"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"స్క్రీన్‌పై ఉన్న కంటెంట్‌ను టెక్స్ట్ రూపంలో యాక్సెస్ చేయడానికి సహాయక యాప్‌ను అనుమతిస్తుంది"</string>
@@ -4593,11 +4614,23 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"అన్ని ఫైళ్లను యాక్సెస్ చేయగలవు"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"స్క్రీన్ ఆటోమేషన్"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"యాప్‌లు బ్యాక్‌గ్రౌండ్‌లో ఉన్నప్పటికీ, టాస్క్‌లను పూర్తి చేయడంలో మీకు సహాయపడటానికి, ఈ యాప్ ఇతర యాప్‌ల స్క్రీన్ కంటెంట్‌ను చూడగలదు, ఇంటరాక్ట్ అవ్వగలదు"</string>
-    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"మీరు స్క్రీన్ ఆటోమేషన్‌ను అనుమతించకుంటే, <xliff:g id="ID_1">%1$s</xliff:g> ఇప్పటికీ <xliff:g id="ID_2">%1$s</xliff:g>‌కు కనెక్ట్ చేసిన యాప్‌లతో ఇతర మార్గాల్లో ఇంటరాక్ట్ అవ్వగలదు"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
+    <skip />
+    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"మీరు స్క్రీన్ ఆటోమేషన్‌ను అనుమతించకపోయినా, ఇతర మార్గాల్లో <xliff:g id="ID_2">%1$s</xliff:g>‌కు కనెక్ట్ అయి ఉన్న యాప్‌లతో <xliff:g id="ID_1">%1$s</xliff:g> ఇప్పటికీ ఇంటరాక్ట్ అవ్వగలదు"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"ఇతర యాప్‌ల స్క్రీన్ కంటెంట్‌తో ఇంటరాక్ట్ అవ్వడం ద్వారా, టాస్క్‌లను పూర్తి చేయడంలో మీకు సహాయపడటానికి యాప్‌లను అనుమతించండి"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ప్రతిసారి అడగాలి"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"ఎల్లవేళలా అనుమతించబడుతుంది"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"అనుమతించవద్దు"</string>
+    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ఫుల్ స్క్రీన్ నోటిఫికేషన్‌లు"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ఈ యాప్ నుండి ఫుల్ స్క్రీన్ నోటిఫికేషన్‌లను అనుమతించండి"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"పరికరం లాక్‌లో ఉన్నప్పుడు నోటిఫికేషన్లను చూపడానికి ఈ యాప్‌ను అనుమతించండి. ఈ నోటిఫికేషన్లు ఫుల్ స్క్రీన్‌లో కనిపిస్తాయి. అలారాలు, ఇన్‌కమింగ్ కాల్స్ లేదా ఇతర అత్యవసర నోటిఫికేషన్‌లను హైలైట్ చేయడానికి యాప్‌లు వీటిని ఉపయోగించవచ్చు."</string>
@@ -4731,7 +4764,7 @@
     <string name="data_usage_template" msgid="3822452362629968010">"<xliff:g id="ID_2">%2$s</xliff:g> మధ్య కాలంలో <xliff:g id="ID_1">%1$s</xliff:g> వినియోగించబడింది"</string>
     <string name="configure" msgid="1499586749829665889">"కాన్ఫిగర్ చేయి"</string>
     <string name="data_usage_other_apps" msgid="5649047093607329537">"వినియోగంలో చేర్చబడిన ఇతర యాప్‌లు"</string>
-    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{డేటా సేవర్ ఆన్‌లో ఉన్నప్పుడు, అపరిమిత మొబైల్ డేటాను ఉపయోగించడానికి 1 యాప్ అనుమతించబడింది}other{డేటా సేవర్ ఆన్‌లో ఉన్నప్పుడు, అపరిమిత మొబైల్ డేటాను ఉపయోగించడానికి # యాప్‌లు అనుమతించబడ్డాయి}}"</string>
+    <string name="data_saver_unrestricted_summary" msgid="559673440849071149">"{count,plural, =1{డేటా సేవర్ ఆన్‌లో ఉన్నప్పుడు, 1 యాప్‌నకు అపరిమిత మొబైల్ డేటా ఉప‌యోగించ‌డానికి అనుమతి ఉంది}other{డేటా సేవర్ ఆన్‌లో ఉన్నప్పుడు, # యాప్‌లకు అపరిమిత మొబైల్ డేటా ఉప‌యోగించ‌డానికి అనుమతి ఉంది}}"</string>
     <string name="data_usage_title" msgid="4039024073687469094">"ప్రాథమిక డేటా"</string>
     <string name="data_usage_wifi_title" msgid="1060495519280456926">"Wi-Fi డేటా"</string>
     <string name="data_used_formatted" msgid="6825854220655476713">"<xliff:g id="ID_1">^1</xliff:g> <xliff:g id="ID_2">^2</xliff:g>⁠"</string>
@@ -6181,4 +6214,12 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"మీ డివైజ్ ఎమర్జెన్సీ శాటిలైట్ సహాయం కోసం రిజిస్టర్ అవ్వలేదు. రిజిస్ట్రేషన్‌ను ఆటోమేటిక్‌గా పూర్తి చేయడానికి, మీరు ఇంటర్నెట్‌కు కనెక్ట్ అయ్యారని నిర్ధారించుకోండి"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"వెబ్ యాప్ ఇన్‌స్టాలర్ సర్వీస్‌ను ఎనేబుల్ చేయండి"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"వెబ్‌సైట్‌లను నేరుగా మీ మొదటి స్క్రీన్‌కు ఇన్‌స్టాల్ చేయడానికి ఈ సర్వీస్‌ను ఎనేబుల్ చేయండి, వాటిని సాధారణ యాప్‌ల వలె ఉపయోగించడానికి."</string>
+    <!-- no translation found for access_hid_title (3937436196813998587) -->
+    <skip />
+    <!-- no translation found for permit_access_hid (870824396872060949) -->
+    <skip />
+    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
+    <skip />
+    <!-- no translation found for keywords_access_hid (682455265293135353) -->
+    <skip />
 </resources>

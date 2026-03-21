@@ -44,6 +44,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.android.internal.widget.LockPatternUtils;
+import com.android.settings.PccAwareUidComparator;
 import com.android.settings.R;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.vpn2.VpnUtils;
@@ -361,7 +362,7 @@ public final class CredentialStorage extends FragmentActivity {
                 Log.e(TAG, ACTION_INSTALL + " must be started with startActivityForResult");
                 return false;
             }
-            if (!UserHandle.isSameApp(launchedFromUid, Process.myUid())) {
+            if (!PccAwareUidComparator.isSameApp(this, launchedFromUid, Process.myUid())) {
                 // Not the same app
                 return false;
             }

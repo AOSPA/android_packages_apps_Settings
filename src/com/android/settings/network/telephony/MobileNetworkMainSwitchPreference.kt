@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -77,6 +78,8 @@ class MobileNetworkMainSwitchPreference(
     override val disableWidgetOnCheckedChanged: Boolean
         get() = false
 
+    override val availabilityDescription = "Always available."
+
     override fun isAvailable(context: Context): Boolean = true
 
     override fun tags(context: Context) = arrayOf(KEY_MOBILE_DATA)
@@ -92,6 +95,8 @@ class MobileNetworkMainSwitchPreference(
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
+    override val supportsWrite = false
+
     override fun onStart(context: PreferenceLifecycleContext) {
         super.onStart(context)
         context.lifecycleScope.launch(Dispatchers.Default) {
@@ -101,6 +106,9 @@ class MobileNetworkMainSwitchPreference(
             }
         }
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.REQUIRES_CONFIRMATION
 
     override fun storage(context: Context): KeyValueStore =
         MobileNetworkSwitchStorage(

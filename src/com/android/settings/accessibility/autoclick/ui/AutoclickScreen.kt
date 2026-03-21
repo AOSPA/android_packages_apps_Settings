@@ -76,6 +76,8 @@ open class AutoclickScreen :
 
     override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_TOGGLE_AUTOCLICK
 
+    override val availabilityDescription = "The device must have a mouse connected."
+
     override fun isAvailable(context: Context): Boolean = InputPeripheralsSettingsUtils.isMouse()
 
     override fun getSummary(context: Context): CharSequence? {
@@ -157,6 +159,8 @@ open class AutoclickScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 

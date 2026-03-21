@@ -328,8 +328,30 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Use locale default"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Use 24-hour format"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Time"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"Time format"</string>
+    <!-- no translation found for time_format_category_title (3122743852067365261) -->
+    <skip />
+    <!-- no translation found for time_format_page_title (2599662358219245734) -->
+    <skip />
+    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
+    <skip />
+    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
+    <skip />
+    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
+    <skip />
+    <!-- no translation found for time_format_automatic (8627801531369181488) -->
+    <skip />
+    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
+    <skip />
+    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
+    <skip />
+    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
+    <skip />
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Time zone"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"Home time zone"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"Select a time zone"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"Set a home time zone for when you\'re away"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"Use home time zone"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"Suggestions"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Select time zone"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"Search time zone"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Date"</string>
@@ -850,8 +872,7 @@
     <string name="bluetooth_settings" msgid="2967239493428695171">"Bluetooth"</string>
     <string name="bluetooth_settings_title" msgid="2642029095769509647">"Bluetooth"</string>
     <string name="bluetooth_pairing_request" msgid="7762990650683525640">"Pair with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
-    <!-- no translation found for bluetooth_pairing_again_request (1394430519292575085) -->
-    <skip />
+    <string name="bluetooth_pairing_again_request" msgid="1394430519292575085">"Pair again with <xliff:g id="DEVICE_NAME">%1$s</xliff:g>?"</string>
     <string name="bluetooth_pairing_group_late_bonding" msgid="3047893658902159692">"Confirm to add the second piece of your audio device"</string>
     <string name="bluetooth_pairing_key_msg" msgid="1329835708475701761">"Bluetooth pairing code"</string>
     <string name="bluetooth_enter_passkey_msg" msgid="5806420933599368592">"Type the pairing code then press Return or Enter"</string>
@@ -865,11 +886,9 @@
     <string name="bluetooth_pairing_phonebook_toggle_text" msgid="2474015367387690034">"Also allow access to contacts and call history"</string>
     <string name="bluetooth_pairing_phonebook_toggle_details" msgid="1367197978487212581">"Info will be used for call announcements and more"</string>
     <string name="bluetooth_pairing_confirmation_title" msgid="3359642089708714808">"Check pairing codes"</string>
-    <!-- no translation found for bluetooth_pairing_again_confirmation_title (838944639700876861) -->
-    <skip />
+    <string name="bluetooth_pairing_again_confirmation_title" msgid="838944639700876861">"Pair again"</string>
     <string name="bluetooth_pairing_confirmation_msg" msgid="8204761740738350792">"Check if this code matches the one on <xliff:g id="DEVICE_NAME">%1$s</xliff:g>.\n\nFor your security, do not enter this code anywhere."</string>
-    <!-- no translation found for bluetooth_repairing_msg (4359999881389087827) -->
-    <skip />
+    <string name="bluetooth_repairing_msg" msgid="4359999881389087827">"This device was paired previously and is trying to re-pair.\nIf you are in a public space, proceed with caution."</string>
     <string name="bluetooth_error_title" msgid="2284738188253690278"></string>
     <string name="bluetooth_connecting_error_message" msgid="3941893154784152112">"Couldn\'t connect to <xliff:g id="DEVICE_NAME">%1$s</xliff:g>."</string>
     <string name="bluetooth_preference_found_media_devices" msgid="830061195998352840">"Available devices"</string>
@@ -905,8 +924,7 @@
     <string name="device_details_leaudio_toggle_summary" msgid="7684848254433230809">"Experimental. Improves audio quality."</string>
     <string name="device_details_battery" msgid="5466987755790847884">"Battery"</string>
     <string name="device_details_battery_charging" msgid="3464969346075775143">"Battery, charging"</string>
-    <!-- no translation found for device_details_key_missing_title (3747991896959671040) -->
-    <skip />
+    <string name="device_details_key_missing_title" msgid="3747991896959671040">"Put the <xliff:g id="DEVICE_NAME">%1$s</xliff:g> in pairing mode and try connecting again.\n\nIf this device isn\'t nearby, you don\'t need to do anything."</string>
     <string name="verbose_printer_logging_title" msgid="6525634245166402031">"Verbose print logging"</string>
     <string name="verbose_printer_logging_summary" msgid="6558076303223667013">"Additional debug logs, including Internet Printing Protocol (IPP) that may contain private information."</string>
     <string name="bluetooth_unpair_dialog_forget_confirm_button" msgid="9184489424930549015">"Forget device"</string>
@@ -1432,8 +1450,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"Screen saver"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"screensaver"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"Unavailable because bedtime mode is on"</string>
-    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
-    <skip />
+    <string name="screensaver_unavailable_due_to_mode" msgid="8515924546767264225">"Not available on this device"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"Use screen saver"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"While charging or docked"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"While docked and charging"</string>
@@ -1496,8 +1513,9 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Cancel"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Protect SIM card"</string>
-    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"Automatic SIM lock protection"</string>
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"Automatic PIN management"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM lock protection mode"</string>
+    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
+    <skip />
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Managed by Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Not managed by Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Enrolment succeeded"</string>
@@ -1506,13 +1524,24 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android-managed PIN"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Value of the Android-managed PIN:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Failed getting PIN"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"Protect SIM card from theft"</string>
+    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
+    <skip />
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM PIN managed by Android"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"SIM PIN manually managed"</string>
-    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"Lock screen must be set up to turn on SIM protection"</string>
+    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
+    <skip />
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Lockscreen required for automatic SIM protection, manual only available now"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Enter current SIM PIN"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Enter the SIM card current PIN"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"Use operator default"</string>
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"Choose SIM protection mode"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"Manual"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"Automatic (Android-managed)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"New SIM PIN"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Confirm new SIM PIN"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PINs do not match. Confirm the new SIM PIN."</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Wrong PIN. Attempts remaining: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
+    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"Use <xliff:g id="CARRIER">%1$s</xliff:g> for mobile data?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"You\'re using <xliff:g id="CARRIER2_0">%2$s</xliff:g> for mobile data. If you switch to <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> will no longer be used for mobile data."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Use <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1815,6 +1844,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Location time zone detection changes are not allowed"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"If your device location is available, it may be used to set your time zone"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Notifications"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Time zone change"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Receive a notification when your time zone is automatically updated"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, time, zone, time zone"</string>
@@ -2099,9 +2130,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"Language and region"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"Keyboard"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"You don’t have permission to change the device language."</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"Languages and input"</string>
     <string name="input_assistance" msgid="3437568284144952104">"Tools"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"Keyboard &amp; input methods"</string>
     <string name="system_language" msgid="1146762166579643257">"System languages"</string>
     <string name="phone_language" msgid="5986939176239963826">"Languages"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2110,7 +2139,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"Auto-capitalisation"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"Capitalise first letter in sentences"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"Auto-punctuate"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"Physical keyboard settings"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"Press Space key twice to insert \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"Show passwords"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Display characters briefly as you type"</string>
@@ -2121,13 +2149,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"This spell checker may be able to collect all the text that you type, including personal data like passwords and credit card numbers. It comes from the app <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Use this spell checker?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"Settings"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"Language"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"Keyboards"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Show the keyboard switch key"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Allow the keyboard switcher button to be shown in the navigation bar, when an input field is selected"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"On-screen keyboard"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Available on-screen keyboard"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"Manage on-screen keyboards"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibility"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"Physical keyboard"</string>
@@ -2187,9 +2213,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"Fast"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"Slow"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"View keyboard shortcuts"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"Show list of shortcuts"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"Work profile keyboards &amp; tools"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"On-screen keyboard for work"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"Default"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"Game controller"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Customise the actions triggered by your controller\'s buttons"</string>
@@ -2308,7 +2332,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"Increase repeat rate"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"Decrease repeat rate"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"<xliff:g id="IME_LABEL">%s</xliff:g> layout"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"Default"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"Automatic: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"User selected: <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"Speech"</string>
@@ -2322,10 +2345,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"Game Controller"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirect vibration"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Send vibration to game controller when connected"</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"Choose keyboard layout"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"Set up keyboard layouts"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"To switch, press Control-Spacebar"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"Default"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Keyboard layouts"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Physical keyboard layouts"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Personal dictionary"</string>
@@ -2373,7 +2392,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"You can customise this device to fit your needs. These accessibility features can be changed later in Settings."</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"Change font size"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"Screen reader"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"Physical keyboard options"</string>
     <string name="captions_category_title" msgid="574490148949400274">"Captions"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"Audio"</string>
     <string name="general_category_title" msgid="6298579528716834157">"General"</string>
@@ -2599,7 +2617,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Expanded Dark theme"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Expanded Dark theme settings"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Open expanded Dark theme settings"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"Expanded dark theme can improve readability, but may cause some apps to display incorrectly.\n\nApps with this setting off will use the standard dark theme option."</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Remove animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Reduce movement on the screen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Text cursor blinking"</string>
@@ -2739,7 +2758,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Hearing device controls"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Sounds"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Notifications"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"Ringtones and alarms"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Sounds will play through hearing devices"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"Sounds will play through device speaker"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Sounds will play through hearing devices and device speaker"</string>
@@ -3107,7 +3125,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"Voice input &amp; output"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"Voice input &amp; output settings"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"Voice search"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"Android keyboard"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"Voice input settings"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"Voice input"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"Voice input services"</string>
@@ -3625,13 +3642,11 @@
     <string name="connected_devices_dashboard_android_auto_no_driving_mode_summary" msgid="6426996842202276640">"Bluetooth, Android Auto, NFC"</string>
     <string name="connected_devices_dashboard_android_auto_no_nfc_no_driving_mode" msgid="1672426693308438634">"Bluetooth, Android Auto"</string>
     <string name="device_dashboard_title" msgid="1176311605407079643">"Device"</string>
-    <!-- no translation found for device_dashboard_summary (534835339280267939) -->
-    <skip />
+    <string name="device_dashboard_summary" msgid="534835339280267939">"Touchpad, keyboard, display, sound"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Brightness, colour, dark theme, lock screen, text"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Keyboard selection, tools"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Cursor speed, button customisation, scrolling"</string>
-    <!-- no translation found for device_sound_dashboard_summary (5766308562837462216) -->
-    <skip />
+    <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Volume, speakers, microphones"</string>
     <string name="device_trackpad_settings_summary" msgid="1658492396087895698">"Cursor customisation, click actions, scrolling"</string>
     <string name="nfc_and_payment_settings_payment_off_nfc_off_summary" msgid="7132040463607801625">"Unavailable because NFC is off"</string>
     <string name="nfc_and_payment_settings_no_payment_installed_summary" msgid="4879818114908207465">"To use, first install a payment app"</string>
@@ -3656,6 +3671,8 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi notification, wi-fi notification"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"data usage"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Use 24-hour format"</string>
+    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
+    <skip />
     <string name="keywords_app_default" msgid="8977706259156428770">"Open with"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Applications"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"timezone"</string>
@@ -3776,6 +3793,10 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Notification volume muted, notifications will vibrate"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> muted"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Unavailable because ring is muted"</string>
+    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
+    <skip />
+    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"Phone ringtone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Default notification sound"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"App provided sound"</string>
@@ -4530,6 +4551,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"USB preferences"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB controlled by"</string>
+    <string name="usb_connected_devices" msgid="535238470176122197">"Connected devices"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"Connected device"</string>
     <string name="usb_control_device" msgid="527916783743021577">"This device"</string>
     <string name="usb_switching" msgid="3654709188596609354">"Switching…"</string>
@@ -4546,6 +4568,8 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP and supplying power"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI and supplying power"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"Webcam and supplying power"</string>
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"Unknown device from <xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g>"</string>
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"Unknown device [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Background check"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Use text from screen"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"Allow the assist app to access the screen contents as text"</string>
@@ -4599,11 +4623,23 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Can access all files"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Screen automation"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"This app will be able to see and interact with other apps\' screen content to help you complete tasks, even when the apps are in the background"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
+    <skip />
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"If you don\'t allow screen automation, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Allow apps to help you complete tasks by interacting with other apps\' screen content"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ask every time"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Always allow"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Don\'t allow"</string>
+    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Full-screen notifications"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Allow full-screen notifications from this app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls or other urgent notifications."</string>
@@ -5327,8 +5363,7 @@
     <string name="satellite_footer_content_section_5" msgid="2466353040832630785">"A mobile or Wi‑Fi network is required to view external links."</string>
     <string name="satellite_footer_content_section_6" msgid="1448633393918612418">"Texting with emergency services may not be available in all areas."</string>
     <string name="satellite_footer_content_section_7" msgid="5524773673918954918">"It may take some time for account changes to show in Settings. Contact <xliff:g id="CARRIER_NAME">%1$s</xliff:g> for details."</string>
-    <!-- no translation found for satellite_footer_content_section_8 (7617809843970032785) -->
-    <skip />
+    <string name="satellite_footer_content_section_8" msgid="7617809843970032785">"To see all apps optimised for satellite connectivity, visit your operator\'s website."</string>
     <string name="more_about_satellite_connectivity" msgid="9110502891919936054">"More about satellite connectivity"</string>
     <string name="satellite_warning_dialog_title" msgid="1610117852475376931">"Can\'t turn on <xliff:g id="FUNCTION">%1$s</xliff:g>"</string>
     <string name="satellite_warning_dialog_content" msgid="936419945275934955">"To turn on <xliff:g id="FUNCTION">%1$s</xliff:g>, first end the satellite connection"</string>
@@ -5343,8 +5378,7 @@
     <string name="title_satellite_supported_app_list_page" msgid="318806852682483512">"Supported apps on your phone"</string>
     <string name="title_satellite_dialog_for_sim_restriction" msgid="454718192423216397">"Can\'t add a SIM"</string>
     <string name="description_satellite_dialog_for_sim_restriction" msgid="5465487347427595435">"End the satellite connection before you add a SIM"</string>
-    <!-- no translation found for satellite_toggle_error (4533772077620854258) -->
-    <skip />
+    <string name="satellite_toggle_error" msgid="4533772077620854258">"Something went wrong. Could not toggle on/off satellite connectivity."</string>
     <string name="apm_sync_bluetooth_off_summary" msgid="1439271302663561593">"Bluetooth is off"</string>
     <string name="airplane_mode_sync_description" msgid="7445965305382384909">"When connected by Bluetooth, aeroplane mode will sync across the supported devices such as phone and watch"</string>
     <string name="mobile_network_apn_title" msgid="5582995550142073054">"Access point names"</string>
@@ -6098,8 +6132,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"App security"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Device unlock"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Account security"</string>
-    <!-- no translation found for device_finders_subpage_title (2635718540485825070) -->
-    <skip />
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"Lost device protection"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"System and updates"</string>
     <string name="location_settings" msgid="6833222354060094170">"Location access"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"See apps and services that have access to location"</string>
@@ -6189,4 +6222,12 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Your device isn\'t registered for Satellite SOS. Make sure that you\'re connected to the Internet for your device to automatically complete registration"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Enable web app installer service"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Enable this service to install websites directly to your home screen, to use them like regular apps."</string>
+    <!-- no translation found for access_hid_title (3937436196813998587) -->
+    <skip />
+    <!-- no translation found for permit_access_hid (870824396872060949) -->
+    <skip />
+    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
+    <skip />
+    <!-- no translation found for keywords_access_hid (682455265293135353) -->
+    <skip />
 </resources>

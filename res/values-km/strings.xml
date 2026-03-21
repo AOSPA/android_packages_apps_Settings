@@ -328,8 +328,21 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"ប្រើ​តាមតំបន់"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"ប្រើ​ប្រព័ន្ធ ២៤ ម៉ោង"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"ម៉ោង"</string>
-    <string name="time_format_category_title" msgid="7108616745509689991">"ទម្រង់​ម៉ោង"</string>
+    <string name="time_format_category_title" msgid="3122743852067365261">"ទម្រង់ 12 ម៉ោង / 24 ម៉ោង"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"ទម្រង់​ម៉ោង"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"ការកំណត់ច្រើនទៀត"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"កម្មវិធីនឹងប្រើទម្រង់ម៉ោងរបស់អ្នកដោយផ្អែកលើការកំណត់នេះ"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"ជ្រើសរើសទម្រង់ម៉ោង"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"ស្វ័យប្រវត្តិ"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"កម្មវិធីប្រើទម្រង់ 12 ម៉ោង / 24 ម៉ោងដោយផ្អែកលើភាសាកម្មវិធី"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"ទម្រង់ 12 ម៉ោង"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"ទម្រង់ 24 ម៉ោង"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"ល្វែងម៉ោង"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"ល្វែងម៉ោង​ផ្ទះ"</string>
+    <string name="home_time_zone_select_title" msgid="9158012099148340770">"ជ្រើសរើសល្វែងម៉ោង"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"កំណត់ល្វែងម៉ោងផ្ទះសម្រាប់ពេលដែលអ្នកមិននៅផ្ទះ"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"ប្រើ​ល្វែងម៉ោងផ្ទះ"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"ការណែនាំ"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"ជ្រើសរើសល្វែងម៉ោង"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"ស្វែងរកល្វែងម៉ោង"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"កាលបរិច្ឆេទ"</string>
@@ -1428,8 +1441,7 @@
     <string name="screensaver_settings_title" msgid="3588535639672365395">"ធាតុរក្សាអេក្រង់"</string>
     <string name="keywords_screensaver" msgid="7249337959432229172">"ធាតុ​រក្សា​អេក្រង់"</string>
     <string name="screensaver_settings_when_to_dream_bedtime" msgid="3279310576803094771">"មិនអាច​ប្រើបានទេ ដោយសារ​បើកមុខងារ​ម៉ោងគេង"</string>
-    <!-- no translation found for screensaver_unavailable_due_to_mode (8515924546767264225) -->
-    <skip />
+    <string name="screensaver_unavailable_due_to_mode" msgid="8515924546767264225">"មិនអាចប្រើ​នៅលើ​ឧបករណ៍នេះ​បានទេ"</string>
     <string name="screensaver_settings_toggle_title" msgid="6194634226897244374">"ប្រើធាតុ​រក្សា​អេក្រង់"</string>
     <string name="screensaver_settings_summary_either_long" msgid="371949139331896271">"ពេលសាកថ្ម ឬភ្ជាប់"</string>
     <string name="screensaver_settings_summary_dock_and_charging" msgid="8485905100159376156">"ខណៈពេលភ្ជាប់ និងសាកថ្ម"</string>
@@ -1492,8 +1504,9 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"យល់​ព្រម​"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"បោះ​បង់​"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"ការពារស៊ីមកាត"</string>
-    <string name="automatic_sim_lock_protection" msgid="9164867628046446829">"ការការពារការចាក់សោស៊ីមដោយស្វ័យប្រវត្តិ"</string>
-    <string name="sim_auto_pin_management_toggle" msgid="277957283281408624">"ការគ្រប់គ្រងកូដ PIN ដោយស្វ័យប្រវត្តិ"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"មុខងារការពារការចាក់សោស៊ីម"</string>
+    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
+    <skip />
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"គ្រប់គ្រងដោយ Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"មិនស្ថិតក្រោមការគ្រប់គ្រងរបស់ Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"ការចុះឈ្មោះបានជោគជ័យ"</string>
@@ -1502,13 +1515,24 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"កូដ PIN ដែលគ្រប់គ្រងដោយ Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"តម្លៃកូដ PIN ដែលគ្រប់គ្រងដោយ Android៖"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"មិនអាចយកកូដ PIN បានទេ"</string>
-    <string name="sim_choose_protection_mode_title" msgid="3844572414471399629">"ការពារស៊ីមកាតពីចោរលួច"</string>
+    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
+    <skip />
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"កូដ PIN របស់ស៊ីមដែលគ្រប់គ្រងដោយ Android"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="1369031226210580996">"បានគ្រប់គ្រងកូដ PIN របស់ស៊ីមដោយផ្ទាល់ដៃ"</string>
-    <string name="sim_protection_mode_lskf_required" msgid="5942088143566182672">"ត្រូវតែរៀបចំអេក្រង់ចាក់សោ ដើម្បីបើកការការពារស៊ីម"</string>
+    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
+    <skip />
+    <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"តម្រូវឱ្យមានអេក្រង់ចាក់សោសម្រាប់ការការពារស៊ីមដោយស្វ័យប្រវត្តិ ឥឡូវនេះមានតែការការពារដោយផ្ទាល់ដៃប៉ុណ្ណោះ"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"បញ្ចូលកូដ PIN របស់ស៊ីមបច្ចុប្បន្ន"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"បញ្ចូលកូដ PIN បច្ចុប្បន្នរបស់ស៊ីមកាត"</string>
     <string name="use_carrier_default_pin" msgid="4777399918806287607">"ប្រើលំនាំដើមរបស់ក្រុមហ៊ុន​សេវាទូរសព្ទ"</string>
+    <string name="choose_sim_pin_protection_mode" msgid="3008087116785955704">"ជ្រើសរើសមុខងារការពារស៊ីម"</string>
+    <string name="sim_pin_protection_mode_manual" msgid="6394394529094030608">"ដោយផ្ទាល់ដៃ"</string>
+    <string name="sim_pin_protection_mode_automatic" msgid="7382457994105124365">"ស្វ័យប្រវត្តិ (គ្រប់គ្រងដោយ Android)"</string>
+    <string name="provide_new_sim_pin_title" msgid="7858611936347465648">"កូដ PIN ស៊ីម​កាត​ថ្មី"</string>
+    <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"បញ្ជាក់កូដ PIN របស់ស៊ីមថ្មី"</string>
+    <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"កូដ PIN មិន​ត្រូវគ្នាទេ។ សូមបញ្ជាក់កូដ PIN ស៊ីមថ្មី។"</string>
+    <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"កូដ PIN ខុស។ នៅសល់​ការព្យាយាម៖ <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> ដង"</string>
+    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"ប្រើ <xliff:g id="CARRIER">%1$s</xliff:g> ទិន្នន័យទូរសព្ទចល័ត?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"អ្នក​កំពុង​ប្រើប្រាស់ <xliff:g id="CARRIER2_0">%2$s</xliff:g> សម្រាប់​ទិន្នន័យ​ទូរសព្ទចល័ត។ ប្រសិនបើប្ដូរទៅ <xliff:g id="CARRIER1">%1$s</xliff:g> <xliff:g id="CARRIER2_1">%2$s</xliff:g> នឹងមិនត្រូវបានប្រើ​សម្រាប់ទិន្នន័យទូរសព្ទចល័ត​ទៀតទេ។"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"ប្រើ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1811,6 +1835,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"ការផ្លាស់ប្ដូរ​ការចាប់ដឹងពីល្វែងម៉ោង​របស់ទីតាំងមិនត្រូវបាន​អនុញ្ញាតទេ"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"ប្រសិនបើ​អាចប្រើ​ទីតាំង​ឧបករណ៍​របស់អ្នកបាន វាអាច​ត្រូវបានប្រើ ដើម្បី​កំណត់​ល្វែងម៉ោង​របស់អ្នក"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"ការ​ជូនដំណឹង"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"ការផ្លាស់ប្ដូរល្វែងម៉ោង"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"ទទួលបានការជូនដំណឹង នៅពេលល្វែងម៉ោងរបស់អ្នកត្រូវបានធ្វើបច្ចុប្បន្នភាពដោយស្វ័យប្រវត្តិ"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"ការជូនដំណឹង ម៉ោង តំបន់ ល្វែងម៉ោង"</string>
@@ -2095,9 +2121,7 @@
     <string name="language_and_region_settings" msgid="2950394107276025120">"ភាសា និងតំបន់"</string>
     <string name="keyboard_settings" msgid="184185708597386454">"ក្ដារចុច"</string>
     <string name="language_empty_list_user_restricted" msgid="8050367405839231863">"អ្នកមិនមានសិទ្ធិអនុញ្ញាតក្នុងការប្ដូរភាសាឧបករណ៍នេះទេ។"</string>
-    <string name="language_keyboard_settings_title" msgid="7934844313233544557">"ភាសា និងការបញ្ចូល"</string>
     <string name="input_assistance" msgid="3437568284144952104">"ឧបករណ៍"</string>
-    <string name="keyboard_settings_category" msgid="5392847229300117064">"ក្ដារ​ចុច &amp; វិធី​សាស្ត្រ​បញ្ចូល"</string>
     <string name="system_language" msgid="1146762166579643257">"ភាសាប្រព័ន្ធ"</string>
     <string name="phone_language" msgid="5986939176239963826">"ភាសា"</string>
     <string name="phone_language_summary" msgid="863041222809685325"></string>
@@ -2106,7 +2130,6 @@
     <string name="auto_caps" msgid="5573583581288305355">"អក្សរ​ធំ​ស្វ័យប្រវត្តិ"</string>
     <string name="auto_caps_summary" msgid="3144141933426846665">"ក្នុងប្រយោគនិមួយៗសូមសរសេរផ្ដើមដោយអក្សរធំ"</string>
     <string name="auto_punctuate" msgid="2838809477621809507">"ដាក់​សញ្ញា​វណ្ណយុត្ត​ស្វ័យ​ប្រវត្តិ"</string>
-    <string name="hardkeyboard_category" msgid="8729780593378161071">"ការ​កំណត់​ក្ដារចុច​រូបវ័ន្ត"</string>
     <string name="auto_punctuate_summary" msgid="3549190848611386748">"ចុច​ប៊ូតុង Space ពីរ​ដើម្បី​បញ្ចូល \".\""</string>
     <string name="show_password" msgid="7101900779571040117">"បង្ហាញ​ពាក្យ​សម្ងាត់"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"បង្ហាញ​តួអក្សរ​មួយភ្លែត​ខណៈ​ពេល​វាយ​បញ្ចូល"</string>
@@ -2117,13 +2140,11 @@
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"កម្មវិធី​ពិនិត្យ​អក្ខរាវិរុទ្ធ​នេះ​អាច​ប្រមូល​អត្ថបទ​​ទាំងអស់​ដែល​អ្នក​វាយ រួមមាន ទិន្នន័យ​​ផ្ទាល់​ខ្លួន​ ដូច​ជា​ពាក្យ​សម្ងាត់ និង​លេខ​កាត​ឥណទាន។ វា​បាន​មក​ពី​កម្មវិធី <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g> ។ ប្រើ​កម្មវិធី​ពិនិត្យ​អក្ខរាវិរុទ្ធ​នេះ?"</string>
     <string name="spellchecker_quick_settings" msgid="6449414356743946577">"ការ​កំណត់"</string>
     <string name="spellchecker_language" msgid="8905487366580285282">"ភាសា"</string>
-    <string name="keyboard_and_input_methods_category" msgid="5296847777802891649">"ក្ដារចុច"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"បង្ហាញគ្រាប់ចុចប្ដូរក្ដារចុច"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"អនុញ្ញាតឱ្យបង្ហាញប៊ូតុងប្ដូរក្ដារចុចនៅក្នុងរបាររុករក នៅពេលជ្រើសរើសកន្លែងបញ្ចូល"</string>
     <string name="virtual_keyboard_category" msgid="2339505603075527212">"ក្ដារចុច​លើអេក្រង់"</string>
     <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
     <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"ក្ដារចុចលើអេក្រង់​ដែលអាចប្រើបាន"</string>
-    <string name="add_virtual_keyboard" msgid="2515850206289352606">"គ្រប់គ្រង​ក្ដារចុច​លើអេក្រង់"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"ជម្រើស"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ភាពងាយស្រួល"</string>
     <string name="physical_keyboard_title" msgid="3328134097512350958">"ក្ដារចុចរូបវន្ត"</string>
@@ -2183,9 +2204,7 @@
     <string name="mouse_keys_acceleration_fast_icon_desc" msgid="4426188473271579794">"លឿន"</string>
     <string name="mouse_keys_acceleration_slow_icon_desc" msgid="8370777074987200135">"យឺត"</string>
     <string name="keyboard_shortcuts_helper" msgid="6934420811737731188">"មើល​ផ្លូវកាត់​ក្ដារចុច"</string>
-    <string name="keyboard_shortcuts_helper_summary" msgid="5979507677602559203">"បង្ហាញបញ្ជីផ្លូវកាត់"</string>
     <string name="language_and_input_for_work_category_title" msgid="2546950919124199743">"ឧបករណ៍ និងក្ដារចុច​កម្រងព័ត៌មាន​ការងារ"</string>
-    <string name="virtual_keyboards_for_work_title" msgid="786459157034008675">"ក្ដារចុចលើអេក្រង់​សម្រាប់ការងារ"</string>
     <string name="keyboard_default_layout" msgid="5377811770620422301">"លំនាំដើម"</string>
     <string name="game_controller_settings_title" msgid="7088469312082579978">"ឧបករណ៍បញ្ជាហ្គេម"</string>
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"ប្ដូរសកម្មភាពដែលបើកដំណើរការដោយប៊ូតុងរបស់ឧបករណ៍បញ្ជាអ្នកតាមបំណង"</string>
@@ -2304,7 +2323,6 @@
     <string name="keyboard_repeat_keys_increase_rate_desc" msgid="1745229237083808184">"បង្កើនអត្រាចុចឡើងវិញ"</string>
     <string name="keyboard_repeat_keys_decrease_rate_desc" msgid="31236959764168589">"បន្ថយអត្រាចុចឡើងវិញ"</string>
     <string name="ime_label_title" msgid="8994569521516807168">"ប្លង់ <xliff:g id="IME_LABEL">%s</xliff:g>"</string>
-    <string name="default_keyboard_layout" msgid="8690689331289452201">"លំនាំដើម"</string>
     <string name="automatic_keyboard_layout_label" msgid="9138088156046198913">"ស្វ័យប្រវត្តិ៖ <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="user_selected_keyboard_layout_label" msgid="154742505924555156">"បានជ្រើសរើសដោយអ្នកប្រើប្រាស់៖ <xliff:g id="LAYOUT_LABEL">%s</xliff:g>"</string>
     <string name="speech_category_title" msgid="5995161659186229742">"ការ​និយាយ"</string>
@@ -2318,10 +2336,6 @@
     <string name="game_controller_settings_category" msgid="8557472715034961918">"កម្មវិធី​ពិនិត្យ​ល្បែង"</string>
     <string name="vibrate_input_devices" msgid="5192591087864449142">"ការ​ញ័រ​ពេល​បញ្ជូន​បន្ត"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"បញ្ជូន​រំញ័រ​ទៅ​ឧបករណ៍​បញ្ជា​ហ្គេម​នៅ​ពេល​ភ្ជាប់"</string>
-    <string name="keyboard_layout_dialog_title" msgid="8770130364048089954">"ជ្រើស​ប្លង់​ក្ដារចុច"</string>
-    <string name="keyboard_layout_dialog_setup_button" msgid="6546245862744626706">"កំណត់​ប្លង់​ក្ដារចុច"</string>
-    <string name="keyboard_layout_dialog_switch_hint" msgid="3303564123674979354">"ដើម្បី​ប្ដូរ ចុច​ Control-Spacebar"</string>
-    <string name="keyboard_layout_default_label" msgid="6078569989261528039">"លំនាំដើម"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"ប្លង់​ក្ដារចុច"</string>
     <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"ប្លង់ក្ដារចុចរូបវន្ត"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"វចនានុក្រម​ផ្ទាល់ខ្លួន"</string>
@@ -2369,7 +2383,6 @@
     <string name="vision_settings_description" msgid="7614894785054441991">"អ្នកអាចកំណត់ឧបករណ៍នេះឲ្យស្របតាម​តម្រូវការរបស់អ្នក។ មុខងារភាព​ងាយស្រួលទាំងនេះអាចផ្លាស់​ប្តូរនៅពេលក្រោយបាននៅក្នុងការកំណត់។"</string>
     <string name="vision_settings_suggestion_title" msgid="4689275412658803919">"ប្ដូរ​ទំហំពុម្ពអក្សរ"</string>
     <string name="screen_reader_category_title" msgid="5825700839731107803">"កម្មវិធី​អាន​អេក្រង់"</string>
-    <string name="keyboard_category_title" msgid="6841712758039893220">"ជម្រើសក្ដារចុចរូបវន្ត"</string>
     <string name="captions_category_title" msgid="574490148949400274">"អក្សររត់"</string>
     <string name="audio_category_title" msgid="5283853679967605826">"សំឡេង"</string>
     <string name="general_category_title" msgid="6298579528716834157">"ទូទៅ"</string>
@@ -2595,7 +2608,8 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"ទម្រង់រចនាងងឹតពង្រីក"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"ការកំណត់ទម្រង់រចនាងងឹតពង្រីក"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"បើកការកំណត់ទម្រង់រចនាងងឹតពង្រីក"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7641176818729300939">"ទម្រង់រចនាងងឹតដែលបានពង្រីកអាចធ្វើឱ្យកាន់តែងាយអាន ប៉ុន្តែអាចធ្វើឱ្យកម្មវិធីមួយចំនួនបង្ហាញមិនត្រឹមត្រូវ។\n\nកម្មវិធីដែលបិទការកំណត់នេះនឹងប្រើជម្រើសទម្រង់រចនាងងឹតស្តង់ដា។"</string>
+    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
+    <skip />
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"លុប​រូបភាព​មាន​ចលនា"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"កាត់បន្ថយចលនានៅលើអេក្រង់"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"ការលោតភ្លឹបភ្លែតទស្សន៍ទ្រនិចអក្សរ"</string>
@@ -2735,7 +2749,6 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"ផ្ទាំងគ្រប់គ្រងឧបករណ៍ស្តាប់"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"សំឡេង"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"ការ​ជូនដំណឹង"</string>
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" msgid="5073468437423245843">"សំឡេង​រោទ៍ និងម៉ោងរោទ៍"</string>
     <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"សំឡេងនឹងលេងតាមរយៈឧបករណ៍ជំនួយការស្ដាប់"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"សំឡេងនឹងលេងតាមរយៈឧបករណ៍បំពងសំឡេងរបស់ឧបករណ៍"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"សំឡេងនឹងលេងតាមរយៈឧបករណ៍ជំនួយការស្ដាប់ និងឧបករណ៍បំពងសំឡេងរបស់ឧបករណ៍"</string>
@@ -3103,7 +3116,6 @@
     <string name="voice_input_output_settings" msgid="1055497319048272051">"ការ​បញ្ចូល &amp; បញ្ចេញ​សំឡេង"</string>
     <string name="voice_input_output_settings_title" msgid="6449454483955543064">"កំណត់​ការ​បញ្ចូល​​ &amp; បញ្ចេញ​សំឡេង"</string>
     <string name="voice_search_settings_title" msgid="228743187532160069">"ស្វែងរក​តាម​​សំឡេង"</string>
-    <string name="keyboard_settings_title" msgid="2199286020368890114">"ក្ដារ​ចុច Android"</string>
     <string name="voice_input_settings" msgid="105821652985768064">"កំណត់​ការ​បញ្ចូល​សំឡេង"</string>
     <string name="voice_input_settings_title" msgid="3708147270767296322">"ការ​បញ្ចូល​សំឡេង"</string>
     <string name="voice_service_preference_section_title" msgid="4807795449147187497">"សេវាកម្ម​បញ្ចូល​សំឡេង"</string>
@@ -3223,7 +3235,7 @@
     <string name="device_admin_add_title" msgid="6087481040932322289">"អ្នកគ្រប់គ្រងឧបករណ៍"</string>
     <string name="device_admin_warning" msgid="1889160106787280321">"ការបើក​ដំណើរការ​កម្មវិធី​អ្នកគ្រប់គ្រង​នេះ​នឹងអនុញ្ញាតឲ្យកម្មវិធី <xliff:g id="APP_NAME">%1$s</xliff:g> ធ្វើប្រតិបត្តិការដូចខាងក្រោម៖"</string>
     <string name="supervision_role_holder_warning" msgid="167724047638694522">"ឧបករណ៍​នេះ​នឹងត្រូវបាន​គ្រប់គ្រង និង​តាមដានដោយ <xliff:g id="APP_NAME_0">%1$s</xliff:g>។ \n\n<xliff:g id="APP_NAME_1">%1$s</xliff:g> នឹងអាចគ្រប់គ្រងការកំណត់ការគ្រប់គ្រងដោយមាតាបិតា ដូចជាការទប់ស្កាត់កម្មវិធី និងការរឹតបន្តឹង​ខ្លឹមសារជាដើម។"</string>
-    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"ឧបករណ៍​នេះ​នឹង​ស្ថិតក្រោមការគ្រប់គ្រង និង​ត្រួតពិនិត្យ​ដោយ <xliff:g id="APP_NAME">%1$s</xliff:g> ។"</string>
+    <string name="device_admin_warning_simplified" msgid="2715756519899116115">"ឧបករណ៍​នេះ​នឹង​ស្ថិតក្រោមការគ្រប់គ្រង និង​ការពិនិត្យតាមដាន​ដោយ <xliff:g id="APP_NAME">%1$s</xliff:g>។"</string>
     <string name="device_admin_status" msgid="6332571781623084064">"កម្មវិធីអ្នក​គ្រប់គ្រង​នេះ​កំពុងដំណើរការ និងអនុញ្ញាតឲ្យកម្មវិធី <xliff:g id="APP_NAME">%1$s</xliff:g> ធ្វើប្រតិបត្តិការដូចខាងក្រោម៖"</string>
     <string name="profile_owner_add_title" msgid="2774489881662331549">"ឲ្យកម្មវិធីគ្រប់គ្រងប្រវត្តិរូបសកម្ម?"</string>
     <string name="supervision_confirmation_title" msgid="8094974031562728585">"អនុញ្ញាតឱ្យ <xliff:g id="APP_NAME">%1$s</xliff:g> គ្រប់គ្រងឧបករណ៍នេះឬ?"</string>
@@ -3650,6 +3662,8 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"ការជូនដំណឹងអំពី Wi‑Fi, ការជូនដំណឹងអំពី wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"ការប្រើទិន្នន័យ"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"ប្រើ​ទម្រង់ 24 ម៉ោង"</string>
+    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
+    <skip />
     <string name="keywords_app_default" msgid="8977706259156428770">"បើក​ជាមួយ"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"កម្មវិធី"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"ល្វែងម៉ោង"</string>
@@ -3770,6 +3784,10 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"បានបិទសំឡេងនៃការជូនដំណឹង ការជូនដំណឹងនឹងញ័រ"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"បាន​បិទសំឡេង <xliff:g id="VOLUME_TYPE">%1$s</xliff:g>"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"មិន​អាច​ប្រើ​បាន​ទេ​ ព្រោះ​សំឡេង​រោទ៍​ត្រូវ​បាន​បិទ"</string>
+    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
+    <skip />
+    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
+    <skip />
     <string name="ringtone_title" msgid="3271453110387368088">"សំឡេង​រោទ៍​ទូរសព្ទ"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"សំឡេង​ជូន​ដំណឹង​លំនាំដើម"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"សំឡេង​ដែល​ផ្តល់​ជូន​សម្រាប់​កម្មវិធី"</string>
@@ -4524,6 +4542,7 @@
     <string name="usb_pref" msgid="8521832005703261700">"USB"</string>
     <string name="usb_preference" msgid="5084550082591493765">"ចំណូលចិត្ត USB"</string>
     <string name="usb_control_title" msgid="1946791559052157693">"USB ត្រូវបានគ្រប់គ្រងដោយ"</string>
+    <string name="usb_connected_devices" msgid="535238470176122197">"ឧបករណ៍ដែលបានភ្ជាប់"</string>
     <string name="usb_control_host" msgid="7404215921555021871">"​ឧបករណ៍ដែលបាន​ភ្ជាប់"</string>
     <string name="usb_control_device" msgid="527916783743021577">"ឧបករណ៍នេះ"</string>
     <string name="usb_switching" msgid="3654709188596609354">"កំពុងប្ដូរ…"</string>
@@ -4540,6 +4559,8 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP និងការ​ផ្គត់ផ្គង់​ថាមពល"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI និងការ​ផ្គត់ផ្គង់​ថាមពល"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"កាមេរ៉ាបណ្ដាញ និងការផ្គត់ផ្គង់ថាមពល"</string>
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"ឧបករណ៍ដែលមិនស្គាល់ពី <xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g>"</string>
+    <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"ឧបករណ៍​ដែលមិន​ស្គាល់ [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"ពិនិត្យផ្ទៃខាងក្រោយ"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"ប្រើអត្ថបទពីអេក្រង់"</string>
     <string name="assist_access_context_summary" msgid="6951814413185646275">"អនុញ្ញាតឲ្យកម្មវិធីជំនួយនេះចូលប្រើខ្លឹមសារជាអត្ថបទលើអេក្រង់"</string>
@@ -4593,11 +4614,23 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"អាច​ចូលប្រើ​ឯកសារ​ទាំងអស់​បាន"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"ស្វ័យប្រវត្តិកម្មអេក្រង់"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"កម្មវិធីនេះនឹងអាចមើលឃើញ និងធ្វើអន្តរកម្មជាមួយខ្លឹមសារអេក្រង់របស់កម្មវិធីផ្សេងទៀត ដើម្បីជួយអ្នកបំពេញកិច្ចការនានា ទោះបីជាកម្មវិធីស្ថិតនៅផ្ទៃខាងក្រោយក៏ដោយ"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
+    <skip />
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"ប្រសិនបើអ្នកមិនអនុញ្ញាតស្វ័យប្រវត្តិកម្មអេក្រង់ទេ <xliff:g id="ID_1">%1$s</xliff:g> ប្រហែលជានៅតែអាចធ្វើអន្តរកម្មជាមួយកម្មវិធីដែលបានភ្ជាប់ជាមួយ <xliff:g id="ID_2">%1$s</xliff:g> តាមវិធីផ្សេងទៀតបានដដែល"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"អនុញ្ញាតឱ្យកម្មវិធីជួយអ្នកបំពេញកិច្ចការដោយធ្វើអន្តរកម្មជាមួយខ្លឹមសារអេក្រង់របស់កម្មវិធីផ្សេងទៀត"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"សួរគ្រប់ពេល"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"អនុញ្ញាត​ជានិច្ច"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"កុំអនុញ្ញាត"</string>
+    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ការជូនដំណឹងពេញអេក្រង់"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"អនុញ្ញាតការជូនដំណឹងពេញអេក្រង់ពីកម្មវិធីនេះ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"អនុញ្ញាតឱ្យកម្មវិធីនេះបង្ហាញការជូនដំណឹងពេញអេក្រង់ នៅពេលឧបករណ៍ត្រូវបានចាក់សោ។ កម្មវិធីអាចប្រើការជូនដំណឹងទាំងនេះ ដើម្បីរំលេចម៉ោងរោទ៍ ការហៅចូល ឬការជូនដំណឹងបន្ទាន់ផ្សេងទៀត។"</string>
@@ -6180,4 +6213,12 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"ឧបករណ៍របស់អ្នកមិនត្រូវបានចុះឈ្មោះសម្រាប់ការប្រកាសអាសន្នតាមផ្កាយរណបទេ។ សូមប្រាកដថា អ្នកបានភ្ជាប់ទៅអ៊ីនធឺណិតដើម្បីឱ្យឧបករណ៍របស់អ្នកបញ្ចប់ការចុះឈ្មោះដោយស្វ័យប្រវត្តិ"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"បើកសេវាកម្មកម្មវិធីដំឡើងកម្មវិធីបណ្ដាញ"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"បើកសេវាកម្មនេះ ដើម្បីដំឡើងគេហទំព័រដោយផ្ទាល់ទៅអេក្រង់ដើមរបស់អ្នក ដើម្បីប្រើគេហទំព័រទាំងនោះដូចជាកម្មវិធីធម្មតា។"</string>
+    <!-- no translation found for access_hid_title (3937436196813998587) -->
+    <skip />
+    <!-- no translation found for permit_access_hid (870824396872060949) -->
+    <skip />
+    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
+    <skip />
+    <!-- no translation found for keywords_access_hid (682455265293135353) -->
+    <skip />
 </resources>

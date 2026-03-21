@@ -65,6 +65,8 @@ class KeyboardVibrationSwitchPreference(
     override val keywords: Int
         get() = R.string.keywords_keyboard_vibration
 
+    override val availabilityDescription = "The device must support keyboard vibration settings."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(
             com.android.internal.R.bool.config_keyboardVibrationSettingsSupported

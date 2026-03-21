@@ -34,6 +34,7 @@ import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.ComputerControlAppInfoPageProvider
 import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
+import com.android.settings.spa.app.specialaccess.HidAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.LongBackgroundTasksAppListProvider
 import com.android.settings.spa.app.specialaccess.MediaManagementAppsAppListProvider
@@ -48,6 +49,7 @@ import com.android.settings.spa.app.specialaccess.UseFullScreenIntentAppListProv
 import com.android.settings.spa.app.specialaccess.WifiControlAppListProvider
 import com.android.settings.spa.app.specialaccess.WriteSystemPreferencesAppListProvider
 import com.android.settings.spa.app.specialaccess.runIfComputerControlEnabled
+import com.android.settings.spa.app.specialaccess.runIfHidAccessEnabled
 import com.android.settings.spa.app.storage.StorageAppListPageProvider
 import com.android.settings.spa.core.instrumentation.SpaLogMetricsProvider
 import com.android.settings.spa.development.UsageStatsPageProvider
@@ -89,6 +91,7 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
             WriteSystemPreferencesAppListProvider,
             UsageDataAppListProvider,
         )
+        .runIfHidAccessEnabled { plus(HidAccessAppListProvider) }
     }
 
     override val pageProviderRepository = lazy {

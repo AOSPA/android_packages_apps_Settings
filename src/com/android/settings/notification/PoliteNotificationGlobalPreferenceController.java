@@ -24,6 +24,7 @@ import androidx.annotation.NonNull;
 import com.android.server.notification.Flags;
 import com.android.settings.core.TogglePreferenceController;
 
+// LINT.IfChange
 public class PoliteNotificationGlobalPreferenceController extends TogglePreferenceController {
 
     public static final int ON = 1;
@@ -60,3 +61,4 @@ public class PoliteNotificationGlobalPreferenceController extends TogglePreferen
         return NO_RES;
     }
 }
+// LINT.ThenChange(PoliteNotificationsApiScreen.kt)

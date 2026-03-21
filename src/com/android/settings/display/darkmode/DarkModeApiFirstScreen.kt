@@ -16,21 +16,28 @@
 
 package com.android.settings.display.darkmode
 
+import android.Manifest
 import android.Manifest.permission.WRITE_SECURE_SETTINGS
+import android.app.UiModeManager
 import android.content.Context
 import android.os.PowerManager
 import android.provider.Settings
 import com.android.settings.R
 import com.android.settings.accessibility.Flags as AccFlags
 import com.android.settings.flags.Flags
+import com.android.settings.fuelgauge.batterysaver.BatterySaverPreference
 import com.android.settings.fuelgauge.batterysaver.BatterySaverScreen
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
+import com.android.settingslib.metadata.preferencesapi.types.TimeOfDay
+import java.time.LocalTime
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DarkModeApiFirstScreen.KEY)
@@ -68,7 +75,7 @@ class DarkModeApiFirstScreen :
                 ),
         ) {
             get {
-                executeEnum {
+                execute {
                     val isExpanded =
                         Settings.Secure.getInt(
                             context.contentResolver,
@@ -85,7 +92,7 @@ class DarkModeApiFirstScreen :
 
             set {
                 permissions(WRITE_SECURE_SETTINGS)
-                executeEnum { value ->
+                execute { value ->
                     var darkThemeMode = STANDARD_DARK_THEME
                     when (value) {
                         DarkThemeMode.STANDARD -> darkThemeMode = STANDARD_DARK_THEME
@@ -99,6 +106,110 @@ class DarkModeApiFirstScreen :
                 }
             }
         }
+
+        preference(
+            key = DARK_THEME_START_TIME,
+            purpose = R.string.dark_theme_start_time_purpose,
+            type = TimeOfDay,
+        ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+            tags(MUSTPASS_SET)
+            permissions(Manifest.permission.MODIFY_DAY_NIGHT_MODE)
+
+            preconditions(R.string.dark_theme_custom_time_precondition) {
+                val uiModeManager = context.getSystemService(UiModeManager::class.java)
+                if (
+                    uiModeManager?.nightMode == UiModeManager.MODE_NIGHT_CUSTOM &&
+                        uiModeManager.nightModeCustomType ==
+                            UiModeManager.MODE_NIGHT_CUSTOM_TYPE_SCHEDULE
+                ) {
+                    Allowed
+                } else {
+                    InvalidPreference(
+                        otherPreferenceScreenKey = KEY,
+                        otherPreferenceKey = DarkModeSchedulePreference.KEY,
+                        reason = R.string.dark_theme_custom_time_invalid_preference,
+                    )
+                }
+            }
+
+            get {
+                execute {
+                    val uiModeManager = context.getSystemService(UiModeManager::class.java)
+                    uiModeManager?.customNightModeStart ?: LocalTime.of(0, 0)
+                }
+            }
+
+            set {
+                preconditions(R.string.dark_theme_power_saver_precondition) {
+                    if (!context.isPowerSaveMode()) {
+                        Allowed
+                    } else {
+                        InvalidPreference(
+                            otherPreferenceScreenKey = BatterySaverScreen.KEY,
+                            otherPreferenceKey = BatterySaverPreference.KEY,
+                            reason = R.string.api_dark_theme_screen_invalid_preference,
+                        )
+                    }
+                }
+                execute { value ->
+                    val uiModeManager = context.getSystemService(UiModeManager::class.java)
+                    uiModeManager?.customNightModeStart = value
+                }
+            }
+        }
+
+        preference(
+            key = DARK_THEME_END_TIME,
+            purpose = R.string.dark_theme_end_time_purpose,
+            type = TimeOfDay,
+        ) {
+            tags(MUSTPASS_SET)
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+            permissions(Manifest.permission.MODIFY_DAY_NIGHT_MODE)
+            preconditions(R.string.dark_theme_custom_time_precondition) {
+                val uiModeManager = context.getSystemService(UiModeManager::class.java)
+                if (
+                    uiModeManager?.nightMode == UiModeManager.MODE_NIGHT_CUSTOM &&
+                        uiModeManager.nightModeCustomType ==
+                            UiModeManager.MODE_NIGHT_CUSTOM_TYPE_SCHEDULE
+                ) {
+                    Allowed
+                } else {
+                    InvalidPreference(
+                        otherPreferenceScreenKey = DarkModeScreen.KEY,
+                        otherPreferenceKey = DarkModeSchedulePreference.KEY,
+                        reason = R.string.dark_theme_custom_time_invalid_preference,
+                    )
+                }
+            }
+
+            get {
+                execute {
+                    val uiModeManager = context.getSystemService(UiModeManager::class.java)
+                    uiModeManager?.customNightModeEnd ?: LocalTime.of(0, 0)
+                }
+            }
+
+            set {
+                preconditions(R.string.dark_theme_power_saver_precondition) {
+                    if (!context.isPowerSaveMode()) {
+                        Allowed
+                    } else {
+                        InvalidPreference(
+                            otherPreferenceScreenKey = BatterySaverScreen.KEY,
+                            otherPreferenceKey = BatterySaverPreference.KEY,
+                            reason = R.string.api_dark_theme_screen_invalid_preference,
+                        )
+                    }
+                }
+
+                execute { value ->
+                    val uiModeManager = context.getSystemService(UiModeManager::class.java)
+                    uiModeManager?.customNightModeEnd = value
+                }
+            }
+        }
     }
 
     companion object {
@@ -106,6 +217,8 @@ class DarkModeApiFirstScreen :
         internal const val RADIO_PREFERENCE_KEY = "dark_theme_mode_selector"
         internal const val STANDARD_DARK_THEME = 0
         internal const val EXPANDED_DARK_THEME = 1
+        internal const val DARK_THEME_START_TIME = "dark_theme_start_time"
+        internal const val DARK_THEME_END_TIME = "dark_theme_end_time"
 
         private fun Context.isPowerSaveMode() =
             getSystemService(PowerManager::class.java)?.isPowerSaveMode == true

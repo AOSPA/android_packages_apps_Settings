@@ -62,6 +62,9 @@ open class HardwareInfoScreen :
 
     override fun fragmentClass(): Class<out Fragment>? = HardwareInfoFragment::class.java
 
+    override val availabilityDescription =
+        "The device must support showing the device model."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_device_model)
 

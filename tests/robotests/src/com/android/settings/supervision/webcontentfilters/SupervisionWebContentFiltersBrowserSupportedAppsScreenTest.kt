@@ -128,7 +128,6 @@ class SupervisionWebContentFiltersBrowserSupportedAppsScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_WEB_CONTENT_FILTERS_SCREEN)
     fun getMetricsCategory() {
         assertThat(browserSupportedAppsScreen.getMetricsCategory())
             .isEqualTo(SettingsEnums.SUPERVISION_WEB_CONTENT_FILTERS_BROWSER_SUPPORTED_APPS)

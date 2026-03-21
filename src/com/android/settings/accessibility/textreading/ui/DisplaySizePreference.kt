@@ -81,6 +81,8 @@ internal class DisplaySizePreference(
     ): @ReadWritePermit Int {
         return ReadWritePermit.ALLOW
     }
+    override val supportsWrite = true
+
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
@@ -202,6 +204,8 @@ internal class DisplaySizePreference(
             commitChange(CHANGE_BY_BUTTON_DELAY, value.toInt())
         }
     }
+
+    override val availabilityDescription = "The main display must be internal."
 
     override fun isAvailable(context: Context) = context.display.isInternal
 

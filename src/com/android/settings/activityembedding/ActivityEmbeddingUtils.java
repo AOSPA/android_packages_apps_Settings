@@ -59,6 +59,12 @@ public class ActivityEmbeddingUtils {
         return context.getResources().getInteger(R.integer.config_activity_embed_split_min_cur_dp);
     }
 
+    /** Get the smallest height dp of the window when the split should be used. */
+    public static int getMinCurrentScreenSplitHeightDp(Context context) {
+        return context.getResources().getInteger(
+                R.integer.config_activity_embed_split_min_height_dp);
+    }
+
     /**
      * Get the smallest dp value of the smallest-width (sw) of the window in any rotation when
      * the split should be used.

@@ -24,6 +24,7 @@ import com.android.settings.R
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
 
 class CaptionLocalePreference(context: Context) :
@@ -42,6 +43,11 @@ class CaptionLocalePreference(context: Context) :
 
     override fun storage(context: Context) =
         SettingsSecureStore.get(context).apply { setDefaultValue(KEY, "") }
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     private val localeData: List<LocalePicker.LocaleInfo> by lazy {
         LocalePicker.getAllAssetLocales(context, /* isInDeveloperMode= */ false)

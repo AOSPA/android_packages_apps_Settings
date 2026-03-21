@@ -42,6 +42,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -76,6 +77,8 @@ class WifiHotspotNamePreference(
 
     override val title: Int
         get() = R.string.wifi_hotspot_name_title
+
+    override val availabilityDescription = "The device must support wifi hotspot."
 
     override fun isAvailable(context: Context) =
         WifiUtils.canShowWifiHotspot(context) &&
@@ -193,6 +196,9 @@ class WifiHotspotNamePreference(
             context.startActivity(intent)
         }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val TAG = "WifiHotspotNamePreference"

@@ -42,6 +42,8 @@ class AvailableHearingDevicePreferenceCategory(
     }
     private var fragmentManager: FragmentManager? = null
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createDeviceUpdater(context: Context): BluetoothDeviceUpdater? =

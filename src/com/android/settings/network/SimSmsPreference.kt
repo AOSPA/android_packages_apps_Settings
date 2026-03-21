@@ -23,6 +23,7 @@ import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
 
@@ -47,6 +48,9 @@ class SimSmsPreference :
     override val icon: Int
         get() = R.drawable.ic_sms
 
+    override val availabilityDescription =
+        "The device must have more than one active subscription available."
+
     override fun isAvailable(context: Context): Boolean {
         return context
             .getSystemService(SubscriptionManager::class.java)
@@ -64,6 +68,9 @@ class SimSmsPreference :
         }
         return subInfo.displayName
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = "sim_sms_preference_key"

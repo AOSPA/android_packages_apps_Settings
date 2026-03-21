@@ -44,6 +44,8 @@ class ChargingSoundPreference :
 
     override fun storage(context: Context) = context.dataStore
 
+    override val availabilityDescription = "The device must support configuring charging sounds in Settings."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_charging_sounds)
 

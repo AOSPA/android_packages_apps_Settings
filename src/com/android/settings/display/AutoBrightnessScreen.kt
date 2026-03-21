@@ -104,11 +104,15 @@ open class AutoBrightnessScreen :
         callingUid: Int,
     ) = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, Settings.AdaptiveBrightnessActivity::class.java, metadata?.key)
+
+    override val availabilityDescription =
+        "The device must support adaptive brightness."
 
     override fun isAvailable(context: Context) =
         context.autoBrightnessAvailabilityStatus == AVAILABLE
@@ -177,6 +181,8 @@ open class AutoBrightnessScreen :
 
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
+        override val availabilityDescription = screenMetadata.availabilityDescription
+
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 
         override val sensitivityLevel : @SensitivityLevel Int = screenMetadata.sensitivityLevel
@@ -199,6 +205,7 @@ open class AutoBrightnessScreen :
             callingPid: Int,
             callingUid: Int,
         ) : @ReadWritePermit Int = screenMetadata.getWritePermit(context, value,  callingPid, callingUid)
+        override val supportsWrite = true
     }
 
     companion object {

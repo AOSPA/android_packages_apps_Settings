@@ -680,6 +680,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         mMobileNetworkRepository.updateEntity();
         // TODO: remove log after fixing b/182326102
         Log.d(LOG_TAG, "onResume() subId=" + mSubId);
+        redrawPreferenceControllers();
         getActivity().registerReceiver(mBroadcastReceiver,
                 new IntentFilter(CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED));
 

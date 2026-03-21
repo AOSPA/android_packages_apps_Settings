@@ -89,6 +89,9 @@ class KeyboardShortcutPreference(context: Context, targets: Set<String>) :
         }
     }
 
+    override val availabilityDescription =
+        "There must be a keyboard connected. There must be exactly one target configured for this shortcut. The device must support Key gesture shortcut settings. The target must be Magnification, Voice Access, TalkBack, Color Inversion, or Select to Speak. "
+
     override fun isAvailable(context: Context): Boolean {
         if (
             !Flags.enableKeyGestureShortcutSettings() ||

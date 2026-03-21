@@ -68,6 +68,9 @@ class SystemNavigationGestureScreen :
     override val keywords: Int
         get() = R.string.keywords_system_navigation
 
+    override val availabilityDescription =
+        "The device must support the swipe up gesture."
+
     override fun isAvailable(context: Context) = context.isGestureAvailable()
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
@@ -123,6 +126,8 @@ class SystemNavigationGestureScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

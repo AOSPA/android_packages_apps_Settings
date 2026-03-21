@@ -106,8 +106,10 @@ open class MobileNetworkListScreen(context: Context) :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, Settings.MobileNetworkListActivity::class.java, metadata?.key)
 
-    override fun isAvailable(context: Context) =
-        SimRepository(context).showMobileNetworkPageEntrance()
+    override val availabilityDescription =
+        "The device must support showing mobile network list in Settings."
+
+    override fun isAvailable(context: Context) = SimRepository(context).showMobileNetworkPageEntrance()
 
     override fun isEnabled(context: Context) =
         super<PreferenceRestrictionMixin>.isEnabled(context) &&
@@ -220,6 +222,8 @@ open class MobileNetworkListScreen(context: Context) :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

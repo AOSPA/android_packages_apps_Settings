@@ -36,6 +36,9 @@ class MediaVibrationIntensitySliderPreference(context: Context) :
     override val keywords: Int
         get() = R.string.keywords_media_vibration
 
+    override val availabilityDescription =
+        "The device must support media vibration settings."
+
     override fun isAvailable(context: Context) = context.isMediaVibrationPreferenceSupported()
 
     companion object {

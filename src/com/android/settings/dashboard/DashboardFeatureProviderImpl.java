@@ -496,10 +496,8 @@ public class DashboardFeatureProviderImpl implements DashboardFeatureProvider {
                 final Icon icon;
                 if (iconInfo != null) {
                     icon = Icon.createWithResource(iconInfo.first, iconInfo.second);
-                } else if (Flags.supportRawDynamicIcons()) {
-                    icon = TileUtils.getRawIconFromUri(mContext, uri, providerMap);
                 } else {
-                    icon = null;
+                    icon = TileUtils.getRawIconFromUri(mContext, uri, providerMap);
                 }
                 if (icon == null) {
                     Log.w(TAG, "Failed to get icon from uri " + uri);

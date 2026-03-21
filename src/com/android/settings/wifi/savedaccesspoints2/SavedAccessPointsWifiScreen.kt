@@ -77,6 +77,8 @@ open class SavedAccessPointsWifiScreen :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, SavedAccessPointsSettingsActivity::class.java, metadata?.key)
 
+    override val availabilityDescription = "There must be at least one saved network or subscription."
+
     override fun isAvailable(context: Context): Boolean {
         val wifiManager = context.wifiManager ?: return false
 
@@ -176,6 +178,8 @@ open class SavedAccessPointsWifiScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

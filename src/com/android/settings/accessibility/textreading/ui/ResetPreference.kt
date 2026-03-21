@@ -49,6 +49,8 @@ internal class ResetPreference(@EntryPoint private val entryPoint: Int) :
     override val icon: Int
         get() = R.drawable.ic_history
 
+    override val availabilityDescription = "The device must not be during setup."
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard()
     }

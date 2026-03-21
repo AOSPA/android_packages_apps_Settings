@@ -104,7 +104,7 @@ constructor(
         }
 
     init {
-        injector.registerDisplayListener(displayListener)
+        injector.registerDisplayListener(displayListener, includeRefreshRateEvents = true)
         registerMirrorModeObserver()
         registerIncludeDefaultDisplayInTopologyObserver()
         activityTaskManager.registerTaskStackListener(lockTaskModeListener)
