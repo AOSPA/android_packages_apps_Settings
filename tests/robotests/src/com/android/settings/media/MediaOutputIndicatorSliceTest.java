@@ -17,8 +17,8 @@
 
 package com.android.settings.media;
 
+import static com.android.media.flags.Flags.FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
-import static com.android.settingslib.media.flags.Flags.FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -39,6 +39,9 @@ import android.media.session.MediaController;
 import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.Process;
+import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.text.TextUtils;
 
@@ -88,6 +91,8 @@ public class MediaOutputIndicatorSliceTest {
 
     private final List<MediaDevice> mDevices = new ArrayList<>();
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private LocalBluetoothManager mLocalBluetoothManager;
     @Mock
@@ -98,9 +103,6 @@ public class MediaOutputIndicatorSliceTest {
     private MediaDevice mDevice2;
     @Mock
     private Drawable mTestDrawable;
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
     private MediaOutputIndicatorSlice mMediaOutputIndicatorSlice;
@@ -217,6 +219,7 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
+    @DisableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
     public void onNotifyChange_withActiveLocalMedia_verifyIntentExtra() {
         when(mMediaController.getSessionToken()).thenReturn(mToken);
         when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
@@ -240,6 +243,35 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
+    @EnableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
+    public void onNotifyChange_withActiveLocalMedia_multiuserFlag_verifyIntentExtra() {
+        when(mMediaController.getSessionToken()).thenReturn(mToken);
+        when(mMediaController.getPackageName()).thenReturn(TEST_PACKAGE_NAME);
+        doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
+                .getActiveLocalMediaController();
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        ArgumentCaptor<UserHandle> targetUserCaptor = ArgumentCaptor.forClass(UserHandle.class);
+
+        mMediaOutputIndicatorSlice.onNotifyChange(null);
+        verify(mContext).sendBroadcastAsUser(intentCaptor.capture(), targetUserCaptor.capture());
+        Intent intent = intentCaptor.getValue();
+
+        assertThat(TextUtils.equals(TEST_PACKAGE_NAME, intent.getStringExtra(
+                MediaOutputConstants.EXTRA_PACKAGE_NAME))).isTrue();
+        assertThat(intent.getParcelableExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
+                UserHandle.class)).isEqualTo(UserHandle.getUserHandleForUid(mToken.getUid()));
+        assertThat(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG).isEqualTo(
+                intent.getAction());
+        assertThat(TextUtils.equals(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME,
+                intent.getPackage())).isTrue();
+        assertThat(intent.getParcelableExtra(
+                MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN, MediaSession.Token.class)).isEqualTo(
+                mToken);
+        assertThat(targetUserCaptor.getValue()).isEqualTo(UserHandle.SYSTEM);
+    }
+
+    @Test
+    @DisableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
     public void onNotifyChange_withoutActiveLocalMedia_verifyIntentExtra() {
         doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
@@ -261,8 +293,8 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
-    public void onNotifyChange_withoutMediaControllerFlagEnabled_verifyIntentExtra() {
-        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+    @DisableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
+    public void onNotifyChange_withoutMediaController_verifyIntentExtra() {
         doReturn(null).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
         ArgumentCaptor<Intent> argument = ArgumentCaptor.forClass(Intent.class);
@@ -279,43 +311,28 @@ public class MediaOutputIndicatorSliceTest {
     }
 
     @Test
-    public void onNotifyChange_withoutMediaControllerFlagDisabled_doNothing() {
-        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+    @EnableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
+    public void onNotifyChange_withoutMediaController_multiuserFlag_verifyIntentExtra() {
         doReturn(null).when(sMediaOutputIndicatorWorker)
                 .getActiveLocalMediaController();
+        ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        ArgumentCaptor<UserHandle> targetUserCaptor = ArgumentCaptor.forClass(UserHandle.class);
 
         mMediaOutputIndicatorSlice.onNotifyChange(null);
-    }
+        verify(mContext).sendBroadcastAsUser(intentCaptor.capture(), targetUserCaptor.capture());
+        Intent intent = intentCaptor.getValue();
 
-
-    @Test
-    public void isVisible_allConditionMatched_returnTrue() {
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mDevices.add(mDevice1);
-
-        when(sMediaOutputIndicatorWorker.getMediaDevices()).thenReturn(mDevices);
-        doReturn(mMediaController).when(sMediaOutputIndicatorWorker)
-                .getActiveLocalMediaController();
-
-        assertThat(mMediaOutputIndicatorSlice.isVisible()).isTrue();
-    }
-
-    @Test
-    public void isVisible_noActiveSession_returnFalse() {
-        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
-        mAudioManager.setMode(AudioManager.MODE_NORMAL);
-        mDevices.add(mDevice1);
-
-        when(sMediaOutputIndicatorWorker.getMediaDevices()).thenReturn(mDevices);
-        doReturn(null).when(sMediaOutputIndicatorWorker)
-                .getActiveLocalMediaController();
-
-        assertThat(mMediaOutputIndicatorSlice.isVisible()).isFalse();
+        assertThat(intent.getAction()).isEqualTo(
+                MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
+        assertThat(TextUtils.equals(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME,
+                intent.getPackage())).isTrue();
+        assertThat(intent.getParcelableExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
+                UserHandle.class)).isEqualTo(mContext.getUser());
+        assertThat(targetUserCaptor.getValue()).isEqualTo(UserHandle.SYSTEM);
     }
 
     @Test
     public void isVisible_noActiveSession_returnTrue() {
-        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         mAudioManager.setMode(AudioManager.MODE_NORMAL);
         mDevices.add(mDevice1);
 

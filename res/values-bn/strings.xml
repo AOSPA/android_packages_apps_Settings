@@ -1316,7 +1316,7 @@
     <string name="wifi_calling_settings_activation_instructions" msgid="3936067355828542266">"ওয়াই-ফাই দিয়ে কল করার সুবিধা অ্যাক্টিভেট করুন"</string>
     <string name="wifi_calling_turn_on" msgid="7687886259199428823">"ওয়াই-ফাই দিয়ে কল করার সুবিধা চালু করুন"</string>
     <string name="wifi_disconnected_from" msgid="5249576734324159708">"<xliff:g id="SSID">%1$s</xliff:g> থেকে ডিসকানেক্ট করা হয়েছে"</string>
-    <string name="account_settings" msgid="255404935489127404">"অ্যাকাউন্টগুলি"</string>
+    <string name="account_settings" msgid="255404935489127404">"অ্যাকাউন্ট"</string>
     <string name="accessibility_category_work" msgid="5133894487353964944">"কাজের প্রোফাইল অ্যাকাউন্টগুলি - <xliff:g id="MANAGED_BY">%s</xliff:g>"</string>
     <string name="accessibility_category_personal" msgid="2228088849803484780">"ব্যক্তিগত প্রোফাইল অ্যাকাউন্টগুলি"</string>
     <string name="accessibility_category_clone" msgid="7893383448944567885">"প্রোফাইল অ্যাকাউন্ট ক্লোন করুন"</string>
@@ -1828,8 +1828,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"লোকেশনের টাইম জোন শনাক্ত করার বিকল্প পরিবর্তনের অনুমতি নেই"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"আপনার ডিভাইসের লোকেশন উপলভ্য থাকলে, এটি আপনার টাইম জোন সেট করার জন্য ব্যবহার করা হতে পারে"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"বিজ্ঞপ্তি"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"আপনার সময় অটোমেটিক পরিবর্তন করা হলে বিজ্ঞপ্তি পান"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"টাইম জোন পরিবর্তন করুন"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"আপনার টাইম জোন অটোমেটিক আপডেট হলে বিজ্ঞপ্তি পান"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"বিজ্ঞপ্তি, সময়, অঞ্চল, টাইম জোন"</string>
@@ -2135,13 +2134,22 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"ভাষা"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"কীবোর্ড সুইচ কী দেখুন"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"ইনপুট ফিল্ড বেছে নেওয়া হলে, নেভিগেশন বারে কীবোর্ড সুইচার বোতাম দেখানোর অনুমতি দিন"</string>
-    <string name="virtual_keyboard_category" msgid="2339505603075527212">"অন-স্ক্রিন কীবোর্ড"</string>
-    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"স্ক্রিনের কীবোর্ড ফিচার উপলভ্য"</string>
+    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
+    <skip />
+    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
+    <skip />
+    <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
+    <skip />
+    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
+    <skip />
     <string name="keyboard_options_category" msgid="8040137073401152608">"বিকল্প"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"অ্যাক্সেসিবিলিটি"</string>
-    <string name="physical_keyboard_title" msgid="3328134097512350958">"ফিজিক্যাল কীবোর্ড"</string>
-    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"ফিজিক্যাল কীবোর্ড লেআউট পিকার"</string>
+    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"বাউন্স \'কী\'"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"একই \'কী\' দ্রুত প্রেস করা রিপিট করলে কোনও কাজ হবে না"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"বাউন্স \'কী\'-এর ক্ষেত্রে বিলম্ব"</string>
@@ -2330,7 +2338,8 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"ইনপুট ডিভাইসে ভাইব্রেশন হতে দিন"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"গেমের কন্ট্রোলার কানেক্ট করা থাকলে সেটিতে ভাইব্রেশন হতে দিন"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"কীবোর্ড লেআউটগুলি"</string>
-    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"ফিজিক্যাল কীবোর্ড লেআউট"</string>
+    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
+    <skip />
     <string name="user_dict_settings_title" msgid="680410651924276991">"ব্যক্তিগত অভিধান"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"অফিসের জন্য ব্যক্তিগত অভিধান"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"অ্যাপে ব্যবহার করা হবে এমন শব্দ যোগ করুন যেমন বানান-পরীক্ষক"</string>
@@ -2352,9 +2361,12 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"সব ভাষার জন্য"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"আরো ভাষা..."</string>
     <string name="testing" msgid="6294172343766732037">"পরীক্ষা করা হচ্ছে"</string>
-    <string name="keyboard_settings_summary" msgid="9188442758316476986">"স্ক্রিনের কীবোর্ড, টুল"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"স্ক্রিনের কীবোর্ড, ফিজিক্যাল কীবোর্ড, টুল"</string>
-    <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"ফিজিক্যাল কীবোর্ড"</string>
+    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
+    <skip />
+    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
+    <skip />
+    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
+    <skip />
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"লেআউট"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"গ্যাজেট চয়ন করুন"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"উইজেট বেছে নিন"</string>
@@ -2928,8 +2940,7 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
-    <!-- no translation found for battery_usage_screen_advance_footer (5883766314661065580) -->
-    <skip />
+    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"ফোন চার্জ হওয়ার সময় ব্যাটারির ব্যবহার ও স্ক্রিন টাইম পরিমাপ করা হয় না"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"অ্যাপের জন্য ব্যাটারির ব্যবহার"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"বিবরণ ব্যবহার করুন"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"বিদ্যুতের ব্যবহার সামঞ্জস্য করুন"</string>
@@ -3760,7 +3771,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"টেক্সটের সাইজ, বড় প্রিন্ট, বড় ফন্ট, বড় টেক্সট, কম দৃষ্টি, টেক্সট আরও বড় করুন, ফন্ট বড় করার টুল, ফন্ট বড় করা"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"\'সবসময় চালু\' অ্যাম্বিয়েন্ট ডিসপ্লে, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, ট্যাগ, রিডার"</string>
-    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"কীবোর্ড, হ্যাপটিক, ভাইব্রেট,"</string>
+    <!-- no translation found for keywords_keyboard_vibration (5870649353180725920) -->
+    <skip />
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"এক্সটার্নাল ডিসপ্লে, কানেক্টেড ডিসপ্লে, এক্সটেন্ডেড ডিসপ্লে, দ্বিতীয় ডিসপ্লে, বিল্ট-ইন ডিসপ্লে, ডিসপ্লে সাজান, মিরর, ডিসপ্লের সাইজ, রোটেশন, রেজোলিউশন, রিফ্রেশ রেট"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"ক্যারেট, টেক্সট ক্যারেট, টেক্সট কার্সর, কার্সর, ব্লিঙ্কিং, ব্লিঙ্ক ইন্টার্ভাল, ব্লিঙ্ক রেট, অ্যানিমেশন, অ্যানিমেশন কমান, অ্যানিমেশন সরান"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"ভলিউম ও ভাইব্রেশন"</string>
@@ -5762,6 +5774,8 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"স্ক্রিন সেভার বেছে নিন"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"কাস্টমাইজ করুন"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> কাস্টমাইজ করুন"</string>
+    <!-- no translation found for dream_preview_button_description (1752727543834253129) -->
+    <skip />
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"ফ্রিফর্ম উইন্ডো সংক্রান্ত সহায়তা চালু করার জন্য ডিভাইস রিবুট করতে হবে।"</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"ফ্রিফর্ম উইন্ডোর উপলভ্যতা আপডেট করতে রিবুট করতে হবে।"</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"সেকেন্ডারি ডিসপ্লেতে ফ্রিফর্ম উইন্ডো চালু করার জন্য রিবুট করতে হবে।"</string>
@@ -5813,8 +5827,7 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="DENOMINATOR">%2$s</xliff:g>:<xliff:g id="NUMERATOR">%1$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"আপনি অ্যাস্পেক্ট রেশিও পরিবর্তন করলে, অ্যাপ রিস্টার্ট হবে। সেভ না করা পরিবর্তন আপনি হারাতে পারেন। নির্দিষ্ট কোনও অ্যাস্পেক্ট রেশিওতে কিছু অ্যাপ অপ্টিমাইজ করা নাও যেতে পারে।"</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"অভিজ্ঞতা"</string>
-    <!-- no translation found for virtual_gamepad_title (8888343036739485679) -->
-    <skip />
+    <string name="virtual_gamepad_title" msgid="8888343036739485679">"ভার্চুয়াল গেমপ্যাড"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ফিঙ্গারপ্রিন্ট সেন্সর"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ফ্ল্যাশ নোটিফিকেশন"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ফ্ল্যাশ বিজ্ঞপ্তি সম্পর্কে"</string>

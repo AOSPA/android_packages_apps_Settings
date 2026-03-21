@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Binder
+import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
@@ -31,9 +32,11 @@ import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreconditionsAsString
@@ -92,9 +95,18 @@ class CatalystStateMetadataProviderExecutor(
                                 semaphore.withPermit {
                                     try {
                                         val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
-                                        if(screenMetadata != null && screenMetadata.isExposable(context)) {
+                                        if (screenMetadata != null && screenMetadata.isExposable(context)) {
                                             buildPerScreenDeviceStatesMetadata(screenKey)
-                                        } else null
+                                        } else {
+                                            val factory = PreferenceScreenRegistry.preferenceScreenMetadataFactories[screenKey]
+                                            val isParameterized = factory is PreferenceScreenMetadataParameterizedFactory
+                                            if (isParameterized) {
+                                                // Try and build the metadata with no itemization entries
+                                                buildPerScreenDeviceStatesMetadata(factory, screenKey )
+                                            } else {
+                                                null
+                                            }
+                                        }
                                     } catch (e: Exception) {
                                         Log.e(TAG, "error building $screenKey", e)
                                         null
@@ -131,6 +143,35 @@ class CatalystStateMetadataProviderExecutor(
                 removeDuplicates = isParameterized,
             )
 
+        return buildHierarchyMetadata(hierarchy, isParameterized)
+    }
+
+    private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
+        parameterizedFactory: PreferenceScreenMetadataParameterizedFactory,
+        screenKey: String
+    ): DeviceStateMetadataProviderExecutorResult? {
+        val screenMetadata =
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                PreferenceScreenRegistry.createWithKeyParameters(
+                    context,
+                    screenKey,
+                    parameterizedFactory.parametersSchema.prepareEmpty()
+                )
+            } else {
+                PreferenceScreenRegistry.create(context, screenKey, Bundle.EMPTY)
+            }
+        if (screenMetadata != null && screenMetadata.isExposable(context)) {
+            val hierarchy = getEnabledPreferencesHierarchy(context, screenMetadata)
+            return buildHierarchyMetadata(hierarchy, isParameterized = true)
+        }
+
+        return null
+    }
+
+    private suspend fun CoroutineScope.buildHierarchyMetadata(
+        hierarchy: Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>,
+        isParameterized: Boolean,
+    ): DeviceStateMetadataProviderExecutorResult {
         val metadata =
             hierarchy.map { entry ->
                 val screenMetaData = entry.key
