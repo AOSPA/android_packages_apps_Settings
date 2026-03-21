@@ -18,8 +18,8 @@ package com.android.settings.fuelgauge
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.ApplicationInfoFlags
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -37,36 +37,33 @@ import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.FailedPreconditionException
 import com.android.settings.testutils2.Parameters
 import com.google.common.truth.Truth.assertThat
-import org.junit.After
 import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
-import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.Implementation
 import org.robolectric.annotation.Implements
-import org.robolectric.shadows.ShadowPackageManager
 
 @RunWith(AndroidJUnit4::class)
 class PowerBackgroundUsageDetailScreenTest {
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
-    private val tester = ApiTester(PowerBackgroundUsageDetailScreen())
+    private lateinit var tester: ApiTester
 
     private val mockFeatureFactory = mock<FeatureFactory>()
     private val mockPackageManager = mock<PackageManager>()
 
     private lateinit var context: Context
-    private lateinit var shadowPackageManager: ShadowPackageManager
 
     @Before
     fun setUp() {
@@ -74,26 +71,22 @@ class PowerBackgroundUsageDetailScreenTest {
         context = spy(baseContext)
         FeatureFactory.setFactory(context, mockFeatureFactory)
         context.stub { on { packageManager } doReturn mockPackageManager }
+
+        val testAppInfo = ApplicationInfo().apply {
+            this.packageName = PACKAGE_NAME
+            this.uid = UID
+        }
         mockPackageManager.stub {
             on { getPackageUidAsUser(eq(PACKAGE_NAME), anyInt()) } doReturn UID
+            on {
+                getInstalledApplicationsAsUser(
+                    any<ApplicationInfoFlags>(),
+                    anyInt()
+                )
+            } doReturn listOf(testAppInfo)
         }
 
-        shadowPackageManager = shadowOf(baseContext.packageManager)
-        shadowPackageManager.installPackage(
-            PackageInfo().apply {
-                this.packageName = PACKAGE_NAME
-                this.applicationInfo =
-                    ApplicationInfo().apply {
-                        this.packageName = PACKAGE_NAME
-                        this.uid = UID
-                    }
-            }
-        )
-    }
-
-    @After
-    fun cleanUp() {
-        ShadowPackageManager.reset()
+        tester = ApiTester(PowerBackgroundUsageDetailScreen(), context)
     }
 
     @Test

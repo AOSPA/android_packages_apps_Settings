@@ -29,6 +29,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -139,6 +140,8 @@ open class WifiDisplayScreen :
 
     override val availabilityDescription = WifiDisplaySettings.AVAILABILITY_DESCRIPTION
 
+    override fun getAvailabilityStability() = WifiDisplaySettings.getAvailabilityStability()
+
     override fun isAvailable(context: Context) = WifiDisplaySettings.isAvailable(context)
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
@@ -175,6 +178,8 @@ open class WifiDisplayScreen :
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 

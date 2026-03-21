@@ -32,6 +32,8 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import com.android.settingslib.widget.SelectorWithWidgetPreference
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+
 
 /**
  * Represents a preference for a specific color correction mode.
@@ -79,6 +81,8 @@ sealed class ModePreference(private val storage: ColorCorrectionModeDataStore) :
         }
 
     override fun getEnabledDescription(): String = "Color correction must be enabled."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context): Boolean {
         return SettingsSecureStore.get(context).getBoolean(ColorCorrectionMainSwitchPreference.KEY)
@@ -182,6 +186,10 @@ class GrayscaleModePreference(storage: ColorCorrectionModeDataStore) : ModePrefe
 
     override val title: Int
         get() = R.string.daltonizer_mode_grayscale_title
+
+    //not reviewed by security & privacy
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     companion object {
         private const val KEY = "daltonizer_mode_grayscale"

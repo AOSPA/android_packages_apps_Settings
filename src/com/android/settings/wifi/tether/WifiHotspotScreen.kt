@@ -53,6 +53,7 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -116,6 +117,8 @@ open class WifiHotspotScreen(context: Context) :
 
     override val availabilityDescription = "The device must support wifi hotspot."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context) =
         canShowWifiHotspot(context) &&
             TetherUtil.isTetherAvailable(context) &&
@@ -147,6 +150,8 @@ open class WifiHotspotScreen(context: Context) :
         }
 
     override fun getEnabledDescription(): String = "Data saver must be turned off and this setting must not be restricted by a device administrator."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) =
         wifiHotspotStore.dataSaverStore.getBoolean(DATA_SAVER_KEY) != true &&

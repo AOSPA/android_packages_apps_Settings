@@ -28,6 +28,7 @@ import com.android.settings.wifi.utils.isAdminUser
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
@@ -44,6 +45,8 @@ class MobileNetworkSpnPreference(private val context: Context, private val subId
             (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)) &&
             (Flags.isDualSimOnboardingEnabled() && SubscriptionManager.isValidSubscriptionId(subId))
     private var carrierName = getCarrierName()
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override val key: String
         get() = KEY

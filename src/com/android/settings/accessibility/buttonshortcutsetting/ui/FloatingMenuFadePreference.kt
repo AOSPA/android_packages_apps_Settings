@@ -29,6 +29,8 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SwitchPreference
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+
 
 /**
  * [SwitchPreference] that controls whether the floating accessibility button fades when inactive.
@@ -54,6 +56,8 @@ class FloatingMenuFadePreference :
     }
 
     override fun getEnabledDescription(): String = "The accessibility floating menu must be enabled."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context): Boolean {
         return AccessibilityUtil.isFloatingMenuEnabled(context)

@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -119,6 +120,8 @@ private constructor(
     override val availabilityDescription =
         "The app must be enabled."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context) = appInfo != null
 
     override fun hasCompleteHierarchy() = false
@@ -194,7 +197,8 @@ private constructor(
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             val repo = AppListRepositoryImpl(context)
-            repo.loadApps(context.userId).forEach { app ->
+            // Make sure to exclude system apps
+            repo.loadAndMaybeExcludeSystemApps(context.userId, true).forEach { app ->
                 emit(Bundle(1).apply { putString(KEY_APP_PACKAGE_NAME, app.packageName) })
             }
         }

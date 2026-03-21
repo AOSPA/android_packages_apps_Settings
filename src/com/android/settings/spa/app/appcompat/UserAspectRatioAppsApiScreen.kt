@@ -22,7 +22,8 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(UserAspectRatioAppsApiScreen.KEY)
@@ -38,7 +39,10 @@ class UserAspectRatioAppsApiScreen :
 
         preconditions(R.string.user_aspect_ratio_apps_screen_preconditions) {
             if (!UserAspectRatioManager.isFeatureEnabled(context)) {
-                Disallowed(R.string.user_aspect_ratio_screen_unavailable)
+                Custom(
+                    R.string.user_aspect_ratio_screen_unavailable,
+                    stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
+                )
             } else {
                 Allowed
             }

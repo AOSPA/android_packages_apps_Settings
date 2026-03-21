@@ -24,6 +24,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -71,6 +72,8 @@ class TripleTapShortcutPreference(
     }
 
     override val availabilityDescription = "The target must be Magnification."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         // This preference is always available from a data perspective if the target is

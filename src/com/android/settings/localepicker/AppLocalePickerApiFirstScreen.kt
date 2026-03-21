@@ -25,7 +25,6 @@ import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
 import com.android.settings.localepicker.AppLocalePickerFragment.ARG_PACKAGE_NAME
 import com.android.settings.localepicker.LocaleUtils.canDisplayLocaleUi
-import com.android.settings.localepicker.LocaleUtils.getAppList
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -37,6 +36,7 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
 import com.android.settingslib.metadata.preferencesapi.unsafe
 import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AppLocalePickerApiFirstScreen.KEY, parameterized = true)
@@ -68,7 +68,7 @@ class AppLocalePickerApiFirstScreen :
             if (!TextUtils.isEmpty(packageName) && canDisplayLocaleUi(context, packageName)) {
                 Allowed
             } else {
-                Custom(R.string.app_locale_picker_screen_unavailable)
+                Custom(R.string.app_locale_picker_screen_unavailable, stability = PreconditionStability.UNSTABLE)
             }
         }
 

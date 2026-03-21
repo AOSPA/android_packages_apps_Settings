@@ -25,7 +25,9 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 @ProvidePreferenceScreen(WifiDataUsageScreenApi.KEY)
 class WifiDataUsageScreenApi :
@@ -43,9 +45,12 @@ class WifiDataUsageScreenApi :
 
         preconditions(R.string.wifi_data_usage_screen_preconditions) {
             if (repository.isAvailable) Allowed
-            else {
+            else if (!repository.hasFeatureWifi) {
                 Log.w(TAG, "Wifi Data Usage Screen is unavailable!")
-                Disallowed(R.string.wifi_data_usage_screen_unavailable)
+                Custom("The device does not have Wi-Fi hardware.", stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
+            } else {
+                Log.w(TAG, "Wifi Data Usage Screen is unavailable!")
+                Custom("The device has recorded no data usage.", stability = PreconditionStability.UNSTABLE)
             }
         }
 

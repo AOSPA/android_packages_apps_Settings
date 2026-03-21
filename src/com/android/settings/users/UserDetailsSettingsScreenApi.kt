@@ -41,6 +41,7 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Collections.emptyList
 import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(UserDetailsSettingsScreenApi.KEY, parameterized = true)
@@ -111,11 +112,11 @@ class UserDetailsSettingsScreenApi :
                 if (!Utils.isVoiceCapable(context)) {
                     HardwareUnsupported(R.string.user_details_enable_calling_unsupported)
                 } else if (!userManager.isAdminUser()) {
-                    Custom(R.string.user_details_setting_unavailable_user_not_admin)
+                    Custom(R.string.user_details_setting_unavailable_user_not_admin, stability = PreconditionStability.UNSTABLE)
                 } else if (
                     paramUserInfo.isMain() || paramUserInfo.isRestricted || paramUserInfo.isGuest()
                 ) {
-                    Custom(R.string.user_details_setting_unavailable_for_selected_user)
+                    Custom(R.string.user_details_setting_unavailable_for_selected_user, stability = PreconditionStability.UNSTABLE)
                 } else {
                     Allowed
                 }
@@ -165,7 +166,7 @@ class UserDetailsSettingsScreenApi :
                 if (!UserManager.isMultipleAdminEnabled()) {
                     HardwareUnsupported(R.string.user_details_grant_admin_unsupported)
                 } else if (!userManager.isAdminUser()) {
-                    Custom(R.string.user_details_setting_unavailable_user_not_admin)
+                    Custom(R.string.user_details_setting_unavailable_user_not_admin, stability = PreconditionStability.UNSTABLE)
                 } else if (
                     paramUserInfo.isMain() ||
                         paramUserInfo.isGuest() ||
@@ -174,7 +175,7 @@ class UserDetailsSettingsScreenApi :
                             paramUserInfo.getUserHandle(),
                         )
                 ) {
-                    Custom(R.string.user_details_setting_unavailable_for_selected_user)
+                    Custom(R.string.user_details_setting_unavailable_for_selected_user, stability = PreconditionStability.UNSTABLE)
                 } else {
                     Allowed
                 }

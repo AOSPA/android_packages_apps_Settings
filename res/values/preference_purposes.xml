@@ -23,7 +23,7 @@
     <string name="general_categories_purpose" translatable="false">general_categories</string>
     <string name="a11y_activity_detail_screen_html_footer_info_purpose" translatable="false">html_footer_info</string>
     <string name="launch_preference_purpose" translatable="false">launch_preference</string>
-    <string name="shortcut_preference_key_purpose" translatable="false">shortcut_preference_key</string>
+    <string name="shortcut_preference_key_purpose" translatable="false">Whether the accessibility feature can be launched via the accessibility button shortcut</string>
     <string name="a11y_activity_detail_screen_top_intro_purpose" translatable="false">top_intro</string>
     <string name="a11y_shortcuts_settings_screen_purpose" translatable="false">Allows users to manage accessibility shortcuts, including configuring the appearance of the accessibility button and enabling the volume keys shortcut on the lock screen.</string>
     <string name="a11y_volume_keys_shortcut_setting_on_lock_screen_purpose" translatable="false">Whether the volume keys shortcut can be used to trigger accessibility features while the device is on the lock screen</string>
@@ -278,6 +278,7 @@
     <string name="previously_connected_hearing_devices_purpose" translatable="false">Displays a list of hearing devices that were previously paired with the device.</string>
     <string name="advanced_app_info_purpose" translatable="false">advanced_app_info</string>
     <string name="installed_app_detail_settings_screen_purpose">Provides detailed information and management options for a specific installed application, including permissions, storage, notifications, and state.</string>
+    <string name="installed_app_detail_unused_apps_switch_purpose">If enabled, will remove permissions, delete temporary files, stop notifications, and archive the app if it is unused for an extended period of time.</string>
     <string name="installed_app_detail_manage_app_unused_parameter_purpose" translatable="false">Specifies the exact package name of the installed application.</string>
     <string name="installed_app_detail_manage_app_unused_toggle_purpose" translatable="false">Controls whether the system can automatically revoke permissions, stop notifications, and free up space if this specific application remains unused for an extended period.</string>
     <string name="installed_app_detail_manage_app_unused_precondition_disabled_globally">The \'Manage app if unused\' feature is currently disabled at the device level.</string>
@@ -322,7 +323,7 @@
     <string name="location_settings_purpose" translatable="false">Allows users to manage system-wide location settings, including toggling location access on or off and accessing sub-settings for app permissions and location services.</string>
     <string name="accessibility_magnification_always_on_enabled_purpose" translatable="false">Whether magnification remains active when the user switches between applications</string>
     <string name="accessibility_magnification_capability_purpose" translatable="false">The preferred magnification area type, such as full screen or partial screen</string>
-    <string name="accessibility_magnification_cursor_following_mode_purpose" translatable="false">accessibility_magnification_cursor_following_mode</string>
+    <string name="accessibility_magnification_cursor_following_mode_purpose" translatable="false">The preferred magnification mode for following the cursor</string>
     <string name="accessibility_magnification_follow_keyboard_enabled_purpose" translatable="false">accessibility_magnification_follow_keyboard_enabled</string>
     <string name="accessibility_magnification_follow_typing_enabled_purpose" translatable="false">Whether the magnifier automatically follows the text cursor while typing</string>
     <string name="accessibility_magnification_joystick_enabled_purpose" translatable="false">accessibility_magnification_joystick_enabled</string>
@@ -702,7 +703,7 @@
     <!-- Device unlock settings screens start -->
     <string name="device_unlock_pref_screen_purpose" translatable="false">Allows users to manage their screen lock settings. This includes setting or modifying their device credential, like a PIN or password, as well as managing their biometrics and other authenticators, like watches, and related preferences for each of these modalities.</string>
     <!-- Device unlock settings screens end -->
-    <string name="available_virtual_keyboard_screen_purpose" translatable="false">Allows users to enable and disable input method editors and to invoke settings activities specific to each input method editor.</string>
+    <string name="available_keyboard_apps_screen_purpose" translatable="false">Allows users to enable and disable input method editors and to invoke settings activities specific to each input method editor.</string>
     <string name="wifi_notify_open_networks_purpose" translatable="false">Whether or not to show a notification when a high-quality public Wi-Fi network is available.</string>
     <string name="wifi_allow_wep_networks_purpose" translatable="false">Allows the device to connect to legacy Wi-Fi networks using the insecure WEP security protocol.</string>
     <string name="wifi_scanning_screen_purpose" translatable="false">Allow apps to scan for Wi-Fi networks at any time, even when Wi-Fi is off, to improve location-based features.</string>

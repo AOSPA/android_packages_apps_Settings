@@ -33,6 +33,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -97,6 +98,8 @@ open class FlashNotificationsScreen :
     override val availabilityDescription =
         "The device must support the flash notifications feature."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context): Boolean =
         FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_FLASH_NOTIFICATIONS)
 
@@ -133,6 +136,8 @@ open class FlashNotificationsScreen :
         override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+    override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

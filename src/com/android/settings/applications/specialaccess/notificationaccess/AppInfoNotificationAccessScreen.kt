@@ -43,6 +43,7 @@ import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -138,6 +139,8 @@ private constructor(
 
     override val availabilityDescription = "The app must be enabled."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =
@@ -160,6 +163,32 @@ private constructor(
             +NotificationAccessAlertingPreference(storage)
             +NotificationAccessSilentPreference(storage)
         }
+
+    class AppInfoNotificationAccessScreenPreference(
+        private val screenMetadata : AppInfoNotificationAccessScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceTitleProvider, PreferenceAvailabilityProvider {
+        override val key : String
+            get() = "device_state_app_info_notification_access_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override val indexable = false
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
+
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+
+        override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
+    }
 
     companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "device_state_app_info_notification_access"

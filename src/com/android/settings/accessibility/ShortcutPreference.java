@@ -17,6 +17,7 @@
 package com.android.settings.accessibility;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -30,6 +31,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.PreferenceViewHolder;
 
 import com.android.settings.R;
+import com.android.settings.accessibility.shared.utils.SetupWizardUtilKt;
+import com.android.settings.widget.FocusIndicatorDrawable;
 import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.widget.TwoTargetPreference;
 
@@ -38,6 +41,13 @@ import com.android.settingslib.widget.TwoTargetPreference;
  * prefer to use.
  */
 public class ShortcutPreference extends TwoTargetPreference {
+
+    private static final int HOLDER_FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP = -18;
+    private static final int HOLDER_FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP = -4;
+    private static final int HOLDER_FOCUS_INDICATOR_CORNER_RADIUS_DP = 16;
+    private static final int TOGGLE_FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP = -4;
+    private static final int TOGGLE_FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP = 5;
+    private static final int TOGGLE_FOCUS_INDICATOR_CORNER_RADIUS_DP = 999; // Fully rounded.
 
     /**
      * Interface definition for a callback to be invoked when the toggle or settings has been
@@ -92,6 +102,17 @@ public class ShortcutPreference extends TwoTargetPreference {
     public void onBindViewHolder(PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
 
+        if (SetupWizardUtilKt.shouldShowFocusRingsInSuw(getContext())) {
+            holder.itemView.setForeground(
+                    new FocusIndicatorDrawable.Builder(getContext())
+                            .withHorizontalPaddingAdjustment(
+                                    HOLDER_FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP)
+                            .withVerticalPaddingAdjustment(
+                                    HOLDER_FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP)
+                            .withCornerRadius(HOLDER_FOCUS_INDICATOR_CORNER_RADIUS_DP)
+                            .build());
+        }
+
         final View widgetFrame = holder.findViewById(android.R.id.widget_frame);
         if (widgetFrame instanceof LinearLayout linearLayout) {
             linearLayout.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
@@ -109,6 +130,26 @@ public class ShortcutPreference extends TwoTargetPreference {
             switchWidget.setOnClickListener(view -> callOnToggleClicked());
             switchWidget.setClickable(mSettingsEditable);
             switchWidget.setFocusable(mSettingsEditable);
+
+            if (SetupWizardUtilKt.shouldShowFocusRingsInSuw(getContext())) {
+                // This change adds the focus ring indicator to the toggle within the shortcut
+                // toggle button row.
+                Drawable focusDrawable =
+                        new FocusIndicatorDrawable.Builder(getContext())
+                                .withHorizontalPaddingAdjustment(
+                                        TOGGLE_FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP)
+                                .withVerticalPaddingAdjustment(
+                                        TOGGLE_FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP)
+                                .withCornerRadius(TOGGLE_FOCUS_INDICATOR_CORNER_RADIUS_DP)
+                                .withColorRes(
+                                        mChecked
+                                                ? com.android.internal.R.color
+                                                        .materialColorOnPrimary
+                                                : com.android.internal.R.color.materialColorPrimary)
+                                .build();
+                switchWidget.setForeground(focusDrawable);
+            }
+
         }
 
         final View divider = holder.itemView.findViewById(

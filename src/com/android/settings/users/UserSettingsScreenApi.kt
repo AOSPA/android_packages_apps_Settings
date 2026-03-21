@@ -41,6 +41,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseR
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(UserSettingsScreenApi.KEY)
@@ -85,7 +86,7 @@ class UserSettingsScreenApi :
                 ) {
                     HardwareUnsupported(R.string.user_settings_main_switch_config_unsupported)
                 } else if (userManager.isGuestUser) {
-                    Custom(R.string.user_settings_main_switch_guest_user_unavailable)
+                    Custom(R.string.user_settings_main_switch_guest_user_unavailable, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
                 } else {
                     Allowed
                 }
@@ -118,10 +119,10 @@ class UserSettingsScreenApi :
                         }
                     }
                     if (!userCaps.mIsMain) {
-                        Custom(R.string.user_settings_main_switch_non_main_user_restricted)
+                        Custom(R.string.user_settings_main_switch_non_main_user_restricted, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
                     } else if (userCaps.mDisallowSwitchUser) {
                         // This one should not ever happen once the flag is released
-                        Custom(R.string.user_settings_main_switch_config_unsupported)
+                        Custom(R.string.user_settings_main_switch_config_unsupported, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
                     } else {
                         Allowed
                     }
@@ -151,7 +152,7 @@ class UserSettingsScreenApi :
                 preconditions(R.string.user_settings_edit_name_precondition) {
                     val userManager = context.getSystemService(UserManager::class.java)
                     if (userManager.isGuestUser || userManager.isProfile) {
-                        Custom(R.string.user_settings_edit_name_restricted)
+                        Custom(R.string.user_settings_edit_name_restricted, stability = PreconditionStability.UNSTABLE)
                     } else {
                         Allowed
                     }
@@ -177,7 +178,7 @@ class UserSettingsScreenApi :
                 ) {
                     HardwareUnsupported(R.string.user_settings_remove_guest_on_exit_unavailable)
                 } else if (!userManager.isAdminUser) {
-                    Custom(R.string.user_settings_unavailable_user_not_admin)
+                    Custom(R.string.user_settings_unavailable_user_not_admin, stability = PreconditionStability.UNSTABLE)
                 } else {
                     Allowed
                 }
@@ -217,7 +218,7 @@ class UserSettingsScreenApi :
                 if (!context.packageManager.hasSystemFeature(PackageManager.FEATURE_TELEPHONY)) {
                     HardwareUnsupported(R.string.user_settings_guest_telephony_config_unsupported)
                 } else if (!userManager.isAdminUser) {
-                    Custom(R.string.user_settings_unavailable_user_not_admin)
+                    Custom(R.string.user_settings_unavailable_user_not_admin, stability = PreconditionStability.UNSTABLE)
                 } else {
                     Allowed
                 }
@@ -264,7 +265,7 @@ class UserSettingsScreenApi :
                         R.string.user_settings_add_users_from_lockscreen_config_unsupported
                     )
                 } else if (!userManager.isAdminUser) {
-                    Custom(R.string.user_settings_unavailable_user_not_admin)
+                    Custom(R.string.user_settings_unavailable_user_not_admin, stability = PreconditionStability.UNSTABLE)
                 } else {
                     Allowed
                 }

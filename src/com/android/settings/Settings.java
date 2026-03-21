@@ -127,7 +127,7 @@ public class Settings extends SettingsActivity {
         }
     }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
+    public static class AvailableKeyboardAppsActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
     public static class PhysicalKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class PhysicalKeyboardLayoutPickerActivity extends SettingsActivity {

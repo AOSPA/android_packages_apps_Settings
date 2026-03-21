@@ -5045,20 +5045,24 @@
     <string name="ime_switcher_button_in_navbar_title">Show the keyboard switch key</string>
     <!-- Summary for the button to toggle the 'IME Switcher Button' preference visibility.[CHAR LIMIT=NONE] -->
     <string name="ime_switcher_button_in_navbar_summary">Allow the keyboard switcher button to be shown in the navigation bar, when an input field is selected</string>
-    <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
-    <string name="virtual_keyboard_category">On-screen keyboard</string>
-    <!-- Keywords for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
-    <string name="keywords_virtual_keyboard">Gboard</string>
-    <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
-    <string name="available_virtual_keyboard_category">Available On-screen keyboard</string>
+    <!-- Title for the 'keyboard apps' preference sub-screen. [CHAR LIMIT=35] -->
+    <string name="keyboard_apps_category">Keyboard apps</string>
+    <!-- Summary for the 'keyboard apps' preference sub-screen. [CHAR LIMIT=NONE] -->
+    <string name="keyboard_apps_category_summary">Language and app settings for <xliff:g id="keyboard_apps_list">%1$s</xliff:g></string>
+    <!-- Keywords for the 'keyboard apps' preference sub-screen. [CHAR LIMIT=35] -->
+    <string name="keywords_keyboard_apps">Gboard</string>
+    <!-- Title for the 'available keyboard apps' preference sub-screen. [CHAR LIMIT=35] -->
+    <string name="available_keyboard_apps_category">Available keyboard apps</string>
     <!-- Title for the 'keyboard options' preference category. [CHAR LIMIT=35] -->
     <string name="keyboard_options_category">Options</string>
     <!-- Title for the 'keyboard accessibility options' preference category. [CHAR LIMIT=35] -->
     <string name="keyboard_a11y_category">Accessibility</string>
-    <!-- Title for the 'physical keyboard' settings screen. [CHAR LIMIT=35] -->
-    <string name="physical_keyboard_title">Physical keyboard</string>
-    <!-- Title for the 'physical keyboard' settings screen. [CHAR LIMIT=35] -->
-    <string name="physical_keyboard_layout_picker_title">Physical keyboard layout picker</string>
+    <!-- Title for the 'physical keyboards' settings screen. [CHAR LIMIT=35] -->
+    <string name="physical_keyboard_title">Physical keyboards</string>
+    <!-- Summary for the 'physical keyboards' settings screen. [CHAR LIMIT=NONE] -->
+    <string name="physical_keyboard_summary">Hardware settings for <xliff:g id="physical_keyboards_list">%1$s</xliff:g></string>
+    <!-- Title for the 'physical keyboard layout picker' settings screen. [CHAR LIMIT=35] -->
+    <string name="physical_keyboard_layout_picker_title">Layout picker</string>
     <!-- Title for the 'Bounce keys' preference switch. [CHAR LIMIT=35] -->
     <string name="bounce_keys">Bounce keys</string>
     <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=300] -->
@@ -5466,8 +5470,8 @@
     <skip />
     <!-- Title for the keyboard layout picker activity. [CHAR LIMIT=35] -->
     <string name="keyboard_layout_picker_title">Keyboard layouts</string>
-    <!-- Category title for the keyboard layout picker activity. [CHAR LIMIT=35] -->
-    <string name="keyboard_layout_picker_category_title">Physical keyboard layouts</string>
+    <!-- Category title for the list of physical keyboard layouts in the keyboard layout picker activity. [CHAR LIMIT=35] -->
+    <string name="keyboard_layout_picker_category_title">Layouts</string>
 
     <!-- User dictionary settings -->
     <skip />
@@ -5518,11 +5522,11 @@
     <string name="testing_sim_toolkit">SIM toolkit</string>
 
     <!-- Summary for default keyboard settings -->
-    <string name="keyboard_settings_summary">On-screen keyboard, tools</string>
+    <string name="keyboard_settings_summary">Keyboard apps, tools</string>
     <!-- Summary for keyboard settings attaching physical_keyboard  -->
-    <string name="keyboard_settings_with_physical_keyboard_summary">On-screen keyboard, physical keyboard, tools</string>
-    <!-- Title for built-in keyboard settings -->
-    <string name="builtin_keyboard_settings_title">Physical keyboard</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary">Keyboard apps, physical keyboards, tools</string>
+    <!-- Title for the list of physical keyboards in 'Physical keyboards' settings -->
+    <string name="physical_keyboards_list_title">Physical keyboards</string>
 
     <!-- Title for enabled locales keyboard layout page -->
     <string name="enabled_locales_keyboard_layout">Layout</string>
@@ -8959,7 +8963,7 @@
     <string name="keywords_change_nfc_tag_apps_state">nfc, tag, reader</string>
 
     <!-- List of synonyms for keyboard vibration settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_keyboard_vibration">keyboard, haptics, vibrate,</string>
+    <string name="keywords_keyboard_vibration">keyboard, haptics, vibrate, typing</string>
 
     <!-- Search keyword for external display settings [CHAR LIMIT=NONE] -->
     <string name="keywords_external_display_settings">external display, connected display, extended display, second display, built-in display, arrange displays, mirror, display size, rotation, resolution, refresh rate</string>

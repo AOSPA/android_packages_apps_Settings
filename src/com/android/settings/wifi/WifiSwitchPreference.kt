@@ -61,6 +61,8 @@ import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+
 
 // LINT.IfChange
 class WifiSwitchPreference(private val scope: CoroutineScope) :
@@ -83,7 +85,9 @@ class WifiSwitchPreference(private val scope: CoroutineScope) :
 
     override fun tags(context: Context) = arrayOf(KEY_WIFI, MUSTPASS_SET)
 
-    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator. Preference cannot be changed while satellite messaging is active. Preference cannot be turned on while in airplane mode."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 

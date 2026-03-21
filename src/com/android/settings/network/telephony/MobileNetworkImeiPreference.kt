@@ -27,6 +27,7 @@ import com.android.settings.network.SubscriptionUtil
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -63,6 +64,8 @@ class MobileNetworkImeiPreference(private val data: MobileNetworkData) :
 
     override val availabilityDescription =
         "The user must be an admin user, and the device must have mobile data or voice capability, and the subscription ID must be valid."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = data.imeiInfoDataFlow.value.isAvailable
 

@@ -22,6 +22,7 @@ import com.android.settings.deviceinfo.HardwareInfoPreferenceController
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
@@ -54,6 +55,8 @@ class DeviceModelPreference :
 
     override val availabilityDescription =
         "The device must support showing the device model."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_device_model)

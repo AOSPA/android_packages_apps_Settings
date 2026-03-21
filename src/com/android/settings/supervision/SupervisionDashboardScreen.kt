@@ -42,6 +42,7 @@ import com.android.settings.supervision.shared.widget.NonIndexablePreferenceCate
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -175,6 +176,8 @@ open class SupervisionDashboardScreen :
         get() = R.drawable.ic_account_child_invert
 
     override val availabilityDescription = "The device must not be in demo mode, or the device must support supervision during demo mode."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = !Utils.shouldHideSupervisionInDemoMode(context)
 

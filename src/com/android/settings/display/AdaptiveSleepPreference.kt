@@ -38,6 +38,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.MUSTPASS
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -80,6 +81,8 @@ class AdaptiveSleepPreference :
 
     override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator, and your device must support adaptive sleep."
 
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context) =
         super<PreferenceRestrictionMixin>.isEnabled(context) && context.canBeEnabled()
 
@@ -88,6 +91,8 @@ class AdaptiveSleepPreference :
 
     override val availabilityDescription =
         "The device must support adaptive sleep."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = context.isAdaptiveSleepSupported()
 

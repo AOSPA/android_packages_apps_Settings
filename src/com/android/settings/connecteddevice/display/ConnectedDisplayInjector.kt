@@ -379,6 +379,13 @@ open class ConnectedDisplayInjector(open val context: Context) {
         return Size(displayInfo.logicalWidth, displayInfo.logicalHeight)
     }
 
+    open fun getPhysicalDpi(displayId: Int): Pair<Float, Float> {
+        val display = displayManager?.getDisplay(displayId) ?: return Pair(0f, 0f)
+        val displayInfo = DisplayInfo()
+        display.getDisplayInfo(displayInfo)
+        return Pair(displayInfo.physicalXDpi, displayInfo.physicalYDpi)
+    }
+
     open fun registerTopologyListener(listener: Consumer<DisplayTopology>) {
         val executor = context.mainExecutor
         if (executor != null) displayManager?.registerTopologyListener(executor, listener)

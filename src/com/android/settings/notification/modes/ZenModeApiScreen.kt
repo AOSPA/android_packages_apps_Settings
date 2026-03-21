@@ -34,6 +34,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithString
 import com.android.settingslib.notification.modes.ZenModesBackend
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ZenModeApiScreen.KEY, parameterized = true)
@@ -78,7 +79,9 @@ class ZenModeApiScreen :
                 if (getModes().any { it.name == modeName && it.id == MANUAL_RULE_ID }) {
                     Allowed
                 } else {
-                    Custom(R.string.mode_manual_duration_not_dnd_mode)
+                    Custom(
+                        R.string.mode_manual_duration_not_dnd_mode,
+                        stability = PreconditionStability.UNSTABLE)
                 }
             }
             get {

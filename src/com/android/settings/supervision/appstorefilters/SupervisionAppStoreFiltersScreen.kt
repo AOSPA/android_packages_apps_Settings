@@ -30,6 +30,7 @@ import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -47,6 +48,8 @@ open class SupervisionAppStoreFiltersScreen :
     PreferenceScreenMixin, PreferenceAvailabilityProvider, PreferenceLifecycleProvider {
 
     override val availabilityDescription = "The device must support the app store filters screen."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = Flags.enableAppStoreFiltersScreen()
 

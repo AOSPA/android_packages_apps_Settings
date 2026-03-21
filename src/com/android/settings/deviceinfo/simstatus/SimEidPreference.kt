@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -63,6 +64,8 @@ class SimEidPreference(private val context: Context) :
         "The user must be an admin user and the device must be mobile data capable or voice capable. " +
             "The device must also have an EID."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context): Boolean =
         context.applicationContext.getSystemService(UserManager::class.java)?.isAdminUser == true &&
             (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)) &&
@@ -77,7 +80,7 @@ class SimEidPreference(private val context: Context) :
     override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? =
-        eidMetadata?.let { PhoneNumberUtil.expandByTts(it.eid) }
+        eidMetadata?.let { PhoneNumberUtil.expandByTts(it.eid).toString() }
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
@@ -124,10 +127,8 @@ class SimEidPreference(private val context: Context) :
         return null
     }
 
-
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
-
 
     private fun getEidMetadataWithAssociatedSlotId(): EidMetadata? {
         val subscriptionManager =

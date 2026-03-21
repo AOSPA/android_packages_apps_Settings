@@ -159,7 +159,9 @@ class CursorFollowingModeChooser : InstrumentedDialogFragment() {
     }
 }
 
+// LINT.IfChange
 class CursorFollowingModeInfo(
     title: CharSequence,
     @AccessibilityMagnificationCursorFollowingMode val mode: Int,
 ) : ItemInfoArrayAdapter.ItemInfo(title, /* summary= */ null, /* drawableId= */ null)
+// LINT.ThenChange(/res/values/arrays.xml)

@@ -26,7 +26,8 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(UserAspectRatioAppApiScreen.KEY, parameterized = true)
@@ -59,11 +60,17 @@ class UserAspectRatioAppApiScreen :
             val app = context.getApplicationInfo(packageName)
             val manager = UserAspectRatioManager(context)
             if (!UserAspectRatioManager.isFeatureEnabled(context)) {
-                Disallowed(R.string.user_aspect_ratio_screen_unavailable)
+                Custom(
+                    R.string.user_aspect_ratio_screen_unavailable,
+                    stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
+                )
             } else if (app != null && manager.canDisplayAspectRatioUi(app)) {
                 Allowed
             } else {
-                Disallowed(R.string.user_aspect_ratio_app_not_launchable)
+                Custom(
+                    R.string.user_aspect_ratio_app_not_launchable,
+                    stability = PreconditionStability.UNSTABLE,
+                )
             }
         }
     }

@@ -46,6 +46,7 @@ import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN
 import com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -88,6 +89,8 @@ class BrightnessLevelPreference :
         NumberFormat.getPercentInstance().format(context.brightnessPercent)
 
     override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
@@ -208,6 +211,8 @@ class BrightnessLevelPreference :
 
     override val availabilityDescription =
         "The default display must be internal."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = context.isBrightnessLevelSettingsAvailable
 

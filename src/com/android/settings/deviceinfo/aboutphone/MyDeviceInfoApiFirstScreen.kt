@@ -38,6 +38,7 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.utils.StringUtil
 
@@ -81,7 +82,7 @@ class MyDeviceInfoApiFirstScreen :
                 ) { value ->
                     val validator = WifiDeviceNameTextValidator()
                     if (!validator.isTextValid(value)) {
-                        Custom("New device name is invalid. ${validator.getErrorMessage(value)}")
+                        Custom("New device name is invalid. ${validator.getErrorMessage(value)}", stability = PreconditionStability.UNSTABLE)
                     } else {
                         Allowed
                     }
