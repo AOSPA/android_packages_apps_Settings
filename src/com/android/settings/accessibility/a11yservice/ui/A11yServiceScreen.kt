@@ -31,6 +31,7 @@ import com.android.settings.Utils
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.a11yservice.A11yServicePreferenceFragment
+import com.android.settings.accessibility.a11yservice.data.AccessibilityService
 import com.android.settings.accessibility.a11yservice.data.UseServiceDataStore
 import com.android.settings.accessibility.a11yservice.ui.A11yServiceFooterPreference.Companion.FOOTER_KEY
 import com.android.settings.accessibility.a11yservice.ui.A11yServiceFooterPreference.Companion.HTML_FOOTER_KEY
@@ -48,7 +49,6 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
-import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -59,7 +59,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TwoTargetPreference.ICON_SIZE_MEDIUM
 import kotlinx.coroutines.CoroutineScope
@@ -68,9 +68,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
-import com.android.settings.accessibility.a11yservice.data.AccessibilityService
-import com.android.settingslib.metadata.SensitivityLevel
 
 @ProvidePreferenceScreen(A11yServiceScreen.KEY, parameterized = true)
 open class A11yServiceScreen
@@ -282,11 +279,15 @@ private constructor(
         @OptIn(ExperimentalCoroutinesApi::class)
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> {
-
             return flow {
                 AccessibilityRepositoryProvider.get(context)
                     .accessibilityServiceInfos
                     .first()
+                    .filter { a11yServiceInfo ->
+                        a11yServiceInfo.resolveInfo?.serviceInfo?.applicationInfo?.run {
+                            isSystemApp || isUpdatedSystemApp
+                        } ?: false
+                    }
                     .forEach { a11yServiceInfo ->
                         emit(
                             Bundle(1).apply {
