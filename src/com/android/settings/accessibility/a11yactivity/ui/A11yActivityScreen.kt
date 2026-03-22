@@ -29,9 +29,9 @@ import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
-import com.android.settings.accessibility.a11yactivity.AccessibilityShortcut
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceFragment
+import com.android.settings.accessibility.a11yactivity.AccessibilityShortcut
 import com.android.settings.accessibility.a11yactivity.ui.A11yActivityFooterPreference.Companion.FOOTER_KEY
 import com.android.settings.accessibility.a11yactivity.ui.A11yActivityFooterPreference.Companion.HTML_FOOTER_KEY
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
@@ -51,6 +51,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TwoTargetPreference
 import kotlinx.coroutines.CoroutineScope
@@ -59,7 +60,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(A11yActivityScreen.KEY, parameterized = true)
 open class A11yActivityScreen

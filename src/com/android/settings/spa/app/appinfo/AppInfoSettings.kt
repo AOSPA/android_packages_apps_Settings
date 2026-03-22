@@ -32,10 +32,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
-import com.android.settings.utils.HsuUtils
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.flags.Flags
+import com.android.settings.personalcontext.PersonalContextAppPreference
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppPreference
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
@@ -46,6 +46,7 @@ import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListPro
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.UsageDataAppListProvider
 import com.android.settings.spa.app.specialaccess.WriteSystemPreferencesAppListProvider
+import com.android.settings.utils.HsuUtils
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
@@ -179,6 +180,10 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
             }
         }
 
+        Category(title = stringResource(R.string.ai_assist_category)) {
+            PersonalContextAppPreference(app)
+        }
+
         Category(title = stringResource(R.string.advanced_apps)) {
             if (android.companion.virtualdevice.flags.Flags.computerControlAccess()) {
                 ComputerControlAutomationAppListProvider.InfoPageEntryItem(app)
@@ -200,8 +205,11 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
         }
 
         // For non-admin users viewing an HSU app, show a message that they cannot manage the app.
-        if (android.multiuser.Flags.hsuAppManagement() &&
-            HsuUtils.isHsuApp(context, app) && !HsuUtils.isAdmin(context)) {
+        if (
+            android.multiuser.Flags.hsuAppManagement() &&
+                HsuUtils.isHsuApp(context, app) &&
+                !HsuUtils.isAdmin(context)
+        ) {
             Category(title = stringResource(R.string.hsu_app_admin_only_explanation)) {}
         }
 
