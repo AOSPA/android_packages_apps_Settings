@@ -58,6 +58,7 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationD
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationType
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.Sensitivity
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CoroutineScope
@@ -104,14 +105,21 @@ class CatalystStateMetadataProviderExecutor(
             SETTING_MAX_EXECUTION_TIME_MS,
             DEFAULT_MAX_EXECUTION_TIME_MS
         ).milliseconds
+        val logAppFunctionTime = Settings.Global.getInt(
+            context.contentResolver,
+            SETTING_LOG_APPFUNCTION_TIME,
+            0
+        ) == 1
 
         val semaphore = Semaphore(maxParallelism)
         var deferredList = emptyList<Pair<String, Deferred<DeviceStateMetadataProviderExecutorResult?>>>()
+        val timeLogs = ConcurrentHashMap<String, Long>()
 
         withTimeoutOrNull(maxExecutionTimeMs) {
             coroutineScope {
                 deferredList = screenKeyList.map { screenKey ->
                     screenKey to async {
+                        val startTime = android.os.SystemClock.elapsedRealtime()
                         try {
                             withTimeout(perScreenTimeoutMs) {
                                 semaphore.withPermit {
@@ -137,13 +145,29 @@ class CatalystStateMetadataProviderExecutor(
                             }
                         } catch (e: TimeoutCancellationException) {
                             Log.e(TAG, "Timed out building screen: $screenKey", e)
+                            if (logAppFunctionTime) {
+                                timeLogs[screenKey] = -1L
+                            }
                             null
+                        } finally {
+                            if (logAppFunctionTime && !timeLogs.containsKey(screenKey)) {
+                                timeLogs[screenKey] = android.os.SystemClock.elapsedRealtime() - startTime
+                            }
                         }
                     }
                 }
                 deferredList.map { it.second }.awaitAll()
             }
         } ?: Log.w(TAG, "Max execution time of $maxExecutionTimeMs exceeded.")
+
+        if (logAppFunctionTime) {
+            timeLogs.entries
+                .sortedByDescending { if (it.value == -1L) Long.MAX_VALUE else it.value }
+                .forEach { entry ->
+                    val timeStr = if (entry.value == -1L) "timed out" else "${entry.value}ms"
+                    Log.d(TAG, "Screen ${entry.key} took $timeStr")
+                }
+        }
 
         val completedKeys = mutableSetOf<String>()
         val results = mutableListOf<DeviceStateMetadataProviderExecutorResult>()
@@ -392,6 +416,7 @@ class CatalystStateMetadataProviderExecutor(
         private const val SETTING_MAX_PARALLELISM = "com.android.settings.APP_FUNCTION_MAX_PARALLELISM"
         private const val SETTING_PER_SCREEN_TIMEOUT_MS = "com.android.settings.APP_FUNCTION_PER_SCREEN_TIMEOUT_MS"
         private const val SETTING_MAX_EXECUTION_TIME_MS = "com.android.settings.APP_FUNCTION_MAX_EXECUTION_TIME_MS"
+        private const val SETTING_LOG_APPFUNCTION_TIME = "com.android.settings.APP_FUNCTION_LOG_TIME"
 
         /** Returns an LLM readable string describing the value type. */
         internal fun PreferenceValueDescriptorProto.toDeviceStateString(): String {
