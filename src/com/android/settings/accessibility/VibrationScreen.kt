@@ -122,6 +122,12 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
                     R.string.toggle_keyboard_vibration_enabled_purpose,
                     MAIN_SWITCH_KEY,
                 )
+                +KeyboardVibrationIntensitySwitchPreference(
+                    context,
+                    "toggle_keyboard_vibration_intensity",
+                    R.string.toggle_keyboard_vibration_intensity_purpose,
+                    MAIN_SWITCH_KEY,
+                )
             }
         }
 
