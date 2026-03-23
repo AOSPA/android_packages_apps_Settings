@@ -18,11 +18,14 @@ package com.android.settings.personalcontext;
 
 import android.content.Context;
 import android.service.personalcontext.PersonalContextManager;
+import android.util.Log;
 
 /**
  * Controller for displaying and handling changes to the per-app PersonalContext settings.
  */
 public class PersonalContextAppPreferenceController {
+    private static final String TAG = "PersonalContextPrefController";
+
     private final Context mContext;
     private final String mPackageName;
 
@@ -35,8 +38,14 @@ public class PersonalContextAppPreferenceController {
      * Sets whether the package associated with this controller has personal context enabled.
      */
     public void setPersonalContextEnabled(boolean value) {
+        if (!isPersonalContextAvailable()) {
+            Log.e(TAG, "PersonalContextManagerService not available on device.");
+            return;
+        }
+
         final PersonalContextManager personalContextManager =
                 mContext.getSystemService(PersonalContextManager.class);
+
         personalContextManager.setPersonalContextModeEnabled(mPackageName, value);
     }
 
@@ -44,8 +53,13 @@ public class PersonalContextAppPreferenceController {
      * Returns whether personal context is enabled for the package associated with this controller.
      */
     public boolean isPersonalContextForAppEnabled() {
+        if (!isPersonalContextAvailable()) {
+            return false;
+        }
+
         final PersonalContextManager personalContextManager =
                 mContext.getSystemService(PersonalContextManager.class);
+
         return personalContextManager.isPersonalContextModeEnabled(mPackageName);
     }
 
@@ -53,8 +67,13 @@ public class PersonalContextAppPreferenceController {
      * Returns whether personal context service has been enabled on this device.
      */
     public boolean isPersonalContextServiceEnabled() {
+        if (!isPersonalContextAvailable()) {
+            return false;
+        }
+
         final PersonalContextManager personalContextManager =
                 mContext.getSystemService(PersonalContextManager.class);
+
         return personalContextManager.isEnabled();
     }
 
@@ -64,6 +83,6 @@ public class PersonalContextAppPreferenceController {
     public boolean isPersonalContextAvailable() {
         return mContext.getResources().getBoolean(
                 com.android.internal.R.bool.config_enablePersonalContextManagerService
-        );
+        ) && mContext.getSystemService(PersonalContextManager.class) != null;
     }
 }
