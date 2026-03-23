@@ -15,6 +15,7 @@
  */
 package com.android.settings.applications
 
+import android.Manifest
 import android.Manifest.permission.ACCESS_NOTIFICATION_POLICY
 import android.content.Context
 import android.content.pm.ApplicationInfo
@@ -69,6 +70,28 @@ class InstalledPackageNameTest {
     @After
     fun cleanUp() {
         ShadowUserManager.reset()
+    }
+
+    @Test
+    fun whenNoParametersAreGiven_returnsKeyWithNoPermissionsAndNonSystemApps() {
+        assertThat(InstalledPackageName.getKey()).isEqualTo("InstalledPackageName:no-permissions:non-system")
+    }
+
+    @Test
+    fun whenExcluseSystemIsFalse_returnsKeyWithNoPermissionsAndAllApps() {
+        assertThat(InstalledPackageName(excludeSystemApps = false).getKey()).isEqualTo("InstalledPackageName:no-permissions:all")
+    }
+
+    @Test
+    fun whenExcluseSystemIsTrueAndPermissionsAreGiven_returnsKeyWithCorrectPermissionsAndAllApps() {
+        assertThat(
+            InstalledPackageName(
+                heldPermissions = arrayOf(
+                    Manifest.permission.READ_SYSTEM_PREFERENCES,
+                    Manifest.permission.WRITE_SETTINGS
+                ), excludeSystemApps = true
+            ).getKey()
+        ).isEqualTo("InstalledPackageName:android.permission.READ_SYSTEM_PREFERENCES,android.permission.WRITE_SETTINGS:non-system")
     }
 
     @Test

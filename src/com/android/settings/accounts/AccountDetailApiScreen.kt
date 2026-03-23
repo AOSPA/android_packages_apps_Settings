@@ -56,7 +56,7 @@ class AccountDetailApiScreen :
                 name = ACCOUNT_NAME,
                 purpose = R.string.account_detail_screen_parameter_purpose,
                 required = true,
-                type = Accounts(),
+                type = Accounts,
             )
 
             prepareScreenExtras { keyParameters, extras ->

@@ -31,7 +31,7 @@ import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
  * @param allowInternal Whether to include the internal display.
  * @param allowExternal Whether to include connected external displays.
  */
-class DisplayId(
+open class DisplayId(
     private val allowInternal: Boolean = true,
     private val allowExternal: Boolean = true,
 ) : DirectFiniteOptionsType<String> {
@@ -68,4 +68,6 @@ class DisplayId(
     override fun getKey(): String = "DisplayId_${allowInternal}_$allowExternal"
 
     override val externalType: EType<String> = EType.String
+
+    companion object : DisplayId()
 }

@@ -53,7 +53,13 @@ open class InstalledPackageName(
     override fun getDescription(context: Context): String =
         context.getString(R.string.installed_package_name_type_description)
 
-    override fun getKey(): String = "InstalledPackageName:${if (excludeSystemApps) "non-system" else "all"}"
+    override fun getKey(): String {
+        val appsFilter = if (excludeSystemApps) "non-system" else "all"
+        val permissionsRequired =
+            heldPermissions?.takeIf { it.isNotEmpty() }?.sorted()?.joinToString(",")
+                ?: "no-permissions"
+        return "InstalledPackageName:$permissionsRequired:$appsFilter"
+    }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<String>, SafetyAnnotated<String>>> {

@@ -47,7 +47,7 @@ class UserAspectRatioAppApiScreen :
                 name = ARG_PACKAGE_NAME,
                 purpose = R.string.user_aspect_ratio_app_parameter_purpose,
                 required = true,
-                type = InstalledPackageName(),
+                type = InstalledPackageName
             )
 
             prepareScreenExtras { parameters, extras ->
