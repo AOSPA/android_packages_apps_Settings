@@ -63,7 +63,7 @@ open class PowerBackgroundUsageDetailScreen :
                 name = EXTRA_PACKAGE_NAME,
                 purpose = R.string.power_background_usage_app_parameter_purpose,
                 required = true,
-                type = InstalledPackageName(),
+                type = InstalledPackageName,
             )
             prepareScreenExtras { parameters, extras ->
                 val packageName = parameters[EXTRA_PACKAGE_NAME] ?: return@prepareScreenExtras

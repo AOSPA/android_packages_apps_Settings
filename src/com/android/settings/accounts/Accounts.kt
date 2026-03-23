@@ -25,7 +25,7 @@ import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.unsafe
 
 /** Provides a list of accounts associated with a associated with the current process user. */
-class Accounts : DirectFiniteOptionsType<String> {
+object Accounts : DirectFiniteOptionsType<String> {
     override val externalType: EType<String> = EType.String
 
     override fun getDescription(context: Context): String =
