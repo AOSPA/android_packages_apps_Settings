@@ -1399,10 +1399,6 @@ public class WifiConfigController2 implements TextWatcher,
         View container = mView.findViewById(containerId);
         if (container != null) {
             container.setEnabled(enabled);
-            // Ensure the entire row is hidden from TalkBack if it's disabled.
-            container.setImportantForAccessibility(enabled
-                    ? View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
-                    : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
         }
     }
 
