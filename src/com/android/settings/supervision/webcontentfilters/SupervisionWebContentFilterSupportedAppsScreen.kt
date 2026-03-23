@@ -31,12 +31,12 @@ import com.android.settingslib.HelpUtils
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.supervision.SupervisionLog.TAG
 import com.android.settingslib.utils.StringUtil
@@ -62,7 +62,9 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
         StringUtil.getIcuPluralsString(
             context,
             supportedApps.size,
-            R.string.supervision_web_content_filters_switch_summary,
+            if (Flags.updateWebContentFiltersSupportedAppsTitle())
+                R.string.supervision_web_content_filters_supported_apps_title
+            else R.string.supervision_web_content_filters_switch_summary,
         )
 
     /** The key used to fetch the list of supported apps from [SupervisionMessengerClient]. */
@@ -73,7 +75,8 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
 
     override fun isEnabled(context: Context): Boolean = isFilterEnabled()
 
-    override val availabilityDescription = "The device must support the new supervision settings UI."
+    override val availabilityDescription =
+        "The device must support the new supervision settings UI."
 
     override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
