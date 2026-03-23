@@ -27,6 +27,7 @@ import androidx.annotation.NonNull;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoController;
+import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoDialog;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
 import com.android.settings.fuelgauge.batteryusage.BatteryEvent;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
@@ -125,6 +126,10 @@ public interface PowerUsageFeatureProvider {
      * @return A string containing the estimate and a label indicating it is a normal estimate
      */
     String getOldEstimateDebugString(String timeRemaining);
+
+    /** Returns the battery advance info dialog */
+    @Nullable
+    BatteryAdvanceInfoDialog getBatteryAdvanceInfoDialog();
 
     /** Returns the battery advance info controller */
     @Nullable
