@@ -361,14 +361,6 @@ public class WifiUtils extends com.android.settingslib.wifi.WifiUtils {
         return userManager != null && userManager.isAdminUser();
     }
 
-    /** @return  true if the current user is at the login screen. */
-    public static boolean isAtLoginScreen(@NonNull Context context) {
-        UserManager userManager = context.getSystemService(UserManager.class);
-        return userManager != null
-                && userManager.isHeadlessSystemUserMode()
-                && userManager.isSystemUser();
-    }
-
     /** @return true if the multi user WiFi is enabled by flags. */
     public static boolean isWifiMultiuserEnabled() {
         return com.android.settings.connectivity.Flags.wifiMultiuser()

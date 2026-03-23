@@ -28,6 +28,7 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 /**
  * The [PreferencesApiScreen] for the Wifi Privacy screen.
@@ -55,7 +56,7 @@ class WifiPrivacyScreenApi :
                 type =
                     GeneratedParameterType(R.string.wifi_privacy_parameter_description) {
                         repository.fetchSavedNetworksInfo().map {
-                            GeneratedValue(it.lookupKey, it.ssid)
+                            GeneratedValue(it.lookupKey.unsafe(), it.ssid.unsafe())
                         }
                     },
             )

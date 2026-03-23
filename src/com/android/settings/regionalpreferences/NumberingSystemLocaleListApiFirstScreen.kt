@@ -37,6 +37,7 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterT
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
+import com.android.settingslib.metadata.preferencesapi.safe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(NumberingSystemLocaleListApiFirstScreen.KEY, parameterized = true)
@@ -58,7 +59,7 @@ class NumberingSystemLocaleListApiFirstScreen :
                 type =
                     GeneratedParameterType(R.string.numbering_system_parameter_description) {
                         getNumberingSystemLocales().map {
-                            GeneratedValue(it.toLanguageTag(), getLocaleNameWithNumberingSystem(it))
+                            GeneratedValue(it.toLanguageTag().safe(), getLocaleNameWithNumberingSystem(it).safe())
                         }
                     },
             )
@@ -96,7 +97,7 @@ class NumberingSystemLocaleListApiFirstScreen :
                     localeList.map { locale ->
                         val code = locale.toLanguageTag()
                         val name = getLocaleNameWithNumberingSystem(locale)
-                        GeneratedValue(code, name)
+                        GeneratedValue(code.safe(), name.safe())
                     }
                 },
         ) {

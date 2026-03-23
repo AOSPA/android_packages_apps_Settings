@@ -420,7 +420,8 @@ constructor(
                 state == SatelliteManager.SATELLITE_MODEM_STATE_DATAGRAM_TRANSFERRING ||
                 state == SatelliteManager.SATELLITE_MODEM_STATE_DATAGRAM_RETRYING ||
                 state == SatelliteManager.SATELLITE_MODEM_STATE_LISTENING ||
-                state == SatelliteManager.SATELLITE_MODEM_STATE_ENABLING_SATELLITE
+                state == SatelliteManager.SATELLITE_MODEM_STATE_ENABLING_SATELLITE ||
+                state == SatelliteManager.SATELLITE_MODEM_STATE_NOT_CONNECTED
         }
     }
 

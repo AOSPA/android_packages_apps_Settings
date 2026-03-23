@@ -29,6 +29,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.media.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
@@ -70,7 +71,9 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
         if (mLocalMediaManager == null) {
             mLocalMediaManager = new LocalMediaManager(mContext, /* packageName= */ null);
             mLocalMediaManager.registerCallback(this);
-            mLocalMediaManager.startScan();
+            if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+                mLocalMediaManager.startScan();
+            }
         }
         mRouterManager = MediaRouter2Manager.getInstance(context);
     }
@@ -85,7 +88,9 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
         mLocalMediaManager = localMediaManager;
         mRouterManager = mediaRouter2Manager;
         mLocalMediaManager.registerCallback(this);
-        mLocalMediaManager.startScan();
+        if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+            mLocalMediaManager.startScan();
+        }
     }
 
     @Override
@@ -112,7 +117,9 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
     @Override
     public void onDestroy() {
         mLocalMediaManager.unregisterCallback(this);
-        mLocalMediaManager.stopScan();
+        if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+            mLocalMediaManager.stopScan();
+        }
     }
 
     private synchronized void refreshPreference() {

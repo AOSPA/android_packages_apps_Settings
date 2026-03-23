@@ -34,6 +34,7 @@ import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import com.android.settingslib.metadata.preferencesapi.safe
 
 @ProvidePreferenceScreen(PowerMenuSettingsScreenApi.KEY)
 class PowerMenuSettingsScreenApi() :
@@ -153,8 +154,8 @@ class PowerMenuSettingsScreenApi() :
 
 private fun Int.createSensitivityGeneratedValue(context: Context): GeneratedValue<Int> {
     return GeneratedValue(
-        this,
-        context.getString(R.string.long_press_power_sensitivity_value_description, this),
+        this.safe(),
+        context.getString(R.string.long_press_power_sensitivity_value_description, this).safe(),
     )
 }
 

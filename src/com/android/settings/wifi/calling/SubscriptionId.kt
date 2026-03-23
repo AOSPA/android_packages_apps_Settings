@@ -21,6 +21,9 @@ import android.telephony.SubscriptionManager
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
 
 /** A subscription ID. */
 // This is only open to allow the companion object to be created. Do not subclass.
@@ -58,12 +61,12 @@ open class SubscriptionId(
 
     override fun getKey(): String = "SubscriptionId:${includeActive}:${includeInactive}"
 
-    override suspend fun getOptions(context: Context): List<Pair<Int, String>> {
+    override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<Int>, SafetyAnnotated<String>>> {
         return try {
             val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
 
             subscriptionManager.activeSubscriptionInfoList
-                ?.map { it.subscriptionId to it.displayName.toString() }
+                ?.map { it.subscriptionId.safe() to it.displayName.toString().unsafe() }
                 ?.toList() ?: emptyList()
         } catch (e: UnsupportedOperationException) {
             // Do not support telephony subscriptions

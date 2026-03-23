@@ -98,6 +98,7 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
             bluetoothA2dp.disableOptionalCodecs(activeDevice);
         }
         mCallback.onBluetoothHDAudioEnabled(enabled);
+        preference.setEnabled(false);
         return true;
     }
 }
