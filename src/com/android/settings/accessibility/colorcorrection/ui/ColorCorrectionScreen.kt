@@ -43,9 +43,10 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import kotlinx.coroutines.CoroutineScope
 
+// LINT.IfChange
 @ProvidePreferenceScreen(ColorCorrectionScreen.KEY)
 class ColorCorrectionScreen :
     PreferenceScreenMixin, PreferenceSummaryProvider, PreferenceLifecycleProvider {
@@ -148,3 +149,4 @@ class ColorCorrectionScreen :
         const val SETTING_KEY = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED
     }
 }
+// LINT.ThenChange(ColorCorrectionApiFirstScreen.kt)

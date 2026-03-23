@@ -18,6 +18,7 @@ package com.android.settings.accessibility
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.VibrationAttributes
+import android.os.vibrator.Flags
 import android.provider.Settings.System.KEYBOARD_VIBRATION_ENABLED
 import android.provider.Settings.System.VIBRATE_ON
 import androidx.preference.Preference
@@ -71,10 +72,15 @@ class KeyboardVibrationSwitchPreference(
 
     override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
-    override fun isAvailable(context: Context) =
-        context.resources.getBoolean(
+    override fun isAvailable(context: Context): Boolean {
+        val isVibrationSupported = context.resources.getBoolean(
             com.android.internal.R.bool.config_keyboardVibrationSettingsSupported
         )
+        val isIntensitySupported = context.resources.getBoolean(
+            com.android.internal.R.bool.config_keyboardVibrationSettingsIntensitySupported
+        ) && Flags.keyboardIntensitySliderEnabled()
+        return isVibrationSupported && !isIntensitySupported
+    }
 
     override fun isEnabled(context: Context) = storage.isPreferenceEnabled()
 
