@@ -99,6 +99,7 @@ open class VibrationIntensityScreen : PreferenceScreenMixin, PreferenceAvailabil
                     KEYBOARD_VIBRATION_ENABLED,
                     R.string.keyboard_vibration_enabled_purpose,
                 )
+                +KeyboardVibrationIntensitySliderPreference(context)
             }
         }
 
