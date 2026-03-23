@@ -19,6 +19,9 @@ import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Context
 import android.content.Intent
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.TtsSpan
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
@@ -65,9 +68,9 @@ class SupervisionDashboardFragment : CatalystFragment() {
             preferenceDataMap =
                 withContext(ioDispatcher) { supervisionClient.getPreferenceData(preferenceKeys) }
             preferences.forEach { preference ->
-                val newSummary = preferenceDataMap?.get(preference.key)?.summary
-                if (newSummary != null) {
-                    preference.setSummary(newSummary)
+                val data = preferenceDataMap?.get(preference.key)
+                if (data != null) {
+                    updatePreferenceDataSummary(preference, data)
                 }
             }
         }
@@ -97,9 +100,9 @@ class SupervisionDashboardFragment : CatalystFragment() {
         val shouldRedirectToSetupSupervision = !isSupervisionEnabled || !isPinSet
 
         preferences.forEach { preference ->
-            val newSummary = preferenceDataMap?.get(preference.key)?.summary
-            if (newSummary != null) {
-                preference.setSummary(newSummary)
+            val data = preferenceDataMap?.get(preference.key)
+            if (data != null) {
+                updatePreferenceDataSummary(preference, data)
             }
 
             if (!originalClickListenerMap.containsKey(preference.key)) {
@@ -134,6 +137,27 @@ class SupervisionDashboardFragment : CatalystFragment() {
                 }
             }
         }
+
+        private fun updatePreferenceDataSummary(preference: Preference, data: PreferenceData) {
+        val newSummary = data.summary
+        if (newSummary != null) {
+            val contentDescription = data.summaryContentDescription
+            if (contentDescription != null) {
+                // This tells screen readers (like TalkBack) to read the summary
+                // content description instead of the summary.
+                val spannable = SpannableString(newSummary)
+                spannable.setSpan(
+                    TtsSpan.TextBuilder(contentDescription.toString()).build(),
+                    0,
+                    newSummary.length,
+                    Spanned.SPAN_INCLUSIVE_INCLUSIVE,
+                )
+                preference.summary = spannable
+            } else {
+                preference.summary = newSummary
+            }
+        }
+    }
 
     companion object {
         @VisibleForTesting var ioDispatcher: CoroutineDispatcher = Dispatchers.IO
