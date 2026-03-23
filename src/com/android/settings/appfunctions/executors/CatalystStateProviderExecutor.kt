@@ -55,6 +55,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import com.android.settingslib.metadata.preferencesapi.markStringAsExternalData
 
@@ -77,12 +78,22 @@ class CatalystStateProviderExecutor(
         try {
             val perScreenDeviceStatesList = mutableListOf<PerScreenDeviceStates>()
             coroutineScope {
-                val semaphore = Semaphore(MAX_PARALLELISM)
+                val maxParallelism = Settings.Global.getInt(
+                    context.contentResolver,
+                    SETTING_MAX_PARALLELISM,
+                    DEFAULT_MAX_PARALLELISM
+                )
+                val perScreenTimeoutMs = Settings.Global.getLong(
+                    context.contentResolver,
+                    SETTING_PER_SCREEN_TIMEOUT_MS,
+                    DEFAULT_PER_SCREEN_TIMEOUT_MS
+                ).milliseconds
+                val semaphore = Semaphore(maxParallelism)
                 val deferredList =
                     screenKeyList.map { screenKey ->
                         async {
                             try {
-                                withTimeout(PER_SCREEN_TIMEOUT_MS) {
+                                withTimeout(perScreenTimeoutMs) {
                                     semaphore.withPermit {
                                         try {
                                             val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
@@ -247,7 +258,9 @@ class CatalystStateProviderExecutor(
 
     companion object {
         private const val TAG = "CatalystStateProviderExecutor"
-        private const val MAX_PARALLELISM = 3
-        private val PER_SCREEN_TIMEOUT_MS = 5.seconds
+        private const val DEFAULT_MAX_PARALLELISM = 3
+        private const val DEFAULT_PER_SCREEN_TIMEOUT_MS = 5000L
+        private const val SETTING_MAX_PARALLELISM = "com.android.settings.APP_FUNCTION_MAX_PARALLELISM"
+        private const val SETTING_PER_SCREEN_TIMEOUT_MS = "com.android.settings.APP_FUNCTION_PER_SCREEN_TIMEOUT_MS"
     }
 }
