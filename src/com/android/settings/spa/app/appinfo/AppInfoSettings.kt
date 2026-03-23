@@ -40,6 +40,7 @@ import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppPreference
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlTargetAppPageProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
@@ -179,9 +180,15 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
                 )
             }
         }
-
+            
         Category(title = stringResource(R.string.ai_assist_category)) {
             PersonalContextAppPreference(app)
+            if (
+                android.companion.virtualdevice.flags.Flags.computerControlAccess() &&
+                    android.companion.virtualdevice.flags.Flags.computerControlPerAppConsent()
+            ) {
+                ComputerControlTargetAppPageProvider.InfoPageEntryItem(app)
+            }
         }
 
         Category(title = stringResource(R.string.advanced_apps)) {
