@@ -67,7 +67,9 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.withTimeoutOrNull
 import com.android.settingslib.metadata.preferencesapi.extractSafety
 
 /* A [DeviceStateExecutor] that provides device state metadata information for Settings that are
@@ -86,21 +88,30 @@ class CatalystStateMetadataProviderExecutor(
     ): DeviceStateMetadataProviderExecutorResult {
         val perScreenDeviceStatesList = mutableListOf<PerScreenMetadata>()
         val itemizationTypes = mutableMapOf<String, ItemizationType>()
-        coroutineScope {
-            val maxParallelism = Settings.Global.getInt(
-                context.contentResolver,
-                SETTING_MAX_PARALLELISM,
-                DEFAULT_MAX_PARALLELISM
-            )
-            val perScreenTimeoutMs = Settings.Global.getLong(
-                context.contentResolver,
-                SETTING_PER_SCREEN_TIMEOUT_MS,
-                DEFAULT_PER_SCREEN_TIMEOUT_MS
-            ).milliseconds
-            val semaphore = Semaphore(maxParallelism)
-            val deferredList =
-                screenKeyList.map { screenKey ->
-                    async {
+
+        val maxParallelism = Settings.Global.getInt(
+            context.contentResolver,
+            SETTING_MAX_PARALLELISM,
+            DEFAULT_MAX_PARALLELISM
+        )
+        val perScreenTimeoutMs = Settings.Global.getLong(
+            context.contentResolver,
+            SETTING_PER_SCREEN_TIMEOUT_MS,
+            DEFAULT_PER_SCREEN_TIMEOUT_MS
+        ).milliseconds
+        val maxExecutionTimeMs = Settings.Global.getLong(
+            context.contentResolver,
+            SETTING_MAX_EXECUTION_TIME_MS,
+            DEFAULT_MAX_EXECUTION_TIME_MS
+        ).milliseconds
+
+        val semaphore = Semaphore(maxParallelism)
+        var deferredList = emptyList<Pair<String, Deferred<DeviceStateMetadataProviderExecutorResult?>>>()
+
+        withTimeoutOrNull(maxExecutionTimeMs) {
+            coroutineScope {
+                deferredList = screenKeyList.map { screenKey ->
+                    screenKey to async {
                         try {
                             withTimeout(perScreenTimeoutMs) {
                                 semaphore.withPermit {
@@ -130,10 +141,31 @@ class CatalystStateMetadataProviderExecutor(
                         }
                     }
                 }
-            val results = deferredList.awaitAll().filterNotNull()
-            perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
-            results.flatMap { it.itemizationTypes }.forEach { itemizationTypes[it.key] = it }
+                deferredList.map { it.second }.awaitAll()
+            }
+        } ?: Log.w(TAG, "Max execution time of $maxExecutionTimeMs exceeded.")
+
+        val completedKeys = mutableSetOf<String>()
+        val results = mutableListOf<DeviceStateMetadataProviderExecutorResult>()
+
+        for ((screenKey, deferred) in deferredList) {
+            if (deferred.isCompleted && !deferred.isCancelled) {
+                completedKeys.add(screenKey)
+                val res = deferred.getCompleted()
+                if (res != null) {
+                    results.add(res)
+                }
+            }
         }
+
+        val incompleteKeys = screenKeyList - completedKeys
+        if (incompleteKeys.isNotEmpty()) {
+            Log.w(TAG, "Screens not processed due to max execution time: $incompleteKeys")
+        }
+
+        perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
+        results.flatMap { it.itemizationTypes }.forEach { itemizationTypes[it.key] = it }
+
         return DeviceStateMetadataProviderExecutorResult(
             metadata = perScreenDeviceStatesList,
             itemizationTypes = itemizationTypes.values.toSet(),
@@ -356,8 +388,10 @@ class CatalystStateMetadataProviderExecutor(
         private const val TAG = "CatalystStateMetadataProviderExecutor"
         private const val DEFAULT_MAX_PARALLELISM = 3
         private const val DEFAULT_PER_SCREEN_TIMEOUT_MS = 5000L
+        private const val DEFAULT_MAX_EXECUTION_TIME_MS = 25000L
         private const val SETTING_MAX_PARALLELISM = "com.android.settings.APP_FUNCTION_MAX_PARALLELISM"
         private const val SETTING_PER_SCREEN_TIMEOUT_MS = "com.android.settings.APP_FUNCTION_PER_SCREEN_TIMEOUT_MS"
+        private const val SETTING_MAX_EXECUTION_TIME_MS = "com.android.settings.APP_FUNCTION_MAX_EXECUTION_TIME_MS"
 
         /** Returns an LLM readable string describing the value type. */
         internal fun PreferenceValueDescriptorProto.toDeviceStateString(): String {

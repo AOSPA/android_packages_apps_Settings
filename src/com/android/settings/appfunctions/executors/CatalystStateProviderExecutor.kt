@@ -55,6 +55,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import com.android.settingslib.metadata.preferencesapi.markStringAsExternalData
@@ -77,21 +79,29 @@ class CatalystStateProviderExecutor(
         AppListRepositoryImpl.useCaching = true
         try {
             val perScreenDeviceStatesList = mutableListOf<PerScreenDeviceStates>()
-            coroutineScope {
-                val maxParallelism = Settings.Global.getInt(
-                    context.contentResolver,
-                    SETTING_MAX_PARALLELISM,
-                    DEFAULT_MAX_PARALLELISM
-                )
-                val perScreenTimeoutMs = Settings.Global.getLong(
-                    context.contentResolver,
-                    SETTING_PER_SCREEN_TIMEOUT_MS,
-                    DEFAULT_PER_SCREEN_TIMEOUT_MS
-                ).milliseconds
-                val semaphore = Semaphore(maxParallelism)
-                val deferredList =
-                    screenKeyList.map { screenKey ->
-                        async {
+            val maxParallelism = Settings.Global.getInt(
+                context.contentResolver,
+                SETTING_MAX_PARALLELISM,
+                DEFAULT_MAX_PARALLELISM
+            )
+            val perScreenTimeoutMs = Settings.Global.getLong(
+                context.contentResolver,
+                SETTING_PER_SCREEN_TIMEOUT_MS,
+                DEFAULT_PER_SCREEN_TIMEOUT_MS
+            ).milliseconds
+            val maxExecutionTimeMs = Settings.Global.getLong(
+                context.contentResolver,
+                SETTING_MAX_EXECUTION_TIME_MS,
+                DEFAULT_MAX_EXECUTION_TIME_MS
+            ).milliseconds
+
+            val semaphore = Semaphore(maxParallelism)
+            var deferredList = emptyList<Pair<String, Deferred<List<PerScreenDeviceStates>?>>>()
+
+            withTimeoutOrNull(maxExecutionTimeMs) {
+                coroutineScope {
+                    deferredList = screenKeyList.map { screenKey ->
+                        screenKey to async {
                             try {
                                 withTimeout(perScreenTimeoutMs) {
                                     semaphore.withPermit {
@@ -115,9 +125,29 @@ class CatalystStateProviderExecutor(
                             }
                         }
                     }
-                val results = deferredList.awaitAll()
-                perScreenDeviceStatesList.addAll(results.filterNotNull().flatten())
+                    deferredList.map { it.second }.awaitAll()
+                }
+            } ?: Log.w(TAG, "Max execution time of $maxExecutionTimeMs exceeded.")
+
+            val completedKeys = mutableSetOf<String>()
+            val results = mutableListOf<List<PerScreenDeviceStates>>()
+
+            for ((screenKey, deferred) in deferredList) {
+                if (deferred.isCompleted && !deferred.isCancelled) {
+                    completedKeys.add(screenKey)
+                    val res = deferred.getCompleted()
+                    if (res != null) {
+                        results.add(res)
+                    }
+                }
             }
+
+            val incompleteKeys = screenKeyList - completedKeys
+            if (incompleteKeys.isNotEmpty()) {
+                Log.w(TAG, "Screens not processed due to max execution time: $incompleteKeys")
+            }
+
+            perScreenDeviceStatesList.addAll(results.flatten())
             return DeviceStateProviderExecutorResult(states = perScreenDeviceStatesList)
         } finally {
             // Disable caching for the next execution to avoid stale data.
@@ -260,7 +290,9 @@ class CatalystStateProviderExecutor(
         private const val TAG = "CatalystStateProviderExecutor"
         private const val DEFAULT_MAX_PARALLELISM = 3
         private const val DEFAULT_PER_SCREEN_TIMEOUT_MS = 5000L
+        private const val DEFAULT_MAX_EXECUTION_TIME_MS = 25000L
         private const val SETTING_MAX_PARALLELISM = "com.android.settings.APP_FUNCTION_MAX_PARALLELISM"
         private const val SETTING_PER_SCREEN_TIMEOUT_MS = "com.android.settings.APP_FUNCTION_PER_SCREEN_TIMEOUT_MS"
+        private const val SETTING_MAX_EXECUTION_TIME_MS = "com.android.settings.APP_FUNCTION_MAX_EXECUTION_TIME_MS"
     }
 }
