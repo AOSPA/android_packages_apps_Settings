@@ -65,6 +65,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         implements LifecycleObserver, OnResume, OnDestroy, OnCreate, OnSaveInstanceState {
     private static final String TAG = "BatteryUsageBreakdownController";
     private static final String ROOT_PREFERENCE_KEY = "battery_usage_breakdown";
+    private static final String BATTERY_ADVANCE_INFO_CATEGORY_KEY =
+            "battery_advance_info_settings_category";
     private static final String FOOTER_PREFERENCE_KEY = "battery_usage_footer";
     private static final String SPINNER_PREFERENCE_KEY = "battery_usage_spinner";
     private static final String PACKAGE_NAME_NONE = "none";
@@ -89,6 +91,7 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
 
     @VisibleForTesting Context mPrefContext;
     @VisibleForTesting PreferenceGroup mRootPreferenceGroup;
+    @VisibleForTesting PreferenceGroup mBatteryAdvanceInfoPreferenceGroup;
     @VisibleForTesting FooterPreference mFooterPreference;
     @VisibleForTesting BatteryDiffData mBatteryDiffData;
     @VisibleForTesting String mBatteryUsageBreakdownTitleLastFullChargeText;
@@ -226,6 +229,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         mPrefContext = screen.getContext();
         mRootPreferenceGroup = screen.findPreference(ROOT_PREFERENCE_KEY);
         mSpinnerPreference = screen.findPreference(SPINNER_PREFERENCE_KEY);
+        mBatteryAdvanceInfoPreferenceGroup =
+                screen.findPreference(BATTERY_ADVANCE_INFO_CATEGORY_KEY);
         mFooterPreference = screen.findPreference(FOOTER_PREFERENCE_KEY);
         mBatteryUsageBreakdownTitleLastFullChargeText =
                 mPrefContext.getString(
@@ -331,16 +336,22 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
     }
 
     private void showFooterPreference(boolean isAllBatteryUsageEmpty) {
+        boolean isBatteryAdvanceInfoEnabled =
+                FeatureFactory.getFeatureFactory()
+                        .getPowerUsageFeatureProvider()
+                        .isBatteryAdvanceInfoEnabled();
         int titleResId = R.string.battery_usage_screen_footer;
         if (isAllBatteryUsageEmpty) {
             titleResId = R.string.battery_usage_screen_footer_empty;
-        } else if (FeatureFactory.getFeatureFactory()
-                    .getPowerUsageFeatureProvider().isBatteryAdvanceInfoEnabled()) {
+        } else if (isBatteryAdvanceInfoEnabled) {
             titleResId = R.string.battery_usage_screen_advance_footer;
         }
 
         mFooterPreference.setTitle(mPrefContext.getString(titleResId));
         mFooterPreference.setVisible(true);
+        if (mBatteryAdvanceInfoPreferenceGroup != null) {
+            mBatteryAdvanceInfoPreferenceGroup.setVisible(isBatteryAdvanceInfoEnabled);
+        }
     }
 
     private void showSpinnerAndAppList() {
@@ -428,7 +439,8 @@ public class BatteryUsageBreakdownController extends BasePreferenceController
         for (int index = preferenceCount - 1; index >= 0; index--) {
             final Preference preference = mRootPreferenceGroup.getPreference(index);
             if ((preference instanceof SettingsSpinnerPreference)
-                    || (preference instanceof FooterPreference)) {
+                    || (preference instanceof FooterPreference)
+                    || (preference instanceof PreferenceGroup)) {
                 // Consider the app preference only and skip others
                 continue;
             }
