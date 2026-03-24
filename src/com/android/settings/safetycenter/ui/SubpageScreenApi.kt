@@ -54,7 +54,7 @@ abstract class SubpageScreenApi(
     init {
         flag { Flags.catalystMigration26q2() && Flags.enableSafetyCenterNewUi() }
 
-        preconditions(R.string.safety_source_unavailable) {
+        preconditions("There must be safety information made available for this screen from on-device safety sources.") {
             if (SafetyCenterSubpageRegistry.isSubpageAvailable(context, subpageRegistryKey)) {
                 Allowed
             } else {
