@@ -338,10 +338,10 @@
     <string name="time_format_12_hour" msgid="4212243396629600426">"12 घंटे वाला फ़ॉर्मैट"</string>
     <string name="time_format_24_hour" msgid="8284408904130498347">"24 घंटे वाला फ़ॉर्मैट"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"टाइम ज़ोन"</string>
-    <string name="home_time_zone_title" msgid="3824736095532816255">"घर का टाइम ज़ोन"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"मौजूदा जगह के मुताबिक टाइम ज़ोन"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"टाइम ज़ोन चुनें"</string>
-    <string name="home_time_zone_summary" msgid="1494773352044636274">"घर से बाहर होने की स्थिति के लिए, अपने घर का टाइम ज़ोन सेट करें"</string>
-    <string name="use_home_time_zone_title" msgid="8026361707497256390">"घर के टाइम ज़ोन का इस्तेमाल करें"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"घर से बाहर होने की स्थिति में, मौजूदा जगह के हिसाब से टाइम ज़ोन सेट होने की सुविधा पाएं"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"मौजूदा जगह के मुताबिक टाइम ज़ोन इस्तेमाल करें"</string>
     <string name="suggestions_category_title" msgid="669819615912272575">"सुझाव"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"टाइम ज़ोन चुनें"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"टाइम ज़ोन खोजें"</string>
@@ -1830,9 +1830,9 @@
     <string name="time_notifications_title" msgid="8654754577463543558">"सूचनाएं"</string>
     <string name="time_notifications_summary" msgid="5669901692108499323">"समय के अपने-आप बदलने पर सूचना पाएं"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"टाइम ज़ोन बदले जाने की सूचना"</string>
-    <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"टाइम ज़ोन अपने-आप अपडेट होने पर सूचना मिलती है"</string>
+    <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"टाइम ज़ोन अपने-आप अपडेट होने पर सूचना पाएं"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"सूचना, समय, ज़ोन, टाइमज़ोन"</string>
-    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"घड़ी का समय बदलने के लिए शेड्यूल किया गया बदलाव"</string>
+    <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"शेड्यूल के हिसाब से घड़ी के समय में बदलाव"</string>
     <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"शेड्यूल के हिसाब से घड़ी के समय में बदलाव होने पर सूचना पाएं. जैसे, डेलाइट सेविंग टाइम की वजह से हुआ बदलाव"</string>
     <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"डीएसटी, डेलाइट सेविंग टाइम, डेलाइट सेविंग, घड़ी के समय में बदलाव, घड़ी का समय बदलने के लिए शेड्यूल किया गया बदलाव"</string>
     <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"अगला बदलाव"</string>
@@ -2134,22 +2134,18 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"भाषा"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"कीबोर्ड स्विच करने का बटन दिखाएं"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"इनपुट फ़ील्ड चुने जाने पर, नेविगेशन बार में कीबोर्ड स्विच करने का बटन दिखाने की अनुमति दें"</string>
-    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
-    <skip />
+    <string name="keyboard_apps_category" msgid="1715169176659877658">"कीबोर्ड ऐप्लिकेशन"</string>
     <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
     <skip />
     <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
     <skip />
-    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
-    <skip />
+    <string name="available_keyboard_apps_category" msgid="7665966484500890112">"उपलब्ध कीबोर्ड ऐप्लिकेशन"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"अन्य विकल्प"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"सुलभता सुविधा"</string>
-    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
-    <skip />
+    <string name="physical_keyboard_title" msgid="6597340453841961909">"फ़िज़िकल कीबोर्ड"</string>
     <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
     <skip />
-    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
-    <skip />
+    <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"लेआउट पिकर"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"बाउंस बटन"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"एक ही बटन को बार-बार, लगातार दबाने पर कोई कार्रवाई नहीं होगी"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"\'बाउंस बटन\' सुविधा के लिए समयसीमा"</string>
@@ -2338,8 +2334,7 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"वाइब्रेशन रिडायरेक्ट करें"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"कनेक्ट होने पर, गेम कंट्रोलर पर वाइब्रेशन हो"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"कीबोर्ड लेआउट"</string>
-    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
-    <skip />
+    <string name="keyboard_layout_picker_category_title" msgid="2312103369489003202">"लेआउट"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"निजी शब्दकोश"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"काम से जुड़ा निजी शब्दकोश"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"ऐप्लिकेशन में इस्तेमाल करने के लिए Gboard के स्पेल चेकर में शब्द जोड़ें"</string>
@@ -2361,12 +2356,9 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"सभी भाषाओं के लिए"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"ज़्यादा भाषाएं…"</string>
     <string name="testing" msgid="6294172343766732037">"परीक्षण"</string>
-    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
-    <skip />
-    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
-    <skip />
-    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
-    <skip />
+    <string name="keyboard_settings_summary" msgid="5513613701144979051">"कीबोर्ड ऐप्लिकेशन, टूल"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="449934856451727476">"कीबोर्ड ऐप्लिकेशन, फ़िज़िकल कीबोर्ड, टूल"</string>
+    <string name="physical_keyboards_list_title" msgid="2062417895303139252">"फ़िज़िकल कीबोर्ड"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"लेआउट"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"गैजेट चुनें"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"विजेट चुनें"</string>
@@ -2558,7 +2550,8 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"आवाज़ बटन"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"आवाज़ वाले दोनों बटन दबाकर रखें"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"तीन बार टैप करें"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"स्क्रीन पर फटाफट %1$d बार टैप करें. ऐसा करने से, हो सकता है कि आपका डिवाइस थोड़ा धीरे काम करे."</string>
+    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (387169602299548488) -->
+    <skip />
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"तीन बार टैप"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"कीबोर्ड शॉर्टकट"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"<xliff:g id="ID_4">%4$s</xliff:g> का इस्तेमाल करने के लिए, <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> को दबाएं"</string>
@@ -4614,17 +4607,49 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सभी फ़ाइलें ऐक्सेस कर सकते हैं"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"स्क्रीन ऑटोमेशन"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"यह ऐप्लिकेशन, अन्य ऐप्लिकेशन की स्क्रीन पर मौजूद कॉन्टेंट को देख पाएगा और उससे इंटरैक्ट कर पाएगा. इससे आपको टास्क पूरे करने में मदद मिलेगी. ऐसा तब भी होगा, जब ऐप्लिकेशन बैकग्राउंड में चल रहे हों"</string>
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> अन्य ऐप्लिकेशन की स्क्रीन पर मौजूद कॉन्टेंट को देख पाएगा और उससे इंटरैक्ट कर पाएगा. इससे आपको टास्क पूरे करने में मदद मिलेगी"</string>
-    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"अगर स्क्रीन ऑटोमेशन की अनुमति नहीं दी जाती है, तो <xliff:g id="ID_1">%1$s</xliff:g> अब भी उन ऐप्लिकेशन के साथ इंटरैक्ट कर सकता है जो <xliff:g id="ID_2">%1$s</xliff:g> से अन्य तरीकों से कनेक्ट किए गए हैं"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2154932816099670659) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_info (9062454049512207228) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (5980762930536180974) -->
+    <skip />
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"ऐप्लिकेशन को अन्य ऐप्लिकेशन की स्क्रीन पर मौजूद कॉन्टेंट के साथ इंटरैक्ट करके, टास्क पूरे करने में आपकी मदद करने की अनुमति दें"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"हर बार पूछें"</string>
-    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"हमेशा के लिए अनुमति दें"</string>
+    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"अनुमति न दें"</string>
-    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"स्क्रीन ऑटोमेशन की अनुमति दें"</string>
-    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"किसी भी ऐप को यह सुविधा हमेशा इस्तेमाल करने की अनुमति नहीं है"</string>
-    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"वे ऐप्लिकेशन यहां दिखेंगे जिन्हें <xliff:g id="ID_1">%1$s</xliff:g> के ज़रिए स्क्रीन ऑटोमेशन की सुविधा का हमेशा इस्तेमाल करने की अनुमति दी गई है. वे ऐप्लिकेशन यहां नहीं दिखेंगे जिन्हें हर सेशन के लिए अलग से अनुमति दी जाती है."</string>
-    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"अनुमति है"</string>
-    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"अनुमति नहीं है"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (4888755761957621266) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (5400163562350523099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_requirement (2238235275174477026) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (2135792628244307590) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_clear_all_apps (7663936744209447022) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (2481703601665259966) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9145402296131321682) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2454906328238498562) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_header (5137088795672278469) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_footer_requirement (4029489221206415252) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (7290667979548333123) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_target_list_header (3243296237180038117) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"पूरी स्क्रीन पर सूचनाएं दिखाने की अनुमति"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"इस ऐप्लिकेशन को पूरी स्क्रीन पर सूचनाएं दिखाने की अनुमति दें"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"डिवाइस लॉक रहने पर, इस ऐप्लिकेशन को सूचनाएं पूरी स्क्रीन पर दिखाने की अनुमति दें. ऐसा करने पर, अलार्म, इनकमिंग कॉल या अन्य ज़रूरी सूचनाएं पूरी स्क्रीन पर दिखाई जा सकती हैं."</string>
@@ -5723,11 +5748,13 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"सुरक्षित किए गए नेटवर्क को ही अनुमति दें"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"यह ज़्यादा सुरक्षित है, लेकिन इससे हो सकता है कि कुछ जगहों पर नेटवर्क कनेक्शन में समस्या आए. हालांकि, आपातकालीन कॉल हमेशा किए जा सकते हैं."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"क्या आपको 2G नेटवर्क से सुरक्षित रखने की सुविधा बंद करनी है?"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> सिम के मौजूदा नेटवर्क में 2G काम नहीं करता. 2G नेटवर्क से सुरक्षित रखने की सुविधा बंद करने पर, आपको नुकसान पहुंचाने वाले झूठे 2G नेटवर्क से कनेक्ट होने का खतरा रहेगा."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (7888326960588858860) -->
+    <skip />
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"बंद करें"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G नेटवर्क से सुरक्षित रखने की सुविधा"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G नेटवर्क से सुरक्षित रखने की सुविधा चालू है"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> सिम के लिए, मौजूदा नेटवर्क पर 2G नेटवर्क से सुरक्षित रखने वाली सुविधा चालू होनी चाहिए. हालांकि, आप चाहें, तो अपने जोखिम पर 2G नेटवर्क की सुरक्षा को बंद किया जा सकता है."</string>
+    <!-- no translation found for network_protection_2g_on_notification_summary (2865716658412002901) -->
+    <skip />
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"सेटिंग"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"सभी सेवाएं"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"क्लिपबोर्ड का डेटा ऐक्सेस किए जाने पर मैसेज पाएं"</string>
@@ -5774,8 +5801,7 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"अपना स्क्रीन सेवर चुनें"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"पसंद के मुताबिक बनाएं"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> को पसंद के मुताबिक बनाएं"</string>
-    <!-- no translation found for dream_preview_button_description (1752727543834253129) -->
-    <skip />
+    <string name="dream_preview_button_description" msgid="1752727543834253129">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> की झलक देखें"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"फ़्रीफ़ॉर्म विंडो सहायता मोड को चालू करने के लिए, डिवाइस को फिर से चालू करना होगा."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"फ़्रीफ़ॉर्म विंडो मोड की उपलब्धता को अपडेट करने के लिए, डिवाइस को फिर से चालू करना होगा."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"सेकंडरी डिसप्ले पर फ़्रीफ़ॉर्म विंडो मोड चालू करने के लिए, डिवाइस को फिर से चालू करना होगा."</string>
@@ -5810,6 +5836,12 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"ऐप्लिकेशन अनइंस्टॉल करें"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}one{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}other{पिछले # महीनों में इंस्टॉल किए गए ऐप्लिकेशन}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}one{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}other{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}}"</string>
+    <!-- no translation found for ai_assist_category (6800674613544630195) -->
+    <skip />
+    <!-- no translation found for personal_context_title (6639623956831710453) -->
+    <skip />
+    <!-- no translation found for personal_context_switch_summary (917644125592480347) -->
+    <skip />
     <string name="aspect_ratio_title" msgid="2451826875939676101">"आसपेक्ट रेशियो"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"अगर इस ऐप्लिकेशन को आपके <xliff:g id="DEVICE_NAME">%1$s</xliff:g> की स्क्रीन के हिसाब से डिज़ाइन नहीं किया गया है, तो इसे देखने के लिए कोई नया आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) चुनें"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"अगर इस ऐप्लिकेशन को आपके <xliff:g id="DEVICE_NAME">%1$s</xliff:g> की स्क्रीन के हिसाब से डिज़ाइन नहीं किया गया है, तो इसे देखने के लिए कोई नया आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) चुनें. ऐसा हो सकता है कि कुछ ऐप्लिकेशन, हर तरह के आसपेक्ट रेशियो के हिसाब से ऑप्टिमाइज़ न हो पाएं."</string>
