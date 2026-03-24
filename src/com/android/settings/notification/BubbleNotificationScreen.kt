@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Preconditio
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NOTIFICATIONS
@@ -118,6 +119,9 @@ open class BubbleNotificationScreen :
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = "notification_bubbles"

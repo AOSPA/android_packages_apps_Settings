@@ -22,6 +22,7 @@ import android.nfc.NfcAdapter
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -42,6 +43,7 @@ class NfcAndPaymentApiScreen :
             type = AnyBoolean,
             purpose = R.string.use_nfc_purpose,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
             preconditions(R.string.use_nfc_preconditions) {
                 if (context.packageManager.hasSystemFeature(PackageManager.FEATURE_NFC_ANY)) {
                     Allowed
@@ -75,6 +77,7 @@ class NfcAndPaymentApiScreen :
             type = AnyBoolean,
             purpose = R.string.require_device_unlock_for_nfc_purpose,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
             preconditions(R.string.require_device_unlock_for_nfc_preconditions) {
                 if (
                     !context.packageManager.hasSystemFeature(
