@@ -24,6 +24,7 @@ import com.android.settingslib.applications.StorageStatsSource
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_APPS
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.multiusers.ManagementScope
 import com.android.settingslib.metadata.preferencesapi.multiusers.PreferenceTarget
@@ -41,6 +42,8 @@ open class AppStorageSettingsScreenApi :
 
     init {
         flag { Flags.catalystMigration26q2() }
+
+        tags(APP_FUNCTION_APPS)
 
         parameters {
             parameter(
