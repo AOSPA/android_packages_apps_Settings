@@ -21,7 +21,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Binder
-import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
@@ -32,11 +31,9 @@ import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
-import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
-import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreconditionsAsString
@@ -115,32 +112,38 @@ class CatalystStateMetadataProviderExecutor(
         var deferredList = emptyList<Pair<String, Deferred<DeviceStateMetadataProviderExecutorResult?>>>()
         val timeLogs = ConcurrentHashMap<String, Long>()
 
+        val startTimeAll = android.os.SystemClock.elapsedRealtime()
         withTimeoutOrNull(maxExecutionTimeMs) {
             coroutineScope {
                 deferredList = screenKeyList.map { screenKey ->
                     screenKey to async {
-                        val startTime = android.os.SystemClock.elapsedRealtime()
+                        var executionTime = -1L
                         try {
-                            withTimeout(perScreenTimeoutMs) {
-                                semaphore.withPermit {
-                                    try {
-                                        val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
-                                        if (screenMetadata != null && screenMetadata.isExposable(context)) {
-                                            buildPerScreenDeviceStatesMetadata(screenKey)
-                                        } else {
-                                            val factory = PreferenceScreenRegistry.preferenceScreenMetadataFactories[screenKey]
-                                            val isParameterized = factory is PreferenceScreenMetadataParameterizedFactory
-                                            if (isParameterized) {
-                                                // Try and build the metadata with no itemization entries
-                                                buildPerScreenDeviceStatesMetadata(factory, screenKey )
+                            semaphore.withPermit {
+                                val startTime = android.os.SystemClock.elapsedRealtime()
+                                try {
+                                    withTimeout(perScreenTimeoutMs) {
+                                        try {
+                                            val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
+                                            if(screenMetadata != null && screenMetadata.isExposable(context)) {
+                                                buildPerScreenDeviceStatesMetadata(screenKey)
                                             } else {
-                                                null
+                                                val factory = PreferenceScreenRegistry.preferenceScreenMetadataFactories[screenKey]
+                                                val isParameterized = factory is PreferenceScreenMetadataParameterizedFactory
+                                                if (isParameterized) {
+                                                    // Try and build the metadata with no itemization entries
+                                                    buildPerScreenDeviceStatesMetadata(factory, screenKey )
+                                                } else {
+                                                    null
+                                                }
                                             }
+                                        } catch (e: Exception) {
+                                            Log.e(TAG, "error building $screenKey", e)
+                                            null
                                         }
-                                    } catch (e: Exception) {
-                                        Log.e(TAG, "error building $screenKey", e)
-                                        null
                                     }
+                                } finally {
+                                    executionTime = android.os.SystemClock.elapsedRealtime() - startTime
                                 }
                             }
                         } catch (e: TimeoutCancellationException) {
@@ -151,7 +154,12 @@ class CatalystStateMetadataProviderExecutor(
                             null
                         } finally {
                             if (logAppFunctionTime && !timeLogs.containsKey(screenKey)) {
-                                timeLogs[screenKey] = android.os.SystemClock.elapsedRealtime() - startTime
+                                if (executionTime == -1L) {
+                                    Log.e(TAG, "executionTime is -1 for screen: $screenKey")
+                                    timeLogs[screenKey] = -1L
+                                } else {
+                                    timeLogs[screenKey] = executionTime
+                                }
                             }
                         }
                     }
@@ -161,6 +169,8 @@ class CatalystStateMetadataProviderExecutor(
         } ?: Log.w(TAG, "Max execution time of $maxExecutionTimeMs exceeded.")
 
         if (logAppFunctionTime) {
+            val totalTime = android.os.SystemClock.elapsedRealtime() - startTimeAll
+                Log.d(TAG, "AppFunction $appFunctionType took ${totalTime}ms")
             timeLogs.entries
                 .sortedByDescending { if (it.value == -1L) Long.MAX_VALUE else it.value }
                 .forEach { entry ->
@@ -198,22 +208,6 @@ class CatalystStateMetadataProviderExecutor(
     }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
-        screenKey: String
-    ): DeviceStateMetadataProviderExecutorResult {
-        val isParameterized = PreferenceScreenRegistry.isParameterized(context, screenKey)
-        val hierarchy =
-            getEnabledPreferencesHierarchy(
-                config,
-                context,
-                appFunctionType = null,
-                screenKey,
-                removeDuplicates = isParameterized,
-            )
-
-        return buildHierarchyMetadata(hierarchy, isParameterized)
-    }
-
-    private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
         parameterizedFactory: PreferenceScreenMetadataParameterizedFactory,
         screenKey: String
     ): DeviceStateMetadataProviderExecutorResult? {
@@ -235,10 +229,20 @@ class CatalystStateMetadataProviderExecutor(
         return null
     }
 
-    private suspend fun CoroutineScope.buildHierarchyMetadata(
-        hierarchy: Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>,
-        isParameterized: Boolean,
+    private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
+        screenKey: String
     ): DeviceStateMetadataProviderExecutorResult {
+        val isParameterized = PreferenceScreenRegistry.isParameterized(context, screenKey)
+        val hierarchy =
+            getEnabledPreferencesHierarchy(
+                config,
+                context,
+                appFunctionType = null,
+                screenKey,
+                removeDuplicates = isParameterized,
+                includeAtLeastOne = true,
+            )
+
         val metadata =
             hierarchy.map { entry ->
                 val screenMetaData = entry.key
@@ -285,7 +289,7 @@ class CatalystStateMetadataProviderExecutor(
                     flags = PreferenceGetterFlags.METADATA or PreferenceGetterFlags.VALUE_DESCRIPTOR,
                 )
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to convert preference to proto: ${metadata.key}", e)
+                Log.e(TAG, "Failed to convert preference to proto: ${screenMetaData.key}/${metadata.key}", e)
                 return@forEach
             }
 
@@ -411,7 +415,7 @@ class CatalystStateMetadataProviderExecutor(
     companion object {
         private const val TAG = "CatalystStateMetadataProviderExecutor"
         private const val DEFAULT_MAX_PARALLELISM = 3
-        private const val DEFAULT_PER_SCREEN_TIMEOUT_MS = 5000L
+        private const val DEFAULT_PER_SCREEN_TIMEOUT_MS = 10000L
         private const val DEFAULT_MAX_EXECUTION_TIME_MS = 25000L
         private const val SETTING_MAX_PARALLELISM = "com.android.settings.APP_FUNCTION_MAX_PARALLELISM"
         private const val SETTING_PER_SCREEN_TIMEOUT_MS = "com.android.settings.APP_FUNCTION_PER_SCREEN_TIMEOUT_MS"
