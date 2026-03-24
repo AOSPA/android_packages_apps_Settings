@@ -1029,6 +1029,10 @@
          existing pattern locks. -->
     <bool name="config_hide_pattern_security_option">false</bool>
 
+    <!-- Whether to disable the option for setting the remote lockscreen credential as the
+         local screen lock during remote validation (Smart Setup/Quick Start) -->
+    <bool name="config_disable_remote_lockscreen_transfer_checkbox">false</bool>
+
     <!-- Light theme customization for lottie illustration in the setup. Not translatable. -->
     <string-array name="layout_animated_banner_customization" translatable="false">
         <item>.primary:@sud_system_primary_light</item>
