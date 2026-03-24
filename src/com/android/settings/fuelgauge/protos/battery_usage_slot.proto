@@ -24,6 +24,7 @@ enum BatteryOptimizationMode {
 enum DataErrorType {
   ERROR_TYPE_UNKNOWN = 0;
   ERROR_TYPE_UNEXPECTED_RESET = 1;
+  ERROR_TYPE_POTENTIAL_SCREEN_TIME_DEFECT = 2;
 }
 
 message DataMetadata {
