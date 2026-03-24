@@ -37,7 +37,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NONE
 
 /** Activity to display [SupervisionPinManagementScreen]. */
 class SupervisionPinManagementActivity :
@@ -51,7 +51,7 @@ class SupervisionPinManagementScreen :
     PreferenceSummaryProvider,
     PreferenceActionMetricsProvider,
     PreferenceIconProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NONE)
 
     override val key: String
         get() = KEY

@@ -62,14 +62,14 @@ private constructor(
 ) : PreferenceScreenMixin, PreferenceTitleProvider, PreferenceAvailabilityProvider {
     override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
-    private val packageName: String =
+    private val packageName: String? =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
             keyParameters!!.packageName
         } else {
             arguments!!.packageName
         }
 
-    private val appInfo = context.getApplicationInfo(packageName)
+    private val appInfo = packageName?.let { context.getApplicationInfo(it) }
 
     @Deprecated(
         "This constructor will be removed once the catalyst framework stops passing the arguments as a bundle. Use the other constructor instead."
