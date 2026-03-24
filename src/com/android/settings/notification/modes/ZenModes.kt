@@ -20,6 +20,7 @@ import android.content.Context
 import com.android.settings.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 import com.android.settingslib.notification.modes.ZenModesBackend
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 /** Provides a list of zen modes on the device. */
 object ZenModes : DirectFiniteOptionsType<String> {
@@ -28,8 +29,8 @@ object ZenModes : DirectFiniteOptionsType<String> {
     override fun getDescription(context: Context): String =
         context.getString(R.string.zen_mode_type_description)
 
-    override suspend fun getOptions(context: Context): List<Pair<String, String>> =
-        ZenModesBackend.getInstance(context).modes.map { mode -> mode.name to mode.name }
+    override suspend fun getOptions(context: Context) =
+        ZenModesBackend.getInstance(context).modes.map { mode -> mode.name.unsafe() to mode.name.unsafe() }
 
     override fun getKey(): String = "ZenModes"
 }

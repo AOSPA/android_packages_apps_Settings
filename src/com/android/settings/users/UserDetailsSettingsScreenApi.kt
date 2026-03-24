@@ -39,6 +39,8 @@ import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Collections.emptyList
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(UserDetailsSettingsScreenApi.KEY, parameterized = true)
@@ -65,8 +67,8 @@ class UserDetailsSettingsScreenApi :
                             ?.filter { it.isUiSwitchableHumanUser() }
                             ?.map { userInfo ->
                                 GeneratedValue(
-                                    value = Integer.toString(userInfo.id),
-                                    description = userInfo.name ?: "",
+                                    value = Integer.toString(userInfo.id).safe(),
+                                    description = userInfo.name?.unsafe() ?: "".safe(),
                                 )
                             } ?: emptyList() // Added elvis operator to return emptyList() if null
                     },

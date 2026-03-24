@@ -20,10 +20,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.Spinner
+import com.android.settings.accessibility.shared.ui.FocusIndicatorDrawable
 import com.android.settingslib.widget.SettingsSpinnerAdapter
 
-class EnhancedSettingsSpinnerAdapter<T>(context: Context?, items: Array<T>) :
-    SettingsSpinnerAdapter<T>(context) {
+class EnhancedSettingsSpinnerAdapter<T>
+@JvmOverloads
+constructor(
+    context: Context?,
+    items: Array<T>,
+    private val showFocusRingIndicator: Boolean = false,
+) : SettingsSpinnerAdapter<T>(context) {
 
     init {
         addAll(items.toList())
@@ -33,10 +39,25 @@ class EnhancedSettingsSpinnerAdapter<T>(context: Context?, items: Array<T>) :
         if (parent is Spinner) {
             setSelectedPosition(parent.selectedItemPosition)
         }
-        return super.getDropDownView(position, convertView, parent)
+        val view = super.getDropDownView(position, convertView, parent)
+        if (showFocusRingIndicator) {
+            view?.setForeground(
+                FocusIndicatorDrawable.Builder(context)
+                    .withStateSet(intArrayOf(android.R.attr.state_selected))
+                    .withCornerRadius(FOCUS_RING_CORNER_RADIUS)
+                    .withVerticalPaddingAdjustment(FOCUS_RING_VERTICAL_PADDING_ADJUSTMENT)
+                    .withHorizontalPaddingAdjustment(FOCUS_RING_HORIZONTAL_PADDING_ADJUSTMENT)
+                    .build()
+            )
+        }
+        return view
     }
 
     companion object {
+        private const val FOCUS_RING_CORNER_RADIUS = 20
+        private const val FOCUS_RING_VERTICAL_PADDING_ADJUSTMENT = -6
+        private const val FOCUS_RING_HORIZONTAL_PADDING_ADJUSTMENT = -6
+
         @JvmStatic
         fun adjustDropDownOffset(spinner: Spinner) {
             spinner.viewTreeObserver.addOnGlobalLayoutListener(

@@ -36,6 +36,8 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseR
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(MobileNetworkScreenApi.KEY, parameterized = true)
@@ -68,8 +70,8 @@ class MobileNetworkScreenApi :
                     ) {
                         subscriptionRepository.visibleActiveSubscriptionInfoList.map { info ->
                             GeneratedValue(
-                                info.subscriptionId.toString(),
-                                info.displayName.toString(),
+                                info.subscriptionId.toString().safe(),
+                                info.displayName.toString().unsafe(),
                             )
                         }
                     },

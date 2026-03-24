@@ -20,6 +20,7 @@ import android.os.VibrationAttributes
 import android.provider.Settings.System.MEDIA_VIBRATION_INTENSITY
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 
 /** Accessibility settings for media vibration, as a switch toggle. */
@@ -42,6 +43,15 @@ class MediaVibrationIntensitySwitchPreference(
     PreferenceAvailabilityProvider {
     override val keywords: Int
         get() = R.string.keywords_media_vibration
+
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY

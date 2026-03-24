@@ -31,6 +31,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows
 import org.robolectric.shadows.ShadowPackageManager
+import com.android.settingslib.metadata.preferencesapi.safe
 
 @RunWith(RobolectricTestRunner::class)
 class NotificationListenerServiceTest {
@@ -62,8 +63,8 @@ class NotificationListenerServiceTest {
         val options = NotificationListenerService.getOptions(context)
 
         assertThat(options).hasSize(1)
-        assertThat(options[0].first).isEqualTo(flattened)
-        assertThat(options[0].second).isEqualTo(flattened)
+        assertThat(options[0].first).isEqualTo(flattened.safe())
+        assertThat(options[0].second).isEqualTo(flattened.safe())
     }
 
     @Test

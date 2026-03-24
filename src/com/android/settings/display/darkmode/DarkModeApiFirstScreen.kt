@@ -74,6 +74,7 @@ class DarkModeApiFirstScreen :
                     R.string.dark_theme_mode_selector_customenum_description,
                 ),
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             get {
                 execute {
                     val isExpanded =
@@ -213,7 +214,7 @@ class DarkModeApiFirstScreen :
     }
 
     companion object {
-        const val KEY = "api_dark_theme_screen"
+        const val KEY = "api_dark_ui_mode"
         internal const val RADIO_PREFERENCE_KEY = "dark_theme_mode_selector"
         internal const val STANDARD_DARK_THEME = 0
         internal const val EXPANDED_DARK_THEME = 1

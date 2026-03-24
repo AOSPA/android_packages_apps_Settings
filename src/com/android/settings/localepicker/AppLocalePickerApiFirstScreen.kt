@@ -34,6 +34,8 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterT
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
+import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settingslib.metadata.preferencesapi.safe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AppLocalePickerApiFirstScreen.KEY, parameterized = true)
@@ -57,7 +59,7 @@ class AppLocalePickerApiFirstScreen :
                         getAppList(context, context.packageManager).map { it ->
                             val packageName = it.packageName
                             val appLabel = it.loadLabel(context.packageManager).toString()
-                            GeneratedValue(packageName, appLabel)
+                            GeneratedValue(packageName.unsafe(), appLabel.unsafe())
                         }
                     },
             )
@@ -87,7 +89,7 @@ class AppLocalePickerApiFirstScreen :
                     val localeInfoList =
                         getLocaleInfoList(context, keyParameters?.get(ARG_PACKAGE_NAME) ?: "")
                     localeInfoList.map {
-                        GeneratedValue(it.locale.toLanguageTag(), it.fullNameNative)
+                        GeneratedValue(it.locale.toLanguageTag().safe(), it.fullNameNative.safe())
                     }
                 },
         ) {
