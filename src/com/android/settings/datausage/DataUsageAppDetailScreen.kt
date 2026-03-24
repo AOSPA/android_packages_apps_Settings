@@ -194,7 +194,8 @@ private constructor(
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             val repo = AppListRepositoryImpl(context)
-            repo.loadApps(context.userId).forEach { app ->
+            // Make sure to exclude system apps
+            repo.loadAndMaybeExcludeSystemApps(context.userId, true).forEach { app ->
                 emit(Bundle(1).apply { putString(KEY_APP_PACKAGE_NAME, app.packageName) })
             }
         }

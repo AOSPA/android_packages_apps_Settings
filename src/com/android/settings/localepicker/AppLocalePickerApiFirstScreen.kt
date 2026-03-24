@@ -25,7 +25,6 @@ import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
 import com.android.settings.localepicker.AppLocalePickerFragment.ARG_PACKAGE_NAME
 import com.android.settings.localepicker.LocaleUtils.canDisplayLocaleUi
-import com.android.settings.localepicker.LocaleUtils.getAppList
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
