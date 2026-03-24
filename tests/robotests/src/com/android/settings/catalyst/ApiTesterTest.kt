@@ -36,12 +36,14 @@ import com.android.settings.testutils2.HardwareUnsupportedException
 import com.android.settings.testutils2.InvalidValueException
 import com.android.settings.testutils2.MissingPermissionException
 import com.android.settings.testutils2.Parameters
+import com.android.settings.testutils2.RegionalRestrictionException
 import com.android.settingslib.datastore.or
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.RegionalRestriction
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
@@ -175,6 +177,15 @@ class ApiTesterTest {
                     }
                     execute {}
                 }
+            }
+            preference(
+                key = "preference_with_fails_precondition_with_regional_restriction",
+                purpose = 0,
+                type = AnyString,
+            ) {
+                preconditions(0) { RegionalRestriction(R.string.hardware_unsupported_exception) }
+                get { execute { "Hello" } }
+                set { execute {} }
             }
             preference(
                 key = "preference_with_setter_and_getter_cant_set_a",
@@ -515,6 +526,20 @@ class ApiTesterTest {
     fun set_missingHardwareFromSetPrecondition_throwsException() {
         assertFailsWith<HardwareUnsupportedException> {
             tester.set("preference_with_fails_precondition_with_hardware_in_set", "v")
+        }
+    }
+
+    @Test
+    fun get_regionalRestriction_throwsException() {
+        assertFailsWith<RegionalRestrictionException> {
+            tester.get<String>("preference_with_fails_precondition_with_regional_restriction")
+        }
+    }
+
+    @Test
+    fun set_regionalRestriction_throwsException() {
+        assertFailsWith<RegionalRestrictionException> {
+            tester.set("preference_with_fails_precondition_with_regional_restriction", "v")
         }
     }
 
