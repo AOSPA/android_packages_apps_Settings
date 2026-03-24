@@ -16,8 +16,10 @@
 
 package com.android.settings.accessibility.setupwizard.items
 
+import android.annotation.IntDef
 import android.content.Context
 import android.util.AttributeSet
+import android.view.HapticFeedbackConstants.CLOCK_TICK
 import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
@@ -57,6 +59,25 @@ class SliderItem : Item {
             ) {
                 super.onInitializeAccessibilityNodeInfo(host, info)
                 info.className = Button::class.java.name
+            }
+        }
+
+    private val sliderTouchListener =
+        object : Slider.OnSliderTouchListener {
+            override fun onStartTrackingTouch(slider: Slider) {
+                isTrackingTouch = true
+            }
+
+            override fun onStopTrackingTouch(slider: Slider) {
+                isTrackingTouch = false
+                syncValueInternal(slider)
+            }
+        }
+
+    private val sliderChangeListener =
+        Slider.OnChangeListener { slider, value, fromUser ->
+            if (fromUser && (updatesContinuously || !isTrackingTouch)) {
+                syncValueInternal(slider)
             }
         }
 
@@ -165,6 +186,10 @@ class SliderItem : Item {
             }
         }
 
+    @HapticFeedbackMode var hapticFeedbackMode: Int = HAPTIC_FEEDBACK_MODE_NONE
+    var isTrackingTouch: Boolean = false
+    var updatesContinuously: Boolean = false
+
     constructor() : super()
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
@@ -174,6 +199,7 @@ class SliderItem : Item {
             // mMax = a.getInt(...) and setMin(...).
             min = a.getInt(R.styleable.SliderItem_min, 0)
             max = a.getInt(R.styleable.SliderItem_max, 100)
+            updatesContinuously = a.getBoolean(R.styleable.SliderItem_updatesContinuously, false)
             sliderIncrement = a.getInt(R.styleable.SliderItem_seekBarIncrement, 0)
             showSliderValue = a.getBoolean(R.styleable.SliderItem_showSliderValue, false)
             iconStartId = a.getResourceId(R.styleable.SliderItem_iconStart, 0)
@@ -228,14 +254,10 @@ class SliderItem : Item {
             valueFrom = min.toFloat()
             valueTo = max.toFloat()
             value = sliderValue.toFloat()
-
+            clearOnSliderTouchListeners()
+            addOnSliderTouchListener(sliderTouchListener)
             clearOnChangeListeners()
-            addOnChangeListener { _, value, fromUser ->
-                if (fromUser) {
-                    // Update the model only when the user interacts
-                    sliderValue = value.toInt()
-                }
-            }
+            addOnChangeListener(sliderChangeListener)
             isClickable = false
 
             if (PartnerConfigHelper.isGlifExpressiveEnabled(context)) {
@@ -318,5 +340,30 @@ class SliderItem : Item {
         iconView.isEnabled = enabled
         iconFrame.isEnabled = enabled
         iconFrame.accessibilityDelegate = buttonAccessibilityDelegate
+    }
+
+    private fun syncValueInternal(slider: Slider) {
+        val newValue = slider.value.toInt()
+        if (newValue != sliderValue) {
+            sliderValue = newValue
+            when (hapticFeedbackMode) {
+                HAPTIC_FEEDBACK_MODE_ON_TICKS -> slider.performHapticFeedback(CLOCK_TICK)
+                HAPTIC_FEEDBACK_MODE_ON_ENDS -> {
+                    if (sliderValue == max || sliderValue == min) {
+                        slider.performHapticFeedback(CLOCK_TICK)
+                    }
+                }
+            }
+        }
+    }
+
+    @IntDef(HAPTIC_FEEDBACK_MODE_NONE, HAPTIC_FEEDBACK_MODE_ON_TICKS, HAPTIC_FEEDBACK_MODE_ON_ENDS)
+    @Retention(AnnotationRetention.SOURCE)
+    annotation class HapticFeedbackMode
+
+    companion object {
+        const val HAPTIC_FEEDBACK_MODE_NONE = 0
+        const val HAPTIC_FEEDBACK_MODE_ON_TICKS = 1
+        const val HAPTIC_FEEDBACK_MODE_ON_ENDS = 2
     }
 }
