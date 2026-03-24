@@ -16,8 +16,6 @@
 
 package com.android.settings.testutils.shadow;
 
-import static android.provider.Settings.DEFAULT_OVERRIDEABLE_BY_RESTORE;
-
 import android.content.ContentResolver;
 import android.provider.Settings;
 
@@ -39,7 +37,7 @@ public class ShadowSecureSettings extends ShadowSettings.ShadowSecure {
 
     @Implementation
     public static boolean putStringForUser(ContentResolver resolver, String name, String value,
-        String tag, boolean makeDefault, int userHandle, boolean overrideableByRestore) {
+            int userHandle) {
         final Table<Integer, String, Object> userTable = getUserTable(resolver);
         synchronized (userTable) {
             if (value != null) {
@@ -57,8 +55,7 @@ public class ShadowSecureSettings extends ShadowSettings.ShadowSecure {
      */
     @Implementation
     public static boolean putString(ContentResolver resolver, String name, String value) {
-        return putStringForUser(resolver, name, value, null, false,
-                resolver.getUserId(), DEFAULT_OVERRIDEABLE_BY_RESTORE);
+        return putStringForUser(resolver, name, value, resolver.getUserId());
     }
 
     @Implementation

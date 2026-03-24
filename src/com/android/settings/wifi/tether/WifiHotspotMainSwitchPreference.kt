@@ -23,8 +23,14 @@ import com.android.settings.R
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.widget.MainSwitchBarMetadata
 import com.android.settings.wifi.utils.wifiApState
-import com.android.settingslib.datastore.*
-import com.android.settingslib.metadata.*
+import com.android.settingslib.datastore.AbstractKeyedDataObservable
+import com.android.settingslib.datastore.HandlerExecutor
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 
 class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStore) :
     MainSwitchBarMetadata, PreferenceAvailabilityProvider {
@@ -43,7 +49,7 @@ class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStor
 
     override fun isAvailable(context: Context) =
         context.wifiApState == WIFI_AP_STATE_ENABLED ||
-                !(featureFactory.wifiFeatureProvider.wifiHotspotRepository?.isRestarting ?: false)
+            !(featureFactory.wifiFeatureProvider.wifiHotspotRepository?.isRestarting ?: false)
 
     override fun storage(context: Context): KeyValueStore = UseWifiHotspotStore(wifiHotspotStore)
 
@@ -60,7 +66,7 @@ class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStor
         ReadWritePermit.ALLOW
 
     override val sensitivityLevel
-        get() = SensitivityLevel.HIGH_SENSITIVITY
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     @Suppress("UNCHECKED_CAST")
     private class UseWifiHotspotStore(private val wifiHotspotStore: KeyValueStore) :

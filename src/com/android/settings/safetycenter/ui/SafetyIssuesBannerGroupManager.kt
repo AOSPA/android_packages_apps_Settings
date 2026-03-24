@@ -86,9 +86,6 @@ class SafetyIssuesBannerGroupManager(
         removeStaleBanners(currentDismissedIssueBanners, newDismissedIssueKeys)
 
         if (newDismissedIssues.isNotEmpty()) {
-            bannerGroup.addSubsection(
-                context.getString(R.string.safety_center_dismissed_issues_subsection_title)
-            )
             createOrUpdateBanners(
                 newDismissedIssues,
                 currentDismissedIssueBanners,
@@ -96,8 +93,6 @@ class SafetyIssuesBannerGroupManager(
                 resolvedIssues,
                 issueIdToHeaderResIdMap,
             )
-        } else {
-            bannerGroup.removeSubsection()
         }
     }
 
@@ -175,7 +170,9 @@ class SafetyIssuesBannerGroupManager(
     ) {
         val staleKeys = currentIssueBanners.keys.toSet() - newIssueKeys
         staleKeys.forEach { key ->
-            currentIssueBanners.remove(key)?.let { banner -> bannerGroup.removePreference(banner) }
+            currentIssueBanners.remove(key)?.let { banner ->
+                bannerGroup.removePreference(banner, /* moveToDismissed= */ false)
+            }
         }
     }
 
@@ -214,11 +211,7 @@ class SafetyIssuesBannerGroupManager(
             banner.updateBanner(issue, isDismissed, resolvedIssues, headerResId)
             banner.order = index
 
-            if (isDismissed) {
-                bannerGroup.addSubsectionPreference(banner)
-            } else {
-                bannerGroup.addPreference(banner)
-            }
+            bannerGroup.addPreference(banner, isDismissed)
         }
     }
 

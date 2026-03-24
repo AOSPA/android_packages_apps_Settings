@@ -43,7 +43,7 @@ import com.android.settingslib.graph.SignalDrawable
  */
 class SatelliteIconDrawable(private val context: Context) : Drawable() {
 
-    private val text: String = context.getString(R.string.satellite_icon_text)
+    private val text: String = context.getString(com.android.internal.R.string.satellite_indicator)
 
     private val signalDrawable: SignalDrawable? =
         try {

@@ -113,13 +113,13 @@ class WifiDisplayScreenTest {
     }
 
     @Test
-    fun getPreferenceHierarchy_returnsEmptyHierarchy() {
+    fun getPreferenceHierarchy_hasWifiDisplayScreenPreference() {
         val testScope = CoroutineScope(Dispatchers.Unconfined)
 
         val hierarchy = preferenceScreenCreator.getPreferenceHierarchy(context, testScope)
 
         assertThat(hierarchy).isNotNull()
-        hierarchy.forEach { fail("Preference hierarchy should be empty") }
+        assertThat(hierarchy.find("wifi_display_settings_preference")).isNotNull()
     }
 
     @Test

@@ -25,6 +25,7 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.applications.AppStorageSettings
+import com.android.settings.applications.InstalledPackageName
 import com.android.settings.applications.getApplicationInfo
 import com.android.settings.applications.specialaccess.InteractAcrossProfilesAppDetailScreen
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
@@ -51,6 +52,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_STORAGE
 
 @ProvidePreferenceScreen(AppInfoStorageScreen.KEY, parameterized = true)
 open class AppInfoStorageScreen
@@ -66,6 +68,8 @@ private constructor(
     PreferenceSummaryProvider,
     PreferenceTitleProvider,
     PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_STORAGE, TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
 
     private val packageName: String =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -107,8 +111,7 @@ private constructor(
 
     override fun getMetricsCategory() = SettingsEnums.APPLICATIONS_APP_STORAGE
 
-    override fun tags(context: Context) =
-        arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
 
     override fun getTitle(context: Context): CharSequence? =
         appInfo?.loadLabel(context.packageManager)
@@ -163,7 +166,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true)
+            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true, type = InstalledPackageName)
         }
 
         @JvmStatic

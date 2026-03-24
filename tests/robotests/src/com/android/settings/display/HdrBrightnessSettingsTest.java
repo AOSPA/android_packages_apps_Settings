@@ -30,6 +30,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class HdrBrightnessSettingsTest {
 
@@ -47,3 +48,4 @@ public class HdrBrightnessSettingsTest {
         assertThat(indexedXml).contains(R.xml.hdr_brightness_detail);
     }
 }
+// LINT.ThenChange(HdrBrightnessApiScreenTest.kt)

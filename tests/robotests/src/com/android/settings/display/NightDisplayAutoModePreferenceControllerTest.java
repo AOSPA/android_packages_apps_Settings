@@ -14,14 +14,23 @@
 
 package com.android.settings.display;
 
+import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.core.BasePreferenceController.UNSUPPORTED_ON_DEVICE;
+
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.hardware.display.ColorDisplayManager;
+import android.hardware.display.DisplayManagerGlobal;
 import android.location.LocationManager;
+import android.view.Display;
+import android.view.DisplayAdjustments;
+import android.view.DisplayInfo;
 
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 
@@ -34,6 +43,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = SettingsShadowResources.class)
 public class NightDisplayAutoModePreferenceControllerTest {
@@ -41,10 +51,15 @@ public class NightDisplayAutoModePreferenceControllerTest {
     private Context mContext;
     private NightDisplayAutoModePreferenceController mController;
     private LocationManager mLocationManager;
+    private final DisplayInfo mDisplayInfo = new DisplayInfo();
 
     @Before
     public void setUp() {
-        mContext = Mockito.spy(RuntimeEnvironment.application);
+        mDisplayInfo.type = Display.TYPE_INTERNAL;
+        DisplayAdjustments daj = null;
+        Display display = new Display(mock(DisplayManagerGlobal.class),
+                Display.DEFAULT_DISPLAY, mDisplayInfo, daj);
+        mContext = Mockito.spy(RuntimeEnvironment.application.createDisplayContext(display));
         mLocationManager = Mockito.mock(LocationManager.class);
         when(mLocationManager.isLocationEnabled()).thenReturn(true);
         when(mContext.getSystemService(eq(LocationManager.class))).thenReturn(mLocationManager);
@@ -60,6 +75,7 @@ public class NightDisplayAutoModePreferenceControllerTest {
     @Test
     public void configuredNightDisplayAvailableAndNotBlocked_isAvailable() {
         NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
         assertThat(mController.isAvailable()).isTrue();
     }
 
@@ -67,6 +83,7 @@ public class NightDisplayAutoModePreferenceControllerTest {
     public void configuredNightDisplayUnavailableAndNotBlocked_isUnavailable() {
         NightDisplayTestUtils.setNightDisplayAvailable(false);
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(false);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -74,6 +91,7 @@ public class NightDisplayAutoModePreferenceControllerTest {
     public void configuredNightDisplayAvailableAndBlocked_isUnavailable() {
         NightDisplayTestUtils.setNightDisplayAvailable(true);
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -81,6 +99,15 @@ public class NightDisplayAutoModePreferenceControllerTest {
     public void configuredNightDisplayUnavailableAndBlocked_isUnavailable() {
         NightDisplayTestUtils.setNightDisplayAvailable(false);
         NightDisplayTestUtils.setNightDisplaySettingsBlocked(true);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+        assertThat(mController.isAvailable()).isFalse();
+    }
+
+    @Test
+    public void configuredNightDisplayAvailableAndNotBlocked_externalDisplay_isUnavailable() {
+        NightDisplayTestUtils.setNightDisplayAvailableAndNotBlocked();
+        mDisplayInfo.type = Display.TYPE_EXTERNAL;
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
         assertThat(mController.isAvailable()).isFalse();
     }
 
@@ -92,3 +119,4 @@ public class NightDisplayAutoModePreferenceControllerTest {
                 .isEqualTo(ColorDisplayManager.AUTO_MODE_TWILIGHT);
     }
 }
+// LINT.ThenChange(NightDisplayApiScreenTest.kt)

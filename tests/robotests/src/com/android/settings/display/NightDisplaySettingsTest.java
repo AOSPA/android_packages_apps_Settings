@@ -30,6 +30,7 @@ import org.robolectric.RuntimeEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 
+// LINT.IfChange
 @RunWith(RobolectricTestRunner.class)
 public class NightDisplaySettingsTest {
 
@@ -53,3 +54,4 @@ public class NightDisplaySettingsTest {
         assertThat(settings.getCategoryKey()).isEqualTo(CategoryKey.CATEGORY_NIGHT_DISPLAY);
     }
 }
+// LINT.ThenChange(NightDisplayScreenTest.kt, NightDisplayApiScreenTest.kt)

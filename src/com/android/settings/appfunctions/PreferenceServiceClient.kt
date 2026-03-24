@@ -16,49 +16,50 @@
 
 package com.android.settings.appfunctions
 
+import android.app.Application
 import android.content.Context
-import android.content.Intent
-import com.android.settingslib.graph.PreferenceGetterApiDescriptor
+import android.os.Process
+import com.android.settings.metrics.SettingsRemoteOpMetricsLogger
+import com.android.settingslib.graph.PreferenceGetterApiHandler
 import com.android.settingslib.graph.PreferenceGetterRequest
 import com.android.settingslib.graph.PreferenceGetterResponse
-import com.android.settingslib.graph.PreferenceSetterApiDescriptor
+import com.android.settingslib.graph.PreferenceSetterApiHandler
 import com.android.settingslib.graph.PreferenceSetterRequest
-import com.android.settingslib.ipc.MessengerServiceClient
-import com.android.settingslib.service.PREFERENCE_SERVICE_ACTION
-import kotlinx.coroutines.Deferred
+import com.android.settingslib.ipc.ApiPermissionChecker
 
-/** Manages the connection to the PreferenceService. */
-class PreferenceServiceClient(context: Context) : MessengerServiceClient(context) {
-    override val serviceIntentFactory = { Intent(PREFERENCE_SERVICE_ACTION) }
+/**
+ * Manages the connection to the PreferenceService by calling handlers directly. This is one layer
+ * deeper than the IPC stack.
+ */
+class PreferenceServiceClient(context: Context) : AutoCloseable {
 
-    /**
-     * The id for get preference graph API. Corresponds to API_GET_PREFERENCE_GRAPH in SettingsLib
-     * ServiceApiConstants.
-     */
-    private val API_GET_PREFERENCE_GRAPH = 1
+    private val application = context.applicationContext as Application
 
-    /**
-     * The id for preference setter API. Corresponds to API_PREFERENCE_SETTER in SettingsLib
-     * ServiceApiConstants.
-     */
-    private val API_PREFERENCE_SETTER = 2
+    private val getApiHandler =
+        PreferenceGetterApiHandler(
+            3,
+            ApiPermissionChecker.alwaysAllow(),
+            SettingsRemoteOpMetricsLogger(),
+        )
 
-    /**
-     * The id for preference getter API. Corresponds to API_PREFERENCE_GETTER in SettingsLib
-     * ServiceApiConstants.
-     */
-    private val API_PREFERENCE_GETTER = 3
+    private val setApiHandler =
+        PreferenceSetterApiHandler(
+            2,
+            ApiPermissionChecker.alwaysAllow(),
+            SettingsRemoteOpMetricsLogger(),
+        )
 
-    /** Invokes the preference getter API. */
-    fun getPreferences(
-        packageName: String,
-        request: PreferenceGetterRequest,
-    ): Deferred<PreferenceGetterResponse> {
-        return invoke(packageName, PreferenceGetterApiDescriptor(API_PREFERENCE_GETTER), request)
+    /** Invokes the preference getter API directly. */
+    suspend fun getPreferences(request: PreferenceGetterRequest): PreferenceGetterResponse {
+        return getApiHandler.invoke(application, Process.myPid(), Process.myUid(), request)
     }
 
-    /** Invokes the preference setter API. */
-    fun setPreferenceValue(packageName: String, request: PreferenceSetterRequest): Deferred<Int> {
-        return invoke(packageName, PreferenceSetterApiDescriptor(API_PREFERENCE_SETTER), request)
+    /** Invokes the preference setter API directly. */
+    suspend fun setPreferenceValue(request: PreferenceSetterRequest): Int {
+        return setApiHandler.invoke(application, Process.myPid(), Process.myUid(), request)
+    }
+
+    override fun close() {
+        // No connection to close as we are calling directly
     }
 }

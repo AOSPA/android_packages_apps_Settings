@@ -20,6 +20,7 @@ import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.Intent
 import android.os.BaseBundle
+import android.os.Process
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
@@ -28,18 +29,23 @@ import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
+import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.ValidatedKeyParameters
+import com.android.settingslib.metadata.ReadWritePermit.Companion.ALLOW
+import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isUiOnlyPreference
+import com.android.settingslib.metadata.preferencesapi.ApiPreference
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
-import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.async
@@ -48,6 +54,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
+import kotlin.time.Duration.Companion.seconds
 
 /* A [DeviceStateProvider] that provides device state information for Settings that are
 exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
@@ -79,8 +86,7 @@ class CatalystStateProviderExecutor(
                                         try {
                                             buildPerScreenDeviceStates(
                                                 screenKey,
-                                                appFunctionType,
-                                                perScreenConfigMap[screenKey]?.additionalDescription,
+                                                appFunctionType
                                             )
                                         } catch (e: Exception) {
                                             Log.e(TAG, "error building $screenKey", e)
@@ -107,7 +113,6 @@ class CatalystStateProviderExecutor(
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenKey: String,
         appFunctionType: DeviceStateAppFunctionType,
-        additionalDescription: String?,
     ): List<PerScreenDeviceStates> {
         Log.v(TAG, "Building per screen device states for $screenKey")
         val hierarchy = getEnabledPreferencesHierarchy(config, context, appFunctionType, screenKey)
@@ -119,33 +124,33 @@ class CatalystStateProviderExecutor(
                 buildPerScreenDeviceStates(
                     screenMetaData,
                     preferencesHierarchy,
-                    additionalDescription,
                 )
             Log.v(TAG, "Built per screen device states for $screenKey")
             states
-        }
+        }.filterNotNull()
     }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenMetaData: PreferenceScreenMetadata,
         preferencesHierarchy: List<PreferenceHierarchyNode>,
-        additionalDescription: String?,
-    ): PerScreenDeviceStates {
+    ): PerScreenDeviceStates? {
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            if(metadata.isUiOnlyPreference(context))
+            // skip over UI-ONLY preferences
+            if (metadata.isUiOnlyPreference(context))
+                return@forEach
+            // skip if metadata is a PreferenceScreen
+            if (metadata.key == screenMetaData.key)
                 return@forEach
             val config = settingConfigMap[metadata.key]
             val jsonValue =
                 when {
                     // TODO(b/444419242): Handle IMEI redaction properly.
                     isImeiPreference(metadata.key) -> "REDACTED"
-                    metadata is PersistentPreference<*> ->
-                        metadata
-                            .storage(context)
-                            .getValue(metadata.key, metadata.valueType as Class<Any>)
-                            ?.toString()
+                    metadata is PersistentPreference<*> -> {
+                        getDeviceStateItemValueForPreference(metadata)
+                    }
                     else -> metadata.getPreferenceSummary(context)?.toString()
                 }
             jsonValue?.let {
@@ -155,8 +160,8 @@ class CatalystStateProviderExecutor(
                         // other item specific id necessary to distinguish the items.
                         key = "${screenMetaData.key}/${metadata.bindingKey}",
                         purpose = metadata.getPreferencePurpose(context).toString(),
-                        name =
-                            LocalizedString(
+                        name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*>) null
+                            else LocalizedString(
                                 english = metadata.getPreferenceTitle(englishContext).toString(),
                                 localized = metadata.getPreferenceTitle(context).toString(),
                             ),
@@ -167,23 +172,27 @@ class CatalystStateProviderExecutor(
             }
         }
 
-        // This is hack because in general parameters are not human readable. We remove known
-        // internal keys then just dump the rest in the description.
         val basicDescription = listOfNotNull(
             screenMetaData.getPreferenceScreenTitle(context)?.toString(),
-            additionalDescription,
-            screenMetaData.getPreferencePurpose(context).toString()
+            screenMetaData.getPreferencePurpose(context).toString(),
+            screenMetaData.accessPreconditionsAsString(context),
         ).filter { it.isNotBlank() }
             .joinToString(". ")
+            .replace("..", ".")
 
-        val arguments = screenMetaData.arguments?.clone() as? BaseBundle
-        arguments?.remove("source")
-        val descriptionSuffix =
+        val keyParameters = screenMetaData.keyParameters
+
+        val descriptionSuffix = if (keyParameters != null && keyParameters != ValidatedKeyParameters.EMPTY) {
+             "${keyParameters.toParametersString()}"
+        } else {
+            val arguments = screenMetaData.arguments?.clone() as? BaseBundle
+            arguments?.remove("source")
             if (arguments == null) {
                 ""
             } else {
                 ". " + arguments.keySet().joinToString(", ") { "$it=${arguments.get(it)}" }
             }
+        }
         val descriptionPrefix = if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else ""
         val description = descriptionPrefix + basicDescription + descriptionSuffix
 
@@ -194,7 +203,22 @@ class CatalystStateProviderExecutor(
                 deviceStateItems = deviceStateItemList,
                 intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
             )
+
         return states
+    }
+
+    private fun getDeviceStateItemValueForPreference(metadata: PersistentPreference<*>): String? {
+        val allowedRead = metadata.getReadPermit(
+            context, Process.myPid(),
+            Process.myUid()
+        ) == ALLOW
+        return if (allowedRead) {
+            metadata.storage(context)
+                .getValue(metadata.key, metadata.valueType as Class<Any>)
+                ?.toString()
+        } else {
+            "null"
+        }
     }
 
     /**

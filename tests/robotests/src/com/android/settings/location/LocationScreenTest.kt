@@ -31,33 +31,33 @@ class LocationScreenTest : SettingsCatalystTestCase() {
     override val preferenceScreenCreator = LocationScreen()
 
     override val flagName: String
-        get() = Flags.FLAG_CATALYST_LOCATION_SETTINGS
+        get() = Flags.FLAG_CATALYST_MIGRATION_26Q2
 
     private val mockLocationManager = mock<LocationManager>()
 
     private val context =
-            object : ContextWrapper(appContext) {
-                override fun getSystemService(name: String): Any =
-                    when (name) {
-                        Context.LOCATION_SERVICE -> mockLocationManager
-                        else -> super.getSystemService(name)
-                    }
-            }
+        object : ContextWrapper(appContext) {
+            override fun getSystemService(name: String): Any =
+                when (name) {
+                    Context.LOCATION_SERVICE -> mockLocationManager
+                    else -> super.getSystemService(name)
+                }
+        }
 
     @Test
     fun getSummary_enableLocation_shouldReturnLoading() {
         mockLocationManager.stub { on { isLocationEnabled } doReturn true }
 
-        assertThat(preferenceScreenCreator.getSummary(context)).isEqualTo(
-                context.getString(R.string.location_settings_loading_app_permission_stats))
+        assertThat(preferenceScreenCreator.getSummary(context))
+            .isEqualTo(context.getString(R.string.location_settings_loading_app_permission_stats))
     }
 
     @Test
     fun getSummary_disableLocation_shouldReturnLocationOff() {
         mockLocationManager.stub { on { isLocationEnabled } doReturn false }
 
-        assertThat(preferenceScreenCreator.getSummary(context)).isEqualTo(
-                context.getString(R.string.location_settings_summary_location_off))
+        assertThat(preferenceScreenCreator.getSummary(context))
+            .isEqualTo(context.getString(R.string.location_settings_summary_location_off))
     }
 
     @Test

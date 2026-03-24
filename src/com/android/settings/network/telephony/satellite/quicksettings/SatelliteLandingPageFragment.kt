@@ -346,6 +346,8 @@ class SatelliteLandingPageFragment : SettingsBasePreferenceFragment {
             context?.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
             Log.e(TAG, "Failed to start activity: ${intent.action ?: intent.component}", e)
+        } catch (e: SecurityException) {
+            Log.e(TAG, "Failed to start activity: ${intent.action ?: intent.component}", e)
         }
     }
 

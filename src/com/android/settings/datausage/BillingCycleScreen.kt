@@ -42,6 +42,7 @@ import com.android.settingslib.preference.PreferenceBindingPlaceholder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 // LINT.IfChange
 /** Preference screen for setting the billing cycle, data warning and limit. */
@@ -58,6 +59,7 @@ private constructor(
     PreferenceAvailabilityProvider,
     PreferenceBinding,
     PreferenceBindingPlaceholder {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
 
     private val subId: Int =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {

@@ -28,6 +28,7 @@ import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -38,6 +39,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.notification.modes.ZenModesBackend
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NOTIFICATIONS
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ZenModesListScreen.KEY)
@@ -47,6 +49,8 @@ open class ZenModesListScreen :
     PreferenceIconProvider,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NOTIFICATIONS, TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
 
     private var zenSettingsObserver: ZenSettingsObserver? = null
 
@@ -91,8 +95,7 @@ open class ZenModesListScreen :
 
     override fun getMetricsCategory(): Int = SettingsEnums.ZEN_PRIORITY_MODES_LIST
 
-    override fun tags(context: Context) =
-        arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
 
     override fun hasCompleteHierarchy() = false
 
@@ -102,7 +105,7 @@ open class ZenModesListScreen :
     override fun fragmentClass(): Class<out Fragment> = ZenModesListFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +ZenModesListScreenPreference(this@ZenModesListScreen) }
 
     override fun onStart(context: PreferenceLifecycleContext) {
         if (isEntryPoint(context)) {
@@ -117,6 +120,24 @@ open class ZenModesListScreen :
             zenSettingsObserver?.unregister()
             zenSettingsObserver = null
         }
+    }
+
+    class ZenModesListScreenPreference(
+        private val screenMetadata : ZenModesListScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider {
+        override val key : String
+            get() = "top_level_priority_modes_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
     }
 
     companion object {

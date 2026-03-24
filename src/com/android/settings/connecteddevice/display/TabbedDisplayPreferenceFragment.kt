@@ -42,6 +42,7 @@ import com.google.common.collect.HashBiMap
  * The main fragment that holds both the DisplayTopologyPreferenceView and the
  * SelectedDisplayPreferenceFragment, isolating them from each other to prevent redraw issues.
  */
+// LINT.IfChange
 @SearchIndexable
 open class TabbedDisplayPreferenceFragment(
     private val testViewModel: DisplayPreferenceViewModel? = null
@@ -156,11 +157,12 @@ open class TabbedDisplayPreferenceFragment(
 
     @VisibleForTesting
     internal open fun createDisplayTopologyPreferenceView(): DisplayTopologyPreferenceView {
+        val uiContext = requireContext()
         val selectedId = viewModel.uiState.value?.selectedDisplayId
         return if (selectedId != null && selectedId != -1) {
-            DisplayTopologyPreferenceView(viewModel.injector, selectedId)
+            DisplayTopologyPreferenceView(uiContext, viewModel.injector, selectedId)
         } else {
-            DisplayTopologyPreferenceView(viewModel.injector)
+            DisplayTopologyPreferenceView(uiContext, viewModel.injector)
         }
     }
 
@@ -372,8 +374,7 @@ open class TabbedDisplayPreferenceFragment(
                     indexInfo.keywords =
                         context.getString(R.string.keywords_external_display_settings)
                     if (DesktopSettingsUtils.shouldShowTopLevelDeviceCategory(context)) {
-                        indexInfo.screenTitle =
-                            context.getString(R.string.display_settings)
+                        indexInfo.screenTitle = context.getString(R.string.display_settings)
                     } else {
                         indexInfo.screenTitle =
                             context.getString(R.string.connected_devices_dashboard_title)
@@ -384,3 +385,4 @@ open class TabbedDisplayPreferenceFragment(
             }
     }
 }
+// LINT.ThenChange(TabbedDisplayApiScreen.kt)

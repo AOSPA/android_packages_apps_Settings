@@ -131,6 +131,19 @@ public class ScreenLockPreferenceDetailsUtilsTest {
     @Test
     public void getSummary_unsecureAndDisabledPattern_flagOn_shouldReturnUnlockModeOff() {
         final String summary = prepareString("unlock_set_unlock_mode_off_new", "unlockModeOff");
+        whenConfigHidePatternSecurityOptionIsEnabled(false);
+
+        when(mLockPatternUtils.isSecure(USER_ID)).thenReturn(false);
+        when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(true);
+
+        assertThat(mScreenLockPreferenceDetailsUtils.getSummary(USER_ID)).isEqualTo(summary);
+    }
+
+    @Test
+    public void getSummary_unsecureAndDisabledPattern_patternUnsupported_hasCorrectSummary() {
+        final String summary = prepareString("unlock_set_unlock_mode_off_new_without_pattern",
+                "unlockModeOffWithoutPattern");
+        whenConfigHidePatternSecurityOptionIsEnabled(true);
 
         when(mLockPatternUtils.isSecure(USER_ID)).thenReturn(false);
         when(mLockPatternUtils.isLockScreenDisabled(anyInt())).thenReturn(true);
@@ -365,6 +378,13 @@ public class ScreenLockPreferenceDetailsUtilsTest {
         final int resId = ResourcesUtils.getResourcesId(
                 ApplicationProvider.getApplicationContext(), "bool",
                 "config_show_unlock_set_or_change");
+        when(mResources.getBoolean(resId)).thenReturn(enabled);
+    }
+
+    private void whenConfigHidePatternSecurityOptionIsEnabled(boolean enabled) {
+        final int resId = ResourcesUtils.getResourcesId(
+                ApplicationProvider.getApplicationContext(), "bool",
+                "config_hide_pattern_security_option");
         when(mResources.getBoolean(resId)).thenReturn(enabled);
     }
 

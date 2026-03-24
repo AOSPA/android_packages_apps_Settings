@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.types.AnyInt
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -44,6 +45,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.merge
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 @ProvidePreferenceScreen(WifiCallingScreen.KEY, parameterized = true, parameterizedMigration = true)
 open class WifiCallingScreen
@@ -54,6 +56,8 @@ private constructor(
     final override val arguments: Bundle?,
     final override val keyParameters: ValidatedKeyParameters?,
 ) : PreferenceScreenMixin, PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+
 
     private val subId: Int =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -103,7 +107,8 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(EXTRA_SUB_ID, "The subscription ID. If it's not provided, the default system subscription will be used.", required = false)
+            // TODO(scottjonathan):We need to specify the correct restricted type here.
+            parameter(EXTRA_SUB_ID, "The subscription ID. If it's not provided, the default system subscription will be used.", required = false, type=AnyInt)
         }
 
         @JvmStatic

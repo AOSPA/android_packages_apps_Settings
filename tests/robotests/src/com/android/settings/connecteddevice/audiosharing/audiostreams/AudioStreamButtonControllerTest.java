@@ -16,8 +16,6 @@
 
 package com.android.settings.connecteddevice.audiosharing.audiostreams;
 
-import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.PAUSED;
-import static com.android.settingslib.bluetooth.LocalBluetoothLeBroadcastAssistant.LocalBluetoothLeBroadcastSourceState.STREAMING;
 import static com.android.settingslib.flags.Flags.FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX;
 import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
 
@@ -88,12 +86,12 @@ public class AudioStreamButtonControllerTest {
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     private static final String KEY = "audio_stream_button";
     private static final int BROADCAST_ID = 1;
+    private static final int SOURCE_ID = 2;
     private final Context mContext = ApplicationProvider.getApplicationContext();
     @Mock private AudioStreamsHelper mAudioStreamsHelper;
     @Mock private PreferenceScreen mScreen;
     @Mock private BluetoothLeBroadcastReceiveState mBroadcastReceiveState;
     @Mock private LocalBluetoothLeBroadcastAssistant mAssistant;
-    @Mock private AudioStreamsRepository mRepository;
     @Mock private ActionButtonsPreference mPreference;
     @Mock private BluetoothDevice mSourceDevice;
     private Lifecycle mLifecycle;
@@ -104,8 +102,8 @@ public class AudioStreamButtonControllerTest {
     @Before
     public void setUp() {
         mSetFlagsRule.disableFlags(FLAG_AUDIO_SHARING_HYSTERESIS_MODE_FIX);
-        ShadowBluetoothAdapter shadowBluetoothAdapter = Shadow.extract(
-                BluetoothAdapter.getDefaultAdapter());
+        ShadowBluetoothAdapter shadowBluetoothAdapter =
+                Shadow.extract(BluetoothAdapter.getDefaultAdapter());
         shadowBluetoothAdapter.setEnabled(true);
         shadowBluetoothAdapter.setIsLeAudioBroadcastSourceSupported(
                 BluetoothStatusCodes.FEATURE_SUPPORTED);
@@ -168,8 +166,9 @@ public class AudioStreamButtonControllerTest {
 
     @Test
     public void testDisplayPreference_sourceStreaming_setDisconnectButton() {
-        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
-                .thenReturn(Map.of(BROADCAST_ID, STREAMING));
+        setupConnectedSource(BROADCAST_ID);
+        BluetoothLeBroadcastMetadata metadata = mock(BluetoothLeBroadcastMetadata.class);
+        when(mAssistant.getSourceMetadata(any(), anyInt())).thenReturn(metadata);
         when(mBroadcastReceiveState.getBroadcastId()).thenReturn(BROADCAST_ID);
 
         mController.displayPreference(mScreen);
@@ -185,6 +184,8 @@ public class AudioStreamButtonControllerTest {
 
         assertThat(listener).isNotNull();
         listener.onClick(mock(View.class));
+        assertThat(mController.mSourceMetadata).isEqualTo(metadata);
+        verify(mAssistant).getSourceMetadata(mSourceDevice, SOURCE_ID);
         verify(mAudioStreamsHelper).removeSource(BROADCAST_ID);
         verify(mPreference).setButton1Enabled(false);
         verify(mFeatureFactory.metricsFeatureProvider)
@@ -193,11 +194,9 @@ public class AudioStreamButtonControllerTest {
 
     @Test
     public void testDisplayPreference_sourceNotConnected_setConnectButton() {
-        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
-                .thenReturn(Collections.emptyMap());
-        mController.setAudioStreamsRepositoryForTesting(mRepository);
+        when(mAudioStreamsHelper.getAllSourcesByDevice()).thenReturn(Collections.emptyMap());
         var metadataToRejoin = mock(BluetoothLeBroadcastMetadata.class);
-        when(mRepository.getSavedMetadata(any(), anyInt())).thenReturn(metadataToRejoin);
+        mController.mSourceMetadata = metadataToRejoin;
 
         mController.displayPreference(mScreen);
 
@@ -219,9 +218,32 @@ public class AudioStreamButtonControllerTest {
     }
 
     @Test
+    public void testDisplayPreference_sourceNotConnected_setConnectButton_cannotAddSource() {
+        when(mAudioStreamsHelper.getAllSourcesByDevice()).thenReturn(Collections.emptyMap());
+        var metadataToRejoin = mock(BluetoothLeBroadcastMetadata.class);
+
+        mController.displayPreference(mScreen);
+
+        verify(mPreference).setButton1Enabled(true);
+        verify(mPreference).setButton1Text(R.string.audio_streams_connect);
+        verify(mPreference).setButton1Icon(com.android.settings.R.drawable.ic_add_24dp);
+
+        ArgumentCaptor<View.OnClickListener> listenerCaptor =
+                ArgumentCaptor.forClass(View.OnClickListener.class);
+        verify(mPreference).setButton1OnClickListener(listenerCaptor.capture());
+        var listener = listenerCaptor.getValue();
+
+        assertThat(listener).isNotNull();
+        listener.onClick(mock(View.class));
+        verify(mAudioStreamsHelper, never()).addSource(metadataToRejoin);
+        verify(mPreference, never()).setButton1Enabled(false);
+        verify(mFeatureFactory.metricsFeatureProvider, never())
+                .action(any(), eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN), anyInt());
+    }
+
+    @Test
     public void testCallback_onSourceRemoved_updateButton() {
-        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
-                .thenReturn(Collections.emptyMap());
+        when(mAudioStreamsHelper.getAllSourcesByDevice()).thenReturn(Collections.emptyMap());
 
         mController.displayPreference(mScreen);
         mController.mBroadcastAssistantCallback.onSourceRemoved(
@@ -235,9 +257,7 @@ public class AudioStreamButtonControllerTest {
 
     @Test
     public void testCallback_onSourceRemovedFailed_updateButton() {
-        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
-                .thenReturn(Map.of(BROADCAST_ID, STREAMING));
-
+        setupConnectedSource(BROADCAST_ID);
         mController.displayPreference(mScreen);
         mController.mBroadcastAssistantCallback.onSourceRemoveFailed(
                 mock(BluetoothDevice.class), /* sourceId= */ 0, /* reason= */ 0);
@@ -254,8 +274,7 @@ public class AudioStreamButtonControllerTest {
 
     @Test
     public void testCallback_onReceiveStateChanged_updateButton() {
-        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
-                .thenReturn(Map.of(BROADCAST_ID, STREAMING));
+        setupConnectedSource(BROADCAST_ID);
         BluetoothLeBroadcastReceiveState state = mock(BluetoothLeBroadcastReceiveState.class);
         List<Long> bisSyncState = new ArrayList<>();
         bisSyncState.add(1L);
@@ -287,8 +306,7 @@ public class AudioStreamButtonControllerTest {
         when(mSourceDevice.getAddress()).thenReturn(address);
         List<Long> bisSyncState = new ArrayList<>();
         when(state.getBisSyncState()).thenReturn(bisSyncState);
-        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
-                .thenReturn(Map.of(BROADCAST_ID, PAUSED));
+        setupConnectedSource(BROADCAST_ID);
         // Create new controller to enable hysteresis mode
         mController = new AudioStreamButtonController(mContext, KEY);
         mController.init(BROADCAST_ID);
@@ -297,7 +315,9 @@ public class AudioStreamButtonControllerTest {
                 mock(BluetoothDevice.class), /* sourceId= */ 0, state);
 
         verify(mFeatureFactory.metricsFeatureProvider)
-                .action(any(), eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN_PRESENT_SUCCEED),
+                .action(
+                        any(),
+                        eq(SettingsEnums.ACTION_AUDIO_STREAM_JOIN_PRESENT_SUCCEED),
                         anyInt());
 
         // Called twice, once in displayPreference, the other one in callback
@@ -309,8 +329,7 @@ public class AudioStreamButtonControllerTest {
 
     @Test
     public void testCallback_onSourceAddFailed_updateButton() {
-        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
-                .thenReturn(Collections.emptyMap());
+        when(mAudioStreamsHelper.getAllSourcesByDevice()).thenReturn(Collections.emptyMap());
 
         mController.displayPreference(mScreen);
         mController.mBroadcastAssistantCallback.onSourceAddFailed(
@@ -329,8 +348,7 @@ public class AudioStreamButtonControllerTest {
 
     @Test
     public void testCallback_onSourceLost_updateButton() {
-        when(mAudioStreamsHelper.getConnectedBroadcastIdAndState(anyBoolean()))
-                .thenReturn(Collections.emptyMap());
+        when(mAudioStreamsHelper.getAllSourcesByDevice()).thenReturn(Collections.emptyMap());
 
         mController.displayPreference(mScreen);
         mController.mBroadcastAssistantCallback.onSourceLost(/* broadcastId= */ 0);
@@ -339,5 +357,14 @@ public class AudioStreamButtonControllerTest {
         verify(mPreference, times(2)).setButton1Enabled(true);
         verify(mPreference, times(2)).setButton1Text(R.string.audio_streams_connect);
         verify(mPreference, times(2)).setButton1Icon(com.android.settings.R.drawable.ic_add_24dp);
+    }
+
+    private void setupConnectedSource(int broadcastId) {
+        var connected = mock(BluetoothLeBroadcastReceiveState.class);
+        when(connected.getBroadcastId()).thenReturn(broadcastId);
+        when(connected.getSourceId()).thenReturn(SOURCE_ID);
+        List<BluetoothLeBroadcastReceiveState> list = new ArrayList<>();
+        list.add(connected);
+        when(mAudioStreamsHelper.getAllSourcesByDevice()).thenReturn(Map.of(mSourceDevice, list));
     }
 }

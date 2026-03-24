@@ -26,20 +26,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.telephony.TelephonyManager
 import android.text.TextUtils
-import android.telephony.SubscriptionManager
 import android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX
 import android.util.Log
 import android.util.Pair
 import androidx.preference.Preference
 import com.android.settings.R
-import com.android.settings.Utils
-import com.android.settings.deviceinfo.PhoneNumberUtil
 import com.android.settings.deviceinfo.imei.ImeiInfoDialogFragment
-import com.android.settings.flags.Flags
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.TelephonyUtils
-import com.android.settings.wifi.utils.isAdminUser
-import com.android.settings.wifi.utils.telephonyManager
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -47,30 +41,19 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.preference.PreferenceBinding
+import kotlinx.coroutines.launch
 
 import com.qti.extphone.QtiImeiInfo
 
 // LINT.IfChange
 @SuppressLint("MissingPermission")
-class MobileNetworkImeiPreference(
-    private val context: Context,
-    private val subId: Int,
-    private val imeiList: List<String> = listOf<String>(),
-) :
+class MobileNetworkImeiPreference(private val data: MobileNetworkData) :
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceLifecycleProvider,
     PreferenceTitleProvider,
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider {
-
-    private val isAvailable =
-        context.isAdminUser == true &&
-            (Utils.isMobileDataCapable(context) || Utils.isVoiceCapable(context)) &&
-            (Flags.isDualSimOnboardingEnabled() && SubscriptionManager.isValidSubscriptionId(subId))
-    private var imei: String? = if (isAvailable) context.getImei() else ""
-    private var indexing: Int = imeiList.indexOf(imei)
-    private val formattedTitle: String = getFormattedTitle()
 
     override val key: String
         get() = KEY
@@ -80,16 +63,15 @@ class MobileNetworkImeiPreference(
 
     private val Context.isMinHalVersion2_1: Boolean
         private get() {
-            val radioVersion: Pair<Int, Int> = telephonyManager?.getHalVersion(
+            val radioVersion: Pair<Int, Int> = data.context.telephonyManager(data.subId)?.getHalVersion(
                     TelephonyManager.HAL_SERVICE_MODEM)?: Pair(0, 0)
             val halVersion = makeRadioVersion(radioVersion.first, radioVersion.second)
             return halVersion > makeRadioVersion(2, 0)
         }
 
-    override fun getSummary(context: Context): CharSequence? =
-        imei?.let { PhoneNumberUtil.expandByTts(it) }
+    override fun getSummary(context: Context): CharSequence? = data.imeiInfoDataFlow.value.summary
 
-    override fun isAvailable(context: Context) = isAvailable
+    override fun isAvailable(context: Context) = data.imeiInfoDataFlow.value.isAvailable
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
@@ -97,34 +79,34 @@ class MobileNetworkImeiPreference(
     }
 
     override fun onCreate(context: PreferenceLifecycleContext) {
+        data.coroutineScope?.launch {
+            data.imeiInfoDataFlow.collect {
+                context.notifyPreferenceChange(KEY)
+                Log.d(TAG, "imeiDataFlow collect")
+            }
+        }
         context.requirePreference<Preference>(key).onPreferenceClickListener =
             Preference.OnPreferenceClickListener {
+                val title = getTitle(context) ?: ""
                 getSlotIndex()
                     .takeIf { it != INVALID_SIM_SLOT_INDEX }
                     ?.run {
                         ImeiInfoDialogFragment.show(
                             context.childFragmentManager,
                             this,
-                            formattedTitle,
+                            title.toString(),
                         )
                     }
                 return@OnPreferenceClickListener true
             }
     }
 
-    override fun getTitle(context: Context): CharSequence? = formattedTitle
-
-    private fun getFormattedTitle(): String =
-        if (indexing != -1 && imeiList.size >= 2) {
-            context.getString(R.string.imei_multi_sim, indexing + 1)
-        } else {
-            context.getString(R.string.status_imei)
-        }
+    override fun getTitle(context: Context): CharSequence? = data.imeiInfoDataFlow.value.title
 
     private fun getSlotIndex(): Int {
         val subscription =
-            SubscriptionUtil.getActiveSubscriptions(context.subscriptionManager).firstOrNull {
-                it.subscriptionId == subId
+            SubscriptionUtil.getActiveSubscriptions(data.context.subscriptionManager).firstOrNull {
+                it.subscriptionId == data.subId
             }
         return if (subscription != null) {
             Log.d(TAG, "getSlotIndex(), simSlotIndex=${subscription.simSlotIndex}")
@@ -141,7 +123,7 @@ class MobileNetworkImeiPreference(
         var qtiImeiInfo: Array<QtiImeiInfo?>? = null
         try {
             if (isMinHalVersion2_1 && !TelephonyUtils.isDsdsToSsConfigValid(this)) {
-                imei = telephonyManager(subId)?.imei ?: String()
+                imei = data.context.telephonyManager(data.subId)?.imei ?: String()
             } else {
                 qtiImeiInfo = TelephonyUtils.getImeiInfo()
                 if (qtiImeiInfo != null) {
@@ -153,7 +135,7 @@ class MobileNetworkImeiPreference(
                     }
                 }
                 if (TextUtils.isEmpty(imei)) {
-                    imei = telephonyManager(subId)?.imei ?: String()
+                    imei = data.context.telephonyManager(data.subId)?.imei ?: String()
                 }
             }
         } catch (exception: Exception) {

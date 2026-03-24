@@ -25,6 +25,7 @@ import com.android.settings.widget.MainSwitchBarMetadata
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
+import com.android.settingslib.metadata.MUSTPASS
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -48,7 +49,7 @@ class DataSaverMainSwitchPreference :
     override val preferenceActionMetrics: Int
         get() = ACTION_DATA_SAVER_MODE
 
-    override fun tags(context: Context) = arrayOf(KEY_DATA_SAVER)
+    override fun tags(context: Context) = arrayOf(KEY_DATA_SAVER, MUSTPASS)
 
     override fun storage(context: Context) = createDataStore(context)
 

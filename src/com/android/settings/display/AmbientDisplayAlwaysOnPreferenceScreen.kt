@@ -58,6 +58,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.systemui.shared.Flags.aodInactivityDetection
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 /**
@@ -74,6 +75,8 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     PreferenceRestrictionMixin,
     PreferenceLifecycleProvider,
     PreferenceSummaryProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, KEY_AMBIENT_DISPLAY_ALWAYS_ON)
+
 
     private val ambientWallpaperPreference = AmbientWallpaperPreference(context)
     private lateinit var keyedObserver: KeyedObserver<String>
@@ -102,7 +105,7 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override val preferenceActionMetrics: Int
         get() = ACTION_AMBIENT_DISPLAY_ALWAYS_ON
 
-    override fun tags(context: Context) = arrayOf(KEY_AMBIENT_DISPLAY_ALWAYS_ON)
+
 
     override val restrictionKeys: Array<String>
         get() = arrayOf(UserManager.DISALLOW_AMBIENT_DISPLAY)

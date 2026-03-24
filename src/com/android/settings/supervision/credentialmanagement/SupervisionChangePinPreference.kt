@@ -19,6 +19,7 @@ import android.app.Activity
 import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_CHANGE_PIN
 import android.app.supervision.flags.Flags
+import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
@@ -37,6 +38,7 @@ import com.android.settings.supervision.shared.supervisingUserHandle
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.supervision.SupervisionLog.TAG
 
@@ -59,6 +61,8 @@ class SupervisionChangePinPreference :
 
     override val purpose: Int
         get() = R.string.supervision_change_pin_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val title: Int
         get() = R.string.supervision_change_pin_preference_title

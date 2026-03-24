@@ -21,6 +21,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.AccessibilityDelegateCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.android.settings.R
 
 class WifiConfigAdvancedLayout(val view: View) {
@@ -38,6 +41,21 @@ class WifiConfigAdvancedLayout(val view: View) {
 
     init {
         layout.setOnClickListener { expanded = !isExpanded }
+        ViewCompat.setAccessibilityDelegate(
+            layout,
+            object : AccessibilityDelegateCompat() {
+                override fun onInitializeAccessibilityNodeInfo(
+                    host: View,
+                    info: AccessibilityNodeInfoCompat,
+                ) {
+                    super.onInitializeAccessibilityNodeInfo(host, info)
+                    info.isCheckable = true
+                    info.expandedState =
+                        if (isExpanded) AccessibilityNodeInfoCompat.EXPANDED_STATE_FULL
+                        else AccessibilityNodeInfoCompat.EXPANDED_STATE_COLLAPSED
+                }
+            },
+        )
     }
 
     var expanded: Boolean

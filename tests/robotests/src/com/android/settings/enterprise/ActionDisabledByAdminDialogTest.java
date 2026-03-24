@@ -17,12 +17,16 @@
 package com.android.settings.enterprise;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+import static android.provider.Settings.ACTION_SHOW_ADMIN_SUPPORT_DETAILS;
+import static android.provider.Settings.ACTION_SHOW_SUSPENDED_PACKAGE_ADMIN_SUPPORT_DETAILS;
 import static android.security.advancedprotection.AdvancedProtectionManager.ACTION_SHOW_ADVANCED_PROTECTION_SUPPORT_DIALOG;
 import static android.security.advancedprotection.AdvancedProtectionManager.ADVANCED_PROTECTION_SYSTEM_ENTITY;
 import static android.security.advancedprotection.AdvancedProtectionManager.EXTRA_SUPPORT_DIALOG_FEATURE;
 import static android.security.advancedprotection.AdvancedProtectionManager.EXTRA_SUPPORT_DIALOG_TYPE;
 import static android.security.advancedprotection.AdvancedProtectionManager.FEATURE_ID_DISALLOW_INSTALL_UNKNOWN_SOURCES;
 import static android.security.advancedprotection.AdvancedProtectionManager.SUPPORT_DIALOG_TYPE_UNKNOWN;
+
+import static com.android.settings.testutils.DevicePolicyUtils.DPC_ADMIN;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -67,6 +71,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
@@ -80,6 +85,9 @@ public class ActionDisabledByAdminDialogTest {
     @Mock
     private DevicePolicyManager mDevicePolicyManager;
 
+    @Mock
+    private UserManager mUserManager;
+
     private ActionDisabledByAdminDialog mDialog;
     private final ComponentName mAdminComponent = new ComponentName("admin", "adminclass");
 
@@ -88,6 +96,7 @@ public class ActionDisabledByAdminDialogTest {
         MockitoAnnotations.initMocks(this);
         mDialog = spy(new ActionDisabledByAdminDialog());
         doReturn(mDevicePolicyManager).when(mDialog).getSystemService(DevicePolicyManager.class);
+        doReturn(mUserManager).when(mDialog).getSystemService(UserManager.class);
     }
 
     @Test
@@ -96,7 +105,7 @@ public class ActionDisabledByAdminDialogTest {
         final EnforcedAdmin expectedAdmin = new EnforcedAdmin(mAdminComponent, UserHandle.of(
                 userId));
 
-        final Intent intent = new Intent();
+        final Intent intent = new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mAdminComponent);
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         assertEquals(expectedAdmin, mDialog.getAdminDetailsFromIntent(intent));
@@ -122,7 +131,7 @@ public class ActionDisabledByAdminDialogTest {
                 new EnforcingAdmin("test.pkg", new UnknownAuthority(), UserHandle.of(userId));
         when(mDevicePolicyManager.getEnforcingAdmin(userId, restriction)).thenReturn(expectedAdmin);
 
-        final Intent intent = new Intent();
+        final Intent intent = new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         intent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, restriction);
 
@@ -142,7 +151,7 @@ public class ActionDisabledByAdminDialogTest {
         when(mDevicePolicyManager.getEnforcingAdminsForPolicy(
                 DevicePolicyIdentifiers.getIdentifierForUserRestriction(restriction),
                 userId)).thenReturn(policyEnforcementInfo);
-        final Intent intent = new Intent();
+        final Intent intent = new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         intent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, restriction);
 
@@ -152,7 +161,7 @@ public class ActionDisabledByAdminDialogTest {
     @Test
     public void testGetEnforcingAdmin_fromNullRestriction_isNull() {
         assertEquals(null,
-                mDialog.getEnforcingAdmin(new Intent()));
+                mDialog.getEnforcingAdmin(new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS)));
     }
 
     @RequiresFlagsEnabled(Flags.FLAG_ENFORCING_ADMIN_EXTRA_ENABLED)
@@ -160,17 +169,76 @@ public class ActionDisabledByAdminDialogTest {
     public void testGetEnforcingAdmin_enforcingAdminExtraEnabled() {
         final EnforcingAdmin expectedAdmin = new EnforcingAdmin("test.pkg", new UnknownAuthority(),
                 UserHandle.CURRENT_OR_SELF);
-        final Intent intent = new Intent();
+        final Intent intent = new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
         intent.putExtra(DevicePolicyManager.EXTRA_ENFORCING_ADMIN, expectedAdmin);
 
         verifyNoMoreInteractions(mDevicePolicyManager);
         assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(intent));
     }
 
+    @EnableFlags({Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
+    @Test
+    public void testGetEnforcingAdmin_appsSuspendedDialog_appSuspendedOnCurrentUser() {
+        final int userId = 123;
+        final EnforcingAdmin expectedAdmin = DPC_ADMIN;
+        final PolicyEnforcementInfo policyEnforcementInfo = new PolicyEnforcementInfo(
+                List.of(expectedAdmin));
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.PACKAGES_SUSPENDED_POLICY,
+                userId)).thenReturn(policyEnforcementInfo);
+        final Intent intent = new Intent(ACTION_SHOW_SUSPENDED_PACKAGE_ADMIN_SUPPORT_DETAILS);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
+
+        assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(intent));
+    }
+
+    @EnableFlags({Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
+    @Test
+    public void testGetEnforcingAdmin_appsSuspendedDialog_appSuspendedOnParentUserByProfile() {
+        final int userId = 123;
+        final int parentUserId = 456;
+        when(mUserManager.getProfileParent(UserHandle.of(userId))).thenReturn(
+                UserHandle.of(parentUserId));
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.PACKAGES_SUSPENDED_POLICY,
+                userId)).thenReturn(new PolicyEnforcementInfo(Collections.emptyList()));
+        final EnforcingAdmin expectedAdmin = DPC_ADMIN;
+        final PolicyEnforcementInfo policyEnforcementInfo = new PolicyEnforcementInfo(
+                List.of(expectedAdmin));
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.PERSONAL_APPS_SUSPENDED_POLICY, parentUserId)).thenReturn(
+                policyEnforcementInfo);
+        final Intent intent = new Intent(ACTION_SHOW_SUSPENDED_PACKAGE_ADMIN_SUPPORT_DETAILS);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
+
+        assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(intent));
+    }
+
+    @EnableFlags({Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED})
+    @Test
+    public void testGetEnforcingAdmin_appsSuspendedDialog_appSuspendedOnParentUser() {
+        final int userId = 123;
+        // The user is not a profile.
+        when(mUserManager.getProfileParent(UserHandle.of(userId))).thenReturn(null);
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.PACKAGES_SUSPENDED_POLICY,
+                userId)).thenReturn(new PolicyEnforcementInfo(Collections.emptyList()));
+        final EnforcingAdmin expectedAdmin = DPC_ADMIN;
+        final PolicyEnforcementInfo policyEnforcementInfo = new PolicyEnforcementInfo(
+                List.of(expectedAdmin));
+        when(mDevicePolicyManager.getEnforcingAdminsForPolicy(
+                DevicePolicyIdentifiers.PERSONAL_APPS_SUSPENDED_POLICY, userId)).thenReturn(
+                policyEnforcementInfo);
+        final Intent intent = new Intent(ACTION_SHOW_SUSPENDED_PACKAGE_ADMIN_SUPPORT_DETAILS);
+        intent.putExtra(Intent.EXTRA_USER_ID, userId);
+
+        assertEquals(expectedAdmin, mDialog.getEnforcingAdmin(intent));
+    }
+
     @Test
     public void testGetRestrictionFromIntent() {
         final String restriction = "someRestriction";
-        final Intent intent = new Intent();
+        final Intent intent = new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
 
         intent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, restriction);
         assertEquals(restriction, mDialog.getRestrictionFromIntent(intent));
@@ -193,7 +261,7 @@ public class ActionDisabledByAdminDialogTest {
                 advancedProtectionAuthority, UserHandle.of(userId), mAdminComponent);
         final String userRestriction = UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY;
 
-        final Intent dialogIntent = new Intent();
+        final Intent dialogIntent = new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
         dialogIntent.putExtra(Intent.EXTRA_USER_ID, userId);
         dialogIntent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, userRestriction);
 
@@ -229,7 +297,7 @@ public class ActionDisabledByAdminDialogTest {
                 List.of(advancedProtectionEnforcingAdmin));
         final String userRestriction = UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY;
 
-        final Intent dialogIntent = new Intent();
+        final Intent dialogIntent = new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
         dialogIntent.putExtra(Intent.EXTRA_USER_ID, userId);
         dialogIntent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, userRestriction);
 
@@ -270,7 +338,7 @@ public class ActionDisabledByAdminDialogTest {
                 List.of(dpcAdmin, advancedProtectionEnforcingAdmin));
         final String userRestriction = UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY;
 
-        final Intent dialogIntent = new Intent();
+        final Intent dialogIntent = new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
         dialogIntent.putExtra(Intent.EXTRA_USER_ID, userId);
         dialogIntent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, userRestriction);
 
@@ -295,7 +363,7 @@ public class ActionDisabledByAdminDialogTest {
                 UnknownAuthority.UNKNOWN_AUTHORITY, UserHandle.of(userId), mAdminComponent);
         final String userRestriction = UserManager.DISALLOW_INSTALL_UNKNOWN_SOURCES_GLOBALLY;
 
-        final Intent dialogIntent = new Intent();
+        final Intent dialogIntent = new Intent(ACTION_SHOW_ADMIN_SUPPORT_DETAILS);
         dialogIntent.putExtra(Intent.EXTRA_USER_ID, userId);
         dialogIntent.putExtra(DevicePolicyManager.EXTRA_RESTRICTION, userRestriction);
 

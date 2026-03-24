@@ -19,22 +19,18 @@ package com.android.settings.spa.app.catalyst
 import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import com.android.settings.R
 import com.android.settings.Settings.StorageUseActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
-import com.android.settings.spa.app.catalyst.AppInfoStorageScreen.Companion.KEY_APP_PACKAGE_NAME
 import com.android.settings.spa.app.storage.StorageType
-import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PreferenceHierarchyGenerator
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_STORAGE
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 @ProvidePreferenceScreen(AppStorageAppListScreen.KEY)
 open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyGenerator<Boolean> {
@@ -53,7 +49,7 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
 
     override fun getMetricsCategory() = SettingsEnums.PAGE_UNKNOWN // TODO: correct page id
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_STORAGE, TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
 
@@ -71,29 +67,8 @@ open class AppStorageAppListScreen : PreferenceScreenMixin, PreferenceHierarchyG
     override fun generatePreferenceHierarchy(
         context: Context,
         coroutineScope: CoroutineScope,
-        type: Boolean, // whether to include system apps
-    ) =
-        preferenceHierarchy(context) {
-            addAsync(coroutineScope, Dispatchers.Default) {
-                AppListRepositoryImpl(context)
-                    .loadAndMaybeExcludeSystemApps(context.userId, type)
-                    .forEach { app ->
-                        if (StorageType.Apps.filter(app)) {
-                            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                                val parameters =
-                                    AppInfoStorageScreen.parametersSchema.prepare(
-                                        KEY_APP_PACKAGE_NAME to app.packageName
-                                    )
-                                +(AppInfoStorageScreen.KEY withParameters parameters)
-                            } else {
-                                val arguments =
-                                    Bundle(1).apply { putString("app", app.packageName) }
-                                +(AppInfoStorageScreen.KEY args arguments)
-                            }
-                        }
-                    }
-            }
-        }
+        type: Boolean,
+    ) = preferenceHierarchy(context) {}
 
     companion object {
         const val KEY = "device_state_apps_storage"

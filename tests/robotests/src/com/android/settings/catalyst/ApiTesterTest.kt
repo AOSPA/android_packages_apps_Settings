@@ -48,6 +48,7 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import com.google.common.truth.Truth
 import kotlin.test.assertFailsWith
+import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -65,6 +66,12 @@ class ApiTesterTest {
         ) {
         init {
             flag { Flags.catalystMigration26q2() }
+            tags("a", "b")
+
+            preference(key = "preference_with_tags", purpose = 0, type = AnyString) {
+                tags("a", "b", "c")
+                get { execute { "Hello" } }
+            }
 
             preference(
                 key =
@@ -372,6 +379,23 @@ class ApiTesterTest {
         }
     }
 
+    class ScreenWithDeviceStateTag :
+        PreferencesApiScreen(
+            key = "F",
+            topLevelSettingsCategory = Category.SYSTEM,
+            fragment = Fragment::class,
+            purpose = 0,
+        ) {
+        init {
+            flag { Flags.catalystMigration26q2() }
+            tags(PreferencesApiScreen.APP_FUNCTION_STORAGE)
+            preference(key = "preference_with_device_state_tag", purpose = 0, type = AnyString) {
+                tags(PreferencesApiScreen.APP_FUNCTION_BATTERY)
+                get { execute { "Hello" } }
+            }
+        }
+    }
+
     val context: Application = ApplicationProvider.getApplicationContext()
     val tester = ApiTester(TestScreen())
     val testerFailingPermissions = ApiTester(FailingPermissionScreen())
@@ -379,6 +403,7 @@ class ApiTesterTest {
     val testerParameterized = ApiTester(ParameterizedScreen())
     val testerFailingPreconditionsParameterized =
         ApiTester(FailingPreconditionParameterizedScreen())
+    val testerScreenWithDeviceStateTag = ApiTester(ScreenWithDeviceStateTag())
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
@@ -516,9 +541,35 @@ class ApiTesterTest {
     }
 
     @Test
+    fun launchIntent_onFailingPreconditionParameterizedScreen_throwsException() {
+        // Initialize screen with parameters that cause the screen precondition to fail.
+        testerFailingPreconditionsParameterized.initializeScreenParameters(
+            Parameters("package" to "parameter2")
+        )
+
+        // Verify that getLaunchIntent throws an exception due to the failed precondition.
+        assertFailsWith<HardwareUnsupportedException> {
+            testerFailingPreconditionsParameterized.getLaunchIntent()
+        }
+    }
+
+    @Test
+    fun launchIntent_onPassedPreconditionParameterizedScreen_isCorrect() {
+        // Initialize screen with parameters that allow the screen precondition to pass.
+        testerFailingPreconditionsParameterized.initializeScreenParameters(
+            Parameters("package" to "parameter1")
+        )
+
+        // Verify that getLaunchIntent returns a non-null intent.
+        Truth.assertThat(testerFailingPreconditionsParameterized.getLaunchIntent()).isNotNull()
+    }
+
+    @Test
     fun getPreferenceOptions_generatedType_areCorrect() {
-        Truth.assertThat(tester.getPreferenceOptions<String>("preference_with_generated_type"))
-            .containsExactly(("value1" to "first"), ("value2" to "second"))
+        runBlocking {
+            Truth.assertThat(tester.getPreferenceOptions<String>("preference_with_generated_type"))
+                .containsExactly(("value1" to "first"), ("value2" to "second"))
+        }
     }
 
     @Test
@@ -529,8 +580,12 @@ class ApiTesterTest {
 
     @Test
     fun getPreferenceOptions_onInfiniteType_throwsException() {
-        assertFailsWith<Exception> {
-            tester.getPreferenceOptions<String>("preference_which_has_value_hello_and_no_setter")
+        runBlocking {
+            assertFailsWith<Exception> {
+                tester.getPreferenceOptions<String>(
+                    "preference_which_has_value_hello_and_no_setter"
+                )
+            }
         }
     }
 
@@ -820,5 +875,37 @@ class ApiTesterTest {
     fun getParameterOptions_onParameterizedScreen_returnsCorrectValues() {
         Truth.assertThat(testerParameterized.getParameterOptions("package"))
             .containsExactly("parameter1", "parameter2")
+    }
+
+    @Test
+    fun getScreenTags_returnsScreenTags() {
+        Truth.assertThat(tester.getScreenTags())
+            .containsExactly("a", "b", "api-first", PreferencesApiScreen.APP_FUNCTION_UNCATEGORIZED)
+    }
+
+    @Test
+    fun getPreferenceTags_forPreferenceWithTags_returnsPreferenceTags() {
+        Truth.assertThat(tester.getPreferenceTags("preference_with_tags"))
+            .containsExactly("a", "b", "c", "api-first")
+    }
+
+    @Test
+    fun getPreferenceTags_forPreferenceWithoutTags_returnsApiFirst() {
+        Truth.assertThat(tester.getPreferenceTags("preference_which_has_value_hello_and_no_setter"))
+            .containsExactly("api-first")
+    }
+
+    @Test
+    fun getScreenTags_withDeviceStateTag_doesNotAddUncategorizedTag() {
+        Truth.assertThat(testerScreenWithDeviceStateTag.getScreenTags())
+            .containsExactly(PreferencesApiScreen.APP_FUNCTION_STORAGE, "api-first")
+    }
+
+    @Test
+    fun getPreferenceTags_withDeviceStateTag_doesNotAddUncategorizedTag() {
+        Truth.assertThat(
+                testerScreenWithDeviceStateTag.getPreferenceTags("preference_with_device_state_tag")
+            )
+            .containsExactly(PreferencesApiScreen.APP_FUNCTION_BATTERY, "api-first")
     }
 }

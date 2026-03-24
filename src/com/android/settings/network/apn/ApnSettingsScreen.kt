@@ -43,11 +43,13 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.types.AnyInt
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ApnSettingsScreen.KEY, parameterized = true)
@@ -63,6 +65,8 @@ private constructor(
     PreferenceRestrictionMixin,
     PreferenceAvailabilityProvider,
     PreferenceBinding {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+
 
     private val subId: Int =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -153,7 +157,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(ApnSettings.SUB_ID, "The subscription ID")
+            parameter(ApnSettings.SUB_ID, "The subscription ID", type = AnyInt) // TODO(scottjonathan): Is there a better type to use here
         }
 
         @JvmStatic

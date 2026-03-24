@@ -50,8 +50,7 @@ public class SimLockPreferenceController extends BasePreferenceController {
         mTelephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
     }
 
-    @Override
-    public int getAvailabilityStatus() {
+    protected int getAvailabilityStatusExcludingFlag() {
         if (!Utils.isMobileDataCapable(mContext) && !Utils.isVoiceCapable(mContext)) {
             return UNSUPPORTED_ON_DEVICE;
         }
@@ -69,6 +68,18 @@ public class SimLockPreferenceController extends BasePreferenceController {
         }
 
         return DISABLED_FOR_USER;
+    }
+
+    @Override
+    public int getAvailabilityStatus() {
+        int availabilityExcludingFlag = getAvailabilityStatusExcludingFlag();
+
+        if (availabilityExcludingFlag == AVAILABLE
+                && android.security.Flags.autoSimPinManagement()) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        return availabilityExcludingFlag;
     }
 
     @Override

@@ -131,11 +131,11 @@ public class SatelliteSettingFooterController extends TelephonyBasePreferenceCon
                     result += getHtmlStringCombination(R.string.satellite_footer_content_section_5);
                     result += getHtmlStringCombination(R.string.satellite_footer_content_section_7,
                             mSimOperatorName);
+                    result += getHtmlStringCombination(R.string.satellite_footer_content_section_8);
                     break;
                 default:
                     Log.d(TAG, "Illegible type : " + ntnType);
             }
-
         } else {
             if (ntnType == CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC) {
                 result += getHtmlStringCombination(R.string.satellite_footer_content_section_6);
@@ -144,6 +144,7 @@ public class SatelliteSettingFooterController extends TelephonyBasePreferenceCon
             }
             result += getHtmlStringCombination(R.string.satellite_footer_content_section_7,
                     mSimOperatorName);
+            result += getHtmlStringCombination(R.string.satellite_footer_content_section_8);
         }
         return result;
     }

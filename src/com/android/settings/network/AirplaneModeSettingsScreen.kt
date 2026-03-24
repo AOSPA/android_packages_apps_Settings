@@ -33,9 +33,12 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.preference.PreferenceBindingPlaceholder
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 /** Preference for the Airplane Mode two-target toggle in the Network & Internet screen. */
 @ProvidePreferenceScreen(AirplaneModeSettingsScreen.KEY)
@@ -45,6 +48,11 @@ open class AirplaneModeSettingsScreen(context: Context) :
     PrimarySwitchPreferenceBinding,
     // Placeholder not needed once NetworkDashboardScreen provides the complete preferenceHierarchy.
     PreferenceBindingPlaceholder {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     private val storage = createDataStore(context)
     private var airplaneModeObserver: KeyedObserver<String?>? = null
@@ -122,6 +130,8 @@ class AirplaneModeSettingsFooter : FooterPreferenceMetadata, FooterPreferenceBin
 
     override val purpose: Int
         @StringRes get() = R.string.airplane_mode_footer_purpose
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val title: Int
         @StringRes get() = R.string.airplane_mode_sync_description

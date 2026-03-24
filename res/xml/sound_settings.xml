@@ -97,6 +97,15 @@
             android:order="-140"
             settings:userRestriction="no_adjust_volume"
             settings:controller="com.android.settings.notification.AlarmVolumePreferenceController"/>
+
+        <!-- Assistant volume -->
+        <com.android.settings.sound.VolumeSliderPreference
+            android:key="assistant_volume"
+            android:icon="@*android:drawable/ic_volume_voice_chat"
+            android:title="@string/assistant_volume_option_title"
+            android:order="-130"
+            settings:userRestriction="no_adjust_volume"
+            settings:controller="com.android.settings.notification.AssistantVolumePreferenceController"/>
     </com.android.settingslib.widget.UntitledPreferenceCategory>
 
     <!-- Vibrations and haptics category -->

@@ -27,6 +27,7 @@ import android.bluetooth.BluetoothLeBroadcastMetadata;
 import android.bluetooth.BluetoothLeBroadcastReceiveState;
 import android.content.Context;
 import android.util.Log;
+import android.util.Pair;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,8 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.settingslib.widget.ActionButtonsPreference;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -53,7 +56,8 @@ public class AudioStreamButtonController extends BasePreferenceController
         implements DefaultLifecycleObserver {
     private static final String TAG = "AudioStreamButtonController";
     private static final String KEY = "audio_stream_button";
-    private static final int SOURCE_ORIGIN_REPOSITORY = SourceOriginForLogging.REPOSITORY.ordinal();
+    private static final int SOURCE_ORIGIN_BT_API =
+            SourceOriginForLogging.GET_SOURCE_BLUETOOTH_API.getValue();
 
     @VisibleForTesting
     final BluetoothLeBroadcastAssistant.Callback mBroadcastAssistantCallback =
@@ -79,18 +83,19 @@ public class AudioStreamButtonController extends BasePreferenceController
                         BluetoothLeBroadcastReceiveState state) {
                     super.onReceiveStateChanged(sink, sourceId, state);
                     var localSourceState = getLocalSourceState(state);
-                    boolean shouldUpdateButton = mHysteresisModeFixAvailable
-                            ? (localSourceState == PAUSED || localSourceState == STREAMING)
-                            : localSourceState == STREAMING;
+                    boolean shouldUpdateButton =
+                            mHysteresisModeFixAvailable
+                                    ? (localSourceState == PAUSED || localSourceState == STREAMING)
+                                    : localSourceState == STREAMING;
                     if (shouldUpdateButton) {
                         updateButton();
                         // TODO(b/308368124): Verify if this log is too noisy.
                         mMetricsFeatureProvider.action(
                                 mContext,
                                 localSourceState == PAUSED
-                                        ? SettingsEnums.ACTION_AUDIO_STREAM_JOIN_PRESENT_SUCCEED :
-                                SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED,
-                                SOURCE_ORIGIN_REPOSITORY);
+                                        ? SettingsEnums.ACTION_AUDIO_STREAM_JOIN_PRESENT_SUCCEED
+                                        : SettingsEnums.ACTION_AUDIO_STREAM_JOIN_SUCCEED,
+                                SOURCE_ORIGIN_BT_API);
                     }
                 }
 
@@ -102,7 +107,7 @@ public class AudioStreamButtonController extends BasePreferenceController
                     mMetricsFeatureProvider.action(
                             mContext,
                             SettingsEnums.ACTION_AUDIO_STREAM_JOIN_FAILED_OTHER,
-                            SOURCE_ORIGIN_REPOSITORY);
+                            SOURCE_ORIGIN_BT_API);
                 }
 
                 @Override
@@ -112,7 +117,6 @@ public class AudioStreamButtonController extends BasePreferenceController
                 }
             };
 
-    private AudioStreamsRepository mAudioStreamsRepository = AudioStreamsRepository.getInstance();
     private final Executor mExecutor;
     private final AudioStreamsHelper mAudioStreamsHelper;
     private final @Nullable LocalBluetoothLeBroadcastAssistant mLeBroadcastAssistant;
@@ -120,14 +124,15 @@ public class AudioStreamButtonController extends BasePreferenceController
     private final boolean mHysteresisModeFixAvailable;
     private @Nullable ActionButtonsPreference mPreference;
     private int mBroadcastId = -1;
+    @VisibleForTesting BluetoothLeBroadcastMetadata mSourceMetadata;
 
     public AudioStreamButtonController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mExecutor = Executors.newSingleThreadExecutor();
         mAudioStreamsHelper = new AudioStreamsHelper(Utils.getLocalBtManager(context));
         mLeBroadcastAssistant = mAudioStreamsHelper.getLeBroadcastAssistant();
-        mHysteresisModeFixAvailable = BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(
-                context);
+        mHysteresisModeFixAvailable =
+                BluetoothUtils.isAudioSharingHysteresisModeFixAvailable(context);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
@@ -152,7 +157,7 @@ public class AudioStreamButtonController extends BasePreferenceController
     @Override
     public final void displayPreference(PreferenceScreen screen) {
         mPreference = screen.findPreference(getPreferenceKey());
-        updateButton();
+        var unused = ThreadUtils.postOnBackgroundThread(this::updateButton);
         super.displayPreference(screen);
     }
 
@@ -162,16 +167,22 @@ public class AudioStreamButtonController extends BasePreferenceController
             return;
         }
 
-        boolean isConnected = mAudioStreamsHelper.getConnectedBroadcastIdAndState(
-                mHysteresisModeFixAvailable).containsKey(mBroadcastId);
-
+        var connectedDeviceAndState = findConnectedDeviceAndState(mBroadcastId);
         View.OnClickListener onClickListener;
-
-        if (isConnected) {
+        if (connectedDeviceAndState != null) {
             onClickListener =
                     unused ->
                             ThreadUtils.postOnBackgroundThread(
                                     () -> {
+                                        if (mLeBroadcastAssistant != null) {
+                                            // Cache source data for rejoining, this metadata will
+                                            // have channel selected
+                                            mSourceMetadata =
+                                                    mLeBroadcastAssistant.getSourceMetadata(
+                                                            connectedDeviceAndState.first,
+                                                            connectedDeviceAndState.second
+                                                                    .getSourceId());
+                                        }
                                         mAudioStreamsHelper.removeSource(mBroadcastId);
                                         mMetricsFeatureProvider.action(
                                                 mContext,
@@ -200,21 +211,33 @@ public class AudioStreamButtonController extends BasePreferenceController
                     unused ->
                             ThreadUtils.postOnBackgroundThread(
                                     () -> {
-                                        var metadata =
-                                                mAudioStreamsRepository.getSavedMetadata(
-                                                        mContext, mBroadcastId);
-                                        if (metadata != null) {
-                                            mAudioStreamsHelper.addSource(metadata);
-                                            mMetricsFeatureProvider.action(
-                                                    mContext,
-                                                    SettingsEnums.ACTION_AUDIO_STREAM_JOIN,
-                                                    SOURCE_ORIGIN_REPOSITORY);
-                                            ThreadUtils.postOnMainThread(
-                                                    () -> {
-                                                        if (mPreference != null) {
-                                                            mPreference.setButton1Enabled(false);
-                                                        }
-                                                    });
+                                        if (mSourceMetadata != null) {
+                                            // As cached metadata is used, we need to make sure
+                                            // channels are deselected to get the "original"
+                                            // metadata.
+                                            var original =
+                                                    AudioStreamsHelper.deselectAllChannels(
+                                                            mSourceMetadata);
+                                            if (original != null) {
+                                                mAudioStreamsHelper.addSource(original);
+
+                                                mMetricsFeatureProvider.action(
+                                                        mContext,
+                                                        SettingsEnums.ACTION_AUDIO_STREAM_JOIN,
+                                                        SOURCE_ORIGIN_BT_API);
+                                                ThreadUtils.postOnMainThread(
+                                                        () -> {
+                                                            if (mPreference != null) {
+                                                                mPreference.setButton1Enabled(
+                                                                        false);
+                                                            }
+                                                        });
+                                            }
+                                        } else {
+                                            Log.w(
+                                                    TAG,
+                                                    "updateButton(): SourceMetadata is null, can't"
+                                                            + " add source.");
                                         }
                                     });
             ThreadUtils.postOnMainThread(
@@ -230,6 +253,22 @@ public class AudioStreamButtonController extends BasePreferenceController
         }
     }
 
+    private @Nullable Pair<BluetoothDevice, BluetoothLeBroadcastReceiveState>
+            findConnectedDeviceAndState(int broadcastId) {
+        Map<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> sourceByDevice =
+                mAudioStreamsHelper.getAllSourcesByDevice();
+        for (Map.Entry<BluetoothDevice, List<BluetoothLeBroadcastReceiveState>> entry :
+                sourceByDevice.entrySet()) {
+            BluetoothDevice device = entry.getKey();
+            for (BluetoothLeBroadcastReceiveState state : entry.getValue()) {
+                if (state.getBroadcastId() == broadcastId) {
+                    return new Pair<>(device, state);
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public int getAvailabilityStatus() {
         return AVAILABLE;
@@ -243,10 +282,5 @@ public class AudioStreamButtonController extends BasePreferenceController
     /** Initialize with broadcast id */
     void init(int broadcastId) {
         mBroadcastId = broadcastId;
-    }
-
-    @VisibleForTesting
-    void setAudioStreamsRepositoryForTesting(AudioStreamsRepository repository) {
-        mAudioStreamsRepository = repository;
     }
 }

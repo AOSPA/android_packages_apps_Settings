@@ -29,15 +29,18 @@ import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(NetworkDashboardScreen.KEY)
 open class NetworkDashboardScreen : PreferenceScreenMixin, PreferenceIconProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
+    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.network_provider_and_internet_screen_purpose
 

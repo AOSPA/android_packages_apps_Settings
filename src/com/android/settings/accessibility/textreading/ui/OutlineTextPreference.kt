@@ -23,13 +23,19 @@ import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoi
 import com.android.settings.accessibility.textreading.data.OutlineTextDataStore
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.SwitchPreferenceBinding
 
 /** Preference metadata for the outline text toggle preference. */
-class OutlineTextPreference(context: Context, @EntryPoint private val entryPoint: Int) :
+class OutlineTextPreference(
+    context: Context,
+    @EntryPoint private val entryPoint: Int,
+    val isUiOnly: Boolean,
+) :
     SwitchPreference(
         key = KEY,
         purpose = R.string.high_text_contrast_enabled_purpose,
@@ -38,6 +44,13 @@ class OutlineTextPreference(context: Context, @EntryPoint private val entryPoint
     ),
     SwitchPreferenceBinding {
 
+    override fun tags(context: Context): Array<String> {
+        if (isUiOnly) {
+            return arrayOf(UI_ONLY_PREFERENCE)
+        }
+        return arrayOf(HERO_SET)
+    }
+
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
@@ -45,6 +58,7 @@ class OutlineTextPreference(context: Context, @EntryPoint private val entryPoint
 
     override val keywords: Int
         get() = R.string.keywords_maximize_text_contrast
+
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 

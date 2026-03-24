@@ -18,10 +18,8 @@ package com.android.settings.sound;
 
 import static com.android.internal.jank.InteractionJankMonitor.CUJ_SETTINGS_SLIDER;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -201,8 +199,7 @@ public class VolumeSliderPreference extends RestrictedSliderPreference {
                 mJankMonitor.end(CUJ_SETTINGS_SLIDER);
             }
         };
-        final Uri sampleUri = mStream == AudioManager.STREAM_MUSIC ? getMediaVolumeUri() : null;
-        mVolumizer = mSliderVolumizerFactory.create(mStream, sampleUri, sbvc);
+        mVolumizer = mSliderVolumizerFactory.create(mStream, sbvc);
         mVolumizer.start();
     }
 
@@ -229,12 +226,6 @@ public class VolumeSliderPreference extends RestrictedSliderPreference {
         if (mMuteIconResId == resId) return;
         mMuteIconResId = resId;
         updateIconView();
-    }
-
-    private Uri getMediaVolumeUri() {
-        return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
-                + getContext().getPackageName()
-                + "/" + R.raw.media_volume);
     }
 
     @VisibleForTesting

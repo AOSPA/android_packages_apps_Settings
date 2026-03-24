@@ -22,7 +22,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DeviceAdminApiScreen.KEY)
@@ -33,14 +33,13 @@ class DeviceAdminApiScreen :
         fragment = DeviceAdminSettings::class,
         purpose = R.string.device_admin_settings_screen_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
         preconditions(R.string.device_admin_settings_screen_preconditions) {
             if (context.resources.getBoolean(R.bool.config_show_manage_device_admin)) {
                 Allowed
             } else {
-                Custom(R.string.device_admin_settings_screen_not_available)
+                HardwareUnsupported(R.string.device_admin_settings_screen_not_available)
             }
         }
     }

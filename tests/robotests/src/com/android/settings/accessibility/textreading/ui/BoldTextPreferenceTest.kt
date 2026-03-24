@@ -41,7 +41,7 @@ class BoldTextPreferenceTest {
     @get:Rule val settingsStoreRule = SettingsStoreRule()
     private val context = ApplicationProvider.getApplicationContext<Context>()
     @EntryPoint private val entryPoint = EntryPoint.DISPLAY_SETTINGS
-    private val boldTextPreference = BoldTextPreference(context, entryPoint)
+    private val boldTextPreference = BoldTextPreference(context, entryPoint, false)
     private val preferenceManager = PreferenceManager(context)
     private val preferenceScreen = preferenceManager.createPreferenceScreen(context)
 

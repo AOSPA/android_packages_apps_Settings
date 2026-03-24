@@ -36,7 +36,7 @@ class NfcStateSource : DeviceStateSource {
         val item =
             DeviceStateItem(
                 key = "toggle_nfc",
-                purpose = "toggle_nfc",
+                purpose = "If NFC is enabled",
                 jsonValue = nfcEnabled.toString(),
             )
 

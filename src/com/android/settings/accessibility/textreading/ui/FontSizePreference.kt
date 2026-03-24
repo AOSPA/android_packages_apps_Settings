@@ -36,11 +36,13 @@ import com.android.settingslib.R as SettingsLibR
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.IntRangeValuePreference
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 import com.google.android.material.slider.Slider
@@ -50,8 +52,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-internal class FontSizePreference(context: Context, @EntryPoint private val entryPoint: Int) :
-    IntRangeValuePreference, SliderPreferenceBinding, PreferenceLifecycleProvider {
+internal class FontSizePreference(
+    context: Context,
+    @EntryPoint private val entryPoint: Int,
+    val isUiOnly: Boolean,
+) : IntRangeValuePreference, SliderPreferenceBinding, PreferenceLifecycleProvider {
     private val fontSizeDataStore by lazy {
         FontSizeDataStore(context = context, entryPoint = entryPoint)
     }
@@ -73,6 +78,13 @@ internal class FontSizePreference(context: Context, @EntryPoint private val entr
 
     private val debounceCommitController by lazy {
         DebounceConfigurationChangeCommitController(minCommitDelay = MIN_COMMIT_DELAY)
+    }
+
+    override fun tags(context: Context): Array<String> {
+        if (isUiOnly) {
+            return arrayOf(UI_ONLY_PREFERENCE)
+        }
+        return arrayOf(MUSTPASS_SET)
     }
 
     override fun getReadPermissions(context: Context) = Permissions.EMPTY
@@ -111,6 +123,7 @@ internal class FontSizePreference(context: Context, @EntryPoint private val entr
 
     override val keywords: Int
         get() = R.string.keywords_font_size
+
 
     override fun createWidget(context: Context) =
         TooltipSliderPreference(context).apply {

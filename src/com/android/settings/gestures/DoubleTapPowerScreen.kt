@@ -30,6 +30,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -40,6 +41,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DoubleTapPowerScreen.KEY)
@@ -49,6 +51,8 @@ open class DoubleTapPowerScreen(context: Context) :
     PreferenceTitleProvider,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     private val doubleTapPowerToOpenCameraDataStore =
         DoubleTapPowerToOpenCameraPreference.createDataStore(context)
     private lateinit var keyedObserver: KeyedObserver<String>
@@ -73,8 +77,6 @@ open class DoubleTapPowerScreen(context: Context) :
         get() = R.string.menu_key_system
 
     override fun getMetricsCategory() = SettingsEnums.SETTINGS_GESTURE_DOUBLE_TAP_POWER
-
-    override fun isFlagEnabled(context: Context) = Flags.deeplinkSystem25q4()
 
     override fun hasCompleteHierarchy() = false
 
@@ -146,6 +148,7 @@ open class DoubleTapPowerScreen(context: Context) :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +DoubleTapPowerScreenPreference(this@DoubleTapPowerScreen)
             if (Flags.catalystMigration26q2()) {
                 if (!context.isNonLaunchWalletOrNonMultiTargetDoubleTap()) {
                     +DoubleTapPowerMainSwitchPreference()
@@ -174,6 +177,29 @@ open class DoubleTapPowerScreen(context: Context) :
             resources.getInteger(IR.integer.config_doubleTapPowerGestureMode) !=
                 DoubleTapPowerSettingsUtils.DOUBLE_TAP_POWER_DISABLED_MODE
         }
+
+    class DoubleTapPowerScreenPreference(
+        private val screenMetadata : DoubleTapPowerScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider,
+        PreferenceTitleProvider, PreferenceAvailabilityProvider {
+        override val key : String
+            get() = "gesture_double_tap_power_input_summary_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context): Array<String> = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+    }
 
     companion object {
         const val KEY = "gesture_double_tap_power_input_summary"

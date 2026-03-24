@@ -214,8 +214,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
+    @RequiresFlagsDisabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isCurrentUserNetworkOwner_multiUserDisabled() {
         assertThat(WifiUtils.isCurrentUserNetworkOwner(mWifiEntry, mContext)).isTrue();
     }
@@ -255,8 +254,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
+    @RequiresFlagsDisabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkEditable_multiUserDisabled() {
         assertThat(WifiUtils.isNetworkEditable(mWifiEntry, mContext)).isTrue();
     }
@@ -303,8 +301,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
+    @RequiresFlagsDisabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isSharedFieldEditable_multiuserDisabled() {
         assertThat(WifiUtils.isSharedFieldEditable(mWifiEntry, mContext)).isFalse();
     }
@@ -343,8 +340,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
+    @RequiresFlagsDisabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkShareable_canShare_multiuserDisabled() {
         when(mWifiEntry.canShare()).thenReturn(true);
 
@@ -391,8 +387,7 @@ public class WifiUtilsTest {
     }
 
     @Test
-    @RequiresFlagsDisabled({com.android.settings.connectivity.Flags.FLAG_WIFI_MULTIUSER,
-            com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER})
+    @RequiresFlagsDisabled(com.android.settings.flags.Flags.FLAG_ENABLE_WIFI_MULTIUSER)
     public void isNetworkForgettable_canForget_multiuserDisabled() {
         when(mWifiEntry.canForget()).thenReturn(true);
 

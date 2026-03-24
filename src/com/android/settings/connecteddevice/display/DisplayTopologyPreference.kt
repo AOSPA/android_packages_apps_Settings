@@ -16,6 +16,7 @@
 
 package com.android.settings.connecteddevice.display
 
+import android.content.Context
 import android.widget.FrameLayout
 import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
@@ -27,10 +28,11 @@ import com.android.settingslib.widget.GroupSectionDividerMixin
  * DisplayTopologyPreference allows the user to change the display topology when there is one or
  * more extended display attached.
  */
-class DisplayTopologyPreference(val injector: ConnectedDisplayInjector) :
-    Preference(injector.context!!), GroupSectionDividerMixin {
+class DisplayTopologyPreference(uiContext: Context, val injector: ConnectedDisplayInjector) :
+    Preference(uiContext), GroupSectionDividerMixin {
 
-    @VisibleForTesting val controller = DisplayTopologyPreferenceController(context, injector)
+    @VisibleForTesting
+    val controller = DisplayTopologyPreferenceController(uiContext, injector.context!!, injector)
 
     init {
         layoutResource = R.layout.display_topology_preference

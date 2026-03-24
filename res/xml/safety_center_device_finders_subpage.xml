@@ -24,7 +24,10 @@
 
     <com.android.settingslib.widget.BannerMessagePreferenceGroup
         android:key="device_finders_issues_banner_group"
-        android:order="20" />
+        android:order="20"
+        settings:showDismissedPreferences="true"
+        settings:expandDismissedTitle="@string/safety_center_expand_dismissed_issues"
+        settings:collapseDismissedTitle="@string/safety_center_collapse_dismissed_issues" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
         android:key="device_finder"
@@ -35,9 +38,9 @@
         settings:profile="personal_profile" />
 
     <com.android.settingslib.safetycenter.SafetySourcePreference
-        android:key="unwanted_tracker_alert"
+        android:key="android_theft_protection"
         android:order="40"
         settings:controller="com.android.settings.safetycenter.ui.SafetySourcePreferenceController"
-        settings:safetySource="@string/config_safety_center_unwanted_tracker_alert_source_id"
+        settings:safetySource="@string/config_safety_center_auto_lock_source_id"
         settings:profile="personal_profile" />
 </PreferenceScreen>

@@ -58,8 +58,8 @@ constructor(
     private val satelliteManager: SatelliteManager?,
     private val connectivityManager: ConnectivityManager?,
     private val scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default),
-    private val isLteNtnSupportedChecker: (Context) -> Boolean = {
-        SatelliteUtils.isLteBasedNtnSupportedByDevice(it)
+    private val isLteNtnSupportedChecker: (Context, Int) -> Boolean = { ctx, subId ->
+        SatelliteUtils.isLteBasedNtnSupported(ctx, subId)
     },
 ) {
 
@@ -158,13 +158,20 @@ constructor(
                     trySend(reasons)
                 }
 
-                satelliteManager?.registerForSatelliteDisallowedReasonsChanged(
-                    callbackExecutor,
-                    callback,
-                )
+                try {
+                    satelliteManager?.registerForSatelliteDisallowedReasonsChanged(
+                        callbackExecutor,
+                        callback,
+                    )
+                } catch (e: IllegalStateException) {
+                    Log.w(TAG, "Failed to register for satellite disallowed reasons: ${e.message}")
+                }
+
                 awaitClose {
-                    runCatching {
+                    try {
                         satelliteManager?.unregisterForSatelliteDisallowedReasonsChanged(callback)
+                    } catch (e: IllegalStateException) {
+                        Log.w(TAG, "Failed to unregister for satellite disallowed reasons", e)
                     }
                 }
             }
@@ -286,6 +293,7 @@ constructor(
                         isOemAllowed = disallowedReasons.isEmpty(),
                         isTerrestrialConnected = isTerrestrial,
                         isCarrierSupported = isCarrierSupported,
+                        subId = subId,
                     )
 
                 when {
@@ -321,12 +329,13 @@ constructor(
         isOemAllowed: Boolean,
         isTerrestrialConnected: Boolean,
         isCarrierSupported: Boolean,
+        subId: Int,
     ): Boolean {
         if (isTerrestrialConnected) return false
 
         // Rule: LTE-NTN devices never show "Available".
         // This state is strictly for NB-IoT (Carrier Roaming/Pixel Skylo).
-        if (isLteNtnSupportedChecker(context)) return false
+        if (isLteNtnSupportedChecker(context, subId)) return false
 
         return if (isCarrierSupported) {
             isCarrierEligible

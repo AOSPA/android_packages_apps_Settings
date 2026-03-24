@@ -50,6 +50,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.supervision.SupervisionLog
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 /**
  * Supervision settings landing page (Settings > Supervision).
@@ -67,6 +68,8 @@ open class SupervisionDashboardScreen :
     PreferenceScreenMixin,
     PreferenceLifecycleProvider,
     OnRoleHoldersChangedListener {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     private var supervisionClient: SupervisionMessengerClient? = null
     private var supervisionManager: SupervisionManager? = null
     private var lifeCycleContext: PreferenceLifecycleContext? = null
@@ -124,6 +127,10 @@ open class SupervisionDashboardScreen :
 
     override fun onResume(context: PreferenceLifecycleContext) {
         if (Flags.enableSupervisionSettingsUiUpdates() && isContainer(context)) {
+            // TODO(b/480262048): Temporary fix to refresh the PIN management preference. Remove
+            // this line once b/480262048 is fixed.
+            lifeCycleContext?.notifyPreferenceChange(SupervisionPinManagementScreen.KEY)
+
             roleManager.addOnRoleHoldersChangedListenerAsUser(
                 context.mainExecutor,
                 this,

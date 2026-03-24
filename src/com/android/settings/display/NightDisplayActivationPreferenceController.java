@@ -28,6 +28,7 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 /**
  * Controller that updates the night display.
  */
+// LINT.IfChange
 public class NightDisplayActivationPreferenceController extends TogglePreferenceController {
 
     private final MetricsFeatureProvider mMetricsFeatureProvider;
@@ -44,9 +45,11 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
 
     @Override
     public int getAvailabilityStatus() {
-        return NightDisplayExtensionsKt.isNightDisplaySettingsAvailable(mContext)
-                ? AVAILABLE_UNSEARCHABLE
-                : UNSUPPORTED_ON_DEVICE;
+        int status = NightDisplayExtensionsKt.getNightDisplayAvailabilityStatus(mContext);
+        if (status == AVAILABLE) {
+            return AVAILABLE_UNSEARCHABLE;
+        }
+        return status;
     }
 
     @Override
@@ -82,3 +85,4 @@ public class NightDisplayActivationPreferenceController extends TogglePreference
     }
 
 }
+// LINT.ThenChange(NightDisplayApiScreen.kt)

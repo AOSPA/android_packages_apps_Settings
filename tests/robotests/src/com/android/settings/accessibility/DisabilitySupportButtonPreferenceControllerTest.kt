@@ -24,9 +24,6 @@ import android.content.Intent.CATEGORY_BROWSABLE
 import android.content.Intent.CATEGORY_DEFAULT
 import android.content.IntentFilter
 import android.content.pm.PackageInfo
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
-import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import androidx.core.net.toUri
 import androidx.fragment.app.testing.EmptyFragmentActivity
@@ -41,7 +38,6 @@ import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.widget.ButtonPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -52,7 +48,6 @@ import org.robolectric.annotation.Config
 @Config(shadows = [SettingsShadowResources::class])
 @RunWith(RobolectricTestRunner::class)
 class DisabilitySupportButtonPreferenceControllerTest {
-    @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val shadowPackageManager = shadowOf(context.packageManager)
@@ -73,23 +68,13 @@ class DisabilitySupportButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
-    fun getAvailabilityStatus_flagOn_returnAvailable() {
+    fun getAvailabilityStatus_returnAvailable() {
         setupController()
 
         assertThat(controller.availabilityStatus).isEqualTo(AVAILABLE)
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
-    fun getAvailabilityStatus_flagOff_returnUnavailable() {
-        setupController()
-
-        assertThat(controller.availabilityStatus).isEqualTo(CONDITIONALLY_UNAVAILABLE)
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
     fun getAvailabilityStatus_deviceProvisionedIsOff_returnUnavailable() {
         Settings.Global.putInt(context.contentResolver, Settings.Global.DEVICE_PROVISIONED, 0)
         setupController()
@@ -98,7 +83,6 @@ class DisabilitySupportButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
     fun getAvailabilityStatus_helpIntentIsEmpty_returnUnavailable() {
         SettingsShadowResources.overrideResource(
             R.string.help_url_accessibility_disability_support,
@@ -110,7 +94,6 @@ class DisabilitySupportButtonPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_ENABLE_DISABILITY_SUPPORT)
     fun performClick_startsIntentWithCorrectUri() {
         setupController()
 

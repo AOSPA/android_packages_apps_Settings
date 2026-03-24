@@ -17,9 +17,13 @@ package com.android.settings.display
 
 import android.content.ContextWrapper
 import android.content.res.Resources
+import android.hardware.display.DisplayManagerGlobal
 import android.provider.Settings
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC
 import android.provider.Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL
+import android.view.Display
+import android.view.DisplayAdjustments
+import android.view.DisplayInfo
 import android.view.LayoutInflater
 import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
@@ -29,11 +33,13 @@ import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import com.android.settingslib.widget.theme.R
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
@@ -46,7 +52,21 @@ class AutoBrightnessScreenTest {
     private val context =
         object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
             override fun getResources(): Resources = mockResources ?: super.getResources()
+
+            override fun getDisplay(): Display {
+                val displayManagerGlobal = mock<DisplayManagerGlobal>()
+                val daj: DisplayAdjustments? = null
+                whenever(displayManagerGlobal.getDisplayInfo(Display.DEFAULT_DISPLAY))
+                    .thenReturn(displayInfo)
+                return Display(displayManagerGlobal, Display.DEFAULT_DISPLAY, displayInfo, daj)
+            }
         }
+    private val displayInfo = DisplayInfo()
+
+    @Before
+    fun setUp() {
+        displayInfo.type = Display.TYPE_INTERNAL
+    }
 
     @Test
     fun switchClick_defaultScreenBrightnessModeTurnOffAuto_returnTrue() {
@@ -113,6 +133,14 @@ class AutoBrightnessScreenTest {
     @Test
     fun isAvailable_configFalseSet_shouldReturnFalse() {
         mockResources = mock { on { getBoolean(any()) } doReturn false }
+
+        assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun isAvailable_externalDisplay_shouldReturnFalse() {
+        mockResources = mock { on { getBoolean(any()) } doReturn true }
+        displayInfo.type = Display.TYPE_EXTERNAL
 
         assertThat(preferenceScreenCreator.isAvailable(context)).isFalse()
     }

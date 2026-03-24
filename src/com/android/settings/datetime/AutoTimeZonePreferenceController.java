@@ -21,11 +21,19 @@ import static android.app.time.Capabilities.CAPABILITY_NOT_APPLICABLE;
 import static android.app.time.Capabilities.CAPABILITY_NOT_SUPPORTED;
 import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
 
+import android.app.admin.DevicePolicyIdentifiers;
+import android.app.admin.DevicePolicyManager;
+import android.app.admin.EnforcingAdmin;
+import android.app.admin.PolicyIdentifier;
+import android.app.admin.flags.Flags;
 import android.app.time.TimeManager;
 import android.app.time.TimeZoneCapabilities;
 import android.app.time.TimeZoneCapabilitiesAndConfig;
 import android.app.time.TimeZoneConfiguration;
 import android.content.Context;
+import android.annotation.Nullable;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 
 import androidx.preference.Preference;
@@ -33,6 +41,7 @@ import androidx.preference.Preference;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 public class AutoTimeZonePreferenceController extends TogglePreferenceController {
 
@@ -41,10 +50,14 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
     private boolean mIsFromSUW;
     private UpdateTimeAndDateCallback mCallback;
     private final TimeManager mTimeManager;
+    @Nullable private final DevicePolicyManager mDpm;
+    private final int mUserId;
 
     public AutoTimeZonePreferenceController(Context context, String preferenceKey) {
         super(context, preferenceKey);
         mTimeManager = context.getSystemService(TimeManager.class);
+        mDpm = context.getSystemService(DevicePolicyManager.class);
+        mUserId = UserHandle.myUserId();
         // This is a no-op implementation of UpdateTimeAndDateCallback to avoid a NPE when
         // setTimeAndDateCallback() isn't called, e.g. for slices and other cases where the
         // controller is instantiated outside of the context of the real Date & Time settings
@@ -138,6 +151,9 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
     public void updateState(Preference preference) {
         super.updateState(preference);
         refreshSummary(preference);
+        if(Flags.policyStreamliningAutoTimeZone()) {
+            checkAndSetDisabledByPolicyValue(preference);
+        }
     }
 
     @Override
@@ -163,5 +179,46 @@ public class AutoTimeZonePreferenceController extends TogglePreferenceController
 
     private TimeZoneCapabilitiesAndConfig getTimeZoneCapabilitiesAndConfig() {
         return mTimeManager.getTimeZoneCapabilitiesAndConfig();
+    }
+
+    private void checkAndSetDisabledByPolicyValue(Preference preference) {
+        if (mDpm == null) {
+            return;
+        }
+
+        if(!(preference instanceof RestrictedSwitchPreference)) {
+            Log.w(TAG, "Preference is not a RestrictedPreference: " +
+                    preference.getClass().getName());
+            return;
+        }
+
+        final RestrictedSwitchPreference restrictedPreference =
+                (RestrictedSwitchPreference) preference;
+
+        Integer autoTimeZonePolicyValue = mDpm.getResolvedDeviceWidePolicy(
+                PolicyIdentifier.AUTO_TIME_ZONE);
+        if (autoTimeZonePolicyValue != null) {
+            switch(autoTimeZonePolicyValue) {
+                case PolicyIdentifier.AUTO_TIME_ZONE_ENABLED:
+                case PolicyIdentifier.AUTO_TIME_ZONE_DISABLED:
+                    EnforcingAdmin enforcingAdmin = mDpm.getEnforcingAdminsForPolicy(
+                            DevicePolicyIdentifiers.AUTO_TIMEZONE_POLICY, mUserId)
+                            .getMostImportantEnforcingAdmin();
+                    restrictedPreference.setDisabledByAdmin(enforcingAdmin);
+                    return; // Policy enforced, no need to check user restriction.
+                case PolicyIdentifier.AUTO_TIME_ZONE_USER_CHOICE:
+                case PolicyIdentifier.AUTO_TIME_ZONE_ENABLED_UNENFORCED:
+                case PolicyIdentifier.AUTO_TIME_ZONE_DISABLED_UNENFORCED:
+                default:
+                    // Policy exists but is not enforcing, fall through to check user restriction.
+                    break;
+            }
+        }
+
+        // If no policy or policy is not enforcing, check for user restrictions. Ensure not disabled
+        // by a previous admin state.
+        restrictedPreference.setDisabledByAdmin((EnforcingAdmin) null);
+        restrictedPreference.checkRestrictionAndSetDisabled(
+                UserManager.DISALLOW_CONFIG_DATE_TIME, mUserId);
     }
 }

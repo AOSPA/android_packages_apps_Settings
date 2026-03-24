@@ -23,8 +23,6 @@ import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.graph.PreferenceGetterResponse
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
-import com.android.settingslib.ipc.ApiDescriptor
-import com.android.settingslib.ipc.MessengerServiceClient
 import com.android.settingslib.metadata.FixedArrayMap
 import com.android.settingslib.metadata.KeyParameters
 import com.android.settingslib.metadata.KeyParametersSchema
@@ -32,9 +30,8 @@ import com.android.settingslib.metadata.PreferenceCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadataFactory
 import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.CompletableDeferred
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -43,11 +40,9 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.robolectric.annotation.Implementation
-import org.robolectric.annotation.Implements
 
 @RunWith(RobolectricTestRunner::class)
-@Config(shadows = [ShadowMessengerServiceClient::class])
+@Config(shadows = [ShadowPreferenceServiceClient::class])
 class CatalystStateGetterExecutorTest {
 
     private lateinit var executor: CatalystStateGetterExecutor
@@ -55,10 +50,10 @@ class CatalystStateGetterExecutorTest {
 
     @Before
     fun setUp() {
-        ShadowMessengerServiceClient.reset()
+        ShadowPreferenceServiceClient.reset()
         executor = CatalystStateGetterExecutor(context)
 
-        val parameterizedSchema = KeyParametersSchema { parameter("pkg", 0) }
+        val parameterizedSchema = KeyParametersSchema { parameter("pkg", 0, type = AnyString) }
         val mockParameterizedFactory =
             mock(PreferenceScreenMetadataParameterizedFactory::class.java)
         `when`(mockParameterizedFactory.parametersSchema).thenReturn(parameterizedSchema)
@@ -90,7 +85,7 @@ class CatalystStateGetterExecutorTest {
                 errors = emptyMap<PreferenceCoordinate, Int>(),
                 preferences = mapOf<PreferenceCoordinate, PreferenceProto>(coord to proto),
             )
-        ShadowMessengerServiceClient.mockResponse = response
+        ShadowPreferenceServiceClient.mockGetterResponse = response
 
         val innerDoc =
             GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
@@ -122,7 +117,7 @@ class CatalystStateGetterExecutorTest {
                 errors = emptyMap<PreferenceCoordinate, Int>(),
                 preferences = mapOf<PreferenceCoordinate, PreferenceProto>(coord to proto),
             )
-        ShadowMessengerServiceClient.mockResponse = response
+        ShadowPreferenceServiceClient.mockGetterResponse = response
 
         val innerDoc =
             GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
@@ -155,7 +150,7 @@ class CatalystStateGetterExecutorTest {
                 errors = mapOf(coord to 1), // 1 is NOT_FOUND
                 preferences = emptyMap(),
             )
-        ShadowMessengerServiceClient.mockResponse = response
+        ShadowPreferenceServiceClient.mockGetterResponse = response
 
         val innerDoc =
             GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
@@ -169,29 +164,5 @@ class CatalystStateGetterExecutorTest {
         val result = executor.execute(DeviceStateAppFunctionType.GET_DEVICE_STATE, params)
 
         assertThat(result.result).isNull()
-    }
-}
-
-@Implements(MessengerServiceClient::class)
-class ShadowMessengerServiceClient {
-    companion object {
-        var mockResponse: Any? = null
-        var lastRequest: Any? = null
-
-        fun reset() {
-            mockResponse = null
-            lastRequest = null
-        }
-    }
-
-    @Implementation
-    fun <Request, Response> invoke(
-        packageName: String,
-        apiDescriptor: ApiDescriptor<Request, Response>,
-        request: Request,
-    ): Deferred<Response> {
-        lastRequest = request
-        @Suppress("UNCHECKED_CAST")
-        return CompletableDeferred(mockResponse as Response)
     }
 }

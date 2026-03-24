@@ -48,6 +48,7 @@ import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkUtils
 import com.android.settings.network.telephony.SubscriptionActivationRepository
 import com.android.settings.network.telephony.SubscriptionRepository
+import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settings.network.telephony.euicc.EuiccRepository
 import com.android.settings.network.telephony.phoneNumberFlow
 import com.android.settingslib.spa.widget.preference.PreferenceModel
@@ -143,21 +144,17 @@ private fun AddSim() {
                 object : PreferenceModel {
                     override val title = stringResource(id = R.string.mobile_network_list_add_more)
                     override val icon = @Composable { SettingsIcon(Icons.Outlined.Add) }
-                    override val onClick = {
+                    override val onClick: (() -> Unit)? = {
                         if (isSatelliteSessionStarted) {
                             startSatelliteWarningDialogFlow(context)
                         } else {
                             // {{ NEW DSDS CHECK START }}
                             if (isMultiSimCapableAndInSingleSimMode(context)) {
                                 Log.d("AddSim", "Device is multi-SIM capable but in SSSS; "
-                                        + "launching SimOnboardingActivity to enable DSDS first")
-                                // Use INVALID_SUBSCRIPTION_ID because we’re not toggling
-                                // an existing sub, just preparing DSDS for add-eSIM.
-                                SimOnboardingActivity.startSimOnboardingActivity(
-                                    context,
-                                    SubscriptionManager.INVALID_SUBSCRIPTION_ID,
-                                    isNewTask = true
-                                )
+                                        + "send Multisim request to enable DSDS first")
+                                TelephonyUtils.connectExtTelephonyService(context)
+                                TelephonyUtils.switchMultiSimConfig(2);
+                                Log.d("AddSim","DSDS_To_SS Multisim request sent ...")
                             } else {
                                 startAddSimFlow(context)
                             }

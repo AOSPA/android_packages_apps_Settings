@@ -33,6 +33,8 @@ import com.android.settings.language.LanguageAndRegionApiFirstScreen.Companion.K
 import com.android.settings.testutils.shadow.ShadowActivityManager
 import com.android.settings.testutils2.ApiTester
 import com.google.common.truth.Truth.assertThat
+import java.util.Locale
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -44,7 +46,6 @@ import org.mockito.kotlin.whenever
 import org.robolectric.Shadows
 import org.robolectric.annotation.Config
 import org.robolectric.shadows.ShadowTelephonyManager
-import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
 @Config(shadows = [ShadowActivityManager::class])
@@ -63,7 +64,7 @@ class LanguageAndRegionApiFirstScreenTest {
         setupLocaleInfoList(
             Locale.US,
             LOCALE_CODE_EN_US to LOCALE_NAME_EN_US,
-            LOCALE_CODE_ES_US to LOCALE_NAME_ES_US
+            LOCALE_CODE_ES_US to LOCALE_NAME_ES_US,
         )
         val shadowTelephonyManager: ShadowTelephonyManager =
             Shadows.shadowOf(context.getSystemService(TelephonyManager::class.java))
@@ -92,11 +93,13 @@ class LanguageAndRegionApiFirstScreenTest {
 
     @Test
     fun systemLocale_optionsAreInSupportedList() {
-        assertThat(tester.getPreferenceOptions<String>(KEY_PREFERENCE))
-            .containsAtLeast(
-                (LOCALE_CODE_EN_US to LOCALE_NAME_EN_US),
-                (LOCALE_CODE_ES_US to LOCALE_NAME_ES_US),
-            )
+        runBlocking {
+            assertThat(tester.getPreferenceOptions<String>(KEY_PREFERENCE))
+                .containsAtLeast(
+                    (LOCALE_CODE_EN_US to LOCALE_NAME_EN_US),
+                    (LOCALE_CODE_ES_US to LOCALE_NAME_ES_US),
+                )
+        }
     }
 
     @Test
@@ -104,7 +107,7 @@ class LanguageAndRegionApiFirstScreenTest {
         setupLocaleInfoList(
             Locale.FRANCE,
             LOCALE_CODE_FR_FR to LOCALE_NAME_FR_FR,
-            LOCALE_CODE_ES_US to LOCALE_NAME_ES_US
+            LOCALE_CODE_ES_US to LOCALE_NAME_ES_US,
         )
 
         assertThat(tester.get<String>(KEY_PREFERENCE)).isEqualTo(LOCALE_CODE_FR_FR)
@@ -124,13 +127,11 @@ class LanguageAndRegionApiFirstScreenTest {
         setupLocaleInfoList(
             Locale.forLanguageTag("en-US-u-ms-ussystem"),
             "en-US-u-ms-ussystem" to LOCALE_NAME_EN_US,
-            "es-US-u-ms-ussystem" to LOCALE_NAME_ES_US
+            "es-US-u-ms-ussystem" to LOCALE_NAME_ES_US,
         )
         tester.set(KEY_PREFERENCE, LOCALE_CODE_ES_US)
 
-        assertThat(
-            Locale.getDefault().toLanguageTag()
-        ).isEqualTo("es-US-u-ms-ussystem")
+        assertThat(Locale.getDefault().toLanguageTag()).isEqualTo("es-US-u-ms-ussystem")
     }
 
     @Test
@@ -138,23 +139,22 @@ class LanguageAndRegionApiFirstScreenTest {
         setupLocaleInfoList(
             Locale.forLanguageTag("en-US-u-ms-ussystem"),
             "en-US-u-ms-ussystem" to LOCALE_NAME_EN_US,
-            "es-US-u-ms-ussystem" to LOCALE_NAME_ES_US
+            "es-US-u-ms-ussystem" to LOCALE_NAME_ES_US,
         )
         tester.set(KEY_PREFERENCE, LOCALE_CODE_FR_FR)
 
-        assertThat(
-            Locale.getDefault().toLanguageTag()
-        ).isEqualTo("fr-FR-u-ms-ussystem")
+        assertThat(Locale.getDefault().toLanguageTag()).isEqualTo("fr-FR-u-ms-ussystem")
     }
 
     private fun getLocaleList(vararg languages: Pair<String, String>): LocaleList {
-        val localeInfoList = languages.map { (languageTag, languageName) ->
-            mock<LocaleStore.LocaleInfo>().apply {
-                whenever(fullNameNative).thenReturn(languageName)
-                whenever(isTranslated).thenReturn(true)
-                whenever(locale).thenReturn(Locale.forLanguageTag(languageTag))
+        val localeInfoList =
+            languages.map { (languageTag, languageName) ->
+                mock<LocaleStore.LocaleInfo>().apply {
+                    whenever(fullNameNative).thenReturn(languageName)
+                    whenever(isTranslated).thenReturn(true)
+                    whenever(locale).thenReturn(Locale.forLanguageTag(languageTag))
+                }
             }
-        }
 
         val locales = localeInfoList.map { it.locale }.toTypedArray()
         return LocaleList(*locales)

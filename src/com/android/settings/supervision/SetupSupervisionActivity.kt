@@ -22,6 +22,8 @@ import android.Manifest.permission.MANAGE_USERS
 import android.app.KeyguardManager
 import android.app.admin.DevicePolicyManager
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_ENABLE_SUPERVISION
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_PIN_SET_UP
+import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SKIP_PIN_RECOVERY
 import android.app.supervision.SupervisionManager
 import android.app.supervision.flags.Flags
 import android.content.Intent
@@ -330,6 +332,10 @@ class SetupSupervisionActivity : FragmentActivity() {
                 this,
                 ACTION_SUPERVISION_ENABLE_SUPERVISION,
             )
+            FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                this,
+                ACTION_SUPERVISION_PIN_SET_UP,
+            )
         }
 
         // Start PIN recovery setup if a recovery method does not already exist.
@@ -344,6 +350,11 @@ class SetupSupervisionActivity : FragmentActivity() {
     private fun handlePinRecoveryResult(result: ActivityResult) {
         if (result.resultCode == RESULT_CANCELED) {
             Log.i(SupervisionLog.TAG, "PIN recovery setup was skipped by the user.")
+
+            FeatureFactory.featureFactory.metricsFeatureProvider.action(
+                this,
+                ACTION_SUPERVISION_SKIP_PIN_RECOVERY,
+            )
         }
         setResult(RESULT_OK)
         finish()

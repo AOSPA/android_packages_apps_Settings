@@ -404,7 +404,7 @@ public class ExternalDisplayPreferenceFragment extends SettingsPreferenceFragmen
 
     @NonNull Preference getDisplayTopologyPreference() {
         if (mDisplayTopologyPreference == null) {
-            mDisplayTopologyPreference = new DisplayTopologyPreference(mInjector);
+            mDisplayTopologyPreference = new DisplayTopologyPreference(requireContext(), mInjector);
             PrefBasics.DISPLAY_TOPOLOGY.apply(mDisplayTopologyPreference, /* nth= */ null);
         }
         return mDisplayTopologyPreference;

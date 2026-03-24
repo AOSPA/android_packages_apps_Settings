@@ -31,7 +31,6 @@ class WifiHotspotSpeedApiScreen :
         fragment = WifiHotspotSpeedSettings::class,
         purpose = R.string.wifi_hotspot_speed_purpose,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
 

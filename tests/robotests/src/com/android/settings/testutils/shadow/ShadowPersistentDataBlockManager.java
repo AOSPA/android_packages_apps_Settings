@@ -25,10 +25,12 @@ import org.robolectric.annotation.Resetter;
 @Implements(PersistentDataBlockManager.class)
 public class ShadowPersistentDataBlockManager {
     private static int sDataBlockSize = 0;
+    private static boolean sIsFactoryResetProtectionActive = false;
 
     @Resetter
     public static void reset() {
         sDataBlockSize = 0;
+        sIsFactoryResetProtectionActive = false;
     }
 
     @Implementation
@@ -36,7 +38,16 @@ public class ShadowPersistentDataBlockManager {
         return sDataBlockSize;
     }
 
+    @Implementation
+    protected boolean isFactoryResetProtectionActive() {
+        return sIsFactoryResetProtectionActive;
+    }
+
     public static void setDataBlockSize(int dataBlockSize) {
         sDataBlockSize = dataBlockSize;
+    }
+
+    public static void setIsFactoryResetProtectionActive(boolean isFactoryResetProtectionActive) {
+        sIsFactoryResetProtectionActive = isFactoryResetProtectionActive;
     }
 }

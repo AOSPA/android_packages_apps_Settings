@@ -51,7 +51,7 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
     @Override
     public int getAvailabilityStatus() {
         if (!mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY)
-                || UserManager.isHeadlessSystemUserMode() || !mUserCaps.isAdmin()) {
+                || !mUserCaps.isAdmin()) {
             return DISABLED_FOR_USER;
         }
         return AVAILABLE;
@@ -66,7 +66,6 @@ public class GuestTelephonyPreferenceController extends TogglePreferenceControll
     @Override
     public boolean setChecked(boolean isChecked) {
         Bundle guestRestrictions = mUserManager.getDefaultGuestRestrictions();
-        guestRestrictions.putBoolean(UserManager.DISALLOW_SMS, true);
         guestRestrictions.putBoolean(UserManager.DISALLOW_OUTGOING_CALLS, !isChecked);
         mUserManager.setDefaultGuestRestrictions(guestRestrictions);
         return true;

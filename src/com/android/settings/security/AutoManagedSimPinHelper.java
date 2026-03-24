@@ -22,7 +22,19 @@ import android.hardware.biometrics.BiometricPrompt;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.os.Looper;
+import android.telephony.PinResult;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+
+import androidx.annotation.Nullable;
+
+import com.android.settingslib.utils.ThreadUtils;
+
+import com.google.common.util.concurrent.ListenableFuture;
+
+import java.util.List;
+import java.util.concurrent.Callable;
 
 /**
  * A class for functionality used by various controllers of the automatic SIM card PIN management
@@ -33,10 +45,11 @@ import android.telephony.TelephonyManager;
 class AutoManagedSimPinHelper {
     private final Context mContext;
     private final TelephonyManager mTelephonyManager;
-
+    private final SubscriptionManager mSubscriptionManager;
     AutoManagedSimPinHelper(Context context) {
         mContext = context;
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
     }
 
     /**
@@ -80,5 +93,83 @@ class AutoManagedSimPinHelper {
         return mTelephonyManager.createForSubscriptionId(
                 subscriptionId).getSimAutoPinManagementEnrollmentStatus()
                 == TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_PLATFORM_MANAGED;
+    }
+
+    public boolean isIccLockEnabled(int subscriptionId) {
+        return mTelephonyManager.createForSubscriptionId(subscriptionId).isIccLockEnabled();
+    }
+
+    /**
+     * Returns true if the provided PIN is valid. Assumes the string is numeric only since that's
+     * the input field type.
+     * @param pin String to check.
+     * @return true if it is between 4 and 8 characters, false otherwise.
+     */
+    public static boolean isPinValid(@Nullable String pin) {
+        if (pin == null) {
+            return false;
+        }
+
+        if (pin.length() < 4 || pin.length() > 8) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public int getFirstPhysicalSimSlot() {
+        final List<SubscriptionInfo> subInfoList =
+                mSubscriptionManager.getActiveSubscriptionInfoList();
+        if (subInfoList == null) {
+            return SubscriptionManager.DEFAULT_SIM_SLOT_INDEX;
+        }
+
+        for (SubscriptionInfo subInfo : subInfoList) {
+            if (subInfo.isActive() && !subInfo.isEmbedded()) {
+                return subInfo.getSimSlotIndex();
+            }
+        }
+
+        return SubscriptionManager.DEFAULT_SIM_SLOT_INDEX;
+    }
+
+    public int getSubIdForFirstPhysicalSimSlot() {
+        int firstSimSlot = getFirstPhysicalSimSlot();
+        if (firstSimSlot == SubscriptionManager.DEFAULT_SIM_SLOT_INDEX) {
+            return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        }
+
+        return mSubscriptionManager.getEnabledSubscriptionId(firstSimSlot);
+    }
+
+    /**
+     * Callable for setting the ICC Lock state. Needed as this should not be called on the UI
+     * thread (as opposed to API related to automatic SIM PIN management, which takes an outcome
+     * receiver and calls it).
+     */
+    private static final class SetIccLockState implements Callable<PinResult> {
+        private final String mPin;
+        private final boolean mEnabled;
+        private final int mSubId;
+        private final TelephonyManager mTelephonyManager;
+
+        SetIccLockState(String pin, boolean enabled, int subId, TelephonyManager telephonyManager) {
+            mPin = pin;
+            mEnabled = enabled;
+            mSubId = subId;
+            mTelephonyManager = telephonyManager;
+        }
+
+        @Override
+        public PinResult call() throws Exception {
+            TelephonyManager tm = mTelephonyManager.createForSubscriptionId(mSubId);
+            return tm.setIccLockEnabled(mEnabled, mPin);
+        }
+    }
+
+    ListenableFuture<PinResult> setIccLockState(String pin, boolean enabled, int subId) {
+        Callable<PinResult> setIccLockState = new SetIccLockState(pin, enabled, subId,
+                mTelephonyManager);
+        return ThreadUtils.postOnBackgroundThread(setIccLockState);
     }
 }

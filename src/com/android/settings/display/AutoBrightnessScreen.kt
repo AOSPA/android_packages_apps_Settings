@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.contract.KEY_ADAPTIVE_BRIGHTNESS
+import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
 import com.android.settings.metrics.PreferenceActionMetricsProvider
@@ -39,12 +40,14 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.BooleanValuePreference
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(AutoBrightnessScreen.KEY)
@@ -55,10 +58,12 @@ open class AutoBrightnessScreen :
     PreferenceAvailabilityProvider,
     PreferenceRestrictionMixin,
     BooleanValuePreference {
+    override fun tags(context: Context) =
+        arrayOf(APP_FUNCTION_UNCATEGORIZED, KEY_ADAPTIVE_BRIGHTNESS)
+
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.auto_brightness_entry_purpose
 
@@ -73,8 +78,6 @@ open class AutoBrightnessScreen :
     override val preferenceActionMetrics: Int
         get() = ACTION_ADAPTIVE_BRIGHTNESS
 
-    override fun tags(context: Context) = arrayOf(KEY_ADAPTIVE_BRIGHTNESS)
-
     override fun isFlagEnabled(context: Context) = Flags.catalystScreenBrightnessMode()
 
     override fun fragmentClass(): Class<out Fragment>? = AutoBrightnessSettings::class.java
@@ -82,7 +85,7 @@ open class AutoBrightnessScreen :
     override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +AutoBrightnessScreenPreference(this@AutoBrightnessScreen) }
 
     override fun storage(context: Context): KeyValueStore =
         AutoBrightnessDataStore(SettingsSystemStore.get(context))
@@ -108,9 +111,7 @@ open class AutoBrightnessScreen :
         makeLaunchIntent(context, Settings.AdaptiveBrightnessActivity::class.java, metadata?.key)
 
     override fun isAvailable(context: Context) =
-        context.resources.getBoolean(
-            com.android.internal.R.bool.config_automatic_brightness_available
-        )
+        context.autoBrightnessAvailabilityStatus == AVAILABLE
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
@@ -158,6 +159,46 @@ open class AutoBrightnessScreen :
         /** Converts boolean value to brightness mode integer. */
         private fun Boolean.toBrightnessMode() =
             if (this) SCREEN_BRIGHTNESS_MODE_AUTOMATIC else SCREEN_BRIGHTNESS_MODE_MANUAL
+    }
+
+    class AutoBrightnessScreenPreference(
+        private val screenMetadata : AutoBrightnessScreen
+    ) : PreferenceMetadata, BooleanValuePreference,
+        PreferenceAvailabilityProvider {
+        override val key : String
+            get() = "auto_brightness_entry_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+
+        override val sensitivityLevel : @SensitivityLevel Int = screenMetadata.sensitivityLevel
+
+        override fun storage(context: Context) : KeyValueStore = screenMetadata.storage(context)
+
+        override fun getReadPermissions(context: Context) = screenMetadata.getReadPermissions(context)
+
+        override fun getReadPermit(
+            context: Context,
+            callingPid: Int,
+            callingUid: Int
+        ) : @ReadWritePermit Int = screenMetadata.getReadPermit(context, callingPid, callingUid)
+
+        override fun getWritePermissions(context: Context) = screenMetadata.getWritePermissions(context)
+
+        override fun getWritePermit(
+            context: Context,
+            value: Boolean?,
+            callingPid: Int,
+            callingUid: Int,
+        ) : @ReadWritePermit Int = screenMetadata.getWritePermit(context, value,  callingPid, callingUid)
     }
 
     companion object {

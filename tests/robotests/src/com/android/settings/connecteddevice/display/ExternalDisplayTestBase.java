@@ -22,6 +22,7 @@ import static com.android.settings.connecteddevice.display.ExternalDisplaySettin
 import static com.android.settings.flags.Flags.FLAG_DISPLAY_TOPOLOGY_PANE_IN_DISPLAY_LIST;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
@@ -40,6 +41,7 @@ import android.app.admin.PolicyEnforcementInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.res.Resources;
+import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayTopology;
 import android.os.RemoteException;
 import android.os.SystemProperties;
@@ -112,10 +114,13 @@ public class ExternalDisplayTestBase {
         doReturn("").when(mMockedInjector).getSystemProperty(
                 VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY);
         doReturn(true).when(mMockedInjector).isProjectedModeEnabled();
-        doAnswer((arg) -> {
-            mListener = arg.getArgument(0);
-            return null;
-        }).when(mMockedInjector).registerDisplayListener(any());
+        doAnswer(
+                        (arg) -> {
+                            mListener = arg.getArgument(0);
+                            return null;
+                        })
+                .when(mMockedInjector)
+                .registerDisplayListener(any(DisplayManager.DisplayListener.class), anyBoolean());
         doReturn(mContext).when(mMockedInjector).getContext();
 
         setupMockDpm();

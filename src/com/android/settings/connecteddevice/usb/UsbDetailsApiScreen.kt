@@ -46,6 +46,8 @@ class UsbDetailsApiScreen :
     init {
         flag { Flags.catalystMigration26q2() }
 
+        // TODO(b/480956777): add api for "Connected devices" preference.
+
         preference(
             key = PREFERENCE_KEY_CONVERT_VIDEOS_TO_AVC,
             purpose = R.string.usb_transcode_files_purpose,

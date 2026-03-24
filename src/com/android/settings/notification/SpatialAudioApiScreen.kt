@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NOTIFICATIONS
 
 // LINT.IfChange
 @ProvidePreferenceScreen(SpatialAudioApiScreen.KEY)
@@ -47,6 +48,8 @@ class SpatialAudioApiScreen :
 
     init {
         flag { Flags.catalystMigration26q2() }
+
+        tags(APP_FUNCTION_NOTIFICATIONS)
 
         preconditions(R.string.spatial_audio_screen_preconditions) {
             if (context.isSpatializerAvailable()) {

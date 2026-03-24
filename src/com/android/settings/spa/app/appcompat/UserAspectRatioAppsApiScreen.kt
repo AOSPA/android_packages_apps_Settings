@@ -16,10 +16,13 @@
 package com.android.settings.spa.app.appcompat
 
 import com.android.settings.R
+import com.android.settings.applications.appcompat.UserAspectRatioManager
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
+import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 
 // LINT.IfChange
 @ProvidePreferenceScreen(UserAspectRatioAppsApiScreen.KEY)
@@ -32,6 +35,14 @@ class UserAspectRatioAppsApiScreen :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
+
+        preconditions(R.string.user_aspect_ratio_apps_screen_preconditions) {
+            if (!UserAspectRatioManager.isFeatureEnabled(context)) {
+                Disallowed(R.string.user_aspect_ratio_screen_unavailable)
+            } else {
+                Allowed
+            }
+        }
     }
 
     companion object {

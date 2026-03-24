@@ -195,7 +195,7 @@ class ApiTester(
         throw FailedPreconditionException()
     }
 
-    private fun <V : Any> checkPotentialFiniteValue(preference: ApiPreference<V>, value: V) {
+    private suspend fun <V : Any> checkPotentialFiniteValue(preference: ApiPreference<V>, value: V) {
         if (preference.type is FiniteOptionsType<*>) {
             if (!getPreferenceOptions<V>(preference.key).map { it.first }.contains(value))
                 throw InvalidValueException(
@@ -244,7 +244,7 @@ class ApiTester(
         val preference = getPreference<V>(key)
         if (parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
-        val operationContext = ApiOperationContext(context, keyParameters)
+        val operationContext = ApiOperationContext(context = context, parameters = keyParameters)
 
         checkGetPermissions(preference)
         checkGetPreconditions(preference, operationContext)
@@ -271,13 +271,15 @@ class ApiTester(
         val setConfig = preference.set ?: throw CannotSetException()
         if (parameters != null) initializeScreenParameters(parameters)
         val keyParameters = preference.getScreenParameters.invoke() ?: ValidatedKeyParameters.EMPTY
-        val operationContext = ApiOperationContext(context, keyParameters)
+        val operationContext = ApiOperationContext(context = context, parameters = keyParameters)
 
         checkSetPermissions(preference)
         checkSetPreconditions(preference, value, operationContext)
-        // TODO(b/470285824) add this functionality in the setter
-        checkPotentialFiniteValue(preference, value)
-        runBlocking { setConfig.execute.invoke(operationContext, value) }
+        runBlocking {
+            // TODO(b/470285824) add this functionality in the setter
+            checkPotentialFiniteValue(preference, value)
+            setConfig.execute.invoke(operationContext, value)
+        }
     }
 
     /**
@@ -286,7 +288,7 @@ class ApiTester(
      */
     fun getLaunchIntent(): Intent {
         val operationContext =
-            ApiOperationContext(context, instance.keyParameters ?: ValidatedKeyParameters.EMPTY)
+            ApiOperationContext(context = context, parameters = instance.keyParameters ?: ValidatedKeyParameters.EMPTY)
         val screenPermissions = runBlocking { instance.screenPermissions }
         if (screenPermissions != null) {
             val pid = android.os.Process.myPid()
@@ -306,18 +308,24 @@ class ApiTester(
     /**
      * Helper method to get all the options of a preference which has the FiniteOptionsType type.
      */
-    fun <V : Any> getPreferenceOptions(key: String): List<Pair<V, String>> {
+    suspend fun <V : Any> getPreferenceOptions(key: String): List<Pair<V, String>> {
         val preference = getPreference<FiniteOptionsType<V>>(key)
         val type = preference.type
         if (type is FiniteOptionsType<*>) {
             val enforcedType = type as FiniteOptionsType<V>
-            return enforcedType.getOptions(context)
+            return runBlocking { enforcedType.getOptions(context) }
         } else
             throw Exception(
                 "Attempting to get all preference options on a " +
                     "preference with infinite options"
             )
     }
+
+    /** Helper method that returns the tags associated with the screen. */
+    fun getScreenTags(): Set<String> = instance.tags(context).toSet()
+
+    /** Helper method that returns the tags associated with a preference. */
+    fun getPreferenceTags(key: String): Set<String> = getPreference<Any>(key).tags(context).toSet()
 
     /** Get the screen extras associated with this parameterized screen. */
     fun getLaunchScreenExtras() = instance.launchScreenExtra

@@ -35,6 +35,7 @@ import com.android.settings.network.telephony.subscriptionManager
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -45,6 +46,7 @@ import com.android.settingslib.spaprivileged.framework.common.userManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
 
 // LINT.IfChange
 /** Preference screen for Network & Internet -> SIMs -> [SIM] -> App data usage. */
@@ -57,6 +59,7 @@ private constructor(
     final override val arguments: Bundle?,
     final override val keyParameters: ValidatedKeyParameters?,
 ) : PreferenceScreenMixin, PreferenceSummaryProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
 
     private val subId: Int =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -96,7 +99,7 @@ private constructor(
     override fun hasCompleteHierarchy() = false
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +DataUsageListScreenPreference(this@DataUsageListScreen) }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?): Intent? {
         val intent =
@@ -126,6 +129,20 @@ private constructor(
             getDataUsageInfo(context, subId).isEnabled
 
     override fun getSummary(context: Context) = getDataUsageInfo(context, subId).summary
+
+    class DataUsageListScreenPreference(
+        private val screenMetadata : DataUsageListScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider {
+        override val key : String
+            get() = "data_usage_summary_preference"
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+        override val indexable = false
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+    }
 
     companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "data_usage_summary"

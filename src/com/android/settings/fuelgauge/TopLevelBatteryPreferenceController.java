@@ -46,6 +46,7 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
 
     private BatteryInfo mBatteryInfo;
     private BatteryStatusFeatureProvider mBatteryStatusFeatureProvider;
+    private BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
     private String mBatteryStatusLabel;
 
     public TopLevelBatteryPreferenceController(Context context, String preferenceKey) {
@@ -71,6 +72,8 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
 
         mBatteryStatusFeatureProvider =
                 FeatureFactory.getFeatureFactory().getBatteryStatusFeatureProvider();
+        mBatterySettingsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
     }
 
     @Override
@@ -149,7 +152,18 @@ public class TopLevelBatteryPreferenceController extends BasePreferenceControlle
     }
 
     private CharSequence generateLabel(BatteryInfo info) {
+        final CharSequence batteryStatusLabel =
+                mBatterySettingsFeatureProvider.getBatteryStatusShortLabel(mContext, info);
+        if (batteryStatusLabel != null) {
+            return batteryStatusLabel;
+        }
         if (Utils.containsIncompatibleChargers(mContext, TAG)) {
+            return mContext.getString(
+                    com.android.settingslib.R.string.power_incompatible_charging_settings_home_page,
+                    info.batteryPercentString);
+        }
+        if (info.isWirelessCharging()
+                && Utils.isWirelessIncompatibleCharging(mContext)) {
             return mContext.getString(
                     com.android.settingslib.R.string.power_incompatible_charging_settings_home_page,
                     info.batteryPercentString);

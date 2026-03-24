@@ -30,8 +30,7 @@ import android.service.notification.NotificationListenerService
 import android.util.Log
 import com.android.settings.R
 import com.android.settings.Settings.NotificationAccessSettingsActivity
-import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_APP_PACKAGE_NAME
-import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_SERVICE_NAME
+import com.android.settings.applications.specialaccess.notificationaccess.AppInfoNotificationAccessScreen.Companion.KEY_SERVICE
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.flags.Flags
@@ -41,10 +40,12 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NOTIFICATIONS
 
 /** "Apps" -> "Special app access" -> "Notification read, reply & control" */
 @ProvidePreferenceScreen(AppsNotificationAccessScreen.KEY)
 open class AppsNotificationAccessScreen : PreferenceScreenMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NOTIFICATIONS, TAG_DEVICE_STATE_SCREEN)
 
     override val key: String
         get() = KEY
@@ -61,7 +62,6 @@ open class AppsNotificationAccessScreen : PreferenceScreenMixin {
 
     override fun getMetricsCategory() = SettingsEnums.NOTIFICATION_ACCESS
 
-    override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_SCREEN)
 
     override fun isFlagEnabled(context: Context) = Flags.catalystAppList()
 
@@ -77,8 +77,7 @@ open class AppsNotificationAccessScreen : PreferenceScreenMixin {
                 if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     val parameters =
                         AppInfoNotificationAccessScreen.parametersSchema.prepare(
-                            KEY_APP_PACKAGE_NAME to service.packageName,
-                            KEY_SERVICE_NAME to service.name,
+                            KEY_SERVICE to service.packageName + "/" + service.name
                         )
                     +(AppInfoNotificationAccessScreen.KEY withParameters parameters)
                 } else {

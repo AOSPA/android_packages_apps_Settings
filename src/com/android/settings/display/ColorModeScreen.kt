@@ -29,6 +29,7 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSystemStore
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -37,6 +38,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ColorModeScreen.KEY)
@@ -45,10 +47,11 @@ open class ColorModeScreen :
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override val key: String
         get() = KEY
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.color_mode_purpose
 
@@ -68,7 +71,7 @@ open class ColorModeScreen :
         get() = R.string.menu_key_display
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +ColorModeScreenPreference(this@ColorModeScreen) }
 
     private var settingsKeyedObserver: KeyedObserver<String>? = null
 
@@ -100,6 +103,26 @@ open class ColorModeScreen :
                 settingsKeyedObserver = null
             }
         }
+    }
+
+    class ColorModeScreenPreference(
+        private val screenMetadata : ColorModeScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+        override val key : String
+            get() = "color_mode_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }
 
     companion object {

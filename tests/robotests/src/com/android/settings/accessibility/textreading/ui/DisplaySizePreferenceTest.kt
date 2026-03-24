@@ -20,6 +20,10 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.hardware.display.DisplayManagerGlobal
+import android.view.Display
+import android.view.DisplayAdjustments
+import android.view.DisplayInfo
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
@@ -35,20 +39,36 @@ import com.android.settingslib.widget.SliderPreference
 import com.google.android.setupcompat.util.WizardManagerHelper
 import com.google.common.truth.Truth.assertThat
 import org.junit.Assume.assumeTrue
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 
 /** Test for [DisplaySizePreference]. */
 @RunWith(RobolectricTestRunner::class)
 class DisplaySizePreferenceTest {
-    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private var context = ApplicationProvider.getApplicationContext<Context>()
     @EntryPoint private val entryPoint = EntryPoint.DISPLAY_SETTINGS
-    private val preference = DisplaySizePreference(context, entryPoint)
+    private val preference = DisplaySizePreference(context, entryPoint, false)
     private val dataStore = preference.storage(context) as DisplaySizeDataStore
     private val preferenceManager = PreferenceManager(context)
     private val preferenceScreen = preferenceManager.createPreferenceScreen(context)
+    private val displayInfo = DisplayInfo()
+
+    @Before
+    fun setUp() {
+        val displayManagerGlobal = mock<DisplayManagerGlobal>()
+        val daj: DisplayAdjustments? = null
+        context =
+            context.createDisplayContext(
+                Display(displayManagerGlobal, Display.DEFAULT_DISPLAY, displayInfo, daj)
+            )
+        whenever(displayManagerGlobal.getDisplayInfo(Display.DEFAULT_DISPLAY))
+            .thenReturn(displayInfo)
+    }
 
     @Test
     fun getReadPermission_returnEmptyPermission() {
@@ -196,5 +216,17 @@ class DisplaySizePreferenceTest {
         preference.onValueChange(slider, newIndex.toFloat(), true)
 
         assertThat(preference.displaySizePreview.value.currentIndex).isEqualTo(newIndex)
+    }
+
+    @Test
+    fun isAvailable_internalDisplay() {
+        displayInfo.type = Display.TYPE_INTERNAL
+        assertThat(preference.isAvailable(context)).isTrue()
+    }
+
+    @Test
+    fun isAvailable_externalDisplay() {
+        displayInfo.type = Display.TYPE_EXTERNAL
+        assertThat(preference.isAvailable(context)).isFalse()
     }
 }

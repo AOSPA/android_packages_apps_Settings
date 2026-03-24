@@ -23,6 +23,7 @@ import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY
 import static android.hardware.devicestate.DeviceState.PROPERTY_FOLDABLE_DISPLAY_CONFIGURATION_OUTER_PRIMARY;
 
 import static com.android.internal.hidden_from_bootclasspath.android.hardware.devicestate.feature.flags.Flags.FLAG_DEVICE_STATE_PROPERTY_MIGRATION;
+import static com.android.settings.flags.Flags.FLAG_DISABLE_KEYBOARD_SETTINGS_IN_DEMO_MODE;
 import static com.android.settings.flags.Flags.FLAG_HIDE_DREAM_SETTING_IN_DEMO_MODE;
 import static com.android.settings.flags.Flags.FLAG_HIDE_MODES_SETTING_IN_DEMO_MODE;
 import static com.android.settings.flags.Flags.FLAG_HIDE_SUPERVISION_SETTING_IN_DEMO_MODE;
@@ -379,6 +380,53 @@ public class UtilsTest {
         when(mockUserManager.isUserForeground()).thenReturn(false);
 
         assertThat(Utils.canCurrentUserDream(mockContext)).isFalse();
+    }
+
+    @Test
+    @EnableFlags(FLAG_DISABLE_KEYBOARD_SETTINGS_IN_DEMO_MODE)
+    public void
+            shouldDisableKeyboardSettingsInDemoMode_inDemoMode_configDisableInDemo_returnTrue() {
+        verifyshouldDisableKeyboardSettingsInDemoMode(
+                /* isDemoMode= */ 1, /* configDisableInDemo= */ true, /* expectedResult= */ true);
+    }
+
+    @Test
+    @EnableFlags(FLAG_DISABLE_KEYBOARD_SETTINGS_IN_DEMO_MODE)
+    public void shouldDisableKeyboardSettingsInDemoMode_notConfigDisableInDemo_returnFalse() {
+        verifyshouldDisableKeyboardSettingsInDemoMode(
+                /* isDemoMode= */ 1, /* configDisableInDemo= */ false, /* expectedResult= */ false);
+        verifyshouldDisableKeyboardSettingsInDemoMode(
+                /* isDemoMode= */ 0, /* configDisableInDemo= */ false, /* expectedResult= */ false);
+    }
+
+    @Test
+    @EnableFlags(FLAG_DISABLE_KEYBOARD_SETTINGS_IN_DEMO_MODE)
+    public void shouldDisableKeyboardSettingsInDemoMode_notInDemoMode_returnFalse() {
+        verifyshouldDisableKeyboardSettingsInDemoMode(
+                /* isDemoMode= */ 0, /* configDisableInDemo= */ true, /* expectedResult= */ false);
+        verifyshouldDisableKeyboardSettingsInDemoMode(
+                /* isDemoMode= */ 0, /* configDisableInDemo= */ false, /* expectedResult= */ false);
+    }
+
+    @Test
+    @DisableFlags(FLAG_DISABLE_KEYBOARD_SETTINGS_IN_DEMO_MODE)
+    public void shouldDisableKeyboardSettingsInDemoMode_disableFlag_returnFalse() {
+        verifyshouldDisableKeyboardSettingsInDemoMode(
+                /* isDemoMode= */ 1, /* configDisableInDemo= */ true, /* expectedResult= */ false);
+        verifyshouldDisableKeyboardSettingsInDemoMode(
+                /* isDemoMode= */ 1, /* configDisableInDemo= */ false, /* expectedResult= */ false);
+    }
+
+    @Test
+    @EnableFlags(FLAG_DISABLE_KEYBOARD_SETTINGS_IN_DEMO_MODE)
+    public void shouldDisableKeyboardSettingsInDemoMode_unexpectedException_returnFalse() {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getBoolean(R.bool.config_disable_keyboard_settings_in_demo_mode))
+                .thenReturn(true);
+        when(mContext.getContentResolver()).thenThrow(
+                new NullPointerException("Test: null pointer"));
+        assertThat(Utils.shouldDisableKeyboardSettingsInDemoMode(mContext)).isFalse();
     }
 
     @Test
@@ -986,6 +1034,23 @@ public class UtilsTest {
         when(mContext.getSystemService(Context.USER_SERVICE)).thenReturn(mMockUserManager);
         when(mMockUserManager.getCredentialOwnerProfile(USER_ID)).thenReturn(USER_ID);
         when(mMockUserManager.isManagedProfile(USER_ID)).thenReturn(isEffectiveUserManagedProfile);
+    }
+
+    private void verifyshouldDisableKeyboardSettingsInDemoMode(
+            int isDemoMode, boolean configDisableInDemo, boolean expectedResult) {
+        Resources mockResources = mock(Resources.class);
+        when(mContext.getResources()).thenReturn(mockResources);
+        when(mockResources.getBoolean(R.bool.config_disable_keyboard_settings_in_demo_mode))
+                .thenReturn(configDisableInDemo);
+
+        // Mock demo mode:
+        SettingsGlobalStore.get(mContext).setInt(Settings.Global.DEVICE_DEMO_MODE, isDemoMode);
+
+        assertThat(Utils.shouldDisableKeyboardSettingsInDemoMode(mContext))
+                .isEqualTo(expectedResult);
+
+        // Clean up to the default value.
+        SettingsGlobalStore.get(mContext).setInt(Settings.Global.DEVICE_DEMO_MODE, 0);
     }
 
     private void verifyshouldHideModesInDemoMode(

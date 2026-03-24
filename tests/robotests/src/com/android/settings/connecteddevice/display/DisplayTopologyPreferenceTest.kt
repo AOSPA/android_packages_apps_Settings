@@ -25,7 +25,6 @@ import android.hardware.display.DisplayTopology.POSITION_LEFT
 import android.hardware.display.DisplayTopology.POSITION_RIGHT
 import android.hardware.display.DisplayTopology.POSITION_TOP
 import android.provider.Settings
-import android.util.DisplayMetrics
 import android.util.Size
 import android.view.Display.DEFAULT_DISPLAY
 import android.view.Display.Mode
@@ -55,7 +54,7 @@ class DisplayTopologyPreferenceTest {
     val context = ApplicationProvider.getApplicationContext<Context>()
     val featureFlags = FakeFeatureFlagsImpl()
     val injector = TestInjector(context, featureFlags)
-    val preference = DisplayTopologyPreference(injector)
+    val preference = DisplayTopologyPreference(context, injector)
     val rootView = View.inflate(context, preference.layoutResource, /* root= */ null)
     val holder = PreferenceViewHolder.createInstanceForTests(rootView)
 
@@ -84,8 +83,6 @@ class DisplayTopologyPreferenceTest {
 
         /** A log of events related to wallpaper revealing. */
         val revealLog = mutableListOf<String>()
-
-        override val densityDpi = DisplayMetrics.DENSITY_DEFAULT
 
         override fun getLogicalSize(displayId: Int): Size? {
             return displaysSize[displayId]
@@ -124,7 +121,10 @@ class DisplayTopologyPreferenceTest {
             topologyListener = null
         }
 
-        override fun registerDisplayListener(listener: DisplayManager.DisplayListener) {
+        override fun registerDisplayListener(
+            listener: DisplayManager.DisplayListener,
+            includeRefreshRateEvents: Boolean,
+        ) {
             if (displayListener != null) {
                 throw IllegalStateException("already have a listener registered: $displayListener")
             }
@@ -700,8 +700,9 @@ class DisplayTopologyPreferenceTest {
     @Test
     fun updatedTopologyCancelsDragIfNonTrivialChange() {
         val (leftBlock, _) = setupPaneWithTwoDisplays(POSITION_LEFT, /* childOffset= */ 42f)
-
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(137.76f)
+        // Expected Y: 133.76 = 42 (offset) * 1.28 (scale: 640 * 0.6 / 300) + 80 (top inset: 32
+        // margin + 48 hint)
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(133.76f)
 
         leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
@@ -715,15 +716,15 @@ class DisplayTopologyPreferenceTest {
                 .setPointer(0f, 30f)
                 .build()
         )
-        // Dragged by 30px: 137.76 + 30 = 167.76.
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(167.76f)
+        // Dragged by 30px: 133.76 + 30 = 163.76.
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(163.76f)
 
         // Offset is only different by 0.5 dp, so the drag will not cancel.
         setupTwoDisplays(POSITION_LEFT, /* childOffset= */ 41.5f)
         injector.topologyListener!!.accept(injector.topology!!)
 
         // Position maintained despite small topology update.
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(167.76f)
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(163.76f)
         // Move block farther downward.
         leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
@@ -731,13 +732,14 @@ class DisplayTopologyPreferenceTest {
                 .setPointer(0f, 50f)
                 .build()
         )
-        // 167.76 + 20 = 187.76.
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(187.76f)
+        // 163.76 + 20 = 183.76.
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(183.76f)
 
         setupTwoDisplays(POSITION_LEFT, /* childOffset= */ 20f)
         injector.topologyListener!!.accept(injector.topology!!)
 
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(109.60f)
+        // New Position: 20 * 1.28 + 80 = 25.6 + 80 = 105.6.
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(105.60f)
         // Another move in the opposite direction should not move the left block.
         leftBlock.dispatchEvent(
             MotionEventBuilder.newBuilder()
@@ -745,7 +747,7 @@ class DisplayTopologyPreferenceTest {
                 .setPointer(0f, -20f)
                 .build()
         )
-        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(109.60f)
+        assertThat(leftBlock.positionInPane.y).isWithin(0.05f).of(105.60f)
     }
 
     @Test

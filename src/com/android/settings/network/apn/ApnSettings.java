@@ -15,8 +15,8 @@
  */
 
 /*
- * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -84,7 +84,8 @@ import java.util.Set;
 /** Handle each different apn setting. */
 // LINT.IfChange
 public class ApnSettings extends RestrictedDashboardFragment
-        implements Preference.OnPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener,
+        FilterOutApnRepository.ApnFilteredOutListener {
     static final String TAG = "ApnSettings";
 
     public static final String APN_ID = "apn_id";
@@ -99,6 +100,8 @@ public class ApnSettings extends RestrictedDashboardFragment
             Telephony.Carriers.EDITED_STATUS,
             Telephony.Carriers.BEARER,
             Telephony.Carriers.BEARER_BITMASK,
+            Telephony.Carriers.MVNO_TYPE,
+            Telephony.Carriers.MVNO_MATCH_DATA,
     };
 
     private static final int ID_INDEX = 0;
@@ -108,6 +111,8 @@ public class ApnSettings extends RestrictedDashboardFragment
     private static final int EDITED_INDEX = 4;
     private static final int BEARER_INDEX = 5;
     private static final int BEARER_BITMASK_INDEX = 6;
+    private static final int MVNO_TYPE_INDEX = 7;
+    private static final int MVNO_MATCH_DATA_INDEX = 8;
 
     private static final int MENU_NEW = Menu.FIRST;
     private static final int MENU_RESTORE = Menu.FIRST + 1;
@@ -136,6 +141,8 @@ public class ApnSettings extends RestrictedDashboardFragment
     private final static String INCLUDE_COMMON_RULES = "include_common_rules";
     private final static String APN_HIDE_RULE_STRINGS_ARRAY= "apn_hide_rule_strings_array";
     private final static String APN_HIDE_RULE_STRINGS_WITH_ICCIDS_ARRAY = "apn_hide_rule_strings_with_iccids_array";
+
+    private FilterOutApnRepository mFilterOutApnRepository;
 
     public ApnSettings() {
         super(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
@@ -178,6 +185,9 @@ public class ApnSettings extends RestrictedDashboardFragment
         }
         mHidePresetApnDetails = b.getBoolean(CarrierConfigManager.KEY_HIDE_PRESET_APN_DETAILS_BOOL);
         mHideApnsGroupByIccid = b.getPersistableBundle(getIccid());
+        if (mFilterOutApnRepository != null) {
+            mFilterOutApnRepository.injectCarrierConfig(b);
+        }
    }
 
     @Override
@@ -195,6 +205,8 @@ public class ApnSettings extends RestrictedDashboardFragment
         mSubscriptionManager =  getSystemService(SubscriptionManager.class);
 
         setIfOnlyAvailableForAdmins(true);
+
+        mFilterOutApnRepository = new FilterOutApnRepository(activity, mSubId);
 
         loadCarrierConfig();
 
@@ -259,6 +271,7 @@ public class ApnSettings extends RestrictedDashboardFragment
         if (!mRestoreDefaultApnMode) {
             fillList();
         }
+        mFilterOutApnRepository.attach(this);
     }
 
     @Override
@@ -270,6 +283,7 @@ public class ApnSettings extends RestrictedDashboardFragment
         }
 
         getActivity().unregisterReceiver(mReceiver);
+        mFilterOutApnRepository.detach(this);
     }
 
     @Override
@@ -356,6 +370,8 @@ public class ApnSettings extends RestrictedDashboardFragment
                 final String key = cursor.getString(ID_INDEX);
                 final String type = cursor.getString(TYPES_INDEX);
                 final int edited = cursor.getInt(EDITED_INDEX);
+                final String mvnoType = cursor.getString(MVNO_TYPE_INDEX);
+                final String mvnoMatchData = cursor.getString(MVNO_MATCH_DATA_INDEX);
 
                 //Special requirement of some operators, need change APN name follow language.
                 String localizedName = Utils.getLocalizedName(getActivity(), cursor.getString(NAME_INDEX));
@@ -375,6 +391,17 @@ public class ApnSettings extends RestrictedDashboardFragment
                         continue;
                     }
                 }
+                try {
+                    if (mFilterOutApnRepository.isApnFilteredOut(apn,
+                            type, mvnoType, mvnoMatchData)) {
+                        cursor.moveToNext();
+                        continue;
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Error filtering APN: " + apn + ", type: " + type, e);
+                    // Continue showing the APN if filtering fails
+                }
+
                 final ApnPreference pref = new ApnPreference(getPrefContext());
 
                 pref.setKey(key);
@@ -672,6 +699,15 @@ public class ApnSettings extends RestrictedDashboardFragment
         // progress dialog UI is really shown.
         removeDialog(DIALOG_RESTORE_DEFAULTAPN);
         showDialog(DIALOG_RESTORE_DEFAULTAPN);
+    }
+
+    @Override
+    public void onApnFilteredOut() {
+        final Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        fillList();
     }
 }
 // LINT.ThenChange(ApnSettingsScreen.kt)

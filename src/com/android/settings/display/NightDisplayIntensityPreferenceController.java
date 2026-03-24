@@ -29,6 +29,7 @@ import com.android.settings.R;
 import com.android.settings.core.SliderPreferenceController;
 import com.android.settingslib.widget.SliderPreference;
 
+// LINT.IfChange
 public class NightDisplayIntensityPreferenceController extends SliderPreferenceController {
 
     private final ColorDisplayManager mColorDisplayManager;
@@ -40,8 +41,9 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
 
     @Override
     public int getAvailabilityStatus() {
-        if (!NightDisplayExtensionsKt.isNightDisplaySettingsAvailable(mContext)) {
-            return UNSUPPORTED_ON_DEVICE;
+        int status = NightDisplayExtensionsKt.getNightDisplayAvailabilityStatus(mContext);
+        if (status != AVAILABLE) {
+            return status;
         } else if (!mColorDisplayManager.isNightDisplayActivated()) {
             return DISABLED_DEPENDENT_SETTING;
         }
@@ -109,3 +111,4 @@ public class NightDisplayIntensityPreferenceController extends SliderPreferenceC
         return ColorDisplayManager.getMaximumColorTemperature(mContext) - temperature;
     }
 }
+// LINT.ThenChange(NightDisplayApiScreen.kt)

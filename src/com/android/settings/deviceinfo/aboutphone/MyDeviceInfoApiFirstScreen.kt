@@ -22,6 +22,7 @@ import android.Manifest.permission.NETWORK_SETTINGS
 import android.Manifest.permission.OVERRIDE_WIFI_CONFIG
 import android.Manifest.permission.WRITE_SECURE_SETTINGS
 import android.os.Build
+import android.os.SystemClock
 import android.provider.Settings.Global.DEVICE_NAME
 import com.android.settings.R
 import com.android.settings.flags.Flags
@@ -29,6 +30,7 @@ import com.android.settings.wifi.tether.WifiDeviceNameTextValidator
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.datastore.and
+import com.android.settingslib.metadata.MUSTPASS
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -36,6 +38,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.utils.StringUtil
 
 // LINT.IfChange
 @ProvidePreferenceScreen(MyDeviceInfoApiFirstScreen.KEY)
@@ -47,18 +50,14 @@ class MyDeviceInfoApiFirstScreen :
         purpose = R.string.my_device_info_pref_screen_purpose,
         alreadyPartiallyMigrated = MyDeviceInfoScreen::class,
     ) {
-
     init {
         flag { Flags.catalystMigration26q2() }
-        addDeviceNamePreference()
-    }
-
-    private fun addDeviceNamePreference() {
         preference(
             key = DEVICE_NAME_KEY,
             purpose = R.string.device_name_purpose,
             type = AnyString,
         ) {
+            tags(MUSTPASS)
             preconditions(R.string.device_name_preconditions) {
                 if (context.resources.getBoolean(R.bool.config_show_device_name)) {
                     Allowed
@@ -87,13 +86,40 @@ class MyDeviceInfoApiFirstScreen :
                 execute { value -> context.updateDeviceName(value) }
             }
         }
+
+        preference(
+            key = BUILD_NUMBER_KEY,
+            purpose = R.string.my_device_info_build_number_purpose,
+            type = AnyString,
+        ) {
+            get { execute { Build.DISPLAY } }
+        }
+
+        preference(
+            key = UPTIME_KEY,
+            purpose = R.string.my_device_info_uptime_purpose,
+            type = AnyString,
+        ) {
+            get {
+                execute {
+                    val uptimeMillis = SystemClock.elapsedRealtime()
+                    StringUtil.formatElapsedTime(context, uptimeMillis.toDouble(), false, false)
+                        .toString()
+                }
+            }
+        }
     }
 
     companion object {
         const val KEY = "api_my_device_info_pref_screen"
         const val DEVICE_NAME_KEY = "device_name"
+        const val BUILD_NUMBER_KEY = "build_number"
+        const val UPTIME_KEY = "uptime"
     }
 }
 // LINT.ThenChange(MyDeviceInfoFragment.java,
 //                 MyDeviceInfoScreen.kt,
-//                 ../DeviceNamePreferenceController.java)
+//                 ../DeviceNamePreferenceController.java,
+//                 ../BuildNumberPreferenceController.java,
+//                 ../UptimePreferenceController.java,
+//                 ../PhoneNumberPreferenceController.java)

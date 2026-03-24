@@ -27,9 +27,11 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(ShortcutsSettingsScreen.KEY)
 open class ShortcutsSettingsScreen : PreferenceScreenMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
 
     override val key: String
         get() = KEY

@@ -31,7 +31,6 @@ import android.os.Handler
 import android.os.Looper
 import android.os.RemoteException
 import android.os.SystemProperties
-import android.util.DisplayMetrics
 import android.util.Log
 import android.util.Size
 import android.view.Display
@@ -65,6 +64,7 @@ import kotlinx.coroutines.coroutineScope
  */
 data class RevealedWallpaper(val displayId: Int, val revealer: View, val viewManager: ViewManager)
 
+// TODO(b/430493225): Clean up nullable context
 open class ConnectedDisplayInjector(open val context: Context?) {
 
     open val flags: DesktopExperienceFlags by lazy { DesktopExperienceFlags(FeatureFlagsImpl()) }
@@ -170,7 +170,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
      * displays that are relying on external display settings page to modify their settings (e.g.
      * rotation)
      */
-    private fun isConnectedDisplay(display: Display): Boolean =
+    fun isConnectedDisplay(display: Display): Boolean =
         display.type == Display.TYPE_EXTERNAL ||
             display.type == Display.TYPE_OVERLAY ||
             isVirtualDisplayAllowed(display)
@@ -256,11 +256,22 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     }
 
     /** Register display listener. */
-    open fun registerDisplayListener(listener: DisplayManager.DisplayListener) {
+    @JvmOverloads
+    open fun registerDisplayListener(
+        listener: DisplayManager.DisplayListener,
+        includeRefreshRateEvents: Boolean = false,
+    ) {
+        var eventFlags =
+            EVENT_TYPE_DISPLAY_ADDED or EVENT_TYPE_DISPLAY_CHANGED or EVENT_TYPE_DISPLAY_REMOVED
+
+        if (includeRefreshRateEvents) {
+            eventFlags = eventFlags or DisplayManager.EVENT_TYPE_DISPLAY_REFRESH_RATE
+        }
+
         displayManager?.registerDisplayListener(
             listener,
             handler,
-            EVENT_TYPE_DISPLAY_ADDED or EVENT_TYPE_DISPLAY_CHANGED or EVENT_TYPE_DISPLAY_REMOVED,
+            eventFlags,
             PRIVATE_EVENT_TYPE_DISPLAY_CONNECTION_CHANGED,
         )
     }
@@ -329,7 +340,15 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     open var displayTopology: DisplayTopology?
         get() = displayManager?.displayTopology
         set(value) {
-            displayManager?.let { it.displayTopology = value }
+            displayManager?.let {
+                try {
+                    it.displayTopology = value
+                } catch (e: IllegalArgumentException) {
+                    // This can happen if Display Manager updated the topology at the same time.
+                    // Cancel this and wait for an update from Display Manager.
+                    Log.w(TAG, "Topology not set, waiting for an update from Display Manager")
+                }
+            }
         }
 
     /**
@@ -353,22 +372,6 @@ open class ConnectedDisplayInjector(open val context: Context?) {
             // from crashing.
             Log.e(TAG, "NPE while mirroring wallpaper of display $displayId - already detached?", e)
             return null
-        }
-    }
-
-    /**
-     * This density is the density of the current display (showing the Settings app UI). It is
-     * necessary to use this density here because the topology pane coordinates are in physical
-     * pixels, and the display bounds and accessibility constraints are in density-independent
-     * pixels.
-     */
-    open val densityDpi: Int by lazy {
-        val c = context
-        val info = DisplayInfo()
-        if (c != null && c.display.getDisplayInfo(info)) {
-            info.logicalDensityDpi
-        } else {
-            DisplayMetrics.DENSITY_DEFAULT
         }
     }
 

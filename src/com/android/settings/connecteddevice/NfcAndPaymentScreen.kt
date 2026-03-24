@@ -27,12 +27,14 @@ import com.android.settings.Settings.NfcSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 @ProvidePreferenceScreen(NfcAndPaymentScreen.KEY)
@@ -41,6 +43,8 @@ open class NfcAndPaymentScreen :
     PreferenceRestrictionMixin,
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
     override val key: String
         get() = KEY
 
@@ -72,7 +76,7 @@ open class NfcAndPaymentScreen :
     override fun fragmentClass(): Class<out Fragment>? = NfcAndPaymentFragment::class.java
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +NfcAndPaymentScreenPreference(this@NfcAndPaymentScreen) }
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, NfcSettingsActivity::class.java, metadata?.key)
@@ -87,6 +91,29 @@ open class NfcAndPaymentScreen :
     override fun isAvailable(context: Context): Boolean =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_NFC) &&
             context.packageManager.hasSystemFeature(PackageManager.FEATURE_NFC_HOST_CARD_EMULATION)
+
+    class NfcAndPaymentScreenPreference(
+        private val screenMetadata : NfcAndPaymentScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PreferenceRestrictionMixin {
+        override val key : String
+            get() = "nfc_and_payment_settings_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val restrictionKeys
+            get() = arrayOf(UserManager.DISALLOW_NEAR_FIELD_COMMUNICATION_RADIO)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = super<PreferenceRestrictionMixin>.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+    }
 
     companion object {
         const val KEY = "nfc_and_payment_settings"

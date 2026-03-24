@@ -27,6 +27,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.R;
 import com.android.settings.core.BasePreferenceController;
 
+// LINT.IfChange
 public class NightDisplayAutoModePreferenceController extends BasePreferenceController
         implements Preference.OnPreferenceChangeListener {
 
@@ -42,9 +43,7 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
 
     @Override
     public int getAvailabilityStatus() {
-        return NightDisplayExtensionsKt.isNightDisplaySettingsAvailable(mContext)
-                ? AVAILABLE
-                : UNSUPPORTED_ON_DEVICE;
+        return NightDisplayExtensionsKt.getNightDisplayAvailabilityStatus(mContext);
     }
 
     @Override
@@ -80,3 +79,4 @@ public class NightDisplayAutoModePreferenceController extends BasePreferenceCont
         return mColorDisplayManager.setNightDisplayAutoMode(Integer.parseInt((String) newValue));
     }
 }
+// LINT.ThenChange(NightDisplayApiScreen.kt)

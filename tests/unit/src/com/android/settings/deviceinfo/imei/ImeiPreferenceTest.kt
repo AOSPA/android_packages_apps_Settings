@@ -65,7 +65,7 @@ class ImeiPreferenceTest {
 
     @Test
     fun initUi_noImei_doNotCrash() {
-        preference = ImeiPreference(context, 0, 2, listOf<String>())
+        preference = ImeiPreference(context, 0, 2, listOf<ImeiData>())
     }
 
     @Test
@@ -167,22 +167,27 @@ class ImeiPreferenceTest {
         }
 
         assertThat(context.getImeiList).hasSize(1)
-        assertThat(context.getImeiList[0]).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[0].imei).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[0].slotId).isEqualTo(0)
     }
 
     @Test
     fun getImeiList_multiActiveSlot_getTwoImei() {
         assertThat(context.getImeiList).hasSize(2)
-        assertThat(context.getImeiList[0]).isEqualTo(IMEI_1)
-        assertThat(context.getImeiList[1]).isEqualTo(IMEI_2)
+        assertThat(context.getImeiList[0].imei).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[0].slotId).isEqualTo(0)
+        assertThat(context.getImeiList[1].imei).isEqualTo(IMEI_2)
+        assertThat(context.getImeiList[1].slotId).isEqualTo(1)
     }
 
     @Test
     fun getImeiList_multiActiveSlot_primaryImei_getTwoImei() {
         mockTelephonyManager.stub { on { primaryImei } doReturn IMEI_2 }
 
-        assertThat(context.getImeiList[0]).isEqualTo(IMEI_2)
-        assertThat(context.getImeiList[1]).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[0].imei).isEqualTo(IMEI_2)
+        assertThat(context.getImeiList[0].slotId).isEqualTo(1)
+        assertThat(context.getImeiList[1].imei).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[1].slotId).isEqualTo(0)
     }
 
     @Test
@@ -193,8 +198,10 @@ class ImeiPreferenceTest {
         }
         mockTelephonyManager.stub { on { primaryImei } doReturn IMEI_1 }
 
-        assertThat(context.getImeiList[0]).isEqualTo(IMEI_1)
-        assertThat(context.getImeiList[1]).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[0].imei).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[0].slotId).isEqualTo(0)
+        assertThat(context.getImeiList[1].imei).isEqualTo(IMEI_1)
+        assertThat(context.getImeiList[1].slotId).isEqualTo(1)
     }
 
     @Test
@@ -209,8 +216,8 @@ class ImeiPreferenceTest {
         const val MULTI_SLOT = 2
         const val IMEI_1 = "111111111111115"
         const val IMEI_2 = "222222222222225"
-        val imeiList = listOf(IMEI_1, IMEI_2)
-        val imeiList_sameImei = listOf(IMEI_1, IMEI_1)
-        val imeiList_oneImei = listOf(IMEI_1)
+        val imeiList = listOf(ImeiData(IMEI_1, 0), ImeiData(IMEI_2, 1))
+        val imeiList_sameImei = listOf(ImeiData(IMEI_1, 0), ImeiData(IMEI_1, 1))
+        val imeiList_oneImei = listOf(ImeiData(IMEI_1, 0))
     }
 }

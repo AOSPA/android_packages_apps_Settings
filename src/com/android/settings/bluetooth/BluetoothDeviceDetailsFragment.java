@@ -315,6 +315,7 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
                 .add(use(BluetoothDetailsBannerController.class).getPreferenceKey())
                 .add(use(AdvancedBluetoothDetailsHeaderController.class).getPreferenceKey())
                 .add(use(LeAudioBluetoothDetailsHeaderController.class).getPreferenceKey())
+                .add(use(GeneralBluetoothDetailsHeaderController.class).getPreferenceKey())
                 .add(use(BluetoothDetailsButtonsController.class).getPreferenceKey());
         if (!BluetoothUtils.isHeadset(cachedDevice.getDevice())) {
             visibleKeys.add(use(BluetoothDetailsMacAddressController.class).getPreferenceKey());

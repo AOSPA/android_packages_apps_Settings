@@ -43,6 +43,7 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
+import com.android.settings.Utils;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.overlay.FeatureFactory;
@@ -72,8 +73,6 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
     private static final String EXTRA_AUTO_SELECTION = "auto_selection";
     public static final String EXTRA_INPUT_DEVICE_IDENTIFIER = "input_device_identifier";
     private static final String TAG = "KeyboardAndTouchA11yFragment";
-    private static final Uri sVirtualKeyboardSettingsUri = Secure.getUriFor(
-            Secure.SHOW_IME_WITH_HARD_KEYBOARD);
     private static final Uri sAccessibilityBounceKeysUri = Secure.getUriFor(
             Secure.ACCESSIBILITY_BOUNCE_KEYS);
     private static final Uri sAccessibilitySlowKeysUri = Secure.getUriFor(
@@ -120,6 +119,15 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(EXTRA_AUTO_SELECTION, mAutoInputDeviceIdentifier);
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // TODO(b/483182050): Temporary mitigation by disabling keyboard settings.
+        if (Utils.shouldDisableKeyboardSettingsInDemoMode(getPrefContext())) {
+            getPreferenceScreen().setEnabled(false);
+        }
     }
 
     @Override
@@ -332,11 +340,6 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         unregisterSettingsObserver();
         ContentResolver contentResolver = getActivity().getContentResolver();
         contentResolver.registerContentObserver(
-                sVirtualKeyboardSettingsUri,
-                false,
-                mContentObserver,
-                UserHandle.myUserId());
-        contentResolver.registerContentObserver(
                 sAccessibilityBounceKeysUri,
                 false,
                 mContentObserver,
@@ -519,7 +522,9 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
             new BaseSearchIndexProvider(R.xml.physical_keyboard_settings) {
                 @Override
                 protected boolean isPageSearchEnabled(Context context) {
-                    return !getHardKeyboards(context).isEmpty();
+                    // TODO(b/483182050): Temporary mitigation by hiding keyboard settings.
+                    return !Utils.shouldDisableKeyboardSettingsInDemoMode(context)
+                            && !getHardKeyboards(context).isEmpty();
                 }
             };
 }

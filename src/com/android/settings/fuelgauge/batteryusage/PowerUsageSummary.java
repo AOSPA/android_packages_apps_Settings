@@ -17,6 +17,7 @@
 package com.android.settings.fuelgauge.batteryusage;
 
 import static com.android.settings.fuelgauge.BatteryBroadcastReceiver.BatteryUpdateType;
+import static com.android.settingslib.Utils.KEY_WIRELESS_INCOMPATIBLE_CHARGING_STATE;
 
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
@@ -34,10 +35,12 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.preference.Preference;
 
+import com.android.internal.annotations.Initializer;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.fuelgauge.BatteryHeaderTextPreferenceController;
 import com.android.settings.fuelgauge.BatteryInfo;
+import com.android.settings.fuelgauge.BatterySettingsFeatureProvider;
 import com.android.settings.fuelgauge.BatteryUtils;
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider;
 import com.android.settings.fuelgauge.batterytip.BatteryTipLoader;
@@ -63,6 +66,7 @@ public class PowerUsageSummary extends PowerUsageBase
     @VisibleForTesting static final String KEY_BATTERY_USAGE = "battery_usage_summary";
 
     @VisibleForTesting PowerUsageFeatureProvider mPowerFeatureProvider;
+    @VisibleForTesting BatterySettingsFeatureProvider mBatterySettingsFeatureProvider;
     @VisibleForTesting BatteryUtils mBatteryUtils;
     @VisibleForTesting BatteryInfo mBatteryInfo;
 
@@ -141,6 +145,16 @@ public class PowerUsageSummary extends PowerUsageBase
                         Global.getUriFor(Global.BATTERY_ESTIMATES_LAST_UPDATE_TIME),
                         false,
                         mSettingsObserver);
+        getContentResolver()
+                .registerContentObserver(
+                        Global.getUriFor(KEY_WIRELESS_INCOMPATIBLE_CHARGING_STATE),
+                        false,
+                        mSettingsObserver);
+        final Uri batteryStatusUri = mBatterySettingsFeatureProvider.getBatteryStatusUri();
+        if (batteryStatusUri != null) {
+            getContentResolver()
+                    .registerContentObserver(batteryStatusUri, false, mSettingsObserver);
+        }
     }
 
     @Override
@@ -195,8 +209,11 @@ public class PowerUsageSummary extends PowerUsageBase
     }
 
     @VisibleForTesting
+    @Initializer
     void initFeatureProvider() {
         mPowerFeatureProvider = FeatureFactory.getFeatureFactory().getPowerUsageFeatureProvider();
+        mBatterySettingsFeatureProvider =
+                FeatureFactory.getFeatureFactory().getBatterySettingsFeatureProvider();
     }
 
     @VisibleForTesting

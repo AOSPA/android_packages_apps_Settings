@@ -85,6 +85,20 @@ class SatelliteUtilsTest {
     }
 
     @Test
+    fun isLteBasedNtnSupported_bundle_returnsTrue() {
+        val config =
+            PersistableBundle().apply {
+                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
+                putInt(
+                    CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                    CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+                )
+            }
+
+        assertThat(SatelliteUtils.isLteBasedNtnSupported(config)).isTrue()
+    }
+
+    @Test
     fun isLteBasedNtnSupported_supportedConfig_hasUserRestriction_stillReturnsTrue() {
         // Set attach restriction reason to true (user restriction)
         setAttachRestrictionReasons(restricted = true)
@@ -159,13 +173,13 @@ class SatelliteUtilsTest {
     }
 
     @Test
-    fun isLteBasedNtnSupportedByDevice_noActiveSubscriptions_returnsFalse() {
+    fun isLteBasedNtnSupportedByAnySub_noActiveSubscriptions_returnsFalse() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(emptyList())
-        assertThat(SatelliteUtils.isLteBasedNtnSupportedByDevice(context)).isFalse()
+        assertThat(SatelliteUtils.isLteBasedNtnSupportedByAnySub(context)).isFalse()
     }
 
     @Test
-    fun isLteBasedNtnSupportedByDevice_oneSubSupported_returnsTrue() {
+    fun isLteBasedNtnSupportedByAnySub_oneSubSupported_returnsTrue() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1))
         setupCarrierConfig(
             isAttachSupported = true,
@@ -173,11 +187,11 @@ class SatelliteUtilsTest {
             subId = SUB_ID,
         )
 
-        assertThat(SatelliteUtils.isLteBasedNtnSupportedByDevice(context)).isTrue()
+        assertThat(SatelliteUtils.isLteBasedNtnSupportedByAnySub(context)).isTrue()
     }
 
     @Test
-    fun isLteBasedNtnSupportedByDevice_oneSubNotSupported_returnsFalse() {
+    fun isLteBasedNtnSupportedByAnySub_oneSubNotSupported_returnsFalse() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1))
         setupCarrierConfig(
             isAttachSupported = true,
@@ -185,11 +199,11 @@ class SatelliteUtilsTest {
             subId = SUB_ID,
         )
 
-        assertThat(SatelliteUtils.isLteBasedNtnSupportedByDevice(context)).isFalse()
+        assertThat(SatelliteUtils.isLteBasedNtnSupportedByAnySub(context)).isFalse()
     }
 
     @Test
-    fun isLteBasedNtnSupportedByDevice_twoSubsOneSupported_returnsTrue() {
+    fun isLteBasedNtnSupportedByAnySub_twoSubsOneSupported_returnsTrue() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1, subInfo2))
         // SUB_ID is supported
         setupCarrierConfig(
@@ -204,11 +218,11 @@ class SatelliteUtilsTest {
             subId = SUB_ID_2,
         )
 
-        assertThat(SatelliteUtils.isLteBasedNtnSupportedByDevice(context)).isTrue()
+        assertThat(SatelliteUtils.isLteBasedNtnSupportedByAnySub(context)).isTrue()
     }
 
     @Test
-    fun isLteBasedNtnSupportedByDevice_twoSubsNoneSupported_returnsFalse() {
+    fun isLteBasedNtnSupportedByAnySub_twoSubsNoneSupported_returnsFalse() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1, subInfo2))
         // SUB_ID is not supported
         setupCarrierConfig(
@@ -223,7 +237,7 @@ class SatelliteUtilsTest {
             subId = SUB_ID_2,
         )
 
-        assertThat(SatelliteUtils.isLteBasedNtnSupportedByDevice(context)).isFalse()
+        assertThat(SatelliteUtils.isLteBasedNtnSupportedByAnySub(context)).isFalse()
     }
 
     /** Configures the test environment to simulate whether LTE NTN has restrictions */

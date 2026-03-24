@@ -36,6 +36,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.dream.DreamBackend
+import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -43,6 +44,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ScreensaverScreen.KEY)
@@ -51,6 +53,8 @@ open class ScreensaverScreen(private val context: Context) :
     AbstractKeyedDataObservable<String>(),
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+
 
     private var dreamBackend: DreamBackend = DreamBackend.getInstance(context)
     private var settingsStore: KeyValueStore = SettingsSecureStore.get(context)
@@ -107,7 +111,7 @@ open class ScreensaverScreen(private val context: Context) :
         makeLaunchIntent(context, DreamSettingsActivity::class.java, metadata?.key)
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
-        preferenceHierarchy(context) {}
+        preferenceHierarchy(context) { +ScreensaverScreenPreference(this@ScreensaverScreen) }
 
     override fun onFirstObserverAdded() {
         // update summary when any of the screen saver settings has changed
@@ -181,6 +185,26 @@ open class ScreensaverScreen(private val context: Context) :
         fun dreamOn(context: Context, activeDreamName: CharSequence): CharSequence
 
         fun dreamOffBedtime(context: Context): CharSequence
+    }
+
+    class ScreensaverScreenPreference(
+        private val screenMetadata : ScreensaverScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+        override val key : String
+            get() = "screensaver_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }
 
     companion object {

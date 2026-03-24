@@ -18,9 +18,15 @@
     xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:title="@string/automatic_sim_lock_protection">
 
-<com.android.settingslib.PrimarySwitchPreference
-    android:key="sim_pin_auto_management_toggle"
-    android:title="@string/sim_auto_pin_management_toggle"
-    android:fragment="com.android.settings.security.ControlAutoSimPinManagementFragment"
-    settings:controller="com.android.settings.security.AutoSimPinManagementController"/>
+    <com.android.settingslib.PrimarySwitchPreference
+        android:key="sim_pin_auto_management_toggle"
+        android:title="@string/sim_auto_pin_management_toggle"
+        android:fragment="com.android.settings.security.ControlAutoSimPinManagementFragment"
+	settings:controller="com.android.settings.security.SimPinProtectionToggleController"/>
+
+    <Preference
+        android:key="esim_conversion_toggle"
+        android:title="@string/convert_to_esim_title"
+        settings:controller="com.android.settings.network.telephony.ConvertToEsimPreferenceController"/>
+
 </PreferenceScreen>

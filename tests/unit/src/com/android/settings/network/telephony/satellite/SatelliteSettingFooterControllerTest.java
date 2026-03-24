@@ -134,6 +134,9 @@ public class SatelliteSettingFooterControllerTest {
         assertThat(
                 summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
                         "satellite_footer_content_section_6"))).isFalse();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_8"))).isTrue();
     }
 
     @Test
@@ -188,6 +191,9 @@ public class SatelliteSettingFooterControllerTest {
         assertThat(
                 summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
                         "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isTrue();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_8"))).isTrue();
     }
 
     @Test
@@ -279,5 +285,40 @@ public class SatelliteSettingFooterControllerTest {
         assertThat(
                 summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
                         "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isTrue();
+    }
+
+    @Test
+    public void displayPreferenceScreen_hybridTypeAndNoEntitlement() {
+        // Verifies footer content for HYBRID connection type without entitlement support.
+        // In this case, section 7 and 8 should be displayed.
+        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                CARRIER_ROAMING_NTN_CONNECT_HYBRID);
+        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false);
+
+        PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
+        when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
+        screen.addPreference(mFooterPreference);
+        mController.init(TEST_SUB_ID, mPersistableBundle);
+
+        // Trigger preference display
+        mController.displayPreference(screen);
+
+        // Capture and verify the summary
+        ArgumentCaptor<CharSequence> summary = ArgumentCaptor.forClass(CharSequence.class);
+        verify(mFooterPreference).setSummary(summary.capture());
+
+        // Assert that the correct sections are present or absent
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_7", TEST_OPERATOR_NAME))).isTrue();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_8"))).isTrue();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_5"))).isFalse();
+        assertThat(
+                summary.getValue().toString().contains(ResourcesUtils.getResourcesString(mContext,
+                        "satellite_footer_content_section_6"))).isFalse();
     }
 }

@@ -38,14 +38,11 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.os.Bundle;
-import android.platform.test.annotations.DisableFlags;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.graphics.hwui.flags.Flags;
 import com.android.settings.Utils;
 
 import com.google.common.truth.Expect;
@@ -94,15 +91,6 @@ public class HighContrastTextMigrationReceiverTest {
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
-    public void onReceive_flagOff_settingsNotSet() {
-        mReceiver.onReceive(mContext, new Intent(ACTION_RESTORED));
-
-        assertPromptStateAndHctState(/* promptState= */ UNKNOWN, /* hctState= */ OFF);
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
     public void onRestored_hctStateOn_showPromptHctKeepsOn() {
         setPromptStateAndHctState(/* promptState= */ UNKNOWN, /* hctState= */ ON);
 
@@ -113,7 +101,6 @@ public class HighContrastTextMigrationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
     public void onRestored_hctStateOff_showPromptHctKeepsOff() {
         setPromptStateAndHctState(/* promptState= */ UNKNOWN, /* hctState= */ OFF);
 
@@ -124,7 +111,6 @@ public class HighContrastTextMigrationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
     public void onPreBootCompleted_promptStateUnknownHctOn_showPromptAndAutoDisableHct() {
         setPromptStateAndHctState(/* promptState= */ UNKNOWN, /* hctState= */ ON);
 
@@ -136,7 +122,6 @@ public class HighContrastTextMigrationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
     public void onPreBootCompleted_promptStateUnknownAndHctOff_promptIsUnnecessaryHctKeepsOff() {
         setPromptStateAndHctState(/* promptState= */ UNKNOWN, /* hctState= */ OFF);
 
@@ -148,7 +133,6 @@ public class HighContrastTextMigrationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
     public void onPreBootCompleted_promptStateShownAndHctOn_promptStateUnchangedHctKeepsOn() {
         setPromptStateAndHctState(/* promptState= */ PROMPT_SHOWN, /* hctState= */ ON);
 
@@ -160,7 +144,6 @@ public class HighContrastTextMigrationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
     public void onPreBootCompleted_promptStateShownAndHctOff_promptStateUnchangedHctKeepsOff() {
         setPromptStateAndHctState(/* promptState= */ PROMPT_SHOWN, /* hctState= */ OFF);
 
@@ -172,7 +155,6 @@ public class HighContrastTextMigrationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
     public void onPreBootCompleted_promptStateUnnecessaryAndHctOn_promptStateUnchangedHctKeepsOn() {
         setPromptStateAndHctState(/* promptState= */ PROMPT_UNNECESSARY, /* hctState= */ ON);
 
@@ -184,7 +166,6 @@ public class HighContrastTextMigrationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
     public void onPreBootCompleted_promptStateUnnecessaryHctOff_promptStateUnchangedHctKeepsOff() {
         setPromptStateAndHctState(/* promptState= */ PROMPT_UNNECESSARY, /* hctState= */ OFF);
 
@@ -196,7 +177,6 @@ public class HighContrastTextMigrationReceiverTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_HIGH_CONTRAST_TEXT_SMALL_TEXT_RECT)
     public void onReceive_openSettingsIntent_openHighContrastTextPreference() {
         Intent intent = new Intent(ACTION_OPEN_SETTINGS);
         mReceiver.onReceive(mContext, intent);

@@ -125,13 +125,6 @@ flag {
 }
 
 flag {
-    name: "enable_disability_support"
-    namespace: "accessibility"
-    description: "Use disability support for accessibility"
-    bug: "419387108"
-}
-
-flag {
     name: "enable_edt_app_exceptions"
     namespace: "accessibility"
     description: "Allow users to opt-out selected apps from Expanded Dark Theme."
@@ -160,6 +153,16 @@ flag {
     namespace: "accessibility"
     description: "Decides whether to use new accessibility setup page uses the SetupLib implementation."
     bug: "407080818"
+}
+
+flag {
+    name: "floating_menu_transparency_slider_announces_disabled"
+    namespace: "accessibility"
+    description: "updates state description so slider handle reads 'disabled' when the setting is disabled."
+    bug: "456649436"
+    metadata {
+      purpose: PURPOSE_BUGFIX
+    }
 }
 
 flag {

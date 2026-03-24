@@ -29,7 +29,6 @@ import com.android.settings.Settings.MobileNetworkActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.datausage.BillingCycleScreen
 import com.android.settings.datausage.DataUsageListScreen
-import com.android.settings.deviceinfo.imei.getImeiList
 import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.apn.ApnSettings
 import com.android.settings.network.apn.ApnSettingsScreen
@@ -47,6 +46,8 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_MOBILE_DATA
+import com.android.settingslib.metadata.preferencesapi.types.AnyInt
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -69,6 +70,7 @@ private constructor(
     PreferenceTitleProvider,
     PreferenceIndexableProvider,
     PreferenceRestrictionMixin {
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
 
     private val subId: Int =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -121,8 +123,7 @@ private constructor(
                 +MobileNetworkSpnPreference(context, subId)
                 +MobileNetworkPhoneNumberPreference(data)
                 +EnabledNetworkModePreference(data)
-                val imeiList = context.getImeiList
-                +MobileNetworkImeiPreference(context, subId, imeiList)
+                +MobileNetworkImeiPreference(data)
                 if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
                     +(DataUsageListScreen.KEY withParameters keyParameters!!)
                 } else {
@@ -193,7 +194,11 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(Settings.EXTRA_SUB_ID, "The subscription ID")
+            parameter(
+                Settings.EXTRA_SUB_ID,
+                "The subscription ID",
+                type = AnyInt,
+            ) // TODO(scottjonathan): Is there a better type to use here
         }
 
         @JvmStatic

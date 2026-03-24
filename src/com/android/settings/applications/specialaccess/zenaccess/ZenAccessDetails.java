@@ -29,6 +29,7 @@ import com.android.settings.applications.AppInfoWithHeader;
 
 import java.util.Set;
 
+// LINT.IfChange
 public class ZenAccessDetails extends AppInfoWithHeader implements
         ZenAccessSettingObserverMixin.Listener {
 
@@ -108,3 +109,4 @@ public class ZenAccessDetails extends AppInfoWithHeader implements
         refreshUi();
     }
 }
+// LINT.ThenChange(ZenAccessDetailsApiScreen.java)

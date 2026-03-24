@@ -38,7 +38,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.SettingsPreferenceFragment;
 import com.android.settings.widget.SettingsMainSwitchBar;
-
+// LINT.IfChange
 public class SpellCheckersSettings extends SettingsPreferenceFragment
         implements OnCheckedChangeListener, OnPreferenceChangeListener {
     private static final String TAG = SpellCheckersSettings.class.getSimpleName();
@@ -274,3 +274,4 @@ public class SpellCheckersSettings extends SettingsPreferenceFragment
         updatePreferenceScreen();
     }
 }
+// LINT.ThenChange(SpellCheckerApiScreen.kt)

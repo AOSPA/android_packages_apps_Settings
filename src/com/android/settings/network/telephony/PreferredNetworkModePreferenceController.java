@@ -15,8 +15,8 @@
  */
 
 /*
- * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
- * Copyright (c) 2023-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -370,8 +370,6 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
                 return R.string.preferred_network_mode_tdscdma_gsm_wcdma_summary;
             case TelephonyManager.NETWORK_MODE_TDSCDMA_GSM:
                 return R.string.preferred_network_mode_tdscdma_gsm_summary;
-            case TelephonyManager.NETWORK_MODE_WCDMA_PREF:
-                return R.string.preferred_network_mode_wcdma_perf_summary;
             case TelephonyManager.NETWORK_MODE_GSM_ONLY:
                 return R.string.preferred_network_mode_gsm_only_summary;
             case TelephonyManager.NETWORK_MODE_TDSCDMA_WCDMA:
@@ -379,6 +377,7 @@ public class PreferredNetworkModePreferenceController extends BasePreferenceCont
             case TelephonyManager.NETWORK_MODE_WCDMA_ONLY:
                 return R.string.preferred_network_mode_wcdma_only_summary;
             case TelephonyManager.NETWORK_MODE_GSM_UMTS:
+            case TelephonyManager.NETWORK_MODE_WCDMA_PREF:
                 return R.string.preferred_network_mode_gsm_wcdma_summary;
             case TelephonyManager.NETWORK_MODE_CDMA_EVDO:
                 return mTelephonyManager.isLteCdmaEvdoGsmWcdmaEnabled()
