@@ -47,5 +47,11 @@ class ComputerControlAutomationPreferenceController(context: Context, key: Strin
     }
 
     override fun getSummary() =
-        mContext.getString(R.string.computer_control_automation_page_summary)
+        if (android.companion.virtualdevice.flags.Flags.computerControlPerAppConsent()) {
+            mContext.getString(
+                R.string.computer_control_automation_page_summary_flag_per_app_consent
+            )
+        } else {
+            mContext.getString(R.string.computer_control_automation_page_summary)
+        }
 }
