@@ -338,11 +338,11 @@
     <string name="time_format_12_hour" msgid="4212243396629600426">"Định dạng 12 giờ"</string>
     <string name="time_format_24_hour" msgid="8284408904130498347">"Định dạng 24 giờ"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Múi giờ"</string>
-    <string name="home_time_zone_title" msgid="3824736095532816255">"Múi giờ chính"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"Múi giờ của nhà riêng"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Chọn múi giờ"</string>
-    <string name="home_time_zone_summary" msgid="1494773352044636274">"Đặt múi giờ chính khi bạn đi vắng"</string>
-    <string name="use_home_time_zone_title" msgid="8026361707497256390">"Dùng múi giờ chính"</string>
-    <string name="suggestions_category_title" msgid="669819615912272575">"Nội dung đề xuất"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"Đặt múi giờ cho nhà riêng của bạn khi bạn đi vắng"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"Dùng múi giờ của nhà riêng"</string>
+    <string name="suggestions_category_title" msgid="669819615912272575">"Đề xuất"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"Chọn múi giờ"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"Tìm kiếm múi giờ"</string>
     <string name="date_time_set_date_title" msgid="7624166157167528407">"Ngày"</string>
@@ -1507,10 +1507,10 @@
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Không do Android quản lý"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Đăng ký thành công"</string>
     <string name="sim_enrollment_failed" msgid="342422651961251317">"Không đăng ký được"</string>
-    <string name="sim_display_platform_managed_pin_title" msgid="6889806433509624620">"Hiển thị mã PIN do Android quản lý"</string>
+    <string name="sim_display_platform_managed_pin_title" msgid="6889806433509624620">"Hiện mã PIN do Android quản lý"</string>
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Mã PIN do Android quản lý"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Giá trị của mã PIN do Android quản lý:"</string>
-    <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Không nhận được mã PIN"</string>
+    <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Không lấy được mã PIN"</string>
     <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Cần có mã PIN để dùng điện thoại"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Mã PIN của SIM do Android quản lý"</string>
     <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"Cần có mã PIN để dùng điện thoại"</string>
@@ -2558,7 +2558,8 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"phím âm lượng"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Nhấn và giữ cả 2 phím âm lượng"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Nhấn 3 lần"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Nhấn nhanh vào màn hình %1$d lần. Thao tác này có thể khiến thiết bị của bạn hoạt động chậm."</string>
+    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (387169602299548488) -->
+    <skip />
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"nhấn 3 lần"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Phím tắt"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Nhấn tổ hợp phím <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> để sử dụng <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -4614,17 +4615,49 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Có thể truy cập vào tất cả các tệp"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Tự động thao tác trên màn hình"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Ứng dụng này sẽ có thể xem và tương tác với nội dung trên màn hình của các ứng dụng khác để giúp bạn hoàn tất việc cần làm, ngay cả khi các ứng dụng đó đang chạy ở chế độ nền"</string>
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> sẽ có thể xem và tương tác với nội dung trên màn hình của các ứng dụng khác để giúp bạn hoàn thành việc cần làm"</string>
-    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Nếu bạn không cho phép tự động thao tác trên màn hình, thì <xliff:g id="ID_1">%1$s</xliff:g> vẫn có thể tương tác với các ứng dụng được kết nối với <xliff:g id="ID_2">%1$s</xliff:g> theo những cách khác"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2154932816099670659) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_info (9062454049512207228) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (5980762930536180974) -->
+    <skip />
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Cho phép các ứng dụng tương tác với nội dung trên màn hình của các ứng dụng khác để giúp bạn hoàn thành các việc"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Luôn hỏi"</string>
-    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Luôn cho phép"</string>
+    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Không cho phép"</string>
-    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Cho phép tự động thao tác trên màn hình"</string>
-    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"Không có ứng dụng nào luôn được cho phép"</string>
-    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Những ứng dụng được <xliff:g id="ID_1">%1$s</xliff:g> cho phép luôn dùng tính năng tự động thao tác trên màn hình sẽ xuất hiện ở đây. Những ứng dụng chỉ nhận được quyền cho mỗi phiên sẽ không xuất hiện."</string>
-    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Được phép"</string>
-    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Không được phép"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (4888755761957621266) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (5400163562350523099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_requirement (2238235275174477026) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (2135792628244307590) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_clear_all_apps (7663936744209447022) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (2481703601665259966) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9145402296131321682) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2454906328238498562) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_header (5137088795672278469) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_footer_requirement (4029489221206415252) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (7290667979548333123) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_target_list_header (3243296237180038117) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Thông báo toàn màn hình"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Cho phép ứng dụng này hiện thông báo toàn màn hình"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Cho phép ứng dụng hiện các thông báo chiếm toàn màn hình khi thiết bị ở trạng thái khoá. Các ứng dụng có thể dùng những thông báo này để làm nổi bật chuông báo, cuộc gọi đến hoặc thông báo khẩn cấp khác."</string>
@@ -5723,11 +5756,13 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Chỉ chấp nhận mạng đã mã hoá"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Sử dụng chế độ này sẽ an toàn hơn nhưng có thể hạn chế kết nối mạng di động của bạn ở một số vị trí. Dù vậy, bạn luôn thực hiện được cuộc gọi khẩn cấp."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Tắt tính năng bảo vệ tránh rủi ro của mạng 2G?"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Mạng hiện tại của SIM <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> không hỗ trợ 2G. Nếu tắt tính năng bảo vệ khỏi mạng 2G, bạn có thể gặp rủi ro khi kết nối với các mạng 2G giả mạo gây hại."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (7888326960588858860) -->
+    <skip />
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Tắt"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Bảo vệ khỏi mạng 2G"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"Tính năng bảo vệ khỏi mạng 2G đang bật"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"Mạng hiện tại của SIM <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> yêu cầu bạn bật tính năng bảo vệ khỏi mạng 2G. Bạn vẫn có thể tắt tính năng này và phải tự chịu rủi ro."</string>
+    <!-- no translation found for network_protection_2g_on_notification_summary (2865716658412002901) -->
+    <skip />
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Cài đặt"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tất cả dịch vụ"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Hiện quyền truy cập vào bảng nhớ tạm"</string>
@@ -5810,6 +5845,12 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Gỡ cài đặt ứng dụng"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Ứng dụng được cài đặt trong vòng # tháng gần đây}other{Ứng dụng được cài đặt trong vòng # tháng gần đây}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Ứng dụng được cài đặt từ hơn # tháng trước}other{Ứng dụng được cài đặt từ hơn # tháng trước}}"</string>
+    <!-- no translation found for ai_assist_category (6800674613544630195) -->
+    <skip />
+    <!-- no translation found for personal_context_title (6639623956831710453) -->
+    <skip />
+    <!-- no translation found for personal_context_switch_summary (917644125592480347) -->
+    <skip />
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Tỷ lệ khung hình"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Hãy thử một tỷ lệ khung hình mới để xem ứng dụng, nếu ứng dụng này chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Hãy thử một tỷ lệ khung hình mới để xem ứng dụng, nếu ứng dụng này chưa được thiết kế cho vừa với <xliff:g id="DEVICE_NAME">%1$s</xliff:g> của bạn. Có thể một số ứng dụng chưa được tối ưu hoá cho một số tỷ lệ khung hình nhất định."</string>
