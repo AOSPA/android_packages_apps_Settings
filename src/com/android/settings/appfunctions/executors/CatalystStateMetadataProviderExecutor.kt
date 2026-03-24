@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Binder
+import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
@@ -31,9 +32,11 @@ import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.accessPreconditionsAsString
@@ -264,7 +267,13 @@ class CatalystStateMetadataProviderExecutor(
                 removeDuplicates = isParameterized,
                 includeAtLeastOne = true,
             )
+        return buildHierarchyMetadata(hierarchy, isParameterized)
+    }
 
+    private suspend fun CoroutineScope.buildHierarchyMetadata(
+        hierarchy: Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>,
+        isParameterized: Boolean,
+    ): DeviceStateMetadataProviderExecutorResult {
         val metadata = hierarchy.map { entry ->
             val screenMetaData = entry.key
             val preferencesHierarchy = entry.value
