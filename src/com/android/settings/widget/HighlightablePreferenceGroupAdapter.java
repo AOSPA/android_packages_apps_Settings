@@ -30,12 +30,16 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.AccessibilityDelegateCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
@@ -147,8 +151,18 @@ public class HighlightablePreferenceGroupAdapter extends SettingsPreferenceGroup
                 && position == mHighlightPosition
                 && (mHighlightKey != null && TextUtils.equals(mHighlightKey, preference.getKey()))
                 && v.isShown()) {
-            // This position should be highlighted. If it's highlighted before - skip animation.
-            v.requestAccessibilityFocus();
+            // set initial accessibility focus
+            TextView title = (TextView) holder.findViewById(android.R.id.title);
+            if (title != null) {
+                ViewCompat.setAccessibilityDelegate(title, new AccessibilityDelegateCompat() {
+                        @Override
+                        public void onInitializeAccessibilityNodeInfo(
+                                View host, AccessibilityNodeInfoCompat info) {
+                            super.onInitializeAccessibilityNodeInfo(host, info);
+                            info.setRequestInitialAccessibilityFocus(true);
+                        }
+                    });
+            }
             addHighlightBackground(holder, !mHighlightVisible, position);
         } else if (Boolean.TRUE.equals(v.getTag(R.id.preference_highlighted))) {
             // View with highlight is reused for a view that should not have highlight
