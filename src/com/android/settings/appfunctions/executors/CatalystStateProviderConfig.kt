@@ -194,6 +194,7 @@ import com.android.settings.safetycenter.ui.AppSecurityScreenApi
 import com.android.settings.safetycenter.ui.DeviceUnlockApiScreen
 import com.android.settings.safetycenter.ui.MoreSecurityPrivacyScreenApi
 import com.android.settings.safetycenter.ui.PrivacyControlsScreenApi
+import com.android.settings.safetycenter.ui.SafetyCenterApiScreen
 import com.android.settings.safetycenter.ui.SystemAndUpdatesScreenApi
 import com.android.settings.security.ContentProtectionScreenApi
 import com.android.settings.security.CredentialManagementAppScreenApi
@@ -698,6 +699,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = PrintServiceApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UsbDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = UnrestrictedDataAccessApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = SafetyCenterApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AccountSecuritySubpageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = AppSecurityScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = SystemAndUpdatesScreenApi.KEY),
