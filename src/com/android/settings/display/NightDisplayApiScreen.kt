@@ -23,6 +23,7 @@ import android.location.LocationManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -67,6 +68,7 @@ class NightDisplayApiScreen :
             purpose = R.string.night_display_activated_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             get { execute { context.colorDisplayManager.isNightDisplayActivated } }
 
             set {
