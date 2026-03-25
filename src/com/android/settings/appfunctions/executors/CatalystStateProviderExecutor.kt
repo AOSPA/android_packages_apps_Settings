@@ -135,7 +135,7 @@ class CatalystStateProviderExecutor(
                                                 val firstScreenMetadata = firstInstance.key
                                                 val firstPreferences = firstInstance.value
 
-                                                if (!firstScreenMetadata.isExposable(context)) return@withTimeout null
+                                                if (!firstScreenMetadata.isExposable(context) || !firstScreenMetadata.isFlagEnabled(context)) return@withTimeout null
 
                                                 val hasNonStaticInfo = firstScreenMetadata.accessPreconditionsAsString(context) != null ||
                                                         firstScreenMetadata.setPreconditionsAsString(context) != null ||
