@@ -21,7 +21,6 @@ import static android.media.AudioSystem.STREAM_MUSIC;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.android.settingslib.media.flags.Flags.FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -41,7 +40,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.session.MediaSessionManager;
-import android.platform.test.flag.junit.SetFlagsRule;
 import android.util.FeatureFlagUtils;
 
 import androidx.preference.ListPreference;
@@ -65,7 +63,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -117,9 +114,6 @@ public class AudioOutputSwitchPreferenceControllerTest {
     private CachedBluetoothDevice mCachedBluetoothDeviceL;
     @Mock
     private CachedBluetoothDevice mCachedBluetoothDeviceR;
-
-    @Rule
-    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
     private Context mContext;
     private PreferenceScreen mScreen;
@@ -245,33 +239,9 @@ public class AudioOutputSwitchPreferenceControllerTest {
     }
 
     @Test
-    public void onStart_shouldRegisterCallbackAndRegisterReceiver() {
-        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
-        mController.onStart();
-
-        verify(mLocalBluetoothManager.getEventManager()).registerCallback(
-                any(BluetoothCallback.class));
-        verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
-        verify(mLocalBluetoothManager).setForegroundActivity(mContext);
-    }
-
-    @Test
-    public void onStop_shouldUnregisterCallbackAndUnregisterReceiver() {
-        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
-        mController.onStart();
-        mController.onStop();
-
-        verify(mLocalBluetoothManager.getEventManager()).unregisterCallback(
-                any(BluetoothCallback.class));
-        verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
-        verify(mLocalBluetoothManager).setForegroundActivity(null);
-    }
-
-    @Test
     public void onStart_shouldRegisterCallbackAndRegisterReceiverWithDefaultMediaOutput() {
         MediaSessionManager mediaSessionManager =
                 spy(mContext.getSystemService(MediaSessionManager.class));
-        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mediaSessionManager);
         mController = new AudioSwitchPreferenceControllerTestable(mContext, TEST_KEY);
 
@@ -291,7 +261,6 @@ public class AudioOutputSwitchPreferenceControllerTest {
     public void onStop_shouldUnregisterCallbackAndUnregisterReceiverWithDefaultMediaOutput() {
         MediaSessionManager mediaSessionManager =
                 spy(mContext.getSystemService(MediaSessionManager.class));
-        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         when(mContext.getSystemService(MediaSessionManager.class)).thenReturn(mediaSessionManager);
         mController = new AudioSwitchPreferenceControllerTestable(mContext, TEST_KEY);
         mController.onStart();

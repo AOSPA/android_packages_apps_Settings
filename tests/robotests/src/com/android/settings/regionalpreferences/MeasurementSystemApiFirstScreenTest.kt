@@ -93,7 +93,7 @@ class MeasurementSystemApiFirstScreenTest {
         Locale.setDefault(Locale.forLanguageTag("en-US-u-ms-ussystem"))
 
         assertThat(tester.get<String>(MeasurementSystemApiFirstScreen.KEY_MEASUREMENT_SYSTEM_ITEM))
-            .isEqualTo("US")
+            .isEqualTo("ussystem")
     }
 
     @Test
@@ -102,7 +102,7 @@ class MeasurementSystemApiFirstScreenTest {
         Locale.setDefault(Locale.forLanguageTag("en-US"))
 
         assertThat(tester.get<String>(MeasurementSystemApiFirstScreen.KEY_MEASUREMENT_SYSTEM_ITEM))
-            .isEqualTo("Use default")
+            .isEqualTo("default")
     }
 
     @Test
@@ -110,14 +110,14 @@ class MeasurementSystemApiFirstScreenTest {
         tester.set(MeasurementSystemApiFirstScreen.KEY_MEASUREMENT_SYSTEM_ITEM, "default")
 
         assertThat(tester.get<String>(MeasurementSystemApiFirstScreen.KEY_MEASUREMENT_SYSTEM_ITEM))
-            .isEqualTo("Use default")
+            .isEqualTo("default")
     }
 
     @Test
     fun setPreference_valueIsUk_returnUksystem() {
-        tester.set(MeasurementSystemApiFirstScreen.KEY_MEASUREMENT_SYSTEM_ITEM, "uk")
+        tester.set(MeasurementSystemApiFirstScreen.KEY_MEASUREMENT_SYSTEM_ITEM, "uksystem")
 
         assertThat(tester.get<String>(MeasurementSystemApiFirstScreen.KEY_MEASUREMENT_SYSTEM_ITEM))
-            .isEqualTo("UK")
+            .isEqualTo("uksystem")
     }
 }

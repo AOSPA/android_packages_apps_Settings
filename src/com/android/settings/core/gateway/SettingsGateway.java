@@ -132,7 +132,7 @@ import com.android.settings.gestures.SwipeToNotificationSettings;
 import com.android.settings.gestures.SystemNavigationGestureSettings;
 import com.android.settings.input.gamecontroller.GameControllerFragment;
 import com.android.settings.input.gamecontroller.GameControllerListFragment;
-import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
+import com.android.settings.inputmethod.AvailableKeyboardAppsFragment;
 import com.android.settings.inputmethod.KeyboardSettings;
 import com.android.settings.inputmethod.ModifierKeysSettings;
 import com.android.settings.inputmethod.NewKeyboardLayoutEnabledLocalesFragment;
@@ -248,7 +248,7 @@ public class SettingsGateway {
             DateTimeSettings.class.getName(),
             LocaleListEditor.class.getName(),
             LanguageAndRegionSettings.class.getName(),
-            AvailableVirtualKeyboardFragment.class.getName(),
+            AvailableKeyboardAppsFragment.class.getName(),
             KeyboardSettings.class.getName(),
             GameControllerFragment.class.getName(),
             GameControllerListFragment.class.getName(),

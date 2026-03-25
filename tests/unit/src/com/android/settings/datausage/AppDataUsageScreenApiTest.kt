@@ -157,7 +157,7 @@ class AppDataUsageScreenApiTest {
     fun backgroundDataSwitch_sensitivityLevel_isNoSensitivity() {
         val preference = screen.preferences.first { it.key == KEY_APP_BACKGROUND_DATA_SWITCH }
 
-        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.DO_NOT_EXPOSE)
     }
 
     @Test
@@ -208,7 +208,7 @@ class AppDataUsageScreenApiTest {
         val preference =
             screen.preferences.first { it.key == KEY_APP_UNRESTRICTED_MOBILE_DATA_USAGE_SWITCH }
 
-        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.DO_NOT_EXPOSE)
     }
 
     @Test

@@ -31,12 +31,13 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseRestriction
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
-import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.unsafe
 
 // LINT.IfChange
@@ -101,7 +102,10 @@ class MobileNetworkScreenApi :
                         ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
 
                 if (!SubscriptionManager.isValidSubscriptionId(subId)) {
-                    Disallowed("This is not a valid subscription id")
+                    Custom(
+                        "This is not a valid subscription id",
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 } else {
                     Allowed
                 }
@@ -137,7 +141,10 @@ class MobileNetworkScreenApi :
                             CarrierConfigManager.KEY_FORCE_HOME_NETWORK_BOOL,
                         )
                     ) {
-                        Disallowed("Roaming is disallowed by the carrier")
+                        Custom(
+                            "Roaming is disallowed by the carrier",
+                            stability = PreconditionStability.UNSTABLE,
+                        )
                     } else {
                         Allowed
                     }
@@ -161,11 +168,20 @@ class MobileNetworkScreenApi :
                     keyParameters?.get(Settings.EXTRA_SUB_ID)?.toInt()
                         ?: SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 if (!SubscriptionManager.isValidSubscriptionId(subId)) {
-                    Disallowed("This is not a valid subscription id")
+                    Custom(
+                        "This is not a valid subscription id",
+                        stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
+                    )
                 } else if (subscriptionRepository.getDefaultDataSubscriptionId() == subId) {
-                    Disallowed("This is the default data subscription")
+                    Custom(
+                        "This is the default data subscription",
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 } else if (!telephonyRepository.isMobileDataCable()) {
-                    Disallowed("Mobile data is not available")
+                    Custom(
+                        "Mobile data is not available",
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 } else {
                     Allowed
                 }

@@ -24,7 +24,10 @@ import android.util.Log
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.utils.getLocale
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
@@ -36,6 +39,7 @@ import java.util.TimeZone
 
 // LINT.IfChange
 class MainlineModuleVersionPreference :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceSummaryProvider,
     PreferenceAvailabilityProvider,
@@ -51,6 +55,12 @@ class MainlineModuleVersionPreference :
 
     override val title: Int
         get() = R.string.module_version
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? {
         val version = getModuleVersion(context)
@@ -91,6 +101,8 @@ class MainlineModuleVersionPreference :
 
     override val availabilityDescription =
         "The device must have a mainline module version."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = getModuleVersion(context).isNotEmpty()
 

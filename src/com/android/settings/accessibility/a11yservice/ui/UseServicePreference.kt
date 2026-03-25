@@ -33,6 +33,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -90,6 +91,8 @@ class UseServicePreference(
     override val supportsWrite = true
     override val availabilityDescription =
         "The service must be targeting SDK R or later if it is using the accessibility button."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         return serviceInfo.run {
@@ -158,10 +161,8 @@ class UseServicePreference(
             }
     }
 
-
-    //marked with DO_NOT_EXPOSE due to security concerns, changing sensitivity will require a check with security
     override val sensitivityLevel: Int
-        get() = SensitivityLevel.DO_NOT_EXPOSE
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     companion object {
         const val KEY = "use_service"

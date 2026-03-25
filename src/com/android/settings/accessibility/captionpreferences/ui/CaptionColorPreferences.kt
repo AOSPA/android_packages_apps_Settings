@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility.captionpreferences.ui
 
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.content.Context
 import androidx.preference.Preference
 import com.android.settings.R
@@ -52,6 +53,10 @@ abstract class BaseCaptionOpacityPreference(private val dependentColorPrefKey: S
     override val valuesDescription: Int
         get() = R.array.captioning_opacity_selector_titles
 
+    override fun getEnabledDescription(): String = "A valid caption color must be selected."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context): Boolean = dataStore.hasValidColor()
 
     override fun dependencies(context: Context): Array<String> =
@@ -66,6 +71,8 @@ class CaptionTextColorPreference(context: Context) : BaseCaptionColorPreference(
 
     override val availabilityDescription =
         "The device must have a custom caption style selected."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_text_color_purpose
@@ -103,6 +110,8 @@ class CaptionTextOpacityPreference(context: Context) :
        override val availabilityDescription =
         "The device must have a custom caption style selected."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_text_opacity_purpose
 
@@ -132,6 +141,8 @@ class CaptionBackgroundColorPreference(context: Context) : BaseCaptionColorPrefe
 
     override val availabilityDescription =
         "The device must have a custom caption style selected."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_background_color_purpose
@@ -169,6 +180,8 @@ class CaptionBackgroundOpacityPreference(context: Context) :
     override val availabilityDescription =
         "The device must have a custom caption style selected."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_background_opacity_purpose
 
@@ -198,6 +211,8 @@ class CaptionWindowColorPreference(context: Context) : BaseCaptionColorPreferenc
 
     override val availabilityDescription =
         "The device must have a custom caption style selected."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_window_color_purpose
@@ -234,6 +249,8 @@ class CaptionWindowOpacityPreference(context: Context) :
 
     override val availabilityDescription =
         "The device must have a custom caption style selected."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override val purpose: Int
         get() = R.string.caption_preferences_appearance_custom_window_opacity_purpose

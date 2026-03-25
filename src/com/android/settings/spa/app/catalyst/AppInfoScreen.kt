@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.KEY_PACKAGE_NAME
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -107,6 +108,8 @@ private constructor(
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
     override val availabilityDescription = "The app must be installed."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = appInfo != null
 

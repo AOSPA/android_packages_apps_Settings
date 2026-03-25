@@ -18,36 +18,24 @@ package com.android.settings.accessibility.screenmagnification.ui
 
 import android.app.settings.SettingsEnums
 import android.content.Context
-import android.platform.test.annotations.DisableFlags
-import android.platform.test.annotations.EnableFlags
 import androidx.test.core.app.ApplicationProvider
-import com.android.server.accessibility.Flags as serverFlags
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
-import com.android.settings.accessibility.Flags
-import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.SettingsStoreRule
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class MagnificationScreenTest : SettingsCatalystTestCase() {
+@RunWith(AndroidJUnit4::class)
+class MagnificationScreenTest {
     @get:Rule val settingStoreRule = SettingsStoreRule()
-    override val preferenceScreenCreator = MagnificationScreen()
-    override val flagName: String
-        get() = Flags.FLAG_CATALYST_MAGNIFICATION
 
     private val context: Context = ApplicationProvider.getApplicationContext()
-
-    override fun migration() {
-        // For update the availability of the one-finger panning switch preference.
-        AccessibilityTestUtils.setWindowMagnificationSupported(context, true)
-        setFlagsRule.enableFlags(serverFlags.FLAG_ENABLE_MAGNIFICATION_ONE_FINGER_PANNING_GESTURE)
-        super.migration()
-    }
+    private val preferenceScreenCreator = MagnificationScreen()
 
     @Test
     fun key() {
@@ -89,30 +77,6 @@ class MagnificationScreenTest : SettingsCatalystTestCase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CATALYST_MAGNIFICATION)
-    fun hasCompleteHierarchy_isTrue() {
-        assertThat(preferenceScreenCreator.hasCompleteHierarchy()).isTrue()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_CATALYST_MAGNIFICATION)
-    fun hasCompleteHierarchy_isFalse() {
-        assertThat(preferenceScreenCreator.hasCompleteHierarchy()).isFalse()
-    }
-
-    @Test
-    @EnableFlags(Flags.FLAG_CATALYST_MAGNIFICATION)
-    fun isFlagEnabled_isTrue() {
-        assertThat(preferenceScreenCreator.isFlagEnabled(context)).isTrue()
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_CATALYST_MAGNIFICATION)
-    fun isFlagEnabled_isFalse() {
-        assertThat(preferenceScreenCreator.isFlagEnabled(context)).isFalse()
-    }
-
-    @Test
     fun getLaunchIntent_noMetadata_correctActivity() {
         val underTest = preferenceScreenCreator.getLaunchIntent(context, null)!!
 
@@ -131,4 +95,5 @@ class MagnificationScreenTest : SettingsCatalystTestCase() {
     }
 }
 
-private data class TestMetadata(override val key: String, override val purpose: Int) : PreferenceMetadata
+private data class TestMetadata(override val key: String, override val purpose: Int) :
+    PreferenceMetadata

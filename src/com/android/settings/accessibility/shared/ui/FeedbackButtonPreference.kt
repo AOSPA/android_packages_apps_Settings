@@ -22,6 +22,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.FeedbackManager
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -51,6 +52,8 @@ open class FeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManag
     protected val feedbackManager: FeedbackManager by lazy { feedbackManagerProvider.invoke() }
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean =
         !context.isInSetupWizard() && feedbackManager.isAvailable()

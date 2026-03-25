@@ -16,6 +16,7 @@
 
 package com.android.settings.applications.specialaccess
 
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.Manifest.permission.READ_SYSTEM_PREFERENCES
 import android.Manifest.permission.WRITE_SYSTEM_PREFERENCES
 import android.app.AppOpsManager
@@ -81,6 +82,8 @@ open class WriteSystemPreferencesAppDetailScreen : SpecialAccessAppDetailScreen 
         "The app must be enabled, and must have requested write system preferences permission."
 
     // Edge case: what if the app's read permission is revoked/granted
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&
             writeSystemPreferencesFilter(context, packageInfo?.applicationInfo)

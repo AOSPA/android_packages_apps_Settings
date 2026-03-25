@@ -25,6 +25,7 @@ import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutT
 import com.android.settings.R
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 
@@ -53,6 +54,8 @@ class TopRowKeyShortcutPreference(context: Context, targets: Set<String>) :
 
     override val availabilityDescription =
         "The device must support Top Row key shortcut settings. There must be an attached keyboard. The keyboard must have a Accessibility key."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         // Should only be available if feature flag is available,

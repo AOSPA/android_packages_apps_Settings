@@ -24,12 +24,14 @@ import android.content.SharedPreferences
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.preference.Preference
+import androidx.recyclerview.widget.RecyclerView
 import com.android.settings.R
 import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.credentialmanagement.SupervisionPinRecoveryActivity
 import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settings.supervision.shared.shouldDisplayPinRecoveryReminders
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -46,6 +48,7 @@ class SupervisionRecoveryBannerPreference :
     private lateinit var lifeCycleContext: PreferenceLifecycleContext
     private lateinit var setUpRecoveryLauncher: ActivityResultLauncher<Intent>
     private lateinit var prefs: SharedPreferences
+    private var isVisible: Boolean? = null
 
     override val key: String
         get() = KEY
@@ -57,6 +60,8 @@ class SupervisionRecoveryBannerPreference :
         get() = false
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionSettingsUiUpdates()) {
@@ -121,6 +126,15 @@ class SupervisionRecoveryBannerPreference :
             banner.isVisible = false
             lifeCycleContext.notifyPreferenceChange(KEY)
         }
+
+        if (isVisible == false && banner.isVisible) {
+            val fragment = lifeCycleContext.lifecycleOwner
+            if (fragment is SupervisionDashboardFragment) {
+                val recyclerView: RecyclerView? = fragment.listView
+                recyclerView?.post { recyclerView.scrollToPosition(0) }
+            }
+        }
+        isVisible = banner.isVisible
     }
 
     private fun hasAccountNameSet(info: SupervisionRecoveryInfo?): Boolean {
