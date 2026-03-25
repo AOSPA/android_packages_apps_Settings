@@ -41,7 +41,7 @@ class DoubleTapPowerApiFirstScreen :
         key = KEY,
         topLevelSettingsCategory = Category.SYSTEM,
         fragment = DoubleTapPowerSettings::class,
-        purpose = R.string.gesture_double_tap_power_input_summary_purpose,
+        purpose = R.string.gesture_double_tap_power_input_summary_purpose_api,
         alreadyPartiallyMigrated = DoubleTapPowerScreen::class,
     ) {
     init {

@@ -47,6 +47,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import kotlinx.coroutines.CoroutineScope
@@ -60,7 +61,12 @@ open class AutoBrightnessScreen :
     PreferenceRestrictionMixin,
     BooleanValuePreference {
     override fun tags(context: Context) =
-        arrayOf(APP_FUNCTION_UNCATEGORIZED, KEY_ADAPTIVE_BRIGHTNESS)
+        arrayOf(
+            APP_FUNCTION_UNCATEGORIZED,
+            KEY_ADAPTIVE_BRIGHTNESS,
+            // exclude this screen from api result since we have the same data in api_auto_brightness_entry
+            UI_ONLY_PREFERENCE
+        )
 
     override val key: String
         get() = KEY

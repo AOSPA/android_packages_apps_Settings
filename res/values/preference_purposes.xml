@@ -81,7 +81,7 @@
     <string name="ambient_display_illustration_purpose" translatable="false">ambient_display_illustration</string>
     <string name="doze_always_on_inactivity_detection_purpose" translatable="false">Whether to turn off the always-on display automatically when no user activity is detected to save power</string>
     <string name="doze_always_on_wallpaper_enabled_purpose" translatable="false">Whether the lock screen wallpaper should be shown when the always-on display is active</string>
-    <string name="app_data_usage_screen_purpose" translatable="false">app_data_usage_screen</string>
+    <string name="app_data_usage_screen_purpose" translatable="false">Provides a detailed breakdown of mobile data and Wi-Fi consumption for a specific app, and allows users to manage background data permissions and data saver exceptions.</string>
     <string name="app_data_usage_parameter_purpose" translatable="false">The package name of the app</string>
     <string name="app_package_name_unavailable" translatable="false">The application package information is currently unavailable</string>
     <string name="app_background_data_switch_purpose" translatable="false">Whether the app can use mobile data in the background</string>
@@ -100,14 +100,15 @@
     <string name="bluetooth_scanning_screen_purpose" translatable="false">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
     <string name="bluetooth_screen_bt_pair_rename_devices_purpose" translatable="false">Name of the device as seen by Bluetooth</string>
     <string name="bluetooth_screen_footer_purpose" translatable="false">bluetooth_screen_footer</string>
-    <string name="bluetooth_switchbar_screen_purpose" translatable="false">Allows users to control whether apps and services can scan for nearby Bluetooth devices even when Bluetooth is turned off, primarily to enhance location accuracy.</string>
+    <string name="bluetooth_switchbar_screen_purpose" translatable="false">Allows users to control whether apps and services can scan for nearby Bluetooth devices even when Bluetooth is turned off, primarily to enhance location accuracy. This screen is identical on device with: api_bluetooth_switchbar_screen</string>
+    <string name="bluetooth_switchbar_screen_purpose_api" translatable="false">Allows users to control whether apps and services can scan for nearby Bluetooth devices even when Bluetooth is turned off, primarily to enhance location accuracy. This screen is identical on device with: bluetooth_switchbar_screen</string>
     <string name="bluetooth_auto_on_toggle_purpose" translatable="false">Controls the feature that automatically turns Bluetooth back on.</string>
     <string name="bluetooth_auto_on_preconditions" translatable="false">Checks if the device hardware and Bluetooth adapter support Bluetooth and the Auto-On feature.</string>
     <string name="bluetooth_not_supported_error" translatable="false">Bluetooth is not supported on this device.</string>
     <string name="bluetooth_auto_on_not_supported_error" translatable="false">Bluetooth Auto-On is not supported by this hardware or adapter.</string>
     <string name="bluetooth_auto_on_hardware_check_failed_error" translatable="false">Hardware check failed due to an exception.</string>
     <string name="bluetooth_auto_on_api_missing_error" translatable="false">System API for Auto-On is missing.</string>
-    <string name="use_bluetooth_purpose" translatable="false">use_bluetooth</string>
+    <string name="use_bluetooth_purpose" translatable="false">Enables or disables the Bluetooth feature on the device, allowing the device to communicate with nearby hardware and support features like Quick Share and Find My Device.</string>
     <string name="button_navigation_settings_page_purpose" translatable="false">Allows users to choose the order of the navigation buttons (Back, Home, Recents) on the navigation bar.</string>
     <string name="button_order_group_purpose" translatable="false">button_order_group</string>
     <string name="navbar_order_preference_default_purpose" translatable="false">Whether the navigation button order is set to Back, Home, Recents</string>
@@ -137,7 +138,8 @@
     <string name="caption_preferences_appearance_custom_window_opacity_purpose" translatable="false">The transparency of the text area used for captions. Allows balancing readability with a clear view of the content</string>
     <string name="caption_preferences_more_options_screen_purpose" translatable="false">Allows users to customize additional caption settings, such as selecting the preferred language for system captions.</string>
     <string name="caption_preferences_locale_purpose" translatable="false">The language used for system captions</string>
-    <string name="configure_network_settings_purpose" translatable="false">Allows users to manage advanced Wi-Fi settings, including automatic Wi-Fi activation based on location, public network notifications, and the usage of less secure WEP networks.</string>
+    <string name="configure_network_settings_purpose" translatable="false">Allows users to manage advanced Wi-Fi settings, including automatic Wi-Fi activation based on location, public network notifications, and the usage of less secure WEP networks. This screen is identical on device with: api_configure_network_settings</string>
+    <string name="configure_network_settings_purpose_api" translatable="false">Allows users to manage advanced Wi-Fi settings, including automatic Wi-Fi activation based on location, public network notifications, and the usage of less secure WEP networks.  This screen is identical on device with: configure_network_settings</string>
     <string name="enable_wifi_wakeup_purpose" translatable="false">Whether or not Wi-Fi is automatically turned on when the device is near high-quality saved networks</string>
     <string name="connection_preferences_purpose" translatable="false">Allows users to manage various device connection settings, including Bluetooth, NFC, file sharing, printing, and cross-device integration.</string>
     <string name="connection_preferences_uwb_purpose" translatable="false">Controls the device\'s ability to perform position ranging through UWB technology.</string>
@@ -162,7 +164,8 @@
     <string name="dark_ui_activated_purpose" translatable="false">Whether the system dark theme is manually enabled</string>
     <string name="dark_ui_auto_mode_purpose" translatable="false">The schedule for switching dark mode on and off.</string>
     <string name="dark_ui_location_off_purpose" translatable="false">dark_ui_location_off</string>
-    <string name="dark_ui_mode_purpose" translatable="false">Allows users to enable and customize the system-wide dark theme, including options for forcing dark theme on unsupported apps and setting an automatic schedule.</string>
+    <string name="dark_ui_mode_purpose" translatable="false">Allows users to enable and customize the system-wide dark theme, including options for forcing dark theme on unsupported apps and setting an automatic schedule. This screen is identical on device with: api_dark_ui_mode</string>
+    <string name="dark_ui_mode_purpose_api" translatable="false">Allows users to enable and customize the system-wide dark theme, including options for forcing dark theme on unsupported apps and setting an automatic schedule. This screen is identical on device with: dark_ui_mode</string>
     <string name="dark_ui_mode_accessibility_purpose" translatable="false">Whether or not the system-wide dark theme is enabled.</string>
     <string name="dark_ui_top_intro_purpose" translatable="false">dark_ui_top_intro</string>
     <string name="display_category_purpose" translatable="false">display_category</string>
@@ -170,7 +173,8 @@
     <string name="dark_theme_mode_selector_customenum_description" translatable="false">Options for dark theme mode</string>
     <string name="expanded_dark_theme_purpose" translatable="false">Sets the system to automatically apply dark theme to most apps, including those without native support</string>
     <string name="standard_dark_theme_purpose" translatable="false">Sets the system to use standard dark theme mode for compatible apps</string>
-    <string name="device_model_purpose" translatable="false">Provides detailed information about the device\'s hardware, including its model name, serial number, hardware version, and manufacturing year.</string>
+    <string name="device_model_purpose" translatable="false">Provides detailed information about the device\'s hardware, including its model name, serial number, hardware version, and manufacturing year. This screen is identical on device with: api_device_model</string>
+    <string name="device_model_purpose_api" translatable="false">Provides detailed information about the device\'s hardware, including its model name, serial number, hardware version, and manufacturing year. This screen is identical on device with: device_model</string>
     <string name="hardware_info_device_model_purpose" translatable="false">The device model name</string>
     <string name="hardware_info_device_revision_purpose" translatable="false">The hardware version of the device</string>
     <string name="device_state_all_recent_location_access_purpose" translatable="false">Allows users to view a list of applications that have recently accessed the device\'s location.</string>
@@ -223,7 +227,8 @@
     <string name="app_storage_cache_size_purpose" translatable="false">Retrieves the size of the temporary cache files created by the application, measured in kilobytes (KB).</string>
     <string name="app_storage_total_size_purpose" translatable="false">Retrieves the total storage space consumed by the application (including code, data, and cache), measured in kilobytes (KB).</string>
     <!-- Double press power button screen begin -->
-    <string name="gesture_double_tap_power_input_summary_purpose" translatable="false">Allows the user to open an application when they quickly press the power button twice. The available options are Camera or Wallet</string>
+    <string name="gesture_double_tap_power_input_summary_purpose" translatable="false">Allows the user to open an application when they quickly press the power button twice. The available options are Camera or Wallet. This screen is identical on device with: api_double_tap_power_screen</string>
+    <string name="gesture_double_tap_power_input_summary_purpose_api" translatable="false">Allows the user to open an application when they quickly press the power button twice. The available options are Camera or Wallet. This screen is identical on device with: gesture_double_tap_power_input_summary</string>
     <string name="gesture_double_tap_power_actions_purpose" translatable="false">Allows the user to configure the action performed when the power button is double-tapped, such as launching the camera or opening the wallet</string>
     <string name="double_tap_power_button_gesture_enabled_purpose" translatable="false">Whether double-pressing the power button triggers a shortcut</string>
     <string name="gesture_double_power_tap_app_purpose" translatable="false">The action to be performed when using the double-press shortcut</string>
@@ -354,7 +359,8 @@
     <string name="my_device_info_uptime_purpose" translatable="false">How long the device has been running since the last reboot.</string>
     <string name="eid_info_purpose" translatable="false">The Embedded Identity Document (EID) unique to the device\'s eSIM</string>
     <string name="imei_info_purpose" translatable="false">The International Mobile Equipment Identity (IMEI) for the first SIM slot</string>
-    <string name="my_device_info_pref_screen_purpose" translatable="false">Allows users to view comprehensive information about their device, such as the device name, model, IMEI, Android version, hardware identifiers, and uptime.</string>
+    <string name="my_device_info_pref_screen_purpose" translatable="false">Allows users to view comprehensive information about their device, such as the device name, model, IMEI, Android version, hardware identifiers, and uptime. This screen is identical on device with: api_my_device_info_pref_screen</string>
+    <string name="my_device_info_pref_screen_purpose_api" translatable="false">Allows users to view comprehensive information about their device, such as the device name, model, IMEI, Android version, hardware identifiers, and uptime. This screen is identical on device with: my_device_info_pref_screen</string>
     <string name="network_provider_and_internet_screen_airplane_mode_on_purpose" translatable="false">Whether or not airplane mode is currently enabled, which disables wireless communications.</string>
     <string name="network_provider_and_internet_screen_purpose" translatable="false">Allows users to manage the device\'s network and internet connections, including mobile data, airplane mode, hotspot, data usage, and advanced settings like VPN and DNS.</string>
     <string name="nfc_and_payment_settings_purpose" translatable="false">Allows users to toggle NFC for data exchange and contactless payments, select a default payment app, and manage security settings for contactless transactions.</string>
@@ -427,7 +433,8 @@
     <string name="polite_notification_global_pref_purpose" translatable="false">Enable the notification cooldown feature to reduce the volume of successive notifications</string>
     <string name="separate_ring_volume_purpose" translatable="false">The system volume level for incoming call ringtones. Higher is louder.</string>
     <string name="sound_effects_enabled_purpose" translatable="false">Whether audible feedback is played during common UI interactions like tapping or clicking</string>
-    <string name="sound_screen_purpose" translatable="false">Allows users to manage device audio settings, including adjusting volume levels for various streams, selecting sound patterns for ringtones and notifications, and toggling specific system-wide sounds and vibration behaviors.</string>
+    <string name="sound_screen_purpose" translatable="false">Allows users to manage device audio settings, including adjusting volume levels for various streams, selecting sound patterns for ringtones and notifications, and toggling specific system-wide sounds and vibration behaviors. This screen is identical on device with: api_sound_screen</string>
+    <string name="sound_screen_purpose_api" translatable="false">Allows users to manage device audio settings, including adjusting volume levels for various streams, selecting sound patterns for ringtones and notifications, and toggling specific system-wide sounds and vibration behaviors. This screen is identical on device with: sound_screen</string>
     <string name="sound_always_show_vibration_icon_purpose" translatable="false">Controls whether a vibration indicator icon appears in the status bar when the device is set to vibrate.</string>
     <string name="system_sounds_and_vibrations_category_purpose" translatable="false">system_sounds_and_vibrations_category</string>
     <string name="volume_controls_category_purpose" translatable="false">volume_controls_category</string>
@@ -504,7 +511,8 @@
     <string name="web_content_filters_search_filter_purpose" translatable="false">Whether or not explicit results are filtered out of search queries</string>
     <string name="supported_apps_group_purpose" translatable="false">supported_apps_group</string>
     <string name="system_controls_preference_screen_purpose" translatable="false">Allows users to manage various system interaction methods and shortcuts, including navigation styles, ending calls with the power button, and screen rotation behavior.</string>
-    <string name="tether_settings_purpose" translatable="false">Configure tethering and hotspot preferences, such as Wi-Fi, USB, Bluetooth, and Ethernet tethering.</string>
+    <string name="tether_settings_purpose" translatable="false">Configure tethering and hotspot preferences, such as Wi-Fi, USB, Bluetooth, and Ethernet tethering. This screen is identical on device with: api_tether_settings</string>
+    <string name="tether_settings_purpose_api" translatable="false">Configure tethering and hotspot preferences, such as Wi-Fi, USB, Bluetooth, and Ethernet tethering. This screen is identical on device with: tether_settings</string>
     <string name="usb_tether_switch_purpose" translatable="false">Whether or not USB tethering is enabled</string>
     <string name="enable_bluetooth_tethering_purpose" translatable="false">Enable or disable Bluetooth tethering to share the device\'s internet connection with other devices.</string>
     <string name="ether_tether_switch_purpose" translatable="false">Whether or not Ethernet tethering is enabled</string>
@@ -587,7 +595,8 @@
     <string name="data_usage_summary_purpose" translatable="false">This SIM data usage screen shows the amount of data each app has consumed from a specific SIM card</string>
     <string name="telephony_apn_key_purpose" translatable="false">telephony_apn_key</string>
     <string name="sim_ringtone_pref_purpose" translatable="false">Allows the user to select and set a unique ringtone for a specific SIM card.</string>
-    <string name="mobile_network_pref_screen_purpose" translatable="false">mobile_network_pref_screen</string>
+    <string name="mobile_network_pref_screen_purpose" translatable="false">Allows users to configure specific SIM card preferences connectivity, including data usage tracking, roaming toggles, network type selection, calling preferences like Wi-Fi Calling, hardware identification like IMEI, and cellular security features like 2G protection. This screen is identical on device with: mobile_network_pref_screen_api</string>
+    <string name="mobile_network_pref_screen_purpose_api" translatable="false">Allows users to configure specific SIM card preferences connectivity, including data usage tracking, roaming toggles, network type selection, calling preferences like Wi-Fi Calling, hardware identification like IMEI, and cellular security features like 2G protection. This screen is identical on device with: mobile_network_pref_screen</string>
     <string name="mobile_network_pref_screen_parameter_sub_id_purpose" translatable="false">The subscription ID</string>
     <string name="mobile_network_pref_screen_parameter_sub_id_description" translatable="false">The active subscription ID and display name of the current SIM.</string>
     <string name="mobile_network_auto_data_switching_purpose" translatable="false">Allows your phone to automatically switch to this SIM for mobile data if your primary network loses coverage, ensuring you stay connected without interruption.</string>
@@ -609,7 +618,8 @@
     <string name="display_settings_api_screen_purpose" translatable="false">Allows users to manage the display and touch settings of the device screen such as brightness, theme, color profiles, screen timeout, and screen refresh rate.</string>
     <string name="display_settings_api_screen_brightness_level_purpose" translatable="false">The brightness level of the device screen</string>
     <string name="screen_timeout_purpose" translatable="false">Allows users to configure how long the screen stays on before automatically turning off, including options for time-based intervals and intelligent features that monitor usage or attention.</string>
-    <string name="battery_saver_screen_purpose" translatable="false">Provides options to save power and extend battery life, including a manual toggle, mode selection between Standard and Extreme, scheduling, and adaptive battery management.</string>
+    <string name="battery_saver_screen_purpose" translatable="false">Provides options to save power and extend battery life, including a manual toggle, mode selection between Standard and Extreme, scheduling, and adaptive battery management. This screen is identical on device with: api_battery_saver_screen</string>
+    <string name="battery_saver_screen_purpose_api" translatable="false">Provides options to save power and extend battery life, including a manual toggle, mode selection between Standard and Extreme, scheduling, and adaptive battery management. This screen is identical on device with: battery_saver_screen</string>
     <string name="lockscreen_from_display_settings_purpose" translatable="false">Allows users to configure what information and controls are visible on the lock screen and when the screen should wake up.</string>
     <string name="use_wifi_hotspot_purpose" translatable="false">Whether the Wi-Fi hotspot is currently enabled</string>
     <string name="wifi_tether_auto_turn_off_purpose" translatable="false">Whether the hotspot automatically turns off when no devices are connected</string>
@@ -743,7 +753,6 @@
     <string name="privacy_camera_extensions_fallback_purpose" translatable="false">Controls whether software fallback is allowed for camera extensions.</string>
     <string name="content_capture_purpose" translatable="false">Controls whether apps can use on-device intelligence to personalize experiences.</string>
     <!-- About phone > Model API start -->
-    <string name="hardware_info_api_screen_purpose" translatable="false">Displays detailed model and hardware information about the device.</string>
     <string name="hardware_info_serial_purpose" translatable="false">The unique serial number of the device.</string>
     <string name="hardware_info_mfg_year_purpose" translatable="false">The year the device was manufactured.</string>
     <!-- About phone > Model API end -->
