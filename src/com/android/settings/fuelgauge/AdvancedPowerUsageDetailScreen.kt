@@ -20,25 +20,24 @@ import android.os.Process
 import com.android.settings.R
 import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
+import com.android.settings.fuelgauge.AdvancedPowerUsageDetail.EXTRA_PACKAGE_NAME
+import com.android.settings.fuelgauge.AdvancedPowerUsageDetail.EXTRA_UID
 import com.android.settings.fuelgauge.BatteryOptimizeHistoricalLogEntry.Action
 import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_OPTIMIZED
 import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_RESTRICTED
 import com.android.settings.fuelgauge.BatteryOptimizeUtils.MODE_UNRESTRICTED
-import com.android.settings.fuelgauge.PowerBackgroundUsageDetail.EXTRA_LAUNCH_SOURCE
-import com.android.settings.fuelgauge.PowerBackgroundUsageDetail.EXTRA_PACKAGE_NAME
-import com.android.settings.fuelgauge.PowerBackgroundUsageDetail.EXTRA_UID
-import com.android.settings.fuelgauge.PowerBackgroundUsageDetail.LaunchSourceType
 import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 // LINT.IfChange
-@ProvidePreferenceScreen(PowerBackgroundUsageDetailScreen.KEY, parameterized = true)
-open class PowerBackgroundUsageDetailScreen :
-    PowerUsageDetailBaseApiScreen(key = KEY, fragment = PowerBackgroundUsageDetail::class) {
+@ProvidePreferenceScreen(AdvancedPowerUsageDetailScreen.KEY, parameterized = true)
+open class AdvancedPowerUsageDetailScreen :
+    PowerUsageDetailBaseApiScreen(key = KEY, fragment = AdvancedPowerUsageDetail::class) {
+
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag { Flags.catalystMigration26q3() }
 
         tags(APP_FUNCTION_BATTERY)
 
@@ -47,7 +46,7 @@ open class PowerBackgroundUsageDetailScreen :
                 name = EXTRA_PACKAGE_NAME,
                 purpose = R.string.power_background_usage_app_parameter_purpose,
                 required = true,
-                type = InstalledPackageName,
+                type = InstalledPackageName(),
             )
             prepareScreenExtras { parameters, extras ->
                 val packageName = parameters[EXTRA_PACKAGE_NAME] ?: return@prepareScreenExtras
@@ -59,12 +58,7 @@ open class PowerBackgroundUsageDetailScreen :
                     )
                 extras.putString(EXTRA_PACKAGE_NAME, packageName)
                 extras.putInt(EXTRA_UID, uid)
-                extras.putString(EXTRA_LAUNCH_SOURCE, LaunchSourceType.SETTINGS_API.name)
             }
-        }
-
-        preconditions(R.string.power_background_usage_detail_screen_preconditions) {
-            requireBatteryOptimizationModeMutable()
         }
 
         preference(
@@ -73,7 +67,6 @@ open class PowerBackgroundUsageDetailScreen :
             type = AnyBoolean,
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
-
             get {
                 execute {
                     ensureBatteryOptimizeUtilsInitialized()
@@ -82,6 +75,10 @@ open class PowerBackgroundUsageDetailScreen :
                 }
             }
             set {
+                preconditions(R.string.power_background_usage_detail_screen_preconditions) {
+                    requireBatteryOptimizationModeMutable()
+                }
+
                 execute { allowed ->
                     ensureBatteryOptimizeUtilsInitialized()
                     val currentMode = batteryOptimizeUtils.appOptimizationMode
@@ -101,8 +98,8 @@ open class PowerBackgroundUsageDetailScreen :
     }
 
     companion object {
-        const val KEY = "power_background_usage_detail"
+        const val KEY = "advanced_power_usage_detail"
         const val SWITCH_KEY = "background_usage_allowability_switch"
     }
 }
-// LINT.ThenChange(PowerBackgroundUsageDetail.java)
+// LINT.ThenChange(AdvancedPowerUsageDetail.java)

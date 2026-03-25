@@ -53,6 +53,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+// LINT.IfChange
 /**
  * Power usage detail fragment for each app, this fragment contains <br>
  * <br>
@@ -413,3 +414,4 @@ public class AdvancedPowerUsageDetail extends DashboardFragment
                 });
     }
 }
+// LINT.ThenChange(AdvancedPowerUsageDetailScreen.java)
