@@ -5222,8 +5222,11 @@
     <string name="game_controller_remapping_reset_dialog_message">All your controller settings will be reset to default</string>
     <!-- Game controller reset dialog confirmation button text [CHAR LIMIT=35] -->
     <string name="game_controller_reset_dialog_button">Reset</string>
-    <!-- Content description for the game controller remapping preference summary. [CHAR LIMIT=NONE] -->
-    <string name="game_controller_remapping_preference_content_description">currently assigned to <xliff:g id="actual_value">%1$s</xliff:g></string>
+    <!-- This string is used to describe the summary of a preference in the game controller remapping Settings screen.
+    It lets the user know what button/stick the button/stick in the preference title is currently assigned to.
+    Example: for a preference mapping the L1 button to the triangle button, the full preference description would be "L1 Button, currently assigned to Triangle Button".
+    [CHAR LIMIT=NONE] [SCREENSHOT=screen/5W8V9C2veeTzNNM] -->
+    <string name="game_controller_remapping_preference_content_description">currently assigned to <xliff:g id="actual_value" example="Triangle Button">%1$s</xliff:g></string>
 
     <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
     <string name="trackpad_settings">Touchpad</string>
