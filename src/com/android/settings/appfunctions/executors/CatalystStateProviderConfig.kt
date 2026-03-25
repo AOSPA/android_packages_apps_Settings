@@ -118,6 +118,7 @@ import com.android.settings.display.ColorContrastApiScreen
 import com.android.settings.display.ColorModeApiScreen
 import com.android.settings.display.ColorModeScreen
 import com.android.settings.display.DeviceStateAutoRotateApiScreen
+import com.android.settings.display.DisplayApiScreen
 import com.android.settings.display.DisplayScreen
 import com.android.settings.display.HdrBrightnessApiScreen
 import com.android.settings.display.NightDisplayApiScreen
@@ -175,6 +176,7 @@ import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.MobileNetworkScreenApi
 import com.android.settings.network.tether.TetherApiScreen
 import com.android.settings.network.tether.TetherScreen
+import com.android.settings.nfc.NfcAndPaymentApiScreen
 import com.android.settings.notification.BubbleNotificationScreen
 import com.android.settings.notification.PoliteNotificationsApiScreen
 import com.android.settings.notification.SoundApiScreen
@@ -187,6 +189,7 @@ import com.android.settings.print.PrintServiceApiScreen
 import com.android.settings.print.PrintSettingsApiScreen
 import com.android.settings.regionalpreferences.FirstDayOfWeekApiFirstScreen
 import com.android.settings.regionalpreferences.MeasurementSystemApiFirstScreen
+import com.android.settings.regionalpreferences.NumberingSystemLocaleListApiFirstScreen
 import com.android.settings.regionalpreferences.RegionPickerApiFirstScreen
 import com.android.settings.regionalpreferences.TemperatureUnitApiFirstScreen
 import com.android.settings.safetycenter.ui.AccountSecuritySubpageScreenApi
@@ -236,6 +239,7 @@ import com.android.settings.wifi.WifiAppDataUsageScreenApi
 import com.android.settings.wifi.WifiDataUsageScreenApi
 import com.android.settings.wifi.calling.WifiCallingScreen
 import com.android.settings.wifi.details.WifiDetailsScreenApi
+import com.android.settings.wifi.details.WifiNetworkDetailsScreen
 import com.android.settings.wifi.details2.WifiPrivacyScreenApi
 import com.android.settings.wifi.p2p.WifiDirectApiScreen
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
@@ -270,6 +274,8 @@ fun getSettingsCatalystConfig() = CatalystConfig(screenConfigs = getCatalystScre
 
 private fun getCatalystScreenConfigs() =
     listOf(
+        PerScreenCatalystConfig(enabled = true, screenKey = NumberingSystemLocaleListApiFirstScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = WifiNetworkDetailsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DarkModeScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DarkModeApiFirstScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorAndMotionScreen.KEY),
@@ -534,6 +540,7 @@ private fun getCatalystScreenConfigs() =
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_MOBILE_DATA),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = NfcAndPaymentScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = NfcAndPaymentApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = NightDisplayScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = NightDisplayApiScreen.KEY),
         PerScreenCatalystConfig(
@@ -727,6 +734,7 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TabbedDisplayApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = DisplayApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ColorModeApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ResolutionRefreshRateApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = ScreenResolutionApiScreen.KEY),
@@ -737,7 +745,7 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = StylusUsiDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreenApi.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreenApiFirst.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreenApiFirst.KEY, appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS)),
         PerScreenCatalystConfig(enabled = true, screenKey = CellularSecurityScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreenApi.KEY),

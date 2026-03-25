@@ -51,7 +51,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.supervision.SupervisionLog
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NONE
 
 /**
  * Supervision settings landing page (Settings > Supervision).
@@ -69,7 +69,7 @@ open class SupervisionDashboardScreen :
     PreferenceScreenMixin,
     PreferenceLifecycleProvider,
     OnRoleHoldersChangedListener {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NONE)
 
     private var supervisionClient: SupervisionMessengerClient? = null
     private var supervisionManager: SupervisionManager? = null

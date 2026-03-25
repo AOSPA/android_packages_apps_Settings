@@ -51,9 +51,9 @@ private constructor(
     final override val keyParameters: ValidatedKeyParameters?,
 ) : PreferenceScreenMixin, PreferenceTitleProvider {
 
-    private val wifiEntryKey: String =
+    private val wifiEntryKey: String? =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-            keyParameters!!.getRequired(KEY_ARGUMENT_WIFI_ENTRY_KEY)
+            keyParameters!!.get(KEY_ARGUMENT_WIFI_ENTRY_KEY)
         } else {
             arguments!!.getString(KEY_ARGUMENT_WIFI_ENTRY_KEY)!!
         }
@@ -96,9 +96,10 @@ private constructor(
             .setDestination(WifiNetworkDetailsFragment::class.java.getName())
             .setArguments(
                 if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                    Bundle().apply { putString(KEY_ARGUMENT_WIFI_ENTRY_KEY, wifiEntryKey) }
+                    Bundle().apply { putString(KEY_ARGUMENT_WIFI_ENTRY_KEY, wifiEntryKey ?: "") }
                 } else {
-                    parametersSchema.prepare(KEY_ARGUMENT_WIFI_ENTRY_KEY to wifiEntryKey).toBundle()
+                    val w = wifiEntryKey ?: ""
+                    parametersSchema.prepare(KEY_ARGUMENT_WIFI_ENTRY_KEY to w).toBundle()
                 }
             )
             .setSourceMetricsCategory(getMetricsCategory())
@@ -120,7 +121,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(KEY_ARGUMENT_WIFI_ENTRY_KEY, "The chosen WiFi entry key", required = true, type = AnyString) // TODO(scottjonathan): What is a wifi entry key?
+            parameter(KEY_ARGUMENT_WIFI_ENTRY_KEY, "The chosen WiFi entry key", required = false, type = AnyString) // TODO(scottjonathan): What is a wifi entry key?
         }
 
         @JvmStatic
