@@ -42,9 +42,11 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context): IllustrationPreference {
+        val hasPointingDevice =
+            InputPeripheralsSettingsUtils.isMouse() || InputPeripheralsSettingsUtils.isTouchpad()
         val lottieResId =
             if (SettingsThemeHelper.isExpressiveTheme(context)) {
-                if (InputPeripheralsSettingsUtils.isMouse()) {
+                if (hasPointingDevice) {
                     R.raw.accessibility_magnification_with_cursor_banner
                 } else {
                     R.raw.accessibility_magnification_banner_expressive
@@ -57,7 +59,7 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
             isSelectable = false
             lottieAnimationResId = lottieResId
             contentDescription = getContentDescription(context)
-            if (InputPeripheralsSettingsUtils.isMouse()) {
+            if (hasPointingDevice) {
                 applyIlloColors()
             } else {
                 applyDynamicColor()

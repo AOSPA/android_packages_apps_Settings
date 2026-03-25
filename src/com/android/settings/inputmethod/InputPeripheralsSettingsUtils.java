@@ -74,7 +74,7 @@ public class InputPeripheralsSettingsUtils {
     /**
      * Returns whether any touchpad is connected.
      */
-    static boolean isTouchpad() {
+    public static boolean isTouchpad() {
         for (int deviceId : InputDevice.getDeviceIds()) {
             final InputDevice device = InputDevice.getDevice(deviceId);
             if (device == null) {
@@ -90,6 +90,8 @@ public class InputPeripheralsSettingsUtils {
 
     /**
      * Returns whether any mouse is connected.
+     * <p>
+     * This does <b>not</b> include touchpads. See {@link #isTouchpad()} to check for those.
      */
     public static boolean isMouse() {
         for (int deviceId : InputDevice.getDeviceIds()) {
@@ -97,8 +99,9 @@ public class InputPeripheralsSettingsUtils {
             if (device == null) {
                 continue;
             }
-            if ((device.getSources() & InputDevice.SOURCE_MOUSE)
-                    == InputDevice.SOURCE_MOUSE) {
+            final int sources = device.getSources();
+            if ((sources & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE
+                    && (sources & InputDevice.SOURCE_TOUCHPAD) == 0) {
                 return true;
             }
         }
