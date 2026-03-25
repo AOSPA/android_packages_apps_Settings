@@ -32,6 +32,7 @@ import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.stub
@@ -48,39 +49,50 @@ class SliderItemTest {
 
     @Test
     fun setSliderValue_outOfBounds_coercesValue() {
-        item.min = 10
-        item.max = 20
+        item.apply {
+            min = 10
+            max = 20
+            sliderValue = 5
 
-        item.sliderValue = 5
-        assertThat(item.sliderValue).isEqualTo(10)
+            assertThat(sliderValue).isEqualTo(10)
+        }
 
-        item.sliderValue = 25
-        assertThat(item.sliderValue).isEqualTo(20)
+        item.apply {
+            sliderValue = 25
+
+            assertThat(sliderValue).isEqualTo(20)
+        }
     }
 
     @Test
     fun setMax_lowerThanCurrentValue_updatesSliderValue() {
-        item.sliderValue = 50
-        item.max = 30
+        item.apply {
+            max = 30
+            sliderValue = 50
 
-        assertThat(item.sliderValue).isEqualTo(30)
+            assertThat(sliderValue).isEqualTo(30)
+        }
     }
 
     @Test
     fun setMin_higherThanCurrentValue_updatesSliderValue() {
-        item.sliderValue = 10
-        item.min = 20
+        item.apply {
+            min = 20
+            sliderValue = 10
 
-        assertThat(item.sliderValue).isEqualTo(20)
+            assertThat(sliderValue).isEqualTo(20)
+        }
     }
 
     @Test
     fun setSliderIncrement_exceedingRange_coercesIncrement() {
-        item.min = 0
-        item.max = 10
-        item.sliderIncrement = 50
+        item.apply {
+            min = 0
+            max = 10
+            sliderIncrement = 50
 
-        assertThat(item.sliderIncrement).isEqualTo(10)
+            assertThat(sliderIncrement).isEqualTo(10)
+        }
     }
 
     @TestParameters(
@@ -102,19 +114,26 @@ class SliderItemTest {
         expectedHaptic: Boolean,
     ) {
         val spySlider = spy(rootView.findViewById<Slider>(R.id.slider))
-        val spyView = spy(rootView)
-        spyView.stub { on { findViewById<Slider>(R.id.slider) } doReturn spySlider }
-        item.apply {
-            min = 0
-            max = 10
-            sliderValue = init
-            hapticFeedbackMode = mode.value
-            updatesContinuously = true
-        }
-        item.onBindView(spyView)
-        val argumentCaptor = argumentCaptor<Slider.OnChangeListener>()
-        verify(spySlider).addOnChangeListener(argumentCaptor.capture())
-        val listener = argumentCaptor.firstValue
+        val spyView =
+            spy(rootView).apply {
+                stub { on { findViewById<Slider>(R.id.slider) } doReturn spySlider }
+            }
+        val listener =
+            item
+                .apply {
+                    min = 0
+                    max = 10
+                    sliderValue = init
+                    hapticFeedbackMode = mode.value
+                    updatesContinuously = true
+                    onBindView(spyView)
+                }
+                .run {
+                    argumentCaptor<Slider.OnChangeListener>().run {
+                        verify(spySlider).addOnChangeListener(capture())
+                        firstValue
+                    }
+                }
 
         spySlider.stub { on { value } doReturn next }
         listener.onValueChange(spySlider, next, true)
@@ -136,8 +155,10 @@ class SliderItemTest {
     @Test
     fun onKey_validNavigation_updatesSlider(keyCode: Int) {
         val spySlider = spy(rootView.findViewById<Slider>(R.id.slider))
-        item.adjustable = true
-        item.onBindView(rootView)
+        item.apply {
+            adjustable = true
+            onBindView(rootView)
+        }
         spySlider.requestFocus()
 
         val event = KeyEvent(KeyEvent.ACTION_DOWN, keyCode)
@@ -157,8 +178,10 @@ class SliderItemTest {
     @Test
     fun onKey_invalidScenarios_ignoresEvent(keyCode: Int) {
         val spySlider = spy(rootView.findViewById<Slider>(R.id.slider))
-        item.adjustable = true
-        item.onBindView(rootView)
+        item.apply {
+            adjustable = true
+            onBindView(rootView)
+        }
         spySlider.requestFocus()
 
         val event = KeyEvent(KeyEvent.ACTION_UP, keyCode)
@@ -170,13 +193,14 @@ class SliderItemTest {
 
     @Test
     fun clickStartIcon_decrementsValue() {
-        item.min = 0
-        item.max = 100
-        item.sliderValue = 50
-        item.sliderIncrement = 10
-        item.iconStartId = android.R.drawable.ic_media_play
-
-        item.onBindView(rootView)
+        item.apply {
+            min = 0
+            max = 100
+            sliderValue = 50
+            sliderIncrement = 10
+            iconStartId = android.R.drawable.ic_media_play
+            onBindView(rootView)
+        }
 
         val startIconFrame = rootView.findViewById<View>(R.id.icon_start).parent as View
         startIconFrame.performClick()
@@ -186,13 +210,14 @@ class SliderItemTest {
 
     @Test
     fun clickEndIcon_incrementsValue() {
-        item.min = 0
-        item.max = 100
-        item.sliderValue = 50
-        item.sliderIncrement = 10
-        item.iconEndId = android.R.drawable.ic_media_play
-
-        item.onBindView(rootView)
+        item.apply {
+            min = 0
+            max = 100
+            sliderValue = 50
+            sliderIncrement = 10
+            iconEndId = android.R.drawable.ic_media_play
+            onBindView(rootView)
+        }
 
         val endIconFrame = rootView.findViewById<View>(R.id.icon_end).parent as View
         endIconFrame.performClick()
@@ -202,14 +227,14 @@ class SliderItemTest {
 
     @Test
     fun icons_hidden_whenIdsAreZero() {
-        item.iconStartId = 0
-        item.iconEndId = 0
-
-        item.onBindView(rootView)
+        item.apply {
+            iconStartId = 0
+            iconEndId = 0
+            onBindView(rootView)
+        }
 
         val startIconFrame = rootView.findViewById<View>(R.id.icon_start).parent as View
         val endIconFrame = rootView.findViewById<View>(R.id.icon_end).parent as View
-
         assertThat(startIconFrame.visibility).isEqualTo(View.GONE)
         assertThat(endIconFrame.visibility).isEqualTo(View.GONE)
     }
@@ -217,9 +242,10 @@ class SliderItemTest {
     @Test
     fun onBindView_setsContentDescriptionFromProperty() {
         val customDescription = "Custom Accessibility Label"
-        item.sliderContentDescription = customDescription
-
-        item.onBindView(rootView)
+        item.apply {
+            sliderContentDescription = customDescription
+            onBindView(rootView)
+        }
 
         val slider = rootView.findViewById<Slider>(R.id.slider)
         assertThat(slider.contentDescription).isEqualTo(customDescription)
@@ -228,10 +254,11 @@ class SliderItemTest {
     @Test
     fun onBindView_setsContentDescriptionFromTitle_whenPropertyIsNull() {
         val title = "Font Size"
-        item.title = title
-        item.sliderContentDescription = null
-
-        item.onBindView(rootView)
+        item.apply {
+            this.title = title
+            sliderContentDescription = null
+            onBindView(rootView)
+        }
 
         val slider = rootView.findViewById<Slider>(R.id.slider)
         assertThat(slider.contentDescription).isEqualTo(title)
@@ -239,26 +266,102 @@ class SliderItemTest {
 
     @Test
     fun onBindView_setsStateDescription() {
-        val stateDescription = "Level 5 of 10"
-        item.sliderStateDescription = stateDescription
-
-        item.onBindView(rootView)
+        val expectedDesc = "Level 5"
+        item.apply {
+            sliderValue = 5
+            sliderStateDescriptionProvider =
+                mock<SliderItem.SliderStateDescriptionProvider>().apply {
+                    stub { on { getStateDescription(5) } doReturn expectedDesc }
+                }
+            onBindView(rootView)
+        }
 
         val slider = rootView.findViewById<Slider>(R.id.slider)
-        assertThat(slider.stateDescription).isEqualTo(stateDescription)
+        assertThat(slider.stateDescription).isEqualTo(expectedDesc)
     }
 
     @Test
-    fun onBindView_clearsDescriptions_whenNull() {
-        item.sliderContentDescription = null
-        item.sliderStateDescription = null
-        item.title = null
+    fun sliderChange_updatesStateDescription() {
+        val spySlider = spy(rootView.findViewById<Slider>(R.id.slider))
+        val spyView =
+            spy(rootView).apply {
+                stub { on { findViewById<Slider>(R.id.slider) } doReturn spySlider }
+            }
+        val expectedDesc = "Value is 75"
+        val listener =
+            item
+                .apply {
+                    sliderStateDescriptionProvider =
+                        mock<SliderItem.SliderStateDescriptionProvider>().apply {
+                            stub { on { getStateDescription(75) } doReturn expectedDesc }
+                        }
+                    onBindView(spyView)
+                }
+                .let {
+                    argumentCaptor<Slider.OnChangeListener>().run {
+                        verify(spySlider).addOnChangeListener(capture())
+                        firstValue
+                    }
+                }
 
-        item.onBindView(rootView)
+        listener.onValueChange(spySlider, 75f, true)
 
-        val slider = rootView.findViewById<Slider>(R.id.slider)
-        assertThat(slider.contentDescription).isNull()
-        assertThat(slider.stateDescription).isNull()
+        assertThat(spySlider.stateDescription).isEqualTo(expectedDesc)
+    }
+
+    @Test
+    fun sliderChange_delegatesToExtraChangeListener() {
+        val spySlider = spy(rootView.findViewById<Slider>(R.id.slider))
+        val spyView =
+            spy(rootView).apply {
+                stub { on { findViewById<Slider>(R.id.slider) } doReturn spySlider }
+            }
+        val mockExtraListener = mock<Slider.OnChangeListener>()
+        item
+            .apply {
+                extraChangeListener = mockExtraListener
+                onBindView(spyView)
+            }
+            .run {
+                argumentCaptor<Slider.OnChangeListener>().run {
+                    verify(spySlider).addOnChangeListener(capture())
+                }
+            }
+
+        val newValue = 75f
+        spySlider.value = newValue
+
+        verify(mockExtraListener).onValueChange(spySlider, newValue, false)
+    }
+
+    @Test
+    fun sliderTouch_delegatesToExtraTouchListener() {
+        val spySlider = spy(rootView.findViewById<Slider>(R.id.slider))
+        val spyView =
+            spy(rootView).apply {
+                stub { on { findViewById<Slider>(R.id.slider) } doReturn spySlider }
+            }
+        val mockExtraListener = mock<Slider.OnSliderTouchListener>()
+        val internalListener =
+            item
+                .apply {
+                    extraTouchListener = mockExtraListener
+                    onBindView(spyView)
+                }
+                .run {
+                    argumentCaptor<Slider.OnSliderTouchListener>().run {
+                        verify(spySlider).addOnSliderTouchListener(capture())
+                        firstValue
+                    }
+                }
+
+        internalListener.onStartTrackingTouch(spySlider)
+        assertThat(item.isTrackingTouch).isTrue()
+        verify(mockExtraListener).onStartTrackingTouch(spySlider)
+
+        internalListener.onStopTrackingTouch(spySlider)
+        assertThat(item.isTrackingTouch).isFalse()
+        verify(mockExtraListener).onStopTrackingTouch(spySlider)
     }
 
     enum class HapticTestMode(val value: Int) {
