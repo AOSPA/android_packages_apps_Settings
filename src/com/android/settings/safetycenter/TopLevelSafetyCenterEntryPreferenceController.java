@@ -35,6 +35,7 @@ import com.android.settings.safetycenter.ui.SafetyCenterSessionUtils;
 
 
 /** Controller for the SafetyCenter entry in top level Settings. */
+// LINT.IfChange
 public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenceController {
 
     private static final String TAG = "TopLevelSafetyCenterEntryPreferenceController";
@@ -81,3 +82,4 @@ public class TopLevelSafetyCenterEntryPreferenceController extends BasePreferenc
         return true;
     }
 }
+// LINT.ThenChange(ui/SafetyCenterApiScreen.kt)

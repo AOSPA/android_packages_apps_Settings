@@ -23,6 +23,7 @@ import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.SensitivityLevel
 
 class StoragePreference(
     override val key: String,
@@ -42,5 +43,7 @@ class StoragePreference(
     override fun getSummary(context: Context) = provideSummary(context)
     override fun getTitle(context: Context) = provideTitle(context)
     override fun intent(context: Context) = provideIntent(context)
+    override val sensitivityLevel
+        get() = SensitivityLevel.DEEP_LINK_ONLY
     override fun tags(context: Context) = tags.toTypedArray()
 }

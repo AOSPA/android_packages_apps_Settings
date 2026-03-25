@@ -26,7 +26,7 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDev
 
 class OpenByDefaultStateSource : DeviceStateSource {
     override val appFunctionType: DeviceStateAppFunctionType =
-        DeviceStateAppFunctionType.GET_UNCATEGORIZED
+        DeviceStateAppFunctionType.GET_APPS
 
     override suspend fun get(
         context: Context,

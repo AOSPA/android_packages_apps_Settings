@@ -60,6 +60,8 @@ class AppInfoScreenApiFirst :
     init {
         flag { Flags.catalystMigration26q2() }
 
+        tags("getAppsDeviceState")
+
         parameters {
             parameter(
                 name = PARAM_PACKAGE,

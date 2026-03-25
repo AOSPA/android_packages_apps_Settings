@@ -18,9 +18,11 @@ package com.android.settings.appfunctions.executors
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
@@ -45,6 +47,7 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
     appFunctionType: DeviceStateAppFunctionType? = null,
     screenKey: String,
     removeDuplicates: Boolean = false,
+    includeAtLeastOne: Boolean = false,
 ): Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>> {
     val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     val perScreenConfig = perScreenConfigMap[screenKey]
@@ -70,7 +73,17 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
                 paramsFlow.toList()
             }
 
-            targetParams.map { param ->
+            val modifiedTargetParams = if (includeAtLeastOne && targetParams.isEmpty()) {
+                if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                        listOf(ValidatedKeyParameters(PreferenceScreenRegistry.getScreenParametersSchema(screenKey) ?: KeyParametersSchema { }, emptyMap()))
+                    } else {
+                        listOf(Bundle())
+                    }
+            } else {
+                targetParams
+            }
+
+            modifiedTargetParams.map { param ->
                 getPreferenceHierarchy(
                     context,
                     screenKey,

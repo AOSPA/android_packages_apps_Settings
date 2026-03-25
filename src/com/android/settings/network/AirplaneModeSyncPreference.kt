@@ -76,7 +76,7 @@ class AirplaneModeSyncPreference(context: Context) :
     override fun storage(context: Context): KeyValueStore = storage
 
     override val sensitivityLevel
-        get() = SensitivityLevel.NO_SENSITIVITY
+        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     override val preferenceActionMetrics: Int
         get() = ACTION_AIRPLANE_MODE_SYNC_TOGGLE

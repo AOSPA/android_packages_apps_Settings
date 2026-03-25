@@ -19,7 +19,12 @@ package com.android.settings.biometrics
 import android.content.DialogInterface
 import android.content.DialogInterface.OnDismissListener
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.Spanned
 import android.text.method.LinkMovementMethod
+import android.text.style.BulletSpan
+import android.text.style.LeadingMarginSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,6 +88,10 @@ class IdentityCheckPromoCardFragment : BottomSheetDialogFragment() {
         val view = inflater.inflate(R.layout.identity_check_promo_card, container, false)
         val summaryView = view.findViewById<TextView>(R.id.summary)
         summaryView.movementMethod = LinkMovementMethod.getInstance()
+
+        val closeButton = view.findViewById<View>(R.id.close_button)
+        closeButton.setOnClickListener { dismiss() }
+
         val action = arguments?.getString(KEY_INTENT_ACTION)
         if (
             action.equals(IdentityCheckSafetySource.ACTION_ISSUE_CARD_WATCH_SHOW_DETAILS) &&
@@ -90,12 +99,13 @@ class IdentityCheckPromoCardFragment : BottomSheetDialogFragment() {
         ) {
             val titleView = view.findViewById<TextView>(R.id.title)
             val promoCardTitle = context!!.getString(R.string.identity_check_watch_promo_card_title)
-            val promoCardSummary =
-                context!!
-                    .getString(R.string.identity_check_promo_card_watch_summary)
-                    .parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT)
             titleView.text = promoCardTitle
-            summaryView.text = promoCardSummary
+
+            val string = context!!.getString(R.string.identity_check_promo_card_watch_summary)
+            setSummary(string)
+        } else {
+            val string = context!!.getString(R.string.identity_check_promo_card_summary)
+            setSummary(string)
         }
         return view
     }
@@ -107,6 +117,33 @@ class IdentityCheckPromoCardFragment : BottomSheetDialogFragment() {
 
     fun setOnDismissListener(onDismissListener: OnDismissListener) {
         this.onDismissListener = onDismissListener
+    }
+
+    private fun setSummary(string: String) {
+        val summaryView = view?.findViewById<TextView>(R.id.summary)
+        val spanned = string.parseAsHtml(HtmlCompat.FROM_HTML_MODE_COMPACT)
+        val indentInDp = 14
+        val indentInPx = (indentInDp * (context?.resources?.displayMetrics?.density ?: 1f)).toInt()
+        val promoCardSummary = spanned.withBulletIndent(indentInPx)
+        summaryView?.text = promoCardSummary
+    }
+
+    private fun Spanned.withBulletIndent(indentPx: Int): Spannable {
+        val spannable = SpannableString(this)
+        val bulletSpans = spannable.getSpans(0, spannable.length, BulletSpan::class.java)
+
+        for (span in bulletSpans) {
+            val start = spannable.getSpanStart(span)
+            val end = spannable.getSpanEnd(span)
+
+            spannable.setSpan(
+                LeadingMarginSpan.Standard(indentPx),
+                start,
+                end,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE,
+            )
+        }
+        return spannable
     }
 
     companion object {

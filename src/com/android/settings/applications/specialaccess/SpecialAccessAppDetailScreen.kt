@@ -132,14 +132,15 @@ private constructor(
         get() = null
 
     override val packageName
-        get() =
+        by lazy {
             if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                keyParameters!!.packageName
+                keyParameters!!.packageName ?: "null"
             } else {
                 arguments!!.packageName
             }
+        }
 
-    override var packageInfo: PackageInfo? = context.getPackageInfo(packageName)
+    override var packageInfo: PackageInfo? = if(packageName != "null") context.getPackageInfo(packageName) else null
 
     override val highlightMenuKey
         get() = R.string.menu_key_apps
@@ -243,7 +244,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(KEY_PACKAGE_NAME,  "The package name of the app", required = true, type = InstalledPackageName)
+            parameter(KEY_PACKAGE_NAME,  "The package name of the app", required = false, type = InstalledPackageName)
         }
 
         /**
