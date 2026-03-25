@@ -115,6 +115,12 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void getBatteryUsageOverCalcPowerDrainThreshold_returnExpectedResult() {
+        assertThat(mPowerFeatureProvider.getBatteryUsageOverCalcPowerDrainThreshold())
+                .isEqualTo(Double.MAX_VALUE);
+    }
+
+    @Test
     public void getBatteryUsageStatsMaxAgeMs_returnUnsetValue() {
         assertThat(mPowerFeatureProvider.getBatteryUsageStatsMaxAgeMs(/* isFromPeriodJob= */true))
                 .isEqualTo(DataProcessor.BATTERY_STATS_MAX_AGE_UNSET);
