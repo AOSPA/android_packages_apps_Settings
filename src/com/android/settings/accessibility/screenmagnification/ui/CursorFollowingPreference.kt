@@ -26,19 +26,21 @@ import com.android.settings.accessibility.MagnificationCapabilities.Magnificatio
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.screenmagnification.dialogs.CursorFollowingModeChooser
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
+import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.preference.PreferenceBinding
-import com.android.settingslib.metadata.DiscreteIntValue
 
 class CursorFollowingPreference :
     PreferenceBinding,
@@ -47,7 +49,8 @@ class CursorFollowingPreference :
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider,
     PreferenceAvailabilityProvider,
-    Preference.OnPreferenceClickListener {
+    Preference.OnPreferenceClickListener,
+    KeyedObserver<String?> {
 
     private lateinit var lifecycleContext: PreferenceLifecycleContext
 
@@ -110,6 +113,7 @@ class CursorFollowingPreference :
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
     override val supportsWrite = true
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         preference.onPreferenceClickListener = this
@@ -118,6 +122,21 @@ class CursorFollowingPreference :
     override fun onCreate(context: PreferenceLifecycleContext) {
         super.onCreate(context)
         lifecycleContext = context
+    }
+
+    override fun onStart(context: PreferenceLifecycleContext) {
+        super.onStart(context)
+        storage(context)
+            .addObserver(MagnificationCapabilities.KEY_CAPABILITY, this, HandlerExecutor.main)
+    }
+
+    override fun onStop(context: PreferenceLifecycleContext) {
+        super.onStop(context)
+        storage(context).removeObserver(MagnificationCapabilities.KEY_CAPABILITY, this)
+    }
+
+    override fun onKeyChanged(key: String?, reason: Int) {
+        lifecycleContext.notifyPreferenceChange(KEY)
     }
 
     override val availabilityDescription =
