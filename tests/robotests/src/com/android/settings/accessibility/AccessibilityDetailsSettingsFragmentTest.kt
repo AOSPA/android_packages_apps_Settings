@@ -73,6 +73,7 @@ class AccessibilityDetailsSettingsFragmentTest {
     @After
     fun cleanUp() {
         AccessibilityRepositoryProvider.resetInstanceForTesting()
+        ShadowRestrictedLockUtilsInternal.reset()
     }
 
     @Test
@@ -118,6 +119,17 @@ class AccessibilityDetailsSettingsFragmentTest {
         intent.putExtra(Intent.EXTRA_COMPONENT_NAME, A11Y_SERVICE_COMPONENT.flattenToString())
         val dpm = context.getSystemService(DevicePolicyManager::class.java)
         (shadowOf(dpm) as ShadowDevicePolicyManager).setPermittedAccessibilityServices(listOf())
+
+        startFragment(intent)
+
+        assertStartActivityWithExpectedFragment(AccessibilitySettings::class.java.getName())
+    }
+
+    @Test
+    fun onCreate_extraComponentNameIsEcmRestricted_launchAccessibilitySettings() {
+        val intent = Intent()
+        intent.putExtra(Intent.EXTRA_COMPONENT_NAME, A11Y_SERVICE_COMPONENT.flattenToString())
+        ShadowRestrictedLockUtilsInternal.setEcmRestrictedPkgs(PACKAGE_NAME)
 
         startFragment(intent)
 

@@ -187,7 +187,7 @@ public class AccessibilityDetailsSettingsFragment extends InstrumentedFragment {
         }
 
         return !RestrictedLockUtilsInternal.isEnhancedConfirmationRestricted(getContext(),
-                packageName, AppOpsManager.OPSTR_BIND_ACCESSIBILITY_SERVICE);
+                AppOpsManager.OPSTR_BIND_ACCESSIBILITY_SERVICE, packageName);
     }
 
     private Bundle buildArguments(AccessibilityServiceInfo info) {
