@@ -143,6 +143,12 @@ object SatelliteUtils {
                     KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
                 )
             if (!fetchedBundle.isEmpty) {
+                Log.i(
+                    TAG,
+                    "fetchCarrierConfigData for subId=$subId: " +
+                        "KEY_SATELLITE_ATTACH_SUPPORTED_BOOL=${fetchedBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL)}, " +
+                        "KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT=${fetchedBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)}"
+                )
                 fetchedBundle
             } else {
                 Log.e(TAG, "Fetched bundle is null or empty, using default config.")

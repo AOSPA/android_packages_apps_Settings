@@ -88,6 +88,11 @@
             android:entries="@array/bt_hci_snoop_log_entries"
             android:entryValues="@array/bt_hci_snoop_log_values" />
 
+        <SwitchPreferenceCompat
+            android:key="bt_hci_snoop_log_socket"
+            android:title="@string/bt_hci_snoop_log_socket_title"
+            android:summary="@string/bt_hci_snoop_log_socket_summary" />
+
         <Preference
             android:key="snoop_logger_filters_dashboard"
             android:title="@string/bt_hci_snoop_log_filters_dashboard_title"

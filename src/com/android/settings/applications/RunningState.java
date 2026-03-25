@@ -787,7 +787,8 @@ public class RunningState {
         mUm = mApplicationContext.getSystemService(UserManager.class);
         mMyUserId = UserHandle.myUserId();
         UserInfo userInfo = mUm.getUserInfo(mMyUserId);
-        mHideManagedProfiles = userInfo == null || !userInfo.canHaveProfile();
+        mHideManagedProfiles = userInfo == null ||
+                !userInfo.canHaveProfile(UserManager.USER_TYPE_PROFILE_MANAGED);
         mResumed = false;
         mBackgroundThread = new HandlerThread("RunningState:Background");
         mBackgroundThread.start();

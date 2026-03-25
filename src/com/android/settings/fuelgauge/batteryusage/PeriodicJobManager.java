@@ -23,10 +23,12 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.annotation.WorkerThread;
 
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
 import com.android.settings.fuelgauge.batteryusage.bugreport.BatteryUsageLogUtils;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.utils.ThreadUtils;
 
 import java.time.Duration;
 
@@ -71,14 +73,23 @@ public final class PeriodicJobManager {
             return;
         }
         // Cancels the previous alert job and schedules the next one.
-        final PendingIntent pendingIntent = getPendingIntent();
-        cancelJob(pendingIntent);
+        ThreadUtils.getBackgroundExecutor().execute(
+                () -> {
+                    final PendingIntent pendingIntent = getPendingIntent();
+                    cancelJob(pendingIntent);
+                    scheduleNextJobAlarm(fromBoot, pendingIntent);
+                }
+        );
+    }
+
+    @WorkerThread
+    private void scheduleNextJobAlarm(
+            final boolean fromBoot, final PendingIntent pendingIntent) {
+        final long currentTimeMillis = System.currentTimeMillis();
         // Uses the timestamp of next full hour in local timezone.
-        long currentTimeMillis = System.currentTimeMillis();
         final long triggerAtMillis = getTriggerAtMillis(currentTimeMillis, fromBoot);
         mAlarmManager.setExactAndAllowWhileIdle(
                 AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
-
         final String timeForLogging = ConvertUtils.utcToLocalTimeForLogging(triggerAtMillis);
         BatteryUsageLogUtils.writeLog(
                 mContext,
@@ -87,6 +98,7 @@ public final class PeriodicJobManager {
         Log.d(TAG, "schedule next alarm job at " + timeForLogging);
     }
 
+    @WorkerThread
     private void cancelJob(PendingIntent pendingIntent) {
         if (mAlarmManager != null) {
             mAlarmManager.cancel(pendingIntent);

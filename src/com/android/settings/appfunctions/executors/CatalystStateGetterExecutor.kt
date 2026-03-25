@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.executors
 
 import android.app.appsearch.GenericDocument
 import android.content.Context
+import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
@@ -47,7 +48,7 @@ class CatalystStateGetterExecutor(private val context: Context) : DeviceStateExe
             }
 
             if (
-                !(AppUtils.isDebuggable() &&
+                !((AppUtils.isDebuggable() || Build.TYPE.equals("dev-keys")) &&
                     Settings.Global.getInt(
                         context.contentResolver,
                         "com.android.settings.APP_FUNCTION_ITEM_GETTER_AVAILABLE",

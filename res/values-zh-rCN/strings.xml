@@ -338,10 +338,10 @@
     <string name="time_format_12_hour" msgid="4212243396629600426">"12 小时制"</string>
     <string name="time_format_24_hour" msgid="8284408904130498347">"24 小时制"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"时区"</string>
-    <string name="home_time_zone_title" msgid="3824736095532816255">"家所在地时区"</string>
+    <string name="home_time_zone_title" msgid="3824736095532816255">"居住地时区"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"选择时区"</string>
-    <string name="home_time_zone_summary" msgid="1494773352044636274">"设置外出时的家所在地时区"</string>
-    <string name="use_home_time_zone_title" msgid="8026361707497256390">"采用家所在地时区"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"设置外出时的居住地时区"</string>
+    <string name="use_home_time_zone_title" msgid="8026361707497256390">"采用居住地时区"</string>
     <string name="suggestions_category_title" msgid="669819615912272575">"建议"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"选择时区"</string>
     <string name="date_time_search_time_zone" msgid="7373967602009974399">"搜索时区"</string>
@@ -2558,7 +2558,8 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"音量键"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"同时按住两个音量键"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"点按三次"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"快速点按屏幕 %1$d 次。此操作可能会减慢设备的运行速度。"</string>
+    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (387169602299548488) -->
+    <skip />
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"点按三次"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"键盘快捷键"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"按 <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> 即可使用<xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -4614,17 +4615,49 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以访问所有文件"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"屏幕自动化"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"此应用将能查看其他应用的界面内容并与之互动，以帮助您完成任务，即使应用在后台运行也无妨"</string>
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g>将能查看其他应用的界面内容并与之互动，以帮助您完成任务"</string>
-    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"如果您不允许界面自动化操作，“<xliff:g id="ID_1">%1$s</xliff:g>”或许仍能以其他方式与关联到“<xliff:g id="ID_2">%1$s</xliff:g>”的应用互动"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2154932816099670659) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_info (9062454049512207228) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (5980762930536180974) -->
+    <skip />
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"允许应用与其他应用的界面内容互动，助您完成任务"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都询问"</string>
-    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"始终允许"</string>
+    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"不允许"</string>
-    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"允许屏幕自动化操作"</string>
-    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"没有始终允许的应用"</string>
-    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"此处会显示由<xliff:g id="ID_1">%1$s</xliff:g>设为可始终使用屏幕自动化操作的应用。仅获得单次授权的应用将不会在此处显示。"</string>
-    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"允许"</string>
-    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"不允许"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (4888755761957621266) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (5400163562350523099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_requirement (2238235275174477026) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (2135792628244307590) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_clear_all_apps (7663936744209447022) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (2481703601665259966) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9145402296131321682) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2454906328238498562) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_header (5137088795672278469) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_footer_requirement (4029489221206415252) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (7290667979548333123) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_target_list_header (3243296237180038117) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全屏通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允许此应用显示全屏通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允许此应用在设备锁定时全屏显示通知。应用可利用全屏通知突出显示闹钟、来电或其他紧急通知。"</string>
@@ -5723,11 +5756,13 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"只允许使用加密网络"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"这样虽然更安全，但可能导致移动网络连接在某些地方受限。紧急呼叫服务则随时可用，不受任何影响。"</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"是否要关闭 2G 网络保护？"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM 卡的当前网络不支持 2G。关闭 2G 保护后，您可能会连接到有害的仿冒 2G 网络。"</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (7888326960588858860) -->
+    <skip />
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"关闭"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G 网络保护"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G 网络保护已开启"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"<xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM 卡的当前网络要求开启 2G 网络保护。您仍然可以选择停用 2G 保护，但需自行承担风险。"</string>
+    <!-- no translation found for network_protection_2g_on_notification_summary (2865716658412002901) -->
+    <skip />
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"设置"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"所有服务"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"显示剪贴板访问通知"</string>
@@ -5810,6 +5845,12 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"卸载应用"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{过去 # 个月内安装的应用}other{过去 # 个月内安装的应用}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# 个多月前安装的应用}other{# 个多月前安装的应用}}"</string>
+    <!-- no translation found for ai_assist_category (6800674613544630195) -->
+    <skip />
+    <!-- no translation found for personal_context_title (6639623956831710453) -->
+    <skip />
+    <!-- no translation found for personal_context_switch_summary (917644125592480347) -->
+    <skip />
     <string name="aspect_ratio_title" msgid="2451826875939676101">"宽高比"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"如果此应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请试试在其他宽高比下查看此应用"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"如果此应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请试试在其他宽高比下查看此应用。某些应用可能没有针对特定宽高比进行优化。"</string>

@@ -27,12 +27,14 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.testutils.FakeFeatureFactory;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlarmManager;
 
 import java.time.Duration;
@@ -41,6 +43,7 @@ import java.util.TimeZone;
 
 /** Tests of {@link PeriodicJobManager}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowThreadUtils.class})
 public final class PeriodicJobManagerTest {
     private Context mContext;
     private ShadowAlarmManager mShadowAlarmManager;
@@ -59,6 +62,7 @@ public final class PeriodicJobManagerTest {
     @After
     public void tearDown() {
         mPeriodicJobManager.reset();
+        ShadowThreadUtils.reset();
     }
 
     @Test
