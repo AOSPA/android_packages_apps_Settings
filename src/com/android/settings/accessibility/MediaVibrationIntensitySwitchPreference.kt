@@ -20,7 +20,6 @@ import android.os.VibrationAttributes
 import android.provider.Settings.System.MEDIA_VIBRATION_INTENSITY
 import com.android.settings.R
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 
@@ -59,8 +58,6 @@ class MediaVibrationIntensitySwitchPreference(
 
     override val availabilityDescription =
         "The device must support media vibration settings."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = context.isMediaVibrationPreferenceSupported()
 }

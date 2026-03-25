@@ -57,6 +57,7 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
+import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.DomesticRoamUtils;
 import com.android.settingslib.mobile.MobileMappings;
@@ -588,15 +589,25 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     }
 
     private void updateGid1() {
-        updateCarrierConfigManagedItem(GID1_LABEL_ID, GID1_VALUE_ID,
-                CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL,
-                () -> getTelephonyManager().getGroupIdLevel1());
+        if (Flags.showSimStatusDetailedInfo()) {
+            updateCarrierConfigManagedItem(GID1_LABEL_ID, GID1_VALUE_ID,
+                    CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL,
+                    () -> getTelephonyManager().getGroupIdLevel1());
+        } else {
+            mDialog.removeSettingFromScreen(GID1_LABEL_ID);
+            mDialog.removeSettingFromScreen(GID1_VALUE_ID);
+        }
     }
 
     private void updateCarrierId() {
-        updateCarrierConfigManagedItem(CARRIER_ID_LABEL_ID, CARRIER_ID_VALUE_ID,
-                CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL,
-                () -> String.valueOf(getTelephonyManager().getSimCarrierId()));
+        if (Flags.showSimStatusDetailedInfo()) {
+            updateCarrierConfigManagedItem(CARRIER_ID_LABEL_ID, CARRIER_ID_VALUE_ID,
+                    CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL,
+                    () -> String.valueOf(getTelephonyManager().getSimCarrierId()));
+        } else {
+            mDialog.removeSettingFromScreen(CARRIER_ID_LABEL_ID);
+            mDialog.removeSettingFromScreen(CARRIER_ID_VALUE_ID);
+        }
     }
 
 

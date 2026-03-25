@@ -67,7 +67,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType;
 import com.android.internal.accessibility.util.ShortcutUtils;
 import com.android.settings.R;
-import com.android.settings.accessibility.shared.utils.SetupWizardUtilKt;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settingslib.utils.StringUtil;
@@ -154,13 +153,6 @@ public final class AccessibilityShortcutsTutorial {
                 /* errorMessage= */ "Unexpected tutorial pages size");
 
         alertDialog.setView(createShortcutNavigationContentView(context, tutorialPages, null));
-
-        if (SetupWizardUtilKt.shouldShowFocusRingsInSuw(context)) {
-            alertDialog.setOnShowListener(
-                    (dialog) ->
-                            SetupWizardUtilKt.configureFocusRingsForDialog(
-                                    (AlertDialog) dialog));
-        }
 
         return alertDialog;
     }

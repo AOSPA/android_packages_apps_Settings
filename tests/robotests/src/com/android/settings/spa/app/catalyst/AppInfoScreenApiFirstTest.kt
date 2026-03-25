@@ -8,10 +8,11 @@ import android.app.AppOpsManager
 import android.app.Application
 import android.apphibernation.AppHibernationManager
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ApplicationInfoFlags
+import android.content.pm.PackageInfo
 import android.os.Build
+import android.os.UserHandle
 import android.permission.PermissionControllerManager
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
@@ -32,24 +33,20 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mockito.doAnswer
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
-import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.spy
-import org.mockito.kotlin.stub
-import org.mockito.kotlin.whenever
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadow.api.Shadow.extract
+import org.robolectric.shadows.ShadowContextImpl
 
 @RunWith(AndroidJUnit4::class)
 class AppInfoScreenApiFirstTest {
 
-    @get:Rule
-    val setFlagsRule = SetFlagsRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
 
-    private val packageManager = mock<PackageManager>()
     private lateinit var context: Context
     private lateinit var tester: ApiTester
 
@@ -64,47 +61,32 @@ class AppInfoScreenApiFirstTest {
     fun setUp() {
         val app = ApplicationProvider.getApplicationContext<Application>()
 
-        val testAppInfo = ApplicationInfo().apply {
-            packageName = validPackageName
-            uid = validUid
-            targetSdkVersion = Build.VERSION_CODES.S
-        }
+        val shadowContext = extract<ShadowContextImpl>(app.baseContext)
+        shadowContext.setSystemService(Context.APP_OPS_SERVICE, mockAppOpsManager)
+        shadowContext.setSystemService("app_hibernation", mockAppHibernationManager)
+        shadowContext.setSystemService("permission_controller", mockPermissionControllerManager)
 
-        packageManager.stub {
-            on {
-                getInstalledApplicationsAsUser(
-                    org.mockito.kotlin.any<ApplicationInfoFlags>(),
-                    anyInt()
-                )
-            } doReturn listOf(testAppInfo)
-            on {
-                getApplicationInfoAsUser(
-                    anyString(),
-                    anyInt(),
-                    anyInt()
-                )
-            } doReturn testAppInfo
-            on {
-                getApplicationInfo(anyString(), anyInt())
-            } doReturn testAppInfo
-        }
-
-        context = spy(app.baseContext)
-
-        doReturn(packageManager).whenever(context).packageManager
-        doReturn(context).whenever(context).createContextAsUser(any(), anyInt())
-
-        doReturn(mockAppOpsManager).whenever(context).getSystemService(AppOpsManager::class.java)
-        doReturn(mockAppOpsManager).whenever(context).getSystemService(Context.APP_OPS_SERVICE)
-        doReturn(mockAppHibernationManager).whenever(context)
-            .getSystemService(AppHibernationManager::class.java)
-        doReturn(mockAppHibernationManager).whenever(context).getSystemService("app_hibernation")
-        doReturn(mockPermissionControllerManager).whenever(context)
-            .getSystemService(PermissionControllerManager::class.java)
-        doReturn(mockPermissionControllerManager).whenever(context)
-            .getSystemService("permission_controller")
+        context =
+            object : ContextWrapper(app) {
+                override fun createContextAsUser(user: UserHandle, flags: Int): Context {
+                    return this
+                }
+            }
 
         tester = ApiTester(AppInfoScreenApiFirst(), context)
+
+        val shadowPackageManager = shadowOf(context.packageManager)
+        val packageInfo =
+            PackageInfo().apply {
+                packageName = validPackageName
+                applicationInfo =
+                    ApplicationInfo().apply {
+                        packageName = validPackageName
+                        uid = validUid
+                        targetSdkVersion = Build.VERSION_CODES.S
+                    }
+            }
+        shadowPackageManager.installPackage(packageInfo)
 
         DeviceConfig.setProperty(
             DeviceConfig.NAMESPACE_APP_HIBERNATION,
@@ -131,10 +113,10 @@ class AppInfoScreenApiFirstTest {
 
     private fun setupHibernationEligibility(eligibility: Int) {
         doAnswer { invocation ->
-            val callback = invocation.getArgument<java.util.function.IntConsumer>(2)
-            callback.accept(eligibility)
-            null
-        }
+                val callback = invocation.getArgument<java.util.function.IntConsumer>(2)
+                callback.accept(eligibility)
+                null
+            }
             .`when`(mockPermissionControllerManager)
             .getHibernationEligibility(anyString(), any(Executor::class.java), any())
     }
@@ -167,31 +149,19 @@ class AppInfoScreenApiFirstTest {
     @Test
     @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun get_appIsArchived_throwsCustomPrecondition() {
-        val testAppInfo = ApplicationInfo().apply {
-            packageName = validPackageName
-            uid = validUid
-            targetSdkVersion = Build.VERSION_CODES.S
-            isArchived = true
-        }
-
-        packageManager.stub {
-            on {
-                getInstalledApplicationsAsUser(
-                    org.mockito.kotlin.any<ApplicationInfoFlags>(),
-                    anyInt()
-                )
-            } doReturn listOf(testAppInfo)
-            on {
-                getApplicationInfoAsUser(
-                    anyString(),
-                    anyInt(),
-                    anyInt()
-                )
-            } doReturn testAppInfo
-            on {
-                getApplicationInfo(anyString(), anyInt())
-            } doReturn testAppInfo
-        }
+        val shadowPackageManager = shadowOf(context.packageManager)
+        val packageInfo =
+            PackageInfo().apply {
+                packageName = validPackageName
+                applicationInfo =
+                    ApplicationInfo().apply {
+                        packageName = validPackageName
+                        uid = validUid
+                        targetSdkVersion = Build.VERSION_CODES.S
+                        isArchived = true
+                    }
+            }
+        shadowPackageManager.installPackage(packageInfo)
 
         assertFailsWith<FailedPreconditionException> { tester.get<Boolean>("unused_apps_switch") }
     }
@@ -210,12 +180,13 @@ class AppInfoScreenApiFirstTest {
     @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun get_modeAllowed_returnsTrue() {
         `when`(
-            mockAppOpsManager.checkOpNoThrow(
-                AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED,
-                validUid,
-                validPackageName,
+                mockAppOpsManager.checkOpNoThrow(
+                    AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED,
+                    validUid,
+                    validPackageName,
+                )
             )
-        ).thenReturn(AppOpsManager.MODE_ALLOWED)
+            .thenReturn(AppOpsManager.MODE_ALLOWED)
 
         val result = tester.get<Boolean>("unused_apps_switch")
         assertThat(result).isTrue()
@@ -224,38 +195,27 @@ class AppInfoScreenApiFirstTest {
     @Test
     @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun get_modeDefault_targetPreS_returnsFalse() {
-        val testAppInfo = ApplicationInfo().apply {
-            packageName = validPackageName
-            uid = validUid
-            targetSdkVersion = Build.VERSION_CODES.Q
-        }
-
-        packageManager.stub {
-            on {
-                getInstalledApplicationsAsUser(
-                    org.mockito.kotlin.any<ApplicationInfoFlags>(),
-                    anyInt()
-                )
-            } doReturn listOf(testAppInfo)
-            on {
-                getApplicationInfoAsUser(
-                    anyString(),
-                    anyInt(),
-                    anyInt()
-                )
-            } doReturn testAppInfo
-            on {
-                getApplicationInfo(anyString(), anyInt())
-            } doReturn testAppInfo
-        }
+        val shadowPackageManager = shadowOf(context.packageManager)
+        val packageInfo =
+            PackageInfo().apply {
+                packageName = validPackageName
+                applicationInfo =
+                    ApplicationInfo().apply {
+                        packageName = validPackageName
+                        uid = validUid
+                        targetSdkVersion = Build.VERSION_CODES.Q
+                    }
+            }
+        shadowPackageManager.installPackage(packageInfo)
 
         `when`(
-            mockAppOpsManager.checkOpNoThrow(
-                AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED,
-                validUid,
-                validPackageName,
+                mockAppOpsManager.checkOpNoThrow(
+                    AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED,
+                    validUid,
+                    validPackageName,
+                )
             )
-        ).thenReturn(AppOpsManager.MODE_DEFAULT)
+            .thenReturn(AppOpsManager.MODE_DEFAULT)
 
         val result = tester.get<Boolean>("unused_apps_switch")
         assertThat(result).isFalse()
@@ -264,17 +224,16 @@ class AppInfoScreenApiFirstTest {
     @Test
     @EnableFlags(FLAG_CATALYST_MIGRATION_26Q2)
     fun get_modeDefault_targetS_returnsTrue() {
-        context.packageManager.getApplicationInfo(
-            validPackageName, 0
-        ).targetSdkVersion = Build.VERSION_CODES.S
-
+        context.packageManager.getApplicationInfo(validPackageName, 0).targetSdkVersion =
+            Build.VERSION_CODES.S
         `when`(
-            mockAppOpsManager.checkOpNoThrow(
-                AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED,
-                validUid,
-                validPackageName,
+                mockAppOpsManager.checkOpNoThrow(
+                    AppOpsManager.OPSTR_AUTO_REVOKE_PERMISSIONS_IF_UNUSED,
+                    validUid,
+                    validPackageName,
+                )
             )
-        ).thenReturn(AppOpsManager.MODE_DEFAULT)
+            .thenReturn(AppOpsManager.MODE_DEFAULT)
 
         val result = tester.get<Boolean>("unused_apps_switch")
         assertThat(result).isTrue()

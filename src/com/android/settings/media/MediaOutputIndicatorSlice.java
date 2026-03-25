@@ -16,8 +16,8 @@
 
 package com.android.settings.media;
 
-import static com.android.media.flags.Flags.fixOutputSwitcherMultiuserSupport;
 import static com.android.settings.slices.CustomSliceRegistry.MEDIA_OUTPUT_INDICATOR_SLICE_URI;
+import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
 
 import android.annotation.ColorInt;
 import android.content.Context;
@@ -25,7 +25,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.session.MediaController;
 import android.net.Uri;
-import android.os.UserHandle;
+import android.util.Log;
 
 import androidx.annotation.VisibleForTesting;
 import androidx.core.graphics.drawable.IconCompat;
@@ -59,9 +59,11 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         }
         final IconCompat icon = IconCompat.createWithResource(mContext,
                 com.android.internal.R.drawable.ic_settings_bluetooth);
-        final int stringRes = (getWorker().getActiveLocalMediaController() != null
-                ? R.string.media_output_label_title
-                : R.string.media_output_title_without_playing);
+        final int stringRes = enableOutputSwitcherForSystemRouting()
+                ? (getWorker().getActiveLocalMediaController() != null
+                        ? R.string.media_output_label_title
+                        : R.string.media_output_title_without_playing)
+                : R.string.media_output_label_title;
         final CharSequence title = mContext.getString(stringRes,
                 Utils.getApplicationLabel(mContext, getWorker().getPackageName()));
         final SliceAction primarySliceAction = SliceAction.create(
@@ -120,9 +122,13 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         // 1. AudioMode is not in on-going call
         // 2. worker is not null
         // 3. Available devices are more than 0
+        // 4. The local media session is active and the state is playing.
+        //    - if !enableOutputSwitcherForSystemRouting(), (4) will be bypass.
         return getWorker() != null
                 && !com.android.settingslib.Utils.isAudioModeOngoingCall(mContext)
-                && getWorker().getMediaDevices().size() > 0;
+                && getWorker().getMediaDevices().size() > 0
+                && (enableOutputSwitcherForSystemRouting()
+                        ? true : getWorker().getActiveLocalMediaController() != null);
     }
 
     @Override
@@ -130,34 +136,21 @@ public class MediaOutputIndicatorSlice implements CustomSliceable {
         final MediaController mediaController = getWorker().getActiveLocalMediaController();
 
         // Launch media output dialog
-        if (mediaController == null) {
-            var outputDialogIntent = new Intent()
+        if (enableOutputSwitcherForSystemRouting() && mediaController == null) {
+            mContext.sendBroadcast(new Intent()
                     .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
-                    .setAction(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
-            if (fixOutputSwitcherMultiuserSupport()) {
-                outputDialogIntent.putExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
-                        mContext.getUser());
-                mContext.sendBroadcastAsUser(outputDialogIntent, UserHandle.SYSTEM);
-            } else {
-                mContext.sendBroadcast(outputDialogIntent);
-            }
-        } else {
-            var outputDialogIntent = new Intent()
+                    .setAction(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG));
+        } else if (mediaController != null) {
+            mContext.sendBroadcast(new Intent()
                     .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
                     .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
                     .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
                             mediaController.getSessionToken())
                     .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
-                            mediaController.getPackageName());
-            if (fixOutputSwitcherMultiuserSupport()) {
-                var mediaSessionUser = UserHandle.getUserHandleForUid(
-                        mediaController.getSessionToken().getUid());
-                outputDialogIntent.putExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
-                        mediaSessionUser);
-                mContext.sendBroadcastAsUser(outputDialogIntent, UserHandle.SYSTEM);
-            } else {
-                mContext.sendBroadcast(outputDialogIntent);
-            }
+                            mediaController.getPackageName()));
+        } else {
+            Log.d(TAG, "No active local media controller");
+            return;
         }
 
         // Dismiss volume panel

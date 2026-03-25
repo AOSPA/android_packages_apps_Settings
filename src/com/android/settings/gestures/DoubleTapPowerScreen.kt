@@ -32,7 +32,6 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -84,8 +83,6 @@ open class DoubleTapPowerScreen(context: Context) :
 
     override val availabilityDescription =
         "The double tap power gesture must not be disabled."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = context.isGestureAvailable()
 
@@ -153,6 +150,7 @@ open class DoubleTapPowerScreen(context: Context) :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +DoubleTapPowerScreenPreference(this@DoubleTapPowerScreen)
             if (Flags.catalystMigration26q2()) {
                 if (!context.isNonLaunchWalletOrNonMultiTargetDoubleTap()) {
                     +DoubleTapPowerMainSwitchPreference()
@@ -195,8 +193,6 @@ open class DoubleTapPowerScreen(context: Context) :
         override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
-
-        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context): Boolean = screenMetadata.isAvailable(context)
     }

@@ -509,7 +509,6 @@ class IdentityCheckSafetySourceTest {
 
     @Test
     @RequiresFlagsEnabled(Flags.FLAG_IDENTITY_CHECK_WATCH)
-    @RequiresFlagsDisabled(FLAG_SCHEDULE_WATCH_RANGING_AVAILABILITY_WITH_JOB_SCHEDULER)
     fun watchContentObserver_onChange_setsSafetySourceData() {
         whenever(safetyCenterManagerWrapper.isEnabled(applicationContext)).thenReturn(true)
 

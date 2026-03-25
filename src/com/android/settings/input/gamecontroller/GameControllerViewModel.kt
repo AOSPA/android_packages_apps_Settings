@@ -28,8 +28,6 @@ import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceK
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToButtonMap
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import android.view.KeyEvent
-import android.view.MotionEvent
 
 /**
  * View model for per device game controller settings pages, managing data for a particular
@@ -108,35 +106,7 @@ class GameControllerViewModel(
         }
     }
 
-    private fun getAxisForButton(buttonKey: Int): Int? {
-        return when (buttonKey) {
-            KeyEvent.KEYCODE_BUTTON_L2 -> MotionEvent.AXIS_LTRIGGER
-            KeyEvent.KEYCODE_BUTTON_R2 -> MotionEvent.AXIS_RTRIGGER
-            else -> null
-        }.takeIf { controllerDevice.axes.contains(it) }
-    }
-
     private fun applyKeyRemapping(fromButtonKey: Int, toButtonKey: Int) {
-        val fromAxis = getAxisForButton(fromButtonKey)
-        val toAxis = getAxisForButton(toButtonKey)
-
-        // Remove any existing axis remappings for the "from" button.
-        inputManager.removeControllerButtonToAxisRemapping(identifier, fromButtonKey);
-
-        if (fromAxis != null && toAxis != null) {
-            // Both buttons produce motion events, remap the axis directly.
-            // E.g. if L2 is mapped to R2, then L2 should produce RTRIGGER axis events.
-            inputManager.remapControllerAxis(identifier, fromAxis, toAxis)
-        } else if (fromAxis != null) {
-            // The "from" button produces motion events, disable those events.
-            inputManager.remapControllerAxis(identifier, fromAxis, MotionEvent.AXIS_DISABLED)
-        } else if (toAxis != null) {
-            // Make sure the "from" button produces motion events which the "to" button does.
-            inputManager.remapControllerButtonToAxis(identifier, fromButtonKey, toAxis)
-        } else {
-            // Neither of the buttons produce motion events, no special handling required.
-        }
-
         inputManager.remapControllerButton(identifier, fromButtonKey, toButtonKey)
         _buttonRemapping.postValue(inputManager.getControllerButtonRemappings(identifier))
     }
@@ -149,8 +119,6 @@ class GameControllerViewModel(
     fun resetRemapping() {
         inputManager.clearAllControllerButtonRemappings(identifier)
         _buttonRemapping.postValue(inputManager.getControllerButtonRemappings(identifier))
-
-        inputManager.clearAllControllerButtonToAxisRemappings(identifier)
 
         inputManager.clearAllControllerAxisRemappings(identifier)
         _axisRemapping.postValue(inputManager.getControllerAxisRemappings(identifier))

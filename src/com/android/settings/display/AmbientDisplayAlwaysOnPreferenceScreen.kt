@@ -47,7 +47,6 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceCategory as Category
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -111,16 +110,10 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override val restrictionKeys: Array<String>
         get() = arrayOf(UserManager.DISALLOW_AMBIENT_DISPLAY)
 
-    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
-
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val availabilityDescription =
         "The device must support ambient display always on, and the user must not have display inversion enabled."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         return !SystemProperties.getBoolean(PROP_AWARE_AVAILABLE, false) &&

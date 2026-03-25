@@ -110,7 +110,6 @@ public class ExternalDisplayTestBase {
                 .when(mMockedInjector)
                 .registerDisplayListener(any(DisplayManager.DisplayListener.class), anyBoolean());
         doReturn(mContext).when(mMockedInjector).getContext();
-        doReturn(new kotlin.Pair<>(40.0f, 40.0f)).when(mMockedInjector).getPhysicalDpi(anyInt());
 
         setupMockDpm();
     }

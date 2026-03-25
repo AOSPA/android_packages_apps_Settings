@@ -33,12 +33,6 @@ class TextReadingSetupWizardFragment : BaseSetupWizardFragment() {
     override fun createControllers(adapter: RecyclerItemAdapter): Map<Int, BaseItemController> =
         buildMap {
             val context = requireContext()
-            findItem(adapter, R.id.font_size_in_suw)?.let {
-                put(R.id.font_size_in_suw, FontSizeSliderItemController.create(context, it))
-            }
-            findItem(adapter, R.id.display_size_in_suw)?.let {
-                put(R.id.display_size_in_suw, DisplaySizeSliderItemController.create(context, it))
-            }
             findItem(adapter, R.id.bold_text_in_suw)?.let {
                 put(R.id.bold_text_in_suw, BoldTextSwitchItemController(context, it))
             }

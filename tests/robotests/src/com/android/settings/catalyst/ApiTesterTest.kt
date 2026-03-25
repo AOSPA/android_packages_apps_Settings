@@ -54,7 +54,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import com.android.settingslib.metadata.preferencesapi.safe
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 @RunWith(AndroidJUnit4::class)
 class ApiTesterTest {
@@ -185,7 +184,7 @@ class ApiTesterTest {
                 get { execute { theValue } }
                 set {
                     valuePreconditions(0) { value ->
-                        if (value == "a") Custom(R.string.custom_exception, stability = PreconditionStability.UNSTABLE) else Allowed
+                        if (value == "a") Custom(R.string.custom_exception) else Allowed
                     }
                     execute { value -> theValue = value }
                 }
@@ -291,7 +290,7 @@ class ApiTesterTest {
                 preconditions(R.string.parameterized_precondition) {
                     if (parameters["package"] == "parameter1") {
                         Allowed
-                    } else Custom(R.string.parameter_must_be_parameter1, stability = PreconditionStability.UNSTABLE)
+                    } else Custom(R.string.parameter_must_be_parameter1)
                 }
                 get { execute { "hello" } }
             }

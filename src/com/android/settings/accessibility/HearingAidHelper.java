@@ -20,7 +20,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
-import android.os.SystemProperties;
 
 import androidx.annotation.Nullable;
 
@@ -40,10 +39,6 @@ import java.util.stream.Collectors;
  */
 public class HearingAidHelper {
 
-    private static final String ASHA_PROFILE_CENTRAL_PROPERTY =
-            "bluetooth.profile.asha.central.enabled";
-    private static final String HAP_PROFILE_CLIENT_PROPERTY =
-            "bluetooth.profile.hap.client.enabled";
     private final BluetoothAdapter mBluetoothAdapter;
     private final LocalBluetoothProfileManager mProfileManager;
     private final CachedBluetoothDeviceManager mCachedDeviceManager;
@@ -94,25 +89,28 @@ public class HearingAidHelper {
 
     /**
      * Checks if {@link BluetoothProfile#HEARING_AID} or {@link BluetoothProfile#HAP_CLIENT}
-     * is supported by checking system properties.
+     * supported.
      */
     public boolean isHearingAidSupported() {
-        return SystemProperties.getBoolean(ASHA_PROFILE_CENTRAL_PROPERTY, false)
-                || SystemProperties.getBoolean(HAP_PROFILE_CLIENT_PROPERTY, false);
+        final List<Integer> supportedList = mBluetoothAdapter.getSupportedProfiles();
+        return supportedList.contains(BluetoothProfile.HEARING_AID)
+                || supportedList.contains(BluetoothProfile.HAP_CLIENT);
     }
 
     /**
-     * Checks if {@link BluetoothProfile#HEARING_AID} is supported by checking the system property.
+     * Checks if {@link BluetoothProfile#HEARING_AID} supported.
      */
     public boolean isAshaProfileSupported() {
-        return SystemProperties.getBoolean(ASHA_PROFILE_CENTRAL_PROPERTY, false);
+        final List<Integer> supportedList = mBluetoothAdapter.getSupportedProfiles();
+        return supportedList.contains(BluetoothProfile.HEARING_AID);
     }
 
     /**
-     * Checks if {@link BluetoothProfile#HAP_CLIENT} is supported by checking the system property.
+     * Checks if {@link BluetoothProfile#HAP_CLIENT} supported.
      */
     public boolean isHapClientProfileSupported() {
-        return SystemProperties.getBoolean(HAP_PROFILE_CLIENT_PROPERTY, false);
+        final List<Integer> supportedList = mBluetoothAdapter.getSupportedProfiles();
+        return supportedList.contains(BluetoothProfile.HAP_CLIENT);
     }
 
     /**

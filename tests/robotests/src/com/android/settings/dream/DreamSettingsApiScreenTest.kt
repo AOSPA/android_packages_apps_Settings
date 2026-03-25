@@ -124,11 +124,11 @@ class DreamSettingsApiScreenTest {
     ) {
         setDreamSettings(dock = testCase.dock, sleep = testCase.sleep, postured = testCase.postured)
 
-        val value = tester.get<Int>(
+        val value = tester.get<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
         )
 
-        assertThat(value).isEqualTo(testCase.expected.asApiValue)
+        assertThat(value).isEqualTo(testCase.expected)
     }
 
     enum class SetWhenToDreamTestCase(
@@ -163,7 +163,7 @@ class DreamSettingsApiScreenTest {
     ) {
         tester.set(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM,
-            testCase.value.asApiValue
+            testCase.value
         )
 
         val backend = DreamBackend.getInstance(context)
@@ -185,7 +185,7 @@ class DreamSettingsApiScreenTest {
         )
 
         assertFailsWith<FailedPreconditionException> {
-            tester.get<Int>(
+            tester.get<DreamSettingsApiScreen.WhenToDream>(
                 DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
             )
         }
@@ -214,18 +214,21 @@ class DreamSettingsApiScreenTest {
             false
         )
 
-        var options = runBlocking { tester.getPreferenceOptions<Int>(
+        var options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
         ).map { it.first } }
 
         assertThat(options).contains(
-            DreamSettingsApiScreen.WhenToDream.WHILE_CHARGING.asApiValue)
+            DreamSettingsApiScreen.WhenToDream.WHILE_CHARGING
+        )
         assertThat(options).contains(
-            DreamSettingsApiScreen.WhenToDream.WHILE_DOCKED.asApiValue)
+            DreamSettingsApiScreen.WhenToDream.WHILE_DOCKED
+        )
         assertThat(options).doesNotContain(
-            DreamSettingsApiScreen.WhenToDream.WHILE_POSTURED.asApiValue)
+            DreamSettingsApiScreen.WhenToDream.WHILE_POSTURED
+        )
         assertThat(options).contains(
-            DreamSettingsApiScreen.WhenToDream.NEVER.asApiValue
+            DreamSettingsApiScreen.WhenToDream.NEVER
         )
 
         // Case 2: Posturing supported
@@ -234,11 +237,11 @@ class DreamSettingsApiScreenTest {
             true
         )
 
-        options = runBlocking { tester.getPreferenceOptions<Int>(
+        options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
         ).map { it.first } }
 
-        assertThat(options).contains(DreamSettingsApiScreen.WhenToDream.WHILE_POSTURED.asApiValue)
+        assertThat(options).contains(DreamSettingsApiScreen.WhenToDream.WHILE_POSTURED)
     }
 
     @Test
@@ -255,11 +258,11 @@ class DreamSettingsApiScreenTest {
             arrayOf("never")
         )
 
-        var options = runBlocking { tester.getPreferenceOptions<Int>(
+        var options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
         ).map { it.first } }
 
-        assertThat(options).containsExactly(DreamSettingsApiScreen.WhenToDream.NEVER.asApiValue)
+        assertThat(options).containsExactly(DreamSettingsApiScreen.WhenToDream.NEVER)
 
         // Case 2: Allow "while_charging_only" and "never"
         SettingsShadowResources.overrideResource(
@@ -267,13 +270,13 @@ class DreamSettingsApiScreenTest {
             arrayOf("while_charging_only", "never")
         )
 
-        options = runBlocking { tester.getPreferenceOptions<Int>(
+        options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
         ).map { it.first } }
 
         assertThat(options).containsExactly(
-            DreamSettingsApiScreen.WhenToDream.WHILE_CHARGING.asApiValue,
-            DreamSettingsApiScreen.WhenToDream.NEVER.asApiValue
+            DreamSettingsApiScreen.WhenToDream.WHILE_CHARGING,
+            DreamSettingsApiScreen.WhenToDream.NEVER
         )
 
         // Case 3: Allow "while_docked_only" and "never"
@@ -282,13 +285,13 @@ class DreamSettingsApiScreenTest {
             arrayOf("while_docked_only", "never")
         )
 
-        options = runBlocking { tester.getPreferenceOptions<Int>(
+        options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
         ).map { it.first } }
 
         assertThat(options).containsExactly(
-            DreamSettingsApiScreen.WhenToDream.WHILE_DOCKED.asApiValue,
-            DreamSettingsApiScreen.WhenToDream.NEVER.asApiValue
+            DreamSettingsApiScreen.WhenToDream.WHILE_DOCKED,
+            DreamSettingsApiScreen.WhenToDream.NEVER
         )
     }
 
@@ -304,13 +307,13 @@ class DreamSettingsApiScreenTest {
             arrayOf("while_docked_only", "never")
         )
 
-        val options = runBlocking { tester.getPreferenceOptions<Int>(
+        val options = runBlocking { tester.getPreferenceOptions<DreamSettingsApiScreen.WhenToDream>(
             DreamSettingsApiScreen.PREF_KEY_WHEN_TO_DREAM
         ).map { it.first } }
 
         assertThat(options).containsExactly(
-            DreamSettingsApiScreen.WhenToDream.WHILE_DOCKED.asApiValue,
-            DreamSettingsApiScreen.WhenToDream.NEVER.asApiValue
+            DreamSettingsApiScreen.WhenToDream.WHILE_DOCKED,
+            DreamSettingsApiScreen.WhenToDream.NEVER
         )
     }
 

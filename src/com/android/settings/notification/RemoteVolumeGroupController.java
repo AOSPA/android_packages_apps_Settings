@@ -16,15 +16,12 @@
 
 package com.android.settings.notification;
 
-import static com.android.media.flags.Flags.fixOutputSwitcherMultiuserSupport;
-
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
-import android.os.UserHandle;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -228,12 +225,7 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
                         .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
                         .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
                                 info.getClientPackageName());
-                if (fixOutputSwitcherMultiuserSupport()) {
-                    intent.putExtra(MediaOutputConstants.EXTRA_USER_HANDLE, mContext.getUser());
-                    mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM);
-                } else {
-                    mContext.sendBroadcast(intent);
-                }
+                mContext.sendBroadcast(intent);
                 return true;
             }
         }

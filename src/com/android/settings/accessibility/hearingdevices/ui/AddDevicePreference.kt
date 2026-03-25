@@ -35,7 +35,6 @@ import com.android.settings.core.SubSettingLauncher
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -122,8 +121,6 @@ class AddDevicePreference(context: Context) :
     }
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)

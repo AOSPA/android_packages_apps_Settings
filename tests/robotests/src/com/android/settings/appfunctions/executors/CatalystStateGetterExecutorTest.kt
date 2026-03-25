@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.android.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,8 +18,6 @@ package com.android.settings.appfunctions.executors
 
 import android.app.Application
 import android.app.appsearch.GenericDocument
-import android.os.Build
-import android.provider.Settings
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.graph.PreferenceGetterResponse
@@ -44,7 +42,6 @@ import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import org.robolectric.util.ReflectionHelpers
 
 @RunWith(RobolectricTestRunner::class)
 @Config(shadows = [ShadowPreferenceServiceClient::class])
@@ -57,16 +54,6 @@ class CatalystStateGetterExecutorTest {
     fun setUp() {
         ShadowPreferenceServiceClient.reset()
         executor = CatalystStateGetterExecutor(context)
-
-        // Default to debuggable build for most tests
-        ReflectionHelpers.setStaticField(Build::class.java, "TYPE", "userdebug")
-
-        // Enable the flag for testing by default
-        Settings.Global.putInt(
-            context.contentResolver,
-            "com.android.settings.APP_FUNCTION_ITEM_GETTER_AVAILABLE",
-            1,
-        )
 
         val parameterizedSchema = KeyParametersSchema { parameter("pkg", 0, type = AnyString) }
         val mockParameterizedFactory =
@@ -185,43 +172,5 @@ class CatalystStateGetterExecutorTest {
                 }
             }
         assertThat(exception.message).isEqualTo("Key [invalid_key] not found")
-    }
-
-    @Test
-    fun execute_flagDisabled_returnsNullResult() = runTest {
-        Settings.Global.putInt(
-            context.contentResolver,
-            "com.android.settings.APP_FUNCTION_ITEM_GETTER_AVAILABLE",
-            0,
-        )
-        val innerDoc =
-            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
-                .setPropertyString("key", "unparameterized_screen/key")
-                .build()
-        val params =
-            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
-                .setPropertyDocument("getDeviceStateItemParams", innerDoc)
-                .build()
-
-        val result = executor.execute(DeviceStateAppFunctionType.GET_DEVICE_STATE, params)
-
-        assertThat(result.result).isNull()
-    }
-
-    @Test
-    fun execute_notDebuggable_returnsNullResult() = runTest {
-        ReflectionHelpers.setStaticField(Build::class.java, "TYPE", "user")
-        val innerDoc =
-            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
-                .setPropertyString("key", "unparameterized_screen/key")
-                .build()
-        val params =
-            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
-                .setPropertyDocument("getDeviceStateItemParams", innerDoc)
-                .build()
-
-        val result = executor.execute(DeviceStateAppFunctionType.GET_DEVICE_STATE, params)
-
-        assertThat(result.result).isNull()
     }
 }

@@ -23,7 +23,6 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DeviceUnlockApiScreen.KEY)
@@ -46,10 +45,7 @@ class DeviceUnlockApiScreen :
             ) {
                 Allowed
             } else {
-                Custom(
-                    R.string.device_unlock_subpage_screen_unavailable,
-                    stability = PreconditionStability.UNSTABLE,
-                )
+                Custom(R.string.device_unlock_subpage_screen_unavailable)
             }
         }
     }

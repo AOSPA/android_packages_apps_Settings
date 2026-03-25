@@ -17,15 +17,100 @@
 package com.android.settings.accessibility.screenmagnification.ui
 
 import android.app.settings.SettingsEnums
+import android.content.ComponentName
 import android.content.Context
+import android.os.Bundle
+import android.text.TextUtils
+import com.android.internal.accessibility.AccessibilityShortcutController
+import com.android.internal.accessibility.common.NotificationConstants.EXTRA_SOURCE
+import com.android.internal.accessibility.common.NotificationConstants.SOURCE_START_SURVEY
 import com.android.settings.R
+import com.android.settings.accessibility.FeedbackButtonPreferenceController
+import com.android.settings.accessibility.FeedbackManager
+import com.android.settings.accessibility.Flags
+import com.android.settings.accessibility.MagnificationSurveyButtonPreferenceController
+import com.android.settings.accessibility.SurveyManager
+import com.android.settings.accessibility.screenmagnification.CursorFollowingModePreferenceController
+import com.android.settings.accessibility.screenmagnification.ModePreferenceController
+import com.android.settings.accessibility.screenmagnification.ToggleMagnificationShortcutPreferenceController
 import com.android.settings.dashboard.DashboardFragment
+import com.android.settings.search.BaseSearchIndexProvider
+import com.android.settingslib.search.SearchIndexable
+import com.android.settingslib.widget.TopIntroPreference
 
 /** Displays the detail screen of the screen magnification feature */
+@SearchIndexable(forTarget = SearchIndexable.ALL and SearchIndexable.ARC.inv())
 open class MagnificationPreferenceFragment : DashboardFragment() {
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (Flags.catalystMagnification()) {
+            return
+        }
+
+        use(ModePreferenceController::class.java)?.setFragmentManager(getChildFragmentManager())
+        use(CursorFollowingModePreferenceController::class.java)
+            ?.setFragmentManager(getChildFragmentManager())
+        use(FeedbackButtonPreferenceController::class.java)
+            .initialize(FeedbackManager(context, metricsCategory))
+        initMagnificationSurvey(context)
+        getShortcutPreferenceController()?.apply {
+            initialize(
+                getFeatureComponentName(),
+                childFragmentManager,
+                getFeatureName(),
+                metricsCategory,
+            )
+        }
+    }
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        super.onCreatePreferences(savedInstanceState, rootKey)
+        if (Flags.catalystMagnification()) {
+            return
+        }
+        // By setting this visibility status before*managing the view, we can prevent a preference
+        // from being inflated if it's meant to be hidden.
+        configureTopIntroVisibility()
+    }
+
+    /** Show the magnification preference settings in the settings. */
+    protected open fun configureTopIntroVisibility() {
+        findPreference<TopIntroPreference?>(MagnificationTopIntroPreference.KEY)?.isVisible = true
+    }
+
+    fun getShortcutPreferenceController(): ToggleMagnificationShortcutPreferenceController? {
+        return if (Flags.catalystMagnification()) {
+            null
+        } else {
+            use(ToggleMagnificationShortcutPreferenceController::class.java)
+        }
+    }
+
+    private fun initMagnificationSurvey(context: Context) {
+        val surveyManager = SurveyManager(this, context, MAGNIFICATION_SURVEY_KEY, metricsCategory)
+        val intent = getIntent()
+        if (
+            intent != null &&
+                intent.getStringExtra(EXTRA_SOURCE) != null &&
+                TextUtils.equals(intent.getStringExtra(EXTRA_SOURCE), SOURCE_START_SURVEY)
+        ) {
+            surveyManager.startSurvey()
+        } else {
+            use(MagnificationSurveyButtonPreferenceController::class.java).initialize(surveyManager)
+        }
+    }
+
+    private fun getFeatureName(): CharSequence {
+        return getText(R.string.accessibility_screen_magnification_title)
+    }
+
+    private fun getFeatureComponentName(): ComponentName {
+        return AccessibilityShortcutController.MAGNIFICATION_COMPONENT_NAME
+    }
+
     override fun getPreferenceScreenResId(): Int {
-        return 0
+        return R.xml.accessibility_magnification_screen
     }
 
     override fun getLogTag(): String? = TAG
@@ -43,5 +128,10 @@ open class MagnificationPreferenceFragment : DashboardFragment() {
     companion object {
         private val TAG = MagnificationPreferenceFragment::class.simpleName
         const val MAGNIFICATION_SURVEY_KEY: String = "A11yMagnificationUser"
+        @JvmField
+        val SEARCH_INDEX_DATA_PROVIDER: BaseSearchIndexProvider =
+            BaseSearchIndexProvider(
+                if (Flags.catalystMagnification()) 0 else R.xml.accessibility_magnification_screen
+            )
     }
 }

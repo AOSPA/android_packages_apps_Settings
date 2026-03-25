@@ -23,7 +23,7 @@ import static android.media.AudioSystem.DEVICE_OUT_EARPIECE;
 import static android.media.AudioSystem.DEVICE_OUT_HEARING_AID;
 
 import static com.android.settingslib.flags.Flags.FLAG_ENABLE_LE_AUDIO_SHARING;
-import static com.android.media.flags.Flags.FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT;
+import static com.android.settingslib.media.flags.Flags.FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -49,11 +49,8 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.VolumeProvider;
 import android.media.session.MediaController;
-import android.media.session.MediaSession;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
-import android.os.UserHandle;
-import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 
@@ -122,6 +119,7 @@ public class MediaOutputPreferenceControllerTest {
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Mock
     private PackageManager mPackageManager;
     @Mock
@@ -364,7 +362,22 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_noActiveLocalPlayback_noTitle() {
+        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        mPlaybackState = new PlaybackState.Builder()
+                .setState(PlaybackState.STATE_NONE, 0, 1)
+                .build();
+        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle()).isNull();
+    }
+
+    @Test
     public void updateState_noActiveLocalPlayback_checkTitle() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         mPlaybackState = new PlaybackState.Builder()
                 .setState(PlaybackState.STATE_NONE, 0, 1)
                 .build();
@@ -380,7 +393,19 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
+    public void updateState_withNullMediaController_noTitle() {
+        mSetFlagsRule.disableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
+        mMediaControllers.clear();
+        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
+
+        mController.updateState(mPreference);
+
+        assertThat(mPreference.getTitle()).isNull();
+    }
+
+    @Test
     public void updateState_withNullMediaController_checkTitle() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         mMediaControllers.clear();
         mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
         mController.displayPreference(mScreen);
@@ -404,8 +429,7 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
-    @DisableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
-    public void handlePreferenceTreeClick_activeLocalMediaSession_launchesOutputSwitcher() {
+    public void click_launch_outputSwitcherSlice() {
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         mController.handlePreferenceTreeClick(mPreference);
         verify(mContext, never()).startActivity(intentCaptor.capture());
@@ -418,34 +442,8 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
-    public void handlePreferenceTreeClick_activeLocalMediaSession_muFlag_launchesOutputSwitcher() {
-        var mediaSessionUid = 15;
-        var mediaSessionToken = new MediaSession.Token(mediaSessionUid, null);
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        final ArgumentCaptor<UserHandle> targetUserCaptor = ArgumentCaptor.forClass(
-                UserHandle.class);
-        mController.handlePreferenceTreeClick(mPreference);
-        verify(mContext, never()).startActivity(intentCaptor.capture());
-        when(mMediaController.getSessionToken()).thenReturn(mediaSessionToken);
-        mPreference.setKey(TEST_KEY);
-
-        mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mContext).sendBroadcastAsUser(intentCaptor.capture(), targetUserCaptor.capture());
-        var intent = intentCaptor.getValue();
-        assertThat(intent.getAction()).isEqualTo(
-                MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
-        assertThat(intent.getParcelableExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
-                UserHandle.class)).isEqualTo(UserHandle.getUserHandleForUid(mediaSessionUid));
-        assertThat(intent.getParcelableExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
-                MediaSession.Token.class)).isEqualTo(mediaSessionToken);
-        assertThat(targetUserCaptor.getValue()).isEqualTo(UserHandle.SYSTEM);
-    }
-
-    @Test
-    @DisableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
-    public void handlePreferenceTreeClick_noLocalPlayback_launchesSystemOutputSwitcher() {
+    public void handlePreferenceTreeClick_WithNoLocalPlaybackFlagEnabled_verifyIntentExtra() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         mPlaybackState = new PlaybackState.Builder()
                 .setState(PlaybackState.STATE_NONE, 0, 1)
@@ -462,32 +460,8 @@ public class MediaOutputPreferenceControllerTest {
     }
 
     @Test
-    @EnableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
-    public void handlePreferenceTreeClick_noLocalPlayback_muFlag_launchesSystemOutputSwitcher() {
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        final ArgumentCaptor<UserHandle> targetUserCaptor = ArgumentCaptor.forClass(
-                UserHandle.class);
-        mPlaybackState = new PlaybackState.Builder()
-                .setState(PlaybackState.STATE_NONE, 0, 1)
-                .build();
-        when(mMediaController.getPlaybackState()).thenReturn(mPlaybackState);
-        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
-        mPreference.setKey(TEST_KEY);
-
-        mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mContext).sendBroadcastAsUser(intentCaptor.capture(), targetUserCaptor.capture());
-        var intent = intentCaptor.getValue();
-        assertThat(intent.getAction()).isEqualTo(
-                MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
-        assertThat(intent.getParcelableExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
-                UserHandle.class)).isEqualTo(mContext.getUser());
-        assertThat(targetUserCaptor.getValue()).isEqualTo(UserHandle.SYSTEM);
-    }
-
-    @Test
-    @DisableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
-    public void handlePreferenceTreeClick_nullController_launchesSystemOutputSwitcher() {
+    public void handlePreferenceTreeClick_WithNullControllerFlagEnabled_verifyIntentExtra() {
+        mSetFlagsRule.enableFlags(FLAG_ENABLE_OUTPUT_SWITCHER_FOR_SYSTEM_ROUTING);
         final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
         mMediaControllers.clear();
         mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
@@ -498,27 +472,6 @@ public class MediaOutputPreferenceControllerTest {
         verify(mContext).sendBroadcast(intentCaptor.capture());
         assertThat(intentCaptor.getValue().getAction())
                 .isEqualTo(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
-    }
-
-    @Test
-    @EnableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
-    public void handlePreferenceTreeClick_nullController_muFlag_launchesSystemOutputSwitcher() {
-        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
-        final ArgumentCaptor<UserHandle> targetUserCaptor = ArgumentCaptor.forClass(
-                UserHandle.class);
-        mMediaControllers.clear();
-        mController = new MediaOutputPreferenceController(mContext, TEST_KEY);
-        mPreference.setKey(TEST_KEY);
-
-        mController.handlePreferenceTreeClick(mPreference);
-
-        verify(mContext).sendBroadcastAsUser(intentCaptor.capture(), targetUserCaptor.capture());
-        var intent = intentCaptor.getValue();
-        assertThat(intent.getAction()).isEqualTo(
-                MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG);
-        assertThat(intent.getParcelableExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
-                UserHandle.class)).isEqualTo(mContext.getUser());
-        assertThat(targetUserCaptor.getValue()).isEqualTo(UserHandle.SYSTEM);
     }
 
     /**

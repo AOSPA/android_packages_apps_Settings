@@ -23,7 +23,6 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(GestureSettingsApiScreen.KEY)
@@ -40,10 +39,7 @@ class GestureSettingsApiScreen :
             if (GesturesSettingPreferenceController.isSpecificControllersAvailable(context, null)) {
                 Allowed
             } else {
-                Custom(
-                    R.string.gesture_settings_screen_all_controllers_not_available,
-                    stability = PreconditionStability.UNSTABLE,
-                )
+                Custom(R.string.gesture_settings_screen_all_controllers_not_available)
             }
         }
     }

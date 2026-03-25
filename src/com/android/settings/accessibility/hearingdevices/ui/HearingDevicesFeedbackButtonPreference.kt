@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility.hearingdevices.ui
 
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.app.settings.SettingsEnums
 import android.content.Context
 import com.android.settings.accessibility.FeedbackManager
@@ -37,8 +36,6 @@ class HearingDevicesFeedbackButtonPreference(feedbackManagerProvider: () -> Feed
     FeedbackButtonPreference(feedbackManagerProvider) {
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 

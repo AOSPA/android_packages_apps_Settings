@@ -28,6 +28,7 @@ import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsThemeHelper
 
+// LINT.IfChange
 internal class MagnificationIllustrationPreference : PreferenceMetadata, PreferenceBinding {
 
     override val key: String
@@ -81,3 +82,4 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
         const val KEY = "animated_image"
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/MagnificationIllustrationPreferenceController.kt)

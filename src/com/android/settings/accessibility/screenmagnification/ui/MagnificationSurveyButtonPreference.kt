@@ -16,7 +16,6 @@
 
 package com.android.settings.accessibility.screenmagnification.ui
 
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.content.Context
 import androidx.annotation.VisibleForTesting
 import com.android.internal.accessibility.AccessibilityShortcutController
@@ -38,8 +37,6 @@ class MagnificationSurveyButtonPreference(metricsCategory: Int = METRICS_CATEGOR
         get() = SURVEY_KEY
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 

@@ -1360,16 +1360,16 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="true"/>
         </activity>
 
-        <activity android:name="Settings$AvailableKeyboardAppsActivity"
+        <activity android:name="Settings$AvailableVirtualKeyboardActivity"
             android:exported="true"
-            android:label="@string/available_keyboard_apps_category">
+            android:label="@string/available_virtual_keyboard_category">
             <intent-filter android:priority="1">
                 <action android:name="android.settings.INPUT_METHOD_SETTINGS" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.inputmethod.AvailableKeyboardAppsFragment" />
+                android:value="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_system"/>
         </activity>

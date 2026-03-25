@@ -272,28 +272,6 @@ public class CreateShortcutPreferenceControllerTest {
         assertThat(mController.canShowDataUsage()).isFalse();
     }
 
-    @Test
-    public void canShowNightDisplay_available_returnTrue() {
-        when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getBoolean(
-                com.android.internal.R.bool.config_nightDisplayAvailable)).thenReturn(true);
-        when(mResources.getBoolean(
-                com.android.internal.R.bool.config_cv_available)).thenReturn(false);
-
-        assertThat(mController.canShowNightDisplay()).isTrue();
-    }
-
-    @Test
-    public void canShowNightDisplay_unavailable_returnFalse() {
-        when(mContext.getResources()).thenReturn(mResources);
-        when(mResources.getBoolean(
-                com.android.internal.R.bool.config_nightDisplayAvailable)).thenReturn(true);
-        when(mResources.getBoolean(
-                com.android.internal.R.bool.config_cv_available)).thenReturn(true);
-
-        assertThat(mController.canShowNightDisplay()).isFalse();
-    }
-
     private void setupActivityInfo(String name) {
         ResolveInfo ri = new ResolveInfo();
         ri.activityInfo = new ActivityInfo();

@@ -74,6 +74,7 @@ open class ActionTimeoutSettingsScreen(context: Context) :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +ActionTimeoutSettingsScreenPreference(this@ActionTimeoutSettingsScreen)
             +ActionTimeoutIntroPreference()
             +ActionTimeoutIllustrationPreference()
             DISCRETE_TIMEOUT_OPTIONS.keys.sorted().forEach { timeoutOption ->
@@ -117,6 +118,25 @@ open class ActionTimeoutSettingsScreen(context: Context) :
             timeoutOptionDataStore.removeObserver(bindingKey, it)
             keyedObserver = null
         }
+    }
+
+    class ActionTimeoutSettingsScreenPreference(
+        private val screenMetadata : ActionTimeoutSettingsScreen
+    ) : PreferenceMetadata, PreferenceSummaryProvider {
+
+        override val key : String
+            get() = "accessibility_control_timeout_preference_fragment_preference"
+
+        override val purpose : Int
+            get() = screenMetadata.purpose
+
+        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val indexable = false
+
+        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
+
+        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
     }
 
     companion object {

@@ -31,7 +31,6 @@ import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.service.dreams.Flags;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.ViewCompat;
@@ -474,57 +473,19 @@ public class DreamPickerControllerTest {
     }
 
     @Test
-    @EnableFlags({Flags.FLAG_DREAMS_SWITCHER, Flags.FLAG_DREAMS_V2})
-    public void onBindView_customizeButton_setsCorrectAccessibilityInfo() {
-        // Setup
-        final DreamInfo dream = createDreamInfo("dream1", true, 0);
-        dream.settingsComponentName = new ComponentName("pkg", "cls");
-        final View itemView = setUpSingleDreamCard(dream);
-        final Button customizeButton = itemView.findViewById(R.id.customize_button_new);
-
-        final AccessibilityDelegateCompat delegate =
-                ViewCompat.getAccessibilityDelegate(customizeButton);
-        final AccessibilityNodeInfoCompat info = AccessibilityNodeInfoCompat.obtain();
-        info.setSelected(true);
-
-        // Verify
-        delegate.onInitializeAccessibilityNodeInfo(customizeButton, info);
-        assertThat(info.isSelected()).isFalse();
-    }
-
-    @Test
-    @EnableFlags({Flags.FLAG_DREAMS_SWITCHER, Flags.FLAG_DREAMS_V2})
-    public void onBindView_previewButton_setsCorrectContentDescription() {
-        // Setup
-        final DreamInfo dream = createDreamInfo("dream1", true, 0);
-        final View itemView = setUpSingleDreamCard(dream);
-        final View previewButton = itemView.findViewById(R.id.preview_button);
-
-        // Verify
-        assertThat(previewButton.getContentDescription().toString()).isEqualTo(
-                mContext.getString(R.string.dream_preview_button_description, dream.caption));
-    }
-
-    @Test
-    @EnableFlags({Flags.FLAG_DREAMS_SWITCHER, Flags.FLAG_DREAMS_V2})
-    public void onBindView_customizeButton_setsCorrectContentDescription() {
-        // Setup
-        final DreamInfo dream = createDreamInfo("dream1", true, 0);
-        dream.settingsComponentName = new ComponentName("pkg", "cls");
-        final View itemView = setUpSingleDreamCard(dream);
-        final Button customizeButton = itemView.findViewById(R.id.customize_button_new);
-
-        // Verify
-        assertThat(customizeButton.getContentDescription().toString()).isEqualTo(
-                mContext.getString(R.string.customize_button_description, dream.caption));
-    }
-
-    @Test
     @EnableFlags(Flags.FLAG_DREAMS_SWITCHER)
     public void onBindView_setsCorrectAccessibilityInfo(@TestParameter boolean isActive) {
         // Setup
         final DreamInfo dream = createDreamInfo("dream1", isActive, isActive ? 0 : -1);
-        final View itemView = setUpSingleDreamCard(dream);
+        when(mBackend.isDreamSwitcherEnabled()).thenReturn(true);
+        when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(List.of(dream)));
+        final DreamPickerController controller = buildController();
+        controller.updateState(mPreference);
+        final RecyclerView recyclerView = mPreference.findViewById(R.id.dream_list);
+        recyclerView.measure(0, 0);
+        recyclerView.layout(0, 0, 100, 1000);
+        final View itemView =
+                recyclerView.findViewHolderForAdapterPosition(0).itemView;
         final AccessibilityDelegateCompat delegate =
                 ViewCompat.getAccessibilityDelegate(itemView);
         final AccessibilityNodeInfoCompat info = AccessibilityNodeInfoCompat.obtain();
@@ -545,17 +506,6 @@ public class DreamPickerControllerTest {
         dreamInfo.icon = mock(Drawable.class);
         when(dreamInfo.icon.mutate()).thenReturn(dreamInfo.icon);
         return dreamInfo;
-    }
-
-    private View setUpSingleDreamCard(DreamInfo dream) {
-        when(mBackend.isDreamSwitcherEnabled()).thenReturn(true);
-        when(mBackend.getDreamInfos()).thenReturn(new ArrayList<>(List.of(dream)));
-        final DreamPickerController controller = buildController();
-        controller.updateState(mPreference);
-        final RecyclerView recyclerView = mPreference.findViewById(R.id.dream_list);
-        recyclerView.measure(0, 0);
-        recyclerView.layout(0, 0, 100, 1000);
-        return recyclerView.findViewHolderForAdapterPosition(0).itemView;
     }
 
     // ===========================================================================================

@@ -19,6 +19,10 @@ package com.android.settings.accessibility.screenmagnification.ui
 import android.app.settings.SettingsEnums
 import android.content.ComponentName
 import android.content.Intent
+import android.platform.test.annotations.RequiresFlagsDisabled
+import android.platform.test.flag.junit.CheckFlagsRule
+import android.platform.test.flag.junit.DeviceFlagsValueProvider
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import android.view.InputDevice
 import android.view.View
@@ -30,6 +34,7 @@ import androidx.preference.Preference
 import com.android.internal.accessibility.AccessibilityShortcutController
 import com.android.settings.R
 import com.android.settings.accessibility.BaseShortcutInteractionsTestCases
+import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.MagnificationCapabilities
 import com.android.settings.accessibility.MagnificationCapabilities.MagnificationMode
 import com.android.settings.accessibility.ShortcutPreference
@@ -43,6 +48,7 @@ import com.android.settings.testutils.shadow.ShadowInputDevice
 import com.android.settingslib.widget.preference.footer.R as FooterPrefR
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -53,6 +59,8 @@ import org.robolectric.shadows.ShadowLooper
 @RunWith(RobolectricTestRunner::class)
 class MagnificationPreferenceFragmentTest :
     BaseShortcutInteractionsTestCases<MagnificationPreferenceFragment>() {
+    @get:Rule val checkFlagsRule: CheckFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
     private var fragScenario: FragmentScenario<MagnificationPreferenceFragment>? = null
     private var fragment: MagnificationPreferenceFragment? = null
 
@@ -138,6 +146,18 @@ class MagnificationPreferenceFragmentTest :
 
             assertThat(isLearnMoreTextVisible(fragment!!)).isFalse()
         }
+    }
+
+    @RequiresFlagsDisabled(Flags.FLAG_CATALYST_MAGNIFICATION)
+    @Test
+    fun getSearchIndexDataProvider_verifyXmlResourcesToIndex() {
+        val searchIndexableResource =
+            MagnificationPreferenceFragment.SEARCH_INDEX_DATA_PROVIDER.getXmlResourcesToIndex(
+                context,
+                /* enabled= */ true,
+            )
+        assertThat(searchIndexableResource.first().xmlResId)
+            .isEqualTo(R.xml.accessibility_magnification_screen)
     }
 
     override fun getShortcutToggle(): ShortcutPreference? {

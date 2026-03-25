@@ -53,7 +53,7 @@ public class TripleTapShortcutOptionController extends ShortcutOptionPreferenceC
             shortcutOptionPreference.setTitle(
                     R.string.accessibility_shortcut_edit_screen_title_triple_tap);
             String summary = mContext.getString(
-                    R.string.accessibility_shortcut_edit_screen_summary_triple_tap);
+                    R.string.accessibility_shortcut_edit_screen_summary_triple_tap, 3);
 
             shortcutOptionPreference.setSummary(summary);
             shortcutOptionPreference.setIntroImageRawResId(

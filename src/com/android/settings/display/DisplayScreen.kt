@@ -30,7 +30,6 @@ import com.android.settings.flags.Flags
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceCategory as Category
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -118,8 +117,6 @@ open class DisplayScreen :
 
     override val availabilityDescription =
         "The device must support showing the top level display preference."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_top_level_display)

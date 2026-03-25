@@ -20,10 +20,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.telephony.SubscriptionManager
 import com.android.settings.R
-import com.android.settingslib.datastore.KeyValueStore
-import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
@@ -33,7 +30,6 @@ import com.android.settingslib.preference.PreferenceBindingPlaceholder
 /** Show primary sms' preference in dual active SIMs. */
 @SuppressLint("MissingPermission")
 class SimSmsPreference :
-    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceBindingPlaceholder,
@@ -55,20 +51,12 @@ class SimSmsPreference :
     override val availabilityDescription =
         "The device must have more than one active subscription available."
 
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
-
     override fun isAvailable(context: Context): Boolean {
         return context
             .getSystemService(SubscriptionManager::class.java)
             .activeSubscriptionIdList
             .size > 1
     }
-
-    override val supportsWrite = false
-
-    override val valueType = String::class.javaObjectType
-
-    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? {
         val subInfo =

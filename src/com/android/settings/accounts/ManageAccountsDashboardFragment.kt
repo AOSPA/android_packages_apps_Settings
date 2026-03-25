@@ -96,19 +96,8 @@ class ManageAccountsDashboardFragment : DashboardFragment() {
         return controllers
     }
 
-    private fun getProfileType(): Int {
-        // If we're running as a profile user, return profile type based on the current user.
-        (context?.getSystemService(Context.USER_SERVICE) as UserManager)?.let { userManager ->
-            if (userManager.isManagedProfile()) {
-                return WORK
-            }
-            if (userManager.isPrivateProfile) {
-                return PRIVATE
-            }
-        }
-
-        // Otherise, infer from the fragment args.
-        return arguments?.getString(FRAGMENT_ARGS_KEY)?.let {
+    private fun getProfileType(): Int =
+        arguments?.getString(FRAGMENT_ARGS_KEY)?.let {
             // If FRAGMENT_ARGS_KEY is set, we're launched from search results.
             when (it) {
                 AUTO_SYNC_WORK_ACCOUNT -> WORK
@@ -116,7 +105,6 @@ class ManageAccountsDashboardFragment : DashboardFragment() {
                 else -> PERSONAL
             }
         } ?: (arguments?.getInt(EXTRA_PROFILE, PERSONAL) ?: PERSONAL)
-    }
 
     companion object {
         private const val FRAGMENT_ARGS_KEY = ":settings:fragment_args_key"

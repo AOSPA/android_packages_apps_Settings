@@ -27,6 +27,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.android.server.accessibility.Flags
 import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
+import com.android.settings.accessibility.screenmagnification.OneFingerPanningPreferenceController
 import com.android.settings.testutils.inflateViewHolder
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settings.testutils.shadow.ShadowInputDevice
@@ -272,7 +273,7 @@ class MagnificationFooterPreferenceTest {
     private fun setOneFingerPanningEnabled(enabled: Boolean) {
         Settings.Secure.putInt(
             context.contentResolver,
-            OneFingerPanningSwitchPreference.KEY,
+            OneFingerPanningPreferenceController.SETTING_KEY,
             if (enabled) AccessibilityUtil.State.ON else AccessibilityUtil.State.OFF,
         )
     }

@@ -27,7 +27,6 @@ import com.android.settings.applications.CatalystAppListFragment
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
@@ -80,8 +79,6 @@ open class DisplayOverOtherAppsAppListScreen :
 
     override val availabilityDescription =
         "This must not be a low ram device OR Android must be version P or below."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = isSystemAlertWindowEnabled(context)
 }

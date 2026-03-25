@@ -32,7 +32,6 @@ import androidx.annotation.Nullable;
 import com.android.internal.util.ArrayUtils;
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoController;
-import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoDialog;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
 import com.android.settings.fuelgauge.batteryusage.BatteryEvent;
 import com.android.settings.fuelgauge.batteryusage.DataProcessor;
@@ -180,12 +179,6 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
 
     @Override
     public String getOldEstimateDebugString(String timeRemaining) {
-        return null;
-    }
-
-    @Override
-    @Nullable
-    public BatteryAdvanceInfoDialog getBatteryAdvanceInfoDialog() {
         return null;
     }
 

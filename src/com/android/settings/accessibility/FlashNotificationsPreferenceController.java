@@ -22,7 +22,6 @@ import android.util.FeatureFlagUtils;
 import com.android.settings.R;
 import com.android.settings.accessibility.FlashNotificationsUtil.State;
 import com.android.settings.core.BasePreferenceController;
-import com.android.settingslib.utils.ThreadUtils;
 
 /**
  * Controller for flash notifications.
@@ -38,18 +37,6 @@ public class FlashNotificationsPreferenceController extends BasePreferenceContro
         boolean isFeatureOn = FeatureFlagUtils.isEnabled(mContext,
                 FeatureFlagUtils.SETTINGS_FLASH_NOTIFICATIONS);
         return isFeatureOn ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
-    }
-
-    @Override
-    public void updateState(androidx.preference.Preference preference) {
-        ThreadUtils.postOnBackgroundThread(() -> {
-            final CharSequence summary = getSummary();
-            mContext.getMainExecutor().execute(() -> {
-                if (preference != null) {
-                    preference.setSummary(summary);
-                }
-            });
-        });
     }
 
     @Override

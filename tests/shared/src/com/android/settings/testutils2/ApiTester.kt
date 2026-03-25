@@ -28,6 +28,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.ApiPrecondi
 import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseRestriction
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
+import com.android.settingslib.metadata.preferencesapi.preconditions.MissingPermission
 import com.android.settingslib.metadata.preferencesapi.preconditions.RegionalRestriction
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import kotlinx.coroutines.flow.toList
@@ -196,6 +197,8 @@ class ApiTester(
             throw HardwareUnsupportedException(result.getReason(context))
         } else if (result is InvalidPreference) {
             throw InvalidPreferenceException(result.getReason(context))
+        } else if (result is MissingPermission) {
+            throw MissingPermissionException(result.getReason(context))
         } else if (result is RegionalRestriction) {
             throw RegionalRestrictionException(result.getReason(context))
         }

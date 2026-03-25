@@ -25,12 +25,9 @@ import com.android.settings.R
 import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.extensions.isPowerSaveMode
 import com.android.settingslib.datastore.HandlerExecutor
-import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
-import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -98,8 +95,6 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
     }
 
     override val availabilityDescription = "The device must be configured for scheduled dark mode."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         uiModeManager.nightMode == UiModeManager.MODE_NIGHT_CUSTOM &&

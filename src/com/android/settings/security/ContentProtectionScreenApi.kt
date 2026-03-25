@@ -36,9 +36,7 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.multiusers.PreferenceTarget
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
-import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseRestriction
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ContentProtectionScreenApi.KEY)
@@ -55,7 +53,7 @@ class ContentProtectionScreenApi :
             if (ContentProtectionPreferenceUtils.isAvailable(context)) {
                 Allowed
             } else {
-                Custom(R.string.content_protection_unsupported, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
+                Custom(R.string.content_protection_unsupported)
             }
         }
 
@@ -72,7 +70,7 @@ class ContentProtectionScreenApi :
                 } else {
                     // For non-primary user, it is impossible to identify the Preference state,
                     // as it may depend on the work profile policy of the primary user.
-                    Custom(R.string.content_protection_switch_unsupported, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
+                    Custom(R.string.content_protection_switch_unsupported)
                 }
             }
             get {
@@ -104,7 +102,7 @@ class ContentProtectionScreenApi :
                                 managedProfile = getManagedProfile(context),
                             )
                     ) {
-                        EnterpriseRestriction(R.string.content_protection_switch_set_controlled_by_device_admin)
+                        Custom(R.string.content_protection_switch_set_controlled_by_device_admin)
                     } else {
                         Allowed
                     }

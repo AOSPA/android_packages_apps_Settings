@@ -34,12 +34,10 @@ import com.android.settings.network.telephony.MobileNetworkScreen
 import com.android.settings.network.telephony.subscriptionManager
 import com.android.settings.utils.getSubId
 import com.android.settings.utils.makeLaunchIntent
-import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
-import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -138,15 +136,12 @@ private constructor(
 
     class DataUsageListScreenPreference(
         private val screenMetadata : DataUsageListScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PersistentPreference<String> {
+    ) : PreferenceMetadata, PreferenceSummaryProvider {
         override val key : String
             get() = "data_usage_summary_preference"
         override val purpose : Int
             get() = screenMetadata.purpose
-        override val supportsWrite: Boolean
-            get() = false
-        override val valueType = String::class.javaObjectType
-        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
+
         override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
         override val indexable = false
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)

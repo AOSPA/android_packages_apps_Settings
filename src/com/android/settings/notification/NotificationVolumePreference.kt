@@ -46,7 +46,6 @@ import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -80,15 +79,9 @@ class NotificationVolumePreference(private val audioHelper: AudioHelper) :
 
     override val availabilityDescription = "The device must support configuring notification volume and must support separate volume controls."
 
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
-
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_notification_volume) &&
             !audioHelper.isSingleVolume
-
-    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator, and the ringer mode must be set to normal."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) =
         super<PreferenceRestrictionMixin>.isEnabled(context) &&

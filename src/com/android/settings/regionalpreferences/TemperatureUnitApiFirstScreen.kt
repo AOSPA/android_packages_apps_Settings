@@ -16,15 +16,13 @@
 
 package com.android.settings.regionalpreferences
 
-import androidx.core.text.util.LocalePreferences
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
-import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
-import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithString
+import com.android.settingslib.metadata.preferencesapi.types.AnyString
 
 // LINT.IfChange
 @ProvidePreferenceScreen(TemperatureUnitApiFirstScreen.KEY)
@@ -42,44 +40,44 @@ class TemperatureUnitApiFirstScreen :
         preference(
             key = KEY_TEMPERATURE_UNIT,
             purpose = R.string.regional_preference_temperature_unit_preference_purpose,
-            type = CustomEnum(TemperatureUnitOptions::class, "Temperature unit"),
+            type = AnyString,
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
 
             get {
                 execute {
-                    val value =
+                    // Use the converter to convert the data to a human-readable value,
+                    // for example: "Use default", "Celsius" and "Fahrenheit"
+                    RegionalPreferencesDataUtils.temperatureUnitsConverter(
+                        context,
                         RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
                             context,
                             ExtensionTypes.TEMPERATURE_UNIT,
-                        )
-                    if (value == null) {
-                        TemperatureUnitOptions.DEFAULT
-                    } else {
-                        TemperatureUnitOptions.values().firstOrNull { it.asApiValue == value }
-                            ?: error("Unknown temperature unit: $value")
-                    }
+                        ),
+                    )
                 }
             }
             set {
                 execute { value ->
-                    RegionalPreferencesDataUtils.savePreference(
-                        context,
-                        ExtensionTypes.TEMPERATURE_UNIT,
-                        value.takeIf { it != TemperatureUnitOptions.DEFAULT }?.asApiValue,
-                    )
+                    val unitValues = context.resources.getStringArray(R.array.temperature_units)
+                    for (item in unitValues) {
+                        // If the human-readable value contains the input,
+                        // 1. the human-readable value is Fahrenheit and the input is fahrenhe
+                        // 2. the human-readable value is Use default and the input is default
+                        if (
+                            RegionalPreferencesDataUtils.temperatureUnitsConverter(context, item)
+                                .contains(value, ignoreCase = true)
+                        ) {
+                            RegionalPreferencesDataUtils.savePreference(
+                                context, ExtensionTypes.TEMPERATURE_UNIT,
+                                item.takeIf { it != RegionalPreferencesDataUtils.DEFAULT_VALUE }
+                            )
+                            break
+                        }
+                    }
                 }
             }
         }
-    }
-
-    enum class TemperatureUnitOptions(
-        override val asApiValue: String,
-        override val purpose: String,
-    ) : EnumApiWithString<String> {
-        DEFAULT(RegionalPreferencesDataUtils.DEFAULT_VALUE, "Default"),
-        CELSIUS(LocalePreferences.TemperatureUnit.CELSIUS, "Celsius"),
-        FAHRENHEIT(LocalePreferences.TemperatureUnit.FAHRENHEIT, "Fahrenheit"),
     }
 
     companion object {

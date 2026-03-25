@@ -55,7 +55,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -110,12 +109,10 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
     static final String ERASE_ESIMS_EXTRA = "erase_esim";
 
-    @VisibleForTesting
-    View mContentView;
+    private View mContentView;
     @VisibleForTesting
     FooterButton mInitiateButton;
-    @VisibleForTesting
-    View mExternalStorageContainer;
+    private View mExternalStorageContainer;
     @VisibleForTesting
     CheckBox mExternalStorage;
     @VisibleForTesting
@@ -124,16 +121,11 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     CheckBox mEsimStorage;
     @VisibleForTesting
     ScrollView mScrollView;
-    private boolean mHasReachedBottom;
-    private boolean mIsListenerAdded;
 
     @Override
     public void onGlobalLayout() {
-        mHasReachedBottom = hasReachedBottom(mScrollView);
-        mInitiateButton.setEnabled(mHasReachedBottom);
+        mInitiateButton.setEnabled(hasReachedBottom(mScrollView));
     }
-
-    // onSaveInstanceState removed to reset state on rotation as requested
 
     private void setUpActionBarAndTitle() {
         final Activity activity = getActivity();
@@ -343,7 +335,6 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
      */
     @VisibleForTesting
     void establishInitialState() {
-        mHasReachedBottom = false;
         setUpActionBarAndTitle();
         setUpInitiateButton();
 
@@ -352,10 +343,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
         mEsimStorage = mContentView.findViewById(R.id.erase_esim);
         if (mScrollView != null) {
-            ViewTreeObserver observer = mScrollView.getViewTreeObserver();
-            if (observer != null) {
-                observer.removeOnGlobalLayoutListener(this);
-            }
+            mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
         }
         mScrollView = mContentView.findViewById(
                 com.google.android.setupdesign.R.id.sud_scroll_view);
@@ -410,9 +398,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         }
 
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        if (um != null) {
-            loadAccountList(um);
-        }
+        loadAccountList(um);
         final StringBuffer contentDescription = new StringBuffer();
         final View mainClearContainer = mContentView.findViewById(R.id.main_clear_container);
         getContentDescription(mainClearContainer, contentDescription);
@@ -423,10 +409,9 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX,
                     int oldScrollY) {
-                if (v instanceof ScrollView && (mHasReachedBottom || hasReachedBottom(
-                        (ScrollView) v))) {
-                    mHasReachedBottom = true;
+                if (v instanceof ScrollView && hasReachedBottom((ScrollView) v)) {
                     mInitiateButton.setEnabled(true);
+                    mScrollView.setOnScrollChangeListener(null);
                 }
             }
         });
@@ -450,13 +435,6 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                     mInitiateButton.setEnabled(true);
                 }
             });
-        }
-        if (!mIsListenerAdded) {
-            ViewTreeObserver observer = mScrollView.getViewTreeObserver();
-            if (observer != null) {
-                observer.addOnGlobalLayoutListener(this);
-                mIsListenerAdded = true;
-            }
         }
     }
 
@@ -500,11 +478,8 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
     @VisibleForTesting
     boolean hasReachedBottom(final ScrollView scrollView) {
-        if (mHasReachedBottom) {
+        if (scrollView.getChildCount() < 1) {
             return true;
-        }
-        if (scrollView == null || scrollView.getChildCount() < 1 || scrollView.getHeight() <= 0) {
-            return false;
         }
 
         final View view = scrollView.getChildAt(0);
@@ -513,8 +488,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         return diff <= 0;
     }
 
-    @VisibleForTesting
-    void setUpInitiateButton() {
+    private void setUpInitiateButton() {
         if (mInitiateButton != null) {
             return;
         }
@@ -540,7 +514,6 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                         .setButtonType(ButtonType.CANCEL)
                         .build());
         mInitiateButton = mixin.getPrimaryButton();
-        mInitiateButton.setEnabled(mHasReachedBottom);
     }
 
     private void getContentDescription(View v, StringBuffer description) {

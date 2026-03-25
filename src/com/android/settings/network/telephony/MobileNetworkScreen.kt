@@ -41,7 +41,6 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -110,8 +109,6 @@ private constructor(
     override fun getMetricsCategory() = SettingsEnums.MOBILE_NETWORK
 
     override val availabilityDescription = "The subscription id must be valid."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean =
         SubscriptionManager.isValidSubscriptionId(subId)
@@ -191,10 +188,6 @@ private constructor(
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
-    override fun getEnabledDescription() = "There must be no restrictions on configuring mobile networks imposed by device administrators."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
-
     override fun isIndexable(context: Context) =
         // Shoudln't be indexable on ARC (Android on Chrome OS) and this seems to be the way to
         // detect that. See https://stackoverflow.com/a/44868935 or isArc() implementation in
@@ -207,7 +200,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(Settings.EXTRA_SUB_ID, "The subscription ID", type = SubscriptionId)
+            parameter(Settings.EXTRA_SUB_ID, "The subscription ID", type = SubscriptionId())
         }
 
         @JvmStatic

@@ -71,20 +71,28 @@ class ClearHomeTimeZonePreferenceControllerTest {
     fun isChecked_homeZoneNotCleared_shouldReturnTrue() {
         Settings.Global.putString(
             mContext.contentResolver,
-            Settings.Global.HOME_TIME_ZONE_ID,
+            Settings.Global.USER_HOME_TIME_ZONE_ID,
             "America/Los_Angeles",
         )
         assertThat(mController.isChecked).isTrue()
 
         // Null signals that the home zone has not been set yet.
-        Settings.Global.putString(mContext.contentResolver, Settings.Global.HOME_TIME_ZONE_ID, null)
+        Settings.Global.putString(
+            mContext.contentResolver,
+            Settings.Global.USER_HOME_TIME_ZONE_ID,
+            null,
+        )
         assertThat(mController.isChecked).isTrue()
     }
 
     @Test
     fun isChecked_homeZoneCleared_shouldReturnFalse() {
         // Empty string signals that the home zone has been cleared by the user.
-        Settings.Global.putString(mContext.contentResolver, Settings.Global.HOME_TIME_ZONE_ID, "")
+        Settings.Global.putString(
+            mContext.contentResolver,
+            Settings.Global.USER_HOME_TIME_ZONE_ID,
+            "",
+        )
         assertThat(mController.isChecked).isFalse()
     }
 

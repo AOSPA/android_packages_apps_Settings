@@ -30,7 +30,6 @@ import android.view.InputDevice;
 
 import androidx.preference.Preference;
 
-import com.android.settings.R;
 import com.android.settings.inputmethod.PhysicalKeyboardFragment.HardKeyboardDeviceInfo;
 import com.android.settings.testutils.shadow.ShadowInputDevice;
 
@@ -124,8 +123,6 @@ public class PhysicalKeyboardPreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference)
-                .setSummary(
-                        mContext.getString(R.string.physical_keyboard_summary, device.getName()));
+        verify(mPreference).setSummary(device.getName());
     }
 }

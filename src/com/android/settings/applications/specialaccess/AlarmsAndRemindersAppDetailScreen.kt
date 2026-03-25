@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess
 
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.Manifest.permission.SCHEDULE_EXACT_ALARM
 import android.Manifest.permission.USE_EXACT_ALARM
 import android.app.AlarmManager
@@ -98,8 +97,6 @@ open class AlarmsAndRemindersAppDetailScreen : SpecialAccessAppDetailScreen {
         "The app must be enabled, and must have requested exact alarm permission."
 
     // Edge case: what if the app's read permission is revoked/granted
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&
             alarmsAndRemindersFilter(context, packageInfo?.applicationInfo)

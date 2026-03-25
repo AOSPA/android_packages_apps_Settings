@@ -33,7 +33,6 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -80,7 +79,6 @@ class WifiDetailsScreenApiTest {
     }
 
     @Test
-    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun launchScreenExtra_parameterized_returnsCorrectExtras() = runTest {
         val allParameters = screen.getAllPossibleParameters(context).first()
@@ -92,7 +90,6 @@ class WifiDetailsScreenApiTest {
     }
 
     @Test
-    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getParameterOptions_returnsCorrectOptions() = runTest {
         val options = tester.getParameterOptions(WifiDetailsScreenApi.PARAMETER_KEY)

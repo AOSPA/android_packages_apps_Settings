@@ -20,7 +20,6 @@ import android.content.Context
 import com.android.settings.R
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
@@ -46,8 +45,6 @@ internal class MagnificationTopIntroPreference :
     override fun createWidget(context: Context) = TopIntroPreference(context)
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean = !context.isInSetupWizard()
 

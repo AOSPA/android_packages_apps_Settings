@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess
 
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.Manifest.permission.MANAGE_EXTERNAL_STORAGE
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
@@ -94,8 +93,6 @@ open class AllFilesAccessAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val availabilityDescription =
         "The app must be enabled, and must have requested manage external storage permission."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
 

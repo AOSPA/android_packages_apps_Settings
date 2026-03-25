@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess
 
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.Manifest.permission.USE_FULL_SCREEN_INTENT
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
@@ -101,8 +100,6 @@ open class FullScreenNotificationsAppDetailScreen : SpecialAccessAppDetailScreen
         "The app must be enabled, and must have requested full screen intent permission."
 
     // Edge case: what if the app's read permission is revoked/granted
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
     override fun isAvailable(context: Context) =
         super.isAvailable(context) && fullScreenIntentFilter(context, packageInfo?.applicationInfo)
 

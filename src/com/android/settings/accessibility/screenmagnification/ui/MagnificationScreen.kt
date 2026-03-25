@@ -25,6 +25,7 @@ import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIF
 import com.android.settings.R
 import com.android.settings.Settings.MagnificationActivity
 import com.android.settings.accessibility.FeedbackManager
+import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
 import com.android.settings.accessibility.shared.ui.FeedbackButtonPreference
@@ -34,8 +35,8 @@ import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(MagnificationScreen.KEY)
 open class MagnificationScreen : PreferenceScreenMixin {
@@ -64,6 +65,10 @@ open class MagnificationScreen : PreferenceScreenMixin {
         get() = R.drawable.ic_accessibility_magnification
 
     override fun getMetricsCategory() = SettingsEnums.ACCESSIBILITY_TOGGLE_SCREEN_MAGNIFICATION
+
+    override fun isFlagEnabled(context: Context) = Flags.catalystMagnification()
+
+    override fun hasCompleteHierarchy() = Flags.catalystMagnification()
 
     override fun fragmentClass(): Class<out Fragment>? = MagnificationPreferenceFragment::class.java
 

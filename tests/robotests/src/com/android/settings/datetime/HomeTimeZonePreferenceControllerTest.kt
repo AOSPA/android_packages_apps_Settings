@@ -52,12 +52,17 @@ class HomeTimeZonePreferenceControllerTest {
 
     @Test
     fun getAvailabilityStatus_shouldBeAvailable() {
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE)
+        assertThat(mController.getAvailabilityStatus())
+            .isEqualTo(AVAILABLE)
     }
 
     @Test
     fun getSummary_homeTimeZoneNotSet_shouldReturnDefaultSummary() {
-        Settings.Global.putString(mContext.contentResolver, Settings.Global.HOME_TIME_ZONE_ID, null)
+        Settings.Global.putString(
+            mContext.contentResolver,
+            Settings.Global.USER_HOME_TIME_ZONE_ID,
+            null,
+        )
         assertThat(mController.getSummary())
             .isEqualTo(mContext.getString(R.string.home_time_zone_summary))
     }
@@ -67,7 +72,7 @@ class HomeTimeZonePreferenceControllerTest {
         val timeZoneId = "America/Los_Angeles"
         Settings.Global.putString(
             mContext.contentResolver,
-            Settings.Global.HOME_TIME_ZONE_ID,
+            Settings.Global.USER_HOME_TIME_ZONE_ID,
             timeZoneId,
         )
 

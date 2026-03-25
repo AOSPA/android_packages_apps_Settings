@@ -21,7 +21,6 @@ import android.icu.text.ListFormatter
 import com.android.settings.R
 import com.android.settings.accessibility.shared.utils.getAccessibilityFeatureName
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
@@ -53,8 +52,6 @@ class IntroPreference(private val targets: Set<String>) :
         }
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean = targets.size > 1
 

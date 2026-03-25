@@ -24,7 +24,6 @@ import com.android.settings.widget.FooterPreferenceBinding
 import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.FooterPreference
@@ -45,8 +44,6 @@ class DarkModeExpandedFooterPreference :
         get() = R.string.accessibility_expanded_dark_theme_footer
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean = Flags.forceInvertColor()
 

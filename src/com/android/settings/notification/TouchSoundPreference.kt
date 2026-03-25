@@ -28,7 +28,6 @@ import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
@@ -57,8 +56,6 @@ class TouchSoundPreference(context: Context) :
     override fun tags(context: Context) = arrayOf(KEY_TOUCH_SOUNDS, MUSTPASS_SET)
 
     override val availabilityDescription = "The device must support configuring touch sounds."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_touch_sounds)

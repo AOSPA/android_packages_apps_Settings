@@ -33,7 +33,10 @@ class ClearHomeTimeZonePreferenceController(context: Context, preferenceKey: Str
 
     override fun isChecked(): Boolean {
         val currentZone =
-            Settings.Global.getString(mContext.contentResolver, Settings.Global.HOME_TIME_ZONE_ID)
+            Settings.Global.getString(
+                mContext.contentResolver,
+                Settings.Global.USER_HOME_TIME_ZONE_ID,
+            )
         return "" != currentZone
     }
 

@@ -28,11 +28,9 @@ import com.android.settings.notification.LockScreenNotificationPreferenceControl
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
-import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.METADATA_IN_UI
-import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -99,7 +97,7 @@ open class LockScreenPreferenceScreen(private val context: Context) :
 
     class LockScreenPreferenceScreenPreference(
         private val screenMetadata : LockScreenPreferenceScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PersistentPreference<String> {
+    ) : PreferenceMetadata, PreferenceSummaryProvider {
         override val key : String
             get() = "lockscreen_from_display_settings_preference"
 
@@ -113,13 +111,6 @@ open class LockScreenPreferenceScreen(private val context: Context) :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
-
-        override val supportsWrite: Boolean
-            get() = false
-
-        override val valueType = String::class.javaObjectType
-
-        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
     }
 
     companion object {

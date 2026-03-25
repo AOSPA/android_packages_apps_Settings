@@ -30,13 +30,13 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SwitchPreference
 
+// LINT.IfChange
 class OneFingerPanningSwitchPreference :
     SwitchPreference(
         KEY,
@@ -87,17 +87,11 @@ class OneFingerPanningSwitchPreference :
     override val availabilityDescription =
         "The device must not be during setup, must support the one finger panning gesture, and must support window magnification."
 
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
-
     override fun isAvailable(context: Context): Boolean {
         return Flags.enableMagnificationOneFingerPanningGesture() &&
             !context.isInSetupWizard() &&
             context.isWindowMagnificationSupported()
     }
-
-    override fun getEnabledDescription(): String = "Screen magnification must be set to full screen or both."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context): Boolean {
         @MagnificationCapabilities.MagnificationMode
@@ -121,11 +115,6 @@ class OneFingerPanningSwitchPreference :
 
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_SINGLE_FINGER_PANNING_ENABLED
-
-        fun isOneFingerPanningEnabled(context: Context): Boolean {
-            return context.dataStore.getBoolean(KEY) == true
-        }
-
         private val Context.dataStore: KeyValueStore
             get() =
                 SettingsSecureStore.get(this).apply {
@@ -140,3 +129,4 @@ class OneFingerPanningSwitchPreference :
                 }
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/OneFingerPanningPreferenceController.kt)

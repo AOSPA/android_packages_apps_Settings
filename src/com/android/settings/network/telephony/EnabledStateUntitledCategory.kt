@@ -20,7 +20,6 @@ import android.content.Context
 import com.android.settings.R
 import com.android.settings.network.SubscriptionsChangeListener
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceGroup
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -47,8 +46,6 @@ class EnabledStateUntitledCategory(val subId: Int) :
     override fun createWidget(context: Context) = UntitledPreferenceCategory(context)
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean =
         context.subscriptionManager?.isActiveSubscriptionId(subId) == true

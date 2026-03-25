@@ -192,7 +192,6 @@ object GameControllerUtils {
         val inputDeviceIdentifier: InputDeviceIdentifier,
         val bluetoothAddress: String?,
         val sources: Int,
-        val axes: Set<Int>,
     ) {
         constructor(
             inputDevice: InputDevice,
@@ -203,12 +202,6 @@ object GameControllerUtils {
             inputDeviceIdentifier = inputDevice.identifier,
             bluetoothAddress = inputDevice.bluetoothAddress,
             sources = inputDevice.sources,
-            axes =
-                inputDevice
-                    .motionRanges
-                    .filter { it.source and InputDevice.SOURCE_JOYSTICK != 0 }
-                    .map { it.axis }
-                    .toSet(),
         )
     }
 }

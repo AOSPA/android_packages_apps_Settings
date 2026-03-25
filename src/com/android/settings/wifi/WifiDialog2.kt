@@ -28,7 +28,7 @@ import android.widget.TextView
 import androidx.annotation.OpenForTesting
 import androidx.appcompat.app.AlertDialog
 import com.android.settings.R
-import com.android.settings.widget.FocusIndicatorDrawable
+import com.android.settings.accessibility.shared.ui.FocusIndicatorDrawable
 import com.android.settings.wifi.utils.WifiDialogHelper
 import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedLockUtilsInternal

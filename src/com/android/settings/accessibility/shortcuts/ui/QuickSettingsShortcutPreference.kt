@@ -33,7 +33,6 @@ import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.shortcuts.ShortcutOptionPreference as ShortcutOptionWidget
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -76,8 +75,6 @@ class QuickSettingsShortcutPreference(context: Context, targets: Set<String>) :
 
     override val availabilityDescription =
         "The device must support Quick Settings. All shortcut targets must have a Quick Settings tile and must be pre-defined as supporting Quick Settings."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         return TileService.isQuickSettingsSupported() &&

@@ -34,7 +34,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.settings.R;
 import com.android.settings.accessibility.a11yservice.A11yServicePreferenceFragment;
 import com.android.settings.accessibility.a11yservice.ui.UseServicePreference;
-import com.android.settings.accessibility.shared.utils.TogglePreferenceAdapterInSuw;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
@@ -91,7 +90,7 @@ public class ToggleScreenReaderPreferenceFragmentForSetupWizard
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
         if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
-            return new TogglePreferenceAdapterInSuw(preferenceScreen);
+            return new PreferenceAdapterInSuw(preferenceScreen);
         }
         return super.onCreateAdapter(preferenceScreen);
     }

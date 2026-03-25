@@ -189,8 +189,6 @@ class WifiWakeupSwitchPreference :
         return true
     }
 
-    override fun getEnabledDescription(): String = "Requires Location to be enabled. Requires Wi-Fi scanning to be always available."
-
     companion object {
         const val TAG = "WifiWakeupSwitchPreference"
         const val KEY = "enable_wifi_wakeup"

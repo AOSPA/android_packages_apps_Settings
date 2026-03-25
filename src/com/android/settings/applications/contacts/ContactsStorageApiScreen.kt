@@ -22,7 +22,6 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ContactsStorageApiScreen.KEY)
@@ -38,10 +37,8 @@ class ContactsStorageApiScreen :
         preconditions(R.string.contacts_storage_screen_preconditions) {
             if (ContactsStoragePreferenceController.isContactsStorageAvailable(context)) {
                 Allowed
-            } else if (!ContactsStoragePreferenceController.newDefaultAccountApiEnabled()) {
-                Custom("This device does not support this screen.", stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
             } else {
-                Custom("Error reading the default account.", stability = PreconditionStability.UNSTABLE)
+                Custom(R.string.contacts_storage_screen_unsupported)
             }
         }
     }

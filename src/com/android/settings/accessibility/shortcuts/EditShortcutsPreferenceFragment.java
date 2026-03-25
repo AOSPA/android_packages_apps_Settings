@@ -69,12 +69,10 @@ import com.android.settings.accessibility.Flags;
 import com.android.settings.accessibility.PreferenceAdapterInSuw;
 import com.android.settings.accessibility.PreferredShortcuts;
 import com.android.settings.accessibility.extensions.ParameterStringArrayUtils;
-import com.android.settings.accessibility.shared.utils.SetupWizardUtilKt;
 import com.android.settings.accessibility.shortcuts.ui.AdvancedPreference;
 import com.android.settings.accessibility.shortcuts.ui.EditShortcutsScreen;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.widget.FocusIndicatorDrawable;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.metadata.ValidatedKeyParameters;
 import com.android.settingslib.widget.SettingsThemeHelper;
@@ -120,10 +118,6 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
 
     private static final Uri QUICK_SETTINGS_SHORTCUT_SETTING =
             Settings.Secure.getUriFor(ACCESSIBILITY_QS_TARGETS);
-
-    private static final int FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP = 45;
-    private static final int FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP = -4;
-    private static final int FOCUS_INDICATOR_CORNER_RADIUS_DP = 20;
 
     @VisibleForTesting
     static final Uri[] SHORTCUT_SETTINGS = {
@@ -292,23 +286,7 @@ public class EditShortcutsPreferenceFragment extends DashboardFragment {
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
         if (SettingsThemeHelper.isExpressiveTheme(requireContext())
                 && WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            return new PreferenceAdapterInSuw(preferenceScreen) {
-                @Override
-                protected void configureFocusIndicator(
-                        @NonNull FocusIndicatorDrawable.Builder builder,
-                        int position,
-                        int count) {
-                    if (!SetupWizardUtilKt.shouldShowFocusRingsInSuw(requireContext())) {
-                        return;
-                    }
-                    builder.withHorizontalPaddingAdjustment(
-                                    FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP)
-                            .withVerticalPaddingAdjustment(
-                                    FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP)
-                            .withCornerRadius(FOCUS_INDICATOR_CORNER_RADIUS_DP)
-                            .withPositionalCornerRadii(position, count);
-                }
-            };
+            return new PreferenceAdapterInSuw(preferenceScreen);
         }
         return super.onCreateAdapter(preferenceScreen);
     }

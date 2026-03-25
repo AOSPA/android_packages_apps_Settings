@@ -31,7 +31,6 @@ import com.android.settingslib.HelpUtils
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.datastore.SettingsStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -74,8 +73,6 @@ abstract class SupervisionWebContentFilterSupportedAppsScreen :
     override fun isEnabled(context: Context): Boolean = isFilterEnabled()
 
     override val availabilityDescription = "The device must support the new supervision settings UI."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = Flags.enableSupervisionSettingsUiUpdates()
 

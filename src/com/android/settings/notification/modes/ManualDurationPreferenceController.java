@@ -27,7 +27,6 @@ import com.android.settings.notification.zen.SettingsZenDurationDialog;
 import com.android.settingslib.notification.modes.ZenMode;
 import com.android.settingslib.notification.modes.ZenModesBackend;
 
-// LINT.IfChange
 public class ManualDurationPreferenceController extends AbstractZenModePreferenceController {
     private static final String TAG = "QsDurationPrefController";
 
@@ -86,4 +85,3 @@ public class ManualDurationPreferenceController extends AbstractZenModePreferenc
         });
     }
 }
-// LINT.ThenChange(ZenModeApiScreen.kt)

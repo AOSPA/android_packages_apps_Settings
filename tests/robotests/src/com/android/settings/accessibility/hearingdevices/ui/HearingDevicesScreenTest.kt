@@ -18,7 +18,7 @@ package com.android.settings.accessibility.hearingdevices.ui
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.os.SystemProperties
+import android.bluetooth.BluetoothProfile
 import com.android.settings.R
 import com.android.settings.accessibility.Flags
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter
@@ -34,13 +34,13 @@ import com.android.settingslib.bluetooth.LocalBluetoothManager
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.google.common.truth.Truth.assertThat
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.robolectric.annotation.Config
+import org.robolectric.shadow.api.Shadow
 
 @Config(shadows = [ShadowBluetoothAdapter::class, ShadowBluetoothUtils::class])
 class HearingDevicesScreenTest : SettingsCatalystTestCase() {
@@ -82,8 +82,11 @@ class HearingDevicesScreenTest : SettingsCatalystTestCase() {
 
     init {
         ShadowBluetoothUtils.sLocalBluetoothManager = mockLocalBluetoothManager
-        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true")
-        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "true")
+        val shadowAdapter: ShadowBluetoothAdapter = Shadow.extract(bluetoothAdapter)
+        shadowAdapter.apply {
+            addSupportedProfiles(BluetoothProfile.HEARING_AID)
+            addSupportedProfiles(BluetoothProfile.HAP_CLIENT)
+        }
     }
 
     override val preferenceScreenCreator = HearingDevicesScreen(appContext)
@@ -92,12 +95,6 @@ class HearingDevicesScreenTest : SettingsCatalystTestCase() {
     @Before
     fun setUp() {
         bluetoothAdapter?.enable()
-    }
-
-    @After
-    fun tearDown() {
-        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "")
-        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "")
     }
 
     @Test
@@ -211,7 +208,5 @@ class HearingDevicesScreenTest : SettingsCatalystTestCase() {
 
     companion object {
         const val TEST_DEVICE_NAME = "TEST_HEARING_AID_BT_DEVICE_NAME"
-        private const val ASHA_PROFILE_CENTRAL_PROPERTY = "bluetooth.profile.asha.central.enabled"
-        private const val HAP_PROFILE_CLIENT_PROPERTY = "bluetooth.profile.hap.client.enabled"
     }
 }

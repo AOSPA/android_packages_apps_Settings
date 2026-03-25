@@ -24,7 +24,6 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ResolutionRefreshRateApiScreen.KEY, parameterized = true)
@@ -76,7 +75,7 @@ class ResolutionRefreshRateApiScreen :
             if (isValidTarget) {
                 Allowed
             } else {
-                Custom(R.string.external_display_connected_unavailable, stability = PreconditionStability.UNSTABLE)
+                Custom(R.string.external_display_connected_unavailable)
             }
         }
     }

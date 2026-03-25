@@ -25,6 +25,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
@@ -81,11 +82,11 @@ class NfcAndPaymentApiScreen :
                         PackageManager.FEATURE_NFC_HOST_CARD_EMULATION
                     )
                 ) {
-                    HardwareUnsupported(R.string.require_device_unlock_for_nfc_unavailable)
+                    Disallowed(R.string.require_device_unlock_for_nfc_unavailable)
                 } else {
                     val adapter = NfcAdapter.getDefaultAdapter(context)
                     if (adapter == null) {
-                        HardwareUnsupported(R.string.use_nfc_unavailable)
+                        Disallowed(R.string.use_nfc_unavailable)
                     } else if (!adapter.isSecureNfcSupported) {
                         HardwareUnsupported(R.string.require_device_unlock_for_nfc_unavailable)
                     } else {

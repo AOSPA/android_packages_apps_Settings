@@ -181,14 +181,29 @@ public final class ActionDisabledByAdminDialogHelper {
 
     private void initializeDialogViews(View root, EnforcedAdmin enforcedAdmin, int userId,
             String restriction) {
-        if (enforcedAdmin.component == null) {
+        ComponentName admin = enforcedAdmin.component;
+        if (admin == null) {
             return;
         }
 
         mActionDisabledByAdminController.updateEnforcedAdmin(enforcedAdmin, userId);
         setAdminSupportIcon(root);
         setAdminSupportTitle(root, restriction);
-        setAdminSupportDetails(mActivity, root, enforcedAdmin);
+
+        if (android.app.admin.flags.Flags.fixDisabledByAdminShortMessageNotShown()) {
+            setAdminSupportDetails(mActivity, root, enforcedAdmin);
+        } else {
+            if (isNotCurrentUserOrProfile(admin, userId)) {
+                admin = null;
+            }
+            final UserHandle user;
+            if (userId == UserHandle.USER_NULL) {
+                user = null;
+            } else {
+                user = UserHandle.of(userId);
+            }
+            setAdminSupportDetails(mActivity, root, new EnforcedAdmin(admin, user));
+        }
     }
 
     private void initializeDialogViews(
@@ -200,6 +215,11 @@ public final class ActionDisabledByAdminDialogHelper {
         setAdminSupportIcon(root);
         setAdminSupportTitle(root, restriction);
         setAdminSupportDetails(mActivity, root, enforcingAdmin);
+    }
+
+    private boolean isNotCurrentUserOrProfile(ComponentName admin, int userId) {
+        return !RestrictedLockUtilsInternal.isAdminInCurrentUserOrProfile(mActivity, admin)
+                || !RestrictedLockUtils.isCurrentUserOrProfile(mActivity, userId);
     }
 
     void setAdminSupportIcon(View root) {

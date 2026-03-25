@@ -32,8 +32,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.R;
 import com.android.settings.accessibility.screenmagnification.ui.MagnificationPreferenceFragment;
-import com.android.settings.accessibility.shared.utils.TogglePreferenceAdapterInSuw;
+import com.android.settings.accessibility.screenmagnification.ui.MagnificationTopIntroPreference;
 import com.android.settingslib.widget.SettingsThemeHelper;
+import com.android.settingslib.widget.TopIntroPreference;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.util.DelightHelper;
@@ -42,7 +43,6 @@ import com.google.android.setupdesign.template.IconMixin;
 
 public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         extends MagnificationPreferenceFragment {
-    private static final String SHORTCUT_PREF_KEY = "magnification_shortcut_preference";
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -76,9 +76,21 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
     @Override
     protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
         if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
-            return new TogglePreferenceAdapterInSuw(preferenceScreen);
+            return new PreferenceAdapterInSuw(preferenceScreen);
         }
         return super.onCreateAdapter(preferenceScreen);
+    }
+
+    /**
+     * Hide the magnification preference settings in the SuW's vision settings.
+     */
+    @Override
+    protected void configureTopIntroVisibility() {
+        TopIntroPreference topIntroPreference = findPreference(
+                MagnificationTopIntroPreference.KEY);
+        if (topIntroPreference != null) {
+            topIntroPreference.setVisible(false);
+        }
     }
 
     @NonNull
@@ -103,7 +115,8 @@ public class ToggleScreenMagnificationPreferenceFragmentForSetupWizard
         // Log the final choice in value if it's different from the previous value.
         Bundle args = getArguments();
         if ((args != null) && args.containsKey(AccessibilitySettings.EXTRA_CHECKED)) {
-            ShortcutPreference shortcutPreference = findPreference(SHORTCUT_PREF_KEY);
+            ShortcutPreference shortcutPreference = findPreference(
+                    getShortcutPreferenceController().getPreferenceKey());
             if (shortcutPreference.isChecked() != args.getBoolean(
                     AccessibilitySettings.EXTRA_CHECKED)) {
                 // TODO: Distinguish between magnification modes

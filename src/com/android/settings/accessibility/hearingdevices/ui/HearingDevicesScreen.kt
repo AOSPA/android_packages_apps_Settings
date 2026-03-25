@@ -50,7 +50,6 @@ import com.android.settingslib.bluetooth.LocalBluetoothProfileManager
 import com.android.settingslib.flags.Flags as SettingsLibFlags
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -167,6 +166,7 @@ open class HearingDevicesScreen(context: Context) :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +HearingDevicesScreenPreference(this@HearingDevicesScreen)
             +HearingDevicesTopIntroPreference(context)
             +AvailableHearingDevicePreferenceCategory(context, metricsCategory)
             if (com.android.settings.flags.Flags.catalystMigration26q2()) {
@@ -209,8 +209,6 @@ open class HearingDevicesScreen(context: Context) :
 
     override val availabilityDescription =
         "The device must support hearing devices (Hearing Aid or HAP Client Bluetooth Profile)."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean = hearingAidHelper.isHearingAidSupported
 
@@ -282,8 +280,6 @@ open class HearingDevicesScreen(context: Context) :
 
         override val availabilityDescription = UI_ONLY_PREFERENCE
 
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
-
         override fun isAvailable(context: Context): Boolean =
             SettingsLibFlags.hearingDevicesGranularOutputRouting()
     }
@@ -325,8 +321,6 @@ open class HearingDevicesScreen(context: Context) :
             screenMetadata.getSummary(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
-
-        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context): Boolean = screenMetadata.isAvailable(context)
     }

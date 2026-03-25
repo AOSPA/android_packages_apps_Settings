@@ -29,7 +29,6 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -72,8 +71,6 @@ class FloatingButtonShortcutPreference(context: Context, targets: Set<String>) :
 
     override val availabilityDescription =
         "The device must be in gesture navigation mode, or in the 'floating menu' mode."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         // FAB should be available when in gesture navigation mode,

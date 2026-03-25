@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess
 
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.Manifest.permission.CHANGE_WIFI_STATE
 import android.Manifest.permission.NETWORK_SETTINGS
 import android.app.AppOpsManager
@@ -90,8 +89,6 @@ open class WifiControlAppDetailScreen : SpecialAccessAppDetailScreen {
         "The app must be enabled, and must have requested change wifi state permission."
 
     // Edge case: what if the app's change wifi state permission is revoked/granted
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
     override fun isAvailable(context: Context) =
         super.isAvailable(context) && wifiStateControlFilter(context, packageInfo?.applicationInfo)
 

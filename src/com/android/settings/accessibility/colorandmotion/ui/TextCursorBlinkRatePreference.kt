@@ -26,7 +26,6 @@ import com.android.settings.accessibility.colorandmotion.data.TextCursorBlinkRat
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.widget.SliderPreference
@@ -109,8 +108,6 @@ class TextCursorBlinkRatePreference(context: Context) :
     override val supportsWrite = true
     override val availabilityDescription =
         "The device must have text cursor blinking user setting."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         return Flags.textCursorBlinkingUserSetting()

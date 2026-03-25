@@ -52,8 +52,6 @@ public class ShadowInputManager extends org.robolectric.shadows.ShadowInputManag
 
     private final Map<InputDeviceIdentifier, Map<Integer, Integer>> mButtonRemappings =
             new HashMap<>();
-    private final Map<InputDeviceIdentifier, Map<Integer, Integer>> mButtonToAxisRemappings =
-            new HashMap<>();
     private final Map<InputDeviceIdentifier, Map<Integer, Integer>> mAxisRemappings =
             new HashMap<>();
     private final Map<Integer, KeyGlyphMap> mGlyphMaps = new HashMap<>();
@@ -139,27 +137,6 @@ public class ShadowInputManager extends org.robolectric.shadows.ShadowInputManag
     }
 
     /**
-     * @see InputManager#remapControllerButtonToAxis(InputDeviceIdentifier, int, int)
-     */
-    @Implementation
-    public void remapControllerButtonToAxis(
-            @NonNull InputDeviceIdentifier identifier,
-            @InputManager.ControllerButton int fromButton,
-            @MotionEvent.Axis int toAxis) {
-        var map = mButtonToAxisRemappings.computeIfAbsent(identifier, unused -> new HashMap<>());
-
-        map.put(fromButton, toAxis);
-    }
-
-    /**
-     * Returns the button to axis remappings.
-     */
-    public Map<Integer, Integer> getControllerButtonToAxisRemappings(
-            @NonNull InputDeviceIdentifier identifier) {
-        return Map.copyOf(mButtonToAxisRemappings.getOrDefault(identifier, Map.of()));
-    }
-
-    /**
      * @see InputManager#remapControllerAxis(InputDeviceIdentifier, int, int)
      */
     @Implementation
@@ -185,31 +162,11 @@ public class ShadowInputManager extends org.robolectric.shadows.ShadowInputManag
     }
 
     /**
-     * @see InputManager#clearAllControllerButtonToAxisRemappings(InputDeviceIdentifier)
-     */
-    @Implementation
-    public void clearAllControllerButtonToAxisRemappings(
-            @NonNull InputDeviceIdentifier identifier) {
-        mButtonToAxisRemappings.remove(identifier);
-    }
-
-    /**
      * @see InputManager#clearAllControllerAxisRemappings(InputDeviceIdentifier)
      */
     @Implementation
     public void clearAllControllerAxisRemappings(@NonNull InputDeviceIdentifier identifier) {
         mAxisRemappings.remove(identifier);
-    }
-
-    /**
-     * @see InputManager#removeControllerButtonToAxisRemapping(InputDeviceIdentifier, int)
-     */
-    @Implementation
-    public void removeControllerButtonToAxisRemapping(
-            @NonNull InputDeviceIdentifier identifier,
-            @InputManager.ControllerButton int fromButton) {
-        var map = mButtonToAxisRemappings.getOrDefault(identifier, new HashMap<>());
-        map.remove(fromButton);
     }
 
     /**

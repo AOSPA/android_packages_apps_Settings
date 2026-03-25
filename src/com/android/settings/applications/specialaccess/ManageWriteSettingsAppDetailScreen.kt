@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess
 
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.Manifest
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
@@ -86,8 +85,6 @@ open class ManageWriteSettingsAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val availabilityDescription =
         "The app must be enabled, and must have requested write settings permission."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&

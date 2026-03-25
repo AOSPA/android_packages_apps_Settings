@@ -27,10 +27,8 @@ import com.android.settings.network.AirplaneModePreference
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settings.wifi.utils.wifiManager
 import com.android.settingslib.datastore.HandlerExecutor
-import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.METADATA_IN_UI
-import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -117,7 +115,7 @@ open class ConfigureWifiScreen(context: Context) :
 
     class ConfigureWifiScreenPreference(
         private val screenMetadata : ConfigureWifiScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PersistentPreference<String> {
+    ) : PreferenceMetadata, PreferenceSummaryProvider {
         override val key : String
             get() = "configure_network_settings_preference"
 
@@ -131,13 +129,6 @@ open class ConfigureWifiScreen(context: Context) :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
-
-        override val supportsWrite: Boolean
-            get() = false
-
-        override val valueType = String::class.javaObjectType
-
-        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
     }
 
     companion object {

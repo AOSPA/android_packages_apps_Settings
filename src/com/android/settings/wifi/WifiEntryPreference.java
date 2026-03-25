@@ -303,12 +303,6 @@ public class WifiEntryPreference extends RestrictedPreference implements
             contentDescription = TextUtils.concat(contentDescription, ",",
                     context.getString(WIFI_CONNECTION_STRENGTH[level]));
         }
-        if (displaySharedIcon()) {
-            contentDescription = TextUtils.concat(contentDescription, ",",
-                    context.getString(
-                            R.string.accessibility_wifi_shared_network_icon_message));
-        }
-
         return TextUtils.concat(contentDescription, ",",
                 mWifiEntry.getSecurity() == WifiEntry.SECURITY_NONE
                         ? context.getString(R.string.accessibility_wifi_security_type_none)

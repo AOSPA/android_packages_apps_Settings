@@ -20,7 +20,6 @@ import android.content.Context
 import android.hardware.display.DisplayManager
 import com.android.settingslib.metadata.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
-import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.unsafe
 import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
@@ -31,7 +30,7 @@ import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
  * @param allowInternal Whether to include the internal display.
  * @param allowExternal Whether to include connected external displays.
  */
-open class DisplayId(
+class DisplayId(
     private val allowInternal: Boolean = true,
     private val allowExternal: Boolean = true,
 ) : DirectFiniteOptionsType<String> {
@@ -67,7 +66,5 @@ open class DisplayId(
 
     override fun getKey(): String = "DisplayId_${allowInternal}_$allowExternal"
 
-    override val externalType: EType<String> = EType.String
-
-    companion object : DisplayId()
+    override fun getType(): Class<String> = String::class.java
 }

@@ -23,7 +23,6 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import java.util.TreeSet
 
 // LINT.IfChange
@@ -44,10 +43,7 @@ class UserDictionaryListApiScreen :
             if (localeSet.size > 1) {
                 Allowed
             } else {
-                Custom(
-                    R.string.user_dict_list_not_supported,
-                    stability = PreconditionStability.UNSTABLE,
-                )
+                Custom(R.string.user_dict_list_not_supported)
             }
         }
     }

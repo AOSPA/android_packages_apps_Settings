@@ -26,8 +26,6 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
-
 
 class VolumeKeysShortcutLockScreenPreference() :
     SwitchPreference(
@@ -46,10 +44,6 @@ class VolumeKeysShortcutLockScreenPreference() :
             setDefaultValue(KEY, default)
         }
     }
-
-    override fun getEnabledDescription(): String = "At least one accessibility shortcut must be assigned to the volume keys."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context): Boolean {
         return context

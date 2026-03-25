@@ -30,8 +30,10 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.UserManager;
 import android.provider.Settings;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.android.settings.R;
@@ -84,6 +86,11 @@ public class NetworkChangeNotification extends BroadcastReceiver {
             Log.w(TAG, "on2gDisabledByCarrierRequest invalid sub ID " + subId);
             return;
         }
+        final SubscriptionInfo info = subscriptionManager.getActiveSubscriptionInfo(subId);
+        if (info == null) {
+            Log.w(TAG, "on2gDisabledByCarrierRequest null SubscriptionInfo for sub ID " + subId);
+            return;
+        }
 
         TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
@@ -100,7 +107,8 @@ public class NetworkChangeNotification extends BroadcastReceiver {
         CharSequence notificationTitle = context.getResources()
                 .getText(R.string.network_protection_2g_on_notification_title);
         CharSequence notificationSummary = context.getResources()
-                .getString(R.string.network_protection_2g_on_notification_summary);
+                .getString(R.string.network_protection_2g_on_notification_summary,
+                        getSimCardName(info));
         create2gDisabledByCarrierNotification(context, notificationTitle, notificationSummary,
                 subId);
     }
@@ -142,5 +150,10 @@ public class NetworkChangeNotification extends BroadcastReceiver {
         notificationManager.notify(notificationId, builder.build());
         Log.i(TAG, "Notification sended sussusfully with subId: " + subId + "title: "
                 + notificationTitle + " description: " + notificationSummary);
+    }
+
+    private String getSimCardName(SubscriptionInfo subInfo) {
+        CharSequence simCardName = subInfo.getDisplayName();
+        return TextUtils.isEmpty(simCardName) ? "" : simCardName.toString();
     }
 }

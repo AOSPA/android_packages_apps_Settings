@@ -33,7 +33,6 @@ import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvi
 import com.android.settings.spa.app.specialaccess.AllFilesAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.ComputerControlAppInfoPageProvider
 import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListProvider
-import com.android.settings.spa.app.specialaccess.ComputerControlTargetAppPageProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.HidAccessAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
@@ -76,23 +75,23 @@ import com.android.settingslib.widget.theme.flags.Flags
 open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
     open fun getTogglePermissionAppListProviders(): List<TogglePermissionAppListProvider> {
         return listOf(
-                AllFilesAccessAppListProvider,
-                DisplayOverOtherAppsAppListProvider,
-                MediaManagementAppsAppListProvider,
-                MediaRoutingControlAppListProvider,
-                ModifySystemSettingsAppListProvider,
-                UseFullScreenIntentAppListProvider,
-                PictureInPictureListProvider,
-                InstallUnknownAppsListProvider,
-                AlarmsAndRemindersAppListProvider,
-                WifiControlAppListProvider,
-                NfcTagAppsSettingsProvider,
-                LongBackgroundTasksAppListProvider,
-                TurnScreenOnAppsAppListProvider,
-                WriteSystemPreferencesAppListProvider,
-                UsageDataAppListProvider,
-            )
-            .runIfHidAccessEnabled { plus(HidAccessAppListProvider) }
+            AllFilesAccessAppListProvider,
+            DisplayOverOtherAppsAppListProvider,
+            MediaManagementAppsAppListProvider,
+            MediaRoutingControlAppListProvider,
+            ModifySystemSettingsAppListProvider,
+            UseFullScreenIntentAppListProvider,
+            PictureInPictureListProvider,
+            InstallUnknownAppsListProvider,
+            AlarmsAndRemindersAppListProvider,
+            WifiControlAppListProvider,
+            NfcTagAppsSettingsProvider,
+            LongBackgroundTasksAppListProvider,
+            TurnScreenOnAppsAppListProvider,
+            WriteSystemPreferencesAppListProvider,
+            UsageDataAppListProvider,
+        )
+        .runIfHidAccessEnabled { plus(HidAccessAppListProvider) }
     }
 
     override val pageProviderRepository = lazy {
@@ -141,7 +140,6 @@ open class SettingsSpaEnvironment(context: Context) : SpaEnvironment(context) {
                     arrayOf(
                         ComputerControlAutomationAppListProvider,
                         ComputerControlAppInfoPageProvider,
-                        ComputerControlTargetAppPageProvider,
                     )
                 )
             }

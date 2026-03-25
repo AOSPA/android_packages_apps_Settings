@@ -21,11 +21,10 @@ import com.android.settings.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 import com.android.settingslib.notification.modes.ZenModesBackend
 import com.android.settingslib.metadata.preferencesapi.unsafe
-import com.android.settingslib.metadata.preferencesapi.types.EType
 
 /** Provides a list of zen modes on the device. */
 object ZenModes : DirectFiniteOptionsType<String> {
-    override val externalType = EType.String
+    override fun getType(): Class<String> = String::class.java
 
     override fun getDescription(context: Context): String =
         context.getString(R.string.zen_mode_type_description)

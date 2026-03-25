@@ -25,7 +25,6 @@ import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settings.accessibility.textreading.dialogs.TextReadingResetDialog
 import com.android.settings.core.instrumentation.SettingsStatsLog
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -51,8 +50,6 @@ internal class ResetPreference(@EntryPoint private val entryPoint: Int) :
         get() = R.drawable.ic_history
 
     override val availabilityDescription = "The device must not be during setup."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard()

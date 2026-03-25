@@ -42,7 +42,6 @@ import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
@@ -115,14 +114,8 @@ open class AutoBrightnessScreen :
     override val availabilityDescription =
         "The device must support adaptive brightness."
 
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
-
     override fun isAvailable(context: Context) =
         context.autoBrightnessAvailabilityStatus == AVAILABLE
-
-    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
@@ -189,8 +182,6 @@ open class AutoBrightnessScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
-
-        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 

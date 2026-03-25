@@ -23,7 +23,6 @@ import com.android.settingslib.graph.PreferenceGetterResponse
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.metadata.PreferenceCoordinate
-import com.android.settingslib.metadata.SensitivityLevel
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -50,10 +49,6 @@ class CatalystStateSetterExecutorTest {
         val proto =
             PreferenceProto.newBuilder()
                 .setValue(PreferenceValueProto.newBuilder().setBooleanValue(true).build())
-                .setAvailable(true)
-                .setEnabled(true)
-                .setWritable(true)
-                .setSensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 .build()
 
         // The executor will request "screen" / "key"
@@ -81,6 +76,6 @@ class CatalystStateSetterExecutorTest {
         val result = executor.execute(DeviceStateAppFunctionType.SET_DEVICE_STATE, params)
 
         assertThat(result.result?.isSuccessful).isFalse()
-        assertThat(result.result?.currentValue).isEqualTo("true")
+        assertThat(result.result?.currentValue).isEqualTo("na")
     }
 }

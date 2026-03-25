@@ -25,7 +25,6 @@ import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
@@ -47,8 +46,6 @@ class DialPadTonePreference :
     override fun storage(context: Context) = SettingsSystemStore.get(context)
 
     override val availabilityDescription = "The device must be voice capable."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = Utils.isVoiceCapable(context)
 

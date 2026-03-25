@@ -34,7 +34,6 @@ import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -78,8 +77,6 @@ open class AutoclickScreen :
     override fun getMetricsCategory(): Int = SettingsEnums.ACCESSIBILITY_TOGGLE_AUTOCLICK
 
     override val availabilityDescription = "The device must have a mouse connected."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean = InputPeripheralsSettingsUtils.isMouse()
 
@@ -125,30 +122,25 @@ open class AutoclickScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
+            +AutoclickScreenPreference(this@AutoclickScreen)
             +AutoclickIntroPreference()
             +AutoclickIllustrationPreference()
             +AutoclickMainSwitchPreference()
-            +AutoClickShortcutPreference(context, metricsCategory)
+            +AccessibilityShortcutPreference(
+                context = context,
+                key = "autoclick_shortcut_preference",
+                purpose = R.string.a11y_autoclick_shortcut_purpose,
+                title = R.string.accessibility_autoclick_shortcut_title,
+                componentName = AccessibilityShortcutController.AUTOCLICK_COMPONENT_NAME,
+                featureName = R.string.accessibility_autoclick_preference_title,
+                metricsCategory = metricsCategory,
+            )
             +AutoclickDelayPreference(context)
             +AutoclickCursorAreaSizePreference()
             +AutoclickIgnoreMinorCursorMovementPreference()
             +AutoclickRevertToLeftClickPreference()
             +AutoclickFooterPreference()
         }
-
-    class AutoClickShortcutPreference(context: Context, metricsCategory: Int) :
-        AccessibilityShortcutPreference(
-            context = context,
-            key = "autoclick_shortcut_preference",
-            purpose = R.string.a11y_autoclick_shortcut_purpose,
-            title = R.string.accessibility_autoclick_shortcut_title,
-            componentName = AccessibilityShortcutController.AUTOCLICK_COMPONENT_NAME,
-            featureName = R.string.accessibility_autoclick_preference_title,
-            metricsCategory = metricsCategory,
-        ) {
-        //not reviewed by security & privacy
-        override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
-    }
 
     class AutoclickScreenPreference(
         private val screenMetadata : AutoclickScreen
@@ -169,8 +161,6 @@ open class AutoclickScreen :
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
-
-        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 

@@ -25,7 +25,6 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.widget.MainSwitchPreferenceBinding
@@ -55,8 +54,6 @@ class DoubleTapPowerMainSwitchPreference :
 
     override val availabilityDescription =
         "The device must support the double tap power button gesture."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean =
         DoubleTapPowerSettingsUtils.isMultiTargetDoubleTapPowerButtonGestureAvailable(context)

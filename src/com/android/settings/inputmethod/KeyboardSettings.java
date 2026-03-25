@@ -96,15 +96,15 @@ public class KeyboardSettings extends DashboardFragment {
             @NonNull Context context, @Nullable Lifecycle lifecycle) {
         final List<AbstractPreferenceController> controllers = new ArrayList<>();
         // Input
-        final KeyboardAppsPreferenceController keyboardAppsPreferenceController =
-                new KeyboardAppsPreferenceController(context);
+        final VirtualKeyboardPreferenceController virtualKeyboardPreferenceController =
+                new VirtualKeyboardPreferenceController(context);
         final PhysicalKeyboardPreferenceController physicalKeyboardPreferenceController =
                 new PhysicalKeyboardPreferenceController(context, lifecycle);
-        controllers.add(keyboardAppsPreferenceController);
+        controllers.add(virtualKeyboardPreferenceController);
         controllers.add(physicalKeyboardPreferenceController);
         controllers.add(new PreferenceCategoryController(context,
                 KEY_KEYBOARDS_CATEGORY).setChildren(
-                Arrays.asList(keyboardAppsPreferenceController,
+                Arrays.asList(virtualKeyboardPreferenceController,
                         physicalKeyboardPreferenceController)));
 
         // Pointer

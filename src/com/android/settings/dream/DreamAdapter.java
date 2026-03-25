@@ -193,8 +193,6 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
                     item.isActive() && mEnabled ? View.VISIBLE : View.GONE);
             previewButton.setSelected(false);
             previewButton.setOnClickListener(v -> item.onPreviewClicked());
-            previewButton.setContentDescription(
-                    mContext.getString(R.string.dream_preview_button_description, item.getTitle()));
         }
 
         private void configureCustomizeButton(IDreamItem item) {
@@ -211,18 +209,8 @@ public class DreamAdapter<DreamItemT extends IDreamItem>
                 customizeButton.setEllipsize(TextUtils.TruncateAt.MARQUEE);
                 customizeButton.setSingleLine();
                 customizeButton.setSelected(true);
-                ViewCompat.setAccessibilityDelegate(customizeButton,
-                        new AccessibilityDelegateCompat() {
-                            @Override
-                            public void onInitializeAccessibilityNodeInfo(View host,
-                                    AccessibilityNodeInfoCompat info) {
-                                super.onInitializeAccessibilityNodeInfo(host, info);
-                                info.setSelected(false);
-                            }
-                        });
             } else {
                 customizeButton.setSelected(false);
-                ViewCompat.setAccessibilityDelegate(customizeButton, null);
             }
             customizeButton.setVisibility(
                     item.allowCustomization() && mEnabled ? View.VISIBLE : View.GONE);

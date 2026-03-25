@@ -342,6 +342,36 @@ public class LocaleUtils {
                 || LocaleList.isPseudoLocale(locale);
     }
 
+    public static List<ApplicationInfo> getAppList(
+            @NonNull Context context,
+            @NonNull PackageManager packageManager
+    ) {
+        UserManager userManager = context.getSystemService(UserManager.class);
+        List<UserHandle> userHandles = userManager.getUserProfiles();
+        List<ApplicationInfo> result = new ArrayList<>();
+
+        for (UserHandle userHandle : userHandles) {
+            final int userId = userHandle.getIdentifier();
+            List<ApplicationInfo> appList = packageManager.getInstalledApplicationsAsUser(
+                    PackageManager.ApplicationInfoFlags.of(PackageManager.GET_META_DATA),
+                    userId
+            );
+            Context userContext;
+            if (userId == context.getUserId()) {
+                userContext = context;
+            } else {
+                userContext = context.createContextAsUser(userHandle, 0);
+            }
+            for (ApplicationInfo app : appList) {
+                if (canDisplayLocaleUi(userContext, app.packageName)) {
+                    result.add(app);
+                }
+            }
+        }
+
+        return result;
+    }
+
     public static boolean canDisplayLocaleUi(Context context, String packageName) {
         try {
             PackageManager packageManager = context.getPackageManager();

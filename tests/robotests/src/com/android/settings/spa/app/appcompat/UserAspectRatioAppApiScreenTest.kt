@@ -19,8 +19,8 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.LauncherActivityInfo
 import android.content.pm.LauncherApps
+import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ApplicationInfoFlags
 import android.content.res.Resources
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
@@ -40,7 +40,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.any
@@ -49,76 +48,51 @@ import org.mockito.Mockito.`when` as whenever
 import org.mockito.Spy
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.doThrow
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.stub
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowPackageManager
 import org.robolectric.shadows.ShadowSystemProperties
 
 @RunWith(AndroidJUnit4::class)
 class UserAspectRatioAppApiScreenTest {
 
-    @JvmField
-    @Rule
-    val mockitoRule: MockitoRule = MockitoJUnit.rule()
-    @get:Rule
-    val setFlagsRule = SetFlagsRule()
-    @Spy
-    private val context: Context = ApplicationProvider.getApplicationContext()
-
+    @JvmField @Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
+    @get:Rule val setFlagsRule = SetFlagsRule()
+    @Spy private val context: Context = ApplicationProvider.getApplicationContext()
     private lateinit var tester: ApiTester
-    private val packageManager = mock<PackageManager>()
-
-    @Mock
-    private lateinit var resources: Resources
-    @Mock
-    private lateinit var launcherApps: LauncherApps
-    @Mock
-    private lateinit var launcherActivities: List<LauncherActivityInfo>
+    private lateinit var shadowPackageManager: ShadowPackageManager
+    @Mock private lateinit var resources: Resources
+    @Mock private lateinit var launcherApps: LauncherApps
+    @Mock private lateinit var launcherActivities: List<LauncherActivityInfo>
 
     @Before
     fun setUp() {
+        tester = ApiTester(UserAspectRatioAppApiScreen(), context)
         whenever(context.resources).thenReturn(resources)
-        whenever(resources.getStringArray(anyInt())).thenReturn(emptyArray())
-        whenever(
-            resources.getBoolean(
-                com.android.internal.R.bool.config_appCompatUserAppAspectRatioSettingsIsEnabled
-            )
-        ).thenReturn(true)
-        whenever(
-            resources.getStringArray(R.array.config_userAspectRatioOverrideEntries)
-        ).thenReturn(arrayOf("App default"))
-        whenever(
-            resources.getIntArray(R.array.config_userAspectRatioOverrideValues)
-        ).thenReturn(intArrayOf(PackageManager.USER_MIN_ASPECT_RATIO_UNSET))
         whenever(context.getSystemService(Context.LAUNCHER_APPS_SERVICE)).thenReturn(launcherApps)
         whenever(context.getSystemService(LauncherApps::class.java)).thenReturn(launcherApps)
         whenever(launcherApps.getActivityList(anyString(), any())).thenReturn(launcherActivities)
-        whenever(context.packageManager).thenReturn(packageManager)
-
-        packageManager.stub {
-            on {
-                getInstalledApplicationsAsUser(
-                    any<ApplicationInfoFlags>(),
-                    anyInt()
+        shadowPackageManager = shadowOf(context.packageManager)
+        val packageInfo =
+            PackageInfo().apply {
+                packageName = PACKAGE_NAME
+                applicationInfo = APP_INFO
+            }
+        shadowPackageManager.installPackage(packageInfo)
+        whenever(
+                resources.getBoolean(
+                    com.android.internal.R.bool.config_appCompatUserAppAspectRatioSettingsIsEnabled
                 )
-            } doReturn listOf(APP_INFO)
-            on {
-                getApplicationInfo(anyString(), anyInt())
-            } doReturn APP_INFO
-
-            // UserAspectRatioManager checks manifest properties.
-            // Throwing NameNotFoundException simulates the property being absent.
-            on {
-                getProperty(anyString(), anyString())
-            } doThrow PackageManager.NameNotFoundException()
-        }
-
-        tester = ApiTester(UserAspectRatioAppApiScreen(), context)
+            )
+            .thenReturn(true)
+        whenever(resources.getStringArray(R.array.config_userAspectRatioOverrideEntries))
+            .thenReturn(arrayOf("App default"))
+        whenever(resources.getIntArray(R.array.config_userAspectRatioOverrideValues))
+            .thenReturn(intArrayOf(PackageManager.USER_MIN_ASPECT_RATIO_UNSET))
     }
 
     @After
     fun cleanUp() {
+        ShadowPackageManager.reset()
         ShadowSystemProperties.reset()
     }
 
@@ -138,11 +112,11 @@ class UserAspectRatioAppApiScreenTest {
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchIntent_featureDisabled_throwsException() {
         whenever(
-            resources.getBoolean(
-                com.android.internal.R.bool.config_appCompatUserAppAspectRatioSettingsIsEnabled
+                resources.getBoolean(
+                    com.android.internal.R.bool.config_appCompatUserAppAspectRatioSettingsIsEnabled
+                )
             )
-        ).thenReturn(false)
-
+            .thenReturn(false)
         tester.initializeScreenParameters(Parameters(ARG_PACKAGE_NAME to PACKAGE_NAME))
         assertThrows(FailedPreconditionException::class.java) { tester.getLaunchIntent() }
     }
@@ -150,8 +124,8 @@ class UserAspectRatioAppApiScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchIntent_cannotDisplayAspectRatioUi_throwsException() {
-        whenever(launcherApps.getActivityList(anyString(), any())).thenReturn(emptyList())
         tester.initializeScreenParameters(Parameters(ARG_PACKAGE_NAME to PACKAGE_NAME))
+        whenever(launcherApps.getActivityList(anyString(), any())).thenReturn(emptyList())
 
         assertThrows(FailedPreconditionException::class.java) { tester.getLaunchIntent() }
     }
@@ -159,9 +133,9 @@ class UserAspectRatioAppApiScreenTest {
     @Test
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getLaunchIntent_canDisplayAspectRatioUi_isNotNull() {
+        tester.initializeScreenParameters(Parameters(ARG_PACKAGE_NAME to PACKAGE_NAME))
         whenever(launcherApps.getActivityList(anyString(), any()))
             .thenReturn(listOf(mock(LauncherActivityInfo::class.java)))
-        tester.initializeScreenParameters(Parameters(ARG_PACKAGE_NAME to PACKAGE_NAME))
 
         assertThat(tester.getLaunchIntent()).isNotNull()
     }
@@ -177,10 +151,6 @@ class UserAspectRatioAppApiScreenTest {
 
     private companion object {
         const val PACKAGE_NAME = "com.abc.test"
-        val APP_INFO = ApplicationInfo().apply {
-            packageName = PACKAGE_NAME
-            flags = ApplicationInfo.FLAG_INSTALLED
-            enabled = true
-        }
+        val APP_INFO = ApplicationInfo().apply { packageName = PACKAGE_NAME }
     }
 }

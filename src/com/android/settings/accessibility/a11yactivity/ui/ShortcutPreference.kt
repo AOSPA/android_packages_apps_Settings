@@ -22,7 +22,6 @@ import com.android.settings.R
 import com.android.settings.accessibility.shared.ui.AccessibilityShortcutPreference
 import com.android.settings.accessibility.shared.ui.ShortcutFeatureNameProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
-import com.android.settingslib.metadata.SensitivityLevel
 
 class ShortcutPreference(
     context: Context,
@@ -46,10 +45,6 @@ class ShortcutPreference(
     override fun getFeatureName(context: Context): CharSequence {
         return shortcutInfo.activityInfo.loadLabel(context.packageManager)
     }
-    //not reviewed by security & privacy
-    override val sensitivityLevel: Int
-        get() = SensitivityLevel.DO_NOT_EXPOSE
-
 
     companion object {
         private const val KEY = "shortcut_preference_key"

@@ -31,7 +31,6 @@ import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.upd
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
-import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale

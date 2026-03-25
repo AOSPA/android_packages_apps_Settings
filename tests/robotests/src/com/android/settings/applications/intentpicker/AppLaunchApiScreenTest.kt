@@ -18,8 +18,6 @@ package com.android.settings.applications.intentpicker
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ApplicationInfoFlags
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -37,13 +35,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.ArgumentMatchers.anyString
-import org.mockito.kotlin.any
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.spy
-import org.mockito.kotlin.stub
+import org.robolectric.Shadows.shadowOf
 import org.robolectric.shadows.ShadowPackageManager
 import org.robolectric.shadows.ShadowSystemProperties
 
@@ -52,17 +44,14 @@ class AppLaunchApiScreenTest {
 
     @get:Rule val setFlagsRule = SetFlagsRule()
 
-    private lateinit var tester: ApiTester
-    private val packageManager = mock<PackageManager>()
+    private val tester = ApiTester(AppLaunchApiScreen())
     private lateinit var context: Context
+    private lateinit var packageManager: ShadowPackageManager
 
     @Before
     fun setUp() {
-        context = spy(ApplicationProvider.getApplicationContext()) {
-            on { packageManager } doReturn packageManager
-        }
-
-        tester = ApiTester(AppLaunchApiScreen(), context)
+        context = ApplicationProvider.getApplicationContext()
+        packageManager = shadowOf(context.packageManager)
     }
 
     @After
@@ -93,14 +82,10 @@ class AppLaunchApiScreenTest {
 
     @Test
     fun getLaunchIntent_nullApp_shouldThrowFailedPreconditionException() {
-        val packageInfoWithNullApp = PackageInfo().apply {
-            packageName = PACKAGE_NAME
-            applicationInfo = null
-        }
-        installApp(null, packageInfoWithNullApp)
+        installApp(null)
         tester.initializeScreenParameters(Parameters(ARG_PACKAGE_NAME to PACKAGE_NAME))
 
-        assertThrows(FailedPreconditionException::class.java) { tester.getLaunchIntent() }
+        assertThat(tester.getLaunchIntent()).isNotNull()
     }
 
     @Test
@@ -120,41 +105,18 @@ class AppLaunchApiScreenTest {
         assertThrows(FailedPreconditionException::class.java) { tester.getLaunchIntent() }
     }
 
-    private fun installApp(appInfo: ApplicationInfo?, packageInfo: PackageInfo? = null) {
-        val appInfoToInstall = appInfo ?: FakeAppInfo()
-        val packageInfoToInstall = packageInfo ?: PackageInfo().apply {
-            this.packageName = PACKAGE_NAME
-            this.applicationInfo = appInfo
-        }
-
-        packageManager.stub {
-            on {
-                getInstalledApplicationsAsUser(
-                    any<ApplicationInfoFlags>(),
-                    anyInt()
-                )
-            } doReturn listOf(appInfoToInstall)
-            on {
-                getPackageInfo(
-                    anyString(),
-                    any<PackageManager.PackageInfoFlags>()
-                )
-            } doReturn packageInfoToInstall
-            on {
-                getPackageInfo(anyString(), anyInt())
-            } doReturn packageInfoToInstall
-        }
-    }
+    private fun installApp(appInfo: ApplicationInfo?) =
+        packageManager.installPackage(
+            PackageInfo().apply {
+                packageName = PACKAGE_NAME
+                applicationInfo = appInfo
+            }
+        )
 
     class FakeAppInfo(enabled: Boolean = true) : ApplicationInfo() {
         init {
             this.packageName = PACKAGE_NAME
             this.enabled = enabled
-            this.flags = FLAG_INSTALLED
-            if (!enabled) {
-                // AppListRepository filters out disabled apps unless this state is set
-                this.enabledSetting = PackageManager.COMPONENT_ENABLED_STATE_DISABLED_USER
-            }
         }
     }
 

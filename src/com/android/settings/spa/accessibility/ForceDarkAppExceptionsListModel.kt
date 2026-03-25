@@ -22,7 +22,6 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.UserHandle
 import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -42,13 +41,9 @@ import com.android.settingslib.spaprivileged.template.app.AppListItemModel
 import com.android.settingslib.spaprivileged.template.app.AppListPage
 import com.android.settingslib.spaprivileged.template.app.AppListSwitchItem
 import java.util.concurrent.TimeUnit
-import kotlin.text.get
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.withContext
 
 object ForceDarkAppExceptionsPageProvider : SettingsPageProvider {
     override val name = "ForceDarkAppExceptions"
@@ -75,15 +70,23 @@ object ForceDarkAppExceptionsPageProvider : SettingsPageProvider {
 data class ForceDarkAppExceptionRecord(
     override val app: ApplicationInfo,
     val controller: ForceDarkAppExceptionsController,
-    var lastTimeUsed: Long = LAST_TIME_USED_DEFAULT,
-) : AppRecord {
-    companion object {
-        const val LAST_TIME_USED_DEFAULT = 0L
-    }
-}
+) : AppRecord
 
 class ForceDarkAppExceptionsListModel(private val context: Context) :
     AppListModel<ForceDarkAppExceptionRecord> {
+
+    private val usageStatsManager =
+        context.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
+    private val now = System.currentTimeMillis()
+    private val usageStatsMap: Map<String, UsageStats>
+
+    init {
+        val startTime = now - TimeUnit.DAYS.toMillis(5)
+        usageStatsMap =
+            usageStatsManager.queryAndAggregateUsageStats(startTime, now).toMutableMap().apply {
+                getPackagesToRemove().forEach { pkgName -> remove(pkgName) }
+            }
+    }
 
     @VisibleForTesting
     var repositoryFactory: (Context, Int) -> ForceDarkAppExceptionsRepository = { context, userId ->
@@ -116,38 +119,14 @@ class ForceDarkAppExceptionsListModel(private val context: Context) :
         return resolveInfo?.activityInfo?.packageName
     }
 
-    // Helper to get UsageStatsManager for a specific userId
-    private fun getUserUsageStatsManager(userId: Int): UsageStatsManager {
-        val userContext = context.createContextAsUser(UserHandle.of(userId), 0)
-        return userContext.getSystemService(Context.USAGE_STATS_SERVICE) as UsageStatsManager
-    }
-
-    // Helper to get or create the UsageStatsMap for a specific userId
-    private suspend fun getUsageStatsMapForUser(userId: Int): Map<String, UsageStats> =
-        withContext(Dispatchers.IO) {
-            val usageStatsManager = getUserUsageStatsManager(userId)
-            val now = System.currentTimeMillis()
-            val startTime = now - TimeUnit.DAYS.toMillis(5)
-
-            // This query is inherently expensive and should run in the background
-            usageStatsManager.queryAndAggregateUsageStats(startTime, now).toMutableMap().apply {
-                getPackagesToRemove().forEach { pkgName -> remove(pkgName) }
-            }
-        }
-
     override fun transform(userIdFlow: Flow<Int>, appListFlow: Flow<List<ApplicationInfo>>) =
         userIdFlow
-            .mapLatest { userId ->
-                repositoryFactory(context, userId) to getUsageStatsMapForUser(userId)
-            }
-            .combine(appListFlow) { (repository, usageStatsMap), appList ->
+            .map { userId -> userId to repositoryFactory(context, userId) }
+            .combine(appListFlow) { (userId, repository), appList ->
                 appList.map { app ->
                     ForceDarkAppExceptionRecord(
                         app = app,
                         controller = ForceDarkAppExceptionsController(app, repository),
-                        lastTimeUsed =
-                            usageStatsMap[app.packageName]?.lastTimeUsed
-                                ?: ForceDarkAppExceptionRecord.LAST_TIME_USED_DEFAULT,
                     )
                 }
             }
@@ -157,7 +136,7 @@ class ForceDarkAppExceptionsListModel(private val context: Context) :
                 // Ordering by the Force dark override status
                 !it.record.controller.isForceDarkAllowed.value
             }
-            .thenByDescending { it.record.lastTimeUsed }
+            .thenByDescending { usageStatsMap[it.record.app.packageName]?.lastTimeUsed ?: 0L }
             .then(super.getComparator(option))
 
     @Composable

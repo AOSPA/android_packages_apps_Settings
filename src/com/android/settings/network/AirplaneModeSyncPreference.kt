@@ -38,8 +38,6 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import java.util.concurrent.atomic.AtomicBoolean
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
-
 
 class AirplaneModeSyncPreference(context: Context) :
     SwitchPreference(KEY, R.string.airplane_mode_sync_purpose, R.string.sync_across_devices_title),
@@ -50,10 +48,6 @@ class AirplaneModeSyncPreference(context: Context) :
 
     override val icon: Int
         @DrawableRes get() = R.drawable.ic_sync
-
-    override fun getEnabledDescription(): String = "Bluetooth must be enabled and a supported watch must be connected."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) =
         context.isBluetoothEnabled() && storage.isSyncSupportedWatchPresent.get()

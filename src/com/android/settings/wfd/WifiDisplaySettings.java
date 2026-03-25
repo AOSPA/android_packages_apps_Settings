@@ -74,7 +74,6 @@ import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.SettingsThemeHelper;
 import com.android.settingslib.widget.TwoTargetPreference;
 import com.android.settingslib.widget.ZeroStatePreference;
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability;
 
 /**
  * The Settings screen for WifiDisplay configuration and connection management.
@@ -240,10 +239,6 @@ public final class WifiDisplaySettings extends SettingsPreferenceFragment implem
         return context.getSystemService(Context.DISPLAY_SERVICE) != null
                 && context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT)
                 && context.getSystemService(Context.WIFI_P2P_SERVICE) != null;
-    }
-
-    public static PreconditionStability getAvailabilityStability() {
-        return PreconditionStability.STABLE_UNTIL_APK_UPDATE;
     }
 
     private void scheduleUpdate(int changes) {

@@ -459,7 +459,7 @@ public class FingerprintSettings extends SubSettings {
          * FingerprintExtPreferencesProvider
          */
         private boolean onExtIntentPreferenceClick(@NonNull Preference preference) {
-            if (!(preference instanceof PrimarySwitchIntentPreference) || mToken == null) {
+            if (!(preference instanceof PrimarySwitchIntentPreference)) {
                 return false;
             }
 

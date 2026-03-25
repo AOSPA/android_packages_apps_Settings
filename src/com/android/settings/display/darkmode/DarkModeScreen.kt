@@ -55,8 +55,6 @@ import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import kotlinx.coroutines.CoroutineScope
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
-
 
 // LINT.IfChange
 abstract class BaseDarkModeScreen(context: Context, val isUiOnly: Boolean) :
@@ -177,10 +175,6 @@ abstract class BaseDarkModeScreen(context: Context, val isUiOnly: Boolean) :
     override fun isEnabled(context: Context) =
         if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) true
         else !context.isPowerSaveMode()
-
-    override fun getEnabledDescription() = if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) "Always enabled." else "Battery saver must be turned off."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isIndexable(context: Context) =
         Flags.catalystDarkUiMode() &&

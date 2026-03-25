@@ -34,7 +34,6 @@ import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -67,8 +66,6 @@ class BluetoothTetherSwitchPreference(
         BluetoothTetherStore(context, coroutineScope, bluetoothAdapter)
 
     override val availabilityDescription = "The device must support bluetooth tethering."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         bluetoothAdapter ?: return false

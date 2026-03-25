@@ -16,7 +16,7 @@
 
 package com.android.settings.sound;
 
-import static com.android.media.flags.Flags.fixOutputSwitcherMultiuserSupport;
+import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothLeBroadcast;
@@ -26,7 +26,6 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
-import android.os.UserHandle;
 import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
@@ -152,7 +151,8 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        mPreference.setVisible(!Utils.isAudioModeOngoingCall(mContext));
+        mPreference.setVisible(!Utils.isAudioModeOngoingCall(mContext)
+                && (enableOutputSwitcherForSystemRouting() ? true : mMediaController != null));
     }
 
     @Override
@@ -172,7 +172,14 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
             return;
         }
 
-        mMediaController = MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager);
+        if (enableOutputSwitcherForSystemRouting()) {
+            mMediaController = MediaOutputUtils.getActiveLocalMediaController(mMediaSessionManager);
+        } else {
+            if (mMediaController == null) {
+                // No active local playback
+                return;
+            }
+        }
 
         mPreference.setEnabled(true);
         if (Utils.isAudioModeOngoingCall(mContext) &&
@@ -262,32 +269,18 @@ public class MediaOutputPreferenceController extends AudioSwitchPreferenceContro
     @Override
     public boolean handlePreferenceTreeClick(Preference preference) {
         if (TextUtils.equals(preference.getKey(), getPreferenceKey())) {
-            if (mMediaController == null) {
-                var intent = new Intent()
+            if (enableOutputSwitcherForSystemRouting() && mMediaController == null) {
+                mContext.sendBroadcast(new Intent()
                         .setAction(MediaOutputConstants.ACTION_LAUNCH_SYSTEM_MEDIA_OUTPUT_DIALOG)
-                        .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME);
-                if (fixOutputSwitcherMultiuserSupport()) {
-                    intent.putExtra(MediaOutputConstants.EXTRA_USER_HANDLE, mContext.getUser());
-                    mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM);
-                } else {
-                    mContext.sendBroadcast(intent);
-                }
-            } else {
-                var intent = new Intent()
+                        .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME));
+            } else if (mMediaController != null) {
+                mContext.sendBroadcast(new Intent()
                         .setAction(MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG)
                         .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
                         .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
                                 mMediaController.getPackageName())
                         .putExtra(MediaOutputConstants.KEY_MEDIA_SESSION_TOKEN,
-                                mMediaController.getSessionToken());
-                if (fixOutputSwitcherMultiuserSupport()) {
-                    var mediaSessionUser = UserHandle.getUserHandleForUid(
-                            mMediaController.getSessionToken().getUid());
-                    intent.putExtra(MediaOutputConstants.EXTRA_USER_HANDLE, mediaSessionUser);
-                    mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM);
-                } else {
-                    mContext.sendBroadcast(intent);
-                }
+                                mMediaController.getSessionToken()));
             }
             return true;
         }

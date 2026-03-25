@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess
 
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.Manifest
 import android.app.AppOpsManager
 import android.app.settings.SettingsEnums
@@ -89,8 +88,6 @@ open class InstallUnknownAppsAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val availabilityDescription =
         "The app must be enabled, and must have requested install unknown apps permission."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         super.isAvailable(context) &&

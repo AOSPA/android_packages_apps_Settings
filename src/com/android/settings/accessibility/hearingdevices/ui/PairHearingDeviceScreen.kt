@@ -37,7 +37,6 @@ import com.android.settings.flags.Flags
 import com.android.settings.restriction.PreferenceRestrictionMixin
 import com.android.settingslib.RestrictedPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceHierarchy
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -95,8 +94,6 @@ open class PairHearingDeviceScreen(context: Context) :
 
     override val availabilityDescription =
         "The device must support Bluetooth."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)

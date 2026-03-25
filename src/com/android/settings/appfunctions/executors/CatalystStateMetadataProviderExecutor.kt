@@ -21,7 +21,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Binder
-import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
@@ -32,34 +31,30 @@ import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
-import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
-import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreconditionsAsString
 import com.android.settingslib.metadata.preferencesapi.types.ApiType
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import com.android.settingslib.metadata.setPreconditionsAsString
-import com.android.settingslib.metadata.stableAccessPreconditionFailuresAsString
-import com.android.settingslib.metadata.stableSetPreconditionFailuresAsString
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
-import com.android.settingslib.metadata.getTrampolinedLaunchIntent
+import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.setWarningAsString
 import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationType
+import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.Sensitivity
-import java.util.concurrent.ConcurrentHashMap
-import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.TimeoutCancellationException
@@ -68,9 +63,7 @@ import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.withTimeout
-import kotlinx.coroutines.withTimeoutOrNull
 import com.android.settingslib.metadata.preferencesapi.extractSafety
 
 /* A [DeviceStateExecutor] that provides device state metadata information for Settings that are
@@ -89,54 +82,19 @@ class CatalystStateMetadataProviderExecutor(
     ): DeviceStateMetadataProviderExecutorResult {
         val perScreenDeviceStatesList = mutableListOf<PerScreenMetadata>()
         val itemizationTypes = mutableMapOf<String, ItemizationType>()
-
-        val maxParallelism = Settings.Global.getInt(
-            context.contentResolver,
-            SETTING_MAX_PARALLELISM,
-            DEFAULT_MAX_PARALLELISM
-        )
-        val perScreenTimeoutMs = Settings.Global.getLong(
-            context.contentResolver,
-            SETTING_PER_SCREEN_TIMEOUT_MS,
-            DEFAULT_PER_SCREEN_TIMEOUT_MS
-        ).milliseconds
-        val maxExecutionTimeMs = Settings.Global.getLong(
-            context.contentResolver,
-            SETTING_MAX_EXECUTION_TIME_MS,
-            DEFAULT_MAX_EXECUTION_TIME_MS
-        ).milliseconds
-        val logAppFunctionTime = Settings.Global.getInt(
-            context.contentResolver,
-            SETTING_LOG_APPFUNCTION_TIME,
-            0
-        ) == 1
-
-        val semaphore = Semaphore(maxParallelism)
-        var deferredList = emptyList<Pair<String, Deferred<DeviceStateMetadataProviderExecutorResult?>>>()
-        val timeLogs = ConcurrentHashMap<String, Long>()
-
-        withTimeoutOrNull(maxExecutionTimeMs) {
-            coroutineScope {
-                deferredList = screenKeyList.map { screenKey ->
-                    screenKey to async {
-                        val startTime = android.os.SystemClock.elapsedRealtime()
+        coroutineScope {
+            val semaphore = Semaphore(MAX_PARALLELISM)
+            val deferredList =
+                screenKeyList.map { screenKey ->
+                    async {
                         try {
-                            withTimeout(perScreenTimeoutMs) {
+                            withTimeout(PER_SCREEN_TIMEOUT_MS) {
                                 semaphore.withPermit {
                                     try {
                                         val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
-                                        if (screenMetadata != null && screenMetadata.isExposable(context)) {
+                                        if(screenMetadata != null && screenMetadata.isExposable(context)) {
                                             buildPerScreenDeviceStatesMetadata(screenKey)
-                                        } else {
-                                            val factory = PreferenceScreenRegistry.preferenceScreenMetadataFactories[screenKey]
-                                            val isParameterized = factory is PreferenceScreenMetadataParameterizedFactory
-                                            if (isParameterized) {
-                                                // Try and build the metadata with no itemization entries
-                                                buildPerScreenDeviceStatesMetadata(factory, screenKey )
-                                            } else {
-                                                null
-                                            }
-                                        }
+                                        } else null
                                     } catch (e: Exception) {
                                         Log.e(TAG, "error building $screenKey", e)
                                         null
@@ -145,55 +103,17 @@ class CatalystStateMetadataProviderExecutor(
                             }
                         } catch (e: TimeoutCancellationException) {
                             Log.e(TAG, "Timed out building screen: $screenKey", e)
-                            if (logAppFunctionTime) {
-                                timeLogs[screenKey] = -1L
-                            }
                             null
-                        } finally {
-                            if (logAppFunctionTime && !timeLogs.containsKey(screenKey)) {
-                                timeLogs[screenKey] = android.os.SystemClock.elapsedRealtime() - startTime
-                            }
                         }
                     }
                 }
-                deferredList.map { it.second }.awaitAll()
-            }
-        } ?: Log.w(TAG, "Max execution time of $maxExecutionTimeMs exceeded.")
-
-        if (logAppFunctionTime) {
-            timeLogs.entries
-                .sortedByDescending { if (it.value == -1L) Long.MAX_VALUE else it.value }
-                .forEach { entry ->
-                    val timeStr = if (entry.value == -1L) "timed out" else "${entry.value}ms"
-                    Log.d(TAG, "Screen ${entry.key} took $timeStr")
-                }
+            val results = deferredList.awaitAll().filterNotNull()
+            perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
+            results.flatMap { it.itemizationTypes }.forEach { itemizationTypes[it.key] = it }
         }
-
-        val completedKeys = mutableSetOf<String>()
-        val results = mutableListOf<DeviceStateMetadataProviderExecutorResult>()
-
-        for ((screenKey, deferred) in deferredList) {
-            if (deferred.isCompleted && !deferred.isCancelled) {
-                completedKeys.add(screenKey)
-                val res = deferred.getCompleted()
-                if (res != null) {
-                    results.add(res)
-                }
-            }
-        }
-
-        val incompleteKeys = screenKeyList - completedKeys
-        if (incompleteKeys.isNotEmpty()) {
-            Log.w(TAG, "Screens not processed due to max execution time: $incompleteKeys")
-        }
-
-        perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
-        results.flatMap { it.itemizationTypes }.forEach { itemizationTypes[it.key] = it }
-
         return DeviceStateMetadataProviderExecutorResult(
             metadata = perScreenDeviceStatesList,
             itemizationTypes = itemizationTypes.values.toSet(),
-            hintText = "When an intentUri includes '%24itemization', that must be replaced by an actual itemization value before launching.",
         )
     }
 
@@ -210,35 +130,6 @@ class CatalystStateMetadataProviderExecutor(
                 removeDuplicates = isParameterized,
             )
 
-        return buildHierarchyMetadata(hierarchy, isParameterized)
-    }
-
-    private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
-        parameterizedFactory: PreferenceScreenMetadataParameterizedFactory,
-        screenKey: String
-    ): DeviceStateMetadataProviderExecutorResult? {
-        val screenMetadata =
-            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                PreferenceScreenRegistry.createWithKeyParameters(
-                    context,
-                    screenKey,
-                    parameterizedFactory.parametersSchema.prepareEmpty()
-                )
-            } else {
-                PreferenceScreenRegistry.create(context, screenKey, Bundle.EMPTY)
-            }
-        if (screenMetadata != null && screenMetadata.isExposable(context)) {
-            val hierarchy = getEnabledPreferencesHierarchy(context, screenMetadata)
-            return buildHierarchyMetadata(hierarchy, isParameterized = true)
-        }
-
-        return null
-    }
-
-    private suspend fun CoroutineScope.buildHierarchyMetadata(
-        hierarchy: Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>,
-        isParameterized: Boolean,
-    ): DeviceStateMetadataProviderExecutorResult {
         val metadata =
             hierarchy.map { entry ->
                 val screenMetaData = entry.key
@@ -296,10 +187,7 @@ class CatalystStateMetadataProviderExecutor(
                     else -> null
                 }
 
-            val writable =
-            if (metadataProto.sensitivityLevel > 2) { // requires confirmation or do not expose
-                false
-            } else if (metadata is ApiPreference<*, *>) {
+            val writable = if (metadata is ApiPreference<*, *>) {
                 metadata.set != null
             } else if (metadata is PersistentPreference<*>) {
                 metadata.supportsWrite
@@ -315,8 +203,6 @@ class CatalystStateMetadataProviderExecutor(
                         metadata.getPreconditionsAsString(context),
                         metadata.setPreconditionsAsString(context),
                         metadata.setWarningAsString(context),
-                        metadata.stableAccessPreconditionFailuresAsString(context),
-                        metadata.stableSetPreconditionFailuresAsString(context),
                     ).joinToString(separator = "\n").replace("..", ".")
             deviceStateItemMetadataList.add(
                 DeviceStateItemMetadata(
@@ -348,17 +234,7 @@ class CatalystStateMetadataProviderExecutor(
             )
         }
 
-        val launchingIntent = screenMetaData.getTrampolinedLaunchIntent(null).apply {
-            // .toUri() will drop the parameter's bundle. In the end, this
-            // launchingIntent will contain only the screenKey and (if parameterized) the
-            // itemization extra. The SettingsLaunchpadActivity is able to launch the correct screen
-            // based on this.
-            if (isParameterized) {
-                // Add the literal '$itemization' string as the value for the itemization extra
-                putExtra(PreferenceScreenMetadata.EXTRA_ITEMIZATION, $$"$itemization")
-            }
-        }.toUri(Intent.URI_INTENT_SCHEME)
-
+        val launchingIntent = screenMetaData.getLaunchIntent(context, null)
         return PerScreenMetadata(
             description = (
                     listOfNotNull(
@@ -372,13 +248,13 @@ class CatalystStateMetadataProviderExecutor(
                     ).filter{it.isNotBlank()}.joinToString(". ").replace("..", ".")
                 ),
             deviceStateItemsMetadata = deviceStateItemMetadataList,
-            intentUri = launchingIntent,
+            // intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
 
             // Ideally itemizationTypes should be 1) nullable and 2) more
             // complex than a string so we can communicate more detail
             itemizationTypes = screenMetaData.keyParametersSchema?.getParameters()?.values?.map {
                     val type = it.type
-                    "${type.getKey()}"
+                    "${type.getKey()} - ${type.getDescription(context)}"
                 }?.toList() ?: emptyList(),
         )
     }
@@ -410,13 +286,8 @@ class CatalystStateMetadataProviderExecutor(
 
     companion object {
         private const val TAG = "CatalystStateMetadataProviderExecutor"
-        private const val DEFAULT_MAX_PARALLELISM = 3
-        private const val DEFAULT_PER_SCREEN_TIMEOUT_MS = 5000L
-        private const val DEFAULT_MAX_EXECUTION_TIME_MS = 25000L
-        private const val SETTING_MAX_PARALLELISM = "com.android.settings.APP_FUNCTION_MAX_PARALLELISM"
-        private const val SETTING_PER_SCREEN_TIMEOUT_MS = "com.android.settings.APP_FUNCTION_PER_SCREEN_TIMEOUT_MS"
-        private const val SETTING_MAX_EXECUTION_TIME_MS = "com.android.settings.APP_FUNCTION_MAX_EXECUTION_TIME_MS"
-        private const val SETTING_LOG_APPFUNCTION_TIME = "com.android.settings.APP_FUNCTION_LOG_TIME"
+        private const val MAX_PARALLELISM = 3
+        private val PER_SCREEN_TIMEOUT_MS = 5.seconds
 
         /** Returns an LLM readable string describing the value type. */
         internal fun PreferenceValueDescriptorProto.toDeviceStateString(): String {

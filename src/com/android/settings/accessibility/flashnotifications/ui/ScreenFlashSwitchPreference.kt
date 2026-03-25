@@ -66,8 +66,7 @@ class ScreenFlashSwitchPreference :
         storage(context).removeObserver(this)
     }
 
-    override fun storage(context: Context): KeyValueStore =
-        SettingsSystemStore.get(context).apply { setDefaultValue(KEY, false) }
+    override fun storage(context: Context): KeyValueStore = SettingsSystemStore.get(context)
 
     override fun getReadPermissions(context: Context) = SettingsSystemStore.getReadPermissions()
 

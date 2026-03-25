@@ -25,7 +25,6 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
-import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 
 // LINT.IfChange

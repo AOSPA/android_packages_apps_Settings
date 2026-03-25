@@ -16,7 +16,6 @@
 
 package com.android.settings.applications.specialaccess.pictureinpicture
 
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.Manifest.permission.USE_PINNED_WINDOWING_LAYER
 import android.app.ActivityManager
 import android.app.AppOpsManager
@@ -95,8 +94,6 @@ open class PictureInPictureAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val availabilityDescription =
         "The app must be enabled, and must have requested picture in picture permission."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         super.isAvailable(context) && pictureInPictureFilter(context, packageInfo?.applicationInfo)

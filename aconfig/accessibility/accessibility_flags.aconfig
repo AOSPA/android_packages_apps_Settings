@@ -70,6 +70,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_magnification"
+  namespace: "accessibility"
+  description: "Migrate magnification screen to the Catalyst infrastructure"
+  bug: "413453974"
+}
+
+flag {
   name: "catalyst_caption_preferences_screen"
   namespace: "accessibility"
   description: "Migrate caption preferences screen to Catalyst infrastructure"
@@ -125,11 +132,10 @@ flag {
 }
 
 flag {
-    name: "enable_inset_focus_rings_in_suw_read_only"
+    name: "enable_inset_focus_rings_in_suw"
     namespace: "accessibility"
     description: "Decides whether to enable inset focus rings in Accessibility surfaces during the SuW."
     bug: "484084632"
-    is_fixed_read_only: true
     metadata {
       purpose: PURPOSE_BUGFIX
     }

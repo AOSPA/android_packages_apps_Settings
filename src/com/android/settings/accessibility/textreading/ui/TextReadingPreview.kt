@@ -26,7 +26,6 @@ import com.android.settings.accessibility.textreading.data.DisplaySize
 import com.android.settings.accessibility.textreading.data.FontSize
 import com.android.settings.display.PreviewPagerAdapter
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -185,8 +184,6 @@ internal class TextReadingPreview(
     }
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         // TODO(b/428700479): Preview preference is hidden in non default displays as preview is

@@ -930,6 +930,8 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Restart Device?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detail NFC logging is intended for development purposes only. Additional NFC data is included in bug reports, which may contain private information. Restart your device to change this setting."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Restart"</string>
+    <string name="external_display_on" msgid="2560104443500154333">"On"</string>
+    <string name="external_display_off" msgid="5634413756025351374">"Off"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"External displays"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Built-in display"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universal cursor"</string>
@@ -1156,6 +1158,7 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"To improve location accuracy and for other purposes, an unknown app wants to turn on network scanning, even when Wi‑Fi is off.\n\nAllow this for all apps that want to scan?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Deny"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*required"</string>
+    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"This is a shared network. You need to sign in to make changes."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contact the network owner or device admin to make changes."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"This network has no internet access. Stay connected?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Some apps and services may not work due to limited connectivity. Use anyway?"</string>
@@ -1828,7 +1831,8 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Location time zone detection changes are not allowed"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"If your device location is available, it may be used to set your time zone"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Notifications"</string>
-    <string name="time_notifications_summary" msgid="5669901692108499323">"Get notified when your time changes automatically"</string>
+    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
+    <skip />
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Time zone change"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Receive a notification when your time zone is automatically updated"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, time, zone, timezone"</string>
@@ -2134,22 +2138,13 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Language"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Show the keyboard switch key"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Allow the keyboard switcher button to be shown in the navigation bar, when an input field is selected"</string>
-    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
-    <skip />
-    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
-    <skip />
-    <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
-    <skip />
-    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
-    <skip />
+    <string name="virtual_keyboard_category" msgid="2339505603075527212">"On-screen keyboard"</string>
+    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
+    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Available On-screen keyboard"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibility"</string>
-    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
-    <skip />
-    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
-    <skip />
-    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
-    <skip />
+    <string name="physical_keyboard_title" msgid="3328134097512350958">"Physical keyboard"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Physical keyboard layout picker"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Bounce keys"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Ignore quickly repeated presses of the same key"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Bounce key delay"</string>
@@ -2338,8 +2333,7 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirect vibration"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Send vibration to game controller when connected"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Keyboard layouts"</string>
-    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
-    <skip />
+    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Physical keyboard layouts"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Personal dictionary"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Personal dictionary for work"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Add words to be used in apps such as Spell checker"</string>
@@ -2361,12 +2355,9 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"For all languages"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"More languages…"</string>
     <string name="testing" msgid="6294172343766732037">"Testing"</string>
-    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
-    <skip />
-    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
-    <skip />
-    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
-    <skip />
+    <string name="keyboard_settings_summary" msgid="9188442758316476986">"On-screen keyboard, tools"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"On-screen keyboard, physical keyboard, tools"</string>
+    <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Physical keyboard"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Layout"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Choose gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Choose widget"</string>
@@ -2940,7 +2931,6 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
-    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"Battery usage and screen time are not measured while the phone is charging"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"App battery usage"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Use details"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Adjust power use"</string>
@@ -3771,8 +3761,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"always on ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, reader"</string>
-    <!-- no translation found for keywords_keyboard_vibration (5870649353180725920) -->
-    <skip />
+    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"keyboard, haptics, vibrate,"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"external display, connected display, extended display, second display, built-in display, arrange displays, mirror, display size, rotation, resolution, refresh rate"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"caret, text caret, text cursor, cursor, blinking, blink interval, blink rate, animation, reduce animation, remove animation"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume and vibration"</string>
@@ -4664,8 +4653,6 @@
     <string name="disconnected" msgid="3469373726996129247">"Not connected"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Not connected"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps installed"</string>
-    <!-- no translation found for storage_percentage_format (420113039071073589) -->
-    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> used - <xliff:g id="FREE_SPACE">%2$s</xliff:g> free"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Dark theme, font size, brightness"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Avg <xliff:g id="USED_MEMORY">%1$s</xliff:g> of <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memory used"</string>
@@ -5776,7 +5763,6 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"Choose your screen saver"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Customize"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Customize <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
-    <string name="dream_preview_button_description" msgid="1752727543834253129">"Preview <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"A reboot is required to enable freeform window support."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"A reboot is required to update availability of freeform windows."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"A reboot is required to enable freeform windows on secondary displays."</string>
@@ -5828,7 +5814,7 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> by <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"The app will restart when you change aspect ratio. You may lose unsaved changes. Some apps may not be optimized for certain aspect ratios."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Experience"</string>
-    <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtual gamepad"</string>
+    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerprint sensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash notifications"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"About flash notifications"</string>

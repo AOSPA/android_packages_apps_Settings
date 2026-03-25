@@ -32,7 +32,6 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -96,8 +95,6 @@ open class PreviouslyConnectedDeviceScreen :
 
     override val availabilityDescription =
         "The device must support bluetooth."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH) ||

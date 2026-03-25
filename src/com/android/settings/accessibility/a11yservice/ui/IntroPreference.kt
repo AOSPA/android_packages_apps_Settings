@@ -22,7 +22,6 @@ import android.text.TextUtils
 import com.android.settings.R
 import com.android.settings.accessibility.extensions.isInSetupWizard
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
@@ -48,8 +47,6 @@ class IntroPreference(private val serviceInfo: AccessibilityServiceInfo) :
         serviceInfo.loadIntro(context.packageManager)
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && !TextUtils.isEmpty(getTitle(context))

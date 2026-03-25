@@ -83,7 +83,7 @@ public class TripleTapShortcutOptionControllerTest {
         String expectedTitle = mContext.getString(
                 R.string.accessibility_shortcut_edit_screen_title_triple_tap);
         String expectedSummary = mContext.getString(
-                R.string.accessibility_shortcut_edit_screen_summary_triple_tap);
+                R.string.accessibility_shortcut_edit_screen_summary_triple_tap, 3);
 
         mController.displayPreference(mPreferenceScreen);
 

@@ -72,8 +72,6 @@
     <string name="user_aspect_ratio_apps_screen_preconditions" translatable="false">The device must support users changing aspect ratio of apps.</string>
     <string name="user_aspect_ratio_app_screen_preconditions" translatable="false">The device must support users changing aspect ratio of apps and the app must be launchable.</string>
     <string name="user_aspect_ratio_app_not_launchable" translatable="false">This app is not launchable.</string>
-    <string name="mode_manual_duration_precondition" translatable="false">Require to be in Do Not Disturb mode.</string>
-    <string name="mode_manual_duration_not_dnd_mode" translatable="false">Must be in do not disturb mode.</string>
     <string name="battery_info_screen_preconditions" translatable="false">The battery settings provider must provide the battery information feature.</string>
     <string name="battery_info_screen_battery_information_feature_disabled" translatable="false">The battery information feature is not enabled.</string>
     <string name="battery_usage_screen_preconditions" translatable="false">The device must support showing battery usage in settings.</string>
@@ -83,6 +81,7 @@
     <string name="sound_vibration_precondition" translatable="false">This device must have a vibration motor.</string>
     <string name="sound_vibration_hardware_unsupported" translatable="false">This device does not have a vibration motor.</string>
     <string name="contacts_storage_screen_preconditions" translatable="false">The device must have a valid default account.</string>
+    <string name="contacts_storage_screen_unsupported" translatable="false">Error reading the default account.</string>
     <string name="account_detail_screen_preconditions" translatable="false">Requires that the specific account name exists for the user.</string>
     <string name="account_security_subpage_screen_preconditions" translatable="false">Requires account security data to be available in Safety Center.</string>
     <string name="device_unlock_subpage_screen_preconditions" translatable="false">Requires device unlock data to be available in Safety Center.</string>
@@ -97,7 +96,7 @@
     <string name="usb_transcode_files_unavailable" translatable="false">This option is only available when USB file transfer or PTP is active.</string>
     <string name="usb_charge_connected_device_preconditions" translatable="false">The USB must be connected and the hardware must support power role switching.</string>
     <string name="usb_charge_connected_device_unavailable" translatable="false">This option is only available when the connected device and cable support being charged via USB.</string>
-    <string name="wifi_data_usage_screen_preconditions" translatable="false">The device must have a Wi-Fi radio and must have some data usage.</string>
+    <string name="wifi_data_usage_screen_preconditions" translatable="false">The device must have a Wi-Fi radio.</string>
     <string name="wifi_data_usage_screen_unavailable" translatable="false">Wi-Fi data usage is not available on this device.</string>
     <string name="auto_data_switching_preconditions" translatable="false">Requires a secondary SIM and mobile data capability to enable automatic switching.</string>
     <string name="data_roaming_switch_preconditions" translatable="false">Available when the mobile network is active and a SIM is present.</string>
@@ -131,8 +130,6 @@
     <string name="auto_brightness_unavailable" translatable="false">Auto-brightness is not supported on this device.</string>
     <string name="screen_resolution_preconditions" translatable="false">The device must support screen resolution configuration.</string>
     <string name="screen_resolution_unsupported" translatable="false">Screen resolution configuration is not supported on this device.</string>
-    <string name="daltonizer_mode_selector_preconditions" translatable="false">Color correction must be on.</string>
-    <string name="daltonizer_mode_selector_invalid_preference" translatable="false">Color correction is turned off.</string>
     <string name="auto_brightness_disallowed" translatable="false">Auto-brightness has disabled by device administrator.</string>
     <string name="when_to_dream_preconditions" translatable="false">The device must support configuring when to start screensaver.</string>
     <string name="when_to_dream_unavailable" translatable="false">The device does not support configuring when to start screensaver.</string>
@@ -147,5 +144,4 @@
     <string name="uwb_settings_unavailable_hardware" translatable="false">Ultra-wideband is not supported on this device.</string>
     <string name="uwb_settings_unavailable_regulation" translatable="false">Ultra-wideband is unavailable due to local regulatory restrictions in your current region.</string>
     <string name="uwb_settings_unavailable_airplane_mode" translatable="false">Ultra-wideband is disabled while Airplane Mode is active.</string>
-    <string name="power_background_usage_detail_screen_preconditions" translatable="false">The device must be configured to allow the specific app to change background power consumption mode.</string>
 </resources>

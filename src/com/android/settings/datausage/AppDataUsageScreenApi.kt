@@ -27,8 +27,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -77,7 +76,7 @@ class AppDataUsageScreenApi :
             purpose = R.string.app_background_data_switch_purpose,
             type = AnyBoolean,
         ) {
-            //not reviewed by security & privacy
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             get {
                 execute {
                     val packageName = getPackageName() ?: return@execute false
@@ -97,11 +96,11 @@ class AppDataUsageScreenApi :
             purpose = R.string.app_unrestricted_mobile_data_usage_switch_purpose,
             type = AnyBoolean,
         ) {
-            //not reviewed by security & privacy
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             preconditions(R.string.app_unrestricted_mobile_data_usage_switch_preconditions) {
                 val packageName =
                     getPackageName()
-                        ?: return@preconditions Custom(R.string.app_package_name_unavailable, stability = PreconditionStability.UNSTABLE)
+                        ?: return@preconditions Disallowed(R.string.app_package_name_unavailable)
 
                 runBlocking(Dispatchers.IO) {
                     if (repository.isPolicyAllowAvailable(packageName)) {
@@ -110,10 +109,7 @@ class AppDataUsageScreenApi :
                         Log.w(TAG, "Unrestricted Mobile Data is unavailable for $packageName")
 
                         // TODO(b/474027987) Catalyst: migrate the Disallowed to InvalidPreference
-                        Custom(
-                            R.string.app_unrestricted_mobile_data_usage_switch_unavailable,
-                            stability = PreconditionStability.UNSTABLE,
-                        )
+                        Disallowed(R.string.app_unrestricted_mobile_data_usage_switch_unavailable)
                     }
                 }
             }

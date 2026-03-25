@@ -22,7 +22,6 @@ import androidx.preference.Preference
 import com.android.settings.bluetooth.BluetoothDeviceUpdater
 import com.android.settings.connecteddevice.DevicePreferenceCallback
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -80,8 +79,6 @@ abstract class HearingDevicePreferenceCategory(key: String, purpose: Int, title:
     }
 
     override val availabilityDescription = "The device must support Bluetooth."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)

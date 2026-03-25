@@ -30,7 +30,6 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_APPS
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AppLaunchApiScreen.KEY, parameterized = true)
@@ -75,36 +74,19 @@ class AppLaunchApiScreen :
             val appInfo = packageInfo.applicationInfo
             when {
                 appInfo == null -> {
-                    Custom(
-                        R.string.app_launch_screen_app_unavailable,
-                        stability = PreconditionStability.UNSTABLE,
-                    )
+                    Custom(R.string.app_launch_screen_app_unavailable)
                 }
                 appInfo.flags and ApplicationInfo.FLAG_INSTALLED == 0 -> {
-                    Custom(
-                        R.string.app_launch_screen_app_not_installed,
-                        stability = PreconditionStability.UNSTABLE,
-                    )
+                    Custom(R.string.app_launch_screen_app_not_installed)
                 }
                 !appInfo.enabled -> {
-                    Custom(
-                        R.string.app_launch_screen_app_disabled,
-                        stability = PreconditionStability.UNSTABLE,
-                    )
+                    Custom(R.string.app_launch_screen_app_disabled)
                 }
                 AppUtils.isInstant(appInfo) -> {
-                    // Technically unstable but unlikely to change.
-                    Custom(
-                        R.string.app_launch_screen_app_instant,
-                        stability = PreconditionStability.UNSTABLE,
-                    )
+                    Custom(R.string.app_launch_screen_app_instant)
                 }
                 AppUtils.isBrowserApp(context, packageName, UserHandle.myUserId()) -> {
-                    // Technically unstable but unlikely to change.
-                    Custom(
-                        R.string.app_launch_screen_app_browser,
-                        stability = PreconditionStability.UNSTABLE,
-                    )
+                    Custom(R.string.app_launch_screen_app_browser)
                 }
                 else -> Allowed
             }

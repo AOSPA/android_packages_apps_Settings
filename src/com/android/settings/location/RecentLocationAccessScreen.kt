@@ -31,7 +31,6 @@ import com.android.settings.dashboard.profileselector.ProfileSelectFragment
 import com.android.settings.flags.Flags
 import com.android.settingslib.applications.RecentAppOpsAccess
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -64,8 +63,6 @@ open class RecentLocationAccessScreen : PreferenceScreenMixin, PreferenceAvailab
     override fun isFlagEnabled(context: Context) = Flags.catalystMigration26q2()
 
     override val availabilityDescription = "Location must be enabled."
-
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = LocationEnabler(context, null, null).isEnabled(
         Settings.Secure.getInt(

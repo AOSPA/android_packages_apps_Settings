@@ -18,8 +18,7 @@ package com.android.settings.applications
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
-import android.content.pm.PackageManager.ApplicationInfoFlags
+import android.content.pm.PackageInfo
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -34,17 +33,16 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.kotlin.any
-import org.mockito.kotlin.doReturn
+import org.mockito.Mockito.doReturn
 import org.mockito.kotlin.mock
-import org.mockito.kotlin.spy
-import org.mockito.kotlin.stub
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(AndroidJUnit4::class)
 class AppStorageSettingsScreenApiTest {
 
     @get:Rule val setFlagsRule = SetFlagsRule()
+
+    private val context = ApplicationProvider.getApplicationContext<Context>()
 
     private lateinit var apiScreen: AppStorageSettingsScreenApi
     private lateinit var tester: ApiTester
@@ -56,25 +54,16 @@ class AppStorageSettingsScreenApiTest {
     private val testCacheBytes = 1024L
     private val testDataBytes = 4096L
 
-    private val packageManager = mock<PackageManager>()
-    private lateinit var context: Context
-
     @Before
     fun setUp() {
-        context = spy(ApplicationProvider.getApplicationContext()) {
-            on { packageManager } doReturn packageManager
-        }
-
-        // Fake the installation of the test application
-        val testAppInfo = ApplicationInfo().apply { packageName = testPackageName }
-        packageManager.stub {
-            on {
-                getInstalledApplicationsAsUser(
-                    any<ApplicationInfoFlags>(),
-                    anyInt()
-                )
-            } doReturn listOf(testAppInfo)
-        }
+        // Install a fake application to satisfy the InstalledPackageName parameter validation.
+        val shadowPackageManager = shadowOf(context.packageManager)
+        val packageInfo =
+            PackageInfo().apply {
+                packageName = testPackageName
+                applicationInfo = ApplicationInfo().apply { packageName = testPackageName }
+            }
+        shadowPackageManager.installPackage(packageInfo)
 
         doReturn(testCodeBytes).`when`(mockAppStorageStats).codeBytes
         doReturn(testDataBytes).`when`(mockAppStorageStats).dataBytes
@@ -94,7 +83,7 @@ class AppStorageSettingsScreenApiTest {
                 }
             }
 
-        tester = ApiTester(apiScreen, context)
+        tester = ApiTester(apiScreen)
         tester.initializeScreenParameters(
             Parameters(AppStorageSettingsScreenApi.PARAM_PACKAGE to testPackageName)
         )

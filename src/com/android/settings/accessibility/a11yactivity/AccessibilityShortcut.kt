@@ -28,7 +28,6 @@ import androidx.annotation.RequiresApi
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settingslib.metadata.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
-import com.android.settingslib.metadata.preferencesapi.types.EType
 import kotlinx.coroutines.flow.first
 import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.unsafe
@@ -38,7 +37,7 @@ import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
  * The flattened string representation of the ComponentName of an Activity implementing an accessibility feature
  */
 object AccessibilityShortcut : DirectFiniteOptionsType<String> {
-    override val externalType: EType<String> = EType.String
+    override fun getType() = String::class.java
 
     override fun getDescription(context: Context): String =
         "The flattened string representation of an Activity implementing an accessibility feature"

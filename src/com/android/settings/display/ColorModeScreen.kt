@@ -27,19 +27,15 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.ColorModeUtils.getActiveColorModeName
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.datastore.HandlerExecutor
-import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.METADATA_IN_UI
-import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
-import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
@@ -82,8 +78,6 @@ open class ColorModeScreen :
     override val availabilityDescription =
         "The device must be color managed and not have accessibility transforms enabled."
 
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
-
     override fun isAvailable(context: Context): Boolean {
         val colorManager = context.getSystemService(ColorDisplayManager::class.java) ?: return false
         return colorManager.isDeviceColorManaged &&
@@ -116,7 +110,7 @@ open class ColorModeScreen :
 
     class ColorModeScreenPreference(
         private val screenMetadata : ColorModeScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PersistentPreference<String> {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
         override val key : String
             get() = "color_mode_preference"
 
@@ -124,13 +118,6 @@ open class ColorModeScreen :
             get() = screenMetadata.purpose
 
         override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
-
-        override val supportsWrite: Boolean
-            get() = false
-
-        override val valueType = String::class.javaObjectType
-
-        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override val indexable = false
 
@@ -140,12 +127,7 @@ open class ColorModeScreen :
 
         override val availabilityDescription = screenMetadata.availabilityDescription
 
-        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
-
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
-
-        override val sensitivityLevel
-            get() = SensitivityLevel.NO_SENSITIVITY
     }
 
     companion object {

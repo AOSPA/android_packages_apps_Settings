@@ -37,7 +37,6 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 @RunWith(RobolectricTestRunner::class)
 class CaptionColorPreferencesTest {
@@ -64,7 +63,6 @@ class CaptionColorPreferencesTest {
                 override val key = "test_key"
                 override val purpose = 0
                 override val availabilityDescription = "availability description"
-                override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
             }
         whenever(captioningManager.rawUserStyle)
             .thenReturn(CaptioningManager.CaptionStyle.PRESET_CUSTOM)
@@ -79,7 +77,6 @@ class CaptionColorPreferencesTest {
                 override val key = "test_key"
                 override val purpose = 0
                 override val availabilityDescription = "availability description"
-                override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
             }
         // Use 0 as a representative non-custom preset value
         whenever(captioningManager.rawUserStyle).thenReturn(0)
@@ -94,7 +91,6 @@ class CaptionColorPreferencesTest {
                 override val key = "test_key"
                 override val purpose = 0
                 override val availabilityDescription = "availability description"
-                override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
             }
         assertThat(customPreference.dependencies(context).toList())
             .isEqualTo(listOf(CustomCaptionOptionsPreference.KEY))

@@ -75,7 +75,7 @@ class WifiScorerTogglePreference() :
     ) = ReadWritePermit.ALLOW
 
     override val sensitivityLevel
-        get() = SensitivityLevel.REQUIRES_CONFIRMATION
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     @Suppress("UNCHECKED_CAST")
     private class WifiScorerToggleStorage(

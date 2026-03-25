@@ -86,7 +86,7 @@ class TripleTapShortcutPreferenceTest {
     @Test
     fun getSummary_returnsCorrectFormattedString() {
         val expectedSummary =
-            appContext.getString(R.string.accessibility_shortcut_edit_screen_summary_triple_tap)
+            appContext.getString(R.string.accessibility_shortcut_edit_screen_summary_triple_tap, 3)
 
         assertThat(preference.getSummary(appContext)).isEqualTo(expectedSummary)
     }

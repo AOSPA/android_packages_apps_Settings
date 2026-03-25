@@ -54,12 +54,8 @@ public class ContactsStoragePreferenceController extends BasePreferenceControlle
         }
     }
 
-    public static boolean newDefaultAccountApiEnabled() {
-        return Flags.newDefaultAccountApiEnabled();
-    }
-
     public static boolean isContactsStorageAvailable(Context context) {
-        if (!newDefaultAccountApiEnabled()) {
+        if (!Flags.newDefaultAccountApiEnabled()) {
             return false;
         }
         try {

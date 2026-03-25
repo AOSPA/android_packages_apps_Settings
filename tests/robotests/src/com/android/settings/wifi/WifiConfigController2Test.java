@@ -1380,7 +1380,7 @@ public class WifiConfigController2Test {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_WIFI_MULTIUSER)
-    public void updateEditConfigurationFieldState_disabled_staysFocusable() {
+    public void updateEditConfigurationFieldState_disabled_hidesFromAccessibility() {
         createController(null, WifiConfigUiBase2.MODE_CONNECT, false);
         MaterialSwitch switchView = mView.findViewById(R.id.edit_wifi_network_configuration);
 
@@ -1393,7 +1393,7 @@ public class WifiConfigController2Test {
         assertThat(switchView.isEnabled()).isFalse();
         assertThat(container.isEnabled()).isFalse();
         assertThat(container.getImportantForAccessibility())
-                .isEqualTo(View.IMPORTANT_FOR_ACCESSIBILITY_AUTO);
+                .isEqualTo(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
     }
 
     @Test

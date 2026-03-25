@@ -45,7 +45,6 @@ import android.service.notification.ZenModeConfig;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RawRes;
 
 import com.android.internal.annotations.GuardedBy;
 import com.android.internal.os.SomeArgs;
@@ -197,11 +196,9 @@ public class SliderVolumizer implements OnSliderTouchListener, OnChangeListener,
             mCallback.onMuted(mMuted, isZenMuted());
         }
         switch(mStreamType) {
-            case AudioManager.STREAM_ASSISTANT:
-                mDefaultUri = getVolumeUri(R.raw.assistant_volume);
-                break;
             case AudioManager.STREAM_MUSIC:
-                mDefaultUri = getVolumeUri(R.raw.media_volume);
+            case AudioManager.STREAM_ASSISTANT:
+                mDefaultUri = getMediaVolumeUri();
                 break;
             case AudioManager.STREAM_RING:
                 mDefaultUri = System.DEFAULT_RINGTONE_URI;
@@ -214,10 +211,10 @@ public class SliderVolumizer implements OnSliderTouchListener, OnChangeListener,
         }
     }
 
-    private Uri getVolumeUri(@RawRes int resourceId) {
+    private Uri getMediaVolumeUri() {
         return Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"
                 + mContext.getPackageName()
-                + "/" + resourceId);
+                + "/" + R.raw.media_volume);
     }
 
     /**

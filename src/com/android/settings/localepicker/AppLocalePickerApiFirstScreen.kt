@@ -21,10 +21,10 @@ import android.text.TextUtils
 import com.android.internal.app.AppLocaleCollector
 import com.android.internal.app.LocaleStore
 import com.android.settings.R
-import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
 import com.android.settings.localepicker.AppLocalePickerFragment.ARG_PACKAGE_NAME
 import com.android.settings.localepicker.LocaleUtils.canDisplayLocaleUi
+import com.android.settings.localepicker.LocaleUtils.getAppList
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -36,7 +36,6 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
 import com.android.settingslib.metadata.preferencesapi.unsafe
 import com.android.settingslib.metadata.preferencesapi.safe
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AppLocalePickerApiFirstScreen.KEY, parameterized = true)
@@ -55,7 +54,14 @@ class AppLocalePickerApiFirstScreen :
             parameter(
                 name = ARG_PACKAGE_NAME,
                 purpose = R.string.app_locale_picker_parameter_purpose,
-                type = InstalledPackageName
+                type =
+                    GeneratedParameterType(R.string.app_locale_picker_parameter_description) {
+                        getAppList(context, context.packageManager).map { it ->
+                            val packageName = it.packageName
+                            val appLabel = it.loadLabel(context.packageManager).toString()
+                            GeneratedValue(packageName.unsafe(), appLabel.unsafe())
+                        }
+                    },
             )
 
             prepareScreenExtras { parameters, extras ->
@@ -68,7 +74,7 @@ class AppLocalePickerApiFirstScreen :
             if (!TextUtils.isEmpty(packageName) && canDisplayLocaleUi(context, packageName)) {
                 Allowed
             } else {
-                Custom(R.string.app_locale_picker_screen_unavailable, stability = PreconditionStability.UNSTABLE)
+                Custom(R.string.app_locale_picker_screen_unavailable)
             }
         }
 

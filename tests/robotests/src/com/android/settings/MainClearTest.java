@@ -76,7 +76,6 @@ import org.robolectric.Shadows;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadow.api.Shadow;
 import org.robolectric.shadows.ShadowActivity;
-import org.robolectric.util.ReflectionHelpers;
 
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
@@ -140,9 +139,6 @@ public class MainClearTest {
         mShadowUserManager = Shadow.extract(userManager);
         mShadowUserManager.setIsAdminUser(true);
         mContentView = LayoutInflater.from(mActivity).inflate(R.layout.main_clear, null);
-        mActivity.setContentView(mContentView);
-        mMainClear.mContentView = mContentView;
-        doReturn(mActivity).when(mMainClear).getContext();
 
         // Make scrollView only have one child
         when(mScrollView.getChildAt(0)).thenReturn(mLinearLayout);
@@ -152,36 +148,6 @@ public class MainClearTest {
         when(mBiometricManager.canAuthenticate(anyInt(),
                 eq(BiometricManager.Authenticators.IDENTITY_CHECK)))
                 .thenReturn(BiometricManager.BIOMETRIC_ERROR_IDENTITY_CHECK_NOT_ACTIVE);
-
-        mMainClear.setUpInitiateButton();
-    }
-
-    @Test
-    public void testOrientationChange_resetsButtonState() {
-        mMainClear.mScrollView = mScrollView;
-        initScrollView(500, 500, 1000); // At bottom
-
-        // 1. Initial layout at bottom enables button
-        mMainClear.onGlobalLayout();
-        assertThat(mMainClear.mInitiateButton.isEnabled()).isTrue();
-
-        // 2. Simulate rotation by resetting internal state
-        ReflectionHelpers.setField(mMainClear, "mHasReachedBottom", false);
-        initScrollView(500, 0, 1000); // Not at bottom anymore
-
-        // 3. Global layout in new orientation (at top) should NOT re-enable if not at bottom
-        mMainClear.onGlobalLayout();
-        assertThat(mMainClear.mInitiateButton.isEnabled()).isFalse();
-
-        // 4. Scroll to bottom
-        initScrollView(500, 500, 1000);
-        mMainClear.onGlobalLayout();
-        assertThat(mMainClear.mInitiateButton.isEnabled()).isTrue();
-
-        // 5. Scroll back up should keep it enabled (sticky)
-        initScrollView(500, 0, 1000);
-        mMainClear.onGlobalLayout();
-        assertThat(mMainClear.mInitiateButton.isEnabled()).isTrue();
     }
 
     @After

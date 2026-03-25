@@ -32,7 +32,6 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -41,6 +40,7 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
+// LINT.IfChange
 class AlwaysOnSwitchPreference :
     SwitchPreference(
         KEY,
@@ -92,8 +92,6 @@ class AlwaysOnSwitchPreference :
     override val availabilityDescription =
         "The device must not be during setup, must support window mangnification, and must support the 'always on' setting."
 
-    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
-
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() &&
             context.isWindowMagnificationSupported() &&
@@ -116,10 +114,6 @@ class AlwaysOnSwitchPreference :
             true
         }
     }
-
-    override fun getEnabledDescription() = "Screen magnification must be set to full screen or both."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context): Boolean {
         @MagnificationCapabilities.MagnificationMode
@@ -161,3 +155,4 @@ class AlwaysOnSwitchPreference :
                 }
     }
 }
+// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/AlwaysOnPreferenceController.kt)

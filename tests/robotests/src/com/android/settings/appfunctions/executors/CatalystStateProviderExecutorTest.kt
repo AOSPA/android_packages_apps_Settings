@@ -299,7 +299,7 @@ class CatalystStateProviderExecutorTest {
         val result = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
 
         assertThat(result.states).hasSize(1)
-        assertThat(result.states[0].description).contains("Passing screen access preconditions: Screen precondition")
+        assertThat(result.states[0].description).contains("Preconditions to accessing: Screen precondition.")
     }
 
     @Test
@@ -476,7 +476,7 @@ class CatalystStateProviderExecutorTest {
                 sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
             )
         )
-        setRegistryFactories(innerSensitiveScreen, outerNoSensitivityScreen)
+        setRegistryFactories(outerNoSensitivityScreen)
         val executor = CatalystStateProviderExecutor(
             buildConfig("outer_no_sensitivity_screen_key", listOf()),
             context,
@@ -491,7 +491,7 @@ class CatalystStateProviderExecutorTest {
     }
 
     @Test
-    fun execute_onExposableScreenWithInnerNonExposableScreen_onlyIncludesOuterScreen() = runTest {
+    fun invoke_onExposableScreenWithInnerNonExposableScreen_onlyIncludesOuterScreen() = runTest {
         val innerSensitiveScreen = createScreen(
             PreferenceScreenConfig(
                 screenKey = "inner_sensitive_screen_key",
@@ -531,7 +531,7 @@ class CatalystStateProviderExecutorTest {
                 summary = R.string.preference_screen_summary,
             )
         )
-        setRegistryFactories(innerSensitiveScreen, outerNoSensitivityScreen)
+        setRegistryFactories(outerNoSensitivityScreen)
 
         val executor = CatalystStateProviderExecutor(
             buildConfig("outer_no_sensitivity_screen_key", listOf()),
@@ -548,48 +548,36 @@ class CatalystStateProviderExecutorTest {
 
     @Test
     fun execute_onNoSensitivityScreenWithCategoriesAndVariousSensitivities_hasOnlyNonSensitivityPreferences() = runTest {
-        val noSensPref = createPersistentPreference<Boolean>(
-            GraphTestUtils.PersistentPreferenceConfig(
-                GraphTestUtils.PreferenceConfig(
-                    key = "no_sens_pref",
-                    purpose = R.string.preference_purpose,
-                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
-                ),
-                readPermission = null,
-                writePermission = null
+        val noSensPref = createSimplePreference(
+            GraphTestUtils.PreferenceConfig(
+                key = "no_sens_pref",
+                purpose = R.string.preference_purpose,
+                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY,
+                summary = R.string.preference_summary,
             )
         )
-        val sensPref = createPersistentPreference<Boolean>(
-            GraphTestUtils.PersistentPreferenceConfig(
-                GraphTestUtils.PreferenceConfig(
-                    key = "sens_pref",
-                    purpose = R.string.preference_purpose,
-                    sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
-                ),
-                readPermission = null,
-                writePermission = null
+        val sensPref = createSimplePreference(
+            GraphTestUtils.PreferenceConfig(
+                key = "sens_pref",
+                purpose = R.string.preference_purpose,
+                sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE,
+                summary = R.string.preference_summary,
             )
         )
-        val noSensPrefInOuter = createPersistentPreference<Boolean>(
-            GraphTestUtils.PersistentPreferenceConfig(
-                GraphTestUtils.PreferenceConfig(
-                    key = "no_sens_outer",
-                    purpose = R.string.preference_purpose,
-                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY,
-                ),
-                readPermission = null,
-                writePermission = null
+        val noSensPrefInOuter = createSimplePreference(
+            GraphTestUtils.PreferenceConfig(
+                key = "no_sens_outer",
+                purpose = R.string.preference_purpose,
+                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY,
+                summary = R.string.preference_summary,
             )
         )
-        val sensPrefInInner = createPersistentPreference<Boolean>(
-            GraphTestUtils.PersistentPreferenceConfig(
-                GraphTestUtils.PreferenceConfig(
-                    key = "sens_inner",
-                    purpose = R.string.preference_purpose,
-                    sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
-                ),
-                readPermission = null,
-                writePermission = null
+        val sensPrefInInner = createSimplePreference(
+            GraphTestUtils.PreferenceConfig(
+                key = "sens_inner",
+                purpose = R.string.preference_purpose,
+                sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE,
+                summary = R.string.preference_summary,
             )
         )
 

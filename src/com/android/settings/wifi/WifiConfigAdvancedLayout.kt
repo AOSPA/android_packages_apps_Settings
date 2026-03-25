@@ -25,7 +25,7 @@ import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.android.settings.R
-import com.android.settings.widget.FocusIndicatorDrawable
+import com.android.settings.accessibility.shared.ui.FocusIndicatorDrawable
 
 class WifiConfigAdvancedLayout
 @JvmOverloads

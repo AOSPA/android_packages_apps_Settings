@@ -19,14 +19,13 @@ package com.android.settings.accessibility;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.provider.Settings;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceViewHolder;
 
-import com.android.settings.widget.FocusIndicatorDrawable;
+import com.android.settings.accessibility.shared.ui.FocusIndicatorDrawable;
 import com.android.settingslib.widget.SettingsPreferenceGroupAdapter;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
@@ -73,17 +72,13 @@ public class PreferenceAdapterInSuw extends SettingsPreferenceGroupAdapter {
     public void onBindViewHolder(@NonNull PreferenceViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         View view = holder.itemView;
-        if (Flags.enableInsetFocusRingsInSuwReadOnly()) {
+        if (Flags.enableInsetFocusRingsInSuw()) {
             Context context = view.getContext();
             if (context != null
                     && context.getResources()
                             .getBoolean(
-                                    com.android.internal.R.bool.config_enableInsetFocusRingsInSuw)
-                    && Settings.Global.getInt(
-                                    context.getContentResolver(),
-                                    Settings.Global.DEVICE_PROVISIONED,
-                                    0)
-                            == 0) {
+                                    com.android.internal.R.bool
+                                            .config_enableInsetFocusRingsInSuw)) {
                 // These changes add the focus ring indicator to rows and options across the
                 // top-level Vision Settings page and most subpages.
                 FocusIndicatorDrawable.Builder builder =

@@ -78,7 +78,6 @@ class DeviceStateMetadataProviderAggregator(private val executors: List<DeviceSt
             perScreenMetadata = allStates,
             deviceLocale = deviceLocale,
             itemizationTypes = allItemizationTypes.toList(),
-            globalHintText = allHintText
         )
     }
 }

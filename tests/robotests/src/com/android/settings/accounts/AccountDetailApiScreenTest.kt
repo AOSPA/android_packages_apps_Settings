@@ -30,7 +30,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.testutils.shadow.ShadowAccountManager
 import com.android.settings.testutils.shadow.ShadowUserManager
 import com.android.settings.testutils2.ApiTester
-import com.android.settings.testutils2.FailedPreconditionException
+import com.android.settings.testutils2.HardwareUnsupportedException
 import com.google.common.truth.Truth.assertThat
 import kotlin.test.assertFailsWith
 import org.junit.Rule
@@ -72,13 +72,14 @@ class AccountDetailApiScreenTest {
 
     @Test
     @Config(shadows = [ShadowAccountManager::class])
-    fun getLaunchIntent_withoutAccount_throwsCustomException() {
-        assertFailsWith<FailedPreconditionException> { tester.getLaunchIntent() }
+    fun getLaunchIntent_withoutAccount_throwsHardwareUnsupportedException() {
+        val failure = assertFailsWith<HardwareUnsupportedException> { tester.getLaunchIntent() }
+        assertThat(failure.reason).isEqualTo(AccountDetailApiScreen.PRECONDITIONS_NO_ACCOUNT)
     }
 
     @Test
     @Config(shadows = [ShadowAccountManager::class, ShadowUserManager::class])
-    fun getLaunchIntent_disabledUserInfo_throwsCustomException() {
+    fun getLaunchIntent_diabeldUserInfo_throwsHardwareUnsupportedException() {
         val userManager =
             Shadow.extract<ShadowUserManager?>(
                 context.getSystemService<UserManager?>(UserManager::class.java)
@@ -86,6 +87,7 @@ class AccountDetailApiScreenTest {
         userManager?.addUserProfile(UserHandle(0))
         userManager?.setIsUserEnabled(0, false)
 
-        assertFailsWith<FailedPreconditionException> { tester.getLaunchIntent() }
+        val failure = assertFailsWith<HardwareUnsupportedException> { tester.getLaunchIntent() }
+        assertThat(failure.reason).isEqualTo(AccountDetailApiScreen.PRECONDITIONS_USER_DISABLED)
     }
 }

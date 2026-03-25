@@ -28,7 +28,6 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 // LINT.IfChange
@@ -75,10 +74,7 @@ class DoubleTwistGestureApiFirstScreen :
                     if (userManager != null) {
                         Allowed
                     } else {
-                        Custom(
-                            R.string.double_twist_gesture_screen_usermanager_not_available,
-                            stability = PreconditionStability.UNSTABLE,
-                        )
+                        Custom(R.string.double_twist_gesture_screen_usermanager_not_available)
                     }
                 }
                 execute { value ->

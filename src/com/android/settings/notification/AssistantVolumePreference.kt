@@ -37,7 +37,6 @@ import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.datastore.and
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
@@ -75,14 +74,8 @@ class AssistantVolumePreference(private val audioHelper: AudioHelper) :
 
     override val availabilityDescription = "The device must support stream assistant, must not be a single volume device, and must not be a watch."
 
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
-
     override fun isAvailable(context: Context) =
         streamAssistantPublic() && !audioHelper.isSingleVolume && !hasFeatureWatch(context)
-
-    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
-
-    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 

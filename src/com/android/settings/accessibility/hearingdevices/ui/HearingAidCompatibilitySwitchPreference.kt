@@ -28,7 +28,6 @@ import com.android.settings.accessibility.hearingdevices.data.HearingAidCompatib
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -101,8 +100,6 @@ class HearingAidCompatibilitySwitchPreference(private val context: Context) :
 
     override val availabilityDescription =
         "The device must support hearing aid compatibility."
-
-    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean =
         telephonyManager.isHearingAidCompatibilitySupported()

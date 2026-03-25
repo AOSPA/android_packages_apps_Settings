@@ -179,7 +179,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
         }
 
         backgroundScope.launch(NonCancellable) {
-            Trace.beginAsyncSection("DeviceStateAppFunction ${request.functionIdentifier}", 0)
+            Trace.beginSection("DeviceStateAppFunction ${request.functionIdentifier}")
             Log.d(TAG, "device state app function ${request.functionIdentifier} called.")
             if (!aggregators.containsKey(appFunctionType)) {
                 metricsLogger.logAppFunctionError(
@@ -229,7 +229,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                     appFunctionType.toMetricsId(),
                 )
             } finally {
-                Trace.endAsyncSection("DeviceStateAppFunction ${request.functionIdentifier}", 0)
+                Trace.endSection()
             }
         }
     }
