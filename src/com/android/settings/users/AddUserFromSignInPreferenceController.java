@@ -25,6 +25,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settings.core.TogglePreferenceController;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 public class AddUserFromSignInPreferenceController extends TogglePreferenceController {
 
@@ -41,6 +42,26 @@ public class AddUserFromSignInPreferenceController extends TogglePreferenceContr
     public void updateState(Preference preference) {
         super.updateState(preference);
         mUserCaps.updateAddUserCapabilities(mContext);
+
+        final RestrictedSwitchPreference restrictedSwitchPreference =
+                (RestrictedSwitchPreference) preference;
+
+        if (android.os.Flags.loginAddUserEnforcement()) {
+            restrictedSwitchPreference.setEnabled(true);
+            for (android.content.pm.UserInfo user : mUserManager.getAliveUsers()) {
+                if (UserManager.USER_TYPE_FULL_SECONDARY.equals(user.userType)
+                        && hasAddUserRestriction(user.getUserHandle())) {
+                    // Disable the toggle when any of the secondary users has DISALLOW_ADD_USER
+                    // restriction.
+                    restrictedSwitchPreference.checkRestrictionAndSetDisabled(
+                            UserManager.DISALLOW_ADD_USER, user.id);
+                    if (restrictedSwitchPreference.isDisabledByAdmin()) {
+                        return;
+                    }
+                    restrictedSwitchPreference.setEnabled(false);
+                }
+            }
+        }
     }
 
     @Override
@@ -60,7 +81,9 @@ public class AddUserFromSignInPreferenceController extends TogglePreferenceContr
 
     @Override
     public boolean isChecked() {
-        return !mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER, UserHandle.SYSTEM);
+        return !hasAddUserRestriction(UserHandle.SYSTEM)
+                && (!android.os.Flags.loginAddUserEnforcement()
+                        || !hasAddUserRestrictionOnAnySecondaryUser());
     }
 
     @Override
@@ -73,5 +96,17 @@ public class AddUserFromSignInPreferenceController extends TogglePreferenceContr
     @Override
     public int getSliceHighlightMenuRes() {
         return R.string.menu_key_system;
+    }
+
+    /** Checks if any secondary user has the DISALLOW_ADD_USER restriction. */
+    private boolean hasAddUserRestrictionOnAnySecondaryUser() {
+        return mUserManager.getAliveUsers().stream()
+                .filter(user -> UserManager.USER_TYPE_FULL_SECONDARY.equals(user.userType))
+                .anyMatch(user -> hasAddUserRestriction(user.getUserHandle()));
+    }
+
+    /** Checks the DISALLOW_ADD_USER restriction for a specific user. */
+    private boolean hasAddUserRestriction(UserHandle user) {
+        return mUserManager.hasUserRestriction(UserManager.DISALLOW_ADD_USER, user);
     }
 }
