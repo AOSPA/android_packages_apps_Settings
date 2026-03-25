@@ -29,14 +29,20 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import android.annotation.Nullable;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.hardware.usb.IUsbSerialReader;
+import android.hardware.usb.UsbConfiguration;
+import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
 import android.hardware.usb.UsbPort;
 import android.hardware.usb.UsbPortStatus;
 import android.net.TetheringManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+
+import com.android.settings.R;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -244,5 +250,80 @@ public class UsbBackendTest {
         final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
 
         assertThat(usbBackend.maybeGetUserRestriction(UsbManager.FUNCTION_UVC)).isNull();
+    }
+
+    private UsbDevice createUsbDevice(
+            int vendorId,
+            int productId,
+            @Nullable String manufactureName,
+            @Nullable String productName) {
+        return new UsbDevice.Builder(
+                        /* name= */ "name",
+                        vendorId,
+                        productId,
+                        /* Class= */ 0,
+                        /* subClass= */ 1,
+                        /* protocol= */ 2,
+                        manufactureName,
+                        productName,
+                        /* version= */ "version",
+                        /* configurations= */ new UsbConfiguration[] {},
+                        /* serialNumber= */ "serialNumber",
+                        /* hasAudioPlayback= */ false,
+                        /* hasAudioCapture= */ false,
+                        /* hasMidi= */ false,
+                        /* hasVideoPlayback= */ false,
+                        /* hasVideoCapture= */ false)
+                .build(new IUsbSerialReader.Default());
+    }
+
+    @Test
+    public void getDeviceName_productNameAvailable_returnsProductName() {
+        final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
+        final UsbDevice usbDevice =
+                createUsbDevice(
+                        /* vendorId= */ 10,
+                        /* productId= */ 11,
+                        /* manufactureName= */ null,
+                        /* productName= */ "Product Name");
+
+        assertThat(usbBackend.getDeviceName(usbDevice)).isEqualTo(usbDevice.getProductName());
+    }
+
+    @Test
+    public void getDeviceName_onlyManufacturerAvailable_returnsManufacturerString() {
+        final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
+        final UsbDevice usbDevice =
+                createUsbDevice(
+                        /* vendorId= */ 10,
+                        /* productId= */ 11,
+                        /* manufactureName= */ "Manufacture Name",
+                        /* productName= */ null);
+
+        final String expected =
+                mContext.getString(
+                        R.string.usb_device_name_unknown_with_manufacturer_name,
+                        usbDevice.getManufacturerName());
+
+        assertThat(usbBackend.getDeviceName(usbDevice)).isEqualTo(expected);
+    }
+
+    @Test
+    public void getDeviceName_noNamesAvailable_returnsVendorProductIds() {
+        final UsbBackend usbBackend = new UsbBackend(mContext, mUserManager);
+        final UsbDevice usbDevice =
+                createUsbDevice(
+                        /* vendorId= */ 30,
+                        /* productId= */ 31,
+                        /* manufactureName= */ null,
+                        /* productName= */ null);
+
+        final String expected =
+                mContext.getString(
+                        R.string.usb_device_name_unknown_with_vendor_id_and_product_id,
+                        usbDevice.getVendorId(),
+                        usbDevice.getProductId());
+
+        assertThat(usbBackend.getDeviceName(usbDevice)).isEqualTo(expected);
     }
 }
