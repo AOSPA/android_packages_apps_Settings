@@ -17,18 +17,26 @@
 package com.android.settings.accessibility.setupwizard.items
 
 import android.content.Context
+import android.view.HapticFeedbackConstants.CLOCK_TICK
 import android.view.LayoutInflater
 import android.view.View
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
 import com.google.android.material.slider.Slider
 import com.google.common.truth.Truth.assertThat
+import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.mockito.kotlin.argumentCaptor
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.never
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
+import org.robolectric.RobolectricTestParameterInjector
 
 /** Tests for [SliderItem]. */
-@RunWith(RobolectricTestRunner::class)
+@RunWith(RobolectricTestParameterInjector::class)
 class SliderItemTest {
 
     private val context: Context = ApplicationProvider.getApplicationContext()
@@ -70,6 +78,49 @@ class SliderItemTest {
         item.sliderIncrement = 50
 
         assertThat(item.sliderIncrement).isEqualTo(10)
+    }
+
+    @TestParameters(
+        value =
+            [
+                "{mode: 'ON_ENDS', init: 5, next: 10.0, expectedHaptic: true}",
+                "{mode: 'ON_ENDS', init: 5, next: 0.0, expectedHaptic: true}",
+                "{mode: 'ON_ENDS', init: 5, next: 6.0, expectedHaptic: false}",
+                "{mode: 'ON_TICKS', init: 5, next: 6.0, expectedHaptic: true}",
+                "{mode: 'ON_TICKS', init: 10, next: 10.0, expectedHaptic: false}",
+                "{mode: 'NONE', init: 5, next: 10.0, expectedHaptic: false}",
+            ]
+    )
+    @Test
+    fun hapticFeedback_changeValue_verifyTrigger(
+        mode: HapticTestMode,
+        init: Int,
+        next: Float,
+        expectedHaptic: Boolean,
+    ) {
+        val spySlider = spy(rootView.findViewById<Slider>(R.id.slider))
+        val spyView = spy(rootView)
+        spyView.stub { on { findViewById<Slider>(R.id.slider) } doReturn spySlider }
+        item.apply {
+            min = 0
+            max = 10
+            sliderValue = init
+            hapticFeedbackMode = mode.value
+            updatesContinuously = true
+        }
+        item.onBindView(spyView)
+        val argumentCaptor = argumentCaptor<Slider.OnChangeListener>()
+        verify(spySlider).addOnChangeListener(argumentCaptor.capture())
+        val listener = argumentCaptor.firstValue
+
+        spySlider.stub { on { value } doReturn next }
+        listener.onValueChange(spySlider, next, true)
+
+        if (expectedHaptic) {
+            verify(spySlider).performHapticFeedback(CLOCK_TICK)
+        } else {
+            verify(spySlider, never()).performHapticFeedback(CLOCK_TICK)
+        }
     }
 
     @Test
@@ -163,5 +214,11 @@ class SliderItemTest {
         val slider = rootView.findViewById<Slider>(R.id.slider)
         assertThat(slider.contentDescription).isNull()
         assertThat(slider.stateDescription).isNull()
+    }
+
+    enum class HapticTestMode(val value: Int) {
+        NONE(SliderItem.HAPTIC_FEEDBACK_MODE_NONE),
+        ON_TICKS(SliderItem.HAPTIC_FEEDBACK_MODE_ON_TICKS),
+        ON_ENDS(SliderItem.HAPTIC_FEEDBACK_MODE_ON_ENDS),
     }
 }
