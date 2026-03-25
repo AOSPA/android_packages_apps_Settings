@@ -278,7 +278,7 @@ public final class PhysicalKeyboardFragment extends DashboardFragment
         final PreferenceScreen preferenceScreen = getPreferenceScreen();
         preferenceScreen.removeAll();
         final PreferenceCategory category = new PreferenceCategory(getPrefContext());
-        category.setTitle(R.string.builtin_keyboard_settings_title);
+        category.setTitle(R.string.physical_keyboards_list_title);
         category.setOrder(0);
         preferenceScreen.addPreference(category);
 

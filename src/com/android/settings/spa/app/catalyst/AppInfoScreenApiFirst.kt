@@ -36,6 +36,7 @@ import com.android.settingslib.metadata.preferencesapi.multiusers.ManagementScop
 import com.android.settingslib.metadata.preferencesapi.multiusers.PreferenceTarget
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.spaprivileged.framework.common.asUser
 import com.android.settingslib.spaprivileged.framework.common.permissionControllerManager
@@ -77,17 +78,18 @@ class AppInfoScreenApiFirst :
 
         preference(
             key = "unused_apps_switch",
-            purpose = R.string.installed_app_detail_manage_app_unused_parameter_purpose,
+            purpose = R.string.installed_app_detail_unused_apps_switch_purpose,
             type = AnyBoolean,
             appliesTo = PreferenceTarget.USER(canManage = ManagementScope.PROFILE_GROUP),
         ) {
             sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
-            preconditions(R.string.installed_app_detail_manage_app_unused_parameter_purpose) {
+            preconditions("App hibernation must be available on the device and the app must not be archived.") {
                 val appInfo =
                     context.getApplicationInfo(parameters.getRequired(PARAM_PACKAGE))
                         ?: return@preconditions Custom(
-                            R.string.installed_app_detail_manage_app_unused_precondition_null_app
+                            R.string.installed_app_detail_manage_app_unused_precondition_null_app,
+                            stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
                         )
 
                 val isFeatureEnabled =
@@ -99,11 +101,13 @@ class AppInfoScreenApiFirst :
 
                 if (!isFeatureEnabled)
                     return@preconditions Custom(
-                        R.string.installed_app_detail_manage_app_unused_parameter_purpose
+                        "App hibernation is not available on this device",
+                        stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
                     )
                 if (appInfo.isArchived)
                     return@preconditions Custom(
-                        R.string.installed_app_detail_manage_app_unused_parameter_purpose
+                        "The app is archived",
+                        stability = PreconditionStability.UNSTABLE,
                     )
 
                 Allowed
@@ -128,7 +132,7 @@ class AppInfoScreenApiFirst :
             }
 
             set {
-                preconditions(R.string.installed_app_detail_settings_screen_purpose) {
+                preconditions("The app must not be a critical system app.") {
                     val appInfo =
                         context.packageManager.getApplicationInfoAsUser(
                             parameters.getRequired(PARAM_PACKAGE),
@@ -137,7 +141,8 @@ class AppInfoScreenApiFirst :
                         )
                             ?: return@preconditions Custom(
                                 R.string
-                                    .installed_app_detail_manage_app_unused_precondition_null_app
+                                    .installed_app_detail_manage_app_unused_precondition_null_app,
+                                stability = PreconditionStability.UNSTABLE,
                             )
 
                     val isEligible =
@@ -147,7 +152,8 @@ class AppInfoScreenApiFirst :
 
                     if (!isEligible) {
                         Custom(
-                            R.string.installed_app_detail_manage_app_unused_precondition_exempt_app
+                            R.string.installed_app_detail_manage_app_unused_precondition_exempt_app,
+                            stability = PreconditionStability.UNSTABLE,
                         )
                     } else {
                         Allowed

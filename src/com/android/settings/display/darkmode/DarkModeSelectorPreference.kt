@@ -28,6 +28,7 @@ import com.android.settings.spa.accessibility.ForceDarkAppExceptionsPageProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIndexableTitleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
@@ -63,6 +64,8 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
         get() = SensitivityLevel.NO_SENSITIVITY
 
     override val availabilityDescription = "The device must support dark mode in the API."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = Flags.catalystDarkUiMode()
 

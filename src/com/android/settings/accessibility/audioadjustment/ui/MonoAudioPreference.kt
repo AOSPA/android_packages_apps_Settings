@@ -34,7 +34,7 @@ class MonoAudioPreference :
         summary = R.string.accessibility_toggle_primary_mono_summary,
     ) {
 
-    override fun storage(context: Context): KeyValueStore = SettingsSystemStore.get(context)
+    override fun storage(context: Context): KeyValueStore = SettingsSystemStore.get(context).apply { setDefaultValue(KEY, false) }
 
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY

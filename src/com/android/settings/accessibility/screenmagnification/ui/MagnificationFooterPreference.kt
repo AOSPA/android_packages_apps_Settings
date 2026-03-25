@@ -22,7 +22,6 @@ import android.icu.text.MessageFormat
 import android.text.Html
 import com.android.server.accessibility.Flags
 import com.android.settings.R
-import com.android.settings.accessibility.screenmagnification.OneFingerPanningPreferenceController
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceBinding
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
 import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
@@ -34,7 +33,6 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
-// LINT.IfChange
 class MagnificationFooterPreference(override val helpResource: Int) :
     AccessibilityFooterPreferenceMetadata,
     AccessibilityFooterPreferenceBinding,
@@ -103,7 +101,7 @@ class MagnificationFooterPreference(override val helpResource: Int) :
     private fun getTouchOnlySummary(context: Context): String {
         if (Flags.enableMagnificationOneFingerPanningGesture()) {
             val isOneFingerPanningOn =
-                OneFingerPanningPreferenceController.isOneFingerPanningEnabled(context)
+                OneFingerPanningSwitchPreference.isOneFingerPanningEnabled(context)
             return MessageFormat.format(
                 context.getString(
                     if (isOneFingerPanningOn)
@@ -165,4 +163,3 @@ class MagnificationFooterPreference(override val helpResource: Int) :
         const val KEY = "html_description"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/FooterPreferenceController.kt)

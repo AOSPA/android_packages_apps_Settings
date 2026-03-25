@@ -25,12 +25,12 @@ import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_BATTERY
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_BATTERY
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.types.AnyInt
-import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.metadata.preferencesapi.types.Date
 import java.util.concurrent.TimeUnit
 
@@ -52,7 +52,10 @@ class BatteryInfoApiScreen :
             if (context.isBatteryInfoEnabled()) {
                 Allowed
             } else {
-                Custom(R.string.battery_info_screen_battery_information_feature_disabled)
+                Custom(
+                    R.string.battery_info_screen_battery_information_feature_disabled,
+                    stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
+                )
             }
         }
 

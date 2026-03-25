@@ -24,6 +24,7 @@ import com.android.settings.R
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.deviceinfo.HardwareInfoPreferenceController.getDeviceModel
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -64,6 +65,8 @@ open class HardwareInfoScreen :
 
     override val availabilityDescription =
         "The device must support showing the device model."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_device_model)

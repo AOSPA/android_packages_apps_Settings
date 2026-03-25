@@ -23,6 +23,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentManager
 import com.android.settings.R
+import com.android.settings.accessibility.shared.utils.configureFocusRingsForDialog
+import com.android.settings.accessibility.shared.utils.shouldShowFocusRingsInSuw
 import com.android.settings.accessibility.textreading.data.BoldTextDataStore
 import com.android.settings.accessibility.textreading.data.DisplaySizeDataStore
 import com.android.settings.accessibility.textreading.data.FontSizeDataStore
@@ -52,11 +54,15 @@ class TextReadingResetDialog : InstrumentedDialogFragment() {
                 resetTextReadingRelatedSettings()
             }
             .setNegativeButton(R.string.cancel, /* listener= */ null)
-            .create().apply {
+            .create()
+            .apply {
                 setOnShowListener {
-                    val titleView = findViewById<android.widget.TextView>(
-                        androidx.appcompat.R.id.alertTitle)
+                    val titleView =
+                        findViewById<android.widget.TextView>(androidx.appcompat.R.id.alertTitle)
                     titleView?.isAccessibilityHeading = true
+                    if (shouldShowFocusRingsInSuw(context)) {
+                        configureFocusRingsForDialog(this)
+                    }
                 }
             }
     }

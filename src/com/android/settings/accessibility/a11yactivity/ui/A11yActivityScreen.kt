@@ -29,9 +29,9 @@ import androidx.fragment.app.Fragment
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
-import com.android.settings.accessibility.a11yactivity.AccessibilityShortcut
 import com.android.settings.accessibility.AccessibilitySettings
 import com.android.settings.accessibility.LaunchAccessibilityActivityPreferenceFragment
+import com.android.settings.accessibility.a11yactivity.AccessibilityShortcut
 import com.android.settings.accessibility.a11yactivity.ui.A11yActivityFooterPreference.Companion.FOOTER_KEY
 import com.android.settings.accessibility.a11yactivity.ui.A11yActivityFooterPreference.Companion.HTML_FOOTER_KEY
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
@@ -43,7 +43,6 @@ import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
-import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -52,8 +51,7 @@ import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.metadata.preferencesapi.types.AnyString
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TwoTargetPreference
 import kotlinx.coroutines.CoroutineScope
@@ -62,7 +60,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(A11yActivityScreen.KEY, parameterized = true)
 open class A11yActivityScreen
@@ -158,7 +155,6 @@ private constructor(
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +A11yActivityScreenPreference(this@A11yActivityScreen)
             val shortcutInfo = accessibilityShortcutInfo
             if (shortcutInfo != null) {
                 +IntroPreference(shortcutInfo)
@@ -203,27 +199,6 @@ private constructor(
                 highlightPreference(arguments!!, metadata?.bindingKey)
             }
         }
-
-    class A11yActivityScreenPreference(
-        private val screenMetadata : A11yActivityScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceTitleProvider {
-
-        override val key : String
-            get() = "a11y_activity_detail_screen_preference"
-
-        override val purpose : Int
-            get() = screenMetadata.purpose
-
-        override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
-
-        override val indexable = false
-
-        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
-
-        override fun getTitle(context: Context) : CharSequence? = screenMetadata.getTitle(context)
-
-        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
-    }
 
     companion object : ParameterizedPreferenceScreenArgumentsFactory {
         const val KEY = "a11y_activity_detail_screen"

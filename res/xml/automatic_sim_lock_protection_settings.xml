@@ -19,12 +19,18 @@
     android:title="@string/automatic_sim_lock_protection">
 
     <SwitchPreferenceCompat
-        android:key="sim_pin_auto_management_toggle"
+        android:key="sim_pin_manual_management_only_toggle"
         android:title="@string/sim_auto_pin_management_toggle"
         settings:controller="com.android.settings.security.SimPinProtectionToggleController"/>
 
+    <com.android.settingslib.PrimarySwitchPreference
+        android:key="sim_pin_auto_management_toggle"
+        android:title="@string/sim_auto_pin_management_toggle"
+        android:fragment="com.android.settings.security.ControlAutoSimPinManagementFragment"
+        settings:controller="com.android.settings.security.SimPinProtectionToggleController"/>
+
     <Preference
-        android:key="change_manually_managed_sim_pin"
+        android:key="change_manually_managed_sim_pin_primary_screen"
         android:title="@string/sim_pin_change"
         settings:controller="com.android.settings.security.ChangeSimPinPreferenceController"
         />

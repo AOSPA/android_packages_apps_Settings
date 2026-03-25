@@ -28,10 +28,11 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
-import com.android.settingslib.metadata.preferencesapi.safe
 import com.android.settingslib.metadata.preferencesapi.unsafe
 
 // LINT.IfChange
@@ -97,7 +98,10 @@ class StylusUsiDetailsApiScreen :
                 if (inputMethod != null && inputMethod.supportsStylusHandwriting()) {
                     Allowed
                 } else {
-                    Custom(R.string.stylus_handwriting_precondition_failed)
+                    Custom(
+                        R.string.stylus_handwriting_precondition_failed,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
             }
 

@@ -41,6 +41,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+
 
 // LINT.IfChange
 class BatterySaverPreference :
@@ -80,6 +82,10 @@ class BatterySaverPreference :
     override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
+
+    override fun getEnabledDescription(): String = "This device must not be plugged in."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) =
         !BatteryStatus(BatteryUtils.getBatteryIntent(context)).isPluggedIn

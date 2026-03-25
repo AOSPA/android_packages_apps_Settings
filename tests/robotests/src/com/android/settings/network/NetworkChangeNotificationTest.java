@@ -34,7 +34,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.UserManager;
-import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -54,7 +53,6 @@ import org.robolectric.RobolectricTestRunner;
 @RunWith(RobolectricTestRunner.class)
 public final class NetworkChangeNotificationTest {
     private static final int SUB_ID = 2;
-    private final String mFakeDisplayName = "fake_display_name";
     private final CharSequence mFakeNotificationChannelTitle = "fake_notification_channel_title";
     private final CharSequence mFakeNotificationTitle = "fake_notification_title";
     private final String mFakeNotificationSummary = "fake_notification_Summary";
@@ -70,8 +68,6 @@ public final class NetworkChangeNotificationTest {
     private SubscriptionManager mSubscriptionManager;
     @Spy
     private Resources mResources = mContext.getResources();
-    @Mock
-    private SubscriptionInfo mSubInfo;
     private NetworkChangeNotification mNetworkChangeNotification = new NetworkChangeNotification();
 
     @Before
@@ -87,15 +83,15 @@ public final class NetworkChangeNotificationTest {
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
         when(mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE)).thenReturn(
                 mSubscriptionManager);
-        when(mSubInfo.getDisplayName()).thenReturn(mFakeDisplayName);
         when(mContext.getResources()).thenReturn(mResources);
         when(mResources.getText(R.string.network_protection_2g_on_notification_title)).thenReturn(
                 mFakeNotificationTitle);
         when(mResources.getText(
                 R.string.network_protection_2g_notification_channel_title)).thenReturn(
                 mFakeNotificationChannelTitle);
-        when(mResources.getString(R.string.network_protection_2g_on_notification_summary,
-                                  mFakeDisplayName)).thenReturn(mFakeNotificationSummary);
+        when(mResources.getString(
+                R.string.network_protection_2g_on_notification_summary)).thenReturn(
+                mFakeNotificationSummary);
     }
 
     @Test
@@ -125,19 +121,6 @@ public final class NetworkChangeNotificationTest {
 
         mNetworkChangeNotification.onReceive(mContext, intent);
 
-        verify(mSubscriptionManager, never()).getActiveSubscriptionInfo(
-                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-    }
-
-    @Test
-    public void onReceive_with2gDisabledByCarrierAction_notGetSubscriptionInfo() {
-        Intent intent = new Intent(TelephonyManager.ACTION_2G_DISABLED_BY_CARRIER);
-        intent.putExtra(EXTRA_SUBSCRIPTION_ID, SUB_ID);
-        when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID)).thenReturn(null);
-
-
-        mNetworkChangeNotification.onReceive(mContext, intent);
-
         verify(mContext, never()).getSystemService(TelephonyManager.class);
     }
 
@@ -145,7 +128,6 @@ public final class NetworkChangeNotificationTest {
     public void onReceive_with2gDisabledByCarrierAction_not2gSupported() {
         Intent intent = new Intent(TelephonyManager.ACTION_2G_DISABLED_BY_CARRIER);
         intent.putExtra(EXTRA_SUBSCRIPTION_ID, SUB_ID);
-        when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID)).thenReturn(mSubInfo);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.getSupportedRadioAccessFamily()).thenReturn(
                 TelephonyManager.NETWORK_TYPE_BITMASK_LTE);
@@ -159,7 +141,6 @@ public final class NetworkChangeNotificationTest {
     public void onReceive_with2gDisabledByCarrierAction_notRadioInterfaceCapabilitySupported() {
         Intent intent = new Intent(TelephonyManager.ACTION_2G_DISABLED_BY_CARRIER);
         intent.putExtra(EXTRA_SUBSCRIPTION_ID, SUB_ID);
-        when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID)).thenReturn(mSubInfo);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.getSupportedRadioAccessFamily()).thenReturn(
                 TelephonyManager.NETWORK_TYPE_BITMASK_GPRS);
@@ -174,7 +155,6 @@ public final class NetworkChangeNotificationTest {
     public void onReceive_with2gDisabledByCarrierAction_notificationShouldSend() {
         Intent intent = new Intent(TelephonyManager.ACTION_2G_DISABLED_BY_CARRIER);
         intent.putExtra(EXTRA_SUBSCRIPTION_ID, SUB_ID);
-        when(mSubscriptionManager.getActiveSubscriptionInfo(SUB_ID)).thenReturn(mSubInfo);
         when(mTelephonyManager.createForSubscriptionId(SUB_ID)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.getSupportedRadioAccessFamily()).thenReturn(
                 TelephonyManager.NETWORK_TYPE_BITMASK_GPRS);

@@ -20,4 +20,7 @@
   <!-- Referenced outside of Settings to confirm bug fixed - bug involved multiple
   pending intents with difference only in intent extras, which doesn't work. -->
   <bool name="config_isSafetyCenterLockScreenPendingIntentFixed">true</bool>
+
+  <!-- Whether to show the top level Device category for desktop. -->
+  <bool name="config_show_top_level_device_category">false</bool>
 </resources>

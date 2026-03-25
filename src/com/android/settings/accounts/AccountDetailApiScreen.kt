@@ -35,6 +35,7 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import kotlin.time.measureTimedValue
 
 // LINT.IfChange
@@ -55,7 +56,7 @@ class AccountDetailApiScreen :
                 name = ACCOUNT_NAME,
                 purpose = R.string.account_detail_screen_parameter_purpose,
                 required = true,
-                type = Accounts(),
+                type = Accounts,
             )
 
             prepareScreenExtras { keyParameters, extras ->
@@ -68,7 +69,7 @@ class AccountDetailApiScreen :
                         extras.putString(KEY_ACCOUNT_TYPE, it.type)
                         extras.putParcelable(KEY_USER_HANDLE, Process.myUserHandle())
                         extras.putParcelable(EXTRA_USER, Process.myUserHandle())
-                    } ?: Custom("Can't find account with name $accountName")
+                    } ?: Custom("Can't find account with name $accountName", stability = PreconditionStability.UNSTABLE)
             }
         }
 
@@ -79,12 +80,12 @@ class AccountDetailApiScreen :
             // TODO(b/479499461): Add support for multiple users.
             val userInfo = userManager.getUserInfo(Process.myUserHandle().identifier)
             if (!userInfo.isEnabled) {
-                HardwareUnsupported(PRECONDITIONS_USER_DISABLED)
+                Custom(PRECONDITIONS_USER_DISABLED, stability = PreconditionStability.UNSTABLE)
             } else {
                 if (getAccountsAsUser(Process.myUserHandle()).isNotEmpty()) {
                     Allowed
                 } else {
-                    HardwareUnsupported(PRECONDITIONS_NO_ACCOUNT)
+                    Custom(PRECONDITIONS_NO_ACCOUNT, stability = PreconditionStability.UNSTABLE)
                 }
             }
         }

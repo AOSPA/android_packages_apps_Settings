@@ -55,7 +55,7 @@ class AccountsTest {
                             name = ACCOUNT_NAME,
                             purpose = R.string.parameter_purpose,
                             required = true,
-                            type = Accounts(),
+                            type = Accounts,
                         )
                     }
                 }

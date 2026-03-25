@@ -42,7 +42,7 @@ class AutoclickMainSwitchPreference :
     override val title: Int
         get() = R.string.accessibility_autoclick_main_switch_title
 
-    override fun storage(context: Context) = SettingsSecureStore.get(context)
+    override fun storage(context: Context) = SettingsSecureStore.get(context).apply { setDefaultValue(SETTING_KEY, false) }
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW

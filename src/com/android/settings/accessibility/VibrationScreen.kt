@@ -24,6 +24,7 @@ import com.android.settings.Settings.VibrationSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -54,6 +55,8 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
 
     override val availabilityDescription =
         "The device must have a vibrator and support only one vibration intensity level."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.hasVibrator && context.getSupportedVibrationIntensityLevels() == 1
@@ -117,6 +120,12 @@ open class VibrationScreen : PreferenceScreenMixin, PreferenceAvailabilityProvid
                     context,
                     "toggle_keyboard_vibration_enabled",
                     R.string.toggle_keyboard_vibration_enabled_purpose,
+                    MAIN_SWITCH_KEY,
+                )
+                +KeyboardVibrationIntensitySwitchPreference(
+                    context,
+                    "toggle_keyboard_vibration_intensity",
+                    R.string.toggle_keyboard_vibration_intensity_purpose,
                     MAIN_SWITCH_KEY,
                 )
             }

@@ -23,7 +23,7 @@
     <string name="general_categories_purpose" translatable="false">general_categories</string>
     <string name="a11y_activity_detail_screen_html_footer_info_purpose" translatable="false">html_footer_info</string>
     <string name="launch_preference_purpose" translatable="false">launch_preference</string>
-    <string name="shortcut_preference_key_purpose" translatable="false">shortcut_preference_key</string>
+    <string name="shortcut_preference_key_purpose" translatable="false">Whether the accessibility feature can be launched via the accessibility button shortcut</string>
     <string name="a11y_activity_detail_screen_top_intro_purpose" translatable="false">top_intro</string>
     <string name="a11y_shortcuts_settings_screen_purpose" translatable="false">Allows users to manage accessibility shortcuts, including configuring the appearance of the accessibility button and enabling the volume keys shortcut on the lock screen.</string>
     <string name="a11y_volume_keys_shortcut_setting_on_lock_screen_purpose" translatable="false">Whether the volume keys shortcut can be used to trigger accessibility features while the device is on the lock screen</string>
@@ -98,7 +98,7 @@
     <string name="battery_usage_percentage_package_purpose" translatable="false">Percentage of battery used by an app</string>
     <string name="app_battery_usage_list_screen_purpose" translatable="false">Allows users to manage background power consumption for all installed applications. This includes auditing per-app battery usage metrics and configuring background policies to balance application performance with device battery life.</string>
     <string name="bluetooth_scanning_screen_purpose" translatable="false">Allow apps and services to scan for nearby devices at any time, even when Bluetooth is off. This can be used, for example, to improve location-based features and services.</string>
-    <string name="bluetooth_screen_bt_pair_rename_devices_purpose" translatable="false">bluetooth_screen_bt_pair_rename_devices</string>
+    <string name="bluetooth_screen_bt_pair_rename_devices_purpose" translatable="false">Name of the device as seen by Bluetooth</string>
     <string name="bluetooth_screen_footer_purpose" translatable="false">bluetooth_screen_footer</string>
     <string name="bluetooth_switchbar_screen_purpose" translatable="false">Allows users to control whether apps and services can scan for nearby Bluetooth devices even when Bluetooth is turned off, primarily to enhance location accuracy.</string>
     <string name="bluetooth_auto_on_toggle_purpose" translatable="false">Controls the feature that automatically turns Bluetooth back on.</string>
@@ -151,6 +151,8 @@
     <string name="daltonizer_mode_tritanomaly_purpose" translatable="false">Set color correction mode to Tritanomaly (blue-yellow)</string>
     <string name="daltonizer_preview_purpose" translatable="false">daltonizer_preview</string>
     <string name="daltonizer_shortcut_key_purpose" translatable="false">Whether a shortcut is enabled to quickly toggle color correction</string>
+    <string name="daltonizer_mode_selector_purpose" translatable="false">Allows users to set color correction mode, selecting to Deuteranomaly, Protanomaly, Tritanomaly, or Grayscale</string>
+    <string name="daltonizer_mode_selector_customenum_description" translatable="false">Options for color correction mode</string>
     <string name="dark_theme_connection_footer_purpose" translatable="false">dark_theme_connection_footer</string>
     <string name="dark_theme_custom_bedtime_footer_purpose" translatable="false">dark_theme_custom_bedtime_footer</string>
     <string name="dark_theme_end_time_purpose" translatable="false">The specific time when dark theme is scheduled to turn off</string>
@@ -173,7 +175,8 @@
     <string name="hardware_info_device_revision_purpose" translatable="false">The hardware version of the device</string>
     <string name="device_state_all_recent_location_access_purpose" translatable="false">Allows users to view a list of applications that have recently accessed the device\'s location.</string>
     <string name="device_state_app_info_notification_access_purpose" translatable="false">device_state_app_info_notification_access_purpose</string>
-    <string name="device_state_auto_rotate_pref_screen_purpose" translatable="false">Allows the user to view and enable automatic screen rotation, also known as auto-rotate.</string>
+    <string name="device_state_auto_rotate_pref_screen_purpose" translatable="false">Allows the user to view and enable automatic screen rotation, also known as auto-rotate. This screen is only available on foldables. </string>
+    <string name="smart_auto_rotate_pref_screen_purpose" translatable="false">Allows the user to view and enable automatic screen rotation, also known as auto-rotate.</string>
     <string name="device_state_notification_access_alerting_preference_purpose" translatable="false">device_state_notification_access_alerting_preference</string>
     <string name="device_state_notification_access_approval_preference_purpose" translatable="false">device_state_notification_access_approval_preference</string>
     <string name="device_state_notification_access_conversations_preference_purpose" translatable="false">device_state_notification_access_conversations_preference</string>
@@ -278,6 +281,7 @@
     <string name="previously_connected_hearing_devices_purpose" translatable="false">Displays a list of hearing devices that were previously paired with the device.</string>
     <string name="advanced_app_info_purpose" translatable="false">advanced_app_info</string>
     <string name="installed_app_detail_settings_screen_purpose">Provides detailed information and management options for a specific installed application, including permissions, storage, notifications, and state.</string>
+    <string name="installed_app_detail_unused_apps_switch_purpose">If enabled, will remove permissions, delete temporary files, stop notifications, and archive the app if it is unused for an extended period of time.</string>
     <string name="installed_app_detail_manage_app_unused_parameter_purpose" translatable="false">Specifies the exact package name of the installed application.</string>
     <string name="installed_app_detail_manage_app_unused_toggle_purpose" translatable="false">Controls whether the system can automatically revoke permissions, stop notifications, and free up space if this specific application remains unused for an extended period.</string>
     <string name="installed_app_detail_manage_app_unused_precondition_disabled_globally">The \'Manage app if unused\' feature is currently disabled at the device level.</string>
@@ -322,7 +326,7 @@
     <string name="location_settings_purpose" translatable="false">Allows users to manage system-wide location settings, including toggling location access on or off and accessing sub-settings for app permissions and location services.</string>
     <string name="accessibility_magnification_always_on_enabled_purpose" translatable="false">Whether magnification remains active when the user switches between applications</string>
     <string name="accessibility_magnification_capability_purpose" translatable="false">The preferred magnification area type, such as full screen or partial screen</string>
-    <string name="accessibility_magnification_cursor_following_mode_purpose" translatable="false">accessibility_magnification_cursor_following_mode</string>
+    <string name="accessibility_magnification_cursor_following_mode_purpose" translatable="false">The preferred magnification mode for following the cursor</string>
     <string name="accessibility_magnification_follow_keyboard_enabled_purpose" translatable="false">accessibility_magnification_follow_keyboard_enabled</string>
     <string name="accessibility_magnification_follow_typing_enabled_purpose" translatable="false">Whether the magnifier automatically follows the text cursor while typing</string>
     <string name="accessibility_magnification_joystick_enabled_purpose" translatable="false">accessibility_magnification_joystick_enabled</string>
@@ -372,6 +376,9 @@
     <string name="percentage_category_purpose" translatable="false">percentage_category</string>
     <string name="power_usage_summary_category_purpose" translatable="false">power_usage_summary_category</string>
     <string name="power_usage_summary_screen_purpose" translatable="false">Allows users to monitor current battery level and status, view detailed usage statistics, and manage power-saving and battery health features such as Battery Saver and Adaptive Charging.</string>
+    <string name="power_background_usage_details_screen_purpose" translatable="false">Allows users to manage background power consumption modes for the selected app.</string>
+    <string name="power_background_usage_app_parameter_purpose" translatable="false">The package to change the background power consumption modes.</string>
+    <string name="power_background_usage_toggle_purpose" translatable="false">Controls whether the app is allowed to perform background work. Apps with this toggle disabled may not work as expected. Notifications may be delayed. </string>
     <string name="status_bar_show_battery_percent_purpose" translatable="false">Whether to display the battery percentage next to the icon in the status bar</string>
     <string name="previously_connected_devices_see_all_purpose" translatable="false">Settings to show the list of previously connected Bluetooth devices</string>
     <string name="reduce_bright_colors_preference_animated_image_purpose" translatable="false">animated_image</string>
@@ -426,7 +433,7 @@
     <string name="special_access_install_unknown_apps_app_detail_purpose" translatable="false">special_access_install_unknown_apps_app_detail</string>
     <string name="special_access_install_unknown_apps_app_list_purpose" translatable="false">Allows users to manage which apps are permitted to install other applications from sources outside of official app stores, such as files downloaded from the web or received via email.</string>
     <string name="device_state_interact_across_profiles_settings_switch_purpose" translatable="false">device_state_interact_across_profiles_settings_switch</string>
-    <string name="special_access_interact_across_profiles_app_detail_purpose" translatable="false">special_access_interact_across_profiles_app_detail</string>
+    <string name="special_access_interact_across_profiles_app_detail_purpose" translatable="false">Allows users to view and manage which apps are permitted to share data and interact across their work and personal profiles. This is only configurable for apps which are configured to support it and only if the user has a work profile.</string>
     <string name="special_access_interact_across_profiles_app_list_purpose" translatable="false">Allows users to view and manage which apps are permitted to share data and interact across their work and personal profiles.</string>
     <string name="special_access_manage_write_settings_app_detail_purpose" translatable="false">special_access_manage_write_settings_app_detail</string>
     <string name="special_access_manage_write_settings_app_list_purpose" translatable="false">special_access_manage_write_settings_app_list</string>
@@ -521,6 +528,8 @@
     <string name="zen_mode_screen_purpose" translatable="false">Allows users to manage and customize a specific mode (include Do Not Disturb, Bedtime, Driving, etc.) , including its name, icon, people, apps, display settings, and automatic activation triggers.</string>
     <string name="zen_mode_screen_parameter_purpose" translatable="false">The mode to be managed.</string>
     <string name="zen_mode_type_description" translatable="false">The name of the mode on the device.</string>
+    <string name="mode_manual_duration_purpose" translatable="false">Allows users to configure the duration for Do Not Disturb</string>
+    <string name="mode_manual_duration_enum_description" translatable="false">Options for the duration</string>
     <string name="active_supervision_apps_group_purpose" translatable="false">active_supervision_apps_group</string>
     <string name="aoc_footer_purpose" translatable="false">aoc_footer</string>
     <string name="available_supervision_apps_group_purpose" translatable="false">available_supervision_apps_group</string>
@@ -535,6 +544,7 @@
     <string name="apply_ramping_ringer_purpose" translatable="false">Whether the phone should vibrate first and then ring gradually for incoming calls.</string>
     <string name="haptic_feedback_intensity_purpose" translatable="false">The intensity of haptic feedback. Bigger is more intense.</string>
     <string name="keyboard_vibration_enabled_purpose" translatable="false">Whether or not the on-screen keyboard provides haptic feedback when typing.</string>
+    <string name="keyboard_vibration_intensity_purpose" translatable="false">keyboard_vibration_intensity</string>
     <string name="media_vibration_intensity_purpose" translatable="false">The intensity of vibration during media playback. Higher is more intense.</string>
     <string name="notification_vibration_intensity_purpose" translatable="false">The intensity level of vibration for notifications. Higher is more intense.</string>
     <string name="ring_vibration_intensity_purpose" translatable="false">The intensity level of vibration for incoming calls. Higher is more intense.</string>
@@ -546,6 +556,7 @@
     <string name="toggle_apply_ramping_ringer_purpose" translatable="false">Whether the phone vibrates first then rings gradually for incoming calls.</string>
     <string name="toggle_haptic_feedback_intensity_purpose" translatable="false">Whether haptic feedback is enabled for touch interactions.</string>
     <string name="toggle_keyboard_vibration_enabled_purpose" translatable="false">Whether the keyboard vibrates during text entry.</string>
+    <string name="toggle_keyboard_vibration_intensity_purpose" translatable="false">toggle_keyboard_vibration_intensity</string>
     <string name="toggle_media_vibration_intensity_purpose" translatable="false">Whether vibration is enabled for media applications.</string>
     <string name="toggle_notification_vibration_intensity_purpose" translatable="false">Whether vibration is enabled for notifications.</string>
     <string name="toggle_ring_vibration_intensity_purpose" translatable="false">Whether vibration is enabled for incoming calls.</string>
@@ -573,7 +584,7 @@
     <string name="device_state_dnd_mode_display_settings_purpose" translatable="false">device_state_dnd_mode_display_settings</string>
     <string name="device_state_dnd_mode_screen_purpose" translatable="false">device_state_dnd_mode_screen</string>
     <string name="wifi_calling_purpose" translatable="false">wifi_calling</string>
-    <string name="wifi_network_details_purpose" translatable="false">wifi_network_details</string>
+    <string name="wifi_network_details_purpose" translatable="false">Shows details of a selected Wi-Fi network.</string>
     <string name="wifi_details_settings_purpose" translatable="false">Allows users to view and manage the details of a saved Wi-Fi network.</string>
     <string name="wifi_details_parameter_purpose" translatable="false">The key of the saved network</string>
     <string name="wifi_details_parameter_description" translatable="false">A unique key representing a saved Wi-Fi network</string>
@@ -697,7 +708,7 @@
     <!-- Device unlock settings screens start -->
     <string name="device_unlock_pref_screen_purpose" translatable="false">Allows users to manage their screen lock settings. This includes setting or modifying their device credential, like a PIN or password, as well as managing their biometrics and other authenticators, like watches, and related preferences for each of these modalities.</string>
     <!-- Device unlock settings screens end -->
-    <string name="available_virtual_keyboard_screen_purpose" translatable="false">Allows users to enable and disable input method editors and to invoke settings activities specific to each input method editor.</string>
+    <string name="available_keyboard_apps_screen_purpose" translatable="false">Allows users to enable and disable input method editors and to invoke settings activities specific to each input method editor.</string>
     <string name="wifi_notify_open_networks_purpose" translatable="false">Whether or not to show a notification when a high-quality public Wi-Fi network is available.</string>
     <string name="wifi_allow_wep_networks_purpose" translatable="false">Allows the device to connect to legacy Wi-Fi networks using the insecure WEP security protocol.</string>
     <string name="wifi_scanning_screen_purpose" translatable="false">Allow apps to scan for Wi-Fi networks at any time, even when Wi-Fi is off, to improve location-based features.</string>

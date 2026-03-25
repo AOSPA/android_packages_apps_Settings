@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.ApplicationInfoFlags
 import android.content.pm.PackageManager.ResolveInfoFlags
 import android.content.pm.ResolveInfo
 import android.content.pm.UserInfo
@@ -39,7 +40,6 @@ import com.android.settings.flags.Flags
 import com.android.settings.localepicker.AppLocalePickerApiFirstScreenTest.ShadowAppLocaleCollector
 import com.android.settings.localepicker.AppLocalePickerApiFirstScreenTest.ShadowAppLocaleCollector.Companion.setLocaleInfos
 import com.android.settings.localepicker.AppLocalePickerApiFirstScreenTest.ShadowLocaleUtils
-import com.android.settings.localepicker.AppLocalePickerApiFirstScreenTest.ShadowLocaleUtils.Companion.setAppList
 import com.android.settings.localepicker.AppLocalePickerApiFirstScreenTest.ShadowLocaleUtils.Companion.setDisplayLocaleUi
 import com.android.settings.localepicker.AppLocalePickerFragment.ARG_PACKAGE_NAME
 import com.android.settings.testutils.shadow.ShadowActivityManager
@@ -54,12 +54,14 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.spy
+import org.mockito.kotlin.stub
 import org.mockito.kotlin.whenever
 import org.robolectric.annotation.Config
 import org.robolectric.annotation.Implementation
@@ -78,7 +80,7 @@ import org.robolectric.shadows.ShadowLocaleManager
 )
 class AppLocalePickerApiFirstScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
-    private val tester = ApiTester(AppLocalePickerApiFirstScreen())
+    private lateinit var tester: ApiTester
     private val resources =
         mock<Resources> {
             on { getStringArray(R.array.config_hideWhenDisabled_packageNames) } doReturn
@@ -96,6 +98,8 @@ class AppLocalePickerApiFirstScreenTest {
                 }
             on { queryIntentActivitiesAsUser(any(), any<ResolveInfoFlags>(), any<Int>()) } doReturn
                 listOf(resolveInfoOf(packageName = IN_LAUNCHER_APP.packageName))
+            on { getInstalledApplications(any<ApplicationInfoFlags>()) } doReturn
+                listOf(CHROME_APP, CLOCK_APP)
         }
 
     private val mockUserManager =
@@ -120,6 +124,7 @@ class AppLocalePickerApiFirstScreenTest {
         // Mock labels for apps
         whenever(packageManager.getApplicationLabel(CHROME_APP)).thenReturn("Chrome")
         whenever(packageManager.getApplicationLabel(CLOCK_APP)).thenReturn("Clock")
+        tester = ApiTester(AppLocalePickerApiFirstScreen(), context)
     }
 
     @After
@@ -153,7 +158,14 @@ class AppLocalePickerApiFirstScreenTest {
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getAppLanguage_returnsCurrentLocale() {
         setDisplayLocaleUi(true)
-        setAppList(listOf(CHROME_APP, CLOCK_APP))
+        packageManager.stub {
+            on {
+                getInstalledApplicationsAsUser(
+                    any<ApplicationInfoFlags>(),
+                    anyInt()
+                )
+            } doReturn listOf(CHROME_APP, CLOCK_APP)
+        }
 
         val currentLocaleInfo = mock<LocaleStore.LocaleInfo>()
         whenever(currentLocaleInfo.isAppCurrentLocale).thenReturn(true)
@@ -174,7 +186,14 @@ class AppLocalePickerApiFirstScreenTest {
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun setAppLanguage_setOtherLocale_isSet() {
         setDisplayLocaleUi(true)
-        setAppList(listOf(CHROME_APP, CLOCK_APP))
+        packageManager.stub {
+            on {
+                getInstalledApplicationsAsUser(
+                    any<ApplicationInfoFlags>(),
+                    anyInt()
+                )
+            } doReturn listOf(CHROME_APP, CLOCK_APP)
+        }
 
         val currentLocaleInfo = mock<LocaleStore.LocaleInfo>()
         whenever(currentLocaleInfo.isAppCurrentLocale).thenReturn(true)

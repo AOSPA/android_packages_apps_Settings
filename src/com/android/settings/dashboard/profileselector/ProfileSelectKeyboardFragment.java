@@ -19,20 +19,20 @@ package com.android.settings.dashboard.profileselector;
 import androidx.fragment.app.Fragment;
 
 import com.android.settings.R;
-import com.android.settings.inputmethod.AvailableVirtualKeyboardFragment;
+import com.android.settings.inputmethod.AvailableKeyboardAppsFragment;
 
 /**
  * When current user has work profile, this fragment used following fragments to represent the
- * on-screen keyboard settings page.
+ * "keyboard apps" settings page.
  *
- * <p>{@link AvailableVirtualKeyboardFragment} used to show both of personal/work user installed
+ * <p>{@link AvailableKeyboardAppsFragment} used to show both of personal/work user installed
  * IMEs.</p>
  */
 public final class ProfileSelectKeyboardFragment extends ProfileSelectFragment {
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.available_virtual_keyboard;
+        return R.xml.available_keyboard_apps;
     }
 
     @Override
@@ -40,8 +40,8 @@ public final class ProfileSelectKeyboardFragment extends ProfileSelectFragment {
         return ProfileSelectFragment.getFragments(
                 getContext(),
                 null /* bundle */,
-                AvailableVirtualKeyboardFragment::new,
-                AvailableVirtualKeyboardFragment::new,
-                AvailableVirtualKeyboardFragment::new);
+                AvailableKeyboardAppsFragment::new,
+                AvailableKeyboardAppsFragment::new,
+                AvailableKeyboardAppsFragment::new);
     }
 }

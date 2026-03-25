@@ -16,6 +16,7 @@
 
 package com.android.settings.notification;
 
+import static com.android.media.flags.Flags.FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 
@@ -24,9 +25,11 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -35,6 +38,10 @@ import android.media.MediaRoute2Info;
 import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.media.session.MediaSessionManager;
+import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -46,11 +53,14 @@ import com.android.settings.Utils;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.media.LocalMediaManager;
+import com.android.settingslib.media.MediaOutputConstants;
 import com.android.settingslib.widget.SliderPreference;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -74,6 +84,8 @@ public class RemoteVolumeGroupControllerTest {
     private static final int CURRENT_VOLUME = 30;
     private static final int MAX_VOLUME = 100;
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private LocalMediaManager mLocalMediaManager;
     @Mock
@@ -203,6 +215,47 @@ public class RemoteVolumeGroupControllerTest {
                 RemoteVolumeGroupController.SWITCHER_PREFIX + TEST_SESSION_1_ID);
 
         assertThat(preference.getSummary()).isEqualTo(TEST_SESSION_1_NAME);
+    }
+
+    @Test
+    @DisableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
+    public void handlePreferenceTreeClick_withActiveSession_launchesOutputSwitcher() {
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        mController.displayPreference(mScreen);
+        final Preference preference = mPreferenceCategory.findPreference(
+                RemoteVolumeGroupController.SWITCHER_PREFIX + TEST_SESSION_1_ID);
+
+        mController.handlePreferenceTreeClick(preference);
+
+        verify(mContext).sendBroadcast(intentCaptor.capture());
+        var intent = intentCaptor.getValue();
+        assertThat(intent.getAction()).isEqualTo(
+                MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
+        assertThat(intent.getStringExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME)).isEqualTo(
+                TEST_PACKAGE_NAME);
+    }
+
+    @Test
+    @EnableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
+    public void handlePreferenceTreeClick_withActiveSession_multiuserFlag_launchesOutputSwitcher() {
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        final ArgumentCaptor<UserHandle> targetUserCaptor = ArgumentCaptor.forClass(
+                UserHandle.class);
+        mController.displayPreference(mScreen);
+        final Preference preference = mPreferenceCategory.findPreference(
+                RemoteVolumeGroupController.SWITCHER_PREFIX + TEST_SESSION_1_ID);
+
+        mController.handlePreferenceTreeClick(preference);
+
+        verify(mContext).sendBroadcastAsUser(intentCaptor.capture(), targetUserCaptor.capture());
+        var intent = intentCaptor.getValue();
+        assertThat(intent.getAction()).isEqualTo(
+                MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
+        assertThat(intent.getStringExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME)).isEqualTo(
+                TEST_PACKAGE_NAME);
+        assertThat(intent.getParcelableExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
+                UserHandle.class)).isEqualTo(mContext.getUser());
+        assertThat(targetUserCaptor.getValue()).isEqualTo(UserHandle.SYSTEM);
     }
 
     private void initPackage() {

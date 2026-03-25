@@ -34,6 +34,7 @@ import com.android.settings.network.SubscriptionUtil
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchItem
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -67,6 +68,8 @@ class SimRingtonePreference(private val context: Context, private val subId: Int
 
     override val availabilityDescription =
         "The device must have more than 1 active SIM and have the corresponding config enabled."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_sim_specific_ringtone) &&
