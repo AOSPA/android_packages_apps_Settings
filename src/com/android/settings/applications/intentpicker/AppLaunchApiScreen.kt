@@ -25,6 +25,7 @@ import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -44,7 +45,8 @@ class AppLaunchApiScreen :
     init {
         flag { Flags.catalystMigration26q2() }
 
-        tags(APP_FUNCTION_APPS)
+        // UI-only as this has no preferences and the OpenByDefaultStateSource provides this information.
+        tags(APP_FUNCTION_APPS, UI_ONLY_PREFERENCE)
 
         parameters {
             parameter(

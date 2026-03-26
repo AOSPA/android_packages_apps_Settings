@@ -50,7 +50,7 @@ class BluetoothDashboardScreenApi :
         ) {
             sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
-            preconditions(R.string.bluetooth_auto_on_preconditions) {
+            preconditions("The device hardware and bluetooth adapter must support Bluetooth and Auto-on.") {
                 val bluetoothManager = context.getSystemService(BluetoothManager::class.java)
                 val bluetoothAdapter =
                     bluetoothManager?.adapter
