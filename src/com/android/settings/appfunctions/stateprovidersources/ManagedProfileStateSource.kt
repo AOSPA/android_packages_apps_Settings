@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.stateprovidersources
 
 import android.content.Context
 import android.os.UserManager
+import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
@@ -37,7 +38,7 @@ class ManagedProfileStateSource : DeviceStateSource {
         val item =
             DeviceStateItem(
                 key = "has_managed_profile",
-                purpose = "has_managed_profile",
+                purpose = context.getString(R.string.has_managed_profile_purpose),
                 jsonValue = hasManagedProfile.toString(),
             )
 

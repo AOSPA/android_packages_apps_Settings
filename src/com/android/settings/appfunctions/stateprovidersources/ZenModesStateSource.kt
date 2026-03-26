@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.stateprovidersources
 
 import android.app.AutomaticZenRule
 import android.content.Context
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.notification.modes.ZenModesBackend
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
@@ -45,13 +46,13 @@ class ZenModesStateSource : DeviceStateSource {
         val dndItem =
             DeviceStateItem(
                 key = "zen_mode_dnd_active",
-                purpose = "zen_mode_dnd_active",
+                purpose = context.getString(R.string.zen_mode_dnd_active_purpose),
                 jsonValue = isDndActive.toString(),
             )
         val bedtimeItem =
             DeviceStateItem(
                 key = "zen_mode_bedtime_active",
-                purpose = "zen_mode_bedtime_active",
+                purpose = context.getString(R.string.zen_mode_bedtime_active_purpose),
                 jsonValue = isBedtimeActive.toString(),
             )
 

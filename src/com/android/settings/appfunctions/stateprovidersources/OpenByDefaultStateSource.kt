@@ -25,8 +25,7 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateI
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 class OpenByDefaultStateSource : DeviceStateSource {
-    override val appFunctionType: DeviceStateAppFunctionType =
-        DeviceStateAppFunctionType.GET_APPS
+    override val appFunctionType: DeviceStateAppFunctionType = DeviceStateAppFunctionType.GET_APPS
 
     override suspend fun get(
         context: Context,
@@ -49,7 +48,7 @@ class OpenByDefaultStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "preferred_settings_enabled_package_$packageName",
-                    purpose = "preferred_settings_enabled_package_$packageName",
+                    purpose = context.getString(R.string.app_launch_screen_purpose),
                     jsonValue = context.getString(stringResId),
                     hintText = "App: $appName",
                 )
