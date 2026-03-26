@@ -405,6 +405,10 @@ public class FaceEnrollEducation extends BiometricEnrollBase {
 
     }
 
+    public boolean isAccessibilityEnabled() {
+        return mAccessibilityEnabled;
+    }
+
     private Button getAccessibilityButton() {
         final Button a11yButton = findViewById(R.id.accessibility_button);
         final Button a11yButtonExpressive = findViewById(R.id.accessibility_button_expressive);

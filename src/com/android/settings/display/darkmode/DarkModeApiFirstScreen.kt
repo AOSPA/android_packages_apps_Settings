@@ -46,7 +46,7 @@ class DarkModeApiFirstScreen :
         key = KEY,
         topLevelSettingsCategory = Category.DISPLAY,
         fragment = DarkModeSettingsFragment::class,
-        purpose = R.string.dark_ui_mode_purpose,
+        purpose = R.string.dark_ui_mode_purpose_api,
         alreadyPartiallyMigrated = DarkModeScreen::class,
     ) {
     init {

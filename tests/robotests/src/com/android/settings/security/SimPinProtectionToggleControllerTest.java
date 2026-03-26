@@ -39,7 +39,6 @@ import android.platform.test.flag.junit.DeviceFlagsValueProvider;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.PinResult;
 import android.telephony.SubscriptionInfo;
-import android.telephony.TelephonyManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -68,6 +67,8 @@ import org.robolectric.shadows.androidx.fragment.FragmentController;
 public class SimPinProtectionToggleControllerTest extends BaseSimProtectionControllerTest {
     private static final String PREFERENCE_KEY = "sim_pin_auto_management_toggle";
     private static final String MANUAL_PIN_ONLY_KEY = "sim_pin_manual_management_only_toggle";
+    private static final int SLOT_INDEX = 1;
+    private static final int SUBSCRIPTION_ID = 3;
 
     @Rule
     public final CheckFlagsRule checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
@@ -97,9 +98,10 @@ public class SimPinProtectionToggleControllerTest extends BaseSimProtectionContr
         super.setUp();
         ShadowAlertDialogCompat.reset();
 
-        mController = new SimPinProtectionToggleController(mContext, MANUAL_PIN_ONLY_KEY);
+        mController = new SimPinProtectionToggleController(mContext, MANUAL_PIN_ONLY_KEY,
+                mAutoManagedSimPinHelper);
         mControllerForAutoPinManagement = new SimPinProtectionToggleController(mContext,
-                PREFERENCE_KEY);
+                PREFERENCE_KEY, mAutoManagedSimPinHelper);
         mSimPinTogglePreference = new SwitchPreferenceCompat(mContext);
         mPrimarySwitchPreference = new PrimarySwitchPreference(mContext);
         when(mScreen.findPreference(MANUAL_PIN_ONLY_KEY)).thenReturn(mSimPinTogglePreference);
@@ -108,32 +110,37 @@ public class SimPinProtectionToggleControllerTest extends BaseSimProtectionContr
         mParent = new SimPinTestFragment();
         FragmentController.setupFragment(
                 mParent, FragmentActivity.class, /* containerViewId= */ 0, /* bundle= */ null);
+
+        when(mAutoManagedSimPinHelper.getSubscriptionIdForSlot(eq(SLOT_INDEX))).thenReturn(
+                SUBSCRIPTION_ID);
+        mController.setSlotIndex(SLOT_INDEX);
+        mControllerForAutoPinManagement.setSlotIndex(SLOT_INDEX);
     }
 
     @Test
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void isChecked_iccLockEnabled_manual() {
-        when(mTelephonyManager.isIccLockEnabled()).thenReturn(true);
-        when(mTelephonyManager.getSimAutoPinManagementEnrollmentStatus()).thenReturn(
-                TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_MANUALLY_MANAGED);
+        when(mAutoManagedSimPinHelper.isIccLockEnabled(eq(SUBSCRIPTION_ID))).thenReturn(true);
+        when(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
+                eq(SUBSCRIPTION_ID))).thenReturn(false);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void isChecked_iccLockEnabled_platformManaged() {
-        when(mTelephonyManager.isIccLockEnabled()).thenReturn(false);
-        when(mTelephonyManager.getSimAutoPinManagementEnrollmentStatus()).thenReturn(
-                TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_PLATFORM_MANAGED);
+        when(mAutoManagedSimPinHelper.isIccLockEnabled(eq(SUBSCRIPTION_ID))).thenReturn(false);
+        when(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
+                eq(SUBSCRIPTION_ID))).thenReturn(true);
         assertThat(mController.isChecked()).isTrue();
     }
 
     @Test
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void isChecked_iccLockDisabled() {
-        when(mTelephonyManager.isIccLockEnabled()).thenReturn(false);
-        when(mTelephonyManager.getSimAutoPinManagementEnrollmentStatus()).thenReturn(
-                TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_MANUALLY_MANAGED);
+        when(mAutoManagedSimPinHelper.isIccLockEnabled(eq(SUBSCRIPTION_ID))).thenReturn(false);
+        when(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
+                eq(SUBSCRIPTION_ID))).thenReturn(false);
         assertThat(mController.isChecked()).isFalse();
     }
 
@@ -184,8 +191,8 @@ public class SimPinProtectionToggleControllerTest extends BaseSimProtectionContr
     @Test
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void getSummary_platformManagedPin() {
-        when(mTelephonyManager.getSimAutoPinManagementEnrollmentStatus()).thenReturn(
-                TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_PLATFORM_MANAGED);
+        when(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
+                eq(SUBSCRIPTION_ID))).thenReturn(true);
 
         assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getString(
                 R.string.sim_protection_mode_protected_by_platform));
@@ -194,9 +201,9 @@ public class SimPinProtectionToggleControllerTest extends BaseSimProtectionContr
     @Test
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void getSummary_manuallyManagedPin() {
-        when(mTelephonyManager.getSimAutoPinManagementEnrollmentStatus()).thenReturn(
-                TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_MANUALLY_MANAGED);
-        when(mTelephonyManager.isIccLockEnabled()).thenReturn(true);
+        when(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
+                eq(SUBSCRIPTION_ID))).thenReturn(false);
+        when(mAutoManagedSimPinHelper.isIccLockEnabled(eq(SUBSCRIPTION_ID))).thenReturn(true);
 
         assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getString(
                 R.string.sim_protection_mode_manually_managed));
@@ -205,9 +212,9 @@ public class SimPinProtectionToggleControllerTest extends BaseSimProtectionContr
     @Test
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void getSummary_noPin() {
-        when(mTelephonyManager.getSimAutoPinManagementEnrollmentStatus()).thenReturn(
-                TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_MANUALLY_MANAGED);
-        when(mTelephonyManager.isIccLockEnabled()).thenReturn(false);
+        when(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
+                eq(SUBSCRIPTION_ID))).thenReturn(false);
+        when(mAutoManagedSimPinHelper.isIccLockEnabled(eq(SUBSCRIPTION_ID))).thenReturn(false);
 
         assertThat(mController.getSummary()).isEqualTo(mContext.getResources().getString(
                 R.string.sim_choose_protection_mode_title));
@@ -217,13 +224,12 @@ public class SimPinProtectionToggleControllerTest extends BaseSimProtectionContr
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     @DisableFlags(FLAG_ENABLE_AUTO_SIM_PIN_UI)
     public void onPinEntered_manualEnrollment_correctPin() {
-        SimPinProtectionToggleController controller =
-                createControllerWithMockHelper();
+        configureControllerForUiTest();
 
         when(mAutoManagedSimPinHelper.setIccLockState(eq("1234"), eq(true), anyInt())).thenReturn(
                 Futures.immediateFuture(new PinResult(PinResult.PIN_RESULT_TYPE_SUCCESS, 0)));
 
-        controller.onPinEntered("1234");
+        mController.onPinEntered("1234");
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mSimPinTogglePreference.isChecked()).isTrue();
@@ -235,13 +241,12 @@ public class SimPinProtectionToggleControllerTest extends BaseSimProtectionContr
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     @DisableFlags(FLAG_ENABLE_AUTO_SIM_PIN_UI)
     public void onPinEntered_manualEnrollment_incorrectPin() {
-        SimPinProtectionToggleController controller =
-                createControllerWithMockHelper();
+        configureControllerForUiTest();
 
         when(mAutoManagedSimPinHelper.setIccLockState(eq("1234"), eq(true), anyInt())).thenReturn(
                 Futures.immediateFuture(new PinResult(PinResult.PIN_RESULT_TYPE_INCORRECT, 2)));
 
-        controller.onPinEntered("1234");
+        mController.onPinEntered("1234");
         shadowOf(Looper.getMainLooper()).idle();
 
         assertThat(mSimPinTogglePreference.isChecked()).isFalse();
@@ -258,17 +263,12 @@ public class SimPinProtectionToggleControllerTest extends BaseSimProtectionContr
                 mContext.getResources().getString(R.string.provide_current_sim_pin_title));
     }
 
-    @NonNull
-    private SimPinProtectionToggleController createControllerWithMockHelper() {
-        SimPinProtectionToggleController controller = new SimPinProtectionToggleController(mContext,
-                MANUAL_PIN_ONLY_KEY, mAutoManagedSimPinHelper);
-
+    private void configureControllerForUiTest() {
         Bundle stateBundle = getBundleForState(
                 SimPinProtectionToggleController.EnrollmentState.ENROLL_TO_MANUAL_PIN_MANAGEMENT);
-        controller.setFragment(mParent);
-        controller.loadEnrollmentState(stateBundle);
-        controller.displayPreference(mScreen);
-        return controller;
+        mController.setFragment(mParent);
+        mController.loadEnrollmentState(stateBundle);
+        mController.displayPreference(mScreen);
     }
 
     @NonNull

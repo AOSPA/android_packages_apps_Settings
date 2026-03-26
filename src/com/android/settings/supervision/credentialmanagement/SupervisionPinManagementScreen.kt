@@ -145,7 +145,6 @@ class SupervisionPinManagementScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +SupervisionSetupRecoveryPreference()
             +UntitledPreferenceCategoryMetadata(
                 key = GROUP_KEY,
                 purpose = R.string.pin_management_group_purpose,
@@ -153,6 +152,7 @@ class SupervisionPinManagementScreen :
                 {
                     +SupervisionPinRecoveryPreference()
                     +SupervisionChangePinPreference()
+                    +SupervisionSetupRecoveryPreference()
                     +SupervisionUpdateRecoveryEmailPreference()
                 }
             +UntitledPreferenceCategoryMetadata(

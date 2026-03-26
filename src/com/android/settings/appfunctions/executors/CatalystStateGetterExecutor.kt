@@ -88,11 +88,13 @@ class CatalystStateGetterExecutor(private val context: Context) : DeviceStateExe
 
             val value = getPreference(context, screenKey, key, keyParameters)
             requireNotNull(value) { "Key [$fullKey] not found" }
+            val errorPrefix = if (value.hasError) "Error: " else ""
+            val jsonValueString = settingsPreferenceValueToString(value.settingsPreferenceValue)
             val item =
                 DeviceStateItem(
                     key = fullKey,
                     purpose = fullKey,
-                    jsonValue = settingsPreferenceValueToString(value.settingsPreferenceValue),
+                    jsonValue = "$errorPrefix$jsonValueString",
                 )
             val itemResponse = DeviceStateItemResponse(deviceStateItem = item)
             DeviceStateItemProviderExecutorResult(result = itemResponse)

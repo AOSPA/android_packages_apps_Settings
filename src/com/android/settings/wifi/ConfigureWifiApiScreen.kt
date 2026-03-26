@@ -42,7 +42,7 @@ class ConfigureWifiApiScreen :
         key = KEY,
         topLevelSettingsCategory = Category.NETWORK,
         fragment = ConfigureWifiSettings::class,
-        purpose = R.string.configure_network_settings_purpose,
+        purpose = R.string.configure_network_settings_purpose_api,
         alreadyPartiallyMigrated = ConfigureWifiScreen::class,
     ) {
 

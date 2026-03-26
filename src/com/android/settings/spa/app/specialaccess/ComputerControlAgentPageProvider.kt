@@ -36,12 +36,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Apps
-import androidx.compose.material.icons.filled.DeleteOutline
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -62,6 +60,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
@@ -168,6 +168,7 @@ object ComputerControlAutomationAppListProvider : SettingsPageProvider {
                     val header =
                         @Composable {
                             if (perAppConsentEnabled && hasItemsForThisUser) {
+                                Spacer(modifier = Modifier.height(SettingsSpace.extraSmall4))
                                 Text(
                                     text =
                                         stringResource(
@@ -192,12 +193,7 @@ object ComputerControlAutomationAppListProvider : SettingsPageProvider {
                                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
                                     Spacer(modifier = Modifier.height(SettingsSpace.extraSmall4))
-                                    AssistantLinkedRequirementFooter(
-                                        stringResource(
-                                            R.string
-                                                .computer_control_automation_agent_list_footer_requirement
-                                        )
-                                    )
+                                    AssistantLinkedRequirementFooter()
                                 }
                             }
                         }
@@ -344,7 +340,6 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                     .getRoleHoldersAsUser(RoleManager.ROLE_ASSISTANT, UserHandle.of(app.userId))
                     .contains(app.packageName)
             }
-        val title = appRepository.produceLabel(app).value
         val perAppConsentEnabled = remember {
             android.companion.virtualdevice.flags.Flags.computerControlPerAppConsent()
         }
@@ -373,19 +368,15 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                     )
                     Spacer(Modifier.height(SettingsSpace.small1))
                     Text(
-                        text = title,
+                        text = appLabel,
                         style = MaterialTheme.typography.titleLargeEmphasized,
                         color = MaterialTheme.colorScheme.onSurface,
                     )
                     Text(
-                        text = stringResource(model.subHeadingResId, title),
+                        text = stringResource(model.subHeadingResId, appLabel),
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier =
-                            Modifier.padding(
-                                vertical = SettingsSpace.extraSmall2,
-                                horizontal = SettingsSpace.small4,
-                            ),
+                        modifier = Modifier.padding(vertical = SettingsSpace.extraSmall2),
                         textAlign = TextAlign.Center,
                     )
                 }
@@ -405,25 +396,22 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                         Text(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             style = MaterialTheme.typography.bodyMedium,
-                            text = stringResource(R.string.computer_control_automation_footer_info),
-                        )
-                        Spacer(Modifier.height(SettingsSpace.small1))
-                    }
-                    if (assistantRoleRequirement) {
-                        AssistantLinkedRequirementFooter(
-                            stringResource(R.string.computer_control_automation_footer_requirement)
+                            text =
+                                AnnotatedString.fromHtml(
+                                    stringResource(R.string.computer_control_automation_footer_info)
+                                ),
                         )
                         Spacer(Modifier.height(SettingsSpace.small1))
                     }
                     Text(
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.bodyMedium,
-                        text =
-                            stringResource(
-                                R.string.computer_control_automation_footer_summary,
-                                title,
-                            ),
+                        text = stringResource(model.footerResId, appLabel),
                     )
+                    if (assistantRoleRequirement) {
+                        Spacer(Modifier.height(SettingsSpace.small1))
+                        AssistantLinkedRequirementFooter()
+                    }
                 }
             }
 
@@ -468,6 +456,7 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
         val displayApps =
             remember(automatablePackages) { consentController.getDisplayApps(automatablePackages) }
         if (displayApps.isNotEmpty()) {
+            // Allowed app list header
             Text(
                 text =
                     stringResource(
@@ -477,10 +466,11 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                 color = MaterialTheme.colorScheme.primary,
                 style = MaterialTheme.typography.labelLargeEmphasized,
             )
+            // Allowed app list
             Category {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     displayApps.forEachIndexed { index, targetApp ->
-                        val removeDialogMessage =
+                        val removeMessage =
                             stringResource(
                                 R.string.computer_control_automation_automatable_app_removed
                             )
@@ -491,7 +481,7 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                         ) {
                             consentController.removeAutomatablePackage(targetApp.packageName)
                             automatablePackages = automatablePackages - targetApp.packageName
-                            Toast.makeText(context, removeDialogMessage, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, removeMessage, Toast.LENGTH_SHORT).show()
                         }
 
                         if (index < displayApps.size - 1) {
@@ -500,10 +490,14 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                     }
                 }
             }
+            // Remove all button
+            val removeAllMessage =
+                stringResource(R.string.computer_control_automation_automatable_all_apps_removed)
             Button(
                 onClick = {
                     consentController.clearAutomatablePackages()
                     automatablePackages = emptySet()
+                    Toast.makeText(context, removeAllMessage, Toast.LENGTH_SHORT).show()
                 },
                 modifier =
                     Modifier.heightIn(min = SettingsDimension.preferenceMinHeight)
@@ -515,8 +509,6 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                         contentColor = MaterialTheme.colorScheme.onSurface,
                     ),
             ) {
-                Icon(imageVector = Icons.Default.DeleteOutline, contentDescription = null)
-                Spacer(Modifier.width(SettingsSpace.extraSmall4))
                 Text(text = stringResource(R.string.computer_control_automation_clear_all_apps))
             }
         } else {
@@ -585,6 +577,13 @@ class ComputerControlAgentPageModel(context: Context) : AppListModel<ComputerCon
             R.string.computer_control_automation_sub_heading_flag_per_app_consent
         } else {
             R.string.computer_control_automation_sub_heading
+        }
+
+    val footerResId =
+        if (perAppConsentEnabled) {
+            R.string.computer_control_automation_footer_summary_flag_per_app_consent
+        } else {
+            R.string.computer_control_automation_footer_summary
         }
 
     private val refreshFlow = MutableStateFlow(0)

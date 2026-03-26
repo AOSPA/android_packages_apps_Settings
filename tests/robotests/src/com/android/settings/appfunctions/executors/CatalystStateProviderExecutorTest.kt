@@ -100,7 +100,14 @@ class CatalystStateProviderExecutorTest {
                     "screen_key",
                     purpose = R.string.preference_screen_purpose,
                     title = R.string.preference_screen_title,
-                    preferences = listOf()
+                    preferences = listOf(
+                        createSimplePreference(
+                            GraphTestUtils.PreferenceConfig(
+                                key = "preference_key",
+                                purpose = R.string.preference_purpose
+                            ),
+                        )
+                    )
                 )
             )
         )
@@ -268,6 +275,14 @@ class CatalystStateProviderExecutorTest {
                                     isUiOnly = true
                                 )
                             )
+                        ),
+                        createPersistentPreference<Boolean>(
+                            GraphTestUtils.PersistentPreferenceConfig(
+                                GraphTestUtils.PreferenceConfig(
+                                    key = "preference_key_2",
+                                    purpose = R.string.preference_purpose
+                                )
+                            )
                         )
                     )
                 )
@@ -284,7 +299,7 @@ class CatalystStateProviderExecutorTest {
         // single screen
         assertThat(result.states).hasSize(1)
         // no device state items
-        assertThat(result.states[0].deviceStateItems).hasSize(0)
+        assertThat(result.states[0].deviceStateItems).hasSize(1)
     }
 
     @Test
@@ -349,7 +364,7 @@ class CatalystStateProviderExecutorTest {
                                     sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
                                 ),
                             )
-                        )
+                        ),
                     ),
                     sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
                 )
@@ -382,6 +397,15 @@ class CatalystStateProviderExecutorTest {
                                     sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
                                 ),
                             )
+                        ),
+                        createPersistentPreference<Boolean>(
+                            persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                                preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                    key = "no_sensitivity_preference",
+                                    purpose = R.string.preference_purpose,
+                                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                                ),
+                            )
                         )
                     ),
                     sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
@@ -396,7 +420,7 @@ class CatalystStateProviderExecutorTest {
 
         val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
         assertThat(deviceStateResult.states).hasSize(1)
-        assertThat(deviceStateResult.states[0].deviceStateItems).hasSize(0)
+        assertThat(deviceStateResult.states[0].deviceStateItems).hasSize(1)
     }
 
     @Test
@@ -629,6 +653,42 @@ class CatalystStateProviderExecutorTest {
         assertThat(screenState.deviceStateItems[1].key).isEqualTo("test_screen/no_sens_outer")
     }
 
+    @Test
+    fun execute_onScreenWithFlagDisabled_notIncluded() = runTest {
+        val innerSensitiveScreen = createScreen(
+            PreferenceScreenConfig(
+                screenKey = "flag_disabled_screen_key",
+                purpose = R.string.preference_screen_purpose,
+                preferences = listOf(
+                    createPersistentPreference<Boolean>(
+                        persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                            preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                key = "inner_preference",
+                                purpose = R.string.preference_purpose,
+                                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                            ),
+                        )
+                    )
+                ),
+                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY,
+                summary = R.string.preference_screen_summary,
+                isFlagEnabled = false,
+            )
+        )
+
+        setRegistryFactories(innerSensitiveScreen)
+
+        val executor = CatalystStateProviderExecutor(
+            buildConfig("flag_disabled_screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+
+        assertThat(deviceStateResult.states).hasSize(0)
+    }
+
     private class ScreenWithKeyParameters : PreferencesApiScreen(
         key = "screen_with_params",
         topLevelSettingsCategory = Category.SYSTEM,
@@ -638,6 +698,18 @@ class CatalystStateProviderExecutorTest {
         override val keyParameters = KeyParametersSchema {
             parameter("param", R.string.preference_purpose, type = AnyString)
         }.prepare("param" to "value")
+
+        init {
+            preference(
+                key = "writable_pref",
+                purpose = R.string.preference_purpose,
+                type = AnyString,
+            ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+                get { execute { "true" } }
+                set { execute {} }
+            }
+        }
     }
 
     private class ApiFirstTestScreen : PreferencesApiScreen(

@@ -22,6 +22,7 @@ import android.app.usage.UsageEvents
 import android.content.Context
 import android.icu.text.RelativeDateTimeFormatter
 import android.os.ServiceManager
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.utils.StringUtil
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
@@ -74,7 +75,7 @@ class NotificationsStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "notifications_enabled_package_$packageName",
-                    purpose = "notifications_enabled_package_$packageName",
+                    purpose = context.getString(R.string.app_notifications_enabled_purpose),
                     jsonValue = areNotificationsEnabled.toString(),
                     hintText = "App: $appName",
                 )
@@ -83,7 +84,7 @@ class NotificationsStateSource : DeviceStateSource {
                 deviceStateItems.add(
                     DeviceStateItem(
                         key = "notifications_last_notification_time_package_$packageName",
-                        purpose = "notifications_last_notification_time_package_$packageName",
+                        purpose = context.getString(R.string.app_last_notification_time_purpose),
                         jsonValue = timeAgo,
                         hintText = "App: $appName",
                     )

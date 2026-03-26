@@ -2134,22 +2134,15 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"語言"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"顯示鍵盤切換鍵"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"選取輸入欄位時，允許導覽列顯示「鍵盤切換工具」按鈕"</string>
-    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
-    <skip />
-    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
-    <skip />
-    <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
-    <skip />
-    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
-    <skip />
+    <string name="keyboard_apps_category" msgid="1715169176659877658">"鍵盤應用程式"</string>
+    <string name="keyboard_apps_category_summary" msgid="6676804967286517009">"<xliff:g id="KEYBOARD_APPS_LIST">%1$s</xliff:g>的語言和應用程式設定"</string>
+    <string name="keywords_keyboard_apps" msgid="895860348178301718">"Gboard"</string>
+    <string name="available_keyboard_apps_category" msgid="7665966484500890112">"可用的鍵盤應用程式"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"選項"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"無障礙"</string>
-    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
-    <skip />
-    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
-    <skip />
-    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
-    <skip />
+    <string name="physical_keyboard_title" msgid="6597340453841961909">"實體鍵盤"</string>
+    <string name="physical_keyboard_summary" msgid="2751015358747795398">"<xliff:g id="PHYSICAL_KEYBOARDS_LIST">%1$s</xliff:g>的硬體設定"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"鍵盤配置挑選器"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"彈回鍵"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"忽略快速重複按下同一按鍵的動作"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"彈回鍵延遲"</string>
@@ -2228,6 +2221,8 @@
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"要重設為預設值嗎？"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"所有控制器設定都會重設為預設值"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"重設"</string>
+    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"觸控板"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"觸控板與滑鼠"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"滑鼠"</string>
@@ -2338,8 +2333,7 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"產生震動"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"連接時使遊戲控制器產生震動"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"鍵盤配置"</string>
-    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
-    <skip />
+    <string name="keyboard_layout_picker_category_title" msgid="2312103369489003202">"鍵盤配置"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"個人字典"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"工作用的個人字典"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"新增要在拼字檢查工具等應用程式中使用的字詞"</string>
@@ -2361,12 +2355,9 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"所有語言"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"更多語言…"</string>
     <string name="testing" msgid="6294172343766732037">"測試中"</string>
-    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
-    <skip />
-    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
-    <skip />
-    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
-    <skip />
+    <string name="keyboard_settings_summary" msgid="5513613701144979051">"鍵盤應用程式、工具"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="449934856451727476">"鍵盤應用程式、實體鍵盤、工具"</string>
+    <string name="physical_keyboards_list_title" msgid="2062417895303139252">"實體鍵盤"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"配置"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"選擇小工具"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"選擇小工具"</string>
@@ -2435,6 +2426,10 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能標記"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"啟用藍牙堆疊記錄"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"變更藍牙堆疊記錄功能的記錄層級 (變更這項設定後請切換藍牙)"</string>
+    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
+    <skip />
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"藍牙 HCI 窺探記錄篩選"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"設定篩選器"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"請停用或啟用藍牙，讓變更生效"</string>
@@ -3641,6 +3636,12 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"裝置"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"觸控板、鍵盤、螢幕、音效"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"亮度、顏色、深色主題、螢幕鎖定、文字"</string>
+    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
+    <skip />
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"鍵盤選取、工具"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"游標速度、自訂按鈕、捲動"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"音量、喇叭、麥克風"</string>
@@ -3772,8 +3773,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字, 大字型, 大型文字, 低視能, 放大文字, 放大字型, 使用大字型"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"一律開啟微光螢幕, 螢幕長亮模式"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, 標記, 感應器"</string>
-    <!-- no translation found for keywords_keyboard_vibration (5870649353180725920) -->
-    <skip />
+    <string name="keywords_keyboard_vibration" msgid="5870649353180725920">"鍵盤、觸覺回饋、震動、輸入"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"外接螢幕, 已連接的螢幕, 延伸螢幕, 第二個螢幕, 內建螢幕, 排列螢幕, 鏡像, 顯示大小, 旋轉, 解析度, 刷新率"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"插入點, 文字插入點, 文字游標, 游標, 閃爍, 閃爍間隔, 閃爍頻率, 動畫, 減少動畫, 移除動畫"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"音量和震動"</string>
@@ -4614,49 +4614,57 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"授權給這個應用程式，允許讀取、修改及刪除這部裝置或任何已連結儲存空間的所有檔案。應用程式獲得授權後，可能會在你不知情的情況下存取檔案。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以存取所有檔案"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"螢幕自動化"</string>
-    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"這個應用程式將可查看其他應用程式的畫面內容並互動，協助你完成工作，即使是在背景執行的應用程式也一樣"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2154932816099670659) -->
+    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_info (9062454049512207228) -->
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (5980762930536180974) -->
+    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
     <skip />
-    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"允許應用程式與其他應用程式的畫面內容互動，協助你完成工作"</string>
+    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都詢問"</string>
     <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
     <skip />
-    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"不允許"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (4888755761957621266) -->
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"不允許"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (5400163562350523099) -->
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (2238235275174477026) -->
+    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
     <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (2135792628244307590) -->
+    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
     <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
     <skip />
+    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
+    <skip />
     <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
     <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (7663936744209447022) -->
+    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
     <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (2481703601665259966) -->
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9145402296131321682) -->
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
     <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2454906328238498562) -->
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (5137088795672278469) -->
+    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_footer_requirement (4029489221206415252) -->
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (7290667979548333123) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (3243296237180038117) -->
+    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全螢幕通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允許這個應用程式顯示全螢幕通知"</string>
@@ -5809,8 +5817,7 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"選擇螢幕保護程式"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"自訂"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"自訂「<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>」"</string>
-    <!-- no translation found for dream_preview_button_description (1752727543834253129) -->
-    <skip />
+    <string name="dream_preview_button_description" msgid="1752727543834253129">"預覽「<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>」"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"必須重新啟動，才能啟用任意形式視窗支援功能。"</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"必須重新啟動，才能更新自由形式視窗的可用性。"</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"必須重新啟動，才能在第二個螢幕上啟用自由形式視窗功能。"</string>

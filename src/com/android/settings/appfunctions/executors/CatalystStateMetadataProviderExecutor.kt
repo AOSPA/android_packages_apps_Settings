@@ -138,7 +138,8 @@ class CatalystStateMetadataProviderExecutor(
                                                         )
                                                 if (
                                                     screenMetadata != null &&
-                                                        screenMetadata.isExposable(context)
+                                                        screenMetadata.isExposable(context) &&
+                                                            screenMetadata.isFlagEnabled(context)
                                                 ) {
                                                     buildPerScreenDeviceStatesMetadata(screenKey)
                                                 } else {
@@ -246,7 +247,7 @@ class CatalystStateMetadataProviderExecutor(
             } else {
                 PreferenceScreenRegistry.create(context, screenKey, Bundle.EMPTY)
             }
-        if (screenMetadata != null && screenMetadata.isExposable(context)) {
+        if (screenMetadata != null && screenMetadata.isExposable(context) && screenMetadata.isFlagEnabled(context)) {
             val hierarchy = getEnabledPreferencesHierarchy(context, screenMetadata)
             return buildHierarchyMetadata(hierarchy, isParameterized = true)
         }
@@ -380,7 +381,7 @@ class CatalystStateMetadataProviderExecutor(
                             val str = "itemization:${type.getKey()}"
                             val parameters = type.getParameters()
 
-                            if (parameters != null) {
+                            if (parameters != null && parameters.toParametersString() != "[]") {
                                 str + " ${parameters.toParametersString()}"
                             } else {
                                 str
@@ -428,6 +429,7 @@ class CatalystStateMetadataProviderExecutor(
                         else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
                         screenMetaData.getPreferencePurpose(context),
                         screenMetaData.accessPreconditionsAsString(context),
+                        screenMetaData.stableAccessPreconditionFailuresAsString(context)
                     )
                     .filter { it.isNotBlank() }
                     .joinToString(". ")
