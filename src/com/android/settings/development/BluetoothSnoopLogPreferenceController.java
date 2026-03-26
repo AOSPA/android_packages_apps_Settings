@@ -43,16 +43,16 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
 
     private final String[] mListValues;
     private final String[] mListEntries;
-    @Nullable private DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private BluetoothSnoopLogHost mHost;
 
     public BluetoothSnoopLogPreferenceController(
-            Context context, @Nullable DevelopmentSettingsDashboardFragment fragment) {
+            Context context, @Nullable BluetoothSnoopLogHost host) {
         super(context);
         mListValues = context.getResources()
                 .getStringArray(com.android.settingslib.R.array.bt_hci_snoop_log_values);
         mListEntries = context.getResources()
                 .getStringArray(com.android.settingslib.R.array.bt_hci_snoop_log_entries);
-        mFragment = fragment;
+        mHost = host;
     }
 
     // Default mode is DISABLED. It can also be changed by modifying the global setting.
@@ -84,8 +84,8 @@ public class BluetoothSnoopLogPreferenceController extends DeveloperOptionsPrefe
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         SystemProperties.set(BLUETOOTH_BTSNOOP_LOG_MODE_PROPERTY, newValue.toString());
         updateState(mPreference);
-        if (mFragment != null) {
-            mFragment.onSettingChanged();
+        if (mHost != null) {
+            mHost.onSettingChanged();
         }
         return true;
     }
