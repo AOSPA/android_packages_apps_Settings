@@ -653,6 +653,42 @@ class CatalystStateProviderExecutorTest {
         assertThat(screenState.deviceStateItems[1].key).isEqualTo("test_screen/no_sens_outer")
     }
 
+    @Test
+    fun execute_onScreenWithFlagDisabled_notIncluded() = runTest {
+        val innerSensitiveScreen = createScreen(
+            PreferenceScreenConfig(
+                screenKey = "flag_disabled_screen_key",
+                purpose = R.string.preference_screen_purpose,
+                preferences = listOf(
+                    createPersistentPreference<Boolean>(
+                        persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                            preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                key = "inner_preference",
+                                purpose = R.string.preference_purpose,
+                                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                            ),
+                        )
+                    )
+                ),
+                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY,
+                summary = R.string.preference_screen_summary,
+                isFlagEnabled = false,
+            )
+        )
+
+        setRegistryFactories(innerSensitiveScreen)
+
+        val executor = CatalystStateProviderExecutor(
+            buildConfig("flag_disabled_screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_UNCATEGORIZED)
+
+        assertThat(deviceStateResult.states).hasSize(0)
+    }
+
     private class ScreenWithKeyParameters : PreferencesApiScreen(
         key = "screen_with_params",
         topLevelSettingsCategory = Category.SYSTEM,

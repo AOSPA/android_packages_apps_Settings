@@ -1046,6 +1046,42 @@ class CatalystStateMetadataProviderExecutorTest {
     }
 
     @Test
+    fun invoke_onScreenWithFlagDisabled_notIncluded() = runTest {
+        val innerSensitiveScreen = createScreen(
+            PreferenceScreenConfig(
+                screenKey = "flag_disabled_screen_key",
+                purpose = R.string.preference_screen_purpose,
+                preferences = listOf(
+                    createPersistentPreference<Boolean>(
+                        persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                            preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                key = "inner_preference",
+                                purpose = R.string.preference_purpose,
+                                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                            ),
+                        )
+                    )
+                ),
+                sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE,
+                summary = R.string.preference_screen_summary,
+                isFlagEnabled = false,
+            )
+        )
+
+        setRegistryFactories(innerSensitiveScreen)
+
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("flag_disabled_screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(deviceStateResult.metadata).hasSize(0)
+    }
+
+    @Test
     fun toDeviceStateString_booleanType_returnsBOOL() {
         val proto = PreferenceValueDescriptorProto.newBuilder()
             .setBooleanType(true)
