@@ -245,10 +245,16 @@ class CatalystStateProviderExecutor(
                         key = "${screenMetaData.key}/${metadata.bindingKey}",
                         purpose = metadata.getPreferencePurpose(context).toString(),
                         name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*, *>) null
-                            else LocalizedString(
-                                english = metadata.getPreferenceTitle(englishContext).toString(),
-                                localized = metadata.getPreferenceTitle(context).toString(),
-                            ),
+                            else {
+                                val englishString = metadata.getPreferenceTitle(englishContext).toString()
+                                val localizedString = metadata.getPreferenceTitle(context).toString()
+                                if (englishString != "null" || localizedString != "null") {
+                                    LocalizedString(
+                                        english = metadata.getPreferenceTitle(englishContext).toString(),
+                                        localized = metadata.getPreferenceTitle(context).toString(),
+                                    )
+                                } else null
+                            },
                         jsonValue = it,
                         hintText = listOfNotNull(
                             metadata.resolvedAccessAndGetPreconditionsAsString(context),
