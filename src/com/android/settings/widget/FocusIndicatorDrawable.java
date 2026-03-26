@@ -72,7 +72,8 @@ public final class FocusIndicatorDrawable {
     public static class Builder {
         private final Context mContext;
         private int mHorizontalPaddingAdjustmentDp = 0;
-        private int mVerticalPaddingAdjustmentDp = 0;
+        private int mTopPaddingAdjustmentDp = 0;
+        private int mBottomPaddingAdjustmentDp = 0;
         private int mCornerRadiusDp = DEFAULT_CORNER_RADIUS_DP;
         private float[] mCornerRadiiPx;
         private int mOutlineWidthDp = DEFAULT_OUTLINE_WIDTH_DP;
@@ -104,7 +105,20 @@ public final class FocusIndicatorDrawable {
          * @param dp The padding adjustment value in dp.
          */
         public Builder withVerticalPaddingAdjustment(int dp) {
-            mVerticalPaddingAdjustmentDp = dp;
+            mTopPaddingAdjustmentDp = dp;
+            mBottomPaddingAdjustmentDp = dp;
+            return this;
+        }
+
+        /**
+         * Sets the top and bottom padding adjustments for the focus ring, in dp.
+         *
+         * @param topDp The top padding adjustment value in dp.
+         * @param bottomDp The bottom padding adjustment value in dp.
+         */
+        public Builder withVerticalPaddingAdjustments(int topDp, int bottomDp) {
+            mTopPaddingAdjustmentDp = topDp;
+            mBottomPaddingAdjustmentDp = bottomDp;
             return this;
         }
 
@@ -265,7 +279,8 @@ public final class FocusIndicatorDrawable {
                             dpToPx(mContext, mOutlineWidthDp),
                             dpToPx(mContext, mInsetDp),
                             dpToPx(mContext, mHorizontalPaddingAdjustmentDp),
-                            dpToPx(mContext, mVerticalPaddingAdjustmentDp),
+                            dpToPx(mContext, mTopPaddingAdjustmentDp),
+                            dpToPx(mContext, mBottomPaddingAdjustmentDp),
                             mColor);
             // In the unfocused state, we draw nothing in the foreground.
             Drawable defaultDrawable = new ColorDrawable(Color.TRANSPARENT);
@@ -287,18 +302,21 @@ public final class FocusIndicatorDrawable {
         private final Rect mTempRect = new Rect();
         private final int mInsetPx;
         private final int mHorizontalPaddingAdjustmentPx;
-        private final int mVerticalPaddingAdjustmentPx;
+        private final int mTopPaddingAdjustmentPx;
+        private final int mBottomPaddingAdjustmentPx;
 
         ClippedBoundsOutlineDrawable(
                 float[] cornerRadii,
                 int outlineWidthPx,
                 int insetPx,
                 int horizontalPaddingAdjustmentPx,
-                int verticalPaddingAdjustmentPx,
+                int topPaddingAdjustmentPx,
+                int bottomPaddingAdjustmentPx,
                 @ColorInt int outlineColor) {
             mInsetPx = insetPx;
             mHorizontalPaddingAdjustmentPx = horizontalPaddingAdjustmentPx;
-            mVerticalPaddingAdjustmentPx = verticalPaddingAdjustmentPx;
+            mTopPaddingAdjustmentPx = topPaddingAdjustmentPx;
+            mBottomPaddingAdjustmentPx = bottomPaddingAdjustmentPx;
 
             mGradientDrawable.setShape(GradientDrawable.RECTANGLE);
             mGradientDrawable.setColor(Color.TRANSPARENT); // The stroke is the visible part.
@@ -315,9 +333,9 @@ public final class FocusIndicatorDrawable {
                 // Calculate the final bounds by starting with the visible clip rect and then
                 // applying the relevant padding, adjustment, and inset values.
                 int drawableLeft = mTempRect.left + mHorizontalPaddingAdjustmentPx + mInsetPx;
-                int drawableTop = mTempRect.top + mVerticalPaddingAdjustmentPx + mInsetPx;
+                int drawableTop = mTempRect.top + mTopPaddingAdjustmentPx + mInsetPx;
                 int drawableRight = mTempRect.right - mHorizontalPaddingAdjustmentPx - mInsetPx;
-                int drawableBottom = mTempRect.bottom - mVerticalPaddingAdjustmentPx - mInsetPx;
+                int drawableBottom = mTempRect.bottom - mBottomPaddingAdjustmentPx - mInsetPx;
 
                 // Only draw if the calculated bounds are valid.
                 if (drawableLeft < drawableRight && drawableTop < drawableBottom) {
