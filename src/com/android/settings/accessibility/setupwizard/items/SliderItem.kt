@@ -20,6 +20,7 @@ import android.annotation.IntDef
 import android.content.Context
 import android.util.AttributeSet
 import android.view.HapticFeedbackConstants.CLOCK_TICK
+import android.view.KeyEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.accessibility.AccessibilityNodeInfo
@@ -60,6 +61,35 @@ class SliderItem : Item {
                 super.onInitializeAccessibilityNodeInfo(host, info)
                 info.className = Button::class.java.name
             }
+        }
+
+    /**
+     * Listener reacting to the user pressing DPAD left/right keys if {@code adjustable} attribute
+     * is set to true; it transfers the key presses to the {@link Slider} to be handled accordingly.
+     */
+    private val sliderKeyListener =
+        View.OnKeyListener { v, keyCode, event ->
+            // Only handle initial key presses
+            if (event.action != KeyEvent.ACTION_DOWN) return@OnKeyListener false
+
+            when (keyCode) {
+                // Ignore DPAD navigation if the slider is disabled/non-adjustable
+                KeyEvent.KEYCODE_DPAD_LEFT,
+                KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                    // Right or left keys are pressed when in non-adjustable mode; Skip the keys.
+                    if (!adjustable) return@OnKeyListener false
+                }
+
+                // We don't want to propagate the click keys down to the Slider since it will
+                // create the ripple effect for the thumb.
+                KeyEvent.KEYCODE_DPAD_CENTER,
+                KeyEvent.KEYCODE_ENTER -> {
+                    return@OnKeyListener false
+                }
+            }
+
+            // Delegate valid key events to the slider instance
+            v.findViewById<Slider>(R.id.slider)?.onKeyDown(keyCode, event) ?: false
         }
 
     private val sliderTouchListener =
@@ -188,7 +218,16 @@ class SliderItem : Item {
 
     @HapticFeedbackMode var hapticFeedbackMode: Int = HAPTIC_FEEDBACK_MODE_NONE
     var isTrackingTouch: Boolean = false
+
     var updatesContinuously: Boolean = false
+
+    var adjustable: Boolean = true
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyChanged()
+            }
+        }
 
     constructor() : super()
 
@@ -197,17 +236,25 @@ class SliderItem : Item {
             // The ordering of these two statements are important. If we want to set max first, we
             // need to perform the same steps by changing min/max to max/min as following:
             // mMax = a.getInt(...) and setMin(...).
-            min = a.getInt(R.styleable.SliderItem_min, 0)
-            max = a.getInt(R.styleable.SliderItem_max, 100)
-            updatesContinuously = a.getBoolean(R.styleable.SliderItem_updatesContinuously, false)
-            sliderIncrement = a.getInt(R.styleable.SliderItem_seekBarIncrement, 0)
-            showSliderValue = a.getBoolean(R.styleable.SliderItem_showSliderValue, false)
-            iconStartId = a.getResourceId(R.styleable.SliderItem_iconStart, 0)
+            min = a.getInt(R.styleable.SliderItem_min, min)
+            max = a.getInt(R.styleable.SliderItem_max, max)
+            adjustable = a.getBoolean(R.styleable.SliderItem_adjustable, adjustable)
+            updatesContinuously =
+                a.getBoolean(R.styleable.SliderItem_updatesContinuously, updatesContinuously)
+            sliderIncrement = a.getInt(R.styleable.SliderItem_seekBarIncrement, sliderIncrement)
+            showSliderValue = a.getBoolean(R.styleable.SliderItem_showSliderValue, showSliderValue)
+            iconStartId = a.getResourceId(R.styleable.SliderItem_iconStart, iconStartId)
             iconStartContentDescriptionId =
-                a.getResourceId(R.styleable.SliderItem_iconStartContentDescription, 0)
-            iconEndId = a.getResourceId(R.styleable.SliderItem_iconEnd, 0)
+                a.getResourceId(
+                    R.styleable.SliderItem_iconStartContentDescription,
+                    iconStartContentDescriptionId,
+                )
+            iconEndId = a.getResourceId(R.styleable.SliderItem_iconEnd, iconEndId)
             iconEndContentDescriptionId =
-                a.getResourceId(R.styleable.SliderItem_iconEndContentDescription, 0)
+                a.getResourceId(
+                    R.styleable.SliderItem_iconEndContentDescription,
+                    iconEndContentDescriptionId,
+                )
         }
     }
 
@@ -219,7 +266,9 @@ class SliderItem : Item {
             initDimensions(view.context)
         }
 
+        view.setOnKeyListener(sliderKeyListener)
         view.isClickable = false
+
         view.findViewById<Slider>(R.id.slider)?.apply {
             labelBehavior =
                 if (showSliderValue) {
