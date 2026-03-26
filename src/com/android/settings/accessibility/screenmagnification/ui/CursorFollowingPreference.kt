@@ -148,7 +148,7 @@ class CursorFollowingPreference :
         return !context.isInSetupWizard() && isMagnificationCursorFollowingModeDialogSupported()
     }
 
-    override fun getEnabledDescription(): String = "Screen magnification must be set to full screen or both."
+    override fun getEnabledDescription(): String = "Screen magnification must be set to 'full screen' or 'switch between full and partial screen'"
 
     override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
