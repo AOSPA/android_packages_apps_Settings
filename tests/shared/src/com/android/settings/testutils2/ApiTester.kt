@@ -23,6 +23,7 @@ import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferencesapi.ApiOperationContext
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.preferencesapi.extractSafety
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.ApiPreconditions
 import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseRestriction
@@ -30,9 +31,9 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUns
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.preconditions.RegionalRestriction
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.clearCache
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
-import com.android.settingslib.metadata.preferencesapi.extractSafety
 
 /**
  * Generic exception thrown if the preconditions of a get/set operation made through the ApiTester
@@ -96,8 +97,12 @@ class ScreenInfo
  */
 class ApiTester(
     private val instance: PreferencesApiScreen,
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val context: Context = ApplicationProvider.getApplicationContext(),
 ) {
+
+    init {
+        clearCache()
+    }
 
     private val possibleParameters by lazy {
         runBlocking { instance.getAllPossibleParameters(context).toList() }
@@ -202,7 +207,10 @@ class ApiTester(
         throw FailedPreconditionException()
     }
 
-    private suspend fun <V : Any> checkPotentialFiniteValue(preference: ApiPreference<*, V>, value: V) {
+    private suspend fun <V : Any> checkPotentialFiniteValue(
+        preference: ApiPreference<*, V>,
+        value: V,
+    ) {
         if (preference.type is FiniteOptionsType<*, *>) {
             if (!getPreferenceOptions<V>(preference.key).map { it.first }.contains(value))
                 throw InvalidValueException(
@@ -295,7 +303,10 @@ class ApiTester(
      */
     fun getLaunchIntent(): Intent {
         val operationContext =
-            ApiOperationContext(context = context, parameters = instance.keyParameters ?: ValidatedKeyParameters.EMPTY)
+            ApiOperationContext(
+                context = context,
+                parameters = instance.keyParameters ?: ValidatedKeyParameters.EMPTY,
+            )
         val screenPermissions = runBlocking { instance.screenPermissions }
         if (screenPermissions != null) {
             val pid = android.os.Process.myPid()
@@ -320,7 +331,11 @@ class ApiTester(
         val type = preference.type
         if (type is FiniteOptionsType<*, *>) {
             val enforcedType = type as FiniteOptionsType<*, V>
-            return runBlocking { enforcedType.getOptions(context).map { extractSafety(it.first) as V to extractSafety(it.second) as String } }
+            return runBlocking {
+                enforcedType.getOptions(context).map {
+                    extractSafety(it.first) as V to extractSafety(it.second) as String
+                }
+            }
         } else
             throw Exception(
                 "Attempting to get all preference options on a " +
@@ -337,14 +352,10 @@ class ApiTester(
     /** Get the screen extras associated with this parameterized screen. */
     fun getLaunchScreenExtras() = instance.launchScreenExtra
 
-    /**
-     * Get all the parameter options for a specific parameter name.
-     */
-    fun getParameterOptions(parameterName: String) : List<String> =
+    /** Get all the parameter options for a specific parameter name. */
+    fun getParameterOptions(parameterName: String): List<String> =
         possibleParameters.flatMap { validatedKeyParameters ->
-            validatedKeyParameters.values
-                .filter { it.key == parameterName }
-                .values
+            validatedKeyParameters.values.filter { it.key == parameterName }.values
         }
 }
 
