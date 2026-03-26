@@ -308,7 +308,7 @@ class CatalystStateProviderExecutor(
         val allowedRead = metadata.getReadPermit(
             context, Process.myPid(),
             Process.myUid()
-        ) == ALLOW
+        ) == ALLOW && metadata.isExposable(context) && (metadata as? PreferenceAvailabilityProvider)?.isAvailable(context) ?: true
         return if (allowedRead) {
             if (metadata.valueType == String::class.java) {
                 // We should be smarter here and only mark external if the data is
