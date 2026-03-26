@@ -169,6 +169,8 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                 applicationContext,
                 appFunctionType.toMetricsId(),
             )
+
+            // Any code beyond this point will not execute
             callback.onError(
                 AppFunctionException(
                     ERROR_DENIED,
@@ -188,12 +190,14 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                     applicationContext,
                     appFunctionType.toMetricsId(),
                 )
+                // Any code beyond this point will not execute
                 callback.onError(
                     AppFunctionException(
                         ERROR_FUNCTION_NOT_FOUND,
                         "${request.functionIdentifier} not supported.",
                     )
                 )
+                return@launch
             }
             try {
                 val startMs = SystemClock.elapsedRealtime()
@@ -218,15 +222,18 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                 )
             } catch (e: Exception) {
                 // TODO(b/491141423): granular exceptions handle
-                callback.onError(
-                    AppFunctionException(ERROR_SYSTEM_ERROR, e.message ?: UNKNOWN_ERROR_MESSAGE)
-                )
-
                 metricsLogger.logAppFunctionError(
                     callingPackage,
                     ERROR_SYSTEM_ERROR,
                     applicationContext,
                     appFunctionType.toMetricsId(),
+                )
+
+                Log.e(TAG, "AppFunction call failed: ${e.message}")
+
+                // Any code beyond this point will not execute
+                callback.onError(
+                    AppFunctionException(ERROR_SYSTEM_ERROR, e.javaClass::class.java.toString())
                 )
             } finally {
                 Trace.endAsyncSection("DeviceStateAppFunction ${request.functionIdentifier}", 0)
@@ -265,7 +272,5 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
 
     companion object {
         private const val TAG = "AbstractDeviceStateAppFunctionService"
-
-        private const val UNKNOWN_ERROR_MESSAGE = "Unknown error"
     }
 }
