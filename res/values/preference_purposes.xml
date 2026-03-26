@@ -186,11 +186,11 @@
     <string name="device_state_notification_access_conversations_preference_purpose" translatable="false">device_state_notification_access_conversations_preference</string>
     <string name="device_state_notification_access_ongoing_preference_purpose" translatable="false">device_state_notification_access_ongoing_preference</string>
     <string name="device_state_notification_access_silent_preference_purpose" translatable="false">device_state_notification_access_silent_preference</string>
-    <string name="app_size_purpose" translatable="false">app_size</string>
-    <string name="cache_size_purpose" translatable="false">cache_size</string>
-    <string name="data_size_purpose" translatable="false">data_size</string>
+    <string name="app_size_purpose" translatable="false">The amount of storage space occupied by the application\'s core code and executable files.</string>
+    <string name="cache_size_purpose" translatable="false">The amount of storage space occupied by temporary cache files created by the application.</string>
+    <string name="data_size_purpose" translatable="false">The amount of storage space occupied by user data and settings stored by the application.</string>
     <string name="device_state_app_info_storage_purpose" translatable="false">Allows users to view a detailed breakdown of storage usage for a specific application and manage its space by clearing data or cache.</string>
-    <string name="total_size_purpose" translatable="false">total_size</string>
+    <string name="total_size_purpose" translatable="false">The total storage space consumed by the application, including code, data, and cache.</string>
     <string name="device_state_apps_storage_purpose" translatable="false">Allows users to view a list of all installed applications and the amount of storage space each occupies on the device.</string>
     <string name="brightness_purpose" translatable="false">The current brightness level of the screen</string>
     <string name="hdr_brightness_screen_purpose" translatable="false">Allows the user to brighten and expand the color range and clarity in High Dynamic Range (HDR) images and videos.</string>
@@ -284,7 +284,7 @@
     <string name="hearing_devices_purpose" translatable="false">Allows users to set up and manage hearing aids, cochlear implants, and other amplification devices, including pairing new devices and configuring audio routing for notifications and ringtones.</string>
     <string name="hearing_options_category_purpose" translatable="false">A section containing general options for hearing devices.</string>
     <string name="previously_connected_hearing_devices_purpose" translatable="false">Displays a list of hearing devices that were previously paired with the device.</string>
-    <string name="advanced_app_info_purpose" translatable="false">advanced_app_info</string>
+    <string name="advanced_app_info_purpose" translatable="false">Provides access to advanced application settings and information, such as battery usage and storage details.</string>
     <string name="installed_app_detail_settings_screen_purpose">Provides detailed information and management options for a specific installed application, including permissions, storage, notifications, and state.</string>
     <string name="installed_app_detail_unused_apps_switch_purpose">If enabled, will remove permissions, delete temporary files, stop notifications, and archive the app if it is unused for an extended period of time.</string>
     <string name="installed_app_detail_manage_app_unused_parameter_purpose" translatable="false">Specifies the exact package name of the installed application.</string>
@@ -604,7 +604,7 @@
     <string name="device_state_bedtime_mode_screen_purpose" translatable="false">device_state_bedtime_mode_screen</string>
     <string name="device_state_dnd_mode_display_settings_purpose" translatable="false">device_state_dnd_mode_display_settings</string>
     <string name="device_state_dnd_mode_screen_purpose" translatable="false">device_state_dnd_mode_screen</string>
-    <string name="wifi_calling_purpose" translatable="false">wifi_calling</string>
+    <string name="wifi_calling_purpose" translatable="false">Whether Wi-Fi calling is enabled, allowing calls over a Wi-Fi network when cellular coverage is limited.</string>
     <string name="wifi_network_details_purpose" translatable="false">Shows details of a selected Wi-Fi network.</string>
     <string name="wifi_details_settings_purpose" translatable="false">Allows users to view and manage the details of a saved Wi-Fi network.</string>
     <string name="wifi_details_parameter_purpose" translatable="false">The key of the saved network</string>
@@ -641,14 +641,14 @@
     <string name="ambient_wallpaper_group_purpose" translatable="false">ambient_wallpaper_group</string>
     <string name="recent_app_location_access_purpose" translatable="false">recent_app_location_access</string>
     <string name="adaptive_connectivity_enabled_purpose" translatable="false">adaptive_connectivity_enabled</string>
-    <string name="enabled_networks_key_purpose" translatable="false">enabled_networks_key</string>
+    <string name="enabled_networks_key_purpose" translatable="false">The preferred mobile network type, such as 5G, LTE, or 3G.</string>
     <string name="enabled_state_container_purpose" translatable="false">enabled_state_container</string>
     <string name="status_header_purpose" translatable="false">status_header</string>
     <string name="network_mode_imei_info_purpose" translatable="false">network_mode_imei_info</string>
     <string name="use_sim_switch_catalyst_purpose" translatable="false">use_sim_switch_catalyst</string>
-    <string name="mobile_network_phone_number_purpose" translatable="false">phone_number</string>
+    <string name="mobile_network_phone_number_purpose" translatable="false">The phone number associated with the SIM card.</string>
     <string name="mobile_network_apn_and_protection_purpose" translatable="false">apn_and_protection</string>
-    <string name="mobile_network_spn_purpose" translatable="false">mobile_network_spn</string>
+    <string name="mobile_network_spn_purpose" translatable="false">The Service Provider Name (SPN) of the mobile network.</string>
     <string name="device_state_activate_purpose" translatable="false">device_state_activate</string>
     <string name="supervision_dynamic_group_2" translatable="false">supervision_dynamic_group_2</string>
     <string name="footer_group_purpose" translatable="false">footer_group</string>
@@ -774,4 +774,32 @@
     <string name="text_to_speech_purpose" translatable="false">Allows the user to manage default text-to-speech settings, including preferred engine, default language, speech rate, and pitch.</string>
     <string name="text_to_speech_rate_purpose" translatable="false">Speech speed at which the text is spoken with normal value 100 in range of 10 to 600.</string>
     <string name="text_to_speech_pitch_purpose" translatable="false">Pitch value that affects the tone of the synthesized speech with normal value 100 in range of 25 to 400.</string>
+
+    <!-- App Functions State Sources purposes -->
+    <string name="app_version_purpose" translatable="false">The version name of the application</string>
+    <string name="app_package_purpose" translatable="false">The package name of the application</string>
+    <string name="battery_saver_reminders_purpose" translatable="false">Whether or not Battery Saver reminders are enabled</string>
+    <string name="global_notification_bubbles_purpose" translatable="false">Whether or not notification bubbles are enabled globally</string>
+    <string name="lock_screen_notification_global_pref_purpose" translatable="false">Whether notifications are shown on the lock screen</string>
+    <string name="has_managed_profile_purpose" translatable="false">Whether the device has a managed profile</string>
+    <string name="media_output_purpose" translatable="false">The current media output device</string>
+    <string name="mobile_data_usage_cycle_purpose" translatable="false">The time range for the current mobile data usage cycle</string>
+    <string name="mobile_data_usage_total_purpose" translatable="false">The total mobile data usage for the current cycle</string>
+    <string name="mobile_data_usage_foreground_purpose" translatable="false">The foreground mobile data usage for the current cycle</string>
+    <string name="mobile_data_usage_background_purpose" translatable="false">The background mobile data usage for the current cycle</string>
+    <string name="sim_enabled_purpose" translatable="false">Whether the SIM is enabled</string>
+    <string name="mobile_data_used_purpose" translatable="false">The amount of mobile data used on this SIM</string>
+    <string name="notification_history_enabled_purpose" translatable="false">Whether notification history is enabled, which allows users to view a list of recently dismissed notifications and see where they came from.</string>
+    <string name="app_notifications_enabled_purpose" translatable="false">Whether notifications are enabled for the application</string>
+    <string name="app_last_notification_time_purpose" translatable="false">The time since the last notification was received from the application</string>
+    <string name="app_last_used_time_purpose" translatable="false">The time since the application was last used</string>
+    <string name="current_screen_timeout_purpose" translatable="false">The current screen timeout duration</string>
+    <string name="wifi_network_name_purpose" translatable="false">The name of the Wi-Fi network</string>
+    <string name="wifi_is_connected_purpose" translatable="false">Whether the device is currently connected to this Wi-Fi network</string>
+    <string name="wifi_auto_connect_purpose" translatable="false">Whether the device automatically connects to this Wi-Fi network</string>
+    <string name="zen_mode_dnd_active_purpose" translatable="false">Whether Do Not Disturb mode is active</string>
+    <string name="zen_mode_bedtime_active_purpose" translatable="false">Whether Bedtime mode is active</string>
+    <string name="nfc_enabled_purpose" translatable="false">Whether NFC is enabled</string>
+    <string name="mobile_network_data_roaming_enabled_purpose" translatable="false">Whether data roaming is enabled for the mobile network.</string>
+    <string name="auto_select_network_purpose" translatable="false">Whether the device automatically selects the best available mobile network or requires the user to manually choose one.</string>
 </resources>

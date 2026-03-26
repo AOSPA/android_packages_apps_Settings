@@ -20,6 +20,7 @@ import android.app.usage.NetworkStats
 import android.app.usage.NetworkStatsManager
 import android.content.Context
 import android.net.NetworkTemplate
+import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.datausage.lib.DataUsageFormatter
@@ -82,7 +83,7 @@ class MobileDataUsageStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "mobile_data_usage_cycle_${app.info.packageName}",
-                    purpose = "mobile_data_usage_cycle_${app.info.packageName}",
+                    purpose = context.getString(R.string.mobile_data_usage_cycle_purpose),
                     jsonValue = Utils.formatDateRange(context, startTimeMs, endTimeMs),
                     hintText = "App: ${app.label}",
                 )
@@ -90,7 +91,7 @@ class MobileDataUsageStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "mobile_data_usage_total_${app.info.packageName}",
-                    purpose = "mobile_data_usage_total_${app.info.packageName}",
+                    purpose = context.getString(R.string.mobile_data_usage_total_purpose),
                     jsonValue = dataUsageFormatter.formatDataUsage(totalBytes),
                     hintText = "App: ${app.label}",
                 )
@@ -98,7 +99,7 @@ class MobileDataUsageStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "mobile_data_usage_foreground_${app.info.packageName}",
-                    purpose = "mobile_data_usage_foreground_${app.info.packageName}",
+                    purpose = context.getString(R.string.mobile_data_usage_foreground_purpose),
                     jsonValue = dataUsageFormatter.formatDataUsage(foregroundBytes),
                     hintText = "App: ${app.label}",
                 )
@@ -106,7 +107,7 @@ class MobileDataUsageStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "mobile_data_usage_background_${app.info.packageName}",
-                    purpose = "mobile_data_usage_background_${app.info.packageName}",
+                    purpose = context.getString(R.string.mobile_data_usage_background_purpose),
                     jsonValue = dataUsageFormatter.formatDataUsage(backgroundBytes),
                     hintText = "App: ${app.label}",
                 )

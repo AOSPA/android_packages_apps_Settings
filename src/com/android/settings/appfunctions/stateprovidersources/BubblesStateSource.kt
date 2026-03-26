@@ -19,6 +19,7 @@ package com.android.settings.appfunctions.stateprovidersources
 import android.content.Context
 import android.provider.Settings
 import android.provider.Settings.Global.NOTIFICATION_BUBBLES
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.notification.BubbleHelper
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
@@ -42,7 +43,7 @@ class BubblesStateSource : DeviceStateSource {
         val item =
             DeviceStateItem(
                 key = "global_notification_bubbles",
-                purpose = "global_notification_bubbles",
+                purpose = context.getString(R.string.global_notification_bubbles_purpose),
                 jsonValue = isEnabled.toString(),
             )
 
