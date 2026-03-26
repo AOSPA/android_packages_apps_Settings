@@ -51,11 +51,11 @@
     <string name="a11y_action_timeout_footer_purpose" translatable="false">shows additional notes about Accessibility timeout</string>
     <string name="a11y_timing_controls_screen_purpose" translatable="false">Customize the system\'s pace to give users more time to interact or read.</string>
     <string name="a11y_touch_hold_delay_purpose" translatable="false">Controls how long you must press and hold a screen item before it registers as a long-press</string>
-    <string name="a11y_audio_adjustment_screen_purpose" translatable="false">Screen allows the users to customize their device\'s sound output to match their physical hearing needs or their specific listening environment</string>
+    <string name="a11y_audio_adjustment_screen_purpose" translatable="false">Allows users to customize their device\'s sound output to match their physical hearing needs or their specific listening environment</string>
     <string name="a11y_mono_audio_setting_purpose" translatable="false">Whether to combine left and right audio channels into a single track played through both speakers</string>
     <string name="a11y_audio_balance_purpose" translatable="false">The balance of audio volume between the left and right speakers. 100 is equal balance.</string>
     <string name="a11y_autoclick_screen_purpose" translatable="false">Screen allows users to set a \'dwell time\' so the device automatically performs a click whenever the cursor stops moving. This enables full navigation of the interface without the need to physically press a button on an external pointer device.</string>
-    <string name="a11y_autoclick_intro_purpose" translatable="false">Short introduction on what autoclick feature is.</string>
+    <string name="a11y_autoclick_intro_purpose" translatable="false">Short introduction on what the autoclick feature is.</string>
     <string name="a11y_autoclick_illustration_purpose" translatable="false">Shows an illustration of the autoclick feature.</string>
     <string name="a11y_autoclick_main_switch_purpose" translatable="false">Allows users to turn on or off the autoclick feature.</string>
     <string name="a11y_autoclick_shortcut_purpose" translatable="false">Allows users to quickly turn on or off the autoclick feature via the selected shortcuts.</string>
@@ -116,11 +116,11 @@
     <string name="color_mode_purpose" translatable="false">Allows the user to change the color profile of the display to suit their visual preferences. This will adjust how colors are rendered on the screen.</string>
     <string name="color_mode_options_purpose" translatable="false">Color modes.</string>
     <string name="color_contrast_screen_purpose" translatable="false">Allows users to customize the contrast. Includes the ability to change contrast of UI elements and the ability to outline all text with a black or white background.</string>
-    <string name="color_contrast_selector_preference_purpose">The contrast level of UI elements on the screen</string>
+    <string name="color_contrast_selector_preference_purpose" translatable="false">The contrast level of UI elements on the screen</string>
     <string name="caption_preferences_screen_purpose" translatable="false">Allows users to enable or disable system-wide captions and access settings to customize their visual appearance.</string>
     <string name="caption_preferences_top_intro_purpose" translatable="false">Shows a short introduction of what caption preferences are for.</string>
     <string name="caption_preferences_main_switch_purpose" translatable="false">Whether system-wide captions are enabled for media content.</string>
-    <string name="caption_preferences_illustration_purpose" translatable="false">Displays a illustration of the caption preferences screen.</string>
+    <string name="caption_preferences_illustration_purpose" translatable="false">Displays an illustration of the caption preferences screen.</string>
     <string name="caption_preferences_footer_purpose" translatable="false">Contains additional information about caption preferences</string>
     <string name="caption_preferences_appearance_purpose" translatable="false">Allows users to configure the caption\'s text size and style.</string>
     <string name="caption_preferences_appearance_preview_purpose" translatable="false">The preview shows exactly how the captions will look over a real video. This helps the user make sure the text is easy to read before saving the settings.</string>
@@ -250,7 +250,7 @@
     <string name="gesture_pick_up_purpose" translatable="false">Whether the screen should automatically wake or show the ambient display when the device is physically lifted</string>
     <!-- Lift to check device screen end -->
     <!-- Tap to check device screen begin -->
-    <string name="tap_screen_gesture_purpose" translatable="false">Allows the user to to tap screen for checking device\’s time, notifications, and other info.</string>
+    <string name="tap_screen_gesture_purpose" translatable="false">Allows the user to tap screen for checking device\’s time, notifications, and other info.</string>
     <string name="gesture_tap_purpose" translatable="false">Enables the gesture to check device\'s time, notifications, and other info, tap device screen.</string>
     <!-- Tap to check device screen end -->
     <!-- Battery information screen begin -->
@@ -584,11 +584,11 @@
     <string name="toggle_vibration_category_call_purpose" translatable="false">toggle_vibration_category_call</string>
     <string name="toggle_vibration_category_haptics_purpose" translatable="false">toggle_vibration_category_haptics</string>
     <string name="toggle_vibration_category_notification_alarm_purpose" translatable="false">toggle_vibration_category_notification_alarm</string>
-    <string name="vibration_screen_purpose" translatable="false">Allows users to customize the vibration settings of their device. This includes turning on/off the vibration for call, notification, alarm, media, and keyboard.</string>
+    <string name="vibration_screen_purpose" translatable="false">Allows users to customize the vibration settings of their device. This includes turning on/off the vibration for call, notification, alarm, media, and keyboard. This screen is only available on devices that do not support variable vibration intensity and is mutually exclusive with the vibration_intensity_screen screen.</string>
     <string name="vpn_settings_purpose" translatable="false">Allows users to view configured Virtual Private Network (VPN) profiles and add new connections to encrypt and secure their internet traffic.</string>
     <string name="wifi_display_settings_purpose" translatable="false">Allows users to search for and connect to nearby wireless display devices to share their screen or media.</string>
     <string name="wifi_tether_purpose" translatable="false">Whether or not the Wi-Fi hotspot is enabled to share the device\'s internet connection or content</string>
-    <string name="vibration_intensity_screen_purpose" translatable="false">Allows users to customize the vibration intensity of their device. This includes turning on/off the vibration, and adjusting the vibration intensity for call, notification, alarm, media, and keyboard.</string>
+    <string name="vibration_intensity_screen_purpose" translatable="false">Allows users to customize the vibration intensity of their device. This includes turning on/off the vibration, and adjusting the vibration intensity for call, notification, alarm, media, and keyboard. This screen is only available on devices with adjustable vibration motors and is mutually exclusive with vibration_screen screen.</string>
     <string name="edit_shortcuts_screen_purpose" translatable="false">edit_shortcuts_screen</string>
     <string name="special_access_write_system_preferences_app_detail_purpose" translatable="false">special_access_write_system_preferences_app_detail</string>
     <string name="billing_preference_catalyst_purpose" translatable="false">billing_preference_catalyst</string>
@@ -726,7 +726,7 @@
     <!-- Account detail screen end -->
     <string name="sim_lock_settings_purpose" translatable="false">Allows users to manage the SIM card lock settings, including enabling or disabling the SIM PIN and changing the PIN code.</string>
     <!-- Date and Time Settings screen begin -->
-    <string name="date_time_settings_purpose"  translatable="false">Allows users to manage the device\'s date, time, and time zone settings. This includes configuring automatic date, time, and time zone detection; manually setting the date, time, and time zone; configuring if location should be used to determine the time zone; and choosing between 12-hour and 24-hour time formats. Users can also configure whether to receive notifications for time zone changes or upcoming scheduled clock changes, such as Daylight Saving Time.</string>
+    <string name="date_time_settings_purpose" translatable="false">Allows users to manage the device\'s date, time, and time zone settings. This includes configuring automatic date, time, and time zone detection; manually setting the date, time, and time zone; configuring if location should be used to determine the time zone; and choosing between 12-hour and 24-hour time formats. Users can also configure whether to receive notifications for time zone changes or upcoming scheduled clock changes, such as Daylight Saving Time.</string>
     <!-- Date and Time Settings screen end -->
     <!-- Device unlock settings screens start -->
     <string name="device_unlock_pref_screen_purpose" translatable="false">Allows users to manage their screen lock settings. This includes setting or modifying their device credential, like a PIN or password, as well as managing their biometrics and other authenticators, like watches, and related preferences for each of these modalities.</string>
