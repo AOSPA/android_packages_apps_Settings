@@ -26,13 +26,16 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import kotlinx.coroutines.CoroutineScope
 
 @ProvidePreferenceScreen(ButtonNavigationSettingsScreen.KEY)
 class ButtonNavigationSettingsScreen : PreferenceScreenMixin {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    // TODO(b/496489797): Remove UI ONLY tag after System > Navigation mode > Navigation Mode radio
+    // is migrated
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, UI_ONLY_PREFERENCE)
 
     override val key: String
         get() = KEY
