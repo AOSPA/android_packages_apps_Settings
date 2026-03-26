@@ -24,6 +24,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityUtil
 import com.android.settings.accessibility.shared.utils.adjustIllustrationLayoutForSetupWizard
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
@@ -51,6 +52,8 @@ abstract class ImageUriPreference :
     abstract fun getImageUri(context: Context): Uri?
 
     override val availabilityDescription = "The image uri must be not null."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean = getImageUri(context) != null
 

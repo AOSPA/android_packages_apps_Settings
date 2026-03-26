@@ -93,7 +93,6 @@ open class MyDeviceInfoScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +MyDeviceInfoScreenPreference(this@MyDeviceInfoScreen)
             +PreferenceCategory(
                 key = DEVICE_DETAIL_CATEGORY,
                 purpose = R.string.device_detail_category_purpose,
@@ -114,24 +113,6 @@ open class MyDeviceInfoScreen :
         }
 
     override fun hasCompleteHierarchy() = false
-
-    class MyDeviceInfoScreenPreference(
-        private val screenMetadata : MyDeviceInfoScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider {
-        override val key : String
-            get() = "my_device_info_pref_screen_preference"
-
-        override val purpose : Int
-            get() = screenMetadata.purpose
-
-        override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
-
-        override val indexable = false
-
-        override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
-
-        override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
-    }
 
     companion object {
         const val KEY = "my_device_info_pref_screen"

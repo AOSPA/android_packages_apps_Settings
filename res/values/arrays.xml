@@ -1103,6 +1103,25 @@
         <item>3</item>
     </integer-array>
 
+    <!-- LINT.IfChange -->
+    <!-- Summary for magnification cursor following modes for accessibility -->
+    <string-array name="magnification_cursor_following_mode_summaries" translatable="false">
+        <item>@string/accessibility_magnification_cursor_following_continuous</item>
+        <item>@string/accessibility_magnification_cursor_following_center</item>
+        <item>@string/accessibility_magnification_cursor_following_edge</item>
+    </string-array>
+
+    <!-- Values for magnification cursor following modes for accessibility -->
+    <integer-array name="magnification_cursor_following_mode_values" translatable="false">
+        <!-- Continuous -->
+        <item>0</item>
+        <!-- Center -->
+        <item>1</item>
+        <!-- Edge -->
+        <item>2</item>
+    </integer-array>
+    <!-- LINT.ThenChange(//src/com/android/settings/accessibility/screenmagnification/dialogs/CursorFollowingModeChooser.kt) -->
+
     <!-- Keys for color space adjustment modes for accessibility -->
     <string-array name="daltonizer_mode_keys" translatable="false">
         <item>daltonizer_mode_deuteranomaly</item>

@@ -25,8 +25,9 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(BluetoothDashboardScreenApi.KEY)
@@ -53,20 +54,20 @@ class BluetoothDashboardScreenApi :
                 val bluetoothManager = context.getSystemService(BluetoothManager::class.java)
                 val bluetoothAdapter =
                     bluetoothManager?.adapter
-                        ?: return@preconditions Disallowed(R.string.bluetooth_not_supported_error)
+                        ?: return@preconditions Custom(R.string.bluetooth_not_supported_error, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
 
                 try {
                     if (bluetoothAdapter.isAutoOnSupported) {
                         Allowed
                     } else {
-                        Disallowed(R.string.bluetooth_auto_on_not_supported_error)
+                        Custom(R.string.bluetooth_auto_on_not_supported_error, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
                     }
-                } catch (e: Exception) {
-                    Log.e(TAG, "Error checking if Auto-On is supported", e)
-                    Disallowed(R.string.bluetooth_auto_on_hardware_check_failed_error)
                 } catch (e: NoSuchMethodError) {
                     Log.e(TAG, "isAutoOnSupported method not found", e)
-                    Disallowed(R.string.bluetooth_auto_on_api_missing_error)
+                    Custom(R.string.bluetooth_auto_on_api_missing_error, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
+                } catch (e: Exception) {
+                    Log.e(TAG, "Error checking if Auto-On is supported", e)
+                    Custom(R.string.bluetooth_auto_on_hardware_check_failed_error, stability = PreconditionStability.UNSTABLE)
                 }
             }
 

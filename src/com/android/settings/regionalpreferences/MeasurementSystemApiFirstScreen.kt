@@ -22,7 +22,8 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
-import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
+import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithString
 
 // LINT.IfChange
 @ProvidePreferenceScreen(MeasurementSystemApiFirstScreen.KEY)
@@ -40,67 +41,45 @@ class MeasurementSystemApiFirstScreen :
         preference(
             key = KEY_MEASUREMENT_SYSTEM_ITEM,
             purpose = R.string.regional_preference_measurement_system_item_preference_purpose,
-            type = AnyString,
+            type = CustomEnum(MeasurementSystemOptions::class, "Measurement system"),
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
 
             get {
                 execute {
-                    // Use the converter to convert the data to a human-readable value,
-                    // for example: "Metric", "US" and "UK"
-                    RegionalPreferencesDataUtils.measurementSystemConverter(
-                        context,
+                    val value =
                         RegionalPreferencesDataUtils.getDefaultUnicodeExtensionData(
                             context,
                             ExtensionTypes.MEASUREMENT_SYSTEM,
-                        ),
-                    )
+                        )
+                    if (value == null) {
+                        MeasurementSystemOptions.DEFAULT
+                    } else {
+                        MeasurementSystemOptions.values().firstOrNull { it.asApiValue == value }
+                            ?: error("Unknown measurement system: $value")
+                    }
                 }
             }
             set {
                 execute { value ->
-                    val unitValues = context.resources.getStringArray(R.array.measurement_system)
-                    val defaultName =
-                        context.getString(R.string.default_string_of_regional_preference)
-                    for (item in unitValues) {
-                        // If the human-readable value contains the input,
-                        // 1. the human-readable value is UK and the input is uk
-                        // 2. the human-readable value is Use default and the input is default
-                        val systemName =
-                            RegionalPreferencesDataUtils.measurementSystemConverter(context, item)
-                        if (isMeasurementSystemMatch(defaultName, systemName, value)) {
-                            RegionalPreferencesDataUtils.savePreference(
-                                context,
-                                ExtensionTypes.MEASUREMENT_SYSTEM,
-                                item.takeIf { it != RegionalPreferencesDataUtils.DEFAULT_VALUE },
-                            )
-                            break
-                        }
-                    }
+                    RegionalPreferencesDataUtils.savePreference(
+                        context,
+                        ExtensionTypes.MEASUREMENT_SYSTEM,
+                        value.takeIf { it != MeasurementSystemOptions.DEFAULT }?.asApiValue,
+                    )
                 }
             }
         }
     }
 
-    private fun isMeasurementSystemMatch(
-        defaultName: String,
-        systemName: String,
-        inputValue: String,
-    ): Boolean {
-        val inputValue = inputValue.lowercase()
-        val systemName = systemName.lowercase()
-
-        return when (inputValue) {
-            // case 1: when input is "default" or "use default"
-            INPUT_VALUE_DEFAULT,
-            INPUT_VALUE_USE_DEFAULT -> {
-                systemName == defaultName.lowercase()
-            }
-            // case 2: when input is "us", "uk", "metrics"
-            else -> {
-                systemName == inputValue
-            }
-        }
+    enum class MeasurementSystemOptions(
+        override val asApiValue: String,
+        override val purpose: String,
+    ) : EnumApiWithString<String> {
+        DEFAULT(RegionalPreferencesDataUtils.DEFAULT_VALUE, "Default"),
+        METRIC(RegionalPreferencesDataUtils.MEASUREMENT_SYSTEM_METRIC, "Metric"),
+        USSYSTEM(RegionalPreferencesDataUtils.MEASUREMENT_SYSTEM_US, "US"),
+        UKSYSTEM(RegionalPreferencesDataUtils.MEASUREMENT_SYSTEM_UK, "UK"),
     }
 
     companion object {

@@ -29,6 +29,7 @@ import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settings.supervision.shared.shouldDisplayPinRecoveryReminders
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -95,6 +96,8 @@ class SupervisionPinManagementScreen :
 
     override val availabilityDescription =
         "The device must have a supervising credential."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = context.isSupervisingCredentialSet()
 

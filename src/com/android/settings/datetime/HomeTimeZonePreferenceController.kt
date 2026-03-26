@@ -32,10 +32,7 @@ class HomeTimeZonePreferenceController(context: Context, preferenceKey: String) 
     override fun getSummary(): CharSequence {
         val now = Calendar.getInstance()
         val homeTimeZone =
-            Settings.Global.getString(
-                mContext.contentResolver,
-                Settings.Global.USER_HOME_TIME_ZONE_ID,
-            )
+            Settings.Global.getString(mContext.contentResolver, Settings.Global.HOME_TIME_ZONE_ID)
 
         return if (!TextUtils.isEmpty(homeTimeZone)) {
             ZoneGetter.getTimeZoneOffsetAndName(

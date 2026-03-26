@@ -42,6 +42,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.doThrow
@@ -75,12 +76,17 @@ class WifiAppDataUsageScreenApiTest {
                 uid = 1000
             }
         mockPm.stub {
-            on { getInstalledApplications(any<PackageManager.ApplicationInfoFlags>()) } doReturn
+            on {
+                getInstalledApplicationsAsUser(
+                    any<PackageManager.ApplicationInfoFlags>(),
+                    anyInt()
+                )
+            } doReturn
                 listOf(appInfo)
         }
 
         screen = WifiAppDataUsageScreenApi()
-        tester = ApiTester(screen)
+        tester = ApiTester(screen, context)
     }
 
     @Test

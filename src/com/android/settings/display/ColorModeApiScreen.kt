@@ -24,10 +24,13 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
-import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
-import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
+import com.android.settingslib.metadata.preferencesapi.types.EType
+import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ColorModeApiScreen.KEY)
@@ -50,13 +53,12 @@ class ColorModeApiScreen :
         }
 
         preconditions(R.string.color_mode_preconditions) {
-            if (
-                context.colorDisplayManager.isDeviceColorManaged &&
-                    !ColorDisplayManager.areAccessibilityTransformsEnabled(context)
-            ) {
-                Allowed
+            if (!context.colorDisplayManager.isDeviceColorManaged) {
+                HardwareUnsupported("The device does not have a wide color gamut display")
+            } else if (ColorDisplayManager.areAccessibilityTransformsEnabled(context)) {
+                Custom(R.string.color_mode_unsupported, stability = PreconditionStability.UNSTABLE)
             } else {
-                Disallowed(R.string.color_mode_unsupported)
+                Allowed
             }
         }
 

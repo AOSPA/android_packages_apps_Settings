@@ -26,8 +26,10 @@ import com.android.settings.accessibility.extensions.isWindowMagnificationSuppor
 import com.android.settings.accessibility.screenmagnification.dialogs.MagnificationModeChooser
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
+import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -36,9 +38,9 @@ import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
-// LINT.IfChange
 class MagnificationModePreference :
     PreferenceBinding,
+    DiscreteIntValue,
     PersistentPreference<Int>,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider,
@@ -65,6 +67,12 @@ class MagnificationModePreference :
         )
     }
 
+    override val values: Int
+        get() = R.array.magnification_mode_values
+
+    override val valuesDescription: Int
+        get() = R.array.magnification_mode_summaries
+
     override fun storage(context: Context): KeyValueStore = SettingsSecureStore.get(context)
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
@@ -84,6 +92,7 @@ class MagnificationModePreference :
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
     override val supportsWrite = true
+
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         preference.onPreferenceClickListener = this
@@ -96,6 +105,8 @@ class MagnificationModePreference :
 
     override val availabilityDescription =
         "The device must not be during setup and must support window magnification."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && context.isWindowMagnificationSupported()
@@ -117,4 +128,3 @@ class MagnificationModePreference :
         private const val MODE_CHOOSER_REQUEST_KEY = "magnificationModeChooser"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/ModePreferenceController.kt)

@@ -124,7 +124,10 @@ public class PhysicalKeyboardPreferenceController extends BasePreferenceControll
         for (HardKeyboardDeviceInfo info : keyboards) {
             summaries.add(info.mDeviceName);
         }
-        mPreference.setSummary(ListFormatter.getInstance().format(summaries));
+        mPreference.setSummary(
+                mContext.getString(
+                        R.string.physical_keyboard_summary,
+                        ListFormatter.getInstance().format(summaries)));
     }
 
     @VisibleForTesting

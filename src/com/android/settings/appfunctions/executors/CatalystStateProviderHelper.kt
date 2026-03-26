@@ -92,6 +92,19 @@ suspend fun CoroutineScope.getEnabledPreferencesHierarchy(
     return hierarchies.filterNotNull().toMap()
 }
 
+fun CoroutineScope.getEnabledPreferencesHierarchy(
+    context: Context,
+    screenMetadata: PreferenceScreenMetadata,
+): Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>> {
+    val preferenceHierarchy = mutableListOf<PreferenceHierarchyNode>()
+    screenMetadata.getPreferenceHierarchy(
+        context,
+        this
+    ).forEach { preferenceHierarchy.add(it) }
+
+    return mapOf(screenMetadata to preferenceHierarchy)
+}
+
 private suspend fun CoroutineScope.getPreferenceHierarchy(
     context: Context,
     screenKey: String,

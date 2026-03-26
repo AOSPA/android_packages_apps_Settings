@@ -31,7 +31,6 @@ import com.android.settingslib.datastore.AbstractKeyedDataObservable
 import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
-import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
@@ -57,7 +56,6 @@ class MobileNetworkMainSwitchPreference(
 ) :
     MainSwitchBarMetadata,
     PreferenceLifecycleProvider,
-    PreferenceAvailabilityProvider,
     Preference.OnPreferenceChangeListener {
 
     val isActivationChangeable = MutableStateFlow(false)
@@ -77,10 +75,6 @@ class MobileNetworkMainSwitchPreference(
 
     override val disableWidgetOnCheckedChanged: Boolean
         get() = false
-
-    override val availabilityDescription = "Always available."
-
-    override fun isAvailable(context: Context): Boolean = true
 
     override fun tags(context: Context) = arrayOf(KEY_MOBILE_DATA)
 

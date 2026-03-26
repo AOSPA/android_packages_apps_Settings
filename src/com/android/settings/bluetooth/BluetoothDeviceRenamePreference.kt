@@ -27,16 +27,19 @@ import com.android.settings.R
 import com.android.settings.connecteddevice.BluetoothDataStore
 import com.android.settings.connecteddevice.BluetoothPreference
 import com.android.settings.overlay.FeatureFactory
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
-import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
 class BluetoothDeviceRenamePreference(private val bluetoothDataStore: BluetoothDataStore) :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceBinding,
     PreferenceAvailabilityProvider,
@@ -58,8 +61,6 @@ class BluetoothDeviceRenamePreference(private val bluetoothDataStore: BluetoothD
         get() = R.string.bluetooth_device_name
 
     override fun dependencies(context: Context) = arrayOf(BluetoothPreference.KEY)
-
-    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun onCreate(context: PreferenceLifecycleContext) {
         lifeCycleContext = context
@@ -105,11 +106,19 @@ class BluetoothDeviceRenamePreference(private val bluetoothDataStore: BluetoothD
         return true
     }
 
-    override val availabilityDescription = UI_ONLY_PREFERENCE
+    override val availabilityDescription = "The device must support Bluetooth."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         return bluetoothDataStore.bluetoothAdapter?.isEnabled == true
     }
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? {
         return bluetoothDataStore.bluetoothAdapter?.name

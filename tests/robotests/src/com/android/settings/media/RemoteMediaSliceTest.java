@@ -20,6 +20,7 @@ import static android.app.slice.Slice.EXTRA_RANGE_VALUE;
 import static android.app.slice.Slice.HINT_LIST_ITEM;
 import static android.app.slice.SliceItem.FORMAT_SLICE;
 
+import static com.android.media.flags.Flags.FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT;
 import static com.android.settings.slices.CustomSliceRegistry.REMOTE_MEDIA_SLICE_URI;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -27,6 +28,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -35,6 +37,10 @@ import android.content.Intent;
 import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
 import android.net.Uri;
+import android.os.UserHandle;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.slice.Slice;
 import androidx.slice.SliceMetadata;
@@ -45,11 +51,14 @@ import androidx.slice.widget.SliceLiveData;
 
 import com.android.settings.slices.SliceBackgroundWorker;
 import com.android.settingslib.media.LocalMediaManager;
+import com.android.settingslib.media.MediaOutputConstants;
 
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
@@ -68,10 +77,16 @@ public class RemoteMediaSliceTest {
     private static final String MEDIA_ID = "media_id";
     private static final String TEST_SESSION_1_ID = "test_session_1_id";
     private static final String TEST_SESSION_1_NAME = "test_session_1_name";
+    private static final String TEST_PACKAGE_NAME = "com.test";
+    private static final String ACTION_LAUNCH_DIALOG = "action_launch_dialog";
+    private static final String CUSTOMIZED_ACTION = "customized_action";
+    private static final String SESSION_INFO = "RoutingSessionInfo";
     private static final int TEST_VOLUME = 3;
 
     private static MediaDeviceUpdateWorker sMediaDeviceUpdateWorker;
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
     @Mock
     private LocalMediaManager mLocalMediaManager;
 
@@ -96,6 +111,7 @@ public class RemoteMediaSliceTest {
         final RoutingSessionInfo remoteSessionInfo = mock(RoutingSessionInfo.class);
         when(remoteSessionInfo.getId()).thenReturn(TEST_SESSION_1_ID);
         when(remoteSessionInfo.getName()).thenReturn(TEST_SESSION_1_NAME);
+        when(remoteSessionInfo.getClientPackageName()).thenReturn(TEST_PACKAGE_NAME);
         when(remoteSessionInfo.getVolumeMax()).thenReturn(100);
         when(remoteSessionInfo.getVolume()).thenReturn(10);
         when(remoteSessionInfo.isSystemSession()).thenReturn(false);
@@ -124,6 +140,49 @@ public class RemoteMediaSliceTest {
         mRemoteMediaSlice.onNotifyChange(intent);
 
         verify(sMediaDeviceUpdateWorker).adjustSessionVolume(TEST_SESSION_1_ID, TEST_VOLUME);
+    }
+
+    @Test
+    @DisableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
+    public void onNotifyChange_actionLaunchDialog_launchesOutputSwitcher() {
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        final Intent intent = new Intent();
+        intent.putExtra(CUSTOMIZED_ACTION,  ACTION_LAUNCH_DIALOG);
+        intent.putExtra(SESSION_INFO,  mRoutingSessionInfos.getFirst());
+
+        mRemoteMediaSlice.onNotifyChange(intent);
+
+        verify(mContext, times(2)).sendBroadcast(intentCaptor.capture());
+        var outputDialogIntent = intentCaptor.getAllValues().getFirst();
+        assertThat(outputDialogIntent.getAction()).isEqualTo(
+                MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
+        assertThat(outputDialogIntent.getStringExtra(
+                MediaOutputConstants.EXTRA_PACKAGE_NAME)).isEqualTo(
+                TEST_PACKAGE_NAME);
+    }
+
+    @Test
+    @EnableFlags(FLAG_FIX_OUTPUT_SWITCHER_MULTIUSER_SUPPORT)
+    public void onNotifyChange_actionLaunchDialog_multiuserFlag_launchesOutputSwitcher() {
+        final ArgumentCaptor<Intent> intentCaptor = ArgumentCaptor.forClass(Intent.class);
+        final ArgumentCaptor<UserHandle> targetUserCaptor = ArgumentCaptor.forClass(
+                UserHandle.class);
+        final Intent intent = new Intent();
+        intent.putExtra(CUSTOMIZED_ACTION,  ACTION_LAUNCH_DIALOG);
+        intent.putExtra(SESSION_INFO,  mRoutingSessionInfos.getFirst());
+
+        mRemoteMediaSlice.onNotifyChange(intent);
+
+        verify(mContext).sendBroadcastAsUser(intentCaptor.capture(), targetUserCaptor.capture());
+        var outputDialogIntent = intentCaptor.getValue();
+        assertThat(outputDialogIntent.getAction()).isEqualTo(
+                MediaOutputConstants.ACTION_LAUNCH_MEDIA_OUTPUT_DIALOG);
+        assertThat(outputDialogIntent.getStringExtra(
+                MediaOutputConstants.EXTRA_PACKAGE_NAME)).isEqualTo(
+                TEST_PACKAGE_NAME);
+        assertThat(outputDialogIntent.getParcelableExtra(MediaOutputConstants.EXTRA_USER_HANDLE,
+                UserHandle.class)).isEqualTo(mContext.getUser());
+        assertThat(targetUserCaptor.getValue()).isEqualTo(UserHandle.SYSTEM);
     }
 
     @Test

@@ -328,24 +328,15 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Brug landestandard"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Brug 24-timers format"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Klokkeslæt"</string>
-    <!-- no translation found for time_format_category_title (3122743852067365261) -->
-    <skip />
-    <!-- no translation found for time_format_page_title (2599662358219245734) -->
-    <skip />
-    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
-    <skip />
-    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
-    <skip />
-    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
-    <skip />
-    <!-- no translation found for time_format_automatic (8627801531369181488) -->
-    <skip />
-    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
-    <skip />
-    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
-    <skip />
-    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
-    <skip />
+    <string name="time_format_category_title" msgid="3122743852067365261">"12-/24-timersformat"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"Tidsformat"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"Flere indstillinger"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"Apps bruger dit tidsformat baseret på denne indstilling"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"Vælg et tidsformat"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"Automatisk"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"Apps bruger 12-/24-timersformat baseret på appsproget"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"12-timersformat"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"24-timersformat"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Tidszone"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Egen tidszone"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Vælg en tidszone"</string>
@@ -939,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Vil du genstarte enheden?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detaljeret NFC-logging er kun beregnet til udvikling. Yderligere NFC-data inkluderes i fejlrapporter, som muligvis indeholder private oplysninger. Genstart enheden for at ændre denne indstilling."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Genstart"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Til"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Fra"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Eksterne skærme"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Indbygget skærm"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universel markør"</string>
@@ -1167,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"For bl.a. at forbedre lokationsnøjagtigheden vil en ukendt app gerne aktivere netværkssøgning, selv når Wi-Fi er deaktiveret.\n\nVil du tillade dette for alle apps, der gerne vil søge?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Afvis"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*skal angives"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Dette er et delt netværk. Du skal logge ind for at foretage ændringer."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Kontakt ejeren af netværket eller enhedsadministratoren for at foretage ændringer."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Dette netværk har ingen internetadgang. Vil du bruge netværket alligevel?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Nogle apps og tjenester fungerer muligvis ikke pga. begrænset forbindelse. Skal de bruges alligevel?"</string>
@@ -1514,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Annuller"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Beskyt SIM-kort"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Tilstand for beskyttelse med SIM-kortlås"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Lås SIM-kort"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Administreres af Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Administreres ikke af Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Tilmeldingen er gennemført"</string>
@@ -1524,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Android-administreret pinkode"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Værdien af den Android-administrerede pinkode:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Pinkoden kunne ikke hentes"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Kræv pinkode for at bruge telefonen"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Pinkoden til SIM-kortet administreres af Android"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"Der kræves en pinkode for at bruge telefonen"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Låseskærm er påkrævet for automatisk SIM-beskyttelse. Manuel beskyttelse er den eneste tilgængelige mulighed lige nu"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Angiv den aktuelle SIM-pinkode"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Angiv den aktuelle pinkode til SIM-kortet"</string>
@@ -1540,8 +1525,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Bekræft ny pinkode til SIM-kort"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Pinkoderne stemmer ikke overens. Bekræft den nye pinkode til SIM-kortet."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Forkert pinkode. Forsøg tilbage: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
-    <skip />
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Angiv den aktuelle pinkode til SIM-kortet"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Vil du bruge <xliff:g id="CARRIER">%1$s</xliff:g> til mobildata?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Du bruger <xliff:g id="CARRIER2_0">%2$s</xliff:g> til mobildata. Hvis du skifter til <xliff:g id="CARRIER1">%1$s</xliff:g>, anvendes <xliff:g id="CARRIER2_1">%2$s</xliff:g> ikke længere til mobildata."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Brug <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1844,8 +1828,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Ændringer i forbindelse med registrering af tidszone ved hjælp af lokation er ikke tilladt"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Hvis din enhedslokation er tilgængelig, kan den bruges til at indstille din tidszone"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Notifikationer"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Få besked, når tiden ændres automatisk"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Ændring af tidszone"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Få en notifikation, når din tidszone opdateres automatisk"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notifikation, klokkeslæt, zone, tidszone"</string>
@@ -2151,13 +2134,22 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Sprog"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Vis tasten til tastaturskift"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Tillad, at knappen til tastaturskift vises på navigationslinjen, når et indtastningsfelt er valgt"</string>
-    <string name="virtual_keyboard_category" msgid="2339505603075527212">"Skærmtastatur"</string>
-    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Tilgængeligt skærmtastatur"</string>
+    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
+    <skip />
+    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
+    <skip />
+    <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
+    <skip />
+    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
+    <skip />
     <string name="keyboard_options_category" msgid="8040137073401152608">"Valgmuligheder"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Hjælpefunktioner"</string>
-    <string name="physical_keyboard_title" msgid="3328134097512350958">"Fysisk tastatur"</string>
-    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Vælger til fysisk tastaturlayout"</string>
+    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Elastiktaster"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Ignorer hurtige gentagne tryk på den samme tast"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Forsinkelse for elastiktaster"</string>
@@ -2346,7 +2338,8 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Omdiriger vibration"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Send vibration til spillecontroller, når den er tilsluttet"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Tastaturlayout"</string>
-    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Layout for fysisk tastatur"</string>
+    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
+    <skip />
     <string name="user_dict_settings_title" msgid="680410651924276991">"Personlig ordbog"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Personlig ordbog til arbejdsprofil"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Tilføj ord, der skal bruges i apps som f.eks. Stavekontrol"</string>
@@ -2368,9 +2361,12 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"For alle sprog"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Flere sprog..."</string>
     <string name="testing" msgid="6294172343766732037">"Tester"</string>
-    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Skærmtastatur, værktøjer"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Skærmtastatur, fysisk tastatur, værktøjer"</string>
-    <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fysisk tastatur"</string>
+    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
+    <skip />
+    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
+    <skip />
+    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
+    <skip />
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Layout"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Vælg gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Vælg widget"</string>
@@ -2617,8 +2613,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Udvidet Mørkt tema"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Udvidede indstillinger for Mørkt tema"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Åbn de udvidede indstillinger for Mørkt tema"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Udvidet Mørkt tema gør automatisk flere apps mørkere for at forbedre læsbarheden.\n\nSørg for, at kontakten for en app er slået til for at bruge udvidet mørkt tema. Hvis en app ikke ser helt rigtig ud, skal du slå dens kontakt fra for at bruge appens eget tema."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Fjern animationer"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Begrænser bevægelse på skærmen"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Blinkende tekstmarkør"</string>
@@ -2945,6 +2940,7 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"Batteriforbrug og skærmtid måles ikke, mens telefonen oplades"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Appens batteriforbrug"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Brugsdetaljer"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Juster strømforbrug"</string>
@@ -3671,8 +3667,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Wi‑Fi-notifikation, wifi-notifikation"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"dataforbrug"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Brug 24-timersformat"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"tidsnotifikationer, tidszonenotifikationer, sommertid, tidszoneforskel"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Åbn med"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Apps"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"tidszone"</string>
@@ -3776,7 +3771,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"tekststørrelse, stor skrifttype, store bogstaver, stor skrifttype, stor tekst, nedsat syn, gør teksten større, større skrifttype, forstørrelse af skrifttype"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"altid tændt aktiv låseskærm, AOD (always on ambient display)"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, læser"</string>
-    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"tastatur, haptisk teknologi, vibration"</string>
+    <!-- no translation found for keywords_keyboard_vibration (5870649353180725920) -->
+    <skip />
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"ekstern skærm, forbundet skærm, udvidet skærm, anden skærm, indbygget skærm, organiser skærme, spejl, skærmstørrelse, rotation, opløsning, opdateringshastighed"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"markør, tekstmarkør, skrivemarkør, indtastningsmarkør, blinkende, blinkinterval, blinkrate, animation, reducer animation, fjern animation"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Lydstyrke og vibration"</string>
@@ -3793,10 +3789,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Notifikationer er indstillet til lydløs, enheden vibrerer ved notifikationer"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> er indstillet til lydløs"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Ikke tilgængelig, fordi ringetonen er slået fra"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Ringetone, underretning om opkald, SIM-kort, ringetone for SIM-kort"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Ringetone"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Ringetone ved opkald"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Standardlyd for notifikationer"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Lyd fra appen"</string>
@@ -4623,23 +4617,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Kan få adgang til alle filer"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Skærmautomatisering"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Denne app kan se og interagere med skærmindhold i andre apps for at hjælpe dig med at udføre opgaver, selv når de pågældende apps kører i baggrunden"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> kan se og interagere med skærmindhold i andre apps for at hjælpe dig med at udføre opgaver"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Hvis du ikke tillader skærmautomatisering, kan <xliff:g id="ID_1">%1$s</xliff:g> muligvis stadig interagere med apps, der er knyttet til <xliff:g id="ID_2">%1$s</xliff:g> på andre måder"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Tillad, at apps hjælper dig med at udføre opgaver ved at interagere med skærmindhold i andre apps"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Spørg hver gang"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Tillad altid"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Tillad ikke"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
-    <skip />
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Tillad skærmautomatisering"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"Ingen apps er altid tilladt"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Apps, der har tilladelse til altid at bruge skærmautomatisering af <xliff:g id="ID_1">%1$s</xliff:g>, vises her. Apps, der kun får tilladelse pr. session, vises ikke."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Tilladt"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Ikke tilladt"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifikationer i fuld skærm"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Tillad notifikationer i fuld skærm fra denne app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Tillad appen at vise notifikationer, der fylder hele skærmen, når enheden er låst. Apps kan benytte denne mulighed til at fremhæve alarmer, indgående opkald og andre presserende notifikationer."</string>
@@ -4676,6 +4664,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Ikke forbundet"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Ikke tilsluttet"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps er installeret"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> er brugt – <xliff:g id="FREE_SPACE">%2$s</xliff:g> ledig plads"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Mørkt tema, skriftstørrelse, lysstyrke"</string>
     <string name="memory_summary" msgid="8221954450951651735">"I gennemsnit er <xliff:g id="USED_MEMORY">%1$s</xliff:g> ud af <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> hukommelse anvendt"</string>
@@ -5786,6 +5776,8 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"Vælg din pauseskærm"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Tilpas"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Tilpas <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for dream_preview_button_description (1752727543834253129) -->
+    <skip />
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Du skal genstarte for at aktivere understøttelse af vinduer i frit format."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Du skal genstarte for at opdatere tilgængeligheden af vinduer i frit format."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Du skal genstarte for at aktivere vinduer i frit format på sekundære skærme."</string>
@@ -5837,7 +5829,7 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g>:<xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Denne app genstartes, når du ændrer billedformatet. Du mister muligvis ændringer, der ikke er gemt. Visse apps er muligvis ikke optimeret til bestemte billedformater."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Brugeroplevelse"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
+    <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtuel gamepad"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingeraftrykssensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Lysnotifikationer"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Om lysnotifikationer"</string>
@@ -6222,12 +6214,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Din enhed er ikke registreret til SOS-meldinger via satellit. Sørg for, at du har forbindelse til internettet på din enhed for automatisk at gennemføre registreringen"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Aktivér tjenesten til installation af webapps"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Aktivér denne tjeneste for at installere websites direkte på din startskærm, så du kan bruge dem som almindelige apps."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"Adgang til Human Interface Device"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"Tillad, at appen kan finde HID-enheder (HID, Human Interface Device)"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"Hvis du giver adgang, kan skadelige apps omprogrammere dine HID\'er, så dit system kompromitteres. Apps kan f.eks. simulere dine tastatur- eller museinput for at styre dit system, når det ikke er åbent. Sørg for, at du har tillid til de apps, du giver adgang til."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"hid, menneske, adgang, enhed"</string>
 </resources>

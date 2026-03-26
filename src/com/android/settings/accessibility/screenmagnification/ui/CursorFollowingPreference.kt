@@ -30,6 +30,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -37,10 +38,11 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
+import com.android.settingslib.metadata.DiscreteIntValue
 
-// LINT.IfChange
 class CursorFollowingPreference :
     PreferenceBinding,
+    DiscreteIntValue,
     PersistentPreference<Int>,
     PreferenceSummaryProvider,
     PreferenceLifecycleProvider,
@@ -60,6 +62,12 @@ class CursorFollowingPreference :
 
     override val title: Int
         get() = R.string.accessibility_magnification_cursor_following_title
+
+    override val values: Int
+        get() = R.array.magnification_cursor_following_mode_values
+
+    override val valuesDescription: Int
+        get() = R.array.magnification_cursor_following_mode_summaries
 
     override fun getSummary(context: Context): CharSequence? {
         if (isEnabled(context)) {
@@ -115,9 +123,15 @@ class CursorFollowingPreference :
     override val availabilityDescription =
         "The device must not be during setup and must have a mouse connected."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && isMagnificationCursorFollowingModeDialogSupported()
     }
+
+    override fun getEnabledDescription(): String = "Screen magnification must be set to full screen or both."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context): Boolean {
         @MagnificationCapabilities.MagnificationMode
@@ -153,4 +167,3 @@ class CursorFollowingPreference :
                 }
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/CursorFollowingModePreferenceController.kt)

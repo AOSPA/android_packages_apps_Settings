@@ -26,11 +26,7 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.R
-import com.android.settings.spa.app.specialaccess.ComputerControlAppRecord
-import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListModel
 import com.android.settings.spa.app.specialaccess.ComputerControlConsentController
-import com.android.settingslib.spaprivileged.model.app.IPackageManagers
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -52,11 +48,9 @@ class ComputerControlAutomationTest {
     @Mock private lateinit var appOpsManager: AppOpsManager
     @Mock private lateinit var virtualDeviceManager: VirtualDeviceManager
     @Mock private lateinit var consentManager: ComputerControlConsentManager
-    @Mock private lateinit var packageManagers: IPackageManagers
     @Mock private lateinit var packageManager: PackageManager
 
     private lateinit var context: Context
-    private lateinit var listModel: ComputerControlAutomationAppListModel
 
     @Before
     fun setUp() {
@@ -66,11 +60,9 @@ class ComputerControlAutomationTest {
             .thenReturn(virtualDeviceManager)
         whenever(virtualDeviceManager.computerControlConsentManager).thenReturn(consentManager)
         whenever(context.packageManager).thenReturn(packageManager)
-
-        listModel = ComputerControlAutomationAppListModel()
     }
 
-    private fun mockApp(packageName: String, uid: Int, hasPermission: Boolean): ApplicationInfo {
+    private fun mockApp(packageName: String, uid: Int): ApplicationInfo {
         val packageInfo =
             PackageInfo().apply {
                 this.packageName = packageName
@@ -79,73 +71,13 @@ class ComputerControlAutomationTest {
                         this.packageName = packageName
                         this.uid = uid
                     }
-                this.requestedPermissions =
-                    if (hasPermission) {
-                        arrayOf(listModel.permission)
-                    } else {
-                        arrayOf("some.other.permission")
-                    }
             }
         return packageInfo.applicationInfo!!
     }
 
     @Test
-    fun getSummary_modeAllowed_returnsAllowedString() {
-        val app = mockApp("test.app", 123, hasPermission = true)
-        whenever(
-                appOpsManager.checkOpNoThrow(
-                    AppOpsManager.OP_COMPUTER_CONTROL,
-                    app.uid,
-                    app.packageName,
-                )
-            )
-            .thenReturn(AppOpsManager.MODE_ALLOWED)
-
-        val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
-
-        assertThat(summary)
-            .isEqualTo(context.getString(R.string.computer_control_automation_always_allowed))
-    }
-
-    @Test
-    fun getSummary_modeIgnored_returnsNotAllowedString() {
-        val app = mockApp("test.app", 123, hasPermission = true)
-        whenever(
-                appOpsManager.checkOpNoThrow(
-                    AppOpsManager.OP_COMPUTER_CONTROL,
-                    app.uid,
-                    app.packageName,
-                )
-            )
-            .thenReturn(AppOpsManager.MODE_IGNORED)
-
-        val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
-
-        assertThat(summary)
-            .isEqualTo(context.getString(R.string.computer_control_automation_dont_allow))
-    }
-
-    @Test
-    fun getSummary_modeDefault_returnsAskString() {
-        val app = mockApp("test.app", 123, hasPermission = true)
-        whenever(
-                appOpsManager.checkOpNoThrow(
-                    AppOpsManager.OP_COMPUTER_CONTROL,
-                    app.uid,
-                    app.packageName,
-                )
-            )
-            .thenReturn(AppOpsManager.MODE_DEFAULT)
-
-        val summary = listModel.getSummary(context, ComputerControlAppRecord(app))
-
-        assertThat(summary)
-            .isEqualTo(context.getString(R.string.computer_control_automation_ask_every_time))
-    }
-
-    @Test
     fun consentController_setAppOpMode_callsAppOpsManager() {
-        val app = mockApp("test.app", 123, hasPermission = true)
+        val app = mockApp("test.app", 123)
         val controller = ComputerControlConsentController(context, app)
 
         controller.setAppOpMode(AppOpsManager.MODE_ALLOWED)
@@ -161,7 +93,7 @@ class ComputerControlAutomationTest {
 
     @Test
     fun consentController_getAutomatablePackages_callsConsentManager() {
-        val app = mockApp("test.app", 123, hasPermission = true)
+        val app = mockApp("test.app", 123)
         val controller = ComputerControlConsentController(context, app)
         val expectedPackages = arrayOf("com.example.app1", "com.example.app2")
         whenever(consentManager.getAutomatableAppListForAgent(app.uid, app.packageName))
@@ -174,7 +106,7 @@ class ComputerControlAutomationTest {
 
     @Test
     fun consentController_clearAutomatablePackages_callsConsentManager() {
-        val app = mockApp("test.app", 123, hasPermission = true)
+        val app = mockApp("test.app", 123)
         val controller = ComputerControlConsentController(context, app)
 
         controller.clearAutomatablePackages()
@@ -184,7 +116,7 @@ class ComputerControlAutomationTest {
 
     @Test
     fun consentController_removeAutomatablePackage_callsConsentManager() {
-        val app = mockApp("test.app", 123, hasPermission = true)
+        val app = mockApp("test.app", 123)
         val controller = ComputerControlConsentController(context, app)
         val targetPackage = "com.example.target"
 

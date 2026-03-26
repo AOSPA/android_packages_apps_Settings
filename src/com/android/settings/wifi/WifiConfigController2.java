@@ -71,10 +71,10 @@ import com.android.net.module.util.ProxyUtils;
 import com.android.settings.ProxySelector;
 import com.android.settings.R;
 import com.android.settings.Utils;
-import com.android.settings.accessibility.shared.ui.FocusIndicatorDrawable;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.utils.AndroidKeystoreAliasLoader;
 import com.android.settings.widget.EnhancedSettingsSpinnerAdapter;
+import com.android.settings.widget.FocusIndicatorDrawable;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController;
 import com.android.settings.wifi.details2.WifiPrivacyPreferenceController2;
@@ -1401,10 +1401,6 @@ public class WifiConfigController2 implements TextWatcher,
         View container = mView.findViewById(containerId);
         if (container != null) {
             container.setEnabled(enabled);
-            // Ensure the entire row is hidden from TalkBack if it's disabled.
-            container.setImportantForAccessibility(enabled
-                    ? View.IMPORTANT_FOR_ACCESSIBILITY_AUTO
-                    : View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);
         }
     }
 

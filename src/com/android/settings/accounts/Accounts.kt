@@ -21,11 +21,12 @@ import android.content.Context
 import android.os.Process
 import com.android.settings.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.unsafe
 
 /** Provides a list of accounts associated with a associated with the current process user. */
-class Accounts : DirectFiniteOptionsType<String> {
-    override fun getType(): Class<String> = String::class.java
+object Accounts : DirectFiniteOptionsType<String> {
+    override val externalType: EType<String> = EType.String
 
     override fun getDescription(context: Context): String =
         context.getString(R.string.accounts_as_user_type_description)

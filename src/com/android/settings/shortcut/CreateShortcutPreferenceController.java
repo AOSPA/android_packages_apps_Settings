@@ -38,10 +38,12 @@ import androidx.preference.PreferenceGroup;
 import com.android.settings.R;
 import com.android.settings.Settings;
 import com.android.settings.Settings.DataUsageSummaryActivity;
+import com.android.settings.Settings.NightDisplaySettingsActivity;
 import com.android.settings.Settings.TetherSettingsActivity;
 import com.android.settings.Settings.WifiTetherSettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.display.NightDisplayExtensionsKt;
 import com.android.settings.gestures.OneHandedSettingsUtils;
 import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.overlay.FeatureFactory;
@@ -196,6 +198,14 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
                     continue;
                 }
             }
+            String nightDisplayActivitySimpleName =
+                NightDisplaySettingsActivity.class.getSimpleName();
+            if (info.activityInfo.name.endsWith(nightDisplayActivitySimpleName)) {
+                if (!canShowNightDisplay()) {
+                    Log.d(TAG, "Skipping night display settings:" + info.activityInfo);
+                    continue;
+                }
+            }
             shortcuts.add(info);
         }
         Collections.sort(shortcuts, SHORTCUT_COMPARATOR);
@@ -211,6 +221,13 @@ public class CreateShortcutPreferenceController extends BasePreferenceController
     @VisibleForTesting
     boolean canShowWifiHotspot() {
         return WifiUtils.canShowWifiHotspot(mContext);
+    }
+
+    @VisibleForTesting
+    boolean canShowNightDisplay() {
+        int availabilityStatus =
+            NightDisplayExtensionsKt.getNightDisplayAvailabilityStatus(mContext);
+        return availabilityStatus == BasePreferenceController.AVAILABLE;
     }
 
     private void logCreateShortcut(ResolveInfo info) {

@@ -930,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Mulakan Semula Peranti?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Pengelogan butiran NFC adalah khusus untuk tujuan pembangunan sahaja. Data tambahan NFC disertakan dalam laporan pepijat yang mungkin mengandungi maklumat peribadi. Mulakan semula peranti anda untuk menukar tetapan ini."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Mulakan semula"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Hidup"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Mati"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Paparan luaran"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Paparan terbina dalam"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Kursor universal"</string>
@@ -1158,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Untuk memperbaik ketepatan lokasi dan untuk tujuan lain, apl tidak diketahui ingin menghidupkan pengimbasan rangkaian, meskipun Wi-Fi dimatikan.\n\nBenarkan hal ini untuk semua apl yang ingin mengimbas?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Tolak"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*diperlukan"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Rangkaian ini dikongsi. Anda perlu log masuk untuk membuat perubahan."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Hubungi pemilik rangkaian atau pentadbir peranti untuk membuat perubahan."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Rangkaian ini tiada akses Internet. Kekal bersambung?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Sesetengah apl dan perkhidmatan mungkin tidak berfungsi kerana kesambungan terhad. Gunakan juga?"</string>
@@ -1505,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Batal"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Lindungi kad SIM"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Mod perlindungan kunci SIM"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Kunci SIM"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Diurus oleh Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Tidak diurus oleh Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Pendaftaran berjaya"</string>
@@ -1515,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"PIN yang diurus Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Nilai PIN yang diurus Android:"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Gagal mendapatkan PIN"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Memerlukan PIN untuk menggunakan telefon"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"PIN SIM diurus oleh Android"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"PIN diperlukan untuk menggunakan telefon"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Skrin kunci diperlukan untuk perlindungan SIM automatik, manual hanya tersedia sekarang"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Masukkan PIN SIM semasa"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Masukkan PIN semasa kad SIM"</string>
@@ -1531,8 +1525,7 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Sahkan PIN SIM baharu"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN tidak sepadan. Sahkan PIN SIM baharu."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"PIN salah. Baki percubaan: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
-    <skip />
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Masukkan kod PIN semasa kad SIM"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Gunakan <xliff:g id="CARRIER">%1$s</xliff:g> utk data mudah alih?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Anda menggunakan <xliff:g id="CARRIER2_0">%2$s</xliff:g> untuk data mudah alih. Jika anda bertukar kepada <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> tidak lagi digunakan untuk data mudah alih."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Gunakan <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1835,8 +1828,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Perubahan pengesanan zon waktu lokasi tidak dibenarkan"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Jika lokasi peranti anda tersedia, ciri ini mungkin digunakan untuk menetapkan zon waktu anda"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Pemberitahuan"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Dapatkan pemberitahuan apabila masa anda berubah secara automatik"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Perubahan zon waktu"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Terima pemberitahuan apabila zon waktu anda dikemaskinikan secara automatik"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"pemberitahuan, masa, zon, zon waktu"</string>
@@ -2142,13 +2134,22 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Bahasa"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Tunjukkan kekunci suis papan kekunci"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Benarkan butang penukar papan kekunci dipaparkan dalam bar navigasi, apabila medan input dipilih"</string>
-    <string name="virtual_keyboard_category" msgid="2339505603075527212">"Papan kekunci pada skrin"</string>
-    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Papan kekunci pada skrin tersedia"</string>
+    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
+    <skip />
+    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
+    <skip />
+    <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
+    <skip />
+    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
+    <skip />
     <string name="keyboard_options_category" msgid="8040137073401152608">"Pilihan"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Kebolehaksesan"</string>
-    <string name="physical_keyboard_title" msgid="3328134097512350958">"Papan kekunci fizikal"</string>
-    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Pemilih reka letak papan kekunci fizikal"</string>
+    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
+    <skip />
+    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
+    <skip />
     <string name="bounce_keys" msgid="7419450970351743904">"Kekunci lantun"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Abaikan penekanan kekunci yang sama secara berulang dan pantas"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Lengah kekunci lantun"</string>
@@ -2337,7 +2338,8 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Ubah hala getaran"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Hantar getaran ke pengawal permainan apabila disambungkan"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Susun atur papan kekunci"</string>
-    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Reka letak papan kekunci fizikal"</string>
+    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
+    <skip />
     <string name="user_dict_settings_title" msgid="680410651924276991">"Kamus peribadi"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Kamus peribadi untuk kerja"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Tambahkan perkataan untuk digunakan dalam apl seperti Penyemak ejaan"</string>
@@ -2359,9 +2361,12 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Untuk semua bahasa"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Lebih banyak bahasa..."</string>
     <string name="testing" msgid="6294172343766732037">"Menguji"</string>
-    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Papan kekunci pada skrin, alatan"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Papan kekunci pada skrin, papan kekunci fizikal, alatan"</string>
-    <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Papan kekunci fizikal"</string>
+    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
+    <skip />
+    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
+    <skip />
+    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
+    <skip />
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Reka letak"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Pilih alat"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Pilih widget"</string>
@@ -2608,8 +2613,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Tema gelap yang dikembangkan"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Tetapan tema gelap yang dikembangkan"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Buka tetapan tema gelap yang dikembangkan"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Tema gelap yang dikembangkan menggelapkan lebih banyak apl secara automatik untuk kebolehbacaan yang lebih baik.\n\nPastikan togol apl dihidupkan untuk menggunakan tema gelap yang dikembangkan. Jika apl kelihatan bermasalah, matikan togol apl untuk menggunakan tema apl itu sendiri."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Alih keluar animasi"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Kurangkan pergerakan pada skrin"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Kursor teks berkelip"</string>
@@ -2936,6 +2940,7 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"Penggunaan bateri dan masa skrin tidak diukur semasa telefon sedang dicas"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Penggunaan bateri oleh apl"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Butiran penggunaan"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Laraskan penggunaan kuasa"</string>
@@ -3662,8 +3667,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"Pemberitahuan Wi‑Fi, pemberitahuan wifi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"penggunaan data"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Gunakan format 24 jam"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"pemberitahuan masa, pemberitahuan zon waktu, DST, waktu jimat siang, ofset zon waktu"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Buka dengan"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Aplikasi"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"zon waktu"</string>
@@ -3767,7 +3771,8 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"saiz teks, huruf cetak besar, fon besar, teks besar, rabun, jadikan teks lebih besar, besarkan teks, pembesaran fon"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"paparan ambien sentiasa hidup, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, pembaca"</string>
-    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"papan kekunci, haptik, getaran,"</string>
+    <!-- no translation found for keywords_keyboard_vibration (5870649353180725920) -->
+    <skip />
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"paparan luaran, paparan tersambung, paparan luas, paparan kedua, paparan terbina dalam, susun paparan, cermin, saiz paparan, penggiliran, peleraian, kadar segar semula"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"karet, karet teks, kursor teks, kursor, berkelip, sela kelipan, kadar kelipan, animasi, kurangkan animasi, alih keluar animasi"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Kelantangan dan getaran"</string>
@@ -3784,10 +3789,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Apabila kelantangan pemberitahuan diredamkan, pemberitahuan akan bergetar"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> diredamkan"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Tidak tersedia kerana deringan diredamkan"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Nada dering, Makluman nada dering, SIM, Nada Dering SIM"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Nada dering"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Nada dering telefon"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Bunyi pemberitahuan lalai"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Bunyi yang disediakan oleh apl"</string>
@@ -4614,23 +4617,17 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Boleh mengakses semua fail"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automasi skrin"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Apl ini akan dapat melihat dan berinteraksi dengan kandungan skrin apl lain untuk membantu anda melengkapkan tugasan, walaupun semasa apl berada pada latar"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> akan dapat melihat dan berinteraksi dengan kandungan skrin apl lain untuk membantu anda melengkapkan tugasan"</string>
     <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Jika anda tidak membenarkan automasi skrin, <xliff:g id="ID_1">%1$s</xliff:g> mungkin masih dapat berinteraksi dengan apl yang disambungkan kepada <xliff:g id="ID_2">%1$s</xliff:g> melalui cara lain"</string>
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Benarkan apl membantu anda melengkapkan tugasan dengan berinteraksi dengan kandungan skrin apl lain"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Tanya setiap kali"</string>
     <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Sentiasa benarkan"</string>
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Jangan benarkan"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
-    <skip />
+    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Benarkan automasi skrin"</string>
+    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"Tiada apl yang sentiasa dibenarkan"</string>
+    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Apl yang dibenarkan untuk sentiasa menggunakan automasi skrin oleh <xliff:g id="ID_1">%1$s</xliff:g> akan dipaparkan di sini. Apl yang hanya mendapat kebenaran setiap sesi tidak akan dipaparkan."</string>
+    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Dibenarkan"</string>
+    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Tidak dibenarkan"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pemberitahuan skrin penuh"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Benarkan pemberitahuan skrin penuh daripada apl ini"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Benarkan apl ini untuk memaparkan pemberitahuan menggunakan skrin penuh apabila peranti dikunci. Apl mungkin menggunakan ciri ini untuk menyerlahkan penggera, panggilan masuk atau pemberitahuan mustahak yang lain."</string>
@@ -4667,6 +4664,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Tidak disambungkan"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Tidak disambungkan"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apl dipasang"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> digunakan - <xliff:g id="FREE_SPACE">%2$s</xliff:g> ruang kosong"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tema gelap, saiz fon, kecerahan"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Purata <xliff:g id="USED_MEMORY">%1$s</xliff:g> daripada <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memori digunakan"</string>
@@ -5777,6 +5776,8 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"Pilih penyelamat skrin anda"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Sesuaikan"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Sesuaikan <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
+    <!-- no translation found for dream_preview_button_description (1752727543834253129) -->
+    <skip />
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"But semula diperlukan untuk mendayakan sokongan tetingkap bentuk bebas."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"But semula diperlukan untuk mengemaskinikan ketersediaan tetingkap bentuk bebas."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"But semula diperlukan untuk mendayakan tetingkap bentuk bebas pada paparan kedua."</string>
@@ -5828,7 +5829,7 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> oleh <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Apl akan dimulakan semula apabila anda mengubah nisbah bidang. Anda mungkin kehilangan perubahan yang belum disimpan. Sesetengah apl mungkin tidak dioptimumkan untuk nisbah bidang tertentu."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Pengalaman"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Pad permainan"</string>
+    <string name="virtual_gamepad_title" msgid="8888343036739485679">"Pad permainan maya"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Penderia cap jari"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Pemberitahuan denyar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Perihal pemberitahuan denyar"</string>
@@ -6213,12 +6214,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Peranti anda tidak didaftarkan untuk SOS via Satelit. Pastikan anda disambungkan kepada Internet untuk membolehkan peranti anda melengkapkan pendaftaran secara automatik"</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Dayakan Perkhidmatan Pemasang Apl Web"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Dayakan perkhidmatan ini untuk memasang laman web terus pada skrin utama anda, untuk menggunakan laman web tersebut seperti apl biasa."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"Akses peranti antara muka manusia"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"Benarkan apl menemukan peranti antara muka manusia (HID)"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"Jika anda membenarkan akses, apl hasad boleh mengatur cara semula HID anda untuk menjejaskan sistem anda. Sebagai contoh, apl boleh mensimulasikan input papan kekunci atau tetikus anda untuk mengawal sistem anda apabila sistem tidak dibuka. Pastikan anda mempercayai apl apabila membenarkan akses."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"hid, manusia, akses, peranti"</string>
 </resources>

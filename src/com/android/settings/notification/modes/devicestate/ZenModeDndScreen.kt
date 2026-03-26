@@ -24,8 +24,11 @@ import com.android.settings.R
 import com.android.settings.Settings.ModeSettingsActivity
 import com.android.settings.contract.TAG_DEVICE_STATE_SCREEN
 import com.android.settings.core.PreferenceScreenMixin
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -55,7 +58,9 @@ open class ZenModeDndScreen :
 
     override fun isFlagEnabled(context: Context) = false
 
-    override val availabilityDescription = "The DND mode must be available."
+    override val availabilityDescription = "The device must support DND mode."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = context.hasDndMode()
 
@@ -77,7 +82,8 @@ open class ZenModeDndScreen :
 
     class ZenModeDndScreenPreference(
         private val screenMetadata : ZenModeDndScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PreferenceTitleProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PreferenceTitleProvider,
+        PersistentPreference<String> {
         override val key : String
             get() = "device_state_dnd_mode_screen_preference"
 
@@ -94,9 +100,18 @@ open class ZenModeDndScreen :
 
         override val availabilityDescription = screenMetadata.availabilityDescription
 
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
+
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 
         override fun getTitle(context: Context): CharSequence? = screenMetadata.getTitle(context)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
     }
 
     companion object {

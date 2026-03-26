@@ -51,6 +51,8 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
     private static final int STATE_ENTER_CURRENT_PIN = 0;
     private static final int STATE_ENTER_NEW_PIN = 1;
     private static final int STATE_CONFIRM_NEW_PIN = 2;
+    private static final String PREFERENCE_ON_PRIMARY_SCREEN =
+            "change_manually_managed_sim_pin_primary_screen";
 
     private final AutoManagedSimPinHelper mAutoManagedSimPinHelper;
     private final SubscriptionManager mSubscriptionManager;
@@ -88,6 +90,11 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
     public int getAvailabilityStatus() {
         if (mayChangeSimPin()) {
             return AVAILABLE;
+        }
+
+        if (getPreferenceKey().equals(PREFERENCE_ON_PRIMARY_SCREEN)
+                && android.security.Flags.enableAutoSimPinUi()) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
         return DISABLED_DEPENDENT_SETTING;
     }
