@@ -57,6 +57,41 @@ class AppInfoScreenApiFirst :
         alreadyPartiallyMigrated = AppInfoScreen::class,
         canManage = ManagementScope.PROFILE_GROUP,
     ) {
+
+    // Caching within a single instance of a single screen is not optimal but
+    // it is simple. We will in future offer cross-preference caching.
+    private var cachedPackageName: String? = null
+    private var cachedUserId: Int? = null
+    private var cachedAppInfo: ApplicationInfo? = null
+    private var cachedEligibility: Boolean? = null
+
+    private fun getCachedAppInfo(context: Context, packageName: String, userId: Int): ApplicationInfo? {
+        if (cachedPackageName == packageName && cachedUserId == userId && cachedAppInfo != null) {
+            return cachedAppInfo
+        }
+        val appInfo =
+            try {
+                context.packageManager.getApplicationInfoAsUser(packageName, 0, userId)
+            } catch (e: Exception) {
+                null
+            }
+        cachedPackageName = packageName
+        cachedUserId = userId
+        cachedAppInfo = appInfo
+        cachedEligibility = null
+        return appInfo
+    }
+
+    private suspend fun isHibernationEligibleCached(
+        context: Context,
+        app: ApplicationInfo,
+    ): Boolean {
+        cachedEligibility?.let { return it }
+        val isEligible = isHibernationEligibleSuspend(context, app)
+        cachedEligibility = isEligible
+        return isEligible
+    }
+
     init {
         flag { Flags.catalystMigration26q2() }
 
@@ -87,13 +122,6 @@ class AppInfoScreenApiFirst :
             sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
             preconditions("App hibernation must be available on the device and the app must not be archived.") {
-                val appInfo =
-                    context.getApplicationInfo(parameters.getRequired(PARAM_PACKAGE))
-                        ?: return@preconditions Custom(
-                            R.string.installed_app_detail_manage_app_unused_precondition_null_app,
-                            stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
-                        )
-
                 val isFeatureEnabled =
                     DeviceConfig.getBoolean(
                         DeviceConfig.NAMESPACE_APP_HIBERNATION,
@@ -106,6 +134,14 @@ class AppInfoScreenApiFirst :
                         "App hibernation is not available on this device",
                         stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
                     )
+
+                val appInfo =
+                    getCachedAppInfo(context, parameters.getRequired(PARAM_PACKAGE), context.userId)
+                        ?: return@preconditions Custom(
+                            R.string.installed_app_detail_manage_app_unused_precondition_null_app,
+                            stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE,
+                        )
+
                 if (appInfo.isArchived)
                     return@preconditions Custom(
                         "The app is archived",
@@ -118,13 +154,10 @@ class AppInfoScreenApiFirst :
             get {
                 execute {
                     val appInfo =
-                        context.packageManager.getApplicationInfoAsUser(
-                            parameters.getRequired(PARAM_PACKAGE),
-                            0,
-                            userId,
-                        ) ?: return@execute false
+                        getCachedAppInfo(context, parameters.getRequired(PARAM_PACKAGE), userId)
+                            ?: return@execute false
 
-                    val isEligible = isHibernationEligibleSuspend(context, appInfo)
+                    val isEligible = isHibernationEligibleCached(context, appInfo)
                     if (isEligible) {
                         isHibernationEnabled(context, appInfo)
                     } else {
@@ -136,11 +169,7 @@ class AppInfoScreenApiFirst :
             set {
                 preconditions("The app must not be a critical system app.") {
                     val appInfo =
-                        context.packageManager.getApplicationInfoAsUser(
-                            parameters.getRequired(PARAM_PACKAGE),
-                            0,
-                            userId,
-                        )
+                        getCachedAppInfo(context, parameters.getRequired(PARAM_PACKAGE), userId)
                             ?: return@preconditions Custom(
                                 R.string
                                     .installed_app_detail_manage_app_unused_precondition_null_app,
@@ -149,7 +178,7 @@ class AppInfoScreenApiFirst :
 
                     val isEligible =
                         kotlinx.coroutines.runBlocking {
-                            isHibernationEligibleSuspend(context, appInfo)
+                            isHibernationEligibleCached(context, appInfo)
                         }
 
                     if (!isEligible) {
@@ -164,7 +193,7 @@ class AppInfoScreenApiFirst :
 
                 execute { isChecked ->
                     val appInfo =
-                        context.getApplicationInfo(parameters.getRequired(PARAM_PACKAGE))
+                        getCachedAppInfo(context, parameters.getRequired(PARAM_PACKAGE), userId)
                             ?: return@execute
                     setHibernationEnabled(context, appInfo, isChecked)
                 }
