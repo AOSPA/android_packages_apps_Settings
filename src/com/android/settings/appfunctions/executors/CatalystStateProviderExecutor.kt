@@ -27,9 +27,11 @@ import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settingslib.metadata.PersistentPreference
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.ReadWritePermit.Companion.ALLOW
 import com.android.settingslib.metadata.accessPreconditionsAsString
@@ -38,8 +40,10 @@ import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.isExposable
+import com.android.settingslib.metadata.isUiOnlyPreference
 import com.android.settingslib.metadata.resolvedAccessAndGetPreconditionsAsString
 import com.android.settingslib.metadata.resolvedSetPreconditionsAsString
+import com.android.settingslib.metadata.setPreconditionsAsString
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
@@ -122,13 +126,28 @@ class CatalystStateProviderExecutor(
                                     try {
                                         withTimeout(perScreenTimeoutMs) {
                                             try {
-                                                val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
-                                                if(screenMetadata != null && screenMetadata.isExposable(context)) {
-                                                    buildPerScreenDeviceStates(
-                                                        screenKey,
-                                                        appFunctionType,
-                                                        shouldIncludeScreenKey
-                                                    )
+                                                val hierarchyMap = getEnabledPreferencesHierarchy(config, context, appFunctionType, screenKey)
+                                                if (hierarchyMap.isEmpty()) return@withTimeout null
+
+                                                val firstInstance = hierarchyMap.entries.first()
+                                                val firstScreenMetadata = firstInstance.key
+                                                val firstPreferences = firstInstance.value
+
+                                                if (!firstScreenMetadata.isExposable(context)) return@withTimeout null
+
+                                                val hasNonStaticInfo = firstScreenMetadata.accessPreconditionsAsString(context) != null ||
+                                                        firstScreenMetadata.setPreconditionsAsString(context) != null ||
+                                                        firstScreenMetadata.getEnabledDescription() != null ||
+                                                        (firstScreenMetadata as? PreferenceAvailabilityProvider)?.availabilityDescription != null
+
+                                                val hasStateProvidingPreference = firstPreferences.any {
+                                                    it.metadata.isExposable(context)
+                                                }
+
+                                                if (hasNonStaticInfo || hasStateProvidingPreference) {
+                                                    hierarchyMap.mapNotNull { (screenMetadata, preferences) ->
+                                                        buildPerScreenDeviceStates(screenMetadata, preferences, shouldIncludeScreenKey)
+                                                    }
                                                 } else null
                                             } catch (e: Exception) {
                                                 Log.e(TAG, "error building $screenKey", e)
@@ -198,27 +217,6 @@ class CatalystStateProviderExecutor(
         }
     }
 
-    private suspend fun CoroutineScope.buildPerScreenDeviceStates(
-        screenKey: String,
-        appFunctionType: DeviceStateAppFunctionType,
-        shouldIncludeScreenKey: Boolean,
-    ): List<PerScreenDeviceStates> {
-        Log.v(TAG, "Building per screen device states for $screenKey")
-        val hierarchy = getEnabledPreferencesHierarchy(config, context, appFunctionType, screenKey)
-
-        return hierarchy.map { entry ->
-            val screenMetaData = entry.key
-            val preferencesHierarchy = entry.value
-            val states =
-                buildPerScreenDeviceStates(
-                    screenMetaData,
-                    preferencesHierarchy,
-                    shouldIncludeScreenKey
-                )
-            Log.v(TAG, "Built per screen device states for $screenKey")
-            states
-        }.filterNotNull()
-    }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenMetaData: PreferenceScreenMetadata,
