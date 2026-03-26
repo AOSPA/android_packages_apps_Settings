@@ -428,6 +428,7 @@ class CatalystStateMetadataProviderExecutor(
                         else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
                         screenMetaData.getPreferencePurpose(context),
                         screenMetaData.accessPreconditionsAsString(context),
+                        screenMetaData.stableAccessPreconditionFailuresAsString(context)
                     )
                     .filter { it.isNotBlank() }
                     .joinToString(". ")
