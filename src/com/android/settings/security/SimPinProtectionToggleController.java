@@ -108,7 +108,7 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
 
     private TelephonyManager mTelephonyManager;
     private SubscriptionManager mSubscriptionManager;
-    private int mSubId;
+    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
     private EnrollmentState mEnrollmentState;
 
@@ -138,8 +138,6 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
         mAutoManagedSimPinHelper = autoManagedSimPinHelper;
         mKeyguardManager = mContext.getSystemService(KeyguardManager.class);
 
-        // TODO: b/476046816 - Support multiple physical SIM card slots in the UI.
-        mSubId = mAutoManagedSimPinHelper.getSubIdForFirstPhysicalSimSlot();
         mEnrollmentState = EnrollmentState.ENROLL_TO_AUTOMATIC_PIN_MANAGEMENT;
     }
 
@@ -201,15 +199,19 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
             return CONDITIONALLY_UNAVAILABLE;
         }
 
+        if (!mSubscriptionManager.isValidSubscriptionId(mSubId)) {
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
         // Manual PIN management only available: Show this preference as available but not
         // the other one.
-        if (getPreferenceKey().equals(MANUAL_PIN_ONLY_KEY) && !Flags.enableAutoSimPinUi()) {
+        if (getPreferenceKey().startsWith(MANUAL_PIN_ONLY_KEY) && !Flags.enableAutoSimPinUi()) {
             return AVAILABLE;
         }
 
         // Automatic PIN management as well as manual PIN management: Show this preference as
         // available but not the other one.
-        if (getPreferenceKey().equals(AUTO_PIN_KEY) && Flags.enableAutoSimPinUi()) {
+        if (getPreferenceKey().startsWith(AUTO_PIN_KEY) && Flags.enableAutoSimPinUi()) {
             return AVAILABLE;
         }
 
@@ -240,12 +242,17 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
-        if (getPreferenceKey().equals(AUTO_PIN_KEY)) {
+        if (getPreferenceKey().startsWith(AUTO_PIN_KEY)) {
             mPrimarySwitchPreference = screen.findPreference(getPreferenceKey());
-        } else if (getPreferenceKey().equals(MANUAL_PIN_ONLY_KEY)) {
+        } else if (getPreferenceKey().startsWith(MANUAL_PIN_ONLY_KEY)) {
             mSwitchPreference = screen.findPreference(getPreferenceKey());
         } else {
             Log.e(TAG, "Ambiguous preference key: " + getPreferenceKey());
+            return;
+        }
+
+        if (!mSubscriptionManager.isValidSubscriptionId(mSubId)) {
+            Log.w(TAG, "invalid subscription, returning.");
             return;
         }
 
@@ -259,13 +266,22 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
         mEnrollmentState.storeState(bundle);
     }
 
-
     /**
      * Sets the enrollment state (in case of instance restore).
      * @param bundle the bundle to load the state from.
      */
     void loadEnrollmentState(@Nullable Bundle bundle) {
         mEnrollmentState = EnrollmentState.fromBundle(bundle);
+    }
+
+    /**
+     * Sets the index of the SIM card slot that this controller is responsible for.
+     * @param slotIndex index in the array of active slots.
+     */
+    public void setSlotIndex(int slotIndex) {
+        mSubId = mAutoManagedSimPinHelper.getSubscriptionIdForSlot(slotIndex);
+        Log.d(TAG, "Preference " + getPreferenceKey() + ": Subscription for slot index " + slotIndex
+                + ": " + mSubId);
     }
 
     private boolean isDeviceSecure() {
