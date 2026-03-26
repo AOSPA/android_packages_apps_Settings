@@ -42,19 +42,19 @@ class BatteryStatusStateSource : DeviceStateSource {
         val batteryStatusItem =
             DeviceStateItem(
                 key = "battery_status",
-                purpose = "battery_status",
+                purpose = "The current status of the battery (e.g. charging, discharging, fully charged)",
                 jsonValue = statusLabel,
             )
         val batteryTimeRemainingItem =
             DeviceStateItem(
                 key = "battery_time_remaining",
-                purpose = "battery_time_remaining",
+                purpose = "The estimated time remaining for the battery for current usage. This will be 'null' if the battery is not discharging.",
                 jsonValue = timeRemainingLabel.toString(),
             )
         val batteryChargedByItem =
             DeviceStateItem(
                 key = "battery_charged_by",
-                purpose = "battery_charged_by",
+                purpose = "The estimated time duration remaining until the device battery reaches 100% charge (e.g., '50 min left until full'). This will be 'null' if the battery is not charging.",
                 jsonValue = chargedByLabel.toString(),
             )
 

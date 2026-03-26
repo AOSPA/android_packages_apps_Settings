@@ -46,12 +46,17 @@ import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.reset
 import org.mockito.kotlin.stub
+import org.mockito.kotlin.verify
 import org.robolectric.RobolectricTestParameterInjector
 import org.robolectric.android.controller.ActivityController
 import org.robolectric.annotation.Config
+import org.robolectric.shadows.ShadowLooper
 
 @Config(shadows = [ShadowInputDevice::class])
 @RunWith(RobolectricTestParameterInjector::class)
@@ -181,6 +186,44 @@ class CursorFollowingPreferenceTest {
     }
 
     @Test
+    fun onStart_capabilityValueChanged_notifyPreferenceChange() {
+        val mockLifecycleContext = createMockLifecycleContext()
+        preference.onCreate(mockLifecycleContext)
+        preference.onStart(mockLifecycleContext)
+        reset(mockLifecycleContext)
+
+        getStorage().setInt(MagnificationCapabilities.KEY_CAPABILITY, MagnificationMode.WINDOW)
+        ShadowLooper.idleMainLooper()
+
+        verify(mockLifecycleContext).notifyPreferenceChange(preference.key)
+    }
+
+    @Test
+    fun onStop_capabillityValueChanged_nonNotifyPreferenceChange() {
+        val mockLifecycleContext = createMockLifecycleContext()
+        preference.onCreate(mockLifecycleContext)
+        preference.onStart(mockLifecycleContext)
+        ShadowLooper.idleMainLooper()
+        preference.onStop(mockLifecycleContext)
+        reset(mockLifecycleContext)
+
+        getStorage().setInt(MagnificationCapabilities.KEY_CAPABILITY, MagnificationMode.WINDOW)
+        ShadowLooper.idleMainLooper()
+
+        verify(mockLifecycleContext, never()).notifyPreferenceChange(any())
+    }
+
+    @Test
+    fun onKeyChanged_notifiesPreferenceChange() {
+        val mockLifecycleContext = createMockLifecycleContext()
+        preference.onCreate(mockLifecycleContext)
+
+        preference.onKeyChanged(MagnificationCapabilities.KEY_CAPABILITY, 0)
+
+        verify(mockLifecycleContext).notifyPreferenceChange(preference.key)
+    }
+
+    @Test
     @TestParameters(
         "{inSetupWizard: false, hasConnectedMouse: false, expectedAvailable: false}",
         "{inSetupWizard: false, hasConnectedMouse: true, expectedAvailable: true}",
@@ -217,6 +260,11 @@ class CursorFollowingPreferenceTest {
         } finally {
             activityController?.destroy()
         }
+    }
+
+    private fun createMockLifecycleContext(): PreferenceLifecycleContext = mock {
+        on { applicationContext } doReturn context
+        on { contentResolver } doReturn context.contentResolver
     }
 
     private fun setCursorFollowingMode(@AccessibilityMagnificationCursorFollowingMode mode: Int) {

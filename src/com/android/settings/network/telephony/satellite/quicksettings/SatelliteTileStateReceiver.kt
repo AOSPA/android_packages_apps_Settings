@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.android.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -89,7 +89,8 @@ open class SatelliteTileStateReceiver(
                 Intent.ACTION_MY_PACKAGE_REPLACED -> { -> handleBootOrAppUpdate(context) }
                 TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED,
                 TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED,
-                CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED -> { ->
+                CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED,
+                Intent.ACTION_SCREEN_ON -> { ->
                         handleSubscriptionOrConfigChanged(context)
                     }
                 else -> null
@@ -136,23 +137,6 @@ open class SatelliteTileStateReceiver(
         Log.i(TAG, "Handling subscription or config change.")
         updateTileServiceEnabledState(context, isAnyNtnSupported(context))
         scheduleEligibilityJob(context)
-    }
-
-    /**
-     * Schedules a JobService to monitor the data registration state.
-     *
-     * The job will be triggered when the data registration state changes (e.g., losing service).
-     */
-    private fun scheduleEligibilityJob(context: Context) {
-        val subId = SubscriptionManager.getDefaultDataSubscriptionId()
-        if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            val jobScheduler = context.getSystemService(android.app.job.JobScheduler::class.java)
-            val jobId = context.resources.getInteger(R.integer.satellite_eligibility_job)
-            jobScheduler?.cancel(jobId)
-            Log.i(TAG, "Default data subscription is invalid, cancelled job.")
-        } else {
-            SatelliteEligibilityJobService.schedule(context, forceImmediate = true)
-        }
     }
 
     private suspend fun isAnyNtnSupported(context: Context): Boolean {
@@ -207,6 +191,23 @@ open class SatelliteTileStateReceiver(
     }
 
     companion object {
+        /**
+         * Schedules a JobService to monitor the data registration state.
+         *
+         * The job will be triggered when the data registration state changes (e.g., losing service).
+         */
+        fun scheduleEligibilityJob(context: Context) {
+            val subId = SubscriptionManager.getDefaultDataSubscriptionId()
+            if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                val jobScheduler = context.getSystemService(android.app.job.JobScheduler::class.java)
+                val jobId = context.resources.getInteger(R.integer.satellite_eligibility_job)
+                jobScheduler?.cancel(jobId)
+                Log.i(TAG, "Default data subscription is invalid, cancelled job.")
+            } else {
+                SatelliteEligibilityJobService.schedule(context, forceImmediate = true)
+            }
+        }
+
         /**
          * Verifies that the satellite tile feature is enabled for the device.
          *
@@ -273,6 +274,7 @@ open class SatelliteTileStateReceiver(
         fun updateTileServiceEnabledState(context: Context, isAnyNtnSupported: Boolean) {
             val componentName = ComponentName(context, SatelliteTileService::class.java)
             val packageManager = context.packageManager
+            val oldState = packageManager.getComponentEnabledSetting(componentName)
             val newState =
                 if (isAnyNtnSupported) {
                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED
@@ -280,15 +282,19 @@ open class SatelliteTileStateReceiver(
                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED
                 }
 
-            if (packageManager.getComponentEnabledSetting(componentName) != newState) {
-                Log.i(TAG, "Setting SatelliteTileService enabled state to: $isAnyNtnSupported")
-
                 // This enables or disables the service, making the tile appear or disappear.
                 packageManager.setComponentEnabledSetting(
                     componentName,
                     newState,
                     PackageManager.DONT_KILL_APP,
                 )
+
+		if (oldState != newState) {
+                    Log.i(TAG, "Setting SatelliteTileService enabled state to: $isAnyNtnSupported")
+                if(newState == PackageManager.COMPONENT_ENABLED_STATE_ENABLED) {
+                    Log.i(TAG, "cc Scheduling eligibility job")
+                    scheduleEligibilityJob(context)
+                }
             }
         }
     }

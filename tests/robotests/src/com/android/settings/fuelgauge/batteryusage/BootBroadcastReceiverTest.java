@@ -37,6 +37,7 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryEventDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settings.testutils.BatteryTestUtils;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -46,6 +47,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlarmManager;
 
 import java.time.Clock;
@@ -55,6 +57,7 @@ import java.util.concurrent.TimeUnit;
 
 /** Tests of {@link BootBroadcastReceiver}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowThreadUtils.class})
 public final class BootBroadcastReceiverTest {
     private Context mContext;
     private BatteryStateDao mBatteryStateDao;

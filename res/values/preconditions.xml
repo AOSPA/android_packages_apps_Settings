@@ -72,6 +72,8 @@
     <string name="user_aspect_ratio_apps_screen_preconditions" translatable="false">The device must support users changing aspect ratio of apps.</string>
     <string name="user_aspect_ratio_app_screen_preconditions" translatable="false">The device must support users changing aspect ratio of apps and the app must be launchable.</string>
     <string name="user_aspect_ratio_app_not_launchable" translatable="false">This app is not launchable.</string>
+    <string name="safety_center_screen_preconditions" translatable="false">The device must support the Safety Center feature.</string>
+    <string name="safety_center_screen_disabled" translatable="false">The device does not support the Safety Center feature.</string>
     <string name="mode_manual_duration_precondition" translatable="false">Require to be in Do Not Disturb mode.</string>
     <string name="mode_manual_duration_not_dnd_mode" translatable="false">Must be in do not disturb mode.</string>
     <string name="battery_info_screen_preconditions" translatable="false">The battery settings provider must provide the battery information feature.</string>
@@ -80,6 +82,14 @@
     <string name="battery_usage_screen_feature_disabled" translatable="false">Battery usage is not supported on this device.</string>
     <string name="battery_settings_screen_preconditions" translatable="false">The device must support showing the top level battery category in settings.</string>
     <string name="battery_settings_screen_feature_disabled" translatable="false">The top level battery category in settings is not supported on this device.</string>
+    <string name="plugged_status_preconditions" translatable="false">The device must be connected to a power source.</string>
+    <string name="plugged_status_unsupported_value" translatable="false">The device is not connected to a power source.</string>
+    <string name="charging_status_preconditions" translatable="false">The device should be charging and the charger and charging strategy are able to estimate the remaining time.</string>
+    <string name="charging_related_value_unsupported" translatable="false">The device must be charging using a compatible charger, and the charging must not be complete.</string>
+    <string name="remaining_time_estimate_value_unsupported" translatable="false">Unable to estimate the remaining time due to an internal error.</string>
+    <string name="power_charge_limited_reason" translatable="false">Battery Defender is enabled and is protecting your battery by pausing charging.</string>
+    <string name="discharging_status_preconditions" translatable="false">The device must be discharging.</string>
+    <string name="discharging_related_value_unsupported" translatable="false">The device is not discharging.</string>
     <string name="sound_vibration_precondition" translatable="false">This device must have a vibration motor.</string>
     <string name="sound_vibration_hardware_unsupported" translatable="false">This device does not have a vibration motor.</string>
     <string name="contacts_storage_screen_preconditions" translatable="false">The device must have a valid default account.</string>

@@ -73,7 +73,6 @@ open class MobileNetworkData(
 
     init {
         refresh()
-        registerActiveSubscriptionChanged()
     }
 
     fun refresh() {
@@ -138,14 +137,15 @@ open class MobileNetworkData(
         }
     }
 
-    private fun registerActiveSubscriptionChanged() {
-        // This is disabled because it blocks coroutinescopes until timeout.
-        // coroutineScope?.launch {
-        //     SubscriptionRepository(context).activeSubscriptionIdListFlow().collect {
-        //         Log.d(TAG, "subId=$subId,activeSubscriptionIdListFlow changed")
-        //         refreshImeiData()
-        //     }
-        // }
+    fun registerActiveSubscriptionChanged() {
+        coroutineScope?.launch {
+            withContext(Dispatchers.Default) {
+                SubscriptionRepository(context).activeSubscriptionIdListFlow().collect {
+                    Log.d(TAG, "subId=$subId,activeSubscriptionIdListFlow changed")
+                    refreshImeiData()
+                }
+            }
+        }
     }
 
     fun isMobileNetworkAvailable(): Boolean {

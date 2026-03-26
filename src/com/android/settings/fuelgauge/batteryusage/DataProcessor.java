@@ -824,6 +824,7 @@ public final class DataProcessor {
                     // Otherwise, simply ignore this start event.
                     if (isLastActiveTimeEarlierThanQueryBufferDuration(
                             pendingUsagePeriod, eventTime)) {
+                        pendingUsagePeriod.setPotentialTimeDefect(true);
                         pendingUsagePeriod.setEndTime(
                                 getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
                         validateAndAddToPeriodList(
@@ -844,6 +845,7 @@ public final class DataProcessor {
                 if (pendingUsagePeriod.hasStartTime()
                         && isLastActiveTimeEarlierThanQueryBufferDuration(
                                 pendingUsagePeriod, eventTime)) {
+                    pendingUsagePeriod.setPotentialTimeDefect(true);
                     pendingUsagePeriod.setEndTime(
                             getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
                     validateAndAddToPeriodList(
@@ -853,6 +855,7 @@ public final class DataProcessor {
                 pendingUsagePeriod.setEndTime(eventTime);
                 // If there's no start time, then add one for the default duration.
                 if (!pendingUsagePeriod.hasStartTime()) {
+                    pendingUsagePeriod.setPotentialTimeDefect(true);
                     pendingUsagePeriod.setStartTime(
                             getStartTimeForIncompleteUsagePeriod(pendingUsagePeriod));
                 }
@@ -941,12 +944,34 @@ public final class DataProcessor {
     static long getScreenOnTime(
             final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap,
             final long userId,
-            final String packageName) {
+            final String packageName,
+            @Nullable final Set<DataErrorType> dataErrorTypes,
+            @Nullable final StringBuilder mergedErrorMsgBuilder) {
         if (appUsageMap == null || appUsageMap.get(userId) == null) {
             return 0;
         }
 
-        return getScreenOnTime(appUsageMap.get(userId).get(packageName));
+        final List<AppUsagePeriod> appUsagePeriodList = appUsageMap.get(userId).get(packageName);
+        if (appUsagePeriodList == null || appUsagePeriodList.isEmpty()) {
+            return 0;
+        }
+
+        if (dataErrorTypes != null && mergedErrorMsgBuilder != null) {
+            final StringBuilder errorMsgBuilder = new StringBuilder();
+            appUsagePeriodList.stream()
+                    .filter(AppUsagePeriod::getPotentialTimeDefect)
+                    .forEach(period -> errorMsgBuilder.append(
+                            String.format("[%d, %d],", period.getStartTime(), period.getEndTime())
+                    ));
+            if (!errorMsgBuilder.isEmpty()) {
+                dataErrorTypes.add(DataErrorType.ERROR_TYPE_POTENTIAL_SCREEN_TIME_DEFECT);
+                mergedErrorMsgBuilder.append(
+                        String.format("\n\t[SCREEN_ON] userId=%d, pkg=%s, %s |",
+                                userId, packageName, errorMsgBuilder));
+            }
+        }
+
+        return getScreenOnTime(appUsagePeriodList);
     }
 
     static Map<Long, BatteryDiffData> getBatteryDiffDataMapFromStatsService(
@@ -1653,7 +1678,9 @@ public final class DataProcessor {
                             getScreenOnTime(
                                     appUsageMap,
                                     selectedBatteryEntry.mUserId,
-                                    selectedBatteryEntry.mPackageName));
+                                    selectedBatteryEntry.mPackageName,
+                                    dataErrorTypes,
+                                    mergedErrorMsg));
             // Ensure the following value will not exceed the threshold.
             // value = background + foregroundService + screen-on
             backgroundUsageTimeInMs =

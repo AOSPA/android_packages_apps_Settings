@@ -37,13 +37,13 @@ import com.android.settings.network.telephony.TelephonyUtils
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.launch
 
@@ -115,6 +115,11 @@ class MobileNetworkImeiPreference(private val data: MobileNetworkData) :
                     }
                 return@OnPreferenceClickListener true
             }
+    }
+
+    override fun onStart(context: PreferenceLifecycleContext) {
+        super.onStart(context)
+        data.registerActiveSubscriptionChanged()
     }
 
     override fun getTitle(context: Context): CharSequence? = data.imeiInfoDataFlow.value.title

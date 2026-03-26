@@ -5311,6 +5311,8 @@
     <string name="game_controller_remapping_reset_dialog_message">All your controller settings will be reset to default</string>
     <!-- Game controller reset dialog confirmation button text [CHAR LIMIT=35] -->
     <string name="game_controller_reset_dialog_button">Reset</string>
+    <!-- Content description for the game controller remapping preference summary. [CHAR LIMIT=NONE] -->
+    <string name="game_controller_remapping_preference_content_description">currently assigned to <xliff:g id="actual_value">%1$s</xliff:g></string>
 
     <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
     <string name="trackpad_settings">Touchpad</string>
@@ -5480,8 +5482,8 @@
     <string name="modifier_keys_caps_lock" translatable="false">Caps lock</string>
     <!-- Title for the button to trigger the 'modifier keys ctrl'. [CHAR LIMIT=15] -->
     <string name="modifier_keys_ctrl" translatable="false">Ctrl</string>
-    <!-- Title for the button to trigger the 'modifier keys action key'. [CHAR LIMIT=15] -->
-    <string name="modifier_keys_meta" translatable="false">Action key</string>
+    <!-- Title for the button to trigger the 'modifier keys action'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_meta" translatable="false">Action</string>
     <!-- Title for the button to trigger the 'modifier keys alt'. [CHAR LIMIT=15] -->
     <string name="modifier_keys_alt" translatable="false">Alt</string>
 
@@ -5775,6 +5777,10 @@
     <!-- setting Checkbox summary to set log level [CHAR_LIMIT=100] -->
     <string name="bt_stack_log_level_summary">Change log level of Bluetooth Stack Logging (Toggle Bluetooth after changing this setting)</string>
     <!-- Title for snoop logger filters dashboard where developers can turn on filters [CHAR LIMIT=100] -->
+    <!-- Title for the snoop logger socket [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_socket_title">Enable Bluetooth HCI snoop log socket</string>
+    <!-- Summary for the snoop logger socket [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_socket_summary">Make the Bluetooth HCI snoop log available on a local socket</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title">Bluetooth HCI snoop log filtering</string>
     <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
     <string name="bt_hci_snoop_log_filters_dashboard_summary">Set filters</string>

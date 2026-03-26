@@ -16,15 +16,23 @@
 
 package com.android.settings.fuelgauge.batteryusage
 
+import android.app.Application
+import android.content.Context
+import android.content.res.Configuration
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import android.text.format.DateUtils
+import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.flags.Flags
+import com.android.settings.fuelgauge.batteryusage.PowerUsageAdvancedApiScreen.Companion.SCREEN_TIME_SINCE_LAST_FULL_CHARGE_KEY
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils2.ApiTester
 import com.android.settings.testutils2.HardwareUnsupportedException
+import com.android.settingslib.metadata.preferencesapi.types.TimeDuration
 import com.google.common.truth.Truth.assertThat
+import java.util.Locale
 import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Rule
@@ -37,12 +45,24 @@ import org.mockito.kotlin.stub
 class PowerUsageAdvancedApiScreenTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
-    private val tester = ApiTester(PowerUsageAdvancedApiScreen())
-
+    private lateinit var context: Context
     private lateinit var featureFactory: FakeFeatureFactory
+    private lateinit var tester: ApiTester
+    private var fakeData: BatteryDiffData? = null
 
     @Before
     fun setUp() {
+        val baseContext = ApplicationProvider.getApplicationContext<Application>()
+        context =
+            baseContext.createConfigurationContext(
+                Configuration(baseContext.resources.configuration).also {
+                    it.setLocale(Locale.ENGLISH)
+                }
+            )
+
+        val screen = PowerUsageAdvancedApiScreen()
+        screen.batteryUsageDataFetcher = { fakeData }
+        tester = ApiTester(screen, context)
         featureFactory = FakeFeatureFactory.setupForTest()
         featureFactory.stub {
             on { powerUsageFeatureProvider.isBatteryUsageEnabled() } doReturn true
@@ -50,13 +70,13 @@ class PowerUsageAdvancedApiScreenTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q3)
     fun getScreen_flagEnabled_isNotNull() {
         assertThat(tester.getScreen()).isNotNull()
     }
 
     @Test
-    @DisableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
+    @DisableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q3)
     fun getScreen_flagDisabled_isNull() {
         assertThat(tester.getScreen()).isNull()
     }
@@ -73,5 +93,50 @@ class PowerUsageAdvancedApiScreenTest {
         }
 
         assertThrows(HardwareUnsupportedException::class.java) { tester.getLaunchIntent() }
+    }
+
+    @Test
+    fun getScreenTimeSinceLastFullCharge_noBatteryDiffData_returnZero() {
+        assertThat(tester.get<TimeDuration>(SCREEN_TIME_SINCE_LAST_FULL_CHARGE_KEY)).isEqualTo(0)
+    }
+
+    @Test
+    fun getScreenTimeSinceLastFullCharge_screenTimeLessThanHalfSeconds_returnZero() {
+        setBatteryDiffDataWithScreenTime(screenTimeMs = 499L)
+        assertThat(tester.get<TimeDuration>(SCREEN_TIME_SINCE_LAST_FULL_CHARGE_KEY)).isEqualTo(0)
+    }
+
+    @Test
+    fun getScreenTimeSinceLastFullCharge_screenTimeRoundToOneSecond_returnOneSecond() {
+        setBatteryDiffDataWithScreenTime(screenTimeMs = 500L)
+
+        assertThat(tester.get<TimeDuration>(SCREEN_TIME_SINCE_LAST_FULL_CHARGE_KEY)).isEqualTo(1)
+    }
+
+    @Test
+    fun getScreenTimeSinceLastFullCharge_screenTimeLargerThanOneMinutes_returnExpectedInt() {
+        setBatteryDiffDataWithScreenTime(
+            screenTimeMs = DateUtils.HOUR_IN_MILLIS + DateUtils.MINUTE_IN_MILLIS * 12L
+        )
+
+        assertThat(tester.get<TimeDuration>(SCREEN_TIME_SINCE_LAST_FULL_CHARGE_KEY))
+            .isEqualTo(60 * 60 + 12 * 60)
+    }
+
+    private fun setBatteryDiffDataWithScreenTime(screenTimeMs: Long) {
+        fakeData =
+            BatteryDiffData(
+                context,
+                /* startTimestamp= */ 100L,
+                /* endTimestamp= */ 200L,
+                /* startBatteryLevel= */ 10,
+                /* endBatteryLevel= */ 5,
+                /* screenOnTime= */ screenTimeMs,
+                /* appDiffEntries= */ mutableListOf(),
+                /* systemDiffEntries= */ mutableListOf(),
+                /* systemAppsPackageNames= */ emptySet(),
+                /* systemAppsUids= */ emptySet(),
+                /* isAccumulated= */ true,
+            )
     }
 }

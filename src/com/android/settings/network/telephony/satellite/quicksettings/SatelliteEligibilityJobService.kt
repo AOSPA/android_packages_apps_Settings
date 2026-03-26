@@ -138,7 +138,7 @@ open class SatelliteEligibilityJobService : JobService() {
             Log.i(TAG, "Not running on system user, ignoring.")
             return false
         }
-        logd { "onStartJob: ${params.jobId}" }
+        Log.i(TAG, "onStartJob: ${params.jobId}")
 
         // Guard against executing if the feature is disabled (kills legacy jobs)
         if (!SatelliteTileStateReceiver.isSatelliteTileFeatureEnabled(this)) {
@@ -153,14 +153,14 @@ open class SatelliteEligibilityJobService : JobService() {
 
         val subId = SubscriptionManager.getDefaultDataSubscriptionId()
         if (subId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-            Log.w(TAG, "Invalid subscription ID, finishing job.")
+            Log.i(TAG, "Invalid subscription ID, finishing job.")
             return false
         }
 
         telephonyManager =
             getSystemService(TelephonyManager::class.java)?.createForSubscriptionId(subId)
         if (telephonyManager == null) {
-            Log.e(TAG, "TelephonyManager is null.")
+            Log.i(TAG, "TelephonyManager is null.")
             return false
         }
 
@@ -172,7 +172,7 @@ open class SatelliteEligibilityJobService : JobService() {
 
         val serviceState = telephonyManager?.serviceState
         val state = serviceState?.state
-        logd { "Current ServiceState: $state" }
+        Log.i(TAG, "Current ServiceState: $state")
 
         if (state == ServiceState.STATE_IN_SERVICE) {
             val isNtn = serviceState?.isUsingNonTerrestrialNetwork() == true
@@ -189,7 +189,7 @@ open class SatelliteEligibilityJobService : JobService() {
             // Schedule timeout
             launch {
                 kotlinx.coroutines.delay(TIMEOUT_MS)
-                Log.i(TAG, "Timed out waiting for satellite eligibility.")
+                Log.i(TAG, "Timed out waiting for satellite eligibility after 10m.")
                 cleanup()
                 schedule(this@SatelliteEligibilityJobService)
                 jobFinished(params, false)
@@ -199,11 +199,14 @@ open class SatelliteEligibilityJobService : JobService() {
             SatelliteStateRepository.getInstance(this@SatelliteEligibilityJobService)
                 .satelliteStatus
                 .collectLatest { status ->
+                    Log.i(TAG, "Received satelliteStatus update: $status")
                     if (status == SatelliteStatus.AVAILABLE || status == SatelliteStatus.ACTIVE) {
                         Log.i(TAG, "Satellite Status: $status. Waiting for 3-minute debounce.")
                         kotlinx.coroutines.delay(OOS_DEBOUNCE_MS)
                         Log.i(TAG, "Satellite Status sustained at $status. Showing prompt.")
                         showPromptAndFinish(params)
+                    } else {
+                        Log.i(TAG, "Satellite Status is $status, debounce timer (if any) cancelled.")
                     }
                 }
         }
@@ -215,7 +218,7 @@ open class SatelliteEligibilityJobService : JobService() {
     }
 
     override fun onStopJob(params: JobParameters): Boolean {
-        logd { "onStopJob" }
+        Log.i(TAG, "onStopJob called for jobId: ${params.jobId}. Reason: ${params.stopReason}")
         cleanup()
         return true
     }

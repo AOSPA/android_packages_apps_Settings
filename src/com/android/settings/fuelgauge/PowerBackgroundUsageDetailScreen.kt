@@ -31,28 +31,12 @@ import com.android.settings.fuelgauge.PowerBackgroundUsageDetail.LaunchSourceTyp
 import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
-import com.android.settingslib.metadata.preferencesapi.ApiOperationContext
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
-import com.android.settingslib.metadata.preferencesapi.category.Category
-import com.android.settingslib.metadata.preferencesapi.multiusers.ManagementScope
-import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(PowerBackgroundUsageDetailScreen.KEY, parameterized = true)
 open class PowerBackgroundUsageDetailScreen :
-    PreferencesApiScreen(
-        key = KEY,
-        topLevelSettingsCategory = Category.BATTERY,
-        fragment = PowerBackgroundUsageDetail::class,
-        purpose = R.string.power_background_usage_details_screen_purpose,
-        canManage = ManagementScope.PROFILE_GROUP,
-    ) {
-
-    private lateinit var batteryOptimizeUtils: BatteryOptimizeUtils
-
+    PowerUsageDetailBaseApiScreen(key = KEY, fragment = PowerBackgroundUsageDetail::class) {
     init {
         flag { Flags.catalystMigration26q2() }
 
@@ -80,30 +64,7 @@ open class PowerBackgroundUsageDetailScreen :
         }
 
         preconditions(R.string.power_background_usage_detail_screen_preconditions) {
-            val packageName = parameters.getRequired(EXTRA_PACKAGE_NAME)
-            val uid = context.packageManager.getPackageUidAsUser(packageName, userId)
-            batteryOptimizeUtils = BatteryOptimizeUtils(context, uid, packageName)
-            when {
-                batteryOptimizeUtils.isDisabledForOptimizeModeOnly -> {
-                    Custom(
-                        context.getString(
-                            R.string.manager_battery_usage_footer_limited,
-                            context.getString(R.string.manager_battery_usage_optimized_only),
-                        ),
-                        stability = PreconditionStability.UNSTABLE
-                    )
-                }
-                batteryOptimizeUtils.isSystemOrDefaultApp -> {
-                    Custom(
-                        context.getString(
-                            R.string.manager_battery_usage_footer_limited,
-                            context.getString(R.string.manager_battery_usage_unrestricted_only),
-                        ),
-                        stability = PreconditionStability.UNSTABLE
-                    )
-                }
-                else -> Allowed
-            }
+            requireBatteryOptimizationModeMutable()
         }
 
         preference(
@@ -137,14 +98,6 @@ open class PowerBackgroundUsageDetailScreen :
                 }
             }
         }
-    }
-
-    private fun ApiOperationContext.ensureBatteryOptimizeUtilsInitialized() {
-        if (this@PowerBackgroundUsageDetailScreen::batteryOptimizeUtils.isInitialized) return
-
-        val packageName = parameters.getRequired(EXTRA_PACKAGE_NAME)
-        val uid = context.packageManager.getPackageUidAsUser(packageName, context.userId)
-        batteryOptimizeUtils = BatteryOptimizeUtils(context, uid, packageName)
     }
 
     companion object {

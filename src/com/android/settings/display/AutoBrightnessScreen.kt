@@ -194,8 +194,6 @@ open class AutoBrightnessScreen :
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 
-        override val sensitivityLevel : @SensitivityLevel Int = screenMetadata.sensitivityLevel
-
         override fun storage(context: Context) : KeyValueStore = screenMetadata.storage(context)
 
         override fun getReadPermissions(context: Context) = screenMetadata.getReadPermissions(context)

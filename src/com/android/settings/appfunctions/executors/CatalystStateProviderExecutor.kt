@@ -100,31 +100,43 @@ class CatalystStateProviderExecutor(
                 SETTING_LOG_APPFUNCTION_TIME,
                 0
             ) == 1
+            val shouldIncludeScreenKey = AppUtils.isDebuggable() && Settings.Global.getInt(
+                context.contentResolver,
+                APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION,
+                0
+            ) == 1
 
             val semaphore = Semaphore(maxParallelism)
             var deferredList = emptyList<Pair<String, Deferred<List<PerScreenDeviceStates>?>>>()
             val timeLogs = ConcurrentHashMap<String, Long>()
 
+            val startTimeAll = android.os.SystemClock.elapsedRealtime()
             withTimeoutOrNull(maxExecutionTimeMs) {
                 coroutineScope {
                     deferredList = screenKeyList.map { screenKey ->
                         screenKey to async {
-                            val startTime = android.os.SystemClock.elapsedRealtime()
+                            var executionTime = -1L
                             try {
-                                withTimeout(perScreenTimeoutMs) {
-                                    semaphore.withPermit {
-                                        try {
-                                            val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
-                                            if(screenMetadata != null && screenMetadata.isExposable(context)) {
-                                                buildPerScreenDeviceStates(
-                                                    screenKey,
-                                                    appFunctionType
-                                                )
-                                            } else null
-                                        } catch (e: Exception) {
-                                            Log.e(TAG, "error building $screenKey", e)
-                                            null
+                                semaphore.withPermit {
+                                    val startTime = android.os.SystemClock.elapsedRealtime()
+                                    try {
+                                        withTimeout(perScreenTimeoutMs) {
+                                            try {
+                                                val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
+                                                if(screenMetadata != null && screenMetadata.isExposable(context)) {
+                                                    buildPerScreenDeviceStates(
+                                                        screenKey,
+                                                        appFunctionType,
+                                                        shouldIncludeScreenKey
+                                                    )
+                                                } else null
+                                            } catch (e: Exception) {
+                                                Log.e(TAG, "error building $screenKey", e)
+                                                null
+                                            }
                                         }
+                                    } finally {
+                                        executionTime = android.os.SystemClock.elapsedRealtime() - startTime
                                     }
                                 }
                             } catch (e: TimeoutCancellationException) {
@@ -135,7 +147,12 @@ class CatalystStateProviderExecutor(
                                 null
                             } finally {
                                 if (logAppFunctionTime && !timeLogs.containsKey(screenKey)) {
-                                    timeLogs[screenKey] = android.os.SystemClock.elapsedRealtime() - startTime
+                                    if (executionTime == -1L) {
+                                        Log.e(TAG, "executionTime is -1 for screen: $screenKey")
+                                        timeLogs[screenKey] = -1L
+                                    } else {
+                                        timeLogs[screenKey] = executionTime
+                                    }
                                 }
                             }
                         }
@@ -145,6 +162,8 @@ class CatalystStateProviderExecutor(
             } ?: Log.w(TAG, "Max execution time of $maxExecutionTimeMs exceeded.")
 
             if (logAppFunctionTime) {
+                val totalTime = android.os.SystemClock.elapsedRealtime() - startTimeAll
+                Log.d(TAG, "AppFunction $appFunctionType took ${totalTime}ms")
                 timeLogs.entries
                     .sortedByDescending { if (it.value == -1L) Long.MAX_VALUE else it.value }
                     .forEach { entry ->
@@ -182,6 +201,7 @@ class CatalystStateProviderExecutor(
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenKey: String,
         appFunctionType: DeviceStateAppFunctionType,
+        shouldIncludeScreenKey: Boolean,
     ): List<PerScreenDeviceStates> {
         Log.v(TAG, "Building per screen device states for $screenKey")
         val hierarchy = getEnabledPreferencesHierarchy(config, context, appFunctionType, screenKey)
@@ -193,6 +213,7 @@ class CatalystStateProviderExecutor(
                 buildPerScreenDeviceStates(
                     screenMetaData,
                     preferencesHierarchy,
+                    shouldIncludeScreenKey
                 )
             Log.v(TAG, "Built per screen device states for $screenKey")
             states
@@ -202,6 +223,7 @@ class CatalystStateProviderExecutor(
     private suspend fun CoroutineScope.buildPerScreenDeviceStates(
         screenMetaData: PreferenceScreenMetadata,
         preferencesHierarchy: List<PreferenceHierarchyNode>,
+        shouldIncludeScreenKey: Boolean,
     ): PerScreenDeviceStates? {
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
@@ -259,7 +281,7 @@ class CatalystStateProviderExecutor(
                 ". " + arguments.keySet().joinToString(", ") { "$it=${arguments.get(it)}" }
             }
         }
-        val descriptionPrefix = if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else ""
+        val descriptionPrefix = if (shouldIncludeScreenKey) "[key=${screenMetaData.key}]" else ""
         val description = descriptionPrefix + basicDescription + descriptionSuffix
 
         val states =
@@ -293,19 +315,6 @@ class CatalystStateProviderExecutor(
         }
     }
 
-    /**
-     * Returns true if the screen key should be included in the description for debugging.
-     *
-     * This should never be used in production.
-     */
-    private fun shouldIncludeScreenKey(): Boolean {
-        return AppUtils.isDebuggable() && Settings.Global.getInt(
-            context.contentResolver,
-            "com.android.settings.APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION",
-            0
-        ) == 1
-    }
-
     private fun isImeiPreference(prefKey: String): Boolean {
         return prefKey.startsWith(ImeiPreference.KEY_PREFIX)
     }
@@ -313,11 +322,12 @@ class CatalystStateProviderExecutor(
     companion object {
         private const val TAG = "CatalystStateProviderExecutor"
         private const val DEFAULT_MAX_PARALLELISM = 3
-        private const val DEFAULT_PER_SCREEN_TIMEOUT_MS = 5000L
+        private const val DEFAULT_PER_SCREEN_TIMEOUT_MS = 20000L
         private const val DEFAULT_MAX_EXECUTION_TIME_MS = 25000L
         private const val SETTING_MAX_PARALLELISM = "com.android.settings.APP_FUNCTION_MAX_PARALLELISM"
         private const val SETTING_PER_SCREEN_TIMEOUT_MS = "com.android.settings.APP_FUNCTION_PER_SCREEN_TIMEOUT_MS"
         private const val SETTING_MAX_EXECUTION_TIME_MS = "com.android.settings.APP_FUNCTION_MAX_EXECUTION_TIME_MS"
         private const val SETTING_LOG_APPFUNCTION_TIME = "com.android.settings.APP_FUNCTION_LOG_TIME"
+        private const val APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION = "com.android.settings.APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION"
     }
 }

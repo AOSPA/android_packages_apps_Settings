@@ -326,9 +326,9 @@
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"הגדרה אוטומטית לפי הרשתות הסלולריות באזור שלך"</string>
     <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"הגדרה אוטומטית באמצעות מיקום המכשיר, אם האפשרות זמינה"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"לפי ברירת המחדל באזור"</string>
-    <string name="date_time_24hour" msgid="286679379105653406">"פורמט 24 שעות"</string>
+    <string name="date_time_24hour" msgid="286679379105653406">"פורמט של 24 שעות"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"שעה"</string>
-    <string name="time_format_category_title" msgid="3122743852067365261">"פורמט 12 שעות או 24 שעות"</string>
+    <string name="time_format_category_title" msgid="3122743852067365261">"פורמט של 12 או 24 שעות"</string>
     <string name="time_format_page_title" msgid="2599662358219245734">"פורמט השעה"</string>
     <string name="time_more_settings_category_title" msgid="8304427350974443921">"הגדרות נוספות"</string>
     <string name="time_format_subtitle" msgid="7291642514630113614">"האפליקציות ישתמשו בפורמט השעה שלך על סמך ההגדרה הזו"</string>
@@ -340,7 +340,7 @@
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"אזור זמן"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"אזור הזמן המקומי"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"בחירת אזור זמן"</string>
-    <string name="home_time_zone_summary" msgid="1494773352044636274">"צריך להגדיר אזור זמן מקומי למקרים שבהם נמצאים במקום אחר"</string>
+    <string name="home_time_zone_summary" msgid="1494773352044636274">"אם עברת למקום אחר, אפשר להגדיר אזור זמן מקומי"</string>
     <string name="use_home_time_zone_title" msgid="8026361707497256390">"לפי אזור הזמן המקומי"</string>
     <string name="suggestions_category_title" msgid="669819615912272575">"הצעות"</string>
     <string name="date_time_set_timezone" msgid="2915125337941495746">"אזור זמן"</string>
@@ -1833,7 +1833,7 @@
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"קבלת התראה כשאזור הזמן מתעדכן אוטומטית"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"התראה, זמן, אזור, אזור זמן"</string>
     <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"הזזה מתוזמנת של השעון"</string>
-    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"קבלת התראה על הזזה מתוזמנת של השעון, למשל במעבר לשעון קיץ"</string>
+    <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"קבלת התראה כשהשעון יזוז בצורה מתוזמנת, למשל במעבר לשעון קיץ"</string>
     <string name="keywords_time_zone_offset_change_notification_category" msgid="8387079903065649221">"שעון קיץ, מעבר לשעון קיץ, מעבר לשעון חורף, הזזת השעון, הזזה מתוזמנת של השעון"</string>
     <string name="footer_time_zone_offset_change_next_change" msgid="8084602449443278109">"השינוי הבא"</string>
     <string name="footer_time_zone_offset_change_no_next_change" msgid="3377219282350130919">"אין שינויים מתוזמנים"</string>
@@ -2134,22 +2134,18 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"שפה"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"הצגה של מתג החלפת המקלדת"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"הצגה של כפתור החלפת המקלדת בפס הניווט כשנבחר שדה להזנת קלט"</string>
-    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
-    <skip />
+    <string name="keyboard_apps_category" msgid="1715169176659877658">"אפליקציות מקלדת"</string>
     <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
     <skip />
     <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
     <skip />
-    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
-    <skip />
+    <string name="available_keyboard_apps_category" msgid="7665966484500890112">"אפליקציות מקלדת זמינות"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"אפשרויות"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"נגישות"</string>
-    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
-    <skip />
+    <string name="physical_keyboard_title" msgid="6597340453841961909">"מקלדות פיזיות"</string>
     <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
     <skip />
-    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
-    <skip />
+    <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"בחירת הפריסה"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"סינון הקשות חוזרות"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"התעלמות מהקשות מהירות חוזרות על אותו מקש"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"השהיה לסינון הקשות חוזרות"</string>
@@ -2338,8 +2334,7 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"הפניה אוטומטית של רטט"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"שליחת רטט אל בקר משחק כשמחובר"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"פריסות מקלדת"</string>
-    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
-    <skip />
+    <string name="keyboard_layout_picker_category_title" msgid="2312103369489003202">"פריסות"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"מילון אישי"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"מילון אישי לעבודה"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"הוספת מילים לשימוש באפליקציות כמו בדיקת איות"</string>
@@ -2361,12 +2356,9 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"לכל השפות"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"שפות נוספות..."</string>
     <string name="testing" msgid="6294172343766732037">"בדיקה"</string>
-    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
-    <skip />
-    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
-    <skip />
-    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
-    <skip />
+    <string name="keyboard_settings_summary" msgid="5513613701144979051">"אפליקציות מקלדת, כלים"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="449934856451727476">"אפליקציות מקלדת, מקלדות פיזיות, כלים"</string>
+    <string name="physical_keyboards_list_title" msgid="2062417895303139252">"מקלדות פיזיות"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"פריסה"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"בחירת גאדג\'ט"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"‏בחירת Widget"</string>
@@ -2558,7 +2550,8 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"כפתורי עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"לחיצה ארוכה על שני הכפתורים של עוצמת הקול"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"לחיצה מהירה 3 פעמים"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"‏לחיצה מהירה %1$d פעמים על המסך. זה עלול להאט את פעולת המכשיר."</string>
+    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (387169602299548488) -->
+    <skip />
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"לחיצה מהירה 3 פעמים"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"מקשי קיצור"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"כדי להשתמש ב<xliff:g id="ID_4">%4$s</xliff:g>, צריך ללחוץ על <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g>"</string>
@@ -4617,17 +4610,49 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"יכולת גישה לכל הקבצים"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"אוטומציה של המסך"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"האפליקציה הזו תוכל לראות את תוכן המסך של אפליקציות אחרות ולקיים איתו אינטראקציה כדי לעזור לך במשימות, גם כשהאפליקציות פועלות ברקע"</string>
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"האפליקציה <xliff:g id="ID_1">%1$s</xliff:g> תוכל לראות את התוכן במסך של אפליקציות אחרות ולקיים איתו אינטראקציה כדי לעזור לך במשימות"</string>
-    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"אם האוטומציה של המסך לא תאושר, יכול להיות שעדיין תהיה ל-<xliff:g id="ID_1">%1$s</xliff:g> אפשרות לקיים אינטראקציה עם אפליקציות שמחוברות אל <xliff:g id="ID_2">%1$s</xliff:g> בדרכים אחרות"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2154932816099670659) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_info (9062454049512207228) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (5980762930536180974) -->
+    <skip />
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"אם תינתן הרשאה, האפליקציות יוכלו לעזור במשימות על ידי אינטראקציה עם תוכן המסך של אפליקציות אחרות"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"אני רוצה לבחור בכל פעם"</string>
-    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"אישור לתמיד"</string>
+    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"אין אישור"</string>
-    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"הרשאה לאינטראקציה אוטומטית עם התוכן במסך"</string>
-    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"אין אפליקציות בלי הגבלת שימוש"</string>
-    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"כאן יוצגו אפליקציות שמותר להן להשתמש תמיד באינטראקציה אוטומטית עם התוכן במסך על ידי <xliff:g id="ID_1">%1$s</xliff:g>. אפליקציות שמקבלות הרשאה לכל סשן בנפרד לא יוצגו."</string>
-    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"יש הרשאה"</string>
-    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"אין הרשאה"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (4888755761957621266) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (5400163562350523099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_requirement (2238235275174477026) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (2135792628244307590) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_clear_all_apps (7663936744209447022) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (2481703601665259966) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9145402296131321682) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2454906328238498562) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_header (5137088795672278469) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_footer_requirement (4029489221206415252) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (7290667979548333123) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_target_list_header (3243296237180038117) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"התראות במסך מלא"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"מתן הרשאה להצגת התראות במסך מלא מהאפליקציה הזו"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"מתן הרשאה לאפליקציה הזו להציג התראות במסך מלא כשהמכשיר נעול. אפליקציות יכולות להשתמש בהרשאה הזו כדי להציג התראות, שיחות נכנסות או הודעות דחופות אחרות."</string>
@@ -5726,11 +5751,13 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"מתן הרשאה לרשתות מוצפנות בלבד"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ההגדרה הזו מאובטחת יותר אבל היא עלולה להוביל לבעיות קליטה במקומות מסוימים. תמיד אפשר לבצע שיחת חירום."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"‏להשבית את ההגנה ברשתות 2G?"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"‏הרשת הנוכחית של כרטיס ה-SIM של <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> לא תומכת ב-2G. אם משביתים את ההגנה ברשת 2G, יש סיכון להתחברות לרשתות 2G מזויפות מזיקות."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (7888326960588858860) -->
+    <skip />
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"השבתה"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"‏הגנה ברשתות 2G"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"‏ההגנה ברשתות 2G מופעלת"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"‏כדי להשתמש בכרטיס ה-SIM של <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> ברשת הנוכחית, צריך להפעיל את ההגנה ברשתות 2G. עדיין יש לך אפשרות להשבית את ההגנה על 2G באחריותך בלבד."</string>
+    <!-- no translation found for network_protection_2g_on_notification_summary (2865716658412002901) -->
+    <skip />
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"הגדרות"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"כל השירותים"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"הצגת גישה ללוח העריכה"</string>
@@ -5813,6 +5840,12 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"הסרת האפליקציה"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{אפליקציות שהותקנו במהלך החודש האחרון}one{אפליקציות שהותקנו במהלך # החודשים האחרונים}two{האפליקציות הותקנו במהלך החודשיים האחרונים}other{אפליקציות שהותקנו במהלך # החודשים האחרונים}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{האפליקציות הותקנו לפני יותר מחודש אחד (#)}one{האפליקציות הותקנו לפני יותר מ-# חודשים}two{האפליקציות הותקנו לפני יותר מחודשיים (#)}other{האפליקציות הותקנו לפני יותר מ-# חודשים}}"</string>
+    <!-- no translation found for ai_assist_category (6800674613544630195) -->
+    <skip />
+    <!-- no translation found for personal_context_title (6639623956831710453) -->
+    <skip />
+    <!-- no translation found for personal_context_switch_summary (917644125592480347) -->
+    <skip />
     <string name="aspect_ratio_title" msgid="2451826875939676101">"יחס גובה-רוחב"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"אם אין לאפליקציה הזו הגדרות מובנות לתצוגה במכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ההגדרה הזו תציג אותה ביחס גובה-רוחב חדש"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"אם אין לאפליקציה הזו הגדרות מובנות לתצוגה במכשיר <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, ההגדרה הזו תציג אותה ביחס גובה-רוחב חדש. יש אפליקציות שלא עובדות טוב ביחסי גובה-רוחב מסוימים."</string>

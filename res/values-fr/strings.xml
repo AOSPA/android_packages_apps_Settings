@@ -2558,7 +2558,8 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"boutons de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Appuyez de manière prolongée sur les deux boutons de volume"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Appuyer trois fois"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Appuyez rapidement %1$d fois sur l\'écran. Votre appareil peut être ralenti"</string>
+    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (387169602299548488) -->
+    <skip />
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"appuyer trois fois"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Raccourci clavier"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Appuyez sur <xliff:g id="ID_1">%1$s</xliff:g>+<xliff:g id="ID_2">%2$s</xliff:g>+<xliff:g id="ID_3">%3$s</xliff:g> pour utiliser <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -4562,7 +4563,7 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP et alimentation"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI et alimentation"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"Webcam et alimentation"</string>
-    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"Appareil de <xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g> inconnu"</string>
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"Appareil inconnu de <xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g>"</string>
     <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"Appareil inconnu [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Vérification en arrière-plan"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Utiliser le texte de l\'écran"</string>
@@ -4617,17 +4618,49 @@
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Peut peut accéder à tous les fichiers"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatisation de l\'écran"</string>
     <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Cette appli pourra voir le contenu affiché sur l\'écran d\'autres applis et interagir avec lui pour vous aider à effectuer des tâches, même lorsque les applis sont en arrière-plan"</string>
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> pourra voir le contenu affiché sur l\'écran d\'autres applis et interagir avec lui pour vous aider à effectuer des tâches"</string>
-    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Si vous n\'autorisez pas l\'automatisation de l\'écran, <xliff:g id="ID_1">%1$s</xliff:g> pourra potentiellement continuer d\'interagir avec les applis connectées à <xliff:g id="ID_2">%1$s</xliff:g> par d\'autres moyens"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2154932816099670659) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_info (9062454049512207228) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (5980762930536180974) -->
+    <skip />
     <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Autoriser les applis à vous aider à effectuer des tâches en interagissant avec le contenu affiché sur l\'écran d\'autres applis"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Toujours demander"</string>
-    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Toujours autoriser"</string>
+    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Ne pas autoriser"</string>
-    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Autoriser l\'automatisation de l\'écran"</string>
-    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"Aucune appli n\'est toujours autorisée"</string>
-    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Les applis autorisées à toujours utiliser l\'automatisation de l\'écran par <xliff:g id="ID_1">%1$s</xliff:g> s\'afficheront ici. Les applis qui n\'obtiennent qu\'une autorisation par session ne s\'afficheront pas."</string>
-    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Autorisé"</string>
-    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Non autorisé"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (4888755761957621266) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (5400163562350523099) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_requirement (2238235275174477026) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (2135792628244307590) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_clear_all_apps (7663936744209447022) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (2481703601665259966) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9145402296131321682) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2454906328238498562) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_header (5137088795672278469) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_footer_requirement (4029489221206415252) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (7290667979548333123) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_target_list_header (3243296237180038117) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifications en plein écran"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Autoriser l\'appli à afficher les notifications en plein écran"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Autoriser cette appli à afficher des notifications occupant tout l\'écran lorsque l\'appareil est verrouillé. Les applis peuvent les utiliser pour mettre en avant les alarmes, les appels entrants ou d\'autres notifications urgentes."</string>
@@ -5725,11 +5758,13 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Autoriser uniquement les réseaux chiffrés"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Cette option est plus sécurisée mais peut limiter votre connexion au réseau mobile dans certains endroits. Les appels d\'urgence sont toujours autorisés."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Désactiver la protection réseaux 2G ?"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Le réseau actuel de la carte SIM <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> n\'est pas compatible avec la 2G. Si vous désactivez la protection 2G, vous risquez de vous connecter à des réseaux 2G falsifiés et dangereux."</string>
+    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (7888326960588858860) -->
+    <skip />
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Désactiver"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Protection réseaux 2G"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"La protection des réseaux 2G est activée"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"Le réseau actuel de la carte SIM <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> nécessite d\'activer la protection 2G. Vous pouvez toujours choisir de désactiver la protection 2G à vos propres risques."</string>
+    <!-- no translation found for network_protection_2g_on_notification_summary (2865716658412002901) -->
+    <skip />
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Paramètres"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tous les services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Afficher les accès au presse-papiers"</string>
@@ -5812,6 +5847,12 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Désinstaller l\'appli"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Applis installées depuis # mois}one{Applis installées depuis # mois}other{Applis installées depuis # mois}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Applis installées il y a plus de # mois}one{Applis installées il y a plus de # mois}other{Applis installées il y a plus de # mois}}"</string>
+    <!-- no translation found for ai_assist_category (6800674613544630195) -->
+    <skip />
+    <!-- no translation found for personal_context_title (6639623956831710453) -->
+    <skip />
+    <!-- no translation found for personal_context_switch_summary (917644125592480347) -->
+    <skip />
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Format"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Essayer un nouveau format dans lequel afficher cette application si elle n\'a pas été conçue pour s\'adapter à votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Essayez un nouveau format dans lequel afficher cette application si elle n\'a pas été conçue pour s\'adapter à votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Il est possible que certaines applications ne soient pas optimisées pour certains formats."</string>
