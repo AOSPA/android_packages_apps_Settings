@@ -631,10 +631,10 @@ class CatalystStateMetadataProviderExecutorTest {
         assertThat(prefMetadata.key).isEqualTo("preconditions_screen/pref_with_preconditions")
         assertThat(prefMetadata.hintText).contains(
             "Preconditions to accessing: Screen precondition, Preference precondition.\n" +
-                "Preconditions to reading: Get precondition.\n" +
-                "Preconditions to writing: Set precondition."
+                "Preconditions to getting: Get precondition.\n" +
+                "Preconditions to setting: Set precondition."
         )
-        assertThat(prefMetadata.hintText).contains("Preconditions to writing: Set precondition.")
+        assertThat(prefMetadata.hintText).contains("Preconditions to setting: Set precondition.")
     }
 
     private class SetWarningTestScreen : PreferencesApiScreen(

@@ -380,7 +380,7 @@ class CatalystStateMetadataProviderExecutor(
                             val str = "itemization:${type.getKey()}"
                             val parameters = type.getParameters()
 
-                            if (parameters != null) {
+                            if (parameters != null && parameters.toParametersString() != "[]") {
                                 str + " ${parameters.toParametersString()}"
                             } else {
                                 str

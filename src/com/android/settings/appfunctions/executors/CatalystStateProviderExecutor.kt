@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.executors
 
 import android.app.appsearch.GenericDocument
 import android.content.Context
+import android.content.Intent
 import android.os.BaseBundle
 import android.os.Process
 import android.provider.Settings
@@ -39,6 +40,7 @@ import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
+import com.android.settingslib.metadata.getTrampolinedLaunchIntent
 import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.isUiOnlyPreference
 import com.android.settingslib.metadata.resolvedAccessAndGetPreconditionsAsString
@@ -142,9 +144,9 @@ class CatalystStateProviderExecutor(
 
                                                 val hasStateProvidingPreference = firstPreferences.any {
                                                     it.metadata.isExposable(context)
-                                                }
+                                                    }
 
-                                                if (hasNonStaticInfo || hasStateProvidingPreference) {
+                                                    if (hasNonStaticInfo || hasStateProvidingPreference) {
                                                     hierarchyMap.mapNotNull { (screenMetadata, preferences) ->
                                                         buildPerScreenDeviceStates(screenMetadata, preferences, shouldIncludeScreenKey)
                                                     }
@@ -282,10 +284,21 @@ class CatalystStateProviderExecutor(
         val descriptionPrefix = if (shouldIncludeScreenKey) "[key=${screenMetaData.key}]" else ""
         val description = descriptionPrefix + basicDescription + descriptionSuffix
 
+        val intentUri =
+            screenMetaData
+                .getTrampolinedLaunchIntent(null)
+                .apply {
+                    if (keyParameters != null && keyParameters != ValidatedKeyParameters.EMPTY) {
+                        putExtra(PreferenceScreenMetadata.EXTRA_ITEMIZATION, keyParameters.values.values.joinToString(","))
+                    }
+                }
+                .toUri(Intent.URI_INTENT_SCHEME)
+
         val states =
             PerScreenDeviceStates(
                 description = description,
                 deviceStateItems = deviceStateItemList,
+                intentUri = intentUri,
             )
 
         return states
@@ -295,7 +308,7 @@ class CatalystStateProviderExecutor(
         val allowedRead = metadata.getReadPermit(
             context, Process.myPid(),
             Process.myUid()
-        ) == ALLOW
+        ) == ALLOW && metadata.isExposable(context) && (metadata as? PreferenceAvailabilityProvider)?.isAvailable(context) ?: true
         return if (allowedRead) {
             if (metadata.valueType == String::class.java) {
                 // We should be smarter here and only mark external if the data is
