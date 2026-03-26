@@ -36,7 +36,7 @@ class BluetoothDashboardScreenApi :
         key = KEY,
         topLevelSettingsCategory = Category.CONNECTED_DEVICES,
         fragment = BluetoothDashboardFragment::class,
-        purpose = R.string.bluetooth_switchbar_screen_purpose,
+        purpose = R.string.bluetooth_switchbar_screen_purpose_api,
         alreadyPartiallyMigrated = BluetoothDashboardScreen::class,
     ) {
 

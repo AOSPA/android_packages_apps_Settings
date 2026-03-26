@@ -47,8 +47,7 @@ class MobileNetworkScreenApi :
         key = KEY,
         topLevelSettingsCategory = Category.NETWORK,
         fragment = MobileNetworkSettings::class,
-        // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
-        purpose = R.string.mobile_network_pref_screen_purpose,
+        purpose = R.string.mobile_network_pref_screen_purpose_api,
         alreadyPartiallyMigrated = MobileNetworkScreen::class,
     ) {
 

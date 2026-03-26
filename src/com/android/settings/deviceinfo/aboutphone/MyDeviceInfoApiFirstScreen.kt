@@ -49,7 +49,7 @@ class MyDeviceInfoApiFirstScreen :
         key = KEY,
         topLevelSettingsCategory = Category.ABOUT_DEVICE,
         fragment = MyDeviceInfoFragment::class,
-        purpose = R.string.my_device_info_pref_screen_purpose,
+        purpose = R.string.my_device_info_pref_screen_purpose_api,
         alreadyPartiallyMigrated = MyDeviceInfoScreen::class,
     ) {
     init {
