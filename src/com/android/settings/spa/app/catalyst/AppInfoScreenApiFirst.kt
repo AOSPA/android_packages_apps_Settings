@@ -95,7 +95,7 @@ class AppInfoScreenApiFirst :
     init {
         flag { Flags.catalystMigration26q2() }
 
-        tags("getAppsDeviceState")
+        tags(APP_FUNCTION_NONE)
 
         parameters {
             parameter(

@@ -753,7 +753,6 @@ private fun getCatalystScreenConfigs() =
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = StylusUsiDetailsApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothDashboardScreenApi.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = AppInfoScreenApiFirst.KEY, appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS)),
         PerScreenCatalystConfig(enabled = true, screenKey = CellularSecurityScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationSettingsScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = LocationServicesScreenApi.KEY),
