@@ -1526,6 +1526,10 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"‏رقمَا التعريف الشخصي غير متطابقَين. يُرجى تأكيد رقم التعريف الشخصي الجديد لشريحة SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"رقم التعريف الشخصي غير صحيح. عدد المحاولات المتبقّية: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"‏يجب إدخال رقم التعريف الشخصي الحالي لشريحة SIM"</string>
+    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
+    <skip />
+    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"هل تريد بيانات الجوّال من <xliff:g id="CARRIER">%1$s</xliff:g>؟"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"أنت تستخدم <xliff:g id="CARRIER2_0">%2$s</xliff:g> للاتصال ببيانات الجوّال. عند التبديل إلى <xliff:g id="CARRIER1">%1$s</xliff:g>، لن يتم استخدام <xliff:g id="CARRIER2_1">%2$s</xliff:g> مرة أخرى للاتصال ببيانات الجوّال."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"استخدام <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2135,15 +2139,13 @@
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"عرض مفتاح التحكّم في لوحة المفاتيح"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"يمكنك السماح بعرض مفتاح التحكّم في لوحة المفاتيح على شريط التنقّل عند اختيار حقل إدخال"</string>
     <string name="keyboard_apps_category" msgid="1715169176659877658">"تطبيقات لوحة المفاتيح"</string>
-    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
-    <skip />
+    <string name="keyboard_apps_category_summary" msgid="6676804967286517009">"إعدادات اللغة والتطبيقات في <xliff:g id="KEYBOARD_APPS_LIST">%1$s</xliff:g>"</string>
     <string name="keywords_keyboard_apps" msgid="895860348178301718">"Gboard"</string>
     <string name="available_keyboard_apps_category" msgid="7665966484500890112">"تطبيقات لوحة المفاتيح المتاحة"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"الخيارات"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"تسهيل الاستخدام"</string>
     <string name="physical_keyboard_title" msgid="6597340453841961909">"لوحات المفاتيح الخارجية"</string>
-    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
-    <skip />
+    <string name="physical_keyboard_summary" msgid="2751015358747795398">"إعدادات الأجهزة في <xliff:g id="PHYSICAL_KEYBOARDS_LIST">%1$s</xliff:g>"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"أداة اختيار تخطيط لوحة المفاتيح"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"تجاهُل النقرات المتكرّرة"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"لتجاهُل الضغطات المتكرّرة بسرعة على المفتاح نفسه"</string>
@@ -2206,19 +2208,31 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"يمكنك تخصيص الإجراءات التي يمكن تفعيلها من خلال أزرار ذراع التحكّم"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"الأزرار"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"الاتجاهات"</string>
-    <string name="game_controller_button_a" msgid="2138420373137111774">"‏الزرّ A"</string>
-    <string name="game_controller_button_b" msgid="2093089857164437480">"‏الزرّ B"</string>
-    <string name="game_controller_button_x" msgid="3428801081204194655">"‏الزرّ X"</string>
-    <string name="game_controller_button_y" msgid="4596061542299533516">"‏الزرّ Y"</string>
-    <string name="game_controller_button_l1" msgid="4428713182602902434">"‏الزرّ L1"</string>
-    <string name="game_controller_button_r1" msgid="6271978600831912659">"‏الزرّ R1"</string>
-    <string name="game_controller_button_l2" msgid="4168716287264803566">"‏الزرّ L2"</string>
-    <string name="game_controller_button_r2" msgid="4361909018228151006">"‏الزرّ R2"</string>
-    <string name="game_controller_button_thumbl" msgid="609311480262927654">"النقر على عصا التحكّم اليسرى"</string>
-    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"النقر على عصا التحكّم اليمنى"</string>
+    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
+    <skip />
     <string name="game_controller_dpad" msgid="5352745621298140827">"لوحة التحكم"</string>
-    <string name="game_controller_stick_left" msgid="1591700901162153956">"عصا التحكّم اليسرى"</string>
-    <string name="game_controller_stick_right" msgid="1418791636252375110">"عصا التحكّم اليمنى"</string>
+    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
+    <skip />
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"إعادة الضبط على الإعدادات التلقائية"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"إعادة الضبط على الإعدادات التلقائية؟"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"ستتم إعادة ضبط جميع إعدادات وحدة التحكّم على الإعدادات التلقائية"</string>
@@ -2555,8 +2569,7 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"مفتاحا مستوى الصوت"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"اضغط مع الاستمرار على مفتاحَي مستوى الصوت"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"النقر ثلاث مرّات"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (387169602299548488) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="387169602299548488">"عليك النقر على الشاشة 3 مرات بسرعة. قد يؤدي ذلك إلى إبطاء جهازك."</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"النقر ثلاث مرّات"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"اختصارات لوحة المفاتيح"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"يمكنك الضغط على <xliff:g id="ID_1">%1$s</xliff:g> + ‏<xliff:g id="ID_2">%2$s</xliff:g> + ‏<xliff:g id="ID_3">%3$s</xliff:g> لاستخدام \"<xliff:g id="ID_4">%4$s</xliff:g>\""</string>
@@ -4631,8 +4644,7 @@
     <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"السؤال في كل مرّة"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"السماح دومًا"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"عدم السماح"</string>
     <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
@@ -4640,22 +4652,18 @@
     <skip />
     <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"تمت إزالة التطبيق"</string>
     <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{تم السماح بتطبيق واحد}zero{تم السماح بـ # تطبيق}two{تم السماح بتطبيقَين}few{تم السماح بـ # تطبيقات}many{تم السماح بـ # تطبيقًا}other{تم السماح بـ # تطبيق}}"</string>
     <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
     <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"لم يتم السماح لأي تطبيقات"</string>
     <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"المساعد الرقمي التلقائي"</string>
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
@@ -5770,13 +5778,11 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"السماح بالشبكات المشفَّرة فقط"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"إجراء أكثر أمانًا، ولكن قد يؤدي إلى الحد من إمكانية الاتصال بشبكة الجوّال في بعض المواقع الجغرافية، ويُسمح بإجراء مكالمات الطوارئ دائمًا"</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"إيقاف ميزة \"الحماية من شبكات الجيل الثاني\"؟"</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (7888326960588858860) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"تتسم شبكات الجيل الثاني بمستوى أمان أقل، وسيؤدي إيقاف هذا الخيار إلى تعريض مكالماتك ورسائلك وبياناتك لخطر الاختراق أو السرقة"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"إيقاف"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"الحماية من شبكات الجيل الثاني"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"ميزة \"الحماية من شبكات الجيل الثاني\" مفعَّلة"</string>
-    <!-- no translation found for network_protection_2g_on_notification_summary (2865716658412002901) -->
-    <skip />
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"يمكنك إيقاف هذا الخيار في \"الإعدادات\"، ولكن شبكة الجيل الثاني أقل أمانًا وقد تعرّض بياناتك للخطر"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"الإعدادات"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"جميع الخدمات"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"إظهار الوصول إلى الحافظة"</string>
@@ -5858,12 +5864,9 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"إلغاء تثبيت التطبيق"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{التطبيقات التي تم تثبيتها خلال آخر شهر}zero{التطبيقات التي تم تثبيتها خلال آخر # شهر}two{التطبيقات التي تم تثبيتها خلال آخر شهرَين}few{التطبيقات التي تم تثبيتها خلال آخر # شهور}many{التطبيقات التي تم تثبيتها خلال آخر # شهرًا}other{التطبيقات التي تم تثبيتها خلال آخر # شهر}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{التطبيقات التي تم تثبيتها قبل أكثر من شهر واحد}zero{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}two{التطبيقات التي تم تثبيتها قبل أكثر من شهرَين}few{التطبيقات التي تم تثبيتها قبل أكثر من # شهور}many{التطبيقات التي تم تثبيتها قبل أكثر من # شهرًا}other{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}}"</string>
-    <!-- no translation found for ai_assist_category (6800674613544630195) -->
-    <skip />
-    <!-- no translation found for personal_context_title (6639623956831710453) -->
-    <skip />
-    <!-- no translation found for personal_context_switch_summary (917644125592480347) -->
-    <skip />
+    <string name="ai_assist_category" msgid="6800674613544630195">"الدعم الذكي"</string>
+    <string name="personal_context_title" msgid="6639623956831710453">"المساعدة الاستباقية"</string>
+    <string name="personal_context_switch_summary" msgid="917644125592480347">"يمكنك اختيار ما إذا كان بإمكان هذا التطبيق المساهمة بمعلومات لإنشاء اقتراحات"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"نسبة العرض إلى الارتفاع"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"جرِّب نسبة عرض إلى ارتفاع جديدة لعرض هذا التطبيق في حال لم يكن مصمّمًا ليلائم \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"جرِّب نسبة عرض إلى ارتفاع جديدة لعرض هذا التطبيق في حال لم يكن مصمّمًا ليلائم \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". قد لا تتوافق بعض التطبيقات مع نِسب عرض إلى ارتفاع محدَّدة."</string>
