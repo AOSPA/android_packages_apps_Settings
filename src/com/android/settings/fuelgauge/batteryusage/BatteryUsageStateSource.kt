@@ -67,10 +67,9 @@ class BatteryUsageStateSource :
             DataProcessManager.getBatteryLevelData(
                 context,
                 null,
-                UserIdsSeries(context, /* isNonUIRequest= */ false),
+                UserIdsSeries(context, /* isNonUIRequest= */ false, /* excludeProfiles= */ true),
                 /* isFromPeriodJob= */ false,
-                this,
-            )
+                this,            )
         batteryLevelDataFlow.value = batteryLevelData
 
         Log.d(TAG, "Wait for state flow ready...")
