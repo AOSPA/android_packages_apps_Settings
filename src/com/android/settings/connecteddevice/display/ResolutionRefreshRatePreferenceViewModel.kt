@@ -230,8 +230,8 @@ constructor(
             logDebug("$mode width is above the allowed limit")
             return false
         }
-        val adjXDpi = currentActivePhysicalWidth * physicalXDpi / mode.physicalWidth
-        val adjYDpi = currentActivePhysicalHeight * physicalYDpi / mode.physicalHeight
+        val adjXDpi = mode.physicalWidth * physicalXDpi / currentActivePhysicalWidth
+        val adjYDpi = mode.physicalHeight * physicalYDpi / currentActivePhysicalHeight
 
         val densityForMode =
             DisplayDensityConfiguration.calculateBaseDensity(
