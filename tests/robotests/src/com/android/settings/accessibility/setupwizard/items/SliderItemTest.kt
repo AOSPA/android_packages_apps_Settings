@@ -18,6 +18,7 @@ package com.android.settings.accessibility.setupwizard.items
 
 import android.content.Context
 import android.view.HapticFeedbackConstants.CLOCK_TICK
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import androidx.test.core.app.ApplicationProvider
@@ -27,6 +28,8 @@ import com.google.common.truth.Truth.assertThat
 import com.google.testing.junit.testparameterinjector.TestParameters
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.kotlin.any
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.never
@@ -121,6 +124,48 @@ class SliderItemTest {
         } else {
             verify(spySlider, never()).performHapticFeedback(CLOCK_TICK)
         }
+    }
+
+    @TestParameters(
+        value =
+            [
+                "{keyCode: ${KeyEvent.KEYCODE_DPAD_LEFT}}",
+                "{keyCode: ${KeyEvent.KEYCODE_DPAD_RIGHT}}",
+            ]
+    )
+    @Test
+    fun onKey_validNavigation_updatesSlider(keyCode: Int) {
+        val spySlider = spy(rootView.findViewById<Slider>(R.id.slider))
+        item.adjustable = true
+        item.onBindView(rootView)
+        spySlider.requestFocus()
+
+        val event = KeyEvent(KeyEvent.ACTION_DOWN, keyCode)
+        val handled = spySlider.dispatchKeyEvent(event)
+
+        assertThat(handled).isTrue()
+        verify(spySlider).onKeyDown(keyCode, event)
+    }
+
+    @TestParameters(
+        value =
+            [
+                "{keyCode: ${KeyEvent.KEYCODE_DPAD_LEFT}}",
+                "{keyCode: ${KeyEvent.KEYCODE_DPAD_RIGHT}}",
+            ]
+    )
+    @Test
+    fun onKey_invalidScenarios_ignoresEvent(keyCode: Int) {
+        val spySlider = spy(rootView.findViewById<Slider>(R.id.slider))
+        item.adjustable = true
+        item.onBindView(rootView)
+        spySlider.requestFocus()
+
+        val event = KeyEvent(KeyEvent.ACTION_UP, keyCode)
+        val handled = spySlider.dispatchKeyEvent(event)
+
+        assertThat(handled).isFalse()
+        verify(spySlider, never()).onKeyDown(anyInt(), any())
     }
 
     @Test
