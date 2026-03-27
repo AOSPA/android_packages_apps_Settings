@@ -33,6 +33,14 @@ public class ShadowWifiDppUtils {
     private static boolean sShowLockScreenCalled = false;
 
     /**
+     * Shadow implementation of {@link WifiDppUtils#showLockScreen}.
+     */
+    @Implementation
+    public static void showLockScreen(Context context, Runnable callback) {
+        sShowLockScreenCalled = true;
+    }
+
+    /**
      * Shadow implementation of {@link WifiDppUtils#showLockScreenForWifiSharing}.
      */
     @Implementation
@@ -41,7 +49,8 @@ public class ShadowWifiDppUtils {
     }
 
     /**
-     * Returns whether {@link WifiDppUtils#showLockScreenForWifiSharing} has been called.
+     * Returns whether {@link WifiDppUtils#showLockScreen} or
+     * {@link WifiDppUtils#showLockScreenForWifiSharing} has been called.
      */
     public static boolean wasShowLockScreenCalled() {
         return sShowLockScreenCalled;
