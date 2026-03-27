@@ -48,7 +48,8 @@ open class AirplaneModeSettingsScreen(context: Context) :
     PrimarySwitchPreferenceBinding,
     // Placeholder not needed once NetworkDashboardScreen provides the complete preferenceHierarchy.
     PreferenceBindingPlaceholder {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA)
+    // UI only as this points at the network_provider_and_internet_screen screen.
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA, UI_ONLY_PREFERENCE)
 
     override val sensitivityLevel
         get() = SensitivityLevel.MUST_PROVIDE_UNDO
