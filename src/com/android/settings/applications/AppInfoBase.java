@@ -58,6 +58,7 @@ import com.android.settings.applications.manageapplications.ManageApplications;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
+import com.android.settings.utils.HsuUtils;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.applications.ApplicationsState;
 import com.android.settingslib.applications.ApplicationsState.AppEntry;
@@ -209,6 +210,12 @@ public abstract class AppInfoBase extends SettingsPreferenceFragment
             return "";
         }
         mAppEntry = mState.getEntry(mPackageName, mUserId);
+        if (mAppEntry != null && android.multiuser.Flags.hsuAppManagement()
+                && !HsuUtils.canControlHsuApp(getContext(), mAppEntry.info)) {
+            Log.w(TAG, "Non-admin user cannot open App info page for HSU app.");
+            finish();
+            return "";
+        }
         if (mAppEntry != null) {
             // Get application info again to refresh changed properties of application
             try {
