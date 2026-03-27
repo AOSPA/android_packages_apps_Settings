@@ -70,10 +70,14 @@ public interface PowerUsageFeatureProvider {
     long getBatteryUsageResetErrorTimeThresholdMs();
 
     /**
-     * Returns a threshold (mA) for the unexpected reset error detected in the app battery usage
-     * consume power.
+     * Returns a threshold (mA) for the unexpected app battery usage consumed power reset.
      */
     double getBatteryUsageResetErrorPowerThreshold();
+
+    /**
+     * Returns a threshold (mA) for the unexpected app battery usage consumed power reset.
+     */
+    double getBatteryUsageOverCalcPowerDrainThreshold();
 
     /** Returns an allowlist of app names combined into the system-apps item */
     List<String> getSystemAppsAllowlist();

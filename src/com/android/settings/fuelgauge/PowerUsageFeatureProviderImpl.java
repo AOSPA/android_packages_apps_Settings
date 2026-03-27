@@ -134,6 +134,11 @@ public class PowerUsageFeatureProviderImpl implements PowerUsageFeatureProvider 
     }
 
     @Override
+    public double getBatteryUsageOverCalcPowerDrainThreshold() {
+        return Double.MAX_VALUE;
+    }
+
+    @Override
     public List<String> getSystemAppsAllowlist() {
         return new ArrayList<>();
     }
