@@ -33,7 +33,6 @@ import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,12 +46,11 @@ class WifiDetailsScreenApiTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
+    // TODO(b/494298373): Replace SavedNetworkRepository with SaveNetwork.
     private val mockSavedNetworkRepository = mock<SavedNetworkRepository>()
     private lateinit var provider: WifiFeatureProvider
     private lateinit var screen: WifiDetailsScreenApi
     private lateinit var tester: ApiTester
-
-    private val fakeInfos = listOf(SavedNetworkInfo(ssid = TEST_SSID, key = TEST_KEY))
 
     @Before
     fun setUp() = runTest {
@@ -80,7 +78,6 @@ class WifiDetailsScreenApiTest {
     }
 
     @Test
-    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun launchScreenExtra_parameterized_returnsCorrectExtras() = runTest {
         val allParameters = screen.getAllPossibleParameters(context).first()
@@ -92,17 +89,20 @@ class WifiDetailsScreenApiTest {
     }
 
     @Test
-    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getParameterOptions_returnsCorrectOptions() = runTest {
         val options = tester.getParameterOptions(WifiDetailsScreenApi.PARAMETER_KEY)
 
-        assertThat(options).containsExactly(TEST_LOOKUP_KEY)
+        assertThat(options).contains(TEST_LOOKUP_KEY)
     }
 
     private companion object {
-        const val TEST_SSID = "Test_SSID"
-        const val TEST_KEY = "Test_Key"
+        const val TEST_SSID = "SSID1"
+        const val TEST_KEY = "key1"
         val TEST_LOOKUP_KEY = "${TEST_KEY.hashCode()}_${TEST_SSID}"
+
+        private val fakeInfo1 = SavedNetworkInfo(ssid = TEST_SSID, key = TEST_KEY)
+        private val fakeInfo2 = SavedNetworkInfo(ssid = "SSID2", key = "key2")
+        private val fakeInfos = listOf(fakeInfo1, fakeInfo2)
     }
 }

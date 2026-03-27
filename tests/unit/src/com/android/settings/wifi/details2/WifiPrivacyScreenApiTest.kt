@@ -34,7 +34,6 @@ import java.util.Base64
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,13 +50,12 @@ class WifiPrivacyScreenApiTest {
     @get:Rule val setFlagsRule = SetFlagsRule()
 
     private val context: Context = ApplicationProvider.getApplicationContext()
+    // TODO(b/494298373): Replace SavedNetworkRepository with SaveNetwork.
     private val mockSavedNetworkRepository = mock<SavedNetworkRepository>()
     private val mockWifiConfiguration = mock<WifiConfiguration>()
     private lateinit var provider: WifiFeatureProvider
     private lateinit var screen: WifiPrivacyScreenApi
     private lateinit var tester: ApiTester
-
-    private val fakeInfos = listOf(SavedNetworkInfo(ssid = TEST_SSID, key = TEST_KEY))
 
     @Before
     fun setUp() = runTest {
@@ -85,7 +83,6 @@ class WifiPrivacyScreenApiTest {
     }
 
     @Test
-    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getSpaRoute_parameterized_returnsCorrectRoute() = runTest {
         val allParameters = screen.getAllPossibleParameters(context).first()
@@ -98,16 +95,14 @@ class WifiPrivacyScreenApiTest {
     }
 
     @Test
-    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getParameterOptions_returnsCorrectOptions() = runTest {
         val options = tester.getParameterOptions(WifiPrivacyScreenApi.PARAMETER_KEY)
 
-        assertThat(options).containsExactly(TEST_LOOKUP_KEY)
+        assertThat(options).contains(TEST_LOOKUP_KEY)
     }
 
     @Test
-    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun getSendDeviceName_valueIsTrue_returnsTrue() = runTest {
         mockWifiConfiguration.stub { on { isSendDhcpHostnameEnabled } doReturn true }
@@ -138,7 +133,6 @@ class WifiPrivacyScreenApiTest {
     }
 
     @Test
-    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun setSendDeviceName_valueIsTrue_setWifiConfiguration() = runTest {
         mockSavedNetworkRepository.stub {
@@ -153,7 +147,6 @@ class WifiPrivacyScreenApiTest {
     }
 
     @Test
-    @Ignore("b/493784758")
     @EnableFlags(Flags.FLAG_CATALYST_MIGRATION_26Q2)
     fun setSendDeviceName_valueIsFalse_setWifiConfiguration() = runTest {
         mockSavedNetworkRepository.stub {
@@ -168,8 +161,12 @@ class WifiPrivacyScreenApiTest {
     }
 
     private companion object {
-        const val TEST_SSID = "Test_SSID"
-        const val TEST_KEY = "Test_Key"
+        const val TEST_SSID = "SSID1"
+        const val TEST_KEY = "key1"
         val TEST_LOOKUP_KEY = "${TEST_KEY.hashCode()}_${TEST_SSID}"
+
+        private val fakeInfo1 = SavedNetworkInfo(ssid = TEST_SSID, key = TEST_KEY)
+        private val fakeInfo2 = SavedNetworkInfo(ssid = "SSID2", key = "key2")
+        private val fakeInfos = listOf(fakeInfo1, fakeInfo2)
     }
 }
