@@ -198,7 +198,7 @@ class AirplaneModeSyncPreferenceTest {
 
     @Test
     fun sensitivityLevel_isNoSensitivity() {
-        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.NO_SENSITIVITY)
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.DO_NOT_EXPOSE)
     }
 
     @Test

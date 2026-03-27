@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 import com.google.android.material.slider.Slider
@@ -41,6 +42,9 @@ import kotlin.math.roundToInt
 /** Preference for adjusting the audio balance between left and right channels. */
 class AudioBalancePreference(context: Context) :
     IntRangeValuePreference, SliderPreferenceBinding {
+
+    // b/494214799
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     private val dataStore by lazy { AudioBalanceDataStore(context) }
 

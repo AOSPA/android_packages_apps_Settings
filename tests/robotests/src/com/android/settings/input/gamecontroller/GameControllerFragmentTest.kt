@@ -868,6 +868,51 @@ class GameControllerFragmentTest {
         }
     }
 
+    @Test
+    fun onLaunch_contentDescriptionIsSet_andUpdatesAfterRemapping() {
+        val device = createFakeController(1, "Test Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val preference =
+                fragment.findPreference<GameControllerRemappingPreference>("controller_button_a")!!
+            // Check that content description is set correctly on launch
+            assertThat(preference.summaryView!!.contentDescription)
+                .isEqualTo(
+                    context.getString(
+                        R.string.game_controller_remapping_preference_content_description,
+                        context.getString(R.string.game_controller_button_a),
+                    )
+                )
+
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_a",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_b",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+            ShadowLooper.idleMainLooper()
+
+            assertThat(preference.summaryView!!.contentDescription)
+                .isEqualTo(
+                    context.getString(
+                        R.string.game_controller_remapping_preference_content_description,
+                        context.getString(R.string.game_controller_button_b),
+                    )
+                )
+        }
+    }
+
     private fun createFakeController(deviceId: Int, name: String): InputDevice {
         return InputDevice.Builder()
             .setSources(InputDevice.SOURCE_GAMEPAD or InputDevice.SOURCE_JOYSTICK)

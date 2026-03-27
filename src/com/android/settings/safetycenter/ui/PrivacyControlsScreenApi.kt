@@ -52,7 +52,7 @@ class PrivacyControlsScreenApi :
         ) {
             sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
-            preconditions(R.string.sensor_toggle_unsupported) {
+            preconditions("The device must support the camera sensor toggle.") {
                 val helper = SensorPrivacyManagerHelper.getInstance(context)!!
                 if (helper.supportsSensorToggle(SensorPrivacyManager.Sensors.CAMERA)) {
                     Allowed
@@ -82,7 +82,7 @@ class PrivacyControlsScreenApi :
         ) {
             sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
-            preconditions(R.string.sensor_toggle_unsupported) {
+            preconditions("The device must support the microphone sensor toggle.") {
                 val helper = SensorPrivacyManagerHelper.getInstance(context)!!
                 if (helper.supportsSensorToggle(SensorPrivacyManager.Sensors.MICROPHONE)) {
                     Allowed
@@ -158,72 +158,6 @@ class PrivacyControlsScreenApi :
                     )
                 }
             }
-        }
-
-        // Health Connect deeplink
-        preference(
-            key = "health_connect",
-            purpose = R.string.health_connect_purpose,
-            type = AnyBoolean,
-        ) {
-            preconditions(R.string.safety_source_unavailable) {
-                if (isSafetySourceVisible(context, "AndroidHealthConnect")) {
-                    Allowed
-                } else {
-                    Custom(
-                        R.string.safety_source_unavailable,
-                        stability = PreconditionStability.UNSTABLE,
-                    )
-                }
-            }
-            get { execute { true } }
-        }
-
-        // App function access deeplink
-        preference(
-            key = "app_function_access",
-            purpose = R.string.app_function_access_purpose,
-            type = AnyBoolean,
-        ) {
-            preconditions(R.string.safety_source_unavailable) {
-                if (isSafetySourceVisible(context, "AndroidAppFunctionAccess")) {
-                    Allowed
-                } else {
-                    Custom(
-                        R.string.safety_source_unavailable,
-                        stability = PreconditionStability.UNSTABLE,
-                    )
-                }
-            }
-            get { execute { true } }
-        }
-
-        // Data sharing updates for location deeplink
-        preference(
-            key = "location_data_sharing_updates",
-            purpose = R.string.location_data_sharing_updates_purpose,
-            type = AnyBoolean,
-        ) {
-            preconditions(R.string.safety_source_unavailable) {
-                if (isSafetySourceVisible(context, "AndroidPrivacyAppDataSharingUpdates")) {
-                    Allowed
-                } else {
-                    Custom(
-                        R.string.safety_source_unavailable,
-                        stability = PreconditionStability.UNSTABLE,
-                    )
-                }
-            }
-            get { execute { true } }
-        }
-
-        // Location access deeplink
-        preference(
-            key = "privacy_location_access",
-            purpose = R.string.privacy_location_access_purpose,
-            type = AnyBoolean,
-        ) {
-            get { execute { true } }
         }
     }
 

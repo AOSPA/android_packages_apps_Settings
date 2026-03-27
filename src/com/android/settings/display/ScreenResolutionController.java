@@ -139,4 +139,4 @@ public class ScreenResolutionController extends BasePreferenceController {
         return mDisplay.getSupportedModes();
     }
 }
-// LINT.ThenChange(ScreenResolutionApiScreen.kt)
+// LINT.ThenChange(ScreenResolutionApiScreen.kt, ScreenResolutionExtensions.kt)

@@ -98,8 +98,8 @@ class AndroidApiStateProviderExecutor(private val context: Context) : DeviceStat
                 .map { provider ->
                     async {
                         try {
-                            withTimeout(PER_SCREEN_TIMEOUT_MS) {
-                                semaphore.withPermit {
+                            semaphore.withPermit {
+                                withTimeout(PER_SCREEN_TIMEOUT_MS) {
                                     val providerName = provider::class.simpleName
                                     try {
                                         Log.v(TAG, "Getting device state from $providerName")

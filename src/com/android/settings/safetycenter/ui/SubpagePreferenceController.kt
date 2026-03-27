@@ -160,16 +160,27 @@ open class SubpagePreferenceController(context: Context, preferenceKey: String) 
         relatedSafetySourcesData: List<SafetyCenterEntry>,
         relatedIssueOnlySafetySourcesData: List<SafetyCenterIssue>,
     ): Int? {
-        val maxEntrySeverity = relatedSafetySourcesData.maxOfOrNull { it.severityLevel }
-        val maxIssueOnlySeverity =
-            relatedIssueOnlySafetySourcesData.maxOfOrNull { toEntrySeverityLevel(it.severityLevel) }
+        val entrySeverities = relatedSafetySourcesData.map { it.severityLevel }
+        val issueSeverities = relatedIssueOnlySafetySourcesData.map { toEntrySeverityLevel(it.severityLevel) }
 
-        return when {
-            maxEntrySeverity == null && maxIssueOnlySeverity == null -> null
-            maxEntrySeverity == null -> maxIssueOnlySeverity
-            maxIssueOnlySeverity == null -> maxEntrySeverity
-            else -> max(maxEntrySeverity, maxIssueOnlySeverity)
+        val allSeverities = entrySeverities + issueSeverities
+
+        return allSeverities.reduceOrNull { acc, severity -> mergeSeverities(acc, severity) }
+    }
+
+    private fun mergeSeverities(left: Int, right: Int): Int {
+        // Rule 1: Warnings and Recommendations always win
+        if (left > SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK || right > SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK) {
+            return max(left, right)
         }
+
+        // Rule 2: If there are no warnings/recommendations, UNKNOWN trumps OK
+        if (left == SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN || right == SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN) {
+            return SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN
+        }
+
+        // Rule 3: Fallback to standard math for remaining cases (e.g., OK vs UNSPECIFIED)
+        return max(left, right)
     }
 
     private fun getRelatedSafetySourcesData(data: SafetyCenterUiData): List<SafetyCenterEntry> {

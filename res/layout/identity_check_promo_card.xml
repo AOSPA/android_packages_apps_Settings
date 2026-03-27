@@ -14,20 +14,18 @@
   limitations under the License.
   -->
 
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:androidprv="http://schemas.android.com/apk/prv/res/android"
     android:id="@+id/bottom_sheet"
-    android:padding="24dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="24dp"
         android:fillViewport="true">
         <LinearLayout
             android:id="@+id/scrollableLayout"
@@ -36,7 +34,7 @@
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/illustration"
-                android:paddingTop="24dp"
+                android:paddingTop="32dp"
                 android:gravity="center_horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,21 +47,34 @@
                 android:textColor="@color/materialColorOnSurface"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:paddingTop="24dp"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:text="@string/identity_check_promo_card_title"/>
 
             <TextView
                 android:id="@+id/summary"
-                android:textAppearance="@style/TextAppearance.SettingsLib.BodySmall"
+                android:textAppearance="@style/TextAppearance.SettingsLib.BodyMedium"
                 android:textColor="@color/materialColorOnSurfaceVariant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:orientation="vertical"
+                android:textColorLink="@color/materialColorPrimary"
                 android:text="@string/identity_check_promo_card_summary"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="top|end"
+        android:src="@drawable/ic_close"
+        android:contentDescription="@string/dismiss"
+        android:tint="@color/materialColorOnSurfaceVariant"
+    android:background="@drawable/identity_check_promo_card_close_button_background"/>
+</FrameLayout>
