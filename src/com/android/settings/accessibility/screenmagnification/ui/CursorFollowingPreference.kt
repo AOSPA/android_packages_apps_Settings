@@ -170,7 +170,7 @@ class CursorFollowingPreference :
         get() = SensitivityLevel.NO_SENSITIVITY
 
     private fun isMagnificationCursorFollowingModeDialogSupported(): Boolean {
-        return InputPeripheralsSettingsUtils.isMouse()
+        return InputPeripheralsSettingsUtils.isMouse() || InputPeripheralsSettingsUtils.isTouchpad()
     }
 
     companion object {

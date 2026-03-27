@@ -70,4 +70,15 @@ public class MouseSettingsControllerTest {
         assertThat(mController.getAvailabilityStatus())
                 .isEqualTo(BasePreferenceController.AVAILABLE);
     }
+
+    @Test
+    public void getAvailabilityStatus_isTouchpad_returnsUnavailable() {
+        int deviceId = 1;
+        InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
+                InputDevice.SOURCE_MOUSE | InputDevice.SOURCE_TOUCHPAD);
+        ShadowInputDevice.addDevice(deviceId, device);
+
+        assertThat(mController.getAvailabilityStatus())
+                .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE);
+    }
 }
