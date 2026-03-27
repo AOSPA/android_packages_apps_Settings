@@ -22,7 +22,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.widget.Button;
+
+import com.android.settings.SidecarFragment;
+import com.android.settings.network.EnableMultiSimSidecar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,11 +41,16 @@ import com.android.settings.network.telephony.MobileNetworkUtils;
 import com.android.settings.system.ResetDashboardFragment;
 
 public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment implements
-        DialogInterface.OnClickListener {
+        DialogInterface.OnClickListener, SidecarFragment.Listener {
 
     public static final String TAG = "EraseEuiccDataDlg";
     private static final String PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK =
             "com.android.settings.network";
+
+    private static final int NUM_OF_SIMS_FOR_DSDS = 2;
+    private EnableMultiSimSidecar mEnableMultiSimSidecar;
+    private TelephonyManager mTelephonyManager;
+    private Context mAppContext;
 
     public static void show(ResetDashboardFragment host) {
         if (host.getActivity() == null) {
@@ -60,13 +70,49 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.reset_esim_title)
-                .setMessage(R.string.reset_esim_desc)
-                .setPositiveButton(R.string.erase_sim_confirm_button, this)
-                .setNegativeButton(R.string.cancel, null)
-                .setOnDismissListener(this)
-                .create();
+        mTelephonyManager = getContext() != null ? getContext().
+                getSystemService(TelephonyManager.class) : null;
+        if (getActivity() != null) {
+            mEnableMultiSimSidecar = EnableMultiSimSidecar.get(getActivity().getFragmentManager());
+        }
+
+        // {{ changed: keep a reference and override positive button click }}
+        AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
+            .setTitle(R.string.reset_esim_title)
+            .setMessage(R.string.reset_esim_desc)
+            .setPositiveButton(R.string.erase_sim_confirm_button, null)
+            .setNegativeButton(R.string.cancel, (d, w) -> d.dismiss())
+            .create();
+
+    alertDialog.setCanceledOnTouchOutside(false);
+
+    alertDialog.setOnShowListener(dlg -> {
+        Button positive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        positive.setOnClickListener(v -> {
+            onClick(alertDialog, DialogInterface.BUTTON_POSITIVE);
+            // do NOT dismiss here; dismiss only after SUCCESS/ERROR or after starting wipe
+        });
+    });
+
+    return alertDialog;
+    }
+
+    @Override
+    public void onResume() {
+        Log.i(TAG, "onResume()");
+        super.onResume();
+        if (mEnableMultiSimSidecar != null) {
+            mEnableMultiSimSidecar.addListener(this);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        Log.i(TAG, "onPause()");
+        if (mEnableMultiSimSidecar != null) {
+            mEnableMultiSimSidecar.removeListener(this);
+        }
+        super.onPause();
     }
 
     @Override
@@ -76,14 +122,54 @@ public class EraseEuiccDataDialogFragment extends InstrumentedDialogFragment imp
             Log.e(TAG, "getTargetFragment return unexpected type");
         }
 
-        if (which == DialogInterface.BUTTON_POSITIVE) {
+        if (which == DialogInterface.BUTTON_POSITIVE && mTelephonyManager != null &&
+                mTelephonyManager.getCardIdForDefaultEuicc() !=
+                TelephonyManager.UNINITIALIZED_CARD_ID) {
             Context context = getContext();
-            MobileNetworkUtils.showLockScreen(context, () -> runAsyncWipe(context));
+            if (context == null) return;
+            mAppContext = context.getApplicationContext();
+
+            // If already DSDS, proceed as before.
+            if (mTelephonyManager.isMultiSimEnabled()) {
+                MobileNetworkUtils.showLockScreen(mAppContext, () -> runAsyncWipe());
+                dismissAllowingStateLoss();
+                return;
+            }
+            // Not DSDS: request DSDS first, then continue in onStateChange(SUCCESS).
+            if (mEnableMultiSimSidecar != null ) {
+                Log.i(TAG, "DSDS not enabled; enabling DSDS before eUICC wipe");
+                mEnableMultiSimSidecar.run(NUM_OF_SIMS_FOR_DSDS);
+            } else {
+                Log.e(TAG, "EnableMultiSimSidecar is null; cannot enable DSDS");
+            }
+        } else {
+            dismissAllowingStateLoss();
         }
     }
 
-    private void runAsyncWipe(Context context) {
-        Runnable runnable = (new ResetNetworkOperationBuilder(context))
+    @Override
+    public void onStateChange(SidecarFragment fragment) {
+        if (!(fragment instanceof EnableMultiSimSidecar)) return;
+
+        EnableMultiSimSidecar sidecar = (EnableMultiSimSidecar) fragment;
+        int state = sidecar.getState();
+
+        if (state == SidecarFragment.State.SUCCESS) {
+            Log.i(TAG, "DSDS enabled successfully; proceeding with eUICC wipe");
+            sidecar.reset();
+            if (mAppContext == null) return;
+            MobileNetworkUtils.showLockScreen(mAppContext, () -> runAsyncWipe());
+
+        // {{ added: now it's safe to close the dialog }}
+        dismissAllowingStateLoss();
+        } else if (state == SidecarFragment.State.ERROR) {
+            Log.e(TAG, "Failed to enable DSDS; cannot proceed with eUICC wipe");
+            sidecar.reset();
+        }
+    }
+
+    private void runAsyncWipe() {
+        Runnable runnable = (new ResetNetworkOperationBuilder(mAppContext))
                 .resetEsim(PACKAGE_NAME_EUICC_DATA_MANAGEMENT_CALLBACK)
                 .build();
         AsyncTask.execute(runnable);
