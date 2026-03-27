@@ -33,6 +33,8 @@ import com.android.settingslib.widget.SettingsThemeHelper
 import com.google.android.setupcompat.util.DelightHelper
 
 const val FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP = -3
+const val FOCUS_INDICATOR_TOP_PADDING_ADJUSTMENT_DP = 6
+const val FOCUS_INDICATOR_BOTTOM_PADDING_ADJUSTMENT_DP = -3
 const val FOCUS_INDICATOR_CORNER_RADIUS_DP = 24
 
 // TODO(b/407080818): Delete this function when we no longer need to adjust the layout
@@ -98,6 +100,16 @@ fun shouldShowFocusRingsInSuw(context: Context): Boolean {
 }
 
 /**
+ * The style of the button to which the focus ring is applied.
+ *
+ * This is used to determine the color of the focus ring.
+ */
+enum class ButtonStyle {
+    PRIMARY,
+    SECONDARY,
+}
+
+/**
  * Applies focus rings and other accessibility settings to a dialog when shown in the Setup Wizard.
  *
  * This function handles applying focus rings to standard buttons and specific custom views (like
@@ -108,8 +120,12 @@ fun shouldShowFocusRingsInSuw(context: Context): Boolean {
  */
 fun configureFocusRingsForDialog(dialog: AlertDialog) {
     // Apply focus rings to standard dialog buttons if they exist.
-    dialog.getButton(DialogInterface.BUTTON_POSITIVE)?.let { applyFocusRingToButton(it) }
-    dialog.getButton(DialogInterface.BUTTON_NEGATIVE)?.let { applyFocusRingToButton(it) }
+    dialog.getButton(DialogInterface.BUTTON_POSITIVE)?.let {
+        applyFocusRingToButton(it, ButtonStyle.PRIMARY)
+    }
+    dialog.getButton(DialogInterface.BUTTON_NEGATIVE)?.let {
+        applyFocusRingToButton(it, ButtonStyle.SECONDARY)
+    }
 
     // Make the button panel not focusable. This is to avoid having the container of the
     // buttons be focusable, which is not an interactive element.
@@ -135,11 +151,21 @@ fun configureFocusRingsForDialog(dialog: AlertDialog) {
     }
 }
 
-private fun applyFocusRingToButton(button: Button) {
+private fun applyFocusRingToButton(button: Button, style: ButtonStyle) {
     button.isSingleLine = false
+    val colorRes =
+        when (style) {
+            ButtonStyle.PRIMARY -> com.android.internal.R.color.materialColorOnPrimary
+            ButtonStyle.SECONDARY -> com.android.internal.R.color.materialColorPrimary
+        }
     button.foreground =
         FocusIndicatorDrawable.Builder(button.context)
             .withHorizontalPaddingAdjustment(FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP)
+            .withVerticalPaddingAdjustments(
+                FOCUS_INDICATOR_TOP_PADDING_ADJUSTMENT_DP,
+                FOCUS_INDICATOR_BOTTOM_PADDING_ADJUSTMENT_DP,
+            )
             .withCornerRadius(FOCUS_INDICATOR_CORNER_RADIUS_DP)
+            .withColorRes(colorRes)
             .build()
 }
