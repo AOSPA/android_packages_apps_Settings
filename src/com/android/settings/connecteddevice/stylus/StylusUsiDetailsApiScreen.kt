@@ -53,7 +53,10 @@ class StylusUsiDetailsApiScreen :
                 purpose = R.string.api_stylus_device_input_id_purpose,
                 required = true,
                 type =
-                    GeneratedParameterType(R.string.api_stylus_device_input_id_type_description) {
+                    GeneratedParameterType(
+                        R.string.api_stylus_device_input_id_type_description,
+                        key = "StylusDeviceInputId",
+                    ) {
                         val inputManager = context.getSystemService(InputManager::class.java)
 
                         inputManager
