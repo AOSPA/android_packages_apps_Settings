@@ -132,9 +132,9 @@ class BrightnessLevelPreference :
         ReadWritePermit.ALLOW
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
-        ReadWritePermit.DISALLOW
+        ReadWritePermit.ALLOW
 
-    override val supportsWrite = false
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
@@ -154,13 +154,22 @@ class BrightnessLevelPreference :
 
         override fun contains(key: String) = key == KEY
 
+        // TODO (b/496853329): migrate to using brighntess unit percentage.
         @Suppress("UNCHECKED_CAST")
         override fun <T : Any> getValue(key: String, valueType: Class<T>) =
             BigDecimal(context.brightnessPercent * 100)
                 .setScale(0, NumberFormat.getPercentInstance().roundingMode)
                 .toInt() as T
 
-        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {}
+        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+            if (value is Int) {
+                context.displayManager.setBrightness(
+                    context.display?.displayId ?: android.view.Display.DEFAULT_DISPLAY,
+                    value.toFloat(),
+                    DisplayManager.BRIGHTNESS_UNIT_PERCENTAGE,
+                )
+            }
+        }
 
         override fun onFirstObserverAdded() {
             SettingsSystemStore.get(context)
