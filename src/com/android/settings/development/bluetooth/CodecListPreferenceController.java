@@ -47,17 +47,17 @@ public class CodecListPreferenceController extends AbstractBluetoothPreferenceCo
     private static final String TAG = "BtExtCodecCtr";
 
     @Nullable private final Callback mCallback;
-    @Nullable protected final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    @Nullable protected final A2dpConfigStore mA2dpConfigStore;
     @Nullable protected ListPreference mListPreference;
 
     public CodecListPreferenceController(
             @NonNull Context context,
             @Nullable Lifecycle lifecycle,
-            @Nullable BluetoothA2dpConfigStore store,
+            @Nullable A2dpConfigStore store,
             @Nullable Callback callback) {
         super(context, lifecycle, store);
         mCallback = callback;
-        mBluetoothA2dpConfigStore = store;
+        mA2dpConfigStore = store;
     }
 
     @Override
@@ -97,8 +97,8 @@ public class CodecListPreferenceController extends AbstractBluetoothPreferenceCo
             return false;
         }
 
-        if (mBluetoothA2dpConfigStore == null) {
-            Log.e(TAG, "onPreferenceChange: Bluetooth A2dp Config Store is null");
+        if (mA2dpConfigStore == null) {
+            Log.e(TAG, "onPreferenceChange: A2dp Config Store is null");
             setupDefaultListPreference();
             return false;
         }
@@ -111,7 +111,7 @@ public class CodecListPreferenceController extends AbstractBluetoothPreferenceCo
         }
 
         BluetoothCodecConfig codecConfig =
-                mBluetoothA2dpConfigStore.createCodecConfig();
+                mA2dpConfigStore.createCodecConfig();
         Log.d(TAG, "onPreferenceChange: setCodecConfigPreference: " + codecConfig.toString());
         bluetoothA2dp.setCodecConfigPreference(activeDevice, codecConfig);
         if (mCallback != null) {
@@ -249,20 +249,20 @@ public class CodecListPreferenceController extends AbstractBluetoothPreferenceCo
             return false;
         }
 
-        if (mBluetoothA2dpConfigStore == null) {
-            Log.e(TAG, "writeConfigurationValues: Bluetooth A2dp Config Store is null");
+        if (mA2dpConfigStore == null) {
+            Log.e(TAG, "writeConfigurationValues: A2dp Config Store is null");
             return false;
         }
 
-        mBluetoothA2dpConfigStore.setCodecType(selectedCodecType);
-        mBluetoothA2dpConfigStore.setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
-        mBluetoothA2dpConfigStore.setSampleRate(
+        mA2dpConfigStore.setCodecType(selectedCodecType);
+        mA2dpConfigStore.setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
+        mA2dpConfigStore.setSampleRate(
                 AbstractBluetoothDialogPreferenceController.getHighestSampleRate(
                         selectedCodecConfig));
-        mBluetoothA2dpConfigStore.setBitsPerSample(
+        mA2dpConfigStore.setBitsPerSample(
                 AbstractBluetoothDialogPreferenceController.getHighestBitsPerSample(
                         selectedCodecConfig));
-        mBluetoothA2dpConfigStore.setChannelMode(
+        mA2dpConfigStore.setChannelMode(
                 AbstractBluetoothDialogPreferenceController.getHighestChannelMode(
                         selectedCodecConfig));
         return true;
@@ -343,16 +343,16 @@ public class CodecListPreferenceController extends AbstractBluetoothPreferenceCo
             Log.e(TAG, "initConfigStore: Current codec config is null.");
             return;
         }
-        if (mBluetoothA2dpConfigStore == null) {
-            Log.e(TAG, "initConfigStore: Bluetooth A2dp Config Store is null.");
+        if (mA2dpConfigStore == null) {
+            Log.e(TAG, "initConfigStore: A2dp Config Store is null.");
             return;
         }
-        mBluetoothA2dpConfigStore.setCodecType(config.getExtendedCodecType());
-        mBluetoothA2dpConfigStore.setSampleRate(config.getSampleRate());
-        mBluetoothA2dpConfigStore.setBitsPerSample(config.getBitsPerSample());
-        mBluetoothA2dpConfigStore.setChannelMode(config.getChannelMode());
-        mBluetoothA2dpConfigStore.setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
-        mBluetoothA2dpConfigStore.setCodecSpecific1Value(config.getCodecSpecific1());
+        mA2dpConfigStore.setCodecType(config.getExtendedCodecType());
+        mA2dpConfigStore.setSampleRate(config.getSampleRate());
+        mA2dpConfigStore.setBitsPerSample(config.getBitsPerSample());
+        mA2dpConfigStore.setChannelMode(config.getChannelMode());
+        mA2dpConfigStore.setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
+        mA2dpConfigStore.setCodecSpecific1Value(config.getCodecSpecific1());
     }
 
     @VisibleForTesting

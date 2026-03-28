@@ -34,7 +34,6 @@ import android.content.Context;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.development.bluetooth.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -61,7 +60,7 @@ public class QualityDialogPreferenceControllerTest {
 
     private QualityDialogPreferenceController mController;
     private QualityDialogPreference mPreference;
-    private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    private A2dpConfigStore mA2dpConfigStore;
     private BluetoothCodecStatus mCodecStatus;
     private BluetoothCodecConfig mCodecConfigAAC;
     private BluetoothCodecConfig mCodecConfigLDAC;
@@ -76,10 +75,10 @@ public class QualityDialogPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mBluetoothA2dpConfigStore = spy(new BluetoothA2dpConfigStore());
+        mA2dpConfigStore = spy(new A2dpConfigStore());
         mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
         mController = new QualityDialogPreferenceController(mContext, mLifecycle,
-                mBluetoothA2dpConfigStore);
+                mA2dpConfigStore);
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = new QualityDialogPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -101,16 +100,16 @@ public class QualityDialogPreferenceControllerTest {
     @Test
     public void writeConfigurationValues_checkSampleRate() {
         mController.writeConfigurationValues(0);
-        verify(mBluetoothA2dpConfigStore).setCodecSpecific1Value(1000);
+        verify(mA2dpConfigStore).setCodecSpecific1Value(1000);
 
         mController.writeConfigurationValues(1);
-        verify(mBluetoothA2dpConfigStore).setCodecSpecific1Value(1001);
+        verify(mA2dpConfigStore).setCodecSpecific1Value(1001);
 
         mController.writeConfigurationValues(2);
-        verify(mBluetoothA2dpConfigStore).setCodecSpecific1Value(1002);
+        verify(mA2dpConfigStore).setCodecSpecific1Value(1002);
 
         mController.writeConfigurationValues(3);
-        verify(mBluetoothA2dpConfigStore).setCodecSpecific1Value(1003);
+        verify(mA2dpConfigStore).setCodecSpecific1Value(1003);
     }
 
     @Test

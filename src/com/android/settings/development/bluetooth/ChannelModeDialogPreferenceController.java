@@ -38,7 +38,7 @@ public class ChannelModeDialogPreferenceController extends
     private static final String TAG = "BtChannelModeCtr";
 
     public ChannelModeDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                          BluetoothA2dpConfigStore store) {
+                                                          A2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 
@@ -73,7 +73,7 @@ public class ChannelModeDialogPreferenceController extends
             default:
                 break;
         }
-        mBluetoothA2dpConfigStore.setChannelMode(channelModeValue);
+        mA2dpConfigStore.setChannelMode(channelModeValue);
     }
 
     @Override

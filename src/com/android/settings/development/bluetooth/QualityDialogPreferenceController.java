@@ -39,7 +39,7 @@ public class QualityDialogPreferenceController extends
     private static final String TAG = "BtQualityCtr";
 
     public QualityDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                      BluetoothA2dpConfigStore store) {
+                                                      A2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 
@@ -67,7 +67,7 @@ public class QualityDialogPreferenceController extends
             default:
                 break;
         }
-        mBluetoothA2dpConfigStore.setCodecSpecific1Value(codecSpecific1Value);
+        mA2dpConfigStore.setCodecSpecific1Value(codecSpecific1Value);
     }
 
     @Override

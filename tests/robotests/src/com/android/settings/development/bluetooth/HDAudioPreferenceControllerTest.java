@@ -33,7 +33,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.SwitchPreference;
 
-import com.android.settings.development.bluetooth.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -66,7 +65,7 @@ public class HDAudioPreferenceControllerTest {
 
     private HDAudioPreferenceController mController;
     private SwitchPreference mPreference;
-    private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    private A2dpConfigStore mA2dpConfigStore;
     private BluetoothDevice mActiveDevice;
     private Context mContext;
     private LifecycleOwner mLifecycleOwner;
@@ -78,9 +77,9 @@ public class HDAudioPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mBluetoothA2dpConfigStore = spy(new BluetoothA2dpConfigStore());
+        mA2dpConfigStore = spy(new A2dpConfigStore());
         mController = new HDAudioPreferenceController(mContext, mLifecycle,
-                mBluetoothA2dpConfigStore, mCallback);
+                mA2dpConfigStore, mCallback);
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = new SwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);

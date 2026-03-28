@@ -50,7 +50,7 @@ class BluetoothDevelopmentSettingsFragment :
     private val adapter: BluetoothAdapter? by lazy {
         requireContext().getSystemService(BluetoothManager::class.java)?.adapter
     }
-    private val a2dpConfigStore = BluetoothA2dpConfigStore()
+    private val a2dpConfigStore = A2dpConfigStore()
     private var a2dp: BluetoothA2dp? = null
 
     private val a2dpReceiver =
@@ -150,7 +150,7 @@ class BluetoothDevelopmentSettingsFragment :
             context: Context,
             lifecycle: Lifecycle?,
             fragment: BluetoothDevelopmentSettingsFragment?,
-            a2dpConfigStore: BluetoothA2dpConfigStore?,
+            a2dpConfigStore: A2dpConfigStore?,
         ): List<AbstractPreferenceController> {
             return listOf(
                 SnoopLogPreferenceController(context, fragment),

@@ -37,7 +37,6 @@ import android.content.Context;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.development.bluetooth.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -67,7 +66,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
 
     private AbstractBluetoothDialogPreferenceController mController;
     private BaseBluetoothDialogPreferenceImpl mPreference;
-    private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    private A2dpConfigStore mA2dpConfigStore;
     private BluetoothCodecStatus mCodecStatus;
     private BluetoothCodecConfig mCodecConfigAAC;
     private BluetoothCodecConfig mCodecConfigSBC;
@@ -84,10 +83,10 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mBluetoothA2dpConfigStore = spy(new BluetoothA2dpConfigStore());
+        mA2dpConfigStore = spy(new A2dpConfigStore());
         mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
         mController = spy(new AbstractBluetoothDialogPreferenceControllerImpl(mContext, mLifecycle,
-                mBluetoothA2dpConfigStore));
+                mA2dpConfigStore));
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = spy(new BaseBluetoothDialogPreferenceImpl(mContext));
 
@@ -124,7 +123,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
         mCodecStatus = new BluetoothCodecStatus.Builder().setCodecConfig(mCodecConfigAAC).build();
         when(mBluetoothA2dp.getCodecStatus(
             mActiveDevice)).thenReturn(mCodecStatus);
-        when(mBluetoothA2dpConfigStore.createCodecConfig()).thenReturn(mCodecConfigAAC);
+        when(mA2dpConfigStore.createCodecConfig()).thenReturn(mCodecConfigAAC);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.onIndexUpdated(mCurrentConfig);
 
@@ -211,7 +210,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
     }
 
     @Test
-    public void onBluetoothServiceConnected_verifyBluetoothA2dpConfigStore() {
+    public void onBluetoothServiceConnected_verifyA2dpConfigStore() {
         mCodecStatus = new BluetoothCodecStatus.Builder()
                 .setCodecConfig(mCodecConfigAAC)
                 .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
@@ -220,12 +219,12 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
             mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
-        verify(mBluetoothA2dpConfigStore).setCodecType(mCodecConfigAAC.getExtendedCodecType());
-        verify(mBluetoothA2dpConfigStore).setSampleRate(mCodecConfigAAC.getSampleRate());
-        verify(mBluetoothA2dpConfigStore).setBitsPerSample(mCodecConfigAAC.getBitsPerSample());
-        verify(mBluetoothA2dpConfigStore).setChannelMode(mCodecConfigAAC.getChannelMode());
-        verify(mBluetoothA2dpConfigStore).setCodecPriority(CODEC_PRIORITY_HIGHEST);
-        verify(mBluetoothA2dpConfigStore).setCodecSpecific1Value(
+        verify(mA2dpConfigStore).setCodecType(mCodecConfigAAC.getExtendedCodecType());
+        verify(mA2dpConfigStore).setSampleRate(mCodecConfigAAC.getSampleRate());
+        verify(mA2dpConfigStore).setBitsPerSample(mCodecConfigAAC.getBitsPerSample());
+        verify(mA2dpConfigStore).setChannelMode(mCodecConfigAAC.getChannelMode());
+        verify(mA2dpConfigStore).setCodecPriority(CODEC_PRIORITY_HIGHEST);
+        verify(mA2dpConfigStore).setCodecSpecific1Value(
                 mCodecConfigAAC.getCodecSpecific1());
     }
 
@@ -290,7 +289,7 @@ public class AbstractBluetoothDialogPreferenceControllerTest {
             AbstractBluetoothDialogPreferenceController {
 
         private AbstractBluetoothDialogPreferenceControllerImpl(Context context,
-                Lifecycle lifecycle, BluetoothA2dpConfigStore store) {
+                Lifecycle lifecycle, A2dpConfigStore store) {
             super(context, lifecycle, store);
         }
 

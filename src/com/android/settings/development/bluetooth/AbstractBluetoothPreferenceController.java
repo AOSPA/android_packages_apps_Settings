@@ -49,7 +49,7 @@ public abstract class AbstractBluetoothPreferenceController extends
     public AbstractBluetoothPreferenceController(
             @Nullable Context context,
             @Nullable Lifecycle lifecycle,
-            @Nullable BluetoothA2dpConfigStore store) {
+            @Nullable A2dpConfigStore store) {
         super(context);
         if (lifecycle != null) {
             lifecycle.addObserver(this);

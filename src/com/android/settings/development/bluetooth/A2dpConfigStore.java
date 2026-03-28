@@ -22,7 +22,7 @@ import android.bluetooth.BluetoothCodecType;
 import androidx.annotation.Nullable;
 
 /** Utility class for storing current Bluetooth A2DP profile values */
-public class BluetoothA2dpConfigStore {
+public class A2dpConfigStore {
 
     // init default values
     private int mCodecTypeNative = BluetoothCodecConfig.SOURCE_CODEC_TYPE_INVALID;

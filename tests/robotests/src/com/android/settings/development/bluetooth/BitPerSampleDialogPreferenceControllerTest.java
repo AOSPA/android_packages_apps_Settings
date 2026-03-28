@@ -34,7 +34,6 @@ import android.content.Context;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.development.bluetooth.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -63,7 +62,7 @@ public class BitPerSampleDialogPreferenceControllerTest {
 
     private BitPerSampleDialogPreferenceController mController;
     private BitPerSampleDialogPreference mPreference;
-    private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    private A2dpConfigStore mA2dpConfigStore;
     private BluetoothCodecStatus mCodecStatus;
     private BluetoothCodecConfig mCodecConfigAAC;
     private BluetoothCodecConfig mCodecConfigSBC;
@@ -78,10 +77,10 @@ public class BitPerSampleDialogPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mBluetoothA2dpConfigStore = spy(new BluetoothA2dpConfigStore());
+        mA2dpConfigStore = spy(new A2dpConfigStore());
         mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
         mController = spy(new BitPerSampleDialogPreferenceController(mContext, mLifecycle,
-                mBluetoothA2dpConfigStore));
+                mA2dpConfigStore));
         mPreference = new BitPerSampleDialogPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
@@ -110,19 +109,19 @@ public class BitPerSampleDialogPreferenceControllerTest {
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         mController.writeConfigurationValues(0);
-        verify(mBluetoothA2dpConfigStore).setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_24);
+        verify(mA2dpConfigStore).setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_24);
     }
 
     @Test
     public void writeConfigurationValues_checkBitsPerSample() {
         mController.writeConfigurationValues(1);
-        verify(mBluetoothA2dpConfigStore).setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_16);
+        verify(mA2dpConfigStore).setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_16);
 
         mController.writeConfigurationValues(2);
-        verify(mBluetoothA2dpConfigStore).setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_24);
+        verify(mA2dpConfigStore).setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_24);
 
         mController.writeConfigurationValues(3);
-        verify(mBluetoothA2dpConfigStore).setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_32);
+        verify(mA2dpConfigStore).setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_32);
     }
 
     @Test

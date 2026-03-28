@@ -38,7 +38,7 @@ public class SampleRateDialogPreferenceController extends
     private static final String TAG = "BtSampleRateCtr";
 
     public SampleRateDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                         BluetoothA2dpConfigStore store) {
+                                                         A2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 
@@ -79,7 +79,7 @@ public class SampleRateDialogPreferenceController extends
             default:
                 break;
         }
-        mBluetoothA2dpConfigStore.setSampleRate(sampleRateValue);
+        mA2dpConfigStore.setSampleRate(sampleRateValue);
     }
 
     @Override

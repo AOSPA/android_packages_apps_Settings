@@ -39,7 +39,7 @@ public class HDAudioPreferenceController extends AbstractBluetoothPreferenceCont
     @Nullable private final Callback mCallback;
 
     public HDAudioPreferenceController(Context context, Lifecycle lifecycle,
-                                                BluetoothA2dpConfigStore store,
+                                                A2dpConfigStore store,
                                                 @Nullable Callback callback) {
         super(context, lifecycle, store);
         mCallback = callback;

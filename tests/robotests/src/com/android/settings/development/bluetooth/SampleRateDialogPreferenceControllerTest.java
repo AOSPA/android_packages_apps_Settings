@@ -34,7 +34,6 @@ import android.content.Context;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.development.bluetooth.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -63,7 +62,7 @@ public class SampleRateDialogPreferenceControllerTest {
 
     private SampleRateDialogPreferenceController mController;
     private SampleRateDialogPreference mPreference;
-    private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    private A2dpConfigStore mA2dpConfigStore;
     private BluetoothCodecStatus mCodecStatus;
     private BluetoothCodecConfig mCodecConfigAAC;
     private BluetoothCodecConfig mCodecConfigSBC;
@@ -79,10 +78,10 @@ public class SampleRateDialogPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mBluetoothA2dpConfigStore = spy(new BluetoothA2dpConfigStore());
+        mA2dpConfigStore = spy(new A2dpConfigStore());
         mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
         mController = spy(new SampleRateDialogPreferenceController(mContext, mLifecycle,
-                mBluetoothA2dpConfigStore));
+                mA2dpConfigStore));
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = new SampleRateDialogPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -115,22 +114,22 @@ public class SampleRateDialogPreferenceControllerTest {
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         mController.writeConfigurationValues(0);
-        verify(mBluetoothA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_88200);
+        verify(mA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_88200);
     }
 
     @Test
     public void writeConfigurationValues_checkSampleRate() {
         mController.writeConfigurationValues(1);
-        verify(mBluetoothA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_44100);
+        verify(mA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_44100);
 
         mController.writeConfigurationValues(2);
-        verify(mBluetoothA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_48000);
+        verify(mA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_48000);
 
         mController.writeConfigurationValues(3);
-        verify(mBluetoothA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_88200);
+        verify(mA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_88200);
 
         mController.writeConfigurationValues(4);
-        verify(mBluetoothA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_96000);
+        verify(mA2dpConfigStore).setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_96000);
     }
 
     @Test

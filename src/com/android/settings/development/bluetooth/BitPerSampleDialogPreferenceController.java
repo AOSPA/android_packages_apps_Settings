@@ -38,7 +38,7 @@ public class BitPerSampleDialogPreferenceController extends
     private static final String TAG = "BtBitPerSampleCtr";
 
     public BitPerSampleDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                           BluetoothA2dpConfigStore store) {
+                                                           A2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 
@@ -76,7 +76,7 @@ public class BitPerSampleDialogPreferenceController extends
             default:
                 break;
         }
-        mBluetoothA2dpConfigStore.setBitsPerSample(bitsPerSampleValue);
+        mA2dpConfigStore.setBitsPerSample(bitsPerSampleValue);
     }
 
     @Override

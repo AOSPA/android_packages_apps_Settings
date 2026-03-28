@@ -34,7 +34,6 @@ import android.content.Context;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.preference.PreferenceScreen;
 
-import com.android.settings.development.bluetooth.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -63,7 +62,7 @@ public class ChannelModeDialogPreferenceControllerTest {
 
     private ChannelModeDialogPreferenceController mController;
     private ChannelModeDialogPreference mPreference;
-    private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    private A2dpConfigStore mA2dpConfigStore;
     private BluetoothCodecStatus mCodecStatus;
     private BluetoothCodecConfig mCodecConfigAAC;
     private BluetoothCodecConfig mCodecConfigSBC;
@@ -78,10 +77,10 @@ public class ChannelModeDialogPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mBluetoothA2dpConfigStore = spy(new BluetoothA2dpConfigStore());
+        mA2dpConfigStore = spy(new A2dpConfigStore());
         mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
         mController = new ChannelModeDialogPreferenceController(mContext, mLifecycle,
-                mBluetoothA2dpConfigStore);
+                mA2dpConfigStore);
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = new ChannelModeDialogPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -110,16 +109,16 @@ public class ChannelModeDialogPreferenceControllerTest {
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
         mController.writeConfigurationValues(0);
-        verify(mBluetoothA2dpConfigStore).setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_STEREO);
+        verify(mA2dpConfigStore).setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_STEREO);
     }
 
     @Test
     public void writeConfigurationValues_checkChannelMode() {
         mController.writeConfigurationValues(1);
-        verify(mBluetoothA2dpConfigStore).setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_MONO);
+        verify(mA2dpConfigStore).setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_MONO);
 
         mController.writeConfigurationValues(2);
-        verify(mBluetoothA2dpConfigStore).setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_STEREO);
+        verify(mA2dpConfigStore).setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_STEREO);
     }
 
     @Test

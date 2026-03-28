@@ -51,12 +51,12 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
     protected static final int[] CHANNEL_MODES = {BluetoothCodecConfig.CHANNEL_MODE_STEREO,
             BluetoothCodecConfig.CHANNEL_MODE_MONO};
 
-    protected final BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    protected final A2dpConfigStore mA2dpConfigStore;
 
     public AbstractBluetoothDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                       BluetoothA2dpConfigStore store) {
+                                                       A2dpConfigStore store) {
         super(context, lifecycle, store);
-        mBluetoothA2dpConfigStore = store;
+        mA2dpConfigStore = store;
     }
 
     @Override
@@ -76,10 +76,10 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         if (bluetoothA2dp == null) {
             return;
         }
-        // update the cache of a2dp config(mBluetoothA2dpConfigStore) before writing config.
+        // update the cache of a2dp config(mA2dpConfigStore) before writing config.
         initConfigStore();
         writeConfigurationValues(index);
-        final BluetoothCodecConfig codecConfig = mBluetoothA2dpConfigStore.createCodecConfig();
+        final BluetoothCodecConfig codecConfig = mA2dpConfigStore.createCodecConfig();
         BluetoothDevice activeDevice = getA2dpActiveDevice();
         if (activeDevice != null) {
             bluetoothA2dp.setCodecConfigPreference(activeDevice, codecConfig);
@@ -109,16 +109,16 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         if (config == null) {
             return;
         }
-        mBluetoothA2dpConfigStore.setCodecType(config.getExtendedCodecType());
-        mBluetoothA2dpConfigStore.setSampleRate(config.getSampleRate());
-        mBluetoothA2dpConfigStore.setBitsPerSample(config.getBitsPerSample());
-        mBluetoothA2dpConfigStore.setChannelMode(config.getChannelMode());
-        mBluetoothA2dpConfigStore.setCodecPriority(CODEC_PRIORITY_HIGHEST);
-        mBluetoothA2dpConfigStore.setCodecSpecific1Value(config.getCodecSpecific1());
+        mA2dpConfigStore.setCodecType(config.getExtendedCodecType());
+        mA2dpConfigStore.setSampleRate(config.getSampleRate());
+        mA2dpConfigStore.setBitsPerSample(config.getBitsPerSample());
+        mA2dpConfigStore.setChannelMode(config.getChannelMode());
+        mA2dpConfigStore.setCodecPriority(CODEC_PRIORITY_HIGHEST);
+        mA2dpConfigStore.setCodecSpecific1Value(config.getCodecSpecific1());
     }
 
     /**
-     * Updates the new value to the {@link BluetoothA2dpConfigStore}.
+     * Updates the new value to the {@link A2dpConfigStore}.
      *
      * @param newValue the new setting value
      */

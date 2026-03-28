@@ -27,7 +27,6 @@ import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.settings.development.bluetooth.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -42,7 +41,7 @@ import org.robolectric.RuntimeEnvironment;
 public class AbstractBluetoothPreferenceControllerTest {
 
     @Mock
-    private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    private A2dpConfigStore mA2dpConfigStore;
     @Mock
     private BluetoothA2dp mBluetoothA2dp;
 
@@ -58,7 +57,7 @@ public class AbstractBluetoothPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mController = spy(new AbstractBluetoothPreferenceControllerImpl(mContext, mLifecycle,
-                mBluetoothA2dpConfigStore));
+                mA2dpConfigStore));
     }
 
     @Test
@@ -100,7 +99,7 @@ public class AbstractBluetoothPreferenceControllerTest {
             AbstractBluetoothPreferenceController {
 
         private AbstractBluetoothPreferenceControllerImpl(Context context, Lifecycle lifecycle,
-                BluetoothA2dpConfigStore store) {
+                A2dpConfigStore store) {
             super(context, lifecycle, store);
         }
 
