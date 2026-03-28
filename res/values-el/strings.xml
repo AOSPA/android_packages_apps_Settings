@@ -1526,6 +1526,10 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Τα PIN δεν ταιριάζουν. Επιβεβαιώστε το νέο PIN της κάρτας SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Λάθος PIN. Προσπάθειες που απομένουν: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Εισαγάγετε τον τρέχοντα κωδικό PIN της κάρτας SIM"</string>
+    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
+    <skip />
+    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"Χρήση <xliff:g id="CARRIER">%1$s</xliff:g> για δεδ. κιν. τηλ.;"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Χρησιμοποιείτε <xliff:g id="CARRIER2_0">%2$s</xliff:g> για δεδομένα κινητής τηλεφωνίας. Εάν κάνετε εναλλαγή στην υπηρεσία <xliff:g id="CARRIER1">%1$s</xliff:g>, η υπηρεσία <xliff:g id="CARRIER2_1">%2$s</xliff:g> δεν θα χρησιμοποιείται πλέον για δεδομένα κινητής τηλεφωνίας."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Χρήση <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2135,15 +2139,13 @@
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Εμφάνιση του πλήκτρου εναλλαγής πληκτρολογίου"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Να επιτρέπεται η εμφάνιση του κουμπιού εναλλαγής πληκτρολογίου στη γραμμή πλοήγησης, όταν έχει επιλεγεί ένα πεδίο εισαγωγής"</string>
     <string name="keyboard_apps_category" msgid="1715169176659877658">"Εφαρμογές πληκτρολογίου"</string>
-    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
-    <skip />
+    <string name="keyboard_apps_category_summary" msgid="6676804967286517009">"Ρυθμίσεις γλώσσας και εφαρμογών για <xliff:g id="KEYBOARD_APPS_LIST">%1$s</xliff:g>"</string>
     <string name="keywords_keyboard_apps" msgid="895860348178301718">"Gboard"</string>
     <string name="available_keyboard_apps_category" msgid="7665966484500890112">"Διαθέσιμες εφαρμογές πληκτρολογίου"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Επιλογές"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Προσβασιμότητα"</string>
     <string name="physical_keyboard_title" msgid="6597340453841961909">"Φυσικά πληκτρολόγια"</string>
-    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
-    <skip />
+    <string name="physical_keyboard_summary" msgid="2751015358747795398">"Ρυθμίσεις εξοπλισμού για <xliff:g id="PHYSICAL_KEYBOARDS_LIST">%1$s</xliff:g>"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"Εργαλείο επιλογής διάταξης"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Ελαστικά πλήκτρα"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Παράβλεψη γρήγορων και επαναλαμβανόμενων πατημάτων του ίδιου πλήκτρου"</string>
@@ -2206,19 +2208,31 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Προσαρμόστε τις ενέργειες που ενεργοποιούνται από τα κουμπιά του χειριστηρίου σας"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Κουμπιά"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Οδηγίες"</string>
-    <string name="game_controller_button_a" msgid="2138420373137111774">"Κουμπί A"</string>
-    <string name="game_controller_button_b" msgid="2093089857164437480">"Κουμπί B"</string>
-    <string name="game_controller_button_x" msgid="3428801081204194655">"Κουμπί X"</string>
-    <string name="game_controller_button_y" msgid="4596061542299533516">"Κουμπί Y"</string>
-    <string name="game_controller_button_l1" msgid="4428713182602902434">"Κουμπί L1"</string>
-    <string name="game_controller_button_r1" msgid="6271978600831912659">"Κουμπί R1"</string>
-    <string name="game_controller_button_l2" msgid="4168716287264803566">"Κουμπί L2"</string>
-    <string name="game_controller_button_r2" msgid="4361909018228151006">"Κουμπί R2"</string>
-    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Κλικ αριστερού μοχλού"</string>
-    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Κλικ δεξιού μοχλού"</string>
+    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
+    <skip />
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <string name="game_controller_stick_left" msgid="1591700901162153956">"Αριστερός μοχλός"</string>
-    <string name="game_controller_stick_right" msgid="1418791636252375110">"Δεξιός μοχλός"</string>
+    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
+    <skip />
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Επαναφορά προεπιλογής"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Επαναφορά προεπιλογής;"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Θα γίνει επαναφορά όλων των ρυθμίσεων του χειριστηρίου στις προεπιλογές"</string>
@@ -2555,8 +2569,7 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"Κουμπιά έντασης ήχου"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Πατήστε παρατεταμένα και τα δύο πλήκτρα έντασης ήχου."</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Τριπλό πάτημα"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (387169602299548488) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="387169602299548488">"Πατήστε γρήγορα την οθόνη 3 φορές. Αυτό μπορεί να επιβραδύνει τη συσκευή σας."</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"τριπλό πάτημα"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Συντομεύσεις πληκτρολογίου"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Πατήστε <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> για χρήση της λειτουργίας <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -5766,13 +5779,11 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Επιτρέπονται μόνο κρυπτογραφημένα δίκτυα"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Αυτή η ρύθμιση είναι πιο ασφαλής, αλλά μπορεί να περιορίσει τη σύνδεση του δικτύου κινητής τηλεφωνίας σε ορισμένες τοποθεσίες. Οι κλήσεις έκτακτης ανάγκης επιτρέπονται πάντα."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Απενεργοποίηση προστασίας από δίκτυα 2G;"</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (7888326960588858860) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"Τα δίκτυα 2G είναι λιγότερο ασφαλή και η απενεργοποίηση της επιλογής καθιστά τις κλήσεις, τα μηνύματα και τα δεδομένα σας ευάλωτα σε υποκλοπή ή κλοπή"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Απενεργοποίηση"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Προστασία από δίκτυα 2G"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"Η προστασία από δίκτυα 2G είναι ενεργή"</string>
-    <!-- no translation found for network_protection_2g_on_notification_summary (2865716658412002901) -->
-    <skip />
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"Μπορείτε να απενεργοποιήσετε αυτή την επιλογή στις Ρυθμίσεις, αλλά το 2G είναι λιγότερο ασφαλές και μπορεί να θέσει σε κίνδυνο τα δεδομένα σας"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Ρυθμίσεις"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Όλες οι υπηρεσίες"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Εμφάνιση πρόσβασης στο πρόχειρο"</string>
@@ -5854,12 +5865,9 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Απεγκατάσταση εφαρμογής"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Εφαρμογές που εγκαταστάθηκαν τον τελευταίο # μήνα}other{Εφαρμογές που εγκαταστάθηκαν τους τελευταίους # μήνες}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Εφαρμογές που εγκαταστάθηκαν περισσότερο από # μήνα πριν}other{Εφαρμογές που εγκαταστάθηκαν περισσότερο από # μήνες πριν}}"</string>
-    <!-- no translation found for ai_assist_category (6800674613544630195) -->
-    <skip />
-    <!-- no translation found for personal_context_title (6639623956831710453) -->
-    <skip />
-    <!-- no translation found for personal_context_switch_summary (917644125592480347) -->
-    <skip />
+    <string name="ai_assist_category" msgid="6800674613544630195">"Βοήθεια AI"</string>
+    <string name="personal_context_title" msgid="6639623956831710453">"Προληπτική βοήθεια"</string>
+    <string name="personal_context_switch_summary" msgid="917644125592480347">"Επιλέξτε αν αυτή η εφαρμογή μπορεί να συνεισφέρει πληροφορίες για την παραγωγή προτάσεων"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Λόγος διαστάσεων"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Εάν αυτή η εφαρμογή δεν έχει σχεδιαστεί για να ταιριάζει με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, δοκιμάστε έναν νέο λόγο διαστάσεων για την προβολή της."</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Εάν αυτή η εφαρμογή δεν έχει σχεδιαστεί για να ταιριάζει με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, δοκιμάστε έναν νέο λόγο διαστάσεων για την προβολή της. Ορισμένες εφαρμογές μπορεί να μην έχουν βελτιστοποιηθεί για συγκεκριμένους λόγους διαστάσεων."</string>

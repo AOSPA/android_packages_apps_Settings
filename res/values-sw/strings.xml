@@ -472,7 +472,7 @@
     <string name="security_settings_fingerprint_v2_enroll_introduction_message_learn_more" msgid="5856010507790137793"></string>
     <string name="fingerprint_check_enroll_touch_sensor" msgid="5010063281557456236">"Gusa kitambuzi cha alama ya kidole"</string>
     <string name="fingerprint_check_enroll_not_recognized" msgid="2779520550437394431">"Alama ya kidole haijatambuliwa"</string>
-    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Kufungua kupitia Saa"</string>
+    <string name="security_settings_activeunlock_preference_title" msgid="4257580421087062228">"Kufungua kwa Saa"</string>
     <string name="security_settings_activeunlock" msgid="8922823742770802651">"Saa"</string>
     <string name="biometric_settings_use_fingerprint_or_watch_for" msgid="1160830065613858095">"Tumia alama ya kidole au saa"</string>
     <string name="biometric_settings_use_face_or_watch_for" msgid="1507077107150278532">"Tumia uso au saa"</string>
@@ -521,8 +521,8 @@
     <string name="security_settings_remoteauth_enroll_enrolling_agree" msgid="7048336252635730908">"Thibitisha"</string>
     <string name="security_settings_remoteauth_enroll_finish_title" msgid="3807372930755413112">"Kila kitu ki shwari!"</string>
     <string name="security_settings_remoteauth_enroll_finish_btn_next" msgid="8072138423143889592">"Nimemaliza"</string>
-    <string name="security_settings_remoteauth_settings_title" msgid="1564912618737165129">"Kufungua kupitia Saa"</string>
-    <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Pata maelezo zaidi kuhusu Kufungua Kupitia Saa"</string>
+    <string name="security_settings_remoteauth_settings_title" msgid="1564912618737165129">"Kufungua kwa Saa"</string>
+    <string name="security_settings_remoteauth_settings_learn_more" msgid="5653556124819260050">"Pata maelezo zaidi kuhusu Kufungua kwa Saa"</string>
     <string name="security_settings_remoteauth_settings_register_new_authenticator" msgid="9191331738306527887">"Weka saa"</string>
     <string name="security_settings_remoteauth_settings_remove_device" msgid="2436226120578851282">"Ondoa saa"</string>
     <string name="security_settings_biometric_preference_summary_none_enrolled" msgid="213377753727694575">"Unahitaji kuweka mipangilio"</string>
@@ -1526,6 +1526,10 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN hazilingani. Thibitisha PIN mpya ya SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"PIN si sahihi. Mara zilizosalia za kujaribu: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Weka PIN ya sasa ya SIM kadi"</string>
+    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
+    <skip />
+    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"Ungependa kutumia <xliff:g id="CARRIER">%1$s</xliff:g> kwa ajili ya data ya mtandao wa simu?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Unatumia <xliff:g id="CARRIER2_0">%2$s</xliff:g> kwa ajili ya data ya mtandao wa simu. Ukibadilisha uweke <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> haitatumika tena kwa ajili ya data ya mtandao wa simu."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Tumia <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2204,19 +2208,31 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Badilisha upendavyo vitendo vinavyoanzishwa na vitufe vya kidhibiti chako"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Vitufe"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Maelekezo"</string>
-    <string name="game_controller_button_a" msgid="2138420373137111774">"Kitufe cha A"</string>
-    <string name="game_controller_button_b" msgid="2093089857164437480">"Kitufe cha B"</string>
-    <string name="game_controller_button_x" msgid="3428801081204194655">"Kitufe cha X"</string>
-    <string name="game_controller_button_y" msgid="4596061542299533516">"Kitufe cha Y"</string>
-    <string name="game_controller_button_l1" msgid="4428713182602902434">"Kitufe cha L1"</string>
-    <string name="game_controller_button_r1" msgid="6271978600831912659">"Kitufe cha R1"</string>
-    <string name="game_controller_button_l2" msgid="4168716287264803566">"Kitufe cha L2"</string>
-    <string name="game_controller_button_r2" msgid="4361909018228151006">"Kitufe cha R2"</string>
-    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Kubofya Kishikio cha Kushoto"</string>
-    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Kubofya Kishikio ya Kulia"</string>
+    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
+    <skip />
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <string name="game_controller_stick_left" msgid="1591700901162153956">"Kishikio cha Kushoto"</string>
-    <string name="game_controller_stick_right" msgid="1418791636252375110">"Kishikio cha Kulia"</string>
+    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
+    <skip />
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Badilisha iwe chaguomsingi"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Utabadilisha iwe chaguomsingi?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Mipangilio yako yote ya kidhibiti itabadilishwa kuwa chaguomsingi"</string>
@@ -2553,8 +2569,7 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"vitufe vya sauti"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Bonyeza na ushikilie vitufe vyote viwili vya sauti"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Kugusa mara tatu"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (387169602299548488) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="387169602299548488">"Gusa skrini mara 3 kwa haraka. Huenda hali hii ikasababisha kifaa chako kifanye kazi polepole."</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"kugusa mara tatu"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Mikato ya kibodi"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Bonyeza <xliff:g id="ID_1">%1$s</xliff:g> pamoja na <xliff:g id="ID_2">%2$s</xliff:g> pamoja na <xliff:g id="ID_3">%3$s</xliff:g> ili utumie <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -4629,8 +4644,7 @@
     <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Uliza kila wakati"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Ruhusu kila wakati"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Usiruhusu"</string>
     <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
@@ -4638,22 +4652,18 @@
     <skip />
     <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Programu imeondolewa"</string>
     <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{Programu 1 imeruhusiwa}other{Programu # zimeruhusiwa}}"</string>
     <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
     <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Hakuna programu zilizoruhusiwa"</string>
     <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Kiratibu dijitali chaguomsingi"</string>
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
@@ -5764,13 +5774,11 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Ruhusu tu mitandao iliyosimbwa kwa njia fiche"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Mbinu hii ni salama zaidi lakini huenda ikazuia muunganisho wa mtandao wako wa simu katika baadhi ya maeneo. Huduma ya kupiga simu za dharura inaruhusiwa kila wakati."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Ungependa kuzima ulinzi dhidi ya hatari za mtandao wa 2G?"</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (7888326960588858860) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"Mitandao ya 2G si salama sana na kuzima kipengele hiki kunafanya simu, ujumbe na data yako iwe katika hatari ya kudukuliwa au kuibwa"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Zima"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Ulinzi dhidi ya hatari za mtandao wa 2G"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"Umewasha ulinzi dhidi ya hatari za mtandao wa 2G"</string>
-    <!-- no translation found for network_protection_2g_on_notification_summary (2865716658412002901) -->
-    <skip />
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"Unaweza kuzima kipengele hiki katika Mipangilio, lakini 2G si salama na inaweza kuhatarisha data yako"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Mipangilio"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Huduma zote"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Onyesha ufikiaji wa ubao wa kunakili"</string>
@@ -5852,12 +5860,9 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Ondoa programu"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Programu zilizosakinishwa mwezi # uliopita}other{Programu zilizosakinishwa miezi # iliyopita}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Programu zilizosakinishwa zaidi ya mwezi # uliopita}other{Programu zilizosakinishwa zaidi ya miezi # iliyopita}}"</string>
-    <!-- no translation found for ai_assist_category (6800674613544630195) -->
-    <skip />
-    <!-- no translation found for personal_context_title (6639623956831710453) -->
-    <skip />
-    <!-- no translation found for personal_context_switch_summary (917644125592480347) -->
-    <skip />
+    <string name="ai_assist_category" msgid="6800674613544630195">"Usaidizi wa AI"</string>
+    <string name="personal_context_title" msgid="6639623956831710453">"Usaidizi wa kiotomatiki"</string>
+    <string name="personal_context_switch_summary" msgid="917644125592480347">"Chagua iwapo programu hii inaweza kuchangia maelezo ili kutoa mapendekezo"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Uwiano"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Jaribu uwiano tofauti kuangalia maudhui kwenye programu hii endapo haijasanidiwa kuendana na <xliff:g id="DEVICE_NAME">%1$s</xliff:g> yako"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Jaribu uwiano tofauti kuangalia maudhui kwenye programu hii endapo haijasanidiwa kuendana na <xliff:g id="DEVICE_NAME">%1$s</xliff:g> yako. Huenda baadhi ya programu zisiweze kutumia uwiano fulani."</string>

@@ -30,6 +30,7 @@ import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NONE
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NOTE
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NOTIFICATIONS
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_OVERVIEW
+import android.provider.Settings.Secure.ACTION_CORNER_ACTION_PEEK
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_QUICK_SETTINGS
 import android.provider.Settings.Secure.ACTION_CORNER_BOTTOM_LEFT_ACTION
 import androidx.preference.ListPreference
@@ -134,6 +135,41 @@ class ActionCornerCustomizationControllerTest {
     }
 
     @Test
+    fun onPreferenceChange_setToPeek() {
+        controller.onPreferenceChange(preference, ACTION_CORNER_ACTION_PEEK)
+
+        val action =
+            Settings.Secure.getIntForUser(
+                context.contentResolver,
+                TARGET,
+                ACTION_CORNER_ACTION_NONE,
+                ActivityManager.getCurrentUser(),
+            )
+        assertThat(action).isEqualTo(ACTION_CORNER_ACTION_PEEK)
+        verify(metricsRule.metricsFeatureProvider).action(any(), eq(METRICS), eq(action))
+    }
+
+    @Test
+    @EnableFlags(com.android.window.flags.Flags.FLAG_ENABLE_HOME_SCREEN_PEEKING)
+    fun displayPreference_peekFlagEnabled_showPeek() {
+        controller.displayPreference(preferenceScreen)
+
+        assertThat(preference.entries).asList().contains(PEEK_TITLE)
+        assertThat(preference.entryValues).asList().contains(ACTION_CORNER_ACTION_PEEK.toString())
+    }
+
+    @Test
+    @DisableFlags(com.android.window.flags.Flags.FLAG_ENABLE_HOME_SCREEN_PEEKING)
+    fun displayPreference_peekFlagDisabled_hidePeek() {
+        controller.displayPreference(preferenceScreen)
+
+        assertThat(preference.entries).asList().doesNotContain(PEEK_TITLE)
+        assertThat(preference.entryValues)
+            .asList()
+            .doesNotContain(ACTION_CORNER_ACTION_PEEK.toString())
+    }
+
+    @Test
     @EnableFlags(Flags.FLAG_ENABLE_NOTE_IN_ACTION_CORNER)
     fun displayPreference_noteActionCornerFlagEnabled_roleAvailable_showNotes() {
         whenever(roleManager.isRoleAvailable(RoleManager.ROLE_NOTES)).thenReturn(true)
@@ -173,6 +209,7 @@ class ActionCornerCustomizationControllerTest {
         const val NONE_TITLE = "None"
         const val HOME_TITLE = "Home"
         const val NOTE_TITLE = "Note"
+        const val PEEK_TITLE = "Peek/unpeek desktop"
         const val METRICS = SettingsEnums.ACTION_BOTTOM_LEFT_ACTION_CORNER_SHORTCUT_CHANGED
 
         val entryValueArray =

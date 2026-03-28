@@ -62,7 +62,10 @@ class UserDetailsSettingsScreenApi :
                 required = true,
                 // TODO(b/479151776): Replace to a user id type once it is implemented
                 type =
-                    GeneratedParameterType(R.string.user_details_settings_user_name_description) {
+                    GeneratedParameterType(
+                        R.string.user_details_settings_user_name_description,
+                        key = "UserDetailsTargetUserId",
+                    ) {
                         val um = context.getSystemService(UserManager::class.java)
                         um.aliveUsers
                             ?.filter { it.isUiSwitchableHumanUser() }
