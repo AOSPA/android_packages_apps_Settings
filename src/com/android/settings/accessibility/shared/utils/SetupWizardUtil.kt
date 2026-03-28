@@ -105,8 +105,8 @@ fun shouldShowFocusRingsInSuw(context: Context): Boolean {
  * This is used to determine the color of the focus ring.
  */
 enum class ButtonStyle {
-    PRIMARY,
-    SECONDARY,
+    FILLED,
+    BORDERLESS,
 }
 
 /**
@@ -121,10 +121,10 @@ enum class ButtonStyle {
 fun configureFocusRingsForDialog(dialog: AlertDialog) {
     // Apply focus rings to standard dialog buttons if they exist.
     dialog.getButton(DialogInterface.BUTTON_POSITIVE)?.let {
-        applyFocusRingToButton(it, ButtonStyle.PRIMARY)
+        applyFocusRingToButton(it, ButtonStyle.FILLED)
     }
     dialog.getButton(DialogInterface.BUTTON_NEGATIVE)?.let {
-        applyFocusRingToButton(it, ButtonStyle.SECONDARY)
+        applyFocusRingToButton(it, ButtonStyle.BORDERLESS)
     }
 
     // Make the button panel not focusable. This is to avoid having the container of the
@@ -155,8 +155,8 @@ private fun applyFocusRingToButton(button: Button, style: ButtonStyle) {
     button.isSingleLine = false
     val colorRes =
         when (style) {
-            ButtonStyle.PRIMARY -> com.android.internal.R.color.materialColorOnPrimary
-            ButtonStyle.SECONDARY -> com.android.internal.R.color.materialColorPrimary
+            ButtonStyle.FILLED -> com.android.internal.R.color.materialColorOnPrimary
+            ButtonStyle.BORDERLESS -> com.android.internal.R.color.materialColorPrimary
         }
     button.foreground =
         FocusIndicatorDrawable.Builder(button.context)
