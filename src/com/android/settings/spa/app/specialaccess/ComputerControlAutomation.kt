@@ -167,13 +167,14 @@ internal fun getAgentsForTarget(
 }
 
 @Composable
-internal fun AssistantLinkedRequirementFooter(requirementText: String) {
+internal fun AssistantLinkedRequirementFooter() {
     val context = LocalContext.current
+    val requirementText = stringResource(R.string.computer_control_automation_footer_requirement)
     val clickableText =
         stringResource(R.string.computer_control_automation_default_digital_assistant_settings)
     val annotatedString = buildAnnotatedString {
         append(requirementText)
-        append("\n")
+        append(" ")
         pushLink(
             LinkAnnotation.Clickable(
                 tag = "URL",
@@ -212,16 +213,17 @@ internal fun AssistantRequirementCard(appLabel: String, modifier: Modifier = Mod
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(SettingsRadius.large3))
                 .background(MaterialTheme.colorScheme.surfaceBright)
-                .padding(SettingsDimension.itemPadding)
+                .padding(SettingsDimension.paddingLarge)
     ) {
         Icon(
             imageVector = Icons.Outlined.Info,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.size(SettingsDimension.itemIconSize),
+            modifier =
+                Modifier.padding(SettingsDimension.paddingTiny).size(SettingsDimension.itemIconSize),
         )
 
-        Spacer(modifier = Modifier.height(SettingsSpace.extraSmall4))
+        Spacer(modifier = Modifier.height(SettingsSpace.extraSmall2))
 
         Text(
             text =
@@ -231,9 +233,10 @@ internal fun AssistantRequirementCard(appLabel: String, modifier: Modifier = Mod
                 ),
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.padding(SettingsDimension.paddingTiny),
         )
 
-        Spacer(modifier = Modifier.height(SettingsSpace.small1))
+        Spacer(modifier = Modifier.height(SettingsSpace.extraSmall4))
 
         Text(
             text =
@@ -243,9 +246,10 @@ internal fun AssistantRequirementCard(appLabel: String, modifier: Modifier = Mod
                 ),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(SettingsDimension.paddingTiny),
         )
 
-        Spacer(modifier = Modifier.height(SettingsSpace.small1))
+        Spacer(modifier = Modifier.height(SettingsSpace.extraSmall6))
 
         Button(
             onClick = {

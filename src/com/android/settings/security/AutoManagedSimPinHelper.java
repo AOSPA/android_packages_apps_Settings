@@ -29,12 +29,14 @@ import android.telephony.TelephonyManager;
 
 import androidx.annotation.Nullable;
 
+import com.android.settings.network.SubscriptionUtil;
 import com.android.settingslib.utils.ThreadUtils;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.stream.IntStream;
 
 /**
  * A class for functionality used by various controllers of the automatic SIM card PIN management
@@ -90,6 +92,10 @@ class AutoManagedSimPinHelper {
             return false;
         }
 
+        if (!android.telephony.SubscriptionManager.isValidSubscriptionId(subscriptionId)) {
+            return false;
+        }
+
         return mTelephonyManager.createForSubscriptionId(
                 subscriptionId).getSimAutoPinManagementEnrollmentStatus()
                 == TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_PLATFORM_MANAGED;
@@ -140,6 +146,45 @@ class AutoManagedSimPinHelper {
         }
 
         return mSubscriptionManager.getEnabledSubscriptionId(firstSimSlot);
+    }
+
+    /**
+     * Returns an array of active slots, without duplicates, sorted from the lowest to the highest
+     * slot index.
+     * @return an array of active slots.
+     */
+    public int[] getActiveSlots() {
+        final List<SubscriptionInfo> subInfoList =
+                SubscriptionUtil.getActiveSubscriptions(mSubscriptionManager);
+        if (subInfoList == null || subInfoList.isEmpty()) {
+            return new int[0];
+        }
+
+        int[] activeSlots = new int[subInfoList.size()];
+        int i = 0;
+        for (SubscriptionInfo subInfo : subInfoList) {
+            activeSlots[i] = subInfo.getSimSlotIndex();
+            i++;
+        }
+        return IntStream.of(activeSlots).sorted().distinct().toArray();
+    }
+
+    public int getSubscriptionIdForSlot(int slotIndex) {
+        int[] activeSlots = getActiveSlots();
+
+        if (activeSlots == null || activeSlots.length < (slotIndex + 1)) {
+            return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        }
+
+        int activeSlot = activeSlots[slotIndex];
+
+        SubscriptionInfo info = mSubscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(
+                activeSlot);
+        if (info == null) {
+            return SubscriptionManager.INVALID_SUBSCRIPTION_ID;
+        }
+
+        return info.getSubscriptionId();
     }
 
     /**

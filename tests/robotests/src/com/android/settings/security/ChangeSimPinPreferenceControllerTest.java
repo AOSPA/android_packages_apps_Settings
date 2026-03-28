@@ -19,51 +19,95 @@ package com.android.settings.security;
 import static android.security.Flags.FLAG_AUTO_SIM_PIN_MANAGEMENT;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
+import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import android.platform.test.annotations.EnableFlags;
-import android.telephony.TelephonyManager;
+import android.platform.test.flag.junit.CheckFlagsRule;
+import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.telephony.SubscriptionManager;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.robolectric.RobolectricTestRunner;
 
 @RunWith(RobolectricTestRunner.class)
 public class ChangeSimPinPreferenceControllerTest extends BaseSimProtectionControllerTest {
+    private static final int SLOT_INDEX = 1;
+    private static final int SUBSCRIPTION_ID = 3;
+
+    @Rule
+    public final CheckFlagsRule checkFlagsRule = DeviceFlagsValueProvider.createCheckFlagsRule();
+
+    @Mock
+    private AutoManagedSimPinHelper mAutoManagedSimPinHelper;
+
     private ChangeSimPinPreferenceController mController;
 
     @Before
     public void setUp() {
         super.setUp();
-        mController = new ChangeSimPinPreferenceController(mContext, "change_sim_pin_key");
+        mController = new ChangeSimPinPreferenceController(mContext, "change_sim_pin_key",
+                mAutoManagedSimPinHelper);
     }
 
-    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
+    private void configureSlot() {
+        when(mAutoManagedSimPinHelper.getSubscriptionIdForSlot(eq(SLOT_INDEX))).thenReturn(
+                SUBSCRIPTION_ID);
+        mController.setSlotIndex(SLOT_INDEX);
+    }
+
     @Test
+    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void getAvailabilityStatus_simPinTurnedOn() {
-        when(mTelephonyManager.isIccLockEnabled()).thenReturn(true);
+        configureSlot();
+        when(mAutoManagedSimPinHelper.isIccLockEnabled(eq(SUBSCRIPTION_ID))).thenReturn(true);
+        when(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
+                eq(SUBSCRIPTION_ID))).thenReturn(false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
 
-    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     @Test
+    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void getAvailabilityStatus_simPinTurnedOff() {
-        when(mTelephonyManager.isIccLockEnabled()).thenReturn(false);
+        configureSlot();
+        when(mAutoManagedSimPinHelper.isIccLockEnabled(eq(SUBSCRIPTION_ID))).thenReturn(false);
+        when(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
+                eq(SUBSCRIPTION_ID))).thenReturn(false);
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 
-    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     @Test
+    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void getAvailabilityStatus_simPinTurnedOnAndPlatformManaged() {
-        when(mTelephonyManager.isIccLockEnabled()).thenReturn(true);
-        when(mTelephonyManager.getSimAutoPinManagementEnrollmentStatus()).thenReturn(
-                TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_PLATFORM_MANAGED);
+        configureSlot();
+        when(mAutoManagedSimPinHelper.isIccLockEnabled(eq(SUBSCRIPTION_ID))).thenReturn(true);
+        when(mAutoManagedSimPinHelper.isPinAutoManagedForSubscription(
+                eq(SUBSCRIPTION_ID))).thenReturn(true);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
+    }
+
+    @Test
+    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
+    public void getAvailabilityStatus_slotNotConfigured() {
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+    }
+
+    @Test
+    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
+    public void getAvailabilityStatus_invalidSubscriptionId() {
+        when(mAutoManagedSimPinHelper.getSubscriptionIdForSlot(eq(SLOT_INDEX))).thenReturn(
+                SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mController.setSlotIndex(SLOT_INDEX);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
     }
 }

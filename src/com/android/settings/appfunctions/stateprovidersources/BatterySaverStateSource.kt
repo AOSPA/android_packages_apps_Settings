@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.stateprovidersources
 
 import android.content.Context
 import android.provider.Settings
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
@@ -40,7 +41,7 @@ class BatterySaverStateSource : DeviceStateSource {
         val item =
             DeviceStateItem(
                 key = "battery_saver_reminders",
-                purpose = "battery_saver_reminders",
+                purpose = context.getString(R.string.battery_saver_reminders_purpose),
                 jsonValue = areRemindersEnabled.toString(),
             )
 

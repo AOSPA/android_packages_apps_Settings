@@ -26,6 +26,7 @@ import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
@@ -33,7 +34,11 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Comp
 // LINT.IfChange
 @ProvidePreferenceScreen(AdvancedConnectedDeviceScreen.KEY)
 open class AdvancedConnectedDeviceScreen : PreferenceScreenMixin, PreferenceSummaryProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    override fun tags(context: Context) = arrayOf(
+        APP_FUNCTION_UNCATEGORIZED,
+        // exclude this screen from api result since we have the same data in api_connection_preferences
+        UI_ONLY_PREFERENCE
+    )
 
     override val key: String
         get() = KEY

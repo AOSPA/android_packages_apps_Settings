@@ -23,7 +23,6 @@ import static com.android.settings.core.BasePreferenceController.DISABLED_DEPEND
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
@@ -62,16 +61,15 @@ public class ShowAutoManagedSimPinControllerTest {
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mContext.getSystemService(SubscriptionManager.class)).thenReturn(mSubscriptionManager);
 
-        when(mSubscriptionManager.setDisplayName(any(), anyInt(), anyInt())).thenReturn(0);
-        when(mSubscriptionManager.getEnabledSubscriptionId(eq(1))).thenReturn(mSubscriptionId);
+        when(mSubscriptionManager.getEnabledSubscriptionId(eq(0))).thenReturn(mSubscriptionId);
         when(mTelephonyManager.createForSubscriptionId(anyInt())).thenReturn(
                 mTelephonyManager);
 
         mController = new ShowAutoManagedSimPinController(mContext, "key");
     }
 
-    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     @Test
+    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void getAvailabilityStatus_pinManuallyManaged() {
         when(mTelephonyManager.getSimAutoPinManagementEnrollmentStatus()).thenReturn(
                 TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_MANUALLY_MANAGED);
@@ -79,8 +77,8 @@ public class ShowAutoManagedSimPinControllerTest {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 
-    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     @Test
+    @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)
     public void getAvailabilityStatus_pinPlatformManaged() {
         when(mTelephonyManager.getSimAutoPinManagementEnrollmentStatus()).thenReturn(
                 TelephonyManager.SIM_PIN_ENROLLMENT_STATUS_PLATFORM_MANAGED);

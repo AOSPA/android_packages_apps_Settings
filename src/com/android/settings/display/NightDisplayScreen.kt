@@ -52,8 +52,11 @@ open class NightDisplayScreen(val context: Context) :
     PrimarySwitchPreferenceBinding,
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
-
+    override fun tags(context: Context) = arrayOf(
+        APP_FUNCTION_UNCATEGORIZED,
+        // exclude this screen from api result since we have the same data (and more) in api_night_display screen
+        UI_ONLY_PREFERENCE
+    )
 
     val colorDisplayManager: ColorDisplayManager? =
         context.getSystemService(ColorDisplayManager::class.java)

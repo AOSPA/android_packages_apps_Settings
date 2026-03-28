@@ -23,10 +23,12 @@ import android.content.pm.ApplicationInfo
 import android.os.Bundle
 import android.os.UserHandle
 import android.view.ViewTreeObserver
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -42,10 +44,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -55,6 +59,7 @@ import com.android.settingslib.spa.framework.common.SettingsEntryBuilder
 import com.android.settingslib.spa.framework.common.SettingsPage
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
+import com.android.settingslib.spa.framework.compose.rememberDrawablePainter
 import com.android.settingslib.spa.framework.theme.SettingsDimension
 import com.android.settingslib.spa.framework.theme.SettingsSpace
 import com.android.settingslib.spa.framework.util.formatString
@@ -68,7 +73,6 @@ import com.android.settingslib.spaprivileged.model.app.PackageManagers.hasReques
 import com.android.settingslib.spaprivileged.model.app.rememberAppRepository
 import com.android.settingslib.spaprivileged.model.app.toRoute
 import com.android.settingslib.spaprivileged.model.app.userId
-import com.android.settingslib.spaprivileged.template.app.AppInfoProvider
 import com.android.settingslib.spaprivileged.template.app.AppList
 import com.android.settingslib.spaprivileged.template.app.AppListConfig
 import com.android.settingslib.spaprivileged.template.app.AppListInput
@@ -104,6 +108,9 @@ object ComputerControlTargetAppPageProvider : SettingsPageProvider {
                 PackageManagers.getPackageInfoAsUser(packageName, userId)
             } ?: return
         val targetApp = packageInfo.applicationInfo!!
+        val appRepository = rememberAppRepository()
+        val app = checkNotNull(packageInfo.applicationInfo)
+        val appLabel = appRepository.produceLabel(app).value
 
         val context = LocalContext.current
         val pageViewModel: ComputerControlTargetAppViewModel = viewModel {
@@ -124,35 +131,54 @@ object ComputerControlTargetAppPageProvider : SettingsPageProvider {
             view.viewTreeObserver.addOnWindowFocusChangeListener(listener)
             onDispose { view.viewTreeObserver.removeOnWindowFocusChangeListener(listener) }
         }
-
         val assistantRoleRequirement = remember {
             android.companion.virtualdevice.flags.Flags.computerControlPerAppConsent() &&
                 android.companion.virtualdevice.flags.Flags
                     .computerControlRoleAssistantRequirement()
         }
+        val hasItems by listModel.hasItemsFlow.collectAsState()
 
         val header =
             @Composable {
-                val hasItems by listModel.hasItemsFlow.collectAsState()
                 if (hasItems) {
-                    remember(packageInfo) { AppInfoProvider(packageInfo) }.AppInfo()
-                    val appLabel = rememberAppRepository().produceLabel(targetApp).value
-                    Text(
-                        text =
-                            stringResource(
-                                R.string.computer_control_automation_target_list_header,
-                                appLabel,
-                            ),
-                        style = MaterialTheme.typography.titleSmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Spacer(modifier = Modifier.height(SettingsSpace.small1))
+                    Column(
+                        modifier =
+                            Modifier.fillMaxWidth()
+                                .padding(
+                                    horizontal = SettingsSpace.extraSmall4,
+                                    vertical = SettingsSpace.small1,
+                                ),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Image(
+                            painter = rememberDrawablePainter(appRepository.produceIcon(app).value),
+                            contentDescription =
+                                appRepository.produceIconContentDescription(app).value,
+                            modifier = Modifier.size(SettingsDimension.itemIconContainerSize),
+                        )
+                        Spacer(Modifier.height(SettingsSpace.small1))
+                        Text(
+                            text = appLabel,
+                            style = MaterialTheme.typography.titleLargeEmphasized,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                        Text(
+                            text =
+                                stringResource(
+                                    R.string.computer_control_automation_target_list_header,
+                                    appLabel,
+                                ),
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(vertical = SettingsSpace.extraSmall2),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
                 }
             }
 
         val footer =
             @Composable {
-                val hasItems by listModel.hasItemsFlow.collectAsState()
                 if (hasItems && assistantRoleRequirement) {
                     Column(Modifier.padding(SettingsDimension.paddingSmall)) {
                         Spacer(modifier = Modifier.height(SettingsSpace.extraSmall4))
@@ -163,11 +189,7 @@ object ComputerControlTargetAppPageProvider : SettingsPageProvider {
                             tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Spacer(modifier = Modifier.height(SettingsSpace.extraSmall4))
-                        AssistantLinkedRequirementFooter(
-                            stringResource(
-                                R.string.computer_control_automation_agent_list_footer_requirement
-                            )
-                        )
+                        AssistantLinkedRequirementFooter()
                     }
                 }
             }
@@ -230,7 +252,7 @@ object ComputerControlTargetAppPageProvider : SettingsPageProvider {
         val summary =
             if (isAlwaysAllowedByAnyAgent) {
                 context.formatString(
-                    R.string.computer_control_automation_apps_allowed,
+                    R.string.computer_control_automation_agents_allowed,
                     "count" to agents.size,
                 )
             } else {

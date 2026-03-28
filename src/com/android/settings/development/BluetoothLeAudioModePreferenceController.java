@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 
@@ -52,7 +53,7 @@ public class BluetoothLeAudioModePreferenceController
     static final String LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY =
             "persist.bluetooth.leaudio_dynamic_switcher.mode";
 
-    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final Fragment mFragment;
 
     @VisibleForTesting
     final String[] mListValues;
@@ -65,7 +66,7 @@ public class BluetoothLeAudioModePreferenceController
     boolean mChanged = false;
 
     public BluetoothLeAudioModePreferenceController(@NonNull Context context,
-            @Nullable DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable Fragment fragment) {
         super(context);
         mFragment = fragment;
         mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();

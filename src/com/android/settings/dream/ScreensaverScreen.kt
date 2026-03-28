@@ -44,6 +44,7 @@ import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
@@ -55,8 +56,12 @@ open class ScreensaverScreen(private val context: Context) :
     AbstractKeyedDataObservable<String>(),
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
-
+    override fun tags(context: Context) = arrayOf(
+        APP_FUNCTION_UNCATEGORIZED,
+        // exclude this screen from api result since it doesn't contain any relevant data, and we
+        // have data in api_screensaver screen
+        UI_ONLY_PREFERENCE
+    )
 
     private var dreamBackend: DreamBackend = DreamBackend.getInstance(context)
     private var settingsStore: KeyValueStore = SettingsSecureStore.get(context)
@@ -91,7 +96,6 @@ open class ScreensaverScreen(private val context: Context) :
     override val key: String
         get() = KEY
 
-    //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.screensaver_purpose
 
@@ -221,7 +225,7 @@ open class ScreensaverScreen(private val context: Context) :
 
         override val availabilityDescription = screenMetadata.availabilityDescription
 
-    override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

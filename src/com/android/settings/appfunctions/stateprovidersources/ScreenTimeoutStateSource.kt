@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.stateprovidersources
 
 import android.content.Context
 import android.provider.Settings
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
@@ -42,7 +43,7 @@ class ScreenTimeoutStateSource : DeviceStateSource {
         val item =
             DeviceStateItem(
                 key = "screen_timeout",
-                purpose = "screen_timeout",
+                purpose = context.getString(R.string.current_screen_timeout_purpose),
                 jsonValue = "$screenTimeoutSeconds s",
             )
 

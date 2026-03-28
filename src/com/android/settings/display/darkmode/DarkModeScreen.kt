@@ -210,7 +210,6 @@ open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context, false)
     override val key
         get() = KEY
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.dark_ui_mode_purpose
 
@@ -226,7 +225,6 @@ open class DarkModeScreenOnAccessibility(context: Context) : BaseDarkModeScreen(
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.dark_ui_mode_accessibility_purpose
 

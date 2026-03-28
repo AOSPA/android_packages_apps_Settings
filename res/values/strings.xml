@@ -3647,6 +3647,10 @@
     <string name="enter_current_sim_pin_after_mismatch">Wrong PIN. Attempts remaining: <xliff:g id="num_attempts">%1$d</xliff:g></string>
     <!-- Accessibility hint - tell the user they should be entering the currend SIM card PIN. [CHAR LIMIT=NONE] -->
     <string name="enter_current_sim_pin_hint">Enter the current PIN code of the SIM card</string>
+    <!-- The title for the first SIM card slot preference. [CHAR LIMIT=NONE] -->
+    <string name="first_sim_card_slot_title">First SIM card slot</string>
+    <!-- The title for the second SIM card slot preference. [CHAR LIMIT=NONE] -->
+    <string name="second_sim_card_slot_title">Second SIM card slot</string>
 
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=40] -->
     <string name="sim_change_data_title">
@@ -5278,31 +5282,31 @@
     <!-- Title for the preference category for stick remapping for game controllers. [CHAR LIMIT=35] -->
     <string name="game_controller_stick_remapping_category">Directions</string>
     <!-- Title for the preference category for button A remapping. Button A is typical game controller button with "A" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_a">A Button</string>
+    <string name="game_controller_button_a">A button</string>
     <!-- Title for the preference category for button B remapping. Button B is typical game controller button with "B" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_b">B Button</string>
+    <string name="game_controller_button_b">B button</string>
     <!-- Title for the preference category for button X remapping. Button X is typical game controller button with "X" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_x">X Button</string>
+    <string name="game_controller_button_x">X button</string>
     <!-- Title for the preference category for button Y remapping. Button Y is typical game controller button with "Y" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_y">Y Button</string>
+    <string name="game_controller_button_y">Y button</string>
     <!-- Title for the preference category for button L1 remapping. Button L1 is typical game controller trigger with "L1" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_l1">L1 Button</string>
+    <string name="game_controller_button_l1">L1 button</string>
     <!-- Title for the preference category for button R1 remapping. Button R1 is typical game controller trigger with "R1" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_r1">R1 Button</string>
+    <string name="game_controller_button_r1">R1 button</string>
     <!-- Title for the preference category for button L2 remapping. Button L2 is typical game controller trigger with "L2" printed on it.[CHAR LIMIT=35] -->
-    <string name="game_controller_button_l2">L2 Button</string>
+    <string name="game_controller_button_l2">L2 button</string>
     <!-- Title for the preference category for button R2 remapping. Button R2 is typical game controller trigger with "R2" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_r2">R2 Button</string>
+    <string name="game_controller_button_r2">R2 button</string>
     <!-- Title for the preference category for button thumbl remapping. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_thumbl">Left Stick Click</string>
+    <string name="game_controller_button_thumbl">Left stick click</string>
     <!-- Title for the preference category for button thumbr remapping. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_thumbr">Right Stick Click</string>
+    <string name="game_controller_button_thumbr">Right stick click</string>
     <!-- Title for the preference category for dpad remapping. [CHAR LIMIT=35] -->
     <string name="game_controller_dpad">D-pad</string>
     <!-- Title for the preference category for left stick remapping. [CHAR LIMIT=35] -->
-    <string name="game_controller_stick_left">Left Stick</string>
+    <string name="game_controller_stick_left">Left stick</string>
     <!-- Title for the preference category for right stick remapping. [CHAR LIMIT=35] -->
-    <string name="game_controller_stick_right">Right Stick</string>
+    <string name="game_controller_stick_right">Right stick</string>
     <!-- Button preference title to reset all game controller settings to default. [CHAR LIMIT=35] -->
     <string name="game_controller_remapping_reset_preference_title">Reset to default</string>
     <!-- Reset dialog title to reset all game controller settings to default. [CHAR LIMIT=35] -->
@@ -5311,8 +5315,11 @@
     <string name="game_controller_remapping_reset_dialog_message">All your controller settings will be reset to default</string>
     <!-- Game controller reset dialog confirmation button text [CHAR LIMIT=35] -->
     <string name="game_controller_reset_dialog_button">Reset</string>
-    <!-- Content description for the game controller remapping preference summary. [CHAR LIMIT=NONE] -->
-    <string name="game_controller_remapping_preference_content_description">currently assigned to <xliff:g id="actual_value">%1$s</xliff:g></string>
+    <!-- This string is used to describe the summary of a preference in the game controller remapping Settings screen.
+    It lets the user know what button/stick the button/stick in the preference title is currently assigned to.
+    Example: for a preference mapping the L1 button to the triangle button, the full preference description would be "L1 Button, currently assigned to Triangle Button".
+    [CHAR LIMIT=NONE] [SCREENSHOT=screen/5W8V9C2veeTzNNM] -->
+    <string name="game_controller_remapping_preference_content_description">currently assigned to <xliff:g id="actual_value" example="Triangle Button">%1$s</xliff:g></string>
 
     <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
     <string name="trackpad_settings">Touchpad</string>
@@ -8825,6 +8832,12 @@
     <string name="device_dashboard_summary">Touchpad, keyboard, display, sound</string>
     <!-- Summary for Display settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_display_dashboard_summary">Brightness, color, dark theme, lock screen, text</string>
+    <!-- Summary for Device Display settings, with touch [CHAR LIMIT=NONE] -->
+    <string name="device_display_dashboard_summary_with_touch">Brightness, color, dark theme, lock screen, text, touch</string>
+    <!-- Summary for Device Display settings, with connected display [CHAR LIMIT=NONE] -->
+    <string name="device_display_dashboard_summary_with_external">Brightness, color, dark theme, lock screen, text, connected display</string>
+    <!-- Summary for Device Display settings, with touch and connected display [CHAR LIMIT=NONE] -->
+    <string name="device_display_dashboard_summary_with_touch_external">Brightness, color, dark theme, lock screen, text, touch, connected display</string>
     <!-- Summary for Keyboard settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_keyboard_settings_summary">Keyboard selection, tools</string>
     <!-- Summary for Mouse settings under Device dashboard [CHAR LIMIT=NONE]-->
@@ -11514,56 +11527,66 @@
     <!-- Computer control automation settings title [CHAR LIMIT=40] [SCREENSHOT=screen/7GzP2k3PhF8UTVQ] -->
     <string name="computer_control_automation_page_title">Screen automation</string>
     <!-- Sub heading for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
-    <string name="computer_control_automation_sub_heading">This app will be able to see and interact with other apps\' screen content to help you complete tasks, even when the apps are in the background</string>
-    <!-- Sub heading for setting which controls whether an app can automate other apps (used when flag for per app consent is enabled) [CHAR LIMIT=NONE] [SCREENSHOT=screen/9JK685fVyrjRmbA] -->
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent">When <xliff:g  example="Example App">%1$s</xliff:g> is your default assistant, it will be able to see and interact with allowed apps\' screen content to help you complete tasks</string>
-    <!-- Footer summary for setting which controls whether an app can automate other apps, informing that only apps that can be automated are listed here [CHAR LIMIT=NONE] [SCREENSHOT=screen/9JK685fVyrjRmbA] -->
-    <string name="computer_control_automation_footer_info">Apps you haven\'t allowed or have allowed \"Only this time\" aren\'t shown.</string>
-    <!-- Footer summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/9JK685fVyrjRmbA] -->
-    <string name="computer_control_automation_footer_summary">If you don\'t allow screen automation, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g example="Example App">%1$s</xliff:g> in other ways.</string>
+    <string name="computer_control_automation_sub_heading">This app will be able to see and interact with other apps\u2019 screen content to help you complete tasks, even when the apps are in the background</string>
+    <!-- Sub heading for setting which controls whether an app can automate other apps (used when flag for per app consent is enabled) [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent"><xliff:g  example="Example App">%1$s</xliff:g> can see and interact with screen content of apps that you\u2019ve allowed to help you complete tasks</string>
+    <!-- Footer summary for setting which controls whether an app can automate other apps, informing that only apps that can be automated are listed here [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_footer_info">Apps for which you chose &lt;strong&gt;Always Allow&lt;/strong&gt; in permissions are shown here. Apps you allowed &lt;strong&gt;Only this time&lt;/strong&gt; or didn\u2019t allow aren\u2019t shown.</string>
+    <!-- Footer summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_footer_summary">If you don\u2019t allow screen automation, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g example="Example App">%1$s</xliff:g> in other ways.</string>
+    <!-- Footer summary for setting which controls whether an app can automate other apps (used when flag for per app consent is enabled) [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent">When you remove an app on this screen, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g  example="Example App">%1$s</xliff:g> in other ways.</string>
+
     <!-- Summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/55Y5GXxjQJNFvRT] -->
-    <string name="computer_control_automation_page_summary">Allow apps to help you complete tasks by interacting with other apps\' screen content</string>
+    <string name="computer_control_automation_page_summary">Allow apps to help you complete tasks by interacting with other apps\u2019 screen content</string>
+    <!-- Summary for setting which controls whether an app can automate other apps (used when flag for per app consent is enabled) [CHAR LIMIT=NONE] [SCREENSHOT=screen/5b5rGqdGA9Eyoyz] -->
+    <string name="computer_control_automation_page_summary_flag_per_app_consent">Allow apps to see and interact with the screen content to help you complete tasks</string>
     <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_ask_every_time">Ask every time</string>
     <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_always_allow">Always allow</string>
     <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
-    <string name="computer_control_automation_dont_allow">Don\'t allow</string>
-    <!-- App list header summary for apps that can be automated [CHAR LIMIT=NONE] [SCREENSHOT=screen/9JK685fVyrjRmbA] -->
-    <string name="computer_control_automation_automatable_app_list_header">Allowed apps</string>
-    <!-- App list summary for no allowed apps that can be automated [CHAR LIMIT=NONE] [SCREENSHOT=screen/5Qoy95JMCfHvGQZ] -->
-    <string name="computer_control_automation_agent_list_empty_title_per_app"><xliff:g id="app_name" example="Example App">%1$s</xliff:g> has no allowed apps for screen automation</string>
-    <!-- Footer summary requirement note for screen automation [CHAR LIMIT=NONE] [SCREENSHOT=screen/9JK685fVyrjRmbA] -->
-    <string name="computer_control_automation_footer_requirement">To use screen automation with this app, it must be set as your default digital assistant.</string>
+    <string name="computer_control_automation_dont_allow">Don\u2019t allow</string>
+    <!-- App list header summary for apps that can be automated [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_automatable_app_list_header">Apps you\u2019ve allowed</string>
+    <!-- App list summary for no allowed apps that can be automated [CHAR LIMIT=NONE] [SCREENSHOT=screen/34vZEivCFH7VbTE] -->
+    <string name="computer_control_automation_agent_list_empty_title_per_app">You haven\u2019t allowed any apps yet</string>
+    <!-- Footer summary requirement note for screen automation [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_footer_requirement">Only the app you\u2019ve set as your default digital assistant can use screen automation.</string>
     <!-- Toast message when app is removed from automatable list [CHAR LIMIT=45] -->
     <string name="computer_control_automation_automatable_app_removed">App removed</string>
-    <!-- Link text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/9JK685fVyrjRmbA] -->
-    <string name="computer_control_automation_default_digital_assistant_settings">Default digital assistant settings</string>
-    <!-- Preference summary for allowed automatable app count [CHAR LIMIT=45] [SCREENSHOT=screen/7KxK29hDwVzf9f4] -->
+    <!-- Toast message when all apps are removed from automatable list [CHAR LIMIT=45] -->
+    <string name="computer_control_automation_automatable_all_apps_removed">All apps removed</string>
+    <!-- Link text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_default_digital_assistant_settings">Assistant settings</string>
+    <!-- Preference summary for allowed automatable app count [CHAR LIMIT=45] [SCREENSHOT=screen/6dwM3xChXExDtSj] -->
     <string name="computer_control_automation_apps_allowed">{count, plural,
         =1      {1 app allowed}
         other   {# apps allowed}
         }</string>
-    <!-- Summary text for an app when no other apps are allowed for screen automation. [CHAR LIMIT=45] [SCREENSHOT=screen/7KxK29hDwVzf9f4] -->
+    <!-- Preference summary for allowed agent app count [CHAR LIMIT=45] [SCREENSHOT=screen/AWrS8FMrHJY583Z] -->
+    <string name="computer_control_automation_agents_allowed">{count, plural,
+        =1      {1 app allowed}
+        other   {# apps allowed}
+        }</string>
+    <!-- Summary text for an app when no other apps are allowed for screen automation. [CHAR LIMIT=45] [SCREENSHOT=screen/6Q4DHoZHd8urFuj] -->
     <string name="computer_control_automation_no_apps_allowed">No apps allowed</string>
-    <!-- Title for the button to clear all allowed apps for screen automation. [CHAR LIMIT=45] [SCREENSHOT=screen/9JK685fVyrjRmbA] -->
-    <string name="computer_control_automation_clear_all_apps">Clear all apps</string>
-    <!-- Category title for default assistant agent app [CHAR LIMIT=45] [SCREENSHOT=screen/9rDNTpAU6doUMES] -->
+    <!-- Title for the button to clear all allowed apps for screen automation. [CHAR LIMIT=45] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_clear_all_apps">Remove all apps</string>
+    <!-- Category title for default assistant agent app [CHAR LIMIT=45] [SCREENSHOT=screen/7gVSWSuePKETBEs] -->
     <string name="computer_control_automation_default_digital_assistant">Default digital assistant</string>
-    <!-- Banner title to change the assistant [CHAR LIMIT=45] [SCREENSHOT=screen/ADFefwvst2Yw6SU] -->
-    <string name="computer_control_automation_banner_to_change_assistant_title"><xliff:g  example="Example App">%1$s</xliff:g> not available for screen automation</string>
-    <!-- Banner text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/ADFefwvst2Yw6SU] -->
-    <string name="computer_control_automation_banner_to_change_assistant_text">Set <xliff:g  example="Example App">%1$s</xliff:g> as your default assistant to allow screen automation</string>
-    <!-- Banner button text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/ADFefwvst2Yw6SU] -->
-    <string name="computer_control_automation_banner_to_change_assistant_button_text">Manage digital assistant</string>
-    <!-- Header summary for computer control automation agent list [CHAR LIMIT=NONE] [SCREENSHOT=screen/7KxK29hDwVzf9f4] -->
-    <string name="computer_control_automation_agent_list_header">These apps can see and interact with other apps\' screen content to help you complete tasks</string>
-    <!-- Footer summary for computer control automation agent list [CHAR LIMIT=NONE] [SCREENSHOT=screen/7KxK29hDwVzf9f4] -->
-    <string name="computer_control_automation_agent_list_footer_requirement">Only your default assistant app can use screen automation.</string>
-    <!-- Empty state title for computer control automation agent list [CHAR LIMIT=NONE] -->
-    <string name="computer_control_automation_agent_list_empty_title">You haven\'t installed any apps that can use screen automation</string>
-    <!-- Header summary for computer control automation target list [CHAR LIMIT=NONE] [SCREENSHOT=screen/9rDNTpAU6doUMES] -->
-    <string name="computer_control_automation_target_list_header">Apps that can use screen automation to see and interact with <xliff:g  example="Example App">%1$s</xliff:g> screen content to help you complete tasks</string>
+    <!-- Banner title to change the assistant [CHAR LIMIT=45] [SCREENSHOT=screen/7yYg35RrTPZyoFu] -->
+    <string name="computer_control_automation_banner_to_change_assistant_title"><xliff:g  example="Example App">%1$s</xliff:g> can\u2019t use screen automation</string>
+    <!-- Banner text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/7yYg35RrTPZyoFu] -->
+    <string name="computer_control_automation_banner_to_change_assistant_text">Only your default digital assistant can use screen automation</string>
+    <!-- Banner button text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/7yYg35RrTPZyoFu] -->
+    <string name="computer_control_automation_banner_to_change_assistant_button_text">Change assistant</string>
+    <!-- Header summary for computer control automation agent list [CHAR LIMIT=NONE] [SCREENSHOT=screen/6Q4DHoZHd8urFuj] -->
+    <string name="computer_control_automation_agent_list_header">These apps can see and interact with the screen content of apps you\u2019ve allowed, to help you complete tasks. </string>
+    <!-- Empty state title for computer control automation agent list [CHAR LIMIT=NONE] [SCREENSHOT=screen/BNQNU8EYxipxZyS] -->
+    <string name="computer_control_automation_agent_list_empty_title">You haven\u2019t installed any apps that can use screen automation</string>
+    <!-- Header summary for computer control automation target list [CHAR LIMIT=NONE] [SCREENSHOT=screen/7gVSWSuePKETBEs] -->
+    <string name="computer_control_automation_target_list_header">These apps can see and interact with <xliff:g  example="Example App">%1$s</xliff:g> screen content to help you complete tasks</string>
 
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
     <string name="full_screen_intent_title">Full-screen notifications</string>

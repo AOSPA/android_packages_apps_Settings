@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.stateprovidersources
 
 import android.content.Context
 import android.provider.Settings
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
@@ -40,7 +41,7 @@ class AdaptiveBrightnessStateSource : DeviceStateSource {
         val item =
             DeviceStateItem(
                 key = "auto_brightness_entry",
-                purpose = "auto_brightness_entry",
+                purpose = context.getString(R.string.auto_brightness_purpose),
                 jsonValue = isAdaptiveBrightnessEnabled.toString(),
             )
 

@@ -29,13 +29,18 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Preconditio
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_BATTERY
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 @ProvidePreferenceScreen(PowerUsageAdvancedScreen.KEY)
 open class PowerUsageAdvancedScreen : PreferenceScreenMixin, PreferenceAvailabilityProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_BATTERY)
+    override fun tags(context: Context) = arrayOf(
+        APP_FUNCTION_BATTERY,
+        // exclude this screen from api result since we have the same data in api_battery_usage_summary
+        UI_ONLY_PREFERENCE
+    )
 
     override val key: String
         get() = KEY

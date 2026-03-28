@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.android.settings.R;
@@ -41,7 +42,7 @@ public class BluetoothRebootDialog extends InstrumentedDialogFragment
     /**
      * The function to show the Reboot Dialog.
      */
-    public static void show(DevelopmentSettingsDashboardFragment host) {
+    public static void show(Fragment host) {
         final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
             final BluetoothRebootDialog dialog =
