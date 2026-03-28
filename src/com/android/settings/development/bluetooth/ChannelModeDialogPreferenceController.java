@@ -28,17 +28,15 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Dialog preference controller to set the Bluetooth A2DP config of audio channel mode
- */
-public class ChannelModeDialogPreferenceController extends
-        AbstractBluetoothDialogPreferenceController {
+/** Dialog preference controller to set the Bluetooth A2DP config of audio channel mode */
+public class ChannelModeDialogPreferenceController
+        extends AbstractBluetoothDialogPreferenceController {
 
     private static final String KEY = "bluetooth_channel_mode_settings";
     private static final String TAG = "BtChannelModeCtr";
 
-    public ChannelModeDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                          A2dpConfigStore store) {
+    public ChannelModeDialogPreferenceController(
+            Context context, Lifecycle lifecycle, A2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 
@@ -60,8 +58,9 @@ public class ChannelModeDialogPreferenceController extends
             case 0:
                 final BluetoothCodecConfig currentConfig = getCurrentCodecConfig();
                 if (currentConfig != null) {
-                    channelModeValue = getHighestChannelMode(getSelectableByCodecType(
-                            currentConfig.getCodecType()));
+                    channelModeValue =
+                            getHighestChannelMode(
+                                    getSelectableByCodecType(currentConfig.getCodecType()));
                 }
                 break;
             case 1:

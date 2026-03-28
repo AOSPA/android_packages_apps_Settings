@@ -39,11 +39,9 @@ public class A2dpHwOffloadPreferenceController extends DeveloperOptionsPreferenc
     static final String A2DP_OFFLOAD_DISABLED_PROPERTY = "persist.bluetooth.a2dp_offload.disabled";
     static final String A2DP_OFFLOAD_SUPPORTED_PROPERTY = "ro.bluetooth.a2dp_offload.supported";
 
-    @VisibleForTesting
-    boolean mChanged = false;
+    @VisibleForTesting boolean mChanged = false;
 
-    public A2dpHwOffloadPreferenceController(Context context,
-            @Nullable Fragment fragment) {
+    public A2dpHwOffloadPreferenceController(Context context, @Nullable Fragment fragment) {
         super(context);
         mFragment = fragment;
     }
@@ -96,13 +94,11 @@ public class A2dpHwOffloadPreferenceController extends DeveloperOptionsPreferenc
         final boolean offloadSupported =
                 SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false);
         final boolean offloadDisabled =
-                    SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
+                SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
         return offloadSupported ? !offloadDisabled : true;
     }
 
-    /**
-     * Called when the RebootDialog confirm is clicked.
-     */
+    /** Called when the RebootDialog confirm is clicked. */
     public void onRebootDialogConfirmed() {
         if (!mChanged) {
             return;
@@ -111,14 +107,12 @@ public class A2dpHwOffloadPreferenceController extends DeveloperOptionsPreferenc
                 SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false);
         SystemProperties.set(A2DP_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(!offloadDisabled));
         if (!offloadDisabled) {
-            SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY,
-                    Boolean.toString(!offloadDisabled));
+            SystemProperties.set(
+                    LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(!offloadDisabled));
         }
     }
 
-    /**
-     * Called when the RebootDialog cancel is clicked.
-     */
+    /** Called when the RebootDialog cancel is clicked. */
     public void onRebootDialogCanceled() {
         mChanged = false;
     }

@@ -16,13 +16,9 @@
 
 package com.android.settings.development.bluetooth;
 
-/**
- * Interface for SnoopLogPreferenceController callbacks.
- */
+/** Interface for SnoopLogPreferenceController callbacks. */
 public interface SnoopLogHost {
 
-    /**
-     * Called when the Bluetooth Snoop Log Mode changes.
-     */
+    /** Called when the Bluetooth Snoop Log Mode changes. */
     void onSettingChanged();
 }

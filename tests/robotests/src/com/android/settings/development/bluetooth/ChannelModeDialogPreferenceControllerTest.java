@@ -53,12 +53,9 @@ public class ChannelModeDialogPreferenceControllerTest {
 
     private static final String DEVICE_ADDRESS = "00:11:22:33:44:55";
 
-    @Mock
-    private BluetoothA2dp mBluetoothA2dp;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
-    @Mock
-    private PreferenceScreen mScreen;
+    @Mock private BluetoothA2dp mBluetoothA2dp;
+    @Mock private BluetoothAdapter mBluetoothAdapter;
+    @Mock private PreferenceScreen mScreen;
 
     private ChannelModeDialogPreferenceController mController;
     private ChannelModeDialogPreference mPreference;
@@ -79,21 +76,24 @@ public class ChannelModeDialogPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mA2dpConfigStore = spy(new A2dpConfigStore());
         mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
-        mController = new ChannelModeDialogPreferenceController(mContext, mLifecycle,
-                mA2dpConfigStore);
+        mController =
+                new ChannelModeDialogPreferenceController(mContext, mLifecycle, mA2dpConfigStore);
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = new ChannelModeDialogPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
-        mCodecConfigAAC = new BluetoothCodecConfig.Builder()
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC)
-                .setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_STEREO)
-                .build();
-        mCodecConfigSBC = new BluetoothCodecConfig.Builder()
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC)
-                .setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_MONO
-                            | BluetoothCodecConfig.CHANNEL_MODE_STEREO)
-                .build();
+        mCodecConfigAAC =
+                new BluetoothCodecConfig.Builder()
+                        .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC)
+                        .setChannelMode(BluetoothCodecConfig.CHANNEL_MODE_STEREO)
+                        .build();
+        mCodecConfigSBC =
+                new BluetoothCodecConfig.Builder()
+                        .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC)
+                        .setChannelMode(
+                                BluetoothCodecConfig.CHANNEL_MODE_MONO
+                                        | BluetoothCodecConfig.CHANNEL_MODE_STEREO)
+                        .build();
         when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
                 .thenReturn(Arrays.asList(mActiveDevice));
     }
@@ -101,10 +101,11 @@ public class ChannelModeDialogPreferenceControllerTest {
     @Test
     public void writeConfigurationValues_selectDefault_setHighest() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
-        mCodecStatus = new BluetoothCodecStatus.Builder()
-                .setCodecConfig(mCodecConfigSBC)
-                .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
-                .build();
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigSBC)
+                        .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
+                        .build();
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
@@ -123,17 +124,19 @@ public class ChannelModeDialogPreferenceControllerTest {
 
     @Test
     public void getCurrentIndexByConfig_verifyIndex() {
-        assertThat(mController.getCurrentIndexByConfig(mCodecConfigAAC)).isEqualTo(
-                mController.convertCfgToBtnIndex(BluetoothCodecConfig.CHANNEL_MODE_STEREO));
+        assertThat(mController.getCurrentIndexByConfig(mCodecConfigAAC))
+                .isEqualTo(
+                        mController.convertCfgToBtnIndex(BluetoothCodecConfig.CHANNEL_MODE_STEREO));
     }
 
     @Test
     public void getSelectableIndex_verifyList() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
-        mCodecStatus = new BluetoothCodecStatus.Builder()
-                .setCodecConfig(mCodecConfigSBC)
-                .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
-                .build();
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigSBC)
+                        .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
+                        .build();
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         List<Integer> indexList = new ArrayList<>();

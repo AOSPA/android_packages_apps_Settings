@@ -26,12 +26,9 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-/**
- * Controller for the "Bluetooth HCI snoop log socket" developer option.
- */
-public class SnoopLogSocketPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+/** Controller for the "Bluetooth HCI snoop log socket" developer option. */
+public class SnoopLogSocketPreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String BLUETOOTH_SNOOP_LOG_SOCKET_KEY = "bt_hci_snoop_log_socket";
 
@@ -51,15 +48,15 @@ public class SnoopLogSocketPreferenceController extends
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        SystemProperties.set(BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY,
-                isEnabled ? "true" : "false");
+        SystemProperties.set(BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY, isEnabled ? "true" : "false");
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final boolean isEnabled = SystemProperties.getBoolean(
-                BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY, false /* default */);
+        final boolean isEnabled =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY, false /* default */);
         ((TwoStatePreference) mPreference).setChecked(isEnabled);
     }
 

@@ -16,14 +16,13 @@
 
 package com.android.settings.development.bluetooth;
 
-import static com.android.settings.development.bluetooth.LeAudioModePreferenceController
-        .LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY;
+import static com.android.settings.development.bluetooth.LeAudioModePreferenceController.LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothStatusCodes;
@@ -49,14 +48,10 @@ import java.util.Arrays;
 @RunWith(RobolectricTestRunner.class)
 public class LeAudioModePreferenceControllerTest {
 
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private DevelopmentSettingsDashboardFragment mFragment;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
-    @Mock
-    private ListPreference mPreference;
+    @Mock private PreferenceScreen mPreferenceScreen;
+    @Mock private DevelopmentSettingsDashboardFragment mFragment;
+    @Mock private BluetoothAdapter mBluetoothAdapter;
+    @Mock private ListPreference mPreference;
 
     private Context mContext;
     private LeAudioModePreferenceController mController;
@@ -67,17 +62,17 @@ public class LeAudioModePreferenceControllerTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
-        mListValues = mContext.getResources().getStringArray(
-                R.array.bluetooth_leaudio_mode_values);
-        mListSummaries = mContext.getResources().getStringArray(
-                R.array.bluetooth_leaudio_mode);
+        mListValues = mContext.getResources().getStringArray(R.array.bluetooth_leaudio_mode_values);
+        mListSummaries = mContext.getResources().getStringArray(R.array.bluetooth_leaudio_mode);
     }
 
-    private void setupUnicastBroadcastSupportStatus(boolean bapUnicastClientEnabled,
-            boolean bapBroadcastSourceEnabled) {
-        SystemProperties.set("bluetooth.profile.bap.unicast.client.enabled",
+    private void setupUnicastBroadcastSupportStatus(
+            boolean bapUnicastClientEnabled, boolean bapBroadcastSourceEnabled) {
+        SystemProperties.set(
+                "bluetooth.profile.bap.unicast.client.enabled",
                 String.valueOf(bapUnicastClientEnabled));
-        SystemProperties.set("bluetooth.profile.bap.broadcast.source.enabled",
+        SystemProperties.set(
+                "bluetooth.profile.bap.broadcast.source.enabled",
                 String.valueOf(bapBroadcastSourceEnabled));
         mController = spy(new LeAudioModePreferenceController(mContext, mFragment));
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
@@ -161,8 +156,11 @@ public class LeAudioModePreferenceControllerTest {
         mController.mNewMode = mListValues[1];
 
         mController.onRebootDialogConfirmed();
-        assertThat(SystemProperties.get(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0])
-                        .equals(mController.mNewMode)).isTrue();
+        assertThat(
+                        SystemProperties.get(
+                                        LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0])
+                                .equals(mController.mNewMode))
+                .isTrue();
     }
 
     @Test
@@ -173,8 +171,11 @@ public class LeAudioModePreferenceControllerTest {
         mController.mNewMode = mListValues[1];
 
         mController.onRebootDialogConfirmed();
-        assertThat(SystemProperties.get(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0])
-                        .equals(mController.mNewMode)).isFalse();
+        assertThat(
+                        SystemProperties.get(
+                                        LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0])
+                                .equals(mController.mNewMode))
+                .isFalse();
     }
 
     @Test
@@ -185,20 +186,22 @@ public class LeAudioModePreferenceControllerTest {
         mController.mNewMode = mListValues[1];
 
         mController.onRebootDialogCanceled();
-        assertThat(SystemProperties.get(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0])
-                        .equals(mController.mNewMode)).isFalse();
+        assertThat(
+                        SystemProperties.get(
+                                        LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0])
+                                .equals(mController.mNewMode))
+                .isFalse();
     }
 
     @Test
     public void onBluetoothTurnOff_shouldNotChangeLeAudioMode() {
         setupUnicastBroadcastSupportStatus(true, true);
         SystemProperties.set(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[1]);
-        when(mBluetoothAdapter.isEnabled())
-                .thenReturn(false);
+        when(mBluetoothAdapter.isEnabled()).thenReturn(false);
 
         mController.updateState(mPreference);
-        final String mode = SystemProperties
-                .get(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0]);
+        final String mode =
+                SystemProperties.get(LE_AUDIO_DYNAMIC_SWITCHER_MODE_PROPERTY, mListValues[0]);
         assertThat(mode.equals(mListValues[1])).isTrue();
     }
 }

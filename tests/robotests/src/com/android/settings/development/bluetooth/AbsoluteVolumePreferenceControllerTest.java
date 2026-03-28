@@ -40,10 +40,8 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class AbsoluteVolumePreferenceControllerTest {
 
-    @Mock
-    private SwitchPreference mPreference;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
+    @Mock private SwitchPreference mPreference;
+    @Mock private PreferenceScreen mPreferenceScreen;
 
     private Context mContext;
     private AbsoluteVolumePreferenceController mController;
@@ -54,7 +52,7 @@ public class AbsoluteVolumePreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = new AbsoluteVolumePreferenceController(mContext);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
+                .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -62,8 +60,9 @@ public class AbsoluteVolumePreferenceControllerTest {
     public void onPreferenceChanged_settingEnabled_shouldTurnOnBluetoothDisableAbsoluteVolume() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final boolean mode = SystemProperties.getBoolean(
-                BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
+        final boolean mode =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
 
         assertThat(mode).isTrue();
     }
@@ -72,8 +71,9 @@ public class AbsoluteVolumePreferenceControllerTest {
     public void onPreferenceChanged_settingDisabled_shouldTurnOffBluetoothDisableAbsoluteVolume() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final boolean mode = SystemProperties.getBoolean(
-                BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
+        final boolean mode =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
 
         assertThat(mode).isFalse();
     }
@@ -98,8 +98,9 @@ public class AbsoluteVolumePreferenceControllerTest {
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
 
-        final boolean mode = SystemProperties.getBoolean(
-                BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
+        final boolean mode =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
 
         assertThat(mode).isFalse();
         verify(mPreference).setEnabled(false);

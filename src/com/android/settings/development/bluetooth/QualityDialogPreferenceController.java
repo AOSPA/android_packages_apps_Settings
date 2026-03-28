@@ -29,17 +29,14 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Dialog preference controller to set the Bluetooth A2DP config of LDAC quality
- */
-public class QualityDialogPreferenceController extends
-        AbstractBluetoothDialogPreferenceController {
+/** Dialog preference controller to set the Bluetooth A2DP config of LDAC quality */
+public class QualityDialogPreferenceController extends AbstractBluetoothDialogPreferenceController {
 
     private static final String KEY = "bluetooth_a2dp_ldac_playback_quality";
     private static final String TAG = "BtQualityCtr";
 
-    public QualityDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                      A2dpConfigStore store) {
+    public QualityDialogPreferenceController(
+            Context context, Lifecycle lifecycle, A2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 

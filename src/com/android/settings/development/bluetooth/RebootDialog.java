@@ -39,14 +39,11 @@ public class RebootDialog extends InstrumentedDialogFragment
 
     public static final String TAG = "BluetoothReboot";
 
-    /**
-     * The function to show the Reboot Dialog.
-     */
+    /** The function to show the Reboot Dialog. */
     public static void show(Fragment host) {
         final FragmentManager manager = host.getActivity().getSupportFragmentManager();
         if (manager.findFragmentByTag(TAG) == null) {
-            final RebootDialog dialog =
-                    new RebootDialog();
+            final RebootDialog dialog = new RebootDialog();
             dialog.setTargetFragment(host, 0 /* requestCode */);
             dialog.show(manager, TAG);
         }
@@ -62,17 +59,14 @@ public class RebootDialog extends InstrumentedDialogFragment
         return new AlertDialog.Builder(getActivity())
                 .setMessage(R.string.bluetooth_disable_hw_offload_dialog_message)
                 .setTitle(R.string.bluetooth_disable_hw_offload_dialog_title)
-                .setPositiveButton(
-                        R.string.bluetooth_disable_hw_offload_dialog_confirm, this)
-                .setNegativeButton(
-                        R.string.bluetooth_disable_hw_offload_dialog_cancel, this)
+                .setPositiveButton(R.string.bluetooth_disable_hw_offload_dialog_confirm, this)
+                .setNegativeButton(R.string.bluetooth_disable_hw_offload_dialog_cancel, this)
                 .create();
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        final OnRebootDialogListener host =
-                (OnRebootDialogListener) getTargetFragment();
+        final OnRebootDialogListener host = (OnRebootDialogListener) getTargetFragment();
         if (host == null) {
             return;
         }
@@ -86,18 +80,14 @@ public class RebootDialog extends InstrumentedDialogFragment
     }
 
     /**
-     * The interface for the RebootDialogListener to provide the action as the
-     * confirmed or canceled clicked.
+     * The interface for the RebootDialogListener to provide the action as the confirmed or canceled
+     * clicked.
      */
     public interface OnRebootDialogListener {
-        /**
-         * Called when the user presses reboot on the warning dialog.
-         */
+        /** Called when the user presses reboot on the warning dialog. */
         void onRebootDialogConfirmed();
 
-        /**
-         * Called when the user presses cancel on the warning dialog.
-         */
+        /** Called when the user presses cancel on the warning dialog. */
         void onRebootDialogCanceled();
     }
 }

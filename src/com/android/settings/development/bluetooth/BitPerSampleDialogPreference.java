@@ -22,11 +22,9 @@ import android.widget.RadioGroup;
 
 import com.android.settings.R;
 
-/**
- * Dialog preference to set the Bluetooth A2DP config of bit per sample
- */
-public class BitPerSampleDialogPreference extends BaseBluetoothDialogPreference implements
-        RadioGroup.OnCheckedChangeListener {
+/** Dialog preference to set the Bluetooth A2DP config of bit per sample */
+public class BitPerSampleDialogPreference extends BaseBluetoothDialogPreference
+        implements RadioGroup.OnCheckedChangeListener {
 
     public BitPerSampleDialogPreference(Context context) {
         super(context);
@@ -38,14 +36,13 @@ public class BitPerSampleDialogPreference extends BaseBluetoothDialogPreference 
         initialize(context);
     }
 
-    public BitPerSampleDialogPreference(Context context, AttributeSet attrs,
-                                                 int defStyleAttr) {
+    public BitPerSampleDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initialize(context);
     }
 
-    public BitPerSampleDialogPreference(Context context, AttributeSet attrs,
-                                                 int defStyleAttr, int defStyleRes) {
+    public BitPerSampleDialogPreference(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initialize(context);
     }
@@ -60,13 +57,19 @@ public class BitPerSampleDialogPreference extends BaseBluetoothDialogPreference 
         mRadioButtonIds.add(R.id.bluetooth_audio_bit_per_sample_16);
         mRadioButtonIds.add(R.id.bluetooth_audio_bit_per_sample_24);
         mRadioButtonIds.add(R.id.bluetooth_audio_bit_per_sample_32);
-        String[] stringArray = context.getResources().getStringArray(
-                com.android.settingslib.R.array.bluetooth_a2dp_codec_bits_per_sample_titles);
+        String[] stringArray =
+                context.getResources()
+                        .getStringArray(
+                                com.android.settingslib.R.array
+                                        .bluetooth_a2dp_codec_bits_per_sample_titles);
         for (int i = 0; i < stringArray.length; i++) {
             mRadioButtonStrings.add(stringArray[i]);
         }
-        stringArray = context.getResources().getStringArray(
-                com.android.settingslib.R.array.bluetooth_a2dp_codec_bits_per_sample_summaries);
+        stringArray =
+                context.getResources()
+                        .getStringArray(
+                                com.android.settingslib.R.array
+                                        .bluetooth_a2dp_codec_bits_per_sample_summaries);
         for (int i = 0; i < stringArray.length; i++) {
             mSummaryStrings.add(stringArray[i]);
         }

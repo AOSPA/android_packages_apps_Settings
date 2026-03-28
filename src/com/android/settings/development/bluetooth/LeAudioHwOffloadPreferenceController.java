@@ -16,8 +16,8 @@
 
 package com.android.settings.development.bluetooth;
 
-import static com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController.A2DP_OFFLOAD_SUPPORTED_PROPERTY;
 import static com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController.A2DP_OFFLOAD_DISABLED_PROPERTY;
+import static com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController.A2DP_OFFLOAD_SUPPORTED_PROPERTY;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -34,11 +34,8 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-/**
- * Preference controller to control Bluetooth LE audio offload
- */
-public class LeAudioHwOffloadPreferenceController
-        extends DeveloperOptionsPreferenceController
+/** Preference controller to control Bluetooth LE audio offload */
+public class LeAudioHwOffloadPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String PREFERENCE_KEY = "bluetooth_disable_le_audio_hw_offload";
@@ -49,14 +46,11 @@ public class LeAudioHwOffloadPreferenceController
     static final String LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY =
             "ro.bluetooth.leaudio_offload.supported";
 
-    @VisibleForTesting
-    BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting BluetoothAdapter mBluetoothAdapter;
 
-    @VisibleForTesting
-    boolean mChanged = false;
+    @VisibleForTesting boolean mChanged = false;
 
-    public LeAudioHwOffloadPreferenceController(Context context,
-            @Nullable Fragment fragment) {
+    public LeAudioHwOffloadPreferenceController(Context context, @Nullable Fragment fragment) {
         super(context);
         mFragment = fragment;
         mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();
@@ -110,7 +104,7 @@ public class LeAudioHwOffloadPreferenceController
         final boolean a2dpOffloadSupported =
                 SystemProperties.getBoolean(A2DP_OFFLOAD_SUPPORTED_PROPERTY, false);
 
-        if(!leAudioEnabled || !leAudioOffloadSupported || !a2dpOffloadSupported) {
+        if (!leAudioEnabled || !leAudioOffloadSupported || !a2dpOffloadSupported) {
             mPreference.setEnabled(false);
         } else {
             ((TwoStatePreference) mPreference).setChecked(false);
@@ -118,36 +112,29 @@ public class LeAudioHwOffloadPreferenceController
         }
     }
 
-    /**
-     * Check if the le audio offload setting is default value.
-     */
+    /** Check if the le audio offload setting is default value. */
     public boolean isDefaultValue() {
         final boolean offloadSupported =
                 !SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, false)
-                && SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
+                        && SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, false);
         final boolean offloadDisabled =
-                    SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);
+                SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);
         return offloadSupported ? !offloadDisabled : true;
     }
 
-    /**
-     * Called when the RebootDialog confirm is clicked.
-     */
+    /** Called when the RebootDialog confirm is clicked. */
     public void onRebootDialogConfirmed() {
         if (!mChanged) {
             return;
         }
 
         final boolean leaudioOffloadDisabled =
-                SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY,
-                false);
-        SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY,
-                Boolean.toString(!leaudioOffloadDisabled));
+                SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);
+        SystemProperties.set(
+                LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(!leaudioOffloadDisabled));
     }
 
-    /**
-     * Called when the RebootDialog cancel is clicked.
-     */
+    /** Called when the RebootDialog cancel is clicked. */
     public void onRebootDialogCanceled() {
         mChanged = false;
     }

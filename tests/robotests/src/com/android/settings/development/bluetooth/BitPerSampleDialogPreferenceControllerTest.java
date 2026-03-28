@@ -53,12 +53,9 @@ public class BitPerSampleDialogPreferenceControllerTest {
 
     private static final String DEVICE_ADDRESS = "00:11:22:33:44:55";
 
-    @Mock
-    private BluetoothA2dp mBluetoothA2dp;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
-    @Mock
-    private PreferenceScreen mScreen;
+    @Mock private BluetoothA2dp mBluetoothA2dp;
+    @Mock private BluetoothAdapter mBluetoothAdapter;
+    @Mock private PreferenceScreen mScreen;
 
     private BitPerSampleDialogPreferenceController mController;
     private BitPerSampleDialogPreference mPreference;
@@ -79,21 +76,26 @@ public class BitPerSampleDialogPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mA2dpConfigStore = spy(new A2dpConfigStore());
         mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
-        mController = spy(new BitPerSampleDialogPreferenceController(mContext, mLifecycle,
-                mA2dpConfigStore));
+        mController =
+                spy(
+                        new BitPerSampleDialogPreferenceController(
+                                mContext, mLifecycle, mA2dpConfigStore));
         mPreference = new BitPerSampleDialogPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
         mController.mBluetoothAdapter = mBluetoothAdapter;
-        mCodecConfigAAC = new BluetoothCodecConfig.Builder()
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC)
-                .setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_16
-                                | BluetoothCodecConfig.BITS_PER_SAMPLE_24)
-                .build();
-        mCodecConfigSBC = new BluetoothCodecConfig.Builder()
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC)
-                .setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_24)
-                .build();
+        mCodecConfigAAC =
+                new BluetoothCodecConfig.Builder()
+                        .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC)
+                        .setBitsPerSample(
+                                BluetoothCodecConfig.BITS_PER_SAMPLE_16
+                                        | BluetoothCodecConfig.BITS_PER_SAMPLE_24)
+                        .build();
+        mCodecConfigSBC =
+                new BluetoothCodecConfig.Builder()
+                        .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_SBC)
+                        .setBitsPerSample(BluetoothCodecConfig.BITS_PER_SAMPLE_24)
+                        .build();
         when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
                 .thenReturn(Arrays.asList(mActiveDevice));
     }
@@ -101,10 +103,11 @@ public class BitPerSampleDialogPreferenceControllerTest {
     @Test
     public void writeConfigurationValues_selectDefault_setHighest() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
-        mCodecStatus = new BluetoothCodecStatus.Builder()
-                .setCodecConfig(mCodecConfigAAC)
-                .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
-                .build();
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigAAC)
+                        .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
+                        .build();
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
 
@@ -126,17 +129,19 @@ public class BitPerSampleDialogPreferenceControllerTest {
 
     @Test
     public void getCurrentIndexByConfig_verifyIndex() {
-        assertThat(mController.getCurrentIndexByConfig(mCodecConfigSBC)).isEqualTo(
-                mController.convertCfgToBtnIndex(BluetoothCodecConfig.BITS_PER_SAMPLE_24));
+        assertThat(mController.getCurrentIndexByConfig(mCodecConfigSBC))
+                .isEqualTo(
+                        mController.convertCfgToBtnIndex(BluetoothCodecConfig.BITS_PER_SAMPLE_24));
     }
 
     @Test
     public void getSelectableIndex_verifyList() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigSBC};
-        mCodecStatus = new BluetoothCodecStatus.Builder()
-                .setCodecConfig(mCodecConfigAAC)
-                .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
-                .build();
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigAAC)
+                        .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
+                        .build();
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         List<Integer> indexList = new ArrayList<>();

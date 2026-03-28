@@ -41,21 +41,15 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class AvrcpVersionPreferenceControllerTest {
 
-    @Mock
-    private ListPreference mPreference;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
+    @Mock private ListPreference mPreference;
+    @Mock private PreferenceScreen mPreferenceScreen;
 
     private Context mContext;
     private AvrcpVersionPreferenceController mController;
 
-    /**
-     * 0: AVRCP 1.4 (Default)
-     * 1: AVRCP 1.3
-     * 2: AVRCP 1.5
-     * 3: AVRCP 1.6
-     */
+    /** 0: AVRCP 1.4 (Default) 1: AVRCP 1.3 2: AVRCP 1.5 3: AVRCP 1.6 */
     private String[] mListValues;
+
     private String[] mListSummaries;
 
     @Before
@@ -63,13 +57,14 @@ public class AvrcpVersionPreferenceControllerTest {
         MockitoAnnotations.initMocks(this);
         mContext = RuntimeEnvironment.application;
         final Resources resources = mContext.getResources();
-        mListValues = resources.getStringArray(
-                com.android.settingslib.R.array.bluetooth_avrcp_version_values);
-        mListSummaries = resources.getStringArray(
-                com.android.settingslib.R.array.bluetooth_avrcp_versions);
+        mListValues =
+                resources.getStringArray(
+                        com.android.settingslib.R.array.bluetooth_avrcp_version_values);
+        mListSummaries =
+                resources.getStringArray(com.android.settingslib.R.array.bluetooth_avrcp_versions);
         mController = new AvrcpVersionPreferenceController(mContext);
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
+                .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 

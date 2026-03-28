@@ -22,11 +22,9 @@ import android.widget.RadioGroup;
 
 import com.android.settings.R;
 
-/**
- * Dialog preference to set the Bluetooth A2DP config of audio channel mode
- */
-public class ChannelModeDialogPreference extends BaseBluetoothDialogPreference implements
-        RadioGroup.OnCheckedChangeListener {
+/** Dialog preference to set the Bluetooth A2DP config of audio channel mode */
+public class ChannelModeDialogPreference extends BaseBluetoothDialogPreference
+        implements RadioGroup.OnCheckedChangeListener {
 
     public ChannelModeDialogPreference(Context context) {
         super(context);
@@ -38,14 +36,13 @@ public class ChannelModeDialogPreference extends BaseBluetoothDialogPreference i
         initialize(context);
     }
 
-    public ChannelModeDialogPreference(Context context, AttributeSet attrs,
-                                                int defStyleAttr) {
+    public ChannelModeDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initialize(context);
     }
 
-    public ChannelModeDialogPreference(Context context, AttributeSet attrs,
-                                                int defStyleAttr, int defStyleRes) {
+    public ChannelModeDialogPreference(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initialize(context);
     }
@@ -59,13 +56,19 @@ public class ChannelModeDialogPreference extends BaseBluetoothDialogPreference i
         mRadioButtonIds.add(R.id.bluetooth_audio_channel_mode_default);
         mRadioButtonIds.add(R.id.bluetooth_audio_channel_mode_mono);
         mRadioButtonIds.add(R.id.bluetooth_audio_channel_mode_stereo);
-        String[] stringArray = context.getResources().getStringArray(
-                com.android.settingslib.R.array.bluetooth_a2dp_codec_channel_mode_titles);
+        String[] stringArray =
+                context.getResources()
+                        .getStringArray(
+                                com.android.settingslib.R.array
+                                        .bluetooth_a2dp_codec_channel_mode_titles);
         for (int i = 0; i < stringArray.length; i++) {
             mRadioButtonStrings.add(stringArray[i]);
         }
-        stringArray = context.getResources().getStringArray(
-                com.android.settingslib.R.array.bluetooth_a2dp_codec_channel_mode_summaries);
+        stringArray =
+                context.getResources()
+                        .getStringArray(
+                                com.android.settingslib.R.array
+                                        .bluetooth_a2dp_codec_channel_mode_summaries);
         for (int i = 0; i < stringArray.length; i++) {
             mSummaryStrings.add(stringArray[i]);
         }

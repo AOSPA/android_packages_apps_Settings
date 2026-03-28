@@ -28,14 +28,11 @@ import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.R;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-/**
- * Preference controller to control Bluetooth MAP version
- */
+/** Preference controller to control Bluetooth MAP version */
 public class MapVersionPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
-    private static final String BLUETOOTH_SELECT_MAP_VERSION_KEY =
-            "bluetooth_select_map_version";
+    private static final String BLUETOOTH_SELECT_MAP_VERSION_KEY = "bluetooth_select_map_version";
 
     @VisibleForTesting
     static final String BLUETOOTH_MAP_VERSION_PROPERTY = "persist.bluetooth.mapversion";

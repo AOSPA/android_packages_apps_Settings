@@ -45,13 +45,14 @@ public class SnoopLogPreferenceController extends DeveloperOptionsPreferenceCont
     private final String[] mListEntries;
     @Nullable private SnoopLogHost mHost;
 
-    public SnoopLogPreferenceController(
-            Context context, @Nullable SnoopLogHost host) {
+    public SnoopLogPreferenceController(Context context, @Nullable SnoopLogHost host) {
         super(context);
-        mListValues = context.getResources()
-                .getStringArray(com.android.settingslib.R.array.bt_hci_snoop_log_values);
-        mListEntries = context.getResources()
-                .getStringArray(com.android.settingslib.R.array.bt_hci_snoop_log_entries);
+        mListValues =
+                context.getResources()
+                        .getStringArray(com.android.settingslib.R.array.bt_hci_snoop_log_values);
+        mListEntries =
+                context.getResources()
+                        .getStringArray(com.android.settingslib.R.array.bt_hci_snoop_log_entries);
         mHost = host;
     }
 

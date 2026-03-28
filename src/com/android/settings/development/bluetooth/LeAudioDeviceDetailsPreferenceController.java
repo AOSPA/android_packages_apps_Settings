@@ -33,8 +33,7 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
  * Preference controller to control whether display Bluetooth LE audio toggle in device detail
  * settings page or not.
  */
-public class LeAudioDeviceDetailsPreferenceController
-        extends DeveloperOptionsPreferenceController
+public class LeAudioDeviceDetailsPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String PREFERENCE_KEY = "bluetooth_show_leaudio_device_details";
@@ -46,8 +45,7 @@ public class LeAudioDeviceDetailsPreferenceController
     static final String LE_AUDIO_TOGGLE_VISIBLE_PROPERTY =
             "persist.bluetooth.leaudio.toggle_visible";
 
-    @VisibleForTesting
-    BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting BluetoothAdapter mBluetoothAdapter;
     @VisibleForTesting boolean mLeAudioEnabledByDefault;
 
     public LeAudioDeviceDetailsPreferenceController(Context context) {
@@ -90,8 +88,9 @@ public class LeAudioDeviceDetailsPreferenceController
             return;
         }
 
-        final boolean isLeAudioToggleVisible = SystemProperties.getBoolean(
-                LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE);
+        final boolean isLeAudioToggleVisible =
+                SystemProperties.getBoolean(
+                        LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, LE_AUDIO_TOGGLE_VISIBLE_DEFAULT_VALUE);
 
         ((TwoStatePreference) mPreference).setChecked(isLeAudioToggleVisible);
     }

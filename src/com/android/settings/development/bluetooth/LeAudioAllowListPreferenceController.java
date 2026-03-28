@@ -30,23 +30,20 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-/**
- * Preference controller to control Bluetooth LE audio feature
- */
-public class LeAudioAllowListPreferenceController
-        extends DeveloperOptionsPreferenceController
+/** Preference controller to control Bluetooth LE audio feature */
+public class LeAudioAllowListPreferenceController extends DeveloperOptionsPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String PREFERENCE_KEY = "bluetooth_bypass_leaudio_allowlist";
 
     static final String LE_AUDIO_CONNECTION_BY_DEFAULT_PROPERTY =
             "ro.bluetooth.leaudio.le_audio_connection_by_default";
+
     @VisibleForTesting
     static final String BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY =
             "persist.bluetooth.leaudio.bypass_allow_list";
 
-    @VisibleForTesting
-    BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting BluetoothAdapter mBluetoothAdapter;
     @VisibleForTesting boolean mLeAudioConnectionByDefault;
 
     public LeAudioAllowListPreferenceController(Context context) {
@@ -70,8 +67,7 @@ public class LeAudioAllowListPreferenceController
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isBypassed = (Boolean) newValue;
-        SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY,
-                isBypassed ? "true" : "false");
+        SystemProperties.set(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, isBypassed ? "true" : "false");
         return true;
     }
 

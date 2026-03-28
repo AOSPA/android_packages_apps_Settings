@@ -16,8 +16,7 @@
 
 package com.android.settings.development.bluetooth;
 
-import static com.android.settings.development.bluetooth.SnoopLogSocketPreferenceController
-        .BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY;
+import static com.android.settings.development.bluetooth.SnoopLogSocketPreferenceController.BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -41,10 +40,8 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class SnoopLogSocketPreferenceControllerTest {
 
-    @Mock
-    private SwitchPreference mPreference;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
+    @Mock private SwitchPreference mPreference;
+    @Mock private PreferenceScreen mPreferenceScreen;
 
     private Context mContext;
     private SnoopLogSocketPreferenceController mController;
@@ -63,8 +60,9 @@ public class SnoopLogSocketPreferenceControllerTest {
     public void onPreferenceChanged_settingEnabled_shouldTurnOnBluetoothSnoopLogSocket() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final boolean mode = SystemProperties.getBoolean(
-                BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY, false /* default */);
+        final boolean mode =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY, false /* default */);
 
         assertThat(mode).isTrue();
     }
@@ -73,8 +71,9 @@ public class SnoopLogSocketPreferenceControllerTest {
     public void onPreferenceChanged_settingDisabled_shouldTurnOffBluetoothSnoopLogSocket() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final boolean mode = SystemProperties.getBoolean(
-                BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY, false /* default */);
+        final boolean mode =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY, false /* default */);
 
         assertThat(mode).isFalse();
     }
@@ -99,8 +98,9 @@ public class SnoopLogSocketPreferenceControllerTest {
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
 
-        final boolean mode = SystemProperties.getBoolean(
-                BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY, false /* default */);
+        final boolean mode =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_SNOOP_LOG_SOCKET_PROPERTY, false /* default */);
 
         assertThat(mode).isFalse();
         verify(mPreference).setEnabled(false);

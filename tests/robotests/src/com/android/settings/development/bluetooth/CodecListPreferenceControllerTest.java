@@ -149,8 +149,7 @@ public class CodecListPreferenceControllerTest {
             assertTrue(
                     mController.writeConfigurationValues(
                             String.valueOf(config.getExtendedCodecType().getCodecId())));
-            verify(mA2dpConfigStore, atLeastOnce())
-                    .setCodecType(config.getExtendedCodecType());
+            verify(mA2dpConfigStore, atLeastOnce()).setCodecType(config.getExtendedCodecType());
         }
 
         // Verify highest config is chosen for AAC
@@ -339,10 +338,8 @@ public class CodecListPreferenceControllerTest {
         verify(mA2dpConfigStore).setSampleRate(mCodecConfigAAC.getSampleRate());
         verify(mA2dpConfigStore).setBitsPerSample(mCodecConfigAAC.getBitsPerSample());
         verify(mA2dpConfigStore).setChannelMode(mCodecConfigAAC.getChannelMode());
-        verify(mA2dpConfigStore)
-                .setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
-        verify(mA2dpConfigStore)
-                .setCodecSpecific1Value(mCodecConfigAAC.getCodecSpecific1());
+        verify(mA2dpConfigStore).setCodecPriority(BluetoothCodecConfig.CODEC_PRIORITY_HIGHEST);
+        verify(mA2dpConfigStore).setCodecSpecific1Value(mCodecConfigAAC.getCodecSpecific1());
     }
 
     @Test
@@ -356,8 +353,7 @@ public class CodecListPreferenceControllerTest {
 
     @Test
     public void onPreferenceChange_whenConfigStoreIsNull_shouldReturnFalse() {
-        mController =
-                new CodecListPreferenceController(mContext, mLifecycle, null, mCallback);
+        mController = new CodecListPreferenceController(mContext, mLifecycle, null, mCallback);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         assertFalse(
                 mController.onPreferenceChange(
@@ -442,8 +438,7 @@ public class CodecListPreferenceControllerTest {
         mController.initConfigStore();
         // No crash
 
-        mController =
-                new CodecListPreferenceController(mContext, mLifecycle, null, mCallback);
+        mController = new CodecListPreferenceController(mContext, mLifecycle, null, mCallback);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.initConfigStore();
         // No crash

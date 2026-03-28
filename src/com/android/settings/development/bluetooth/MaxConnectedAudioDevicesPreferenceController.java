@@ -28,9 +28,9 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class MaxConnectedAudioDevicesPreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+public class MaxConnectedAudioDevicesPreferenceController
+        extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String MAX_CONNECTED_AUDIO_DEVICES_PREFERENCE_KEY =
             "bluetooth_max_connected_audio_devices";
@@ -45,9 +45,9 @@ public class MaxConnectedAudioDevicesPreferenceController extends
         super(context);
 
         final BluetoothManager bluetoothManager = context.getSystemService(BluetoothManager.class);
-        if(bluetoothManager != null && bluetoothManager.getAdapter() != null) {
+        if (bluetoothManager != null && bluetoothManager.getAdapter() != null) {
             mDefaultMaxConnectedAudioDevices =
-                bluetoothManager.getAdapter().getMaxConnectedAudioDevices();
+                    bluetoothManager.getAdapter().getMaxConnectedAudioDevices();
         }
     }
 
@@ -109,4 +109,3 @@ public class MaxConnectedAudioDevicesPreferenceController extends
         updateState(mPreference);
     }
 }
-

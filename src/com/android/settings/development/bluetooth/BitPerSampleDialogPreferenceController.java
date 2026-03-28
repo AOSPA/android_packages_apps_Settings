@@ -28,17 +28,15 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Dialog preference controller to set the Bluetooth A2DP config of bit per sample
- */
-public class BitPerSampleDialogPreferenceController extends
-        AbstractBluetoothDialogPreferenceController {
+/** Dialog preference controller to set the Bluetooth A2DP config of bit per sample */
+public class BitPerSampleDialogPreferenceController
+        extends AbstractBluetoothDialogPreferenceController {
 
     private static final String KEY = "bluetooth_bit_per_sample_settings";
     private static final String TAG = "BtBitPerSampleCtr";
 
-    public BitPerSampleDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                           A2dpConfigStore store) {
+    public BitPerSampleDialogPreferenceController(
+            Context context, Lifecycle lifecycle, A2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 
@@ -60,8 +58,9 @@ public class BitPerSampleDialogPreferenceController extends
             case 0:
                 final BluetoothCodecConfig currentConfig = getCurrentCodecConfig();
                 if (currentConfig != null) {
-                    bitsPerSampleValue = getHighestBitsPerSample(getSelectableByCodecType(
-                            currentConfig.getCodecType()));
+                    bitsPerSampleValue =
+                            getHighestBitsPerSample(
+                                    getSelectableByCodecType(currentConfig.getCodecType()));
                 }
                 break;
             case 1:

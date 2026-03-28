@@ -85,8 +85,7 @@ public class SnoopLogPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_turnOnFullBluetoothSnoopLog() {
         mController.onPreferenceChange(
-                null,
-                mListValues[SnoopLogPreferenceController.BTSNOOP_LOG_MODE_FULL_INDEX]);
+                null, mListValues[SnoopLogPreferenceController.BTSNOOP_LOG_MODE_FULL_INDEX]);
         final String mode = SystemProperties.get(BLUETOOTH_BTSNOOP_LOG_MODE_PROPERTY);
         // "full" is hard-coded between Settings and system/bt
         Assert.assertEquals(mode, "full");
@@ -95,8 +94,7 @@ public class SnoopLogPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_turnOnFilteredBluetoothSnoopLog() {
         mController.onPreferenceChange(
-                null,
-                mListValues[SnoopLogPreferenceController.BTSNOOP_LOG_MODE_FILTERED_INDEX]);
+                null, mListValues[SnoopLogPreferenceController.BTSNOOP_LOG_MODE_FILTERED_INDEX]);
         final String mode = SystemProperties.get(BLUETOOTH_BTSNOOP_LOG_MODE_PROPERTY);
         // "filtered" is hard-coded between Settings and system/bt
         Assert.assertEquals(mode, "filtered");
@@ -105,8 +103,7 @@ public class SnoopLogPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_turnOffBluetoothSnoopLog() {
         mController.onPreferenceChange(
-                null,
-                mListValues[SnoopLogPreferenceController.BTSNOOP_LOG_MODE_DISABLED_INDEX]);
+                null, mListValues[SnoopLogPreferenceController.BTSNOOP_LOG_MODE_DISABLED_INDEX]);
         final String mode = SystemProperties.get(BLUETOOTH_BTSNOOP_LOG_MODE_PROPERTY);
         // "disabled" is hard-coded between Settings and system/bt
         Assert.assertEquals(mode, "disabled");

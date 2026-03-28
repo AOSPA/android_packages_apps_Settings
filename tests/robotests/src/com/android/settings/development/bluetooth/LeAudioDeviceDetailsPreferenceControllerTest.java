@@ -48,12 +48,9 @@ import org.robolectric.annotation.Config;
 @Config(shadows = {ShadowDeviceConfig.class})
 public class LeAudioDeviceDetailsPreferenceControllerTest {
 
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
-    @Mock
-    private SwitchPreference mPreference;
+    @Mock private PreferenceScreen mPreferenceScreen;
+    @Mock private BluetoothAdapter mBluetoothAdapter;
+    @Mock private SwitchPreference mPreference;
 
     private Context mContext;
     private LeAudioDeviceDetailsPreferenceController mController;
@@ -64,7 +61,7 @@ public class LeAudioDeviceDetailsPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = spy(new LeAudioDeviceDetailsPreferenceController(mContext));
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
+                .thenReturn(mPreference);
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mController.displayPreference(mPreferenceScreen);
     }
@@ -78,8 +75,8 @@ public class LeAudioDeviceDetailsPreferenceControllerTest {
     public void onPreferenceChanged_settingEnabled_shouldTurnOnLeAudioDeviceDetailSetting() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
         mController.onPreferenceChange(mPreference, true /* new value */);
-        final boolean isEnabled = SystemProperties.getBoolean(
-                LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, false);
+        final boolean isEnabled =
+                SystemProperties.getBoolean(LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, false);
         assertThat(isEnabled).isTrue();
     }
 
@@ -87,8 +84,8 @@ public class LeAudioDeviceDetailsPreferenceControllerTest {
     public void onPreferenceChanged_settingDisabled_shouldTurnOffLeAudioDeviceDetailSetting() {
         mController.sLeAudioSupportedStateCache = BluetoothStatusCodes.FEATURE_SUPPORTED;
         mController.onPreferenceChange(mPreference, false /* new value */);
-        final boolean isEnabled = SystemProperties.getBoolean(
-                LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, true);
+        final boolean isEnabled =
+                SystemProperties.getBoolean(LE_AUDIO_TOGGLE_VISIBLE_PROPERTY, true);
         assertThat(isEnabled).isFalse();
     }
 

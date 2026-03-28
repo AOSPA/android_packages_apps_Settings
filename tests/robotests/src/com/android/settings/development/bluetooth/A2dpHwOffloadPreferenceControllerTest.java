@@ -16,10 +16,8 @@
 
 package com.android.settings.development.bluetooth;
 
-import static com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController
-        .A2DP_OFFLOAD_DISABLED_PROPERTY;
-import static com.android.settings.development.bluetooth.LeAudioHwOffloadPreferenceController
-        .LE_AUDIO_OFFLOAD_DISABLED_PROPERTY;
+import static com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController.A2DP_OFFLOAD_DISABLED_PROPERTY;
+import static com.android.settings.development.bluetooth.LeAudioHwOffloadPreferenceController.LE_AUDIO_OFFLOAD_DISABLED_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -45,10 +43,8 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class A2dpHwOffloadPreferenceControllerTest {
 
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private DevelopmentSettingsDashboardFragment mFragment;
+    @Mock private PreferenceScreen mPreferenceScreen;
+    @Mock private DevelopmentSettingsDashboardFragment mFragment;
 
     private Context mContext;
     private SwitchPreference mPreference;
@@ -61,7 +57,7 @@ public class A2dpHwOffloadPreferenceControllerTest {
         mPreference = new SwitchPreference(mContext);
         mController = spy(new A2dpHwOffloadPreferenceController(mContext, mFragment));
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
+                .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
     }
 
@@ -84,8 +80,8 @@ public class A2dpHwOffloadPreferenceControllerTest {
 
         mController.onRebootDialogConfirmed();
         final boolean a2dpMode = SystemProperties.getBoolean(A2DP_OFFLOAD_DISABLED_PROPERTY, true);
-        final boolean leAudioMode = SystemProperties
-                .getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
+        final boolean leAudioMode =
+                SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
         assertThat(a2dpMode).isTrue();
         assertThat(leAudioMode).isTrue();
     }

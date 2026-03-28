@@ -22,11 +22,9 @@ import android.widget.RadioGroup;
 
 import com.android.settings.R;
 
-/**
- * Dialog preference to set the Bluetooth A2DP config of LDAC quality
- */
-public class QualityDialogPreference extends BaseBluetoothDialogPreference implements
-        RadioGroup.OnCheckedChangeListener {
+/** Dialog preference to set the Bluetooth A2DP config of LDAC quality */
+public class QualityDialogPreference extends BaseBluetoothDialogPreference
+        implements RadioGroup.OnCheckedChangeListener {
 
     public QualityDialogPreference(Context context) {
         super(context);
@@ -43,8 +41,8 @@ public class QualityDialogPreference extends BaseBluetoothDialogPreference imple
         initialize(context);
     }
 
-    public QualityDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
-                                            int defStyleRes) {
+    public QualityDialogPreference(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initialize(context);
     }
@@ -64,14 +62,19 @@ public class QualityDialogPreference extends BaseBluetoothDialogPreference imple
         mRadioButtonIds.add(R.id.bluetooth_audio_quality_optimized_quality);
         mRadioButtonIds.add(R.id.bluetooth_audio_quality_optimized_connection);
         mRadioButtonIds.add(R.id.bluetooth_audio_quality_best_effort);
-        String[] stringArray = context.getResources().getStringArray(
-                com.android.settingslib.R.array.bluetooth_a2dp_codec_ldac_playback_quality_titles);
+        String[] stringArray =
+                context.getResources()
+                        .getStringArray(
+                                com.android.settingslib.R.array
+                                        .bluetooth_a2dp_codec_ldac_playback_quality_titles);
         for (int i = 0; i < stringArray.length; i++) {
             mRadioButtonStrings.add(stringArray[i]);
         }
-        stringArray = context.getResources().getStringArray(
-                com.android.settingslib.R
-                        .array.bluetooth_a2dp_codec_ldac_playback_quality_summaries);
+        stringArray =
+                context.getResources()
+                        .getStringArray(
+                                com.android.settingslib.R.array
+                                        .bluetooth_a2dp_codec_ldac_playback_quality_summaries);
         for (int i = 0; i < stringArray.length; i++) {
             mSummaryStrings.add(stringArray[i]);
         }

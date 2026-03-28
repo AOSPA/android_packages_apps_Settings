@@ -54,14 +54,10 @@ public class HDAudioPreferenceControllerTest {
 
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
 
-    @Mock
-    private BluetoothA2dp mBluetoothA2dp;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
-    @Mock
-    private PreferenceScreen mScreen;
-    @Mock
-    private AbstractBluetoothPreferenceController.Callback mCallback;
+    @Mock private BluetoothA2dp mBluetoothA2dp;
+    @Mock private BluetoothAdapter mBluetoothAdapter;
+    @Mock private PreferenceScreen mScreen;
+    @Mock private AbstractBluetoothPreferenceController.Callback mCallback;
 
     private HDAudioPreferenceController mController;
     private SwitchPreference mPreference;
@@ -78,8 +74,8 @@ public class HDAudioPreferenceControllerTest {
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mA2dpConfigStore = spy(new A2dpConfigStore());
-        mController = new HDAudioPreferenceController(mContext, mLifecycle,
-                mA2dpConfigStore, mCallback);
+        mController =
+                new HDAudioPreferenceController(mContext, mLifecycle, mA2dpConfigStore, mCallback);
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = new SwitchPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
@@ -101,8 +97,8 @@ public class HDAudioPreferenceControllerTest {
     public void updateState_codecSupported_setEnable() {
         when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
                 .thenReturn(Arrays.asList(mActiveDevice));
-        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
-                mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
+        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice))
+                .thenReturn(mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
 
@@ -113,8 +109,8 @@ public class HDAudioPreferenceControllerTest {
     public void updateState_codecNotSupported_setDisable() {
         when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
                 .thenReturn(Arrays.asList(mActiveDevice));
-        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
-                mBluetoothA2dp.OPTIONAL_CODECS_NOT_SUPPORTED);
+        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice))
+                .thenReturn(mBluetoothA2dp.OPTIONAL_CODECS_NOT_SUPPORTED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
 
@@ -125,10 +121,10 @@ public class HDAudioPreferenceControllerTest {
     public void updateState_codecSupportedAndEnabled_checked() {
         when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
                 .thenReturn(Arrays.asList(mActiveDevice));
-        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
-                mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
-        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice)).thenReturn(
-                mBluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
+        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice))
+                .thenReturn(mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
+        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice))
+                .thenReturn(mBluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
 
@@ -139,10 +135,10 @@ public class HDAudioPreferenceControllerTest {
     public void updateState_codecSupportedAndDisabled_notChecked() {
         when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
                 .thenReturn(Arrays.asList(mActiveDevice));
-        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice)).thenReturn(
-                mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
-        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice)).thenReturn(
-                mBluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED);
+        when(mBluetoothA2dp.isOptionalCodecsSupported(mActiveDevice))
+                .thenReturn(mBluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
+        when(mBluetoothA2dp.isOptionalCodecsEnabled(mActiveDevice))
+                .thenReturn(mBluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
 
@@ -158,8 +154,9 @@ public class HDAudioPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, enabled);
 
         verify(mBluetoothA2dp).disableOptionalCodecs(mActiveDevice);
-        verify(mBluetoothA2dp).setOptionalCodecsEnabled(mActiveDevice,
-                BluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED);
+        verify(mBluetoothA2dp)
+                .setOptionalCodecsEnabled(
+                        mActiveDevice, BluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED);
         verify(mCallback).onBluetoothHDAudioEnabled(enabled);
         assertThat(mPreference.isEnabled()).isFalse();
     }
@@ -173,8 +170,9 @@ public class HDAudioPreferenceControllerTest {
         mController.onPreferenceChange(mPreference, enabled);
 
         verify(mBluetoothA2dp).enableOptionalCodecs(mActiveDevice);
-        verify(mBluetoothA2dp).setOptionalCodecsEnabled(mActiveDevice,
-                BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
+        verify(mBluetoothA2dp)
+                .setOptionalCodecsEnabled(
+                        mActiveDevice, BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED);
         verify(mCallback).onBluetoothHDAudioEnabled(enabled);
         assertThat(mPreference.isEnabled()).isFalse();
     }

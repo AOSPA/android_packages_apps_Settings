@@ -34,17 +34,17 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 import java.util.List;
 
-/**
- * Abstract class for Bluetooth A2DP config controller in developer option.
- */
-public abstract class AbstractBluetoothPreferenceController extends
-        DeveloperOptionsPreferenceController implements ServiceConnectionListener,
-        LifecycleObserver, OnDestroy, PreferenceControllerMixin {
+/** Abstract class for Bluetooth A2DP config controller in developer option. */
+public abstract class AbstractBluetoothPreferenceController
+        extends DeveloperOptionsPreferenceController
+        implements ServiceConnectionListener,
+                LifecycleObserver,
+                OnDestroy,
+                PreferenceControllerMixin {
 
     @Nullable protected volatile BluetoothA2dp mBluetoothA2dp;
 
-    @VisibleForTesting
-    BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting BluetoothAdapter mBluetoothAdapter;
 
     public AbstractBluetoothPreferenceController(
             @Nullable Context context,
@@ -79,13 +79,9 @@ public abstract class AbstractBluetoothPreferenceController extends
         mBluetoothA2dp = null;
     }
 
-    /**
-     * Callback interface for this class to manipulate data from controller.
-     */
+    /** Callback interface for this class to manipulate data from controller. */
     public interface Callback {
-        /**
-         * Callback method to notify preferences when the Bluetooth A2DP config is changed.
-         */
+        /** Callback method to notify preferences when the Bluetooth A2DP config is changed. */
         void onBluetoothCodecChanged();
 
         /**

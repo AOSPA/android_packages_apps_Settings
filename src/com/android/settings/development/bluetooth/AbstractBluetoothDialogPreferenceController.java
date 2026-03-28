@@ -31,30 +31,34 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import java.util.List;
 
-/**
- * Abstract class for Bluetooth A2DP config dialog controller in developer option.
- */
-public abstract class AbstractBluetoothDialogPreferenceController extends
-        AbstractBluetoothPreferenceController implements BaseBluetoothDialogPreference.Callback {
+/** Abstract class for Bluetooth A2DP config dialog controller in developer option. */
+public abstract class AbstractBluetoothDialogPreferenceController
+        extends AbstractBluetoothPreferenceController
+        implements BaseBluetoothDialogPreference.Callback {
 
     private static final String TAG = "AbstractBtDlgCtr";
 
-    protected static final int[] SAMPLE_RATES = {BluetoothCodecConfig.SAMPLE_RATE_192000,
-            BluetoothCodecConfig.SAMPLE_RATE_176400,
-            BluetoothCodecConfig.SAMPLE_RATE_96000,
-            BluetoothCodecConfig.SAMPLE_RATE_88200,
-            BluetoothCodecConfig.SAMPLE_RATE_48000,
-            BluetoothCodecConfig.SAMPLE_RATE_44100};
-    protected static final int[] BITS_PER_SAMPLES = {BluetoothCodecConfig.BITS_PER_SAMPLE_32,
-            BluetoothCodecConfig.BITS_PER_SAMPLE_24,
-            BluetoothCodecConfig.BITS_PER_SAMPLE_16};
-    protected static final int[] CHANNEL_MODES = {BluetoothCodecConfig.CHANNEL_MODE_STEREO,
-            BluetoothCodecConfig.CHANNEL_MODE_MONO};
+    protected static final int[] SAMPLE_RATES = {
+        BluetoothCodecConfig.SAMPLE_RATE_192000,
+        BluetoothCodecConfig.SAMPLE_RATE_176400,
+        BluetoothCodecConfig.SAMPLE_RATE_96000,
+        BluetoothCodecConfig.SAMPLE_RATE_88200,
+        BluetoothCodecConfig.SAMPLE_RATE_48000,
+        BluetoothCodecConfig.SAMPLE_RATE_44100
+    };
+    protected static final int[] BITS_PER_SAMPLES = {
+        BluetoothCodecConfig.BITS_PER_SAMPLE_32,
+        BluetoothCodecConfig.BITS_PER_SAMPLE_24,
+        BluetoothCodecConfig.BITS_PER_SAMPLE_16
+    };
+    protected static final int[] CHANNEL_MODES = {
+        BluetoothCodecConfig.CHANNEL_MODE_STEREO, BluetoothCodecConfig.CHANNEL_MODE_MONO
+    };
 
     protected final A2dpConfigStore mA2dpConfigStore;
 
-    public AbstractBluetoothDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                       A2dpConfigStore store) {
+    public AbstractBluetoothDialogPreferenceController(
+            Context context, Lifecycle lifecycle, A2dpConfigStore store) {
         super(context, lifecycle, store);
         mA2dpConfigStore = store;
     }
@@ -66,8 +70,8 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
 
     @Override
     public CharSequence getSummary() {
-        return ((BaseBluetoothDialogPreference) mPreference).generateSummary(
-                getCurrentConfigIndex());
+        return ((BaseBluetoothDialogPreference) mPreference)
+                .generateSummary(getCurrentConfigIndex());
     }
 
     @Override
@@ -84,8 +88,8 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         if (activeDevice != null) {
             bluetoothA2dp.setCodecConfigPreference(activeDevice, codecConfig);
         }
-        mPreference.setSummary(((BaseBluetoothDialogPreference) mPreference).generateSummary(
-                index));
+        mPreference.setSummary(
+                ((BaseBluetoothDialogPreference) mPreference).generateSummary(index));
     }
 
     @Override
@@ -154,8 +158,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
             Log.d(TAG, "Unable to get current codec config. No active device.");
             return null;
         }
-        final BluetoothCodecStatus codecStatus =
-                bluetoothA2dp.getCodecStatus(activeDevice);
+        final BluetoothCodecStatus codecStatus = bluetoothA2dp.getCodecStatus(activeDevice);
         if (codecStatus == null) {
             Log.d(TAG, "Unable to get current codec config. Codec status is null");
             return null;
@@ -173,8 +176,7 @@ public abstract class AbstractBluetoothDialogPreferenceController extends
         if (bluetoothA2dp == null) {
             return null;
         }
-        BluetoothDevice bluetoothDevice =
-                (device != null) ? device : getA2dpActiveDevice();
+        BluetoothDevice bluetoothDevice = (device != null) ? device : getA2dpActiveDevice();
         if (bluetoothDevice == null) {
             return null;
         }

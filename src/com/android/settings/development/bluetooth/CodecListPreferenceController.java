@@ -110,8 +110,7 @@ public class CodecListPreferenceController extends AbstractBluetoothPreferenceCo
             return false;
         }
 
-        BluetoothCodecConfig codecConfig =
-                mA2dpConfigStore.createCodecConfig();
+        BluetoothCodecConfig codecConfig = mA2dpConfigStore.createCodecConfig();
         Log.d(TAG, "onPreferenceChange: setCodecConfigPreference: " + codecConfig.toString());
         bluetoothA2dp.setCodecConfigPreference(activeDevice, codecConfig);
         if (mCallback != null) {

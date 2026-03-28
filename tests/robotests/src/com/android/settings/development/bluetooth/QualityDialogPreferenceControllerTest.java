@@ -51,12 +51,9 @@ public class QualityDialogPreferenceControllerTest {
 
     private static final String DEVICE_ADDRESS = "00:11:22:33:44:55";
 
-    @Mock
-    private BluetoothA2dp mBluetoothA2dp;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
-    @Mock
-    private PreferenceScreen mScreen;
+    @Mock private BluetoothA2dp mBluetoothA2dp;
+    @Mock private BluetoothAdapter mBluetoothAdapter;
+    @Mock private PreferenceScreen mScreen;
 
     private QualityDialogPreferenceController mController;
     private QualityDialogPreference mPreference;
@@ -77,22 +74,24 @@ public class QualityDialogPreferenceControllerTest {
         mLifecycle = new Lifecycle(mLifecycleOwner);
         mA2dpConfigStore = spy(new A2dpConfigStore());
         mActiveDevice = BluetoothAdapter.getDefaultAdapter().getRemoteDevice(DEVICE_ADDRESS);
-        mController = new QualityDialogPreferenceController(mContext, mLifecycle,
-                mA2dpConfigStore);
+        mController = new QualityDialogPreferenceController(mContext, mLifecycle, mA2dpConfigStore);
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mPreference = new QualityDialogPreference(mContext);
         when(mScreen.findPreference(mController.getPreferenceKey())).thenReturn(mPreference);
         mController.displayPreference(mScreen);
-        mCodecConfigAAC = new BluetoothCodecConfig.Builder()
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC)
-                .setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_48000
-                        | BluetoothCodecConfig.SAMPLE_RATE_88200)
-                .build();
-        mCodecConfigLDAC = new BluetoothCodecConfig.Builder()
-                .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC)
-                .setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_96000)
-                .setCodecSpecific1(1001)
-                .build();
+        mCodecConfigAAC =
+                new BluetoothCodecConfig.Builder()
+                        .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_AAC)
+                        .setSampleRate(
+                                BluetoothCodecConfig.SAMPLE_RATE_48000
+                                        | BluetoothCodecConfig.SAMPLE_RATE_88200)
+                        .build();
+        mCodecConfigLDAC =
+                new BluetoothCodecConfig.Builder()
+                        .setCodecType(BluetoothCodecConfig.SOURCE_CODEC_TYPE_LDAC)
+                        .setSampleRate(BluetoothCodecConfig.SAMPLE_RATE_96000)
+                        .setCodecSpecific1(1001)
+                        .build();
         when(mBluetoothAdapter.getActiveDevices(eq(BluetoothProfile.A2DP)))
                 .thenReturn(Arrays.asList(mActiveDevice));
     }
@@ -114,17 +113,18 @@ public class QualityDialogPreferenceControllerTest {
 
     @Test
     public void getCurrentIndexByConfig_verifyIndex() {
-        assertThat(mController.getCurrentIndexByConfig(mCodecConfigLDAC)).isEqualTo(
-                mController.convertCfgToBtnIndex(1001));
+        assertThat(mController.getCurrentIndexByConfig(mCodecConfigLDAC))
+                .isEqualTo(mController.convertCfgToBtnIndex(1001));
     }
 
     @Test
     public void updateState_codeTypeIsLDAC_enablePreference() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigLDAC};
-        mCodecStatus = new BluetoothCodecStatus.Builder()
-                .setCodecConfig(mCodecConfigLDAC)
-                .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
-                .build();
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigLDAC)
+                        .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
+                        .build();
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);
@@ -135,10 +135,11 @@ public class QualityDialogPreferenceControllerTest {
     @Test
     public void updateState_codeTypeAAC_disablePreference() {
         BluetoothCodecConfig[] mCodecConfigs = {mCodecConfigAAC, mCodecConfigLDAC};
-        mCodecStatus = new BluetoothCodecStatus.Builder()
-                .setCodecConfig(mCodecConfigAAC)
-                .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
-                .build();
+        mCodecStatus =
+                new BluetoothCodecStatus.Builder()
+                        .setCodecConfig(mCodecConfigAAC)
+                        .setCodecsSelectableCapabilities(Arrays.asList(mCodecConfigs))
+                        .build();
         when(mBluetoothA2dp.getCodecStatus(mActiveDevice)).thenReturn(mCodecStatus);
         mController.onBluetoothServiceConnected(mBluetoothA2dp);
         mController.updateState(mPreference);

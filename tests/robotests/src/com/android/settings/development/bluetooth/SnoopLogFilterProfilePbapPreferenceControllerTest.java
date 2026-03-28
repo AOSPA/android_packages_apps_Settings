@@ -75,8 +75,7 @@ public class SnoopLogFilterProfilePbapPreferenceControllerTest {
     @Test
     public void verifyResourceSizeAndRange() {
         Assert.assertTrue(
-                SnoopLogFilterProfilePbapPreferenceController
-                        .isSnoopLogModeFilteredEnabled());
+                SnoopLogFilterProfilePbapPreferenceController.isSnoopLogModeFilteredEnabled());
         // Verify normal list entries and default preference entries have the same size
         Assert.assertEquals(mListEntries.length, mListValues.length);
         // Update the preference
@@ -91,8 +90,7 @@ public class SnoopLogFilterProfilePbapPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_turnOnBluetoothSnoopLogFullFilterPbap() {
         Assert.assertTrue(
-                SnoopLogFilterProfilePbapPreferenceController
-                        .isSnoopLogModeFilteredEnabled());
+                SnoopLogFilterProfilePbapPreferenceController.isSnoopLogModeFilteredEnabled());
         mController.onPreferenceChange(
                 null,
                 mListValues[
@@ -109,8 +107,7 @@ public class SnoopLogFilterProfilePbapPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_turnOnBluetoothSnoopLogHeaderFilterPbap() {
         Assert.assertTrue(
-                SnoopLogFilterProfilePbapPreferenceController
-                        .isSnoopLogModeFilteredEnabled());
+                SnoopLogFilterProfilePbapPreferenceController.isSnoopLogModeFilteredEnabled());
         mController.onPreferenceChange(
                 null,
                 mListValues[
@@ -126,8 +123,7 @@ public class SnoopLogFilterProfilePbapPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_turnOnBluetoothSnoopLogMagicFilterPbap() {
         Assert.assertTrue(
-                SnoopLogFilterProfilePbapPreferenceController
-                        .isSnoopLogModeFilteredEnabled());
+                SnoopLogFilterProfilePbapPreferenceController.isSnoopLogModeFilteredEnabled());
         mController.onPreferenceChange(
                 null,
                 mListValues[
@@ -143,8 +139,7 @@ public class SnoopLogFilterProfilePbapPreferenceControllerTest {
     @Test
     public void onPreferenceChanged_turnOffBluetoothSnoopLogFilterPbap() {
         Assert.assertTrue(
-                SnoopLogFilterProfilePbapPreferenceController
-                        .isSnoopLogModeFilteredEnabled());
+                SnoopLogFilterProfilePbapPreferenceController.isSnoopLogModeFilteredEnabled());
         mController.onPreferenceChange(
                 null,
                 mListValues[
@@ -161,8 +156,7 @@ public class SnoopLogFilterProfilePbapPreferenceControllerTest {
     @Test
     public void updateState_preferenceShouldBeSetToRightValue() {
         Assert.assertTrue(
-                SnoopLogFilterProfilePbapPreferenceController
-                        .isSnoopLogModeFilteredEnabled());
+                SnoopLogFilterProfilePbapPreferenceController.isSnoopLogModeFilteredEnabled());
         for (int i = 0; i < mListValues.length; ++i) {
             BluetoothProperties.snoop_log_filter_profile_pbap(
                     BluetoothProperties.snoop_log_filter_profile_pbap_values.valueOf(

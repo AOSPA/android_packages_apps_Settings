@@ -40,10 +40,8 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class DeviceNoNamePreferenceControllerTest {
 
-    @Mock
-    private SwitchPreference mPreference;
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
+    @Mock private SwitchPreference mPreference;
+    @Mock private PreferenceScreen mPreferenceScreen;
 
     private Context mContext;
     private DeviceNoNamePreferenceController mController;
@@ -62,9 +60,9 @@ public class DeviceNoNamePreferenceControllerTest {
     public void onPreferenceChanged_settingEnabled_shouldTurnOnBluetoothDeviceNoName() {
         mController.onPreferenceChange(mPreference, true /* new value */);
 
-        final boolean mode = SystemProperties.getBoolean(
-                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY,
-                false /* default */);
+        final boolean mode =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, false /* default */);
 
         assertThat(mode).isTrue();
     }
@@ -73,16 +71,16 @@ public class DeviceNoNamePreferenceControllerTest {
     public void onPreferenceChanged_settingDisabled_shouldTurnOffBluetoothDeviceNoName() {
         mController.onPreferenceChange(mPreference, false /* new value */);
 
-        final boolean mode = SystemProperties.getBoolean(
-                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, true /* default */);
+        final boolean mode =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, true /* default */);
 
         assertThat(mode).isFalse();
     }
 
     @Test
     public void updateState_settingEnabled_preferenceShouldBeChecked() {
-        SystemProperties.set(BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY,
-                Boolean.toString(true));
+        SystemProperties.set(BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, Boolean.toString(true));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(true);
@@ -90,8 +88,8 @@ public class DeviceNoNamePreferenceControllerTest {
 
     @Test
     public void updateState_settingDisabled_preferenceShouldNotBeChecked() {
-        SystemProperties.set(BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY,
-                Boolean.toString(false));
+        SystemProperties.set(
+                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, Boolean.toString(false));
         mController.updateState(mPreference);
 
         verify(mPreference).setChecked(false);
@@ -101,9 +99,9 @@ public class DeviceNoNamePreferenceControllerTest {
     public void onDeveloperOptionsDisabled_shouldDisablePreference() {
         mController.onDeveloperOptionsDisabled();
 
-        final boolean mode = SystemProperties.getBoolean(
-                BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY,
-                true /* default */);
+        final boolean mode =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_SHOW_DEVICES_WITHOUT_NAMES_PROPERTY, true /* default */);
 
         assertThat(mode).isFalse();
         verify(mPreference).setEnabled(false);

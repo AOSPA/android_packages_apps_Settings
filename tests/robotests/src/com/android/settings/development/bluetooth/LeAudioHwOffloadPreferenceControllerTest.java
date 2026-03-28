@@ -18,14 +18,10 @@ package com.android.settings.development.bluetooth;
 
 import static android.bluetooth.BluetoothStatusCodes.FEATURE_SUPPORTED;
 
-import static com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController
-        .A2DP_OFFLOAD_DISABLED_PROPERTY;
-import static com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController
-        .A2DP_OFFLOAD_SUPPORTED_PROPERTY;
-import static com.android.settings.development.bluetooth.LeAudioHwOffloadPreferenceController
-        .LE_AUDIO_OFFLOAD_DISABLED_PROPERTY;
-import static com.android.settings.development.bluetooth.LeAudioHwOffloadPreferenceController
-        .LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY;
+import static com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController.A2DP_OFFLOAD_DISABLED_PROPERTY;
+import static com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController.A2DP_OFFLOAD_SUPPORTED_PROPERTY;
+import static com.android.settings.development.bluetooth.LeAudioHwOffloadPreferenceController.LE_AUDIO_OFFLOAD_DISABLED_PROPERTY;
+import static com.android.settings.development.bluetooth.LeAudioHwOffloadPreferenceController.LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -52,12 +48,9 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class LeAudioHwOffloadPreferenceControllerTest {
 
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private DevelopmentSettingsDashboardFragment mFragment;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
+    @Mock private PreferenceScreen mPreferenceScreen;
+    @Mock private DevelopmentSettingsDashboardFragment mFragment;
+    @Mock private BluetoothAdapter mBluetoothAdapter;
 
     private Context mContext;
     private SwitchPreference mPreference;
@@ -70,11 +63,10 @@ public class LeAudioHwOffloadPreferenceControllerTest {
         mPreference = new SwitchPreference(mContext);
         mController = spy(new LeAudioHwOffloadPreferenceController(mContext, mFragment));
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
+                .thenReturn(mPreference);
         mController.displayPreference(mPreferenceScreen);
         mController.mBluetoothAdapter = mBluetoothAdapter;
-        when(mBluetoothAdapter.isLeAudioSupported())
-            .thenReturn(FEATURE_SUPPORTED);
+        when(mBluetoothAdapter.isLeAudioSupported()).thenReturn(FEATURE_SUPPORTED);
     }
 
     @Test
@@ -93,8 +85,7 @@ public class LeAudioHwOffloadPreferenceControllerTest {
         mController.mChanged = true;
 
         mController.onRebootDialogConfirmed();
-        final boolean mode2 = SystemProperties.getBoolean(
-                LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
+        final boolean mode2 = SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, true);
         assertThat(mode2).isFalse();
     }
 
@@ -203,8 +194,7 @@ public class LeAudioHwOffloadPreferenceControllerTest {
         SystemProperties.set(LE_AUDIO_OFFLOAD_SUPPORTED_PROPERTY, Boolean.toString(true));
         SystemProperties.set(A2DP_OFFLOAD_SUPPORTED_PROPERTY, Boolean.toString(true));
 
-        SystemProperties.set(
-                LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
+        SystemProperties.set(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, Boolean.toString(true));
         mController.onDeveloperOptionsSwitchDisabled();
         boolean leAueioDisabled =
                 SystemProperties.getBoolean(LE_AUDIO_OFFLOAD_DISABLED_PROPERTY, false);

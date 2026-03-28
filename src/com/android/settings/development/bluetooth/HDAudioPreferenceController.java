@@ -27,9 +27,7 @@ import androidx.preference.TwoStatePreference;
 
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
-/**
- * Switch preference controller for HD audio(optional codec)
- */
+/** Switch preference controller for HD audio(optional codec) */
 public class HDAudioPreferenceController extends AbstractBluetoothPreferenceController
         implements Preference.OnPreferenceChangeListener {
 
@@ -38,9 +36,11 @@ public class HDAudioPreferenceController extends AbstractBluetoothPreferenceCont
 
     @Nullable private final Callback mCallback;
 
-    public HDAudioPreferenceController(Context context, Lifecycle lifecycle,
-                                                A2dpConfigStore store,
-                                                @Nullable Callback callback) {
+    public HDAudioPreferenceController(
+            Context context,
+            Lifecycle lifecycle,
+            A2dpConfigStore store,
+            @Nullable Callback callback) {
         super(context, lifecycle, store);
         mCallback = callback;
     }
@@ -58,12 +58,14 @@ public class HDAudioPreferenceController extends AbstractBluetoothPreferenceCont
             mPreference.setEnabled(false);
             return;
         }
-        final boolean supported = (bluetoothA2dp.isOptionalCodecsSupported(activeDevice)
-                == BluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
+        final boolean supported =
+                (bluetoothA2dp.isOptionalCodecsSupported(activeDevice)
+                        == BluetoothA2dp.OPTIONAL_CODECS_SUPPORTED);
         mPreference.setEnabled(supported);
         if (supported) {
-            final boolean isEnabled = bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
-                    == BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED;
+            final boolean isEnabled =
+                    bluetoothA2dp.isOptionalCodecsEnabled(activeDevice)
+                            == BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED;
             ((TwoStatePreference) mPreference).setChecked(isEnabled);
         }
     }
@@ -81,9 +83,10 @@ public class HDAudioPreferenceController extends AbstractBluetoothPreferenceCont
             return true;
         }
         final boolean enabled = (Boolean) newValue;
-        final int prefValue = enabled
-                ? BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED
-                : BluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED;
+        final int prefValue =
+                enabled
+                        ? BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED
+                        : BluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED;
         BluetoothDevice activeDevice = getA2dpActiveDevice();
         if (activeDevice == null) {
             mPreference.setEnabled(false);

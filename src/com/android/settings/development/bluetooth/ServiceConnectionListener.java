@@ -18,24 +18,19 @@ package com.android.settings.development.bluetooth;
 
 import android.bluetooth.BluetoothA2dp;
 
-/**
- * Interface for callbacks about bluetooth connectivity.
- */
+/** Interface for callbacks about bluetooth connectivity. */
 public interface ServiceConnectionListener {
 
     /**
      * Called when the bluetooth service is connected.
+     *
      * @param bluetoothA2dp controller for Bluetooth A2DP profile.
      */
     void onBluetoothServiceConnected(BluetoothA2dp bluetoothA2dp);
 
-    /**
-     * Called when the bluetooth codec configuration is changed.
-     */
+    /** Called when the bluetooth codec configuration is changed. */
     void onBluetoothCodecUpdated();
 
-    /**
-     * Called with the bluetooth service is disconnected.
-     */
+    /** Called with the bluetooth service is disconnected. */
     void onBluetoothServiceDisconnected();
 }

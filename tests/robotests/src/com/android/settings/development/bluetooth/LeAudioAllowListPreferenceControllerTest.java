@@ -44,12 +44,9 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class LeAudioAllowListPreferenceControllerTest {
 
-    @Mock
-    private PreferenceScreen mPreferenceScreen;
-    @Mock
-    private BluetoothAdapter mBluetoothAdapter;
-    @Mock
-    private SwitchPreference mPreference;
+    @Mock private PreferenceScreen mPreferenceScreen;
+    @Mock private BluetoothAdapter mBluetoothAdapter;
+    @Mock private SwitchPreference mPreference;
     private Context mContext;
     private LeAudioAllowListPreferenceController mController;
 
@@ -59,25 +56,22 @@ public class LeAudioAllowListPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mController = spy(new LeAudioAllowListPreferenceController(mContext));
         when(mPreferenceScreen.findPreference(mController.getPreferenceKey()))
-            .thenReturn(mPreference);
+                .thenReturn(mPreference);
         mController.mBluetoothAdapter = mBluetoothAdapter;
         mController.displayPreference(mPreferenceScreen);
-        when(mBluetoothAdapter.isLeAudioSupported())
-            .thenReturn(FEATURE_SUPPORTED);
+        when(mBluetoothAdapter.isLeAudioSupported()).thenReturn(FEATURE_SUPPORTED);
     }
 
     @Test
     public void onPreferenceChange_setCheck_shouldBypassLeAudioAllowlist() {
         mController.onPreferenceChange(mPreference, Boolean.TRUE);
-        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY,
-                false)).isTrue();
+        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, false)).isTrue();
     }
 
     @Test
     public void onPreferenceChange_setUnCheck_shouldNotBypassLeAudioAllowlist() {
         mController.onPreferenceChange(mPreference, Boolean.FALSE);
-        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY,
-                true)).isFalse();
+        assertThat(SystemProperties.getBoolean(BYPASS_LE_AUDIO_ALLOWLIST_PROPERTY, true)).isFalse();
     }
 
     @Test

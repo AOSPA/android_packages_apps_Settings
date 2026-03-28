@@ -26,12 +26,12 @@ import androidx.preference.TwoStatePreference;
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
-public class AbsoluteVolumePreferenceController extends
-        DeveloperOptionsPreferenceController implements Preference.OnPreferenceChangeListener,
-        PreferenceControllerMixin {
+public class AbsoluteVolumePreferenceController extends DeveloperOptionsPreferenceController
+        implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_KEY =
             "bluetooth_disable_absolute_volume";
+
     @VisibleForTesting
     static final String BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY =
             "persist.bluetooth.disableabsvol";
@@ -48,15 +48,16 @@ public class AbsoluteVolumePreferenceController extends
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         final boolean isEnabled = (Boolean) newValue;
-        SystemProperties.set(BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY,
-                isEnabled ? "true" : "false");
+        SystemProperties.set(
+                BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, isEnabled ? "true" : "false");
         return true;
     }
 
     @Override
     public void updateState(Preference preference) {
-        final boolean isEnabled = SystemProperties.getBoolean(
-                BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
+        final boolean isEnabled =
+                SystemProperties.getBoolean(
+                        BLUETOOTH_DISABLE_ABSOLUTE_VOLUME_PROPERTY, false /* default */);
         ((TwoStatePreference) mPreference).setChecked(isEnabled);
     }
 

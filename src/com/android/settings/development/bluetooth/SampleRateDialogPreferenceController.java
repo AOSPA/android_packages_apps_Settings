@@ -28,17 +28,15 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Dialog preference controller to set the Bluetooth A2DP config of sample rate
- */
-public class SampleRateDialogPreferenceController extends
-        AbstractBluetoothDialogPreferenceController {
+/** Dialog preference controller to set the Bluetooth A2DP config of sample rate */
+public class SampleRateDialogPreferenceController
+        extends AbstractBluetoothDialogPreferenceController {
 
     private static final String KEY = "bluetooth_sample_rate_settings";
     private static final String TAG = "BtSampleRateCtr";
 
-    public SampleRateDialogPreferenceController(Context context, Lifecycle lifecycle,
-                                                         A2dpConfigStore store) {
+    public SampleRateDialogPreferenceController(
+            Context context, Lifecycle lifecycle, A2dpConfigStore store) {
         super(context, lifecycle, store);
     }
 
@@ -60,8 +58,9 @@ public class SampleRateDialogPreferenceController extends
             case 0:
                 final BluetoothCodecConfig currentConfig = getCurrentCodecConfig();
                 if (currentConfig != null) {
-                    sampleRateValue = getHighestSampleRate(getSelectableByCodecType(
-                            currentConfig.getCodecType()));
+                    sampleRateValue =
+                            getHighestSampleRate(
+                                    getSelectableByCodecType(currentConfig.getCodecType()));
                 }
                 break;
             case 1:
