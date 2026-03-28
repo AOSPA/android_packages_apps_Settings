@@ -27,6 +27,7 @@ import android.os.SystemProperties;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.Fragment;
 import androidx.preference.Preference;
 import androidx.preference.TwoStatePreference;
 
@@ -41,7 +42,7 @@ public class BluetoothLeAudioHwOffloadPreferenceController
         implements Preference.OnPreferenceChangeListener, PreferenceControllerMixin {
 
     private static final String PREFERENCE_KEY = "bluetooth_disable_le_audio_hw_offload";
-    @Nullable private final DevelopmentSettingsDashboardFragment mFragment;
+    @Nullable private final Fragment mFragment;
 
     static final String LE_AUDIO_OFFLOAD_DISABLED_PROPERTY =
             "persist.bluetooth.leaudio_offload.disabled";
@@ -55,7 +56,7 @@ public class BluetoothLeAudioHwOffloadPreferenceController
     boolean mChanged = false;
 
     public BluetoothLeAudioHwOffloadPreferenceController(Context context,
-            @Nullable DevelopmentSettingsDashboardFragment fragment) {
+            @Nullable Fragment fragment) {
         super(context);
         mFragment = fragment;
         mBluetoothAdapter = context.getSystemService(BluetoothManager.class).getAdapter();

@@ -2135,15 +2135,13 @@
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"किबोर्ड बदल्ने की देखाउनुहोस्"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"कुनै इन्पुट फिल्ड चयन गरिएका बेला नेभिगेसन बारमा किबोर्ड बदल्ने बटन देखाउने अनुमति दिनुहोस्"</string>
     <string name="keyboard_apps_category" msgid="1715169176659877658">"किबोर्ड एपहरू"</string>
-    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
-    <skip />
+    <string name="keyboard_apps_category_summary" msgid="6676804967286517009">"<xliff:g id="KEYBOARD_APPS_LIST">%1$s</xliff:g> का भाषा तथा एपसम्बन्धी सेटिङ"</string>
     <string name="keywords_keyboard_apps" msgid="895860348178301718">"Gboard"</string>
     <string name="available_keyboard_apps_category" msgid="7665966484500890112">"उपलब्ध किबोर्ड एपहरू"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"विकल्पहरू"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"एक्सेसिबिलिटी सुविधा"</string>
     <string name="physical_keyboard_title" msgid="6597340453841961909">"भौतिक किबोर्डहरू"</string>
-    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
-    <skip />
+    <string name="physical_keyboard_summary" msgid="2751015358747795398">"<xliff:g id="PHYSICAL_KEYBOARDS_LIST">%1$s</xliff:g> का हार्डवेयरसम्बन्धी सेटिङ"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"लेआउट पिकर"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"बाउन्स की"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"एउटै की बारम्बार थिचिएका खण्डमा बेवास्ता गर्नुहोस्"</string>
@@ -2223,6 +2221,8 @@
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"रिसेट गरी डिफल्ट बनाउने हो?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"तपाईंका कन्ट्रोलर सेटिङ रिसेट गरी डिफल्ट बनाइने छन्"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"रिसेट गर्नुहोस्"</string>
+    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"टचप्याड"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"टचप्याड र माउस"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"माउस"</string>
@@ -2426,6 +2426,10 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"विशेष फ्ल्यागहरू"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"ब्लुटुथ स्ट्याग लग अन गर्नुहोस्"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"ब्लुटुथ स्ट्याक लगिङको लग लेभल बदल्नुहोस् (यो सेटिङ बदलेपछि ब्लुटुथ टगल गर्नुहोस्)"</string>
+    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
+    <skip />
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"ब्लुटुथ HCI स्नुप लग फिल्टरिङ"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"फिल्टर सेट गर्नुहोस्"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"परिवर्तनहरू लागू गर्न ब्लुटुथ अफ गरी फेरि अन गर्नुहोस्"</string>
@@ -2605,7 +2609,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"सबै एपमा लागू हुने अँध्यारो थिम"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"सबै एपमा लागू हुने अँध्यारो थिमसम्बन्धी सेटिङ"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"सबै एपमा लागू हुने अँध्यारो थिमसम्बन्धी सेटिङ खोल्नुहोस्"</string>
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"पढ्न सजिलो होस् भन्नाका लागि सबै एपमा लागू हुने अँध्यारो थिमले अझ धेरै एपहरूलाई स्वतः अँध्यारो बनाउँछ।\n\nसबै एपमा लागू हुने अँध्यारो थिम कुनै एपमा प्रयोग गर्न सो एपको टगल अन राख्नुहोस्। सबै एपमा लागू हुने अँध्यारो थिम प्रयोग गर्दा कुनै एप सही तरिकाले देखिएन भने उक्त एपको आफ्नै थिम प्रयोग गर्न त्यसको टगल अफ गर्नुहोस्।"</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"पढ्न सजिलो होस् भन्नाका लागि सबै एपमा लागू हुने अँध्यारो थिमले अझ धेरै एपहरूलाई स्वतः अँध्यारो बनाउँछ।\n\nसबै एपमा लागू हुने अँध्यारो थिम कुनै एपमा प्रयोग गर्न सो एपको टगल अन राख्नुहोस्। सबै एपमा लागू हुने अँध्यारो थिम प्रयोग गर्दा कुनै एपमा राम्रो देखिएन भने उक्त एपको आफ्नै थिम प्रयोग गर्न त्यसको टगल अफ गर्नुहोस्।"</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"एनिमेसन हटाउनुहोस्"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"स्क्रिनमा चाल कम गर्नुहोस्"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"टेक्स्टको कर्सर पिलिक पिलिक हुने सुविधा"</string>
@@ -3632,6 +3636,12 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"डिभाइस"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"टचप्याड, किबोर्ड, डिस्प्ले, साउन्ड"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"ब्राइटनेस, रङ, अँध्यारो थिम, लक स्क्रिन, टेक्स्ट"</string>
+    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
+    <skip />
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"किबोर्ड चयन, टुलहरू"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"कर्सरको गति, बटन कस्टमाइजेसन, स्क्रोलिङ"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"भोल्युम, स्पिकर, माइक्रोफोन"</string>
@@ -4607,49 +4617,57 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"यो एपलाई यो डिभाइस वा जोडिएको कुनै भण्डारणमा रहेका सबै फाइलहरू पढ्ने, परिमार्जन गर्ने तथा मेट्ने अनुमति दिनुहोस्। अनुमति दिइएका खण्डमा यो एपले तपाईंको स्पष्ट अनुमतिविनै फाइलहरू एक्सेस गर्नसक्छ।"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सबै फाइलहरूमाथि पहुँच राख्न सक्छ।"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"स्क्रिन अटोमेसन"</string>
-    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"यो एपले तपाईंलाई कार्यहरू पूरा गर्न मद्दत गर्ने प्रयोजनका लागि अन्य एपहरू ब्याकग्राउन्डमा चलिरहेका बेला पनि ती एपको स्क्रिनमा भएका सामग्री हेर्न र ती सामग्रीसँग अन्तर्क्रिया गर्न सक्ने छ"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2154932816099670659) -->
+    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_info (9062454049512207228) -->
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (5980762930536180974) -->
+    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
     <skip />
-    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"एपहरूलाई अन्य एपको स्क्रिनमा भएको सामग्रीसँग अन्तर्क्रिया गरेर तपाईंलाई कार्यहरू पूरा गर्न मद्दत गर्ने अनुमति दिनुहोस्"</string>
+    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"प्रत्येक पटक सोध्नुहोस्"</string>
     <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
     <skip />
-    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"अनुमति नदिनुहोस्"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (4888755761957621266) -->
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"अनुमति नदिनुहोस्"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (5400163562350523099) -->
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (2238235275174477026) -->
+    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
     <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (2135792628244307590) -->
+    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
     <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
     <skip />
+    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
+    <skip />
     <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
     <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (7663936744209447022) -->
+    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
     <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (2481703601665259966) -->
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9145402296131321682) -->
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
     <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2454906328238498562) -->
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (5137088795672278469) -->
+    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_footer_requirement (4029489221206415252) -->
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (7290667979548333123) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (3243296237180038117) -->
+    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"फुल स्क्रिनमा नोटिफिकेसनहरू देखाउने अनुमति"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"यो एपलाई नोटिफिकेसनहरू फुल स्क्रिनमा देखाउने अनुमति दिनुहोस्"</string>
@@ -5801,8 +5819,7 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"स्क्रिन सेभर छान्नुहोस्"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"कस्टमाइज गर्नुहोस्"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> कस्टमाइज गर्नुहोस्"</string>
-    <!-- no translation found for dream_preview_button_description (1752727543834253129) -->
-    <skip />
+    <string name="dream_preview_button_description" msgid="1752727543834253129">"<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g> को प्रिभ्यू हेर्नुहोस्"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"फ्रिफर्म विन्डो प्रयोग गर्ने सुविधा अन गर्न रिबुट गर्नु पर्ने हुन्छ।"</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"फ्रिफर्म विन्डोको उपलब्धता अपडेट गर्न रिबुट गर्नु पर्ने हुन्छ।"</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"सहायक डिस्प्लेहरूमा फ्रिफर्म विन्डो अन गर्न रिबुट गर्नु पर्ने हुन्छ।"</string>

@@ -36,14 +36,15 @@ import com.android.settingslib.metadata.KEY_PACKAGE_NAME
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.packageName
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -60,7 +61,11 @@ private constructor(
     final override val arguments: Bundle?,
     final override val keyParameters: ValidatedKeyParameters?,
 ) : PreferenceScreenMixin, PreferenceTitleProvider, PreferenceAvailabilityProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    override fun tags(context: Context) = arrayOf(
+        APP_FUNCTION_UNCATEGORIZED,
+        // exclude this screen from api result since we have the data in api_installed_app_detail_settings_screen
+        UI_ONLY_PREFERENCE,
+    )
 
     private val packageName: String? =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -84,7 +89,6 @@ private constructor(
     override val key: String
         get() = KEY
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.installed_app_detail_settings_screen_purpose
 
@@ -126,9 +130,15 @@ private constructor(
         const val KEY = "installed_app_detail_settings_screen"
         const val SOURCE = "appinfo"
 
-        @JvmStatic override val parametersSchema = KeyParametersSchema {
-            parameter(KEY_PACKAGE_NAME, "The package name of the app", required = true, type = InstalledPackageName)
-         }
+        @JvmStatic
+        override val parametersSchema = KeyParametersSchema {
+            parameter(
+                KEY_PACKAGE_NAME,
+                "The package name of the app",
+                required = true,
+                type = InstalledPackageName
+            )
+        }
 
         @JvmStatic
         override fun keyParameters(context: Context): Flow<ValidatedKeyParameters> {

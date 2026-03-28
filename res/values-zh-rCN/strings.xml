@@ -2134,22 +2134,15 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"语言"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"显示键盘开关键"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"允许在选择输入字段时，在导航栏中显示键盘开关按钮"</string>
-    <!-- no translation found for keyboard_apps_category (1715169176659877658) -->
-    <skip />
-    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
-    <skip />
-    <!-- no translation found for keywords_keyboard_apps (895860348178301718) -->
-    <skip />
-    <!-- no translation found for available_keyboard_apps_category (7665966484500890112) -->
-    <skip />
+    <string name="keyboard_apps_category" msgid="1715169176659877658">"键盘应用"</string>
+    <string name="keyboard_apps_category_summary" msgid="6676804967286517009">"<xliff:g id="KEYBOARD_APPS_LIST">%1$s</xliff:g>的语言和应用设置"</string>
+    <string name="keywords_keyboard_apps" msgid="895860348178301718">"Gboard"</string>
+    <string name="available_keyboard_apps_category" msgid="7665966484500890112">"可用的键盘应用"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"选项"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"无障碍功能"</string>
-    <!-- no translation found for physical_keyboard_title (6597340453841961909) -->
-    <skip />
-    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
-    <skip />
-    <!-- no translation found for physical_keyboard_layout_picker_title (6538070154297781081) -->
-    <skip />
+    <string name="physical_keyboard_title" msgid="6597340453841961909">"实体键盘"</string>
+    <string name="physical_keyboard_summary" msgid="2751015358747795398">"<xliff:g id="PHYSICAL_KEYBOARDS_LIST">%1$s</xliff:g>的硬件设置"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"布局选择器"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"防抖键"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"忽略快速重复按下同一按键的操作"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"防抖键延迟"</string>
@@ -2228,6 +2221,8 @@
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"重置为默认设置？"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"所有控制器设置都将重置为默认值"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"重置"</string>
+    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"触控板"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"触控板和鼠标"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"鼠标"</string>
@@ -2338,8 +2333,7 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"重定向振动"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"连接后将振动传到游戏控制器"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"键盘布局"</string>
-    <!-- no translation found for keyboard_layout_picker_category_title (2312103369489003202) -->
-    <skip />
+    <string name="keyboard_layout_picker_category_title" msgid="2312103369489003202">"布局"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"个人字典"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"工作用的个人字典"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"添加要在“拼写检查工具”等应用中使用的字词"</string>
@@ -2361,12 +2355,9 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"所有语言"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"更多语言..."</string>
     <string name="testing" msgid="6294172343766732037">"测试"</string>
-    <!-- no translation found for keyboard_settings_summary (5513613701144979051) -->
-    <skip />
-    <!-- no translation found for keyboard_settings_with_physical_keyboard_summary (449934856451727476) -->
-    <skip />
-    <!-- no translation found for physical_keyboards_list_title (2062417895303139252) -->
-    <skip />
+    <string name="keyboard_settings_summary" msgid="5513613701144979051">"键盘应用、工具"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="449934856451727476">"键盘应用、实体键盘、工具"</string>
+    <string name="physical_keyboards_list_title" msgid="2062417895303139252">"实体键盘"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"布局"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"选择小工具"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"选择微件"</string>
@@ -2435,6 +2426,10 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能标志"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"启用蓝牙堆栈日志"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"更改蓝牙堆栈日志级别（更改此设置后，切换蓝牙开关）"</string>
+    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
+    <skip />
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"蓝牙 HCI 信息收集日志过滤"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"设置过滤器"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"停用并启用蓝牙，使更改生效"</string>
@@ -3643,6 +3638,12 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"设备"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"触控板、键盘、显示、声音"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"亮度、颜色、深色主题、锁屏、文本"</string>
+    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
+    <skip />
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"键盘选择、工具"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"光标速度、按钮自定义、滚动"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"音量、扬声器、麦克风"</string>
@@ -3774,8 +3775,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"文字大小, 大字版, 大字体, 大文字, 低视力, 放大文字, 字体放大工具, 字体放大, text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"氛围屏保始终保持开启状态, AOD, always on ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, 标签, tag, 读取器, reader"</string>
-    <!-- no translation found for keywords_keyboard_vibration (5870649353180725920) -->
-    <skip />
+    <string name="keywords_keyboard_vibration" msgid="5870649353180725920">"键盘, 触感反馈, 振动, 输入, keyboard, haptics, vibrate, typing"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"外接显示器, 已连接的显示器, 扩展显示器, 第二个显示器, 内置显示器, 排列显示器, 镜像, 显示器大小, 旋转, 分辨率, 刷新率, 外接显示屏, 已连接的显示屏, 扩展显示屏, 第二个显示屏, 内置显示屏, 排列显示屏 显示屏大小, external display, connected display, extended display, second display, built-in display, arrange displays, mirror, display size, rotation, resolution, refresh rate"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"插入点, 文本插入点, 文本光标, 光标, 闪烁, 闪烁间隔, 闪烁速率, 动画, 减少动画, 移除动画"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"音量和振动"</string>
@@ -4619,49 +4619,57 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允许此应用读取、修改和删除此设备或任何已连接的存储设备上的所有文件。如果您授予该权限，应用无需明确通知您即可访问文件。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以访问所有文件"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"屏幕自动化"</string>
-    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"此应用将能查看其他应用的界面内容并与之互动，以帮助您完成任务，即使应用在后台运行也无妨"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2154932816099670659) -->
+    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_info (9062454049512207228) -->
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (5980762930536180974) -->
+    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
     <skip />
-    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"允许应用与其他应用的界面内容互动，助您完成任务"</string>
+    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都询问"</string>
     <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
     <skip />
-    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"不允许"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (4888755761957621266) -->
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"不允许"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (5400163562350523099) -->
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
     <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (2238235275174477026) -->
+    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
     <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (2135792628244307590) -->
+    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
     <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
     <skip />
+    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
+    <skip />
     <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
     <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (7663936744209447022) -->
+    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
     <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (2481703601665259966) -->
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9145402296131321682) -->
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
     <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2454906328238498562) -->
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (5137088795672278469) -->
+    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_footer_requirement (4029489221206415252) -->
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
     <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (7290667979548333123) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (3243296237180038117) -->
+    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全屏通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允许此应用显示全屏通知"</string>
@@ -5829,8 +5837,7 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"选择屏保"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"自定义"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"自定义“<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>”"</string>
-    <!-- no translation found for dream_preview_button_description (1752727543834253129) -->
-    <skip />
+    <string name="dream_preview_button_description" msgid="1752727543834253129">"预览“<xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>”"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"您必须重新启动设备，才能启用自由窗口支持。"</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"您必须重新启动设备，才能更新可自由调整的窗口的可用性。"</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"您必须重新启动设备，才能在辅助显示屏上启用可自由调整的窗口。"</string>

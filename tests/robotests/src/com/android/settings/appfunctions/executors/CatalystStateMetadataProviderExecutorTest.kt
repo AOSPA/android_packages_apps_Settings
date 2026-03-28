@@ -631,10 +631,10 @@ class CatalystStateMetadataProviderExecutorTest {
         assertThat(prefMetadata.key).isEqualTo("preconditions_screen/pref_with_preconditions")
         assertThat(prefMetadata.hintText).contains(
             "Preconditions to accessing: Screen precondition, Preference precondition.\n" +
-                "Preconditions to reading: Get precondition.\n" +
-                "Preconditions to writing: Set precondition."
+                "Preconditions to getting: Get precondition.\n" +
+                "Preconditions to setting: Set precondition."
         )
-        assertThat(prefMetadata.hintText).contains("Preconditions to writing: Set precondition.")
+        assertThat(prefMetadata.hintText).contains("Preconditions to setting: Set precondition.")
     }
 
     private class SetWarningTestScreen : PreferencesApiScreen(
@@ -1043,6 +1043,42 @@ class CatalystStateMetadataProviderExecutorTest {
         assertThat(screenMetadata.deviceStateItemsMetadata).hasSize(2)
         assertThat(screenMetadata.deviceStateItemsMetadata[0].key).isEqualTo("test_screen/no_sens_pref")
         assertThat(screenMetadata.deviceStateItemsMetadata[1].key).isEqualTo("test_screen/no_sens_outer")
+    }
+
+    @Test
+    fun invoke_onScreenWithFlagDisabled_notIncluded() = runTest {
+        val innerSensitiveScreen = createScreen(
+            PreferenceScreenConfig(
+                screenKey = "flag_disabled_screen_key",
+                purpose = R.string.preference_screen_purpose,
+                preferences = listOf(
+                    createPersistentPreference<Boolean>(
+                        persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                            preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                key = "inner_preference",
+                                purpose = R.string.preference_purpose,
+                                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                            ),
+                        )
+                    )
+                ),
+                sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE,
+                summary = R.string.preference_screen_summary,
+                isFlagEnabled = false,
+            )
+        )
+
+        setRegistryFactories(innerSensitiveScreen)
+
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("flag_disabled_screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(deviceStateResult.metadata).hasSize(0)
     }
 
     @Test

@@ -167,29 +167,33 @@ class CatalystStateSetterExecutor(private val context: Context) : DeviceStateExe
                     failureReason = failureReason,
                 )
 
+        if (currentValue != null && currentValue.hasError) {
+            return SetDeviceStateItemResponse(
+                isSuccessful = false,
+                currentValue = "N/A",
+                failureReason = settingsPreferenceValueToString(currentValue.settingsPreferenceValue),
+            )
+        }
+
         return try {
-            val resultInt =
+            val setterResponse =
                 setPreference(context, screenKey, key, settingsPreferenceValue, keyParameters)
-            val setValueResult = transformCatalystSetValueResponse(resultInt)
+            val setValueResult = transformCatalystSetValueResponse(setterResponse)
+
             return if (setValueResult.resultCode == SetValueResult.RESULT_OK) {
                 SetDeviceStateItemResponse(
                     isSuccessful = true,
                     currentValue = settingsPreferenceValueToString(settingsPreferenceValue),
                 )
-            } else if (setValueResult.resultCode == SetValueResult.RESULT_DISALLOW) {
-                SetDeviceStateItemResponse(
-                    isSuccessful = false,
-                    currentValue =
-                        settingsPreferenceValueToString(currentValue?.settingsPreferenceValue),
-                    failureReason = "Preference evaluation of write permit is disallow",
-                )
             } else {
+                val failureReasonMessage =
+                    setterResponse.failureReason?.let { " due to $it" } ?: ""
+
                 SetDeviceStateItemResponse(
                     isSuccessful = false,
                     currentValue =
                         settingsPreferenceValueToString(currentValue?.settingsPreferenceValue),
-                    // TODO b/484302113: Show the error in an AI friendly format such as String
-                    failureReason = setValueResult.resultCode.toString(),
+                    failureReason = "Error with code ${setterResponse.errorCode}$failureReasonMessage",
                 )
             }
         } catch (e: Exception) {

@@ -20,6 +20,8 @@ import android.app.appsearch.GenericDocument
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.graph.PreferenceGetterResponse
+import com.android.settingslib.graph.PreferenceSetterResult
+import com.android.settingslib.graph.proto.PreferenceErrorProto
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.metadata.PreferenceCoordinate
@@ -82,5 +84,49 @@ class CatalystStateSetterExecutorTest {
 
         assertThat(result.result?.isSuccessful).isFalse()
         assertThat(result.result?.currentValue).isEqualTo("true")
+        assertThat(result.result?.failureReason).contains("Error with code ${PreferenceSetterResult.INTERNAL_ERROR} due to Set failed")
+    }
+
+    @Test
+    fun execute_setPreferenceValueFailsWhenGet_returnsNAValue() = runTest {
+        // Setup initial value for "getPreference" call that contains an error
+        val proto =
+            PreferenceProto.newBuilder()
+                .setValue(PreferenceValueProto.newBuilder().setError(
+                    PreferenceErrorProto.newBuilder().setError("Preconditions failed").build()
+                ))
+                .setAvailable(true)
+                .setEnabled(true)
+                .setWritable(true)
+                .setSensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+                .build()
+
+        // The executor will request "screen" / "key"
+        val coord = PreferenceCoordinate("screen", "key")
+        val response =
+            PreferenceGetterResponse(
+                errors = emptyMap<PreferenceCoordinate, Int>(),
+                preferences = mapOf<PreferenceCoordinate, PreferenceProto>(coord to proto),
+            )
+        ShadowPreferenceServiceClient.mockGetterResponse = response
+
+        // Mock setPreferenceValue to fail by throwing an exception in the shadow
+        ShadowPreferenceServiceClient.setterException = Exception("Set failed")
+
+        val innerDoc =
+            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
+                .setPropertyString("key", "screen/key")
+                .setPropertyString("value", "false")
+                .build()
+        val params =
+            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
+                .setPropertyDocument("setDeviceStateItemParams", innerDoc)
+                .build()
+
+        val result = executor.execute(DeviceStateAppFunctionType.SET_DEVICE_STATE, params)
+
+        assertThat(result.result?.isSuccessful).isFalse()
+        assertThat(result.result?.currentValue).isEqualTo("N/A")
+        assertThat(result.result?.failureReason).isEqualTo("Preconditions failed")
     }
 }

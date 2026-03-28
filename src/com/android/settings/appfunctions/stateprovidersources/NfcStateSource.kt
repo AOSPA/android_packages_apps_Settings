@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.stateprovidersources
 
 import android.content.Context
 import android.nfc.NfcAdapter
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
@@ -36,7 +37,7 @@ class NfcStateSource : DeviceStateSource {
         val item =
             DeviceStateItem(
                 key = "toggle_nfc",
-                purpose = "If NFC is enabled",
+                purpose = context.getString(R.string.nfc_enabled_purpose),
                 jsonValue = nfcEnabled.toString(),
             )
 

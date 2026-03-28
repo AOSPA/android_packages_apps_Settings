@@ -693,20 +693,6 @@
     "type": "boolean"
   },
   {
-    "preference_key": "gesture_double_power_tap_camera",
-    "file_name": "DoubleTapPowerScreen.kt",
-    "screen_key": "gesture_double_tap_power_input_summary",
-    "writable": "False",
-    "type": "boolean"
-  },
-  {
-    "preference_key": "gesture_double_power_tap_wallet",
-    "file_name": "DoubleTapPowerScreen.kt",
-    "screen_key": "gesture_double_tap_power_input_summary",
-    "writable": "False",
-    "type": "unknown"
-  },
-  {
     "preference_key": "hdr_brightness_enabled",
     "file_name": "HdrBrightnessApiScreen.kt",
     "screen_key": "hdr_brightness_detail",
@@ -1610,27 +1596,6 @@
     "type": "boolean"
   },
   {
-    "preference_key": "a11y_activity_detail_screen_preference",
-    "file_name": "A11yActivityScreen.kt",
-    "screen_key": "a11y_activity_detail_screen",
-    "writable": "False",
-    "type": "unknown"
-  },
-  {
-    "preference_key": "a11y_service_detail_screen_preference",
-    "file_name": "A11yServiceScreen.kt",
-    "screen_key": "a11y_service_detail_screen",
-    "writable": "False",
-    "type": "unknown"
-  },
-  {
-    "preference_key": "accessibility_control_timeout_preference_fragment_preference",
-    "file_name": "ActionTimeoutSettingsScreen.kt",
-    "screen_key": "accessibility_control_timeout_preference_fragment",
-    "writable": "False",
-    "type": "unknown"
-  },
-  {
     "preference_key": "accessibility_service_settings",
     "file_name": "A11yServiceScreen.kt",
     "screen_key": "a11y_service_detail_screen",
@@ -1664,13 +1629,6 @@
     "screen_key": "api_mobile_network_pref_screen",
     "writable": "True",
     "type": "boolean"
-  },
-  {
-    "preference_key": "autoclick_preference_preference",
-    "file_name": "AutoclickScreen.kt",
-    "screen_key": "autoclick_preference",
-    "writable": "False",
-    "type": "unknown"
   },
   {
     "preference_key": "battery_info_cycle_count",
@@ -1771,13 +1729,6 @@
     "type": "unknown"
   },
   {
-    "preference_key": "device_state_app_info_notification_access_preference",
-    "file_name": "AppInfoNotificationAccessScreen.kt",
-    "screen_key": "device_state_app_info_notification_access",
-    "writable": "False",
-    "type": "unknown"
-  },
-  {
     "preference_key": "enable_calling",
     "file_name": "UserDetailsSettingsScreenApi.kt",
     "screen_key": "user_details_settings_screen",
@@ -1788,13 +1739,6 @@
     "preference_key": "flash_notifications_preference",
     "file_name": "FlashNotificationsScreen.kt",
     "screen_key": "flash_notifications",
-    "writable": "False",
-    "type": "unknown"
-  },
-  {
-    "preference_key": "gesture_double_tap_power_input_summary_preference",
-    "file_name": "DoubleTapPowerScreen.kt",
-    "screen_key": "gesture_double_tap_power_input_summary",
     "writable": "False",
     "type": "unknown"
   },
@@ -1813,23 +1757,9 @@
     "type": "unknown"
   },
   {
-    "preference_key": "hearing_devices_preference",
-    "file_name": "HearingDevicesScreen.kt",
-    "screen_key": "hearing_devices",
-    "writable": "False",
-    "type": "unknown"
-  },
-  {
     "preference_key": "lockscreen_from_display_settings_preference",
     "file_name": "LockScreenPreferenceScreen.kt",
     "screen_key": "lockscreen_from_display_settings",
-    "writable": "False",
-    "type": "unknown"
-  },
-  {
-    "preference_key": "mobile_network_list_preference",
-    "file_name": "MobileNetworkListScreen.kt",
-    "screen_key": "mobile_network_list",
     "writable": "False",
     "type": "unknown"
   },
@@ -1881,13 +1811,6 @@
     "screen_key": "print_service_settings",
     "writable": "True",
     "type": "boolean"
-  },
-  {
-    "preference_key": "recent_app_location_access_0",
-    "file_name": "RecentLocationAccessScreen.kt",
-    "screen_key": "device_state_all_recent_location_access",
-    "writable": "False",
-    "type": "unknown"
   },
   {
     "preference_key": "saved_networks_preference",
@@ -2021,5 +1944,1132 @@
     "screen_key": "wifi_display_settings",
     "writable": "False",
     "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_activity_app_info",
+    "file_name": "A11yActivityScreen.kt",
+    "screen_key": "a11y_activity_detail_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_activity_settings",
+    "file_name": "A11yActivityScreen.kt",
+    "screen_key": "a11y_activity_detail_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_autoclick_banner",
+    "file_name": "AutoclickScreen.kt",
+    "screen_key": "autoclick_preference",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_autoclick_footer",
+    "file_name": "AutoclickScreen.kt",
+    "screen_key": "autoclick_preference",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_autoclick_intro",
+    "file_name": "AutoclickScreen.kt",
+    "screen_key": "autoclick_preference",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_button_footer",
+    "file_name": "ButtonShortcutSettingScreen.kt",
+    "screen_key": "accessibility_button_preference",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_button_intro",
+    "file_name": "ButtonShortcutSettingScreen.kt",
+    "screen_key": "accessibility_button_preference",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_button_preview",
+    "file_name": "ButtonShortcutSettingScreen.kt",
+    "screen_key": "accessibility_button_preference",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_control_timeout_banner",
+    "file_name": "ActionTimeoutSettingsScreen.kt",
+    "screen_key": "accessibility_control_timeout_preference_fragment",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_control_timeout_footer",
+    "file_name": "ActionTimeoutSettingsScreen.kt",
+    "screen_key": "accessibility_control_timeout_preference_fragment",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_control_timeout_intro",
+    "file_name": "ActionTimeoutSettingsScreen.kt",
+    "screen_key": "accessibility_control_timeout_preference_fragment",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accessibility_service_app_info",
+    "file_name": "A11yServiceScreen.kt",
+    "screen_key": "a11y_service_detail_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accounts_and_backup_accounts_category",
+    "file_name": "AccountsAndBackupScreen.kt",
+    "screen_key": "top_level_accounts_and_backup",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "accounts_and_backup_backup_category",
+    "file_name": "AccountsAndBackupScreen.kt",
+    "screen_key": "top_level_accounts_and_backup",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "active_supervision_apps_group",
+    "file_name": "SupervisionDashboardScreen.kt",
+    "screen_key": "top_level_supervision",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "adaptive_battery_category",
+    "file_name": "BatterySaverScreen.kt",
+    "screen_key": "battery_saver_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "adaptive_battery_illustration",
+    "file_name": "AdaptiveBatteryScreen.kt",
+    "screen_key": "adaptive_battery_entry",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "adaptive_battery_top_intro",
+    "file_name": "AdaptiveBatteryScreen.kt",
+    "screen_key": "adaptive_battery_entry",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "adaptive_vibration_footer",
+    "file_name": "AdaptiveVibrationScreen.kt",
+    "screen_key": "adaptive_vibration_settings",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "adaptive_vibration_illustration",
+    "file_name": "AdaptiveVibrationScreen.kt",
+    "screen_key": "adaptive_vibration_settings",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "adaptive_vibration_top_intro",
+    "file_name": "AdaptiveVibrationScreen.kt",
+    "screen_key": "adaptive_vibration_settings",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "ambient_display_always_on_intro",
+    "file_name": "AmbientDisplayAlwaysOnPreferenceScreen.kt",
+    "screen_key": "ambient_display_always_on_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "ambient_display_illustration",
+    "file_name": "AmbientDisplayAlwaysOnPreferenceScreen.kt",
+    "screen_key": "ambient_display_always_on_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "ambient_wallpaperGroup",
+    "file_name": "AmbientDisplayAlwaysOnPreferenceScreen.kt",
+    "screen_key": "ambient_display_always_on_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "animated_image",
+    "file_name": "A11yServiceScreen.kt",
+    "screen_key": "a11y_service_detail_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "aoc_footer",
+    "file_name": "SupervisionDashboardScreen.kt",
+    "screen_key": "top_level_supervision",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "apn_and_protection_container",
+    "file_name": "MobileNetworkScreen.kt",
+    "screen_key": "mobile_network_pref_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "app_background_data_switch",
+    "file_name": "AppDataUsageScreenApi.kt",
+    "screen_key": "api_app_data_usage_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "app_info_header",
+    "file_name": "AllFilesAccessAppDetailScreen.kt",
+    "screen_key": "special_access_all_files_access_app_detail",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "app_store_filters_footer",
+    "file_name": "SupervisionAppStoreFiltersScreen.kt",
+    "screen_key": "supervision_app_store_filters",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "app_unrestricted_mobile_data_usage_switch",
+    "file_name": "AppDataUsageScreenApi.kt",
+    "screen_key": "api_app_data_usage_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "audio_category",
+    "file_name": "SoundScreen.kt",
+    "screen_key": "sound_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "available_hearing_devices",
+    "file_name": "HearingDevicesScreen.kt",
+    "screen_key": "hearing_devices",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "available_supervision_apps_group",
+    "file_name": "SupervisionDashboardScreen.kt",
+    "screen_key": "top_level_supervision",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "background_usage_allowability_switch",
+    "file_name": "PowerBackgroundUsageDetailScreen.kt",
+    "screen_key": "power_background_usage_detail",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "battery_saver_group",
+    "file_name": "BatterySaverScreen.kt",
+    "screen_key": "battery_saver_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "battery_saver_reminder_entry",
+    "file_name": "BatterySaverScheduleScreen.kt",
+    "screen_key": "battery_saver_schedule",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "battery_saver_schedule_category",
+    "file_name": "BatterySaverScreen.kt",
+    "screen_key": "battery_saver_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "battery_saver_type",
+    "file_name": "BatterySaverGoogleApiScreen.kt",
+    "screen_key": "api_battery_saver_screen",
+    "writable": "True",
+    "type": "string"
+  },
+  {
+    "preference_key": "bluetooth_auto_on_settings_toggle",
+    "file_name": "BluetoothDashboardScreenApi.kt",
+    "screen_key": "api_bluetooth_switchbar_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "bluetooth_screen_bt_pair_rename_devices",
+    "file_name": "BluetoothDashboardScreen.kt",
+    "screen_key": "bluetooth_switchbar_screen",
+    "writable": "False",
+    "type": "string"
+  },
+  {
+    "preference_key": "bluetooth_screen_footer",
+    "file_name": "BluetoothDashboardScreen.kt",
+    "screen_key": "bluetooth_switchbar_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "browser_filters_group",
+    "file_name": "SupervisionWebContentFiltersScreen.kt",
+    "screen_key": "supervision_web_content_filters",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "button_order_group",
+    "file_name": "ButtonNavigationSettingsScreen.kt",
+    "screen_key": "button_navigation_settings_page",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "captioning_appearance_footer",
+    "file_name": "CaptioningAppearanceScreen.kt",
+    "screen_key": "captioning_appearance",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "captioning_custom_options_category",
+    "file_name": "CaptioningAppearanceScreen.kt",
+    "screen_key": "captioning_appearance",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "captioning_intro",
+    "file_name": "CaptioningScreens.kt",
+    "screen_key": "captioning_preference_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "captioning_more_options_footer",
+    "file_name": "CaptioningMoreOptionsScreen.kt",
+    "screen_key": "captioning_more_options",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "captioning_preview",
+    "file_name": "CaptioningAppearanceScreen.kt",
+    "screen_key": "captioning_appearance",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "captioning_settings_footer",
+    "file_name": "CaptioningScreens.kt",
+    "screen_key": "captioning_preference_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "category_brightness",
+    "file_name": "DisplayScreen.kt",
+    "screen_key": "display_settings_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "category_key_appearance",
+    "file_name": "DisplayScreen.kt",
+    "screen_key": "display_settings_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "category_lock_display",
+    "file_name": "DisplayScreen.kt",
+    "screen_key": "display_settings_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "category_other",
+    "file_name": "DisplayScreen.kt",
+    "screen_key": "display_settings_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "category_touch",
+    "file_name": "DisplayScreen.kt",
+    "screen_key": "display_settings_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "copyright",
+    "file_name": "LegalSettingsScreen.kt",
+    "screen_key": "legal_information",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "daltonizer_preview",
+    "file_name": "ColorCorrectionScreen.kt",
+    "screen_key": "daltonizer_preference",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "dark_theme_connection_footer",
+    "file_name": "DarkModeScreen.kt",
+    "screen_key": "dark_ui_mode",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "dark_theme_custom_bedtime_footer",
+    "file_name": "DarkModeScreen.kt",
+    "screen_key": "dark_ui_mode",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "dark_theme_expanded_footer",
+    "file_name": "DarkModeScreen.kt",
+    "screen_key": "dark_ui_mode",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "dark_theme_group",
+    "file_name": "DarkModeScreen.kt",
+    "screen_key": "dark_ui_mode",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "dark_theme_mode_selector",
+    "file_name": "DarkModeApiFirstScreen.kt",
+    "screen_key": "api_dark_ui_mode",
+    "writable": "True",
+    "type": "integer"
+  },
+  {
+    "preference_key": "dark_ui_location_off",
+    "file_name": "DarkModeScreen.kt",
+    "screen_key": "dark_ui_mode",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "dark_ui_top_intro",
+    "file_name": "DarkModeScreen.kt",
+    "screen_key": "dark_ui_mode",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "delete_pin_group",
+    "file_name": "SupervisionPinManagementScreen.kt",
+    "screen_key": "supervision_pin_management",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "device_detail_category",
+    "file_name": "MyDeviceInfoScreen.kt",
+    "screen_key": "my_device_info_pref_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "device_state_interact_across_profiles_settings_switch",
+    "file_name": "InteractAcrossProfilesAppDetailScreen.kt",
+    "screen_key": "special_access_interact_across_profiles_app_detail",
+    "writable": "False",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "display_category",
+    "file_name": "DarkModeScreen.kt",
+    "screen_key": "dark_ui_mode",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "display_text_size",
+    "file_name": "TextReadingScreen.kt",
+    "screen_key": "text_reading_options",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "doze_always_on_inactivity_detection",
+    "file_name": "AmbientDisplayAlwaysOnPreferenceScreen.kt",
+    "screen_key": "ambient_display_always_on_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "doze_always_on_wallpaper_enabled",
+    "file_name": "AmbientDisplayAlwaysOnPreferenceScreen.kt",
+    "screen_key": "ambient_display_always_on_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "enabled_networks_key",
+    "file_name": "MobileNetworkScreen.kt",
+    "screen_key": "mobile_network_pref_screen",
+    "writable": "False",
+    "type": "string"
+  },
+  {
+    "preference_key": "enabled_state_container",
+    "file_name": "MobileNetworkScreen.kt",
+    "screen_key": "mobile_network_pref_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "feedback",
+    "file_name": "ColorAndMotionScreen.kt",
+    "screen_key": "accessibility_color_and_motion",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "flash_notifications_category",
+    "file_name": "FlashNotificationsScreen.kt",
+    "screen_key": "flash_notifications",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "flash_notifications_footer",
+    "file_name": "FlashNotificationsScreen.kt",
+    "screen_key": "flash_notifications",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "flash_notifications_illustration",
+    "file_name": "FlashNotificationsScreen.kt",
+    "screen_key": "flash_notifications",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "flash_notifications_intro",
+    "file_name": "FlashNotificationsScreen.kt",
+    "screen_key": "flash_notifications",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "flash_notifications_preview",
+    "file_name": "FlashNotificationsScreen.kt",
+    "screen_key": "flash_notifications",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "footer",
+    "file_name": "AllFilesAccessAppDetailScreen.kt",
+    "screen_key": "special_access_all_files_access_app_detail",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "footer_info",
+    "file_name": "A11yServiceScreen.kt",
+    "screen_key": "a11y_service_detail_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "general_categories",
+    "file_name": "A11yServiceScreen.kt",
+    "screen_key": "a11y_service_detail_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "gesture_double_power_tap_app",
+    "file_name": "DoubleTapPowerApiFirstScreen.kt",
+    "screen_key": "api_double_tap_power_screen",
+    "writable": "True",
+    "type": "integer"
+  },
+  {
+    "preference_key": "handwriting_switch",
+    "file_name": "StylusUsiDetailsApiScreen.kt",
+    "screen_key": "stylus_usi_details_api_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "hearing_device_footer",
+    "file_name": "HearingDevicesScreen.kt",
+    "screen_key": "hearing_devices",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "hearing_device_intro",
+    "file_name": "HearingDevicesScreen.kt",
+    "screen_key": "hearing_devices",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "hearing_device_routing_category",
+    "file_name": "HearingDevicesScreen.kt",
+    "screen_key": "hearing_devices",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "hearing_options_category",
+    "file_name": "HearingDevicesScreen.kt",
+    "screen_key": "hearing_devices",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "html_description",
+    "file_name": "ColorCorrectionScreen.kt",
+    "screen_key": "daltonizer_preference",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "html_footer_info",
+    "file_name": "A11yServiceScreen.kt",
+    "screen_key": "a11y_service_detail_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "ignore_button",
+    "file_name": "StylusUsiDetailsApiScreen.kt",
+    "screen_key": "stylus_usi_details_api_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "launch_preference",
+    "file_name": "A11yActivityScreen.kt",
+    "screen_key": "a11y_activity_detail_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "legal_source_code",
+    "file_name": "LegalSettingsScreen.kt",
+    "screen_key": "legal_information",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "license",
+    "file_name": "LegalSettingsScreen.kt",
+    "screen_key": "legal_information",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "low_light_mode",
+    "file_name": "DreamSettingsApiScreen.kt",
+    "screen_key": "api_screensaver",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "mobile_network_spn",
+    "file_name": "MobileNetworkScreen.kt",
+    "screen_key": "mobile_network_pref_screen",
+    "writable": "False",
+    "type": "string"
+  },
+  {
+    "preference_key": "mode_manual_duration",
+    "file_name": "ZenModeApiScreen.kt",
+    "screen_key": "zen_mode_screen",
+    "writable": "True",
+    "type": "integer"
+  },
+  {
+    "preference_key": "network_mode_imei_info",
+    "file_name": "MobileNetworkScreen.kt",
+    "screen_key": "mobile_network_pref_screen",
+    "writable": "False",
+    "type": "string"
+  },
+  {
+    "preference_key": "night_display_end_time",
+    "file_name": "NightDisplayApiScreen.kt",
+    "screen_key": "api_night_display",
+    "writable": "True",
+    "type": "string"
+  },
+  {
+    "preference_key": "night_display_start_time",
+    "file_name": "NightDisplayApiScreen.kt",
+    "screen_key": "api_night_display",
+    "writable": "True",
+    "type": "string"
+  },
+  {
+    "preference_key": "numbering_system_preference",
+    "file_name": "NumberingSystemLocaleListApiFirstScreen.kt",
+    "screen_key": "regional_preference_numbering_system",
+    "writable": "True",
+    "type": "string"
+  },
+  {
+    "preference_key": "percentage_category",
+    "file_name": "PowerUsageSummaryScreen.kt",
+    "screen_key": "power_usage_summary_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "phone_number",
+    "file_name": "MobileNetworkScreen.kt",
+    "screen_key": "mobile_network_pref_screen",
+    "writable": "False",
+    "type": "string"
+  },
+  {
+    "preference_key": "pin_management_footer",
+    "file_name": "SupervisionPinManagementScreen.kt",
+    "screen_key": "supervision_pin_management",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "pin_management_group",
+    "file_name": "SupervisionPinManagementScreen.kt",
+    "screen_key": "supervision_pin_management",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "polite_notification_global_pref",
+    "file_name": "PoliteNotificationsApiScreen.kt",
+    "screen_key": "notification_cooldown_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "power_usage_summary_category",
+    "file_name": "PowerUsageSummaryScreen.kt",
+    "screen_key": "power_usage_summary_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "preview",
+    "file_name": "TextReadingScreen.kt",
+    "screen_key": "text_reading_options",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "previously_connected_hearing_devices",
+    "file_name": "HearingDevicesScreen.kt",
+    "screen_key": "hearing_devices",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "promo_footer",
+    "file_name": "SupervisionDashboardScreen.kt",
+    "screen_key": "top_level_supervision",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "require_device_unlock_for_nfc",
+    "file_name": "NfcAndPaymentApiScreen.kt",
+    "screen_key": "nfc_and_payment_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "reset",
+    "file_name": "TextReadingScreen.kt",
+    "screen_key": "text_reading_options",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "reverse_charging_detail_footer",
+    "file_name": "ReverseChargingScreen.kt",
+    "screen_key": "reverse_charging",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "reverse_charging_illustration",
+    "file_name": "ReverseChargingScreen.kt",
+    "screen_key": "reverse_charging",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "reverse_charging_summary",
+    "file_name": "ReverseChargingScreen.kt",
+    "screen_key": "reverse_charging",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "search_filters_group",
+    "file_name": "SupervisionWebContentFiltersScreen.kt",
+    "screen_key": "supervision_web_content_filters",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "sim_ringtone_info",
+    "file_name": "MobileNetworkScreen.kt",
+    "screen_key": "mobile_network_pref_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "software_update_settings_v2_preference",
+    "file_name": "SoftwareUpdateScreen.kt",
+    "screen_key": "software_update_settings_v2",
+    "writable": "False",
+    "type": "string"
+  },
+  {
+    "preference_key": "status_header",
+    "file_name": "MobileNetworkScreen.kt",
+    "screen_key": "mobile_network_pref_screen",
+    "writable": "False",
+    "type": "string"
+  },
+  {
+    "preference_key": "supervision_app_store_filters_group",
+    "file_name": "SupervisionAppStoreFiltersScreen.kt",
+    "screen_key": "supervision_app_store_filters",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supervision_app_store_filters_intro",
+    "file_name": "SupervisionAppStoreFiltersScreen.kt",
+    "screen_key": "supervision_app_store_filters",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supervision_change_pin",
+    "file_name": "SupervisionPinManagementScreen.kt",
+    "screen_key": "supervision_pin_management",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supervision_delete_pin",
+    "file_name": "SupervisionPinManagementScreen.kt",
+    "screen_key": "supervision_pin_management",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supervision_features_group_1",
+    "file_name": "SupervisionDashboardScreen.kt",
+    "screen_key": "top_level_supervision",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supervision_features_group_2",
+    "file_name": "SupervisionDashboardScreen.kt",
+    "screen_key": "top_level_supervision",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supervision_pin_recovery",
+    "file_name": "SupervisionPinManagementScreen.kt",
+    "screen_key": "supervision_pin_management",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supervision_pin_recovery_banner",
+    "file_name": "SupervisionDashboardScreen.kt",
+    "screen_key": "top_level_supervision",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supervision_set_up_pin",
+    "file_name": "SupervisionDashboardScreen.kt",
+    "screen_key": "top_level_supervision",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supervision_setup_recovery",
+    "file_name": "SupervisionPinManagementScreen.kt",
+    "screen_key": "supervision_pin_management",
+    "writable": "False",
+    "type": "string"
+  },
+  {
+    "preference_key": "supervision_update_recovery_email",
+    "file_name": "SupervisionPinManagementScreen.kt",
+    "screen_key": "supervision_pin_management",
+    "writable": "False",
+    "type": "string"
+  },
+  {
+    "preference_key": "supervision_web_content_filters_intro",
+    "file_name": "SupervisionWebContentFiltersScreen.kt",
+    "screen_key": "supervision_web_content_filters",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "supported_apps_group",
+    "file_name": "SupervisionWebContentFiltersBrowserSupportedAppsScreen.kt",
+    "screen_key": "supervision_web_content_filters_browser_supported_apps",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "survey",
+    "file_name": "DarkModeScreen.kt",
+    "screen_key": "dark_ui_mode",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "system_sounds_and_vibrations_category",
+    "file_name": "SoundScreen.kt",
+    "screen_key": "sound_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "terms",
+    "file_name": "LegalSettingsScreen.kt",
+    "screen_key": "legal_information",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "text_style",
+    "file_name": "TextReadingScreen.kt",
+    "screen_key": "text_reading_options",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "toggle_vibration_category_call",
+    "file_name": "VibrationScreen.kt",
+    "screen_key": "vibration_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "toggle_vibration_category_haptics",
+    "file_name": "VibrationScreen.kt",
+    "screen_key": "vibration_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "toggle_vibration_category_notification_alarm",
+    "file_name": "VibrationScreen.kt",
+    "screen_key": "vibration_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "top_intro",
+    "file_name": "A11yServiceScreen.kt",
+    "screen_key": "a11y_service_detail_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "touch_sensitivity_illustration",
+    "file_name": "TouchSensitivityScreen.kt",
+    "screen_key": "touch_sensitivity_settings_page",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "touch_sensitivity_settings_top_intro",
+    "file_name": "TouchSensitivityScreen.kt",
+    "screen_key": "touch_sensitivity_settings_page",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "tts_default_pitch",
+    "file_name": "TextToSpeechApiScreen.kt",
+    "screen_key": "text_to_speech_settings",
+    "writable": "True",
+    "type": "integer"
+  },
+  {
+    "preference_key": "tts_default_rate",
+    "file_name": "TextToSpeechApiScreen.kt",
+    "screen_key": "text_to_speech_settings",
+    "writable": "True",
+    "type": "integer"
+  },
+  {
+    "preference_key": "unused_apps_switch",
+    "file_name": "AppInfoScreenApiFirst.kt",
+    "screen_key": "api_installed_app_detail_settings_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "use_nfc",
+    "file_name": "NfcAndPaymentApiScreen.kt",
+    "screen_key": "nfc_and_payment_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "use_sim_switch_catalyst",
+    "file_name": "MobileNetworkScreen.kt",
+    "screen_key": "mobile_network_pref_screen",
+    "writable": "False",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "uwb_settings",
+    "file_name": "AdvancedConnectedDeviceApiScreen.kt",
+    "screen_key": "api_connection_preferences",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "vibration_category_call",
+    "file_name": "VibrationIntensityScreen.kt",
+    "screen_key": "vibration_intensity_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "vibration_category_haptics",
+    "file_name": "VibrationIntensityScreen.kt",
+    "screen_key": "vibration_intensity_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "vibration_category_notification_alarm",
+    "file_name": "VibrationIntensityScreen.kt",
+    "screen_key": "vibration_intensity_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "volume_controls_category",
+    "file_name": "SoundScreen.kt",
+    "screen_key": "sound_screen",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "wallpaper_attributions",
+    "file_name": "LegalSettingsScreen.kt",
+    "screen_key": "legal_information",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "web_content_filters_footer",
+    "file_name": "SupervisionWebContentFiltersScreen.kt",
+    "screen_key": "supervision_web_content_filters",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "webview_license",
+    "file_name": "LegalSettingsScreen.kt",
+    "screen_key": "legal_information",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "when_to_start",
+    "file_name": "DreamSettingsApiScreen.kt",
+    "screen_key": "api_screensaver",
+    "writable": "True",
+    "type": "integer"
+  },
+  {
+    "preference_key": "wifi_calling_switch",
+    "file_name": "WifiCallingScreen.kt",
+    "screen_key": "wifi_calling",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "wifi_category",
+    "file_name": "NetworkProviderScreen.kt",
+    "screen_key": "internet_settings",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "wifi_ext_category",
+    "file_name": "NetworkProviderScreen.kt",
+    "screen_key": "internet_settings",
+    "writable": "False",
+    "type": "unknown"
+  },
+  {
+    "preference_key": "wifi_privacy_send_device_name_switch",
+    "file_name": "WifiPrivacyScreenApi.kt",
+    "screen_key": "wifi_privacy_screen",
+    "writable": "True",
+    "type": "boolean"
+  },
+  {
+    "preference_key": "wifi_scanning",
+    "file_name": "WifiScanningApiScreen.kt",
+    "screen_key": "wifi_always_scanning_screen",
+    "writable": "True",
+    "type": "boolean"
   }
 ]

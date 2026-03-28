@@ -44,7 +44,6 @@ open class HardwareInfoScreen :
     override val key: String
         get() = KEY
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.device_model_purpose
 

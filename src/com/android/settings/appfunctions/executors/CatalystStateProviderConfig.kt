@@ -182,6 +182,7 @@ import com.android.settings.notification.PoliteNotificationsApiScreen
 import com.android.settings.notification.SoundApiScreen
 import com.android.settings.notification.SoundScreen
 import com.android.settings.notification.SpatialAudioApiScreen
+import com.android.settings.notification.app.AppNotificationSettingsApiScreen
 import com.android.settings.notification.app.ConversationListScreen
 import com.android.settings.notification.modes.ZenModeApiScreen
 import com.android.settings.notification.modes.ZenModesListScreen
@@ -634,6 +635,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = EmergencyDashboardScreen.KEY),
         PerScreenCatalystConfig(
             enabled = true,
+            screenKey = AppNotificationSettingsApiScreen.KEY,
+            appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
+        ),
+        PerScreenCatalystConfig(
+            enabled = true,
             screenKey = ZenModesListScreen.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_NOTIFICATIONS),
         ),
@@ -740,7 +746,9 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = ScreenResolutionApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OneHandedApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiScanningApiScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = AppStorageSettingsScreenApi.KEY,
+        PerScreenCatalystConfig(
+            enabled = true,
+            screenKey = AppStorageSettingsScreenApi.KEY,
             appFunctionTypes = setOf(DeviceStateAppFunctionType.GET_APPS),
         ),
         PerScreenCatalystConfig(enabled = true, screenKey = StylusUsiDetailsApiScreen.KEY),

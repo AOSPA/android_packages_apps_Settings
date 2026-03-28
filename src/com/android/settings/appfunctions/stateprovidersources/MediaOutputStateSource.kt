@@ -54,7 +54,11 @@ class MediaOutputStateSource : DeviceStateSource {
             }
 
         val item =
-            DeviceStateItem(key = "media_output", purpose = "media_output", jsonValue = summary)
+            DeviceStateItem(
+                key = "media_output",
+                purpose = context.getString(R.string.media_output_purpose),
+                jsonValue = summary,
+            )
         return listOf(
             PerScreenDeviceStates(
                 description = "Sound & vibration",

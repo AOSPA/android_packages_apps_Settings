@@ -39,7 +39,8 @@ class HardwareInfoApiScreen :
         key = KEY,
         topLevelSettingsCategory = Category.ABOUT_DEVICE,
         fragment = HardwareInfoFragment::class,
-        purpose = R.string.hardware_info_api_screen_purpose,
+        alreadyPartiallyMigrated = HardwareInfoScreen::class,
+        purpose = R.string.device_model_purpose_api,
     ) {
     init {
         flag { Flags.catalystMigration26q2() }

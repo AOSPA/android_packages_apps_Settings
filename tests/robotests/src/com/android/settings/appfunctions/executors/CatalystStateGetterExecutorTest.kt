@@ -23,6 +23,7 @@ import android.provider.Settings
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settingslib.graph.PreferenceGetterResponse
+import com.android.settingslib.graph.proto.PreferenceErrorProto
 import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.metadata.FixedArrayMap
@@ -223,5 +224,37 @@ class CatalystStateGetterExecutorTest {
         val result = executor.execute(DeviceStateAppFunctionType.GET_DEVICE_STATE, params)
 
         assertThat(result.result).isNull()
+    }
+
+    @Test
+    fun execute_protoContainsError_returnsErrorInResult() = runTest {
+        val proto = PreferenceProto.newBuilder().setValue(
+            PreferenceValueProto.newBuilder().setError(
+                PreferenceErrorProto.newBuilder().setError("Preconditions failed").build()
+            )
+        ).build()
+
+        val coord = PreferenceCoordinate("screen_key", "pref_key")
+        val response =
+            PreferenceGetterResponse(
+                errors = emptyMap<PreferenceCoordinate, Int>(),
+                preferences = mapOf<PreferenceCoordinate, PreferenceProto>(coord to proto),
+            )
+        ShadowPreferenceServiceClient.mockGetterResponse = response
+
+        val innerDoc =
+            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
+                .setPropertyString("key", "screen_key/pref_key")
+                .build()
+        val params =
+            GenericDocument.Builder<GenericDocument.Builder<*>>("namespace", "id", "schema")
+                .setPropertyDocument("getDeviceStateItemParams", innerDoc)
+                .build()
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_DEVICE_STATE, params)
+
+        assertThat(result.result).isNotNull()
+        assertThat(result.result?.deviceStateItem?.key).isEqualTo("screen_key/pref_key")
+        assertThat(result.result?.deviceStateItem?.jsonValue).isEqualTo("Error: Preconditions failed")
     }
 }
