@@ -65,7 +65,12 @@ open class DisplayId(
             }
     }
 
-    override fun getKey(): String = "DisplayId_${allowInternal}_$allowExternal"
+    override fun getKey(): String = when {
+        allowInternal && allowExternal -> "DisplayId_InternalAndExternal"
+        allowInternal -> "DisplayId_InternalOnly"
+        allowExternal -> "DisplayId_ExternalOnly"
+        else -> "DisplayId_NoDisplay"
+    }
 
     override val externalType: EType<String> = EType.String
 

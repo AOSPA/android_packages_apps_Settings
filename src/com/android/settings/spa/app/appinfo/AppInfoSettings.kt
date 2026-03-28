@@ -16,11 +16,13 @@
 
 package com.android.settings.spa.app.appinfo
 
+import android.app.Activity
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.UserHandle
+import android.os.UserManager
 import android.util.FeatureFlagUtils
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -137,6 +139,15 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     ) {
         val packageInfo = packageInfoState.value ?: return@RegularScaffold
         val app = packageInfo.applicationInfo ?: return@RegularScaffold
+
+        // In Headless System User Mode, non-admin users are restricted from controlling HSU apps
+        // to prevent system-wide impact. Block access to the App Info page for these users.
+        if (android.multiuser.Flags.hsuAppManagement() && !HsuUtils.canControlHsuApp(context, app)) {
+            val activity = context as? Activity
+            activity?.finish()
+            return@RegularScaffold
+        }
+
         val appInfoProvider = remember(packageInfo) { AppInfoProvider(packageInfo) }
         val isHibernationSwitchEnabledStateFlow = MutableStateFlow(false)
         val isContinueAcrossDevicesSwitchEnabledStateFlow = MutableStateFlow(false)
@@ -209,15 +220,6 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         Category(title = stringResource(R.string.app_install_details_group_title)) {
             AppInstallerInfoPreference(app)
-        }
-
-        // For non-admin users viewing an HSU app, show a message that they cannot manage the app.
-        if (
-            android.multiuser.Flags.hsuAppManagement() &&
-                HsuUtils.isHsuApp(context, app) &&
-                !HsuUtils.isAdmin(context)
-        ) {
-            Category(title = stringResource(R.string.hsu_app_admin_only_explanation)) {}
         }
 
         appInfoProvider.FooterAppVersion()

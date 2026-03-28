@@ -30,6 +30,10 @@ public class ProtectedTimeoutListPreference extends TimeoutListPreference {
 
     @Override
     public void performClick() {
-        WifiDppUtils.showLockScreen(getContext(), super::performClick);
+        if (com.android.settings.flags.Flags.biometricsOnboardingEducation()) {
+            super.performClick();
+        } else {
+            WifiDppUtils.showLockScreen(getContext(), super::performClick);
+        }
     }
 }

@@ -55,7 +55,8 @@ class DisplayTopologyPreferenceController(
         uiContext.resources.getDimensionPixelSize(R.dimen.topology_hint_text_view_height)
     private val isViewOnDisplaySupportingDesktopMode =
         injector.desktopState?.isDesktopModeSupportedOnDisplay(uiContext.displayId) ?: false
-    private val isCursorPointingDeviceAvailable = InputPeripheralsSettingsUtils.isMouse()
+    private val isCursorPointingDeviceAvailable =
+        InputPeripheralsSettingsUtils.isMouse() || InputPeripheralsSettingsUtils.isTouchpad()
 
     @VisibleForTesting lateinit var paneContent: FrameLayout
     @VisibleForTesting lateinit var paneHolder: FrameLayout

@@ -21,14 +21,22 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceGroupAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.modules.expresslog.Counter;
 import com.android.settings.R;
+import com.android.settings.accessibility.textreading.ui.FocusTarget;
+import com.android.settings.accessibility.textreading.ui.FocusTargetViewModel;
 import com.android.settings.accessibility.textreading.ui.TextReadingPreview;
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen;
 import com.android.settings.accessibility.textreading.ui.TextReadingScreenFromNotification;
@@ -50,6 +58,7 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
     private static final String SETUP_WIZARD_PACKAGE = "setupwizard";
     static final String PREVIEW_KEY = TextReadingPreview.KEY;
     private int mEntryPoint = EntryPoint.UNKNOWN_ENTRY;
+    @Nullable private FocusTargetViewModel mFocusViewModel;
 
     /**
      * The entry point which launches the {@link TextReadingPreferenceFragment}.
@@ -87,6 +96,20 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
                 // Only log this counter during the first launch, not during activity refresh
                 && savedInstanceState == null) {
             Counter.logIncrement("accessibility.value_hct_notification_opened_settings");
+        }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // TODO(b/496229275) Move this logic to a more general place since other Settings fragments
+        // that cause configuration changes experience this issue.
+        final FragmentActivity activity = getActivity();
+        if (activity != null) {
+            mFocusViewModel = new ViewModelProvider(activity).get(FocusTargetViewModel.class);
+            setupFocusRestoration();
+            Log.d(TAG, "Initialized FocusTargetViewModel and focus restoration");
         }
     }
 
@@ -140,5 +163,112 @@ public class TextReadingPreferenceFragment extends DashboardFragment {
             };
         }
         return screenKey;
+    }
+
+    /**
+     * Sets up listeners to track and restore focus within the RecyclerView.
+     *
+     * <p>When a user changes settings like display size or text size, the UI may recompose,
+     * causing the RecyclerView to temporarily detach its views and lose focus. We use a
+     * {@link FocusTargetViewModel} to save the exact preference and view ID that the user
+     * was focused on.
+     *
+     * <p>We intentionally ignore focus changes when the list itself does not have focus
+     * (e.g., during the transient state of recomposition) to avoid prematurely clearing
+     * our saved target. Once the view is reattached to the window, we restore the focus
+     * and then clear the target.
+     */
+    private void setupFocusRestoration() {
+        final RecyclerView listView = getListView();
+
+        // Track which preference item and child view is focused.
+        listView.getViewTreeObserver().addOnGlobalFocusChangeListener((oldFocus, focusedView) -> {
+            if (focusedView == null || !listView.hasFocus()) {
+                return;
+            }
+
+            final int focusedViewId = focusedView.getId();
+            final String preferenceKey = getPreferenceKeyForView(listView, focusedView);
+            if (preferenceKey != null && focusedViewId != View.NO_ID && mFocusViewModel != null) {
+                mFocusViewModel.setFocusTarget(preferenceKey, focusedViewId);
+                Log.d(TAG, "Updated focus target: PreferenceKey=" + preferenceKey + ", ViewId="
+                        + focusedViewId);
+            }
+        });
+
+        // Setup focus restoration
+        listView.addOnChildAttachStateChangeListener(
+            new RecyclerView.OnChildAttachStateChangeListener() {
+                @Override
+                public void onChildViewAttachedToWindow(@NonNull View view) {
+                    if (mFocusViewModel == null) {
+                        return;
+                    }
+
+                    final FocusTarget target = mFocusViewModel.getFocusTarget().getValue();
+                    if (target == null) {
+                        return;
+                    }
+
+                    final int targetViewId = target.getViewId();
+                    final String targetPreferenceKey = target.getPreferenceKey();
+                    final String preferenceKey = getPreferenceKeyForView(listView, view);
+                    if (preferenceKey == null || !preferenceKey.equals(targetPreferenceKey)) {
+                        return;
+                    }
+
+                    Log.d(TAG,
+                            "Attempting to restore focus: PreferenceKey=" + targetPreferenceKey
+                                    + ", ViewId=" + targetViewId);
+
+                    final View viewToFocus = view.findViewById(targetViewId);
+                    if (viewToFocus == null) {
+                        Log.d(TAG, "Unable to find view: PreferenceKey=" + targetPreferenceKey
+                                + ", ViewId=" + targetViewId);
+                        return;
+                    }
+
+                    view.post(() -> {
+                        viewToFocus.requestFocus();
+                        Log.d(TAG,
+                                "Focus restored: PreferenceKey=" + preferenceKey + ", ViewId="
+                                        + targetViewId);
+                    });
+
+                    mFocusViewModel.clearFocusTarget();
+                }
+
+                @Override
+                public void onChildViewDetachedFromWindow(@NonNull View view) {}
+            });
+    }
+
+    /**
+     * Helper to get the Preference key associated with a View inside the RecyclerView.
+     */
+    @Nullable
+    private static String getPreferenceKeyForView(@NonNull RecyclerView listView,
+            @NonNull View view) {
+        final View itemView = listView.findContainingItemView(view);
+        if (itemView == null) {
+            return null;
+        }
+
+        final int position = listView.getChildAdapterPosition(itemView);
+        if (position == RecyclerView.NO_POSITION) {
+            return null;
+        }
+
+        final RecyclerView.Adapter adapter = listView.getAdapter();
+        if (!(adapter instanceof PreferenceGroupAdapter)) {
+            return null;
+        }
+
+        final Preference preference = ((PreferenceGroupAdapter) adapter).getItem(position);
+        if (preference == null) {
+            return null;
+        }
+
+        return preference.getKey();
     }
 }

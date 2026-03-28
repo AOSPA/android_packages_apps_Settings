@@ -28,6 +28,7 @@ import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 import kotlin.math.min
@@ -108,6 +109,10 @@ open class VibrationIntensitySliderPreference(
         }
         return false // value has been updated
     }
+
+    override fun getEnabledDescription() = "The vibration setting (vibrate_on) must be enabled."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     @CallSuper override fun isEnabled(context: Context) = storage.isPreferenceEnabled()
 }

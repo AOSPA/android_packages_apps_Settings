@@ -38,7 +38,7 @@ class TrustAgentApiScreen :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
-        preconditions(R.string.trust_agents_preconditions) {
+        preconditions("The device must support managing trust agents from settings, and the user must have a lock screen set.") {
             if (
                 context.resources.getBoolean(R.bool.config_show_manage_trust_agents) &&
                     FeatureFactory.featureFactory.securityFeatureProvider

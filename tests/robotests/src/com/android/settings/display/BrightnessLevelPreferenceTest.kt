@@ -27,7 +27,13 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import android.hardware.display.DisplayManager
+import org.mockito.kotlin.any
+import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.spy
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 // LINT.IfChange
@@ -36,6 +42,7 @@ class BrightnessLevelPreferenceTest {
     private var context = ApplicationProvider.getApplicationContext<Context>()
     private val preference = BrightnessLevelPreference()
     private val displayInfo = DisplayInfo()
+    private val displayManager = mock<DisplayManager>()
 
     @Before
     fun setUp() {
@@ -43,11 +50,13 @@ class BrightnessLevelPreferenceTest {
         val displayManagerGlobal = mock<DisplayManagerGlobal>()
         val daj: DisplayAdjustments? = null
         context =
-            context.createDisplayContext(
+            spy(context.createDisplayContext(
                 Display(displayManagerGlobal, Display.DEFAULT_DISPLAY, displayInfo, daj)
-            )
+            ))
         whenever(displayManagerGlobal.getDisplayInfo(Display.DEFAULT_DISPLAY))
             .thenReturn(displayInfo)
+        whenever(context.getSystemService(DisplayManager::class.java))
+            .thenReturn(displayManager)
     }
 
     @Test
@@ -59,6 +68,27 @@ class BrightnessLevelPreferenceTest {
     fun isAvailable_externalDisplay() {
         displayInfo.type = Display.TYPE_EXTERNAL
         assertThat(preference.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun setValue_updatesDisplayManagerBrightness() {
+        preference.storage(context).setValue(
+            BrightnessLevelPreference.KEY, Int::class.javaObjectType, 75)
+
+        verify(displayManager).setBrightness(
+            eq(Display.DEFAULT_DISPLAY),
+            eq(75f),
+            eq(DisplayManager.BRIGHTNESS_UNIT_PERCENTAGE)
+        )
+    }
+
+    @Test
+    fun setValue_nonInt_doesNothing() {
+        preference
+            .storage(context)
+            .setValue(BrightnessLevelPreference.KEY, Float::class.javaObjectType, 75f)
+
+        verify(displayManager, never()).setBrightness(any(), any(), any())
     }
 }
 // LINT.ThenChange(BrightnessLevelPreferenceControllerTest.java, DisplayApiScreenTest.kt)

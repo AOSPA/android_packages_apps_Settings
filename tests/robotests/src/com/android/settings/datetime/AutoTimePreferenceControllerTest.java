@@ -18,7 +18,10 @@ package com.android.settings.datetime;
 
 import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 
+import static android.os.UserManager.DISALLOW_CONFIG_DATE_TIME;
 import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
@@ -50,6 +53,7 @@ import androidx.preference.Preference;
 
 import com.android.settings.R;
 import com.android.settingslib.RestrictedSwitchPreference;
+import com.android.settingslib.RestrictedPreferenceHelper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -75,6 +79,8 @@ public class AutoTimePreferenceControllerTest {
     private DevicePolicyManager mDpm;
     @Mock
     private DevicePolicyResourcesManager mResources;
+    @Mock
+    private RestrictedPreferenceHelper mHelper;
 
     @Rule public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
 
@@ -200,7 +206,7 @@ public class AutoTimePreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setDisabledByAdmin(admin);
+        assertTrue(mPreference.isDisabledByAdmin());
     }
 
     @Test
@@ -218,7 +224,7 @@ public class AutoTimePreferenceControllerTest {
 
         mController.updateState(mPreference);
 
-        verify(mPreference, never()).setDisabledByAdmin(admin);
+        assertFalse(mPreference.isDisabledByAdmin());
     }
 
     @Test
@@ -231,15 +237,16 @@ public class AutoTimePreferenceControllerTest {
         TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
                 /* autoSupported= */true, /* autoEnabled= */true);
         when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mPreference.getRestrictedPreferenceHelper()).thenReturn(mHelper);
         when(mDpm.getResolvedDeviceWidePolicy(
                 PolicyIdentifier.AUTO_TIME)).thenReturn(autoTimePolicyValue);
         setupEnforcingAdminForPolicy();
 
         mController.updateState(mPreference);
 
-        verify(mPreference).setDisabledByAdmin((EnforcingAdmin) null);
-        verify(mPreference).checkRestrictionAndSetDisabled(
-                android.os.UserManager.DISALLOW_CONFIG_DATE_TIME, UserHandle.myUserId());
+        verify(mHelper).setDisabledByEnforcingAdmin((EnforcingAdmin) null);
+        verify(mHelper).checkRestrictionAndSetDisabled(
+                DISALLOW_CONFIG_DATE_TIME, UserHandle.myUserId());
     }
 
     @Test
@@ -252,15 +259,16 @@ public class AutoTimePreferenceControllerTest {
         TimeCapabilitiesAndConfig capabilitiesAndConfig = createCapabilitiesAndConfig(
                 /* autoSupported= */true, /* autoEnabled= */true);
         when(mTimeManager.getTimeCapabilitiesAndConfig()).thenReturn(capabilitiesAndConfig);
+        when(mPreference.getRestrictedPreferenceHelper()).thenReturn(mHelper);
         when(mDpm.getResolvedDeviceWidePolicy(
                 PolicyIdentifier.AUTO_TIME)).thenReturn(autoTimePolicyValue);
         setupEnforcingAdminForPolicy();
 
         mController.updateState(mPreference);
 
-        verify(mPreference, never()).setDisabledByAdmin((EnforcingAdmin) null);
-        verify(mPreference, never()).checkRestrictionAndSetDisabled(
-                android.os.UserManager.DISALLOW_CONFIG_DATE_TIME, UserHandle.myUserId());
+        verify(mHelper, never()).setDisabledByEnforcingAdmin((EnforcingAdmin) null);
+        verify(mHelper, never()).checkRestrictionAndSetDisabled(
+                DISALLOW_CONFIG_DATE_TIME, UserHandle.myUserId());
     }
 
     private static TimeCapabilitiesAndConfig createCapabilitiesAndConfig(boolean autoSupported,

@@ -83,7 +83,7 @@ open class DoubleTapPowerScreen(context: Context) :
     override fun fragmentClass(): Class<out Fragment>? = DoubleTapPowerSettings::class.java
 
     override val availabilityDescription =
-        "The double tap power gesture must not be disabled."
+        "The device must support the double tap power gesture."
 
     override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
