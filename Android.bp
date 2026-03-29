@@ -50,7 +50,9 @@ android_library {
         "SettingsLib-search-defaults",
         "SettingsLintDefaults",
         "SpaPrivilegedLib-defaults",
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
 //        "btadva_settings_java_defaults",
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
     ],
 
     srcs: [
@@ -148,7 +150,9 @@ android_library {
         "telephony-common",
         "ims-common",
         "telephony-ext",
+// QTI_BEGIN: 2021-06-08: Telephony: Add 5G network mode preference in Developer Options menu.
         "extphonelib",
+// QTI_END: 2021-06-08: Telephony: Add 5G network mode preference in Developer Options menu.
         "qti-telephony-utils",
     ],
     flags_packages: [
@@ -212,9 +216,11 @@ android_app {
     uses_libs: ["org.apache.http.legacy"],
     use_resource_processor: true,
     resource_dirs: [],
+// QTI_BEGIN: 2021-06-08: Telephony: Add 5G network mode preference in Developer Options menu.
     libs: [
         "extphonelib"
     ],
+// QTI_END: 2021-06-08: Telephony: Add 5G network mode preference in Developer Options menu.
     flags_packages: [
         "android.app.flags-aconfig",
     ],

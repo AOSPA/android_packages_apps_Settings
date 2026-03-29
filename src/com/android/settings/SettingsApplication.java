@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
  * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 package com.android.settings;
 
 import android.app.Application;
@@ -46,7 +48,9 @@ import com.android.settings.homepage.SettingsHomepageActivity;
 import com.android.settings.localepicker.LocaleNotificationDataManager;
 import com.android.settings.metrics.SettingsMetricsLogger;
 import com.android.settings.msds.MSDLPlayerWrapper;
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 import com.android.settings.network.telephony.TelephonyUtils;
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.overlay.FeatureFactoryImpl;
 import com.android.settings.spa.SettingsSpaEnvironment;
@@ -112,8 +116,10 @@ public class SettingsApplication extends Application {
             ElapsedTimeUtils.assignSuwFinishedTimeStamp(getApplicationContext());
         }
 
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         TelephonyUtils.connectExtTelephonyService(getApplicationContext());
 
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         // Set Spa environment.
         setSpaEnvironment();
 

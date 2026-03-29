@@ -16,8 +16,12 @@
 
 package com.android.settings.bluetooth;
 
+// QTI_BEGIN: 2020-08-10: Bluetooth: BT: update HD audio pref checkbox state once codec config change
 import android.bluetooth.BluetoothCodecStatus;
+// QTI_END: 2020-08-10: Bluetooth: BT: update HD audio pref checkbox state once codec config change
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
 import android.bluetooth.BluetoothCsipSetCoordinator;
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
 import static android.bluetooth.BluetoothDevice.METADATA_MODEL_NAME;
 import static android.bluetooth.BluetoothProfile.CONNECTION_POLICY_UNKNOWN;
 import static android.content.pm.PackageManager.FEATURE_PC;
@@ -72,7 +76,9 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class BluetoothDetailsProfilesController extends BluetoothDetailsController
         implements Preference.OnPreferenceClickListener,
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
         LocalBluetoothProfileManager.ServiceListener {
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
     public static final String HIGH_QUALITY_AUDIO_PREF_TAG = "A2dpProfileHighQualityAudio";
 
     private static final String TAG = "BtDetailsProfilesCtrl";
@@ -287,11 +293,13 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             return;
         }
 
+// QTI_BEGIN: 2023-04-06: Bluetooth: Call A2dp, HFP disable profile for group.
         if (profile instanceof A2dpProfile ||
             profile instanceof HeadsetProfile) {
             disableProfileforGroup(profile);
             return;
         }
+// QTI_END: 2023-04-06: Bluetooth: Call A2dp, HFP disable profile for group.
         final BluetoothDevice bluetoothDevice = mCachedDevice.getDevice();
         profile.setEnabled(bluetoothDevice, false);
 
@@ -308,23 +316,33 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
      */
     @Override
     public boolean onPreferenceClick(Preference preference) {
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
         LocalBluetoothProfile profile = mProfileManager.getProfileByName(preference.getKey());
         if (profile == null) {
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
             // It might be the PbapServerProfile, which is not stored by name.
             PbapServerProfile psp = mManager.getProfileManager().getPbapProfile();
             if (TextUtils.equals(preference.getKey(), psp.toString())) {
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
                 profile = psp;
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
             } else {
                 return false;
             }
         }
         TwoStatePreference profilePref = (TwoStatePreference) preference;
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
         if (profilePref.isChecked()) {
             enableProfile(profile);
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
         } else {
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
             disableProfile(profile);
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
         }
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
         refreshProfilePreference(profilePref, profile);
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
         return true;
     }
 
@@ -454,6 +472,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
         Utils.setLeAudioEnabled(mManager, List.copyOf(mCachedDeviceGroup), true);
     }
 
+// QTI_BEGIN: 2023-04-06: Bluetooth: Call A2dp, HFP disable profile for group.
     private void disableProfileforGroup(LocalBluetoothProfile profile) {
         if (profile != null && mProfileDeviceMap.get(profile.toString()) != null) {
             Log.d(TAG, "Disable " + profile.toString());
@@ -466,6 +485,7 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             }
         }
     }
+// QTI_END: 2023-04-06: Bluetooth: Call A2dp, HFP disable profile for group.
     /**
      * This is a helper method to be called after adding a Preference for a profile. If that
      * profile happened to be A2dp and the device supports high quality audio, it will add a
@@ -508,7 +528,9 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
             item.registerCallback(this);
         }
         mProfileManager.addServiceListener(this);
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
         //mManager.getEventManager().registerCallback(this);
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
         refresh();
     }
 
@@ -605,4 +627,6 @@ public class BluetoothDetailsProfilesController extends BluetoothDetailsControll
     public String getPreferenceKey() {
         return KEY_PROFILES_GROUP;
     }
+// QTI_BEGIN: 2020-08-10: Bluetooth: BT: update HD audio pref checkbox state once codec config change
 }
+// QTI_END: 2020-08-10: Bluetooth: BT: update HD audio pref checkbox state once codec config change

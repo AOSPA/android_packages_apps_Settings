@@ -26,7 +26,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
+// QTI_BEGIN: 2024-07-01: Telephony: Fix to start ToggleSubscriptionDialogActivity
 import com.android.settings.network.SubscriptionUtil
+// QTI_END: 2024-07-01: Telephony: Fix to start ToggleSubscriptionDialogActivity
 import com.android.settings.spa.preference.ComposePreferenceController
 import com.android.settingslib.spa.widget.preference.MainSwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel

@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 package com.android.settings.network.telephony;
 
 import android.app.Dialog;
@@ -51,30 +53,46 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
 
     public static final int TYPE_DISABLE_DIALOG = 0;
     public static final int TYPE_MULTI_SIM_DIALOG = 1;
+// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
     public static final int TYPE_DISABLE_CIWLAN_DIALOG = 2;
+// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
 
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     private static final String ARG_PREF_TITLE = "pref_title";
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     private static final String ARG_DIALOG_TYPE = "dialog_type";
     private static final String ARG_SUB_ID = "subId";
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
     private static final String ARG_CIWLAN_MODE_SUPPORTED = "ciwlan_mode_supported";
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 
     private SubscriptionManager mSubscriptionManager;
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     private String mPrefTitle;
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
     private int mType;
     private int mSubId;
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
     private boolean mCiwlanModeSupported;
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 
     private WifiPickerTrackerHelper mWifiPickerTrackerHelper;
 
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
     public static MobileDataDialogFragment newInstance(String prefTitle, int type, int subId,
             boolean ciwlanModeSupported) {
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         final MobileDataDialogFragment dialogFragment = new MobileDataDialogFragment();
 
         Bundle args = new Bundle();
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         args.putString(ARG_PREF_TITLE, prefTitle);
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         args.putInt(ARG_DIALOG_TYPE, type);
         args.putInt(ARG_SUB_ID, subId);
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         args.putBoolean(ARG_CIWLAN_MODE_SUPPORTED, ciwlanModeSupported);
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         dialogFragment.setArguments(args);
 
         return dialogFragment;
@@ -93,10 +111,14 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
         final Bundle bundle = getArguments();
         final Context context = getContext();
 
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         mPrefTitle = bundle.getString(ARG_PREF_TITLE).toLowerCase();
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
         mType = bundle.getInt(ARG_DIALOG_TYPE);
         mSubId = bundle.getInt(ARG_SUB_ID);
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
         mCiwlanModeSupported = bundle.getBoolean(ARG_CIWLAN_MODE_SUPPORTED);
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 
         switch (mType) {
             case TYPE_DISABLE_DIALOG:
@@ -133,7 +155,10 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                                 this)
                         .setNegativeButton(R.string.cancel, null)
                         .create();
+// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
             case TYPE_DISABLE_CIWLAN_DIALOG:
+// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
                 String msg = mCiwlanModeSupported ?
                         context.getString(
                                 R.string.toggle_disable_ciwlan_call_will_drop_dialog_body,
@@ -141,13 +166,22 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
                         context.getString(
                                 R.string.toggle_disable_ciwlan_call_might_drop_dialog_body,
                                 mPrefTitle);
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
                 return new AlertDialog.Builder(context)
+// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
+// QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
                         .setTitle(context.getString(
+// QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+// QTI_BEGIN: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
                                 R.string.toggle_disable_ciwlan_call_dialog_title, mPrefTitle))
                         .setMessage(msg)
+// QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
+// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
                         .setPositiveButton(android.R.string.ok, this)
                         .setNegativeButton(android.R.string.cancel, null)
                         .create();
+// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
             default:
                 throw new IllegalArgumentException("unknown type " + mType);
         }
@@ -161,7 +195,9 @@ public class MobileDataDialogFragment extends InstrumentedDialogFragment impleme
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (mType) {
+// QTI_BEGIN: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
             case TYPE_DISABLE_CIWLAN_DIALOG:
+// QTI_END: 2022-10-07: Telephony: Merge "Show warning when user tries to turn off data/roaming/C_IWLAN toggle" into t-keystone-qcom-dev
             case TYPE_DISABLE_DIALOG:
                 Log.d(TAG, "setMobileDataEnabled: false");
                 MobileNetworkUtils.setMobileDataEnabled(getContext(), mSubId, false /* enabled */,

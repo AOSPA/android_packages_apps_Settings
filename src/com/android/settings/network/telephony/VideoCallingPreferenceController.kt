@@ -81,8 +81,10 @@ constructor(
     }
 
     override fun onViewCreated(viewLifecycleOwner: LifecycleOwner) {
+// QTI_BEGIN: 2025-02-27: Telephony: IMS: Fix VideoCalling UI issues
         preference?.isVisible = false
         callingPreferenceCategoryController?.updateChildVisible(preferenceKey, false)
+// QTI_END: 2025-02-27: Telephony: IMS: Fix VideoCalling UI issues
         videoCallingRepository.isVideoCallReadyFlow(subId).collectLatestWithLifecycle(
             viewLifecycleOwner
         ) { isReady ->

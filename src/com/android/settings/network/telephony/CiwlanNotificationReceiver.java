@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
 /*
  * Copyright (C) 2014 The Android Open Source Project
  *
@@ -14,8 +15,14 @@
  * limitations under the License.
  */
 
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
+// QTI_BEGIN: 2024-01-29: Telephony: Fix copyright marking
 /* Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+// QTI_END: 2024-01-29: Telephony: Fix copyright marking
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
  * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted (subject to the limitations in the
@@ -61,7 +68,11 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
+// QTI_BEGIN: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
 import android.provider.Settings;
+// QTI_END: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -90,9 +101,13 @@ public class CiwlanNotificationReceiver extends BroadcastReceiver {
 
     private static final int MAX_NUM_PHONES = 2;
 
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
+// QTI_BEGIN: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
     private static final String CIWLAN_MODE_PREF_SUPPORT_CACHE_KEY = "CIWLAN_MODE_PREF_SUPPORT_KEY";
     private static final int CIWLAN_MODE_PREF_SUPPORTED = 1;
 
+// QTI_END: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
     @Override
     public void onReceive(Context context, Intent intent) {
         switch (intent.getAction()) {
@@ -100,12 +115,22 @@ public class CiwlanNotificationReceiver extends BroadcastReceiver {
                 boolean show = intent.getBooleanExtra(CIWLAN_EXIT_NOTIFICATION_STATUS, false);
                 int phoneId = intent.getIntExtra(CIWLAN_EXIT_NOTIFICATION_PHONE_ID,
                         SubscriptionManager.INVALID_PHONE_INDEX);
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
+// QTI_BEGIN: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
                 boolean ciwlanModePrefSupported = Settings.Global.getInt(
                         context.getContentResolver(), CIWLAN_MODE_PREF_SUPPORT_CACHE_KEY, 0)
                                 == CIWLAN_MODE_PREF_SUPPORTED;
+// QTI_END: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
                 // If MSIM C_IWLAN is not supported, this notification must be shown for DDS only
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
                 if (!ciwlanModePrefSupported && show &&
+// QTI_END: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
                         SubscriptionManager.getSubscriptionId(phoneId) !=
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
                         SubscriptionManager.getDefaultDataSubscriptionId()) {
                     Log.d(TAG, "Notification not supported for nDDS, ignoring...");
                     return;
@@ -204,4 +229,7 @@ public class CiwlanNotificationReceiver extends BroadcastReceiver {
                 name, NotificationManager.IMPORTANCE_HIGH);
         notificationMgr.createNotificationChannel(channel);
     }
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
+// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 }
+// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
