@@ -15230,6 +15230,11 @@
         =1      {On # app}
         other   {On # apps}
         }</string>
+    <!-- Title for web content filters supported apps entry point. [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_supported_apps_title">{count, plural,
+        =1      {With # app}
+        other   {With # apps}
+        }</string>
     <!-- Floating text for supported apps entry point icon, which displays the number of remaining supported apps. [CHAR LIMIT=10] -->
     <string name="supervision_remaining_supported_apps_count">+<xliff:g id="count" example="2">%d</xliff:g></string>
     <!-- Title for learn more link button. [CHAR LIMIT=NONE]-->
