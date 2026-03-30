@@ -45,9 +45,11 @@ public class CdmaSubscriptionPreferenceController extends CdmaBasePreferenceCont
 
     @Override
     public int getAvailabilityStatus(int subId) {
+// QTI_BEGIN: 2025-04-21: Telephony: Deprecate CDMA am: 6811313ba7 am: 6811313ba7
         return MobileNetworkUtils.isCdmaSupported(mContext)
                 && MobileNetworkUtils.isCdmaOptions(mContext, subId)
                 && deviceSupportsNvAndRuim()
+// QTI_END: 2025-04-21: Telephony: Deprecate CDMA am: 6811313ba7 am: 6811313ba7
                 ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }

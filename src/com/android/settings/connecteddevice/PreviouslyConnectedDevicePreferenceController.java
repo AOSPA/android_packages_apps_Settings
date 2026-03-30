@@ -29,13 +29,17 @@ import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
 import android.bluetooth.BluetoothAdapter;
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
 
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
 import com.android.settingslib.bluetooth.BluetoothCallback;
 import com.android.settingslib.bluetooth.LocalBluetoothAdapter;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settings.bluetooth.Utils;
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
 import com.android.settings.R;
 import com.android.settings.bluetooth.BluetoothDevicePreference;
 import com.android.settings.bluetooth.BluetoothDeviceUpdater;
@@ -55,7 +59,9 @@ import java.util.Map;
 
 // LINT.IfChange
 public class PreviouslyConnectedDevicePreferenceController extends BasePreferenceController
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
         implements LifecycleObserver, OnStart, OnStop, DevicePreferenceCallback, BluetoothCallback {
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
 
     private static final String TAG = "PreviouslyDevicePreController";
     private static final boolean DEBUG = Log.isLoggable(TAG, Log.DEBUG);
@@ -68,8 +74,10 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     private final BluetoothAdapter mBluetoothAdapter;
 
     private PreferenceGroup mPreferenceGroup;
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
     private LocalBluetoothAdapter mLocalAdapter;
     private LocalBluetoothManager manager;
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
     private BluetoothDeviceUpdater mBluetoothDeviceUpdater;
     private DockUpdater mSavedDockUpdater;
 
@@ -132,7 +140,9 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         Log.d(TAG, "Updating preference group by onStart on thread "
                 + Thread.currentThread().getName());
         updatePreferenceGroup();
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
         manager.getEventManager().registerCallback(this);
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
     }
 
     @Override
@@ -140,8 +150,10 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         mBluetoothDeviceUpdater.unregisterCallback();
         mSavedDockUpdater.unregisterCallback();
         mContext.unregisterReceiver(mReceiver);
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
         manager.getEventManager().unregisterCallback(this);
 
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
     }
 
     public void init(DashboardFragment fragment) {
@@ -218,9 +230,12 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
         });
     }
 
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
     @Override
     public void onBluetoothStateChanged(int bluetoothState) {
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
         updatePreferenceVisibility();
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
     }
 
     @Override
@@ -258,6 +273,7 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
        // do nothing
     }
 
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
     @VisibleForTesting
     void setBluetoothDeviceUpdater(BluetoothDeviceUpdater bluetoothDeviceUpdater) {
         mBluetoothDeviceUpdater = bluetoothDeviceUpdater;
@@ -277,10 +293,14 @@ public class PreviouslyConnectedDevicePreferenceController extends BasePreferenc
     void updatePreferenceVisibility() {
         if (mBluetoothAdapter != null && mBluetoothAdapter.isEnabled()) {
             mSeeAllPreference.setSummary("");
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
         } else {
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
             mSeeAllPreference.setSummary(
                     mContext.getString(R.string.connected_device_see_all_summary));
+// QTI_BEGIN: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
         }
+// QTI_END: 2020-06-23: WConnect/BTHOST_IOE: BT: Don't display previously connected devices in BLE_ON
     }
 
 }

@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
 /******************************************************************************
  *  Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
@@ -51,7 +52,11 @@ import com.android.settings.R;
 public class GroupOptionsPreference extends Preference {
 
     private static final String TAG = "GroupOptionsPreference";
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
+// QTI_BEGIN: 2021-01-19: Bluetooth: BC: handle add source for group device
     private final ButtonInfo mBtnAddSrcGroup = new ButtonInfo();
+// QTI_END: 2021-01-19: Bluetooth: BC: handle add source for group device
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
     private final ButtonInfo mBtnConnect = new ButtonInfo();
     private final ButtonInfo mBtnForget = new ButtonInfo();
     private final ButtonInfo mBtnDisconnect = new ButtonInfo();
@@ -87,7 +92,11 @@ public class GroupOptionsPreference extends Preference {
         super.onBindViewHolder(holder);
         holder.setDividerAllowedAbove(true);
         holder.setDividerAllowedBelow(true);
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
+// QTI_BEGIN: 2021-01-19: Bluetooth: BC: handle add source for group device
         mBtnAddSrcGroup.mButton = (Button) holder.findViewById(R.id.id_btn_group_add_source);
+// QTI_END: 2021-01-19: Bluetooth: BC: handle add source for group device
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
         mBtnConnect.mButton = (Button) holder.findViewById(R.id.id_btn_connect);
         mBtnForget.mButton = (Button) holder.findViewById(R.id.id_btn_forget);
         mBtnDisconnect.mButton = (Button) holder.findViewById(R.id.id_btn_disconnect);
@@ -96,7 +105,11 @@ public class GroupOptionsPreference extends Preference {
         mTvGroupId.mTextView = (TextView)holder.findViewById(R.id.id_tv_groupid);
         mTvStatus.mTextView =(TextView)holder.findViewById(R.id.id_tv_status);
         mProgressScan.mProgress = (ProgressBar)holder.findViewById(R.id.id_progress_group_scan);
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
+// QTI_BEGIN: 2021-01-19: Bluetooth: BC: handle add source for group device
         mBtnAddSrcGroup.setUpButton();
+// QTI_END: 2021-01-19: Bluetooth: BC: handle add source for group device
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
         mBtnConnect.setUpButton();
         mBtnForget.setUpButton();
         mBtnDisconnect.setUpButton();
@@ -107,6 +120,8 @@ public class GroupOptionsPreference extends Preference {
         mProgressScan.setUpProgress();
     }
 
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes
+// QTI_BEGIN: 2021-01-19: Bluetooth: BC: handle add source for group device
     public GroupOptionsPreference setAddSourceGroupButtonVisible(boolean isVisible) {
         if (isVisible != mBtnAddSrcGroup.mIsVisible) {
             mBtnAddSrcGroup.mIsVisible = isVisible;
@@ -141,6 +156,8 @@ public class GroupOptionsPreference extends Preference {
         return this;
     }
 
+// QTI_END: 2021-01-19: Bluetooth: BC: handle add source for group device
+// QTI_BEGIN: 2021-01-04: Bluetooth: Group: Add below Group Changes
     public GroupOptionsPreference setConnectButtonVisible(boolean isVisible) {
         if (isVisible != mBtnConnect.mIsVisible) {
             mBtnConnect.mIsVisible = isVisible;
@@ -412,3 +429,4 @@ public class GroupOptionsPreference extends Preference {
         }
     }
 }
+// QTI_END: 2021-01-04: Bluetooth: Group: Add below Group Changes

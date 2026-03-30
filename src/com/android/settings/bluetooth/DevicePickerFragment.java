@@ -224,7 +224,9 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
     }
 
     private void sendDevicePickedIntent(BluetoothDevice device) {
+// QTI_BEGIN: 2019-01-30: Bluetooth: Settings: Broadcast intent with foreground priority
         android.util.Log.d("Devicepicker", "sendDevicePickedIntent");
+// QTI_END: 2019-01-30: Bluetooth: Settings: Broadcast intent with foreground priority
         Intent intent = new Intent(BluetoothDevicePicker.ACTION_DEVICE_SELECTED);
         intent.putExtra(BluetoothDevice.EXTRA_DEVICE, device);
         if (mLaunchPackage != null && mLaunchClass != null) {
@@ -232,7 +234,9 @@ public final class DevicePickerFragment extends DeviceListPreferenceFragment {
                 intent.setClassName(mLaunchPackage, mLaunchClass);
             }
         }
+// QTI_BEGIN: 2019-01-30: Bluetooth: Settings: Broadcast intent with foreground priority
         intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+// QTI_END: 2019-01-30: Bluetooth: Settings: Broadcast intent with foreground priority
 
         mContext.sendBroadcast(intent, Manifest.permission.BLUETOOTH_CONNECT);
     }

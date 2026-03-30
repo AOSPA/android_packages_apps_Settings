@@ -89,7 +89,9 @@ abstract class BluetoothNameDialogFragment extends InstrumentedDialogFragment
                 .setTitle(getDialogTitle())
                 .setView(createDialogView(deviceName))
                 .setPositiveButton(R.string.bluetooth_rename_button, (dialog, which) -> {
+// QTI_BEGIN: 2018-04-10: Bluetooth: GAP: Rejecting the empty string in Bluetooth rename
                     setDeviceName(mDeviceNameView.getText().toString().trim());
+// QTI_END: 2018-04-10: Bluetooth: GAP: Rejecting the empty string in Bluetooth rename
                 })
                 .setNegativeButton(android.R.string.cancel, null);
         mAlertDialog = builder.create();

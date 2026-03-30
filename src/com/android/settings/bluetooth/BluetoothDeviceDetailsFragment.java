@@ -26,9 +26,13 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.SystemClock;
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import android.os.SystemProperties;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import android.os.UserManager;
+// QTI_BEGIN: 2022-10-07: Bluetooth: Use property API to identify broadcast support
 import android.sysprop.BluetoothProperties;
+// QTI_END: 2022-10-07: Bluetooth: Use property API to identify broadcast support
 import android.util.FeatureFlagUtils;
 import android.util.Log;
 import android.view.InputDevice;
@@ -39,14 +43,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceScreen;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 
 import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.bluetooth.ui.model.FragmentTypeModel;
 import com.android.settings.connecteddevice.stylus.StylusDevicesController;
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import com.android.settings.dashboard.DashboardFragment;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import com.android.settings.inputmethod.KeyboardSettingsPreferenceController;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.bluetooth.BluetoothCallback;
@@ -58,8 +66,10 @@ import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.utils.ThreadUtils;
 
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 
 import com.google.common.collect.ImmutableList;
 import org.json.JSONException;
@@ -71,14 +81,18 @@ import java.util.function.Consumer;
 
 public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurableFragment {
     private static final String TAG = "BTDeviceDetailsFrg";
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     private static final String BLUETOOTH_ADV_AUDIO_MASK_PROP
                                                   = "persist.vendor.service.bt.adv_audio_mask";
     private static final String BLUETOOTH_BROADCAST_UI_PROP = "persist.bluetooth.broadcast_ui";
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     private static final String BLUETOOTH_BROADCAST_PTS_PROP
                                                   = "persist.vendor.service.bt.broadcast_pts";
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     private static final int BA_MASK = 0x02;
     private static boolean mBAEnabled = false;
     private static boolean mBAPropertyChecked = false;
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
 
     /**
      * An interface to let tests override the normal mechanism for looking up the
@@ -334,15 +348,19 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
         return visibleKeys.build();
     }
 
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     @Override
     protected void displayResourceTilesToScreen(PreferenceScreen screen) {
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
         if (!mBAEnabled || !cachedDevice.isBASeeker()) {
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
            screen.removePreference(screen.findPreference("sync_helper_buttons"));
            screen.removePreference(screen.findPreference("added_sources"));
         }
         super.displayResourceTilesToScreen(screen);
     }
 
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
     @Override
     protected List<AbstractPreferenceController> createPreferenceControllers(Context context) {
         ArrayList<AbstractPreferenceController> controllers = new ArrayList<>();
@@ -428,7 +446,9 @@ public class BluetoothDeviceDetailsFragment extends BluetoothDetailsConfigurable
                     .invoke(objBADeviceController, this, cachedDevice);
             controllers.add((AbstractPreferenceController) objAddSourceController);
             controllers.add((AbstractPreferenceController) objBADeviceController);
+// QTI_BEGIN: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
           }
+// QTI_END: 2021-03-04: Bluetooth: Bluetooth Broadcast UI: Add support for reflection
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException |
             InvocationTargetException | InstantiationException | IllegalArgumentException |
             ExceptionInInitializerError e) {

@@ -24,7 +24,9 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.text.TextUtils;
 import android.util.EventLog;
+// QTI_BEGIN: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 import android.util.Log;
+// QTI_END: 2018-02-22: Android_UI: Enable proprietary MobileNetworkSettings
 
 import androidx.annotation.VisibleForTesting;
 import androidx.preference.Preference;
@@ -94,8 +96,11 @@ public class DataUsageSummary extends DashboardFragment {
         }
         boolean hasWifiRadio = DataUsageUtils.hasWifiRadio(context);
         if (hasMobileData) {
+// QTI_BEGIN: 2024-04-03: Telephony: Fix Data Usage widget NPE
             List<SubscriptionInfo> subscriptions = SubscriptionUtil.getAvailableSubscriptions(
                     context);
+// QTI_END: 2024-04-03: Telephony: Fix Data Usage widget NPE
+// QTI_BEGIN: 2018-04-23: Telephony: Mobile data option for both SUBs in DataUsageSummary.
             if (subscriptions == null || subscriptions.size() == 0) {
                 addMobileSection(defaultSubId);
             }
@@ -107,6 +112,7 @@ public class DataUsageSummary extends DashboardFragment {
                     addMobileSection(subInfo.getSubscriptionId());
                 }
             }
+// QTI_END: 2018-04-23: Telephony: Mobile data option for both SUBs in DataUsageSummary.
             if (hasActiveSubscription() && hasWifiRadio) {
                 // If the device has active SIM, the data usage section shows usage for mobile,
                 // and the WiFi section is added if there is a WiFi radio - legacy behavior.
