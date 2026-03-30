@@ -17,9 +17,11 @@
 package com.android.settings.network.telephony
 
 import android.content.Context
+import com.android.settings.network.telephony.satellite.SatelliteSettingsRepository
 
 class TelephonyFeatureProviderImpl(appContext: Context) : TelephonyFeatureProvider {
     override val telephonyRepository = TelephonySettingsRepository(appContext)
     override val subscriptionRepository = SubscriptionSettingsRepository(appContext)
     override val carrierConfigRepository = CarrierConfigRepository(appContext)
+    override val satelliteSettingsRepository = SatelliteSettingsRepository(appContext)
 }
