@@ -92,6 +92,9 @@ open class PairHearingDeviceScreen(context: Context) :
 
     override fun createWidget(context: Context): Preference = RestrictedPreference(context)
 
+    override val availabilityDescription =
+        "The device must support Bluetooth."
+
     override fun isAvailable(context: Context): Boolean =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
 

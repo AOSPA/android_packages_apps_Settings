@@ -51,6 +51,9 @@ class TopRowKeyShortcutPreference(context: Context, targets: Set<String>) :
         }
     }
 
+    override val availabilityDescription =
+        "The device must support Top Row key shortcut settings. There must be an attached keyboard. The keyboard must have a Accessibility key."
+
     override fun isAvailable(context: Context): Boolean {
         // Should only be available if feature flag is available,
         // and if there is an attached keyboard

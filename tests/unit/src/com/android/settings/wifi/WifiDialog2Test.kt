@@ -34,35 +34,34 @@ import org.mockito.junit.MockitoRule
 @Ignore
 @RunWith(AndroidJUnit4::class)
 class WifiDialog2Test {
-    @get:Rule
-    val activityScenarioRule = ActivityScenarioRule(ComponentActivity::class.java)
+    @get:Rule val activityScenarioRule = ActivityScenarioRule(ComponentActivity::class.java)
 
-    @get:Rule
-    val mockito: MockitoRule = MockitoJUnit.rule()
+    @get:Rule val mockito: MockitoRule = MockitoJUnit.rule()
 
-    @Mock
-    private lateinit var mockWifiEntry: WifiEntry
+    @Mock private lateinit var mockWifiEntry: WifiEntry
 
     private val listener = object : WifiDialog2Listener {}
 
     @Test
     fun constructor_usesDefaultTheme() {
         activityScenarioRule.scenario.onActivity { activity ->
-            val wifiDialog2 = WifiDialog2(
-                context = activity,
-                listener = listener,
-                wifiEntry = mockWifiEntry,
-                mode = WifiConfigUiBase2.MODE_CONNECT,
-                style = 0,
-                hideSubmitButton = false
-            )
+            val wifiDialog2 =
+                WifiDialog2(
+                    context = activity,
+                    listener = listener,
+                    wifiEntry = mockWifiEntry,
+                    mode = WifiConfigUiBase2.MODE_CONNECT,
+                    style = 0,
+                    hideSubmitButton = false,
+                )
 
-            val modal = WifiDialog2(
-                context = activity,
-                listener = listener,
-                wifiEntry = mockWifiEntry,
-                mode = WifiConfigUiBase2.MODE_CONNECT,
-            )
+            val modal =
+                WifiDialog2(
+                    context = activity,
+                    listener = listener,
+                    wifiEntry = mockWifiEntry,
+                    mode = WifiConfigUiBase2.MODE_CONNECT,
+                )
 
             assertThat(modal.context.themeResId).isEqualTo(wifiDialog2.context.themeResId)
         }
@@ -71,24 +70,50 @@ class WifiDialog2Test {
     @Test
     fun constructor_whenSetTheme_shouldBeCustomizedTheme() {
         activityScenarioRule.scenario.onActivity { activity ->
-            val wifiDialog2 = WifiDialog2(
-                context = activity,
-                listener = listener,
-                wifiEntry = mockWifiEntry,
-                mode = WifiConfigUiBase2.MODE_CONNECT,
-                style = R.style.SuwAlertDialogThemeCompat_Light,
-                hideSubmitButton = false,
-            )
+            val wifiDialog2 =
+                WifiDialog2(
+                    context = activity,
+                    listener = listener,
+                    wifiEntry = mockWifiEntry,
+                    mode = WifiConfigUiBase2.MODE_CONNECT,
+                    style = R.style.SuwAlertDialogThemeCompat_Light,
+                    hideSubmitButton = false,
+                )
 
-            val modal = WifiDialog2(
-                context = activity,
-                listener = listener,
-                wifiEntry = mockWifiEntry,
-                mode = WifiConfigUiBase2.MODE_CONNECT,
-                style = R.style.SuwAlertDialogThemeCompat_Light,
-            )
+            val modal =
+                WifiDialog2(
+                    context = activity,
+                    listener = listener,
+                    wifiEntry = mockWifiEntry,
+                    mode = WifiConfigUiBase2.MODE_CONNECT,
+                    style = R.style.SuwAlertDialogThemeCompat_Light,
+                )
 
             assertThat(modal.context.themeResId).isEqualTo(wifiDialog2.context.themeResId)
+        }
+    }
+
+    @Test
+    fun onStart_showFocusRingsTrue_appliesFocusIndicatorToCancelButton() {
+        activityScenarioRule.scenario.onActivity { activity ->
+            val wifiDialog2 =
+                WifiDialog2(
+                    context = activity,
+                    listener = listener,
+                    wifiEntry = mockWifiEntry,
+                    mode = WifiConfigUiBase2.MODE_CONNECT,
+                    style = R.style.SuwAlertDialogThemeCompat_Light,
+                    hideSubmitButton = false,
+                    showFocusRingIndicator = true,
+                )
+            wifiDialog2.show()
+
+            val cancelButton = wifiDialog2.getCancelButton()
+            assertThat(cancelButton).isNotNull()
+            assertThat(cancelButton?.isSingleLine).isFalse()
+            assertThat(cancelButton?.foreground).isNotNull()
+
+            wifiDialog2.dismiss()
         }
     }
 }

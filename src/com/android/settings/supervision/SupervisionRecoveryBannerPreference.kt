@@ -56,6 +56,8 @@ class SupervisionRecoveryBannerPreference :
     override val indexable: Boolean
         get() = false
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionSettingsUiUpdates()) {
             return false

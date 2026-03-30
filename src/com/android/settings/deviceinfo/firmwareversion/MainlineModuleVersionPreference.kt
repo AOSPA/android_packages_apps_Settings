@@ -27,6 +27,7 @@ import com.android.settings.utils.getLocale
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -88,6 +89,9 @@ class MainlineModuleVersionPreference :
         return MODULE_UPDATE_ACTION_V2.resolveIntent() ?: MODULE_UPDATE_ACTION.resolveIntent()
     }
 
+    override val availabilityDescription =
+        "The device must have a mainline module version."
+
     override fun isAvailable(context: Context) = getModuleVersion(context).isNotEmpty()
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
@@ -111,6 +115,9 @@ class MainlineModuleVersionPreference :
             ""
         }
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val TAG = "MainlineModulePreference"

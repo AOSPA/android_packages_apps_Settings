@@ -70,7 +70,7 @@ public final class AccessibilityUtil {
     private static final String TAG = AccessibilityUtil.class.getSimpleName();
 
     // LINT.IfChange(shortcut_type_ui_order)
-    static final int[] SHORTCUTS_ORDER_IN_UI = {
+    public static final int[] SHORTCUTS_ORDER_IN_UI = {
             KEY_GESTURE,
             QUICK_SETTINGS,
             SOFTWARE, // FAB displays before gesture. Navbar displays without gesture.

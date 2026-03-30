@@ -30,6 +30,7 @@ import com.android.settings.applications.CatalystAppListFragment.Companion.DEFAU
 import com.android.settings.applications.getPackageInfoWithPermissions
 import com.android.settings.applications.isPermissionGranted
 import com.android.settings.applications.isPermissionRequested
+import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -50,6 +51,9 @@ open class WriteSystemPreferencesAppDetailScreen : SpecialAccessAppDetailScreen 
 
     override val key
         get() = KEY
+
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
 
     //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
@@ -72,6 +76,9 @@ open class WriteSystemPreferencesAppDetailScreen : SpecialAccessAppDetailScreen 
 
     override val footerPreferenceTitle
         get() = R.string.write_system_preferences_footer_description
+
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested write system preferences permission."
 
     // Edge case: what if the app's read permission is revoked/granted
     override fun isAvailable(context: Context) =

@@ -133,4 +133,5 @@ public class AdvancedConnectedDeviceDashboardFragment extends DashboardFragment 
                 }
             };
 }
-// LINT.ThenChange(AdvancedConnectedDeviceScreen.kt)
+// LINT.ThenChange(AdvancedConnectedDeviceScreen.kt,
+// AdvancedConnectedDeviceApiScreen.kt)

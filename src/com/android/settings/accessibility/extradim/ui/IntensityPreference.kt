@@ -60,6 +60,8 @@ class IntensityPreference(
 
     override fun getMaxValue(context: Context): Int = IntensityDataStore.MAX_VALUE
 
+    override fun getUnitOfMeasurement() = "%"
+
     override fun isEnabled(context: Context): Boolean = extraDimStorage.getBoolean(KEY) == true
 
     override fun storage(context: Context): KeyValueStore = storage
@@ -80,6 +82,7 @@ class IntensityPreference(
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun onCreate(context: PreferenceLifecycleContext) {
         if (settingsKeyedObserver == null) {
             settingsKeyedObserver = KeyedObserver { _, _ ->

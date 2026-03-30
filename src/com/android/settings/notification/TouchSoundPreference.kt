@@ -55,6 +55,8 @@ class TouchSoundPreference(context: Context) :
 
     override fun tags(context: Context) = arrayOf(KEY_TOUCH_SOUNDS, MUSTPASS_SET)
 
+    override val availabilityDescription = "The device must support configuring touch sounds."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_touch_sounds)
 

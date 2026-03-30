@@ -24,6 +24,7 @@ import com.android.settings.flags.Flags.catalystMigration26q2
 import com.android.settings.gestures.LongPressPowerSensitivityPreferenceController.closestValueIndex
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -33,6 +34,7 @@ import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import com.android.settingslib.metadata.preferencesapi.safe
 
 @ProvidePreferenceScreen(PowerMenuSettingsScreenApi.KEY)
 class PowerMenuSettingsScreenApi() :
@@ -60,8 +62,10 @@ class PowerMenuSettingsScreenApi() :
                 R.string.long_press_power_actions_description
             ),
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
-                executeEnum {
+                execute {
                     val invokeAssistant =
                         PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(context)
                     if (invokeAssistant) {
@@ -73,7 +77,7 @@ class PowerMenuSettingsScreenApi() :
             }
 
             set {
-                executeEnum { value ->
+                execute { value ->
                     when (value) {
                         LongPressPowerActions.POWER_MENU ->
                             PowerMenuSettingsUtils.setLongPressPowerForPowerMenu(context)
@@ -97,6 +101,8 @@ class PowerMenuSettingsScreenApi() :
                     }
                 },
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             preconditions(R.string.long_press_power_sensitivity_precondition) {
                 when {
                     !PowerMenuSettingsUtils.isLongPressPowerForAssistantEnabled(context) -> {
@@ -148,8 +154,8 @@ class PowerMenuSettingsScreenApi() :
 
 private fun Int.createSensitivityGeneratedValue(context: Context): GeneratedValue<Int> {
     return GeneratedValue(
-        this,
-        context.getString(R.string.long_press_power_sensitivity_value_description, this),
+        this.safe(),
+        context.getString(R.string.long_press_power_sensitivity_value_description, this).safe(),
     )
 }
 

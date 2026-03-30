@@ -19,6 +19,7 @@ package com.android.settings.regionalpreferences
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
@@ -41,6 +42,8 @@ class TemperatureUnitApiFirstScreen :
             purpose = R.string.regional_preference_temperature_unit_preference_purpose,
             type = AnyString,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 execute {
                     // Use the converter to convert the data to a human-readable value,

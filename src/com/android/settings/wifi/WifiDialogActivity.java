@@ -46,6 +46,7 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SetupWizardUtils;
 import com.android.settings.Utils;
+import com.android.settings.accessibility.shared.utils.SetupWizardUtilKt;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
@@ -225,7 +226,9 @@ public class WifiDialogActivity extends ObservableActivity implements WifiDialog
         if (mIsWifiTrackerLib || mUseWifiDialog2ForAddNetwork) {
             mDialog2 = new WifiDialog2(this, this,
                     mNetworkDetailsTracker == null ? null : mNetworkDetailsTracker.getWifiEntry(),
-                    WifiConfigUiBase2.MODE_CONNECT, targetStyle);
+                    WifiConfigUiBase2.MODE_CONNECT, targetStyle, /*hideSubmitButton=*/ false ,
+                    /*hideMeteredAndPrivacy=*/ false, /*isSysUiCaller=*/ false,
+                    /*showFocusRingIndicator=*/ SetupWizardUtilKt.shouldShowFocusRingsInSuw(this));
         } else {
             mDialog = WifiDialog.createModal(this, this, mAccessPoint,
                     WifiConfigUiBase.MODE_CONNECT, targetStyle);

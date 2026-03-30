@@ -50,6 +50,7 @@ import com.android.settings.testutils.MetricsRule
 import com.android.settings.testutils.SettingsStoreRule
 import com.android.settings.testutils.shadow.SettingsShadowResources
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.createAndBindWidget
@@ -326,7 +327,9 @@ class AirplaneModePreferenceTest {
     @Test
     fun properties() {
         assertThat(airplaneModePreference.icon).isEqualTo(R.drawable.ic_airplanemode_active)
-        assertThat(airplaneModePreference.tags(context)).asList().containsExactly(KEY_AIRPLANE_MODE)
+        assertThat(airplaneModePreference.tags(context))
+            .asList()
+            .containsExactly(KEY_AIRPLANE_MODE, HERO_SET)
         assertThat(airplaneModePreference.restrictionKeys)
             .asList()
             .containsExactly(UserManager.DISALLOW_AIRPLANE_MODE)

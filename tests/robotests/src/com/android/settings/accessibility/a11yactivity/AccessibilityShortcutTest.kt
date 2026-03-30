@@ -37,6 +37,8 @@ import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import org.robolectric.shadow.api.Shadow
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 @RunWith(RobolectricTestRunner::class)
 @Config(shadows = [ShadowAccessibilityManager::class])
@@ -64,8 +66,8 @@ class AccessibilityShortcutTest {
         val options = AccessibilityShortcut.getOptions(context)
 
         assertThat(options).hasSize(1)
-        assertThat(options[0].first).isEqualTo(componentName.flattenToString())
-        assertThat(options[0].second).isEqualTo("An intro")
+        assertThat(options[0].first).isEqualTo(componentName.flattenToString().safe())
+        assertThat(options[0].second).isEqualTo("An intro".unsafe())
     }
 
     @Test

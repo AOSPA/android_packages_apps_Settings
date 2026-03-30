@@ -18,10 +18,14 @@ package com.android.settings.spa.app.specialaccess
 
 import android.Manifest
 import android.app.AppOpsManager
+import android.companion.virtual.VirtualDeviceManager
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Bundle
+import android.view.ViewTreeObserver
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,19 +33,30 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.IntState
-import androidx.compose.runtime.asIntState
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.core.os.bundleOf
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -55,13 +70,16 @@ import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.framework.compose.rememberContext
 import com.android.settingslib.spa.framework.compose.rememberDrawablePainter
 import com.android.settingslib.spa.framework.theme.SettingsDimension
+import com.android.settingslib.spa.framework.theme.SettingsRadius
 import com.android.settingslib.spa.framework.theme.SettingsSpace
 import com.android.settingslib.spa.framework.util.filterItem
 import com.android.settingslib.spa.framework.util.mapItem
 import com.android.settingslib.spa.widget.preference.ListPreferenceOption
+import com.android.settingslib.spa.widget.preference.MainSwitchPreference
 import com.android.settingslib.spa.widget.preference.Preference
 import com.android.settingslib.spa.widget.preference.PreferenceModel
 import com.android.settingslib.spa.widget.preference.Radio2
+import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
 import com.android.settingslib.spa.widget.ui.Category
 import com.android.settingslib.spa.widget.ui.Footer
@@ -75,6 +93,7 @@ import com.android.settingslib.spaprivileged.model.app.getOpMode
 import com.android.settingslib.spaprivileged.model.app.opModeFlow
 import com.android.settingslib.spaprivileged.model.app.rememberAppRepository
 import com.android.settingslib.spaprivileged.model.app.toRoute
+import com.android.settingslib.spaprivileged.model.app.userId
 import com.android.settingslib.spaprivileged.template.app.AppList
 import com.android.settingslib.spaprivileged.template.app.AppListInput
 import com.android.settingslib.spaprivileged.template.app.AppListItem
@@ -260,7 +279,7 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
                     color = MaterialTheme.colorScheme.onSurface,
                 )
                 Text(
-                    text = stringResource(model.subHeadingResId),
+                    text = stringResource(model.subHeadingResId, title),
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier =
@@ -283,30 +302,188 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
     }
 
     /** The content of the app info page. */
+    @OptIn(ExperimentalMaterial3ExpressiveApi::class)
     @Composable
     fun Content(app: ApplicationInfo, model: ComputerControlAutomationAppListModel) {
-        val controller = rememberContext { ComputerAutomationController(it, app, model.appOps) }
-        val options =
-            listOf(
-                ListPreferenceOption(
-                    id = AppOpsManager.MODE_ALLOWED,
-                    text = stringResource(model.allowedTitleResId),
-                ),
-                ListPreferenceOption(
-                    id = AppOpsManager.MODE_DEFAULT,
-                    text = stringResource(model.askTitleResId),
-                ),
-                ListPreferenceOption(
-                    id = AppOpsManager.MODE_IGNORED,
-                    text = stringResource(model.deniedTitleResId),
-                ),
+        val appRepository = rememberAppRepository()
+        val appLabel = appRepository.produceLabel(app).value
+        val consentController = rememberContext { ComputerControlConsentController(it, app) }
+        val selectedId by
+            consentController.appOpsModeFlow.collectAsState(consentController.appOpsMode)
+
+        if (android.companion.virtualdevice.flags.Flags.computerControlPerAppConsent()) {
+            val isChecked = selectedId == AppOpsManager.MODE_ALLOWED
+            var automatablePackages by
+                remember(app.uid, app.packageName) {
+                    mutableStateOf(consentController.getAutomatablePackages())
+                }
+            // Refresh list on focus gain (in case it changed externally, e.g. in split-screen)
+            // TODO (b/485637560): Consider a listener style callback API for app list changes
+            val view = LocalView.current
+            DisposableEffect(view) {
+                val listener =
+                    ViewTreeObserver.OnWindowFocusChangeListener { hasFocus ->
+                        if (hasFocus) {
+                            automatablePackages = consentController.getAutomatablePackages()
+                        }
+                    }
+                view.viewTreeObserver.addOnWindowFocusChangeListener(listener)
+                onDispose { view.viewTreeObserver.removeOnWindowFocusChangeListener(listener) }
+            }
+            val displayApps =
+                remember(automatablePackages) {
+                    consentController.getDisplayApps(automatablePackages)
+                }
+
+            MainSwitchPreference(
+                object : SwitchPreferenceModel {
+                    override val title =
+                        stringResource(R.string.computer_control_automation_toggle_title)
+                    override val checked = { isChecked }
+                    override val onCheckedChange = { newChecked: Boolean ->
+                        if (!newChecked) {
+                            consentController.clearAutomatablePackages()
+                            automatablePackages = emptySet()
+                        }
+                        consentController.setAppOpMode(
+                            if (newChecked) AppOpsManager.MODE_ALLOWED
+                            else AppOpsManager.MODE_DEFAULT
+                        )
+                    }
+                }
             )
-        val selectedId: IntState = controller.modeFlow.collectAsState(controller.mode).asIntState()
-        Category(modifier = Modifier.selectableGroup()) {
-            for (option in options) {
-                Radio2(option, selectedId.intValue, enabled = true) { controller.setMode(it) }
+
+            Text(
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                style = MaterialTheme.typography.bodyMedium,
+                text =
+                    stringResource(
+                        R.string.computer_control_automation_automatable_app_list_header_summary,
+                        appLabel,
+                    ),
+                modifier = Modifier.padding(SettingsDimension.itemPadding),
+            )
+
+            if (isChecked && displayApps.isNotEmpty()) {
+                Category() {
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        displayApps.forEachIndexed { index, targetApp ->
+                            AllowedAppItem(
+                                app = targetApp,
+                                shape = getAppItemShape(index, displayApps.size),
+                            ) {
+                                consentController.removeAutomatablePackage(targetApp.packageName)
+                                automatablePackages = automatablePackages - targetApp.packageName
+                            }
+
+                            if (index < displayApps.size - 1) {
+                                Spacer(modifier = Modifier.height(2.dp))
+                            }
+                        }
+                    }
+                }
+            } else {
+                Text(
+                    text =
+                        stringResource(
+                            R.string.computer_control_automation_automatable_app_list_header_no_apps
+                        ),
+                    modifier = Modifier.padding(SettingsDimension.itemPadding),
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.labelLargeEmphasized,
+                )
+            }
+        } else {
+            val options =
+                listOf(
+                    ListPreferenceOption(
+                        id = AppOpsManager.MODE_ALLOWED,
+                        text = stringResource(model.alwaysAllowedTitleResId),
+                    ),
+                    ListPreferenceOption(
+                        id = AppOpsManager.MODE_DEFAULT,
+                        text = stringResource(model.askTitleResId),
+                    ),
+                    ListPreferenceOption(
+                        id = AppOpsManager.MODE_IGNORED,
+                        text = stringResource(model.deniedTitleResId),
+                    ),
+                )
+            Category(modifier = Modifier.selectableGroup()) {
+                for (option in options) {
+                    Radio2(option, selectedId, enabled = true) {
+                        consentController.setAppOpMode(it)
+                    }
+                }
             }
         }
+    }
+
+    @Composable
+    fun AllowedAppItem(app: ApplicationInfo, shape: Shape, onRemove: () -> Unit) {
+        val appRepository = rememberAppRepository()
+        val label = appRepository.produceLabel(app).value
+        Box(
+            modifier =
+                Modifier.fillMaxWidth()
+                    .clip(shape)
+                    .background(MaterialTheme.colorScheme.surfaceContainerHighest)
+        ) {
+            Preference(
+                object : PreferenceModel {
+                    override val title = label
+                    override val summary = { "" }
+                    override val icon = @Composable { AppIcon(app = app) }
+                    override val onClick = null
+                }
+            )
+            IconButton(
+                onClick = onRemove,
+                modifier = Modifier.align(Alignment.CenterEnd).padding(end = SettingsSpace.small2),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Close,
+                    contentDescription = "Remove",
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+    }
+
+    @Composable
+    private fun getAppItemShape(index: Int, total: Int): Shape {
+        val large = SettingsRadius.large3
+        val small = SettingsRadius.extraSmall2
+
+        return when {
+            total == 1 -> RoundedCornerShape(large)
+            index == 0 ->
+                RoundedCornerShape(
+                    topStart = large,
+                    topEnd = large,
+                    bottomStart = small,
+                    bottomEnd = small,
+                )
+            index == total - 1 ->
+                RoundedCornerShape(
+                    topStart = small,
+                    topEnd = small,
+                    bottomStart = large,
+                    bottomEnd = large,
+                )
+            else -> RoundedCornerShape(small)
+        }
+    }
+
+    /** The icon of the app. */
+    @Composable
+    fun AppIcon(app: ApplicationInfo) {
+        val appRepository = rememberAppRepository()
+        Image(
+            painter = rememberDrawablePainter(appRepository.produceIcon(app).value),
+            contentDescription = appRepository.produceIconContentDescription(app).value,
+            modifier = Modifier.size(SettingsDimension.appIconItemSize),
+        )
     }
 }
 
@@ -318,17 +495,17 @@ object ComputerControlAppInfoPageProvider : SettingsPageProvider {
  */
 class ComputerControlAutomationAppListModel : AppListModel<ComputerControlAppRecord> {
     val permission = Manifest.permission.ACCESS_COMPUTER_CONTROL
-    val allowedTitleResId = R.string.computer_control_automation_always_allowed
+    val alwaysAllowedTitleResId = R.string.computer_control_automation_always_allowed
     val askTitleResId = R.string.computer_control_automation_ask_every_time
     val deniedTitleResId = R.string.computer_control_automation_dont_allow
     val pageTitleResId = R.string.computer_control_automation_page_title
-    val subHeadingResId = R.string.computer_control_automation_sub_heading
+    val subHeadingResId =
+        if (android.companion.virtualdevice.flags.Flags.computerControlPerAppConsent()) {
+            R.string.computer_control_automation_sub_heading_flag_per_app_consent
+        } else {
+            R.string.computer_control_automation_sub_heading
+        }
     val footerResId = R.string.computer_control_automation_footer_summary
-    val appOps =
-        AppOps(
-            op = AppOpsManager.OP_COMPUTER_CONTROL,
-            modeForNotAllowed = AppOpsManager.MODE_IGNORED,
-        )
 
     @Composable
     override fun AppListItemModel<ComputerControlAppRecord>.AppItem() {
@@ -342,14 +519,23 @@ class ComputerControlAutomationAppListModel : AppListModel<ComputerControlAppRec
     }
 
     fun getSummary(context: Context, record: ComputerControlAppRecord): String {
-        val controller = ComputerAutomationController(context, record.app, appOps)
-        return context.getString(
-            when (controller.mode) {
-                AppOpsManager.MODE_ALLOWED -> allowedTitleResId
-                AppOpsManager.MODE_IGNORED -> deniedTitleResId
-                else -> askTitleResId
-            }
-        )
+        val controller = ComputerControlConsentController(context, record.app)
+        if (android.companion.virtualdevice.flags.Flags.computerControlPerAppConsent()) {
+            return context.getString(
+                when (controller.appOpsMode) {
+                    AppOpsManager.MODE_ALLOWED -> R.string.computer_control_automation_allowed
+                    else -> R.string.computer_control_automation_not_allowed
+                }
+            )
+        } else {
+            return context.getString(
+                when (controller.appOpsMode) {
+                    AppOpsManager.MODE_ALLOWED -> alwaysAllowedTitleResId
+                    AppOpsManager.MODE_IGNORED -> deniedTitleResId
+                    else -> askTitleResId
+                }
+            )
+        }
     }
 
     override fun transform(
@@ -362,26 +548,64 @@ class ComputerControlAutomationAppListModel : AppListModel<ComputerControlAppRec
 }
 
 /**
- * The controller for the computer control automation page.
+ * The controller for managing the consent for automation.
  *
  * This controller is responsible for getting and setting the app op mode for the
  * [AppOpsManager.OP_COMPUTER_CONTROL] permission.
+ *
+ * This controller interacts with [VirtualDeviceManager] to get, remove, or clear the list of apps
+ * that the agent is allowed to control.
  */
-internal class ComputerAutomationController(
-    context: Context,
+internal class ComputerControlConsentController(
+    private val context: Context,
     private val app: ApplicationInfo,
-    private val appOps: AppOps,
 ) {
+
+    private val vdm = context.getSystemService(VirtualDeviceManager::class.java)
+    private val consentManager = vdm?.computerControlConsentManager
     private val appOpsManager = context.appOpsManager
+    private val appOps =
+        AppOps(
+            op = AppOpsManager.OP_COMPUTER_CONTROL,
+            modeForNotAllowed = AppOpsManager.MODE_IGNORED,
+        )
+    val appOpsModeFlow: Flow<Int> = appOpsManager.opModeFlow(appOps.op, app)
+    val appOpsMode: Int
+        get() = appOpsManager.getOpMode(appOps.op, app)
 
-    val modeFlow: Flow<Int> = appOpsManager.opModeFlow(appOps.op, app)
-
-    fun setMode(mode: Int) {
+    fun setAppOpMode(mode: Int) {
         appOpsManager.setMode(appOps.op, app.uid, app.packageName, mode)
     }
 
-    val mode: Int
-        get() = appOpsManager.getOpMode(appOps.op, app)
+    fun getAutomatablePackages(): Set<String> {
+        return consentManager?.getAutomatableAppListForAgent(app.uid, app.packageName)?.toSet()
+            ?: emptySet()
+    }
+
+    fun clearAutomatablePackages() {
+        consentManager?.clearAutomatableAppListForAgent(app.uid, app.packageName)
+    }
+
+    fun removeAutomatablePackage(targetPackageName: String) {
+        consentManager?.removeAppFromAutomatableAppListForAgent(
+            app.uid,
+            app.packageName,
+            targetPackageName,
+        )
+    }
+
+    /**
+     * Converts a set of package names into a sorted list of [ApplicationInfo] objects for display.
+     */
+    fun getDisplayApps(packageNames: Set<String>): List<ApplicationInfo> {
+        return packageNames
+            .mapNotNull { pkgName ->
+                PackageManagers.getPackageInfoAsUser(pkgName, app.userId)?.applicationInfo
+            }
+            .sortedBy { targetApp ->
+                context.packageManager.getApplicationLabel(targetApp).toString()
+            }
+    }
 }
 
 fun <T> T.runIfComputerControlEnabled(block: T.() -> T): T {

@@ -40,7 +40,6 @@ import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.view.MotionEventBuilder
 import com.android.settings.R
-import com.android.settings.flags.FakeFeatureFlagsImpl
 import com.google.common.truth.Truth.assertThat
 import java.util.function.Consumer
 import kotlin.math.abs
@@ -53,8 +52,7 @@ import org.robolectric.Shadows.shadowOf
 @RunWith(RobolectricTestRunner::class)
 class DisplayTopologyPreferenceTest {
     val context = ApplicationProvider.getApplicationContext<Context>()
-    val featureFlags = FakeFeatureFlagsImpl()
-    val injector = TestInjector(context, featureFlags)
+    val injector = TestInjector(context)
     val preference = DisplayTopologyPreference(context, injector)
     val rootView = View.inflate(context, preference.layoutResource, /* root= */ null)
     val holder = PreferenceViewHolder.createInstanceForTests(rootView)
@@ -64,8 +62,7 @@ class DisplayTopologyPreferenceTest {
         preference.controller.topologyHint.disableAnimation()
     }
 
-    class TestInjector(context: Context, featureFlags: FakeFeatureFlagsImpl) :
-        ConnectedDisplayInjector(context) {
+    class TestInjector(context: Context) : ConnectedDisplayInjector(context) {
         var displaysSize = mutableMapOf<Int, Size>()
         var topology: DisplayTopology? = null
 
@@ -77,8 +74,6 @@ class DisplayTopologyPreferenceTest {
             set(value) {
                 topology = value
             }
-
-        override val flags = DesktopExperienceFlags(featureFlags)
 
         /** A log of events related to wallpaper revealing. */
         val revealLog = mutableListOf<String>()

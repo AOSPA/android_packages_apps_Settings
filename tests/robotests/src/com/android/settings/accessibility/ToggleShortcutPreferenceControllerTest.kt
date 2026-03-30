@@ -32,7 +32,6 @@ import androidx.lifecycle.Lifecycle.State.INITIALIZED
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceViewHolder
 import androidx.test.core.app.ApplicationProvider
-import com.android.hardware.input.Flags
 import com.android.internal.accessibility.AccessibilityShortcutController.AUTOCLICK_COMPONENT_NAME
 import com.android.internal.accessibility.common.ShortcutConstants
 import com.android.internal.accessibility.common.ShortcutConstants.UserShortcutType.DEFAULT
@@ -154,6 +153,11 @@ class ToggleShortcutPreferenceControllerTest {
 
     @Test
     fun displayPreferenceAndUpdateState_softwareOrGestureShortcut_updateCheckStateAndSummary() {
+        AccessibilityTestUtils.setSoftwareShortcutMode(
+            context,
+            /* gestureNavEnabled= */ true,
+            /* floatingButtonEnabled= */ false,
+        )
         a11yManager.enableShortcutsForTargets(
             /* enable= */ true,
             SOFTWARE or GESTURE,
@@ -307,7 +311,7 @@ class ToggleShortcutPreferenceControllerTest {
 
         a11yManager.enableShortcutsForTargets(
             /* enable=*/ true,
-            GESTURE,
+            SOFTWARE,
             setOf(testComponentString),
             context.userId,
         )
@@ -315,17 +319,17 @@ class ToggleShortcutPreferenceControllerTest {
             .getContentObserverForTesting()
             .onChange(
                 /* selfChange= */ false,
-                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_GESTURE_TARGETS),
+                Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_BUTTON_TARGETS),
             )
         ShadowLooper.runUiThreadTasksIncludingDelayedTasks()
 
         assertThat(shortcutPreference.isChecked).isTrue()
         assertThat(shortcutPreference.summary)
-            .isEqualTo(AccessibilityUtil.getShortcutSummaryList(context, GESTURE))
+            .isEqualTo(AccessibilityUtil.getShortcutSummaryList(context, SOFTWARE))
         assertThat(
                 PreferredShortcuts.retrieveUserShortcutType(context, testComponentString, DEFAULT)
             )
-            .isEqualTo(GESTURE)
+            .isEqualTo(SOFTWARE)
     }
 
     private fun setHardwareKeyboard(hasConnectedKeyboard: Boolean) {

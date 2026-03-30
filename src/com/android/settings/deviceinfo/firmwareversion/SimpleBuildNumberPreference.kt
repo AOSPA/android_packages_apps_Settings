@@ -25,6 +25,7 @@ import com.android.settings.R
 import com.android.settings.contract.TAG_DEVICE_STATE_PREFERENCE
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -55,5 +56,9 @@ class SimpleBuildNumberPreference :
         preference.isSelectable = false
         preference.isCopyingEnabled = true
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
+
 }
 // LINT.ThenChange(SimpleBuildNumberPreferenceController.java)

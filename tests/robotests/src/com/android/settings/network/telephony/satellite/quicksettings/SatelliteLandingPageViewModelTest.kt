@@ -26,6 +26,7 @@ import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.satellite.SatelliteManager
+import com.android.settings.R
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -91,6 +92,8 @@ class SatelliteLandingPageViewModelTest {
             .thenReturn(satelliteDisallowedReasonsFlow)
         `when`(satelliteStateRepository.activeSubIdFlow).thenReturn(activeSubIdFlow)
         `when`(satelliteStateRepository.getAttachRestrictionReasons(SUB_ID)).thenReturn(emptySet())
+        `when`(satelliteStateRepository.getSatelliteDataSupportMode(SUB_ID))
+            .thenReturn(SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN)
     }
 
     @Test
@@ -221,7 +224,8 @@ class SatelliteLandingPageViewModelTest {
     @Test
     fun satelliteAppItems_whenLteNtnSupported_loadsLteApps() = runTest {
         setLteNtnSupported(true)
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf("com.app1"))
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(false))
+            .thenReturn(listOf("com.app1"))
         mockAppsRepositoryIntents()
         setupPackageManagerForApp("com.app1", "App1", Intent("app1.intent"))
         setupCommonPackageManagerApps()
@@ -235,6 +239,27 @@ class SatelliteLandingPageViewModelTest {
             .inOrder()
         assertThat(items[0].summary)
             .isEqualTo(context.getString(com.android.settings.R.string.satellite_phone_summary))
+    }
+
+    @Test
+    fun satelliteAppItems_whenLteNtnSupportedAndRestricted_loadsRestrictedApps() = runTest {
+        setLteNtnSupported(true)
+        val messagesPackage = context.getString(R.string.config_satellite_messages_app_package)
+        `when`(satelliteStateRepository.getSatelliteDataSupportMode(SUB_ID))
+            .thenReturn(SatelliteManager.SATELLITE_DATA_SUPPORT_RESTRICTED)
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(true))
+            .thenReturn(listOf(messagesPackage))
+        mockAppsRepositoryIntents()
+        setupPackageManagerForApp(messagesPackage, "Messages", Intent("messages.intent"))
+        setupCommonPackageManagerApps()
+
+        val items = createViewModelAndGetItems()
+        waitForAsync()
+
+        assertThat(items).hasSize(2) // Phone, Messages
+        assertThat(items.map { it.getAppLabel(packageManager) })
+            .containsExactly("Phone", "Messages")
+            .inOrder()
     }
 
     @Test
@@ -260,7 +285,8 @@ class SatelliteLandingPageViewModelTest {
     fun satelliteAppItems_whenAppNotFound_doesNotLoadApp() = runTest {
         setLteNtnSupported(true)
         val missingPackage = "com.missing.app"
-        `when`(appsRepository.getAppsPackagesForLteLandingPage()).thenReturn(listOf(missingPackage))
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(false))
+            .thenReturn(listOf(missingPackage))
         mockAppsRepositoryIntents()
         setupCommonPackageManagerApps()
 
@@ -278,7 +304,7 @@ class SatelliteLandingPageViewModelTest {
     fun satelliteAppItems_whenAppLaunchIntentNull_doesNotLoadApp() = runTest {
         setLteNtnSupported(true)
         val noIntentPackage = "com.nointent.app"
-        `when`(appsRepository.getAppsPackagesForLteLandingPage())
+        `when`(appsRepository.getAppsPackagesForLteLandingPage(false))
             .thenReturn(listOf(noIntentPackage))
         mockAppsRepositoryIntents()
         setupCommonPackageManagerApps()
@@ -425,10 +451,7 @@ class SatelliteLandingPageViewModelTest {
     }
 
     private fun setupCommonPackageManagerApps() {
-        setupPackageManagerForApp(
-            SatelliteAppsRepository.PACKAGE_NAME_PHONE,
-            "Phone",
-            Intent("dialer"),
-        )
+        val phonePackage = context.getString(R.string.config_satellite_phone_app_package)
+        setupPackageManagerForApp(phonePackage, "Phone", Intent("dialer"))
     }
 }

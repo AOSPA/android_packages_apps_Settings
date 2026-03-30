@@ -73,6 +73,8 @@ class WifiCallingMainSwitchPreference(private val subId: Int) :
         context.isCallStateIdle(subId) &&
             WifiCallingQueryImsState(context, subId).isAllowUserControl
 
+    override val availabilityDescription = "The subscription ID must be valid and wifi calling must be ready."
+
     override fun isAvailable(context: Context) =
         SubscriptionManager.isValidSubscriptionId(subId) &&
             runBlocking { WifiCallingRepository(context, subId).wifiCallingReadyFlow().first() }
@@ -102,6 +104,8 @@ class WifiCallingMainSwitchPreference(private val subId: Int) :
                 ReadWritePermit.REQUIRE_USER_AGREEMENT
             else -> ReadWritePermit.ALLOW
         }
+
+    override val supportsWrite = true
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY

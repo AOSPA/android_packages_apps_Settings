@@ -58,8 +58,11 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
+
+    override val availabilityDescription = "The device must support dark mode in the API."
 
     override fun isAvailable(context: Context) = Flags.catalystDarkUiMode()
 
@@ -100,6 +103,9 @@ class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val is
 
     override fun getIndexableTitle(context: Context): CharSequence? =
         context.getText(R.string.accessibility_standard_dark_theme_title_in_search)
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = "standard_dark_theme"
@@ -163,6 +169,9 @@ class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val is
             })
         }
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = "expanded_dark_theme"

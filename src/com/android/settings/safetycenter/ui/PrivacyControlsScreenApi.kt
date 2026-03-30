@@ -21,6 +21,7 @@ import android.provider.Settings
 import com.android.settings.R
 import com.android.settings.utils.SensorPrivacyManagerHelper
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
@@ -48,6 +49,8 @@ class PrivacyControlsScreenApi :
             purpose = R.string.privacy_camera_toggle_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             preconditions(R.string.sensor_toggle_unsupported) {
                 val helper = SensorPrivacyManagerHelper.getInstance(context)!!
                 if (helper.supportsSensorToggle(SensorPrivacyManager.Sensors.CAMERA)) {
@@ -76,6 +79,8 @@ class PrivacyControlsScreenApi :
             purpose = R.string.privacy_mic_toggle_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             preconditions(R.string.sensor_toggle_unsupported) {
                 val helper = SensorPrivacyManagerHelper.getInstance(context)!!
                 if (helper.supportsSensorToggle(SensorPrivacyManager.Sensors.MICROPHONE)) {
@@ -104,6 +109,8 @@ class PrivacyControlsScreenApi :
             purpose = R.string.show_clip_access_notification_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             get {
                 execute {
                     Settings.Secure.getInt(
@@ -130,6 +137,8 @@ class PrivacyControlsScreenApi :
             purpose = R.string.show_password_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             get {
                 execute {
                     Settings.System.getInt(

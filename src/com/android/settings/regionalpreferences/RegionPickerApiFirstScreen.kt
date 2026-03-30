@@ -23,11 +23,13 @@ import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateSelectedLocale
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
+import com.android.settingslib.metadata.preferencesapi.safe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(RegionPickerApiFirstScreen.KEY)
@@ -57,12 +59,17 @@ class RegionPickerApiFirstScreen :
                     // India
                     localeInfoList.add(defaultLocaleInfo)
                     localeInfoList.map {
-                        GeneratedValue(it.locale.country, it.fullCountryNameNative)
+                        GeneratedValue(it.locale.country.safe(), it.fullCountryNameNative.safe())
                     }
                 },
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get { execute { Locale.getDefault().country } }
             set {
+                warning {
+                    warn(R.string.change_region_warning)
+                }
                 execute { value ->
                     val locale =
                         Locale.Builder().setLocale(Locale.getDefault()).setRegion(value).build()

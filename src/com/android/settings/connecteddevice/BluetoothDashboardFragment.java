@@ -60,6 +60,7 @@ import java.util.List;
  * Dedicated screen for allowing the user to toggle bluetooth which displays relevant information to
  * the user based on related settings such as bluetooth scanning.
  */
+// LINT.IfChange
 @SearchIndexable(forTarget = SearchIndexable.ALL & ~SearchIndexable.ARC)
 public class BluetoothDashboardFragment extends DashboardFragment {
 
@@ -273,3 +274,4 @@ public class BluetoothDashboardFragment extends DashboardFragment {
         }
     }
 }
+// LINT.ThenChange(BluetoothDashboardScreen.kt, BluetoothDashboardScreenApi.kt)

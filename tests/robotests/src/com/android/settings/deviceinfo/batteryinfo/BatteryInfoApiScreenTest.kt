@@ -30,6 +30,7 @@ import com.android.settings.fuelgauge.BatteryUtils
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils2.ApiTester
 import com.google.common.truth.Truth.assertThat
+import kotlin.test.assertFailsWith
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -89,13 +90,11 @@ class BatteryInfoApiScreenTest {
     @Test
     fun getManufactureDatePreference_returnsFormattedDate() {
         val timestampSeconds = 1715856000L
+        val expectedDate = "2024-05-16"
         shadowBatteryManager.setProperty(
             BatteryManager.BATTERY_PROPERTY_MANUFACTURING_DATE,
             timestampSeconds,
         )
-
-        val expectedDate =
-            BatteryUtils.getBatteryInfoFormattedDate(timestampSeconds * 1000).toString()
 
         assertThat(apiTester.get<String>(BatteryInfoApiScreen.MANUFACTURE_DATE_KEY))
             .isEqualTo(expectedDate)
@@ -104,13 +103,11 @@ class BatteryInfoApiScreenTest {
     @Test
     fun getFirstUseDatePreference_returnsFormattedDate() {
         val timestampSeconds = 1715857000L
+        val expectedDate = "2024-05-16"
         shadowBatteryManager.setProperty(
             BatteryManager.BATTERY_PROPERTY_FIRST_USAGE_DATE,
             timestampSeconds,
         )
-
-        val expectedDate =
-            BatteryUtils.getBatteryInfoFormattedDate(timestampSeconds * 1000).toString()
 
         assertThat(apiTester.get<String>(BatteryInfoApiScreen.FIRST_USE_DATE_KEY))
             .isEqualTo(expectedDate)
@@ -125,17 +122,18 @@ class BatteryInfoApiScreenTest {
             }
         doReturn(batteryIntent).whenever(context).registerReceiver(eq(null), any())
 
-        assertThat(apiTester.get<String>(BatteryInfoApiScreen.CYCLE_COUNT_KEY))
-            .isEqualTo(cycleCount.toString())
+        assertThat(apiTester.get<Integer>(BatteryInfoApiScreen.CYCLE_COUNT_KEY))
+            .isEqualTo(cycleCount)
     }
 
     @Test
-    fun getCycleCountPreference_noValue_returnsNotAvailable() {
+    fun getCycleCountPreference_noValue_errors() {
         val batteryIntent = Intent(Intent.ACTION_BATTERY_CHANGED)
         doReturn(batteryIntent).whenever(context).registerReceiver(eq(null), any())
 
-        assertThat(apiTester.get<String>(BatteryInfoApiScreen.CYCLE_COUNT_KEY))
-            .isEqualTo(context.getString(R.string.battery_cycle_count_not_available))
+        assertFailsWith<IllegalStateException> {
+            apiTester.get<Integer>(BatteryInfoApiScreen.CYCLE_COUNT_KEY)
+        }
     }
 }
 

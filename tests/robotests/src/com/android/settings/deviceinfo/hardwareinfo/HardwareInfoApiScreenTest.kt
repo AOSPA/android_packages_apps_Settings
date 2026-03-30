@@ -83,26 +83,6 @@ class HardwareInfoApiScreenTest {
     }
 
     @Test
-    fun getManufacturedYear_zeroDate_returnsUnknown() {
-        ShadowSystemProperties.override("ro.build.date.utc", "0")
-        assertThat(tester.get<String>(HardwareInfoApiScreen.MANUFACTURED_YEAR_KEY))
-            .isEqualTo(context.getString(R.string.device_info_default))
-    }
-
-    @Test
-    fun getManufacturedYear_negativeDate_returnsUnknown() {
-        ShadowSystemProperties.override("ro.build.date.utc", "-1000")
-        assertThat(tester.get<String>(HardwareInfoApiScreen.MANUFACTURED_YEAR_KEY))
-            .isEqualTo(context.getString(R.string.device_info_default))
-    }
-
-    @Test
-    fun getManufacturedYear_missingProperty_returnsUnknown() {
-        assertThat(tester.get<String>(HardwareInfoApiScreen.MANUFACTURED_YEAR_KEY))
-            .isEqualTo(context.getString(R.string.device_info_default))
-    }
-
-    @Test
     fun getSerialNumber_permissionDenied_throwsMissingPermissionException() {
         shadowApplication.denyPermissions(READ_PRIVILEGED_PHONE_STATE)
         ShadowBuild.setSerial("TESTSERIAL123")

@@ -29,7 +29,9 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DreamSettingsApiScreen.KEY)
@@ -79,15 +81,15 @@ class DreamSettingsApiScreen :
         }
     }
 
-    private object WhenToDreamType : FiniteOptionsType<WhenToDream> {
-        override suspend fun getOptions(context: Context): List<Pair<WhenToDream, String>> {
+    private object WhenToDreamType : DirectFiniteOptionsType<WhenToDream> {
+        override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<WhenToDream>, SafetyAnnotated<String>>> {
             val validValues = DreamUtils.getWhenToDreamOptions(context.resources).toSet()
             val posturingSupported =
                 context.resources.getBoolean(R.bool.config_posturing_supported)
             return WhenToDream.entries
                 .filter { it.asApiValue in validValues }
                 .filter { it != WhenToDream.WHILE_POSTURED || posturingSupported }
-                .map { it to context.getString(it.purpose) }
+                .map { it.safe() to context.getString(it.purpose).safe() }
         }
 
         override fun getDescription(context: Context): String =

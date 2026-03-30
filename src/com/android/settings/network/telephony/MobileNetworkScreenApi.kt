@@ -27,6 +27,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -35,6 +36,8 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseR
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(MobileNetworkScreenApi.KEY, parameterized = true)
@@ -67,8 +70,8 @@ class MobileNetworkScreenApi :
                     ) {
                         subscriptionRepository.visibleActiveSubscriptionInfoList.map { info ->
                             GeneratedValue(
-                                info.subscriptionId.toString(),
-                                info.displayName.toString(),
+                                info.subscriptionId.toString().safe(),
+                                info.displayName.toString().unsafe(),
                             )
                         }
                     },
@@ -90,6 +93,8 @@ class MobileNetworkScreenApi :
             purpose = R.string.mobile_network_data_roaming_switching_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
+
             preconditions(R.string.data_roaming_switch_preconditions) {
                 val subId =
                     keyParameters?.get(Settings.EXTRA_SUB_ID)?.toInt()
@@ -149,6 +154,8 @@ class MobileNetworkScreenApi :
             purpose = R.string.mobile_network_auto_data_switching_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             preconditions(R.string.auto_data_switching_preconditions) {
                 val subId =
                     keyParameters?.get(Settings.EXTRA_SUB_ID)?.toInt()

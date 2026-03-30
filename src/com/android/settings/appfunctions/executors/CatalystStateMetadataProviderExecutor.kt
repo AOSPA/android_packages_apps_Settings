@@ -31,6 +31,7 @@ import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenRegistry
@@ -43,7 +44,7 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceTitle
-import com.android.settingslib.metadata.isUiOnlyPreference
+import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.setWarningAsString
@@ -63,6 +64,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
+import com.android.settingslib.metadata.preferencesapi.extractSafety
 
 /* A [DeviceStateExecutor] that provides device state metadata information for Settings that are
 exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
@@ -71,7 +73,6 @@ class CatalystStateMetadataProviderExecutor(
     private val context: Context,
     private val englishContext: Context,
 ) : DeviceStateExecutor {
-    private val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
     private val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     private val screenKeyList = perScreenConfigMap.keys.toList()
 
@@ -80,7 +81,7 @@ class CatalystStateMetadataProviderExecutor(
         params: GenericDocument?,
     ): DeviceStateMetadataProviderExecutorResult {
         val perScreenDeviceStatesList = mutableListOf<PerScreenMetadata>()
-        val itemizationTypes = mutableSetOf<ItemizationType>()
+        val itemizationTypes = mutableMapOf<String, ItemizationType>()
         coroutineScope {
             val semaphore = Semaphore(MAX_PARALLELISM)
             val deferredList =
@@ -90,7 +91,10 @@ class CatalystStateMetadataProviderExecutor(
                             withTimeout(PER_SCREEN_TIMEOUT_MS) {
                                 semaphore.withPermit {
                                     try {
-                                        buildPerScreenDeviceStatesMetadata(screenKey)
+                                        val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
+                                        if(screenMetadata != null && screenMetadata.isExposable(context)) {
+                                            buildPerScreenDeviceStatesMetadata(screenKey)
+                                        } else null
                                     } catch (e: Exception) {
                                         Log.e(TAG, "error building $screenKey", e)
                                         null
@@ -105,11 +109,11 @@ class CatalystStateMetadataProviderExecutor(
                 }
             val results = deferredList.awaitAll().filterNotNull()
             perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
-            itemizationTypes.addAll(results.flatMap { it.itemizationTypes })
+            results.flatMap { it.itemizationTypes }.forEach { itemizationTypes[it.key] = it }
         }
         return DeviceStateMetadataProviderExecutorResult(
             metadata = perScreenDeviceStatesList,
-            itemizationTypes = itemizationTypes,
+            itemizationTypes = itemizationTypes.values.toSet(),
         )
     }
 
@@ -137,19 +141,19 @@ class CatalystStateMetadataProviderExecutor(
                 )
             }
 
-        val types = mutableSetOf<ItemizationType>()
+        val types = mutableMapOf<String, ItemizationType>()
         hierarchy.values.flatten().forEach { node ->
-            (node.metadata as? ApiPreference<*>)?.let { types.add(it.type.toItemizationType(context)) }
+            (node.metadata as? ApiPreference<*, *>)?.let { types[it.type.toItemizationType(context).key] = it.type.toItemizationType(context) }
         }
         hierarchy.keys.forEach { screenMetaData ->
             screenMetaData.keyParametersSchema?.getParameters()?.values?.forEach { param ->
-                types.add(param.type.toItemizationType(context))
+                types[param.type.toItemizationType(context).key] = param.type.toItemizationType(context)
             }
         }
 
         return DeviceStateMetadataProviderExecutorResult(
             metadata = metadata,
-            itemizationTypes = types,
+            itemizationTypes = types.values.toSet(),
         )
     }
 
@@ -161,13 +165,6 @@ class CatalystStateMetadataProviderExecutor(
         val deviceStateItemMetadataList = mutableListOf<DeviceStateItemMetadata>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            val config = settingConfigMap[metadata.key]
-            // skip over UI-only preferences
-            if(metadata.isUiOnlyPreference(context))
-                return@forEach
-            // skip if metadata is screen
-            if(metadata is PreferenceScreenMetadata)
-                return@forEach
             // skip over explicitly disabled preferences
             val metadataProto = try {
                 metadata.toProto(
@@ -190,10 +187,12 @@ class CatalystStateMetadataProviderExecutor(
                     else -> null
                 }
 
-            val writable = if (metadata is ApiPreference<*>) {
+            val writable = if (metadata is ApiPreference<*, *>) {
                 metadata.set != null
+            } else if (metadata is PersistentPreference<*>) {
+                metadata.supportsWrite
             } else {
-                false // Legacy preferences are not writable
+                false
             }
 
             // We replace .. with . because sometimes the strings
@@ -204,30 +203,26 @@ class CatalystStateMetadataProviderExecutor(
                         metadata.getPreconditionsAsString(context),
                         metadata.setPreconditionsAsString(context),
                         metadata.setWarningAsString(context),
-                        config?.hintText(englishContext, metadata)
                     ).joinToString(separator = "\n").replace("..", ".")
             deviceStateItemMetadataList.add(
                 DeviceStateItemMetadata(
-                    // TODO: Expose parameterization
                     key = "${screenMetaData.key}/${metadataProto.key}",
                     purpose = metadataProto.getPurposeString(),
-                    // Currently api-first screens and preferences do not have
-                    // titles
-                    name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*>) null
-                    else LocalizedString(
-                            english = metadata.getPreferenceTitle(englishContext).toString(),
-                            localized = metadata.getPreferenceTitle(context).toString(),
-                        ),
+                    // Name contains values so should not be in metadata. The
+                    // valuable information here is now in the purpose.
+                    name = null,
                     sensitivity = sensitivityLevel,
                     writable = writable,
-                    possibleValues = if (metadata is ApiPreference<*>) {
+                    possibleValues = if (metadata is ApiPreference<*, *>) {
                         val type = metadata.type
-                        if (type is FiniteOptionsType) {
-                            type.getOptions(context).map {
-                                "${it.first.toString()} (${it.second.toString()})"
-                            }.joinToString(", ")
+
+                        val str = "itemization:${type.getKey()}"
+                        val parameters = type.getParameters()
+
+                        if (parameters != null) {
+                            str + " ${parameters.toParametersString()}"
                         } else {
-                            null
+                            str
                         }
                     } else {
                         val str = metadataProto.valueDescriptor.toDeviceStateString()
@@ -244,7 +239,7 @@ class CatalystStateMetadataProviderExecutor(
             description = (
                     listOfNotNull(
                         if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else "",
-                        // This is a hack to remove the title from parametrised screens as it may contain
+                        // This is a hack to remove the title from parameterised screens as it may contain
                         // some text referring to that specific parameter which could confuse the agent.
                         if (isParameterized) ""
                             else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
@@ -259,12 +254,7 @@ class CatalystStateMetadataProviderExecutor(
             // complex than a string so we can communicate more detail
             itemizationTypes = screenMetaData.keyParametersSchema?.getParameters()?.values?.map {
                     val type = it.type
-                    if (type is FiniteOptionsType) {
-                        val optionsString = type.getOptions(context).map { "${it.first} (${it.second})" }.joinToString(",")
-                        "${type.getKey()} - ${type.getDescription(context)} - options: $optionsString"
-                    } else {
-                        "${type.getKey()} - ${type.getDescription(context)}"
-                    }
+                    "${type.getKey()} - ${type.getDescription(context)}"
                 }?.toList() ?: emptyList(),
         )
     }
@@ -348,13 +338,13 @@ class CatalystStateMetadataProviderExecutor(
     }
 }
 
-suspend fun ApiType<*>.toItemizationType(context: Context): ItemizationType {
+suspend fun ApiType<*, *>.toItemizationType(context: Context): ItemizationType {
     return ItemizationType(
         key = getKey(),
         hintText = getDescription(context),
         values = if (this is FiniteOptionsType) {
             getOptions(context).map {
-                ItemizationDetail(key = it.first.toString(), value = it.second.toString())
+                ItemizationDetail(key = extractSafety(it.first).toString(), value = extractSafety(it.second).toString())
             }.toList()
         } else {
             emptyList()

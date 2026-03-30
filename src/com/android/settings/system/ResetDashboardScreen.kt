@@ -65,6 +65,8 @@ open class ResetDashboardScreen :
 
     override fun fragmentClass(): Class<out Fragment>? = ResetDashboardFragment::class.java
 
+    override val availabilityDescription = "The device must support the reset dashboard."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_reset_dashboard)
 

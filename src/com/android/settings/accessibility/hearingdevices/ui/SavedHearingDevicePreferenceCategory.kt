@@ -28,6 +28,7 @@ class SavedHearingDevicePreferenceCategory(
     purpose: Int = R.string.previously_connected_hearing_devices_purpose,
     title: Int = R.string.accessibility_hearing_device_saved_title,
 ) : HearingDevicePreferenceCategory(key, purpose, title) {
+    override val availabilityDescription = UI_ONLY_PREFERENCE
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
     override fun createDeviceUpdater(context: Context): BluetoothDeviceUpdater? =
         SavedHearingDeviceUpdater(context, this, metricsCategory)

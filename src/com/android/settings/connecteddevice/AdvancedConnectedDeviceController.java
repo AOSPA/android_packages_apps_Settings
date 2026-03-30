@@ -126,4 +126,5 @@ public class AdvancedConnectedDeviceController extends BasePreferenceController 
         return resId;
     }
 }
-// LINT.ThenChange(AdvancedConnectedDeviceScreen.kt)
+// LINT.ThenChange(AdvancedConnectedDeviceScreen.kt,
+// AdvancedConnectedDeviceApiScreen.kt)

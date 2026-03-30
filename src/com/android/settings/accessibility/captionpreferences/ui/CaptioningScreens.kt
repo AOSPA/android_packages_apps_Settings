@@ -278,6 +278,9 @@ class CustomCaptionOptionsPreference :
         }
     }
 
+    override val availabilityDescription =
+        "The device must have a custom caption style selected."
+
     override fun isAvailable(context: Context): Boolean =
         context.getSystemService<CaptioningManager>()?.rawUserStyle ==
             CaptioningManager.CaptionStyle.PRESET_CUSTOM

@@ -15,15 +15,21 @@
  */
 package com.android.settings.supervision
 
+import android.app.Application
 import android.app.KeyguardManager
 import android.app.settings.SettingsEnums.ACTION_SUPERVISION_SET_UP_PIN_ENTRY
 import android.app.supervision.SupervisionManager
+import android.app.supervision.flags.Flags
 import android.content.Context
-import android.content.ContextWrapper
+import android.content.Intent
 import android.content.pm.UserInfo
 import android.os.UserManager
 import android.os.UserManager.USER_TYPE_PROFILE_SUPERVISING
+import android.platform.test.annotations.DisableFlags
+import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.testing.EmptyFragmentActivity
 import androidx.preference.Preference
 import androidx.test.core.app.ActivityScenario
@@ -32,17 +38,25 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.testutils.MetricsRule
+import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Answers
+import org.mockito.kotlin.UseConstructor.Companion.withArguments
 import org.mockito.kotlin.any
+import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadow.api.Shadow
+import org.robolectric.shadows.ShadowContextImpl
 
 @RunWith(AndroidJUnit4::class)
 class SupervisionSetUpPinPreferenceTest {
@@ -50,21 +64,35 @@ class SupervisionSetUpPinPreferenceTest {
     private val mockUserManager = mock<UserManager>()
     private val mockSupervisionManager = mock<SupervisionManager>()
 
-    @get:Rule val metricsRule = MetricsRule()
-    @get:Rule val setFlagsRule = SetFlagsRule()
+    @get:Rule(order = 0) val setFlagsRule = SetFlagsRule()
+    @get:Rule(order = 1) val metricsRule = MetricsRule()
 
-    private val context: Context =
-        object : ContextWrapper(ApplicationProvider.getApplicationContext()) {
-            override fun getSystemService(name: String): Any? =
-                when (name) {
-                    Context.KEYGUARD_SERVICE -> mockKeyguardManager
-                    Context.USER_SERVICE -> mockUserManager
-                    Context.SUPERVISION_SERVICE -> mockSupervisionManager
-                    else -> super.getSystemService(name)
-                }
-        }
+    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val mockLifeCycleContext =
+        mock<PreferenceLifecycleContext>(
+            useConstructor = withArguments(context),
+            defaultAnswer = Answers.CALLS_REAL_METHODS,
+        )
+    private val mockConfirmCredentialsLauncher = mock<ActivityResultLauncher<Intent>>()
 
     private val supervisionSetUpPinPreference = SupervisionSetUpPinPreference()
+
+    @Before
+    fun setUp() {
+        Shadow.extract<ShadowContextImpl>((context as Application).baseContext).apply {
+            setSystemService(Context.KEYGUARD_SERVICE, mockKeyguardManager)
+            setSystemService(Context.USER_SERVICE, mockUserManager)
+            setSystemService(Context.SUPERVISION_SERVICE, mockSupervisionManager)
+        }
+        whenever(
+                mockLifeCycleContext.registerForActivityResult(
+                    any<ActivityResultContracts.StartActivityForResult>(),
+                    any(),
+                )
+            )
+            .thenReturn(mockConfirmCredentialsLauncher)
+        supervisionSetUpPinPreference.onCreate(mockLifeCycleContext)
+    }
 
     @Test
     fun key() {
@@ -112,7 +140,8 @@ class SupervisionSetUpPinPreferenceTest {
     }
 
     @Test
-    fun onPreferenceClick_launchesCorrectIntent() {
+    @DisableFlags(Flags.FLAG_ENABLE_PARENT_APPROVAL_FOR_PIN_SETUP)
+    fun onPreferenceClick_launchesPinSetupFlowIntent() {
         ActivityScenario.launch(EmptyFragmentActivity::class.java).use { scenario ->
             scenario.onActivity { activity ->
                 val widget: Preference = supervisionSetUpPinPreference.createAndBindWidget(activity)
@@ -122,6 +151,47 @@ class SupervisionSetUpPinPreferenceTest {
                 assertThat(result).isTrue()
                 val intent = shadowOf(activity).nextStartedActivity
                 assertThat(intent.component?.className)
+                    .isEqualTo(SetupSupervisionActivity::class.java.name)
+
+                verify(mockConfirmCredentialsLauncher, never()).launch(any())
+            }
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_PARENT_APPROVAL_FOR_PIN_SETUP)
+    fun onPreferenceClick_hasOtherApprovalMethods_launchesCredentialIsConfirmed() {
+        val expectedIntent = mock<Intent>()
+        whenever(mockSupervisionManager.createConfirmSupervisionCredentialsIntent())
+            .thenReturn(expectedIntent)
+        val widget: Preference = supervisionSetUpPinPreference.createAndBindWidget(context)
+
+        val result = supervisionSetUpPinPreference.onPreferenceClick(widget)
+
+        assertThat(result).isTrue()
+
+        val intentCaptor = argumentCaptor<Intent>()
+        verify(mockConfirmCredentialsLauncher).launch(intentCaptor.capture())
+        assertThat(intentCaptor.firstValue).isEqualTo(expectedIntent)
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_ENABLE_PARENT_APPROVAL_FOR_PIN_SETUP)
+    fun onPreferenceClick_noOtherApprovalMethods_launchesPinSetupFlowIntent() {
+        whenever(mockSupervisionManager.createConfirmSupervisionCredentialsIntent())
+            .thenReturn(null)
+        ActivityScenario.launch(EmptyFragmentActivity::class.java).use { scenario ->
+            scenario.onActivity { activity ->
+                val widget: Preference = supervisionSetUpPinPreference.createAndBindWidget(activity)
+
+                val result = supervisionSetUpPinPreference.onPreferenceClick(widget)
+
+                assertThat(result).isTrue()
+                verify(mockConfirmCredentialsLauncher, never()).launch(any())
+
+                val activityShadow = shadowOf(activity)
+                val pinSetupIntent = activityShadow.nextStartedActivity
+                assertThat(pinSetupIntent.component?.className)
                     .isEqualTo(SetupSupervisionActivity::class.java.name)
             }
         }

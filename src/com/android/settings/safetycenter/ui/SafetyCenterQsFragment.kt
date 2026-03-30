@@ -357,7 +357,9 @@ class SafetyCenterQsFragment : Fragment() {
 
         private fun getSensorStatusTextResId(permissionGroup: String, enabled: Boolean): Int {
             return when (permissionGroup) {
-                LOCATION -> if (enabled) R.string.switch_on_text else R.string.switch_off_text
+                LOCATION ->
+                    if (enabled) R.string.accessibility_feature_state_on
+                    else R.string.location_settings_summary_location_off
                 else ->
                     if (enabled) R.string.subscription_available
                     else R.string.safety_center_blocked_label

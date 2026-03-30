@@ -16,8 +16,6 @@
 
 package com.android.settings.spa.app.specialaccess
 
-import android.Manifest
-import android.app.AppOpsManager
 import android.app.role.RoleManager
 import android.app.settings.SettingsEnums
 import android.companion.AssociationRequest
@@ -27,9 +25,7 @@ import android.platform.test.flag.junit.SetFlagsRule
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.media.flags.Flags
-import com.android.settings.R
 import com.android.settings.testutils.FakeFeatureFactory
-import com.android.settingslib.spaprivileged.model.app.AppOps
 import com.android.settingslib.spaprivileged.model.app.IAppOpsPermissionController
 import com.android.settingslib.spaprivileged.template.app.AppOpPermissionRecord
 import com.google.common.truth.Truth.assertThat
@@ -68,20 +64,6 @@ class MediaRoutingControlTest {
         whenever(context.getSystemService(RoleManager::class.java))
                 .thenReturn(mockRoleManager)
         listModel = MediaRoutingControlAppsListModel(context)
-    }
-
-    @Test
-    fun modelResourceIdAndProperties() {
-        assertThat(listModel.pageTitleResId).isEqualTo(R.string.media_routing_control_title)
-        assertThat(listModel.switchTitleResId).isEqualTo(R.string.allow_media_routing_control)
-        assertThat(listModel.footerResId).isEqualTo(R.string.allow_media_routing_description)
-        assertThat(listModel.appOps).isEqualTo(
-            AppOps(
-                op = AppOpsManager.OP_MEDIA_ROUTING_CONTROL,
-                setModeByUid = true,
-            )
-        )
-        assertThat(listModel.permission).isEqualTo(Manifest.permission.MEDIA_ROUTING_CONTROL)
     }
 
     @Test

@@ -28,6 +28,7 @@ import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
@@ -65,6 +66,8 @@ class KeyboardVibrationSwitchPreference(
     override val keywords: Int
         get() = R.string.keywords_keyboard_vibration
 
+    override val availabilityDescription = "The device must support keyboard vibration settings."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(
             com.android.internal.R.bool.config_keyboardVibrationSettingsSupported
@@ -92,6 +95,15 @@ class KeyboardVibrationSwitchPreference(
         }
         return false
     }
+
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY

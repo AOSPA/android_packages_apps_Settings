@@ -24,6 +24,7 @@ import android.media.Spatializer
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -64,6 +65,8 @@ class SpatialAudioApiScreen :
             purpose = R.string.spatial_audio_phone_speakers_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             val speaker by lazy {
                 AudioDeviceAttributes(
                 AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_BUILTIN_SPEAKER, ""
@@ -102,6 +105,8 @@ class SpatialAudioApiScreen :
             purpose = R.string.spatial_audio_wired_headphones_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             val wiredHeadphones by lazy {
                 AudioDeviceAttributes(
                     AudioDeviceAttributes.ROLE_OUTPUT, AudioDeviceInfo.TYPE_WIRED_HEADPHONES, ""

@@ -125,6 +125,8 @@ private constructor(
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
+    override val availabilityDescription = "The app must be enabled."
+
     override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =
@@ -199,6 +201,8 @@ private class InteractAcrossProfilesMainSwitch(private val storage: KeyValueStor
         get() = R.string.interact_across_profiles_title
 
     override fun storage(context: Context) = storage
+
+    override val supportsWrite = false
 
     companion object {
         const val KEY = "device_state_interact_across_profiles_settings_switch"

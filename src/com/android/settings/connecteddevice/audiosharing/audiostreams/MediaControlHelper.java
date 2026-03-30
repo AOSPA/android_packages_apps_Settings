@@ -25,6 +25,7 @@ import android.util.Pair;
 
 import androidx.annotation.Nullable;
 
+import com.android.media.flags.Flags;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.media.BluetoothMediaDevice;
@@ -91,7 +92,9 @@ class MediaControlHelper {
                         }
                     };
             localMediaManager.registerCallback(deviceCallback);
-            localMediaManager.startScan();
+            if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+                localMediaManager.startScan();
+            }
             mLocalMediaManagers.add(new Pair<>(localMediaManager, deviceCallback));
         }
     }
@@ -99,7 +102,9 @@ class MediaControlHelper {
     void stop() {
         mLocalMediaManagers.forEach(
                 m -> {
-                    m.first.stopScan();
+                    if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+                        m.first.stopScan();
+                    }
                     m.first.unregisterCallback(m.second);
                 });
         mLocalMediaManagers.clear();

@@ -84,6 +84,7 @@ import java.util.List;
  * For non-system applications, there is no option to clear data. Instead there is an option to
  * uninstall the application.
  */
+// Lint.IfChange
 public class AppInfoDashboardFragment extends DashboardFragment
         implements ApplicationsState.Callbacks,
         ButtonActionDialogFragment.AppButtonsDialogListener {
@@ -890,3 +891,4 @@ public class AppInfoDashboardFragment extends DashboardFragment
     };
 
 }
+// Lint.ThenChange(AppInfoScreenApiFirst.kt, HibernationSwitchPreferenceController.java)

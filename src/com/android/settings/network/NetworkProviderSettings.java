@@ -19,6 +19,12 @@ package com.android.settings.network;
 import static android.net.wifi.WifiConfiguration.NetworkSelectionStatus.NETWORK_SELECTION_ENABLED;
 import static android.os.UserManager.DISALLOW_CONFIG_WIFI;
 
+import static com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService.ISSUE_SUBJECT_IS_CELLULAR;
+import static com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService.ISSUE_SUBJECT_IS_WIFI;
+import static com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService.KEY_ACTION_OF_PREFERENCE_UI_FOOTER;
+import static com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService.KEY_CLASS_NAME;
+import static com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService.KEY_NAME_OF_PREFERENCE_UI_FOOTER;
+import static com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService.KEY_PACKAGE_NAME;
 import static com.android.wifitrackerlib.WifiEntry.CONNECTED_STATE_CONNECTED;
 
 import android.app.Activity;
@@ -118,6 +124,7 @@ import com.android.wifitrackerlib.WifiPickerTracker;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -198,7 +205,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
 
     private TroubleshootingServiceConnection mTroubleshootingServiceConnection;
 
-    private ResultReceiver mWifiTroubleshootingReceiver =
+    private final ResultReceiver mWifiTroubleshootingReceiver =
             new ResultReceiver(new Handler(Looper.getMainLooper())) {
                 @Override
                 protected void onReceiveResult(int resultCode, Bundle resultData) {
@@ -217,21 +224,25 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                             attachFooter(connectedEntry.getKey(), "", null);
                             return;
                         }
-                        if (!resultData.containsKey(
-                                ITroubleshootingInfoProviderService
-                                        .KEY_ACTION_OF_PREFERENCE_UI_FOOTER)) {
+                        Map<String, Bundle> uiInfos =
+                                mTroubleshootingServiceConnection.getDiagnosticUiInfos();
+                        if (!uiInfos.containsKey(ISSUE_SUBJECT_IS_WIFI)) {
+                            Log.i(TAG, "No wifi troubleshooting UI info");
                             return;
                         }
-                        String title = resultData.getString(
-                                ITroubleshootingInfoProviderService
-                                        .KEY_NAME_OF_PREFERENCE_UI_FOOTER);
-                        String packageName = resultData.getString(
-                                ITroubleshootingInfoProviderService.KEY_PACKAGE_NAME);
-                        String className = resultData.getString(
-                                ITroubleshootingInfoProviderService.KEY_CLASS_NAME);
-                        String action = resultData.getString(
-                                ITroubleshootingInfoProviderService
-                                        .KEY_ACTION_OF_PREFERENCE_UI_FOOTER);
+                        Bundle bundle = uiInfos.get(ISSUE_SUBJECT_IS_WIFI);
+                        if (bundle == null || bundle.isEmpty()) {
+                            Log.i(TAG, "No wifi troubleshooting UI info due to no bundle data");
+                            return;
+                        }
+                        if (!bundle.containsKey(KEY_ACTION_OF_PREFERENCE_UI_FOOTER)) {
+                            Log.i(TAG, "No footer action of Wifi info");
+                            return;
+                        }
+                        String title = bundle.getString(KEY_NAME_OF_PREFERENCE_UI_FOOTER);
+                        String packageName = bundle.getString(KEY_PACKAGE_NAME);
+                        String className = bundle.getString(KEY_CLASS_NAME);
+                        String action = bundle.getString(KEY_ACTION_OF_PREFERENCE_UI_FOOTER);
                         attachFooter(connectedEntry.getKey(), title, (v) -> {
                             TroubleshootingUtils.startWifiTroubleShootingActivity(
                                     getActivity(),
@@ -244,7 +255,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                 }
             };
 
-    private ResultReceiver mMobileTroubleshootingReceiver =
+    private final ResultReceiver mMobileTroubleshootingReceiver =
             new ResultReceiver(new Handler(Looper.getMainLooper())) {
                 @Override
                 protected void onReceiveResult(int resultCode, Bundle resultData) {
@@ -256,20 +267,25 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                                 null);
                         return;
                     }
-                    if (!resultData.containsKey(
-                            ITroubleshootingInfoProviderService
-                                    .KEY_ACTION_OF_PREFERENCE_UI_FOOTER)) {
+                    Map<String, Bundle> uiInfos =
+                            mTroubleshootingServiceConnection.getDiagnosticUiInfos();
+                    if (!uiInfos.containsKey(ISSUE_SUBJECT_IS_CELLULAR)) {
+                        Log.i(TAG, "No cellular troubleshooting UI info");
                         return;
                     }
-                    String title = resultData.getString(
-                            ITroubleshootingInfoProviderService.KEY_NAME_OF_PREFERENCE_UI_FOOTER);
-                    String packageName = resultData.getString(
-                            ITroubleshootingInfoProviderService.KEY_PACKAGE_NAME);
-                    String className = resultData.getString(
-                            ITroubleshootingInfoProviderService.KEY_CLASS_NAME);
-                    String action = resultData.getString(
-                            ITroubleshootingInfoProviderService.KEY_ACTION_OF_PREFERENCE_UI_FOOTER);
-
+                    Bundle bundle = uiInfos.get(ISSUE_SUBJECT_IS_CELLULAR);
+                    if (bundle == null || bundle.isEmpty()) {
+                        Log.i(TAG, "No cellular troubleshooting UI info due to no bundle data");
+                        return;
+                    }
+                    if (!bundle.containsKey(KEY_ACTION_OF_PREFERENCE_UI_FOOTER)) {
+                        Log.i(TAG, "No footer action of Cellular info");
+                        return;
+                    }
+                    String title = bundle.getString(KEY_NAME_OF_PREFERENCE_UI_FOOTER);
+                    String packageName = bundle.getString(KEY_PACKAGE_NAME);
+                    String className = bundle.getString(KEY_CLASS_NAME);
+                    String action = bundle.getString(KEY_ACTION_OF_PREFERENCE_UI_FOOTER);
                     attachFooter(
                             SubscriptionsPreferenceController.PREF_KEY_ACTIVE_MOBILE_CONNECTION,
                             title,
@@ -417,8 +433,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         }
         mAirplaneModeEnabler = new AirplaneModeEnabler(getContext(), this);
 
-        // TODO(b/37429702): Add animations and preference comparator back after initial screen is
-        // loaded (ODR).
+        // Animations and preference comparator are disabled. See b/37429702 for context.
         setAnimationAllowed(false);
 
         addPreferences();
@@ -465,7 +480,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
         };
 
         HashMap<String, ResultReceiver> resultReceivers = new HashMap<>();
-        resultReceivers.put(ITroubleshootingInfoProviderService.ISSUE_SUBJECT_IS_WIFI,
+        resultReceivers.put(ISSUE_SUBJECT_IS_WIFI,
                 mWifiTroubleshootingReceiver);
         resultReceivers.put(ITroubleshootingInfoProviderService.ISSUE_SUBJECT_IS_CELLULAR,
                 mMobileTroubleshootingReceiver);

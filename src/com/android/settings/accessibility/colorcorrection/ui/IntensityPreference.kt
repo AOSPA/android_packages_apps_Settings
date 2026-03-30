@@ -78,6 +78,7 @@ class IntensityPreference(context: Context) :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun isEnabled(context: Context): Boolean {
         val colorCorrectionEnabled =
             dataStore.getBoolean(SETTING_KEY_COLOR_CORRECTION_ENABLED) ?: false

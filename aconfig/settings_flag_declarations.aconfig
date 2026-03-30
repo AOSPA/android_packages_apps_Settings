@@ -16,13 +16,6 @@ flag {
 }
 
 flag {
-    name: "support_raw_dynamic_icons"
-    namespace: "android_settings"
-    description: "Flag to gate support of injected preference icons containing raw data"
-    bug: "351884562"
-}
-
-flag {
     name: "updated_suggestion_card_aosp"
     namespace: "android_settings"
     description: "Use updated suggestion card(s) in AOSP Settings"
@@ -62,4 +55,11 @@ flag {
   namespace: "android_settings"
   description: "Enables alert indicator on homepage tiles"
   bug: "403326850"
+}
+
+flag {
+  name: "storage_summary_percentage_alignment"
+  namespace: "mediaprovider"
+  description: "Isolate percentage formatting in storage summary to ensure correct alignment in RTL locales."
+  bug: "394910107"
 }

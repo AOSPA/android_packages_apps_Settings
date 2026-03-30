@@ -27,25 +27,29 @@ import android.os.UserManager
 import androidx.annotation.RequiresApi
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settingslib.metadata.R
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 import kotlinx.coroutines.flow.first
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
 
 /**
  * The flattened string representation of the ComponentName of an Activity implementing an accessibility feature
  */
-object AccessibilityShortcut : FiniteOptionsType<String> {
+object AccessibilityShortcut : DirectFiniteOptionsType<String> {
     override fun getType() = String::class.java
 
     override fun getDescription(context: Context): String =
         "The flattened string representation of an Activity implementing an accessibility feature"
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    override suspend fun getOptions(context: Context): List<Pair<String, String>> {
-      return AccessibilityRepositoryProvider.get(context)
+    override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<String>, SafetyAnnotated<String>>> {
+            return AccessibilityRepositoryProvider.get(context)
                     .accessibilityShortcutInfos
                     .first()
                     .map { a11yShortcutInfo ->
-                      Pair(a11yShortcutInfo.componentName.flattenToString(), a11yShortcutInfo.loadIntro(context.packageManager)?.toString() ?: a11yShortcutInfo.componentName.flattenToString())
+                      val componentName = a11yShortcutInfo.componentName.flattenToString().safe()
+                      Pair(componentName, a11yShortcutInfo.loadIntro(context.packageManager)?.toString()?.unsafe() ?: componentName)
                     }.toList()
     }
 

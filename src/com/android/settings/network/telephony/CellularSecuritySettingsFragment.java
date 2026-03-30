@@ -27,6 +27,7 @@ import com.android.settings.dashboard.DashboardFragment;
 /**
  * Cellular Security features (insecure network notifications, network security controls, etc)
  */
+// LINT.IfChange
 public class CellularSecuritySettingsFragment extends DashboardFragment {
 
     private static final String TAG = "CellularSecuritySettingsFragment";
@@ -62,3 +63,4 @@ public class CellularSecuritySettingsFragment extends DashboardFragment {
         return R.xml.cellular_security;
     }
 }
+// LINT.ThenChange(CellularSecurityScreenApi.kt)

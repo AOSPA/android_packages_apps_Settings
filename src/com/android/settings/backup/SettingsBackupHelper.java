@@ -52,11 +52,9 @@ public class SettingsBackupHelper extends BackupAgentHelper {
         RegionalCustomizationFeatureProvider regionalCustomizationFeatureProvider =
                 FeatureFactory.getFeatureFactory().getRegionalCustomizationFeatureProvider();
 
-        if (Flags.enableSoundBackup()) {
-            if (onboardingFeatureProvider != null) {
-                addHelper(SOUND_BACKUP_HELPER, onboardingFeatureProvider.
-                        getSoundBackupHelper(this, this.getBackupRestoreEventLogger()));
-            }
+        if (onboardingFeatureProvider != null) {
+            addHelper(SOUND_BACKUP_HELPER, onboardingFeatureProvider.
+                    getSoundBackupHelper(this, this.getBackupRestoreEventLogger()));
         }
 
         if (Flags.accessibilityAppearanceSettingsBackupEnabled()) {

@@ -23,6 +23,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.print.PrintRepository.PrintServiceDisplayInfo
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
@@ -30,6 +31,7 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterT
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 // LINT.IfChange
 /**
@@ -56,7 +58,7 @@ class PrintServiceApiScreen :
                 purpose = R.string.print_service_parameter_purpose,
                 type =
                     GeneratedParameterType(R.string.print_service_parameter_description) {
-                        fetchDisplayInfos().map { GeneratedValue(it.componentName, it.title) }
+                        fetchDisplayInfos().map { GeneratedValue(it.componentName.unsafe(), it.title.unsafe()) }
                     },
             )
 
@@ -72,6 +74,8 @@ class PrintServiceApiScreen :
         }
 
         preference(PRINT_SWITCH_KEY, PRINT_SWITCH_PURPOSE, AnyBoolean) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 permissions(Manifest.permission.READ_PRINT_SERVICES)
                 execute {

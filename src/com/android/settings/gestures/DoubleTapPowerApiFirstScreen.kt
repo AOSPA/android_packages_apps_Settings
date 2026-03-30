@@ -23,6 +23,7 @@ import android.service.quickaccesswallet.QuickAccessWalletClient
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -67,8 +68,9 @@ class DoubleTapPowerApiFirstScreen :
                     R.string.gesture_double_power_tap_app_custom_enum_description,
                 ),
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             get {
-                executeEnum {
+                execute {
                     val launchApp =
                         Settings.Secure.getInt(
                             context.contentResolver,
@@ -105,7 +107,7 @@ class DoubleTapPowerApiFirstScreen :
                         }
                     }
                 }
-                executeEnum { value ->
+                execute { value ->
                     val launchApp =
                         if (value == PowerButtonLaunchApp.CAMERA) {
                             CAMERA_LAUNCH_VALUE

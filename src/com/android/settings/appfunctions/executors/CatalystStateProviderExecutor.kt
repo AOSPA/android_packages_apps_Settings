@@ -27,10 +27,11 @@ import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
 import com.android.settings.deviceinfo.imei.ImeiPreference
+import com.android.settings.utils.flattenBundles
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
-import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.ReadWritePermit.Companion.ALLOW
 import com.android.settingslib.metadata.accessPreconditionsAsString
@@ -38,7 +39,8 @@ import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
 import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
-import com.android.settingslib.metadata.isUiOnlyPreference
+import com.android.settingslib.metadata.getTrampolinedLaunchIntent
+import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiPreference
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
@@ -55,6 +57,7 @@ import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
 import kotlin.time.Duration.Companion.seconds
+import com.android.settingslib.metadata.preferencesapi.markStringAsExternalData
 
 /* A [DeviceStateProvider] that provides device state information for Settings that are
 exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
@@ -63,7 +66,6 @@ class CatalystStateProviderExecutor(
     private val context: Context,
     private val englishContext: Context,
 ) : DeviceStateExecutor {
-    private val settingConfigMap = config.deviceStateItems.associateBy { it.settingKey }
     private val perScreenConfigMap = config.screenConfigs.associateBy { it.screenKey }
     private val screenKeyList = perScreenConfigMap.keys.toList()
 
@@ -84,10 +86,13 @@ class CatalystStateProviderExecutor(
                                 withTimeout(PER_SCREEN_TIMEOUT_MS) {
                                     semaphore.withPermit {
                                         try {
-                                            buildPerScreenDeviceStates(
-                                                screenKey,
-                                                appFunctionType
-                                            )
+                                            val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
+                                            if(screenMetadata != null && screenMetadata.isExposable(context)) {
+                                                buildPerScreenDeviceStates(
+                                                    screenKey,
+                                                    appFunctionType
+                                                )
+                                            } else null
                                         } catch (e: Exception) {
                                             Log.e(TAG, "error building $screenKey", e)
                                             null
@@ -137,13 +142,6 @@ class CatalystStateProviderExecutor(
         val deviceStateItemList = mutableListOf<DeviceStateItem>()
         preferencesHierarchy.forEach {
             val metadata = it.metadata
-            // skip over UI-ONLY preferences
-            if (metadata.isUiOnlyPreference(context))
-                return@forEach
-            // skip if metadata is a PreferenceScreen
-            if (metadata.key == screenMetaData.key)
-                return@forEach
-            val config = settingConfigMap[metadata.key]
             val jsonValue =
                 when {
                     // TODO(b/444419242): Handle IMEI redaction properly.
@@ -151,7 +149,10 @@ class CatalystStateProviderExecutor(
                     metadata is PersistentPreference<*> -> {
                         getDeviceStateItemValueForPreference(metadata)
                     }
-                    else -> metadata.getPreferenceSummary(context)?.toString()
+                    else ->
+                        metadata.getPreferenceSummary(context)?.toString()?.let {
+                            markStringAsExternalData(it)
+                        }
                 }
             jsonValue?.let {
                 deviceStateItemList.add(
@@ -160,13 +161,12 @@ class CatalystStateProviderExecutor(
                         // other item specific id necessary to distinguish the items.
                         key = "${screenMetaData.key}/${metadata.bindingKey}",
                         purpose = metadata.getPreferencePurpose(context).toString(),
-                        name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*>) null
+                        name = if (metadata is PreferencesApiScreen || metadata is ApiPreference<*, *>) null
                             else LocalizedString(
                                 english = metadata.getPreferenceTitle(englishContext).toString(),
                                 localized = metadata.getPreferenceTitle(context).toString(),
                             ),
                         jsonValue = it,
-                        hintText = config?.hintText(englishContext, metadata),
                     )
                 )
             }
@@ -196,7 +196,10 @@ class CatalystStateProviderExecutor(
         val descriptionPrefix = if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else ""
         val description = descriptionPrefix + basicDescription + descriptionSuffix
 
-        val launchingIntent = screenMetaData.getLaunchIntent(context, null)
+        val launchingIntent = screenMetaData.getTrampolinedLaunchIntent(context, null)?.apply {
+            // Use flattenBundles since launchingIntent.toUri drops the bundles
+            flattenBundles()
+        }
         val states =
             PerScreenDeviceStates(
                 description = description,
@@ -213,11 +216,19 @@ class CatalystStateProviderExecutor(
             Process.myUid()
         ) == ALLOW
         return if (allowedRead) {
-            metadata.storage(context)
-                .getValue(metadata.key, metadata.valueType as Class<Any>)
-                ?.toString()
+            if (metadata.valueType == String::class.java) {
+                // We should be smarter here and only mark external if the data is
+                // actually unsafe.
+                metadata.storage(context)
+                    .getValue(metadata.key, metadata.valueType as Class<Any>)
+                    ?.toString()?.let { markStringAsExternalData(it) }
+            } else {
+                metadata.storage(context)
+                    .getValue(metadata.key, metadata.valueType as Class<Any>)
+                    ?.toString()
+            }
         } else {
-            "null"
+            "Error: Not allowed to read value"
         }
     }
 

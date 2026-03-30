@@ -33,7 +33,7 @@ class AdaptiveConnectivityApiScreen :
         alreadyPartiallyMigrated = AdaptiveConnectivityScreen::class,
     ) {
     init {
-        flag { Flags.catalystMigration26q2() && Flags.enableAdaptiveConnectivityToggleSwitches() }
+        flag { Flags.catalystMigration26q2() }
         preference(
             key = PREF_KEY_WIFI,
             purpose = R.string.adaptive_connectivity_wifi_enabled_purpose,

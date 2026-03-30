@@ -51,6 +51,8 @@ class ZenModeButtonPreference(val zenMode: ZenMode) :
 
     override fun tags(context: Context) = arrayOf(TAG_DEVICE_STATE_PREFERENCE)
 
+    override val availabilityDescription = "The DND mode must be enabled and be allowed to be manually invoked."
+
     override fun isAvailable(context: Context) =
         zenMode.isEnabled && (zenMode.isActive || zenMode.isManualInvocationAllowed)
 
@@ -66,6 +68,8 @@ class ZenModeButtonPreference(val zenMode: ZenMode) :
 
             override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {}
         }
+
+    override val supportsWrite = false
 
     companion object {
         const val KEY = "device_state_activate" // only for device state.

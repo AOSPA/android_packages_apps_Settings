@@ -27,7 +27,10 @@ import android.os.UserHandle
 import android.os.UserManager
 import androidx.annotation.RequiresApi
 import com.android.settingslib.metadata.R
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
 
 /**
  * Any package installed on the device.
@@ -44,7 +47,7 @@ import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 open class InstalledPackageName(
     private val flags: Long? = null,
     private val heldPermissions: Array<String>? = null,
-) : FiniteOptionsType<String> {
+) : DirectFiniteOptionsType<String> {
 
     override fun getType(): Class<String> = String::class.java
 
@@ -54,7 +57,7 @@ open class InstalledPackageName(
     override fun getKey(): String = "InstalledPackageName:${flags ?: 0}"
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    override suspend fun getOptions(context: Context): List<Pair<String, String>> {
+    override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<String>, SafetyAnnotated<String>>> {
         val pm = context.packageManager
         val appList: List<ApplicationInfo> =
             if (heldPermissions != null) {
@@ -68,7 +71,7 @@ open class InstalledPackageName(
             }
 
         return appList.map { appInfo ->
-            appInfo.packageName to (appInfo.loadLabel(pm)?.toString() ?: appInfo.packageName)
+            appInfo.packageName.safe() to (appInfo.loadLabel(pm)?.toString()?.unsafe() ?: appInfo.packageName.safe())
         }
     }
 

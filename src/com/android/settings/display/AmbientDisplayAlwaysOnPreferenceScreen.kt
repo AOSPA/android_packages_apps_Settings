@@ -112,6 +112,9 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
+    override val availabilityDescription =
+        "The device must support ambient display always on, and the user must not have display inversion enabled."
+
     override fun isAvailable(context: Context): Boolean {
         return !SystemProperties.getBoolean(PROP_AWARE_AVAILABLE, false) &&
             AmbientDisplayConfiguration(context).alwaysOnAvailableForUser(UserHandle.myUserId())
@@ -187,6 +190,7 @@ open class AmbientDisplayAlwaysOnPreferenceScreen(context: Context) :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 

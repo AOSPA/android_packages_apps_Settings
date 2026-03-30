@@ -120,6 +120,8 @@ class AddDevicePreference(context: Context) :
         }
     }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean =
         context.packageManager.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)
 

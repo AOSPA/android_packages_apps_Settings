@@ -16,7 +16,6 @@
 
 package com.android.settings.dream;
 
-import static android.service.dreams.Flags.dreamsSwitcher;
 import static android.service.dreams.Flags.dreamsV2;
 
 import static com.android.settings.dream.DreamMainSwitchPreferenceController.MAIN_SWITCH_PREF_KEY;
@@ -362,7 +361,8 @@ public class DreamSettings extends DashboardFragment implements OnCheckedChangeL
      * dream.
      */
     private void updateSelectedDreamSettingsState(boolean dreamsEnabled) {
-        if (dreamsSwitcher()) {
+        final DreamBackend backend = DreamBackend.getInstance(getContext());
+        if (backend.isDreamSwitcherEnabled()) {
             updateMultiSelectedDreamsSettingsState(dreamsEnabled);
             return;
         }

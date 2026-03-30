@@ -27,6 +27,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
+import com.android.settingslib.metadata.preferencesapi.safe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(ColorModeApiScreen.KEY)
@@ -43,7 +44,10 @@ class ColorModeApiScreen :
     private lateinit var colorModesToSummaries: Map<Int, CharSequence>
 
     init {
-        flag { Flags.catalystMigration26q2() }
+        flag {
+            Flags.catalystMigration26q2() &&
+                com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
+        }
 
         preconditions(R.string.color_mode_preconditions) {
             if (
@@ -64,10 +68,10 @@ class ColorModeApiScreen :
                     ColorModeUtils.getAvailableColorModes(context)
                         .map { colorMode ->
                             GeneratedValue(
-                                value = colorMode,
+                                value = colorMode.safe(),
                                 description =
-                                    colorModesToSummaries.get(colorMode)?.toString()
-                                        ?: colorMode.toString(),
+                                    colorModesToSummaries.get(colorMode)?.toString()?.safe()
+                                        ?: colorMode.toString().safe(),
                             )
                         }
                         .toSet()

@@ -25,6 +25,7 @@ import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.testutils.GraphTestUtils
+import com.android.settingslib.testutils.GraphTestUtils.PreferenceScreenConfig
 import com.android.settingslib.testutils.GraphTestUtils.createPersistentPreference
 import com.android.settingslib.testutils.GraphTestUtils.createScreen
 import com.android.settingslib.testutils.GraphTestUtils.createSimplePreference
@@ -53,8 +54,10 @@ import com.android.settingslib.graph.proto.RangeValueProto
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.metadata.preferencesapi.types.ApiType
-import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
+import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
+import com.android.settingslib.metadata.preferencesapi.safe
 
 @RunWith(RobolectricTestRunner::class)
 class CatalystStateMetadataProviderExecutorTest {
@@ -74,7 +77,7 @@ class CatalystStateMetadataProviderExecutorTest {
 
 
     @Test
-    fun execute_onWritablePreference_notApiFirst_returnsNonWritableDeviceStateItem() = runTest {
+    fun execute_onWritablePreference_notApiFirst_returnsWritableDeviceStateItem() = runTest {
         val metadata = TestPreferenceMetadata(
                 bindingKey = "test_key_writable",
                 isPersistent = true,
@@ -100,17 +103,15 @@ class CatalystStateMetadataProviderExecutorTest {
         assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
             "screen_key/test_key_writable"
         )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isFalse()
+        assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isTrue()
     }
 
-
     @Test
-    fun execute_onNonPersistentPreference_returnsUnwritableDeviceStateItem() = runTest {
-        val metadata =
-            TestPreferenceMetadata(
+    fun execute_onWritablePreference_notApiFirst_notWritable_returnsNotWritableDeviceStateItem() = runTest {
+        val metadata = TestPreferenceMetadata(
                 bindingKey = "test_key_writable",
-                isPersistent = false,
-                writePermit = ReadWritePermit.ALLOW,
+                isPersistent = true,
+                writePermit = null,
             )
         setRegistryFactories(
             createScreen(
@@ -128,48 +129,9 @@ class CatalystStateMetadataProviderExecutorTest {
         )
 
         val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-
-        // single screen
-        assertThat(result.metadata).hasSize(1)
-        // the preference
         assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
         assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
             "screen_key/test_key_writable"
-        )
-        assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isFalse()
-    }
-
-    @Test
-    fun execute_onDisallowedPermitPreference_returnsUnwritableDeviceStateItem() = runTest {
-        val metadata =
-            TestPreferenceMetadata(
-                bindingKey = "test_key_not_writable",
-                isPersistent = true,
-                writePermit = ReadWritePermit.DISALLOW,
-            )
-        setRegistryFactories(
-            createScreen(
-                GraphTestUtils.PreferenceScreenConfig(
-                    "screen_key",
-                    purpose = R.string.preference_screen_purpose,
-                    preferences = listOf(metadata)
-                )
-            )
-        )
-        val executor = CatalystStateMetadataProviderExecutor(
-            buildConfig("screen_key", listOf("test_key_not_writable")),
-            context,
-            englishContext
-        )
-
-        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
-
-        // single screen
-        assertThat(result.metadata).hasSize(1)
-        // the preference
-        assertThat(result.metadata[0].deviceStateItemsMetadata).hasSize(1)
-        assertThat(result.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
-            "screen_key/test_key_not_writable"
         )
         assertThat(result.metadata[0].deviceStateItemsMetadata[0].writable).isFalse()
     }
@@ -246,6 +208,42 @@ class CatalystStateMetadataProviderExecutorTest {
             }. ${
                 context.getString(R.string.preference_screen_purpose)
             }"
+        )
+    }
+
+    @Test
+    fun execute_onScreenWithoutTitle_returnsPurpose() = runTest {
+        setRegistryFactories(
+            createScreen(
+                GraphTestUtils.PreferenceScreenConfig (
+                    "screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    title = 0,
+                    preferences = listOf(
+                        createSimplePreference(
+                            GraphTestUtils.PreferenceConfig(
+                                key = "preference_key",
+                                purpose = R.string.preference_purpose,
+                            )
+                        )
+                    )
+                )
+            )
+        )
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig(
+                "screen_key",
+                listOf("preference_key"),
+            ),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(result.metadata).hasSize(1)
+        assertThat(result.metadata[0].description).isEqualTo (
+                context.getString(R.string.preference_screen_purpose)
         )
     }
 
@@ -433,6 +431,8 @@ class CatalystStateMetadataProviderExecutorTest {
         override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int): Int? =
             writePermit
 
+        override val supportsWrite = writePermit != null
+
         override fun storage(context: Context) = GraphTestUtils.createStorage(null, bindingKey)
     }
 
@@ -448,6 +448,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "true" } }
                 set { execute {} }
             }
@@ -457,6 +458,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "true" } }
             }
         }
@@ -598,6 +600,8 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
                 preconditions("Preference precondition") { Allowed }
                 get {
                     preconditions("Get precondition") { Allowed }
@@ -644,6 +648,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get {
                     execute { "value" }
                 }
@@ -660,6 +665,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get {
                     execute { "value" }
                 }
@@ -679,6 +685,7 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = AnyString,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get {
                     execute { "value" }
                 }
@@ -715,15 +722,15 @@ class CatalystStateMetadataProviderExecutorTest {
 
         val prefSetWarningWithoutPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[0]
         assertThat(prefSetWarningWithoutPreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_without_preconditions")
-        assertThat(prefSetWarningWithoutPreconditionsMetadata.hintText).contains("Warning before writing: Set warning 1 (must be shown).")
+        assertThat(prefSetWarningWithoutPreconditionsMetadata.hintText).contains("[Must show to user]: Set warning 1.")
 
         val prefSetWarningWithPreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[1]
         assertThat(prefSetWarningWithPreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_with_preconditions")
-        assertThat(prefSetWarningWithPreconditionsMetadata.hintText).contains("Warning before writing: Set warning 2 (must be shown if preconditions are met: Set preconditions).")
+        assertThat(prefSetWarningWithPreconditionsMetadata.hintText).contains("[Must show to user]: Set warning 2 (if preconditions are met: Set preconditions).")
 
         val prefSetWarningWithValuePreconditionsMetadata = result.metadata[0].deviceStateItemsMetadata[2]
         assertThat(prefSetWarningWithValuePreconditionsMetadata.key).isEqualTo("set_warning_screen/pref_with_set_warning_with_value_preconditions")
-        assertThat(prefSetWarningWithValuePreconditionsMetadata.hintText).contains("Warning before writing: Set warning 3 (must be shown if preconditions are met: Set value preconditions).")
+        assertThat(prefSetWarningWithValuePreconditionsMetadata.hintText).contains("[Must show to user]: Set warning 3 (if preconditions are met: Set value preconditions).")
     }
 
     @Test
@@ -740,6 +747,285 @@ class CatalystStateMetadataProviderExecutorTest {
         val prefMetadata = result.metadata[0].deviceStateItemsMetadata[0]
         assertThat(prefMetadata.key).isEqualTo("api_first_screen/writable_pref")
         assertThat(prefMetadata.name).isNull()
+    }
+
+    @Test
+    fun execute_onDoNotExposeScreen_doesNotIncludeAnyOfItsData() = runTest {
+        setRegistryFactories(
+            createScreen(
+                PreferenceScreenConfig(
+                    screenKey = "do_not_expose_screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(
+                        createPersistentPreference<Boolean>(
+                            persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                                preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                    key = "no_sensitivity_preference",
+                                    purpose = R.string.preference_purpose,
+                                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                                ),
+                            )
+                        )
+                    ),
+                    sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
+                )
+            )
+        )
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("do_not_expose_screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+        assertThat(deviceStateResult.metadata).hasSize(0)
+    }
+
+    @Test
+    fun execute_onDoNotExposePreference_doesNotIncludeIt() = runTest {
+        setRegistryFactories(
+            createScreen(
+                PreferenceScreenConfig(
+                    screenKey = "no_sensitivity_screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(
+                        createPersistentPreference<Boolean>(
+                            persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                                preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                    key = "do_not_expose_preference",
+                                    purpose = R.string.preference_purpose,
+                                    sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
+                                ),
+                            )
+                        )
+                    ),
+                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                )
+            )
+        )
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("no_sensitivity_screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+        assertThat(deviceStateResult.metadata).hasSize(1)
+        assertThat(deviceStateResult.metadata[0].deviceStateItemsMetadata).hasSize(0)
+    }
+
+    @Test
+    fun execute_onNoSensitivityScreenAndPreference_includesThem() = runTest {
+        setRegistryFactories(
+            createScreen(
+                PreferenceScreenConfig(
+                    screenKey = "no_sensitivity_screen_key",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(
+                        createPersistentPreference<Boolean>(
+                            persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                                preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                    key = "no_sensitivity_preference",
+                                    purpose = R.string.preference_purpose,
+                                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                                ),
+                            )
+                        )
+                    ),
+                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                )
+            )
+        )
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("no_sensitivity_screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(deviceStateResult.metadata).hasSize(1)
+        assertThat(deviceStateResult.metadata[0].deviceStateItemsMetadata).hasSize(1)
+        assertThat(deviceStateResult.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo(
+            "no_sensitivity_screen_key/no_sensitivity_preference"
+        )
+    }
+
+    @Test
+    fun execute_onNoSensitivityNestedScreens_includesOnlyOuterScreen() = runTest {
+        val innerSensitiveScreen = createScreen(
+            PreferenceScreenConfig(
+                screenKey = "inner_no_sensitive_screen_key",
+                purpose = R.string.preference_screen_purpose,
+                preferences = listOf(
+                    createPersistentPreference<Boolean>(
+                        persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                            preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                key = "inner_no_sensitivity_preference",
+                                purpose = R.string.preference_purpose,
+                                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                            ),
+                        )
+                    )
+                ),
+                summary = R.string.preference_screen_summary,
+                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+            )
+        )
+        val outerNoSensitivityScreen = createScreen(
+            PreferenceScreenConfig(
+                screenKey = "outer_no_sensitivity_screen_key",
+                purpose = R.string.preference_screen_purpose,
+                preferences = listOf(
+                    createPersistentPreference<Boolean>(
+                        persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                            preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                key = "outer_no_sensitivity_preference",
+                                purpose = R.string.preference_purpose,
+                                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                            ),
+                        )
+                    ),
+                    innerSensitiveScreen
+                ),
+                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+            )
+        )
+        setRegistryFactories(outerNoSensitivityScreen)
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("outer_no_sensitivity_screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(deviceStateResult.metadata).hasSize(1)
+        assertThat(deviceStateResult.metadata[0].deviceStateItemsMetadata).hasSize(1)
+        assertThat(deviceStateResult.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo("outer_no_sensitivity_screen_key/outer_no_sensitivity_preference")
+    }
+
+    @Test
+    fun invoke_onExposableScreenWithInnerNonExposableScreen_onlyIncludesOuterScreen() = runTest {
+        val innerSensitiveScreen = createScreen(
+            PreferenceScreenConfig(
+                screenKey = "inner_sensitive_screen_key",
+                purpose = R.string.preference_screen_purpose,
+                preferences = listOf(
+                    createPersistentPreference<Boolean>(
+                        persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                            preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                key = "inner_no_sensitivity_preference",
+                                purpose = R.string.preference_purpose,
+                                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                            ),
+                        )
+                    )
+                ),
+                sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE,
+                summary = R.string.preference_screen_summary,
+            )
+        )
+        val outerNoSensitivityScreen = createScreen(
+            PreferenceScreenConfig(
+                screenKey = "outer_no_sensitivity_screen_key",
+                purpose = R.string.preference_screen_purpose,
+                preferences = listOf(
+                    createPersistentPreference<Boolean>(
+                        persistentPreferenceConfig = GraphTestUtils.PersistentPreferenceConfig(
+                            preferenceConfig = GraphTestUtils.PreferenceConfig(
+                                key = "outer_no_sensitivity_preference",
+                                purpose = R.string.preference_purpose,
+                                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                            ),
+                        )
+                    ),
+                    innerSensitiveScreen
+                ),
+                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY,
+                summary = R.string.preference_screen_summary,
+            )
+        )
+        setRegistryFactories(outerNoSensitivityScreen)
+
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("outer_no_sensitivity_screen_key", listOf()),
+            context,
+            englishContext
+        )
+
+        val deviceStateResult = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(deviceStateResult.metadata).hasSize(1)
+        assertThat(deviceStateResult.metadata[0].deviceStateItemsMetadata).hasSize(1)
+        assertThat(deviceStateResult.metadata[0].deviceStateItemsMetadata[0].key).isEqualTo("outer_no_sensitivity_screen_key/outer_no_sensitivity_preference")
+    }
+
+    @Test
+    fun execute_onNoSensitivityScreenWithCategoriesAndVariousSensitivities_hasOnlyNonSensitivityPreferences() = runTest {
+        val noSensPref = createSimplePreference(
+            GraphTestUtils.PreferenceConfig(
+                key = "no_sens_pref",
+                purpose = R.string.preference_purpose,
+                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+            )
+        )
+        val sensPref = createSimplePreference(
+            GraphTestUtils.PreferenceConfig(
+                key = "sens_pref",
+                purpose = R.string.preference_purpose,
+                sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
+            )
+        )
+        val noSensPrefInOuter = createSimplePreference(
+            GraphTestUtils.PreferenceConfig(
+                key = "no_sens_outer",
+                purpose = R.string.preference_purpose,
+                sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+            )
+        )
+        val sensPrefInInner = createSimplePreference(
+            GraphTestUtils.PreferenceConfig(
+                key = "sens_inner",
+                purpose = R.string.preference_purpose,
+                sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
+            )
+        )
+
+        val innerCategory = GraphTestUtils.PreferenceCategoryConfig(
+            key = "inner_category",
+            preferences = listOf(sensPrefInInner)
+        )
+        val outerCategory = GraphTestUtils.PreferenceCategoryConfig(
+            key = "outer_category",
+            preferences = listOf(noSensPrefInOuter),
+            innerCategories = listOf(innerCategory)
+        )
+
+        setRegistryFactories(
+            createScreen(
+                PreferenceScreenConfig(
+                    screenKey = "test_screen",
+                    purpose = R.string.preference_screen_purpose,
+                    preferences = listOf(noSensPref, sensPref),
+                    preferencesInCategories = listOf(outerCategory),
+                    sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
+                )
+            )
+        )
+        val executor = CatalystStateMetadataProviderExecutor(
+            buildConfig("test_screen", listOf()),
+            context,
+            englishContext
+        )
+
+        val result = executor.execute(DeviceStateAppFunctionType.GET_METADATA)
+
+        assertThat(result.metadata).hasSize(1)
+        val screenMetadata = result.metadata[0]
+        assertThat(screenMetadata.deviceStateItemsMetadata).hasSize(2)
+        assertThat(screenMetadata.deviceStateItemsMetadata[0].key).isEqualTo("test_screen/no_sens_pref")
+        assertThat(screenMetadata.deviceStateItemsMetadata[1].key).isEqualTo("test_screen/no_sens_outer")
     }
 
     @Test
@@ -898,18 +1184,19 @@ class CatalystStateMetadataProviderExecutorTest {
                 purpose = R.string.preference_purpose,
                 type = TestEnumType,
             ) {
+                sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
                 get { execute { "OPTION_1" } }
             }
         }
     }
 
-    private object TestEnumType : FiniteOptionsType<String> {
+    private object TestEnumType : DirectFiniteOptionsType<String> {
         override fun getType(): Class<String> = String::class.java
         override fun getKey(): String = "test_enum"
         override fun getDescription(context: Context): String = "Test Enum Description"
-        override suspend fun getOptions(context: Context): List<Pair<String, String>> = listOf(
-            "OPTION_1" to "Option 1",
-            "OPTION_2" to "Option 2"
+        override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<String>, SafetyAnnotated<String>>> = listOf(
+            "OPTION_1".safe() to "Option 1".safe(),
+            "OPTION_2".safe() to "Option 2".safe()
         )
     }
 }

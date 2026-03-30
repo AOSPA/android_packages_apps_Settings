@@ -44,6 +44,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.types.AnyInt
+import com.android.settingslib.metadata.preferencesapi.types.SubscriptionId
 import com.android.settingslib.preference.PreferenceBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -84,6 +85,9 @@ private constructor(
 
     override val key: String
         get() = KEY
+
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
 
     // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
@@ -136,6 +140,9 @@ private constructor(
             )
         }
 
+    override val availabilityDescription =
+        "The subscription must have a GSM APN."
+
     override fun isAvailable(context: Context): Boolean {
         val carrierConfig: PersistableBundle? =
             CarrierConfigCache.getInstance(context).getConfigForSubId(subId)
@@ -157,7 +164,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(ApnSettings.SUB_ID, "The subscription ID", type = AnyInt) // TODO(scottjonathan): Is there a better type to use here
+            parameter(ApnSettings.SUB_ID, "The subscription ID", type = SubscriptionId())
         }
 
         @JvmStatic
