@@ -1056,7 +1056,10 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"WEP நெட்வொர்க்குடன் இணைக்கப்பட்டுள்ளீர்கள். இந்த நெட்வொர்க்குகளை அனுமதிப்பதை நீங்கள் நிறுத்தினால், இணைப்பில் இருந்து துண்டிக்கப்படுவீர்கள்."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"மேம்பட்ட விருப்பங்கள்"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"கீழ் தோன்றும் பட்டியின் மேம்படுத்தப்பட்ட விருப்பங்கள்"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"விரி"</string>
+    <!-- no translation found for wifi_advanced_toggle_action_expand (8286882218084659009) -->
+    <skip />
+    <!-- no translation found for wifi_advanced_toggle_action_collapse (8864441197817185264) -->
+    <skip />
     <string name="wifi_ssid" msgid="5139273830867723030">"நெட்வொர்க் பெயர்*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID ஐ உள்ளிடவும்"</string>
     <string name="wifi_security" msgid="9095934643631406913">"பாதுகாப்பு"</string>
@@ -2309,6 +2312,8 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"அறிவிப்புகள்"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"விரைவு அமைப்புகள்"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"குறிப்பு"</string>
+    <!-- no translation found for action_corner_action_peek_title (4305093703546498134) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g>க்கு ஷார்ட்கட்டைத் தேர்வுசெய்யுங்கள்"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"கீழ் இடது மூலை"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"கீழ் வலது மூலை"</string>
@@ -4629,9 +4634,9 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"இந்த சாதனத்திலோ இணைக்கப்பட்டுள்ள சேமிப்பகங்களிலோ உள்ள ஃபைல்கள் அனைத்தையும் படிக்கவும் நீக்கவும் அவற்றில் மாற்றங்களைச் செய்யவும் இந்த ஆப்ஸை அனுமதிக்கும். அனுமதி வழங்கப்படும் பட்சத்தில் உங்களுக்குத் தெரியாமலேயே ஃபைல்களை ஆப்ஸ் அணுகக்கூடும்."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"அனைத்து ஃபைல்களையும் அணுகமுடிந்த ஆப்ஸ்"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"திரை ஆட்டோமேஷன்"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
+    <!-- no translation found for computer_control_automation_sub_heading (542883453066952146) -->
     <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2086013777547395674) -->
     <skip />
     <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
     <skip />
@@ -4641,11 +4646,10 @@
     <skip />
     <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (6590135080063496543) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ஒவ்வொரு முறையும் கேள்"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"எப்போதும் அனுமதி"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"அனுமதிக்காதே"</string>
     <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
@@ -4653,22 +4657,18 @@
     <skip />
     <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"ஆப்ஸ் அகற்றப்பட்டது"</string>
     <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 ஆப்ஸ் அனுமதிக்கப்பட்டுள்ளது}other{# ஆப்ஸ் அனுமதிக்கப்பட்டுள்ளன}}"</string>
     <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
     <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"எந்த ஆப்ஸும் அனுமதிக்கப்படவில்லை"</string>
     <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"இயல்பு டிஜிட்டல் அசிஸ்டண்ட்"</string>
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
@@ -4679,7 +4679,7 @@
     <skip />
     <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
     <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
+    <!-- no translation found for computer_control_automation_target_list_header (2625151188607263591) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"முழுத்திரை அறிவிப்புகள்"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"இந்த ஆப்ஸிலிருந்து முழுத்திரை அறிவிப்புகளைக் காட்ட அனுமதித்தல்"</string>
@@ -5865,7 +5865,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"ஆப்ஸை நிறுவல் நீக்கு"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{கடந்த # மாதத்தில் நிறுவப்பட்ட ஆப்ஸ்}other{கடந்த # மாதங்களில் நிறுவப்பட்ட ஆப்ஸ்}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# மாதத்திற்கு முன்பு நிறுவப்பட்ட ஆப்ஸ்}other{# மாதங்களுக்கு முன்பு நிறுவப்பட்ட ஆப்ஸ்}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI உதவி"</string>
+    <!-- no translation found for ai_assist_category (6115635022788919643) -->
+    <skip />
     <string name="personal_context_title" msgid="6639623956831710453">"முன்கூட்டிய உதவி"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"பரிந்துரைகளை உருவாக்க, இந்த ஆப்ஸ் தகவல்களை வழங்கலாமா என்பதைத் தேர்வுசெய்யவும்"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"தோற்ற விகிதம்"</string>
@@ -5886,6 +5887,8 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"தோற்ற விகிதத்தை நீங்கள் மாற்றும்போது ஆப்ஸ் மீண்டும் தொடங்கும். சேமிக்கப்படாத மாற்றங்களை நீங்கள் இழக்க நேரிடலாம். குறிப்பிட்ட தோற்ற விகிதங்களில் சில ஆப்ஸைப் பயன்படுத்த முடியாமல் போகலாம்."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"அனுபவம்"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"விர்ச்சுவல் கேம்பேட்"</string>
+    <!-- no translation found for virtual_gamepad_restart_game_toast (5281647814007835224) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"கைரேகை சென்சார்"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ஃபிளாஷ் அறிவிப்புகள்"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ஃபிளாஷ் அறிவிப்புகள் குறித்த அறிமுகம்"</string>
