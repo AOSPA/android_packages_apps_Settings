@@ -25,7 +25,6 @@ import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.TopIntroPreference
 
-// LINT.IfChange
 internal class DarkModeTopIntroPreference :
     PreferenceMetadata, PreferenceBinding, PreferenceTitleProvider {
 
@@ -55,4 +54,3 @@ internal class DarkModeTopIntroPreference :
         const val KEY = "dark_ui_top_intro"
     }
 }
-// LINT.ThenChange(DarkModeTopIntroPreferenceController.java)
