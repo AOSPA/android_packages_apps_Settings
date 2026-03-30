@@ -30,7 +30,9 @@ import static org.mockito.Mockito.when;
 import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.FragmentActivity;
@@ -38,6 +40,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.widget.WorkOnlyCategory;
@@ -264,6 +267,20 @@ public class SettingsPreferenceFragmentTest {
         mFragment2.onAttach(mContext);
 
         verify(mFragment2, times(1)).finish();
+    }
+
+    @Test
+    public void onCreateRecyclerView_shouldSetFocusableToFalse() {
+        // Setup inflater and parent view group
+        final LayoutInflater inflater = LayoutInflater.from(mContext);
+        final ViewGroup parent = new FrameLayout(mContext);
+
+        // Call the method under test
+        final RecyclerView recyclerView = mFragment.onCreateRecyclerView(inflater, parent,
+                null /* savedInstanceState */);
+
+        // Verify that the RecyclerView is explicitly set to non-focusable
+        assertThat(recyclerView.isFocusable()).isFalse();
     }
 
     public static class TestFragment extends SettingsPreferenceFragment {
