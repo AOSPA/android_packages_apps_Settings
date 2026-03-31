@@ -3826,8 +3826,8 @@
     <!-- Label for categories splitter in Settings > Storage [CHAR LIMIT=none] -->
     <string name="storage_system_label">System</string>
 
-    <!-- Message to notify guest users as to why they can't set up the storage device [CHAR LIMIT=50]-->
-    <string name="storage_wizard_guest">Guest mode users cannot format SD cards</string>
+    <!-- Message to notify non-admin users as to why they can't set up the storage device [CHAR LIMIT=50]-->
+    <string name="storage_wizard_guest">Only admins can format SD cards</string>
 
     <!-- In-progress title. This string lets the user know the SD card is being formatted. The user won't be able to proceed with setup until this step is finished. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_progress_title">Formatting <xliff:g id="name" example="SD card">^1</xliff:g>\u2026</string>
