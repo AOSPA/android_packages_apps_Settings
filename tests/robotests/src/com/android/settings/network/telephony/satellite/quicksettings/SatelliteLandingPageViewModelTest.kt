@@ -21,12 +21,14 @@ import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Looper
-import android.os.PersistableBundle
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.satellite.SatelliteManager
 import com.android.settings.R
+import com.android.settings.network.telephony.TelephonyFeatureProvider
+import com.android.settings.network.telephony.satellite.SatelliteSettingsRepository
+import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -71,9 +73,16 @@ class SatelliteLandingPageViewModelTest {
     private val satelliteDisallowedReasonsFlow = MutableStateFlow(intArrayOf())
     private val activeSubIdFlow = MutableStateFlow(SUB_ID)
 
+    private lateinit var fakeFeatureFactory: FakeFeatureFactory
+    @Mock private lateinit var mockTelephonyFeatureProvider: TelephonyFeatureProvider
+    @Mock private lateinit var mockSatelliteSettingsRepository: SatelliteSettingsRepository
+
     @Before
     fun setUp() {
         context = RuntimeEnvironment.getApplication()
+        fakeFeatureFactory = FakeFeatureFactory.setupForTest()
+        `when`(fakeFeatureFactory.telephonyFeatureProvider.satelliteSettingsRepository)
+            .thenReturn(mockSatelliteSettingsRepository)
 
         shadowSatelliteManager =
             Shadow.extract(context.getSystemService(SatelliteManager::class.java))
@@ -82,8 +91,6 @@ class SatelliteLandingPageViewModelTest {
         subInfo = SubscriptionInfo.Builder().setId(SUB_ID).build()
         val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
         shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo))
-        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
-        shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, PersistableBundle())
 
         `when`(satelliteStateRepository.satelliteStatus).thenReturn(satelliteStatusFlow)
         `when`(satelliteStateRepository.isTerrestrialConnected)
@@ -377,18 +384,12 @@ class SatelliteLandingPageViewModelTest {
     }
 
     private fun setLteNtnSupported(isSupported: Boolean) {
-        val config =
-            PersistableBundle().apply {
-                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, isSupported)
-                if (isSupported) {
-                    putInt(
-                        CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                        CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-                    )
-                }
-            }
-        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
-        shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, config)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(SUB_ID))
+            .thenReturn(isSupported)
+        if (isSupported) {
+            `when`(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(SUB_ID))
+                .thenReturn(CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC)
+        }
     }
 
     private fun TestScope.createViewModel(): SatelliteLandingPageViewModel {
@@ -422,12 +423,8 @@ class SatelliteLandingPageViewModelTest {
         val newSubInfo = SubscriptionInfo.Builder().setId(newSubId).build()
         val subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
         shadowOf(subscriptionManager).setActiveSubscriptionInfoList(listOf(subInfo, newSubInfo))
-        val config =
-            PersistableBundle().apply {
-                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
-            }
-        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
-        shadowOf(carrierConfigManager).setConfigForSubId(newSubId, config)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(newSubId))
+            .thenReturn(true)
 
         // Trigger subscription change
         activeSubIdFlow.value = newSubId

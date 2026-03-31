@@ -31,6 +31,7 @@ public class SatelliteSettingsRepository {
     @Nullable
     private SatelliteManager mSatelliteManager;
 
+    @Nullable
     private SatelliteManager getSatelliteManager() {
         if (mSatelliteManager == null) {
             mSatelliteManager = mContext.getSystemService(SatelliteManager.class);
@@ -42,19 +43,22 @@ public class SatelliteSettingsRepository {
         mContext = appContext;
     }
 
-    /** Refers to {@link SatelliteManager.isSatelliteAttachSupported} */
+    /** Refers to {@link SatelliteManager#isSatelliteAttachSupported} */
     public boolean isSatelliteAttachSupported(int subId) {
-        return getSatelliteManager().isSatelliteAttachSupported(subId);
+        SatelliteManager sm = getSatelliteManager();
+        return sm != null && sm.isSatelliteAttachSupported(subId);
     }
 
     /** Refers to {@link SatelliteManager#getSatelliteNtnConnectType} */
     public int getSatelliteNtnConnectType(int subId) {
-        return getSatelliteManager().getSatelliteNtnConnectType(subId);
+        SatelliteManager sm = getSatelliteManager();
+        return sm != null ? sm.getSatelliteNtnConnectType(subId) : 0;
     }
 
     /** Refers to {@link SatelliteManager#isSatelliteEntitlementSupported} */
     public boolean isSatelliteEntitlementSupported(int subId) {
-        return getSatelliteManager().isSatelliteEntitlementSupported(subId);
+        SatelliteManager sm = getSatelliteManager();
+        return sm != null && sm.isSatelliteEntitlementSupported(subId);
     }
 
     /** Returns the value of {@link CarrierConfigManager#KEY_SATELLITE_ESOS_SUPPORTED_BOOL} */
