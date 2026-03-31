@@ -76,6 +76,7 @@ import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.utils.StringUtil;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -657,6 +658,9 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         }
 
         if (accountsCount > 0) {
+            String accountTitle = StringUtil.getIcuPluralsString(context, accountsCount,
+                R.string.main_clear_accounts_count);
+            ((TextView) accountsLabel).setText(accountTitle);
             accountsLabel.setVisibility(View.VISIBLE);
             contents.setVisibility(View.VISIBLE);
         }

@@ -97,6 +97,11 @@ class WifiDataUsagePreference(context: Context):
 
     override fun isAvailable(context: Context): Boolean = isAvailable
 
+    override fun getEnabledDescription() =
+        "The device must have wifi data usage (at least one byte must have been transferred using wifi)."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context): Boolean = isEnabled
 
     override fun intent(context: Context): Intent? = launchIntent

@@ -25,6 +25,7 @@ import android.content.pm.IPackageManager
 import android.content.pm.PackageManager
 import android.os.UserHandle
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
@@ -66,6 +67,7 @@ class VirtualGamepadPresenter(
     private val pm: IPackageManager,
     private val app: ApplicationInfo,
 ) {
+    private var toastShown = false
     val isSystemOverrideEnabled =
         CompatChanges.isChangeEnabled(
             OVERRIDE_ENABLE_VIRTUAL_GAMEPAD,
@@ -86,6 +88,15 @@ class VirtualGamepadPresenter(
     fun onCheckedChange(newChecked: Boolean) {
         _isChecked.value = newChecked
         setEnabled(newChecked)
+        showToast()
+    }
+
+    private fun showToast() {
+        if (!toastShown) {
+            Toast.makeText(context, R.string.virtual_gamepad_restart_game_toast, Toast.LENGTH_SHORT)
+                .show()
+            toastShown = true
+        }
     }
 
     @PackageManager.VirtualGamepadUserOption

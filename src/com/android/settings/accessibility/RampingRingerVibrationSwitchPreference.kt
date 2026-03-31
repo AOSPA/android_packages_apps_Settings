@@ -90,6 +90,10 @@ class RampingRingerVibrationSwitchPreference(
 
     override fun dependencies(context: Context) = arrayOf(ringPreferenceKey)
 
+    override fun getEnabledDescription() = "The vibration setting (vibrate_on) must be enabled and ${ringPreferenceKey} must not be set to 0."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context) = storage.isPreferenceEnabled()
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {

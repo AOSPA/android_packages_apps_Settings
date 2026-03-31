@@ -82,6 +82,10 @@ class KeyboardVibrationSwitchPreference(
         return isVibrationSupported && !isIntensitySupported
     }
 
+    override fun getEnabledDescription() = "The vibration setting (vibrate_on) must be enabled."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context) = storage.isPreferenceEnabled()
 
     override fun storage(context: Context): KeyValueStore = storage

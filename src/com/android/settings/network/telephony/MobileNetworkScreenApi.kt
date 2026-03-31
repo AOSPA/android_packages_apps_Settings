@@ -66,7 +66,8 @@ class MobileNetworkScreenApi :
                 required = true,
                 type =
                     GeneratedParameterType(
-                        R.string.mobile_network_pref_screen_parameter_sub_id_description
+                        R.string.mobile_network_pref_screen_parameter_sub_id_description,
+                        key = "MobileNetworkSubscriptionId"
                     ) {
                         subscriptionRepository.visibleActiveSubscriptionInfoList.map { info ->
                             GeneratedValue(

@@ -81,7 +81,8 @@ open class AutoclickScreen :
 
     override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
-    override fun isAvailable(context: Context): Boolean = InputPeripheralsSettingsUtils.isMouse()
+    override fun isAvailable(context: Context): Boolean =
+        InputPeripheralsSettingsUtils.isMouse() || InputPeripheralsSettingsUtils.isTouchpad()
 
     override fun getSummary(context: Context): CharSequence? {
         val storage = SettingsSecureStore.get(context)

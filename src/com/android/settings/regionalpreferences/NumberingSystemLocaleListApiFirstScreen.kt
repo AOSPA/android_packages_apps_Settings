@@ -58,7 +58,10 @@ class NumberingSystemLocaleListApiFirstScreen :
                 name = KEY_SELECTED_LANGUAGE,
                 purpose = R.string.regional_preference_numbering_system_parameter_purpose,
                 type =
-                    GeneratedParameterType(R.string.numbering_system_parameter_description) {
+                    GeneratedParameterType(
+                        R.string.numbering_system_parameter_description,
+                        key = "NumberingSystemLanguageCode",
+                    ) {
                         getNumberingSystemLocales().map {
                             GeneratedValue(it.toLanguageTag().safe(), getLocaleNameWithNumberingSystem(it).safe())
                         }

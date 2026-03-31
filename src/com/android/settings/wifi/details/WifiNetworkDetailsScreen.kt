@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFa
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
@@ -41,6 +42,7 @@ import kotlinx.coroutines.flow.flow
 
 // TODO(b/418768192): add a lint check to update WifiNetworkDetailsFragment.java when this file is
 // changed and vice versa.
+/** This screen was migrated to the API-first approach in [WifiDetailsScreenApi]. */
 @ProvidePreferenceScreen(WifiNetworkDetailsScreen.KEY, parameterized = true)
 open class WifiNetworkDetailsScreen
 private constructor(
@@ -84,7 +86,7 @@ private constructor(
     override fun getMetricsCategory() = SettingsEnums.WIFI_NETWORK_DETAILS
 
     override fun tags(context: Context) =
-        arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+        arrayOf(TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE, UI_ONLY_PREFERENCE)
 
     override fun getTitle(context: Context): CharSequence = ""
 

@@ -1526,6 +1526,10 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"កូដ PIN មិន​ត្រូវគ្នាទេ។ សូមបញ្ជាក់កូដ PIN ស៊ីមថ្មី។"</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"កូដ PIN ខុស។ នៅសល់​ការព្យាយាម៖ <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> ដង"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"បញ្ចូលកូដ PIN បច្ចុប្បន្នរបស់ស៊ីមកាត"</string>
+    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
+    <skip />
+    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"ប្រើ <xliff:g id="CARRIER">%1$s</xliff:g> ទិន្នន័យទូរសព្ទចល័ត?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"អ្នក​កំពុង​ប្រើប្រាស់ <xliff:g id="CARRIER2_0">%2$s</xliff:g> សម្រាប់​ទិន្នន័យ​ទូរសព្ទចល័ត។ ប្រសិនបើប្ដូរទៅ <xliff:g id="CARRIER1">%1$s</xliff:g> <xliff:g id="CARRIER2_1">%2$s</xliff:g> នឹងមិនត្រូវបានប្រើ​សម្រាប់ទិន្នន័យទូរសព្ទចល័ត​ទៀតទេ។"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"ប្រើ <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2135,15 +2139,13 @@
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"បង្ហាញគ្រាប់ចុចប្ដូរក្ដារចុច"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"អនុញ្ញាតឱ្យបង្ហាញប៊ូតុងប្ដូរក្ដារចុចនៅក្នុងរបាររុករក នៅពេលជ្រើសរើសកន្លែងបញ្ចូល"</string>
     <string name="keyboard_apps_category" msgid="1715169176659877658">"កម្មវិធីក្ដារចុច"</string>
-    <!-- no translation found for keyboard_apps_category_summary (6676804967286517009) -->
-    <skip />
+    <string name="keyboard_apps_category_summary" msgid="6676804967286517009">"ការកំណត់ភាសា និងកម្មវិធីសម្រាប់ <xliff:g id="KEYBOARD_APPS_LIST">%1$s</xliff:g>"</string>
     <string name="keywords_keyboard_apps" msgid="895860348178301718">"Gboard"</string>
     <string name="available_keyboard_apps_category" msgid="7665966484500890112">"កម្មវិធីក្ដារចុចដែលអាចប្រើបាន"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"ជម្រើស"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"ភាពងាយស្រួល"</string>
     <string name="physical_keyboard_title" msgid="6597340453841961909">"ក្ដារចុចរូបវន្ត"</string>
-    <!-- no translation found for physical_keyboard_summary (2751015358747795398) -->
-    <skip />
+    <string name="physical_keyboard_summary" msgid="2751015358747795398">"ការកំណត់ហាតវែរសម្រាប់ <xliff:g id="PHYSICAL_KEYBOARDS_LIST">%1$s</xliff:g>"</string>
     <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"ផ្ទាំងជ្រើសរើសប្លង់"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"គ្រាប់ចុចឡង"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"មិនអើពើការចុចគ្រាប់ចុចតែមួយច្រំដែលយ៉ាងលឿន"</string>
@@ -2206,19 +2208,31 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"ប្ដូរសកម្មភាពដែលបើកដំណើរការដោយប៊ូតុងរបស់ឧបករណ៍បញ្ជាអ្នកតាមបំណង"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"ប៊ូតុង"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"ទិសដៅ"</string>
-    <string name="game_controller_button_a" msgid="2138420373137111774">"ប៊ូតុង A"</string>
-    <string name="game_controller_button_b" msgid="2093089857164437480">"ប៊ូតុង B"</string>
-    <string name="game_controller_button_x" msgid="3428801081204194655">"ប៊ូតុង X"</string>
-    <string name="game_controller_button_y" msgid="4596061542299533516">"ប៊ូតុង Y"</string>
-    <string name="game_controller_button_l1" msgid="4428713182602902434">"ប៊ូតុង L1"</string>
-    <string name="game_controller_button_r1" msgid="6271978600831912659">"ប៊ូតុង R1"</string>
-    <string name="game_controller_button_l2" msgid="4168716287264803566">"ប៊ូតុង L2"</string>
-    <string name="game_controller_button_r2" msgid="4361909018228151006">"ប៊ូតុង R2"</string>
-    <string name="game_controller_button_thumbl" msgid="609311480262927654">"ការចុចដងបញ្ជាខាងឆ្វេង"</string>
-    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"ការចុចដងបញ្ជាខាងស្ដាំ"</string>
+    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
+    <skip />
     <string name="game_controller_dpad" msgid="5352745621298140827">"ឌីផេត"</string>
-    <string name="game_controller_stick_left" msgid="1591700901162153956">"ដងបញ្ជាខាងឆ្វេង"</string>
-    <string name="game_controller_stick_right" msgid="1418791636252375110">"ដងបញ្ជាខាងស្ដាំ"</string>
+    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
+    <skip />
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"កំណត់​ឡើងវិញទៅជាលំនាំដើម"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"កំណត់​ឡើងវិញទៅជាលំនាំដើមឬ?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"ការកំណត់ឧបករណ៍បញ្ជាទាំងអស់របស់អ្នកនឹងត្រូវបានកំណត់ឡើងវិញទៅលំនាំដើម"</string>
@@ -2555,8 +2569,7 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"គ្រាប់ចុច​កម្រិតសំឡេង"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"ចុច​គ្រាប់ចុច​កម្រិតសំឡេង​ទាំងពីរ​ឱ្យជាប់"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"ចុចបីដង"</string>
-    <!-- no translation found for accessibility_shortcut_edit_screen_summary_triple_tap (387169602299548488) -->
-    <skip />
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="387169602299548488">"ចុចអេក្រង់ 3 ដងឱ្យរហ័ស។ ការធ្វើបែបនេះអាចបន្ថយល្បឿនឧបករណ៍របស់អ្នក។"</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"ចុចបីដង"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"ផ្លូវកាត់​ក្ដារចុច"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"ចុច <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> ដើម្បីប្រើ <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -5768,13 +5781,11 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"អនុញ្ញាតបណ្ដាញដែលបានអ៊ីនគ្រីបតែប៉ុណ្ណោះ"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ការធ្វើបែបនេះកាន់តែមានសុវត្ថិភាព ប៉ុន្តែអាចដាក់កំហិតការតភ្ជាប់បណ្ដាញ​ទូរសព្ទ​ចល័តរបស់អ្នកនៅក្នុងទីតាំងមួយចំនួន។ ការហៅទៅលេខសង្គ្រោះបន្ទាន់ត្រូវបានអនុញ្ញាតជានិច្ច។"</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"បិទការការពារបណ្ដាញ 2G ឬ?"</string>
-    <!-- no translation found for network_protection_2g_off_alert_dialog_desc (7888326960588858860) -->
-    <skip />
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"បណ្ដាញ 2G មិនសូវមានសុវត្ថិភាពទេ ហើយការបិទមុខងារនេះធ្វើឱ្យការហៅទូរសព្ទ សារ និងទិន្នន័យរបស់អ្នកងាយរងគ្រោះពីការស្កាត់យក ឬការលួច"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"បិទ"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"ការការពារបណ្ដាញ 2G"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"ការការពារបណ្ដាញ 2G ត្រូវបានបើក"</string>
-    <!-- no translation found for network_protection_2g_on_notification_summary (2865716658412002901) -->
-    <skip />
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"អ្នកអាចបិទមុខងារនេះនៅក្នុងការកំណត់ ប៉ុន្តែ 2G មិនសូវមានសុវត្ថិភាព និងអាចបង្កហានិភ័យដល់ទិន្នន័យរបស់អ្នក"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"ការកំណត់"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"សេវាកម្មទាំងអស់"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"បង្ហាញការចូលប្រើឃ្លីបបត"</string>
@@ -5856,12 +5867,9 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"លុប​កម្មវិធី"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{កម្មវិធីដែលបានដំឡើង # ខែចុងក្រោយ}other{កម្មវិធីដែលបានដំឡើង # ខែចុងក្រោយ}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{កម្មវិធីដែលបានដំឡើង​លើសពី # ខែមុន}other{កម្មវិធីដែលបានដំឡើង​លើសពី # ខែមុន}}"</string>
-    <!-- no translation found for ai_assist_category (6800674613544630195) -->
-    <skip />
-    <!-- no translation found for personal_context_title (6639623956831710453) -->
-    <skip />
-    <!-- no translation found for personal_context_switch_summary (917644125592480347) -->
-    <skip />
+    <string name="ai_assist_category" msgid="6800674613544630195">"ជំនួយ AI"</string>
+    <string name="personal_context_title" msgid="6639623956831710453">"ជំនួយសកម្មជាមុន"</string>
+    <string name="personal_context_switch_summary" msgid="917644125592480347">"ជ្រើសរើសថាតើកម្មវិធីនេះអាចចូលរួមចំណែកផ្ដល់ព័ត៌មាន ដើម្បីបង្កើតការណែនាំឬអត់"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"សមាមាត្រ"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"សាកល្បងប្រើ​សមាមាត្រថ្មី ដើម្បីមើលកម្មវិធីនេះ ប្រសិនបើ​វាមិនត្រូវបានរចនាឡើងឱ្យ​ប៉ុនគ្នានឹងទំហំ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> របស់អ្នកទេ"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"សាកល្បងប្រើ​សមាមាត្រថ្មី ដើម្បីមើលកម្មវិធីនេះ ប្រសិនបើ​វាមិនត្រូវបានរចនាឡើងឱ្យ​ប៉ុនគ្នានឹងទំហំ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> របស់អ្នកទេ។ កម្មវិធីមួយចំនួនប្រហែលជាមិនស័ក្ដិសមសម្រាប់សមាមាត្រជាក់លាក់ទេ។"</string>
