@@ -47,6 +47,8 @@ import androidx.annotation.VisibleForTesting;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.android.settings.R;
+import com.android.settings.development.bluetooth.LeAudioHwOffloadPreferenceController;
+import com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
@@ -278,12 +280,12 @@ public class DevelopmentSettingsDashboardFragment extends RestrictedDashboardFra
                     EnableDevelopmentSettingWarningDialog.show(this /* host */);
                 }
             } else {
-                final BluetoothA2dpHwOffloadPreferenceController a2dpController =
+                final A2dpHwOffloadPreferenceController a2dpController =
                         getDevelopmentOptionsController(
-                                BluetoothA2dpHwOffloadPreferenceController.class);
-                final BluetoothLeAudioHwOffloadPreferenceController leAudioController =
+                                A2dpHwOffloadPreferenceController.class);
+                final LeAudioHwOffloadPreferenceController leAudioController =
                         getDevelopmentOptionsController(
-                                BluetoothLeAudioHwOffloadPreferenceController.class);
+                                LeAudioHwOffloadPreferenceController.class);
                 final NfcSnoopLogPreferenceController nfcSnoopLogController =
                         getDevelopmentOptionsController(
                                 NfcSnoopLogPreferenceController.class);
