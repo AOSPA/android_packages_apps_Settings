@@ -34,6 +34,7 @@ import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.flags.Flags.FLAG_ENABLE_SATELLITE_TOGGLE
+import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settingslib.widget.MainSwitchPreference
 import com.google.common.truth.Truth.assertThat
 import java.util.concurrent.Executor
@@ -42,9 +43,11 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
@@ -68,9 +71,16 @@ class SatelliteSettingMainSwitchControllerTest {
     private lateinit var satelliteManager: SatelliteManager
     private val carrierConfig = PersistableBundle()
 
+    private lateinit var fakeFeatureFactory: FakeFeatureFactory
+    @Mock private lateinit var mockSatelliteSettingsRepository: SatelliteSettingsRepository
+
     @Before
     fun setUp() {
         context = ApplicationProvider.getApplicationContext()
+        fakeFeatureFactory = FakeFeatureFactory.setupForTest()
+        `when`(fakeFeatureFactory.telephonyFeatureProvider.satelliteSettingsRepository)
+            .thenReturn(mockSatelliteSettingsRepository)
+
         satelliteManager = context.getSystemService(SatelliteManager::class.java)
         preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
         controller = SatelliteSettingMainSwitchController(context, "satellite_setting_main_switch")
@@ -80,17 +90,15 @@ class SatelliteSettingMainSwitchControllerTest {
         preferenceScreen.addPreference(switchPreference)
 
         ShadowSatelliteManager.reset()
-        carrierConfig.putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
-        carrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-        )
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(SUB_ID)).thenReturn(true)
+        `when`(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(SUB_ID))
+            .thenReturn(CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC)
     }
 
     @Test
     @DisableFlags(FLAG_ENABLE_SATELLITE_TOGGLE)
     fun getAvailabilityStatus_flagOff_isUnavailable() {
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        controller.init(SUB_ID, satelliteManager)
 
         assertThat(controller.getAvailabilityStatus(SUB_ID))
             .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE)
@@ -99,11 +107,9 @@ class SatelliteSettingMainSwitchControllerTest {
     @Test
     @EnableFlags(FLAG_ENABLE_SATELLITE_TOGGLE)
     fun getAvailabilityStatus_manual_isUnavailable() {
-        carrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
-        )
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        `when`(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(SUB_ID))
+            .thenReturn(CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL)
+        controller.init(SUB_ID, satelliteManager)
 
         assertThat(controller.getAvailabilityStatus(SUB_ID))
             .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE)
@@ -112,12 +118,10 @@ class SatelliteSettingMainSwitchControllerTest {
     @Test
     @EnableFlags(FLAG_ENABLE_SATELLITE_TOGGLE)
     fun getAvailabilityStatus_attachNotSupported_isUnavailable() {
-        carrierConfig.putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
-        carrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-        )
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(SUB_ID)).thenReturn(false)
+        `when`(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(SUB_ID))
+            .thenReturn(CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC)
+        controller.init(SUB_ID, satelliteManager)
 
         assertThat(controller.getAvailabilityStatus(SUB_ID))
             .isEqualTo(BasePreferenceController.CONDITIONALLY_UNAVAILABLE)
@@ -126,11 +130,9 @@ class SatelliteSettingMainSwitchControllerTest {
     @Test
     @EnableFlags(FLAG_ENABLE_SATELLITE_TOGGLE)
     fun getAvailabilityStatus_automatic_isAvailable() {
-        carrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-        )
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        `when`(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(SUB_ID))
+            .thenReturn(CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC)
+        controller.init(SUB_ID, satelliteManager)
 
         assertThat(controller.getAvailabilityStatus(SUB_ID))
             .isEqualTo(BasePreferenceController.AVAILABLE)
@@ -139,11 +141,9 @@ class SatelliteSettingMainSwitchControllerTest {
     @Test
     @EnableFlags(FLAG_ENABLE_SATELLITE_TOGGLE)
     fun getAvailabilityStatus_hybrid_isAvailable() {
-        carrierConfig.putInt(
-            CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID,
-        )
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        `when`(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(SUB_ID))
+            .thenReturn(CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID)
+        controller.init(SUB_ID, satelliteManager)
 
         assertThat(controller.getAvailabilityStatus(SUB_ID))
             .isEqualTo(BasePreferenceController.AVAILABLE)
@@ -156,7 +156,7 @@ class SatelliteSettingMainSwitchControllerTest {
         val expectedResponse = EnableResponse(true, false, false, intArrayOf())
         ShadowSatelliteManager.setRequestIsEnabledResult(expectedResponse)
 
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        controller.init(SUB_ID, satelliteManager)
         shadowOf(Looper.getMainLooper()).idle()
 
         assertThat(controller.isChecked()).isTrue()
@@ -168,7 +168,7 @@ class SatelliteSettingMainSwitchControllerTest {
         val expectedResponse = EnableResponse(true, false, false, intArrayOf())
         ShadowSatelliteManager.setRequestIsEnabledResult(expectedResponse)
 
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        controller.init(SUB_ID, satelliteManager)
         shadowOf(Looper.getMainLooper()).idle()
 
         controller.updateState(switchPreference)
@@ -184,7 +184,7 @@ class SatelliteSettingMainSwitchControllerTest {
         ShadowSatelliteManager.setRequestIsEnabledResult(expectedResponse)
 
         controller.displayPreference(preferenceScreen)
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        controller.init(SUB_ID, satelliteManager)
         shadowOf(Looper.getMainLooper()).idle()
 
         assertThat(controller.isChecked()).isTrue()
@@ -197,7 +197,7 @@ class SatelliteSettingMainSwitchControllerTest {
     fun setChecked_true_success_updatesStateAndCallsManager() {
         ShadowSatelliteManager.setRequestEnabledResult(SATELLITE_RESULT_SUCCESS)
 
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        controller.init(SUB_ID, satelliteManager)
         controller.displayPreference(preferenceScreen)
 
         val result = controller.setChecked(true)
@@ -221,7 +221,7 @@ class SatelliteSettingMainSwitchControllerTest {
         ShadowSatelliteManager.setRequestIsEnabledResult(
             EnableResponse(false, false, false, intArrayOf())
         )
-        controller.init(SUB_ID, carrierConfig, satelliteManager)
+        controller.init(SUB_ID, satelliteManager)
         shadowOf(Looper.getMainLooper()).idle()
         controller.displayPreference(preferenceScreen)
         assertThat(controller.isChecked()).isFalse()
