@@ -16,15 +16,21 @@
 
 package com.android.settings.accessibility;
 
+import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.VibrationAttributes;
 import android.os.vibrator.Flags;
 import android.provider.Settings;
 
+import com.android.settings.overlay.FeatureFactory;
+import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
+
 /** Preference controller for keyboard vibration intensity slider */
 // LINT.IfChange
 public class KeyboardVibrationIntensitySliderPreferenceController
         extends VibrationIntensityPreferenceController {
+
+    private final MetricsFeatureProvider mMetricsFeatureProvider;
 
     /** General configuration for keyboard vibration intensity settings. */
     public static final class KeyboardVibrationPreferenceConfig extends VibrationPreferenceConfig {
@@ -38,12 +44,14 @@ public class KeyboardVibrationIntensitySliderPreferenceController
     public KeyboardVibrationIntensitySliderPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey, new KeyboardVibrationPreferenceConfig(context));
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     protected KeyboardVibrationIntensitySliderPreferenceController(Context context,
             String preferenceKey, int supportedIntensityLevels) {
         super(context, preferenceKey, new KeyboardVibrationPreferenceConfig(context),
                 supportedIntensityLevels);
+        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -55,6 +63,16 @@ public class KeyboardVibrationIntensitySliderPreferenceController
         final boolean isIntensityFlagEnabled = Flags.keyboardIntensitySliderEnabled();
         return (isVibrationSupported && isIntensitySupported && isIntensityFlagEnabled)
                 ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
+    }
+
+    @Override
+    public boolean setSliderPosition(int position) {
+        final boolean success = super.setSliderPosition(position);
+        if (success) {
+            mMetricsFeatureProvider.action(mContext,
+                    SettingsEnums.ACTION_KEYBOARD_VIBRATION_INTENSITY_CHANGED, position);
+        }
+        return success;
     }
 }
 // LINT.ThenChange(KeyboardVibrationIntensitySliderPreference.kt)
