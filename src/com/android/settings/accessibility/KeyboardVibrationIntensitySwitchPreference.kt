@@ -15,11 +15,13 @@
  */
 package com.android.settings.accessibility
 
+import android.app.settings.SettingsEnums
 import android.content.Context
 import android.os.VibrationAttributes
 import android.os.vibrator.Flags
 import android.provider.Settings.System.KEYBOARD_VIBRATION_INTENSITY
 import com.android.settings.R
+import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.ReadWritePermit
@@ -41,7 +43,12 @@ class KeyboardVibrationIntensitySwitchPreference(
         vibrationUsage = VibrationAttributes.USAGE_IME_FEEDBACK,
         title = R.string.accessibility_keyboard_vibration_title,
     ),
+    PreferenceActionMetricsProvider,
     PreferenceAvailabilityProvider {
+
+    override val preferenceActionMetrics: Int
+        get() = SettingsEnums.ACTION_KEYBOARD_VIBRATION_INTENSITY_CHANGED
+
     override val keywords: Int
         get() = R.string.keywords_keyboard_vibration
 
