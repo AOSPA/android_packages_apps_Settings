@@ -364,7 +364,14 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
     }
 
     private void showPinEntryDialog() {
-        showPinEntryDialog(EnterSimPinDialogFragment.newEnterCurrentPin());
+        EnterSimPinDialogFragment df;
+
+        if (mEnrollmentState == EnrollmentState.UNENROLL_FROM_MANUAL_PIN_MANAGEMENT) {
+            df = EnterSimPinDialogFragment.newEnterCurrentPinToTurnOff();
+        } else {
+            df = EnterSimPinDialogFragment.newEnterCurrentPin();
+        }
+        showPinEntryDialog(df);
     }
 
     private void showPinEntryDialog(EnterSimPinDialogFragment df) {

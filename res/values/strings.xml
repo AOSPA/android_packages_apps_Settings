@@ -3567,9 +3567,11 @@
     <!-- Automatic SIM card lock protection screen, preference summary when there is no lockscreen so the feature cannot be turned on. [CHAR LIMIT=NONE] -->
     <string name="sim_protection_mode_lskf_required">Lockscreen required for automatic SIM protection, manual only available now</string>
     <!-- Enrollment into automatic SIM PIN management dialog, title. [CHAR LIMIT=40] -->
-    <string name="provide_current_sim_pin_title">Enter current SIM PIN</string>
-    <!-- Enrollment into automatic SIM PIN management dialog, text. [CHAR LIMIT=NONE] -->
-    <string name="provide_current_sim_pin">Enter the SIM card current PIN</string>
+    <string name="provide_current_sim_pin_title">Enter PIN to turn on SIM lock</string>
+    <!-- Enrollment into automatic SIM PIN management dialog or manual SIM PIN, text. [CHAR LIMIT=NONE] -->
+    <string name="provide_current_sim_pin">Enter your SIM PIN to continue</string>
+    <!-- Unenrollment from manual SIM PIN dialog, title. [CHAR LIMIT=40] -->
+    <string name="turn_off_manual_sim_pin_title">Enter PIN to turn off SIM lock</string>
     <!-- Enrollment into automatic SIM PIN management dialog, button for using carrier default PIN. [CHAR LIMIT=25] -->
     <string name="use_carrier_default_pin">Use carrier default</string>
     <!-- Protecting SIM card via PIN, enrolling into automatic or manual management. [CHAR LIMIT=NONE] -->
@@ -3579,15 +3581,17 @@
     <!-- Protecting SIM card via PIN, automatic management mode. [CHAR LIMIT=NONE] -->
     <string name="sim_pin_protection_mode_automatic">Automatic (Android-managed)</string>
     <!-- Dialog for entering the SIM PIN, title. [CHAR LIMIT=NONE] -->
-    <string name="provide_new_sim_pin_title">New SIM PIN</string>
+    <string name="provide_new_sim_pin_title">Set a new SIM PIN</string>
+    <!-- Dialog for entering the SIM PIN, text. [CHAR LIMIT=NONE] -->
+    <string name="provide_new_sim_pin">SIM PIN must be 4 to 8 digits</string>
     <!-- Dialog for confirming the SIM PIN, title. [CHAR LIMIT=NONE] -->
-    <string name="confirm_new_sim_pin_title">Confirm new SIM PIN</string>
+    <string name="confirm_new_sim_pin_title">Re-enter your SIM PIN</string>
     <!-- Error message shown to the user if the confirmed PIN does not match the new PIN entered. [CHAR LIMIT=NONE] -->
     <string name="confirm_new_sim_pin_after_mismatch">PINs do not match. Confirm the new SIM PIN.</string>
     <!-- Error message shown to the user if the current PIN provided is wrong. [CHAR LIMIT=NONE] -->
     <string name="enter_current_sim_pin_after_mismatch">Wrong PIN. Attempts remaining: <xliff:g id="num_attempts">%1$d</xliff:g></string>
     <!-- Accessibility hint - tell the user they should be entering the currend SIM card PIN. [CHAR LIMIT=NONE] -->
-    <string name="enter_current_sim_pin_hint">Enter the current PIN code of the SIM card</string>
+    <string name="enter_current_sim_pin_hint">Enter a PIN code for the SIM card</string>
     <!-- The title for the first SIM card slot preference. [CHAR LIMIT=NONE] -->
     <string name="first_sim_card_slot_title">First SIM card slot</string>
     <!-- The title for the second SIM card slot preference. [CHAR LIMIT=NONE] -->
