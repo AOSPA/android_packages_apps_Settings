@@ -36,7 +36,6 @@ import com.android.settings.R;
 import com.android.settings.network.telephony.ConvertToEsimPreferenceController;
 import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
-import com.android.settingslib.widget.IntroPreference;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -117,14 +116,10 @@ public class ProtectSimPrimaryScreenFragmentTest {
         mFragment.onAttach(mContext);
         mFragment.setAutoManagedSimPinHelperForTesting(mAutoManagedSimPinHelper);
 
-        IntroPreference intro0 = new IntroPreference(mContext);
         PreferenceCategory category0 = new PreferenceCategory(mContext);
-        IntroPreference intro1 = new IntroPreference(mContext);
         PreferenceCategory category1 = new PreferenceCategory(mContext);
 
-        doReturn(intro0).when(mFragment).findPreference("first_active_slot_intro");
         doReturn(category0).when(mFragment).findPreference("category_first_sim_card_slot");
-        doReturn(intro1).when(mFragment).findPreference("second_active_slot_intro");
         doReturn(category1).when(mFragment).findPreference("category_second_sim_card_slot");
 
         when(mAutoManagedSimPinHelper.getActiveSlots()).thenReturn(new int[]{0, 1});
@@ -139,8 +134,8 @@ public class ProtectSimPrimaryScreenFragmentTest {
 
         mFragment.onResume();
 
-        assertThat(intro0.getTitle().toString()).isEqualTo("Carrier 0");
-        assertThat(intro1.getTitle().toString()).isEqualTo("Carrier 1");
+        assertThat(category0.getTitle().toString()).isEqualTo("Carrier 0");
+        assertThat(category1.getTitle().toString()).isEqualTo("Carrier 1");
     }
 
     @Test
@@ -149,17 +144,14 @@ public class ProtectSimPrimaryScreenFragmentTest {
         mFragment.onAttach(mContext);
         mFragment.setAutoManagedSimPinHelperForTesting(mAutoManagedSimPinHelper);
 
-        IntroPreference intro0 = new IntroPreference(mContext);
         PreferenceCategory category0 = new PreferenceCategory(mContext);
 
-        doReturn(intro0).when(mFragment).findPreference("first_active_slot_intro");
         doReturn(category0).when(mFragment).findPreference("category_first_sim_card_slot");
 
         when(mAutoManagedSimPinHelper.getActiveSlots()).thenReturn(new int[]{});
 
         mFragment.onResume();
 
-        assertThat(intro0.isVisible()).isFalse();
         assertThat(category0.isVisible()).isFalse();
     }
 

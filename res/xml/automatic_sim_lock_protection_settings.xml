@@ -16,15 +16,10 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/automatic_sim_lock_protection">
+    android:title="@string/sim_lock_settings">
 
     <PreferenceCategory
-        android:title="@string/first_sim_card_slot_title"
         android:key="category_first_sim_card_slot">
-
-        <com.android.settingslib.widget.IntroPreference
-            android:key="first_active_slot_intro"
-            android:selectable="false" />
 
         <SwitchPreferenceCompat
             android:key="sim_pin_manual_management_only_toggle_0"
@@ -44,12 +39,7 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="category_second_sim_card_slot"
-        android:title="@string/second_sim_card_slot_title">
-
-        <com.android.settingslib.widget.IntroPreference
-            android:key="second_active_slot_intro"
-            android:selectable="false" />
+        android:key="category_second_sim_card_slot">
 
         <SwitchPreferenceCompat
             android:key="sim_pin_manual_management_only_toggle_1"
