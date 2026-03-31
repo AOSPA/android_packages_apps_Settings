@@ -20,7 +20,10 @@ import android.content.Context
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.accessibility.setupwizard.items.SliderItem
+import com.android.settings.accessibility.textreading.data.DisplaySizeDataStore
+import com.android.settings.accessibility.textreading.ui.DisplaySizeDelegate
 import com.android.settings.accessibility.textreading.ui.DisplaySizePreference
+import com.google.android.material.slider.Slider
 import com.google.android.setupdesign.items.Item
 
 /** Controller for the display size slider item in the Accessibility Setup Wizard. */
@@ -29,6 +32,11 @@ internal class DisplaySizeSliderItemController(
     item: Item,
     private val metadata: DisplaySizePreference,
 ) : BaseItemController(item) {
+
+    private val displaySizeDataStore = metadata.storage(context) as DisplaySizeDataStore
+    private val delegate by lazy {
+        DisplaySizeDelegate(displaySizeDataStore = displaySizeDataStore, dataStoreKey = KEY)
+    }
 
     override fun bindData(item: Item) {
         (item as? SliderItem)?.apply {
@@ -39,7 +47,21 @@ internal class DisplaySizeSliderItemController(
                     min = minValue
                     max = maxValue
                     sliderIncrement = getIncrementStep(context)
-                    isVisible = true
+                    sliderValue = delegate.sizePreview.value.currentIndex
+                    extraChangeListener =
+                        Slider.OnChangeListener { _, value, _ ->
+                            delegate.onValueChange(index = value.toInt())
+                        }
+                    extraTouchListener =
+                        object : Slider.OnSliderTouchListener {
+                            override fun onStartTrackingTouch(slider: Slider) {
+                                delegate.onStartTrackingTouch()
+                            }
+
+                            override fun onStopTrackingTouch(slider: Slider) {
+                                delegate.onStopTrackingTouch(slider.value.toInt())
+                            }
+                        }
                 } else {
                     // Determine visibility based on range availability.
                     // If min equals max, we provide a valid fallback range to prevent

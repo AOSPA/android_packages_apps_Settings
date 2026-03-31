@@ -63,6 +63,9 @@ class SliderItem : Item {
             }
         }
 
+    var extraTouchListener: Slider.OnSliderTouchListener? = null
+    var extraChangeListener: Slider.OnChangeListener? = null
+
     /**
      * Listener reacting to the user pressing DPAD left/right keys if {@code adjustable} attribute
      * is set to true; it transfers the key presses to the {@link Slider} to be handled accordingly.
@@ -96,19 +99,27 @@ class SliderItem : Item {
         object : Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) {
                 isTrackingTouch = true
+                extraTouchListener?.onStartTrackingTouch(slider)
             }
 
             override fun onStopTrackingTouch(slider: Slider) {
                 isTrackingTouch = false
                 syncValueInternal(slider)
+                extraTouchListener?.onStopTrackingTouch(slider)
             }
         }
 
     private val sliderChangeListener =
         Slider.OnChangeListener { slider, value, fromUser ->
+            val intValue = value.toInt()
+            sliderStateDescriptionProvider?.let { provider ->
+                slider.stateDescription = provider.getStateDescription(intValue)
+            }
+
             if (fromUser && (updatesContinuously || !isTrackingTouch)) {
                 syncValueInternal(slider)
             }
+            extraChangeListener?.onValueChange(slider, value, fromUser)
         }
 
     var sliderValue: Int = 0
@@ -208,11 +219,10 @@ class SliderItem : Item {
             }
         }
 
-    var sliderStateDescription: CharSequence? = null
+    var sliderStateDescriptionProvider: SliderStateDescriptionProvider? = null
         set(value) {
             if (field != value) {
                 field = value
-                notifyChanged()
             }
         }
 
@@ -294,10 +304,8 @@ class SliderItem : Item {
             } else {
                 setContentDescription(null)
             }
-            if (!sliderStateDescription.isNullOrEmpty()) {
-                setStateDescription(sliderStateDescription)
-            } else {
-                setStateDescription(null)
+            sliderStateDescriptionProvider?.let { provider ->
+                stateDescription = provider.getStateDescription(sliderValue)
             }
 
             valueFrom = min.toFloat()
@@ -409,6 +417,10 @@ class SliderItem : Item {
     @IntDef(HAPTIC_FEEDBACK_MODE_NONE, HAPTIC_FEEDBACK_MODE_ON_TICKS, HAPTIC_FEEDBACK_MODE_ON_ENDS)
     @Retention(AnnotationRetention.SOURCE)
     annotation class HapticFeedbackMode
+
+    fun interface SliderStateDescriptionProvider {
+        fun getStateDescription(value: Int): CharSequence?
+    }
 
     companion object {
         const val HAPTIC_FEEDBACK_MODE_NONE = 0
