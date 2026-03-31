@@ -49,6 +49,8 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.settings.R
 import com.android.settings.fuelgauge.PowerUsageFeatureProvider
+import com.android.settings.network.telephony.TelephonyFeatureProvider
+import com.android.settings.network.telephony.satellite.SatelliteSettingsRepository
 import com.android.settings.overlay.FeatureFactory
 import com.android.settings.spa.preference.ComposePreference
 import com.android.settingslib.RestrictedLockUtilsInternal
@@ -108,6 +110,8 @@ class SatelliteLandingPageFragmentTest {
     @Mock private lateinit var mockMetricsFeatureProvider: MetricsFeatureProvider
     @Mock private lateinit var mockFeatureFactory: FeatureFactory
     @Mock private lateinit var mockPowerUsageFeatureProvider: PowerUsageFeatureProvider
+    @Mock private lateinit var mockTelephonyFeatureProvider: TelephonyFeatureProvider
+    @Mock private lateinit var mockSatelliteSettingsRepository: SatelliteSettingsRepository
 
     private lateinit var fragmentFactory: FragmentFactory
     private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.NOT_AVAILABLE)
@@ -134,12 +138,16 @@ class SatelliteLandingPageFragmentTest {
         `when`(mockFeatureFactory.metricsFeatureProvider).thenReturn(mockMetricsFeatureProvider)
         `when`(mockFeatureFactory.powerUsageFeatureProvider)
             .thenReturn(mockPowerUsageFeatureProvider)
+        `when`(mockFeatureFactory.telephonyFeatureProvider).thenReturn(mockTelephonyFeatureProvider)
+        `when`(mockTelephonyFeatureProvider.satelliteSettingsRepository)
+            .thenReturn(mockSatelliteSettingsRepository)
         FeatureFactory.setFactory(context, mockFeatureFactory)
 
         // Mock SatelliteUtils
         // Default to not supported
+        whenever(SatelliteUtils.isLteBasedNtnSupported(anyInt())).thenReturn(false)
         whenever(SatelliteUtils.isLteBasedNtnSupported(any(), anyInt())).thenReturn(false)
-        whenever(SatelliteUtils.isCarrierRoamingNtnSupported(any(), anyInt())).thenReturn(false)
+        whenever(SatelliteUtils.isCarrierRoamingNtnSupported(anyInt())).thenReturn(false)
 
         // Mock RestrictedLockUtilsInternal
         whenever(
@@ -340,7 +348,8 @@ class SatelliteLandingPageFragmentTest {
         setupPackageManagerForApp(APP1_PACKAGE, APP1_NAME, Intent(APP1_INTENT_ACTION))
 
         val scenario = launchFragment()
-        composeTestRule.waitForIdle()
+        scenario.onFragment { fragment -> fragment.viewModel.refresh() }
+        waitForAsync()
 
         scenario.onFragment { fragment ->
             val composePref = fragment.findPreference<ComposePreference>("satellite_apps_list")
@@ -425,6 +434,8 @@ class SatelliteLandingPageFragmentTest {
         setLteNtnSupported(true)
 
         val scenario = launchFragment()
+        scenario.onFragment { fragment -> fragment.viewModel.refresh() }
+        waitForAsync()
 
         scenario.onFragment { fragment ->
             val footer = fragment.findPreference<FooterPreference>("footer")
@@ -438,6 +449,8 @@ class SatelliteLandingPageFragmentTest {
         setLteNtnSupported(false)
 
         val scenario = launchFragment()
+        scenario.onFragment { fragment -> fragment.viewModel.refresh() }
+        waitForAsync()
 
         scenario.onFragment { fragment ->
             val footer = fragment.findPreference<FooterPreference>("footer")
@@ -560,7 +573,11 @@ class SatelliteLandingPageFragmentTest {
         setLteNtnSupported(true)
         val scenario = launchFragment()
 
-        scenario.onFragment { fragment -> fragment.viewModel.refresh() }
+        scenario.onFragment { fragment ->
+            // Reset the metric log flag to ensure refresh() triggers the log
+            setField(fragment, "isVariantMetricLogged", false)
+            fragment.viewModel.refresh()
+        }
         waitForAsync()
 
         verify(mockMetricsFeatureProvider)
@@ -648,6 +665,7 @@ class SatelliteLandingPageFragmentTest {
 
     private fun setLteNtnSupported(isSupported: Boolean) {
         // Mock SatelliteUtils to return the desired support status
+        whenever(SatelliteUtils.isLteBasedNtnSupported(anyInt())).thenReturn(isSupported)
         whenever(SatelliteUtils.isLteBasedNtnSupported(any(), anyInt())).thenReturn(isSupported)
     }
 
@@ -664,5 +682,11 @@ class SatelliteLandingPageFragmentTest {
         field.isAccessible = true
         @Suppress("UNCHECKED_CAST")
         return field.get(target) as T
+    }
+
+    private fun setField(target: Any, fieldName: String, value: Any?) {
+        val field = target::class.java.getDeclaredField(fieldName)
+        field.isAccessible = true
+        field.set(target, value)
     }
 }
