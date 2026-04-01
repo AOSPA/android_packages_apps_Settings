@@ -21,10 +21,10 @@
     <string name="spatial_audio_screen_hardware_unsupported" translatable="false">Spatialization is not enabled.</string>
     <string name="spatial_audio_phone_speaker_hardware_unsupported" translatable="false">Spatialization is not available for the device speaker.</string>
     <string name="api_dark_theme_screen_preconditions" translatable="false">Battery Saver must be off or the device must allow Dark theme settings during Battery Saver</string>
-    <string name="api_dark_theme_screen_invalid_preference" translatable="false">The Battery Saver is turned on.</string>
+    <string name="api_dark_theme_screen_invalid_preference" translatable="false">Battery Saver is turned on.</string>
     <string name="dark_theme_custom_time_precondition" translatable="false">The device must be configured to use a custom dark theme schedule.</string>
     <string name="dark_theme_custom_time_invalid_preference" translatable="false">Dark theme schedule is not set to custom time.</string>
-    <string name="dark_theme_power_saver_precondition" translatable="false">The Battery Saver must be off. </string>
+    <string name="dark_theme_power_saver_precondition" translatable="false">Battery Saver must be off. </string>
     <string name="managed_profile_settings_screen_preconditions" translatable="false">The device must have a work profile.</string>
     <string name="managed_profile_settings_screen_not_supported" translatable="false">The work profile is not set up on this device.</string>
     <string name="app_launch_settings_screen_preconditions" translatable="false">The app must be installed and enabled, and must not be an instant app or a browser app.</string>
@@ -43,8 +43,8 @@
     <string name="gesture_settings_screen_all_controllers_not_available" translatable="false">The device has no available gesture controllers.</string>
     <string name="double_twist_gesture_screen_preconditions" translatable="false">The device must have a Double Twist sensor.</string>
     <string name="double_twist_gesture_screen_hardware_unsupported" translatable="false">This device does not support the Double Twist sensor.</string>
-    <string name="double_twist_gesture_screen_set_preconditions" translatable="false">The set API needs UserManager to be available.</string>
-    <string name="double_twist_gesture_screen_usermanager_not_available" translatable="false">UserManager is null.</string>
+    <string name="double_twist_gesture_screen_set_preconditions" translatable="false">UserManager must be available. This is the case for most devices in most circumstances.</string>
+    <string name="double_twist_gesture_screen_usermanager_not_available" translatable="false">UserManager is not available.</string>
     <string name="gesture_swipe_down_fingerprint_screen_preconditions" translatable="false">The device must have the fingerprint hardware.</string>
     <string name="gesture_swipe_down_fingerprint_screen_hardware_unsupported" translatable="false">This device does not support the fingerprint hardware.</string>
     <string name="double_tap_screen_preconditions" translatable="false">The device must have a double-tap sensor.</string>
@@ -74,7 +74,7 @@
     <string name="user_aspect_ratio_app_not_launchable" translatable="false">This app is not launchable.</string>
     <string name="safety_center_screen_preconditions" translatable="false">The device must support the Safety Center feature.</string>
     <string name="safety_center_screen_disabled" translatable="false">The device does not support the Safety Center feature.</string>
-    <string name="mode_manual_duration_precondition" translatable="false">Require to be in Do Not Disturb mode.</string>
+    <string name="mode_manual_duration_precondition" translatable="false">This setting is specific to the Do Not Disturb mode and cannot be configured for any other modes.</string>
     <string name="mode_manual_duration_not_dnd_mode" translatable="false">Must be in do not disturb mode.</string>
     <string name="battery_info_screen_preconditions" translatable="false">The battery settings provider must provide the battery information feature.</string>
     <string name="battery_info_screen_battery_information_feature_disabled" translatable="false">The battery information feature is not enabled.</string>
@@ -93,9 +93,9 @@
     <string name="sound_vibration_precondition" translatable="false">This device must have a vibration motor.</string>
     <string name="sound_vibration_hardware_unsupported" translatable="false">This device does not have a vibration motor.</string>
     <string name="contacts_storage_screen_preconditions" translatable="false">The device must have a valid default account.</string>
-    <string name="account_detail_screen_preconditions" translatable="false">Requires that the specific account name exists for the user.</string>
-    <string name="account_security_subpage_screen_preconditions" translatable="false">Requires account security data to be available in Safety Center.</string>
-    <string name="device_unlock_subpage_screen_preconditions" translatable="false">Requires device unlock data to be available in Safety Center.</string>
+    <string name="account_detail_screen_preconditions" translatable="false">The specific account name must exist for the user.</string>
+    <string name="account_security_subpage_screen_preconditions" translatable="false">Account security data must be available in Safety Center.</string>
+    <string name="device_unlock_subpage_screen_preconditions" translatable="false">Device unlock data must be available in Safety Center.</string>
     <string name="device_unlock_subpage_screen_unavailable" translatable="false">No device unlock data has been reported to Safety Center.</string>
     <string name="terms_of_address_screen_preconditions" translatable="false">The default system language should be either any French locale (except for fr-CA) or one of the pseudo-locales (en-XA or ar-XB).</string>
     <string name="terms_of_address_screen_unavailable" translatable="false">The default system language does not support the terms of address</string>
@@ -109,7 +109,7 @@
     <string name="usb_charge_connected_device_unavailable" translatable="false">This option is only available when the connected device and cable support being charged via USB.</string>
     <string name="wifi_data_usage_screen_preconditions" translatable="false">The device must have a Wi-Fi radio and must have some data usage.</string>
     <string name="wifi_data_usage_screen_unavailable" translatable="false">Wi-Fi data usage is not available on this device.</string>
-    <string name="auto_data_switching_preconditions" translatable="false">Requires a secondary SIM and mobile data capability to enable automatic switching.</string>
+    <string name="auto_data_switching_preconditions" translatable="false">A secondary SIM must be inserted and the device must have mobile data capability.</string>
     <string name="data_roaming_switch_preconditions" translatable="false">Available when the mobile network is active and a SIM is present.</string>
     <string name="data_roaming_switch_availability_preconditions" translatable="false">Enabled when data roaming is not restricted by work policy and the carrier allows manual roaming configuration.</string>
     <string name="sensor_toggle_unsupported" translatable="false">This device does not support hardware toggles for this sensor.</string>
@@ -122,7 +122,7 @@
     <string name="hdr_brightness_boost_level_preconditions" translatable="false">High Dynamic Range (HDR) brightness must be enabled.</string>
     <string name="hdr_brightness_disabled" translatable="false">High Dynamic Range (HDR) brightness is disabled.</string>
     <string name="adaptive_connectivity_mobile_network_preconditions" translatable="false">The mobile subscription must allow the adaptive connectivity toggle to be configured.</string>
-    <string name="color_mode_preconditions" translatable="false">Requires device to support color mode configuration</string>
+    <string name="color_mode_preconditions" translatable="false">The device must support color mode configuration</string>
     <string name="color_mode_unsupported" translatable="false">Accessibility transforms are disabled for this user.</string>
     <string name="display_settings_screen_preconditions" translatable="false">The device must support top-level display settings.</string>
     <string name="display_settings_screen_unsupported" translatable="false">The device does not support top-level display settings.</string>
@@ -149,7 +149,7 @@
     <string name="low_light_mode_preconditions" translatable="false">The device must support low light mode for screensaver.</string>
     <string name="use_nfc_preconditions" translatable="false">The device must have near field communication(NFC) capability.</string>
     <string name="use_nfc_unavailable" translatable="false">NFC is not available on this device.</string>
-    <string name="require_device_unlock_for_nfc_preconditions" translatable="false">The device must support require device unlock for NFC paymentys feature.</string>
+    <string name="require_device_unlock_for_nfc_preconditions" translatable="false">The device must support the require device unlock for NFC payments feature.</string>
     <string name="require_device_unlock_for_nfc_unavailable" translatable="false">Require device unlock for NFC payments is not supported on this device.</string>
     <string name="uwb_settings_general_precondition" translatable="false">The use of ultra-wideband must be supported by the hardware and must not be restricted by device policy</string>
     <string name="uwb_settings_set_precondition" translatable="false">Ultra-wideband settings cannot be changed during airplane mode.</string>

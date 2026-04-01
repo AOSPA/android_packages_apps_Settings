@@ -35,7 +35,7 @@ class RecentAppsStateSource : DeviceStateSource {
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
     ): List<PerScreenDeviceStates> {
-        val recentAppStatsMixin = RecentAppStatsMixin(context, RECENT_APP_COUNT)
+        val recentAppStatsMixin = RecentAppStatsMixin(context, RECENT_APP_COUNT, /* excludeProfiles= */ true)
         recentAppStatsMixin.loadDisplayableRecentApps(RECENT_APP_COUNT)
         val deviceStateItems = mutableListOf<DeviceStateItem>()
         for (app in recentAppStatsMixin.recentApps) {

@@ -95,7 +95,8 @@ class PowerMenuSettingsScreenApi() :
             type =
                 GeneratedType(
                     description = R.string.long_press_power_assistant_sensitivity_ms_description,
-                    unit = "ms"
+                    unit = "ms",
+                    key = "LongPressButtonTime",
                 ) {
                     context.resources.getIntArray(DURATIONS_ARRAY_ID).map {
                         it.createSensitivityGeneratedValue(context)

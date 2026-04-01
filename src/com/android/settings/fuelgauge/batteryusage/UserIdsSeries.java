@@ -33,9 +33,15 @@ class UserIdsSeries {
     @Nullable private UserInfo mPrivateUser = null;
     @Nullable private UserInfo mManagedProfileUser = null;
 
-    UserIdsSeries(final Context context, final boolean isNonUIRequest) {
+    UserIdsSeries(final Context context, final boolean isNonUIRequest, final boolean excludeProfiles) {
         mUserManager = context.getSystemService(UserManager.class);
         mCurrentUserId = context.getUserId();
+
+        if (excludeProfiles) {
+            mVisibleUserIds.add(mCurrentUserId);
+            return;
+        }
+
         List<UserInfo> aliveUsers =
                 mUserManager != null ? mUserManager.getAliveUsers() : new ArrayList<>();
 
@@ -58,6 +64,10 @@ class UserIdsSeries {
                 mVisibleUserIds.add(userInfo.id);
             }
         }
+    }
+
+    UserIdsSeries(final Context context, final boolean isNonUIRequest) {
+        this(context, isNonUIRequest, false);
     }
 
     int getCurrentUserId() {

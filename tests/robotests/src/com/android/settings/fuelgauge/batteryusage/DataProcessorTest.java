@@ -104,6 +104,8 @@ public final class DataProcessorTest {
         when(mPowerUsageFeatureProvider.getBatteryUsageResetErrorTimeThresholdMs())
                 .thenReturn(1000 * 30L);
         when(mPowerUsageFeatureProvider.getBatteryUsageResetErrorPowerThreshold()).thenReturn(5.0);
+        when(mPowerUsageFeatureProvider.getBatteryUsageOverCalcPowerDrainThreshold())
+                .thenReturn(10000.0);
         doReturn(true).when(mUserIdsSeries).isMainUserProfileOnly();
 
         DataProcessor.sTestSystemAppsPackageNames = Set.of();
@@ -2234,6 +2236,111 @@ public final class DataProcessorTest {
         diffEntries = batteryDiffData.getSystemDiffEntryList();
         assertThat(diffEntries).hasSize(1);
         assertThat(diffEntries.get(0).getPackageName()).isEqualTo("package5");
+        assertThat(diffEntries.get(0).mDataMetadata).isNull();
+    }
+
+    @Test
+    public void insertHourlyUsageDiffDataPerSlot_consumePowerOverCalc_overCalcError() {
+        final double threshold = 100.0;
+        when(mPowerUsageFeatureProvider.getBatteryUsageOverCalcPowerDrainThreshold())
+                .thenReturn(threshold);
+        final long startTimestampMs = 1641045600000L; // 2022-01-01 22:00:00
+        final long midTimestampMs = 1641049200000L;   // 2022-01-01 23:00:00
+        final long endTimestampMs = 1641052800000L;   // 2022-01-02 00:00:00
+        final List<Long> timestamps = List.of(startTimestampMs, midTimestampMs, endTimestampMs);
+        final List<Double> normalConsumePowerList = List.of(1.0, 2.0, 3.0);
+        final List<Double> overCalcConsumePowerList = List.of(1.0, threshold + 2, threshold + 3);
+        final List<Map<String, BatteryHistEntry>> slotBatteryHistoryList = new ArrayList<>();
+        final int currentUserId = mContext.getUserId();
+        for (int i = 0; i < timestamps.size(); i++) {
+            final BatteryHistEntry normalEntry =
+                    createBatteryHistEntry(
+                            "package1",
+                            "label1",
+                            /* consumePower= */ normalConsumePowerList.get(i),
+                            /* foregroundUsageConsumePower= */ 8,
+                            /* foregroundServiceUsageConsumePower= */ 8,
+                            /* backgroundUsageConsumePower= */ 8,
+                            /* cachedUsageConsumePower= */ 8,
+                            /* uid= */ 1L,
+                            currentUserId,
+                            ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                            /* foregroundUsageTimeInMs= */ 5L,
+                            /* foregroundServiceUsageTimeInMs= */ 5L,
+                            /* backgroundUsageTimeInMs= */ 5L,
+                            /* isHidden= */ false);
+            final BatteryHistEntry overCalcEntry =
+                    createBatteryHistEntry(
+                            "package2",
+                            "label2",
+                            /* consumePower= */ overCalcConsumePowerList.get(i),
+                            /* foregroundUsageConsumePower= */ 8,
+                            /* foregroundServiceUsageConsumePower= */ 8,
+                            /* backgroundUsageConsumePower= */ 8,
+                            /* cachedUsageConsumePower= */ 8,
+                            /* uid= */ 2L,
+                            currentUserId,
+                            ConvertUtils.CONSUMER_TYPE_UID_BATTERY,
+                            /* foregroundUsageTimeInMs= */ 5L,
+                            /* foregroundServiceUsageTimeInMs= */ 5L,
+                            /* backgroundUsageTimeInMs= */ 5L,
+                            /* isHidden= */ false);
+            final BatteryHistEntry overCalcSystemEntry =
+                    createBatteryHistEntry(
+                            "package3",
+                            "Screen",
+                            /* consumePower= */ overCalcConsumePowerList.get(i),
+                            /* foregroundUsageConsumePower= */ 8,
+                            /* foregroundServiceUsageConsumePower= */ 8,
+                            /* backgroundUsageConsumePower= */ 8,
+                            /* cachedUsageConsumePower= */ 8,
+                            /* uid= */ 3L,
+                            currentUserId,
+                            ConvertUtils.CONSUMER_TYPE_SYSTEM_BATTERY,
+                            /* foregroundUsageTimeInMs= */ 5L,
+                            /* foregroundServiceUsageTimeInMs= */ 5L,
+                            /* backgroundUsageTimeInMs= */ 5L,
+                            /* isHidden= */ false);
+            slotBatteryHistoryList.add(Map.of(
+                    normalEntry.getKey(), normalEntry,
+                    overCalcEntry.getKey(), overCalcEntry,
+                    overCalcSystemEntry.getKey(), overCalcSystemEntry
+            ));
+        }
+
+        BatteryDiffData batteryDiffData = insertHourlyUsageDiffDataPerSlot(
+                mContext,
+                startTimestampMs,
+                endTimestampMs,
+                /* startBatteryLevel= */ 90,
+                /* endBatteryLevel= */ 80,
+                mUserIdsSeries,
+                /* slotDuration= */ endTimestampMs - startTimestampMs,
+                /* systemAppsPackageNames= */ Set.of(),
+                /* systemAppsUids= */ Set.of(),
+                /* appUsageMap= */ Map.of(),
+                slotBatteryHistoryList
+        );
+
+        List<BatteryDiffEntry> diffEntries = batteryDiffData.getAppDiffEntryList();
+        assertThat(diffEntries).hasSize(2);
+        // normalEntry
+        assertThat(diffEntries.get(0).getPackageName()).isEqualTo("package1");
+        assertThat(diffEntries.get(0).mDataMetadata).isNull();
+        // overCalcEntry
+        assertThat(diffEntries.get(1).getPackageName()).isEqualTo("package2");
+        assertThat(diffEntries.get(1).mDataMetadata).isNotNull();
+        assertThat(diffEntries.get(1).mDataMetadata.mErrorTypes).containsExactly(
+                DataErrorType.ERROR_TYPE_OVER_CALC_POWER_DRAIN_BY_CAPACITY
+        );
+        assertThat(diffEntries.get(1).mDataMetadata.mErrorMsg).contains(
+                String.format("[OVER_CALC_CAP] totalConsumePower: (%.2f - %.2f) > %.2f",
+                        threshold + 2, 1.0, threshold));
+        assertThat(diffEntries.get(1).mConsumePower).isEqualTo(1);
+        // overCalcSystemEntry
+        diffEntries = batteryDiffData.getSystemDiffEntryList();
+        assertThat(diffEntries).hasSize(1);
+        assertThat(diffEntries.get(0).getPackageName()).isEqualTo("package3");
         assertThat(diffEntries.get(0).mDataMetadata).isNull();
     }
 

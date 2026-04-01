@@ -152,7 +152,7 @@ class PowerUsageSummaryApiScreen :
                         )
                     } else if (batteryInfo.batteryStatus == BatteryManager.BATTERY_STATUS_FULL) {
                         Custom(
-                            com.android.settingslib.R.string.battery_info_status_full_charged,
+                            "The device is fully charged.",
                             stability = PreconditionStability.UNSTABLE,
                         )
                     } else if (batteryInfo.remainingTimeUs <= 0L) {
@@ -182,7 +182,7 @@ class PowerUsageSummaryApiScreen :
                     ensureBatteryInfoInitialized()
                     if (!batteryInfo.discharging) {
                         Custom(
-                            R.string.charging_related_value_unsupported,
+                            R.string.discharging_related_value_unsupported,
                             stability = PreconditionStability.UNSTABLE,
                         )
                     } else if (batteryInfo.remainingTimeUs <= 0L) {

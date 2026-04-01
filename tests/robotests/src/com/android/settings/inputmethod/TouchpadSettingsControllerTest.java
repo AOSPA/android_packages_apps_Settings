@@ -64,7 +64,7 @@ public class TouchpadSettingsControllerTest {
     public void getAvailabilityStatus_isTouchpad_returnsAvailable() {
         int deviceId = 1;
         InputDevice device = ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId,
-                InputDevice.SOURCE_TOUCHPAD);
+                InputDevice.SOURCE_MOUSE | InputDevice.SOURCE_TOUCHPAD);
         ShadowInputDevice.addDevice(deviceId, device);
 
         assertThat(mController.getAvailabilityStatus())

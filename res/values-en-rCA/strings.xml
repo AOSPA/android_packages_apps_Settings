@@ -1526,6 +1526,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PINs do not match. Confirm the new SIM PIN."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Wrong PIN. Attempts remaining: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Enter the current PIN code of the SIM card"</string>
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"First SIM card slot"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Second SIM card slot"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Use <xliff:g id="CARRIER">%1$s</xliff:g> for mobile data?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"You\'re using <xliff:g id="CARRIER2_0">%2$s</xliff:g> for mobile data. If you switch to <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> will no longer be used for mobile data."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Use <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2204,19 +2206,19 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Customize the actions triggered by your controller’s buttons"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Buttons"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Directions"</string>
-    <string name="game_controller_button_a" msgid="2138420373137111774">"A Button"</string>
-    <string name="game_controller_button_b" msgid="2093089857164437480">"B Button"</string>
-    <string name="game_controller_button_x" msgid="3428801081204194655">"X Button"</string>
-    <string name="game_controller_button_y" msgid="4596061542299533516">"Y Button"</string>
-    <string name="game_controller_button_l1" msgid="4428713182602902434">"L1 Button"</string>
-    <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 Button"</string>
-    <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 Button"</string>
-    <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 Button"</string>
-    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Left Stick Click"</string>
-    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Right Stick Click"</string>
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A button"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B button"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X button"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y button"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 button"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 button"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 button"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 button"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Left stick click"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Right stick click"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <string name="game_controller_stick_left" msgid="1591700901162153956">"Left Stick"</string>
-    <string name="game_controller_stick_right" msgid="1418791636252375110">"Right Stick"</string>
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Left stick"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Right stick"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Reset to default"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Reset to default?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"All your controller settings will be reset to default"</string>
@@ -3632,12 +3634,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Device"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Touchpad, keyboard, display, sound"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Brightness, color, dark theme, lock screen, text"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Brightness, color, dark theme, lock screen, text, touch"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Brightness, color, dark theme, lock screen, text, connected display"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Brightness, color, dark theme, lock screen, text, touch, connected display"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Keyboard selection, tools"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Cursor speed, button customization, scrolling"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Volume, speakers, microphones"</string>
@@ -4613,53 +4612,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Can access all files"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Screen automation"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="8884590840087038012">"This app will be able to see and interact with other apps’ screen content to help you complete tasks, even when the apps are in the background"</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2641175029127556724">"<xliff:g id="ID_1">%1$s</xliff:g> can see and interact with screen content of apps that you’ve allowed to help you complete tasks"</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Apps for which you chose &lt;strong&gt;Always Allow&lt;/strong&gt; in permissions are shown here. Apps you allowed &lt;strong&gt;Only this time&lt;/strong&gt; or didn’t allow aren’t shown."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"If you don’t allow screen automation, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"When you remove an app on this screen, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Allow apps to help you complete tasks by interacting with other apps’ screen content"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="2884280820078815604">"Allow apps to see and interact with the screen content to help you complete tasks"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ask every time"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Always allow"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Don’t allow"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Apps you’ve allowed"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"You haven’t allowed any apps yet"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Only the app you’ve set as your default digital assistant can use screen automation."</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"App removed"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"All apps removed"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Assistant settings"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 app allowed}other{# apps allowed}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 app allowed}other{# apps allowed}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"No apps allowed"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Remove all apps"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Default digital assistant"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> can’t use screen automation"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Only your default digital assistant can use screen automation"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Change assistant"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"These apps can see and interact with the screen content of apps you’ve allowed, to help you complete tasks."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"You haven’t installed any apps that can use screen automation"</string>
+    <string name="computer_control_automation_target_list_header" msgid="4637651650979368491">"These apps can see and interact with <xliff:g id="ID_1">%1$s</xliff:g> screen content to help you complete tasks"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Full-screen notifications"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Allow full-screen notifications from this app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls, or other urgent notifications."</string>

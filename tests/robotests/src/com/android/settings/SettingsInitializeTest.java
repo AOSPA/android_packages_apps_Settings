@@ -18,29 +18,35 @@ package com.android.settings;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
-
 import android.content.pm.ShortcutManager;
 
 import com.android.settings.core.instrumentation.ElapsedTimeUtils;
-import java.util.Collections;
+import com.android.settings.testutils.shadow.SettingsShadowResources;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
+import org.robolectric.annotation.Config;
 
+import java.util.Collections;
 import java.util.List;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {SettingsShadowResources.class})
 public class SettingsInitializeTest {
 
     private Context mContext;
     private SettingsInitialize mSettingsInitialize;
     private ShortcutManager mShortcutManager;
+    private PackageManager mPackageManager;
 
     @Before
     public void setUp() {
@@ -49,6 +55,7 @@ public class SettingsInitializeTest {
         mContext = RuntimeEnvironment.application;
         mSettingsInitialize = new SettingsInitialize();
         mShortcutManager = (ShortcutManager) mContext.getSystemService(Context.SHORTCUT_SERVICE);
+        mPackageManager = mContext.getPackageManager();
     }
 
     @Test
@@ -104,5 +111,31 @@ public class SettingsInitializeTest {
 
         final long elapsedTime = ElapsedTimeUtils.getElapsedTime(System.currentTimeMillis());
         assertThat(elapsedTime).isNotEqualTo(-1L);
+    }
+
+    @Test
+    public void onReceive_regulatoryInfoConfigTrue_shouldEnableActivity() {
+        SettingsShadowResources.overrideResource(R.bool.config_show_regulatory_info, true);
+
+        mSettingsInitialize.onReceive(mContext, new Intent(Intent.ACTION_USER_INITIALIZE));
+
+        ComponentName componentName = new ComponentName(mContext,
+                RegulatoryInfoDisplayActivity.class);
+        int state = mPackageManager.getComponentEnabledSetting(componentName);
+
+        assertThat(state).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+    }
+
+    @Test
+    public void onReceive_regulatoryInfoConfigFalse_shouldResetToDefault() {
+        SettingsShadowResources.overrideResource(R.bool.config_show_regulatory_info, false);
+
+        mSettingsInitialize.onReceive(mContext, new Intent(Intent.ACTION_USER_INITIALIZE));
+
+        ComponentName componentName = new ComponentName(mContext,
+                RegulatoryInfoDisplayActivity.class);
+        int state = mPackageManager.getComponentEnabledSetting(componentName);
+
+        assertThat(state).isEqualTo(PackageManager.COMPONENT_ENABLED_STATE_DEFAULT);
     }
 }

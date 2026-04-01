@@ -798,6 +798,11 @@
     <string name="main_clear_desc" product="desktop">"This will erase all data from your device\u2019s <b>internal storage</b>, including:\n\n<li>Your Google Account</li>\n<li>System and app data and settings</li>\n<li>Downloaded apps</li>"</string>
     <!-- SD card & phone storage settings screen, instructions and list of current accounts.  The list of accounts follows this text[CHAR LIMIT=NONE] -->
     <string name="main_clear_accounts" product="default">"\n\nYou are currently signed into the following accounts:\n"</string>
+    <!-- SD card & phone storage settings screen, instructions and list of current accounts.  The list of accounts follows this text[CHAR LIMIT=NONE] -->
+    <string name="main_clear_accounts_count" product="default">{count, plural,
+        =1    {\n\nYou are currently signed into the following account:\n}
+        other {\n\nYou are currently signed into the following accounts:\n}
+    }</string>
     <!-- SD card & phone storage settings screen, notification if other users are present on the device [CHAR LIMIT=NONE] -->
     <string name="main_clear_other_users_present" product="default">"\n\nThere are other users present on this device.\n"</string>
     <!-- SD card & phone storage settings screen, instructions about whether to also erase the external storage (SD card) when erasing the internal storage [CHAR LIMIT=NONE] -->

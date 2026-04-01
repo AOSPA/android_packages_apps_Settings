@@ -53,9 +53,6 @@ public class MouseScrollingAccelerationPreferenceController extends TogglePrefer
 
     @Override
     public int getAvailabilityStatus() {
-        if (!InputSettings.isMouseScrollingAccelerationFeatureFlagEnabled()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         return AVAILABLE;
     }
 

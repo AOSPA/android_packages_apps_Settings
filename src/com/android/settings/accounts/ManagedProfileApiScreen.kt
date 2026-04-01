@@ -20,6 +20,7 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -37,6 +38,8 @@ class ManagedProfileApiScreen :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
+
+        tags(UI_ONLY_PREFERENCE)
 
         preconditions(R.string.managed_profile_settings_screen_preconditions) {
             // TODO (b/469050075): Wait for HasWorkProfile preconditions finished and update code.
