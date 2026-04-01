@@ -16,18 +16,22 @@
 
 package com.android.settings.network.telephony.satellite;
 
+import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_UNKNOWN;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ESOS_SUPPORTED_BOOL;
 
 import android.annotation.Nullable;
 import android.content.Context;
+import android.telephony.SubscriptionManager;
 import android.telephony.satellite.SatelliteManager;
+import android.util.Log;
 
 import com.android.settings.overlay.FeatureFactory;
 
 /** A repository class for interacting with the SatelliteManager API. */
 public class SatelliteSettingsRepository {
-    private final Context mContext;
+    private static final String TAG = SatelliteSettingsRepository.class.getSimpleName();
 
+    private final Context mContext;
     @Nullable
     private SatelliteManager mSatelliteManager;
 
@@ -45,20 +49,65 @@ public class SatelliteSettingsRepository {
 
     /** Refers to {@link SatelliteManager#isSatelliteAttachSupported} */
     public boolean isSatelliteAttachSupported(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            Log.d(TAG, "isSatelliteAttachSupported: isValidSubscriptionId");
+            return false;
+        }
         SatelliteManager sm = getSatelliteManager();
-        return sm != null && sm.isSatelliteAttachSupported(subId);
+        if (sm != null) {
+            try {
+                return sm.isSatelliteAttachSupported(subId);
+            } catch (IllegalStateException e) {
+                Log.e(TAG, "isSatelliteAttachSupported: IllegalStateException", e);
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "isSatelliteAttachSupported: IllegalArgumentException", e);
+            } catch (SecurityException e) {
+                Log.e(TAG, "isSatelliteAttachSupported: SecurityException", e);
+            }
+        }
+        return false;
     }
 
     /** Refers to {@link SatelliteManager#getSatelliteNtnConnectType} */
     public int getSatelliteNtnConnectType(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            Log.d(TAG, "getSatelliteNtnConnectType: isValidSubscriptionId");
+            return CARRIER_ROAMING_NTN_CONNECT_UNKNOWN;
+        }
         SatelliteManager sm = getSatelliteManager();
-        return sm != null ? sm.getSatelliteNtnConnectType(subId) : 0;
+        if (sm != null) {
+            try {
+                return sm.getSatelliteNtnConnectType(subId);
+            } catch (IllegalStateException e) {
+                Log.e(TAG, "getSatelliteNtnConnectType: IllegalStateException", e);
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "getSatelliteNtnConnectType: IllegalArgumentException", e);
+            } catch (SecurityException e) {
+                Log.e(TAG, "getSatelliteNtnConnectType: SecurityException", e);
+            }
+        }
+        return CARRIER_ROAMING_NTN_CONNECT_UNKNOWN;
     }
 
     /** Refers to {@link SatelliteManager#isSatelliteEntitlementSupported} */
     public boolean isSatelliteEntitlementSupported(int subId) {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            Log.d(TAG, "isSatelliteEntitlementSupported: isValidSubscriptionId");
+            return false;
+        }
         SatelliteManager sm = getSatelliteManager();
-        return sm != null && sm.isSatelliteEntitlementSupported(subId);
+        if (sm != null) {
+            try {
+                return sm.isSatelliteEntitlementSupported(subId);
+            } catch (IllegalStateException e) {
+                Log.e(TAG, "isSatelliteEntitlementSupported: IllegalStateException", e);
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "isSatelliteEntitlementSupported: IllegalArgumentException", e);
+            } catch (SecurityException e) {
+                Log.e(TAG, "isSatelliteEntitlementSupported: SecurityException", e);
+            }
+        }
+        return false;
     }
 
     /** Returns the value of {@link CarrierConfigManager#KEY_SATELLITE_ESOS_SUPPORTED_BOOL} */
