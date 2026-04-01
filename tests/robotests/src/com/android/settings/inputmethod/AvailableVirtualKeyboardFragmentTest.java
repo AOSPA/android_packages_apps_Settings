@@ -81,7 +81,7 @@ import java.util.List;
         SettingsShadowResources.class,
         ShadowDashboardFragment.class
 })
-public class AvailableKeyboardAppsFragmentTest {
+public class AvailableVirtualKeyboardFragmentTest {
 
     @Rule
     public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
@@ -99,7 +99,7 @@ public class AvailableKeyboardAppsFragmentTest {
     @Mock
     private InputMethodPreference mInputMethodPreference;
     private Context mContext;
-    private AvailableKeyboardAppsFragment mFragment;
+    private AvailableVirtualKeyboardFragment mFragment;
 
     @Before
     public void setUp() {
@@ -142,7 +142,7 @@ public class AvailableKeyboardAppsFragmentTest {
 
         mFragment.onCreatePreferences(new Bundle(), "test");
 
-        verify(mFragment).addPreferencesFromResource(R.xml.available_keyboard_apps);
+        verify(mFragment).addPreferencesFromResource(R.xml.available_virtual_keyboard);
     }
 
     @Test
@@ -198,7 +198,7 @@ public class AvailableKeyboardAppsFragmentTest {
     @Test
     public void searchIndexProvider_shouldIndexResource() {
         final List<SearchIndexableResource> indexRes =
-                AvailableKeyboardAppsFragment.SEARCH_INDEX_DATA_PROVIDER
+                AvailableVirtualKeyboardFragment.SEARCH_INDEX_DATA_PROVIDER
                         .getXmlResourcesToIndex(RuntimeEnvironment.application, true /* enabled */);
 
         assertThat(indexRes).isNotNull();
@@ -240,20 +240,20 @@ public class AvailableKeyboardAppsFragmentTest {
         SettingsShadowResources.overrideResource(
                 R.bool.config_disable_keyboard_settings_in_demo_mode, true);
 
-        assertThat(AvailableKeyboardAppsFragment.SEARCH_INDEX_DATA_PROVIDER
+        assertThat(AvailableVirtualKeyboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .isPageSearchEnabled(mContext)).isFalse();
     }
 
     @Test
     public void isPageSearchEnabled_notInDemoMode_returnsTrue() {
-        assertThat(AvailableKeyboardAppsFragment.SEARCH_INDEX_DATA_PROVIDER
+        assertThat(AvailableVirtualKeyboardFragment.SEARCH_INDEX_DATA_PROVIDER
                 .isPageSearchEnabled(mContext)).isTrue();
     }
 
     private void initFragment() {
         final Bundle bundle = new Bundle();
         bundle.putInt(EXTRA_PROFILE, ProfileSelectFragment.ProfileType.PERSONAL);
-        mFragment = spy(new AvailableKeyboardAppsFragment());
+        mFragment = spy(new AvailableVirtualKeyboardFragment());
         mFragment.setArguments(bundle);
         mFragment.mInputMethodSettingValues = mValuesWrapper;
         ReflectionHelpers.setField(mFragment, "mPreferenceManager", mPreferenceManager);
