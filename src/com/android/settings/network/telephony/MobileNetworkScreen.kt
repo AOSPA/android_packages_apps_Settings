@@ -92,6 +92,9 @@ private constructor(
     override val key: String
         get() = KEY
 
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
+
     override val purpose: Int
         get() = R.string.mobile_network_pref_screen_purpose
 
