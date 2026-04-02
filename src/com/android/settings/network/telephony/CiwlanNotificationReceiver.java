@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
 /*
  * Copyright (C) 2014 The Android Open Source Project
  *
@@ -14,7 +15,9 @@
  * limitations under the License.
  */
 
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
 /*
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted (subject to the limitations in the
  * disclaimer below) provided that the following conditions are met:
@@ -46,18 +49,22 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
 /*
 ​​ * ​​​Changes from Qualcomm Technologies, Inc. are provided under the following license:
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
 package com.android.settings.network.telephony;
 
 import static android.provider.Settings.ACTION_NETWORK_OPERATOR_SETTINGS;
 import static android.provider.Settings.EXTRA_SUB_ID;
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
 import static com.android.settings.Settings.MobileNetworkActivity.MOBILE_NETWORK_FRAGMENT_NAME;
 import static com.android.settings.SettingsActivity.EXTRA_SHOW_FRAGMENT;
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
 
 import android.R.drawable;
 import android.app.NotificationChannel;
@@ -67,6 +74,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
 // QTI_BEGIN: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
 import android.provider.Settings;
 // QTI_END: 2024-04-11: Telephony: Use cached value to get MSIM C_IWLAN support
@@ -175,9 +183,11 @@ public class CiwlanNotificationReceiver extends BroadcastReceiver {
         createNotificationChannel(notificationMgr, context);
         // Build the positive button that launches the UI to disable C_IWLAN
         int subId = SubscriptionManager.getSubscriptionId(phoneId);
+// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
         Intent ciwlanIntent = new Intent(ACTION_NETWORK_OPERATOR_SETTINGS)
                 .putExtra(EXTRA_SUB_ID, subId)
                 .putExtra(EXTRA_SHOW_FRAGMENT, MOBILE_NETWORK_FRAGMENT_NAME);
+// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         PendingIntent pendingIntent = PendingIntent.getActivity(context, phoneId, ciwlanIntent,
                 PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Action ciwlanSettingAction = new NotificationCompat.Action.Builder(0,
