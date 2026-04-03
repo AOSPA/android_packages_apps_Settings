@@ -34,6 +34,7 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.preference.PreferenceBinding
 import java.time.LocalTime
 
@@ -95,6 +96,8 @@ sealed class DarkModeCustomTimePreference(protected val uiModeManager: UiModeMan
     }
 
     override val availabilityDescription = "The device must be configured for scheduled dark mode."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         uiModeManager.nightMode == UiModeManager.MODE_NIGHT_CUSTOM &&

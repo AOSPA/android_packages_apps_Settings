@@ -23,6 +23,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.preference.PreferenceViewHolder
 import com.android.settings.accessibility.extensions.isInSetupWizard
+import com.android.settings.accessibility.shared.utils.shouldShowFocusRingsInSuw
+import com.android.settings.widget.FocusIndicatorDrawable
 import com.android.settingslib.widget.SliderPreference
 
 /** Custom version of {@link SliderPreference} with tool tip window. */
@@ -41,12 +43,37 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
         // Once move this fix to SettingsLib, revert the change here.
         if (context.isInSetupWizard()) {
             val iconStartFrame =
-                holder.findViewById(
-                    com.android.settingslib.widget.preference.slider.R.id.icon_start
-                )?.parent as? ViewGroup
-            val iconEndFrame =
-                holder.findViewById(com.android.settingslib.widget.preference.slider.R.id.icon_end)
+                holder
+                    .findViewById(com.android.settingslib.widget.preference.slider.R.id.icon_start)
                     ?.parent as? ViewGroup
+            val iconEndFrame =
+                holder
+                    .findViewById(com.android.settingslib.widget.preference.slider.R.id.icon_end)
+                    ?.parent as? ViewGroup
+
+            if (shouldShowFocusRingsInSuw(context)) {
+                // Apply a standard circular focus ring to the start and end icons.
+                listOfNotNull(iconStartFrame, iconEndFrame).forEach {
+                    it.isFocusable = true
+                    it.foreground =
+                        FocusIndicatorDrawable.Builder(context)
+                            .withCornerRadius(FOCUS_INDICATOR_CORNER_RADIUS_DP)
+                            .build()
+                }
+
+                // Apply a wider, pill-shaped focus ring to the slider itself.
+                slider?.let {
+                    it.isFocusable = true
+                    it.foreground =
+                        FocusIndicatorDrawable.Builder(context)
+                            .withHorizontalPaddingAdjustment(
+                                FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP
+                            )
+                            .withCornerRadius(FOCUS_INDICATOR_CORNER_RADIUS_DP)
+                            .build()
+                }
+            }
+
             if (iconStartFrame?.isVisible == true) {
                 iconStartFrame.setOnClickListener { _ ->
                     if (value > 0) {
@@ -130,5 +157,10 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
                     }
                 }
         }
+    }
+
+    companion object {
+        private const val FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP = -1
+        private const val FOCUS_INDICATOR_CORNER_RADIUS_DP = 999 // Fully rounded.
     }
 }

@@ -122,7 +122,6 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 ResolutionItem(physicalWidth = 760, physicalHeight = 600),
                 ResolutionItem(physicalWidth = 720, physicalHeight = 480),
                 ResolutionItem(physicalWidth = 640, physicalHeight = 480),
-                ResolutionItem(physicalWidth = 320, physicalHeight = 240),
             )
             .inOrder()
 
@@ -376,5 +375,142 @@ class ResolutionRefreshRatePreferenceViewModelTest : ExternalDisplayTestBase() {
                 RefreshRateItem(modeId = 102, refreshRate = 50f),
             )
             .inOrder()
+    }
+
+    @Test
+    fun init_withHighDpi_filtersOutLowDpResolutions() {
+        // Mocking physical DPI so that calculateBaseDensity results in 320 DPI.
+        // 320 DPI means 1 dp = 2 pixels.
+        // 600 dp = 1200 pixels.
+        whenever(mMockedInjector.getPhysicalDpi(EXTERNAL_DISPLAY_ID)).thenReturn(Pair(320f, 320f))
+
+        setupViewModel()
+        val state = viewModel.uiState.value!!
+
+        // Resolutions in ExternalDisplayTestBase:
+        // (0) 1920x1080 -> 1920*160/320 = 960 dp (Allowed)
+        // (5) 2048x1024 -> 2048*160/320 = 1024 dp (Allowed)
+        // (1) 800x600 -> 800*160/320 = 400 dp (Filtered)
+        // (2) 320x240 -> 320*160/320 = 160 dp (Filtered)
+        // (3,4) 640x480 -> 640*160/320 = 320 dp (Filtered)
+        // (6) 720x480 -> 720*160/320 = 360 dp (Filtered)
+        // (7) 760x600 -> 760*160/320 = 380 dp (Filtered)
+        // (8) 720x480 -> 720*160/320 = 360 dp (Filtered)
+
+        assertThat(state.topResolutionItems)
+            .containsExactly(
+                ResolutionItem(physicalWidth = 2048, physicalHeight = 1024),
+                ResolutionItem(physicalWidth = 1920, physicalHeight = 1080),
+                ResolutionItem(physicalWidth = 720, physicalHeight = 480),
+            )
+            .inOrder()
+
+        assertThat(state.moreResolutionItems).isEmpty()
+    }
+
+    @Test
+    fun init_withHighDpi_includesActiveModeEvenIfBelowThreshold() {
+        val displayId = 789
+        val lowResMode = Mode(10, 800, 600, 60f)
+        val highResMode = Mode(11, 1920, 1080, 60f)
+        val supportedModes = listOf(lowResMode, highResMode)
+
+        val display =
+            DisplayDevice(
+                displayId,
+                "local:789",
+                "test",
+                lowResMode,
+                supportedModes,
+                isEnabled = DisplayIsEnabled.YES,
+                isConnectedDisplay = true,
+                rotation = 0,
+                isHdrSupported = false,
+            )
+        updateDisplaysAndTopology(listOf(display))
+
+        whenever(mMockedInjector.getPhysicalDpi(displayId)).thenReturn(Pair(320f, 320f))
+
+        setupViewModel(displayId)
+        val state = viewModel.uiState.value!!
+
+        // lowResMode is 800x600 -> 400dp < 600dp, but it's active so it should be included.
+        // highResMode is 1920x1080 -> 293dp < 600dp, should be filtered.
+
+        val allResolutions = state.topResolutionItems + state.moreResolutionItems
+        assertThat(allResolutions).containsExactly(ResolutionItem(800, 600))
+    }
+
+    @Test
+    fun isAllowed_withHighResActiveMode2560x1440_doesNotFilter1024x768_bug_496815734() {
+        // This test mimics Case 1 from b/496815734.
+        val displayId = 101
+        val activeMode = Mode(1, 2560, 1440, 60f)
+        val lowResMode = Mode(2, 1024, 768, 60f)
+        val supportedModes = listOf(activeMode, lowResMode)
+
+        val display =
+            DisplayDevice(
+                displayId,
+                "local:101",
+                "test_bug_case1",
+                activeMode,
+                supportedModes,
+                isEnabled = DisplayIsEnabled.YES,
+                isConnectedDisplay = true,
+                rotation = 0,
+                isHdrSupported = false,
+            )
+        updateDisplaysAndTopology(listOf(display))
+
+        // Case 1: Native 2560x1440 is active
+        // currentActiveWidth = 2560, physicalXDpi = 108.92
+        // checkedModeWidth = 1024
+        // Step 1: adjXDpi = (1024 * 108.92) / 2560 = 43.569
+        // Step 2: calculateBaseDensity results in density >= 100
+        // Result: widthDp > 600 -> VISIBLE
+        whenever(mMockedInjector.getPhysicalDpi(displayId)).thenReturn(Pair(108.92f, 108.86f))
+
+        setupViewModel(displayId)
+        val state = viewModel.uiState.value!!
+
+        val allResolutions = state.topResolutionItems + state.moreResolutionItems
+        assertThat(allResolutions).contains(ResolutionItem(1024, 768))
+    }
+
+    @Test
+    fun isAllowed_withHighResActiveMode1920x1200_doesNotFilter1024x768_bug_496815734() {
+        // This test mimics Case 2 from b/496815734.
+        val displayId = 102
+        val activeMode = Mode(1, 1920, 1200, 60f)
+        val lowResMode = Mode(2, 1024, 768, 60f)
+        val supportedModes = listOf(activeMode, lowResMode)
+
+        val display =
+            DisplayDevice(
+                displayId,
+                "local:102",
+                "test_bug_case2",
+                activeMode,
+                supportedModes,
+                isEnabled = DisplayIsEnabled.YES,
+                isConnectedDisplay = true,
+                rotation = 0,
+                isHdrSupported = false,
+            )
+        updateDisplaysAndTopology(listOf(display))
+
+        // Case 2: 1920x1200 is active
+        // currentActiveWidth = 1920, physicalXDpi = 81.28
+        // checkedModeWidth = 1024
+        // Step 1: adjXDpi = (1024 * 81.28) / 1920 = 43.349
+        // Result: widthDp > 600 -> VISIBLE
+        whenever(mMockedInjector.getPhysicalDpi(displayId)).thenReturn(Pair(81.28f, 89.65f))
+
+        setupViewModel(displayId)
+        val state = viewModel.uiState.value!!
+
+        val allResolutions = state.topResolutionItems + state.moreResolutionItems
+        assertThat(allResolutions).contains(ResolutionItem(1024, 768))
     }
 }

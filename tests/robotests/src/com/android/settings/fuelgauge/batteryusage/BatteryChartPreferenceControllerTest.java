@@ -405,7 +405,7 @@ public final class BatteryChartPreferenceControllerTest {
     }
 
     @Test
-    public void onBatteryLevelDataUpdate_featureEnabledAndFirstLaunch_selectDailyIndex() {
+    public void onBatteryLevelDataUpdate_featureOnboardAndFirstLaunch_doesNotSelectIndex() {
         when(mFeatureFactory.powerUsageFeatureProvider.isBatteryAdvanceInfoEnabled())
                 .thenReturn(true);
         BatteryLevelData batteryLevelData =
@@ -413,7 +413,8 @@ public final class BatteryChartPreferenceControllerTest {
 
         mBatteryChartPreferenceController.onBatteryLevelDataUpdate(batteryLevelData);
 
-        assertThat(mBatteryChartPreferenceController.mDailyChartIndex).isEqualTo(2);
+        assertThat(mBatteryChartPreferenceController.mDailyChartIndex)
+                .isEqualTo(SELECTED_INDEX_ALL);
     }
 
     @Test

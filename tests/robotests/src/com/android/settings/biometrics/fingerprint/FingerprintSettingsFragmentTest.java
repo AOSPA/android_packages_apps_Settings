@@ -36,6 +36,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.clearInvocations;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -297,6 +298,7 @@ public class FingerprintSettingsFragmentTest {
         }
         intent.putExtra(Intent.EXTRA_USER_ID, userId);
         mActivity = spy(Robolectric.buildActivity(FragmentActivity.class, intent).get());
+        doReturn(intent).when(mActivity).getIntent();
         doReturn(mActivity).when(mFragment).getActivity();
 
         FragmentManager fragmentManager = mock(FragmentManager.class);
@@ -663,6 +665,81 @@ public class FingerprintSettingsFragmentTest {
         // Verify click, and no changeListener for later switching toggle case
         verify(spiedPrimarySwitchIntentPref).setOnPreferenceClickListener(any());
         verify(spiedPrimarySwitchIntentPref, never()).setOnPreferenceChangeListener(any());
+    }
+
+    @Test
+    public void testPrimarySwitchIntentPreferenceClick_mTokenNotNull() {
+        PrimarySwitchIntentPreference spiedPrimarySwitchIntentPref = spy(
+                new PrimarySwitchIntentPreference(mContext) {
+                    @Override
+                    public String getKey() {
+                        return "TEST_KEY";
+                    }
+
+                    @NonNull
+                    @Override
+                    public Intent getLaunchedIntent(@NonNull byte[] token) {
+                        return new Intent("TEST_ACTION");
+                    }
+                });
+        when(mExtPreferencesProvider.getSize()).thenReturn(1);
+        when(mExtPreferencesProvider.newPreference(eq(0),
+                any(FingerprintExtPreferencesProvider.PreferenceInflater.class)))
+                .thenReturn(spiedPrimarySwitchIntentPref);
+
+        Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(false, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        // Clear any previous calls to startActivityForResult (like from addFirstFingerprint)
+        clearInvocations(mFragment);
+
+        Preference.OnPreferenceClickListener listener =
+                spiedPrimarySwitchIntentPref.getOnPreferenceClickListener();
+        assertThat(listener).isNotNull();
+        listener.onPreferenceClick(spiedPrimarySwitchIntentPref);
+
+        // LAUNCH_EXT_PREF_REQUEST = 12
+        verify(mFragment).startActivityForResult(any(Intent.class), eq(12));
+    }
+
+    @Test
+    public void testPrimarySwitchIntentPreferenceClick_mTokenNull() {
+        PrimarySwitchIntentPreference spiedPrimarySwitchIntentPref = spy(
+                new PrimarySwitchIntentPreference(mContext) {
+                    @Override
+                    public String getKey() {
+                        return "TEST_KEY";
+                    }
+
+                    @NonNull
+                    @Override
+                    public Intent getLaunchedIntent(@NonNull byte[] token) {
+                        return new Intent("TEST_ACTION");
+                    }
+                });
+        when(mExtPreferencesProvider.getSize()).thenReturn(1);
+        when(mExtPreferencesProvider.newPreference(eq(0),
+                any(FingerprintExtPreferencesProvider.PreferenceInflater.class)))
+                .thenReturn(spiedPrimarySwitchIntentPref);
+
+        Fingerprint fingerprint = new Fingerprint("Test", 0, 0);
+        when(mFingerprintManager.hasEnrolledFingerprints(anyInt())).thenReturn(true);
+        doReturn(List.of(fingerprint)).when(mFingerprintManager).getEnrolledFingerprints(anyInt());
+        setUpFragment(true, PRIMARY_USER_ID, TYPE_UDFPS_OPTICAL, 5);
+
+        shadowOf(Looper.getMainLooper()).idle();
+
+        Preference.OnPreferenceClickListener listener =
+                spiedPrimarySwitchIntentPref.getOnPreferenceClickListener();
+        assertThat(listener).isNotNull();
+        listener.onPreferenceClick(spiedPrimarySwitchIntentPref);
+
+        // LAUNCH_EXT_PREF_REQUEST = 12
+        verify(mFragment, never()).startActivityForResult(any(Intent.class), eq(12));
     }
 
     private void setSensor(@FingerprintSensorProperties.SensorType int sensorType,

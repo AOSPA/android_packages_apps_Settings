@@ -24,6 +24,7 @@ import com.android.settings.Settings.ConnectedDeviceDashboardActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -68,6 +69,8 @@ open class ConnectedDeviceDashboardScreen :
         makeLaunchIntent(context, ConnectedDeviceDashboardActivity::class.java, metadata?.key)
 
     override val availabilityDescription = "The device must support the 'connected devices' top level Settings category."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean =
         context.resources.getBoolean(R.bool.config_show_top_level_connected_devices)

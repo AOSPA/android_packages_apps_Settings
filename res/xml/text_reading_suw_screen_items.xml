@@ -16,7 +16,32 @@
 -->
 
 <ItemGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
     android:id="@+id/text_reading_in_suw">
+
+    <SectionItem
+        android:id="@+id/display_text_size_in_suw"
+        android:title="@string/category_title_display_text_size">
+
+        <com.android.settings.accessibility.setupwizard.items.SliderItem
+            android:id="@+id/font_size_in_suw"
+            android:title="@string/title_font_size"
+            android:summary="@string/short_summary_font_size"
+            settings:iconStart="@drawable/ic_remove_24dp"
+            settings:iconStartContentDescription="@string/font_size_make_smaller_desc"
+            settings:iconEnd="@drawable/ic_add_24dp"
+            settings:iconEndContentDescription="@string/font_size_make_larger_desc" />
+
+        <com.android.settings.accessibility.setupwizard.items.SliderItem
+            android:id="@+id/display_size_in_suw"
+            android:title="@string/screen_zoom_title"
+            android:summary="@string/screen_zoom_short_summary"
+            settings:iconStart="@drawable/ic_remove_24dp"
+            settings:iconStartContentDescription="@string/screen_zoom_make_smaller_desc"
+            settings:iconEnd="@drawable/ic_add_24dp"
+            settings:iconEndContentDescription="@string/screen_zoom_make_larger_desc" />
+
+    </SectionItem>
 
     <SectionItem
         android:id="@+id/text_style_in_suw"

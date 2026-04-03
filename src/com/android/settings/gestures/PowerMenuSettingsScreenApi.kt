@@ -31,6 +31,7 @@ import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
@@ -94,7 +95,8 @@ class PowerMenuSettingsScreenApi() :
             type =
                 GeneratedType(
                     description = R.string.long_press_power_assistant_sensitivity_ms_description,
-                    unit = "ms"
+                    unit = "ms",
+                    key = "LongPressButtonTime",
                 ) {
                     context.resources.getIntArray(DURATIONS_ARRAY_ID).map {
                         it.createSensitivityGeneratedValue(context)

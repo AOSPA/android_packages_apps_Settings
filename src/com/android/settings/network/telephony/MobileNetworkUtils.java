@@ -15,15 +15,19 @@
  */
 
 /*
+// QTI_BEGIN: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+// QTI_END: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
  * Copyright (c) 2022-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
 package com.android.settings.network.telephony;
 
+// QTI_BEGIN: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
 import static com.qti.extphone.ExtTelephonyManager.FEATURE_TDSCDMA_SUPPORT;
 
+// QTI_END: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
 import static android.provider.Telephony.Carriers.ENFORCE_MANAGED_URI;
 
 import android.app.KeyguardManager;
@@ -311,11 +315,13 @@ public class MobileNetworkUtils {
         }
     }
 
+// QTI_BEGIN: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
     public static boolean isCdmaSupported(Context context) {
         final PackageManager pm = context.getPackageManager();
         return pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_CDMA);
     }
 
+// QTI_END: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
     /**
      * Return {@code true} if show CDMA category
      */
@@ -340,12 +346,14 @@ public class MobileNetworkUtils {
 
         if (isWorldMode(context, subId)) {
             long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
+// QTI_BEGIN: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
             try {
                 allowedNetworkTypes = telephonyManager.getAllowedNetworkTypesForReason(
                         TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
             } catch (Exception ex) {
                 Log.e(TAG, "isCdmaOptions: getAllowedNetworkTypesForReason exception", ex);
             }
+// QTI_END: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
             final int settingsNetworkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
 
             if (settingsNetworkMode == TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA
@@ -376,12 +384,14 @@ public class MobileNetworkUtils {
         final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
+// QTI_BEGIN: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
         try {
             allowedNetworkTypes = telephonyManager.getAllowedNetworkTypesForReason(
                     TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
         } catch (Exception ex) {
             Log.e(TAG, "isGsmOptions: getAllowedNetworkTypesForReason exception", ex);
         }
+// QTI_END: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
         final int networkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
         if (isWorldMode(context, subId)) {
             if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO
@@ -449,6 +459,7 @@ public class MobileNetworkUtils {
 
         if (isWorldMode(context, subId)) {
             long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
+// QTI_BEGIN: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
             try {
                 allowedNetworkTypes = telephonyManager.getAllowedNetworkTypesForReason(
                         TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
@@ -456,6 +467,7 @@ public class MobileNetworkUtils {
                 Log.e(TAG, "shouldDisplayNetworkSelectOptions: getAllowedNetworkTypesForReason"
                          + " exception", ex);
             }
+// QTI_END: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
             final int networkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
             if (networkMode == TelephonyManager.NETWORK_MODE_LTE_CDMA_EVDO) {
                 return false;
@@ -482,11 +494,13 @@ public class MobileNetworkUtils {
 
     //TODO(b/117651939): move it to telephony
     private static boolean isTdscdmaSupported(Context context, TelephonyManager telephonyManager) {
+// QTI_BEGIN: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
         ExtTelephonyManager extTelephonyMgr = ExtTelephonyManager.getInstance(context);
         if (!extTelephonyMgr.isFeatureSupported(FEATURE_TDSCDMA_SUPPORT)) {
             return false;
         }
 
+// QTI_END: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
         final PersistableBundle carrierConfig = CarrierConfigCache.getInstance(context).getConfig();
 
         if (carrierConfig == null) {
@@ -575,6 +589,7 @@ public class MobileNetworkUtils {
         final TelephonyManager telephonyManager = context.getSystemService(TelephonyManager.class)
                 .createForSubscriptionId(subId);
         long allowedNetworkTypes = NetworkModes.NETWORK_MODE_UNKNOWN;
+// QTI_BEGIN: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
         try {
             allowedNetworkTypes = telephonyManager.getAllowedNetworkTypesForReason(
                     TelephonyManager.ALLOWED_NETWORK_TYPES_REASON_USER);
@@ -582,6 +597,7 @@ public class MobileNetworkUtils {
             Log.e(TAG, "shouldSpeciallyUpdateGsmCdma: getAllowedNetworkTypesForReason"
                     + " exception", ex);
         }
+// QTI_END: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
         final int networkMode = RadioAccessFamily.getNetworkTypeFromRaf((int) allowedNetworkTypes);
         if (networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM
                 || networkMode == TelephonyManager.NETWORK_MODE_LTE_TDSCDMA_GSM_WCDMA
@@ -717,6 +733,7 @@ public class MobileNetworkUtils {
      */
     public static CharSequence getPreferredStatus(boolean isRtlMode, Context context,
             boolean isPreferredCallStatus, List<SubscriptionInfoEntity> entityList) {
+// QTI_BEGIN: 2023-11-16: Telephony: Perform summary for data preference
         return getPreferredStatus(isRtlMode, context, isPreferredCallStatus, false, entityList);
     }
 
@@ -726,6 +743,7 @@ public class MobileNetworkUtils {
     public static CharSequence getPreferredStatus(boolean isRtlMode, Context context,
             boolean isPreferredCallStatus, boolean isPreferredData,
             List<SubscriptionInfoEntity> entityList) {
+// QTI_END: 2023-11-16: Telephony: Perform summary for data preference
         if (entityList != null && !entityList.isEmpty()) {
             final StringBuilder summary = new StringBuilder();
             for (SubscriptionInfoEntity subInfo : entityList) {
@@ -737,6 +755,7 @@ public class MobileNetworkUtils {
                     return displayName;
                 }
 
+// QTI_BEGIN: 2023-11-16: Telephony: Perform summary for data preference
                 CharSequence status = "";
                 if (isPreferredData) {
                     status = getPreferredDataStatus(context, subInfo);
@@ -745,6 +764,7 @@ public class MobileNetworkUtils {
                             ? getPreferredCallStatus(context, subInfo)
                             : getPreferredSmsStatus(context, subInfo);
                 }
+// QTI_END: 2023-11-16: Telephony: Perform summary for data preference
                 if (status.toString().isEmpty()) {
                     // If there are 2 or more SIMs and one of these has no preferred status,
                     // set only its displayName as summary.
@@ -784,6 +804,7 @@ public class MobileNetworkUtils {
             SubscriptionInfoEntity subInfo) {
         String status = "";
         if (subInfo.getSubId() == SubscriptionManager.getDefaultSmsSubscriptionId()) {
+// QTI_BEGIN: 2023-11-16: Telephony: Perform summary for data preference
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 
@@ -794,6 +815,7 @@ public class MobileNetworkUtils {
             SubscriptionInfoEntity subInfo) {
         String status = "";
         if (subInfo.getSubId() == SubscriptionManager.getDefaultDataSubscriptionId()) {
+// QTI_END: 2023-11-16: Telephony: Perform summary for data preference
             status = setSummaryResId(context, R.string.calls_sms_preferred);
         }
 
@@ -828,9 +850,11 @@ public class MobileNetworkUtils {
 
     public static boolean isCagSnpnEnabled(Context context) {
         if (mCagSnpnFeatureStatus == -1) {
+// QTI_BEGIN: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
             ExtTelephonyManager extTelephonyMgr = ExtTelephonyManager.getInstance(context);
             mCagSnpnFeatureStatus = extTelephonyMgr.getPropertyValueBool(PROPERTY_CAG_SNPN, false)
                     ? 1 : 0;
+// QTI_END: 2024-11-20: Telephony: Deprecate CDMA/TDSCDMA
             Log.d(TAG, "isCagSnpnEnabled, mCagSnpnFeatureStatus = " + mCagSnpnFeatureStatus);
         }
         return mCagSnpnFeatureStatus == 1 ? true : false;

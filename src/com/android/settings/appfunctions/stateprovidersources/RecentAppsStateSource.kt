@@ -19,6 +19,7 @@ package com.android.settings.appfunctions.stateprovidersources
 import android.app.usage.UsageStats
 import android.content.Context
 import android.icu.text.RelativeDateTimeFormatter
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.applications.AppsPreferenceController
 import com.android.settings.applications.RecentAppStatsMixin
@@ -34,7 +35,7 @@ class RecentAppsStateSource : DeviceStateSource {
         context: Context,
         sharedDeviceStateData: SharedDeviceStateData,
     ): List<PerScreenDeviceStates> {
-        val recentAppStatsMixin = RecentAppStatsMixin(context, RECENT_APP_COUNT)
+        val recentAppStatsMixin = RecentAppStatsMixin(context, RECENT_APP_COUNT, /* excludeProfiles= */ true)
         recentAppStatsMixin.loadDisplayableRecentApps(RECENT_APP_COUNT)
         val deviceStateItems = mutableListOf<DeviceStateItem>()
         for (app in recentAppStatsMixin.recentApps) {
@@ -44,7 +45,7 @@ class RecentAppsStateSource : DeviceStateSource {
             deviceStateItems.add(
                 DeviceStateItem(
                     key = "recent_apps_category_package_${stats.packageName}",
-                    purpose = "recent_apps_category_package_${stats.packageName}",
+                    purpose = context.getString(R.string.app_last_used_time_purpose),
                     jsonValue =
                         StringUtil.formatRelativeTime(
                             context,

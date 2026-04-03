@@ -27,7 +27,9 @@ import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 import com.android.settingslib.preference.SwitchPreferenceBinding
@@ -79,12 +81,18 @@ class RampingRingerVibrationSwitchPreference(
     override val availabilityDescription =
         "The device must be voice capable and ramping ringer must not be enabled by telephony config."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context) =
         deviceConfig.isVoiceCapable(context) && !deviceConfig.isTelephonyRampingRingerEnabled()
 
     override fun storage(context: Context): KeyValueStore = storage
 
     override fun dependencies(context: Context) = arrayOf(ringPreferenceKey)
+
+    override fun getEnabledDescription() = "The vibration setting (vibrate_on) must be enabled and ${ringPreferenceKey} must not be set to 0."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = storage.isPreferenceEnabled()
 
@@ -105,6 +113,15 @@ class RampingRingerVibrationSwitchPreference(
         }
         return true
     }
+
+    override fun getWritePermit(
+        context: Context,
+        value: Boolean?,
+        callingPid: Int,
+        callingUid: Int,
+    ) = ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override val sensitivityLevel: Int
         get() = SensitivityLevel.NO_SENSITIVITY

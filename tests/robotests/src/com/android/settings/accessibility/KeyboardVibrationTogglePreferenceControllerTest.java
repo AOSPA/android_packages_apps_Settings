@@ -33,6 +33,7 @@ import android.app.settings.SettingsEnums;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.vibrator.Flags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.Settings;
 
@@ -88,6 +89,22 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_keyboardVibrationSettingsSupported))
                 .thenReturn(true);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsIntensitySupported))
+                .thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_intensitySupportedAndFlagDisabled_available() {
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsSupported))
+                .thenReturn(true);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsIntensitySupported))
+                .thenReturn(true);
+        mSetFlagsRule.disableFlags(Flags.FLAG_KEYBOARD_INTENSITY_SLIDER_ENABLED);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
     }
@@ -97,6 +114,22 @@ public class KeyboardVibrationTogglePreferenceControllerTest {
         when(mResources.getBoolean(
                 com.android.internal.R.bool.config_keyboardVibrationSettingsSupported))
                 .thenReturn(false);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsIntensitySupported))
+                .thenReturn(false);
+
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
+    }
+
+    @Test
+    public void getAvailabilityStatus_intensitySupportedAndFlagEnabled_unavailable() {
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsSupported))
+                .thenReturn(true);
+        when(mResources.getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsIntensitySupported))
+                .thenReturn(true);
+        mSetFlagsRule.enableFlags(Flags.FLAG_KEYBOARD_INTENSITY_SLIDER_ENABLED);
 
         assertThat(mController.getAvailabilityStatus()).isEqualTo(UNSUPPORTED_ON_DEVICE);
     }

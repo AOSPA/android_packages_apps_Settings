@@ -51,7 +51,9 @@ import com.android.settings.core.InstrumentedFragment;
 import com.android.settings.core.SubSettingLauncher;
 import com.android.settings.network.ResetNetworkRestrictionViewBuilder;
 import com.android.settings.network.SubscriptionUtil;
+// QTI_BEGIN: 2022-10-07: Telephony: Merge "Settings: support CU operator ID display in domestic roaming status" into t-keystone-qcom-dev
 import com.android.settings.network.telephony.DomesticRoamUtils;
+// QTI_END: 2022-10-07: Telephony: Merge "Settings: support CU operator ID display in domestic roaming status" into t-keystone-qcom-dev
 import com.android.settings.network.telephony.EuiccRacConnectivityDialogActivity;
 import com.android.settings.password.ChooseLockSettingsHelper;
 import com.android.settings.password.ConfirmLockPattern;
@@ -240,6 +242,7 @@ public class ResetNetwork extends InstrumentedFragment {
                 if (TextUtils.isEmpty(name)) {
                     CharSequence carrierName = record.getCarrierName();
                     name = TextUtils.isEmpty(carrierName) ? "" : carrierName.toString();
+// QTI_BEGIN: 2022-10-07: Telephony: Merge "Settings: support CU operator ID display in domestic roaming status" into t-keystone-qcom-dev
                     if (DomesticRoamUtils.isFeatureEnabled(getContext())) {
                         String operatorName = DomesticRoamUtils.getRegisteredOperatorName(
                                 getContext(), record.getSubscriptionId());
@@ -247,6 +250,7 @@ public class ResetNetwork extends InstrumentedFragment {
                             name = operatorName;
                         }
                     }
+// QTI_END: 2022-10-07: Telephony: Merge "Settings: support CU operator ID display in domestic roaming status" into t-keystone-qcom-dev
                 }
                 if (TextUtils.isEmpty(name)) {
                     name = String.format("MCC:%s MNC:%s Slot:%s Id:%s", record.getMcc(),

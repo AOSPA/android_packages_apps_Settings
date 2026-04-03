@@ -23,6 +23,9 @@ import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateSetterExecutorResult
 import com.android.settings.appfunctions.GenericDeviceStateItemSetterParams
+import com.android.settings.appfunctions.utils.DEEP_LINK_ONLY
+import com.android.settings.appfunctions.utils.DO_NOT_EXPOSE
+import com.android.settings.appfunctions.utils.REQUIRES_CONFIRMATION
 import com.android.settings.appfunctions.utils.determineParamName
 import com.android.settings.appfunctions.utils.getPreference
 import com.android.settings.appfunctions.utils.setPreference
@@ -33,9 +36,6 @@ import com.android.settingslib.service.transformCatalystSetValueResponse
 import com.google.android.appfunctions.schema.common.v1.devicestate.SetDeviceStateItemResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import com.android.settings.appfunctions.utils.DO_NOT_EXPOSE
-import com.android.settings.appfunctions.utils.REQUIRES_CONFIRMATION
-import com.android.settings.appfunctions.utils.DEEP_LINK_ONLY
 
 /**
  * A [DeviceStateExecutor] that sets device state for Settings that are exposed using Catalyst
@@ -107,74 +107,101 @@ class CatalystStateSetterExecutor(private val context: Context) : DeviceStateExe
         val keyParameters = buildKeyParameters(screenKey, params.itemizationKeys)
 
         val currentValue = getPreference(context, screenKey, key, keyParameters)
-        var failureReason = "Unsupported value type or value"
+        var failureReason: String? = null
 
-        if(currentValue != null && !currentValue.isAvailable){
-            failureReason = "Set unavailable"
+        if (currentValue == null) {
+            failureReason = "Unsupported value type or value"
         }
 
-        if(currentValue != null && !currentValue.isEnabled){
-            failureReason = "Set is not enabled for this preference"
-        }
-
-        if (currentValue?.sensitivityLevel == DO_NOT_EXPOSE || currentValue?.sensitivityLevel == REQUIRES_CONFIRMATION || currentValue?.sensitivityLevel == DEEP_LINK_ONLY) {
+        if (
+            currentValue?.sensitivityLevel == DO_NOT_EXPOSE ||
+                currentValue?.sensitivityLevel == REQUIRES_CONFIRMATION ||
+                currentValue?.sensitivityLevel == DEEP_LINK_ONLY
+        ) {
             failureReason = "Set unavailable due to sensitivity level restrictions"
 
-            if (currentValue.sensitivityLevel == DO_NOT_EXPOSE && toSettingsPreferenceValue(
-                    params.value,
-                    currentValue.settingsPreferenceValue?.type
-                ) != null
+            if (
+                currentValue.sensitivityLevel == DO_NOT_EXPOSE &&
+                    toSettingsPreferenceValue(
+                        params.value,
+                        currentValue.settingsPreferenceValue?.type,
+                    ) != null
             ) {
                 Log.e(
                     "UNEXPECTED",
-                    "Get current value should not be possible on DO_NOT_EXPOSE preferences"
+                    "Get current value should not be possible on DO_NOT_EXPOSE preferences",
                 )
 
                 return SetDeviceStateItemResponse(
                     isSuccessful = false,
-                    currentValue = "na",
+                    currentValue = "N/A",
                     failureReason = failureReason,
                 )
             }
+        }
+
+        if (currentValue != null) {
+            if (!currentValue.isAvailable) {
+                failureReason = "Preference unavailable"
+            } else if (!currentValue.isEnabled) {
+                failureReason = "Preference not enabled"
+            } else if (!currentValue.isWriteable) {
+                failureReason = "Set is not supported for this preference"
+            }
+        }
+
+        if (failureReason != null) {
+            return SetDeviceStateItemResponse(
+                isSuccessful = false,
+                currentValue = "N/A",
+                failureReason = failureReason,
+            )
         }
 
         val settingsPreferenceValue =
             toSettingsPreferenceValue(params.value, currentValue?.settingsPreferenceValue?.type)
                 ?: return SetDeviceStateItemResponse(
                     isSuccessful = false,
-                    currentValue = settingsPreferenceValueToString(currentValue?.settingsPreferenceValue),
+                    currentValue =
+                        settingsPreferenceValueToString(currentValue?.settingsPreferenceValue),
                     failureReason = failureReason,
                 )
 
+        if (currentValue != null && currentValue.hasError) {
+            return SetDeviceStateItemResponse(
+                isSuccessful = false,
+                currentValue = "N/A",
+                failureReason = settingsPreferenceValueToString(currentValue.settingsPreferenceValue),
+            )
+        }
+
         return try {
-            val resultInt =
+            val setterResponse =
                 setPreference(context, screenKey, key, settingsPreferenceValue, keyParameters)
-            val setValueResult = transformCatalystSetValueResponse(resultInt)
+            val setValueResult = transformCatalystSetValueResponse(setterResponse)
+
             return if (setValueResult.resultCode == SetValueResult.RESULT_OK) {
                 SetDeviceStateItemResponse(
                     isSuccessful = true,
                     currentValue = settingsPreferenceValueToString(settingsPreferenceValue),
                 )
-            } else if(setValueResult.resultCode == SetValueResult.RESULT_DISALLOW){
-                SetDeviceStateItemResponse(
-                    isSuccessful = false,
-                    currentValue = settingsPreferenceValueToString(currentValue?.settingsPreferenceValue),
-                    failureReason = "Preference evaluation of write permit is disallow",
-                )
             } else {
+                val failureReasonMessage =
+                    setterResponse.failureReason?.let { " due to $it" } ?: ""
+
                 SetDeviceStateItemResponse(
                     isSuccessful = false,
-                    currentValue = settingsPreferenceValueToString(currentValue?.settingsPreferenceValue),
-                    // TODO b/484302113: Show the error in an AI friendly format such as String
-                    failureReason = setValueResult.resultCode.toString(),
+                    currentValue =
+                        settingsPreferenceValueToString(currentValue?.settingsPreferenceValue),
+                    failureReason = "Error with code ${setterResponse.errorCode}$failureReasonMessage",
                 )
             }
-
         } catch (e: Exception) {
             Log.e(TAG, "Error setting preference value", e)
             SetDeviceStateItemResponse(
                 isSuccessful = false,
-                currentValue = settingsPreferenceValueToString(currentValue?.settingsPreferenceValue),
+                currentValue =
+                    settingsPreferenceValueToString(currentValue?.settingsPreferenceValue),
                 failureReason = "Error: ${e.message}",
             )
         }

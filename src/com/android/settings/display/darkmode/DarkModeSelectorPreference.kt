@@ -27,7 +27,6 @@ import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.accessibility.ForceDarkAppExceptionsPageProvider
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
-import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceIndexableTitleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
@@ -36,12 +35,10 @@ import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.BooleanValuePreferenceBinding
 import com.android.settingslib.widget.SelectorWithWidgetPreference
 
-// LINT.IfChange
 sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStorage) :
     BooleanValuePreference,
     BooleanValuePreferenceBinding,
     SelectorWithWidgetPreference.OnClickListener,
-    PreferenceAvailabilityProvider,
     PreferenceIndexableTitleProvider {
 
     override fun storage(context: Context): KeyValueStore = dataStore
@@ -62,10 +59,6 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
-    override val availabilityDescription = "The device must support dark mode in the API."
-
-    override fun isAvailable(context: Context) = Flags.catalystDarkUiMode()
-
     override fun createWidget(context: Context) = SelectorWithWidgetPreference(context)
 
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
@@ -79,6 +72,7 @@ sealed class DarkModeSelectorPreference(private val dataStore: DarkThemeModeStor
 }
 
 /** The "Standard Dark Theme" preference. */
+// LINT.IfChange
 class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val isUiOnly: Boolean) :
     DarkModeSelectorPreference(dataStore) {
 
@@ -111,8 +105,10 @@ class StandardDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val is
         const val KEY = "standard_dark_theme"
     }
 }
+// LINT.ThenChange(DarkModeApiFirstScreen.kt)
 
 /** The "Expanded Dark Theme" preference. */
+// LINT.IfChange
 class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val isUiOnly: Boolean) :
     DarkModeSelectorPreference(dataStore), View.OnClickListener {
 
@@ -177,4 +173,4 @@ class ExpandedDarkModeSelectorPreference(dataStore: DarkThemeModeStorage, val is
         const val KEY = "expanded_dark_theme"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/ForceInvertPreferenceController.java)
+// LINT.ThenChange(DarkModeApiFirstScreen.kt)

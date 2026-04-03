@@ -42,6 +42,7 @@ import com.android.settings.supervision.shared.widget.NonIndexablePreferenceCate
 import com.android.settings.supervision.webcontentfilters.SupervisionWebContentFiltersScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -50,7 +51,7 @@ import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.supervision.SupervisionLog
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NONE
 
 /**
  * Supervision settings landing page (Settings > Supervision).
@@ -68,7 +69,7 @@ open class SupervisionDashboardScreen :
     PreferenceScreenMixin,
     PreferenceLifecycleProvider,
     OnRoleHoldersChangedListener {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NONE)
 
     private var supervisionClient: SupervisionMessengerClient? = null
     private var supervisionManager: SupervisionManager? = null
@@ -175,6 +176,8 @@ open class SupervisionDashboardScreen :
         get() = R.drawable.ic_account_child_invert
 
     override val availabilityDescription = "The device must not be in demo mode, or the device must support supervision during demo mode."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = !Utils.shouldHideSupervisionInDemoMode(context)
 

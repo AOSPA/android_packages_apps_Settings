@@ -18,16 +18,12 @@ package com.android.settings.accessibility.textreading.ui
 
 import android.Manifest
 import android.content.Context
-import androidx.annotation.VisibleForTesting
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint
 import com.android.settings.accessibility.TooltipSliderPreference
 import com.android.settings.accessibility.extensions.isInSetupWizard
-import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController
-import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.CHANGE_BY_BUTTON_DELAY
-import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.CHANGE_BY_SLIDER_DELAY
-import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.MIN_COMMIT_DELAY
+import com.android.settings.accessibility.shared.utils.shouldShowFocusRingsInSuw
 import com.android.settings.accessibility.textreading.data.DisplaySizeDataStore
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
@@ -40,12 +36,10 @@ import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 import com.google.android.material.slider.Slider
-import kotlin.time.Duration
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 internal class DisplaySizePreference(
     context: Context,
@@ -54,8 +48,6 @@ internal class DisplaySizePreference(
 ) :
     IntRangeValuePreference,
     SliderPreferenceBinding,
-    Slider.OnSliderTouchListener,
-    Slider.OnChangeListener,
     PreferenceLifecycleProvider,
     PreferenceAvailabilityProvider {
 
@@ -81,8 +73,8 @@ internal class DisplaySizePreference(
     ): @ReadWritePermit Int {
         return ReadWritePermit.ALLOW
     }
-    override val supportsWrite = true
 
+    override val supportsWrite = true
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
@@ -92,21 +84,13 @@ internal class DisplaySizePreference(
     }
 
     private val displaySizes by lazy { displaySizeDataStore.displaySizeData.value.values }
-    private var isDraggingSlider = false
 
-    private val _displaySizePreview by lazy {
-        MutableStateFlow(displaySizeDataStore.displaySizeData.value)
+    private val delegate by lazy {
+        DisplaySizeDelegate(displaySizeDataStore = displaySizeDataStore, dataStoreKey = KEY)
     }
 
-    /**
-     * [displaySizePreview] is the temporary display size while the user is dragging and haven't
-     * commit the change. This is useful when trying to display preview of the size changes.
-     */
-    val displaySizePreview by lazy { _displaySizePreview.asStateFlow() }
-
-    private val debounceCommitController by lazy {
-        DebounceConfigurationChangeCommitController(minCommitDelay = MIN_COMMIT_DELAY)
-    }
+    val displaySizePreview
+        get() = delegate.sizePreview
 
     override val key: String
         get() = KEY
@@ -122,7 +106,6 @@ internal class DisplaySizePreference(
 
     override val keywords: Int
         get() = R.string.keywords_display_size
-
 
     override fun createWidget(context: Context): SliderPreference {
         val widget =
@@ -140,9 +123,19 @@ internal class DisplaySizePreference(
             setIconEnd(R.drawable.ic_add_24dp)
             setIconEndContentDescription(R.string.screen_zoom_make_larger_desc)
             setTickVisible(true)
-            setDefaultValue(_displaySizePreview.value.currentIndex)
-            setExtraChangeListener(this@DisplaySizePreference)
-            setExtraTouchListener(this@DisplaySizePreference)
+            setDefaultValue(delegate.sizePreview.value.currentIndex)
+            setExtraChangeListener { _, value, _ -> delegate.onValueChange(index = value.toInt()) }
+            setExtraTouchListener(
+                object : Slider.OnSliderTouchListener {
+                    override fun onStartTrackingTouch(slider: Slider) {
+                        delegate.onStartTrackingTouch()
+                    }
+
+                    override fun onStopTrackingTouch(slider: Slider) {
+                        delegate.onStopTrackingTouch(slider.value.toInt())
+                    }
+                }
+            )
         }
         return widget
     }
@@ -154,8 +147,15 @@ internal class DisplaySizePreference(
         // datastore while the user is dragging, or when we want to have some delay to show the
         // preview before committing the changes.
         preference as SliderPreference
-        preference.isPersistent = false
-        preference.value = _displaySizePreview.value.currentIndex
+        preference.run {
+            isPersistent = false
+            value = delegate.sizePreview.value.currentIndex
+            // This change makes the row that contains the "Display size" slider unable to be
+            // focused, but allows the slider and its buttons to be focusable.
+            if (shouldShowFocusRingsInSuw(context)) {
+                isSelectable = false
+            }
+        }
     }
 
     override fun onStart(context: PreferenceLifecycleContext) {
@@ -167,7 +167,7 @@ internal class DisplaySizePreference(
         // widget won't save the correct index when
         // [View#onSaveInstanceState] is called.
         context.findPreference<SliderPreference>(KEY)?.value =
-            _displaySizePreview.value.currentIndex
+            delegate.sizePreview.value.currentIndex
     }
 
     override fun getIncrementStep(context: Context): Int {
@@ -186,33 +186,11 @@ internal class DisplaySizePreference(
         return displaySizeDataStore
     }
 
-    override fun onStartTrackingTouch(slider: Slider) {
-        isDraggingSlider = true
-    }
-
-    override fun onStopTrackingTouch(slider: Slider) {
-        isDraggingSlider = false
-        // call data store to save the value
-        commitChange(CHANGE_BY_SLIDER_DELAY, slider.value.toInt())
-    }
-
-    override fun onValueChange(slider: Slider, value: Float, fromUser: Boolean) {
-        _displaySizePreview.value = _displaySizePreview.value.copy(currentIndex = value.toInt())
-
-        if (!isDraggingSlider) {
-            // if not dragging call datastore to save the value
-            commitChange(CHANGE_BY_BUTTON_DELAY, value.toInt())
-        }
-    }
-
     override val availabilityDescription = "The main display must be internal."
 
-    override fun isAvailable(context: Context) = context.display.isInternal
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
-    @VisibleForTesting
-    internal fun commitChange(delay: Duration, index: Int) {
-        debounceCommitController.commitDelayed(delay) { displaySizeDataStore.setInt(KEY, index) }
-    }
+    override fun isAvailable(context: Context) = context.display.isInternal
 
     companion object {
         const val KEY = "display_size"

@@ -465,11 +465,6 @@
     "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_vibration_screen}"
   },
   {
-    "file_name": "SoundWorkApiScreen.kt",
-    "item_name": "sound_work_screen",
-    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=sound_work_screen}"
-  },
-  {
     "file_name": "ContactsStorageApiScreen.kt",
     "item_name": "contacts_storage_settings",
     "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=contacts_storage_settings}"
@@ -708,11 +703,6 @@
     "file_name": "DeviceUnlockApiScreen.kt",
     "item_name": "device_unlock_pref_screen",
     "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=device_unlock_pref_screen}"
-  },
-  {
-    "file_name": "FirmwareVersionScreenApi.kt",
-    "item_name": "firmware_version_screen",
-    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=firmware_version_screen}"
   },
   {
     "file_name": "UserDetailsSettingsScreenApi.kt",
@@ -1033,6 +1023,181 @@
     "file_name": "ZenAccessDetailsApiScreen.kt",
     "item_name": "zen_access_detail",
     "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={launch_screen_extra=Bundle[{package=${package}}], screen_key=zen_access_detail, screen_args=Bundle[{package=${package}}]}"
+  },
+  {
+    "file_name": "AccountDetailApiScreen.kt",
+    "item_name": "account_detail_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=account_detail_screen, :settings:fragment_args_key=account_detail_screen, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "AppDataUsageScreenApi.kt",
+    "item_name": "api_app_data_usage_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_app_data_usage_screen, :settings:fragment_args_key=api_app_data_usage_screen, screen_args=Bundle[{app=com.google.android.youtube}]}"
+  },
+  {
+    "file_name": "AppStorageSettingsScreenApi.kt",
+    "item_name": "api_app_storage_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_app_storage_settings, :settings:fragment_args_key=api_app_storage_settings, screen_args=Bundle[{package=com.google.android.youtube}]}"
+  },
+  {
+    "file_name": "BatterySaverGoogleApiScreen.kt",
+    "item_name": "api_battery_saver_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_battery_saver_screen, :settings:fragment_args_key=api_battery_saver_screen}"
+  },
+  {
+    "file_name": "PowerUsageAdvancedApiScreen.kt",
+    "item_name": "api_battery_usage_summary",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_battery_usage_summary, :settings:fragment_args_key=api_battery_usage_summary}"
+  },
+  {
+    "file_name": "BluetoothDashboardScreenApi.kt",
+    "item_name": "api_bluetooth_switchbar_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_bluetooth_switchbar_screen, :settings:fragment_args_key=api_bluetooth_switchbar_screen}"
+  },
+  {
+    "file_name": "AdvancedConnectedDeviceApiScreen.kt",
+    "item_name": "api_connection_preferences",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_connection_preferences, :settings:fragment_args_key=api_connection_preferences}"
+  },
+  {
+    "file_name": "DarkModeApiFirstScreen.kt",
+    "item_name": "api_dark_ui_mode",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_dark_ui_mode, :settings:fragment_args_key=api_dark_ui_mode}"
+  },
+  {
+    "file_name": "DoubleTapPowerApiFirstScreen.kt",
+    "item_name": "api_double_tap_power_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_double_tap_power_screen, :settings:fragment_args_key=api_double_tap_power_screen}"
+  },
+  {
+    "file_name": "AppInfoScreenApiFirst.kt",
+    "item_name": "api_installed_app_detail_settings_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_installed_app_detail_settings_screen, :settings:fragment_args_key=api_installed_app_detail_settings_screen, screen_args=Bundle[{package=com.google.android.youtube}]}"
+  },
+  {
+    "file_name": "LocationServicesScreenApi.kt",
+    "item_name": "api_location_services",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_location_services, :settings:fragment_args_key=api_location_services}"
+  },
+  {
+    "file_name": "LocationSettingsScreenApi.kt",
+    "item_name": "api_location_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_location_settings, :settings:fragment_args_key=api_location_settings}"
+  },
+  {
+    "file_name": "PowerUsageSummaryApiScreen.kt",
+    "item_name": "api_power_usage_summary_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=api_power_usage_summary_screen, :settings:fragment_args_key=api_power_usage_summary_screen}"
+  },
+  {
+    "file_name": "CellularSecurityScreenApi.kt",
+    "item_name": "cellular_security_settings_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=cellular_security_settings_screen, :settings:fragment_args_key=cellular_security_settings_screen}"
+  },
+  {
+    "file_name": "DeviceStateAutoRotateApiScreen.kt",
+    "item_name": "device_state_auto_rotate_pref_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=device_state_auto_rotate_pref_screen, :settings:fragment_args_key=device_state_auto_rotate_pref_screen}"
+  },
+  {
+    "file_name": "EditShortcutsScreen.kt",
+    "item_name": "edit_shortcuts_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=edit_shortcuts_screen, :settings:fragment_args_key=edit_shortcuts_screen, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "ResolutionRefreshRateApiScreen.kt",
+    "item_name": "external_display_resolution_refresh_rate_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=external_display_resolution_refresh_rate_screen, :settings:fragment_args_key=external_display_resolution_refresh_rate_screen, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "MobileNetworkScreen.kt",
+    "item_name": "mobile_network_pref_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=mobile_network_pref_screen, :settings:fragment_args_key=mobile_network_pref_screen, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "NfcAndPaymentApiScreen.kt",
+    "item_name": "nfc_and_payment_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=nfc_and_payment_screen, :settings:fragment_args_key=nfc_and_payment_screen}"
+  },
+  {
+    "file_name": "PoliteNotificationsApiScreen.kt",
+    "item_name": "notification_cooldown_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=notification_cooldown_screen, :settings:fragment_args_key=notification_cooldown_screen}"
+  },
+  {
+    "file_name": "PowerBackgroundUsageDetailScreen.kt",
+    "item_name": "power_background_usage_detail",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=power_background_usage_detail, :settings:fragment_args_key=power_background_usage_detail, screen_args=Bundle[{extra_package_name=com.google.android.youtube}]}"
+  },
+  {
+    "file_name": "NumberingSystemLocaleListApiFirstScreen.kt",
+    "item_name": "regional_preference_numbering_system",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=regional_preference_numbering_system, :settings:fragment_args_key=regional_preference_numbering_system, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "ScreenResolutionApiScreen.kt",
+    "item_name": "screen_resolution",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=screen_resolution, :settings:fragment_args_key=screen_resolution}"
+  },
+  {
+    "file_name": "SmartAutoRotateApiScreen.kt",
+    "item_name": "smart_auto_rotate_pref_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=smart_auto_rotate_pref_screen, :settings:fragment_args_key=smart_auto_rotate_pref_screen}"
+  },
+  {
+    "file_name": "InteractAcrossProfilesAppDetailScreen.kt",
+    "item_name": "special_access_interact_across_profiles_app_detail",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=special_access_interact_across_profiles_app_detail, :settings:fragment_args_key=special_access_interact_across_profiles_app_detail, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "StylusUsiDetailsApiScreen.kt",
+    "item_name": "stylus_usi_details_api_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=stylus_usi_details_api_screen, :settings:fragment_args_key=stylus_usi_details_api_screen, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "TextToSpeechApiScreen.kt",
+    "item_name": "text_to_speech_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=text_to_speech_settings, :settings:fragment_args_key=text_to_speech_settings}"
+  },
+  {
+    "file_name": "TouchSensitivityScreen.kt",
+    "item_name": "touch_sensitivity_settings_page",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=touch_sensitivity_settings_page, :settings:fragment_args_key=touch_sensitivity_settings_page}"
+  },
+  {
+    "file_name": "WifiScanningApiScreen.kt",
+    "item_name": "wifi_always_scanning_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=wifi_always_scanning_screen, :settings:fragment_args_key=wifi_always_scanning_screen}"
+  },
+  {
+    "file_name": "WifiAppDataUsageScreenApi.kt",
+    "item_name": "wifi_app_data_usage_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=wifi_app_data_usage_screen, :settings:fragment_args_key=wifi_app_data_usage_screen, screen_args=Bundle[{app=com.google.android.youtube}]}"
+  },
+  {
+    "file_name": "WifiCallingScreen.kt",
+    "item_name": "wifi_calling",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=wifi_calling, :settings:fragment_args_key=wifi_calling, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "WifiDetailsScreenApi.kt",
+    "item_name": "wifi_details_settings",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=wifi_details_settings, :settings:fragment_args_key=wifi_details_settings, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "WifiNetworkDetailsScreen.kt",
+    "item_name": "wifi_network_details",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=wifi_network_details, :settings:fragment_args_key=wifi_network_details, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "WifiPrivacyScreenApi.kt",
+    "item_name": "wifi_privacy_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=wifi_privacy_screen, :settings:fragment_args_key=wifi_privacy_screen, screen_args=Bundle[{}]}"
+  },
+  {
+    "file_name": "ZenModeApiScreen.kt",
+    "item_name": "zen_mode_screen",
+    "intent": "Intent { act=com.android.settings.action.LAUNCH_SETTINGS_PAGES pkg=com.android.settings (has extras) } extras={screen_key=zen_mode_screen, :settings:fragment_args_key=zen_mode_screen, screen_args=Bundle[{MODE_NAME=Do Not Disturb}]}"
   }
 ]
 

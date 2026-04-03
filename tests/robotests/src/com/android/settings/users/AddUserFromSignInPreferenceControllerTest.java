@@ -15,6 +15,8 @@
  */
 package com.android.settings.users;
 
+import static android.os.Flags.FLAG_LOGIN_ADD_USER_ENFORCEMENT;
+
 import static com.android.settings.flags.Flags.FLAG_SHOW_ADD_USERS_FROM_SIGNIN_TOGGLE;
 
 import static com.google.common.truth.Truth.assertThat;
@@ -138,6 +140,7 @@ public class AddUserFromSignInPreferenceControllerTest {
 
         mController.updateState(preference);
 
+        verify(preference, org.mockito.Mockito.never()).setEnabled(false);
         verify(preference).setChecked(true);
     }
 
@@ -148,7 +151,37 @@ public class AddUserFromSignInPreferenceControllerTest {
 
         mController.updateState(preference);
 
+        verify(preference, org.mockito.Mockito.never()).setEnabled(false);
         verify(preference).setChecked(false);
+    }
+
+    @Test
+    @EnableFlags(FLAG_LOGIN_ADD_USER_ENFORCEMENT)
+    public void updateState_preferenceSetDisabledAndUncheckedWithSecondaryUserRestriction() {
+        android.content.pm.UserInfo user = new android.content.pm.UserInfo(10, "secondary", 0);
+        mUserManager.addAliveUser(user);
+        mUserManager.setUserRestriction(user.getUserHandle(), UserManager.DISALLOW_ADD_USER, true);
+        final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
+        when(preference.isDisabledByAdmin()).thenReturn(true);
+
+        mController.updateState(preference);
+
+        verify(preference).checkRestrictionAndSetDisabled(UserManager.DISALLOW_ADD_USER, 10);
+        verify(preference, org.mockito.Mockito.never()).setEnabled(false);
+        verify(preference).setChecked(false);
+    }
+
+    @Test
+    @EnableFlags(FLAG_LOGIN_ADD_USER_ENFORCEMENT)
+    public void updateState_preferenceSetEnabledWithNoOtherUserRestriction() {
+        android.content.pm.UserInfo user = new android.content.pm.UserInfo(10, "secondary", 0);
+        mUserManager.addAliveUser(user);
+        final RestrictedSwitchPreference preference = mock(RestrictedSwitchPreference.class);
+
+        mController.updateState(preference);
+
+        verify(preference, org.mockito.Mockito.never()).setEnabled(false);
+        verify(preference).setEnabled(true);
     }
 
     @Test

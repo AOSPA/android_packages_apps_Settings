@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2024-11-21: Telephony: Fix NullPointerException while disabling SIM card
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
  * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2024-11-21: Telephony: Fix NullPointerException while disabling SIM card
 package com.android.settings.network.telephony;
 
 import android.content.Context;
@@ -28,12 +30,18 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+// QTI_BEGIN: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
 import android.telephony.TelephonyCallback;
+// QTI_END: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
+// QTI_BEGIN: 2024-05-20: Telephony: Fix for pSIM/MEP profile switching on UI Settings
 import android.telephony.UiccSlotInfo;
+// QTI_END: 2024-05-20: Telephony: Fix for pSIM/MEP profile switching on UI Settings
 import android.text.TextUtils;
+// QTI_BEGIN: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
 import android.util.ArrayMap;
+// QTI_END: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
 import android.util.Log;
 import android.view.View;
 
@@ -41,7 +49,9 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.SidecarFragment;
 import com.android.settings.network.EnableMultiSimSidecar;
+// QTI_BEGIN: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
 import com.android.settings.network.SubscriptionsChangeListener;
+// QTI_END: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.SwitchToEuiccSubscriptionSidecar;
 import com.android.settings.network.SwitchToRemovableSlotSidecar;
@@ -51,16 +61,24 @@ import com.android.settings.network.telephony.TelephonyUtils;
 import com.google.common.collect.ImmutableList;
 
 import java.util.ArrayList;
+// QTI_BEGIN: 2024-11-21: Telephony: Fix NullPointerException while disabling SIM card
 import java.util.Arrays;
+// QTI_END: 2024-11-21: Telephony: Fix NullPointerException while disabling SIM card
 import java.util.List;
+// QTI_BEGIN: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
 import java.util.Map;
+// QTI_END: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
+// QTI_BEGIN: 2024-11-21: Telephony: Fix NullPointerException while disabling SIM card
 import java.util.Objects;
+// QTI_END: 2024-11-21: Telephony: Fix NullPointerException while disabling SIM card
 import java.util.stream.Collectors;
 
 /** This dialog activity handles both eSIM and pSIM subscriptions enabling and disabling. */
 public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogActivity
+// QTI_BEGIN: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
         implements SidecarFragment.Listener, ConfirmDialogFragment.OnConfirmListener,
         SubscriptionsChangeListener.SubscriptionsChangeListenerClient {
+// QTI_END: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
 
     private static final String TAG = "ToggleSubscriptionDialogActivity";
     // Arguments
@@ -81,8 +99,10 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     private static final int LINE_BREAK_OFFSET_TWO = 2;
     private static final String RTL_MARK = "\u200F";
 
+// QTI_BEGIN: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
     private Map<Integer, TelephonyCallbackCallStateListener> mCallStateListeners;
 
+// QTI_END: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
     /**
      * Returns an intent of ToggleSubscriptionDialogActivity.
      *
@@ -98,7 +118,9 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     private SubscriptionInfo mSubInfo;
+// QTI_BEGIN: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
     private SubscriptionsChangeListener mChangeListener;
+// QTI_END: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
     private SwitchToEuiccSubscriptionSidecar mSwitchToEuiccSubscriptionSidecar;
     private SwitchToRemovableSlotSidecar mSwitchToRemovableSlotSidecar;
     private EnableMultiSimSidecar mEnableMultiSimSidecar;
@@ -139,7 +161,9 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         isRtlMode = getResources().getConfiguration().getLayoutDirection()
                 == View.LAYOUT_DIRECTION_RTL;
         Log.i(TAG, "isMultipleEnabledProfilesSupported():" + isMultipleEnabledProfilesSupported());
+// QTI_BEGIN: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
         mCallStateListeners = new ArrayMap<>();
+// QTI_END: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
 
         if (savedInstanceState == null) {
             if (mEnable) {
@@ -153,17 +177,24 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     @Override
     protected void onResume() {
         super.onResume();
+// QTI_BEGIN: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
         if (mChangeListener == null) {
             mChangeListener = new SubscriptionsChangeListener(this, this);
         }
+// QTI_END: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
+// QTI_BEGIN: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
         registerCallStateListeners();
 
+// QTI_END: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
+// QTI_BEGIN: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
         mChangeListener.start();
+// QTI_END: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
         mSwitchToEuiccSubscriptionSidecar.addListener(this);
         mSwitchToRemovableSlotSidecar.addListener(this);
         mEnableMultiSimSidecar.addListener(this);
     }
 
+// QTI_BEGIN: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
     private void registerCallStateListeners() {
         if (mCallStateListeners != null) {
             for (int slotId = 0; slotId < mTelMgr.getActiveModemCount(); slotId++) {
@@ -178,37 +209,55 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         }
     }
 
+// QTI_END: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
     @Override
     protected void onPause() {
+// QTI_BEGIN: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
         if (mChangeListener != null) {
             mChangeListener.stop();
         }
+// QTI_END: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
         mEnableMultiSimSidecar.removeListener(this);
         mSwitchToRemovableSlotSidecar.removeListener(this);
         mSwitchToEuiccSubscriptionSidecar.removeListener(this);
         super.onPause();
     }
 
+// QTI_BEGIN: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
     @Override
     public void onSubscriptionsChanged() {
+// QTI_END: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
+// QTI_BEGIN: 2024-05-20: Telephony: Fix for pSIM/MEP profile switching on UI Settings
         if (mSubInfo == null || (!mIsEsimOperation && !isPsimPresent()
                 && !mSubscriptionManager.isActiveSubscriptionId(mSubInfo.getSubscriptionId()))
+// QTI_END: 2024-05-20: Telephony: Fix for pSIM/MEP profile switching on UI Settings
+// QTI_BEGIN: 2022-10-07: Telephony: Dismiss user confirmation dialog only for physical sim
                 && !isFinishing()) {
+// QTI_END: 2022-10-07: Telephony: Dismiss user confirmation dialog only for physical sim
+// QTI_BEGIN: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
             Log.i(TAG, "Finish dialog for inactive sim");
             finish();
         }
     }
 
+// QTI_END: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
+// QTI_BEGIN: 2024-05-20: Telephony: Fix for pSIM/MEP profile switching on UI Settings
     private boolean isPsimPresent() {
+// QTI_END: 2024-05-20: Telephony: Fix for pSIM/MEP profile switching on UI Settings
         UiccSlotInfo[] slotInfos = mTelMgr.getUiccSlotsInfo();
         if (slotInfos == null) {
             return false;
         }
+// QTI_BEGIN: 2024-11-21: Telephony: Fix NullPointerException while disabling SIM card
         return Arrays.stream(slotInfos)
                 .filter(Objects::nonNull)
+// QTI_END: 2024-11-21: Telephony: Fix NullPointerException while disabling SIM card
                 .anyMatch(slotInfo -> mSubInfo.getIccId().equals(slotInfo.getCardId()));
+// QTI_BEGIN: 2024-05-20: Telephony: Fix for pSIM/MEP profile switching on UI Settings
     }
 
+// QTI_END: 2024-05-20: Telephony: Fix for pSIM/MEP profile switching on UI Settings
+// QTI_BEGIN: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -225,9 +274,12 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         }
     }
 
+// QTI_END: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
+// QTI_BEGIN: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
     @Override
     public void onAirplaneModeChanged(boolean airplaneModeEnabled) {}
 
+// QTI_END: 2022-04-01: Telephony: Dismiss toggle sim Off dialog incase of sim removal
     @Override
     public void onStateChange(SidecarFragment fragment) {
         if (fragment == mSwitchToEuiccSubscriptionSidecar) {
@@ -394,7 +446,9 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
     }
 
     private void handleTogglePsimAction() {
+// QTI_BEGIN: 2021-11-08: Telephony: Fix sim disable/enable for legacy targets.
         if (mSubInfo != null) {
+// QTI_END: 2021-11-08: Telephony: Fix sim disable/enable for legacy targets.
             mSubscriptionManager.setUiccApplicationsEnabled(mSubInfo.getSubscriptionId(), mEnable);
             finish();
         } else {
@@ -415,7 +469,9 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             }
             return;
         }
+// QTI_BEGIN: 2024-02-08: Telephony: Revert "Fix to enable eSIM for MEP supported UICCs"
         if (!mIsEsimOperation && isRemovableSimEnabled()) {
+// QTI_END: 2024-02-08: Telephony: Revert "Fix to enable eSIM for MEP supported UICCs"
             // This case is for switching on psim when device is not multiple enable profile
             // supported.
             Log.i(TAG, "Toggle on pSIM, no dialog displayed.");
@@ -704,6 +760,7 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
         return cardInfos.stream().anyMatch(
                 cardInfo -> cardInfo.isMultipleEnabledProfilesSupported());
     }
+// QTI_BEGIN: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
 
     class TelephonyCallbackCallStateListener extends TelephonyCallback implements
             TelephonyCallback.CallStateListener {
@@ -737,4 +794,5 @@ public class ToggleSubscriptionDialogActivity extends SubscriptionActionDialogAc
             mTelephonyManager.unregisterTelephonyCallback(this);
         }
     }
+// QTI_END: 2023-06-26: Telephony: Dismiss SIM Disable Dialog during call.
 }

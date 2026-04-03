@@ -156,6 +156,551 @@ class GameControllerFragmentTest {
     }
 
     @Test
+    fun onFragmentResult_BToL2_enablesAxis_then_BToX_removesAxis() {
+        val device = createFakeController(1, "Remapping Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val resultBToL2 =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_b",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                resultBToL2,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_B, KeyEvent.KEYCODE_BUTTON_L2)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_B, MotionEvent.AXIS_LTRIGGER)
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+
+        scenario.onFragment { fragment ->
+            val resultBToX =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_b",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_x",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                resultBToX,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_B, KeyEvent.KEYCODE_BUTTON_X)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+    }
+
+    @Test
+    fun onFragmentResult_AToY_remapsButton_then_AToR2_remapsButtonToAxis() {
+        val device = createFakeController(1, "Remapping Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_a",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_y",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_A, KeyEvent.KEYCODE_BUTTON_Y)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_a",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_r2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_A, KeyEvent.KEYCODE_BUTTON_R2)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_A, MotionEvent.AXIS_RTRIGGER)
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+    }
+
+    @Test
+    fun onFragmentResult_XToR2_remapsButtonToAxis_then_XToX_removesRemappings() {
+        val device = createFakeController(1, "Remapping Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_x",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_r2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_X, KeyEvent.KEYCODE_BUTTON_R2)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_X, MotionEvent.AXIS_RTRIGGER)
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_x",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_x",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .isEmpty()
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+    }
+
+    @Test
+    fun onFragmentResult_BToY_remapsButton_then_BToB_clearsRemappings() {
+        val device = createFakeController(1, "Remapping Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_b",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_y",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_B, KeyEvent.KEYCODE_BUTTON_Y)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_b",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_b",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier)).isEmpty()
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier)).isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+    }
+
+    @Test
+    fun onFragmentResult_L2ToR2_remapsAxis_then_L2ToA_disablesAxis() {
+        val device = createFakeController(1, "Remapping Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_r2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_L2, KeyEvent.KEYCODE_BUTTON_R2)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .containsExactly(MotionEvent.AXIS_LTRIGGER, MotionEvent.AXIS_RTRIGGER)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_a",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_L2, KeyEvent.KEYCODE_BUTTON_A)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .containsExactly(MotionEvent.AXIS_LTRIGGER, MotionEvent.AXIS_DISABLED)
+    }
+
+    @Test
+    fun onFragmentResult_L2ToA_disablesAxis_then_L2ToR2_remapsAxis() {
+        val device = createFakeController(1, "Remapping Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_a",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_L2, KeyEvent.KEYCODE_BUTTON_A)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .containsExactly(MotionEvent.AXIS_LTRIGGER, MotionEvent.AXIS_DISABLED)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_r2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_L2, KeyEvent.KEYCODE_BUTTON_R2)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .containsExactly(MotionEvent.AXIS_LTRIGGER, MotionEvent.AXIS_RTRIGGER)
+    }
+
+    @Test
+    fun onFragmentResult_R2ToL2_remapsAxis_then_R2ToR2_clearsRemappings() {
+        val device = createFakeController(1, "Remapping Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val resultR2ToL2 =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_r2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                resultR2ToL2,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_R2, KeyEvent.KEYCODE_BUTTON_L2)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .containsExactly(MotionEvent.AXIS_RTRIGGER, MotionEvent.AXIS_LTRIGGER)
+
+        scenario.onFragment { fragment ->
+            val resultR2ToA =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_r2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_r2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                resultR2ToA,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .isEmpty()
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+    }
+
+    @Test
+    fun onFragmentResult_L2ToA_disablesAxis_then_L2ToL2_clearsRemappings() {
+        val device = createFakeController(1, "Remapping Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_a",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_L2, KeyEvent.KEYCODE_BUTTON_A)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .containsExactly(MotionEvent.AXIS_LTRIGGER, MotionEvent.AXIS_DISABLED)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier)).isEmpty()
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier)).isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
+    }
+
+    @Test
+    fun onFragmentResult_AToL2_motionRangeNotSupported_remapsButtonOnly() {
+        val device = createFakeControllerWithoutMotionRanges()
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_a",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_A, KeyEvent.KEYCODE_BUTTON_L2)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .isEmpty()
+    }
+
+    @Test
+    fun onFragmentResult_l2ToR2_motionRangesNotSupported_remapsButtonOnly() {
+        val device = createFakeControllerWithoutMotionRanges()
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val resultL2ToR2 =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_r2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                resultL2ToR2,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_L2, KeyEvent.KEYCODE_BUTTON_R2)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .isEmpty()
+    }
+
+    @Test
+    fun onFragmentResult_R2ToL2_nonJoystickMotionRange_remapsButtonOnly() {
+        val device = InputDevice.Builder()
+            .setSources(InputDevice.SOURCE_GAMEPAD or InputDevice.SOURCE_JOYSTICK)
+            .setId(1)
+            .setName("Remapping Controller")
+            .setDescriptor("device 1")
+            .addMotionRange(MotionEvent.AXIS_LTRIGGER, InputDevice.SOURCE_MOUSE, 0f, 1f, 0f, 0f, 0f)
+            .addMotionRange(MotionEvent.AXIS_RTRIGGER, InputDevice.SOURCE_MOUSE, 0f, 1f, 0f, 0f, 0f)
+            .build()
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_r2",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_l2",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+        }
+
+        assertThat(inputManager.getControllerButtonRemappings(device.identifier))
+            .containsExactly(KeyEvent.KEYCODE_BUTTON_R2, KeyEvent.KEYCODE_BUTTON_L2)
+        assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+            .isEmpty()
+        assertThat(inputManager.getControllerAxisRemappings(device.identifier))
+            .isEmpty()
+    }
+
+    @Test
     fun onRequestRemappingDialog_showsRemappingDialogFragment() {
         val device = createFakeController(1, "Test Controller")
         shadowInputManager.addInputDevice(device)
@@ -189,6 +734,11 @@ class GameControllerFragmentTest {
             KeyEvent.KEYCODE_BUTTON_L1,
             KeyEvent.KEYCODE_BUTTON_R2,
         )
+        inputManager.remapControllerButtonToAxis(
+            device.identifier,
+            KeyEvent.KEYCODE_BUTTON_A,
+            MotionEvent.AXIS_LTRIGGER,
+        )
         inputManager.remapControllerAxis(device.identifier, MotionEvent.AXIS_Y, MotionEvent.AXIS_RZ)
         val scenario = launchFragment(device.identifier)
 
@@ -219,6 +769,8 @@ class GameControllerFragmentTest {
 
             ShadowLooper.idleMainLooper()
             assertThat(inputManager.getControllerButtonRemappings(device.identifier)).isEmpty()
+            assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+                .isEmpty()
             assertThat(inputManager.getControllerAxisRemappings(device.identifier)).isEmpty()
             // Check that the mappings have been reset in the UI: the button (title) and the
             // corresponding action (summary) is the same for each preference.
@@ -243,6 +795,16 @@ class GameControllerFragmentTest {
             device.identifier,
             KeyEvent.KEYCODE_BUTTON_L1,
             KeyEvent.KEYCODE_BUTTON_R2,
+        )
+        inputManager.remapControllerButtonToAxis(
+            device.identifier,
+            KeyEvent.KEYCODE_BUTTON_A,
+            MotionEvent.AXIS_LTRIGGER,
+        )
+        inputManager.remapControllerButtonToAxis(
+            device.identifier,
+            KeyEvent.KEYCODE_BUTTON_Y,
+            MotionEvent.AXIS_RTRIGGER,
         )
         inputManager.remapControllerAxis(device.identifier, MotionEvent.AXIS_Y, MotionEvent.AXIS_RZ)
         val scenario = launchFragment(device.identifier)
@@ -280,6 +842,13 @@ class GameControllerFragmentTest {
                     KeyEvent.KEYCODE_BUTTON_L1,
                     KeyEvent.KEYCODE_BUTTON_R2,
                 )
+            assertThat(shadowInputManager.getControllerButtonToAxisRemappings(device.identifier))
+                .containsExactly(
+                    KeyEvent.KEYCODE_BUTTON_A,
+                    MotionEvent.AXIS_LTRIGGER,
+                    KeyEvent.KEYCODE_BUTTON_Y,
+                    MotionEvent.AXIS_RTRIGGER,
+                )
             assertThat(inputManager.getControllerAxisRemappings(device.identifier))
                 .containsExactly(MotionEvent.AXIS_Y, MotionEvent.AXIS_RZ)
             for ((key, nameResId) in GameControllerUtils.preferenceKeyToNameMap) {
@@ -299,12 +868,68 @@ class GameControllerFragmentTest {
         }
     }
 
+    @Test
+    fun onLaunch_contentDescriptionIsSet_andUpdatesAfterRemapping() {
+        val device = createFakeController(1, "Test Controller")
+        shadowInputManager.addInputDevice(device)
+        val scenario = launchFragment(device.identifier)
+
+        scenario.onFragment { fragment ->
+            val preference =
+                fragment.findPreference<GameControllerRemappingPreference>("controller_button_a")!!
+            // Check that content description is set correctly on launch
+            assertThat(preference.summaryView!!.contentDescription)
+                .isEqualTo(
+                    context.getString(
+                        R.string.game_controller_remapping_preference_content_description,
+                        context.getString(R.string.game_controller_button_a),
+                    )
+                )
+
+            val result =
+                Bundle().apply {
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_FROM_PREFERENCE_KEY,
+                        "controller_button_a",
+                    )
+                    putString(
+                        GameControllerRemappingDialogFragment.ARGS_TO_PREFERENCE_KEY,
+                        "controller_button_b",
+                    )
+                }
+            fragment.parentFragmentManager.setFragmentResult(
+                GameControllerRemappingDialogFragment.REQUEST_REMAPPING,
+                result,
+            )
+            ShadowLooper.idleMainLooper()
+
+            assertThat(preference.summaryView!!.contentDescription)
+                .isEqualTo(
+                    context.getString(
+                        R.string.game_controller_remapping_preference_content_description,
+                        context.getString(R.string.game_controller_button_b),
+                    )
+                )
+        }
+    }
+
     private fun createFakeController(deviceId: Int, name: String): InputDevice {
         return InputDevice.Builder()
             .setSources(InputDevice.SOURCE_GAMEPAD or InputDevice.SOURCE_JOYSTICK)
             .setId(deviceId)
             .setName(name)
             .setDescriptor("device $deviceId")
+            .addMotionRange(MotionEvent.AXIS_LTRIGGER, InputDevice.SOURCE_JOYSTICK, 0f, 1f, 0f, 0f, 0f)
+            .addMotionRange(MotionEvent.AXIS_RTRIGGER, InputDevice.SOURCE_JOYSTICK, 0f, 1f, 0f, 0f, 0f)
+            .build()
+    }
+
+    private fun createFakeControllerWithoutMotionRanges(): InputDevice {
+        return InputDevice.Builder()
+            .setSources(InputDevice.SOURCE_GAMEPAD or InputDevice.SOURCE_JOYSTICK)
+            .setId(1)
+            .setName("Remapping Controller")
+            .setDescriptor("device 1")
             .build()
     }
 }

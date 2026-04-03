@@ -42,10 +42,12 @@ import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import kotlinx.coroutines.CoroutineScope
@@ -59,7 +61,12 @@ open class AutoBrightnessScreen :
     PreferenceRestrictionMixin,
     BooleanValuePreference {
     override fun tags(context: Context) =
-        arrayOf(APP_FUNCTION_UNCATEGORIZED, KEY_ADAPTIVE_BRIGHTNESS)
+        arrayOf(
+            APP_FUNCTION_UNCATEGORIZED,
+            KEY_ADAPTIVE_BRIGHTNESS,
+            // exclude this screen from api result since we have the same data in api_auto_brightness_entry
+            UI_ONLY_PREFERENCE
+        )
 
     override val key: String
         get() = KEY
@@ -114,8 +121,14 @@ open class AutoBrightnessScreen :
     override val availabilityDescription =
         "The device must support adaptive brightness."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context) =
         context.autoBrightnessAvailabilityStatus == AVAILABLE
+
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
@@ -183,9 +196,11 @@ open class AutoBrightnessScreen :
 
         override val availabilityDescription = screenMetadata.availabilityDescription
 
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
+
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 
-        override val sensitivityLevel : @SensitivityLevel Int = screenMetadata.sensitivityLevel
+        override val sensitivityLevel = SensitivityLevel.NO_SENSITIVITY
 
         override fun storage(context: Context) : KeyValueStore = screenMetadata.storage(context)
 

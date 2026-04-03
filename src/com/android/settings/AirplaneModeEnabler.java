@@ -20,7 +20,9 @@ import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Looper;
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
 import android.os.SystemProperties;
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.telephony.PhoneStateListener;
@@ -141,10 +143,14 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         }
     }
 
+// QTI_BEGIN: 2025-02-18: Telephony: Fix for SCBM Exit dialog
     public static boolean isInScbm() {
+// QTI_END: 2025-02-18: Telephony: Fix for SCBM Exit dialog
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
         return SystemProperties.getBoolean("ril.inscbm", false);
     }
 
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
     /**
      * Check the status of ECM mode
      *
@@ -196,9 +202,11 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
     }
 
     public void setAirplaneMode(boolean isAirplaneModeOn) {
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
         if (isInEcmMode() || isInScbm()) {
             // In Emergency mode, do not update database at this point
             Log.d(LOG_TAG, "Emergency mode airplane mode=" + isAirplaneModeOn);
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
         } else {
             mMetricsFeatureProvider.action(mContext, SettingsEnums.ACTION_AIRPLANE_TOGGLE,
                     isAirplaneModeOn);
@@ -206,11 +214,13 @@ public class AirplaneModeEnabler extends GlobalSettingsChangeListener {
         }
     }
 
+// QTI_BEGIN: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
     public void setAirplaneModeInEmergencyMode(boolean isEmergencyModeExit,
             boolean isAirplaneModeOn) {
         Log.d(LOG_TAG, "Exist Emergency Mode=" + isEmergencyModeExit +
                 ", with airplane mode=" + isAirplaneModeOn);
         if (isEmergencyModeExit) {
+// QTI_END: 2022-01-12: Telephony: show exit SCBM popup dialogue on APM enable
             // update database based on the current checkbox state
             setAirplaneModeOn(isAirplaneModeOn);
         } else {

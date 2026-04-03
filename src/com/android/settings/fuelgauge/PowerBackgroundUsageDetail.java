@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+// LINT.IfChange
 /** Allow background usage fragment for each app */
 public class PowerBackgroundUsageDetail extends DashboardFragment {
     private static final String TAG = "PowerBackgroundUsageDetail";
@@ -64,6 +65,7 @@ public class PowerBackgroundUsageDetail extends DashboardFragment {
         BATTERY_TIP,
         APP_BATTERY_USAGE_PAGE,
         INTENT,
+        SETTINGS_API,
     }
 
     private static final String KEY_PREF_HEADER = "header_view";
@@ -265,3 +267,4 @@ public class PowerBackgroundUsageDetail extends DashboardFragment {
                 });
     }
 }
+// LINT.ThenChange(PowerBackgroundUsageDetailScreen.kt)

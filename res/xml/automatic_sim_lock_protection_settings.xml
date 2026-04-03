@@ -16,22 +16,44 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:title="@string/automatic_sim_lock_protection">
+    android:title="@string/sim_lock_settings">
 
-    <SwitchPreferenceCompat
-        android:key="sim_pin_auto_management_toggle"
-        android:title="@string/sim_auto_pin_management_toggle"
-        settings:controller="com.android.settings.security.SimPinProtectionToggleController"/>
+    <PreferenceCategory
+        android:key="category_first_sim_card_slot">
 
-    <Preference
-        android:key="change_manually_managed_sim_pin"
-        android:title="@string/sim_pin_change"
-        settings:controller="com.android.settings.security.ChangeSimPinPreferenceController"
-        />
+        <SwitchPreferenceCompat
+            android:key="sim_pin_manual_management_only_toggle_0"
+            android:title="@string/sim_auto_pin_management_toggle"
+            settings:controller="com.android.settings.security.SimPinProtectionToggleController"/>
+
+        <com.android.settingslib.PrimarySwitchPreference
+            android:fragment="com.android.settings.security.ControlAutoSimPinManagementFragment"
+            android:key="sim_pin_auto_management_toggle_0"
+            android:title="@string/sim_auto_pin_management_toggle"
+            settings:controller="com.android.settings.security.SimPinProtectionToggleController" />
+
+        <Preference
+            android:key="change_manually_managed_sim_pin_primary_screen_0"
+            android:title="@string/sim_pin_change"
+            settings:controller="com.android.settings.security.ChangeSimPinPreferenceController"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="category_second_sim_card_slot">
+
+        <SwitchPreferenceCompat
+            android:key="sim_pin_manual_management_only_toggle_1"
+            android:title="@string/sim_auto_pin_management_toggle"
+            settings:controller="com.android.settings.security.SimPinProtectionToggleController"/>
+
+        <Preference
+            android:key="change_manually_managed_sim_pin_primary_screen_1"
+            android:title="@string/sim_pin_change"
+            settings:controller="com.android.settings.security.ChangeSimPinPreferenceController"/>
+    </PreferenceCategory>
 
     <Preference
         android:key="esim_conversion_toggle"
         android:title="@string/convert_to_esim_title"
         settings:controller="com.android.settings.network.telephony.ConvertToEsimPreferenceController"/>
-
 </PreferenceScreen>

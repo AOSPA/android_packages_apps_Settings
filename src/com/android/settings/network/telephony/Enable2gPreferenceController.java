@@ -375,8 +375,7 @@ public class Enable2gPreferenceController extends TelephonyTogglePreferenceContr
     private void showNetworkProtectionDialog(int titleResId, int descResId,
                                              int positiveBtntxtResId) {
         NetworkProtectionDialogFragment.show(mFragment, mContext.getString(titleResId),
-                mContext.getString(descResId, getSimCardName()),
-                mContext.getString(positiveBtntxtResId));
+                mContext.getString(descResId), mContext.getString(positiveBtntxtResId));
     }
 
     @VisibleForTesting

@@ -46,7 +46,7 @@ class DarkModeApiFirstScreen :
         key = KEY,
         topLevelSettingsCategory = Category.DISPLAY,
         fragment = DarkModeSettingsFragment::class,
-        purpose = R.string.dark_ui_mode_purpose,
+        purpose = R.string.dark_ui_mode_purpose_api,
         alreadyPartiallyMigrated = DarkModeScreen::class,
     ) {
     init {
@@ -81,6 +81,7 @@ class DarkModeApiFirstScreen :
                         Settings.Secure.getInt(
                             context.contentResolver,
                             Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED,
+                            STANDARD_DARK_THEME,
                         ) == EXPANDED_DARK_THEME
 
                     if (isExpanded) {
@@ -225,10 +226,10 @@ class DarkModeApiFirstScreen :
             getSystemService(PowerManager::class.java)?.isPowerSaveMode == true
     }
 }
-
-// LINT.ThenChange(DarkModeSettingsFragment.java,
-//                 ../DarkUIPreferenceController.java,
-//                 ForceInvertPreferenceController.java)
+// LINT.ThenChange(DarkModeScreen.kt,
+//                 StandardDarkModeSelectorPreference.kt,
+//                 ExpandedDarkModeSelectorPreference.kt,
+//                 DarkModeCustomTimePreference.kt)
 
 internal enum class DarkThemeMode(override val asApiValue: Int, override val purpose: Int) :
     EnumApiWithRes<Int> {

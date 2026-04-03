@@ -88,27 +88,10 @@ public class UsbDetailsConnectedDevicesController extends UsbDetailsController {
 
     private Preference createPreference(UsbDevice usbDevice) {
         final Preference preference = new Preference(mContext);
-        preference.setTitle(getDeviceName(usbDevice));
+        preference.setTitle(mUsbBackend.getDeviceName(usbDevice));
         preference.setIcon(R.drawable.ic_usb);
         preference.setKey(createDevicePreferenceKey(usbDevice));
 
         return preference;
-    }
-
-    private String getDeviceName(UsbDevice usbDevice) {
-        if (usbDevice.getProductName() != null) {
-            return usbDevice.getProductName();
-        }
-
-        if (usbDevice.getManufacturerName() != null) {
-            return mContext.getString(
-                    R.string.usb_device_name_unknown_with_manufacturer_name,
-                    usbDevice.getManufacturerName());
-        }
-
-        return mContext.getString(
-                R.string.usb_device_name_unknown_with_vendor_id_and_product_id,
-                usbDevice.getVendorId(),
-                usbDevice.getProductId());
     }
 }

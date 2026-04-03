@@ -26,7 +26,8 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.safetycenter.SafetyCenterDataTransformer
 import kotlin.reflect.KClass
 
@@ -53,11 +54,14 @@ abstract class SubpageScreenApi(
     init {
         flag { Flags.catalystMigration26q2() && Flags.enableSafetyCenterNewUi() }
 
-        preconditions(R.string.safety_source_unavailable) {
+        preconditions("There must be safety information made available for this screen from on-device safety sources.") {
             if (SafetyCenterSubpageRegistry.isSubpageAvailable(context, subpageRegistryKey)) {
                 Allowed
             } else {
-                Disallowed(R.string.safety_source_unavailable)
+                Custom(
+                    R.string.safety_source_unavailable,
+                    stability = PreconditionStability.UNSTABLE,
+                )
             }
         }
     }

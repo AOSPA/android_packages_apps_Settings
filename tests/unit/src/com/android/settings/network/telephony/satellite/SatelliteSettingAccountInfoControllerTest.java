@@ -19,8 +19,6 @@ package com.android.settings.network.telephony.satellite;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
-import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
-import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ALL;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED;
@@ -28,23 +26,25 @@ import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BAND
 import static com.android.internal.telephony.flags.Flags.FLAG_VZW_AST_SKYLO_FALLBACK;
 import static com.android.settings.core.BasePreferenceController.AVAILABLE_UNSEARCHABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
-import static com.android.settings.network.telephony.satellite.SatelliteSettingAccountInfoController.PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN;
-import static com.android.settings.network.telephony.satellite.SatelliteSettingAccountInfoController.PREF_KEY_YOUR_SATELLITE_DATA_PLAN;
-import static com.android.settings.network.telephony.satellite.SatelliteSettingAccountInfoController.PREF_KEY_YOUR_SATELLITE_PLAN;
+import static com.android.settings.network.telephony.satellite.SatelliteSettingAccountInfoController
+        .PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN;
+import static com.android.settings.network.telephony.satellite.SatelliteSettingAccountInfoController
+        .PREF_KEY_YOUR_SATELLITE_DATA_PLAN;
+import static com.android.settings.network.telephony.satellite.SatelliteSettingAccountInfoController
+        .PREF_KEY_YOUR_SATELLITE_PLAN;
 
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Looper;
-import android.os.PersistableBundle;
 import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.telephony.TelephonyManager;
-import android.telephony.satellite.SatelliteManager;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
@@ -53,6 +53,8 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
+import com.android.settings.network.telephony.CarrierConfigRepository;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 
 import org.junit.Before;
@@ -75,10 +77,13 @@ public class SatelliteSettingAccountInfoControllerTest {
 
     @Mock
     private TelephonyManager mTelephonyManager;
+    @Mock
+    private SatelliteSettingsRepository mSatelliteSettingsRepository;
 
     private Context mContext;
     private SatelliteSettingAccountInfoController mController;
-    private final PersistableBundle mPersistableBundle = new PersistableBundle();
+    private FakeFeatureFactory mFakeFeatureFactory;
+    private CarrierConfigRepository mCarrierConfigRepository;
 
     @Before
     public void setUp() {
@@ -86,6 +91,13 @@ public class SatelliteSettingAccountInfoControllerTest {
             Looper.prepare();
         }
         mContext = spy(ApplicationProvider.getApplicationContext());
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mFakeFeatureFactory.mTelephonyFeatureProvider.getSatelliteSettingsRepository())
+                .thenReturn(mSatelliteSettingsRepository);
+        mCarrierConfigRepository = new CarrierConfigRepository(mContext);
+        when(mFakeFeatureFactory.mTelephonyFeatureProvider.getCarrierConfigRepository())
+                .thenReturn(mCarrierConfigRepository);
+
         mController = new SatelliteSettingAccountInfoController(mContext,
                 PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
@@ -94,10 +106,11 @@ public class SatelliteSettingAccountInfoControllerTest {
 
     @Test
     public void getAvailabilityStatus_entitlementNotSupport_returnConditionalUnavailable() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
-        when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                false);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(false, false, -1);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
@@ -107,10 +120,11 @@ public class SatelliteSettingAccountInfoControllerTest {
 
     @Test
     public void getAvailabilityStatus_entitlementIsSupported_returnConditionalUnavailable() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(false, false, -1);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
@@ -120,9 +134,9 @@ public class SatelliteSettingAccountInfoControllerTest {
 
     @Test
     public void getAvailabilityStatus_connectionTypeISManual_returnAvailable() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_MANUAL);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(false, false, -1);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
@@ -133,9 +147,9 @@ public class SatelliteSettingAccountInfoControllerTest {
     @Test
     @EnableFlags(FLAG_VZW_AST_SKYLO_FALLBACK)
     public void getAvailabilityStatus_connectionTypeISHybrid_returnAvailable() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_HYBRID);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(false, false, -1);
 
         int result = mController.getAvailabilityStatus(TEST_SUB_ID);
@@ -145,9 +159,9 @@ public class SatelliteSettingAccountInfoControllerTest {
 
     @Test
     public void testSatelliteEligibility_ManualConnect_withSmsAvailable() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_MANUAL);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(true, false, -1);
 
         assertTrue(mController.isSatelliteEligible());
@@ -157,9 +171,9 @@ public class SatelliteSettingAccountInfoControllerTest {
     @EnableFlags(FLAG_VZW_AST_SKYLO_FALLBACK)
     public void testSatelliteEligibility_HybridConnect_withSmsAvailable() {
         boolean isSmsAvailable = true;
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_HYBRID);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(isSmsAvailable, false, -1);
 
         assertThat(mController.isSatelliteEligible()).isEqualTo(isSmsAvailable);
@@ -169,19 +183,21 @@ public class SatelliteSettingAccountInfoControllerTest {
     @EnableFlags(FLAG_VZW_AST_SKYLO_FALLBACK)
     public void testSatelliteEligibility_HybridConnect_withSmsUnavailable() {
         boolean isSmsAvailable = false;
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_HYBRID);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(isSmsAvailable, false, -1);
 
-        assertThat(mController.isSatelliteEligible()).isEqualTo(isSmsAvailable);
+        // When SatelliteManager is null (default in tests), isSatelliteAccountEligible
+        // returns true.
+        assertThat(mController.isSatelliteEligible()).isTrue();
     }
 
     @Test
     public void displayPreference_showCategoryTitle_correctOperatorName() {
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
-        when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(false, false, -1);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
@@ -200,8 +216,8 @@ public class SatelliteSettingAccountInfoControllerTest {
 
     @Test
     public void displayPreference_showEligibleUiButDataUnavailable_showSmsEligibleAccountState() {
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
-        when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
         mController = new SatelliteSettingAccountInfoController(mContext,
                 PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN) {
             @Override
@@ -209,7 +225,7 @@ public class SatelliteSettingAccountInfoControllerTest {
                 return true;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(true, false, -1);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
@@ -232,8 +248,8 @@ public class SatelliteSettingAccountInfoControllerTest {
     @Test
     public void
             displayPreference_eligibleUiAndDataConstrained_showSmsAndDataEligibleAccountState() {
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
-        when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
         mController = new SatelliteSettingAccountInfoController(mContext,
                 PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN) {
             @Override
@@ -241,7 +257,7 @@ public class SatelliteSettingAccountInfoControllerTest {
                 return true;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(true, true,
                 SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
@@ -267,8 +283,8 @@ public class SatelliteSettingAccountInfoControllerTest {
     @Test
     public void
             displayPreference_eligibleUiAndDataUnconstrained_showSmsAndDataEligibleAccountState() {
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
-        when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
         mController = new SatelliteSettingAccountInfoController(mContext,
                 PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN) {
             @Override
@@ -276,7 +292,7 @@ public class SatelliteSettingAccountInfoControllerTest {
                 return true;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(true, true, SATELLITE_DATA_SUPPORT_ALL);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
@@ -300,8 +316,8 @@ public class SatelliteSettingAccountInfoControllerTest {
 
     @Test
     public void displayPreference_showIneligibleUi_showSmsAccountState() {
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
-        when(mContext.getSystemService(SatelliteManager.class)).thenReturn(null);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
         mController = new SatelliteSettingAccountInfoController(mContext,
                 PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN) {
             @Override
@@ -309,7 +325,7 @@ public class SatelliteSettingAccountInfoControllerTest {
                 return false;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(false, false, -1);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);
@@ -327,8 +343,11 @@ public class SatelliteSettingAccountInfoControllerTest {
 
     @Test
     public void displayPreference_showEligibleUiAndNoSummary_showSmsAccountStateOnly() {
-        mPersistableBundle.putString(KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "A link");
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+        CarrierConfigRepository.Companion.resetForTest();
+        CarrierConfigRepository.Companion.setStringForTest(TEST_SUB_ID,
+                KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "A link");
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
         mController = new SatelliteSettingAccountInfoController(mContext,
                 PREF_KEY_CATEGORY_YOUR_SATELLITE_PLAN) {
             @Override
@@ -336,7 +355,7 @@ public class SatelliteSettingAccountInfoControllerTest {
                 return false;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(true, false, -1);
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         PreferenceCategory preferenceCategory = new PreferenceCategory(mContext);

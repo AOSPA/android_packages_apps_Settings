@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
 /**
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
@@ -40,7 +41,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.InputType;
 import android.text.Editable;
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
 import android.text.TextUtils;
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,7 +60,11 @@ import android.util.Log;
 
 import com.android.internal.telephony.TelephonyIntents;
 import com.android.settings.R;
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
+// QTI_BEGIN: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
 import com.android.settings.Utils;
+// QTI_END: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
 
 import java.util.List;
 
@@ -129,7 +136,11 @@ public class UserPLMNEditorActivity extends PreferenceActivity implements
 
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
+// QTI_BEGIN: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
         Utils.setupEdgeToEdge(this);
+// QTI_END: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
         addPreferencesFromResource(R.xml.uplmn_editor);
         mNoSet = getResources().getString(R.string.voicemail_number_not_set);
 
@@ -321,9 +332,11 @@ public class UserPLMNEditorActivity extends PreferenceActivity implements
         Log.d(LOG_TAG, "plmn = " + plmn);
         String[] CuPlmnArray = getResources().getStringArray(R.array.uplmn_cu_mcc_mnc_values);
         for (String CuPlmn : CuPlmnArray) {
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
             if (!TextUtils.isEmpty(plmn) && plmn.equals(CuPlmn)) {
                 return R.array.uplmn_prefer_network_mode_w_choices;
             }
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
         }
         return R.array.uplmn_prefer_network_mode_td_choices;
     }
@@ -406,3 +419,4 @@ public class UserPLMNEditorActivity extends PreferenceActivity implements
     }
 
 }
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature

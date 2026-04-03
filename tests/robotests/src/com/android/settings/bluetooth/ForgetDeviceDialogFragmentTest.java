@@ -19,6 +19,9 @@ package com.android.settings.bluetooth;
 import static com.google.common.truth.Truth.assertThat;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyFloat;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -29,15 +32,18 @@ import static org.mockito.Mockito.when;
 import android.bluetooth.BluetoothDevice;
 import android.companion.AssociationInfo;
 import android.companion.CompanionDeviceManager;
+import android.companion.DeviceId;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
 import android.content.pm.PackageManager;
 import android.net.MacAddress;
 import android.os.Bundle;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
+import android.text.TextUtils;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -197,6 +203,61 @@ public class ForgetDeviceDialogFragmentTest {
         );
     }
 
+    @Test
+    @RequiresFlagsEnabled(Flags.FLAG_ENABLE_REMOVE_ASSOCIATION_BT_UNPAIR)
+    public void onConfirm_disassociatesBothMacRepresentations_andIgnoresOthers() throws Exception {
+        final String targetMacUppercase = "AA:BB:CC:DD:EE:FF";
+        final String targetMacLowercase = "aa:bb:cc:dd:ee:ff";
+        when(mCachedDevice.getAddress()).thenReturn(targetMacUppercase);
+
+        final AssociationInfo assocByDeviceMac = mock(AssociationInfo.class);
+        final AssociationInfo assocByDeviceId = mock(AssociationInfo.class);
+        final AssociationInfo assocUnrelated = mock(AssociationInfo.class);
+        final DeviceId deviceId = mock(DeviceId.class);
+
+        final ApplicationInfo mockAppInfo1 = mock(ApplicationInfo.class);
+        final ApplicationInfo mockAppInfo2 = mock(ApplicationInfo.class);
+
+        when(deviceId.getMacAddress()).thenReturn(MacAddress.fromString(targetMacLowercase));
+
+        when(assocByDeviceMac.getId()).thenReturn(1);
+        when(assocByDeviceMac.getDeviceMacAddressAsString()).thenReturn(targetMacLowercase);
+        when(assocByDeviceMac.getPackageName()).thenReturn("com.mytest.test.app1");
+
+        when(assocByDeviceId.getId()).thenReturn(2);
+        when(assocByDeviceId.getDeviceId()).thenReturn(deviceId);
+        when(assocByDeviceId.getPackageName()).thenReturn("com.mytest.test.app2");
+
+        when(assocUnrelated.getId()).thenReturn(3);
+        when(assocUnrelated.getDeviceMacAddressAsString()).thenReturn("00:11:22:33:44:55");
+        when(assocUnrelated.getPackageName()).thenReturn("com.mytest.test.app3");
+
+        when(mPackageManager.getApplicationInfo(eq("com.mytest.test.app1"), eq(0)))
+                .thenReturn(mockAppInfo1);
+        when(mockAppInfo1.loadSafeLabel(eq(mPackageManager), anyFloat(), anyInt()))
+                .thenReturn("Test App 1");
+
+        when(mPackageManager.getApplicationInfo(eq("com.mytest.test.app2"), eq(0)))
+                .thenReturn(mockAppInfo2);
+        when(mockAppInfo2.loadSafeLabel(eq(mPackageManager), anyFloat(), anyInt()))
+                .thenReturn("Test App 2");
+
+        mAssociations.addAll(List.of(assocByDeviceMac, assocByDeviceId, assocUnrelated));
+
+        final AlertDialog dialog = (AlertDialog) mFragment.onCreateDialog(Bundle.EMPTY);
+        dialog.show();
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).performClick();
+        ShadowLooper.idleMainLooper();
+
+        verify(mCachedDevice).unpair();
+
+        verify(mCompanionDeviceManager).disassociate(1);
+        verify(mCompanionDeviceManager).disassociate(2);
+        verify(mCompanionDeviceManager, never()).disassociate(3);
+
+        assertThat(mActivity.isFinishing()).isTrue();
+    }
+
     private void initDialog() {
         mActivity.getSupportFragmentManager().beginTransaction().add(mFragment, null).commit();
         mDialog = (AlertDialog) ShadowDialog.getLatestDialog();
@@ -217,7 +278,11 @@ public class ForgetDeviceDialogFragmentTest {
         ApplicationInfo appInfo = mock(ApplicationInfo.class);
         try {
             when(mPackageManager.getApplicationInfo(packageName, 0)).thenReturn(appInfo);
-            when(mPackageManager.getApplicationLabel(appInfo)).thenReturn(appName);
+            when(appInfo.loadSafeLabel(
+                    mPackageManager,
+                    PackageItemInfo.MAX_SAFE_LABEL_LENGTH,
+                    TextUtils.SAFE_STRING_FLAG_TRIM | TextUtils.SAFE_STRING_FLAG_FIRST_LINE))
+                    .thenReturn(appName);
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException(e);
         }

@@ -824,6 +824,7 @@ public final class DataProcessor {
                     // Otherwise, simply ignore this start event.
                     if (isLastActiveTimeEarlierThanQueryBufferDuration(
                             pendingUsagePeriod, eventTime)) {
+                        pendingUsagePeriod.setPotentialTimeDefect(true);
                         pendingUsagePeriod.setEndTime(
                                 getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
                         validateAndAddToPeriodList(
@@ -844,6 +845,7 @@ public final class DataProcessor {
                 if (pendingUsagePeriod.hasStartTime()
                         && isLastActiveTimeEarlierThanQueryBufferDuration(
                                 pendingUsagePeriod, eventTime)) {
+                    pendingUsagePeriod.setPotentialTimeDefect(true);
                     pendingUsagePeriod.setEndTime(
                             getEndTimeForIncompleteUsagePeriod(pendingUsagePeriod, eventTime));
                     validateAndAddToPeriodList(
@@ -853,6 +855,7 @@ public final class DataProcessor {
                 pendingUsagePeriod.setEndTime(eventTime);
                 // If there's no start time, then add one for the default duration.
                 if (!pendingUsagePeriod.hasStartTime()) {
+                    pendingUsagePeriod.setPotentialTimeDefect(true);
                     pendingUsagePeriod.setStartTime(
                             getStartTimeForIncompleteUsagePeriod(pendingUsagePeriod));
                 }
@@ -941,12 +944,34 @@ public final class DataProcessor {
     static long getScreenOnTime(
             final Map<Long, Map<String, List<AppUsagePeriod>>> appUsageMap,
             final long userId,
-            final String packageName) {
+            final String packageName,
+            @Nullable final Set<DataErrorType> dataErrorTypes,
+            @Nullable final StringBuilder mergedErrorMsgBuilder) {
         if (appUsageMap == null || appUsageMap.get(userId) == null) {
             return 0;
         }
 
-        return getScreenOnTime(appUsageMap.get(userId).get(packageName));
+        final List<AppUsagePeriod> appUsagePeriodList = appUsageMap.get(userId).get(packageName);
+        if (appUsagePeriodList == null || appUsagePeriodList.isEmpty()) {
+            return 0;
+        }
+
+        if (dataErrorTypes != null && mergedErrorMsgBuilder != null) {
+            final StringBuilder errorMsgBuilder = new StringBuilder();
+            appUsagePeriodList.stream()
+                    .filter(AppUsagePeriod::getPotentialTimeDefect)
+                    .forEach(period -> errorMsgBuilder.append(
+                            String.format("[%d, %d],", period.getStartTime(), period.getEndTime())
+                    ));
+            if (!errorMsgBuilder.isEmpty()) {
+                dataErrorTypes.add(DataErrorType.ERROR_TYPE_POTENTIAL_SCREEN_TIME_DEFECT);
+                mergedErrorMsgBuilder.append(
+                        String.format("\n\t[SCREEN_ON] userId=%d, pkg=%s, %s |",
+                                userId, packageName, errorMsgBuilder));
+            }
+        }
+
+        return getScreenOnTime(appUsagePeriodList);
     }
 
     static Map<Long, BatteryDiffData> getBatteryDiffDataMapFromStatsService(
@@ -1563,44 +1588,43 @@ public final class DataProcessor {
                         getDiffValue(
                                 currentEntry.mForegroundUsageTimeInMs,
                                 nextEntry.mForegroundUsageTimeInMs,
-                                "foregroundUsageTime", errorMsg);
+                                "foregroundUsageTime", dataErrorTypes, errorMsg);
                 foregroundServiceUsageTimeInMs +=
                         getDiffValue(
                                 currentEntry.mForegroundServiceUsageTimeInMs,
                                 nextEntry.mForegroundServiceUsageTimeInMs,
-                                "foregroundServiceUsageTime", errorMsg);
+                                "foregroundServiceUsageTime", dataErrorTypes, errorMsg);
                 backgroundUsageTimeInMs +=
                         getDiffValue(
                                 currentEntry.mBackgroundUsageTimeInMs,
                                 nextEntry.mBackgroundUsageTimeInMs,
-                                "backgroundUsageTime", errorMsg);
+                                "backgroundUsageTime", dataErrorTypes, errorMsg);
                 consumePower +=
                         getDiffValue(currentEntry.mConsumePower, nextEntry.mConsumePower,
-                                "totalConsumePower", errorMsg);
+                                "totalConsumePower", dataErrorTypes, errorMsg);
                 foregroundUsageConsumePower +=
                         getDiffValue(
                                 currentEntry.mForegroundUsageConsumePower,
                                 nextEntry.mForegroundUsageConsumePower,
-                                "foregroundUsageConsumePower", errorMsg);
+                                "foregroundUsageConsumePower", dataErrorTypes, errorMsg);
                 foregroundServiceUsageConsumePower +=
                         getDiffValue(
                                 currentEntry.mForegroundServiceUsageConsumePower,
                                 nextEntry.mForegroundServiceUsageConsumePower,
-                                "foregroundServiceUsageConsumePower", errorMsg);
+                                "foregroundServiceUsageConsumePower", dataErrorTypes, errorMsg);
                 backgroundUsageConsumePower +=
                         getDiffValue(
                                 currentEntry.mBackgroundUsageConsumePower,
                                 nextEntry.mBackgroundUsageConsumePower,
-                                "backgroundUsageConsumePower", errorMsg);
+                                "backgroundUsageConsumePower", dataErrorTypes, errorMsg);
                 cachedUsageConsumePower +=
                         getDiffValue(
                                 currentEntry.mCachedUsageConsumePower,
                                 nextEntry.mCachedUsageConsumePower,
-                                "cachedUsageConsumePower", errorMsg);
+                                "cachedUsageConsumePower", dataErrorTypes, errorMsg);
                 if (!errorMsg.isEmpty()) {
-                    dataErrorTypes.add(DataErrorType.ERROR_TYPE_UNEXPECTED_RESET);
                     mergedErrorMsg.append(
-                            String.format("\n\t[RESET] startTime = %d, endTime = %d, tag = %s |",
+                            String.format("\n\t[Diff] startTime = %d, endTime = %d, tag = {%s} |",
                                     currentEntry.mTimestamp,
                                     nextEntry.mTimestamp,
                                     errorMsg));
@@ -1653,7 +1677,9 @@ public final class DataProcessor {
                             getScreenOnTime(
                                     appUsageMap,
                                     selectedBatteryEntry.mUserId,
-                                    selectedBatteryEntry.mPackageName));
+                                    selectedBatteryEntry.mPackageName,
+                                    dataErrorTypes,
+                                    mergedErrorMsg));
             // Ensure the following value will not exceed the threshold.
             // value = background + foregroundService + screen-on
             backgroundUsageTimeInMs =
@@ -2053,29 +2079,44 @@ public final class DataProcessor {
         return true;
     }
 
-    private static long getDiffValue(long v1, long v2, String tag, StringBuilder errorMsgBuilder) {
+    private static long getDiffValue(long v1, long v2, String tag,
+            Set<DataErrorType> dataErrorTypes, StringBuilder errorMsgBuilder) {
         long delta = v2 - v1;
         if (delta < 0L) {
             long threshold = FeatureFactory.getFeatureFactory()
                     .getPowerUsageFeatureProvider().getBatteryUsageResetErrorTimeThresholdMs();
             if (Math.abs(delta) > threshold) {
-                errorMsgBuilder.append(String.format("| %s: %d -> %d", tag, v1, v2));
+                dataErrorTypes.add(DataErrorType.ERROR_TYPE_UNEXPECTED_RESET);
+                errorMsgBuilder.append(String.format("|[RESET] %s: %d -> %d", tag, v1, v2));
             }
+            return 0L;
         }
-        return Math.max(delta, 0L);
+        return delta;
     }
 
     private static double getDiffValue(
-            double v1, double v2, String tag, StringBuilder errorMsgBuilder) {
+            double v1, double v2, String tag,
+            Set<DataErrorType> dataErrorTypes, StringBuilder errorMsgBuilder) {
         double delta = v2 - v1;
         if (delta < 0.0) {
-            double threshold = FeatureFactory.getFeatureFactory()
+            final double resetThreshold = FeatureFactory.getFeatureFactory()
                     .getPowerUsageFeatureProvider().getBatteryUsageResetErrorPowerThreshold();
-            if (Math.abs(delta) > threshold) {
-                errorMsgBuilder.append(String.format("| %s: %f -> %f", tag, v1, v2));
+            if (Math.abs(delta) > resetThreshold) {
+                dataErrorTypes.add(DataErrorType.ERROR_TYPE_UNEXPECTED_RESET);
+                errorMsgBuilder.append(String.format("|[RESET] %s: %.2f -> %.2f", tag, v1, v2));
             }
+            return 0.0;
         }
-        return Math.max(delta, 0.0);
+
+        final double overCalcPowerDrainThreshold = FeatureFactory.getFeatureFactory()
+                .getPowerUsageFeatureProvider().getBatteryUsageOverCalcPowerDrainThreshold();
+        if (overCalcPowerDrainThreshold > 0 && delta > overCalcPowerDrainThreshold) {
+            dataErrorTypes.add(DataErrorType.ERROR_TYPE_OVER_CALC_POWER_DRAIN_BY_CAPACITY);
+            errorMsgBuilder.append(String.format("|[OVER_CALC_CAP] %s: (%.2f - %.2f) > %.2f",
+                    tag, v2, v1, overCalcPowerDrainThreshold));
+            return 0.0;
+        }
+        return delta;
     }
 
     private static long getCurrentTimeMillis() {

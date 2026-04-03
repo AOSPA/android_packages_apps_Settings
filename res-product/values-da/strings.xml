@@ -462,6 +462,8 @@
     <string name="main_clear_desc" product="default" msgid="1888412491866186706">"Dette rydder alle data fra den "<b>"interne lagerplads"</b>" på din telefon, inklusive: \n\n"<li>"Din Google-konto"</li>\n<li>"Data og indstillinger for system og apps"</li>\n<li>"Downloadede apps"</li></string>
     <string name="main_clear_desc" product="desktop" msgid="405802272460355609">"Dette rydder alle data fra den "<b>"interne lagerplads"</b>" på din enhed, herunder: \n\n"<li>"Din Google-konto"</li>\n<li>"Data og indstillinger for system og apps"</li>\n<li>"Downloadede apps"</li></string>
     <string name="main_clear_accounts" product="default" msgid="3604029744509330786">\n\n"Du er i øjeblikket logget ind på følgende konti:\n"</string>
+    <!-- no translation found for main_clear_accounts_count (8431492930725475832) -->
+    <skip />
     <string name="main_clear_other_users_present" product="default" msgid="7750368595882863399">\n\n"Der er andre brugere til stede på denne enhed.\n"</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="5834269984459195918">\n\n"Ryd musik, billeder og andre brugerdata ved at rydde "<b>"USB-lageret"</b>"."</string>
     <string name="main_clear_desc_erase_external_storage" product="default" msgid="2891180770413959600">\n\n"Hvis du vil rydde musik, billeder og andre brugerdata, skal du rydde "<b>"SD-kortet"</b>"."</string>
@@ -504,10 +506,8 @@
     <string name="accessibility_daltonizer_about_intro_text" product="default" msgid="5234458848997942613">"Juster, hvordan farverne vises på din telefon"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="tablet" msgid="5300401841391736534">"Juster, hvordan farverne vises på din tablet"</string>
     <string name="accessibility_daltonizer_about_intro_text" product="desktop" msgid="8908526728447739478">"Juster, hvordan farverne vises på din enhed"</string>
-    <!-- no translation found for accessibility_hearing_device_ringtone_alarm_routing_title (6245455325032243921) -->
-    <skip />
-    <!-- no translation found for accessibility_hearing_device_ringtone_alarm_routing_title (1096901437012239116) -->
-    <skip />
+    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" product="default" msgid="6245455325032243921">"Ringetoner og alarmer"</string>
+    <string name="accessibility_hearing_device_ringtone_alarm_routing_title" product="desktop" msgid="1096901437012239116">"Alarmer"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="default" msgid="9162440023310121356">"Ekstra dæmpet belysning kan være en nyttig funktion, når: &lt;ol&gt; &lt;li&gt; Din telefons minimumslysstyrke stadig er for lys&lt;/li&gt; &lt;li&gt; Du bruger din telefon i mørke omgivelser, f.eks. om aftenen eller på et mørkt værelse inden sengetid&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="tablet" msgid="5747242697890472822">"Ekstra dæmpet belysning kan være en nyttig funktion, når: &lt;ol&gt; &lt;li&gt; Din tablets minimumslysstyrke stadig er for lys&lt;/li&gt; &lt;li&gt; Du bruger din tablet i mørke omgivelser, f.eks. om aftenen eller på et mørkt værelse inden sengetid&lt;/li&gt; &lt;/ol&gt;"</string>
     <string name="reduce_bright_colors_preference_subtitle" product="desktop" msgid="3114657547062643684">"Ekstra dæmpet belysning kan være en nyttig funktion, når: &lt;ol&gt; &lt;li&gt; Din enheds minimumslysstyrke stadig er for lys&lt;/li&gt; &lt;li&gt; Du bruger din enhed i mørke omgivelser, f.eks. om aftenen eller på et mørkt værelse inden sengetid&lt;/li&gt; &lt;/ol&gt;"</string>
@@ -726,9 +726,9 @@
     <string name="security_settings_fingerprint_description" product="default" msgid="1962781280961450006"></string>
     <string name="security_settings_fingerprint_description" product="desktop" msgid="1962781280961450006"></string>
     <string name="security_settings_face_preference_title" product="default" msgid="1088234386271687481">"Ansigtsoplåsning"</string>
-    <string name="security_settings_face_preference_title" product="desktop" msgid="120316049914434185">"Lås op via ansigtsgenkendelse"</string>
+    <string name="security_settings_face_preference_title" product="desktop" msgid="120316049914434185">"Ansigtigsoplåsning"</string>
     <string name="security_settings_face_profile_preference_title" product="default" msgid="1915373190432876537">"Ansigtsoplåsning til arbejdsprofil"</string>
-    <string name="security_settings_face_profile_preference_title" product="desktop" msgid="4371857798884456701">"Oplåsning via ansigtsgenkendelse til arbejdsprofil"</string>
+    <string name="security_settings_face_profile_preference_title" product="desktop" msgid="4371857798884456701">"Oplåsning via ansigtsoplåsning til arbejdsprofil"</string>
     <string name="security_settings_face_enroll_education_title" product="default" msgid="8682081307863421676">"Sådan konfigurerer du Ansigtsoplåsning"</string>
     <string name="security_settings_face_enroll_education_title" product="desktop" msgid="8858193013681141921">"Sådan konfigurerer du oplåsning via ansigtsgenkendelse"</string>
     <string name="security_settings_face_enroll_education_title_accessibility" product="default" msgid="3901871844780048667">"Konfigurer Ansigtsoplåsning"</string>
@@ -754,23 +754,23 @@
     <string name="security_settings_face_settings_enroll" product="default" msgid="478045480258037112">"Konfigurer Ansigtsoplåsning"</string>
     <string name="security_settings_face_settings_enroll" product="desktop" msgid="1975696698406819144">"Konfigurer oplåsning via ansigtsgenkendelse"</string>
     <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" product="default" msgid="3091207415358585820">"Konfigurer Ansigtsoplåsning eller Fingeroplåsning først"</string>
-    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" product="desktop" msgid="3568327776503208253">"Konfigurer oplåsning via ansigtsgenkendelse eller Fingeroplåsning først"</string>
+    <string name="security_settings_activeunlock_require_face_fingerprint_setup_title" product="desktop" msgid="3568327776503208253">"Konfigurer Ansigtsoplåsning eller Fingeroplåsning først"</string>
     <string name="security_settings_activeunlock_require_face_setup_title" product="default" msgid="5451139327828979605">"Konfigurer Ansigtsoplåsning først"</string>
     <string name="security_settings_activeunlock_require_face_setup_title" product="desktop" msgid="491404270155205470">"Konfigurer oplåsning via ansigtsgenkendelse først"</string>
     <string name="security_settings_biometric_preference_title" product="default" msgid="301824710578384746">"Ansigtsoplåsning og Fingeroplåsning"</string>
-    <string name="security_settings_biometric_preference_title" product="desktop" msgid="1931938360990718210">"Oplåsning via ansigtsgenkendelse og Fingeroplåsning"</string>
+    <string name="security_settings_biometric_preference_title" product="desktop" msgid="1931938360990718210">"Ansigtsoplåsning og Fingeroplåsning"</string>
     <string name="security_settings_work_biometric_preference_title" product="default" msgid="5408195383591972572">"Ansigtsoplåsning og Fingeroplåsning til arbejdsprofil"</string>
-    <string name="security_settings_work_biometric_preference_title" product="desktop" msgid="3219742888338830428">"Oplåsning via ansigtsgenkendelse og Fingeroplåsning til arbejdsprofil"</string>
+    <string name="security_settings_work_biometric_preference_title" product="desktop" msgid="3219742888338830428">"Ansigtsoplåsning og Fingeroplåsning til arbejdsprofil"</string>
     <string name="biometric_settings_add_face_in_split_mode_title" product="default" msgid="3738938046173770733">"Ansigtsoplåsning kan ikke konfigureres"</string>
     <string name="biometric_settings_add_face_in_split_mode_title" product="desktop" msgid="4418550129265286960">"Oplåsning via ansigtsgenkendelse kan ikke konfigureres"</string>
     <string name="biometric_settings_add_face_in_split_mode_message" product="default" msgid="6022144462744038426">"Luk den opdelte skærm for at konfigurere Ansigtsoplåsning"</string>
     <string name="biometric_settings_add_face_in_split_mode_message" product="desktop" msgid="3957054157286969169">"Luk den opdelte skærm for at konfigurere oplåsning via ansigtsgenkendelse"</string>
     <string name="private_space_biometric_title" product="default" msgid="6023715691209902125">"Ansigtsoplåsning og Fingeroplåsning"</string>
-    <string name="private_space_biometric_title" product="desktop" msgid="7653829341622235589">"Oplåsning via ansigtsgenkendelse og Fingeroplåsning"</string>
+    <string name="private_space_biometric_title" product="desktop" msgid="7653829341622235589">"Ansigtsoplåsning og Fingeroplåsning"</string>
     <string name="private_space_biometric_unlock_title" product="default" msgid="4621918727209012807">"Ansigtsoplåsning og Fingeroplåsning til privat område"</string>
     <string name="private_space_biometric_unlock_title" product="desktop" msgid="8876292883349974060">"Oplåsning via ansigtsgenkendelse og Fingeroplåsning til privat område"</string>
     <string name="private_space_face_title" product="default" msgid="6298308773515063762">"Ansigtsoplåsning"</string>
-    <string name="private_space_face_title" product="desktop" msgid="5330390437157810466">"Lås op via ansigtsgenkendelse"</string>
+    <string name="private_space_face_title" product="desktop" msgid="5330390437157810466">"Ansigtigsoplåsning"</string>
     <string name="private_space_face_unlock_title" product="default" msgid="6728077494636366004">"Ansigtsoplåsning til privat område"</string>
     <string name="private_space_face_unlock_title" product="desktop" msgid="5927793887938524983">"Oplåsning via ansigtsgenkendelse til privat område"</string>
     <string name="private_space_face_enroll_introduction_title" product="default" msgid="2639038889945177295">"Konfigurer Ansigtsoplåsning til privat område"</string>
@@ -800,11 +800,11 @@
 
 </xliff:g>Wallet, betalingsapps og andre apps, der kræver godkendelse, vil muligvis ikke fungere efter hensigten."</string>
     <string name="lockpassword_choose_your_password_header_for_face" product="default" msgid="6148777249889558666">"Angiv alternativ for Ansigtsoplåsning"</string>
-    <string name="lockpassword_choose_your_password_header_for_face" product="desktop" msgid="3207282447348772055">"Angiv alternativ for Ansigtsoplåsning"</string>
+    <string name="lockpassword_choose_your_password_header_for_face" product="desktop" msgid="3207282447348772055">"Angiv adgangskode for ansigtsoplåsning"</string>
     <string name="lockpassword_choose_your_pattern_header_for_face" product="default" msgid="2879540885525976497">"Angiv alternativ for Ansigtsoplåsning"</string>
-    <string name="lockpassword_choose_your_pattern_header_for_face" product="desktop" msgid="7936694877510431166">"Angiv alternativ for Ansigtsoplåsning"</string>
+    <string name="lockpassword_choose_your_pattern_header_for_face" product="desktop" msgid="7936694877510431166">"Angiv mønster for ansigtsoplåsning"</string>
     <string name="lockpassword_choose_your_pin_header_for_face" product="default" msgid="901192866812262140">"Angiv alternativ for Ansigtsoplåsning"</string>
-    <string name="lockpassword_choose_your_pin_header_for_face" product="desktop" msgid="2581974088529231135">"Angiv alternativ for Ansigtsoplåsning"</string>
+    <string name="lockpassword_choose_your_pin_header_for_face" product="desktop" msgid="2581974088529231135">"Angiv pinkode for ansigtsoplåsning"</string>
     <string name="identity_check_issue_card_summary" product="default" msgid="4376934098421152876">"Identitetstjek forhindrer uønsket adgang til dine apps. Nu tilgængelig med alle apps, der bruger Fingeroplåsning eller Ansigtsoplåsning."</string>
     <string name="identity_check_issue_card_summary" product="desktop" msgid="5618480959570778444">"Identitetstjek forhindrer uønsket adgang til dine apps. Nu tilgængelig med alle apps, der bruger oplåsning via ansigtsgenkendelse og Fingeroplåsning."</string>
     <string name="identity_check_promo_card_summary" product="default" msgid="7603823818908679600">"Opdateringer:\n"<ul><li>"Identitetstjek føjer beskyttelse til alle apps, der bruger Fingeroplåsning eller Ansigtsoplåsning"</li>\n<li>"Med tiden kan Identitetstjek tilføje flere måder at verificere din identitet på og beskytte apps på din enhed. "<a href="https://support.google.com/android?p=identity_check">"Få flere oplysninger om, hvornår og hvor du er beskyttet"</a></li></ul></string>

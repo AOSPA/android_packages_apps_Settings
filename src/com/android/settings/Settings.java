@@ -13,6 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+/*
+​​ * ​​​Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings;
 
 import static android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS;
@@ -165,7 +172,7 @@ public class Settings extends SettingsActivity {
         }
     }
     public static class WifiP2pSettingsActivity extends SettingsActivity { /* empty */ }
-    public static class AvailableVirtualKeyboardActivity extends SettingsActivity { /* empty */ }
+    public static class AvailableKeyboardAppsActivity extends SettingsActivity { /* empty */ }
     public static class KeyboardLayoutPickerActivity extends SettingsActivity { /* empty */ }
     public static class PhysicalKeyboardActivity extends SettingsActivity { /* empty */ }
     public static class PhysicalKeyboardLayoutPickerActivity extends SettingsActivity {
@@ -556,7 +563,7 @@ public class Settings extends SettingsActivity {
     public static class MobileNetworkListActivity extends SettingsActivity {}
     public static class PowerMenuSettingsActivity extends SettingsActivity {}
     public static class MobileNetworkActivity extends SettingsActivity {
-        private static final String MOBILE_NETWORK_FRAGMENT_NAME =
+        public static final String MOBILE_NETWORK_FRAGMENT_NAME =
                 "com.android.settings.network.telephony.MobileNetworkSettings";
         public static final String TAG = "MobileNetworkActivity";
         public static final String EXTRA_MMS_MESSAGE = "mms_message";
@@ -681,8 +688,10 @@ public class Settings extends SettingsActivity {
         }
     }
     public static class SystemDashboardActivity extends SettingsActivity {}
+// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
     public static class SupportDashboardActivity extends SettingsActivity {}
     public static class SMQQtiFeedbackActivity extends SettingsActivity { /* empty */ }
+// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
     public static class ResetDashboardActivity extends CatalystSettingsActivity {
         public ResetDashboardActivity() {
             super(ResetDashboardScreen.KEY, ResetDashboardFragment.class);

@@ -202,8 +202,10 @@ fun ApnPage(apnDataInit: ApnData, apnDataCur: MutableState<ApnData>, uriInit: Ur
                 SettingsOutlinedTextField(
                     value = apnData.mmsc,
                     label = stringResource(R.string.apn_mmsc),
+// QTI_BEGIN: 2025-10-15: Telephony: Google Auto DDS FR changes
                     errorMessage = validateMMSC(
                         apnData.validEnabled, apnData.mmsc, context, apnData),
+// QTI_END: 2025-10-15: Telephony: Google Auto DDS FR changes
                     enabled = apnData.isFieldEnabled(Telephony.Carriers.MMSC),
                 ) { apnData = apnData.copy(mmsc = it) }
                 SettingsOutlinedTextField(

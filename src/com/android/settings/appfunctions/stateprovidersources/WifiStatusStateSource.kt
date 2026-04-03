@@ -21,6 +21,7 @@ import android.net.wifi.WifiConfiguration
 import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import android.util.Log
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
@@ -75,21 +76,21 @@ class WifiStatusStateSource : DeviceStateSource {
                         listOf(
                             DeviceStateItem(
                                 key = "wifi_name_$networkId",
-                                purpose = "wifi_name networkId:$networkId",
+                                purpose = context.getString(R.string.wifi_network_name_purpose),
                                 jsonValue = ssid,
                                 hintText = "Wifi name of saved network",
                             ),
                             DeviceStateItem(
                                 key = "is_connected_$networkId",
-                                purpose = "wifi_is_connected networkId:$networkId",
+                                purpose = context.getString(R.string.wifi_is_connected_purpose),
                                 jsonValue = isConnected.toString(),
                                 hintText = "Whether currently connected to $ssid",
                             ),
                             DeviceStateItem(
                                 key = "auto_connect_$networkId",
-                                purpose = "wifi_auto_connect networkId:$networkId",
+                                purpose = context.getString(R.string.wifi_auto_connect_purpose),
                                 jsonValue = network.allowAutojoin.toString(),
-                                hintText = "Whether $ssid is set to auto-connect",
+                                hintText = "Whether auto-connect is set for $ssid",
                             ),
                         )
                     }

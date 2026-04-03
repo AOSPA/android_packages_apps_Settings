@@ -27,14 +27,18 @@ import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.SubscriptionManager;
 import android.telephony.SubscriptionManager.OnSubscriptionsChangedListener;
+// QTI_BEGIN: 2021-04-19: Telephony: Temporary fix for settings app issue
 import android.util.Log;
+// QTI_END: 2021-04-19: Telephony: Temporary fix for settings app issue
 
 import com.android.internal.telephony.TelephonyIntents;
 
 /** Helper class for listening to changes in availability of telephony subscriptions */
 public class SubscriptionsChangeListener extends ContentObserver {
 
+// QTI_BEGIN: 2021-04-19: Telephony: Temporary fix for settings app issue
     private static final String TAG = "SubscriptionsChangeListener";
+// QTI_END: 2021-04-19: Telephony: Temporary fix for settings app issue
 
     public interface SubscriptionsChangeListenerClient {
         void onAirplaneModeChanged(boolean airplaneModeEnabled);
@@ -72,7 +76,9 @@ public class SubscriptionsChangeListener extends ContentObserver {
     }
 
     public void start() {
+// QTI_BEGIN: 2021-04-19: Telephony: Temporary fix for settings app issue
         Log.d(TAG, "Start");
+// QTI_END: 2021-04-19: Telephony: Temporary fix for settings app issue
         mSubscriptionManager.addOnSubscriptionsChangedListener(
                 mContext.getMainExecutor(), mSubscriptionsChangedListener);
         mContext.getContentResolver()
@@ -88,11 +94,15 @@ public class SubscriptionsChangeListener extends ContentObserver {
             mSubscriptionManager.removeOnSubscriptionsChangedListener(
                     mSubscriptionsChangedListener);
             mContext.getContentResolver().unregisterContentObserver(this);
+// QTI_BEGIN: 2021-04-19: Telephony: Temporary fix for settings app issue
             mContext.unregisterReceiver(mBroadcastReceiver);
+// QTI_END: 2021-04-19: Telephony: Temporary fix for settings app issue
             mRunning = false;
         } else {
             Log.d(TAG, "Stop has been called without associated Start.");
+// QTI_BEGIN: 2021-04-19: Telephony: Temporary fix for settings app issue
         }
+// QTI_END: 2021-04-19: Telephony: Temporary fix for settings app issue
     }
 
     public boolean isAirplaneModeOn() {

@@ -36,11 +36,13 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
@@ -66,7 +68,14 @@ private constructor(
     PreferenceTitleProvider,
     PreferenceLifecycleProvider,
     PreferenceAvailabilityProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_MOBILE_DATA, TAG_DEVICE_STATE_SCREEN, TAG_DEVICE_STATE_PREFERENCE)
+
+    override fun tags(context: Context) = arrayOf(
+        APP_FUNCTION_MOBILE_DATA,
+        TAG_DEVICE_STATE_SCREEN,
+        TAG_DEVICE_STATE_PREFERENCE,
+        // exclude this screen from api result since we have the same data in api_app_data_usage_screen
+        UI_ONLY_PREFERENCE
+    )
 
     private lateinit var keyedObserver: KeyedObserver<String>
 
@@ -118,6 +127,8 @@ private constructor(
 
     override val availabilityDescription =
         "The app must be enabled."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = appInfo != null
 
@@ -194,7 +205,8 @@ private constructor(
         @JvmStatic
         fun parameters(context: Context): Flow<Bundle> = flow {
             val repo = AppListRepositoryImpl(context)
-            repo.loadApps(context.userId).forEach { app ->
+            // Make sure to exclude system apps
+            repo.loadAndMaybeExcludeSystemApps(context.userId, true).forEach { app ->
                 emit(Bundle(1).apply { putString(KEY_APP_PACKAGE_NAME, app.packageName) })
             }
         }

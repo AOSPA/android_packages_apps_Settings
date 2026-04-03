@@ -17,12 +17,25 @@
 package com.android.settings.accessibility.shared.utils
 
 import android.content.Context
+import android.content.DialogInterface
+import android.provider.Settings
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
 import com.airbnb.lottie.LottieAnimationView
+import com.android.settings.R
+import com.android.settings.accessibility.Flags
 import com.android.settings.accessibility.extensions.isInSetupWizard
+import com.android.settings.widget.FocusIndicatorDrawable
 import com.android.settingslib.widget.LottieColorUtils
 import com.android.settingslib.widget.SettingsThemeHelper
 import com.google.android.setupcompat.util.DelightHelper
+
+const val FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP = -3
+const val FOCUS_INDICATOR_TOP_PADDING_ADJUSTMENT_DP = 6
+const val FOCUS_INDICATOR_BOTTOM_PADDING_ADJUSTMENT_DP = -3
+const val FOCUS_INDICATOR_CORNER_RADIUS_DP = 24
 
 // TODO(b/407080818): Delete this function when we no longer need to adjust the layout
 /**
@@ -77,9 +90,82 @@ fun handleIllustrationAnimationForSetupWizard(view: LottieAnimationView) {
  * @param context the current context.
  * @return `true` if the focus rings should be shown.
  */
-fun shouldShowFocusRingsInSuw(context: Context): Boolean =
-    com.android.settings.accessibility.Flags.enableInsetFocusRingsInSuw() &&
-        context.resources.getBoolean(
-            com.android.internal.R.bool.config_enableInsetFocusRingsInSuw
-        ) &&
-        context.isInSetupWizard()
+fun shouldShowFocusRingsInSuw(context: Context): Boolean {
+    val isInsetFocusRingFlagEnabled = Flags.enableInsetFocusRingsInSuwReadOnly()
+    val isInsetFocusRingConfigEnabled =
+        context.resources.getBoolean(com.android.internal.R.bool.config_enableInsetFocusRingsInSuw)
+    val isDeviceNotProvisioned =
+        Settings.Global.getInt(context.contentResolver, Settings.Global.DEVICE_PROVISIONED, 0) == 0
+    return isInsetFocusRingFlagEnabled && isInsetFocusRingConfigEnabled && isDeviceNotProvisioned
+}
+
+/**
+ * The style of the button to which the focus ring is applied.
+ *
+ * This is used to determine the color of the focus ring.
+ */
+enum class ButtonStyle {
+    FILLED,
+    BORDERLESS,
+}
+
+/**
+ * Applies focus rings and other accessibility settings to a dialog when shown in the Setup Wizard.
+ *
+ * This function handles applying focus rings to standard buttons and specific custom views (like
+ * the tutorial ViewPager) and adjusts view focusability for a better accessibility experience
+ * during SUW.
+ *
+ * @param dialog The [AlertDialog] to modify.
+ */
+fun configureFocusRingsForDialog(dialog: AlertDialog) {
+    // Apply focus rings to standard dialog buttons if they exist.
+    dialog.getButton(DialogInterface.BUTTON_POSITIVE)?.let {
+        applyFocusRingToButton(it, ButtonStyle.FILLED)
+    }
+    dialog.getButton(DialogInterface.BUTTON_NEGATIVE)?.let {
+        applyFocusRingToButton(it, ButtonStyle.BORDERLESS)
+    }
+
+    // Make the button panel not focusable. This is to avoid having the container of the
+    // buttons be focusable, which is not an interactive element.
+    dialog.findViewById<View>(androidx.appcompat.R.id.buttonPanel)?.let {
+        it.isFocusable = false
+        it.isFocusableInTouchMode = false
+    }
+
+    // Apply focus rings and settings to custom views from tutorials, if they exist.
+    dialog.findViewById<View>(R.id.view_pager)?.let { viewPager ->
+        viewPager.foreground = FocusIndicatorDrawable.Builder(dialog.context).build()
+
+        // Make the view group containing the lottie animation not focusable to
+        // prevent interaction with non-interactive elements.
+        (viewPager.parent as? View)?.let {
+            it.isFocusable = false
+            it.isFocusableInTouchMode = false
+        }
+        (viewPager.parent?.parent as? ViewGroup)?.let {
+            it.isFocusable = false
+            it.isFocusableInTouchMode = false
+        }
+    }
+}
+
+private fun applyFocusRingToButton(button: Button, style: ButtonStyle) {
+    button.isSingleLine = false
+    val colorRes =
+        when (style) {
+            ButtonStyle.FILLED -> com.android.internal.R.color.materialColorOnPrimary
+            ButtonStyle.BORDERLESS -> com.android.internal.R.color.materialColorPrimary
+        }
+    button.foreground =
+        FocusIndicatorDrawable.Builder(button.context)
+            .withHorizontalPaddingAdjustment(FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP)
+            .withVerticalPaddingAdjustments(
+                FOCUS_INDICATOR_TOP_PADDING_ADJUSTMENT_DP,
+                FOCUS_INDICATOR_BOTTOM_PADDING_ADJUSTMENT_DP,
+            )
+            .withCornerRadius(FOCUS_INDICATOR_CORNER_RADIUS_DP)
+            .withColorRes(colorRes)
+            .build()
+}

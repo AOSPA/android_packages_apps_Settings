@@ -33,9 +33,9 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.widget.FooterPreference
 
-// LINT.IfChange
 class DarkModePendingLocationFooterPreference :
     FooterPreferenceMetadata,
     FooterPreferenceBinding,
@@ -56,6 +56,8 @@ class DarkModePendingLocationFooterPreference :
         get() = R.drawable.ic_settings_location_filled
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         val uiModeManager = context.getSystemService(UiModeManager::class.java) ?: return false
@@ -97,4 +99,3 @@ class DarkModePendingLocationFooterPreference :
         const val NIGHT_MODE_SETTING_KEY = Settings.Secure.UI_NIGHT_MODE
     }
 }
-// LINT.ThenChange(DarkModePendingLocationPreferenceController.java)

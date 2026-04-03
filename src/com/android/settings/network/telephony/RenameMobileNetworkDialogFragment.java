@@ -188,6 +188,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
         mTelephonyManager = mTelephonyManager.createForSubscriptionId(mSubId);
         operatorName.setVisibility(View.VISIBLE);
         operatorName.setText(info.getCarrierName());
+// QTI_BEGIN: 2022-10-07: Telephony: Merge "Settings: support CU operator ID display in domestic roaming status" into t-keystone-qcom-dev
         if (DomesticRoamUtils.isFeatureEnabled(getContext())) {
             String carrierName = DomesticRoamUtils.getRegisteredOperatorName(
                     getContext(), info.getSubscriptionId());
@@ -195,6 +196,7 @@ public class RenameMobileNetworkDialogFragment extends InstrumentedDialogFragmen
                 operatorName.setText(carrierName);
             }
         }
+// QTI_END: 2022-10-07: Telephony: Merge "Settings: support CU operator ID display in domestic roaming status" into t-keystone-qcom-dev
         final TextView phoneTitle = view.findViewById(R.id.number_label);
         phoneTitle.setVisibility(info.isOpportunistic() ? View.GONE : View.VISIBLE);
 

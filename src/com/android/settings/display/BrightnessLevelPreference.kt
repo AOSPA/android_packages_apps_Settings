@@ -46,6 +46,7 @@ import com.android.settingslib.display.BrightnessUtils.GAMMA_SPACE_MIN
 import com.android.settingslib.display.BrightnessUtils.convertLinearToGammaFloat
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -87,6 +88,10 @@ class BrightnessLevelPreference :
     override fun getSummary(context: Context): CharSequence? =
         NumberFormat.getPercentInstance().format(context.brightnessPercent)
 
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
     override val restrictionKeys
@@ -127,9 +132,9 @@ class BrightnessLevelPreference :
         ReadWritePermit.ALLOW
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
-        ReadWritePermit.DISALLOW
+        ReadWritePermit.ALLOW
 
-    override val supportsWrite = false
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
@@ -139,7 +144,7 @@ class BrightnessLevelPreference :
 
     override fun getMaxValue(context: Context) = 100
 
-    override fun getUnitOfMeasurement() = "%"
+    override fun getUnitOfMeasurement() = "percentage"
 
     private class BrightnessStorage(private val context: Context) :
         AbstractKeyedDataObservable<String>(),
@@ -149,13 +154,22 @@ class BrightnessLevelPreference :
 
         override fun contains(key: String) = key == KEY
 
+        // TODO (b/496853329): migrate to using brighntess unit percentage.
         @Suppress("UNCHECKED_CAST")
         override fun <T : Any> getValue(key: String, valueType: Class<T>) =
             BigDecimal(context.brightnessPercent * 100)
                 .setScale(0, NumberFormat.getPercentInstance().roundingMode)
                 .toInt() as T
 
-        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {}
+        override fun <T : Any> setValue(key: String, valueType: Class<T>, value: T?) {
+            if (value is Int) {
+                context.displayManager.setBrightness(
+                    context.display?.displayId ?: android.view.Display.DEFAULT_DISPLAY,
+                    value.toFloat(),
+                    DisplayManager.BRIGHTNESS_UNIT_PERCENTAGE,
+                )
+            }
+        }
 
         override fun onFirstObserverAdded() {
             SettingsSystemStore.get(context)
@@ -206,6 +220,8 @@ class BrightnessLevelPreference :
 
     override val availabilityDescription =
         "The default display must be internal."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = context.isBrightnessLevelSettingsAvailable
 

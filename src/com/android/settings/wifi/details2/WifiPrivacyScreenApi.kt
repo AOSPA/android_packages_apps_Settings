@@ -17,18 +17,18 @@
 package com.android.settings.wifi.details2
 
 import android.Manifest.permission
+import android.net.wifi.WifiConfiguration
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
+import com.android.settings.wifi.repository.SavedNetworkInfo
 import com.android.settingslib.datastore.Permissions.Companion.anyOf
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel.Companion.REQUIRES_CONFIRMATION
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
-import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
-import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
-import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settings.wifi.details.SavedNetwork
 
 /**
  * The [PreferencesApiScreen] for the Wifi Privacy screen.
@@ -43,8 +43,10 @@ class WifiPrivacyScreenApi :
         purpose = R.string.wifi_privacy_settings_purpose,
     ) {
     private val repository = featureFactory.wifiFeatureProvider.savedNetworkRepository
-    private val paramKey: String?
-        get() = keyParameters?.get(PARAMETER_KEY)
+    private val network: SavedNetworkInfo?
+        get() = keyParameters?.getTyped<SavedNetworkInfo>(PARAMETER_KEY)
+    private val wifiConfiguration: WifiConfiguration?
+        get() = network?.let { repository.getWifiConfiguration(it.lookupKey) }
 
     init {
         flag { Flags.catalystMigration26q2() }
@@ -53,19 +55,12 @@ class WifiPrivacyScreenApi :
             parameter(
                 name = PARAMETER_KEY,
                 purpose = R.string.wifi_privacy_parameter_purpose,
-                type =
-                    GeneratedParameterType(R.string.wifi_privacy_parameter_description) {
-                        repository.fetchSavedNetworksInfo().map {
-                            GeneratedValue(it.lookupKey.unsafe(), it.ssid.unsafe())
-                        }
-                    },
+                type = SavedNetwork,
             )
 
             prepareSpaRoute { keyParameters ->
-                val lookupKey = keyParameters[PARAMETER_KEY] ?: return@prepareSpaRoute ""
-                repository.findSavedNetworkInfo(lookupKey)?.let { info ->
-                    WifiPrivacyPageProvider.getRoute(info.key)
-                } ?: ""
+                val savedNetwork = keyParameters.getTyped<SavedNetworkInfo>(PARAMETER_KEY) ?: return@prepareSpaRoute ""
+                WifiPrivacyPageProvider.getRoute(savedNetwork.key)
             }
         }
 
@@ -74,17 +69,13 @@ class WifiPrivacyScreenApi :
 
             get {
                 permissions(SEND_DEVICES_NAME_READ_PERMISSIONS)
-                execute {
-                    paramKey?.let { key ->
-                        repository.getWifiConfiguration(key)?.isSendDhcpHostnameEnabled
-                    } ?: false
-                }
+                execute { wifiConfiguration?.let { it.isSendDhcpHostnameEnabled } ?: false }
             }
             set {
                 permissions(SEND_DEVICES_NAME_WRITE_PERMISSIONS)
                 execute { value ->
-                    paramKey?.let { key ->
-                        repository.setWifiConfiguration(key) { config ->
+                    network?.let {
+                        repository.setWifiConfiguration(it.lookupKey) { config ->
                             config.isSendDhcpHostnameEnabled = value
                         }
                     }

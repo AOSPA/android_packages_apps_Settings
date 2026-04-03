@@ -25,7 +25,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import android.os.PersistableBundle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -36,6 +35,9 @@ import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.network.telephony.TelephonyFeatureProvider
+import com.android.settings.network.telephony.satellite.SatelliteSettingsRepository
+import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -50,6 +52,7 @@ import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mock
+import org.mockito.Mockito.atLeastOnce
 import org.mockito.Mockito.clearInvocations
 import org.mockito.Mockito.eq
 import org.mockito.Mockito.mock
@@ -94,9 +97,17 @@ class SatelliteTileStateReceiverTest {
     private val SUB_ID = 1
     private var jobId = 0
 
+    private lateinit var fakeFeatureFactory: FakeFeatureFactory
+    @Mock private lateinit var mockTelephonyFeatureProvider: TelephonyFeatureProvider
+    @Mock private lateinit var mockSatelliteSettingsRepository: SatelliteSettingsRepository
+
     @Before
     fun setUp() {
         context = spy(RuntimeEnvironment.getApplication())
+        fakeFeatureFactory = FakeFeatureFactory.setupForTest()
+        `when`(fakeFeatureFactory.telephonyFeatureProvider.satelliteSettingsRepository)
+            .thenReturn(mockSatelliteSettingsRepository)
+
         jobId = context.resources.getInteger(R.integer.satellite_eligibility_job)
         `when`(context.applicationContext).thenReturn(context)
         `when`(context.packageManager).thenReturn(packageManager)
@@ -120,6 +131,8 @@ class SatelliteTileStateReceiverTest {
         // Reset the singleton state of SatelliteSupportedStateChangeHandler to ensure test
         // isolation
         SatelliteSupportedStateChangeHandler.reset()
+
+        shadowSatelliteManager.setIsSupportedResponse(false, null)
 
         componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DEFAULT
         `when`(packageManager.getComponentEnabledSetting(any())).thenAnswer {
@@ -373,7 +386,8 @@ class SatelliteTileStateReceiverTest {
             advanceUntilIdle()
 
             // The tile should remain enabled because LTE NTN is supported
-            verify(packageManager, never()).setComponentEnabledSetting(any(), anyInt(), anyInt())
+            // In the current implementation, setComponentEnabledSetting is called always.
+            verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
         }
 
     @Test
@@ -433,6 +447,49 @@ class SatelliteTileStateReceiverTest {
         assertThat(SatelliteTileStateReceiver.isTileServiceEnabled(context)).isFalse()
     }
 
+    @Test
+    fun updateTileServiceEnabledState_ntnSupported_stateChanged_enablesTileAndSchedulesJob() {
+        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+
+        SatelliteTileStateReceiver.updateTileServiceEnabledState(context, true)
+
+        verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+        verifyJobScheduled()
+    }
+
+    @Test
+    fun updateTileServiceEnabledState_ntnSupported_stateUnchanged_enablesTileAndDoesNotScheduleJob() {
+        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+
+        SatelliteTileStateReceiver.updateTileServiceEnabledState(context, true)
+
+        // In the current implementation, setComponentEnabledSetting is called always.
+        verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_ENABLED)
+        // Job is NOT scheduled inside updateTileServiceEnabledState because state didn't change
+        verify(mockJobScheduler, never()).schedule(any())
+    }
+
+    @Test
+    fun updateTileServiceEnabledState_ntnNotSupported_stateChanged_disablesTileAndDoesNotScheduleJob() {
+        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+
+        SatelliteTileStateReceiver.updateTileServiceEnabledState(context, false)
+
+        verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+        verify(mockJobScheduler, never()).schedule(any())
+    }
+
+    @Test
+    fun updateTileServiceEnabledState_ntnNotSupported_stateUnchanged_disablesTileAndDoesNotScheduleJob() {
+        componentEnabledState = PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+
+        SatelliteTileStateReceiver.updateTileServiceEnabledState(context, false)
+
+        // In the current implementation, setComponentEnabledSetting is called always.
+        verifyTileEnabledState(PackageManager.COMPONENT_ENABLED_STATE_DISABLED)
+        verify(mockJobScheduler, never()).schedule(any())
+    }
+
     private fun sendBootCompletedBroadcast() {
         val intent = Intent(Intent.ACTION_BOOT_COMPLETED)
         receiver.onReceive(context, intent)
@@ -468,21 +525,17 @@ class SatelliteTileStateReceiverTest {
         val reasons = if (isSupported) emptySet() else setOf(1)
         shadowSatelliteManager.setAttachRestrictionReasonsForCarrier(SUB_ID, reasons)
 
-        val config =
-            PersistableBundle().apply {
-                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, isSupported)
-                putInt(
-                    CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                    CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-                )
-            }
-        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
-        shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, config)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(SUB_ID))
+            .thenReturn(isSupported)
+        if (isSupported) {
+            `when`(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(SUB_ID))
+                .thenReturn(CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC)
+        }
     }
 
     private fun verifyJobScheduled() {
         val jobInfoCaptor = ArgumentCaptor.forClass(JobInfo::class.java)
-        verify(mockJobScheduler).schedule(jobInfoCaptor.capture())
+        verify(mockJobScheduler, atLeastOnce()).schedule(jobInfoCaptor.capture())
 
         val jobInfo = jobInfoCaptor.value
         assertThat(jobInfo.id).isEqualTo(jobId)

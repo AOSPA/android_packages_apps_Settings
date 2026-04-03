@@ -101,6 +101,8 @@ open class AccessibilityShortcutPreference(
 
     override fun getWritePermissions(context: Context) = SettingsSecureStore.getWritePermissions()
 
+    override fun getEnabledDescription(): String = "Clients can only set the value to 'false'"
+
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 

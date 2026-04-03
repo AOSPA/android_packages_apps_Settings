@@ -55,14 +55,15 @@ class TroubleshootingUtils {
             action: String,
             ssid: String,
         ) {
-            val intent = Intent()
-            if (packageName.isNotEmpty() && className.isNotEmpty()) {
-                intent.component = ComponentName(packageName, className)
-            } else if (packageName.isNotEmpty()) {
-                intent.setPackage(packageName)
-            } else {
+            if (packageName.isEmpty()) {
                 Log.d(TAG, "No necessary package name for Wi-Fi.")
                 return
+            }
+            val intent = Intent()
+            if (className.isNotEmpty()) {
+                intent.component = ComponentName(packageName, className)
+            } else {
+                intent.setPackage(packageName)
             }
 
             intent.action = action
@@ -82,14 +83,15 @@ class TroubleshootingUtils {
             action: String,
             subId: Int,
         ) {
-            val intent = Intent()
-            if (packageName.isNotEmpty() && className.isNotEmpty()) {
-                intent.component = ComponentName(packageName, className)
-            } else if (packageName.isNotEmpty()) {
-                intent.setPackage(packageName)
-            } else {
+            if (packageName.isEmpty()) {
                 Log.d(TAG, "No necessary package name for mobile.")
                 return
+            }
+            val intent = Intent()
+            if (className.isNotEmpty()) {
+                intent.component = ComponentName(packageName, className)
+            } else {
+                intent.setPackage(packageName)
             }
             intent.action = action
             intent.putExtra(android.provider.Settings.EXTRA_SUB_ID, subId)

@@ -25,16 +25,22 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_BATTERY
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 
 // LINT.IfChange
 @ProvidePreferenceScreen(PowerUsageAdvancedScreen.KEY)
 open class PowerUsageAdvancedScreen : PreferenceScreenMixin, PreferenceAvailabilityProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_BATTERY)
+    override fun tags(context: Context) = arrayOf(
+        APP_FUNCTION_BATTERY,
+        // exclude this screen from api result since we have the same data in api_battery_usage_summary
+        UI_ONLY_PREFERENCE
+    )
 
     override val key: String
         get() = KEY
@@ -72,6 +78,8 @@ open class PowerUsageAdvancedScreen : PreferenceScreenMixin, PreferenceAvailabil
 
     override val availabilityDescription =
         "The device must support showing battery usage in settings."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         featureFactory.powerUsageFeatureProvider.isBatteryUsageEnabled()

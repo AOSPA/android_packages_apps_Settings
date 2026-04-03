@@ -127,9 +127,7 @@ class SatelliteLandingPageViewModel(
         _isLteBasedNtnSupported.value = isLteSupported
 
         val isCarrierSupported =
-            withContext(backgroundDispatcher) {
-                SatelliteUtils.isCarrierRoamingNtnSupported(context, subId)
-            }
+            withContext(backgroundDispatcher) { SatelliteUtils.isCarrierRoamingNtnSupported(subId) }
         _isCarrierRoamingNtnSupported.value = isCarrierSupported
 
         val dataSupportMode =
@@ -145,8 +143,7 @@ class SatelliteLandingPageViewModel(
     /** Updates the state flow for banners. */
     private suspend fun updateBannerState(subId: Int) {
         val isTerrestrialNetworkConnected = satelliteStateRepository.isTerrestrialConnected.value
-        val isSatelliteEnabledByCarrier =
-            SatelliteUtils.isCarrierRoamingNtnSupported(context, subId)
+        val isSatelliteEnabledByCarrier = SatelliteUtils.isCarrierRoamingNtnSupported(subId)
 
         val isLteSupported = isLteBasedNtnSupported.value
         val isSatelliteAvailableInRegion: Boolean

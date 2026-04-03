@@ -16,8 +16,11 @@ flag {
 }
 
 flag {
-    name: "show_sim_status_detailed_info"
-    namespace: "settings_experience"
-    description: "Show GID1 and Carrier ID in Sim Status"
-    bug: "471099598"
+  name: "skip_onboarding_when_same_set"
+  namespace: "settings_experience"
+  description: "Retain previous settings when turning on the same 'second SIM'"
+  bug: "330893284"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
 }

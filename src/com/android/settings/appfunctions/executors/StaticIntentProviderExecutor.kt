@@ -20,12 +20,6 @@ import android.app.appsearch.GenericDocument
 import androidx.annotation.Keep
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
-import com.android.settings.appfunctions.intents.getAppsIntents
-import com.android.settings.appfunctions.intents.getModesIntents
-import com.android.settings.appfunctions.intents.getNotificationsIntents
-import com.android.settings.appfunctions.intents.getOtherIntents
-import com.android.settings.appfunctions.intents.getSecurityIntents
-import com.android.settings.appfunctions.intents.getStorageIntents
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
 
 /** A simple data class to represent a static Intent URI + description. */
@@ -71,13 +65,3 @@ class StaticIntentProviderExecutor(val staticIntents: List<StaticIntents>) : Dev
         return DeviceStateProviderExecutorResult(states)
     }
 }
-
-fun getAllIntents(): List<StaticIntents> =
-    listOf(
-        getAppsIntents(),
-        getNotificationsIntents(),
-        getModesIntents(),
-        getStorageIntents(),
-        getSecurityIntents(),
-        getOtherIntents(),
-    )

@@ -172,7 +172,9 @@ public class SimStatusPreferenceController extends BasePreferenceController {
 
     private CharSequence getCarrierName(int simSlot) {
         SubscriptionInfo subInfo = getSubscriptionInfo(simSlot);
+// QTI_BEGIN: 2023-05-29: Android_UI: Settings: Fix NPE FC caused by AOSP code refactor
         if (DomesticRoamUtils.isFeatureEnabled(mContext) && subInfo != null) {
+// QTI_END: 2023-05-29: Android_UI: Settings: Fix NPE FC caused by AOSP code refactor
             String operatorName = DomesticRoamUtils.getRegisteredOperatorName(
                 mContext, subInfo.getSubscriptionId());
             if (DomesticRoamUtils.EMPTY_OPERATOR_NAME != operatorName) {

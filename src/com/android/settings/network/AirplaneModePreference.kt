@@ -38,6 +38,7 @@ import com.android.settingslib.datastore.KeyValueStoreDelegate
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.HERO_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -66,7 +67,13 @@ open class AirplaneModePreference :
 
     override val availabilityDescription = "The device must support configuring airplane mode."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context) = context.isAirplaneModeEligible()
+
+    override fun getEnabledDescription(): String = "This setting must not be restricted by a device administrator. Airplane mode cannot be changed during an emergency call. Airplane mode cannot be changed while satellite messaging is active."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = super<PreferenceRestrictionMixin>.isEnabled(context)
 
@@ -105,10 +112,12 @@ open class AirplaneModePreference :
                     showSatelliteDialog(context)
                     return@OnPreferenceChangeListener false
                 }
+// QTI_BEGIN: 2025-02-18: Telephony: Fix for SCBM Exit dialog
                 if (isInScbmMode()) {
                     showScbmDialog(context)
                     return@OnPreferenceChangeListener false
                 }
+// QTI_END: 2025-02-18: Telephony: Fix for SCBM Exit dialog
                 return@OnPreferenceChangeListener true
             }
     }
@@ -119,8 +128,10 @@ open class AirplaneModePreference :
         resultCode: Int,
         data: Intent?,
     ): Boolean {
+// QTI_BEGIN: 2025-02-18: Telephony: Fix for SCBM Exit dialog
         if ((requestCode == REQUEST_CODE_EXIT_ECM || requestCode == REQUEST_CODE_EXIT_SCBM)
             && resultCode == Activity.RESULT_OK) {
+// QTI_END: 2025-02-18: Telephony: Fix for SCBM Exit dialog
             context.getKeyValueStore(KEY)?.setBoolean(KEY, true)
         }
         return true
@@ -139,6 +150,7 @@ open class AirplaneModePreference :
         context.startActivityForResult(intent, REQUEST_CODE_EXIT_ECM, null)
     }
 
+// QTI_BEGIN: 2025-02-18: Telephony: Fix for SCBM Exit dialog
     private fun showScbmDialog(context: PreferenceLifecycleContext) {
         val intent =
             Intent(ExtTelephonyManager.ACTION_SHOW_NOTICE_SCM_BLOCK_OTHERS, null)
@@ -146,6 +158,7 @@ open class AirplaneModePreference :
         context.startActivityForResult(intent, REQUEST_CODE_EXIT_SCBM, null)
     }
 
+// QTI_END: 2025-02-18: Telephony: Fix for SCBM Exit dialog
     private fun showSatelliteDialog(context: PreferenceLifecycleContext) {
         val intent =
             Intent(context, SatelliteWarningDialogActivity::class.java)
@@ -156,13 +169,17 @@ open class AirplaneModePreference :
         context.startActivity(intent)
     }
 
+// QTI_BEGIN: 2025-02-18: Telephony: Fix for SCBM Exit dialog
     private fun isInScbmMode() = AirplaneModeEnabler.isInScbm()
 
+// QTI_END: 2025-02-18: Telephony: Fix for SCBM Exit dialog
     companion object {
         const val KEY = Settings.Global.AIRPLANE_MODE_ON
         const val DEFAULT_VALUE = false
         const val REQUEST_CODE_EXIT_ECM = 1
+// QTI_BEGIN: 2025-02-18: Telephony: Fix for SCBM Exit dialog
         const val REQUEST_CODE_EXIT_SCBM = 2
+// QTI_END: 2025-02-18: Telephony: Fix for SCBM Exit dialog
 
         fun createDataStore(context: Context): KeyValueStore = AirplaneModeStorage(context)
 
@@ -198,6 +215,8 @@ class AirplaneModeTogglePreference : AirplaneModePreference() {
 
     override val availabilityDescription = "The device must support configuring airplane mode and must not have a paired watch."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && !context.hasPairedWatchForAirplaneModeSync()
 }
@@ -206,6 +225,8 @@ class AirplaneModeTogglePreference : AirplaneModePreference() {
 class AirplaneModeDetailsPreference : AirplaneModePreference(), MainSwitchPreferenceBinding {
 
     override val availabilityDescription = "The device must support configuring airplane mode and must not have a paired watch."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         context.isAirplaneModeEligible() && context.hasPairedWatchForAirplaneModeSync()

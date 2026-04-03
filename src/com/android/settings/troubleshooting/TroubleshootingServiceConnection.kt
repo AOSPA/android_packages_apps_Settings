@@ -30,21 +30,21 @@ import com.android.settings.R
 import com.android.settingslib.interfaces.troubleshooting.ITroubleshootingInfoProviderService
 import java.util.concurrent.atomic.AtomicBoolean
 
-class TroubleshootingServiceConnection(
-    private val receivers: Map<String, ResultReceiver> = emptyMap()
-) : ServiceConnection {
-
+/**
+ * Provide an easier way to connect the troubleshooting service. TODO Move this to
+ * SettingsInterfaceLib
+ */
+class TroubleshootingServiceConnection(val receivers: Map<String, ResultReceiver> = emptyMap()) :
+    ServiceConnection {
     private var troubleshootingService: ITroubleshootingInfoProviderService? = null
     var serviceConnectionListener: ServiceConnectionListener? = null
-
-    private val isServiceConnected = AtomicBoolean(false)
+    val isServiceConnected = AtomicBoolean(false)
 
     /** Gets the troubleshooting UI content from the service. */
     var diagnosticUiInfos: Map<String, Bundle> = emptyMap()
-        private set
 
     override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-        Log.d(LOG_TAG, "onServiceConnected")
+        Log.d(TAG, "onServiceConnected")
         val binder = ITroubleshootingInfoProviderService.Stub.asInterface(service)
         troubleshootingService = binder
         isServiceConnected.set(true)
@@ -52,8 +52,15 @@ class TroubleshootingServiceConnection(
         initializeServiceCommunication(binder)
     }
 
+    override fun onNullBinding(name: ComponentName?) {
+        Log.w(TAG, "onNullBinding: Service $name refused the bind request.")
+        isServiceConnected.set(false)
+        troubleshootingService = null
+        serviceConnectionListener?.onServiceConnectedState(false)
+    }
+
     override fun onServiceDisconnected(name: ComponentName?) {
-        Log.i(LOG_TAG, "onServiceDisconnected")
+        Log.i(TAG, "onServiceDisconnected")
         isServiceConnected.set(false)
         troubleshootingService = null
         serviceConnectionListener?.onServiceConnectedState(false)
@@ -63,21 +70,25 @@ class TroubleshootingServiceConnection(
         val infoMap = mutableMapOf<String, Bundle>()
         try {
             receivers.mapValues { (functionType, receiver) ->
-                Log.d(LOG_TAG, "Registering $functionType")
+                Log.d(TAG, "Registering $functionType")
                 infoMap[functionType] = service.getDiagnosticUiInfo(functionType)
                 service.registerIssueDetectionCallback(functionType, receiver)
             }
             this.diagnosticUiInfos = infoMap
             serviceConnectionListener?.onServiceConnectedState(true)
         } catch (e: RemoteException) {
-            Log.e(LOG_TAG, "Error during service registration", e)
+            Log.e(TAG, "Error during service registration", e)
         }
     }
 
     fun bindService(context: Context) {
         val serviceInfo = getTroubleshootingServiceInfo(context)
         if (serviceInfo.isNullOrBlank()) {
-            Log.w(LOG_TAG, "Service info is empty, cannot bind.")
+            Log.w(TAG, "Service info is empty, cannot bind.")
+            return
+        }
+        if (isServiceConnected.get()) {
+            Log.d(TAG, "Already bind.")
             return
         }
 
@@ -87,27 +98,35 @@ class TroubleshootingServiceConnection(
                 setComponent(component)
             }
 
-        Log.i(LOG_TAG, "Binding to service: $component")
+        Log.i(TAG, "Binding to service: $component")
         try {
             val success = context.bindService(intent, this, Context.BIND_AUTO_CREATE)
             if (!success) {
-                Log.e(LOG_TAG, "Unable to bind to service")
+                Log.e(TAG, "Unable to bind to service")
+                unbindService(context)
             }
-        } catch (e: java.lang.SecurityException) {
-            Log.e(LOG_TAG, "SecurityException while binding service", e)
+        } catch (e: SecurityException) {
+            Log.e(TAG, "SecurityException while binding service", e)
+            unbindService(context)
         }
     }
 
     fun unbindService(context: Context) {
-        val service = troubleshootingService ?: return
         try {
-            for ((functionType, receiver) in receivers) {
-                service.unregisterIssueDetectionCallback(functionType, receiver)
+            troubleshootingService?.let { service: ITroubleshootingInfoProviderService ->
+                for ((functionType, receiver) in receivers) {
+                    service.unregisterIssueDetectionCallback(functionType, receiver)
+                }
             }
         } catch (e: RemoteException) {
-            Log.e(LOG_TAG, "Error unregistering callbacks", e)
+            Log.e(TAG, "Error unregistering callbacks", e)
         } finally {
-            context.unbindService(this)
+            try {
+                context.unbindService(this)
+            } catch (e: IllegalArgumentException) {
+                // This happens if the service wasn't actually registered; safe to ignore
+                Log.d(TAG, "Service was not registered")
+            }
             troubleshootingService = null
             isServiceConnected.set(false)
         }
@@ -144,7 +163,7 @@ class TroubleshootingServiceConnection(
     }
 
     companion object {
-        private const val LOG_TAG = "TroubleshootSvcConn"
+        private const val TAG = "TroubleshootSvcConn"
         var cachedExists: Boolean? = null
     }
 }

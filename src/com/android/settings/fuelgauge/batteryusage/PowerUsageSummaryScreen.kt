@@ -26,6 +26,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.fuelgauge.BatteryHeaderPreference
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_BATTERY
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -43,7 +44,6 @@ open class PowerUsageSummaryScreen :
     override val key: String
         get() = KEY
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.power_usage_summary_screen_purpose
 
@@ -69,6 +69,8 @@ open class PowerUsageSummaryScreen :
 
     override val availabilityDescription =
         "The device must support showing the top level battery category in settings."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_top_level_battery)

@@ -31,9 +31,12 @@ import androidx.core.net.toUri
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResult
 import com.android.internal.accessibility.dialog.AccessibilityServiceWarning
+import com.android.settings.R
 import com.android.settings.accessibility.AccessibilityDialogUtils.DialogEnums
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
+import com.android.settings.accessibility.shared.utils.shouldShowFocusRingsInSuw
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
+import com.android.settings.widget.FocusIndicatorDrawable
 
 class AccessibilityServiceWarningDialogFragment : InstrumentedDialogFragment() {
     private var source: Int = 0
@@ -96,19 +99,87 @@ class AccessibilityServiceWarningDialogFragment : InstrumentedDialogFragment() {
                 }
             }
 
+        val contentView =
+            AccessibilityServiceWarning.createAccessibilityServiceWarningDialogContentView(
+                context,
+                serviceInfo,
+                allowListener,
+                denyListener,
+                uninstallListener,
+            )
+
         val alertDialog =
-            AlertDialog.Builder(context)
-                .setView(
-                    AccessibilityServiceWarning.createAccessibilityServiceWarningDialogContentView(
-                        context,
-                        serviceInfo,
-                        allowListener,
-                        denyListener,
-                        uninstallListener,
+            AlertDialog.Builder(context).setView(contentView).setCancelable(true).create()
+
+        if (shouldShowFocusRingsInSuw(context)) {
+            alertDialog.setOnShowListener {
+                // These changes add the focus ring indicator to the permission warning dialog that
+                // is shown when enabling the TalkBack shortcut button.
+                contentView
+                    .findViewById<View>(
+                        com.android.internal.R.id.accessibility_permission_enable_allow_button
                     )
-                )
-                .setCancelable(true)
-                .create()
+                    ?.let {
+                        it.foreground =
+                            FocusIndicatorDrawable.Builder(context)
+                                .withHorizontalPaddingAdjustment(
+                                    FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP
+                                )
+                                .withVerticalPaddingAdjustment(
+                                    FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP
+                                )
+                                // This button needs sharp corners.
+                                .withCornerRadius(0)
+                                .build()
+                    }
+
+                val uninstallButton =
+                    contentView.findViewById<View>(
+                        com.android.internal.R.id.accessibility_permission_enable_uninstall_button
+                    )
+                val isUninstallButtonVisible = uninstallButton?.visibility == View.VISIBLE
+
+                contentView
+                    .findViewById<View>(
+                        com.android.internal.R.id.accessibility_permission_enable_deny_button
+                    )
+                    ?.let {
+                        val builder =
+                            FocusIndicatorDrawable.Builder(context)
+                                .withHorizontalPaddingAdjustment(
+                                    FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP
+                                )
+                                .withVerticalPaddingAdjustment(
+                                    FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP
+                                )
+                        if (isUninstallButtonVisible) {
+                            // This button needs sharp corners.
+                            builder.withCornerRadius(0)
+                        } else {
+                            // This button needs sharp top corners and rounded bottom corners.
+                            builder.withCornerRadii(0, 0, 24, 24)
+                        }
+                        it.foreground = builder.build()
+                    }
+
+                if (isUninstallButtonVisible) {
+                    uninstallButton?.let {
+                        it.foreground =
+                            FocusIndicatorDrawable.Builder(context)
+                                .withHorizontalPaddingAdjustment(
+                                    FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP
+                                )
+                                .withVerticalPaddingAdjustment(
+                                    FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP
+                                )
+                                // This button needs sharp top corners and rounded bottom corners.
+                                .withCornerRadii(0, 0, 24, 24)
+                                .build()
+                    }
+                }
+            }
+        }
+
         alertDialog.window?.run {
             val params = attributes
             params.privateFlags =
@@ -135,6 +206,8 @@ class AccessibilityServiceWarningDialogFragment : InstrumentedDialogFragment() {
         private const val ARG_FEATURE_COMPONENT_NAME = "serviceComponentName"
         private const val ARG_SOURCE = "source"
         private const val ARG_REQUEST_KEY = "requestKey"
+        private const val FOCUS_INDICATOR_HORIZONTAL_PADDING_ADJUSTMENT_DP = -4
+        private const val FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP = -5
 
         @VisibleForTesting const val RESULT_STATUS = "status"
         const val RESULT_STATUS_ALLOW = "allow"

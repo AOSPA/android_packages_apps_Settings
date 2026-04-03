@@ -17,16 +17,22 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import android.net.wifi.WifiInfo;
 import android.util.Log;
+// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 
 import com.android.settings.R;
+// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.Utils;
+// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.core.PreferenceControllerMixin;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.deviceinfo.AbstractWifiMacAddressPreferenceController;
+// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import androidx.preference.Preference;
 import androidx.preference.PreferenceScreen;
+// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 
 /**
  * Concrete subclass of WIFI MAC address preference controller
@@ -42,6 +48,7 @@ public class WifiMacAddressPreferenceController extends AbstractWifiMacAddressPr
         return mContext.getResources().getBoolean(R.bool.config_show_wifi_mac_address);
     }
 
+// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
     @Override
     public void displayPreference(PreferenceScreen screen) {
         super.displayPreference(screen);
@@ -62,5 +69,6 @@ public class WifiMacAddressPreferenceController extends AbstractWifiMacAddressPr
             }
         }
     }
+// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
     // This space intentionally left blank
 }

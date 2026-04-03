@@ -75,9 +75,6 @@ public class MouseScrollingSpeedPreferenceController extends SliderPreferenceCon
 
     @Override
     public int getAvailabilityStatus() {
-        if (!InputSettings.isMouseScrollingAccelerationFeatureFlagEnabled()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         return shouldEnableSlideBar() ? AVAILABLE : DISABLED_DEPENDENT_SETTING;
     }
 

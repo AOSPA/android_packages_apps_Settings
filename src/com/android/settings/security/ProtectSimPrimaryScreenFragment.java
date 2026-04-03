@@ -20,9 +20,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
+import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.network.telephony.ConvertToEsimPreferenceController;
@@ -34,21 +36,46 @@ import java.util.List;
  * (in general) on/off.
  */
 public class ProtectSimPrimaryScreenFragment extends BaseSimPinFragment {
-    @Nullable
-    private SimPinProtectionToggleController mController;
-
-    @Nullable
-    private ChangeSimPinPreferenceController mChangePinController;
+    // Key of the CategoryPreference preference for the first active slot.
+    private static final String FIRST_SLOT_CATEGORY = "category_first_sim_card_slot";
+    // Key of the CategoryPreference preference for the second active slot.
+    private static final String SECOND_SLOT_CATEGORY = "category_second_sim_card_slot";
+    // There are multiple controllers for changing the SIM PIN preferences - one for each slot.
+    private List<ChangeSimPinPreferenceController> mChangePinControllers;
+    // There are multiple SIM PIN toggle controllers - one for each slot and potentially multiple
+    // for a given slot, to handle manual and automatic PIN management modes.
+    private List<SimPinProtectionToggleController> mControllers;
+    private AutoManagedSimPinHelper mAutoManagedSimPinHelper;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        mController = use(SimPinProtectionToggleController.class);
-        mController.setFragment(this);
+        mAutoManagedSimPinHelper = new AutoManagedSimPinHelper(context);
 
-        mChangePinController = use(ChangeSimPinPreferenceController.class);
-        mChangePinController.setFragment(this);
+        mControllers = useAll(SimPinProtectionToggleController.class);
+        for (SimPinProtectionToggleController controller : mControllers) {
+            controller.setFragment(this);
+            // If the controller's preference key indicates it's for the first slot, set slot
+            // index as 0. Otherwise, check if it's for the second slot, and set slot index as 1.
+            if (controller.getPreferenceKey().endsWith("_0")) {
+                controller.setSlotIndex(0);
+            } else if (controller.getPreferenceKey().endsWith("_1")) {
+                controller.setSlotIndex(1);
+            }
+        }
+
+        mChangePinControllers = useAll(ChangeSimPinPreferenceController.class);
+        for (ChangeSimPinPreferenceController controller : mChangePinControllers) {
+            controller.setFragment(this);
+            // If the controller's preference key indicates it's for the first slot, set slot
+            // index as 0. Otherwise, check if it's for the second slot, and set slot index as 1.
+            if (controller.getPreferenceKey().endsWith("_0")) {
+                controller.setSlotIndex(0);
+            } else if (controller.getPreferenceKey().endsWith("_1")) {
+                controller.setSlotIndex(1);
+            }
+        }
 
         int subId = getSubId(context);
         ConvertToEsimPreferenceController convertToEsimController =
@@ -84,16 +111,71 @@ public class ProtectSimPrimaryScreenFragment extends BaseSimPinFragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        if (mController != null) {
-            mController.storeEnrollmentState(outState);
+        for (SimPinProtectionToggleController controller : mControllers) {
+            if (controller.isAvailable()) {
+                controller.storeEnrollmentState(outState);
+            }
         }
     }
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        if (mController != null) {
-            mController.loadEnrollmentState(bundle);
+        for (SimPinProtectionToggleController controller : mControllers) {
+            if (controller.isAvailable()) {
+                controller.loadEnrollmentState(bundle);
+            }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        initFirstActiveSlotHeader();
+        initSecondActiveSlotHeader();
+    }
+
+    @VisibleForTesting
+    public void setAutoManagedSimPinHelperForTesting(AutoManagedSimPinHelper helper) {
+        mAutoManagedSimPinHelper = helper;
+    }
+
+    private void initSlotHeader(String categoryKey, int slotIndex) {
+        PreferenceCategory category = findPreference(categoryKey);
+        if (category == null) {
+            Log.d(TAG, "Missing preference for category " + categoryKey);
+            return;
+        }
+
+        int[] activeSlots = mAutoManagedSimPinHelper.getActiveSlots();
+
+        if (activeSlots == null || activeSlots.length < (slotIndex + 1)) {
+            category.setVisible(false);
+            return;
+        }
+
+        int activeSlot = activeSlots[slotIndex];
+
+        SubscriptionManager subscriptionManager =
+                getContext().getSystemService(SubscriptionManager.class);
+        SubscriptionInfo info = subscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(
+                activeSlot);
+        if (info != null) {
+            category.setTitle(info.getCarrierName());
+        } else {
+            category.setTitle(
+                    getContext().getResources().getString(R.string.sim_editor_title,
+                            slotIndex + 1));
+        }
+        category.setVisible(true);
+    }
+
+    private void initFirstActiveSlotHeader() {
+        initSlotHeader(FIRST_SLOT_CATEGORY, 0);
+    }
+
+    private void initSecondActiveSlotHeader() {
+        initSlotHeader(SECOND_SLOT_CATEGORY, 1);
     }
 }

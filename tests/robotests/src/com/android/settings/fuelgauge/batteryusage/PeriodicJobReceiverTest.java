@@ -34,6 +34,7 @@ import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDao;
 import com.android.settings.fuelgauge.batteryusage.db.BatteryStateDatabase;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settings.testutils.BatteryTestUtils;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -42,6 +43,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAlarmManager;
 
 import java.time.Clock;
@@ -50,6 +52,7 @@ import java.util.concurrent.TimeUnit;
 
 /** Tests of {@link PeriodicJobReceiver}. */
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowThreadUtils.class})
 public final class PeriodicJobReceiverTest {
     private static final Intent JOB_UPDATE_INTENT =
             new Intent(PeriodicJobReceiver.ACTION_PERIODIC_JOB_UPDATE);

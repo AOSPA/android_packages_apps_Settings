@@ -18,6 +18,7 @@ package com.android.settings
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_FORWARD_RESULT
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
@@ -27,6 +28,7 @@ import android.os.Process
 import android.util.Log
 import androidx.annotation.VisibleForTesting
 import com.android.settings.SettingsActivity.EXTRA_FRAGMENT_ARG_KEY
+import com.android.settings.SettingsLaunchpadActivity.Companion.EXTRA_HIGHLIGHT_KEY
 import com.android.settings.activityembedding.ActivityEmbeddingUtils
 import com.android.settings.activityembedding.EmbeddedDeepLinkUtils.getTrampolineIntent
 import com.android.settings.core.PreferenceScreenMixin
@@ -38,12 +40,16 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_ARGS
 import com.android.settingslib.metadata.EXTRA_BINDING_SCREEN_KEY
 import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceScreenCoordinate
 import com.android.settingslib.metadata.PreferenceScreenMetadata
 import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_LAUNCH_SCREEN
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_ARGS
+import com.android.settingslib.metadata.PreferenceScreenMetadata.Companion.EXTRA_SCREEN_KEY
 import com.android.settingslib.metadata.PreferenceScreenRegistry
 import com.android.settingslib.metadata.PreferenceSearchIndexablesProvider
 import com.android.settingslib.metadata.ValidatedKeyParameters
+import com.android.settingslib.metadata.isExposable
 import com.android.settingslib.metadata.preferencesapi.ApiOperationContext
 import com.android.settingslib.metadata.preferencesapi.FlagContext
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
@@ -73,25 +79,6 @@ import kotlinx.coroutines.runBlocking
  *   highlight within the target screen.
  */
 open class SettingsLaunchpadActivity : Activity() {
-
-    companion object {
-        const val EXTRA_SCREEN_KEY = "screen_key"
-        const val EXTRA_SCREEN_ARGS = "screen_args"
-        const val EXTRA_HIGHLIGHT_KEY = "highlight_key"
-
-        private const val TAG = "SettingsLaunchpad"
-
-        /** Permissions that allow a caller to enter this trampoline activity. */
-        private val USE_TRAMPOLINE_PERMISSIONS =
-            listOf(
-                Manifest.permission.READ_SYSTEM_PREFERENCES,
-                Manifest.permission.EXECUTE_APP_FUNCTIONS,
-            )
-
-        /** Permissions that allow a caller to bypass screen-specific permission checks. */
-        private val TRUSTED_SCREEN_BYPASS_PERMISSIONS =
-            listOf(Manifest.permission.EXECUTE_APP_FUNCTIONS)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,7 +113,22 @@ open class SettingsLaunchpadActivity : Activity() {
         }
 
         val highlightKey = intent.getStringExtra(EXTRA_HIGHLIGHT_KEY)
-        val screenArgsBundle = intent.getBundleExtra(EXTRA_SCREEN_ARGS)
+        var screenArgsBundle = intent.getBundleExtra(EXTRA_SCREEN_ARGS)
+
+        if (screenArgsBundle == null) {
+            val itemization = intent.getStringExtra(PreferenceScreenMetadata.EXTRA_ITEMIZATION)
+            if (!itemization.isNullOrEmpty()) {
+                val schema = PreferenceScreenRegistry.getScreenParametersSchema(screenKey)
+                val firstParamName = schema?.getParameters()?.keys?.firstOrNull()
+
+                if (firstParamName != null) {
+                    // Map the itemization value to the screen's first formal parameter
+                    screenArgsBundle = Bundle().apply { putString(firstParamName, itemization) }
+                    Log.d(TAG, "Mapped itemization to '$firstParamName' for screen: $screenKey")
+                }
+            }
+        }
+
         val screenCoordinate = createScreenCoordinate(screenKey, screenArgsBundle)
 
         // Using PreferenceScreenRegistry.create() to get screen metadata
@@ -136,6 +138,12 @@ open class SettingsLaunchpadActivity : Activity() {
                     Log.e(TAG, "Cannot find screen metadata for key: $screenKey")
                     return
                 }
+
+        if (shouldBlockScreenLaunch(this, screenMetadata)) {
+            return
+        }
+
+        val menuKey = resolveMenuKey(screenMetadata)
 
         if (screenMetadata is PreferencesApiScreen) {
             val checkScreenFlag = screenMetadata.flag?.check(FlagContext(this)) ?: true
@@ -166,26 +174,33 @@ open class SettingsLaunchpadActivity : Activity() {
                     parameters = screenMetadata.keyParameters ?: ValidatedKeyParameters.EMPTY,
                 )
 
-            // Precondition checks are suspend functions. Since this is a trampoline
-            // activity that should execute quickly, we use runBlocking. This assumes
-            // the precondition checks are fast and won't cause ANRs.
-            val screenPreconditionsCheck =
-                runBlocking { screenMetadata.screenPreconditions?.check(opContext) } ?: Allowed
-            if (
-                screenPreconditionsCheck != Allowed
-            ) { // Do not launch the screen if preconditions are not met.
-                val reason = (screenPreconditionsCheck as Disallowed).getReason(opContext.context)
-                Log.w(
-                    TAG,
-                    "Screen preconditions not met for key '$screenKey' with reason: $reason. Aborting launch.",
-                )
+            try {
+                // Precondition checks are suspend functions. Since this is a trampoline
+                // activity that should execute quickly, we use runBlocking. This assumes
+                // the precondition checks are fast and won't cause ANRs.
+                val screenPreconditionsCheck =
+                    runBlocking { screenMetadata.screenPreconditions?.check(opContext) } ?: Allowed
+                if (
+                    screenPreconditionsCheck != Allowed
+                ) { // Do not launch the screen if preconditions are not met.
+                    val reason =
+                        (screenPreconditionsCheck as Disallowed).getReason(opContext.context)
+                    Log.w(
+                        TAG,
+                        "Screen preconditions not met for key '$screenKey' with reason: $reason. Aborting launch.",
+                    )
+                    return
+                }
+            } catch (ex: Exception) {
+                // this can happen when a client wants to open a package that doesn't exist on device
+                Log.e(TAG, "Screen precondition check threw an exception for key: $screenKey", ex)
                 return
             }
 
             val spaRoute = screenMetadata.getSpaRoute()
             if (!spaRoute.isNullOrEmpty()) {
                 startScreen(
-                    screenMetadata,
+                    menuKey,
                     { getSpaActivityIntent(spaRoute) },
                     { startSpaActivity(spaRoute) },
                 )
@@ -219,12 +234,16 @@ open class SettingsLaunchpadActivity : Activity() {
             return
         }
 
+        // get the launch screen extra from the screen metadata intent if present
+        val launchScreenExtra = metadataIntent?.getBundleExtra(EXTRA_LAUNCH_SCREEN)
+
         launchFragment(
             fragmentClass.name,
             screenKey,
-            args = screenArgsBundle,
-            highlightKey = highlightKey,
-            metadata = screenMetadata,
+            screenArgsBundle,
+            highlightKey,
+            launchScreenExtra,
+            menuKey
         )
     }
 
@@ -233,7 +252,8 @@ open class SettingsLaunchpadActivity : Activity() {
         key: String,
         args: Bundle?,
         highlightKey: String?,
-        metadata: PreferenceScreenMetadata,
+        launchScreenExtra: Bundle?,
+        menuKey: String?,
     ) {
         val launchArgs =
             Bundle().apply {
@@ -242,7 +262,6 @@ open class SettingsLaunchpadActivity : Activity() {
                 putString(EXTRA_FRAGMENT_ARG_KEY, highlightKey)
 
                 // add all values from the launchScreenExtra to this bundle
-                val launchScreenExtra = intent.getBundleExtra(EXTRA_LAUNCH_SCREEN)
                 launchScreenExtra?.let { putAll(it) }
             }
 
@@ -256,19 +275,18 @@ open class SettingsLaunchpadActivity : Activity() {
                 ) // TODO(b/465855195): set a meaningful metrics category
 
         startScreen(
-            metadata,
+            menuKey,
             { launcher.toIntent() },
             { launcher.addFlags(FLAG_ACTIVITY_NEW_TASK).launch() },
         )
     }
 
     private fun startScreen(
-        metadata: PreferenceScreenMetadata,
+        menuKey: String?,
         intent: () -> Intent,
         launch: () -> Unit,
     ) {
         if (shouldLaunchDeepLinkTrampoline()) {
-            val menuKey = resolveMenuKey(metadata)
             val deepLinkIntent =
                 getTrampolineIntent(intent(), menuKey).addFlags(FLAG_ACTIVITY_NEW_TASK)
             startActivity(deepLinkIntent)
@@ -282,12 +300,32 @@ open class SettingsLaunchpadActivity : Activity() {
             is PreferencesApiScreen -> metadata.topLevelSettingsCategory.value
             is PreferenceScreenMixin ->
                 metadata.highlightMenuKey.takeIf { it != 0 }?.let { getString(it) }
+
             else -> null
         }
 
+    private fun shouldBlockScreenLaunch(
+        context: Context,
+        metadata: PreferenceScreenMetadata
+    ): Boolean {
+        // If the screen is not exposable => block.
+        if (!metadata.isExposable(context)) {
+            Log.w(TAG, "Screen ${metadata.key} is not exposable. Blocking launch.")
+            return true
+        }
+
+        // If the screen is not available => block.
+        if (metadata is PreferenceAvailabilityProvider && !metadata.isAvailable(context)) {
+            Log.w(TAG, "Screen ${metadata.key} is not available. Blocking launch.")
+            return true
+        }
+
+        return false
+    }
+
     private fun shouldLaunchDeepLinkTrampoline(): Boolean {
         return ActivityEmbeddingUtils.isEmbeddingActivityEnabled(this) &&
-            !ActivityEmbeddingUtils.isAlreadyEmbedded(this)
+                !ActivityEmbeddingUtils.isAlreadyEmbedded(this)
     }
 
     private fun createScreenCoordinate(
@@ -297,7 +335,7 @@ open class SettingsLaunchpadActivity : Activity() {
         val screenCoordinate =
             if (
                 CatalystFlagProviderFactory.catalystUseKeyParameters() &&
-                    PreferenceScreenRegistry.isParameterized(this, screenKey)
+                PreferenceScreenRegistry.isParameterized(this, screenKey)
             ) {
                 PreferenceScreenCoordinate(
                     screenKey,
@@ -318,7 +356,7 @@ open class SettingsLaunchpadActivity : Activity() {
             Log.w(
                 TAG,
                 "launchedFromPackage is null. " +
-                    "Callers must use ActivityOptions.setShareIdentityEnabled(true).",
+                        "Callers must use ActivityOptions.setShareIdentityEnabled(true).",
             )
             return false
         }
@@ -344,5 +382,23 @@ open class SettingsLaunchpadActivity : Activity() {
     override fun getLaunchedFromPackage(): String? = super.getLaunchedFromPackage()
 
     /** Returns the UID of the application that launched this activity. */
-    @VisibleForTesting override fun getLaunchedFromUid(): Int = super.getLaunchedFromUid()
+    @VisibleForTesting
+    override fun getLaunchedFromUid(): Int = super.getLaunchedFromUid()
+
+    companion object {
+        const val EXTRA_HIGHLIGHT_KEY = "highlight_key"
+
+        private const val TAG = "SettingsLaunchpad"
+
+        /** Permissions that allow a caller to enter this trampoline activity. */
+        private val USE_TRAMPOLINE_PERMISSIONS =
+            listOf(
+                Manifest.permission.READ_SYSTEM_PREFERENCES,
+                Manifest.permission.EXECUTE_APP_FUNCTIONS,
+            )
+
+        /** Permissions that allow a caller to bypass screen-specific permission checks. */
+        private val TRUSTED_SCREEN_BYPASS_PERMISSIONS =
+            listOf(Manifest.permission.EXECUTE_APP_FUNCTIONS)
+    }
 }

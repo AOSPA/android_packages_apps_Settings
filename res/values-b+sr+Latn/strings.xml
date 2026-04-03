@@ -930,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Želite da restartujete uređaj?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"NFC evidentiranje detalja je namenjeno samo u svrhe programiranja. Dodatni NFC podaci uvršteni su u izveštaje o greškama, koji mogu da sadrže privatne podatke. Restartujte uređaj da biste promenili ovo podešavanje."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Restartuj"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Uključeno"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Isključeno"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Spoljni ekrani"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Ugrađeni ekran"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Univerzalni kursor"</string>
@@ -1058,7 +1056,10 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Povezani ste na WEP mrežu. Ako ne dozvolite ove mreže, nećete biti povezani."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Napredne opcije"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Padajuća lista sa naprednim opcijama"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"proširite"</string>
+    <!-- no translation found for wifi_advanced_toggle_action_expand (8286882218084659009) -->
+    <skip />
+    <!-- no translation found for wifi_advanced_toggle_action_collapse (8864441197817185264) -->
+    <skip />
     <string name="wifi_ssid" msgid="5139273830867723030">"Naziv mreže*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Unesite SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Bezbednost"</string>
@@ -1158,7 +1159,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Radi poboljšanja preciznosti lokacije i u druge svrhe, nepoznata aplikacija želi da uključi skeniranje mreže čak i kada je WiFi isključen.\n\nŽelite da dozvolite ovo za sve aplikacije koje žele da skeniraju?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Odbij"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*obavezno"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Ovo je deljena mreža. Morate da se prijavite da biste uneli promene."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Obratite se vlasniku mreže ili administratoru uređaja da biste uneli promene."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ova mreža nema pristup internetu. Želite li da ostanete povezani?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Neke aplikacije i usluge neće raditi usled ograničene veze. Želite li da se ipak koristi?"</string>
@@ -1529,6 +1529,10 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN-ovi se ne podudaraju. Potvrdite novi PIN za SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Pogrešan PIN. Preostalih pokušaja: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Unesite aktuelni PIN kôd SIM kartice"</string>
+    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
+    <skip />
+    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"Koristiti <xliff:g id="CARRIER">%1$s</xliff:g> za mob. podatke?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Koristite <xliff:g id="CARRIER2_0">%2$s</xliff:g> za mobilne podatke. Ako pređete na <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> se više neće koristiti za mobilne podatke."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Koristi <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1831,8 +1835,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Promene otkrivanja vremenske zone lokacije nisu dozvoljene"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Ako je lokacija uređaja dostupna, može da se koristi za podešavanje vremenske zone"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Obaveštenja"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Dobijajte obaveštenja kada se vreme automatski promeni"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Promena vremenske zone"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Dobijte obaveštenje kada se vremenska zona automatski ažurira"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"obaveštenje, vreme, zona, vremenska zona"</string>
@@ -2138,13 +2141,15 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Jezik"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Prikaži taster za promenu tastature"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Dozvolite da se dugme za promenu tastature prikazuje na traci za navigaciju kada je izabrano polje za unos"</string>
-    <string name="virtual_keyboard_category" msgid="2339505603075527212">"Tastatura na ekranu"</string>
-    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Dostupna tastatura na ekranu"</string>
+    <string name="keyboard_apps_category" msgid="1715169176659877658">"Aplikacije za tastaturu"</string>
+    <string name="keyboard_apps_category_summary" msgid="6676804967286517009">"Podešavanja jezika i aplikacija za <xliff:g id="KEYBOARD_APPS_LIST">%1$s</xliff:g>"</string>
+    <string name="keywords_keyboard_apps" msgid="895860348178301718">"Gboard"</string>
+    <string name="available_keyboard_apps_category" msgid="7665966484500890112">"Dostupne aplikacije za tastaturu"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Opcije"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Pristupačnost"</string>
-    <string name="physical_keyboard_title" msgid="3328134097512350958">"Fizička tastatura"</string>
-    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Birač rasporeda fizičke tastature"</string>
+    <string name="physical_keyboard_title" msgid="6597340453841961909">"Fizičke tastature"</string>
+    <string name="physical_keyboard_summary" msgid="2751015358747795398">"Podešavanja hardvera za <xliff:g id="PHYSICAL_KEYBOARDS_LIST">%1$s</xliff:g>"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"Birač rasporeda"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Duži odziv tastera"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Ignorišite brze pritiske istog tastera koji se ponavljaju"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Kašnjenje dužeg odziva tastera"</string>
@@ -2206,23 +2211,36 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Prilagodite radnje koje pokreće dugmad kontrolera"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Dugmad"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Putanja"</string>
-    <string name="game_controller_button_a" msgid="2138420373137111774">"Dugme A"</string>
-    <string name="game_controller_button_b" msgid="2093089857164437480">"Dugme B"</string>
-    <string name="game_controller_button_x" msgid="3428801081204194655">"Dugme X"</string>
-    <string name="game_controller_button_y" msgid="4596061542299533516">"Dugme Y"</string>
-    <string name="game_controller_button_l1" msgid="4428713182602902434">"Dugme L1"</string>
-    <string name="game_controller_button_r1" msgid="6271978600831912659">"Dugme R1"</string>
-    <string name="game_controller_button_l2" msgid="4168716287264803566">"Dugme L2"</string>
-    <string name="game_controller_button_r2" msgid="4361909018228151006">"Dugme R2"</string>
-    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Klik na levu palicu"</string>
-    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Klik na desnu palicu"</string>
+    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
+    <skip />
     <string name="game_controller_dpad" msgid="5352745621298140827">"Navigaciono dugme"</string>
-    <string name="game_controller_stick_left" msgid="1591700901162153956">"Leva palica"</string>
-    <string name="game_controller_stick_right" msgid="1418791636252375110">"Desna palica"</string>
+    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
+    <skip />
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Resetuj na podrazumevano"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Resetovaćete na podrazumevano?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Sva podešavanja kontrolera će biti resetovana na podrazumevana"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Resetuj"</string>
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"trenutno je dodeljeno vrednosti <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Tačped"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Tačped i miš"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Miš"</string>
@@ -2293,6 +2311,8 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Obaveštenja"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Brza podešavanja"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Napomena"</string>
+    <!-- no translation found for action_corner_action_peek_title (4305093703546498134) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Odaberite prečicu za <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"donji levi ugao"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"donji desni ugao"</string>
@@ -2333,7 +2353,7 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Preusmeri vibraciju"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Preusmeri vibraciju na kontroler za igre kada je povezan"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Rasporedi tastature"</string>
-    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Rasporedi fizičkih tastatura"</string>
+    <string name="keyboard_layout_picker_category_title" msgid="2312103369489003202">"Rasporedi"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Lični rečnik"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Lični rečnik za posao"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Dodajte reči koje će se koristiti u aplikacijama kao što je Provera pravopisa"</string>
@@ -2355,9 +2375,9 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Za sve jezike"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Još jezika..."</string>
     <string name="testing" msgid="6294172343766732037">"Testiranje"</string>
-    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Tastatura na ekranu, alatke"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Tastatura na ekranu, fizička tastatura, alatke"</string>
-    <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Fizička tastatura"</string>
+    <string name="keyboard_settings_summary" msgid="5513613701144979051">"Aplikacije za tastaturu, alatke"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="449934856451727476">"Aplikacije za tastaturu, fizičke tastature, alatke"</string>
+    <string name="physical_keyboards_list_title" msgid="2062417895303139252">"Fizičke tastature"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Raspored"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Izbor gadžeta"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Izbor vidžeta"</string>
@@ -2426,6 +2446,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Oznake funkcija"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Omogući evidenciju za Bluetooth grupu"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Promenite nivo evidencije za Bluetooth grupu (uključite/isključite Bluetooth po menjanju podešavanja)"</string>
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Omogućite priključak za Bluetooth HCI snoop log"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Omogućite da Bluetooth HCI snoop log bude dostupan na lokalnom priključku"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtriranje snoop evidencije za Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Podesi filtere"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Onemogućite i omogućite Bluetooth da bi promene stupile na snagu"</string>
@@ -2549,7 +2571,7 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"tasteri za jačinu zvuka"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Pritisnite i zadržite oba tastera za jačinu zvuka"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Dodirnite triput"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Brzo dodirnite ekran %1$d puta. Ovo može da uspori uređaj."</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="387169602299548488">"Brzo dodirnite ekran 3 puta. To može da uspori uređaj."</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"dodirnite triput"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Tasterska prečica"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Pritisnite <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> da biste koristili <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -2604,8 +2626,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Proširena tamna tema"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Podešavanja proširene tamne teme"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Otvorite podešavanja proširene tamne teme"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Proširena tamna tema automatski potamnjuje više aplikacija radi bolje čitljivosti.\n\nNe isključujte prekidač aplikacije da biste koristili proširenu tamnu temu. Ako aplikacija ne izgleda dobro, isključite njen prekidač da biste koristili temu aplikacije."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Ukloni animacije"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Smanjite pomeranja na ekranu"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Treptanje kursora za tekst"</string>
@@ -2932,6 +2953,7 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"Potrošnja baterije i vreme ispred ekrana se ne mere dok se telefon puni"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Potrošnja baterije za aplikacije"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Korišćenje detalja"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Prilagođavanje korišćenja napajanja"</string>
@@ -3631,6 +3653,12 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Uređaj"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Tačped, tastatura, ekran, zvuk"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Osvetljenost, boja, tamna tema, zaključani ekran, tekst"</string>
+    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
+    <skip />
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Izbor tastature, alatke"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Brzina kursora, prilagođavanje dugmadi, skrolovanje"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Jačina zvuka, zvučnici, mikrofoni"</string>
@@ -3762,7 +3790,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"veličina teksta, velika slova, velik font, velik tekst, slabovidost, povećanje teksta, uvećavanje fonta, povećanje fonta"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"zvek uključen ambijentalni prikaz, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, oznaka, čitač"</string>
-    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"tastatura, haptika, vibracija,"</string>
+    <string name="keywords_keyboard_vibration" msgid="5870649353180725920">"tastatura, haptika, vibriranje, kucanje"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"spoljni ekran, povezani ekran, prošireni ekran, drugi ekran, ugrađeni ekran, raspoređivanje ekrana, preslikavanje, veličina prikaza, rotacija, rezolucija, učestalost osvežavanja"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"kursor, kursor za tekst, treptanje, interval treptanja, brzina treptanja, animacija, smanji animaciju, ukloni animaciju"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Jačina zvuka i vibracija"</string>
@@ -3779,10 +3807,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Zvuk obaveštenja je isključen, obaveštenja će vibrirati"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"Isključen je zvuk za: <xliff:g id="VOLUME_TYPE">%1$s</xliff:g>"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Nedostupno jer je zvuk isključen"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Melodija zvona, upozorenje o dolaznom pozivu, SIM, melodija zvona za SIM"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Melodija zvona"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Zvuk zvona telefona"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Podrazumevani zvuk obaveštenja"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Zvuk aplikacije"</string>
@@ -4608,18 +4634,53 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Dozvolite da ova aplikacija čita, menja i briše sve datoteke na ovom uređaju ili svim povezanim uređajima za skladištenje. Ako to dozvolite, aplikacija može da pristupa datotekama bez vašeg znanja."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Može da pristupa svim datotekama"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatizacija ekrana"</string>
-    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Ova aplikacija će moći da vidi sadržaj ekrana drugih aplikacija i da ostvaruje interakciju sa njim kako bi vam pomogla da obavljate zadatke, čak i kada su aplikacije u pozadini"</string>
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"Aplikacija <xliff:g id="ID_1">%1$s</xliff:g> će moći da vidi sadržaj ekrana drugih aplikacija i da ostvaruje interakciju sa njim kako bi vam pomogla da obavljate zadatke"</string>
-    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Ako ne dozvolite automatizaciju ekrana, <xliff:g id="ID_1">%1$s</xliff:g> će možda i dalje moći da komunicira sa aplikacijama koje su povezane sa aplikacijom <xliff:g id="ID_2">%1$s</xliff:g> na druge načine"</string>
-    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Dozvolite aplikacijama da vam pomažu u obavljanju zadataka pomoću interakcije sa sadržajem ekrana drugih aplikacija"</string>
+    <!-- no translation found for computer_control_automation_sub_heading (542883453066952146) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2086013777547395674) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (6590135080063496543) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Uvek pitaj"</string>
-    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Uvek dozvoli"</string>
-    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Ne dozvoli"</string>
-    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Dozvoli automatizaciju ekrana"</string>
-    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"Nijedna aplikacija nije uvek dozvoljena"</string>
-    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Ovde će se prikazivati aplikacije kojima <xliff:g id="ID_1">%1$s</xliff:g> dozvoljava da uvek koriste automatizaciju ekrana. Aplikacije koje dobijaju samo dozvolu za svaku sesiju neće se prikazivati."</string>
-    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Dozvoljeno"</string>
-    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Nije dozvoljeno"</string>
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Uvek dozvoli"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Ne dozvoli"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
+    <skip />
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Aplikacija je uklonjena"</string>
+    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
+    <skip />
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{Dozvoljena je 1 aplikacija}one{Dozvoljena je # aplikacija}few{Dozvoljene su # aplikacije}other{Dozvoljeno je # aplikacija}}"</string>
+    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
+    <skip />
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Nijedna aplikacija nema dozvolu"</string>
+    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
+    <skip />
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Podrazumevani digitalni pomoćnik"</string>
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_target_list_header (2625151188607263591) -->
+    <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Obaveštenja preko celog ekrana"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Dozvoli obaveštenja preko celog ekrana od ove aplikacije"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Dozvolite ovoj aplikaciji da prikazuje obaveštenja preko celog ekrana kada je uređaj zaključan. Aplikacije mogu da ih koriste radi isticanja alarma, dolaznih poziva ili drugih hitnih obaveštenja."</string>
@@ -4656,6 +4717,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Nije povezano"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Nije povezana"</string>
     <string name="apps_summary" msgid="4007416751775414252">"Instaliranih aplikacija: <xliff:g id="COUNT">%1$d</xliff:g>"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"Koristi se <xliff:g id="PERCENTAGE">%1$s</xliff:g> – dostupno je <xliff:g id="FREE_SPACE">%2$s</xliff:g>"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Tamna tema, veličina fonta, osvetljenost"</string>
     <string name="memory_summary" msgid="8221954450951651735">"U proseku je u upotrebi <xliff:g id="USED_MEMORY">%1$s</xliff:g> od <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memorije"</string>
@@ -5716,11 +5779,11 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Dozvoli samo šifrovane mreže"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Ovo je bezbednije, ali može da ograniči vezu sa mobilnom mrežom na nekim lokacijama. Hitni pozivi su uvek dozvoljeni."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Želite da isključite zaštitu od 2G mreže?"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Aktuelna mreža za <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM ne podržava 2G. Ako isključite zaštitu od 2G mreže, rizikujete da se povežete na štetne lažne 2G mreže."</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2G mreže su manje bezbedne, a ako ovo isključite, pozivi, poruke i podaci će biti podložni presretanju ili krađi"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Isključi"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Zaštita od 2G mreže"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"Zaštita od 2G mreže je uključena"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"Aktuelna mreža za <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM zahteva da bude uključena 2G zaštita. I dalje možete da onemogućite 2G zaštitu na sopstveni rizik."</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"To može da se isključi u Podešavanjima, ali 2G je manje bezbedan i može da ugrozi podatke"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Podešavanja"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Sve usluge"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Prikazuj pristup privremenoj memoriji"</string>
@@ -5767,6 +5830,7 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"Izaberite čuvar ekrana"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Prilagodi"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Prilagodite <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
+    <string name="dream_preview_button_description" msgid="1752727543834253129">"Pregled: <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Morate da restartujete da biste omogućili podršku za prozore proizvoljnog formata."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Morate da restartujete da biste ažurirali dostupnost prozora proizvoljnog formata."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Morate da restartujete da biste omogućili prozore proizvoljnog formata na sekundarnim ekranima."</string>
@@ -5801,6 +5865,10 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Deinstaliraj aplikaciju"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplikacije instalirane u poslednjih mesec dana}one{Aplikacije instalirane u poslednjih # meseci}few{Aplikacije instalirane u poslednja # meseca}other{Aplikacije instalirane u poslednjih # meseci}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplikacije koje su instalirane pre više od # meseca}one{Aplikacije koje su instalirane pre više od # meseca}few{Aplikacije koje su instalirane pre više od # meseca}other{Aplikacije koje su instalirane pre više od # meseci}}"</string>
+    <!-- no translation found for ai_assist_category (6115635022788919643) -->
+    <skip />
+    <string name="personal_context_title" msgid="6639623956831710453">"Proaktivna pomoć"</string>
+    <string name="personal_context_switch_summary" msgid="917644125592480347">"Odaberite da li ova aplikacija može da šalje informacije za generisanje predloga"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Razmera"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Isprobajte novu razmeru da biste pregledali sadržaj ove aplikacije ako nije dizajnirana da staje na: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Isprobajte novu razmeru da biste pregledali sadržaj ove aplikacije ako nije dizajnirana da staje na: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Neke aplikacije možda neće biti optimizovane za određene razmere."</string>
@@ -5818,7 +5886,9 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> puta <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Aplikacija će se restartovati kada promenite razmeru. Možda ćete izgubiti nesačuvane promene. Neke aplikacije možda neće biti optimizovane za određene razmere."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Doživljaj"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Džojped"</string>
+    <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtuelni džojped"</string>
+    <!-- no translation found for virtual_gamepad_restart_game_toast (5281647814007835224) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Senzor za otisak prsta"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Treperuća obaveštenja"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"O treperućim obaveštenjima"</string>

@@ -63,45 +63,46 @@ class MobileNetworkStateSource : DeviceStateSource {
             listOf(
                 DeviceStateItem(
                     key = "sim_enabled_$subId",
-                    purpose = "sim_enabled_$subId",
+                    purpose = context.getString(R.string.sim_enabled_purpose),
                     jsonValue = subscriptionManager.isSubscriptionEnabled(subId).toString(),
                     hintText = "Whether the SIM with subscription ID $subId is enabled",
                 ),
                 DeviceStateItem(
                     key = "mobile_data_used_$subId",
-                    purpose = "mobile_data_used subscription:$subId",
+                    purpose = context.getString(R.string.mobile_data_used_purpose),
                     jsonValue = getDataUsedString(context, subId),
                     hintText =
                         "Data used of subscription ID $subId in this cycle | This SIM data usage screen shows the amount of data each app has consumed from a specific SIM card.",
                 ),
                 DeviceStateItem(
                     key = "mobile_network_name_$subId",
-                    purpose = "mobile_network_name subscription:$subId",
+                    purpose = context.getString(R.string.mobile_network_spn_purpose),
                     jsonValue =
                         SubscriptionUtil.getUniqueSubscriptionDisplayName(it, context).toString(),
                     hintText = "Mobile network name of subscription ID $subId",
                 ),
                 DeviceStateItem(
                     key = "phone_number_$subId",
-                    purpose = "phone_number subscription:$subId",
+                    purpose = context.getString(R.string.mobile_network_phone_number_purpose),
                     jsonValue = SubscriptionUtil.getBidiFormattedPhoneNumber(context, it),
                     hintText = "Phone number of subscription ID $subId",
                 ),
                 DeviceStateItem(
                     key = "data_roaming_enabled_$subId",
-                    purpose = "data_roaming_enabled subscription:$subId",
+                    purpose =
+                        context.getString(R.string.mobile_network_data_roaming_enabled_purpose),
                     jsonValue = telephonyManager.isDataRoamingEnabled.toString(),
                     hintText = "Whether the data roaming of subscription ID $subId is enabled",
                 ),
                 DeviceStateItem(
                     key = "preferred_network_type_$subId",
-                    purpose = "preferred_mobile_snetwork_type subscription:$subId",
+                    purpose = context.getString(R.string.enabled_networks_key_purpose),
                     jsonValue = getPreferredNetworkMode(context, subId),
                     hintText = "The preferred network type of subscription ID $subId",
                 ),
                 DeviceStateItem(
                     key = "auto_select_network_$subId",
-                    purpose = "auto_select_mobile_network subscription:$subId",
+                    purpose = context.getString(R.string.auto_select_network_purpose),
                     jsonValue = telephonyManager.serviceState?.isManualSelection?.not().toString(),
                     hintText =
                         "Whether the subscription ID $subId enables automatically select network",

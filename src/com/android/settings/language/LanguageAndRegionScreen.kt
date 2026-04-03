@@ -24,6 +24,7 @@ import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
@@ -31,7 +32,11 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Comp
 // LINT.IfChange
 @ProvidePreferenceScreen(LanguageAndRegionScreen.KEY)
 open class LanguageAndRegionScreen : PreferenceScreenMixin {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    override fun tags(context: Context) = arrayOf(
+        APP_FUNCTION_UNCATEGORIZED,
+        // exclude this screen from api result since we have the data in api_language_and_region_settings screen
+        UI_ONLY_PREFERENCE,
+    )
 
     override val key: String
         get() = KEY

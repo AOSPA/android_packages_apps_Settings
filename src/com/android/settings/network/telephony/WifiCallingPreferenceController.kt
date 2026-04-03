@@ -25,7 +25,9 @@ import android.telephony.ims.ImsMmTelManager
 import androidx.lifecycle.LifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
+// QTI_BEGIN: 2024-02-22: Telephony: Settings : add WFC summary for ims preferrred.
 import com.android.ims.ImsConfig
+// QTI_END: 2024-02-22: Telephony: Settings : add WFC summary for ims preferrred.
 import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.network.telephony.MobileNetworkSettingsSearchIndex.MobileNetworkSettingsSearchResult
@@ -131,9 +133,11 @@ open class WifiCallingPreferenceController @JvmOverloads constructor(
             ImsMmTelManager.WIFI_MODE_WIFI_PREFERRED ->
                 com.android.internal.R.string.wfc_mode_wifi_preferred_summary
 
+// QTI_BEGIN: 2024-02-22: Telephony: Settings : add WFC summary for ims preferrred.
             ImsConfig.WfcModeFeatureValueConstants.IMS_PREFERRED ->
                 com.android.internal.R.string.wfc_mode_ims_preferred_summary
 
+// QTI_END: 2024-02-22: Telephony: Settings : add WFC summary for ims preferrred.
             else -> com.android.internal.R.string.wifi_calling_off_summary
         }
         return resourcesForSub.getString(resId)

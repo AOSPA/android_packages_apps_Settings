@@ -27,6 +27,7 @@ import androidx.annotation.NonNull;
 
 import com.android.settings.core.InstrumentedPreferenceFragment;
 import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoController;
+import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoDialog;
 import com.android.settings.fuelgauge.batteryusage.BatteryDiffData;
 import com.android.settings.fuelgauge.batteryusage.BatteryEvent;
 import com.android.settings.fuelgauge.batteryusage.DetectRequestSourceType;
@@ -69,10 +70,14 @@ public interface PowerUsageFeatureProvider {
     long getBatteryUsageResetErrorTimeThresholdMs();
 
     /**
-     * Returns a threshold (mA) for the unexpected reset error detected in the app battery usage
-     * consume power.
+     * Returns a threshold (mA) for the unexpected app battery usage consumed power reset.
      */
     double getBatteryUsageResetErrorPowerThreshold();
+
+    /**
+     * Returns a threshold (mA) for the unexpected app battery usage consumed power reset.
+     */
+    double getBatteryUsageOverCalcPowerDrainThreshold();
 
     /** Returns an allowlist of app names combined into the system-apps item */
     List<String> getSystemAppsAllowlist();
@@ -125,6 +130,10 @@ public interface PowerUsageFeatureProvider {
      * @return A string containing the estimate and a label indicating it is a normal estimate
      */
     String getOldEstimateDebugString(String timeRemaining);
+
+    /** Returns the battery advance info dialog */
+    @Nullable
+    BatteryAdvanceInfoDialog getBatteryAdvanceInfoDialog();
 
     /** Returns the battery advance info controller */
     @Nullable

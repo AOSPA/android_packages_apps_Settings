@@ -25,6 +25,7 @@ import com.android.settingslib.graph.PreferenceGetterRequest
 import com.android.settingslib.graph.PreferenceGetterResponse
 import com.android.settingslib.graph.PreferenceSetterApiHandler
 import com.android.settingslib.graph.PreferenceSetterRequest
+import com.android.settingslib.graph.PreferenceSetterResponse
 import com.android.settingslib.ipc.ApiPermissionChecker
 
 /**
@@ -55,7 +56,7 @@ class PreferenceServiceClient(context: Context) : AutoCloseable {
     }
 
     /** Invokes the preference setter API directly. */
-    suspend fun setPreferenceValue(request: PreferenceSetterRequest): Int {
+    suspend fun setPreferenceValue(request: PreferenceSetterRequest): PreferenceSetterResponse {
         return setApiHandler.invoke(application, Process.myPid(), Process.myUid(), request)
     }
 

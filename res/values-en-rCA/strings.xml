@@ -930,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Restart Device?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"Detail NFC logging is intended for development purposes only. Additional NFC data is included in bug reports, which may contain private information. Restart your device to change this setting."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Restart"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"On"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Off"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"External displays"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Built-in display"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Universal cursor"</string>
@@ -1058,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"You\'re connected to a WEP network. If you stop allowing these networks, you\'ll be disconnected."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Advanced options"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Drop down list Advanced Options"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"expand"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"expand"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"collapse"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Network name*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Enter the SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Security"</string>
@@ -1158,7 +1157,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"To improve location accuracy and for other purposes, an unknown app wants to turn on network scanning, even when Wi‑Fi is off.\n\nAllow this for all apps that want to scan?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Deny"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"*required"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"This is a shared network. You need to sign in to make changes."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contact the network owner or device admin to make changes."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"This network has no internet access. Stay connected?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Some apps and services may not work due to limited connectivity. Use anyway?"</string>
@@ -1529,6 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PINs do not match. Confirm the new SIM PIN."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Wrong PIN. Attempts remaining: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Enter the current PIN code of the SIM card"</string>
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"First SIM card slot"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Second SIM card slot"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Use <xliff:g id="CARRIER">%1$s</xliff:g> for mobile data?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"You\'re using <xliff:g id="CARRIER2_0">%2$s</xliff:g> for mobile data. If you switch to <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> will no longer be used for mobile data."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Use <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1831,8 +1831,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Location time zone detection changes are not allowed"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"If your device location is available, it may be used to set your time zone"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Notifications"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Get notified when your time changes automatically"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Time zone change"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Receive a notification when your time zone is automatically updated"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, time, zone, timezone"</string>
@@ -2138,13 +2137,15 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Language"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Show the keyboard switch key"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Allow the keyboard switcher button to be shown in the navigation bar, when an input field is selected"</string>
-    <string name="virtual_keyboard_category" msgid="2339505603075527212">"On-screen keyboard"</string>
-    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Available On-screen keyboard"</string>
+    <string name="keyboard_apps_category" msgid="1715169176659877658">"Keyboard apps"</string>
+    <string name="keyboard_apps_category_summary" msgid="6676804967286517009">"Language and app settings for <xliff:g id="KEYBOARD_APPS_LIST">%1$s</xliff:g>"</string>
+    <string name="keywords_keyboard_apps" msgid="895860348178301718">"Gboard"</string>
+    <string name="available_keyboard_apps_category" msgid="7665966484500890112">"Available keyboard apps"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibility"</string>
-    <string name="physical_keyboard_title" msgid="3328134097512350958">"Physical keyboard"</string>
-    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Physical keyboard layout picker"</string>
+    <string name="physical_keyboard_title" msgid="6597340453841961909">"Physical keyboards"</string>
+    <string name="physical_keyboard_summary" msgid="2751015358747795398">"Hardware settings for <xliff:g id="PHYSICAL_KEYBOARDS_LIST">%1$s</xliff:g>"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"Layout picker"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Bounce keys"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Ignore quickly repeated presses of the same key"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Bounce key delay"</string>
@@ -2206,23 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Customize the actions triggered by your controller’s buttons"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Buttons"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Directions"</string>
-    <string name="game_controller_button_a" msgid="2138420373137111774">"A Button"</string>
-    <string name="game_controller_button_b" msgid="2093089857164437480">"B Button"</string>
-    <string name="game_controller_button_x" msgid="3428801081204194655">"X Button"</string>
-    <string name="game_controller_button_y" msgid="4596061542299533516">"Y Button"</string>
-    <string name="game_controller_button_l1" msgid="4428713182602902434">"L1 Button"</string>
-    <string name="game_controller_button_r1" msgid="6271978600831912659">"R1 Button"</string>
-    <string name="game_controller_button_l2" msgid="4168716287264803566">"L2 Button"</string>
-    <string name="game_controller_button_r2" msgid="4361909018228151006">"R2 Button"</string>
-    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Left Stick Click"</string>
-    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Right Stick Click"</string>
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A button"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B button"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X button"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y button"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 button"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 button"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 button"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 button"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Left stick click"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Right stick click"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <string name="game_controller_stick_left" msgid="1591700901162153956">"Left Stick"</string>
-    <string name="game_controller_stick_right" msgid="1418791636252375110">"Right Stick"</string>
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Left stick"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Right stick"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Reset to default"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Reset to default?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"All your controller settings will be reset to default"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Reset"</string>
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"currently assigned to <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad &amp; mouse"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Mouse"</string>
@@ -2293,6 +2295,8 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notifications"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Quick settings"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Note"</string>
+    <!-- no translation found for action_corner_action_peek_title (4305093703546498134) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Choose a shortcut for the <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"bottom-left corner"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"bottom-right corner"</string>
@@ -2333,7 +2337,7 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Redirect vibration"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Send vibration to game controller when connected"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Keyboard layouts"</string>
-    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Physical keyboard layouts"</string>
+    <string name="keyboard_layout_picker_category_title" msgid="2312103369489003202">"Layouts"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Personal dictionary"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Personal dictionary for work"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Add words to be used in apps such as Spell checker"</string>
@@ -2355,9 +2359,9 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"For all languages"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"More languages…"</string>
     <string name="testing" msgid="6294172343766732037">"Testing"</string>
-    <string name="keyboard_settings_summary" msgid="9188442758316476986">"On-screen keyboard, tools"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"On-screen keyboard, physical keyboard, tools"</string>
-    <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Physical keyboard"</string>
+    <string name="keyboard_settings_summary" msgid="5513613701144979051">"Keyboard apps, tools"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="449934856451727476">"Keyboard apps, physical keyboards, tools"</string>
+    <string name="physical_keyboards_list_title" msgid="2062417895303139252">"Physical keyboards"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Layout"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Choose gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Choose widget"</string>
@@ -2426,6 +2430,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Feature flags"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Enable Bluetooth stack log"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Change log level of Bluetooth Stack Logging (Toggle Bluetooth after changing this setting)"</string>
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Enable Bluetooth HCI snoop log socket"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Make the Bluetooth HCI snoop log available on a local socket"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI snoop log filtering"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Set filters"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Disable and enable Bluetooth for the changes to take effect"</string>
@@ -2549,7 +2555,7 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"volume keys"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Press and hold both volume keys"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Triple tap"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Quickly tap the screen %1$d times. This may slow down your device."</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="387169602299548488">"Quickly tap the screen 3 times. This may slow down your device."</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"triple tap"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Keyboard shortcut"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Press <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g> to use <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -2931,6 +2937,7 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"Battery usage and screen time are not measured while the phone is charging"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"App battery usage"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Use details"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Adjust power use"</string>
@@ -3630,6 +3637,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Device"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Touchpad, keyboard, display, sound"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Brightness, color, dark theme, lock screen, text"</string>
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Brightness, color, dark theme, lock screen, text, touch"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Brightness, color, dark theme, lock screen, text, connected display"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Brightness, color, dark theme, lock screen, text, touch, connected display"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Keyboard selection, tools"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Cursor speed, button customization, scrolling"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Volume, speakers, microphones"</string>
@@ -3761,7 +3771,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"text size, large print, large font, large text, low vision, make text bigger, font enlarger, font enlargement"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"always on ambient display, AOD"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"nfc, tag, reader"</string>
-    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"keyboard, haptics, vibrate,"</string>
+    <string name="keywords_keyboard_vibration" msgid="5870649353180725920">"keyboard, haptics, vibrate, typing"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"external display, connected display, extended display, second display, built-in display, arrange displays, mirror, display size, rotation, resolution, refresh rate"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"caret, text caret, text cursor, cursor, blinking, blink interval, blink rate, animation, reduce animation, remove animation"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume and vibration"</string>
@@ -4605,18 +4615,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Can access all files"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Screen automation"</string>
-    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"This app will be able to see and interact with other apps\' screen content to help you complete tasks, even when the apps are in the background"</string>
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="6841078031131642530">"<xliff:g id="ID_1">%1$s</xliff:g> will be able to see and interact with other apps\' screen content to help you complete tasks"</string>
-    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"If you don\'t allow screen automation, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways"</string>
-    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Allow apps to help you complete tasks by interacting with other apps\' screen content"</string>
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"This app will be able to see and interact with other apps’ screen content to help you complete tasks, even when the apps are in the background."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> can see and interact with the screen content of apps that you’ve allowed to help you complete tasks."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Apps for which you chose &lt;strong&gt;Always Allow&lt;/strong&gt; in permissions are shown here. Apps you allowed &lt;strong&gt;Only this time&lt;/strong&gt; or didn’t allow aren’t shown."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"If you don’t allow screen automation, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"When you remove an app on this screen, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Allow apps to help you complete tasks by interacting with other apps’ screen content"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Allow apps to see and interact with screen content to help you complete tasks"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ask every time"</string>
-    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Always allow"</string>
-    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Don\'t allow"</string>
-    <string name="computer_control_automation_toggle_title" msgid="6649138321373233109">"Allow screen automation"</string>
-    <string name="computer_control_automation_automatable_app_list_header_no_apps" msgid="1017862532735758587">"No apps are always allowed"</string>
-    <string name="computer_control_automation_automatable_app_list_header_summary" msgid="2787499743279799250">"Apps that are allowed to always use the screen automation by <xliff:g id="ID_1">%1$s</xliff:g> will be shown here. Apps that only get a per-session permission will not be shown."</string>
-    <string name="computer_control_automation_allowed" msgid="6000569909180841099">"Allowed"</string>
-    <string name="computer_control_automation_not_allowed" msgid="3817051114351029813">"Not allowed"</string>
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Always allow"</string>
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Don’t allow"</string>
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Apps you’ve allowed"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"You haven’t allowed any apps yet"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Only the app you’ve set as your default digital assistant can use screen automation."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"App removed"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"All apps removed"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Assistant settings"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 app allowed}other{# apps allowed}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 app allowed}other{# apps allowed}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"No apps allowed"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Remove all apps"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Default digital assistant"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> can’t use screen automation"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Only your default digital assistant can use screen automation"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Change assistant"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"These apps can see and interact with the screen content of apps you’ve allowed, to help you complete tasks."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"You haven’t installed any apps that can use screen automation"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"These apps can see and interact with <xliff:g id="ID_1">%1$s</xliff:g> screen content to help you complete tasks."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Full-screen notifications"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Allow full-screen notifications from this app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls, or other urgent notifications."</string>
@@ -4653,6 +4678,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Not connected"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Not connected"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> apps installed"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> used - <xliff:g id="FREE_SPACE">%2$s</xliff:g> free"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Dark theme, font size, brightness"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Avg <xliff:g id="USED_MEMORY">%1$s</xliff:g> of <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> memory used"</string>
@@ -5712,11 +5739,11 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Allow only encrypted networks"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"This is more secure but may limit your mobile network connection in some locations. Emergency calling is always allowed."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Turn off 2G network protection?"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Current network for <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM does not support 2G. Turning off 2G protection will put you at risk of connecting to harmful spoofed 2G networks."</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2G networks are less secure, and turning this off makes your calls, messages, and data vulnerable to interception or theft"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Turn off"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G network protection"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G network protection is on"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"The current network for <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> SIM requires 2G protection to be turned on. You may still choose to disable 2G protection at your own risk."</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"You can turn this off in Settings, but 2G is less secure and may put your data at risk"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Settings"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"All services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Show clipboard access"</string>
@@ -5763,6 +5790,7 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"Choose your screen saver"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Customize"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Customize <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
+    <string name="dream_preview_button_description" msgid="1752727543834253129">"Preview <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"A reboot is required to enable freeform window support."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"A reboot is required to update availability of freeform windows."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"A reboot is required to enable freeform windows on secondary displays."</string>
@@ -5797,6 +5825,9 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Uninstall app"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps installed in the last # month}other{Apps installed in the last # months}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps installed more than # month ago}other{Apps installed more than # months ago}}"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Screen access"</string>
+    <string name="personal_context_title" msgid="6639623956831710453">"Proactive assist"</string>
+    <string name="personal_context_switch_summary" msgid="917644125592480347">"Choose whether this app can contribute info to produce suggestions"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Aspect ratio"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Try a new aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Try a new aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Some apps may not be optimized for certain aspect ratios."</string>
@@ -5814,7 +5845,8 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> by <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"The app will restart when you change aspect ratio. You may lose unsaved changes. Some apps may not be optimized for certain aspect ratios."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Experience"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Gamepad"</string>
+    <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtual gamepad"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Restart your game to confirm changes"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerprint sensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash notifications"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"About flash notifications"</string>
