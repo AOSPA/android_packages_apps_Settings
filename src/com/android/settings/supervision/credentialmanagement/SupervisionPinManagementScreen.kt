@@ -29,6 +29,7 @@ import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settings.supervision.shared.shouldDisplayPinRecoveryReminders
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -36,7 +37,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.widget.UntitledPreferenceCategoryMetadata
 import kotlinx.coroutines.CoroutineScope
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_NONE
 
 /** Activity to display [SupervisionPinManagementScreen]. */
 class SupervisionPinManagementActivity :
@@ -50,7 +51,7 @@ class SupervisionPinManagementScreen :
     PreferenceSummaryProvider,
     PreferenceActionMetricsProvider,
     PreferenceIconProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_NONE)
 
     override val key: String
         get() = KEY
@@ -95,6 +96,8 @@ class SupervisionPinManagementScreen :
 
     override val availabilityDescription =
         "The device must have a supervising credential."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = context.isSupervisingCredentialSet()
 
@@ -142,7 +145,6 @@ class SupervisionPinManagementScreen :
 
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +SupervisionSetupRecoveryPreference()
             +UntitledPreferenceCategoryMetadata(
                 key = GROUP_KEY,
                 purpose = R.string.pin_management_group_purpose,
@@ -150,6 +152,7 @@ class SupervisionPinManagementScreen :
                 {
                     +SupervisionPinRecoveryPreference()
                     +SupervisionChangePinPreference()
+                    +SupervisionSetupRecoveryPreference()
                     +SupervisionUpdateRecoveryEmailPreference()
                 }
             +UntitledPreferenceCategoryMetadata(

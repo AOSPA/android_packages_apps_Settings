@@ -26,8 +26,12 @@ import android.content.Intent;
 import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserManager;
+// QTI_BEGIN: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
 import android.telephony.TelephonyManager;
+// QTI_END: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
+// QTI_BEGIN: 2021-07-11: Android_UI: Settings: add sim status listener in about phone
 import android.util.Log;
+// QTI_END: 2021-07-11: Android_UI: Settings: add sim status listener in about phone
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -44,11 +48,15 @@ import com.android.settings.deviceinfo.FccEquipmentIdPreferenceController;
 import com.android.settings.deviceinfo.FeedbackPreferenceController;
 import com.android.settings.deviceinfo.IpAddressPreferenceController;
 import com.android.settings.deviceinfo.ManualPreferenceController;
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import com.android.settings.deviceinfo.PhoneNumberPreferenceController;
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import com.android.settings.deviceinfo.RegulatoryInfoPreferenceController;
 import com.android.settings.deviceinfo.SafetyInfoPreferenceController;
+// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.deviceinfo.SoftwareVersionPreferenceController;
 import com.android.settings.deviceinfo.StorageSizePreferenceController;
+// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 import com.android.settings.deviceinfo.UptimePreferenceController;
 import com.android.settings.deviceinfo.WifiMacAddressPreferenceController;
 import com.android.settings.deviceinfo.imei.ImeiInfoPreferenceController;
@@ -72,12 +80,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
+// QTI_BEGIN: 2021-07-11: Android_UI: Settings: add sim status listener in about phone
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 
 import com.android.internal.telephony.IccCardConstants;
 import com.android.internal.telephony.TelephonyIntents;
 
+// QTI_END: 2021-07-11: Android_UI: Settings: add sim status listener in about phone
 // LINT.IfChange
 @SearchIndexable
 public class MyDeviceInfoFragment extends DashboardFragment
@@ -87,6 +97,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
     private static final String KEY_EID_INFO = "eid_info";
     private static final String KEY_MY_DEVICE_INFO_HEADER = "my_device_info_header";
 
+// QTI_BEGIN: 2021-07-11: Android_UI: Settings: add sim status listener in about phone
     private final BroadcastReceiver mSimStateReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
@@ -98,6 +109,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
         }
     };
 
+// QTI_END: 2021-07-11: Android_UI: Settings: add sim status listener in about phone
     private BuildNumberPreferenceController mBuildNumberPreferenceController;
 
     @Override
@@ -116,7 +128,9 @@ public class MyDeviceInfoFragment extends DashboardFragment
         use(DeviceNamePreferenceController.class).setHost(this /* parent */);
         mBuildNumberPreferenceController = use(BuildNumberPreferenceController.class);
         mBuildNumberPreferenceController.setHost(this /* parent */);
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
         use(PhoneNumberPreferenceController.class).init(getSettingsLifecycle());
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
     }
 
     @Override
@@ -142,6 +156,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
         initHeader();
     }
 
+// QTI_BEGIN: 2021-07-11: Android_UI: Settings: add sim status listener in about phone
     @Override
     public void onPause() {
         super.onPause();
@@ -165,6 +180,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
         }
     }
 
+// QTI_END: 2021-07-11: Android_UI: Settings: add sim status listener in about phone
     @Override
     protected String getLogTag() {
         return LOG_TAG;
@@ -201,8 +217,10 @@ public class MyDeviceInfoFragment extends DashboardFragment
         controllers.add(new FeedbackPreferenceController(fragment, context));
         controllers.add(new FccEquipmentIdPreferenceController(context));
         controllers.add(new UptimePreferenceController(context, lifecycle));
+// QTI_BEGIN: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
         controllers.add(new SoftwareVersionPreferenceController(context));
         controllers.add(new StorageSizePreferenceController(context));
+// QTI_END: 2019-03-19: Android_UI: Settings: support CT chipset PA requirements
 
         Consumer<String> imeiInfoList = imeiKey -> {
             if (Flags.catalystMyDeviceInfoPrefScreen()) {
@@ -230,12 +248,15 @@ public class MyDeviceInfoFragment extends DashboardFragment
             }
         }
 
+// QTI_BEGIN: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
         Context appContext = context.getApplicationContext();
         TelephonyManager telephonyManager = appContext.getSystemService(TelephonyManager.class);
         int phoneCount = telephonyManager.getPhoneCount();
         if (Utils.isSupportCTPA(appContext) && phoneCount >= 2) {
+// QTI_END: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
             final int slot0PhoneType = telephonyManager.getCurrentPhoneType();
             final int slot1PhoneType = telephonyManager.getCurrentPhoneType();
+// QTI_BEGIN: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
             if (PHONE_TYPE_CDMA != slot0PhoneType && PHONE_TYPE_CDMA != slot1PhoneType) {
                 imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (phoneCount + 1));
             } else if (PHONE_TYPE_CDMA == slot0PhoneType){
@@ -244,6 +265,7 @@ public class MyDeviceInfoFragment extends DashboardFragment
                 imeiInfoList.accept(ImeiInfoPreferenceController.DEFAULT_KEY + (phoneCount + 3));
             }
         }
+// QTI_END: 2023-08-11: Android_UI: Settings: Fix MEID not displayed in CT mode
         if (!isCatalystEnabled) {
             EidStatus eidStatus = new EidStatus(slotSimStatus, context, executor);
             SimEidPreferenceController simEid = new SimEidPreferenceController(context,

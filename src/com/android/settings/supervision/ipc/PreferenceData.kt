@@ -42,6 +42,7 @@ data class PreferenceData(
     val icon: Int? = null,
     val title: CharSequence? = null,
     val summary: CharSequence? = null,
+    var summaryContentDescription: CharSequence? = null,
     var action: String? = null,
     var trailingIcon: Int? = null,
     var targetPackage: String? = null,
@@ -55,6 +56,7 @@ data class PreferenceData(
         icon = bundle.getInt(ICON, -1).takeIf { it != -1 },
         title = bundle.getCharSequence(TITLE),
         summary = bundle.getCharSequence(SUMMARY),
+        summaryContentDescription = bundle.getCharSequence(SUMMARY_CONTENT_DESCRIPTION),
         action = bundle.getString(ACTION),
         trailingIcon = bundle.getInt(ACTION_ICON, -1).takeIf { it != -1 },
         targetPackage = bundle.getString(TARGET_PACKAGE),
@@ -69,6 +71,7 @@ data class PreferenceData(
         icon = jsonObject.optInt(ICON, -1).takeIf { it != -1 },
         title = jsonObject.optString(TITLE, null),
         summary = jsonObject.optString(SUMMARY, null),
+        summaryContentDescription = jsonObject.optString(SUMMARY_CONTENT_DESCRIPTION, null),
         action = jsonObject.optString(ACTION, null),
         trailingIcon = jsonObject.optInt(ACTION_ICON, -1).takeIf { it != -1 },
         targetPackage = jsonObject.optString(TARGET_PACKAGE, null),
@@ -82,6 +85,7 @@ data class PreferenceData(
             icon?.let { put(ICON, it) }
             title?.let { put(TITLE, it.toString()) }
             summary?.let { put(SUMMARY, it.toString()) }
+            summaryContentDescription?.let { put(SUMMARY_CONTENT_DESCRIPTION, it.toString()) }
             action?.let { put(ACTION, it) }
             trailingIcon?.let { put(ACTION_ICON, it) }
             targetPackage?.let { put(TARGET_PACKAGE, it) }
@@ -96,6 +100,7 @@ data class PreferenceData(
             icon?.let { putInt(ICON, it) }
             title?.let { putCharSequence(TITLE, it) }
             summary?.let { putCharSequence(SUMMARY, it) }
+            summaryContentDescription?.let { putCharSequence(SUMMARY_CONTENT_DESCRIPTION, it) }
             action?.let { putString(ACTION, it) }
             trailingIcon?.let { putInt(ACTION_ICON, it) }
             targetPackage?.let { putString(TARGET_PACKAGE, it) }
@@ -109,6 +114,7 @@ data class PreferenceData(
         private const val ICON = "icon"
         private const val TITLE = "title"
         private const val SUMMARY = "summary"
+        private const val SUMMARY_CONTENT_DESCRIPTION = "summary_content_description"
         private const val ACTION = "action"
         private const val ACTION_ICON = "trailing_icon"
         private const val TARGET_PACKAGE = "target_package"

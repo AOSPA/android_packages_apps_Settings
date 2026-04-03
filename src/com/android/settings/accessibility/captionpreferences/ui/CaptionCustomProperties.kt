@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.DiscreteStringValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
@@ -95,6 +96,8 @@ class CaptionFontFamilyPreference(context: Context) :
     override val availabilityDescription =
         "The device must have a custom caption style selected."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     companion object {
         private const val KEY = "captioning_typeface"
     }
@@ -130,6 +133,8 @@ class CaptionEdgeTypePreference(context: Context) :
     override val availabilityDescription =
         "The device must have a custom caption style selected."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     private val summaryMap by lazy {
         SummaryMap(values, valuesDescription, useIntValues = true) { _, v -> v as Int }
     }
@@ -164,6 +169,8 @@ class CaptionEdgeColorPreference(context: Context) :
     override val availabilityDescription =
         "The device must have a custom caption style selected."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override val title: Int
         get() = R.string.captioning_edge_color
 
@@ -192,6 +199,10 @@ class CaptionEdgeColorPreference(context: Context) :
 
     override fun createWidget(context: Context): Preference =
         createColorWidget(context, values, valuesDescription)
+
+    override fun getEnabledDescription(): String = "A caption edge type other than 'None' must be selected."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context): Boolean =
         captionHelper.edgeType != CaptioningManager.CaptionStyle.EDGE_TYPE_NONE

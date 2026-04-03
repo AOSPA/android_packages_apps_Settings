@@ -25,7 +25,7 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.EnterpriseRestriction
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
@@ -70,7 +70,7 @@ open class WifiScanningApiScreen :
                             ?: error("UserManager service not found")
 
                     if (userManager.hasUserRestriction(UserManager.DISALLOW_CONFIG_LOCATION)) {
-                        Custom(R.string.wifi_scanning_user_restricted)
+                        EnterpriseRestriction(R.string.wifi_scanning_user_restricted)
                     } else {
                         Allowed
                     }

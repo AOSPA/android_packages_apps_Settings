@@ -45,7 +45,9 @@ import com.android.settingslib.search.SearchIndexable;
 public class ConnectedDeviceDashboardFragment extends DashboardFragment {
 
     private static final String TAG = "ConnectedDeviceFrag";
+// QTI_BEGIN: 2023-10-19: Bluetooth: Enable AOSP BT APEX
     private static final String SYSTEMUI_PACKAGE_NAME = "com.android.systemui";
+// QTI_END: 2023-10-19: Bluetooth: Enable AOSP BT APEX
     private static final String SETTINGS_SEARCH_ACTION =
             "com.android.settings.SEARCH_RESULT_TRAMPOLINE";
     @VisibleForTesting static final String KEY_CONNECTED_DEVICES = "connected_device_list";

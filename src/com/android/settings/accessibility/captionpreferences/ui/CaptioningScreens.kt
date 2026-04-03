@@ -35,6 +35,7 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -280,6 +281,8 @@ class CustomCaptionOptionsPreference :
 
     override val availabilityDescription =
         "The device must have a custom caption style selected."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean =
         context.getSystemService<CaptioningManager>()?.rawUserStyle ==

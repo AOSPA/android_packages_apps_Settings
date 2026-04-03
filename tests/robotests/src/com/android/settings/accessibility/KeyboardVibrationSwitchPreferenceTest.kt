@@ -21,8 +21,11 @@ import android.content.res.Resources
 import android.os.VibrationAttributes
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.os.vibrator.Flags
+import android.platform.test.flag.junit.SetFlagsRule
 import android.provider.Settings
 import android.provider.Settings.System.KEYBOARD_VIBRATION_ENABLED
+import android.provider.Settings.System.VIBRATE_ON
 import androidx.core.content.getSystemService
 import androidx.preference.SwitchPreferenceCompat
 import androidx.test.core.app.ApplicationProvider
@@ -33,7 +36,9 @@ import com.android.settingslib.preference.PreferenceBindingFactory
 import com.android.settingslib.preference.createAndBindWidget
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+
 import org.junit.runner.RunWith
 import org.mockito.kotlin.any
 import org.mockito.kotlin.doReturn
@@ -45,6 +50,8 @@ import org.mockito.kotlin.verify
 // LINT.IfChange
 @RunWith(AndroidJUnit4::class)
 class KeyboardVibrationSwitchPreferenceTest {
+    @get:Rule val setFlagsRule = SetFlagsRule()
+
     private val resourcesSpy: Resources =
         spy(ApplicationProvider.getApplicationContext<Context>().resources)
 
@@ -73,7 +80,9 @@ class KeyboardVibrationSwitchPreferenceTest {
     fun isAvailable_keyboardVibrationSettingsNotSupport_unavailable() {
         resourcesSpy.stub {
             on { getBoolean(R.bool.config_keyboardVibrationSettingsSupported) } doReturn false
+            on { getBoolean(R.bool.config_keyboardVibrationSettingsIntensitySupported) } doReturn false
         }
+        setFlagsRule.enableFlags(Flags.FLAG_KEYBOARD_INTENSITY_SLIDER_ENABLED)
 
         assertThat(preference.isAvailable(context)).isFalse()
     }
@@ -82,9 +91,33 @@ class KeyboardVibrationSwitchPreferenceTest {
     fun isAvailable_keyboardVibrationSettingsSupport_available() {
         resourcesSpy.stub {
             on { getBoolean(R.bool.config_keyboardVibrationSettingsSupported) } doReturn true
+            on { getBoolean(R.bool.config_keyboardVibrationSettingsIntensitySupported) } doReturn false
         }
+        setFlagsRule.enableFlags(Flags.FLAG_KEYBOARD_INTENSITY_SLIDER_ENABLED)
 
         assertThat(preference.isAvailable(context)).isTrue()
+    }
+
+    @Test
+    fun isAvailable_intensitySupportedAndFlagDisabled_available() {
+        resourcesSpy.stub {
+            on { getBoolean(R.bool.config_keyboardVibrationSettingsSupported) } doReturn true
+            on { getBoolean(R.bool.config_keyboardVibrationSettingsIntensitySupported) } doReturn true
+        }
+        setFlagsRule.disableFlags(Flags.FLAG_KEYBOARD_INTENSITY_SLIDER_ENABLED)
+
+        assertThat(preference.isAvailable(context)).isTrue()
+    }
+
+    @Test
+    fun isAvailable_intensitySupportedAndFlagEnabled_unavailable() {
+        resourcesSpy.stub {
+            on { getBoolean(R.bool.config_keyboardVibrationSettingsSupported) } doReturn true
+            on { getBoolean(R.bool.config_keyboardVibrationSettingsIntensitySupported) } doReturn true
+        }
+        setFlagsRule.enableFlags(Flags.FLAG_KEYBOARD_INTENSITY_SLIDER_ENABLED)
+
+        assertThat(preference.isAvailable(context)).isFalse()
     }
 
     @Test

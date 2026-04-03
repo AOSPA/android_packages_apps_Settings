@@ -44,6 +44,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
@@ -66,7 +67,9 @@ private constructor(
     final override val arguments: Bundle?,
     final override val keyParameters: ValidatedKeyParameters?,
 ) : PreferenceScreenMixin, PreferenceLifecycleProvider {
-    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED)
+    // Tagged as UI-ONLY since due to it having no parameters, it is not meaningful for now for
+    // graph callers.
+    override fun tags(context: Context) = arrayOf(APP_FUNCTION_UNCATEGORIZED, UI_ONLY_PREFERENCE)
 
     private val shortcutTargets: Set<String> by lazy {
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {

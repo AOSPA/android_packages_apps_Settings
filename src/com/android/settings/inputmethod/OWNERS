@@ -3,6 +3,7 @@ include platform/frameworks/base:/services/core/java/com/android/server/inputmet
 include /OWNERS
 
 # Settings for physical keyboard, mouse, gamepad, and touchpad are better reviewed by the input team
+per-file InputPeripheralsSettingsUtils.java = file:platform/frameworks/base:/INPUT_OWNERS
 per-file GameControllerPreferenceController.java = file:platform/frameworks/base:/INPUT_OWNERS
 per-file KeyboardRepeatKeys*.java = file:platform/frameworks/base:/INPUT_OWNERS
 per-file KeyboardLayoutPicker*.java = file:platform/frameworks/base:/INPUT_OWNERS

@@ -30,6 +30,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.VibrationAttributes;
 import android.os.Vibrator;
+import android.os.vibrator.Flags;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -112,11 +113,12 @@ public class KeyboardVibrationTogglePreferenceController extends TogglePreferenc
 
     @Override
     public int getAvailabilityStatus() {
-        if (mContext.getResources().getBoolean(
-                com.android.internal.R.bool.config_keyboardVibrationSettingsSupported)) {
-            return AVAILABLE;
-        }
-        return UNSUPPORTED_ON_DEVICE;
+        final boolean isVibrationSupported = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsSupported);
+        final boolean isIntensitySupported = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_keyboardVibrationSettingsIntensitySupported)
+                && Flags.keyboardIntensitySliderEnabled();
+        return (isVibrationSupported && !isIntensitySupported) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
     }
 
     @Override

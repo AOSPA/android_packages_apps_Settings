@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Binder
+import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
@@ -31,32 +32,37 @@ import com.android.settingslib.graph.proto.PreferenceProto
 import com.android.settingslib.graph.proto.PreferenceValueDescriptorProto
 import com.android.settingslib.graph.proto.PreferenceValueProto
 import com.android.settingslib.graph.toProto
+import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenMetadataParameterizedFactory
 import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreconditionsAsString
+import com.android.settingslib.metadata.getPreferencePurpose
+import com.android.settingslib.metadata.getPreferenceScreenTitle
+import com.android.settingslib.metadata.getTrampolinedLaunchIntent
+import com.android.settingslib.metadata.isExposable
+import com.android.settingslib.metadata.preferencesapi.ApiPreference
+import com.android.settingslib.metadata.preferencesapi.extractSafety
 import com.android.settingslib.metadata.preferencesapi.types.ApiType
 import com.android.settingslib.metadata.preferencesapi.types.FiniteOptionsType
 import com.android.settingslib.metadata.setPreconditionsAsString
-import com.android.settingslib.metadata.SensitivityLevel
-import com.android.settingslib.metadata.getPreferencePurpose
-import com.android.settingslib.metadata.getPreferenceScreenTitle
-import com.android.settingslib.metadata.getPreferenceTitle
-import com.android.settingslib.metadata.isExposable
-import com.android.settingslib.metadata.preferencesapi.ApiPreference
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.setWarningAsString
+import com.android.settingslib.metadata.stableAccessPreconditionFailuresAsString
+import com.android.settingslib.metadata.stableSetPreconditionFailuresAsString
 import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationDetail
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationType
-import com.google.android.appfunctions.schema.common.v1.devicestate.LocalizedString
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenMetadata
 import com.google.android.appfunctions.schema.common.v1.devicestate.Sensitivity
-import kotlin.time.Duration.Companion.seconds
+import java.util.concurrent.ConcurrentHashMap
+import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -64,7 +70,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
-import com.android.settingslib.metadata.preferencesapi.extractSafety
+import kotlinx.coroutines.withTimeoutOrNull
 
 /* A [DeviceStateExecutor] that provides device state metadata information for Settings that are
 exposed using Catalyst framework. Configured in [CatalystStateProviderConfig]. */
@@ -82,39 +88,171 @@ class CatalystStateMetadataProviderExecutor(
     ): DeviceStateMetadataProviderExecutorResult {
         val perScreenDeviceStatesList = mutableListOf<PerScreenMetadata>()
         val itemizationTypes = mutableMapOf<String, ItemizationType>()
-        coroutineScope {
-            val semaphore = Semaphore(MAX_PARALLELISM)
-            val deferredList =
-                screenKeyList.map { screenKey ->
-                    async {
-                        try {
-                            withTimeout(PER_SCREEN_TIMEOUT_MS) {
+
+        val maxParallelism =
+            Settings.Global.getInt(
+                context.contentResolver,
+                SETTING_MAX_PARALLELISM,
+                DEFAULT_MAX_PARALLELISM,
+            )
+        val perScreenTimeoutMs =
+            Settings.Global.getLong(
+                    context.contentResolver,
+                    SETTING_PER_SCREEN_TIMEOUT_MS,
+                    DEFAULT_PER_SCREEN_TIMEOUT_MS,
+                )
+                .milliseconds
+        val maxExecutionTimeMs =
+            Settings.Global.getLong(
+                    context.contentResolver,
+                    SETTING_MAX_EXECUTION_TIME_MS,
+                    DEFAULT_MAX_EXECUTION_TIME_MS,
+                )
+                .milliseconds
+        val logAppFunctionTime =
+            Settings.Global.getInt(context.contentResolver, SETTING_LOG_APPFUNCTION_TIME, 0) == 1
+
+        val semaphore = Semaphore(maxParallelism)
+        var deferredList =
+            emptyList<Pair<String, Deferred<DeviceStateMetadataProviderExecutorResult?>>>()
+        val timeLogs = ConcurrentHashMap<String, Long>()
+
+        val startTimeAll = android.os.SystemClock.elapsedRealtime()
+        withTimeoutOrNull(maxExecutionTimeMs) {
+            coroutineScope {
+                deferredList = screenKeyList.map { screenKey ->
+                    screenKey to
+                        async {
+                            var executionTime = -1L
+                            try {
                                 semaphore.withPermit {
+                                    val startTime = android.os.SystemClock.elapsedRealtime()
                                     try {
-                                        val screenMetadata = PreferenceScreenRegistry.createScreenInstanceForMetadata(context, screenKey)
-                                        if(screenMetadata != null && screenMetadata.isExposable(context)) {
-                                            buildPerScreenDeviceStatesMetadata(screenKey)
-                                        } else null
-                                    } catch (e: Exception) {
-                                        Log.e(TAG, "error building $screenKey", e)
-                                        null
+                                        withTimeout(perScreenTimeoutMs) {
+                                            try {
+                                                val screenMetadata =
+                                                    PreferenceScreenRegistry
+                                                        .createScreenInstanceForMetadata(
+                                                            context,
+                                                            screenKey,
+                                                        )
+                                                if (
+                                                    screenMetadata != null &&
+                                                        screenMetadata.isExposable(context) &&
+                                                            screenMetadata.isFlagEnabled(context)
+                                                ) {
+                                                    buildPerScreenDeviceStatesMetadata(screenKey)
+                                                } else {
+                                                    val factory =
+                                                        PreferenceScreenRegistry
+                                                            .preferenceScreenMetadataFactories[
+                                                                screenKey]
+                                                    val isParameterized =
+                                                        factory is
+                                                            PreferenceScreenMetadataParameterizedFactory
+                                                    if (isParameterized) {
+                                                        // Try and build the metadata with no
+                                                        // itemization entries
+                                                        buildPerScreenDeviceStatesMetadata(
+                                                            factory,
+                                                            screenKey,
+                                                        )
+                                                    } else {
+                                                        null
+                                                    }
+                                                }
+                                            } catch (e: Exception) {
+                                                Log.e(TAG, "error building $screenKey", e)
+                                                null
+                                            }
+                                        }
+                                    } finally {
+                                        executionTime =
+                                            android.os.SystemClock.elapsedRealtime() - startTime
+                                    }
+                                }
+                            } catch (e: TimeoutCancellationException) {
+                                Log.e(TAG, "Timed out building screen: $screenKey", e)
+                                if (logAppFunctionTime) {
+                                    timeLogs[screenKey] = -1L
+                                }
+                                null
+                            } finally {
+                                if (logAppFunctionTime && !timeLogs.containsKey(screenKey)) {
+                                    if (executionTime == -1L) {
+                                        Log.e(TAG, "executionTime is -1 for screen: $screenKey")
+                                        timeLogs[screenKey] = -1L
+                                    } else {
+                                        timeLogs[screenKey] = executionTime
                                     }
                                 }
                             }
-                        } catch (e: TimeoutCancellationException) {
-                            Log.e(TAG, "Timed out building screen: $screenKey", e)
-                            null
                         }
-                    }
                 }
-            val results = deferredList.awaitAll().filterNotNull()
-            perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
-            results.flatMap { it.itemizationTypes }.forEach { itemizationTypes[it.key] = it }
+                deferredList.map { it.second }.awaitAll()
+            }
+        } ?: Log.w(TAG, "Max execution time of $maxExecutionTimeMs exceeded.")
+
+        if (logAppFunctionTime) {
+            val totalTime = android.os.SystemClock.elapsedRealtime() - startTimeAll
+            Log.d(TAG, "AppFunction $appFunctionType took ${totalTime}ms")
+            timeLogs.entries
+                .sortedByDescending { if (it.value == -1L) Long.MAX_VALUE else it.value }
+                .forEach { entry ->
+                    val timeStr = if (entry.value == -1L) "timed out" else "${entry.value}ms"
+                    Log.d(TAG, "Screen ${entry.key} took $timeStr")
+                }
         }
+
+        val completedKeys = mutableSetOf<String>()
+        val results = mutableListOf<DeviceStateMetadataProviderExecutorResult>()
+
+        for ((screenKey, deferred) in deferredList) {
+            if (deferred.isCompleted && !deferred.isCancelled) {
+                completedKeys.add(screenKey)
+                val res = deferred.getCompleted()
+                if (res != null) {
+                    results.add(res)
+                }
+            }
+        }
+
+        val incompleteKeys = screenKeyList - completedKeys
+        if (incompleteKeys.isNotEmpty()) {
+            Log.w(TAG, "Screens not processed due to max execution time: $incompleteKeys")
+        }
+
+        perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
+        results.flatMap { it.itemizationTypes }.forEach { itemizationTypes[it.key] = it }
+
         return DeviceStateMetadataProviderExecutorResult(
             metadata = perScreenDeviceStatesList,
             itemizationTypes = itemizationTypes.values.toSet(),
+            hintText =
+                "When an intentUri includes '%24itemization', that must be replaced by an actual itemization value before launching.",
         )
+    }
+
+    private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
+        parameterizedFactory: PreferenceScreenMetadataParameterizedFactory,
+        screenKey: String
+    ): DeviceStateMetadataProviderExecutorResult? {
+        val screenMetadata =
+            if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
+                PreferenceScreenRegistry.createWithKeyParameters(
+                    context,
+                    screenKey,
+                    parameterizedFactory.parametersSchema.prepareEmpty()
+                )
+            } else {
+                PreferenceScreenRegistry.create(context, screenKey, Bundle.EMPTY)
+            }
+        if (screenMetadata != null && screenMetadata.isExposable(context) && screenMetadata.isFlagEnabled(context)) {
+            val hierarchy = getEnabledPreferencesHierarchy(context, screenMetadata)
+            return buildHierarchyMetadata(hierarchy, isParameterized = true)
+        }
+
+        return null
     }
 
     private suspend fun CoroutineScope.buildPerScreenDeviceStatesMetadata(
@@ -128,26 +266,35 @@ class CatalystStateMetadataProviderExecutor(
                 appFunctionType = null,
                 screenKey,
                 removeDuplicates = isParameterized,
+                includeAtLeastOne = true,
             )
+        return buildHierarchyMetadata(hierarchy, isParameterized)
+    }
 
-        val metadata =
-            hierarchy.map { entry ->
-                val screenMetaData = entry.key
-                val preferencesHierarchy = entry.value
-                buildPerScreenDeviceStatesMetadata(
-                    screenMetaData,
-                    preferencesHierarchy,
-                    isParameterized,
-                )
-            }
+    private suspend fun CoroutineScope.buildHierarchyMetadata(
+        hierarchy: Map<PreferenceScreenMetadata, List<PreferenceHierarchyNode>>,
+        isParameterized: Boolean,
+    ): DeviceStateMetadataProviderExecutorResult {
+        val metadata = hierarchy.map { entry ->
+            val screenMetaData = entry.key
+            val preferencesHierarchy = entry.value
+            buildPerScreenDeviceStatesMetadata(
+                screenMetaData,
+                preferencesHierarchy,
+                isParameterized,
+            )
+        }
 
         val types = mutableMapOf<String, ItemizationType>()
         hierarchy.values.flatten().forEach { node ->
-            (node.metadata as? ApiPreference<*, *>)?.let { types[it.type.toItemizationType(context).key] = it.type.toItemizationType(context) }
+            (node.metadata as? ApiPreference<*, *>)?.let {
+                types[it.type.toItemizationType(context).key] = it.type.toItemizationType(context)
+            }
         }
         hierarchy.keys.forEach { screenMetaData ->
             screenMetaData.keyParametersSchema?.getParameters()?.values?.forEach { param ->
-                types[param.type.toItemizationType(context).key] = param.type.toItemizationType(context)
+                types[param.type.toItemizationType(context).key] =
+                    param.type.toItemizationType(context)
             }
         }
 
@@ -166,19 +313,25 @@ class CatalystStateMetadataProviderExecutor(
         preferencesHierarchy.forEach {
             val metadata = it.metadata
             // skip over explicitly disabled preferences
-            val metadataProto = try {
-                metadata.toProto(
-                    context,
-                    Binder.getCallingPid(),
-                    Binder.getCallingUid(),
-                    screenMetaData,
-                    isRoot = false,
-                    flags = PreferenceGetterFlags.METADATA or PreferenceGetterFlags.VALUE_DESCRIPTOR,
-                )
-            } catch (e: Exception) {
-                Log.e(TAG, "Failed to convert preference to proto: ${metadata.key}", e)
-                return@forEach
-            }
+            val metadataProto =
+                try {
+                    metadata.toProto(
+                        context,
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        screenMetaData,
+                        isRoot = false,
+                        flags =
+                            PreferenceGetterFlags.METADATA or PreferenceGetterFlags.VALUE_DESCRIPTOR,
+                    )
+                } catch (e: Exception) {
+                    Log.e(
+                        TAG,
+                        "Failed to convert preference to proto: ${screenMetaData.key}/${metadata.key}",
+                        e,
+                    )
+                    return@forEach
+                }
 
             val sensitivityLevel =
                 when (metadataProto.sensitivityLevel) {
@@ -187,23 +340,31 @@ class CatalystStateMetadataProviderExecutor(
                     else -> null
                 }
 
-            val writable = if (metadata is ApiPreference<*, *>) {
-                metadata.set != null
-            } else if (metadata is PersistentPreference<*>) {
-                metadata.supportsWrite
-            } else {
-                false
-            }
+            val writable =
+                if (metadataProto.sensitivityLevel > 2) { // requires confirmation or do not expose
+                    false
+                } else if (metadata is ApiPreference<*, *>) {
+                    metadata.set != null
+                } else if (metadata is PersistentPreference<*>) {
+                    metadata.supportsWrite
+                } else {
+                    false
+                }
 
             // We replace .. with . because sometimes the strings
             // contain a full stop at the end and this joins with
             // the separator
-            val hintText = listOfNotNull(
+            val hintText =
+                listOfNotNull(
                         metadata.accessPreconditionsAsString(context),
                         metadata.getPreconditionsAsString(context),
                         metadata.setPreconditionsAsString(context),
                         metadata.setWarningAsString(context),
-                    ).joinToString(separator = "\n").replace("..", ".")
+                        metadata.stableAccessPreconditionFailuresAsString(context),
+                        metadata.stableSetPreconditionFailuresAsString(context),
+                    )
+                    .joinToString(separator = "\n")
+                    .replace("..", ".")
             deviceStateItemMetadataList.add(
                 DeviceStateItemMetadata(
                     key = "${screenMetaData.key}/${metadataProto.key}",
@@ -213,49 +374,80 @@ class CatalystStateMetadataProviderExecutor(
                     name = null,
                     sensitivity = sensitivityLevel,
                     writable = writable,
-                    possibleValues = if (metadata is ApiPreference<*, *>) {
-                        val type = metadata.type
+                    possibleValues =
+                        if (metadata is ApiPreference<*, *>) {
+                            val type = metadata.type
 
-                        val str = "itemization:${type.getKey()}"
-                        val parameters = type.getParameters()
+                            val str = "itemization:${type.getKey()}"
+                            val parameters = type.getParameters()
 
-                        if (parameters != null) {
-                            str + " ${parameters.toParametersString()}"
+                            if (parameters != null && parameters.toParametersString() != "[]") {
+                                str + " ${parameters.toParametersString()}"
+                            } else {
+                                str
+                            }
                         } else {
-                            str
-                        }
-                    } else {
-                        val str = metadataProto.valueDescriptor.toDeviceStateString()
-                        if (str.isEmpty()) null else str
-                    },
-
-                    hintText = if (hintText.isNotEmpty()) { hintText } else { null },
+                            val str = metadataProto.valueDescriptor.toDeviceStateString()
+                            if (str.isEmpty()) null else str
+                        },
+                    hintText =
+                        if (hintText.isNotEmpty()) {
+                            hintText
+                        } else {
+                            null
+                        },
                 )
             )
         }
 
-        val launchingIntent = screenMetaData.getLaunchIntent(context, null)
+        val launchingIntent =
+            screenMetaData
+                .getTrampolinedLaunchIntent(null)
+                .apply {
+                    // .toUri() will drop the parameter's bundle. In the end, this
+                    // launchingIntent will contain only the screenKey and (if parameterized) the
+                    // itemization extra. The SettingsLaunchpadActivity is able to launch the
+                    // correct screen
+                    // based on this.
+                    if (isParameterized) {
+                        // Add the literal '$itemization' string as the value for the itemization
+                        // extra
+                        putExtra(PreferenceScreenMetadata.EXTRA_ITEMIZATION, $$"$itemization")
+                    }
+                }
+                .toUri(Intent.URI_INTENT_SCHEME)
+
         return PerScreenMetadata(
-            description = (
-                    listOfNotNull(
+            description =
+                (listOfNotNull(
                         if (shouldIncludeScreenKey()) "[key=${screenMetaData.key}]" else "",
-                        // This is a hack to remove the title from parameterised screens as it may contain
-                        // some text referring to that specific parameter which could confuse the agent.
+                        // This is a hack to remove the title from parameterised screens as it may
+                        // contain
+                        // some text referring to that specific parameter which could confuse the
+                        // agent.
                         if (isParameterized) ""
-                            else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
+                        else screenMetaData.getPreferenceScreenTitle(context)?.toString() ?: "",
                         screenMetaData.getPreferencePurpose(context),
                         screenMetaData.accessPreconditionsAsString(context),
-                    ).filter{it.isNotBlank()}.joinToString(". ").replace("..", ".")
-                ),
+                        screenMetaData.stableAccessPreconditionFailuresAsString(context)
+                    )
+                    .filter { it.isNotBlank() }
+                    .joinToString(". ")
+                    .replace("..", ".")),
             deviceStateItemsMetadata = deviceStateItemMetadataList,
-            // intentUri = launchingIntent?.toUri(Intent.URI_INTENT_SCHEME),
+            intentUri = launchingIntent,
 
             // Ideally itemizationTypes should be 1) nullable and 2) more
             // complex than a string so we can communicate more detail
-            itemizationTypes = screenMetaData.keyParametersSchema?.getParameters()?.values?.map {
-                    val type = it.type
-                    "${type.getKey()} - ${type.getDescription(context)}"
-                }?.toList() ?: emptyList(),
+            itemizationTypes =
+                screenMetaData.keyParametersSchema
+                    ?.getParameters()
+                    ?.values
+                    ?.map {
+                        val type = it.type
+                        "${type.getKey()}"
+                    }
+                    ?.toList() ?: emptyList(),
         )
     }
 
@@ -265,11 +457,12 @@ class CatalystStateMetadataProviderExecutor(
      * This should never be used in production.
      */
     private fun shouldIncludeScreenKey(): Boolean {
-        return AppUtils.isDebuggable() && Settings.Global.getInt(
-            context.contentResolver,
-            "com.android.settings.APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION",
-            0
-        ) == 1
+        return AppUtils.isDebuggable() &&
+            Settings.Global.getInt(
+                context.contentResolver,
+                "com.android.settings.APP_FUNCTION_INCLUDE_SCREEN_KEY_IN_DESCRIPTION",
+                0,
+            ) == 1
     }
 
     private fun PreferenceProto.getPurposeString(): String =
@@ -286,43 +479,62 @@ class CatalystStateMetadataProviderExecutor(
 
     companion object {
         private const val TAG = "CatalystStateMetadataProviderExecutor"
-        private const val MAX_PARALLELISM = 3
-        private val PER_SCREEN_TIMEOUT_MS = 5.seconds
+        private const val DEFAULT_MAX_PARALLELISM = 3
+        private const val DEFAULT_PER_SCREEN_TIMEOUT_MS = 10000L
+        private const val DEFAULT_MAX_EXECUTION_TIME_MS = 25000L
+        private const val SETTING_MAX_PARALLELISM =
+            "com.android.settings.APP_FUNCTION_MAX_PARALLELISM"
+        private const val SETTING_PER_SCREEN_TIMEOUT_MS =
+            "com.android.settings.APP_FUNCTION_PER_SCREEN_TIMEOUT_MS"
+        private const val SETTING_MAX_EXECUTION_TIME_MS =
+            "com.android.settings.APP_FUNCTION_MAX_EXECUTION_TIME_MS"
+        private const val SETTING_LOG_APPFUNCTION_TIME =
+            "com.android.settings.APP_FUNCTION_LOG_TIME"
 
         /** Returns an LLM readable string describing the value type. */
         internal fun PreferenceValueDescriptorProto.toDeviceStateString(): String {
-            val typeString = if (possibleValuesCount > 0) {
-                possibleValuesList.joinToString(separator = ", ") {
-                    "${it.value.toValueString()} (${it.description})"
-                }
-            } else {
-                when (typeCase) {
-                    PreferenceValueDescriptorProto.TypeCase.BOOLEAN_TYPE -> "BOOL"
-                    PreferenceValueDescriptorProto.TypeCase.FLOAT_TYPE -> "FLOAT"
-                    PreferenceValueDescriptorProto.TypeCase.LONG_TYPE -> "LONG"
-                    PreferenceValueDescriptorProto.TypeCase.RANGE_VALUE -> {
-                        val range = rangeValue
-                        val filter = listOf(
-                            if (range.hasMin()) "min=${range.min}" else null,
-                            if (range.hasMax()) "max=${range.max}" else null,
-                            if (range.hasStep() && range.step > 1) "step=${range.step}" else null,
-                        ).filterNotNull().joinToString(separator = ", ")
-
-                        if (filter.isEmpty()) {
-                            "INTEGER"
-                        } else {
-                            "INTEGER($filter)"
-                        }
+            val typeString =
+                if (possibleValuesCount > 0) {
+                    possibleValuesList.joinToString(separator = ", ") {
+                        "${it.value.toValueString()} (${it.description})"
                     }
-                    PreferenceValueDescriptorProto.TypeCase.STRING_TYPE -> "STRING"
-                else -> ""
+                } else {
+                    when (typeCase) {
+                        PreferenceValueDescriptorProto.TypeCase.BOOLEAN_TYPE -> "BOOL"
+                        PreferenceValueDescriptorProto.TypeCase.FLOAT_TYPE -> "FLOAT"
+                        PreferenceValueDescriptorProto.TypeCase.LONG_TYPE -> "LONG"
+                        PreferenceValueDescriptorProto.TypeCase.RANGE_VALUE -> {
+                            val range = rangeValue
+                            val filter =
+                                listOf(
+                                        if (range.hasMin()) "min=${range.min}" else null,
+                                        if (range.hasMax()) "max=${range.max}" else null,
+                                        if (range.hasStep() && range.step > 1) "step=${range.step}"
+                                        else null,
+                                    )
+                                    .filterNotNull()
+                                    .joinToString(separator = ", ")
+
+                            if (filter.isEmpty()) {
+                                "INTEGER"
+                            } else {
+                                "INTEGER($filter)"
+                            }
+                        }
+                        PreferenceValueDescriptorProto.TypeCase.STRING_TYPE -> "STRING"
+                        else -> ""
+                    }
                 }
-            }
-            val parametersString = if (hasParameters() && parameters.valuesMap.isNotEmpty()) {
-                " [" + parameters.valuesMap.entries.sortedBy { it.key }.joinToString(",") { "${it.key}=${it.value}" } + "]"
-            } else {
-                ""
-            }
+            val parametersString =
+                if (hasParameters() && parameters.valuesMap.isNotEmpty()) {
+                    " [" +
+                        parameters.valuesMap.entries
+                            .sortedBy { it.key }
+                            .joinToString(",") { "${it.key}=${it.value}" } +
+                        "]"
+                } else {
+                    ""
+                }
             return typeString + parametersString
         }
 
@@ -342,12 +554,18 @@ suspend fun ApiType<*, *>.toItemizationType(context: Context): ItemizationType {
     return ItemizationType(
         key = getKey(),
         hintText = getDescription(context),
-        values = if (this is FiniteOptionsType) {
-            getOptions(context).map {
-                ItemizationDetail(key = extractSafety(it.first).toString(), value = extractSafety(it.second).toString())
-            }.toList()
-        } else {
-            emptyList()
-        },
+        values =
+            if (this is FiniteOptionsType) {
+                getOptions(context)
+                    .map {
+                        ItemizationDetail(
+                            key = extractSafety(it.first).toString(),
+                            value = extractSafety(it.second).toString(),
+                        )
+                    }
+                    .toList()
+            } else {
+                emptyList()
+            },
     )
 }

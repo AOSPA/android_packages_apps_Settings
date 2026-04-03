@@ -32,8 +32,11 @@ import android.net.TetheringManager;
 import android.os.UserHandle;
 import android.os.UserManager;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+
+import com.android.settings.R;
 
 import java.util.List;
 import java.util.Map;
@@ -56,7 +59,8 @@ public class UsbBackend {
     private final boolean mUVCEnabled;
     private final boolean mIsAdminUser;
 
-    private UsbManager mUsbManager;
+    private final Context mContext;
+    private final UsbManager mUsbManager;
 
     @Nullable
     private UsbPort mPort;
@@ -69,15 +73,16 @@ public class UsbBackend {
 
     @VisibleForTesting
     public UsbBackend(Context context, UserManager userManager) {
-        mUsbManager = context.getSystemService(UsbManager.class);
+        mContext = context;
+        mUsbManager = mContext.getSystemService(UsbManager.class);
 
         mFileTransferRestrictedBySystem = isUsbFileTransferRestrictedBySystem(userManager);
         mTetheringRestrictedBySystem = isUsbTetheringRestrictedBySystem(userManager);
         mUVCEnabled = isUvcEnabled();
         mIsAdminUser = userManager.isAdminUser();
 
-        mMidiSupported = context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI);
-        final TetheringManager tm = context.getSystemService(TetheringManager.class);
+        mMidiSupported = mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_MIDI);
+        final TetheringManager tm = mContext.getSystemService(TetheringManager.class);
         mTetheringSupported = tm.isTetheringSupported();
         updatePorts();
     }
@@ -182,6 +187,37 @@ public class UsbBackend {
 
     public Map<String, UsbDevice> getUsbDevices() {
         return mUsbManager.getDeviceList();
+    }
+
+    /**
+     * Returns a user-friendly name for the given {@link UsbDevice}.
+     *
+     * <p>The name is determined in the following order of preference:
+     *
+     * <ol>
+     *   <li>The product name of the device, if available.
+     *   <li>A localized string containing the manufacturer name, if available.
+     *   <li>A localized string containing the device's vendor ID and product ID as a fallback.
+     * </ol>
+     *
+     * @param usbDevice the {@link UsbDevice} to get the name for.
+     * @return a localized string representing the name of the USB device.
+     */
+    public String getDeviceName(@NonNull UsbDevice usbDevice) {
+        if (usbDevice.getProductName() != null) {
+            return usbDevice.getProductName();
+        }
+
+        if (usbDevice.getManufacturerName() != null) {
+            return mContext.getString(
+                    R.string.usb_device_name_unknown_with_manufacturer_name,
+                    usbDevice.getManufacturerName());
+        }
+
+        return mContext.getString(
+                R.string.usb_device_name_unknown_with_vendor_id_and_product_id,
+                usbDevice.getVendorId(),
+                usbDevice.getProductId());
     }
 
     public static String usbFunctionsToString(long functions) {

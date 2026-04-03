@@ -131,6 +131,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
             switch (msg.what) {
                 case MESSAGE_HIDE_ERROR_MESSAGE:
                     mErrorMessage.setVisibility(View.INVISIBLE);
+                    mErrorMessage.setError(null);
                     break;
 
                 case MESSAGE_SHOW_ERROR_MESSAGE:
@@ -138,8 +139,7 @@ public class WifiDppQrCodeScannerFragment extends WifiDppQrCodeBaseFragment impl
 
                     mErrorMessage.setVisibility(View.VISIBLE);
                     mErrorMessage.setText(errorMessage);
-                    mErrorMessage.sendAccessibilityEvent(
-                            AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED);
+                    mErrorMessage.setError(errorMessage, null);
 
                     // Cancel any pending messages to hide error view and requeue the message so
                     // user has time to see error

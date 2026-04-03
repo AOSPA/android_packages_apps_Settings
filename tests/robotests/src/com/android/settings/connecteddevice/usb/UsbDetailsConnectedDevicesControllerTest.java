@@ -22,12 +22,11 @@ import static com.android.settings.connecteddevice.usb.UsbDetailsConnectedDevice
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import android.annotation.Nullable;
 import android.content.Context;
-import android.hardware.usb.IUsbSerialReader;
-import android.hardware.usb.UsbConfiguration;
+import android.graphics.Bitmap;
 import android.hardware.usb.UsbDevice;
 import android.platform.test.annotations.DisableFlags;
 import android.platform.test.annotations.EnableFlags;
@@ -36,7 +35,6 @@ import android.platform.test.flag.junit.SetFlagsRule;
 import androidx.core.graphics.drawable.IconCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
@@ -66,7 +64,6 @@ public class UsbDetailsConnectedDevicesControllerTest {
     private Context mContext;
     private PreferenceScreen mScreen;
     private UsbDetailsConnectedDevicesController mUsbDetailsConnectedDevicesController;
-    private IconCompat mUsbIcon;
 
     @Before
     public void setUp() {
@@ -74,10 +71,6 @@ public class UsbDetailsConnectedDevicesControllerTest {
 
         mContext = RuntimeEnvironment.getApplication();
         mScreen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
-        mUsbIcon =
-                Utils.createIconWithDrawable(
-                        IconCompat.createWithResource(mContext, R.drawable.ic_usb)
-                                .loadDrawable(mContext));
 
         mUsbDetailsConnectedDevicesController =
                 new UsbDetailsConnectedDevicesController(mContext, mFragment, mUsbBackend);
@@ -92,52 +85,19 @@ public class UsbDetailsConnectedDevicesControllerTest {
         mOpenMocks.close();
     }
 
-    private UsbDevice createUsbDevice(
-            String name,
-            int vendorId,
-            int productId,
-            @Nullable String manufactureName,
-            @Nullable String productName) {
-        return new UsbDevice.Builder(
-                        name,
-                        vendorId,
-                        productId,
-                        /* Class= */ 0,
-                        /* subClass= */ 1,
-                        /* protocol= */ 2,
-                        manufactureName,
-                        productName,
-                        /* version= */ "version",
-                        /* configurations= */ new UsbConfiguration[] {},
-                        /* serialNumber= */ "serialNumber",
-                        /* hasAudioPlayback= */ false,
-                        /* hasAudioCapture= */ false,
-                        /* hasMidi= */ false,
-                        /* hasVideoPlayback= */ false,
-                        /* hasVideoCapture= */ false)
-                .build(new IUsbSerialReader.Default());
-    }
-
     @Test
     @DisableFlags(FLAG_ENABLE_PERSISTENT_USB_DEVICE_PERMISSIONS)
     public void connectedUsbDevicesPreferences_featureDisabled() {
-        final UsbDevice usbDeviceWithProductName =
-                createUsbDevice(
-                        /* name= */ "name",
-                        /* vendorId= */ 1,
-                        /* productId= */ 2,
-                        /* manufactureName= */ null,
-                        /* productName= */ null);
-        final Map<String, UsbDevice> usbDevices =
-                Map.of(usbDeviceWithProductName.getDeviceName(), usbDeviceWithProductName);
+        final Map<String, UsbDevice> usbDevices = Map.of("usbDeviceName", mock(UsbDevice.class));
         when(mUsbBackend.getUsbDevices()).thenReturn(usbDevices);
 
         mUsbDetailsConnectedDevicesController.displayPreference(mScreen);
-        final PreferenceGroup preferenceGroup =
+        final PreferenceCategory preferenceCategory =
                 mScreen.findPreference(mUsbDetailsConnectedDevicesController.getPreferenceKey());
 
-        assertThat(preferenceGroup.isVisible()).isFalse();
-        assertThat(preferenceGroup.getPreferenceCount()).isEqualTo(0);
+        assertThat(preferenceCategory).isNotNull();
+        assertThat(preferenceCategory.isVisible()).isFalse();
+        assertThat(preferenceCategory.getPreferenceCount()).isEqualTo(0);
     }
 
     @Test
@@ -146,76 +106,72 @@ public class UsbDetailsConnectedDevicesControllerTest {
         when(mUsbBackend.getUsbDevices()).thenReturn(Map.of());
 
         mUsbDetailsConnectedDevicesController.displayPreference(mScreen);
-        final PreferenceGroup preferenceGroup =
+        final PreferenceCategory preferenceCategory =
                 mScreen.findPreference(mUsbDetailsConnectedDevicesController.getPreferenceKey());
 
-        assertThat(preferenceGroup.isVisible()).isFalse();
-        assertThat(preferenceGroup.getPreferenceCount()).isEqualTo(0);
+        assertThat(preferenceCategory).isNotNull();
+        assertThat(preferenceCategory.isVisible()).isFalse();
+        assertThat(preferenceCategory.getPreferenceCount()).isEqualTo(0);
     }
 
     @Test
     @EnableFlags(FLAG_ENABLE_PERSISTENT_USB_DEVICE_PERMISSIONS)
     public void connectedUsbDevicesPreferences() {
-        final UsbDevice usbDeviceWithProductName =
-                createUsbDevice(
-                        /* name= */ "usbDeviceWithProductName",
-                        /* vendorId= */ 10,
-                        /* productId= */ 11,
-                        /* manufactureName= */ null,
-                        /* productName= */ "Product Name");
-        final UsbDevice usbDeviceWithManufactureName =
-                createUsbDevice(
-                        /* name= */ "usbDeviceWithManufactureName",
-                        /* vendorId= */ 20,
-                        /* productId= */ 21,
-                        /* manufactureName= */ "Manufacture Name",
-                        /* productName= */ null);
-        final UsbDevice usbDeviceOnlyWithIds =
-                createUsbDevice(
-                        /* name= */ "usbDeviceOnlyWithIds",
-                        /* vendorId= */ 30,
-                        /* productId= */ 31,
-                        /* manufactureName= */ null,
-                        /* productName= */ null);
+        final UsbDevice firstUsbDevice = mock(UsbDevice.class);
+        final UsbDevice secondUsbDevice = mock(UsbDevice.class);
+        final UsbDevice thirdUsbDevice = mock(UsbDevice.class);
+
+        final String firstUsbDeviceName = "firstDeviceName";
+        final String secondUsbDeviceName = "secondDeviceName";
+        final String thirdUsbDeviceName = "thirdDeviceName";
 
         final Map<String, UsbDevice> usbDevices =
                 Map.of(
-                        usbDeviceWithProductName.getDeviceName(), usbDeviceWithProductName,
-                        usbDeviceWithManufactureName.getDeviceName(), usbDeviceWithManufactureName,
-                        usbDeviceOnlyWithIds.getDeviceName(), usbDeviceOnlyWithIds);
-        when(mUsbBackend.getUsbDevices()).thenReturn(usbDevices);
-
-        mUsbDetailsConnectedDevicesController.displayPreference(mScreen);
-
-        final String productNameTitle = usbDeviceWithProductName.getProductName();
-        final String manufacturerNameTitle =
-                mContext.getString(
-                        R.string.usb_device_name_unknown_with_manufacturer_name,
-                        usbDeviceWithManufactureName.getManufacturerName());
-        final String onlyWithIdsTitle =
-                mContext.getString(
-                        R.string.usb_device_name_unknown_with_vendor_id_and_product_id,
-                        usbDeviceOnlyWithIds.getVendorId(),
-                        usbDeviceOnlyWithIds.getProductId());
+                        firstUsbDeviceName,
+                        firstUsbDevice,
+                        secondUsbDeviceName,
+                        secondUsbDevice,
+                        thirdUsbDeviceName,
+                        thirdUsbDevice);
         final Map<String, String> expectedTitles =
                 Map.of(
-                        createDevicePreferenceKey(usbDeviceWithProductName), productNameTitle,
-                        createDevicePreferenceKey(usbDeviceWithManufactureName),
-                                manufacturerNameTitle,
-                        createDevicePreferenceKey(usbDeviceOnlyWithIds), onlyWithIdsTitle);
+                        createDevicePreferenceKey(firstUsbDevice),
+                        firstUsbDeviceName,
+                        createDevicePreferenceKey(secondUsbDevice),
+                        secondUsbDeviceName,
+                        createDevicePreferenceKey(thirdUsbDevice),
+                        thirdUsbDeviceName);
 
-        final PreferenceGroup preferenceGroup =
+        when(mUsbBackend.getUsbDevices()).thenReturn(usbDevices);
+        when(mUsbBackend.getDeviceName(firstUsbDevice)).thenReturn(firstUsbDeviceName);
+        when(mUsbBackend.getDeviceName(secondUsbDevice)).thenReturn(secondUsbDeviceName);
+        when(mUsbBackend.getDeviceName(thirdUsbDevice)).thenReturn(thirdUsbDeviceName);
+
+        mUsbDetailsConnectedDevicesController.displayPreference(mScreen);
+        final PreferenceCategory preferenceCategory =
                 mScreen.findPreference(mUsbDetailsConnectedDevicesController.getPreferenceKey());
 
-        assertThat(preferenceGroup.getPreferenceCount()).isEqualTo(expectedTitles.size());
-        for (int i = 0; i < preferenceGroup.getPreferenceCount(); ++i) {
-            final Preference preference = preferenceGroup.getPreference(i);
+        assertThat(preferenceCategory).isNotNull();
+        assertThat(preferenceCategory.getPreferenceCount()).isEqualTo(expectedTitles.size());
 
-            final IconCompat preferenceIcon = Utils.createIconWithDrawable(preference.getIcon());
-            assertThat(preferenceIcon.getBitmap().sameAs(mUsbIcon.getBitmap())).isTrue();
+        final Bitmap expectedIcon =
+                Utils.createIconWithDrawable(
+                                IconCompat.createWithResource(mContext, R.drawable.ic_usb)
+                                        .loadDrawable(mContext))
+                        .getBitmap();
+
+        for (int i = 0; i < preferenceCategory.getPreferenceCount(); ++i) {
+            final Preference preference = preferenceCategory.getPreference(i);
+
+            final Bitmap preferenceIcon =
+                    Utils.createIconWithDrawable(preference.getIcon()).getBitmap();
+            assertThat(preferenceIcon).isNotNull();
+            assertThat(preferenceIcon.sameAs(expectedIcon)).isTrue();
 
             final String expectedTitle = expectedTitles.get(preference.getKey());
-            assertThat(preference.getTitle().toString()).isEqualTo(expectedTitle);
+            final CharSequence preferenceTitle = preference.getTitle();
+            assertThat(preferenceTitle).isNotNull();
+            assertThat(preferenceTitle.toString()).isEqualTo(expectedTitle);
         }
     }
 }

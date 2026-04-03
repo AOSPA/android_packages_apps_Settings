@@ -22,8 +22,8 @@ import static org.mockito.Mockito.when;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.os.SystemProperties;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -37,6 +37,7 @@ import com.android.settingslib.bluetooth.HearingAidProfile;
 import com.android.settingslib.bluetooth.LocalBluetoothManager;
 import com.android.settingslib.bluetooth.LocalBluetoothProfileManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -59,6 +60,10 @@ public class HearingAidHelperTest {
     public final MockitoRule mockito = MockitoJUnit.rule();
     private final Context mContext = ApplicationProvider.getApplicationContext();
     private static final String TEST_DEVICE_ADDRESS = "00:A1:A1:A1:A1:A1";
+    private static final String ASHA_PROFILE_CENTRAL_PROPERTY =
+            "bluetooth.profile.asha.central.enabled";
+    private static final String HAP_PROFILE_CLIENT_PROPERTY =
+            "bluetooth.profile.hap.client.enabled";
 
     @Mock
     private LocalBluetoothManager mLocalBluetoothManager;
@@ -94,43 +99,60 @@ public class HearingAidHelperTest {
         mHelper = new HearingAidHelper(mContext);
     }
 
+    @After
+    public void tearDown() {
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "");
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "");
+    }
+
     @Test
     public void isHearingAidSupported_ashaSupported_returnTrue() {
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
 
         assertThat(mHelper.isHearingAidSupported()).isTrue();
     }
 
     @Test
     public void isHearingAidSupported_hapSupported_returnTrue() {
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HAP_CLIENT);
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "true");
 
         assertThat(mHelper.isHearingAidSupported()).isTrue();
     }
 
     @Test
     public void isHearingAidSupported_unsupported_returnFalse() {
-        mShadowBluetoothAdapter.clearSupportedProfiles();
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "false");
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "false");
 
         assertThat(mHelper.isHearingAidSupported()).isFalse();
     }
 
     @Test
     public void isAshaProfileSupported_supported_returnTrue() {
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
 
         assertThat(mHelper.isAshaProfileSupported()).isTrue();
     }
 
     @Test
+    public void isAshaProfileSupported_unsupported_returnFalse() {
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "false");
+
+        assertThat(mHelper.isAshaProfileSupported()).isFalse();
+    }
+
+    @Test
     public void isHapClientProfileSupported_supported_returnTrue() {
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HAP_CLIENT);
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "true");
 
         assertThat(mHelper.isHapClientProfileSupported()).isTrue();
+    }
+
+    @Test
+    public void isHapClientProfileSupported_unsupported_returnFalse() {
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "false");
+
+        assertThat(mHelper.isHapClientProfileSupported()).isFalse();
     }
 
     @Test
@@ -152,8 +174,7 @@ public class HearingAidHelperTest {
     @Test
     public void getConnectedHearingAidDeviceList_oneDeviceAdded_getOneDevice() {
         mBluetoothAdapter.enable();
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(new ArrayList<>(
                 Collections.singletonList(mBluetoothDevice)));
 
@@ -163,8 +184,7 @@ public class HearingAidHelperTest {
     @Test
     public void getConnectedHearingAidDeviceList_oneSubDeviceAdded_getZeroDevice() {
         mBluetoothAdapter.enable();
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(new ArrayList<>(
                 Collections.singletonList(mBluetoothDevice)));
         when(mLocalBluetoothManager.getCachedDeviceManager().isSubDevice(
@@ -176,8 +196,7 @@ public class HearingAidHelperTest {
     @Test
     public void getConnectedHearingAidDevice_getExpectedCachedBluetoothDevice() {
         mBluetoothAdapter.enable();
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
         when(mHearingAidProfile.getConnectedDevices()).thenReturn(new ArrayList<>(
                 Collections.singletonList(mBluetoothDevice)));
 

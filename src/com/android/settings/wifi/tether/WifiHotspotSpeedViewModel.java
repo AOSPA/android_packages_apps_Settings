@@ -16,9 +16,11 @@
 
 package com.android.settings.wifi.tether;
 
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE;
 import static android.net.wifi.SoftApConfiguration.SECURITY_TYPE_WPA3_OWE_TRANSITION;
 
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_5GHZ;
 import static com.android.settings.wifi.repository.WifiHotspotRepository.SPEED_2GHZ_6GHZ;
@@ -59,8 +61,10 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
     protected final WifiHotspotRepository mWifiHotspotRepository;
     protected Map<Integer, SpeedInfo> mSpeedInfoMap = new HashMap<>();
     protected MutableLiveData<Map<Integer, SpeedInfo>> mSpeedInfoMapData;
+// QTI_BEGIN: 2024-02-05: WLAN: Tethering: Enable 2.4GHz and 5Ghz band options in hotspot settings.
     protected SpeedInfo mSpeedInfo2g = new SpeedInfo(false, true, true);
     protected SpeedInfo mSpeedInfo5g = new SpeedInfo(false, true, true);
+// QTI_END: 2024-02-05: WLAN: Tethering: Enable 2.4GHz and 5Ghz band options in hotspot settings.
     protected SpeedInfo mSpeedInfo2g5g = new SpeedInfo(false, true, true);
     protected SpeedInfo mSpeedInfo6g = new SpeedInfo(false, true, true);
     protected SpeedInfo mSpeedInfo2g6g = new SpeedInfo(false, true, true);
@@ -68,8 +72,10 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
     protected final Observer<Boolean> m6gAvailableObserver = a -> on6gAvailableChanged(a);
     protected final Observer<Boolean> m5gAvailableObserver = a -> on5gAvailableChanged(a);
     protected final Observer<Integer> mSpeedTypeObserver = st -> onSpeedTypeChanged(st);
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
     protected final Observer<Integer> mSecurityTypeObserver = st -> onSecurityTypeChanged(st);
     protected int mCurrentSecurityType;
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
 
     public WifiHotspotSpeedViewModel(@NotNull Application application) {
         super(application);
@@ -78,8 +84,10 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mWifiHotspotRepository.get6gAvailable().observeForever(m6gAvailableObserver);
         mWifiHotspotRepository.get5gAvailable().observeForever(m5gAvailableObserver);
         mWifiHotspotRepository.getSpeedType().observeForever(mSpeedTypeObserver);
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         mWifiHotspotRepository.getSecurityType().observeForever(mSecurityTypeObserver);
         mCurrentSecurityType = mWifiHotspotRepository.getSecurityType().getValue();
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         mWifiHotspotRepository.setAutoRefresh(true);
     }
 
@@ -88,7 +96,9 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         mWifiHotspotRepository.get6gAvailable().removeObserver(m6gAvailableObserver);
         mWifiHotspotRepository.get5gAvailable().removeObserver(m5gAvailableObserver);
         mWifiHotspotRepository.getSpeedType().removeObserver(mSpeedTypeObserver);
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         mWifiHotspotRepository.getSecurityType().removeObserver(mSecurityTypeObserver);
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
     }
 
     protected void on6gAvailableChanged(Boolean available) {
@@ -114,17 +124,21 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
                 .getString(available ? RES_SPEED_5G_SUMMARY : RES_SUMMARY_UNAVAILABLE);
 
         boolean showDualBand = mWifiHotspotRepository.isDualBand() && available;
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         if (mCurrentSecurityType == SECURITY_TYPE_WPA3_OWE ||
             mCurrentSecurityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
             if (!mWifiHotspotRepository.isEnhancedOpenOweOnlyEnabled()) {
                 mSpeedInfo2g5g.mIsVisible = false;
             } else {
                 mSpeedInfo2g5g.mIsVisible = showDualBand;
             }
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         } else {
             log("on5gAvailableChanged(), showDualBand:" + showDualBand);
             mSpeedInfo2g5g.mIsVisible = showDualBand;
         }
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
         updateSpeedInfoMapData();
     }
 
@@ -138,21 +152,25 @@ public class WifiHotspotSpeedViewModel extends AndroidViewModel {
         updateSpeedInfoMapData();
     }
 
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
    protected void onSecurityTypeChanged(int securityType) {
        mCurrentSecurityType = securityType;
        log("onSecurityTypeChanged(), securityType:" + securityType);
        if (securityType == SECURITY_TYPE_WPA3_OWE ||
            securityType == SECURITY_TYPE_WPA3_OWE_TRANSITION) {
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
            if (!mWifiHotspotRepository.isEnhancedOpenOweOnlyEnabled()) {
                mSpeedInfo2g5g.mIsVisible = false;
                if (mSpeedInfo2g5g.mIsChecked) {
                    mSpeedInfo2g.mIsChecked = true;
                }
+// QTI_BEGIN: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
            }
        }
        updateSpeedInfoMapData();
    }
 
+// QTI_END: 2024-03-07: WLAN: Tethering: Enable configuration of Enhanced Open (OWE) Security mode.
     /**
      * Sets SpeedType
      */

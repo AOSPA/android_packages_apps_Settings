@@ -31,6 +31,7 @@ import com.android.settings.overlay.FeatureFactory
 import com.android.settings.supervision.credentialmanagement.SupervisionPinManagementScreen
 import com.android.settings.supervision.shared.isSupervisingCredentialSet
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -63,6 +64,8 @@ class SupervisionSetUpPinPreference :
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override val availabilityDescription = "The device must not have a supervising credential."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = !context.isSupervisingCredentialSet()
 

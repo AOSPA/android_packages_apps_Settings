@@ -24,6 +24,7 @@ import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenc
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceIntroductionTitleProvider
 import com.android.settings.accessibility.shared.ui.AccessibilityFooterPreferenceMetadata
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 
@@ -65,6 +66,8 @@ class A11yActivityFooterPreference(
     }
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         return getTitle(context)?.isNotBlank() == true

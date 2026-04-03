@@ -27,6 +27,7 @@ import android.content.pm.PackageManager;
 import android.os.Process;
 
 import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoController;
+import com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoDialog;
 import com.android.settings.fuelgauge.batteryusage.DataProcessor;
 
 import org.junit.Before;
@@ -114,6 +115,12 @@ public class PowerUsageFeatureProviderImplTest {
     }
 
     @Test
+    public void getBatteryUsageOverCalcPowerDrainThreshold_returnExpectedResult() {
+        assertThat(mPowerFeatureProvider.getBatteryUsageOverCalcPowerDrainThreshold())
+                .isEqualTo(Double.MAX_VALUE);
+    }
+
+    @Test
     public void getBatteryUsageStatsMaxAgeMs_returnUnsetValue() {
         assertThat(mPowerFeatureProvider.getBatteryUsageStatsMaxAgeMs(/* isFromPeriodJob= */true))
                 .isEqualTo(DataProcessor.BATTERY_STATS_MAX_AGE_UNSET);
@@ -157,6 +164,13 @@ public class PowerUsageFeatureProviderImplTest {
     @Test
     public void isTypeSystem_uidOther_returnFalse() {
         assertThat(mPowerFeatureProvider.isTypeSystem(UID_OTHER, null)).isFalse();
+    }
+
+    @Test
+    public void getBatteryAdvanceInfoDialog_returnNull() {
+        BatteryAdvanceInfoDialog dialog = mPowerFeatureProvider.getBatteryAdvanceInfoDialog();
+
+        assertThat(dialog).isNull();
     }
 
     @Test

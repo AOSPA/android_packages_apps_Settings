@@ -35,7 +35,10 @@ import com.android.settings.datausage.lib.INetworkCycleDataRepository
 import com.android.settings.datausage.lib.NetworkCycleDataRepository
 import com.android.settings.network.ProxySubscriptionManager
 import com.android.settings.network.policy.NetworkPolicyRepository
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -67,6 +70,7 @@ class MobileNetworkDataUsagePreference(
             DataPlanRepositoryImpl(it)
         },
 ) :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceLifecycleProvider,
     PreferenceBinding,
@@ -123,7 +127,15 @@ class MobileNetworkDataUsagePreference(
     override val availabilityDescription =
         "The subscription ID must be valid."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context) = subInfo != null
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context) = dataUsageDataFlow.value.summary
 

@@ -36,6 +36,8 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 import kotlin.time.Duration.Companion.milliseconds
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+
 
 /** A preference that allows the user to adjust the intensity of color correction. */
 class IntensityPreference(context: Context) :
@@ -79,6 +81,10 @@ class IntensityPreference(context: Context) :
         ReadWritePermit.ALLOW
 
     override val supportsWrite = true
+    override fun getEnabledDescription(): String = "Color correction must be enabled and the mode must not be grayscale."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
+
     override fun isEnabled(context: Context): Boolean {
         val colorCorrectionEnabled =
             dataStore.getBoolean(SETTING_KEY_COLOR_CORRECTION_ENABLED) ?: false

@@ -73,7 +73,6 @@ open class MobileNetworkData(
 
     init {
         refresh()
-        registerActiveSubscriptionChanged()
     }
 
     fun refresh() {
@@ -138,11 +137,13 @@ open class MobileNetworkData(
         }
     }
 
-    private fun registerActiveSubscriptionChanged() {
+    fun registerActiveSubscriptionChanged() {
         coroutineScope?.launch {
-            SubscriptionRepository(context).activeSubscriptionIdListFlow().collect {
-                Log.d(TAG, "subId=$subId,activeSubscriptionIdListFlow changed")
-                refreshImeiData()
+            withContext(Dispatchers.Default) {
+                SubscriptionRepository(context).activeSubscriptionIdListFlow().collect {
+                    Log.d(TAG, "subId=$subId,activeSubscriptionIdListFlow changed")
+                    refreshImeiData()
+                }
             }
         }
     }

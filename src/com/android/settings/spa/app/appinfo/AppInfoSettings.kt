@@ -16,11 +16,13 @@
 
 package com.android.settings.spa.app.appinfo
 
+import android.app.Activity
 import android.app.settings.SettingsEnums
 import android.content.pm.ApplicationInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.UserHandle
+import android.os.UserManager
 import android.util.FeatureFlagUtils
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -32,20 +34,22 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.android.settings.R
-import com.android.settings.utils.HsuUtils
 import com.android.settings.applications.AppInfoBase
 import com.android.settings.applications.appinfo.AppInfoDashboardFragment
 import com.android.settings.flags.Flags
+import com.android.settings.personalcontext.PersonalContextAppPreference
 import com.android.settings.spa.SpaActivity.Companion.startSpaActivity
 import com.android.settings.spa.app.appcompat.UserAspectRatioAppPreference
 import com.android.settings.spa.app.specialaccess.AlarmsAndRemindersAppListProvider
 import com.android.settings.spa.app.specialaccess.ComputerControlAutomationAppListProvider
+import com.android.settings.spa.app.specialaccess.ComputerControlTargetAppPageProvider
 import com.android.settings.spa.app.specialaccess.DisplayOverOtherAppsAppListProvider
 import com.android.settings.spa.app.specialaccess.InstallUnknownAppsListProvider
 import com.android.settings.spa.app.specialaccess.ModifySystemSettingsAppListProvider
 import com.android.settings.spa.app.specialaccess.PictureInPictureListProvider
 import com.android.settings.spa.app.specialaccess.UsageDataAppListProvider
 import com.android.settings.spa.app.specialaccess.WriteSystemPreferencesAppListProvider
+import com.android.settings.utils.HsuUtils
 import com.android.settingslib.spa.framework.common.SettingsPageProvider
 import com.android.settingslib.spa.framework.compose.navigator
 import com.android.settingslib.spa.widget.scaffold.RegularScaffold
@@ -135,6 +139,15 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
     ) {
         val packageInfo = packageInfoState.value ?: return@RegularScaffold
         val app = packageInfo.applicationInfo ?: return@RegularScaffold
+
+        // In Headless System User Mode, non-admin users are restricted from controlling HSU apps
+        // to prevent system-wide impact. Block access to the App Info page for these users.
+        if (android.multiuser.Flags.hsuAppManagement() && !HsuUtils.canControlHsuApp(context, app)) {
+            val activity = context as? Activity
+            activity?.finish()
+            return@RegularScaffold
+        }
+
         val appInfoProvider = remember(packageInfo) { AppInfoProvider(packageInfo) }
         val isHibernationSwitchEnabledStateFlow = MutableStateFlow(false)
         val isContinueAcrossDevicesSwitchEnabledStateFlow = MutableStateFlow(false)
@@ -178,6 +191,16 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
                 )
             }
         }
+            
+        Category(title = stringResource(R.string.ai_assist_category)) {
+            PersonalContextAppPreference(app)
+            if (
+                android.companion.virtualdevice.flags.Flags.computerControlAccess() &&
+                    android.companion.virtualdevice.flags.Flags.computerControlPerAppConsent()
+            ) {
+                ComputerControlTargetAppPageProvider.InfoPageEntryItem(app)
+            }
+        }
 
         Category(title = stringResource(R.string.advanced_apps)) {
             if (android.companion.virtualdevice.flags.Flags.computerControlAccess()) {
@@ -197,12 +220,6 @@ private fun AppInfoSettings(packageInfoPresenter: PackageInfoPresenter) {
 
         Category(title = stringResource(R.string.app_install_details_group_title)) {
             AppInstallerInfoPreference(app)
-        }
-
-        // For non-admin users viewing an HSU app, show a message that they cannot manage the app.
-        if (android.multiuser.Flags.hsuAppManagement() &&
-            HsuUtils.isHsuApp(context, app) && !HsuUtils.isAdmin(context)) {
-            Category(title = stringResource(R.string.hsu_app_admin_only_explanation)) {}
         }
 
         appInfoProvider.FooterAppVersion()

@@ -18,6 +18,7 @@ package com.android.settings.datetime
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 
@@ -33,6 +34,11 @@ class DateTimeSettingsApiScreen :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
+
+        // exclude this screen from api result since we don't have any preferences in it, and it is
+        // redundant with the date_time_settings screen in the output. We can remove this tag when
+        // we'll add preferences.
+        tags(UI_ONLY_PREFERENCE)
     }
 
     companion object {

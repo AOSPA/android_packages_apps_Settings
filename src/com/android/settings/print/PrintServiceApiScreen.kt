@@ -57,7 +57,10 @@ class PrintServiceApiScreen :
                 name = EXTRA_SERVICE_COMPONENT_NAME,
                 purpose = R.string.print_service_parameter_purpose,
                 type =
-                    GeneratedParameterType(R.string.print_service_parameter_description) {
+                    GeneratedParameterType(
+                        R.string.print_service_parameter_description,
+                        key = "PrintServiceComponent"
+                    ) {
                         fetchDisplayInfos().map { GeneratedValue(it.componentName.unsafe(), it.title.unsafe()) }
                     },
             )

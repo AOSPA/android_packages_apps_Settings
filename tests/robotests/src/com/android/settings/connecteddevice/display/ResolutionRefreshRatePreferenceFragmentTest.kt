@@ -134,7 +134,7 @@ class ResolutionRefreshRatePreferenceFragmentTest : ExternalDisplayTestBase() {
                 )!!
 
             assertThat(topCategory.preferenceCount).isEqualTo(3)
-            assertThat(moreCategory.preferenceCount).isEqualTo(4)
+            assertThat(moreCategory.preferenceCount).isEqualTo(3)
 
             val initialResPref = topCategory.getPreference(1) as SelectorWithWidgetPreference
             assertThat(initialResPref.key).isEqualTo("1920x1080")

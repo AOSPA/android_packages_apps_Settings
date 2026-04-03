@@ -390,6 +390,9 @@ public class BatteryInfo {
                     com.android.settingslib.fuelgauge.BatteryUtils.GLOBAL_TIME_TO_FULL_MILLIS,
                     chargeTimeMs);
         }
+        if (chargeTimeMs > 0) {
+            info.remainingTimeUs = PowerUtil.convertMsToUs(chargeTimeMs);
+        }
 
         final int status =
                 batteryBroadcast.getIntExtra(
@@ -437,7 +440,6 @@ public class BatteryInfo {
                         && dockDefenderMode == BatteryUtils.DockDefenderMode.DISABLED)
                 || dockDefenderMode == BatteryUtils.DockDefenderMode.TEMPORARILY_BYPASSED) {
             // Battery is charging to full
-            info.remainingTimeUs = PowerUtil.convertMsToUs(chargeTimeMs);
             int resId = getChargingDurationResId(info.isFastCharging);
             info.remainingLabel =
                     chargeTimeMs <= 0

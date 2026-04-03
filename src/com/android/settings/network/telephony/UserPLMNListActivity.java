@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
 /**
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
@@ -63,7 +64,11 @@ import com.android.internal.telephony.uicc.IccUtils;
 import com.android.internal.telephony.uicc.PlmnActRecord;
 import com.android.internal.telephony.uicc.UiccController;
 import com.android.settings.R;
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
+// QTI_BEGIN: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
 import com.android.settings.Utils;
+// QTI_END: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
 
 import org.codeaurora.internal.IExtTelephony;
 
@@ -180,22 +185,38 @@ public class UserPLMNListActivity extends PreferenceActivity
 
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
+// QTI_BEGIN: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
         Utils.setupEdgeToEdge(this);
+// QTI_END: 2024-06-03: Android_UI: Settings: Adapt edge-to-edge enforcement
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
         addPreferencesFromResource(R.xml.uplmn_settings);
         mUPLMNListContainer = (PreferenceScreen) findPreference(BUTTON_UPLMN_LIST_KEY);
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
+// QTI_BEGIN: 2020-06-21: RIL: Correct the phone ID when list the user plmns
         int subId = getIntent().getIntExtra(SubscriptionManager.EXTRA_SUBSCRIPTION_INDEX,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
         mPhoneId = SubscriptionManager.getPhoneId(subId);
+// QTI_END: 2020-06-21: RIL: Correct the phone ID when list the user plmns
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
 
         mExtTelephony
             = IExtTelephony.Stub
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
+// QTI_BEGIN: 2020-06-24: Telephony: Use the updated IExtTelephony service name
                     .asInterface(ServiceManager.getService("qti.radio.extphone"));
+// QTI_END: 2020-06-24: Telephony: Use the updated IExtTelephony service name
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
         intentFilter.addAction(ACTION_WRITE_EF_BROADCAST);
         intentFilter.addAction(ACTION_READ_EF_BROADCAST);
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
+// QTI_BEGIN: 2025-01-03: Telephony: UPLMN: Flag receiver with RECEIVER_EXPORTED
         registerReceiver(mReceiver, intentFilter, Context.RECEIVER_EXPORTED);
+// QTI_END: 2025-01-03: Telephony: UPLMN: Flag receiver with RECEIVER_EXPORTED
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
     }
 
     @Override
@@ -565,6 +586,8 @@ public class UserPLMNListActivity extends PreferenceActivity
             list.add(mUPLMNList.get(i));
         }
 
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
+// QTI_BEGIN: 2024-06-05: Telephony: Uplmn: Fix IndexOutOfBoundsException issue
         if (oldposition >= 0 && newposition >= 0) {
             if (oldposition > newposition) {
                 list.remove(oldposition);
@@ -576,6 +599,8 @@ public class UserPLMNListActivity extends PreferenceActivity
                 list.remove(oldposition);
                 list.add(oldposition, newInfo);
             }
+// QTI_END: 2024-06-05: Telephony: Uplmn: Fix IndexOutOfBoundsException issue
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
         }
 
         updateListPriority(list);
@@ -602,9 +627,11 @@ public class UserPLMNListActivity extends PreferenceActivity
             list.add(mUPLMNList.get(i));
         }
 
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
         if (position >= 0) {
             list.remove(position);
         }
+// QTI_BEGIN: 2020-04-17: Telephony: Redesign the user controlled PLMN feature
         network.setOperatorNumeric(null);
         list.add(network);
 
@@ -750,3 +777,4 @@ public class UserPLMNListActivity extends PreferenceActivity
         Log.d(LOG_TAG, msg);
     }
 }
+// QTI_END: 2020-04-17: Telephony: Redesign the user controlled PLMN feature

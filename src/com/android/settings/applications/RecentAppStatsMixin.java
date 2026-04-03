@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.PowerManager;
+import android.os.Process;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.ArrayMap;
@@ -70,6 +71,7 @@ public class RecentAppStatsMixin implements LifecycleObserver, OnStart {
     private final PowerManager mPowerManager;
     private final ApplicationsState mApplicationsState;
     private final List<RecentAppStatsListener> mAppStatsListeners;
+    private final boolean mExcludeProfiles;
     private Calendar mCalendar;
 
     static {
@@ -83,9 +85,10 @@ public class RecentAppStatsMixin implements LifecycleObserver, OnStart {
         ));
     }
 
-    public RecentAppStatsMixin(Context context, int maximumApps) {
+    public RecentAppStatsMixin(Context context, int maximumApps, boolean excludeProfiles) {
         mContext = context;
         mMaximumApps = maximumApps;
+        mExcludeProfiles = excludeProfiles;
         mPm = mContext.getPackageManager();
         mPowerManager = mContext.getSystemService(PowerManager.class);
         mUserManager = mContext.getSystemService(UserManager.class);
@@ -93,6 +96,10 @@ public class RecentAppStatsMixin implements LifecycleObserver, OnStart {
                 (Application) mContext.getApplicationContext());
         mRecentApps = new ArrayList<>();
         mAppStatsListeners = new ArrayList<>();
+    }
+
+    public RecentAppStatsMixin(Context context, int maximumApps) {
+        this(context, maximumApps, false);
     }
 
     @Override
@@ -123,8 +130,14 @@ public class RecentAppStatsMixin implements LifecycleObserver, OnStart {
         mCalendar.add(Calendar.DAY_OF_YEAR, -1);
 
         List<UsageStatsWrapper> usageStatsAllUsers = new ArrayList<>();
+        List<UserHandle> profiles;
 
-        List<UserHandle> profiles = mUserManager.getUserProfiles();
+        if (mExcludeProfiles) {
+            profiles = Arrays.asList(Process.myUserHandle());
+        } else {
+            profiles = mUserManager.getUserProfiles();
+        }
+
         for (UserHandle userHandle : profiles) {
             int userId = userHandle.getIdentifier();
 

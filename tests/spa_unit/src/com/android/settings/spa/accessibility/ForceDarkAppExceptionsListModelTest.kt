@@ -60,6 +60,7 @@ class ForceDarkAppExceptionsListModelTest {
     @Before
     fun setup() {
         whenever(context.packageName).thenReturn("package.test")
+        whenever(context.createContextAsUser(any(), anyInt())).thenReturn(context)
         whenever(mockPackageManager.resolveActivity(any(), anyInt())).thenReturn(null)
         whenever(context.packageManager).thenReturn(mockPackageManager)
         whenever(usageStatsManager.queryAndAggregateUsageStats(anyLong(), anyLong()))
@@ -101,49 +102,19 @@ class ForceDarkAppExceptionsListModelTest {
         whenever(usageStatsB.lastTimeUsed).thenReturn(300L)
         whenever(usageStatsC.lastTimeUsed).thenReturn(200L)
 
-        val source =
-            listOf(
-                AppEntry(
-                    ForceDarkAppExceptionRecord(
-                        app = APP_A,
-                        controller = ForceDarkAppExceptionsController(APP_A, repository),
-                    ),
-                    "appA",
-                    CollationKey("first", byteArrayOf(0)),
-                ),
-                AppEntry(
-                    ForceDarkAppExceptionRecord(
-                        app = APP_B,
-                        controller = ForceDarkAppExceptionsController(APP_B, repository),
-                    ),
-                    "appB",
-                    CollationKey("second", byteArrayOf(0)),
-                ),
-                AppEntry(
-                    ForceDarkAppExceptionRecord(
-                        app = APP_C,
-                        controller = ForceDarkAppExceptionsController(APP_C, repository),
-                    ),
-                    "appC",
-                    CollationKey("third", byteArrayOf(0)),
-                ),
-                AppEntry(
-                    ForceDarkAppExceptionRecord(
-                        app = APP_D,
-                        controller = ForceDarkAppExceptionsController(APP_D, repository),
-                    ),
-                    "appD",
-                    CollationKey("fourth", byteArrayOf(0)),
-                ),
-                AppEntry(
-                    ForceDarkAppExceptionRecord(
-                        app = APP_E,
-                        controller = ForceDarkAppExceptionsController(APP_E, repository),
-                    ),
-                    "appE",
-                    CollationKey("fifth", byteArrayOf(0)),
-                ),
+        val sourceFlow =
+            listModel.transform(
+                userIdFlow = flowOf(USER_ID),
+                appListFlow = flowOf(listOf(APP_A, APP_B, APP_C, APP_D, APP_E)),
             )
+        val source =
+            sourceFlow.first().mapIndexed { index, appRecord ->
+                AppEntry(
+                    appRecord,
+                    appRecord.app.packageName,
+                    CollationKey(index.toString(), byteArrayOf(0)),
+                )
+            }
 
         val orderedPackageNames: List<String> =
             source.sortedWith(listModel.getComparator(0)).map { it.record.app.packageName }

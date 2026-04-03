@@ -17,33 +17,23 @@ package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.os.SystemProperties;
 import android.util.FeatureFlagUtils;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.android.settings.bluetooth.Utils;
-import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
-import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
-
-import org.junit.Before;
+import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
 
 /** Tests for {@link AccessibilityAudioRoutingFragment}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class})
 public class AccessibilityAudioRoutingFragmentTest {
 
     @Rule
@@ -51,26 +41,22 @@ public class AccessibilityAudioRoutingFragmentTest {
 
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
+    private static final String ASHA_PROFILE_CENTRAL_PROPERTY =
+            "bluetooth.profile.asha.central.enabled";
+    private static final String HAP_PROFILE_CLIENT_PROPERTY =
+            "bluetooth.profile.hap.client.enabled";
 
-    @Mock
-    private LocalBluetoothManager mLocalBluetoothManager;
-    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
-    private BluetoothAdapter mBluetoothAdapter;
-
-    @Before
-    public void setUp() {
-        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
-        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
+    @After
+    public void tearDown() {
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "");
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "");
     }
 
     @Test
     public void deviceSupportsHearingAidAndPageEnabled_isPageSearchEnabled_returnTrue() {
         FeatureFlagUtils.setEnabled(mContext,
                 FeatureFlagUtils.SETTINGS_AUDIO_ROUTING, true);
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
 
         assertThat(AccessibilityAudioRoutingFragment.isPageSearchEnabled(mContext)).isTrue();
     }
@@ -79,8 +65,8 @@ public class AccessibilityAudioRoutingFragmentTest {
     public void deviceDoesNotSupportHearingAidAndPageEnabled_isPageSearchEnabled_returnFalse() {
         FeatureFlagUtils.setEnabled(mContext,
                 FeatureFlagUtils.SETTINGS_AUDIO_ROUTING, true);
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEADSET);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "false");
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "false");
 
         assertThat(AccessibilityAudioRoutingFragment.isPageSearchEnabled(mContext)).isFalse();
     }
@@ -89,8 +75,7 @@ public class AccessibilityAudioRoutingFragmentTest {
     public void deviceSupportsHearingAidAndPageDisabled_isPageSearchEnabled_returnFalse() {
         FeatureFlagUtils.setEnabled(mContext,
                 FeatureFlagUtils.SETTINGS_AUDIO_ROUTING, false);
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
 
         assertThat(AccessibilityAudioRoutingFragment.isPageSearchEnabled(mContext)).isFalse();
     }

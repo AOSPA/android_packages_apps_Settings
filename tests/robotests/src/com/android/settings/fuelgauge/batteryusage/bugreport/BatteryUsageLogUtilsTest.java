@@ -23,15 +23,16 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.fuelgauge.BatteryUsageHistoricalLogEntry.Action;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.android.util.concurrent.PausedExecutorService;
-import org.robolectric.shadows.ShadowLooper;
+import org.robolectric.annotation.Config;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -40,21 +41,24 @@ import java.util.List;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(RobolectricTestRunner.class)
+@Config(shadows = {ShadowThreadUtils.class})
 public final class BatteryUsageLogUtilsTest {
 
     private StringWriter mTestStringWriter;
     private PrintWriter mTestPrintWriter;
     private Context mContext;
-    private PausedExecutorService mExecutorService;
 
     @Before
     public void setUp() {
-        mExecutorService = new PausedExecutorService();
-        BatteryUsageLogUtils.setExecutor(mExecutorService);
         mContext = ApplicationProvider.getApplicationContext();
         mTestStringWriter = new StringWriter();
         mTestPrintWriter = new PrintWriter(mTestStringWriter);
         BatteryUsageLogUtils.getSharedPreferences(mContext).edit().clear().commit();
+    }
+
+    @After
+    public void tearDown() {
+        ShadowThreadUtils.reset();
     }
 
     @Test
@@ -76,14 +80,12 @@ public final class BatteryUsageLogUtilsTest {
         }
         writeLogWrapper(mContext, Action.EXECUTE_JOB, "execute", expectedTokens);
 
-        assertActionCount("EXECUTE_JOB", 0);
-        mExecutorService.runAll();
-        ShadowLooper.idleMainLooper();
+        assertActionCount(Action.EXECUTE_JOB.name(), 0);
         BatteryUsageLogUtils.printHistoricalLog(mContext, mTestPrintWriter);
 
         assertInOrder(expectedTokens);
-        assertActionCount("SCHEDULE_JOB", expectedCount);
-        assertActionCount("EXECUTE_JOB", 1);
+        assertActionCount(Action.SCHEDULE_JOB.name(), expectedCount);
+        assertActionCount(Action.EXECUTE_JOB.name(), 1);
     }
 
     @Test
@@ -95,15 +97,13 @@ public final class BatteryUsageLogUtilsTest {
             writeLogWrapper(mContext, Action.EXECUTE_JOB, "" + i, expectedTokens);
         }
 
-        assertActionCount("EXECUTE_JOB", 0);
-        mExecutorService.runAll();
-        ShadowLooper.idleMainLooper();
+        assertActionCount(Action.EXECUTE_JOB.name(), 0);
         BatteryUsageLogUtils.printHistoricalLog(mContext, mTestPrintWriter);
 
         final String dumpResults = mTestStringWriter.toString();
-        assertThat(dumpResults.contains("SCHEDULE_JOB")).isFalse();
+        assertThat(dumpResults.contains(Action.SCHEDULE_JOB.name())).isFalse();
         assertInOrder(expectedTokens);
-        assertActionCount("EXECUTE_JOB", BatteryUsageLogUtils.MAX_ENTRIES);
+        assertActionCount(Action.EXECUTE_JOB.name(), BatteryUsageLogUtils.MAX_ENTRIES);
     }
 
     private void assertActionCount(String token, int count) {

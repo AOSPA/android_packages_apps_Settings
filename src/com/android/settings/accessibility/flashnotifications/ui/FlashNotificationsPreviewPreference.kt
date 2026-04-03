@@ -29,6 +29,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSystemStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -88,6 +89,8 @@ class FlashNotificationsPreviewPreference :
         }
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context): Boolean {
         val currentState = FlashNotificationsUtil.getFlashNotificationsState(context)

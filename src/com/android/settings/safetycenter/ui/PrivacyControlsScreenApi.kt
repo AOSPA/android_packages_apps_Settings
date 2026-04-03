@@ -24,8 +24,9 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 /**
@@ -51,7 +52,7 @@ class PrivacyControlsScreenApi :
         ) {
             sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
-            preconditions(R.string.sensor_toggle_unsupported) {
+            preconditions("The device must support the camera sensor toggle.") {
                 val helper = SensorPrivacyManagerHelper.getInstance(context)!!
                 if (helper.supportsSensorToggle(SensorPrivacyManager.Sensors.CAMERA)) {
                     Allowed
@@ -81,7 +82,7 @@ class PrivacyControlsScreenApi :
         ) {
             sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
-            preconditions(R.string.sensor_toggle_unsupported) {
+            preconditions("The device must support the microphone sensor toggle.") {
                 val helper = SensorPrivacyManagerHelper.getInstance(context)!!
                 if (helper.supportsSensorToggle(SensorPrivacyManager.Sensors.MICROPHONE)) {
                     Allowed
@@ -157,63 +158,6 @@ class PrivacyControlsScreenApi :
                     )
                 }
             }
-        }
-
-        // Health Connect deeplink
-        preference(
-            key = "health_connect",
-            purpose = R.string.health_connect_purpose,
-            type = AnyBoolean,
-        ) {
-            preconditions(R.string.safety_source_unavailable) {
-                if (isSafetySourceVisible(context, "AndroidHealthConnect")) {
-                    Allowed
-                } else {
-                    Disallowed(R.string.safety_source_unavailable)
-                }
-            }
-            get { execute { true } }
-        }
-
-        // App function access deeplink
-        preference(
-            key = "app_function_access",
-            purpose = R.string.app_function_access_purpose,
-            type = AnyBoolean,
-        ) {
-            preconditions(R.string.safety_source_unavailable) {
-                if (isSafetySourceVisible(context, "AndroidAppFunctionAccess")) {
-                    Allowed
-                } else {
-                    Disallowed(R.string.safety_source_unavailable)
-                }
-            }
-            get { execute { true } }
-        }
-
-        // Data sharing updates for location deeplink
-        preference(
-            key = "location_data_sharing_updates",
-            purpose = R.string.location_data_sharing_updates_purpose,
-            type = AnyBoolean,
-        ) {
-            preconditions(R.string.safety_source_unavailable) {
-                if (isSafetySourceVisible(context, "AndroidPrivacyAppDataSharingUpdates")) {
-                    Allowed
-                } else {
-                    Disallowed(R.string.safety_source_unavailable)
-                }
-            }
-            get { execute { true } }
-        }
-
-        // Location access deeplink
-        preference(
-            key = "privacy_location_access",
-            purpose = R.string.privacy_location_access_purpose,
-            type = AnyBoolean,
-        ) {
-            get { execute { true } }
         }
     }
 

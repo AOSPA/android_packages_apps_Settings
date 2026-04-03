@@ -48,7 +48,10 @@ class RegionPickerApiFirstScreen :
             key = KEY_PREFERENCE,
             purpose = R.string.system_locale_region_picker_preference_purpose,
             type =
-                GeneratedType(description = R.string.default_system_language_region_description) {
+                GeneratedType(
+                    description = R.string.default_system_language_region_description,
+                    key = "SystemRegionCountryCode",
+                ) {
                     val defaultLocaleInfo = LocaleStore.getLocaleInfo(Locale.getDefault())
                     val parentLocale = defaultLocaleInfo.parent
                     val parentLocaleInfo = LocaleStore.getLocaleInfo(parentLocale)

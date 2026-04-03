@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
  * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
 package com.android.settings.network.telephony.cdma;
 
 import static android.telephony.TelephonyManager.NETWORK_MODE_LTE_GSM_WCDMA;
@@ -73,6 +75,7 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
                 }
             }
 
+// QTI_BEGIN: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
             long allowedNetworkTypes = NETWORK_MODE_UNKNOWN;
             try {
                 allowedNetworkTypes = mTelephonyManager.getAllowedNetworkTypesForReason(
@@ -80,9 +83,12 @@ public class CdmaSystemSelectPreferenceController extends CdmaBasePreferenceCont
             } catch (Exception ex) {
                 Log.e(TAG, "updateState: getAllowedNetworkTypesForReason exception", ex);
             }
+// QTI_END: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
             final int settingsNetworkMode =
                     hasTelephonyMgr ? RadioAccessFamily.getNetworkTypeFromRaf(
+// QTI_BEGIN: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
                             (int) allowedNetworkTypes) : NETWORK_MODE_UNKNOWN;
+// QTI_END: 2024-08-01: Telephony: Handle getAllowedNetworkTypesForReason exceptions
             final boolean enableList = settingsNetworkMode != NETWORK_MODE_LTE_GSM_WCDMA
                     && settingsNetworkMode != NETWORK_MODE_NR_LTE_GSM_WCDMA
                     && !mIsAirplaneModeOn;

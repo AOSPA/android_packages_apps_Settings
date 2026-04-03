@@ -24,6 +24,7 @@ message BatteryOptimizeHistoricalLogEntry {
     EXPIRATION_RESET = 8;
     BATTERY_TIP_APPLY = 9;
     BATTERY_TIP_ACCEPT= 10;
+    SETTINGS_API_APPLY = 11;
   }
 
   optional string package_name = 1;

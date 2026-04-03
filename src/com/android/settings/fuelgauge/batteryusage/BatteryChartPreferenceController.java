@@ -16,6 +16,9 @@
 
 package com.android.settings.fuelgauge.batteryusage;
 
+import static com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoDialog.BATTERY_ADVANCE_INFO_SETTINGS;
+import static com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoDialog.DEFAULT;
+import static com.android.settings.fuelgauge.batteryusage.BatteryAdvanceInfoDialog.ENABLE;
 import static com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController.SlotUpdateSource.CLICK_DAILY_CHART;
 import static com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController.SlotUpdateSource.CLICK_HOURLY_CHART;
 import static com.android.settings.fuelgauge.batteryusage.BatteryChartPreferenceController.SlotUpdateSource.HIGHLIGHT_SLOT;
@@ -26,9 +29,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -45,6 +51,7 @@ import com.android.settings.R;
 import com.android.settings.SettingsActivity;
 import com.android.settings.Utils;
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.core.instrumentation.InstrumentedDialogFragment;
 import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.core.AbstractPreferenceController;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
@@ -52,6 +59,7 @@ import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnCreate;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
+import com.android.settingslib.core.lifecycle.events.OnPause;
 import com.android.settingslib.core.lifecycle.events.OnResume;
 import com.android.settingslib.core.lifecycle.events.OnSaveInstanceState;
 
@@ -71,6 +79,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
                 OnCreate,
                 OnDestroy,
                 OnSaveInstanceState,
+                OnPause,
                 OnResume {
     private static final String TAG = "BatteryChartPreferenceController";
     private static final String PREFERENCE_KEY = "battery_chart";
@@ -123,6 +132,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
 
     private final SettingsActivity mActivity;
     private final MetricsFeatureProvider mMetricsFeatureProvider;
+    private final ContentObserver mContentObserver;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
     private final AnimatorListenerAdapter mHourlyChartFadeInAdapter =
             createHourlyChartAnimatorListenerAdapter(/* visible= */ true);
@@ -143,6 +153,7 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         mActivity = activity;
         mIs24HourFormat = DateFormat.is24HourFormat(context);
         mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
+        mContentObserver = getBatteryAdvanceInfoObserver();
         if (lifecycle != null) {
             lifecycle.addObserver(this);
         }
@@ -167,6 +178,15 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     public void onResume() {
         mIs24HourFormat = DateFormat.is24HourFormat(mContext);
         mMetricsFeatureProvider.action(mPrefContext, SettingsEnums.OPEN_BATTERY_USAGE);
+        mContext.getContentResolver().registerContentObserver(
+                Settings.Global.getUriFor(BATTERY_ADVANCE_INFO_SETTINGS),
+                /* notifyForDescendants= */ false,
+                mContentObserver);
+    }
+
+    @Override
+    public void onPause() {
+        mContext.getContentResolver().unregisterContentObserver(mContentObserver);
     }
 
     @Override
@@ -254,8 +274,18 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
         }
         if (mIsFirstLaunch && FeatureFactory.getFeatureFactory()
                 .getPowerUsageFeatureProvider().isBatteryAdvanceInfoEnabled()) {
-            // Select last daily slot instead of all by default once available.
-            mDailyChartIndex = mDailyViewModel.getLastSlotIndex();
+            final int batteryAdvanceInfoSettings = getBatteryAdvanceInfoSettings();
+            if (batteryAdvanceInfoSettings == DEFAULT) {
+                final InstrumentedDialogFragment batteryAdvanceInfoDialog =
+                        FeatureFactory.getFeatureFactory()
+                                .getPowerUsageFeatureProvider().getBatteryAdvanceInfoDialog();
+                if (batteryAdvanceInfoDialog != null) {
+                    batteryAdvanceInfoDialog.show(mActivity.getSupportFragmentManager(), TAG);
+                }
+            } else if (batteryAdvanceInfoSettings == ENABLE) {
+                // Select last daily slot instead of all by default once available.
+                mDailyChartIndex = mDailyViewModel.getLastSlotIndex();
+            }
             mIsFirstLaunch = false;
         }
         refreshUi();
@@ -598,6 +628,26 @@ public class BatteryChartPreferenceController extends AbstractPreferenceControll
     private boolean isAllSelected() {
         return (isBatteryLevelDataInOneDay() || mDailyChartIndex == SELECTED_INDEX_ALL)
                 && mHourlyChartIndex == SELECTED_INDEX_ALL;
+    }
+
+    private ContentObserver getBatteryAdvanceInfoObserver() {
+        return new ContentObserver(new Handler(Looper.getMainLooper())) {
+            @Override
+            public void onChange(boolean selfChange, Uri uri) {
+                if (getBatteryAdvanceInfoSettings() == ENABLE) {
+                    // Select last daily slot instead of all by default once available.
+                    mDailyChartIndex = mDailyViewModel.getLastSlotIndex();
+                }
+                if (mOnSelectedIndexUpdatedListener != null) {
+                    mOnSelectedIndexUpdatedListener.onSelectedIndexUpdated(CLICK_DAILY_CHART);
+                }
+            }
+        };
+    }
+
+    private int getBatteryAdvanceInfoSettings() {
+        return Settings.Global.getInt(
+                mContext.getContentResolver(), BATTERY_ADVANCE_INFO_SETTINGS, DEFAULT);
     }
 
     @VisibleForTesting

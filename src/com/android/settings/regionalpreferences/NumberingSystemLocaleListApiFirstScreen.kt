@@ -38,6 +38,7 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
 import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(NumberingSystemLocaleListApiFirstScreen.KEY, parameterized = true)
@@ -57,7 +58,10 @@ class NumberingSystemLocaleListApiFirstScreen :
                 name = KEY_SELECTED_LANGUAGE,
                 purpose = R.string.regional_preference_numbering_system_parameter_purpose,
                 type =
-                    GeneratedParameterType(R.string.numbering_system_parameter_description) {
+                    GeneratedParameterType(
+                        R.string.numbering_system_parameter_description,
+                        key = "NumberingSystemLanguageCode",
+                    ) {
                         getNumberingSystemLocales().map {
                             GeneratedValue(it.toLanguageTag().safe(), getLocaleNameWithNumberingSystem(it).safe())
                         }
@@ -74,7 +78,7 @@ class NumberingSystemLocaleListApiFirstScreen :
             if (getNumberingSystemLocales().isNotEmpty()) {
                 Allowed
             } else {
-                Custom(R.string.numbering_system_screen_unavailable)
+                Custom(R.string.numbering_system_screen_unavailable, stability = PreconditionStability.UNSTABLE)
             }
         }
 

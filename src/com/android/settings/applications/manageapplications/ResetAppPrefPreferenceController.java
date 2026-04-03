@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
+/*
+ * Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.applications.manageapplications;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
+import android.telecom.TelecomManager;
 import android.text.TextUtils;
 
 import androidx.preference.Preference;
@@ -87,9 +93,7 @@ public class ResetAppPrefPreferenceController extends AbstractPreferenceControll
         if (!Utils.isVoiceCapable(mContext)) {
             return false;
         }
-        TelephonyManager telephonyManager = mContext.getSystemService(TelephonyManager.class);
-        return telephonyManager != null
-                && telephonyManager.getCallState(telephonyManager.getSubscriptionId())
-                        != TelephonyManager.CALL_STATE_IDLE;
+        TelecomManager telecomManager = mContext.getSystemService(TelecomManager.class);
+        return telecomManager != null && telecomManager.isInCall();
     }
 }

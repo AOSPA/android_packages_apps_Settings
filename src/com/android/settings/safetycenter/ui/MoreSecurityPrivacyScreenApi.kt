@@ -112,7 +112,7 @@ class MoreSecurityPrivacyScreenApi :
         ) {
             sensitivityLevel(SensitivityLevel.REQUIRES_CONFIRMATION)
 
-            preconditions(R.string.content_capture_unavailable) {
+            preconditions("The device must support content capture and the feature must not be disabled by any device or enterprise restrictions.") {
                 if (
                     !ContentCaptureUtils.isFeatureAvailable() ||
                         ContentCaptureUtils.getServiceSettingsComponentName() != null

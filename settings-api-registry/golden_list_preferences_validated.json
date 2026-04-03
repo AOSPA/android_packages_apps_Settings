@@ -6,16 +6,6 @@
   },
   {
     "screen_key": "dark_ui_mode",
-    "preference_key": "standard_dark_theme",
-    "is_writable": true
-  },
-  {
-    "screen_key": "dark_ui_mode",
-    "preference_key": "expanded_dark_theme",
-    "is_writable": true
-  },
-  {
-    "screen_key": "dark_ui_mode",
     "preference_key": "dark_ui_auto_mode",
     "is_writable": true
   },
@@ -27,16 +17,6 @@
   {
     "screen_key": "daltonizer_preference",
     "preference_key": "accessibility_display_daltonizer_enabled",
-    "is_writable": true
-  },
-  {
-    "screen_key": "adaptive_connectivity",
-    "preference_key": "adaptive_connectivity_wifi_enabled",
-    "is_writable": true
-  },
-  {
-    "screen_key": "adaptive_connectivity",
-    "preference_key": "adaptive_connectivity_mobile_network_enabled",
     "is_writable": true
   },
   {
@@ -290,11 +270,6 @@
     "is_writable": true
   },
   {
-    "screen_key": "autoclick_preference",
-    "preference_key": "autoclick_preference_preference",
-    "is_writable": false
-  },
-  {
     "screen_key": "media_controls",
     "preference_key": "qs_media_resumption",
     "is_writable": true
@@ -347,6 +322,581 @@
   {
     "screen_key": "button_navigation_settings_page",
     "preference_key": "navbar_order_preference_reverse",
+    "is_writable": true
+  },
+  {
+    "screen_key": "a11y_service_detail_screen",
+    "preference_key": "service_shortcut",
+    "is_writable": false
+  },
+  {
+    "screen_key": "a11y_service_detail_screen",
+    "preference_key": "use_service",
+    "is_writable": false
+  },
+  {
+    "screen_key": "accessibility_color_and_motion",
+    "preference_key": "disable_window_blurs",
+    "is_writable": true
+  },
+  {
+    "screen_key": "accessibility_control_timeout_preference_fragment",
+    "preference_key": "accessibility_control_timeout_10secs",
+    "is_writable": false
+  },
+  {
+    "screen_key": "accessibility_control_timeout_preference_fragment",
+    "preference_key": "accessibility_control_timeout_1min",
+    "is_writable": false
+  },
+  {
+    "screen_key": "accessibility_control_timeout_preference_fragment",
+    "preference_key": "accessibility_control_timeout_2mins",
+    "is_writable": false
+  },
+  {
+    "screen_key": "accessibility_control_timeout_preference_fragment",
+    "preference_key": "accessibility_control_timeout_30secs",
+    "is_writable": false
+  },
+  {
+    "screen_key": "accessibility_control_timeout_preference_fragment",
+    "preference_key": "accessibility_control_timeout_default",
+    "is_writable": false
+  },
+  {
+    "screen_key": "accessibility_shortcuts_preference_screen",
+    "preference_key": "accessibility_shortcut_on_lock_screen",
+    "is_writable": false
+  },
+  {
+    "screen_key": "adaptive_battery_entry",
+    "preference_key": "adaptive_battery_management_enabled",
+    "is_writable": true
+  },
+  {
+    "screen_key": "api_battery_saver_screen",
+    "preference_key": "battery_saver_type",
+    "is_writable": true
+  },
+  {
+    "screen_key": "api_bluetooth_switchbar_screen",
+    "preference_key": "bluetooth_auto_on_settings_toggle",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_dark_ui_mode",
+    "preference_key": "dark_theme_end_time",
+    "is_writable": true
+  },
+  {
+    "screen_key": "api_dark_ui_mode",
+    "preference_key": "dark_theme_mode_selector",
+    "is_writable": true
+  },
+  {
+    "screen_key": "api_dark_ui_mode",
+    "preference_key": "dark_theme_start_time",
+    "is_writable": true
+  },
+  {
+    "screen_key": "api_device_model",
+    "preference_key": "manufactured_year",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_my_device_info_pref_screen",
+    "preference_key": "device_name",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_my_device_info_pref_screen",
+    "preference_key": "uptime",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_tether_settings",
+    "preference_key": "enable_ethernet_tethering",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_tether_settings",
+    "preference_key": "usb_tether_settings",
+    "is_writable": false
+  },
+  {
+    "screen_key": "audio_adjustment_preference_screen",
+    "preference_key": "master_mono",
+    "is_writable": true
+  },
+  {
+    "screen_key": "autoclick_preference",
+    "preference_key": "accessibility_autoclick_delay",
+    "is_writable": false
+  },
+  {
+    "screen_key": "autoclick_preference",
+    "preference_key": "accessibility_autoclick_enabled",
+    "is_writable": false
+  },
+  {
+    "screen_key": "battery_info_screen",
+    "preference_key": "battery_info_cycle_count",
+    "is_writable": false
+  },
+  {
+    "screen_key": "battery_info_screen",
+    "preference_key": "battery_info_first_use_date",
+    "is_writable": false
+  },
+  {
+    "screen_key": "battery_info_screen",
+    "preference_key": "battery_info_manufacture_date",
+    "is_writable": false
+  },
+  {
+    "screen_key": "battery_saver_schedule",
+    "preference_key": "low_power_mode_reminder_enabled",
+    "is_writable": true
+  },
+  {
+    "screen_key": "battery_saver_screen",
+    "preference_key": "battery_saver",
+    "is_writable": true
+  },
+  {
+    "screen_key": "color_mode",
+    "preference_key": "color_mode_preference",
+    "is_writable": false
+  },
+  {
+    "screen_key": "daltonizer_preference",
+    "preference_key": "accessibility_display_daltonizer_saturation_level",
+    "is_writable": true
+  },
+  {
+    "screen_key": "daltonizer_preference",
+    "preference_key": "daltonizer_shortcut_key",
+    "is_writable": true
+  },
+  {
+    "screen_key": "double_twist_gesture_screen",
+    "preference_key": "gesture_double_twist",
+    "is_writable": true
+  },
+  {
+    "screen_key": "flash_notifications",
+    "preference_key": "camera_flash_notification",
+    "is_writable": true
+  },
+  {
+    "screen_key": "flash_notifications",
+    "preference_key": "screen_flash_notification",
+    "is_writable": true
+  },
+  {
+    "screen_key": "hearing_devices",
+    "preference_key": "hearing_aid",
+    "is_writable": false
+  },
+  {
+    "screen_key": "hearing_devices",
+    "preference_key": "hearing_aids_shortcut_preference",
+    "is_writable": false
+  },
+  {
+    "screen_key": "long_press_power_pref_screen",
+    "preference_key": "gesture_power_menu_long_press_category",
+    "is_writable": true
+  },
+  {
+    "screen_key": "long_press_power_pref_screen",
+    "preference_key": "gesture_power_menu_long_press_for_assist_sensitivity",
+    "is_writable": true
+  },
+  {
+    "screen_key": "magnification_preference_screen",
+    "preference_key": "accessibility_magnification_capability",
+    "is_writable": true
+  },
+  {
+    "screen_key": "magnification_preference_screen",
+    "preference_key": "magnification_shortcut_preference",
+    "is_writable": true
+  },
+  {
+    "screen_key": "media_controls",
+    "preference_key": "media_controls_lock_screen",
+    "is_writable": false
+  },
+  {
+    "screen_key": "mobile_network_list",
+    "preference_key": "mobile_data",
+    "is_writable": false
+  },
+  {
+    "screen_key": "mobile_network_pref_screen",
+    "preference_key": "enabled_networks_key",
+    "is_writable": false
+  },
+  {
+    "screen_key": "mobile_network_pref_screen",
+    "preference_key": "mobile_network_spn",
+    "is_writable": false
+  },
+  {
+    "screen_key": "mobile_network_pref_screen",
+    "preference_key": "phone_number",
+    "is_writable": false
+  },
+  {
+    "screen_key": "mobile_network_pref_screen",
+    "preference_key": "status_header",
+    "is_writable": false
+  },
+  {
+    "screen_key": "mobile_network_pref_screen",
+    "preference_key": "use_sim_switch_catalyst",
+    "is_writable": false
+  },
+  {
+    "screen_key": "more_security_privacy_settings",
+    "preference_key": "content_capture",
+    "is_writable": false
+  },
+  {
+    "screen_key": "more_security_privacy_settings",
+    "preference_key": "privacy_camera_extensions_fallback",
+    "is_writable": false
+  },
+  {
+    "screen_key": "more_security_privacy_settings",
+    "preference_key": "privacy_media_controls_lockscreen",
+    "is_writable": false
+  },
+  {
+    "screen_key": "notification_cooldown_screen",
+    "preference_key": "polite_notification_global_pref",
+    "is_writable": true
+  },
+  {
+    "screen_key": "pickup_gesture_screen",
+    "preference_key": "gesture_pick_up",
+    "is_writable": true
+  },
+  {
+    "screen_key": "privacy_controls_screen",
+    "preference_key": "privacy_camera_toggle",
+    "is_writable": false
+  },
+  {
+    "screen_key": "privacy_controls_screen",
+    "preference_key": "privacy_mic_toggle",
+    "is_writable": false
+  },
+  {
+    "screen_key": "privacy_controls_screen",
+    "preference_key": "show_clip_access_notification",
+    "is_writable": false
+  },
+  {
+    "screen_key": "privacy_controls_screen",
+    "preference_key": "show_password",
+    "is_writable": false
+  },
+  {
+    "screen_key": "reduce_bright_colors_preference",
+    "preference_key": "reduce_bright_colors_shortcut",
+    "is_writable": true
+  },
+  {
+    "screen_key": "reduce_bright_colors_preference",
+    "preference_key": "reduce_bright_colors_switch",
+    "is_writable": true
+  },
+  {
+    "screen_key": "regional_preference_first_day_of_week",
+    "preference_key": "first_day_of_week_item_preference",
+    "is_writable": true
+  },
+  {
+    "screen_key": "regional_preference_measurement_system",
+    "preference_key": "measurement_system_item_preference",
+    "is_writable": true
+  },
+  {
+    "screen_key": "regional_preference_temperature",
+    "preference_key": "temperature_unit_preference",
+    "is_writable": true
+  },
+  {
+    "screen_key": "screen_timeout",
+    "preference_key": "adaptive_sleep",
+    "is_writable": false
+  },
+  {
+    "screen_key": "spatial_audio_screen",
+    "preference_key": "spatial_audio",
+    "is_writable": true
+  },
+  {
+    "screen_key": "spatial_audio_screen",
+    "preference_key": "spatial_audio_wired_headphones",
+    "is_writable": true
+  },
+  {
+    "screen_key": "tap_assistance_preference_screen",
+    "preference_key": "long_press_timeout",
+    "is_writable": false
+  },
+  {
+    "screen_key": "tap_screen_gesture",
+    "preference_key": "gesture_tap",
+    "is_writable": false
+  },
+  {
+    "screen_key": "tether_settings",
+    "preference_key": "enable_bluetooth_tethering",
+    "is_writable": false
+  },
+  {
+    "screen_key": "toggle_inversion_preference",
+    "preference_key": "accessibility_display_inversion_enabled",
+    "is_writable": true
+  },
+  {
+    "screen_key": "toggle_inversion_preference",
+    "preference_key": "color_inversion_shortcut_key",
+    "is_writable": true
+  },
+  {
+    "screen_key": "touch_sensitivity_settings_page",
+    "preference_key": "adaptive_touch_sensitivity_enabled",
+    "is_writable": true
+  },
+  {
+    "screen_key": "touch_sensitivity_settings_page",
+    "preference_key": "touch_sensitivity_enabled",
+    "is_writable": true
+  },
+  {
+    "screen_key": "user_settings_screen",
+    "preference_key": "enable_guest_calling",
+    "is_writable": false
+  },
+  {
+    "screen_key": "user_settings_screen",
+    "preference_key": "multiple_users_main_switch",
+    "is_writable": false
+  },
+  {
+    "screen_key": "user_settings_screen",
+    "preference_key": "user_settings_add_users_when_locked",
+    "is_writable": false
+  },
+  {
+    "screen_key": "vibration_intensity_screen",
+    "preference_key": "apply_ramping_ringer",
+    "is_writable": true
+  },
+  {
+    "screen_key": "vibration_intensity_screen",
+    "preference_key": "keyboard_vibration_enabled",
+    "is_writable": true
+  },
+  {
+    "screen_key": "vibration_screen",
+    "preference_key": "toggle_alarm_vibration_intensity",
+    "is_writable": true
+  },
+  {
+    "screen_key": "vibration_screen",
+    "preference_key": "toggle_apply_ramping_ringer",
+    "is_writable": true
+  },
+  {
+    "screen_key": "vibration_screen",
+    "preference_key": "toggle_haptic_feedback_intensity",
+    "is_writable": true
+  },
+  {
+    "screen_key": "vibration_screen",
+    "preference_key": "toggle_keyboard_vibration_enabled",
+    "is_writable": true
+  },
+  {
+    "screen_key": "vibration_screen",
+    "preference_key": "toggle_media_vibration_intensity",
+    "is_writable": true
+  },
+  {
+    "screen_key": "vibration_screen",
+    "preference_key": "toggle_notification_vibration_intensity",
+    "is_writable": true
+  },
+  {
+    "screen_key": "vibration_screen",
+    "preference_key": "toggle_ring_vibration_intensity",
+    "is_writable": true
+  },
+  {
+    "screen_key": "api_app_storage_settings",
+    "preference_key": "app_size",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_app_storage_settings",
+    "preference_key": "cache_size",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_app_storage_settings",
+    "preference_key": "data_size",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_app_storage_settings",
+    "preference_key": "total_size",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_daltonizer_preference",
+    "preference_key": "daltonizer_mode_selector",
+    "is_writable": true
+  },
+  {
+    "screen_key": "api_double_tap_power_screen",
+    "preference_key": "gesture_double_power_tap_app",
+    "is_writable": true
+  },
+  {
+    "screen_key": "api_installed_app_detail_settings_screen",
+    "preference_key": "unused_apps_switch",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_mobile_network_pref_screen",
+    "preference_key": "button_roaming_key",
+    "is_writable": false
+  },
+  {
+    "screen_key": "api_sound_screen",
+    "preference_key": "vibrate_icon",
+    "is_writable": true
+  },
+  {
+    "screen_key": "configure_network_settings",
+    "preference_key": "enable_wifi_wakeup",
+    "is_writable": true
+  },
+  {
+    "screen_key": "magnification_preference_screen",
+    "preference_key": "accessibility_magnification_cursor_following_mode",
+    "is_writable": true
+  },
+  {
+    "screen_key": "magnification_preference_screen",
+    "preference_key": "accessibility_magnification_follow_keyboard_enabled",
+    "is_writable": true
+  },
+  {
+    "screen_key": "nfc_and_payment_screen",
+    "preference_key": "require_device_unlock_for_nfc",
+    "is_writable": false
+  },
+  {
+    "screen_key": "nfc_and_payment_screen",
+    "preference_key": "use_nfc",
+    "is_writable": false
+  },
+  {
+    "screen_key": "night_display",
+    "preference_key": "night_display_preference",
+    "is_writable": true
+  },
+  {
+    "screen_key": "reduce_bright_colors_preference",
+    "preference_key": "reduce_bright_colors_level",
+    "is_writable": true
+  },
+  {
+    "screen_key": "reduce_bright_colors_preference",
+    "preference_key": "reduce_bright_colors_persist_across_reboots",
+    "is_writable": true
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "pref_apps",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "pref_audio",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "pref_documents",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "pref_games",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "pref_images",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "pref_other",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "pref_system",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "pref_trash",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "pref_videos",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "storage_summary_total",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "storage_summary_used",
+    "is_writable": false
+  },
+  {
+    "screen_key": "storage_dashboard_fragment",
+    "preference_key": "temporary_files",
+    "is_writable": false
+  },
+  {
+    "screen_key": "usb_details_fragment",
+    "preference_key": "usb_details_power_role",
+    "is_writable": true
+  },
+  {
+    "screen_key": "usb_details_fragment",
+    "preference_key": "usb_transcode_files",
+    "is_writable": true
+  },
+  {
+    "screen_key": "zen_mode_screen",
+    "preference_key": "mode_manual_duration",
     "is_writable": true
   }
 ]

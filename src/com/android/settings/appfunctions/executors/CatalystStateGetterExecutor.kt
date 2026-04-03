@@ -18,6 +18,7 @@ package com.android.settings.appfunctions.executors
 
 import android.app.appsearch.GenericDocument
 import android.content.Context
+import android.provider.Settings
 import android.util.Log
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateItemProviderExecutorResult
@@ -25,6 +26,7 @@ import com.android.settings.appfunctions.utils.determineParamName
 import com.android.settings.appfunctions.utils.getPreference
 import com.android.settings.appfunctions.utils.settingsPreferenceValueToString
 import com.android.settingslib.metadata.KeyParameters
+import com.android.settingslib.utils.applications.AppUtils
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItemResponse
 import kotlinx.coroutines.Dispatchers
@@ -42,6 +44,17 @@ class CatalystStateGetterExecutor(private val context: Context) : DeviceStateExe
             }
             if (params == null) {
                 throw IllegalArgumentException("Provided params are null.")
+            }
+
+            if (
+                !(AppUtils.isDebuggable() &&
+                    Settings.Global.getInt(
+                        context.contentResolver,
+                        "com.android.settings.APP_FUNCTION_ITEM_GETTER_AVAILABLE",
+                        0,
+                    ) == 1)
+            ) {
+                return@withContext DeviceStateItemProviderExecutorResult(result = null)
             }
 
             val unparsedParams =
@@ -74,11 +87,13 @@ class CatalystStateGetterExecutor(private val context: Context) : DeviceStateExe
 
             val value = getPreference(context, screenKey, key, keyParameters)
             requireNotNull(value) { "Key [$fullKey] not found" }
+            val errorPrefix = if (value.hasError) "Error: " else ""
+            val jsonValueString = settingsPreferenceValueToString(value.settingsPreferenceValue)
             val item =
                 DeviceStateItem(
                     key = fullKey,
                     purpose = fullKey,
-                    jsonValue = settingsPreferenceValueToString(value.settingsPreferenceValue),
+                    jsonValue = "$errorPrefix$jsonValueString",
                 )
             val itemResponse = DeviceStateItemResponse(deviceStateItem = item)
             DeviceStateItemProviderExecutorResult(result = itemResponse)

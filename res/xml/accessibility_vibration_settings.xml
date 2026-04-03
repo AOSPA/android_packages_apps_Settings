@@ -86,6 +86,12 @@
             app:keywords="@string/keywords_keyboard_vibration"
             app:controller="com.android.settings.accessibility.KeyboardVibrationTogglePreferenceController"/>
 
+        <SwitchPreferenceCompat
+            android:key="toggle_keyboard_vibration_intensity"
+            android:title="@string/accessibility_keyboard_vibration_title"
+            app:keywords="@string/keywords_keyboard_vibration"
+            app:controller="com.android.settings.accessibility.KeyboardVibrationIntensitySwitchPreferenceController"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

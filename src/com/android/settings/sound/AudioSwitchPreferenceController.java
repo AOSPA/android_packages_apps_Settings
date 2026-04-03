@@ -18,8 +18,6 @@ package com.android.settings.sound;
 
 import static android.media.AudioManager.STREAM_DEVICES_CHANGED_ACTION;
 
-import static com.android.settingslib.media.flags.Flags.enableOutputSwitcherForSystemRouting;
-
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -117,13 +115,8 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         }
         mProfileManager = mLocalBluetoothManager.getProfileManager();
 
-        if (enableOutputSwitcherForSystemRouting()) {
-            mMediaSessionManager = context.getSystemService(MediaSessionManager.class);
-            mSessionListener = new SessionChangeListener();
-        } else {
-            mMediaSessionManager = null;
-            mSessionListener = null;
-        }
+        mMediaSessionManager = context.getSystemService(MediaSessionManager.class);
+        mSessionListener = new SessionChangeListener();
     }
 
     /**
@@ -373,14 +366,10 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
         intentFilter.addAction(STREAM_DEVICES_CHANGED_ACTION);
 
-        if (enableOutputSwitcherForSystemRouting()) {
-            mContext.registerReceiver(mReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
-            if (mMediaSessionManager != null) {
-                mMediaSessionManager.addOnActiveSessionsChangedListener(
-                        mSessionListener, null, mHandler);
-            }
-        } else {
-            mContext.registerReceiver(mReceiver, intentFilter);
+        mContext.registerReceiver(mReceiver, intentFilter, Context.RECEIVER_NOT_EXPORTED);
+        if (mMediaSessionManager != null) {
+            mMediaSessionManager.addOnActiveSessionsChangedListener(
+                    mSessionListener, null, mHandler);
         }
     }
 
@@ -388,10 +377,8 @@ public abstract class AudioSwitchPreferenceController extends BasePreferenceCont
         mLocalBluetoothManager.getEventManager().unregisterCallback(this);
         mAudioManager.unregisterAudioDeviceCallback(mAudioManagerAudioDeviceCallback);
         mContext.unregisterReceiver(mReceiver);
-        if (enableOutputSwitcherForSystemRouting()) {
-            if (mMediaSessionManager != null) {
-                mMediaSessionManager.removeOnActiveSessionsChangedListener(mSessionListener);
-            }
+        if (mMediaSessionManager != null) {
+            mMediaSessionManager.removeOnActiveSessionsChangedListener(mSessionListener);
         }
     }
 

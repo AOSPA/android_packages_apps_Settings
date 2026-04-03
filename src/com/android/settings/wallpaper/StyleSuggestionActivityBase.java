@@ -16,7 +16,6 @@
 
 package com.android.settings.wallpaper;
 
-import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.content.Intent;
@@ -24,6 +23,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.VisibleForTesting;
+import androidx.fragment.app.FragmentActivity;
 
 import com.android.settings.R;
 import com.android.settings.core.SubSettingLauncher;
@@ -31,7 +31,7 @@ import com.android.settings.display.WallpaperPreferenceController;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
-public abstract class StyleSuggestionActivityBase extends Activity {
+public abstract class StyleSuggestionActivityBase extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

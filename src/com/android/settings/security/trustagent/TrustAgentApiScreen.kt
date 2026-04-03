@@ -25,6 +25,7 @@ import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(TrustAgentApiScreen.KEY)
@@ -37,7 +38,7 @@ class TrustAgentApiScreen :
     ) {
     init {
         flag { Flags.catalystMigration26q2() }
-        preconditions(R.string.trust_agents_preconditions) {
+        preconditions("The device must support managing trust agents from settings, and the user must have a lock screen set.") {
             if (
                 context.resources.getBoolean(R.bool.config_show_manage_trust_agents) &&
                     FeatureFactory.featureFactory.securityFeatureProvider
@@ -47,9 +48,12 @@ class TrustAgentApiScreen :
                 Allowed
             } else {
                 if (!context.resources.getBoolean(R.bool.config_show_manage_trust_agents)) {
-                    Custom(R.string.trust_agents_not_available)
+                    Custom(R.string.trust_agents_not_available, stability = PreconditionStability.STABLE_UNTIL_APK_UPDATE)
                 } else {
-                    Custom(R.string.trust_agents_unset_lock_screen)
+                    Custom(
+                        R.string.trust_agents_unset_lock_screen,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
             }
         }

@@ -24,6 +24,7 @@ import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -40,7 +41,13 @@ class BlurSwitchPreference :
 
     override val availabilityDescription = "The device must support cross window blur."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context) = CROSS_WINDOW_BLUR_SUPPORTED
+
+    override fun getEnabledDescription(): String = "Battery saver must be turned off."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = !context.isPowerSaveMode()
 

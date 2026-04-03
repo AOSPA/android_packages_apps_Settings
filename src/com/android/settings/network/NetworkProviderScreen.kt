@@ -30,6 +30,7 @@ import com.android.settings.wifi.WifiDataUsagePreference
 import com.android.settings.wifi.WifiSwitchPreference
 import com.android.settings.wifi.savedaccesspoints2.SavedAccessPointsWifiScreen
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -61,6 +62,8 @@ open class NetworkProviderScreen :
 
     override val availabilityDescription =
         "The device must support showing internet settings in Settings."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_internet_settings)

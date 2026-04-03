@@ -49,9 +49,11 @@ class PersistentAfterRestartsPreference(
     override val indexable
         get() = false
 
+    override fun getEnabledDescription() = "The 'Extra dim' setting must be enabled"
+
     override fun isEnabled(context: Context): Boolean = extraDimStorage.getBoolean(KEY) == true
 
-    override fun storage(context: Context): KeyValueStore = SettingsSecureStore.get(context)
+    override fun storage(context: Context): KeyValueStore = SettingsSecureStore.get(context).apply { setDefaultValue(KEY, false) }
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 

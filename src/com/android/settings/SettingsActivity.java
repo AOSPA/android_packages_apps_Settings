@@ -72,6 +72,7 @@ import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
+import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
@@ -180,7 +181,9 @@ public class SettingsActivity extends SettingsBaseActivity
 
     private CharSequence mInitialTitle;
     private int mInitialTitleResId;
+// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
     private SmqSettings mSMQ;
+// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
 
     private boolean mBatteryPresent = true;
     private final BroadcastReceiver mBatteryInfoReceiver = new BroadcastReceiver() {
@@ -294,8 +297,10 @@ public class SettingsActivity extends SettingsBaseActivity
             getWindow().setUiOptions(intent.getIntExtra(EXTRA_UI_OPTIONS, 0));
         }
 
+// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         mSMQ = new SmqSettings(getApplicationContext());
 
+// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         // Getting Intent properties can only be done after the super.onCreate(...)
         final String initialFragmentName = getInitialFragmentName(intent);
 
@@ -303,7 +308,8 @@ public class SettingsActivity extends SettingsBaseActivity
         // insets.
         // If this is in setup flow, don't apply theme. Because light theme needs to be applied
         // in SettingsBaseActivity#onCreate().
-        if (isSubSettings(intent) && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
+        if (isSubSettings(intent) && !WizardManagerHelper.isAnySetupWizard(getIntent())
+                && !PartnerConfigHelper.shouldApplyModalDialog(this)) {
             int themeId = SettingsThemeHelper.isExpressiveTheme(this)
                     ? R.style.Theme_SubSettings_Expressive : R.style.Theme_SubSettings;
             setTheme(themeId);
@@ -406,7 +412,8 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private boolean isActionBarButtonEnabled(Intent intent) {
-        if (WizardManagerHelper.isAnySetupWizard(intent)) {
+        if (WizardManagerHelper.isAnySetupWizard(intent)
+                || PartnerConfigHelper.shouldApplyModalDialog(this)) {
             return false;
         }
         final boolean isSecondLayerPage =
@@ -508,6 +515,7 @@ public class SettingsActivity extends SettingsBaseActivity
     public Theme getTheme() {
         Theme theme = super.getTheme();
         if (!WizardManagerHelper.isAnySetupWizard(getIntent())
+                && !PartnerConfigHelper.shouldApplyModalDialog(this)
                 && SettingsThemeHelper.isExpressiveTheme(this)) {
             theme.applyStyle(R.style.Theme_SubSettings_Expressive, true);
         }
@@ -729,14 +737,18 @@ public class SettingsActivity extends SettingsBaseActivity
      */
     private void switchToFragment(String fragmentName, Bundle args, boolean validate,
             int titleResId, CharSequence title) {
+// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         if (fragmentName.equals(getString(R.string.qtifeedback_intent_action))){
              final Intent newIntent = new Intent(getString(R.string.qtifeedback_intent_action));
              newIntent.addCategory("android.intent.category.DEFAULT");
              startActivity(newIntent);
              finish();
+// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
              return;
+// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         }
 
+// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         Log.d(LOG_TAG, "Switching to fragment " + fragmentName);
 
         if (validate && !isValidFragment(fragmentName)) {
@@ -782,9 +794,11 @@ public class SettingsActivity extends SettingsBaseActivity
                 pm.hasSystemFeature(PackageManager.FEATURE_BLUETOOTH), isAdmin)
                 || somethingChanged;
 
+// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
         if(mSMQ.isShowSmqSettings()){
             somethingChanged = setTileEnabled(changedList, new ComponentName(packageName, Settings.SMQQtiFeedbackActivity.class.getName()), mSMQ.isShowSmqSettings(), isAdmin) || somethingChanged;
         }
+// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
 
         // Enable DataUsageSummaryActivity if the data plan feature flag is turned on otherwise
         // enable DataPlanUsageSummaryActivity.

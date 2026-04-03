@@ -54,9 +54,6 @@ public class MouseSwapPrimaryButtonPreferenceController extends TogglePreference
 
     @Override
     public int getAvailabilityStatus() {
-        if (!InputSettings.isMouseSwapPrimaryButtonFeatureFlagEnabled()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         return AVAILABLE;
     }
 

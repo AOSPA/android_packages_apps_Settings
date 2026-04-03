@@ -36,12 +36,14 @@ import com.android.settings.testutils2.HardwareUnsupportedException
 import com.android.settings.testutils2.InvalidValueException
 import com.android.settings.testutils2.MissingPermissionException
 import com.android.settings.testutils2.Parameters
+import com.android.settings.testutils2.RegionalRestrictionException
 import com.android.settingslib.datastore.or
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.RegionalRestriction
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
@@ -54,6 +56,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
 import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 @RunWith(AndroidJUnit4::class)
 class ApiTesterTest {
@@ -176,6 +179,15 @@ class ApiTesterTest {
                 }
             }
             preference(
+                key = "preference_with_fails_precondition_with_regional_restriction",
+                purpose = 0,
+                type = AnyString,
+            ) {
+                preconditions(0) { RegionalRestriction(R.string.hardware_unsupported_exception) }
+                get { execute { "Hello" } }
+                set { execute {} }
+            }
+            preference(
                 key = "preference_with_setter_and_getter_cant_set_a",
                 purpose = 0,
                 type = AnyString,
@@ -184,7 +196,7 @@ class ApiTesterTest {
                 get { execute { theValue } }
                 set {
                     valuePreconditions(0) { value ->
-                        if (value == "a") Custom(R.string.custom_exception) else Allowed
+                        if (value == "a") Custom(R.string.custom_exception, stability = PreconditionStability.UNSTABLE) else Allowed
                     }
                     execute { value -> theValue = value }
                 }
@@ -290,7 +302,7 @@ class ApiTesterTest {
                 preconditions(R.string.parameterized_precondition) {
                     if (parameters["package"] == "parameter1") {
                         Allowed
-                    } else Custom(R.string.parameter_must_be_parameter1)
+                    } else Custom(R.string.parameter_must_be_parameter1, stability = PreconditionStability.UNSTABLE)
                 }
                 get { execute { "hello" } }
             }
@@ -514,6 +526,20 @@ class ApiTesterTest {
     fun set_missingHardwareFromSetPrecondition_throwsException() {
         assertFailsWith<HardwareUnsupportedException> {
             tester.set("preference_with_fails_precondition_with_hardware_in_set", "v")
+        }
+    }
+
+    @Test
+    fun get_regionalRestriction_throwsException() {
+        assertFailsWith<RegionalRestrictionException> {
+            tester.get<String>("preference_with_fails_precondition_with_regional_restriction")
+        }
+    }
+
+    @Test
+    fun set_regionalRestriction_throwsException() {
+        assertFailsWith<RegionalRestrictionException> {
+            tester.set("preference_with_fails_precondition_with_regional_restriction", "v")
         }
     }
 

@@ -2485,7 +2485,9 @@
     <!-- Message for talkback to say when focus on Advanced Options[CHAR LIMIT=NONE] -->
     <string name="wifi_advanced_toggle_description">Drop down list Advanced Options</string>
     <!-- Extended message for talkback to say when Advanced Options is collapsed. (e.g., Double-tap to expand) [CHAR LIMIT=NONE] -->
-    <string name="wifi_advanced_toggle_description_collapsed">expand</string>
+    <string name="wifi_advanced_toggle_action_expand">expand</string>
+    <!-- Extended message for talkback to say when Advanced Options is expanded. (e.g., Double-tap to collapse) [CHAR LIMIT=NONE] -->
+    <string name="wifi_advanced_toggle_action_collapse">collapse</string>
     <!-- Label for the SSID of the network -->
     <string name="wifi_ssid">Network name*</string>
     <!-- Hint for a text field to enter the SSID of a hidden wifi network. [CHAR LIMIT=35] -->
@@ -3647,6 +3649,10 @@
     <string name="enter_current_sim_pin_after_mismatch">Wrong PIN. Attempts remaining: <xliff:g id="num_attempts">%1$d</xliff:g></string>
     <!-- Accessibility hint - tell the user they should be entering the currend SIM card PIN. [CHAR LIMIT=NONE] -->
     <string name="enter_current_sim_pin_hint">Enter the current PIN code of the SIM card</string>
+    <!-- The title for the first SIM card slot preference. [CHAR LIMIT=NONE] -->
+    <string name="first_sim_card_slot_title">First SIM card slot</string>
+    <!-- The title for the second SIM card slot preference. [CHAR LIMIT=NONE] -->
+    <string name="second_sim_card_slot_title">Second SIM card slot</string>
 
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=40] -->
     <string name="sim_change_data_title">
@@ -5134,20 +5140,24 @@
     <string name="ime_switcher_button_in_navbar_title">Show the keyboard switch key</string>
     <!-- Summary for the button to toggle the 'IME Switcher Button' preference visibility.[CHAR LIMIT=NONE] -->
     <string name="ime_switcher_button_in_navbar_summary">Allow the keyboard switcher button to be shown in the navigation bar, when an input field is selected</string>
-    <!-- Title for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
-    <string name="virtual_keyboard_category">On-screen keyboard</string>
-    <!-- Keywords for the 'virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
-    <string name="keywords_virtual_keyboard">Gboard</string>
-    <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
-    <string name="available_virtual_keyboard_category">Available On-screen keyboard</string>
+    <!-- Title for the 'keyboard apps' preference sub-screen. [CHAR LIMIT=35] -->
+    <string name="keyboard_apps_category">Keyboard apps</string>
+    <!-- Summary for the 'keyboard apps' preference sub-screen. [CHAR LIMIT=NONE] -->
+    <string name="keyboard_apps_category_summary">Language and app settings for <xliff:g id="keyboard_apps_list">%1$s</xliff:g></string>
+    <!-- Keywords for the 'keyboard apps' preference sub-screen. [CHAR LIMIT=35] -->
+    <string name="keywords_keyboard_apps">Gboard</string>
+    <!-- Title for the 'available keyboard apps' preference sub-screen. [CHAR LIMIT=35] -->
+    <string name="available_keyboard_apps_category">Available keyboard apps</string>
     <!-- Title for the 'keyboard options' preference category. [CHAR LIMIT=35] -->
     <string name="keyboard_options_category">Options</string>
     <!-- Title for the 'keyboard accessibility options' preference category. [CHAR LIMIT=35] -->
     <string name="keyboard_a11y_category">Accessibility</string>
-    <!-- Title for the 'physical keyboard' settings screen. [CHAR LIMIT=35] -->
-    <string name="physical_keyboard_title">Physical keyboard</string>
-    <!-- Title for the 'physical keyboard' settings screen. [CHAR LIMIT=35] -->
-    <string name="physical_keyboard_layout_picker_title">Physical keyboard layout picker</string>
+    <!-- Title for the 'physical keyboards' settings screen. [CHAR LIMIT=35] -->
+    <string name="physical_keyboard_title">Physical keyboards</string>
+    <!-- Summary for the 'physical keyboards' settings screen. [CHAR LIMIT=NONE] -->
+    <string name="physical_keyboard_summary">Hardware settings for <xliff:g id="physical_keyboards_list">%1$s</xliff:g></string>
+    <!-- Title for the 'physical keyboard layout picker' settings screen. [CHAR LIMIT=35] -->
+    <string name="physical_keyboard_layout_picker_title">Layout picker</string>
     <!-- Title for the 'Bounce keys' preference switch. [CHAR LIMIT=35] -->
     <string name="bounce_keys">Bounce keys</string>
     <!-- Summary text for the 'Bounce keys' preference sub-screen. [CHAR LIMIT=300] -->
@@ -5274,31 +5284,31 @@
     <!-- Title for the preference category for stick remapping for game controllers. [CHAR LIMIT=35] -->
     <string name="game_controller_stick_remapping_category">Directions</string>
     <!-- Title for the preference category for button A remapping. Button A is typical game controller button with "A" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_a">A Button</string>
+    <string name="game_controller_button_a">A button</string>
     <!-- Title for the preference category for button B remapping. Button B is typical game controller button with "B" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_b">B Button</string>
+    <string name="game_controller_button_b">B button</string>
     <!-- Title for the preference category for button X remapping. Button X is typical game controller button with "X" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_x">X Button</string>
+    <string name="game_controller_button_x">X button</string>
     <!-- Title for the preference category for button Y remapping. Button Y is typical game controller button with "Y" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_y">Y Button</string>
+    <string name="game_controller_button_y">Y button</string>
     <!-- Title for the preference category for button L1 remapping. Button L1 is typical game controller trigger with "L1" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_l1">L1 Button</string>
+    <string name="game_controller_button_l1">L1 button</string>
     <!-- Title for the preference category for button R1 remapping. Button R1 is typical game controller trigger with "R1" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_r1">R1 Button</string>
+    <string name="game_controller_button_r1">R1 button</string>
     <!-- Title for the preference category for button L2 remapping. Button L2 is typical game controller trigger with "L2" printed on it.[CHAR LIMIT=35] -->
-    <string name="game_controller_button_l2">L2 Button</string>
+    <string name="game_controller_button_l2">L2 button</string>
     <!-- Title for the preference category for button R2 remapping. Button R2 is typical game controller trigger with "R2" printed on it. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_r2">R2 Button</string>
+    <string name="game_controller_button_r2">R2 button</string>
     <!-- Title for the preference category for button thumbl remapping. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_thumbl">Left Stick Click</string>
+    <string name="game_controller_button_thumbl">Left stick click</string>
     <!-- Title for the preference category for button thumbr remapping. [CHAR LIMIT=35] -->
-    <string name="game_controller_button_thumbr">Right Stick Click</string>
+    <string name="game_controller_button_thumbr">Right stick click</string>
     <!-- Title for the preference category for dpad remapping. [CHAR LIMIT=35] -->
     <string name="game_controller_dpad">D-pad</string>
     <!-- Title for the preference category for left stick remapping. [CHAR LIMIT=35] -->
-    <string name="game_controller_stick_left">Left Stick</string>
+    <string name="game_controller_stick_left">Left stick</string>
     <!-- Title for the preference category for right stick remapping. [CHAR LIMIT=35] -->
-    <string name="game_controller_stick_right">Right Stick</string>
+    <string name="game_controller_stick_right">Right stick</string>
     <!-- Button preference title to reset all game controller settings to default. [CHAR LIMIT=35] -->
     <string name="game_controller_remapping_reset_preference_title">Reset to default</string>
     <!-- Reset dialog title to reset all game controller settings to default. [CHAR LIMIT=35] -->
@@ -5307,6 +5317,11 @@
     <string name="game_controller_remapping_reset_dialog_message">All your controller settings will be reset to default</string>
     <!-- Game controller reset dialog confirmation button text [CHAR LIMIT=35] -->
     <string name="game_controller_reset_dialog_button">Reset</string>
+    <!-- This string is used to describe the summary of a preference in the game controller remapping Settings screen.
+    It lets the user know what button/stick the button/stick in the preference title is currently assigned to.
+    Example: for a preference mapping the L1 button to the triangle button, the full preference description would be "L1 Button, currently assigned to Triangle Button".
+    [CHAR LIMIT=NONE] [SCREENSHOT=screen/5W8V9C2veeTzNNM] -->
+    <string name="game_controller_remapping_preference_content_description">currently assigned to <xliff:g id="actual_value" example="Triangle Button">%1$s</xliff:g></string>
 
     <!-- Title for the button to trigger the 'trackpad settings' page if only connect with a touchpad. [CHAR LIMIT=35] -->
     <string name="trackpad_settings">Touchpad</string>
@@ -5456,6 +5471,8 @@
     <string name="action_corner_action_quick_settings">Quick settings</string>
     <!-- Text for 'Note' action radio button. [CHAR LIMIT=60] -->
     <string name="action_corner_action_note_title">Note</string>
+    <!-- Text for 'Peek/unpeek desktop' action radio button. [CHAR LIMIT=60] -->
+    <string name="action_corner_action_peek_title">Peek/unpeek desktop</string>
     <!-- Title text for action selection dialog. [CHAR LIMIT=NONE] -->
     <string name="action_corner_action_dialog_title">Choose a shortcut for the <xliff:g id="corner">%1$s</xliff:g></string>
     <!-- Text for 'Bottom-left corner'. [CHAR LIMIT=60] -->
@@ -5476,8 +5493,8 @@
     <string name="modifier_keys_caps_lock" translatable="false">Caps lock</string>
     <!-- Title for the button to trigger the 'modifier keys ctrl'. [CHAR LIMIT=15] -->
     <string name="modifier_keys_ctrl" translatable="false">Ctrl</string>
-    <!-- Title for the button to trigger the 'modifier keys action key'. [CHAR LIMIT=15] -->
-    <string name="modifier_keys_meta" translatable="false">Action key</string>
+    <!-- Title for the button to trigger the 'modifier keys action'. [CHAR LIMIT=15] -->
+    <string name="modifier_keys_meta" translatable="false">Action</string>
     <!-- Title for the button to trigger the 'modifier keys alt'. [CHAR LIMIT=15] -->
     <string name="modifier_keys_alt" translatable="false">Alt</string>
 
@@ -5555,8 +5572,8 @@
     <skip />
     <!-- Title for the keyboard layout picker activity. [CHAR LIMIT=35] -->
     <string name="keyboard_layout_picker_title">Keyboard layouts</string>
-    <!-- Category title for the keyboard layout picker activity. [CHAR LIMIT=35] -->
-    <string name="keyboard_layout_picker_category_title">Physical keyboard layouts</string>
+    <!-- Category title for the list of physical keyboard layouts in the keyboard layout picker activity. [CHAR LIMIT=35] -->
+    <string name="keyboard_layout_picker_category_title">Layouts</string>
 
     <!-- User dictionary settings -->
     <skip />
@@ -5607,11 +5624,11 @@
     <string name="testing_sim_toolkit">SIM toolkit</string>
 
     <!-- Summary for default keyboard settings -->
-    <string name="keyboard_settings_summary">On-screen keyboard, tools</string>
+    <string name="keyboard_settings_summary">Keyboard apps, tools</string>
     <!-- Summary for keyboard settings attaching physical_keyboard  -->
-    <string name="keyboard_settings_with_physical_keyboard_summary">On-screen keyboard, physical keyboard, tools</string>
-    <!-- Title for built-in keyboard settings -->
-    <string name="builtin_keyboard_settings_title">Physical keyboard</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary">Keyboard apps, physical keyboards, tools</string>
+    <!-- Title for the list of physical keyboards in 'Physical keyboards' settings -->
+    <string name="physical_keyboards_list_title">Physical keyboards</string>
 
     <!-- Title for enabled locales keyboard layout page -->
     <string name="enabled_locales_keyboard_layout">Layout</string>
@@ -5771,6 +5788,10 @@
     <!-- setting Checkbox summary to set log level [CHAR_LIMIT=100] -->
     <string name="bt_stack_log_level_summary">Change log level of Bluetooth Stack Logging (Toggle Bluetooth after changing this setting)</string>
     <!-- Title for snoop logger filters dashboard where developers can turn on filters [CHAR LIMIT=100] -->
+    <!-- Title for the snoop logger socket [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_socket_title">Enable Bluetooth HCI snoop log socket</string>
+    <!-- Summary for the snoop logger socket [CHAR LIMIT=100] -->
+    <string name="bt_hci_snoop_log_socket_summary">Make the Bluetooth HCI snoop log available on a local socket</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title">Bluetooth HCI snoop log filtering</string>
     <!-- Summary for the snoop logger filters [CHAR LIMIT=100] -->
     <string name="bt_hci_snoop_log_filters_dashboard_summary">Set filters</string>
@@ -6098,7 +6119,7 @@
     <!-- Title for triple tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_edit_screen_title_triple_tap">Triple tap</string>
     <!-- Summary for triple tap shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap">Quickly tap the screen %1$d times. This may slow down your device.</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap">Quickly tap the screen 3 times. This may slow down your device.</string>
     <!-- Part of list to compose user's accessibility shortcut list. [CHAR LIMIT=NONE] -->
     <string name="accessibility_shortcut_triple_tap_keyword">triple tap</string>
     <!-- Title for keyboard shortcut in accessibility edit shortcut screen. [CHAR LIMIT=NONE] -->
@@ -8815,6 +8836,12 @@
     <string name="device_dashboard_summary">Touchpad, keyboard, display, sound</string>
     <!-- Summary for Display settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_display_dashboard_summary">Brightness, color, dark theme, lock screen, text</string>
+    <!-- Summary for Device Display settings, with touch [CHAR LIMIT=NONE] -->
+    <string name="device_display_dashboard_summary_with_touch">Brightness, color, dark theme, lock screen, text, touch</string>
+    <!-- Summary for Device Display settings, with connected display [CHAR LIMIT=NONE] -->
+    <string name="device_display_dashboard_summary_with_external">Brightness, color, dark theme, lock screen, text, connected display</string>
+    <!-- Summary for Device Display settings, with touch and connected display [CHAR LIMIT=NONE] -->
+    <string name="device_display_dashboard_summary_with_touch_external">Brightness, color, dark theme, lock screen, text, touch, connected display</string>
     <!-- Summary for Keyboard settings under Device dashboard [CHAR LIMIT=NONE]-->
     <string name="device_keyboard_settings_summary">Keyboard selection, tools</string>
     <!-- Summary for Mouse settings under Device dashboard [CHAR LIMIT=NONE]-->
@@ -9060,7 +9087,7 @@
     <string name="keywords_change_nfc_tag_apps_state">nfc, tag, reader</string>
 
     <!-- List of synonyms for keyboard vibration settings search [CHAR LIMIT=NONE] -->
-    <string name="keywords_keyboard_vibration">keyboard, haptics, vibrate,</string>
+    <string name="keywords_keyboard_vibration">keyboard, haptics, vibrate, typing</string>
 
     <!-- Search keyword for external display settings [CHAR LIMIT=NONE] -->
     <string name="keywords_external_display_settings">external display, connected display, extended display, second display, built-in display, arrange displays, mirror, display size, rotation, resolution, refresh rate</string>
@@ -11504,29 +11531,66 @@
     <!-- Computer control automation settings title [CHAR LIMIT=40] [SCREENSHOT=screen/7GzP2k3PhF8UTVQ] -->
     <string name="computer_control_automation_page_title">Screen automation</string>
     <!-- Sub heading for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
-    <string name="computer_control_automation_sub_heading">This app will be able to see and interact with other apps\' screen content to help you complete tasks, even when the apps are in the background</string>
-    <!-- Sub heading for setting which controls whether an app can automate other apps (used when flag for per app consent is enabled) [CHAR LIMIT=NONE] [SCREENSHOT=screen/BTHQJHtAbPeeaWz] -->
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent"><xliff:g  example="Example App">%1$s</xliff:g> will be able to see and interact with other apps\' screen content to help you complete tasks</string>
-    <!-- Footer summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
-    <string name="computer_control_automation_footer_summary">If you don\'t allow screen automation, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g example="Example App">%1$s</xliff:g> in other ways</string>
+    <string name="computer_control_automation_sub_heading">This app will be able to see and interact with other apps\u2019 screen content to help you complete tasks, even when the apps are in the background.</string>
+    <!-- Sub heading for setting which controls whether an app can automate other apps (used when flag for per app consent is enabled) [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent"><xliff:g  example="Example App">%1$s</xliff:g> can see and interact with the screen content of apps that you\u2019ve allowed to help you complete tasks.</string>
+    <!-- Footer summary for setting which controls whether an app can automate other apps, informing that only apps that can be automated are listed here [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_footer_info">Apps for which you chose &lt;strong&gt;Always Allow&lt;/strong&gt; in permissions are shown here. Apps you allowed &lt;strong&gt;Only this time&lt;/strong&gt; or didn\u2019t allow aren\u2019t shown.</string>
+    <!-- Footer summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_footer_summary">If you don\u2019t allow screen automation, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g example="Example App">%1$s</xliff:g> in other ways.</string>
+    <!-- Footer summary for setting which controls whether an app can automate other apps (used when flag for per app consent is enabled) [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent">When you remove an app on this screen, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g  example="Example App">%1$s</xliff:g> in other ways.</string>
+
     <!-- Summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/55Y5GXxjQJNFvRT] -->
-    <string name="computer_control_automation_page_summary">Allow apps to help you complete tasks by interacting with other apps\' screen content</string>
+    <string name="computer_control_automation_page_summary">Allow apps to help you complete tasks by interacting with other apps\u2019 screen content</string>
+    <!-- Summary for setting which controls whether an app can automate other apps (used when flag for per app consent is enabled) [CHAR LIMIT=NONE] [SCREENSHOT=screen/5b5rGqdGA9Eyoyz] -->
+    <string name="computer_control_automation_page_summary_flag_per_app_consent">Allow apps to see and interact with screen content to help you complete tasks</string>
     <!-- Preference summary text for an app when computer control access must be confirmed every time. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_ask_every_time">Ask every time</string>
-    <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF -->
-    <string name="computer_control_automation_always_allowed">Always allow</string>
+    <!-- Preference summary text for an app when computer control access is always allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
+    <string name="computer_control_automation_always_allow">Always allow</string>
     <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
-    <string name="computer_control_automation_dont_allow">Don\'t allow</string>
-    <!-- Switch preference title to toggle screen automation. [CHAR LIMIT=45] [SCREENSHOT=screen/BTHQJHtAbPeeaWz] -->
-    <string name="computer_control_automation_toggle_title">Allow screen automation</string>
-    <!-- App list header for automatable app list with no automatable apps. [CHAR LIMIT=45] [SCREENSHOT=screen/6FQtqkKPvjwJ3Zp] -->
-    <string name="computer_control_automation_automatable_app_list_header_no_apps">No apps are always allowed</string>
-    <!-- App list header summary for apps that can be automated [CHAR LIMIT=NONE] [SCREENSHOT=screen/BTHQJHtAbPeeaWz] -->
-    <string name="computer_control_automation_automatable_app_list_header_summary">Apps that are allowed to always use the screen automation by <xliff:g  example="Example App">%1$s</xliff:g> will be shown here. Apps that only get a per-session permission will not be shown.</string>
-    <!-- Preference summary text for an app when computer control access is allowed. [CHAR LIMIT=45] -->
-    <string name="computer_control_automation_allowed">Allowed</string>
-    <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45]-->
-    <string name="computer_control_automation_not_allowed">Not allowed</string>
+    <string name="computer_control_automation_dont_allow">Don\u2019t allow</string>
+    <!-- App list header summary for apps that can be automated [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_automatable_app_list_header">Apps you\u2019ve allowed</string>
+    <!-- App list summary for no allowed apps that can be automated [CHAR LIMIT=NONE] [SCREENSHOT=screen/34vZEivCFH7VbTE] -->
+    <string name="computer_control_automation_agent_list_empty_title_per_app">You haven\u2019t allowed any apps yet</string>
+    <!-- Footer summary requirement note for screen automation [CHAR LIMIT=NONE] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_footer_requirement">Only the app you\u2019ve set as your default digital assistant can use screen automation.</string>
+    <!-- Toast message when app is removed from automatable list [CHAR LIMIT=45] -->
+    <string name="computer_control_automation_automatable_app_removed">App removed</string>
+    <!-- Toast message when all apps are removed from automatable list [CHAR LIMIT=45] -->
+    <string name="computer_control_automation_automatable_all_apps_removed">All apps removed</string>
+    <!-- Link text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_default_digital_assistant_settings">Assistant settings</string>
+    <!-- Preference summary for allowed automatable app count [CHAR LIMIT=45] [SCREENSHOT=screen/6dwM3xChXExDtSj] -->
+    <string name="computer_control_automation_apps_allowed">{count, plural,
+        =1      {1 app allowed}
+        other   {# apps allowed}
+        }</string>
+    <!-- Preference summary for allowed agent app count [CHAR LIMIT=45] [SCREENSHOT=screen/AWrS8FMrHJY583Z] -->
+    <string name="computer_control_automation_agents_allowed">{count, plural,
+        =1      {1 app allowed}
+        other   {# apps allowed}
+        }</string>
+    <!-- Summary text for an app when no other apps are allowed for screen automation. [CHAR LIMIT=45] [SCREENSHOT=screen/6Q4DHoZHd8urFuj] -->
+    <string name="computer_control_automation_no_apps_allowed">No apps allowed</string>
+    <!-- Title for the button to clear all allowed apps for screen automation. [CHAR LIMIT=45] [SCREENSHOT=screen/9XzhgFVrY8JPwiG] -->
+    <string name="computer_control_automation_clear_all_apps">Remove all apps</string>
+    <!-- Category title for default assistant agent app [CHAR LIMIT=45] [SCREENSHOT=screen/7gVSWSuePKETBEs] -->
+    <string name="computer_control_automation_default_digital_assistant">Default digital assistant</string>
+    <!-- Banner title to change the assistant [CHAR LIMIT=45] [SCREENSHOT=screen/7yYg35RrTPZyoFu] -->
+    <string name="computer_control_automation_banner_to_change_assistant_title"><xliff:g  example="Example App">%1$s</xliff:g> can\u2019t use screen automation</string>
+    <!-- Banner text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/7yYg35RrTPZyoFu] -->
+    <string name="computer_control_automation_banner_to_change_assistant_text">Only your default digital assistant can use screen automation</string>
+    <!-- Banner button text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/7yYg35RrTPZyoFu] -->
+    <string name="computer_control_automation_banner_to_change_assistant_button_text">Change assistant</string>
+    <!-- Header summary for computer control automation agent list [CHAR LIMIT=NONE] [SCREENSHOT=screen/6Q4DHoZHd8urFuj] -->
+    <string name="computer_control_automation_agent_list_header">These apps can see and interact with the screen content of apps you\u2019ve allowed, to help you complete tasks.</string>
+    <!-- Empty state title for computer control automation agent list [CHAR LIMIT=NONE] [SCREENSHOT=screen/BNQNU8EYxipxZyS] -->
+    <string name="computer_control_automation_agent_list_empty_title">You haven\u2019t installed any apps that can use screen automation</string>
+    <!-- Header summary for computer control automation target list [CHAR LIMIT=NONE] [SCREENSHOT=screen/7gVSWSuePKETBEs] -->
+    <string name="computer_control_automation_target_list_header">These apps can see and interact with <xliff:g  example="Example App">%1$s</xliff:g> screen content to help you complete tasks.</string>
 
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
     <string name="full_screen_intent_title">Full-screen notifications</string>
@@ -14565,7 +14629,7 @@
     <!-- Alert Dialog title text for 2g network protection [CHAR LIMIT=50]-->
     <string name="network_protection_2g_off_alert_dialog_title">Turn off 2G network protection?</string>
     <!-- Alert Dialog description text for 2g network protection [CHAR LIMIT=50]-->
-    <string name="network_protection_2g_off_alert_dialog_desc">Current network for <xliff:g id="carrier provider name">%s</xliff:g> SIM does not support 2G. Turning off 2G protection will put you at risk of connecting to harmful spoofed 2G networks.</string>
+    <string name="network_protection_2g_off_alert_dialog_desc">2G networks are less secure, and turning this off makes your calls, messages, and data vulnerable to interception or theft</string>
     <!-- Alert Dialog button text when enable 2g network [CHAR LIMIT=50]-->
     <string name="network_protection_2g_alert_dialog_turn_off_btn">Turn off</string>
     <!-- Notification channel text for 2g network protection [CHAR LIMIT=50]-->
@@ -14573,7 +14637,7 @@
     <!-- Notification title text for 2g network protection [CHAR LIMIT=50]-->
     <string name="network_protection_2g_on_notification_title">2G network protection is on</string>
     <!-- Notification summary text for 2g network protection [CHAR LIMIT=50]-->
-    <string name="network_protection_2g_on_notification_summary">The current network for <xliff:g id="carrier provider name">%s</xliff:g> SIM requires 2G protection to be turned on. You may still choose to disable 2G protection at your own risk.</string>
+    <string name="network_protection_2g_on_notification_summary">You can turn this off in Settings, but 2G is less secure and may put your data at risk</string>
     <!-- Notification button text when enable 2g network [CHAR LIMIT=50]-->
     <string name="network_protection_2g_notification_settings_btn">Settings</string>
 
@@ -14689,6 +14753,8 @@
     <string name="customize_button_title">Customize</string>
     <!-- The content description for accessibility tools of the customize button. It specifies which screensaver the user is customizing [CHAR LIMIT=NONE] -->
     <string name="customize_button_description">Customize <xliff:g id="screensaver_name" example="Art Gallery">%1$s</xliff:g></string>
+    <!-- The content description for accessibility tools of the preview button. It specifies which screensaver the user is previewing [CHAR LIMIT=NONE] -->
+    <string name="dream_preview_button_description">Preview <xliff:g id="screensaver_name" example="Art Gallery">%1$s</xliff:g></string>
 
     <!-- Dialog body text used to explain a reboot is required after enabling freeform window support for it to work. Freeform windows enables users to freely arrange and resize overlapping apps. [CHAR LIMIT=none] -->
     <string name="reboot_dialog_enable_freeform_support">A reboot is required to enable freeform window support.</string>
@@ -14786,6 +14852,13 @@
         other {Apps installed more than # months ago}
         }</string>
 
+    <!-- [CHAR LIMIT=40] Label for category for AI Assistance settings for an app. -->
+    <string name="ai_assist_category">Screen access</string>
+    <!-- [CHAR LIMIT=60] Title for preference controlling app participation in Personal Context. -->
+    <string name="personal_context_title">Proactive assist</string>
+    <!-- [CHAR LIMIT=NONE] Personal Context summary to toggle whether app content contributed. -->
+    <string name="personal_context_switch_summary">Choose whether this app can contribute info to produce suggestions</string>
+
     <!-- App Aspect Ratio (User Aspect Ratio Override) -->
     <!-- [CHAR LIMIT=60] Aspect ratio title setting to choose app aspect ratio -->
     <string name="aspect_ratio_title">Aspect ratio</string>
@@ -14829,6 +14902,7 @@
     <!-- Virtual Gamepad user override -->
     <!-- [CHAR LIMIT=60] Virtual gamepad setting to enable or disable the gamepad. -->
     <string name="virtual_gamepad_title">Virtual gamepad</string>
+    <string name="virtual_gamepad_restart_game_toast">Restart your game to confirm changes</string>
 
     <!-- Accessibility label for fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="accessibility_fingerprint_label">Fingerprint sensor</string>

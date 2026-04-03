@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -32,14 +33,20 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.internal.annotations.VisibleForTesting;
 import com.android.internal.util.Preconditions;
 import com.android.settings.R;
+import com.android.settings.accessibility.shared.utils.SetupWizardUtilKt;
 import com.android.settings.display.PreviewPagerAdapter;
 import com.android.settings.widget.DotsPageIndicator;
+import com.android.settings.widget.FocusIndicatorDrawable;
 import com.android.settingslib.widget.GroupSectionDividerMixin;
 
 /**
  * A {@link Preference} that could show the preview related to the text and reading options.
  */
 public class TextReadingPreviewPreference extends Preference implements GroupSectionDividerMixin {
+
+    private static final int FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP = 2;
+    private static final int FOCUS_INDICATOR_CORNER_RADIUS_DP = 2;
+
     private static final String KEY_LAST_INDEX = "last_preview_index";
     private int mCurrentItem;
     private int mLastLayerIndex;
@@ -94,9 +101,18 @@ public class TextReadingPreviewPreference extends Preference implements GroupSec
         LinearLayout backgroundView = previewLayout.findViewById(R.id.preview_background);
         adjustPaddings(previewLayout, backgroundView);
 
-        final ViewPager viewPager = (ViewPager) holder.findViewById(R.id.preview_pager);
+        ViewPager viewPager = (ViewPager) holder.findViewById(R.id.preview_pager);
+        if (SetupWizardUtilKt.shouldShowFocusRingsInSuw(getContext())) {
+            // These changes prevent elements within the text reading preview, which cannot be
+            // interacted with, from being focusable.
+            viewPager.setFocusable(false);
+            viewPager.setFocusableInTouchMode(false);
+            if (viewPager instanceof ViewGroup viewGroup) {
+                viewGroup.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
+            }
+        }
         viewPager.addOnPageChangeListener(mPageChangeListener);
-        final DotsPageIndicator pageIndicator =
+        DotsPageIndicator pageIndicator =
                 (DotsPageIndicator) holder.findViewById(R.id.page_indicator);
         updateAdapterIfNeeded(viewPager, pageIndicator, mPreviewAdapter);
         updatePagerAndIndicator(viewPager, pageIndicator);
@@ -108,8 +124,29 @@ public class TextReadingPreviewPreference extends Preference implements GroupSec
                 ? R.id.preview_right_button : R.id.preview_left_button;
         int nextId = (layoutDirection == View.LAYOUT_DIRECTION_RTL)
                 ? R.id.preview_left_button : R.id.preview_right_button;
-        final ImageButton previousButton = previewLayout.findViewById(previousId);
-        final ImageButton nextButton = previewLayout.findViewById(nextId);
+        ImageButton previousButton = previewLayout.findViewById(previousId);
+        ImageButton nextButton = previewLayout.findViewById(nextId);
+
+        if (SetupWizardUtilKt.shouldShowFocusRingsInSuw(getContext())) {
+            // These changes add the focus ring indicator to the "previous" and "next" buttons of
+            // the text reading preview container.
+            if (previousButton != null) {
+                previousButton.setForeground(
+                        new FocusIndicatorDrawable.Builder(getContext())
+                                .withVerticalPaddingAdjustment(
+                                        FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP)
+                                .withCornerRadius(FOCUS_INDICATOR_CORNER_RADIUS_DP)
+                                .build());
+            }
+            if (nextButton != null) {
+                nextButton.setForeground(
+                        new FocusIndicatorDrawable.Builder(getContext())
+                                .withVerticalPaddingAdjustment(
+                                        FOCUS_INDICATOR_VERTICAL_PADDING_ADJUSTMENT_DP)
+                                .withCornerRadius(FOCUS_INDICATOR_CORNER_RADIUS_DP)
+                                .build());
+            }
+        }
 
         // These call ViewPager#setCurrentItem directly
         // because that doesn't force a refresh through notifyChanged().

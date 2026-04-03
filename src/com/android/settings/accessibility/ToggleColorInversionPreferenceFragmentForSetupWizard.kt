@@ -25,6 +25,7 @@ import androidx.preference.PreferenceScreen
 import androidx.recyclerview.widget.RecyclerView
 import com.android.settings.R
 import com.android.settings.accessibility.colorinversion.ui.IntroPreference
+import com.android.settings.accessibility.shared.utils.TogglePreferenceAdapterInSuw
 import com.android.settingslib.widget.MainSwitchPreference
 import com.android.settingslib.widget.SettingsThemeHelper
 import com.android.settingslib.widget.TopIntroPreference
@@ -71,7 +72,7 @@ class ToggleColorInversionPreferenceFragmentForSetupWizard :
 
     override fun onCreateAdapter(preferenceScreen: PreferenceScreen): RecyclerView.Adapter<*> {
         return if (SettingsThemeHelper.isExpressiveTheme(requireContext())) {
-            PreferenceAdapterInSuw(preferenceScreen)
+            TogglePreferenceAdapterInSuw(preferenceScreen)
         } else super.onCreateAdapter(preferenceScreen)
     }
 

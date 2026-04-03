@@ -34,7 +34,7 @@ class TetherApiScreen :
         key = KEY,
         topLevelSettingsCategory = Category.NETWORK,
         fragment = TetherSettings::class,
-        purpose = R.string.tether_settings_purpose,
+        purpose = R.string.tether_settings_purpose_api,
         alreadyPartiallyMigrated = TetherScreen::class,
     ) {
     private val tetheringRepository =

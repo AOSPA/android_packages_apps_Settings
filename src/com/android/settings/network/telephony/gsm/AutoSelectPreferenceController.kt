@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 /*
  * Changes from Qualcomm Innovation Center are provided under the following license:
  *
@@ -21,6 +22,7 @@
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 package com.android.settings.network.telephony.gsm
 
 import android.app.ProgressDialog
@@ -35,7 +37,9 @@ import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteManager
 import android.telephony.satellite.SatelliteModemStateCallback
 import android.telephony.satellite.SelectedNbIotSatelliteSubscriptionCallback
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 import android.util.Log
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 import androidx.annotation.VisibleForTesting
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -57,7 +61,9 @@ import com.android.settingslib.spa.framework.compose.OverridableFlow
 import com.android.settingslib.spa.framework.util.collectLatestWithLifecycle
 import com.android.settingslib.spa.widget.preference.SwitchPreference
 import com.android.settingslib.spa.widget.preference.SwitchPreferenceModel
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 import kotlinx.coroutines.CoroutineScope
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -65,7 +71,9 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.filterNotNull
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
 import kotlinx.coroutines.flow.flowOf
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
@@ -87,9 +95,11 @@ constructor(
     },
     private val airplaneModeRepository: AirplaneModeRepository = AirplaneModeRepository(context),
 ) : ComposePreferenceController(context, key), DefaultLifecycleObserver,
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
     SelectNetworkPreferenceController.OnNetworkScanTypeListener {
 
     private val LOG_TAG = "AutoSelectPreferenceController"
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
     private var isSatelliteSessionStarted = false
     private var isSelectedSubIdForSatellite = false
 
@@ -101,7 +111,9 @@ constructor(
     @VisibleForTesting var progressDialog: ProgressDialog? = null
 
     private var subId = SubscriptionManager.INVALID_SUBSCRIPTION_ID
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
     lateinit var coroutineScope: CoroutineScope
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
 
     val satelliteModemStateCallback = SatelliteModemStateCallback { state ->
         isSatelliteSessionStarted =
@@ -133,7 +145,9 @@ constructor(
 
     @Composable
     override fun Content() {
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
         coroutineScope = rememberCoroutineScope()
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
         val serviceStateFlow = remember {
             serviceStateFlowFactory(subId)
                 .stateIn(coroutineScope, SharingStarted.Lazily, null)
@@ -218,22 +232,28 @@ constructor(
                     telephonyManager.simOperatorName,
                 )
             } else if (getPhoneType() == TelephonyManager.PHONE_TYPE_CDMA) {
+// QTI_BEGIN: 2024-03-13: Telephony: Disallow changing network select mode
                 mContext.getString(
                     R.string.cdma_manual_mode_disallowed_summary
                 )
+// QTI_END: 2024-03-13: Telephony: Disallow changing network select mode
             } else ""
         }
 
+// QTI_BEGIN: 2024-03-13: Telephony: Disallow changing network select mode
     private fun getPhoneType(): Int {
         return telephonyManager.currentPhoneType
     }
 
+// QTI_END: 2024-03-13: Telephony: Disallow changing network select mode
     private fun onlyAutoSelectInHome(): Boolean =
         getConfigForSubId(subId)
             .getBoolean(CarrierConfigManager.KEY_ONLY_AUTO_SELECT_IN_HOME_NETWORK_BOOL)
 
     private suspend fun setAutomaticSelectionMode(overrideChannel: OverridableFlow<Boolean>) {
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
         Log.i(LOG_TAG, "setAutomaticSelectionMode")
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
         showAutoSelectProgressBar()
 
         withContext(Dispatchers.Default) {
@@ -292,6 +312,7 @@ constructor(
         }
     }
 
+// QTI_BEGIN: 2024-03-14: Telephony: CAG and SNPN feature
     override fun onNetworkScanTypeChanged(type: Int) {
         Log.i(LOG_TAG, "onNetworkScanTypeChanged type = $type")
 
@@ -299,6 +320,7 @@ constructor(
         coroutineScope.launch { setAutomaticSelectionMode(overrideChannel) }
     }
 
+// QTI_END: 2024-03-14: Telephony: CAG and SNPN feature
     /**
      * Callback when network select mode might get updated
      *

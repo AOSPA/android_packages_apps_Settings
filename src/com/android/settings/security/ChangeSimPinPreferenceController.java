@@ -43,6 +43,13 @@ import java.util.concurrent.Callable;
 
 /**
  * Controller for changing the SIM card's PIN when it's managed by the user.
+ * This controller can be used for the preference on the main "SIM lock protection mode" screen or
+ * in the inner screen (when the UI for automatic SIM PIN management is turned on).
+ *
+ * To differentiate between the two, the controller checks if its preference key equals
+ * PREFERENCE_ON_PRIMARY_SCREEN.
+ * If the controller is for the preference that is on the primary screen, and the UI for automatic
+ * SIM PIN management is turned on, then the controller will mark the preference as unavailable.
  */
 public class ChangeSimPinPreferenceController extends BasePreferenceController implements
         Preference.OnPreferenceClickListener, EnterSimPinDialogFragment.SimPinEntryListener {
@@ -51,10 +58,12 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
     private static final int STATE_ENTER_CURRENT_PIN = 0;
     private static final int STATE_ENTER_NEW_PIN = 1;
     private static final int STATE_CONFIRM_NEW_PIN = 2;
+    private static final String PREFERENCE_ON_PRIMARY_SCREEN =
+            "change_manually_managed_sim_pin_primary_screen";
 
     private final AutoManagedSimPinHelper mAutoManagedSimPinHelper;
     private final SubscriptionManager mSubscriptionManager;
-    private final int mSubId;
+    private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
     // TODO: http://b/487265436 - store state of controller in case of fragment re-creation.
     private int mState = STATE_ENTER_CURRENT_PIN;
 
@@ -66,12 +75,17 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
     public ChangeSimPinPreferenceController(
             @NonNull Context context,
             @NonNull String preferenceKey) {
+        this(context, preferenceKey, new AutoManagedSimPinHelper(context));
+    }
+
+    @VisibleForTesting
+    public ChangeSimPinPreferenceController(
+            @NonNull Context context,
+            @NonNull String preferenceKey,
+            AutoManagedSimPinHelper helper) {
         super(context, preferenceKey);
-        mAutoManagedSimPinHelper = new AutoManagedSimPinHelper(mContext);
+        mAutoManagedSimPinHelper = helper;
         mSubscriptionManager = context.getSystemService(SubscriptionManager.class);
-        // TODO: b/476046816 - Handle multiple SIM slots, probably by taking in the slot index
-        // during construction.
-        mSubId = mSubscriptionManager.getEnabledSubscriptionId(0);
     }
 
     /**
@@ -86,8 +100,19 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
 
     @Override
     public int getAvailabilityStatus() {
+        if (!mSubscriptionManager.isValidSubscriptionId(mSubId)) {
+            Log.d(TAG, "Invalid subscription for " + getPreferenceKey());
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
         if (mayChangeSimPin()) {
             return AVAILABLE;
+        }
+
+        // See class documentation for an explanation of this behaviour.
+        if (getPreferenceKey().startsWith(PREFERENCE_ON_PRIMARY_SCREEN)
+                && android.security.Flags.enableAutoSimPinUi()) {
+            return CONDITIONALLY_UNAVAILABLE;
         }
         return DISABLED_DEPENDENT_SETTING;
     }
@@ -214,6 +239,16 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
         if (mFragment != null) {
             mFragment.forceUpdatePreferences();
         }
+    }
+
+    /**
+     * Sets the index of the SIM card slot that this controller is responsible for.
+     * @param slotIndex index in the array of active slots.
+     */
+    public void setSlotIndex(int slotIndex) {
+        mSubId = mAutoManagedSimPinHelper.getSubscriptionIdForSlot(slotIndex);
+        Log.d(TAG, "Preference " + getPreferenceKey() + ": Subscription for slot index " + slotIndex
+                + ": " + mSubId);
     }
 
     private class ChangeSimPin implements Callable<PinResult> {

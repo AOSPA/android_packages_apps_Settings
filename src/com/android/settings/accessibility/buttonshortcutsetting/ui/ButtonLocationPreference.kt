@@ -31,6 +31,7 @@ import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -98,6 +99,8 @@ class ButtonLocationPreference(context: Context) :
 
     override val availabilityDescription =
         "The device must be using 3-button navigation, or the operating system must be configured to enable customising the button location."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         return AccessibilityUtil.isAccessibilityButtonLocationConfigurable(context)

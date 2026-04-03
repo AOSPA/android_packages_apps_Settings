@@ -20,6 +20,7 @@ import static android.security.Flags.FLAG_AUTO_SIM_PIN_MANAGEMENT;
 
 import static com.android.settings.core.BasePreferenceController.AVAILABLE;
 import static com.android.settings.core.BasePreferenceController.CONDITIONALLY_UNAVAILABLE;
+import static com.android.settings.core.BasePreferenceController.DISABLED_DEPENDENT_SETTING;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -57,7 +58,7 @@ public class AutomaticSimProtectionModePreferenceControllerTest extends
     @Test
     public void getAvailabilityStatus_deviceIsNotSecure() {
         when(mKeyguardManager.isDeviceSecure()).thenReturn(false);
-        assertThat(mController.getAvailabilityStatus()).isEqualTo(CONDITIONALLY_UNAVAILABLE);
+        assertThat(mController.getAvailabilityStatus()).isEqualTo(DISABLED_DEPENDENT_SETTING);
     }
 
     @EnableFlags(FLAG_AUTO_SIM_PIN_MANAGEMENT)

@@ -150,6 +150,9 @@ public class ShadowRestrictedLockUtilsInternal {
     @Implementation
     public static boolean isEnhancedConfirmationRestricted(@NonNull Context context,
             @NonNull String settingIdentifier, @NonNull String packageName) {
+        if (ArrayUtils.contains(sEcmRestrictedPkgs, packageName)) {
+            return true;
+        }
         return false;
     }
 

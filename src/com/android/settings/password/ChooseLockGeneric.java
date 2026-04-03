@@ -261,7 +261,9 @@ public class ChooseLockGeneric extends SettingsActivity {
             mLockPatternUtils = new LockPatternUtils(activity);
             mIsSetNewPassword = ACTION_SET_NEW_PARENT_PROFILE_PASSWORD.equals(chooseLockAction)
                     || ACTION_SET_NEW_PASSWORD.equals(chooseLockAction);
+// QTI_BEGIN: 2018-05-29: SecureSystems: Clear traces of temporary stored password after updating password
             mLockPatternUtils.sanitizePassword();
+// QTI_END: 2018-05-29: SecureSystems: Clear traces of temporary stored password after updating password
 
             // Defaults to needing to confirm credentials
             final boolean confirmCredentials = intent
@@ -1008,7 +1010,9 @@ public class ChooseLockGeneric extends SettingsActivity {
         @Override
         public void onDestroy() {
             super.onDestroy();
+// QTI_BEGIN: 2018-05-29: SecureSystems: Clear traces of temporary stored password after updating password
             mLockPatternUtils.sanitizePassword();
+// QTI_END: 2018-05-29: SecureSystems: Clear traces of temporary stored password after updating password
             if (mUserPassword != null) {
                 mUserPassword.zeroize();
             }

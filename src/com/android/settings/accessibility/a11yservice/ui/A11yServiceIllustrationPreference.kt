@@ -16,6 +16,7 @@
 
 package com.android.settings.accessibility.a11yservice.ui
 
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.ContentResolver
 import android.content.Context
@@ -29,6 +30,8 @@ class A11yServiceIllustrationPreference(private val serviceInfo: AccessibilitySe
     ImageUriPreference() {
 
     override val availabilityDescription = UI_ONLY_PREFERENCE
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
