@@ -17,35 +17,32 @@ package com.android.settings.network.telephony.satellite
 
 import android.content.Context
 import android.content.Intent
-import android.os.PersistableBundle
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
-import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
-import android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL
 import androidx.lifecycle.testing.TestLifecycleOwner
 import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.network.CarrierConfigCache
 import com.android.settings.network.SatelliteRepository
+import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.kotlin.any
-import org.mockito.kotlin.eq
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.stub
 import org.mockito.kotlin.whenever
 
 @RunWith(AndroidJUnit4::class)
 class SatelliteSettingPreferenceControllerTest {
-    private val mockCarrierConfigCache = mock<CarrierConfigCache>()
     private var mockSatelliteRepository =
         mock<SatelliteRepository>().stub {
             on { isSatelliteAccessConfigurationForCurrentLocationFlow(TEST_SUB_ID) }
@@ -63,21 +60,33 @@ class SatelliteSettingPreferenceControllerTest {
         }
     private val preferenceScreen = PreferenceManager(context).createPreferenceScreen(context)
 
-    private val controller =
-        SatelliteSettingPreferenceController(
-            context = context,
-            key = KEY,
-            carrierConfigCache = mockCarrierConfigCache,
-            satelliteRepository = mockSatelliteRepository,
-        )
+    private lateinit var fakeFeatureFactory: FakeFeatureFactory
+    @Mock private lateinit var mockSatelliteSettingsRepository: SatelliteSettingsRepository
+
+    private lateinit var controller: SatelliteSettingPreferenceController
+
+    @Before
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
+        fakeFeatureFactory = FakeFeatureFactory.setupForTest()
+        whenever(fakeFeatureFactory.telephonyFeatureProvider.satelliteSettingsRepository)
+            .thenReturn(mockSatelliteSettingsRepository)
+
+        controller =
+            SatelliteSettingPreferenceController(
+                context = context,
+                key = KEY,
+                satelliteRepository = mockSatelliteRepository,
+            )
+    }
 
     @Test
     fun onViewCreated_inFence_preferenceIsEnabled() = runBlocking {
-        // Arrange: Set up carrier configs to make the preference visible.
-        val carrierConfigs = PersistableBundle()
-        carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
-        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
-            .thenReturn(carrierConfigs)
+        // Arrange: Set up repository to make the preference visible.
+        whenever(mockSatelliteSettingsRepository.isSatelliteAttachSupported(TEST_SUB_ID))
+            .thenReturn(true)
+        whenever(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(TEST_SUB_ID))
+            .thenReturn(CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC)
         // The default mock for isSatelliteAccessConfigurationForCurrentLocationFlow returns true.
 
         // Arrange: Initialize the controller and display the preference.
@@ -95,14 +104,11 @@ class SatelliteSettingPreferenceControllerTest {
 
     @Test
     fun isVisible_connectionManualTypeAndoutOfFence_disabled() = runBlocking {
-        val carrierConfigs = PersistableBundle()
-        carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
-        carrierConfigs.putInt(
-            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CARRIER_ROAMING_NTN_CONNECT_MANUAL,
-        )
-        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
-            .thenReturn(carrierConfigs)
+        whenever(mockSatelliteSettingsRepository.isSatelliteAttachSupported(TEST_SUB_ID))
+            .thenReturn(true)
+        whenever(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(TEST_SUB_ID))
+            .thenReturn(CARRIER_ROAMING_NTN_CONNECT_MANUAL)
+
         whenever(
                 mockSatelliteRepository.isSatelliteAccessConfigurationForCurrentLocationFlow(
                     TEST_SUB_ID
@@ -124,14 +130,11 @@ class SatelliteSettingPreferenceControllerTest {
 
     @Test
     fun isVisible_connectionHybridTypeAndoutOfFence_disabled() = runBlocking {
-        val carrierConfigs = PersistableBundle()
-        carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
-        carrierConfigs.putInt(
-            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CARRIER_ROAMING_NTN_CONNECT_HYBRID,
-        )
-        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
-            .thenReturn(carrierConfigs)
+        whenever(mockSatelliteSettingsRepository.isSatelliteAttachSupported(TEST_SUB_ID))
+            .thenReturn(true)
+        whenever(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(TEST_SUB_ID))
+            .thenReturn(CARRIER_ROAMING_NTN_CONNECT_HYBRID)
+
         whenever(
                 mockSatelliteRepository.isSatelliteAccessConfigurationForCurrentLocationFlow(
                     TEST_SUB_ID
@@ -158,15 +161,11 @@ class SatelliteSettingPreferenceControllerTest {
             // when the isSatelliteAccessConfigurationForCurrentLocationFlow emits new values,
             // which is the core behavior of using .collect { ... } on the flow.
 
-            // Arrange: Set up carrier configs to make the preference visible.
-            val carrierConfigs = PersistableBundle()
-            carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
-            carrierConfigs.putInt(
-                KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                CARRIER_ROAMING_NTN_CONNECT_MANUAL,
-            )
-            whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
-                .thenReturn(carrierConfigs)
+            // Arrange: Set up repository to make the preference visible.
+            whenever(mockSatelliteSettingsRepository.isSatelliteAttachSupported(TEST_SUB_ID))
+                .thenReturn(true)
+            whenever(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(TEST_SUB_ID))
+                .thenReturn(CARRIER_ROAMING_NTN_CONNECT_MANUAL)
 
             // Arrange: Use a MutableStateFlow to control the satellite access value, allowing
             // us to emit new values during the test. Start with satellite access being disabled.
@@ -207,10 +206,9 @@ class SatelliteSettingPreferenceControllerTest {
 
     @Test
     fun isVisible_satelliteIsNotSupported_inVisible() = runBlocking {
-        val carrierConfigs = PersistableBundle()
-        carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
-        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
-            .thenReturn(carrierConfigs)
+        whenever(mockSatelliteSettingsRepository.isSatelliteAttachSupported(TEST_SUB_ID))
+            .thenReturn(false)
+
         controller.initialize(TEST_SUB_ID)
         preferenceScreen.addPreference(preference)
         controller.displayPreference(preferenceScreen)
@@ -223,14 +221,10 @@ class SatelliteSettingPreferenceControllerTest {
 
     @Test
     fun isVisible_autoType_visible() = runBlocking {
-        val carrierConfigs = PersistableBundle()
-        carrierConfigs.putBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
-        carrierConfigs.putInt(
-            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-        )
-        whenever(mockCarrierConfigCache.getSpecificConfigsForSubId(eq(TEST_SUB_ID), any()))
-            .thenReturn(carrierConfigs)
+        whenever(mockSatelliteSettingsRepository.isSatelliteAttachSupported(TEST_SUB_ID))
+            .thenReturn(true)
+        whenever(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(TEST_SUB_ID))
+            .thenReturn(CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC)
 
         controller.initialize(TEST_SUB_ID)
         preferenceScreen.addPreference(preference)

@@ -25,7 +25,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
-import android.os.PersistableBundle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
@@ -36,6 +35,9 @@ import android.telephony.TelephonyManager
 import android.telephony.satellite.SatelliteManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
+import com.android.settings.network.telephony.TelephonyFeatureProvider
+import com.android.settings.network.telephony.satellite.SatelliteSettingsRepository
+import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -95,9 +97,17 @@ class SatelliteTileStateReceiverTest {
     private val SUB_ID = 1
     private var jobId = 0
 
+    private lateinit var fakeFeatureFactory: FakeFeatureFactory
+    @Mock private lateinit var mockTelephonyFeatureProvider: TelephonyFeatureProvider
+    @Mock private lateinit var mockSatelliteSettingsRepository: SatelliteSettingsRepository
+
     @Before
     fun setUp() {
         context = spy(RuntimeEnvironment.getApplication())
+        fakeFeatureFactory = FakeFeatureFactory.setupForTest()
+        `when`(fakeFeatureFactory.telephonyFeatureProvider.satelliteSettingsRepository)
+            .thenReturn(mockSatelliteSettingsRepository)
+
         jobId = context.resources.getInteger(R.integer.satellite_eligibility_job)
         `when`(context.applicationContext).thenReturn(context)
         `when`(context.packageManager).thenReturn(packageManager)
@@ -515,16 +525,12 @@ class SatelliteTileStateReceiverTest {
         val reasons = if (isSupported) emptySet() else setOf(1)
         shadowSatelliteManager.setAttachRestrictionReasonsForCarrier(SUB_ID, reasons)
 
-        val config =
-            PersistableBundle().apply {
-                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, isSupported)
-                putInt(
-                    CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                    CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-                )
-            }
-        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)!!
-        shadowOf(carrierConfigManager).setConfigForSubId(SUB_ID, config)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(SUB_ID))
+            .thenReturn(isSupported)
+        if (isSupported) {
+            `when`(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(SUB_ID))
+                .thenReturn(CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC)
+        }
     }
 
     private fun verifyJobScheduled() {
