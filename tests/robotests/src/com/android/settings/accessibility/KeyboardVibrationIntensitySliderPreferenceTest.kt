@@ -15,6 +15,7 @@
  */
 package com.android.settings.accessibility
 
+import android.app.settings.SettingsEnums
 import android.os.vibrator.Flags
 import android.platform.test.flag.junit.SetFlagsRule
 import com.google.common.truth.Truth.assertThat
@@ -30,6 +31,12 @@ class KeyboardVibrationIntensitySliderPreferenceTest :
 
     override val hasRingerModeDependency = false
     override val preference = KeyboardVibrationIntensitySliderPreference(context)
+
+    @Test
+    fun preferenceActionMetrics_returnsKeyboardVibrationIntensityChanged() {
+        assertThat(preference.preferenceActionMetrics)
+            .isEqualTo(SettingsEnums.ACTION_KEYBOARD_VIBRATION_INTENSITY_CHANGED)
+    }
 
     @Test
     fun isAvailable_keyboardVibrationNotSupported_unavailable() {

@@ -42,15 +42,17 @@ import com.android.settings.testutils.shadow.ShadowUtils;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupdesign.GlifLayout;
 
+import com.google.testing.junit.testparameterinjector.TestParameter;
+
 import org.junit.After;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
+import org.robolectric.RobolectricTestParameterInjector;
 import org.robolectric.annotation.Config;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(RobolectricTestParameterInjector.class)
 @Config(shadows = ShadowUtils.class)
 public class ChooseLockPatternTest {
     @Rule
@@ -149,16 +151,22 @@ public class ChooseLockPatternTest {
     }
 
     @Test
-    public void headerText_stageConfirmWrong() {
+    public void headerText_shouldShowDrawYourPatternAgain_whenStageRequiresConfirmation(
+            @TestParameter({
+                "ConfirmWrong",
+                "NeedToConfirm",
+                "ChoiceConfirmed"
+            }) String stageName) {
+        ChooseLockPatternFragment.Stage stage = ChooseLockPatternFragment.Stage.valueOf(stageName);
         ChooseLockPattern activity = createActivity(true);
         ChooseLockPatternFragment fragment = (ChooseLockPatternFragment)
                 activity.getSupportFragmentManager().findFragmentById(R.id.main_content);
         final GlifLayout layout = fragment.getView().findViewById(R.id.setup_wizard_layout);
         Bundle savedInstanceState = new Bundle();
-        savedInstanceState.putInt(KEY_UI_STAGE,
-                ChooseLockPatternFragment.Stage.ConfirmWrong.ordinal());
+        savedInstanceState.putInt(KEY_UI_STAGE, stage.ordinal());
 
         fragment.onViewCreated(layout, savedInstanceState);
+
         assertThat(layout.getHeaderText().toString()).isEqualTo(activity.getResources().getString(
                 R.string.lockpassword_draw_your_pattern_again_header));
     }

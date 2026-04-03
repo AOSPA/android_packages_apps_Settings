@@ -23,16 +23,13 @@ import com.android.settings.accessibility.extensions.isPowerSaveMode
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.MUSTPASS_SET
-import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
-import com.android.settingslib.widget.MainSwitchPreferenceBinding
 import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+import com.android.settingslib.widget.MainSwitchPreferenceBinding
 
-
-// LINT.IfChange
 class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage, val isUiOnly: Boolean) :
     PreferenceMetadata, MainSwitchPreferenceBinding, BooleanValuePreference {
 
@@ -55,7 +52,10 @@ class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage, val i
         return arrayOf(MUSTPASS_SET)
     }
 
-    override fun getEnabledDescription(): String = if (!Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) "Battery saver must be turned off." else "Always enabled."
+    override fun getEnabledDescription(): String =
+        if (!Flags.allowToEnterDarkThemeSettingsWhenBatterySaver())
+            "Battery saver must be turned off."
+        else "Always enabled."
 
     override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
@@ -83,4 +83,3 @@ class DarkModeMainSwitchPreference(private val dataStore: DarkModeStorage, val i
         const val KEY = "dark_ui_activated"
     }
 }
-// LINT.ThenChange(DarkModeActivationPreferenceController.java)

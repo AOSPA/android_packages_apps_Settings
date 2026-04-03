@@ -1393,7 +1393,6 @@ public class UserSettings extends SettingsPreferenceFragment
                     pref.setSummary(R.string.user_summary_restricted_not_set_up);
                 } else {
                     pref.setSummary(R.string.user_summary_not_set_up);
-                    pref.setEnabled(true);
                 }
             } else if (user.isRestricted()) {
                 pref.setSummary(R.string.user_summary_restricted_profile);

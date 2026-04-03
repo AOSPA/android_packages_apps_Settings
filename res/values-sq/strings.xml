@@ -1056,7 +1056,10 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Je lidhur me një rrjet WEP. Nëse nuk i lejon këto rrjete, do të shkëputesh."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opsionet e përparuara"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Opsionet e përparuara të listës me lëshim poshtë"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"zgjero"</string>
+    <!-- no translation found for wifi_advanced_toggle_action_expand (8286882218084659009) -->
+    <skip />
+    <!-- no translation found for wifi_advanced_toggle_action_collapse (8864441197817185264) -->
+    <skip />
     <string name="wifi_ssid" msgid="5139273830867723030">"Emri i rrjetit*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Fut SSID-në"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Siguria"</string>
@@ -2309,6 +2312,8 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Njoftimet"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Cilësimet e shpejta"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Shënim"</string>
+    <!-- no translation found for action_corner_action_peek_title (4305093703546498134) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Zgjidh një shkurtore për <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"këndi i poshtëm majtas"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"këndi i poshtëm djathtas"</string>
@@ -4632,9 +4637,9 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Lejo që ky aplikacion të lexojë, modifikojë dhe fshijë të gjithë skedarët në këtë pajisje ose në çdo volum hapësire ruajtjeje të lidhur. Nëse lejohet, aplikacioni mund të ketë qasje te skedarët pa dijeninë tënde të qartë."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mund të ketë qasje te të gjithë skedarët"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatizimi i ekranit"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
+    <!-- no translation found for computer_control_automation_sub_heading (542883453066952146) -->
     <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2086013777547395674) -->
     <skip />
     <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
     <skip />
@@ -4644,11 +4649,10 @@
     <skip />
     <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (6590135080063496543) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Pyet çdo herë"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Lejo gjithmonë"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Mos lejo"</string>
     <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
@@ -4656,22 +4660,18 @@
     <skip />
     <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Aplikacioni u hoq"</string>
     <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 aplikacion i lejuar}other{# aplikacione të lejuara}}"</string>
     <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
     <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Nuk lejohet asnjë aplikacion"</string>
     <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Asistenti dixhital i parazgjedhur"</string>
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
@@ -4682,7 +4682,7 @@
     <skip />
     <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
     <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
+    <!-- no translation found for computer_control_automation_target_list_header (2625151188607263591) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Njoftimet në ekran të plotë"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Të lejohen njoftimet në ekran të plotë nga ky aplikacion"</string>
@@ -5867,7 +5867,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Çinstalo aplikacionin"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplikacionet e instaluara në # muajin e fundit}other{Aplikacionet e instaluara në # muajt e fundit}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplikacionet e instaluara më shumë se # muaj më parë}other{Aplikacionet e instaluara më shumë se # muaj më parë}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"Ndihma e IA-së"</string>
+    <!-- no translation found for ai_assist_category (6115635022788919643) -->
+    <skip />
     <string name="personal_context_title" msgid="6639623956831710453">"Ndihma proaktive"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Zgjidh nëse ky aplikacion mund të kontribuojë me informacione për të prodhuar sugjerime"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Raporti i pamjes"</string>
@@ -5888,6 +5889,8 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Aplikacioni do të riniset kur të ndryshosh raportin e pamjes. Mund t\'i humbasësh ndryshimet e paruajtura. Disa aplikacione mund të mos jenë të optimizuara për raporte të caktuara të pamjes."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Përvoja"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Kontrollori virtual i lojës"</string>
+    <!-- no translation found for virtual_gamepad_restart_game_toast (5281647814007835224) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensori i gjurmës së gishtit"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Njoftimet me blic"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Rreth njoftimeve me blic"</string>

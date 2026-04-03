@@ -18,8 +18,7 @@ package com.android.settings.network.telephony.satellite
 
 import android.content.Context
 import android.os.OutcomeReceiver
-import android.os.PersistableBundle
-import android.telephony.CarrierConfigManager
+import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
 import android.telephony.satellite.EnableRequestAttributes
 import android.telephony.satellite.EnableResponse
 import android.telephony.satellite.SatelliteManager
@@ -32,28 +31,25 @@ import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settings.network.telephony.TelephonyTogglePreferenceController
 import com.android.settings.network.telephony.satellite.quicksettings.SatelliteUtils
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.widget.MainSwitchPreference
 
 /** Controller for the main switch on the satellite settings screen. */
 class SatelliteSettingMainSwitchController(context: Context, key: String) :
     TelephonyTogglePreferenceController(context, key) {
 
-    private var mCarrierConfigs: PersistableBundle = PersistableBundle.EMPTY
     private lateinit var mSwitchPreference: MainSwitchPreference
     private var mSatelliteManager: SatelliteManager? = null
     private var mIsSatelliteEnabled = false
-    private var mNtnConnectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
+    private var mNtnConnectType = CARRIER_ROAMING_NTN_CONNECT_MANUAL
 
-    fun init(subId: Int, carrierConfigs: PersistableBundle, satelliteManager: SatelliteManager?) {
+    fun init(subId: Int, satelliteManager: SatelliteManager?) {
         mSubId = subId
-        mCarrierConfigs = carrierConfigs
-        mNtnConnectType =
-            mCarrierConfigs.getInt(
-                CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
-            )
+        val repository =
+            FeatureFactory.featureFactory.telephonyFeatureProvider.satelliteSettingsRepository
+        mNtnConnectType = repository.getSatelliteNtnConnectType(mSubId)
         mSatelliteManager = satelliteManager
-        if (SatelliteUtils.isLteBasedNtnSupported(mCarrierConfigs)) {
+        if (SatelliteUtils.isLteBasedNtnSupported(mSubId)) {
             requestIsEnabled()
         }
     }
@@ -64,7 +60,7 @@ class SatelliteSettingMainSwitchController(context: Context, key: String) :
         }
 
         // Only display the toggle if LTE NTN is supported.
-        return if (SatelliteUtils.isLteBasedNtnSupported(mCarrierConfigs)) {
+        return if (SatelliteUtils.isLteBasedNtnSupported(subId)) {
             AVAILABLE
         } else {
             CONDITIONALLY_UNAVAILABLE
@@ -122,7 +118,7 @@ class SatelliteSettingMainSwitchController(context: Context, key: String) :
 
     override fun updateState(preference: Preference) {
         super.updateState(preference)
-        if (SatelliteUtils.isLteBasedNtnSupported(mCarrierConfigs)) {
+        if (SatelliteUtils.isLteBasedNtnSupported(mSubId)) {
             requestIsEnabled()
         }
     }

@@ -1056,7 +1056,10 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"您已连接到 WEP 网络。如果您不再允许连接这类网络，将会断开连接。"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"高级选项"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"下拉列表高级选项"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"展开"</string>
+    <!-- no translation found for wifi_advanced_toggle_action_expand (8286882218084659009) -->
+    <skip />
+    <!-- no translation found for wifi_advanced_toggle_action_collapse (8864441197817185264) -->
+    <skip />
     <string name="wifi_ssid" msgid="5139273830867723030">"网络名称*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"输入 SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"安全性"</string>
@@ -2309,6 +2312,8 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"通知"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"快捷设置"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"笔记"</string>
+    <!-- no translation found for action_corner_action_peek_title (4305093703546498134) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"选择<xliff:g id="CORNER">%1$s</xliff:g>的快捷方式"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"左下角"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"右下角"</string>
@@ -4634,9 +4639,9 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允许此应用读取、修改和删除此设备或任何已连接的存储设备上的所有文件。如果您授予该权限，应用无需明确通知您即可访问文件。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以访问所有文件"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"屏幕自动化"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
+    <!-- no translation found for computer_control_automation_sub_heading (542883453066952146) -->
     <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2086013777547395674) -->
     <skip />
     <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
     <skip />
@@ -4646,11 +4651,10 @@
     <skip />
     <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (6590135080063496543) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都询问"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"始终允许"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"不允许"</string>
     <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
@@ -4658,22 +4662,18 @@
     <skip />
     <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"应用已移除"</string>
     <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{已允许 1 个应用}other{已允许 # 个应用}}"</string>
     <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
     <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"未允许任何应用"</string>
     <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"默认数字助理"</string>
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
@@ -4684,7 +4684,7 @@
     <skip />
     <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
     <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
+    <!-- no translation found for computer_control_automation_target_list_header (2625151188607263591) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全屏通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允许此应用显示全屏通知"</string>
@@ -5886,7 +5886,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"卸载应用"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{过去 # 个月内安装的应用}other{过去 # 个月内安装的应用}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# 个多月前安装的应用}other{# 个多月前安装的应用}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI 辅助"</string>
+    <!-- no translation found for ai_assist_category (6115635022788919643) -->
+    <skip />
     <string name="personal_context_title" msgid="6639623956831710453">"主动辅助"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"选择此应用是否可以提供信息来生成建议"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"宽高比"</string>
@@ -5907,6 +5908,8 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"更改宽高比后，应用将重启。未保存的更改可能会丢失。某些应用可能没有针对特定宽高比进行优化。"</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"体验"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"虚拟游戏手柄"</string>
+    <!-- no translation found for virtual_gamepad_restart_game_toast (5281647814007835224) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指纹传感器"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"闪烁通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"闪烁通知简介"</string>

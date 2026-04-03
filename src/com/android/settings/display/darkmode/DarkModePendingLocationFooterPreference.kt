@@ -29,14 +29,13 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.widget.FooterPreference
 
-// LINT.IfChange
 class DarkModePendingLocationFooterPreference :
     FooterPreferenceMetadata,
     FooterPreferenceBinding,
@@ -100,4 +99,3 @@ class DarkModePendingLocationFooterPreference :
         const val NIGHT_MODE_SETTING_KEY = Settings.Secure.UI_NIGHT_MODE
     }
 }
-// LINT.ThenChange(DarkModePendingLocationPreferenceController.java)

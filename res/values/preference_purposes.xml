@@ -726,7 +726,16 @@
     <!-- Account detail screen end -->
     <string name="sim_lock_settings_purpose" translatable="false">Allows users to manage the SIM card lock settings, including enabling or disabling the SIM PIN and changing the PIN code.</string>
     <!-- Date and Time Settings screen begin -->
-    <string name="date_time_settings_purpose" translatable="false">Allows users to manage the device\'s date, time, and time zone settings. This includes configuring automatic date, time, and time zone detection; manually setting the date, time, and time zone; configuring if location should be used to determine the time zone; and choosing between 12-hour and 24-hour time formats. Users can also configure whether to receive notifications for time zone changes or upcoming scheduled clock changes, such as Daylight Saving Time.</string>
+    <string name="date_time_settings_purpose"  translatable="false">Allows users to manage the device\'s date, time, and time zone settings. This includes configuring automatic date, time, and time zone detection; manually setting the date, time, and time zone; configuring if location should be used to determine the time zone; and choosing between 12-hour and 24-hour time formats. Users can also configure whether to receive notifications for time zone changes or upcoming scheduled clock changes, such as Daylight Saving Time.</string>
+    <string name="auto_date_time_purpose" translatable="false">Controls the user\’s ability to automatically set the date and time based on network and wireless signals.</string>
+    <string name="manual_date_purpose" translatable="false">Allows users to get and manually set the current date.</string>
+    <string name="manual_date_precondition" translatable="false">Cannot set date manually when automatic date and time detection is enabled.</string>
+    <string name="manual_time_purpose" translatable="false">Allows users to get and manually set the current time.</string>
+    <string name="manual_time_precondition" translatable="false">Cannot set time manually when automatic date and time detection is enabled.</string>
+    <string name="time_manager_service_not_available" translatable="false">TimeManager service not available.</string>
+    <string name="failed_to_update_time_configuration" translatable="false">Failed to update time configuration.</string>
+    <string name="failed_to_set_date" translatable="false">Failed to set date.</string>
+    <string name="failed_to_set_time" translatable="false">Failed to set time.</string>
     <!-- Date and Time Settings screen end -->
     <!-- Device unlock settings screens start -->
     <string name="device_unlock_pref_screen_purpose" translatable="false">Allows users to manage their screen lock settings. This includes setting or modifying their device credential, like a PIN or password, as well as managing their biometrics and other authenticators, like watches, and related preferences for each of these modalities.</string>

@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Olete ühendatud WEP-võrguga. Kui lõpetate nende võrkude lubamise, katkestatakse teie ühendus."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Täpsemad valikud"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Rippmenüü loend Täpsemad valikud"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"laienda"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"laiendamine"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"ahendamine"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Võrgu nimi*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Sisestage SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Turvalisus"</string>
@@ -2309,6 +2310,8 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Märguanded"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Kiirseaded"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Märkus"</string>
+    <!-- no translation found for action_corner_action_peek_title (4305093703546498134) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Valige otsetee <xliff:g id="CORNER">%1$s</xliff:g> jaoks"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"vasaku alanurga"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"parema alanurga"</string>
@@ -4632,10 +4635,8 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Sellel rakendusel lubatakse lugeda, muuta ja kustutada kõiki selles seadmes ning ühendatud andmekandjatel olevaid faile. Loa andmisel võib rakendus failidele juurde pääseda ilma teie teadmata."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pääseb failidele juurde"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Ekraani automatiseerimine"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"See rakendus saab vaadata teiste rakenduste ekraanikuva sisu ja sellega toiminguid teha, et teile abiks olla, isegi kui rakendused töötavad taustal."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> saab vaadata teie lubatud rakenduste ekraanikuva sisu ja sellega toiminguid teha, et teile abiks olla."</string>
     <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
     <skip />
     <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
@@ -4644,11 +4645,9 @@
     <skip />
     <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Lubage rakendustel vaadata ekraanikuva sisu ja sellega toiminguid teha, et teile abiks olla."</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Küsi iga kord"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Luba alati"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Ära luba"</string>
     <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
@@ -4656,22 +4655,18 @@
     <skip />
     <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Rakendus eemaldati."</string>
     <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{Üks rakendus on lubatud}other{# rakendust on lubatud}}"</string>
     <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
     <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Ükski rakendus pole lubatud."</string>
     <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Digitaalse assistendi vaikerakendus"</string>
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
@@ -4682,8 +4677,7 @@
     <skip />
     <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
     <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Need rakendused saavad vaadata rakenduse <xliff:g id="ID_1">%1$s</xliff:g> ekraanikuva sisu ja sellega toiminguid teha, et teile abiks olla."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Kogu ekraani katvad märguanded"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Selle rakenduse kogu ekraani katvate märguannete lubamine"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Lubage sellel rakendusel kuvada kogu ekraani katvaid märguandeid, kui seade on lukustatud. Rakendused võivad selle abil tõsta esile alarme, sissetulevaid kõnesid või muid pakilisi märguandeid."</string>
@@ -5867,7 +5861,7 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Desinstalli rakendus"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Rakendused, mis installiti viimase # kuu jooksul}other{Rakendused, mis installiti viimase # kuu jooksul}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Rakendused, mis installiti rohkem kui # kuu tagasi}other{Rakendused, mis installiti rohkem kui # kuud tagasi}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI-abi"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Juurdepääs ekraanile"</string>
     <string name="personal_context_title" msgid="6639623956831710453">"Ennetav abi"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Valige, kas see rakendus saab soovituste andmiseks teavet lisada."</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Kuvasuhe"</string>
@@ -5888,6 +5882,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"See rakendus taaskäivitatakse, kui muudate kuvasuhet. Salvestamata muudatused võivad kaduma minna. Teatud kuvasuhete korral ei pruugita mõningaid rakendusi optimeerida."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Kogemus"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtuaalne mängupult"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Muudatuste kinnitamiseks taaskäivitage mäng."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sõrmejäljeandur"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Vilkuvad märguanded"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Teave vilkuvate märguannete kohta"</string>

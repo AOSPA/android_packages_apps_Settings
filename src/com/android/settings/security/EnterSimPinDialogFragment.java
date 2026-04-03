@@ -88,6 +88,16 @@ public class EnterSimPinDialogFragment extends DialogFragment {
     }
 
     /**
+     * Returns a dialog requesting the user to enter the current SIM PIN when the user initiates
+     * turning off the manual SIM PIN protection.
+     * @return a dialog instance.
+     */
+    static EnterSimPinDialogFragment newEnterCurrentPinToTurnOff() {
+        return createFragmentWithArgs(R.string.turn_off_manual_sim_pin_title,
+                R.string.provide_current_sim_pin);
+    }
+
+    /**
      * Same as {@code newEnterCurrentPin} but with a hint about the correct format of the
      * PIN.
      *
@@ -110,12 +120,45 @@ public class EnterSimPinDialogFragment extends DialogFragment {
     }
 
     /**
+     * Returns a dialog requesting the user to enter the current SIM PIN when the user the process
+     * of changing the SIM card's PIN.
+     * @return a dialog instance.
+     */
+    static EnterSimPinDialogFragment newChangeCurrentPin() {
+        return createFragmentWithArgs(R.string.sim_pin_change,
+                R.string.provide_current_sim_pin);
+    }
+
+    /**
+     * Same as {@code newChangeCurrentPin} but with a hint about the correct format of the
+     * PIN.
+     *
+     * @return a dialog instance.
+     */
+    static EnterSimPinDialogFragment newChangeCurrentPinWithHint() {
+        return createFragmentWithArgs(R.string.sim_pin_change,
+                R.string.sim_invalid_pin_hint);
+    }
+
+    /**
+     * Same as {@code newEnterCurrentPin} but with a hint about the correct format of the
+     * PIN, for the flow when the user tries to change the SIM PIN.
+     *
+     * @return a dialog instance.
+     */
+    static EnterSimPinDialogFragment newChangeCurrentPin(int numAttemptsRemaining) {
+        return createFragmentWithArgs(R.string.sim_pin_change,
+                R.string.enter_current_sim_pin_after_mismatch,
+                numAttemptsRemaining);
+    }
+
+    /**
      * Returns a dialog asking the user to enter the new SIM PIN.
      * @return a dialog instance.
      */
     static EnterSimPinDialogFragment newEnterNewPin() {
         return createFragmentWithArgs(R.string.provide_new_sim_pin_title,
-                R.string.sim_enter_new);
+                R.string.provide_new_sim_pin);
     }
 
     /**
@@ -159,7 +202,6 @@ public class EnterSimPinDialogFragment extends DialogFragment {
 
     @Override
     public @NonNull Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        //readValuesFromBundle(savedInstanceState);
         Bundle args = requireArguments();
         int dialogTitleResource = args.getInt(KEY_TITLE);
         int mDialogMessageResource = args.getInt(KEY_MESSAGE);

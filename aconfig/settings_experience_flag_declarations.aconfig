@@ -20,3 +20,11 @@ flag {
         purpose: PURPOSE_BUGFIX
     }
 }
+
+flag {
+    name: "receive_troubleshooting_message_on_internet_dialog"
+    namespace: "settings_experience"
+    description: "Receive troubleshooting messages from another process."
+    bug: "473410103"
+}
+

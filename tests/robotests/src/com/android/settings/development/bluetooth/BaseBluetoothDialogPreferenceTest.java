@@ -54,12 +54,9 @@ public class BaseBluetoothDialogPreferenceTest {
     private static final String SUMMARY1 = "Test summary1";
     private static final String SUMMARY2 = "Test summary2";
 
-    @Mock
-    private BaseBluetoothDialogPreference.Callback mCallback;
-    @Mock
-    private Dialog mDialog;
-    @Mock
-    private View mView;
+    @Mock private BaseBluetoothDialogPreference.Callback mCallback;
+    @Mock private Dialog mDialog;
+    @Mock private View mView;
 
     private BaseBluetoothDialogPreference mPreference;
     private Context mContext;
@@ -170,13 +167,15 @@ public class BaseBluetoothDialogPreferenceTest {
 
     @Test
     public void generateSummary_checkString() {
-        String label = mContext.getResources().getString(
-                com.android.settingslib.R.string.bluetooth_select_a2dp_codec_streaming_label);
+        String label =
+                mContext.getResources()
+                        .getString(
+                                com.android.settingslib.R.string
+                                        .bluetooth_select_a2dp_codec_streaming_label);
         final String summary = String.format(label, SUMMARY2);
 
         assertThat(mPreference.generateSummary(1)).isEqualTo(summary);
     }
-
 
     private static class BaseBluetoothDialogPreferenceImpl extends BaseBluetoothDialogPreference {
 

@@ -226,10 +226,10 @@ class DarkModeApiFirstScreen :
             getSystemService(PowerManager::class.java)?.isPowerSaveMode == true
     }
 }
-
-// LINT.ThenChange(DarkModeSettingsFragment.java,
-//                 ../DarkUIPreferenceController.java,
-//                 ForceInvertPreferenceController.java)
+// LINT.ThenChange(DarkModeScreen.kt,
+//                 StandardDarkModeSelectorPreference.kt,
+//                 ExpandedDarkModeSelectorPreference.kt,
+//                 DarkModeCustomTimePreference.kt)
 
 internal enum class DarkThemeMode(override val asApiValue: Int, override val purpose: Int) :
     EnumApiWithRes<Int> {

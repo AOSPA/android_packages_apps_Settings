@@ -1056,7 +1056,10 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Bạn đang kết nối với một mạng WEP. Nếu ngừng cho phép các mạng này, bạn sẽ bị ngắt kết nối."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Tùy chọn nâng cao"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Danh sách thả xuống của Tùy chọn nâng cao"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"mở rộng"</string>
+    <!-- no translation found for wifi_advanced_toggle_action_expand (8286882218084659009) -->
+    <skip />
+    <!-- no translation found for wifi_advanced_toggle_action_collapse (8864441197817185264) -->
+    <skip />
     <string name="wifi_ssid" msgid="5139273830867723030">"Tên mạng*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Nhập SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Bảo mật"</string>
@@ -2309,6 +2312,8 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Thông báo"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Cài đặt nhanh"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Lưu ý"</string>
+    <!-- no translation found for action_corner_action_peek_title (4305093703546498134) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Chọn một lối tắt cho <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"góc dưới cùng bên trái"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"góc dưới cùng bên phải"</string>
@@ -2619,7 +2624,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Mở rộng"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Giao diện tối mở rộng"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Tự động áp dụng giao diện tối cho hầu hết các ứng dụng không hỗ trợ giao diện này, giúp cải thiện khả năng hỗ trợ tiếp cận"</string>
-    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Nếu chế độ mở rộng gặp vấn đề, hãy dùng chế độ tiêu chuẩn."</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Nếu bạn gặp vấn đề với chế độ Mở rộng, hãy dùng chế độ Tiêu chuẩn."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"buộc đảo ngược, đảo màu, độ tương phản"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Giao diện tối mở rộng"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Chế độ cài đặt giao diện tối mở rộng"</string>
@@ -4632,9 +4637,9 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Cho phép ứng dụng này đọc, sửa đổi và xóa tất cả các tệp trên thiết bị này hoặc bất kỳ thiết bị lưu trữ nào đã kết nối. Nếu bạn cho phép, ứng dụng có thể truy cập vào các tệp mà không cần thông báo rõ ràng cho bạn."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Có thể truy cập vào tất cả các tệp"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Tự động thao tác trên màn hình"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
+    <!-- no translation found for computer_control_automation_sub_heading (542883453066952146) -->
     <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2086013777547395674) -->
     <skip />
     <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
     <skip />
@@ -4644,11 +4649,10 @@
     <skip />
     <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (6590135080063496543) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Luôn hỏi"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Luôn cho phép"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Không cho phép"</string>
     <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
@@ -4656,22 +4660,18 @@
     <skip />
     <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Đã xoá ứng dụng"</string>
     <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
     <skip />
     <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
     <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 ứng dụng được cho phép}other{# ứng dụng được cho phép}}"</string>
     <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
     <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Chưa cho phép ứng dụng nào"</string>
     <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
     <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Trợ lý kỹ thuật số mặc định"</string>
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
     <skip />
     <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
@@ -4682,7 +4682,7 @@
     <skip />
     <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
     <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
+    <!-- no translation found for computer_control_automation_target_list_header (2625151188607263591) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Thông báo toàn màn hình"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Cho phép ứng dụng này hiện thông báo toàn màn hình"</string>
@@ -5867,7 +5867,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Gỡ cài đặt ứng dụng"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Ứng dụng được cài đặt trong vòng # tháng gần đây}other{Ứng dụng được cài đặt trong vòng # tháng gần đây}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Ứng dụng được cài đặt từ hơn # tháng trước}other{Ứng dụng được cài đặt từ hơn # tháng trước}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"Trợ giúp AI"</string>
+    <!-- no translation found for ai_assist_category (6115635022788919643) -->
+    <skip />
     <string name="personal_context_title" msgid="6639623956831710453">"Trợ giúp chủ động"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Chọn xem ứng dụng này có thể đóng góp thông tin để đưa ra đề xuất hay không"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Tỷ lệ khung hình"</string>
@@ -5888,6 +5889,8 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Ứng dụng sẽ khởi động lại khi bạn thay đổi tỷ lệ khung hình. Bạn có thể bị mất những thay đổi chưa lưu. Có thể một số ứng dụng chưa được tối ưu hoá cho một số tỷ lệ khung hình nhất định."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Trải nghiệm"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Tay điều khiển trò chơi ảo"</string>
+    <!-- no translation found for virtual_gamepad_restart_game_toast (5281647814007835224) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Cảm biến vân tay"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Nháy sáng khi có thông báo"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Giới thiệu về thông báo bằng đèn flash"</string>

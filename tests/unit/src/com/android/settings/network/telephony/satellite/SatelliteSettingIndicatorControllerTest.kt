@@ -16,14 +16,11 @@
 package com.android.settings.network.telephony.satellite
 
 import android.content.Context
-import android.os.PersistableBundle
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
-import android.telephony.CarrierConfigManager
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
-import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ALL
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED
@@ -35,11 +32,15 @@ import androidx.preference.PreferenceScreen
 import androidx.test.annotation.UiThreadTest
 import androidx.test.core.app.ApplicationProvider
 import com.android.internal.telephony.flags.Flags
+import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.ResourcesUtils
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.spy
 import org.mockito.kotlin.whenever
 
@@ -49,17 +50,24 @@ class SatelliteSettingIndicatorControllerTest {
 
     private val mContext: Context = ApplicationProvider.getApplicationContext()
     private var mController: SatelliteSettingIndicatorController? = null
-    private val mCarrierConfig = PersistableBundle()
+
+    private lateinit var mFakeFeatureFactory: FakeFeatureFactory
+    @Mock private lateinit var mMockSatelliteSettingsRepository: SatelliteSettingsRepository
 
     @Before
     fun setUp() {
+        MockitoAnnotations.initMocks(this)
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest()
+        whenever(mFakeFeatureFactory.telephonyFeatureProvider.satelliteSettingsRepository)
+            .thenReturn(mMockSatelliteSettingsRepository)
+
         mController = SatelliteSettingIndicatorController(mContext, KEY)
     }
 
     @Test
     fun updateState_autoModeAndAccEligibleDataAvailableAndSupported_correctString() {
         setAutoModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(true, true, SATELLITE_DATA_SUPPORT_ALL)
         setRestrictionReasonContain(false)
         val preferenceManager = PreferenceManager(mContext)
@@ -97,7 +105,7 @@ class SatelliteSettingIndicatorControllerTest {
     @Test
     fun updateState_autoModeAndAccEligibleDataAvailableAndConstrained_correctString() {
         setAutoModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             true,
             true,
@@ -139,7 +147,7 @@ class SatelliteSettingIndicatorControllerTest {
     @Test
     fun updateState_autoModeAndAccIneligibleDataUnavailable_prefDisabledAndCorrectString() {
         setAutoModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             true,
             false,
@@ -181,7 +189,7 @@ class SatelliteSettingIndicatorControllerTest {
     @Test
     fun updateState_autoModeAndAccEligibleDataUnavailable_prefEnabledAndCorrectString() {
         setAutoModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             true,
             false,
@@ -223,7 +231,7 @@ class SatelliteSettingIndicatorControllerTest {
     @Test
     fun updateState_manualModeAndSmsAvailble_prefEnabledAndCorrectString() {
         setManualModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             true,
             false,
@@ -275,7 +283,7 @@ class SatelliteSettingIndicatorControllerTest {
     @Test
     fun updateState_manualModeAndSmsUnAvailble_prefDisabledAndCorrectString() {
         setManualModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             false,
             false,
@@ -328,7 +336,7 @@ class SatelliteSettingIndicatorControllerTest {
     @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
     fun updateState_hybridModeAndAccNotEligibleSmsUnAvailble_preferenceDisabled() {
         setHybridModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             false,
             false,
@@ -382,7 +390,7 @@ class SatelliteSettingIndicatorControllerTest {
     @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
     fun updateState_hybridModeAndAccNotEligibleSmsAvailbleDataUnavailable_prefEnabledAndCorrectString() {
         setHybridModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             true,
             false,
@@ -436,7 +444,7 @@ class SatelliteSettingIndicatorControllerTest {
     @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
     fun updateState_hybridModeAndAccEligibleDataUnavailable_prefEnabledAndCorrectString() {
         setHybridModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             true,
             false,
@@ -490,7 +498,7 @@ class SatelliteSettingIndicatorControllerTest {
     @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
     fun updateState_hybridModeAndAccEligibleAndDataAvailable_prefEnabledAndCorrectString() {
         setHybridModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             true,
             true,
@@ -533,7 +541,7 @@ class SatelliteSettingIndicatorControllerTest {
     @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
     fun updateState_hybridModeAndAccEligibleAndDataAvailableDataConstrained_correctString() {
         setHybridModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(
             true,
             true,
@@ -576,7 +584,7 @@ class SatelliteSettingIndicatorControllerTest {
     @EnableFlags(Flags.FLAG_VZW_AST_SKYLO_FALLBACK)
     fun updateState_hybridModeAndAccEligibleAndDataAvailableDataSupported_correctString() {
         setHybridModeCarrierConfig()
-        mController?.init(TEST_SUB_ID, mCarrierConfig)
+        mController?.init(TEST_SUB_ID)
         mController?.setCarrierRoamingNtnAvailability(true, true, SATELLITE_DATA_SUPPORT_ALL)
         setRestrictionReasonContain(false)
         val preferenceManager = PreferenceManager(mContext)
@@ -635,29 +643,20 @@ class SatelliteSettingIndicatorControllerTest {
     }
 
     private fun setHybridModeCarrierConfig() {
-        mCarrierConfig.putInt(
-            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CARRIER_ROAMING_NTN_CONNECT_HYBRID,
-        )
-
-        mCarrierConfig.putBoolean(
-            CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL,
-            true,
-        )
+        whenever(mMockSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt()))
+            .thenReturn(CARRIER_ROAMING_NTN_CONNECT_HYBRID)
+        whenever(mMockSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt()))
+            .thenReturn(true)
     }
 
     private fun setManualModeCarrierConfig() {
-        mCarrierConfig.putInt(
-            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CARRIER_ROAMING_NTN_CONNECT_MANUAL,
-        )
+        whenever(mMockSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt()))
+            .thenReturn(CARRIER_ROAMING_NTN_CONNECT_MANUAL)
     }
 
     private fun setAutoModeCarrierConfig() {
-        mCarrierConfig.putInt(
-            KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-            CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-        )
+        whenever(mMockSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt()))
+            .thenReturn(CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC)
     }
 
     private fun setRestrictionReasonContain(isRestrictionReasonContain: Boolean) {

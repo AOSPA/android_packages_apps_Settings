@@ -15,3 +15,12 @@ flag {
     bug: "422974529"
 }
 
+flag {
+  name: "skip_onboarding_when_same_set"
+  namespace: "settings_experience"
+  description: "Retain previous settings when turning on the same 'second SIM'"
+  bug: "330893284"
+  metadata {
+    purpose: PURPOSE_BUGFIX
+  }
+}

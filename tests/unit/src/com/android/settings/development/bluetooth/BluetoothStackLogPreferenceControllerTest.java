@@ -16,9 +16,9 @@
 
 package com.android.settings.development.bluetooth;
 
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BT_LOG_LEVEL_DEFAULT_INDEX;
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BT_LOG_LEVEL_PROP;
-import static com.android.settings.development.bluetooth.BluetoothStackLogPreferenceController.BT_LOG_LEVEL_PROP_PERSIST;
+import static com.android.settings.development.bluetooth.StackLogPreferenceController.BT_LOG_LEVEL_DEFAULT_INDEX;
+import static com.android.settings.development.bluetooth.StackLogPreferenceController.BT_LOG_LEVEL_PROP;
+import static com.android.settings.development.bluetooth.StackLogPreferenceController.BT_LOG_LEVEL_PROP_PERSIST;
 
 import static com.google.common.truth.Truth.assertThat;
 
@@ -53,7 +53,7 @@ public class BluetoothStackLogPreferenceControllerTest {
     private PreferenceManager mPreferenceManager;
     private PreferenceScreen mPreferenceScreen;
 
-    private BluetoothStackLogPreferenceController mController;
+    private StackLogPreferenceController mController;
 
     private CharSequence[] mListValues;
     private CharSequence[] mListEntries;
@@ -69,7 +69,7 @@ public class BluetoothStackLogPreferenceControllerTest {
         mPreferenceManager = new PreferenceManager(mContext);
         mPreferenceScreen = mPreferenceManager.createPreferenceScreen(mContext);
         mPreference = new ListPreference(mContext);
-        mController = new BluetoothStackLogPreferenceController(mContext);
+        mController = new StackLogPreferenceController(mContext);
 
         mPreference.setKey(mController.getPreferenceKey());
         mPreference.setEntries(getStringArrayResourceId(XML_DEFINED_ENTRIES_RESOURCE));

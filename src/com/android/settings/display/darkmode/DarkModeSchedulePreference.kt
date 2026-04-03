@@ -35,7 +35,6 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 
-// LINT.IfChange
 class DarkModeSchedulePreference(
     context: Context,
     val isUiOnly: Boolean,
@@ -142,4 +141,3 @@ class DarkModeSchedulePreference(
         const val KEY = "dark_ui_auto_mode"
     }
 }
-// LINT.ThenChange(DarkModeScheduleSelectorController.java)

@@ -3628,9 +3628,11 @@
     <!-- Automatic SIM card lock protection screen, preference summary when there is no lockscreen so the feature cannot be turned on. [CHAR LIMIT=NONE] -->
     <string name="sim_protection_mode_lskf_required">Lockscreen required for automatic SIM protection, manual only available now</string>
     <!-- Enrollment into automatic SIM PIN management dialog, title. [CHAR LIMIT=40] -->
-    <string name="provide_current_sim_pin_title">Enter current SIM PIN</string>
-    <!-- Enrollment into automatic SIM PIN management dialog, text. [CHAR LIMIT=NONE] -->
-    <string name="provide_current_sim_pin">Enter the SIM card current PIN</string>
+    <string name="provide_current_sim_pin_title">Enter PIN to turn on SIM lock</string>
+    <!-- Enrollment into automatic SIM PIN management dialog or manual SIM PIN, text. [CHAR LIMIT=NONE] -->
+    <string name="provide_current_sim_pin">Enter your SIM PIN to continue</string>
+    <!-- Unenrollment from manual SIM PIN dialog, title. [CHAR LIMIT=40] -->
+    <string name="turn_off_manual_sim_pin_title">Enter PIN to turn off SIM lock</string>
     <!-- Enrollment into automatic SIM PIN management dialog, button for using carrier default PIN. [CHAR LIMIT=25] -->
     <string name="use_carrier_default_pin">Use carrier default</string>
     <!-- Protecting SIM card via PIN, enrolling into automatic or manual management. [CHAR LIMIT=NONE] -->
@@ -3640,15 +3642,17 @@
     <!-- Protecting SIM card via PIN, automatic management mode. [CHAR LIMIT=NONE] -->
     <string name="sim_pin_protection_mode_automatic">Automatic (Android-managed)</string>
     <!-- Dialog for entering the SIM PIN, title. [CHAR LIMIT=NONE] -->
-    <string name="provide_new_sim_pin_title">New SIM PIN</string>
+    <string name="provide_new_sim_pin_title">Set a new SIM PIN</string>
+    <!-- Dialog for entering the SIM PIN, text. [CHAR LIMIT=NONE] -->
+    <string name="provide_new_sim_pin">SIM PIN must be 4 to 8 digits</string>
     <!-- Dialog for confirming the SIM PIN, title. [CHAR LIMIT=NONE] -->
-    <string name="confirm_new_sim_pin_title">Confirm new SIM PIN</string>
+    <string name="confirm_new_sim_pin_title">Re-enter your SIM PIN</string>
     <!-- Error message shown to the user if the confirmed PIN does not match the new PIN entered. [CHAR LIMIT=NONE] -->
     <string name="confirm_new_sim_pin_after_mismatch">PINs do not match. Confirm the new SIM PIN.</string>
     <!-- Error message shown to the user if the current PIN provided is wrong. [CHAR LIMIT=NONE] -->
     <string name="enter_current_sim_pin_after_mismatch">Wrong PIN. Attempts remaining: <xliff:g id="num_attempts">%1$d</xliff:g></string>
     <!-- Accessibility hint - tell the user they should be entering the currend SIM card PIN. [CHAR LIMIT=NONE] -->
-    <string name="enter_current_sim_pin_hint">Enter the current PIN code of the SIM card</string>
+    <string name="enter_current_sim_pin_hint">Enter a PIN code for the SIM card</string>
     <!-- The title for the first SIM card slot preference. [CHAR LIMIT=NONE] -->
     <string name="first_sim_card_slot_title">First SIM card slot</string>
     <!-- The title for the second SIM card slot preference. [CHAR LIMIT=NONE] -->
@@ -3893,8 +3897,8 @@
     <!-- Label for categories splitter in Settings > Storage [CHAR LIMIT=none] -->
     <string name="storage_system_label">System</string>
 
-    <!-- Message to notify guest users as to why they can't set up the storage device [CHAR LIMIT=50]-->
-    <string name="storage_wizard_guest">Guest mode users cannot format SD cards</string>
+    <!-- Message to notify non-admin users as to why they can't set up the storage device [CHAR LIMIT=50]-->
+    <string name="storage_wizard_guest">Only admins can format SD cards</string>
 
     <!-- In-progress title. This string lets the user know the SD card is being formatted. The user won't be able to proceed with setup until this step is finished. The placeholder is for the name of the device (e.g. brand name of the SD card). [CHAR LIMIT=32] -->
     <string name="storage_wizard_format_progress_title">Formatting <xliff:g id="name" example="SD card">^1</xliff:g>\u2026</string>
@@ -11586,7 +11590,7 @@
     <!-- Banner button text to change the default digital assistant settings [CHAR LIMIT=45] [SCREENSHOT=screen/7yYg35RrTPZyoFu] -->
     <string name="computer_control_automation_banner_to_change_assistant_button_text">Change assistant</string>
     <!-- Header summary for computer control automation agent list [CHAR LIMIT=NONE] [SCREENSHOT=screen/6Q4DHoZHd8urFuj] -->
-    <string name="computer_control_automation_agent_list_header">These apps can see and interact with the screen content of apps you\u2019ve allowed, to help you complete tasks.</string>
+    <string name="computer_control_automation_agent_list_header">These apps can see and interact with the screen content of apps you\u2019ve allowed to help you complete tasks.</string>
     <!-- Empty state title for computer control automation agent list [CHAR LIMIT=NONE] [SCREENSHOT=screen/BNQNU8EYxipxZyS] -->
     <string name="computer_control_automation_agent_list_empty_title">You haven\u2019t installed any apps that can use screen automation</string>
     <!-- Header summary for computer control automation target list [CHAR LIMIT=NONE] [SCREENSHOT=screen/7gVSWSuePKETBEs] -->
@@ -13173,9 +13177,9 @@
     <!-- Debugging developer settings: enable angle as system driver? [CHAR LIMIT=50] -->
     <string name="enable_angle_as_system_driver">Experimental: Enable ANGLE</string>
     <!-- Debugging developer settings: enable angle as system driver summary [CHAR LIMIT=NONE] -->
-    <string name="enable_angle_as_system_driver_summary">Warning: Enable ANGLE as default OpenGL ES driver. This feature is in experiment and may not be compatible with some camera and video apps. Please backup your device data before turning on the switch</string>
+    <string name="enable_angle_as_system_driver_summary">Warning: ANGLE will be set as the default OpenGL ES driver. This feature is experimental and may not be compatible with some camera or video apps. Back up any important data before turning this on.</string>
     <!--Dialog body text used to explain a reboot is required after changing ANGLE as system GLES driver setting-->
-    <string name="reboot_dialog_enable_angle_as_system_driver">A reboot is required to change the system OpenGL ES driver. Please back up your device data before rebooting. In case the reboot failed, you need a factory reset to restore the device</string>
+    <string name="reboot_dialog_enable_angle_as_system_driver">To change the system OpenGL ES driver, the device will restart. Back up any important data before restarting. If restarting fails, a factory reset will be needed to use the device.</string>
 
     <!-- Title for App Compatibility Changes dashboard where developers can configure per-app overrides for compatibility changes [CHAR LIMIT=50] -->
     <string name="platform_compat_dashboard_title">App Compatibility Changes</string>
@@ -15446,6 +15450,11 @@
     <string name="supervision_web_content_filters_switch_summary">{count, plural,
         =1      {On # app}
         other   {On # apps}
+        }</string>
+    <!-- Title for web content filters supported apps entry point. [CHAR LIMIT=60] -->
+    <string name="supervision_web_content_filters_supported_apps_title">{count, plural,
+        =1      {With # app}
+        other   {With # apps}
         }</string>
     <!-- Floating text for supported apps entry point icon, which displays the number of remaining supported apps. [CHAR LIMIT=10] -->
     <string name="supervision_remaining_supported_apps_count">+<xliff:g id="count" example="2">%d</xliff:g></string>

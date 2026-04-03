@@ -19,27 +19,28 @@ package com.android.settings.network.telephony.satellite;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
-import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
-import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
 
-import static com.android.settings.network.telephony.satellite.SatelliteSettingFooterController.KEY_FOOTER_PREFERENCE;
+import static com.android.settings.network.telephony.satellite.SatelliteSettingFooterController
+        .KEY_FOOTER_PREFERENCE;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Looper;
-import android.os.PersistableBundle;
 import android.telephony.TelephonyManager;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.settings.network.telephony.CarrierConfigRepository;
+import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.ResourcesUtils;
 import com.android.settingslib.widget.FooterPreference;
 
@@ -61,11 +62,14 @@ public class SatelliteSettingFooterControllerTest {
     @Mock
     private TelephonyManager mTelephonyManager;
     @Mock
-    FooterPreference mFooterPreference;
+    private FooterPreference mFooterPreference;
+    @Mock
+    private SatelliteSettingsRepository mSatelliteSettingsRepository;
 
     private Context mContext;
     private SatelliteSettingFooterController mController;
-    private final PersistableBundle mPersistableBundle = new PersistableBundle();
+    private FakeFeatureFactory mFakeFeatureFactory;
+    private CarrierConfigRepository mCarrierConfigRepository;
 
     @Before
     public void setUp() {
@@ -73,11 +77,20 @@ public class SatelliteSettingFooterControllerTest {
             Looper.prepare();
         }
         mContext = spy(ApplicationProvider.getApplicationContext());
+        mFakeFeatureFactory = FakeFeatureFactory.setupForTest();
+        when(mFakeFeatureFactory.mTelephonyFeatureProvider.getSatelliteSettingsRepository())
+                .thenReturn(mSatelliteSettingsRepository);
+        mCarrierConfigRepository = new CarrierConfigRepository(mContext);
+        when(mFakeFeatureFactory.mTelephonyFeatureProvider.getCarrierConfigRepository())
+                .thenReturn(mCarrierConfigRepository);
+
         mController = new SatelliteSettingFooterController(mContext,
                 KEY_FOOTER_PREFERENCE);
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         when(mTelephonyManager.getSimOperatorName(TEST_SUB_ID)).thenReturn(TEST_OPERATOR_NAME);
-        mPersistableBundle.putString(KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "");
+        CarrierConfigRepository.Companion.resetForTest();
+        CarrierConfigRepository.Companion.setStringForTest(TEST_SUB_ID,
+                KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "");
     }
 
     @Test
@@ -85,7 +98,7 @@ public class SatelliteSettingFooterControllerTest {
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
         screen.addPreference(mFooterPreference);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
 
         mController.displayPreference(screen);
 
@@ -111,14 +124,15 @@ public class SatelliteSettingFooterControllerTest {
 
     @Test
     public void displayPreferenceScreen_manualTypeAndNoEntitlement() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_MANUAL);
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                false);
 
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
         screen.addPreference(mFooterPreference);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
 
         mController.displayPreference(screen);
 
@@ -141,14 +155,15 @@ public class SatelliteSettingFooterControllerTest {
 
     @Test
     public void displayPreferenceScreen_autoTypeAndNoEntitlement() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                false);
 
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
         screen.addPreference(mFooterPreference);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
 
         mController.displayPreference(screen);
 
@@ -168,14 +183,15 @@ public class SatelliteSettingFooterControllerTest {
 
     @Test
     public void displayPreferenceScreen_autoTypeAndHasEntitlement() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC);
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
 
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
         screen.addPreference(mFooterPreference);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
 
         mController.displayPreference(screen);
 
@@ -198,14 +214,15 @@ public class SatelliteSettingFooterControllerTest {
 
     @Test
     public void displayPreferenceScreen_manualTypeAndHasEntitlement() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_MANUAL);
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
 
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
         screen.addPreference(mFooterPreference);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
 
         mController.displayPreference(screen);
 
@@ -225,9 +242,10 @@ public class SatelliteSettingFooterControllerTest {
 
     @Test
     public void displayPreferenceScreen_hybridTypeAndEligible() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_HYBRID);
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
 
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
@@ -239,7 +257,7 @@ public class SatelliteSettingFooterControllerTest {
                 return true;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(true, true, 0);
 
         mController.displayPreference(screen);
@@ -257,9 +275,10 @@ public class SatelliteSettingFooterControllerTest {
 
     @Test
     public void displayPreferenceScreen_hybridTypeAndIneligible() {
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_HYBRID);
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, true);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                true);
 
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
@@ -271,7 +290,7 @@ public class SatelliteSettingFooterControllerTest {
                 return false;
             }
         };
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
         mController.setCarrierRoamingNtnAvailability(true, true, 0);
 
         mController.displayPreference(screen);
@@ -291,14 +310,15 @@ public class SatelliteSettingFooterControllerTest {
     public void displayPreferenceScreen_hybridTypeAndNoEntitlement() {
         // Verifies footer content for HYBRID connection type without entitlement support.
         // In this case, section 7 and 8 should be displayed.
-        mPersistableBundle.putInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+        when(mSatelliteSettingsRepository.getSatelliteNtnConnectType(anyInt())).thenReturn(
                 CARRIER_ROAMING_NTN_CONNECT_HYBRID);
-        mPersistableBundle.putBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false);
+        when(mSatelliteSettingsRepository.isSatelliteEntitlementSupported(anyInt())).thenReturn(
+                false);
 
         PreferenceScreen screen = new PreferenceManager(mContext).createPreferenceScreen(mContext);
         when(mFooterPreference.getKey()).thenReturn(KEY_FOOTER_PREFERENCE);
         screen.addPreference(mFooterPreference);
-        mController.init(TEST_SUB_ID, mPersistableBundle);
+        mController.init(TEST_SUB_ID);
 
         // Trigger preference display
         mController.displayPreference(screen);

@@ -1056,7 +1056,10 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Je bent verbonden met een WEP-netwerk. Als je deze netwerken niet meer toestaat, wordt de verbinding verbroken."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Geavanceerde opties"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Dropdownmenu \'Geavanceerde opties\'"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"uitvouwen"</string>
+    <!-- no translation found for wifi_advanced_toggle_action_expand (8286882218084659009) -->
+    <skip />
+    <!-- no translation found for wifi_advanced_toggle_action_collapse (8864441197817185264) -->
+    <skip />
     <string name="wifi_ssid" msgid="5139273830867723030">"Netwerknaam*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Voer de SSID in"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Beveiliging"</string>
@@ -2237,8 +2240,7 @@
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Naar standaard resetten?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Al je controllerinstellingen worden teruggezet op de standaardwaarden"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Resetten"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"op dit moment toegewezen aan <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad en muis"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Muis"</string>
@@ -2309,6 +2311,8 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Meldingen"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Snelle instellingen"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Notitie"</string>
+    <!-- no translation found for action_corner_action_peek_title (4305093703546498134) -->
+    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Kies een snelkoppeling voor de <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"linkerbenedenhoek"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"rechterbenedenhoek"</string>
@@ -2442,10 +2446,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Functievlaggen"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Bluetooth-stacklogboek aanzetten"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Wijzig het Bluetooth Stack Logging-logniveau (schakel bluetooth na het wijzigen van deze instelling)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Netwerkverbinding voor snoop-logbestand voor bluetooth-HCI aanzetten"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Het snoop-logbestand voor bluetooth-HCI beschikbaar maken op een lokale netwerkverbinding"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filter voor snoop-logbestand voor bluetooth-HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Filters instellen"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Zet bluetooth aan en uit om de wijzigingen door te voeren"</string>
@@ -4632,9 +4634,9 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Sta toe dat deze app alle bestanden op dit apparaat of gekoppelde opslagvolumes kan lezen, aanpassen of verwijderen. Als je dit toestaat, kan de app zonder jouw medeweten toegang tot bestanden krijgen."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mag toegang tot alle bestanden hebben"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Schermautomatisering"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
+    <!-- no translation found for computer_control_automation_sub_heading (542883453066952146) -->
     <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2086013777547395674) -->
     <skip />
     <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
     <skip />
@@ -4644,7 +4646,7 @@
     <skip />
     <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
     <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (6590135080063496543) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Altijd vragen"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Altijd toestaan"</string>
@@ -4677,7 +4679,7 @@
     <skip />
     <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
     <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
+    <!-- no translation found for computer_control_automation_target_list_header (2625151188607263591) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Meldingen op volledig scherm"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Meldingen op volledig scherm van deze app toestaan"</string>
@@ -5862,7 +5864,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"App verwijderen"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps in de afgelopen # maand geïnstalleerd}other{Apps in de afgelopen # maanden geïnstalleerd}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps meer dan # maand geleden geïnstalleerd}other{Apps meer dan # maanden geleden geïnstalleerd}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI-ondersteuning"</string>
+    <!-- no translation found for ai_assist_category (6115635022788919643) -->
+    <skip />
     <string name="personal_context_title" msgid="6639623956831710453">"Proactieve hulp"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Kies of deze app informatie mag bijdragen om suggesties te genereren"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Beeldverhouding"</string>
@@ -5883,6 +5886,8 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"De app wordt opnieuw opgestart als je de beeldverhouding wijzigt. Niet-opgeslagen wijzigingen kunnen verloren gaan. Sommige apps zijn misschien niet geoptimaliseerd voor bepaalde beeldverhoudingen."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Functionaliteit"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtuele gamepad"</string>
+    <!-- no translation found for virtual_gamepad_restart_game_toast (5281647814007835224) -->
+    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Vingerafdruksensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Meldingen met flits"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Over meldingen met flits"</string>
