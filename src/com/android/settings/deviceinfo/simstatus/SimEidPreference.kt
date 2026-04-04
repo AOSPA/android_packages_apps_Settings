@@ -128,7 +128,7 @@ class SimEidPreference(private val context: Context) :
     }
 
     override val sensitivityLevel
-        get() = SensitivityLevel.NO_SENSITIVITY
+        get() = SensitivityLevel.DO_NOT_EXPOSE
 
     private fun getEidMetadataWithAssociatedSlotId(): EidMetadata? {
         val subscriptionManager =
