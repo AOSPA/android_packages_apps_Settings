@@ -25,12 +25,13 @@ import com.android.settings.R
 import com.android.settings.Settings.LocationSettingsActivity
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.BannerMessagePreference
 
+// LINT.IfChange
 class TwilightLocationPreference :
     PreferenceMetadata, PreferenceBinding, PreferenceAvailabilityProvider {
 
@@ -48,7 +49,8 @@ class TwilightLocationPreference :
 
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
-    override val availabilityDescription = "The device must have location turned off."
+    override val availabilityDescription =
+        "The device must have location turned off."
 
     override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
@@ -82,3 +84,4 @@ class TwilightLocationPreference :
         const val KEY = "dark_ui_location_off"
     }
 }
+// LINT.ThenChange(../TwilightLocationPreferenceController.java)

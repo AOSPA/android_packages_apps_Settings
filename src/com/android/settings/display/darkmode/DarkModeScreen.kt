@@ -41,6 +41,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.metadata.BooleanValuePreference
 import com.android.settingslib.metadata.MUSTPASS_SET
+import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceCategory
 import com.android.settingslib.metadata.PreferenceIndexableProvider
 import com.android.settingslib.metadata.PreferenceLifecycleContext
@@ -53,8 +54,9 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+
 
 // LINT.IfChange
 abstract class BaseDarkModeScreen(context: Context, val isUiOnly: Boolean) :
@@ -98,6 +100,8 @@ abstract class BaseDarkModeScreen(context: Context, val isUiOnly: Boolean) :
     override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
+
+    override fun isFlagEnabled(context: Context) = Flags.catalystDarkUiMode()
 
     override fun fragmentClass(): Class<out Fragment>? = DarkModeSettingsFragment::class.java
 
@@ -171,23 +175,16 @@ abstract class BaseDarkModeScreen(context: Context, val isUiOnly: Boolean) :
     }
 
     override fun isEnabled(context: Context) =
-        if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) {
-            true
-        } else {
-            !context.isPowerSaveMode()
-        }
+        if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) true
+        else !context.isPowerSaveMode()
 
-    override fun getEnabledDescription() =
-        if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) {
-            "Always enabled."
-        } else {
-            "Battery saver must be turned off."
-        }
+    override fun getEnabledDescription() = if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) "Always enabled." else "Battery saver must be turned off."
 
     override fun getEnabledStability() = if (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver()) PreconditionStability.STABLE_UNTIL_APK_UPDATE else PreconditionStability.UNSTABLE
 
     override fun isIndexable(context: Context) =
-        Flags.allowToEnterDarkThemeSettingsWhenBatterySaver() || !context.isPowerSaveMode()
+        Flags.catalystDarkUiMode() &&
+            (Flags.allowToEnterDarkThemeSettingsWhenBatterySaver() || !context.isPowerSaveMode())
 
     override fun getSummary(context: Context): CharSequence? {
         val active = darkModeStorage.getBoolean(key) == true
@@ -203,7 +200,8 @@ abstract class BaseDarkModeScreen(context: Context, val isUiOnly: Boolean) :
             getSystemService(PowerManager::class.java)?.isPowerSaveMode == true
     }
 }
-// LINT.ThenChange(DarkModeApiFirstScreen.kt)
+
+// LINT.ThenChange(../DarkUIPreferenceController.java)
 
 @ProvidePreferenceScreen(DarkModeScreen.KEY)
 open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context, false) {

@@ -20,7 +20,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
+import android.os.PersistableBundle
 import android.provider.Settings
+import android.telephony.CarrierConfigManager
 import android.telephony.ServiceState
 import android.telephony.SubscriptionManager
 import android.telephony.TelephonyCallback
@@ -29,9 +31,6 @@ import android.telephony.satellite.SatelliteDisallowedReasonsCallback
 import android.telephony.satellite.SatelliteManager
 import android.telephony.satellite.SatelliteModemStateCallback
 import androidx.test.core.app.ApplicationProvider
-import com.android.settings.network.telephony.TelephonyFeatureProvider
-import com.android.settings.network.telephony.satellite.SatelliteSettingsRepository
-import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
@@ -56,6 +55,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowCarrierConfigManager
 import org.robolectric.shadows.ShadowLooper
 import org.robolectric.shadows.ShadowSubscriptionManager
 
@@ -70,10 +70,7 @@ class SatelliteStateRepositoryTest {
     @Mock private lateinit var connectivityManager: ConnectivityManager
 
     private lateinit var shadowSubscriptionManager: ShadowSubscriptionManager
-
-    private lateinit var fakeFeatureFactory: FakeFeatureFactory
-    @Mock private lateinit var mockTelephonyFeatureProvider: TelephonyFeatureProvider
-    @Mock private lateinit var mockSatelliteSettingsRepository: SatelliteSettingsRepository
+    private lateinit var shadowCarrierConfigManager: ShadowCarrierConfigManager
 
     // UnconfinedTestDispatcher executes coroutines eagerly (synchronously) when they are launched.
     // This ensures that when launchIn(backgroundScope) is called, the entire chain (subscription ->
@@ -85,24 +82,20 @@ class SatelliteStateRepositoryTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        fakeFeatureFactory = FakeFeatureFactory.setupForTest()
-        `when`(fakeFeatureFactory.telephonyFeatureProvider.satelliteSettingsRepository)
-            .thenReturn(mockSatelliteSettingsRepository)
-
+        shadowCarrierConfigManager =
+            shadowOf(context.getSystemService(CarrierConfigManager::class.java))
         shadowSubscriptionManager =
             shadowOf(context.getSystemService(SubscriptionManager::class.java))
 
         doAnswer { invocation ->
-                val callback = invocation.getArgument<TelephonyCallback>(1)
-                if (callback is TelephonyCallback.CarrierRoamingNtnListener) {
-                    // Trigger an emission by changing the state from its default (false, false)
-                    callback.onCarrierRoamingNtnEligibleStateChanged(true)
-                    callback.onCarrierRoamingNtnEligibleStateChanged(false)
-                }
-                null
+            val callback = invocation.getArgument<TelephonyCallback>(1)
+            if (callback is TelephonyCallback.CarrierRoamingNtnListener) {
+                // Trigger an emission by changing the state from its default (false, false)
+                callback.onCarrierRoamingNtnEligibleStateChanged(true)
+                callback.onCarrierRoamingNtnEligibleStateChanged(false)
             }
-            .`when`(telephonyManager)
-            .registerTelephonyCallback(any(), any())
+            null
+        }.`when`(telephonyManager).registerTelephonyCallback(any(), any())
     }
 
     private fun createRepository(
@@ -387,27 +380,28 @@ class SatelliteStateRepositoryTest {
         }
 
     @Test
-    fun satelliteStatus_whenOemSatelliteNotConnected_returnsActive() =
-        testScope.runTest {
-            repository = createRepository(backgroundScope)
-            val values = mutableListOf<SatelliteStatus>()
-            repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
-            advanceUntilIdle()
+     fun satelliteStatus_whenOemSatelliteNotConnected_returnsActive() =
+         testScope.runTest {
+             repository = createRepository(backgroundScope)
+             val values = mutableListOf<SatelliteStatus>()
+             repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+             advanceUntilIdle()
 
-            val callback = captureSatelliteModemStateCallback()
-            callback.onSatelliteModemStateChanged(
-                SatelliteManager.SATELLITE_MODEM_STATE_NOT_CONNECTED
-            )
-            advanceUntilIdle()
+             val callback = captureSatelliteModemStateCallback()
+             callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_NOT_CONNECTED)
+             advanceUntilIdle()
 
-            assertThat(values.last()).isEqualTo(SatelliteStatus.ACTIVE)
+             assertThat(values.last()).isEqualTo(SatelliteStatus.ACTIVE)
         }
 
     // Helpers to capture callbacks and trigger updates
 
     private fun setCarrierSupported(subId: Int, supported: Boolean) {
-        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(subId))
-            .thenReturn(supported)
+        val config =
+            PersistableBundle().apply {
+                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, supported)
+            }
+        shadowCarrierConfigManager.setConfigForSubId(subId, config)
     }
 
     private fun setAirplaneMode(airplaneModeOn: Boolean) {

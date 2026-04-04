@@ -17,13 +17,9 @@
 package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.VibrationAttributes;
@@ -36,7 +32,6 @@ import androidx.preference.PreferenceScreen;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settings.testutils.shadow.ShadowInteractionJankMonitor;
 import com.android.settingslib.core.lifecycle.Lifecycle;
@@ -70,12 +65,10 @@ public class KeyboardVibrationIntensitySliderPreferenceControllerTest {
     private Vibrator mVibrator;
     private KeyboardVibrationIntensitySliderPreferenceController mController;
     private SliderPreference mPreference;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mLifecycle = new Lifecycle(() -> mLifecycle);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
@@ -198,27 +191,14 @@ public class KeyboardVibrationIntensitySliderPreferenceControllerTest {
         mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_LOW);
         assertThat(readSetting(Settings.System.KEYBOARD_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_LOW);
-    }
 
-    @Test
-    public void setSliderPosition_logMetrics() {
         mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_MEDIUM);
-
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
-                eq(SettingsEnums.ACTION_KEYBOARD_VIBRATION_INTENSITY_CHANGED),
-                eq(Vibrator.VIBRATION_INTENSITY_MEDIUM));
-    }
-
-    @Test
-    public void setSliderPosition_preferenceDisabled_doesNotLogMetrics() {
-        updateSetting(VibrationPreferenceConfig.MAIN_SWITCH_SETTING_KEY,
-                Vibrator.VIBRATION_INTENSITY_OFF);
+        assertThat(readSetting(Settings.System.KEYBOARD_VIBRATION_INTENSITY))
+                .isEqualTo(Vibrator.VIBRATION_INTENSITY_MEDIUM);
 
         mController.setSliderPosition(Vibrator.VIBRATION_INTENSITY_HIGH);
-
-        verify(mFeatureFactory.metricsFeatureProvider, org.mockito.Mockito.never()).action(any(),
-                eq(SettingsEnums.ACTION_KEYBOARD_VIBRATION_INTENSITY_CHANGED),
-                any(Integer.class));
+        assertThat(readSetting(Settings.System.KEYBOARD_VIBRATION_INTENSITY))
+                .isEqualTo(Vibrator.VIBRATION_INTENSITY_HIGH);
     }
 
     private void updateSetting(String key, int value) {

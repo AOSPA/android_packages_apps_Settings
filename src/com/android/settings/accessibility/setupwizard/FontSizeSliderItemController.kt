@@ -20,11 +20,7 @@ import android.content.Context
 import androidx.fragment.app.FragmentActivity
 import com.android.settings.accessibility.TextReadingPreferenceFragment
 import com.android.settings.accessibility.setupwizard.items.SliderItem
-import com.android.settings.accessibility.textreading.data.FontSizeDataStore
-import com.android.settings.accessibility.textreading.ui.FontSizeDelegate
 import com.android.settings.accessibility.textreading.ui.FontSizePreference
-import com.android.settingslib.R as SettingsLibR
-import com.google.android.material.slider.Slider
 import com.google.android.setupdesign.items.Item
 
 /** Controller for the font size slider item in the Accessibility Setup Wizard. */
@@ -34,48 +30,12 @@ internal class FontSizeSliderItemController(
     private val metadata: FontSizePreference,
 ) : BaseItemController(item) {
 
-    private val fontSizeDataStore = metadata.storage(context) as FontSizeDataStore
-    private val fontSizes by lazy { fontSizeDataStore.fontSizeData.value.values }
-    private val fontSizesLabel by lazy {
-        fontSizes
-            .map { value ->
-                context.getString(SettingsLibR.string.font_scale_percentage, (value * 100).toInt())
-            }
-            .toTypedArray()
-    }
-    private val delegate by lazy {
-        FontSizeDelegate(fontSizeDataStore = fontSizeDataStore, dataStoreKey = KEY)
-    }
-
     override fun bindData(item: Item) {
         (item as? SliderItem)?.apply {
             with(metadata) {
                 min = getMinValue(context)
                 max = getMaxValue(context)
                 sliderIncrement = getIncrementStep(context)
-                sliderValue = delegate.sizePreview.value.currentIndex
-                sliderStateDescriptionProvider =
-                    SliderItem.SliderStateDescriptionProvider { index ->
-                        if (index in fontSizesLabel.indices) {
-                            fontSizesLabel[index]
-                        } else {
-                            null
-                        }
-                    }
-                extraChangeListener =
-                    Slider.OnChangeListener { _, value, _ ->
-                        delegate.onValueChange(index = value.toInt())
-                    }
-                extraTouchListener =
-                    object : Slider.OnSliderTouchListener {
-                        override fun onStartTrackingTouch(slider: Slider) {
-                            delegate.onStartTrackingTouch()
-                        }
-
-                        override fun onStopTrackingTouch(slider: Slider) {
-                            delegate.onStopTrackingTouch(slider.value.toInt())
-                        }
-                    }
             }
         }
     }

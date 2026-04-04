@@ -21,18 +21,6 @@
     android:id="@+id/supervision_setup_introduction"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:sucHeaderText="@string/supervision_intro_title">
-
-    <LinearLayout
-        style="@style/SudContentFrame"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            style="@style/SudDescription.Glif"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/supervision_intro_description"
-            android:contentDescription="@string/supervision_intro_content_description" />
-    </LinearLayout>
+    app:sucHeaderText="@string/supervision_intro_title"
+    app:sudDescriptionText="@string/supervision_intro_description">
 </com.google.android.setupdesign.GlifLayout>

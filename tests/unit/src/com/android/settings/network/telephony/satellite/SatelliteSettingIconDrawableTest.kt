@@ -50,7 +50,7 @@ class SatelliteSettingIconDrawableTest {
 
     @Test
     fun constructor_initializesWithDefaultText() {
-        assertThat(drawable.satText).isEqualTo("SAT")
+        assertThat(drawable.satText).isEqualTo(context.getString(R.string.satellite_icon_text))
     }
 
     @Test

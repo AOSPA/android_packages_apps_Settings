@@ -135,7 +135,7 @@
             android:title="@string/bluetooth_select_a2dp_codec_type"
             android:dialogTitle="@string/bluetooth_select_a2dp_codec_type_dialog_title"/>
 
-        <com.android.settings.development.bluetooth.SampleRateDialogPreference
+        <com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreference
             android:key="bluetooth_sample_rate_settings"
             android:title="@string/bluetooth_select_a2dp_codec_sample_rate"
             android:dialogTitle="@string/bluetooth_select_a2dp_codec_sample_rate_dialog_title"
@@ -143,7 +143,7 @@
             android:positiveButtonText=""
             android:negativeButtonText="@string/dlg_ok"/>
 
-        <com.android.settings.development.bluetooth.BitPerSampleDialogPreference
+        <com.android.settings.development.bluetooth.BluetoothBitPerSampleDialogPreference
             android:key="bluetooth_bit_per_sample_settings"
             android:title="@string/bluetooth_select_a2dp_codec_bits_per_sample"
             android:dialogTitle="@string/bluetooth_select_a2dp_codec_bits_per_sample_dialog_title"
@@ -151,7 +151,7 @@
             android:positiveButtonText=""
             android:negativeButtonText="@string/dlg_ok"/>
 
-        <com.android.settings.development.bluetooth.ChannelModeDialogPreference
+        <com.android.settings.development.bluetooth.BluetoothChannelModeDialogPreference
             android:key="bluetooth_channel_mode_settings"
             android:title="@string/bluetooth_select_a2dp_codec_channel_mode"
             android:dialogTitle="@string/bluetooth_select_a2dp_codec_channel_mode_dialog_title"
@@ -159,7 +159,7 @@
             android:positiveButtonText=""
             android:negativeButtonText="@string/dlg_ok"/>
 
-        <com.android.settings.development.bluetooth.QualityDialogPreference
+        <com.android.settings.development.bluetooth.BluetoothQualityDialogPreference
             android:key="bluetooth_a2dp_ldac_playback_quality"
             android:title="@string/bluetooth_select_a2dp_codec_ldac_playback_quality"
             android:dialogTitle="@string/bluetooth_select_a2dp_codec_ldac_playback_quality_dialog_title"

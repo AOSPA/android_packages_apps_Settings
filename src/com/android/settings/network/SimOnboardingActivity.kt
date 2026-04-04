@@ -189,7 +189,7 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             }
 
             CallbackType.CALLBACK_FINISH -> {
-                scope.launch { withContext(Dispatchers.Main) { finish() } }
+                finish()
             }
         }
     }
@@ -231,12 +231,6 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
         RestartDialogImpl()
         LaunchedEffect(Unit) {
             viewModelUiStateFlow()
-            if (viewModel.shouldSkipOnboarding(onboardingService)) {
-                Log.d(TAG, "Skip onboarding flow and enable SIM directly.")
-                onboardingService.addCurrentItemForSelectedSim()
-                callbackListener(CallbackType.CALLBACK_ONBOARDING_COMPLETE)
-                return@LaunchedEffect
-            }
 
             if (
                 showError.value != ErrorType.ERROR_NONE ||
@@ -420,26 +414,23 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
             .catch { e -> Log.e(TAG, "Error while sidecarReceiverFlow", e) }
             .conflate()
 
-    suspend fun startSimSwitching() {
-        withContext(Dispatchers.Default) {
-            Log.d(TAG, "startSimSwitching:")
+    fun startSimSwitching() {
+        Log.d(TAG, "startSimSwitching:")
 
-            var targetSubInfo = onboardingService.targetSubInfo
-            if (onboardingService.doesTargetSimActive) {
-                Log.d(TAG, "target subInfo is already active")
-                viewModel.saveSimOnboardingResult(onboardingService)
-                callbackListener(CallbackType.CALLBACK_SETUP_NAME)
-                return@withContext
-            }
-            targetSubInfo?.let {
-                var removedSubInfo = onboardingService.getRemovedSim()
-                viewModel.startSimSwitching(targetSubInfo, removedSubInfo)
-            }
-                ?: run {
-                    Log.e(TAG, "no target subInfo in onboardingService")
-                    withContext(Dispatchers.Main) { finish() }
-                }
+        var targetSubInfo = onboardingService.targetSubInfo
+        if (onboardingService.doesTargetSimActive) {
+            Log.d(TAG, "target subInfo is already active")
+            callbackListener(CallbackType.CALLBACK_SETUP_NAME)
+            return
         }
+        targetSubInfo?.let {
+            var removedSubInfo = onboardingService.getRemovedSim()
+            viewModel.startSimSwitching(targetSubInfo, removedSubInfo)
+        }
+            ?: run {
+                Log.e(TAG, "no target subInfo in onboardingService")
+                finish()
+            }
     }
 
     fun onStateChange(fragment: SidecarFragment?) {
@@ -488,7 +479,6 @@ class SimOnboardingActivity : SpaBaseDialogActivity() {
                 TAG,
                 if (isTimeout) "Sim is not ready after timeout" else "Sim is ready then go to next",
             )
-            viewModel.saveSimOnboardingResult(onboardingService)
             callbackListener(CallbackType.CALLBACK_SETUP_NAME)
         }
     }

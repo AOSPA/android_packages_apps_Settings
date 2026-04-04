@@ -30,6 +30,7 @@ import com.android.settings.R
 import com.android.settings.accessibility.TextReadingPreferenceFragment.EntryPoint
 import com.android.settings.accessibility.TooltipSliderPreference
 import com.android.settings.accessibility.textreading.data.DisplaySizeDataStore
+import com.android.settings.testutils.inflateViewHolder
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
@@ -37,6 +38,7 @@ import com.android.settingslib.preference.createAndBindWidget
 import com.android.settingslib.widget.SliderPreference
 import com.google.android.setupcompat.util.WizardManagerHelper
 import com.google.common.truth.Truth.assertThat
+import org.junit.Assume.assumeTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -146,6 +148,74 @@ class DisplaySizePreferenceTest {
     fun getMaxValue() {
         assertThat(preference.getMaxValue(context))
             .isEqualTo(dataStore.displaySizeData.value.values.size - 1)
+    }
+
+    @Test
+    fun verifyDataStoreValueWontChangeWhileSlidingTheSlider() {
+        val valueSize = preference.displaySizePreview.value.values.size
+        assumeTrue(
+            "Skip the test because there is only one value. We can't change the value",
+            valueSize > 1,
+        )
+
+        val dataStoreInitialValue = preference.displaySizePreview.value.currentIndex
+        val sliderPreference =
+            preference.createAndBindWidget<SliderPreference>(context, preferenceScreen)
+        val slider =
+            sliderPreference.run {
+                inflateViewHolder()
+                slider!!
+            }
+
+        preference.onStartTrackingTouch(slider)
+        val newValue = (slider.value + 1) % valueSize
+        preference.onValueChange(slider, newValue, true)
+
+        val storage = preference.storage(context) as DisplaySizeDataStore
+        assertThat(storage.getInt(preference.key)).isEqualTo(dataStoreInitialValue)
+    }
+
+    @Test
+    fun verifyDatastoreValueIsUpdatedWhenStopSlidingTheSlider() {
+        val valueSize = preference.displaySizePreview.value.values.size
+        assumeTrue(
+            "Skip the test because there is only one value. We can't change the value",
+            valueSize > 1,
+        )
+
+        val sliderPreference =
+            preference.createAndBindWidget<SliderPreference>(context, preferenceScreen)
+        val slider =
+            sliderPreference.run {
+                inflateViewHolder()
+                slider!!
+            }
+
+        preference.onStartTrackingTouch(slider)
+        val newValue = (slider.value + 1) % valueSize
+        slider.value = newValue
+        preference.onStopTrackingTouch(slider)
+
+        val storage = preference.storage(context) as DisplaySizeDataStore
+        assertThat(storage.getInt(preference.key)).isEqualTo(newValue)
+    }
+
+    @Test
+    fun verifyDisplaySizePreviewDataChangesWhenOnValueChangeIsCalled() {
+        val sliderPreference =
+            preference.createAndBindWidget<SliderPreference>(context, preferenceScreen)
+        val slider =
+            sliderPreference.run {
+                inflateViewHolder()
+                slider!!
+            }
+        val sliderIndex = slider.value.toInt()
+        assertThat(sliderIndex).isEqualTo(preference.displaySizePreview.value.currentIndex)
+
+        val newIndex = sliderIndex + 1
+        preference.onValueChange(slider, newIndex.toFloat(), true)
+
+        assertThat(preference.displaySizePreview.value.currentIndex).isEqualTo(newIndex)
     }
 
     @Test

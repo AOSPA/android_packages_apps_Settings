@@ -16,12 +16,8 @@
 
 package com.android.settings.network.telephony
 
-import com.android.settings.network.telephony.satellite.SatelliteSettingsRepository
-
-/** A interface to provide each function repository. */
 interface TelephonyFeatureProvider {
     val telephonyRepository: TelephonySettingsRepository
     val subscriptionRepository: SubscriptionSettingsRepository
     val carrierConfigRepository: CarrierConfigRepository
-    val satelliteSettingsRepository: SatelliteSettingsRepository
 }

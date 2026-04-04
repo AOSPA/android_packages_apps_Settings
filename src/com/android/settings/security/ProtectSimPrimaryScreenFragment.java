@@ -28,6 +28,7 @@ import androidx.preference.PreferenceCategory;
 
 import com.android.settings.R;
 import com.android.settings.network.telephony.ConvertToEsimPreferenceController;
+import com.android.settingslib.widget.IntroPreference;
 
 import java.util.List;
 
@@ -36,9 +37,12 @@ import java.util.List;
  * (in general) on/off.
  */
 public class ProtectSimPrimaryScreenFragment extends BaseSimPinFragment {
-    // Key of the CategoryPreference preference for the first active slot.
+    // Key of the IntroPreference preference for the first active slot.
+    private static final String FIRST_SLOT_HEADER = "first_active_slot_intro";
+    // Key of the IntroPreference preference for the second active slot.
+    private static final String SECOND_SLOT_HEADER = "second_active_slot_intro";
+
     private static final String FIRST_SLOT_CATEGORY = "category_first_sim_card_slot";
-    // Key of the CategoryPreference preference for the second active slot.
     private static final String SECOND_SLOT_CATEGORY = "category_second_sim_card_slot";
     // There are multiple controllers for changing the SIM PIN preferences - one for each slot.
     private List<ChangeSimPinPreferenceController> mChangePinControllers;
@@ -141,16 +145,18 @@ public class ProtectSimPrimaryScreenFragment extends BaseSimPinFragment {
         mAutoManagedSimPinHelper = helper;
     }
 
-    private void initSlotHeader(String categoryKey, int slotIndex) {
+    private void initSlotHeader(String categoryKey, String slotHeaderKey, int slotIndex) {
+        IntroPreference introPreference = findPreference(slotHeaderKey);
         PreferenceCategory category = findPreference(categoryKey);
-        if (category == null) {
-            Log.d(TAG, "Missing preference for category " + categoryKey);
+        if (introPreference == null || category == null) {
+            Log.d(TAG, "Missing preference for category " + categoryKey + " or " + slotHeaderKey);
             return;
         }
 
         int[] activeSlots = mAutoManagedSimPinHelper.getActiveSlots();
 
         if (activeSlots == null || activeSlots.length < (slotIndex + 1)) {
+            introPreference.setVisible(false);
             category.setVisible(false);
             return;
         }
@@ -162,20 +168,21 @@ public class ProtectSimPrimaryScreenFragment extends BaseSimPinFragment {
         SubscriptionInfo info = subscriptionManager.getActiveSubscriptionInfoForSimSlotIndex(
                 activeSlot);
         if (info != null) {
-            category.setTitle(info.getCarrierName());
+            introPreference.setTitle(info.getCarrierName());
         } else {
-            category.setTitle(
+            introPreference.setTitle(
                     getContext().getResources().getString(R.string.sim_editor_title,
                             slotIndex + 1));
         }
+        introPreference.setVisible(true);
         category.setVisible(true);
     }
 
     private void initFirstActiveSlotHeader() {
-        initSlotHeader(FIRST_SLOT_CATEGORY, 0);
+        initSlotHeader(FIRST_SLOT_CATEGORY, FIRST_SLOT_HEADER, 0);
     }
 
     private void initSecondActiveSlotHeader() {
-        initSlotHeader(SECOND_SLOT_CATEGORY, 1);
+        initSlotHeader(SECOND_SLOT_CATEGORY, SECOND_SLOT_HEADER, 1);
     }
 }

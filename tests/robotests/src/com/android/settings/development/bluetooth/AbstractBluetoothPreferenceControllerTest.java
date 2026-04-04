@@ -27,6 +27,7 @@ import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
 
+import com.android.settings.development.BluetoothA2dpConfigStore;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
 import org.junit.Before;
@@ -40,8 +41,10 @@ import org.robolectric.RuntimeEnvironment;
 @RunWith(RobolectricTestRunner.class)
 public class AbstractBluetoothPreferenceControllerTest {
 
-    @Mock private A2dpConfigStore mA2dpConfigStore;
-    @Mock private BluetoothA2dp mBluetoothA2dp;
+    @Mock
+    private BluetoothA2dpConfigStore mBluetoothA2dpConfigStore;
+    @Mock
+    private BluetoothA2dp mBluetoothA2dp;
 
     private LifecycleOwner mLifecycleOwner;
     private Lifecycle mLifecycle;
@@ -54,10 +57,8 @@ public class AbstractBluetoothPreferenceControllerTest {
         mContext = RuntimeEnvironment.application;
         mLifecycleOwner = () -> mLifecycle;
         mLifecycle = new Lifecycle(mLifecycleOwner);
-        mController =
-                spy(
-                        new AbstractBluetoothPreferenceControllerImpl(
-                                mContext, mLifecycle, mA2dpConfigStore));
+        mController = spy(new AbstractBluetoothPreferenceControllerImpl(mContext, mLifecycle,
+                mBluetoothA2dpConfigStore));
     }
 
     @Test
@@ -95,11 +96,11 @@ public class AbstractBluetoothPreferenceControllerTest {
         assertThat(mController.mBluetoothA2dp).isNull();
     }
 
-    private static class AbstractBluetoothPreferenceControllerImpl
-            extends AbstractBluetoothPreferenceController {
+    private static class AbstractBluetoothPreferenceControllerImpl extends
+            AbstractBluetoothPreferenceController {
 
-        private AbstractBluetoothPreferenceControllerImpl(
-                Context context, Lifecycle lifecycle, A2dpConfigStore store) {
+        private AbstractBluetoothPreferenceControllerImpl(Context context, Lifecycle lifecycle,
+                BluetoothA2dpConfigStore store) {
             super(context, lifecycle, store);
         }
 

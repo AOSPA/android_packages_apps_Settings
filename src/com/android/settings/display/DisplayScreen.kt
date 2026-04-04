@@ -21,6 +21,7 @@ import androidx.fragment.app.Fragment
 import com.android.settings.DisplaySettings
 import com.android.settings.R
 import com.android.settings.Settings.DisplaySettingsActivity
+import com.android.settings.accessibility.Flags as AccessibilityFlags
 import com.android.settings.accessibility.textreading.ui.TextReadingScreen
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.display.darkmode.DarkModeScreen
@@ -29,15 +30,15 @@ import com.android.settings.flags.Flags
 import com.android.settings.security.LockScreenPreferenceScreen
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceCategory as Category
 import com.android.settingslib.metadata.PreferenceIconProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
-import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.widget.SettingsThemeHelper.isExpressiveTheme
 import kotlinx.coroutines.CoroutineScope
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 // LINT.IfChange
 @ProvidePreferenceScreen(DisplayScreen.KEY)
@@ -98,7 +99,7 @@ open class DisplayScreen :
                 R.string.category_name_appearance,
             ) order -180 +=
                 {
-                    +DarkModeScreen.KEY
+                    if (AccessibilityFlags.catalystDarkUiMode()) +DarkModeScreen.KEY
                     +TextReadingScreen.KEY
                 }
             +Category(

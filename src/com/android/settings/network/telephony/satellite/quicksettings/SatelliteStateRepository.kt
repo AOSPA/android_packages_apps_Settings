@@ -96,8 +96,7 @@ constructor(
             }
 
         // no initial state needs to be emited.
-        // registerTelephonyCallback always callsback immediately with current state as per
-        // documentation of the API
+	// registerTelephonyCallback always callsback immediately with current state as per documentation of the API
 
         telephonyManager?.registerTelephonyCallback(callbackExecutor, callback)
         awaitClose { runCatching { telephonyManager?.unregisterTelephonyCallback(callback) } }
@@ -283,7 +282,7 @@ constructor(
                 activeSubIdFlow,
             ) { (carrierState, isOemActive, disallowedReasons), isTerrestrial, isAirplaneMode, subId
                 ->
-                val isCarrierSupported = SatelliteUtils.isCarrierRoamingNtnSupported(subId)
+                val isCarrierSupported = SatelliteUtils.isCarrierRoamingNtnSupported(context, subId)
                 val isSatelliteAvailable =
                     checkSatelliteAvailability(
                         isCarrierEligible = carrierState.isEligible,
@@ -299,7 +298,7 @@ constructor(
                         "isTerrestrial=$isTerrestrial, isCarrierSupported=$isCarrierSupported, " +
                         "carrierEligible=${carrierState.isEligible}, carrierActive=${carrierState.isActive}, " +
                         "oemActive=$isOemActive, oemDisallowedReasons=${disallowedReasons.contentToString()}, " +
-                        "isSatelliteAvailable=$isSatelliteAvailable",
+                        "isSatelliteAvailable=$isSatelliteAvailable"
                 )
 
                 // Rule: Immediate return if Airplane Mode is on

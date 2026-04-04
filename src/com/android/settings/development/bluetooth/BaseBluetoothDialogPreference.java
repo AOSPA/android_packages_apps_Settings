@@ -30,9 +30,11 @@ import com.android.settingslib.CustomDialogPreferenceCompat;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Abstract class for Bluetooth A2DP config preference in developer option. */
-public abstract class BaseBluetoothDialogPreference extends CustomDialogPreferenceCompat
-        implements RadioGroup.OnCheckedChangeListener {
+/**
+ * Abstract class for Bluetooth A2DP config preference in developer option.
+ */
+public abstract class BaseBluetoothDialogPreference extends CustomDialogPreferenceCompat implements
+        RadioGroup.OnCheckedChangeListener{
     private static final String TAG = "BaseBluetoothDlgPref";
 
     protected List<Integer> mRadioButtonIds = new ArrayList<>();
@@ -53,8 +55,8 @@ public abstract class BaseBluetoothDialogPreference extends CustomDialogPreferen
         super(context, attrs, defStyleAttr);
     }
 
-    public BaseBluetoothDialogPreference(
-            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public BaseBluetoothDialogPreference(Context context, AttributeSet attrs, int defStyleAttr,
+            int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -77,9 +79,8 @@ public abstract class BaseBluetoothDialogPreference extends CustomDialogPreferen
         // Initial radio button group
         final RadioGroup radioGroup = view.findViewById(getRadioButtonGroupId());
         if (radioGroup == null) {
-            Log.e(
-                    TAG,
-                    "Unable to show dialog by no radio button group: " + getRadioButtonGroupId());
+            Log.e(TAG, "Unable to show dialog by no radio button group: "
+                    + getRadioButtonGroupId());
             return;
         }
         radioGroup.check(mRadioButtonIds.get(currentIndex));
@@ -118,48 +119,54 @@ public abstract class BaseBluetoothDialogPreference extends CustomDialogPreferen
         getDialog().dismiss();
     }
 
-    /** Method to set callback. */
+    /**
+     * Method to set callback.
+     */
     public void setCallback(Callback callback) {
         mCallback = callback;
     }
 
-    /** Method to get summary strings by index. */
+    /**
+     * Method to get summary strings by index.
+     */
     protected String generateSummary(int index) {
         if (index > mSummaryStrings.size()) {
             Log.e(TAG, "Unable to get summary of " + index + ". Size is " + mSummaryStrings.size());
             return null;
         }
-        return index == getDefaultIndex()
-                ? mSummaryStrings.get(getDefaultIndex())
-                : String.format(
-                        getContext()
-                                .getResources()
-                                .getString(
-                                        com.android.settingslib.R.string
-                                                .bluetooth_select_a2dp_codec_streaming_label),
+        return index == getDefaultIndex() ? mSummaryStrings.get(getDefaultIndex()) :
+                String.format(getContext().getResources().getString(
+                        com.android.settingslib.R
+                                .string.bluetooth_select_a2dp_codec_streaming_label),
                         mSummaryStrings.get(index));
     }
 
-    /** Method to get default index. */
+    /**
+     * Method to get default index.
+     */
     protected int getDefaultIndex() {
         return 0;
     }
 
-    /** Method to get radio button group id. */
+    /**
+     * Method to get radio button group id.
+     */
     protected abstract int getRadioButtonGroupId();
 
-    /** Callback interface for this class to manipulate data from controller. */
+    /**
+     * Callback interface for this class to manipulate data from controller.
+     */
     public interface Callback {
-        /** Method to get current Bluetooth A2DP config index. */
+        /**
+         * Method to get current Bluetooth A2DP config index.
+         */
         int getCurrentConfigIndex();
-
         /**
          * Method to get selectable config index which means supported by phone and device.
          *
          * @return the available {@link List} of the Bluetooth A2DP config.
          */
         List<Integer> getSelectableIndex();
-
         /**
          * Method to notify controller when user changes config.
          *

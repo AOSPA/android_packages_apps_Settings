@@ -41,7 +41,6 @@ import com.android.internal.logging.nano.MetricsProto;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.biometrics.IdentityCheckBiometricErrorDialog;
-import com.android.settings.development.bluetooth.A2dpHwOffloadPreferenceController;
 import com.android.settings.password.ConfirmDeviceCredentialActivity;
 import com.android.settings.testutils.shadow.ShadowAlertDialogCompat;
 import com.android.settings.testutils.shadow.ShadowUserManager;
@@ -265,11 +264,11 @@ public class DevelopmentSettingsDashboardFragmentTest {
     @Ignore
     @Config(shadows = ShadowDisableDevSettingsDialogFragment.class)
     public void onSwitchChanged_turnOff_andOffloadIsNotDefaultValue_shouldShowWarningDialog() {
-        final A2dpHwOffloadPreferenceController controller =
-                mock(A2dpHwOffloadPreferenceController.class);
+        final BluetoothA2dpHwOffloadPreferenceController controller =
+                mock(BluetoothA2dpHwOffloadPreferenceController.class);
         when(mDashboard.getContext()).thenReturn(mContext);
         when(mDashboard.getDevelopmentOptionsController(
-                A2dpHwOffloadPreferenceController.class)).thenReturn(controller);
+                BluetoothA2dpHwOffloadPreferenceController.class)).thenReturn(controller);
         when(controller.isDefaultValue()).thenReturn(false);
         Settings.Global.putInt(mContext.getContentResolver(),
                 Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);

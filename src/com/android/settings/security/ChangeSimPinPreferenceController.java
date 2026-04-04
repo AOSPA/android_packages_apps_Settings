@@ -161,8 +161,8 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
     private EnterSimPinDialogFragment getDialogForState(int state, boolean invalidPinInput) {
         return switch (state) {
             case STATE_ENTER_CURRENT_PIN ->
-                invalidPinInput ? EnterSimPinDialogFragment.newChangeCurrentPinWithHint()
-                        : EnterSimPinDialogFragment.newChangeCurrentPin();
+                invalidPinInput ? EnterSimPinDialogFragment.newEnterCurrentPinWithHint()
+                        : EnterSimPinDialogFragment.newEnterCurrentPin();
             case STATE_ENTER_NEW_PIN ->
                 invalidPinInput ? EnterSimPinDialogFragment.newEnterNewPinWithHint()
                         : EnterSimPinDialogFragment.newEnterNewPin();
@@ -215,7 +215,7 @@ public class ChangeSimPinPreferenceController extends BasePreferenceController i
                 if (result.getResult() != PIN_RESULT_TYPE_SUCCESS) {
                     resetState();
                     showPinEntryDialog(
-                            EnterSimPinDialogFragment.newChangeCurrentPin(
+                            EnterSimPinDialogFragment.newEnterCurrentPin(
                                             result.getAttemptsRemaining()));
                 } else {
                     Toast.makeText(mContext,

@@ -27,6 +27,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.core.PreferenceControllerMixin;
+import com.android.settings.development.BluetoothA2dpConfigStore;
+import com.android.settings.development.BluetoothServiceConnectionListener;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 import com.android.settingslib.core.lifecycle.LifecycleObserver;
 import com.android.settingslib.core.lifecycle.events.OnDestroy;
@@ -34,22 +36,22 @@ import com.android.settingslib.development.DeveloperOptionsPreferenceController;
 
 import java.util.List;
 
-/** Abstract class for Bluetooth A2DP config controller in developer option. */
-public abstract class AbstractBluetoothPreferenceController
-        extends DeveloperOptionsPreferenceController
-        implements ServiceConnectionListener,
-                LifecycleObserver,
-                OnDestroy,
-                PreferenceControllerMixin {
+/**
+ * Abstract class for Bluetooth A2DP config controller in developer option.
+ */
+public abstract class AbstractBluetoothPreferenceController extends
+        DeveloperOptionsPreferenceController implements BluetoothServiceConnectionListener,
+        LifecycleObserver, OnDestroy, PreferenceControllerMixin {
 
     @Nullable protected volatile BluetoothA2dp mBluetoothA2dp;
 
-    @VisibleForTesting BluetoothAdapter mBluetoothAdapter;
+    @VisibleForTesting
+    BluetoothAdapter mBluetoothAdapter;
 
     public AbstractBluetoothPreferenceController(
             @Nullable Context context,
             @Nullable Lifecycle lifecycle,
-            @Nullable A2dpConfigStore store) {
+            @Nullable BluetoothA2dpConfigStore store) {
         super(context);
         if (lifecycle != null) {
             lifecycle.addObserver(this);
@@ -79,9 +81,13 @@ public abstract class AbstractBluetoothPreferenceController
         mBluetoothA2dp = null;
     }
 
-    /** Callback interface for this class to manipulate data from controller. */
+    /**
+     * Callback interface for this class to manipulate data from controller.
+     */
     public interface Callback {
-        /** Callback method to notify preferences when the Bluetooth A2DP config is changed. */
+        /**
+         * Callback method to notify preferences when the Bluetooth A2DP config is changed.
+         */
         void onBluetoothCodecChanged();
 
         /**

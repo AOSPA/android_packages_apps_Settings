@@ -34,7 +34,6 @@ import android.telephony.euicc.EuiccManager
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.settings.flags.Flags
 import java.util.concurrent.atomic.AtomicInteger
 import java.util.function.ToIntFunction
 import java.util.stream.Collectors
@@ -47,7 +46,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.conflate
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -82,7 +80,6 @@ class SimOnboardingViewModel(private val application: Application) : AndroidView
     private var euiccOpId = -1
     private lateinit var currentSimSwitchingInfo: SimSwitchingInfo
     private lateinit var callbackIntent: PendingIntent
-    private lateinit var repository: SimOnboardingRepository
 
     enum class SwitchingState {
         NOT_STARTED,
@@ -158,8 +155,6 @@ class SimOnboardingViewModel(private val application: Application) : AndroidView
                 }
             }
         }
-
-        repository = SimOnboardingRepository(application)
     }
 
     fun Application.sidecarReceiverFlow(): Flow<Int> =
@@ -601,48 +596,6 @@ class SimOnboardingViewModel(private val application: Application) : AndroidView
                 _uiState.value = SwitchingState.FAILED
             }
         }
-    }
-
-    suspend fun shouldSkipOnboarding(service: SimOnboardingService): Boolean {
-        if (!Flags.skipOnboardingWhenSameSet()) {
-            Log.d(TAG, "flag is disabled")
-            return false
-        }
-
-        val combinedSubIds =
-            service.activeSubInfoList.map { it.subscriptionId.toString() }.toSet().toMutableSet()
-        val targetSubId = service.targetSubInfo?.subscriptionId ?: return false
-        combinedSubIds.add(targetSubId.toString())
-
-        val savedSet = repository.onboardingSimSet.firstOrNull()
-        if (savedSet == null || savedSet.isEmpty()) {
-            Log.d(TAG, "shouldSkipOnboarding: savedSet is empty")
-            return false
-        }
-
-        val skip = combinedSubIds == savedSet
-        Log.d(
-            TAG,
-            "shouldSkipOnboarding: combinedSubIds=$combinedSubIds, savedSet=$savedSet, skip=$skip",
-        )
-        return skip
-    }
-
-    suspend fun saveSimOnboardingResult(service: SimOnboardingService) {
-        if (!Flags.skipOnboardingWhenSameSet()) {
-            Log.d(TAG, "flag is disabled")
-            return
-        }
-
-        val simSet = service.userSelectedSubInfoList.map { it.subscriptionId.toString() }.toSet()
-        if (simSet.isNotEmpty() && simSet.size >= 2) {
-            Log.d(TAG, "saveSimOnboardingResult: $simSet")
-            repository.saveOnboardingSimSet(simSet)
-        }
-    }
-
-    suspend fun clearOnboardingSimSet() {
-        repository.clearOnboardingSimSet()
     }
 
     companion object {

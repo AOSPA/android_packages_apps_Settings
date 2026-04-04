@@ -18,6 +18,8 @@ package com.android.settings.network.telephony.satellite;
 
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
+import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
 
@@ -25,6 +27,7 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
+import android.os.PersistableBundle;
 import android.telephony.satellite.SatelliteManager;
 import android.util.Log;
 
@@ -36,7 +39,6 @@ import androidx.preference.PreferenceScreen;
 
 import com.android.internal.telephony.flags.Flags;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
-import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 
 import java.util.List;
@@ -51,6 +53,7 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
     private boolean mIsDataAvailable;
     private boolean mIsSatelliteEligible;
     private int mDataMode = SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
+    private PersistableBundle mConfigBundle = new PersistableBundle();
 
     public SatelliteAppListCategoryController(
             @NonNull Context context,
@@ -59,8 +62,10 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
     }
 
     /** Initialize the necessary applications' data */
-    public void init(int subId) {
+    public void init(int subId, @NonNull PersistableBundle configBundle) {
         mSubId = subId;
+        mConfigBundle = configBundle;
+
     }
 
     void setCarrierRoamingNtnAvailability(boolean isSmsAvailable, boolean isDataAvailable,
@@ -92,11 +97,8 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        SatelliteSettingsRepository repository =
-                FeatureFactory.getFeatureFactory().getTelephonyFeatureProvider()
-                        .getSatelliteSettingsRepository();
         // Only when carrier support entitlement check, it shall check account eligible or not.
-        if (repository.isSatelliteEntitlementSupported(mSubId)
+        if (mConfigBundle.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL)
                 && !mIsSatelliteEligible) {
             return CONDITIONALLY_UNAVAILABLE;
         }
@@ -124,18 +126,15 @@ public class SatelliteAppListCategoryController extends TelephonyBasePreferenceC
 
     @VisibleForTesting
     protected boolean isSatelliteEligible() {
-        SatelliteSettingsRepository repository =
-                FeatureFactory.getFeatureFactory().getTelephonyFeatureProvider()
-                        .getSatelliteSettingsRepository();
-        if (repository.getSatelliteNtnConnectType(mSubId)
+        if (mConfigBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
                 == CARRIER_ROAMING_NTN_CONNECT_MANUAL) {
             return mIsSmsAvailable;
         }
 
         if (Flags.vzwAstSkyloFallback()
-                && repository.getSatelliteNtnConnectType(mSubId)
+                && mConfigBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
                 == CARRIER_ROAMING_NTN_CONNECT_HYBRID) {
-            if (repository.isSatelliteEntitlementSupported(mSubId)) {
+            if (mConfigBundle.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false)) {
                 if (SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)) {
                     return true;
                 } else {

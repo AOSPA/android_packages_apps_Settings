@@ -22,17 +22,19 @@
 
 package com.android.settings.network
 
+import android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID
+import android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX
+
 import android.content.Context
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
-import android.telephony.SubscriptionManager.INVALID_SIM_SLOT_INDEX
-import android.telephony.SubscriptionManager.INVALID_SUBSCRIPTION_ID
 import android.telephony.TelephonyManager
 import android.telephony.UiccCardInfo
 import android.util.Log
 import com.android.settings.network.SimOnboardingActivity.Companion.CallbackType
 import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.sortableSimSlotIndex
+import com.android.settings.network.telephony.UiccSlotRepository
 import com.android.settings.sim.SimActivationNotifier
 import com.android.settings.spa.network.setDefaultData
 import com.android.settings.spa.network.setDefaultSms
@@ -44,8 +46,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.withContext
 
 class SimOnboardingService {
-    var subscriptionManager: SubscriptionManager? = null
-    var telephonyManager: TelephonyManager? = null
+    var subscriptionManager:SubscriptionManager? = null
+    var telephonyManager:TelephonyManager? = null
 
     var targetSubId: Int = INVALID_SUBSCRIPTION_ID
     var targetSubInfo: SubscriptionInfo? = null
@@ -58,7 +60,7 @@ class SimOnboardingService {
     val targetPrimarySimAutoDataSwitch = MutableStateFlow(false)
     var targetNonDds: Int = INVALID_SUBSCRIPTION_ID
         get() {
-            if (targetPrimarySimMobileData == INVALID_SUBSCRIPTION_ID) {
+            if(targetPrimarySimMobileData == INVALID_SUBSCRIPTION_ID) {
                 Log.w(TAG, "No DDS")
                 return INVALID_SUBSCRIPTION_ID
             }
@@ -67,7 +69,6 @@ class SimOnboardingService {
                 .map { it.subscriptionId }
                 .firstOrNull() ?: INVALID_SUBSCRIPTION_ID
         }
-
     var callback: (CallbackType) -> Unit = {}
 
     var isMultipleEnabledProfilesSupported: Boolean = false
@@ -76,19 +77,16 @@ class SimOnboardingService {
                 Log.w(TAG, "UICC cards info list is empty.")
                 return false
             }
-            return uiccCardInfoList.any { it.isMultipleEnabledProfilesSupported }
+            return  uiccCardInfoList.any { it.isMultipleEnabledProfilesSupported }
         }
-
     var isEsimProfileEnabled: Boolean = false
         get() {
             return activeSubInfoList.stream().anyMatch { it.isEmbedded }
         }
-
     var isRemovableSimProfileEnabled: Boolean = false
         get() {
             return activeSubInfoList.stream().anyMatch { !it.isEmbedded }
         }
-
     var doesTargetSimActive = false
         get() {
             return targetSubInfo?.getSimSlotIndex() ?: INVALID_SIM_SLOT_INDEX >= 0
@@ -103,14 +101,13 @@ class SimOnboardingService {
         get() {
             return SubscriptionManager.isUsableSubscriptionId(targetSubId)
         }
-
     var getActiveModemCount = 0
         get() {
             return (telephonyManager?.getActiveModemCount() ?: 0)
         }
 
-    var renameMutableMap: MutableMap<Int, String> = mutableMapOf()
-    var userSelectedSubInfoList: MutableList<SubscriptionInfo> = mutableListOf()
+    var renameMutableMap : MutableMap<Int, String> = mutableMapOf()
+    var userSelectedSubInfoList : MutableList<SubscriptionInfo> = mutableListOf()
 
     var isSimSelectionFinished = false
         get() {
@@ -121,18 +118,16 @@ class SimOnboardingService {
     var isAllOfSlotAssigned = false
         get() {
             val activeModem = getActiveModemCount
-            if (activeModem == 0) {
+            if(activeModem == 0){
                 Log.e(TAG, "isAllOfSlotAssigned: getActiveModemCount is 0")
                 return true
             }
             return getActiveModemCount != 0 && activeSubInfoList.size == activeModem
         }
-
     var isMultiSimEnabled = false
         get() {
             return getActiveModemCount > 1
         }
-
     var isMultiSimSupported = false
         get() {
             return telephonyManager?.isMultiSimSupported == TelephonyManager.MULTISIM_ALLOWED
@@ -155,19 +150,23 @@ class SimOnboardingService {
         clearUserRecord()
     }
 
-    fun clearUserRecord() {
+    fun clearUserRecord(){
         renameMutableMap.clear()
         userSelectedSubInfoList.clear()
     }
 
-    fun initData(inputTargetSubId: Int, context: Context, callback: (CallbackType) -> Unit) {
+    fun initData(inputTargetSubId: Int,
+                 context: Context,
+                 callback: (CallbackType) -> Unit) {
         clear()
         this.callback = callback
         targetSubId = inputTargetSubId
         subscriptionManager = context.getSystemService(SubscriptionManager::class.java)
         telephonyManager = context.getSystemService(TelephonyManager::class.java)
         activeSubInfoList = SubscriptionUtil.getActiveSubscriptions(subscriptionManager)
-        Log.d(TAG, "startInit: targetSubId:$targetSubId, activeSubInfoList: $activeSubInfoList")
+        Log.d(
+            TAG, "startInit: targetSubId:$targetSubId, activeSubInfoList: $activeSubInfoList"
+        )
 
         ThreadUtils.postOnBackgroundThread {
             availableSubInfoList = SubscriptionUtil.getAvailableSubscriptions(context)
@@ -177,7 +176,7 @@ class SimOnboardingService {
             userSelectedSubInfoList
                     .sortWith(compareBy({ it.sortableSimSlotIndex }, { it.subscriptionId }))
             Log.d(TAG, "targetSubId: $targetSubId , targetSubInfo: $targetSubInfo")
-            uiccCardInfoList = telephonyManager?.uiccCardsInfo ?: listOf()
+            uiccCardInfoList = telephonyManager?.uiccCardsInfo!!
             Log.d(TAG, "uiccCardInfoList: $uiccCardInfoList")
 
             targetPrimarySimCalls = SubscriptionManager.getDefaultVoiceSubscriptionId()
@@ -185,19 +184,17 @@ class SimOnboardingService {
             targetPrimarySimMobileData = SubscriptionManager.getDefaultDataSubscriptionId()
 
             Log.d(
-                TAG,
-                "doesTargetSimHaveEsimOperation: $doesTargetSimHaveEsimOperation" +
+                TAG,"doesTargetSimHaveEsimOperation: $doesTargetSimHaveEsimOperation" +
                     ", isMultipleEnabledProfilesSupported: $isMultipleEnabledProfilesSupported" +
                     ", targetPrimarySimCalls: $targetPrimarySimCalls" +
                     ", targetPrimarySimTexts: $targetPrimarySimTexts" +
-                    ", targetPrimarySimMobileData: $targetPrimarySimMobileData",
-            )
+                    ", targetPrimarySimMobileData: $targetPrimarySimMobileData")
         }
     }
 
     /**
-     * Return the subscriptionInfo list which has the target subscriptionInfo + active
-     * subscriptionInfo.
+     * Return the subscriptionInfo list which has
+     * the target subscriptionInfo + active subscriptionInfo.
      */
     fun getSelectableSubscriptionInfoList(): List<SubscriptionInfo> {
         var list: MutableList<SubscriptionInfo> = mutableListOf()
@@ -209,9 +206,11 @@ class SimOnboardingService {
         return list.toList()
     }
 
-    /** Return the user selected SubscriptionInfo list. */
+    /**
+     * Return the user selected SubscriptionInfo list.
+     */
     fun getSelectedSubscriptionInfoList(): List<SubscriptionInfo> {
-        if (userSelectedSubInfoList.isEmpty()) {
+        if (userSelectedSubInfoList.isEmpty()){
             Log.d(TAG, "userSelectedSubInfoList is empty")
             return activeSubInfoList
         }
@@ -219,17 +218,13 @@ class SimOnboardingService {
     }
 
     fun getSelectedSubscriptionInfoListWithRenaming(): List<SubscriptionInfo> {
-        if (userSelectedSubInfoList.isEmpty()) {
+        if (userSelectedSubInfoList.isEmpty()){
             Log.d(TAG, "userSelectedSubInfoList is empty")
             return activeSubInfoList
         }
-        return userSelectedSubInfoList
-            .map {
-                SubscriptionInfo.Builder(it)
-                    .setDisplayName(getSubscriptionInfoDisplayName(it))
-                    .build()
-            }
-            .toList()
+        return userSelectedSubInfoList.map {
+            SubscriptionInfo.Builder(it).setDisplayName(getSubscriptionInfoDisplayName(it)).build()
+        }.toList()
     }
 
     fun addItemForRenaming(subInfo: SubscriptionInfo, newName: String) {
@@ -240,7 +235,7 @@ class SimOnboardingService {
         renameMutableMap[subInfo.subscriptionId] = newName
         Log.d(
             TAG,
-            "renameMutableMap add ${subInfo.subscriptionId} & $newName into: $renameMutableMap",
+            "renameMutableMap add ${subInfo.subscriptionId} & $newName into: $renameMutableMap"
         )
     }
 
@@ -255,9 +250,8 @@ class SimOnboardingService {
             )
             userSelectedSubInfoList
                     .sortWith(compareBy({ it.sortableSimSlotIndex }, { it.subscriptionId }))
-            Log.d(
-                TAG,
-                "addCurrentItemForSelectedSim: userSelectedSubInfoList: $userSelectedSubInfoList",
+            Log.d(TAG,
+                "addCurrentItemForSelectedSim: userSelectedSubInfoList: $userSelectedSubInfoList"
             )
         }
     }
@@ -277,10 +271,10 @@ class SimOnboardingService {
     }
 
     /**
-     * Return the subscriptionInfo which will be removed in the slot during the sim onboarding. If
-     * return Null, then no subscriptionInfo will be removed in the slot.
+     * Return the subscriptionInfo which will be removed in the slot during the sim onboarding.
+     * If return Null, then no subscriptionInfo will be removed in the slot.
      */
-    fun getRemovedSim(): SubscriptionInfo? {
+    fun getRemovedSim():SubscriptionInfo?{
         return activeSubInfoList.find { !userSelectedSubInfoList.contains(it) }
     }
 
@@ -290,21 +284,20 @@ class SimOnboardingService {
         if (targetSubInfo != null && canDisablePhysicalSubscription) {
             // TODO: to support disable case.
             subscriptionManager?.setUiccApplicationsEnabled(
-                targetSubInfo!!.subscriptionId,
-                /*enabled=*/ true,
-            )
+                    targetSubInfo!!.subscriptionId, /*enabled=*/true)
         } else {
-            Log.i(
-                TAG,
-                "The device does not support toggling pSIM. It is enough to just " +
-                    "enable the removable slot.",
+            Log.i(TAG, "The device does not support toggling pSIM. It is enough to just "
+                    + "enable the removable slot."
             )
         }
     }
 
     fun isDsdsConditionSatisfied(): Boolean {
         if (isMultiSimEnabled) {
-            Log.d(TAG, "DSDS is already enabled. Condition not satisfied.")
+            Log.d(
+                TAG,
+                "DSDS is already enabled. Condition not satisfied."
+            )
             return false
         }
         if (!isMultiSimSupported) {
@@ -313,23 +306,23 @@ class SimOnboardingService {
         }
         val anyActiveSim = activeSubInfoList.isNotEmpty()
         if (isMultipleEnabledProfilesSupported && anyActiveSim) {
-            Log.d(
-                TAG,
-                "Device supports MEP and eSIM operation and eSIM profile is enabled." +
-                    " DSDS condition satisfied.",
+            Log.d(TAG,
+                "Device supports MEP and eSIM operation and eSIM profile is enabled."
+                        + " DSDS condition satisfied."
             )
             return true
         }
 
         if (doesTargetSimHaveEsimOperation && isRemovableSimProfileEnabled) {
-            Log.d(TAG, "eSIM operation and removable PSIM is enabled. DSDS condition satisfied.")
+            Log.d(TAG,
+                "eSIM operation and removable PSIM is enabled. DSDS condition satisfied."
+            )
             return true
         }
         if (!doesTargetSimHaveEsimOperation && isEsimProfileEnabled) {
-            Log.d(
-                TAG,
-                "Removable SIM operation and eSIM profile is enabled. DSDS condition" +
-                    " satisfied.",
+            Log.d(TAG,
+                "Removable SIM operation and eSIM profile is enabled. DSDS condition"
+                        + " satisfied."
             )
             return true
         }
@@ -337,7 +330,7 @@ class SimOnboardingService {
         return false
     }
 
-    fun startActivatingSim() {
+    fun startActivatingSim(){
         // TODO: start to activate sim
         callback(CallbackType.CALLBACK_FINISH)
     }
@@ -346,9 +339,8 @@ class SimOnboardingService {
         withContext(Dispatchers.Default) {
             renameMutableMap.forEach {
                 subscriptionManager?.setDisplayName(
-                    it.value,
-                    it.key,
-                    SubscriptionManager.NAME_SOURCE_USER_INPUT,
+                    it.value, it.key,
+                    SubscriptionManager.NAME_SOURCE_USER_INPUT
                 )
             }
             // next action is SETUP_PRIMARY_SIM
@@ -358,22 +350,24 @@ class SimOnboardingService {
 
     suspend fun startSetupPrimarySim(
         context: Context,
-        wifiPickerTrackerHelper: WifiPickerTrackerHelper,
+        wifiPickerTrackerHelper: WifiPickerTrackerHelper
     ) {
         withContext(Dispatchers.Default) {
-            setDefaultVoice(subscriptionManager, targetPrimarySimCalls)
-            setDefaultSms(subscriptionManager, targetPrimarySimTexts)
-            setDefaultData(
-                context,
-                subscriptionManager,
-                wifiPickerTrackerHelper,
-                targetPrimarySimMobileData,
-            )
-            MobileDataRepository(context)
-                .setAutoDataSwitch(targetNonDds, targetPrimarySimAutoDataSwitch.value)
-        }
-        // no next action, send finish
-        callback(CallbackType.CALLBACK_FINISH)
+                setDefaultVoice(subscriptionManager, targetPrimarySimCalls)
+                setDefaultSms(subscriptionManager, targetPrimarySimTexts)
+                setDefaultData(
+                    context,
+                    subscriptionManager,
+                    wifiPickerTrackerHelper,
+                    targetPrimarySimMobileData
+                )
+                MobileDataRepository(context).setAutoDataSwitch(
+                    targetNonDds,
+                    targetPrimarySimAutoDataSwitch.value
+                )
+            }
+            // no next action, send finish
+            callback(CallbackType.CALLBACK_FINISH)
     }
 
     suspend fun startEnableDsds(context: Context) {
@@ -385,7 +379,7 @@ class SimOnboardingService {
         }
     }
 
-    companion object {
+    companion object{
         private const val TAG = "SimOnboardingService"
         const val NUM_OF_SIMS_FOR_DSDS = 2
     }

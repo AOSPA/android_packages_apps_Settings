@@ -16,26 +16,19 @@
 
 package com.android.settings.accessibility;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
-import android.os.Vibrator;
 import android.os.vibrator.Flags;
 
 import com.android.settings.accessibility.KeyboardVibrationIntensitySliderPreferenceController.KeyboardVibrationPreferenceConfig;
-import com.android.settings.overlay.FeatureFactory;
-import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 
 /** Preference controller for keyboard vibration with only a switch for on/off states. */
 // LINT.IfChange
 public class KeyboardVibrationIntensitySwitchPreferenceController
         extends VibrationTogglePreferenceController {
 
-    private final MetricsFeatureProvider mMetricsFeatureProvider;
-
     public KeyboardVibrationIntensitySwitchPreferenceController(Context context,
             String preferenceKey) {
         super(context, preferenceKey, new KeyboardVibrationPreferenceConfig(context));
-        mMetricsFeatureProvider = FeatureFactory.getFeatureFactory().getMetricsFeatureProvider();
     }
 
     @Override
@@ -46,19 +39,6 @@ public class KeyboardVibrationIntensitySwitchPreferenceController
                 com.android.internal.R.bool.config_keyboardVibrationSettingsIntensitySupported)
                 && Flags.keyboardIntensitySliderEnabled();
         return (isVibrationSupported && isIntensitySupported) ? AVAILABLE : UNSUPPORTED_ON_DEVICE;
-    }
-
-    @Override
-    public boolean setChecked(boolean isChecked) {
-        final boolean success = super.setChecked(isChecked);
-        if (success) {
-            final int intensity = isChecked
-                    ? mPreferenceConfig.getDefaultIntensity()
-                    : Vibrator.VIBRATION_INTENSITY_OFF;
-            mMetricsFeatureProvider.action(mContext,
-                    SettingsEnums.ACTION_KEYBOARD_VIBRATION_INTENSITY_CHANGED, intensity);
-        }
-        return success;
     }
 }
 // LINT.ThenChange(KeyboardVibrationIntensitySwitchPreference.kt)

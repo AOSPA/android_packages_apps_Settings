@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.widget.FooterPreference
 import java.util.Locale
 
+// LINT.IfChange
 class DarkModeCustomModesFooterPreference :
     FooterPreferenceMetadata, FooterPreferenceBinding, PreferenceTitleProvider {
 
@@ -80,3 +81,4 @@ class DarkModeCustomModesFooterPreference :
         const val KEY = "dark_theme_custom_bedtime_footer"
     }
 }
+// LINT.ThenChange(DarkModeCustomModesPreferenceController.java)

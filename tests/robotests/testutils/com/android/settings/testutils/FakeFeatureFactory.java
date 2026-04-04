@@ -168,7 +168,6 @@ public class FakeFeatureFactory extends FeatureFactory {
         mDisplayFeatureProvider = mock(DisplayFeatureProvider.class);
         mSyncAcrossDevicesFeatureProvider = mock(SyncAcrossDevicesFeatureProvider.class);
         mAudioSharingFeatureProvider = mock(AudioSharingFeatureProvider.class);
-        mTelephonyFeatureProvider = mock(TelephonyFeatureProvider.class);
     }
 
     @Override

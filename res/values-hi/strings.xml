@@ -1056,10 +1056,7 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"आपका डिवाइस WEP नेटवर्क से कनेक्ट है. इन नेटवर्क को कनेक्ट करने की अनुमति न देने पर, आपका डिवाइस डिसकनेक्ट हो जाएगा."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"बेहतर विकल्प"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"बेहतर विकल्पों की ड्रॉप-डाउन सूची"</string>
-    <!-- no translation found for wifi_advanced_toggle_action_expand (8286882218084659009) -->
-    <skip />
-    <!-- no translation found for wifi_advanced_toggle_action_collapse (8864441197817185264) -->
-    <skip />
+    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"बड़ा करें"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"नेटवर्क का नाम*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID डालें"</string>
     <string name="wifi_security" msgid="9095934643631406913">"सुरक्षा"</string>
@@ -1529,8 +1526,10 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"पिन मेल नहीं खा रहे हैं. सिम के नए पिन की पुष्टि करें."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"गलत पिन डाला गया. <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> बार और कोशिश की जा सकती है"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"सिम कार्ड का मौजूदा पिन कोड डालें"</string>
-    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"पहला सिम कार्ड स्लॉट"</string>
-    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"दूसरा सिम कार्ड स्लॉट"</string>
+    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
+    <skip />
+    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
+    <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"मोबाइल डेटा के लिए <xliff:g id="CARRIER">%1$s</xliff:g> का इस्तेमाल करें?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"मोबाइल डेटा के लिए आप <xliff:g id="CARRIER2_0">%2$s</xliff:g> इस्तेमाल कर रहे हैं. अगर आप <xliff:g id="CARRIER1">%1$s</xliff:g> का इस्तेमाल करते हैं, तो <xliff:g id="CARRIER2_1">%2$s</xliff:g> को मोबाइल डेटा के लिए इस्तेमाल नहीं किया जाएगा."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> का इस्तेमाल करें"</string>
@@ -2209,24 +2208,37 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"कंट्रोलर के बटन दबाने पर होने वाली कार्रवाइयों को अपनी पसंद के मुताबिक बनाएं"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"बटन"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"निर्देश"</string>
-    <string name="game_controller_button_a" msgid="5071545867597871251">"A बटन"</string>
-    <string name="game_controller_button_b" msgid="1748230935407462227">"B बटन"</string>
-    <string name="game_controller_button_x" msgid="5150893082866627799">"X बटन"</string>
-    <string name="game_controller_button_y" msgid="3128289851792045414">"Y बटन"</string>
-    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 बटन"</string>
-    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 बटन"</string>
-    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 बटन"</string>
-    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 बटन"</string>
-    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"लेफ़्ट स्टिक क्लिक"</string>
-    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"राइट स्टिक क्लिक"</string>
+    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
+    <skip />
     <string name="game_controller_dpad" msgid="5352745621298140827">"डी-पैड"</string>
-    <string name="game_controller_stick_left" msgid="1351741077215302297">"लेफ़्ट स्टिक"</string>
-    <string name="game_controller_stick_right" msgid="1419620827073193725">"राइट स्टिक"</string>
+    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
+    <skip />
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"डिफ़ॉल्ट पर रीसेट करें"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"सेटिंग डिफ़ॉल्ट पर रीसेट करनी हैं?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"कंट्रोलर की सभी सेटिंग डिफ़ॉल्ट पर रीसेट हो जाएंगी"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"रीसेट करें"</string>
-    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"फ़िलहाल, <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g> को असाइन किया गया है"</string>
+    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"टचपैड"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"टचपैड और माउस"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"माउस"</string>
@@ -2297,8 +2309,6 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"सूचनाएं"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"क्विक सेटिंग"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"नोट"</string>
-    <!-- no translation found for action_corner_action_peek_title (4305093703546498134) -->
-    <skip />
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g> के लिए कोई शॉर्टकट चुनें"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"सबसे नीचे बाईं ओर"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"सबसे नीचे दाईं ओर"</string>
@@ -2432,8 +2442,10 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"फ़ीचर फ़्लैग"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"ब्लूटूथ स्टैक का लॉग चालू करें"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"ब्लूटूथ स्टैक के लॉग इन का लॉग लेवल बदलें (यह सेटिंग बदलने के बाद ब्लूटूथ को टॉगल करें)"</string>
-    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"ब्लूटूथ एचसीआई स्नूप लॉग के सॉकेट को चालू करें"</string>
-    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"ब्लूटूथ एचसीआई स्नूप लॉग को लोकल सॉकेट पर उपलब्ध कराएं"</string>
+    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
+    <skip />
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"ब्लूटूथ एचसीआई स्नूप लॉग फ़िल्टर"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"फ़िल्टर सेट करें"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"बदलावों को लागू करने के लिए, ब्लूटूथ को चालू और बंद करें"</string>
@@ -3639,9 +3651,12 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"डिवाइस"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"टचपैड, कीबोर्ड, डिसप्ले, साउंड"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"स्क्रीन की रोशनी, रंग, गहरे रंग वाली थीम, लॉक स्क्रीन, टेक्स्ट"</string>
-    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"स्क्रीन की रोशनी, रंग, गहरे रंग वाली थीम, लॉक स्क्रीन, टेक्स्ट"</string>
-    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"स्क्रीन की रोशनी, रंग, गहरे रंग वाली थीम, लॉक स्क्रीन, टेक्स्ट, कनेक्ट किया गया डिसप्ले"</string>
-    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"स्क्रीन की रोशनी, रंग, गहरे रंग वाली थीम, लॉक स्क्रीन, टेक्स्ट, टच, कनेक्ट किया गया डिसप्ले"</string>
+    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
+    <skip />
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"कीबोर्ड चुनना, टूल"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"कर्सर की स्पीड, बटन को पसंद के मुताबिक बनाना, स्क्रोल करना"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"वॉल्यूम, स्पीकर, माइक्रोफ़ोन"</string>
@@ -4617,36 +4632,57 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"इस ऐप्लिकेशन को अनुमति दें कि इस डिवाइस और इससे जुड़े स्टोरेज में मौजूद सभी फ़ाइलों को पढ़ सके, उनमें बदलाव कर सके, और उन्हें मिटा सके. अनुमति दिए जाने पर, यह ऐप्लिकेशन आपको सूचना दिए बिना उन फ़ाइलों को ऐक्सेस कर सकता है."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सभी फ़ाइलें ऐक्सेस कर सकते हैं"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"स्क्रीन ऑटोमेशन"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (542883453066952146) -->
+    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
     <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2086013777547395674) -->
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
     <skip />
-    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"जिन ऐप्लिकेशन के लिए आपने अनुमतियों में &lt;strong&gt;हमेशा के लिए अनुमति दें&lt;/strong&gt; को चुना है वे यहां दिखते हैं. जिन ऐप्लिकेशन के लिए आपने &lt;strong&gt;सिर्फ़ इस बार अनुमति दें&lt;/strong&gt; को चुना है या अनुमति नहीं दी है वे नहीं दिखते."</string>
-    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"अगर स्क्रीन ऑटोमेशन की अनुमति नहीं दी जाती है, तो <xliff:g id="ID_1">%1$s</xliff:g> अब भी उन ऐप्लिकेशन के साथ इंटरैक्ट कर सकता है जो <xliff:g id="ID_2">%1$s</xliff:g> से अन्य तरीकों से कनेक्ट किए गए हैं."</string>
-    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"इस स्क्रीन से किसी ऐप्लिकेशन को हटाने पर, <xliff:g id="ID_1">%1$s</xliff:g> अब भी उन ऐप्लिकेशन के साथ इंटरैक्ट कर सकता है जो <xliff:g id="ID_2">%1$s</xliff:g> से अन्य तरीकों से कनेक्ट किए गए हैं."</string>
-    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"ऐप्लिकेशन को अन्य ऐप्लिकेशन की स्क्रीन पर मौजूद कॉन्टेंट के साथ इंटरैक्ट करके, टास्क पूरे करने में आपकी मदद करने की अनुमति दें"</string>
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (6590135080063496543) -->
+    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
     <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"हर बार पूछें"</string>
-    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"हमेशा के लिए अनुमति दें"</string>
+    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
+    <skip />
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"अनुमति न दें"</string>
-    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"ऐसे ऐप्लिकेशन जिन्हें अनुमति दी गई है"</string>
-    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"फ़िलहाल, आपने किसी भी ऐप्लिकेशन को अनुमति नहीं दी है"</string>
-    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"सिर्फ़ वह ऐप्लिकेशन स्क्रीन ऑटोमेशन का इस्तेमाल कर सकता है जिसे आपने डिफ़ॉल्ट डिजिटल असिस्टेंट के तौर पर सेट किया है."</string>
-    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"ऐप्लिकेशन को हटाया गया"</string>
-    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"सभी ऐप्लिकेशन हटाए गए"</string>
-    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Assistant की सेटिंग"</string>
-    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 ऐप्लिकेशन को अनुमति दी गई है}one{# ऐप्लिकेशन को अनुमति दी गई है}other{# ऐप्लिकेशन को अनुमति दी गई है}}"</string>
-    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 ऐप्लिकेशन को अनुमति दी गई है}one{# ऐप्लिकेशन को अनुमति दी गई है}other{# ऐप्लिकेशन को अनुमति दी गई है}}"</string>
-    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"किसी भी ऐप्लिकेशन को अनुमति नहीं है"</string>
-    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"सभी ऐप्लिकेशन हटाएं"</string>
-    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"डिफ़ॉल्ट डिजिटल असिस्टेंट"</string>
-    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> स्क्रीन ऑटोमेशन का इस्तेमाल नहीं कर सकता"</string>
-    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"स्क्रीन ऑटोमेशन का इस्तेमाल, सिर्फ़ आपका डिफ़ॉल्ट डिजिटल असिस्टेंट कर सकता है"</string>
-    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"असिस्टेंट बदलें"</string>
-    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"ये ऐप्लिकेशन, उन ऐप्लिकेशन की स्क्रीन पर मौजूद कॉन्टेंट को देख सकते हैं जिनके लिए आपने अनुमति दी है. साथ ही, वे उस कॉन्टेंट के साथ इंटरैक्ट भी कर सकते हैं. इससे आपको टास्क पूरे करने में मदद मिलेगी."</string>
-    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"आपने ऐसा कोई ऐप्लिकेशन इंस्टॉल नहीं किया है जो स्क्रीन ऑटोमेशन का इस्तेमाल कर सके"</string>
-    <!-- no translation found for computer_control_automation_target_list_header (2625151188607263591) -->
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"पूरी स्क्रीन पर सूचनाएं दिखाने की अनुमति"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"इस ऐप्लिकेशन को पूरी स्क्रीन पर सूचनाएं दिखाने की अनुमति दें"</string>
@@ -5831,8 +5867,7 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"ऐप्लिकेशन अनइंस्टॉल करें"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}one{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}other{पिछले # महीनों में इंस्टॉल किए गए ऐप्लिकेशन}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}one{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}other{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}}"</string>
-    <!-- no translation found for ai_assist_category (6115635022788919643) -->
-    <skip />
+    <string name="ai_assist_category" msgid="6800674613544630195">"एआई असिस्टेंस"</string>
     <string name="personal_context_title" msgid="6639623956831710453">"अपने-आप मिलने वाली मदद"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"चुनें कि सुझाव देने के लिए, यह ऐप्लिकेशन जानकारी शेयर कर सकता है या नहीं"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"आसपेक्ट रेशियो"</string>
@@ -5853,8 +5888,6 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) बदलने पर ऐप्लिकेशन रीस्टार्ट होगा. इससे वे बदलाव मिट सकते हैं जिन्हें सेव नहीं किया गया है. ऐसा हो सकता है कि कुछ ऐप्लिकेशन, हर तरह के आसपेक्ट रेशियो के हिसाब से ऑप्टिमाइज़ न हो पाएं."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"उपयोगकर्ता अनुभव"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"वर्चुअल गेमपैड"</string>
-    <!-- no translation found for virtual_gamepad_restart_game_toast (5281647814007835224) -->
-    <skip />
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"फ़िंगरप्रिंट सेंसर"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"फ़्लैश के साथ मिलने वाली सूचनाएं"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"फ़्लैश के साथ मिलने वाली सूचनाओं की जानकारी"</string>

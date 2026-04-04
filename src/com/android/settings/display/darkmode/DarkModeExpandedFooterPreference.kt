@@ -24,11 +24,12 @@ import com.android.settings.widget.FooterPreferenceBinding
 import com.android.settings.widget.FooterPreferenceMetadata
 import com.android.settingslib.HelpUtils
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
-import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.widget.FooterPreference
 
+// LINT.IfChange
 class DarkModeExpandedFooterPreference :
     FooterPreferenceMetadata, FooterPreferenceBinding, PreferenceAvailabilityProvider {
 
@@ -75,3 +76,4 @@ class DarkModeExpandedFooterPreference :
         const val KEY = "dark_theme_expanded_footer"
     }
 }
+// LINT.ThenChange(DarkModeExpandedFooterPreferenceController.java)

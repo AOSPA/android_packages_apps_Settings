@@ -313,7 +313,7 @@ public abstract class ProfileSelectFragment extends DashboardFragment {
             List<UserInfo> userInfos = userManager.getProfiles(UserHandle.myUserId());
 
             for (UserInfo userInfo : userInfos) {
-                if (userInfo.isFull()) {
+                if (userInfo.canHaveProfile()) {
                     fragments.add(
                             createAndGetFragment(
                                     ProfileType.PERSONAL,

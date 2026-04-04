@@ -42,6 +42,13 @@ flag {
 }
 
 flag {
+  name: "catalyst_dark_ui_mode"
+  namespace: "accessibility"
+  description: "Migrate dark mode screen to the Catalyst infrastructure"
+  bug: "337243099"
+}
+
+flag {
   name: "catalyst_edit_shortcuts"
   namespace: "accessibility"
   description: "Migrate edit shortcuts screen to the Catalyst infrastructure"

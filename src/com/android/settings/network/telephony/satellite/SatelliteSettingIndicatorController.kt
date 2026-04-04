@@ -16,8 +16,9 @@
 package com.android.settings.network.telephony.satellite
 
 import android.content.Context
-import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID
-import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
+import android.os.PersistableBundle
+import android.telephony.CarrierConfigManager
+import android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED
 import android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED
 import android.util.Log
@@ -28,19 +29,20 @@ import androidx.preference.PreferenceScreen
 import com.android.internal.telephony.flags.Flags
 import com.android.settings.R
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
-import com.android.settings.overlay.FeatureFactory
 
 /** A controller to control How is work paragraph. */
 class SatelliteSettingIndicatorController(context: Context?, preferenceKey: String?) :
     TelephonyBasePreferenceController(context, preferenceKey) {
+    private var mCarrierConfigs: PersistableBundle = PersistableBundle()
     private var mIsSmsAvailable = false
     private var mIsDataAvailable = false
     private var mIsSatelliteEligible = false
     private var mDataMode = SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED
     private var screen: PreferenceScreen? = null
 
-    fun init(subId: Int) {
+    fun init(subId: Int, carrierConfigs: PersistableBundle) {
         mSubId = subId
+        mCarrierConfigs = carrierConfigs
     }
 
     fun setCarrierRoamingNtnAvailability(
@@ -132,27 +134,28 @@ class SatelliteSettingIndicatorController(context: Context?, preferenceKey: Stri
 
     private val isCarrierRoamingNtnConnectedTypeManual: Boolean
         get() =
-            CARRIER_ROAMING_NTN_CONNECT_MANUAL ==
-                FeatureFactory.featureFactory.telephonyFeatureProvider.satelliteSettingsRepository
-                    .getSatelliteNtnConnectType(mSubId)
+            CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL ==
+                mCarrierConfigs.getInt(
+                    CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                    CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+                )
 
     private val isCarrierRoamingNtnConnectedTypeHybrid: Boolean
         get() =
             Flags.vzwAstSkyloFallback() &&
-                CARRIER_ROAMING_NTN_CONNECT_HYBRID ==
-                    FeatureFactory.featureFactory.telephonyFeatureProvider
-                        .satelliteSettingsRepository
-                        .getSatelliteNtnConnectType(mSubId)
+                CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID ==
+                    mCarrierConfigs.getInt(
+                        CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                        CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
+                    )
 
     private fun isSatelliteEligible(): Boolean {
-        val repository =
-            FeatureFactory.featureFactory.telephonyFeatureProvider.satelliteSettingsRepository
         if (isCarrierRoamingNtnConnectedTypeManual) {
             return mIsSmsAvailable
         }
 
         if (isCarrierRoamingNtnConnectedTypeHybrid) {
-            if (repository.isSatelliteEntitlementSupported(mSubId)) {
+            if (mCarrierConfigs.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false)) {
                 if (SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)) {
                     return true
                 } else {

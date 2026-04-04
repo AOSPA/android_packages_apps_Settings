@@ -29,10 +29,15 @@ import android.content.Context;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.RemoteException;
+import android.platform.test.annotations.DisableFlags;
+import android.platform.test.annotations.EnableFlags;
+import android.platform.test.flag.junit.SetFlagsRule;
 
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 import androidx.test.core.app.ApplicationProvider;
+
+import com.android.settings.flags.Flags;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -59,6 +64,9 @@ public class ShowHdrSdrRatioPreferenceControllerTest {
     private ShowHdrSdrRatioPreferenceController mController;
     private Context mContext;
 
+    @Rule
+    public final SetFlagsRule mSetFlagsRule = new SetFlagsRule();
+
     @Before
     public void setUp() {
         mContext = ApplicationProvider.getApplicationContext();
@@ -68,6 +76,7 @@ public class ShowHdrSdrRatioPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_DEVELOPMENT_HDR_SDR_RATIO)
     public void onPreferenceChange_settingEnabled_shouldChecked() throws RemoteException {
         assertTrue(mController.isAvailable());
         mockSurfaceFlingerTransactResponse(true);
@@ -76,6 +85,7 @@ public class ShowHdrSdrRatioPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_DEVELOPMENT_HDR_SDR_RATIO)
     public void onPreferenceChange_settingDisabled_shouldUnchecked() throws RemoteException {
         assertTrue(mController.isAvailable());
         mockSurfaceFlingerTransactResponse(false);
@@ -84,6 +94,7 @@ public class ShowHdrSdrRatioPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_DEVELOPMENT_HDR_SDR_RATIO)
     public void updateState_settingEnabled_shouldChecked() throws RemoteException {
         assertTrue(mController.isAvailable());
         mockSurfaceFlingerTransactResponse(true);
@@ -92,6 +103,7 @@ public class ShowHdrSdrRatioPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_DEVELOPMENT_HDR_SDR_RATIO)
     public void updateState_settingDisabled_shouldUnchecked() throws RemoteException {
         assertTrue(mController.isAvailable());
         mockSurfaceFlingerTransactResponse(false);
@@ -100,12 +112,21 @@ public class ShowHdrSdrRatioPreferenceControllerTest {
     }
 
     @Test
+    @DisableFlags(Flags.FLAG_DEVELOPMENT_HDR_SDR_RATIO)
+    public void settingNotAvailable_isHdrSdrRatioAvailableFalse_flagsOff() {
+        mController = new ShowHdrSdrRatioPreferenceController(mContext, mSurfaceFlinger, true);
+        assertFalse(mController.isAvailable());
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_DEVELOPMENT_HDR_SDR_RATIO)
     public void settingNotAvailable_isHdrSdrRatioAvailableTrue_flagsOn() {
         mController = new ShowHdrSdrRatioPreferenceController(mContext, mSurfaceFlinger, false);
         assertFalse(mController.isAvailable());
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_DEVELOPMENT_HDR_SDR_RATIO)
     public void onDeveloperOptionsSwitchDisabled_preferenceUnchecked_shouldNotTurnOffPreference()
             throws RemoteException {
         assertTrue(mController.isAvailable());
@@ -119,6 +140,7 @@ public class ShowHdrSdrRatioPreferenceControllerTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_DEVELOPMENT_HDR_SDR_RATIO)
     public void onDeveloperOptionsSwitchDisabled_preferenceChecked_shouldTurnOffPreference()
             throws RemoteException {
         assertTrue(mController.isAvailable());

@@ -17,13 +17,10 @@
 package com.android.settings.accessibility;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.VibrationAttributes;
@@ -37,7 +34,6 @@ import androidx.preference.SwitchPreference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.core.BasePreferenceController;
-import com.android.settings.testutils.FakeFeatureFactory;
 import com.android.settings.testutils.shadow.SettingsShadowResources;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
@@ -69,12 +65,10 @@ public class KeyboardVibrationIntensitySwitchPreferenceControllerTest {
     private Vibrator mVibrator;
     private KeyboardVibrationIntensitySwitchPreferenceController mController;
     private SwitchPreference mPreference;
-    private FakeFeatureFactory mFeatureFactory;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mFeatureFactory = FakeFeatureFactory.setupForTest();
         mLifecycle = new Lifecycle(() -> mLifecycle);
         mContext = spy(ApplicationProvider.getApplicationContext());
         when(mContext.getSystemService(Context.AUDIO_SERVICE)).thenReturn(mAudioManager);
@@ -190,20 +184,14 @@ public class KeyboardVibrationIntensitySwitchPreferenceControllerTest {
         assertThat(mPreference.isChecked()).isFalse();
 
         mController.setChecked(true);
-        int defaultIntensity = mVibrator.getDefaultVibrationIntensity(
-                VibrationAttributes.USAGE_IME_FEEDBACK);
         assertThat(readSetting(Settings.System.KEYBOARD_VIBRATION_INTENSITY))
-                .isEqualTo(defaultIntensity);
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
-                eq(SettingsEnums.ACTION_KEYBOARD_VIBRATION_INTENSITY_CHANGED),
-                eq(defaultIntensity));
+                .isEqualTo(
+                        mVibrator.getDefaultVibrationIntensity(
+                                VibrationAttributes.USAGE_IME_FEEDBACK));
 
         mController.setChecked(false);
         assertThat(readSetting(Settings.System.KEYBOARD_VIBRATION_INTENSITY))
                 .isEqualTo(Vibrator.VIBRATION_INTENSITY_OFF);
-        verify(mFeatureFactory.metricsFeatureProvider).action(any(),
-                eq(SettingsEnums.ACTION_KEYBOARD_VIBRATION_INTENSITY_CHANGED),
-                eq(Vibrator.VIBRATION_INTENSITY_OFF));
     }
 
     private void updateSetting(String key, int value) {
@@ -214,4 +202,4 @@ public class KeyboardVibrationIntensitySwitchPreferenceControllerTest {
         return Settings.System.getInt(mContext.getContentResolver(), settingKey);
     }
 }
-// LINT.ThenChange(KeyboardVibrationIntensitySwitchPreferenceTest.kt)
+// LINT.ThenChange(KeyboardVibrationIntensitySwitchPreference.kt)

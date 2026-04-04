@@ -16,6 +16,11 @@
 
 package com.android.settings.network.telephony.satellite;
 
+import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
+import static android.telephony.CarrierConfigManager.KEY_EMERGENCY_MESSAGING_SUPPORTED_BOOL;
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL;
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
+import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
 import static android.telephony.NetworkRegistrationInfo.SERVICE_TYPE_DATA;
 import static android.telephony.NetworkRegistrationInfo.SERVICE_TYPE_SMS;
 
@@ -24,7 +29,9 @@ import static com.android.settings.network.telephony.satellite.SatelliteCarrierS
 import android.app.Activity;
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.os.PersistableBundle;
 import android.os.UserManager;
+import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
@@ -37,7 +44,6 @@ import androidx.annotation.VisibleForTesting;
 import com.android.settings.R;
 import com.android.settings.dashboard.RestrictedDashboardFragment;
 import com.android.settings.flags.Flags;
-import com.android.settings.overlay.FeatureFactory;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,6 +61,7 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     private Activity mActivity;
     private SatelliteManager mSatelliteManager;
     private TelephonyManager mTelephonyManager;
+    private PersistableBundle mConfigBundle;
     private int mSubId = SubscriptionManager.INVALID_SUBSCRIPTION_ID;
 
     public SatelliteSetting() {
@@ -78,12 +85,10 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         }
         mSubId = mActivity.getIntent().getIntExtra(SUB_ID,
                 SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+        mConfigBundle = fetchCarrierConfigData(mSubId);
 
-        SatelliteSettingsRepository repository = FeatureFactory.getFeatureFactory()
-                .getTelephonyFeatureProvider().getSatelliteSettingsRepository();
-
-        if (!repository.isSatelliteAttachSupported(mSubId)) {
-            Log.d(TAG, "SatelliteSettings: isSatelliteAttachSupported is false, "
+        if (!mConfigBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)) {
+            Log.d(TAG, "SatelliteSettings: KEY_SATELLITE_ATTACH_SUPPORTED_BOOL is false, "
                     + "do nothing.");
             finish();
         }
@@ -93,13 +98,14 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
         }
 
         if (Flags.enableSatelliteToggle()) {
-            use(SatelliteSettingMainSwitchController.class).init(mSubId, mSatelliteManager);
+            use(SatelliteSettingMainSwitchController.class).init(mSubId, mConfigBundle,
+                    mSatelliteManager);
         }
-        use(SatelliteAppListCategoryController.class).init(mSubId);
+        use(SatelliteAppListCategoryController.class).init(mSubId, mConfigBundle);
         use(SatelliteSettingAboutContentController.class).init(mSubId);
-        use(SatelliteSettingAccountInfoController.class).init(mSubId);
-        use(SatelliteSettingFooterController.class).init(mSubId);
-        use(SatelliteSettingIndicatorController.class).init(mSubId);
+        use(SatelliteSettingAccountInfoController.class).init(mSubId, mConfigBundle);
+        use(SatelliteSettingFooterController.class).init(mSubId, mConfigBundle);
+        use(SatelliteSettingIndicatorController.class).init(mSubId, mConfigBundle);
     }
 
     @Override
@@ -140,6 +146,27 @@ public class SatelliteSetting extends RestrictedDashboardFragment {
     @Override
     protected int getPreferenceScreenResId() {
         return R.xml.satellite_setting;
+    }
+
+    private PersistableBundle fetchCarrierConfigData(int subId) {
+        CarrierConfigManager carrierConfigManager = mActivity.getSystemService(
+                CarrierConfigManager.class);
+        PersistableBundle bundle = CarrierConfigManager.getDefaultConfig();
+        try {
+            bundle = carrierConfigManager.getConfigForSubId(subId,
+                    KEY_SATELLITE_ATTACH_SUPPORTED_BOOL,
+                    KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING,
+                    KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
+                    KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL,
+                    KEY_EMERGENCY_MESSAGING_SUPPORTED_BOOL);
+            if (bundle.isEmpty()) {
+                Log.d(TAG, "SatelliteSettings: getDefaultConfig");
+                bundle = CarrierConfigManager.getDefaultConfig();
+            }
+        } catch (IllegalStateException exception) {
+            Log.d(TAG, "SatelliteSettings exception : " + exception);
+        }
+        return bundle;
     }
 
     private class CarrierRoamingNtnModeCallback extends TelephonyCallback implements

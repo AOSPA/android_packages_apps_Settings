@@ -26,6 +26,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.regionalpreferences.NumberingSystemItemController.ARG_KEY_REGIONAL_PREFERENCE
 import com.android.settings.regionalpreferences.NumberingSystemItemController.ARG_VALUE_NUMBERING_SYSTEM_SELECT
 import com.android.settings.regionalpreferences.NumberingSystemItemController.KEY_SELECTED_LANGUAGE
+import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.getNumberingSystemLocales
 import com.android.settings.regionalpreferences.RegionalPreferencesDataUtils.updateSelectedLocale
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
@@ -61,7 +62,7 @@ class NumberingSystemLocaleListApiFirstScreen :
                         R.string.numbering_system_parameter_description,
                         key = "NumberingSystemLanguageCode",
                     ) {
-                        getNumberingSystemLocales(context).map {
+                        getNumberingSystemLocales().map {
                             GeneratedValue(it.toLanguageTag().safe(), getLocaleNameWithNumberingSystem(it).safe())
                         }
                     },
@@ -74,7 +75,7 @@ class NumberingSystemLocaleListApiFirstScreen :
         }
 
         preconditions(R.string.numbering_system_screen_preconditions) {
-            if (getNumberingSystemLocales(context).isNotEmpty()) {
+            if (getNumberingSystemLocales().isNotEmpty()) {
                 Allowed
             } else {
                 Custom(R.string.numbering_system_screen_unavailable, stability = PreconditionStability.UNSTABLE)
@@ -130,13 +131,6 @@ class NumberingSystemLocaleListApiFirstScreen :
                 }
             }
         }
-    }
-
-    private fun getNumberingSystemLocales(context: Context): Set<Locale> {
-        // Initialize the supported languages to LocaleInfos
-        LocaleStore.fillCache(context)
-
-        return RegionalPreferencesDataUtils.getNumberingSystemLocales()
     }
 
     private fun getLocaleListWithNumberingSystem(

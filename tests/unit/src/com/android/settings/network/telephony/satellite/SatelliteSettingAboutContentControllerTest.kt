@@ -17,59 +17,39 @@
 package com.android.settings.network.telephony.satellite
 
 import android.content.Context
+import android.telephony.TelephonyManager
 import androidx.preference.PreferenceManager
 import androidx.preference.PreferenceScreen
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.network.telephony.TelephonyFeatureProvider
-import com.android.settings.network.telephony.TelephonySettingsRepository
 import com.android.settings.network.telephony.satellite.SatelliteSettingAboutContentController.Companion.PREF_KEY_ABOUT_SATELLITE_CONNECTIVITY
-import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.ResourcesUtils
 import com.android.settingslib.widget.TopIntroPreference
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
-import org.mockito.junit.MockitoJUnit
-import org.mockito.junit.MockitoRule
-import org.mockito.kotlin.whenever
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.spy
 
-@RunWith(AndroidJUnit4::class)
 class SatelliteSettingAboutContentControllerTest {
-    @get:Rule val mockitoRule: MockitoRule = MockitoJUnit.rule()
+    private val mockTelephonyManager: TelephonyManager = mock<TelephonyManager> {
+        on { getSimOperatorName(TEST_SUB_ID) } doReturn TEST_SIM_OPERATOR_NAME
+    }
 
-    @Mock private lateinit var mockTelephonyFeatureProvider: TelephonyFeatureProvider
-    @Mock private lateinit var mockTelephonySettingsRepository: TelephonySettingsRepository
+    private var context: Context = spy(ApplicationProvider.getApplicationContext()) {
+        on { getSystemService(TelephonyManager::class.java) } doReturn mockTelephonyManager
+    }
 
-    private lateinit var context: Context
-    private lateinit var controller: SatelliteSettingAboutContentController
+    private val controller = SatelliteSettingAboutContentController(
+        context = context,
+        key = PREF_KEY_ABOUT_SATELLITE_CONNECTIVITY,
+    )
+
     private lateinit var screen: PreferenceScreen
     private lateinit var preference: TopIntroPreference
-    private lateinit var fakeFeatureFactory: FakeFeatureFactory
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
-        fakeFeatureFactory = FakeFeatureFactory.setupForTest()
-        val telephonyFeatureProvider = fakeFeatureFactory.mTelephonyFeatureProvider
-        whenever(telephonyFeatureProvider.telephonyRepository)
-            .thenReturn(mockTelephonySettingsRepository)
-
-        whenever(mockTelephonySettingsRepository.getSimOperatorName(TEST_SUB_ID))
-            .thenReturn(TEST_SIM_OPERATOR_NAME)
-
-        context = ApplicationProvider.getApplicationContext<Context>()
-
-        controller =
-            SatelliteSettingAboutContentController(
-                context = context,
-                key = PREF_KEY_ABOUT_SATELLITE_CONNECTIVITY,
-            )
-
         preference =
             TopIntroPreference(context).apply { key = PREF_KEY_ABOUT_SATELLITE_CONNECTIVITY }
         screen = PreferenceManager(context).createPreferenceScreen(context)
@@ -82,14 +62,13 @@ class SatelliteSettingAboutContentControllerTest {
 
         controller.displayPreference(screen)
 
-        assertThat(preference.title.toString())
-            .isEqualTo(
-                ResourcesUtils.getResourcesString(
-                    context,
-                    "description_about_satellite_setting",
-                    TEST_SIM_OPERATOR_NAME,
-                )
+        assertThat(preference.title.toString()).isEqualTo(
+            ResourcesUtils.getResourcesString(
+                context,
+                "description_about_satellite_setting",
+                TEST_SIM_OPERATOR_NAME
             )
+        )
     }
 
     private companion object {

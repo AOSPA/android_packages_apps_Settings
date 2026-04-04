@@ -291,7 +291,6 @@ class SupervisionWebContentFiltersScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    @DisableFlags(Flags.FLAG_UPDATE_WEB_CONTENT_FILTERS_SUPPORTED_APPS_TITLE)
     fun browserSupportedAppsEntryTitle() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val title =
@@ -299,29 +298,6 @@ class SupervisionWebContentFiltersScreenTest {
                     context,
                     4,
                     R.string.supervision_web_content_filters_switch_summary,
-                )
-            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
-
-            val preference =
-                fragment.findPreference<Preference>(
-                    SupervisionWebContentFiltersBrowserSupportedAppsScreen.KEY
-                )
-            assertThat(preference?.title).isEqualTo(title)
-        }
-    }
-
-    @Test
-    @EnableFlags(
-        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
-        Flags.FLAG_UPDATE_WEB_CONTENT_FILTERS_SUPPORTED_APPS_TITLE,
-    )
-    fun browserSupportedAppsEntryTitle_updatesEnabled() {
-        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
-            val title =
-                StringUtil.getIcuPluralsString(
-                    context,
-                    4,
-                    R.string.supervision_web_content_filters_supported_apps_title,
                 )
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 
@@ -438,7 +414,6 @@ class SupervisionWebContentFiltersScreenTest {
 
     @Test
     @EnableFlags(Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES)
-    @DisableFlags(Flags.FLAG_UPDATE_WEB_CONTENT_FILTERS_SUPPORTED_APPS_TITLE)
     fun searchSupportedAppsEntryTitle() {
         supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
             val title =
@@ -446,29 +421,6 @@ class SupervisionWebContentFiltersScreenTest {
                     context,
                     0,
                     R.string.supervision_web_content_filters_switch_summary,
-                )
-            InstrumentationRegistry.getInstrumentation().waitForIdleSync()
-
-            val preference =
-                fragment.findPreference<Preference>(
-                    SupervisionWebContentFiltersSearchSupportedAppsScreen.KEY
-                )
-            assertThat(preference?.title).isEqualTo(title)
-        }
-    }
-
-    @Test
-    @EnableFlags(
-        Flags.FLAG_ENABLE_SUPERVISION_SETTINGS_UI_UPDATES,
-        Flags.FLAG_UPDATE_WEB_CONTENT_FILTERS_SUPPORTED_APPS_TITLE,
-    )
-    fun searchSupportedAppsEntryTitle_updatesEnabled() {
-        supervisionWebContentFiltersScreen.launchFragmentScenario().onFragment { fragment ->
-            val title =
-                StringUtil.getIcuPluralsString(
-                    context,
-                    0,
-                    R.string.supervision_web_content_filters_supported_apps_title,
                 )
             InstrumentationRegistry.getInstrumentation().waitForIdleSync()
 

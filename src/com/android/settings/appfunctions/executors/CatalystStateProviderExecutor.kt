@@ -26,18 +26,23 @@ import android.util.Log
 import com.android.settings.appfunctions.CatalystConfig
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.appfunctions.DeviceStateProviderExecutorResult
+import com.android.settings.deviceinfo.imei.ImeiPreference
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceHierarchyNode
 import com.android.settingslib.metadata.PreferenceScreenMetadata
+import com.android.settingslib.metadata.PreferenceScreenRegistry
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.ValidatedKeyParameters
 import com.android.settingslib.metadata.ReadWritePermit.Companion.ALLOW
 import com.android.settingslib.metadata.accessPreconditionsAsString
 import com.android.settingslib.metadata.getPreferencePurpose
 import com.android.settingslib.metadata.getPreferenceScreenTitle
+import com.android.settingslib.metadata.getPreferenceSummary
 import com.android.settingslib.metadata.getPreferenceTitle
 import com.android.settingslib.metadata.getTrampolinedLaunchIntent
 import com.android.settingslib.metadata.isExposable
+import com.android.settingslib.metadata.isUiOnlyPreference
 import com.android.settingslib.metadata.resolvedAccessAndGetPreconditionsAsString
 import com.android.settingslib.metadata.resolvedSetPreconditionsAsString
 import com.android.settingslib.metadata.setPreconditionsAsString
@@ -60,6 +65,7 @@ import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 import com.android.settingslib.metadata.preferencesapi.markStringAsExternalData
 
 /* A [DeviceStateProvider] that provides device state information for Settings that are
@@ -223,10 +229,13 @@ class CatalystStateProviderExecutor(
         preferencesHierarchy.forEach {
             val metadata = it.metadata
             val jsonValue =
-                if (metadata is PersistentPreference<*>) {
-                    getDeviceStateItemValueForPreference(metadata)
-                } else {
-                    null
+                when {
+                    // TODO(b/444419242): Handle IMEI redaction properly.
+                    isImeiPreference(metadata.key) -> "REDACTED"
+                    metadata is PersistentPreference<*> -> {
+                        getDeviceStateItemValueForPreference(metadata)
+                    }
+                    else -> null
                 }
             jsonValue?.let {
                 deviceStateItemList.add(
@@ -321,6 +330,10 @@ class CatalystStateProviderExecutor(
         } else {
             "Error: Not allowed to read value"
         }
+    }
+
+    private fun isImeiPreference(prefKey: String): Boolean {
+        return prefKey.startsWith(ImeiPreference.KEY_PREFIX)
     }
 
     companion object {

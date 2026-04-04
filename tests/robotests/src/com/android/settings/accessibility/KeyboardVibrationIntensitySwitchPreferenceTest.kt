@@ -15,7 +15,6 @@
  */
 package com.android.settings.accessibility
 
-import android.app.settings.SettingsEnums
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.res.Resources
@@ -37,12 +36,6 @@ class KeyboardVibrationIntensitySwitchPreferenceTest :
     override val hasRingerModeDependency = false
     override val preference =
         KeyboardVibrationIntensitySwitchPreference(context, "key", 0, "main_key")
-
-    @Test
-    fun preferenceActionMetrics_returnsKeyboardVibrationIntensityChanged() {
-        assertThat(preference.preferenceActionMetrics)
-            .isEqualTo(SettingsEnums.ACTION_KEYBOARD_VIBRATION_INTENSITY_CHANGED)
-    }
 
     private val resourcesSpy: Resources =
         spy(ApplicationProvider.getApplicationContext<Context>().resources)
