@@ -93,6 +93,9 @@ open class PreviouslyConnectedDeviceScreen :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, PreviouslyConnectedDeviceActivity::class.java, metadata?.key)
 
+    override val availabilityDescription =
+        "The device must support bluetooth."
+
     override fun isAvailable(context: Context) =
         context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH) ||
             featureFactory.dockUpdaterFeatureProvider.getSavedDockUpdater(context, this) != null

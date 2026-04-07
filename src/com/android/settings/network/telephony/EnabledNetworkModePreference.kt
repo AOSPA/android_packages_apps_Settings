@@ -83,6 +83,9 @@ class EnabledNetworkModePreference(
     override val title: Int
         get() = R.string.preferred_network_mode_title
 
+    override val availabilityDescription =
+        "Network Mode must be available."
+
     override fun isAvailable(context: Context): Boolean =
         data.enabledNetworkModeFlow.value.isAvailable
 
@@ -145,6 +148,8 @@ class EnabledNetworkModePreference(
 
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
+
+    override val supportsWrite = false
 
     override val sensitivityLevel
         get() = SensitivityLevel.MUST_PROVIDE_UNDO

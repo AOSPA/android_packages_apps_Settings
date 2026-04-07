@@ -25,19 +25,11 @@ import android.provider.Settings
 import android.telephony.SubscriptionManager
 import android.telephony.satellite.SatelliteManager
 import android.util.Log
-import androidx.annotation.VisibleForTesting
 import com.android.settings.R
 
 /** A repository for getting the list of satellite apps for the landing page. */
 open class SatelliteAppsRepository(private val context: Context) {
     companion object {
-        const val PACKAGE_NAME_PHONE = "com.google.android.dialer"
-
-        @VisibleForTesting const val PACKAGE_NAME_SCONE = "com.google.android.apps.scone"
-        @VisibleForTesting
-        const val COMPONENT_NAME_SETTINGS_GATEWAY_ACTIVITY =
-            "com.google.android.apps.scone.satellite.settings.gateway.SettingsGatewayActivity"
-
         private const val TAG = "SatelliteAppsRepository"
         private const val EXTRA_SHOW_FRAGMENT_AS_SUBSETTING =
             ":settings:show_fragment_as_subsetting"
@@ -52,7 +44,7 @@ open class SatelliteAppsRepository(private val context: Context) {
     open fun getDialerIntent(): Intent? {
         val intent = Intent(Intent.ACTION_DIAL)
         if (intent.resolveActivity(context.packageManager) == null) {
-            Log.d(TAG, "Intent for dialer cannot be resolved.")
+            Log.i(TAG, "Intent for dialer cannot be resolved.")
             return null
         }
         return intent
@@ -75,10 +67,14 @@ open class SatelliteAppsRepository(private val context: Context) {
             if (isCarrierRoamingNtnSupported) {
                 Intent(Settings.ACTION_SATELLITE_SETTING)
             } else {
-                Intent()
-                    .setComponent(
-                        ComponentName(PACKAGE_NAME_SCONE, COMPONENT_NAME_SETTINGS_GATEWAY_ACTIVITY)
-                    )
+                val packageName =
+                    context.getString(R.string.config_satellite_settings_gateway_package)
+                val className = context.getString(R.string.config_satellite_settings_gateway_class)
+                if (packageName.isEmpty() || className.isEmpty()) {
+                    Log.w(TAG, "Settings gateway package or class is empty.")
+                    return null
+                }
+                Intent().setComponent(ComponentName(packageName, className))
             }
 
         settingsIntent.putExtra(EXTRA_SHOW_FRAGMENT_AS_SUBSETTING, true)
@@ -102,17 +98,16 @@ open class SatelliteAppsRepository(private val context: Context) {
     }
 
     /** Returns the list of satellite app package names for the LTE-based landing page. */
-    open fun getAppsPackagesForLteLandingPage(): List<String> {
+    open fun getAppsPackagesForLteLandingPage(isRestrictedMode: Boolean = false): List<String> {
         val overrideSatelliteAppsForLteLandingPageWithConfig =
             DeviceConfig.getBoolean(
                 DeviceConfig.NAMESPACE_TELEPHONY,
                 OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG_KEY,
                 DEFAULT_OVERRIDE_SATELLITE_APPS_FOR_LTE_LANDING_PAGE_WITH_CONFIG_VALUE,
             )
-        Log.d(
-            TAG,
-            "getAppsPackagesForLteLandingPage: overrideSatelliteAppsForLteLandingPageWithConfig=$overrideSatelliteAppsForLteLandingPageWithConfig",
-        )
+        logd {
+            "getAppsPackagesForLteLandingPage: overrideSatelliteAppsForLteLandingPageWithConfig=$overrideSatelliteAppsForLteLandingPageWithConfig, isRestrictedMode=$isRestrictedMode"
+        }
 
         val packages =
             if (overrideSatelliteAppsForLteLandingPageWithConfig) {
@@ -123,7 +118,18 @@ open class SatelliteAppsRepository(private val context: Context) {
                 // By default, use the satellite data optimized apps from SatelliteManager.
                 getSatelliteDataOptimizedApps(context)
             }
-        return packages.filter { it.isNotEmpty() && isPackageInstalled(it) }
+
+        // Filter out other apps, keeping only Messages if in restricted mode
+        val filteredPackages =
+            if (isRestrictedMode) {
+                val messagesPackage =
+                    context.getString(R.string.config_satellite_messages_app_package)
+                packages.filter { it == messagesPackage }
+            } else {
+                packages
+            }
+
+        return filteredPackages.filter { it.isNotEmpty() && isPackageInstalled(it) }
     }
 
     private fun isPackageInstalled(packageName: String): Boolean {
@@ -131,7 +137,7 @@ open class SatelliteAppsRepository(private val context: Context) {
             context.packageManager.getPackageInfo(packageName, 0)
             true
         } catch (e: PackageManager.NameNotFoundException) {
-            Log.d(TAG, "$packageName is not installed.")
+            logd { "$packageName is not installed." }
             false
         }
     }
@@ -144,8 +150,14 @@ open class SatelliteAppsRepository(private val context: Context) {
         try {
             return satelliteManager.getSatelliteDataOptimizedApps()
         } catch (e: IllegalStateException) {
-            Log.d(TAG, "getSatelliteDataOptimizedApps failed due to $e")
+            Log.w(TAG, "getSatelliteDataOptimizedApps failed due to $e")
         }
         return emptyList()
+    }
+
+    private inline fun logd(message: () -> String) {
+        if (Log.isLoggable(TAG, Log.DEBUG)) {
+            Log.d(TAG, message())
+        }
     }
 }

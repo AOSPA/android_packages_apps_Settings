@@ -1460,7 +1460,8 @@ public final class DataProcessor {
     }
 
     @Nullable
-    private static BatteryDiffData insertHourlyUsageDiffDataPerSlot(
+    @VisibleForTesting
+    static BatteryDiffData insertHourlyUsageDiffDataPerSlot(
             final Context context,
             final long startTimestamp,
             final long endTimestamp,
@@ -1523,6 +1524,8 @@ public final class DataProcessor {
             }
 
             BatteryHistEntry selectedBatteryEntry = null;
+            final Set<DataErrorType> dataErrorTypes = new ArraySet<>();
+            final StringBuilder mergedErrorMsg = new StringBuilder();
             final List<BatteryHistEntry> batteryHistEntries = new ArrayList<>();
             for (Map<String, BatteryHistEntry> slotBatteryHistMap : slotBatteryHistoryList) {
                 BatteryHistEntry entry =
@@ -1555,35 +1558,53 @@ public final class DataProcessor {
             for (int i = 0; i < batteryHistEntries.size() - 1; i++) {
                 final BatteryHistEntry currentEntry = batteryHistEntries.get(i);
                 final BatteryHistEntry nextEntry = batteryHistEntries.get(i + 1);
+                final StringBuilder errorMsg = new StringBuilder();
                 foregroundUsageTimeInMs +=
                         getDiffValue(
                                 currentEntry.mForegroundUsageTimeInMs,
-                                nextEntry.mForegroundUsageTimeInMs);
+                                nextEntry.mForegroundUsageTimeInMs,
+                                "foregroundUsageTime", errorMsg);
                 foregroundServiceUsageTimeInMs +=
                         getDiffValue(
                                 currentEntry.mForegroundServiceUsageTimeInMs,
-                                nextEntry.mForegroundServiceUsageTimeInMs);
+                                nextEntry.mForegroundServiceUsageTimeInMs,
+                                "foregroundServiceUsageTime", errorMsg);
                 backgroundUsageTimeInMs +=
                         getDiffValue(
                                 currentEntry.mBackgroundUsageTimeInMs,
-                                nextEntry.mBackgroundUsageTimeInMs);
-                consumePower += getDiffValue(currentEntry.mConsumePower, nextEntry.mConsumePower);
+                                nextEntry.mBackgroundUsageTimeInMs,
+                                "backgroundUsageTime", errorMsg);
+                consumePower +=
+                        getDiffValue(currentEntry.mConsumePower, nextEntry.mConsumePower,
+                                "totalConsumePower", errorMsg);
                 foregroundUsageConsumePower +=
                         getDiffValue(
                                 currentEntry.mForegroundUsageConsumePower,
-                                nextEntry.mForegroundUsageConsumePower);
+                                nextEntry.mForegroundUsageConsumePower,
+                                "foregroundUsageConsumePower", errorMsg);
                 foregroundServiceUsageConsumePower +=
                         getDiffValue(
                                 currentEntry.mForegroundServiceUsageConsumePower,
-                                nextEntry.mForegroundServiceUsageConsumePower);
+                                nextEntry.mForegroundServiceUsageConsumePower,
+                                "foregroundServiceUsageConsumePower", errorMsg);
                 backgroundUsageConsumePower +=
                         getDiffValue(
                                 currentEntry.mBackgroundUsageConsumePower,
-                                nextEntry.mBackgroundUsageConsumePower);
+                                nextEntry.mBackgroundUsageConsumePower,
+                                "backgroundUsageConsumePower", errorMsg);
                 cachedUsageConsumePower +=
                         getDiffValue(
                                 currentEntry.mCachedUsageConsumePower,
-                                nextEntry.mCachedUsageConsumePower);
+                                nextEntry.mCachedUsageConsumePower,
+                                "cachedUsageConsumePower", errorMsg);
+                if (!errorMsg.isEmpty()) {
+                    dataErrorTypes.add(DataErrorType.ERROR_TYPE_UNEXPECTED_RESET);
+                    mergedErrorMsg.append(
+                            String.format("\n\t[RESET] startTime = %d, endTime = %d, tag = %s |",
+                                    currentEntry.mTimestamp,
+                                    nextEntry.mTimestamp,
+                                    errorMsg));
+                }
             }
             if (isSystemConsumer(selectedBatteryEntry.mConsumerType)
                     && selectedBatteryEntry.mDrainType == BatteryConsumer.POWER_COMPONENT_SCREEN) {
@@ -1664,6 +1685,11 @@ public final class DataProcessor {
             if (currentBatteryDiffEntry.isSystemEntry()) {
                 systemEntries.add(currentBatteryDiffEntry);
             } else {
+                if (!dataErrorTypes.isEmpty()) {
+                    currentBatteryDiffEntry.setDataMetadata(
+                            new BatteryDiffEntry.DataMetadata(
+                                    new ArrayList<>(dataErrorTypes), mergedErrorMsg.toString()));
+                }
                 appEntries.add(currentBatteryDiffEntry);
             }
         }
@@ -2027,12 +2053,29 @@ public final class DataProcessor {
         return true;
     }
 
-    private static long getDiffValue(long v1, long v2) {
-        return v2 > v1 ? v2 - v1 : 0;
+    private static long getDiffValue(long v1, long v2, String tag, StringBuilder errorMsgBuilder) {
+        long delta = v2 - v1;
+        if (delta < 0L) {
+            long threshold = FeatureFactory.getFeatureFactory()
+                    .getPowerUsageFeatureProvider().getBatteryUsageResetErrorTimeThresholdMs();
+            if (Math.abs(delta) > threshold) {
+                errorMsgBuilder.append(String.format("| %s: %d -> %d", tag, v1, v2));
+            }
+        }
+        return Math.max(delta, 0L);
     }
 
-    private static double getDiffValue(double v1, double v2) {
-        return v2 > v1 ? v2 - v1 : 0;
+    private static double getDiffValue(
+            double v1, double v2, String tag, StringBuilder errorMsgBuilder) {
+        double delta = v2 - v1;
+        if (delta < 0.0) {
+            double threshold = FeatureFactory.getFeatureFactory()
+                    .getPowerUsageFeatureProvider().getBatteryUsageResetErrorPowerThreshold();
+            if (Math.abs(delta) > threshold) {
+                errorMsgBuilder.append(String.format("| %s: %f -> %f", tag, v1, v2));
+            }
+        }
+        return Math.max(delta, 0.0);
     }
 
     private static long getCurrentTimeMillis() {

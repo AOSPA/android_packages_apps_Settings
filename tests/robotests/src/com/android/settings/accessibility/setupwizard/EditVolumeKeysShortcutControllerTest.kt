@@ -25,6 +25,7 @@ import com.android.internal.accessibility.AccessibilityShortcutController.MAGNIF
 import com.android.settings.R
 import com.android.settings.accessibility.Flags.FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH
 import com.android.settings.accessibility.setupwizard.items.IllustrationCheckBoxItem
+import com.android.settings.testutils.AccessibilityTestUtils
 import com.android.settings.testutils.shadow.ShadowInputDevice
 import com.google.common.truth.Truth.assertThat
 import org.junit.Rule
@@ -66,8 +67,8 @@ class EditVolumeKeysShortcutControllerTest {
 
     @Test
     @DisableFlags(FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH)
-    fun bindData_keyboardAttachedAndFlagOff_setsMobileImage() {
-        setHardwareKeyboard(true)
+    fun bindData_desktopSupportedAndFlagOff_setsMobileImage() {
+        AccessibilityTestUtils.setDesktopSupported(appContext, true)
         val controller = createController(setOf(MAGNIFICATION_CONTROLLER_NAME))
 
         controller.bindData(item)
@@ -77,8 +78,8 @@ class EditVolumeKeysShortcutControllerTest {
 
     @Test
     @DisableFlags(FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH)
-    fun bindData_keyboardDetachedAndFlagOff_setsMobileImage() {
-        setHardwareKeyboard(false)
+    fun bindData_desktopNotSupportedAndFlagOff_setsMobileImage() {
+        AccessibilityTestUtils.setDesktopSupported(appContext, false)
         val controller = createController(setOf(MAGNIFICATION_CONTROLLER_NAME))
 
         controller.bindData(item)
@@ -88,8 +89,8 @@ class EditVolumeKeysShortcutControllerTest {
 
     @Test
     @EnableFlags(FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH)
-    fun bindData_keyboardAttachedAndFlagOn_setsDesktopImage() {
-        setHardwareKeyboard(true)
+    fun bindData_desktopSupportedAndFlagOn_setsDesktopImage() {
+        AccessibilityTestUtils.setDesktopSupported(appContext, true)
         val controller = createController(setOf(MAGNIFICATION_CONTROLLER_NAME))
 
         controller.bindData(item)
@@ -100,23 +101,14 @@ class EditVolumeKeysShortcutControllerTest {
 
     @Test
     @EnableFlags(FLAG_DESKTOP_MAGNIFICATION_SETTINGS_POLISH)
-    fun bindData_keyboardDetachedAndFlagOn_setsMobileImage() {
-        setHardwareKeyboard(false)
+    fun bindData_desktopNotSupportedAndFlagOn_setsMobileImage() {
+        AccessibilityTestUtils.setDesktopSupported(appContext, false)
         val controller = createController(setOf(MAGNIFICATION_CONTROLLER_NAME))
 
         controller.bindData(item)
 
         assertThat(item.imageResId).isEqualTo(R.drawable.accessibility_shortcut_type_volume_keys)
     }
-
-    private fun setHardwareKeyboard(hasConnectedKeyboard: Boolean) =
-        if (hasConnectedKeyboard) {
-            ShadowInputDevice.makeFullKeyboardInputDevicebyId(/* id= */ 1).also {
-                ShadowInputDevice.addDevice(it.id, it)
-            }
-        } else {
-            ShadowInputDevice.reset()
-        }
 
     /** Creates the controller and its associated store. */
     private fun createController(targets: Set<String>) =

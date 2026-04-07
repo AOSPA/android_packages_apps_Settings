@@ -28,6 +28,7 @@ import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 
@@ -59,6 +60,8 @@ class IntensityPreference(
 
     override fun getMaxValue(context: Context): Int = IntensityDataStore.MAX_VALUE
 
+    override fun getUnitOfMeasurement() = "%"
+
     override fun isEnabled(context: Context): Boolean = extraDimStorage.getBoolean(KEY) == true
 
     override fun storage(context: Context): KeyValueStore = storage
@@ -79,6 +82,7 @@ class IntensityPreference(
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun onCreate(context: PreferenceLifecycleContext) {
         if (settingsKeyedObserver == null) {
             settingsKeyedObserver = KeyedObserver { _, _ ->
@@ -94,6 +98,9 @@ class IntensityPreference(
         settingsKeyedObserver?.let { observer -> extraDimStorage.removeObserver(observer) }
         settingsKeyedObserver = null
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         private const val KEY = IntensityDataStore.SETTING_KEY

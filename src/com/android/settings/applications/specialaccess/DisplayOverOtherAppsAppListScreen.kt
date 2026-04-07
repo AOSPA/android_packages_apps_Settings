@@ -29,6 +29,7 @@ import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 
 @ProvidePreferenceScreen(DisplayOverOtherAppsAppListScreen.KEY)
@@ -48,6 +49,8 @@ open class DisplayOverOtherAppsAppListScreen :
 
     override val keywords: Int
         get() = R.string.keywords_draw_overlay
+
+    override val sensitivityLevel = SensitivityLevel.DO_NOT_EXPOSE
 
     override fun isFlagEnabled(context: Context) = Flags.deeplinkApps25q4()
 
@@ -73,6 +76,9 @@ open class DisplayOverOtherAppsAppListScreen :
     companion object {
         const val KEY = "special_access_draw_overlay_app_list"
     }
+
+    override val availabilityDescription =
+        "This must not be a low ram device OR Android must be version P or below."
 
     override fun isAvailable(context: Context) = isSystemAlertWindowEnabled(context)
 }

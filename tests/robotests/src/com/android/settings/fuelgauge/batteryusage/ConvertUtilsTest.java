@@ -389,6 +389,11 @@ public final class ConvertUtilsTest {
         optimizationModeCache.mBatteryOptimizeModeCache.put(
                 (int) batteryDiffEntry.mUid,
                 Pair.create(BatteryOptimizationMode.MODE_OPTIMIZED, false));
+        batteryDiffEntry.mDataMetadata =
+                new BatteryDiffEntry.DataMetadata(
+                        List.of(DataErrorType.ERROR_TYPE_UNKNOWN),
+                        "ERROR_MSG"
+                );
 
         final BatteryUsageDiff batteryUsageDiff =
                 ConvertUtils.convertToBatteryUsageDiff(batteryDiffEntry, optimizationModeCache);
@@ -414,6 +419,12 @@ public final class ConvertUtilsTest {
         assertThat(batteryUsageDiff.getIsAppOptimizationModeMutable()).isFalse();
         assertThat(batteryUsageDiff.hasPackageName()).isFalse();
         assertThat(batteryUsageDiff.hasLabel()).isFalse();
+        final DataMetadata dataMetadata = batteryUsageDiff.getDataMetadata();
+        assertThat(dataMetadata).isNotEqualTo(DataMetadata.getDefaultInstance());
+        assertThat(dataMetadata.getDataErrorTypesList()).containsExactly(
+                DataErrorType.ERROR_TYPE_UNKNOWN
+        );
+        assertThat(dataMetadata.getErrorMsg()).isEqualTo("ERROR_MSG");
     }
 
     @Test

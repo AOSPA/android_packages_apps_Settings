@@ -779,7 +779,23 @@
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_time_title">Time</string>
     <!-- Date & time setting screen title for setting time format (allowing user to set device display in 12-hour format or 24-hour format) [CHAR LIMIT=30] -->
-    <string name="time_format_category_title">Time format</string>
+    <string name="time_format_category_title">12-hour / 24-hour format</string>
+    <!-- Date & time setting screen title for setting time format (allowing user to set device display in 12-hour format or 24-hour format) [CHAR LIMIT=30] -->
+    <string name="time_format_page_title">Time format</string>
+    <!-- Date & time setting screen title for setting more settings [CHAR LIMIT=30] -->
+    <string name="time_more_settings_category_title">More settings</string>
+    <!-- Date & time setting screen subtitle for setting time format (allowing user to set device display in 12-hour format or 24-hour format) [CHAR LIMIT=NONE] -->
+    <string name="time_format_subtitle">Applications will use your time format based on this setting</string>
+    <!-- Date & time setting screen category title for setting time format (allowing user to set device display in 12-hour format or 24-hour format) [CHAR LIMIT=30] -->
+    <string name="time_format_options_category_title">Select a time format</string>
+    <!-- Date & time setting screen option set to automatic (i.e. use app or system language) [CHAR LIMIT=30] -->
+    <string name="time_format_automatic">Automatic</string>
+    <!-- Date & time setting screen option summary for setting time format to automatic [CHAR LIMIT=NONE] -->
+    <string name="time_format_automatic_summary">Apps use 12-hour / 24-hour format based on app language</string>
+    <!-- Date & time setting screen option title for setting time format to 12-hour format [CHAR LIMIT=30] -->
+    <string name="time_format_12_hour">12-hour format</string>
+    <!-- Date & time setting screen option title for setting time format to 24-hour format [CHAR LIMIT=30] -->
+    <string name="time_format_24_hour">24-hour format</string>
     <!-- Date & time setting screen setting option title [CHAR LIMIT=30] -->
     <string name="date_time_set_timezone_title">Time zone</string>
     <!-- Date & time setting screen setting option title for home time zone [CHAR LIMIT=30] -->
@@ -2162,10 +2178,6 @@
     <!-- Nfc developer settings: The confirm button of the popup dialog. [CHAR_LIMIT=60] -->
     <string name="nfc_reboot_dialog_confirm">Restart</string>
 
-    <!-- External Display settings. When external display is enabled. [CHAR LIMIT=40] -->
-    <string name="external_display_on">On</string>
-    <!-- External Display settings. When external display is disabled. [CHAR LIMIT=40] -->
-    <string name="external_display_off">Off</string>
     <!-- External Display settings. The title of the screen. [CHAR LIMIT=40] -->
     <string name="external_display_settings_title">External displays</string>
     <!-- Built-in display settings category. Appears in External displays and Connected Displays fragments. -->
@@ -2461,6 +2473,10 @@
     <string name="wifi_allow_wep_networks_set_value_precondition" translatable="false">You cannot turn off this setting while connected to a WEP network.</string>
     <!-- Error message shown when the user is connected to WEP and tries to disable the setting [CHAR LIMIT=NONE] -->
     <string name="wifi_allow_wep_networks_set_invalid_preference" translatable="false">This device is connected to a WEP network. Disabling WEP support will disconnect the device.</string>
+    <!-- Precondition text shown when the device hardware does not support WiFi scanning [CHAR LIMIT=NONE] -->
+    <string name="wifi_scanning_hardware_unsupported" translatable="false">This setting is only available on devices that support WiFi scanning.</string>
+    <!-- Precondition text shown when the user is restricted from WiFi scanning [CHAR LIMIT=NONE] -->
+    <string name="wifi_scanning_user_restricted" translatable="false">The user must not be restricted from changing location settings by a device owner or a profile owner.</string>
 
     <!-- Dialog for Access Points -->
     <skip />
@@ -3586,7 +3602,7 @@
     <!-- More security and Privacy, SIM protection setting screen title  [CHAR LIMIT=40] -->
     <string name="automatic_sim_lock_protection">SIM lock protection mode</string>
     <!-- SIM protection settings screen, primary setting for turning on automatic PIN management. [CHAR LIMIT=40] -->
-    <string name="sim_auto_pin_management_toggle">Automatic PIN management</string>
+    <string name="sim_auto_pin_management_toggle">Lock SIM</string>
     <!-- SIM protection settings screen, primary setting, description for automatic PIN management on [CHAR LIMIT=NONE] -->
     <string name="sim_pin_auto_management_on">Managed by Android</string>
     <!-- SIM protection settings screen, primary setting, description for auto PIN management off [CHAR LIMIT=NONE] -->
@@ -3604,11 +3620,11 @@
     <!-- Dialog for showing the platform-managed PIN, text when there's a failure. [CHAR LIMIT=NONE] -->
     <string name="sim_platform_managed_pin_failure">Failed getting PIN</string>
     <!-- Automatic SIM card lock protection screen, preference summary when nothing is set. [CHAR LIMIT=NONE] -->
-    <string name="sim_choose_protection_mode_title">Protect SIM card from theft</string>
+    <string name="sim_choose_protection_mode_title">Require PIN to use phone</string>
     <!-- Automatic SIM card lock protection screen, preference summary when the SIM PIN is platform-managed. [CHAR LIMIT=NONE] -->
     <string name="sim_protection_mode_protected_by_platform">SIM PIN managed by Android</string>
     <!-- Automatic SIM card lock protection screen, preference summary when the SIM PIN is manually managed. [CHAR LIMIT=NONE] -->
-    <string name="sim_protection_mode_manually_managed">SIM PIN manually managed</string>
+    <string name="sim_protection_mode_manually_managed">PIN required to use phone</string>
     <!-- Automatic SIM card lock protection screen, preference summary when there is no lockscreen so the feature cannot be turned on. [CHAR LIMIT=NONE] -->
     <string name="sim_protection_mode_lskf_required">Lockscreen required for automatic SIM protection, manual only available now</string>
     <!-- Enrollment into automatic SIM PIN management dialog, title. [CHAR LIMIT=40] -->
@@ -3631,6 +3647,8 @@
     <string name="confirm_new_sim_pin_after_mismatch">PINs do not match. Confirm the new SIM PIN.</string>
     <!-- Error message shown to the user if the current PIN provided is wrong. [CHAR LIMIT=NONE] -->
     <string name="enter_current_sim_pin_after_mismatch">Wrong PIN. Attempts remaining: <xliff:g id="num_attempts">%1$d</xliff:g></string>
+    <!-- Accessibility hint - tell the user they should be entering the currend SIM card PIN. [CHAR LIMIT=NONE] -->
+    <string name="enter_current_sim_pin_hint">Enter the current PIN code of the SIM card</string>
 
     <!-- Title asking user if they wish to change the default sim for cellular data.  [CHAR LIMIT=40] -->
     <string name="sim_change_data_title">
@@ -4402,6 +4420,8 @@
 
     <!-- Date&Time settings screen, title of the notification category [CHAR LIMIT=60] -->
     <string name="time_notifications_title">Notifications</string>
+    <!-- Date&Time settings screen, summary of the notification category [CHAR LIMIT=NONE] -->
+    <string name="time_notifications_summary">Get notified when your time changes automatically</string>
     <!-- Date&Time settings screen, title of the time zone change notification toggle [CHAR LIMIT=60] -->
     <string name="time_zone_change_notifications_toggle_title">Time zone change</string>
     <!-- Date&Time settings screen, summary of the time zone change notification toggle [CHAR_LIMIT=NONE] -->
@@ -5069,12 +5089,8 @@
     <string name="keyboard_settings">Keyboard</string>
     <!-- Text displayed when user has restriction DISALLOW_CONFIG_LOCALE [CHAR LIMIT=NONE]-->
     <string name="language_empty_list_user_restricted">You don\u2019t have permission to change the device language.</string>
-    <!-- Title of Languages & input settings screen -->
-    <string name="language_keyboard_settings_title">Languages&#160;&amp; input</string>
     <!-- Title of preference category that lists all settings about helping user text input such as spell checker [CHAR LIMIT=60]-->
     <string name="input_assistance">Tools</string>
-    <!-- On Languages & input settings screen, heading. Inside the "Languages & input settings" screen, this is the header for settings that relate to keyboard (enable/disable each keyboard, settings for each keyboard). -->
-    <string name="keyboard_settings_category">Keyboard &amp; input methods</string>
     <!-- On Languages settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
     <string name="system_language">System Languages</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to take the user to a screen to select the locale. -->
@@ -5091,8 +5107,6 @@
     <string name="auto_caps_summary">Capitalize first letter in sentences</string>
     <!-- On Text & language settings screen, setting option name. title of the setting to enable automatic punctuation of entered text.  for example, it will change an entered "youre" to "you're". -->
     <string name="auto_punctuate">Auto-punctuate</string>
-    <!-- On Text & language settings screen, category for physical keyboard text entry options. -->
-    <string name="hardkeyboard_category">Physical keyboard settings</string>
     <!-- On Text & language settings screen, setting summary for the Auto-punctuate setting. -->
     <string name="auto_punctuate_summary">Press Space key twice to insert \u0022.\u0022</string>
     <!-- On Security & location settings screen, setting check box name. Title of the checkbox to set whether password edit fields will show the most recent character typed and then hide it, or just hide it right away.  By hide, I mean mask it out. -->
@@ -5118,8 +5132,6 @@
     <string name="spellchecker_quick_settings">Settings</string>
     <!-- Image button description for spell checker language. -->
     <string name="spellchecker_language">Language</string>
-    <!-- Title for the 'keyboard and input methods' preference category. [CHAR LIMIT=45] -->
-    <string name="keyboard_and_input_methods_category">Keyboards</string>
     <!-- Title for the button to toggle the 'IME Switcher Button' preference visibility.[CHAR LIMIT=60] -->
     <string name="ime_switcher_button_in_navbar_title">Show the keyboard switch key</string>
     <!-- Summary for the button to toggle the 'IME Switcher Button' preference visibility.[CHAR LIMIT=NONE] -->
@@ -5130,8 +5142,6 @@
     <string name="keywords_virtual_keyboard">Gboard</string>
     <!-- Title for the 'available virtual keyboard' preference sub-screen. [CHAR LIMIT=35] -->
     <string name="available_virtual_keyboard_category">Available On-screen keyboard</string>
-    <!-- Title for the button to trigger the 'Manage keyboards' preference sub-screen, where the user can turn on/off installed virtual keyboards.[CHAR LIMIT=35] -->
-    <string name="add_virtual_keyboard">Manage on-screen keyboards</string>
     <!-- Title for the 'keyboard options' preference category. [CHAR LIMIT=35] -->
     <string name="keyboard_options_category">Options</string>
     <!-- Title for the 'keyboard accessibility options' preference category. [CHAR LIMIT=35] -->
@@ -5252,12 +5262,8 @@
 
     <!-- Title for the button to trigger the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=35] -->
     <string name="keyboard_shortcuts_helper">View keyboard shortcuts</string>
-    <!-- Summary text for the 'keyboard shortcuts helper' dialog. [CHAR LIMIT=100] -->
-    <string name="keyboard_shortcuts_helper_summary">Show list of shortcuts</string>
     <!-- Title for the 'Work profile keyboards & tools' preference category inside Languages and inputs'. [CHAR LIMIT=50] -->
     <string name="language_and_input_for_work_category_title">Work profile keyboards &amp; tools</string>
-    <!-- Title for the 'Virtual keyboards for work' preference. [CHAR LIMIT=45] -->
-    <string name="virtual_keyboards_for_work_title">On-screen keyboard for work</string>
     <!-- Summary text for none selected keyboard default layout -->
     <string name="keyboard_default_layout">Default</string>
 
@@ -5517,8 +5523,6 @@
 
     <!-- Title text for per IME subtype keyboard layout. [CHAR LIMIT=35] -->
     <string name="ime_label_title"><xliff:g id="ime_label" example="Gboard">%s</xliff:g> layout</string>
-    <!-- Summary text for keyboards when no layout has been selected. [CHAR LIMIT=35] -->
-    <string name="default_keyboard_layout">Default</string>
     <!-- Summary text for keyboards when a layout is automatically selected. [CHAR LIMIT=35] -->
     <string name="automatic_keyboard_layout_label">Automatic: <xliff:g id="layout_label" example="English(US)">%s</xliff:g></string>
     <!-- Summary text for keyboards when a layout is user selected. [CHAR LIMIT=35] -->
@@ -5548,17 +5552,6 @@
     <string name="vibrate_input_devices">Redirect vibration</string>
     <!-- On Languages & input settings screen, setting summary.  Setting to redirect vibration to input devices. [CHAR LIMIT=100] -->
     <string name="vibrate_input_devices_summary">Send vibration to game controller when connected</string>
-
-    <!-- Keyboard Layout Preference Dialog -->
-    <skip />
-    <!-- Title for the keyboard layout preference dialog. [CHAR LIMIT=35] -->
-    <string name="keyboard_layout_dialog_title">Choose keyboard layout</string>
-    <!-- Button to configure keyboard layouts.  [CHAR LIMIT=35] -->
-    <string name="keyboard_layout_dialog_setup_button">Set up keyboard layouts</string>
-    <!-- Hint describing how to switch keyboard layouts using the keyboard.  [CHAR LIMIT=48] -->
-    <string name="keyboard_layout_dialog_switch_hint">To switch, press Control-Spacebar</string>
-    <!-- Label of the default keyboard layout.  [CHAR LIMIT=35] -->
-    <string name="keyboard_layout_default_label">Default</string>
 
     <!-- Keyboard Layout Picker -->
     <skip />
@@ -5679,8 +5672,6 @@
     <string name="vision_settings_suggestion_title">Change font size</string>
     <!-- Title for the accessibility preference category of screen reader services and settings. [CHAR LIMIT=50] -->
     <string name="screen_reader_category_title">Screen reader</string>
-    <!-- Title for the accessibility preference category of physical keyboard options. [CHAR LIMIT=50] -->
-    <string name="keyboard_category_title">Physical keyboard options</string>
     <!-- Title for the accessibility preference category of caption services and settings. [CHAR LIMIT=50] -->
     <string name="captions_category_title">Captions</string>
     <!-- Title for the accessibility preference category of audio services and settings. [CHAR LIMIT=50] -->
@@ -6228,7 +6219,7 @@
     <!-- Hint for the Expanded dark theme per-app settings gear icon. [CHAR LIMIT=NONE] -->
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint">Open expanded dark theme settings</string>
     <!-- header description for the Expanded dark theme per-app settings. [CHAR LIMIT=NONE] -->
-    <string name="accessibility_expanded_dark_theme_exceptions_header_description">Expanded dark theme can improve readability, but may cause some apps to display incorrectly.\n\nApps with this setting off will use the standard dark theme option.</string>
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description">Expanded dark theme automatically darkens more apps for better readability.\n\nKeep an app\'s toggle on to use expanded dark theme. If an app doesn\'t look right, turn its toggle off to use the app\'s own theme.</string>
     <!-- Title for the accessibility preference for disabling animations. [CHAR LIMIT=35] -->
     <string name="accessibility_disable_animations">Remove animations</string>
     <!-- Summary for the accessibility preference for disabling animations. [CHAR LIMIT=60] -->
@@ -6518,8 +6509,6 @@
     <string name="accessibility_hearing_device_routing_title">Sounds</string>
     <!-- Title for the "Notifications" toggle in the Sounds category. [CHAR LIMIT=35] -->
     <string name="accessibility_hearing_device_notification_routing_title">Notifications</string>
-    <!-- Title for the "Ringtones and alarms" toggle in the Sounds category. [CHAR LIMIT=35] -->
-    <string name="accessibility_hearing_device_ringtone_alarm_routing_title">Ringtones and alarms</string>
     <!-- Summary for when audio is routed to the hearing device. [CHAR LIMIT=NONE] -->
     <string name="accessibility_hearing_device_routing_hearing_device_summary">Sounds will play through hearing devices</string>
     <!-- Summary for when audio is routed to the device speaker. (user's device speaker, e.g. phone, tablet, car) [CHAR LIMIT=NONE] -->
@@ -6974,6 +6963,9 @@
     <!-- Text for battery advance info learn more link [CHAR LIMIT=NONE] -->
     <string name="battery_advance_info_learn_more"></string>
 
+    <!-- [CHAR_LIMIT=NONE] Battery usage main screen footer advance content -->
+    <string name="battery_usage_screen_advance_footer">Battery usage and screen time are not measured while the phone is charging</string>
+
     <!-- Activity title for battery usage details for an app. or power consumer -->
     <string name="battery_details_title">App battery usage</string>
     <!-- Subtitle for application/subsystem details -->
@@ -7404,8 +7396,6 @@
     <string name="voice_input_output_settings_title">Voice input &amp; output settings</string>
     <!-- Title of voice search settings list item within voice input/output settings -->
     <string name="voice_search_settings_title">Voice search</string>
-    <!-- Title of keyboard settings list item within voice input/output settings -->
-    <string name="keyboard_settings_title">Android keyboard</string>
 
     <!-- Voice input settings -->
     <skip />
@@ -8884,6 +8874,8 @@
     <string name="keywords_wifi_data_usage">data usage</string>
     <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
     <string name="keywords_time_format">Use 24-hour format</string>
+    <!-- Search keyword for "Time format" settings. [CHAR_LIMIT=NONE]-->
+    <string name="keywords_time_notifications">time notifications, time zone notifications, DST, daylight savings, time zone offset</string>
     <!-- Search keyword for "Default Apps" settings [CHAR_LIMIT=NONE]-->
     <string name="keywords_app_default">Open with</string>
     <!-- Search keyword for "App info" settings [CHAR_LIMIT=NONE]-->
@@ -9119,6 +9111,12 @@
 
     <!-- Sound: Summary for when notification volume is disabled. [CHAR LIMIT=100] -->
     <string name="notification_volume_disabled_summary">Unavailable because ring is muted</string>
+
+    <!-- Search keywords for the sim specific ringtone preference. [CHAR LIMIT=NONE] -->
+    <string name="keywords_sim_ringtone">Ringtone, Ringtone alert, SIM, SIM Ringtone</string>
+
+    <!-- Sound: Title for the sim specific ringtone preference. [CHAR LIMIT=30] -->
+    <string name="sim_ringtone_title">Ringtone</string>
 
     <!-- Sound: Title for the option defining the phone ringtone. [CHAR LIMIT=30] -->
     <string name="ringtone_title">Phone ringtone</string>
@@ -11509,6 +11507,8 @@
     <string name="computer_control_automation_page_title">Screen automation</string>
     <!-- Sub heading for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_sub_heading">This app will be able to see and interact with other apps\' screen content to help you complete tasks, even when the apps are in the background</string>
+    <!-- Sub heading for setting which controls whether an app can automate other apps (used when flag for per app consent is enabled) [CHAR LIMIT=NONE] [SCREENSHOT=screen/BTHQJHtAbPeeaWz] -->
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent"><xliff:g  example="Example App">%1$s</xliff:g> will be able to see and interact with other apps\' screen content to help you complete tasks</string>
     <!-- Footer summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_footer_summary">If you don\'t allow screen automation, <xliff:g  example="Example App">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g example="Example App">%1$s</xliff:g> in other ways</string>
     <!-- Summary for setting which controls whether an app can automate other apps [CHAR LIMIT=NONE] [SCREENSHOT=screen/55Y5GXxjQJNFvRT] -->
@@ -11519,6 +11519,16 @@
     <string name="computer_control_automation_always_allowed">Always allow</string>
     <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45] [SCREENSHOT=screen/76tCViXrkt43PMF] -->
     <string name="computer_control_automation_dont_allow">Don\'t allow</string>
+    <!-- Switch preference title to toggle screen automation. [CHAR LIMIT=45] [SCREENSHOT=screen/BTHQJHtAbPeeaWz] -->
+    <string name="computer_control_automation_toggle_title">Allow screen automation</string>
+    <!-- App list header for automatable app list with no automatable apps. [CHAR LIMIT=45] [SCREENSHOT=screen/6FQtqkKPvjwJ3Zp] -->
+    <string name="computer_control_automation_automatable_app_list_header_no_apps">No apps are always allowed</string>
+    <!-- App list header summary for apps that can be automated [CHAR LIMIT=NONE] [SCREENSHOT=screen/BTHQJHtAbPeeaWz] -->
+    <string name="computer_control_automation_automatable_app_list_header_summary">Apps that are allowed to always use the screen automation by <xliff:g  example="Example App">%1$s</xliff:g> will be shown here. Apps that only get a per-session permission will not be shown.</string>
+    <!-- Preference summary text for an app when computer control access is allowed. [CHAR LIMIT=45] -->
+    <string name="computer_control_automation_allowed">Allowed</string>
+    <!-- Preference summary text for an app when computer control access is not allowed. [CHAR LIMIT=45]-->
+    <string name="computer_control_automation_not_allowed">Not allowed</string>
 
     <!-- Manage full screen intent permission title [CHAR LIMIT=40] -->
     <string name="full_screen_intent_title">Full-screen notifications</string>
@@ -11607,6 +11617,12 @@
 
     <!-- Summary of apps [CHAR LIMIT=NONE] -->
     <string name="apps_summary"><xliff:g id="count" example="24">%1$d</xliff:g> apps installed</string>
+
+    <!-- Format for the percentage part of storage summary. [CHAR LIMIT=10] -->
+    <string name="storage_percentage_format"
+        translation_description="Percentage of storage used (e.g., 16%). For RTL languages like Persian, ensure the percentage symbol is correctly placed on the visual left of the numeral.">
+        <xliff:g id="percentage" example="16%">%1$s%%</xliff:g>
+    </string>
 
     <!-- Summary of storage usage [CHAR LIMIT=NONE] -->
     <string name="storage_toplevel_summary"><xliff:g id="percentage" example="54%">%1$s</xliff:g> used - <xliff:g id="free_space" example="32GB">%2$s</xliff:g> free</string>
@@ -14814,7 +14830,7 @@
 
     <!-- Virtual Gamepad user override -->
     <!-- [CHAR LIMIT=60] Virtual gamepad setting to enable or disable the gamepad. -->
-    <string name="virtual_gamepad_title">Gamepad</string>
+    <string name="virtual_gamepad_title">Virtual gamepad</string>
 
     <!-- Accessibility label for fingerprint sensor [CHAR LIMIT=NONE] -->
     <string name="accessibility_fingerprint_label">Fingerprint sensor</string>
@@ -15708,4 +15724,15 @@
     <!-- Enable WebApp Minter -->
     <string name="enable_webapp_minter_title">Enable Web App Installer Service</string>
     <string name="enable_webapp_minter_summary">Enable this service to install websites directly to your home screen, to use them like regular apps.</string>
+
+    <!-- Access HID (Human Interface Device) start -->
+    <!-- Title of HID access screen [CHAR LIMIT=40] [SCREENSHOT=screen/voqkxjdsyiP62J5]-->
+    <string name="access_hid_title">Human interface device access</string>
+    <!-- Label for a setting which controls whether an app can manage HIDs [CHAR LIMIT=NONE] [SCREENSHOT=screen/9b4PwXWD4S9XWhD] -->
+    <string name="permit_access_hid">Allow app to discover human interface devices (HIDs)</string>
+    <!-- Description for a setting which controls whether an app can access HIDs [CHAR LIMIT=NONE] [SCREENSHOT=screen/9b4PwXWD4S9XWhD] -->
+    <string name="allow_access_hid_description">If you allow access, malicious apps may reprogram your HIDs to compromise your system. For example, apps could simulate your keyboard or mouse inputs to control your system when it isn\'t open. Make sure you trust apps when allowing access.</string>
+    <!-- Search keywords for Human interface device access setting -->
+    <string name="keywords_access_hid">hid, human, access, device</string>
+    <!-- Access HID end -->
 </resources>

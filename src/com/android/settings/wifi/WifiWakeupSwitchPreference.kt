@@ -109,7 +109,7 @@ class WifiWakeupSwitchPreference :
         }
 
     override val sensitivityLevel
-        get() = SensitivityLevel.MUST_PROVIDE_UNDO
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     override fun storage(context: Context): KeyValueStore = Storage(context)
 

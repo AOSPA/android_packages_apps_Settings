@@ -33,6 +33,7 @@ import com.android.settings.applications.isPermissionRequested
 import com.android.settings.flags.Flags
 import com.android.settings.utils.highlightPreference
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
+import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -59,6 +60,9 @@ open class WifiControlAppDetailScreen : SpecialAccessAppDetailScreen {
     override val key
         get() = KEY
 
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
+
     //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.special_access_wifi_control_app_detail_purpose
@@ -80,6 +84,9 @@ open class WifiControlAppDetailScreen : SpecialAccessAppDetailScreen {
 
     override val footerPreferenceTitle
         get() = R.string.change_wifi_state_app_detail_summary
+
+    override val availabilityDescription =
+        "The app must be enabled, and must have requested change wifi state permission."
 
     // Edge case: what if the app's change wifi state permission is revoked/granted
     override fun isAvailable(context: Context) =

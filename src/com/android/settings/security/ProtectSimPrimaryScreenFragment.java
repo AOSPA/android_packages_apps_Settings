@@ -16,18 +16,15 @@
 
 package com.android.settings.security;
 
-import android.app.settings.SettingsEnums;
 import android.content.Context;
 import android.os.Bundle;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.settings.R;
-import com.android.settings.dashboard.DashboardFragment;
 import com.android.settings.network.telephony.ConvertToEsimPreferenceController;
 
 import java.util.List;
@@ -36,17 +33,12 @@ import java.util.List;
  * Fragment for showing the PrimarySwitchPreference toggle for toggling SIM protection
  * (in general) on/off.
  */
-public class ProtectSimPrimaryScreenFragment extends DashboardFragment implements
-        EnterSimPinDialogFragment.SimPinEntryListener {
-    private static final String TAG = "AutoSimPinLockFrg";
-
+public class ProtectSimPrimaryScreenFragment extends BaseSimPinFragment {
     @Nullable
     private SimPinProtectionToggleController mController;
 
-    @Override
-    protected String getLogTag() {
-        return TAG;
-    }
+    @Nullable
+    private ChangeSimPinPreferenceController mChangePinController;
 
     @Override
     public void onAttach(Context context) {
@@ -54,6 +46,9 @@ public class ProtectSimPrimaryScreenFragment extends DashboardFragment implement
 
         mController = use(SimPinProtectionToggleController.class);
         mController.setFragment(this);
+
+        mChangePinController = use(ChangeSimPinPreferenceController.class);
+        mChangePinController.setFragment(this);
 
         int subId = getSubId(context);
         ConvertToEsimPreferenceController convertToEsimController =
@@ -87,11 +82,6 @@ public class ProtectSimPrimaryScreenFragment extends DashboardFragment implement
     }
 
     @Override
-    public int getMetricsCategory() {
-        return SettingsEnums.AUTOMATIC_SIM_PIN_MANAGEMENT;
-    }
-
-    @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mController != null) {
@@ -104,32 +94,6 @@ public class ProtectSimPrimaryScreenFragment extends DashboardFragment implement
         super.onCreate(bundle);
         if (mController != null) {
             mController.loadEnrollmentState(bundle);
-        }
-    }
-
-    /**
-     * To be called by the SIM PIN entry dialog to proceed with enrollment after the user
-     * has provided the PIN.
-     *
-     * @param pin The current SIM PIN as provided by the user.
-     */
-    @Override
-    public void onPinEntered(String pin) {
-        if (mController == null) {
-            Log.w(TAG, "Controller is not initialized, cannot process PIN");
-            return;
-        }
-        mController.handlePinEntered(pin);
-    }
-
-    /**
-     * To be called by the SIM PIN entry dialog when the user cancels PIN entry, thus
-     * aborting the enrollment.
-     */
-    @Override
-    public void onEntryCancelled() {
-        if (mController != null) {
-            mController.cancelEnrollment();
         }
     }
 }

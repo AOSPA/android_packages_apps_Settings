@@ -18,23 +18,22 @@ package com.android.settings.gestures
 
 import android.content.ComponentName
 import android.content.Context
-import android.view.accessibility.Flags
-import androidx.test.core.app.ApplicationProvider
+import android.testing.TestableContext
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
 import com.android.settings.Settings
-import com.android.settings.testutils2.SettingsCatalystTestCase
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.TestScope
 import org.junit.Test
+import org.junit.runner.RunWith
 
-class ButtonNavigationSettingsScreenTest() : SettingsCatalystTestCase() {
-    override val preferenceScreenCreator = ButtonNavigationSettingsScreen()
-    override val flagName
-        get() = Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION
+@RunWith(AndroidJUnit4::class)
+class ButtonNavigationSettingsScreenTest {
+    val preferenceScreenCreator = ButtonNavigationSettingsScreen()
 
-    private val context: Context = ApplicationProvider.getApplicationContext()
+    private val context: Context =
+        TestableContext(InstrumentationRegistry.getInstrumentation().context)
     private val testScope = TestScope()
-
-    @Test override fun migration() {}
 
     @Test
     fun getPreferenceHierarchy_returnsHierarchy() {
@@ -63,8 +62,8 @@ class ButtonNavigationSettingsScreenTest() : SettingsCatalystTestCase() {
     @Test
     fun getLaunchIntent_returnButtonNavigationSettingsActivityIntent() {
         val expectedComponent =
-            ComponentName(appContext, Settings.ButtonNavigationSettingsActivity::class.java)
-        val intent = preferenceScreenCreator.getLaunchIntent(appContext, null)
+            ComponentName(context, Settings.ButtonNavigationSettingsActivity::class.java)
+        val intent = preferenceScreenCreator.getLaunchIntent(context, null)
         assertThat(intent).isNotNull()
         assertThat(intent!!.component).isEqualTo(expectedComponent)
     }

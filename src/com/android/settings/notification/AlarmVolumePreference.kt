@@ -70,6 +70,8 @@ class AlarmVolumePreference(private val audioHelper: AudioHelper) :
             else -> AndroidR.drawable.ic_audio_alarm
         }
 
+    override val availabilityDescription = "The device must support configuring alarm volume in Settings and must not be a single volume device."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_alarm_volume) && !audioHelper.isSingleVolume
 
@@ -106,6 +108,8 @@ class AlarmVolumePreference(private val audioHelper: AudioHelper) :
 
     override fun getWritePermit(context: Context, value: Int?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY

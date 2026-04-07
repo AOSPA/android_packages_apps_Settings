@@ -33,6 +33,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -82,6 +83,7 @@ class MagnificationModePreference :
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         preference.onPreferenceClickListener = this
@@ -91,6 +93,9 @@ class MagnificationModePreference :
         super.onCreate(context)
         lifecycleContext = context
     }
+
+    override val availabilityDescription =
+        "The device must not be during setup and must support window magnification."
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && context.isWindowMagnificationSupported()
@@ -103,6 +108,9 @@ class MagnificationModePreference :
         )
         return true
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_CAPABILITY

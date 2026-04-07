@@ -92,6 +92,9 @@ open class FlashNotificationsScreen :
             +FlashNotificationsFooterPreference()
         }
 
+    override val availabilityDescription =
+        "The device must support the flash notifications feature."
+
     override fun isAvailable(context: Context): Boolean =
         FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_FLASH_NOTIFICATIONS)
 
@@ -120,6 +123,8 @@ open class FlashNotificationsScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

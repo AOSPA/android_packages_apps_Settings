@@ -23,6 +23,7 @@ import android.provider.Settings.Secure
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -52,6 +53,7 @@ class PickupGestureApiScreen :
             purpose = R.string.gesture_pick_up_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             get {
                 execute {
                     AmbientDisplayConfiguration(context).pickupGestureEnabled(UserHandle.myUserId())

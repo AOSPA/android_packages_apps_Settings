@@ -155,6 +155,11 @@ public final class TelephonyUtils {
         Log.d(TAG, "queryDsdsToSsConfig value = " + sDsdsToSsConfigStatus);
     }
 
+    public static int getDsdsToSsConfigValue() {
+        Log.d(TAG, "getDsdsToSsConfigValue value = " + sDsdsToSsConfigStatus);
+        return sDsdsToSsConfigStatus;
+    }
+
     public static boolean isAdvancedPlmnScanSupported(Context context) {
         boolean propVal = false;
         if (mIsServiceBound) {

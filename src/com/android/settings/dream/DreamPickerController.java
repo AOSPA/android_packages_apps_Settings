@@ -16,8 +16,6 @@
 
 package com.android.settings.dream;
 
-import static android.service.dreams.Flags.dreamsSwitcher;
-
 import android.app.settings.SettingsEnums;
 import android.content.ComponentName;
 import android.content.Context;
@@ -87,7 +85,7 @@ public class DreamPickerController extends BasePreferenceController {
         super(context, PREF_KEY);
         mBackend = backend;
         mDreamInfos.addAll(mBackend.getDreamInfos());
-        if (dreamsSwitcher()) {
+        if (mBackend.isDreamSwitcherEnabled()) {
             mDreamInfos.sort(DREAM_INFO_COMPARATOR);
             mSelectedDreams = filterSelectedDreamInfos(mDreamInfos);
         } else {
@@ -112,7 +110,7 @@ public class DreamPickerController extends BasePreferenceController {
         mAdapter = new DreamAdapter<>(
                 R.layout.dream_preference_layout,
                 mDreamInfos.stream().map(DreamItem::new).collect(Collectors.toList()),
-                /* allowMultiSelection= */ dreamsSwitcher());
+                /* allowMultiSelection= */ mBackend.isDreamSwitcherEnabled());
 
         mAdapter.setEnabled(mBackend.isEnabled());
 
@@ -124,7 +122,7 @@ public class DreamPickerController extends BasePreferenceController {
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
-        if (!dreamsSwitcher()) {
+        if (!mBackend.isDreamSwitcherEnabled()) {
             recyclerView.addItemDecoration(
                     new GridSpacingItemDecoration(mContext, R.dimen.dream_preference_card_padding));
             return;
@@ -175,7 +173,7 @@ public class DreamPickerController extends BasePreferenceController {
     void refreshDreamsList() {
         mDreamInfos.clear();
         mDreamInfos.addAll(mBackend.getDreamInfos());
-        if (dreamsSwitcher()) {
+        if (mBackend.isDreamSwitcherEnabled()) {
             mDreamInfos.sort(DREAM_INFO_COMPARATOR);
             mSelectedDreams = filterSelectedDreamInfos(mDreamInfos);
         }
@@ -597,7 +595,7 @@ public class DreamPickerController extends BasePreferenceController {
         @Override
         public void onItemClicked() {
             int logValue;
-            if (dreamsSwitcher()) {
+            if (mBackend.isDreamSwitcherEnabled()) {
                 updateDreamSelection(mDreamInfo);
                 logValue = mDreamInfo.isActive ? 1 : 0;
             } else {
@@ -632,7 +630,7 @@ public class DreamPickerController extends BasePreferenceController {
                 return false;
             }
 
-            if (dreamsSwitcher()) {
+            if (mBackend.isDreamSwitcherEnabled()) {
                 return mDreamInfo.isActive;
             }
 

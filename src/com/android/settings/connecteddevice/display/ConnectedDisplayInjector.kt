@@ -48,7 +48,6 @@ import android.view.WindowManagerGlobal
 import androidx.annotation.OpenForTesting
 import com.android.server.display.feature.flags.Flags
 import com.android.settings.connecteddevice.display.ExternalDisplaySettingsConfiguration.VIRTUAL_DISPLAY_PACKAGE_NAME_SYSTEM_PROPERTY
-import com.android.settings.flags.FeatureFlagsImpl
 import com.android.wm.shell.shared.desktopmode.DesktopState
 import java.util.function.Consumer
 import kotlinx.coroutines.Dispatchers
@@ -64,10 +63,8 @@ import kotlinx.coroutines.coroutineScope
  */
 data class RevealedWallpaper(val displayId: Int, val revealer: View, val viewManager: ViewManager)
 
-// TODO(b/430493225): Clean up nullable context
-open class ConnectedDisplayInjector(open val context: Context?) {
+open class ConnectedDisplayInjector(open val context: Context) {
 
-    open val flags: DesktopExperienceFlags by lazy { DesktopExperienceFlags(FeatureFlagsImpl()) }
     open val handler: Handler by lazy { Handler(Looper.getMainLooper()) }
 
     /**
@@ -78,11 +75,11 @@ open class ConnectedDisplayInjector(open val context: Context?) {
 
     /** The display manager instance, or null if context is null. */
     val displayManager: DisplayManager? by lazy {
-        context?.getSystemService(DisplayManager::class.java)
+        context.getSystemService(DisplayManager::class.java)
     }
 
     @get:OpenForTesting
-    open val desktopState: DesktopState? by lazy { context?.let { DesktopState.getInstance(it) } }
+    open val desktopState: DesktopState? by lazy { context.let { DesktopState.getInstance(it) } }
 
     /** The window manager instance, or null if it cannot be retrieved. */
     val windowManager: IWindowManager? by lazy { WindowManagerGlobal.getWindowManagerService() }
@@ -101,12 +98,12 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     open fun revealWallpaper(displayId: Int): RevealedWallpaper? {
         val display = displayManager?.getDisplay(displayId) ?: return null
         val windowCtx =
-            context?.createWindowContext(
+            context.createWindowContext(
                 display,
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
                 /* options= */ null,
             )
-        val windowManager = windowCtx?.getSystemService(WindowManager::class.java) ?: return null
+        val windowManager = windowCtx.getSystemService(WindowManager::class.java) ?: return null
 
         val view = View(windowCtx)
         windowManager.addView(
@@ -319,7 +316,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     open fun freezeDisplayRotation(displayId: Int, rotation: Int): Boolean {
         val wm = windowManager ?: return false
         try {
-            wm.freezeDisplayRotation(displayId, rotation, "ExternalDisplayPreferenceFragment")
+            wm.freezeDisplayRotation(displayId, rotation, "SelectedDisplayPreferenceFragment")
             return true
         } catch (e: RemoteException) {
             Log.e(TAG, "Error while freezing user rotation of display $displayId", e)
@@ -383,7 +380,7 @@ open class ConnectedDisplayInjector(open val context: Context?) {
     }
 
     open fun registerTopologyListener(listener: Consumer<DisplayTopology>) {
-        val executor = context?.mainExecutor
+        val executor = context.mainExecutor
         if (executor != null) displayManager?.registerTopologyListener(executor, listener)
     }
 

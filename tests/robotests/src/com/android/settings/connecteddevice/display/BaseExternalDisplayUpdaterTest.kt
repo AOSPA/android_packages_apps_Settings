@@ -22,6 +22,7 @@ import android.app.admin.DpcAuthority
 import android.app.admin.EnforcingAdmin
 import android.app.admin.PolicyEnforcementInfo
 import android.app.admin.flags.Flags.FLAG_POLICY_TRANSPARENCY_REFACTOR_ENABLED
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.hardware.display.DisplayManager
@@ -30,22 +31,16 @@ import android.os.UserHandle
 import android.platform.test.annotations.DisableFlags
 import android.platform.test.annotations.EnableFlags
 import android.platform.test.flag.junit.SetFlagsRule
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.android.settings.R
 import com.android.settings.SettingsActivity
 import com.android.settings.connecteddevice.DevicePreferenceCallback
 import com.android.settings.flags.FakeFeatureFlagsImpl
-import android.content.ComponentName
-import com.android.settings.flags.Flags
-import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedPreference
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentCaptor
-import org.mockito.ArgumentMatchers.any
 import org.mockito.ArgumentMatchers.anyBoolean
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.eq
@@ -54,7 +49,6 @@ import org.mockito.Mockito
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
-import org.mockito.MockitoAnnotations
 
 @RunWith(AndroidJUnit4::class)
 class BaseExternalDisplayUpdaterTest : ExternalDisplayTestBase() {
@@ -99,7 +93,6 @@ class BaseExternalDisplayUpdaterTest : ExternalDisplayTestBase() {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING)
     fun launchSettings_flagEnabled_launchesTabbedFragment() {
         updater.callLaunchSettings(mContext, null)
 
@@ -109,19 +102,6 @@ class BaseExternalDisplayUpdaterTest : ExternalDisplayTestBase() {
         val intent = captor.value
         val destination = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)
         assert(destination == TabbedDisplayPreferenceFragment::class.java.name)
-    }
-
-    @Test
-    @DisableFlags(Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING)
-    fun launchSettings_flagDisabled_launchesExternalDisplayFragment() {
-        updater.callLaunchSettings(mContext, null)
-
-        val captor = ArgumentCaptor.forClass(Intent::class.java)
-        verify(mContext).startActivity(captor.capture())
-
-        val intent = captor.value
-        val destination = intent.getStringExtra(SettingsActivity.EXTRA_SHOW_FRAGMENT)
-        assert(destination == ExternalDisplayPreferenceFragment::class.java.name)
     }
 
     @Test

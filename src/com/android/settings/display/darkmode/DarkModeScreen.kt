@@ -51,6 +51,7 @@ import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferenceHierarchy
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
 import kotlinx.coroutines.CoroutineScope
@@ -94,6 +95,7 @@ abstract class BaseDarkModeScreen(context: Context, val isUiOnly: Boolean) :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
@@ -215,6 +217,8 @@ open class DarkModeScreen(context: Context) : BaseDarkModeScreen(context, false)
 open class DarkModeScreenOnAccessibility(context: Context) : BaseDarkModeScreen(context, true) {
     override val key
         get() = KEY
+
+    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int

@@ -35,6 +35,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -100,6 +101,7 @@ class CursorFollowingPreference :
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun bind(preference: Preference, metadata: PreferenceMetadata) {
         super.bind(preference, metadata)
         preference.onPreferenceClickListener = this
@@ -109,6 +111,9 @@ class CursorFollowingPreference :
         super.onCreate(context)
         lifecycleContext = context
     }
+
+    override val availabilityDescription =
+        "The device must not be during setup and must have a mouse connected."
 
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && isMagnificationCursorFollowingModeDialogSupported()
@@ -127,6 +132,9 @@ class CursorFollowingPreference :
         )
         return true
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     private fun isMagnificationCursorFollowingModeDialogSupported(): Boolean {
         return InputPeripheralsSettingsUtils.isMouse()

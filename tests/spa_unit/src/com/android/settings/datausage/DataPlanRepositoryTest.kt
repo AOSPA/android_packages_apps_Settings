@@ -34,53 +34,119 @@ class DataPlanRepositoryTest {
 
     private object FakeNetworkCycleDataRepository : INetworkCycleDataRepository {
         override fun getCycles(): List<Range<Long>> = emptyList()
+
         override fun getPolicy() = null
 
-        override fun queryUsage(range: Range<Long>) = NetworkUsageData(
-            startTime = CYCLE_CYCLE_START_TIME,
-            endTime = CYCLE_CYCLE_END_TIME,
-            usage = CYCLE_BYTES,
-        )
+        override fun queryUsage(range: Range<Long>) =
+            NetworkUsageData(
+                startTime = CYCLE_CYCLE_START_TIME,
+                endTime = CYCLE_CYCLE_END_TIME,
+                usage = CYCLE_BYTES,
+            )
     }
 
     private val repository = DataPlanRepositoryImpl(FakeNetworkCycleDataRepository)
 
-    private val policy = mock<NetworkPolicy> {
-        on { cycleIterator() } doReturn listOf(
-            Range(zonedDateTime(CYCLE_CYCLE_START_TIME), zonedDateTime(CYCLE_CYCLE_END_TIME)),
-        ).iterator()
-    }
+    private val policy =
+        mock<NetworkPolicy> {
+            on { cycleIterator() } doReturn
+                listOf(
+                        Range(
+                            zonedDateTime(CYCLE_CYCLE_START_TIME),
+                            zonedDateTime(CYCLE_CYCLE_END_TIME),
+                        )
+                    )
+                    .iterator()
+        }
+
+    private val NO_PLAN_INFO = DataPlanInfo(
+        dataPlanCount = 0,
+        dataPlanSize = SubscriptionPlan.BYTES_UNKNOWN,
+        dataBarSize = CYCLE_BYTES,
+        dataPlanUse = CYCLE_BYTES,
+        cycleEnd = CYCLE_CYCLE_END_TIME,
+        snapshotTime = SubscriptionPlan.TIME_UNKNOWN,
+    )
 
     @Test
     fun getDataPlanInfo_hasSubscriptionPlan() {
         val dataPlanInfo = repository.getDataPlanInfo(policy, listOf(SUBSCRIPTION_PLAN))
 
-        assertThat(dataPlanInfo).isEqualTo(
-            DataPlanInfo(
-                dataPlanCount = 1,
-                dataPlanSize = DATA_LIMIT_BYTES,
-                dataBarSize = DATA_LIMIT_BYTES,
-                dataPlanUse = DATA_USAGE_BYTES,
-                cycleEnd = PLAN_CYCLE_END_TIME,
-                snapshotTime = DATA_USAGE_TIME,
+        assertThat(dataPlanInfo)
+            .isEqualTo(
+                DataPlanInfo(
+                    dataPlanCount = 1,
+                    dataPlanSize = DATA_LIMIT_BYTES,
+                    dataBarSize = DATA_LIMIT_BYTES,
+                    dataPlanUse = CYCLE_BYTES,
+                    cycleEnd = PLAN_CYCLE_END_TIME,
+                    snapshotTime = DATA_USAGE_TIME,
+                )
             )
-        )
     }
 
     @Test
     fun getDataPlanInfo_noSubscriptionPlan() {
         val dataPlanInfo = repository.getDataPlanInfo(policy, emptyList())
 
-        assertThat(dataPlanInfo).isEqualTo(
-            DataPlanInfo(
-                dataPlanCount = 0,
-                dataPlanSize = SubscriptionPlan.BYTES_UNKNOWN,
-                dataBarSize = CYCLE_BYTES,
-                dataPlanUse = CYCLE_BYTES,
-                cycleEnd = CYCLE_CYCLE_END_TIME,
-                snapshotTime = SubscriptionPlan.TIME_UNKNOWN,
+        assertThat(dataPlanInfo).isEqualTo(NO_PLAN_INFO)
+    }
+
+    @Test
+    fun getDataPlanInfo_withPlan_zeroDataLimit_returnsNoPlanInfo() {
+        val plan =
+            SubscriptionPlan.Builder.createNonrecurring(
+                zonedDateTime(PLAN_CYCLE_START_TIME),
+                zonedDateTime(PLAN_CYCLE_END_TIME),
             )
-        )
+                .apply {
+                    setDataLimit(0, SubscriptionPlan.LIMIT_BEHAVIOR_DISABLED)
+                    setDataUsage(DATA_USAGE_BYTES, DATA_USAGE_TIME)
+                }
+                .build()
+
+        val dataPlanInfo = repository.getDataPlanInfo(policy, listOf(plan))
+
+        // Expect behavior as if there's no valid plan.
+        assertThat(dataPlanInfo).isEqualTo(NO_PLAN_INFO)
+    }
+
+    @Test
+    fun getDataPlanInfo_withPlan_negativeDataLimit_returnsNoPlanInfo() {
+        val plan =
+            SubscriptionPlan.Builder.createNonrecurring(
+                zonedDateTime(PLAN_CYCLE_START_TIME),
+                zonedDateTime(PLAN_CYCLE_END_TIME),
+            )
+                .apply {
+                    setDataLimit(-1, SubscriptionPlan.LIMIT_BEHAVIOR_DISABLED)
+                    setDataUsage(DATA_USAGE_BYTES, DATA_USAGE_TIME)
+                }
+                .build()
+
+        val dataPlanInfo = repository.getDataPlanInfo(policy, listOf(plan))
+
+        // Expect behavior as if there's no valid plan.
+        assertThat(dataPlanInfo).isEqualTo(NO_PLAN_INFO)
+    }
+
+    @Test
+    fun getDataPlanInfo_withPlan_negativeDataUsage_returnsNoPlanInfo() {
+        val plan =
+            SubscriptionPlan.Builder.createNonrecurring(
+                zonedDateTime(PLAN_CYCLE_START_TIME),
+                zonedDateTime(PLAN_CYCLE_END_TIME),
+            )
+                .apply {
+                    setDataLimit(DATA_LIMIT_BYTES, SubscriptionPlan.LIMIT_BEHAVIOR_DISABLED)
+                    setDataUsage(-1, DATA_USAGE_TIME)
+                }
+                .build()
+
+        val dataPlanInfo = repository.getDataPlanInfo(policy, listOf(plan))
+
+        // Expect behavior as if there's no valid plan.
+        assertThat(dataPlanInfo).isEqualTo(NO_PLAN_INFO)
     }
 
     private companion object {
@@ -94,12 +160,15 @@ class DataPlanRepositoryTest {
         const val DATA_USAGE_BYTES = 400L
         const val DATA_USAGE_TIME = 500L
 
-        val SUBSCRIPTION_PLAN: SubscriptionPlan = SubscriptionPlan.Builder.createNonrecurring(
-            zonedDateTime(PLAN_CYCLE_START_TIME),
-            zonedDateTime(PLAN_CYCLE_END_TIME),
-        ).apply {
-            setDataLimit(DATA_LIMIT_BYTES, SubscriptionPlan.LIMIT_BEHAVIOR_DISABLED)
-            setDataUsage(DATA_USAGE_BYTES, DATA_USAGE_TIME)
-        }.build()
+        val SUBSCRIPTION_PLAN: SubscriptionPlan =
+            SubscriptionPlan.Builder.createNonrecurring(
+                    zonedDateTime(PLAN_CYCLE_START_TIME),
+                    zonedDateTime(PLAN_CYCLE_END_TIME),
+                )
+                .apply {
+                    setDataLimit(DATA_LIMIT_BYTES, SubscriptionPlan.LIMIT_BEHAVIOR_DISABLED)
+                    setDataUsage(DATA_USAGE_BYTES, DATA_USAGE_TIME)
+                }
+                .build()
     }
 }

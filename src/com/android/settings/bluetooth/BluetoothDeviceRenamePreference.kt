@@ -105,6 +105,8 @@ class BluetoothDeviceRenamePreference(private val bluetoothDataStore: BluetoothD
         return true
     }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         return bluetoothDataStore.bluetoothAdapter?.isEnabled == true
     }

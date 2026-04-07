@@ -90,6 +90,7 @@ open class NightDisplayScreen(val context: Context) :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun storage(context: Context): KeyValueStore = NightDisplayStorage(context)
 
     override fun fragmentClass(): Class<out Fragment>? = NightDisplaySettings::class.java
@@ -104,6 +105,9 @@ open class NightDisplayScreen(val context: Context) :
         +NightDisplayScreenPreference(this@NightDisplayScreen)
         +NightDisplayTopIntroPreference()
     }
+
+    override val availabilityDescription =
+        "The device must support night display settings."
 
     override fun isAvailable(context: Context): Boolean = context.isNightDisplaySettingsAvailable
 
@@ -130,6 +134,8 @@ open class NightDisplayScreen(val context: Context) :
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
+        override val availabilityDescription = screenMetadata.availabilityDescription
+
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
 
         override val sensitivityLevel : @SensitivityLevel Int = screenMetadata.sensitivityLevel
@@ -151,6 +157,7 @@ open class NightDisplayScreen(val context: Context) :
             callingPid: Int,
             callingUid: Int
         ) : @ReadWritePermit Int = screenMetadata.getWritePermit(context, callingPid, callingUid)
+        override val supportsWrite = true
     }
 
     companion object {
@@ -176,6 +183,8 @@ internal class NightDisplayTopIntroPreference :
         get() = false
 
     override fun createWidget(context: Context) = TopIntroPreference(context)
+
+    override val availabilityDescription = UI_ONLY_PREFERENCE
 
     override fun isAvailable(context: Context): Boolean = context.isNightDisplaySettingsAvailable
 }

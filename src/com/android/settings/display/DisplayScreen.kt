@@ -115,6 +115,9 @@ open class DisplayScreen :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, DisplaySettingsActivity::class.java, metadata?.key)
 
+    override val availabilityDescription =
+        "The device must support showing the top level display preference."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_top_level_display)
 

@@ -45,7 +45,7 @@ class MediaControlsLockscreenSwitchPreference :
     override fun tags(context: Context) = arrayOf(KEY_SHOW_MEDIA_ON_LOCK_SCREEN, MUSTPASS_SET)
 
     override val sensitivityLevel
-        get() = SensitivityLevel.NO_SENSITIVITY
+        get() = SensitivityLevel.REQUIRES_CONFIRMATION
 
     override fun getReadPermissions(context: Context) = SettingsSecureStore.getReadPermissions()
 

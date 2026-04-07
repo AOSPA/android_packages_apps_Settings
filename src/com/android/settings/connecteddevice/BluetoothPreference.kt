@@ -100,6 +100,7 @@ class BluetoothPreference(private val bluetoothDataStore: BluetoothDataStore) :
             else -> ReadWritePermit.ALLOW
         }
 
+    override val supportsWrite = true
     override val sensitivityLevel
         get() = SensitivityLevel.MUST_PROVIDE_UNDO
 

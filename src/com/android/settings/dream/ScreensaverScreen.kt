@@ -142,6 +142,9 @@ open class ScreensaverScreen(private val context: Context) :
     override val keywords: Int
         get() = R.string.keywords_screensaver
 
+    override val availabilityDescription =
+        "The device must not be in demo mode (unless dreams are enabled in demo mode), dreams must be supported on the device, and either the user must be the 'dock' user or dreams must be supported on all users for this device."
+
     override fun isAvailable(context: Context) = Utils.areDreamsAvailableToCurrentUser(context)
 
     @VisibleForTesting
@@ -203,6 +206,8 @@ open class ScreensaverScreen(private val context: Context) :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

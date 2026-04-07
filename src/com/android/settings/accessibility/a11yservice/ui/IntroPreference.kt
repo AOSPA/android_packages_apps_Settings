@@ -46,6 +46,8 @@ class IntroPreference(private val serviceInfo: AccessibilityServiceInfo) :
     override fun getTitle(context: Context): CharSequence? =
         serviceInfo.loadIntro(context.packageManager)
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && !TextUtils.isEmpty(getTitle(context))
     }

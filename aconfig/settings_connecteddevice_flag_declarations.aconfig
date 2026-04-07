@@ -2,13 +2,6 @@ package: "com.android.settings.flags"
 container: "system_ext"
 
 flag {
-  name: "display_topology_pane_in_display_list"
-  namespace: "display_manager"
-  description: "Shows the connected display setting and shows the topology pane in the display list, even with only one display connected."
-  bug: "352648432"
-}
-
-flag {
     name: "exclude_webcam_auth_challenge"
     namespace: "safety_center"
     description: "Gates whether to exclude webcam from USB preferences auth challenge."
@@ -16,13 +9,6 @@ flag {
     metadata {
         purpose: PURPOSE_BUGFIX
     }
-}
-
-flag {
-  name: "show_tabbed_connected_display_setting"
-  namespace: "lse_desktop_experience"
-  description: "Show floating toolbar display selection and tabbed display settings."
-  bug: "409354332"
 }
 
 flag {

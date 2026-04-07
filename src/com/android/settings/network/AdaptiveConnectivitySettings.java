@@ -35,7 +35,6 @@ import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
-import com.android.settings.flags.Flags;
 import com.android.settings.search.BaseSearchIndexProvider;
 import com.android.settingslib.search.SearchIndexable;
 import com.android.settingslib.widget.IllustrationPreference;
@@ -83,30 +82,24 @@ public class AdaptiveConnectivitySettings extends DashboardFragment {
 
         final IllustrationPreference illustration =
                 checkNotNull(findPreference(ADAPTIVE_CONNECTIVITY_HEADER));
-        final boolean enableNestedToggles = Flags.enableAdaptiveConnectivityToggleSwitches();
 
-        illustration.setLottieAnimationResId(
-                enableNestedToggles
-                        ? R.drawable.ic_enhanced_connectivity_dynamic
-                        : R.drawable.ic_enhanced_connectivity);
+        illustration.setLottieAnimationResId(R.drawable.ic_enhanced_connectivity_dynamic);
 
-        if (enableNestedToggles) {
-            illustration.applyDynamicColor();
-            // remove summary
-            Preference topIntroPref = findPreference(ADAPTIVE_CONNECTIVITY_SUMMARY);
-            if (topIntroPref != null) {
-                topIntroPref.setVisible(false);
-            }
-            setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED);
-            final SubscriptionManager subscriptionManager =
-                    getContext().getSystemService(SubscriptionManager.class);
-            final boolean shouldHideMobileNetworkToggle =
-                    subscriptionManager != null
-                            && SubscriptionUtil.hasSubscriptionForMobileNetworkToggleDisable(
-                                    getContext(), subscriptionManager);
-            if (!shouldHideMobileNetworkToggle) {
-                setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED);
-            }
+        illustration.applyDynamicColor();
+        // remove summary
+        Preference topIntroPref = findPreference(ADAPTIVE_CONNECTIVITY_SUMMARY);
+        if (topIntroPref != null) {
+            topIntroPref.setVisible(false);
+        }
+        setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_WIFI_ENABLED);
+        final SubscriptionManager subscriptionManager =
+                getContext().getSystemService(SubscriptionManager.class);
+        final boolean shouldHideMobileNetworkToggle =
+                subscriptionManager != null
+                        && SubscriptionUtil.hasSubscriptionForMobileNetworkToggleDisable(
+                                getContext(), subscriptionManager);
+        if (!shouldHideMobileNetworkToggle) {
+            setupSwitchPreferenceCompat(ADAPTIVE_CONNECTIVITY_MOBILE_NETWORK_ENABLED);
         }
     }
 

@@ -48,6 +48,8 @@ class AudioRoutingPreference : PreferenceMetadata, PreferenceAvailabilityProvide
             .setSourceMetricsCategory(SettingsEnums.ACCESSIBILITY_HEARING_AID_SETTINGS)
             .toIntent()
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean =
         FeatureFlagUtils.isEnabled(context, FeatureFlagUtils.SETTINGS_AUDIO_ROUTING)
 

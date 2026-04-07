@@ -34,10 +34,9 @@ import androidx.preference.PreferenceScreen;
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker;
 import com.android.settings.nfc.NfcPreferenceController.NfcSliceWorker.NfcUpdateReceiver;
 import com.android.settings.testutils.shadow.ShadowNfcAdapter;
-import com.android.settingslib.widget.MainSwitchPreference;
+import com.android.settingslib.RestrictedSwitchPreference;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -63,7 +62,7 @@ public class NfcPreferenceControllerTest {
     private PreferenceScreen mScreen;
 
     private Context mContext;
-    private MainSwitchPreference mNfcPreference;
+    private RestrictedSwitchPreference mNfcPreference;
     private NfcPreferenceController mNfcController;
     private ShadowNfcAdapter mShadowNfcAdapter;
     private NfcAdapter mNfcAdapter;
@@ -81,7 +80,7 @@ public class NfcPreferenceControllerTest {
 
         mNfcController = new NfcPreferenceController(mContext,
                 NfcPreferenceController.KEY_TOGGLE_NFC);
-        mNfcPreference = new MainSwitchPreference(RuntimeEnvironment.application);
+        mNfcPreference = new RestrictedSwitchPreference(RuntimeEnvironment.application);
 
         when(mScreen.findPreference(mNfcController.getPreferenceKey())).thenReturn(mNfcPreference);
     }
@@ -100,7 +99,6 @@ public class NfcPreferenceControllerTest {
                 .isEqualTo(NfcPreferenceController.UNSUPPORTED_ON_DEVICE);
     }
 
-    @Ignore("b/424065209")
     @Test
     public void isNfcEnable_nfcStateNotTurning_shouldReturnTrue() {
         mNfcController.displayPreference(mScreen);
@@ -113,7 +111,6 @@ public class NfcPreferenceControllerTest {
         assertThat(mNfcPreference.isEnabled()).isTrue();
     }
 
-    @Ignore("b/424065209")
     @Test
     public void isNfcEnable_nfcStateTurning_shouldReturnFalse() {
         mNfcController.displayPreference(mScreen);
@@ -126,7 +123,6 @@ public class NfcPreferenceControllerTest {
         assertThat(mNfcPreference.isEnabled()).isFalse();
     }
 
-    @Ignore("b/424065209")
     @Test
     public void isNfcChecked_nfcStateOn_shouldReturnTrue() {
         mNfcController.displayPreference(mScreen);

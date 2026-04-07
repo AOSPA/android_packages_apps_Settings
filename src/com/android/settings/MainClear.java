@@ -347,6 +347,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         }
         mScrollView = mContentView.findViewById(
                 com.google.android.setupdesign.R.id.sud_scroll_view);
+        mScrollView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
 
         /*
          * If the external storage is emulated, it will be erased with a factory
@@ -417,6 +418,24 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
         // Set the initial state of the initiateButton
         mScrollView.getViewTreeObserver().addOnGlobalLayoutListener(this);
+
+        // Add a focus listener to handle keyboard navigation
+        mScrollView.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus && hasReachedBottom(mScrollView)) {
+                mInitiateButton.setEnabled(true);
+            }
+        });
+
+        // Also, listen for focus changes on the last focusable element
+        View lastFocusable = mEsimStorageContainer.getVisibility() == View.VISIBLE
+                ? mEsimStorageContainer : mExternalStorageContainer;
+        if (lastFocusable != null) {
+            lastFocusable.setOnFocusChangeListener((v, hasFocus) -> {
+                if (hasFocus) {
+                    mInitiateButton.setEnabled(true);
+                }
+            });
+        }
     }
 
     /**

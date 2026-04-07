@@ -25,6 +25,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsGlobalStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 class BlurSwitchPreference :
@@ -35,6 +36,8 @@ class BlurSwitchPreference :
     ),
     PreferenceAvailabilityProvider,
     PreferenceSummaryProvider {
+
+    override val availabilityDescription = "The device must support cross window blur."
 
     override fun isAvailable(context: Context) = CROSS_WINDOW_BLUR_SUPPORTED
 
@@ -54,6 +57,9 @@ class BlurSwitchPreference :
             else R.string.blur_switch_summary
         )
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = Settings.Global.DISABLE_WINDOW_BLURS

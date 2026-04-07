@@ -55,6 +55,9 @@ open class LocationServicesScreen : PreferenceScreenMixin, PreferenceAvailabilit
 
     override fun fragmentClass(): Class<out Fragment>? = LocationServices::class.java
 
+    override val availabilityDescription =
+        "The device must support showing location services in Settings."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_location_services)
 

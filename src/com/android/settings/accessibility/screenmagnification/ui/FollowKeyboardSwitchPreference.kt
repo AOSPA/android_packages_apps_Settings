@@ -26,6 +26,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.SwitchPreference
 
 // LINT.IfChange
@@ -56,9 +57,15 @@ class FollowKeyboardSwitchPreference :
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val availabilityDescription =
+        "The device must not be during setup and must have a keyboard connected."
+
     override fun isAvailable(context: Context): Boolean {
         return !context.isInSetupWizard() && InputPeripheralsSettingsUtils.isHardKeyboard()
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         const val KEY = Settings.Secure.ACCESSIBILITY_MAGNIFICATION_FOLLOW_KEYBOARD_ENABLED

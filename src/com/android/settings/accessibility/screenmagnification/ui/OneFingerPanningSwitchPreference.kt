@@ -84,6 +84,9 @@ class OneFingerPanningSwitchPreference :
         callingUid: Int,
     ): @ReadWritePermit Int? = ReadWritePermit.ALLOW
 
+    override val availabilityDescription =
+        "The device must not be during setup, must support the one finger panning gesture, and must support window magnification."
+
     override fun isAvailable(context: Context): Boolean {
         return Flags.enableMagnificationOneFingerPanningGesture() &&
             !context.isInSetupWizard() &&

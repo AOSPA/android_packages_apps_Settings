@@ -66,6 +66,9 @@ open class EmergencyDashboardScreen :
 
     override fun fragmentClass(): Class<out Fragment>? = EmergencyDashboardFragment::class.java
 
+    override val availabilityDescription =
+        "The device must support emergency settings."
+
     override fun isAvailable(context: Context): Boolean =
         context.resources.getBoolean(R.bool.config_show_emergency_settings)
 

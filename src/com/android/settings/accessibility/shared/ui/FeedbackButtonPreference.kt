@@ -50,6 +50,8 @@ open class FeedbackButtonPreference(feedbackManagerProvider: () -> FeedbackManag
 
     protected val feedbackManager: FeedbackManager by lazy { feedbackManagerProvider.invoke() }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean =
         !context.isInSetupWizard() && feedbackManager.isAvailable()
 

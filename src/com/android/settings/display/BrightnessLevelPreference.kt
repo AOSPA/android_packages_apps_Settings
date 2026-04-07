@@ -31,7 +31,6 @@ import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.Utils
 import com.android.settings.contract.KEY_BRIGHTNESS_LEVEL
-import com.android.settings.core.BasePreferenceController.AVAILABLE
 import com.android.settings.core.SettingsBaseActivity
 import com.android.settings.metrics.PreferenceActionMetricsProvider
 import com.android.settings.restriction.PreferenceRestrictionMixin
@@ -130,6 +129,7 @@ class BrightnessLevelPreference :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.DISALLOW
 
+    override val supportsWrite = false
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
 
@@ -138,6 +138,8 @@ class BrightnessLevelPreference :
     override fun getMinValue(context: Context) = 0
 
     override fun getMaxValue(context: Context) = 100
+
+    override fun getUnitOfMeasurement() = "%"
 
     private class BrightnessStorage(private val context: Context) :
         AbstractKeyedDataObservable<String>(),
@@ -202,8 +204,10 @@ class BrightnessLevelPreference :
         return true
     }
 
-    override fun isAvailable(context: Context) =
-        context.brightnessLevelAvailabilityStatus == AVAILABLE
+    override val availabilityDescription =
+        "The default display must be internal."
+
+    override fun isAvailable(context: Context) = context.isBrightnessLevelSettingsAvailable
 
     companion object {
         const val KEY = "brightness"

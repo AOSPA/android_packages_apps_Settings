@@ -47,13 +47,11 @@ import android.content.om.OverlayInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.platform.test.annotations.EnableFlags;
 import android.platform.test.flag.junit.SetFlagsRule;
 import android.provider.SearchIndexableResource;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
-import android.view.accessibility.Flags;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.preference.PreferenceViewHolder;
@@ -210,7 +208,6 @@ public class SystemNavigationGestureSettingsTest {
     }
 
     @Test
-    @EnableFlags(Flags.FLAG_NAVBAR_FLIP_ORDER_OPTION)
     public void initializeA11yNode_buttonNav_hasCustomClickAction() {
         PreferenceViewHolder preferenceViewHolder = setUpFragmentWithViewHolder();
 

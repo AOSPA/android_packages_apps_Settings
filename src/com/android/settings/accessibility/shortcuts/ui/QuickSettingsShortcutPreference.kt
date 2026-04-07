@@ -73,6 +73,9 @@ class QuickSettingsShortcutPreference(context: Context, targets: Set<String>) :
         )
     }
 
+    override val availabilityDescription =
+        "The device must support Quick Settings. All shortcut targets must have a Quick Settings tile and must be pre-defined as supporting Quick Settings."
+
     override fun isAvailable(context: Context): Boolean {
         return TileService.isQuickSettingsSupported() &&
             allTargetsHasQsTile(context) &&

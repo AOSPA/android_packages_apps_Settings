@@ -32,6 +32,7 @@ import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ReadWritePermit
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.widget.SliderPreference
 import com.android.settingslib.widget.SliderPreferenceBinding
 import kotlin.time.Duration.Companion.milliseconds
@@ -77,6 +78,7 @@ class IntensityPreference(context: Context) :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
     override fun isEnabled(context: Context): Boolean {
         val colorCorrectionEnabled =
             dataStore.getBoolean(SETTING_KEY_COLOR_CORRECTION_ENABLED) ?: false
@@ -140,6 +142,9 @@ class IntensityPreference(context: Context) :
         debounceCommitController?.cancelPendingCommit()
         debounceCommitController = null
     }
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.NO_SENSITIVITY
 
     companion object {
         internal const val KEY = Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_SATURATION_LEVEL

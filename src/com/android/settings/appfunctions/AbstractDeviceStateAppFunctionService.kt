@@ -20,6 +20,7 @@ import android.app.KeyguardManager
 import android.app.appfunctions.AppFunctionException
 import android.app.appfunctions.AppFunctionException.ERROR_DENIED
 import android.app.appfunctions.AppFunctionException.ERROR_FUNCTION_NOT_FOUND
+import android.app.appfunctions.AppFunctionException.ERROR_SYSTEM_ERROR
 import android.app.appfunctions.AppFunctionService
 import android.app.appfunctions.ExecuteAppFunctionRequest
 import android.app.appfunctions.ExecuteAppFunctionResponse
@@ -194,26 +195,42 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                     )
                 )
             }
-            val startMs = SystemClock.elapsedRealtime()
-            val responseData =
-                aggregators[appFunctionType]!!.aggregate(
-                    appFunctionType,
-                    request.parameters,
-                    applicationContext.getLocale().toString(),
+            try {
+                val startMs = SystemClock.elapsedRealtime()
+
+                val responseData =
+                    aggregators[appFunctionType]!!.aggregate(
+                        appFunctionType,
+                        request.parameters,
+                        applicationContext.getLocale().toString(),
+                    )
+                val response = buildResponse(responseData)
+                callback.onResult(response)
+
+                val executeDurationMs = SystemClock.elapsedRealtime() - startMs
+                Log.d(TAG, "app function ${request.functionIdentifier} fulfilled.")
+
+                metricsLogger.logAppFunction(
+                    appFunctionType.toMetricsId(),
+                    callingPackage,
+                    executeDurationMs,
+                    applicationContext,
                 )
-            val response = buildResponse(responseData)
-            callback.onResult(response)
+            } catch (e: Exception) {
+                // TODO(b/491141423): granular exceptions handle
+                callback.onError(
+                    AppFunctionException(ERROR_SYSTEM_ERROR, e.message ?: UNKNOWN_ERROR_MESSAGE)
+                )
 
-            val executeDurationMs = SystemClock.elapsedRealtime() - startMs
-            Log.d(TAG, "app function ${request.functionIdentifier} fulfilled.")
-            Trace.endSection()
-
-            metricsLogger.logAppFunction(
-                appFunctionType.toMetricsId(),
-                callingPackage,
-                executeDurationMs,
-                applicationContext,
-            )
+                metricsLogger.logAppFunctionError(
+                    callingPackage,
+                    ERROR_SYSTEM_ERROR,
+                    applicationContext,
+                    appFunctionType.toMetricsId(),
+                )
+            } finally {
+                Trace.endSection()
+            }
         }
     }
 
@@ -248,5 +265,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
 
     companion object {
         private const val TAG = "AbstractDeviceStateAppFunctionService"
+
+        private const val UNKNOWN_ERROR_MESSAGE = "Unknown error"
     }
 }

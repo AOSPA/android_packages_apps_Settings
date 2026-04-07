@@ -45,6 +45,8 @@ class EnabledStateUntitledCategory(val subId: Int) :
 
     override fun createWidget(context: Context) = UntitledPreferenceCategory(context)
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context): Boolean =
         context.subscriptionManager?.isActiveSubscriptionId(subId) == true
 

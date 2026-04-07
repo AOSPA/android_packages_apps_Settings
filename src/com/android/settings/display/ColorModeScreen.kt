@@ -75,6 +75,9 @@ open class ColorModeScreen :
 
     private var settingsKeyedObserver: KeyedObserver<String>? = null
 
+    override val availabilityDescription =
+        "The device must be color managed and not have accessibility transforms enabled."
+
     override fun isAvailable(context: Context): Boolean {
         val colorManager = context.getSystemService(ColorDisplayManager::class.java) ?: return false
         return colorManager.isDeviceColorManaged &&
@@ -121,6 +124,8 @@ open class ColorModeScreen :
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val availabilityDescription = screenMetadata.availabilityDescription
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

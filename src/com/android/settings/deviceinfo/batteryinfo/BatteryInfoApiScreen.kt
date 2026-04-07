@@ -23,12 +23,15 @@ import com.android.settings.flags.Flags
 import com.android.settings.fuelgauge.BatteryUtils
 import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_BATTERY
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.types.AnyInt
 import com.android.settingslib.metadata.preferencesapi.types.AnyString
+import com.android.settingslib.metadata.preferencesapi.types.Date
 import java.util.concurrent.TimeUnit
 
 // LINT.IfChange
@@ -56,8 +59,10 @@ class BatteryInfoApiScreen :
         preference(
             key = MANUFACTURE_DATE_KEY,
             purpose = R.string.battery_info_manufacture_date_purpose,
-            type = AnyString,
+            type = Date,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 execute {
                     val mBatteryManager =
@@ -71,7 +76,9 @@ class BatteryInfoApiScreen :
                     val mManufactureDateInMs =
                         TimeUnit.MILLISECONDS.convert(manufactureEpoch, TimeUnit.SECONDS)
 
-                    BatteryUtils.getBatteryInfoFormattedDate(mManufactureDateInMs).toString()
+                    java.time.Instant.ofEpochMilli(mManufactureDateInMs)
+                        .atZone(java.time.ZoneId.systemDefault())
+                        .toLocalDate()
                 }
             }
         }
@@ -79,8 +86,10 @@ class BatteryInfoApiScreen :
         preference(
             key = FIRST_USE_DATE_KEY,
             purpose = R.string.battery_info_first_usage_date_purpose,
-            type = AnyString,
+            type = Date,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 execute {
                     val mBatteryManager =
@@ -95,7 +104,9 @@ class BatteryInfoApiScreen :
                     val firstUseDateMs =
                         TimeUnit.MILLISECONDS.convert(firstUseDateInSec, TimeUnit.SECONDS)
 
-                    BatteryUtils.getBatteryInfoFormattedDate(firstUseDateMs).toString()
+                    java.time.Instant.ofEpochMilli(firstUseDateMs)
+                        .atZone(java.time.ZoneId.systemDefault())
+                        .toLocalDate()
                 }
             }
         }
@@ -103,8 +114,10 @@ class BatteryInfoApiScreen :
         preference(
             key = CYCLE_COUNT_KEY,
             purpose = R.string.battery_info_cycle_count_purpose,
-            type = AnyString,
+            type = AnyInt,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             get {
                 execute {
                     val batteryIntent = BatteryUtils.getBatteryIntent(context)
@@ -116,9 +129,9 @@ class BatteryInfoApiScreen :
                         )
 
                     if (cycleCount == INVALID_CYCLE_COUNT) {
-                        context.getString(R.string.battery_cycle_count_not_available)
+                        error(context.getString(R.string.battery_cycle_count_not_available))
                     } else {
-                        cycleCount.toString()
+                        cycleCount
                     }
                 }
             }

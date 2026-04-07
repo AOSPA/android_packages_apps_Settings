@@ -44,6 +44,8 @@ class ScreenLockSoundPreference :
 
     override fun storage(context: Context) = context.dataStore
 
+    override val availabilityDescription = "The device must support configuring screen locking sounds."
+
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_screen_locking_sounds)
 

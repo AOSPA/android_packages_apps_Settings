@@ -28,6 +28,8 @@ import com.android.settingslib.metadata.DiscreteIntValue
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
+import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.preference.PreferenceBinding
 
 /**
@@ -75,7 +77,14 @@ class LongPressTimeoutPreference(context: Context) :
     override val valuesDescription: Int
         get() = R.array.long_press_timeout_selector_list_titles
 
+    override fun getUnitOfMeasurement() = "milliseconds"
+
     override fun storage(context: Context): KeyValueStore = dataStore
+
+    override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
+        ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override val title: Int
         get() = R.string.accessibility_long_press_timeout_preference_title
@@ -87,6 +96,9 @@ class LongPressTimeoutPreference(context: Context) :
     }
 
     override fun createWidget(context: Context) = ListPreference(context)
+
+    override val sensitivityLevel: Int
+        get() = SensitivityLevel.DEEP_LINK_ONLY
 
     companion object {
         const val KEY = Settings.Secure.LONG_PRESS_TIMEOUT

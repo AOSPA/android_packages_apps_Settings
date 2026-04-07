@@ -18,12 +18,12 @@ package com.android.settings.wifi.tether
 
 import android.content.ContextWrapper
 import android.net.wifi.WifiManager
-import androidx.lifecycle.LiveData
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.wifi.factory.WifiFeatureProvider
 import com.android.settings.wifi.repository.WifiHotspotRepository
 import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.SensitivityLevel
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
@@ -80,5 +80,10 @@ class WifiHotspotMainSwitchPreferenceTest {
         mockWifiHotspotRepository.stub { on { isRestarting } doReturn true }
 
         assertThat(preference.isAvailable(context)).isFalse()
+    }
+
+    @Test
+    fun sensitivityLevel_returnNoSensitivity() {
+        assertThat(preference.sensitivityLevel).isEqualTo(SensitivityLevel.MUST_PROVIDE_UNDO)
     }
 }

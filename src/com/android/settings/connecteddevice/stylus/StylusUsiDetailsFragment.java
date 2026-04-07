@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Controls the USI stylus details and provides updates to individual controllers. */
+// LINT.IfChange
 public class StylusUsiDetailsFragment extends DashboardFragment {
     private static final String TAG = StylusUsiDetailsFragment.class.getSimpleName();
     private static final String KEY_DEVICE_INPUT_ID = "device_input_id";
@@ -80,3 +81,4 @@ public class StylusUsiDetailsFragment extends DashboardFragment {
         return controllers;
     }
 }
+// LINT.ThenChange(StylusUsiDetailsApiScreen.kt)

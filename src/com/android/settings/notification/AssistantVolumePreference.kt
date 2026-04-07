@@ -72,6 +72,8 @@ class AssistantVolumePreference(private val audioHelper: AudioHelper) :
             else -> AndroidR.drawable.ic_volume_voice_chat
         }
 
+    override val availabilityDescription = "The device must support stream assistant, must not be a single volume device, and must not be a watch."
+
     override fun isAvailable(context: Context) =
         streamAssistantPublic() && !audioHelper.isSingleVolume && !hasFeatureWatch(context)
 
@@ -108,6 +110,8 @@ class AssistantVolumePreference(private val audioHelper: AudioHelper) :
 
     override fun getWritePermit(context: Context, value: Int?, myUid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
+
+    override val supportsWrite = true
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY

@@ -32,7 +32,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.core.SettingsBaseActivity
-import com.android.settings.flags.Flags.FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING
 import com.android.settings.testutils.InstantTaskExecutorRule
 import com.android.settings.testutils.shadow.ShadowDesktopSettingsUtils
 import com.android.settingslib.collapsingtoolbar.widget.ScrollableToolbarItemLayout
@@ -48,6 +47,7 @@ import org.mockito.ArgumentCaptor
 import org.mockito.Captor
 import org.mockito.kotlin.any
 import org.mockito.kotlin.atLeastOnce
+import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.never
@@ -87,7 +87,6 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     @Before
     override fun setUp() {
         super.setUp()
-        mFlags.setFlag(FLAG_SHOW_TABBED_CONNECTED_DISPLAY_SETTING, true)
         val application = ApplicationProvider.getApplicationContext() as Application
 
         includeBuiltinDisplay()
@@ -454,24 +453,53 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     fun focus_backwardFromSelectedDisplayContainer_movesToTopologyViewAndExpandsAppBar() {
         viewModel.updateEnabledDisplays()
         val direction = View.FOCUS_UP
-        val descendantFocusables = ArrayList<View>()
-        selectedDisplayPrefContainerSpy.addFocusables(descendantFocusables, direction)
+        val container = selectedDisplayPrefContainerSpy
 
-        val nextFocus =
-            selectedDisplayPrefContainerSpy.focusSearch(descendantFocusables.first(), direction)
+        val v =
+            android.widget.Button(mContext).apply {
+                isFocusable = true
+                visibility = View.VISIBLE
+            }
+        container.addView(v)
+
+        // Mock to return dummy view v to simulate it's at the boundary
+        doAnswer { invocation ->
+                val list = invocation.getArgument<ArrayList<View>>(0)
+                list.add(v)
+                null
+            }
+            .whenever(container)
+            .addFocusables(any(), any())
+
+        val nextFocus = container.focusSearch(v, direction)
         assertThat(nextFocus).isEqualTo(topologyView)
-        verify(appBarLayoutSpy).setExpanded(/* expanded= */ true, /* animate= */ true)
+        verify(appBarLayoutSpy, atLeastOnce())
+            .setExpanded(/* expanded= */ true, /* animate= */ true)
     }
 
     @Test
     fun focus_forwardFromSelectedDisplayContainer_returnNull() {
         viewModel.updateEnabledDisplays()
         val direction = View.FOCUS_DOWN
-        val descendantFocusables = ArrayList<View>()
-        selectedDisplayPrefContainerSpy.addFocusables(descendantFocusables, direction)
+        val container = selectedDisplayPrefContainerSpy
 
-        val nextFocus =
-            selectedDisplayPrefContainerSpy.focusSearch(descendantFocusables.last(), direction)
+        val v =
+            android.widget.Button(mContext).apply {
+                isFocusable = true
+                visibility = View.VISIBLE
+            }
+        container.addView(v)
+
+        // Mock to return dummy view v to simulate it's at the boundary
+        doAnswer { invocation ->
+                val list = invocation.getArgument<ArrayList<View>>(0)
+                list.add(v)
+                null
+            }
+            .whenever(container)
+            .addFocusables(any(), any())
+
+        val nextFocus = container.focusSearch(v, direction)
         // It's expected to be null here to let parent view to handle the next focus (which will
         // naturally be moved to Toolbar items
         assertNull(nextFocus)
@@ -559,7 +587,7 @@ class TabbedDisplayPreferenceFragmentTest : ExternalDisplayTestBase() {
     class FakeDisplayTopologyPreferenceView(
         injector: ConnectedDisplayInjector,
         initialSelectedDisplayId: Int? = null,
-    ) : DisplayTopologyPreferenceView(injector.context!!, injector, initialSelectedDisplayId) {
+    ) : DisplayTopologyPreferenceView(injector.context, injector, initialSelectedDisplayId) {
 
         var selectedListener: DisplayTopologyPreferenceController.OnDisplayBlockSelectedListener? =
             null

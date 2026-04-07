@@ -50,6 +50,8 @@ abstract class ImageUriPreference :
 
     abstract fun getImageUri(context: Context): Uri?
 
+    override val availabilityDescription = "The image uri must be not null."
+
     override fun isAvailable(context: Context): Boolean = getImageUri(context) != null
 
     abstract fun getContentDescription(context: Context): CharSequence?

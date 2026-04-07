@@ -114,6 +114,8 @@ open class WifiHotspotScreen(context: Context) :
     override val preferenceActionMetrics: Int
         get() = ACTION_WIFI_HOTSPOT
 
+    override val availabilityDescription = "The device must support wifi hotspot."
+
     override fun isAvailable(context: Context) =
         canShowWifiHotspot(context) &&
             TetherUtil.isTetherAvailable(context) &&
@@ -163,8 +165,10 @@ open class WifiHotspotScreen(context: Context) :
     override fun getWritePermit(context: Context, callingPid: Int, callingUid: Int) =
         ReadWritePermit.ALLOW
 
+    override val supportsWrite = true
+
     override val sensitivityLevel
-        get() = SensitivityLevel.DEEP_LINK_ONLY
+        get() = SensitivityLevel.MUST_PROVIDE_UNDO
 
     override fun storage(context: Context): KeyValueStore = wifiHotspotStore
 

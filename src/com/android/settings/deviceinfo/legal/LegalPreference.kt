@@ -41,6 +41,8 @@ class LegalPreference(
         return resolveInfo.loadLabel(context.packageManager)
     }
 
+    override val availabilityDescription = UI_ONLY_PREFERENCE
+
     override fun isAvailable(context: Context) = (findMatchingSpecificActivity(context) != null)
 
     override fun intent(context: Context) =

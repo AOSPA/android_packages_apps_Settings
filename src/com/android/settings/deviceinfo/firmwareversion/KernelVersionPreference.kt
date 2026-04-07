@@ -22,6 +22,7 @@ import com.android.settings.R
 import com.android.settingslib.DeviceInfoUtils
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.preference.PreferenceBinding
 
 // LINT.IfChange
@@ -44,5 +45,9 @@ class KernelVersionPreference : PreferenceMetadata, PreferenceSummaryProvider, P
         preference.isSelectable = false
         preference.isCopyingEnabled = true
     }
+
+    override val sensitivityLevel
+        get() = SensitivityLevel.NO_SENSITIVITY
+
 }
 // LINT.ThenChange(KernelVersionPreferenceController.java)

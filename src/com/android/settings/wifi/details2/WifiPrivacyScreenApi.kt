@@ -22,6 +22,7 @@ import com.android.settings.flags.Flags
 import com.android.settings.overlay.FeatureFactory.Companion.featureFactory
 import com.android.settingslib.datastore.Permissions.Companion.anyOf
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel.Companion.REQUIRES_CONFIRMATION
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
@@ -68,6 +69,8 @@ class WifiPrivacyScreenApi :
         }
 
         preference(SEND_DEVICES_NAME_SWITCH_KEY, SEND_DEVICES_NAME_PURPOSE, AnyBoolean) {
+            sensitivityLevel(REQUIRES_CONFIRMATION)
+
             get {
                 permissions(SEND_DEVICES_NAME_READ_PERMISSIONS)
                 execute {

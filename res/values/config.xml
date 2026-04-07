@@ -432,6 +432,9 @@
     <!-- Whether alarm_volume should be shown or not. -->
     <bool name="config_show_alarm_volume">true</bool>
 
+    <!-- Whether SIM Specific Ringtone should be shown or not. -->
+    <bool name="config_show_sim_specific_ringtone">false</bool>
+
     <!-- Whether call_volume should be shown or not. -->
     <bool name="config_show_call_volume">true</bool>
 
@@ -739,12 +742,15 @@
     <!-- The ratio to use when using the two-pane settings layout -->
     <item name="config_activity_embed_split_ratio" format="float" type="dimen">0.3636</item>
 
+    <!-- The smallest value of current width of the window when the split should be used. -->
+    <integer name="config_activity_embed_split_min_cur_dp">720</integer>
+
+    <!-- The smallest value of current height of the window when the split should be used. -->
+    <integer name="config_activity_embed_split_min_height_dp">600</integer>
+
     <!-- The smallest value of the smallest-width (sw) of the window in any rotation when the split
          should be used. -->
     <integer name="config_activity_embed_split_min_sw_dp">600</integer>
-
-    <!-- The smallest value of current width of the window when the split should be used. -->
-    <integer name="config_activity_embed_split_min_cur_dp">720</integer>
 
     <!-- The number of visible app icons while entering app list related pages for preloading.
          Take the "Unrestricted data" page as the example, the visible app icons could be 15
@@ -1008,6 +1014,18 @@
 
     <!-- An array of package names of satellite apps for the LTE landing page. -->
     <string-array name="config_satellite_apps_for_lte_landing_page" translatable="false"></string-array>
+
+    <!-- The package name of the phone app for satellite. -->
+    <string name="config_satellite_phone_app_package" translatable="false">com.google.android.dialer</string>
+
+    <!-- The package name of the messages app for satellite. -->
+    <string name="config_satellite_messages_app_package" translatable="false">com.google.android.apps.messaging</string>
+
+    <!-- The package name of the app that provides the satellite settings gateway. -->
+    <string name="config_satellite_settings_gateway_package" translatable="false">com.google.android.apps.scone</string>
+
+    <!-- The class name of the activity that provides the satellite settings gateway. -->
+    <string name="config_satellite_settings_gateway_class" translatable="false">com.google.android.apps.scone.satellite.settings.gateway.SettingsGatewayActivity</string>
 
     <!-- Whether to show the satellite tile in quick settings. This is true by default for all OEMs. -->
     <bool name="config_show_satellite_tile">true</bool>

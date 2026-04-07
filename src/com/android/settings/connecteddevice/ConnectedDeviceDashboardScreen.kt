@@ -67,6 +67,8 @@ open class ConnectedDeviceDashboardScreen :
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
         makeLaunchIntent(context, ConnectedDeviceDashboardActivity::class.java, metadata?.key)
 
+    override val availabilityDescription = "The device must support the 'connected devices' top level Settings category."
+
     override fun isAvailable(context: Context): Boolean =
         context.resources.getBoolean(R.bool.config_show_top_level_connected_devices)
 

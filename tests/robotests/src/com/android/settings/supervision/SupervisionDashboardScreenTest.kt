@@ -61,6 +61,7 @@ import java.util.concurrent.Executor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -213,6 +214,8 @@ class SupervisionDashboardScreenTest {
             val webContentFilterPreference =
                 fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
+            // Idle to ensure all tasks in onResume are completed.
+            advanceUntilIdle()
             shadowOf(Looper.getMainLooper()).idle()
             // Add another idle() to ensure all asynchronous tasks triggered by onResume
             // and the first idle() are completed.
@@ -236,6 +239,8 @@ class SupervisionDashboardScreenTest {
             val webContentFilterPreference =
                 fragment.findPreference<Preference>(SupervisionWebContentFiltersScreen.KEY)!!
 
+            // Idle to ensure all tasks in onResume are completed.
+            advanceUntilIdle()
             shadowOf(Looper.getMainLooper()).idle()
             // Add another idle() to ensure all asynchronous tasks triggered by onResume
             // and the first idle() are completed.
