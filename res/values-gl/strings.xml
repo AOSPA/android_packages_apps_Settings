@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Tes conexión cunha rede WEP. Se non dás permiso para usar estas redes, perderás a conexión."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opcións avanzadas"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Lista despregable Opcións avanzadas"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"despregar"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"despregar"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"contraer"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Nome da rede*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Introduce o SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Seguranza"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Os PIN non coinciden. Confirma o novo PIN da SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"O PIN é incorrecto. Intentos restantes: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Mete o código PIN actual da tarxeta SIM"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Rañura da primeira tarxeta SIM"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Rañura da segunda tarxeta SIM"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Usar <xliff:g id="CARRIER">%1$s</xliff:g> para os datos móbiles?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Estás utilizando <xliff:g id="CARRIER2_0">%2$s</xliff:g> para os datos móbiles. Se cambias a <xliff:g id="CARRIER1">%1$s</xliff:g>, deixarase de utilizar <xliff:g id="CARRIER2_1">%2$s</xliff:g> para os datos móbiles."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Usar <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Personaliza as accións que se activan cos botóns do mando"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Botóns"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Indicacións"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"Botón A"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"Botón B"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"Botón X"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Botón Y"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"Botón L1"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"Botón R1"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"Botón L2"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"Botón R2"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Clic na panca esquerda"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Clic na panca dereita"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"Cruceta"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Panca esquerda"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Panca dereita"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Restablecer configuración predeterminada"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Queres restablecer a configuración predeterminada?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Restableceranse os valores predeterminados de todas as opcións de configuración do mando"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Restablecer"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"actualmente asignada a <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Panel táctil"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Panel táctil e rato"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Rato"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notificacións"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Configuración rápida"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Nota"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Mostrar ou ocultar escritorio"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Escoller un atallo para a <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"esquina inferior esquerda"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"esquina inferior dereita"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funcións experimentais"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Activar rexistro da pilla de Bluetooth"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Cambia o nivel de rexistro da pilla de Bluetooth (activa/desactiva Bluetooth tras cambiar a opción)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Activar o zócolo do rexistro de busca de Bluetooth HCI"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Fai que o rexistro de busca de HCI de Bluetooth estea dispoñible nun zócolo local"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtrado do rexistro de Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Define os filtros"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Desactiva e volve activar o Bluetooth para que se apliquen os cambios"</string>
@@ -3653,12 +3638,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositivo"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Panel táctil, teclado, pantalla, son"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Brillo, cor, tema escuro, pantalla de bloqueo, texto"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Brillo, cor, tema escuro, pantalla de bloqueo, texto, toque"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Brillo, cor, tema escuro, pantalla de bloqueo, texto, pantalla conectada"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Brillo, cor, tema escuro, pantalla de bloqueo, texto, toque, pantalla conectada"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Selección de teclado, ferramentas"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Velocidade do cursor, personalización dos botóns, desprazamento"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Volume, altofalantes, micrófonos"</string>
@@ -4631,58 +4613,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permite que esta aplicación lea, modifique e elimine todos os ficheiros deste dispositivo ou de calquera unidade de almacenamento conectada. Se lle dás permiso, a aplicación poderá acceder aos ficheiros sen que se che notifique explicitamente."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Poden acceder a todos os ficheiros"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatización da pantalla"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Esta aplicación poderá ver o contido da pantalla doutras aplicacións e interactuar con el para axudarche a completar tarefas, mesmo cando as aplicacións estean en segundo plano."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> pode ver o contido da pantalla das aplicacións que permitiches e interactuar con el para axudarche a completar tarefas."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Aquí móstranse as aplicacións para as que escolliches a opción &lt;strong&gt;Permitir sempre&lt;/strong&gt; nos permisos. Non se mostran as aplicacións que teñen definida a opción de acceso &lt;strong&gt;Só esta vez&lt;/strong&gt; nin as que non teñen permiso."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Se non permites a automatización da pantalla, é posible que <xliff:g id="ID_1">%1$s</xliff:g> siga podendo interactuar coas aplicacións conectadas a <xliff:g id="ID_2">%1$s</xliff:g> doutras maneiras"</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Se quitas unha aplicación desta pantalla, é posible que <xliff:g id="ID_1">%1$s</xliff:g> poida seguir interactuando coas aplicacións conectadas a <xliff:g id="ID_2">%1$s</xliff:g> doutras maneiras."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Permite que as aplicacións che axuden a completar tarefas interactuando co contido da pantalla doutras aplicacións"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Permite que as aplicacións vexan o contido da pantalla e interactúen con el para axudarche a completar tarefas"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Preguntar sempre"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Permitir sempre"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Non permitir"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Aplicacións que permitiches"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Aínda non permitiches ningunha aplicación"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Só a aplicación que definises como asistente dixital predeterminado poderá usar a automatización da pantalla."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Quitouse a aplicación"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Quitáronse todas as aplicacións"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Configuración do Asistente"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 aplicación permitida}other{# aplicacións permitidas}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 aplicación permitida}other{# aplicacións permitidas}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Ningunha aplicación permitida"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Quitar todas as aplicacións"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Asistente dixital predeterminado"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> non pode usar a automatización da pantalla"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Só o asistente predeterminado pode usar a automatización"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Cambiar de asistente"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Estas aplicacións poden ver o contido da pantalla das aplicacións que permitiches e interactuar con el para axudarche a completar tarefas."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"Non tes instalada ningunha aplicación que poida usar a automatización da pantalla"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Estas aplicacións poden ver o contido da pantalla de <xliff:g id="ID_1">%1$s</xliff:g> e interactuar con el para axudarche a completar tarefas."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificacións en pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permitir mostrar notificacións en pantalla completa procedentes desta aplicación"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permite que esta aplicación amose notificacións en pantalla completa cando o dispositivo estea bloqueado. A aplicación pode usar esta opción para destacar alarmas, chamadas entrantes ou outras notificacións urxentes."</string>
@@ -5867,8 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Desinstalar aplicación"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplicacións instaladas no último mes}other{Aplicacións instaladas nos últimos # meses}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplicacións instaladas hai máis de # mes}other{Aplicacións instaladas hai máis de # meses}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"Asistencia de IA"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Asistencia proactiva"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Acceso á pantalla"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"Contexto da pantalla"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Decide se esta aplicación pode achegar información para xerar suxestións"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Proporción"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Proba unha nova proporción para ver esta aplicación no caso de que non se deseñase para adaptarse ao teu dispositivo (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)"</string>
@@ -5888,6 +5845,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"A aplicación reiniciarase cando cambies a proporción. Podes perder os cambios que non estean gardados. É posible que algunhas aplicacións non estean optimizadas para determinadas proporcións."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Experiencia"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Mando virtual"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Reinicia o xogo para confirmar os cambios"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor de impresión dixital"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificacións con luz"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Acerca das notificacións con luz"</string>

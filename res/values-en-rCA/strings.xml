@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"You\'re connected to a WEP network. If you stop allowing these networks, you\'ll be disconnected."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Advanced options"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Drop down list Advanced Options"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"expand"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"expand"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"collapse"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Network name*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Enter the SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Security"</string>
@@ -2294,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notifications"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Quick settings"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Note"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Peek/unpeek desktop"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Choose a shortcut for the <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"bottom-left corner"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"bottom-right corner"</string>
@@ -4609,13 +4611,13 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Allow this app to read, modify and delete all files on this device or any connected storage volumes. If granted, app may access files without your explicit knowledge."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Can access all files"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Screen automation"</string>
-    <string name="computer_control_automation_sub_heading" msgid="8884590840087038012">"This app will be able to see and interact with other apps’ screen content to help you complete tasks, even when the apps are in the background"</string>
-    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2641175029127556724">"<xliff:g id="ID_1">%1$s</xliff:g> can see and interact with screen content of apps that you’ve allowed to help you complete tasks"</string>
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"This app will be able to see and interact with other apps’ screen content to help you complete tasks, even when the apps are in the background."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> can see and interact with the screen content of apps that you’ve allowed to help you complete tasks."</string>
     <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Apps for which you chose &lt;strong&gt;Always Allow&lt;/strong&gt; in permissions are shown here. Apps you allowed &lt;strong&gt;Only this time&lt;/strong&gt; or didn’t allow aren’t shown."</string>
     <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"If you don’t allow screen automation, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways."</string>
     <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"When you remove an app on this screen, <xliff:g id="ID_1">%1$s</xliff:g> may still be able to interact with apps that are connected to <xliff:g id="ID_2">%1$s</xliff:g> in other ways."</string>
     <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Allow apps to help you complete tasks by interacting with other apps’ screen content"</string>
-    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="2884280820078815604">"Allow apps to see and interact with the screen content to help you complete tasks"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Allow apps to see and interact with screen content to help you complete tasks"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ask every time"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Always allow"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Don’t allow"</string>
@@ -4635,7 +4637,7 @@
     <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Change assistant"</string>
     <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"These apps can see and interact with the screen content of apps you’ve allowed, to help you complete tasks."</string>
     <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"You haven’t installed any apps that can use screen automation"</string>
-    <string name="computer_control_automation_target_list_header" msgid="4637651650979368491">"These apps can see and interact with <xliff:g id="ID_1">%1$s</xliff:g> screen content to help you complete tasks"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"These apps can see and interact with <xliff:g id="ID_1">%1$s</xliff:g> screen content to help you complete tasks."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Full-screen notifications"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Allow full-screen notifications from this app"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Allow this app to show notifications that take up the full screen when the device is locked. Apps may use these to highlight alarms, incoming calls, or other urgent notifications."</string>
@@ -5820,8 +5822,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Uninstall app"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps installed in the last # month}other{Apps installed in the last # months}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps installed more than # month ago}other{Apps installed more than # months ago}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI assistance"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Proactive assist"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Screen access"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"Screen context"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Choose whether this app can contribute info to produce suggestions"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Aspect ratio"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Try a new aspect ratio to view this app if it hasn\'t been designed to fit your <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
@@ -5841,6 +5843,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"The app will restart when you change aspect ratio. You may lose unsaved changes. Some apps may not be optimized for certain aspect ratios."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Experience"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtual gamepad"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Restart your game to confirm changes"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Fingerprint sensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Flash notifications"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"About flash notifications"</string>
