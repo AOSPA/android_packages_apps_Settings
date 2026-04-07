@@ -72,7 +72,6 @@ import com.android.settingslib.core.instrumentation.SharedPreferencesLogger;
 import com.android.settingslib.drawer.DashboardCategory;
 import com.android.settingslib.widget.SettingsThemeHelper;
 
-import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
 import java.util.ArrayList;
@@ -302,8 +301,7 @@ public class SettingsActivity extends SettingsBaseActivity
         // insets.
         // If this is in setup flow, don't apply theme. Because light theme needs to be applied
         // in SettingsBaseActivity#onCreate().
-        if (isSubSettings(intent) && !WizardManagerHelper.isAnySetupWizard(getIntent())
-                && !PartnerConfigHelper.shouldApplyModalDialog(this)) {
+        if (isSubSettings(intent) && !WizardManagerHelper.isAnySetupWizard(getIntent())) {
             int themeId = SettingsThemeHelper.isExpressiveTheme(this)
                     ? R.style.Theme_SubSettings_Expressive : R.style.Theme_SubSettings;
             setTheme(themeId);
@@ -406,8 +404,7 @@ public class SettingsActivity extends SettingsBaseActivity
     }
 
     private boolean isActionBarButtonEnabled(Intent intent) {
-        if (WizardManagerHelper.isAnySetupWizard(intent)
-                || PartnerConfigHelper.shouldApplyModalDialog(this)) {
+        if (WizardManagerHelper.isAnySetupWizard(intent)) {
             return false;
         }
         final boolean isSecondLayerPage =
@@ -509,7 +506,6 @@ public class SettingsActivity extends SettingsBaseActivity
     public Theme getTheme() {
         Theme theme = super.getTheme();
         if (!WizardManagerHelper.isAnySetupWizard(getIntent())
-                && !PartnerConfigHelper.shouldApplyModalDialog(this)
                 && SettingsThemeHelper.isExpressiveTheme(this)) {
             theme.applyStyle(R.style.Theme_SubSettings_Expressive, true);
         }
