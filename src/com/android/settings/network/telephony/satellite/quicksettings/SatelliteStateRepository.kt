@@ -99,6 +99,7 @@ constructor(
         // registerTelephonyCallback always callsback immediately with current state as per
         // documentation of the API
 
+        Log.i(TAG, "registerTelephonyCallback for carrierRoamingNtnStateFlow")
         telephonyManager?.registerTelephonyCallback(callbackExecutor, callback)
         awaitClose { runCatching { telephonyManager?.unregisterTelephonyCallback(callback) } }
     }
@@ -123,6 +124,7 @@ constructor(
         // delayed or async.
         trySend(isAvailable)
 
+        Log.i(TAG, "registerTelephonyCallback for isCellularAvailableFlow")
         telephonyManager?.registerTelephonyCallback(callbackExecutor, callback)
         awaitClose { runCatching { telephonyManager?.unregisterTelephonyCallback(callback) } }
     }
