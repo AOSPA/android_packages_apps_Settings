@@ -331,6 +331,9 @@ constructor(
      * @return The [SatelliteManager.SatelliteDataSupportMode].
      */
     open fun getSatelliteDataSupportMode(subId: Int): Int {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN
+        }
         return try {
             satelliteManager?.getSatelliteDataSupportMode(subId)
                 ?: SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN

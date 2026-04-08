@@ -22,7 +22,9 @@ import android.net.Uri
 import android.provider.Settings
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
 import android.telephony.SubscriptionManager
+import android.telephony.satellite.SatelliteManager
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import com.android.settings.overlay.FeatureFactory
 
 /** Utility class for satellite/telephony-related functionalities. */
@@ -123,6 +125,35 @@ object SatelliteUtils {
             return false
         }
         return isLteBasedNtnSupported(activeSubId)
+    }
+
+    @VisibleForTesting
+    var satelliteAppsRepositoryProvider: (Context) -> SatelliteAppsRepository =
+        { context -> SatelliteAppsRepository(context) }
+
+    /**
+     * Returns the appropriate intent for satellite entry point.
+     *
+     * If the current data support mode is unconstrained, this returns the intent for the detailed
+     * satellite settings page. Otherwise, it returns the intent for the satellite landing page.
+     */
+    @JvmStatic
+    fun resolveSatelliteSettingsIntent(context: Context): Intent {
+        val subId = SubscriptionManager.getActiveDataSubscriptionId()
+        val dataSupportMode =
+            SatelliteStateRepository.getInstance(context).getSatelliteDataSupportMode(subId)
+
+        if (dataSupportMode == SatelliteManager.SATELLITE_DATA_SUPPORT_UNCONSTRAINED) {
+            val isCarrierRoamingNtnSupported = isCarrierRoamingNtnSupported(subId)
+            val settingsIntent =
+                satelliteAppsRepositoryProvider(context)
+                    .getSettingsIntent(isCarrierRoamingNtnSupported)
+            if (settingsIntent != null) {
+                return settingsIntent
+            }
+        }
+
+        return Intent(context, SatelliteLandingPageActivity::class.java)
     }
 
     /**
