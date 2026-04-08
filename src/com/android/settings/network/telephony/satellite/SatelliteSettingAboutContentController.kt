@@ -20,7 +20,7 @@ import android.content.Context
 import androidx.preference.PreferenceScreen
 import com.android.settings.R
 import com.android.settings.network.telephony.TelephonyBasePreferenceController
-import com.android.settings.network.telephony.telephonyManager
+import com.android.settings.overlay.FeatureFactory
 import com.android.settingslib.widget.TopIntroPreference
 
 /** A controller to show the introduction of satellite connectivity. */
@@ -30,16 +30,15 @@ class SatelliteSettingAboutContentController(context: Context, key: String) :
 
     fun init(subId: Int) {
         mSubId = subId
-        simOperatorName = mContext.telephonyManager(mSubId).simOperatorName ?: ""
+        simOperatorName =
+            FeatureFactory.featureFactory.telephonyFeatureProvider.telephonyRepository
+                .getSimOperatorName(subId)
     }
 
     override fun displayPreference(screen: PreferenceScreen?) {
         super.displayPreference(screen)
         val preference: TopIntroPreference? =
             screen?.findPreference(PREF_KEY_ABOUT_SATELLITE_CONNECTIVITY)
-        if (simOperatorName.isEmpty()) {
-            simOperatorName = mContext.telephonyManager(mSubId).simOperatorName
-        }
         preference?.title =
             mContext.getString(R.string.description_about_satellite_setting, simOperatorName)
     }
