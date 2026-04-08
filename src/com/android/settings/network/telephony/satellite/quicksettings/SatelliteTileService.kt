@@ -47,6 +47,7 @@ open class SatelliteTileService : TileService() {
     private var updateJob: Job? = null
 
     override fun onStartListening() {
+        Log.i(TAG, "onStartListening")
         super.onStartListening()
         val repo = SatelliteStateRepository.getInstance(this)
         // Ensure any previous job is cancelled before starting a new one.
@@ -55,12 +56,14 @@ open class SatelliteTileService : TileService() {
             scope.launch {
                 repo.satelliteStatus.collect { status ->
                     logd { "onStartListening: status=$status" }
+                    Log.i(TAG, "onStartListening: status=$status")
                     updateTile(status)
                 }
             }
     }
 
     override fun onStopListening() {
+        Log.i(TAG, "onStopListening")
         super.onStopListening()
         updateJob?.cancel()
     }
