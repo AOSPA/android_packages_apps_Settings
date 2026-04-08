@@ -35,7 +35,6 @@ import android.content.pm.ResolveInfo;
 import android.content.pm.UserInfo;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.platform.test.annotations.RequiresFlagsDisabled;
 import android.platform.test.annotations.RequiresFlagsEnabled;
 import android.platform.test.flag.junit.CheckFlagsRule;
 import android.platform.test.flag.junit.DeviceFlagsValueProvider;
@@ -147,7 +146,6 @@ public class FactoryResetPreferenceControllerTest {
 
     @Test
     @RequiresFlagsEnabled(com.android.settings.factory_reset.Flags.FLAG_ENABLE_FACTORY_RESET_WIZARD)
-    @RequiresFlagsDisabled(com.android.settings.flags.Flags.FLAG_OWL_V2_ENABLED)
     public void handlePreference_factoryResetWizardEnabled()
             throws PackageManager.NameNotFoundException {
         ArgumentCaptor<Intent> intentArgumentCaptor = ArgumentCaptor.forClass(Intent.class);
@@ -163,7 +161,6 @@ public class FactoryResetPreferenceControllerTest {
 
     @Test
     @RequiresFlagsEnabled(com.android.settings.factory_reset.Flags.FLAG_ENABLE_FACTORY_RESET_WIZARD)
-    @RequiresFlagsDisabled(com.android.settings.flags.Flags.FLAG_OWL_V2_ENABLED)
     public void handlePreference_factoryResetWizardEnabled_noExistingFrwApp()
             throws PackageManager.NameNotFoundException {
         PackageInfo info = new PackageInfo();
