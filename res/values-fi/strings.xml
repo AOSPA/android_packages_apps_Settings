@@ -326,7 +326,7 @@
     <string name="zone_auto_title_summary" msgid="6540356783943375071">"Määritä automaattisesti lähellä olevien mobiiliverkkojen perusteella"</string>
     <string name="auto_zone_requires_location_summary" msgid="2366567167956530124">"Määritä automaattisesti sijainnin perusteella, jos saatavilla"</string>
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Käytä paikallista oletusasetusta"</string>
-    <string name="date_time_24hour" msgid="286679379105653406">"Käytä 24-tuntista kelloa"</string>
+    <string name="date_time_24hour" msgid="286679379105653406">"Käytä 24 tunnin kelloa"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Aika"</string>
     <string name="time_format_category_title" msgid="3122743852067365261">"12 tunnin / 24 tunnin kello"</string>
     <string name="time_format_page_title" msgid="2599662358219245734">"Ajan esitystapa"</string>
@@ -1035,7 +1035,7 @@
     <string name="wifi_cellular_data_fallback_summary" msgid="7039944853033554386">"Vaihda mobiilidataan, jos Wi-Fi-yhteyttä ei voi muodostaa. Datan käytöstä voi aiheutua maksuja."</string>
     <string name="wifi_add_network" msgid="4178564862173751181">"Lisää verkko"</string>
     <string name="wifi_configure_settings_preference_title" msgid="2536725796700696566">"Wi-Fi-asetukset"</string>
-    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi-Fi otetaan uudelleen käyttöön automaattisesti"</string>
+    <string name="wifi_configure_settings_preference_summary_wakeup_on" msgid="7822368955551467382">"Wi-Fi laitetaan uudelleen päälle automaattisesti"</string>
     <string name="wifi_configure_settings_preference_summary_wakeup_off" msgid="5710203586018223864">"Wi-Fi ei mene uudelleen päälle automaattisesti"</string>
     <string name="wifi_menu_p2p" msgid="5234165837732940385">"Wi-Fi Direct"</string>
     <string name="wifi_empty_list_wifi_off" msgid="7697422506708419298">"Näet käytössä olevat verkot ottamalla Wi-Fin käyttöön."</string>
@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Laitteesi on yhteydessä WEP-verkkoon. Jos lopetat näiden verkkojen sallimisen, yhteys katkeaa."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Lisäasetukset"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Lisäasetusten avattava lista"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"laajenna"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"laajenna"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"tiivistä"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Verkon nimi*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Lisää SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Suojaus"</string>
@@ -1460,7 +1461,7 @@
     <string name="low_light_display_behavior_subtitle" msgid="1833984014035605413">"Valitse, mitä vähäisen valon tilassa näytetään"</string>
     <string name="low_light_display_behavior_low_light_clock_dream" msgid="2235561363691252383">"Vähäisen valon kello"</string>
     <string name="low_light_display_behavior_summary_on" msgid="4218678742261840224">"Päällä / <xliff:g id="LOW_LIGHT_MODE">%1$s</xliff:g>"</string>
-    <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Pois päältä"</string>
+    <string name="low_light_display_behavior_summary_off" msgid="4565368094992120316">"Poissa päältä"</string>
     <string name="low_light_display_behavior_low_light_clock_dream_full_summary" msgid="1145914465090731721">"Vähäisen valon kello näkyy, kun ympäristö on pimeä"</string>
     <string name="ambient_display_screen_title" msgid="8615947016991429325">"Himmennetty näyttö"</string>
     <string name="ambient_display_category_triggers" msgid="1216640141609270011">"Näyttämisaika"</string>
@@ -1513,7 +1514,7 @@
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"PIN-koodin hakeminen ei onnistunut"</string>
     <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Puhelin avautuu PIN-koodilla"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"SIM-kortin PIN-koodia hallinnoi Android"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"Puhelimen käyttö edellyttää PIN-koodia"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"Puhelin avautuu PIN-koodilla"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Automaattinen SIM-suojaus edellyttää lukitusnäyttöä, nyt saatavilla vain manuaalinen suojaus"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Lisää nykyinen SIM-kortin PIN-koodi"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Lisää SIM-kortin nykyinen PIN-koodi"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN-koodit eivät täsmää. Vahvista uusi SIM-kortin PIN-koodi."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Virheellinen PIN-koodi. Jäljellä olevat yritykset: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Lisää SIM-kortin nykyinen PIN-koodi"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Ensimmäinen SIM-korttipaikka"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Toinen SIM-korttipaikka"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Käytetäänkö mobiilidataa (<xliff:g id="CARRIER">%1$s</xliff:g>)?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Käytät mobiilidataa (<xliff:g id="CARRIER2_0">%2$s</xliff:g>). Jos <xliff:g id="CARRIER1">%1$s</xliff:g> otetaan käyttöön, <xliff:g id="CARRIER2_1">%2$s</xliff:g> ei enää käytä mobiilidataa."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Valitse <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1893,9 +1892,9 @@
     <string name="lockpassword_forgot_password" msgid="5730587692489737223">"Unohditko salasanasi?"</string>
     <string name="lockpassword_forgot_pattern" msgid="1196116549051927516">"Unohditko kuviosi?"</string>
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Unohditko PIN-koodisi?"</string>
-    <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"Henkilöllisyytesi vahvistetaan kuviolla"</string>
+    <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"Henkilöllisyytesi todennetaan kuviolla"</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"Henkilöllisyytesi vahvistetaan PIN-koodilla"</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"Henkilöllisyytesi vahvistetaan salasanalla"</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"Henkilöllisyytesi todennetaan salasanalla"</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="2552062474449423029">"Henkilöllisyytesi vahvistetaan työkuviolla"</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6556640367641079244">"Henkilöllisyytesi vahvistetaan työprofiilin PIN-koodilla"</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5700270644291633820">"Henkilöllisyytesi vahvistetaan työprofiilin salasanalla"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Muokkaa ohjaimen painikkeiden käynnistämiä toimintoja"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Painikkeet"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Suunnat"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A-painike"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B-painike"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X-painike"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y-painike"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1-painike"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1-painike"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2-painike"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2-painike"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Vasemman ohjainsauvan klikkaus"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Oikean ohjainsauvan klikkaus"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"Suuntanäppäimet"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Vasen ohjainsauva"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Oikea ohjainsauva"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Palauta oletukset"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Palautetaanko oletukset?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Kaikki ohjainasetukset palautetaan oletuksiin"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Palauta"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"määritetty arvoon: <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Kosketuslevy"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Kosketuslevy ja hiiri"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Hiiri"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Ilmoitukset"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Pika-asetukset"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Muistiinpano"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Näytä/piilota työpöytä"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Valitse pikakuvake: <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"vasen alakulma"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"oikea alakulma"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Ominaisuusilmoitukset"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Ota Bluetooth-pinon lokikirjaus käyttöön"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Muuta Bluetooth-pinon lokikirjaustasoa (laita Bluetooth päälle/pois, kun olet muuttanut asetusta)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Ota Bluetoothin HCI-tarkkailulokin pistorasia käyttöön"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Aseta Bluetoothin HCI-tarkkailuloki saataville paikallisessa pistorasiassa"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetoothin HCI-tarkkailulokin suodatus"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Valitse suodattimet"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Laita Bluetooth pois päältä ja uudelleen päälle, jotta muutokset tulevat voimaan"</string>
@@ -3175,7 +3160,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"Verkon ilmoitukset"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"Voit saada ilmoituksen, kun laite muodostaa yhteyden salaamattomaan verkkoon tai kun verkko tallentaa yksilöllisen laite- tai SIM-tunnuksen"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"Verkkosukupolvi"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"Suojaus 2G-verkoilta välttää vähemmän turvallisia 2G-verkkoja. Tämä voi rajoittaa yhteyksiä joissakin paikoissa. 2G sallitaan aina hätäpuheluita varten, mutta puhelut eivät välttämättä yhdisty, jos käytät verkkovierailua ulkomailla."</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"Suojaus 2G-verkoilta välttää vähemmän turvallisia 2G-verkkoja, mikä voi rajoittaa yhteyksiä joissakin paikoissa. 2G sallitaan aina hätäpuheluita varten, mutta puhelut eivät välttämättä yhdisty, jos käytät verkkovierailua ulkomailla."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"Suojaus 2G-verkoilta"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"Salaus"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"Verkkosukupolvet"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Laite"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Kosketuslevy, näppäimistö, näyttö, ääni"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Kirkkaus, väri, tumma teema, lukitusnäyttö, teksti"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Kirkkaus, väri, tumma teema, lukitusnäyttö, teksti, kosketus"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Kirkkaus, väri, tumma teema, lukitusnäyttö, teksti, yhdistetty näyttö"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Kirkkaus, väri, tumma teema, lukitusnäyttö, teksti, kosketus, yhdistetty näyttö"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Näppäimistön valinta, työkalut"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Kohdistinnopeus, painikkeen muokkaus, vieritys"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Äänenvoimakkuus, kaiuttimet, mikrofonit"</string>
@@ -4629,58 +4611,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Salli sovelluksen lukea, muokata ja poistaa kaikkia tiedostoja tällä laitteella ja yhdistetyillä tallennuslaitteilla. Jos sallit tämän, sovelluksella on pääsy tiedostoihin ilman, että sinulle ilmoitetaan asiasta erikseen."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Voi päästä kaikkiin tiedostoihin"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Näytön automaatio"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Sovellus voi nähdä muiden sovellusten näytön sisällön ja auttaa sinua suorittamaan tehtäviä sen avulla, vaikka sovellukset olisivat taustalla."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> voi nähdä sallimiesi sovellusten näytön sisällön ja auttaa sinua suorittamaan tehtäviä sen avulla"</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Täällä näkyvät sovellukset, joille olet valinnut &lt;strong&gt;Salli aina&lt;/strong&gt; ‑luvan. Sovelluksia, joille olet antanut &lt;strong&gt;Vain tällä kertaa&lt;/strong&gt; -luvan tai joille et ole antanut lupaa, ei näy."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Jos et salli näytön automaatiota, <xliff:g id="ID_1">%1$s</xliff:g> voi silti olla yhteydessä sovelluksiin, joihin <xliff:g id="ID_2">%1$s</xliff:g> on yhdistetty muilla tavoilla."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Kun poistat sovelluksen tältä näytöltä, <xliff:g id="ID_1">%1$s</xliff:g> voi silti olla yhteydessä sovelluksiin, joihin <xliff:g id="ID_2">%1$s</xliff:g> on yhdistetty muilla tavoilla."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Salli sovellusten auttaa sinua suorittamaan tehtäviä käyttämällä näytön sisältöä muista sovelluksista"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Salli sovellusten nähdä näytön sisältö ja auttaa sinua suorittamaan tehtäviä sen avulla"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Kysy aina"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Salli aina"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Älä salli"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Sallimasi sovellukset"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Et ole vielä sallinut yhtään sovellusta"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Vain oletusdigiavustajaksi valitsemasi sovellus voi käyttää näytön automaatiota."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Sovellus poistettu"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Kaikki sovellukset poistettu"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Assistantin asetukset"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 sovellus sallittu}other{# sovellus sallittu}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 sovellus sallittu}other{# sovellusta sallittu}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Ei sallittuja sovelluksia"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Poista kaikki sovellukset"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Oletusdigiavustaja"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> ei voi käyttää näytön automaatiota"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Vain oletusdigiavustaja voi käyttää näytön automaatiota"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Vaihda avustajaa"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Nämä sovellukset voivat nähdä sallimiesi sovellusten näytön sisällön ja auttaa sinua suorittamaan tehtäviä sen avulla."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"Et ole asentanut sovelluksia, jotka voivat käyttää näytön automaatiota"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Nämä sovellukset voivat nähdä näytön sisällön (<xliff:g id="ID_1">%1$s</xliff:g>) ja auttaa sinua suorittamaan tehtäviä sen avulla"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Koko näytön ilmoitukset"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Salli sovelluksen lähettää koko näytön ilmoituksia"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Salli sovelluksen näyttää koko näytön ilmoituksia, kun laite on lukittu. Sovellukset voivat käyttää tällaisia ilmoituksia hälytyksistä, saapuvista puheluista tai muista tärkeistä asioista ilmoittamiseen."</string>
@@ -5774,7 +5731,7 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"Puhelinnumero puuttuu."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"Suojaus 2G-verkoilta"</string>
-    <string name="enable_2g_summary" msgid="6194875539424151678">"Välttää vähemmän turvallisia 2G-verkkoja. Tämä voi rajoittaa yhteyksiä joissakin paikoissa. 2G sallitaan aina hätäpuheluita varten, mutta puhelut eivät välttämättä yhdisty, jos käytät verkkovierailua ulkomailla."</string>
+    <string name="enable_2g_summary" msgid="6194875539424151678">"Välttää vähemmän turvallisia 2G-verkkoja, mikä voi rajoittaa yhteyksiä joissakin paikoissa. 2G sallitaan aina hätäpuheluita varten, mutta puhelut eivät välttämättä yhdisty, jos käytät verkkovierailua ulkomailla."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> edellyttää 2G:tä"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Salli vain salatut verkot"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Tämä on turvallisempaa, mutta voi rajoittaa mobiiliverkkoyhteyttä joissakin paikoissa. Hätäpuhelut sallitaan."</string>
@@ -5865,8 +5822,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Poista sovellus"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Viimeisen # kuukauden aikana asennetut sovellukset}other{Viimeisten # kuukauden aikana asennetut sovellukset}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Yli # kuukausi sitten asennetut sovellukset}other{Yli # kuukautta sitten asennetut sovellukset}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"Tekoälyavustaja"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Proactive assist"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Pääsy näyttöön"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"Näyttökonteksti"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Valitse, voiko tämä sovellus lisätä tietoja ehdotusten luomista varten"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Kuvasuhde"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Kokeile sovellukselle uutta kuvasuhdetta, jos sitä ei ole suunniteltu sopimaan laitteellesi (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)"</string>
@@ -5886,6 +5843,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Sovellus käynnistyy uudelleen, kun muutat kuvasuhdetta. Voit menettää tallentamattomat muutokset. Kaikkia sovelluksia ei ehkä optimoida tietyille kuvasuhteille."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Kokemus"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtuaalinen peliohjain"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Vahvista muutokset käynnistämällä peli uudelleen"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sormenjälkitunnistin"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Valoilmoitukset"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Tietoa valoilmoituksista"</string>

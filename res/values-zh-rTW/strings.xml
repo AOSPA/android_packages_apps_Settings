@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"你已連上 WEP 網路。如果不允許使用這類網路，連線就會中斷。"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"進階選項"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"下拉式選單進階選項"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"展開"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"展開"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"收合"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"網路名稱*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"輸入 SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"安全性"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN 碼不相符。確認新的 SIM 卡 PIN 碼。"</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"PIN 碼錯誤，可再試 <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> 次"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"請輸入 SIM 卡目前的 PIN 碼"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"第一個 SIM 卡插槽"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"第二個 SIM 卡插槽"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"要使用「<xliff:g id="CARRIER">%1$s</xliff:g>」的行動數據網路嗎？"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"你目前使用的是「<xliff:g id="CARRIER2_0">%2$s</xliff:g>」的行動數據網路。如果你切換至「<xliff:g id="CARRIER1">%1$s</xliff:g>」，系統將不再使用「<xliff:g id="CARRIER2_1">%2$s</xliff:g>」的行動數據網路。"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"使用「<xliff:g id="CARRIER">%1$s</xliff:g>」"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"自訂控制器按鈕觸發的動作"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"按鈕"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"方向"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A 按鈕"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B 按鈕"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X 按鈕"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y 按鈕"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 按鈕"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 按鈕"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 按鈕"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 按鈕"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"按一下左側搖桿"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"按一下右側搖桿"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-Pad"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"左側搖桿"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"右側搖桿"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"重設為預設值"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"要重設為預設值嗎？"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"所有控制器設定都會重設為預設值"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"重設"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"目前已指派給「<xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>」"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"觸控板"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"觸控板與滑鼠"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"滑鼠"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"通知"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"快速設定"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"附註"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"查看/隱藏桌面"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"選擇<xliff:g id="CORNER">%1$s</xliff:g>的捷徑"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"左下角"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"右下角"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"功能標記"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"啟用藍牙堆疊記錄"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"變更藍牙堆疊記錄功能的記錄層級 (變更這項設定後請切換藍牙)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"啟用藍牙 HCI 窺探記錄通訊端"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"透過本機通訊端提供藍牙 HCI 窺探記錄"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"藍牙 HCI 窺探記錄篩選"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"設定篩選器"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"請停用或啟用藍牙，讓變更生效"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"裝置"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"觸控板、鍵盤、螢幕、音效"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"亮度、顏色、深色主題、螢幕鎖定、文字"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"亮度、顏色、深色主題、螢幕鎖定、文字、觸控"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"亮度、顏色、深色主題、螢幕鎖定、文字、已連結的螢幕"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"亮度、顏色、深色主題、螢幕鎖定、文字、觸控、已連結的螢幕"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"鍵盤選取、工具"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"游標速度、自訂按鈕、捲動"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"音量、喇叭、麥克風"</string>
@@ -4629,58 +4611,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"授權給這個應用程式，允許讀取、修改及刪除這部裝置或任何已連結儲存空間的所有檔案。應用程式獲得授權後，可能會在你不知情的情況下存取檔案。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以存取所有檔案"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"螢幕自動化"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"這個應用程式將可查看其他應用程式的畫面，並與當中的內容互動，協助你完成工作，即使是在背景執行的應用程式也一樣。"</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"「<xliff:g id="ID_1">%1$s</xliff:g>」可查看你允許的應用程式畫面，並與當中的內容互動，協助你完成工作。"</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"這裡會顯示你選擇「一律允許」&lt;strong&gt;&lt;/strong&gt;權限的應用程式，不會顯示你選擇「僅允許這一次」&lt;strong&gt;&lt;/strong&gt;或「不允許」的應用程式。"</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"如果不允許螢幕自動化動作，「<xliff:g id="ID_1">%1$s</xliff:g>」仍可能透過其他方式與連結至「<xliff:g id="ID_2">%1$s</xliff:g>」的應用程式互動。"</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"移除這個畫面上的應用程式後，「<xliff:g id="ID_1">%1$s</xliff:g>」可能還是能以其他方式與連結至「<xliff:g id="ID_2">%1$s</xliff:g>」的應用程式互動。"</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"允許應用程式與其他應用程式的畫面內容互動，協助你完成工作"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"允許應用程式查看畫面，並與當中的內容互動，協助你完成工作"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"每次都詢問"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"一律允許"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"不允許"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"你允許的應用程式"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"你尚未允許任何應用程式"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"只有設為預設數位助理的應用程式才能使用螢幕自動化功能。"</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"應用程式已從清單中移除"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"已移除所有應用程式"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"數位助理設定"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{已允許 1 個應用程式}other{已允許 # 個應用程式}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{已允許 1 個應用程式}other{已允許 # 個應用程式}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"未允許任何應用程式"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"移除所有應用程式"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"預設數位助理"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"「<xliff:g id="ID_1">%1$s</xliff:g>」無法使用螢幕自動化功能"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"只有預設數位助理可以使用螢幕自動化功能"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"變更數位助理"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"這些應用程式可查看你允許的應用程式畫面內容並互動，協助你完成工作。"</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"你尚未安裝任何可使用螢幕自動化的應用程式"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"這些應用程式可以查看「<xliff:g id="ID_1">%1$s</xliff:g>」的畫面，並與當中的內容互動，協助你完成工作。"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全螢幕通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"允許這個應用程式顯示全螢幕通知"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"允許這個應用程式在裝置鎖定時顯示全螢幕通知。應用程式可能會利用這類通知顯示鬧鐘、來電或其他緊急通知。"</string>
@@ -5189,7 +5146,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"變更"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"最多只能開啟 5 項服務"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"如要新增其他服務，請先關閉至少 1 項服務"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"選擇你想使用的服務，以便儲存登入及自動填入建議的資料。如果也想收到其他服務提供的建議，請開啟相關服務。"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"選擇要用來儲存登入及自動填入建議資料的服務。如果也想收到其他服務提供的建議，請開啟相關服務。"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"「%1$s」會根據畫面內容判斷要自動填入的資訊。"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"密碼、密碼金鑰和資料服務限制"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"一次最多可選取 5 個密碼、密碼金鑰和資料服務。如要新增其他服務，請先停用其中一項服務。"</string>
@@ -5865,8 +5822,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"解除安裝應用程式"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{過去 # 個月內安裝的應用程式}other{過去 # 個月內安裝的應用程式}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{超過 # 個月前安裝的應用程式}other{超過 # 個月前安裝的應用程式}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI 輔助"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"主動協助"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"螢幕存取權"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"畫面內容"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"選擇這個應用程式能否提供資訊，用於生成建議"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"顯示比例"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"如果這個應用程式不適合用 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 的預設比例顯示，請嘗試新比例"</string>
@@ -5886,6 +5843,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"變更顯示比例後，應用程式會重新啟動，未儲存的變更可能會遺失。部分應用程式可能未針對某些顯示比例完成最佳化調整。"</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"體驗"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"虛擬遊戲手把"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"重新啟動遊戲以確認變更"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋感應器"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"閃光燈通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"關於閃光燈通知"</string>
@@ -6180,7 +6138,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"應用程式安全性"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"裝置解鎖"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"帳戶安全性"</string>
-    <string name="device_finders_subpage_title" msgid="2635718540485825070">"遺失裝置額外保固方案"</string>
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"裝置遺失防護"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"系統與更新"</string>
     <string name="location_settings" msgid="6833222354060094170">"位置資訊存取權"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"查看可存取位置資訊的應用程式與服務"</string>
@@ -6217,7 +6175,7 @@
     <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"收合已關閉的警告"</string>
     <string name="safety_center_expand_dismissed_issues" msgid="6075170862549670397">"查看已關閉的警告"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"要關閉這個警示嗎？"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"請隨時查看安全性與隱私權設定，上網更安全"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"請隨時查看安全性與隱私權設定，上網更安⁠全"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"動作已完成"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"安全性與隱私快速設定"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"你的隱私權控制項"</string>

@@ -285,7 +285,7 @@
     <string name="terms_of_address_feminine" msgid="1743479869695539283">"صيغة مخاطبة مؤنثة"</string>
     <string name="terms_of_address_masculine" msgid="983106046135098856">"صيغة مخاطبة مذكّرة"</string>
     <string name="terms_of_address_neutral" msgid="5475414185543112478">"صيغة مخاطبة محايدة"</string>
-    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{هل تريد إزالة اللغة المحددة؟}zero{هل تريد إزالة اللغات المحددة؟}two{هل تريد إزالة اللغتَين المحددتَين؟}few{هل تريد إزالة اللغات المحددة؟}many{هل تريد إزالة اللغات المحددة؟}other{هل تريد إزالة اللغات المحددة؟}}"</string>
+    <string name="dlg_remove_locales_title" msgid="3170501604483612114">"{count,plural, =1{إزالة اللغة المحددة؟}zero{إزالة اللغات المحددة؟}two{إزالة اللغتَين المحددتَين؟}few{إزالة اللغات المحددة؟}many{إزالة اللغات المحددة؟}other{إزالة اللغات المحددة؟}}"</string>
     <string name="dlg_remove_system_locales_title" msgid="7626516786258866543">"‏هل المطلوب تغيير لغة النظام إلى %s؟"</string>
     <string name="dlg_remove_locales_message" msgid="6636637008013310242">"ستتم إزالة <xliff:g id="LANGUAGE">%s</xliff:g> من لغاتك المفضّلة"</string>
     <string name="dlg_remove_locales_error_title" msgid="5875503658221562572">"تتعذر إزالة كل اللغات"</string>
@@ -328,7 +328,7 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"استخدام التنسيق التلقائي المحلي"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"استخدام تنسيق ٢٤ ساعة"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"الوقت"</string>
-    <string name="time_format_category_title" msgid="3122743852067365261">"تنسيق 12 ساعة / 24 ساعة"</string>
+    <string name="time_format_category_title" msgid="3122743852067365261">"تنسيق ١٢ ساعة / ٢٤ ساعة"</string>
     <string name="time_format_page_title" msgid="2599662358219245734">"تنسيق الوقت"</string>
     <string name="time_more_settings_category_title" msgid="8304427350974443921">"إعدادات إضافية"</string>
     <string name="time_format_subtitle" msgid="7291642514630113614">"ستستخدم التطبيقات تنسيق الوقت بناءً على هذا الإعداد"</string>
@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"‏جهازك متصل بشبكة WEP. إذا حظرت هذا النوع من الشبكات، فسيتم قطع اتصالك."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"الخيارات المتقدمة"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"القائمة المنسدلة \"الخيارات المتقدمة\""</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"توسيع"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"توسيع"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"تصغير"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"اسم الشبكة*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"‏يُرجى إدخال SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"الأمان"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"‏رقمَا التعريف الشخصي غير متطابقَين. يُرجى تأكيد رقم التعريف الشخصي الجديد لشريحة SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"رقم التعريف الشخصي غير صحيح. عدد المحاولات المتبقّية: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"‏يجب إدخال رقم التعريف الشخصي الحالي لشريحة SIM"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"‏فتحة شريحة SIM الأولى"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"‏فتحة شريحة SIM الثانية"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"هل تريد بيانات الجوّال من <xliff:g id="CARRIER">%1$s</xliff:g>؟"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"أنت تستخدم <xliff:g id="CARRIER2_0">%2$s</xliff:g> للاتصال ببيانات الجوّال. عند التبديل إلى <xliff:g id="CARRIER1">%1$s</xliff:g>، لن يتم استخدام <xliff:g id="CARRIER2_1">%2$s</xliff:g> مرة أخرى للاتصال ببيانات الجوّال."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"استخدام <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1560,7 +1559,7 @@
     <string name="storage_settings_title" msgid="486118156723194815">"إعدادات وحدة التخزين"</string>
     <string name="status_eid" msgid="3588471107671992684">"E​ID"</string>
     <string name="eid_multi_sim" msgid="3054468215477777096">"‏\"معرّف شريحة SIM المضمّنة\" (E​ID) <xliff:g id="EID_SLOT_ID">%1$d</xliff:g>"</string>
-    <string name="imei_multi_sim" msgid="6990044568468728075">"‏رقم IMEI: <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
+    <string name="imei_multi_sim" msgid="6990044568468728075">"‏رقم IMEI‏ <xliff:g id="IMEI_ID">%1$d</xliff:g>"</string>
     <string name="view_saved_network" msgid="1232387673095080910">"‏لعرض عنوان MAC، اختَر شبكة محفوظة"</string>
     <string name="status_imei" msgid="5719752369250485007">"‏معرّف IMEI"</string>
     <string name="status_imei_sv" msgid="6908985558726440951">"‏معرّف IMEI SV"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"يمكنك تخصيص الإجراءات التي يمكن تفعيلها من خلال أزرار ذراع التحكّم"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"الأزرار"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"الاتجاهات"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"‏الزر A"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"‏الزر B"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"‏الزر X"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"‏الزر Y"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"‏الزر L1"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"‏الزر R1"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"‏الزر L2"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"‏الزر R2"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"النقر على عصا التحكّم اليسرى"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"النقر على عصا التحكّم اليمنى"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"لوحة التحكم"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"عصا التحكّم اليسرى"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"عصا التحكّم اليمنى"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"إعادة الضبط على الإعدادات التلقائية"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"إعادة الضبط على الإعدادات التلقائية؟"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"ستتم إعادة ضبط جميع إعدادات وحدة التحكّم على الإعدادات التلقائية"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"إعادة الضبط"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"معيَّن حاليًا إلى \"<xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>\""</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"لوحة اللمس"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"لوحة اللمس والماوس"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"الماوس"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"الإشعارات"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"الإعدادات السريعة"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"ملاحظة"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"إظهار سطح المكتب أو إخفاؤه"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"يُرجى اختيار اختصار  <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"الزاوية السفلية اليمنى"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"الزاوية السفلية اليسرى"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"عناصر التحكّم في الميزات"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"تفعيل سجلّ حزمة البلوتوث"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"تغيير مستوى سجلّ حزمة البلوتوث (فعِّل البلوتوث بعد تغيير هذا الإعداد)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"تفعيل مقبس سجلّ التتبع لواجهة تحكّم المضيف في البلوتوث"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"إتاحة سجلّ التتبع لواجهة تحكّم المضيف في البلوتوث على مقبس محلي"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"فلترة سجلّ التتبع لواجهة تحكم مضيف البلوتوث"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"ضبط الفلاتر"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"عليك إيقاف البلوتوث ثم تفعيله لتصبح التغييرات سارية."</string>
@@ -3175,7 +3160,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"إشعارات الشبكة"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"‏تلقّي إشعارات عندما يتصل جهازك بشبكة غير مشفَّرة أو عندما ترصد شبكة أرقام التعريف الفريدة للجهاز أو شريحة SIM"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"جيل الشبكة"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"تعمل ميزة \"الحماية من شبكات الجيل الثاني\" على تجنُّب شبكات الجيل الثاني التي تتسم بمستوى أقل من الأمان، ما قد يحدّ من إمكانية الاتصال في بعض الأماكن. ويُسمح باستخدام شبكات الجيل الثاني دائمًا لمكالمات الطوارئ، ولكن قد لا يتم إجراء المكالمات في حال التجوال بالهاتف دوليًا."</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"تعمل ميزة \"الحماية من شبكات الجيل الثاني\" على تجنُّب شبكات الجيل الثاني كونها أقل أمانًا، ما قد يحدّ من إمكانية الاتصال في بعض الأماكن. ويُسمح باستخدام شبكات الجيل الثاني دائمًا لإجراء مكالمات الطوارئ، ولكن قد لا تنجح في حال التجوال بالهاتف دوليًا."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"الحماية من شبكات الجيل الثاني"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"التشفير"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"أجيال الشبكات"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"الجهاز"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"لوحة اللمس، لوحة المفاتيح، الشاشة، الصوت"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"السطوع، اللون، المظهر الداكن، شاشة القفل، نص"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"السطوع، اللون، المظهر الداكن، شاشة القفل، النص، اللمس"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"السطوع، اللون، المظهر الداكن، شاشة القفل، النص، الشاشة المتصلة"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"السطوع، اللون، المظهر الداكن، شاشة القفل، النص، اللمس، الشاشة المتصلة"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"اختيار لوحة المفاتيح، الأدوات"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"سرعة المؤشر، تخصيص الأزرار، الانتقال"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"مستوى الصوت، مكبّرات الصوت، الميكروفونات"</string>
@@ -4629,53 +4611,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"يسمح هذا الإعداد لهذا التطبيق بقراءة كل الملفات وتعديلها وحذفها من هذا الجهاز أو أي وحدات تخزين متصلة. في حال تفعيله، يمكن أن يصل التطبيق إلى الملفات بدون إعلامك بذلك."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"يمكن الوصول إلى كل الملفات"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"التشغيل الآلي للشاشة"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"سيتمكّن هذا التطبيق من الاطّلاع على محتوى شاشة التطبيقات الأخرى والتفاعل معه لمساعدتك في إكمال المهام، حتى عند عمل التطبيقات في الخلفية."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"بإمكان \"<xliff:g id="ID_1">%1$s</xliff:g>\" الاطّلاع على محتوى شاشة التطبيقات التي سمحت بها والتفاعل معه لمساعدتك في إكمال المهام."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"‏تظهر هنا التطبيقات التي اخترت لها الإذن &lt;strong&gt;السماح دومًا&lt;/strong&gt; في الأذونات. ولا يتم عرض التطبيقات التي سمحت بها &lt;strong&gt;هذه المرّة فقط&lt;/strong&gt; أو غير المسموح بها."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"في حال عدم السماح بميزة \"التفاعل الآلي مع الشاشة\"، قد يظل بإمكان \"<xliff:g id="ID_1">%1$s</xliff:g>\" التفاعل مع التطبيقات المرتبطة بـ \"<xliff:g id="ID_2">%1$s</xliff:g>\" بطرق أخرى."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"عند إزالة أحد التطبيقات من هذه الشاشة، قد يظل بإمكان \"<xliff:g id="ID_1">%1$s</xliff:g>\" التفاعل مع التطبيقات المرتبطة بـ \"<xliff:g id="ID_2">%1$s</xliff:g>\" بطرق أخرى."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"السماح للتطبيقات بمساعدتك في إكمال المهام من خلال التفاعل مع محتوى شاشة التطبيقات الأخرى"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"السماح للتطبيقات بالاطّلاع على محتوى الشاشة والتفاعل معه لمساعدتك في إكمال المهام"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"السؤال في كل مرّة"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"السماح دومًا"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"عدم السماح"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"التطبيقات المسموح بها"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"لم يسبق لك السماح بأي تطبيقات حتى الآن"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"يمكن فقط للتطبيق الذي ضبطته ليكون مساعدك الرقمي التلقائي استخدام ميزة \"التفاعل الآلي مع الشاشة\"."</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"تمت إزالة التطبيق"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"تمت إزالة كل التطبيقات"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"إعدادات المساعد"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{تم السماح بتطبيق واحد}zero{تم السماح بـ # تطبيق}two{تم السماح بتطبيقَين}few{تم السماح بـ # تطبيقات}many{تم السماح بـ # تطبيقًا}other{تم السماح بـ # تطبيق}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{تم السماح بتطبيق واحد}zero{تم السماح بـ # تطبيق}two{تم السماح بتطبيقَين}few{تم السماح بـ # تطبيقات}many{تم السماح بـ # تطبيقًا}other{تم السماح بـ # تطبيق}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"لم يتم السماح لأي تطبيقات"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"إزالة كل التطبيقات"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"المساعد الرقمي التلقائي"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"لا يمكن لـ \"<xliff:g id="ID_1">%1$s</xliff:g>\" استخدام ميزة \"التفاعل الآلي مع الشاشة\""</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"يمكن لمساعدك الرقمي التلقائي فقط استخدام ميزة \"التفاعل الآلي مع الشاشة\""</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"تغيير المساعد"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"يمكن لهذه التطبيقات الاطّلاع على محتوى شاشة التطبيقات التي سمحت بها والتفاعل معه لمساعدتك في إكمال المهام."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"ما مِن تطبيقات مثبَّتة يمكنها استخدام ميزة \"التفاعل الآلي مع الشاشة\""</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"يمكن لهذه التطبيقات الاطّلاع على محتوى شاشة \"<xliff:g id="ID_1">%1$s</xliff:g>\" والتفاعل معه لمساعدتك في إكمال المهام."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"عرض الإشعارات بملء الشاشة"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"السماح بعرض الإشعارات ملء الشاشة من هذا التطبيق"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"يتم السماح لهذا التطبيق بعرض إشعارات بملء الشاشة عندما يكون الجهاز مُقفَلاً. قد تستخدم التطبيقات هذا الإذن لإبراز المنبّهات أو المكالمات الواردة أو غيرها من الإشعارات العاجلة."</string>
@@ -5773,12 +5735,12 @@
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"رقم الهاتف مفقود."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"حسنًا"</string>
     <string name="enable_2g_title" msgid="5657132300321750181">"الحماية من شبكات الجيل الثاني"</string>
-    <string name="enable_2g_summary" msgid="6194875539424151678">"يؤدي هذا الخيار إلى تجنُّب شبكات الجيل الثاني التي تتسم بمستوى أمان أقل، ما قد يحدّ من إمكانية الاتصال في بعض الأماكن. ويُسمح باستخدام شبكات الجيل الثاني دائمًا لإجراء مكالمات الطوارئ، ولكن قد لا تنجح في حال التجوال بالهاتف دوليًا."</string>
+    <string name="enable_2g_summary" msgid="6194875539424151678">"يؤدي هذا الخيار إلى تجنُّب شبكات الجيل الثاني كونها أقل أمانًا، ما قد يحدّ من إمكانية الاتصال في بعض الأماكن. ويُسمح باستخدام شبكات الجيل الثاني دائمًا لإجراء مكالمات الطوارئ، ولكن قد لا تنجح في حال التجوال بالهاتف دوليًا."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"يطلب مشغّل شبكة الجوال <xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> توفّر شبكة الجيل الثاني"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"السماح بالشبكات المشفَّرة فقط"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"إجراء أكثر أمانًا، ولكن قد يؤدي إلى الحد من إمكانية الاتصال بشبكة الجوّال في بعض المواقع الجغرافية، ويُسمح بإجراء مكالمات الطوارئ دائمًا"</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"إيقاف ميزة \"الحماية من شبكات الجيل الثاني\"؟"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"تتسم شبكات الجيل الثاني بمستوى أمان أقل، وسيؤدي إيقاف هذا الخيار إلى تعريض مكالماتك ورسائلك وبياناتك لخطر الاختراق أو السرقة"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"تعدّ شبكات الجيل الثاني أقل أمانًا، لذلك سيؤدي إيقاف هذا الخيار إلى تعريض مكالماتك ورسائلك وبياناتك لخطر الاختراق أو السرقة"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"إيقاف"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"الحماية من شبكات الجيل الثاني"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"ميزة \"الحماية من شبكات الجيل الثاني\" مفعَّلة"</string>
@@ -5786,7 +5748,7 @@
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"الإعدادات"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"جميع الخدمات"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"إظهار الوصول إلى الحافظة"</string>
-    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"إظهار رسالة عندما يصل التطبيق إلى نص أو صور أو محتوى آخر تم نسخه"</string>
+    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"عرض رسالة عندما يصل التطبيق إلى نص أو صور أو محتوى آخر نسخته"</string>
     <string name="all_apps" msgid="3054120149509114789">"جميع التطبيقات"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"عدم السماح"</string>
     <string name="virtual_device_connected" msgid="6082030549955977794">"متّصل"</string>
@@ -5864,8 +5826,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"إلغاء تثبيت التطبيق"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{التطبيقات التي تم تثبيتها خلال آخر شهر}zero{التطبيقات التي تم تثبيتها خلال آخر # شهر}two{التطبيقات التي تم تثبيتها خلال آخر شهرَين}few{التطبيقات التي تم تثبيتها خلال آخر # شهور}many{التطبيقات التي تم تثبيتها خلال آخر # شهرًا}other{التطبيقات التي تم تثبيتها خلال آخر # شهر}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{التطبيقات التي تم تثبيتها قبل أكثر من شهر واحد}zero{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}two{التطبيقات التي تم تثبيتها قبل أكثر من شهرَين}few{التطبيقات التي تم تثبيتها قبل أكثر من # شهور}many{التطبيقات التي تم تثبيتها قبل أكثر من # شهرًا}other{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"الدعم الذكي"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"المساعدة الاستباقية"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"الاطّلاع على محتوى الشاشة"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"سياق الشاشة"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"يمكنك اختيار ما إذا كان بإمكان هذا التطبيق المساهمة بمعلومات لإنشاء اقتراحات"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"نسبة العرض إلى الارتفاع"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"جرِّب نسبة عرض إلى ارتفاع جديدة لعرض هذا التطبيق في حال لم يكن مصمّمًا ليلائم \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
@@ -5885,6 +5847,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"سيُعاد تشغيل التطبيق بعد تغيير نسبة العرض إلى الارتفاع. قد لا تظهر التغييرات غير المحفوظة، وقد لا تكون بعض التطبيقات متوافقة مع نِسب عرض إلى ارتفاع محدَّدة."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"تجربة الاستخدام"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"جهاز تحكّم افتراضي في الألعاب"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"يجب إعادة تشغيل اللعبة لتأكيد التغييرات"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"أداة استشعار بصمة الإصبع"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"الإشعارات المصحوبة بوميض"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"لمحة عن الإشعارات المصحوبة بوميض"</string>
