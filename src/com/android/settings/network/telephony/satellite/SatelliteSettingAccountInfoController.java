@@ -18,8 +18,6 @@ package com.android.settings.network.telephony.satellite;
 
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_HYBRID;
 import static android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL;
-import static android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT;
-import static android.telephony.CarrierConfigManager.KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL;
 import static android.telephony.CarrierConfigManager.KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_BANDWIDTH_CONSTRAINED;
 import static android.telephony.CarrierConfigManager.SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
@@ -29,7 +27,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.PersistableBundle;
 import android.telephony.TelephonyManager;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -45,6 +42,7 @@ import androidx.preference.PreferenceScreen;
 import com.android.internal.telephony.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.network.telephony.TelephonyBasePreferenceController;
+import com.android.settings.overlay.FeatureFactory;
 import com.android.settingslib.Utils;
 
 /** A controller to control content of "Your mobile plan". */
@@ -64,7 +62,6 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
     private boolean mIsDataAvailable;
     private boolean mIsSatelliteEligible;
     private int mDataMode = SATELLITE_DATA_SUPPORT_ONLY_RESTRICTED;
-    private PersistableBundle mConfigBundle = new PersistableBundle();
 
     public SatelliteSettingAccountInfoController(@NonNull Context context,
             @NonNull String preferenceKey) {
@@ -72,9 +69,8 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
     }
 
     /** Initialize the UI settings. */
-    public void init(int subId, @NonNull PersistableBundle configBundle) {
+    public void init(int subId) {
         mSubId = subId;
-        mConfigBundle = configBundle;
         mSimOperatorName = mContext.getSystemService(TelephonyManager.class).getSimOperatorName(
                 mSubId);
     }
@@ -102,14 +98,17 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        if (mConfigBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
+        SatelliteSettingsRepository repository =
+                FeatureFactory.getFeatureFactory().getTelephonyFeatureProvider()
+                        .getSatelliteSettingsRepository();
+        if (repository.getSatelliteNtnConnectType(mSubId)
                 == CARRIER_ROAMING_NTN_CONNECT_MANUAL
                 || (Flags.vzwAstSkyloFallback()
-                && mConfigBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
+                && repository.getSatelliteNtnConnectType(mSubId)
                 == CARRIER_ROAMING_NTN_CONNECT_HYBRID)) {
             return AVAILABLE_UNSEARCHABLE;
         }
-        return mConfigBundle.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL)
+        return repository.isSatelliteEntitlementSupported(mSubId)
                 ? AVAILABLE_UNSEARCHABLE
                 : CONDITIONALLY_UNAVAILABLE;
     }
@@ -159,8 +158,10 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
         /* Or, it will show the blocked icon with the guidance that satellite is not included
                in user's mobile plan */
         messagingPreference.setTitle(R.string.title_no_satellite_plan);
-        String url = mConfigBundle.getString(KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING, "");
-        if (!url.isEmpty()) {
+        String url = FeatureFactory.getFeatureFactory().getTelephonyFeatureProvider()
+                .getCarrierConfigRepository().getString(mSubId,
+                        KEY_SATELLITE_INFORMATION_REDIRECT_URL_STRING);
+        if (url != null && !url.isEmpty()) {
             /* And, the link url provides more information via web page will be shown */
             SpannableString spannable = new SpannableString(
                     mContext.getString(R.string.summary_add_satellite_setting));
@@ -185,15 +186,18 @@ public class SatelliteSettingAccountInfoController extends TelephonyBasePreferen
 
     @VisibleForTesting
     protected boolean isSatelliteEligible() {
-        if (mConfigBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
+        SatelliteSettingsRepository repository =
+                FeatureFactory.getFeatureFactory().getTelephonyFeatureProvider()
+                        .getSatelliteSettingsRepository();
+        if (repository.getSatelliteNtnConnectType(mSubId)
                 == CARRIER_ROAMING_NTN_CONNECT_MANUAL) {
             return mIsSmsAvailable;
         }
 
         if (Flags.vzwAstSkyloFallback()
-                && mConfigBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)
+                && repository.getSatelliteNtnConnectType(mSubId)
                 == CARRIER_ROAMING_NTN_CONNECT_HYBRID) {
-            if (mConfigBundle.getBoolean(KEY_SATELLITE_ENTITLEMENT_SUPPORTED_BOOL, false)) {
+            if (repository.isSatelliteEntitlementSupported(mSubId)) {
                 if (SatelliteCarrierSettingUtils.isSatelliteAccountEligible(mContext, mSubId)) {
                     return true;
                 } else {
