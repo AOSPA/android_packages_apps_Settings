@@ -27,7 +27,7 @@
     <string name="device_info_protected_single_press" msgid="3810785480060743677">"انقر لإظهار المعلومات."</string>
     <string name="show_dev_countdown" msgid="2936506773086395069">"{count,plural, =1{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا خطوة واحدة.}zero{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}two{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا خطوتَين.}few{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوات.}many{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}other{لا تفصلك الآن عن الوصول إلى مرحلة المطوّرين إلّا # خطوة.}}"</string>
     <string name="show_dev_on" msgid="2840850085134853754">"أهلاً بك بين المطوّرين"</string>
-    <string name="show_dev_already" msgid="7041756429707644630">"لقد أصبحت الآن مطور برامج."</string>
+    <string name="show_dev_already" msgid="7041756429707644630">"لا حاجة للضغط المتكرّر، فقد تم تفعيل وضع مطوّر البرامج"</string>
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"يُرجى تفعيل خيارات المطوري أولاً."</string>
     <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"يمكن للمستخدمين المشرفين وحدهم الوصول إلى إعدادات المطوّر."</string>
     <string name="header_category_system" msgid="1665516346845259058">"النظام"</string>
@@ -597,7 +597,7 @@
     <string name="lock_screen_pin_skip_title" msgid="6853866579893458111">"أتريد تخطي إعداد رقم التعريف الشخصي؟"</string>
     <string name="lock_screen_pin_skip_face_title" msgid="8810770395309512358">"هل تريد تخطي إعداد رقم تعريف شخصي ووجه؟"</string>
     <string name="lock_screen_pin_skip_fingerprint_title" msgid="371214283158750976">"هل تريد تخطي إعداد رقم تعريف شخصي وبصمة إصبع؟"</string>
-    <string name="lock_screen_pin_skip_biometrics_title" msgid="1082066572914073311">"هل تريد تخطي إعداد رقم تعريف شخصي ووجه وبصمة إصبع؟"</string>
+    <string name="lock_screen_pin_skip_biometrics_title" msgid="1082066572914073311">"تخطي إعداد رقم تعريف شخصي وبصمة وجه وإصبع؟"</string>
     <string name="lock_screen_password_skip_title" msgid="8891463713793185768">"أتريد تخطّي إعداد كلمة المرور؟"</string>
     <string name="lock_screen_password_skip_face_title" msgid="8166210519462164998">"هل تريد تخطي إعداد كلمة مرور ووجه؟"</string>
     <string name="lock_screen_password_skip_fingerprint_title" msgid="2506392546016772170">"هل تريد تخطي إعداد كلمة مرور وبصمة إصبع؟"</string>
@@ -2679,8 +2679,8 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"إعدادات التنقل"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"الاهتزاز واللمس"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"التحكّم في قوة الاهتزاز للاستخدامات المختلفة"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"مفعّل/ التحكم في مستويات الاهتزاز للمكالمات والإشعارات والمنبّهات"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"غير مفعّل: التحكّم في مستويات الاهتزاز للمكالمات والإشعارات والمنبّهات"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"الميزة مفعّلة / التحكّم في مستويات الاهتزاز للمكالمات والإشعارات والمنبّهات"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"الميزة غير مفعّلة / التحكّم في مستويات الاهتزاز للمكالمات والإشعارات والمنبّهات"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"تم إيقاف الخيار بسبب ضبط الجهاز على وضع كتم الصوت."</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"المكالمات"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"الإشعارات والمنبّهات"</string>
@@ -2932,7 +2932,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"تفاصيل السجل"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"استخدام البطارية"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"بيانات استخدام البطارية خلال آخر 24 ساعة"</string>
-    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"الاطلاع على الاستخدام منذ آخر شحن كامل"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"الاطلاع على بيانات الاستخدام منذ آخر شحن كامل"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
@@ -2978,7 +2978,7 @@
     <string name="battery_tip_incompatible_charging_content_description" msgid="355668467640367701">"مزيد من المعلومات عن الشحن بمحوِّل طاقة غير متوافق"</string>
     <string name="smart_battery_manager_title" msgid="3677620516657920364">"مدير البطارية"</string>
     <string name="smart_battery_title" msgid="9095903608520254254">"إدارة التطبيقات تلقائيًا"</string>
-    <string name="smart_battery_footer" msgid="8407121907452993645">"عندما يرصد \"مدير البطارية\" تطبيقات تستنزف شحن البطارية، سيتوفر لديك خيار بتقييد هذه التطبيقات، علمًا بأن التطبيقات المقيدة قد لا تعمل على نحو صحيح وقد تتأخر الإشعارات."</string>
+    <string name="smart_battery_footer" msgid="8407121907452993645">"عندما ترصد \"إدارة البطارية\" تطبيقات تستنزف شحن البطارية، سيتوفر لديك خيار بتقييد هذه التطبيقات، علمًا بأن التطبيقات المقيدة قد لا تعمل على نحو صحيح وقد تتأخر الإشعارات."</string>
     <string name="restricted_app_title" msgid="6585080822121007436">"التطبيقات المقيّدة"</string>
     <string name="restricted_app_summary" msgid="1022307922754893997">"{count,plural, =1{فرض قيود على استخدام تطبيق واحد للبطارية}zero{فرض قيود على استخدام # تطبيق للبطارية}two{فرض قيود على استخدام تطبيقََين للبطارية}few{فرض قيود على استخدام # تطبيقات للبطارية}many{فرض قيود على استخدام # تطبيقًا للبطارية}other{فرض قيود على استخدام # تطبيق للبطارية}}"</string>
     <string name="restricted_app_time_summary" msgid="3097721884155913252">"مُقيَّد <xliff:g id="TIME">%1$s</xliff:g>."</string>
@@ -4003,7 +4003,7 @@
     <string name="notification_pulse_title" msgid="8013178454646671529">"وميض الضوء"</string>
     <string name="lock_screen_notifications_title" msgid="2876323153692406203">"الخصوصية"</string>
     <string name="lockscreen_bypass_title" msgid="6519964196744088573">"تخطي شاشة القفل"</string>
-    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"بعد فتح القفل، انتقل مباشرةً إلى آخر شاشة مُستخدَمة. لن تظهر الإشعارات على شاشة القفل. لعرضها، يمكنك التمرير سريعًا من أعلى الشاشة لأسفلها."</string>
+    <string name="lockscreen_bypass_summary" msgid="4578154430436224161">"بعد فتح القفل، انتقل مباشرةً إلى آخر شاشة استخدمتها. لن تظهر الإشعارات على شاشة القفل. لعرضها، يمكنك التمرير سريعًا من أعلى الشاشة لأسفلها."</string>
     <string name="keywords_lockscreen_bypass" msgid="41035425468915498">"شاشة القفل، شاشة القفل، التخطي، التجاوز"</string>
     <string name="locked_work_profile_notification_title" msgid="279367321791301499">"عند قفل ملف العمل"</string>
     <string name="lock_screen_notif_minimalism" msgid="5556871004042668149">"تقليل عدد الإشعارات المعروضة على شاشة القفل"</string>
@@ -4073,11 +4073,11 @@
     <string name="notification_priority_title" msgid="5554834239080425229">"ذات أولوية"</string>
     <string name="notification_channel_summary_priority" msgid="7225362351439076913">"تظهر في أعلى قسم المحادثات في شكل فقاعة عائمة وتعرض صورة الملف الشخصي على شاشة القفل"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"لا يتوافق تطبيق \"<xliff:g id="APP_NAME">%1$s</xliff:g>\" مع معظم ميزات المحادثات. لا يمكنك ضبط محادثة كأولوية ولن تظهر المحادثات كفقاعات عائمة."</string>
-    <string name="notification_channel_summary_min" msgid="8823399508450176842">"في الظل المنسدل، يمكنك تصغير الإشعارات إلى سطر واحد"</string>
+    <string name="notification_channel_summary_min" msgid="8823399508450176842">"تصغير الإشعارات ليظهر سطر واحد من محتواها في لوحة الإشعارات المنسدلة"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"بدون صوت أو اهتزاز"</string>
     <string name="notification_conversation_summary_low" msgid="6352818857388412326">"بدون صوت أو اهتزاز وتظهر في أسفل قسم المحادثات"</string>
     <string name="notification_channel_summary_default" msgid="1168420867670390611">"قد يرنّ الجهاز أو يهتزّ حسب إعداداته"</string>
-    <string name="notification_channel_summary_high" msgid="3411637309360617621">"عند فتح قفل الجهاز، تظهر الإشعارات في صورة بانر أعلى الشاشة"</string>
+    <string name="notification_channel_summary_high" msgid="3411637309360617621">"تظهر الإشعارات في بانر بأعلى الشاشة عندما لا يكون الجهاز مقفلاً"</string>
     <string name="notification_switch_label" msgid="8029371325967501557">"جميع إشعارات <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"جميع إشعارات <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{حوالي إشعار واحد في اليوم}zero{حوالي # إشعار في اليوم}two{حوالي إشعارَين في اليوم}few{حوالي # إشعارات في اليوم}many{حوالي # إشعارًا في اليوم}other{حوالي # إشعار في اليوم}}"</string>
@@ -4459,7 +4459,7 @@
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"إزالة الأذونات وحذف الملفات المؤقتة وإيقاف الإشعارات وأرشفة التطبيق"</string>
     <string name="task_continuity_category" msgid="3736049711007817178">"استمرارية المهام"</string>
     <string name="continue_across_devices_switch" msgid="3276869201367526007">"مهام التطبيق"</string>
-    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"يمكنك المتابعة بسلاسة من حيث توقفت على أجهزة أخرى"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"المتابعة بسلاسة من حيث توقفت على أجهزة أخرى"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"جميع التطبيقات"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"التطبيقات المثبَّتة"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"التطبيقات الفورية"</string>
@@ -5112,7 +5112,7 @@
     <string name="game_storage_settings" msgid="2521393115726178837">"الألعاب"</string>
     <string name="app_info_storage_title" msgid="4076977173803093808">"المساحة المستخدمة"</string>
     <string name="webview_uninstalled_for_user" msgid="627352948986275488">"(تم إلغاء التثبيت للمستخدم <xliff:g id="USER">%s</xliff:g>)"</string>
-    <string name="webview_disabled_for_user" msgid="5809886172032644498">"(غير مغعّلة للمستخدم <xliff:g id="USER">%s</xliff:g>)"</string>
+    <string name="webview_disabled_for_user" msgid="5809886172032644498">"(غير مفعّلة للمستخدم <xliff:g id="USER">%s</xliff:g>)"</string>
     <string name="autofill_app" msgid="7595308061826307921">"خدمة الملء التلقائي"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"الخدمة التلقائية للملء التلقائي"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"كلمات المرور"</string>
@@ -5463,7 +5463,7 @@
     <string name="switch_sim_dialog_no_switch_text" msgid="7053939850026876088">"لاستخدام بيانات الجوّال وميزات المكالمات والرسائل القصيرة في وقتٍ لاحق، انتقِل إلى إعدادات الشبكة."</string>
     <string name="sim_card_label" msgid="6263064316075963775">"‏شريحة SIM"</string>
     <string name="erase_sim_dialog_title" msgid="4742077437653028326">"‏هل تريد محو بيانات شريحة eSIM؟"</string>
-    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"‏سيؤدي محو بيانات بطاقة eSIM هذه إلى إزالة خدمة \"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>\" من هذا الجهاز، ولن يتم إلغاء خدمة \"<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>\". لطلب شريحة eSIM جديدة، عليك التواصل مع مشغّل شبكة الجوّال."</string>
+    <string name="erase_sim_dialog_text" msgid="3982216582200709197">"‏سيؤدي محو بيانات شريحة eSIM هذه إلى إزالة خدمة \"<xliff:g id="CARRIER_NAME_A">%1$s</xliff:g>\" من هذا الجهاز، ولن يتم إلغاء خدمة \"<xliff:g id="CARRIER_NAME_B">%1$s</xliff:g>\". لطلب شريحة eSIM جديدة، عليك التواصل مع مشغّل شبكة الجوّال."</string>
     <string name="erase_sim_confirm_button" msgid="8309115684335320541">"محو البيانات"</string>
     <string name="erasing_sim" msgid="4237180547590463930">"‏جارٍ محو بيانات شريحة eSIM…"</string>
     <string name="erase_sim_fail_title" msgid="1445700500168357303">"‏يتعذّر محو بيانات شريحة eSIM"</string>
@@ -5827,8 +5827,7 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{التطبيقات التي تم تثبيتها خلال آخر شهر}zero{التطبيقات التي تم تثبيتها خلال آخر # شهر}two{التطبيقات التي تم تثبيتها خلال آخر شهرَين}few{التطبيقات التي تم تثبيتها خلال آخر # شهور}many{التطبيقات التي تم تثبيتها خلال آخر # شهرًا}other{التطبيقات التي تم تثبيتها خلال آخر # شهر}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{التطبيقات التي تم تثبيتها قبل أكثر من شهر واحد}zero{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}two{التطبيقات التي تم تثبيتها قبل أكثر من شهرَين}few{التطبيقات التي تم تثبيتها قبل أكثر من # شهور}many{التطبيقات التي تم تثبيتها قبل أكثر من # شهرًا}other{التطبيقات التي تم تثبيتها قبل أكثر من # شهر}}"</string>
     <string name="ai_assist_category" msgid="6115635022788919643">"الاطّلاع على محتوى الشاشة"</string>
-    <string name="personal_context_title" msgid="5665514384061696635">"سياق الشاشة"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"يمكنك اختيار ما إذا كان بإمكان هذا التطبيق المساهمة بمعلومات لإنشاء اقتراحات"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"السماح بالوصول إلى محتوى شاشة هذا التطبيق للحصول على مساعدة استباقية"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"نسبة العرض إلى الارتفاع"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"جرِّب نسبة عرض إلى ارتفاع جديدة لعرض هذا التطبيق في حال لم يكن مصمّمًا ليلائم \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\"."</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"جرِّب نسبة عرض إلى ارتفاع جديدة لعرض هذا التطبيق في حال لم يكن مصمّمًا ليلائم \"<xliff:g id="DEVICE_NAME">%1$s</xliff:g>\". قد لا تتوافق بعض التطبيقات مع نِسب عرض إلى ارتفاع محدَّدة."</string>
