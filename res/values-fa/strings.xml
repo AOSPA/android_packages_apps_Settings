@@ -1022,7 +1022,7 @@
     <string name="wifi_in_airplane_mode" msgid="1235412508135267981">"در حالت هواپیما"</string>
     <string name="wifi_notify_open_networks" msgid="2610323626246818961">"دریافت اعلان برای شبکه‌های عمومی"</string>
     <string name="wifi_notify_open_networks_summary" msgid="191058832201741013">"وقتی شبکه عمومی‌ای با کیفیت خوب در دسترس است، اطلاع داده شود"</string>
-    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"‏مجاز کردن شبکه‌های WEP"</string>
+    <string name="wifi_allow_wep_networks" msgid="8772342993235292010">"‏اجازه دادن به شبکه‌های WEP"</string>
     <string name="wifi_allow_wep_networks_summary" msgid="3033397893296724615">"‏WEP یک پروتکل امنیتی قدیمی است که امنیت کمتری دارد"</string>
     <string name="wifi_allow_wep_networks_summary_carrier_not_allow" msgid="6298103289728210026">"‏شرکت مخابراتی شما اجازه استفاده از شبکه‌های WEP را نمی‌دهد زیرا امنیت کمتری دارند"</string>
     <string name="wifi_wakeup" msgid="3834327315861781611">"‏روشن شدن خودکار Wi-Fi"</string>
@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"‏به شبکه WEP متصل هستید. اگر مجاز بودن این شبکه‌ها را متوقف کنید، اتصالتان قطع خواهد شد."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"گزینه‌های پیشرفته"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"گزینه‌های پیشرفتهٔ فهرست کرکره‌ای"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"بزرگ کردن"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"گسترده کردن"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"جمع کردن"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"نام شبکه*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"‏SSID را وارد کنید"</string>
     <string name="wifi_security" msgid="9095934643631406913">"امنیت"</string>
@@ -1128,7 +1129,7 @@
     <string name="wifi_dpp_wifi_password" msgid="4992986319806934381">"‏گذرواژه Wi-Fi: ‏<xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_dpp_hotspot_password" msgid="688464342650820420">"گذرواژه نقطه اتصال: <xliff:g id="PASSWORD">%1$s</xliff:g>"</string>
     <string name="wifi_auto_connect_title" msgid="1890342051674657892">"اتصال خودکار"</string>
-    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"مجاز کردن اتصال به این شبکه (وقتی در محدوده باشد)"</string>
+    <string name="wifi_auto_connect_summary" msgid="1707702705345670370">"اجازه اتصال دادن به این شبکه (وقتی در محدوده باشد)"</string>
     <string name="wifi_dpp_add_device" msgid="8695656122114721335">"افزودن دستگاه"</string>
     <string name="wifi_dpp_connect_network_using_qr_code" msgid="6975258007798254937">"برای افزودن دستگاه به این شبکه، از رمزینه پاسخ‌سریع استفاده کنید"</string>
     <string name="wifi_dpp_qr_code_is_not_valid_format" msgid="5190689503019328279">"رمزینه پاسخ‌سریع، قالب معتبری نیست"</string>
@@ -1501,7 +1502,7 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"تأیید"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"لغو"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"محافظت از سیم‌کارت"</string>
-    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"حالت محافظت از قفل سیم‌کارت"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"حالت حفاظ قفل سیم‌کارت"</string>
     <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"قفل کردن سیم‌کارت"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"‏تحت مدیریت Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"‏تحت‌مدیریت Android نیست"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"کدهای پین با هم مطابقت ندارند. پین سیم‌کارت جدید را تأیید کنید."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"پین اشتباه است. <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> تلاش باقی مانده است"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"پین کد فعلی سیم‌کارت را وارد کنید"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"جای سیم‌کارت اول"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"جای سیم‌کارت دوم"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"استفاده از <xliff:g id="CARRIER">%1$s</xliff:g> برای داده همراه؟"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"برای داده تلفن همراه، از <xliff:g id="CARRIER2_0">%2$s</xliff:g> استفاده می‌کنید. اگر به <xliff:g id="CARRIER1">%1$s</xliff:g> جابه‌جا شوید، دیگر <xliff:g id="CARRIER2_1">%2$s</xliff:g> برای داده تلفن همراه استفاده نمی‌شود."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"استفاده از <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"کنش‌های راه‌اندازی‌شده با دکمه‌های کنترل را سفارشی‌سازی کنید"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"دکمه‌ها"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"جهت‌ها"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"‏دکمه A"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"‏دکمه B"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"‏دکمه X"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"‏دکمه Y"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"‏دکمه L1"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"‏دکمه R1"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"‏دکمه L2"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"‏دکمه R2"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"کلیک کردن دسته کنترل سمت چپ"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"کلیک کردن دسته کنترل سمت راست"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"پد کنترل"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"دسته کنترل سمت چپ"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"دسته کنترل سمت راست"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"بازنشانی به پیش‌فرض"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"به حالت پیش‌فرض بازنشانی شوند؟"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"همه تنظیمات کنترل شما به حالت پیش‌فرض بازنشانی خواهند شد"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"بازنشانی"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"درحال‌حاضر به <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g> تخصیص شده است"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"صفحه لمسی"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"صفحه لمسی و موشواره"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"موشواره"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"اعلان‌ها"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"تنظیمات فوری"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"یادداشت"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"نگاه سریع/لغو نگاه سریع به میز کار"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"میان‌بری برای <xliff:g id="CORNER">%1$s</xliff:g> انتخاب کنید"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"گوشه پایین چپ"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"گوشه پایین راست"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"پرچم‌های ویژه"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"فعال کردن گزارش بلوتوث"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"تغییر سطح گزارش‌گیری پشته بلوتوث (بعداز تغییر این تنظیم، وضعیت بلوتوث را تغییر دهید)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"‏فعال کردن Bluetooth HCI snoop log socket"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"‏گزارش Bluetooth HCI snoop log را در یک socket محلی دردسترس قرار دهید"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"‏فیلتر کردن گزارش تجسس Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"تنظیم فیلترها"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"برای اعمال تغییرات، بلوتوث را غیرفعال و فعال کنید"</string>
@@ -2621,7 +2606,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"گسترش‌یافته"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"زمینه تیره گسترش‌یافته"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"به‌صورت خودکار زمینه تیره را روی اکثر برنامه‌هایی که از آن پشتیبانی نمی‌کنند اعمال می‌کند و به بهبود دسترس‌پذیری کمک می‌کند."</string>
-    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"اگر هنگام استفاده از گزینه ازهم بازشده با مشکلی مواجه شدید، از گزینه استاندارد استفاده کنید."</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"اگر هنگام استفاده از گزینه «گسترش‌یافته» با مشکلی مواجه شدید، از گزینه «استاندارد» استفاده کنید."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"معکوس اجباری، وارونگی رنگ، کنتراست"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"زمینه تیره گسترش‌یافته"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"تنظیمات «زمینه تیره گسترش‌یافته»"</string>
@@ -2766,7 +2751,7 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"کنترل‌های دستگاه کمک‌شنوایی"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"صداها"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"اعلان‌ها"</string>
-    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"صداها ازطریق دستگاه‌های کمک‌شنوایی پخش خواهد شد"</string>
+    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"صداها ازطریق سمعک‌ها پخش خواهد شد"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"صداها ازطریق بلندگوی دستگاه پخش خواهد شد"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"صداها ازطریق سمعک‌ها و بلندگوی دستگاه پخش خواهد شد"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"میان‌بر سمعک"</string>
@@ -3177,8 +3162,8 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"اعلان‌های شبکه"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"وقتی دستگاهتان به شبکه رمزگذاری‌نشده متصل شود، یا وقتی شبکه‌ای شناسه یکتای دستگاه یا سیم‌کارتتان را ضبط کند، اعلان دریافت می‌کنید"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"نسل شبکه"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"«محافظت دربرابر شبکه نسل دوم» از اتصال به شبکه‌های نسل دوم که امنیت کمتری دارند جلوگیری می‌کند. این ویژگی ممکن است اتصال‌پذیری را در برخی جا‌ها محدود کند. شبکه نسل دوم همیشه برای تماس‌های اضطراری مجاز است، اما اگر از فراگردی بین‌المللی استفاده می‌کنید، ممکن است تماس‌ها وصل نشود."</string>
-    <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"محافظت دربرابر شبکه نسل دوم"</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"«حفاظ شبکه نسل دوم» از اتصال به شبکه‌های نسل دوم که امنیت کمتری دارند جلوگیری می‌کند. این ویژگی ممکن است اتصال‌پذیری را در برخی جا‌ها محدود کند. شبکه نسل دوم همیشه برای تماس‌های اضطراری مجاز است، اما اگر از فراگردی بین‌المللی استفاده می‌کنید، ممکن است تماس‌ها وصل نشود."</string>
+    <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"حفاظ شبکه نسل دوم"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"رمزگذاری"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"شبکه‌های تولیدشده"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"می‌توانید هریک از سیم‌کارت‌های نصب‌شده را به‌گونه‌ای پیکربندی کنید که فقط به شبکه‌های پشتیبانی‌کننده از نسل سوم، چهارم، و پنجم متصل شوند. سیم‌کارت به شبکه‌های قدیمی‌تر و ناامن نسل دوم متصل نخواهد شد. درصورتی‌که فقط شبکه نسل دوم دردسترس باشد، این تنظیم ممکن است اتصال‌پذیری را محدود کند. در شرایط اضطراری، ممکن است از شبکه نسل دوم استفاده شود."</string>
@@ -3653,12 +3638,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"دستگاه"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"صفحه لمسی، صفحه‌کلید، نمایشگر، صدا"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"روشنایی، رنگ، زمینه تیره، صفحه قفل، نوشتار"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"روشنایی، رنگ، زمینه تیره، صفحه قفل، نوشتار، لمس"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"روشنایی، رنگ، زمینه تیره، صفحه قفل، نوشتار، نمایشگر متصل"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"روشنایی، رنگ، زمینه تیره، صفحه قفل، نوشتار، لمس، نمایشگر متصل"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"انتخاب صفحه‌کلید، ابزارها"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"سرعت مکان‌نما، سفارشی‌سازی دکمه، پیمایش"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"میزان صدا، بلندگوها، میکروفون‌ها"</string>
@@ -4472,7 +4454,7 @@
     <string name="runtime_permissions_summary_no_permissions_requested" msgid="7174876170116073356">"اجازه‌ای درخواست نشده"</string>
     <string name="runtime_permissions_summary_control_app_access" msgid="3744591396348990500">"کنترل دسترسی برنامه به داده‌های شما"</string>
     <string name="permissions_usage_title" msgid="2942741460679049132">"داشبورد حریم خصوصی"</string>
-    <string name="permissions_usage_summary" msgid="6784310472062516454">"نمایش برنامه‌هایی که اخیراً از اجازه‌ها استفاده کرده‌اند"</string>
+    <string name="permissions_usage_summary" msgid="6784310472062516454">"نشان دادن برنامه‌هایی که اخیراً از اجازه‌ها استفاده کرده‌اند"</string>
     <string name="unused_apps" msgid="4566272194756830656">"برنامه‌های استفاده‌نشده"</string>
     <string name="unused_apps_summary" msgid="4236371818881973021">"{count,plural, =1{‏‎# برنامه استفاده‌نشده}one{‏‎# برنامه استفاده‌نشده}other{‏‎# برنامه استفاده‌نشده}}"</string>
     <string name="unused_apps_category" msgid="8954930958175500851">"تنظیمات برنامه‌های استفاده‌نشده"</string>
@@ -4634,58 +4616,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"به این برنامه اجازه می‌دهد همه فایل‌های موجود در این دستگاه یا فضاهای ذخیره‌سازی متصل‌شده به آن را بخواند، تغییر دهد، و حذف کند. اگر این مجوز به برنامه داده شود، ممکن است بدون اطلاع صریح شما به فایل‌ها دسترسی یابد."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"می‌توانند به همه فایل‌ها دسترسی داشته باشند"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"خودکارسازی صفحه"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"این برنامه می‌تواند محتوای صفحه برنامه‌های دیگر را ببیند و با آن‌ها تعامل داشته باشد تا به شما در انجام تکالیف کمک کند، حتی زمانی که برنامه‌ها در پس‌زمینه هستند."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"‫<xliff:g id="ID_1">%1$s</xliff:g> می‌تواند محتوای غربال کردنصفحه برنامه‌هایی را که اجازه داده‌اید به شما در انجام تکالیف کمک کنند ببیند و با آن‌ها تعامل داشته باشد."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"‏برنامه‌هایی که برای آن‌ها در اجازه‌ها &lt;strong&gt;همیشه اجازه دادن&lt;/strong&gt; را انتخاب کرده‌اید در اینجا نشان داده می‌شوند. برنامه‌هایی که اجازه &lt;strong&gt;فقط این بار&lt;/strong&gt; را به آن‌ها داده‌اید یا اجازه نداده‌اید نشان داده نمی‌شوند."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"اگر به خودکارسازی صفحه‌نمایش اجازه نداده‌اید، <xliff:g id="ID_1">%1$s</xliff:g> ممکن است همچنان بتواند از راه‌های دیگر با برنامه‌هایی که به <xliff:g id="ID_2">%1$s</xliff:g> متصل هستند تعامل داشته باشد"</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"وقتی برنامه‌ای را در این صفحه برمی‌دارید، <xliff:g id="ID_1">%1$s</xliff:g> ممکن است همچنان بتواند از راه‌های دیگر با برنامه‌هایی که به <xliff:g id="ID_2">%1$s</xliff:g> متصل هستند تعامل داشته باشد."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"به برنامه‌ها اجازه دهید ازطریق تعامل با محتوای صفحه برنامه‌های دیگر به شما در انجام تکالیف کمک کنند"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"به برنامه‌ها اجازه دهید محتوای صفحه را ببینند و با آن تعامل داشته باشند تا به شما در انجام تکالیف کمک کنند"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"هربار پرسیده شود"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"همیشه مجاز"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"اجازه ندادن"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"برنامه‌هایی که به آن‌ها اجازه داده‌اید"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"هنوز به هیچ برنامه‌ای اجازه نداده‌اید"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"فقط برنامه‌ای که به‌عنوان دستیار دیجیتال پیش‌فرض تنظیم کرده‌اید می‌تواند از خودکارسازی صفحه‌نمایش استفاده کند."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"برنامه برداشته شد"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"همه برنامه‌ها برداشته شدند"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"تنظیمات دستیار"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{‫۱ برنامه مجاز شد}one{‫# برنامه مجاز شد}other{‫# برنامه مجاز شد}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{۱ به برنامه اجازه داده شد}one{# به برنامه‌ها اجازه داده شد}other{# به برنامه‌ها اجازه داده شد}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"برنامه‌ای مجاز نشده"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"برداشتن همه برنامه‌ها"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"دستیار دیجیتال پیش‌فرض"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"‫<xliff:g id="ID_1">%1$s</xliff:g> نمی‌تواند از خودکارسازی صفحه‌نمایش استفاده کند"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"فقط دستیار دیجیتال پیش‌فرض شما می‌تواند از خودکارسازی صفحه‌نمایش استفاده کند"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"تغییر دستیار"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"این برنامه‌ها می‌توانند محتوای صفحه‌نمایش برنامه‌هایی را که اجازه داده‌اید ببینند و با آن‌ها تعامل داشته باشند تا به شما در انجام تکالیف کمک کنند."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"هیچ برنامه‌ای که بتواند از خودکارسازی صفحه‌نمایش استفاده کند نصب نکرده‌اید"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"این برنامه‌ها می‌توانند محتوای صفحه <xliff:g id="ID_1">%1$s</xliff:g> را ببینند و با آن تعامل داشته باشند تا به شما در انجام تکالیف کمک کنند."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"اعلان‌های تمام‌صفحه"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"مجاز کردن اعلان‌های تمام‌صفحه از این برنامه"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"به این برنامه اجازه می‌دهد وقتی دستگاه قفل است، اعلان‌ها را روی کل صفحه نشان دهد. برنامه‌ها ممکن است از این قابلیت برای برجسته کردن هشدارها، تماس ورودی، یا دیگر اعلان‌های فوری استفاده کنند."</string>
@@ -5194,7 +5151,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"تغییر دادن"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"فقط می‌توانید ۵ سرویس روشن داشته باشید"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"حداقل ۱ سرویس را خاموش کنید تا بتوانید سرویس دیگری اضافه کنید"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"سرویس موردنظر را برای ذخیره‌سازی داده انتخاب کنید تا از آن برای پیشنهادهای تکمیل خودکار و ورود به سیستم استفاده شود. اگر می‌خواهید سرویس‌های اضافی هم پیشنهاد ارائه دهند، آن‌ها را نیز روشن کنید."</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"سرویس ترجیحی‌تان را برای ذخیره‌سازی داده انتخاب کنید تا از آن برای پیشنهادهای تکمیل خودکار و ورود به سیستم استفاده شود. اگر می‌خواهید سرویس‌های اضافی هم پیشنهاد ارائه دهند، آن‌ها را نیز روشن کنید."</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"‏%1$s از محتوای روی صفحه شما استفاده می‌کند تا تشخیص دهد چه چیزهایی را می‌توان به‌طور خودکار تکمیل کرد."</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"محدودیت گذرواژه‌ها، گذرکلیدها، و سرویس‌های داده"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"می‌توانید حداکثر تا ۵ گذرواژه، گذرکلید، و سرویس داده را به‌صورت هم‌زمان فعال داشته باشید. برای افزودن مورد جدید، یکی از سرویس‌ها را خاموش کنید."</string>
@@ -5777,21 +5734,21 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"وارد کردن شماره تلفن"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"شماره تلفن وارد نشده است."</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"تأیید"</string>
-    <string name="enable_2g_title" msgid="5657132300321750181">"محافظت دربرابر شبکه نسل دوم"</string>
+    <string name="enable_2g_title" msgid="5657132300321750181">"حفاظ شبکه نسل دوم"</string>
     <string name="enable_2g_summary" msgid="6194875539424151678">"از اتصال به شبکه‌های نسل دوم که امنیت کمتری دارند جلوگیری می‌کند. این ویژگی ممکن است اتصال‌پذیری را در برخی جا‌ها محدود کند. شبکه نسل دوم همیشه برای تماس‌های اضطراری مجاز است، اما اگر از فراگردی بین‌المللی استفاده می‌کنید، ممکن است تماس‌ها وصل نشود."</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"‏<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> برای دردسترس بودن به 2G نیاز دارد"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"فقط شبکه‌های رمزگذاری‌شده مجاز باشد"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"این کار ایمن‌تر است اما ممکن است اتصال شبکه تلفن همراه شما را در برخی مکان‌ها محدود کند. تماس اضطراری همیشه مجاز است."</string>
-    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"«محافظت دربرابر شبکه نسل دوم» خاموش شود؟"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"شبکه‌های نسل دوم ناامن‌ترند؛ خاموش کردن این، تماس، پیام و داده‌هایتان را دربرابر شنود یا سرقت آسیب‌پذیر می‌کند."</string>
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"«حفاظ شبکه نسل دوم» خاموش شود؟"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"شبکه‌های نسل دوم امنیت کمتری دارند؛ خاموش کردن آن، تماس، پیام، و داده‌هایتان را دربرابر شنود یا سرقت آسیب‌پذیر می‌کند"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"خاموش کردن"</string>
-    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"محافظت دربرابر شبکه نسل دوم"</string>
-    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"محافظت دربرابر شبکه نسل دوم روشن است"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"می‌توانید این را در «تنظیمات» خاموش کنید، اما نسل دو ناامن است و ممکن است داده‌هایتان را به خطر بیندازد."</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"حفاظ شبکه نسل دوم"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"«حفاظ شبکه نسل دوم» روشن است"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"می‌توانید آن را در «تنظیمات» خاموش کنید، اما امنیت نسل دو کمتر است و ممکن است داده‌هایتان را درمعرض خطر قرار دهد."</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"تنظیمات"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"همه سرویس‌ها"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"نشان دادن دسترسی به بریده‌دان"</string>
-    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"وقتی برنامه‌ها به نوشتار، تصویر، یا محتوای دیگری که کپی کرده‌اید دسترسی پیدا می‌کنند، پیامی نشان داده می‌شود"</string>
+    <string name="show_clip_access_notification_summary" msgid="474090757777203207">"وقتی که برنامه‌ها به نوشتار، تصویر، یا محتوای دیگری که کپی کرده‌اید دسترسی پیدا می‌کنند، پیامی نشان داده می‌شود"</string>
     <string name="all_apps" msgid="3054120149509114789">"همه برنامه‌ها"</string>
     <string name="request_manage_bluetooth_permission_dont_allow" msgid="8798061333407581300">"اجازه ندادن"</string>
     <string name="virtual_device_connected" msgid="6082030549955977794">"متصل‌شده"</string>
@@ -5869,8 +5826,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"حذف نصب برنامه"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{برنامه‌هایی که طی # ماه گذشته نصب شده است}one{برنامه‌هایی که طی # ماه گذشته نصب شده است}other{برنامه‌هایی که طی # ماه گذشته نصب شده است}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{برنامه‌هایی که بیش‌از # ماه از نصب آن‌ها می‌گذرد}one{برنامه‌هایی که بیش‌از # ماه از نصب آن‌ها می‌گذرد}other{برنامه‌هایی که بیش‌از # ماه از نصب آن‌ها می‌گذرد}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"کمک هوشواره‌ای"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"دستیاری پیش‌کنشی"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"دست یافتن به صفحه‌نمایش"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"بافت صفحه"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"انتخاب کنید این برنامه بتواند برای تولید پیشنهادها اطلاعات ارائه دهد یا نه"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"نسبت ابعادی"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"اگر این برنامه متناسب با <xliff:g id="DEVICE_NAME">%1$s</xliff:g> شما طراحی نشده است، نسبت ابعادی جدیدی را برای مشاهده برنامه امتحان کنید"</string>
@@ -5890,6 +5847,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"وقتی نسبت ابعادی را تغییر می‌دهید، برنامه بازراه‌اندازی می‌شود. ممکن است تغییرات ذخیره‌نشده را ازدست بدهید. ممکن است برخی‌از برنامه‌ها برای نسبت‌های ابعادی مشخصی بهینه‌سازی نشده باشند."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"تجربه"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"پد بازی مجازی"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"برای تایید تغییرات، بازی را بازراه‌اندازی کنید"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"حسگر اثر انگشت"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"اعلان‌های چشمک‌زن"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"درباره اعلان‌های چشمک‌زن"</string>

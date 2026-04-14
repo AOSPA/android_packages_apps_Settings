@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Jste připojeni k síti WEP. Pokud tyto sítě přestanete povolovat, budete odpojeni."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Rozšířené možnosti"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Rozbalovací seznam Pokročilé možnosti"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"rozbalit"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"rozbalit"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"sbalit"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Název sítě*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Zadejte SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Zabezpečení"</string>
@@ -1501,7 +1502,7 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Zrušit"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Chránit SIM kartu"</string>
-    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Režim ochrany zámkem SIM karty"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Ochrana zámkem SIM karty"</string>
     <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Zamykat SIM kartu"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Spravováno systémem Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Nespravováno systémem Android"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Kódy PIN se neshodují. Potvrďte nový PIN SIM karty."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Chybný PIN. Zbývající počet pokusů: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Zadejte aktuální PIN kód SIM karty"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Slot pro první SIM kartu"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Slot pro druhou SIM kartu"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Používat pro mobilní data <xliff:g id="CARRIER">%1$s</xliff:g>?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Pro mobilní data používáte <xliff:g id="CARRIER2_0">%2$s</xliff:g>. Pokud přepnete na operátora <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> už se používat nebude."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Použít <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Přizpůsobte si akce spouštěné tlačítky ovladače"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Tlačítka"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Směry"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"Tlačítko A"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"Tlačítko B"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"Tlačítko X"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Tlačítko Y"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"Tlačítko L1"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"Tlačítko R1"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"Tlačítko L2"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"Tlačítko R2"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Stisknutí levé páčky"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Stisknutí pravé páčky"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Levá páčka"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Pravá páčka"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Resetovat do výchozího nastavení"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Resetovat do výchozího nastavení?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Všechna nastavení ovladače se resetují na výchozí"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Resetovat"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"aktuálně přiřazeno k: <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad a myš"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Myš"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Oznámení"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Rychlé nastavení"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Poznámka"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Zobrazit/skrýt náhled plochy"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Vyberte zkratku pro <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"levý dolní roh"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"pravý dolní roh"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Příznaky experimentálních funkcí"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Povolit protokol sady Bluetooth"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Změnit úroveň protokolování sady Bluetooth (po změně tohoto nastavení se Bluetooth přepne)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Povolit socket protokolu Bluetooth HCI"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Zpřístupnit protokol Bluetooth HCI na místním socketu"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtrování protokolu Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Nastavené filtry"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Změny se projeví po deaktivaci a opětovné aktivaci Bluetooth"</string>
@@ -2619,7 +2604,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Rozšířený"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Rozšířený tmavý motiv"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Automaticky použije tmavý motiv u většiny aplikací, které ho nepodporují, což pomáhá zlepšit přístupnost."</string>
-    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Pokud máte s rozšířenou možností problémy, použijte standardní možnost."</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Pokud máte problémy s možností Rozšířený, použijte možnost Standardní."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"vynucené převrácení, převrácení barev, kontrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Rozšířený tmavý motiv"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Nastavení rozšířeného tmavého motivu"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Zařízení"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Touchpad, klávesnice, displej, zvuk"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Jas, barva, tmavý motiv, obrazovka uzamčení, text"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Jas, barva, tmavý motiv, obrazovka uzamčení, text, dotyk"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Jas, barva, tmavý motiv, obrazovka uzamčení, text, připojený displej"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Jas, barva, tmavý motiv, obrazovka uzamčení, text, dotyk, připojený displej"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Výběr klávesnice, nástroje"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Rychlost kurzoru, přizpůsobení tlačítek, posouvání"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Hlasitost, reproduktory, mikrofony"</string>
@@ -4099,7 +4081,7 @@
     <string name="notification_channel_summary_low_lock" msgid="4009247523075328235">"Zobrazí oznámení s nižší prioritou. Vždy tichý režim."</string>
     <string name="notification_channel_summary_low_status_lock" msgid="3668028634045057230">"Zobrazí oznámení s nižší prioritou. Vždy tichý režim."</string>
     <string name="notification_channel_summary_high" msgid="3411637309360617621">"Když je zařízení odemčené, zobrazovat oznámení jako banner v horní části obrazovky"</string>
-    <string name="notification_switch_label" msgid="8029371325967501557">"<xliff:g id="APP_NAME">%1$s</xliff:g>: všechna oznámení"</string>
+    <string name="notification_switch_label" msgid="8029371325967501557">"Všechna oznámení aplikace <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notification_app_switch_label" msgid="4422902423925084193">"Všechna oznámení aplikace <xliff:g id="APP_NAME">%1$s</xliff:g>"</string>
     <string name="notifications_sent_daily" msgid="10274479224185437">"{count,plural, =1{Přibližně # oznámení za den}few{Přibližně # oznámení za den}many{Přibližně # oznámení za den}other{Přibližně # oznámení za den}}"</string>
     <string name="notifications_sent_weekly" msgid="7895656213187555346">"{count,plural, =1{Přibližně # oznámení za týden}few{Přibližně # oznámení za týden}many{Přibližně # oznámení za týden}other{Přibližně # oznámení za týden}}"</string>
@@ -4632,53 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Když tuto možnost povolíte, aplikace bude moct načítat, upravovat a mazat soubory v tomto zařízení a v připojených úložištích. Aplikace bude mít přístup k souborům i bez vašeho vědomí."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mají přístup ke všem souborům"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatizace obrazovky"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Tato aplikace bude moct zobrazit obsah obrazovky ostatních aplikací a interagováním s ním vám pomáhat provádět úkoly i v případě, že tyto aplikace budou na pozadí."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"Aplikace <xliff:g id="ID_1">%1$s</xliff:g> může číst obsah obrazovek aplikací, u kterých jste to povolil, a interagováním s ním vám pomáhat provádět úkoly."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Tady se zobrazují jen aplikace, u kterých byla v oprávněních vybrána možnost &lt;strong&gt;Vždy povolit&lt;/strong&gt;. Aplikace, u kterých byla vybrána možnost &lt;strong&gt;Pouze tentokrát&lt;/strong&gt; nebo které nebyly povoleny, se nezobrazují."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Pokud automatizaci obrazovky nepovolíte, aplikace <xliff:g id="ID_1">%1$s</xliff:g> může přesto s aplikacemi připojenými k aplikaci <xliff:g id="ID_2">%1$s</xliff:g> interagovat jinými způsoby"</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Když na této obrazovce aplikaci odeberete, může aplikace <xliff:g id="ID_1">%1$s</xliff:g> přesto s aplikacemi připojenými k aplikaci <xliff:g id="ID_2">%1$s</xliff:g> interagovat jinými způsoby."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Povolit aplikacím pomáhat vám s prováděním úkolů interagováním s obsahem obrazovek jiných aplikací"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Povolit aplikacím číst obsah obrazovky a interagovat s ním, aby vám mohly pomáhat s prováděním úkolů"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Pokaždé se zeptat"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Vždy povolit"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Nepovolovat"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Aplikace, které jste povolili"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Zatím jste žádné aplikace nepovolili"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Automatizaci obrazovky může používat jen aplikace, kterou jste nastavili jako výchozího digitálního asistenta."</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Aplikace byla odstraněna"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Všechny aplikace byly odstraněny"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Nastavení Asistenta"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 povolená aplikace}few{# povolené aplikace}many{# povolené aplikace}other{# povolených aplikací}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{Je povolena 1 aplikace}few{Jsou povoleny # aplikace}many{Je povoleno # aplikace}other{Je povoleno # aplikací}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Přístup není povolen žádným aplikacím"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Odstranit všechny aplikace"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Výchozí digitální asistent"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> nemůže používat automatizaci obrazovky"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Automatizaci obrazovky může používat jen váš výchozí digitální asistent"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Změnit asistenta"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Tyto aplikace můžou číst obsah obrazovek aplikací, u kterých jste to povolili, a interagováním s ním vám pomáhat provádět úkoly."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"Nemáte nainstalované žádné aplikace, které můžou používat automatizaci obrazovky"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Tyto aplikace můžou číst obsah obrazovky aplikace <xliff:g id="ID_1">%1$s</xliff:g> a interagováním s ním vám pomáhat provádět úkoly."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Oznámení na celou obrazovku"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Povolit oznámení z této aplikace na celou obrazovku"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Aplikaci můžete povolit zobrazovat oznámení přes celou obrazovku, když bude zařízení zamknuté. Aplikace tak mohou zvýraznit budíky, příchozí hovory a další důležitá oznámení."</string>
@@ -5864,8 +5826,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Odinstalovat aplikaci"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplikace nainstalované během posledního # měsíce}few{Aplikace nainstalované během posledních # měsíců}many{Aplikace nainstalované během posledního # měsíce}other{Aplikace nainstalované během posledních # měsíců}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplikace nainstalované před více než # měsícem}few{Aplikace nainstalované před více než # měsíci}many{Aplikace nainstalované před více než # měsíce}other{Aplikace nainstalované před více než # měsíci}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"Pomoc AI"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Proaktivní asistence"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Přístup k obrazovce"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"Kontext obrazovky"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Vyberte, zda tato aplikace může přispívat informacemi k vytváření návrhů"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Poměr stran"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Vyzkoušejte nový poměr stran, ve kterém se bude aplikace zobrazovat, pokud není určena pro rozměr obrazovky vašeho zařízení <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
@@ -5885,6 +5847,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Když změníte poměr stran, aplikace se restartuje. Můžete přijít o neuložené změny. Některé aplikace nemusí být optimalizované pro určité poměry stran."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Prostředí"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtuální gamepad"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Restartujte hru, aby se změny projevily"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Snímač otisků prstů"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Světelná oznámení"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Informace o světelných oznámeních"</string>
@@ -6216,7 +6179,7 @@
     <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"Sbalit zavřená upozornění"</string>
     <string name="safety_center_expand_dismissed_issues" msgid="6075170862549670397">"Zobrazit zavřená upozornění"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Zavřít upozornění?"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Pokud ochranu budete chtít zvýšit, kdykoli můžete zkontrolovat nastavení zabezpečení a soukromí"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Nastavení zabezpečení a soukromí můžete kdykoli zkontrolovat a ochranu zvýšit"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Akce dokončena"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Rychlé nastavení ochrany soukromí a zabezpečení"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Nastavení ochrany soukromí"</string>

@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Έχετε συνδεθεί σε δίκτυο WEP. Αν σταματήσετε να επιτρέπετε αυτά τα δίκτυα, θα αποσυνδεθείτε."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Σύνθετες επιλογές"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Σύνθετες επιλογές αναπτυσσόμενης λίστας"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"ανάπτυξη"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"ανάπτυξη"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"σύμπτυξη"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Όνομα δικτύου*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Πληκτρολογήστε το SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Ασφάλεια"</string>
@@ -1501,7 +1502,7 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Ακύρωση"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Προστασία κάρτας SIM"</string>
-    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Λειτουργία προστασίας κλειδώματος SIM"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Λειτ. προστ. κλειδώμ. SIM"</string>
     <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Κλείδωμα SIM"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Διαχειρίζεται από το Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Δεν διαχειρίζεται από το Android"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Τα PIN δεν ταιριάζουν. Επιβεβαιώστε το νέο PIN της κάρτας SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Λάθος PIN. Προσπάθειες που απομένουν: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Εισαγάγετε τον τρέχοντα κωδικό PIN της κάρτας SIM"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Υποδοχή πρώτης κάρτας SIM"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Υποδοχή δεύτερης κάρτας SIM"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Χρήση <xliff:g id="CARRIER">%1$s</xliff:g> για δεδ. κιν. τηλ.;"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Χρησιμοποιείτε <xliff:g id="CARRIER2_0">%2$s</xliff:g> για δεδομένα κινητής τηλεφωνίας. Εάν κάνετε εναλλαγή στην υπηρεσία <xliff:g id="CARRIER1">%1$s</xliff:g>, η υπηρεσία <xliff:g id="CARRIER2_1">%2$s</xliff:g> δεν θα χρησιμοποιείται πλέον για δεδομένα κινητής τηλεφωνίας."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Χρήση <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -1577,7 +1576,7 @@
     <string name="status_data_network_type" msgid="3689772955330665876">"Τύπος δικτύου δεδομένων κινητής τηλεφωνίας"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Τύπος φωνητικού δικτύου κινητής τηλεφωνίας"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Πληροφορίες λειτουργού"</string>
-    <string name="status_data_state" msgid="525196229491743487">"Κατάστ.δικτ.κιν.τηλ."</string>
+    <string name="status_data_state" msgid="525196229491743487">"Κατάστ. δικτ. κιν. τηλ."</string>
     <string name="status_esim_id" msgid="5158916796362809133">"EID"</string>
     <string name="status_service_state" msgid="1693424422121058791">"Κατάσταση υπηρεσίας"</string>
     <string name="status_signal_strength" msgid="7644525712554444359">"Ισχύς σήματος"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Προσαρμόστε τις ενέργειες που ενεργοποιούνται από τα κουμπιά του χειριστηρίου σας"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Κουμπιά"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Οδηγίες"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"Κουμπί A"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"Κουμπί B"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"Κουμπί X"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Κουμπί Y"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"Κουμπί L1"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"Κουμπί R1"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"Κουμπί L2"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"Κουμπί R2"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Κλικ αριστερού μοχλού"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Κλικ δεξιού μοχλού"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Αριστερός μοχλός"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Δεξιός μοχλός"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Επαναφορά προεπιλογής"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Επαναφορά προεπιλογής;"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Θα γίνει επαναφορά όλων των ρυθμίσεων του χειριστηρίου στις προεπιλογές"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Επαναφορά"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"επί του παρόντος έχει ανατεθεί στο στοιχείο <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Επιφάνεια αφής"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Επιφάνεια αφής και ποντίκι"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Ποντίκι"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Ειδοποιήσεις"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Γρήγορες ρυθμίσεις"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Σημείωση"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Προσωρινή εμφάνιση/απόκρυψη επιφάνειας εργασίας"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Επιλέξτε μια συντόμευση για: <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"κάτω αριστερή γωνία"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"κάτω δεξιά γωνία"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Επισημάνσεις λειτουργιών"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Ενεργοποίηση αρχείου καταγραφής στοίβας Bluetooth"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Αλλαγή επιπέδου αρχείου καταγραφής στοίβας Bluetooth (Εναλλαγή Bluetooth μετά την αλλαγή ρύθμισης)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Ενεργοποίηση υποδοχής αρχείου καταγραφής παρακολούθησης Bluetooth HCI"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Διάθεση του αρχείου καταγραφής παρακολούθησης Bluetooth HCI σε τοπική υποδοχή"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Φιλτράρισμα καταγραφής παρακολούθησης Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Ορισμός φίλτρων"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Απενεργοποιήστε και ενεργοποιήστε το Bluetooth για εφαρμογή των αλλαγών"</string>
@@ -2619,7 +2604,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Αναπτυγμένη"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Αναπτυγμένο Σκούρο θέμα"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Εφαρμόζει αυτόματα το σκούρο θέμα στις περισσότερες εφαρμογές που δεν το υποστηρίζουν, συμβάλλοντας στη βελτίωση της προσβασιμότητας"</string>
-    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Αν αντιμετωπίζετε προβλήματα με την αναπτυγμένη επιλογή, χρησιμοποιήστε τη βασική."</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Αν αντιμετωπίζετε προβλήματα με την αναπτυγμένη προβολή, χρησιμοποιήστε τη βασική."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"αναγκαστική αντιστροφή, αντιστροφή χρωμάτων, αντίθεση"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Αναπτυγμένο Σκούρο θέμα"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Ρυθμίσεις Αναπτυγμένου Σκούρου θέματος"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Συσκευή"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Επιφάνεια αφής, πληκτρολόγιο, οθόνη, ήχος"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Φωτεινότητα, χρώμα, σκούρο θέμα, οθόνη κλειδώματος, κείμενο"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Φωτεινότητα, χρώμα, σκούρο θέμα, οθόνη κλειδώματος, κείμενο, αφή"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Φωτεινότητα, χρώμα, σκούρο θέμα, οθόνη κλειδώματος, κείμενο, συνδεδεμένη οθόνη"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Φωτεινότητα, χρώμα, σκούρο θέμα, οθόνη κλειδώματος, κείμενο, αφή, συνδεδεμένη οθόνη"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Επιλογή πληκτρολογίου, εργαλεία"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Ταχύτητα δείκτη, προσαρμογή κουμπιών, κύλιση"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Ένταση ήχου, ηχεία, μικρόφωνα"</string>
@@ -4383,7 +4365,7 @@
     <string name="zen_mode_blurb_managed" msgid="5473921634985032149">"Εξατομικεύστε τις εμπειρίες συσκευών και τις ρυθμίσεις για διαφορετικούς χρήστες"</string>
     <string name="zen_mode_blurb_transit" msgid="38808687370288052">"Απολαύστε μια καλύτερη διαδρομή συγκοινωνίας με αυτόματες προσαρμογές ρυθμίσεων"</string>
     <string name="zen_mode_blurb_generic" msgid="3041601339807075625">"Ελαχιστοποιήστε τις διακοπές επιτρέποντας ειδοποιήσεις μόνο από σημαντικά άτομα και εφαρμογές"</string>
-    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Ορίστε μια λειτουργία που ακολουθεί ένα τυπικό χρονοδιάγραμμα"</string>
+    <string name="zen_mode_inspiration_schedule_time" msgid="5596540503159096153">"Ορίστε μια λειτουργία που ακολουθεί ένα τυπικό πρόγραμμα"</string>
     <string name="zen_mode_inspiration_schedule_calendar" msgid="3678727180860212700">"Διατηρήστε τη συσκευή σας συγχρονισμένη με τα συμβάντα της ημέρας"</string>
     <string name="zen_mode_inspiration_bedtime" msgid="6294822414181670666">"Νιώστε ξύπνιοι 100%"</string>
     <string name="zen_mode_inspiration_driving" msgid="8237825783857483135">"Δώστε προτεραιότητα στην ασφάλεια στον δρόμο"</string>
@@ -4632,58 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Να επιτρέπεται σε αυτή την εφαρμογή η ανάγνωση, η τροποποίηση και η διαγραφή όλων των αρχείων σε αυτή τη συσκευή και σε κάθε συνδεδεμένη μονάδα αποθήκευσης. Εάν εκχωρηθούν σχετικά δικαιώματα, η εφαρμογή μπορεί να έχει πρόσβαση σε αρχεία χωρίς να έχετε ενημερωθεί ρητά."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Με πρόσβαση σε όλα τα αρχεία"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Αυτοματισμός οθόνης"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Αυτή η εφαρμογή θα μπορεί να βλέπει και να αλληλεπιδρά με το περιεχόμενο οθόνης από άλλες εφαρμογές, για να σας βοηθά να ολοκληρώνετε εργασίες, ακόμα και όταν οι εφαρμογές βρίσκονται στο παρασκήνιο."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"Η εφαρμογή <xliff:g id="ID_1">%1$s</xliff:g> μπορεί να βλέπει και να αλληλεπιδρά με το περιεχόμενο οθόνης των εφαρμογών που έχετε επιτρέψει να σας βοηθούν να ολοκληρώνετε εργασίες."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Εδώ εμφανίζονται οι εφαρμογές για τις οποίες επιλέξατε &lt;strong&gt;Να επιτρέπεται πάντα&lt;/strong&gt; στις άδειες. Δεν εμφανίζονται οι εφαρμογές που επιτρέψατε &lt;strong&gt;Μόνο αυτή τη φορά&lt;/strong&gt; ή δεν επιτρέψατε καθόλου."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Αν δεν επιτρέψετε τον αυτοματισμό οθόνης, η εφαρμογή <xliff:g id="ID_1">%1$s</xliff:g> ενδέχεται να εξακολουθεί να αλληλεπιδρά με εφαρμογές που είναι συνδεδεμένες με την εφαρμογή <xliff:g id="ID_2">%1$s</xliff:g> με άλλους τρόπους"</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Όταν καταργείτε μια εφαρμογή σε αυτή την οθόνη, η εφαρμογή <xliff:g id="ID_1">%1$s</xliff:g> ενδέχεται να εξακολουθεί να αλληλεπιδρά με εφαρμογές που είναι συνδεδεμένες με την εφαρμογή <xliff:g id="ID_2">%1$s</xliff:g> με άλλους τρόπους."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Να επιτρέπεται στις εφαρμογές να σας βοηθούν να ολοκληρώνετε εργασίες αλληλεπιδρώντας με το περιεχόμενο της οθόνης άλλων εφαρμογών"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Να επιτρέπεται στις εφαρμογές να βλέπουν και να αλληλεπιδρούν με το περιεχόμενο στην οθόνη, ώστε να μπορούν να σας βοηθήσουν να ολοκληρώνετε εργασίες"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ερώτηση κάθε φορά"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Να επιτρέπεται πάντα"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Να μην επιτρέπεται"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Εφαρμογές που έχετε επιτρέψει"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Δεν έχετε επιτρέψει ακόμη εφαρμογές"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Μόνο η εφαρμογή που έχετε ορίσει ως προεπιλεγμένο ψηφιακό βοηθό μπορεί να χρησιμοποιήσει τον αυτοματισμό οθόνης."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Η εφαρμογή καταργήθηκε"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Καταργήθηκαν όλες οι εφαρμογές"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Ρυθμίσεις Βοηθού"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 επιτρεπόμενη εφαρμογή}other{# επιτρεπόμενες εφαρμογές}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 επιτρεπόμενη εφαρμογή}other{# επιτρεπόμενες εφαρμογές}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Δεν επιτρέπονται εφαρμογές"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Κατάργηση όλων των εφαρμογών"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Προεπιλεγμένος ψηφιακός βοηθός"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"Το <xliff:g id="ID_1">%1$s</xliff:g> δεν μπορεί να χρησιμοποιήσει τον αυτοματισμό οθόνης"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Μόνο ο προεπιλεγμένος ψηφιακός βοηθός χρησιμοποιεί τον αυτοματισμό οθόνης"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Αλλαγή βοηθού"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Αυτές οι εφαρμογές μπορούν να βλέπουν και να αλληλεπιδρούν με το περιεχόμενο της οθόνης των εφαρμογών που έχετε επιτρέψει, για να σας βοηθούν να ολοκληρώνετε εργασίες."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"Δεν έχετε εγκαταστήσει εφαρμογές που μπορούν να χρησιμοποιήσουν τον αυτοματισμό οθόνης"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Αυτές οι εφαρμογές μπορούν να βλέπουν και να αλληλεπιδρούν με το περιεχόμενο οθόνης της εφαρμογής <xliff:g id="ID_1">%1$s</xliff:g>, για να σας βοηθούν να ολοκληρώνετε εργασίες."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Ειδοποιήσεις σε πλήρη οθόνη"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Να επιτρέπονται οι ειδοποιήσεις σε πλήρη οθόνη από αυτή την εφαρμογή"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Να επιτρέπεται στην εφαρμογή η εμφάνιση ειδοποιήσεων σε πλήρη οθόνη όταν η συσκευή είναι κλειδωμένη. Οι εφαρμογές ενδέχεται να χρησιμοποιούν αυτή τη λειτουργία για επισήμανση ξυπνητηριών, εισερχόμενων κλήσεων ή άλλων επειγουσών ειδοποιήσεων."</string>
@@ -5180,7 +5137,7 @@
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;Απενεργοποίηση αυτής της υπηρεσίας; &lt;/b&gt; &lt;br/&gt; &lt;br/&gt; Αποθηκευμένες πληροφορίες, όπως κωδικοί πρόσβασης, κλειδιά πρόσβασης, τρόποι πληρωμής και άλλα, δεν θα συμπληρώνονται όταν είστε συνδεδεμένοι. Για να χρησιμοποιήσετε τις αποθηκευμένες πληροφορίες σας, επιλέξτε έναν κωδικό πρόσβασης, ένα κλειδί πρόσβασης ή μια υπηρεσία δεδομένων."</string>
     <string name="account_dashboard_title_with_passkeys" msgid="648242372086733541">"Κωδικοί/κλειδιά πρόσβασης, λογαριασμοί"</string>
     <string name="dashboard_title_passwords_passkeys" msgid="1811104856434785799">"Κωδικοί πρόσβασης και κλειδιά πρόσβασης"</string>
-    <string name="accounts_and_backup_title" msgid="2841026269835953207">"Λογαριασμοί και αντίγραφα ασφαλείας"</string>
+    <string name="accounts_and_backup_title" msgid="2841026269835953207">"Λογαρ. και αντίγρ. ασφαλ."</string>
     <string name="accounts_and_backup_summary" msgid="4126659439608747174">"Δημιουργήστε αντίγραφο ασφαλείας για τα δεδομένα, αντιγράψτε δεδομένα από άλλη συσκευή"</string>
     <string name="accounts_and_backup_manage_accounts_title" msgid="1034959782380418930">"Διαχείριση λογαριασμών"</string>
     <string name="accounts_and_backup_backup_category_title" msgid="807568201052547222">"Δημ. αντιγ. ασφαλ. ή αντιγραφή δεδομένων"</string>
@@ -5867,8 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Απεγκατάσταση εφαρμογής"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Εφαρμογές που εγκαταστάθηκαν τον τελευταίο # μήνα}other{Εφαρμογές που εγκαταστάθηκαν τους τελευταίους # μήνες}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Εφαρμογές που εγκαταστάθηκαν περισσότερο από # μήνα πριν}other{Εφαρμογές που εγκαταστάθηκαν περισσότερο από # μήνες πριν}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"Βοήθεια AI"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Προληπτική βοήθεια"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Πρόσβαση στην οθόνη"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"Περιεχόμενο οθόνης"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Επιλέξτε αν αυτή η εφαρμογή μπορεί να συνεισφέρει πληροφορίες για την παραγωγή προτάσεων"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Λόγος διαστάσεων"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Εάν αυτή η εφαρμογή δεν έχει σχεδιαστεί για να ταιριάζει με τη συσκευή <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, δοκιμάστε έναν νέο λόγο διαστάσεων για την προβολή της."</string>
@@ -5888,6 +5845,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Θα γίνει επανεκκίνηση της εφαρμογής μόλις αλλάξετε τον λόγο διαστάσεων. Μπορεί να χάσετε τις μη αποθηκευμένες αλλαγές. Ορισμένες εφαρμογές μπορεί να μην έχουν βελτιστοποιηθεί για συγκεκριμένους λόγους διαστάσεων."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Εμπειρία"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Εικονικό gamepad"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Επανεκκινήστε το παιχνίδι για να επιβεβαιωθούν οι αλλαγές"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Αισθητήρας δακτυλικών αποτυπωμάτων"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Ειδοποιήσεις με λάμψη"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Σχετικά με τις ειδοποιήσεις με λάμψη"</string>

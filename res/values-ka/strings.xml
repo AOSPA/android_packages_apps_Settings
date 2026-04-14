@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"თქვენ WEP ქსელთან ხართ დაკავშირებული. თუ შეწყვეტთ ამ ქსელების დაშვებას, თქვენ გაგიწყდებათ კავშირი."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"დამატებითი პარამეტრები"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"ჩამოსაშლელი სიის დამატებითი პარამეტრები"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"გაფართოება"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"გაფართოება"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"ჩაკეცვა"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"ქსელის სახელი*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"შეიყვანეთ SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"უსაფრთხოება"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN-ები არ ემთხვევა. დაადასტურეთ SIM-ის ახალი PIN-კოდი."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"PIN-კოდი არასწორია. დარჩა <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> ცდა"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"შეიყვანეთ SIM ბარათის მიმდინარე PIN-კოდი"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"პირველი SIM ბარათის სათავსო"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"მეორე SIM ბარათის სათავსო"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"გამოიყენებთ <xliff:g id="CARRIER">%1$s</xliff:g>-ს მობ. ინტ.-თვის?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"თქვენ იყენებთ <xliff:g id="CARRIER2_0">%2$s</xliff:g>-ს მობილური ინტერნეტისთვის. თუ <xliff:g id="CARRIER1">%1$s</xliff:g>-ზე გადაერთვებით, <xliff:g id="CARRIER2_1">%2$s</xliff:g> აღარ იქნება გამოყენებული მობილური ინტერნეტისთვის."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>-ის გამოყენება"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"მოირგეთ თქვენი კონტროლერის ღილაკებით გამოწვეული მოქმედებები"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"ღილაკები"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"მიმართულებები"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A ღილაკი"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B ღილაკი"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X ღილაკი"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y ღილაკი"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 ღილაკი"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 ღილაკი"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 ღილაკი"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 ღილაკი"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"მარცხენა ჯოისტიკზე დაწკაპუნება"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"მარჯვენა ჯოისტიკზე დაწკაპუნება"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"მარცხენა ჯოისტიკი"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"მარჯვენა ჯოისტიკი"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"ნაგულისხმევ პარამეტრებზე გადაყენება"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"გსურთ ნაგულისხმევ პარამეტრებზე გადაყენება?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"კონტროლერის ყველა პარამეტრი გადაყენდება ნაგულისხმევზე"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"გადაყენება"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"ამჟამად მიმაგრებულია <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>-ზე"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"სენსორული პანელი"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"სენსორული პანელი და მაუსი"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"მაუსი"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"შეტყობინებები"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"სწრაფი პარამეტრები"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"შენიშვნა"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"დესკტოპის ჩახედვა/ჩახედვის გაუქმება"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"აირჩიეთ მალსახმობი <xliff:g id="CORNER">%1$s</xliff:g>-ისთვის"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"ქვედა მარცხენა კუთხე"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"ქვედა მარჯვენა კუთხე"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"ფუნქციების ალმები"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Bluetooth-ის დასტის ჟურნალის ჩართვა"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Bluetooth-ის დასტის ჟურნალის დონის შეცვლა (ამ პარამეტრის შეცვლის შემდეგ გადართეთ Bluetooth)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Bluetooth HCI-ს მიყურადების ჟურნალის სოკეტის ჩართვა"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"გახდეს Bluetooth HCI-ს მიყურადების ჟურნალი ხელმისაწვდომი ლოკალურ სოკეტზე"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI ტრანსლირების ჟურნალის გაფილტვრა"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"ფილტრების დაყენება"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"ცვლილებების განსახორციელებლად ჩართეთ და გათიშეთ Bluetooth"</string>
@@ -2569,7 +2554,7 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"ხმის ღილაკები"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"ხანგრძლივად დააჭირეთ ხმის ორივე ღილაკს"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"სამმაგი შეხება"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="387169602299548488">"სწრაფად შეეხეთ ეკრანს 3-ჯერ. ამან შესაძლოა თქვენი მოწყობილობა შეანელოს."</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="387169602299548488">"სწრაფად შეეხეთ ეკრანს 3-ჯერ. ამან შესაძლოა შეანელოს თქვენი მოწყობილობა."</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"სამმაგი შეხება"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"კლავიატურის მალსახმობი"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"დააჭირეთ: <xliff:g id="ID_1">%1$s</xliff:g> + <xliff:g id="ID_2">%2$s</xliff:g> + <xliff:g id="ID_3">%3$s</xliff:g>, რომ გამოიყენოთ <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"მოწყობილობა"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"სენსორული პანელი, კლავიატურა, ეკრანი, ხმა"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"სიკაშკაშე, ფერი, მუქი თემა, ჩაკეტილი ეკრანი, ტექსტი"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"სიკაშკაშე, ფერი, მუქი თემა, ჩაკეტილი ეკრანი, ტექსტი, სენსორი"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"სიკაშკაშე, ფერი, მუქი თემა, ჩაკეტილი ეკრანი, ტექსტი, დაკავშირებული ეკრანი"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"სიკაშკაშე, ფერი, მუქი თემა, ჩაკეტილი ეკრანი, ტექსტი, სენსორი, დაკავშირებული ეკრანი"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"კლავიატურის არჩევა, ხელსაწყოები"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"კურსორის სიჩქარე, ღილაკის მორგება, გადაადგილება"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"ხმა, დინამიკები, მიკროფონები"</string>
@@ -4632,53 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"აპს აძლევს უფლებას, წაიკითხოს, შეცვალოს და წაშალოს ყველა ფაილი ამ მოწყობილობაზე და ნებისმიერ დაკავშირებულ მეხსიერებაზე. ამ უფლების მინიჭების შემთხვევაში, აპს შეიძლება ფაილებზე წვდომა ჰქონდეს ისე, რომ ამის შესახებ არ იცოდეთ."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"შეუძლია ჰქონდეს წვდომა ყველა ფაილზე"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"ეკრანის ავტომატიზაცია"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"ეს აპი შეძლებს სხვა აპების ეკრანის კონტენტის ნახვას და მათთან ინტერაქციას, რათა დაგეხმაროთ ამოცანების შესრულებაში, მაშინაც კი, როცა აპები ფონურ რეჟიმშია."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g>-ს შეუძლია ნახოს და დაუკავშირდეს იმ აპების ეკრანის კონტენტს, რომლებსაც ნება დართეთ, დაგეხმაროთ ამოცანების შესრულებაში."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"აპები, რომლებისთვისაც აირჩიეთ &lt;strong&gt;ყოველთვის დაშვება&lt;/strong&gt; ნებართვებში, აქ გამოჩნდება. აპები, რომლებისთვისაც დაუშვით &lt;strong&gt;მხოლოდ ამ ერთხელ&lt;/strong&gt; ან არ დაუშვით, არ გამოჩნდება."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"თუ ეკრანის ავტომატიზაციას არ დაუშვებთ, <xliff:g id="ID_1">%1$s</xliff:g> მაინც შეძლებს <xliff:g id="ID_2">%1$s</xliff:g>-თან დაკავშირებულ აპებთან ინტერაქციას სხვა გზებით."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"ამ ეკრანზე აპის ამოშლისას <xliff:g id="ID_1">%1$s</xliff:g> მაინც შეძლებს <xliff:g id="ID_2">%1$s</xliff:g>-თან დაკავშირებულ აპებთან ინტერაქციას სხვა გზებით."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"ნება დართეთ აპებს, დაგეხმაროთ ამოცანების შესრულებაში სხვა აპების ეკრანის კონტენტთან ინტერაქციის გზით"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"დართეთ აპებს ეკრანის კონტენტის ნახვისა და მასთან დაკავშირების ნება ამოცანების შესრულებაში დასახმარებლად"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ყოველთვის მკითხეთ"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"ყოველთვის დაშვება"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"არ დაიშვას"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"თქვენ მიერ დაშვებული აპები"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"თქვენ ჯერ არ დაგიშვიათ აპები"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"მხოლოდ იმ აპს შეუძლია ეკრანის ავტომატიზაციის გამოყენება, რომელიც თქვენ დააყენეთ ნაგულისხმევ ციფრულ ასისტენტად."</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"აპი ამოიშალა"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"ყველა აპი ამოიშალა"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"ასისტენტის პარამეტრები"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{დაშვებულია 1 აპი}other{დაშვებულია # აპი}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{დაშვებულია 1 აპი}other{დაშვებულია # აპი}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"დაშვებული აპები არ არის"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"ყველა აპის ამოშლა"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"ნაგულისხმევი ციფრული ასისტენტი"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> ეკრანის ავტომატიზაციას ვერ გამოიყენებს"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"მხოლოდ ნაგულისხმევ ციფრულ ასისტენტს შეუძლია ეკრანის ავტომატიზაციის გამოყენება"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"ასისტენტის შეცვლა"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"ეს აპები შეძლებს თქვენ მიერ დაშვებული აპების ეკრანის კონტენტის ნახვას და მათთან ინტერაქციას, რათა დაგეხმაროთ ამოცანების შესრულებაში."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"თქვენ არ დაგიინსტალირებიათ აპები, რომლებსაც შეუძლია ეკრანის ავტომატიზაციის გამოყენება"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"ეს აპები შეძლებს <xliff:g id="ID_1">%1$s</xliff:g>-ის ეკრანის კონტენტის ნახვას და მასთან ინტერაქციას, რათა დაგეხმაროთ ამოცანების შესრულებაში."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"სრული ეკრანის შეტყობინებები"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ამ აპიდან შეტყობინებების დაშვება სრულ ეკრანზე"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ნება დართეთ ამ აპს, აჩვენოს შეტყობინებები, რომლებიც სრულ ეკრანს იკავებს, როდესაც მოწყობილობა ჩაკეტილია. აპმა ისინი შეიძლება გამოიყენოს გამაფრთხილებელი სიგნალების და შემომავალი ზარების გამოყოფისთვის ან სხვა გადაუდებელი შეტყობინებებისთვის."</string>
@@ -5776,11 +5738,11 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"მხოლოდ დაშიფრული ქსელების დაშვება"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"ეს უფრო უსაფრთხოა, მაგრამ შესაძლოა გარკვეულ მდებარეობებში შეზღუდოს თქვენი მობილურ ქსელთან კავშირი. გადაუდებელი ზარი ყოველთვის დაშვებულია."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"გსურთ 2G ქსელის დაცვის გამორთვა?"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2G ქსელი ნაკლებად უსაფრთხოა და ამის გამორთვა თქვენს ზარებს, შეტყობინებებსა და მონაცემებს ჩარევის ან ქურდობის მიმართ მოწყვლადს ხდის"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2G ქსელი ნაკლებად უსაფრთხოა და ამ ფუნქციის გამორთვა ქმნის სხვების მიერ თქვენი ზარების, შეტყობინებებისა და მონაცემების ხელში ჩაგდების ან მოპარვის საფრთხეს."</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"გამორთვა"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G ქსელის დაცვა"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G ქსელის დაცვა ჩართულია"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"ამის გამორთვა პარამეტრებიდან შეგიძლიათ, მაგრამ 2G ნაკლებად უსაფრთხოა და შეიძლება თქვენს მონაცემებს საფრთხე შეუქმნას"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"ამ ფუნქციის გამორთვა პარამეტრებიდან შეგიძლიათ, მაგრამ 2G ნაკლებად უსაფრთხოა და შესაძლოა საფრთხე შეუქმნას თქვენს მონაცემებს"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"პარამეტრები"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"ყველა სერვისი"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"გაცვლის ბუფერზე წვდომის ჩვენება"</string>
@@ -5862,8 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"აპის დეინსტალაცია"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{ბოლო # თვეში დაყენებული აპები}other{ბოლო # თვეში დაყენებული აპები}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{აპის ინსტალაციიდან გასულია # თვეზე მეტი}other{აპის ინსტალაციიდან გასულია # თვეზე მეტი}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI დახმარება"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"პროაქტიული დახმარება"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"ეკრანზე წვდომა"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"ეკრანის კონტექსტი"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"აირჩიეთ, შეძლებს თუ არა ეს აპი ინფორმაციული წვლილის შეტანას შემოთავაზებების გენერირებაში"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"თანაფარდობა"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"სცადეთ ახალი თანაფარდობა ამ აპის სანახავად, თუ ის არ არის შემუშავებული თქვენი <xliff:g id="DEVICE_NAME">%1$s</xliff:g>-ის შესაფერისად"</string>
@@ -5883,6 +5845,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"აპი გადაიტვირთება, როდესაც შეცვლით თანაფარდობას. შეიძლება დაკარგოთ შეუნახავი ცვლილებები. ზოგიერთი აპი შესაძლოა არ იყოს ოპტიმიზებული კონკრეტული თანაფარდობებისადმი."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"სამუშაო გამოცდილება"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"ვირტუალური გეიმპედი"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"ცვლილებების დასადასტურებლად გადატვირთეთ თამაში"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"თითის ანაბეჭდის სენსორი"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ბლიც გაფრთხილებები"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ბლიც გაფრთხილებების შესახებ"</string>

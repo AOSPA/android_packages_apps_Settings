@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"আপুনি এটা WEP নেটৱৰ্কৰ সৈতে সংযুক্ত হৈ আছে। যদি আপুনি এই নেটৱৰ্কসমূহৰ অনুমতি দিয়া বন্ধ কৰে, তেন্তে আপোনাৰ সংযোগ বিচ্ছিন্ন কৰা হ’ব।"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"উচ্চখাপৰ বিকল্প"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"ড্ৰ’প ডাউন তালিকাৰ উন্নত বিকল্পসমূহ"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"বিস্তাৰিত কৰক"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"বিস্তাৰ কৰক"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"সংকোচন কৰক"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"নেটৱৰ্কৰ নাম*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID দিয়ক"</string>
     <string name="wifi_security" msgid="9095934643631406913">"সুৰক্ষা"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"পিনসমূহ মিলা নাই। নতুন ছিম পিনটো নিশ্চিত কৰক।"</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"ভুল পিন। বাকী থকা প্ৰয়াসৰ সংখ্যা: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"ছিম কাৰ্ডখনৰ বৰ্তমানৰ পিন ক’ডটো দিয়ক"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"প্ৰথম ছিম কাৰ্ডৰ শ্ল’ট"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"দ্বিতীয় ছিম কাৰ্ডৰ শ্ল’ট"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"ডেটাৰ বাবে <xliff:g id="CARRIER">%1$s</xliff:g> ব্যৱহাৰ কৰিবনে?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"আপুনি মবাইল ডেটাৰ বাবে <xliff:g id="CARRIER2_0">%2$s</xliff:g> ব্যৱহাৰ কৰি আছে। যদি আপুনি ইয়াৰ সলনি <xliff:g id="CARRIER1">%1$s</xliff:g> ব্যৱহাৰ কৰে তেন্তে, ম’বাইল ডেটাৰ বাবে আৰু <xliff:g id="CARRIER2_1">%2$s</xliff:g> ব্যৱহাৰ কৰা নহ’ব।"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> ব্যৱহাৰ কৰক"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"আপোনাৰ নিয়ন্ত্ৰকৰ বুটামসমূহে ট্ৰিগাৰ কৰা কাৰ্যসমূহ কাষ্টমাইজ কৰক"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"বুটাম"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"দিক্-নিৰ্দেশনা"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A বুটাম"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B বুটাম"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X বুটাম"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y বুটাম"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 বুটাম"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 বুটাম"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 বুটাম"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 বুটাম"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"বাওঁফালৰ ষ্টিকত ক্লিক"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"সোঁফালৰ ষ্টিকত ক্লিক"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"ডি-পে’ড"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"বাওঁফালৰ ষ্টিক"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"সোঁফালৰ ষ্টিক"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"ডিফ’ল্টলৈ ৰিছেট কৰক"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"ডিফ’ল্টলৈ ৰিছেট কৰিবনে?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"আপোনাৰ নিয়ন্ত্ৰকৰ আটাইবোৰ ছেটিং ডিফ’ল্টলৈ ৰিছেট কৰা হ’ব"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"ৰিছেট কৰক"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"বৰ্তমান <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>ক কামৰ দায়িত্ব দিয়া হৈছে"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"টাচ্চপেড"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"টাচ্চপেড আৰু মাউছ"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"মাউছ"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"জাননী"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"ক্ষিপ্ৰ ছেটিং"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"টোকা"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"ডেস্কটপ ভুমুকি মাৰিবলৈ দিয়ক/ভুমুকি মাৰিবলৈ নিদিব"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g>ৰ বাবে এটা শ্বৰ্টকাট বাছনি কৰক"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"একেবাৰে তলৰ বাওঁফালৰ কোণ"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"একেবাৰে তলৰ সোঁফালৰ কোণ"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"বৈশিষ্ট সম্পৰ্কীয় পতাকাবোৰ"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"ব্লুটুথৰ ষ্টেক লগ সক্ষম কৰক"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"ব্লুটুথৰ ষ্টেক লগিঙৰ লগৰ স্তৰ বৃদ্ধি কৰক (এই ছেটিংটো সলনি কৰাৰ পাছত ব্লুটুথ ট’গল কৰক)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"ব্লুটুথ HCI স্নুপ লগ ছকেট সক্ষম কৰক"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"ব্লুটুথ HCI স্নুপ লগ এটা স্থানীয় ছকেটত উপলব্ধ কৰক"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"ব্লুটুথ HCI স্নুপ লগ ফিল্টাৰ কৰা"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"ফিল্টাৰ ছেট কৰক"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"সলনি কৰা কাৰ্যসমূহ কাৰ্যকৰী হ\'বলৈ ব্লুটুথ অক্ষম আৰু সক্ষম কৰক"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"ডিভাইচ"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"টাচ্চপেড, কীব’ৰ্ড, ডিছপ্লে’, ধ্বনি"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"উজ্জ্বলতা, ৰং, গাঢ় ৰঙৰ থীম, লক স্ক্ৰীন, পাঠ"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"উজ্জ্বলতা, ৰং, গাঢ় ৰঙৰ থীম, লক স্ক্ৰীন, পাঠ. স্পৰ্শ"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"উজ্জ্বলতা, ৰং, গাঢ় ৰঙৰ থীম, লক স্ক্ৰীন, পাঠ, সংযুক্ত ডিছপ্লে’"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"উজ্জ্বলতা, ৰং, গাঢ় ৰঙৰ থীম, লক স্ক্ৰীন, পাঠ, স্পৰ্শ, সংযুক্ত ডিছপ্লে’"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"কীব’ৰ্ড বাছনি, সঁজুলি"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"কাৰ্ছৰৰ গতিবেগ, বুটামৰ কাষ্টমাইজেশ্বন, স্ক্ৰ’ল কৰা"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"ভলিউম, স্পীকাৰ, মাইক্ৰ’ফ’ন"</string>
@@ -4632,53 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"এই এপ্‌টোক এই ডিভাইচটোত অথবা অন্য যিকোনো সংযুক্ত ষ্ট’ৰেজৰ ভলিউমসমূহত আটাইবোৰ ফাইল পঢ়িবলৈ, সংশোধন কৰিবলৈ আৰু মচিবলৈ অনুমতি দিয়ক। যদি অনুমতি দিয়ে, আপোনাৰ নিশ্চিত জ্ঞানৰ অবিহনে এপে ফাইলবোৰ এক্সেছ কৰিব পাৰে।"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"আটাইবোৰ ফাইল এক্সেছ কৰিব পাৰে"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"স্ক্ৰীনৰ স্বয়ংক্ৰিয়কৰণ"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"আপোনাক কাৰ্যসমূহ সম্পূৰ্ণ কৰাত সহায় কৰিবলৈ এই এপ্‌টোৱে অন্য এপ্‌সমূহৰ স্ক্ৰীনত থকা সমল চোৱাৰ লগতে সেইসমূহৰ সৈতে ভাব-বিনিময় কৰিব পাৰিব, আনকি এপ্‌সমূহ পৃষ্ঠভূমিত থকাৰ সময়তো।"</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"আপোনাক কাৰ্যসমূহ সম্পূৰ্ণ কৰাত সহায় কৰিবলৈ <xliff:g id="ID_1">%1$s</xliff:g>এ আপুনি অনুমতি দিয়া এপ্‌সমূহৰ স্ক্ৰীনত থকা সমল চাব পাৰে আৰু সেইসমূহৰ সৈতে ভাব-বিনিময় কৰিব পাৰে।"</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"আপুনি অনুমতিত &lt;strong&gt;সদায় অনুমতি দিয়ক&lt;/strong&gt; বাছনি কৰা এপ্‌সমূহ ইয়াত দেখুওৱা হয়। আপুনি &lt;strong&gt;কেৱল এইবাৰ&lt;/strong&gt; অনুমতি দিয়া বা অনুমতি নিদিয়া এপ্‌সমূহ দেখুওৱা নহয়।"</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"যদি আপুনি স্ক্ৰীন অট’মেশ্বনৰ অনুমতি নিদিয়ে, <xliff:g id="ID_1">%1$s</xliff:g>এ তথাপি অন্য উপায়েৰে <xliff:g id="ID_2">%1$s</xliff:g>ৰ সৈতে সংযুক্ত এপ্‌সমূহৰ সৈতে ভাব-বিনিময় কৰিব পাৰিব।"</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"আপুনি এই স্ক্ৰীনখনত কোনো এপ্‌ আঁতৰালে, <xliff:g id="ID_1">%1$s</xliff:g>এ তথাপি অন্য উপায়েৰে <xliff:g id="ID_2">%1$s</xliff:g>ৰ সৈতে সংযুক্ত এপ্‌সমূহৰ সৈতে ভাব-বিনিময় কৰিব পাৰিব।"</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"এপ্‌সমূহক অন্য এপৰ স্ক্ৰীনত থকা সমলৰ সৈতে ভাব-বিনিময় কৰি আপোনাক কাৰ্যসমূহ সম্পূৰ্ণ কৰাত সহায় কৰিবলৈ দিয়ক"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"আপোনাক কাৰ্যসমূহ সম্পূৰ্ণ কৰাত সহায় কৰিবলৈ এপ্‌সমূহক স্ক্ৰীনৰ সমল চাবলৈ দিয়াৰ লগতে সেইসমূহৰ সৈতে ভাব-বিনিময় কৰিবলৈ দিয়ক"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"প্ৰতিবাৰতে সোধক"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"সদায়ৰ বাবে অনুমোদন"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"অনুমতি নিদিব"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"আপুনি অনুমতি দিয়া এপ্‌সমূহ"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"আপুনি এতিয়ালৈকে কোনো এপক অনুমতি দিয়া নাই"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"আপুনি আপোনাৰ ডিফ’ল্ট ডিজিটেল সহায়ক হিচাপে ছেট কৰা এপ্‌টোৱেহে স্ক্ৰীন অট’মেশ্বন ব্যৱহাৰ কৰিব পাৰে।"</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"এপ্‌টো আঁতৰোৱা হৈছে"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"আটাইবোৰ এপ্‌ আঁতৰোৱা হৈছে"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Assistantৰ ছেটিং"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{১ টা এপৰ অনুমতি আছে}one{# টা এপৰ অনুমতি আছে}other{# টা এপৰ অনুমতি আছে}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{১ টা এপৰ অনুমতি আছে}one{# টা এপৰ অনুমতি আছে}other{# টা এপৰ অনুমতি আছে}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"কোনো এপক অনুমতি দিয়া হোৱা নাই"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"আটাইবোৰ এপ্‌ আঁতৰাওক"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"ডিফ’ল্ট ডিজিটেল সহায়ক"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g>এ স্ক্ৰীন অট’মেশ্বন ব্যৱহাৰ কৰিব নোৱাৰে"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"কেৱল আপোনাৰ ডিফ’ল্ট ডিজিটেল সহায়কটোৱে স্ক্ৰীন অট’মেশ্বন ব্যৱহাৰ কৰিব পাৰে"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"সহায়ক সলনি কৰক"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"আপোনাক কাৰ্যসমূহ সম্পূৰ্ণ কৰাত সহায় কৰিবলৈ এই এপ্‌সমূহে আপুনি অনুমতি দিয়া এপ্‌সমূহৰ স্ক্ৰীনত থকা সমল চাব পাৰে আৰু সেইসমূহৰ সৈতে ভাব-বিনিময় কৰিব পাৰে।"</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"আপুনি স্ক্ৰীন অট’মেশ্বন ব্যৱহাৰ কৰিব পৰা কোনো এপ্‌ ইনষ্টল কৰা নাই"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"আপোনাক কাৰ্যসমূহ সম্পূৰ্ণ কৰাত সহায় কৰিবলৈ এই এপ্‌সমূহে <xliff:g id="ID_1">%1$s</xliff:g>ৰ স্ক্ৰীনত থকা সমল চোৱাৰ লগতে সেইসমূহৰ সৈতে ভাব-বিনিময় কৰিব পাৰে।"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"পূৰ্ণ স্ক্ৰীনৰ জাননীসমূহ"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"এই এপ্‌টোৰ পৰা পূৰ্ণ স্ক্ৰীনৰ জাননীৰ অনুমতি দিয়ক"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"এই এপ্‌টোক ডিভাইচ লক হৈ থাকোঁতে পূৰ্ণ স্ক্ৰীনত ওলোৱা জাননীসমূহ দেখুওৱাৰ অনুমতি দিয়ক। এপ্‌সমূহে এইবোৰ এলাৰ্ম, অন্তৰ্গামী কল অথবা অন্য জৰুৰী জাননীসমূহ হাইলাইট কৰিবলৈ ব্যৱহাৰ কৰিব পাৰে।"</string>
@@ -5862,8 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"এপ্‌ আনইনষ্টল কৰক"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{যোৱা # মাহত ইনষ্টল কৰা এপ্‌}one{যোৱা # মাহত ইনষ্টল কৰা এপ্‌}other{যোৱা # মাহত ইনষ্টল কৰা এপ্‌}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# মাহতকৈ আগত ইনষ্টল কৰা এপ্‌}one{# মাহতকৈ আগত ইনষ্টল কৰা এপ্‌}other{# মাহতকৈ আগত ইনষ্টল কৰা এপ্‌}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI এছিষ্টেন্স"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"আগতীয়া সহায়"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"স্ক্ৰীনৰ এক্সেছ"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"স্ক্ৰীনৰ প্ৰসংগ"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"এই এপ্‌টোৱে পৰামৰ্শ প্ৰস্তুত কৰিবলৈ তথ্যৰ অৱদান আগবঢ়াব পাৰেনে নোৱাৰে সেয়া বাছনি কৰক"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"আকাৰৰ অনুপাত"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"এই এপ্‌টো চাবলৈ এটা আকাৰৰ অনুপাত ব্যৱহাৰ কৰি চাওক যদি এইটো আপোনাৰ <xliff:g id="DEVICE_NAME">%1$s</xliff:g>ৰ সৈতে মিলাকৈ ডিজাইন কৰা হোৱা নাই"</string>
@@ -5883,6 +5845,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"আপুনি আকাৰৰ অনুপাত সলনি কৰিলে এপ্‌টো পুনৰ আৰম্ভ হ’ব। আপুনি ছেভ নকৰা সালসলনিসমূহ হেৰুৱাব পাৰে। নিৰ্দিষ্ট কিছুমান আকাৰৰ অনুপাতৰ বাবে কিছুমান এপ্‌ অপ্টিমাইজ কৰা নহ’বও পাৰে।"</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"অভিজ্ঞতা"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"ভাৰ্চুৱেল গে’মপেড"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"সালসলনিসমূহ নিশ্চিত কৰিবলৈ আপোনাৰ গে’মটো ৰিষ্টাৰ্ট কৰক"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ফিংগাৰপ্ৰিণ্ট ছেন্সৰ"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ফ্লেশ্ব জাননী"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ফ্লেশ্ব জাননীৰ বিষয়ে"</string>
