@@ -15,12 +15,8 @@
  */
 
 /*
-// QTI_BEGIN: 2024-01-29: Telephony: Fix copyright marking
- * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
-// QTI_END: 2024-01-29: Telephony: Fix copyright marking
-// QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
- * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
-// QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+ * ​​​Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -40,6 +36,9 @@ import static android.telephony.NetworkRegistrationInfo.DOMAIN_PS;
 // QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_ON_CIWLAN_CONFIG_CHANGE;
 // QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_GET_RADIO_ICON_RESPONSE;
+import static com.qti.extphone.ExtPhoneCallbackListener.EVENT_ON_RADIO_ICON_CHANGE;
+
 import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.settings.SettingsEnums;
@@ -126,8 +125,12 @@ import com.qti.extphone.ExtPhoneCallbackListener;
 // QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 // QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 import com.qti.extphone.ExtTelephonyManager;
+import com.qti.extphone.RadioIcon;
+import com.qti.extphone.RadioIconType;
 import com.qti.extphone.ServiceCallback;
 // QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+import com.qti.extphone.Status;
+import com.qti.extphone.Token;
 
 // QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 import java.lang.Runnable;
@@ -210,6 +213,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     private static int sInstanceCounter = 0;
 // QTI_END: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
 // QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+    private static RadioIcon sCurrentRadioIcon = null;
     private static final ServiceCallback mExtTelServiceCallback = new ServiceCallback() {
 // QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 // QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
@@ -219,9 +223,17 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 // QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 // QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
             sExtTelServiceConnected = true;
-            int[] events = new int[] {EVENT_ON_CIWLAN_CONFIG_CHANGE};
-            sClient = sExtTelephonyManager.registerCallbackWithEvents(sPackageName,
-                    mExtPhoneCallbackListener, events);
+            int[] events = new int[] {
+                    EVENT_ON_CIWLAN_CONFIG_CHANGE,
+                    EVENT_GET_RADIO_ICON_RESPONSE,
+                    EVENT_ON_RADIO_ICON_CHANGE};
+            // Since sClient is static, it is shared between the sub-specific instances of this
+            // class. Calling registerCallbackWithEvents with the same package name will return
+            // null. As such, make sure to call it only if it hasn't been called yet.
+            if (sClient == null) {
+                sClient = sExtTelephonyManager.registerCallbackWithEvents(sPackageName,
+                        mExtPhoneCallbackListener, events);
+            }
 // QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 // QTI_BEGIN: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
             sIsMsimCiwlanSupported = sExtTelephonyManager.isFeatureSupported(
@@ -234,6 +246,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             getCiwlanConfig();
 // QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 // QTI_BEGIN: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
+            getCurrentRadioIcon();
         }
 
         @Override
@@ -241,6 +254,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
             Log.d(LOG_TAG, "ExtTelephony service disconnected");
 // QTI_END: 2023-02-13: Telephony: Show C_IWLAN-related warning dialogs
 // QTI_BEGIN: 2024-07-22: Telephony: Unregister to ExtPhoneCallback
+            sCurrentRadioIcon = null;
             sExtTelephonyManager.unregisterCallback(mExtPhoneCallbackListener);
 // QTI_END: 2024-07-22: Telephony: Unregister to ExtPhoneCallback
 // QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
@@ -266,6 +280,31 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
         }
 // QTI_END: 2023-04-27: Telephony: Restore backward compatibility for C_IWLAN dialogs
 // QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+
+        @Override
+        public void onRadioIconResponse(int slotId, Token token, Status status, RadioIcon icon)
+                throws RemoteException {
+            if (status.get() == Status.SUCCESS && icon != null) {
+                Log.d(LOG_TAG, "onRadioIconResponse slotId = " + slotId + ", icon = "
+                        + icon.getType());
+                sCurrentRadioIcon = icon;
+            } else {
+                Log.d(LOG_TAG, "onRadioIconResponse: Failed or null icon, status = "
+                        + status.get());
+            }
+        }
+
+        @Override
+        public void onRadioIconChange(int slotId, RadioIcon icon)
+                throws RemoteException {
+            if (icon != null) {
+                Log.d(LOG_TAG, "onRadioIconChange slotId = " + slotId + ", icon = "
+                        + icon.getType());
+                sCurrentRadioIcon = icon;
+            } else {
+                Log.d(LOG_TAG, "onRadioIconChange: Null icon received");
+            }
+        }
     };
 
 // QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
@@ -284,6 +323,22 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
 
 // QTI_END: 2024-06-07: Telephony: Fix mobile network setting preferences display issue
 // QTI_BEGIN: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+    private static void getCurrentRadioIcon() {
+        mExecutor.execute(() -> {
+            final int slotId = SubscriptionManager.getPhoneId(mSubId);
+            if (slotId == SubscriptionManager.INVALID_PHONE_INDEX) {
+                Log.e(LOG_TAG, "queryRadioIcon - invalid phone ID");
+                return;
+            }
+            try {
+                sExtTelephonyManager.queryRadioIcon(slotId, sClient);
+                Log.d(LOG_TAG, "Queried initial radio icon state for NB-TN detection");
+            } catch (Exception ex) {
+                Log.e(LOG_TAG, "queryRadioIcon failed: " + ex);
+            }
+        });
+    }
+
     private static CiwlanConfig getCiwlanConfig(int... subscriptionId) {
         // If subscriptionId is passed in, return the config belonging to that subId. Otherwise,
         // query the config for all active subscriptions.
@@ -489,6 +544,18 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     }
 
 // QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
+    static boolean isOnLteNb1(int subId) {
+        if (subId != mSubId) {
+            Log.d(LOG_TAG, "isOnLteNb1 - passed in sub ID different from this instance's sub ID");
+            return false;
+        }
+        if (sCurrentRadioIcon == null) {
+            Log.d(LOG_TAG, "isOnLteNb1 - radio icon is null");
+            return false;
+        }
+        return sCurrentRadioIcon.getType().get() == RadioIconType.TYPE_LTE_NB_IOT;
+    }
+
     private BroadcastReceiver mBrocastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -896,6 +963,7 @@ public class MobileNetworkSettings extends AbstractMobileNetworkSettings impleme
     public void onDestroy() {
 // QTI_END: 2024-02-02: Telephony: Update C_IWLAN warning dialog showing criteria
 // QTI_BEGIN: 2024-02-29: Telephony: Fix for Settings app crash when toggle Mobile Data
+        sCurrentRadioIcon = null;
         Log.i(LOG_TAG, "onDestroy: sExtTelServiceConnected = " + sExtTelServiceConnected
                 + " , sInstanceCounter = " + sInstanceCounter);
         if (sInstanceCounter > 0) {

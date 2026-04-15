@@ -17,6 +17,7 @@
 package com.android.settings.security;
 
 import android.content.Context;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 
@@ -57,9 +58,10 @@ public abstract class BaseSimProtectionModePreferenceController extends
     public int getAvailabilityStatus() {
         boolean isFlagEnabled = android.security.Flags.autoSimPinManagement();
         SubscriptionManager sm = mContext.getSystemService(SubscriptionManager.class);
-        boolean isValidSubscription = sm.isValidSubscriptionId(mSubId);
-        boolean isEmbeddedSim = isValidSubscription && sm.getActiveSubscriptionInfo(
-                mSubId).isEmbedded();
+        boolean isValidSubscription = sm != null && sm.isValidSubscriptionId(mSubId);
+        SubscriptionInfo subInfo = isValidSubscription ? sm.getActiveSubscriptionInfo(mSubId) :
+                null;
+        boolean isEmbeddedSim = subInfo != null && subInfo.isEmbedded();
 
         return isFlagEnabled && isValidSubscription && !isEmbeddedSim ? AVAILABLE
                 : CONDITIONALLY_UNAVAILABLE;

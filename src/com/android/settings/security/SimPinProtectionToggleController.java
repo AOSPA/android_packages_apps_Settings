@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.OutcomeReceiver;
 import android.security.Flags;
 import android.telephony.PinResult;
+import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -176,10 +177,11 @@ public class SimPinProtectionToggleController extends TogglePreferenceController
     }
 
     private void enableManualOrAutomaticSimPin() {
-        boolean isValidSubscription = mSubscriptionManager.isValidSubscriptionId(mSubId);
-        boolean isEmbeddedSim =
-                isValidSubscription && mSubscriptionManager.getActiveSubscriptionInfo(
-                        mSubId).isEmbedded();
+        boolean isValidSubscription = mSubscriptionManager != null &&
+                mSubscriptionManager.isValidSubscriptionId(mSubId);
+        SubscriptionInfo subInfo = isValidSubscription ? mSubscriptionManager.
+                getActiveSubscriptionInfo(mSubId) : null;
+        boolean isEmbeddedSim = subInfo != null && subInfo.isEmbedded();
 
         if (isDeviceSecure() && !isEmbeddedSim && Flags.enableAutoSimPinUi()) {
             mEnrollmentState = EnrollmentState.ENROLL_TO_AUTOMATIC_PIN_MANAGEMENT;
