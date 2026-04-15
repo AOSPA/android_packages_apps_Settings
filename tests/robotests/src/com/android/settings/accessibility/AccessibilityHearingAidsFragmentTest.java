@@ -22,20 +22,16 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothProfile;
 import android.content.Context;
+import android.os.SystemProperties;
 import android.telephony.TelephonyManager;
 
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
-import com.android.settings.bluetooth.Utils;
 import com.android.settings.testutils.XmlTestUtils;
-import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
-import com.android.settings.testutils.shadow.ShadowBluetoothUtils;
-import com.android.settingslib.bluetooth.LocalBluetoothManager;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,26 +41,23 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadow.api.Shadow;
 
 import java.util.List;
 import java.util.Objects;
 
 /** Tests for {@link AccessibilityHearingAidsFragment}. */
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = {ShadowBluetoothAdapter.class, ShadowBluetoothUtils.class})
 public class AccessibilityHearingAidsFragmentTest {
 
     @Rule
     public MockitoRule mMockitoRule = MockitoJUnit.rule();
     @Spy
     private final Context mContext = ApplicationProvider.getApplicationContext();
-
+    private static final String ASHA_PROFILE_CENTRAL_PROPERTY =
+            "bluetooth.profile.asha.central.enabled";
+    private static final String HAP_PROFILE_CLIENT_PROPERTY =
+            "bluetooth.profile.hap.client.enabled";
     @Mock
-    private LocalBluetoothManager mLocalBluetoothManager;
-    private ShadowBluetoothAdapter mShadowBluetoothAdapter;
-    private BluetoothAdapter mBluetoothAdapter;
     private TelephonyManager mTelephonyManager;
 
     @Before
@@ -72,17 +65,17 @@ public class AccessibilityHearingAidsFragmentTest {
         mTelephonyManager = spy(mContext.getSystemService(TelephonyManager.class));
         when(mContext.getSystemService(TelephonyManager.class)).thenReturn(mTelephonyManager);
         doReturn(true).when(mTelephonyManager).isHearingAidCompatibilitySupported();
+    }
 
-        ShadowBluetoothUtils.sLocalBluetoothManager = mLocalBluetoothManager;
-        mLocalBluetoothManager = Utils.getLocalBtManager(mContext);
-        mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        mShadowBluetoothAdapter = Shadow.extract(mBluetoothAdapter);
+    @After
+    public void tearDown() {
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "");
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "");
     }
 
     @Test
     public void getNonIndexableKeys_existInXmlLayout() {
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
 
         final List<String> niks = AccessibilityHearingAidsFragment.SEARCH_INDEX_DATA_PROVIDER
                 .getNonIndexableKeys(mContext).stream()
@@ -96,16 +89,15 @@ public class AccessibilityHearingAidsFragmentTest {
 
     @Test
     public void deviceSupportsHearingAid_isPageSearchEnabled_returnTrue() {
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEARING_AID);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "true");
 
         assertThat(AccessibilityHearingAidsFragment.isPageSearchEnabled(mContext)).isTrue();
     }
 
     @Test
     public void deviceDoesNotSupportHearingAid_isPageSearchEnabled_returnFalse() {
-        mShadowBluetoothAdapter.clearSupportedProfiles();
-        mShadowBluetoothAdapter.addSupportedProfiles(BluetoothProfile.HEADSET);
+        SystemProperties.set(ASHA_PROFILE_CENTRAL_PROPERTY, "false");
+        SystemProperties.set(HAP_PROFILE_CLIENT_PROPERTY, "false");
 
         assertThat(AccessibilityHearingAidsFragment.isPageSearchEnabled(mContext)).isFalse();
     }

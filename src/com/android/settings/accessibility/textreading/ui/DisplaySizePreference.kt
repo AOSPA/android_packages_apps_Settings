@@ -28,12 +28,14 @@ import com.android.settings.accessibility.shared.utils.DebounceConfigurationChan
 import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.CHANGE_BY_BUTTON_DELAY
 import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.CHANGE_BY_SLIDER_DELAY
 import com.android.settings.accessibility.shared.utils.DebounceConfigurationChangeCommitController.Companion.MIN_COMMIT_DELAY
+import com.android.settings.accessibility.shared.utils.shouldShowFocusRingsInSuw
 import com.android.settings.accessibility.textreading.data.DisplaySizeDataStore
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.IntRangeValuePreference
 import com.android.settingslib.metadata.MUSTPASS_SET
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -81,8 +83,8 @@ internal class DisplaySizePreference(
     ): @ReadWritePermit Int {
         return ReadWritePermit.ALLOW
     }
-    override val supportsWrite = true
 
+    override val supportsWrite = true
 
     override val sensitivityLevel
         get() = SensitivityLevel.NO_SENSITIVITY
@@ -123,7 +125,6 @@ internal class DisplaySizePreference(
     override val keywords: Int
         get() = R.string.keywords_display_size
 
-
     override fun createWidget(context: Context): SliderPreference {
         val widget =
             if (context.isInSetupWizard()) {
@@ -154,8 +155,15 @@ internal class DisplaySizePreference(
         // datastore while the user is dragging, or when we want to have some delay to show the
         // preview before committing the changes.
         preference as SliderPreference
-        preference.isPersistent = false
-        preference.value = _displaySizePreview.value.currentIndex
+        preference.run {
+            isPersistent = false
+            value = _displaySizePreview.value.currentIndex
+            // This change makes the row that contains the "Display size" slider unable to be
+            // focused, but allows the slider and its buttons to be focusable.
+            if (shouldShowFocusRingsInSuw(context)) {
+                isSelectable = false
+            }
+        }
     }
 
     override fun onStart(context: PreferenceLifecycleContext) {
@@ -206,6 +214,8 @@ internal class DisplaySizePreference(
     }
 
     override val availabilityDescription = "The main display must be internal."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = context.display.isInternal
 

@@ -28,6 +28,7 @@ import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NONE
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NOTE
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_NOTIFICATIONS
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_OVERVIEW
+import android.provider.Settings.Secure.ACTION_CORNER_ACTION_PEEK
 import android.provider.Settings.Secure.ACTION_CORNER_ACTION_QUICK_SETTINGS
 import android.provider.Settings.Secure.ACTION_CORNER_BOTTOM_LEFT_ACTION
 import android.provider.Settings.Secure.ACTION_CORNER_BOTTOM_RIGHT_ACTION
@@ -81,6 +82,9 @@ class ActionCornerCustomizationController(context: Context, preferenceKey: Strin
                 mContext.resources
                     .getStringArray(R.array.action_corner_action_titles)
                     .toMutableList()
+            if (com.android.window.flags.Flags.enableHomeScreenPeeking()) {
+                titles.add(mContext.getString(R.string.action_corner_action_peek_title))
+            }
             if (
                 Flags.enableNoteInActionCorner() &&
                     roleManager?.isRoleAvailable(RoleManager.ROLE_NOTES) == true
@@ -122,16 +126,19 @@ class ActionCornerCustomizationController(context: Context, preferenceKey: Strin
     }
 
     private val entryValues: Array<CharSequence>
-        get() =
+        get() {
+            val values = BASE_ENTRY_VALUES.toMutableList()
+            if (com.android.window.flags.Flags.enableHomeScreenPeeking()) {
+                values.add(ACTION_CORNER_ACTION_PEEK.toString())
+            }
             if (
                 Flags.enableNoteInActionCorner() &&
                     roleManager?.isRoleAvailable(RoleManager.ROLE_NOTES) == true
             ) {
-                (BASE_ENTRY_VALUES.toMutableList() + ACTION_CORNER_ACTION_NOTE.toString())
-                    .toTypedArray()
-            } else {
-                BASE_ENTRY_VALUES
+                values.add(ACTION_CORNER_ACTION_NOTE.toString())
             }
+            return values.toTypedArray()
+        }
 
     private companion object {
         val prefKeyToCorner =

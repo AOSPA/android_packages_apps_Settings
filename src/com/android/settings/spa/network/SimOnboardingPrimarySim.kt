@@ -14,15 +14,23 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
+// QTI_BEGIN: 2025-01-16: Telephony: Fix mobile data greyed out issue
  * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+// QTI_END: 2025-01-16: Telephony: Fix mobile data greyed out issue
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 package com.android.settings.spa.network
 
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 import android.provider.Settings
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 import android.telephony.SubscriptionManager
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.SignalCellularAlt
@@ -38,7 +46,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.network.SimOnboardingService
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 import com.android.settings.network.telephony.TelephonyUtils
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 import com.android.settingslib.spa.widget.preference.ListPreference
 import com.android.settingslib.spa.widget.preference.ListPreferenceModel
 import com.android.settingslib.spa.widget.preference.ListPreferenceOption
@@ -150,10 +160,13 @@ fun SimOnboardingPrimarySimImpl(
                     },
                 )
             }
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
         }
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
     }
 }
 
+// QTI_BEGIN: 2025-01-16: Telephony: Fix mobile data greyed out issue
 @Composable
 fun CreatePrimarySimListPreference(
         title: String,
@@ -167,8 +180,11 @@ fun CreatePrimarySimListPreference(
         override val options = list
         override val selectedId = selectedId
         override val onIdSelected = onIdSelected
+// QTI_END: 2025-01-16: Telephony: Fix mobile data greyed out issue
         override val icon = @Composable { SettingsIcon(icon) }
+// QTI_BEGIN: 2025-01-16: Telephony: Fix mobile data greyed out issue
         }
+// QTI_END: 2025-01-16: Telephony: Fix mobile data greyed out issue
     )
 
 @Composable
@@ -177,8 +193,10 @@ fun CreatePrimarySimListPreference(
         list: List<ListPreferenceOption>,
         selectedId: MutableIntState,
         icon: ImageVector,
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
         onIdSelected: (id: Int) -> Unit,
         isSelectable: Boolean
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
 ) = ListPreference(
     object : ListPreferenceModel {
         override val title = title
@@ -188,9 +206,13 @@ fun CreatePrimarySimListPreference(
         override val icon = @Composable {
             SettingsIcon(icon)
         }
+// QTI_BEGIN: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
         // In case of Calls & SMS preference, this is always true.
         // For default data preference, the UI is greyed out when
         // SmartDDS is enabled and device in ECBM/SCBM mode and
         // when a call is active on any of the subscriptions
         override val enabled = { isSelectable }
+// QTI_END: 2024-12-11: Telephony: Enable Dual SIM onboarding feature in Settings
+// QTI_BEGIN: 2025-01-16: Telephony: Fix mobile data greyed out issue
 })
+// QTI_END: 2025-01-16: Telephony: Fix mobile data greyed out issue

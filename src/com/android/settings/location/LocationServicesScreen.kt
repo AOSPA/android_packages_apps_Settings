@@ -25,6 +25,7 @@ import com.android.settings.Settings.ScanningSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
@@ -39,7 +40,6 @@ open class LocationServicesScreen : PreferenceScreenMixin, PreferenceAvailabilit
     override val key: String
         get() = KEY
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.location_services_purpose
 
@@ -57,6 +57,8 @@ open class LocationServicesScreen : PreferenceScreenMixin, PreferenceAvailabilit
 
     override val availabilityDescription =
         "The device must support showing location services in Settings."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) =
         context.resources.getBoolean(R.bool.config_show_location_services)

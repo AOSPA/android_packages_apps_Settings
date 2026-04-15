@@ -141,6 +141,7 @@ public class ConfirmLockPatternTest {
     @After
     public void tearDown() {
         ShadowLockPatternUtils.reset();
+        SettingsShadowResources.reset();
     }
 
     @Test
@@ -377,9 +378,10 @@ public class ConfirmLockPatternTest {
         clearButton.performClick();
         assertThat(lockPatternView.isEmpty()).isTrue();
     }
-
     @Test
-    public void checkboxVisibility_hidePatternDisabled_checkboxIsVisible() throws Exception {
+    public void checkPatternTransfer_bothHideConfigsFalse_checkboxIsVisible() throws Exception {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_disable_remote_lockscreen_transfer_checkbox, false);
         SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, false);
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(
@@ -389,10 +391,45 @@ public class ConfirmLockPatternTest {
         ConfirmLockPatternFragment fragment =
                 (ConfirmLockPatternFragment) getConfirmDeviceCredentialBaseFragment(activity);
         assertThat(fragment.mCheckBox.getVisibility()).isEqualTo(View.VISIBLE);
+        assertThat(fragment.mCheckBox.isChecked()).isTrue();
     }
 
     @Test
-    public void checkboxVisibility_hidePatternEnabled_checkboxIsGone() throws Exception {
+    public void checkPatternTransfer_hideCheckboxConfigTrue_checkboxIsGone() throws Exception {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_disable_remote_lockscreen_transfer_checkbox, true);
+        SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, false);
+        ConfirmDeviceCredentialBaseActivity activity =
+                buildConfirmDeviceCredentialBaseActivity(
+                        ConfirmLockPattern.class,
+                        createRemoteLockscreenValidationIntent(
+                                KeyguardManager.PATTERN, VALID_REMAINING_ATTEMPTS));
+        ConfirmLockPatternFragment fragment =
+                (ConfirmLockPatternFragment) getConfirmDeviceCredentialBaseFragment(activity);
+        assertThat(fragment.mCheckBox.getVisibility()).isEqualTo(View.GONE);
+        assertThat(fragment.mCheckBox.isChecked()).isFalse();
+    }
+
+    @Test
+    public void checkPatternTransfer_hidePatternConfigTrue_checkboxIsGone() throws Exception {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_disable_remote_lockscreen_transfer_checkbox, false);
+        SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, true);
+        ConfirmDeviceCredentialBaseActivity activity =
+                buildConfirmDeviceCredentialBaseActivity(
+                        ConfirmLockPattern.class,
+                        createRemoteLockscreenValidationIntent(
+                                KeyguardManager.PATTERN, VALID_REMAINING_ATTEMPTS));
+        ConfirmLockPatternFragment fragment =
+                (ConfirmLockPatternFragment) getConfirmDeviceCredentialBaseFragment(activity);
+        assertThat(fragment.mCheckBox.getVisibility()).isEqualTo(View.GONE);
+        assertThat(fragment.mCheckBox.isChecked()).isFalse();
+    }
+
+    @Test
+    public void checkPatternTransfer_bothHideConfigsTrue_checkboxIsGone() throws Exception {
+        SettingsShadowResources.overrideResource(
+                R.bool.config_disable_remote_lockscreen_transfer_checkbox, true);
         SettingsShadowResources.overrideResource(R.bool.config_hide_pattern_security_option, true);
         ConfirmDeviceCredentialBaseActivity activity =
                 buildConfirmDeviceCredentialBaseActivity(

@@ -25,11 +25,13 @@ import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
 import com.android.settingslib.applications.AppUtils
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_APPS
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AppLaunchApiScreen.KEY, parameterized = true)
@@ -43,7 +45,8 @@ class AppLaunchApiScreen :
     init {
         flag { Flags.catalystMigration26q2() }
 
-        tags(APP_FUNCTION_APPS)
+        // UI-only as this has no preferences and the OpenByDefaultStateSource provides this information.
+        tags(APP_FUNCTION_APPS, UI_ONLY_PREFERENCE)
 
         parameters {
             parameter(
@@ -74,19 +77,36 @@ class AppLaunchApiScreen :
             val appInfo = packageInfo.applicationInfo
             when {
                 appInfo == null -> {
-                    Custom(R.string.app_launch_screen_app_unavailable)
+                    Custom(
+                        R.string.app_launch_screen_app_unavailable,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
                 appInfo.flags and ApplicationInfo.FLAG_INSTALLED == 0 -> {
-                    Custom(R.string.app_launch_screen_app_not_installed)
+                    Custom(
+                        R.string.app_launch_screen_app_not_installed,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
                 !appInfo.enabled -> {
-                    Custom(R.string.app_launch_screen_app_disabled)
+                    Custom(
+                        R.string.app_launch_screen_app_disabled,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
                 AppUtils.isInstant(appInfo) -> {
-                    Custom(R.string.app_launch_screen_app_instant)
+                    // Technically unstable but unlikely to change.
+                    Custom(
+                        R.string.app_launch_screen_app_instant,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
                 AppUtils.isBrowserApp(context, packageName, UserHandle.myUserId()) -> {
-                    Custom(R.string.app_launch_screen_app_browser)
+                    // Technically unstable but unlikely to change.
+                    Custom(
+                        R.string.app_launch_screen_app_browser,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
                 }
                 else -> Allowed
             }

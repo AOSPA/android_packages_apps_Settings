@@ -23,20 +23,20 @@ import android.location.LocationManager
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
 import com.android.settingslib.metadata.preferencesapi.preconditions.InvalidPreference
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 import com.android.settingslib.metadata.preferencesapi.types.PercentageInt
 import com.android.settingslib.metadata.preferencesapi.types.TimeOfDay
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit.MINUTES
 import kotlin.math.roundToInt
 
 // LINT.IfChange
@@ -68,6 +68,7 @@ class NightDisplayApiScreen :
             purpose = R.string.night_display_activated_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             get { execute { context.colorDisplayManager.isNightDisplayActivated } }
 
             set {
@@ -124,7 +125,10 @@ class NightDisplayApiScreen :
                         value == ColorDisplayManager.AUTO_MODE_TWILIGHT &&
                             !context.isLocationEnabled
                     ) {
-                        Disallowed(R.string.night_display_auto_mode_twilight_location_disabled)
+                        Custom(
+                            R.string.night_display_auto_mode_twilight_location_disabled,
+                            stability = PreconditionStability.UNSTABLE,
+                        )
                     } else {
                         Allowed
                     }
@@ -152,18 +156,12 @@ class NightDisplayApiScreen :
                 }
             }
 
-            get {
-                execute {
-                    context.colorDisplayManager.getNightDisplayCustomStartTime()
-                }
-            }
+            get { execute { context.colorDisplayManager.getNightDisplayCustomStartTime() } }
 
             set {
                 permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
                 execute { value ->
-                    context.colorDisplayManager.setNightDisplayCustomStartTime(
-                        value
-                    )
+                    context.colorDisplayManager.setNightDisplayCustomStartTime(value)
                 }
             }
         }
@@ -185,19 +183,11 @@ class NightDisplayApiScreen :
                 }
             }
 
-            get {
-                execute {
-                    context.colorDisplayManager.getNightDisplayCustomEndTime()
-                }
-            }
+            get { execute { context.colorDisplayManager.getNightDisplayCustomEndTime() } }
 
             set {
                 permissions(CONTROL_DISPLAY_COLOR_TRANSFORMS)
-                execute { value ->
-                    context.colorDisplayManager.setNightDisplayCustomEndTime(
-                        value
-                    )
-                }
+                execute { value -> context.colorDisplayManager.setNightDisplayCustomEndTime(value) }
             }
         }
     }

@@ -44,6 +44,7 @@ import android.provider.Settings;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -75,6 +76,11 @@ public class FlashNotificationsUtilTest {
         MockitoAnnotations.initMocks(this);
         mShadowCameraManager = Shadows.shadowOf(mCameraManager);
         mContentResolver = mContext.getContentResolver();
+    }
+
+    @After
+    public void tearDown() {
+        FlashNotificationsUtil.reset();
     }
 
     @Test

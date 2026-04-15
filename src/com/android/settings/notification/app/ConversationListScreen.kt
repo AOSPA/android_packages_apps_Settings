@@ -24,7 +24,9 @@ import com.android.settings.Settings.ConversationListSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.notification.NotificationBackend
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -78,7 +80,7 @@ open class ConversationListScreen : PreferenceScreenMixin, PreferenceSummaryProv
 
     class ConversationListScreenPreference(
         private val screenMetadata : ConversationListScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PersistentPreference<String> {
         override val key : String
             get() = "conversations_preference"
 
@@ -92,6 +94,13 @@ open class ConversationListScreen : PreferenceScreenMixin, PreferenceSummaryProv
         override fun isEnabled(context: Context) : Boolean = screenMetadata.isEnabled(context)
 
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
     }
 
     companion object {

@@ -477,6 +477,93 @@ class SafetyCenterFragmentTest {
     }
 
     @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun deviceUnlockPref_withUnknownAndUnspecifiedEntries_usesErrorSummaryAndNullIcon() {
+        val errorEntry =
+            createEntry(
+                id = "ErrorEntry",
+                title = "Error Entry",
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN,
+                hasError = true,
+            )
+        val unspecifiedEntry =
+            createEntry(
+                id = "UnspecifiedEntry",
+                title = "Unspecified Entry",
+                sourceId = ANDROID_FACE_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNSPECIFIED,
+            )
+
+        // Verifies that UNKNOWN correctly overrides UNSPECIFIED, catching the error state
+        runTest(createScData(entries = listOf(errorEntry, unspecifiedEntry))) { fragment ->
+            val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString())
+                .isEqualTo(mApplication.getString(R.string.safety_center_refresh_error))
+            assertIconResource(preference, R.drawable.ic_safety_null_state)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun deviceUnlockPref_withUnknownAndOkEntries_usesErrorSummaryAndNullIcon() {
+        val errorEntry =
+            createEntry(
+                id = "ErrorEntry",
+                title = "Error Entry",
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN,
+                hasError = true,
+            )
+        val okEntry =
+            createEntry(
+                id = "OkEntry",
+                title = "OK Entry",
+                sourceId = ANDROID_FACE_UNLOCK_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_OK,
+            )
+
+        // Verifies that UNKNOWN correctly overrides OK
+        runTest(createScData(entries = listOf(errorEntry, okEntry))) { fragment ->
+            val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString())
+                .isEqualTo(mApplication.getString(R.string.safety_center_refresh_error))
+            assertIconResource(preference, R.drawable.ic_safety_null_state)
+        }
+    }
+
+    @Test
+    @EnableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
+    fun deviceUnlockPref_withUnknownAndCriticalEntries_usesCriticalSummaryAndWarnIcon() {
+        val errorEntry =
+            createEntry(
+                id = "ErrorEntry",
+                title = "Error Entry",
+                sourceId = ANDROID_LOCK_SCREEN_SOURCE_ID,
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_UNKNOWN,
+                hasError = true,
+            )
+        val criticalEntry =
+            createEntry(
+                id = "CriticalEntry",
+                title = "Critical Entry",
+                sourceId = ANDROID_FACE_UNLOCK_SOURCE_ID,
+                summary = "Critical Summary",
+                severity = SafetyCenterEntry.ENTRY_SEVERITY_LEVEL_CRITICAL_WARNING,
+            )
+
+        // Verifies that CRITICAL correctly overrides UNKNOWN
+        runTest(createScData(entries = listOf(errorEntry, criticalEntry))) { fragment ->
+            val preference = fragment.findPreference<Preference>(DEVICE_UNLOCK_KEY)
+            assertThat(preference?.isVisible).isTrue()
+            assertThat(preference?.summary.toString()).isEqualTo("Critical Summary")
+            assertIconResource(preference, R.drawable.ic_safety_warn)
+        }
+    }
+
+    @Test
     @DisableFlags(Flags.FLAG_OPEN_SAFETY_CENTER_APIS)
     fun deviceUnlockPref_whenFlagDisabled_subpageHidden() {
         val entry =

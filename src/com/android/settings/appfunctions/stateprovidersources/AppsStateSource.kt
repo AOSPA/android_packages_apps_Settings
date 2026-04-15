@@ -17,6 +17,7 @@
 package com.android.settings.appfunctions.stateprovidersources
 
 import android.content.Context
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.android.settings.applications.getPackageInfo
 import com.android.settingslib.spaprivileged.model.app.AppListRepositoryImpl
@@ -37,12 +38,12 @@ class AppsStateSource : DeviceStateSource {
                     listOf(
                         DeviceStateItem(
                             key = "version",
-                            purpose = "version",
+                            purpose = context.getString(R.string.app_version_purpose),
                             jsonValue = context.getPackageInfo(it.packageName)?.versionName,
                         ),
                         DeviceStateItem(
                             key = "packageName",
-                            purpose = "packageName",
+                            purpose = context.getString(R.string.app_package_purpose),
                             jsonValue = it.packageName,
                         ),
                     )

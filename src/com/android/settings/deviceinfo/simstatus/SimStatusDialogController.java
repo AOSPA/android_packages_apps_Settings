@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2025-03-12: Telephony: Showing 5G as data network type instead of NR NSA
 /*
  * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
  * Copyright (c) 2024-2025 Qualcomm Innovation Center, Inc. All rights reserved.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2025-03-12: Telephony: Showing 5G as data network type instead of NR NSA
 package com.android.settings.deviceinfo.simstatus;
 
 import android.content.BroadcastReceiver;
@@ -57,19 +59,22 @@ import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.android.settings.R;
-import com.android.settings.flags.Flags;
 import com.android.settings.network.SubscriptionUtil;
 import com.android.settings.network.telephony.DomesticRoamUtils;
+// QTI_BEGIN: 2024-03-07: Android_UI: Settings: Support network identity display for some carriers.
 import com.android.settingslib.mobile.MobileMappings;
 import com.android.settingslib.mobile.MobileMappings.Config;
 import com.android.settingslib.SignalIcon.MobileIconGroup;
+// QTI_END: 2024-03-07: Android_UI: Settings: Support network identity display for some carriers.
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.Lifecycle;
 
+// QTI_BEGIN: 2024-03-07: Android_UI: Settings: Support network identity display for some carriers.
 import static com.android.settings.network.MobileIconGroupExtKt.getSummaryForSub;
 import static com.android.settingslib.mobile.MobileMappings.getIconKey;
 import static com.android.settingslib.mobile.MobileMappings.mapIconSets;
 
+// QTI_END: 2024-03-07: Android_UI: Settings: Support network identity display for some carriers.
 import kotlin.Unit;
 
 import java.util.List;
@@ -524,6 +529,7 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         if (actualDataNetworkType == TelephonyManager.NETWORK_TYPE_LTE
                 && isOverrideNwTypeNrAdvancedOrNsa) {
             dataNetworkTypeName = "NR NSA";
+// QTI_BEGIN: 2025-03-12: Telephony: Showing 5G as data network type instead of NR NSA
         } else {
             boolean isLteVoice = (TelephonyManager.NETWORK_TYPE_LTE == actualVoiceNetworkType);
             boolean isLteData = (TelephonyManager.NETWORK_TYPE_LTE == actualDataNetworkType);
@@ -543,6 +549,7 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
                     voiceNetworkTypeName = isLteVoice ? mappedTypeName : voiceNetworkTypeName;
                     dataNetworkTypeName = isLteData ? mappedTypeName : dataNetworkTypeName;
                 }
+// QTI_END: 2025-03-12: Telephony: Showing 5G as data network type instead of NR NSA
             }
         }
 
@@ -550,6 +557,7 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         mDialog.setText(CELL_DATA_NETWORK_TYPE_VALUE_ID, dataNetworkTypeName);
     }
 
+// QTI_BEGIN: 2024-03-07: Android_UI: Settings: Support network identity display for some carriers.
     /**
      * Gets config for carrier customization.
      */
@@ -571,6 +579,7 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
         return getSummaryForSub(iconGroup, context, subId);
     }
 
+// QTI_END: 2024-03-07: Android_UI: Settings: Support network identity display for some carriers.
     private void updateRoamingStatus(ServiceState serviceState) {
         // If the serviceState is null, we assume that roaming is disabled.
         if (serviceState == null) {
@@ -589,25 +598,15 @@ public class SimStatusDialogController implements DefaultLifecycleObserver {
     }
 
     private void updateGid1() {
-        if (Flags.showSimStatusDetailedInfo()) {
-            updateCarrierConfigManagedItem(GID1_LABEL_ID, GID1_VALUE_ID,
-                    CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL,
-                    () -> getTelephonyManager().getGroupIdLevel1());
-        } else {
-            mDialog.removeSettingFromScreen(GID1_LABEL_ID);
-            mDialog.removeSettingFromScreen(GID1_VALUE_ID);
-        }
+        updateCarrierConfigManagedItem(GID1_LABEL_ID, GID1_VALUE_ID,
+                CarrierConfigManager.KEY_SHOW_GID1_IN_SIM_STATUS_BOOL,
+                () -> getTelephonyManager().getGroupIdLevel1());
     }
 
     private void updateCarrierId() {
-        if (Flags.showSimStatusDetailedInfo()) {
-            updateCarrierConfigManagedItem(CARRIER_ID_LABEL_ID, CARRIER_ID_VALUE_ID,
-                    CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL,
-                    () -> String.valueOf(getTelephonyManager().getSimCarrierId()));
-        } else {
-            mDialog.removeSettingFromScreen(CARRIER_ID_LABEL_ID);
-            mDialog.removeSettingFromScreen(CARRIER_ID_VALUE_ID);
-        }
+        updateCarrierConfigManagedItem(CARRIER_ID_LABEL_ID, CARRIER_ID_VALUE_ID,
+                CarrierConfigManager.KEY_SHOW_CARRIER_ID_IN_SIM_STATUS_BOOL,
+                () -> String.valueOf(getTelephonyManager().getSimCarrierId()));
     }
 
 

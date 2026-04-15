@@ -31,6 +31,7 @@ import com.android.settings.wifi.tether.WifiHotspotScreen
 import com.android.settingslib.TetherUtil
 import com.android.settingslib.Utils
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceTitleProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -69,6 +70,8 @@ open class TetherScreen :
         }
 
     override val availabilityDescription = "The device must support tethering."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = TetherUtil.isTetherAvailable(context)
 

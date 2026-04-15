@@ -39,6 +39,9 @@ import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Collections.emptyList
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(UserDetailsSettingsScreenApi.KEY, parameterized = true)
@@ -59,14 +62,17 @@ class UserDetailsSettingsScreenApi :
                 required = true,
                 // TODO(b/479151776): Replace to a user id type once it is implemented
                 type =
-                    GeneratedParameterType(R.string.user_details_settings_user_name_description) {
+                    GeneratedParameterType(
+                        R.string.user_details_settings_user_name_description,
+                        key = "UserDetailsTargetUserId",
+                    ) {
                         val um = context.getSystemService(UserManager::class.java)
                         um.aliveUsers
                             ?.filter { it.isUiSwitchableHumanUser() }
                             ?.map { userInfo ->
                                 GeneratedValue(
-                                    value = Integer.toString(userInfo.id),
-                                    description = userInfo.name ?: "",
+                                    value = Integer.toString(userInfo.id).safe(),
+                                    description = userInfo.name?.unsafe() ?: "".safe(),
                                 )
                             } ?: emptyList() // Added elvis operator to return emptyList() if null
                     },
@@ -109,11 +115,11 @@ class UserDetailsSettingsScreenApi :
                 if (!Utils.isVoiceCapable(context)) {
                     HardwareUnsupported(R.string.user_details_enable_calling_unsupported)
                 } else if (!userManager.isAdminUser()) {
-                    Custom(R.string.user_details_setting_unavailable_user_not_admin)
+                    Custom(R.string.user_details_setting_unavailable_user_not_admin, stability = PreconditionStability.UNSTABLE)
                 } else if (
                     paramUserInfo.isMain() || paramUserInfo.isRestricted || paramUserInfo.isGuest()
                 ) {
-                    Custom(R.string.user_details_setting_unavailable_for_selected_user)
+                    Custom(R.string.user_details_setting_unavailable_for_selected_user, stability = PreconditionStability.UNSTABLE)
                 } else {
                     Allowed
                 }
@@ -163,7 +169,7 @@ class UserDetailsSettingsScreenApi :
                 if (!UserManager.isMultipleAdminEnabled()) {
                     HardwareUnsupported(R.string.user_details_grant_admin_unsupported)
                 } else if (!userManager.isAdminUser()) {
-                    Custom(R.string.user_details_setting_unavailable_user_not_admin)
+                    Custom(R.string.user_details_setting_unavailable_user_not_admin, stability = PreconditionStability.UNSTABLE)
                 } else if (
                     paramUserInfo.isMain() ||
                         paramUserInfo.isGuest() ||
@@ -172,7 +178,7 @@ class UserDetailsSettingsScreenApi :
                             paramUserInfo.getUserHandle(),
                         )
                 ) {
-                    Custom(R.string.user_details_setting_unavailable_for_selected_user)
+                    Custom(R.string.user_details_setting_unavailable_for_selected_user, stability = PreconditionStability.UNSTABLE)
                 } else {
                     Allowed
                 }

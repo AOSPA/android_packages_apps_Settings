@@ -40,6 +40,7 @@ import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.KeyParametersSchema
 import com.android.settingslib.metadata.ParameterizedPreferenceScreenArgumentsFactory
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
@@ -67,14 +68,14 @@ private constructor(
     PreferenceTitleProvider,
     PreferenceAvailabilityProvider {
 
-    private val packageName: String =
+    private val packageName: String? =
         if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-            keyParameters!!.getRequired(KEY_APP_PACKAGE_NAME)
+            keyParameters!!.get(KEY_APP_PACKAGE_NAME)
         } else {
             arguments!!.getString(KEY_APP_PACKAGE_NAME)!!
         }
 
-    private val appInfo = context.getApplicationInfo(packageName)
+    private val appInfo = packageName?.let { context.getApplicationInfo(it) }
 
     private val storage: KeyValueStore = InteractAcrossProfilesStorage(context, packageName)
 
@@ -90,6 +91,9 @@ private constructor(
 
     override val key: String
         get() = KEY
+
+    override val keyParametersSchema: KeyParametersSchema
+        get() = parametersSchema
 
     //TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
@@ -127,12 +131,14 @@ private constructor(
 
     override val availabilityDescription = "The app must be enabled."
 
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
+
     override fun isAvailable(context: Context) = appInfo != null
 
     override fun extras(context: Context): Bundle? =
         Bundle(1).apply {
             if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
-                putString(KEY_EXTRA_PACKAGE_NAME, keyParameters!!.getRequired(KEY_APP_PACKAGE_NAME))
+                putString(KEY_EXTRA_PACKAGE_NAME, keyParameters!!.get(KEY_APP_PACKAGE_NAME) ?: "")
             } else {
                 putString(KEY_EXTRA_PACKAGE_NAME, arguments!!.getString(KEY_APP_PACKAGE_NAME))
             }
@@ -151,7 +157,7 @@ private constructor(
 
         @JvmStatic
         override val parametersSchema = KeyParametersSchema {
-            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = true, type = InstalledPackageName)
+            parameter(KEY_APP_PACKAGE_NAME, "The package name of the app", required = false, type = InstalledPackageName)
         }
 
         @JvmStatic
@@ -211,7 +217,7 @@ private class InteractAcrossProfilesMainSwitch(private val storage: KeyValueStor
 
 private class InteractAcrossProfilesStorage(
     private val context: Context,
-    private val packageName: String,
+    private val packageName: String?,
 ) : NoOpKeyedObservable<String>(), KeyValueStore {
 
     override fun contains(key: String): Boolean {
@@ -220,6 +226,7 @@ private class InteractAcrossProfilesStorage(
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : Any> getValue(key: String, valueType: Class<T>): T {
+        if (packageName == null) error("No package name provided")
         return InteractAcrossProfilesDetails.isInteractAcrossProfilesEnabled(context, packageName)
             as T
     }

@@ -28,16 +28,17 @@ import android.widget.TextView
 import androidx.annotation.OpenForTesting
 import androidx.appcompat.app.AlertDialog
 import com.android.settings.R
+import com.android.settings.widget.FocusIndicatorDrawable
 import com.android.settings.wifi.utils.WifiDialogHelper
 import com.android.settingslib.RestrictedLockUtils
 import com.android.settingslib.RestrictedLockUtilsInternal
 import com.android.wifitrackerlib.WifiEntry
 
-/**
- * Dialog for users to edit a Wi-Fi network.
- */
+/** Dialog for users to edit a Wi-Fi network. */
 @OpenForTesting
-open class WifiDialog2 @JvmOverloads constructor(
+open class WifiDialog2
+@JvmOverloads
+constructor(
     context: Context,
     private val listener: WifiDialog2Listener,
     val wifiEntry: WifiEntry?,
@@ -46,24 +47,17 @@ open class WifiDialog2 @JvmOverloads constructor(
     private val hideSubmitButton: Boolean = mode == WifiConfigUiBase2.MODE_VIEW,
     private val hideMeteredAndPrivacy: Boolean = false,
     private val isSysUiCaller: Boolean = false,
+    private val showFocusRingIndicator: Boolean = false,
 ) : AlertDialog(context, style), WifiConfigUiBase2, DialogInterface.OnClickListener {
-    /**
-     * Host UI component of WifiDialog2 can receive callbacks by this interface.
-     */
+    /** Host UI component of WifiDialog2 can receive callbacks by this interface. */
     interface WifiDialog2Listener {
-        /**
-         * To forget the Wi-Fi network.
-         */
+        /** To forget the Wi-Fi network. */
         fun onForget(dialog: WifiDialog2) {}
 
-        /**
-         * To save the Wi-Fi network.
-         */
+        /** To save the Wi-Fi network. */
         fun onSubmit(dialog: WifiDialog2) {}
 
-        /**
-         * To trigger Wi-Fi QR code scanner.
-         */
+        /** To trigger Wi-Fi QR code scanner. */
         fun onScan(dialog: WifiDialog2, ssid: String) {}
     }
 
@@ -79,7 +73,15 @@ open class WifiDialog2 @JvmOverloads constructor(
         }
         view = layoutInflater.inflate(R.layout.wifi_dialog, null)
         setView(view)
-        controller = WifiConfigController2(this, view, wifiEntry, mode, hideMeteredAndPrivacy)
+        controller =
+            WifiConfigController2(
+                this,
+                view,
+                wifiEntry,
+                mode,
+                hideMeteredAndPrivacy,
+                showFocusRingIndicator,
+            )
         super.onCreate(savedInstanceState)
         if (hideSubmitButton) {
             controller.hideSubmitButton()
@@ -114,6 +116,16 @@ open class WifiDialog2 @JvmOverloads constructor(
                 listener.onScan(this, ssid)
             }
         }
+        if (showFocusRingIndicator) {
+            val cancelButton = getButton(BUTTON_NEGATIVE)
+            val submitButton = getButton(BUTTON_SUBMIT)
+            cancelButton?.setSingleLine(false)
+            cancelButton?.foreground =
+                FocusIndicatorDrawable.Builder(context).withCornerRadius(2).build()
+            submitButton?.setSingleLine(false)
+            submitButton?.foreground =
+                FocusIndicatorDrawable.Builder(context).withCornerRadius(2).build()
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -133,7 +145,7 @@ open class WifiDialog2 @JvmOverloads constructor(
                 if (WifiUtils.isNetworkLockedDown(context, wifiEntry!!.wifiConfiguration)) {
                     RestrictedLockUtils.sendShowAdminSupportDetailsIntent(
                         context,
-                        RestrictedLockUtilsInternal.getDeviceOwner(context)
+                        RestrictedLockUtilsInternal.getDeviceOwner(context),
                     )
                     return
                 }

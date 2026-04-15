@@ -29,6 +29,7 @@ import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
+import com.android.settingslib.metadata.preferencesapi.safe
 
 // LINT.IfChange
 @ProvidePreferenceScreen(RegionPickerApiFirstScreen.KEY)
@@ -47,7 +48,10 @@ class RegionPickerApiFirstScreen :
             key = KEY_PREFERENCE,
             purpose = R.string.system_locale_region_picker_preference_purpose,
             type =
-                GeneratedType(description = R.string.default_system_language_region_description) {
+                GeneratedType(
+                    description = R.string.default_system_language_region_description,
+                    key = "SystemRegionCountryCode",
+                ) {
                     val defaultLocaleInfo = LocaleStore.getLocaleInfo(Locale.getDefault())
                     val parentLocale = defaultLocaleInfo.parent
                     val parentLocaleInfo = LocaleStore.getLocaleInfo(parentLocale)
@@ -58,7 +62,7 @@ class RegionPickerApiFirstScreen :
                     // India
                     localeInfoList.add(defaultLocaleInfo)
                     localeInfoList.map {
-                        GeneratedValue(it.locale.country, it.fullCountryNameNative)
+                        GeneratedValue(it.locale.country.safe(), it.fullCountryNameNative.safe())
                     }
                 },
         ) {

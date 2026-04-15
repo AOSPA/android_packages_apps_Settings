@@ -24,6 +24,7 @@ import com.android.settings.DisplaySettings
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -46,6 +47,11 @@ class DisplayApiScreen :
             Flags.catalystMigration26q2() &&
                 com.android.server.display.feature.flags.Flags.displaySettingsApiScreenSupport()
         }
+
+        // exclude this screen from api result since the adjust brightness preference (and more)
+        // are in the display_settings_screen screen in the output. We can remove this tag when
+        // we'll add other preferences.
+        tags(UI_ONLY_PREFERENCE)
 
         preconditions(R.string.display_settings_screen_preconditions) {
             if (context.resources.getBoolean(R.bool.config_show_top_level_display)) {

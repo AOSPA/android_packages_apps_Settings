@@ -21,6 +21,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -42,6 +43,7 @@ import android.net.Uri;
 
 import androidx.test.core.app.ApplicationProvider;
 
+import com.android.media.flags.Flags;
 import com.android.settings.bluetooth.Utils;
 import com.android.settings.slices.ShadowSliceBackgroundWorker;
 import com.android.settings.testutils.shadow.ShadowBluetoothAdapter;
@@ -130,7 +132,11 @@ public class MediaOutputIndicatorWorkerTest {
         verify(mBluetoothEventManager).registerCallback(mMediaOutputIndicatorWorker);
         verify(mContext).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
         verify(mLocalMediaManager).registerCallback(mMediaOutputIndicatorWorker);
-        verify(mLocalMediaManager).startScan();
+        if (Flags.cleanupUnnecessaryScanRequestInSettings()) {
+            verify(mLocalMediaManager, never()).startScan();
+        } else {
+            verify(mLocalMediaManager).startScan();
+        }
     }
 
     @Test
@@ -196,7 +202,11 @@ public class MediaOutputIndicatorWorkerTest {
         verify(mBluetoothEventManager).unregisterCallback(mMediaOutputIndicatorWorker);
         verify(mContext).unregisterReceiver(any(BroadcastReceiver.class));
         verify(mLocalMediaManager).unregisterCallback(mMediaOutputIndicatorWorker);
-        verify(mLocalMediaManager).stopScan();
+        if (Flags.cleanupUnnecessaryScanRequestInSettings()) {
+            verify(mLocalMediaManager, never()).stopScan();
+        } else {
+            verify(mLocalMediaManager).stopScan();
+        }
     }
 
     @Test

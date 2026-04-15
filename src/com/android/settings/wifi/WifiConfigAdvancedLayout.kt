@@ -25,8 +25,11 @@ import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import com.android.settings.R
+import com.android.settings.widget.FocusIndicatorDrawable
 
-class WifiConfigAdvancedLayout(val view: View) {
+class WifiConfigAdvancedLayout
+@JvmOverloads
+constructor(val view: View, private val showFocusRingIndicator: Boolean = false) {
 
     private val layout = view.requireViewById<LinearLayout>(R.id.advanced_options_layout)
     private val icon = view.requireViewById<ImageView>(R.id.advanced_options_icon)
@@ -39,23 +42,48 @@ class WifiConfigAdvancedLayout(val view: View) {
 
     private var isExpanded = false
 
+    private val accessibilityDelegate =
+        object : AccessibilityDelegateCompat() {
+            override fun onInitializeAccessibilityNodeInfo(
+                host: View,
+                info: AccessibilityNodeInfoCompat,
+            ) {
+                super.onInitializeAccessibilityNodeInfo(host, info)
+
+                info.expandedState =
+                    if (isExpanded) AccessibilityNodeInfoCompat.EXPANDED_STATE_FULL
+                    else AccessibilityNodeInfoCompat.EXPANDED_STATE_COLLAPSED
+
+                val actionLabelRes =
+                    if (isExpanded) R.string.wifi_advanced_toggle_action_collapse
+                    else R.string.wifi_advanced_toggle_action_expand
+
+                setAccessibilityAction(info, host, actionLabelRes)
+            }
+        }
+
+    private fun setAccessibilityAction(
+        info: AccessibilityNodeInfoCompat,
+        host: View,
+        actionLabelRes: Int,
+    ) {
+        info.removeAction(AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK)
+
+        val customClick =
+            AccessibilityNodeInfoCompat.AccessibilityActionCompat(
+                AccessibilityNodeInfoCompat.ACTION_CLICK,
+                host.context.getString(actionLabelRes),
+            )
+
+        info.addAction(customClick)
+    }
+
     init {
         layout.setOnClickListener { expanded = !isExpanded }
-        ViewCompat.setAccessibilityDelegate(
-            layout,
-            object : AccessibilityDelegateCompat() {
-                override fun onInitializeAccessibilityNodeInfo(
-                    host: View,
-                    info: AccessibilityNodeInfoCompat,
-                ) {
-                    super.onInitializeAccessibilityNodeInfo(host, info)
-                    info.isCheckable = true
-                    info.expandedState =
-                        if (isExpanded) AccessibilityNodeInfoCompat.EXPANDED_STATE_FULL
-                        else AccessibilityNodeInfoCompat.EXPANDED_STATE_COLLAPSED
-                }
-            },
-        )
+        if (showFocusRingIndicator) {
+            layout.foreground = FocusIndicatorDrawable.Builder(view.context).build()
+        }
+        ViewCompat.setAccessibilityDelegate(layout, accessibilityDelegate)
     }
 
     var expanded: Boolean

@@ -29,6 +29,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.KeyedObserver
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.ReadWritePermit
 import com.android.settingslib.metadata.SensitivityLevel
 
@@ -48,6 +49,8 @@ class WifiHotspotMainSwitchPreference(private val wifiHotspotStore: KeyValueStor
         get() = false
 
     override val availabilityDescription = "Wifi hotspot must be enabled."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) =
         context.wifiApState == WIFI_AP_STATE_ENABLED ||

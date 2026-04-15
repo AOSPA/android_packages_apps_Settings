@@ -23,12 +23,15 @@ import android.service.quickaccesswallet.QuickAccessWalletClient
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
 import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
 import com.android.settingslib.metadata.preferencesapi.preconditions.HardwareUnsupported
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.types.CustomEnum
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import com.android.settingslib.metadata.preferencesapi.types.EnumApiWithRes
 
 // LINT.IfChange
@@ -38,7 +41,7 @@ class DoubleTapPowerApiFirstScreen :
         key = KEY,
         topLevelSettingsCategory = Category.SYSTEM,
         fragment = DoubleTapPowerSettings::class,
-        purpose = R.string.gesture_double_tap_power_input_summary_purpose,
+        purpose = R.string.gesture_double_tap_power_input_summary_purpose_api,
         alreadyPartiallyMigrated = DoubleTapPowerScreen::class,
     ) {
     init {
@@ -67,6 +70,7 @@ class DoubleTapPowerApiFirstScreen :
                     R.string.gesture_double_power_tap_app_custom_enum_description,
                 ),
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             get {
                 execute {
                     val launchApp =
@@ -96,11 +100,15 @@ class DoubleTapPowerApiFirstScreen :
                         Allowed
                     } else {
                         if (!isDoubleTapPowerButtonGestureEnabled) {
-                            Custom(R.string.gesture_double_power_tap_app_set_gesture_disabled)
+                            Custom(
+                                R.string.gesture_double_power_tap_app_set_gesture_disabled,
+                                stability = PreconditionStability.UNSTABLE,
+                            )
                         } else {
                             Custom(
                                 R.string
-                                    .gesture_double_power_tap_app_set_wallet_service_not_available
+                                    .gesture_double_power_tap_app_set_wallet_service_not_available,
+                                stability = PreconditionStability.UNSTABLE,
                             )
                         }
                     }

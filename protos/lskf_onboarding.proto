@@ -1,0 +1,126 @@
+syntax = "proto2";
+
+package com.android.settings.password;
+option java_package = "com.android.settings.password";
+option java_outer_classname = "LockSettingsOnboardingProto";
+
+/**
+ * Logs when a lock settings onboarding flow happens.
+ *
+ * Logged from:
+ *   packages/apps/Settings/
+ *
+ * Keep in sync with settings_extension_atoms.proto & settings_enums.proto in frameworks
+ */
+message SettingsLskfOnboarding {
+  // The initial credential type before the onboarding process.
+  optional CredentialType init_credential_type = 1;
+
+  // The new credential type after the onboarding process.
+  optional CredentialType end_credential_type = 2;
+
+  // From SUW/Settings/SafetyCenter
+  optional FromSource from_source = 3;
+
+  // The associated user. Eg: 0 for owners, 10+ for others.
+  optional int32 user = 4;
+
+  // Duration of the onboarding flow in millis.
+  optional int64 duration_millis = 5;
+
+  // The result code of the onboarding flow
+  optional OnboardingResult result_code = 6;
+
+  // All screen infos that a user navigates through the onboarding flow.
+  optional RepeatedOnboardingScreenInfo onboarding_screen_info_list = 7;
+}
+
+message OnboardingScreenInfo {
+  // The onboarding screen
+  optional OnboardingScreen onboarding_screen = 1;
+  // The actions that user performs on this screen
+  repeated OnboardingAction onboarding_actions = 2;
+  // The time in ms that user stays on this screen
+  optional int64 dwell_time_millis = 3;
+}
+
+message RepeatedOnboardingScreenInfo {
+  // The onboarding screen info list
+  repeated OnboardingScreenInfo info_list = 1;
+}
+
+// The final credential type that users set
+enum CredentialType {
+  UNKNOWN_TYPE = 0;
+  PATTERN = 1;
+  PASSWORD = 2;
+  PIN = 3;
+  NONE = 4;
+  SWIPE = 5;
+  MANAGED = 6;
+}
+
+// The source that trigger the onboarding flow
+enum FromSource {
+  FROM_UNKNOWN = 0;
+  FROM_SUW = 1;
+  FROM_SETTINGS = 2;
+  FROM_SAFETY_ISSUE = 3;
+}
+
+// The result code of the onboarding flow
+enum OnboardingResult {
+  RESULT_UNKNOWN = 0;
+  RESULT_COMPLETED = 1;
+  RESULT_SKIP = 2;
+  RESULT_TIMEOUT = 3;
+  RESULT_CANCEL = 4;
+}
+
+// Screens during the onboarding flow
+enum OnboardingScreen {
+  SCREEN_UNKNOWN = 0;
+  // 1 ~ 6 are not used in lock settings onboarding flow
+  SCREEN_CHOOSE_LOCK_GENERIC = 7;
+  SCREEN_CHOOSE_LOCK_PATTERN = 8;
+  SCREEN_CHOOSE_LOCK_PASSWORD = 9;
+  SCREEN_CHOOSE_LOCK_PIN = 10;
+}
+
+// Actions during the onboarding flow
+enum OnboardingAction {
+  ACTION_ONBOARDING_UNKNOWN = 0;
+  ACTION_NEXT = 1;
+  ACTION_SKIP = 2;
+  ACTION_CANCEL = 3;
+  // 4 ~ 16 are not used in lock settings onboarding flow
+  ACTION_OK = 17;
+  ACTION_CLEAR = 18;
+  ACTION_CONFIRM = 19;
+  ACTION_CHOOSE_LOCK_NONE = 20;
+  ACTION_CHOOSE_LOCK_SWIPE = 21;
+  ACTION_CHOOSE_LOCK_PATTERN = 22;
+  ACTION_CHOOSE_LOCK_PIN = 23;
+  ACTION_CHOOSE_LOCK_PASSWORD = 24;
+  ACTION_SCREEN_LOCK_OPTION_DIALOG_SHOWN = 25;
+  ACTION_SCREEN_LOCK_OPTION_DIALOG_CANCEL = 26;
+  ACTION_MAKE_PATTERN_VISIBLE_ON = 27;
+  ACTION_MAKE_PATTERN_VISIBLE_OFF = 28;
+  ACTION_LOCK_AFTER_SCREEN_TIMEOUT = 29;
+  ACTION_POWER_BTN_INSTANT_LOCKS_ON = 30;
+  ACTION_POWER_BTN_INSTANT_LOCKS_OFF = 31;
+  ACTION_ENHANCED_PIN_PRIVACY_ON = 32;
+  ACTION_ENHANCED_PIN_PRIVACY_OFF = 33;
+  ACTION_AUTO_CONFIRM_UNLOCK_ON = 34;
+  ACTION_AUTO_CONFIRM_UNLOCK_OFF = 35;
+  ACTION_SKIP_DIALOG_SKIP = 36;
+  ACTION_SKIP_DIALOG_CANCEL = 37;
+  ACTION_REMOVE_LOCK_DIALOG_SHOWN = 38;
+  ACTION_REMOVE_LOCK_DIALOG_OK = 39;
+  ACTION_REMOVE_LOCK_DIALOG_CANCEL = 40;
+  ACTION_FIRST_CHOICE_VALID = 41;
+  ACTION_FIRST_CHOICE_INVALID = 42;
+  ACTION_CHOICE_TOO_SHORT = 43;
+  ACTION_CHOICE_CONFIRMED = 44;
+  ACTION_CHOICE_CONFIRM_WRONG = 45;
+}

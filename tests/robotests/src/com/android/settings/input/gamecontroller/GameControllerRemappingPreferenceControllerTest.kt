@@ -84,7 +84,7 @@ class GameControllerRemappingPreferenceControllerTest {
 
         preferences =
             preferenceKeyToNameMap.keys.associateWith { key ->
-                Preference(context).apply { this.key = key }
+                GameControllerRemappingPreference(context, null).apply { this.key = key }
             }
         whenever(screen.findPreference<Preference>(any())).thenAnswer { invocation ->
             val key = invocation.arguments[0] as String

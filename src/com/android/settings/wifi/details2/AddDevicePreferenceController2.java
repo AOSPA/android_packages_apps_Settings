@@ -24,6 +24,7 @@ import android.util.Log;
 import androidx.preference.Preference;
 
 import com.android.settings.core.BasePreferenceController;
+import com.android.settings.wifi.WifiUtils;
 import com.android.settings.wifi.dpp.WifiDppUtils;
 import com.android.wifitrackerlib.WifiEntry;
 
@@ -52,6 +53,14 @@ public class AddDevicePreferenceController2 extends BasePreferenceController {
     @Override
     public int getAvailabilityStatus() {
         return mWifiEntry.canEasyConnect() ? AVAILABLE : CONDITIONALLY_UNAVAILABLE;
+    }
+
+    @Override
+    public void updateState(Preference preference) {
+        super.updateState(preference);
+        if (mWifiEntry != null) {
+            preference.setEnabled(WifiUtils.isNetworkShareable(mWifiEntry, mContext));
+        }
     }
 
     @Override

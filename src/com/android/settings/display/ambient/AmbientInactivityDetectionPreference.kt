@@ -22,6 +22,8 @@ import com.android.settings.R
 import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.SettingsSecureStore
 import com.android.settingslib.metadata.SwitchPreference
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+
 
 class AmbientInactivityDetectionPreference(context: Context) :
     SwitchPreference(
@@ -34,6 +36,10 @@ class AmbientInactivityDetectionPreference(context: Context) :
     private val dozeAlwaysOnDataStore = AmbientDisplayStorage(context)
 
     override fun dependencies(context: Context) = arrayOf(AmbientDisplayMainSwitchPreference.KEY)
+
+    override fun getEnabledDescription(): String = "Always-on display must be enabled."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isEnabled(context: Context) = dozeAlwaysOnDataStore.getBoolean(DOZE_ALWAYS_ON)!!
 

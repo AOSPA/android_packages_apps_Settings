@@ -32,7 +32,10 @@ import androidx.core.content.ContextCompat
 import androidx.preference.Preference
 import com.android.settings.R
 import com.android.settings.metrics.PreferenceActionMetricsProvider
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -45,6 +48,7 @@ import com.android.settingslib.preference.PreferenceBinding
  * update the PIN recovery email.
  */
 class SupervisionUpdateRecoveryEmailPreference :
+    PersistentPreference<String>,
     PreferenceMetadata,
     PreferenceAvailabilityProvider,
     PreferenceLifecycleProvider,
@@ -66,9 +70,13 @@ class SupervisionUpdateRecoveryEmailPreference :
     override val title: Int
         get() = R.string.supervision_update_recovery_email_preference_title
 
-    override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
-
     override fun dependencies(context: Context) = arrayOf(SupervisionSetupRecoveryPreference.KEY)
+
+    override val supportsWrite = false
+
+    override val valueType = String::class.javaObjectType
+
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
     override fun getSummary(context: Context): CharSequence? {
         val email =
@@ -107,6 +115,8 @@ class SupervisionUpdateRecoveryEmailPreference :
 
     override val availabilityDescription =
         "The device must support the PIN recovery screen and the recovery email must be verified."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context): Boolean {
         if (!Flags.enableSupervisionPinRecoveryScreen()) {

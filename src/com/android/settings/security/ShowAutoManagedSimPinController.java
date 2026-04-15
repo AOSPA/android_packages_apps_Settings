@@ -56,9 +56,7 @@ public class ShowAutoManagedSimPinController extends BasePreferenceController im
     public ShowAutoManagedSimPinController(@NonNull Context context,
             @NonNull String preferenceKey) {
         super(context, preferenceKey);
-        mSubscriptionManager = ((SubscriptionManager) context
-                .getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE))
-                .createForAllUserProfiles();
+        mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
         mTelephonyManager = context.getSystemService(TelephonyManager.class);
         mSubId = mSubscriptionManager.getEnabledSubscriptionId(0);
 

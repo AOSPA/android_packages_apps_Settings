@@ -18,9 +18,12 @@ package com.android.settings.deviceinfo.storage
 
 import android.content.Context
 import android.content.Intent
+import com.android.settingslib.datastore.KeyValueStore
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.PreferenceTitleProvider
+import com.android.settingslib.metadata.SensitivityLevel
 
 class StoragePreference(
     override val key: String,
@@ -30,11 +33,17 @@ class StoragePreference(
     val provideSummary: (Context) -> CharSequence?,
     val provideTitle: (Context) -> CharSequence? = { it.getString(title) },
     private val tags: List<String> = emptyList(),
-) : PreferenceMetadata,
+) : PersistentPreference<String>,
+    PreferenceMetadata,
     PreferenceTitleProvider,
     PreferenceSummaryProvider {
+    override val supportsWrite = false
+    override val valueType = String::class.javaObjectType
+    override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
     override fun getSummary(context: Context) = provideSummary(context)
     override fun getTitle(context: Context) = provideTitle(context)
     override fun intent(context: Context) = provideIntent(context)
+    override val sensitivityLevel
+        get() = SensitivityLevel.DEEP_LINK_ONLY
     override fun tags(context: Context) = tags.toTypedArray()
 }

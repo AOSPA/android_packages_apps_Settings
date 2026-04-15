@@ -21,10 +21,10 @@ import android.text.TextUtils
 import com.android.internal.app.AppLocaleCollector
 import com.android.internal.app.LocaleStore
 import com.android.settings.R
+import com.android.settings.applications.InstalledPackageName
 import com.android.settings.flags.Flags
 import com.android.settings.localepicker.AppLocalePickerFragment.ARG_PACKAGE_NAME
 import com.android.settings.localepicker.LocaleUtils.canDisplayLocaleUi
-import com.android.settings.localepicker.LocaleUtils.getAppList
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
@@ -34,6 +34,9 @@ import com.android.settingslib.metadata.preferencesapi.types.GeneratedParameterT
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedType
 import com.android.settingslib.metadata.preferencesapi.types.GeneratedValue
 import java.util.Locale
+import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 
 // LINT.IfChange
 @ProvidePreferenceScreen(AppLocalePickerApiFirstScreen.KEY, parameterized = true)
@@ -52,14 +55,7 @@ class AppLocalePickerApiFirstScreen :
             parameter(
                 name = ARG_PACKAGE_NAME,
                 purpose = R.string.app_locale_picker_parameter_purpose,
-                type =
-                    GeneratedParameterType(R.string.app_locale_picker_parameter_description) {
-                        getAppList(context, context.packageManager).map { it ->
-                            val packageName = it.packageName
-                            val appLabel = it.loadLabel(context.packageManager).toString()
-                            GeneratedValue(packageName, appLabel)
-                        }
-                    },
+                type = InstalledPackageName
             )
 
             prepareScreenExtras { parameters, extras ->
@@ -72,7 +68,7 @@ class AppLocalePickerApiFirstScreen :
             if (!TextUtils.isEmpty(packageName) && canDisplayLocaleUi(context, packageName)) {
                 Allowed
             } else {
-                Custom(R.string.app_locale_picker_screen_unavailable)
+                Custom(R.string.app_locale_picker_screen_unavailable, stability = PreconditionStability.UNSTABLE)
             }
         }
 
@@ -87,7 +83,7 @@ class AppLocalePickerApiFirstScreen :
                     val localeInfoList =
                         getLocaleInfoList(context, keyParameters?.get(ARG_PACKAGE_NAME) ?: "")
                     localeInfoList.map {
-                        GeneratedValue(it.locale.toLanguageTag(), it.fullNameNative)
+                        GeneratedValue(it.locale.toLanguageTag().safe(), it.fullNameNative.safe())
                     }
                 },
         ) {

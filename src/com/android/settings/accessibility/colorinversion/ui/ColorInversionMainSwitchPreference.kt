@@ -38,7 +38,7 @@ class ColorInversionMainSwitchPreference(context: Context) :
     private val storage by lazy {
         ToggleFeatureDataStore(
             AccessibilityShortcutController.COLOR_INVERSION_COMPONENT_NAME,
-            SettingsSecureStore.get(context),
+            SettingsSecureStore.get(context).apply { setDefaultValue(KEY, false) },
         )
     }
 

@@ -16,12 +16,15 @@
 
 package com.android.settings.notification;
 
+import static com.android.media.flags.Flags.fixOutputSwitcherMultiuserSupport;
+
 import android.annotation.NonNull;
 import android.annotation.Nullable;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaRouter2Manager;
 import android.media.RoutingSessionInfo;
+import android.os.UserHandle;
 import android.text.TextUtils;
 
 import androidx.annotation.VisibleForTesting;
@@ -29,6 +32,7 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
 
+import com.android.media.flags.Flags;
 import com.android.settings.R;
 import com.android.settings.Utils;
 import com.android.settings.core.BasePreferenceController;
@@ -70,7 +74,9 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
         if (mLocalMediaManager == null) {
             mLocalMediaManager = new LocalMediaManager(mContext, /* packageName= */ null);
             mLocalMediaManager.registerCallback(this);
-            mLocalMediaManager.startScan();
+            if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+                mLocalMediaManager.startScan();
+            }
         }
         mRouterManager = MediaRouter2Manager.getInstance(context);
     }
@@ -85,7 +91,9 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
         mLocalMediaManager = localMediaManager;
         mRouterManager = mediaRouter2Manager;
         mLocalMediaManager.registerCallback(this);
-        mLocalMediaManager.startScan();
+        if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+            mLocalMediaManager.startScan();
+        }
     }
 
     @Override
@@ -112,7 +120,9 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
     @Override
     public void onDestroy() {
         mLocalMediaManager.unregisterCallback(this);
-        mLocalMediaManager.stopScan();
+        if (!Flags.cleanupUnnecessaryScanRequestInSettings()) {
+            mLocalMediaManager.stopScan();
+        }
     }
 
     private synchronized void refreshPreference() {
@@ -218,7 +228,12 @@ public class RemoteVolumeGroupController extends BasePreferenceController implem
                         .setPackage(MediaOutputConstants.SYSTEMUI_PACKAGE_NAME)
                         .putExtra(MediaOutputConstants.EXTRA_PACKAGE_NAME,
                                 info.getClientPackageName());
-                mContext.sendBroadcast(intent);
+                if (fixOutputSwitcherMultiuserSupport()) {
+                    intent.putExtra(MediaOutputConstants.EXTRA_USER_HANDLE, mContext.getUser());
+                    mContext.sendBroadcastAsUser(intent, UserHandle.SYSTEM);
+                } else {
+                    mContext.sendBroadcast(intent);
+                }
                 return true;
             }
         }

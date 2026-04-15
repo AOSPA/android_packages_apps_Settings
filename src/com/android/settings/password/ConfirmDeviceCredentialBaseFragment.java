@@ -248,8 +248,14 @@ public abstract class ConfirmDeviceCredentialBaseFragment extends InstrumentedFr
         setupForgotButtonIfManagedProfile(view);
 
         mCheckBox = view.findViewById(R.id.checkbox);
-        if (mCheckBox != null && mRemoteValidation) {
-            mCheckBox.setVisibility(View.VISIBLE);
+        if (mCheckBox != null) {
+            if (getResources().getBoolean(
+                    R.bool.config_disable_remote_lockscreen_transfer_checkbox)) {
+                mCheckBox.setVisibility(View.GONE);
+                mCheckBox.setChecked(false);
+            } else if (mRemoteValidation) {
+                mCheckBox.setVisibility(View.VISIBLE);
+            }
         }
         setupEmergencyCallButtonIfManagedSubscription(view);
     }

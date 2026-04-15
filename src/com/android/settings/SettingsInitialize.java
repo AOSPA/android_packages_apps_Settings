@@ -71,6 +71,7 @@ public class SettingsInitialize extends BroadcastReceiver {
         ThreadUtils.postOnBackgroundThread(() -> refreshExistingShortcuts(context));
         enableTwoPaneDeepLinkActivityIfNecessary(pm, context);
         storeSuwCompleteTimestamp(context, broadcast);
+        syncRegulatoryInfoVisibility(context, pm);
     }
 
     private void managedProfileSetup(Context context, final PackageManager pm, Intent broadcast,
@@ -167,6 +168,34 @@ public class SettingsInitialize extends BroadcastReceiver {
     private void storeSuwCompleteTimestamp(Context context, Intent broadcast) {
         if (SetupWizardUtils.ACTION_SETUP_WIZARD_FINISHED.equals(broadcast.getAction())) {
             ElapsedTimeUtils.storeSuwFinishedTimestamp(context, System.currentTimeMillis());
+        }
+    }
+
+    /**
+     * Synchronizes the enabled state of {@link RegulatoryInfoDisplayActivity} with the
+     * {@code config_show_regulatory_info} resource.
+     *
+     * <p>This ensures that the activity is correctly enabled or disabled in the package manager
+     * based on the current device configuration, specifically when the value was changed by a
+     * resource overlay after the initial manifest parsing.
+     */
+    private void syncRegulatoryInfoVisibility(Context context, PackageManager pm) {
+        final ComponentName componentName = new ComponentName(context,
+                RegulatoryInfoDisplayActivity.class);
+        final boolean isConfigEnabled = context.getResources().getBoolean(
+                R.bool.config_show_regulatory_info);
+        final int targetState = isConfigEnabled
+                ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                : PackageManager.COMPONENT_ENABLED_STATE_DEFAULT;
+        try {
+            int currentState = pm.getComponentEnabledSetting(componentName);
+            if (currentState != targetState) {
+                Log.i(TAG, "Syncing RegulatoryInfoDisplayActivity state for current user.");
+                pm.setComponentEnabledSetting(componentName, targetState,
+                        PackageManager.DONT_KILL_APP);
+            }
+        } catch (IllegalArgumentException e) {
+            Log.e(TAG, "Unable to sync RegulatoryInfoDisplayActivity state", e);
         }
     }
 }

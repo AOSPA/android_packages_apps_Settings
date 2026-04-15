@@ -19,6 +19,7 @@ package com.android.settings.appfunctions.stateprovidersources
 import android.content.Context
 import android.provider.Settings
 import android.provider.Settings.Secure.NOTIFICATION_HISTORY_ENABLED
+import com.android.settings.R
 import com.android.settings.appfunctions.DeviceStateAppFunctionType
 import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateItem
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenDeviceStates
@@ -37,7 +38,7 @@ class NotificationHistoryStateSource : DeviceStateSource {
         val item =
             DeviceStateItem(
                 key = "notification_history",
-                purpose = "notification_history",
+                purpose = context.getString(R.string.notification_history_enabled_purpose),
                 jsonValue = isEnabled.toString(),
             )
 

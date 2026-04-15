@@ -28,24 +28,25 @@ import androidx.annotation.RequiresApi
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settingslib.metadata.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import kotlinx.coroutines.flow.first
+import com.android.settingslib.metadata.preferencesapi.safe
 
 /**
  * The flattened string representation of a NotificationListenerService
  */
 object NotificationListenerService : DirectFiniteOptionsType<String> {
-    override fun getType() = String::class.java
+    override val externalType: EType<String> = EType.String
 
     override fun getDescription(context: Context): String =
         "The flattened string representation of a NotificationListenerService"
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    override suspend fun getOptions(context: Context): List<Pair<String, String>> {
-      return AppsNotificationAccessScreen.loadNotificationListenerServices(context).map {
-        val flattened = it.packageName + "/" + it.name
+    override suspend fun getOptions(context: Context) =
+      AppsNotificationAccessScreen.loadNotificationListenerServices(context).map {
+        val flattened = (it.packageName + "/" + it.name).safe()
         Pair(flattened, flattened)
       }.toList()
-    }
 
     override fun getKey() = "NotificationListenerService"
 }

@@ -46,7 +46,7 @@ class DarkModeApiFirstScreen :
         key = KEY,
         topLevelSettingsCategory = Category.DISPLAY,
         fragment = DarkModeSettingsFragment::class,
-        purpose = R.string.dark_ui_mode_purpose,
+        purpose = R.string.dark_ui_mode_purpose_api,
         alreadyPartiallyMigrated = DarkModeScreen::class,
     ) {
     init {
@@ -74,12 +74,14 @@ class DarkModeApiFirstScreen :
                     R.string.dark_theme_mode_selector_customenum_description,
                 ),
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
             get {
                 execute {
                     val isExpanded =
                         Settings.Secure.getInt(
                             context.contentResolver,
                             Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED,
+                            STANDARD_DARK_THEME,
                         ) == EXPANDED_DARK_THEME
 
                     if (isExpanded) {
@@ -213,7 +215,7 @@ class DarkModeApiFirstScreen :
     }
 
     companion object {
-        const val KEY = "api_dark_theme_screen"
+        const val KEY = "api_dark_ui_mode"
         internal const val RADIO_PREFERENCE_KEY = "dark_theme_mode_selector"
         internal const val STANDARD_DARK_THEME = 0
         internal const val EXPANDED_DARK_THEME = 1

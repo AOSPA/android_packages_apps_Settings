@@ -55,6 +55,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnScrollChangeListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -75,6 +76,7 @@ import com.android.settings.password.ConfirmLockPattern;
 import com.android.settingslib.RestrictedLockUtilsInternal;
 import com.android.settingslib.core.instrumentation.MetricsFeatureProvider;
 import com.android.settingslib.development.DevelopmentSettingsEnabler;
+import com.android.settingslib.utils.StringUtil;
 
 import com.google.android.setupcompat.template.FooterBarMixin;
 import com.google.android.setupcompat.template.FooterButton;
@@ -109,10 +111,12 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     static final String ERASE_EXTERNAL_EXTRA = "erase_sd";
     static final String ERASE_ESIMS_EXTRA = "erase_esim";
 
-    private View mContentView;
+    @VisibleForTesting
+    View mContentView;
     @VisibleForTesting
     FooterButton mInitiateButton;
-    private View mExternalStorageContainer;
+    @VisibleForTesting
+    View mExternalStorageContainer;
     @VisibleForTesting
     CheckBox mExternalStorage;
     @VisibleForTesting
@@ -121,11 +125,16 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
     CheckBox mEsimStorage;
     @VisibleForTesting
     ScrollView mScrollView;
+    private boolean mHasReachedBottom;
+    private boolean mIsListenerAdded;
 
     @Override
     public void onGlobalLayout() {
-        mInitiateButton.setEnabled(hasReachedBottom(mScrollView));
+        mHasReachedBottom = hasReachedBottom(mScrollView);
+        mInitiateButton.setEnabled(mHasReachedBottom);
     }
+
+    // onSaveInstanceState removed to reset state on rotation as requested
 
     private void setUpActionBarAndTitle() {
         final Activity activity = getActivity();
@@ -335,6 +344,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
      */
     @VisibleForTesting
     void establishInitialState() {
+        mHasReachedBottom = false;
         setUpActionBarAndTitle();
         setUpInitiateButton();
 
@@ -343,7 +353,10 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         mEsimStorageContainer = mContentView.findViewById(R.id.erase_esim_container);
         mEsimStorage = mContentView.findViewById(R.id.erase_esim);
         if (mScrollView != null) {
-            mScrollView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            ViewTreeObserver observer = mScrollView.getViewTreeObserver();
+            if (observer != null) {
+                observer.removeOnGlobalLayoutListener(this);
+            }
         }
         mScrollView = mContentView.findViewById(
                 com.google.android.setupdesign.R.id.sud_scroll_view);
@@ -398,7 +411,9 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         }
 
         final UserManager um = (UserManager) getActivity().getSystemService(Context.USER_SERVICE);
-        loadAccountList(um);
+        if (um != null) {
+            loadAccountList(um);
+        }
         final StringBuffer contentDescription = new StringBuffer();
         final View mainClearContainer = mContentView.findViewById(R.id.main_clear_container);
         getContentDescription(mainClearContainer, contentDescription);
@@ -409,9 +424,10 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
             @Override
             public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX,
                     int oldScrollY) {
-                if (v instanceof ScrollView && hasReachedBottom((ScrollView) v)) {
+                if (v instanceof ScrollView && (mHasReachedBottom || hasReachedBottom(
+                        (ScrollView) v))) {
+                    mHasReachedBottom = true;
                     mInitiateButton.setEnabled(true);
-                    mScrollView.setOnScrollChangeListener(null);
                 }
             }
         });
@@ -435,6 +451,13 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                     mInitiateButton.setEnabled(true);
                 }
             });
+        }
+        if (!mIsListenerAdded) {
+            ViewTreeObserver observer = mScrollView.getViewTreeObserver();
+            if (observer != null) {
+                observer.addOnGlobalLayoutListener(this);
+                mIsListenerAdded = true;
+            }
         }
     }
 
@@ -478,8 +501,11 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
 
     @VisibleForTesting
     boolean hasReachedBottom(final ScrollView scrollView) {
-        if (scrollView.getChildCount() < 1) {
+        if (mHasReachedBottom) {
             return true;
+        }
+        if (scrollView == null || scrollView.getChildCount() < 1 || scrollView.getHeight() <= 0) {
+            return false;
         }
 
         final View view = scrollView.getChildAt(0);
@@ -488,7 +514,8 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         return diff <= 0;
     }
 
-    private void setUpInitiateButton() {
+    @VisibleForTesting
+    void setUpInitiateButton() {
         if (mInitiateButton != null) {
             return;
         }
@@ -514,6 +541,7 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
                         .setButtonType(ButtonType.CANCEL)
                         .build());
         mInitiateButton = mixin.getPrimaryButton();
+        mInitiateButton.setEnabled(mHasReachedBottom);
     }
 
     private void getContentDescription(View v, StringBuffer description) {
@@ -630,6 +658,9 @@ public class MainClear extends InstrumentedFragment implements OnGlobalLayoutLis
         }
 
         if (accountsCount > 0) {
+            String accountTitle = StringUtil.getIcuPluralsString(context, accountsCount,
+                R.string.main_clear_accounts_count);
+            ((TextView) accountsLabel).setText(accountTitle);
             accountsLabel.setVisibility(View.VISIBLE);
             contents.setVisibility(View.VISIBLE);
         }

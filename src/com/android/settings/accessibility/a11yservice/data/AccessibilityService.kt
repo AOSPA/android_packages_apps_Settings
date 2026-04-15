@@ -29,24 +29,29 @@ import androidx.annotation.RequiresApi
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settingslib.metadata.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.EType
 import kotlinx.coroutines.flow.first
+import com.android.settingslib.metadata.preferencesapi.safe
+import com.android.settingslib.metadata.preferencesapi.unsafe
+import com.android.settingslib.metadata.preferencesapi.SafetyAnnotated
 
 /**
  * The flattened string representation of the ComponentName of a service implementing an accessibility feature
  */
 object AccessibilityService : DirectFiniteOptionsType<String> {
-    override fun getType() = String::class.java
+    override val externalType: EType<String> = EType.String
 
     override fun getDescription(context: Context): String =
         "The flattened string representation of an AccessibilityService implementing an accessibility feature"
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    override suspend fun getOptions(context: Context): List<Pair<String, String>> {
+    override suspend fun getOptions(context: Context): List<Pair<SafetyAnnotated<String>, SafetyAnnotated<String>>> {
       return AccessibilityRepositoryProvider.get(context)
                     .accessibilityServiceInfos
                     .first()
                     .map { a11yServiceInfo ->
-                      Pair(a11yServiceInfo.componentName.flattenToString(), a11yServiceInfo.loadIntro(context.packageManager)?.toString() ?: a11yServiceInfo.componentName.flattenToString())
+                      val componentName = a11yServiceInfo.componentName.flattenToString().safe()
+                      Pair(componentName, a11yServiceInfo.loadIntro(context.packageManager)?.toString()?.unsafe() ?: componentName)
                     }.toList()
     }
 

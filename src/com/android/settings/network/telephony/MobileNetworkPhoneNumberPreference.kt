@@ -25,6 +25,7 @@ import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datastore.Permissions
 import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceChangeReason
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
@@ -49,6 +50,8 @@ class MobileNetworkPhoneNumberPreference(private val data: MobileNetworkData) :
         get() = R.string.status_number
 
     override val availabilityDescription = "A mobile network must be available."
+
+    override fun getAvailabilityStability() = PreconditionStability.UNSTABLE
 
     override fun isAvailable(context: Context) = data.phoneNumberDataFlow.value.isAvailable
 

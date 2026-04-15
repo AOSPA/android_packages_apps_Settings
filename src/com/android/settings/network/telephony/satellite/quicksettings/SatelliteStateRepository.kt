@@ -95,9 +95,8 @@ constructor(
                 }
             }
 
-        // Emit initial default state to unblock 'combine' immediately, in case the callback is
-        // delayed or async.
-        trySend(CarrierRoamingNtnState())
+        // no initial state needs to be emited.
+	// registerTelephonyCallback always callsback immediately with current state as per documentation of the API
 
         telephonyManager?.registerTelephonyCallback(callbackExecutor, callback)
         awaitClose { runCatching { telephonyManager?.unregisterTelephonyCallback(callback) } }
@@ -283,9 +282,6 @@ constructor(
                 activeSubIdFlow,
             ) { (carrierState, isOemActive, disallowedReasons), isTerrestrial, isAirplaneMode, subId
                 ->
-                // Rule: Immediate return if Airplane Mode is on
-                if (isAirplaneMode) return@combine SatelliteStatus.NOT_AVAILABLE
-
                 val isCarrierSupported = SatelliteUtils.isCarrierRoamingNtnSupported(context, subId)
                 val isSatelliteAvailable =
                     checkSatelliteAvailability(
@@ -296,11 +292,26 @@ constructor(
                         subId = subId,
                     )
 
-                when {
-                    carrierState.isActive || isOemActive -> SatelliteStatus.ACTIVE
-                    isSatelliteAvailable -> SatelliteStatus.AVAILABLE
-                    else -> SatelliteStatus.NOT_AVAILABLE
-                }
+                Log.i(
+                    TAG,
+                    "satelliteStatus check: subId=$subId, isAirplaneMode=$isAirplaneMode, " +
+                        "isTerrestrial=$isTerrestrial, isCarrierSupported=$isCarrierSupported, " +
+                        "carrierEligible=${carrierState.isEligible}, carrierActive=${carrierState.isActive}, " +
+                        "oemActive=$isOemActive, oemDisallowedReasons=${disallowedReasons.contentToString()}, " +
+                        "isSatelliteAvailable=$isSatelliteAvailable"
+                )
+
+                // Rule: Immediate return if Airplane Mode is on
+                if (isAirplaneMode) return@combine SatelliteStatus.NOT_AVAILABLE
+
+                val status =
+                    when {
+                        carrierState.isActive || isOemActive -> SatelliteStatus.ACTIVE
+                        isSatelliteAvailable -> SatelliteStatus.AVAILABLE
+                        else -> SatelliteStatus.NOT_AVAILABLE
+                    }
+                Log.i(TAG, "satelliteStatus final status: $status")
+                status
             }
             .stateIn(scope, SharingStarted.WhileSubscribed(), SatelliteStatus.NOT_AVAILABLE)
 
@@ -420,7 +431,8 @@ constructor(
                 state == SatelliteManager.SATELLITE_MODEM_STATE_DATAGRAM_TRANSFERRING ||
                 state == SatelliteManager.SATELLITE_MODEM_STATE_DATAGRAM_RETRYING ||
                 state == SatelliteManager.SATELLITE_MODEM_STATE_LISTENING ||
-                state == SatelliteManager.SATELLITE_MODEM_STATE_ENABLING_SATELLITE
+                state == SatelliteManager.SATELLITE_MODEM_STATE_ENABLING_SATELLITE ||
+                state == SatelliteManager.SATELLITE_MODEM_STATE_NOT_CONNECTED
         }
     }
 

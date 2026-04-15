@@ -126,7 +126,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// TODO(b/143326832): Should add test cases for connect button.
 @RunWith(RobolectricTestRunner.class)
 @Config(shadows = {
         ShadowDevicePolicyManager.class,

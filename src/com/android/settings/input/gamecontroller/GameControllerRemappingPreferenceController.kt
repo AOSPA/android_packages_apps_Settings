@@ -22,6 +22,7 @@ import android.util.Log
 import android.view.InputDevice
 import androidx.preference.Preference
 import androidx.preference.PreferenceScreen
+import com.android.settings.R
 import com.android.settings.core.BasePreferenceController
 import com.android.settings.input.gamecontroller.GameControllerUtils.buttonToPreferenceKeyMap
 import com.android.settings.input.gamecontroller.GameControllerUtils.preferenceKeyToAxesMap
@@ -71,7 +72,7 @@ class GameControllerRemappingPreferenceController(
         val screen = preferenceScreen ?: return
         // Loop through all the key remapping preferences we manage and update their summaries
         preferenceKeyToButtonMap.keys.forEach { fromPreferenceKey ->
-            screen.findPreference<Preference>(fromPreferenceKey)?.let { pref ->
+            screen.findPreference<GameControllerRemappingPreference>(fromPreferenceKey)?.let { pref ->
                 val toPreferenceKey = findMappedPreference(fromPreferenceKey)
                 if (toPreferenceKey != null) {
                     val displayName =
@@ -80,6 +81,7 @@ class GameControllerRemappingPreferenceController(
                         )
                     pref.summary =
                         displayName ?: context.getString(preferenceKeyToNameMap[toPreferenceKey]!!)
+                    pref.updateSummaryContentDescription()
                 } else {
                     Log.w(GameControllerUtils.TAG, "Unmapped preference key $fromPreferenceKey")
                 }
@@ -87,10 +89,11 @@ class GameControllerRemappingPreferenceController(
         }
 
         preferenceKeyToAxesMap.keys.forEach { fromPreferenceKey ->
-            screen.findPreference<Preference>(fromPreferenceKey)?.let { pref ->
+            screen.findPreference<GameControllerRemappingPreference>(fromPreferenceKey)?.let { pref ->
                 val toPreferenceKey = findMappedPreference(fromPreferenceKey)
                 if (toPreferenceKey != null) {
                     pref.setSummary(context.getString(preferenceKeyToNameMap[toPreferenceKey]!!))
+                    pref.updateSummaryContentDescription()
                 } else {
                     Log.w(GameControllerUtils.TAG, "Unmapped preference key $fromPreferenceKey")
                 }

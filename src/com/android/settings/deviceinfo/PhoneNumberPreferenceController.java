@@ -17,20 +17,28 @@
 package com.android.settings.deviceinfo;
 
 import android.content.Context;
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import android.os.Handler;
 import android.os.Looper;
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import android.os.UserManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import android.telephony.ims.ImsMmTelManager;
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import android.text.TextUtils;
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import android.util.Log;
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 
 import androidx.annotation.VisibleForTesting;
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceScreen;
@@ -41,9 +49,12 @@ import com.android.settings.core.BasePreferenceController;
 import com.android.settings.network.SubscriptionUtil;
 
 import java.util.ArrayList;
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import java.util.HashMap;
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import java.util.List;
 
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 import static android.content.Context.CLIPBOARD_SERVICE;
 import static androidx.lifecycle.Lifecycle.Event;
 
@@ -53,6 +64,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController
     // This delay is used to make sure telephony framework has enough time to parse
     // the phone number from the IMS registration indication message.
     private static final long DELAY_MILLIS = 500L;
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 
     private static final String KEY_PHONE_NUMBER = "phone_number";
     private static final String KEY_PREFERENCE_CATEGORY = "basic_info_category";
@@ -60,6 +72,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController
     private final TelephonyManager mTelephonyManager;
     private final SubscriptionManager mSubscriptionManager;
     private final List<Preference> mPreferenceList = new ArrayList<>();
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
     private HashMap<Integer, ImsConnector> mImsConnectorMap = new HashMap<>();
     private int mPhoneCount;
     private Handler mHandler;
@@ -76,14 +89,17 @@ public class PhoneNumberPreferenceController extends BasePreferenceController
                     mHandler.postDelayed(() -> updateState(null), DELAY_MILLIS);
                 }
             };
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 
     public PhoneNumberPreferenceController(Context context, String key) {
         super(context, key);
         mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         mSubscriptionManager = mContext.getSystemService(SubscriptionManager.class);
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
         mPhoneCount = mTelephonyManager.getPhoneCount();
         mHandler = new Handler(Looper.getMainLooper());
         initImsConnectors();
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
     }
 
     @Override
@@ -178,6 +194,7 @@ public class PhoneNumberPreferenceController extends BasePreferenceController
     protected Preference createNewPreference(Context context) {
         return new Preference(context);
     }
+// QTI_BEGIN: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 
     public void init(Lifecycle lifecycle) {
         if (null != lifecycle) {
@@ -241,4 +258,5 @@ public class PhoneNumberPreferenceController extends BasePreferenceController
         mImsConnectorMap.clear();
         super.finalize();
     }
+// QTI_END: 2021-09-22: Android_UI: Settings: Update phone numbers when IMS registered.
 }

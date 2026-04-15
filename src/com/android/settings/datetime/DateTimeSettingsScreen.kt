@@ -22,8 +22,10 @@ import com.android.settings.R
 import com.android.settings.Settings
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.datetime.ZoneGetter
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -41,7 +43,6 @@ open class DateTimeSettingsScreen : PreferenceScreenMixin, PreferenceSummaryProv
     override val key: String
         get() = KEY
 
-    // TODO(b/462618020) Catalyst-purpose: replace default purpose with 2 line description
     override val purpose: Int
         get() = R.string.date_time_settings_purpose
 
@@ -76,7 +77,7 @@ open class DateTimeSettingsScreen : PreferenceScreenMixin, PreferenceSummaryProv
 
     class DateTimeSettingsScreenPreference(
         private val screenMetadata : DateTimeSettingsScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PersistentPreference<String> {
         override val key : String
             get() = "date_time_settings_preference"
 
@@ -84,6 +85,13 @@ open class DateTimeSettingsScreen : PreferenceScreenMixin, PreferenceSummaryProv
             get() = screenMetadata.purpose
 
         override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override val indexable = false
 

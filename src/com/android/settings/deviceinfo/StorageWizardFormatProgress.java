@@ -104,8 +104,11 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                     storage.partitionPrivate(activity.mDisk.getId());
                     publishProgress(40);
 
+// QTI_BEGIN: 2019-07-31: Android_UI: Settings: fix NPE for some sdcards
                     final VolumeInfo privateVol = activity.findFirstVolume(TYPE_PRIVATE, 50);
+// QTI_END: 2019-07-31: Android_UI: Settings: fix NPE for some sdcards
                     final CompletableFuture<PersistableBundle> result = new CompletableFuture<>();
+// QTI_BEGIN: 2019-07-31: Android_UI: Settings: fix NPE for some sdcards
                     if(null != privateVol) {
                         storage.benchmark(privateVol.getId(), new IVoldTaskListener.Stub() {
                             @Override
@@ -122,6 +125,7 @@ public class StorageWizardFormatProgress extends StorageWizardBase {
                         mPrivateBench = result.get(60, TimeUnit.SECONDS).getLong("run",
                                 Long.MAX_VALUE);
                     }
+// QTI_END: 2019-07-31: Android_UI: Settings: fix NPE for some sdcards
 
                     // If we just adopted the device that had been providing
                     // physical storage, then automatically move storage to the

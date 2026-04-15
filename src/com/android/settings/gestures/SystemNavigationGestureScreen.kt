@@ -27,8 +27,11 @@ import com.android.settings.R
 import com.android.settings.Settings.NavigationModeSettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.PreferenceSummaryProvider
 import com.android.settingslib.metadata.ProvidePreferenceScreen
@@ -71,6 +74,8 @@ class SystemNavigationGestureScreen :
     override val availabilityDescription =
         "The device must support the swipe up gesture."
 
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
+
     override fun isAvailable(context: Context) = context.isGestureAvailable()
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
@@ -112,12 +117,19 @@ class SystemNavigationGestureScreen :
 
     class SystemNavigationGestureScreenPreference(
         private val screenMetadata : SystemNavigationGestureScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PersistentPreference<String> {
         override val key : String
             get() = "gesture_system_navigation_input_summary_preference"
 
         override val purpose : Int
             get() = screenMetadata.purpose
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
 
         override fun tags(context: Context) = arrayOf(METADATA_IN_UI)
 
@@ -128,6 +140,8 @@ class SystemNavigationGestureScreen :
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

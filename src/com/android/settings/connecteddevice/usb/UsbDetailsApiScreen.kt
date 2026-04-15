@@ -29,7 +29,8 @@ import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
-import com.android.settingslib.metadata.preferencesapi.preconditions.Disallowed
+import com.android.settingslib.metadata.preferencesapi.preconditions.Custom
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.preferencesapi.types.AnyBoolean
 
 // LINT.IfChange
@@ -63,7 +64,7 @@ class UsbDetailsApiScreen :
                 val isDataRole = usbDetailsRepository.getDataRole() == DATA_ROLE_DEVICE
                 when {
                     isDataRole && (isMtpEnabled || isPtpEnabled) -> Allowed
-                    else -> Disallowed(R.string.usb_transcode_files_unavailable)
+                    else -> Custom(R.string.usb_transcode_files_unavailable, stability = PreconditionStability.UNSTABLE)
                 }
             }
 
@@ -85,7 +86,11 @@ class UsbDetailsApiScreen :
                         usbDetailsRepository.isSupportAllRoles
                 )
                     Allowed
-                else Disallowed(R.string.usb_charge_connected_device_unavailable)
+                else
+                    Custom(
+                        R.string.usb_charge_connected_device_unavailable,
+                        stability = PreconditionStability.UNSTABLE,
+                    )
             }
 
             get { execute { usbDetailsRepository.powerRole == POWER_ROLE_SOURCE } }

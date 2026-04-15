@@ -74,40 +74,6 @@
             android:entries="@array/hdcp_checking_titles"
             android:entryValues="@array/hdcp_checking_values" />
 
-        <ListPreference
-            android:key="bt_stack_log_level"
-            android:title="@string/bt_stack_log_level"
-            android:dialogTitle="@string/bt_stack_log_level_summary"
-            android:entries="@array/bt_stack_log_level_entries"
-            android:entryValues="@array/bt_stack_log_level_values" />
-
-        <ListPreference
-            android:key="bt_hci_snoop_log"
-            android:title="@string/bt_hci_snoop_log"
-            android:dialogTitle="@string/bt_hci_snoop_log_summary"
-            android:entries="@array/bt_hci_snoop_log_entries"
-            android:entryValues="@array/bt_hci_snoop_log_values" />
-
-        <Preference
-            android:key="snoop_logger_filters_dashboard"
-            android:title="@string/bt_hci_snoop_log_filters_dashboard_title"
-            android:fragment=
-                "com.android.settings.development.snooplogger.SnoopLoggerFiltersDashboard" />
-
-        <ListPreference
-            android:key="bt_hci_snoop_log_filter_pbap"
-            android:title="@string/bt_hci_snoop_log_filter_pbap_title"
-            android:dialogTitle="@string/bt_hci_snoop_log_filter_summary"
-            android:entries="@array/bt_hci_snoop_log_profile_filter_entries"
-            android:entryValues="@array/bt_hci_snoop_log_profile_filter_values" />
-
-        <ListPreference
-            android:key="bt_hci_snoop_log_filter_map"
-            android:title="@string/bt_hci_snoop_log_filter_map_title"
-            android:dialogTitle="@string/bt_hci_snoop_log_filter_summary"
-            android:entries="@array/bt_hci_snoop_log_profile_filter_entries"
-            android:entryValues="@array/bt_hci_snoop_log_profile_filter_values" />
-
         <com.android.settingslib.RestrictedSwitchPreference
             android:key="oem_unlock_enable"
             android:title="@string/oem_unlock_enable"
@@ -336,6 +302,11 @@
         android:title="@string/debug_networking_category"
         android:order="400">
 
+        <Preference
+            android:key="bluetooth_development_settings"
+            android:title="@string/bluetooth"
+            android:fragment="com.android.settings.development.bluetooth.BluetoothDevelopmentSettingsFragment" />
+
         <SwitchPreferenceCompat
             android:key="wifi_display_certification"
             android:title="@string/wifi_display_certification"
@@ -379,103 +350,7 @@
             android:fragment="com.android.settings.connecteddevice.usb.UsbDefaultFragment"
             android:title="@string/usb_default_label"/>
 
-        <SwitchPreferenceCompat
-            android:key="bluetooth_show_devices_without_names"
-            android:title="@string/bluetooth_show_devices_without_names"
-            android:summary="@string/bluetooth_show_devices_without_names_summary" />
-
-        <SwitchPreferenceCompat
-            android:key="bluetooth_disable_absolute_volume"
-            android:title="@string/bluetooth_disable_absolute_volume"
-            android:summary="@string/bluetooth_disable_absolute_volume_summary" />
-
-        <ListPreference
-            android:key="bluetooth_leaudio_mode"
-            android:title="@string/bluetooth_leaudio_mode"
-            android:summary="@string/summary_placeholder"
-            android:entries="@array/bluetooth_leaudio_mode"
-            android:entryValues="@array/bluetooth_leaudio_mode_values"/>
-
-        <SwitchPreferenceCompat
-            android:key="bluetooth_show_leaudio_device_details"
-            android:title="@string/bluetooth_show_leaudio_device_details"/>
-
-        <SwitchPreferenceCompat
-            android:key="bluetooth_bypass_leaudio_allowlist"
-            android:title="@string/bluetooth_bypass_leaudio_allowlist"
-            android:summary="@string/bluetooth_bypass_leaudio_allowlist_summary" />
-
-        <SwitchPreferenceCompat
-            android:key="bluetooth_disable_le_audio_hw_offload"
-            android:title="@string/bluetooth_disable_le_audio_hw_offload" />
-
-        <SwitchPreferenceCompat
-            android:key="bluetooth_disable_a2dp_hw_offload"
-            android:title="@string/bluetooth_disable_a2dp_hw_offload" />
-
-        <ListPreference
-            android:key="bluetooth_select_avrcp_version"
-            android:title="@string/bluetooth_select_avrcp_version_string"
-            android:dialogTitle="@string/bluetooth_select_avrcp_version_dialog_title"
-            android:entries="@array/bluetooth_avrcp_versions"
-            android:entryValues="@array/bluetooth_avrcp_version_values" />
-
-        <ListPreference
-            android:key="bluetooth_select_map_version"
-            android:title="@string/bluetooth_select_map_version_string"
-            android:dialogTitle="@string/bluetooth_select_map_version_dialog_title"
-            android:entries="@array/bluetooth_map_versions"
-            android:entryValues="@array/bluetooth_map_version_values" />
-
-        <SwitchPreferenceCompat
-            android:key="bluetooth_hd_audio_settings"
-            android:title="@string/bluetooth_profile_a2dp_high_quality_unknown_codec"/>
-
-        <ListPreference
-            android:key="bluetooth_audio_codec_settings_list"
-            android:title="@string/bluetooth_select_a2dp_codec_type"
-            android:dialogTitle="@string/bluetooth_select_a2dp_codec_type_dialog_title"/>
-
-        <com.android.settings.development.bluetooth.BluetoothSampleRateDialogPreference
-            android:key="bluetooth_sample_rate_settings"
-            android:title="@string/bluetooth_select_a2dp_codec_sample_rate"
-            android:dialogTitle="@string/bluetooth_select_a2dp_codec_sample_rate_dialog_title"
-            android:dialogLayout="@layout/bluetooth_audio_sample_rate_dialog"
-            android:positiveButtonText=""
-            android:negativeButtonText="@string/dlg_ok"/>
-
-        <com.android.settings.development.bluetooth.BluetoothBitPerSampleDialogPreference
-            android:key="bluetooth_bit_per_sample_settings"
-            android:title="@string/bluetooth_select_a2dp_codec_bits_per_sample"
-            android:dialogTitle="@string/bluetooth_select_a2dp_codec_bits_per_sample_dialog_title"
-            android:dialogLayout="@layout/bluetooth_audio_bit_per_sample_dialog"
-            android:positiveButtonText=""
-            android:negativeButtonText="@string/dlg_ok"/>
-
-        <com.android.settings.development.bluetooth.BluetoothChannelModeDialogPreference
-            android:key="bluetooth_channel_mode_settings"
-            android:title="@string/bluetooth_select_a2dp_codec_channel_mode"
-            android:dialogTitle="@string/bluetooth_select_a2dp_codec_channel_mode_dialog_title"
-            android:dialogLayout="@layout/bluetooth_audio_channel_mode_dialog"
-            android:positiveButtonText=""
-            android:negativeButtonText="@string/dlg_ok"/>
-
-        <com.android.settings.development.bluetooth.BluetoothQualityDialogPreference
-            android:key="bluetooth_a2dp_ldac_playback_quality"
-            android:title="@string/bluetooth_select_a2dp_codec_ldac_playback_quality"
-            android:dialogTitle="@string/bluetooth_select_a2dp_codec_ldac_playback_quality_dialog_title"
-            android:dialogLayout="@layout/bluetooth_audio_quality_dialog"
-            android:positiveButtonText=""
-            android:negativeButtonText="@string/dlg_ok"/>
-
-        <ListPreference
-            android:key="bluetooth_max_connected_audio_devices"
-            android:title="@string/bluetooth_max_connected_audio_devices_string"
-            android:dialogTitle="@string/bluetooth_max_connected_audio_devices_dialog_title"
-            android:entries="@array/bluetooth_max_connected_audio_devices"
-            android:entryValues="@array/bluetooth_max_connected_audio_devices_values" />
-
-    <SwitchPreference
+        <SwitchPreference
             android:key="bluetooth_xpan_dev_settings"
             android:title="@string/bluetooth_xpan_devoption_title"
             android:summary="@string/bluetooth_xpan_devoption_description"/>

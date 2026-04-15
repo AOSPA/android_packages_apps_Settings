@@ -1,3 +1,4 @@
+// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
 /**
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  *
@@ -207,9 +208,13 @@ public class LegacyIncrementalScanBroadcastReceiver extends BroadcastReceiver {
                         operatorStateString);
 
                 CellInfo cellinfo =
+// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
+// QTI_BEGIN: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
                         CellInfoUtil.convertLegacyIncrScanOperatorInfoToCellInfo(operatorInfo);
 
                 Log.d(TAG, "OperatorInfo: " + operatorInfo.toString());
+// QTI_END: 2024-04-01: Telephony: Incremental scan via QCRIL hooks
+// QTI_BEGIN: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks
 
                 cellInfoList.add(cellinfo);
             }
@@ -217,3 +222,4 @@ public class LegacyIncrementalScanBroadcastReceiver extends BroadcastReceiver {
         return cellInfoList;
     }
 }
+// QTI_END: 2020-02-05: Telephony: Add support for incremental scan via QCRIL hooks

@@ -19,28 +19,92 @@ package com.android.settings.display
 import android.content.Context
 import android.graphics.Point
 import android.hardware.display.DisplayManager
-import android.view.Display
+import android.provider.Settings
 import android.util.Log
+import android.view.Display
+import com.android.settings.core.instrumentation.SettingsStatsLog
 
-/** Return true if the device contains two (or more) resolutions. */
-fun Context.checkSupportedResolutions(): Boolean {
+// LINT.IfChange
+private const val TAG = "ScreenResolutionExt"
+private const val SCREEN_RESOLUTION = "user_selected_resolution"
+private const val HIGHRESOLUTION_IDX = 0
+private const val FULLRESOLUTION_IDX = 1
+
+private fun Context.getDefaultDisplay(): Display? {
     val displayManager = getSystemService(DisplayManager::class.java)
-    val display = displayManager?.getDisplay(Display.DEFAULT_DISPLAY) ?: return false
-    val TAG = "ScreenResolutionExtensions"
+    return displayManager?.getDisplay(Display.DEFAULT_DISPLAY)
+}
 
-    val resolutions = mutableSetOf<Point>()
-    for (mode in display.supportedModes) {
-        resolutions.add(Point(mode.physicalWidth, mode.physicalHeight))
-    }
+private fun Context.getSortedResolutionList(): List<Point>? {
+    val display = getDefaultDisplay() ?: return null
+    val resolutions =
+        display.supportedModes.mapTo(mutableSetOf()) { Point(it.physicalWidth, it.physicalHeight) }
 
     if (resolutions.size != 2) {
         Log.e(TAG, "No support")
-        return false
+        return null
     }
 
-    val resolutionList = resolutions.toList().sortedBy { it.x * it.y }
-    val highWidth = resolutionList[0].x
-    val fullWidth = resolutionList[1].x
+    return resolutions.toList().sortedBy { it.x * it.y }
+}
 
+/** Return true if the device contains exactly two resolutions. */
+fun Context.checkSupportedResolutions(): Boolean {
+    val resolutionList = getSortedResolutionList() ?: return false
+    val highWidth = resolutionList[HIGHRESOLUTION_IDX].x
+    val fullWidth = resolutionList[FULLRESOLUTION_IDX].x
     return highWidth != 0 && fullWidth != 0
 }
+
+/** Return the high resolution width of the device. */
+fun Context.getHighResolutionDisplayWidth(): Int = getSortedResolutionList()?.getOrNull(HIGHRESOLUTION_IDX)?.x ?: 0
+
+/** Return the full resolution width of the device. */
+fun Context.getFullResolutionDisplayWidth(): Int = getSortedResolutionList()?.getOrNull(FULLRESOLUTION_IDX)?.x ?: 0
+
+/** Return the high resolution height of the device. */
+fun Context.getHighResolutionDisplayHeight(): Int = getSortedResolutionList()?.getOrNull(HIGHRESOLUTION_IDX)?.y ?: 0
+
+/** Return the full resolution height of the device. */
+fun Context.getFullResolutionDisplayHeight(): Int = getSortedResolutionList()?.getOrNull(FULLRESOLUTION_IDX)?.y ?: 0
+
+/** Return the current display width. */
+fun Context.getDisplayWidth(): Int = getDefaultDisplay()?.mode?.physicalWidth ?: 0
+
+/** Get preferred display mode. */
+private fun Context.getPreferMode(width: Int): Display.Mode? {
+    val display = getDefaultDisplay() ?: return null
+    val currentMode = display.mode
+    // Find the mode with the matching width, preserving the current refresh rate
+    return display.supportedModes.find {
+        it.physicalWidth == width && it.refreshRate == currentMode.refreshRate
+    } ?: display.supportedModes.find { it.physicalWidth == width } // Fallback to any refresh rate
+}
+
+/** Using display manager to set the display mode. */
+fun Context.setDisplayModeByWidth(width: Int) {
+    val display = getDefaultDisplay() ?: return
+    val mode = getPreferMode(width)
+    if (mode == null) {
+        Log.e(TAG, "No preferred mode found for width: $width")
+        return
+    }
+
+    try {
+        /** Apply the resolution change. */
+        Log.i(TAG, "setUserPreferredDisplayMode: $mode")
+        display.setUserPreferredDisplayMode(mode)
+    } catch (e: Exception) {
+        Log.e(TAG, "setUserPreferredDisplayMode() failed", e)
+        return
+    }
+
+    /** Send the atom after resolution changed successfully. */
+    SettingsStatsLog.write(
+        SettingsStatsLog.USER_SELECTED_RESOLUTION,
+        display.uniqueId.hashCode(),
+        mode.physicalWidth,
+        mode.physicalHeight,
+    )
+}
+// LINT.ThenChange(ScreenResolutionController.java)

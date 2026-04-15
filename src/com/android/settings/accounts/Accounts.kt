@@ -21,19 +21,21 @@ import android.content.Context
 import android.os.Process
 import com.android.settings.R
 import com.android.settingslib.metadata.preferencesapi.types.DirectFiniteOptionsType
+import com.android.settingslib.metadata.preferencesapi.types.EType
+import com.android.settingslib.metadata.preferencesapi.unsafe
 
 /** Provides a list of accounts associated with a associated with the current process user. */
-class Accounts : DirectFiniteOptionsType<String> {
-    override fun getType(): Class<String> = String::class.java
+object Accounts : DirectFiniteOptionsType<String> {
+    override val externalType: EType<String> = EType.String
 
     override fun getDescription(context: Context): String =
         context.getString(R.string.accounts_as_user_type_description)
 
     // TODO(b/479499461): Add support for multiple users.
-    override suspend fun getOptions(context: Context): List<Pair<String, String>> =
+    override suspend fun getOptions(context: Context) =
         AccountManager.get(context).getAccountsAsUser(Process.myUserHandle().identifier).map {
             account ->
-            account.name to account.name
+            account.name.unsafe() to account.name.unsafe()
         }
 
     override fun getKey(): String = "Accounts"

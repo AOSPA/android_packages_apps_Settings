@@ -19,6 +19,7 @@ package com.android.settings.datetime;
 import static android.app.time.Capabilities.CAPABILITY_POSSESSED;
 
 import android.app.DatePickerDialog;
+import android.app.admin.flags.Flags;
 import android.app.time.TimeCapabilities;
 import android.app.time.TimeManager;
 import android.app.timedetector.ManualTimeSuggestion;
@@ -69,6 +70,9 @@ public class DatePreferenceController extends BasePreferenceController
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
+        if (Flags.policyStreamliningAutoTime()) {
+            DateTimePolicyHelper.checkAutoTimePolicyAndSetDisabled(mContext, preference);
+        }
 
         if (preference instanceof RestrictedPreference
                 && ((RestrictedPreference) preference).isDisabledByAdmin()) {

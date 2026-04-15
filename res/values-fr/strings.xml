@@ -328,24 +328,15 @@
     <string name="date_time_24hour_auto" msgid="6583078135067804252">"Utiliser les paramètres régionaux par défaut"</string>
     <string name="date_time_24hour" msgid="286679379105653406">"Utiliser le format 24h"</string>
     <string name="date_time_set_time_title" msgid="2870083415922991906">"Heure"</string>
-    <!-- no translation found for time_format_category_title (3122743852067365261) -->
-    <skip />
-    <!-- no translation found for time_format_page_title (2599662358219245734) -->
-    <skip />
-    <!-- no translation found for time_more_settings_category_title (8304427350974443921) -->
-    <skip />
-    <!-- no translation found for time_format_subtitle (7291642514630113614) -->
-    <skip />
-    <!-- no translation found for time_format_options_category_title (8323377746209428543) -->
-    <skip />
-    <!-- no translation found for time_format_automatic (8627801531369181488) -->
-    <skip />
-    <!-- no translation found for time_format_automatic_summary (4373100143829400876) -->
-    <skip />
-    <!-- no translation found for time_format_12_hour (4212243396629600426) -->
-    <skip />
-    <!-- no translation found for time_format_24_hour (8284408904130498347) -->
-    <skip />
+    <string name="time_format_category_title" msgid="3122743852067365261">"Format 12 heures / 24 heures"</string>
+    <string name="time_format_page_title" msgid="2599662358219245734">"Format horaire"</string>
+    <string name="time_more_settings_category_title" msgid="8304427350974443921">"Plus de paramètres"</string>
+    <string name="time_format_subtitle" msgid="7291642514630113614">"Les applications utiliseront le format horaire défini par ce paramètre"</string>
+    <string name="time_format_options_category_title" msgid="8323377746209428543">"Sélectionner un format horaire"</string>
+    <string name="time_format_automatic" msgid="8627801531369181488">"Automatique"</string>
+    <string name="time_format_automatic_summary" msgid="4373100143829400876">"Les applis utilisent le format 12 heures / 24 heures en fonction de la langue sélectionnée"</string>
+    <string name="time_format_12_hour" msgid="4212243396629600426">"Format 12 heures"</string>
+    <string name="time_format_24_hour" msgid="8284408904130498347">"Format 24 heures"</string>
     <string name="date_time_set_timezone_title" msgid="790404320569600222">"Fuseau horaire"</string>
     <string name="home_time_zone_title" msgid="3824736095532816255">"Mon fuseau horaire"</string>
     <string name="home_time_zone_select_title" msgid="9158012099148340770">"Sélectionner un fuseau horaire"</string>
@@ -939,8 +930,6 @@
     <string name="nfc_reboot_dialog_title" msgid="2033983438635768169">"Redémarrer l\'appareil ?"</string>
     <string name="nfc_reboot_dialog_message" msgid="4929353168157966992">"La journalisation des détails NFC est destinée exclusivement au développement. Des données NFC supplémentaires sont incluses dans les rapports de bug. Ils peuvent contenir des informations privées. Redémarrez votre appareil pour modifier ce paramètre."</string>
     <string name="nfc_reboot_dialog_confirm" msgid="4769763632008584567">"Redémarrer"</string>
-    <string name="external_display_on" msgid="2560104443500154333">"Activé"</string>
-    <string name="external_display_off" msgid="5634413756025351374">"Désactivé"</string>
     <string name="external_display_settings_title" msgid="3865786552022665355">"Écrans externes"</string>
     <string name="builtin_display_settings_category" msgid="3441388849060771885">"Écran intégré"</string>
     <string name="builtin_display_settings_universal_cursor_title" msgid="209064877333151313">"Curseur universel"</string>
@@ -1167,7 +1156,6 @@
     <string name="wifi_scan_always_turn_on_message_unknown" msgid="4903345360745717385">"Pour améliorer la précision de la localisation, entre autres, une application inconnue souhaite activer la recherche de réseaux, même quand le Wi-Fi est désactivé.\n\nAutoriser pour toutes les applications qui le demandent ?"</string>
     <string name="wifi_scan_always_confirm_deny" msgid="6997087934558839256">"Refuser"</string>
     <string name="wifi_field_required" msgid="6312381745503042588">"* obligatoire"</string>
-    <string name="wifi_shared_network_login_screen_warning" msgid="8298716960537761436">"Il s\'agit d\'un réseau partagé. Vous devez vous connecter pour apporter des modifications."</string>
     <string name="edit_wifi_network_non_owner_message" msgid="4387650403845968672">"Contactez le propriétaire du réseau ou l\'administrateur de l\'appareil pour apporter des modifications."</string>
     <string name="no_internet_access_text" msgid="3611993143350310936">"Ce réseau ne dispose d\'aucun accès à Internet. Rester connecté ?"</string>
     <string name="partial_connectivity_text" msgid="8874614799723694554">"Connectivité limitée. Des services et applications peuvent ne pas fonctionner. Utiliser quand même ?"</string>
@@ -1514,8 +1502,7 @@
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Annuler"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Protéger la carte SIM"</string>
     <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Protection par verrouillage de carte SIM"</string>
-    <!-- no translation found for sim_auto_pin_management_toggle (3119834807997704128) -->
-    <skip />
+    <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Verrouiller la carte SIM"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Géré par Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Non géré par Android"</string>
     <string name="sim_enrollment_succeeded" msgid="3279720081300983303">"Enregistrement réussi"</string>
@@ -1524,11 +1511,9 @@
     <string name="sim_display_platform_managed_pin" msgid="8315071204210521632">"Code PIN géré par Android"</string>
     <string name="sim_platform_managed_pin_value" msgid="3041833119193596268">"Valeur du code PIN géré par Android :"</string>
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"Échec de l\'obtention du code PIN"</string>
-    <!-- no translation found for sim_choose_protection_mode_title (6490096870138696540) -->
-    <skip />
+    <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"Exiger le code PIN pour utiliser le téléphone"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"Code PIN de la carte SIM géré par Android"</string>
-    <!-- no translation found for sim_protection_mode_manually_managed (4900165823596420059) -->
-    <skip />
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"Saisissez le code PIN pour utiliser le téléphone"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"Verrouillage de l\'écran requis pour la protection automatique de la carte SIM. Seule la protection manuelle est disponible pour le moment."</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"Saisissez le code PIN actuel de la SIM"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"Saisissez le code PIN actuel de la carte SIM"</string>
@@ -1540,7 +1525,10 @@
     <string name="confirm_new_sim_pin_title" msgid="8260672663421256888">"Confirmer le nouveau code PIN de la carte SIM"</string>
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Les codes PIN ne correspondent pas. Confirmez le nouveau code PIN de la carte SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Code PIN incorrect. Tentatives restantes : <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
-    <!-- no translation found for enter_current_sim_pin_hint (5079349481153303213) -->
+    <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Saisissez le code PIN actuel de la carte SIM"</string>
+    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
+    <skip />
+    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
     <skip />
     <string name="sim_change_data_title" msgid="4663239438584588847">"Utiliser <xliff:g id="CARRIER">%1$s</xliff:g> pour les données mobiles ?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Vous utilisez <xliff:g id="CARRIER2_0">%2$s</xliff:g> pour les données mobiles. Si vous basculez sur <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> ne sera plus utilisé pour les données mobiles."</string>
@@ -1844,8 +1832,7 @@
     <string name="location_time_zone_detection_not_allowed" msgid="8264525161514617051">"Modifications de la détection du fuseau horaire basée sur la position non autorisées"</string>
     <string name="location_time_zone_detection_auto_is_on" msgid="1837317773761632655">"Si la position de votre appareil est disponible, celle-ci peut être utilisée pour définir votre fuseau horaire"</string>
     <string name="time_notifications_title" msgid="8654754577463543558">"Notifications"</string>
-    <!-- no translation found for time_notifications_summary (5669901692108499323) -->
-    <skip />
+    <string name="time_notifications_summary" msgid="5669901692108499323">"Recevez une notification lorsque votre heure change automatiquement"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Changement de fuseau horaire"</string>
     <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Recevoir une notification lorsque votre fuseau horaire est mis à jour automatiquement"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"notification, heure, zone, fuseau horaire"</string>
@@ -2151,13 +2138,15 @@
     <string name="spellchecker_language" msgid="8905487366580285282">"Langue"</string>
     <string name="ime_switcher_button_in_navbar_title" msgid="3909360598089922591">"Afficher le bouton de changement du clavier"</string>
     <string name="ime_switcher_button_in_navbar_summary" msgid="7202853456799949367">"Autoriser l\'affichage du bouton de changement de clavier dans la barre de navigation lorsqu\'un champ de saisie est sélectionné"</string>
-    <string name="virtual_keyboard_category" msgid="2339505603075527212">"Clavier à l\'écran"</string>
-    <string name="keywords_virtual_keyboard" msgid="1494726424879503434">"Gboard"</string>
-    <string name="available_virtual_keyboard_category" msgid="6930012948152749337">"Clavier à l\'écran disponible"</string>
+    <string name="keyboard_apps_category" msgid="1715169176659877658">"Applis de clavier"</string>
+    <string name="keyboard_apps_category_summary" msgid="6676804967286517009">"Paramètres de langue et d\'applis pour <xliff:g id="KEYBOARD_APPS_LIST">%1$s</xliff:g>"</string>
+    <string name="keywords_keyboard_apps" msgid="895860348178301718">"Gboard"</string>
+    <string name="available_keyboard_apps_category" msgid="7665966484500890112">"Applis de clavier disponibles"</string>
     <string name="keyboard_options_category" msgid="8040137073401152608">"Options"</string>
     <string name="keyboard_a11y_category" msgid="8230758278046841469">"Accessibilité"</string>
-    <string name="physical_keyboard_title" msgid="3328134097512350958">"Clavier physique"</string>
-    <string name="physical_keyboard_layout_picker_title" msgid="4526600767648916256">"Disposition du clavier physique"</string>
+    <string name="physical_keyboard_title" msgid="6597340453841961909">"Claviers physiques"</string>
+    <string name="physical_keyboard_summary" msgid="2751015358747795398">"Paramètres matériels pour <xliff:g id="PHYSICAL_KEYBOARDS_LIST">%1$s</xliff:g>"</string>
+    <string name="physical_keyboard_layout_picker_title" msgid="6538070154297781081">"Sélecteur de disposition"</string>
     <string name="bounce_keys" msgid="7419450970351743904">"Touches filtres"</string>
     <string name="bounce_keys_summary" msgid="8890925059943636911">"Ignorer les frappes rapides et consécutives d\'une même touche"</string>
     <string name="bounce_keys_dialog_title" msgid="1090578395028456023">"Délai des touches filtres"</string>
@@ -2219,23 +2208,37 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Personnalisez les actions déclenchées par les boutons de votre manette"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Boutons"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Directions"</string>
-    <string name="game_controller_button_a" msgid="2138420373137111774">"Bouton A"</string>
-    <string name="game_controller_button_b" msgid="2093089857164437480">"Bouton B"</string>
-    <string name="game_controller_button_x" msgid="3428801081204194655">"Bouton X"</string>
-    <string name="game_controller_button_y" msgid="4596061542299533516">"Bouton Y"</string>
-    <string name="game_controller_button_l1" msgid="4428713182602902434">"Bouton L1"</string>
-    <string name="game_controller_button_r1" msgid="6271978600831912659">"Bouton R1"</string>
-    <string name="game_controller_button_l2" msgid="4168716287264803566">"Bouton L2"</string>
-    <string name="game_controller_button_r2" msgid="4361909018228151006">"Bouton R2"</string>
-    <string name="game_controller_button_thumbl" msgid="609311480262927654">"Appui sur le joystick gauche"</string>
-    <string name="game_controller_button_thumbr" msgid="6734424131770099471">"Appui sur le joystick droit"</string>
+    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
+    <skip />
+    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
+    <skip />
+    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
+    <skip />
+    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
+    <skip />
+    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
+    <skip />
+    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
+    <skip />
+    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
+    <skip />
     <string name="game_controller_dpad" msgid="5352745621298140827">"Pavé directionnel"</string>
-    <string name="game_controller_stick_left" msgid="1591700901162153956">"Joystick gauche"</string>
-    <string name="game_controller_stick_right" msgid="1418791636252375110">"Joystick droit"</string>
+    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
+    <skip />
+    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
+    <skip />
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Rétablir les paramètres par défaut"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Rétablir les param. par défaut ?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Tous les paramètres de votre manette seront rétablis par défaut"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Réinitialiser"</string>
+    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
+    <skip />
     <string name="trackpad_settings" msgid="2071131324087677005">"Pavé tactile"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Pavé tactile et souris"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Souris"</string>
@@ -2346,7 +2349,7 @@
     <string name="vibrate_input_devices" msgid="5192591087864449142">"Vibreur pour la redirection"</string>
     <string name="vibrate_input_devices_summary" msgid="8791680891376689823">"Rediriger le vibreur vers la manette de jeu lorsque vous êtes connecté"</string>
     <string name="keyboard_layout_picker_title" msgid="240504762718562906">"Dispositions du clavier"</string>
-    <string name="keyboard_layout_picker_category_title" msgid="2369473692906329772">"Dispositions de claviers physiques"</string>
+    <string name="keyboard_layout_picker_category_title" msgid="2312103369489003202">"Dispositions"</string>
     <string name="user_dict_settings_title" msgid="680410651924276991">"Dictionnaire personnel"</string>
     <string name="user_dict_settings_for_work_title" msgid="1245315720684961770">"Dictionnaire personnel pour le travail"</string>
     <string name="user_dict_settings_summary" msgid="4939694372338975081">"Ajoutez des mots qui pourront être utilisés dans des applis comme le correcteur orthographique"</string>
@@ -2368,9 +2371,9 @@
     <string name="user_dict_settings_all_languages" msgid="8563387437755363526">"Pour toutes les langues"</string>
     <string name="user_dict_settings_more_languages" msgid="5378870726809672319">"Plus de langues…"</string>
     <string name="testing" msgid="6294172343766732037">"Test"</string>
-    <string name="keyboard_settings_summary" msgid="9188442758316476986">"Clavier à l\'écran, outils"</string>
-    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="2240779804018260938">"Clavier à l\'écran, clavier physique, outils"</string>
-    <string name="builtin_keyboard_settings_title" msgid="5096171620714179661">"Clavier physique"</string>
+    <string name="keyboard_settings_summary" msgid="5513613701144979051">"Applis de clavier, outils"</string>
+    <string name="keyboard_settings_with_physical_keyboard_summary" msgid="449934856451727476">"Applis de clavier, claviers physiques, outils"</string>
+    <string name="physical_keyboards_list_title" msgid="2062417895303139252">"Claviers physiques"</string>
     <string name="enabled_locales_keyboard_layout" msgid="3939886151098958639">"Mise en page"</string>
     <string name="gadget_picker_title" msgid="7615902510050731400">"Choisir un gadget"</string>
     <string name="widget_picker_title" msgid="7641298325488989676">"Choisir un widget"</string>
@@ -2439,6 +2442,10 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Flags de fonctionnalités"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Activer le journal de la pile Bluetooth"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Modifier le niveau de journalisation de la pile Bluetooth (activer le Bluetooth ensuite)"</string>
+    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
+    <skip />
+    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
+    <skip />
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filtrage des journaux de surveillance HCI Bluetooth"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Définissez des filtres"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Désactivez et activez le Bluetooth pour appliquer les changements"</string>
@@ -2562,7 +2569,7 @@
     <string name="accessibility_shortcut_hardware_keyword" msgid="2483152542320987022">"boutons de volume"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_hardware" msgid="2503134386397991634">"Appuyez de manière prolongée sur les deux boutons de volume"</string>
     <string name="accessibility_shortcut_edit_screen_title_triple_tap" msgid="3314488747597058942">"Appuyer trois fois"</string>
-    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="4839204951599629871">"Appuyez rapidement %1$d fois sur l\'écran. Votre appareil peut être ralenti"</string>
+    <string name="accessibility_shortcut_edit_screen_summary_triple_tap" msgid="387169602299548488">"Appuyer rapidement trois fois sur l\'écran. Cela peut ralentir votre appareil."</string>
     <string name="accessibility_shortcut_triple_tap_keyword" msgid="5359347130888464334">"appuyer trois fois"</string>
     <string name="accessibility_shortcut_edit_dialog_title_keyboard" msgid="6563958384189884131">"Raccourci clavier"</string>
     <string name="accessibility_shortcut_edit_dialog_summary_keyboard" msgid="8755352177645189254">"Appuyez sur <xliff:g id="ID_1">%1$s</xliff:g>+<xliff:g id="ID_2">%2$s</xliff:g>+<xliff:g id="ID_3">%3$s</xliff:g> pour utiliser <xliff:g id="ID_4">%4$s</xliff:g>"</string>
@@ -2617,8 +2624,7 @@
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Thème sombre étendu"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Paramètres du thème sombre étendu"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_hint" msgid="5416622231409406588">"Ouvrir les paramètres du thème sombre étendu"</string>
-    <!-- no translation found for accessibility_expanded_dark_theme_exceptions_header_description (7803346084270796410) -->
-    <skip />
+    <string name="accessibility_expanded_dark_theme_exceptions_header_description" msgid="7803346084270796410">"Le thème sombre étendu assombrit automatiquement plus d\'applications pour améliorer la lisibilité.\n\nPour l\'utiliser, activez l\'option correspondante dans les applications. Si une application ne s\'affiche pas correctement, désactivez l\'option pour utiliser son thème d\'origine."</string>
     <string name="accessibility_disable_animations" msgid="2993529829457179058">"Supprimer les animations"</string>
     <string name="accessibility_disable_animations_summary" msgid="5828228669556554565">"Réduire les mouvements à l\'écran"</string>
     <string name="accessibility_text_cursor_blink_rate_title" msgid="2560387611012958520">"Clignotement du curseur de texte"</string>
@@ -2945,6 +2951,7 @@
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
+    <string name="battery_usage_screen_advance_footer" msgid="5883766314661065580">"L\'utilisation de la batterie et le temps d\'écran ne sont pas mesurés lorsque le téléphone est en charge"</string>
     <string name="battery_details_title" msgid="3289680399291090588">"Utilisation de la batterie par l\'appli"</string>
     <string name="details_subtitle" msgid="2550872569652785527">"Détails d\'utilisation"</string>
     <string name="controls_subtitle" msgid="3759606830916441564">"Ajuster la consommation"</string>
@@ -3644,6 +3651,12 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Appareil"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Pavé tactile, clavier, écran, son"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Luminosité, couleur, thème sombre, écran de verrouillage, texte"</string>
+    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
+    <skip />
+    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
+    <skip />
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Sélection du clavier, outils"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Vitesse du curseur, personnalisation des boutons, défilement"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Volume, haut-parleurs, micros"</string>
@@ -3671,8 +3684,7 @@
     <string name="keywords_wifi_notify_open_networks" msgid="6580896556389306636">"notification Wi‑Fi, notification wi-fi"</string>
     <string name="keywords_wifi_data_usage" msgid="4718555409695862085">"consommation des données"</string>
     <string name="keywords_time_format" msgid="5384803098766166820">"Utiliser le format 24 heures"</string>
-    <!-- no translation found for keywords_time_notifications (401122178351164403) -->
-    <skip />
+    <string name="keywords_time_notifications" msgid="401122178351164403">"notifications de l\'heure, notifications de fuseau horaire, DST, heure d\'été, décalage de fuseau horaire"</string>
     <string name="keywords_app_default" msgid="8977706259156428770">"Ouvrir avec"</string>
     <string name="keywords_applications_settings" msgid="999926810912037792">"Applications"</string>
     <string name="keywords_time_zone" msgid="6402919157244589055">"fuseau horaire"</string>
@@ -3776,7 +3788,7 @@
     <string name="keywords_font_size" msgid="1643198841815006447">"taille du texte, gros caractères, grande police, gros texte, vision basse, agrandir le texte, agrandisseur de police, agrandissement de la police"</string>
     <string name="keywords_always_show_time_info" msgid="1066752498285497595">"Mode Always-on affichage ambiant, mode Always-on"</string>
     <string name="keywords_change_nfc_tag_apps_state" msgid="9032287964590554366">"NFC, tag, lecteur"</string>
-    <string name="keywords_keyboard_vibration" msgid="6485149510591654697">"clavier, technologies haptiques, vibreur"</string>
+    <string name="keywords_keyboard_vibration" msgid="5870649353180725920">"clavier, technologies haptiques, vibrer, saisie"</string>
     <string name="keywords_external_display_settings" msgid="4717990369488386495">"écran externe, écran connecté, écran étendu, deuxième écran, écran intégré, organiser les écrans, dupliquer, taille de l\'écran, rotation, résolution, fréquence d\'actualisation"</string>
     <string name="keywords_text_cursor_blink_rate" msgid="7682963763334011148">"curseur, curseur de texte, curseur de saisie, clignotement, intervalle de clignotement, fréquence de clignotement, animation, réduire l\'animation, supprimer l\'animation"</string>
     <string name="sound_dashboard_summary" msgid="8254699132423665654">"Volume et vibreur"</string>
@@ -3793,10 +3805,8 @@
     <string name="notification_volume_content_description_vibrate_mode" msgid="6097212000507408288">"Le son des notifications est coupé, mais le téléphone vibre"</string>
     <string name="volume_content_description_silent_mode" msgid="377680514551405754">"<xliff:g id="VOLUME_TYPE">%1$s</xliff:g> : son coupé"</string>
     <string name="notification_volume_disabled_summary" msgid="8679988555852056079">"Indisponible car la sonnerie est coupée"</string>
-    <!-- no translation found for keywords_sim_ringtone (8759812211069047968) -->
-    <skip />
-    <!-- no translation found for sim_ringtone_title (5253365736568657674) -->
-    <skip />
+    <string name="keywords_sim_ringtone" msgid="8759812211069047968">"Sonnerie, Alerte d\'appel, SIM, Sonnerie de la SIM"</string>
+    <string name="sim_ringtone_title" msgid="5253365736568657674">"Sonnerie"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"Sonnerie du téléphone"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"Son par défaut des notifications"</string>
     <string name="notification_unknown_sound_title" msgid="1319708450698738980">"Son fourni par l\'application"</string>
@@ -4568,7 +4578,7 @@
     <string name="usb_summary_photo_transfers_power" msgid="9077173567697482239">"PTP et alimentation"</string>
     <string name="usb_summary_MIDI_power" msgid="1184681982025435815">"MIDI et alimentation"</string>
     <string name="usb_summary_UVC_power" msgid="226810354412154061">"Webcam et alimentation"</string>
-    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"Appareil de <xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g> inconnu"</string>
+    <string name="usb_device_name_unknown_with_manufacturer_name" msgid="9075986054227881069">"Appareil inconnu de <xliff:g id="MANUFACTURER_NAME">%1$s</xliff:g>"</string>
     <string name="usb_device_name_unknown_with_vendor_id_and_product_id" msgid="8750941211592531562">"Appareil inconnu [<xliff:g id="VENDOR_ID">%1$04x</xliff:g>:<xliff:g id="PRODUCT_ID">%2$04x</xliff:g>]"</string>
     <string name="background_check_pref" msgid="5304564658578987535">"Vérification en arrière-plan"</string>
     <string name="assist_access_context_title" msgid="5201495523514096201">"Utiliser le texte de l\'écran"</string>
@@ -4622,23 +4632,57 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Autoriser cette appli à lire, modifier et supprimer tous les fichiers sur cet appareil ou sur n\'importe quel volume de stockage connecté. Si cette option est activée, l\'appli pourra accéder à des fichiers à votre insu."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Peut peut accéder à tous les fichiers"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatisation de l\'écran"</string>
-    <string name="computer_control_automation_sub_heading" msgid="1416146361612039463">"Cette appli pourra voir le contenu affiché sur l\'écran d\'autres applis et interagir avec lui pour vous aider à effectuer des tâches, même lorsque les applis sont en arrière-plan"</string>
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (6841078031131642530) -->
+    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
     <skip />
-    <string name="computer_control_automation_footer_summary" msgid="7244915433372453577">"Si vous n\'autorisez pas l\'automatisation de l\'écran, <xliff:g id="ID_1">%1$s</xliff:g> pourra potentiellement continuer d\'interagir avec les applis connectées à <xliff:g id="ID_2">%1$s</xliff:g> par d\'autres moyens"</string>
-    <string name="computer_control_automation_page_summary" msgid="5061942204074823130">"Autoriser les applis à vous aider à effectuer des tâches en interagissant avec le contenu affiché sur l\'écran d\'autres applis"</string>
+    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
+    <skip />
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Toujours demander"</string>
-    <string name="computer_control_automation_always_allowed" msgid="2509025480867646050">"Toujours autoriser"</string>
-    <string name="computer_control_automation_dont_allow" msgid="6562575180350018944">"Ne pas autoriser"</string>
-    <!-- no translation found for computer_control_automation_toggle_title (6649138321373233109) -->
+    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
     <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_no_apps (1017862532735758587) -->
+    <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Ne pas autoriser"</string>
+    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
     <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_list_header_summary (2787499743279799250) -->
+    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
     <skip />
-    <!-- no translation found for computer_control_automation_allowed (6000569909180841099) -->
+    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
     <skip />
-    <!-- no translation found for computer_control_automation_not_allowed (3817051114351029813) -->
+    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
+    <skip />
+    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
     <skip />
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notifications en plein écran"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Autoriser l\'appli à afficher les notifications en plein écran"</string>
@@ -4676,6 +4720,8 @@
     <string name="disconnected" msgid="3469373726996129247">"Non connecté"</string>
     <string name="keyboard_disconnected" msgid="796053864561894531">"Non connecté"</string>
     <string name="apps_summary" msgid="4007416751775414252">"<xliff:g id="COUNT">%1$d</xliff:g> applications installées"</string>
+    <!-- no translation found for storage_percentage_format (420113039071073589) -->
+    <skip />
     <string name="storage_toplevel_summary" msgid="6708203706751754934">"<xliff:g id="PERCENTAGE">%1$s</xliff:g> utilisés - <xliff:g id="FREE_SPACE">%2$s</xliff:g> disponibles"</string>
     <string name="display_dashboard_summary" msgid="1599453894989339454">"Thème sombre, taille de la police, luminosité"</string>
     <string name="memory_summary" msgid="8221954450951651735">"Utilisation d\'environ <xliff:g id="USED_MEMORY">%1$s</xliff:g> sur <xliff:g id="TOTAL_MEMORY">%2$s</xliff:g> de mémoire"</string>
@@ -5735,11 +5781,11 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Autoriser uniquement les réseaux chiffrés"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Cette option est plus sécurisée mais peut limiter votre connexion au réseau mobile dans certains endroits. Les appels d\'urgence sont toujours autorisés."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Désactiver la protection réseaux 2G ?"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="1741533494609270306">"Le réseau actuel de la carte SIM <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> n\'est pas compatible avec la 2G. Si vous désactivez la protection 2G, vous risquez de vous connecter à des réseaux 2G falsifiés et dangereux."</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"Les réseaux 2G sont moins sécurisés. Si vous désactivez cette option, vos appels, messages et données seront susceptibles d\'être interceptés ou volés."</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Désactiver"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Protection réseaux 2G"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"La protection des réseaux 2G est activée"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="5572748453651863580">"Le réseau actuel de la carte SIM <xliff:g id="CARRIER_PROVIDER_NAME">%s</xliff:g> nécessite d\'activer la protection 2G. Vous pouvez toujours choisir de désactiver la protection 2G à vos propres risques."</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"Vous pouvez désactiver cette option dans les paramètres, mais les réseaux 2G sont moins sécurisés et peuvent mettre vos données en danger"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Paramètres"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tous les services"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Afficher les accès au presse-papiers"</string>
@@ -5786,6 +5832,7 @@
     <string name="dream_setup_title" msgid="2458303874255396142">"Choisissez votre économiseur d\'écran"</string>
     <string name="customize_button_title" msgid="1110284655990203359">"Personnaliser"</string>
     <string name="customize_button_description" msgid="7440248477266126231">"Personnaliser <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
+    <string name="dream_preview_button_description" msgid="1752727543834253129">"Prévisualiser <xliff:g id="SCREENSAVER_NAME">%1$s</xliff:g>"</string>
     <string name="reboot_dialog_enable_freeform_support" msgid="3697462756493543645">"Un redémarrage est nécessaire pour activer la prise en charge des fenêtres de forme libre."</string>
     <string name="reboot_dialog_override_desktop_mode" msgid="7480950772574354130">"Un redémarrage est nécessaire pour modifier la disponibilité des fenêtres de forme libre."</string>
     <string name="reboot_dialog_enable_desktop_mode_on_secondary_display" msgid="1153621881052401924">"Un redémarrage est nécessaire pour activer les fenêtres de forme libre sur les écrans secondaires."</string>
@@ -5820,6 +5867,9 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Désinstaller l\'appli"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Applis installées depuis # mois}one{Applis installées depuis # mois}other{Applis installées depuis # mois}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Applis installées il y a plus de # mois}one{Applis installées il y a plus de # mois}other{Applis installées il y a plus de # mois}}"</string>
+    <string name="ai_assist_category" msgid="6800674613544630195">"Assistance IA"</string>
+    <string name="personal_context_title" msgid="6639623956831710453">"Assistance proactive"</string>
+    <string name="personal_context_switch_summary" msgid="917644125592480347">"Choisissez si cette appli peut ou non fournir des infos pour générer des suggestions"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Format"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Essayer un nouveau format dans lequel afficher cette application si elle n\'a pas été conçue pour s\'adapter à votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Essayez un nouveau format dans lequel afficher cette application si elle n\'a pas été conçue pour s\'adapter à votre <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Il est possible que certaines applications ne soient pas optimisées pour certains formats."</string>
@@ -5837,11 +5887,11 @@
     <string name="user_aspect_ratio_option_a11y" msgid="1235801996029095219">"<xliff:g id="NUMERATOR">%1$s</xliff:g> par <xliff:g id="DENOMINATOR">%2$s</xliff:g>"</string>
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Si vous modifiez le format, l\'application redémarrera et vous risquez de perdre les modifications non enregistrées. Il est possible que certaines applications ne soient pas optimisées pour certains formats."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Expérience"</string>
-    <string name="virtual_gamepad_title" msgid="4310166725503017564">"Manette de jeu"</string>
+    <string name="virtual_gamepad_title" msgid="8888343036739485679">"Manette de jeu virtuelle"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Lecteur d\'empreinte digitale"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notifications lumineuses"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"À propos des notifications lumineuses"</string>
-    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"Désactivé / Le flash de l\'appareil photo ou un clignotement de l\'écran vous alerte pour les notifications et les alarme"</string>
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"Désactivé / Le flash de l\'appareil photo ou un clignotement de l\'écran vous alerte pour les notifications et les alarmes"</string>
     <string name="flash_notifications_summary_on" msgid="7750683903778104666">"Activé / Le flash de l\'appareil photo ou un clignotement de l\'écran vous alerte pour les notifications et les alarmes"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"Le flash de l\'appareil photo ou l\'écran clignote lorsque vous recevez des notifications ou que des alarmes retentissent"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"L\'écran clignote lorsque que vous recevez des notifications ou que des alarmes retentissent"</string>
@@ -6028,7 +6078,7 @@
     <string name="audio_streams_main_page_name_dialog_format_alert" msgid="6797839340871206774">"Le nom de votre flux audio doit contenir entre 4 et 32 caractères et n\'être composé que de lettres, de chiffres et de symboles"</string>
     <string name="audio_streams_qr_code_scanner_label" msgid="8799703301071378034">"Lecteur de QR code"</string>
     <string name="audio_streams_qr_code_help_with_link" msgid="5542328067190486479"><annotation id="link">"Besoin d\'aide ?"</annotation></string>
-    <string name="homepage_search" msgid="6759334912284663559">"Rechercher dans les paramètres"</string>
+    <string name="homepage_search" msgid="6759334912284663559">"Rechercher dans paramètres"</string>
     <string name="keywords_contacts_storage" msgid="9061213057165337893">"contacts, stockage, compte"</string>
     <string name="contacts_storage_settings_title" msgid="1574030546525203810">"Stockage des contacts"</string>
     <string name="contacts_storage_device_only_preference_label" msgid="970250816918108264">"Appareil uniquement"</string>
@@ -6222,12 +6272,8 @@
     <string name="unprovisioned_device_warning" msgid="1275456484320369400">"Votre appareil n\'est pas enregistré pour pouvoir utiliser SOS par satellite. Vérifiez que vous êtes connecté à Internet pour que l\'enregistrement de votre appareil se fasse automatiquement."</string>
     <string name="enable_webapp_minter_title" msgid="1814043991443158736">"Activer le service d\'installation d\'applications Web"</string>
     <string name="enable_webapp_minter_summary" msgid="333269694933213570">"Activez ce service pour installer des sites Web directement sur votre écran d\'accueil et les utiliser comme des applis classiques."</string>
-    <!-- no translation found for access_hid_title (3937436196813998587) -->
-    <skip />
-    <!-- no translation found for permit_access_hid (870824396872060949) -->
-    <skip />
-    <!-- no translation found for allow_access_hid_description (5950783046013896271) -->
-    <skip />
-    <!-- no translation found for keywords_access_hid (682455265293135353) -->
-    <skip />
+    <string name="access_hid_title" msgid="3937436196813998587">"Accès aux périphériques d\'interface humaine"</string>
+    <string name="permit_access_hid" msgid="870824396872060949">"Autoriser l\'appli à détecter les périphériques d\'interface humaine (HID)"</string>
+    <string name="allow_access_hid_description" msgid="5950783046013896271">"Si vous autorisez l\'accès, des applis malveillantes pourront reprogrammer vos HID pour compromettre votre système. Par exemple, des applis pourraient simuler les entrées de votre clavier ou de la souris pour contrôler votre système lorsqu\'il n\'est pas ouvert. Assurez-vous de faire confiance aux applis avant d\'autoriser l\'accès."</string>
+    <string name="keywords_access_hid" msgid="682455265293135353">"hid, humain, accès, appareil"</string>
 </resources>

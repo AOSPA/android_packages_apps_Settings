@@ -17,18 +17,38 @@
 package com.android.settings.accessibility.screenmagnification.ui
 
 import android.content.Context
+import android.view.InputDevice
 import androidx.test.core.app.ApplicationProvider
 import com.android.settings.R
+import com.android.settings.testutils.shadow.ShadowInputDevice
 import com.android.settingslib.widget.IllustrationPreference
+import com.android.settingslib.widget.SettingsThemeHelper
 import com.google.common.truth.Truth.assertThat
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+import org.robolectric.annotation.Implementation
+import org.robolectric.annotation.Implements
 
 @RunWith(RobolectricTestRunner::class)
+@Config(
+    shadows =
+        [
+            ShadowInputDevice::class,
+            MagnificationIllustrationPreferenceTest.ShadowSettingsThemeHelper::class,
+        ]
+)
 class MagnificationIllustrationPreferenceTest {
     private val context: Context = ApplicationProvider.getApplicationContext()
     private val magnificationIllustrationPreference = MagnificationIllustrationPreference()
+
+    @Before
+    fun setUp() {
+        ShadowInputDevice.reset()
+        ShadowSettingsThemeHelper.setExpressiveTheme(false)
+    }
 
     @Test
     fun key() {
@@ -52,5 +72,73 @@ class MagnificationIllustrationPreferenceTest {
                     context.getText(R.string.accessibility_screen_magnification_title),
                 )
             )
+    }
+
+    @Test
+    fun createWidget_expressiveThemeOff_useDefaultBanner() {
+        ShadowSettingsThemeHelper.setExpressiveTheme(false)
+
+        val preference: IllustrationPreference =
+            magnificationIllustrationPreference.createWidget(context)
+
+        assertThat(preference.lottieAnimationResId)
+            .isEqualTo(R.raw.accessibility_magnification_banner)
+    }
+
+    @Test
+    fun createWidget_expressiveThemeOn_noMouse_useExpressiveBanner() {
+        ShadowSettingsThemeHelper.setExpressiveTheme(true)
+
+        val preference: IllustrationPreference =
+            magnificationIllustrationPreference.createWidget(context)
+
+        assertThat(preference.lottieAnimationResId)
+            .isEqualTo(R.raw.accessibility_magnification_banner_expressive)
+    }
+
+    @Test
+    fun createWidget_expressiveThemeOn_withMouse_useMouseBanner() {
+        ShadowSettingsThemeHelper.setExpressiveTheme(true)
+        addMouseDevice()
+
+        val preference: IllustrationPreference =
+            magnificationIllustrationPreference.createWidget(context)
+
+        assertThat(preference.lottieAnimationResId)
+            .isEqualTo(R.raw.accessibility_magnification_with_cursor_banner)
+    }
+
+    @Test
+    fun createWidget_expressiveThemeOff_withMouse_useDefaultBanner() {
+        ShadowSettingsThemeHelper.setExpressiveTheme(false)
+        addMouseDevice()
+
+        val preference: IllustrationPreference =
+            magnificationIllustrationPreference.createWidget(context)
+
+        assertThat(preference.lottieAnimationResId)
+            .isEqualTo(R.raw.accessibility_magnification_banner)
+    }
+
+    private fun addMouseDevice() {
+        val deviceId = 1
+        val device =
+            ShadowInputDevice.makeInputDevicebyIdWithSources(deviceId, InputDevice.SOURCE_MOUSE)
+        ShadowInputDevice.addDevice(deviceId, device)
+    }
+
+    @Implements(SettingsThemeHelper::class)
+    class ShadowSettingsThemeHelper {
+        companion object {
+            private var isExpressiveTheme = false
+
+            @JvmStatic
+            @Implementation
+            fun isExpressiveTheme(context: Context): Boolean = isExpressiveTheme
+
+            fun setExpressiveTheme(enabled: Boolean) {
+                isExpressiveTheme = enabled
+            }
+        }
     }
 }

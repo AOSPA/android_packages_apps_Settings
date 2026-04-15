@@ -46,10 +46,12 @@ import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers.any
 import org.mockito.Mock
 import org.mockito.Mockito.atLeastOnce
+import org.mockito.Mockito.doAnswer
 import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.doThrow
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
@@ -84,6 +86,16 @@ class SatelliteStateRepositoryTest {
             shadowOf(context.getSystemService(CarrierConfigManager::class.java))
         shadowSubscriptionManager =
             shadowOf(context.getSystemService(SubscriptionManager::class.java))
+
+        doAnswer { invocation ->
+            val callback = invocation.getArgument<TelephonyCallback>(1)
+            if (callback is TelephonyCallback.CarrierRoamingNtnListener) {
+                // Trigger an emission by changing the state from its default (false, false)
+                callback.onCarrierRoamingNtnEligibleStateChanged(true)
+                callback.onCarrierRoamingNtnEligibleStateChanged(false)
+            }
+            null
+        }.`when`(telephonyManager).registerTelephonyCallback(any(), any())
     }
 
     private fun createRepository(
@@ -365,6 +377,21 @@ class SatelliteStateRepositoryTest {
 
             val mode = repository.getSatelliteDataSupportMode(subId)
             assertThat(mode).isEqualTo(SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN)
+        }
+
+    @Test
+     fun satelliteStatus_whenOemSatelliteNotConnected_returnsActive() =
+         testScope.runTest {
+             repository = createRepository(backgroundScope)
+             val values = mutableListOf<SatelliteStatus>()
+             repository.satelliteStatus.onEach { values.add(it) }.launchIn(backgroundScope)
+             advanceUntilIdle()
+
+             val callback = captureSatelliteModemStateCallback()
+             callback.onSatelliteModemStateChanged(SatelliteManager.SATELLITE_MODEM_STATE_NOT_CONNECTED)
+             advanceUntilIdle()
+
+             assertThat(values.last()).isEqualTo(SatelliteStatus.ACTIVE)
         }
 
     // Helpers to capture callbacks and trigger updates

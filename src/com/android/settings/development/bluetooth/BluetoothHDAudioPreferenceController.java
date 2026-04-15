@@ -82,7 +82,9 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
             return true;
         }
         final boolean enabled = (Boolean) newValue;
+// QTI_BEGIN: 2020-04-14: Bluetooth: A2dpSrc: Bluetooth codec Dev-UI support for QVA codecs
         Log.e(TAG, "onPreferenceChange: " + enabled);
+// QTI_END: 2020-04-14: Bluetooth: A2dpSrc: Bluetooth codec Dev-UI support for QVA codecs
         final int prefValue = enabled
                 ? BluetoothA2dp.OPTIONAL_CODECS_PREF_ENABLED
                 : BluetoothA2dp.OPTIONAL_CODECS_PREF_DISABLED;
@@ -98,6 +100,7 @@ public class BluetoothHDAudioPreferenceController extends AbstractBluetoothPrefe
             bluetoothA2dp.disableOptionalCodecs(activeDevice);
         }
         mCallback.onBluetoothHDAudioEnabled(enabled);
+        preference.setEnabled(false);
         return true;
     }
 }

@@ -94,7 +94,7 @@ open class HomeTimeZoneSettings :
         mSelectedTimeZoneId =
             Settings.Global.getString(
                 requireContext().contentResolver,
-                Settings.Global.USER_HOME_TIME_ZONE_ID,
+                Settings.Global.HOME_TIME_ZONE_ID,
             )
         updateUi()
     }
@@ -223,7 +223,7 @@ open class HomeTimeZoneSettings :
         mSelectedTimeZoneId = tzId
         Settings.Global.putString(
             requireContext().contentResolver,
-            Settings.Global.USER_HOME_TIME_ZONE_ID,
+            Settings.Global.HOME_TIME_ZONE_ID,
             tzId,
         )
 

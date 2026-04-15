@@ -23,9 +23,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import android.content.Context;
 
+import androidx.preference.Preference;
 import androidx.test.core.app.ApplicationProvider;
 
 import com.android.settings.R;
+import com.android.settings.testutils.shadow.ShadowThreadUtils;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,9 +40,10 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowLooper;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(shadows = ShadowFlashNotificationsUtils.class)
+@Config(shadows = {ShadowFlashNotificationsUtils.class, ShadowThreadUtils.class})
 public class FlashNotificationsPreferenceControllerTest {
     private static final String PREFERENCE_KEY = "preference_key";
 
@@ -65,6 +68,18 @@ public class FlashNotificationsPreferenceControllerTest {
     @Test
     public void getAvailabilityStatus() {
         assertThat(mController.getAvailabilityStatus()).isEqualTo(AVAILABLE);
+    }
+
+    @Test
+    public void updateState_shouldSetSummary() {
+        setFlashNotificationsState(FlashNotificationsUtil.State.CAMERA);
+        final Preference preference = new Preference(mContext);
+
+        mController.updateState(preference);
+        ShadowLooper.idleMainLooper();
+
+        assertThat(preference.getSummary().toString()).isEqualTo(mContext.getString(
+                R.string.flash_notifications_summary_on));
     }
 
     @Test

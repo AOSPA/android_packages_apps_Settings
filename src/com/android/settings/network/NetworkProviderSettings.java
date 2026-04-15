@@ -208,7 +208,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     private final ResultReceiver mWifiTroubleshootingReceiver =
             new ResultReceiver(new Handler(Looper.getMainLooper())) {
                 @Override
-                protected void onReceiveResult(int resultCode, Bundle resultData) {
+                protected void onReceiveResult(int resultCode, @Nullable Bundle resultData) {
                     super.onReceiveResult(resultCode, resultData);
                     final WifiEntry connectedEntry = mWifiPickerTracker.getConnectedWifiEntry();
                     PreferenceCategory connectedWifiPreferenceCategory =
@@ -239,10 +239,10 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                             Log.i(TAG, "No footer action of Wifi info");
                             return;
                         }
-                        String title = bundle.getString(KEY_NAME_OF_PREFERENCE_UI_FOOTER);
-                        String packageName = bundle.getString(KEY_PACKAGE_NAME);
-                        String className = bundle.getString(KEY_CLASS_NAME);
-                        String action = bundle.getString(KEY_ACTION_OF_PREFERENCE_UI_FOOTER);
+                        String title = bundle.getString(KEY_NAME_OF_PREFERENCE_UI_FOOTER, "");
+                        String packageName = bundle.getString(KEY_PACKAGE_NAME, "");
+                        String className = bundle.getString(KEY_CLASS_NAME, "");
+                        String action = bundle.getString(KEY_ACTION_OF_PREFERENCE_UI_FOOTER, "");
                         attachFooter(connectedEntry.getKey(), title, (v) -> {
                             TroubleshootingUtils.startWifiTroubleShootingActivity(
                                     getActivity(),
@@ -258,7 +258,7 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
     private final ResultReceiver mMobileTroubleshootingReceiver =
             new ResultReceiver(new Handler(Looper.getMainLooper())) {
                 @Override
-                protected void onReceiveResult(int resultCode, Bundle resultData) {
+                protected void onReceiveResult(int resultCode, @Nullable Bundle resultData) {
                     super.onReceiveResult(resultCode, resultData);
                     if (resultCode == ITroubleshootingInfoProviderService.RESULT_SUCCESS) {
                         attachFooter(
@@ -282,10 +282,10 @@ public class NetworkProviderSettings extends RestrictedDashboardFragment
                         Log.i(TAG, "No footer action of Cellular info");
                         return;
                     }
-                    String title = bundle.getString(KEY_NAME_OF_PREFERENCE_UI_FOOTER);
-                    String packageName = bundle.getString(KEY_PACKAGE_NAME);
-                    String className = bundle.getString(KEY_CLASS_NAME);
-                    String action = bundle.getString(KEY_ACTION_OF_PREFERENCE_UI_FOOTER);
+                    String title = bundle.getString(KEY_NAME_OF_PREFERENCE_UI_FOOTER, "");
+                    String packageName = bundle.getString(KEY_PACKAGE_NAME, "");
+                    String className = bundle.getString(KEY_CLASS_NAME, "");
+                    String action = bundle.getString(KEY_ACTION_OF_PREFERENCE_UI_FOOTER, "");
                     attachFooter(
                             SubscriptionsPreferenceController.PREF_KEY_ACTIVE_MOBILE_CONNECTION,
                             title,

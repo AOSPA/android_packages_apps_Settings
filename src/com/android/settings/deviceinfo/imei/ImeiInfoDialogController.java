@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 /*
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
  * Changes from Qualcomm Technologies, Inc. are provided under the following license:
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 package com.android.settings.deviceinfo.imei;
 
 import android.content.Context;
@@ -29,15 +33,19 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
 import android.util.Pair;
+// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
 
 import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 import com.android.settings.network.telephony.TelephonyUtils;
 
 import com.qti.extphone.QtiImeiInfo;
+// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 
 public class ImeiInfoDialogController {
 
@@ -63,8 +71,12 @@ public class ImeiInfoDialogController {
     private final TelephonyManager mTelephonyManager;
     private final SubscriptionInfo mSubscriptionInfo;
     private final int mSlotId;
+// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
     private QtiImeiInfo mQtiImeiInfo[];
+// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
     private boolean mIsDsdsToSsConfigValid;
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
 
     public ImeiInfoDialogController(@NonNull ImeiInfoDialogFragment dialog, int slotId) {
         mDialog = dialog;
@@ -77,19 +89,30 @@ public class ImeiInfoDialogController {
         if (mSubscriptionInfo != null) {
             mTelephonyManager = context.getSystemService(TelephonyManager.class)
                     .createForSubscriptionId(mSubscriptionInfo.getSubscriptionId());
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
         } else if (isValidSlotIndex(slotId, tm) || mIsDsdsToSsConfigValid) {
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
             mTelephonyManager = tm;
         } else {
             mTelephonyManager = null;
         }
+// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
         TelephonyUtils.connectExtTelephonyService(context);
+// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
+// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
         mQtiImeiInfo = TelephonyUtils.getImeiInfo();
     }
 
     private String getImei(int slot) {
         String imei = null;
+// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
+// QTI_BEGIN: 2024-02-19: Telephony: Avoid IllegalStateException in Settings app
         try {
+// QTI_END: 2024-02-19: Telephony: Avoid IllegalStateException in Settings app
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
             if (isMinHalVersion2_1() && !mIsDsdsToSsConfigValid) {
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
+// QTI_BEGIN: 2024-02-19: Telephony: Avoid IllegalStateException in Settings app
                 imei = mTelephonyManager.getImei(slot);
             } else {
                 if (mQtiImeiInfo == null) {
@@ -101,16 +124,29 @@ public class ImeiInfoDialogController {
                             imei = mQtiImeiInfo[i].getImei();
                             break;
                         }
+// QTI_END: 2024-02-19: Telephony: Avoid IllegalStateException in Settings app
+// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
                     }
+// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
+// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
                 }
+// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
+// QTI_BEGIN: 2024-02-19: Telephony: Avoid IllegalStateException in Settings app
                 if (TextUtils.isEmpty(imei)) {
                     imei = mTelephonyManager.getImei(slot);
                 }
+// QTI_END: 2024-02-19: Telephony: Avoid IllegalStateException in Settings app
+// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
             }
+// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
+// QTI_BEGIN: 2024-02-19: Telephony: Avoid IllegalStateException in Settings app
         } catch (Exception exception) {
             Log.i(TAG, "Imei not available. " + exception);
+// QTI_END: 2024-02-19: Telephony: Avoid IllegalStateException in Settings app
+// QTI_BEGIN: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
         }
         return imei;
+// QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
     }
 
     /**
@@ -118,9 +154,11 @@ public class ImeiInfoDialogController {
      */
     public void populateImeiInfo() {
         if (mTelephonyManager == null) {
+// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
             if (mIsDsdsToSsConfigValid) {
                 updateDialogForGsmPhone();
             }
+// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
             Log.w(TAG, "TelephonyManager for this slot is null. Invalid slot? id=" + mSlotId);
             return;
         }
@@ -194,6 +232,7 @@ public class ImeiInfoDialogController {
     private boolean isValidSlotIndex(int slotIndex, TelephonyManager telephonyManager) {
         return slotIndex >= 0 && slotIndex < telephonyManager.getPhoneCount();
     }
+// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
 
     private int makeRadioVersion(int major, int minor) {
         if (major < 0 || minor < 0) return 0;
@@ -201,9 +240,14 @@ public class ImeiInfoDialogController {
     }
 
     private boolean isMinHalVersion2_1() {
+// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
+// QTI_BEGIN: 2023-03-27: Telephony: Use correct API to get HAL Version
         Pair<Integer, Integer> radioVersion = mTelephonyManager.getHalVersion(
                 TelephonyManager.HAL_SERVICE_MODEM);
+// QTI_END: 2023-03-27: Telephony: Use correct API to get HAL Version
+// QTI_BEGIN: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
         int halVersion = makeRadioVersion(radioVersion.first, radioVersion.second);
         return (halVersion > makeRadioVersion(2, 0)) ? true:false;
     }
+// QTI_END: 2023-03-23: Telephony: Primary IMEI is not displayed in About Phone
 }

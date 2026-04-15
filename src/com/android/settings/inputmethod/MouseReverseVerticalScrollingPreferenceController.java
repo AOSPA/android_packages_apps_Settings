@@ -54,9 +54,6 @@ public class MouseReverseVerticalScrollingPreferenceController extends TogglePre
 
     @Override
     public int getAvailabilityStatus() {
-        if (!InputSettings.isMouseReverseVerticalScrollingFeatureFlagEnabled()) {
-            return UNSUPPORTED_ON_DEVICE;
-        }
         return AVAILABLE;
     }
 

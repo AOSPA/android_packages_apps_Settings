@@ -24,6 +24,7 @@ import com.android.settingslib.applications.StorageStatsSource
 import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
+import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_APPS
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.multiusers.ManagementScope
 import com.android.settingslib.metadata.preferencesapi.multiusers.PreferenceTarget
@@ -41,6 +42,8 @@ open class AppStorageSettingsScreenApi :
 
     init {
         flag { Flags.catalystMigration26q2() }
+
+        tags(APP_FUNCTION_APPS)
 
         parameters {
             parameter(
@@ -61,7 +64,7 @@ open class AppStorageSettingsScreenApi :
         preference(
             key = KEY_APP_SIZE,
             purpose = R.string.app_storage_app_size_purpose,
-            type = AnyInt,
+            type = AnyInt(unitOfMeasurement = "kilobytes"),
             appliesTo = PreferenceTarget.USER(canManage = ManagementScope.PROFILE_GROUP),
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
@@ -77,7 +80,7 @@ open class AppStorageSettingsScreenApi :
         preference(
             key = KEY_DATA_SIZE,
             purpose = R.string.app_storage_data_size_purpose,
-            type = AnyInt,
+            type = AnyInt(unitOfMeasurement = "kilobytes"),
             appliesTo = PreferenceTarget.USER(canManage = ManagementScope.PROFILE_GROUP),
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
@@ -95,7 +98,7 @@ open class AppStorageSettingsScreenApi :
         preference(
             key = KEY_CACHE_SIZE,
             purpose = R.string.app_storage_cache_size_purpose,
-            type = AnyInt,
+            type = AnyInt(unitOfMeasurement = "kilobytes"),
             appliesTo = PreferenceTarget.USER(canManage = ManagementScope.PROFILE_GROUP),
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
@@ -111,7 +114,7 @@ open class AppStorageSettingsScreenApi :
         preference(
             key = KEY_TOTAL_SIZE,
             purpose = R.string.app_storage_total_size_purpose,
-            type = AnyInt,
+            type = AnyInt(unitOfMeasurement = "kilobytes"),
             appliesTo = PreferenceTarget.USER(canManage = ManagementScope.PROFILE_GROUP),
         ) {
             sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)

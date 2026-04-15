@@ -1006,9 +1006,6 @@
     <!-- The initial value for remaining in enroll progress -->
     <integer name="init_fingerprint_enroll_remaining">0</integer>
 
-    <!-- Whether to show the top level Device category for desktop. -->
-    <bool name="config_show_top_level_device_category">false</bool>
-
     <!-- An array of package names of satellite apps for the NB-NTN landing page. -->
     <string-array name="config_satellite_apps_for_nbntn_landing_page" translatable="false"></string-array>
 
@@ -1037,6 +1034,10 @@
 
     <!-- Whether to use OweOnly when "Enhanced Open" is selected in UI.-->
     <bool name="config_vendor_wifi_tethering_use_owe_only">false</bool>
+
+    <!-- Whether to disable the option for setting the remote lockscreen credential as the
+         local screen lock during remote validation (Smart Setup/Quick Start) -->
+    <bool name="config_disable_remote_lockscreen_transfer_checkbox">false</bool>
 
     <!-- Light theme customization for lottie illustration in the setup. Not translatable. -->
     <string-array name="layout_animated_banner_customization" translatable="false">
@@ -1101,4 +1102,7 @@
 
     <!-- Whether to enable the device state app functions. -->
     <bool name="config_device_state_app_functions_enabled">false</bool>
+
+    <!-- TODO(b/496286136): Whether to force showing the icon on the locale picker screen. -->
+    <bool name="config_force_showing_icon_on_locale_picker_screen">false</bool>
 </resources>

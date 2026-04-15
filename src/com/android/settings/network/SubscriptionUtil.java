@@ -523,10 +523,12 @@ public class SubscriptionUtil {
             Log.d(TAG, "Unable to toggle subscription due to sim switch is in progress.");
             return;
         }
+// QTI_BEGIN: 2024-12-10: Telephony: Enable Dual SIM onboarding feature in Settings
         if (enable && Flags.isDualSimOnboardingEnabled()) {
             SimOnboardingActivity.startSimOnboardingActivity(context, subId, false);
             return;
         }
+// QTI_END: 2024-12-10: Telephony: Enable Dual SIM onboarding feature in Settings
         Intent intent = ToggleSubscriptionDialogActivity.getIntent(context, subId, enable);
         if (isNewTask) {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

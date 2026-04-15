@@ -22,6 +22,7 @@ import android.provider.Settings.Secure
 import com.android.settings.R
 import com.android.settings.flags.Flags
 import com.android.settingslib.metadata.ProvidePreferenceScreen
+import com.android.settingslib.metadata.SensitivityLevel
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen
 import com.android.settingslib.metadata.preferencesapi.category.Category
 import com.android.settingslib.metadata.preferencesapi.preconditions.Allowed
@@ -34,7 +35,7 @@ class SoundApiScreen : PreferencesApiScreen(
     key = KEY,
     topLevelSettingsCategory = Category.SOUND,
     fragment = SoundSettings::class,
-    purpose = R.string.sound_screen_purpose,
+    purpose = R.string.sound_screen_purpose_api,
     alreadyPartiallyMigrated = SoundScreen::class,
 ) {
     init {
@@ -45,6 +46,8 @@ class SoundApiScreen : PreferencesApiScreen(
             purpose = R.string.sound_always_show_vibration_icon_purpose,
             type = AnyBoolean,
         ) {
+            sensitivityLevel(SensitivityLevel.NO_SENSITIVITY)
+
             preconditions(R.string.sound_vibration_precondition) {
                 if (context.isVibrationAvailable()) {
                     Allowed

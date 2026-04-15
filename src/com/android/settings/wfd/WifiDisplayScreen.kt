@@ -25,8 +25,11 @@ import com.android.settings.R
 import com.android.settings.Settings.WifiDisplaySettingsActivity
 import com.android.settings.core.PreferenceScreenMixin
 import com.android.settings.utils.makeLaunchIntent
+import com.android.settingslib.datastore.KeyValueStore
 import com.android.settingslib.metadata.METADATA_IN_UI
+import com.android.settingslib.metadata.PersistentPreference
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -137,6 +140,8 @@ open class WifiDisplayScreen :
 
     override val availabilityDescription = WifiDisplaySettings.AVAILABILITY_DESCRIPTION
 
+    override fun getAvailabilityStability() = WifiDisplaySettings.getAvailabilityStability()
+
     override fun isAvailable(context: Context) = WifiDisplaySettings.isAvailable(context)
 
     override fun getLaunchIntent(context: Context, metadata: PreferenceMetadata?) =
@@ -157,7 +162,7 @@ open class WifiDisplayScreen :
 
     class WifiDisplayScreenPreference(
         private val screenMetadata : WifiDisplayScreen
-    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider {
+    ) : PreferenceMetadata, PreferenceSummaryProvider, PreferenceAvailabilityProvider, PersistentPreference<String> {
         override val key : String
             get() = "wifi_display_settings_preference"
 
@@ -174,7 +179,16 @@ open class WifiDisplayScreen :
 
         override val availabilityDescription = screenMetadata.availabilityDescription
 
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
+
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
+
+        override val supportsWrite: Boolean
+            get() = false
+
+        override val valueType = String::class.javaObjectType
+
+        override fun storage(context: Context): KeyValueStore = createSummaryStorage(context, key)
     }
 
     companion object {

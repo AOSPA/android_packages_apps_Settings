@@ -44,6 +44,7 @@ import com.android.settingslib.datastore.HandlerExecutor
 import com.android.settingslib.metadata.CatalystFlagProviderFactory
 import com.android.settingslib.metadata.METADATA_IN_UI
 import com.android.settingslib.metadata.PreferenceAvailabilityProvider
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
 import com.android.settingslib.metadata.PreferenceLifecycleContext
 import com.android.settingslib.metadata.PreferenceLifecycleProvider
 import com.android.settingslib.metadata.PreferenceMetadata
@@ -108,6 +109,8 @@ open class MobileNetworkListScreen(context: Context) :
 
     override val availabilityDescription =
         "The device must support showing mobile network list in Settings."
+
+    override fun getAvailabilityStability() = PreconditionStability.STABLE_UNTIL_APK_UPDATE
 
     override fun isAvailable(context: Context) = SimRepository(context).showMobileNetworkPageEntrance()
 
@@ -188,7 +191,6 @@ open class MobileNetworkListScreen(context: Context) :
     // Keep it for the external apps may retrieve it through the Setting Graph.
     override fun getPreferenceHierarchy(context: Context, coroutineScope: CoroutineScope) =
         preferenceHierarchy(context) {
-            +MobileNetworkListScreenPreference(this@MobileNetworkListScreen)
             +MobileDataPreference()
             addAsync(coroutineScope, Dispatchers.Default) {
                 if (CatalystFlagProviderFactory.catalystUseKeyParameters()) {
@@ -224,6 +226,8 @@ open class MobileNetworkListScreen(context: Context) :
         override fun getSummary(context: Context) : CharSequence? = screenMetadata.getSummary(context)
 
         override val availabilityDescription = screenMetadata.availabilityDescription
+
+        override fun getAvailabilityStability() = screenMetadata.getAvailabilityStability()
 
         override fun isAvailable(context: Context) : Boolean = screenMetadata.isAvailable(context)
     }

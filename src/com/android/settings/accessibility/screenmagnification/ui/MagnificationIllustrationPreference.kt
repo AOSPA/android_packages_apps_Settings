@@ -21,13 +21,13 @@ import com.airbnb.lottie.LottieAnimationView
 import com.android.settings.R
 import com.android.settings.accessibility.shared.utils.adjustIllustrationLayoutForSetupWizard
 import com.android.settings.accessibility.shared.utils.handleIllustrationAnimationForSetupWizard
+import com.android.settings.inputmethod.InputPeripheralsSettingsUtils
 import com.android.settingslib.metadata.PreferenceMetadata
 import com.android.settingslib.metadata.UI_ONLY_PREFERENCE
 import com.android.settingslib.preference.PreferenceBinding
 import com.android.settingslib.widget.IllustrationPreference
 import com.android.settingslib.widget.SettingsThemeHelper
 
-// LINT.IfChange
 internal class MagnificationIllustrationPreference : PreferenceMetadata, PreferenceBinding {
 
     override val key: String
@@ -42,9 +42,15 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
     override fun tags(context: Context) = arrayOf(UI_ONLY_PREFERENCE)
 
     override fun createWidget(context: Context): IllustrationPreference {
+        val hasPointingDevice =
+            InputPeripheralsSettingsUtils.isMouse() || InputPeripheralsSettingsUtils.isTouchpad()
         val lottieResId =
             if (SettingsThemeHelper.isExpressiveTheme(context)) {
-                R.raw.accessibility_magnification_banner_expressive
+                if (hasPointingDevice) {
+                    R.raw.accessibility_magnification_with_cursor_banner
+                } else {
+                    R.raw.accessibility_magnification_banner_expressive
+                }
             } else {
                 R.raw.accessibility_magnification_banner
             }
@@ -53,7 +59,11 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
             isSelectable = false
             lottieAnimationResId = lottieResId
             contentDescription = getContentDescription(context)
-            applyDynamicColor()
+            if (hasPointingDevice) {
+                applyIlloColors()
+            } else {
+                applyDynamicColor()
+            }
             setOnBindListener { view: LottieAnimationView? ->
                 view?.let { animationView ->
                     adjustIllustrationLayoutForSetupWizard(animationView)
@@ -73,4 +83,3 @@ internal class MagnificationIllustrationPreference : PreferenceMetadata, Prefere
         const val KEY = "animated_image"
     }
 }
-// LINT.ThenChange(/src/com/android/settings/accessibility/screenmagnification/MagnificationIllustrationPreferenceController.kt)

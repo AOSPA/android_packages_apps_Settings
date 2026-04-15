@@ -30,6 +30,8 @@ import com.android.settingslib.metadata.ProvidePreferenceScreen
 import com.android.settingslib.metadata.preferenceHierarchy
 import kotlinx.coroutines.CoroutineScope
 import com.android.settingslib.metadata.preferencesapi.PreferencesApiScreen.Companion.APP_FUNCTION_UNCATEGORIZED
+import com.android.settingslib.metadata.preferencesapi.preconditions.PreconditionStability
+
 
 /** Provides the preference screen for the Accessibility Button shortcut settings. */
 @ProvidePreferenceScreen(ButtonShortcutSettingScreen.KEY)
@@ -73,6 +75,10 @@ open class ButtonShortcutSettingScreen :
             ?.getAccessibilityShortcutTargets(ShortcutConstants.UserShortcutType.SOFTWARE)
             ?.isNotEmpty() ?: false
     }
+
+    override fun getEnabledDescription() = "At least one accessibility feature must be assigned to the accessibility button."
+
+    override fun getEnabledStability() = PreconditionStability.UNSTABLE
 
     override fun isIndexable(context: Context): Boolean {
         return isEnabled(context)

@@ -28,6 +28,8 @@ import com.android.settings.R
 import com.android.settings.accessibility.data.AccessibilityRepositoryProvider
 import com.android.settings.accessibility.extensions.getFeatureName
 import com.android.settings.accessibility.extensions.useService
+import com.android.settings.accessibility.shared.utils.configureFocusRingsForDialog
+import com.android.settings.accessibility.shared.utils.shouldShowFocusRingsInSuw
 import com.android.settings.core.instrumentation.InstrumentedDialogFragment
 
 private const val ARG_FEATURE_COMPONENT_NAME = "serviceComponentName"
@@ -70,17 +72,24 @@ class DisableAccessibilityServiceDialogFragment : InstrumentedDialogFragment() {
                 }
             }
 
-        return AlertDialog.Builder(context)
-            .setTitle(
-                context.getString(
-                    R.string.disable_service_title,
-                    serviceInfo.getFeatureName(context),
+        val dialog =
+            AlertDialog.Builder(context)
+                .setTitle(
+                    context.getString(
+                        R.string.disable_service_title,
+                        serviceInfo.getFeatureName(context),
+                    )
                 )
-            )
-            .setCancelable(true)
-            .setPositiveButton(R.string.accessibility_dialog_button_stop, listener)
-            .setNegativeButton(R.string.accessibility_dialog_button_cancel, listener)
-            .create()
+                .setCancelable(true)
+                .setPositiveButton(R.string.accessibility_dialog_button_stop, listener)
+                .setNegativeButton(R.string.accessibility_dialog_button_cancel, listener)
+                .create()
+
+        if (shouldShowFocusRingsInSuw(context)) {
+            dialog.setOnShowListener { configureFocusRingsForDialog(dialog) }
+        }
+
+        return dialog
     }
 
     override fun getMetricsCategory(): Int {
