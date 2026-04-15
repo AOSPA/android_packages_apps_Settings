@@ -373,6 +373,15 @@ class SatelliteStateRepositoryTest {
         }
 
     @Test
+    fun getSatelliteDataSupportMode_invalidSubId_returnsUnknown() =
+        testScope.runTest {
+            repository = createRepository(backgroundScope)
+
+            val mode = repository.getSatelliteDataSupportMode(SubscriptionManager.INVALID_SUBSCRIPTION_ID)
+            assertThat(mode).isEqualTo(SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN)
+        }
+
+    @Test
     fun getSatelliteDataSupportMode_exception_returnsUnknown() =
         testScope.runTest {
             val subId = 1

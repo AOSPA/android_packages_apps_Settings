@@ -19,9 +19,14 @@ package com.android.settings.network.telephony.satellite.quicksettings
 import android.app.PendingIntent
 import android.app.settings.SettingsEnums
 import android.content.Context
+import android.content.Intent
 import android.os.Looper
 import android.service.quicksettings.Tile
+import android.telephony.satellite.SatelliteManager
 import com.android.settings.R
+import com.android.settings.network.telephony.TelephonyFeatureProvider
+import com.android.settings.network.telephony.satellite.SatelliteSettingsRepository
+import com.android.settings.testutils.FakeFeatureFactory
 import com.android.settings.testutils.MetricsRule
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,13 +42,16 @@ import org.mockito.Captor
 import org.mockito.Mock
 import org.mockito.Mockito.doNothing
 import org.mockito.Mockito.doReturn
+import org.mockito.Mockito.mock
 import org.mockito.Mockito.spy
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
 import org.robolectric.Robolectric
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.Shadows.shadowOf
+import org.robolectric.shadows.ShadowSubscriptionManager
 
 @RunWith(RobolectricTestRunner::class)
 class SatelliteTileServiceTest {
@@ -59,6 +67,8 @@ class SatelliteTileServiceTest {
     private lateinit var service: SatelliteTileService
     private val satelliteStatusFlow = MutableStateFlow(SatelliteStatus.NOT_AVAILABLE)
 
+    @Mock private lateinit var mockSatelliteAppsRepository: SatelliteAppsRepository
+
     @Before
     fun setUp() {
         context = RuntimeEnvironment.getApplication()
@@ -70,6 +80,8 @@ class SatelliteTileServiceTest {
         service = spy(Robolectric.setupService(SatelliteTileService::class.java))
         service.satelliteTilePromptUtils = satelliteTilePromptUtils
 
+        SatelliteUtils.satelliteAppsRepositoryProvider = { mockSatelliteAppsRepository }
+
         service.onCreate()
     }
 
@@ -77,6 +89,7 @@ class SatelliteTileServiceTest {
     fun tearDown() {
         // Reset singleton to avoid leaking state between tests
         SatelliteStateRepository.setInstance(null)
+        SatelliteUtils.satelliteAppsRepositoryProvider = { SatelliteAppsRepository(it) }
     }
 
     @Test
@@ -117,6 +130,34 @@ class SatelliteTileServiceTest {
         assertThat(capturedIntent).isNotNull()
         assertThat(capturedIntent.component?.className)
             .isEqualTo(SatelliteLandingPageActivity::class.java.name)
+    }
+
+    @Test
+    fun onClick_unconstrained_startsSettingsActivity() {
+        val subId = 1
+        ShadowSubscriptionManager.setActiveDataSubscriptionId(subId)
+        doReturn(SatelliteManager.SATELLITE_DATA_SUPPORT_UNCONSTRAINED)
+            .`when`(repository)
+            .getSatelliteDataSupportMode(subId)
+
+        // Mock Carrier Roaming NTN supported
+        val mockSatelliteSettingsRepository = mock(SatelliteSettingsRepository::class.java)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(subId)).thenReturn(true)
+
+        val fakeFeatureFactory = FakeFeatureFactory.setupForTest()
+        `when`(fakeFeatureFactory.mTelephonyFeatureProvider.satelliteSettingsRepository)
+            .thenReturn(mockSatelliteSettingsRepository)
+
+        val expectedIntent = Intent(android.provider.Settings.ACTION_SATELLITE_SETTING)
+        `when`(mockSatelliteAppsRepository.getSettingsIntent(true)).thenReturn(expectedIntent)
+
+        doNothing().`when`(service).startActivityAndCollapse(any(PendingIntent::class.java))
+
+        service.onClick()
+
+        verify(service).startActivityAndCollapse(pendingIntentCaptor.capture())
+        val capturedIntent = shadowOf(pendingIntentCaptor.value).savedIntent
+        assertThat(capturedIntent).isEqualTo(expectedIntent)
     }
 
     @Test
