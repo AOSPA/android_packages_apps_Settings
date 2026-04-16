@@ -1,4 +1,3 @@
-// QTI_BEGIN: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
 /*
 Copyright (c) 2016, The Linux Foundation. All rights reserved.
 
@@ -105,6 +104,5 @@ public class DBReadAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
         return true;
     }
-// QTI_END: 2018-06-25: Linux/QDMA: Adding QtiFeedback menu settings
 
 }
