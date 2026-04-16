@@ -761,12 +761,12 @@
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"Способы разблокировки экрана"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"Способы разблокировки экрана"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"Разблокировать с автоподтверждением"</string>
-    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Устройство разблокируется автоматически после ввода верного PIN-кода длиной не менее 6 цифр. Этот способ менее безопасный, чем подтверждение вручную."</string>
+    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"Устройство разблокируется автоматически при вводе правильного PIN-кода из 6 и более цифр. Это чуть менее безопасно, чем подтверждение кнопкой ввода."</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"Автоматическое подтверждение верного PIN-кода"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"Подтверждение PIN-кода вручную безопаснее автоматического"</string>
     <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"Введите PIN-код устройства, чтобы включить автоматическое подтверждение."</string>
     <string name="auto_confirm_off_pin_verify_description" msgid="4256219155659760047">"Введите PIN-код устройства, чтобы отключить автоматическое подтверждение."</string>
-    <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Блокировка экрана"</string>
+    <string name="unlock_set_unlock_launch_picker_title" msgid="4981063601772605609">"Способ разблокировки экрана"</string>
     <string name="unlock_set_unlock_launch_picker_title_profile" msgid="7631371082326055429">"Блокировка рабочего профиля"</string>
     <string name="unlock_set_unlock_off_title" msgid="2831957685685921667">"Нет"</string>
     <string name="unlock_set_unlock_none_title" msgid="2844029875174409728">"Провести по экрану"</string>
@@ -1576,9 +1576,9 @@
     <string name="status_data_network_type" msgid="3689772955330665876">"Тип мобильной сети для передачи данных"</string>
     <string name="status_voice_network_type" msgid="8700356693062562884">"Тип мобильной сети для голосовой связи"</string>
     <string name="status_latest_area_info" msgid="8288488664620741734">"Сведения об операторе"</string>
-    <string name="status_data_state" msgid="525196229491743487">"Передача данных в моб. сети"</string>
+    <string name="status_data_state" msgid="525196229491743487">"Состояние мобильной сети"</string>
     <string name="status_esim_id" msgid="5158916796362809133">"Идентификатор eSIM (EID)"</string>
-    <string name="status_service_state" msgid="1693424422121058791">"Доступность моб. сети"</string>
+    <string name="status_service_state" msgid="1693424422121058791">"Доступность услуги"</string>
     <string name="status_signal_strength" msgid="7644525712554444359">"Уровень сигнала"</string>
     <string name="status_roaming" msgid="1253597174715663778">"Роуминг"</string>
     <string name="status_operator" msgid="4335640583552058491">"Сеть"</string>
@@ -1894,7 +1894,7 @@
     <string name="lockpassword_forgot_pin" msgid="7164232234705747672">"Забыли PIN-код?"</string>
     <string name="lockpassword_confirm_your_pattern_generic" msgid="4983618652824112610">"Введите графический ключ, чтобы подтвердить свою личность."</string>
     <string name="lockpassword_confirm_your_pin_generic" msgid="45398445305933355">"Введите PIN-код, чтобы подтвердить свою личность."</string>
-    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"Пароль позволяет подтвердить вашу личность."</string>
+    <string name="lockpassword_confirm_your_password_generic" msgid="1263500907003586594">"Введите пароль, чтобы подтвердить свою личность."</string>
     <string name="lockpassword_confirm_your_pattern_generic_profile" msgid="2552062474449423029">"Графический ключ рабочего профиля позволяет подтвердить вашу личность."</string>
     <string name="lockpassword_confirm_your_pin_generic_profile" msgid="6556640367641079244">"PIN-код рабочего профиля позволяет подтвердить вашу личность."</string>
     <string name="lockpassword_confirm_your_password_generic_profile" msgid="5700270644291633820">"Пароль рабочего профиля позволяет подтвердить вашу личность."</string>
@@ -2032,7 +2032,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"Работающие"</string>
     <string name="not_installed" msgid="5074606858798519449">"Не установлено для пользователя"</string>
     <string name="installed" msgid="2837449358488825884">"Установлено"</string>
-    <string name="no_applications" msgid="5471491608902031500">"Нет подходящих приложений."</string>
+    <string name="no_applications" msgid="5471491608902031500">"Таких приложений нет."</string>
     <string name="internal_storage" msgid="999496851424448809">"Внутр. накопитель"</string>
     <string name="recompute_size" msgid="1098091228370999128">"Повторное вычисление размера..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"Удалить данные приложения?"</string>
@@ -2571,7 +2571,7 @@
     <string name="accessibility_button_about_title" msgid="3581116105084067926">"О кнопке специальных возможностей"</string>
     <string name="accessibility_button_gesture_about_title" msgid="8468987303602865536">"О кнопке специальных возможностей и жесте"</string>
     <string name="accessibility_button_gesture_footer_learn_more_content_description" msgid="4144803517680297869">"Подробнее о кнопке специальных возможностей и жесте…"</string>
-    <string name="accessibility_button_intro" msgid="2601976470525277903">"Используется кнопка специальных возможностей. При навигации с помощью трех кнопок жест недоступен."</string>
+    <string name="accessibility_button_intro" msgid="2601976470525277903">"Используется кнопка специальных возможностей. При навигации тремя кнопками жест недоступен."</string>
     <string name="accessibility_button_summary" msgid="8510939012631455831">"Быстрый доступ к специальным возможностям"</string>
     <string name="accessibility_button_description" msgid="7669538706120092399">"&lt;b&gt;С чего начать:&lt;/b&gt;&lt;br/&gt; {0,number,integer}. Откройте настройки специальных возможностей.&lt;br/&gt; {1,number,integer}. Выберите нужную функцию и нажмите на ее значок.&lt;br/&gt; {2,number,integer}. Назначьте кнопку для функции.&lt;br/&gt;"</string>
     <string name="accessibility_button_location_title" msgid="7182107846092304942">"Расположение"</string>
@@ -4181,7 +4181,7 @@
     <string name="notification_channels_other" msgid="18159805343647908">"Другие"</string>
     <string name="no_channels" msgid="4716199078612071915">"Это приложение не отправляло уведомлений."</string>
     <string name="no_recent_channels" msgid="5068574296267584043">"Показать неиспользуемые категории"</string>
-    <string name="app_settings_link" msgid="6725453466705333311">"Доп. настройки в приложении"</string>
+    <string name="app_settings_link" msgid="6725453466705333311">"Дополнительные настройки в приложении"</string>
     <string name="show_unused_channels" msgid="4956292847964439078">"Показать неиспользуемые категории"</string>
     <string name="hide_unused_channels" msgid="2019739275175707170">"Скрыть неиспользуемые категории"</string>
     <string name="deleted_channels" msgid="8489800381509312964">"{count,plural, =1{# категория удалена}one{# категория удалена}few{# категории удалено}many{# категорий удалено}other{# категории удалено}}"</string>
@@ -4458,7 +4458,7 @@
     <string name="unused_apps_switch_v2" msgid="7464060328451454469">"Приостановить работу в неактивный период"</string>
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"Удалить разрешения и временные файлы, прекратить отправку уведомлений и перенести приложение в архив"</string>
     <string name="task_continuity_category" msgid="3736049711007817178">"Продолжение работы"</string>
-    <string name="continue_across_devices_switch" msgid="3276869201367526007">"Задачи в приложениях"</string>
+    <string name="continue_across_devices_switch" msgid="3276869201367526007">"Задачи в приложении"</string>
     <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"Продолжать работу на других устройствах с того места, где вы остановились"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"Все приложения"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"Установленные приложения"</string>
@@ -4610,7 +4610,7 @@
     <string name="permit_manage_external_storage" msgid="6928847280689401761">"Разрешить доступ к управлению всеми файлами"</string>
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Приложение сможет читать, изменять и удалять все файлы на этом устройстве и любых подключенных носителях. Доступ к файлам будет осуществляться без дополнительного уведомления."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Приложения, имеющие доступ ко всем файлам"</string>
-    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Автоматизация экрана"</string>
+    <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Автоматические действия"</string>
     <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Это приложение сможет просматривать контент других приложений на экране и взаимодействовать с ним, чтобы помогать вам выполнять задачи, даже когда приложения работают в фоновом режиме."</string>
     <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"Приложение \"<xliff:g id="ID_1">%1$s</xliff:g>\" может просматривать контент приложений, которым вы разрешили доступ для выполнения задач, и взаимодействовать с ним."</string>
     <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Здесь показаны приложения, для которых вы выбрали &lt;strong&gt;Разрешать всегда&lt;/strong&gt;. В списке нет приложений, для которых указан вариант &lt;strong&gt;Только в этот раз&lt;/strong&gt; или запрещен доступ."</string>
@@ -4923,7 +4923,7 @@
     <string name="automation_intelligence_category_title" msgid="1154006517484412196">"Автоматизация и искусственный интеллект"</string>
     <string name="system_management_category_title" msgid="5405726452116686478">"Управление системой"</string>
     <string name="manage_data_category_title" msgid="1663320047422544008">"Управление данными"</string>
-    <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Навигация с помощью двух кнопок"</string>
+    <string name="swipe_up_to_switch_apps_title" msgid="6677266952021118342">"Навигация двумя кнопками"</string>
     <string name="swipe_up_to_switch_apps_summary" msgid="1415457307836359560">"Чтобы переключиться между приложениями, проведите вверх по кнопке главного экрана. Чтобы увидеть все приложения, снова проведите вверх. Для возврата к предыдущему экрану нажмите кнопку \"Назад\"."</string>
     <string name="shade_panels_title" msgid="6816157397029469997">"Уведомления и быстрые настройки"</string>
     <string name="keywords_shade_panels" msgid="6181844937287087945">"панель уведомлений, панели, уведомления, быстрые настройки, раздельно, вместе, совмещенный, раздельный"</string>
@@ -4939,8 +4939,8 @@
     <string name="edge_to_edge_navigation_summary" msgid="818109176611921504">"Чтобы перейти на главный экран, проведите вверх от нижнего края. Чтобы переключиться между приложениями, проведите вверх от нижнего края, задержите палец и отпустите. Чтобы вернуться на предыдущий экран, проведите от левого или правого края."</string>
     <string name="legacy_navigation_title" msgid="7877402855994423727">"Навигация тремя кнопками"</string>
     <string name="legacy_navigation_summary" msgid="5905301067778326433">"Чтобы вернуться назад, открыть главный экран или переключиться между приложениями, используйте кнопки в нижней части экрана"</string>
-    <string name="nav_tutorial_button_description" msgid="7195363082216233970">"Открыть руководство по навигации с помощью жестов."</string>
-    <string name="keywords_system_navigation" msgid="3131782378486554934">"навигация в системе, навигация с помощью двух кнопок, навигация с помощью трех кнопок, навигация с помощью жестов, пролистывание"</string>
+    <string name="nav_tutorial_button_description" msgid="7195363082216233970">"Открыть руководство по навигации жестами."</string>
+    <string name="keywords_system_navigation" msgid="3131782378486554934">"навигация в системе, навигация двумя кнопками, навигация тремя кнопками, навигация жестами, пролистывание"</string>
     <string name="assistant_gesture_category_title" msgid="2478251256585807920">"Цифровой помощник"</string>
     <string name="assistant_corner_gesture_title" msgid="1895061522687002106">"Жест вызова помощника"</string>
     <string name="assistant_corner_gesture_summary" msgid="5012534700233017955">"Проведите вверх из нижнего угла экрана, чтобы вызвать цифрового помощника"</string>
@@ -4953,8 +4953,8 @@
     <string name="back_sensitivity_dialog_message" msgid="6638367716784103306">"При высокой чувствительности могут не работать жесты по краям экрана в приложениях."</string>
     <string name="back_sensitivity_dialog_title" msgid="6153608904168908264">"Чувствительность для жеста \"Назад\""</string>
     <string name="gesture_settings_activity_title" msgid="1882463161833981820">"Навигация жестами"</string>
-    <string name="gesture_settings_button_description" msgid="7916105652019436751">"Настройки навигации с помощью жестов"</string>
-    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"Открыть настройки навигации с помощью жестов"</string>
+    <string name="gesture_settings_button_description" msgid="7916105652019436751">"Настройки навигации жестами"</string>
+    <string name="gesture_settings_extra_button_hint" msgid="5061056396437804198">"Открыть настройки навигации жестами"</string>
     <string name="gesture_navigation_tutorial_title" msgid="1605955266131665429">"Как использовать жесты"</string>
     <string name="button_navigation_settings_activity_title" msgid="7335636045504461813">"Навигация кнопками"</string>
     <string name="button_navigation_settings_button_description" msgid="1790810452341767848">"Настройки навигации с помощью кнопок"</string>
@@ -4964,7 +4964,7 @@
     <string name="navbar_back_button" msgid="6386920156044420082">"Назад"</string>
     <string name="navbar_home_button" msgid="951459586446869883">"Главная"</string>
     <string name="navbar_recent_button" msgid="6005580570601162420">"Недавние"</string>
-    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навигация с помощью жестов, чувствительность для жеста \"Назад\", жест \"Назад\""</string>
+    <string name="keywords_gesture_navigation_settings" msgid="667561222717238931">"навигация жестами, чувствительность для жеста \"Назад\", жест \"Назад\""</string>
     <string name="keywords_button_navigation_settings" msgid="7888812253110553920">"навигация, кнопка главного экрана"</string>
     <string name="one_handed_title" msgid="2584414010282746195">"Режим управления одной рукой"</string>
     <string name="one_handed_mode_enabled" msgid="3396864848786359651">"Режим управления одной рукой"</string>
@@ -4973,7 +4973,7 @@
     <string name="one_handed_mode_swipe_down_category" msgid="110178629274462484">"Провести вниз"</string>
     <string name="one_handed_mode_use_shortcut_category" msgid="1414714099339147711">"Использовать быстрый запуск, чтобы"</string>
     <string name="one_handed_mode_intro_text" msgid="7921988617828924342">"Потяните вниз верхнюю половину экрана, чтобы до нее было легче достать одной рукой."</string>
-    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Как использовать режим управления одной рукой"</b>\n" • Убедитесь, что в системных настройках включена навигация с помощью жестов.\n • Проведите вниз в нижней части экрана."</string>
+    <string name="one_handed_mode_footer_text" msgid="6336209800330679840">" "<b>"Как использовать режим управления одной рукой"</b>\n" • Убедитесь, что в системных настройках включена навигация жестами.\n • Проведите вниз в нижней части экрана."</string>
     <string name="one_handed_action_pull_down_screen_title" msgid="9187194533815438150">"Переместить экран в зону досягаемости"</string>
     <string name="one_handed_action_pull_down_screen_summary" msgid="7582432473450036628">"Переместить верхнюю часть экрана вниз, ближе к вашему большому пальцу"</string>
     <string name="one_handed_action_show_notification_title" msgid="8789305491485437130">"Показать уведомления"</string>
@@ -5825,8 +5825,7 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Приложения, установленные в течение # последнего месяца}one{Приложения, установленные в течение # последнего месяца}few{Приложения, установленные в течение # последних месяцев}many{Приложения, установленные в течение # последних месяцев}other{Приложения, установленные в течение # последнего месяца}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Приложения, установленные более # месяца назад}one{Приложения, установленные более # месяца назад}few{Приложения, установленные более # месяцев назад}many{Приложения, установленные более # месяцев назад}other{Приложения, установленные более # месяца назад}}"</string>
     <string name="ai_assist_category" msgid="6115635022788919643">"Доступ к экрану"</string>
-    <string name="personal_context_title" msgid="5665514384061696635">"Экранный контекст"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"Укажите, может ли это приложение предоставлять данные для формирования рекомендаций"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"Разрешить доступ к содержимому экрана этого приложения, чтобы автоматически получать помощь"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Соотношение сторон"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Если приложение неправильно отображается на устройстве <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, попробуйте другое соотношение сторон."</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Если приложение неправильно отображается на устройстве <xliff:g id="DEVICE_NAME">%1$s</xliff:g>, попробуйте другое соотношение сторон. Некоторые приложения оптимизированы не для всех соотношений сторон."</string>
@@ -5897,10 +5896,10 @@
     <string name="about_phone_device_name_warning" msgid="3243226572404472381">"Название устройства доступно установленным приложениям. Его также могут видеть другие пользователи, когда вы подключаетесь к устройствам Bluetooth и сетям Wi-Fi или настраиваете точку доступа Wi-Fi."</string>
     <string name="grammatical_gender_title" msgid="8584242850477270828">"Грамматический род"</string>
     <string name="grammatical_gender_dialog_title" msgid="8754048592099871587">"Выберите грамматический род"</string>
-    <string name="content_protection_preference_title" msgid="5069260032659193074">"Сканирование подозрительных приложений"</string>
+    <string name="content_protection_preference_title" msgid="5069260032659193074">"Поиск подозрительных приложений"</string>
     <string name="content_protection_preference_summary" msgid="2252393849408445391">"Проверять историю действий в приложении на фишинг"</string>
-    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Сканировать на наличие вводящих в заблуждение приложений"</string>
-    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Сканировать на наличие вводящих в заблуждение приложений для работы"</string>
+    <string name="content_protection_preference_user_consent_switch_title" msgid="1797782616799594426">"Поиск подозрительных приложений"</string>
+    <string name="content_protection_preference_user_consent_work_profile_switch_title" msgid="3004347470520916069">"Поиск подозрительных приложений для работы"</string>
     <string name="content_protection_preference_subpage_summary" msgid="3595621220981703364"></string>
     <string name="content_protection_preference_subpage_info" msgid="6890886357653365489"></string>
     <string name="accessibility_setup_password_complete" msgid="6358749253318369077">"Пароль установлен"</string>
@@ -6177,7 +6176,7 @@
     <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"Свернуть закрытые оповещения"</string>
     <string name="safety_center_expand_dismissed_issues" msgid="6075170862549670397">"Развернуть закрытые оповещения"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Закрыть оповещение?"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Вы в любое время можете проверить и изменить настройки безопасности и конфиденциальности."</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"Вы в любое время можете проверить настройки безопасности и конфиденциальности, чтобы усилить защиту."</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Действие выполнено"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Быстрые настройки защиты и конфиденциальности"</string>
     <string name="privacy_controls_qs" msgid="1774718598801606190">"Настройки конфиденциальности"</string>

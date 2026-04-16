@@ -761,7 +761,7 @@
     <string name="setup_lock_settings_options_button_label" msgid="6098297461618298505">"屏锁方式"</string>
     <string name="setup_lock_settings_options_dialog_title" msgid="7985107300517468569">"屏锁方式"</string>
     <string name="lock_screen_auto_pin_confirm_title" msgid="3012128112186088375">"自动确认解锁"</string>
-    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"正确输入不低于 6 位数的 PIN 码后，设备会自动解锁。与通过点按 Enter 键来确认 PIN 码相比，此确认方式的安全性略低。"</string>
+    <string name="lock_screen_auto_pin_confirm_summary" msgid="9050818870806580819">"正确输入不低于 6 位数的数字密码后，设备会自动解锁。与通过点按 Enter 键来确认数字密码相比，此确认方式的安全性略低。"</string>
     <string name="auto_pin_confirm_user_message" msgid="6194556173488939314">"自动确认正确的 PIN 码"</string>
     <string name="auto_pin_confirm_opt_in_security_message" msgid="580773976736184893">"通过点按 Enter 键确认 PIN 码比使用自动确认功能更加安全"</string>
     <string name="auto_confirm_on_pin_verify_description" msgid="2052240431173223502">"输入设备 PIN 码以启用自动确认功能"</string>
@@ -1004,7 +1004,7 @@
     <string name="show_hdr_sdr_ratio" msgid="4188007289024955585">"显示 HDR/SDR 比率"</string>
     <string name="show_hdr_sdr_ratio_summary" msgid="986292785096013733">"显示当前的 HDR/SDR 比率"</string>
     <string name="nfc_quick_toggle_title" msgid="3607620705230351666">"NFC"</string>
-    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"要求解锁设备"</string>
+    <string name="nfc_secure_settings_title" msgid="2731645608098399794">"必须解锁设备"</string>
     <string name="android_beam_settings_title" msgid="2797963824490671295">"Android Beam"</string>
     <string name="android_beam_on_summary" msgid="6067720758437490896">"已准备好通过 NFC 传输应用内容"</string>
     <string name="android_beam_off_summary" msgid="5693961375631325042">"已关闭"</string>
@@ -1943,8 +1943,8 @@
     <string name="lockpattern_settings_enable_title" msgid="7401197111303283723">"需要解锁图案"</string>
     <string name="lockpattern_settings_enable_summary" msgid="1116467204475387886">"必须绘制图案才能解锁屏幕"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title" msgid="3340969054395584754">"显示解锁图案"</string>
-    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"增强型 PIN 码隐私保护"</string>
-    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"输入 PIN 码时停用动画功能"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_title" msgid="7172693275721931683">"增强型数字密码隐私保护"</string>
+    <string name="lockpattern_settings_enhanced_pin_privacy_summary" msgid="8639588868341114740">"输入数字密码时停用动画"</string>
     <string name="lockpattern_settings_enable_visible_pattern_title_profile" msgid="5138189101808127489">"显示资料解锁图案"</string>
     <string name="lockpattern_settings_enable_tactile_feedback_title" msgid="2273374883831956787">"点按时振动"</string>
     <string name="lockpattern_settings_enable_power_button_instantly_locks" msgid="1638619728773344099">"按下电源按钮后即刻锁定"</string>
@@ -2032,7 +2032,7 @@
     <string name="filter_apps_running" msgid="535465683273284141">"正在运行"</string>
     <string name="not_installed" msgid="5074606858798519449">"此用户未安装"</string>
     <string name="installed" msgid="2837449358488825884">"已安装"</string>
-    <string name="no_applications" msgid="5471491608902031500">"没有匹配的应用"</string>
+    <string name="no_applications" msgid="5471491608902031500">"没有相符的应用"</string>
     <string name="internal_storage" msgid="999496851424448809">"内部存储空间"</string>
     <string name="recompute_size" msgid="1098091228370999128">"正在重新计算大小..."</string>
     <string name="clear_data_dlg_title" msgid="180446967743732410">"要删除应用数据吗？"</string>
@@ -2679,8 +2679,8 @@
     <string name="accessibility_autoclick_navigation_settings" msgid="26376319288642658">"导航设置"</string>
     <string name="accessibility_vibration_settings_title" msgid="936301142478631993">"振动和触感反馈"</string>
     <string name="accessibility_vibration_settings_summary" msgid="3690308537483465527">"控制各种使用情形的振动强度"</string>
-    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"已开启/控制来电、通知和闹钟的振动强度"</string>
-    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"已关闭/控制来电、通知和闹钟的振动强度"</string>
+    <string name="accessibility_vibration_settings_state_on" msgid="3316037269092584284">"已开启 / 控制来电、通知和闹钟的振动强度"</string>
+    <string name="accessibility_vibration_settings_state_off" msgid="113565506991847845">"已关闭 / 控制来电、通知和闹钟的振动强度"</string>
     <string name="accessibility_vibration_setting_disabled_for_silent_mode_summary" msgid="3982701772953323190">"设备已设为静音，因此该设置已停用"</string>
     <string name="accessibility_call_vibration_category_title" msgid="2545607568768192318">"通话"</string>
     <string name="accessibility_notification_alarm_vibration_category_title" msgid="2683635252414849417">"通知和闹钟"</string>
@@ -3603,7 +3603,7 @@
     <string name="sim_calls_always_use" msgid="967857230039768111">"一律使用这张卡进行通话"</string>
     <string name="select_sim_for_data" msgid="2642305487659432499">"选择用哪张 SIM 卡上网"</string>
     <string name="select_sim_for_sms" msgid="5335510076282673497">"选择要用于收发短信的 SIM 卡"</string>
-    <string name="data_switch_started" msgid="6292759843974720112">"正在切换用于连接数据网络的 SIM 卡，这最多可能需要 1 分钟的时间…"</string>
+    <string name="data_switch_started" msgid="6292759843974720112">"正在切换用于连接数据网络的 SIM 卡，用时可能多达 1 分钟…"</string>
     <string name="select_specific_sim_for_data_title" msgid="5851980301321577985">"要使用<xliff:g id="NEW_SIM">%1$s</xliff:g>的移动数据吗？"</string>
     <string name="select_specific_sim_for_data_msg" msgid="7401698123430573637">"如果切换到<xliff:g id="NEW_SIM">%1$s</xliff:g>，系统将不再使用<xliff:g id="OLD_SIM">%2$s</xliff:g>的移动数据。"</string>
     <string name="select_specific_sim_for_data_button" msgid="6571935548920603512">"使用“<xliff:g id="NEW_SIM">%1$s</xliff:g>”"</string>
@@ -3778,7 +3778,7 @@
     <string name="remote_media_volume_option_title" msgid="7907330631195715350">"Google Cast 音量"</string>
     <string name="call_volume_option_title" msgid="1461105986437268924">"通话音量"</string>
     <string name="alarm_volume_option_title" msgid="6398641749273697140">"闹钟音量"</string>
-    <string name="assistant_volume_option_title" msgid="7206008753384831048">"Google 助理音量"</string>
+    <string name="assistant_volume_option_title" msgid="7206008753384831048">"数字助理音量"</string>
     <string name="ring_volume_option_title" msgid="1520802026403038560">"铃声和通知音量"</string>
     <string name="separate_ring_volume_option_title" msgid="2212910223857375951">"铃声音量"</string>
     <string name="notification_volume_option_title" msgid="4838818791683615978">"通知音量"</string>
@@ -3978,7 +3978,7 @@
     <string name="notification_summarization_no_apps_desc" msgid="6058658379217986963">"所有适用的应用目前都在使用通知摘要"</string>
     <string name="live_notifications" msgid="4650406646292963831">"实时通知"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"实时动态"</string>
-    <string name="live_notifications_desc" msgid="6857161077319125625">"在状态栏和锁定的屏幕上显示具有时效性的持续性通知"</string>
+    <string name="live_notifications_desc" msgid="6857161077319125625">"在状态栏和锁屏界面上显示具有时效性的持续通知"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"消息气泡"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"消息气泡"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"以消息气泡形式显示此对话"</string>
@@ -4071,7 +4071,7 @@
     <string name="allow_interruption" msgid="5237201780159482716">"允许打扰"</string>
     <string name="allow_interruption_summary" msgid="9044131663518112543">"允许应用发出提示音、振动，以及/或在屏幕上弹出通知"</string>
     <string name="notification_priority_title" msgid="5554834239080425229">"优先"</string>
-    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"以悬浮消息气泡形式显示在对话部分顶部，如果设备处于锁定状态，则在锁屏界面上显示个人资料照片"</string>
+    <string name="notification_channel_summary_priority" msgid="7225362351439076913">"以悬浮消息气泡形式显示在对话部分顶部，锁屏状态下显示个人资料照片"</string>
     <string name="convo_not_supported_summary" msgid="4285471045268268048">"<xliff:g id="APP_NAME">%1$s</xliff:g>不支持大部分对话功能。您无法设置优先对话，并且对话不会以悬浮消息气泡形式显示。"</string>
     <string name="notification_channel_summary_min" msgid="8823399508450176842">"将下拉通知栏中的通知合拢为一行"</string>
     <string name="notification_channel_summary_low" msgid="5549662596677692000">"不发出提示音，也不振动"</string>
@@ -4459,7 +4459,7 @@
     <string name="unused_apps_switch_summary_v2" msgid="3182898279622036805">"撤销权限、删除临时文件、停收通知并归档应用"</string>
     <string name="task_continuity_category" msgid="3736049711007817178">"任务连续性"</string>
     <string name="continue_across_devices_switch" msgid="3276869201367526007">"应用任务"</string>
-    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"在其他设备上无缝继续上次的任务"</string>
+    <string name="continue_across_devices_switch_summary" msgid="1967904656230859035">"在其他设备上无缝接续任务进度"</string>
     <string name="filter_all_apps" msgid="6645539744080251371">"所有应用"</string>
     <string name="filter_enabled_apps" msgid="8868356616126759124">"已安装的应用"</string>
     <string name="filter_instant_apps" msgid="2292108467020380068">"免安装应用"</string>
@@ -4611,10 +4611,10 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"允许此应用读取、修改和删除此设备或任何已连接的存储设备上的所有文件。如果您授予该权限，应用无需明确通知您即可访问文件。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"可以访问所有文件"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"屏幕自动化"</string>
-    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"此应用将能查看其他应用的屏幕内容并与之互动，以帮助您完成任务，即使应用在后台运行也无妨。"</string>
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"此应用将能查看其他应用的界面内容并与之互动，帮助您完成各种任务，即使这些应用在后台运行也无妨。"</string>
     <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"“<xliff:g id="ID_1">%1$s</xliff:g>”可以查看您已允许的应用的屏幕内容并与之互动，以帮助您完成任务。"</string>
     <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"此处会显示您在权限中选择&lt;strong&gt;始终允许&lt;/strong&gt;的应用。您选择&lt;strong&gt;仅限这一次&lt;/strong&gt;或不允许的应用不会显示。"</string>
-    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"如果您不允许屏幕自动化操作，“<xliff:g id="ID_1">%1$s</xliff:g>”或许仍能以其他方式与关联到“<xliff:g id="ID_2">%1$s</xliff:g>”的应用互动。"</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"即使您不允许屏幕自动化操作，“<xliff:g id="ID_1">%1$s</xliff:g>”或许仍能以其他方式与关联到“<xliff:g id="ID_2">%1$s</xliff:g>”的应用互动。"</string>
     <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"即使您在此屏幕中移除某个应用，“<xliff:g id="ID_1">%1$s</xliff:g>”或许仍能以其他方式与关联到“<xliff:g id="ID_2">%1$s</xliff:g>”的应用互动。"</string>
     <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"允许应用与其他应用的屏幕内容互动，助您完成任务"</string>
     <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"允许应用查看屏幕内容并与之互动，以帮助您完成任务"</string>
@@ -5823,8 +5823,7 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{过去 # 个月内安装的应用}other{过去 # 个月内安装的应用}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# 个多月前安装的应用}other{# 个多月前安装的应用}}"</string>
     <string name="ai_assist_category" msgid="6115635022788919643">"屏幕访问权限"</string>
-    <string name="personal_context_title" msgid="5665514384061696635">"屏幕上的内容"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"选择此应用是否可以提供信息来生成建议"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"允许访问此应用的屏幕内容，以便获得主动帮助"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"宽高比"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"如果此应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请试试在其他宽高比下查看此应用"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"如果此应用的设计不适配您的<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，请试试在其他宽高比下查看此应用。某些应用可能没有针对特定宽高比进行优化。"</string>
@@ -5847,7 +5846,7 @@
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指纹传感器"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"闪烁通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"闪烁通知简介"</string>
-    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"已关闭/收到通知和闹钟响铃时，会看到相机闪光灯或屏幕闪烁提醒"</string>
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"已关闭 / 收到通知及闹钟响铃时，相机闪光灯或屏幕会闪烁"</string>
     <string name="flash_notifications_summary_on" msgid="7750683903778104666">"已开启 / 收到通知和闹钟响铃时，您会看到相机闪光灯或屏幕闪烁提醒"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"收到通知或闹钟响铃时，闪烁相机闪光灯或屏幕"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"收到通知或闹钟响铃时闪烁屏幕"</string>
@@ -6184,8 +6183,8 @@
     <string name="safety_center_qs_privacy_control" msgid="6195218177331454936">"开关。<xliff:g id="PRIVACY_CONTROL_TITLE">%1$s</xliff:g>。<xliff:g id="PRIVACY_CONTROL_STATUS">%2$s</xliff:g>"</string>
     <string name="safety_center_blocked_label" msgid="2315349461511071065">"已屏蔽"</string>
     <string name="safety_center_toggle" msgid="3349093870782510158">"切换开关"</string>
-    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"麦克风访问权限"</string>
-    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"相机访问权限"</string>
+    <string name="microphone_toggle_label_qs" msgid="3835703707697050929">"麦克风权限"</string>
+    <string name="camera_toggle_label_qs" msgid="7321667331432507064">"相机权限"</string>
     <string name="location_toggle_label_qs" msgid="1593489235177619829">"位置信息权限"</string>
     <string name="bluetooth_pairing_passkey_dialog_pairing_positive_button_text" msgid="5422642444726463520">"正在配对"</string>
     <string name="bluetooth_pairing_pin_success_message" msgid="5476171772317649183">"已连接“<xliff:g id="DEVICE_NAME">%1$s</xliff:g>”"</string>

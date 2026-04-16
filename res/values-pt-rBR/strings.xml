@@ -2232,7 +2232,7 @@
     <string name="trackpad_settings_summary" msgid="2984582991609553396">"Velocidade do cursor, gestos"</string>
     <string name="trackpad_tap_to_click" msgid="1938230946542070746">"Tocar para clicar"</string>
     <string name="trackpad_tap_dragging_title" msgid="4198317837427535015">"Tocar e arrastar para mover os itens"</string>
-    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Toque duas vezes no touchpad e arraste o dedo para mover"</string>
+    <string name="trackpad_tap_dragging_summary" msgid="5605534150661601073">"Toque 2 vezes no touchpad e arraste o dedo para mover itens"</string>
     <string name="trackpad_touchpad_gesture_title" msgid="7568052847609914436">"Gestos do touchpad"</string>
     <string name="trackpad_touchpad_gesture_summary" msgid="6256074591395359124">"Personalize gestos individuais de navegação do touchpad"</string>
     <string name="trackpad_reverse_scrolling_title" msgid="422877284529360866">"Rolagem reversa"</string>
@@ -3043,10 +3043,10 @@
     <string name="battery_saver_turn_on_automatically_never" msgid="6194649389871448663">"Nunca"</string>
     <string name="battery_saver_turn_on_automatically_pct" msgid="4294335680892392449">"com <xliff:g id="PERCENT">%1$s</xliff:g> de bateria"</string>
     <string name="battery_percentage" msgid="1779934245963043490">"Porcentagem da bateria"</string>
-    <string name="battery_percentage_description" msgid="2321465139126125541">"Mostra a porcentagem da bateria na barra de status"</string>
+    <string name="battery_percentage_description" msgid="2321465139126125541">"Mostra a porcentagem de bateria na barra de status"</string>
     <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"Nível da bateria desde a última carga completa"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"Nível da bateria nas últimas 24h"</string>
-    <string name="battery_app_usage" msgid="8976453608783133770">"Uso de apps desde a última carga completa"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"Uso do app desde a última carga completa"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"Uso do app nas últimas 24h"</string>
     <string name="battery_system_usage" msgid="1395943945140097585">"Uso do sistema desde a última carga completa"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"Uso do sistema nas últimas 24h"</string>
@@ -3125,7 +3125,7 @@
     <string name="voice_interaction_security_warning" msgid="7962884055885987671">"Este serviço de entrada por voz poderá executar monitoramento por voz sempre ativado e apps com o recurso de comando de voz em seu nome. Ele está incluído no app <xliff:g id="VOICE_INPUT_SERVICE_APP_NAME">%s</xliff:g>. Quer ativar o uso deste serviço?"</string>
     <string name="on_device_recognition_settings" msgid="6503160369314598069">"Configurações de reconhecimento no dispositivo"</string>
     <string name="on_device_recognition_settings_title" msgid="7137599722039096545">"Reconhecimento no dispositivo"</string>
-    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Reconhecimento de fala no dispositivo"</string>
+    <string name="on_device_recognition_settings_summary" msgid="3292736423223499348">"Reconhec. de fala no dispositivo"</string>
     <string name="tts_subtext" msgid="8958790811881046789">"Ajustar o tom e a velocidade da fala"</string>
     <string name="tts_engine_preference_title" msgid="7808775764174571132">"Mecanismo preferencial"</string>
     <string name="tts_engine_settings_title" msgid="1298093555056321577">"Configurações do mecanismo"</string>
@@ -3613,7 +3613,7 @@
     <string name="color_orange" msgid="216547825489739010">"Laranja"</string>
     <string name="color_purple" msgid="6603701972079904843">"Roxo"</string>
     <string name="sim_status_title" msgid="6188770698037109774">"Status do chip"</string>
-    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Status do chip: %1$d"</string>
+    <string name="sim_status_title_sim_slot" msgid="8727408941064901486">"Status do chip %1$d"</string>
     <string name="sim_signal_strength" msgid="6351052821700294501">"<xliff:g id="DBM">%1$d</xliff:g> dBm <xliff:g id="ASU">%2$d</xliff:g> asu"</string>
     <string name="sim_notification_title" msgid="6839556577405929262">"Seus chips foram trocados"</string>
     <string name="sim_notification_summary" msgid="5593339846307029991">"Toque para configurar"</string>
@@ -5823,8 +5823,7 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps instalados no último # mês}one{Apps instalados no último # mês}other{Apps instalados nos últimos # meses}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps instalados há mais de # mês}one{Apps instalados há mais de # mês}other{Apps instalados há mais de # meses}}"</string>
     <string name="ai_assist_category" msgid="6115635022788919643">"Acesso à tela"</string>
-    <string name="personal_context_title" msgid="5665514384061696635">"Contexto na tela"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"Escolha se este app pode contribuir com informações para gerar sugestões"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"Permita o acesso ao conteúdo da tela deste app para receber ajuda proativa"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Proporção"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Teste uma nova proporção para esse app caso ele não tenha sido criado para caber no seu dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Teste uma nova proporção para esse app caso ele não tenha sido criado para caber no seu dispositivo <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Talvez alguns apps não estejam otimizados para algumas proporções."</string>
@@ -6138,7 +6137,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"Segurança de apps"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"Desbloqueio do dispositivo"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"Segurança da conta"</string>
-    <string name="device_finders_subpage_title" msgid="2635718540485825070">"Proteção para dispositivo perdido"</string>
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"Proteção para disp. perdido"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"Sistema e atualizações"</string>
     <string name="location_settings" msgid="6833222354060094170">"Acesso ao local"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"Veja apps e serviços que têm acesso à localização"</string>
