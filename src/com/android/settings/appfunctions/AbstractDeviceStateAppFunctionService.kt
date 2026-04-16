@@ -229,7 +229,7 @@ abstract class AbstractDeviceStateAppFunctionService : AppFunctionService() {
                     appFunctionType.toMetricsId(),
                 )
 
-                Log.e(TAG, "AppFunction call failed: ${e.message}")
+                Log.e(TAG, "device state app function ${request.functionIdentifier} failed.", e)
 
                 // Any code beyond this point will not execute
                 callback.onError(
