@@ -654,7 +654,7 @@
     <string name="private_space_fingerprint_enroll_finish_message" msgid="4754797926493316965">"指紋可用於解鎖私人空間或核准購買交易"</string>
     <string name="private_space_face_enroll_introduction_message" msgid="250239418499081821">"臉孔可用於解鎖私人空間或驗證身分，方便你進行特定操作，例如登入應用程式或核准購買交易"</string>
     <string name="private_space_face_enroll_introduction_info_less_secure" msgid="8460719783943533172">"使用複雜的圖案、PIN 碼或密碼解鎖私人空間，可能比使用人臉解鎖來得安全"</string>
-    <string name="private_space_face_settings_require_attention_details" msgid="2799569069549999689">"眼睛必須睜開，才能解鎖私人空間。為求順利解鎖，建議取下太陽眼鏡。"</string>
+    <string name="private_space_face_settings_require_attention_details" msgid="2799569069549999689">"眼睛必須睜開，才能解鎖私人空間。為求順利解鎖，建議拿掉太陽眼鏡"</string>
     <string name="private_space_category_ways_to_unlock" msgid="4356631225316950046">"解鎖方式"</string>
     <string name="private_space_screen_lock_summary" msgid="394837965365561070">"與裝置螢幕鎖定相同"</string>
     <string name="private_space_new_lock_title" msgid="9056139964133004094">"要選擇新的私人空間鎖定方式嗎？"</string>
@@ -2189,7 +2189,7 @@
     <string name="mouse_swap_primary_button" msgid="4798006242525441304">"調換滑鼠主按鈕"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"將滑鼠左鍵做為右鍵使用"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"游標加速"</string>
-    <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"滑鼠移動得越快，游標就移動得越遠"</string>
+    <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"滑鼠動得越快，游標就移得越遠"</string>
     <string name="mouse_key_main_page_title" msgid="8051692181770475257">"「<xliff:g id="KEYBOARD_NAME">%s</xliff:g>」的滑鼠按鍵"</string>
     <string name="mouse_keys_directional_summary" msgid="4579525566659216785">"使用「<xliff:g id="DIRECTIONAL_LABEL">%s</xliff:g>」鍵移動滑鼠游標"</string>
     <string name="mouse_keys_click_summary" msgid="8271700153598258484">"按下「<xliff:g id="CLICK_LABEL">%s</xliff:g>」鍵代表點選滑鼠主要按鍵"</string>
@@ -4056,7 +4056,7 @@
     <string name="important_conversations_summary" msgid="3184022761562676418">"顯示在對話部分的頂端"</string>
     <string name="other_conversations" msgid="551178916855139870">"非重要對話"</string>
     <string name="other_conversations_summary" msgid="3487426787901236273">"你已變更的對話"</string>
-    <string name="recent_conversations" msgid="471678228756995274">"最近的對話"</string>
+    <string name="recent_conversations" msgid="471678228756995274">"近期對話"</string>
     <string name="conversation_settings_clear_recents" msgid="8940398397663307054">"清除近期對話"</string>
     <string name="recent_convos_removed" msgid="2122932798895714203">"已移除近期對話"</string>
     <string name="recent_convo_removed" msgid="8686414146325958281">"對話已移除"</string>
@@ -5149,7 +5149,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"變更"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"最多只能開啟 5 項服務"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"如要新增其他服務，請先關閉至少 1 項服務"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"選擇要用來儲存登入及自動填入建議資料的服務。如果也想收到其他服務提供的建議，請開啟相關服務。"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"選擇偏好服務，用來儲存登入及自動填入建議的資料。如果也想收到其他服務提供的建議，請開啟所需服務。"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"「%1$s」會根據畫面內容判斷要自動填入的資訊。"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"密碼、密碼金鑰和資料服務限制"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"一次最多可選取 5 個密碼、密碼金鑰和資料服務。如要新增其他服務，請先停用其中一項服務。"</string>
@@ -5825,8 +5825,7 @@
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{過去 # 個月內安裝的應用程式}other{過去 # 個月內安裝的應用程式}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{超過 # 個月前安裝的應用程式}other{超過 # 個月前安裝的應用程式}}"</string>
     <string name="ai_assist_category" msgid="6115635022788919643">"螢幕存取權"</string>
-    <string name="personal_context_title" msgid="5665514384061696635">"畫面內容"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"選擇這個應用程式能否提供資訊，用於生成建議"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"允許存取這個應用程式的畫面內容，以主動提供協助"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"顯示比例"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"如果這個應用程式不適合用 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 的預設比例顯示，請嘗試新比例"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"如果這個應用程式不適合用 <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 的預設比例顯示，請嘗試其他比例。部分應用程式可能未針對某些顯示比例完成最佳化調整。"</string>

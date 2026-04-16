@@ -737,7 +737,6 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = WifiAppDataUsageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OpeningLinksApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TabbedDisplayApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DisplayApiScreen.KEY),

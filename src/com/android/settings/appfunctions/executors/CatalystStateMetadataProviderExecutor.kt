@@ -20,6 +20,7 @@ import android.app.appsearch.GenericDocument
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.os.BadParcelableException
 import android.os.Binder
 import android.os.Bundle
 import android.provider.Settings
@@ -67,6 +68,7 @@ import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.supervisorScope
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
@@ -119,7 +121,7 @@ class CatalystStateMetadataProviderExecutor(
 
         val startTimeAll = android.os.SystemClock.elapsedRealtime()
         withTimeoutOrNull(maxExecutionTimeMs) {
-            coroutineScope {
+            supervisorScope {
                 deferredList = screenKeyList.map { screenKey ->
                     screenKey to
                         async {
@@ -136,7 +138,7 @@ class CatalystStateMetadataProviderExecutor(
                                                             context,
                                                             screenKey,
                                                         )
-                                                if (
+                                                val result = if (
                                                     screenMetadata != null &&
                                                         screenMetadata.isExposable(context) &&
                                                             screenMetadata.isFlagEnabled(context)
@@ -161,6 +163,7 @@ class CatalystStateMetadataProviderExecutor(
                                                         null
                                                     }
                                                 }
+                                                result
                                             } catch (e: Exception) {
                                                 Log.e(TAG, "error building $screenKey", e)
                                                 null
@@ -189,7 +192,11 @@ class CatalystStateMetadataProviderExecutor(
                             }
                         }
                 }
-                deferredList.map { it.second }.awaitAll()
+                try {
+                    deferredList.map { it.second }.awaitAll()
+                } catch (e: Exception) {
+                    Log.w(TAG, "Some tasks failed during awaitAll", e)
+                }
             }
         } ?: Log.w(TAG, "Max execution time of $maxExecutionTimeMs exceeded.")
 
@@ -210,9 +217,13 @@ class CatalystStateMetadataProviderExecutor(
         for ((screenKey, deferred) in deferredList) {
             if (deferred.isCompleted && !deferred.isCancelled) {
                 completedKeys.add(screenKey)
-                val res = deferred.getCompleted()
-                if (res != null) {
-                    results.add(res)
+                try {
+                    val res = deferred.getCompleted()
+                    if (res != null) {
+                        results.add(res)
+                    }
+                } catch (e: Exception) {
+                    Log.e(TAG, "Failed to get result for screen: $screenKey", e)
                 }
             }
         }
@@ -222,8 +233,20 @@ class CatalystStateMetadataProviderExecutor(
             Log.w(TAG, "Screens not processed due to max execution time: $incompleteKeys")
         }
 
-        perScreenDeviceStatesList.addAll(results.flatMap { it.metadata })
-        results.flatMap { it.itemizationTypes }.forEach { itemizationTypes[it.key] = it }
+        for (res in results) {
+            try {
+                perScreenDeviceStatesList.addAll(res.metadata)
+            } catch (e: BadParcelableException) {
+                Log.e(TAG, "Failed to read metadata for a screen result due to IPC failure", e)
+                // Continue to next result to salvage as much as possible
+            }
+
+            try {
+                res.itemizationTypes.forEach { itemizationTypes[it.key] = it }
+            } catch (e: BadParcelableException) {
+                Log.e(TAG, "Failed to read itemizationTypes for a screen result due to IPC failure", e)
+            }
+        }
 
         return DeviceStateMetadataProviderExecutorResult(
             metadata = perScreenDeviceStatesList,
