@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"WEP ネットワークに接続しました。これらのネットワークの許可を停止すると、接続が解除されます。"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"詳細設定"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"プルダウン リスト、詳細設定"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"展開"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"開く"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"閉じる"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"ネットワーク名*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID を入力"</string>
     <string name="wifi_security" msgid="9095934643631406913">"セキュリティ"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN が一致しません。新しい SIM PIN を確認してください。"</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"PIN が正しくありません。残りの試行回数: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> 回"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"SIM カードの現在の PIN コードを入力してください"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"1 番目の SIM カードスロット"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"2 番目の SIM カードスロット"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"モバイルデータに <xliff:g id="CARRIER">%1$s</xliff:g> を使用？"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"モバイルデータに <xliff:g id="CARRIER2_0">%2$s</xliff:g> を使用しています。<xliff:g id="CARRIER1">%1$s</xliff:g> に切り替えると、モバイルデータに <xliff:g id="CARRIER2_1">%2$s</xliff:g> は使用されなくなります。"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> を使用"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"コントローラのボタンでトリガーされるアクションをカスタマイズできます"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"ボタン"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"方向"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A ボタン"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B ボタン"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X ボタン"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y ボタン"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 ボタン"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 ボタン"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 ボタン"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 ボタン"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"左スティック クリック"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"右スティック クリック"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"左スティック"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"右スティック"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"デフォルトにリセット"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"デフォルトにリセットしますか？"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"コントローラの設定がすべてデフォルトにリセットされます"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"リセット"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"現在 <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g> に割り当てられています"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"タッチパッド"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"タッチパッドとマウス"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"マウス"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"通知"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"クイック設定"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"注"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"デスクトップの表示 / 非表示"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g>のショートカットを選択してください"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"左下の角"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"右下の角"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"機能フラグ"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Bluetooth スタックログを有効化"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Bluetooth スタック ロギングのログレベルを変更します（この設定の変更後に Bluetooth を切り替えます）"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Bluetooth HCI スヌープログ ソケットを有効にする"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"ローカル ソケットで Bluetooth HCI スヌープログを有効にします"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI スヌープログ フィルタリング"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"フィルタを設定"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"変更を反映するには、Bluetooth を無効にしてから有効にしてください"</string>
@@ -2947,7 +2932,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"履歴の詳細"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"バッテリー使用量"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"過去 24 時間の使用状況を確認できます"</string>
-    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"前回のフル充電以降の使用を表示"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"前回のフル充電以降の使用量を表示します"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
@@ -3175,8 +3160,8 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"ネットワークに関する通知"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"暗号化されていないネットワークに接続された場合や、一意のデバイス ID または SIM ID がネットワークにより記録された場合に通知します"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"ネットワークの世代"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G ネットワークからの保護を ON にすると、安全性が低いため 2G ネットワークは使用されません。一部の地域では接続が制限される場合があります。緊急通報では 2G が常に許可されますが、国際ローミング時は通話がつながらないことがあります。"</string>
-    <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G ネットワークからの保護"</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G ネットワークの制限を有効にすると、安全性の低い 2G ネットワークは使用されません。一部の地域では接続が制限される場合があります。緊急通報では 2G が常に許可されますが、国際ローミング時は通話がつながらないことがあります。"</string>
+    <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G ネットワークの制限"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"暗号化"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"ネットワークの世代"</string>
     <string name="cellular_security_network_generations_summary" msgid="139087814553929402">"挿入した SIM カードごとに、3G、4G、5G 対応のネットワークにのみ接続するように設定できます。旧式の安全でない 2G ネットワークには接続できなくなります。この設定により、2G ネットワークしか利用できない場合に接続が制限されることがあります。緊急の場合は 2G が使用されることがあります。"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"デバイス"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"タッチパッド、キーボード、ディスプレイ、サウンド"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"明るさ、色、ダークモード、ロック画面、テキスト"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"明るさ、色、ダークモード、ロック画面、テキスト、タップ"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"明るさ、色、ダークモード、ロック画面、テキスト、接続済みのディスプレイ"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"明るさ、色、ダークモード、ロック画面、テキスト、タップ、接続済みのディスプレイ"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"キーボードの選択、ツール"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"カーソルの速度、ボタンのカスタマイズ、スクロール"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"音量、スピーカー、マイク"</string>
@@ -4632,53 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"このアプリに対して、デバイス内または接続されているストレージ ボリューム内のファイルすべての参照、変更、削除を許可します。許可されている場合、アプリがユーザーの事前の承認なしにファイルにアクセスすることもあります。"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"すべてのファイルにアクセス可能"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"画面の自動操作"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"このアプリは、他のアプリの画面上のコンテンツを参照して操作し、タスクを完了できるようになります（アプリがバックグラウンドで動作している場合も同様です）。"</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> は、タスクの完了をサポートするために許可されたアプリの画面上のコンテンツを参照して操作できます。"</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"権限で [&lt;strong&gt;常に許可&lt;/strong&gt;] を選択したアプリがここに表示されます。[&lt;strong&gt;今回のみ&lt;/strong&gt;] 許可したアプリや許可しなかったアプリは表示されません。"</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"スクリーン オートメーションを許可していない場合でも、<xliff:g id="ID_1">%1$s</xliff:g> は <xliff:g id="ID_2">%1$s</xliff:g> に接続されているアプリを他の方法で操作できる可能性があります。"</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"この画面でアプリを削除した場合でも、<xliff:g id="ID_1">%1$s</xliff:g> は <xliff:g id="ID_2">%1$s</xliff:g> に接続されているアプリを他の方法で操作できる可能性があります。"</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"他のアプリの画面上のコンテンツを操作してタスクを完了することをアプリに許可します"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"画面上のコンテンツを参照して操作し、タスクを完了することをアプリに許可します"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"毎回確認"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"常に許可"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"許可しない"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"許可したアプリ"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"許可したアプリはまだありません"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"デフォルトのデジタル アシスタントとして設定したアプリのみが、スクリーン オートメーションを使用できます。"</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"アプリは削除されました"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"すべてのアプリを削除しました"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"アシスタントの設定"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 件のアプリが許可されています}other{# 件のアプリが許可されています}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 件のアプリが許可されています}other{# 件のアプリが許可されています}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"許可されているアプリはありません"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"すべてのアプリを削除"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"デフォルトのデジタル アシスタント"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> はスクリーン オートメーションを使用できません"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"デフォルトのデジタル アシスタントのみスクリーン オートメーションを使用できます"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"アシスタントを変更"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"これらのアプリは、許可されたアプリの画面上のコンテンツを参照して操作し、タスクを完了することができます。"</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"スクリーン オートメーションを使用できるアプリがインストールされていません"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"これらのアプリは、<xliff:g id="ID_1">%1$s</xliff:g> の画面上のコンテンツを参照して操作し、タスクを完了することができます。"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"全画面通知"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"このアプリからの全画面通知を許可する"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"デバイスがロックされているときに通知を全画面に表示することを、このアプリに許可します。アプリは全画面表示を、アラーム、着信、緊急通知などを目立たせるために使用することがあります。"</string>
@@ -5770,17 +5732,17 @@
     <string name="smart_forwarding_input_mdn_dialog_title" msgid="7542216086697868415">"電話番号を入力"</string>
     <string name="smart_forwarding_missing_mdn_text" msgid="2907314684242542226">"電話番号が指定されていません。"</string>
     <string name="smart_forwarding_missing_alert_dialog_text" msgid="7870419247987316112">"OK"</string>
-    <string name="enable_2g_title" msgid="5657132300321750181">"2G ネットワークからの保護"</string>
+    <string name="enable_2g_title" msgid="5657132300321750181">"2G ネットワークの制限"</string>
     <string name="enable_2g_summary" msgid="6194875539424151678">"安全性の低い 2G ネットワークは使用されません。一部の地域では接続が制限される場合があります。緊急通報では 2G が常に許可されますが、国際ローミング時は通話がつながらないことがあります。"</string>
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> を利用するには、2G が必要です"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"暗号化されたネットワークのみを許可する"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"セキュリティは強化されますが、場所によってモバイル ネットワーク接続が制限される可能性があります。緊急通報は常に許可されます。"</string>
-    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G ネットワークからの保護を無効にしますか？"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2G は安全性が低いため、オフにすると、通話、メッセージ、データが傍受や盗難に対して脆弱になります"</string>
-    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"OFF にする"</string>
-    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G ネットワークからの保護"</string>
-    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G ネットワークからの保護が有効です"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"[設定] でオフにできますが、2G は安全性が低いため、データを危険にさらす可能性があります"</string>
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G ネットワークの制限を無効にしますか？"</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2G は安全性が低いため、無効にすると、通話、メッセージ、データが傍受や盗難に対して脆弱になります"</string>
+    <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"無効にする"</string>
+    <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G ネットワークの制限"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G ネットワークの制限が有効です"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"[設定] で無効にできますが、2G は安全性が低いため、データが危険にさらされる可能性があります"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"設定"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"すべてのサービス"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"クリップボードへのアクセスを表示"</string>
@@ -5862,8 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"アプリをアンインストール"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{過去 # か月間にインストールされたアプリ}other{過去 # か月間にインストールされたアプリ}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# か月以上前にインストールされたアプリ}other{# か月以上前にインストールされたアプリ}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI アシスタンス"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"プロアクティブ アシスト"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"画面へのアクセス"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"画面のコンテキスト"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"このアプリが候補の生成に情報を提供することを許可するかどうかを指定します"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"アスペクト比"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"このアプリがお使いの <xliff:g id="DEVICE_NAME">%1$s</xliff:g> 用に設計されていない場合は、新しいアスペクト比で表示してみてください"</string>
@@ -5883,6 +5845,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"アスペクト比を変更すると、アプリが再起動します。保存されていない変更は失われる可能性があります。アプリによっては特定のアスペクト比で最適化できない場合があります。"</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"エクスペリエンス"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"仮想ゲームパッド"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"ゲームを再起動して変更を確定してください"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"指紋認証センサー"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"点滅による通知"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"点滅による通知について"</string>

@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"WEP тармагына туташып турасыз. Эгер бул тармактарга уруксат берүүнү токтотсоңуз, алардан ажыратыласыз."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Өркүндөтүлгөн параметрлер"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Өркүндөтүлгөн параметрлердин ылдый түшүүчү тизмеси"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"жайып көрсөтүү"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"жайып көрсөтүү"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"жыйыштыруу"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Тармактын аталышы*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID киргизиңиз"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Коопсуздук"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN коддор дал келген жок. Жаңы SIM картанын PIN кодун ырастаңыз."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"PIN код туура эмес. <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> аракет калды"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"SIM картанын учурдагы PIN кодун киргизиңиз"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Биринчи SIM карта уячасы"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Экинчи SIM карта уячасы"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"<xliff:g id="CARRIER">%1$s</xliff:g> Интернети колдонулсунбу?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Мобилдик Интернет үчүн <xliff:g id="CARRIER2_0">%2$s</xliff:g> операторун колдонуп жатасыз. Эгер <xliff:g id="CARRIER1">%1$s</xliff:g> операторуна которулсаңыз, <xliff:g id="CARRIER2_1">%2$s</xliff:g> мобилдик Интернет үчүн колдонулбай калат."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> операторун колдонуу"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Көзөмөлдөгүчтүн баскычтары менен аткарылган аракеттерди ыңгайлаштырыңыз"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Баскычтар"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Багыттар"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A баскычы"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B баскычы"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X баскычы ="</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y баскычы"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 баскычы"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 баскычы"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 баскычы"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 баскычы"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Сол жойстикти басуу"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Оң жойстикти басуу"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Сол жойстик"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Оң жойстик"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Демейки мааниге келтирүү"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Демейки мааниге келтиресизби?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Көзөмөлдөгүчтүн бардык параметрлери демейкиге кайтарылат"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Баштапкы абалга келтирүү"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"учурда <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g> деген колдонуучуга дайындалды"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Сенсордук такта"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сенсордук такта жана чычкан"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Чычкан"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Билдирмелер"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Ыкчам параметрлер"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Эскертүү"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Иш тактаны көрсөтүү/жашыруу"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g> үчүн ыкчам баскыч тандаңыз"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"төмөнкү сол бурчу"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"төмөнкү оң бурчу"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Функцияларды белгилөө"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Bluetooth таржымалын иштетүү"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Bluetooth таржымалынын деңгээлин өзгөртүү (Бул параметрди өзгөрткөндөн кийин Bluetooth\'ду өчүрүү/күйгүзүү керек)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Bluetooth HCI тыңшоо таржымалынын сокетин иштетүү"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Bluetooth HCI тыңшоо таржымалын жергиликтүү сокетте жеткиликтүү кылуу"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI тыңшоо таржымалын чыпкалоо"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Чыпкаларды тууралаңыз"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Өзгөрүүлөр күчүнө кириши үчүн, Bluetooth\'ду өчүрүп, кайра иштетиңиз"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Түзмөк"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Сенсордук такта, баскычтоп, дисплей, үн"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Жарыктык, түс, караңгы тема, кулпу экраны, текст"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Жарыктык, түс, караңгы тема, кулпу экраны, текст"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Жарыктык, түс, караңгы тема, кулпу экраны, текст, туташкан дисплей"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Жарыктык, түс, караңгы тема, кулпу экраны, текст, тийүү, туташкан дисплей"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Баскычтоп тандоо, куралдар"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Курсордун ылдамдыгы, баскычты ыңгайлаштыруу, сыдыруу"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Үн, динамиктер, микрофондор"</string>
@@ -4632,58 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Бул колдонмого түзмөктөгү жана башка байланышкан сактагычтардагы бардык файлдарды көрүп, өзгөртүп жана өчүрүүгө уруксат бересизби? Колдонмо файлдарды сизге айтпай пайдалана алат."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Бардык файлдарга мүмкүнчүлүк бар"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Экранды автоматташтыруу"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Бул колдонмо тапшырмаларды аткарууга жардам берүү үчүн экрандагы башка колдонмолордун контентин көрүп, алар менен аракеттеше алат (колдонмолор фондо иштеп жатканда да)."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> тапшырмаларды аткарууга жардам берүү үчүн уруксат берген колдонмолордун экрандагы контентин көрүп, алар менен аракеттеше алат."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Уруксаттар жөндөөлөрүндө &lt;strong&gt;Ар дайым уруксат берүү&lt;/strong&gt; параметрин тандаган колдонмолор ушул жерде көрсөтүлөт. &lt;strong&gt;Ушул жолу гана&lt;/strong&gt; уруксат берилген же уруксат берилбеген колдонмолор бул жерде көрсөтүлбөйт."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Эгер автоматтык аракеттер функциясына уруксат бербесеңиз, <xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%1$s</xliff:g> колдонмосуна байланышкан колдонмолор менен башка жолдор менен иштей бериши мүмкүн."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Бул экрандагы колдонмону алып салсаңыз да, <xliff:g id="ID_1">%1$s</xliff:g> <xliff:g id="ID_2">%1$s</xliff:g> колдонмосуна байланышкан башка колдонмолор менен ал ар башка жолдор аркылуу иштей бериши мүмкүн."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Иштерди бүтүргөнгө жардам берүү үчүн колдонмолорго экрандагы башка колдонмолордун контенти менен иштөөгө уруксат бересиз"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Тапшырмаларды аткарууга жардам берүү үчүн колдонмолорго экрандагы контентти көрүүгө жана алар менен аракеттешүүгө уруксат берүү"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Ар дайым суралсын"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Ар дайым уруксат берүү"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Тыюу салуу"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Сиз уруксат берген колдонмолор"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Азырынча бир да колдонмого уруксат берген жоксуз"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Автоматтык аракеттер функциясы демейки санарип жардамчысы катары коюлган колдонмо гана колдоно алат."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Колдонмо өчүрүлдү"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Бардык колдонмолор өчүрүлдү"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Жардамчынын жөндөөлөрү"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 колдонмого уруксат берилди}other{# колдонмого уруксат берилди}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 колдонмого уруксат бар}other{# колдонмого уруксат берилди}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Бир да колдонмого уруксат берилген жок"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Бардык колдонмолорду өчүрүү"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Демейки санариптик жардамчы"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> автоматтык аракеттерди кыла албайт"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Автоматтык аракеттер функциясын демейки санариптик жардамчыңыз гана колдоно алат"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Жардамчыны өзгөртүү"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Бул колдонмолор тапшырмаларды аткарууга жардам берүү үчүн сиз уруксат берген колдонмолордун экрандагы контентин көрүп, алар менен аракеттеше алат."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"Автоматтык аракеттер функциясын пайдалана турган колдонмолорду орноткон жоксуз"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Бул колдонмолор тапшырмаларды аткарууга жардам берүү үчүн экрандагы <xliff:g id="ID_1">%1$s</xliff:g> колдонмосунун контентин көрүп, алар менен аракеттеше алат."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Толук экрандагы билдирмелер"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Бул колдонмого толук экрандагы билдирмелерди көрсөтүүгө уруксат берүү"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Бул колдонмого түзмөк кулпуланып турганда толук экрандагы билдирмелерди көрсөтүүгө уруксат бериңиз. Колдонмолор муну ойготкучтарды, кирүүчү чалууларды же башка шашылыш билдирмелерди көрсөтүү үчүн колдонушат."</string>
@@ -5781,11 +5738,11 @@
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Шифрленген тармактарга гана уруксат берүү"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Бул коопсуз чечим болгону менен, айрым жерлерде мобилдик тармакка туташуу кыйынчылыктарды жаратышы мүмкүн. Шашылыш чалууга ар дайым уруксат берилет."</string>
     <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G тармагын коргоону өчүрөсүзбү?"</string>
-    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2G тармактары коопсуз эмес. Бул функцияны өчүрсөңүз, чалуулар, билдирүүлөр, маалымат кармалып же уурдалышы мүмкүн."</string>
+    <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2G тармактары жакшы корголбойт. Бул функцияны өчүрсөңүз, чалууларыңыз жана билдирүүлөрүңүз кармалып, маалыматтарыңыз уурдалышы мүмкүн."</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Өчүрүү"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G тармагын коргоо"</string>
     <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"2G тармагын коргоо күйүк"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"Бул параметрди өчүрсөңүз болот, бирок 2G коопсуз эмес жана маалыматыңызга коркунуч жаратышы мүмкүн."</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"Бул параметрди өчүрүп койсоңуз болот, бирок 2G тармагында маалыматыңызга коркунуч келтирилиши мүмкүн."</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Параметрлер"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Бардык кызматтар"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Алмашуу буферин пайдалануу мүмкүнчүлүгүн көрсөтүү"</string>
@@ -5867,9 +5824,9 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Колдонмону чыгарып салуу"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Акыркы # айдын ичинде орнотулган колдонмолор}other{Акыркы # айдын ичинде орнотулган колдонмолор}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# айдан ашуун убакыт мурун орнотулган колдонмолор}other{# айдан ашуун убакыт мурун орнотулган колдонмолор}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"ЖИден жардам"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Акылдуу жардам"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"Бул колдонмо сунуш түзүүдө маалымат бере алар-алабсын тандаңыз."</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Экранды колдонуу"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"Экрандагы контекст"</string>
+    <string name="personal_context_switch_summary" msgid="917644125592480347">"Бул колдонмо сунуш түзүүдө маалымат бере алар-албасын тандаңыз."</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Тараптардын катнашы"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Эгер колдонмо <xliff:g id="DEVICE_NAME">%1$s</xliff:g> үчүн түзүлбөсө, аны көрүү үчүн жаңы тараптардын катнашын колдонуп көрүңүз"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Эгер колдонмо <xliff:g id="DEVICE_NAME">%1$s</xliff:g> түзмөгүнө туура келбей калса, тараптардын башка катнашын колдонуп көрүңүз. Белгилүү бир тараптардын катнаштары айрым колдонмолорго чак келбей калышы мүмкүн."</string>
@@ -5888,6 +5845,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Тараптардын катнашын өзгөрткөндө бул колдонмо өчүп күйөт. Сакталбаган өзгөрүүлөрүңүз өчүп калышы мүмкүн. Белгилүү бир тараптардын катнаштары айрым колдонмолорго чак келбей калышы мүмкүн."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Тажрыйба"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Виртуалдык геймпад"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Өзгөртүүлөрдү ырастоо үчүн оюнду өчүрүп күйгүзүңүз"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Манжа изинин сенсору"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Жарык менен коштолгон билдирмелер"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Жарык менен коштолгон билдирмелер жөнүндө"</string>

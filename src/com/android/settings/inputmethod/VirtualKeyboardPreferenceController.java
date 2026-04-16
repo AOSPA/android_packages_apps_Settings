@@ -34,14 +34,14 @@ import com.android.settingslib.core.AbstractPreferenceController;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KeyboardAppsPreferenceController extends AbstractPreferenceController
+public class VirtualKeyboardPreferenceController extends AbstractPreferenceController
         implements PreferenceControllerMixin {
 
     private final InputMethodManager mImm;
     private final DevicePolicyManager mDpm;
     private final PackageManager mPm;
 
-    public KeyboardAppsPreferenceController(Context context) {
+    public VirtualKeyboardPreferenceController(Context context) {
         super(context);
         mPm = mContext.getPackageManager();
         mDpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);

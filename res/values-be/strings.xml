@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Вы падключаны да сеткі WEP. Калі забараніць выкарыстанне такіх сетак, падключэнне будзе страчана."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Дадатковыя параметры"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Выпадны спіс \"Дадатковыя параметры\""</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"разгарнуць"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"разгарнуць"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"згарнуць"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Назва сеткі*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Увядзіце SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Бяспека"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN-коды не супадаюць. Пацвердзіце новы PIN-код SIM-карты."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Няправільны PIN-код. Засталося спроб: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>."</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Увядзіце бягучы PIN-код SIM-карты"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Першы слот для SIM-карты"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Другі слот для SIM-карты"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Выкарыстоўваць <xliff:g id="CARRIER">%1$s</xliff:g> для трафіка?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Вы карыстаецеся паслугамі аператара \"<xliff:g id="CARRIER2_0">%2$s</xliff:g>\" для мабільнай перадачы даных. Пры пераключэнні на аператара \"<xliff:g id="CARRIER1">%1$s</xliff:g>\", <xliff:g id="CARRIER2_1">%2$s</xliff:g> больш не будзе выкарыстоўвацца для мабільнай перадачы даных."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Выкарыстоўваць аператара <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Наладзьце дзеянні, якія выконваюцца пры націсканні кнопак кантролера"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Кнопкі"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Маршруты"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"Кнопка A"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"Кнопка B"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"Кнопка X"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Кнопка Y"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"Кнопка L1"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"Кнопка R1"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"Кнопка L2"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"Кнопка R2"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Націсканне левага джойсціка"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Націсканне правага джойсціка"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"Крыжавіна"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Левы джойсцік"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Правы джойсцік"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Скінуць да стандартных значэнняў"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Скінуць да стандартных значэнняў?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Усе налады кантролера будуць скінуты да стандартных значэнняў"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Скінуць"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"зараз прызначана карыстальніку <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Сэнсарная панэль"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Сэнсарная панэль і мыш"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Мыш"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Апавяшчэнні"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Хуткія налады"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Нататка"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Паказаць/схаваць працоўны стол"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Выберыце спалучэнне клавіш для дзеяння \"<xliff:g id="CORNER">%1$s</xliff:g>\""</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"ніжні левы вугал"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"ніжні правы вугал"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Эксперыментальныя функцыі"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Уключыць журнал стэка Bluetooth"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Змяніць узровень вядзення журнала для стэка (змяніўшы наладу, трэба выключыць і ўключыць Bluetooth)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Уключыць сокет журнала перахоплівання даных Bluetooth HCI"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Зрабіць журнал перахоплівання даных Bluetooth HCI даступным праз лакальны сокет"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Фільтрацыя журнала адсочвання Bluetooth HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Наладзіць фільтры"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Выключыце і ўключыце Bluetooth, каб змяненні пачалі дзейнічаць"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Прылада"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Сэнсарная панэль, клавіятура, дысплэй, гук"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Яркасць, колер, цёмная тэма, экран блакіроўкі, тэкст"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Яркасць, колер, цёмная тэма, экран блакіроўкі, тэкст, сэнсарны ўвод"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Яркасць, колер, цёмная тэма, экран блакіроўкі, тэкст, падключаны дысплэй"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Яркасць, колер, цёмная тэма, экран блакіроўкі, тэкст, сэнсарны ўвод, падключаны дысплэй"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Выбар клавіятуры, інструменты"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Хуткасць курсора, налады кнопак, прагортванне"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Гучнасць, дынамікі, мікрафоны"</string>
@@ -4632,58 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Дазвольце гэтай праграме чытаць, змяняць і выдаляць усе файлы на гэтай прыладзе ці ў падключаных сховішчах. З такім дазволам праграма зможа атрымліваць доступ да файлаў без вашага ведама."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Магчымы доступ да ўсіх файлаў"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Аўтаматызацыя экрана"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Гэта праграма зможа праглядаць змесціва экрана іншых праграм і ўзаемадзейнічаць з ім, каб дапамагаць вам выконваць задачы, нават калі праграмы працуюць у фонавым рэжыме."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"Праграма \"<xliff:g id="ID_1">%1$s</xliff:g>\" можа праглядаць змесціва экрана праграм, якім вы дазволілі дапамагаць вам выконваць задачы, і ўзаемадзейнічаць з ім."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Тут паказваюцца праграмы, для якіх у дазволах вы выбралі &lt;strong&gt;Заўсёды дазваляць&lt;/strong&gt;. Праграмы, якім вы дазволілі доступ &lt;strong&gt;Толькі адзін раз&lt;/strong&gt; або якім не далі дазвол, не паказваюцца."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Калі вы не дазволіце аўтаматызацыю экрана, праграма \"<xliff:g id="ID_1">%1$s</xliff:g>\" зможа іншымі спосабамі ўзаемадзейнічаць з праграмамі, падключанымі да праграмы \"<xliff:g id="ID_2">%1$s</xliff:g>\"."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Калі вы выдаліце праграму на гэтым экране, праграма \"<xliff:g id="ID_1">%1$s</xliff:g>\" зможа іншымі спосабамі ўзаемадзейнічаць з праграмамі, падключанымі да праграмы \"<xliff:g id="ID_2">%1$s</xliff:g>\"."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Дазволіць праграмам дапамагаць вам выконваць задачы, узаемадзейнічаючы са змесцівам экрана іншых праграм"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Дазволіць праграмам праглядаць змесціва экрана і ўзаемадзейнічаць з ім, каб дапамагаць вам выконваць задачы"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Заўсёды пытацца"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Заўсёды дазваляць"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Не дазваляць"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Праграмы, якія вы дазволілі"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Вы пакуль не дазволілі ніводнай праграмы"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Аўтаматызацыю экрана можа выкарыстоўваць толькі праграма, якую вы выбралі ў якасці стандартнага лічбавага памочніка."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Праграма выдалена"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Усе праграмы выдалены"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Налады Памочніка"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{Дазволена 1 праграма}one{Дазволена # праграма}few{Дазволена # праграмы}many{Дазволена # праграм}other{Дазволены # праграмы}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{Дазволена 1 праграма}one{Дазволена # праграма}few{Дазволены # праграмы}many{Дазволены # праграм}other{Дазволены # праграмы}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Няма дазволеных праграм"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Выдаліць усе праграмы"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Стандартны лічбавы памочнік"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"Праграма \"<xliff:g id="ID_1">%1$s</xliff:g>\" не можа выкарыстоўваць аўтаматызацыю экрана"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Аўтаматызацыю экрана можа выкарыстоўваць толькі стандартны лічбавы памочнік"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Змяніць памочніка"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Гэтыя праграмы могуць праглядаць змесціва экрана праграм, для якіх вы далі дазвол, і ўзаемадзейнічаць з ім, каб дапамагаць вам выконваць задачы."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"У вас не ўсталяваны праграмы, якія могуць выкарыстоўваць аўтаматызацыю экрана"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Гэтыя праграмы могуць праглядаць змесціва экрана праграмы \"<xliff:g id="ID_1">%1$s</xliff:g>\" і ўзаемадзейнічаць з ім, каб дапамагаць вам выконваць задачы."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Поўнаэкранныя апавяшчэнні"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Дазволіць поўнаэкранныя апавяшчэнні ад гэтай праграмы"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Гэта праграма зможа паказваць поўнаэкранныя апавяшчэнні, калі прылада заблакіравана. Дзякуючы гэтаму дазволу праграмы могуць паказваць сігналы будзільнікаў, уваходныя выклікі і іншыя тэрміновыя апавяшчэнні."</string>
@@ -5869,8 +5826,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Выдаліць праграму"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Праграмы, усталяваныя за апошні # месяц}one{Праграмы, усталяваныя за апошні # месяц}few{Праграмы, усталяваныя за апошнія # месяцы}many{Праграмы, усталяваныя за апошнія # месяцаў}other{Праграмы, усталяваныя за апошнія # месяца}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Праграмы, усталяваныя больш як # месяц назад}one{Праграмы, усталяваныя больш як # месяц назад}few{Праграмы, усталяваныя больш як # месяцы назад}many{Праграмы, усталяваныя больш як # месяцаў назад}other{Праграмы, усталяваныя больш як # месяца назад}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"Дапамога AI"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Актыўная дапамога"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Доступ да экрана"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"Кантэкст экрана"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Выберыце, ці дазваляць гэтай праграме перадаваць інфармацыю для стварэння прапаноў"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Суадносіны бакоў"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Калі гэта праграма не аптымізавана для вашай прылады (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>), выберыце іншыя суадносіны бакоў"</string>
@@ -5890,6 +5847,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Калі вы зменіце суадносіны бакоў, праграма перазапусціцца. Незахаваныя змяненні могуць быць страчаны. Для некаторых праграм пэўныя суадносіны бакоў могуць не падыходзіць."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Вопыт"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Віртуальны геймпад"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Перазапусціце гульню, каб пацвердзіць змяненні"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Сканер адбіткаў пальцаў"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Флэш-апавяшчэнні"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Пра флэш-апавяшчэнні"</string>

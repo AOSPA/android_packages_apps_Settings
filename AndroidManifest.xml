@@ -1360,7 +1360,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                        android:value="true"/>
         </activity>
 
-        <activity android:name="Settings$AvailableKeyboardAppsActivity"
+        <activity android:name="Settings$AvailableVirtualKeyboardActivity"
             android:exported="true"
             android:label="@string/available_keyboard_apps_category">
             <intent-filter android:priority="1">
@@ -1369,7 +1369,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.inputmethod.AvailableKeyboardAppsFragment" />
+                android:value="com.android.settings.inputmethod.AvailableVirtualKeyboardFragment" />
             <meta-data android:name="com.android.settings.HIGHLIGHT_MENU_KEY"
                        android:value="@string/menu_key_system"/>
         </activity>
@@ -6288,6 +6288,7 @@ SPDX-License-Identifier: BSD-3-Clause-Clear -->
                 <action android:name="android.telephony.action.DEFAULT_DATA_SUBSCRIPTION_CHANGED"/>
                 <action android:name="android.telephony.action.CARRIER_CONFIG_CHANGED"/>
                 <action android:name="android.telephony.action.SIM_CARD_STATE_CHANGED"/>
+                <action android:name="android.intent.action.SERVICE_STATE"/>
             </intent-filter>
         </receiver>
 

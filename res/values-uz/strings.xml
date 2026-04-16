@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"WEP tarmoqqa ulandingiz. Bu tarmoqlarga ruxsat berishni toʻxtatsangiz, aloqa uziladi."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Kengaytirilgan sozlamalar"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Qoʻshimcha parametrlar pastga ochiluvchi roʻyxati"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"yoyish"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"yoyish"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"yigʻish"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Tarmoq nomi*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Tarmoq nomini (SSID) kiriting"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Himoya"</string>
@@ -1501,7 +1502,7 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Bekor qilish"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"SIM kartani himoya qilish"</string>
-    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM karta qulfining himoya rejimi"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM karta himoyasi rejimi"</string>
     <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"SIM kartani qulflash"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Android tomonidan boshqariladi"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Android tomonidan boshqarilmaydi"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN kodlar bir xil emas. Yangi SIM karta PIN kodini tasdiqlang."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"PIN kod xato. Yana <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> marta urinish mumkin"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"SIM karta joriy PIN kodini kiriting"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Birinchi SIM karta uyasi"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Ikkinchi SIM karta uyasi"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Mobil internet uchun <xliff:g id="CARRIER">%1$s</xliff:g> ishlatilsinmi?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Mobil internet uchun <xliff:g id="CARRIER2_0">%2$s</xliff:g> ishlatmoqdasiz. <xliff:g id="CARRIER1">%1$s</xliff:g> faollashtirilganda, <xliff:g id="CARRIER2_1">%2$s</xliff:g> qayta mobil internet uchun ishlatilmaydi."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> ishlatish"</string>
@@ -2208,31 +2207,19 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Kontroller tugmalari bilan bajariladigan amallarni moslang"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Tugmalar"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Yoʻnalishlar"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A tugmasi"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B tugmasi"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X tugmasi"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y tugmasi"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 tugmasi"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 tugmasi"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 tugmasi"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 tugmasi"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Chap joystikni bosish"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Oʻng joystikni bosish"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"Strelkali tugmalar"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Chap joystik"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Oʻng joystik"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Asliga qaytarish"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Asliga qaytarilsinmi?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Kontroller sozlamalari asliga qaytariladi"</string>
@@ -2308,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Bildirishnomalar"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Tezkor sozlamalar"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Qayd"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Desktopni chiqarish/berkitish"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g> uchun yorliqni tanlang"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"pastki chap burchak"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"pastki oʻng burchak"</string>
@@ -2616,7 +2604,7 @@
     <string name="accessibility_expanded_dark_theme_title" msgid="9221540446783335817">"Kengaytirilgan"</string>
     <string name="accessibility_expanded_dark_theme_title_in_search" msgid="1504625269329894086">"Kengaytirilgan Tungi mavzu"</string>
     <string name="accessibility_expanded_dark_theme_summary" msgid="6706822433218670699">"Qulaylikni oshirish uchun uni dastaklamaydigan aksariyat ilovalarga tungi mavzuni avtomatik tatbiq etadi"</string>
-    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Kengaytirilgan variantda muammolar yuz bersa, standart variantdan foydalaning."</string>
+    <string name="accessibility_expanded_dark_theme_footer" msgid="4015739338153140109">"Kengaytirilgan mavzuda muammolar yuz bersa, Standart mavzudan foydalaning."</string>
     <string name="keywords_expanded_dark_theme" msgid="8366925785183600306">"majburiy akslantirish, rangni akslantirish, kontrast"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_title" msgid="6670371265342260529">"Kengaytirilgan Tungi mavzu"</string>
     <string name="accessibility_expanded_dark_theme_exceptions_gear_content_description" msgid="4279819951044961382">"Kengaytirilgan tungi mavzu sozlamalari"</string>
@@ -3648,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Qurilma"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Sensorli panel, klaviatura, ekran, tovush"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Yorqinlik, rang, tungi mavzu, ekran qulfi, matn"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Yorqinlik, rang, tungi mavzu, ekran qulfi, matn, sensor"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Yorqinlik, rang, tungi mavzu, ekran qulfi, matn, ulangan displey"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Yorqinlik, rang, tungi mavzu, ekran qulfi, matn, sensor, ulangan displey"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Klaviatura tanlovi, vositalar"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Kursor tezligi, tugmani sozlash, aylantirish"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Tovush balandligi, karnaylar, mikrofonlar"</string>
@@ -4629,53 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Bu ilovaga mazkur qurilmadagi yoki ulangan xotira qurilmalaridagi barcha fayllarni oʻqish, tahrirlash va oʻchirib tashlash uchun ruxsat beriladi. Ruxsat berilgandan keyin ilova fayllardan sizning xabaringizsiz foydalana oladi."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Barcha fayllarga ruxsati bor ilova"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Ekran avtomatizatsiyasi"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Bu ilova vazifalarni bajarishda yordam berish uchun boshqa ilovalarning ekran kontentini koʻrib, hatto ilovalar fonda boʻlsa ham ular bilan oʻzaro aloqa qilishi mumkin."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> vazifalarni bajarishda yordam berish uchun ruxsat berilgan ilovalar ekran kontentini koʻrib, ular bilan oʻzaro aloqa qilishi mumkin."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Ruxsatlarda &lt;strong&gt;Doimiy ruxsat&lt;/strong&gt; tanlangan ilovalar shu yerda chiqadi. &lt;strong&gt;Faqat shu safar&lt;/strong&gt; ruxsat berilgan yoki ruxsat berilmagan ilovalar chiqmaydi."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Ekran avtomatizatsiyasiga ruxsat bermasangiz, <xliff:g id="ID_1">%1$s</xliff:g> baribir boshqa usullar bilan <xliff:g id="ID_2">%1$s</xliff:g> xizmatiga ulangan ilovalar bilan oʻzaro aloqa qilishi mumkin."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Bu ekrandagi ilovani olib tashlasangiz, <xliff:g id="ID_1">%1$s</xliff:g> baribir boshqa usullar bilan <xliff:g id="ID_2">%1$s</xliff:g> xizmatiga ulangan ilovalar bilan oʻzaro aloqa qilishi mumkin."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Ilovalarga boshqa ilovalar ekran kontenti bilan oʻzaro aloqa qilish orqali vazifalarni bajarish uchun yordam berishga ruxsat bering"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Vazifalarni bajarishda yordam berish uchun ilovalarga ekrandagi kontentni koʻrish va ular bilan oʻzaro aloqa qilishga ruxsat bering"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Har safar soʻralsin"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Har doim ruxsat"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Rad etish"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Ruxsat berilgan ilovalar"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Hali hech qanday ilovaga ruxsat bermadingiz"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Ekran avtomatizatsiyasidan faqat birlamchi raqamli yordamchi sifatida sozlangan ilova foydalanishi mumkin."</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Ilova olib tashlandi"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Barcha ilovalar olib tashlandi"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Google Assistent sozlamalari"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{Ruxsat berilgan ilovalar: 1}other{Ruxsat berilgan ilovalar: #}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{Ruxsat berilgan ilovalar: 1}other{Ruxsat berilgan ilovalar: #}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Hech qanday ilovaga ruxsat berilmagan"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Barcha ilovalarni olib tashlash"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Birlamchi raqamli yordamchi"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> ekran avtomatizatsiyasidan foydalanolmaydi"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Ekran avtomatizatsiyasidan faqat birlamchi raqamli yordamchi foydalanishi mumkin"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Yordamchini almashtirish"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Bu ilovalar vazifalarni bajarishda yordam berish uchun ruxsat berilgan ilovalar ekran kontentini koʻrib, ular bilan oʻzaro aloqa qilishi mumkin."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"Ekran avtomatizatsiyasidan foydalanish mumkin ilovalar oʻrnatilmagan"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Bu ilovalar vazifalarni bajarishda yordam berish uchun <xliff:g id="ID_1">%1$s</xliff:g> ekran kontentini koʻrib, ular bilan oʻzaro aloqa qilishi mumkin."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Butun ekran bildirishnomalari"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Bu ilova bildirishnomalarini butun ekranda chiqishiga ruxsat berish"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Bu ilovaga qurilma qulflanganida butun ekranni egallaydigan bildirishnoma chiqarishga ruxsat berish. Ilovalar uning yordamida signallar, kiruvchi chaqiruv yoki boshqa shoshilinch bildirishnomalarni ajratib koʻrsatishi mumkin."</string>
@@ -5859,8 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Ilovani oʻchirish"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Oxirgi # oy ichida oʻrnatilgan ilovalar}other{Oxirgi # oy ichida oʻrnatilgan ilovalar}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# oy oldin oʻrnatilgan ilovalar}other{# oy oldin oʻrnatilgan ilovalar}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI yordami"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Faol yordam"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Ekran ruxsati"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"Ekran konteksti"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Bu ilova tavsiyalar yaratish uchun axborot kiritishi mumkinligini tanlang"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Tomonlar nisbati"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Bu ilova <xliff:g id="DEVICE_NAME">%1$s</xliff:g> uchun moslanmagan, shu sababli yangi tomonlar nisbatini sinang"</string>
@@ -5880,6 +5845,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Tomonlar nisbati oʻzgarishi bilan ilova qaytadan ishga tushadi. Oʻzgarishlar saqlanmasligi mumkin. Ayrim ilovalar muayyan tomonlar nisbatiga optimallashtirilmagan boʻlishi mumkin."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Tajriba"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtual geympad"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Oʻzgarishlarni tasdiqlash uchun oʻyinni qayta ishga tushiring"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Barmoq izi skaneri"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Yoritkichli bildirishnomalar"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Yoritkichli bildirishnomalar haqida"</string>
