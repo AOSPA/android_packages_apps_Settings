@@ -51,6 +51,9 @@ class WifiPrivacyScreenApi :
     init {
         flag { Flags.catalystMigration26q2() }
 
+        // TODO(b/501330847): Re-add this screen to state provider config
+        tags(APP_FUNCTION_NONE)
+
         parameters {
             parameter(
                 name = PARAMETER_KEY,

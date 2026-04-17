@@ -15,12 +15,8 @@
  */
 
 /*
-// QTI_BEGIN: 2024-06-18: Telephony: Start SubscriptionsChangeListener on PLMN search.
  * ​​​Changes from Qualcomm Technologies, Inc. are provided under the following license:
-// QTI_END: 2024-06-18: Telephony: Start SubscriptionsChangeListener on PLMN search.
-// QTI_BEGIN: 2025-06-23: Telephony: Use selected plmn name as summary of choose network am: 0f4a28c31f am: 0f4a28c31f
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-// QTI_END: 2025-06-23: Telephony: Use selected plmn name as summary of choose network am: 0f4a28c31f am: 0f4a28c31f
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 

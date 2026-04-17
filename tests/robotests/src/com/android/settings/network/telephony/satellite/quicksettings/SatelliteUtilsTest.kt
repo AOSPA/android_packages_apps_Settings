@@ -17,6 +17,8 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.Application
+import android.content.Intent
+import android.provider.Settings
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
@@ -27,11 +29,13 @@ import com.android.settings.network.telephony.satellite.SatelliteSettingsReposit
 import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
@@ -60,6 +64,8 @@ class SatelliteUtilsTest {
     private lateinit var fakeFeatureFactory: FakeFeatureFactory
     @Mock private lateinit var mockTelephonyFeatureProvider: TelephonyFeatureProvider
     @Mock private lateinit var mockSatelliteSettingsRepository: SatelliteSettingsRepository
+    @Mock private lateinit var mockSatelliteStateRepository: SatelliteStateRepository
+    @Mock private lateinit var mockSatelliteAppsRepository: SatelliteAppsRepository
 
     @Before
     fun setUp() {
@@ -80,6 +86,59 @@ class SatelliteUtilsTest {
 
         `when`(subInfo1.subscriptionId).thenReturn(SUB_ID)
         `when`(subInfo2.subscriptionId).thenReturn(SUB_ID_2)
+
+        SatelliteStateRepository.setInstance(mockSatelliteStateRepository)
+        SatelliteUtils.satelliteAppsRepositoryProvider = { mockSatelliteAppsRepository }
+    }
+
+    @After
+    fun tearDown() {
+        SatelliteStateRepository.setInstance(null)
+        // Reset the provider to default
+        SatelliteUtils.satelliteAppsRepositoryProvider = { SatelliteAppsRepository(it) }
+    }
+
+    @Test
+    fun resolveSatelliteSettingsIntent_unconstrainedMode_returnsSettingsIntent() {
+        `when`(mockSatelliteStateRepository.getSatelliteDataSupportMode(SUB_ID))
+            .thenReturn(SatelliteManager.SATELLITE_DATA_SUPPORT_UNCONSTRAINED)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(SUB_ID)).thenReturn(true)
+        ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
+
+        val expectedIntent = Intent(Settings.ACTION_SATELLITE_SETTING)
+        `when`(mockSatelliteAppsRepository.getSettingsIntent(true)).thenReturn(expectedIntent)
+
+        val resultIntent = SatelliteUtils.resolveSatelliteSettingsIntent(context)
+
+        assertThat(resultIntent).isEqualTo(expectedIntent)
+    }
+
+    @Test
+    fun resolveSatelliteSettingsIntent_unconstrainedMode_settingsIntentNull_returnsLandingPageIntent() {
+        `when`(mockSatelliteStateRepository.getSatelliteDataSupportMode(anyInt()))
+            .thenReturn(SatelliteManager.SATELLITE_DATA_SUPPORT_UNCONSTRAINED)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(anyInt())).thenReturn(true)
+        ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
+
+        `when`(mockSatelliteAppsRepository.getSettingsIntent(true)).thenReturn(null)
+
+        val resultIntent = SatelliteUtils.resolveSatelliteSettingsIntent(context)
+
+        assertThat(resultIntent).isNotNull()
+        assertThat(resultIntent.component?.className)
+            .isEqualTo(SatelliteLandingPageActivity::class.java.name)
+    }
+
+    @Test
+    fun resolveSatelliteSettingsIntent_constrainedMode_returnsLandingPageIntent() {
+        `when`(mockSatelliteStateRepository.getSatelliteDataSupportMode(SUB_ID))
+            .thenReturn(SatelliteManager.SATELLITE_DATA_SUPPORT_CONSTRAINED)
+        ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
+
+        val resultIntent = SatelliteUtils.resolveSatelliteSettingsIntent(context)
+
+        assertThat(resultIntent.component?.className)
+            .isEqualTo(SatelliteLandingPageActivity::class.java.name)
     }
 
     @Test
