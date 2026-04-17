@@ -18,6 +18,7 @@ package com.android.settings.applications.assist;
 
 import android.app.settings.SettingsEnums;
 import android.content.Context;
+import android.permission.flags.Flags;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -70,18 +71,22 @@ public class ManageAssist extends DashboardFragment {
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =
-            new BaseSearchIndexProvider(R.xml.manage_assist) {
+            new BaseSearchIndexProvider(
+                    Flags.assistSettingsPrivacyImprovementsEnabled() ? 0 : R.xml.manage_assist) {
 
                 @Override
                 public List<AbstractPreferenceController> createPreferenceControllers(
                         Context context) {
-                    return buildPreferenceControllers(context, null /* lifecycle */);
+                    return Flags.assistSettingsPrivacyImprovementsEnabled() ? null
+                            : buildPreferenceControllers(context, null /* lifecycle */);
                 }
 
                 @Override
                 public List<String> getNonIndexableKeys(Context context) {
                     List<String> keys = super.getNonIndexableKeys(context);
-                    keys.add(KEY_ASSIST);
+                    if (!Flags.assistSettingsPrivacyImprovementsEnabled()) {
+                        keys.add(KEY_ASSIST);
+                    }
                     return keys;
                 }
             };
