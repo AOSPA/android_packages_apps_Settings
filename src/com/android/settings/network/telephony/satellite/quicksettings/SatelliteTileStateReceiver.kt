@@ -68,6 +68,7 @@ open class SatelliteTileStateReceiver(
 ) : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
+        Log.i(TAG, "onReceive: intent=$intent")
         if (UserHandle.myUserId() != UserHandle.USER_SYSTEM) {
             Log.i(TAG, "Not running on system user, ignoring.")
             return
@@ -90,7 +91,8 @@ open class SatelliteTileStateReceiver(
                 TelephonyManager.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED,
                 TelephonyManager.ACTION_SIM_CARD_STATE_CHANGED,
                 CarrierConfigManager.ACTION_CARRIER_CONFIG_CHANGED,
-                Intent.ACTION_SCREEN_ON -> { ->
+                Intent.ACTION_SCREEN_ON,
+                Intent.ACTION_SERVICE_STATE -> { ->
                         handleSubscriptionOrConfigChanged(context)
                     }
                 else -> null

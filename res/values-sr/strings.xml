@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Повезани сте на WEP мрежу. Ако не дозволите ове мреже, нећете бити повезани."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Напредне опције"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Падајућа листа са напредним опцијама"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"проширите"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"проширите"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"скупите"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Назив мреже*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Унесите SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Безбедност"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN-ови се не подударају. Потврдите нови PIN за SIM."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Погрешан PIN. Преосталих покушаја: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Унесите актуелни PIN кôд SIM картице"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Први отвор за SIM картицу"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Други отвор за SIM картицу"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Користити <xliff:g id="CARRIER">%1$s</xliff:g> за моб. податке?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Користите <xliff:g id="CARRIER2_0">%2$s</xliff:g> за мобилне податке. Ако пређете на <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> се више неће користити за мобилне податке."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Користи <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2208,31 +2207,19 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Прилагодите радње које покреће дугмад контролера"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Дугмад"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Путања"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"Дугме A"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"Дугме B"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"Дугме X"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Дугме Y"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"Дугме L1"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"Дугме R1"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"Дугме L2"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"Дугме R2"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Клик на леву палицу"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Клик на десну палицу"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"Навигационо дугме"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Лева палица"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Десна палица"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Ресетуј на подразумевано"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Ресетоваћете на подразумевано?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Сва подешавања контролера ће бити ресетована на подразумевана"</string>
@@ -2308,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Обавештења"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Брза подешавања"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Напомена"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Прикажи/сакриј рачунар"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Одаберите пречицу за <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"доњи леви угао"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"доњи десни угао"</string>
@@ -2761,7 +2749,7 @@
     <string name="accessibility_hearing_device_control" msgid="2661965917013100611">"Контроле слушног апарата"</string>
     <string name="accessibility_hearing_device_routing_title" msgid="6091797237224624114">"Звуци"</string>
     <string name="accessibility_hearing_device_notification_routing_title" msgid="793772286292835373">"Обавештења"</string>
-    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Звуци ће се пуштати преко слушних апарата"</string>
+    <string name="accessibility_hearing_device_routing_hearing_device_summary" msgid="7245587063709607168">"Звукови ће се пуштати преко слушних апарата"</string>
     <string name="accessibility_hearing_device_routing_device_speaker_summary" msgid="6744745201076934510">"Звукови ће се пуштати преко звучника уређаја"</string>
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"Звукови ће се пуштати преко слушних апарата и звучника уређаја"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"Пречица за слушни апарат"</string>
@@ -3648,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Уређај"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Тачпед, тастатура, екран, звук"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Осветљеност, боја, тамна тема, закључани екран, текст"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Осветљеност, боја, тамна тема, закључани екран, текст, додир"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Осветљеност, боја, тамна тема, закључани екран, текст, повезани екран"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Осветљеност, боја, тамна тема, закључани екран, текст, додир, повезани екран"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Избор тастатуре, алатке"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Брзина курсора, прилагођавање дугмади, скроловање"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Јачина звука, звучници, микрофони"</string>
@@ -4629,53 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Дозволите да ова апликација чита, мења и брише све датотеке на овом уређају или свим повезаним уређајима за складиштење. Ако то дозволите, апликација може да приступа датотекама без вашег знања."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Може да приступа свим датотекама"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Аутоматизација екрана"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Ова апликација ће моћи да види садржај екрана других апликација и да остварује интеракцију са њим како би вам помогла да обављате задатке, чак и када су апликације у позадини."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> може да види садржај екрана апликација којима сте дозволили да вам помажу у обављању задатака и да остварује интеракцију са њим."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Овде се приказују апликације за које сте одабрали &lt;strong&gt;Увек дозволи&lt;/strong&gt; у дозволама. Апликације које сте дозволили &lt;strong&gt;Само овај пут&lt;/strong&gt; или нисте дозволили се не приказују."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Ако не дозволите аутоматизацију екрана, <xliff:g id="ID_1">%1$s</xliff:g> ће можда и даље моћи да остварује интеракцију са апликацијама које су повезане са апликацијом <xliff:g id="ID_2">%1$s</xliff:g> на друге начине."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Када уклоните апликацију на овом екрану, <xliff:g id="ID_1">%1$s</xliff:g> ће можда и даље моћи да остварује интеракцију са апликацијама које су повезане са <xliff:g id="ID_2">%1$s</xliff:g>-ом на друге начине."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Дозволите апликацијама да вам помажу у обављању задатака помоћу интеракције са садржајем екрана других апликација"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Дозволите апликацијама да виде садржај екрана и остварују интеракцију са њим како би вам помогле да обављате задатке"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Увек питај"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Увек дозволи"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Не дозволи"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Апликације које сте дозволили"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Још нисте дозволили ниједну апликацију"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Само апликација коју сте подесили као подразумевани дигитални помоћник може да користи аутоматизацију екрана."</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Апликација је уклоњена"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Све апликације су уклоњене"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Подешавања Помоћника"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{Дозвољена је 1 апликација}one{Дозвољена је # апликација}few{Дозвољене су # апликације}other{Дозвољено је # апликација}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{Дозвољена је 1 апликација}one{Дозвољена је # апликација}few{Дозвољене су # апликације}other{Дозвољено је # апликација}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Ниједна апликација нема дозволу"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Уклони све апликације"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Подразумевани дигитални помоћник"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> не може да користи аутоматизацију екрана"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Само подразумевани дигитални помоћник може да користи аутоматизацију екрана"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Промените помоћника"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Ове апликације могу да виде садржај екрана апликација које сте дозволили и да остварују интеракцију са њим како би вам помогле да обављате задатке."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"Нисте инсталирали ниједну апликацију која може да користи аутоматизацију екрана"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Ове апликације могу да виде садржај екрана апликације <xliff:g id="ID_1">%1$s</xliff:g> и остварују интеракцију са њим како би вам помогле да обављате задатке."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Обавештења преко целог екрана"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Дозволи обавештења преко целог екрана од ове апликације"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Дозволите овој апликацији да приказује обавештења преко целог екрана када је уређај закључан. Апликације могу да их користе ради истицања аларма, долазних позива или других хитних обавештења."</string>
@@ -5860,8 +5825,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Деинсталирај апликацију"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Апликације инсталиране у последњих месец дана}one{Апликације инсталиране у последњих # месеци}few{Апликације инсталиране у последња # месеца}other{Апликације инсталиране у последњих # месеци}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Апликације које су инсталиране пре више од # месеца}one{Апликације које су инсталиране пре више од # месеца}few{Апликације које су инсталиране пре више од # месеца}other{Апликације које су инсталиране пре више од # месеци}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI помоћ"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Проактивна помоћ"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Приступ екрану"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"Контекст екрана"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"Одаберите да ли ова апликација може да шаље информације за генерисање предлога"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Размера"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Испробајте нову размеру да бисте прегледали садржај ове апликације ако није дизајнирана да стаје на: <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
@@ -5881,6 +5846,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Апликација ће се рестартовати када промените размеру. Можда ћете изгубити несачуване промене. Неке апликације можда неће бити оптимизоване за одређене размере."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Доживљај"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Виртуелни џојпед"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Рестартујте игру да бисте потврдили промене"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Сензор за отисак прста"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Треперућа обавештења"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"О треперућим обавештењима"</string>
@@ -6206,12 +6172,12 @@
     <string name="safety_center_app_data_sharing_updates_search_terms" msgid="2041373488015575634">"подаци, дељење података, ажурирања дељења података, ажурирања дељења података за локацију, дељење"</string>
     <string name="safety_center_permission_usage_search_terms" msgid="3015527940068111714">"приватност, контролна табла за приватност"</string>
     <string name="safety_center_private_space_search_terms" msgid="6748750858253093118">"Приватан простор"</string>
-    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Више упозорења"</string>
+    <string name="safety_center_issues_banner_group_expandable_title" msgid="3710448986851994773">"Још упозорења"</string>
     <string name="safety_center_issues_banner_group_collapsible_title" msgid="7634388110493742279">"Мање упозорења"</string>
     <string name="safety_center_dismissed_issues_subsection_title" msgid="3097430988082288937">"Одбачена упозорења"</string>
     <string name="safety_center_collapse_dismissed_issues" msgid="1906333435017081366">"Скупи одбачена упозорења"</string>
     <string name="safety_center_expand_dismissed_issues" msgid="6075170862549670397">"Прикажи одбачена упозорења"</string>
-    <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Желите да одбаците ово обавештење?"</string>
+    <string name="safety_center_issue_card_dismiss_confirmation_title" msgid="181880492023793974">"Желите да одбаците ово упозорење?"</string>
     <string name="safety_center_issue_card_dismiss_confirmation_message" msgid="6644443810531446787">"У било ком тренутку можете да прегледате подешавања безбедности и приватности да бисте појачали заштиту"</string>
     <string name="safety_center_resolved_issue_fallback" msgid="223765674640909183">"Радња је завршена"</string>
     <string name="safety_center_qs_page_landing" msgid="1024103851758565938">"Брза подешавања безбедности и приватности"</string>

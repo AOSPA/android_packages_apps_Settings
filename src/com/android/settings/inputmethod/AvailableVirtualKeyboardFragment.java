@@ -45,13 +45,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The fragment for "keyboard apps" settings which used to display user installed IMEs.
+ * The fragment for on-screen keyboard settings which used to display user installed IMEs.
  */
 // LINT.IfChange
 @SearchIndexable
-public class AvailableKeyboardAppsFragment extends DashboardFragment
+public class AvailableVirtualKeyboardFragment extends DashboardFragment
         implements InputMethodPreference.OnSavePreferenceListener {
-    private static final String TAG = "AvailableKeyboardAppsFragment";
+    private static final String TAG = "AvailableVirtualKeyboardFragment";
 
     @VisibleForTesting
     final ArrayList<InputMethodPreference> mInputMethodPreferenceList = new ArrayList<>();
@@ -66,7 +66,7 @@ public class AvailableKeyboardAppsFragment extends DashboardFragment
 
     @Override
     public void onCreatePreferences(Bundle bundle, String s) {
-        addPreferencesFromResource(R.xml.available_keyboard_apps);
+        addPreferencesFromResource(R.xml.available_virtual_keyboard);
         mInputMethodSettingValues = InputMethodSettingValuesWrapper.getInstance(mUserAwareContext);
     }
 
@@ -129,7 +129,7 @@ public class AvailableKeyboardAppsFragment extends DashboardFragment
 
     @Override
     protected int getPreferenceScreenResId() {
-        return R.xml.available_keyboard_apps;
+        return R.xml.available_virtual_keyboard;
     }
 
     @Override
@@ -213,7 +213,7 @@ public class AvailableKeyboardAppsFragment extends DashboardFragment
                 boolean enabled) {
             List<SearchIndexableResource> res = new ArrayList<>();
             SearchIndexableResource index = new SearchIndexableResource(context);
-            index.xmlResId = R.xml.available_keyboard_apps;
+            index.xmlResId = R.xml.available_virtual_keyboard;
             res.add(index);
             return res;
         }
@@ -228,4 +228,4 @@ public class AvailableKeyboardAppsFragment extends DashboardFragment
     @VisibleForTesting
     public static final SearchIndexProvider SEARCH_INDEX_DATA_PROVIDER = new SearchIndexProvider();
 }
-// LINT.ThenChange(AvailableKeyboardAppsApiScreen.kt)
+// LINT.ThenChange(AvailableVirtualKeyboardApiScreen.kt)

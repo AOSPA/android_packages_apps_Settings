@@ -31,7 +31,7 @@
     <string name="dev_settings_disabled_warning" msgid="6971867026249671244">"ଦୟାକରି ପ୍ରଥମେ ଡେଭଲପର୍‌ ବିକଳ୍ପଗୁଡିକ ସକ୍ଷମ କରନ୍ତୁ।"</string>
     <string name="dev_settings_available_to_admin_only_warning" msgid="3408243404879083111">"ଡେଭେଲପର ସେଟିଂସକୁ କେବଳ ଆଡମିନ ୟୁଜରମାନେ ଆକ୍ସେସ କରିପାରିବେ।"</string>
     <string name="header_category_system" msgid="1665516346845259058">"ସିଷ୍ଟମ"</string>
-    <string name="radioInfo_service_in" msgid="9088637745836646271">"ସେବାରେ ଅଛି"</string>
+    <string name="radioInfo_service_in" msgid="9088637745836646271">"ସର୍ଭିସରେ ଅଛି"</string>
     <string name="radioInfo_service_out" msgid="1868347333892403287">"ଏବେ କାମ କରୁନାହିଁ"</string>
     <string name="radioInfo_service_off" msgid="6184928420860868571">"ରେଡିଓ ବନ୍ଦ କରନ୍ତୁ"</string>
     <string name="radioInfo_roaming_in" msgid="8892550453644088692">"ରୋମିଙ୍ଗ"</string>
@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"ଆପଣ ଏକ WEP ନେଟୱାର୍କ ସହ କନେକ୍ଟ ଅଛନ୍ତି। ଯଦି ଆପଣ ଏହି ନେଟୱାର୍କଗୁଡ଼ିକୁ ଅନୁମତି ଦେବା ବନ୍ଦ ନକରନ୍ତି, ତେବେ ଆପଣ ଡିସକନେକ୍ଟ ହେଇଯିବେ।"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"ଉନ୍ନତ ବିକଳ୍ପ"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"ଡ୍ରପ୍-ଡାଉନ୍ ତାଲିକାରେ ଉନ୍ନତ ବିକଳ୍ପଗୁଡ଼ିକ"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"ବିସ୍ତାର କରନ୍ତୁ"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"ବିସ୍ତାର କରନ୍ତୁ"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"ସଙ୍କୁଚିତ କରନ୍ତୁ"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"ନେଟୱାର୍କର ନାମ*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID ଲେଖନ୍ତୁ"</string>
     <string name="wifi_security" msgid="9095934643631406913">"ସୁରକ୍ଷା"</string>
@@ -1096,7 +1097,7 @@
     <string name="wifi_privacy_settings_ephemeral_summary" msgid="8502084692297249372">"ଅନିୟମିତ MAC"</string>
     <string name="wifi_dpp_add_device_to_network" msgid="6141246783457722976">"ଏକ ଡିଭାଇସ୍‍ ଯୋଗ କରନ୍ତୁ"</string>
     <string name="wifi_dpp_center_qr_code" msgid="5270782275746178104">"ଏହି “<xliff:g id="SSID">%1$s</xliff:g>”ରେ ଡିଭାଇସ୍ ଯୋଗ କରିବା ପାଇଁ ନିମ୍ନରେ ଥିବା QR କୋଡ୍‍କୁ କେନ୍ଦ୍ରକୁ ଆଣନ୍ତୁ"</string>
-    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"QR କୋଡ୍‍ ସ୍କାନ୍‍ କରନ୍ତୁ"</string>
+    <string name="wifi_dpp_scan_qr_code" msgid="3543923817779444434">"QR କୋଡ ସ୍କାନ କରନ୍ତୁ"</string>
     <string name="wifi_dpp_scan_qr_code_join_network" msgid="969985020363459133">"“<xliff:g id="SSID">%1$s</xliff:g>” ସହ ସଂଯୋଗ କରିବାକୁ ନିମ୍ନରେ ଥିବା କେନ୍ଦ୍ରକୁ ଆଣନ୍ତୁ"</string>
     <string name="wifi_dpp_scan_qr_code_join_unknown_network" msgid="3180020429793614145">"ଗୋଟିଏ QR କୋଡ ସ୍କାନ କରି ୱାଇ-ଫାଇରେ ଯୋଗ ଦିଅନ୍ତୁ"</string>
     <string name="wifi_dpp_share_wifi" msgid="2431744447544057866">"ୱାଇ-ଫାଇ ସେୟାର କରନ୍ତୁ"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PINଗୁଡ଼ିକ ମେଳ ହେଉନାହିଁ। ନୂଆ SIM PINକୁ ସୁନିଶ୍ଚିତ କରନ୍ତୁ।"</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"ଭୁଲ PIN। ଏତିକି ପ୍ରଚେଷ୍ଟା ବାକି ଅଛି: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"SIM କାର୍ଡର ବର୍ତ୍ତମାନର PIN କୋଡ ଲେଖନ୍ତୁ"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"ପ୍ରଥମ SIM କାର୍ଡ ସ୍ଲଟ"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"ଦ୍ୱିତୀୟ SIM କାର୍ଡ ସ୍ଲଟ"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"ମୋବାଇଲ୍ ଡାଟା ପାଇଁ <xliff:g id="CARRIER">%1$s</xliff:g> ବ୍ୟବହାର କରିବେ?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"ମୋବାଇଲ୍ ଡାଟା ପାଇଁ ଆପଣ <xliff:g id="CARRIER2_0">%2$s</xliff:g> ବ୍ୟବହାର କରୁଛନ୍ତି। ଯଦି ଆପଣ <xliff:g id="CARRIER1">%1$s</xliff:g>କୁ ସ୍ବିଚ୍ କରୁଛନ୍ତି, ତେବେ ମୋବାଇଲ୍ ଡାଟା ପାଇଁ ଆଉ <xliff:g id="CARRIER2_1">%2$s</xliff:g> ବ୍ୟବହୃତ ହେବ ନାହିଁ।"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> ବ୍ୟବହାର କରନ୍ତୁ"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"ଆପଣଙ୍କ କଣ୍ଟ୍ରୋଲରର ବଟନଗୁଡ଼ିକ ଦ୍ୱାରା ଟ୍ରିଗର ହେଉଥିବା କାର୍ଯ୍ୟଗୁଡ଼ିକୁ କଷ୍ଟମାଇଜ କରନ୍ତୁ"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"ବଟନ"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"ଦିଗନିର୍ଦ୍ଦେଶ"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A ବଟନ"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B ବଟନ"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X ବଟନ"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y ବଟନ"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 ବଟନ"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 ବଟନ"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 ବଟନ"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 ବଟନ"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"ବାମ ଷ୍ଟିକ କ୍ଲିକ"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"ଡାହାଣ ଷ୍ଟିକ କ୍ଲିକ"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"ବାମ ଷ୍ଟିକ"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"ଡାହାଣ ଷ୍ଟିକ"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"ଡିଫଲ୍ଟରେ ରିସେଟ କରନ୍ତୁ"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"ଡିଫଲ୍ଟରେ ରିସେଟ କରିବେ?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"ଆପଣଙ୍କର ସମସ୍ତ କଣ୍ଟ୍ରୋଲର ସେଟିଂସକୁ ଡିଫଲ୍ଟରେ ରିସେଟ କରାଯିବ"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"ରିସେଟ କରନ୍ତୁ"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"ବର୍ତ୍ତମାନ <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>ଙ୍କୁ ଆସାଇନ କରାଯାଇଛି"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"ଟଚପେଡ"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"ଟଚପେଡ ଓ ମାଉସ"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"ମାଉସ"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"ବିଜ୍ଞପ୍ତି"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"କ୍ୱିକ ସେଟିଂସ"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"ନୋଟ"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"ଡେସ୍କଟପକୁ ପିକ/ଅନପିକ କରନ୍ତୁ"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g> ପାଇଁ ଏକ ସର୍ଟକଟ ବାଛନ୍ତୁ"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"ନିମ୍ନ-ବାମପଟ କୋଣ"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"ନିମ୍ନ-ଡାହାଣପଟ କୋଣ"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"ଫିଚର୍ ଫ୍ଲାଗ୍"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"ବ୍ଲୁଟୁଥ ଷ୍ଟାକ ଲଗ ସକ୍ଷମ କରନ୍ତୁ"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"ବ୍ଲୁଟୁଥ ଷ୍ଟାକ ଲଗିଂର ଲଗ ଲେଭେଲ ବଦଳାନ୍ତୁ (ଏହି ସେଟିଂସକୁ ବଦଳାଇବା ପରେ ବ୍ଲୁଟୁଥକୁ ଟୋଗଲ କରନ୍ତୁ)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"ବ୍ଲୁଟୁଥ HCI ସ୍ନୁପ ଲଗ ସକେଟକୁ ସକ୍ଷମ କରନ୍ତୁ"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"ଏକ ସ୍ଥାନୀୟ ସକେଟରେ ବ୍ଲୁଟୁଥ HCI ସ୍ନୁପ ଲଗ ଉପଲବ୍ଧ କରାନ୍ତୁ"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"ବ୍ଲୁଟୁଥ HCI ସ୍ନୁପ ଲଗ ଫିଲ୍ଟରିଂ"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"ଫିଲ୍ଟରଗୁଡ଼ିକୁ ସେଟ କରନ୍ତୁ"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"ପରିବର୍ତ୍ତନଗୁଡ଼ିକ କାର୍ଯ୍ୟକାରୀ ହେବା ପାଇଁ ବ୍ଲୁଟୁଥକୁ ଅକ୍ଷମ କରି ସକ୍ଷମ କରନ୍ତୁ"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"ଡିଭାଇସ"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"ଟଚପେଡ, କୀବୋର୍ଡ, ଡିସପ୍ଲେ, ସାଉଣ୍ଡ"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"ଉଜ୍ଜ୍ୱଳତା, ରଙ୍ଗ, ଡାର୍କ ଥିମ, ଲକ ସ୍କ୍ରିନ, ଟେକ୍ସଟ"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"ଉଜ୍ଜ୍ୱଳତା, ରଙ୍ଗ, ଡାର୍କ ଥିମ, ଲକ ସ୍କ୍ରିନ, ଟେକ୍ସଟ, ସ୍ପର୍ଶ"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"ଉଜ୍ଜ୍ୱଳତା, ରଙ୍ଗ, ଡାର୍କ ଥିମ, ଲକ ସ୍କ୍ରିନ, ଟେକ୍ସଟ, କନେକ୍ଟ ହୋଇଥିବା ଡିସପ୍ଲେ"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"ଉଜ୍ଜ୍ୱଳତା, ରଙ୍ଗ, ଡାର୍କ ଥିମ, ଲକ ସ୍କ୍ରିନ, ଟେକ୍ସଟ, ସ୍ପର୍ଶ, କନେକ୍ଟ ହୋଇଥିବା ଡିସପ୍ଲେ"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"କୀବୋର୍ଡ ଚୟନ, ଟୁଲ"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"କର୍ସର ସ୍ପିଡ, ବଟନ କଷ୍ଟମାଇଜେସନ, ସ୍କ୍ରୋଲିଂ"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"ଭଲ୍ୟୁମ, ସ୍ପିକର, ମାଇକ୍ରୋଫୋନ"</string>
@@ -4632,53 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ଏହି ଡିଭାଇସ୍ କିମ୍ବା ଯେ କୌଣସି ସଂଯୁକ୍ତ ଥିବା ଷ୍ଟୋରେଜ୍ ଭଲ୍ୟୁମରେ ଥିବା ସମସ୍ତ ଫାଇଲକୁ ପଢ଼ିବା, ପରିବର୍ତ୍ତନ କରିବା ଏବଂ ଡିଲିଟ୍ କରିବା ପାଇଁ ଏହି ଆପକୁ ଅନୁମତି ଦିଅନ୍ତୁ। ଯଦି ଅନୁମତି ଦିଆଯାଏ, ତେବେ ଆପ୍ ଆପଣଙ୍କୁ ସ୍ପଷ୍ଟ ନକରି ଫାଇଲଗୁଡ଼ିକୁ ଆକ୍ସେସ୍ କରିପାରେ।"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"ସମସ୍ତ ଫାଇଲକୁ ଆକ୍ସେସ୍ କରିପାରିବ"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"ସ୍କ୍ରିନ ଅଟୋମେସନ"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"ଆପ୍ସ ବେକଗ୍ରାଉଣ୍ଡରେ ଥିବା ସମୟରେ ମଧ୍ୟ ଆପଣଙ୍କୁ ଟାସ୍କଗୁଡ଼ିକ ସମ୍ପୂର୍ଣ୍ଣ କରିବାରେ ସାହାଯ୍ୟ କରିବା ପାଇଁ ଏହି ଆପ ଅନ୍ୟ ଆପ୍ସର ସ୍କ୍ରିନ ବିଷୟବସ୍ତୁକୁ ଦେଖିବା ଏବଂ ସେଗୁଡ଼ିକ ସହ ଇଣ୍ଟରାକ୍ଟ କରିବାକୁ ସକ୍ଷମ ହେବ।"</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"ଆପଣଙ୍କୁ ଟାସ୍କଗୁଡ଼ିକ ସମ୍ପୂର୍ଣ୍ଣ କରିବାରେ ସାହାଯ୍ୟ କରିବା ପାଇଁ <xliff:g id="ID_1">%1$s</xliff:g> ଆପଣ ଅନୁମତି ଦେଇଥିବା ଆପ୍ସର ସ୍କ୍ରିନ ବିଷୟବସ୍ତୁକୁ ଦେଖିପାରିବ ଏବଂ ସେଗୁଡ଼ିକ ସହ ଇଣ୍ଟରାକ୍ଟ କରିପାରିବ।"</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"ଆପଣ ଅନୁମତିରେ &lt;strong&gt;ସର୍ବଦା ଅନୁମତି ଦିଅନ୍ତୁ&lt;/strong&gt; ବାଛିଥିବା ଆପ୍ସ ଏଠାରେ ଦେଖାଯାଏ। ଆପଣ &lt;strong&gt;କେବଳ ଏହି ସମୟ&lt;/strong&gt; ପାଇଁ ଅନୁମତି ଦେଇଥିବା କିମ୍ବା ଅନୁମତି ଦେଇନଥିବା ଆପ୍ସ ଦେଖାଯାଏ ନାହିଁ।"</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"ଯଦି ଆପଣ ସ୍କ୍ରିନ ଅଟୋମେସନକୁ ଅନୁମତି ଦିଅନ୍ତି ନାହିଁ, ତେବେ <xliff:g id="ID_1">%1$s</xliff:g> ଏବେ ବି ଅନ୍ୟ ଉପାୟରେ <xliff:g id="ID_2">%1$s</xliff:g> ସହ କନେକ୍ଟ ହୋଇଥିବା ଆପ୍ସ ସହ ଇଣ୍ଟରାକ୍ଟ କରିବାକୁ ସକ୍ଷମ ହୋଇପାରେ।"</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"ଆପଣ ଏହି ସ୍କ୍ରିନରେ ଏକ ଆପକୁ କାଢ଼ି ଦେଲେ, <xliff:g id="ID_1">%1$s</xliff:g> ଏବେ ବି ଅନ୍ୟ ଉପାୟରେ <xliff:g id="ID_2">%1$s</xliff:g> ସହ କନେକ୍ଟ ହୋଇଥିବା ଆପ୍ସ ସହ ଇଣ୍ଟରାକ୍ଟ କରିବାକୁ ସକ୍ଷମ ହୋଇପାରେ।"</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"ଅନ୍ୟ ଆପ୍ସର ସ୍କ୍ରିନ ବିଷୟବସ୍ତୁ ସହ ଇଣ୍ଟରାକ୍ଟ କରି ଟାସ୍କଗୁଡ଼ିକୁ ସମ୍ପୂର୍ଣ୍ଣ କରିବାରେ ଆପଣଙ୍କୁ ସାହାଯ୍ୟ କରିବା ପାଇଁ ଆପ୍ସକୁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"ଟାସ୍କଗୁଡ଼ିକୁ ସମ୍ପୂର୍ଣ୍ଣ କରିବାରେ ଆପଣଙ୍କୁ ସାହାଯ୍ୟ କରିବା ପାଇଁ ସ୍କ୍ରିନ ବିଷୟବସ୍ତୁକୁ ଦେଖିବା ଏବଂ ସେଗୁଡ଼ିକ ସହ ଇଣ୍ଟରାକ୍ଟ କରିବା ପାଇଁ ଆପ୍ସକୁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ପ୍ରତ୍ୟେକ ଥର ପଚାରନ୍ତୁ"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"ସର୍ବଦା ଅନୁମତି ଦିଅନ୍ତୁ"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"ଅନୁମତି ଦିଅନ୍ତୁ ନାହିଁ"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"ଆପଣ ଅନୁମତି ଦେଇଥିବା ଆପ୍ସ"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"ଆପଣ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ଆପ୍ସକୁ ଅନୁମତି ଦେଇନାହାଁନ୍ତି"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"ଆପଣଙ୍କ ଡିଫଲ୍ଟ ଡିଜିଟାଲ ଆସିଷ୍ଟାଣ୍ଟ ଭାବେ ଆପଣ ସେଟ କରିଥିବା ଆପ କେବଳ ସ୍କ୍ରିନ ଅଟୋମେସନକୁ ବ୍ୟବହାର କରିପାରିବ।"</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"ଆପକୁ କାଢ଼ି ଦିଆଯାଇଛି"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"ସମସ୍ତ ଆପ୍ସକୁ କାଢ଼ି ଦିଆଯାଇଛି"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Assistant ସେଟିଂସ"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 ଆପକୁ ଅନୁମତି ଦିଆଯାଇଛି}other{# ଆପ୍ସକୁ ଅନୁମତି ଦିଆଯାଇଛି}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 ଆପକୁ ଅନୁମତି ଦିଆଯାଇଛି}other{# ଆପ୍ସକୁ ଅନୁମତି ଦିଆଯାଇଛି}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"କୌଣସି ଆପ୍ସକୁ ଅନୁମତି ଦିଆଯାଇନାହିଁ"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"ସମସ୍ତ ଆପ୍ସକୁ କାଢ଼ି ଦିଅନ୍ତୁ"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"ଡିଫଲ୍ଟ ଡିଜିଟାଲ ଆସିଷ୍ଟାଣ୍ଟ"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> ସ୍କ୍ରିନ ଅଟୋମେସନକୁ ବ୍ୟବହାର କରିପାରିବ ନାହିଁ"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"ଡିଫଲ୍ଟ ଡିଜିଟାଲ ଆସିଷ୍ଟାଣ୍ଟ ହିଁ ସ୍କ୍ରିନ ଅଟୋମେସନକୁ ବ୍ୟବହାର କରିପାରିବ"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"ଆସିଷ୍ଟାଣ୍ଟ ପରିବର୍ତ୍ତନ କରନ୍ତୁ"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"ଆପଣଙ୍କୁ ଟାସ୍କଗୁଡ଼ିକ ସମ୍ପୂର୍ଣ୍ଣ କରିବାରେ ସାହାଯ୍ୟ କରିବା ପାଇଁ, ଆପଣ ଅନୁମତି ଦେଇଥିବା ଆପ୍ସର ସ୍କ୍ରିନ ବିଷୟବସ୍ତୁକୁ ଏହି ଆପ୍ସ ଦେଖିପାରିବ ଏବଂ ସେଗୁଡ଼ିକ ସହ ଇଣ୍ଟରାକ୍ଟ କରିପାରିବ।"</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"ସ୍କ୍ରିନ ଅଟୋମେସନ ବ୍ୟବହାର କରିପାରୁଥିବା କୌଣସି ଆପ୍ସ ଆପଣ ଇନଷ୍ଟଲ କରିନାହାଁନ୍ତି"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"ଆପଣଙ୍କୁ ଟାସ୍କଗୁଡ଼ିକ ସମ୍ପୂର୍ଣ୍ଣ କରିବାରେ ସାହାଯ୍ୟ କରିବା ପାଇଁ ଏହି ଆପ୍ସ <xliff:g id="ID_1">%1$s</xliff:g>ର ସ୍କ୍ରିନ ବିଷୟବସ୍ତୁକୁ ଦେଖିପାରିବ ଏବଂ ସେଗୁଡ଼ିକ ସହ ଇଣ୍ଟରାକ୍ଟ କରିପାରିବ।"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"ପୂର୍ଣ୍ଣ-ସ୍କ୍ରିନ ବିଜ୍ଞପ୍ତି"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ଏହି ଆପରୁ ପୂର୍ଣ୍ଣ-ସ୍କ୍ରିନ ବିଜ୍ଞପ୍ତିକୁ ଅନୁମତି ଦିଅନ୍ତୁ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ଡିଭାଇସ ଲକ ହେଲେ ପୂର୍ଣ୍ଣ ସ୍କ୍ରିନରେ ଦେଖାଯାଉଥିବା ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକୁ ଦେଖାଇବା ପାଇଁ ଏହି ଆପକୁ ଅନୁମତି ଦିଅନ୍ତୁ। ଆଲାରାମ, ଇନକମିଂ କଲ କିମ୍ବା ଅନ୍ୟ ଜରୁରୀ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକୁ ହାଇଲାଇଟ କରିବା ପାଇଁ ଆପ୍ସ ଏଗୁଡ଼ିକୁ ବ୍ୟବହାର କରିପାରେ।"</string>
@@ -5157,7 +5119,7 @@
     <string name="autofill_app" msgid="7595308061826307921">"ଅଟୋଫିଲ ସେବା"</string>
     <string name="default_autofill_app" msgid="372234803718251606">"ଡିଫଲ୍ଟ ଅଟୋଫିଲ ସେବା"</string>
     <string name="autofill_passwords" msgid="6708057251459761083">"ପାସୱାର୍ଡଗୁଡ଼ିକ"</string>
-    <string name="credman_chosen_app_title" msgid="7735183808067729319">"ପସନ୍ଦର ସେବା"</string>
+    <string name="credman_chosen_app_title" msgid="7735183808067729319">"ପସନ୍ଦର ସର୍ଭିସ"</string>
     <string name="credman_credentials" msgid="2620352336624160642">"ଅତିରିକ୍ତ ସେବା"</string>
     <string name="autofill_passwords_count" msgid="6359289285822955973">"{count,plural, =1{#ଟି ପାସୱାର୍ଡ}other{#ଟି ପାସୱାର୍ଡ}}"</string>
     <string name="autofill_keywords" msgid="8598763328489346438">"ସ୍ୱତଃ, ପୂରଣ, ସ୍ୱତଃପୂରଣ, ପାସୱାର୍ଡ"</string>
@@ -5169,7 +5131,7 @@
     <string name="autofill_confirmation_message" msgid="4888767934273494272">"&lt;b&gt;ଆପଣ ଏହି ଆପ୍‌କୁ ବିଶ୍ୱାସ କରୁଥିବା ନିଶ୍ଚିତ କରନ୍ତୁ&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; &lt;xliff:g id=app_name example=Google Autofill&gt;%1$s&lt;/xliff:g&gt; କ\'ଣ ଅଟୋଫିଲ୍‌ କରାଯାଇପାରିବ ନିର୍ଦ୍ଧାରଣ କରିବା ପାଇଁ, Google Autofill ଆପଣଙ୍କ ସ୍କ୍ରୀନ୍‌ରେ ଯାହା ଥାଏ, ତାହା ବ୍ୟବହାର କରେ।"</string>
     <string name="credman_autofill_confirmation_message" msgid="843829628024668466">"&lt;b&gt;Use &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt;?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ବର୍ତ୍ତମାନଠାରୁ ନୂଆ ପାସୱାର୍ଡ, ପାସକୀ ଏବଂ ଅନ୍ୟ ସୂଚନା ଏଠାରେ ସେଭ ହେବ। କଣ ଅଟୋଫିଲ କରାଯାଇପାରିବ ତାହା ସ୍ଥିର କରିବାକୁ &lt;xliff:g id=app_name example=Provider&gt;%1$s&lt;/xliff:g&gt; ଆପଣଙ୍କ ସ୍କ୍ରିନରେ ଯାହା ଥାଏ ତାକୁ ବ୍ୟବହାର କରିପାରେ।"</string>
     <string name="credman_picker_title" msgid="8442086614222006564">"ପାସୱାର୍ଡ, ପାସକୀ ଏବଂ ଅଟୋଫିଲ ପାଇଁ ପସନ୍ଦର ସେବା"</string>
-    <string name="credman_picker_title_new" msgid="4292105803864397398">"ପସନ୍ଦର ସେବା"</string>
+    <string name="credman_picker_title_new" msgid="4292105803864397398">"ପସନ୍ଦର ସର୍ଭିସ"</string>
     <string name="credman_picker_page_summary" msgid="4633938046738617332">"ସାଇନ-ଇନ ଏବଂ ଅଟୋଫିଲ ପରାମର୍ଶଗୁଡ଼ିକ ପାଇଁ ଡାଟା ସେଭ କରିବାକୁ ଆପଣଙ୍କ ପସନ୍ଦର ସେବା ବାଛନ୍ତୁ"</string>
     <string name="credman_confirmation_message_title" msgid="8847900085593880729">"%1$s ବନ୍ଦ କରିବେ?"</string>
     <string name="credman_confirmation_message" msgid="2357324543658635239">"&lt;b&gt;ଏହି ସେବାକୁ ବନ୍ଦ କରିବେ?&lt;/b&gt; &lt;br/&gt; &lt;br/&gt; ଆପଣ ସାଇନ ଇନ କରିବା ସମୟରେ ପାସୱାର୍ଡ, ପାସକୀ, ପେମେଣ୍ଟ ପଦ୍ଧତି ପରି ସେଭ କରାଯାଇଥିବା ସୂଚନା ଏବଂ ଅନ୍ୟ ସୂଚନା ପୂରଣ ହେବ ନାହିଁ। ଆପଣଙ୍କ ସେଭ କରାଯାଇଥିବା ସୂଚନା ବ୍ୟବହାର କରିବାକୁ ଏକ ପାସୱାର୍ଡ, ପାସକୀ କିମ୍ବା ଡାଟା ସେବା ବାଛନ୍ତୁ।"</string>
@@ -5187,7 +5149,7 @@
     <string name="credman_confirmation_change_provider_positive_button" msgid="7732302992885116967">"ପରିବର୍ତ୍ତନ କରନ୍ତୁ"</string>
     <string name="credman_limit_error_msg_title" msgid="1525814645803612135">"ଏଥିରେ ଆପଣ କେବଳ 5 ସେବା ରଖିପାରିବେ"</string>
     <string name="credman_limit_error_msg" msgid="2521803280130310063">"ଅନ୍ୟ ଏକ ସେବା ଯୋଗ କରିବାକୁ ଅତି କମରେ 1 ସେବାକୁ ବନ୍ଦ କରନ୍ତୁ"</string>
-    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"ସାଇନ-ଇନ ଏବଂ ଅଟୋଫିଲ ପରାମର୍ଶଗୁଡ଼ିକ ପାଇଁ ଡାଟା ସେଭ କରିବାକୁ ଆପଣଙ୍କ ପସନ୍ଦର ସର୍ଭିସ ବାଛନ୍ତୁ। ସେମାନେ ମଧ୍ୟ ପରାମର୍ଶ ପ୍ରଦାନ କରନ୍ତୁ ବୋଲି ଯଦି ଆପଣ ଚାହାଁନ୍ତି ତେବେ ଅତିରିକ୍ତ ସେବାଗୁଡ଼ିକୁ ଚାଲୁ କରନ୍ତୁ।"</string>
+    <string name="credman_main_settings_intro_text" msgid="4981603639240772620">"ସାଇନ-ଇନ ଏବଂ ଅଟୋଫିଲ ପରାମର୍ଶଗୁଡ଼ିକ ପାଇଁ ଡାଟା ସେଭ କରିବାକୁ ଆପଣଙ୍କ ପସନ୍ଦର ସର୍ଭିସ ବାଛନ୍ତୁ। ସେମାନେ ମଧ୍ୟ ପରାମର୍ଶ ପ୍ରଦାନ କରନ୍ତୁ ବୋଲି ଯଦି ଆପଣ ଚାହାଁନ୍ତି ତେବେ ଅତିରିକ୍ତ ସର୍ଭିସଗୁଡ଼ିକୁ ଚାଲୁ କରନ୍ତୁ।"</string>
     <string name="credman_enable_confirmation_message" msgid="8407841892310870169">"କଣ ଅଟୋଫିଲ କରାଯାଇପାରିବ ତାହା ସ୍ଥିର କରିବାକୁ %1$s ଆପଣଙ୍କ ସ୍କ୍ରିନରେ ଯାହା ଥାଏ ତାକୁ ବ୍ୟବହାର କରେ।"</string>
     <string name="credman_error_message_title" msgid="4099557206946333568">"ପାସୱାର୍ଡ, ପାସକୀ ଏବଂ ଡାଟା ସେବାଗୁଡ଼ିକର ସୀମା"</string>
     <string name="credman_error_message" msgid="8334797097200415449">"ସମାନ ସମୟରେ ଆପଣ 5 ପର୍ଯ୍ୟନ୍ତ ପାସୱାର୍ଡ, ପାସକୀ ଏବଂ ଡାଟା ସେବାକୁ ସକ୍ରିୟ ରଖିପାରିବେ। ଅଧିକ ଯୋଗ କରିବା ପାଇଁ ଏକ ସେବାକୁ ବନ୍ଦ କରନ୍ତୁ।"</string>
@@ -5804,7 +5766,7 @@
     <string name="camera_toggle_title" msgid="8952668677727244992">"କେମେରା ଆକ୍ସେସ"</string>
     <string name="mic_toggle_title" msgid="265145278323852547">"ମାଇକ୍ରୋଫୋନ୍ ଆକ୍ସେସ୍"</string>
     <string name="perm_toggle_description" msgid="5754629581767319022">"ଆପ୍ସ ଓ ସର୍ଭିସେସ ପାଇଁ"</string>
-    <string name="mic_toggle_description" msgid="484139688645092237">"ଆପ ଓ ସେବାଗୁଡ଼ିକ ପାଇଁ। ଯଦି ଏହି ସେଟିଂ ବନ୍ଦ ଥାଏ, ତେବେ ଆପଣ ଏକ ଜରୁରୀକାଳୀନ ନମ୍ବରକୁ କଲ କରିବା ସମୟରେ ମାଇକ୍ରୋଫୋନ ଡାଟା ଏବେ ବି ସେୟାର କରାଯାଇପାରେ।"</string>
+    <string name="mic_toggle_description" msgid="484139688645092237">"ଆପ ଓ ସର୍ଭିସଗୁଡ଼ିକ ପାଇଁ। ଯଦି ଏହି ସେଟିଂ ବନ୍ଦ ଥାଏ, ତେବେ ଆପଣ ଏକ ଜରୁରୀକାଳୀନ ନମ୍ବରକୁ କଲ କରିବା ସମୟରେ ମାଇକ୍ରୋଫୋନ ଡାଟା ଏବେ ବି ସେୟାର କରାଯାଇପାରେ।"</string>
     <string name="previous_page_content_description" msgid="6438292457923282991">"ପୂର୍ବବର୍ତ୍ତୀ"</string>
     <string name="next_page_content_description" msgid="1641835099813416294">"ପରବର୍ତ୍ତୀ"</string>
     <string name="colors_viewpager_content_description" msgid="2591751086138259565">"ରଙ୍ଗ ପ୍ରିଭ୍ୟୁ"</string>
@@ -5862,8 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"ଆପ ଅନଇନଷ୍ଟଲ କରନ୍ତୁ"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{ଗତ # ମାସରେ ଇନଷ୍ଟଲ କରାଯାଇଥିବା ଆପ୍ସ}other{ଗତ # ମାସରେ ଇନଷ୍ଟଲ କରାଯାଇଥିବା ଆପ୍ସ}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{# ମାସରୁ ଅଧିକ ସମୟ ପୂର୍ବେ ଇନଷ୍ଟଲ କରାଯାଇଥିବା ଆପ୍ସ}other{# ମାସରୁ ଅଧିକ ସମୟ ପୂର୍ବେ ଇନଷ୍ଟଲ କରାଯାଇଥିବା ଆପ୍ସ}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI ସହାୟତା"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"ସକ୍ରିୟ ସହାୟତା"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"ସ୍କ୍ରିନ ଆକ୍ସେସ"</string>
+    <string name="personal_context_title" msgid="5665514384061696635">"ସ୍କ୍ରିନ ପ୍ରସଙ୍ଗ"</string>
     <string name="personal_context_switch_summary" msgid="917644125592480347">"ପରାମର୍ଶଗୁଡ଼ିକ ତିଆରି କରିବାକୁ ଏହି ଆପ ସୂଚନା କଣ୍ଟ୍ରିବ୍ୟୁଟ କରିପାରିବ ନା ନାହିଁ ତାହା ବାଛନ୍ତୁ"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"ଚଉଡ଼ା ଓ ଉଚ୍ଚତାର ଅନୁପାତ"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"ଆପଣଙ୍କ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> ସହ ଫିଟ ହେବା ପାଇଁ ଯଦି ଏହି ଆପକୁ ଡିଜାଇନ କରାଯାଇନାହିଁ ତେବେ ଏହାକୁ ଭ୍ୟୁ କରିବା ପାଇଁ ଏକ ନୂଆ ଚଉଡ଼ା ଓ ଉଚ୍ଚତାର ଅନୁପାତ ବ୍ୟବହାର କରି ଦେଖନ୍ତୁ"</string>
@@ -5883,6 +5845,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"ଆପଣ ଚଉଡ଼ା ଓ ଉଚ୍ଚତାର ଅନୁପାତ ପରିବର୍ତ୍ତନ କଲେ ଏହି ଆପଟି ରିଷ୍ଟାର୍ଟ ହେବ। ଆପଣ ସେଭ କରାଯାଇନଥିବା ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ହରାଇପାରନ୍ତି। ନିର୍ଦ୍ଦିଷ୍ଟ ଚଉଡ଼ା ଓ ଉଚ୍ଚତାର ଅନୁପାତ ପାଇଁ କିଛି ଆପ୍ସ ଅପ୍ଟିମାଇଜ ହୋଇନପାରେ।"</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"ଅନୁଭୂତି"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"ଭର୍ଚୁଆଲ ଗେମପେଡ"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ସୁନିଶ୍ଚିତ କରିବା ପାଇଁ ଆପଣଙ୍କ ଗେମକୁ ରିଷ୍ଟାର୍ଟ କରନ୍ତୁ"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"ଟିପଚିହ୍ନ ସେନ୍ସର"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"ଫ୍ଲାସ ବିଜ୍ଞପ୍ତି"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ଫ୍ଲାସ ବିଜ୍ଞପ୍ତିଗୁଡ଼ିକ ବିଷୟରେ"</string>
@@ -6180,7 +6143,7 @@
     <string name="device_finders_subpage_title" msgid="2635718540485825070">"ହଜିଯାଇଥିବା ଡିଭାଇସର ସୁରକ୍ଷା"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"ସିଷ୍ଟମ ଏବଂ ଅପଡେଟ"</string>
     <string name="location_settings" msgid="6833222354060094170">"ଲୋକେସନ ଆକ୍ସେସ"</string>
-    <string name="location_settings_subtitle" msgid="8471780117911010030">"ଲୋକେସନକୁ ଆକ୍ସେସ ଥିବା ଆପ୍ସ ଏବଂ ସେବାଗୁଡ଼ିକୁ ଦେଖନ୍ତୁ"</string>
+    <string name="location_settings_subtitle" msgid="8471780117911010030">"ଲୋକେସନକୁ ଆକ୍ସେସ ଥିବା ଆପ୍ସ ଏବଂ ସର୍ଭିସଗୁଡ଼ିକୁ ଦେଖନ୍ତୁ"</string>
     <string name="identity_check_notification_title" msgid="8004343932775654492">"ପରିଚୟ ଯାଞ୍ଚ ଅଧିକ ଆପ୍ସ ସହ କାମ କରେ"</string>
     <string name="identity_check_watch_notification_title" msgid="5559702400315647907">"ପରିଚୟ ଯାଞ୍ଚ ଏବଂ ଆପଣଙ୍କ ୱାଚ"</string>
     <string name="identity_check_watch_notification_summary" msgid="3200144847521451493">"ଏକ କନେକ୍ଟ ହୋଇଥିବା ୱାଚ ସହିତ, ପରିଚୟ ଯାଞ୍ଚ ଆପ୍ସକୁ ଅନାବଶ୍ୟକ ଆକ୍ସେସ ପ୍ରତିରୋଧ କରିବା ପାଇଁ ଏହା ଆପଣ ବୋଲି ଯାଞ୍ଚ କରିବାର ଅଧିକ ଉପାୟ ଯୋଗ କରେ"</string>
