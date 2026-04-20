@@ -29,6 +29,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.settings.R
 import com.android.settings.network.SatelliteRepository
+import com.android.settings.network.telephony.AirplaneModeRepository
 import com.android.settings.network.telephony.MobileDataRepository
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.flow.emptyFlow
@@ -54,6 +55,9 @@ class MobileDataSwitchPreferenceTest {
     private val mockSatelliteRepository =
         mock<SatelliteRepository> { on { getIsSessionStartedFlow() } doReturn flowOf(false) }
 
+    private val mockAirplaneModeRepository =
+        mock<AirplaneModeRepository> { on { airplaneModeChangedFlow() } doReturn flowOf(false) }
+
     @Test
     fun title_displayed() {
         composeTestRule.setContent {
@@ -62,6 +66,7 @@ class MobileDataSwitchPreferenceTest {
                     SUB_ID,
                     mockMobileDataRepository,
                     mockSatelliteRepository,
+                    mockAirplaneModeRepository,
                 ) {}
             }
         }
@@ -79,6 +84,7 @@ class MobileDataSwitchPreferenceTest {
                     SUB_ID,
                     mockMobileDataRepository,
                     mockSatelliteRepository,
+                    mockAirplaneModeRepository,
                 ) {}
             }
         }
@@ -100,6 +106,7 @@ class MobileDataSwitchPreferenceTest {
                     SUB_ID,
                     mockMobileDataRepository,
                     mockSatelliteRepository,
+                    mockAirplaneModeRepository,
                 ) {
                     newCheckedCalled = it
                 }
@@ -127,6 +134,7 @@ class MobileDataSwitchPreferenceTest {
                     SUB_ID,
                     mockMobileDataRepository,
                     mockSatelliteRepository,
+                    mockAirplaneModeRepository,
                 ) {}
             }
         }
@@ -148,6 +156,7 @@ class MobileDataSwitchPreferenceTest {
                     SUB_ID,
                     mockMobileDataRepository,
                     mockSatelliteRepository,
+                    mockAirplaneModeRepository,
                 ) {}
             }
         }
@@ -155,6 +164,31 @@ class MobileDataSwitchPreferenceTest {
         composeTestRule
             .onNodeWithText(context.getString(R.string.mobile_data_settings_title))
             .assertIsEnabled()
+    }
+
+    @Test
+    fun changeable_airplaneModeOn_notEnabled() {
+        mockMobileDataRepository.stub {
+            on { isMobileDataEnabledFlow(SUB_ID) } doReturn flowOf(true)
+        }
+        mockAirplaneModeRepository.stub {
+            on { airplaneModeChangedFlow() } doReturn flowOf(true)
+        }
+
+        composeTestRule.setContent {
+            CompositionLocalProvider(LocalContext provides context) {
+                MobileDataSwitchPreference(
+                    SUB_ID,
+                    mockMobileDataRepository,
+                    mockSatelliteRepository,
+                    mockAirplaneModeRepository,
+                ) {}
+            }
+        }
+
+        composeTestRule
+            .onNodeWithText(context.getString(R.string.mobile_data_settings_title))
+            .assertIsNotEnabled()
     }
 
     private companion object {
