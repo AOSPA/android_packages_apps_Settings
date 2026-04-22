@@ -203,6 +203,8 @@ class SatelliteTilePromptUtilsTest {
             assertThat(smallIcon.resId).isEqualTo(R.drawable.ic_satellite_tile)
             assertThat(flags and Notification.FLAG_AUTO_CANCEL)
                 .isEqualTo(Notification.FLAG_AUTO_CANCEL)
+            assertThat(flags and Notification.FLAG_LOCAL_ONLY)
+                .isEqualTo(Notification.FLAG_LOCAL_ONLY)
 
             assertPendingIntent(contentIntent)
             assertPendingIntent(actions[0].actionIntent)
