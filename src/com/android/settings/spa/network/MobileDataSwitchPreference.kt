@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.settings.R
 import com.android.settings.network.SatelliteRepository
+import com.android.settings.network.telephony.AirplaneModeRepository
 import com.android.settings.network.telephony.MobileDataRepository
 import com.android.settings.network.telephony.subscriptionManager
 import com.android.settingslib.spa.framework.compose.HighlightBox
@@ -52,6 +53,7 @@ fun MobileDataSwitchPreference(subId: Int) {
             subId = subId,
             mobileDataRepository = rememberContext(::MobileDataRepository),
             satelliteRepository = rememberContext(::SatelliteRepository),
+            airplaneModeRepository = rememberContext(::AirplaneModeRepository),
             setMobileData = setMobileDataImpl(subId),
         )
     }
@@ -63,6 +65,7 @@ fun MobileDataSwitchPreference(
     subId: Int,
     mobileDataRepository: MobileDataRepository,
     satelliteRepository: SatelliteRepository,
+    airplaneModeRepository: AirplaneModeRepository,
     setMobileData: (newChecked: Boolean) -> Unit,
 ) {
     val mobileDataSummary = stringResource(id = R.string.mobile_data_settings_summary)
@@ -72,6 +75,9 @@ fun MobileDataSwitchPreference(
     val satelliteStarted by remember {
         satelliteRepository.getIsSessionStartedFlow()
     }.collectAsStateWithLifecycle(initialValue = false)
+    val isAirplaneModeOn by remember {
+        airplaneModeRepository.airplaneModeChangedFlow()
+    }.collectAsStateWithLifecycle(initialValue = false)
     SwitchPreference(
         object : SwitchPreferenceModel {
             override val title = stringResource(id = R.string.mobile_data_settings_title)
@@ -79,7 +85,7 @@ fun MobileDataSwitchPreference(
             override val checked = { isMobileDataEnabled }
             override val onCheckedChange = setMobileData
             override val changeable: () -> Boolean
-                get() = { !satelliteStarted }
+                get() = { !satelliteStarted && !isAirplaneModeOn }
         }
     )
 }
