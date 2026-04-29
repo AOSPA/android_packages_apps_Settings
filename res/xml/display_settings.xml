@@ -87,7 +87,7 @@
             android:fragment="com.android.settings.display.ScreenTimeoutSettings"
             settings:controller="com.android.settings.display.ScreenTimeoutPreferenceController"/>
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:key="pocket_judge"
             android:title="@string/proximity_wake_title"
             android:summary="@string/proximity_wake_summary" />
