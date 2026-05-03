@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"T\'has connectat a una xarxa WEP. Si deixes de permetre aquestes xarxes, perdràs la connexió."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Opcions avançades"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Llista desplegable Opcions avançades"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"desplega"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"desplega"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"replega"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Nom de la xarxa*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Introdueix l\'SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Seguretat"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"Els PIN no coincideixen. Confirma el PIN de la SIM nou."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"El PIN no és correcte. Intents restants: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Introdueix el codi PIN actual de la targeta SIM"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Primera ranura de la targeta SIM"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Segona ranura de la targeta SIM"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Utilitzar <xliff:g id="CARRIER">%1$s</xliff:g> per a dades mòbils?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Estàs utilitzant <xliff:g id="CARRIER2_0">%2$s</xliff:g> per a les dades mòbils. Si canvies a <xliff:g id="CARRIER1">%1$s</xliff:g>, ja no es farà servir <xliff:g id="CARRIER2_1">%2$s</xliff:g> per a les dades mòbils."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Utilitza <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2208,31 +2207,19 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Personalitza les accions que activen els botons del comandament"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Botons"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Indicacions"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"Botó A"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"Botó B"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"Botó X"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Botó Y"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"Botó L1"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"Botó R1"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"Botó L2"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"Botó R2"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Clic a la palanca esquerra"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Clic a la palanca dreta"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"Creu direccional"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Palanca esquerra"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Palanca dreta"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Restableix els valors predeterminats"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Vols restablir els valors predeterminats?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Totes les opcions de configuració del comandament es restabliran als valors predeterminats"</string>
@@ -2308,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Notificacions"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Configuració ràpida"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Nota"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Mostra/Amaga l\'escriptori"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Tria una drecera per a l’<xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"extrem inferior esquerre"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"extrem inferior dret"</string>
@@ -3650,12 +3638,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Dispositiu"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Ratolí tàctil, teclat, pantalla, so"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Brillantor, color, tema fosc, pantalla de bloqueig, text"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Brillantor, color, tema fosc, pantalla de bloqueig, text, funció tàctil"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Brillantor, color, tema fosc, pantalla de bloqueig, text, pantalla connectada"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Brillantor, color, tema fosc, pantalla de bloqueig, text, funció tàctil, pantalla connectada"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Selecció de teclat, eines"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Velocitat del cursor, personalització dels botons, desplaçament"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Volum, altaveus, micròfons"</string>
@@ -3995,7 +3980,7 @@
     <string name="notification_summarization_no_apps_desc" msgid="6058658379217986963">"Actualment, totes les aplicacions aplicables utilitzen resums de notificacions"</string>
     <string name="live_notifications" msgid="4650406646292963831">"Notificacions en temps real"</string>
     <string name="live_notifications_switch" msgid="7745275403210881110">"Actualitzacions en temps real"</string>
-    <string name="live_notifications_desc" msgid="6857161077319125625">"Mostra les notificacions en curs i les notificacions importants a la barra d\'estat i a la pantalla de bloqueig"</string>
+    <string name="live_notifications_desc" msgid="6857161077319125625">"Mostra les notificacions en curs de caràcter urgent a la barra d\'estat i a la pantalla de bloqueig"</string>
     <string name="notification_bubbles_title" msgid="5681506665322329301">"Bombolles"</string>
     <string name="bubbles_app_toggle_title" msgid="5319021259954576150">"Bombolles"</string>
     <string name="bubbles_conversation_toggle_title" msgid="5225039214083311316">"Mostra aquesta conversa com a bombolla"</string>
@@ -4107,7 +4092,7 @@
     <string name="manage_notification_access_summary" msgid="2907135226478903997">"Controla quins dispositius i aplicacions poden llegir notificacions"</string>
     <string name="work_profile_notification_access_blocked_summary" msgid="8643809206612366067">"S\'ha bloquejat l\'accés a les notificacions del perfil de treball"</string>
     <string name="notification_assistant_title" msgid="5889201903272393099">"Notificacions millorades"</string>
-    <string name="notification_assistant_summary" msgid="1957783114840908887">"Rep accions suggerides, respostes i més"</string>
+    <string name="notification_assistant_summary" msgid="1957783114840908887">"Rep accions i respostes suggerides, i més"</string>
     <string name="no_notification_assistant" msgid="2533323397091834096">"Cap"</string>
     <string name="no_notification_listeners" msgid="2839354157349636000">"Cap aplicació instal·lada no ha sol·licitat accés a les notificacions."</string>
     <string name="notification_access_detail_switch" msgid="46386786409608330">"Permet l\'accés a les notificacions"</string>
@@ -4631,58 +4616,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Permet que aquesta aplicació llegeixi, modifiqui i suprimeixi tots els fitxers d\'aquest dispositiu o de qualsevol volum d\'emmagatzematge connectat. L\'aplicació podrà accedir als fitxers sense el teu coneixement explícit."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Pot accedir a tots els fitxers"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Automatització de la pantalla"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Aquesta aplicació podrà veure el contingut de la pantalla d\'altres aplicacions i interaccionar-hi per ajudar-te a completar tasques, fins i tot quan les aplicacions estiguin en segon pla."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> pot veure el contingut de la pantalla de les aplicacions que has permès i interaccionar-hi per ajudar-te a completar tasques."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Aquí es mostren les aplicacions per a les quals has triat &lt;strong&gt;Permet sempre&lt;/strong&gt; als permisos. No es mostren les aplicacions per a les quals has triat &lt;strong&gt;Només aquesta vegada&lt;/strong&gt; o que no has permès."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Si no permets l\'automatització de pantalla, és possible que <xliff:g id="ID_1">%1$s</xliff:g> pugui continuar interaccionant d\'altres maneres amb les aplicacions que estan connectades a <xliff:g id="ID_2">%1$s</xliff:g>."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Si suprimeixes una aplicació en aquesta pantalla, és possible que <xliff:g id="ID_1">%1$s</xliff:g> pugui continuar interaccionant d\'altres maneres amb les aplicacions que estan connectades a <xliff:g id="ID_2">%1$s</xliff:g>."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Permet que les aplicacions t\'ajudin a completar tasques interaccionant amb el contingut de la pantalla d\'altres aplicacions"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Permet que les aplicacions vegin el contingut de la pantalla i hi interaccionin per ajudar-te a completar tasques"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Pregunta sempre"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Permet sempre"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"No permetis"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Aplicacions que has permès"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Encara no has permès cap aplicació"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Només l\'aplicació que hagis establert com a assistent digital predeterminat pot utilitzar l\'automatització de pantalla."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"S\'ha suprimit l\'aplicació"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"S\'han suprimit totes les aplicacions"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Configuració de l\'assistent"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 aplicació permesa}other{# aplicacions permeses}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 aplicació permesa}other{# aplicacions permeses}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Cap aplicació amb permís"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Suprimeix totes les aplicacions"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Assistent digital predeterminat"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> no pot utilitzar l\'automatització de pantalla"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Només el teu assistent digital predeterminat pot utilitzar l\'automatització de pantalla"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Canvia d\'assistent"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Aquestes aplicacions poden veure el contingut de la pantalla de les aplicacions que has permès i interaccionar-hi per ajudar-te a completar tasques."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"No has instal·lat cap aplicació que pugui utilitzar l\'automatització de pantalla"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Aquestes aplicacions poden veure el contingut de la pantalla de <xliff:g id="ID_1">%1$s</xliff:g> i interaccionar-hi per ajudar-te a completar tasques."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Notificacions de pantalla completa"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Permet les notificacions de pantalla completa d\'aquesta aplicació"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Permet que aquesta aplicació mostri notificacions que ocupen tota la pantalla quan el dispositiu està bloquejat. Les aplicacions poden utilitzar aquesta opció per destacar alarmes, trucades entrants o altres notificacions urgents."</string>
@@ -5779,12 +5739,12 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> necessita una connexió 2G disponible"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"Permet només xarxes encriptades"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"Aquesta opció és més segura, però pot ser que limiti la connexió de xarxa mòbil en algunes ubicacions. Les trucades d\'emergència sempre estan permeses."</string>
-    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Vols desactivar la protecció contra xarxes 2G?"</string>
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"Vols desactivar la protecció de xarxes 2G?"</string>
     <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"Les xarxes 2G són menys segures i, si ho desactives, les trucades, els missatges i les dades seran vulnerables a robatoris"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"Desactiva"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"Protecció contra xarxes 2G"</string>
-    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"La protecció contra xarxes 2G està activada"</string>
-    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"Pots desactivar-ho a Configuració però les xarxes 2G són menys segures per a les dades"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"La protecció de xarxes 2G està activada"</string>
+    <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"Pots desactivar-ho a Configuració, però les xarxes 2G són menys segures i poden posar les teves dades en risc"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"Configuració"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"Tots els serveis"</string>
     <string name="show_clip_access_notification" msgid="7782300987639778542">"Mostra l\'accés al porta-retalls"</string>
@@ -5866,9 +5826,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Desinstal·la l\'aplicació"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Aplicacions instal·lades en el # darrer mes}other{Aplicacions instal·lades en els # darrers mesos}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Aplicacions instal·lades fa més d’# mes}other{Aplicacions instal·lades fa més de # mesos}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"Assistència d\'IA"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Assistència proactiva"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"Tria si aquesta aplicació pot aportar informació per generar suggeriments"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Accés a la pantalla"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"Permet l\'accés al contingut en pantalla d\'aquesta aplicació per obtenir ajuda proactiva"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Relació d\'aspecte"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Prova una nova relació d\'aspecte per veure aquesta aplicació en cas que no s\'hagi dissenyat per adaptar-se al teu dispositiu (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>)"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Prova una nova relació d\'aspecte per veure aquesta aplicació en cas que no s\'hagi dissenyat per adaptar-se al teu dispositiu (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>). Pot ser que algunes aplicacions no estiguin optimitzades per a determinades relacions d\'aspecte."</string>
@@ -5887,6 +5846,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"L\'aplicació es reiniciarà quan canviïs la relació d\'aspecte. És possible que es perdin els canvis sense desar. Pot ser que algunes aplicacions no estiguin optimitzades per a determinades relacions d\'aspecte."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Experiència"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Comandament de joc virtual"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Reinicia el joc per confirmar els canvis"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Sensor d\'empremtes digitals"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Notificacions amb flaix"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Sobre les notificacions amb flaix"</string>

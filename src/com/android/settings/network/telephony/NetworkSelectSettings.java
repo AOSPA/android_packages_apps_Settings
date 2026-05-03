@@ -15,12 +15,8 @@
  */
 
 /*
-// QTI_BEGIN: 2024-06-18: Telephony: Start SubscriptionsChangeListener on PLMN search.
- * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
-// QTI_END: 2024-06-18: Telephony: Start SubscriptionsChangeListener on PLMN search.
-// QTI_BEGIN: 2025-06-23: Telephony: Use selected plmn name as summary of choose network am: 0f4a28c31f am: 0f4a28c31f
- * Copyright (c) 2022-2025 Qualcomm Innovation Center, Inc. All rights reserved.
-// QTI_END: 2025-06-23: Telephony: Use selected plmn name as summary of choose network am: 0f4a28c31f am: 0f4a28c31f
+ * ​​​Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
 
@@ -289,7 +285,11 @@ public class NetworkSelectSettings extends DashboardFragment implements
         mNetworkSelectRepository.launchUpdateNetworkRegistrationInfo(
                 getViewLifecycleOwner(),
                 (info) -> {
-                    forceUpdateConnectedPreferenceCategory(info);
+                    if (!MobileNetworkSettings.isOnLteNb1(mSubId)) {
+                        forceUpdateConnectedPreferenceCategory(info);
+                    } else {
+                        Log.d(TAG, "On NB-TN, skip force updating connected pref...");
+                    }
                     return Unit.INSTANCE;
                 });
         launchNetworkScan();
@@ -600,7 +600,8 @@ public class NetworkSelectSettings extends DashboardFragment implements
             }
             pref.setKey(pref.getOperatorName());
 
-            if (mCellInfoList.get(index).isRegistered()) {
+            if (mCellInfoList.get(index).isRegistered()
+                    && !MobileNetworkSettings.isOnLteNb1(mSubId)) {
                 pref.setSummary(R.string.network_connected);
             } else {
                 pref.setSummary(null);

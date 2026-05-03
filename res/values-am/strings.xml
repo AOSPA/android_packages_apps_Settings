@@ -627,7 +627,7 @@
     <string name="security_settings_fingerprint_enroll_lift_touch_again" msgid="2590665137265458789">"ጣትዎን ያንሱ፣ ከዚያ በድጋሚ ዳሳሽ ይንኩ"</string>
     <string name="security_settings_fingerprint_bad_calibration_title" msgid="3073145395701953620">"የጣት አሻራ ዳሳሽን መጠቀም አይቻልም"</string>
     <string name="security_settings_fingerprint_bad_calibration" msgid="304585658839584958">"የጥገና አገልግሎት ሰጪን ይጎብኙ።"</string>
-    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"ማያ ገፅ ጠፍቶ በጣት አሻራ መክፈቻ"</string>
+    <string name="security_settings_screen_off_unlock_udfps_title" msgid="3862344421345708607">"ማያ ገጽ ጠፍቶ በጣት አሻራ መክፈቻ"</string>
     <string name="security_settings_screen_off_unlock_udfps_description" msgid="6950375823241861147">"ማያ ገፁ በሚጠፋበት ጊዜ እንኳን በጣት አሻራ መክፈቻ ይጠቀሙ"</string>
     <string name="security_settings_screen_off_unlock_udfps_keywords" msgid="7550893353934831569">"ማያ ገፅ ጠፍቷል፣ ክፈት"</string>
     <string name="security_advanced_settings" msgid="6260756619837834042">"ተጨማሪ የደህንነት ቅንብሮች"</string>
@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"ከWEP አውታረ መረብ ጋር ተገናኝተዋል። እነዚህን አውታረ መረቦች መፍቀድ ካቆሙ ይቋረጣሉ።"</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"የላቁ አማራጮች"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"የተቆልቋይ ዝርዝር የላቁ አማራጮች"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"ዘርጋ"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"ዘርጋ"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"ሰብስብ"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"የአውታረ መረብ ስም*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID ያስገቡ"</string>
     <string name="wifi_security" msgid="9095934643631406913">"ደህንነት"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"ፒኖቹ አይዛመዱም። አዲሱን የሲም ፒን ያረጋግጡ።"</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"የተሳሳተ ፒን። ቀሪ ሙከራዎች፦ <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"የSIM ካርዱን የአሁን ፒን ኮድ ያስገቡ"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"የመጀመሪያው የSIM ካርድ ማስገቢያ"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"ሁለተኛ የSIM ካርድ ማስገቢያ"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"ለተንቀሳቃሽ ውሂብ <xliff:g id="CARRIER">%1$s</xliff:g> ን ይጠቀም?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"ለተንቀሳቃሽ ውሂብ <xliff:g id="CARRIER2_0">%2$s</xliff:g> ን እየተጠቀሙ ነዎት። ወደ <xliff:g id="CARRIER1">%1$s</xliff:g> ከቀየሩ፣ <xliff:g id="CARRIER2_1">%2$s</xliff:g> ከእንግዲህ ለተንቀሳቃሽ ውሂብ ጥቅም ላይ አይውልም።"</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g>ን ይጠቀሙ"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"በመቆጣጠሪያዎ አዝራሮች የሚቀሰቀሱትን እርምጃዎች ያብጁ"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"አዝራሮች"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"አቅጣጫዎች"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A አዝራር"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B አዝራር"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X አዝራር"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y አዝራር"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 አዝራር"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 አዝራር"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 አዝራር"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 አዝራር"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"የግራ ዘንግ ጠቅታ"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"የቀኝ ዘንግ ጠቅታ"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-ሰሌዳ"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"የግራ ዘንግ"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"የቀኝ ዘንግ"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"ወደ ነባሪ ዳግም አስጀምር"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"ወደ ነባሪ ዳግም ይጀምር?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"ሁሉም የመቆጣጠሪያ ቅንብሮችዎ ወደ ነባሪ ዳግም ይጀምራሉ"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"ዳግም አስጀምር"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"በአሁኑ ጊዜ ለ<xliff:g id="ACTUAL_VALUE">%1$s</xliff:g> ተመድቧል"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"የመዳሰሻ ሰሌዳ"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"የመዳሰሻ ሰሌዳ እና መዳፊት"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"መዳፊት"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"ማሳወቂያዎች"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"ፈጣን ቅንብሮች"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"ማስታወሻ"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"የዴስክቶፕ ፈጣን ዕይታ/ፈጣን ዕይታን አቁም"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"ለ<xliff:g id="CORNER">%1$s</xliff:g> አቅጣጫ ይምረጡ"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"ከታች ግራ ጥግ"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"ከታች ቀኝ ጥግ"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"የባህሪ ጥቆማዎች"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"የብሉቱዝ ቁልሎች ምዝግብ ማስታወሻን አንቃ"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"የብሉቱዝ ቁልሎች ምዝግብ ማስታወሻ ደረጃን ይቀይሩ (ይህን ቅንብር ከቀየሩ በኋላ ብሉቱዝን ይቀያይሩ)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"የBluetooth HCI snoop log ሶኬትን ያንቁ"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"የBluetooth HCI snoop logን በአካባቢያዊ ሶኬት ላይ እንዲገኝ ያድርጉ"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"የብሉቱዝ HCI snoop ምዝግብ ማስታወሻ ማጣራት"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"ማጣሪያዎችን ያቀናብሩ"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"ለውጦቹ እንዲተገበሩ ብሉቱዝን ያሰናክሉ እና ያንቁ"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"መሣሪያ"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"የመዳሰሻ ሰሌዳ፣ የቁልፍ ሰሌዳ፣ ማሳያ፣ ድምፅ"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"ብሩህነት፣ ቀለም፣ ጠቆር ያለ ገጽታ፣ ማያ ገጽ ቁልፍ፣ ጽሑፍ"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"ብሩህነት፣ ቀለም፣ ጠቆር ያለ ገጽታ፣ ማያ ገጽ ቁልፍ፣ ጽሑፍ፣ ንክኪ"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"ብሩህነት፣ ቀለም፣ ጠቆር ያለ ገጽታ፣ ማያ ገጽ ቁልፍ፣ ጽሑፍ፣ የተገናኘ ማሳያ"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"ብሩህነት፣ ቀለም፣ ጠቆር ያለ ገጽታ፣ ማያ ገጽ ቁልፍ፣ ጽሑፍ፣ ንክኪ፣ የተገናኘ ማሳያ"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"የቁልፍ ሰሌዳ ምርጫ፣ መሣሪያዎች"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"የጠቋሚ ፍጥነት፣ የአዝራር ማበጀት፣ መሸብለል"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"የድምፅ መጠን፣ ድምፅ ማውጫዎች፣ ማይክሮፎኖች"</string>
@@ -3815,7 +3797,7 @@
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"በመጀመሪያ ንዘር በመቀጠል በዝግታ ደውል"</string>
     <string name="spatial_audio_title" msgid="1775370104206884711">"Spatial ኦዲዮ"</string>
     <string name="dial_pad_tones_title" msgid="3536945335367914892">"የመደወያ ሰሌዳ ድምጾች"</string>
-    <string name="screen_locking_sounds_title" msgid="5695030983872787321">"የማያ ገፅ መቆለፊያ ድምፅ"</string>
+    <string name="screen_locking_sounds_title" msgid="5695030983872787321">"የማያ ገጽ መቆለፊያ ድምፅ"</string>
     <string name="charging_sounds_title" msgid="5261683808537783668">"የኃይል መሙላት ድምፅ እና ንዝረት"</string>
     <string name="docking_sounds_title" msgid="5341616179210436159">"የመትከል ድምጾች"</string>
     <string name="touch_sounds_title" msgid="826964355109667449">"የመታ ማድረግ እና ጠቅታ ድምጾች"</string>
@@ -4083,7 +4065,7 @@
     <string name="conversation_onboarding_title" msgid="5194559958353468484">"ቅድሚያ ተሰጪ እና የተሻሻሉ ውይይቶች እዚህ ላይ ብቅ ይላሉ"</string>
     <string name="conversation_onboarding_summary" msgid="2484845363368486941">"አንድን ውይይት እንደ ቅድሚያ ተሰጪ አንድ ጊዜ ምልክት ካደረጉበት ወይም በውይይቶች ላይ ማናቸውንም ሌሎች ለውጦች ካደረጉ በኋላ እዚህ ላይ ብቅ ይላሉ። \n\nየእርስዎን ውይይት ቅንብሮች ለመለወጥ፦ \nወደ ታች ተጎታች መጋረጃን ለመክፈት ከማያ ገጹ አናት ላይ ወደ ታች በጣት ጠረግ ያድርጉ፣ በመቀጠል ውይይትን ነካ ያድርጉ እና ይያዙ።"</string>
     <string name="notification_importance_min_title" msgid="7676541266705442501">"አሳንስ"</string>
-    <string name="notification_importance_high_title" msgid="394129291760607808">"ብቅ-ባይ ማያ ገፅ"</string>
+    <string name="notification_importance_high_title" msgid="394129291760607808">"ብቅ-ባይ ማያ ገጽ"</string>
     <string name="notification_silence_title" msgid="4085829874452944989">"ፀጥ ያለ"</string>
     <string name="notification_alert_title" msgid="1632401211722199217">"ነባሪ"</string>
     <string name="allow_interruption" msgid="5237201780159482716">"መቆራረጦችን ፍቀድ"</string>
@@ -4632,58 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"ይህ መተግበሪያ በዚህ መሣሪያ ላይ ወይም በማናቸውም የተገናኙ የማከማቻ መጠኖች ላይ ሁሉንም ፋይሎች እንዲያነብ፣ እንዲያሻሽል እና እንዲሰርዝ ይፍቀዱ። ፈቃድ ከተሰጠ፣ መተግበሪያ ያለ የእርስዎ ግልፅ የሆነ ዕውቀት ፋይሎችን መድረስ ይችላል።"</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"ሁሉንም ፋይሎች መድረስ ይችላል"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"የማያ ገጽ አውቶሜሽን"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"ይህ መተግበሪያ መተግበሪያዎቹ በዳራ ውስጥ ቢሆኑም እንኳን እርስዎ ተግባሮችን እንዲያጠናቅቁ ለማገዝ የሌሎች መተግበሪያዎችን የማያ ገጽ ይዘት ማየት እና ከእነሱ ጋር መስተጋብር መፍጠር ይችላል።"</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> እርስዎ ተግባሮችን እንዲያጠናቅቁ ለማገዝ የፈቀዱላቸውን መተግበሪያዎች የማያ ገጽ ይዘት ማየት እና ከእነሱ ጋር መስተጋብር መፍጠር ይችላል።"</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"በፈቃዶች ውስጥ &lt;strong&gt;ሁልጊዜ ፍቀድ&lt;/strong&gt; የፈቀዱላቸው መተግበሪያዎች እዚህ ይታያሉ። &lt;strong&gt;ለዚህ ጊዜ ብቻ&lt;/strong&gt; የፈቀዱላቸው ወይም ያልፈቀዱላቸው መተግበሪያዎች አይታዩም።"</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"የማያ ገጽ አውቶሜሽንን ካልፈቀዱ፣ <xliff:g id="ID_1">%1$s</xliff:g> አሁንም ከ<xliff:g id="ID_2">%1$s</xliff:g> ጋር በተገናኙ መተግበሪያዎች በሌሎች መንገዶች መስተጋብር መፍጠር ይችል ይሆናል።"</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"በዚህ ማያ ገጽ ላይ መተግበሪያን ሲያስወግዱ፣ <xliff:g id="ID_1">%1$s</xliff:g> አሁንም ከ<xliff:g id="ID_2">%1$s</xliff:g> ጋር በተገናኙ መተግበሪያዎች በሌሎች መንገዶች መስተጋብር መፍጠር ይችል ይሆናል።"</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"መተግበሪያዎች ከሌሎች መተግበሪያዎች የማያ ገጽ ይዘት ጋር መስተጋብር በመፍጠር ተግባሮችን እንዲያጠናቅቁ እንዲያግዙዎ ይፍቀዱ"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"መተግበሪያዎች ተግባሮችን እንዲያጠናቅቁ ለማገዝ የማያ ገጽ ይዘትን እንዲያዩ እና ከእሱ ጋር መስተጋብር እንዲፈጥሩ ይፍቀዱ"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"ሁልጊዜ ጠይቅ"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"ሁልጊዜ ይፍቀዱ"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"አትፍቀድ"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"የፈቀዷቸው መተግበሪያዎች"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"እስካሁን ምንም መተግበሪያዎችን አልፈቀዱም"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"የማያ ገጽ አውቶሜሽንን መጠቀም የሚችለው እንደ ነባሪ ዲጂታል ረዳት ያቀናበሩት መተግበሪያ ብቻ ነው።"</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"መተግበሪያ ተወግዷል"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"ሁሉም መተግበሪያዎች ተወግደዋል"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"የረዳት ቅንብሮች"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 መተግበሪያ ተፈቅዷል}one{# መተግበሪያ ተፈቅዷል}other{# መተግበሪያዎች ይፈቀዳሉ}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 መተግበሪያ ተፈቅዷል}one{# መተግበሪያ ተፈቅዷል}other{# መተግበሪያዎች ተፈቅደዋል}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"ምንም መተግበሪያዎች አልተፈቀዱም"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"ሁሉንም መተግበሪያዎች አስወግድ"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"ነባሪ ዲጂታል ረዳት"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> የማያ ገጽ አውቶሜሽንን መጠቀም አይችልም"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"የማያ ገጽ አውቶሜሽን መጠቀም የሚችለው የእርስዎ ነባሪ ዲጂታል ረዳት ብቻ ነው"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"ረዳትን ቀይር"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"እነዚህ መተግበሪያዎች እርስዎ ተግባሮችን እንዲያጠናቅቁ ለማገዝ የፈቀዷቸውን መተግበሪያዎች የማያ ገጽ ይዘት ማየት እና ከእሱ ጋር መስተጋብር መፍጠር ይችላሉ።"</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"የማያ ገጽ አውቶሜሽንን መጠቀም የሚችሉ ምንም መተግበሪያዎችን አልጫኑም"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"እነዚህ መተግበሪያዎች እርስዎ ተግባሮችን እንዲያጠናቅቁ ለማገዝ የ<xliff:g id="ID_1">%1$s</xliff:g> ማያ ገጽ ይዘትን ማየት እና ከእሱ ጋር መስተጋብር መፍጠር ይችላሉ።"</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"የሙሉ መስኮት ማሳያ ማሳወቂያዎች"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"ከዚህ መተግበሪያ የሙሉ መስኮት ማሳያ ማሳወቂያዎችን ይፍቀዱ"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"ይህ መተግበሪያ መሣሪያው በሚቆለፍበት ጊዜ ሙሉ ገጽ ዕይታውን የሚይዙ ማሳወቂያዎችን እንዲያሳይ ይፍቀዱለት። መተግበሪያዎች ማንቂያዎችን፣ ገቢ ጥሪዎችን ወይም ሌሎች አስቸኳይ ማሳወቂያዎችን ለማድመቅ እነዚህን ሊጠቀሙ ይችላሉ።"</string>
@@ -5784,7 +5741,7 @@
     <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2ጂ አውታረ መረቦች ደኅንነታቸው ያነሰ ነው እና ይህን ማጥፋት የእርስዎን ጥሪዎች፣ መልዕክቶች እና ውሂብ ለመጠለፍ ወይም ለመስረቅ ተጋላጭ ያደርጋቸዋል"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"አጥፋ"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"የ2G አውታረ መረብ ጥበቃ"</string>
-    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"የ2G አውታረ መረብ ጥበቃ በርቷል"</string>
+    <string name="network_protection_2g_on_notification_title" msgid="2244012861602551260">"የ2ጂ አውታረ መረብ ጥበቃ በርቷል"</string>
     <string name="network_protection_2g_on_notification_summary" msgid="2865716658412002901">"ይህን በቅንብሮች ውስጥ ማጥፋት ይችላሉ፣ ነገር ግን 2ጂ ደኅንነቱ ያነሰ ነው እና ውሂብዎን አደጋ ላይ ሊጥል ይችላል"</string>
     <string name="network_protection_2g_notification_settings_btn" msgid="2531645174083640421">"ቅንብሮች"</string>
     <string name="app_info_all_services_label" msgid="1487070364839071105">"ሁሉም አገልግሎቶች"</string>
@@ -5867,9 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"መተግበሪያን አራግፍ"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{ባለፈው # ወር ውስጥ የተጫኑ መተግበሪያዎች}one{ባለፈው # ወር ውስጥ የተጫኑ መተግበሪያዎች}other{ባለፉት # ወራት ውስጥ የተጫኑ መተግበሪያዎች}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{ከ# ወር በላይ በፊት የተጫኑ መተግበሪያዎች}one{ከ# ወር በላይ በፊት የተጫኑ መተግበሪያዎች}other{ከ# ወራት በላይ በፊት የተጫኑ መተግበሪያዎች}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"ሰው ሠራሽ አስተውሎት እርዳታ"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"ንቁ ረዳት"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"ይህ መተግበሪያ ጥቆማዎችን ለማመንጨት መረጃ ማበርከት ይችል እንደሆነ ይምረጡ"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"የማያ ገጽ መዳረሻ"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"ገቢር እገዛ ለማግኘት የዚህን መተግበሪያ የማያ ገጽ ይዘት መዳረሻ ይፍቀዱ"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"ምጥጥነ ገፅታ"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"ይህ መተግበሪያ ለእርስዎ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> እንዲሆን ተደርጎ ካልተነደፈ እሱን ለመመልከት አዲስ ምጥጥነ ገፅታን ይሞክሩ"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"ይህ መተግበሪያ ለእርስዎ <xliff:g id="DEVICE_NAME">%1$s</xliff:g> እንዲሆን ተደርጎ ካልተነደፈ እሱን ለመመልከት አዲስ ምጥጥነ ገፅታን ይሞክሩ። አንዳንድ መተግበሪያዎች ለተወሰኑ ምጥጥነ ገፅታዎች ሊተቡ አይችሉም።"</string>
@@ -5888,6 +5844,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"ምጥጥነ ገፅታውን ሲለውጡ መተግበሪያው እንደገና ይጀምራል። ያልተቀመጡ ለውጦችን ሊያጡ ይችላሉ። አንዳንድ መተግበሪያዎች ለተወሰኑ ምጥጥነ ገፅታዎች ሊተቡ አይችሉም።"</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"ተሞክሮ"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"ምናባዊ የመጫወቻ ንጣፍ"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"ለውጦችን ለማረጋገጥ ጨዋታዎን እንደገና ያስጀምሩ"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"የጣት አሻራ ዳሳሽ"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"የብልጭታ ማሳወቂያዎች"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"ስለብልጭታ ማሳወቂያዎች"</string>

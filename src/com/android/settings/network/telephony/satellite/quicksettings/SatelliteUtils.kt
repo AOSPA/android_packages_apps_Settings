@@ -19,14 +19,13 @@ package com.android.settings.network.telephony.satellite.quicksettings
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.PersistableBundle
 import android.provider.Settings
-import android.telephony.CarrierConfigManager
 import android.telephony.CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL
-import android.telephony.CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT
-import android.telephony.CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL
 import android.telephony.SubscriptionManager
+import android.telephony.satellite.SatelliteManager
 import android.util.Log
+import androidx.annotation.VisibleForTesting
+import com.android.settings.overlay.FeatureFactory
 
 /** Utility class for satellite/telephony-related functionalities. */
 object SatelliteUtils {
@@ -39,9 +38,7 @@ object SatelliteUtils {
         return isLteBasedNtnSupportedByCarrier(context, subId)
     }
 
-    /**
-     * Returns true if LTE-based NTN is supported by any active subscription on the device.
-     */
+    /** Returns true if LTE-based NTN is supported by any active subscription on the device. */
     @JvmStatic
     fun isLteBasedNtnSupportedByAnySub(context: Context): Boolean {
         val subscriptionManager: SubscriptionManager? =
@@ -68,19 +65,22 @@ object SatelliteUtils {
      *
      * "Support" is defined as inherent capability REGARDLESS of current availability or status.
      *
-     * @param context The context to use for fetching carrier config.
      * @param activeSubId The active subscription ID to check carrier support for.
      */
     @JvmStatic
-    fun isCarrierRoamingNtnSupported(context: Context, activeSubId: Int): Boolean {
+    fun isCarrierRoamingNtnSupported(activeSubId: Int): Boolean {
         if (activeSubId == SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
             Log.w(TAG, "ActiveSubId is invalid")
             return false
         }
 
-        val configBundle = fetchCarrierConfigData(context, activeSubId)
-        val isSatelliteAttachSupported =
-            configBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
+        val telephonyFeatureProvider = FeatureFactory.featureFactory.telephonyFeatureProvider
+        if (telephonyFeatureProvider == null) {
+            Log.w(TAG, "TelephonyFeatureProvider is null")
+            return false
+        }
+        val repository = telephonyFeatureProvider.satelliteSettingsRepository
+        val isSatelliteAttachSupported = repository.isSatelliteAttachSupported(activeSubId)
 
         logd {
             "isCarrierRoamingNtnSupported: $isSatelliteAttachSupported, activeSubId: $activeSubId"
@@ -88,12 +88,16 @@ object SatelliteUtils {
         return isSatelliteAttachSupported
     }
 
-    /** Returns true if LTE-based NTN is supported for the given carrier config. */
+    /** Returns true if LTE-based NTN is supported for the given subId. */
     @JvmStatic
-    fun isLteBasedNtnSupported(carrierConfig: PersistableBundle): Boolean {
-        val isSatelliteAttachSupported =
-            carrierConfig.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, false)
-        if (!isSatelliteAttachSupported) {
+    fun isLteBasedNtnSupported(subId: Int): Boolean {
+        val telephonyFeatureProvider = FeatureFactory.featureFactory.telephonyFeatureProvider
+        if (telephonyFeatureProvider == null) {
+            Log.w(TAG, "TelephonyFeatureProvider is null")
+            return false
+        }
+        val repository = telephonyFeatureProvider.satelliteSettingsRepository
+        if (!repository.isSatelliteAttachSupported(subId)) {
             return false
         }
 
@@ -102,10 +106,7 @@ object SatelliteUtils {
         // page instead of LTE landing page.
         // If connect type is not manual, then automatic NTN connect is supported.
         val isCarrierRoamingNtnConnectTypeAutomatic =
-            carrierConfig.getInt(
-                KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                /* default= */ CARRIER_ROAMING_NTN_CONNECT_MANUAL,
-            ) != CARRIER_ROAMING_NTN_CONNECT_MANUAL
+            repository.getSatelliteNtnConnectType(subId) != CARRIER_ROAMING_NTN_CONNECT_MANUAL
 
         logd { "isLteBasedNtnSupported: $isCarrierRoamingNtnConnectTypeAutomatic" }
         return isCarrierRoamingNtnConnectTypeAutomatic
@@ -123,41 +124,36 @@ object SatelliteUtils {
             Log.w(TAG, "ActiveSubId is invalid")
             return false
         }
-        val configBundle = fetchCarrierConfigData(context, activeSubId)
-        return isLteBasedNtnSupported(configBundle)
+        return isLteBasedNtnSupported(activeSubId)
     }
 
-    private fun fetchCarrierConfigData(context: Context, subId: Int): PersistableBundle {
-        val carrierConfigManager = context.getSystemService(CarrierConfigManager::class.java)
+    @VisibleForTesting
+    var satelliteAppsRepositoryProvider: (Context) -> SatelliteAppsRepository =
+        { context -> SatelliteAppsRepository(context) }
 
-        if (carrierConfigManager == null) {
-            Log.e(TAG, "CarrierConfigManager is null, returning default config.")
-            return CarrierConfigManager.getDefaultConfig()
-        }
+    /**
+     * Returns the appropriate intent for satellite entry point.
+     *
+     * If the current data support mode is unconstrained, this returns the intent for the detailed
+     * satellite settings page. Otherwise, it returns the intent for the satellite landing page.
+     */
+    @JvmStatic
+    fun resolveSatelliteSettingsIntent(context: Context): Intent {
+        val subId = SubscriptionManager.getActiveDataSubscriptionId()
+        val dataSupportMode =
+            SatelliteStateRepository.getInstance(context).getSatelliteDataSupportMode(subId)
 
-        return try {
-            val fetchedBundle =
-                carrierConfigManager.getConfigForSubId(
-                    subId,
-                    KEY_SATELLITE_ATTACH_SUPPORTED_BOOL,
-                    KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                )
-            if (!fetchedBundle.isEmpty) {
-                Log.i(
-                    TAG,
-                    "fetchCarrierConfigData for subId=$subId: " +
-                        "KEY_SATELLITE_ATTACH_SUPPORTED_BOOL=${fetchedBundle.getBoolean(KEY_SATELLITE_ATTACH_SUPPORTED_BOOL)}, " +
-                        "KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT=${fetchedBundle.getInt(KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT)}"
-                )
-                fetchedBundle
-            } else {
-                Log.e(TAG, "Fetched bundle is null or empty, using default config.")
-                CarrierConfigManager.getDefaultConfig()
+        if (dataSupportMode == SatelliteManager.SATELLITE_DATA_SUPPORT_UNCONSTRAINED) {
+            val isCarrierRoamingNtnSupported = isCarrierRoamingNtnSupported(subId)
+            val settingsIntent =
+                satelliteAppsRepositoryProvider(context)
+                    .getSettingsIntent(isCarrierRoamingNtnSupported)
+            if (settingsIntent != null) {
+                return settingsIntent
             }
-        } catch (exception: IllegalStateException) {
-            Log.e(TAG, "Exception fetching carrier config: $exception")
-            CarrierConfigManager.getDefaultConfig()
         }
+
+        return Intent(context, SatelliteLandingPageActivity::class.java)
     }
 
     /**

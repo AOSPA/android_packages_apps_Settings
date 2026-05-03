@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Jūs esat izveidojis savienojumu ar WEP tīklu. Ja vairs neatļausiet šo tīklu izmantošanu, savienojums tiks pārtraukts."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Papildu opcijas"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Nolaižamais saraksts “Papildu opcijas”"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"izvērst"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"izvērst"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"sakļaut"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Tīkla nosaukums*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Ievadiet SSID"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Drošība"</string>
@@ -1501,7 +1502,7 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"Labi"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Atcelt"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Aizsargāt SIM karti"</string>
-    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM bloķēšanas aizsardzības režīms"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"SIM aizsardzības režīms"</string>
     <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Bloķēt SIM karti"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Pārvalda Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Nepārvalda Android"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"PIN vērtības neatbilst. Apstipriniet jauno SIM PIN."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Nepareizs PIN. Atlikušo mēģinājumu skaits: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>."</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Ievadiet SIM kartes pašreizējo PIN"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Pirmās SIM kartes slots"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Otrās SIM kartes slots"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"Vai lietot <xliff:g id="CARRIER">%1$s</xliff:g> mobilajiem datiem?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Jūs izmantojat mobilajiem datiem <xliff:g id="CARRIER2_0">%2$s</xliff:g>. Pārslēdzoties uz <xliff:g id="CARRIER1">%1$s</xliff:g>, <xliff:g id="CARRIER2_1">%2$s</xliff:g> SIM vairs netiks izmantota mobilajiem datiem."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"Izmantot operatoru <xliff:g id="CARRIER">%1$s</xliff:g>"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Pielāgojiet darbības, ko aktivizē jūsu vadāmierīces pogas."</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Pogas"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Virzieni"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"Poga A"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"Poga B"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"Poga X"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Poga Y"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"Poga L1"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"Poga R1"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"Poga L2"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"Poga R2"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Kreisās vadības sviras klikšķis"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Labās vadības sviras klikšķis"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"Virzienu slēdzis"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Kreisā vadības svira"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Labā vadības svira"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Atiestatīt uz noklusējumu"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Vai atiestatīt uz noklusējumu?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Visiem jūsu vadāmierīces iestatījumiem tiks atiestatītas noklusējuma vērtības."</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Atiestatīt"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"šobrīd piešķirta vērtība <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Skārienpaliktnis"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Skārienpaliktnis un pele"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Pele"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Paziņojumi"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Ātrie iestatījumi"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Piezīme"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Apskatīt/neapskatīt darbvirsmu"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Izvēlieties saīsni šim stūrim: <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"apakšējais kreisais stūris"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"apakšējais labais stūris"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Funkciju karodziņi"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Iespējot Bluetooth steka žurnālu"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Mainīt Bluetooth steka žurnāla līmeni (pēc šī iestatījuma mainīšanas pārslēdziet Bluetooth)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Bluetooth HCI okšķerēšanas žurnāla ligzdas iespējošana"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Padariet Bluetooth HCI okšķerēšanas žurnālu pieejamu lokālā ligzdā."</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Bluetooth HCI okšķerēšanas žurnāla filtrēšana"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Iestatīt filtrus"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Atspējojiet un iespējojiet Bluetooth, lai izmaiņas stātos spēkā."</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Ierīce"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Skārienpaliktnis, tastatūra, displejs, skaņa"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Spilgtums, krāsa, tumšais motīvs, bloķēšanas ekrāns, teksts"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Spilgtums, krāsa, tumšais motīvs, bloķēšanas ekrāns, teksts, skāriens"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Spilgtums, krāsa, tumšais motīvs, bloķēšanas ekrāns, teksts, pievienotais displejs"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Spilgtums, krāsa, tumšais motīvs, bloķēšanas ekrāns, teksts, skāriens, pievienotais displejs"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Tastatūras atlase, rīki"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Kursora ātrums, pogu pielāgošana, ritināšana"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Skaļums, skaļruņi, mikrofoni"</string>
@@ -4632,58 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Atļaujiet šai lietotnei lasīt, pārveidot un dzēst visus failus šajā ierīcē vai pievienotajās atmiņas ierīcēs. Ja piešķirsiet atļauju, lietotne varēs piekļūt failiem, jums par to nezinot."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Var piekļūt visiem failiem"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Ekrāna automatizācija"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Šī lietotne varēs skatīt citu lietotņu ekrāna saturu un mijiedarboties ar to, lai palīdzētu jums izpildīt uzdevumus, pat ja lietotnes darbojas fonā."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> var skatīt jūsu atļauto lietotņu ekrāna saturu un mijiedarboties ar to, lai palīdzētu jums izpildīt uzdevumus."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Šeit ir redzamas lietotnes, kurām atļaujās izvēlējāties opciju &lt;strong&gt;Vienmēr atļaut&lt;/strong&gt;. Nav redzamas lietotnes, kurām tika piešķirta atļauja &lt;strong&gt;Tikai šoreiz&lt;/strong&gt; vai atļauja netika piešķirta."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Ja neatļausiet ekrāna automatizāciju, lietotne <xliff:g id="ID_1">%1$s</xliff:g> joprojām varēs citādi mijiedarboties ar lietotnēm, kas ir saistītas ar lietotni <xliff:g id="ID_2">%1$s</xliff:g>."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Ja noņemsiet lietotni šajā ekrānā, lietotne <xliff:g id="ID_1">%1$s</xliff:g> joprojām varēs citādi mijiedarboties ar lietotnēm, kas ir saistītas ar lietotni <xliff:g id="ID_2">%1$s</xliff:g>."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Atļaujiet lietotnēm palīdzēt jums izpildīt uzdevumus, mijiedarbojoties ar citu lietotņu ekrāna saturu."</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Atļaujiet lietotnēm skatīt ekrāna saturu un mijiedarboties ar to, lai palīdzētu jums izpildīt uzdevumus."</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Vaicāt katru reizi"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Vienmēr atļaut"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Neatļaut"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Jūsu atļautās lietotnes"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Jūs vēl neesat atļāvis nevienu lietotni"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Ekrāna automatizāciju var izmantot tikai lietotne, ko iestatījāt kā noklusējuma digitālo asistentu."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"Noņemta lietotne"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Visas lietotnes ir noņemtas."</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Asistenta iestatījumi"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{Atļauta 1 lietotne}zero{Atļautas # lietotnes}one{Atļauta # lietotne}other{Atļautas # lietotnes}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{Atļauta 1 lietotne}zero{Atļautas # lietotnes}one{Atļauta # lietotne}other{Atļautas # lietotnes}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Nav atļauta neviena lietotne"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Noņemt visas lietotnes"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Noklusējuma digitālais asistents"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> nevar izmantot ekrāna automatizāciju"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Ekrāna automatizāciju var izmantot tikai jūsu noklusējuma digitālais asistents."</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Mainīt asistentu"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Šīs lietotnes var skatīt jūsu atļauto lietotņu ekrāna saturu un mijiedarboties ar to, lai palīdzētu jums izpildīt uzdevumus."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"Jūs neesat instalējis nevienu lietotni, kurā var izmantot ekrāna automatizāciju"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Šīs lietotnes var skatīt lietotnes <xliff:g id="ID_1">%1$s</xliff:g> ekrāna saturu un mijiedarboties ar to, lai palīdzētu jums izpildīt uzdevumus."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Pilnekrāna paziņojumi"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Atļaut pilnekrāna paziņojumus no šīs lietotnes"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Atļaujiet šai lietotnei rādīt paziņojumus pilnekrāna režīmā, kad ierīce ir bloķēta. Lietotnes var šādi izcelt signālus, ienākošos zvanus vai citus svarīgus paziņojumus."</string>
@@ -5868,9 +5825,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"Atinstalēt lietotni"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Pēdējā # mēneša laikā instalētās lietotnes}zero{Pēdējo # mēnešu laikā instalētās lietotnes}one{Pēdējā # mēneša laikā instalētās lietotnes}other{Pēdējo # mēnešu laikā instalētās lietotnes}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Pirms vairāk nekā # mēneša instalētās lietotnes}zero{Pirms vairāk nekā # mēnešiem instalētās lietotnes}one{Pirms vairāk nekā # mēneša instalētās lietotnes}other{Pirms vairāk nekā # mēnešiem instalētās lietotnes}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"MI palīdzība"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Aktīva palīdzība"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"Izvēlieties, vai šī lietotne var sniegt informāciju, lai ģenerētu ieteikumus."</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Piekļuve ekrānam"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"Lai saņemtu proaktīvu palīdzību, atļaujiet piekļuvi šīs lietotnes ekrāna saturam."</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Malu attiecība"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Ja šīs lietotnes noformējums neatbilst jūsu ierīces (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) izmēriem, lietotnes skatīšanai izmēģiniet jaunu malu attiecību."</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Ja šīs lietotnes noformējums neatbilst jūsu ierīces (<xliff:g id="DEVICE_NAME">%1$s</xliff:g>) izmēriem, lietotnes skatīšanai izmēģiniet jaunu malu attiecību. Dažas lietotnes var nebūt optimizētas noteiktām malu attiecībām."</string>
@@ -5889,6 +5845,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"Mainot malu attiecību, lietotne tiks restartēta. Iespējams, zaudēsiet nesaglabātas izmaiņas. Dažas lietotnes var nebūt optimizētas noteiktām malu attiecībām."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Pieredze"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtuālā spēļu vadāmierīce"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Restartējiet spēli, lai apstiprinātu izmaiņas."</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Pirksta nospieduma sensors"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Zibpaziņojumi"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Par zibpaziņojumiem"</string>

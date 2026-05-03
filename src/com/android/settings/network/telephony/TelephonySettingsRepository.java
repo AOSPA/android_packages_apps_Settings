@@ -32,11 +32,13 @@ public class TelephonySettingsRepository {
         mContext = appContext;
     }
 
+    @Nullable
     private TelephonyManager getTelephonyManagerForSubId(int subId) {
         if (mTelephonyManager == null) {
             mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
         }
-        return mTelephonyManager.createForSubscriptionId(subId);
+        return (mTelephonyManager == null) ? null
+                : mTelephonyManager.createForSubscriptionId(subId);
     }
 
     /** Checks mobile data cable is connected */
@@ -46,25 +48,49 @@ public class TelephonySettingsRepository {
 
     /** Checks mobile data switch policy is enabled */
     public boolean isMobileDataSwitchPolicyEnabled(int subId) {
-        return getTelephonyManagerForSubId(subId).isMobileDataPolicyEnabled(
+        TelephonyManager tm = getTelephonyManagerForSubId(subId);
+        return tm != null && tm.isMobileDataPolicyEnabled(
                 TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH
         );
     }
 
     /** Sets mobile data switch policy enabled or not */
     public void setMobileDataSwitchPolicyEnabled(int subId, boolean isEnabled) {
-        getTelephonyManagerForSubId(subId).setMobileDataPolicyEnabled(
-                TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH,
-                isEnabled
-        );
+        TelephonyManager tm = getTelephonyManagerForSubId(subId);
+        if (tm != null) {
+            tm.setMobileDataPolicyEnabled(
+                    TelephonyManager.MOBILE_DATA_POLICY_AUTO_DATA_SWITCH,
+                    isEnabled
+            );
+        }
     }
     /** Checks data roaming is enabled */
     public boolean isDataRoamingEnabled(int subId) {
-        return getTelephonyManagerForSubId(subId).isDataRoamingEnabled();
+        TelephonyManager tm = getTelephonyManagerForSubId(subId);
+        return tm != null && tm.isDataRoamingEnabled();
     }
 
     /** Sets data roaming enabled or not */
     public void setDataRoamingEnabled(int subId, boolean isEnabled) {
-        getTelephonyManagerForSubId(subId).setDataRoamingEnabled(isEnabled);
+        TelephonyManager tm = getTelephonyManagerForSubId(subId);
+        if (tm != null) {
+            tm.setDataRoamingEnabled(isEnabled);
+        }
+    }
+
+    /**
+     * Get Sim Operator Name for the given subscription id.
+     *
+     * @param subId The subscription id.
+     * @return The sim operator name.
+     */
+    public String getSimOperatorName(int subId) {
+        if (mTelephonyManager == null) {
+            mTelephonyManager = mContext.getSystemService(TelephonyManager.class);
+        }
+        if (mTelephonyManager == null) {
+            return "";
+        }
+        return mTelephonyManager.getSimOperatorName(subId);
     }
 }

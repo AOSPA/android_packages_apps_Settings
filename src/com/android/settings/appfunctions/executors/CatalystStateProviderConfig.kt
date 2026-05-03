@@ -150,7 +150,7 @@ import com.android.settings.gestures.PowerMenuSettingsScreenApi
 import com.android.settings.gestures.SwipeToNotificationApiScreen
 import com.android.settings.gestures.SystemNavigationGestureScreen
 import com.android.settings.gestures.TapScreenGestureApiScreen
-import com.android.settings.inputmethod.AvailableKeyboardAppsApiScreen
+import com.android.settings.inputmethod.AvailableVirtualKeyboardApiScreen
 import com.android.settings.inputmethod.SpellCheckerApiScreen
 import com.android.settings.inputmethod.UserDictionaryListApiScreen
 import com.android.settings.language.LanguageAndRegionApiFirstScreen
@@ -732,12 +732,11 @@ private fun getCatalystScreenConfigs() =
         PerScreenCatalystConfig(enabled = true, screenKey = BluetoothScanningApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DateTimeSettingsScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DeviceUnlockApiScreen.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = AvailableKeyboardAppsApiScreen.KEY),
+        PerScreenCatalystConfig(enabled = true, screenKey = AvailableVirtualKeyboardApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDataUsageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiAppDataUsageScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = OpeningLinksApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = WifiDetailsScreenApi.KEY),
-        PerScreenCatalystConfig(enabled = true, screenKey = WifiPrivacyScreenApi.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = HardwareInfoApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = TabbedDisplayApiScreen.KEY),
         PerScreenCatalystConfig(enabled = true, screenKey = DisplayApiScreen.KEY),

@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"आपका डिवाइस WEP नेटवर्क से कनेक्ट है. इन नेटवर्क को कनेक्ट करने की अनुमति न देने पर, आपका डिवाइस डिसकनेक्ट हो जाएगा."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"बेहतर विकल्प"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"बेहतर विकल्पों की ड्रॉप-डाउन सूची"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"बड़ा करें"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"बड़ा करें"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"छोटा करें"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"नेटवर्क का नाम*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"SSID डालें"</string>
     <string name="wifi_security" msgid="9095934643631406913">"सुरक्षा"</string>
@@ -1513,7 +1514,7 @@
     <string name="sim_platform_managed_pin_failure" msgid="7724058239107026471">"पिन नहीं मिल सका"</string>
     <string name="sim_choose_protection_mode_title" msgid="6490096870138696540">"फ़ोन का इस्तेमाल करने के लिए पिन ज़रूरी है"</string>
     <string name="sim_protection_mode_protected_by_platform" msgid="3411990756518847014">"सिम के पिन को Android से मैनेज किया जा रहा है"</string>
-    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"फ़ोन का इस्तेमाल करने के लिए पिन ज़रूरी है"</string>
+    <string name="sim_protection_mode_manually_managed" msgid="4900165823596420059">"कॉल की सुविधा का इस्तेमाल करने के लिए पिन ज़रूरी है"</string>
     <string name="sim_protection_mode_lskf_required" msgid="3092348651156624481">"सिम के अपने-आप लॉक होने की सुविधा के लिए, लॉकस्क्रीन सेटअप करना ज़रूरी है. फ़िलहाल, सिर्फ़ मैन्युअल तरीके से सिम लॉक करने की सुविधा उपलब्ध है"</string>
     <string name="provide_current_sim_pin_title" msgid="4164416887125189306">"सिम का मौजूदा पिन डालें"</string>
     <string name="provide_current_sim_pin" msgid="2805396981527525822">"सिम कार्ड का मौजूदा पिन डालें"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"पिन मेल नहीं खा रहे हैं. सिम के नए पिन की पुष्टि करें."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"गलत पिन डाला गया. <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g> बार और कोशिश की जा सकती है"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"सिम कार्ड का मौजूदा पिन कोड डालें"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"पहला सिम कार्ड स्लॉट"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"दूसरा सिम कार्ड स्लॉट"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"मोबाइल डेटा के लिए <xliff:g id="CARRIER">%1$s</xliff:g> का इस्तेमाल करें?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"मोबाइल डेटा के लिए आप <xliff:g id="CARRIER2_0">%2$s</xliff:g> इस्तेमाल कर रहे हैं. अगर आप <xliff:g id="CARRIER1">%1$s</xliff:g> का इस्तेमाल करते हैं, तो <xliff:g id="CARRIER2_1">%2$s</xliff:g> को मोबाइल डेटा के लिए इस्तेमाल नहीं किया जाएगा."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> का इस्तेमाल करें"</string>
@@ -1814,7 +1813,7 @@
     <string name="location_scanning_bluetooth_always_scanning_title" msgid="1809309545730215891">"ब्लूटूथ डिवाइस का पता लगाने की सुविधा"</string>
     <string name="location_scanning_bluetooth_always_scanning_description" msgid="5362988856388462841">"ऐप्लिकेशन और सेवाओं को किसी भी समय आस-पास के डिवाइसों का पता लगाने की अनुमति दें, भले ही आपके डिवाइस की ब्लूटूथ सेटिंग बंद हो. इसका इस्तेमाल कई कामों के लिए किया जा सकता है. जैसे, जगह की जानकारी से जुड़ी सुविधाओं और सेवाओं को बेहतर बनाना."</string>
     <string name="location_services_preference_title" msgid="604317859531782159">"जगह की जानकारी"</string>
-    <string name="location_services_screen_title" msgid="5640002489976602476">"जगह की जानकारी"</string>
+    <string name="location_services_screen_title" msgid="5640002489976602476">"जगह की जानकारी से जुड़ी सुविधाएं"</string>
     <string name="location_time_zone_detection_toggle_title" msgid="720338048522014712">"टाइम ज़ोन के लिए जगह की जानकारी का इस्तेमाल"</string>
     <string name="location_time_zone_detection_status_title" msgid="8903495354385600423">"टाइम ज़ोन अपने-आप सेट नहीं हो सकता"</string>
     <string name="location_time_zone_detection_status_summary_degraded_by_settings" msgid="6198939835335841106"></string>
@@ -2187,7 +2186,7 @@
     <string name="mouse_scrolling_speed_make_slower_description" msgid="349335653732016736">"स्क्रोल करने की स्पीड कम करें"</string>
     <string name="mouse_pointer_speed_make_faster_desc" msgid="7764518379488092305">"कर्सर की स्पीड बढ़ाएं"</string>
     <string name="mouse_pointer_speed_make_slower_desc" msgid="5833674987434163839">"कर्सर की स्पीड कम करें"</string>
-    <string name="mouse_swap_primary_button" msgid="4798006242525441304">"माउस का मुख्य बटन स्वैप करें"</string>
+    <string name="mouse_swap_primary_button" msgid="4798006242525441304">"माउस का प्राइमरी बटन स्विच करें"</string>
     <string name="mouse_swap_primary_button_summary" msgid="3276638019321067902">"माउस के बाएं बटन को दाएं बटन की तरह इस्तेमाल करें"</string>
     <string name="mouse_pointer_acceleration" msgid="388336576055293329">"कर्सर की स्पीड"</string>
     <string name="mouse_pointer_acceleration_summary" msgid="6954407061360045792">"माउस को तेज़ी से मूव करने पर, कर्सर ज़्यादा दूर तक मूव होगा"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"कंट्रोलर के बटन दबाने पर होने वाली कार्रवाइयों को अपनी पसंद के मुताबिक बनाएं"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"बटन"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"निर्देश"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A बटन"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B बटन"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X बटन"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y बटन"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1 बटन"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1 बटन"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2 बटन"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2 बटन"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"लेफ़्ट स्टिक क्लिक"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"राइट स्टिक क्लिक"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"डी-पैड"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"लेफ़्ट स्टिक"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"राइट स्टिक"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"डिफ़ॉल्ट पर रीसेट करें"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"सेटिंग डिफ़ॉल्ट पर रीसेट करनी हैं?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"कंट्रोलर की सभी सेटिंग डिफ़ॉल्ट पर रीसेट हो जाएंगी"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"रीसेट करें"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"फ़िलहाल, <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g> को असाइन किया गया है"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"टचपैड"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"टचपैड और माउस"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"माउस"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"सूचनाएं"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"क्विक सेटिंग"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"नोट"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"डेस्कटॉप की मुख्य स्क्रीन दिखाएं/छिपाएं"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"<xliff:g id="CORNER">%1$s</xliff:g> के लिए कोई शॉर्टकट चुनें"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"सबसे नीचे बाईं ओर"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"सबसे नीचे दाईं ओर"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"फ़ीचर फ़्लैग"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"ब्लूटूथ स्टैक का लॉग चालू करें"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"ब्लूटूथ स्टैक के लॉग इन का लॉग लेवल बदलें (यह सेटिंग बदलने के बाद ब्लूटूथ को टॉगल करें)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"ब्लूटूथ एचसीआई स्नूप लॉग के सॉकेट को चालू करें"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"ब्लूटूथ एचसीआई स्नूप लॉग को लोकल सॉकेट पर उपलब्ध कराएं"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"ब्लूटूथ एचसीआई स्नूप लॉग फ़िल्टर"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"फ़िल्टर सेट करें"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"बदलावों को लागू करने के लिए, ब्लूटूथ को चालू और बंद करें"</string>
@@ -2769,7 +2754,7 @@
     <string name="accessibility_hearing_device_routing_duplicate_both_summary" msgid="2013193345937386772">"कान की मशीन और डिवाइस के स्पीकर पर आवाज़ें सुनाई देंगी"</string>
     <string name="accessibility_hearing_device_shortcut_title" msgid="7645100199603031360">"कान की मशीन ऐक्सेस करने का शॉर्टकट"</string>
     <string name="accessibility_hac_mode_title" msgid="2037950424429555652">"कान की मशीन के साथ काम करने की सुविधा"</string>
-    <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"इस सुविधा के चालू रहने पर, टेलिकॉल के साथ डिवाइस बेहतर तरीके से काम करते हैं और आस-पास का शोर कम होता है"</string>
+    <string name="accessibility_hac_mode_summary" msgid="5198760061256669067">"इस सुविधा के चालू रहने पर, टेलिकॉइल के साथ डिवाइस बेहतर तरीके से काम करते हैं और आस-पास का शोर कम होता है"</string>
     <string name="hac_disclaimer_message" msgid="5279579026956312543"></string>
     <string name="accessibility_hearing_device_about_title" msgid="7883758309646288250">"कान की मशीनों के बारे में जानकारी"</string>
     <string name="accessibility_hearing_device_footer_summary" msgid="5513620078219951077">"ASHA या LE Audio के साथ काम नहीं करने वाली कान की अन्य मशीनें ढूंढने के लिए, &lt;b&gt;नया डिवाइस जोड़ें&lt;/b&gt; और फिर &lt;b&gt;ज़्यादा डिवाइस देखें&lt;/b&gt; पर टैप करें"</string>
@@ -2947,7 +2932,7 @@
     <string name="history_details_title" msgid="8628584613889559355">"इतिहास विवरण"</string>
     <string name="advanced_battery_preference_title" msgid="3790901207877260883">"बैटरी खर्च"</string>
     <string name="advanced_battery_preference_summary_with_hours" msgid="954091349133320955">"पिछले 24 घंटों में हुए इस्तेमाल की जानकारी"</string>
-    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"पूरा चार्ज होने के बाद से बैटरी खर्च"</string>
+    <string name="advanced_battery_preference_summary" msgid="2372763700477268393">"पूरी चार्ज होने के बाद से खर्च हुई बैटरी"</string>
     <string name="battery_advance_info" msgid="770292928851695973"></string>
     <string name="battery_advance_info_for_slot" msgid="7940946026908896969"></string>
     <string name="battery_advance_info_learn_more" msgid="4401302692578050024"></string>
@@ -3061,7 +3046,7 @@
     <string name="battery_percentage_description" msgid="2321465139126125541">"स्टेटस बार में दिखाएं कि कितने प्रतिशत बैटरी बची है"</string>
     <string name="battery_usage_chart_graph_hint_last_full_charge" msgid="6570336408060566877">"पूरी तरह से चार्ज होने के बाद से लेकर अब तक बैटरी का लेवल"</string>
     <string name="battery_usage_chart_graph_hint" msgid="9182079098173323005">"पिछले 24 घंटों में बैटरी लेवल की जानकारी"</string>
-    <string name="battery_app_usage" msgid="8976453608783133770">"पिछली बार पूरी तरह चार्ज होने के बाद से अब तक, ऐप्लिकेशन के इस्तेमाल में खर्च हुई बैटरी"</string>
+    <string name="battery_app_usage" msgid="8976453608783133770">"डिवाइस पूरा चार्ज होने के बाद से अब तक, ऐप्लिकेशन के इस्तेमाल में खर्च हुई बैटरी"</string>
     <string name="battery_app_usage_for_past_24" msgid="1234770810563940656">"पिछले 24 घंटों में, ऐप्लिकेशन ने कितनी बैटरी इस्तेमाल की"</string>
     <string name="battery_system_usage" msgid="1395943945140097585">"पिछली बार पूरी तरह चार्ज होने के बाद से अब तक, सिस्टम के इस्तेमाल में खर्च हुई बैटरी"</string>
     <string name="battery_system_usage_for_past_24" msgid="3341520273114616263">"पिछले 24 घंटों में, सिस्टम ने कितनी बैटरी इस्तेमाल की"</string>
@@ -3175,7 +3160,7 @@
     <string name="cellular_security_notifications_controller_title" msgid="4853056963523277847">"नेटवर्क से जुड़ी सूचनाएं"</string>
     <string name="cellular_security_notifications_controller_summary" msgid="8339863845393759958">"इन मामलों में सूचना मिलेगीः डिवाइस जब किसी असुरक्षित नेटवर्क से कनेक्ट होगा या कोई नेटवर्क उसका यूनीक आईडी या सिम आईडी रिकॉर्ड करेगा"</string>
     <string name="cellular_security_2G_network_generation_header" msgid="2892850064192939887">"नेटवर्क जनरेशन"</string>
-    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G नेटवर्क से सुरक्षित रखने वाली सुविधा, डिवाइस को ऐसे कनेक्ट होने से रोकती है, क्योंकि ये कम सुरक्षित होते हैं. इस वजह से कुछ जगहों पर कनेक्टिविटी खराब हो सकती है. आपातकालीन कॉल के लिए, 2G नेटवर्क हमेशा उपलब्ध होते हैं. हालांकि, ऐसा हो सकता है कि अंतरराष्ट्रीय रोमिंग के दौरान ऐसे कॉल कनेक्ट न हों."</string>
+    <string name="cellular_security_2G_network_generation_summary" msgid="4041699962072749477">"2G नेटवर्क से सुरक्षित रखने वाली सुविधा, डिवाइस को ऐसे नेटवर्क से कनेक्ट होने से रोकती है, क्योंकि ये कम सुरक्षित होते हैं. इस वजह से कुछ जगहों पर कनेक्टिविटी खराब हो सकती है. आपातकालीन कॉल के लिए, 2G नेटवर्क हमेशा उपलब्ध होते हैं. हालांकि, ऐसा हो सकता है कि अंतरराष्ट्रीय रोमिंग के दौरान ऐसे कॉल कनेक्ट न हों."</string>
     <string name="cellular_security_2G_network_generation_title" msgid="706766676947606951">"2G नेटवर्क से सुरक्षित रखने वाली सुविधा"</string>
     <string name="cellular_security_settings_encryption_title" msgid="4013084091666375780">"एन्क्रिप्शन"</string>
     <string name="cellular_security_network_generations_title" msgid="2343026988833783854">"नेटवर्क की जनरेशन"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"डिवाइस"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"टचपैड, कीबोर्ड, डिसप्ले, साउंड"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"स्क्रीन की रोशनी, रंग, गहरे रंग वाली थीम, लॉक स्क्रीन, टेक्स्ट"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"स्क्रीन की रोशनी, रंग, गहरे रंग वाली थीम, लॉक स्क्रीन, टेक्स्ट"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"स्क्रीन की रोशनी, रंग, गहरे रंग वाली थीम, लॉक स्क्रीन, टेक्स्ट, कनेक्ट किया गया डिसप्ले"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"स्क्रीन की रोशनी, रंग, गहरे रंग वाली थीम, लॉक स्क्रीन, टेक्स्ट, टच, कनेक्ट किया गया डिसप्ले"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"कीबोर्ड चुनना, टूल"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"कर्सर की स्पीड, बटन को पसंद के मुताबिक बनाना, स्क्रोल करना"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"वॉल्यूम, स्पीकर, माइक्रोफ़ोन"</string>
@@ -3809,7 +3791,7 @@
     <string name="sim_ringtone_title" msgid="5253365736568657674">"रिंगटोन"</string>
     <string name="ringtone_title" msgid="3271453110387368088">"फ़ोन की रिंगटोन"</string>
     <string name="notification_ringtone_title" msgid="6924501621312095512">"सूचना की डिफ़ॉल्ट आवाज़"</string>
-    <string name="notification_unknown_sound_title" msgid="1319708450698738980">"ऐप की ओर से दी जाने वाली ध्वनि"</string>
+    <string name="notification_unknown_sound_title" msgid="1319708450698738980">"ऐप की ओर से दी जाने वाली आवाज़"</string>
     <string name="notification_sound_default" msgid="8630353701915294299">"सूचना की डिफ़ॉल्ट आवाज़"</string>
     <string name="alarm_ringtone_title" msgid="6680761007731764726">"अलार्म की डिफ़ॉल्ट आवाज़"</string>
     <string name="vibrate_when_ringing_option_ramping_ringer" msgid="2798848945803840348">"पहले वाइब्रेट हो, फिर धीरे-धीरे घंटी बजे"</string>
@@ -4213,7 +4195,7 @@
     <string name="app_notification_fsi_permission_title" msgid="2260977598430154428">"फ़ुल-स्क्रीन पर सूचनाएं दिखाने की अनुमति दें"</string>
     <string name="app_notification_fsi_permission_summary" msgid="7673487977631068039">"डिवाइस के लॉक होने पर, सूचनाओं को फ़ुल स्क्रीन पर दिखाने की अनुमति दें"</string>
     <string name="notification_badge_title" msgid="6854537463548411313">"\'सूचनाएं बताने वाला डॉट\' सुविधा चालू करें"</string>
-    <string name="notification_channel_badge_title" msgid="6505542437385640049">"सूचनाओं वाला डॉट दिखाएं"</string>
+    <string name="notification_channel_badge_title" msgid="6505542437385640049">"सूचनाएं बताने वाला डॉट दिखाएं"</string>
     <string name="app_notification_override_dnd_title" msgid="3769539356442226691">"\'परेशान न करें\' मोड को बायपास करें"</string>
     <string name="app_notification_override_dnd_summary" msgid="4894641191397562920">"\'परेशान न करें\' मोड चालू होने पर भी ये सूचनाएं दिखाना जारी रखें"</string>
     <string name="app_notification_visibility_override_title" msgid="7778628150022065920">"लॉक स्क्रीन पर दिखाएं"</string>
@@ -4632,58 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"इस ऐप्लिकेशन को अनुमति दें कि इस डिवाइस और इससे जुड़े स्टोरेज में मौजूद सभी फ़ाइलों को पढ़ सके, उनमें बदलाव कर सके, और उन्हें मिटा सके. अनुमति दिए जाने पर, यह ऐप्लिकेशन आपको सूचना दिए बिना उन फ़ाइलों को ऐक्सेस कर सकता है."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"सभी फ़ाइलें ऐक्सेस कर सकते हैं"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"स्क्रीन ऑटोमेशन"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"यह ऐप्लिकेशन, अन्य ऐप्लिकेशन की स्क्रीन पर मौजूद कॉन्टेंट को देख पाएगा और उससे इंटरैक्ट कर पाएगा, ताकि आपको टास्क पूरे करने में मदद मिल सके. ऐसा तब भी होगा, जब ऐप्लिकेशन बैकग्राउंड में चल रहे हों."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g>, उन ऐप्लिकेशन की स्क्रीन पर मौजूद कॉन्टेंट को देख सकता है और उससे इंटरैक्ट कर सकता है जिन्हें आपने टास्क पूरा करने में मदद करने की अनुमति दी है."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"जिन ऐप्लिकेशन के लिए आपने अनुमतियों में &lt;strong&gt;हमेशा के लिए अनुमति दें&lt;/strong&gt; को चुना है वे यहां दिखते हैं. जिन ऐप्लिकेशन के लिए आपने &lt;strong&gt;सिर्फ़ इस बार अनुमति दें&lt;/strong&gt; को चुना है या अनुमति नहीं दी है वे नहीं दिखते."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"अगर स्क्रीन ऑटोमेशन की अनुमति नहीं दी जाती है, तो <xliff:g id="ID_1">%1$s</xliff:g> अब भी उन ऐप्लिकेशन के साथ इंटरैक्ट कर सकता है जो <xliff:g id="ID_2">%1$s</xliff:g> से अन्य तरीकों से कनेक्ट किए गए हैं."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"इस स्क्रीन से किसी ऐप्लिकेशन को हटाने पर, <xliff:g id="ID_1">%1$s</xliff:g> अब भी उन ऐप्लिकेशन के साथ इंटरैक्ट कर सकता है जो <xliff:g id="ID_2">%1$s</xliff:g> से अन्य तरीकों से कनेक्ट किए गए हैं."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"ऐप्लिकेशन को अन्य ऐप्लिकेशन की स्क्रीन पर मौजूद कॉन्टेंट के साथ इंटरैक्ट करके, टास्क पूरे करने में आपकी मदद करने की अनुमति दें"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"ऐप्लिकेशन को स्क्रीन पर मौजूद कॉन्टेंट देखने और उससे इंटरैक्ट करने की अनुमति दें. इससे आपको टास्क पूरे करने में मदद मिलेगी"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"हर बार पूछें"</string>
-    <!-- no translation found for computer_control_automation_always_allow (6862319012006718706) -->
-    <skip />
+    <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"हमेशा के लिए अनुमति दें"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"अनुमति न दें"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_app_removed (8067079570854078888) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_apps_allowed (5356183224081522318) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_no_apps_allowed (3612333816616744203) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant (1000543942933527763) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"ऐसे ऐप्लिकेशन जिन्हें अनुमति दी गई है"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"फ़िलहाल, आपने किसी भी ऐप्लिकेशन को अनुमति नहीं दी है"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"सिर्फ़ वह ऐप्लिकेशन स्क्रीन ऑटोमेशन का इस्तेमाल कर सकता है जिसे आपने डिफ़ॉल्ट डिजिटल असिस्टेंट के तौर पर सेट किया है."</string>
+    <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"ऐप्लिकेशन को हटाया गया"</string>
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"सभी ऐप्लिकेशन हटाए गए"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Assistant की सेटिंग"</string>
+    <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 ऐप्लिकेशन को अनुमति दी गई है}one{# ऐप्लिकेशन को अनुमति दी गई है}other{# ऐप्लिकेशन को अनुमति दी गई है}}"</string>
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 ऐप्लिकेशन को अनुमति दी गई है}one{# ऐप्लिकेशन को अनुमति दी गई है}other{# ऐप्लिकेशन को अनुमति दी गई है}}"</string>
+    <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"किसी भी ऐप्लिकेशन को अनुमति नहीं है"</string>
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"सभी ऐप्लिकेशन हटाएं"</string>
+    <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"डिफ़ॉल्ट डिजिटल असिस्टेंट"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> स्क्रीन ऑटोमेशन का इस्तेमाल नहीं कर सकता"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"स्क्रीन ऑटोमेशन का इस्तेमाल, सिर्फ़ आपका डिफ़ॉल्ट डिजिटल असिस्टेंट कर सकता है"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"असिस्टेंट बदलें"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"ये ऐप्लिकेशन, उन ऐप्लिकेशन की स्क्रीन पर मौजूद कॉन्टेंट को देख सकते हैं जिनके लिए आपने अनुमति दी है. साथ ही, वे उस कॉन्टेंट के साथ इंटरैक्ट भी कर सकते हैं. इससे आपको टास्क पूरे करने में मदद मिलेगी."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"आपने ऐसा कोई ऐप्लिकेशन इंस्टॉल नहीं किया है जो स्क्रीन ऑटोमेशन का इस्तेमाल कर सके"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"टास्क पूरे करने में आपकी मदद करने के लिए ये ऐप्लिकेशन, <xliff:g id="ID_1">%1$s</xliff:g> की स्क्रीन पर मौजूद कॉन्टेंट को देख सकते हैं और उससे इंटरैक्ट कर सकते हैं."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"पूरी स्क्रीन पर सूचनाएं दिखाने की अनुमति"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"इस ऐप्लिकेशन को पूरी स्क्रीन पर सूचनाएं दिखाने की अनुमति दें"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"डिवाइस लॉक रहने पर, इस ऐप्लिकेशन को सूचनाएं पूरी स्क्रीन पर दिखाने की अनुमति दें. ऐसा करने पर, अलार्म, इनकमिंग कॉल या अन्य ज़रूरी सूचनाएं पूरी स्क्रीन पर दिखाई जा सकती हैं."</string>
@@ -5567,7 +5524,7 @@
     <string name="wfc_disclaimer_location_desc_text" msgid="1417004513415772582">"जब आप आपातकालीन कॉल के लिए इस सेवा का इस्तेमाल करते हैं, तो मोबाइल और इंटरनेट सेवा देने वाली कंपनी, आपकी जगह की जानकारी इकट्ठा कर सकती है.\n\nज़्यादा जानकारी के लिए, अपनी मोबाइल और इंटरनेट सेवा देने वाली कंपनी की निजता नीति को देखें."</string>
     <string name="forget_passpoint_dialog_message" msgid="2433875063907365760">"आप बचे हुए समय या डेटा का ऐक्सेस खो सकते हैं. हटाने से पहले अपनी सेवा देने वाली कंपनी से पुष्टि कर लें."</string>
     <string name="content_capture" msgid="868372905432812238">"ऐप्लिकेशन की सामग्री"</string>
-    <string name="content_capture_summary" msgid="49720773699715531">"ऐप्लिकेशन को Android सिस्टम में कॉन्टेंट भेजने की अनुमति दें"</string>
+    <string name="content_capture_summary" msgid="49720773699715531">"ऐप्लिकेशन को Android सिस्टम में कॉन्टेंट भेजने की अनुमति मिल जाती है"</string>
     <string name="capture_system_heap_dump_title" msgid="9210974110606886455">"सिस्टम हीप डंप कैप्चर करें"</string>
     <string name="development_memtag_page_title" msgid="3546667618748029188">"मेमोरी टैगिंग एक्सटेंशन"</string>
     <string name="development_memtag_intro" msgid="8032596625527637164">"मेमोरी टैगिंग एक्सटेंशन (एमटीई) आपके ऐप्लिकेशन में मेमोरी की सुरक्षा की गड़बड़ियों को ढूंढने में मदद करता है और ऐप्लिकेशन में मौजूद नेटिव कोड को और सुरक्षित बना सकता है."</string>
@@ -5780,7 +5737,7 @@
     <string name="enable_2g_summary_disabled_carrier" msgid="8141118453219482762">"<xliff:g id="CARRIER_NAME_2G">%1$s</xliff:g> के लिए 2G नेटवर्क होना ज़रूरी है"</string>
     <string name="require_cellular_encryption_title" msgid="6087085031703089235">"सुरक्षित किए गए नेटवर्क को ही अनुमति दें"</string>
     <string name="require_cellular_encryption_summary" msgid="6090569065420631457">"यह ज़्यादा सुरक्षित है, लेकिन इससे हो सकता है कि कुछ जगहों पर नेटवर्क कनेक्शन में समस्या आए. हालांकि, आपातकालीन कॉल हमेशा किए जा सकते हैं."</string>
-    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"क्या आपको 2G नेटवर्क से सुरक्षित रखने की सुविधा बंद करनी है?"</string>
+    <string name="network_protection_2g_off_alert_dialog_title" msgid="7957970817801353563">"2G नेटवर्क से सुरक्षित रखने की सुविधा बंद करनी है?"</string>
     <string name="network_protection_2g_off_alert_dialog_desc" msgid="7888326960588858860">"2G नेटवर्क कम सुरक्षित होते हैं. इस सुविधा को बंद करने पर आपके कॉल, मैसेज, और डेटा को ऐक्सेस या चोरी किया जा सकता है"</string>
     <string name="network_protection_2g_alert_dialog_turn_off_btn" msgid="4730685657471161010">"बंद करें"</string>
     <string name="network_protection_2g_notification_channel_title" msgid="8691263963046740086">"2G नेटवर्क से सुरक्षित रखने की सुविधा"</string>
@@ -5867,9 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"ऐप्लिकेशन अनइंस्टॉल करें"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}one{पिछले # महीने में इंस्टॉल किए गए ऐप्लिकेशन}other{पिछले # महीनों में इंस्टॉल किए गए ऐप्लिकेशन}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}one{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}other{ऐप्लिकेशन, # महीने से भी पहले इंस्टॉल किए गए}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"एआई असिस्टेंस"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"अपने-आप मिलने वाली मदद"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"चुनें कि सुझाव देने के लिए, यह ऐप्लिकेशन जानकारी शेयर कर सकता है या नहीं"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"स्क्रीन का ऐक्सेस"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"अपने-आप मिलने वाली मदद के लिए, ऐप्लिकेशन की स्क्रीन पर दिख रहे कॉन्टेंट को ऐक्सेस करने की अनुमति दें"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"आसपेक्ट रेशियो"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"अगर इस ऐप्लिकेशन को आपके <xliff:g id="DEVICE_NAME">%1$s</xliff:g> की स्क्रीन के हिसाब से डिज़ाइन नहीं किया गया है, तो इसे देखने के लिए कोई नया आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) चुनें"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"अगर इस ऐप्लिकेशन को आपके <xliff:g id="DEVICE_NAME">%1$s</xliff:g> की स्क्रीन के हिसाब से डिज़ाइन नहीं किया गया है, तो इसे देखने के लिए कोई नया आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) चुनें. ऐसा हो सकता है कि कुछ ऐप्लिकेशन, हर तरह के आसपेक्ट रेशियो के हिसाब से ऑप्टिमाइज़ न हो पाएं."</string>
@@ -5888,10 +5844,11 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) बदलने पर ऐप्लिकेशन रीस्टार्ट होगा. इससे वे बदलाव मिट सकते हैं जिन्हें सेव नहीं किया गया है. ऐसा हो सकता है कि कुछ ऐप्लिकेशन, हर तरह के आसपेक्ट रेशियो के हिसाब से ऑप्टिमाइज़ न हो पाएं."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"उपयोगकर्ता अनुभव"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"वर्चुअल गेमपैड"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"बदलावों की पुष्टि करने के लिए, गेम को रीस्टार्ट करें"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"फ़िंगरप्रिंट सेंसर"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"फ़्लैश के साथ मिलने वाली सूचनाएं"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"फ़्लैश के साथ मिलने वाली सूचनाओं की जानकारी"</string>
-    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"बंद है / सूचनाओं और अलार्म का अलर्ट, कैमरे या स्क्रीन के फ़्लैश से पाएं"</string>
+    <string name="flash_notifications_summary_off" msgid="5425509923465184385">"बंद है / सूचनाओं और अलार्म के अलर्ट, कैमरे या स्क्रीन के फ़्लैश से पाएं"</string>
     <string name="flash_notifications_summary_on" msgid="7750683903778104666">"चालू है / सूचनाओं और अलार्म के लिए, स्क्रीन के फ़्लैश या कैमरे की सुविधा चालू करें"</string>
     <string name="flash_notifications_intro" msgid="8409873413480928249">"सूचनाएं मिलने या अलार्म बजने पर कैमरे की लाइट या स्क्रीन फ़्लैश होगी"</string>
     <string name="flash_notifications_intro_without_camera_flash" msgid="6297337174487793891">"सूचनाएं मिलने या अलार्म बजने पर स्क्रीन का फ़्लैश चालू होने की सुविधा पाएं"</string>
@@ -6182,7 +6139,7 @@
     <string name="app_security_subpage_title" msgid="397183486243670441">"ऐप्लिकेशन की सुरक्षा"</string>
     <string name="device_unlock_subpage_title" msgid="8619367783572270468">"डिवाइस अनलॉक करने की सुविधा"</string>
     <string name="account_security_subpage_title" msgid="3676085534746127966">"खाते की सुरक्षा"</string>
-    <string name="device_finders_subpage_title" msgid="2635718540485825070">"डिवाइस खोने पर डेटा को सुरक्षित रखने से जुड़ी सेटिंग"</string>
+    <string name="device_finders_subpage_title" msgid="2635718540485825070">"डिवाइस खोने पर डेटा को सुरक्षित रखने की सेटिंग"</string>
     <string name="system_and_updates_subpage_title" msgid="5274185686741552322">"सिस्टम और अपडेट"</string>
     <string name="location_settings" msgid="6833222354060094170">"जगह की जानकारी का ऐक्सेस"</string>
     <string name="location_settings_subtitle" msgid="8471780117911010030">"उन ऐप्लिकेशन और सेवाओं को देखें जिनके पास जगह की जानकारी का ऐक्सेस है"</string>

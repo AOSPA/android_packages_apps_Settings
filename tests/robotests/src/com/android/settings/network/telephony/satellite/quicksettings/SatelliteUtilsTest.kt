@@ -17,19 +17,25 @@
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.Application
-import android.os.PersistableBundle
+import android.content.Intent
+import android.provider.Settings
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionInfo
 import android.telephony.SubscriptionManager
 import android.telephony.satellite.SatelliteManager
 import androidx.test.core.app.ApplicationProvider
+import com.android.settings.network.telephony.TelephonyFeatureProvider
+import com.android.settings.network.telephony.satellite.SatelliteSettingsRepository
+import com.android.settings.testutils.FakeFeatureFactory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.MockitoAnnotations
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.Shadows.shadowOf
@@ -55,28 +61,89 @@ class SatelliteUtilsTest {
     private val SUB_ID = 1
     private val SUB_ID_2 = 2
 
+    private lateinit var fakeFeatureFactory: FakeFeatureFactory
+    @Mock private lateinit var mockTelephonyFeatureProvider: TelephonyFeatureProvider
+    @Mock private lateinit var mockSatelliteSettingsRepository: SatelliteSettingsRepository
+    @Mock private lateinit var mockSatelliteStateRepository: SatelliteStateRepository
+    @Mock private lateinit var mockSatelliteAppsRepository: SatelliteAppsRepository
+
     @Before
     fun setUp() {
         MockitoAnnotations.openMocks(this)
         context = ApplicationProvider.getApplicationContext<Application>()
+        fakeFeatureFactory = FakeFeatureFactory.setupForTest()
+        `when`(fakeFeatureFactory.telephonyFeatureProvider.satelliteSettingsRepository)
+            .thenReturn(mockSatelliteSettingsRepository)
 
         shadowSatelliteManager =
             Shadow.extract(context.getSystemService(SatelliteManager::class.java))
 
         shadowCarrierConfigManager =
             Shadow.extract(context.getSystemService(CarrierConfigManager::class.java))
-        shadowCarrierConfigManager.setConfigForSubId(SUB_ID, PersistableBundle())
 
         shadowSubscriptionManager =
             shadowOf(context.getSystemService(SubscriptionManager::class.java))
 
         `when`(subInfo1.subscriptionId).thenReturn(SUB_ID)
         `when`(subInfo2.subscriptionId).thenReturn(SUB_ID_2)
+
+        SatelliteStateRepository.setInstance(mockSatelliteStateRepository)
+        SatelliteUtils.satelliteAppsRepositoryProvider = { mockSatelliteAppsRepository }
+    }
+
+    @After
+    fun tearDown() {
+        SatelliteStateRepository.setInstance(null)
+        // Reset the provider to default
+        SatelliteUtils.satelliteAppsRepositoryProvider = { SatelliteAppsRepository(it) }
+    }
+
+    @Test
+    fun resolveSatelliteSettingsIntent_unconstrainedMode_returnsSettingsIntent() {
+        `when`(mockSatelliteStateRepository.getSatelliteDataSupportMode(SUB_ID))
+            .thenReturn(SatelliteManager.SATELLITE_DATA_SUPPORT_UNCONSTRAINED)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(SUB_ID)).thenReturn(true)
+        ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
+
+        val expectedIntent = Intent(Settings.ACTION_SATELLITE_SETTING)
+        `when`(mockSatelliteAppsRepository.getSettingsIntent(true)).thenReturn(expectedIntent)
+
+        val resultIntent = SatelliteUtils.resolveSatelliteSettingsIntent(context)
+
+        assertThat(resultIntent).isEqualTo(expectedIntent)
+    }
+
+    @Test
+    fun resolveSatelliteSettingsIntent_unconstrainedMode_settingsIntentNull_returnsLandingPageIntent() {
+        `when`(mockSatelliteStateRepository.getSatelliteDataSupportMode(anyInt()))
+            .thenReturn(SatelliteManager.SATELLITE_DATA_SUPPORT_UNCONSTRAINED)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(anyInt())).thenReturn(true)
+        ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
+
+        `when`(mockSatelliteAppsRepository.getSettingsIntent(true)).thenReturn(null)
+
+        val resultIntent = SatelliteUtils.resolveSatelliteSettingsIntent(context)
+
+        assertThat(resultIntent).isNotNull()
+        assertThat(resultIntent.component?.className)
+            .isEqualTo(SatelliteLandingPageActivity::class.java.name)
+    }
+
+    @Test
+    fun resolveSatelliteSettingsIntent_constrainedMode_returnsLandingPageIntent() {
+        `when`(mockSatelliteStateRepository.getSatelliteDataSupportMode(SUB_ID))
+            .thenReturn(SatelliteManager.SATELLITE_DATA_SUPPORT_CONSTRAINED)
+        ShadowSubscriptionManager.setActiveDataSubscriptionId(SUB_ID)
+
+        val resultIntent = SatelliteUtils.resolveSatelliteSettingsIntent(context)
+
+        assertThat(resultIntent.component?.className)
+            .isEqualTo(SatelliteLandingPageActivity::class.java.name)
     }
 
     @Test
     fun isLteBasedNtnSupportedByCarrier_allConditionsMet_returnsTrue() {
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
         )
@@ -85,24 +152,10 @@ class SatelliteUtilsTest {
     }
 
     @Test
-    fun isLteBasedNtnSupported_bundle_returnsTrue() {
-        val config =
-            PersistableBundle().apply {
-                putBoolean(CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL, true)
-                putInt(
-                    CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT,
-                    CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
-                )
-            }
-
-        assertThat(SatelliteUtils.isLteBasedNtnSupported(config)).isTrue()
-    }
-
-    @Test
     fun isLteBasedNtnSupported_supportedConfig_hasUserRestriction_stillReturnsTrue() {
         // Set attach restriction reason to true (user restriction)
         setAttachRestrictionReasons(restricted = true)
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
         )
@@ -114,8 +167,7 @@ class SatelliteUtilsTest {
     fun isCarrierRoamingNtnSupported_invalidSubId_returnsFalse() {
         assertThat(
                 SatelliteUtils.isCarrierRoamingNtnSupported(
-                    context,
-                    SubscriptionManager.INVALID_SUBSCRIPTION_ID,
+                    SubscriptionManager.INVALID_SUBSCRIPTION_ID
                 )
             )
             .isFalse()
@@ -123,7 +175,7 @@ class SatelliteUtilsTest {
 
     @Test
     fun isLteBasedNtnSupportedByCarrier_satelliteAttachNotSupported_returnsFalse() {
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = false,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
         )
@@ -133,7 +185,7 @@ class SatelliteUtilsTest {
 
     @Test
     fun isLteBasedNtnSupportedByCarrier_connectTypeManual_returnsFalse() {
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
         )
@@ -143,33 +195,33 @@ class SatelliteUtilsTest {
 
     @Test
     fun isCarrierRoamingNtnSupported_allConditionsMet_returnsTrue() {
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
         )
 
-        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isTrue()
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(SUB_ID)).isTrue()
     }
 
     @Test
     fun isCarrierRoamingNtnSupported_attachRestricted_stillReturnsTrue() {
         setAttachRestrictionReasons(restricted = true)
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
         )
 
-        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isTrue()
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(SUB_ID)).isTrue()
     }
 
     @Test
     fun isCarrierRoamingNtnSupported_satelliteAttachNotSupported_returnsFalse() {
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = false,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
         )
 
-        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(context, SUB_ID)).isFalse()
+        assertThat(SatelliteUtils.isCarrierRoamingNtnSupported(SUB_ID)).isFalse()
     }
 
     @Test
@@ -181,7 +233,7 @@ class SatelliteUtilsTest {
     @Test
     fun isLteBasedNtnSupportedByAnySub_oneSubSupported_returnsTrue() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1))
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
             subId = SUB_ID,
@@ -193,7 +245,7 @@ class SatelliteUtilsTest {
     @Test
     fun isLteBasedNtnSupportedByAnySub_oneSubNotSupported_returnsFalse() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1))
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
             subId = SUB_ID,
@@ -206,13 +258,13 @@ class SatelliteUtilsTest {
     fun isLteBasedNtnSupportedByAnySub_twoSubsOneSupported_returnsTrue() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1, subInfo2))
         // SUB_ID is supported
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
             subId = SUB_ID,
         )
         // SUB_ID_2 is not supported
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = false,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
             subId = SUB_ID_2,
@@ -225,13 +277,13 @@ class SatelliteUtilsTest {
     fun isLteBasedNtnSupportedByAnySub_twoSubsNoneSupported_returnsFalse() {
         shadowSubscriptionManager.setActiveSubscriptionInfoList(listOf(subInfo1, subInfo2))
         // SUB_ID is not supported
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = false,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_AUTOMATIC,
             subId = SUB_ID,
         )
         // SUB_ID_2 is not supported
-        setupCarrierConfig(
+        setupSatelliteRepository(
             isAttachSupported = true,
             connectType = CarrierConfigManager.CARRIER_ROAMING_NTN_CONNECT_MANUAL,
             subId = SUB_ID_2,
@@ -248,19 +300,14 @@ class SatelliteUtilsTest {
         shadowSatelliteManager.setAttachRestrictionReasonsForCarrier(subId, reasons)
     }
 
-    private fun setupCarrierConfig(
+    private fun setupSatelliteRepository(
         isAttachSupported: Boolean,
         connectType: Int,
         subId: Int = SUB_ID,
     ) {
-        val config =
-            PersistableBundle().apply {
-                putBoolean(
-                    CarrierConfigManager.KEY_SATELLITE_ATTACH_SUPPORTED_BOOL,
-                    isAttachSupported,
-                )
-                putInt(CarrierConfigManager.KEY_CARRIER_ROAMING_NTN_CONNECT_TYPE_INT, connectType)
-            }
-        shadowCarrierConfigManager.setConfigForSubId(subId, config)
+        `when`(mockSatelliteSettingsRepository.isSatelliteAttachSupported(subId))
+            .thenReturn(isAttachSupported)
+        `when`(mockSatelliteSettingsRepository.getSatelliteNtnConnectType(subId))
+            .thenReturn(connectType)
     }
 }

@@ -79,27 +79,28 @@ constructor(
                 var state = CarrierRoamingNtnState()
 
                 override fun onCarrierRoamingNtnEligibleStateChanged(eligible: Boolean) {
-                    if (state.isEligible != eligible) {
-                        Log.i(TAG, "onCarrierRoamingNtnEligibleStateChanged: $eligible")
-                        state = state.copy(isEligible = eligible)
-                        trySend(state)
-                    }
+                    Log.i(TAG, "onCarrierRoamingNtnEligibleStateChanged: $eligible")
+                    state = state.copy(isEligible = eligible)
+                    trySend(state)
                 }
 
                 override fun onCarrierRoamingNtnModeChanged(active: Boolean) {
-                    if (state.isActive != active) {
-                        Log.i(TAG, "onCarrierRoamingNtnModeChanged: $active")
-                        state = state.copy(isActive = active)
-                        trySend(state)
-                    }
+                    Log.i(TAG, "onCarrierRoamingNtnModeChanged: $active")
+                    state = state.copy(isActive = active)
+                    trySend(state)
                 }
             }
 
         // no initial state needs to be emited.
-	// registerTelephonyCallback always callsback immediately with current state as per documentation of the API
+        // registerTelephonyCallback always callsback immediately with current state as per
+        // documentation of the API
 
+        Log.i(TAG, "registerTelephonyCallback for carrierRoamingNtnStateFlow")
         telephonyManager?.registerTelephonyCallback(callbackExecutor, callback)
-        awaitClose { runCatching { telephonyManager?.unregisterTelephonyCallback(callback) } }
+        awaitClose {
+            Log.i(TAG, "unregisterTelephonyCallback for carrierRoamingNtnStateFlow")
+            runCatching { telephonyManager?.unregisterTelephonyCallback(callback) }
+        }
     }
 
     private val isCellularAvailableFlow = callbackFlow {
@@ -122,8 +123,12 @@ constructor(
         // delayed or async.
         trySend(isAvailable)
 
+        Log.i(TAG, "registerTelephonyCallback for isCellularAvailableFlow")
         telephonyManager?.registerTelephonyCallback(callbackExecutor, callback)
-        awaitClose { runCatching { telephonyManager?.unregisterTelephonyCallback(callback) } }
+        awaitClose {
+            Log.i(TAG, "unregisterTelephonyCallback for isCellularAvailableFlow")
+            runCatching { telephonyManager?.unregisterTelephonyCallback(callback) }
+        }
     }
 
     private val isOemSatelliteActiveFlow = callbackFlow {
@@ -140,6 +145,7 @@ constructor(
         // Emit initial state
         trySend(isActive)
 
+        Log.i(TAG, "registerForModemStateChanged for isOemSatelliteActiveFlow")
         satelliteManager?.registerForModemStateChanged(callbackExecutor, callback)
         awaitClose { runCatching { satelliteManager?.unregisterForModemStateChanged(callback) } }
     }
@@ -158,6 +164,7 @@ constructor(
                 }
 
                 try {
+                    Log.i(TAG, "registerForSatelliteDisallowedReasonsChanged for satelliteDisallowedReasons flow")
                     satelliteManager?.registerForSatelliteDisallowedReasonsChanged(
                         callbackExecutor,
                         callback,
@@ -282,7 +289,7 @@ constructor(
                 activeSubIdFlow,
             ) { (carrierState, isOemActive, disallowedReasons), isTerrestrial, isAirplaneMode, subId
                 ->
-                val isCarrierSupported = SatelliteUtils.isCarrierRoamingNtnSupported(context, subId)
+                val isCarrierSupported = SatelliteUtils.isCarrierRoamingNtnSupported(subId)
                 val isSatelliteAvailable =
                     checkSatelliteAvailability(
                         isCarrierEligible = carrierState.isEligible,
@@ -298,7 +305,7 @@ constructor(
                         "isTerrestrial=$isTerrestrial, isCarrierSupported=$isCarrierSupported, " +
                         "carrierEligible=${carrierState.isEligible}, carrierActive=${carrierState.isActive}, " +
                         "oemActive=$isOemActive, oemDisallowedReasons=${disallowedReasons.contentToString()}, " +
-                        "isSatelliteAvailable=$isSatelliteAvailable"
+                        "isSatelliteAvailable=$isSatelliteAvailable",
                 )
 
                 // Rule: Immediate return if Airplane Mode is on
@@ -324,6 +331,9 @@ constructor(
      * @return The [SatelliteManager.SatelliteDataSupportMode].
      */
     open fun getSatelliteDataSupportMode(subId: Int): Int {
+        if (!SubscriptionManager.isValidSubscriptionId(subId)) {
+            return SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN
+        }
         return try {
             satelliteManager?.getSatelliteDataSupportMode(subId)
                 ?: SatelliteManager.SATELLITE_DATA_SUPPORT_UNKNOWN
@@ -376,7 +386,10 @@ constructor(
     /* Returns true if cellular is available and not using a non-terrestrial network. */
     private fun checkInitialCellularAvailability(): Boolean {
         return try {
-            val state = telephonyManager?.serviceState ?: return false
+            val state = telephonyManager?.serviceState
+            Log.i(TAG, "checkInitialCellularAvailability: serviceState is ${if (state == null) "null" else "not null"}")
+            Log.i(TAG, "checkInitialCellularAvailability: serviceState=$state")
+            if (state == null) return false
             state.state == ServiceState.STATE_IN_SERVICE && !state.isUsingNonTerrestrialNetwork
         } catch (e: Exception) {
             Log.e(TAG, "Error checking initial cellular state", e)
@@ -387,8 +400,12 @@ constructor(
     /* Returns true if internet is available. */
     private fun checkInitialInternetAvailability(): Boolean {
         return try {
-            val activeNetwork = connectivityManager?.activeNetwork ?: return false
-            val caps = connectivityManager.getNetworkCapabilities(activeNetwork) ?: return false
+            val activeNetwork = connectivityManager?.activeNetwork
+            Log.i(TAG, "checkInitialInternetAvailability: activeNetwork is ${if (activeNetwork == null) "null" else "not null"}")
+            if (activeNetwork == null) return false
+            val caps = connectivityManager.getNetworkCapabilities(activeNetwork)
+            Log.i(TAG, "checkInitialInternetAvailability: networkCapabilities=$caps")
+            if (caps == null) return false
             caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
         } catch (e: Exception) {
             Log.e(TAG, "Error checking initial internet state", e)

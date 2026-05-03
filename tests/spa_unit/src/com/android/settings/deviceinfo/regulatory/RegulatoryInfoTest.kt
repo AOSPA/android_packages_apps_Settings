@@ -27,7 +27,6 @@ import com.android.dx.mockito.inline.extended.ExtendedMockito
 import com.android.dx.mockito.inline.extended.ExtendedMockito.doReturn
 import com.android.settings.deviceinfo.regulatory.RegulatoryInfo.KEY_COO
 import com.android.settings.deviceinfo.regulatory.RegulatoryInfo.KEY_SKU
-import com.android.settings.deviceinfo.regulatory.RegulatoryInfo.KEY_TEST_LABEL_PERMIT_BOOL
 import com.android.settings.deviceinfo.regulatory.RegulatoryInfo.getRegulatoryInfo
 import com.android.settings.tests.spa_unit.R
 import com.google.common.truth.Truth.assertThat
@@ -36,7 +35,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.MockitoSession
-import org.mockito.kotlin.whenever
 import org.mockito.quality.Strictness
 
 @RunWith(AndroidJUnit4::class)
@@ -47,15 +45,11 @@ class RegulatoryInfoTest {
 
     @Before
     fun setUp() {
-        mockSession =
-            ExtendedMockito.mockitoSession()
-                .initMocks(this)
-                .mockStatic(SystemProperties::class.java)
-                .strictness(Strictness.LENIENT)
-                .startMocking()
-
-        whenever(SystemProperties.get(KEY_SKU)).thenReturn("")
-        whenever(SystemProperties.get(KEY_COO)).thenReturn("")
+        mockSession = ExtendedMockito.mockitoSession()
+            .initMocks(this)
+            .mockStatic(SystemProperties::class.java)
+            .strictness(Strictness.LENIENT)
+            .startMocking()
     }
 
     @After
@@ -65,15 +59,8 @@ class RegulatoryInfoTest {
 
     @Test
     fun getRegulatoryInfo_noSkuProperty_shouldReturnDefaultLabel() {
-        val regulatoryInfo = context.getRegulatoryInfo()
+        doReturn("").`when` { SystemProperties.get(KEY_SKU) }
 
-        assertDrawableSameAs(regulatoryInfo, R.drawable.regulatory_info)
-    }
-
-    @Test
-    fun getRegulatoryInfo_testPermitAndNoSkuProperty_shouldReturnDefaultLabel() {
-        whenever(SystemProperties.get("ro.build.type")).thenReturn("userdebug")
-        whenever(SystemProperties.getBoolean(KEY_TEST_LABEL_PERMIT_BOOL, false)).thenReturn(true)
         val regulatoryInfo = context.getRegulatoryInfo()
 
         assertDrawableSameAs(regulatoryInfo, R.drawable.regulatory_info)
@@ -82,6 +69,7 @@ class RegulatoryInfoTest {
     @Test
     fun getResourceId_noCooProperty_shouldReturnSkuLabel() {
         doReturn("sku").`when` { SystemProperties.get(KEY_SKU) }
+        doReturn("").`when` { SystemProperties.get(KEY_COO) }
 
         val regulatoryInfo = context.getRegulatoryInfo()
 
@@ -101,6 +89,7 @@ class RegulatoryInfoTest {
     @Test
     fun getResourceId_noCorrespondingCooLabel_shouldReturnSkuLabel() {
         doReturn("sku").`when` { SystemProperties.get(KEY_SKU) }
+        doReturn("unknown").`when` { SystemProperties.get(KEY_COO) }
 
         val regulatoryInfo = context.getRegulatoryInfo()
 

@@ -54,7 +54,7 @@ public class BluetoothPairingDetail extends BluetoothDevicePairingDetailBase imp
         Indexable {
     private static final String TAG = "BluetoothPairingDetail";
 
-    private static final long SHOW_NO_DEVICE_BUTTON_TIMEOUT_MILLS = 5000;
+    private static final long SHOW_NO_DEVICE_BUTTON_TIMEOUT_MILLS = 12800;
     @VisibleForTesting
     static final String KEY_AVAIL_DEVICES = "available_devices";
     @VisibleForTesting

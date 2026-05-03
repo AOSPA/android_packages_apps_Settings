@@ -1056,7 +1056,8 @@
     <string name="wifi_settings_wep_networks_disconnect_summary" msgid="6894496037087903635">"Je bent verbonden met een WEP-netwerk. Als je deze netwerken niet meer toestaat, wordt de verbinding verbroken."</string>
     <string name="wifi_show_advanced" msgid="2969378109942071741">"Geavanceerde opties"</string>
     <string name="wifi_advanced_toggle_description" msgid="7299179796727934885">"Dropdownmenu \'Geavanceerde opties\'"</string>
-    <string name="wifi_advanced_toggle_description_collapsed" msgid="3615140699129928913">"uitvouwen"</string>
+    <string name="wifi_advanced_toggle_action_expand" msgid="8286882218084659009">"uitvouwen"</string>
+    <string name="wifi_advanced_toggle_action_collapse" msgid="8864441197817185264">"samenvouwen"</string>
     <string name="wifi_ssid" msgid="5139273830867723030">"Netwerknaam*"</string>
     <string name="wifi_ssid_hint" msgid="1940577553241083524">"Voer de SSID in"</string>
     <string name="wifi_security" msgid="9095934643631406913">"Beveiliging"</string>
@@ -1501,7 +1502,7 @@
     <string name="sim_enter_ok" msgid="3401715290135787531">"OK"</string>
     <string name="sim_enter_cancel" msgid="2001859323724961490">"Annuleren"</string>
     <string name="automatic_sim_lock_settings_title" msgid="744044872158962782">"Simkaart beschermen"</string>
-    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Beschermingsmodus voor simlock"</string>
+    <string name="automatic_sim_lock_protection" msgid="455534553760066231">"Bescherming voor simlock"</string>
     <string name="sim_auto_pin_management_toggle" msgid="3119834807997704128">"Simkaart vergrendelen"</string>
     <string name="sim_pin_auto_management_on" msgid="1839795195797452391">"Beheerd door Android"</string>
     <string name="sim_pin_auto_management_off" msgid="8518118023400831852">"Niet beheerd door Android"</string>
@@ -1526,10 +1527,8 @@
     <string name="confirm_new_sim_pin_after_mismatch" msgid="8358717933025894071">"De pincodes komen niet overeen. Bevestig de nieuwe pincode voor de simkaart."</string>
     <string name="enter_current_sim_pin_after_mismatch" msgid="6910905505364979098">"Onjuiste pincode. Resterende pogingen: <xliff:g id="NUM_ATTEMPTS">%1$d</xliff:g>"</string>
     <string name="enter_current_sim_pin_hint" msgid="5079349481153303213">"Voer de huidige pincode van de simkaart in"</string>
-    <!-- no translation found for first_sim_card_slot_title (3356479839445380506) -->
-    <skip />
-    <!-- no translation found for second_sim_card_slot_title (3633426789926751040) -->
-    <skip />
+    <string name="first_sim_card_slot_title" msgid="3356479839445380506">"Eerste simkaartsleuf"</string>
+    <string name="second_sim_card_slot_title" msgid="3633426789926751040">"Tweede simkaartsleuf"</string>
     <string name="sim_change_data_title" msgid="4663239438584588847">"<xliff:g id="CARRIER">%1$s</xliff:g> gebruiken voor mobiele data?"</string>
     <string name="sim_change_data_message" msgid="3046178883369645132">"Je gebruikt <xliff:g id="CARRIER2_0">%2$s</xliff:g> voor mobiele data. Als je overschakelt naar <xliff:g id="CARRIER1">%1$s</xliff:g>, wordt <xliff:g id="CARRIER2_1">%2$s</xliff:g> niet meer gebruikt voor mobiele data."</string>
     <string name="sim_change_data_ok" msgid="4922114750417276560">"<xliff:g id="CARRIER">%1$s</xliff:g> gebruiken"</string>
@@ -1834,7 +1833,7 @@
     <string name="time_notifications_title" msgid="8654754577463543558">"Meldingen"</string>
     <string name="time_notifications_summary" msgid="5669901692108499323">"Krijg een melding als je tijd automatisch verandert"</string>
     <string name="time_zone_change_notifications_toggle_title" msgid="1043535997768918630">"Wijziging van tijdzone"</string>
-    <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Krijg een melding als je tijdzone automatisch wordt geüpdatet"</string>
+    <string name="time_zone_change_notifications_toggle_summary" msgid="3262043415408639456">"Krijg een melding als je tijdzone automatisch wordt aangepast"</string>
     <string name="keywords_time_notification_category" msgid="2835103450233237372">"melding, tijd, zone, tijdzone"</string>
     <string name="time_zone_offset_change_notification_toggle_title" msgid="1193662496430013157">"Geplande klokwijziging"</string>
     <string name="time_zone_offset_change_notification_toggle_summary" msgid="5968024653460815774">"Krijg een melding als je klok een geplande wijziging uitvoert, bijvoorbeeld voor zomertijd"</string>
@@ -2130,7 +2129,7 @@
     <string name="show_password" msgid="7101900779571040117">"Wachtwoorden tonen"</string>
     <string name="show_password_summary" msgid="9025960283785111619">"Geef tekens kort weer terwijl je typt"</string>
     <string name="show_secrets_touch_title" msgid="84204071484216549">"Wachtwoorden tonen voor touchscreen"</string>
-    <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Tekens kort tonen terwijl je typt op het touchscreen"</string>
+    <string name="show_secrets_touch_summary" msgid="4533171516921235441">"Toon tekens kort terwijl je typt op het touchscreen"</string>
     <string name="show_secrets_physical_title" msgid="3789582834699960816">"Wachtwoorden tonen voor toetsenbord"</string>
     <string name="show_secrets_physical_summary" msgid="8230461852128151893">"Tekens kort tonen terwijl je typt op het toetsenbord"</string>
     <string name="spellchecker_security_warning" msgid="2016059050608271820">"Deze spellingcontrole verzamelt mogelijk alle tekst die je typt, inclusief persoonsgegevens zoals wachtwoorden en creditcardnummers. De service is afkomstig uit de app <xliff:g id="SPELLCHECKER_APPLICATION_NAME">%1$s</xliff:g>. Wil je deze spellingcontrole gebruiken?"</string>
@@ -2208,37 +2207,24 @@
     <string name="game_controller_remapping_settings_intro" msgid="1173670925035985170">"Pas de acties aan die worden geactiveerd door de knoppen van je controller"</string>
     <string name="game_controller_key_remapping_category" msgid="8787322674373090790">"Knoppen"</string>
     <string name="game_controller_stick_remapping_category" msgid="2566684534140451352">"Richting"</string>
-    <!-- no translation found for game_controller_button_a (5071545867597871251) -->
-    <skip />
-    <!-- no translation found for game_controller_button_b (1748230935407462227) -->
-    <skip />
-    <!-- no translation found for game_controller_button_x (5150893082866627799) -->
-    <skip />
-    <!-- no translation found for game_controller_button_y (3128289851792045414) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l1 (1559379663052267819) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r1 (1099083705080098292) -->
-    <skip />
-    <!-- no translation found for game_controller_button_l2 (277550270086966314) -->
-    <skip />
-    <!-- no translation found for game_controller_button_r2 (1599573694754627567) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbl (8420064513456676882) -->
-    <skip />
-    <!-- no translation found for game_controller_button_thumbr (4876850584413866928) -->
-    <skip />
+    <string name="game_controller_button_a" msgid="5071545867597871251">"A-knop"</string>
+    <string name="game_controller_button_b" msgid="1748230935407462227">"B-knop"</string>
+    <string name="game_controller_button_x" msgid="5150893082866627799">"X-knop"</string>
+    <string name="game_controller_button_y" msgid="3128289851792045414">"Y-knop"</string>
+    <string name="game_controller_button_l1" msgid="1559379663052267819">"L1-knop"</string>
+    <string name="game_controller_button_r1" msgid="1099083705080098292">"R1-knop"</string>
+    <string name="game_controller_button_l2" msgid="277550270086966314">"L2-knop"</string>
+    <string name="game_controller_button_r2" msgid="1599573694754627567">"R2-knop"</string>
+    <string name="game_controller_button_thumbl" msgid="8420064513456676882">"Klikken met de linkerstick"</string>
+    <string name="game_controller_button_thumbr" msgid="4876850584413866928">"Klikken met de rechterstick"</string>
     <string name="game_controller_dpad" msgid="5352745621298140827">"D-pad"</string>
-    <!-- no translation found for game_controller_stick_left (1351741077215302297) -->
-    <skip />
-    <!-- no translation found for game_controller_stick_right (1419620827073193725) -->
-    <skip />
+    <string name="game_controller_stick_left" msgid="1351741077215302297">"Linkerstick"</string>
+    <string name="game_controller_stick_right" msgid="1419620827073193725">"Rechterstick"</string>
     <string name="game_controller_remapping_reset_preference_title" msgid="649377683257651371">"Naar standaard resetten"</string>
     <string name="game_controller_remapping_reset_dialog_title" msgid="2983250640475811715">"Naar standaard resetten?"</string>
     <string name="game_controller_remapping_reset_dialog_message" msgid="6675448345609566154">"Al je controllerinstellingen worden teruggezet op de standaardwaarden"</string>
     <string name="game_controller_reset_dialog_button" msgid="4119182187827816149">"Resetten"</string>
-    <!-- no translation found for game_controller_remapping_preference_content_description (4483442504610146166) -->
-    <skip />
+    <string name="game_controller_remapping_preference_content_description" msgid="4483442504610146166">"op dit moment toegewezen aan <xliff:g id="ACTUAL_VALUE">%1$s</xliff:g>"</string>
     <string name="trackpad_settings" msgid="2071131324087677005">"Touchpad"</string>
     <string name="trackpad_mouse_settings" msgid="136226693583218429">"Touchpad en muis"</string>
     <string name="mouse_settings" msgid="7301671756721327122">"Muis"</string>
@@ -2309,6 +2295,7 @@
     <string name="action_corner_action_notifications" msgid="3779353356349774469">"Meldingen"</string>
     <string name="action_corner_action_quick_settings" msgid="4660901117283653069">"Snelle instellingen"</string>
     <string name="action_corner_action_note_title" msgid="676681755341991937">"Notitie"</string>
+    <string name="action_corner_action_peek_title" msgid="4305093703546498134">"Bureaublad tonen/verbergen"</string>
     <string name="action_corner_action_dialog_title" msgid="8253240813317885237">"Kies een snelkoppeling voor de <xliff:g id="CORNER">%1$s</xliff:g>"</string>
     <string name="action_corner_bottom_left_name" msgid="9193788067022476544">"linkerbenedenhoek"</string>
     <string name="action_corner_bottom_right_name" msgid="1031603363418505375">"rechterbenedenhoek"</string>
@@ -2442,10 +2429,8 @@
     <string name="feature_flags_dashboard_title" msgid="348990373716658289">"Functievlaggen"</string>
     <string name="bt_stack_log_level" msgid="6527899271926969296">"Bluetooth-stacklogboek aanzetten"</string>
     <string name="bt_stack_log_level_summary" msgid="3769107713334448285">"Wijzig het Bluetooth Stack Logging-logniveau (schakel bluetooth na het wijzigen van deze instelling)"</string>
-    <!-- no translation found for bt_hci_snoop_log_socket_title (8799637279242376944) -->
-    <skip />
-    <!-- no translation found for bt_hci_snoop_log_socket_summary (4349486848576844956) -->
-    <skip />
+    <string name="bt_hci_snoop_log_socket_title" msgid="8799637279242376944">"Netwerkverbinding voor snoop-logbestand voor bluetooth-HCI aanzetten"</string>
+    <string name="bt_hci_snoop_log_socket_summary" msgid="4349486848576844956">"Het snoop-logbestand voor bluetooth-HCI beschikbaar maken op een lokale netwerkverbinding"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_title" msgid="401330708633716596">"Filter voor snoop-logbestand voor bluetooth-HCI"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_summary" msgid="1319792184194176235">"Filters instellen"</string>
     <string name="bt_hci_snoop_log_filters_dashboard_footer" msgid="4158945851818483666">"Zet bluetooth aan en uit om de wijzigingen door te voeren"</string>
@@ -3651,12 +3636,9 @@
     <string name="device_dashboard_title" msgid="1176311605407079643">"Apparaat"</string>
     <string name="device_dashboard_summary" msgid="534835339280267939">"Touchpad, toetsenbord, scherm, geluid"</string>
     <string name="device_display_dashboard_summary" msgid="3247324964824296389">"Helderheid, kleur, donker thema, vergrendelscherm, tekst"</string>
-    <!-- no translation found for device_display_dashboard_summary_with_touch (3084505212908473817) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_external (7611181864276530737) -->
-    <skip />
-    <!-- no translation found for device_display_dashboard_summary_with_touch_external (8308333133621298607) -->
-    <skip />
+    <string name="device_display_dashboard_summary_with_touch" msgid="3084505212908473817">"Helderheid, kleur, donker thema, vergrendelscherm, tekst, aanraking"</string>
+    <string name="device_display_dashboard_summary_with_external" msgid="7611181864276530737">"Helderheid, kleur, donker thema, vergrendelscherm, tekst, verbonden scherm"</string>
+    <string name="device_display_dashboard_summary_with_touch_external" msgid="8308333133621298607">"Helderheid, kleur, donker thema, vergrendelscherm, tekst, aanraking, verbonden scherm"</string>
     <string name="device_keyboard_settings_summary" msgid="3836352140707901919">"Toetsenbordselectie, tools"</string>
     <string name="device_mouse_settings_summary" msgid="3326654487979268054">"Cursorsnelheid, knopaanpassing, scrollen"</string>
     <string name="device_sound_dashboard_summary" msgid="5766308562837462216">"Volume, speakers, microfoons"</string>
@@ -3838,7 +3820,7 @@
     <string name="spatial_audio_wired_headphones" msgid="2237355789145828648">"Bedrade koptelefoon"</string>
     <string name="spatial_audio_text" msgid="8201387855375146000">"Compatibele media leveren een royaler geluid"</string>
     <string name="spatial_summary_off" msgid="8272678804629774378">"Uit"</string>
-    <string name="spatial_summary_on_one" msgid="6239933399496282994">"Aan: <xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
+    <string name="spatial_summary_on_one" msgid="6239933399496282994">"Aan/<xliff:g id="OUTPUT_DEVICE">%1$s</xliff:g>"</string>
     <string name="spatial_summary_on_two" msgid="4526919818832483883">"Aan/<xliff:g id="OUTPUT_DEVICE_0">%1$s</xliff:g> en <xliff:g id="OUTPUT_DEVICE_1">%2$s</xliff:g>"</string>
     <string name="spatial_audio_footer_title" msgid="8775010547623606088">"Je kunt ook ruimtelijke audio voor bluetooth-apparaten aanzetten."</string>
     <string name="spatial_audio_footer_learn_more_text" msgid="3826811708094366301">"Instellingen voor verbonden apparaten"</string>
@@ -4632,53 +4614,33 @@
     <string name="allow_manage_external_storage_description" msgid="5707948153603253225">"Sta toe dat deze app alle bestanden op dit apparaat of gekoppelde opslagvolumes kan lezen, aanpassen of verwijderen. Als je dit toestaat, kan de app zonder jouw medeweten toegang tot bestanden krijgen."</string>
     <string name="filter_manage_external_storage" msgid="6751640571715343804">"Mag toegang tot alle bestanden hebben"</string>
     <string name="computer_control_automation_page_title" msgid="8338485752259445405">"Schermautomatisering"</string>
-    <!-- no translation found for computer_control_automation_sub_heading (8884590840087038012) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_sub_heading_flag_per_app_consent (2641175029127556724) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_info (3763944064782921476) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary (2608444735645972812) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_summary_flag_per_app_consent (3429755303627713396) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary (7372144192754600861) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_page_summary_flag_per_app_consent (2884280820078815604) -->
-    <skip />
+    <string name="computer_control_automation_sub_heading" msgid="542883453066952146">"Deze app kan de schermcontent van andere apps bekijken en er interactie mee hebben om je te helpen taken uit te voeren, zelfs als de apps op de achtergrond worden uitgevoerd."</string>
+    <string name="computer_control_automation_sub_heading_flag_per_app_consent" msgid="2086013777547395674">"<xliff:g id="ID_1">%1$s</xliff:g> kan de schermcontent van apps die je hebt toegestaan, bekijken en er interactie mee hebben om je te helpen taken uit te voeren."</string>
+    <string name="computer_control_automation_footer_info" msgid="3763944064782921476">"Hier worden apps getoond waarvoor je &lt;strong&gt;Altijd toestaan&lt;/strong&gt; in de rechten hebt gekozen. Apps die je &lt;strong&gt;Alleen deze keer&lt;/strong&gt; hebt toegestaan of niet hebt toegestaan, worden niet getoond."</string>
+    <string name="computer_control_automation_footer_summary" msgid="2608444735645972812">"Als je schermautomatisering niet toestaat, kan <xliff:g id="ID_1">%1$s</xliff:g> nog steeds op andere manieren interactie hebben met apps die zijn verbonden met <xliff:g id="ID_2">%1$s</xliff:g>."</string>
+    <string name="computer_control_automation_footer_summary_flag_per_app_consent" msgid="3429755303627713396">"Als je een app op dit scherm verwijdert, kan <xliff:g id="ID_1">%1$s</xliff:g> nog steeds op andere manieren interactie hebben met apps die zijn verbonden met <xliff:g id="ID_2">%1$s</xliff:g>."</string>
+    <string name="computer_control_automation_page_summary" msgid="7372144192754600861">"Sta apps toe om je te helpen taken uit te voeren door interactie te hebben met de schermcontent van andere apps"</string>
+    <string name="computer_control_automation_page_summary_flag_per_app_consent" msgid="6590135080063496543">"Sta apps toe om schermcontent te bekijken en er interactie mee te hebben om je te helpen taken uit te voeren"</string>
     <string name="computer_control_automation_ask_every_time" msgid="2636885901417245388">"Altijd vragen"</string>
     <string name="computer_control_automation_always_allow" msgid="6862319012006718706">"Altijd toestaan"</string>
     <string name="computer_control_automation_dont_allow" msgid="5870733328332108204">"Niet toestaan"</string>
-    <!-- no translation found for computer_control_automation_automatable_app_list_header (1918303040236651331) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title_per_app (6248428992700513039) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_footer_requirement (3058497842878431129) -->
-    <skip />
+    <string name="computer_control_automation_automatable_app_list_header" msgid="1918303040236651331">"Apps die je hebt toegestaan"</string>
+    <string name="computer_control_automation_agent_list_empty_title_per_app" msgid="6248428992700513039">"Je hebt nog geen apps toegestaan"</string>
+    <string name="computer_control_automation_footer_requirement" msgid="3058497842878431129">"Alleen de app die je als je standaard digitale assistent hebt ingesteld, kan schermautomatisering gebruiken."</string>
     <string name="computer_control_automation_automatable_app_removed" msgid="8067079570854078888">"App verwijderd"</string>
-    <!-- no translation found for computer_control_automation_automatable_all_apps_removed (6183230251089094628) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_default_digital_assistant_settings (5120888826055807112) -->
-    <skip />
+    <string name="computer_control_automation_automatable_all_apps_removed" msgid="6183230251089094628">"Alle apps verwijderd"</string>
+    <string name="computer_control_automation_default_digital_assistant_settings" msgid="5120888826055807112">"Assistent-instellingen"</string>
     <string name="computer_control_automation_apps_allowed" msgid="5356183224081522318">"{count,plural, =1{1 app toegestaan}other{# apps toegestaan}}"</string>
-    <!-- no translation found for computer_control_automation_agents_allowed (1671205541161504268) -->
-    <skip />
+    <string name="computer_control_automation_agents_allowed" msgid="1671205541161504268">"{count,plural, =1{1 app toegestaan}other{# apps toegestaan}}"</string>
     <string name="computer_control_automation_no_apps_allowed" msgid="3612333816616744203">"Geen apps toegestaan"</string>
-    <!-- no translation found for computer_control_automation_clear_all_apps (6219537413574973082) -->
-    <skip />
+    <string name="computer_control_automation_clear_all_apps" msgid="6219537413574973082">"Alle apps verwijderen"</string>
     <string name="computer_control_automation_default_digital_assistant" msgid="1000543942933527763">"Standaard digitale assistent"</string>
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_title (8226855831714271287) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_text (9056618475527094328) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_banner_to_change_assistant_button_text (2889542689314230862) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_header (3654765139735229178) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_agent_list_empty_title (156451952315684097) -->
-    <skip />
-    <!-- no translation found for computer_control_automation_target_list_header (4637651650979368491) -->
-    <skip />
+    <string name="computer_control_automation_banner_to_change_assistant_title" msgid="8226855831714271287">"<xliff:g id="ID_1">%1$s</xliff:g> kan schermautomatisering niet gebruiken"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_text" msgid="9056618475527094328">"Alleen je standaard digitale assistent kan schermautomatisering gebruiken"</string>
+    <string name="computer_control_automation_banner_to_change_assistant_button_text" msgid="2889542689314230862">"Assistent wijzigen"</string>
+    <string name="computer_control_automation_agent_list_header" msgid="3654765139735229178">"Deze apps kunnen de schermcontent van apps die je hebt toegestaan, bekijken en er interactie mee hebben om je te helpen taken uit te voeren."</string>
+    <string name="computer_control_automation_agent_list_empty_title" msgid="156451952315684097">"Je hebt geen apps geïnstalleerd die schermautomatisering kunnen gebruiken"</string>
+    <string name="computer_control_automation_target_list_header" msgid="2625151188607263591">"Deze apps kunnen de schermcontent van <xliff:g id="ID_1">%1$s</xliff:g> bekijken en er interactie mee hebben om je te helpen taken uit te voeren."</string>
     <string name="full_screen_intent_title" msgid="5888548315628268674">"Meldingen op volledig scherm"</string>
     <string name="permit_full_screen_intent" msgid="2414307667550523630">"Meldingen op volledig scherm van deze app toestaan"</string>
     <string name="footer_description_full_screen_intent" msgid="7716518411349225528">"Sta toe dat deze app meldingen op het volledige scherm toont als het apparaat is vergrendeld. Apps kunnen zo wekkers, inkomende gesprekken of andere urgente meldingen onder de aandacht brengen."</string>
@@ -5862,9 +5824,8 @@
     <string name="background_install_uninstall_button_description" msgid="1189649052911501249">"App verwijderen"</string>
     <string name="background_install_before" msgid="8608614957688912715">"{count,plural, =1{Apps in de afgelopen # maand geïnstalleerd}other{Apps in de afgelopen # maanden geïnstalleerd}}"</string>
     <string name="background_install_after" msgid="7983488897570908149">"{count,plural, =1{Apps meer dan # maand geleden geïnstalleerd}other{Apps meer dan # maanden geleden geïnstalleerd}}"</string>
-    <string name="ai_assist_category" msgid="6800674613544630195">"AI-ondersteuning"</string>
-    <string name="personal_context_title" msgid="6639623956831710453">"Proactieve hulp"</string>
-    <string name="personal_context_switch_summary" msgid="917644125592480347">"Kies of deze app informatie mag bijdragen om suggesties te genereren"</string>
+    <string name="ai_assist_category" msgid="6115635022788919643">"Schermtoegang"</string>
+    <string name="personal_context_switch_summary" msgid="1766362196303258988">"Geef toegang tot de schermcontent van deze app om proactieve hulp te krijgen"</string>
     <string name="aspect_ratio_title" msgid="2451826875939676101">"Beeldverhouding"</string>
     <string name="aspect_ratio_summary" msgid="4056406351663726494">"Geef deze app in een nieuwe beeldverhouding weer als die niet is ontworpen voor je <xliff:g id="DEVICE_NAME">%1$s</xliff:g>"</string>
     <string name="aspect_ratio_main_summary" msgid="4141964559612756940">"Geef deze app in een nieuwe beeldverhouding weer als die niet is ontworpen voor je <xliff:g id="DEVICE_NAME">%1$s</xliff:g>. Sommige apps zijn misschien niet geoptimaliseerd voor bepaalde beeldverhoudingen."</string>
@@ -5883,6 +5844,7 @@
     <string name="app_aspect_ratio_footer" msgid="4029509301182067475">"De app wordt opnieuw opgestart als je de beeldverhouding wijzigt. Niet-opgeslagen wijzigingen kunnen verloren gaan. Sommige apps zijn misschien niet geoptimaliseerd voor bepaalde beeldverhoudingen."</string>
     <string name="app_info_experience_category" msgid="6283332744508784886">"Functionaliteit"</string>
     <string name="virtual_gamepad_title" msgid="8888343036739485679">"Virtuele gamepad"</string>
+    <string name="virtual_gamepad_restart_game_toast" msgid="5281647814007835224">"Start je game opnieuw op om de wijzigingen te bevestigen"</string>
     <string name="accessibility_fingerprint_label" msgid="5017431423168191733">"Vingerafdruksensor"</string>
     <string name="flash_notifications_title" msgid="4490438861180492311">"Meldingen met flits"</string>
     <string name="flash_notifications_about_title" msgid="9004351252928121214">"Over meldingen met flits"</string>

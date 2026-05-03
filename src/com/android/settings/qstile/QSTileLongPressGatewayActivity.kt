@@ -29,6 +29,8 @@ import com.android.settings.development.AdbWirelessDebuggingPreferenceController
 import com.android.settings.development.qstile.AdbWirelessDebuggingDevelopmentTile
 import com.android.settings.network.telephony.satellite.quicksettings.SatelliteLandingPageActivity
 import com.android.settings.network.telephony.satellite.quicksettings.SatelliteTileService
+import com.android.settings.network.telephony.satellite.quicksettings.SatelliteUtils
+import com.android.settings.overlay.FeatureFactory
 
 /** A gateway activity for handling long-press actions on Quick Settings tiles. */
 class QSTileLongPressGatewayActivity : AppCompatActivity() {
@@ -47,7 +49,7 @@ class QSTileLongPressGatewayActivity : AppCompatActivity() {
         when (tileComponent?.className) {
             SatelliteTileService::class.java.name -> {
                 // If component is SatelliteTileService, launch the landing page.
-                val intent = Intent(this, SatelliteLandingPageActivity::class.java)
+                val intent = SatelliteUtils.resolveSatelliteSettingsIntent(this)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
                 finish()

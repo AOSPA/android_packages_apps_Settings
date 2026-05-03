@@ -51,8 +51,8 @@
     <string name="bluetooth_ask_enablement_and_lasting_discovery_no_name" product="desktop" msgid="1296067140931944135">"某个应用想要开启蓝牙，并让其他设备可检测到此设备。您之后可以在“蓝牙”设置中更改此设置。"</string>
     <string name="bluetooth_hearing_device_input_routing_builtin_option" product="default" msgid="604940407490893699">"此手机的麦克风"</string>
     <string name="bluetooth_hearing_device_input_routing_builtin_option" product="desktop" msgid="899174913125357494">"此设备的麦克风"</string>
-    <string name="bluetooth_audio_routing_summary" product="default" msgid="7087659154407454242">"将声音发送到助听装置或手机扬声器"</string>
-    <string name="bluetooth_audio_routing_summary" product="desktop" msgid="4537882886747949240">"将声音发送到助听装置或设备扬声器"</string>
+    <string name="bluetooth_audio_routing_summary" product="default" msgid="7087659154407454242">"将声音发送到助听设备或手机扬声器"</string>
+    <string name="bluetooth_audio_routing_summary" product="desktop" msgid="4537882886747949240">"将声音发送到助听设备或设备扬声器"</string>
     <string name="encryption_and_credential_settings_summary" product="default" msgid="3741475436042800617">"手机已加密"</string>
     <string name="encryption_and_credential_settings_summary" product="tablet" msgid="2220021007677215054">"设备已加密"</string>
     <string name="encryption_and_credential_settings_summary" product="desktop" msgid="2220021007677215054">"设备已加密"</string>
@@ -416,7 +416,7 @@
     <string name="virtual_device_details_footer_title" product="tablet" msgid="1049988675804747535">"如果您取消保存<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，它将不再与此平板电脑关联。部分权限将被移除，并且部分应用和应用串流功能可能会停止运行。"</string>
     <string name="virtual_device_details_footer_title" product="device" msgid="7548402204973923744">"如果您取消保存<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，它将不再与此设备关联。部分权限将被移除，并且部分应用和应用串流功能可能会停止运行。"</string>
     <string name="virtual_device_details_footer_title" product="desktop" msgid="7548402204973923744">"如果您取消保存<xliff:g id="DEVICE_NAME">%1$s</xliff:g>，它将不再与此设备关联。部分权限将被移除，并且部分应用和应用串流功能可能会停止运行。"</string>
-    <string name="nfc_secure_toggle_summary" product="default" msgid="3074277711174185931">"仅允许在屏幕解锁时进行感应式支付"</string>
+    <string name="nfc_secure_toggle_summary" product="default" msgid="3074277711174185931">"仅允许在屏幕解锁后进行感应式支付"</string>
     <string name="wifi_add_app_single_network_summary" product="default" msgid="7742934005022827107">"<xliff:g id="APPNAME">%1$s</xliff:g>想将 1 个网络保存到您的手机"</string>
     <string name="wifi_add_app_single_network_summary" product="tablet" msgid="93466057231937113">"<xliff:g id="APPNAME">%1$s</xliff:g>想将 1 个网络保存到您的平板电脑"</string>
     <string name="wifi_add_app_single_network_summary" product="desktop" msgid="2116663141004049983">"“<xliff:g id="APPNAME">%1$s</xliff:g>”想将某个网络保存到您的设备"</string>
@@ -429,10 +429,10 @@
     <string name="auto_rotate_screen_summary" product="tablet" msgid="3163709742477804994">"变换平板电脑持握方向时，自动调整为相应的竖屏或横屏模式"</string>
     <string name="auto_rotate_screen_summary" product="desktop" msgid="3805199344834364732">"变换设备持握方向时，自动调整为相应的竖屏或横屏模式"</string>
     <string name="sim_lock_on" product="tablet" msgid="227481196121403470">"需要输入PIN码才能使用平板电脑"</string>
-    <string name="sim_lock_on" product="default" msgid="6896034657274595838">"需要输入 PIN 码才能使用手机"</string>
+    <string name="sim_lock_on" product="default" msgid="6896034657274595838">"需要输入 PIN 码才能使用电话功能"</string>
     <string name="sim_lock_on" product="desktop" msgid="5734697047766184447">"需要输入 PIN 码才能使用设备"</string>
     <string name="sim_lock_off" product="tablet" msgid="4619320846576958981">"需要输入PIN码才能使用平板电脑"</string>
-    <string name="sim_lock_off" product="default" msgid="2064502270875375541">"需要输入 PIN 码才能使用手机"</string>
+    <string name="sim_lock_off" product="default" msgid="2064502270875375541">"需要输入 PIN 码才能使用电话功能"</string>
     <string name="sim_lock_off" product="desktop" msgid="903164661366964150">"需要输入 PIN 码才能使用设备"</string>
     <string name="status_number" product="default" msgid="2333455505912871374">"电话号码"</string>
     <string name="status_number" product="tablet" msgid="2610169120378692971">"MSISDN"</string>
@@ -462,6 +462,7 @@
     <string name="main_clear_desc" product="default" msgid="1888412491866186706">"此操作将清除手机"<b>"内部存储空间"</b>"中的所有数据，包括：\n\n"<li>"Google 账号"</li>\n<li>"系统和应用的数据和设置"</li>\n<li>"已下载的应用"</li></string>
     <string name="main_clear_desc" product="desktop" msgid="405802272460355609">"此操作会清除设备"<b>"内部存储空间"</b>"中的所有数据，包括：\n\n"<li>"您的 Google 账号"</li>\n<li>"系统和应用数据与设置"</li>\n<li>"下载的应用"</li></string>
     <string name="main_clear_accounts" product="default" msgid="3604029744509330786">\n\n"您目前已登录以下账号：\n"</string>
+    <string name="main_clear_accounts_count" product="default" msgid="8431492930725475832">"{count,plural, =1{\n\n您目前已登录以下账号：\n}other{\n\n您目前已登录以下账号：\n}}"</string>
     <string name="main_clear_other_users_present" product="default" msgid="7750368595882863399">\n\n"此设备上目前还有其他用户。\n"</string>
     <string name="main_clear_desc_erase_external_storage" product="nosdcard" msgid="5834269984459195918">\n\n"如需清除音乐、照片和其他用户数据，您需要清空该 "<b>"USB 存储设备"</b>"。"</string>
     <string name="main_clear_desc_erase_external_storage" product="default" msgid="2891180770413959600">\n\n"如需清除音乐、图片和其他用户数据，您需要清空该 "<b>"SD 卡"</b>"。"</string>

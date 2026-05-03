@@ -21,6 +21,8 @@ import android.app.settings.SettingsEnums
 import android.content.Intent
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
+import android.telephony.SubscriptionManager
+import android.telephony.satellite.SatelliteManager
 import android.util.Log
 import androidx.annotation.MainThread
 import androidx.annotation.VisibleForTesting
@@ -47,6 +49,7 @@ open class SatelliteTileService : TileService() {
     private var updateJob: Job? = null
 
     override fun onStartListening() {
+        Log.i(TAG, "onStartListening")
         super.onStartListening()
         val repo = SatelliteStateRepository.getInstance(this)
         // Ensure any previous job is cancelled before starting a new one.
@@ -55,12 +58,14 @@ open class SatelliteTileService : TileService() {
             scope.launch {
                 repo.satelliteStatus.collect { status ->
                     logd { "onStartListening: status=$status" }
+                    Log.i(TAG, "onStartListening: status=$status")
                     updateTile(status)
                 }
             }
     }
 
     override fun onStopListening() {
+        Log.i(TAG, "onStopListening")
         super.onStopListening()
         updateJob?.cancel()
     }
@@ -85,10 +90,8 @@ open class SatelliteTileService : TileService() {
     override fun onClick() {
         super.onClick()
         unlockAndRun {
-            val intent =
-                Intent(this, SatelliteLandingPageActivity::class.java).apply {
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                }
+            val intent = SatelliteUtils.resolveSatelliteSettingsIntent(this)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
             val pendingIntent =
                 PendingIntent.getActivity(
                     this,

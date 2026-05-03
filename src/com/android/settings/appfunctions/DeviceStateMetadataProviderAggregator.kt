@@ -17,6 +17,7 @@
 package com.android.settings.appfunctions
 
 import android.app.appsearch.GenericDocument
+import android.util.Log
 import androidx.annotation.Keep
 import com.android.settings.appfunctions.executors.DeviceStateExecutor
 import com.android.settings.appfunctions.executors.DeviceStateExecutorResult
@@ -25,7 +26,7 @@ import com.google.android.appfunctions.schema.common.v1.devicestate.DeviceStateR
 import com.google.android.appfunctions.schema.common.v1.devicestate.ItemizationType
 import com.google.android.appfunctions.schema.common.v1.devicestate.PerScreenMetadata
 import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.supervisorScope
 
 /**
  * Orchestrates the collection and transformation of device state metadata information.
@@ -55,7 +56,7 @@ class DeviceStateMetadataProviderAggregator(private val executors: List<DeviceSt
         params: GenericDocument,
         deviceLocale: String,
     ): DeviceStateMetadataResponse {
-        val executorResults = coroutineScope {
+        val executorResults = supervisorScope {
             executors
                 .map { executor ->
                     async {
@@ -63,23 +64,47 @@ class DeviceStateMetadataProviderAggregator(private val executors: List<DeviceSt
                             as DeviceStateMetadataProviderExecutorResult
                     }
                 }
-                .map { it.await() }
+                .mapNotNull {
+                    try {
+                        it.await()
+                    } catch (e: Exception) {
+                        Log.e(TAG, "Failed to execute provider", e)
+                        null
+                    }
+                }
         }
 
-        val allStates = executorResults.flatMap { it.metadata }
         val allHintText = executorResults.mapNotNull { it.hintText }.joinToString(separator = "\n")
-        val allItemizationTypes =
-            executorResults
-                .flatMap { it.itemizationTypes }
-                .distinctBy { it.key }
-                .toSet()
+
+        val allStates = mutableListOf<PerScreenMetadata>()
+        val allItemizationTypes = mutableMapOf<String, ItemizationType>()
+
+        for (result in executorResults) {
+            try {
+                allStates.addAll(result.metadata)
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to aggregate metadata from an executor", e)
+            }
+
+            try {
+                result.itemizationTypes.forEach { allItemizationTypes[it.key] = it }
+            } catch (e: Exception) {
+                Log.e(TAG, "Failed to aggregate itemizationTypes from an executor", e)
+            }
+        }
+
+        val distinctItemizationTypes = allItemizationTypes.values.toSet()
 
         return DeviceStateMetadataResponse(
             perScreenMetadata = allStates,
             deviceLocale = deviceLocale,
-            itemizationTypes = allItemizationTypes.toList(),
+            itemizationTypes = distinctItemizationTypes.toList(),
             globalHintText = allHintText
         )
+    }
+
+    companion object {
+        private const val TAG = "DeviceStateMetadataProviderAggregator"
     }
 }
 
