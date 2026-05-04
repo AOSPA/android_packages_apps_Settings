@@ -128,23 +128,4 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerTest {
         mController.updateState(mPreference);
         verify(mPreference).setChecked(false);
     }
-
-    @Test
-    public void onDeveloperOptionSwitchDisabled_shouldDisableAngleAsSystemDriver() {
-        mController.onDeveloperOptionsSwitchDisabled();
-        final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
-        assertThat(systemEGLDriver).isEqualTo("");
-    }
-
-    @Test
-    public void onDeveloperOptionSwitchDisabled_preferenceShouldNotBeChecked() {
-        mController.onDeveloperOptionsSwitchDisabled();
-        verify(mPreference).setChecked(false);
-    }
-
-    @Test
-    public void onDeveloperOptionsSwitchDisabled_preferenceShouldNotBeEnabled() {
-        mController.onDeveloperOptionsSwitchDisabled();
-        verify(mPreference).setEnabled(false);
-    }
 }

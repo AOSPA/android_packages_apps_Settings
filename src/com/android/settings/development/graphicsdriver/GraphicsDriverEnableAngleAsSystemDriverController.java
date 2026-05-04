@@ -59,6 +59,8 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
     static final String PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION =
             "debug.graphics.angle.developeroption.enable";
 
+    @VisibleForTesting static final String PROPERTY_VENDOR_API_LEVEL = "ro.vendor.api_level";
+
     @VisibleForTesting static final String ANGLE_DRIVER_SUFFIX = "angle";
 
     @VisibleForTesting
@@ -78,6 +80,11 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
                 @Override
                 public boolean getBoolean(String key, boolean def) {
                     return SystemProperties.getBoolean(key, def);
+                }
+
+                @Override
+                public int getInt(String key, int def) {
+                    return SystemProperties.getInt(key, def);
                 }
             };
         }
@@ -121,6 +128,16 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
                 + persistGraphicsEglValue);
     }
 
+    // On devices where vendor API level is >= 202604, hide the switch from UI.
+    // This prevents users from changing the value of "persist.graphics.egl" through developer
+    // option menu UI on newly released devices.
+    @Override
+    public boolean isAvailable() {
+        final boolean isVendorAPILevelQualify =
+                (mSystemProperties.getInt(PROPERTY_VENDOR_API_LEVEL, 0) < 202604);
+        return isVendorAPILevelQualify;
+    }
+
     @Override
     public String getPreferenceKey() {
         return ENABLE_ANELE_AS_SYSTEM_DRIVER_KEY;
@@ -146,14 +163,6 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
                 this);
     }
 
-    /** Return the default value of "persist.graphics.egl" */
-    public boolean isDefaultValue() {
-        final String currentGlesDriver =
-                mSystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
-        // default value of "persist.graphics.egl" is ""
-        return TextUtils.isEmpty(currentGlesDriver);
-    }
-
     @Override
     public void updateState(Preference preference) {
         super.updateState(preference);
@@ -173,12 +182,8 @@ public class GraphicsDriverEnableAngleAsSystemDriverController
 
     @Override
     protected void onDeveloperOptionsSwitchDisabled() {
-        // 1) disable the switch
+        // disable the switch
         super.onDeveloperOptionsSwitchDisabled();
-        // 2) set the persist.graphics.egl empty string
-        GraphicsEnvironment.getInstance().toggleAngleAsSystemDriver(false);
-        // 3) reset the switch
-        ((TwoStatePreference) mPreference).setChecked(false);
     }
 
     void toggleSwitchBack() {
