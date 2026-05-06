@@ -16,15 +16,10 @@
  */
 
 /*
-// QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
-// QTI_BEGIN: 2024-01-29: Telephony: Fix copyright marking
- * Changes from Qualcomm Innovation Center, Inc. are provided under the following license:
-// QTI_END: 2024-01-29: Telephony: Fix copyright marking
-// QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
- * Copyright (c) 2022-2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  * SPDX-License-Identifier: BSD-3-Clause-Clear
  */
-
 package com.android.settings.network.telephony;
 
 import static com.android.settings.network.telephony.TelephonyConstants.RadioAccessFamily.LTE;
@@ -266,13 +261,14 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
 
     @Override
     public int getAvailabilityStatus(int subId) {
-        // Check for the dynamic capability from modem.
-        if (!hasBackupCallingFeature(subId)) {
-            return CONDITIONALLY_UNAVAILABLE;
-        }
         List<SubscriptionInfo> subIdList = getActiveSubscriptionList();
         SubscriptionInfo subInfo = getSubscriptionInfoFromList(subIdList, subId);
         if (subInfo == null) {  // given subId is not actives
+            return CONDITIONALLY_UNAVAILABLE;
+        }
+
+        // Check for the dynamic capability from modem.
+        if (!hasBackupCallingFeature(subId)) {
             return CONDITIONALLY_UNAVAILABLE;
         }
         return AVAILABLE;
@@ -476,7 +472,10 @@ public class BackupCallingPreferenceController extends TelephonyTogglePreference
         }
 // QTI_END: 2024-01-11: Telephony: Restore C_IWLAN UI
 // QTI_BEGIN: 2024-02-06: Telephony: Fix C_IWLAN UI not showing
-        mCallingPreferenceCategoryController.updateChildVisible(getPreferenceKey(), true);
+        if (mCallingPreferenceCategoryController != null) {
+            mCallingPreferenceCategoryController.updateChildVisible(getPreferenceKey(),
+                getAvailabilityStatus() == AVAILABLE);
+        }
 // QTI_END: 2024-02-06: Telephony: Fix C_IWLAN UI not showing
 // QTI_BEGIN: 2024-01-11: Telephony: Restore C_IWLAN UI
         SubscriptionInfo subInfo = getSubscriptionInfoFromActiveList(mSubId);
