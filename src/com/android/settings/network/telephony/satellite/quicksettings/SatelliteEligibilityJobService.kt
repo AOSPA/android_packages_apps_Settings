@@ -52,7 +52,7 @@ open class SatelliteEligibilityJobService : JobService() {
 
     companion object {
         private const val TIMEOUT_MS = 10 * 60 * 1000L // 10 minutes
-        private const val OOS_DEBOUNCE_MS = 3 * 60 * 1000L // 3 minutes
+        private const val OOS_DEBOUNCE_MS = 10 * 1000L // 10 sec
 
         @VisibleForTesting internal var satelliteTilePromptUtils = SatelliteTilePromptUtils()
 
@@ -200,10 +200,13 @@ open class SatelliteEligibilityJobService : JobService() {
                 .satelliteStatus
                 .collectLatest { status ->
                     Log.i(TAG, "Received satelliteStatus update: $status")
-                    if (status == SatelliteStatus.AVAILABLE || status == SatelliteStatus.ACTIVE) {
-                        Log.i(TAG, "Satellite Status: $status. Waiting for 3-minute debounce.")
+                    if (status == SatelliteStatus.AVAILABLE) {
+                        Log.i(TAG, "Satellite Status: $status. Waiting for 10 sec  debounce.")
                         kotlinx.coroutines.delay(OOS_DEBOUNCE_MS)
                         Log.i(TAG, "Satellite Status sustained at $status. Showing prompt.")
+                        showPromptAndFinish(params)
+                    } else if (status == SatelliteStatus.ACTIVE) {
+                        Log.i(TAG, "Satellite Status $status. Showing prompt.")
                         showPromptAndFinish(params)
                     } else {
                         Log.i(TAG, "Satellite Status is $status, debounce timer (if any) cancelled.")
