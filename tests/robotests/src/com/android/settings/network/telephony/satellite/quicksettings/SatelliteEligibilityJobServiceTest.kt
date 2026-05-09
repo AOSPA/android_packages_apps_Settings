@@ -336,13 +336,13 @@ class SatelliteEligibilityJobServiceTest {
 
         // Trigger status available
         satelliteStatusFlow.value = SatelliteStatus.AVAILABLE
-        // Advance time partially (e.g. 1 minute)
-        ShadowLooper.idleMainLooper(60 * 1000L, TimeUnit.MILLISECONDS)
+        // Advance time partially (e.g. 2 seconds)
+        ShadowLooper.idleMainLooper(2 * 1000L, TimeUnit.MILLISECONDS)
 
         // Trigger status not available (transient)
         satelliteStatusFlow.value = SatelliteStatus.NOT_AVAILABLE
-        // Advance time to complete the original 3 minutes
-        ShadowLooper.idleMainLooper(3 * 60 * 1000L, TimeUnit.MILLISECONDS)
+        // Advance time to complete the original 10 sec
+        ShadowLooper.idleMainLooper(10 * 1000L, TimeUnit.MILLISECONDS)
 
         // Verify prompt was NOT shown
         verify(mockSatelliteTilePromptUtils, never())
