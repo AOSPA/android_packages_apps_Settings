@@ -26,11 +26,13 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.telephony.UiccCardInfo;
+import android.telephony.UiccPortInfo;
 import android.telephony.UiccSlotInfo;
 import android.telephony.UiccSlotMapping;
 import android.util.Log;
 
 import com.android.internal.annotations.VisibleForTesting;
+import com.android.settings.network.telephony.TelephonyUtils;
 import com.android.settingslib.utils.ThreadUtils;
 
 import java.lang.annotation.Retention;
@@ -149,6 +151,42 @@ public class UiccSlotUtil {
 
         Collection<UiccSlotMapping> uiccSlotMappings = telMgr.getSimSlotMapping();
         Log.d(TAG, "The SimSlotMapping: " + uiccSlotMappings);
+
+        // In SSSS mode, TelephonyManager.getSimSlotMapping filters out logical slot
+        // mappings where isValidPhoneId() fails (e.g. logical slot 1 is filtered out in
+        // SSSS). So construct the UiccSlotMapping from UiccSlotsInfo in such case.
+        if (!telMgr.isMultiSimEnabled()) {
+            if (!TelephonyUtils.isServiceConnected()) {
+                TelephonyUtils.connectExtTelephonyService(context);
+            }
+            if (TelephonyUtils.getDsdsToSsConfigValue() == 2) {
+                UiccSlotInfo[] slotInfos = telMgr.getUiccSlotsInfo();
+                if (slotInfos != null && uiccSlotMappings != null) {
+                    List<UiccSlotMapping> completeMappings = new ArrayList<>(uiccSlotMappings);
+                    for (int physSlot = 0; physSlot < slotInfos.length; physSlot++) {
+                        UiccSlotInfo slotInfo = slotInfos[physSlot];
+                        if (slotInfo == null) continue;
+                        for (UiccPortInfo portInfo : slotInfo.getPorts()) {
+                            if (portInfo == null) continue;
+                            int logicalSlot = portInfo.getLogicalSlotIndex();
+                            int portIndex = portInfo.getPortIndex();
+                            if (logicalSlot == INVALID_LOGICAL_SLOT_ID) continue;
+                            final int finalPhysSlot = physSlot;
+                            boolean alreadyPresent = uiccSlotMappings.stream().anyMatch(
+                                    m -> m.getLogicalSlotIndex() == logicalSlot);
+                            if (!alreadyPresent) {
+                                Log.d(TAG, "Add missing mapping: physSlot=" + finalPhysSlot
+                                        + " port=" + portIndex + " logicalSlot=" + logicalSlot);
+                                completeMappings.add(
+                                        new UiccSlotMapping(portIndex, finalPhysSlot, logicalSlot));
+                            }
+                        }
+                    }
+                    uiccSlotMappings = completeMappings;
+                    Log.d(TAG, "Complete SimSlotMapping: " + uiccSlotMappings);
+                }
+            }
+        }
 
         SubscriptionManager subscriptionManager = context.getSystemService(
                 SubscriptionManager.class).createForAllUserProfiles();
