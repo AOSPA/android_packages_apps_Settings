@@ -75,6 +75,8 @@ import com.qti.extphone.ServiceCallback;
 import org.codeaurora.internal.IExtTelephony;
 // QTI_END: 2020-01-26: Telephony: Add support for primary card and subsidy lock
 // QTI_BEGIN: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.Optional;
 // QTI_END: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
 
@@ -92,7 +94,7 @@ public final class TelephonyUtils {
 // QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
 
 // QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
-    private static int sDsdsToSsConfigStatus = -1;
+    private static volatile int sDsdsToSsConfigStatus = -1;
     private static UiccSlotInfo[] sSlotsInfo;
 
 // QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
@@ -132,9 +134,9 @@ public final class TelephonyUtils {
     private static boolean mIsServiceBound;
 // QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
 // QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
-    private static boolean mIsSmartDdsSwitchFeatureAvailable = true; // default to true
 // QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
 // QTI_BEGIN: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
+    private static volatile boolean sIsSmartDdsSwitchFeatureAvailable = true; // default to true
     private static Optional<Boolean> mIsSubsidyFeatureEnabled = Optional.empty();
 // QTI_END: 2021-11-29: Telephony: FR73834: Subsidy lock feature support.
 
@@ -210,23 +212,31 @@ public final class TelephonyUtils {
     }
 
     /**
-     * Querying the DSDS to SSSS configuration status.
-     *
-     * If sDsdsToSsConfigStatus is 0, it means the dsds_to_ss property is not enabled.
-// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
-     * If sDsdsToSsConfigStatus is 1, it means the dsds_to_ss property is enabled for PSIM.
-     * If sDsdsToSsConfigStatus is 2, it means the dsds_to_ss property is enabled for PSIM and ESIM.
-// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
+     * Queries all ExtTelephony configuration values needed at service connect time.
+     * Queries the DSDS-to-SS configuration status and the SmartDDS switch feature
+     * availability. Both are blocking Binder IPC calls and must be invoked on a
+     * background thread.
+     * sDsdsToSsConfigStatus values:
+     *   0 - dsds_to_ss property not enabled
+     *   1 - enabled for PSIM
+     *   2 - enabled for PSIM and ESIM
      */
-    private static void queryDsdsToSsConfig() {
+    private static void queryExtTelephonyConfig() {
         if (sDsdsToSsConfigStatus == -1) {
             sDsdsToSsConfigStatus = mExtTelephonyManager.
                     getPropertyValueInt(PROPERTY_DSDS_TO_SS, 0);
         }
-        Log.d(TAG, "queryDsdsToSsConfig value = " + sDsdsToSsConfigStatus);
+        Log.d(TAG, "queryExtTelephonyConfig: sDsdsToSsConfigStatus = " + sDsdsToSsConfigStatus);
+        try {
+            sIsSmartDdsSwitchFeatureAvailable =
+                    mExtTelephonyManager.isSmartDdsSwitchFeatureAvailable();
+            Log.d(TAG, "queryExtTelephonyConfig: sIsSmartDdsSwitchFeatureAvailable = " +
+                    sIsSmartDdsSwitchFeatureAvailable);
+        } catch (RemoteException ex) {
+            Log.e(TAG, "queryExtTelephonyConfig: isSmartDdsSwitchFeatureAvailable exception " + ex);
+        }
     }
 
-// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
     public static int getDsdsToSsConfigValue() {
         Log.d(TAG, "getDsdsToSsConfigValue value = " + sDsdsToSsConfigStatus);
         return sDsdsToSsConfigStatus;
@@ -383,7 +393,7 @@ public final class TelephonyUtils {
 // QTI_END: 2021-11-30: Telephony: Primary Imei Status Support Settings->AboutPhone.
 // QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
     public static boolean isSmartDdsSwitchFeatureAvailable() {
-        return mIsSmartDdsSwitchFeatureAvailable;
+        return sIsSmartDdsSwitchFeatureAvailable;
     }
 
 // QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
@@ -422,23 +432,13 @@ public final class TelephonyUtils {
         public void onConnected() {
             Log.d(TAG, "ExtTelephony Service connected");
             mIsServiceBound = true;
-// QTI_END: 2021-06-20: Telephony: Change for IExtphone implementation
-// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
-            try {
-// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
-// QTI_BEGIN: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
-                queryDsdsToSsConfig();
-// QTI_END: 2025-02-26: Telephony: Show both IMEIs when device is with single SIM
-// QTI_BEGIN: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
-                mIsSmartDdsSwitchFeatureAvailable =
-                        mExtTelephonyManager.isSmartDdsSwitchFeatureAvailable();
-                Log.d(TAG, "isSmartDdsSwitchFeatureAvailable: " +
-                        mIsSmartDdsSwitchFeatureAvailable);
-            } catch (RemoteException ex) {
-                Log.e(TAG, "isSmartDdsSwitchFeatureAvailable exception " + ex);
-            }
-// QTI_END: 2023-04-18: Telephony: Enable auto data switch feature for legacy targets
 // QTI_BEGIN: 2021-06-20: Telephony: Change for IExtphone implementation
+            // Move synchronous Binder calls to background thread to avoid ANR.
+            // Shutdown the executor after submitting the task so the thread is
+            // released once the task completes.
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute(() -> queryExtTelephonyConfig());
+            executor.shutdown();
         }
 
         @Override

@@ -174,6 +174,8 @@ open class SatelliteTilePromptUtils {
                 .setContentText(
                     context.getString(R.string.satellite_tile_prompt_notification_summary)
                 )
+                // Don't prompt user to add phone tile on paired watch, etc.
+                .setLocalOnly(true)
                 .setStyle(
                     NotificationCompat.BigTextStyle()
                         .bigText(
