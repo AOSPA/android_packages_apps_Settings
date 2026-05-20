@@ -20,19 +20,23 @@ import static com.android.settings.development.graphicsdriver.GraphicsDriverEnab
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.Injector;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION;
 import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_PERSISTENT_GRAPHICS_EGL;
+import static com.android.settings.development.graphicsdriver.GraphicsDriverEnableAngleAsSystemDriverController.PROPERTY_VENDOR_API_LEVEL;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 import android.content.Context;
 import android.os.Looper;
 import android.os.SystemProperties;
+import android.text.TextUtils;
 
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
@@ -42,6 +46,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.android.settings.development.DevelopmentSettingsDashboardFragment;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,6 +63,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     private SwitchPreference mPreference;
 
     private GraphicsDriverEnableAngleAsSystemDriverController mController;
+
+    private static Boolean sIsControllerAvailableOnDevice = null;
+
+    private static String sDevicePersistGraphicsEGLValue = null;
 
     // Signal to wait for SystemProperty values changed
     private static class PropertyChangeSignal {
@@ -137,10 +146,55 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
         mPreference.setKey(mController.getPreferenceKey());
         screen.addPreference(mPreference);
         mController.displayPreference(screen);
+
+        if (sIsControllerAvailableOnDevice == null) {
+            final boolean isVendorAPILevelQualify =
+                    (SystemProperties.getInt(PROPERTY_VENDOR_API_LEVEL, 0) < 202604);
+            sIsControllerAvailableOnDevice = isVendorAPILevelQualify;
+        }
+
+        if (sDevicePersistGraphicsEGLValue == null) {
+            sDevicePersistGraphicsEGLValue =
+                    SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
+        }
+    }
+
+    @After
+    public void restoreDeviceStatus() {
+        final String persistGraphicsEGLValueAfterTest =
+                SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
+        if (!TextUtils.equals(sDevicePersistGraphicsEGLValue, persistGraphicsEGLValueAfterTest)) {
+            PropertyChangeSignal propertyChangeSignal = new PropertyChangeSignal();
+            SystemProperties.addChangeCallback(propertyChangeSignal.getCountDownJob());
+            mController.onPreferenceChange(
+                    mPreference,
+                    TextUtils.equals(ANGLE_DRIVER_SUFFIX, sDevicePersistGraphicsEGLValue));
+            propertyChangeSignal.wait(100);
+            // Verify the SystemProperty is set to the original device value.
+            assertThat(SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL))
+                    .isEqualTo(sDevicePersistGraphicsEGLValue);
+        }
+    }
+
+    @Test
+    public void vendorAPILevelQualify_isAvailable_shouldReturnTrue() {
+        when(mSystemPropertiesMock.getInt(eq(PROPERTY_VENDOR_API_LEVEL), anyInt()))
+                .thenReturn(202504);
+        assertThat(mController.isAvailable()).isTrue();
+    }
+
+    @Test
+    public void vendorAPILevelNotQualify_isAvailable_shouldReturnFalse() {
+        when(mSystemPropertiesMock.getInt(eq(PROPERTY_VENDOR_API_LEVEL), anyInt()))
+                .thenReturn(202604);
+        assertThat(mController.isAvailable()).isFalse();
     }
 
     @Test
     public void onPreferenceChange_switchOn_shouldEnableAngleAsSystemDriver() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         // Step 1: toggle the switch "Enable ANGLE" on
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
@@ -161,6 +215,9 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void onPreferenceChange_switchOff_shouldDisableAngleAsSystemDriver() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         // Step 1: toggle the switch "Enable ANGLE" off
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
@@ -180,13 +237,31 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     }
 
     @Test
-    public void updateState_PreferenceShouldEnabled() {
+    public void updateState_PreferenceShouldEnabled_AngleIsSystemDriver() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
+                .thenReturn(ANGLE_DRIVER_SUFFIX);
+        mController.updateState(mPreference);
+        assertThat(mPreference.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void updateState_PreferenceShouldDisabled_AngleIsNotSystemDriver() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
+        when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any())).thenReturn("");
         mController.updateState(mPreference);
         assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
     public void updateState_angleIsSystemGLESDriver_PreferenceShouldBeChecked() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any()))
                 .thenReturn(ANGLE_DRIVER_SUFFIX);
         mController.updateState(mPreference);
@@ -195,13 +270,19 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void updateState_angleIsNotSystemGLESDriver_PreferenceShouldNotBeChecked() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         when(mSystemPropertiesMock.get(eq(PROPERTY_PERSISTENT_GRAPHICS_EGL), any())).thenReturn("");
         mController.updateState(mPreference);
         assertThat(mPreference.isChecked()).isFalse();
     }
 
     @Test
-    public void onDeveloperOptionSwitchDisabled_angleShouldNotBeSystemGLESDriver() {
+    public void onDeveloperOptionSwitchDisabled_persistGraphicsEGLValueUnchanged() {
+        final String persistGraphicsEGLValueBefore =
+                SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL, "");
+
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
         // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
@@ -209,30 +290,35 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
         SystemProperties.addChangeCallback(propertyChangeSignal1.getCountDownJob());
 
         // Test that onDeveloperOptionSwitchDisabled,
-        // persist.graphics.egl updates to ""
+        // persist.graphics.egl remains unchanged
         mController.onDeveloperOptionsSwitchDisabled();
         propertyChangeSignal1.wait(100);
-        final String systemEGLDriver = SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
-        assertThat(systemEGLDriver).isEqualTo("");
+        final String persistGraphicsEGLValueAfter =
+                SystemProperties.get(PROPERTY_PERSISTENT_GRAPHICS_EGL);
+        assertThat(persistGraphicsEGLValueAfter).isEqualTo(persistGraphicsEGLValueBefore);
 
         // Done with the test, remove the callback
         SystemProperties.removeChangeCallback(propertyChangeSignal1.getCountDownJob());
     }
 
     @Test
-    public void onDeveloperOptionSwitchDisabled_PreferenceShouldNotBeChecked() {
+    public void onDeveloperOptionSwitchDisabled_PreferenceCheckedUnchanged() {
+        final boolean preferenceIsCheckedBefore = mPreference.isChecked();
         mController.onDeveloperOptionsSwitchDisabled();
-        assertThat(mPreference.isChecked()).isFalse();
+        assertThat(mPreference.isChecked()).isEqualTo(preferenceIsCheckedBefore);
     }
 
     @Test
-    public void onDeveloperOptionSwitchDisabled_PreferenceShouldDisabled() {
+    public void onDeveloperOptionSwitchDisabled_PreferenceIsDisabled() {
         mController.onDeveloperOptionsSwitchDisabled();
         assertThat(mPreference.isEnabled()).isFalse();
     }
 
     @Test
-    public void onRebootCancelled_ToggleSwitchFromOnToOff() {
+    public void onRebootCancelled_ToggleSwitchOnRevertToOff() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         // Step 1: Toggle the "Enable ANGLE" switch on
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
@@ -269,7 +355,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     }
 
     @Test
-    public void onRebootCancelled_ToggleSwitchFromOffToOn() {
+    public void onRebootCancelled_ToggleSwitchOffRevertToOn() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         // Step 1: Toggle off the switch "Enable ANGLE"
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
@@ -306,7 +395,10 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     }
 
     @Test
-    public void onRebootDialogDismissed_ToggleSwitchFromOnToOff() {
+    public void onRebootDialogDismissed_ToggleSwitchOnRevertToOff() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         // Step 1: Toggle on the switch "Enable ANGLE"
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
@@ -342,8 +434,11 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
     }
 
     @Test
-    public void onRebootDialogDismissed_ToggleSwitchFromOffToOn() {
-        // Step 1: Toggle on the switch "Enable ANGLE"
+    public void onRebootDialogDismissed_ToggleSwitchOffRevertToOn() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
+        // Step 1: Toggle off the switch "Enable ANGLE"
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
         // GpuService::toggleAngleAsSystemDriver() updates the persist.graphics.egl.
@@ -379,6 +474,9 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void onRebootDialogConfirmed_ToggleSwitchOnRemainsOn() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         // Step 1: Toggle on the switch "Enable ANGLE"
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
@@ -414,6 +512,9 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void onRebootDialogConfirmed_ToggleSwitchOffRemainsOff() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         // Step 1: Toggle off the switch "Enable ANGLE"
         // Add a callback when SystemProperty changes.
         // This allows the thread to wait until
@@ -449,6 +550,9 @@ public class GraphicsDriverEnableAngleAsSystemDriverControllerJUnitTest {
 
     @Test
     public void updateState_DeveloperOptionPropertyIsFalse() {
+        assumeTrue(
+                "Skipping test on device where the switch is not available",
+                sIsControllerAvailableOnDevice);
         // Test that when debug.graphics.angle.developeroption.enable is false:
         when(mSystemPropertiesMock.getBoolean(eq(PROPERTY_DEBUG_ANGLE_DEVELOPER_OPTION),
                                               anyBoolean())).thenReturn(false);
