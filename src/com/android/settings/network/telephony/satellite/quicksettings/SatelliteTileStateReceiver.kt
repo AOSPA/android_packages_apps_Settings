@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/*
+ * ​​​​​Changes from Qualcomm Technologies, Inc. are provided under the following license:
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.android.settings.network.telephony.satellite.quicksettings
 
 import android.app.ActivityManager
@@ -42,6 +48,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 
 private const val TAG = "SatelliteTileStateReceiver"
 
@@ -141,9 +148,12 @@ open class SatelliteTileStateReceiver(
         scheduleEligibilityJob(context)
     }
 
-    private suspend fun isAnyNtnSupported(context: Context): Boolean {
-        return isAnyNtnSupportedFlow(context).first()
-    }
+    private suspend fun isAnyNtnSupported(context: Context): Boolean =
+        withTimeoutOrNull(NTN_SUPPORT_CHECK_TIMEOUT_MS) { isAnyNtnSupportedFlow(context).first() }
+            ?: false.also {
+                Log.w(TAG, "isAnyNtnSupported timed out after ${NTN_SUPPORT_CHECK_TIMEOUT_MS}ms, " +
+                "defaulting to false.")
+            }
 
     /**
      * Returns a [Flow] that emits true if NB-IoT-based NTN is supported, false otherwise.
@@ -193,6 +203,15 @@ open class SatelliteTileStateReceiver(
     }
 
     companion object {
+        /**
+         * Timeout (in milliseconds) for the [SatelliteManager.requestIsSupported] IPC call.
+         *
+         * During early boot, [SatelliteController] may not be fully initialized, causing the
+         * callback to never arrive. This timeout ensures [pendingResult.finish()] is always
+         * called within the 60-second broadcast timeout window.
+         */
+        private const val NTN_SUPPORT_CHECK_TIMEOUT_MS = 10000L
+
         /**
          * Schedules a JobService to monitor the data registration state.
          *
