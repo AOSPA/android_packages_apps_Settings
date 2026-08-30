@@ -37,6 +37,7 @@ import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
@@ -53,6 +54,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.flags.Flags;
 import com.android.systemui.biometrics.UdfpsUtils;
 import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
@@ -83,6 +85,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
     private AccessibilityManager mAccessibilityManager;
 
     private ObjectAnimator mHeaderScrollAnimator;
+    private boolean mIsUdfpsLocationLow;
 
     public UdfpsEnrollEnrollingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -271,7 +274,16 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
             UdfpsEnrollHelper udfpsEnrollHelper,
             AccessibilityManager accessibilityManager) {
         mAccessibilityManager = accessibilityManager;
+        mIsUdfpsLocationLow = BiometricUtils.isUdfpsLocationLow(mContext, udfpsProps);
         initUdfpsEnrollView(udfpsProps, udfpsEnrollHelper);
+
+        if (mIsUdfpsLocationLow) {
+            disableClipping(this);
+            post(() -> {
+                disableClipping(this);
+                disableClippingToRoot(this);
+            });
+        }
 
         if (!mIsLandscape) {
             adjustPortraitPaddings();
@@ -424,5 +436,33 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
                 secondPosition[0] + view2.getMeasuredWidth(),
                 secondPosition[1] + view2.getMeasuredHeight());
         return rectView1.intersect(rectView2);
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (mIsUdfpsLocationLow) {
+            disableClipping(this);
+            disableClippingToRoot(this);
+        }
+    }
+
+    private static void disableClipping(View view) {
+        if (view instanceof ViewGroup vg) {
+            vg.setClipChildren(false);
+            vg.setClipToPadding(false);
+            for (int i = 0; i < vg.getChildCount(); i++) {
+                disableClipping(vg.getChildAt(i));
+            }
+        }
+    }
+
+    private static void disableClippingToRoot(View view) {
+        ViewParent parent = view.getParent();
+        while (parent instanceof ViewGroup vg) {
+            vg.setClipChildren(false);
+            vg.setClipToPadding(false);
+            parent = vg.getParent();
+        }
     }
 }
