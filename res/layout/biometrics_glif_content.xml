@@ -15,26 +15,32 @@
     limitations under the License.
 -->
 
-<LinearLayout
+<!-- Please keep filterTouchesWhenObscured=true; it's to prevent tapjacking.
+     See https://developer.android.com/privacy-and-security/risks/tapjacking -->
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/sud_layout_template_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:filterTouchesWhenObscured="true"
     android:clipChildren="false"
-    android:clipToPadding="false"
-    android:orientation="vertical">
+    android:clipToPadding="false">
 
     <ViewStub
         android:id="@+id/sud_layout_sticky_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" />
 
     <com.google.android.setupdesign.view.BottomScrollView
         android:id="@+id/sud_header_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/biometrics_glif_header_height"
+        android:layout_alignParentTop="true"
         android:fillViewport="true"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="vertical"
         tools:ignore="UnusedAttribute">
 
@@ -42,41 +48,17 @@
 
     </com.google.android.setupdesign.view.BottomScrollView>
 
-
-    <com.google.android.setupdesign.view.BottomScrollView
-        android:id="@+id/sud_scroll_view"
+    <FrameLayout
+        android:id="@+id/sud_layout_content"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true"
-        android:scrollIndicators="?attr/sudScrollIndicators"
-        tools:ignore="UnusedAttribute">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ViewStub
-                android:id="@+id/sud_layout_illustration_progress_stub"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inflatedId="@+id/sud_layout_progress_illustration"
-                android:layout="@layout/sud_progress_illustration_layout" />
-
-            <FrameLayout
-                android:id="@+id/sud_layout_content"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-    </com.google.android.setupdesign.view.BottomScrollView>
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false" />
 
     <ViewStub
         android:id="@+id/suc_layout_footer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
 
-</LinearLayout>
+</RelativeLayout>
