@@ -15,14 +15,24 @@
     limitations under the License.
 -->
 
-<com.google.android.setupcompat.view.StatusBarBackgroundLayout
+<!-- Please keep filterTouchesWhenObscured=true; it's to prevent tapjacking.
+     See https://developer.android.com/privacy-and-security/risks/tapjacking -->
+<androidx.core.view.insets.ProtectionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/suc_layout_status"
+    android:id="@+id/sud_layout_protection"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:clipToPadding="false">
+    <com.google.android.setupcompat.view.StatusBarBackgroundLayout
+        android:id="@+id/suc_layout_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:filterTouchesWhenObscured="true">
 
-    <include layout="@layout/biometrics_glif_content" />
+        <include layout="@layout/sud_glif_expressive_template_content_layout" />
 
-</com.google.android.setupcompat.view.StatusBarBackgroundLayout>
+    </com.google.android.setupcompat.view.StatusBarBackgroundLayout>
+</androidx.core.view.insets.ProtectionLayout>
