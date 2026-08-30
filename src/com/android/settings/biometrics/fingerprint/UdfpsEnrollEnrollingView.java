@@ -53,6 +53,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.VisibleForTesting;
 
 import com.android.settings.R;
+import com.android.settings.biometrics.BiometricUtils;
 import com.android.settings.flags.Flags;
 import com.android.systemui.biometrics.UdfpsUtils;
 import com.android.systemui.biometrics.shared.model.UdfpsOverlayParams;
@@ -83,6 +84,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
     private AccessibilityManager mAccessibilityManager;
 
     private ObjectAnimator mHeaderScrollAnimator;
+    private boolean mIsUdfpsLocationLow;
 
     public UdfpsEnrollEnrollingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -271,6 +273,7 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
             UdfpsEnrollHelper udfpsEnrollHelper,
             AccessibilityManager accessibilityManager) {
         mAccessibilityManager = accessibilityManager;
+        mIsUdfpsLocationLow = BiometricUtils.isUdfpsLocationLow(mContext, udfpsProps);
         initUdfpsEnrollView(udfpsProps, udfpsEnrollHelper);
 
         if (!mIsLandscape) {
@@ -332,6 +335,10 @@ public class UdfpsEnrollEnrollingView extends GlifLayout {
     }
 
     private void adjustPortraitPaddings() {
+        if (mIsUdfpsLocationLow) {
+            return;
+        }
+
         // In the portrait mode, layout_container's height is 0, so it's
         // always shown at the bottom of the screen.
         final FrameLayout portraitLayoutContainer = findViewById(R.id.layout_container);
